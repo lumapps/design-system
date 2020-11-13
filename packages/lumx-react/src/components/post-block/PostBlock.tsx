@@ -7,7 +7,7 @@ import isObject from 'lodash/isObject';
 import { Orientation, Theme, Thumbnail, ThumbnailProps, ThumbnailVariant } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, ValueOf, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
@@ -22,13 +22,13 @@ interface PostBlockProps extends GenericProps {
     /** The meta elements. */
     meta?: ReactNode;
     /** The orientation. */
-    orientation?: Orientation;
+    orientation?: ValueOf<Orientation>;
     /** The tag elements. */
     tags?: ReactNode;
     /** Content text. Can be either a string, or sanitized html. */
     text?: string | { __html: string };
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
-    theme?: Theme;
+    theme?: ValueOf<Theme>;
     /**
      * The url of the image we want to display.
      * @see {@link ThumbnailProps#image}

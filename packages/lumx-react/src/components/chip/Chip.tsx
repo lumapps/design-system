@@ -7,7 +7,7 @@ import isFunction from 'lodash/isFunction';
 import { Color, ColorPalette, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 
-import { GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
+import { GenericProps, ValueOf, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
 
 /**
  * Authorized size values.
@@ -35,9 +35,9 @@ interface ChipProps extends GenericProps {
     /** Whether the component is selected or not. */
     isSelected?: boolean;
     /** The size variant of the component. */
-    size?: ChipSize;
+    size?: ValueOf<ChipSize>;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
-    theme?: Theme;
+    theme?: ValueOf<Theme>;
     /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
     /** The function called when the "after" element is clicked. */

@@ -8,7 +8,7 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
 import isFunction from 'lodash/isFunction';
 
-import { GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
+import { GenericProps, ValueOf, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
 
 import { mdiImageBrokenVariant } from '@lumx/icons';
 import { useFocusedImage } from '@lumx/react/hooks/useFocusedImage';
@@ -25,12 +25,6 @@ declare module 'react' {
         loading?: 'auto' | 'eager' | 'lazy';
     }
 }
-
-/**
- * All available aspect ratios.
- * @deprecated
- */
-const ThumbnailAspectRatio: Record<string, AspectRatio> = { ...AspectRatio };
 
 /**
  *  Authorized size values.
@@ -72,14 +66,14 @@ enum ImageLoading {
  */
 interface ThumbnailProps extends GenericProps {
     /** The thumbnail alignment. */
-    align?: Alignment;
+    align?: ValueOf<Alignment>;
     /** The image aspect ratio. */
-    aspectRatio?: AspectRatio;
+    aspectRatio?: ValueOf<AspectRatio>;
     /**
      * Allows images that are loaded from foreign origins
      * to be used as if they had been loaded from the current origin.
      */
-    crossOrigin?: CrossOrigin;
+    crossOrigin?: ValueOf<CrossOrigin>;
     /** The fallback svg or react node. */
     fallback?: string | ReactNode;
     /** Whether the image has to fill its container height or not. */
@@ -95,15 +89,15 @@ interface ThumbnailProps extends GenericProps {
     /** Whether the image has to be centered according to the focal point after a window resize. */
     isFollowingWindowSize?: boolean;
     /** The size variant of the component. */
-    size?: ThumbnailSize;
+    size?: ValueOf<ThumbnailSize>;
     /** The image loading mode. */
-    loading?: ImageLoading;
+    loading?: ValueOf<ImageLoading>;
     /** The time before recalculating focal point if isFollowingWindowSize is activated. */
     resizeDebounceTime?: number;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
-    theme?: Theme;
+    theme?: ValueOf<Theme>;
     /** The variant of the component. */
-    variant?: ThumbnailVariant;
+    variant?: ValueOf<ThumbnailVariant>;
 }
 
 /**
@@ -199,10 +193,10 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
                 {...(imgProps || {})}
                 ref={focusImageRef}
                 className={imgClassname}
-                crossOrigin={setCrossOrigin()}
+                crossOrigin={setCrossOrigin() as any}
                 src={image}
                 alt={alt}
-                loading={loading}
+                loading={loading as any}
                 onLoad={onImageLoad}
                 onError={onImageError}
             />
@@ -235,13 +229,4 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
 Thumbnail.displayName = COMPONENT_NAME;
 Thumbnail.defaultProps = DEFAULT_PROPS;
 
-export {
-    CLASSNAME,
-    Thumbnail,
-    ThumbnailProps,
-    ThumbnailAspectRatio,
-    ThumbnailSize,
-    ThumbnailStates,
-    ThumbnailVariant,
-    CrossOrigin,
-};
+export { CLASSNAME, Thumbnail, ThumbnailProps, ThumbnailSize, ThumbnailStates, ThumbnailVariant, CrossOrigin };

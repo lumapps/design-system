@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { SideNavigationItem, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses, isComponent } from '@lumx/react/utils';
+import { GenericProps, ValueOf, getRootClassName, handleBasicClasses, isComponent } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
@@ -14,7 +14,7 @@ interface SideNavigationProps extends GenericProps {
     /** The children elements. Should use SideNavigationItem. */
     children: ReactNode;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
-    theme?: Theme;
+    theme?: ValueOf<Theme>;
     /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
 }

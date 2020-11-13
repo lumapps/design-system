@@ -6,7 +6,7 @@ import { List, ListProps } from '@lumx/react/components/list/List';
 import { Offset, Placement, Popover } from '@lumx/react/components/popover/Popover';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { useInfiniteScroll } from '@lumx/react/hooks/useInfiniteScroll';
-import { GenericProps, getRootClassName, handleBasicClasses, isComponent } from '@lumx/react/utils';
+import { GenericProps, ValueOf, getRootClassName, handleBasicClasses, isComponent } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
@@ -56,7 +56,7 @@ interface DropdownProps extends GenericProps {
      * The preferred Dropdown location against the anchor element.
      * @see {@link PopoverProps#placement}
      */
-    placement?: Placement;
+    placement?: ValueOf<Placement>;
     /** Whether the focus should be set on the list when the dropdown is open or not. */
     shouldFocusOnOpen?: boolean;
     /**

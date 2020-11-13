@@ -1,6 +1,6 @@
 import { Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
-import { GenericProps, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, ValueOf, handleBasicClasses } from '@lumx/react/utils';
 
 import classNames from 'classnames';
 import React, { ReactNode } from 'react';
@@ -26,11 +26,11 @@ interface TabListProps extends GenericProps {
     /** The children elements. */
     children: ReactNode;
     /** The layout of the tabs. */
-    layout?: TabListLayout;
+    layout?: ValueOf<TabListLayout>;
     /** The position of the tabs. */
-    position?: TabListPosition;
+    position?: ValueOf<TabListPosition>;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
-    theme?: Theme;
+    theme?: ValueOf<Theme>;
     /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
 }

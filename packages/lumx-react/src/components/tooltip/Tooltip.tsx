@@ -9,7 +9,7 @@ import { Placement } from '@lumx/react/components/popover/Popover';
 
 import { COMPONENT_PREFIX, DOCUMENT } from '@lumx/react/constants';
 
-import { Falsy, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, ValueOf, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { useInjectTooltipRef } from './useInjectTooltipRef';
 import { useTooltipOpen } from './useTooltipOpen';
@@ -30,7 +30,7 @@ interface TooltipProps extends GenericProps {
     /** The label of the tooltip. */
     label?: string | null | false;
     /** The placement of the tooltip based on the anchor element placement. */
-    placement?: TooltipPlacement;
+    placement?: ValueOf<TooltipPlacement>;
 }
 
 /**
@@ -78,7 +78,7 @@ const Tooltip: React.FC<TooltipProps> = (props) => {
                 options: { offset: [0, OFFSET] },
             },
         ],
-    });
+    } as any);
 
     const position = attributes?.popper?.['data-popper-placement'] ?? placement;
     const isOpen = useTooltipOpen(delay as number, anchorElement) || forceOpen;

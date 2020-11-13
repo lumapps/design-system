@@ -3,6 +3,8 @@ import isEmpty from 'lodash/isEmpty';
 import isString from 'lodash/isString';
 import React, { ReactElement, ReactNode } from 'react';
 
+export type ValueOf<T> = T[keyof T];
+
 /**
  * The properties of a component to use to determine it's name.
  * In the order of preference.

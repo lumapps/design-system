@@ -7,7 +7,7 @@ import { Theme } from '@lumx/react';
 import { AUTOPLAY_DEFAULT_INTERVAL, FULL_WIDTH_PERCENT } from '@lumx/react/components/slideshow/constants';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { useInterval } from '@lumx/react/hooks';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, ValueOf, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { SlideshowControls } from './SlideshowControls';
 
@@ -28,7 +28,7 @@ interface SlideshowProps extends GenericProps {
     /** The interval between each slide when automatic rotation is enabled. */
     interval?: number;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
-    theme?: Theme;
+    theme?: ValueOf<Theme>;
     /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
     /* Callback when slide changes */

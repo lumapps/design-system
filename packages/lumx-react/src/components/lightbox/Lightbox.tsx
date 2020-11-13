@@ -8,7 +8,7 @@ import { createPortal } from 'react-dom';
 import { mdiClose } from '@lumx/icons';
 import { ColorPalette, Emphasis, IconButton, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, DOCUMENT } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, ValueOf, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import isFunction from 'lodash/isFunction';
 
@@ -29,7 +29,7 @@ interface LightboxProps extends GenericProps {
     /** Whether to keep the dialog open on clickaway or escape press. */
     preventAutoClose?: boolean;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
-    theme?: Theme;
+    theme?: ValueOf<Theme>;
     /** The z-axis position. */
     zIndex?: number;
     /** The function called on close. */

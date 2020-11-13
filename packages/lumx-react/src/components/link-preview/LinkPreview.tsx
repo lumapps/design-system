@@ -15,7 +15,9 @@ import {
 } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, ValueOf, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+
+type LinkPreviewSizes = Size.regular | Size.big;
 
 /**
  * Defines the props of the component.
@@ -31,9 +33,9 @@ interface LinkPreviewProps extends GenericProps {
     /** The props to pass to the link, minus those already set by the LinkPreview props. */
     linkProps?: Omit<LinkProps, 'color' | 'colorVariant' | 'href' | 'target'>;
     /** The size variant of the component. */
-    size?: Size.regular | Size.big;
+    size?: ValueOf<LinkPreviewSizes>;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
-    theme?: Theme;
+    theme?: ValueOf<Theme>;
     /**
      * The image URL of the Thumbnail.
      * @see {@link ThumbnailProps#image}

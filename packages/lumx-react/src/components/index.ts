@@ -1,3 +1,5 @@
+import { ValueOf } from '../utils/type';
+
 /**
  * Authorized alignments.
  */
@@ -34,7 +36,7 @@ enum ColorPalette {
     red = 'red',
     light = 'light',
 }
-type Color = ColorPalette | string;
+type Color = ValueOf<ColorPalette> | string;
 
 /**
  * See SCSS variable $lumx-color-variants

@@ -4,7 +4,8 @@ import classNames from 'classnames';
 
 import { Alignment, Orientation, Size } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, ValueOf, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+
 type GridGutterSize = Size.regular | Size.big | Size.huge;
 
 /**
@@ -12,15 +13,15 @@ type GridGutterSize = Size.regular | Size.big | Size.huge;
  */
 interface GridProps extends GenericProps {
     /** The grid orientation. */
-    orientation?: Orientation;
+    orientation?: ValueOf<Orientation>;
     /** Whether the children are wrapped or not. */
     wrap?: string;
     /** The grid vertical alignment. */
-    vAlign?: Alignment;
+    vAlign?: ValueOf<Alignment>;
     /** The grid horizontal alignment. */
-    hAlign?: Alignment;
+    hAlign?: ValueOf<Alignment>;
     /** The grid gutter size. */
-    gutter?: GridGutterSize;
+    gutter?: ValueOf<GridGutterSize>;
 }
 
 /**

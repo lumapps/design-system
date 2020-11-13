@@ -9,12 +9,6 @@ import { getBasicClass, getRootClassName } from '@lumx/react/utils';
 import { BaseButtonProps, ButtonRoot } from './ButtonRoot';
 
 /**
- * The authorized values for the `emphasis` prop.
- * @deprecated Use Emphasis instead.
- */
-const ButtonEmphasis = Emphasis;
-
-/**
  * Defines the props of the component.
  */
 interface ButtonProps extends BaseButtonProps {
@@ -71,4 +65,4 @@ const Button: React.FC<ButtonProps> = (props) => {
 Button.displayName = COMPONENT_NAME;
 Button.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, ButtonEmphasis, Button, ButtonProps };
+export { CLASSNAME, Button, ButtonProps };

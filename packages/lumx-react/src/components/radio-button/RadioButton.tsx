@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { InputHelper, InputLabel, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, ValueOf, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import uniqueId from 'lodash/uniqueId';
 
@@ -26,7 +26,7 @@ interface RadioButtonProps extends GenericProps {
     /** The native input name property. */
     name?: string;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
-    theme?: Theme;
+    theme?: ValueOf<Theme>;
     /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
     /** The native input value property. */

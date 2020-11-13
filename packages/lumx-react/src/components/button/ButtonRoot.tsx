@@ -6,7 +6,7 @@ import classNames from 'classnames';
 
 import { Color, ColorPalette, Emphasis, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
-import { GenericProps, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, ValueOf, handleBasicClasses } from '@lumx/react/utils';
 import { renderLink } from '@lumx/react/utils/renderLink';
 
 /**
@@ -20,7 +20,7 @@ interface BaseButtonProps extends GenericProps {
     /** The color variant of the component. */
     color?: Color;
     /** The emphasis variant of the component. */
-    emphasis?: Emphasis;
+    emphasis?: ValueOf<Emphasis>;
     /** Whether or not the button has a background color in low emphasis. */
     hasBackground?: boolean;
     /** The native anchor href property. It determines whether the Button will be a <button> or an <a>. */
@@ -32,11 +32,11 @@ interface BaseButtonProps extends GenericProps {
     /** The native input name property. */
     name?: string;
     /** The size variant of the component. */
-    size?: ButtonSize;
+    size?: ValueOf<ButtonSize>;
     /** The native anchor target property. */
     target?: '_self' | '_blank' | '_parent' | '_top';
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
-    theme?: Theme;
+    theme?: ValueOf<Theme>;
     /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
     /**

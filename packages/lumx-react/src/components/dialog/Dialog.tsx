@@ -12,10 +12,19 @@ import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { useIntersectionObserver } from '@lumx/react/hooks/useIntersectionObserver';
-import { GenericProps, getRootClassName, handleBasicClasses, isComponent, partitionMulti } from '@lumx/react/utils';
+import {
+    GenericProps,
+    ValueOf,
+    getRootClassName,
+    handleBasicClasses,
+    isComponent,
+    partitionMulti,
+} from '@lumx/react/utils';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 
 import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
+
+type DialogSizes = Size.tiny | Size.regular | Size.big | Size.huge;
 
 /**
  * Defines the props of the component.
@@ -42,14 +51,12 @@ interface DialogProps extends GenericProps {
     /** Whether to keep the dialog open on clickaway or escape press. */
     preventAutoClose?: boolean;
     /** The size variant of the component. */
-    size?: DialogSizes;
+    size?: ValueOf<DialogSizes>;
     /** The z-axis position. */
     zIndex?: number;
     /** The function called on close. */
     onClose?(): void;
 }
-
-type DialogSizes = Size.tiny | Size.regular | Size.big | Size.huge;
 
 const isHeader = isComponent('header');
 const isFooter = isComponent('footer');
@@ -87,7 +94,6 @@ const Dialog: React.FC<DialogProps> = (props) => {
         footer,
         isLoading,
         isOpen,
-        onOpen,
         onClose,
         parentElement,
         contentRef,

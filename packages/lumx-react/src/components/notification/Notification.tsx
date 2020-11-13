@@ -11,7 +11,7 @@ import { DOCUMENT, NOTIFICATION_TRANSITION_DURATION } from '@lumx/react/constant
 
 import { NOTIFICATION_CONFIGURATION } from '@lumx/react/components/notification/constants';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, ValueOf, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
 
@@ -36,9 +36,9 @@ interface NotificationProps extends GenericProps {
     /** Whether the component is open or not. */
     isOpen?: boolean;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
-    theme?: Theme;
+    theme?: ValueOf<Theme>;
     /** The type of notification (error or success for example). */
-    type?: NotificationType;
+    type?: ValueOf<NotificationType>;
     /** The z-axis position. */
     zIndex?: number;
     /** The function called on click on the action button. */

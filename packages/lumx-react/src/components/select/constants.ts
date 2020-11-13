@@ -1,5 +1,5 @@
 import { Theme } from '@lumx/react/components';
-import { GenericProps } from '@lumx/react/utils';
+import { GenericProps, ValueOf } from '@lumx/react/utils';
 import { ReactNode, SyntheticEvent } from 'react';
 
 /**
@@ -32,11 +32,11 @@ interface CoreSelectProps extends GenericProps {
     /** The select placeholder (input variant). */
     placeholder?: string;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
-    theme?: Theme;
+    theme?: ValueOf<Theme>;
     /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
     /** The selected choices area style. */
-    variant?: SelectVariant;
+    variant?: ValueOf<SelectVariant>;
     /** The function called when the clear button is clicked. NB: if not specified, clear buttons won't be displayed. */
     onClear?(event: SyntheticEvent, value?: string): void;
     /** The function called when the select field is blurred. */

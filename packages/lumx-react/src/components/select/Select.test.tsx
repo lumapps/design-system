@@ -89,7 +89,7 @@ describe(`<${Select.displayName}>`, () => {
 
             expect(container).toHaveClassName(CLASSNAME);
             expect(container).toHaveClassName(
-                getBasicClass({ prefix: CLASSNAME, type: 'theme', value: DEFAULT_PROPS.theme }),
+                getBasicClass({ prefix: CLASSNAME, type: 'theme', value: DEFAULT_PROPS.theme as string }),
             );
             expect(container).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'isEmpty', value: true }));
         });
@@ -103,10 +103,10 @@ describe(`<${Select.displayName}>`, () => {
             const { container } = setup(modifiedProps);
 
             expect(container).toHaveClassName(
-                getBasicClass({ prefix: CLASSNAME, type: testedProp, value: modifiedProps[testedProp] }),
+                getBasicClass({ prefix: CLASSNAME, type: testedProp, value: modifiedProps[testedProp] as string }),
             );
             expect(container).not.toHaveClassName(
-                getBasicClass({ prefix: CLASSNAME, type: testedProp, value: DEFAULT_PROPS.theme }),
+                getBasicClass({ prefix: CLASSNAME, type: testedProp, value: DEFAULT_PROPS.theme as string }),
             );
         });
 

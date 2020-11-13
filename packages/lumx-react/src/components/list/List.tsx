@@ -3,12 +3,14 @@ import { Size } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 
 import { useKeyboardListNavigation, useKeyboardListNavigationType } from '@lumx/react/hooks/useKeyboardListNavigation';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, ValueOf, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
 import classNames from 'classnames';
 import React, { Key, ReactNode, Ref, useRef } from 'react';
 import { useInteractiveList } from './useInteractiveList';
+
+type ItemPaddingSizes = Size.big | Size.huge;
 
 /**
  * Defines the props of the component.
@@ -16,13 +18,8 @@ import { useInteractiveList } from './useInteractiveList';
 interface ListProps extends GenericProps {
     /** The children elements. Should be ListItem, ListSubheader or ListDivider. */
     children: ReactNode;
-    /**
-     * Whether the list items are clickable.
-     * @deprecated not needed anymore.
-     */
-    isClickable?: boolean;
     /** The item padding size. */
-    itemPadding?: Size.big | Size.huge;
+    itemPadding?: ValueOf<ItemPaddingSizes>;
     /** The reference passed to the <ul> element. */
     listElementRef?: Ref<HTMLUListElement>;
     /** Whether custom colors are applied to this component or not. */
@@ -48,7 +45,6 @@ interface List {
 const List: React.FC<ListProps> & List = ({
     children,
     className,
-    isClickable,
     itemPadding,
     listElementRef,
     onListItemSelected,
@@ -62,7 +58,7 @@ const List: React.FC<ListProps> & List = ({
         ref,
         onListItemSelected,
     });
-    const clickable = hasClickableItem || isClickable;
+    const clickable = hasClickableItem;
 
     return (
         <ul

@@ -4,6 +4,7 @@ import { AspectRatio, Size } from '@lumx/react/components';
 import { FocusedImage, LumHTMLImageElement } from '@lumx/react/components/thumbnail/FocusedImage';
 import { FocusPoint } from '@lumx/react/components/thumbnail/FocusedImageOptions';
 import { ThumbnailStates } from '@lumx/react/components/thumbnail/Thumbnail';
+import { ValueOf } from '../utils';
 
 /**
  * Handle the focus point and the aspect ratio of an image.
@@ -18,11 +19,11 @@ import { ThumbnailStates } from '@lumx/react/components/thumbnail/Thumbnail';
  */
 const useFocusedImage = (
     focus: FocusPoint,
-    aspectRatio: AspectRatio,
-    size: Size,
+    aspectRatio: ValueOf<AspectRatio>,
+    size: ValueOf<Size>,
     debounceTime: number,
     isFollowingWindowSize: boolean,
-    thumbnailState: ThumbnailStates,
+    thumbnailState: ValueOf<ThumbnailStates>,
 ) => {
     const focusRef = useRef<FocusedImage | null>(null);
 

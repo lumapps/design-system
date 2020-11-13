@@ -87,10 +87,10 @@ describe(`<${Divider.displayName}>`, () => {
             const { hr } = setup(modifiedProps);
 
             expect(hr).toHaveClassName(
-                getBasicClass({ prefix: CLASSNAME, type: testedProp, value: modifiedProps[testedProp] }),
+                getBasicClass({ prefix: CLASSNAME, type: testedProp, value: modifiedProps[testedProp] as string }),
             );
             expect(hr).not.toHaveClassName(
-                getBasicClass({ prefix: CLASSNAME, type: testedProp, value: DEFAULT_PROPS[testedProp] }),
+                getBasicClass({ prefix: CLASSNAME, type: testedProp, value: DEFAULT_PROPS[testedProp] as string }),
             );
         });
     });

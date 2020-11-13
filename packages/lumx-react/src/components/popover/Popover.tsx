@@ -11,7 +11,7 @@ import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, ValueOf, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
 /**
@@ -86,7 +86,7 @@ interface PopoverProps extends GenericProps {
     /** The desired offset. */
     offset?: Offset;
     /** The desired placement. */
-    placement?: Placement;
+    placement?: ValueOf<Placement>;
     /** The reference of the popover. */
     popoverRef?: React.RefObject<HTMLDivElement>;
     /** The z-axis position. */
@@ -214,7 +214,7 @@ const Popover: React.FC<PopoverProps> = (props) => {
     const { styles, attributes, state } = usePopper(anchorRef.current, popperElement, {
         placement,
         modifiers,
-    });
+    } as any);
 
     const position = state?.placement ?? placement;
 

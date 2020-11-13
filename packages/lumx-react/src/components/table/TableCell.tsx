@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { Icon, Size } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
+import { GenericProps, ValueOf, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
 
 import { mdiArrowDown, mdiArrowUp } from '@lumx/icons';
 
@@ -43,11 +43,11 @@ interface TableCellProps extends GenericProps {
     /** Whether the column is sortable or not (thead only). */
     isSortable?: boolean;
     /** The scope of the thead. */
-    scope?: ThScope;
+    scope?: ValueOf<ThScope>;
     /** The initial sort order (sortable thead only). */
-    sortOrder?: ThOrder;
+    sortOrder?: ValueOf<ThOrder>;
     /** The variant of the cell. */
-    variant?: TableCellVariant;
+    variant?: ValueOf<TableCellVariant>;
     /** The function called on click on header. */
     onHeaderClick?(): void;
 }
@@ -75,6 +75,7 @@ const TableCell: React.FC<TableCellProps> = ({
     icon,
     isSortable,
     onHeaderClick,
+    scope,
     sortOrder,
     variant,
     ...forwardedProps
@@ -93,6 +94,7 @@ const TableCell: React.FC<TableCellProps> = ({
             {variant === TableCellVariant.head && (
                 <th
                     {...forwardedProps}
+                    scope={scope as string}
                     className={classNames(
                         handleBasicClasses({ prefix: CLASSNAME, isSortable }),
                         className,

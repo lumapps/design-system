@@ -82,10 +82,10 @@ describe(`<${Badge.displayName}>`, () => {
             const { badge } = setup(modifiedProps);
 
             expect(badge).toHaveClassName(
-                getBasicClass({ prefix: CLASSNAME, type: testedProp, value: modifiedProps[testedProp] }),
+                getBasicClass({ prefix: CLASSNAME, type: testedProp, value: modifiedProps[testedProp] as string }),
             );
             expect(badge).not.toHaveClassName(
-                getBasicClass({ prefix: CLASSNAME, type: testedProp, value: DEFAULT_PROPS[testedProp] }),
+                getBasicClass({ prefix: CLASSNAME, type: testedProp, value: DEFAULT_PROPS[testedProp] as string }),
             );
         });
     });

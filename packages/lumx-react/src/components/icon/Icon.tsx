@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { Color, ColorPalette, ColorVariant, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, ValueOf, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 type IconSizes = Size.xxs | Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
 
@@ -15,7 +15,7 @@ interface IconProps extends GenericProps {
     /** The color of the icon. */
     color?: Color;
     /** The degree of lightness and darkness of the selected icon color. */
-    colorVariant?: ColorVariant;
+    colorVariant?: ValueOf<ColorVariant>;
     /** Whether the icon has a shape. */
     hasShape?: boolean;
     /**
@@ -26,9 +26,9 @@ interface IconProps extends GenericProps {
     /** The reference passed to the <i> element. */
     iconRef?: React.RefObject<HTMLElement>;
     /** The size variant of the component. */
-    size?: IconSizes;
+    size?: ValueOf<IconSizes>;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
-    theme?: Theme;
+    theme?: ValueOf<Theme>;
 }
 
 /**

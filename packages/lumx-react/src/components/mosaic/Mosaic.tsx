@@ -2,7 +2,7 @@ import React, { MouseEvent, MouseEventHandler, useCallback } from 'react';
 
 import { AspectRatio, Theme, Thumbnail, ThumbnailProps } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, ValueOf, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
 import take from 'lodash/take';
 
@@ -11,7 +11,7 @@ import take from 'lodash/take';
  */
 interface MosaicProps extends GenericProps {
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
-    theme?: Theme;
+    theme?: ValueOf<Theme>;
     /** The list of thumbnails. */
     thumbnails: Array<Omit<ThumbnailProps, 'theme' | 'aspectRatio' | 'fillHeight' | 'tabIndex'>>;
     /** The function called on click on a mosaic image. */

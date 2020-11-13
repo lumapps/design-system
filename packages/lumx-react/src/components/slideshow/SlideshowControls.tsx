@@ -10,7 +10,7 @@ import {
     PAGINATION_ITEM_SIZE,
 } from '@lumx/react/components/slideshow/constants';
 import { COMPONENT_PREFIX, LEFT_KEY_CODE, RIGHT_KEY_CODE } from '@lumx/react/constants';
-import { GenericProps, detectSwipe, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, ValueOf, detectSwipe, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import isFunction from 'lodash/isFunction';
 
@@ -25,7 +25,7 @@ interface SlideshowControlsProps extends GenericProps {
     /** The number of slides. */
     slidesCount: number;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
-    theme?: Theme;
+    theme?: ValueOf<Theme>;
     /** The function called on click on the "next" arrow */
     onNextClick?(): void;
     /** The function called on click on a navigation item */

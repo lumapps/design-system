@@ -1,7 +1,7 @@
 import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiInformation } from '@lumx/icons';
 import { ColorPalette, Icon, Size } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, ValueOf, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
 import React, { ReactNode } from 'react';
 
@@ -20,8 +20,8 @@ interface MessageProps extends GenericProps {
     children?: ReactNode;
     /** Whether the message has a background or not. */
     hasBackground?: boolean;
-    /** The kind of helper (error or sucess for exemple). */
-    kind?: MessageKind;
+    /** The kind of helper (error or sucess for example). */
+    kind?: ValueOf<MessageKind>;
 }
 
 /**
@@ -45,26 +45,26 @@ const DEFAULT_PROPS: Partial<MessageProps> = {
  * The color according to kind props.
  */
 const KIND_COLOR = {
-    [MessageKind.error]: ColorPalette.red,
-    [MessageKind.info]: ColorPalette.dark,
-    [MessageKind.success]: ColorPalette.green,
-    [MessageKind.warning]: ColorPalette.yellow,
+    [MessageKind.error as string]: ColorPalette.red,
+    [MessageKind.info as string]: ColorPalette.dark,
+    [MessageKind.success as string]: ColorPalette.green,
+    [MessageKind.warning as string]: ColorPalette.yellow,
 };
 
 /**
  * The icons according to kind props.
  */
 const KIND_ICON = {
-    [MessageKind.error]: mdiAlert,
-    [MessageKind.info]: mdiInformation,
-    [MessageKind.success]: mdiCheckCircle,
-    [MessageKind.warning]: mdiAlertCircle,
+    [MessageKind.error as string]: mdiAlert,
+    [MessageKind.info as string]: mdiInformation,
+    [MessageKind.success as string]: mdiCheckCircle,
+    [MessageKind.warning as string]: mdiAlertCircle,
 };
 
 const Message: React.FC<MessageProps> = ({ children, className, hasBackground, kind, ...forwardedProps }) => {
-    const icon = kind ? KIND_ICON[kind] : null;
+    const icon = kind ? KIND_ICON[kind as string] : null;
 
-    const color = kind ? KIND_COLOR[kind] : DEFAULT_PROPS.color;
+    const color = kind ? KIND_COLOR[kind as string] : DEFAULT_PROPS.color;
     return (
         <div
             className={classNames(

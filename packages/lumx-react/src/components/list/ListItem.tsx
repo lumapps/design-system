@@ -6,19 +6,8 @@ import isEmpty from 'lodash/isEmpty';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
 import { ListProps, Size } from '@lumx/react';
-import { GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
+import { GenericProps, ValueOf, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
 import { renderLink } from '@lumx/react/utils/renderLink';
-
-/**
- *  Authorized size values.
- *  @deprecated use Size instead.
- */
-const ListItemSize = {
-    big: Size.big,
-    huge: Size.huge,
-    regular: Size.regular,
-    tiny: Size.tiny,
-};
 
 type ListItemSizes = Size.tiny | Size.regular | Size.big | Size.huge;
 
@@ -45,7 +34,7 @@ interface ListItemProps extends GenericProps {
     /** The reference passed to the <a> element. */
     linkRef?: Ref<HTMLAnchorElement>;
     /** The size variant of the component. */
-    size?: ListItemSizes;
+    size?: ValueOf<ListItemSizes>;
     /** The function called when an item is selected. */
     onItemSelected?(): void;
 }
@@ -144,4 +133,4 @@ const ListItem: React.FC<ListItemProps> = (props) => {
 ListItem.displayName = COMPONENT_NAME;
 ListItem.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, ListItem, ListItemProps, ListItemSize, ListItemSizes, isClickable };
+export { CLASSNAME, ListItem, ListItemProps, ListItemSizes, isClickable };

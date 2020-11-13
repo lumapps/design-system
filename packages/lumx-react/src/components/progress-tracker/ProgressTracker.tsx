@@ -53,7 +53,8 @@ const ProgressTracker: React.FC<ProgressTrackerProps> = (props) => {
     const state = useTabProviderContextState();
     const numberOfSteps = state?.ids?.tab?.length || 0;
     const backgroundPosition: number = numberOfSteps > 0 ? 100 / (numberOfSteps * 2) : 0;
-    const trackPosition: number = numberOfSteps > 0 ? ((100 / (numberOfSteps - 1)) * (state?.activeTabIndex || 0)) / 100 : 0;
+    const trackPosition: number =
+        numberOfSteps > 0 ? ((100 / (numberOfSteps - 1)) * (state?.activeTabIndex || 0)) / 100 : 0;
 
     return (
         <div

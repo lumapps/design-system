@@ -11,6 +11,7 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import {
     Callback,
     GenericProps,
+    ValueOf,
     getRootClassName,
     handleBasicClasses,
     isComponent,
@@ -27,7 +28,7 @@ interface SideNavigationItemProps extends GenericProps {
     /** The children elements. Should use SideNavigationItem. */
     children?: ReactNode;
     /** The emphasis variant of the component. */
-    emphasis?: Emphasis;
+    emphasis?: ValueOf<Emphasis>;
     /** The label of the menu item. */
     label: string | ReactNode;
     /** The icon the menu item (SVG path code). */

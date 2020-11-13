@@ -10,7 +10,7 @@ export { AutocompleteMultiple, AutocompleteMultipleProps } from './components/au
 
 export { Badge, BadgeProps } from './components/badge/Badge';
 
-export { Button, ButtonEmphasis, ButtonProps } from './components/button/Button';
+export { Button, ButtonProps } from './components/button/Button';
 
 export { ButtonGroup, ButtonGroupProps } from './components/button/ButtonGroup';
 
@@ -38,13 +38,7 @@ export { InputHelper, InputHelperProps } from './components/input-helper/InputHe
 
 export { InputLabel, InputLabelProps } from './components/input-label/InputLabel';
 
-export {
-    CrossOrigin,
-    Thumbnail,
-    ThumbnailAspectRatio,
-    ThumbnailProps,
-    ThumbnailVariant,
-} from './components/thumbnail/Thumbnail';
+export { CrossOrigin, Thumbnail, ThumbnailProps, ThumbnailVariant } from './components/thumbnail/Thumbnail';
 
 export { FocusPoint } from './components/thumbnail/FocusedImageOptions';
 
@@ -58,7 +52,7 @@ export { List, ListProps } from './components/list/List';
 
 export { ListDivider, ListDividerProps } from './components/list/ListDivider';
 
-export { ListItem, ListItemProps, ListItemSize, ListItemSizes } from './components/list/ListItem';
+export { ListItem, ListItemProps, ListItemSizes } from './components/list/ListItem';
 
 export { ListSubheader, ListSubheaderProps } from './components/list/ListSubheader';
 

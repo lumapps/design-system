@@ -8,7 +8,7 @@ import isEmpty from 'lodash/isEmpty';
 import { InputHelper, InputLabel, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, ValueOf, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 enum SwitchPosition {
     left = 'left',
@@ -28,9 +28,9 @@ interface SwitchProps extends GenericProps {
     /** The native input name property. */
     name?: string;
     /** The position of the toggle regarding the label. */
-    position?: SwitchPosition;
+    position?: ValueOf<SwitchPosition>;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
-    theme?: Theme;
+    theme?: ValueOf<Theme>;
     /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
     /** The native input value property. */

@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { Dropdown, Offset, Placement, TextField, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, ValueOf, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { useFocus } from '@lumx/react/hooks/useFocus';
 
@@ -32,7 +32,7 @@ interface AutocompleteProps extends GenericProps {
      * The preferred Dropdown location against the anchor element.
      * @see {@link DropdownProps#placement}
      */
-    placement?: Placement;
+    placement?: ValueOf<Placement>;
     /**
      * Whether the dropdown should fit to the anchor width or not.
      * @see {@link DropdownProps#fitToAnchorWidth}
@@ -88,13 +88,13 @@ interface AutocompleteProps extends GenericProps {
      */
     placeholder?: string;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
-    theme?: Theme;
+    theme?: ValueOf<Theme>;
     /** The children elements. Should be a list of suggestions. */
-    children: React.ReactNode;
+    children: ReactNode;
     /**
      * The list of chips to be displayed before the text field input.
      */
-    chips?: React.ReactNode;
+    chips?: ReactNode;
     /**
      * The value of the text field.
      * @see {@link TextFieldProps#value}

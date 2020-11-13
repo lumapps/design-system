@@ -13,6 +13,7 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import {
     Callback,
     GenericProps,
+    ValueOf,
     getRootClassName,
     handleBasicClasses,
     isComponent,
@@ -32,7 +33,7 @@ interface ExpansionPanelProps extends GenericProps {
     /** The label text used when no `<header>` was provided in the children. */
     label?: string;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
-    theme?: Theme;
+    theme?: ValueOf<Theme>;
     /** The function called on open. */
     onOpen?: Callback;
     /** The function called on close. */

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { Avatar, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, ENTER_KEY_CODE } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, ValueOf, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import isFunction from 'lodash/isFunction';
 import { AvatarProps } from '../avatar/Avatar';
@@ -14,7 +14,7 @@ import { AvatarProps } from '../avatar/Avatar';
  */
 interface CommentBlockProps extends GenericProps {
     /** The action elements. */
-    actions?: HTMLElement | ReactNode;
+    actions?: ReactNode;
     /**
      * The url of the avatar picture we want to display.
      * @see {@link AvatarProps#image}
@@ -23,7 +23,7 @@ interface CommentBlockProps extends GenericProps {
     /** The props to pass to the avatar, minus those already set by the CommentBlock props. */
     avatarProps?: Omit<AvatarProps, 'image' | 'size' | 'tabIndex' | 'onClick' | 'onKeyPress'>;
     /** The children elements. */
-    children?: HTMLElement | ReactNode;
+    children?: ReactNode;
     /** The timestamp of the component. */
     date: string;
     /** Whether the component has actions to display or not. */
@@ -41,7 +41,7 @@ interface CommentBlockProps extends GenericProps {
     /** The content of the comment. */
     text: HTMLElement | string;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
-    theme?: Theme;
+    theme?: ValueOf<Theme>;
     /** The function called on click. */
     onClick?(): void;
     /** The function called when the cursor enters the component. */

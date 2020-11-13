@@ -1,22 +1,24 @@
 import { Alignment } from '@lumx/react/components';
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, ValueOf, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { useChipGroupNavigation, useChipGroupNavigationType } from '@lumx/react/hooks/useChipGroupNavigation';
+
+type ChipGroupAlignment = Alignment.left | Alignment.center | Alignment.right;
 
 /**
  * Defines the props of the component.
  */
 interface ChipGroupProps extends GenericProps {
     /** The alignment of the component. */
-    align?: string;
+    align?: ValueOf<ChipGroupAlignment>;
     /** The children elements. Should be a list of Chip. */
-    children: React.ReactNode;
+    children: ReactNode;
 }
 
 /**

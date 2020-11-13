@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { AspectRatio, Icon, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, ValueOf, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 enum UploaderVariant {
     square = 'square',
@@ -19,17 +19,17 @@ type UploaderSize = Size.xl | Size.xxl;
  */
 interface UploaderProps extends GenericProps {
     /** The aspect ratio the image will get. */
-    aspectRatio?: AspectRatio;
+    aspectRatio?: ValueOf<AspectRatio>;
     /** The icon of the uploader. */
     icon?: string;
     /** The label of the uploader. */
     label?: string;
     /** The size variant of the component. */
-    size?: UploaderSize;
+    size?: ValueOf<UploaderSize>;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
-    theme?: Theme;
+    theme?: ValueOf<Theme>;
     /** The variant of the component. */
-    variant?: UploaderVariant;
+    variant?: ValueOf<UploaderVariant>;
     /** The function called on click. */
     onClick?: MouseEventHandler<HTMLDivElement>;
 }

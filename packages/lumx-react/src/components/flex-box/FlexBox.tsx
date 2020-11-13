@@ -1,6 +1,6 @@
 import { Alignment, Orientation } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, ValueOf, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
 import castArray from 'lodash/castArray';
 import React, { ReactNode } from 'react';
@@ -8,6 +8,8 @@ import { Size } from '..';
 
 export type MarginAutoAlignment = Alignment.top | Alignment.bottom | Alignment.right | Alignment.left;
 export type GapSize = Size.regular | Size.big | Size.huge;
+type HorizontalAlignment = Alignment.top | Alignment.center | Alignment.bottom;
+type VerticalAlignment = Alignment.left | Alignment.center | Alignment.right;
 
 /**
  * Defines the props of the component.
@@ -18,17 +20,17 @@ interface FlexBoxProps extends GenericProps {
     /** Whether the "content filling space" is enabled or not. */
     fillSpace?: boolean;
     /** The gap space between flexbox items. */
-    gap?: GapSize;
+    gap?: ValueOf<GapSize>;
     /** The flex horizontal alignment. */
-    hAlign?: Alignment.top | Alignment.center | Alignment.bottom;
+    hAlign?: ValueOf<HorizontalAlignment>;
     /** Whether the "auto margin" is enabled all around or not. */
-    marginAuto?: MarginAutoAlignment | MarginAutoAlignment[];
+    marginAuto?: ValueOf<MarginAutoAlignment> | Array<ValueOf<MarginAutoAlignment>>;
     /** Whether the "content shrink" is disabled or not. */
     noShrink?: boolean;
     /** The flex direction. */
-    orientation?: Orientation;
+    orientation?: ValueOf<Orientation>;
     /** The flex vertical alignment. */
-    vAlign?: Alignment.left | Alignment.center | Alignment.right;
+    vAlign?: ValueOf<VerticalAlignment>;
     /** Whether the "flex wrap" is enabled or not. */
     wrap?: boolean;
 }

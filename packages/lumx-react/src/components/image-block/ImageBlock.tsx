@@ -7,7 +7,7 @@ import isObject from 'lodash/isObject';
 import { Alignment, AspectRatio, Size, Theme, Thumbnail } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, ValueOf, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { ThumbnailProps } from '../thumbnail/Thumbnail';
 
 /**
@@ -30,7 +30,7 @@ interface ImageBlockProps extends GenericProps {
     /** The action elements. */
     actions?: ReactNode;
     /** The position of the caption. */
-    captionPosition?: ImageBlockCaptionPosition;
+    captionPosition?: ValueOf<ImageBlockCaptionPosition>;
     /** The style to apply to the caption section. */
     captionStyle?: CSSProperties;
     /** The image description. Can be either a string, or sanitized html. */
@@ -41,11 +41,11 @@ interface ImageBlockProps extends GenericProps {
      */
     image: string;
     /** The size variant of the component. */
-    size?: ImageBlockSize;
+    size?: ValueOf<ImageBlockSize>;
     /** The tags elements. */
-    tags?: HTMLElement | ReactNode;
+    tags?: ReactNode;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
-    theme?: Theme;
+    theme?: ValueOf<Theme>;
     /** The props to pass to the thumbnail, minus those already set by the ImageBlock props. */
     thumbnailProps?: Omit<ThumbnailProps, 'image' | 'size' | 'theme'>;
     /** The image title to display in the caption. */

@@ -6,7 +6,7 @@ import { Size, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
-import { GenericProps, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, ValueOf, handleBasicClasses } from '@lumx/react/utils';
 import { getRootClassName } from '../../utils/getRootClassName';
 
 /**
@@ -19,15 +19,15 @@ type AvatarSize = Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
  */
 interface AvatarProps extends GenericProps {
     /** The action elements. */
-    actions?: HTMLElement | ReactNode;
+    actions?: ReactNode;
     /** The optional avatar badge. */
     badge?: ReactElement;
     /** The avatar image URL. */
     image: string;
     /** The size variant of the component. */
-    size?: AvatarSize;
+    size?: ValueOf<AvatarSize>;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
-    theme?: Theme;
+    theme?: ValueOf<Theme>;
 }
 
 /**

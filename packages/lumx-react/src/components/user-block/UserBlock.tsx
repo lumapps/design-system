@@ -6,7 +6,7 @@ import { Avatar, Orientation, Size, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, ValueOf, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { AvatarProps } from '../avatar/Avatar';
 
 /**
@@ -34,11 +34,11 @@ interface UserBlockProps extends GenericProps {
     /** The name of the user.. */
     name?: string;
     /** The orientation of the user block. */
-    orientation?: Orientation;
+    orientation?: ValueOf<Orientation>;
     /** The size variant of the component. */
-    size?: UserBlockSize;
+    size?: ValueOf<UserBlockSize>;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
-    theme?: Theme;
+    theme?: ValueOf<Theme>;
     /** The reference passed to the wrapper. */
     userBlockRef?: Ref<HTMLDivElement>;
     /** The function called on click. */

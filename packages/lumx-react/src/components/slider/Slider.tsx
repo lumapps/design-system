@@ -6,7 +6,7 @@ import { InputHelper, InputLabel, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import useEventCallback from '@lumx/react/hooks/useEventCallback';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, ValueOf, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import uuid from 'uuid/v4';
 
@@ -33,7 +33,7 @@ interface SliderProps extends GenericProps {
     /** The value between two steps. */
     steps?: number;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
-    theme?: Theme;
+    theme?: ValueOf<Theme>;
     /** The current selected value of the slider. */
     value: number;
     /** The function called on change. */

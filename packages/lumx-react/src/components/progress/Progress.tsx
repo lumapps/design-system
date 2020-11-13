@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, ValueOf, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
  * Authorized variants.
@@ -20,11 +20,11 @@ enum ProgressVariant {
  */
 interface ProgressProps extends GenericProps {
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
-    theme?: Theme;
+    theme?: ValueOf<Theme>;
     /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
     /** The component variant. */
-    variant?: ProgressVariant;
+    variant?: ValueOf<ProgressVariant>;
 }
 
 /**

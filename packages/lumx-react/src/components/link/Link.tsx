@@ -6,7 +6,7 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import classNames from 'classnames';
 
 import { Color, ColorVariant, Icon, Size, Typography } from '@lumx/react';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, ValueOf, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { renderLink } from '@lumx/react/utils/renderLink';
 
 type HTMLAnchorProps = React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
@@ -18,7 +18,7 @@ interface LinkProps extends GenericProps {
     /** The color of the link. */
     color?: Color;
     /** The degree of lightness and darkness of the selected link color. */
-    colorVariant?: ColorVariant;
+    colorVariant?: ValueOf<ColorVariant>;
     /** Link href. */
     href?: HTMLAnchorProps['href'];
     /** Whether the component is disabled or not. */
@@ -40,7 +40,7 @@ interface LinkProps extends GenericProps {
     /** Link target. */
     target?: HTMLAnchorProps['target'];
     /** The typography of the link. */
-    typography?: Typography;
+    typography?: ValueOf<Typography>;
 }
 
 /**
