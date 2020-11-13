@@ -3,9 +3,9 @@ import React from 'react';
 
 export const App = ({ theme }: any) => (
     <ImageBlock
-        aspectRatio={AspectRatio.horizontal}
         captionPosition={ImageBlockCaptionPosition.over}
         description="Lorem ipsum dolor sit amet, consectur adipiscing "
+        image="/demo-assets/landscape2.jpg"
         tags={
             <ChipGroup>
                 <Chip size={Size.s} theme={theme}>
@@ -19,6 +19,6 @@ export const App = ({ theme }: any) => (
         }
         theme={theme}
         title="Lorem ipsum"
-        image="/demo-assets/landscape2.jpg"
+        thumbnailProps={{ aspectRatio: AspectRatio.horizontal }}
     />
 );

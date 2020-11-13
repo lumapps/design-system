@@ -5,9 +5,9 @@ export const App = () => (
     <div className="lumx-color-background-dark-L5 lumx-spacing-padding-huge">
         <ImageBlock
             className="lumx-color-background-light-N"
-            aspectRatio={AspectRatio.horizontal}
             captionStyle={{ padding: 16 }}
             description="Lorem ipsum dolor sit amet, consectur adipiscing "
+            image="/demo-assets/landscape3.jpg"
             tags={
                 <ChipGroup>
                     <Chip size={Size.s}>Tag 1</Chip>
@@ -15,7 +15,7 @@ export const App = () => (
                 </ChipGroup>
             }
             title="Lorem ipsum"
-            image="/demo-assets/landscape3.jpg"
+            thumbnailProps={{ aspectRatio: AspectRatio.horizontal }}
         />
     </div>
 );

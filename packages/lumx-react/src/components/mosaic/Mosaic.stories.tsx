@@ -66,11 +66,12 @@ export const clickableThumbnails = ({ theme }: any) => {
         <div style={{ width: 250 }}>
             <Mosaic
                 theme={theme}
+                onImageClick={onClick}
                 thumbnails={[
-                    { image: imageKnob('Image 1', IMAGES.landscape1), onClick },
-                    { image: imageKnob('Image 2', IMAGES.landscape2), onClick },
-                    { image: imageKnob('Image 3', IMAGES.landscape3), onClick },
-                    { image: imageKnob('Image 4', IMAGES.portrait1), onClick },
+                    { image: imageKnob('Image 1', IMAGES.landscape1) },
+                    { image: imageKnob('Image 2', IMAGES.landscape2) },
+                    { image: imageKnob('Image 3', IMAGES.landscape3) },
+                    { image: imageKnob('Image 4', IMAGES.portrait1) },
                 ]}
             />
         </div>
@@ -79,41 +80,37 @@ export const clickableThumbnails = ({ theme }: any) => {
 
 export const sixThumbnails = ({ theme }: any) => {
     const [activeIndex, setActiveIndex] = useState<number>();
-    const lightBoxParent = useRef(null);
     const thumbnails = [
-        { onClick: setActiveIndex, image: imageKnob('Image 1', IMAGES.landscape1) },
-        { onClick: setActiveIndex, image: imageKnob('Image 2', IMAGES.landscape2) },
-        { onClick: setActiveIndex, image: imageKnob('Image 3', IMAGES.landscape3) },
-        { onClick: setActiveIndex, image: imageKnob('Image 4', IMAGES.portrait1) },
-        { onClick: setActiveIndex, image: imageKnob('Image 5', IMAGES.portrait2) },
-        { onClick: setActiveIndex, image: imageKnob('Image 6', IMAGES.square1) },
+        { image: imageKnob('Image 1', IMAGES.landscape1) },
+        { image: imageKnob('Image 2', IMAGES.landscape2) },
+        { image: imageKnob('Image 3', IMAGES.landscape3) },
+        { image: imageKnob('Image 4', IMAGES.portrait1) },
+        { image: imageKnob('Image 5', IMAGES.portrait2) },
+        { image: imageKnob('Image 6', IMAGES.square1) },
     ];
+    const lightBoxParent = useRef(null);
     const closeLightBox = useCallback(() => {
-        setActiveIndex(0);
+        setActiveIndex(undefined);
     }, [setActiveIndex]);
 
     return (
         <div ref={lightBoxParent} style={{ width: 250 }}>
-            <Mosaic theme={theme} thumbnails={thumbnails} />
+            <Mosaic theme={theme} onImageClick={setActiveIndex} thumbnails={thumbnails} />
 
-            <Lightbox
-                isOpen={activeIndex !== undefined && activeIndex !== null}
-                parentElement={lightBoxParent}
-                onClose={closeLightBox}
-            >
-                <Slideshow activeIndex={activeIndex} hasControls={true} fillHeight={true} theme={Theme.dark}>
-                    {thumbnails.map((th, idx) => {
-                        return (
-                            <SlideshowItem key={`${th.image}-${idx}`}>
-                                <ImageBlock
-                                    image={th.image}
-                                    align={Alignment.center}
-                                    fillHeight={true}
-                                    theme={Theme.dark}
-                                />
-                            </SlideshowItem>
-                        );
-                    })}
+            <Lightbox isOpen={activeIndex !== undefined} parentElement={lightBoxParent} onClose={closeLightBox}>
+                <Slideshow activeIndex={activeIndex} hasControls fillHeight theme={Theme.dark}>
+                    {thumbnails.map((thumbnail, index) => (
+                        <SlideshowItem key={`${thumbnail.image}-${index}`}>
+                            <ImageBlock
+                                image={thumbnail.image}
+                                theme={Theme.dark}
+                                thumbnailProps={{
+                                    align: Alignment.center,
+                                    fillHeight: true,
+                                }}
+                            />
+                        </SlideshowItem>
+                    ))}
                 </Slideshow>
             </Lightbox>
         </div>

@@ -29,8 +29,8 @@ export const App = ({ theme }: any) => (
                 </div>
             </FlexBox>
         }
-        aspectRatio={AspectRatio.horizontal}
         description="Lorem ipsum dolor sit amet, consectur adipiscing "
+        image="/demo-assets/landscape1.jpg"
         tags={
             <ChipGroup>
                 <Chip size={Size.s} theme={theme}>
@@ -44,6 +44,6 @@ export const App = ({ theme }: any) => (
         }
         theme={theme}
         title="Lorem ipsum"
-        image="/demo-assets/landscape1.jpg"
+        thumbnailProps={{ aspectRatio: AspectRatio.horizontal }}
     />
 );

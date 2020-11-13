@@ -31,7 +31,7 @@ export const Simple = ({ theme }: any) => {
         >
             {images.map((image, index) => (
                 <SlideshowItem key={`${image}-${index}`}>
-                    <ImageBlock aspectRatio={AspectRatio.horizontal} image={image} theme={theme} />
+                    <ImageBlock thumbnailProps={{ aspectRatio: AspectRatio.horizontal }} image={image} theme={theme} />
                 </SlideshowItem>
             ))}
         </Slideshow>

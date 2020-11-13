@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEvent, MouseEventHandler, useCallback } from 'react';
 
 import { AspectRatio, Theme, Thumbnail, ThumbnailProps } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
@@ -9,15 +9,13 @@ import take from 'lodash/take';
 /**
  * Defines the props of the component.
  */
-interface ClickableThumbnailProps
-    extends Omit<ThumbnailProps, 'theme' | 'aspectRatio' | 'fillHeight' | 'tabIndex' | 'onClick'> {
-    onClick?(index: number): void;
-}
 interface MosaicProps extends GenericProps {
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
     /** The list of thumbnails. */
-    thumbnails: ClickableThumbnailProps[];
+    thumbnails: Array<Omit<ThumbnailProps, 'theme' | 'aspectRatio' | 'fillHeight' | 'tabIndex'>>;
+    /** The function called on click on a mosaic image. */
+    onImageClick?(index: number): void;
 }
 
 /**
@@ -37,25 +35,26 @@ const DEFAULT_PROPS: Partial<MosaicProps> = {
     theme: Theme.light,
 };
 
-const Mosaic: React.FC<MosaicProps> = ({ className, theme, thumbnails, ...forwardedProps }) => (
-    <div
-        {...forwardedProps}
-        className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }), {
-            [`${CLASSNAME}--has-1-thumbnail`]: thumbnails?.length === 1,
-            [`${CLASSNAME}--has-2-thumbnails`]: thumbnails?.length === 2,
-            [`${CLASSNAME}--has-3-thumbnails`]: thumbnails?.length === 3,
-            [`${CLASSNAME}--has-4-thumbnails`]: thumbnails?.length >= 4,
-        })}
-    >
-        <div className={`${CLASSNAME}__wrapper`}>
-            {take(thumbnails, 4).map(({ image, onClick, ...thumbnail }, index) => {
-                const handleClick = () => {
-                    if (onClick) {
-                        onClick(index);
-                    }
-                };
-
-                return (
+const Mosaic: React.FC<MosaicProps> = ({ className, theme, thumbnails, onImageClick, ...forwardedProps }) => {
+    const handleImageClick = useCallback(
+        (index: number, onClick?: MouseEventHandler): MouseEventHandler => (event) => {
+            onClick?.(event);
+            onImageClick?.(index);
+        },
+        [onImageClick],
+    );
+    return (
+        <div
+            {...forwardedProps}
+            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }), {
+                [`${CLASSNAME}--has-1-thumbnail`]: thumbnails?.length === 1,
+                [`${CLASSNAME}--has-2-thumbnails`]: thumbnails?.length === 2,
+                [`${CLASSNAME}--has-3-thumbnails`]: thumbnails?.length === 3,
+                [`${CLASSNAME}--has-4-thumbnails`]: thumbnails?.length >= 4,
+            })}
+        >
+            <div className={`${CLASSNAME}__wrapper`}>
+                {take(thumbnails, 4).map(({ image, onClick, ...thumbnail }, index) => (
                     <div key={index} className={`${CLASSNAME}__thumbnail`}>
                         <Thumbnail
                             {...thumbnail}
@@ -63,8 +62,8 @@ const Mosaic: React.FC<MosaicProps> = ({ className, theme, thumbnails, ...forwar
                             theme={theme}
                             aspectRatio={AspectRatio.free}
                             fillHeight
-                            tabIndex={onClick && '0'}
-                            onClick={handleClick}
+                            tabIndex={(onClick || onImageClick) && '0'}
+                            onClick={handleImageClick(index, onClick)}
                         />
 
                         {thumbnails.length > 4 && index === 3 && (
@@ -73,11 +72,11 @@ const Mosaic: React.FC<MosaicProps> = ({ className, theme, thumbnails, ...forwar
                             </div>
                         )}
                     </div>
-                );
-            })}
+                ))}
+            </div>
         </div>
-    </div>
-);
+    );
+};
 
 Mosaic.displayName = COMPONENT_NAME;
 Mosaic.defaultProps = DEFAULT_PROPS;

@@ -41,12 +41,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Default color of `Badge` is now `primary`.
 -   _[BREAKING]_ Removed `Tabs` component replaced by the `TabProvider` and `TabList` components.
 -   _[BREAKING]_ `Tab` component doesn't wrap the tab content anymore (use `TabPanel` for that). Implements the [WAI-ARIA `tab` role](https://www.w3.org/TR/wai-aria-practices-1.1/examples/tabs/tabs-1/tabs.html#rps_label).
+-   _[BREAKING]_ `onClick` prop for `Mosaic.thumbnail` prop is no longer automatically passing the index.
 
 ### Removed
 
 -   _[BREAKING]_ Removed `onOpen` prop from `Dialog` component. User should use `isOpen` from its side.
 -   _[BREAKING]_ Removed `thumbnailAspectRatio` prop from `PostBlock` component. User should pass it using `thumbnailProps` instead.
 -   _[BREAKING]_ Removed `onOpen`, `role` and `noWrapper` props from `Lightbox` component.
+-   _[BREAKING]_ `align`, `aspectRatio`, `crossOrigin`, `fillHeight`, `focusPoint`, `isCrossOriginEnabled` and `onClick` props have been removed from `ImageBlock` component. These props will now be passed using the `ImageBlock.thumbnailProps` prop.
 
 ## [0.28.0][] - 2020-11-17
 
