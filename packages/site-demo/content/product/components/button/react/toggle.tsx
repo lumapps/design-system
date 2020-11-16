@@ -1,23 +1,19 @@
 import { mdiBellPlus, mdiBellRing, mdiCheck } from '@lumx/icons';
-import { Button, Emphasis, FlexBox, IconButton, Orientation, Size } from '@lumx/react';
+import { Button, Emphasis, IconButton } from '@lumx/react';
 import React from 'react';
 
 export const App = ({ theme }: any) => (
     <>
-        <FlexBox gap={Size.big} orientation={Orientation.horizontal}>
-            <Button emphasis={Emphasis.medium} theme={theme}>
-                Subscribe
-            </Button>
+        <Button theme={theme} emphasis={Emphasis.medium}>
+            Subscribe
+        </Button>
 
-            <Button leftIcon={mdiCheck} emphasis={Emphasis.medium} isSelected={true} theme={theme}>
-                Subscribed
-            </Button>
-        </FlexBox>
+        <Button theme={theme} emphasis={Emphasis.medium} leftIcon={mdiCheck} isSelected>
+            Subscribed
+        </Button>
 
-        <FlexBox gap={Size.big} orientation={Orientation.horizontal}>
-            <IconButton emphasis={Emphasis.medium} icon={mdiBellPlus} theme={theme} />
+        <IconButton theme={theme} emphasis={Emphasis.medium} icon={mdiBellPlus} />
 
-            <IconButton emphasis={Emphasis.medium} icon={mdiBellRing} isSelected={true} theme={theme} />
-        </FlexBox>
+        <IconButton theme={theme} emphasis={Emphasis.medium} icon={mdiBellRing} isSelected />
     </>
 );
