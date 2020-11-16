@@ -9,3 +9,5 @@ export { htmlDecode } from './htmlDecode';
 export * from './partitionMulti';
 
 export * from './type';
+
+export * from './truncate';
