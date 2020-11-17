@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   _[BREAKING]_ `angular` and `jquery` are now exclusively defined as `peerDependencies`. You must install them separately from `@lumx/angularjs`.
+-   _[BREAKING]_ updated `@lumx/angularjs` to jquery v3.5.1.
+
 ## [0.27.0][] - 2020-11-05
 
 ### Changed
