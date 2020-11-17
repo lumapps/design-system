@@ -1112,7 +1112,7 @@ module.exports = {
         'import/default': 'error',
         'import/dynamic-import-chunkname': 'warn',
         'import/export': 'error',
-        'import/exports-last': 'error',
+        'import/exports-last': 'off',
         'import/extensions': [
             'error',
             'never',
@@ -1147,18 +1147,7 @@ module.exports = {
             },
         ],
         'import/no-amd': 'error',
-        'import/no-anonymous-default-export': [
-            'error',
-            {
-                allowAnonymousClass: false,
-                allowAnonymousFunction: false,
-                allowArray: false,
-                allowArrowFunction: true,
-                allowCallExpression: false,
-                allowLiteral: false,
-                allowObject: false,
-            },
-        ],
+        'import/no-anonymous-default-export': 'off',
         'import/no-commonjs': [
             'error',
             {
@@ -1173,7 +1162,7 @@ module.exports = {
         'import/no-extraneous-dependencies': [
             'error',
             {
-                devDependencies: ['**/*.test.jsx', '**/*.spec.js'],
+                devDependencies: ['**/*.test.jsx', '**/*.spec.js', '**/*.stories.js'],
                 optionalDependencies: false,
                 peerDependencies: true,
             },

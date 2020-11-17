@@ -1,0 +1,34 @@
+<style>
+    .dark-link-style {
+        color: rgba(255, 255, 255, 1); /* light-N */
+        text-decoration: none;
+    }
+    .dark-link-style:hover {
+        color: rgba(255, 255, 255, 0.9); /* light-L1 */
+        text-decoration: underline;
+    }
+    .dark-link-style:active {
+        color: rgba(255, 255, 255, 0.8); /* light-L2 */
+    }
+</style>
+<div
+    lumx-grid-container="row"
+    style="justify-content:space-evenly; align-items: center;"
+    class="lumx-theme-background-dark-N"
+>
+    <a href="#" class="dark-link-style">Link</a>
+
+    <a
+        href="#"
+        class="dark-link-style"
+        style="    display: inline-flex;
+    align-items: center;"
+        ><lumx-icon
+            lumx-size="xs"
+            lumx-path="{{ vm.icons.mdiHelpCircle }}"
+            style="display:inline-block; margin-right:4px"
+        ></lumx-icon>
+        Link with icon</a
+    >
+    <a href="#" class="dark-link-style"><h2 style="margin:0;">Link</h2></a>
+</div>
