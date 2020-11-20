@@ -75,35 +75,35 @@ interface ThumbnailProps extends GenericProps {
     align?: Alignment;
     /** The image aspect ratio. */
     aspectRatio?: AspectRatio;
-    /** Enable cross origin attribute. */
-    isCrossOriginEnabled?: boolean;
     /**
      * Allows images that are loaded from foreign origins
      * to be used as if they had been loaded from the current origin.
      */
     crossOrigin?: CrossOrigin;
-    /** Whether the image has to fill its container's height. */
-    fillHeight?: boolean;
-    /** Avatar image. */
-    image: string;
-    /** Size. */
-    size?: ThumbnailSize;
-    /** Image Loading mode */
-    loading?: ImageLoading;
-    /** Theme. */
-    theme?: Theme;
-    /** Variant. */
-    variant?: ThumbnailVariant;
-    /** Focal Point coordinates. */
-    focusPoint?: FocusPoint;
-    /** Allows to re-center the image according to the focal point after after window resizing */
-    isFollowingWindowSize?: boolean;
-    /** Time before recalculating focal point if isFollowingWindowSize is activated */
-    resizeDebounceTime?: number;
-    /** props that will be passed directly to the `img` tag */
-    imgProps?: ImgHTMLAttributes<HTMLImageElement>;
-    /** Fallback svg or react node. */
+    /** The fallback svg or react node. */
     fallback?: string | ReactNode;
+    /** Whether the image has to fill its container height or not. */
+    fillHeight?: boolean;
+    /** The focal Point coordinates. */
+    focusPoint?: FocusPoint;
+    /** The avatar image. */
+    image: string;
+    /** The props that will be passed directly to the <img> element. */
+    imgProps?: ImgHTMLAttributes<HTMLImageElement>;
+    /** Whether cross origin is enabled or not. */
+    isCrossOriginEnabled?: boolean;
+    /** Whether the image has to be centered according to the focal point after a window resize. */
+    isFollowingWindowSize?: boolean;
+    /** The size variant of the component. */
+    size?: ThumbnailSize;
+    /** The image loading mode. */
+    loading?: ImageLoading;
+    /** The time before recalculating focal point if isFollowingWindowSize is activated. */
+    resizeDebounceTime?: number;
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    theme?: Theme;
+    /** The variant of the component. */
+    variant?: ThumbnailVariant;
 }
 
 /**
@@ -121,44 +121,37 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: Partial<ThumbnailProps> = {
     align: Alignment.left,
-    crossOrigin: CrossOrigin.anonymous,
     aspectRatio: AspectRatio.original,
+    crossOrigin: CrossOrigin.anonymous,
     fallback: mdiImageBrokenVariant,
     focusPoint: { x: 0, y: 0 },
     isCrossOriginEnabled: true,
+    isFollowingWindowSize: true,
     loading: ImageLoading.lazy,
+    resizeDebounceTime: 20,
     theme: Theme.light,
     variant: ThumbnailVariant.squared,
-    resizeDebounceTime: 20,
-    isFollowingWindowSize: true,
 };
 
-/**
- * Simple component used to display image with square or round shape.
- * Convenient to display image previews or user avatar.
- * Has a fallback image when the source image is in error.
- *
- * @return The component.
- */
 const Thumbnail: React.FC<ThumbnailProps> = ({
-    className,
-    isCrossOriginEnabled,
-    crossOrigin,
-    resizeDebounceTime,
-    isFollowingWindowSize,
     align,
+    alt = 'Thumbnail',
     aspectRatio,
+    className,
+    crossOrigin,
     fallback,
     fillHeight,
+    focusPoint,
+    image,
+    imgProps,
+    isCrossOriginEnabled,
+    isFollowingWindowSize,
     loading,
+    onClick,
+    resizeDebounceTime,
     size,
     theme,
     variant,
-    image,
-    alt = 'Thumbnail',
-    onClick,
-    focusPoint,
-    imgProps,
     ...forwardedProps
 }: ThumbnailProps): ReactElement => {
     const [thumbnailState, setThumbnailState] = useState<ThumbnailStates>('isLoading');

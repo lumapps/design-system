@@ -10,7 +10,7 @@ import { getRootClassName } from '@lumx/react/utils';
  */
 interface IconButtonProps extends BaseButtonProps {
     /**
-     * The icon used as the button label.
+     * The icon name to use as the button label.
      * @see {@link IconProps#icon}
      */
     icon: string;
@@ -35,12 +35,6 @@ const DEFAULT_PROPS: Partial<IconButtonProps> = {
     theme: Theme.light,
 };
 
-/**
- * Displays an icon button.
- *
- * @param  props The component props.
- * @return The component.
- */
 const IconButton: React.FC<IconButtonProps> = (props) => {
     const { emphasis, icon, size, theme, ...forwardedProps } = props;
 

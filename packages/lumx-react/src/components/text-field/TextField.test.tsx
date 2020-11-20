@@ -159,13 +159,6 @@ describe(`<${TextField.displayName}>`, () => {
             expect(inputNative).toHaveValue(value);
         });
 
-        it('should have number as value', () => {
-            const value = 2;
-            const { inputNative } = setup({ value });
-
-            expect(inputNative).toHaveValue(value);
-        });
-
         it('should have helper text', () => {
             const { helper } = setup({
                 helper: 'test',
@@ -223,9 +216,13 @@ describe(`<${TextField.displayName}>`, () => {
             const event = {
                 target: { value: 'my value' },
             };
-            const component = shallow(<TextField value="" onChange={onChangeMock} />);
+            const component = shallow(<TextField value="" name="my name" onChange={onChangeMock} />);
             component.find('input').simulate('change', event);
-            expect(onChangeMock).toBeCalledWith('my value');
+            expect(onChangeMock).toBeCalledWith('my value', 'my name', {
+                target: {
+                    value: 'my value',
+                },
+            });
         });
     });
 

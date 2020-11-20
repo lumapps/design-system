@@ -11,13 +11,13 @@ exports[`<RadioGroup> Snapshots and structure should render with radio button ch
   className="lumx-radio-group"
 >
   <RadioButton
-    checked={true}
+    isChecked={true}
     key="0"
     label="Label 1"
     theme="light"
   />
   <RadioButton
-    checked={false}
+    isChecked={false}
     key="1"
     label="Label 2"
     theme="light"

@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, SyntheticEvent } from 'react';
 
 import classNames from 'classnames';
 
@@ -14,25 +14,26 @@ import uniqueId from 'lodash/uniqueId';
  * Defines the props of the component.
  */
 interface CheckboxProps extends GenericProps {
-    /** Is checkbox disabled */
-    disabled?: boolean;
-    /** Helper */
+    /** The helper of the checkbox. */
     helper?: string;
-    /** Native input id */
+    /** The native input id property. */
     id?: string;
-    /** Label */
+    /** Whether it is checked or not. */
+    isChecked?: boolean;
+    /** Whether the component is disabled or not. */
+    isDisabled?: boolean;
+    /** The label of the checkbox. */
     label?: ReactNode;
-    /** Component theme */
+    /** The native input name property. */
+    name?: string;
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
-    /** Whether custom colors are applied to this component. */
+    /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
-    /** Is checkbox checked */
-    value?: boolean;
-    /**
-     * Checkbox onChange event.
-     * @param value New checked value.
-     */
-    onChange(value: boolean): void;
+    /** The native input value property. */
+    value?: string;
+    /** The function called on change. */
+    onChange?(isChecked: boolean, value?: string, name?: string, event?: SyntheticEvent): void;
 }
 
 /**
@@ -50,7 +51,6 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: Partial<CheckboxProps> = {
     theme: Theme.light,
-    value: false,
 };
 
 /**
@@ -59,11 +59,15 @@ const DEFAULT_PROPS: Partial<CheckboxProps> = {
  * @return The component.
  */
 const Checkbox: React.FC<CheckboxProps> = ({
+    checked,
     className,
     disabled,
     helper,
     id,
+    isChecked = checked,
+    isDisabled = disabled,
     label,
+    name,
     onChange,
     theme,
     useCustomColors,
@@ -71,8 +75,10 @@ const Checkbox: React.FC<CheckboxProps> = ({
     ...forwardedProps
 }) => {
     const inputId = id || uniqueId(`${CLASSNAME.toLowerCase()}-`);
-    const handleChange = () => {
-        onChange(!value);
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (onChange) {
+            onChange(!isChecked, value, name, event);
+        }
     };
 
     return (
@@ -81,9 +87,9 @@ const Checkbox: React.FC<CheckboxProps> = ({
             className={classNames(
                 className,
                 handleBasicClasses({
-                    isChecked: value,
-                    isDisabled: disabled,
-                    isUnchecked: !value,
+                    isChecked,
+                    isDisabled,
+                    isUnchecked: !isChecked,
                     prefix: CLASSNAME,
                     theme,
                 }),
@@ -95,8 +101,10 @@ const Checkbox: React.FC<CheckboxProps> = ({
                     type="checkbox"
                     id={inputId}
                     className={`${CLASSNAME}__input-native`}
-                    tabIndex={disabled ? -1 : 0}
-                    checked={value}
+                    tabIndex={isDisabled ? -1 : 0}
+                    name={name}
+                    value={value}
+                    checked={isChecked}
                     onChange={handleChange}
                 />
 

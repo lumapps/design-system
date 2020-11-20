@@ -13,7 +13,6 @@ import { ESCAPE_KEY_CODE } from './constants';
  * @param  value The value to check.
  * @return Whether the input value is empty or != 0.
  */
-// tslint:disable-next-line:variable-name
 const _isEmpty = (value: any) => {
     if (typeof value === 'number') {
         return value === 0;

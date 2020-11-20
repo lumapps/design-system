@@ -4,29 +4,17 @@ import React, { ReactNode, useState } from 'react';
 import { ExpansionPanel, Theme } from '@lumx/react';
 
 interface DesignTokenProps {
-    /**
-     * The design token name.
-     */
+    /** The design token name. */
     name: string;
-    /**
-     * The design token prefix.
-     */
+    /** The design token prefix. */
     prefix?: ReactNode;
-    /**
-     * The design token description.
-     */
+    /** The design token description. */
     description?: string;
-    /**
-     * From which version the design token is available.
-     */
+    /** From which version the design token is available. */
     version?: string;
-    /**
-     * The design token theme.
-     */
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
-    /**
-     * The design token demo.
-     */
+    /** The design token demo. */
     children?: ReactNode;
 }
 
@@ -52,7 +40,7 @@ export const DesignToken: React.FC<DesignTokenProps> = ({
             hasBackground
             hasHeaderDivider
             isOpen={isOpen}
-            toggleCallback={setIsOpen}
+            onToggleOpen={setIsOpen}
             theme={theme}
         >
             <header>

@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, SyntheticEvent } from 'react';
 
 import classNames from 'classnames';
 
@@ -13,35 +13,26 @@ import uniqueId from 'lodash/uniqueId';
  * Defines the props of the component.
  */
 interface RadioButtonProps extends GenericProps {
-    /** Whether or not the radio button is checked. */
-    checked?: boolean;
-
-    /**  Whether or not the radio button is disabled. */
-    disabled?: boolean;
-
-    /** Radio button helper. */
+    /** The helper of the radio button. */
     helper?: string;
-
-    /** Native radio input id. */
+    /** The native input id property. */
     id?: string;
-
-    /** Radio button label. */
+    /** Whether it is checked or not. */
+    isChecked?: boolean;
+    /** Whether the component is disabled or not. */
+    isDisabled?: boolean;
+    /** The label of the radio button. */
     label?: ReactNode;
-
-    /** Native radio input name. */
+    /** The native input name property. */
     name?: string;
-
-    /** Theme. */
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
-
-    /** Whether custom colors are applied to this component. */
+    /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
-
-    /** Native radio input value. */
+    /** The native input value property. */
     value?: string;
-
-    /** Radio button onChange event (provides the radio input value).  */
-    onChange?(value: string): void;
+    /** The function called on change. */
+    onChange?(value?: string, name?: string, event?: SyntheticEvent): void;
 }
 
 /**
@@ -61,31 +52,26 @@ const DEFAULT_PROPS: Partial<RadioButtonProps> = {
     theme: Theme.light,
 };
 
-/**
- * Defines a radio button.
- *
- * @param  props The component props.
- * @return The component.
- */
-const RadioButton: React.FC<RadioButtonProps> = (props) => {
-    const {
-        className,
-        checked,
-        disabled,
-        helper,
-        id,
-        label,
-        name,
-        theme,
-        useCustomColors,
-        value,
-        onChange,
-        ...forwardedProps
-    } = props;
+const RadioButton: React.FC<RadioButtonProps> = ({
+    checked,
+    className,
+    disabled,
+    helper,
+    id,
+    isChecked = checked,
+    isDisabled = disabled,
+    label,
+    name,
+    onChange,
+    theme,
+    useCustomColors,
+    value,
+    ...forwardedProps
+}) => {
     const radioButtonId: string = id || uniqueId(`${CLASSNAME.toLowerCase()}-`);
-    const handleChange = () => {
-        if (onChange && value) {
-            onChange(value);
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (onChange) {
+            onChange(value, name, event);
         }
     };
 
@@ -94,9 +80,9 @@ const RadioButton: React.FC<RadioButtonProps> = (props) => {
             className={classNames(
                 className,
                 handleBasicClasses({
-                    isChecked: checked,
-                    isDisabled: disabled,
-                    isUnchecked: !checked,
+                    isChecked,
+                    isDisabled,
+                    isUnchecked: !isChecked,
                     prefix: CLASSNAME,
                     theme,
                 }),
@@ -106,14 +92,14 @@ const RadioButton: React.FC<RadioButtonProps> = (props) => {
             <div className={`${CLASSNAME}__input-wrapper`}>
                 <input
                     {...forwardedProps}
-                    checked={checked}
                     className={`${CLASSNAME}__input-native`}
-                    disabled={disabled}
-                    name={name}
+                    disabled={isDisabled}
                     id={radioButtonId}
-                    tabIndex={disabled ? -1 : 0}
+                    tabIndex={isDisabled ? -1 : 0}
                     type="radio"
+                    name={name}
                     value={value}
+                    checked={isChecked}
                     onChange={handleChange}
                 />
 

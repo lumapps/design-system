@@ -2,8 +2,17 @@ import React, { useCallback } from 'react';
 
 import classNames from 'classnames';
 
-import { AspectRatio, ColorPalette, ColorVariant, Link, Size, Theme, Thumbnail } from '@lumx/react';
-import { ThumbnailProps } from '../thumbnail/Thumbnail';
+import {
+    AspectRatio,
+    ColorPalette,
+    ColorVariant,
+    Link,
+    LinkProps,
+    Size,
+    Theme,
+    Thumbnail,
+    ThumbnailProps,
+} from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
@@ -12,26 +21,27 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
  * Defines the props of the component.
  */
 interface LinkPreviewProps extends GenericProps {
-    /** The url of the link. */
-    url: string;
-    /** Content text. Can be either a string, or sanitized html. */
-    description?:
-        | string
-        | {
-              __html: string;
-          };
-    /** The size variant of the web bookmark. */
+    /** The text of the link. Can be either a string, or sanitized html. */
+    description?: string | { __html: string };
+    /**
+     * The url of the link.
+     * @see {@link LinkProps#image}
+     */
+    link: string;
+    /** The props to pass to the link, minus those already set by the LinkPreview props. */
+    linkProps?: Omit<LinkProps, 'color' | 'colorVariant' | 'href' | 'target'>;
+    /** The size variant of the component. */
     size?: Size.regular | Size.big;
-    /** Theme. */
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
-    /** Thumbnail image source */
+    /**
+     * The image URL of the Thumbnail.
+     * @see {@link ThumbnailProps#image}
+     */
     thumbnail?: string;
-    /** Thumbnail component props, without the props set by the component. */
-    thumbnailProps?: Omit<
-        ThumbnailProps,
-        'image' | 'onClick' | 'role' | 'tabIndex' | 'image' | 'aspectRatio' | 'fillHeight'
-    >;
-    /** Link title */
+    /** The props to pass to the thumbnail, minus those already set by the LinkPreview props. */
+    thumbnailProps?: Omit<ThumbnailProps, 'aspectRatio' | 'fillHeight' | 'image' | 'onClick' | 'role' | 'tabIndex'>;
+    /** The title of the link. */
     title?: string;
 }
 
@@ -53,23 +63,19 @@ const DEFAULT_PROPS: Partial<LinkPreviewProps> = {
     theme: Theme.light,
 };
 
-/**
- * LinkPreview Element that display a Lumapps post
- *
- * @return The component.
- */
 const LinkPreview: React.FC<LinkPreviewProps> = ({
     className,
-    title,
     description,
-    url,
+    link,
+    linkProps,
     size,
     theme,
     thumbnail = '',
     thumbnailProps,
+    title,
     ...forwardedProps
 }) => {
-    const goToUrl = useCallback(() => window.open(url, '_blank'), [url]);
+    const goToUrl = useCallback(() => window.open(link, '_blank'), [link]);
 
     return (
         <div
@@ -102,8 +108,9 @@ const LinkPreview: React.FC<LinkPreviewProps> = ({
                     {title && (
                         <div className={`${CLASSNAME}__title`}>
                             <Link
+                                {...linkProps}
                                 target="_blank"
-                                href={url}
+                                href={link}
                                 color={theme === Theme.light ? ColorPalette.dark : ColorPalette.light}
                                 colorVariant={ColorVariant.N}
                             >
@@ -115,13 +122,14 @@ const LinkPreview: React.FC<LinkPreviewProps> = ({
 
                     <div className={`${CLASSNAME}__link`}>
                         <Link
-                            className={`${CLASSNAME}__link`}
+                            {...linkProps}
+                            className={classNames(`${CLASSNAME}__link`, linkProps?.className)}
                             target="_blank"
-                            href={url}
+                            href={link}
                             color={theme === Theme.light ? ColorPalette.blue : ColorPalette.light}
                             colorVariant={ColorVariant.N}
                         >
-                            {url}
+                            {link}
                         </Link>
                     </div>
                 </div>

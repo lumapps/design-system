@@ -29,29 +29,22 @@ enum NotificationType {
  * Defines the props of the component.
  */
 interface NotificationProps extends GenericProps {
-    /** Label for action button. */
+    /** The label of the action button. */
     actionLabel?: string;
-
-    /** Content of notification. */
+    /** The content of the notification. */
     content?: React.ReactNode;
-
-    /** Whether notification is open or not. */
+    /** Whether the component is open or not. */
     isOpen?: boolean;
-
-    /** Theme */
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
-
-    /** Type of notification (info, success, warning, error). */
+    /** The type of notification (error or success for example). */
     type?: NotificationType;
-
     /** The z-axis position. */
     zIndex?: number;
-
-    /** Callback function for action button. */
-    actionCallback?(): void;
-
-    /** Function to handle click on the notification. */
-    handleClick?(): void;
+    /** The function called on click on the action button. */
+    onActionClick?(): void;
+    /** The function called on click on the component. */
+    onClick?(): void;
 }
 
 /**
@@ -78,12 +71,12 @@ const DEFAULT_PROPS: Partial<NotificationProps> = {
  * @return The notification component.
  */
 const Notification: React.FC<NotificationProps> = ({
-    actionCallback,
     actionLabel,
-    content,
     className,
-    handleClick,
+    content,
     isOpen,
+    onActionClick,
+    onClick,
     theme,
     type,
     zIndex,
@@ -93,13 +86,13 @@ const Notification: React.FC<NotificationProps> = ({
         // Can't render in SSR.
         return null;
     }
-    const hasAction: boolean = Boolean(actionCallback) && Boolean(actionLabel);
+    const hasAction: boolean = Boolean(onActionClick) && Boolean(actionLabel);
 
     const isVisible = useDelayedVisibility(!!isOpen, NOTIFICATION_TRANSITION_DURATION);
 
     const handleCallback = (evt: React.MouseEvent) => {
-        if (isFunction(actionCallback)) {
-            actionCallback();
+        if (isFunction(onActionClick)) {
+            onActionClick();
         }
         evt.stopPropagation();
     };
@@ -117,7 +110,7 @@ const Notification: React.FC<NotificationProps> = ({
                           prefix: CLASSNAME,
                       }),
                   )}
-                  onClick={handleClick}
+                  onClick={onClick}
                   style={{ zIndex }}
               >
                   <div className={`${CLASSNAME}__icon`}>

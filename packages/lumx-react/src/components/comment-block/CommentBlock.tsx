@@ -7,40 +7,46 @@ import { COMPONENT_PREFIX, ENTER_KEY_CODE } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import isFunction from 'lodash/isFunction';
+import { AvatarProps } from '../avatar/Avatar';
 
 /**
  * Defines the props of the component.
  */
 interface CommentBlockProps extends GenericProps {
-    /* Actions elements to be transcluded into the component */
+    /** The action elements. */
     actions?: HTMLElement | ReactNode;
-    /* The url of the avatar picture we want to display */
+    /**
+     * The url of the avatar picture we want to display.
+     * @see {@link AvatarProps#image}
+     */
     avatar: string;
-    /* Children elements to be transcluded into the component */
+    /** The props to pass to the avatar, minus those already set by the CommentBlock props. */
+    avatarProps?: Omit<AvatarProps, 'image' | 'size' | 'tabIndex' | 'onClick' | 'onKeyPress'>;
+    /** The children elements. */
     children?: HTMLElement | ReactNode;
-    /* Comment timestamp */
+    /** The timestamp of the component. */
     date: string;
-    /* Where the component has actions to display */
+    /** Whether the component has actions to display or not. */
     hasActions?: boolean;
-    /* Whether the component has children blocks to display */
+    /** Whether the component has children blocks to display or not. */
     hasChildren?: boolean;
-    /* Whether the component children are indented below parent */
+    /** Whether the component children are indented below parent or not. */
     hasIndentedChildren?: boolean;
-    /* Whether the children blocks are shown*/
+    /** Whether the component is open or not. */
     isOpen?: boolean;
-    /* Whether the comment is relevant */
+    /** Whether the comment is relevant or not. */
     isRelevant?: boolean;
-    /* Username display */
+    /** The name of the comment author. */
     name: string;
-    /* Content to be displayed */
+    /** The content of the comment. */
     text: HTMLElement | string;
-    /* Component theme */
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
-    /* Callback for the click event. */
+    /** The function called on click. */
     onClick?(): void;
-    /* Callback for the mouseEnter event. */
+    /** The function called when the cursor enters the component. */
     onMouseEnter?(): void;
-    /* Callback for the mouseEnter event. */
+    /** The function called when the cursor exists the component. */
     onMouseLeave?(): void;
 }
 
@@ -61,14 +67,10 @@ const DEFAULT_PROPS: Partial<CommentBlockProps> = {
     theme: Theme.light,
 };
 
-/**
- * [Enter the description of the component here].
- *
- * @return The component.
- */
 const CommentBlock: React.FC<CommentBlockProps> = ({
     actions,
     avatar,
+    avatarProps,
     children,
     date,
     hasActions,
@@ -82,7 +84,7 @@ const CommentBlock: React.FC<CommentBlockProps> = ({
     onMouseLeave,
     text,
     theme,
-}: CommentBlockProps): React.ReactElement => {
+}) => {
     const enterKeyPress: KeyboardEventHandler<HTMLElement> = (evt: KeyboardEvent<HTMLElement>) => {
         if (evt.which === ENTER_KEY_CODE && isFunction(onClick)) {
             onClick();
@@ -105,6 +107,7 @@ const CommentBlock: React.FC<CommentBlockProps> = ({
             <div className={`${CLASSNAME}__wrapper`}>
                 <div className={`${CLASSNAME}__avatar`}>
                     <Avatar
+                        {...avatarProps}
                         image={avatar}
                         size={Size.m}
                         tabIndex={onClick ? 0 : -1}

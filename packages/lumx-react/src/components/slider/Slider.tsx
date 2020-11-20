@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { SyntheticEvent, useMemo, useRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -14,29 +14,31 @@ import uuid from 'uuid/v4';
  * Defines the props of the component.
  */
 interface SliderProps extends GenericProps {
-    /** Deactivate the component */
-    disabled?: boolean;
-    /** Label */
-    label?: string;
-    /** Helper message */
+    /** The helper message of the slider. */
     helper?: string;
-    /** Should the min and max labels be hidden */
-    hideMinMaxlabel?: boolean;
-    /** Maximum value */
+    /** Whether the min and max labels should be hidden or not. */
+    hideMinMaxLabel?: boolean;
+    /** Whether the component is disabled or not. */
+    isDisabled?: boolean;
+    /** The label of the slider. */
+    label?: string;
+    /** The maximum value of the slider range. */
     max: number;
-    /** Minimum value */
+    /** The minimum value of the slider range. */
     min: number;
-    /**  Number of figures used for the fractional part of the value */
+    /** The native input name property. */
+    name?: string;
+    /** The number of figures used for the fractional part of the value. */
     precision?: number;
-    /** Value between 2 steps */
+    /** The value between two steps. */
     steps?: number;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
-    /** Value */
+    /** The current selected value of the slider. */
     value: number;
-    /** Callback function invoked when the slider value changes */
-    onChange(value: number): void;
-    /** Callback function invoked when the component is clicked */
+    /** The function called on change. */
+    onChange(value: number, name?: string, event?: SyntheticEvent): void;
+    /** The function called on click. */
     onMouseDown?(event: React.SyntheticEvent): void;
 }
 
@@ -95,40 +97,38 @@ const computeValueFromPercent = (percent: number, min: number, max: number, prec
 const computePercentFromValue = (value: number, min: number, max: number): number =>
     Number((value - min) / (max - min));
 
-/**
- * Slider component.
- *
- * @return The component.
- */
 const Slider: React.FC<SliderProps> = ({
     className,
-    label,
+    disabled,
     helper,
-    id = uuid(),
+    hideMinMaxLabel,
+    id,
+    isDisabled = disabled,
+    label,
     max,
     min,
-    onMouseDown,
+    name,
     onChange,
-    steps,
+    onMouseDown,
     precision,
-    hideMinMaxlabel,
-    value,
-    disabled,
+    steps,
     theme,
+    value,
     ...forwardedProps
 }) => {
+    const sliderId = useMemo(() => id || `slider-${uuid()}`, [id]);
     const sliderRef = useRef<HTMLDivElement>(null);
-    const avaibleSteps: number[] = [];
+    const availableSteps: number[] = [];
 
     // build a lookup array for the steps.
     if (steps) {
-        avaibleSteps.push(0);
+        availableSteps.push(0);
         const percentStep = 1 / ((max - min) / steps);
         let ptr = 0;
         while (true) {
             if (ptr + percentStep < 1) {
                 ptr += percentStep;
-                avaibleSteps.push(ptr);
+                availableSteps.push(ptr);
             } else {
                 break;
             }
@@ -142,7 +142,7 @@ const Slider: React.FC<SliderProps> = ({
      * @return The closest step value
      */
     const findClosestStep = (percentValue: number): number => {
-        const closest = avaibleSteps.reduce(
+        const closest = availableSteps.reduce(
             // tslint:disable-next-line: typedef
             (acc, step) => {
                 const aDst = Math.abs(percentValue - step);
@@ -181,7 +181,7 @@ const Slider: React.FC<SliderProps> = ({
         const newValue = getPercentValue(event, slider!);
 
         if (onChange) {
-            onChange(computeValueFromPercent(newValue, min, max, precision!));
+            onChange(computeValueFromPercent(newValue, min, max, precision!), name, event);
         }
     });
 
@@ -204,11 +204,11 @@ const Slider: React.FC<SliderProps> = ({
         const oldPercent = computePercentFromValue(value, min, max);
         let percent = clamp(oldPercent + (previous ? -0.1 : 0.1), 0, 1);
         if (steps) {
-            percent = oldPercent + avaibleSteps[1] * (previous ? -1 : 1);
+            percent = oldPercent + availableSteps[1] * (previous ? -1 : 1);
             percent = findClosestStep(percent);
         }
         if (onChange) {
-            onChange(computeValueFromPercent(percent, min, max, precision!));
+            onChange(computeValueFromPercent(percent, min, max, precision!), name);
         }
     };
 
@@ -230,13 +230,13 @@ const Slider: React.FC<SliderProps> = ({
         if (onMouseDown) {
             onMouseDown(event);
         }
-        if (disabled) {
+        if (isDisabled) {
             return;
         }
         const { current: slider } = sliderRef;
         const newValue = getPercentValue(event, slider!);
         if (onChange) {
-            onChange(computeValueFromPercent(newValue, min, max, precision!));
+            onChange(computeValueFromPercent(newValue, min, max, precision!), name, event);
         }
 
         document.body.addEventListener('mousemove', handleMove);
@@ -252,9 +252,10 @@ const Slider: React.FC<SliderProps> = ({
                 handleBasicClasses({ prefix: CLASSNAME, theme, hasLabel: Boolean(label) }),
             )}
             onMouseDown={handleMouseDown}
+            aria-disabled={isDisabled}
         >
             {label && (
-                <InputLabel htmlFor={id} className={`${CLASSNAME}__label`} theme={theme}>
+                <InputLabel htmlFor={sliderId} className={`${CLASSNAME}__label`} theme={theme}>
                     {label}
                 </InputLabel>
             )}
@@ -266,7 +267,7 @@ const Slider: React.FC<SliderProps> = ({
             )}
 
             <div className={`${CLASSNAME}__ui-wrapper`}>
-                {!hideMinMaxlabel && (
+                {!hideMinMaxLabel && (
                     <span className={`${CLASSNAME}__value-label ${CLASSNAME}__value-label--min`}>{min}</span>
                 )}
                 <div className={`${CLASSNAME}__wrapper`} ref={sliderRef}>
@@ -277,7 +278,7 @@ const Slider: React.FC<SliderProps> = ({
                     />
                     {steps ? (
                         <div className={`${CLASSNAME}__ticks`}>
-                            {avaibleSteps.map((step: number, idx: number) => {
+                            {availableSteps.map((step: number, idx: number) => {
                                 return (
                                     <div
                                         key={`tick_${idx}`}
@@ -289,12 +290,15 @@ const Slider: React.FC<SliderProps> = ({
                         </div>
                     ) : null}
                     <button
+                        name={name}
+                        id={sliderId}
                         className={`${CLASSNAME}__handle`}
                         style={{ left: percentString }}
                         onKeyDown={handleKeyDown}
+                        disabled={isDisabled}
                     />
                 </div>
-                {!hideMinMaxlabel && (
+                {!hideMinMaxLabel && (
                     <span className={`${CLASSNAME}__value-label ${CLASSNAME}__value-label--max`}>{max}</span>
                 )}
             </div>

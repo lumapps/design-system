@@ -157,7 +157,7 @@ describe(`<${Switch.displayName}>`, () => {
 
         it('should use the given props', () => {
             const modifiedPropsBuilder: () => SetupProps = build('props').fields({
-                checked: true,
+                isChecked: true,
                 position: oneOf(...without(Object.values(SwitchPosition), DEFAULT_PROPS.position)),
                 theme: oneOf(...without(Object.values(Theme), DEFAULT_PROPS.theme)),
             });
@@ -188,17 +188,17 @@ describe(`<${Switch.displayName}>`, () => {
 
     // 3. Test events.
     describe('Events', () => {
-        const onToggle: jest.Mock = jest.fn();
+        const onChange: jest.Mock = jest.fn();
 
         beforeEach(() => {
-            onToggle.mockClear();
+            onChange.mockClear();
         });
 
-        it('should trigger `onToggle` when toggled', () => {
-            const { input } = setup({ onToggle }, false);
+        it('should trigger `onChange` when toggled', () => {
+            const { input } = setup({ onChange }, false);
 
             input.simulate('change');
-            expect(onToggle).toHaveBeenCalled();
+            expect(onChange).toHaveBeenCalled();
         });
     });
 

@@ -1,4 +1,4 @@
-import React, { AnchorHTMLAttributes, KeyboardEventHandler, MouseEventHandler, ReactNode, SyntheticEvent } from 'react';
+import React, { KeyboardEventHandler, MouseEventHandler, ReactNode, SyntheticEvent } from 'react';
 
 import classNames from 'classnames';
 
@@ -10,17 +10,17 @@ import { GenericProps, handleBasicClasses } from '@lumx/react/utils';
  * Defines the props of the component.
  */
 interface TabProps extends GenericProps {
-    /** Tab index */
-    index?: number;
-    /** Tab icon */
+    /** The icon of the tab. */
     icon?: IconProps['icon'];
-    /** Is tab active */
+    /** The index of the tab. */
+    index?: number;
+    /** Whether the tab is active or not. */
     isActive?: boolean;
-    /** Is tab disabled */
+    /** Whether the component is disabled or not. */
     isDisabled?: boolean;
-    /** Tab label */
+    /** The label of the tab. */
     label?: string | ReactNode;
-    /** Function to trigger on tab click */
+    /** The function called on click. */
     onTabClick?(e: { event: SyntheticEvent; index?: number }): void;
 }
 
@@ -39,23 +39,17 @@ const CLASSNAME = `${CSS_PREFIX}-tabs__link`;
  */
 const DEFAULT_PROPS: Partial<TabProps> = {};
 
-/**
- * Define a single Tab for Tabs component.
- *
- * @return The component.
- */
 const Tab: React.FC<TabProps> = ({
     className,
+    disabled,
     icon,
     index,
     isActive,
-    isDisabled,
+    isDisabled = disabled,
     label,
     onTabClick,
     ...forwardedProps
 }) => {
-    const tabIndex: AnchorHTMLAttributes<HTMLAnchorElement>['tabIndex'] = isDisabled ? -1 : 0;
-
     const handleTabClick: MouseEventHandler = (event) => {
         onTabClick?.({ event, index });
     };
@@ -74,9 +68,10 @@ const Tab: React.FC<TabProps> = ({
         <a
             {...forwardedProps}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, isActive, isDisabled }))}
-            tabIndex={tabIndex}
+            tabIndex={isDisabled ? -1 : 0}
             onClick={handleTabClick}
             onKeyPress={handleKeyPress}
+            aria-disabled={isDisabled}
         >
             {icon && <Icon icon={icon} size={Size.xs} />}
             {label && <span>{label}</span>}
@@ -85,4 +80,4 @@ const Tab: React.FC<TabProps> = ({
 };
 Tab.displayName = COMPONENT_NAME;
 
-export { CLASSNAME, DEFAULT_PROPS, Tab, TabProps };
+export { CLASSNAME, Tab, TabProps };

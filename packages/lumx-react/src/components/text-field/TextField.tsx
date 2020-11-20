@@ -1,4 +1,4 @@
-import React, { ReactNode, RefObject, useState } from 'react';
+import React, { ReactNode, RefObject, SyntheticEvent, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
 import get from 'lodash/get';
@@ -13,77 +13,56 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
  * Defines the props of the component.
  */
 interface TextFieldProps extends GenericProps {
-    /** A Chip Group to be rendered before the main text input */
+    /** A Chip Group to be rendered before the main text input. */
     chips?: HTMLElement | ReactNode;
-
-    /** The error related to the TextField */
+    /** The error related to the TextField. */
     error?: string | ReactNode;
-
-    /** Whether we force the focus style */
+    /** Whether we force the focus style or not. */
     forceFocusStyle?: boolean;
-
     /** Whether the text field is displayed with error style or not. */
     hasError?: boolean;
-
-    /** The helper related to the TextField */
+    /** The helper related to the TextField. */
     helper?: string | ReactNode;
-
-    /** The max length the input accepts. If set, a character counter will be displayed. */
-    maxLength?: number;
-
     /** Text field icon (SVG path). */
     icon?: string;
-
-    /** Id that will be passed to input element. An id is generated (uuid) if no id is provided. */
+    /** The id that will be passed to input element. An id is generated (uuid) if no id is provided. */
     id?: string;
-
-    /** Whether the text field is disabled or not. */
-    isDisabled?: boolean;
-
-    /** Whether the text field is required or not. */
-    isRequired?: boolean;
-
-    /** Whether the text field is displayed with valid style or not. */
-    isValid?: boolean;
-
+    /** The reference passed to the <input> or <textarea> element. */
+    inputRef?: RefObject<HTMLInputElement> | RefObject<HTMLTextAreaElement>;
     /** Whether the text field shows a cross to clear its content or not. */
     isClearable?: boolean;
-
-    /** Text field label displayed in a label tag. */
+    /** Whether the component is disabled or not. */
+    isDisabled?: boolean;
+    /** Whether the component is required or not. */
+    isRequired?: boolean;
+    /** Whether the text field is displayed with valid style or not. */
+    isValid?: boolean;
+    /** The label of the text field. */
     label?: string;
-
-    /** Text field placeholder message. */
-    placeholder?: string;
-
-    /** Theme. */
-    theme?: Theme;
-
-    /** Whether custom colors are applied to this component. */
-    useCustomColors?: boolean;
-
-    /** Switches the input to a textarea. */
-    multiline?: boolean;
-
-    /** Minimum rows to be displayed (requires multiline to be enabled). */
+    /** The max length the input accepts. If set, a character counter will be displayed. */
+    maxLength?: number;
+    /** The minimum rows to be displayed (requires multiline to be enabled). */
     minimumRows?: number;
-
-    /** A ref that will be passed to the input or text area element. */
-    inputRef?: RefObject<HTMLInputElement> | RefObject<HTMLTextAreaElement>;
-
-    /** Text field value. */
-    value?: string | number;
-
-    /** A ref that will be passed to the wrapper element. */
+    /** Whether the text field is a textarea or an input. */
+    multiline?: boolean;
+    /** The native input name property. */
+    name?: string;
+    /** The placeholder message of the text field. */
+    placeholder?: string;
+    /** The reference passed to the wrapper. */
     textFieldRef?: RefObject<HTMLDivElement>;
-
-    /** Text field value change handler. */
-    onChange(value: string): void;
-
-    /** Text field focus change handler. */
-    onFocus?(event: React.FocusEvent): void;
-
-    /** Text field blur change handler. */
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    theme?: Theme;
+    /** Whether custom colors are applied to this component or not. */
+    useCustomColors?: boolean;
+    /** The value of the text field. */
+    value?: string;
+    /** The function called on blur. */
     onBlur?(event: React.FocusEvent): void;
+    /** The function called on change. */
+    onChange(value: string, name?: string, event?: SyntheticEvent): void;
+    /** The function called on focus. */
+    onFocus?(event: React.FocusEvent): void;
 }
 
 /**
@@ -99,7 +78,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The minimum number of rows that we want to display on the text area
  */
-const MIN_ROWS = 2;
+const DEFAULT_MIN_ROWS = 2;
 
 /**
  * The default value of props.
@@ -108,6 +87,7 @@ const DEFAULT_PROPS: Partial<TextFieldProps> = {
     theme: Theme.light,
     type: 'text',
 };
+
 /**
  * Hook that allows to calculate the number of rows needed for a text area.
  * @param minimumRows Minimum number of rows that we want to display.
@@ -165,10 +145,11 @@ interface InputNativeProps {
     placeholder?: string;
     rows: number;
     type: string;
-    value?: string | number;
+    name?: string;
+    value?: string;
     setFocus(focus: boolean): void;
     recomputeNumberOfRows(target: Element): void;
-    onChange(value: string): void;
+    onChange(value: string, name?: string, event?: SyntheticEvent): void;
     onFocus?(value: React.FocusEvent): void;
     onBlur?(value: React.FocusEvent): void;
 }
@@ -189,6 +170,7 @@ const renderInputNative: React.FC<InputNativeProps> = (props) => {
         rows,
         recomputeNumberOfRows,
         type,
+        name,
         ...forwardedProps
     } = props;
 
@@ -216,7 +198,7 @@ const renderInputNative: React.FC<InputNativeProps> = (props) => {
     };
 
     const handleChange = (event: React.ChangeEvent) => {
-        onChange(get(event, 'target.value'));
+        onChange(get(event, 'target.value'), name, event);
     };
 
     return multiline ? (
@@ -227,6 +209,7 @@ const renderInputNative: React.FC<InputNativeProps> = (props) => {
             required={isRequired}
             placeholder={placeholder}
             value={value}
+            name={name}
             rows={rows}
             onFocus={onTextFieldFocus}
             onBlur={onTextFieldBlur}
@@ -242,6 +225,7 @@ const renderInputNative: React.FC<InputNativeProps> = (props) => {
             type={type}
             placeholder={placeholder}
             value={value}
+            name={name}
             onFocus={onTextFieldFocus}
             onBlur={onTextFieldBlur}
             onChange={handleChange}
@@ -250,46 +234,41 @@ const renderInputNative: React.FC<InputNativeProps> = (props) => {
     );
 };
 
-/**
- * Text field.
- *
- * @param  props Text field props.
- * @return The component.
- */
-const TextField: React.FC<TextFieldProps> = (props) => {
-    const {
-        chips,
-        className,
-        error,
-        forceFocusStyle,
-        hasError,
-        helper,
-        icon,
-        id = uuid(),
-        isDisabled,
-        isRequired,
-        isClearable,
-        isValid,
-        label,
-        maxLength,
-        onChange,
-        onFocus,
-        onBlur,
-        placeholder,
-        minimumRows,
-        inputRef = React.useRef(null),
-        theme,
-        multiline,
-        useCustomColors,
-        textFieldRef,
-        type,
-        value,
-        ...forwardedProps
-    } = props;
-
+const TextField: React.FC<TextFieldProps> = ({
+    chips,
+    className,
+    disabled,
+    error,
+    forceFocusStyle,
+    hasError,
+    helper,
+    icon,
+    id,
+    inputRef = React.useRef(null),
+    isClearable,
+    isDisabled = disabled,
+    isRequired,
+    isValid,
+    label,
+    maxLength,
+    minimumRows,
+    multiline,
+    name,
+    onBlur,
+    onChange,
+    onFocus,
+    placeholder,
+    textFieldRef,
+    theme,
+    type,
+    useCustomColors,
+    value,
+    ...forwardedProps
+}) => {
+    const textFieldId = useMemo(() => id || `text-field-${uuid()}`, [id]);
     const [isFocus, setFocus] = useState(false);
-    const { rows, recomputeNumberOfRows } = useComputeNumberOfRows(minimumRows || MIN_ROWS);
-    const valueLength = (value && `${value}`.length) || 0;
+    const { rows, recomputeNumberOfRows } = useComputeNumberOfRows(multiline ? minimumRows || DEFAULT_MIN_ROWS : 0);
+    const valueLength = (value || '').length;
     const isNotEmpty = valueLength > 0;
 
     /**
@@ -331,7 +310,12 @@ const TextField: React.FC<TextFieldProps> = (props) => {
         >
             {label && (
                 <div className={`${CLASSNAME}__header`}>
-                    <InputLabel htmlFor={id} className={`${CLASSNAME}__label`} isRequired={isRequired} theme={theme}>
+                    <InputLabel
+                        htmlFor={textFieldId}
+                        className={`${CLASSNAME}__label`}
+                        isRequired={isRequired}
+                        theme={theme}
+                    >
                         {label}
                     </InputLabel>
 
@@ -359,7 +343,7 @@ const TextField: React.FC<TextFieldProps> = (props) => {
                 <div className={`${CLASSNAME}__input-wrapper`}>
                     <div className={`${CLASSNAME}__input-native`}>
                         {renderInputNative({
-                            id,
+                            id: textFieldId,
                             inputRef,
                             isDisabled,
                             isRequired,
@@ -374,6 +358,7 @@ const TextField: React.FC<TextFieldProps> = (props) => {
                             setFocus,
                             type,
                             value,
+                            name,
                             ...forwardedProps,
                         })}
                     </div>

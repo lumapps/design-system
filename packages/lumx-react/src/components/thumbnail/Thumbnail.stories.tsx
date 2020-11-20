@@ -6,6 +6,7 @@ import React from 'react';
 export default { title: 'LumX components/thumbnail/Thumbnail' };
 
 interface StoryProps {
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme: Theme;
 }
 

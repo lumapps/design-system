@@ -1,9 +1,8 @@
-import React, { Children } from 'react';
+import React, { Children, SyntheticEvent, useMemo } from 'react';
 
 import classNames from 'classnames';
 import uuid from 'uuid/v4';
 
-import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 
 import { InputHelper, InputLabel, Theme } from '@lumx/react';
@@ -20,31 +19,24 @@ enum SwitchPosition {
  * Defines the props of the component.
  */
 interface SwitchProps extends GenericProps {
-    /**
-     * Indicates if it is toggled on or not.
-     */
-    checked?: boolean;
-
-    /**
-     * A small help to display below.
-     */
+    /** The helper of the switch. */
     helper?: string;
-
-    /**
-     * The position of the toggle regarding the label.
-     */
+    /** Whether it is checked or not. */
+    isChecked?: boolean;
+    /** Whether the component is disabled or not. */
+    isDisabled?: boolean;
+    /** The native input name property. */
+    name?: string;
+    /** The position of the toggle regarding the label. */
     position?: SwitchPosition;
-
-    /**
-     * The theme.
-     */
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
-
-    /** Whether custom colors are applied to this component. */
+    /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
-
-    /** Switch value change handler. */
-    onToggle?(enabled: boolean): void;
+    /** The native input value property. */
+    value?: string;
+    /** The function called on change. */
+    onChange?(isChecked: boolean, value?: string, name?: string, event?: SyntheticEvent): void;
 }
 
 /**
@@ -65,31 +57,27 @@ const DEFAULT_PROPS: Partial<SwitchProps> = {
     theme: Theme.light,
 };
 
-/**
- * [Enter the description of the component here].
- *
- * @return The component.
- */
 const Switch: React.FC<SwitchProps> = ({
-    className,
-    children,
     checked,
+    children,
+    className,
+    disabled,
     helper,
-    onToggle,
+    id,
+    isChecked = checked,
+    isDisabled = disabled,
+    name,
+    onChange,
     position,
     theme,
     useCustomColors,
+    value,
     ...forwardedProps
 }) => {
-    const switchId: string = uuid();
-
-    /**
-     * Toggle the state of the <Switch> inner checkbox.
-     * @param event Change event.
-     */
-    const toggleIsChecked = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (onToggle) {
-            onToggle(get(event, 'target.checked'));
+    const switchId = useMemo(() => id || `switch-${uuid()}`, [id]);
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (onChange) {
+            onChange(!isChecked, value, name, event);
         }
     };
 
@@ -100,23 +88,26 @@ const Switch: React.FC<SwitchProps> = ({
                 className,
                 handleBasicClasses({
                     prefix: CLASSNAME,
-
-                    checked: Boolean(checked),
-                    disabled: forwardedProps.disabled,
+                    isChecked,
+                    isDisabled,
                     position,
                     theme,
-                    unchecked: !Boolean(checked),
+                    isUnchecked: !isChecked,
                 }),
                 { [`${CSS_PREFIX}-custom-colors`]: useCustomColors },
             )}
+            aria-disabled={isDisabled}
         >
             <div className={`${CLASSNAME}__input-wrapper`}>
                 <input
                     type="checkbox"
                     id={switchId}
                     className={`${CLASSNAME}__input-native`}
-                    checked={checked}
-                    onChange={toggleIsChecked}
+                    name={name}
+                    value={value}
+                    disabled={isDisabled}
+                    checked={isChecked}
+                    onChange={handleChange}
                 />
 
                 <div className={`${CLASSNAME}__input-placeholder`}>

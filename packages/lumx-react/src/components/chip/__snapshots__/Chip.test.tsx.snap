@@ -3,7 +3,6 @@
 exports[`<Chip /> Snapshot should render correctly Chip component 1`] = `
 <a
   className="lumx-chip lumx-chip--color-dark lumx-chip--size-m lumx-chip--is-unselected"
-  role="button"
   tabIndex={-1}
 >
   <div

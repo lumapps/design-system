@@ -43,22 +43,23 @@ const stopPropagation = (evt: Event) => evt.stopPropagation();
  * @return The component.
  */
 const SelectField: React.FC<SelectProps> = ({
-    variant,
-    label,
-    value,
-    isEmpty,
-    isValid,
+    anchorRef,
+    handleKeyboardNav,
     hasError,
+    hasInputClear,
+    id,
+    isDisabled,
+    isEmpty,
+    isRequired,
+    isValid,
+    label,
     onClear,
     onInputClick,
-    theme,
     placeholder,
-    handleKeyboardNav,
-    targetUuid,
-    anchorRef,
-    isRequired,
-    hasInputClear,
     selectedValueRender,
+    theme,
+    value,
+    variant,
 }) => {
     return (
         <>
@@ -67,7 +68,7 @@ const SelectField: React.FC<SelectProps> = ({
                     {label && (
                         <div className={`${CLASSNAME}__header`}>
                             <InputLabel
-                                htmlFor={targetUuid}
+                                htmlFor={id}
                                 className={`${CLASSNAME}__label`}
                                 isRequired={isRequired}
                                 theme={theme}
@@ -79,11 +80,12 @@ const SelectField: React.FC<SelectProps> = ({
 
                     <div
                         ref={anchorRef as RefObject<HTMLDivElement>}
-                        id={targetUuid}
+                        id={id}
                         className={`${CLASSNAME}__wrapper`}
                         onClick={onInputClick}
                         onKeyDown={handleKeyboardNav}
-                        tabIndex={0}
+                        tabIndex={isDisabled ? undefined : 0}
+                        aria-disabled={isDisabled || undefined}
                     >
                         <div
                             className={classNames([
@@ -123,8 +125,9 @@ const SelectField: React.FC<SelectProps> = ({
 
             {variant === SelectVariant.chip && (
                 <Chip
-                    id={targetUuid}
+                    id={id}
                     isSelected={!isEmpty}
+                    isDisabled={isDisabled}
                     after={<Icon icon={isEmpty ? mdiMenuDown : mdiCloseCircle} />}
                     onAfterClick={isEmpty ? onInputClick : onClear}
                     onClick={onInputClick}
@@ -140,7 +143,7 @@ const SelectField: React.FC<SelectProps> = ({
     );
 };
 
-const Select = (props: SelectProps) => {
+const Select: React.FC<SelectProps> = (props) => {
     const isEmpty = lodashIsEmpty(props.value);
     const hasInputClear = props.onClear && !isEmpty;
 

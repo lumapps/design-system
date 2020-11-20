@@ -21,19 +21,15 @@ type TooltipPlacement = Placement.TOP | Placement.RIGHT | Placement.BOTTOM | Pla
  * Defines the props of the component.
  */
 interface TooltipProps extends GenericProps {
-    /** Tooltip label. */
-    label?: string | Falsy;
-
-    /** Tooltip anchor. */
+    /** The children elements. Will act as the tooltip anchor. */
     children: ReactNode;
-
-    /** Force tooltip to show even without the mouse over the anchor. */
-    forceOpen?: boolean;
-
-    /** Delay in ms before closing the tooltip . */
+    /** The delay (in ms) before closing the tooltip. */
     delay?: number;
-
-    /** Placement of tooltip relative to the anchor element. */
+    /** Whether the tooltip is displayed even without the mouse hovering the anchor. */
+    forceOpen?: boolean;
+    /** The label of the tooltip. */
+    label?: string | null | false;
+    /** The placement of the tooltip based on the anchor element placement. */
     placement?: TooltipPlacement;
 }
 
@@ -60,13 +56,6 @@ const DEFAULT_PROPS: Partial<TooltipProps> = {
  */
 const OFFSET = 8;
 
-/**
- * Tooltip.
- *
- * @see WAI-ARIA https://www.w3.org/TR/wai-aria-practices/#tooltip
- * @param  props The component props.
- * @return The component.
- */
 const Tooltip: React.FC<TooltipProps> = (props) => {
     if (!DOCUMENT) {
         // Can't render in SSR.

@@ -11,10 +11,10 @@ exports[`<SelectMultiple> Snapshots and structure should render chips 1`] = `
       }
     }
     handleKeyboardNav={[Function]}
+    id="select-uuid"
     isEmpty={true}
     selectedChipRender={[Function]}
     selectedValueRender={[Function]}
-    targetUuid="uuid"
     theme="light"
     value={Array []}
     variant="chip"
@@ -52,10 +52,10 @@ exports[`<SelectMultiple> Snapshots and structure should render defaults 1`] = `
       }
     }
     handleKeyboardNav={[Function]}
+    id="select-uuid"
     isEmpty={true}
     selectedChipRender={[Function]}
     selectedValueRender={[Function]}
-    targetUuid="uuid"
     theme="light"
     value={Array []}
     variant="input"

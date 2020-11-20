@@ -21,8 +21,7 @@ import { CoreSelectProps, SelectVariant } from './constants';
 interface SelectMultipleProps extends CoreSelectProps {
     /** The list of selected values. */
     value: string[];
-
-    /** The function called to render a selected value when `isMultiple` is true. Default: Renders the value inside of a Chip */
+    /** The function called to render a selected value when `isMultiple` is true. Default: Renders the value inside of a Chip. */
     selectedChipRender?(
         choice: string,
         index: number,
@@ -59,115 +58,110 @@ const DEFAULT_PROPS: Partial<SelectMultipleProps> = {
     selectedValueRender: (choice) => choice,
 };
 
-/**
- * Select Multiple component.
- *
- * @return The component.
- */
 const SelectMultipleField: React.FC<SelectMultipleProps> = ({
-    variant,
-    label,
-    value,
-    isEmpty,
-    isValid,
+    anchorRef,
+    handleKeyboardNav,
     hasError,
+    id,
+    isDisabled,
+    isEmpty,
+    isRequired,
+    isValid,
+    label,
     onClear,
     onInputClick,
-    theme,
     placeholder,
-    handleKeyboardNav,
-    targetUuid,
-    anchorRef,
-    isRequired,
-    isDisabled,
     selectedChipRender,
     selectedValueRender,
-}) => {
-    return (
-        <>
-            {variant === SelectVariant.input && (
-                <>
-                    {label && (
-                        <div className={`${CLASSNAME}__header`}>
-                            <InputLabel
-                                htmlFor={targetUuid}
-                                className={`${CLASSNAME}__label`}
-                                isRequired={isRequired}
-                                theme={theme}
-                            >
-                                {label}
-                            </InputLabel>
-                        </div>
-                    )}
-
-                    <div
-                        ref={anchorRef as RefObject<HTMLDivElement>}
-                        id={targetUuid}
-                        className={`${CLASSNAME}__wrapper`}
-                        onClick={onInputClick}
-                        onKeyDown={handleKeyboardNav}
-                        tabIndex={0}
-                    >
-                        <div className={`${CLASSNAME}__chips`}>
-                            {!isEmpty && (
-                                <ChipGroup theme={theme}>
-                                    {value.map((val: string, index: number) =>
-                                        selectedChipRender!(val, index, onClear, isDisabled, theme),
-                                    )}
-                                </ChipGroup>
-                            )}
-                        </div>
-
-                        {isEmpty && placeholder && (
-                            <div
-                                className={classNames([
-                                    `${CLASSNAME}__input-native`,
-                                    `${CLASSNAME}__input-native--placeholder`,
-                                ])}
-                            >
-                                <span>{placeholder}</span>
-                            </div>
-                        )}
-
-                        {(isValid || hasError) && (
-                            <div className={`${CLASSNAME}__input-validity`}>
-                                <Icon icon={isValid ? mdiCheckCircle : mdiAlertCircle} size={Size.xxs} />
-                            </div>
-                        )}
-
-                        <div className={`${CLASSNAME}__input-indicator`}>
-                            <Icon icon={mdiMenuDown} size={Size.s} />
-                        </div>
+    theme,
+    value,
+    variant,
+}) => (
+    <>
+        {variant === SelectVariant.input && (
+            <>
+                {label && (
+                    <div className={`${CLASSNAME}__header`}>
+                        <InputLabel
+                            htmlFor={id}
+                            className={`${CLASSNAME}__label`}
+                            isRequired={isRequired}
+                            theme={theme}
+                        >
+                            {label}
+                        </InputLabel>
                     </div>
-                </>
-            )}
+                )}
 
-            {variant === SelectVariant.chip && (
-                <Chip
-                    id={targetUuid}
-                    isSelected={!isEmpty}
-                    after={<Icon icon={isEmpty ? mdiMenuDown : mdiCloseCircle} />}
-                    onAfterClick={isEmpty ? onInputClick : onClear}
+                <div
+                    ref={anchorRef as RefObject<HTMLDivElement>}
+                    id={id}
+                    className={`${CLASSNAME}__wrapper`}
                     onClick={onInputClick}
-                    chipRef={anchorRef as RefObject<HTMLAnchorElement>}
-                    theme={theme}
+                    onKeyDown={handleKeyboardNav}
+                    tabIndex={isDisabled ? undefined : 0}
+                    aria-disabled={isDisabled || undefined}
                 >
-                    {isEmpty && <span>{label}</span>}
+                    <div className={`${CLASSNAME}__chips`}>
+                        {!isEmpty && (
+                            <ChipGroup theme={theme}>
+                                {value.map((val: string, index: number) =>
+                                    selectedChipRender!(val, index, onClear, isDisabled, theme),
+                                )}
+                            </ChipGroup>
+                        )}
+                    </div>
 
-                    {!isEmpty && (
-                        <span>
-                            <span>{selectedValueRender!(value[0])}</span>
-
-                            {value.length > 1 && <span>&nbsp;+{value.length - 1}</span>}
-                        </span>
+                    {isEmpty && placeholder && (
+                        <div
+                            className={classNames([
+                                `${CLASSNAME}__input-native`,
+                                `${CLASSNAME}__input-native--placeholder`,
+                            ])}
+                        >
+                            <span>{placeholder}</span>
+                        </div>
                     )}
-                </Chip>
-            )}
-        </>
-    );
-};
 
-const SelectMultiple = (props: any) =>
+                    {(isValid || hasError) && (
+                        <div className={`${CLASSNAME}__input-validity`}>
+                            <Icon icon={isValid ? mdiCheckCircle : mdiAlertCircle} size={Size.xxs} />
+                        </div>
+                    )}
+
+                    <div className={`${CLASSNAME}__input-indicator`}>
+                        <Icon icon={mdiMenuDown} size={Size.s} />
+                    </div>
+                </div>
+            </>
+        )}
+
+        {variant === SelectVariant.chip && (
+            <Chip
+                id={id}
+                isSelected={!isEmpty}
+                isDisabled={isDisabled}
+                after={<Icon icon={isEmpty ? mdiMenuDown : mdiCloseCircle} />}
+                onAfterClick={isEmpty ? onInputClick : onClear}
+                onClick={onInputClick}
+                chipRef={anchorRef as RefObject<HTMLAnchorElement>}
+                theme={theme}
+            >
+                {isEmpty && <span>{label}</span>}
+
+                {!isEmpty && (
+                    <span>
+                        <span>{selectedValueRender!(value[0])}</span>
+
+                        {value.length > 1 && <span>&nbsp;+{value.length - 1}</span>}
+                    </span>
+                )}
+            </Chip>
+        )}
+    </>
+);
+
+const SelectMultiple: React.FC<SelectMultipleProps> = (props) =>
     withSelectContext(SelectMultipleField, {
         ...props,
         className: classNames(

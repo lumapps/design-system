@@ -53,8 +53,8 @@ const StoryBlock: React.FC<StoryBlockProps> = (props) => {
                     Material
                 </Chip>
                 <Switch
-                    checked={theme === Theme.dark}
-                    onToggle={toggleTheme}
+                    isChecked={theme === Theme.dark}
+                    onChange={toggleTheme}
                     position={SwitchPosition.right}
                     theme={theme}
                 >

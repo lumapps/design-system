@@ -8,7 +8,7 @@ import { GenericProps, getRootClassName } from '@lumx/react/utils';
  * Defines the props of the component
  */
 interface ButtonGroupProps extends GenericProps {
-    /** Ref passed to the wrapper. */
+    /** The reference passed to the wrapper. */
     buttonGroupRef?: Ref<HTMLDivElement>;
 }
 
@@ -27,14 +27,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: Partial<ButtonGroupProps> = {};
 
-/**
- * Displays a group of <Button>s.
- *
- * @see {@link Button} for more information on <Button>.
- *
- * @return The component.
- */
-const ButtonGroup: React.FC<ButtonGroupProps> = ({ children, className, buttonGroupRef, ...forwardedProps }) => (
+const ButtonGroup: React.FC<ButtonGroupProps> = ({ buttonGroupRef, children, className, ...forwardedProps }) => (
     <div {...forwardedProps} className={classNames(className, CLASSNAME)} ref={buttonGroupRef}>
         {children}
     </div>

@@ -77,10 +77,10 @@ describe(`<${Mosaic.displayName}>`, () => {
             const { thumbnails } = setup({
                 theme: expectedTheme,
                 thumbnails: [
-                    { url: 'https://picsum.photos/200' },
-                    { url: 'https://picsum.photos/210' },
-                    { url: 'https://picsum.photos/220' },
-                    { url: 'https://picsum.photos/230' },
+                    { image: 'https://picsum.photos/200' },
+                    { image: 'https://picsum.photos/210' },
+                    { image: 'https://picsum.photos/220' },
+                    { image: 'https://picsum.photos/230' },
                 ],
             });
             thumbnails.forEach((thumbnail: Wrapper) => {
@@ -94,10 +94,10 @@ describe(`<${Mosaic.displayName}>`, () => {
             const { thumbnails } = setup({
                 theme: expectedTheme,
                 thumbnails: [
-                    { url: 'https://picsum.photos/200' },
-                    { url: 'https://picsum.photos/210', onClick },
-                    { url: 'https://picsum.photos/220' },
-                    { url: 'https://picsum.photos/230', onClick },
+                    { image: 'https://picsum.photos/200' },
+                    { image: 'https://picsum.photos/210', onClick },
+                    { image: 'https://picsum.photos/220' },
+                    { image: 'https://picsum.photos/230', onClick },
                 ],
             });
             thumbnails.forEach((thumbnail: Wrapper, index: number) => {
@@ -118,11 +118,11 @@ describe(`<${Mosaic.displayName}>`, () => {
                 thumbnails: [
                     {
                         onClick: clickOnFirstThumbnail,
-                        url: 'https://picsum.photos/200',
+                        image: 'https://picsum.photos/200',
                     },
-                    { url: 'https://picsum.photos/210' },
-                    { url: 'https://picsum.photos/220' },
-                    { url: 'https://picsum.photos/230' },
+                    { image: 'https://picsum.photos/210' },
+                    { image: 'https://picsum.photos/220' },
+                    { image: 'https://picsum.photos/230' },
                 ],
             });
             thumbnails.forEach((thumbnail: Wrapper) => {

@@ -38,34 +38,17 @@ enum TableCellVariant {
  * Defines the props of the component.
  */
 interface TableCellProps extends GenericProps {
-    /**
-     * The mdi name of the icon (thead only).
-     */
+    /** The name of the icon (thead only). */
     icon?: string;
-
-    /**
-     * Whether the column is sortable or not (thead only).
-     */
+    /** Whether the column is sortable or not (thead only). */
     isSortable?: boolean;
-
-    /**
-     * The scope of the thead.
-     */
+    /** The scope of the thead. */
     scope?: ThScope;
-
-    /**
-     * The initial sort order (sortable thead only).
-     */
+    /** The initial sort order (sortable thead only). */
     sortOrder?: ThOrder;
-
-    /**
-     * The variant of the cell.
-     */
+    /** The variant of the cell. */
     variant?: TableCellVariant;
-
-    /**
-     * The function to call when we click on an order button.
-     */
+    /** The function called on click on header. */
     onHeaderClick?(): void;
 }
 
@@ -86,11 +69,6 @@ const DEFAULT_PROPS: Partial<TableCellProps> = {
     variant: TableCellVariant.body,
 };
 
-/**
- * The TableCell component displays an HTML Table Header Cell.
- *
- * @return The component.
- */
 const TableCell: React.FC<TableCellProps> = ({
     children,
     className,

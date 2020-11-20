@@ -1,5 +1,3 @@
-import isObject from 'lodash/isObject';
-
 import React, { ReactNode, Ref } from 'react';
 
 import classNames from 'classnames';
@@ -20,29 +18,34 @@ type UserBlockSize = Size.s | Size.m | Size.l;
  * Defines the props of the component.
  */
 interface UserBlockProps extends GenericProps {
-    /** Avatar image. */
-    avatar?: AvatarProps | string;
-    /** Simple Action block. */
+    /**
+     * The url of the avatar picture we want to display.
+     * @see {@link AvatarProps#image}
+     */
+    avatar?: string;
+    /** The props to pass to the avatar, minus those already set by the UserBlock props. */
+    avatarProps?: Omit<AvatarProps, 'image' | 'size' | 'onClick' | 'tabIndex' | 'theme'>;
+    /** The single action element. */
     simpleAction?: ReactNode;
-    /** Multiple Actions block. */
+    /** The group of action elements. */
     multipleActions?: ReactNode;
-    /** Additional fields used to describe the use. */
+    /** The additional fields used to describe the user. */
     fields?: string[];
-    /** User name. */
+    /** The name of the user.. */
     name?: string;
-    /** Orientation. */
+    /** The orientation of the user block. */
     orientation?: Orientation;
-    /** Size. */
+    /** The size variant of the component. */
     size?: UserBlockSize;
-    /** Theme. */
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
-    /** Reference passed to the wrapper. */
+    /** The reference passed to the wrapper. */
     userBlockRef?: Ref<HTMLDivElement>;
-    /** Callback for the click event. */
+    /** The function called on click. */
     onClick?(): void;
-    /** Callback for the mouseEnter event. */
+    /** The function called when the cursor enters the component. */
     onMouseEnter?(): void;
-    /** Callback for the mouseEnter event. */
+    /** The function called when the cursor exits the component. */
     onMouseLeave?(): void;
 }
 
@@ -65,24 +68,20 @@ const DEFAULT_PROPS: Partial<UserBlockProps> = {
     theme: Theme.light,
 };
 
-/**
- * Render a user information as a card if orientation is vertical or no action user info block if horizontal.
- *
- * @return The component.
- */
 const UserBlock: React.FC<UserBlockProps> = ({
     avatar,
-    theme,
-    orientation,
+    avatarProps,
+    className,
     fields,
+    multipleActions,
     name,
     onClick,
     onMouseEnter,
     onMouseLeave,
-    className,
+    orientation,
     simpleAction,
-    multipleActions,
     size,
+    theme,
     userBlockRef,
     ...forwardedProps
 }) => {
@@ -125,7 +124,8 @@ const UserBlock: React.FC<UserBlockProps> = ({
             {avatar && (
                 <div className={`${CLASSNAME}__avatar`}>
                     <Avatar
-                        {...(isObject(avatar) ? avatar : { image: avatar })}
+                        {...avatarProps}
+                        image={avatar}
                         size={componentSize}
                         onClick={onClick}
                         tabIndex={onClick ? 0 : -1}

@@ -1,4 +1,4 @@
-import React, { Children, ReactElement, ReactNode, RefObject, useEffect, useMemo, useRef, useState } from 'react';
+import React, { Children, ReactElement, ReactNode, RefObject, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import classNames from 'classnames';
@@ -21,76 +21,32 @@ import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
  * Defines the props of the component.
  */
 interface DialogProps extends GenericProps {
-    /**
-     * Element(s) to display in the footer part.
-     */
+    /** The elements to display in the footer part. */
     footer?: ReactNode;
-
-    /**
-     * Force divider between the dialog content and the footer (instead of showing it on scroll)
-     */
+    /** Whether the divider between the dialog content and the footer is always displayed (instead of showing it on scroll). */
     forceFooterDivider?: boolean;
-
-    /**
-     * Element(s) to display in the header part.
-     */
+    /** The elements to display in the header part. */
     header?: ReactNode;
-
-    /**
-     * Force divider between the dialog content and the header (instead of showing it on scroll)
-     */
+    /** Whether the divider between the dialog content and the footer is always displayed (instead of showing it on scroll). */
     forceHeaderDivider?: boolean;
-
-    /**
-     * Display an indefinite progress indicator over the dialog content when activated.
-     */
+    /** Whether the indefinite progress indicator over the dialog content is displayed or not. */
     isLoading?: boolean;
-
-    /**
-     * Controls the visibility of the dialog.
-     */
+    /** Whether the component is open or not. */
     isOpen?: boolean;
-
-    /**
-     * Ref of element that triggered modal opening to set focus on.
-     */
+    /** The reference of the element that triggered modal opening to set focus on. */
     parentElement?: RefObject<HTMLElement>;
-
-    /**
-     * Ref of content section of the Dialog.
-     */
+    /** The reference passed to the content. */
     contentRef?: RefObject<HTMLDivElement>;
-
-    /**
-     * Ref of the element that should get the focus when the dialogs opens.
-     * By default, the first child will take focus.
-     */
+    /** The reference of the element that should get the focus when the dialogs opens. By default, the first child will take focus. */
     focusElement?: RefObject<HTMLElement>;
-
-    /**
-     * Prevent clickaway and escape to dismiss the dialog
-     */
+    /** Whether to keep the dialog open on clickaway or escape press. */
     preventAutoClose?: boolean;
-
-    /**
-     * Size of the dialog
-     */
+    /** The size variant of the component. */
     size?: DialogSizes;
-
-    /**
-     * The z-axis position.
-     */
+    /** The z-axis position. */
     zIndex?: number;
-
-    /**
-     * Callback called when the dialog is closing.
-     */
+    /** The function called on close. */
     onClose?(): void;
-
-    /**
-     * Callback called when the dialog is opening.
-     */
-    onOpen?(): void;
 }
 
 type DialogSizes = Size.tiny | Size.regular | Size.big | Size.huge;
@@ -115,12 +71,6 @@ const DEFAULT_PROPS: Partial<DialogProps> = {
     size: Size.big,
 };
 
-/**
- * Dialog component.
- *
- * @param props Component props.
- * @return The component.
- */
 const Dialog: React.FC<DialogProps> = (props) => {
     if (!DOCUMENT) {
         // Can't render in SSR.
@@ -175,12 +125,6 @@ const Dialog: React.FC<DialogProps> = (props) => {
     const headerChildContent = headerChildProps?.children;
     const footerChildProps = (footerChild as ReactElement)?.props;
     const footerChildContent = footerChildProps?.children;
-
-    useEffect(() => {
-        if (isOpen) {
-            onOpen?.();
-        }
-    }, [isOpen]);
 
     const isVisible = useDelayedVisibility(Boolean(isOpen), DIALOG_TRANSITION_DURATION);
 

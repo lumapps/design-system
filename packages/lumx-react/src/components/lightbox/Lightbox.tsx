@@ -18,31 +18,22 @@ const _TRANSITION_DURATION = 400;
  * Defines the props of the component.
  */
 interface LightboxProps extends GenericProps {
-    /** Label for accessibility assistive devices. */
+    /** The label for accessibility assistive devices. */
     ariaLabel?: string;
-    /** should the close button be visible - default true */
+    /** Whether the closing button should be visible or not. */
     isCloseButtonVisible?: boolean;
-    /** Status of lightbox. */
+    /** Whether the component is open or not. */
     isOpen?: boolean;
-    /** Ref of element that triggered modal opening to set focus on. */
+    /** The reference of the element that triggered modal opening to set focus on. */
     parentElement: RefObject<any>;
-    /** Prevent clickaway and escape to dismiss the lightbox */
+    /** Whether to keep the dialog open on clickaway or escape press. */
     preventAutoClose?: boolean;
-    /** Indicates if a wrapper that will block clickaway */
-    noWrapper?: boolean;
-    /**
-     * ARIA role attribute to provide more information about the structure of a document for users
-     *  of assistive technologies.
-     */
-    role?: string;
-    /** Theme. */
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
     /** The z-axis position. */
     zIndex?: number;
-    /** Callback called when lightbox is closing. */
+    /** The function called on close. */
     onClose?(): void;
-    /** Callback called when lightbox is opening. */
-    onOpen?(): void;
 }
 
 /**
@@ -61,7 +52,6 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 const DEFAULT_PROPS: Partial<LightboxProps> = {
     ariaLabel: 'Lightbox',
     isCloseButtonVisible: true,
-    role: 'dialog',
     theme: Theme.light,
 };
 
@@ -76,14 +66,12 @@ const Lightbox: React.FC<LightboxProps> = ({
     className,
     isCloseButtonVisible,
     isOpen,
-    noWrapper,
     onClose,
-    onOpen,
     parentElement,
     preventAutoClose,
-    role,
     theme,
     zIndex,
+    ...forwardedProps
 }) => {
     if (!DOCUMENT) {
         // Can't render in SSR.
@@ -120,10 +108,6 @@ const Lightbox: React.FC<LightboxProps> = ({
         if (childrenRef && childrenRef.current && childrenRef.current.firstChild) {
             // Set focus inside lightbox.
             childrenRef.current.firstChild.focus();
-        }
-
-        if (isFunction(onOpen)) {
-            onOpen();
         }
     };
 
@@ -164,17 +148,6 @@ const Lightbox: React.FC<LightboxProps> = ({
         evt.stopPropagation();
     };
 
-    /**
-     * Wrap children, if needed, in an almost fullscreen div
-     */
-    const childrenWrapper = noWrapper ? (
-        children
-    ) : (
-        <div ref={childrenRef} className={`${CLASSNAME}__wrapper`} role="presentation" onClick={preventClick}>
-            {children}
-        </div>
-    );
-
     return (
         <>
             {isTrapActive &&
@@ -191,6 +164,7 @@ const Lightbox: React.FC<LightboxProps> = ({
                         }}
                     >
                         <div
+                            {...forwardedProps}
                             aria-label={ariaLabel}
                             aria-modal="true"
                             className={classNames(
@@ -201,7 +175,6 @@ const Lightbox: React.FC<LightboxProps> = ({
                                     theme,
                                 }),
                             )}
-                            role={role}
                             style={{
                                 display: isTrapActive ? 'block' : '',
                                 zIndex,
@@ -221,7 +194,14 @@ const Lightbox: React.FC<LightboxProps> = ({
                                     onClick={handleClose}
                                 />
                             )}
-                            {childrenWrapper}
+                            <div
+                                ref={childrenRef}
+                                className={`${CLASSNAME}__wrapper`}
+                                role="presentation"
+                                onClick={preventClick}
+                            >
+                                {children}
+                            </div>
                         </div>
                     </FocusTrap>,
                     document.body,

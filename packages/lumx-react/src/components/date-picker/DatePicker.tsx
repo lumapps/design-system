@@ -15,26 +15,20 @@ import DatePickerValueProp from './DatePickerValueProp';
  */
 
 interface DatePickerProps extends GenericProps {
-    /** Locale. */
-    locale: string;
-
-    /** Max date. */
-    maxDate?: Date;
-
-    /** Min date. */
-    minDate?: Date;
-
-    /** Today or selected date Ref */
-    todayOrSelectedDateRef?: RefObject<HTMLButtonElement>;
-
-    /** Value. */
-    value: DatePickerValueProp;
-
-    /** Month to display by default */
+    /** The month to display by default. */
     defaultMonth?: DatePickerValueProp;
-
-    /** On change. */
-    onChange(value: moment.Moment | undefined): void;
+    /** The locale (language or region) to use. */
+    locale: string;
+    /** The date after which no date can be selected. */
+    maxDate?: Date;
+    /** The date before which no date can be selected. */
+    minDate?: Date;
+    /** The reference passed to the <button> element if it corresponds to the current date or the selected date. */
+    todayOrSelectedDateRef?: RefObject<HTMLButtonElement>;
+    /** The current value of the text field. */
+    value: DatePickerValueProp;
+    /** The function called on change. */
+    onChange(value?: moment.Moment): void;
 }
 
 /**
@@ -52,15 +46,8 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: Partial<DatePickerProps> = {};
 
-/**
- * Simple component used to pick a date (semi-controlled implementation).
- * @param props See DatePickerProps.
- *
- * @return The component.
- */
-const DatePicker = (props: DatePickerProps) => {
+const DatePicker: React.FC<DatePickerProps> = ({ defaultMonth, locale, value, ...forwardedProps }) => {
     let castedValue;
-    const { value, defaultMonth } = props;
     if (value) {
         castedValue = moment(value);
     } else if (defaultMonth) {
@@ -77,12 +64,15 @@ const DatePicker = (props: DatePickerProps) => {
     const setNextMonth = () => setMonthOffset(monthOffset + 1);
 
     const selectedMonth = moment(today)
-        .locale(props.locale)
+        .locale(locale)
         .add(monthOffset, 'months');
 
     return (
         <DatePickerControlled
-            {...props}
+            {...forwardedProps}
+            defaultMonth={defaultMonth}
+            locale={locale}
+            value={value}
             onPrevMonthChange={setPrevMonth}
             onNextMonthChange={setNextMonth}
             selectedMonth={selectedMonth}

@@ -25,11 +25,6 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME, true);
  */
 const DEFAULT_PROPS: Partial<TableHeaderProps> = {};
 
-/**
- * The TableHeader component displays an HTML Table Head, composed TableHeader-cells in TableHeader Rows.
- *
- * @return The component.
- */
 const TableHeader: React.FC<TableHeaderProps> = ({ children, className, ...forwardedProps }) => (
     <thead {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))}>
         {children}

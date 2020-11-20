@@ -128,8 +128,8 @@ exports[`<Tooltip> Snapshots and structure should work on disabled elements 1`] 
     className="lumx-tooltip-anchor-wrapper"
   >
     <Button
-      disabled={true}
       emphasis="high"
+      isDisabled={true}
       size="m"
       theme="light"
     >

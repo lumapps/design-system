@@ -8,7 +8,7 @@ export const App = ({ theme }: any) => (
             Default
         </Button>
 
-        <Button disabled emphasis={Emphasis.low} theme={theme}>
+        <Button isDisabled emphasis={Emphasis.low} theme={theme}>
             Disabled
         </Button>
 

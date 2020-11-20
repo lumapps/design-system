@@ -17,20 +17,15 @@ import { mdiAlertCircle, mdiCheckCircle, mdiRadioboxBlank, mdiRadioboxMarked } f
 interface ProgressTrackerStepProps extends GenericProps {
     /** Whether the step should be in error state or not. */
     hasError?: boolean;
-
-    /** The step's helper text. */
+    /** The helper of the step. */
     helper?: string | null;
-
-    /** Whether the current step is active. */
+    /** Whether the current step is active or not. */
     isActive?: boolean;
-
-    /** Whether the current step is completed. */
+    /** Whether the current step is completed or not. */
     isComplete?: boolean;
-
-    /** The step's label. */
+    /** The label of the step. */
     label?: string | null;
-
-    /** The component theme to apply. */
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
 }
 
@@ -51,11 +46,6 @@ const DEFAULT_PROPS: Partial<ProgressTrackerStepProps> = {
     theme: Theme.light,
 };
 
-/**
- * Defines a step for the `ProgressTracker` element.
- *
- * @return The component.
- */
 const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = ({
     className,
     hasError,

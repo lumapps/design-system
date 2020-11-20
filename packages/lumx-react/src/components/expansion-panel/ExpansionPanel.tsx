@@ -23,29 +23,22 @@ import {
  * Defines the props of the component.
  */
 interface ExpansionPanelProps extends GenericProps {
-    /** The color theme. */
-    theme?: Theme;
-
-    /** The label text used when no `<header>` was provided in the children. */
-    label?: string;
-
     /** Whether the hexpansion panel has a background. */
     hasBackground?: boolean;
-
     /** Whether the header has a divider. */
     hasHeaderDivider?: boolean;
-
-    /** Set panel open or not. */
+    /** Whether the component is open or not. */
     isOpen?: boolean;
-
+    /** The label text used when no `<header>` was provided in the children. */
+    label?: string;
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    theme?: Theme;
     /** The function called on open. */
-    openCallback?: Callback;
-
+    onOpen?: Callback;
     /** The function called on close. */
-    closeCallback?: Callback;
-
+    onClose?: Callback;
     /** The function called on open or close. */
-    toggleCallback?(shouldOpen: boolean): void;
+    onToggleOpen?(shouldOpen: boolean): void;
 }
 
 /**
@@ -71,15 +64,15 @@ const isFooter = isComponent('footer');
 
 const ExpansionPanel: React.FC<ExpansionPanelProps> = (props) => {
     const {
-        label,
-        theme,
+        className,
         hasBackground,
         hasHeaderDivider,
         isOpen,
-        className,
-        openCallback,
-        closeCallback,
-        toggleCallback,
+        label,
+        onClose,
+        onOpen,
+        onToggleOpen,
+        theme,
         ...forwardedProps
     } = props;
 
@@ -98,14 +91,14 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = (props) => {
 
     const toggleOpen = () => {
         const shouldOpen = !isOpen;
-        if (isFunction(openCallback) && shouldOpen) {
-            openCallback();
+        if (isFunction(onOpen) && shouldOpen) {
+            onOpen();
         }
-        if (isFunction(closeCallback) && !shouldOpen) {
-            closeCallback();
+        if (isFunction(onClose) && !shouldOpen) {
+            onClose();
         }
-        if (isFunction(toggleCallback)) {
-            toggleCallback(shouldOpen);
+        if (isFunction(onToggleOpen)) {
+            onToggleOpen(shouldOpen);
         }
     };
 

@@ -12,27 +12,21 @@ type IconSizes = Size.xxs | Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.
  * Defines the props of the component.
  */
 interface IconProps extends GenericProps {
+    /** The color of the icon. */
+    color?: Color;
+    /** The degree of lightness and darkness of the selected icon color. */
+    colorVariant?: ColorVariant;
+    /** Whether the icon has a shape. */
+    hasShape?: boolean;
     /**
      * The icon SVG path draw code (`d` property of the `<path>` SVG element).
      * @see {@link https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths}
      */
     icon: string;
-
-    /** Reference on the `<i>` icon HTML element. */
+    /** The reference passed to the <i> element. */
     iconRef?: React.RefObject<HTMLElement>;
-
-    /** The icon color. */
-    color?: Color;
-
-    /** Whether the icon has shape. */
-    hasShape?: boolean;
-
-    /** The icon color variant. */
-    colorVariant?: ColorVariant;
-
-    /** The icon size. */
+    /** The size variant of the component. */
     size?: IconSizes;
-
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
 }
@@ -52,11 +46,6 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: Partial<IconProps> = {};
 
-/**
- * Displays an icon in the form of a HTML <svg> tag with the wanted icon path.
- *
- * @return The component
- */
 const Icon: React.FC<IconProps> = ({
     className,
     color,

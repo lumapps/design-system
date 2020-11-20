@@ -42,10 +42,6 @@ export const App = () => {
 
     const triggerElement = useRef(null);
 
-    const onOpenModal = useCallback(() => {
-        // Do something.
-    }, []);
-
     const onCloseModal = useCallback(() => {
         // Do something.
         setIsOpened(false);
@@ -101,14 +97,8 @@ export const App = () => {
                 </Message>
             </div>
 
-            <Lightbox isOpen={isOpened} parentElement={triggerElement} onClose={onCloseModal} onOpen={onOpenModal}>
-                <Slideshow
-                    activeIndex={activeIndex}
-                    hasControls={true}
-                    autoPlay={true}
-                    fillHeight={true}
-                    theme={Theme.dark}
-                >
+            <Lightbox isOpen={isOpened} parentElement={triggerElement} onClose={onCloseModal}>
+                <Slideshow activeIndex={activeIndex} hasControls={true} autoPlay={true} fillHeight={true} theme={Theme.dark}>
                     <SlideshowItem>
                         <ImageBlock image="https://picsum.photos/640/480/?image=24" {...imageBlockDemoProps} />
                     </SlideshowItem>

@@ -7,6 +7,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Added `avatarProps` to `CommentBlock` to allow setting custom props to the avatar.
+-   Added `linkProps` to `LinkPreview` to allow setting custom props to the link.
+-   Added `avatarProps` to `UserBlock` to allow setting custom props to the link.
+-   Added `thumbnailProps` to `PostBlock` to allow setting custom props to the link.
+-   Added props forwarding to `Lightbox` component.
+-   Added `name` and `value` props to `Switch`, `CheckBox` and `RadioButton` components.
+-   Added `name` prop to `Autocomplete`, `DatePicker`, `TextField`, `Button`, `IconButton` and `Slider` components.
+-   Expose component default props in React `Component.defaultProps`
+
+### Changed
+
+-   Upgrade to mdi v5.6.55 and handle backward compatibility.
+-   _[BREAKING]_ Renamed `url` prop to `link` for `LinkPreview` component.
+-   _[BREAKING]_ Renamed `onToggle` prop to `onChange` for `Switch` component.
+-   _[BREAKING]_ `avatar` prop from `UserBlock` component is now a string and corresponds to the avatar url. Any other avatar props should be passed to `avatarProps` prop.
+-   _[BREAKING]_ Renamed `handleClick` prop to `onClick` and `actionCallback` prop to `onActionClick` for `Notification` component.
+-   _[BREAKING]_ Removed `HTMLElement` as type in `PostBlock` component props.
+-   _[BREAKING]_ Renamed `closeCallback`, `openCallback` and `toggleCallback` props respectively to `onClose`, `onOpen` and `onToggleOpen` for `ExpansionPanel` component.
+-   _[BREAKING]_ `Checkbox` now uses `checked` (edit: and its alias `isChecked`, see below) prop instead of `value` prop to know whether it is toggled on or not. This is more consistant with HTML native naming convention and this is also how it is used for `RadioButton` and `Switch`. As said above, `value` has been added as prop and acts like the HTML native prop `value`.
+-   _[BREAKING]_ Changed `onChange` method signature for `RadioButton` component. This is breaking since now the `value` argument of `onChange` method is required.
+-   Changed `onChange` method signature for `Switch`, `CheckBox`, `Autocomplete`, `TextField`, `DatePicker` and `Slider` components.
+-   `isDisabled` prop is now the official name for the disabled state of all components (although `disabled` will also work for compatibility with the HTML `disabled` attribute)
+-   `isChecked` prop is now the official name for the checked state of all checkable components (although `checked` will also work for compatibility with the HTML `checked` attribute).
+-   _[BREAKING]_ The prop `value` of `TextField` component can not be a `number` anymore. The user would have to cast the value on its side.
+-   _[BREAKING]_ Renamed `hideMinMaxlabel` prop to `hideMinMaxLabel` for `Slider` component.
+-   Default color of `Badge` is now `primary`.
+
+### Removed
+
+-   _[BREAKING]_ Removed `onOpen` prop from `Dialog` component. User should use `isOpen` from its side.
+-   _[BREAKING]_ Removed `thumbnailAspectRatio` prop from `PostBlock` component. User should pass it using `thumbnailProps` instead.
+-   _[BREAKING]_ Removed `onOpen`, `role` and `noWrapper` props from `Lightbox` component.
+
 ## [0.28.0][] - 2020-11-17
 
 ### Changed

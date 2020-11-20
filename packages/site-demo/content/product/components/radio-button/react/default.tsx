@@ -3,37 +3,38 @@ import React, { useState } from 'react';
 
 export const App = ({ theme }: any) => {
     const [value, setValue] = useState('lorem');
+    const onChange = (newValue: string) => setValue(newValue);
 
     return (
         <RadioGroup>
             <RadioButton
-                checked={value === 'lorem'}
+                isChecked={value === 'lorem'}
                 label="Radio button"
                 name="test1"
                 theme={theme}
                 value="lorem"
-                onChange={setValue}
+                onChange={onChange}
             />
 
             <RadioButton
-                checked={value === 'ipsum'}
+                isChecked={value === 'ipsum'}
                 helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
                 label="Radio button with help"
                 name="test1"
                 theme={theme}
                 value="ipsum"
-                onChange={setValue}
+                onChange={onChange}
             />
 
             <RadioButton
-                checked={value === 'dolor'}
+                isChecked={value === 'dolor'}
                 helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
                 label="Disabled radio button with help"
                 name="test1"
                 theme={theme}
                 value="dolor"
-                onChange={setValue}
-                disabled
+                onChange={onChange}
+                isDisabled
             />
         </RadioGroup>
     );

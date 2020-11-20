@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode, Ref, useMemo } from 'react';
+import React, { ReactNode, Ref, useMemo } from 'react';
 
 import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
@@ -26,37 +26,27 @@ type ListItemSizes = Size.tiny | Size.regular | Size.big | Size.huge;
  * Defines the props of the component.
  */
 interface ListItemProps extends GenericProps {
-    /** After content element */
-    after?: ReactElement;
-
-    /** Before content element. */
-    before?: ReactElement;
-
-    /** List item content. */
+    /** A component to be rendered after the content. */
+    after?: ReactNode;
+    /** A component to be rendered before the content. */
+    before?: ReactNode;
+    /** The children elements. */
     children: string | ReactNode;
-
-    /** Whether the list item should be highlighted. */
+    /** Whether the list item should be highlighted or not. */
     isHighlighted?: boolean;
-
-    /** Whether the list item is selected or not. */
+    /** Whether the component is selected or not. */
     isSelected?: boolean;
-
-    /** List item size. */
-    size?: ListItemSizes;
-
-    /** List item reference. */
+    /** The reference passed to the <li> element. */
     listItemRef?: Ref<HTMLLIElement>;
-
     /** Sets a custom react component for the link (can be used to inject react router Link). */
     linkAs?: 'a' | any;
-
     /** props that will be passed on to the Link */
     linkProps?: React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
-
-    /** Link element reference (use with {@link linkProps} prop). */
+    /** The reference passed to the <a> element. */
     linkRef?: Ref<HTMLAnchorElement>;
-
-    /** Callback used to retrieved the selected entry. */
+    /** The size variant of the component. */
+    size?: ListItemSizes;
+    /** The function called when an item is selected. */
     onItemSelected?(): void;
 }
 
@@ -81,30 +71,24 @@ const DEFAULT_PROPS: Partial<ListProps> = {
  * Check if the list item is clickable.
  * @return `true` if the list item is clickable; `false` otherwise.
  */
-function isClickable({ linkProps, onItemSelected }: ListItemProps): boolean {
+function isClickable({ linkProps, onItemSelected }: Partial<ListItemProps>): boolean {
     return !isEmpty(linkProps?.href) || !!onItemSelected;
 }
 
-/**
- * Component used in List element.
- *
- * @param  props The component props.
- * @return The component.
- */
 const ListItem: React.FC<ListItemProps> = (props) => {
     const {
         after,
+        before,
         children,
         className,
         isHighlighted,
         isSelected,
-        size,
-        onItemSelected,
-        before,
         linkAs,
         linkProps = {},
         linkRef,
         listItemRef,
+        onItemSelected,
+        size,
         ...forwardedProps
     } = props;
     const onKeyDown = useMemo(() => (onItemSelected ? onEnterPressed(onItemSelected) : undefined), [onItemSelected]);
@@ -129,7 +113,7 @@ const ListItem: React.FC<ListItemProps> = (props) => {
                 }),
             )}
         >
-            {isClickable(props) ? (
+            {isClickable({ linkProps, onItemSelected }) ? (
                 /* Clickable list item */
                 renderLink(
                     {
