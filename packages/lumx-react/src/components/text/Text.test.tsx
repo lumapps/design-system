@@ -59,10 +59,10 @@ describe(`<${Text.displayName}>`, () => {
 
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
-        it('should use maxChars and the default EllipsisType defined', () => {
+        it('should use maxChars and the default EllipsisType', () => {
             const { wrapper } = setup({
                 text: 'introduced manner nodded rising sentence tube establish board garage each lose particularly',
-                max: 10,
+                maxChars: 10,
             });
             expect(wrapper).toMatchSnapshot();
         });
@@ -70,16 +70,7 @@ describe(`<${Text.displayName}>`, () => {
         it('should use maxChars and the defined EllipsisType', () => {
             const { wrapper } = setup({
                 text: 'introduced manner nodded rising sentence tube establish board garage each lose particularly',
-                max: 10,
-                ellipsisType: EllipsisType.START,
-            });
-            expect(wrapper).toMatchSnapshot();
-        });
-
-        it('should use maxChars and the defined EllipsisType', () => {
-            const { wrapper } = setup({
-                text: 'introduced manner nodded rising sentence tube establish board garage each lose particularly',
-                max: 10,
+                maxChars: 10,
                 ellipsisType: EllipsisType.START,
             });
             expect(wrapper).toMatchSnapshot();

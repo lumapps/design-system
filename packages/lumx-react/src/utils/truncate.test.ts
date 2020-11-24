@@ -10,6 +10,12 @@ describe(`truncate util`, () => {
         expect(truncatedText).toEqual(text);
     });
 
+    it('should not truncate the text since the max is not valid', () => {
+        const truncatedText = truncate(text, { max: -1 });
+
+        expect(truncatedText).toEqual(text);
+    });
+
     it('should truncate at the end', () => {
         const truncatedText = truncate(text, { max: 10 });
 

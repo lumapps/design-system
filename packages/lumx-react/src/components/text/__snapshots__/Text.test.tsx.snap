@@ -1,36 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Text> Props should use maxChars and the default EllipsisType defined 1`] = `
+exports[`<Text> Props should use maxChars and the default EllipsisType 1`] = `
 <span
   ariaLabel="introduced manner nodded rising sentence tube establish board garage each lose particularly"
-  max={10}
 >
-  ...
+  introduced...
 </span>
 `;
 
 exports[`<Text> Props should use maxChars and the defined EllipsisType 1`] = `
 <span
   ariaLabel="introduced manner nodded rising sentence tube establish board garage each lose particularly"
-  max={10}
 >
-  ...
-</span>
-`;
-
-exports[`<Text> Props should use maxChars and the defined EllipsisType 2`] = `
-<span
-  ariaLabel="introduced manner nodded rising sentence tube establish board garage each lose particularly"
-  max={10}
->
-  ...
+  ...rticularly
 </span>
 `;
 
 exports[`<Text> Snapshots and structure should render defaults 1`] = `
-<span
-  ariaLabel="bound"
->
-  ...
+<span>
+  bound
 </span>
 `;

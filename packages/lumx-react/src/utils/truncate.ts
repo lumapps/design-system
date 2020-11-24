@@ -17,7 +17,7 @@ export const truncate = (
     { max = 0, ellipsisType = EllipsisType.END, separator = ELLIPSIS_CHARS }: TruncateParams,
 ) => {
     // If there is no need to crop
-    if (text.length <= max) {
+    if (text.length <= max || max <= 0) {
         return text;
     }
 
