@@ -1,0 +1,53 @@
+# Loading state
+
+**Use loading states when information take an extended amount of time to process and appear on-screen. [Progress](/product/components/progress) and [Skeleton](/product/components/skeleton) components communicate loading states.**
+
+Loading states use motion to convey that the application is in transition phase and not stuck. This can help reduce user uncertainty.
+
+There are two ways of communicating loading state, both consist in displaying animated components.
+
+Use `progress` most of the time as it is relatively straightforward in design and development.
+
+Use `skeleton` for pieces of UI which loading require a special traitement:people see them loading lot of time during their journey on the app, they are the first elements to render when loading the app and so on.
+
+## Progress
+
+Using [progress](/product/components/progress) is the simpliest way of communicating that an action is being completed.
+
+<img src="assets/progress-case.png" width="100%" />
+
+Use progress in place of content while loading.
+
+<img src="assets/progress-user.png" width="100%" />
+
+Use progress in combination with dimming overlays and disabled inputs when users actions need time to process, like submitting a form.
+
+<img src="assets/progress-dialog.png" width="100%" />
+
+Prefer `circular` over `linear` **progress** variant, linear are only used in rare cases like page loading or some widgets loading.
+
+<img src="assets/progress-page.png" width="100%" />
+
+## Skeleton
+
+Using [skeleton](/product/components/skeleton) is an advanced way of communicating that an action is being completed.
+
+<img src="assets/skeleton-widget.png" width="100%" />
+
+When designing loading states with skeleton, use the minimum elaboration needed to make the replaced content recognizable. Not all components need to be replaced by shapes.
+
+<img src="assets/skeleton-result.png" width="100%" />
+
+The number of successive similar pieces of content doesn’t have to be exact and should not exceed 3 if it’s not crucial to make the content recognizable.
+
+<img src="assets/skeleton-menu.png" width="100%" />
+
+Add some variation on successive similar pieces of content to increase skeleton similitude with the replaced content.
+
+<img src="assets/skeleton-users.png" width="100%" />
+
+Consider the following components when designing loading states with skeleton:
+• Container-based components (avatars, tiles, list, and so on)
+• Data-based components which pull in data (tables)
+• Data indicators (badges)
+• Data-based text
