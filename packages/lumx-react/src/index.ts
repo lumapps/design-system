@@ -139,3 +139,5 @@ export { Uploader, UploaderProps, UploaderVariant } from './components/uploader/
 export { LinkPreview, LinkPreviewProps } from './components/link-preview/LinkPreview';
 
 export { FlexBox, FlexBoxProps } from './components/flex-box/FlexBox';
+
+export { Text, TextProps, EllipsisType } from './components/text/Text';

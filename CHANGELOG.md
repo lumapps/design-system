@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Added `name` and `value` props to `Switch`, `CheckBox` and `RadioButton` components.
 -   Added `name` prop to `Autocomplete`, `DatePicker`, `TextField`, `Button`, `IconButton` and `Slider` components.
 -   Expose component default props in React `Component.defaultProps`
--   Added util `truncate` that allow a text to be truncate at the `end`, `start`, or `middle`.
+-   Added `Text` component that allow a text to be truncate at the `end`, `start`, or `middle`.
 
 ### Changed
 
