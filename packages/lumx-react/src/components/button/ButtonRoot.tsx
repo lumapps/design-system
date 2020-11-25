@@ -39,7 +39,6 @@ interface BaseButtonProps extends GenericProps {
     theme?: Theme;
     /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
-
     /**
      * Use this property if you specified a URL in the `href` property and you want to customize the react component
      * for the link (can be used to inject react router Link).
@@ -102,6 +101,7 @@ const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
         linkAs,
         name,
         size,
+        target,
         theme,
         useCustomColors,
         variant,
@@ -133,15 +133,21 @@ const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
         { [`${CSS_PREFIX}-custom-colors`]: useCustomColors },
     );
 
-    if (!isEmpty(props.href) || linkAs) {
+    /**
+     * If the linkAs prop is used, we use the linkAs component instead of a <button>.
+     * If there is an href attribute, we display an <a> instead of a <button>.
+     *
+     * However, in any case, if the component is disabled, we returned a <button> since disabled is not compatible with <a>.
+     */
+    if ((linkAs || !isEmpty(props.href)) && !isDisabled) {
         return renderLink(
             {
                 linkAs,
-                ref: buttonRef as RefObject<HTMLAnchorElement>,
-                className: buttonClassName,
-                disabled: isDisabled,
-                href: !isDisabled ? href : undefined,
                 ...forwardedProps,
+                href,
+                target,
+                className: buttonClassName,
+                ref: buttonRef as RefObject<HTMLAnchorElement>,
             },
             children,
         );

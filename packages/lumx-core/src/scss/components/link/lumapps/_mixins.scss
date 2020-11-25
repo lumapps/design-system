@@ -1,4 +1,6 @@
 @mixin lumx-link-base() {
+    border: none;
+    background: none;
     cursor: pointer;
     outline: none;
     text-decoration: none;

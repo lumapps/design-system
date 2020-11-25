@@ -26,3 +26,9 @@ export const simpleButton = ({ theme }: any) => {
         </Button>
     );
 };
+
+export const withHref = () => <Button href="https://google.com">Button with redirection</Button>;
+
+export const disabled = () => <Button isDisabled>Disabled button</Button>;
+
+export const disabledWithHref = () => <Button href="https://google.com" isDisabled>Disabled button with redirection</Button>;
