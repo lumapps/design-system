@@ -20,7 +20,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
--   Upgrade to mdi v5.6.55 and handle backward compatibility.
 -   _[BREAKING]_ Renamed `url` prop to `link` for `LinkPreview` component.
 -   _[BREAKING]_ Renamed `onToggle` prop to `onChange` for `Switch` component.
 -   _[BREAKING]_ `avatar` prop from `UserBlock` component is now a string and corresponds to the avatar url. Any other avatar props should be passed to `avatarProps` prop.
