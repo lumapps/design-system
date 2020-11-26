@@ -49,6 +49,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   _[BREAKING]_ `activeStep` prop for `ProgressTracker` component has been removed and is now handled by `ProgressTrackerProvider` component.
 -   `ProgressTrackerStep` components are button instead of anchor for better a11y. Aria attributes have been added according to [WAI ARIA `tab` role](https://www.w3.org/TR/wai-aria-practices-1.1/examples/tabs/tabs-1/tabs.html) since stepper are similar to tabs in term of a11y.
 -   _[BREAKING]_ `onClick` prop for `ProgressTrackerStep` component is not used anymore. `ProgressTrackerProvider` component has an `onChange` prop instead. Therefore, a step is now clickable if it is not disabled.
+-   _[BREAKING]_ `DatePicker` and `DatePickerField` `value` prop can no longer be a `Moment` object. This will allow us to remove `moment` dep in the future without generating breaking change later. The `value` prop can no longer be a `string` to avoid handling incompatible values. `value` can only be a `Date` (or `undefined` for non selectable values).
 
 ### Removed
 
