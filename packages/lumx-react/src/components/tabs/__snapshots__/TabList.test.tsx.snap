@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TabList> Snapshots and structure should render correctly 1`] = `
+<div
+  className="lumx-tabs lumx-tabs--layout-fixed lumx-tabs--position-left lumx-tabs--theme-light"
+>
+  <div
+    aria-label="Tab list"
+    className="lumx-tabs__links"
+    role="tablist"
+  >
+    <Tab
+      key="0"
+      label="Tab 0"
+    />
+    <Tab
+      key="1"
+      label="Tab 1"
+    />
+  </div>
+</div>
+`;

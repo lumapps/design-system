@@ -19,6 +19,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Expose component default props in React `Component.defaultProps`
 -   A `Link` component without an `href` would result in a button looking like a link instead of an anchor.
 -   Added `typography` prop to `Link` component.
+-   Added `TabProvider` component wrapping the new `TabList` and `TabPanel` and handling state (controlled or uncontrolled).
+-   Added `TabPanel` component that wraps the content of a tab (previously wrapped in the `Tab` component). Implements the [WAI-ARIA `tabpanel` role](https://www.w3.org/TR/wai-aria-practices-1.1/examples/tabs/tabs-1/tabs.html#rps_label).
+-   Added `TabList` component that wraps `Tab` components. Implements the [WAI-ARIA `tablist` role](https://www.w3.org/TR/wai-aria-practices-1.1/examples/tabs/tabs-1/tabs.html#rps_label).
 
 ### Changed
 
@@ -36,6 +39,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   _[BREAKING]_ The prop `value` of `TextField` component can not be a `number` anymore. The user would have to cast the value on its side.
 -   _[BREAKING]_ Renamed `hideMinMaxlabel` prop to `hideMinMaxLabel` for `Slider` component.
 -   Default color of `Badge` is now `primary`.
+-   _[BREAKING]_ Removed `Tabs` component replaced by the `TabProvider` and `TabList` components.
+-   _[BREAKING]_ `Tab` component doesn't wrap the tab content anymore (use `TabPanel` for that). Implements the [WAI-ARIA `tab` role](https://www.w3.org/TR/wai-aria-practices-1.1/examples/tabs/tabs-1/tabs.html#rps_label).
 
 ### Removed
 

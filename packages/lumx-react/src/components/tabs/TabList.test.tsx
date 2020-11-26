@@ -1,21 +1,22 @@
-import React, { ReactElement } from 'react';
-
-import noop from 'lodash/noop';
-
-import { mount, shallow } from 'enzyme';
-import 'jest-enzyme';
-import { build, oneOf } from 'test-data-bot';
+import { Tab } from '@lumx/react';
 
 import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
-import { Tab } from '@lumx/react';
-import { CLASSNAME, Tabs, TabsLayout, TabsPosition, TabsProps } from './Tabs';
+import { mount, shallow } from 'enzyme';
+import 'jest-enzyme';
+import React, { ReactElement } from 'react';
+import { build, oneOf } from 'test-data-bot';
+import { CLASSNAME, TabList, TabListLayout, TabListPosition, TabListProps } from './TabList';
+import { setupTabProviderMocks } from './test.mocks';
+
+// Mock useTabProviderContext.
+jest.mock('./state', () => ({ useTabProviderContext: jest.fn() }));
 
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-type SetupProps = Partial<TabsProps>;
+type SetupProps = Partial<TabListProps>;
 
 /**
  * Defines what the `setup` function will return.
@@ -38,25 +39,25 @@ interface Setup extends CommonSetup {
  *                       component.
  */
 const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
-    const tabs = [<Tab>Tab 0</Tab>, <Tab>Tab 1</Tab>];
-    const props: TabsProps = {
+    const tabs = [<Tab key={0} label="Tab 0" />, <Tab key={1} label="Tab 1" />];
+    const props: TabListProps = {
         children: tabs,
-        onTabClick: noop,
+        'aria-label': 'Tab list',
         ...propsOverrides,
     };
-
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
 
     // noinspection RequiredAttributes
-    const wrapper: Wrapper = renderer(<Tabs {...props} />);
+    const wrapper: Wrapper = renderer(<TabList {...props} />);
 
-    return {
-        props,
-        wrapper,
-    };
+    return { props, wrapper };
 };
 
-describe(`<${Tabs.displayName}>`, () => {
+describe(`<${TabList.displayName}>`, () => {
+    beforeEach(() => {
+        setupTabProviderMocks();
+    });
+
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', () => {
         it('should render correctly', () => {
@@ -68,9 +69,6 @@ describe(`<${Tabs.displayName}>`, () => {
 
             expect(wrapper.childAt(0)).toExist();
             expect(wrapper.childAt(0)).toHaveClassName('lumx-tabs__links');
-
-            expect(wrapper.childAt(1)).toExist();
-            expect(wrapper.childAt(1)).toHaveClassName('lumx-tabs__panes');
         });
     });
 
@@ -78,8 +76,8 @@ describe(`<${Tabs.displayName}>`, () => {
     describe('Props', () => {
         it('should use the given props', () => {
             const modifiedPropsBuilder: () => SetupProps = build('props').fields!({
-                layout: TabsLayout.clustered,
-                position: oneOf(TabsPosition.center, TabsPosition.right),
+                layout: TabListLayout.clustered,
+                position: oneOf(TabListPosition.center, TabListPosition.right),
             });
 
             const modifiedProps: SetupProps = modifiedPropsBuilder();
@@ -92,38 +90,6 @@ describe(`<${Tabs.displayName}>`, () => {
                 );
             });
         });
-    });
-
-    // 3. Test events.
-    describe('Events', () => {
-        const onTabClick: jest.Mock = jest.fn();
-
-        beforeEach(() => {
-            onTabClick.mockClear();
-        });
-
-        it('should trigger `onTabClick` when a child tab is clicked', () => {
-            const { wrapper } = setup({ onTabClick }, false);
-            const firstTab = wrapper.find('Tab[index=1]');
-
-            firstTab.simulate('click');
-            expect(onTabClick).toHaveBeenCalledWith({ event: jasmine.any(Object), index: 1 });
-        });
-    });
-
-    // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', () => {
-        it('should fail when no `Tab` children is given', () => {
-            expect(() => {
-                // We know that children must be given to <Tabs>, but for the test, ignore it.
-                setup({ children: null });
-            }).toThrowErrorMatchingSnapshot();
-        });
-    });
-
-    // 5. Test state.
-    describe('State', () => {
-        // Nothing to do here.
     });
 
     // Common tests suite.

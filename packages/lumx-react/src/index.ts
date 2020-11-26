@@ -104,9 +104,13 @@ export { TableHeader, TableHeaderProps } from './components/table/TableHeader';
 
 export { TableRow, TableRowProps } from './components/table/TableRow';
 
-export { Tabs, TabsProps, TabsLayout, TabsPosition } from './components/tabs/Tabs';
-
 export { Tab, TabProps } from './components/tabs/Tab';
+
+export { TabList, TabListProps, TabListLayout, TabListPosition } from './components/tabs/TabList';
+
+export { TabPanel, TabPanelProps } from './components/tabs/TabPanel';
+
+export { TabProvider, TabProviderProps } from './components/tabs/TabProvider';
 
 export { TextField, TextFieldProps } from './components/text-field/TextField';
 
