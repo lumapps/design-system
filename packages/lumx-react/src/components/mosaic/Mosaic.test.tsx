@@ -129,7 +129,6 @@ describe(`<${Mosaic.displayName}>`, () => {
                 thumbnail.simulate('click');
             });
             expect(clickOnFirstThumbnail).toHaveBeenCalledTimes(1);
-            expect(clickOnFirstThumbnail).toHaveBeenCalledWith(0);
         });
     });
 

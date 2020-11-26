@@ -3,9 +3,8 @@ import React from 'react';
 
 export const App = ({ theme }: any) => (
     <ImageBlock
-        align={Alignment.center}
-        aspectRatio={AspectRatio.original}
         description="Lorem ipsum dolor sit amet, consectur adipiscing "
+        image="/demo-assets/portrait1.jpg"
         tags={
             <ChipGroup align={Alignment.center}>
                 <Chip size={Size.s} theme={theme}>
@@ -19,6 +18,9 @@ export const App = ({ theme }: any) => (
         }
         theme={theme}
         title="Lorem ipsum"
-        image="/demo-assets/portrait1.jpg"
+        thumbnailProps={{
+            align: Alignment.center,
+            aspectRatio: AspectRatio.original,
+        }}
     />
 );

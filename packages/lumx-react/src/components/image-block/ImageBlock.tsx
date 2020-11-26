@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import isObject from 'lodash/isObject';
 
-import { Alignment, AspectRatio, CrossOrigin, FocusPoint, Size, Theme, Thumbnail } from '@lumx/react';
+import { Alignment, AspectRatio, Size, Theme, Thumbnail } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
@@ -27,77 +27,29 @@ type ImageBlockSize = Size.xl | Size.xxl;
  * Defines the props of the component.
  */
 interface ImageBlockProps extends GenericProps {
-    /**
-     * The caption wrapper alignment.
-     * @see {@link ThumbnailProps#align}
-     */
-    align?: Alignment;
-    /**
-     * The aspect ratio the image will get.
-     * @see {@link ThumbnailProps#aspectRatio}
-     */
-    aspectRatio?: AspectRatio;
+    /** The action elements. */
+    actions?: ReactNode;
     /** The position of the caption. */
     captionPosition?: ImageBlockCaptionPosition;
     /** The style to apply to the caption section. */
     captionStyle?: CSSProperties;
-    /**
-     * Allows images that are loaded from foreign origins to be used as if they had been loaded from the current origin.
-     * @see {@link ThumbnailProps#crossOrigin}
-     */
-    crossOrigin?: CrossOrigin;
     /** The image description. Can be either a string, or sanitized html. */
     description?: string | { __html: string };
-    /**
-     * Whether the image has to fill its container's height.
-     * @see {@link ThumbnailProps#fillHeight}
-     */
-    fillHeight?: boolean;
-    /**
-     * The focal point coordinates.
-     * @see {@link ThumbnailProps#focusPoint}
-     */
-    focusPoint?: FocusPoint;
     /**
      * The url of the image we want to display.
      * @see {@link ThumbnailProps#image}
      */
     image: string;
-    /** The props to pass to the thumbnail, minus those already set by the ImageBlock props. */
-    thumbnailProps?: Omit<
-        ThumbnailProps,
-        | 'align'
-        | 'aspectRatio'
-        | 'crossOrigin'
-        | 'fillHeight'
-        | 'focusPoint'
-        | 'image'
-        | 'isCrossOriginEnabled'
-        | 'size'
-        | 'theme'
-        | 'onClick'
-    >;
-    /**
-     * Whether the cross origin attribute is enabled.
-     * @see {@link ThumbnailProps#isCrossOriginEnabled}
-     */
-    isCrossOriginEnabled?: boolean;
-    /**
-     * The size variant of the component.
-     * @see {@link ThumbnailProps#size}
-     */
+    /** The size variant of the component. */
     size?: ImageBlockSize;
     /** The tags elements. */
     tags?: HTMLElement | ReactNode;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
+    /** The props to pass to the thumbnail, minus those already set by the ImageBlock props. */
+    thumbnailProps?: Omit<ThumbnailProps, 'image' | 'size' | 'theme'>;
     /** The image title to display in the caption. */
     title?: string;
-    /**
-     * The function called on click.
-     * @see {@link ThumbnailProps#onClick}
-     */
-    onClick?(): void;
 }
 
 /**
@@ -114,26 +66,21 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: Partial<ImageBlockProps> = {
-    align: Alignment.left,
-    aspectRatio: AspectRatio.original,
     captionPosition: ImageBlockCaptionPosition.below,
     theme: Theme.light,
+    thumbnailProps: {
+        align: Alignment.left,
+        aspectRatio: AspectRatio.original,
+    },
 };
 
 const ImageBlock: React.FC<ImageBlockProps> = ({
     actions,
-    align,
-    aspectRatio,
     captionPosition,
     captionStyle,
     className,
-    crossOrigin,
     description,
-    fillHeight,
-    focusPoint,
     image,
-    isCrossOriginEnabled,
-    onClick,
     size,
     tags,
     theme,
@@ -147,31 +94,20 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
             className={classNames(
                 className,
                 handleBasicClasses({
-                    align,
-                    aspectRatio,
+                    align: thumbnailProps?.align,
+                    aspectRatio: thumbnailProps?.aspectRatio,
+                    fillHeight: thumbnailProps?.fillHeight,
                     captionPosition,
                     prefix: CLASSNAME,
                     size,
                     theme,
                 }),
-                {
-                    [`${CLASSNAME}--fill-height`]: fillHeight,
-                    [`${CLASSNAME}--format-crop`]: aspectRatio && aspectRatio !== AspectRatio.original,
-                    [`${CLASSNAME}--format-original`]: !aspectRatio || aspectRatio === AspectRatio.original,
-                },
             )}
         >
             <Thumbnail
                 {...thumbnailProps}
-                align={align}
-                aspectRatio={aspectRatio}
                 className={classNames(`${CLASSNAME}__image`, thumbnailProps?.className)}
-                crossOrigin={crossOrigin}
-                fillHeight={fillHeight}
-                focusPoint={focusPoint}
                 image={image}
-                isCrossOriginEnabled={isCrossOriginEnabled}
-                onClick={onClick}
                 size={size}
                 theme={theme}
             />

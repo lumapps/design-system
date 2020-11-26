@@ -9,22 +9,46 @@ export const App = ({ theme }: any) => {
     return (
         <Slideshow activeIndex={0} hasControls theme={theme} autoPlay groupBy={1} style={slideshowStyle}>
             <SlideshowItem>
-                <ImageBlock aspectRatio={AspectRatio.vertical} image="/demo-assets/landscape1.jpg" theme={theme} />
+                <ImageBlock
+                    thumbnailProps={{ aspectRatio: AspectRatio.vertical }}
+                    image="/demo-assets/landscape1.jpg"
+                    theme={theme}
+                />
             </SlideshowItem>
             <SlideshowItem>
-                <ImageBlock aspectRatio={AspectRatio.vertical} image="/demo-assets/landscape2.jpg" theme={theme} />
+                <ImageBlock
+                    thumbnailProps={{ aspectRatio: AspectRatio.vertical }}
+                    image="/demo-assets/landscape2.jpg"
+                    theme={theme}
+                />
             </SlideshowItem>
             <SlideshowItem>
-                <ImageBlock aspectRatio={AspectRatio.vertical} image="/demo-assets/landscape3.jpg" theme={theme} />
+                <ImageBlock
+                    thumbnailProps={{ aspectRatio: AspectRatio.vertical }}
+                    image="/demo-assets/landscape3.jpg"
+                    theme={theme}
+                />
             </SlideshowItem>
             <SlideshowItem>
-                <ImageBlock aspectRatio={AspectRatio.vertical} image="/demo-assets/portrait1.jpg" theme={theme} />
+                <ImageBlock
+                    thumbnailProps={{ aspectRatio: AspectRatio.vertical }}
+                    image="/demo-assets/portrait1.jpg"
+                    theme={theme}
+                />
             </SlideshowItem>
             <SlideshowItem>
-                <ImageBlock aspectRatio={AspectRatio.vertical} image="/demo-assets/portrait2.jpg" theme={theme} />
+                <ImageBlock
+                    thumbnailProps={{ aspectRatio: AspectRatio.vertical }}
+                    image="/demo-assets/portrait2.jpg"
+                    theme={theme}
+                />
             </SlideshowItem>
             <SlideshowItem>
-                <ImageBlock aspectRatio={AspectRatio.vertical} image="/demo-assets/portrait3.jpg" theme={theme} />
+                <ImageBlock
+                    thumbnailProps={{ aspectRatio: AspectRatio.vertical }}
+                    image="/demo-assets/portrait3.jpg"
+                    theme={theme}
+                />
             </SlideshowItem>
         </Slideshow>
     );

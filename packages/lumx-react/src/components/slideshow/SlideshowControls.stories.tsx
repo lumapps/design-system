@@ -60,7 +60,7 @@ export const ControllingSlideshow = ({ theme }: any) => {
             >
                 {items.map((item) => (
                     <SlideshowItem key={item}>
-                        <ImageBlock aspectRatio={AspectRatio.vertical} image={item} theme={theme} />
+                        <ImageBlock image={item} thumbnailProps={{ aspectRatio: AspectRatio.vertical }} theme={theme} />
                     </SlideshowItem>
                 ))}
             </Slideshow>

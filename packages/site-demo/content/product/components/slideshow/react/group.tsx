@@ -21,10 +21,10 @@ export const App = ({ theme }: any) => {
             {images.map((image) => (
                 <SlideshowItem key={image}>
                     <ImageBlock
-                        aspectRatio={AspectRatio.horizontal}
                         captionPosition={ImageBlockCaptionPosition.over}
                         image={image}
                         theme={theme}
+                        thumbnailProps={{ aspectRatio: AspectRatio.horizontal }}
                         {...imageBlockDemoProps}
                     />
                 </SlideshowItem>

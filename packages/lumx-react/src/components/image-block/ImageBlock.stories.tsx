@@ -59,17 +59,19 @@ export const defaultImageBlock = ({ theme }: any) => {
 
     return (
         <ImageBlock
-            align={align}
-            aspectRatio={aspectRatio}
-            crossOrigin={crossOrigin}
             description={description}
-            focusPoint={focusPoint}
             image={htmlDecode(imageUrl)}
-            isCrossOriginEnabled={isCrossOriginEnabled}
             size={size}
             tags={isDisplayedTags && tags}
             title={title}
             theme={theme}
+            thumbnailProps={{
+                align,
+                aspectRatio,
+                crossOrigin,
+                focusPoint,
+                isCrossOriginEnabled,
+            }}
         />
     );
 };
