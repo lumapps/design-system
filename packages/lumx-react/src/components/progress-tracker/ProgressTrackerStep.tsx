@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { FocusEventHandler, KeyboardEventHandler, useCallback } from 'react';
+import { useTabProviderContext } from '../tabs/state';
 
 import classNames from 'classnames';
 
-import isFunction from 'lodash/isFunction';
+import { Icon, InputHelper, InputLabel, Kind, Size } from '@lumx/react';
 
-import { Icon, InputHelper, InputLabel, Kind, Size, Theme } from '@lumx/react';
-
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
+import { COMPONENT_PREFIX, ENTER_KEY_CODE } from '@lumx/react/constants';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiRadioboxBlank, mdiRadioboxMarked } from '@lumx/icons';
 
@@ -15,18 +14,22 @@ import { mdiAlertCircle, mdiCheckCircle, mdiRadioboxBlank, mdiRadioboxMarked } f
  * Defines the props of the component.
  */
 interface ProgressTrackerStepProps extends GenericProps {
+    /** Children are not supported. */
+    children?: never;
     /** Whether the step should be in error state or not. */
     hasError?: boolean;
     /** The helper of the step. */
     helper?: string | null;
+    /** The step HTML id. */
+    id?: string;
     /** Whether the current step is active or not. */
     isActive?: boolean;
     /** Whether the current step is completed or not. */
     isComplete?: boolean;
+    /** Whether the component is disabled or not. */
+    isDisabled?: boolean;
     /** The label of the step. */
     label?: string | null;
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
-    theme?: Theme;
 }
 
 /**
@@ -42,29 +45,64 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: Partial<ProgressTrackerStepProps> = {
-    theme: Theme.light,
-};
+const DEFAULT_PROPS: Partial<ProgressTrackerStepProps> = {};
 
-const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = ({
-    className,
-    hasError,
-    helper,
-    isActive,
-    isComplete,
-    label,
-    theme,
-    ...props
-}) => {
-    const { onClick = null, ...forwardedProps } = props;
+/**
+ * ProgressTrackerStep component.
+ *
+ * Implements WAI-ARIA `tab` role {@see https://www.w3.org/TR/wai-aria-practices-1.1/examples/tabs/tabs-1/tabs.html#rps_label}
+ *
+ * @param  props Component props.
+ * @return React element.
+ */
+const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = (props) => {
+    const {
+        className,
+        disabled,
+        hasError,
+        helper,
+        id,
+        isActive: propIsActive,
+        isComplete,
+        isDisabled = disabled,
+        label,
+        onFocus,
+        onKeyPress,
+        tabIndex = -1,
+        ...forwardedProps
+    } = props;
+    const state = useTabProviderContext('tab', id);
+    const isActive = propIsActive || state?.isActive;
 
-    const isClickable: boolean = isFunction(onClick);
+    const changeToCurrentTab = useCallback(() => {
+        if (isDisabled) {
+            return;
+        }
+        state?.changeToTab();
+    }, [isDisabled, state?.changeToTab]);
 
-    /**
-     * Provides correct icon depending on step's current status.
-     *
-     * @return The correct svg path.
-     */
+    const handleFocus: FocusEventHandler = useCallback(
+        (event) => {
+            onFocus?.(event);
+            if (state?.shouldActivateOnFocus) {
+                changeToCurrentTab();
+            }
+        },
+        [onFocus, state?.shouldActivateOnFocus],
+    );
+
+    const handleKeyPress: KeyboardEventHandler = useCallback(
+        (event) => {
+            onKeyPress?.(event);
+            const keyCode = event.which ?? event.keyCode;
+            if (keyCode !== ENTER_KEY_CODE) {
+                return;
+            }
+            changeToCurrentTab();
+        },
+        [onKeyPress],
+    );
+
     const getIcon = (): string => {
         if (isComplete) {
             return mdiCheckCircle;
@@ -78,35 +116,38 @@ const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = ({
     };
 
     return (
-        <a
+        <button
             {...forwardedProps}
+            id={state?.tabId}
             className={classNames(
                 className,
                 handleBasicClasses({
-                    active: isActive,
-                    clickable: isClickable,
-                    complete: isComplete,
                     prefix: CLASSNAME,
-                    theme,
+                    hasError,
+                    isActive,
+                    isClickable: state && !isDisabled,
+                    isComplete,
                 }),
-                { [`${CLASSNAME}--has-error`]: hasError },
             )}
-            tabIndex={isClickable ? 0 : -1}
-            onClick={onClick}
-            onKeyDown={onEnterPressed(onClick)}
+            onClick={changeToCurrentTab}
+            onKeyPress={handleKeyPress}
+            onFocus={handleFocus}
+            role="tab"
+            tabIndex={isActive ? 0 : tabIndex}
+            aria-disabled={isDisabled}
+            aria-selected={isActive}
+            aria-controls={state?.tabPanelId}
         >
             <Icon className={`${CLASSNAME}__state`} icon={getIcon()} size={Size.s} />
 
-            <InputLabel theme={theme} className={`${CLASSNAME}__label`}>
-                {label}
-            </InputLabel>
+            <InputLabel className={`${CLASSNAME}__label`}>{label}</InputLabel>
 
             {helper && (
-                <InputHelper kind={hasError ? Kind.error : Kind.info} theme={theme} className={`${CLASSNAME}__helper`}>
+                <InputHelper kind={hasError ? Kind.error : Kind.info} className={`${CLASSNAME}__helper`}>
                     {helper}
                 </InputHelper>
             )}
-        </a>
+        </button>
     );
 };
 

@@ -1,1 +1,1 @@
-/home/gcornut/git/dup-design-system/packages/site-demo/content/product/components/badge/react/icon.tsx
+../../../../../site-demo/content/product/components/badge/react/icon.tsx

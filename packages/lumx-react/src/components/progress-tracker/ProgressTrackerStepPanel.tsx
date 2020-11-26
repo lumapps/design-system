@@ -8,37 +8,37 @@ import React from 'react';
 /**
  * Defines the props of the component.
  */
-interface TabPanelProps extends GenericProps {
-    /** The tab panel HTML id. */
+interface ProgressTrackerStepPanelProps extends GenericProps {
+    /** The step panel HTML id. */
     id?: string;
-    /** Whether the tab is active or not. */
+    /** Whether the step is active or not. */
     isActive?: boolean;
 }
 
 /**
  * The display name of the component.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}TabPanel`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}ProgressTrackerStepPanel`;
 
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME = `${CSS_PREFIX}-tab-panel`;
+const CLASSNAME = `${CSS_PREFIX}-step-panel`;
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: Partial<TabPanelProps> = {};
+const DEFAULT_PROPS: Partial<ProgressTrackerStepPanelProps> = {};
 
 /**
- * TabPanel component.
+ * ProgressTrackerStepPanel component.
  *
  * Implements WAI-ARIA `tabpanel` role {@see https://www.w3.org/TR/wai-aria-practices-1.1/examples/tabs/tabs-1/tabs.html#rps_label}
  *
  * @param  props Component props.
  * @return React element.
  */
-const TabPanel: React.FC<TabPanelProps> = (props) => {
+const ProgressTrackerStepPanel: React.FC<ProgressTrackerStepPanelProps> = (props) => {
     const { children, id, className, isActive: propIsActive, ...forwardedProps } = props;
 
     const state = useTabProviderContext('tabPanel', id);
@@ -57,7 +57,7 @@ const TabPanel: React.FC<TabPanelProps> = (props) => {
         </div>
     );
 };
-TabPanel.displayName = COMPONENT_NAME;
-TabPanel.defaultProps = DEFAULT_PROPS;
+ProgressTrackerStepPanel.displayName = COMPONENT_NAME;
+ProgressTrackerStepPanel.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, TabPanel, TabPanelProps };
+export { CLASSNAME, ProgressTrackerStepPanel, ProgressTrackerStepPanelProps };

@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProgressTrackerStepPanel> Snapshots and structure should render correctly 1`] = `
+<div
+  aria-labelledby="tab-1"
+  className="lumx-step-panel"
+  id="tab-panel-1"
+  role="tabpanel"
+  tabIndex={0}
+>
+  Tab panel content
+</div>
+`;
+
+exports[`<ProgressTrackerStepPanel> Snapshots and structure should render isActive state 1`] = `
+<div
+  aria-labelledby="tab-2"
+  className="lumx-step-panel lumx-step-panel--is-active"
+  id="tab-panel-2"
+  role="tabpanel"
+  tabIndex={0}
+>
+  Tab panel content
+</div>
+`;

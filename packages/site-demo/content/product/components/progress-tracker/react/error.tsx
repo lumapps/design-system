@@ -3,7 +3,7 @@ import React from 'react';
 
 export const App = () => (
     <>
-        <ProgressTrackerStep hasError label="Step" helper="Error message" />
-        <ProgressTrackerStep isActive hasError label="Step" helper="Error message" />
+        <ProgressTrackerStep label="Step" helper="Error message" hasError />
+        <ProgressTrackerStep label="Active step" helper="Error message" isActive hasError />
     </>
 );

@@ -22,6 +22,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Added `TabProvider` component wrapping the new `TabList` and `TabPanel` and handling state (controlled or uncontrolled).
 -   Added `TabPanel` component that wraps the content of a tab (previously wrapped in the `Tab` component). Implements the [WAI-ARIA `tabpanel` role](https://www.w3.org/TR/wai-aria-practices-1.1/examples/tabs/tabs-1/tabs.html#rps_label).
 -   Added `TabList` component that wraps `Tab` components. Implements the [WAI-ARIA `tablist` role](https://www.w3.org/TR/wai-aria-practices-1.1/examples/tabs/tabs-1/tabs.html#rps_label).
+-   Added `ProgressTrackerProvider` component wrapping the new `ProgressTracker` and `ProgressTrackerStepPanel` and handling state (controlled or uncontrolled).
+-   Added `ProgressTrackerStepPanel` component that wraps the content of a step. Implements the [WAI-ARIA `tabpanel` role](https://www.w3.org/TR/wai-aria-practices-1.1/examples/tabs/tabs-1/tabs.html#rps_label).
+-   Added `isDisabled` prop to `ProgressTrackerStep` component.
 
 ### Changed
 
@@ -42,6 +45,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   _[BREAKING]_ Removed `Tabs` component replaced by the `TabProvider` and `TabList` components.
 -   _[BREAKING]_ `Tab` component doesn't wrap the tab content anymore (use `TabPanel` for that). Implements the [WAI-ARIA `tab` role](https://www.w3.org/TR/wai-aria-practices-1.1/examples/tabs/tabs-1/tabs.html#rps_label).
 -   _[BREAKING]_ `onClick` prop for `Mosaic.thumbnail` prop is no longer automatically passing the index.
+-   `ProgressTracker` component now implements the [WAI-ARIA `tablist` role](https://www.w3.org/TR/wai-aria-practices-1.1/examples/tabs/tabs-1/tabs.html#rps_label).
+-   _[BREAKING]_ `activeStep` prop for `ProgressTracker` component has been removed and is now handled by `ProgressTrackerProvider` component.
+-   `ProgressTrackerStep` components are button instead of anchor for better a11y. Aria attributes have been added according to [WAI ARIA `tab` role](https://www.w3.org/TR/wai-aria-practices-1.1/examples/tabs/tabs-1/tabs.html) since stepper are similar to tabs in term of a11y.
+-   _[BREAKING]_ `onClick` prop for `ProgressTrackerStep` component is not used anymore. `ProgressTrackerProvider` component has an `onChange` prop instead. Therefore, a step is now clickable if it is not disabled.
 
 ### Removed
 

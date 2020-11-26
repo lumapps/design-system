@@ -42,7 +42,7 @@ function generateDemoStories() {
 
         const storyFiles = demoFiles.map((demoFile) => {
             const storyFile = path.join(componentDemoDir, path.basename(demoFile));
-            fs.symlinkSync(demoFile, storyFile);
+            fs.symlinkSync(path.relative(path.dirname(storyFile), demoFile), storyFile);
             return storyFile;
         });
 

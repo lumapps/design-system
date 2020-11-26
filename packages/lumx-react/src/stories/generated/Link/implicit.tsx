@@ -1,1 +1,1 @@
-/home/gcornut/git/dup-design-system/packages/site-demo/content/product/components/link/react/implicit.tsx
+../../../../../site-demo/content/product/components/link/react/implicit.tsx

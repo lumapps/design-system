@@ -1,1 +1,1 @@
-/home/gcornut/git/dup-design-system/packages/site-demo/content/product/components/slider/react/without-min-max.tsx
+../../../../../site-demo/content/product/components/slider/react/without-min-max.tsx
