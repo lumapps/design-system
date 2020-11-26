@@ -8,15 +8,13 @@ import { GenericProps } from '@lumx/react/utils';
 import { getRootClassName } from '../../utils/getRootClassName';
 
 import { DatePickerControlled } from './DatePickerControlled';
-import DatePickerValueProp from './DatePickerValueProp';
 
 /**
  * Defines the props of the component.
  */
-
 interface DatePickerProps extends GenericProps {
     /** The month to display by default. */
-    defaultMonth?: DatePickerValueProp;
+    defaultMonth?: Date;
     /** The locale (language or region) to use. */
     locale: string;
     /** The date after which no date can be selected. */
@@ -26,9 +24,9 @@ interface DatePickerProps extends GenericProps {
     /** The reference passed to the <button> element if it corresponds to the current date or the selected date. */
     todayOrSelectedDateRef?: RefObject<HTMLButtonElement>;
     /** The current value of the text field. */
-    value: DatePickerValueProp;
+    value: Date | undefined;
     /** The function called on change. */
-    onChange(value?: moment.Moment): void;
+    onChange(value: Date | undefined): void;
 }
 
 /**
@@ -65,7 +63,8 @@ const DatePicker: React.FC<DatePickerProps> = ({ defaultMonth, locale, value, ..
 
     const selectedMonth = moment(today)
         .locale(locale)
-        .add(monthOffset, 'months');
+        .add(monthOffset, 'months')
+        .toDate();
 
     return (
         <DatePickerControlled

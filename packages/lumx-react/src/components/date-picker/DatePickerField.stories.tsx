@@ -1,13 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import moment from 'moment';
-
-import { DatePickerField, DatePickerProps } from '@lumx/react';
+import { DatePickerField } from '@lumx/react';
 
 export default { title: 'LumX components/date-picker/DatePickerField' };
 
 export const simple = ({ theme }: any) => {
-    const [value, setValue] = React.useState<DatePickerProps['value']>();
+    const [value, setValue] = useState<Date | undefined>();
 
     return (
         <DatePickerField
@@ -22,7 +20,7 @@ export const simple = ({ theme }: any) => {
 };
 
 export const withDefaultValue = ({ theme }: any) => {
-    const [value, setValue] = React.useState<DatePickerProps['value']>(moment().add(20, 'days'));
+    const [value, setValue] = useState<Date | undefined>(new Date('2020-05-18'));
 
     return (
         <DatePickerField
@@ -37,7 +35,7 @@ export const withDefaultValue = ({ theme }: any) => {
 };
 
 export const withErrorAndHelper = ({ theme }: any) => {
-    const [value, setValue] = React.useState<DatePickerProps['value']>();
+    const [value, setValue] = useState<Date | undefined>(new Date('2020-05-18'));
 
     return (
         <DatePickerField
@@ -54,7 +52,7 @@ export const withErrorAndHelper = ({ theme }: any) => {
 };
 
 export const customMonth = ({ theme }: any) => {
-    const [value, setValue] = React.useState<DatePickerProps['value']>();
+    const [value, setValue] = useState<Date | undefined>();
 
     return (
         <DatePickerField
@@ -64,58 +62,13 @@ export const customMonth = ({ theme }: any) => {
             theme={theme}
             onChange={setValue}
             value={value}
-            defaultMonth={moment('2019-07-14')}
-        />
-    );
-};
-
-export const withDateObject = ({ theme }: any) => {
-    const [value, setValue] = React.useState<DatePickerProps['value']>(new Date('2020-05-18'));
-
-    return (
-        <DatePickerField
-            locale="fr"
-            label="Start date"
-            placeholder="Pick a date"
-            theme={theme}
-            onChange={setValue}
-            value={value}
-        />
-    );
-};
-
-export const withCompatibleString = ({ theme }: any) => {
-    const [value, setValue] = React.useState<DatePickerProps['value']>('2020-05-22');
-
-    return (
-        <DatePickerField
-            locale="fr"
-            label="Start date"
-            placeholder="Pick a date"
-            theme={theme}
-            onChange={setValue}
-            value={value}
-        />
-    );
-};
-
-export const withIncompatibleString = ({ theme }: any) => {
-    const [value, setValue] = React.useState<DatePickerProps['value']>('not a real date');
-
-    return (
-        <DatePickerField
-            locale="fr"
-            label="Start date"
-            placeholder="Pick a date"
-            theme={theme}
-            onChange={setValue}
-            value={value}
+            defaultMonth={new Date('2019-07-14')}
         />
     );
 };
 
 export const with28FebruarySelected = ({ theme }: any) => {
-    const [value, setValue] = React.useState<DatePickerProps['value']>(new Date('2019-02-28'));
+    const [value, setValue] = useState<Date | undefined>(new Date('2019-02-28'));
 
     return (
         <DatePickerField

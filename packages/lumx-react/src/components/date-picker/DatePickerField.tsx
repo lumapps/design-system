@@ -7,7 +7,6 @@ import React, { SyntheticEvent, useCallback, useRef, useState } from 'react';
 
 import { ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
 import { CLASSNAME, DatePicker } from './DatePicker';
-import DatePickerValueProp from './DatePickerValueProp';
 
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { GenericProps } from '@lumx/react/utils';
@@ -17,7 +16,7 @@ import { GenericProps } from '@lumx/react/utils';
  */
 interface DatePickerFieldProps extends GenericProps {
     /** The month to display by default. */
-    defaultMonth?: DatePickerValueProp;
+    defaultMonth?: Date;
     /** Whether the component is disabled or not. */
     isDisabled?: boolean;
     /** The locale (language or region) to use. */
@@ -29,9 +28,9 @@ interface DatePickerFieldProps extends GenericProps {
     /** The native input name property. */
     name?: string;
     /** The current value of the text field. */
-    value: DatePickerValueProp;
+    value: Date | undefined;
     /** The function called on change. */
-    onChange(value?: moment.Moment, name?: string, event?: SyntheticEvent): void;
+    onChange(value: Date | undefined, name?: string, event?: SyntheticEvent): void;
 }
 
 /**
@@ -81,16 +80,11 @@ const DatePickerField = ({
         }
     };
 
-    const onDatePickerChange = (newDate?: moment.Moment) => {
+    const onDatePickerChange = (newDate?: Date) => {
         onChange(newDate, name);
         onClose();
     };
 
-    const castedValue = value && moment(value).isValid() ? moment(value) : undefined;
-    const castedDefaultMonth = defaultMonth && moment(defaultMonth).isValid() ? moment(defaultMonth) : undefined;
-    if ((value && !moment(value).isValid()) || (defaultMonth && !moment(defaultMonth).isValid())) {
-        console.warn(`[@lumx/react/DatePickerField] Invalid date provided '${value}'`);
-    }
     return (
         <>
             <TextField
@@ -98,7 +92,13 @@ const DatePickerField = ({
                 name={name}
                 forceFocusStyle={isOpen}
                 textFieldRef={anchorRef}
-                value={castedValue ? castedValue.locale(locale).format('LL') : ''}
+                value={
+                    value
+                        ? moment(value)
+                              .locale(locale)
+                              .format('LL')
+                        : ''
+                }
                 onClick={toggleSimpleMenu}
                 onChange={onTextFieldChange}
                 onKeyPress={handleKeyboardNav}
@@ -119,10 +119,10 @@ const DatePickerField = ({
                             locale={locale}
                             maxDate={maxDate}
                             minDate={minDate}
-                            value={castedValue}
+                            value={value}
                             onChange={onDatePickerChange}
                             todayOrSelectedDateRef={todayOrSelectedDateRef}
-                            defaultMonth={castedDefaultMonth}
+                            defaultMonth={defaultMonth}
                         />
                     </div>
                 </Popover>

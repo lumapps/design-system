@@ -15,10 +15,9 @@ import { CLASSNAME, DatePickerProps } from './DatePicker';
 /**
  * Defines the props of the component.
  */
-
 type DatePickerControlledProps = DatePickerProps & {
     /** The selected month to display. */
-    selectedMonth: moment.Moment;
+    selectedMonth: Date;
     /** The function called when switching to previous month. */
     onPrevMonthChange(): void;
     /** The function called when switching to next month. */
@@ -42,7 +41,7 @@ const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
     value,
 }) => {
     const days = React.useMemo(() => {
-        return getAnnotatedMonthCalendar(locale, minDate, maxDate, selectedMonth);
+        return getAnnotatedMonthCalendar(locale, minDate, maxDate, moment(selectedMonth));
     }, [locale, minDate, maxDate, selectedMonth]);
 
     const weekDays = React.useMemo(() => {
@@ -97,7 +96,7 @@ const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
                                         })}
                                         disabled={!annotatedDate.isClickable}
                                         // tslint:disable-next-line: jsx-no-lambda
-                                        onClick={() => onChange(annotatedDate.date)}
+                                        onClick={() => onChange(moment(annotatedDate.date).toDate())}
                                     >
                                         <span>{annotatedDate.date.format('DD')}</span>
                                     </button>
