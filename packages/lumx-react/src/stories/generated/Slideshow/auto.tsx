@@ -1,1 +1,1 @@
-/home/gcornut/git/dup-design-system/packages/site-demo/content/product/components/slideshow/react/auto.tsx
+../../../../../site-demo/content/product/components/slideshow/react/auto.tsx

@@ -1,1 +1,1 @@
-/home/gcornut/git/dup-design-system/packages/site-demo/content/product/components/chip/react/dismissible.tsx
+../../../../../site-demo/content/product/components/chip/react/dismissible.tsx

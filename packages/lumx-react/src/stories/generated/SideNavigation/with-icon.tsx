@@ -1,1 +1,1 @@
-/home/gcornut/git/dup-design-system/packages/site-demo/content/product/components/side-navigation/react/with-icon.tsx
+../../../../../site-demo/content/product/components/side-navigation/react/with-icon.tsx

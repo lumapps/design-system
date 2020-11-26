@@ -1,1 +1,1 @@
-/home/gcornut/git/dup-design-system/packages/site-demo/content/product/components/button/react/emphasis-low.tsx
+../../../../../site-demo/content/product/components/button/react/emphasis-low.tsx

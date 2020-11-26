@@ -1,1 +1,1 @@
-/home/gcornut/git/dup-design-system/packages/site-demo/content/product/components/progress-tracker/react/default.tsx
+../../../../../site-demo/content/product/components/progress-tracker/react/default.tsx
