@@ -1,62 +1,27 @@
 import { mdiStar } from '@lumx/icons';
 import { Badge, ColorPalette, Icon, List, ListItem, Size } from '@lumx/react';
+import { AVATAR_IMAGES, avatarImageKnob } from '@lumx/react/stories/knobs';
 import React from 'react';
 import { UserBlock } from './UserBlock';
 
 export default { title: 'LumX components/user-block/UserBlock' };
 
-export const s = () => {
+export const Sizes = () => {
     // tslint:disable-next-line:no-console
     const logAction = (action: string) => () => console.log(action);
-    return (
-        <div className="demo-grid">
+    return [Size.s, Size.m, Size.l].map((size: any) => (
+        <div className="demo-grid" key={size}>
             <UserBlock
                 name="Emmitt O. Lum"
                 fields={['Creative developer', 'Denpasar']}
-                avatar="http://i.pravatar.cc/40"
-                size={Size.s}
+                avatar={avatarImageKnob()}
+                size={size}
                 onMouseEnter={logAction('Mouse entered')}
                 onMouseLeave={logAction('Mouse left')}
                 onClick={logAction('UserBlock clicked')}
             />
         </div>
-    );
-};
-
-export const m = () => {
-    // tslint:disable-next-line:no-console
-    const logAction = (action: string) => () => console.log(action);
-    return (
-        <div className="demo-grid">
-            <UserBlock
-                name="Emmitt O. Lum"
-                fields={['Creative developer', 'Denpasar']}
-                avatar="http://i.pravatar.cc/72"
-                size={Size.m}
-                onMouseEnter={logAction('Mouse entered')}
-                onMouseLeave={logAction('Mouse left')}
-                onClick={logAction('UserBlock clicked')}
-            />
-        </div>
-    );
-};
-
-export const l = () => {
-    // tslint:disable-next-line:no-console
-    const logAction = (action: string) => () => console.log(action);
-    return (
-        <div className="demo-grid">
-            <UserBlock
-                name="Emmitt O. Lum"
-                fields={['Creative developer', 'Denpasar']}
-                avatar="http://i.pravatar.cc/128"
-                size={Size.l}
-                onMouseEnter={logAction('Mouse entered')}
-                onMouseLeave={logAction('Mouse left')}
-                onClick={logAction('UserBlock clicked')}
-            />
-        </div>
-    );
+    ));
 };
 
 export const withBadge = () => {
@@ -67,7 +32,7 @@ export const withBadge = () => {
             <UserBlock
                 name="Emmitt O. Lum"
                 fields={['Creative developer', 'Denpasar']}
-                avatar="http://i.pravatar.cc/72"
+                avatar={avatarImageKnob()}
                 avatarProps={{
                     badge: (
                         <Badge color={ColorPalette.blue}>
@@ -94,7 +59,7 @@ export const list = () => {
                     <UserBlock
                         name="Emmitt O. Lum"
                         fields={['Creative developer', 'Denpasar']}
-                        avatar="http://i.pravatar.cc/72"
+                        avatar={avatarImageKnob('Avatar 1', AVATAR_IMAGES.avatar1)}
                         avatarProps={{
                             badge: (
                                 <Badge color={ColorPalette.blue}>
@@ -112,7 +77,7 @@ export const list = () => {
                     <UserBlock
                         name="Emmitt O. Lum"
                         fields={['Creative developer', 'Denpasar']}
-                        avatar="http://i.pravatar.cc/72"
+                        avatar={avatarImageKnob('Avatar 2', AVATAR_IMAGES.avatar2)}
                         avatarProps={{
                             badge: (
                                 <Badge color={ColorPalette.blue}>
@@ -130,7 +95,7 @@ export const list = () => {
                     <UserBlock
                         name="Emmitt O. Lum"
                         fields={['Creative developer', 'Denpasar']}
-                        avatar="http://i.pravatar.cc/72"
+                        avatar={avatarImageKnob('Avatar 3', AVATAR_IMAGES.avatar3)}
                         avatarProps={{
                             badge: (
                                 <Badge color={ColorPalette.blue}>

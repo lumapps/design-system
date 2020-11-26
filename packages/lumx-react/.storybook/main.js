@@ -1,3 +1,8 @@
+const generateDemoStories = require('./generate-demo-stories');
+
+// Generate storybook stories from demo site demos.
+generateDemoStories();
+
 module.exports = {
     stories: ['../src/**/*.stories.tsx'],
     addons: [

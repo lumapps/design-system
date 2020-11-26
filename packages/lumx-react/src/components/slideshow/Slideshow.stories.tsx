@@ -1,95 +1,39 @@
-import { AspectRatio, ImageBlock, ImageBlockCaptionPosition, Slideshow, SlideshowItem } from '@lumx/react';
+import { AspectRatio, ImageBlock, Slideshow, SlideshowItem } from '@lumx/react';
+import { IMAGES, imageKnob } from '@lumx/react/stories/knobs';
+import { boolean, number } from '@storybook/addon-knobs';
 import React from 'react';
 
 export default { title: 'LumX components/slideshow/Slideshow' };
 
 export const Simple = ({ theme }: any) => {
-    const slideshowStyle = {
-        width: '50%',
-    };
-
+    const images = [
+        imageKnob('Image 1', IMAGES.landscape1),
+        imageKnob('Image 2', IMAGES.landscape2),
+        imageKnob('Image 3', IMAGES.landscape3),
+        imageKnob('Image 5', IMAGES.portrait1),
+        imageKnob('Image 6', IMAGES.portrait2),
+        imageKnob('Image 7', IMAGES.portrait3),
+    ];
+    const activeIndex = number('Active index', 0);
+    const groupBy = number('Group by', 1);
+    const hasControls = boolean('Has controls', true);
+    const autoPlay = boolean('Autoplay', false);
+    const interval = number('Autoplay interval (in milliseconds)', 1000);
     return (
-        <Slideshow activeIndex={0} hasControls theme={theme} groupBy={1} style={slideshowStyle}>
-            <SlideshowItem>
-                <ImageBlock
-                    aspectRatio={AspectRatio.horizontal}
-                    captionPosition={ImageBlockCaptionPosition.over}
-                    image="https://picsum.photos/640/480/?image=31"
-                    theme={theme}
-                />
-            </SlideshowItem>
-
-            <SlideshowItem>
-                <ImageBlock
-                    aspectRatio={AspectRatio.horizontal}
-                    captionPosition={ImageBlockCaptionPosition.over}
-                    image="https://picsum.photos/640/480/?image=1"
-                    theme={theme}
-                />
-            </SlideshowItem>
-
-            <SlideshowItem>
-                <ImageBlock
-                    aspectRatio={AspectRatio.horizontal}
-                    captionPosition={ImageBlockCaptionPosition.over}
-                    image="https://picsum.photos/640/480/?image=2"
-                    theme={theme}
-                />
-            </SlideshowItem>
-
-            <SlideshowItem>
-                <ImageBlock
-                    aspectRatio={AspectRatio.horizontal}
-                    captionPosition={ImageBlockCaptionPosition.over}
-                    image="https://picsum.photos/640/480/?image=8"
-                    theme={theme}
-                />
-            </SlideshowItem>
-
-            <SlideshowItem>
-                <ImageBlock
-                    aspectRatio={AspectRatio.horizontal}
-                    captionPosition={ImageBlockCaptionPosition.over}
-                    image="https://picsum.photos/640/480/?image=3"
-                    theme={theme}
-                />
-            </SlideshowItem>
-
-            <SlideshowItem>
-                <ImageBlock
-                    aspectRatio={AspectRatio.horizontal}
-                    captionPosition={ImageBlockCaptionPosition.over}
-                    image="https://picsum.photos/640/480/?image=4"
-                    theme={theme}
-                />
-            </SlideshowItem>
-
-            <SlideshowItem>
-                <ImageBlock
-                    aspectRatio={AspectRatio.horizontal}
-                    captionPosition={ImageBlockCaptionPosition.over}
-                    image="https://picsum.photos/640/480/?image=5"
-                    theme={theme}
-                />
-            </SlideshowItem>
-
-            <SlideshowItem>
-                <ImageBlock
-                    aspectRatio={AspectRatio.horizontal}
-                    captionPosition={ImageBlockCaptionPosition.over}
-                    image="https://picsum.photos/640/480/?image=36"
-                    theme={theme}
-                />
-            </SlideshowItem>
-
-            <SlideshowItem>
-                <ImageBlock
-                    aspectRatio={AspectRatio.horizontal}
-                    captionPosition={ImageBlockCaptionPosition.over}
-                    image="https://picsum.photos/640/480/?image=7"
-                    theme={theme}
-                />
-            </SlideshowItem>
+        <Slideshow
+            activeIndex={activeIndex}
+            autoPlay={autoPlay}
+            interval={interval}
+            hasControls={hasControls}
+            theme={theme}
+            groupBy={groupBy}
+            style={{ width: '50%' }}
+        >
+            {images.map((image, index) => (
+                <SlideshowItem key={`${image}-${index}`}>
+                    <ImageBlock aspectRatio={AspectRatio.horizontal} image={image} theme={theme} />
+                </SlideshowItem>
+            ))}
         </Slideshow>
     );
 };

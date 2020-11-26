@@ -1,3 +1,4 @@
+import { IMAGES, imageKnob } from '@lumx/react/stories/knobs';
 import React from 'react';
 
 import { AspectRatio, ImageBlock, Slideshow, SlideshowControls, SlideshowItem } from '@lumx/react';
@@ -29,15 +30,12 @@ export const Simple = () => {
 export const ControllingSlideshow = ({ theme }: any) => {
     const parentRef = React.useRef(null);
     const items = [
-        'https://picsum.photos/480/400/?image=1',
-        'https://picsum.photos/480/400/?image=2',
-        'https://picsum.photos/480/400/?image=3',
-        'https://picsum.photos/480/400/?image=4',
-        'https://picsum.photos/480/400/?image=5',
-        'https://picsum.photos/480/400/?image=6',
-        'https://picsum.photos/480/400/?image=7',
-        'https://picsum.photos/480/400/?image=8',
-        'https://picsum.photos/480/400/?image=9',
+        imageKnob('Image 1', IMAGES.landscape1),
+        imageKnob('Image 2', IMAGES.landscape2),
+        imageKnob('Image 3', IMAGES.landscape3),
+        imageKnob('Image 5', IMAGES.portrait1),
+        imageKnob('Image 6', IMAGES.portrait2),
+        imageKnob('Image 7', IMAGES.portrait3),
     ];
     const [activeIndex, setActiveIndex] = React.useState(0);
     const maxIndex = items.length - 1;

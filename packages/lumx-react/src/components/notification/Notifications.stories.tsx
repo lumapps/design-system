@@ -4,7 +4,13 @@ import { Button, Notification, NotificationType } from '@lumx/react';
 
 import noop from 'lodash/noop';
 
-export default { title: 'LumX components/notification/Notification' };
+export default {
+    title: 'LumX components/notification/Notification',
+    parameters: {
+        // Notifies Chromatic to pause the animations when they finish for the specific story.
+        chromatic: { pauseAnimationAtEnd: true },
+    },
+};
 
 const properties = {
     error: {

@@ -1,3 +1,4 @@
+import { LANDSCAPE_IMAGES, landscapeImageKnob } from '@lumx/react/stories/knobs';
 import React from 'react';
 
 import { Alignment, AspectRatio, Chip, ChipGroup, CrossOrigin, ImageBlock, Size } from '@lumx/react';
@@ -40,11 +41,7 @@ export const defaultImageBlock = ({ theme }: any) => {
             </Chip>
         </ChipGroup>
     );
-    const imageUrl = text(
-        'Url image',
-        'https://i.picsum.photos/id/237/536/354.jpg?hmac=i0yVXW1ORpyCZpQ-CknuyV-jbtU7_x9EBQVhvT5aRr0',
-        groupId,
-    );
+    const imageUrl = landscapeImageKnob('Url image', LANDSCAPE_IMAGES.landscape1, groupId);
     const focusPoint = {
         x: number('Focus X', 1, numberKnobOptions, groupId),
         y: number('Focus Y', 0, numberKnobOptions, groupId),

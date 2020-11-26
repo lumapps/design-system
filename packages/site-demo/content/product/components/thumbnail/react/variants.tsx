@@ -3,7 +3,7 @@ import React from 'react';
 
 export const App = () => (
     <>
-        <Thumbnail image="https://picsum.photos/150" size={Size.xl} variant={ThumbnailVariant.squared} />
-        <Thumbnail image="https://picsum.photos/150" size={Size.xl} variant={ThumbnailVariant.rounded} />
+        <Thumbnail image="/demo-assets/square1.jpg" size={Size.xl} variant={ThumbnailVariant.squared} />
+        <Thumbnail image="/demo-assets/square1.jpg" size={Size.xl} variant={ThumbnailVariant.rounded} />
     </>
 );

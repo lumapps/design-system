@@ -26,14 +26,14 @@ export const App = () => (
         <ListItem before={<Icon icon={mdiSend} size={Size.xs} />}>Single-line item</ListItem>
 
         <ListItem
-            before={<Thumbnail variant={ThumbnailVariant.rounded} image="https://picsum.photos/72" size={Size.m} />}
+            before={<Thumbnail variant={ThumbnailVariant.rounded} image="/demo-assets/square1.jpg" size={Size.m} />}
             after={<IconButton emphasis={Emphasis.low} icon={mdiDotsHorizontal} />}
         >
             Single-line item
         </ListItem>
 
         <ListItem
-            before={<Avatar image="../avatar/assets/persona.png" size={Size.m} />}
+            before={<Avatar image="/demo-assets/persona.png" size={Size.m} />}
             after={<Button emphasis={Emphasis.low}>Button</Button>}
         >
             Single-line item

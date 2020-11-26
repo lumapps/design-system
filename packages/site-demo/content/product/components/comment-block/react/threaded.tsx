@@ -16,7 +16,7 @@ export const App = ({ theme }: any) => (
             </Button>,
         ]}
         theme={theme}
-        avatar="../avatar/assets/persona.png"
+        avatar="/demo-assets/persona.png"
         date="4 hours ago"
         name="Emmitt O. Lum"
         text="All the rumors have finally died down and many skeptics have tightened their lips, the iPod does support video format now on its fifth generation."
@@ -28,7 +28,7 @@ export const App = ({ theme }: any) => (
                     24 likes
                 </Button>
             }
-            avatar="../avatar/assets/persona.png"
+            avatar="/demo-assets/persona.png"
             date="3 hours ago"
             name="Jackson Ray"
             theme={theme}
@@ -41,7 +41,7 @@ export const App = ({ theme }: any) => (
                     16 likes
                 </Button>
             }
-            avatar="../avatar/assets/persona.png"
+            avatar="/demo-assets/persona.png"
             date="2 hours ago"
             name="Hettie Powell"
             theme={theme}

@@ -77,10 +77,10 @@ describe(`<${Mosaic.displayName}>`, () => {
             const { thumbnails } = setup({
                 theme: expectedTheme,
                 thumbnails: [
-                    { image: 'https://picsum.photos/200' },
-                    { image: 'https://picsum.photos/210' },
-                    { image: 'https://picsum.photos/220' },
-                    { image: 'https://picsum.photos/230' },
+                    { image: 'image/file/path/0' },
+                    { image: 'image/file/path/1' },
+                    { image: 'image/file/path/2' },
+                    { image: 'image/file/path/3' },
                 ],
             });
             thumbnails.forEach((thumbnail: Wrapper) => {
@@ -94,10 +94,10 @@ describe(`<${Mosaic.displayName}>`, () => {
             const { thumbnails } = setup({
                 theme: expectedTheme,
                 thumbnails: [
-                    { image: 'https://picsum.photos/200' },
-                    { image: 'https://picsum.photos/210', onClick },
-                    { image: 'https://picsum.photos/220' },
-                    { image: 'https://picsum.photos/230', onClick },
+                    { image: 'image/file/path/0' },
+                    { image: 'image/file/path/1', onClick },
+                    { image: 'image/file/path/2' },
+                    { image: 'image/file/path/3', onClick },
                 ],
             });
             thumbnails.forEach((thumbnail: Wrapper, index: number) => {
@@ -118,11 +118,11 @@ describe(`<${Mosaic.displayName}>`, () => {
                 thumbnails: [
                     {
                         onClick: clickOnFirstThumbnail,
-                        image: 'https://picsum.photos/200',
+                        image: 'image/file/path/0',
                     },
-                    { image: 'https://picsum.photos/210' },
-                    { image: 'https://picsum.photos/220' },
-                    { image: 'https://picsum.photos/230' },
+                    { image: 'image/file/path/1' },
+                    { image: 'image/file/path/2' },
+                    { image: 'image/file/path/3' },
                 ],
             });
             thumbnails.forEach((thumbnail: Wrapper) => {

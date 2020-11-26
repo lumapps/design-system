@@ -31,7 +31,7 @@ interface Setup extends CommonSetup {
  */
 const setup = ({ ...propsOverrides }: Partial<AvatarProps> = {}, shallowRendering: boolean = true): Setup => {
     const props: AvatarProps = {
-        image: 'http://i.pravatar.cc/40',
+        image: 'path/to/avatar/image.png',
         ...propsOverrides,
     };
 

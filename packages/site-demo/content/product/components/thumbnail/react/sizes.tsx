@@ -3,14 +3,14 @@ import React from 'react';
 
 export const App = () => (
     <>
-        <Thumbnail image="https://picsum.photos/28" size={Size.xxs} />
-        <Thumbnail image="https://picsum.photos/40" size={Size.xs} />
-        <Thumbnail image="https://picsum.photos/48" size={Size.s} />
-        <Thumbnail image="https://picsum.photos/72" size={Size.m} />
-        <Thumbnail image="https://picsum.photos/128" size={Size.l} />
-        <Thumbnail image="https://picsum.photos/256" size={Size.xl} />
+        <Thumbnail image="/demo-assets/square2.jpg" size={Size.xxs} />
+        <Thumbnail image="/demo-assets/square2.jpg" size={Size.xs} />
+        <Thumbnail image="/demo-assets/square2.jpg" size={Size.s} />
+        <Thumbnail image="/demo-assets/square2.jpg" size={Size.m} />
+        <Thumbnail image="/demo-assets/square2.jpg" size={Size.l} />
+        <Thumbnail image="/demo-assets/square2.jpg" size={Size.xl} />
         <div style={{ width: 300 }}>
-            <Thumbnail image="https://picsum.photos/400" />
+            <Thumbnail image="/demo-assets/square2.jpg" />
         </div>
     </>
 );

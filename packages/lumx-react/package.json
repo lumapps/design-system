@@ -46,6 +46,7 @@
         "autoprefixer": "^9.7.4",
         "babel-loader": "^8.0.6",
         "babel-plugin-smart-webpack-import": "^1.6.0",
+        "chromatic": "^5.4.0",
         "clean-webpack-plugin": "^3.0.0",
         "copy-webpack-plugin": "^5.1.1",
         "core-js": "^3.6.4",
@@ -56,6 +57,7 @@
         "expect-more-jest": "^5.2.0",
         "fork-ts-checker-webpack-plugin": "^4.0.3",
         "friendly-errors-webpack-plugin": "^1.7.0",
+        "glob": "^7.1.6",
         "html-minifier-webpack-plugin": "^2.2.3",
         "install-peers-cli": "^2.2.0",
         "is-ci": "^2.0.0",
@@ -121,7 +123,7 @@
         "prepare": "install-peers",
         "prepublishOnly": "yarn build",
         "test": "jest --config jest/index.js --coverage --notify --passWithNoTests --detectOpenHandles --runInBand",
-        "storybook": "start-storybook -p 9000"
+        "storybook": "start-storybook -s ../site-demo/static/ -p 9000"
     },
     "sideEffects": false,
     "version": "0.28.0"

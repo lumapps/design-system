@@ -1,5 +1,7 @@
-import { mdiHome } from '@lumx/icons/index';
+import range from 'lodash/range';
+import React, { useRef, useState } from 'react';
 
+import { mdiHome } from '@lumx/icons';
 import {
     Alignment,
     Button,
@@ -12,12 +14,10 @@ import {
     Placement,
     Size,
 } from '@lumx/react';
-import range from 'lodash/range';
-import React, { useRef, useState } from 'react';
 
 export default { title: 'LumX components/dropdown/Dropdown' };
 
-export const matchAnchorWithMinWidth = () => {
+export const MatchAnchorWithMinWidth = () => {
     const buttonRef1 = useRef<any>(null);
     const buttonRef2 = useRef<any>(null);
     return (
@@ -40,7 +40,7 @@ export const matchAnchorWithMinWidth = () => {
     );
 };
 
-export const dropdownInLongPage = () => {
+export const LongPagePlacement = () => {
     const anchorFirstRef = React.useRef(null);
     const [isFirstOpen, setFirstIsOpen] = React.useState(false);
     const toggleFirstMenu = () => setFirstIsOpen(!isFirstOpen);
@@ -188,8 +188,12 @@ export const dropdownInLongPage = () => {
         </div>
     );
 };
+LongPagePlacement.parameters = {
+    // Disables Chromatic snapshot (not relevant for this story).
+    chromatic: { disable: true },
+};
 
-export const dropdownInfiniteScroll = () => {
+export const InfiniteScroll = () => {
     const buttonRef = useRef(null);
     const [items, setItems] = useState(range(10));
     const onInfiniteScroll = () => {
@@ -208,4 +212,8 @@ export const dropdownInfiniteScroll = () => {
             </Dropdown>
         </>
     );
+};
+InfiniteScroll.parameters = {
+    // Disables Chromatic snapshot (not relevant for this story).
+    chromatic: { disable: true },
 };

@@ -19,12 +19,12 @@ export const App = () => (
 
         <ListItem
             size={Size.tiny}
-            before={<Thumbnail variant={ThumbnailVariant.rounded} image="https://picsum.photos/48" size={Size.xs} />}
+            before={<Thumbnail variant={ThumbnailVariant.rounded} image="/demo-assets/square1.jpg" size={Size.xs} />}
         >
             Single-line item
         </ListItem>
 
-        <ListItem size={Size.tiny} before={<Avatar image="../avatar/assets/persona.png" size={Size.xs} />}>
+        <ListItem size={Size.tiny} before={<Avatar image="/demo-assets/persona.png" size={Size.xs} />}>
             Single-line item
         </ListItem>
     </List>
