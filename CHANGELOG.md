@@ -11,8 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Added `avatarProps` to `CommentBlock` to allow setting custom props to the avatar.
 -   Added `linkProps` to `LinkPreview` to allow setting custom props to the link.
--   Added `avatarProps` to `UserBlock` to allow setting custom props to the link.
--   Added `thumbnailProps` to `PostBlock` to allow setting custom props to the link.
+-   Added `avatarProps` to `UserBlock` to allow setting custom props to the avatar.
+-   Added `thumbnailProps` to `PostBlock` to allow setting custom props to the thumbnail.
 -   Added props forwarding to `Lightbox` component.
 -   Added `name` and `value` props to `Switch`, `CheckBox` and `RadioButton` components.
 -   Added `name` prop to `Autocomplete`, `DatePicker`, `TextField`, `Button`, `IconButton` and `Slider` components.
@@ -32,7 +32,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   _[BREAKING]_ Renamed `onToggle` prop to `onChange` for `Switch` component.
 -   _[BREAKING]_ `avatar` prop from `UserBlock` component is now a string and corresponds to the avatar url. Any other avatar props should be passed to `avatarProps` prop.
 -   _[BREAKING]_ Renamed `handleClick` prop to `onClick` and `actionCallback` prop to `onActionClick` for `Notification` component.
--   _[BREAKING]_ Removed `HTMLElement` as type in `PostBlock` component props.
 -   _[BREAKING]_ Renamed `closeCallback`, `openCallback` and `toggleCallback` props respectively to `onClose`, `onOpen` and `onToggleOpen` for `ExpansionPanel` component.
 -   _[BREAKING]_ `Checkbox` now uses `checked` (edit: and its alias `isChecked`, see below) prop instead of `value` prop to know whether it is toggled on or not. This is more consistant with HTML native naming convention and this is also how it is used for `RadioButton` and `Switch`. As said above, `value` has been added as prop and acts like the HTML native prop `value`.
 -   _[BREAKING]_ Changed `onChange` method signature for `RadioButton` component. This is breaking since now the `value` argument of `onChange` method is required.
@@ -42,7 +41,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   _[BREAKING]_ The prop `value` of `TextField` component can not be a `number` anymore. The user would have to cast the value on its side.
 -   _[BREAKING]_ Renamed `hideMinMaxlabel` prop to `hideMinMaxLabel` for `Slider` component.
 -   Default color of `Badge` is now `primary`.
--   _[BREAKING]_ Removed `Tabs` component replaced by the `TabProvider` and `TabList` components.
 -   _[BREAKING]_ `Tab` component doesn't wrap the tab content anymore (use `TabPanel` for that). Implements the [WAI-ARIA `tab` role](https://www.w3.org/TR/wai-aria-practices-1.1/examples/tabs/tabs-1/tabs.html#rps_label).
 -   _[BREAKING]_ `onClick` prop for `Mosaic.thumbnail` prop is no longer automatically passing the index.
 -   `ProgressTracker` component now implements the [WAI-ARIA `tablist` role](https://www.w3.org/TR/wai-aria-practices-1.1/examples/tabs/tabs-1/tabs.html#rps_label).
@@ -53,10 +51,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+-   _[BREAKING]_ Removed `HTMLElement` as type in `PostBlock` component props.
 -   _[BREAKING]_ Removed `onOpen` prop from `Dialog` component. User should use `isOpen` from its side.
 -   _[BREAKING]_ Removed `thumbnailAspectRatio` prop from `PostBlock` component. User should pass it using `thumbnailProps` instead.
 -   _[BREAKING]_ Removed `onOpen`, `role` and `noWrapper` props from `Lightbox` component.
 -   _[BREAKING]_ `align`, `aspectRatio`, `crossOrigin`, `fillHeight`, `focusPoint`, `isCrossOriginEnabled` and `onClick` props have been removed from `ImageBlock` component. These props will now be passed using the `ImageBlock.thumbnailProps` prop.
+-   _[BREAKING]_ Removed `Tabs` component replaced by the `TabProvider` and `TabList` components.
 
 ## [0.28.0][] - 2020-11-17
 
