@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Fixed `Popover` and `Dropdown` scrollbar behavior.
 -   Fixed `Popover` arrow placement on placement variant `start` and `end`.
 
+### Added
+
+-   Forward synthetic event in List `onListItemSelected` prop and ListItem `onItemSelected` prop.
+
 ## [0.28.0][] - 2020-11-17
 
 ### Changed

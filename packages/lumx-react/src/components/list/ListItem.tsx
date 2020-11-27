@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode, Ref, useMemo } from 'react';
+import React, { ReactElement, ReactNode, Ref, SyntheticEvent, useMemo } from 'react';
 
 import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
@@ -57,7 +57,7 @@ interface ListItemProps extends GenericProps {
     linkRef?: Ref<HTMLAnchorElement>;
 
     /** Callback used to retrieved the selected entry. */
-    onItemSelected?(): void;
+    onItemSelected?(evt: SyntheticEvent): void;
 }
 
 /**
