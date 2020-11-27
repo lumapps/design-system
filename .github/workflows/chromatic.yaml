@@ -3,11 +3,16 @@ name: Chromatic
 on:
   pull_request:
     types: [ opened, synchronize, reopened, labeled ]
+  push:
+    branches:
+        - master
+        - release/**
 
 jobs:
   deploy:
-    # Run if the "need: review-design" label is present or if the target branch is a release branch
-    if: "contains(github.event.pull_request.labels.*.name, 'need: review-design') || startsWith(github.base_ref, 'release/') || startsWith(github.ref, 'release/')"
+    # Run on push (on master or release branch)
+    # OR run if the "need: review-design" label is present or if the target branch is a release branch
+    if: "github.event.push || (contains(github.event.pull_request.labels.*.name, 'need: review-design') || startsWith(github.base_ref, 'release/') || startsWith(github.ref, 'release/'))"
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout repository"
