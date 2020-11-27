@@ -12,7 +12,7 @@ jobs:
   deploy:
     # Run on push (on master or release branch)
     # OR run if the "need: review-design" label is present or if the target branch is a release branch
-    if: "github.event.push || (contains(github.event.pull_request.labels.*.name, 'need: review-design') || startsWith(github.base_ref, 'release/') || startsWith(github.ref, 'release/'))"
+    if: "github.event_name == 'push' || (contains(github.event.pull_request.labels.*.name, 'need: review-design') || startsWith(github.base_ref, 'release/') || startsWith(github.ref, 'release/'))"
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout repository"
