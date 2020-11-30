@@ -103,7 +103,7 @@
 }
 
 // Focus state
-.#{$lumx-base-prefix}-progress-tracker-step--is-clickable[data-focus-visible-added] {
+.#{$lumx-base-prefix}-progress-tracker-step[data-focus-visible-added] {
     @include lumx-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('emphasis', 'LOW'), 'dark');
 }
 
