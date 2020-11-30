@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Added `ProgressTrackerProvider` component wrapping the new `ProgressTracker` and `ProgressTrackerStepPanel` and handling state (controlled or uncontrolled).
 -   Added `ProgressTrackerStepPanel` component that wraps the content of a step. Implements the [WAI-ARIA `tabpanel` role](https://www.w3.org/TR/wai-aria-practices-1.1/examples/tabs/tabs-1/tabs.html#rps_label).
 -   Added `isDisabled` prop to `ProgressTrackerStep` component.
+-   Added `rightIcon` and `leftIcon` props for `Link` component. Sizes of icons are based on `typography` prop.
 
 ### Changed
 

@@ -22,7 +22,7 @@ exports[`<Link> Snapshots and structure should render correctly 1`] = `
 
 exports[`<Link> Snapshots and structure should render typography 1`] = `
 <a
-  className="lumx-link lumx-typography-title"
+  className="lumx-link"
   href="https://google.com"
 />
 `;

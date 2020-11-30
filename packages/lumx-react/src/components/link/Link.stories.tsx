@@ -1,6 +1,7 @@
+import { mdiChevronDown, mdiLink } from '@lumx/icons';
 import { ColorPalette, ColorVariant, Link, Typography } from '@lumx/react';
 import { boolean, select, text } from '@storybook/addon-knobs';
-import React from 'react';
+import React, { Fragment } from 'react';
 
 export default { title: 'LumX components/link/Link' };
 
@@ -46,6 +47,43 @@ export const withoutHref = () => <Link onClick={onClick}>Link without redirectio
 const CustomLink: React.FC = ({ children, ...props }) =>
     React.createElement('a', { ...props, style: { color: 'red' } }, children);
 
-export const withCustomLink = () => <Link linkAs={CustomLink} href="https://google.com">Custom link</Link>;
+export const withCustomLink = () => (
+    <Link linkAs={CustomLink} href="https://google.com">
+        Custom link
+    </Link>
+);
 
-export const disabledLink = () => <Link onClick={onClick} disabled>Disabled link</Link>;
+export const disabledLink = () => (
+    <Link onClick={onClick} disabled>
+        Disabled link
+    </Link>
+);
+
+export const withIcon = () => (
+    <>
+        {Object.values(Typography).map((typography) => (
+            <Fragment key={typography}>
+                <p>
+                    <Link rightIcon={mdiLink} href="https://www.google.com" typography={typography}>
+                        With right icon
+                    </Link>
+                </p>
+                <p>
+                    <Link leftIcon={mdiChevronDown} href="https://www.google.com" typography={typography}>
+                        With left icon
+                    </Link>
+                </p>
+                <p>
+                    <Link
+                        leftIcon={mdiChevronDown}
+                        rightIcon={mdiLink}
+                        href="https://www.google.com"
+                        typography={typography}
+                    >
+                        With right and left icon
+                    </Link>
+                </p>
+            </Fragment>
+        ))}
+    </>
+);
