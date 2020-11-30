@@ -1,3 +1,4 @@
+import { onEscapePressed } from '@lumx/react/utils';
 import { useEffect, useRef, useState } from 'react';
 
 /**
@@ -33,11 +34,13 @@ export function useTooltipOpen(delay: number, anchorElement: HTMLElement | null)
         anchorElement.addEventListener('focusin', handleMouseEnter);
         anchorElement.addEventListener('mouseleave', handleMouseLeave);
         anchorElement.addEventListener('focusout', handleMouseLeave);
+        anchorElement.addEventListener('keydown', onEscapePressed(handleMouseLeave));
         return () => {
             anchorElement.removeEventListener('mouseenter', handleMouseEnter);
             anchorElement.removeEventListener('focusin', handleMouseEnter);
             anchorElement.removeEventListener('mouseleave', handleMouseLeave);
             anchorElement.removeEventListener('focusout', handleMouseLeave);
+            anchorElement.removeEventListener('keydown', onEscapePressed(handleMouseLeave));
 
             if (timer.current) {
                 clearTimeout(timer.current);
