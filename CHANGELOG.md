@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   Added `headerActions` prop to `CommentBlock` component to add actions to the header.
+-   Added `SkeletonRectangle`, `SkeletonCircle` and `SkeletonTypography` components.
 
 ### Fixed
 
