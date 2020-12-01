@@ -1,6 +1,6 @@
 // @ts-ignore
 import { detectOverflow } from '@popperjs/core';
-import React, { ReactNode, RefObject, useMemo, useRef, useState } from 'react';
+import React, { ReactNode, RefObject, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { usePopper } from 'react-popper';
 
@@ -217,10 +217,11 @@ const Popover: React.FC<PopoverProps> = (props) => {
         modifiers.push(maxSize, applyMaxHeight);
     }
 
-    const { styles, attributes, state } = usePopper(anchorRef.current, popperElement, {
+    const { styles, attributes, state, update } = usePopper(anchorRef.current, popperElement, {
         placement,
         modifiers,
     });
+    useEffect(() => { update?.(); }, [children, update]);
 
     const position = state?.placement ?? placement;
 
@@ -239,30 +240,30 @@ const Popover: React.FC<PopoverProps> = (props) => {
 
     return isOpen
         ? createPortal(
-              <div
-                  {...forwardedProps}
-                  ref={mergeRefs(setPopperElement, popoverRef)}
-                  className={classNames(
-                      className,
-                      handleBasicClasses({ prefix: CLASSNAME, elevation: Math.min(elevation || 0, 5), position }),
-                  )}
-                  style={popoverStyle}
-                  {...attributes.popper}
-              >
-                  <div ref={wrapperRef} className={`${CLASSNAME}__wrapper`}>
-                      <ClickAwayProvider callback={closeOnClickAway && onClose} refs={[wrapperRef, anchorRef]}>
-                          {hasArrow ? (
-                              <>
-                                  <div className={`${CLASSNAME}__arrow`} />
-                                  <div className={`${CLASSNAME}__inner`}>{children}</div>
-                              </>
-                          ) : (
-                              children
-                          )}
-                      </ClickAwayProvider>
-                  </div>
-              </div>,
-              document.body,
+                <div
+                    {...forwardedProps}
+                    ref={mergeRefs(setPopperElement, popoverRef)}
+                    className={classNames(
+                        className,
+                        handleBasicClasses({ prefix: CLASSNAME, elevation: Math.min(elevation || 0, 5), position }),
+                    )}
+                    style={popoverStyle}
+                    {...attributes.popper}
+                >
+                    <div ref={wrapperRef} className={`${CLASSNAME}__wrapper`}>
+                        <ClickAwayProvider callback={closeOnClickAway && onClose} refs={[wrapperRef, anchorRef]}>
+                            {hasArrow ? (
+                                <>
+                                    <div className={`${CLASSNAME}__arrow`} />
+                                    <div className={`${CLASSNAME}__inner`}>{children}</div>
+                                </>
+                            ) : (
+                                children
+                            )}
+                        </ClickAwayProvider>
+                    </div>
+                </div>,
+                document.body,
           )
         : null;
 };

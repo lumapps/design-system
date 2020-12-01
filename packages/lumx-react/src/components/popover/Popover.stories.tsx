@@ -1,7 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { Chip, FlexBox, Orientation, Placement, Popover, Size } from '@lumx/react';
+import { mdiAccount, mdiBell } from '@lumx/icons';
+import {
+    Chip,
+    Emphasis,
+    FlexBox,
+    Icon,
+    IconButton,
+    List,
+    ListItem,
+    Orientation,
+    Placement,
+    Popover,
+    Size,
+} from '@lumx/react';
 import { boolean, select } from '@storybook/addon-knobs';
+import range from 'lodash/range';
 
 export default { title: 'LumX components/popover/Popover' };
 
@@ -176,6 +190,103 @@ export const top = ({ theme }: any) => {
             </div>
             <Popover theme={theme} anchorRef={anchorRef} placement={Placement.TOP} isOpen>
                 <div style={demoPopperStyle}>{'Popover'}</div>
+            </Popover>
+        </div>
+    );
+};
+
+export const withUpdatingChildren = ({ theme }: any) => {
+    const anchorRef = React.useRef(null);
+    const [isOpen, setIsOpen] = React.useState(false);
+
+    const toggleOpen = () => setIsOpen(!isOpen);
+
+    const [text, setText] = useState('Long loading text with useless words');
+    useEffect(() => {
+        if (isOpen) {
+            const timer = setTimeout(() => {
+                setText('Text');
+            }, 1000);
+            return () => clearTimeout(timer);
+        } else {
+            setText('Long loading text with useless words');
+        }
+    }, [isOpen]);
+
+    return (
+        <div style={{ float: 'right' }} className="lumx-spacing-margin-right-huge">
+            <IconButton
+                className="lumx-spacing-margin-right-huge"
+                buttonRef={anchorRef}
+                emphasis={Emphasis.low}
+                icon={mdiBell}
+                size={Size.m}
+                onClick={toggleOpen}
+            />
+            <Popover
+                closeOnClickAway
+                closeOnEscape
+                theme={theme}
+                isOpen={isOpen}
+                anchorRef={anchorRef}
+                placement={Placement.BOTTOM_END}
+                onClose={toggleOpen}
+                fitWithinViewportHeight
+            >
+                <List>
+                    <ListItem
+                        before={<Icon icon={mdiAccount} />}
+                        className="lumx-spacing-margin-right-huge"
+                    >
+                        <span>{text}</span>
+                    </ListItem>
+                </List>
+            </Popover>
+        </div>
+    );
+};
+
+export const withScrollingPopover = ({ theme }: any) => {
+    const anchorRef = React.useRef(null);
+    const [isOpen, setIsOpen] = React.useState(false);
+
+    const toggleOpen = () => setIsOpen(!isOpen);
+
+    return (
+        <div style={{ float: 'right' }} className="lumx-spacing-margin-right-huge">
+            <IconButton
+                className="lumx-spacing-margin-right-huge"
+                buttonRef={anchorRef}
+                emphasis={Emphasis.low}
+                icon={mdiBell}
+                size={Size.m}
+                onClick={toggleOpen}
+            />
+            <Popover
+                closeOnClickAway
+                closeOnEscape
+                theme={theme}
+                isOpen={isOpen}
+                anchorRef={anchorRef}
+                placement={Placement.BOTTOM_START}
+                onClose={toggleOpen}
+                fitWithinViewportHeight
+            >
+                <div style={{ overflowY: 'auto' }}>
+                    <List>
+                        {range(100).map((n: number) => {
+                            return (
+                                <ListItem
+                                    key={`key-${n}`}
+                                    before={<Icon icon={mdiAccount} />}
+                                    className="lumx-spacing-margin-right-huge"
+                                >
+                                    <span>{`List item ${n} and some text`}</span>
+                                </ListItem>
+                            );
+                        })}
+                    </List>
+                </div>
             </Popover>
         </div>
     );
