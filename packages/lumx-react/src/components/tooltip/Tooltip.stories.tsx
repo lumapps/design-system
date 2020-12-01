@@ -25,7 +25,9 @@ export const ForceOpen = () => {
 export const InlineTooltip = () => (
     <>
         {'Some text with a '}
-        <Tooltip label="A tooltip on the word 'tooltip'">tooltip</Tooltip>
+        <Tooltip label="A tooltip on the word 'tooltip'">
+            <span>tooltip</span>
+        </Tooltip>
         {' on one word.'}
     </>
 );
