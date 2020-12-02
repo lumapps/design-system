@@ -4,6 +4,19 @@
 
 .#{$lumx-base-prefix}-link {
     @include lumx-link;
+
+    &__left-icon {
+        margin-right: $lumx-spacing-unit-tiny;
+    }
+
+    &__right-icon {
+        margin-left: $lumx-spacing-unit-tiny;
+    }
+
+    &:disabled,
+    &[aria-disabled='true'] {
+        @include lumx-state-disabled-input;
+    }
 }
 
 /* Link colors
