@@ -4,7 +4,18 @@ import React from 'react';
 
 export const App = () => (
     <SideNavigation>
-        <SideNavigationItem label="Resting" icon={mdiEmail} emphasis={Emphasis.low} />
-        <SideNavigationItem label="Selected" icon={mdiEmail} emphasis={Emphasis.low} isSelected />
+        <SideNavigationItem
+            label="Resting"
+            icon={mdiEmail}
+            emphasis={Emphasis.low}
+            toggleButtonProps={{ label: 'Toggle' }}
+        />
+        <SideNavigationItem
+            label="Selected"
+            icon={mdiEmail}
+            emphasis={Emphasis.low}
+            isSelected
+            toggleButtonProps={{ label: 'Toggle' }}
+        />
     </SideNavigation>
 );

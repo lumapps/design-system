@@ -1,3 +1,4 @@
+import { IconButtonProps } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils';
 import { RefObject } from 'react';
 
@@ -13,6 +14,11 @@ export interface DatePickerProps extends GenericProps {
     maxDate?: Date;
     /** The date before which no date can be selected. */
     minDate?: Date;
+    /** The props to pass to the next month change button, minus those already set by the DatePickerControlled props. */
+    nextButtonProps: Pick<IconButtonProps, 'label'> & Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis'>;
+    /** The props to pass to the previous month change button, minus those already set by the DatePickerControlled props. */
+    previousButtonProps: Pick<IconButtonProps, 'label'> &
+        Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis'>;
     /** The reference passed to the <button> element if it corresponds to the current date or the selected date. */
     todayOrSelectedDateRef?: RefObject<HTMLButtonElement>;
     /** The current value of the text field. */

@@ -26,10 +26,10 @@ export const App = ({ theme }: any) => (
                 <Button size={Size.s} theme={theme}>
                     Split
                 </Button>
-                <IconButton size={Size.s} icon={mdiMenuDown} theme={theme} />
+                <IconButton label="More" size={Size.s} icon={mdiMenuDown} theme={theme} />
             </ButtonGroup>
 
-            <IconButton icon={mdiPlus} size={Size.s} theme={theme} />
+            <IconButton label="Add" icon={mdiPlus} size={Size.s} theme={theme} />
         </FlexBox>
 
         <FlexBox gap={Size.big} orientation={Orientation.horizontal}>
@@ -52,10 +52,10 @@ export const App = ({ theme }: any) => (
                 <Button emphasis={Emphasis.medium} size={Size.s} theme={theme}>
                     Split
                 </Button>
-                <IconButton emphasis={Emphasis.medium} icon={mdiMenuDown} size={Size.s} theme={theme} />
+                <IconButton label="More" emphasis={Emphasis.medium} icon={mdiMenuDown} size={Size.s} theme={theme} />
             </ButtonGroup>
 
-            <IconButton icon={mdiPlus} emphasis={Emphasis.medium} size={Size.s} theme={theme} />
+            <IconButton label="Add" icon={mdiPlus} emphasis={Emphasis.medium} size={Size.s} theme={theme} />
         </FlexBox>
 
         <FlexBox gap={Size.big} orientation={Orientation.horizontal}>
@@ -75,7 +75,7 @@ export const App = ({ theme }: any) => (
                 Dropdown
             </Button>
 
-            <IconButton icon={mdiPlus} emphasis={Emphasis.low} size={Size.s} theme={theme} />
+            <IconButton label="Add" icon={mdiPlus} emphasis={Emphasis.low} size={Size.s} theme={theme} />
         </FlexBox>
     </>
 );

@@ -20,6 +20,6 @@ export const App = ({ theme }: any) => (
             Dropdown
         </Button>
 
-        <IconButton emphasis={Emphasis.low} icon={mdiPlus} theme={theme} />
+        <IconButton label="Add" emphasis={Emphasis.low} icon={mdiPlus} theme={theme} />
     </>
 );

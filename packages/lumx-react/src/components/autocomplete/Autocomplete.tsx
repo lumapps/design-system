@@ -2,7 +2,7 @@ import React, { ReactNode, RefObject, SyntheticEvent, useRef } from 'react';
 
 import classNames from 'classnames';
 
-import { Dropdown, Offset, Placement, TextField, Theme } from '@lumx/react';
+import { Dropdown, IconButtonProps, Offset, Placement, TextField, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
@@ -19,6 +19,13 @@ export interface AutocompleteProps extends GenericProps {
      * @see {@link DropdownProps#anchorToInput}
      */
     anchorToInput?: boolean;
+    /**
+     * The props to pass to the clear button, minus those already set by the TextField props.
+     * If not specified, the button won't be displayed.
+     * @see {@link TextFieldProps#clearButtonProps}
+     */
+    clearButtonProps?: Pick<IconButtonProps, 'label'> &
+        Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis'>;
     /**
      * The reference passed to the <input> or <textarea> element.
      * @see {@link TextFieldProps#inputRef}
@@ -53,11 +60,6 @@ export interface AutocompleteProps extends GenericProps {
      * Whether the text box should be focused upon closing the suggestions or not.
      */
     shouldFocusOnClose?: boolean;
-    /**
-     * Whether the text field displays a clear button or not.
-     * @see {@link TextFieldProps#isClearable}
-     */
-    isClearable?: boolean;
     /**
      * The helper message of the text field.
      * @see {@link TextFieldProps#helper}
@@ -189,7 +191,7 @@ export const Autocomplete: Comp<AutocompleteProps> = ({
     helper,
     icon,
     inputRef,
-    isClearable,
+    clearButtonProps,
     isDisabled = disabled,
     isOpen,
     isValid,
@@ -229,7 +231,7 @@ export const Autocomplete: Comp<AutocompleteProps> = ({
                 helper={helper}
                 icon={icon}
                 inputRef={mergeRefs(inputAnchorRef, inputRef) as any}
-                isClearable={isClearable}
+                clearButtonProps={clearButtonProps}
                 isDisabled={isDisabled}
                 isValid={isValid}
                 label={label}

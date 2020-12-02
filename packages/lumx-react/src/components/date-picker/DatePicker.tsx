@@ -5,7 +5,7 @@ import { CLASSNAME, COMPONENT_NAME } from './constants';
 import { DatePickerControlled } from './DatePickerControlled';
 import { DatePickerProps } from './types';
 
-export const DatePicker: Comp<DatePickerProps> = ({ defaultMonth, locale, value, ...forwardedProps }) => {
+export const DatePicker: Comp<DatePickerProps> = ({ defaultMonth, locale, value, onChange, ...forwardedProps }) => {
     let castedValue;
     if (value) {
         castedValue = moment(value);
@@ -16,14 +16,19 @@ export const DatePicker: Comp<DatePickerProps> = ({ defaultMonth, locale, value,
         // eslint-disable-next-line no-console
         console.warn(`[@lumx/react/DatePicker] Invalid date provided ${castedValue}`);
     }
-    const today = castedValue && castedValue.isValid() ? castedValue : moment();
+    const selectedDay = castedValue && castedValue.isValid() ? castedValue : moment();
 
     const [monthOffset, setMonthOffset] = useState(0);
 
     const setPrevMonth = () => setMonthOffset(monthOffset - 1);
     const setNextMonth = () => setMonthOffset(monthOffset + 1);
 
-    const selectedMonth = moment(today).locale(locale).add(monthOffset, 'months').toDate();
+    const onDatePickerChange = (newDate?: Date) => {
+        onChange(newDate);
+        setMonthOffset(0);
+    };
+
+    const selectedMonth = moment(selectedDay).locale(locale).add(monthOffset, 'months').toDate();
 
     return (
         <DatePickerControlled
@@ -34,6 +39,7 @@ export const DatePicker: Comp<DatePickerProps> = ({ defaultMonth, locale, value,
             onPrevMonthChange={setPrevMonth}
             onNextMonthChange={setNextMonth}
             selectedMonth={selectedMonth}
+            onChange={onDatePickerChange}
         />
     );
 };

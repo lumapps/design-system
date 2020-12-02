@@ -33,6 +33,7 @@ export const App = ({ theme }: any) => {
             theme={theme}
             variant={SelectVariant.chip}
             onClear={clearSelected}
+            clearButtonProps={{ label: 'Clear' }}
             onDropdownClose={closeSelect}
             onInputClick={toggleSelect}
         >

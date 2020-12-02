@@ -28,9 +28,11 @@ export const DatePickerControlled: Comp<DatePickerControlledProps> = ({
     locale,
     maxDate,
     minDate,
+    nextButtonProps,
     onChange,
     onNextMonthChange,
     onPrevMonthChange,
+    previousButtonProps,
     selectedMonth,
     todayOrSelectedDateRef,
     value,
@@ -47,8 +49,22 @@ export const DatePickerControlled: Comp<DatePickerControlledProps> = ({
         <div className={`${CLASSNAME}`}>
             <Toolbar
                 className={`${CLASSNAME}__toolbar`}
-                after={<IconButton emphasis={Emphasis.low} icon={mdiChevronRight} onClick={onNextMonthChange} />}
-                before={<IconButton emphasis={Emphasis.low} icon={mdiChevronLeft} onClick={onPrevMonthChange} />}
+                after={
+                    <IconButton
+                        {...nextButtonProps}
+                        emphasis={Emphasis.low}
+                        icon={mdiChevronRight}
+                        onClick={onNextMonthChange}
+                    />
+                }
+                before={
+                    <IconButton
+                        {...previousButtonProps}
+                        emphasis={Emphasis.low}
+                        icon={mdiChevronLeft}
+                        onClick={onPrevMonthChange}
+                    />
+                }
                 label={
                     <span className={`${CLASSNAME}__month`}>
                         {moment(selectedMonth).locale(locale).format('MMMM YYYY')}

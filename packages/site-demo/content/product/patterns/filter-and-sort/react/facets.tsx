@@ -56,6 +56,7 @@ export const App = () => {
                         label="Color"
                         variant={SelectVariant.chip}
                         onClear={clearSelected}
+                        clearButtonProps={{ label: 'Clear' }}
                         onDropdownClose={closeSelect}
                         onInputClick={toggleSelect}
                     >

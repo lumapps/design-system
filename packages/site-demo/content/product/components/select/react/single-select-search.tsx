@@ -40,6 +40,7 @@ export const App = ({ theme }: any) => {
             theme={theme}
             value={value}
             onClear={clearSelected}
+            clearButtonProps={{ label: 'Clear' }}
             onInputClick={toggleSelect}
             onDropdownClose={closeSelect}
         >

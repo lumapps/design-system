@@ -25,7 +25,13 @@ export const App = () => {
 
     return (
         <>
-            <ExpansionPanel hasBackground hasHeaderDivider isOpen={isOpen1} onToggleOpen={setOpen1}>
+            <ExpansionPanel
+                hasBackground
+                hasHeaderDivider
+                isOpen={isOpen1}
+                onToggleOpen={setOpen1}
+                toggleButtonProps={{ label: 'Toggle' }}
+            >
                 <header>
                     <FlexBox
                         className="lumx-spacing-margin-left-regular"
@@ -44,7 +50,13 @@ export const App = () => {
                 </div>
             </ExpansionPanel>
 
-            <ExpansionPanel hasBackground hasHeaderDivider isOpen={isOpen2} onToggleOpen={setOpen2}>
+            <ExpansionPanel
+                hasBackground
+                hasHeaderDivider
+                isOpen={isOpen2}
+                onToggleOpen={setOpen2}
+                toggleButtonProps={{ label: 'Toggle' }}
+            >
                 <header>
                     <FlexBox
                         className="lumx-spacing-margin-left-regular"
@@ -68,7 +80,12 @@ export const App = () => {
                 </div>
             </ExpansionPanel>
 
-            <ExpansionPanel hasBackground isOpen={isOpen3} onToggleOpen={setOpen3}>
+            <ExpansionPanel
+                hasBackground
+                isOpen={isOpen3}
+                onToggleOpen={setOpen3}
+                toggleButtonProps={{ label: 'Toggle' }}
+            >
                 <header>
                     <FlexBox
                         className="lumx-spacing-margin-left-big"
@@ -79,6 +96,7 @@ export const App = () => {
 
                         <FlexBox marginAuto={Alignment.left}>
                             <IconButton
+                                label="Secondary actions"
                                 icon={mdiDotsVertical}
                                 emphasis={Emphasis.low}
                                 size={Size.m}
@@ -94,7 +112,7 @@ export const App = () => {
                 </div>
             </ExpansionPanel>
 
-            <ExpansionPanel isOpen={isOpen4} onToggleOpen={setOpen4}>
+            <ExpansionPanel isOpen={isOpen4} onToggleOpen={setOpen4} toggleButtonProps={{ label: 'Toggle' }}>
                 <header>
                     <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
                         <Thumbnail image="/demo-assets/square1.jpg" size={Size.m} variant={ThumbnailVariant.rounded} />
@@ -111,7 +129,7 @@ export const App = () => {
 
             <Divider />
 
-            <ExpansionPanel isOpen={isOpen5} onToggleOpen={setOpen5}>
+            <ExpansionPanel isOpen={isOpen5} onToggleOpen={setOpen5} toggleButtonProps={{ label: 'Toggle' }}>
                 <header>
                     <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
                         <Thumbnail image="/demo-assets/square1.jpg" size={Size.m} variant={ThumbnailVariant.rounded} />
@@ -128,7 +146,7 @@ export const App = () => {
 
             <Divider />
 
-            <ExpansionPanel isOpen={isOpen6} onToggleOpen={setOpen6}>
+            <ExpansionPanel isOpen={isOpen6} onToggleOpen={setOpen6} toggleButtonProps={{ label: 'Toggle' }}>
                 <header>
                     <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
                         <Thumbnail image="/demo-assets/square1.jpg" size={Size.m} variant={ThumbnailVariant.rounded} />

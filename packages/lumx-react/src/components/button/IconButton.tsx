@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Emphasis, Icon, Size, Theme } from '@lumx/react';
+import { Emphasis, Icon, Size, Theme, Tooltip } from '@lumx/react';
 import { BaseButtonProps, ButtonRoot } from '@lumx/react/components/button/ButtonRoot';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, getRootClassName } from '@lumx/react/utils';
@@ -14,6 +14,11 @@ export interface IconButtonProps extends BaseButtonProps {
      * @see {@link IconProps#icon}
      */
     icon: string;
+    /**
+     * The label of the tooltip. It is required for a11y purpose.
+     * If you really don't want a tooltip and aria-label, you can give an empty label (this is not recommended).
+     */
+    label: string;
 }
 
 /**
@@ -36,12 +41,14 @@ const DEFAULT_PROPS: Partial<IconButtonProps> = {
 };
 
 export const IconButton: Comp<IconButtonProps> = (props) => {
-    const { emphasis, icon, size, theme, ...forwardedProps } = props;
+    const { emphasis, icon, label, size, theme, ...forwardedProps } = props;
 
     return (
-        <ButtonRoot {...{ emphasis, size, theme, ...forwardedProps }} variant="icon">
-            <Icon icon={icon} />
-        </ButtonRoot>
+        <Tooltip label={label}>
+            <ButtonRoot {...{ emphasis, size, theme, ...forwardedProps }} aria-label={label} variant="icon">
+                <Icon icon={icon} />
+            </ButtonRoot>
+        </Tooltip>
     );
 };
 IconButton.displayName = COMPONENT_NAME;

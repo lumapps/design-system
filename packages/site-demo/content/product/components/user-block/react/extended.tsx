@@ -20,6 +20,7 @@ export const App = ({ theme }: any) => {
         demoActions.map((demoAction, idx) => (
             <IconButton
                 key={idx}
+                label={`Action ${idx}`}
                 emphasis={Emphasis.low}
                 color={theme === Theme.dark ? 'light' : undefined}
                 icon={demoAction}

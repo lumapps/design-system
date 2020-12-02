@@ -24,7 +24,7 @@ export const MatchAnchorWithMinWidth = () => {
         <>
             <div>Match anchor width only if the dropdown is smaller</div>
             <FlexBox orientation={Orientation.horizontal}>
-                <IconButton icon={mdiHome} buttonRef={buttonRef1} />
+                <IconButton label="Home" icon={mdiHome} buttonRef={buttonRef1} />
                 <Dropdown anchorRef={buttonRef1} isOpen>
                     Big dropdown
                 </Dropdown>

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { createPortal } from 'react-dom';
 
 import { mdiClose } from '@lumx/icons';
-import { ColorPalette, Emphasis, IconButton, Theme } from '@lumx/react';
+import { ColorPalette, Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, DOCUMENT } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
@@ -21,8 +21,9 @@ const LIGHTBOX_TRANSITION_DURATION = 400;
 export interface LightboxProps extends GenericProps {
     /** The label for accessibility assistive devices. */
     ariaLabel?: string;
-    /** Whether the closing button should be visible or not. */
-    isCloseButtonVisible?: boolean;
+    /** The props to pass to the close button, minus those already set by the Lightbox props. */
+    closeButtonProps?: Pick<IconButtonProps, 'label'> &
+        Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis' | 'color'>;
     /** Whether the component is open or not. */
     isOpen?: boolean;
     /** The reference of the element that triggered modal opening to set focus on. */
@@ -52,7 +53,6 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: Partial<LightboxProps> = {
     ariaLabel: 'Lightbox',
-    isCloseButtonVisible: true,
     theme: Theme.light,
 };
 
@@ -65,7 +65,7 @@ export const Lightbox: Comp<LightboxProps> = ({
     ariaLabel,
     children,
     className,
-    isCloseButtonVisible,
+    closeButtonProps,
     isOpen,
     onClose,
     parentElement,
@@ -118,8 +118,9 @@ export const Lightbox: Comp<LightboxProps> = ({
             style={{ zIndex }}
             ref={wrapperRef}
         >
-            {isCloseButtonVisible && (
+            {closeButtonProps && (
                 <IconButton
+                    {...closeButtonProps}
                     className={`${CLASSNAME}__close`}
                     color={ColorPalette.light}
                     emphasis={Emphasis.low}

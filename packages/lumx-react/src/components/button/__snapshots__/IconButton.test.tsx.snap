@@ -1,35 +1,50 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<IconButton> Props should forward any CSS class 1`] = `
-<ButtonRoot
-  className="component component--is-tested"
-  emphasis="high"
-  size="m"
-  theme="light"
-  variant="icon"
+<Tooltip
+  delay={500}
+  placement="bottom"
 >
-  <Icon />
-</ButtonRoot>
+  <ButtonRoot
+    className="component component--is-tested"
+    emphasis="high"
+    size="m"
+    theme="light"
+    variant="icon"
+  >
+    <Icon />
+  </ButtonRoot>
+</Tooltip>
 `;
 
 exports[`<IconButton> Props should use default props 1`] = `
-<ButtonRoot
-  emphasis="high"
-  size="m"
-  theme="light"
-  variant="icon"
+<Tooltip
+  delay={500}
+  placement="bottom"
 >
-  <Icon />
-</ButtonRoot>
+  <ButtonRoot
+    emphasis="high"
+    size="m"
+    theme="light"
+    variant="icon"
+  >
+    <Icon />
+  </ButtonRoot>
+</Tooltip>
 `;
 
 exports[`<IconButton> Snapshots and structure should render icon button 1`] = `
-<ButtonRoot
-  emphasis="high"
-  size="m"
-  theme="light"
-  variant="icon"
+<Tooltip
+  delay={500}
+  placement="bottom"
 >
-  <Icon />
-</ButtonRoot>
+  <ButtonRoot
+    emphasis="high"
+    size="m"
+    theme="light"
+    variant="icon"
+  >
+    <Icon />
+  </ButtonRoot>
+</Tooltip>
 `;

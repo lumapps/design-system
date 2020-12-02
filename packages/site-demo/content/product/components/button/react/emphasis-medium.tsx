@@ -24,9 +24,9 @@ export const App = ({ theme }: any) => (
             <Button emphasis={Emphasis.medium} theme={theme}>
                 Split
             </Button>
-            <IconButton emphasis={Emphasis.medium} icon={mdiMenuDown} theme={theme} />
+            <IconButton label="More" emphasis={Emphasis.medium} icon={mdiMenuDown} theme={theme} />
         </ButtonGroup>
 
-        <IconButton emphasis={Emphasis.medium} icon={mdiPlus} theme={theme} />
+        <IconButton label="Add" emphasis={Emphasis.medium} icon={mdiPlus} theme={theme} />
     </>
 );

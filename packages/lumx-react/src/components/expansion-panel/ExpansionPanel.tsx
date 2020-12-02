@@ -8,7 +8,7 @@ import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import isFunction from 'lodash/isFunction';
 
-import { ColorPalette, DragHandle, Emphasis, IconButton, Theme } from '@lumx/react';
+import { ColorPalette, DragHandle, Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import {
     Callback,
@@ -38,6 +38,9 @@ export interface ExpansionPanelProps extends GenericProps {
     onOpen?: Callback;
     /** The function called on close. */
     onClose?: Callback;
+    /** The props to pass to the toggle button, minus those already set by the ExpansionPanel props. */
+    toggleButtonProps: Pick<IconButtonProps, 'label'> &
+        Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis' | 'color'>;
     /** The function called on open or close. */
     onToggleOpen?(shouldOpen: boolean): void;
 }
@@ -66,6 +69,7 @@ const isFooter = isComponent('footer');
 export const ExpansionPanel: Comp<ExpansionPanelProps> = (props) => {
     const {
         className,
+        children: anyChildren,
         hasBackground,
         hasHeaderDivider,
         isOpen,
@@ -74,7 +78,7 @@ export const ExpansionPanel: Comp<ExpansionPanelProps> = (props) => {
         onOpen,
         onToggleOpen,
         theme,
-        children: anyChildren,
+        toggleButtonProps,
         ...forwardedProps
     } = props;
 
@@ -141,7 +145,12 @@ export const ExpansionPanel: Comp<ExpansionPanelProps> = (props) => {
                 </div>
 
                 <div className={`${CLASSNAME}__header-toggle`}>
-                    <IconButton color={color} emphasis={Emphasis.low} icon={isOpen ? mdiChevronUp : mdiChevronDown} />
+                    <IconButton
+                        {...toggleButtonProps}
+                        color={color}
+                        emphasis={Emphasis.low}
+                        icon={isOpen ? mdiChevronUp : mdiChevronDown}
+                    />
                 </div>
             </header>
 

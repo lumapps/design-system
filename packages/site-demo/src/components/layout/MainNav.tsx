@@ -82,6 +82,7 @@ const renderNavItem = (
         emphasis: EMPHASIS_BY_LEVEL[level],
         isOpen: includes(openPaths, path),
         isSelected: locationPath === path,
+        toggleButtonProps: { label: 'Toggle' },
     };
 
     if (!children?.length) {

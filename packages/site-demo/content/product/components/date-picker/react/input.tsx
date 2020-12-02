@@ -12,6 +12,8 @@ export const App = () => {
             icon={mdiCalendar}
             value={datePicked}
             onChange={setDatePicked}
+            nextButtonProps={{ label: 'Next month' }}
+            previousButtonProps={{ label: 'Previous month' }}
         />
     );
 };

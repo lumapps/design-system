@@ -232,7 +232,9 @@ export const DialogWithFocusableElements = ({ theme }: any) => {
                 <header>
                     <Toolbar
                         label={<span className="lumx-typography-title">Dialog header</span>}
-                        after={<IconButton icon={mdiClose} onClick={closeDialog} emphasis={Emphasis.low} />}
+                        after={
+                            <IconButton label="Close" icon={mdiClose} onClick={closeDialog} emphasis={Emphasis.low} />
+                        }
                     />
                 </header>
                 <div className="lumx-spacing-padding-horizontal-huge lumx-spacing-padding-bottom-huge">

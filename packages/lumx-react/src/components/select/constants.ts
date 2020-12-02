@@ -1,5 +1,6 @@
+import { IconButtonProps } from '@lumx/react';
 import { Theme } from '@lumx/react/components';
-import { Comp, GenericProps } from '@lumx/react/utils';
+import { GenericProps } from '@lumx/react/utils';
 import { ReactNode, SyntheticEvent } from 'react';
 
 /**
@@ -11,6 +12,9 @@ export enum SelectVariant {
 }
 
 export interface CoreSelectProps extends GenericProps {
+    /** The props to pass to the clear button, minus those already set by the Select props. If not specified, the button won't be displayed. */
+    clearButtonProps?: Pick<IconButtonProps, 'label'> &
+        Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis'>;
     /** Whether the select (input variant) is displayed with error style or not. */
     hasError?: boolean;
     /** The error related to the component. */
@@ -37,7 +41,7 @@ export interface CoreSelectProps extends GenericProps {
     useCustomColors?: boolean;
     /** The selected choices area style. */
     variant?: SelectVariant;
-    /** The function called when the clear button is clicked. NB: if not specified, clear buttons won't be displayed. */
+    /** The function called when the clear button is clicked. If not specified, the button won't be displayed. */
     onClear?(event: SyntheticEvent, value?: string): void;
     /** The function called when the select field is blurred. */
     onBlur?(): void;

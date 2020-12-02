@@ -2,7 +2,7 @@ import React, { CSSProperties, useCallback, useEffect, useRef, useState } from '
 
 import classNames from 'classnames';
 
-import { Theme } from '@lumx/react';
+import { IconButtonProps, Theme } from '@lumx/react';
 
 import { AUTOPLAY_DEFAULT_INTERVAL, FULL_WIDTH_PERCENT } from '@lumx/react/components/slideshow/constants';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
@@ -27,7 +27,12 @@ export interface SlideshowProps extends GenericProps {
     hasControls?: boolean;
     /** The interval between each slide when automatic rotation is enabled. */
     interval?: number;
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    /** The props to pass to the next button, minus those already set by the SlideshowControls props. */
+    nextButtonProps: Pick<IconButtonProps, 'label'> &
+        Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis' | 'color'>;
+    /** The props to pass to the previous button, minus those already set by the SlideshowControls props. */
+    previousButtonProps: Pick<IconButtonProps, 'label'> &
+        Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis' | 'color'>;
     theme?: Theme;
     /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
@@ -65,9 +70,11 @@ export const Slideshow: Comp<SlideshowProps> = ({
     groupBy,
     hasControls,
     interval,
+    nextButtonProps,
+    onChange,
+    previousButtonProps,
     theme,
     useCustomColors,
-    onChange,
     ...forwardedProps
 }) => {
     const [currentIndex, setCurrentIndex] = useState<number>(activeIndex as number);
@@ -206,6 +213,8 @@ export const Slideshow: Comp<SlideshowProps> = ({
                         slidesCount={slidesCount}
                         parentRef={parentRef}
                         theme={theme}
+                        nextButtonProps={nextButtonProps}
+                        previousButtonProps={previousButtonProps}
                     />
                 </div>
             )}

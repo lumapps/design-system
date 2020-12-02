@@ -4,6 +4,11 @@ import React from 'react';
 
 export const App = () => (
     <SideNavigation>
-        <SideNavigationItem label="With leading icon" icon={mdiEmail} emphasis={Emphasis.low} />
+        <SideNavigationItem
+            label="With leading icon"
+            icon={mdiEmail}
+            emphasis={Emphasis.low}
+            toggleButtonProps={{ label: 'Toggle' }}
+        />
     </SideNavigation>
 );

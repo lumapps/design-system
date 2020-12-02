@@ -1,23 +1,23 @@
 import { mdiPrinter } from '@lumx/icons';
-import { Emphasis, IconButton, Placement, Tooltip } from '@lumx/react';
+import { Icon, Placement, Tooltip } from '@lumx/react';
 import React from 'react';
 
 export const App = () => (
     <>
         <Tooltip label="Print" placement={Placement.LEFT} forceOpen>
-            <IconButton emphasis={Emphasis.medium} icon={mdiPrinter} />
+            <Icon icon={mdiPrinter} />
         </Tooltip>
 
         <Tooltip label="Print" placement={Placement.BOTTOM} forceOpen>
-            <IconButton emphasis={Emphasis.medium} icon={mdiPrinter} />
+            <Icon icon={mdiPrinter} />
         </Tooltip>
 
         <Tooltip label="Print" placement={Placement.TOP} forceOpen>
-            <IconButton emphasis={Emphasis.medium} icon={mdiPrinter} />
+            <Icon icon={mdiPrinter} />
         </Tooltip>
 
         <Tooltip label="Print" placement={Placement.RIGHT} forceOpen>
-            <IconButton emphasis={Emphasis.medium} icon={mdiPrinter} />
+            <Icon icon={mdiPrinter} />
         </Tooltip>
     </>
 );

@@ -149,6 +149,7 @@ export const SelectWithClearButton = ({ theme }: any) => {
             isOpen={isOpen}
             value={value}
             onClear={clearSelected}
+            clearButtonProps={{ label: 'Clear' }}
             label={LABEL}
             placeholder={PLACEHOLDER}
             theme={theme}
@@ -213,6 +214,7 @@ export const SelectWithAnotherField = ({ theme }: any) => {
                 isOpen={isOpen}
                 value={value}
                 onClear={clearSelected}
+                clearButtonProps={{ label: 'Clear' }}
                 label={LABEL}
                 placeholder={PLACEHOLDER}
                 theme={theme}
@@ -370,6 +372,7 @@ export const SelectWithChipVariant = ({ theme }: any) => {
             onDropdownClose={closeSelect}
             variant={SelectVariant.chip}
             onClear={onClear}
+            clearButtonProps={{ label: 'Clear' }}
         >
             <List isClickable>
                 {CHOICES.length > 0

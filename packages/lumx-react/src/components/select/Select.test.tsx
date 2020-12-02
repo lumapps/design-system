@@ -229,9 +229,9 @@ describe(`<${Select.displayName}>`, () => {
         it('should call onClear when clear icon is clicked in select input', () => {
             const value = 'Value';
             const onClear: jest.Mock = jest.fn();
-            const { input } = setup({ value, onClear }, false);
+            const { input } = setup({ value, onClear, clearButtonProps: { label: 'Clear' } }, false);
 
-            input.find(`.${CLASSNAME}__input-clear`).first().simulate('click');
+            input.find('[aria-label="Clear"]').first().simulate('click');
             expect(onClear).toHaveBeenCalled();
         });
     });

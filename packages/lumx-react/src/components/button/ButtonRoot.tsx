@@ -17,6 +17,8 @@ type HTMLButtonProps = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>
 export type ButtonSize = Size.s | Size.m;
 
 export interface BaseButtonProps extends GenericProps {
+    /** The label that describes the button if necessary. */
+    ['aria-label']?: string;
     /** The reference passed to the <a> or <button> element. */
     buttonRef?: RefObject<HTMLButtonElement> | RefObject<HTMLAnchorElement>;
     /** The color variant of the component. */
@@ -93,6 +95,7 @@ const renderButtonWrapper: React.FC<ButtonRootProps> = (props) => {
 
 export const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
     const {
+        'aria-label': ariaLabel,
         buttonRef,
         children,
         className,
@@ -150,6 +153,7 @@ export const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
             {
                 linkAs,
                 ...forwardedProps,
+                'aria-label': ariaLabel,
                 href,
                 target,
                 className: buttonClassName,
@@ -162,6 +166,8 @@ export const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
         <button
             {...forwardedProps}
             disabled={isDisabled}
+            aria-disabled={isDisabled}
+            aria-label={ariaLabel}
             ref={buttonRef as RefObject<HTMLButtonElement>}
             className={buttonClassName}
             name={name}

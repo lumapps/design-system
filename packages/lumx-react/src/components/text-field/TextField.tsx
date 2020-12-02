@@ -5,7 +5,7 @@ import get from 'lodash/get';
 import { uid } from 'uid';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiCloseCircle } from '@lumx/icons';
-import { Emphasis, Icon, IconButton, InputHelper, InputLabel, Kind, Size, Theme } from '@lumx/react';
+import { Emphasis, Icon, IconButton, IconButtonProps, InputHelper, InputLabel, Kind, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
@@ -16,6 +16,9 @@ import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 export interface TextFieldProps extends GenericProps {
     /** A Chip Group to be rendered before the main text input. */
     chips?: HTMLElement | ReactNode;
+    /** The props to pass to the clear button, minus those already set by the TextField props. If not specified, the button won't be displayed. */
+    clearButtonProps?: Pick<IconButtonProps, 'label'> &
+        Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis'>;
     /** The error related to the TextField. */
     error?: string | ReactNode;
     /** Whether we force the focus style or not. */
@@ -30,8 +33,6 @@ export interface TextFieldProps extends GenericProps {
     id?: string;
     /** The reference passed to the <input> or <textarea> element. */
     inputRef?: RefObject<HTMLInputElement> | RefObject<HTMLTextAreaElement>;
-    /** Whether the text field shows a cross to clear its content or not. */
-    isClearable?: boolean;
     /** Whether the component is disabled or not. */
     isDisabled?: boolean;
     /** Whether the component is required or not. */
@@ -225,6 +226,7 @@ const renderInputNative: Comp<InputNativeProps> = (props) => {
 export const TextField: Comp<TextFieldProps> = ({
     chips,
     className,
+    clearButtonProps,
     disabled,
     error,
     forceFocusStyle,
@@ -233,7 +235,6 @@ export const TextField: Comp<TextFieldProps> = ({
     icon,
     id,
     inputRef,
-    isClearable,
     isDisabled = disabled,
     isRequired,
     isValid,
@@ -282,7 +283,7 @@ export const TextField: Comp<TextFieldProps> = ({
                     hasError: !isValid && hasError,
                     hasIcon: Boolean(icon),
                     hasInput: !multiline,
-                    hasInputClear: isClearable && isNotEmpty,
+                    hasInputClear: clearButtonProps && isNotEmpty,
                     hasLabel: Boolean(label),
                     hasPlaceholder: Boolean(placeholder),
                     hasTextarea: multiline,
@@ -360,8 +361,9 @@ export const TextField: Comp<TextFieldProps> = ({
                         />
                     )}
 
-                    {isClearable && isNotEmpty && (
+                    {clearButtonProps && isNotEmpty && (
                         <IconButton
+                            {...clearButtonProps}
                             className={`${CLASSNAME}__input-clear`}
                             icon={mdiCloseCircle}
                             emphasis={Emphasis.low}

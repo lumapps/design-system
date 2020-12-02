@@ -3,7 +3,7 @@ import React, { RefObject, useCallback, useEffect, useState } from 'react';
 import classNames from 'classnames';
 
 import { mdiChevronLeft, mdiChevronRight } from '@lumx/icons';
-import { Emphasis, IconButton, Theme } from '@lumx/react';
+import { Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
 import {
     EDGE_FROM_ACTIVE_INDEX,
     PAGINATION_ITEMS_MAX,
@@ -20,8 +20,14 @@ import isFunction from 'lodash/isFunction';
 export interface SlideshowControlsProps extends GenericProps {
     /** The index of the current slide. */
     activeIndex?: number;
+    /** The props to pass to the next button, minus those already set by the SlideshowControls props. */
+    nextButtonProps: Pick<IconButtonProps, 'label'> &
+        Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis' | 'color'>;
     /** The reference of the parent element. */
     parentRef: RefObject<HTMLDivElement>;
+    /** The props to pass to the previous button, minus those already set by the SlideshowControls props. */
+    previousButtonProps: Pick<IconButtonProps, 'label'> &
+        Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis' | 'color'>;
     /** The number of slides. */
     slidesCount: number;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
@@ -64,10 +70,12 @@ const DEFAULT_PROPS: Partial<SlideshowControlsProps> = {
 export const SlideshowControls: Comp<SlideshowControlsProps> = ({
     activeIndex,
     className,
+    nextButtonProps,
     onNextClick,
     onPaginationClick,
     onPreviousClick,
     parentRef,
+    previousButtonProps,
     slidesCount,
     theme,
     ...forwardedProps
@@ -261,6 +269,7 @@ export const SlideshowControls: Comp<SlideshowControlsProps> = ({
             })}
         >
             <IconButton
+                {...nextButtonProps}
                 icon={mdiChevronLeft}
                 className={`${CLASSNAME}__navigation`}
                 color={theme === Theme.dark ? 'light' : 'dark'}
@@ -274,6 +283,7 @@ export const SlideshowControls: Comp<SlideshowControlsProps> = ({
                 </div>
             </div>
             <IconButton
+                {...previousButtonProps}
                 icon={mdiChevronRight}
                 className={`${CLASSNAME}__navigation`}
                 color={theme === Theme.dark ? 'light' : 'dark'}

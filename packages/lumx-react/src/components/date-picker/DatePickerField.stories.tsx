@@ -15,6 +15,8 @@ export const Simple = ({ theme }: any) => {
             theme={theme}
             onChange={setValue}
             value={value}
+            nextButtonProps={{ label: 'Next month' }}
+            previousButtonProps={{ label: 'Previous month' }}
         />
     );
 };
@@ -30,6 +32,8 @@ export const WithDefaultValue = ({ theme }: any) => {
             theme={theme}
             onChange={setValue}
             value={value}
+            nextButtonProps={{ label: 'Next month' }}
+            previousButtonProps={{ label: 'Previous month' }}
         />
     );
 };
@@ -47,6 +51,8 @@ export const WithErrorAndHelper = ({ theme }: any) => {
             value={value}
             hasError
             helper="Helper"
+            nextButtonProps={{ label: 'Next month' }}
+            previousButtonProps={{ label: 'Previous month' }}
         />
     );
 };
@@ -63,6 +69,8 @@ export const CustomMonth = ({ theme }: any) => {
             onChange={setValue}
             value={value}
             defaultMonth={new Date('2019-07-14')}
+            nextButtonProps={{ label: 'Next month' }}
+            previousButtonProps={{ label: 'Previous month' }}
         />
     );
 };
@@ -78,6 +86,8 @@ export const With28FebruarySelected = ({ theme }: any) => {
             theme={theme}
             onChange={setValue}
             value={value}
+            nextButtonProps={{ label: 'Next month' }}
+            previousButtonProps={{ label: 'Previous month' }}
         />
     );
 };

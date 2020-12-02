@@ -89,8 +89,19 @@ export const SixThumbnails = ({ theme }: any) => {
         <div ref={lightBoxParent} style={{ width: 250 }}>
             <Mosaic theme={theme} onImageClick={setActiveIndex} thumbnails={thumbnails} />
 
-            <Lightbox isOpen={activeIndex !== undefined} parentElement={lightBoxParent} onClose={closeLightBox}>
-                <Slideshow activeIndex={activeIndex} hasControls fillHeight theme={Theme.dark}>
+            <Lightbox
+                isOpen={activeIndex !== undefined}
+                parentElement={lightBoxParent}
+                onClose={closeLightBox}
+                closeButtonProps={{ label: 'Close' }}
+            >
+                <Slideshow
+                    activeIndex={activeIndex}
+                    nextButtonProps={{ label: 'Next' }}
+                    previousButtonProps={{ label: 'Previous' }}
+                    fillHeight
+                    theme={Theme.dark}
+                >
                     {thumbnails.map((thumbnail, index) => (
                         <SlideshowItem key={`${thumbnail.image}-${index}`}>
                             <ImageBlock

@@ -35,6 +35,7 @@ export const App = ({ theme }: any) => {
             placeholder={PLACEHOLDER}
             theme={theme}
             onClear={clearSelected}
+            clearButtonProps={{ label: 'Clear' }}
         >
             <List>
                 {CHOICES.length > 0

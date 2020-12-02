@@ -10,7 +10,7 @@ export const App = ({ theme }: any) => {
 
     return (
         <Toolbar
-            before={<IconButton emphasis={Emphasis.low} theme={theme} icon={mdiChevronLeft} />}
+            before={<IconButton label="Previous" emphasis={Emphasis.low} theme={theme} icon={mdiChevronLeft} />}
             label={
                 <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
                     <span
@@ -34,6 +34,7 @@ export const App = ({ theme }: any) => {
             after={
                 <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
                     <IconButton
+                        label="Grid"
                         className="lumx-spacing-margin-right-regular"
                         emphasis={Emphasis.low}
                         theme={theme}

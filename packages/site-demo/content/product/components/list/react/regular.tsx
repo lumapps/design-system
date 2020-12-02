@@ -27,7 +27,7 @@ export const App = () => (
 
         <ListItem
             before={<Thumbnail variant={ThumbnailVariant.rounded} image="/demo-assets/square1.jpg" size={Size.m} />}
-            after={<IconButton emphasis={Emphasis.low} icon={mdiDotsHorizontal} />}
+            after={<IconButton label="More" emphasis={Emphasis.low} icon={mdiDotsHorizontal} />}
         >
             Single-line item
         </ListItem>

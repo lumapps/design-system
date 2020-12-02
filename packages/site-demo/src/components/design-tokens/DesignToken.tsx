@@ -42,6 +42,7 @@ export const DesignToken: React.FC<DesignTokenProps> = ({
             isOpen={isOpen}
             onToggleOpen={setIsOpen}
             theme={theme}
+            toggleButtonProps={{ label: 'Toggle' }}
         >
             <header>
                 <div className="design-token__header">

@@ -38,7 +38,14 @@ export const App = ({ theme }: any) => {
     ];
 
     return (
-        <Slideshow activeIndex={0} hasControls theme={theme} groupBy={1} style={{ width: '50%' }}>
+        <Slideshow
+            activeIndex={0}
+            nextButtonProps={{ label: 'Next' }}
+            previousButtonProps={{ label: 'Previous' }}
+            theme={theme}
+            groupBy={1}
+            style={{ width: '50%' }}
+        >
             {images.map((image) => (
                 <SlideshowItem key={image}>
                     <ImageBlock

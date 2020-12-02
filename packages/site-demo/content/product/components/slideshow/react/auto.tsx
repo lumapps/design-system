@@ -7,7 +7,15 @@ export const App = ({ theme }: any) => {
     };
 
     return (
-        <Slideshow activeIndex={0} hasControls theme={theme} autoPlay groupBy={1} style={slideshowStyle}>
+        <Slideshow
+            activeIndex={0}
+            nextButtonProps={{ label: 'Next' }}
+            previousButtonProps={{ label: 'Previous' }}
+            theme={theme}
+            autoPlay
+            groupBy={1}
+            style={slideshowStyle}
+        >
             <SlideshowItem>
                 <ImageBlock
                     thumbnailProps={{ aspectRatio: AspectRatio.vertical }}
