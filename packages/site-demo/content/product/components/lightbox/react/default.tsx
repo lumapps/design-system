@@ -52,8 +52,10 @@ export const App = () => {
             >
                 <Slideshow
                     activeIndex={activeIndex}
-                    nextButtonProps={{ label: 'Next' }}
-                    previousButtonProps={{ label: 'Previous' }}
+                    slideshowControlsProps={{
+                        nextButtonProps: { label: 'Next' },
+                        previousButtonProps: { label: 'Previous' },
+                    }}
                     autoPlay
                     fillHeight
                     theme={Theme.dark}

@@ -53,7 +53,6 @@ export const ControllingSlideshow = ({ theme }: any) => {
         <div style={{ height: 400, width: 500, position: 'relative' }}>
             <Slideshow
                 activeIndex={activeIndex}
-                hasControls={false}
                 theme={theme}
                 autoPlay
                 groupBy={1}

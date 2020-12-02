@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   _[BREAKING]_ Added required `label` prop for `IconButton`. The label is used as `aria-label` for the button and to add a tooltip. This prop is required for a11y purpose. If you really don't want a tooltip, you can give an empty label (this is not recommended).
 -   _[BREAKING]_ Added `nextButtonProps` and `previousButtonProps` props to `DatePickerControlled`, `DatePicker` and `DatePickerField` components to allow setting custom props to the `IconButton`s used to change month. These fields are **required** because translation are not handled inside the Design System and the `IconButton` now requires a `label` for a11y purposes.
 -   _[BREAKING]_ Added `nextButtonProps` and `previousButtonProps` props to `SlideshowControls` component to allow setting custom props to the `IconButton`s used to change image. These fields are **required** because translation are not handled inside the Design System and the `IconButton` now requires a `label` for a11y purposes.
+-   Added `slideshowControlsProps` to the `Slideshow` component to allow setting custom props to the slideshow controls. Controls are not displayed if this prop is not set.
 -   _[BREAKING]_ Added `toggleButtonProps` prop to `ExpansionPanel` component to allow setting custom props to the `IconButton`s used to toggle the panel. This field is **required** because translation are not handled inside the Design System and the `IconButton` now requires a `label` for a11y purposes.
 -   _[BREAKING]_ Added `toggleButtonProps` prop to `SideNavigationItem` component to allow setting custom props to the `IconButton`s used to toggle the menu. This field is **required** because translation are not handled inside the Design System and the `IconButton` now requires a `label` for a11y purposes.
 -   Added `clearButtonProps` prop to `Select` component to allow setting custom props to the `IconButton`s used to clear the select. This prop is not required since the icon button is not automatically displayed. However, when used to display the button, the `label` prop inside the `clearButtonProps` prop will be required because translation are not handled inside the Design System and the `IconButton` now requires a `label` for a11y purposes.
@@ -72,6 +73,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   _[BREAKING]_ Removed `thumbnails.url` prop on the `Mosaic` (use `image` instead).
 -   _[BREAKING]_ `isClosingButtonVisible` prop of `Lightbox` component has been removed. Passing the `label` prop using `closeButtonProps` prop is enough to determine the visibility of the icon button.
 -   _[BREAKING]_ `isClearable` prop of `TextField`, `Autocomplete` and `AutocompleteMultiple` components has been removed. Passing the `label` prop using `clearButtonProps` prop is enough to determine the visibility of the icon button.
+-   _[BREAKING]_ `hasControls` prop of `Slideshow` component has been removed. Using `slideshowControlsProps` prop is enough to determine the visibility of the slideshow controls.
 
 ## [0.28.2][] - 2020-12-11
 

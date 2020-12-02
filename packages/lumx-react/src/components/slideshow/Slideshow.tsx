@@ -2,14 +2,12 @@ import React, { CSSProperties, useCallback, useEffect, useRef, useState } from '
 
 import classNames from 'classnames';
 
-import { IconButtonProps, Theme } from '@lumx/react';
+import { SlideshowControls, SlideshowControlsProps, Theme } from '@lumx/react';
 
 import { AUTOPLAY_DEFAULT_INTERVAL, FULL_WIDTH_PERCENT } from '@lumx/react/components/slideshow/constants';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { useInterval } from '@lumx/react/hooks';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
-
-import { SlideshowControls } from './SlideshowControls';
 
 /**
  * Defines the props of the component.
@@ -23,16 +21,21 @@ export interface SlideshowProps extends GenericProps {
     fillHeight?: boolean;
     /** The number of slides to group together. */
     groupBy?: number;
-    /** Whether slideshow has controls or not. */
-    hasControls?: boolean;
     /** The interval between each slide when automatic rotation is enabled. */
     interval?: number;
-    /** The props to pass to the next button, minus those already set by the SlideshowControls props. */
-    nextButtonProps: Pick<IconButtonProps, 'label'> &
-        Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis' | 'color'>;
-    /** The props to pass to the previous button, minus those already set by the SlideshowControls props. */
-    previousButtonProps: Pick<IconButtonProps, 'label'> &
-        Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis' | 'color'>;
+    /** The props to pass to the slideshow controls, minus those already set by the Slideshow props. */
+    slideshowControlsProps?: Pick<SlideshowControlsProps, 'nextButtonProps' | 'previousButtonProps'> &
+        Omit<
+            SlideshowControlsProps,
+            | 'activeIndex'
+            | 'onPaginationClick'
+            | 'onNextClick'
+            | 'onPreviousClick'
+            | 'slidesCount'
+            | 'parentRef'
+            | 'theme'
+        >;
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
     /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
@@ -68,11 +71,9 @@ export const Slideshow: Comp<SlideshowProps> = ({
     className,
     fillHeight,
     groupBy,
-    hasControls,
     interval,
-    nextButtonProps,
     onChange,
-    previousButtonProps,
+    slideshowControlsProps,
     theme,
     useCustomColors,
     ...forwardedProps
@@ -175,12 +176,12 @@ export const Slideshow: Comp<SlideshowProps> = ({
     };
 
     /* If the activeIndex props changes, update the current slide */
-    React.useEffect(() => {
+    useEffect(() => {
         setCurrentIndex(activeIndex as number);
     }, [activeIndex]);
 
     /* If the slide changes, with autoplay for example, trigger "onChange" */
-    React.useEffect(() => {
+    useEffect(() => {
         if (onChange) {
             onChange(currentIndex);
         }
@@ -203,9 +204,10 @@ export const Slideshow: Comp<SlideshowProps> = ({
                 </div>
             </div>
 
-            {hasControls && slidesCount > 1 && (
+            {slideshowControlsProps && slidesCount > 1 && (
                 <div className={`${CLASSNAME}__controls`}>
                     <SlideshowControls
+                        {...slideshowControlsProps}
                         activeIndex={currentIndex}
                         onPaginationClick={handleControlGotToSlide}
                         onNextClick={handleControlNextSlide}
@@ -213,8 +215,6 @@ export const Slideshow: Comp<SlideshowProps> = ({
                         slidesCount={slidesCount}
                         parentRef={parentRef}
                         theme={theme}
-                        nextButtonProps={nextButtonProps}
-                        previousButtonProps={previousButtonProps}
                     />
                 </div>
             )}

@@ -97,8 +97,10 @@ export const SixThumbnails = ({ theme }: any) => {
             >
                 <Slideshow
                     activeIndex={activeIndex}
-                    nextButtonProps={{ label: 'Next' }}
-                    previousButtonProps={{ label: 'Previous' }}
+                    slideshowControlsProps={{
+                        nextButtonProps: { label: 'Next' },
+                        previousButtonProps: { label: 'Previous' },
+                    }}
                     fillHeight
                     theme={Theme.dark}
                 >
