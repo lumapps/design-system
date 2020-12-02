@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { RefObject, useEffect, useRef, useState } from 'react';
 
 import { mdiAccount, mdiBell } from '@lumx/icons';
 import {
+    Alignment,
     Chip,
     Emphasis,
     FlexBox,
@@ -16,115 +17,47 @@ import {
 } from '@lumx/react';
 import { boolean, select } from '@storybook/addon-knobs';
 import range from 'lodash/range';
+import startCase from 'lodash/startCase';
 
 export default { title: 'LumX components/popover/Popover' };
 
 const DEFAULT_PROPS = Popover.defaultProps as any;
 
 export const positions = ({ theme }: any) => {
-    const demoPopperStyle = {
-        alignItems: 'center',
-        display: 'flex',
-        height: 80,
-        justifyContent: 'center',
-        width: 100,
-    };
-
-    const demoPopoverHolderStyle = {
-        alignItems: 'center',
-        display: 'flex',
-        height: 132,
-        justifyContent: 'center',
-    };
-
-    const topAnchorRef = React.useRef(null);
-    const rightAnchorRef = React.useRef(null);
-    const bottomAnchorRef = React.useRef(null);
-    const leftAnchorRef = React.useRef(null);
-
-    const hasArrow = boolean('hasArrow', DEFAULT_PROPS.hasArrow as any);
-    const elevation: any = select('elevation', [5, 4, 3, 2, 1], DEFAULT_PROPS.elevation);
+    const popovers: Array<[Placement, RefObject<any>]> = [
+        [Placement.LEFT, useRef(null)],
+        [Placement.TOP, useRef(null)],
+        [Placement.BOTTOM, useRef(null)],
+        [Placement.RIGHT, useRef(null)],
+    ];
+    const hasArrow = boolean('Has arrow', DEFAULT_PROPS.hasArrow as any);
+    const elevation: any = select('Elevation', [5, 4, 3, 2, 1], DEFAULT_PROPS.elevation);
+    const alignOptions = { middle: '', start: '-start', end: '-end' };
+    const align = select('Placement variant', alignOptions, alignOptions.middle);
 
     return (
-        <FlexBox
-            className="lumx-spacing-margin-top-huge lumx-spacing-margin-bottom-huge"
-            orientation={Orientation.horizontal}
-        >
-            <FlexBox fillSpace>
-                <div style={demoPopoverHolderStyle}>
-                    <Chip chipRef={topAnchorRef} theme={theme} size={Size.s}>
-                        TOP
-                    </Chip>
-                </div>
-                <Popover
-                    theme={theme}
-                    anchorRef={topAnchorRef}
-                    placement={Placement.TOP}
-                    isOpen
-                    hasArrow={hasArrow}
-                    elevation={elevation}
-                >
-                    <div style={demoPopperStyle}>{'Popover'}</div>
-                </Popover>
-            </FlexBox>
+        <FlexBox style={{ padding: 80 }} orientation={Orientation.horizontal}>
+            {popovers.map(([placement, ref]) => {
+                const placementVariant = (placement + align) as any;
+                return (
+                    <FlexBox key={placement} fillSpace vAlign={Alignment.center} hAlign={Alignment.center}>
+                        <Chip chipRef={ref} theme={theme} size={Size.s}>
+                            {startCase(placementVariant).toUpperCase()}
+                        </Chip>
 
-            <FlexBox fillSpace>
-                <div style={demoPopoverHolderStyle}>
-                    <Chip chipRef={rightAnchorRef} theme={theme} size={Size.s}>
-                        RIGHT
-                    </Chip>
-                </div>
-                <Popover
-                    theme={theme}
-                    anchorRef={rightAnchorRef}
-                    placement={Placement.RIGHT}
-                    isOpen
-                    hasArrow={hasArrow}
-                    elevation={elevation}
-                >
-                    <div style={demoPopperStyle}>{'Popover'}</div>
-                </Popover>
-            </FlexBox>
-
-            <FlexBox fillSpace />
-
-            <FlexBox fillSpace>
-                <div style={demoPopoverHolderStyle}>
-                    <Chip chipRef={bottomAnchorRef} theme={theme} size={Size.s}>
-                        BOTTOM
-                    </Chip>
-                </div>
-                <Popover
-                    theme={theme}
-                    anchorRef={bottomAnchorRef}
-                    placement={Placement.BOTTOM}
-                    isOpen
-                    hasArrow={hasArrow}
-                    elevation={elevation}
-                >
-                    <div style={demoPopperStyle}>{'Popover'}</div>
-                </Popover>
-            </FlexBox>
-
-            <FlexBox fillSpace />
-
-            <FlexBox fillSpace>
-                <div style={demoPopoverHolderStyle}>
-                    <Chip chipRef={leftAnchorRef} theme={theme} size={Size.s}>
-                        LEFT
-                    </Chip>
-                </div>
-                <Popover
-                    theme={theme}
-                    anchorRef={leftAnchorRef}
-                    placement={Placement.LEFT}
-                    isOpen
-                    hasArrow={hasArrow}
-                    elevation={elevation}
-                >
-                    <div style={demoPopperStyle}>{'Popover'}</div>
-                </Popover>
-            </FlexBox>
+                        <Popover
+                            isOpen
+                            theme={theme}
+                            anchorRef={ref}
+                            placement={placementVariant}
+                            elevation={elevation}
+                            hasArrow={hasArrow}
+                        >
+                            <div className="lumx-spacing-margin-huge">Popover</div>
+                        </Popover>
+                    </FlexBox>
+                );
+            })}
         </FlexBox>
     );
 };
@@ -208,9 +141,8 @@ export const withUpdatingChildren = ({ theme }: any) => {
                 setText('Text');
             }, 1000);
             return () => clearTimeout(timer);
-        } else {
-            setText('Long loading text with useless words');
         }
+        setText('Long loading text with useless words');
     }, [isOpen]);
 
     return (
@@ -234,10 +166,7 @@ export const withUpdatingChildren = ({ theme }: any) => {
                 fitWithinViewportHeight
             >
                 <List>
-                    <ListItem
-                        before={<Icon icon={mdiAccount} />}
-                        className="lumx-spacing-margin-right-huge"
-                    >
+                    <ListItem before={<Icon icon={mdiAccount} />} className="lumx-spacing-margin-right-huge">
                         <span>{text}</span>
                     </ListItem>
                 </List>
@@ -268,25 +197,23 @@ export const withScrollingPopover = ({ theme }: any) => {
                 theme={theme}
                 isOpen={isOpen}
                 anchorRef={anchorRef}
-                placement={Placement.BOTTOM_START}
+                placement={Placement.BOTTOM}
                 onClose={toggleOpen}
                 fitWithinViewportHeight
             >
-                <div style={{ overflowY: 'auto' }}>
-                    <List>
-                        {range(100).map((n: number) => {
-                            return (
-                                <ListItem
-                                    key={`key-${n}`}
-                                    before={<Icon icon={mdiAccount} />}
-                                    className="lumx-spacing-margin-right-huge"
-                                >
-                                    <span>{`List item ${n} and some text`}</span>
-                                </ListItem>
-                            );
-                        })}
-                    </List>
-                </div>
+                <List style={{ overflowY: 'auto' }}>
+                    {range(100).map((n: number) => {
+                        return (
+                            <ListItem
+                                key={`key-${n}`}
+                                before={<Icon icon={mdiAccount} />}
+                                className="lumx-spacing-margin-right-huge"
+                            >
+                                <span>{`List item ${n} and some text`}</span>
+                            </ListItem>
+                        );
+                    })}
+                </List>
             </Popover>
         </div>
     );

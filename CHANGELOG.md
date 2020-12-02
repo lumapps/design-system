@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Fixed ClickAwayProvider initialization error using deferred initialization.
 -   Fixed `Popover` placement on children update.
+-   Fixed `Popover` and `Dropdown` scrollbar behavior.
+-   Fixed `Popover` arrow placement on placement variant `start` and `end`.
 
 ## [0.28.0][] - 2020-11-17
 
