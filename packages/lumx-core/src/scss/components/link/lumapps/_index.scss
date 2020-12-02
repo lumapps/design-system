@@ -12,6 +12,11 @@
     &__right-icon {
         margin-left: $lumx-spacing-unit-tiny;
     }
+
+    &:disabled,
+    &[aria-disabled='true'] {
+        @include lumx-state-disabled-input;
+    }
 }
 
 /* Link colors
