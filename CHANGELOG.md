@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.28.1][] - 2020-12-03
+
 ### Fixed
 
 -   Fixed ClickAwayProvider initialization error using deferred initialization.
@@ -805,3 +807,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.27.0]: https://github.com/lumapps/design-system/tree/v0.27.0
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.28.0...HEAD
 [0.28.0]: https://github.com/lumapps/design-system/tree/v0.28.0
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.28.1...HEAD
+[0.28.1]: https://github.com/lumapps/design-system/tree/v0.28.1
