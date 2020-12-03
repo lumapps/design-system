@@ -10,5 +10,6 @@ module.exports = {
         '@storybook/addon-viewport/register',
         '@storybook/addon-a11y/register',
         '@storybook/addon-actions/register',
+        '@storybook/addon-storysource',
     ],
 };
