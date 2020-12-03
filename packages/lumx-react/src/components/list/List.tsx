@@ -7,7 +7,7 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
 import classNames from 'classnames';
-import React, { Key, ReactNode, Ref, useRef } from 'react';
+import React, { Key, ReactNode, Ref, SyntheticEvent, useRef } from 'react';
 import { useInteractiveList } from './useInteractiveList';
 
 /**
@@ -37,8 +37,9 @@ interface ListProps extends GenericProps {
      *
      * @param key   React key of the selected item.
      * @param index Index of the selected item among the sibling items.
+     * @param evt   Source event (either mouse or keyboard event).
      */
-    onListItemSelected?(key: Key, index: number): void;
+    onListItemSelected?(key: Key, index: number, evt: SyntheticEvent): void;
 }
 
 /**
