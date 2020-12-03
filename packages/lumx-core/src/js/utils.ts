@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import React from 'react';
 
 import isBoolean from 'lodash/isBoolean';
 import isEmpty from 'lodash/isEmpty';
@@ -20,7 +21,6 @@ const _isEmpty = (value: any) => {
 
     return isEmpty(value);
 };
-type Callback = () => void;
 
 /**
  * Get the basic CSS class for the given type.
@@ -156,33 +156,39 @@ function detectSwipe(touchSurface: Element, handleSwipe: (direction: SwipeDirect
     };
 }
 
+type KeyboardEventHandler<E extends KeyboardEvent | React.KeyboardEvent> = (event: E) => void;
+
 /**
  * Make sure the pressed key is the enter key before calling the callback.
  *
- * @param  cb The callback to call on enter/return press.
+ * @param  handler The handler to call on enter/return press.
  * @return The decorated function.
  */
-function onEnterPressed(cb: Callback) {
-    return (evt: { key: string }) => {
+function onEnterPressed<E extends KeyboardEvent | React.KeyboardEvent>(
+    handler: KeyboardEventHandler<E>,
+): KeyboardEventHandler<E> {
+    return (evt) => {
         if (evt.key !== 'Enter') {
             return;
         }
-        cb();
+        handler(evt);
     };
 }
 
 /**
  * Make sure the pressed key is the escape key before calling the callback.
  *
- * @param  cb The callback to call on escape press.
+ * @param  handler The handler to call on enter/return press.
  * @return The decorated function.
  */
-function onEscapePressed(cb: Callback) {
-    return (evt: { keyCode: number }) => {
+function onEscapePressed<E extends KeyboardEvent | React.KeyboardEvent>(
+    handler: KeyboardEventHandler<E>,
+): KeyboardEventHandler<E> {
+    return (evt: any) => {
         if (evt.keyCode !== ESCAPE_KEY_CODE) {
             return;
         }
-        cb();
+        handler(evt);
     };
 }
 
