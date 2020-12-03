@@ -1,6 +1,6 @@
 // @ts-ignore
 import { detectOverflow } from '@popperjs/core';
-import React, { ReactNode, RefObject, useMemo, useRef, useState } from 'react';
+import React, { ReactNode, RefObject, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { usePopper } from 'react-popper';
 
@@ -198,10 +198,12 @@ const Popover: React.FC<PopoverProps> = (props) => {
         focusElement,
         className,
         onClose,
+        style,
         ...forwardedProps
     } = props;
     const [popperElement, setPopperElement] = useState<null | HTMLElement>(null);
-    const wrapperRef = useRef<HTMLDivElement>(null);
+    const [arrowElement, setArrowElement] = useState<null | HTMLElement>(null);
+    const clickAwayRef = useRef<HTMLDivElement>(null);
 
     const modifiers: any = [];
     const actualOffset: [number, number] = [offset?.along ?? 0, (offset?.away ?? 0) + (hasArrow ? OFFSET : 0)];
@@ -209,6 +211,9 @@ const Popover: React.FC<PopoverProps> = (props) => {
         name: 'offset',
         options: { offset: actualOffset },
     });
+    if (hasArrow && arrowElement) {
+        modifiers.push({ name: 'arrow', options: { element: arrowElement, padding: OFFSET } });
+    }
 
     if (fitToAnchorWidth) {
         modifiers.push(sameWidth);
@@ -217,15 +222,18 @@ const Popover: React.FC<PopoverProps> = (props) => {
         modifiers.push(maxSize, applyMaxHeight);
     }
 
-    const { styles, attributes, state } = usePopper(anchorRef.current, popperElement, {
+    const { styles, attributes, state, update } = usePopper(anchorRef.current, popperElement, {
         placement,
         modifiers,
     });
+    useEffect(() => {
+        update?.();
+    }, [children, update]);
 
     const position = state?.placement ?? placement;
 
     const popoverStyle = useMemo(() => {
-        const newStyles = { ...styles.popper, zIndex };
+        const newStyles = { ...style, ...styles.popper, zIndex };
 
         if (fitWithinViewportHeight && !newStyles.maxHeight) {
             newStyles.maxHeight = WINDOW?.innerHeight || DOCUMENT?.documentElement.clientHeight;
@@ -241,7 +249,7 @@ const Popover: React.FC<PopoverProps> = (props) => {
         ? createPortal(
               <div
                   {...forwardedProps}
-                  ref={mergeRefs(setPopperElement, popoverRef)}
+                  ref={mergeRefs(setPopperElement, popoverRef, clickAwayRef)}
                   className={classNames(
                       className,
                       handleBasicClasses({ prefix: CLASSNAME, elevation: Math.min(elevation || 0, 5), position }),
@@ -249,18 +257,10 @@ const Popover: React.FC<PopoverProps> = (props) => {
                   style={popoverStyle}
                   {...attributes.popper}
               >
-                  <div ref={wrapperRef} className={`${CLASSNAME}__wrapper`}>
-                      <ClickAwayProvider callback={closeOnClickAway && onClose} refs={[wrapperRef, anchorRef]}>
-                          {hasArrow ? (
-                              <>
-                                  <div className={`${CLASSNAME}__arrow`} />
-                                  <div className={`${CLASSNAME}__inner`}>{children}</div>
-                              </>
-                          ) : (
-                              children
-                          )}
-                      </ClickAwayProvider>
-                  </div>
+                  <ClickAwayProvider callback={closeOnClickAway && onClose} refs={[clickAwayRef, anchorRef]}>
+                      {hasArrow && <div ref={setArrowElement} className={`${CLASSNAME}__arrow`} style={styles.arrow} />}
+                      {children}
+                  </ClickAwayProvider>
               </div>,
               document.body,
           )
