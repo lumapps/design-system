@@ -107,7 +107,9 @@ const ListItem: React.FC<ListItemProps> = (props) => {
         listItemRef,
         ...forwardedProps
     } = props;
-    const onKeyDown = useMemo(() => (onItemSelected ? onEnterPressed(onItemSelected) : undefined), [onItemSelected]);
+    const onKeyDown = useMemo(() => (onItemSelected ? onEnterPressed(onItemSelected as any) : undefined), [
+        onItemSelected,
+    ]);
 
     const content = (
         <>
