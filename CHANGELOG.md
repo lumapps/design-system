@@ -59,6 +59,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   _[BREAKING]_ `align`, `aspectRatio`, `crossOrigin`, `fillHeight`, `focusPoint`, `isCrossOriginEnabled` and `onClick` props have been removed from `ImageBlock` component. These props will now be passed using the `ImageBlock.thumbnailProps` prop.
 -   _[BREAKING]_ Removed `Tabs` component replaced by the `TabProvider` and `TabList` components.
 
+## [0.28.1][] - 2020-12-03
+
+### Fixed
+
+-   Fixed ClickAwayProvider initialization error using deferred initialization.
+-   Fixed `Popover` placement on children update.
+-   Fixed `Popover` and `Dropdown` scrollbar behavior.
+-   Fixed `Popover` arrow placement on placement variant `start` and `end`.
+
+### Added
+
+-   Forward synthetic event in List `onListItemSelected` prop and ListItem `onItemSelected` prop.
+
 ## [0.28.0][] - 2020-11-17
 
 ### Changed
@@ -846,3 +859,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.27.0]: https://github.com/lumapps/design-system/tree/v0.27.0
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.28.0...HEAD
 [0.28.0]: https://github.com/lumapps/design-system/tree/v0.28.0
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.28.1...HEAD
+[0.28.1]: https://github.com/lumapps/design-system/tree/v0.28.1

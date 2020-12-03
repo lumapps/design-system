@@ -19,7 +19,9 @@ export const ClickAwayProvider: React.FC<ClickAwayParameters> = ({ children, cal
 
     const appendChildrenRefs = useCallback(
         (newChildrenRefs: ClickAwayParameters['refs']) => {
-            setChildrenRefs(uniq([...childrenRefs, ...newChildrenRefs]));
+            setTimeout(() => {
+                setChildrenRefs(uniq([...childrenRefs, ...newChildrenRefs]));
+            });
         },
         [childrenRefs, setChildrenRefs],
     );

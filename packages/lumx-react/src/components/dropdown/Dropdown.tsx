@@ -115,10 +115,10 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
         zIndex,
         ...forwardedProps
     } = props;
-    const popoverRef = useRef<HTMLDivElement>(null);
+    const innerRef = useRef<HTMLDivElement>(null);
     const listElement = useRef(null);
 
-    useInfiniteScroll(popoverRef, onInfiniteScroll);
+    useInfiniteScroll(innerRef, onInfiniteScroll);
 
     const popperElement = useMemo(() => {
         return !Array.isArray(children) && isComponent(List)(children)
@@ -135,13 +135,13 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
                   isClickable: true,
               })
             : children;
-    }, [listElement, popoverRef, children, className, closeOnClick, props]);
+    }, [listElement, innerRef, children, className, closeOnClick, props]);
 
     return isOpen ? (
         <Popover
             {...forwardedProps}
             anchorRef={anchorRef}
-            className={classNames(className, `${CLASSNAME}__menu`, handleBasicClasses({ prefix: CLASSNAME }))}
+            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))}
             closeOnClickAway={closeOnClickAway}
             closeOnEscape={closeOnEscape}
             fitToAnchorWidth={fitToAnchorWidth}
@@ -151,10 +151,11 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
             offset={offset}
             onClose={onClose}
             placement={placement}
-            popoverRef={popoverRef}
             zIndex={zIndex}
         >
-            {popperElement}
+            <div className={`${CLASSNAME}__menu`} ref={innerRef}>
+                {popperElement}
+            </div>
         </Popover>
     ) : null;
 };

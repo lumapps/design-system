@@ -1,12 +1,22 @@
 import { ListItemProps } from '@lumx/react';
 import { isClickable } from '@lumx/react/components/list/ListItem';
+
+import { DOWN_KEY_CODE, UP_KEY_CODE } from '@lumx/react/constants';
 import { isComponent } from '@lumx/react/utils';
 import { flattenChildren } from '@lumx/react/utils/flattenChildren';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
-import { Key, ReactElement, ReactNode, RefObject, cloneElement, useEffect, useMemo, useState } from 'react';
-
-import { DOWN_KEY_CODE, UP_KEY_CODE } from '@lumx/react/constants';
 import get from 'lodash/get';
+import {
+    Key,
+    ReactElement,
+    ReactNode,
+    RefObject,
+    SyntheticEvent,
+    cloneElement,
+    useEffect,
+    useMemo,
+    useState,
+} from 'react';
 
 type Listener = (evt: KeyboardEvent) => void;
 
@@ -27,8 +37,9 @@ interface Options {
      *
      * @param index Index of the selected item among the sibling items.
      * @param key   React key of the selected item.
+     * @param evt   Source event (either mouse or keyboard event).
      */
-    onListItemSelected?(index: number, key: Key | null): void;
+    onListItemSelected?(index: number, key: Key | null, evt: SyntheticEvent): void;
 }
 
 interface Output {
@@ -177,9 +188,9 @@ export const useInteractiveList: useInteractiveList = (options) => {
                         element?.focus();
                     }
                 }),
-                onItemSelected() {
+                onItemSelected(evt) {
                     item.props.onItemSelected?.();
-                    onListItemSelected?.(index, item.key);
+                    onListItemSelected?.(index, item.key, evt);
                 },
                 ...onKeyboardFocus(item.props, () => {
                     setActiveItemIndex(index);

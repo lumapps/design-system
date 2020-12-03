@@ -1,4 +1,4 @@
-import React, { ReactNode, Ref, useMemo } from 'react';
+import React, { ReactNode, Ref, SyntheticEvent, useMemo } from 'react';
 
 import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
@@ -47,7 +47,7 @@ interface ListItemProps extends GenericProps {
     /** The size variant of the component. */
     size?: ListItemSizes;
     /** The function called when an item is selected. */
-    onItemSelected?(): void;
+    onItemSelected?(evt: SyntheticEvent): void;
 }
 
 /**
@@ -91,7 +91,9 @@ const ListItem: React.FC<ListItemProps> = (props) => {
         size,
         ...forwardedProps
     } = props;
-    const onKeyDown = useMemo(() => (onItemSelected ? onEnterPressed(onItemSelected) : undefined), [onItemSelected]);
+    const onKeyDown = useMemo(() => (onItemSelected ? onEnterPressed(onItemSelected as any) : undefined), [
+        onItemSelected,
+    ]);
 
     const content = (
         <>
