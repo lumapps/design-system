@@ -10,7 +10,7 @@ import React, { ReactNode } from 'react';
 /**
  * Defines the props of the component.
  */
-interface AutocompleteMultipleProps extends AutocompleteProps {
+export interface AutocompleteMultipleProps extends AutocompleteProps {
     /**
      * The list of selected values.
      */
@@ -42,7 +42,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}AutocompleteMultiple`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -68,7 +68,7 @@ const DEFAULT_PROPS: Partial<AutocompleteMultipleProps> = {
     values: [],
 };
 
-const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = ({
+export const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = ({
     anchorToInput,
     children,
     chipsAlignment,
@@ -151,5 +151,3 @@ const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = ({
 );
 AutocompleteMultiple.displayName = COMPONENT_NAME;
 AutocompleteMultiple.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, AutocompleteMultiple, AutocompleteMultipleProps };

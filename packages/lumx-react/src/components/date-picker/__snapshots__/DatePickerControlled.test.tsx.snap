@@ -132,6 +132,7 @@ exports[`<DatePickerControlled> Snapshots and structure should render correctly 
           className="lumx-date-picker__month-day"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <span>
             01
@@ -146,6 +147,7 @@ exports[`<DatePickerControlled> Snapshots and structure should render correctly 
           className="lumx-date-picker__month-day"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <span>
             02
@@ -160,6 +162,7 @@ exports[`<DatePickerControlled> Snapshots and structure should render correctly 
           className="lumx-date-picker__month-day"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <span>
             03
@@ -174,6 +177,7 @@ exports[`<DatePickerControlled> Snapshots and structure should render correctly 
           className="lumx-date-picker__month-day"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <span>
             04
@@ -188,6 +192,7 @@ exports[`<DatePickerControlled> Snapshots and structure should render correctly 
           className="lumx-date-picker__month-day"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <span>
             05
@@ -202,6 +207,7 @@ exports[`<DatePickerControlled> Snapshots and structure should render correctly 
           className="lumx-date-picker__month-day"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <span>
             06
@@ -216,6 +222,7 @@ exports[`<DatePickerControlled> Snapshots and structure should render correctly 
           className="lumx-date-picker__month-day"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <span>
             07
@@ -230,6 +237,7 @@ exports[`<DatePickerControlled> Snapshots and structure should render correctly 
           className="lumx-date-picker__month-day"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <span>
             08
@@ -244,6 +252,7 @@ exports[`<DatePickerControlled> Snapshots and structure should render correctly 
           className="lumx-date-picker__month-day"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <span>
             09
@@ -258,6 +267,7 @@ exports[`<DatePickerControlled> Snapshots and structure should render correctly 
           className="lumx-date-picker__month-day"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <span>
             10
@@ -272,6 +282,7 @@ exports[`<DatePickerControlled> Snapshots and structure should render correctly 
           className="lumx-date-picker__month-day"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <span>
             11
@@ -286,6 +297,7 @@ exports[`<DatePickerControlled> Snapshots and structure should render correctly 
           className="lumx-date-picker__month-day"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <span>
             12
@@ -300,6 +312,7 @@ exports[`<DatePickerControlled> Snapshots and structure should render correctly 
           className="lumx-date-picker__month-day"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <span>
             13
@@ -314,6 +327,7 @@ exports[`<DatePickerControlled> Snapshots and structure should render correctly 
           className="lumx-date-picker__month-day"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <span>
             14
@@ -328,6 +342,7 @@ exports[`<DatePickerControlled> Snapshots and structure should render correctly 
           className="lumx-date-picker__month-day"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <span>
             15
@@ -342,6 +357,7 @@ exports[`<DatePickerControlled> Snapshots and structure should render correctly 
           className="lumx-date-picker__month-day"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <span>
             16
@@ -356,6 +372,7 @@ exports[`<DatePickerControlled> Snapshots and structure should render correctly 
           className="lumx-date-picker__month-day"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <span>
             17
@@ -370,6 +387,7 @@ exports[`<DatePickerControlled> Snapshots and structure should render correctly 
           className="lumx-date-picker__month-day lumx-date-picker__month-day--is-selected lumx-date-picker__month-day--is-today"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <span>
             18
@@ -384,6 +402,7 @@ exports[`<DatePickerControlled> Snapshots and structure should render correctly 
           className="lumx-date-picker__month-day"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <span>
             19
@@ -398,6 +417,7 @@ exports[`<DatePickerControlled> Snapshots and structure should render correctly 
           className="lumx-date-picker__month-day"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <span>
             20
@@ -412,6 +432,7 @@ exports[`<DatePickerControlled> Snapshots and structure should render correctly 
           className="lumx-date-picker__month-day"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <span>
             21
@@ -426,6 +447,7 @@ exports[`<DatePickerControlled> Snapshots and structure should render correctly 
           className="lumx-date-picker__month-day"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <span>
             22
@@ -440,6 +462,7 @@ exports[`<DatePickerControlled> Snapshots and structure should render correctly 
           className="lumx-date-picker__month-day"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <span>
             23
@@ -454,6 +477,7 @@ exports[`<DatePickerControlled> Snapshots and structure should render correctly 
           className="lumx-date-picker__month-day"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <span>
             24
@@ -468,6 +492,7 @@ exports[`<DatePickerControlled> Snapshots and structure should render correctly 
           className="lumx-date-picker__month-day"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <span>
             25
@@ -482,6 +507,7 @@ exports[`<DatePickerControlled> Snapshots and structure should render correctly 
           className="lumx-date-picker__month-day"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <span>
             26
@@ -496,6 +522,7 @@ exports[`<DatePickerControlled> Snapshots and structure should render correctly 
           className="lumx-date-picker__month-day"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <span>
             27
@@ -510,6 +537,7 @@ exports[`<DatePickerControlled> Snapshots and structure should render correctly 
           className="lumx-date-picker__month-day"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <span>
             28
@@ -524,6 +552,7 @@ exports[`<DatePickerControlled> Snapshots and structure should render correctly 
           className="lumx-date-picker__month-day"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <span>
             29
@@ -538,6 +567,7 @@ exports[`<DatePickerControlled> Snapshots and structure should render correctly 
           className="lumx-date-picker__month-day"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <span>
             30
@@ -552,6 +582,7 @@ exports[`<DatePickerControlled> Snapshots and structure should render correctly 
           className="lumx-date-picker__month-day"
           disabled={false}
           onClick={[Function]}
+          type="button"
         >
           <span>
             31

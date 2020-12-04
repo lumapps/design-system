@@ -1,11 +1,10 @@
-import React, { ReactElement } from 'react';
+import { CommonSetup, Wrapper } from '@lumx/react/testing/utils';
 
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
-
-import { CommonSetup, Wrapper } from '@lumx/react/testing/utils';
-
-import { DatePicker, DatePickerProps } from './DatePicker';
+import React, { ReactElement } from 'react';
+import { DatePickerProps } from './base';
+import { DatePicker } from './DatePicker';
 
 const mockedDate = new Date(
     new Date(1487721600).toLocaleString('en-US', {
@@ -20,7 +19,7 @@ interface Setup extends CommonSetup {
     props: SetupProps;
 }
 
-const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
+const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering = true): Setup => {
     const props: DatePickerProps = {
         locale: 'fr',
         onChange: jest.fn(),

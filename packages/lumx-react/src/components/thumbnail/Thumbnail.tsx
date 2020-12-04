@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex,jsx-a11y/no-static-element-interactions */
 import React, { ImgHTMLAttributes, ReactElement, ReactNode, useEffect, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
@@ -20,7 +21,6 @@ import { isInternetExplorer } from '@lumx/react/utils/isInternetExplorer';
  * https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/ADVANCED.md#adding-non-standard-attributes
  */
 declare module 'react' {
-    // tslint:disable-next-line: interface-name
     interface ImgHTMLAttributes<T> extends React.HTMLAttributes<T> {
         loading?: 'auto' | 'eager' | 'lazy';
     }
@@ -30,22 +30,22 @@ declare module 'react' {
  * All available aspect ratios.
  * @deprecated
  */
-const ThumbnailAspectRatio: Record<string, AspectRatio> = { ...AspectRatio };
+export const ThumbnailAspectRatio: Record<string, AspectRatio> = { ...AspectRatio };
 
 /**
  *  Authorized size values.
  */
-type ThumbnailSize = Size.xxs | Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
+export type ThumbnailSize = Size.xxs | Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
 
 /**
  *  Thumbnail status.
  */
-type ThumbnailStates = 'isLoading' | 'hasError' | 'isLoaded';
+export type ThumbnailStates = 'isLoading' | 'hasError' | 'isLoaded';
 
 /**
  *  Cross-origin values.
  */
-enum CrossOrigin {
+export enum CrossOrigin {
     anonymous = 'anonymous',
     useCredentials = 'use-credentials',
 }
@@ -53,7 +53,7 @@ enum CrossOrigin {
 /**
  * Authorized variants.
  */
-enum ThumbnailVariant {
+export enum ThumbnailVariant {
     squared = 'squared',
     rounded = 'rounded',
 }
@@ -61,7 +61,7 @@ enum ThumbnailVariant {
 /**
  * Authorized types of image loading.
  */
-enum ImageLoading {
+export enum ImageLoading {
     auto = 'auto',
     lazy = 'lazy',
     eager = 'eager',
@@ -70,7 +70,7 @@ enum ImageLoading {
 /**
  * Defines the props of the component.
  */
-interface ThumbnailProps extends GenericProps {
+export interface ThumbnailProps extends GenericProps {
     /** The thumbnail alignment. */
     align?: Alignment;
     /** The image aspect ratio. */
@@ -114,7 +114,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Thumbnail`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -133,7 +133,7 @@ const DEFAULT_PROPS: Partial<ThumbnailProps> = {
     variant: ThumbnailVariant.squared,
 };
 
-const Thumbnail: React.FC<ThumbnailProps> = ({
+export const Thumbnail: React.FC<ThumbnailProps> = ({
     align,
     alt = 'Thumbnail',
     aspectRatio,
@@ -163,13 +163,16 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
         isFollowingWindowSize!,
         thumbnailState,
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const setCrossOrigin = () => (!isInternetExplorer() && isCrossOriginEnabled ? crossOrigin : undefined);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const onImageError = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
         if (imgProps?.onError) {
             imgProps.onError(event);
         }
         setThumbnailState('hasError');
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const onImageLoad = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
         if (imgProps?.onLoad) {
             imgProps.onLoad(event);
@@ -188,7 +191,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
             ) : (
                 fallback
             ),
-        [fallback, size],
+        [fallback, size, theme],
     );
 
     const renderedImage = useMemo(() => {
@@ -208,7 +211,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
             />
         );
         return isOriginalAspectRatio ? img : <div className={`${CLASSNAME}__background`}>{img}</div>;
-    }, [aspectRatio, crossOrigin, image, imgProps, onImageError, onImageLoad]);
+    }, [alt, aspectRatio, focusImageRef, image, imgProps, loading, onImageError, onImageLoad, setCrossOrigin]);
 
     useEffect(() => {
         setThumbnailState('isLoading');
@@ -234,14 +237,3 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
 };
 Thumbnail.displayName = COMPONENT_NAME;
 Thumbnail.defaultProps = DEFAULT_PROPS;
-
-export {
-    CLASSNAME,
-    Thumbnail,
-    ThumbnailProps,
-    ThumbnailAspectRatio,
-    ThumbnailSize,
-    ThumbnailStates,
-    ThumbnailVariant,
-    CrossOrigin,
-};

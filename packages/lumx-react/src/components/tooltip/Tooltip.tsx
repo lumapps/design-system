@@ -9,18 +9,18 @@ import { Placement } from '@lumx/react/components/popover/Popover';
 
 import { COMPONENT_PREFIX, DOCUMENT } from '@lumx/react/constants';
 
-import { Falsy, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { useInjectTooltipRef } from './useInjectTooltipRef';
 import { useTooltipOpen } from './useTooltipOpen';
 
 /** Position of the tooltip relative to the anchor element. */
-type TooltipPlacement = Placement.TOP | Placement.RIGHT | Placement.BOTTOM | Placement.LEFT;
+export type TooltipPlacement = Placement.TOP | Placement.RIGHT | Placement.BOTTOM | Placement.LEFT;
 
 /**
  * Defines the props of the component.
  */
-interface TooltipProps extends GenericProps {
+export interface TooltipProps extends GenericProps {
     /** The children elements. Will act as the tooltip anchor. */
     children: ReactNode;
     /** The delay (in ms) before closing the tooltip. */
@@ -41,7 +41,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Tooltip`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -56,7 +56,7 @@ const DEFAULT_PROPS: Partial<TooltipProps> = {
  */
 const OFFSET = 8;
 
-const Tooltip: React.FC<TooltipProps> = (props) => {
+export const Tooltip: React.FC<TooltipProps> = (props) => {
     if (!DOCUMENT) {
         // Can't render in SSR.
         return null;
@@ -66,10 +66,14 @@ const Tooltip: React.FC<TooltipProps> = (props) => {
         return <>{children}</>;
     }
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const id = useMemo(() => `tooltip-${uuid()}`, []);
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [popperElement, setPopperElement] = useState<null | HTMLElement>(null);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const { styles, attributes } = usePopper(anchorElement, popperElement, {
         placement,
         modifiers: [
@@ -81,7 +85,9 @@ const Tooltip: React.FC<TooltipProps> = (props) => {
     });
 
     const position = attributes?.popper?.['data-popper-placement'] ?? placement;
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const isOpen = useTooltipOpen(delay as number, anchorElement) || forceOpen;
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const wrappedChildren = useInjectTooltipRef(children, setAnchorElement, isOpen as boolean, id);
 
     return (
@@ -113,5 +119,3 @@ const Tooltip: React.FC<TooltipProps> = (props) => {
 };
 Tooltip.displayName = COMPONENT_NAME;
 Tooltip.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, useTooltipOpen, Tooltip, TooltipPlacement, TooltipProps };

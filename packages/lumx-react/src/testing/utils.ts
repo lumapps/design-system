@@ -10,13 +10,13 @@ import { GenericProps } from '@lumx/react/utils';
 /**
  * The type of a wrapper that can be
  */
-type Wrapper = ShallowWrapper | ReactWrapper;
+export type Wrapper = ShallowWrapper | ReactWrapper;
 
 /**
  * Defines what is always returned by the setup function.
  * Note that `props` should be retyped in the specific interface extending this one.
  */
-interface CommonSetup {
+export interface CommonSetup {
     /**
      * The properties of the tested component.
      */
@@ -37,7 +37,7 @@ interface CommonSetup {
  *                          by the `setup` function.
  * @param   params The params that can be used by the tests.
  */
-function commonTestsSuite(
+export function commonTestsSuite(
     setup: (props?: GenericProps, shallowRendering?: boolean) => CommonSetup,
     { ...tests }: { className?: string | string[]; prop?: string | string[] },
     { ...params }: GenericProps,
@@ -63,7 +63,6 @@ function commonTestsSuite(
             });
         }
 
-        // tslint:disable-next-line: early-exit
         if (tests.prop !== undefined && !isEmpty(tests.prop)) {
             it('should forward any other prop', () => {
                 const testedProp: string = params.prop || 'winter';
@@ -87,7 +86,7 @@ function commonTestsSuite(
  * @param stories   Stories module.
  * @param component Component to dive into (expanding the shallow rendering fot this particular component).
  */
-function expectStoriesToMatchSnapshots(stories: Record<string, any>, component: React.FC<any>) {
+export function expectStoriesToMatchSnapshots(stories: Record<string, any>, component: React.FC<any>) {
     for (const [storyName, Story] of Object.entries(stories)) {
         if (typeof Story !== 'function') {
             continue;
@@ -101,7 +100,3 @@ function expectStoriesToMatchSnapshots(stories: Record<string, any>, component: 
         });
     }
 }
-
-/////////////////////////////
-
-export { CommonSetup, Wrapper, commonTestsSuite, expectStoriesToMatchSnapshots };

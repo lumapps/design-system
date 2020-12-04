@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const useBooleanState = (defaultValue: boolean): [boolean, () => void, () => void, () => void] => {
+export const useBooleanState = (defaultValue: boolean): [boolean, () => void, () => void, () => void] => {
     const [booleanValue, setBoolean] = useState<boolean>(defaultValue);
 
     const setToFalse = () => {
@@ -17,5 +17,3 @@ const useBooleanState = (defaultValue: boolean): [boolean, () => void, () => voi
 
     return [booleanValue, setToFalse, setToTrue, toggleBoolean];
 };
-
-export { useBooleanState };

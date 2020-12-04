@@ -10,7 +10,7 @@ import { GenericProps, getRootClassName, handleBasicClasses, isComponent } from 
 /**
  * Defines the props of the component.
  */
-interface SideNavigationProps extends GenericProps {
+export interface SideNavigationProps extends GenericProps {
     /** The children elements. Should use SideNavigationItem. */
     children: ReactNode;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
@@ -27,9 +27,9 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}SideNavigation`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
-const SideNavigation: React.FC<SideNavigationProps> = ({
+export const SideNavigation: React.FC<SideNavigationProps> = ({
     children,
     className,
     theme,
@@ -52,5 +52,3 @@ const SideNavigation: React.FC<SideNavigationProps> = ({
     );
 };
 SideNavigation.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, SideNavigation, SideNavigationProps };

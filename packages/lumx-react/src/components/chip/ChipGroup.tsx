@@ -12,7 +12,7 @@ import { useChipGroupNavigation, useChipGroupNavigationType } from '@lumx/react/
 /**
  * Defines the props of the component.
  */
-interface ChipGroupProps extends GenericProps {
+export interface ChipGroupProps extends GenericProps {
     /** The alignment of the component. */
     align?: string;
     /** The children elements. Should be a list of Chip. */
@@ -34,13 +34,13 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}ChipGroup`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 interface ChipGroup {
     useChipGroupNavigation: useChipGroupNavigationType;
 }
 
-const ChipGroup: React.FC<ChipGroupProps> & ChipGroup = ({ align, children, className, ...forwardedProps }) => {
+export const ChipGroup: React.FC<ChipGroupProps> & ChipGroup = ({ align, children, className, ...forwardedProps }) => {
     const chipGroupClassName = handleBasicClasses({
         align,
         prefix: CLASSNAME,
@@ -56,5 +56,3 @@ const ChipGroup: React.FC<ChipGroupProps> & ChipGroup = ({ align, children, clas
 ChipGroup.displayName = COMPONENT_NAME;
 ChipGroup.defaultProps = DEFAULT_PROPS;
 ChipGroup.useChipGroupNavigation = useChipGroupNavigation;
-
-export { CLASSNAME, ChipGroup, ChipGroupProps };

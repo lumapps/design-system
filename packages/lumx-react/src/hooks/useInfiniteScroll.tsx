@@ -14,11 +14,11 @@ type EventCallback = (evt?: Event) => void;
  * @param  [callback]        A callback function to call when the bottom of the reference element is reached.
  * @param  [callbackOnMount] A callback function to call when the component is mounted.
  */
-const useInfiniteScroll: useInfiniteScrollType = (ref, callback, callbackOnMount = false) => {
+export const useInfiniteScroll: useInfiniteScrollType = (ref, callback, callbackOnMount = false) => {
     useEffect(() => {
         const { current } = ref;
         if (!callback || !current) {
-            return;
+            return undefined;
         }
 
         const isAtBottom = () => Boolean(current && current.scrollTop + current.clientHeight >= current.scrollHeight);
@@ -45,7 +45,5 @@ const useInfiniteScroll: useInfiniteScrollType = (ref, callback, callbackOnMount
         if (callback && callbackOnMount) {
             callback();
         }
-    }, []);
+    }, [callback, callbackOnMount]);
 };
-
-export { useInfiniteScroll };

@@ -17,7 +17,7 @@ interface UseKeyboardListNavigationType {
     setActiveItemIndex(value: SetStateAction<number>): void;
 }
 
-type useKeyboardListNavigationType = <I>(
+export type useKeyboardListNavigationType = <I>(
     items: I[],
     ref: RefObject<HTMLElement>,
     onListItemSelected: (itemSelected: I) => void,
@@ -46,7 +46,7 @@ const INITIAL_INDEX = -1;
  * @param  preventTabOnEnteredValue determines whether upon TAB, if there is a value entered, the event is prevented or not.
  * @return useKeyboardListNavigation helpers.
  */
-const useKeyboardListNavigation: useKeyboardListNavigationType = (
+export const useKeyboardListNavigation: useKeyboardListNavigationType = (
     items,
     ref,
     onListItemSelected,
@@ -96,7 +96,6 @@ const useKeyboardListNavigation: useKeyboardListNavigationType = (
      * @param evt - key pressed event
      */
     const onArrowPressed: Listener = (evt) => {
-        // tslint:disable-next-line: deprecation
         const { keyCode } = evt;
         const nextActiveIndex = calculateActiveIndex(keyCode);
         setActiveItemIndex(nextActiveIndex);
@@ -177,7 +176,6 @@ const useKeyboardListNavigation: useKeyboardListNavigationType = (
      * @param evt - key pressed or key down event
      */
     const onKeyboardNavigation: Listener = (evt) => {
-        // tslint:disable-next-line: deprecation
         const { keyCode } = evt;
         const handler = eventsForKeyPressed[keyCode];
 
@@ -189,7 +187,7 @@ const useKeyboardListNavigation: useKeyboardListNavigationType = (
     useEffect(() => {
         const { current: currentElement } = ref;
         if (!currentElement) {
-            return;
+            return undefined;
         }
         currentElement.addEventListener('focus', resetActiveIndex);
         currentElement.addEventListener('keydown', onKeyboardNavigation);
@@ -206,5 +204,3 @@ const useKeyboardListNavigation: useKeyboardListNavigationType = (
         setActiveItemIndex,
     };
 };
-
-export { useKeyboardListNavigation, useKeyboardListNavigationType };

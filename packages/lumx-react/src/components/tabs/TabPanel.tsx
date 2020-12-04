@@ -8,7 +8,7 @@ import React from 'react';
 /**
  * Defines the props of the component.
  */
-interface TabPanelProps extends GenericProps {
+export interface TabPanelProps extends GenericProps {
     /** The tab panel HTML id. */
     id?: string;
     /** Whether the tab is active or not. */
@@ -23,7 +23,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}TabPanel`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME = `${CSS_PREFIX}-tab-panel`;
+export const CLASSNAME = `${CSS_PREFIX}-tab-panel`;
 
 /**
  * The default value of props.
@@ -38,7 +38,7 @@ const DEFAULT_PROPS: Partial<TabPanelProps> = {};
  * @param  props Component props.
  * @return React element.
  */
-const TabPanel: React.FC<TabPanelProps> = (props) => {
+export const TabPanel: React.FC<TabPanelProps> = (props) => {
     const { children, id, className, isActive: propIsActive, ...forwardedProps } = props;
 
     const state = useTabProviderContext('tabPanel', id);
@@ -59,5 +59,3 @@ const TabPanel: React.FC<TabPanelProps> = (props) => {
 };
 TabPanel.displayName = COMPONENT_NAME;
 TabPanel.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, TabPanel, TabPanelProps };

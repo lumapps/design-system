@@ -9,7 +9,7 @@ export default { title: 'LumX components/text-field/TextField' };
  * TextField story
  * @return simple TextField.
  */
-export const simpleTextField = ({ theme }: any) => (
+export const SimpleTextField = ({ theme }: any) => (
     <TextField
         value={text('Value', 'myvalue')}
         label={text('Label', 'I am the label')}
@@ -19,7 +19,7 @@ export const simpleTextField = ({ theme }: any) => (
     />
 );
 
-export const simpleTextNumberField = ({ theme }: any) => (
+export const SimpleTextNumberField = ({ theme }: any) => (
     <TextField
         value={text('Value', '2')}
         label={text('Label', 'I am the label')}
@@ -30,7 +30,7 @@ export const simpleTextNumberField = ({ theme }: any) => (
     />
 );
 
-export const textFieldWithHelp = ({ theme }: any) => (
+export const TextFieldWithHelp = ({ theme }: any) => (
     <TextField
         value={text('Value', 'myvalue')}
         label={text('Label', 'I am the label')}
@@ -41,7 +41,7 @@ export const textFieldWithHelp = ({ theme }: any) => (
     />
 );
 
-export const textFieldWithError = ({ theme }: any) => (
+export const TextFieldWithError = ({ theme }: any) => (
     <TextField
         value={text('Value', 'myvalue')}
         label={text('Label', 'I am the label')}
@@ -49,7 +49,7 @@ export const textFieldWithError = ({ theme }: any) => (
         theme={theme}
         onChange={noop}
         helper={<span>{text('Helper', 'ex: toto@acme.com')}</span>}
-        hasError={true}
+        hasError
         error={
             <span>
                 You must provide <strong>something</strong>

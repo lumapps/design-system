@@ -29,7 +29,7 @@ interface Setup extends CommonSetup {
  * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup = ({ ...propsOverrides }: Partial<AvatarProps> = {}, shallowRendering: boolean = true): Setup => {
+const setup = ({ ...propsOverrides }: Partial<AvatarProps> = {}, shallowRendering = true): Setup => {
     const props: AvatarProps = {
         image: 'path/to/avatar/image.png',
         ...propsOverrides,

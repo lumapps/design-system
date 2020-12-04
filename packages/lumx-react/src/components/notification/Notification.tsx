@@ -7,10 +7,8 @@ import isFunction from 'lodash/isFunction';
 
 import { Button, Emphasis, Icon, Size, Theme } from '@lumx/react';
 
-import { DOCUMENT, NOTIFICATION_TRANSITION_DURATION } from '@lumx/react/constants';
-
+import { COMPONENT_PREFIX, DOCUMENT, NOTIFICATION_TRANSITION_DURATION } from '@lumx/react/constants';
 import { NOTIFICATION_CONFIGURATION } from '@lumx/react/components/notification/constants';
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
@@ -18,7 +16,7 @@ import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
 /**
  * Different types of notification.
  */
-enum NotificationType {
+export enum NotificationType {
     info = 'info',
     success = 'success',
     warning = 'warning',
@@ -28,7 +26,7 @@ enum NotificationType {
 /**
  * Defines the props of the component.
  */
-interface NotificationProps extends GenericProps {
+export interface NotificationProps extends GenericProps {
     /** The label of the action button. */
     actionLabel?: string;
     /** The content of the notification. */
@@ -55,7 +53,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Notification`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -70,7 +68,7 @@ const DEFAULT_PROPS: Partial<NotificationProps> = {
  *
  * @return The notification component.
  */
-const Notification: React.FC<NotificationProps> = ({
+export const Notification: React.FC<NotificationProps> = ({
     actionLabel,
     className,
     content,
@@ -131,5 +129,3 @@ const Notification: React.FC<NotificationProps> = ({
 };
 Notification.displayName = COMPONENT_NAME;
 Notification.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, Notification, NotificationProps, NotificationType };

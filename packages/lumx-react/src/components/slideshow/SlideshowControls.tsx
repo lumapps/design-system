@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks,@typescript-eslint/no-use-before-define,jsx-a11y/control-has-associated-label,react-hooks/exhaustive-deps */
 import React, { RefObject, useCallback, useEffect, useState } from 'react';
 
 import classNames from 'classnames';
@@ -17,7 +18,7 @@ import isFunction from 'lodash/isFunction';
 /**
  * Defines the props of the component.
  */
-interface SlideshowControlsProps extends GenericProps {
+export interface SlideshowControlsProps extends GenericProps {
     /** The index of the current slide. */
     activeIndex?: number;
     /** The reference of the parent element. */
@@ -37,7 +38,7 @@ interface SlideshowControlsProps extends GenericProps {
 /**
  * Defines the visible range of navigation items.
  */
-interface PaginationRange {
+export interface PaginationRange {
     minRange: number;
     maxRange: number;
 }
@@ -50,7 +51,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}SlideshowControls`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -60,7 +61,7 @@ const DEFAULT_PROPS: Partial<SlideshowControlsProps> = {
     theme: Theme.light,
 };
 
-const SlideshowControls: React.FC<SlideshowControlsProps> = ({
+export const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     activeIndex,
     className,
     onNextClick,
@@ -82,7 +83,6 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
      * @param evt Keyboard event.
      */
     const handleKeyPressed = (evt: KeyboardEvent) => {
-        // tslint:disable-next-line: deprecation
         const { keyCode } = evt;
         if (keyCode === LEFT_KEY_CODE) {
             handlePreviousClick();
@@ -150,7 +150,7 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
                         [`${CLASSNAME}__pagination-item--is-out-range`]: isPaginationItemOutVisibleRange(i),
                     })}
                     key={i}
-                    // tslint:disable-next-line: jsx-no-lambda
+                    type="button"
                     onClick={() => handleItemClick(i)}
                     tabIndex={-1}
                 />,
@@ -222,39 +222,36 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
 
     useEffect(() => {
         updateVisibleRange(activeIndex);
-    }, [activeIndex]);
+    }, [activeIndex, updateVisibleRange]);
 
     /**
      * Inline style of wrapper element.
      */
-    const wrapperStyle: {} = {
+    const wrapperStyle = {
         transform: `translateX(-${PAGINATION_ITEM_SIZE * visibleRange.minRange}px)`,
     };
 
     useEffect(() => {
-        let swipeListeners: () => void;
-
-        if (parentRef && parentRef.current) {
-            parentRef.current.addEventListener('keydown', handleKeyPressed);
-
-            swipeListeners = detectSwipe(parentRef.current, (swipeDirection: string) => {
-                if (swipeDirection === 'right') {
-                    handlePreviousClick();
-                }
-
-                if (swipeDirection === 'left') {
-                    handleNextClick();
-                }
-            });
+        if (!parentRef?.current) {
+            return undefined;
         }
+        const { current } = parentRef;
+        current.addEventListener('keydown', handleKeyPressed);
+
+        const swipeListeners = detectSwipe(current, (swipeDirection: string) => {
+            if (swipeDirection === 'right') {
+                handlePreviousClick();
+            }
+            if (swipeDirection === 'left') {
+                handleNextClick();
+            }
+        });
 
         return () => {
-            if (parentRef && parentRef.current) {
-                parentRef.current.removeEventListener('keydown', handleKeyPressed);
-                swipeListeners();
-            }
+            current.removeEventListener('keydown', handleKeyPressed);
+            swipeListeners();
         };
-    }, [activeIndex, parentRef]);
+    }, [activeIndex, handleKeyPressed, handleNextClick, handlePreviousClick, parentRef]);
 
     return (
         <div
@@ -289,5 +286,3 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
 };
 SlideshowControls.displayName = COMPONENT_NAME;
 SlideshowControls.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, SlideshowControls, SlideshowControlsProps as SlideshowProps };

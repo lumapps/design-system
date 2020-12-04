@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import React, { CSSProperties, useCallback, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
@@ -14,7 +15,7 @@ import { SlideshowControls } from './SlideshowControls';
 /**
  * Defines the props of the component.
  */
-interface SlideshowProps extends GenericProps {
+export interface SlideshowProps extends GenericProps {
     /** The index of the current slide. */
     activeIndex?: number;
     /** Whether the automatic rotation of the slideshow is enabled or not. */
@@ -43,7 +44,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Slideshow`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -55,7 +56,7 @@ const DEFAULT_PROPS: Partial<SlideshowProps> = {
     theme: Theme.light,
 };
 
-const Slideshow: React.FC<SlideshowProps> = ({
+export const Slideshow: React.FC<SlideshowProps> = ({
     activeIndex,
     autoPlay,
     children,
@@ -77,64 +78,18 @@ const Slideshow: React.FC<SlideshowProps> = ({
      * The number of slideshow items.
      *
      */
-    const itemsCount: number = React.Children.count(children);
+    const itemsCount = React.Children.count(children);
 
     /**
      * Number of slides when using groupBy prop.
      */
-    const slidesCount: number = Math.ceil(itemsCount / (groupBy as number));
+    const slidesCount = Math.ceil(itemsCount / (groupBy as number));
 
     /**
      * Inline style of wrapper element.
      */
     const wrapperStyle: CSSProperties = {
         transform: `translateX(-${FULL_WIDTH_PERCENT * currentIndex}%)`,
-    };
-
-    useEffect(() => {
-        if (currentIndex > slidesCount - 1) {
-            setCurrentIndex(DEFAULT_PROPS.activeIndex!);
-        }
-    }, [currentIndex]);
-
-    /**
-     * Start automatic rotation of slideshow.
-     */
-    useInterval(
-        () => {
-            goToNextSlide();
-        },
-        isAutoPlaying && slidesCount > 1 ? (interval as number) : null,
-    );
-
-    /**
-     * Handle click on a bullet to go to a specific slide.
-     */
-    const handleControlGotToSlide = useCallback(
-        (index: number) => {
-            stopAutoPlay();
-
-            if (currentIndex >= 0 && currentIndex < slidesCount) {
-                setCurrentIndex(() => index);
-            }
-        },
-        [currentIndex, isAutoPlaying, slidesCount, setCurrentIndex, setIsAutoPlaying],
-    );
-
-    /**
-     * Handle click or keyboard event to go to next slide.
-     */
-    const handleControlNextSlide = () => {
-        stopAutoPlay();
-        goToNextSlide();
-    };
-
-    /**
-     * Handle click or keyboard event to go to previous slide.
-     */
-    const handleControlPreviousSlide = () => {
-        stopAutoPlay();
-        goToPreviousSlide();
     };
 
     /**
@@ -164,6 +119,52 @@ const Slideshow: React.FC<SlideshowProps> = ({
      */
     const stopAutoPlay = () => {
         setIsAutoPlaying(false);
+    };
+
+    useEffect(() => {
+        if (currentIndex > slidesCount - 1) {
+            setCurrentIndex(DEFAULT_PROPS.activeIndex!);
+        }
+    }, [currentIndex, slidesCount]);
+
+    /**
+     * Start automatic rotation of slideshow.
+     */
+    useInterval(
+        () => {
+            goToNextSlide();
+        },
+        isAutoPlaying && slidesCount > 1 ? (interval as number) : null,
+    );
+
+    /**
+     * Handle click on a bullet to go to a specific slide.
+     */
+    const handleControlGotToSlide = useCallback(
+        (index: number) => {
+            stopAutoPlay();
+
+            if (currentIndex >= 0 && currentIndex < slidesCount) {
+                setCurrentIndex(() => index);
+            }
+        },
+        [currentIndex, slidesCount, setCurrentIndex],
+    );
+
+    /**
+     * Handle click or keyboard event to go to next slide.
+     */
+    const handleControlNextSlide = () => {
+        stopAutoPlay();
+        goToNextSlide();
+    };
+
+    /**
+     * Handle click or keyboard event to go to previous slide.
+     */
+    const handleControlPreviousSlide = () => {
+        stopAutoPlay();
+        goToPreviousSlide();
     };
 
     /* If the activeIndex props changes, update the current slide */
@@ -213,5 +214,3 @@ const Slideshow: React.FC<SlideshowProps> = ({
 };
 Slideshow.displayName = COMPONENT_NAME;
 Slideshow.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, Slideshow, SlideshowProps };

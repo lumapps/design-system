@@ -1,4 +1,4 @@
-const INPUT_HELPER_CONFIGURATION: Record<string, { color: string }> = {
+export const INPUT_HELPER_CONFIGURATION: Record<string, { color: string }> = {
     error: {
         color: 'red',
     },
@@ -9,5 +9,3 @@ const INPUT_HELPER_CONFIGURATION: Record<string, { color: string }> = {
         color: 'yellow',
     },
 };
-
-export { INPUT_HELPER_CONFIGURATION };

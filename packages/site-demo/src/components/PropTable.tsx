@@ -33,11 +33,10 @@ const renderTypeTableRow = ({ type, defaultValue }: Property) => (
             return acc;
         }, [] as ReactNode[])}
         {defaultValue && !castArray(type).includes(defaultValue) && (
-            <>
-                {' (default: '}
-                <strong>{defaultValue}</strong>
-                {')'}
-            </>
+            <span>
+                {' '}
+                (default: <strong>{defaultValue}</strong>)
+            </span>
         )}
     </span>
 );

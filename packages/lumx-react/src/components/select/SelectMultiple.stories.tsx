@@ -2,20 +2,18 @@
 import { Chip, List, ListItem, SelectMultiple, Size } from '@lumx/react';
 import { useBooleanState } from '@lumx/react/hooks';
 import noop from 'lodash/noop';
-import React, { SyntheticEvent } from 'react';
+import React, { MouseEventHandler, SyntheticEvent, useState } from 'react';
 import { SelectVariant } from './constants';
 
 export default { title: 'LumX components/select/Select Multiple' };
 
+const PLACEHOLDER = 'Select values';
+const LABEL = 'Select label';
 const CHOICES = ['First item', 'Second item', 'Third item'];
 
-export const defaultSelectMultiple = ({ theme }: any) => {
-    const PLACEHOLDER = 'Select values';
-    const LABEL = 'Select label';
-
-    const [values, setValues] = React.useState<string[]>([]);
-    // tslint:disable-next-line:no-unused
-    const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
+export const DefaultSelectMultiple = ({ theme }: any) => {
+    const [values, setValues] = useState<string[]>([]);
+    const [isOpen, closeSelect, , toggleSelect] = useBooleanState(false);
 
     const clearSelected = (event: SyntheticEvent, value: string) => {
         event.stopPropagation();
@@ -44,10 +42,10 @@ export const defaultSelectMultiple = ({ theme }: any) => {
         >
             <List isClickable>
                 {CHOICES.length > 0
-                    ? CHOICES.map((choice, index) => (
+                    ? CHOICES.map((choice) => (
                           <ListItem
                               isSelected={values.includes(choice)}
-                              key={index}
+                              key={choice}
                               onItemSelected={selectItem(choice)}
                               size={Size.tiny}
                           >
@@ -64,10 +62,10 @@ export const defaultSelectMultiple = ({ theme }: any) => {
     );
 };
 
-export const selectMultipleWithNoData = ({ theme }: any) => {
+export const SelectMultipleWithNoData = ({ theme }: any) => {
     return (
         <SelectMultiple
-            isOpen={true}
+            isOpen
             value={[]}
             onClear={noop}
             label="Select label"
@@ -85,10 +83,10 @@ export const selectMultipleWithNoData = ({ theme }: any) => {
     );
 };
 
-export const disabledSelectMultiple = ({ theme }: any) => {
+export const DisabledSelectMultiple = ({ theme }: any) => {
     return (
         <SelectMultiple
-            isOpen={true}
+            isOpen
             value={[]}
             onClear={noop}
             label="Select label"
@@ -101,13 +99,9 @@ export const disabledSelectMultiple = ({ theme }: any) => {
     );
 };
 
-export const chipsSelectMultiple = ({ theme }: any) => {
-    const PLACEHOLDER = 'Select values';
-    const LABEL = 'Select label';
-
-    const [values, setValues] = React.useState<string[]>([]);
-    // tslint:disable-next-line:no-unused
-    const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
+export const ChipsSelectMultiple = ({ theme }: any) => {
+    const [values, setValues] = useState<string[]>([]);
+    const [isOpen, closeSelect, , toggleSelect] = useBooleanState(false);
 
     const clearSelected = (event: SyntheticEvent, value: string) => {
         event.stopPropagation();
@@ -137,10 +131,10 @@ export const chipsSelectMultiple = ({ theme }: any) => {
         >
             <List isClickable>
                 {CHOICES.length > 0
-                    ? CHOICES.map((choice, index) => (
+                    ? CHOICES.map((choice) => (
                           <ListItem
                               isSelected={values.includes(choice)}
-                              key={index}
+                              key={choice}
                               onItemSelected={selectItem(choice)}
                               size={Size.tiny}
                           >
@@ -157,13 +151,9 @@ export const chipsSelectMultiple = ({ theme }: any) => {
     );
 };
 
-export const chipsCustomSelectMultiple = ({ theme }: any) => {
-    const PLACEHOLDER = 'Select values';
-    const LABEL = 'Select label';
-
-    const [values, setValues] = React.useState<string[]>([]);
-    // tslint:disable-next-line:no-unused
-    const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
+export const ChipsCustomSelectMultiple = ({ theme }: any) => {
+    const [values, setValues] = useState<string[]>([]);
+    const [isOpen, closeSelect, , toggleSelect] = useBooleanState(false);
 
     const clearSelected = (event: SyntheticEvent, value: string) => {
         event.stopPropagation();
@@ -179,18 +169,11 @@ export const chipsCustomSelectMultiple = ({ theme }: any) => {
         setValues([...values, item]);
     };
 
-    const customSelectChipRenderer = (
-        choice: string,
-        index: number,
-        onClear?: (event: SyntheticEvent, choice: string) => void,
-        isDisabled?: boolean,
-        // tslint:disable-next-line: no-shadowed-variable
-        theme?: any,
-    ) => {
-        const onClick = (event: React.MouseEvent) => onClear && onClear(event, choice);
+    const customSelectChipRenderer = (choice: string, index: number, onClear: any, isDisabled: any) => {
+        const onClick: MouseEventHandler = (event) => onClear && onClear(event, choice);
         return (
             <Chip
-                key={index}
+                key={choice}
                 isDisabled={isDisabled}
                 size={Size.s}
                 onAfterClick={onClick}
@@ -216,10 +199,10 @@ export const chipsCustomSelectMultiple = ({ theme }: any) => {
         >
             <List isClickable>
                 {CHOICES.length > 0
-                    ? CHOICES.map((choice, index) => (
+                    ? CHOICES.map((choice) => (
                           <ListItem
                               isSelected={values.includes(choice)}
-                              key={index}
+                              key={choice}
                               onItemSelected={selectItem(choice)}
                               size={Size.tiny}
                           >

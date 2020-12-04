@@ -19,7 +19,7 @@ const iconSizes: Array<IconSizes | undefined> = [
 const iconColors = [undefined, ...Object.values(ColorPalette)];
 const iconShapes = [false, true];
 
-export const allIcon = ({ theme }: any) => {
+export const AllIcon = ({ theme }: any) => {
     return (
         <>
             {iconShapes.map((hasShape) => {
@@ -33,7 +33,7 @@ export const allIcon = ({ theme }: any) => {
                                     <FlexBox orientation={Orientation.horizontal}>
                                         {iconColors.map((color) => {
                                             return (
-                                                <FlexBox fillSpace>
+                                                <FlexBox fillSpace key={color}>
                                                     {`Color: ${color}`}
                                                     <Icon
                                                         hasShape={hasShape}

@@ -6,11 +6,10 @@ import React from 'react';
 
 import isArray from 'lodash/isArray';
 import { FlexBox, FlexBoxProps } from './FlexBox';
-/*  tslint:disable object-literal-sort-keys */
 
 export default { title: 'LumX components/flex-box/FlexBox' };
 
-const DEFAULT_PROPS = FlexBox.defaultProps as any;
+const DEFAULT_PROPS: any = {};
 
 type FlexBoxPropName = keyof FlexBoxProps;
 const flexViewKnobConfigs: Array<
@@ -68,13 +67,13 @@ export const Flex = () => (
 
 const hAlign = (prefix?: string) =>
     select(
-        `${prefix ? prefix + ': ' : ''}Horizontal align`,
+        `${prefix ? `${prefix}: ` : ''}Horizontal align`,
         [Alignment.center, Alignment.top, Alignment.bottom],
         Alignment.center,
     );
 const vAlign = (prefix?: string) =>
     select(
-        `${prefix ? prefix + ': ' : ''}Vertical align`,
+        `${prefix ? `${prefix}: ` : ''}Vertical align`,
         [Alignment.center, Alignment.left, Alignment.right],
         Alignment.center,
     );

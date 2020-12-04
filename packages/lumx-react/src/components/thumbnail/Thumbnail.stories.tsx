@@ -43,7 +43,7 @@ const ThumbnailSizes: Record<any, ThumbnailSize | undefined> = {
  * Thumbnail story
  * @return simple Thumbnail.
  */
-export const defaultThumbnail = ({ theme }: StoryProps) => {
+export const DefaultThumbnail = ({ theme }: StoryProps) => {
     const align = select<Alignment>('Alignment', Alignment, Alignment.left, groupId);
     const aspectRatio = select<AspectRatio>('Aspect ratio', AspectRatio, AspectRatio.square, groupId);
     const isCrossOriginEnabled = boolean('Is CORS enabled', false, groupId);

@@ -17,7 +17,7 @@ const _TRANSITION_DURATION = 400;
 /**
  * Defines the props of the component.
  */
-interface LightboxProps extends GenericProps {
+export interface LightboxProps extends GenericProps {
     /** The label for accessibility assistive devices. */
     ariaLabel?: string;
     /** Whether the closing button should be visible or not. */
@@ -44,7 +44,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Lightbox`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -60,7 +60,7 @@ const DEFAULT_PROPS: Partial<LightboxProps> = {
  *
  * @return Lightbox.
  */
-const Lightbox: React.FC<LightboxProps> = ({
+export const Lightbox: React.FC<LightboxProps> = ({
     ariaLabel,
     children,
     className,
@@ -78,19 +78,24 @@ const Lightbox: React.FC<LightboxProps> = ({
         return null;
     }
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const buttonRef: React.RefObject<HTMLButtonElement> = useRef(null);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const childrenRef: React.RefObject<any> = useRef(null);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [isTrapActive, setTrapActive] = useState(false);
     const modalElement: Element | null = document.querySelector(`.${CLASSNAME}`);
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
         if (!isOpen || !modalElement) {
-            return;
+            return undefined;
         }
         disableBodyScroll(modalElement);
         return () => enableBodyScroll(modalElement);
     }, [isOpen, modalElement]);
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
         if (isOpen) {
             setTrapActive(true);
@@ -129,15 +134,19 @@ const Lightbox: React.FC<LightboxProps> = ({
      *
      * @param evt Click event.
      */
-    const handleClose = useCallback((evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        if (Boolean(preventAutoClose)) {
-            return;
-        }
-        evt.stopPropagation();
-        if (isFunction(onClose)) {
-            onClose();
-        }
-    }, []);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const handleClose = useCallback(
+        (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+            if (preventAutoClose) {
+                return;
+            }
+            evt.stopPropagation();
+            if (isFunction(onClose)) {
+                onClose();
+            }
+        },
+        [onClose, preventAutoClose],
+    );
 
     /**
      * Prevent click bubbling to parent.
@@ -211,5 +220,3 @@ const Lightbox: React.FC<LightboxProps> = ({
 };
 Lightbox.displayName = COMPONENT_NAME;
 Lightbox.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, Lightbox, LightboxProps };

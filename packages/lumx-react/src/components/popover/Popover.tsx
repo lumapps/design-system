@@ -1,4 +1,3 @@
-// @ts-ignore
 import { detectOverflow } from '@popperjs/core';
 import React, { ReactNode, RefObject, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -17,7 +16,7 @@ import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 /**
  * Different possible placements for the popover.
  */
-enum Placement {
+export enum Placement {
     AUTO = 'auto',
     AUTO_END = 'auto-end',
     AUTO_START = 'auto-start',
@@ -42,7 +41,7 @@ enum Placement {
 /**
  * Offset of the popover.
  */
-interface Offset {
+export interface Offset {
     /** Offset size along the reference. */
     along?: number;
     /** Offset size away from the reference. */
@@ -52,7 +51,7 @@ interface Offset {
 /**
  * Popover elevation index.
  */
-type Elevation = 1 | 2 | 3 | 4 | 5;
+export type Elevation = 1 | 2 | 3 | 4 | 5;
 
 /**
  * The offset from the target in case of arrow.
@@ -62,7 +61,7 @@ const OFFSET = 8;
 /**
  * Defines the props of the component.
  */
-interface PopoverProps extends GenericProps {
+export interface PopoverProps extends GenericProps {
     /** The reference of the DOM element used to set the position of the popover. */
     anchorRef: React.RefObject<HTMLElement>;
     /** The children elements. */
@@ -103,7 +102,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Popover`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -123,9 +122,11 @@ const sameWidth = {
     phase: 'beforeWrite',
     requires: ['computeStyles'],
     fn({ state }: any) {
+        // eslint-disable-next-line no-param-reassign
         state.styles.popper.minWidth = `${state.rects.reference.width}px`;
     },
     effect({ state }: any) {
+        // eslint-disable-next-line no-param-reassign
         state.elements.popper.style.minWidth = `${state.elements.reference.offsetWidth}px`;
     },
 };
@@ -148,6 +149,7 @@ const maxSize = {
 
         const widthProp = basePlacement === 'left' ? 'left' : 'right';
         const heightProp = basePlacement === 'top' ? 'top' : 'bottom';
+        // eslint-disable-next-line no-param-reassign
         state.modifiersData[name] = {
             width: width - overflow[widthProp] - x,
             height: height - overflow[heightProp] - y,
@@ -165,11 +167,12 @@ const applyMaxHeight = {
     requires: ['maxSize'],
     fn({ state }: any) {
         const { height } = state.modifiersData.maxSize;
+        // eslint-disable-next-line no-param-reassign
         state.elements.popper.style.maxHeight = `${height - OFFSET}px`;
     },
 };
 
-const Popover: React.FC<PopoverProps> = (props) => {
+export const Popover: React.FC<PopoverProps> = (props) => {
     if (!DOCUMENT) {
         // Can't render in SSR.
         return null;
@@ -195,8 +198,11 @@ const Popover: React.FC<PopoverProps> = (props) => {
         zIndex,
         ...forwardedProps
     } = props;
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [popperElement, setPopperElement] = useState<null | HTMLElement>(null);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [arrowElement, setArrowElement] = useState<null | HTMLElement>(null);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const clickAwayRef = useRef<HTMLDivElement>(null);
 
     const modifiers: any = [];
@@ -216,16 +222,19 @@ const Popover: React.FC<PopoverProps> = (props) => {
         modifiers.push(maxSize, applyMaxHeight);
     }
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const { styles, attributes, state, update } = usePopper(anchorRef.current, popperElement, {
         placement,
         modifiers,
     });
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
         update?.();
     }, [children, update]);
 
     const position = state?.placement ?? placement;
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const popoverStyle = useMemo(() => {
         const newStyles = { ...style, ...styles.popper, zIndex };
 
@@ -234,9 +243,11 @@ const Popover: React.FC<PopoverProps> = (props) => {
         }
 
         return newStyles;
-    }, [zIndex, styles.popper.transform]);
+    }, [style, styles.popper, zIndex, fitWithinViewportHeight]);
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     useCallbackOnEscape(onClose, isOpen && closeOnEscape);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     useFocus(focusElement?.current, isOpen && (state?.rects?.popper?.y ?? -1) >= 0);
 
     return isOpen
@@ -262,5 +273,3 @@ const Popover: React.FC<PopoverProps> = (props) => {
 };
 Popover.displayName = COMPONENT_NAME;
 Popover.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, Popover, PopoverProps, Placement, Offset };

@@ -13,19 +13,19 @@ import { renderLink } from '@lumx/react/utils/renderLink';
  *  Authorized size values.
  *  @deprecated use Size instead.
  */
-const ListItemSize = {
+export const ListItemSize = {
     big: Size.big,
     huge: Size.huge,
     regular: Size.regular,
     tiny: Size.tiny,
 };
 
-type ListItemSizes = Size.tiny | Size.regular | Size.big | Size.huge;
+export type ListItemSizes = Size.tiny | Size.regular | Size.big | Size.huge;
 
 /**
  * Defines the props of the component.
  */
-interface ListItemProps extends GenericProps {
+export interface ListItemProps extends GenericProps {
     /** A component to be rendered after the content. */
     after?: ReactNode;
     /** A component to be rendered before the content. */
@@ -58,7 +58,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}ListItem`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -71,11 +71,11 @@ const DEFAULT_PROPS: Partial<ListProps> = {
  * Check if the list item is clickable.
  * @return `true` if the list item is clickable; `false` otherwise.
  */
-function isClickable({ linkProps, onItemSelected }: Partial<ListItemProps>): boolean {
+export function isClickable({ linkProps, onItemSelected }: Partial<ListItemProps>): boolean {
     return !isEmpty(linkProps?.href) || !!onItemSelected;
 }
 
-const ListItem: React.FC<ListItemProps> = (props) => {
+export const ListItem: React.FC<ListItemProps> = (props) => {
     const {
         after,
         before,
@@ -145,5 +145,3 @@ const ListItem: React.FC<ListItemProps> = (props) => {
 };
 ListItem.displayName = COMPONENT_NAME;
 ListItem.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, ListItem, ListItemProps, ListItemSize, ListItemSizes, isClickable };

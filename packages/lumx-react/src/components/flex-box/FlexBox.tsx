@@ -12,7 +12,7 @@ export type GapSize = Size.regular | Size.big | Size.huge;
 /**
  * Defines the props of the component.
  */
-interface FlexBoxProps extends GenericProps {
+export interface FlexBoxProps extends GenericProps {
     /** The children elements. */
     children?: ReactNode;
     /** Whether the "content filling space" is enabled or not. */
@@ -41,11 +41,9 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}FlexBox`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
-const DEFAULT_PROPS: Partial<FlexBoxProps> = {};
-
-const FlexBox: React.FC<FlexBoxProps> = ({
+export const FlexBox: React.FC<FlexBoxProps> = ({
     children,
     className,
     fillSpace,
@@ -79,6 +77,3 @@ const FlexBox: React.FC<FlexBoxProps> = ({
     </div>
 );
 FlexBox.displayName = COMPONENT_NAME;
-FlexBox.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, FlexBox, FlexBoxProps };

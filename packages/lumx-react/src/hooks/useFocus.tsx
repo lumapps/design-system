@@ -8,10 +8,14 @@ import { useEffect, useState } from 'react';
  */
 export function useFocus(element: HTMLElement | null | undefined, shouldFocus = true) {
     const [wasFocus, setWasFocus] = useState(false);
-    useEffect(() => {
-        if (shouldFocus && wasFocus !== shouldFocus && element) {
-            element.focus();
-            setWasFocus(shouldFocus);
-        }
-    }, [element, shouldFocus]);
+    useEffect(
+        () => {
+            if (shouldFocus && wasFocus !== shouldFocus && element) {
+                element.focus();
+                setWasFocus(shouldFocus);
+            }
+        },
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [element, shouldFocus],
+    );
 }

@@ -12,6 +12,14 @@ interface State {
  * This component is in charge of catching any error and avoid to the whole application to crash.
  */
 export class ErrorBoundary extends React.Component<{}, State> {
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            error: undefined,
+            hasError: false,
+        };
+    }
+
     /**
      * When an error occurred, save the error in the state so that we can display it in the fallback display.
      *
@@ -21,11 +29,6 @@ export class ErrorBoundary extends React.Component<{}, State> {
     public static getDerivedStateFromError(error: Error): State {
         return { error, hasError: true };
     }
-
-    public state: State = {
-        error: undefined,
-        hasError: false,
-    };
 
     public render() {
         const { error, hasError } = this.state;
@@ -39,6 +42,7 @@ export class ErrorBoundary extends React.Component<{}, State> {
                 </>
             );
         }
+        // eslint-disable-next-line react/destructuring-assignment
         return this.props.children;
     }
 }

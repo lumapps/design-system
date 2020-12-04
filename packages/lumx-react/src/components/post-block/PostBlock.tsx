@@ -12,7 +12,7 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 /**
  * Defines the props of the component.
  */
-interface PostBlockProps extends GenericProps {
+export interface PostBlockProps extends GenericProps {
     /** The action elements. */
     actions?: ReactNode;
     /** The attachment elements. */
@@ -50,7 +50,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}PostBlock`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -60,7 +60,7 @@ const DEFAULT_PROPS: Partial<PostBlockProps> = {
     theme: Theme.light,
 };
 
-const PostBlock: React.FC<PostBlockProps> = ({
+export const PostBlock: React.FC<PostBlockProps> = ({
     actions,
     attachments,
     author,
@@ -121,5 +121,3 @@ const PostBlock: React.FC<PostBlockProps> = ({
 
 PostBlock.displayName = COMPONENT_NAME;
 PostBlock.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, PostBlock, PostBlockProps };

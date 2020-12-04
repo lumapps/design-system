@@ -8,8 +8,7 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 /**
  * Defines the props of the component.
  */
-interface I<%= componentName %>Props extends GenericProps {}
-type <%= componentName %>Props = I<%= componentName %>Props;
+export interface <%= componentName %>Props extends GenericProps {}
 
 /**
  * The display name of the component.
@@ -19,7 +18,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}<%= componentName %>`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -31,7 +30,7 @@ const DEFAULT_PROPS: Partial<<%= componentName %>Props> = {};
  *
  * @return The component.
  */
-const <%= componentName %>: React.FC<<%= componentName %>Props> = (props: <%= componentName %>Props): ReactElement => {
+export const <%= componentName %>: React.FC<<%= componentName %>Props> = (props: <%= componentName %>Props): ReactElement => {
     const { children, className, ...forwardedProps } = props;
 
     return (
@@ -50,5 +49,3 @@ const <%= componentName %>: React.FC<<%= componentName %>Props> = (props: <%= co
 };
 <%= componentName %>.displayName = COMPONENT_NAME;
 <%= componentName %>.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, <%= componentName %>, <%= componentName %>Props };

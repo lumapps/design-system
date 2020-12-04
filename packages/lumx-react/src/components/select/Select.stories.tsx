@@ -10,13 +10,12 @@ export default { title: 'LumX components/select/Select' };
 
 const CHOICES = ['First item', 'Second item', 'Third item'];
 
-export const simpleSelect = ({ theme }: any) => {
+export const SimpleSelect = ({ theme }: any) => {
     const PLACEHOLDER = 'Select a value';
     const LABEL = 'Select label';
 
-    const [value, setValue] = React.useState<string>('');
-    // tslint:disable-next-line:no-unused
-    const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
+    const [value, setValue] = useState<string>('');
+    const [isOpen, closeSelect, , toggleSelect] = useBooleanState(false);
 
     const selectItem = (item: string) => () => {
         closeSelect();
@@ -36,10 +35,10 @@ export const simpleSelect = ({ theme }: any) => {
         >
             <List isClickable>
                 {CHOICES.length > 0
-                    ? CHOICES.map((choice, index) => (
+                    ? CHOICES.map((choice) => (
                           <ListItem
                               isSelected={value === choice}
-                              key={index}
+                              key={choice}
                               onItemSelected={selectItem(choice)}
                               size={Size.tiny}
                           >
@@ -56,13 +55,12 @@ export const simpleSelect = ({ theme }: any) => {
     );
 };
 
-export const simpleSelectWithInfiniteScroll = ({ theme }: any) => {
+export const SimpleSelectWithInfiniteScroll = ({ theme }: any) => {
     const PLACEHOLDER = 'Select a value';
     const LABEL = 'Select label';
     const [items, setItems] = useState(CHOICES);
-    const [value, setValue] = React.useState<string>('');
-    // tslint:disable-next-line:no-unused
-    const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
+    const [value, setValue] = useState<string>('');
+    const [isOpen, closeSelect, , toggleSelect] = useBooleanState(false);
 
     const selectItem = (item: string) => () => {
         closeSelect();
@@ -87,10 +85,10 @@ export const simpleSelectWithInfiniteScroll = ({ theme }: any) => {
         >
             <List isClickable>
                 {items.length > 0
-                    ? items.map((choice, index) => (
+                    ? items.map((choice) => (
                           <ListItem
                               isSelected={value === choice}
-                              key={index}
+                              key={choice}
                               onItemSelected={selectItem(choice)}
                               size={Size.tiny}
                           >
@@ -107,11 +105,11 @@ export const simpleSelectWithInfiniteScroll = ({ theme }: any) => {
     );
 };
 
-export const disabledSelect = ({ theme }: any) => {
+export const DisabledSelect = ({ theme }: any) => {
     return (
         <Select
             isOpen={false}
-            value={''}
+            value=""
             label={text('label', 'My select')}
             placeholder={text('placeholder', 'Placeholder')}
             theme={theme}
@@ -128,18 +126,16 @@ export const disabledSelect = ({ theme }: any) => {
     );
 };
 
-export const selectWithClearButton = ({ theme }: any) => {
+export const SelectWithClearButton = ({ theme }: any) => {
     const PLACEHOLDER = 'Select a value';
     const LABEL = 'Select label';
 
-    const [value, setValue] = React.useState<string>('');
-    // tslint:disable-next-line:no-unused
-    const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
+    const [value, setValue] = useState<string>('');
+    const [isOpen, closeSelect, , toggleSelect] = useBooleanState(false);
 
-    // tslint:disable-next-line: no-shadowed-variable
-    const clearSelected = (event: SyntheticEvent, value: string) => {
+    const clearSelected = (event: SyntheticEvent, newValue: string) => {
         event.stopPropagation();
-        setValue(value);
+        setValue(newValue);
     };
 
     const selectItem = (item: string) => () => {
@@ -161,10 +157,10 @@ export const selectWithClearButton = ({ theme }: any) => {
         >
             <List isClickable>
                 {CHOICES.length > 0
-                    ? CHOICES.map((choice, index) => (
+                    ? CHOICES.map((choice) => (
                           <ListItem
                               isSelected={value === choice}
-                              key={index}
+                              key={choice}
                               onItemSelected={selectItem(choice)}
                               size={Size.tiny}
                           >
@@ -181,19 +177,17 @@ export const selectWithClearButton = ({ theme }: any) => {
     );
 };
 
-export const selectWithAnotherField = ({ theme }: any) => {
+export const SelectWithAnotherField = ({ theme }: any) => {
     const PLACEHOLDER = 'Select a value';
     const LABEL = 'Select label';
 
-    const [value, setValue] = React.useState<string>('');
-    const [blurred, setWasBlurred] = React.useState('');
-    // tslint:disable-next-line:no-unused
-    const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
+    const [value, setValue] = useState<string>('');
+    const [blurred, setWasBlurred] = useState('');
+    const [isOpen, closeSelect, , toggleSelect] = useBooleanState(false);
 
-    // tslint:disable-next-line: no-shadowed-variable
-    const clearSelected = (event: SyntheticEvent, value: string) => {
+    const clearSelected = (event: SyntheticEvent, newValue: string) => {
         event.stopPropagation();
-        setValue(value);
+        setValue(newValue);
     };
 
     const selectItem = (item: string) => () => {
@@ -228,10 +222,10 @@ export const selectWithAnotherField = ({ theme }: any) => {
             >
                 <List isClickable>
                     {CHOICES.length > 0
-                        ? CHOICES.map((choice, index) => (
+                        ? CHOICES.map((choice) => (
                               <ListItem
                                   isSelected={value === choice}
-                                  key={index}
+                                  key={choice}
                                   onItemSelected={selectItem(choice)}
                                   size={Size.tiny}
                               >
@@ -250,14 +244,13 @@ export const selectWithAnotherField = ({ theme }: any) => {
     );
 };
 
-export const selectWithNoData = ({ theme }: any) => {
-    // tslint:disable-next-line: no-unused
-    const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(true);
+export const SelectWithNoData = ({ theme }: any) => {
+    const [isOpen, closeSelect, , toggleSelect] = useBooleanState(true);
 
     return (
         <Select
             isOpen={isOpen}
-            value={''}
+            value=""
             label={text('label', 'My select')}
             placeholder={text('placeholder', 'Placeholder')}
             theme={theme}
@@ -273,14 +266,13 @@ export const selectWithNoData = ({ theme }: any) => {
     );
 };
 
-export const selectWithHelper = ({ theme }: any) => {
-    // tslint:disable-next-line: no-unused
-    const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
+export const SelectWithHelper = ({ theme }: any) => {
+    const [isOpen, closeSelect, , toggleSelect] = useBooleanState(false);
 
     return (
         <Select
             isOpen={isOpen}
-            value={''}
+            value=""
             label={text('label', 'Country')}
             placeholder={text('placeholder', 'Your country')}
             theme={theme}
@@ -289,8 +281,8 @@ export const selectWithHelper = ({ theme }: any) => {
             onDropdownClose={closeSelect}
         >
             <List theme={theme} isClickable>
-                {CHOICES.map((choice, index) => (
-                    <ListItem key={index} size={Size.tiny}>
+                {CHOICES.map((choice) => (
+                    <ListItem key={choice} size={Size.tiny}>
                         {choice}
                     </ListItem>
                 ))}
@@ -299,26 +291,25 @@ export const selectWithHelper = ({ theme }: any) => {
     );
 };
 
-export const selectWithError = ({ theme }: any) => {
-    // tslint:disable-next-line: no-unused
-    const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
+export const SelectWithError = ({ theme }: any) => {
+    const [isOpen, closeSelect, , toggleSelect] = useBooleanState(false);
 
     return (
         <Select
             isOpen={isOpen}
-            value={''}
+            value=""
             label={text('label', 'Country')}
             placeholder={text('placeholder', 'Your country')}
             theme={theme}
             helper={text('helper', 'This is used in analytics')}
             onInputClick={toggleSelect}
             onDropdownClose={closeSelect}
-            hasError={true}
+            hasError
             error={text('Error', 'Please select something :)')}
         >
             <List theme={theme} isClickable>
-                {CHOICES.map((choice, index) => (
-                    <ListItem key={index} size={Size.tiny}>
+                {CHOICES.map((choice) => (
+                    <ListItem key={choice} size={Size.tiny}>
                         {choice}
                     </ListItem>
                 ))}
@@ -327,14 +318,13 @@ export const selectWithError = ({ theme }: any) => {
     );
 };
 
-export const selectSuccess = ({ theme }: any) => {
-    // tslint:disable-next-line: no-unused
-    const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
+export const SelectSuccess = ({ theme }: any) => {
+    const [isOpen, closeSelect, , toggleSelect] = useBooleanState(false);
 
     return (
         <Select
             isOpen={isOpen}
-            value={''}
+            value=""
             label={text('label', 'Country')}
             placeholder={text('placeholder', 'Your country')}
             theme={theme}
@@ -344,8 +334,8 @@ export const selectSuccess = ({ theme }: any) => {
             isValid
         >
             <List theme={theme} isClickable>
-                {CHOICES.map((choice, index) => (
-                    <ListItem key={index} size={Size.tiny}>
+                {CHOICES.map((choice) => (
+                    <ListItem key={choice} size={Size.tiny}>
                         {choice}
                     </ListItem>
                 ))}
@@ -354,13 +344,12 @@ export const selectSuccess = ({ theme }: any) => {
     );
 };
 
-export const selectWithChipVariant = ({ theme }: any) => {
+export const SelectWithChipVariant = ({ theme }: any) => {
     const PLACEHOLDER = 'Select a value';
     const LABEL = 'Select label';
 
-    const [value, setValue] = React.useState<string>('');
-    // tslint:disable-next-line:no-unused
-    const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
+    const [value, setValue] = useState<string>('');
+    const [isOpen, closeSelect, , toggleSelect] = useBooleanState(false);
 
     const selectItem = (item: string) => () => {
         closeSelect();
@@ -384,10 +373,10 @@ export const selectWithChipVariant = ({ theme }: any) => {
         >
             <List isClickable>
                 {CHOICES.length > 0
-                    ? CHOICES.map((choice, index) => (
+                    ? CHOICES.map((choice) => (
                           <ListItem
                               isSelected={value === choice}
-                              key={index}
+                              key={choice}
                               onItemSelected={selectItem(choice)}
                               size={Size.tiny}
                           >

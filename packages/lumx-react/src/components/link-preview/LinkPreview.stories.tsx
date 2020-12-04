@@ -15,7 +15,7 @@ Mauris ultrices pellentesque vestibulum. Etiam vel turpis at eros condimentum fe
  * LinkPreview story
  * @return regular LinkPreview.
  */
-export const regularLinkPreview = ({ theme }: any) => (
+export const RegularLinkPreview = ({ theme }: any) => (
     <LinkPreview
         title={text('Title', 'Link title')}
         description={text('Description', LONG_LOREM_IPSUM)}
@@ -29,7 +29,7 @@ export const regularLinkPreview = ({ theme }: any) => (
  * LinkPreview story
  * @return regular LinkPreview without thumbnail.
  */
-export const noThumbnail = ({ theme }: any) => (
+export const NoThumbnail = ({ theme }: any) => (
     <LinkPreview
         title={text('Title', 'Link title')}
         description={text('Description', LONG_LOREM_IPSUM)}
@@ -42,59 +42,47 @@ export const noThumbnail = ({ theme }: any) => (
  * LinkPreview story
  * @return regular LinkPreview without thumbnail, title and description.
  */
-export const onlyUrl = ({ theme }: any) => <LinkPreview link={text('URL', 'https://google.com')} theme={theme} />;
+export const OnlyUrl = ({ theme }: any) => <LinkPreview link={text('URL', 'https://google.com')} theme={theme} />;
 
 /**
  * LinkPreview story
  * @return big LinkPreview.
  */
-export const bigLinkPreview = ({ theme }: any) => {
-    const wrapperStyle = { width: 400 };
-
-    return (
-        <div style={wrapperStyle}>
-            <LinkPreview
-                title={text('Title', 'Link title')}
-                description={text('Description', LONG_LOREM_IPSUM)}
-                link={text('URL', 'https://google.com')}
-                theme={theme}
-                thumbnail={landscapeImageKnob()}
-                size={Size.big}
-            />
-        </div>
-    );
-};
+export const BigLinkPreview = ({ theme }: any) => (
+    <div style={{ width: 400 }}>
+        <LinkPreview
+            title={text('Title', 'Link title')}
+            description={text('Description', LONG_LOREM_IPSUM)}
+            link={text('URL', 'https://google.com')}
+            theme={theme}
+            thumbnail={landscapeImageKnob()}
+            size={Size.big}
+        />
+    </div>
+);
 
 /**
  * LinkPreview story
  * @return big LinkPreview without thumbnail.
  */
-export const bigWithoutThumbnail = ({ theme }: any) => {
-    const wrapperStyle = { width: 400 };
-
-    return (
-        <div style={wrapperStyle}>
-            <LinkPreview
-                title={text('Title', 'Link title')}
-                description={text('Description', LONG_LOREM_IPSUM)}
-                link={text('URL', 'https://google.com')}
-                theme={theme}
-                size={Size.big}
-            />
-        </div>
-    );
-};
+export const BigWithoutThumbnail = ({ theme }: any) => (
+    <div style={{ width: 400 }}>
+        <LinkPreview
+            title={text('Title', 'Link title')}
+            description={text('Description', LONG_LOREM_IPSUM)}
+            link={text('URL', 'https://google.com')}
+            theme={theme}
+            size={Size.big}
+        />
+    </div>
+);
 
 /**
  * LinkPreview story
  * @return big LinkPreview without thumbnail, title and description.
  */
-export const bigWithOnlyUrl = ({ theme }: any) => {
-    const wrapperStyle = { width: 400 };
-
-    return (
-        <div style={wrapperStyle}>
-            <LinkPreview link={text('URL', 'https://google.com')} theme={theme} size={Size.big} />
-        </div>
-    );
-};
+export const BigWithOnlyUrl = ({ theme }: any) => (
+    <div style={{ width: 400 }}>
+        <LinkPreview link={text('URL', 'https://google.com')} theme={theme} size={Size.big} />
+    </div>
+);

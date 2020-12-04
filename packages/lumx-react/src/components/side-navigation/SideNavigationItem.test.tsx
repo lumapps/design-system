@@ -38,7 +38,7 @@ interface Setup extends CommonSetup {
  * @param  [shallowRendering=true]  Indicates if we want to do a shallow or a full rendering.
  * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
+const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering = true): Setup => {
     const props: Partial<SideNavigationItemProps> = {
         ...propsOverrides,
     };

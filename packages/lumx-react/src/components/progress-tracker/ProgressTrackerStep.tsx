@@ -13,7 +13,7 @@ import { mdiAlertCircle, mdiCheckCircle, mdiRadioboxBlank, mdiRadioboxMarked } f
 /**
  * Defines the props of the component.
  */
-interface ProgressTrackerStepProps extends GenericProps {
+export interface ProgressTrackerStepProps extends GenericProps {
     /** Children are not supported. */
     children?: never;
     /** Whether the step should be in error state or not. */
@@ -40,7 +40,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}ProgressTrackerStep`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -55,7 +55,7 @@ const DEFAULT_PROPS: Partial<ProgressTrackerStepProps> = {};
  * @param  props Component props.
  * @return React element.
  */
-const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = (props) => {
+export const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = (props) => {
     const {
         className,
         disabled,
@@ -153,5 +153,3 @@ const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = (props) => {
 
 ProgressTrackerStep.displayName = COMPONENT_NAME;
 ProgressTrackerStep.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, ProgressTrackerStep, ProgressTrackerStepProps };

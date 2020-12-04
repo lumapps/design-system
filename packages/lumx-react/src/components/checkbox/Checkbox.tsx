@@ -13,7 +13,7 @@ import uniqueId from 'lodash/uniqueId';
 /**
  * Defines the props of the component.
  */
-interface CheckboxProps extends GenericProps {
+export interface CheckboxProps extends GenericProps {
     /** The helper of the checkbox. */
     helper?: string;
     /** The native input id property. */
@@ -44,7 +44,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Checkbox`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -58,7 +58,7 @@ const DEFAULT_PROPS: Partial<CheckboxProps> = {
  *
  * @return The component.
  */
-const Checkbox: React.FC<CheckboxProps> = ({
+export const Checkbox: React.FC<CheckboxProps> = ({
     checked,
     className,
     disabled,
@@ -134,5 +134,3 @@ const Checkbox: React.FC<CheckboxProps> = ({
 };
 Checkbox.displayName = COMPONENT_NAME;
 Checkbox.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, Checkbox, CheckboxProps };

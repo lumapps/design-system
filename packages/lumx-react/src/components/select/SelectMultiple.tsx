@@ -14,11 +14,11 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
-import { withSelectContext } from './WithSelectContext';
+import { WithSelectContext } from './WithSelectContext';
 import { CoreSelectProps, SelectVariant } from './constants';
 
 /** Defines the props of the component. */
-interface SelectMultipleProps extends CoreSelectProps {
+export interface SelectMultipleProps extends CoreSelectProps {
     /** The list of selected values. */
     value: string[];
     /** The function called to render a selected value when `isMultiple` is true. Default: Renders the value inside of a Chip. */
@@ -35,7 +35,7 @@ interface SelectMultipleProps extends CoreSelectProps {
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Select`;
 
 /** The default class name and classes prefix for this component. */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /** The default value of props. */
 const DEFAULT_PROPS: Partial<SelectMultipleProps> = {
@@ -58,7 +58,7 @@ const DEFAULT_PROPS: Partial<SelectMultipleProps> = {
     selectedValueRender: (choice) => choice,
 };
 
-const SelectMultipleField: React.FC<SelectMultipleProps> = ({
+export const SelectMultipleField: React.FC<SelectMultipleProps> = ({
     anchorRef,
     handleKeyboardNav,
     hasError,
@@ -161,8 +161,8 @@ const SelectMultipleField: React.FC<SelectMultipleProps> = ({
     </>
 );
 
-const SelectMultiple: React.FC<SelectMultipleProps> = (props) =>
-    withSelectContext(SelectMultipleField, {
+export const SelectMultiple: React.FC<SelectMultipleProps> = (props) =>
+    WithSelectContext(SelectMultipleField, {
         ...props,
         className: classNames(
             props.className,
@@ -177,5 +177,3 @@ const SelectMultiple: React.FC<SelectMultipleProps> = (props) =>
 
 SelectMultiple.displayName = COMPONENT_NAME;
 SelectMultiple.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, SelectMultiple, SelectMultipleProps, SelectVariant };

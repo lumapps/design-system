@@ -1,4 +1,3 @@
-/* tslint:disable:no-console jsx-no-lambda */
 import React, { useRef } from 'react';
 
 import { mdiAccount, mdiOpenInNew } from '@lumx/icons';
@@ -29,8 +28,12 @@ export const KeyboardNavigation = () => {
 
     return (
         <>
-            <button onClick={focusList}>focus list</button>
-            <button onClick={focusFirsItem}>focus first item</button>
+            <button type="button" onClick={focusList}>
+                focus list
+            </button>
+            <button type="button" onClick={focusFirsItem}>
+                focus first item
+            </button>
             <List onListItemSelected={action('List onListItemSelected')} listElementRef={listRef}>
                 <ListItem linkRef={firstItemRef} onItemSelected={action('onItemSelected: Clickable item 1')}>
                     Clickable item 1
@@ -92,7 +95,7 @@ export const WithItemPadding = () => {
     );
 };
 
-export const asLink = () => {
+export const AsLink = () => {
     return (
         <div className="demo-grid">
             <List>

@@ -1,24 +1,17 @@
 import { mdiCalendar } from '@lumx/icons';
 import { DatePickerField } from '@lumx/react';
-import { Moment } from 'moment';
-import React from 'react';
+import React, { useState } from 'react';
 
 export const App = () => {
-    const LOCALE = 'en';
-    const now = new Date();
-    const [datePicked, setDatePicked] = React.useState<Date | Moment | string>(now);
-
-    const handleDatePicked = (picked: Moment) => {
-        setDatePicked(picked);
-    };
+    const [datePicked, setDatePicked] = useState<Date | undefined>(new Date());
 
     return (
         <DatePickerField
+            locale="en"
             label="Pick a date"
             icon={mdiCalendar}
             value={datePicked}
-            locale={LOCALE}
-            onChange={handleDatePicked}
+            onChange={setDatePicked}
         />
     );
 };

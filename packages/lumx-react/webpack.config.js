@@ -1,8 +1,4 @@
-/* eslint-disable import/no-nodejs-modules */
-/* eslint-disable import/no-commonjs */
-/* eslint-disable import/unambiguous */
-/* eslint-disable import/no-extraneous-dependencies */
-
+/* eslint-disable */
 const IS_CI = require('is-ci');
 const path = require('path');
 

@@ -43,7 +43,7 @@ interface Setup extends CommonSetup {
  * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup = ({ ...props }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
+const setup = ({ ...props }: SetupProps = {}, shallowRendering = true): Setup => {
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
     // @ts-ignore
     const wrapper: Wrapper = renderer(<Checkbox {...props} />);

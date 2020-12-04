@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { Dispatch, createContext, useCallback, useContext, useEffect, useMemo } from 'react';
 import uuid from 'uuid/v4';
 
@@ -36,6 +37,8 @@ export const reducer = (state: State, action: Action) => {
             // Append tab/tabPanel id in state.
             return { ...state, ids: { ...state.ids, [type]: [...state.ids[type], id] } };
         }
+        default:
+            return state;
     }
 };
 
@@ -56,14 +59,22 @@ export const useTabProviderContext = (type: TabType, originalId?: string): undef
     const [state, dispatch] = context;
 
     // Current tab or tab panel id.
-    const id = useMemo(() => originalId || `${type}-${uuid()}`, []);
-    useEffect(() => {
-        // On mount: register tab or tab panel id.
-        dispatch({ type: 'register', payload: { type, id } });
-    }, []);
+    const id = useMemo(
+        () => originalId || `${type}-${uuid()}`,
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [],
+    );
+    useEffect(
+        () => {
+            // On mount: register tab or tab panel id.
+            dispatch({ type: 'register', payload: { type, id } });
+        },
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [],
+    );
 
     // Find tab/tabPanel index using it's id.
-    const index = useMemo(() => state.ids[type].indexOf(id), [state, id]);
+    const index = useMemo(() => state.ids[type].indexOf(id), [state.ids, type, id]);
     const tabId = useMemo(() => state.ids.tab[index] || '', [state, index]);
     const tabPanelId = useMemo(() => state.ids.tabPanel[index] || '', [state, index]);
     const isActive = useMemo(() => state.activeTabIndex === index, [state, index]);

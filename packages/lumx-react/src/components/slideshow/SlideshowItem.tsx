@@ -13,14 +13,14 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}SlideshowItem`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * Item of slideshow.
  *
  * @return The component.
  */
-const SlideshowItem: React.FC<GenericProps> = ({ className, children, ...forwardedProps }) => (
+export const SlideshowItem: React.FC<GenericProps> = ({ className, children, ...forwardedProps }) => (
     <div
         {...forwardedProps}
         className={classNames(
@@ -34,5 +34,3 @@ const SlideshowItem: React.FC<GenericProps> = ({ className, children, ...forward
     </div>
 );
 SlideshowItem.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, SlideshowItem };

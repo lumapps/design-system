@@ -5,7 +5,7 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 import classNames from 'classnames';
 import React, { ReactNode } from 'react';
 
-enum MessageKind {
+export enum MessageKind {
     error = 'error',
     info = 'info',
     success = 'success',
@@ -15,7 +15,7 @@ enum MessageKind {
 /**
  * Defines the props of the component.
  */
-interface MessageProps extends GenericProps {
+export interface MessageProps extends GenericProps {
     /** The children elements. */
     children?: ReactNode;
     /** Whether the message has a background or not. */
@@ -32,7 +32,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Message`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -61,7 +61,7 @@ const KIND_ICON = {
     [MessageKind.warning]: mdiAlertCircle,
 };
 
-const Message: React.FC<MessageProps> = ({ children, className, hasBackground, kind, ...forwardedProps }) => {
+export const Message: React.FC<MessageProps> = ({ children, className, hasBackground, kind, ...forwardedProps }) => {
     const icon = kind ? KIND_ICON[kind] : null;
 
     const color = kind ? KIND_COLOR[kind] : DEFAULT_PROPS.color;
@@ -84,5 +84,3 @@ const Message: React.FC<MessageProps> = ({ children, className, hasBackground, k
 };
 Message.displayName = COMPONENT_NAME;
 Message.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, MessageKind, Message, MessageProps };

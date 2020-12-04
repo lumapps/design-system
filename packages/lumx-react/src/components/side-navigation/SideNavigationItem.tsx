@@ -23,7 +23,7 @@ import { IconButton } from '../button/IconButton';
 /**
  * Defines the props of the component.
  */
-interface SideNavigationItemProps extends GenericProps {
+export interface SideNavigationItemProps extends GenericProps {
     /** The children elements. Should use SideNavigationItem. */
     children?: ReactNode;
     /** The emphasis variant of the component. */
@@ -54,7 +54,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}SideNavigationItem`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -63,7 +63,7 @@ const DEFAULT_PROPS: Partial<SideNavigationItemProps> = {
     emphasis: Emphasis.high,
 };
 
-const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
+export const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
     const {
         children,
         className,
@@ -146,5 +146,3 @@ const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
 };
 SideNavigationItem.displayName = COMPONENT_NAME;
 SideNavigationItem.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, SideNavigationItem, SideNavigationItemProps };

@@ -7,7 +7,6 @@ import { UserBlock } from './UserBlock';
 export default { title: 'LumX components/user-block/UserBlock' };
 
 export const Sizes = () => {
-    // tslint:disable-next-line:no-console
     const logAction = (action: string) => () => console.log(action);
     return [Size.s, Size.m, Size.l].map((size: any) => (
         <div className="demo-grid" key={size}>
@@ -24,8 +23,7 @@ export const Sizes = () => {
     ));
 };
 
-export const withBadge = () => {
-    // tslint:disable-next-line:no-console
+export const WithBadge = () => {
     const logAction = (action: string) => () => console.log(action);
     return (
         <div className="demo-grid">
@@ -49,8 +47,7 @@ export const withBadge = () => {
     );
 };
 
-export const list = () => {
-    // tslint:disable-next-line:no-console
+export const InList = () => {
     const logAction = (action: string) => () => console.log(action);
     return (
         <div className="demo-grid">

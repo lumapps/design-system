@@ -8,7 +8,7 @@ export default { title: 'LumX components/side-navigation/Side Navigation' };
 const CustomLink: React.FC = ({ children, ...props }) =>
     React.createElement('a', { ...props, style: { color: 'red' } }, children);
 
-export const sideNavigation = () => (
+export const Simple = () => (
     <SideNavigation>
         <SideNavigationItem label="Navigation item" emphasis={Emphasis.low} />
         <SideNavigationItem label="Navigation item" emphasis={Emphasis.low} />
@@ -94,7 +94,6 @@ export const With3LevelsAndMultiActions = () => {
                 label="Level 1"
                 emphasis={Emphasis.high}
                 isOpen={l1IsOpen}
-                // tslint:disable-next-line: ter-no-script-url
                 linkProps={{ href: 'javascript:alert("Level 1")' }}
                 icon={mdiAccount}
                 onActionClick={toggleL1}
@@ -103,14 +102,12 @@ export const With3LevelsAndMultiActions = () => {
                     label="Level 2"
                     emphasis={Emphasis.medium}
                     isOpen={l2IsOpen}
-                    // tslint:disable-next-line: ter-no-script-url
                     linkProps={{ href: 'javascript:alert("Level 2")' }}
                     onActionClick={toggleL2}
                 >
                     <SideNavigationItem
                         label="Level 3.1"
                         emphasis={Emphasis.low}
-                        // tslint:disable-next-line: ter-no-script-url
                         linkProps={{ href: 'javascript:alert("Level 3.1 item is clicked")' }}
                         onActionClick={alertMessage('Level 3.1 action is clicked')}
                     />

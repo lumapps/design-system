@@ -13,7 +13,7 @@ import isFunction from 'lodash/isFunction';
 /**
  * The authorized values for the `sortOrder` prop.
  */
-enum ThOrder {
+export enum ThOrder {
     asc = 'asc',
     desc = 'desc',
 }
@@ -21,7 +21,7 @@ enum ThOrder {
 /**
  * The authorized values for the `scope` prop.
  */
-enum ThScope {
+export enum ThScope {
     col = 'col',
     row = 'row',
 }
@@ -29,7 +29,7 @@ enum ThScope {
 /**
  * The authorized variants.
  */
-enum TableCellVariant {
+export enum TableCellVariant {
     body = 'body',
     head = 'head',
 }
@@ -37,7 +37,7 @@ enum TableCellVariant {
 /**
  * Defines the props of the component.
  */
-interface TableCellProps extends GenericProps {
+export interface TableCellProps extends GenericProps {
     /** The name of the icon (thead only). */
     icon?: string;
     /** Whether the column is sortable or not (thead only). */
@@ -60,7 +60,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}TableCell`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME, true);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME, true);
 
 /**
  * The default value of props.
@@ -69,7 +69,7 @@ const DEFAULT_PROPS: Partial<TableCellProps> = {
     variant: TableCellVariant.body,
 };
 
-const TableCell: React.FC<TableCellProps> = ({
+export const TableCell: React.FC<TableCellProps> = ({
     children,
     className,
     icon,
@@ -134,5 +134,3 @@ const TableCell: React.FC<TableCellProps> = ({
 };
 TableCell.displayName = COMPONENT_NAME;
 TableCell.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, TableCell, TableCellProps, TableCellVariant, ThOrder, ThScope };

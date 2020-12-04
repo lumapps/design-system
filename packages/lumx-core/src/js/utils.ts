@@ -30,7 +30,7 @@ const _isEmpty = (value: any) => {
  * @param  value  The value of the type of the CSS class (e.g.: 'primary', 'button', ...).
  * @return The basic CSS class.
  */
-function getBasicClass({
+export function getBasicClass({
     prefix,
     type,
     value,
@@ -67,7 +67,7 @@ function getBasicClass({
  *                be used in the classname to represent the value of the given prop.
  * @return All LumX basic CSS classes.
  */
-function handleBasicClasses({ prefix, ...props }: { prefix: string; [prop: string]: any }): string {
+export function handleBasicClasses({ prefix, ...props }: { prefix: string; [prop: string]: any }): string {
     const otherClasses: any = {};
     if (!isEmpty(props)) {
         Object.keys(props).forEach((prop) => {
@@ -90,7 +90,7 @@ declare type SwipeDirection = 'none' | 'up' | 'down' | 'left' | 'right';
  * @param  handleSwipe Callback function.
  * @return Function to remove listeners.
  */
-function detectSwipe(touchSurface: Element, handleSwipe: (direction: SwipeDirection) => void = noop) {
+export function detectSwipe(touchSurface: Element, handleSwipe: (direction: SwipeDirection) => void = noop) {
     let distX: number;
     let distY: number;
     let startX: number;
@@ -164,7 +164,7 @@ type KeyboardEventHandler<E extends KeyboardEvent | React.KeyboardEvent> = (even
  * @param  handler The handler to call on enter/return press.
  * @return The decorated function.
  */
-function onEnterPressed<E extends KeyboardEvent | React.KeyboardEvent>(
+export function onEnterPressed<E extends KeyboardEvent | React.KeyboardEvent>(
     handler: KeyboardEventHandler<E>,
 ): KeyboardEventHandler<E> {
     return (evt) => {
@@ -181,7 +181,7 @@ function onEnterPressed<E extends KeyboardEvent | React.KeyboardEvent>(
  * @param  handler The handler to call on enter/return press.
  * @return The decorated function.
  */
-function onEscapePressed<E extends KeyboardEvent | React.KeyboardEvent>(
+export function onEscapePressed<E extends KeyboardEvent | React.KeyboardEvent>(
     handler: KeyboardEventHandler<E>,
 ): KeyboardEventHandler<E> {
     return (evt: any) => {
@@ -191,5 +191,3 @@ function onEscapePressed<E extends KeyboardEvent | React.KeyboardEvent>(
         handler(evt);
     };
 }
-
-export { getBasicClass, handleBasicClasses, detectSwipe, onEnterPressed, onEscapePressed };

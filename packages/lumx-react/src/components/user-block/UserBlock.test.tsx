@@ -28,7 +28,7 @@ interface Setup extends CommonSetup {
  * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup = ({ ...propsOverrides }: Partial<UserBlockProps> = {}, shallowRendering: boolean = true): Setup => {
+const setup = ({ ...propsOverrides }: Partial<UserBlockProps> = {}, shallowRendering = true): Setup => {
     const props: UserBlockProps = {
         ...propsOverrides,
     };

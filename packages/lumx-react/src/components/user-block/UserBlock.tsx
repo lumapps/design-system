@@ -12,12 +12,12 @@ import { AvatarProps } from '../avatar/Avatar';
 /**
  * Authorized size values.
  */
-type UserBlockSize = Size.s | Size.m | Size.l;
+export type UserBlockSize = Size.s | Size.m | Size.l;
 
 /**
  * Defines the props of the component.
  */
-interface UserBlockProps extends GenericProps {
+export interface UserBlockProps extends GenericProps {
     /**
      * The url of the avatar picture we want to display.
      * @see {@link AvatarProps#image}
@@ -57,7 +57,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}UserBlock`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -68,7 +68,7 @@ const DEFAULT_PROPS: Partial<UserBlockProps> = {
     theme: Theme.light,
 };
 
-const UserBlock: React.FC<UserBlockProps> = ({
+export const UserBlock: React.FC<UserBlockProps> = ({
     avatar,
     avatarProps,
     className,
@@ -95,6 +95,7 @@ const UserBlock: React.FC<UserBlockProps> = ({
     const shouldDisplayActions: boolean = orientation === Orientation.vertical;
 
     const nameBlock: ReactNode = name && (
+        // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-tabindex,jsx-a11y/no-static-element-interactions
         <span className={`${CLASSNAME}__name`} onClick={onClick} tabIndex={onClick ? 0 : -1}>
             {name}
         </span>
@@ -103,7 +104,7 @@ const UserBlock: React.FC<UserBlockProps> = ({
     const fieldsBlock: ReactNode = fields && componentSize !== Size.s && (
         <div className={`${CLASSNAME}__fields`}>
             {fields.map((aField: string, idx: number) => (
-                <span key={`ubf${idx}`} className={`${CLASSNAME}__field`}>
+                <span key={idx} className={`${CLASSNAME}__field`}>
                     {aField}
                 </span>
             ))}
@@ -148,5 +149,3 @@ const UserBlock: React.FC<UserBlockProps> = ({
 };
 UserBlock.displayName = COMPONENT_NAME;
 UserBlock.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, UserBlock, UserBlockProps, UserBlockSize };

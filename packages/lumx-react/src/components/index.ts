@@ -1,7 +1,7 @@
 /**
  * Authorized alignments.
  */
-enum Alignment {
+export enum Alignment {
     bottom = 'bottom',
     center = 'center',
     end = 'end',
@@ -14,17 +14,9 @@ enum Alignment {
 }
 
 /**
- * Defines the type of a complex default prop (which depends on the value of another prop).
- */
-interface ComplexPropDefault<T> {
-    default: T;
-    [key: string]: T;
-}
-
-/**
  * See SCSS variable $lumx-color-palette
  */
-enum ColorPalette {
+export enum ColorPalette {
     primary = 'primary',
     secondary = 'secondary',
     blue = 'blue',
@@ -34,12 +26,12 @@ enum ColorPalette {
     red = 'red',
     light = 'light',
 }
-type Color = ColorPalette | string;
+export type Color = ColorPalette | string;
 
 /**
  * See SCSS variable $lumx-color-variants
  */
-enum ColorVariant {
+export enum ColorVariant {
     D1 = 'D1',
     D2 = 'D2',
     L1 = 'L1',
@@ -51,12 +43,12 @@ enum ColorVariant {
     N = 'N',
 }
 
-enum Theme {
+export enum Theme {
     light = 'light',
     dark = 'dark',
 }
 
-enum Size {
+export enum Size {
     xxs = 'xxs',
     xs = 'xs',
     s = 's',
@@ -70,12 +62,12 @@ enum Size {
     huge = 'huge',
 }
 
-enum Orientation {
+export enum Orientation {
     horizontal = 'horizontal',
     vertical = 'vertical',
 }
 
-enum Emphasis {
+export enum Emphasis {
     low = 'low',
     medium = 'medium',
     high = 'high',
@@ -84,7 +76,7 @@ enum Emphasis {
 /**
  * List of typographies.
  */
-enum Typography {
+export enum Typography {
     overline = 'overline',
     caption = 'caption',
     body1 = 'body1',
@@ -99,7 +91,7 @@ enum Typography {
 /**
  * All available aspect ratios.
  */
-enum AspectRatio {
+export enum AspectRatio {
     original = 'original',
     horizontal = 'horizontal',
     vertical = 'vertical',
@@ -110,24 +102,9 @@ enum AspectRatio {
 /**
  * Semantic info about the purpose of the component
  */
-enum Kind {
+export enum Kind {
     info = 'info',
     valid = 'success',
     warning = 'warning',
     error = 'error',
 }
-
-export {
-    Alignment,
-    AspectRatio,
-    ComplexPropDefault,
-    Color,
-    ColorPalette,
-    ColorVariant,
-    Theme,
-    Size,
-    Orientation,
-    Emphasis,
-    Kind,
-    Typography,
-};

@@ -10,7 +10,7 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 /**
  * Authorized variants.
  */
-enum ProgressVariant {
+export enum ProgressVariant {
     linear = 'linear',
     circular = 'circular',
 }
@@ -18,7 +18,7 @@ enum ProgressVariant {
 /**
  * Defines the props of the component.
  */
-interface ProgressProps extends GenericProps {
+export interface ProgressProps extends GenericProps {
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
     /** Whether custom colors are applied to this component or not. */
@@ -35,7 +35,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Progress`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -45,7 +45,13 @@ const DEFAULT_PROPS: Partial<ProgressProps> = {
     variant: ProgressVariant.circular,
 };
 
-const Progress: React.FC<ProgressProps> = ({ className, theme, useCustomColors, variant, ...forwardedProps }) => {
+export const Progress: React.FC<ProgressProps> = ({
+    className,
+    theme,
+    useCustomColors,
+    variant,
+    ...forwardedProps
+}) => {
     return (
         <div
             {...forwardedProps}
@@ -83,5 +89,3 @@ const Progress: React.FC<ProgressProps> = ({ className, theme, useCustomColors, 
 };
 Progress.displayName = COMPONENT_NAME;
 Progress.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, Progress, ProgressProps, ProgressVariant };

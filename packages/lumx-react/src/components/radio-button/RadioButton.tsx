@@ -12,7 +12,7 @@ import uniqueId from 'lodash/uniqueId';
 /**
  * Defines the props of the component.
  */
-interface RadioButtonProps extends GenericProps {
+export interface RadioButtonProps extends GenericProps {
     /** The helper of the radio button. */
     helper?: string;
     /** The native input id property. */
@@ -43,7 +43,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}RadioButton`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -52,7 +52,7 @@ const DEFAULT_PROPS: Partial<RadioButtonProps> = {
     theme: Theme.light,
 };
 
-const RadioButton: React.FC<RadioButtonProps> = ({
+export const RadioButton: React.FC<RadioButtonProps> = ({
     checked,
     className,
     disabled,
@@ -126,5 +126,3 @@ const RadioButton: React.FC<RadioButtonProps> = ({
 };
 RadioButton.displayName = COMPONENT_NAME;
 RadioButton.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, RadioButton, RadioButtonProps };

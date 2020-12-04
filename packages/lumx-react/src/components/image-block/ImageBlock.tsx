@@ -13,7 +13,7 @@ import { ThumbnailProps } from '../thumbnail/Thumbnail';
 /**
  * Authorized variants.
  */
-enum ImageBlockCaptionPosition {
+export enum ImageBlockCaptionPosition {
     below = 'below',
     over = 'over',
 }
@@ -21,12 +21,12 @@ enum ImageBlockCaptionPosition {
 /**
  *  Authorized size values.
  */
-type ImageBlockSize = Size.xl | Size.xxl;
+export type ImageBlockSize = Size.xl | Size.xxl;
 
 /**
  * Defines the props of the component.
  */
-interface ImageBlockProps extends GenericProps {
+export interface ImageBlockProps extends GenericProps {
     /** The action elements. */
     actions?: ReactNode;
     /** The position of the caption. */
@@ -60,7 +60,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}ImageBlock`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -74,7 +74,7 @@ const DEFAULT_PROPS: Partial<ImageBlockProps> = {
     },
 };
 
-const ImageBlock: React.FC<ImageBlockProps> = ({
+export const ImageBlock: React.FC<ImageBlockProps> = ({
     actions,
     captionPosition,
     captionStyle,
@@ -134,5 +134,3 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
 };
 ImageBlock.displayName = COMPONENT_NAME;
 ImageBlock.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, ImageBlockCaptionPosition, ImageBlock, ImageBlockProps };

@@ -5,10 +5,9 @@ import React, { Fragment } from 'react';
 
 export default { title: 'LumX components/link/Link' };
 
-// tslint:disable-next-line:no-console
 const onClick = () => console.log('clicked link');
 
-export const simpleLink = () => (
+export const SimpleLink = () => (
     <>
         <Link
             href={text('href', 'https://google.com', 'Link 1')}
@@ -42,24 +41,26 @@ export const simpleLink = () => (
     </>
 );
 
-export const withoutHref = () => <Link onClick={onClick}>Link without redirection</Link>;
+// eslint-disable-next-line jsx-a11y/anchor-is-valid
+export const WithoutHref = () => <Link onClick={onClick}>Link without redirection</Link>;
 
 const CustomLink: React.FC = ({ children, ...props }) =>
     React.createElement('a', { ...props, style: { color: 'red' } }, children);
 
-export const withCustomLink = () => (
+export const WithCustomLink = () => (
     <Link linkAs={CustomLink} href="https://google.com">
         Custom link
     </Link>
 );
 
-export const disabledLink = () => (
+export const DisabledLink = () => (
+    // eslint-disable-next-line jsx-a11y/anchor-is-valid
     <Link onClick={onClick} disabled>
         Disabled link
     </Link>
 );
 
-export const withIcon = () => (
+export const WithIcon = () => (
     <>
         {Object.values(Typography).map((typography) => (
             <Fragment key={typography}>

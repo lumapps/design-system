@@ -12,7 +12,7 @@ import { AvatarProps } from '../avatar/Avatar';
 /**
  * Defines the props of the component.
  */
-interface CommentBlockProps extends GenericProps {
+export interface CommentBlockProps extends GenericProps {
     /** The action elements. */
     actions?: HTMLElement | ReactNode;
     /**
@@ -58,7 +58,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}CommentBlock`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -67,7 +67,7 @@ const DEFAULT_PROPS: Partial<CommentBlockProps> = {
     theme: Theme.light,
 };
 
-const CommentBlock: React.FC<CommentBlockProps> = ({
+export const CommentBlock: React.FC<CommentBlockProps> = ({
     actions,
     avatar,
     avatarProps,
@@ -145,5 +145,3 @@ const CommentBlock: React.FC<CommentBlockProps> = ({
 };
 CommentBlock.displayName = COMPONENT_NAME;
 CommentBlock.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, CommentBlock, CommentBlockProps };

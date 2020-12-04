@@ -5,7 +5,7 @@ import React from 'react';
 
 export default { title: 'LumX components/slider/Slider' };
 
-export const defaultSlider = ({ theme }: any) => (
+export const DefaultSlider = ({ theme }: any) => (
     <Slider
         label={text('label', 'Default')}
         max={number('max', 10)}
@@ -16,7 +16,7 @@ export const defaultSlider = ({ theme }: any) => (
     />
 );
 
-export const withHelperSlider = ({ theme }: any) => (
+export const WithHelperSlider = ({ theme }: any) => (
     <Slider
         label={text('label', 'Default')}
         helper={text('helper', 'This is an helper text')}

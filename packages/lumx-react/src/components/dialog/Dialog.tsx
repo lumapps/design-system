@@ -5,9 +5,7 @@ import classNames from 'classnames';
 
 import { Progress, ProgressVariant, Size } from '@lumx/react';
 
-import { DIALOG_TRANSITION_DURATION, DOCUMENT } from '@lumx/react/constants';
-
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
+import { COMPONENT_PREFIX, DIALOG_TRANSITION_DURATION, DOCUMENT } from '@lumx/react/constants';
 import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
@@ -20,7 +18,7 @@ import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
 /**
  * Defines the props of the component.
  */
-interface DialogProps extends GenericProps {
+export interface DialogProps extends GenericProps {
     /** The elements to display in the footer part. */
     footer?: ReactNode;
     /** Whether the divider between the dialog content and the footer is always displayed (instead of showing it on scroll). */
@@ -49,7 +47,7 @@ interface DialogProps extends GenericProps {
     onClose?(): void;
 }
 
-type DialogSizes = Size.tiny | Size.regular | Size.big | Size.huge;
+export type DialogSizes = Size.tiny | Size.regular | Size.big | Size.huge;
 
 const isHeader = isComponent('header');
 const isFooter = isComponent('footer');
@@ -62,7 +60,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Dialog`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -71,7 +69,7 @@ const DEFAULT_PROPS: Partial<DialogProps> = {
     size: Size.big,
 };
 
-const Dialog: React.FC<DialogProps> = (props) => {
+export const Dialog: React.FC<DialogProps> = (props) => {
     if (!DOCUMENT) {
         // Can't render in SSR.
         return null;
@@ -97,18 +95,25 @@ const Dialog: React.FC<DialogProps> = (props) => {
         ...forwardedProps
     } = props;
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     useCallbackOnEscape(onClose, isOpen && !preventAutoClose);
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const wrapperRef = useRef<HTMLDivElement>(null);
 
     // Focus the parent element on close.
-    useFocus(parentElement?.current, !Boolean(isOpen));
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useFocus(parentElement?.current, !isOpen);
 
     // Handle focus trap.
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     useFocusTrap(wrapperRef.current, focusElement?.current);
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [sentinelTop, setSentinelTop] = useState<Element | null>(null);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [sentinelBottom, setSentinelBottom] = useState<Element | null>(null);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const intersections = useIntersectionObserver([sentinelTop, sentinelBottom], {
         threshold: [0, 1],
     });
@@ -117,6 +122,7 @@ const Dialog: React.FC<DialogProps> = (props) => {
     const hasBottomIntersection = !(intersections.get(sentinelBottom!)?.isIntersecting ?? true);
 
     // Separate header, footer and dialog content from children.
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [[headerChild], [footerChild], content] = useMemo(
         () => partitionMulti(Children.toArray(children), [isHeader, isFooter]),
         [children],
@@ -126,6 +132,7 @@ const Dialog: React.FC<DialogProps> = (props) => {
     const footerChildProps = (footerChild as ReactElement)?.props;
     const footerChildContent = footerChildProps?.children;
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const isVisible = useDelayedVisibility(Boolean(isOpen), DIALOG_TRANSITION_DURATION);
 
     return isOpen || isVisible
@@ -208,5 +215,3 @@ const Dialog: React.FC<DialogProps> = (props) => {
 };
 Dialog.displayName = COMPONENT_NAME;
 Dialog.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, Dialog, DialogProps, DialogSizes };

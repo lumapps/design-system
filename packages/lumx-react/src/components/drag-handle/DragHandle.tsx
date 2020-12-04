@@ -11,7 +11,7 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 /**
  * Defines the props of the component.
  */
-interface DragHandleProps extends GenericProps {
+export interface DragHandleProps extends GenericProps {
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
 }
@@ -24,13 +24,11 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}DragHandle`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
-const DragHandle: React.FC<DragHandleProps> = ({ className, theme, ...forwardedProps }) => (
+export const DragHandle: React.FC<DragHandleProps> = ({ className, theme, ...forwardedProps }) => (
     <div {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }))}>
         <Icon icon={mdiDragVertical} color={theme === Theme.dark ? ColorPalette.light : undefined} size={Size.xs} />
     </div>
 );
 DragHandle.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DragHandle, DragHandleProps };

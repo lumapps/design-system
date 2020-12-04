@@ -15,7 +15,7 @@ const query = graphql`
 
 export const LumxVersion: React.FC = () => {
     const data = useStaticQuery(query);
-    const version = data.site.siteMetadata.version;
+    const { version } = data.site.siteMetadata;
     return (
         <Button
             emphasis={Emphasis.low}

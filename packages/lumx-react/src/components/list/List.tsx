@@ -13,7 +13,7 @@ import { useInteractiveList } from './useInteractiveList';
 /**
  * Defines the props of the component.
  */
-interface ListProps extends GenericProps {
+export interface ListProps extends GenericProps {
     /** The children elements. Should be ListItem, ListSubheader or ListDivider. */
     children: ReactNode;
     /**
@@ -45,13 +45,13 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}List`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 interface List {
     useKeyboardListNavigation: useKeyboardListNavigationType;
 }
 
-const List: React.FC<ListProps> & List = ({
+export const List: React.FC<ListProps> & List = ({
     children,
     className,
     isClickable,
@@ -91,5 +91,3 @@ const List: React.FC<ListProps> & List = ({
 
 List.displayName = COMPONENT_NAME;
 List.useKeyboardListNavigation = useKeyboardListNavigation;
-
-export { CLASSNAME, List, ListProps };

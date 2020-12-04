@@ -1,4 +1,3 @@
-/* tslint:disable:jsx-no-lambda */
 import { Button } from '@lumx/react';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 import React, { useCallback, useRef, useState } from 'react';

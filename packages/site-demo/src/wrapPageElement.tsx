@@ -7,4 +7,5 @@ import React from 'react';
  *
  * @return wrapped element.
  */
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const wrapPageElement = ({ element, props }: any) => <Layout {...props}>{element}</Layout>;

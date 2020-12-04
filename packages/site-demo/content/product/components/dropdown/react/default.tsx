@@ -13,12 +13,10 @@ export const App = () => {
     const closeComplexMenu = () => setComplexIsOpen(false);
 
     const onSimpleMenuSelected = (item: string) => () => {
-        // tslint:disable-next-line:no-console
         console.log('selected item', item);
         closeSimpleMenu();
     };
     const onComplexMenuSelected = (item: string) => () => {
-        // tslint:disable-next-line:no-console
         console.log('selected item', item);
         closeComplexMenu();
     };

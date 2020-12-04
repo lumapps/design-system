@@ -10,7 +10,7 @@ import { InputHelper, InputLabel, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
-enum SwitchPosition {
+export enum SwitchPosition {
     left = 'left',
     right = 'right',
 }
@@ -18,7 +18,7 @@ enum SwitchPosition {
 /**
  * Defines the props of the component.
  */
-interface SwitchProps extends GenericProps {
+export interface SwitchProps extends GenericProps {
     /** The helper of the switch. */
     helper?: string;
     /** Whether it is checked or not. */
@@ -47,7 +47,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Switch`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -57,7 +57,7 @@ const DEFAULT_PROPS: Partial<SwitchProps> = {
     theme: Theme.light,
 };
 
-const Switch: React.FC<SwitchProps> = ({
+export const Switch: React.FC<SwitchProps> = ({
     checked,
     children,
     className,
@@ -133,5 +133,3 @@ const Switch: React.FC<SwitchProps> = ({
 };
 Switch.displayName = COMPONENT_NAME;
 Switch.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, Switch, SwitchProps, SwitchPosition };

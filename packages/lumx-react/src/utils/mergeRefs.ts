@@ -15,6 +15,7 @@ export function mergeRefs<T>(...refs: Array<MutableRefObject<T> | FnRef<T> | Fal
             if (typeof ref === 'function') {
                 ref(value);
             } else if (ref) {
+                // eslint-disable-next-line no-param-reassign
                 ref.current = value;
             }
         });

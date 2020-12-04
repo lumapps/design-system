@@ -30,7 +30,7 @@ export interface ClickAwayParameters {
 export function useClickAway({ callback, refs }: ClickAwayParameters) {
     useEffect(() => {
         if (!callback || !refs || isEmpty(refs)) {
-            return;
+            return undefined;
         }
         const listener: EventListener = (evt) => {
             if (isClickAway(evt.target as HTMLElement, refs)) {

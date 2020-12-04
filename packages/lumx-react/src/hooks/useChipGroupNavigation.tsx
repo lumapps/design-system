@@ -11,7 +11,7 @@ interface UseChipGroupNavigation {
     resetChipNavigation(): void;
 }
 
-type useChipGroupNavigationType<C = any> = (
+export type useChipGroupNavigationType<C = any> = (
     chips: C[],
     onChipDeleted: (chip: C) => void,
     initialActiveChip?: number,
@@ -27,7 +27,7 @@ const INITIAL_STATE_ACTIVE_CHIP = -1;
  *
  * @return chip navigation tools.
  */
-const useChipGroupNavigation: useChipGroupNavigationType = (
+export const useChipGroupNavigation: useChipGroupNavigationType = (
     chips,
     onChipDeleted,
     initialActiveChip = INITIAL_STATE_ACTIVE_CHIP,
@@ -73,5 +73,3 @@ const useChipGroupNavigation: useChipGroupNavigationType = (
         resetChipNavigation,
     };
 };
-
-export { useChipGroupNavigation, useChipGroupNavigationType };
