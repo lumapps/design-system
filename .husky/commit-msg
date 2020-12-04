@@ -1,0 +1,21 @@
+#!/bin/bash
+. "$(dirname $0)/_/husky.sh"
+
+REPO="https://github.com/lumapps/commit-message-validator"
+REV="master"
+REPO_DIR="$(dirname $0)/_/commit-message-validator"
+
+# Get or update git repository
+(
+    set -x
+    if [[ ! -d "$REPO_DIR" ]]; then
+        git clone --depth 1 "$REPO" "$REPO_DIR"
+    fi
+    cd "$REPO_DIR" || return
+    git fetch --depth 1
+    git reset --hard "origin/$REV"
+    git clean -dfx
+) > /dev/null 2>&1
+
+# Run commit validator (--no-jira remove the JIRA ticket requirement)
+cat | "$REPO_DIR/check_message.sh" "--no-jira" "$@"
