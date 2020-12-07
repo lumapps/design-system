@@ -8,7 +8,7 @@
     @include lumx-elevation($lumx-tooltip-elevation);
 
     position: absolute;
-    z-index: 9999;
+    z-index: map-get($lumx-base-layers, 'higher');
     top: 0;
     left: 0;
     padding: $lumx-spacing-unit / 2 $lumx-spacing-unit;

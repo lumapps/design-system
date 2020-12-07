@@ -3,6 +3,8 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-dropdown {
+    z-index: map-get($lumx-base-layers, 'high');
+
     &--has-toggle {
         display: inline-block;
         vertical-align: top;

@@ -6,7 +6,7 @@ import template from './popover.html';
 
 /////////////////////////////
 
-function PopoverController(LxDepthService, $element, $scope, $timeout) {
+function PopoverController($element, $scope, $timeout) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
@@ -88,10 +88,6 @@ function PopoverController(LxDepthService, $element, $scope, $timeout) {
      * Open popover.
      */
     function _open() {
-        LxDepthService.increase();
-
-        $element.css('z-index', LxDepthService.get());
-
         // eslint-disable-next-line no-new
         new PopperJs(_targetEl, $element, {
             modifiers: {

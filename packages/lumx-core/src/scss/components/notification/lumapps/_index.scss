@@ -8,6 +8,7 @@
     @include lumx-elevation(4);
 
     position: fixed;
+    z-index: map-get($lumx-base-layers, 'higher');
     right: $lumx-spacing-unit * 3;
     bottom: $lumx-spacing-unit * 3;
     display: flex;
