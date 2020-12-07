@@ -13,7 +13,7 @@ import uuid from 'uuid/v4';
 /**
  * Defines the props of the component.
  */
-interface SliderProps extends GenericProps {
+export interface SliderProps extends GenericProps {
     /** The helper message of the slider. */
     helper?: string;
     /** Whether the min and max labels should be hidden or not. */
@@ -52,7 +52,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Slider`;
  * The default class name and classes prefix for this component.
  *
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -97,7 +97,7 @@ const computeValueFromPercent = (percent: number, min: number, max: number, prec
 const computePercentFromValue = (value: number, min: number, max: number): number =>
     Number((value - min) / (max - min));
 
-const Slider: React.FC<SliderProps> = ({
+export const Slider: React.FC<SliderProps> = ({
     className,
     disabled,
     helper,
@@ -143,7 +143,6 @@ const Slider: React.FC<SliderProps> = ({
      */
     const findClosestStep = (percentValue: number): number => {
         const closest = availableSteps.reduce(
-            // tslint:disable-next-line: typedef
             (acc, step) => {
                 const aDst = Math.abs(percentValue - step);
                 if (aDst < acc.dst) {
@@ -307,5 +306,3 @@ const Slider: React.FC<SliderProps> = ({
 };
 Slider.displayName = COMPONENT_NAME;
 Slider.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, Slider, SliderProps };

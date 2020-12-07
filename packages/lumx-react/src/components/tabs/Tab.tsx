@@ -9,7 +9,7 @@ import { useTabProviderContext } from './state';
 /**
  * Defines the props of the component.
  */
-interface TabProps extends GenericProps {
+export interface TabProps extends GenericProps {
     /** Children are not supported. */
     children?: never;
     /** The icon of the tab. */
@@ -32,7 +32,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Tab`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME = `${CSS_PREFIX}-tabs__link`;
+export const CLASSNAME = `${CSS_PREFIX}-tabs__link`;
 
 /**
  * The default value of props.
@@ -47,7 +47,7 @@ const DEFAULT_PROPS: Partial<TabProps> = {};
  * @param  props Component props.
  * @return React element.
  */
-const Tab: React.FC<TabProps> = (props) => {
+export const Tab: React.FC<TabProps> = (props) => {
     const {
         className,
         disabled,
@@ -114,5 +114,3 @@ const Tab: React.FC<TabProps> = (props) => {
 };
 Tab.displayName = COMPONENT_NAME;
 Tab.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, Tab, TabProps };

@@ -10,6 +10,6 @@ export const isInternetExplorer = () => {
         return false;
     }
     const msie = userAgent.indexOf('MSIE ');
-    const isIEVersion = !!userAgent.match(/Trident.*rv\:11\./);
+    const isIEVersion = !!userAgent.match(/Trident.*rv:11\./);
     return msie > 0 || isIEVersion;
 };

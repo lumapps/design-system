@@ -10,26 +10,26 @@ import { mdiChevronLeft, mdiChevronRight } from '@lumx/icons';
 
 import { getAnnotatedMonthCalendar, getWeekDays } from '@lumx/core/js/date-picker';
 
-import { CLASSNAME, DatePickerProps } from './DatePicker';
+import { DatePickerProps, CLASSNAME } from './base';
 
 /**
  * Defines the props of the component.
  */
-type DatePickerControlledProps = DatePickerProps & {
+export interface DatePickerControlledProps extends DatePickerProps {
     /** The selected month to display. */
     selectedMonth: Date;
     /** The function called when switching to previous month. */
     onPrevMonthChange(): void;
     /** The function called when switching to next month. */
     onNextMonthChange(): void;
-};
+}
 
 /**
  * The display name of the component.
  */
 const COMPONENT_NAME = 'DatePickerControlled';
 
-const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
+export const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
     locale,
     maxDate,
     minDate,
@@ -56,9 +56,7 @@ const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
                 before={<IconButton emphasis={Emphasis.low} icon={mdiChevronLeft} onClick={onPrevMonthChange} />}
                 label={
                     <span className={`${CLASSNAME}__month`}>
-                        {moment(selectedMonth)
-                            .locale(locale)
-                            .format('MMMM YYYY')}
+                        {moment(selectedMonth).locale(locale).format('MMMM YYYY')}
                     </span>
                 }
             />
@@ -67,10 +65,7 @@ const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
                     {weekDays.map((weekDay) => (
                         <div key={weekDay.unix()} className={`${CLASSNAME}__day-wrapper`}>
                             <span className={`${CLASSNAME}__week-day`}>
-                                {weekDay
-                                    .format('dddd')
-                                    .slice(0, 1)
-                                    .toLocaleUpperCase()}
+                                {weekDay.format('dddd').slice(0, 1).toLocaleUpperCase()}
                             </span>
                         </div>
                     ))}
@@ -95,7 +90,7 @@ const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
                                                 annotatedDate.isClickable && annotatedDate.isToday,
                                         })}
                                         disabled={!annotatedDate.isClickable}
-                                        // tslint:disable-next-line: jsx-no-lambda
+                                        type="button"
                                         onClick={() => onChange(moment(annotatedDate.date).toDate())}
                                     >
                                         <span>{annotatedDate.date.format('DD')}</span>
@@ -111,5 +106,3 @@ const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
     );
 };
 DatePickerControlled.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, COMPONENT_NAME, DatePickerControlled, DatePickerControlledProps };

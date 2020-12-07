@@ -14,7 +14,7 @@ type HTMLAnchorProps = React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAn
 /**
  * Defines the props of the component.
  */
-interface LinkProps extends GenericProps {
+export interface LinkProps extends GenericProps {
     /** The color of the link. */
     color?: Color;
     /** The degree of lightness and darkness of the selected link color. */
@@ -51,7 +51,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Link`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 const getIconSize = (typography?: Typography) => {
     switch (typography) {
@@ -77,7 +77,7 @@ const getIconSize = (typography?: Typography) => {
     }
 };
 
-const Link: React.FC<LinkProps> = ({
+export const Link: React.FC<LinkProps> = ({
     children,
     className,
     color,
@@ -147,5 +147,3 @@ const Link: React.FC<LinkProps> = ({
     );
 };
 Link.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, COMPONENT_NAME, Link, LinkProps };

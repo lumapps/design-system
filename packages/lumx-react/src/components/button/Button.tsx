@@ -12,12 +12,12 @@ import { BaseButtonProps, ButtonRoot } from './ButtonRoot';
  * The authorized values for the `emphasis` prop.
  * @deprecated Use Emphasis instead.
  */
-const ButtonEmphasis = Emphasis;
+export const ButtonEmphasis = Emphasis;
 
 /**
  * Defines the props of the component.
  */
-interface ButtonProps extends BaseButtonProps {
+export interface ButtonProps extends BaseButtonProps {
     /** The children elements. */
     children?: ReactNode;
     /**
@@ -40,7 +40,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Button`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -51,7 +51,7 @@ const DEFAULT_PROPS: Partial<ButtonProps> = {
     theme: Theme.light,
 };
 
-const Button: React.FC<ButtonProps> = (props) => {
+export const Button: React.FC<ButtonProps> = (props) => {
     const { children, className, emphasis, leftIcon, rightIcon, size, theme, ...forwardedProps } = props;
 
     const buttonClassName = classNames(
@@ -70,5 +70,3 @@ const Button: React.FC<ButtonProps> = (props) => {
 };
 Button.displayName = COMPONENT_NAME;
 Button.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, ButtonEmphasis, Button, ButtonProps };

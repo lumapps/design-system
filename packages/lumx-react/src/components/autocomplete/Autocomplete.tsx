@@ -12,7 +12,7 @@ import { useFocus } from '@lumx/react/hooks/useFocus';
 /**
  * Defines the props of the component.
  */
-interface AutocompleteProps extends GenericProps {
+export interface AutocompleteProps extends GenericProps {
     /**
      * Whether the suggestions list should display anchored to the input or to the wrapper.
      * @see {@link DropdownProps#anchorToInput}
@@ -160,7 +160,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Autocomplete`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -173,7 +173,7 @@ const DEFAULT_PROPS: Partial<AutocompleteProps> = {
     shouldFocusOnClose: false,
 };
 
-const Autocomplete: React.FC<AutocompleteProps> = ({
+export const Autocomplete: React.FC<AutocompleteProps> = ({
     anchorToInput,
     children,
     chips,
@@ -261,5 +261,3 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
 };
 Autocomplete.displayName = COMPONENT_NAME;
 Autocomplete.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, Autocomplete, AutocompleteProps };

@@ -13,7 +13,7 @@ interface StoryBlockProps {
 
 const CLASSNAME = 'story-block';
 
-const StoryBlock: React.FC<StoryBlockProps> = (props) => {
+export const StoryBlock: React.FC<StoryBlockProps> = (props) => {
     const { children } = props;
 
     const [globalTheme, setGlobalTheme] = useState<GlobalTheme>('lumapps');
@@ -69,5 +69,3 @@ const StoryBlock: React.FC<StoryBlockProps> = (props) => {
         </div>
     );
 };
-
-export { StoryBlock };

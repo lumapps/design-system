@@ -16,10 +16,9 @@ import { CLASSNAME, Dropdown, DropdownProps } from './Dropdown';
  * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup = ({ ...propsOverrides }: Partial<DropdownProps> = {}, shallowRendering: boolean = true) => {
+const setup = ({ ...propsOverrides }: Partial<DropdownProps> = {}, shallowRendering = true) => {
     const anchorRef = React.createRef<HTMLButtonElement>();
     const props: DropdownProps = {
-        // tslint:disable-next-line no-unused
         anchorRef,
         children: <div>This is the content of the dropdown</div>,
         isOpen: true,

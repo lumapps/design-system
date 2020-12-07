@@ -103,9 +103,7 @@ export const Controlled = () => {
                             </p>
                             <FlexBox orientation={Orientation.horizontal} className="lumx-spacing-margin-top-huge">
                                 <FlexBox fillSpace>
-                                    {index === 0 ? (
-                                        undefined
-                                    ) : (
+                                    {index === 0 ? undefined : (
                                         <Button onClick={previous(index)} color={ColorPalette.secondary}>
                                             Previous
                                         </Button>
@@ -118,9 +116,7 @@ export const Controlled = () => {
                                 >
                                     Toggle error
                                 </Button>
-                                {index === steps.length - 1 && step.isComplete ? (
-                                    undefined
-                                ) : (
+                                {index === steps.length - 1 && step.isComplete ? undefined : (
                                     <Button onClick={next(index)} color={ColorPalette.primary}>
                                         {index === steps.length - 1 ? 'Complete' : 'Next with success'}
                                     </Button>

@@ -7,7 +7,7 @@ import React, { ReactNode } from 'react';
 /**
  * Defines the props of the component.
  */
-interface InputLabelProps extends GenericProps {
+export interface InputLabelProps extends GenericProps {
     /** The children elements. */
     children: string | ReactNode;
     /** Whether the component is required or not. */
@@ -24,7 +24,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}InputLabel`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -33,7 +33,14 @@ const DEFAULT_PROPS: Partial<InputLabelProps> = {
     theme: Theme.light,
 };
 
-const InputLabel: React.FC<InputLabelProps> = ({ children, className, isRequired, theme, ...forwardedProps }) => (
+export const InputLabel: React.FC<InputLabelProps> = ({
+    children,
+    className,
+    isRequired,
+    theme,
+    ...forwardedProps
+}) => (
+    // eslint-disable-next-line jsx-a11y/label-has-associated-control
     <label
         {...forwardedProps}
         className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, isRequired, theme }))}
@@ -44,5 +51,3 @@ const InputLabel: React.FC<InputLabelProps> = ({ children, className, isRequired
 
 InputLabel.displayName = COMPONENT_NAME;
 InputLabel.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, InputLabel, InputLabelProps };

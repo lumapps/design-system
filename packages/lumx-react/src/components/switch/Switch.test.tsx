@@ -64,7 +64,7 @@ interface Setup extends CommonSetup {
  * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
+const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering = true): Setup => {
     const props: SwitchProps = {
         ...propsOverrides,
     };

@@ -1,13 +1,13 @@
-import React, { MouseEventHandler, ReactNode, Ref, useCallback } from 'react';
+import { Color, ColorPalette, Size, Theme } from '@lumx/react';
+import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
+import { useStopPropagation } from '@lumx/react/hooks/useStopPropagation';
+
+import { GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
 
 import classNames from 'classnames';
 
 import isFunction from 'lodash/isFunction';
-
-import { Color, ColorPalette, Size, Theme } from '@lumx/react';
-import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
-
-import { GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
+import React, { MouseEventHandler, ReactNode, Ref } from 'react';
 
 /**
  * Authorized size values.
@@ -17,7 +17,7 @@ type ChipSize = Size.s | Size.m;
 /**
  * Defines the props of the component.
  */
-interface ChipProps extends GenericProps {
+export interface ChipProps extends GenericProps {
     /** A component to be rendered after the content. */
     after?: ReactNode;
     /** A component to be rendered before the content. */
@@ -54,7 +54,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Chip`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -64,26 +64,7 @@ const DEFAULT_PROPS: Partial<ChipProps> = {
     theme: Theme.light,
 };
 
-/**
- * Wrap mouse event handler to stop event propagation.
- *
- * @param  handler   The mouse handler to wrap.
- * @return Mouse handler stopping propagation.
- */
-function useStopPropagation(handler?: MouseEventHandler): MouseEventHandler {
-    return useCallback(
-        (evt) => {
-            if (!evt || !isFunction(handler)) {
-                return;
-            }
-            handler(evt);
-            evt.stopPropagation();
-        },
-        [handler],
-    );
-}
-
-const Chip: React.FC<ChipProps> = ({
+export const Chip: React.FC<ChipProps> = ({
     after,
     before,
     children,
@@ -114,6 +95,7 @@ const Chip: React.FC<ChipProps> = ({
     const handleOnAfterClick = useStopPropagation(onAfterClick);
 
     return (
+        // eslint-disable-next-line jsx-a11y/no-static-element-interactions
         <a
             {...forwardedProps}
             ref={chipRef}
@@ -140,6 +122,7 @@ const Chip: React.FC<ChipProps> = ({
             onKeyDown={hasOnClick ? onEnterPressed(onClick) : undefined}
         >
             {before && (
+                // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
                 <div
                     className={classNames(`${CLASSNAME}__before`, {
                         [`${CLASSNAME}__before--is-clickable`]: hasBeforeClick,
@@ -153,6 +136,7 @@ const Chip: React.FC<ChipProps> = ({
             <div className={`${CLASSNAME}__label`}>{children}</div>
 
             {after && (
+                // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
                 <div
                     className={classNames(`${CLASSNAME}__after`, {
                         [`${CLASSNAME}__after--is-clickable`]: hasAfterClick,
@@ -168,5 +152,3 @@ const Chip: React.FC<ChipProps> = ({
 
 Chip.displayName = COMPONENT_NAME;
 Chip.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, Chip, ChipProps };

@@ -23,7 +23,7 @@ export default { title: 'LumX components/popover/Popover' };
 
 const DEFAULT_PROPS = Popover.defaultProps as any;
 
-export const positions = ({ theme }: any) => {
+export const Positions = ({ theme }: any) => {
     const popovers: Array<[Placement, RefObject<any>]> = [
         [Placement.LEFT, useRef(null)],
         [Placement.TOP, useRef(null)],
@@ -62,7 +62,7 @@ export const positions = ({ theme }: any) => {
     );
 };
 
-export const auto = ({ theme }: any) => {
+export const Auto = ({ theme }: any) => {
     const demoPopperStyle = {
         alignItems: 'center',
         display: 'flex',
@@ -79,7 +79,7 @@ export const auto = ({ theme }: any) => {
         justifyContent: 'center',
     };
 
-    const anchorRef = React.useRef(null);
+    const anchorRef = useRef(null);
 
     return (
         <div style={container}>
@@ -89,13 +89,13 @@ export const auto = ({ theme }: any) => {
                 </Chip>
             </div>
             <Popover theme={theme} anchorRef={anchorRef} placement={Placement.AUTO} isOpen>
-                <div style={demoPopperStyle}>{'Popover'}</div>
+                <div style={demoPopperStyle}>Popover</div>
             </Popover>
         </div>
     );
 };
 
-export const top = ({ theme }: any) => {
+export const Top = ({ theme }: any) => {
     const demoPopperStyle = {
         alignItems: 'center',
         display: 'flex',
@@ -112,7 +112,7 @@ export const top = ({ theme }: any) => {
         justifyContent: 'center',
     };
 
-    const anchorRef = React.useRef(null);
+    const anchorRef = useRef(null);
 
     return (
         <div style={container}>
@@ -122,15 +122,15 @@ export const top = ({ theme }: any) => {
                 </Chip>
             </div>
             <Popover theme={theme} anchorRef={anchorRef} placement={Placement.TOP} isOpen>
-                <div style={demoPopperStyle}>{'Popover'}</div>
+                <div style={demoPopperStyle}>Popover</div>
             </Popover>
         </div>
     );
 };
 
-export const withUpdatingChildren = ({ theme }: any) => {
-    const anchorRef = React.useRef(null);
-    const [isOpen, setIsOpen] = React.useState(false);
+export const WithUpdatingChildren = ({ theme }: any) => {
+    const anchorRef = useRef(null);
+    const [isOpen, setIsOpen] = useState(false);
 
     const toggleOpen = () => setIsOpen(!isOpen);
 
@@ -143,6 +143,7 @@ export const withUpdatingChildren = ({ theme }: any) => {
             return () => clearTimeout(timer);
         }
         setText('Long loading text with useless words');
+        return undefined;
     }, [isOpen]);
 
     return (
@@ -175,9 +176,9 @@ export const withUpdatingChildren = ({ theme }: any) => {
     );
 };
 
-export const withScrollingPopover = ({ theme }: any) => {
-    const anchorRef = React.useRef(null);
-    const [isOpen, setIsOpen] = React.useState(false);
+export const WithScrollingPopover = ({ theme }: any) => {
+    const anchorRef = useRef(null);
+    const [isOpen, setIsOpen] = useState(false);
 
     const toggleOpen = () => setIsOpen(!isOpen);
 

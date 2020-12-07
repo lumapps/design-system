@@ -20,6 +20,6 @@ export function useCallbackOnEscape(
             rootElement.addEventListener('keydown', onKeyDown);
             return () => rootElement.removeEventListener('keydown', onKeyDown);
         }
-        return;
+        return undefined;
     }, [callback, closeOnEscape, rootElement]);
 }

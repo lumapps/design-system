@@ -22,8 +22,8 @@ import {
 /**
  * Defines the props of the component.
  */
-interface ExpansionPanelProps extends GenericProps {
-    /** Whether the hexpansion panel has a background. */
+export interface ExpansionPanelProps extends GenericProps {
+    /** Whether the expansion panel has a background. */
     hasBackground?: boolean;
     /** Whether the header has a divider. */
     hasHeaderDivider?: boolean;
@@ -49,7 +49,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}ExpansionPanel`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -62,7 +62,7 @@ const isDragHandle = isComponent(DragHandle);
 const isHeader = isComponent('header');
 const isFooter = isComponent('footer');
 
-const ExpansionPanel: React.FC<ExpansionPanelProps> = (props) => {
+export const ExpansionPanel: React.FC<ExpansionPanelProps> = (props) => {
     const {
         className,
         hasBackground,
@@ -73,10 +73,11 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = (props) => {
         onOpen,
         onToggleOpen,
         theme,
+        children: anyChildren,
         ...forwardedProps
     } = props;
 
-    const children: ReactNode[] = Children.toArray(props.children);
+    const children: ReactNode[] = Children.toArray(anyChildren);
 
     // Partition children by types.
     const [[dragHandle], [header], [footer], content] = partitionMulti(children, [isDragHandle, isHeader, isFooter]);
@@ -126,10 +127,11 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = (props) => {
     useEffect(() => {
         const height = isOpen ? get(wrapperRef.current, 'offsetHeight', 0) : 0;
         setMaxHeight(`${height}px`);
-    }, [children, isOpen, wrapperRef.current]);
+    }, [children, isOpen]);
 
     return (
         <section {...forwardedProps} className={rootClassName}>
+            {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
             <header className={`${CLASSNAME}__header`} onClick={toggleOpen}>
                 {dragHandle && <div className={`${CLASSNAME}__header-drag`}>{dragHandle}</div>}
 
@@ -156,5 +158,3 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = (props) => {
 };
 ExpansionPanel.displayName = COMPONENT_NAME;
 ExpansionPanel.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, ExpansionPanel, ExpansionPanelProps };

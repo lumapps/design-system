@@ -1,4 +1,4 @@
-import React, { MouseEvent, MouseEventHandler, useCallback } from 'react';
+import React, { MouseEventHandler, useCallback } from 'react';
 
 import { AspectRatio, Theme, Thumbnail, ThumbnailProps } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
@@ -9,7 +9,7 @@ import take from 'lodash/take';
 /**
  * Defines the props of the component.
  */
-interface MosaicProps extends GenericProps {
+export interface MosaicProps extends GenericProps {
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
     /** The list of thumbnails. */
@@ -26,7 +26,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Mosaic`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -35,7 +35,7 @@ const DEFAULT_PROPS: Partial<MosaicProps> = {
     theme: Theme.light,
 };
 
-const Mosaic: React.FC<MosaicProps> = ({ className, theme, thumbnails, onImageClick, ...forwardedProps }) => {
+export const Mosaic: React.FC<MosaicProps> = ({ className, theme, thumbnails, onImageClick, ...forwardedProps }) => {
     const handleImageClick = useCallback(
         (index: number, onClick?: MouseEventHandler): MouseEventHandler => (event) => {
             onClick?.(event);
@@ -80,5 +80,3 @@ const Mosaic: React.FC<MosaicProps> = ({ className, theme, thumbnails, onImageCl
 
 Mosaic.displayName = COMPONENT_NAME;
 Mosaic.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, Mosaic, MosaicProps };

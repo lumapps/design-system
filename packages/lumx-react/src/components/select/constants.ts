@@ -5,12 +5,12 @@ import { ReactNode, SyntheticEvent } from 'react';
 /**
  * The authorized variants.
  */
-enum SelectVariant {
+export enum SelectVariant {
     input = 'input',
     chip = 'chip',
 }
 
-interface CoreSelectProps extends GenericProps {
+export interface CoreSelectProps extends GenericProps {
     /** Whether the select (input variant) is displayed with error style or not. */
     hasError?: boolean;
     /** The error related to the component. */
@@ -52,5 +52,3 @@ interface CoreSelectProps extends GenericProps {
     /** The function called to render the selected value. Default: Renders the value as a string. */
     selectedValueRender?(choice: string): ReactNode | string;
 }
-
-export { SelectVariant, CoreSelectProps };

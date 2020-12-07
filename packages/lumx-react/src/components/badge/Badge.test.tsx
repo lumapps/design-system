@@ -32,7 +32,7 @@ interface Setup extends CommonSetup {
  * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup = ({ ...propsOverrides }: Partial<BadgeProps> = {}, shallowRendering: boolean = true): Setup => {
+const setup = ({ ...propsOverrides }: Partial<BadgeProps> = {}, shallowRendering = true): Setup => {
     const props: BadgeProps = {
         children: <span>30</span>,
         ...propsOverrides,

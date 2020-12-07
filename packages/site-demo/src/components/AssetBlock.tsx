@@ -27,7 +27,7 @@ interface AssetBlock {
  * @return The file name.
  */
 function getFileName(url: string): string {
-    const match = url.match(/\/([^\/]+$)/);
+    const match = url.match(/\/([^/]+$)/);
     if (match) {
         const [, fileName] = match;
 

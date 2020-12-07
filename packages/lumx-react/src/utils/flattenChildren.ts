@@ -10,9 +10,8 @@ import { isFragment } from 'react-is';
  * @return Flattened react nodes.
  */
 export function flattenChildren(children: ReactNode) {
-    // tslint:disable-next-line:no-shadowed-variable
-    function recur(children: ReactNode, keys: Key[] = []) {
-        return Children.toArray(children).reduce((acc: ReactChild[], node, index) => {
+    function recur(nodes: ReactNode, keys: Key[] = []) {
+        return Children.toArray(nodes).reduce((acc: ReactChild[], node, index) => {
             const nodeKeys = keys.concat(get(node, 'key') ?? index);
             if (isFragment(node)) {
                 acc.push(...recur(node.props.children, nodeKeys));

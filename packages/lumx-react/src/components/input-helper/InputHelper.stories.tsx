@@ -4,19 +4,19 @@ import React from 'react';
 
 export default { title: 'LumX components/input-helper/Input Helper' };
 
-export const informationHelper = ({ theme }: any) => (
+export const InformationHelper = ({ theme }: any) => (
     <InputHelper kind={Kind.info} theme={theme}>
         {text('Text', 'ex: toto@acme.com')}
     </InputHelper>
 );
 
-export const errorHelper = ({ theme }: any) => (
+export const ErrorHelper = ({ theme }: any) => (
     <InputHelper kind={Kind.error} theme={theme}>
         {text('Text', 'You should be bold!')}
     </InputHelper>
 );
 
-export const validHelper = ({ theme }: any) => (
+export const ValidHelper = ({ theme }: any) => (
     <InputHelper kind={Kind.valid} theme={theme}>
         {text('Text', 'Great, you are bold')}
     </InputHelper>

@@ -51,7 +51,7 @@ export const PageHead: React.FC<Props> = (props) => {
             <meta property="og:description" content={metaDescription} />
             <meta property="og:type" content="website" />
             {keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
-            {meta.length > 0 && meta.map((m) => <meta {...m} />)}
+            {meta.length > 0 && meta.map((m) => <meta key={m.name || m.property} {...m} />)}
         </Helmet>
     );
 };

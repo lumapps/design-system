@@ -607,7 +607,7 @@ function _getTextFieldCSSRules(colorPalette: ColorPalette, theme: GlobalTheme) {
  * @param theme        The theme to apply the custom color palette on.
  * @param colorPalette The custom color palette.
  */
-function setCustomColors(sheet: CSSStyleSheet, theme: GlobalTheme, colorPalette: ColorPalette) {
+export function setCustomColors(sheet: CSSStyleSheet, theme: GlobalTheme, colorPalette: ColorPalette) {
     let index = 0;
 
     const buttonRules = [
@@ -618,7 +618,7 @@ function setCustomColors(sheet: CSSStyleSheet, theme: GlobalTheme, colorPalette:
 
     buttonRules.forEach((buttonRule) => {
         _addCSSRule(sheet, buttonRule.selector, buttonRule.rule, index);
-        index++;
+        index += 1;
     });
 
     let checkboxRules;
@@ -630,28 +630,28 @@ function setCustomColors(sheet: CSSStyleSheet, theme: GlobalTheme, colorPalette:
 
     checkboxRules?.forEach((checkboxRule) => {
         _addCSSRule(sheet, checkboxRule.selector, checkboxRule.rule, index);
-        index++;
+        index += 1;
     });
 
     const chipRules = _getChipCSSRules(colorPalette);
 
     chipRules.forEach((chipRule) => {
         _addCSSRule(sheet, chipRule.selector, chipRule.rule, index);
-        index++;
+        index += 1;
     });
 
     const listRules = _getListCSSRules(colorPalette);
 
     listRules.forEach((listRule) => {
         _addCSSRule(sheet, listRule.selector, listRule.rule, index);
-        index++;
+        index += 1;
     });
 
     const progressRules = _getProgressCSSRules(colorPalette);
 
     progressRules.forEach((progressRule) => {
         _addCSSRule(sheet, progressRule.selector, progressRule.rule, index);
-        index++;
+        index += 1;
     });
 
     let radioButtonRules;
@@ -663,50 +663,48 @@ function setCustomColors(sheet: CSSStyleSheet, theme: GlobalTheme, colorPalette:
 
     radioButtonRules?.forEach((radioButtonRule) => {
         _addCSSRule(sheet, radioButtonRule.selector, radioButtonRule.rule, index);
-        index++;
+        index += 1;
     });
 
     const selectRules = _getSelectCSSRules(colorPalette, theme);
 
     selectRules?.forEach((selectRule) => {
         _addCSSRule(sheet, selectRule.selector, selectRule.rule, index);
-        index++;
+        index += 1;
     });
 
     const sideNavigationRules = _getSideNavigationCSSRules(colorPalette);
 
     sideNavigationRules.forEach((sideNavigationRule) => {
         _addCSSRule(sheet, sideNavigationRule.selector, sideNavigationRule.rule, index);
-        index++;
+        index += 1;
     });
 
     const slideshowControlsRules = _getSlideshowControlsCSSRules(colorPalette);
 
     slideshowControlsRules.forEach((slideshowControlsRule) => {
         _addCSSRule(sheet, slideshowControlsRule.selector, slideshowControlsRule.rule, index);
-        index++;
+        index += 1;
     });
 
     const switchRules = _getSwitchCSSRules(colorPalette, theme);
 
     switchRules?.forEach((switchRule) => {
         _addCSSRule(sheet, switchRule.selector, switchRule.rule, index);
-        index++;
+        index += 1;
     });
 
     const tabsRules = _getTabsCSSRules(colorPalette, theme);
 
     tabsRules.forEach((tabsRule) => {
         _addCSSRule(sheet, tabsRule.selector, tabsRule.rule, index);
-        index++;
+        index += 1;
     });
 
     const textFieldRules = _getTextFieldCSSRules(colorPalette, theme);
 
     textFieldRules?.forEach((textFieldRule) => {
         _addCSSRule(sheet, textFieldRule.selector, textFieldRule.rule, index);
-        index++;
+        index += 1;
     });
 }
-
-export { setCustomColors };

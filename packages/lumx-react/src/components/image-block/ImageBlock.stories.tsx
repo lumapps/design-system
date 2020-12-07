@@ -22,7 +22,7 @@ const corsOptions = {
 
 const groupId = 'Image block';
 
-export const defaultImageBlock = ({ theme }: any) => {
+export const DefaultImageBlock = ({ theme }: any) => {
     const align = select<Alignment>('Alignment', Alignment, Alignment.center, groupId);
     const aspectRatio = select<AspectRatio>('Aspect ratio', AspectRatio, AspectRatio.square, groupId);
     const title = text('Title', 'Hello world', groupId);

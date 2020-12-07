@@ -4,7 +4,7 @@ import { DatePickerField } from '@lumx/react';
 
 export default { title: 'LumX components/date-picker/DatePickerField' };
 
-export const simple = ({ theme }: any) => {
+export const Simple = ({ theme }: any) => {
     const [value, setValue] = useState<Date | undefined>();
 
     return (
@@ -19,7 +19,7 @@ export const simple = ({ theme }: any) => {
     );
 };
 
-export const withDefaultValue = ({ theme }: any) => {
+export const WithDefaultValue = ({ theme }: any) => {
     const [value, setValue] = useState<Date | undefined>(new Date('2020-05-18'));
 
     return (
@@ -34,7 +34,7 @@ export const withDefaultValue = ({ theme }: any) => {
     );
 };
 
-export const withErrorAndHelper = ({ theme }: any) => {
+export const WithErrorAndHelper = ({ theme }: any) => {
     const [value, setValue] = useState<Date | undefined>(new Date('2020-05-18'));
 
     return (
@@ -51,7 +51,7 @@ export const withErrorAndHelper = ({ theme }: any) => {
     );
 };
 
-export const customMonth = ({ theme }: any) => {
+export const CustomMonth = ({ theme }: any) => {
     const [value, setValue] = useState<Date | undefined>();
 
     return (
@@ -67,7 +67,7 @@ export const customMonth = ({ theme }: any) => {
     );
 };
 
-export const with28FebruarySelected = ({ theme }: any) => {
+export const With28FebruarySelected = ({ theme }: any) => {
     const [value, setValue] = useState<Date | undefined>(new Date('2019-02-28'));
 
     return (

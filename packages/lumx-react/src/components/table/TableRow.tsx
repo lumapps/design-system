@@ -8,7 +8,7 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 /**
  * Defines the props of the component.
  */
-interface TableRowProps extends GenericProps {
+export interface TableRowProps extends GenericProps {
     /** Whether the component is clickable or not. */
     isClickable?: boolean;
     /** Whether the component is disabled or not. */
@@ -25,14 +25,14 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}TableRow`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME, true);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME, true);
 
 /**
  * The default value of props.
  */
 const DEFAULT_PROPS: Partial<TableRowProps> = {};
 
-const TableRow: React.FC<TableRowProps> = ({
+export const TableRow: React.FC<TableRowProps> = ({
     children,
     className,
     disabled,
@@ -61,5 +61,3 @@ const TableRow: React.FC<TableRowProps> = ({
 
 TableRow.displayName = COMPONENT_NAME;
 TableRow.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, TableRow, TableRowProps };

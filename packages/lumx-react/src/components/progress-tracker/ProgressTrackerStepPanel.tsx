@@ -8,7 +8,7 @@ import React from 'react';
 /**
  * Defines the props of the component.
  */
-interface ProgressTrackerStepPanelProps extends GenericProps {
+export interface ProgressTrackerStepPanelProps extends GenericProps {
     /** The step panel HTML id. */
     id?: string;
     /** Whether the step is active or not. */
@@ -23,7 +23,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}ProgressTrackerStepPanel`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME = `${CSS_PREFIX}-step-panel`;
+export const CLASSNAME = `${CSS_PREFIX}-step-panel`;
 
 /**
  * The default value of props.
@@ -38,7 +38,7 @@ const DEFAULT_PROPS: Partial<ProgressTrackerStepPanelProps> = {};
  * @param  props Component props.
  * @return React element.
  */
-const ProgressTrackerStepPanel: React.FC<ProgressTrackerStepPanelProps> = (props) => {
+export const ProgressTrackerStepPanel: React.FC<ProgressTrackerStepPanelProps> = (props) => {
     const { children, id, className, isActive: propIsActive, ...forwardedProps } = props;
 
     const state = useTabProviderContext('tabPanel', id);
@@ -59,5 +59,3 @@ const ProgressTrackerStepPanel: React.FC<ProgressTrackerStepPanelProps> = (props
 };
 ProgressTrackerStepPanel.displayName = COMPONENT_NAME;
 ProgressTrackerStepPanel.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, ProgressTrackerStepPanel, ProgressTrackerStepPanelProps };

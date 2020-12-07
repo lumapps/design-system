@@ -9,7 +9,7 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 /**
  * Defines the props of the component.
  */
-interface ListDividerProps extends GenericProps {}
+export type ListDividerProps = GenericProps;
 
 /**
  * The display name of the component.
@@ -19,11 +19,9 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}ListDivider`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
-const ListDivider: React.FC<ListDividerProps> = ({ className, ...forwardedProps }) => (
+export const ListDivider: React.FC<ListDividerProps> = ({ className, ...forwardedProps }) => (
     <li {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} />
 );
 ListDivider.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, ListDivider, ListDividerProps };

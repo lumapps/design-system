@@ -124,7 +124,6 @@ export const useInteractiveList: useInteractiveList = (options) => {
          * @param evt Key event
          */
         const onArrowPressed: Listener = (evt) => {
-            // tslint:disable-next-line: deprecation
             const { keyCode } = evt;
             if (keyCode !== UP_KEY_CODE && keyCode !== DOWN_KEY_CODE) {
                 return;

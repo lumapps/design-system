@@ -27,7 +27,6 @@ export const App = ({ theme }: any) => {
     const [values, setValues] = React.useState<string[]>([]);
 
     const onInfiniteScroll = () => {
-        // tslint:disable-next-line:no-console
         console.log('You have reached the bottom of the select dropdown.');
     };
 

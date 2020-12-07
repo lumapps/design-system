@@ -47,7 +47,6 @@ export const LongPagePlacement = () => {
     const closeFirstMenu = () => setFirstIsOpen(false);
 
     const onFirstMenuSelected = (item: string) => () => {
-        // tslint:disable-next-line:no-console
         console.log('selected item', item);
         closeFirstMenu();
     };
@@ -58,7 +57,6 @@ export const LongPagePlacement = () => {
     const closeSecondMenu = () => setSecondIsOpen(false);
 
     const onSecondMenuSelected = (item: string) => () => {
-        // tslint:disable-next-line:no-console
         console.log('selected item', item);
         closeSecondMenu();
     };
@@ -69,7 +67,6 @@ export const LongPagePlacement = () => {
     const closeThirdMenu = () => setThirdIsOpen(false);
 
     const onThirdMenuSelected = (item: string) => () => {
-        // tslint:disable-next-line:no-console
         console.log('selected item', item);
         closeThirdMenu();
     };

@@ -18,7 +18,7 @@ import { Predicate } from './type';
  * @param  predicates array of predicates to apply on elements
  * @return partitioned elements by the given predicates
  */
-function partitionMulti<T>(elements: T[], predicates: Array<Predicate<T>>): T[][] {
+export function partitionMulti<T>(elements: T[], predicates: Array<Predicate<T>>): T[][] {
     return reduce(
         predicates,
         (partitioned: T[][], predicate: Predicate<T>) =>
@@ -26,5 +26,3 @@ function partitionMulti<T>(elements: T[], predicates: Array<Predicate<T>>): T[][
         [elements],
     );
 }
-
-export { partitionMulti };

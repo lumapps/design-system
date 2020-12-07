@@ -9,7 +9,7 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 /**
  * Defines the props of the component.
  */
-interface ToolbarProps extends GenericProps {
+export interface ToolbarProps extends GenericProps {
     /** A component to be rendered after the content. */
     after?: ReactNode;
     /** A component to be rendered before the content. */
@@ -26,14 +26,14 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Toolbar`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
 const DEFAULT_PROPS: Partial<ToolbarProps> = {};
 
-const Toolbar: React.FC<ToolbarProps> = ({ after, before, className, label, ...forwardedProps }) => {
+export const Toolbar: React.FC<ToolbarProps> = ({ after, before, className, label, ...forwardedProps }) => {
     return (
         <div
             {...forwardedProps}
@@ -55,5 +55,3 @@ const Toolbar: React.FC<ToolbarProps> = ({ after, before, className, label, ...f
 };
 Toolbar.displayName = COMPONENT_NAME;
 Toolbar.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, Toolbar, ToolbarProps };

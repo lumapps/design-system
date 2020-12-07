@@ -15,20 +15,22 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
-import { withSelectContext } from './WithSelectContext';
+import { WithSelectContext } from './WithSelectContext';
 import { CoreSelectProps, SelectVariant } from './constants';
 
 /** Defines the props of the component. */
-interface SelectProps extends CoreSelectProps {
+export interface SelectProps extends CoreSelectProps {
     /** The selected value. */
     value: string;
 }
+
+export { SelectVariant };
 
 /** The display name of the component. */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Select`;
 
 /** The default class name and classes prefix for this component. */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /** The default value of props. */
 const DEFAULT_PROPS: Partial<SelectProps> = {
@@ -143,11 +145,11 @@ const SelectField: React.FC<SelectProps> = ({
     );
 };
 
-const Select: React.FC<SelectProps> = (props) => {
+export const Select: React.FC<SelectProps> = (props) => {
     const isEmpty = lodashIsEmpty(props.value);
     const hasInputClear = props.onClear && !isEmpty;
 
-    return withSelectContext(SelectField, {
+    return WithSelectContext(SelectField, {
         ...props,
         className: classNames(
             props.className,
@@ -164,5 +166,3 @@ const Select: React.FC<SelectProps> = (props) => {
 
 Select.displayName = COMPONENT_NAME;
 Select.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, Select, SelectProps, SelectVariant };

@@ -1,10 +1,8 @@
-/* eslint-disable unicorn/prefer-spread */
 import range from 'lodash/range';
 import mMoment, { Moment } from 'moment';
 import { extendMoment } from 'moment-range';
 
-// @ts-ignore
-const moment = extendMoment(mMoment);
+const moment = extendMoment(mMoment as any);
 
 const DAYS_PER_WEEK = 7;
 
@@ -21,12 +19,8 @@ interface AnnotatedDate {
  * @param  locale The locale using to generate the order of days in a week.
  * @return The list of days in a week based on locale.
  */
-function getWeekDays(locale: string): Moment[] {
-    return range(DAYS_PER_WEEK).map((_, i) =>
-        moment()
-            .locale(locale)
-            .weekday(i),
-    );
+export function getWeekDays(locale: string): Moment[] {
+    return range(DAYS_PER_WEEK).map((_, i) => moment().locale(locale).weekday(i));
 }
 
 /**
@@ -36,7 +30,7 @@ function getWeekDays(locale: string): Moment[] {
  * @param  selectedMonth The selected month.
  * @return The list of days in a week based on locale.
  */
-function getMonthCalendar(locale: string, selectedMonth?: Moment): Moment[] {
+export function getMonthCalendar(locale: string, selectedMonth?: Moment): Moment[] {
     const firstDayOfMonth = moment(selectedMonth).startOf('month');
     const endDayOfMonth = moment(selectedMonth).endOf('month');
     // The first day of the week depends on the locale used. In FR the first day is a monday but in EN the first day is sunday
@@ -56,15 +50,13 @@ function getMonthCalendar(locale: string, selectedMonth?: Moment): Moment[] {
  * @param  selectedMonth The selected month.
  * @return The list of days in a week based on locale.
  */
-function getAnnotatedMonthCalendar(
+export function getAnnotatedMonthCalendar(
     locale: string,
     minDate?: Date,
     maxDate?: Date,
     selectedMonth?: Moment,
 ): AnnotatedDate[] {
-    const month = moment(selectedMonth)
-        .locale(locale)
-        .month();
+    const month = moment(selectedMonth).locale(locale).month();
 
     const clickableRange = moment.range(minDate!, maxDate!);
 
@@ -77,5 +69,3 @@ function getAnnotatedMonthCalendar(
         };
     });
 }
-
-export { getWeekDays, getMonthCalendar, getAnnotatedMonthCalendar };

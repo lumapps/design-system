@@ -11,7 +11,7 @@ import { GenericProps, getRootClassName, handleBasicClasses, isComponent } from 
 /**
  * Defines the props of the component.
  */
-interface DropdownProps extends GenericProps {
+export interface DropdownProps extends GenericProps {
     /** The reference of the DOM element used to set the position of the popover.
      * @see {@link PopoverProps#anchorRef}
      */
@@ -81,7 +81,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Dropdown`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -96,7 +96,7 @@ const DEFAULT_PROPS: Partial<DropdownProps> = {
     shouldFocusOnOpen: true,
 };
 
-const Dropdown: React.FC<DropdownProps> = (props) => {
+export const Dropdown: React.FC<DropdownProps> = (props) => {
     const {
         anchorRef,
         children,
@@ -161,5 +161,3 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
 };
 Dropdown.displayName = COMPONENT_NAME;
 Dropdown.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, Dropdown, DropdownProps };

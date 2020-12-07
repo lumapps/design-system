@@ -12,7 +12,7 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 /**
  * Defines the props of the component.
  */
-interface TextFieldProps extends GenericProps {
+export interface TextFieldProps extends GenericProps {
     /** A Chip Group to be rendered before the main text input. */
     chips?: HTMLElement | ReactNode;
     /** The error related to the TextField. */
@@ -73,7 +73,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}TextField`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The minimum number of rows that we want to display on the text area
@@ -234,7 +234,7 @@ const renderInputNative: React.FC<InputNativeProps> = (props) => {
     );
 };
 
-const TextField: React.FC<TextFieldProps> = ({
+export const TextField: React.FC<TextFieldProps> = ({
     chips,
     className,
     disabled,
@@ -400,5 +400,3 @@ const TextField: React.FC<TextFieldProps> = ({
 };
 TextField.displayName = COMPONENT_NAME;
 TextField.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, TextField, TextFieldProps };

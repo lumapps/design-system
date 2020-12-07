@@ -20,7 +20,7 @@ interface Setup extends CommonSetup {
     props: SetupProps;
 }
 
-const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
+const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering = true): Setup => {
     const props: DatePickerControlledProps = {
         locale: 'fr',
         onChange: jest.fn(),

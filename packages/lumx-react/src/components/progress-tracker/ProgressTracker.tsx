@@ -10,7 +10,7 @@ import { useTabProviderContextState } from '../tabs/state';
 /**
  * Defines the props of the component.
  */
-interface ProgressTrackerProps extends GenericProps {
+export interface ProgressTrackerProps extends GenericProps {
     /** The label that describes the purpose of the set of steps. */
     ['aria-label']: string;
     /** The children elements. */
@@ -25,7 +25,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}ProgressTracker`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -40,8 +40,8 @@ const DEFAULT_PROPS: Partial<ProgressTrackerProps> = {};
  * @param  props Component props.
  * @return React element.
  */
-const ProgressTracker: React.FC<ProgressTrackerProps> = (props) => {
-    const { ['aria-label']: ariaLabel, children, className, ...forwardedProps } = props;
+export const ProgressTracker: React.FC<ProgressTrackerProps> = (props) => {
+    const { 'aria-label': ariaLabel, children, className, ...forwardedProps } = props;
     const stepListRef = React.useRef(null);
     useRovingTabIndex({
         parentRef: stepListRef,
@@ -53,7 +53,8 @@ const ProgressTracker: React.FC<ProgressTrackerProps> = (props) => {
     const state = useTabProviderContextState();
     const numberOfSteps = state?.ids?.tab?.length || 0;
     const backgroundPosition: number = numberOfSteps > 0 ? 100 / (numberOfSteps * 2) : 0;
-    const trackPosition: number = numberOfSteps > 0 ? ((100 / (numberOfSteps - 1)) * (state?.activeTabIndex || 0)) / 100 : 0;
+    const trackPosition: number =
+        numberOfSteps > 0 ? ((100 / (numberOfSteps - 1)) * (state?.activeTabIndex || 0)) / 100 : 0;
 
     return (
         <div
@@ -83,5 +84,3 @@ const ProgressTracker: React.FC<ProgressTrackerProps> = (props) => {
 };
 ProgressTracker.displayName = COMPONENT_NAME;
 ProgressTracker.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, ProgressTracker, ProgressTrackerProps };

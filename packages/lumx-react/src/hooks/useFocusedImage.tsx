@@ -16,7 +16,7 @@ import { ThumbnailStates } from '@lumx/react/components/thumbnail/Thumbnail';
  * @param   thumbnailState        State of the thumbnail.
  * @return                        Function to handle ref.
  */
-const useFocusedImage = (
+export const useFocusedImage = (
     focus: FocusPoint,
     aspectRatio: AspectRatio,
     size: Size,
@@ -26,11 +26,15 @@ const useFocusedImage = (
 ) => {
     const focusRef = useRef<FocusedImage | null>(null);
 
-    useEffect(() => {
-        if (focusRef.current) {
-            focusRef.current.setFocus(focus!);
-        }
-    }, [focusRef.current, focus?.x, focus?.y, size]);
+    useEffect(
+        () => {
+            if (focusRef.current) {
+                focusRef.current.setFocus(focus!);
+            }
+        },
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [focusRef.current, focus?.x, focus?.y, size],
+    );
 
     useEffect(() => {
         if (thumbnailState === 'hasError' || aspectRatio === AspectRatio.original) {
@@ -51,5 +55,3 @@ const useFocusedImage = (
         }
     };
 };
-
-export { useFocusedImage };

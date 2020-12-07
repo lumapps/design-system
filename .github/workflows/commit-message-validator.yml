@@ -14,5 +14,7 @@ jobs:
 
       - name: Commit message validation
         uses: lumapps/commit-message-validator@master
+        with:
+            no_jira: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

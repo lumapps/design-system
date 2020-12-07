@@ -6,60 +6,52 @@ import { Mosaic } from './Mosaic';
 
 export default { title: 'LumX components/mosaic/Mosaic' };
 
-export const oneThumbnail = ({ theme }: any) => {
-    return (
-        <div style={{ width: 250 }}>
-            <Mosaic theme={theme} thumbnails={[{ image: imageKnob('Image', IMAGES.landscape1) }]} />
-        </div>
-    );
-};
+export const OneThumbnail = ({ theme }: any) => (
+    <div style={{ width: 250 }}>
+        <Mosaic theme={theme} thumbnails={[{ image: imageKnob('Image', IMAGES.landscape1) }]} />
+    </div>
+);
 
-export const twoThumbnails = ({ theme }: any) => {
-    return (
-        <div style={{ width: 250 }}>
-            <Mosaic
-                theme={theme}
-                thumbnails={[
-                    { image: imageKnob('Image 1', IMAGES.landscape1) },
-                    { image: imageKnob('Image 2', IMAGES.landscape2) },
-                ]}
-            />
-        </div>
-    );
-};
+export const TwoThumbnails = ({ theme }: any) => (
+    <div style={{ width: 250 }}>
+        <Mosaic
+            theme={theme}
+            thumbnails={[
+                { image: imageKnob('Image 1', IMAGES.landscape1) },
+                { image: imageKnob('Image 2', IMAGES.landscape2) },
+            ]}
+        />
+    </div>
+);
 
-export const threeThumbnails = ({ theme }: any) => {
-    return (
-        <div style={{ width: 250 }}>
-            <Mosaic
-                theme={theme}
-                thumbnails={[
-                    { image: imageKnob('Image 1', IMAGES.landscape1) },
-                    { image: imageKnob('Image 2', IMAGES.landscape2) },
-                    { image: imageKnob('Image 3', IMAGES.landscape3) },
-                ]}
-            />
-        </div>
-    );
-};
+export const ThreeThumbnails = ({ theme }: any) => (
+    <div style={{ width: 250 }}>
+        <Mosaic
+            theme={theme}
+            thumbnails={[
+                { image: imageKnob('Image 1', IMAGES.landscape1) },
+                { image: imageKnob('Image 2', IMAGES.landscape2) },
+                { image: imageKnob('Image 3', IMAGES.landscape3) },
+            ]}
+        />
+    </div>
+);
 
-export const fourThumbnails = ({ theme }: any) => {
-    return (
-        <div style={{ width: 250 }}>
-            <Mosaic
-                theme={theme}
-                thumbnails={[
-                    { image: imageKnob('Image 1', IMAGES.landscape1) },
-                    { image: imageKnob('Image 2', IMAGES.landscape2) },
-                    { image: imageKnob('Image 3', IMAGES.landscape3) },
-                    { image: imageKnob('Image 4', IMAGES.portrait1) },
-                ]}
-            />
-        </div>
-    );
-};
+export const FourThumbnails = ({ theme }: any) => (
+    <div style={{ width: 250 }}>
+        <Mosaic
+            theme={theme}
+            thumbnails={[
+                { image: imageKnob('Image 1', IMAGES.landscape1) },
+                { image: imageKnob('Image 2', IMAGES.landscape2) },
+                { image: imageKnob('Image 3', IMAGES.landscape3) },
+                { image: imageKnob('Image 4', IMAGES.portrait1) },
+            ]}
+        />
+    </div>
+);
 
-export const clickableThumbnails = ({ theme }: any) => {
+export const ClickableThumbnails = ({ theme }: any) => {
     const onClick = (index: number) => alert(`Clicked n°${index}`);
 
     return (
@@ -78,7 +70,7 @@ export const clickableThumbnails = ({ theme }: any) => {
     );
 };
 
-export const sixThumbnails = ({ theme }: any) => {
+export const SixThumbnails = ({ theme }: any) => {
     const [activeIndex, setActiveIndex] = useState<number>();
     const thumbnails = [
         { image: imageKnob('Image 1', IMAGES.landscape1) },

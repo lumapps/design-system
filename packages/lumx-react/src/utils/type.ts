@@ -20,7 +20,7 @@ const NAME_PROPERTIES: string[] = [
 /**
  * Define a generic props types.
  */
-interface GenericProps {
+export interface GenericProps {
     /**
      * Any prop (particularly any supported prop for a HTML element).
      * E.g. classNames, onClick, disabled, ...
@@ -31,8 +31,8 @@ interface GenericProps {
 /**
  * Defines a generic component type.
  */
-type ComponentType = ReactNode | React.FC<any> | React.PureComponent<any, any> | React.Component<any, any>;
-type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+export type ComponentType = ReactNode | React.FC<any> | React.PureComponent<any, any> | React.Component<any, any>;
+export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 /**
  * Get the name of the given type.
@@ -42,7 +42,7 @@ type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
  * @param type The type to get the name of.
  * @return The name of the type.
  */
-function getTypeName(type: string | ComponentType): string | ComponentType {
+export function getTypeName(type: string | ComponentType): string | ComponentType {
     if (isString(type)) {
         return type;
     }
@@ -65,7 +65,7 @@ function getTypeName(type: string | ComponentType): string | ComponentType {
  * @param type The type we want to check if the ReactElement is of.
  * @return     If the ReactElement is of the given type or not.
  */
-function isElementOfType(el: ReactNode, type: string | ComponentType): boolean {
+export function isElementOfType(el: ReactNode, type: string | ComponentType): boolean {
     const typeName: string | ComponentType = getTypeName(type);
 
     if (!isString(typeName) || isEmpty(typeName)) {
@@ -97,15 +97,15 @@ function isElementOfType(el: ReactNode, type: string | ComponentType): boolean {
  * @param el The ReactElement to check if it's a text.
  * @return   If the ReactElement is a text or not.
  */
-function isElementText(el: ReactNode): boolean {
+export function isElementText(el: ReactNode): boolean {
     return isString(el);
 }
 
 /**
  * Callback function type alias (use for readability)
  */
-type Callback = () => void;
-type Predicate<T> = (t: T) => boolean;
+export type Callback = () => void;
+export type Predicate<T> = (t: T) => boolean;
 
 /**
  * Create a predicate function that checks if a ReactNode is a react element from the given component.
@@ -113,7 +113,7 @@ type Predicate<T> = (t: T) => boolean;
  * @param  component React function component or the component name
  * @return predicate returning true if value is instance of the component
  */
-const isComponent = <C>(component: React.FC<C> | string) => (instance: ReactNode): instance is ReactElement => {
+export const isComponent = <C>(component: React.FC<C> | string) => (instance: ReactNode): instance is ReactElement => {
     const componentName = typeof component === 'string' ? component : component.displayName;
 
     return (
@@ -126,17 +126,4 @@ const isComponent = <C>(component: React.FC<C> | string) => (instance: ReactNode
  * JS falsy values.
  * (excluding `NaN` as it can't be distinguished from `number`)
  */
-type Falsy = false | undefined | null | 0 | '';
-
-export {
-    isComponent,
-    Predicate,
-    Callback,
-    isElementText,
-    isElementOfType,
-    getTypeName,
-    Omit,
-    ComponentType,
-    GenericProps,
-    Falsy,
-};
+export type Falsy = false | undefined | null | 0 | '';

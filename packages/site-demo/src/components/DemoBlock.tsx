@@ -46,7 +46,9 @@ export const DemoBlock: React.FC<DemoBlockProps> = ({
     const toggleShowCode = () => setShowCode(!showCode);
 
     if (flexBoxProps.orientation === Orientation.horizontal) {
+        // eslint-disable-next-line no-param-reassign
         flexBoxProps.hAlign = flexBoxProps.hAlign || Alignment.center;
+        // eslint-disable-next-line no-param-reassign
         flexBoxProps.vAlign = flexBoxProps.vAlign || Alignment.center;
     }
     return (

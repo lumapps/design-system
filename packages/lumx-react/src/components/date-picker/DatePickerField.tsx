@@ -6,15 +6,15 @@ import moment from 'moment';
 import React, { SyntheticEvent, useCallback, useRef, useState } from 'react';
 
 import { ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
-import { CLASSNAME, DatePicker } from './DatePicker';
-
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { GenericProps } from '@lumx/react/utils';
+
+import { DatePicker } from './DatePicker';
 
 /**
  * Defines the props of the component.
  */
-interface DatePickerFieldProps extends GenericProps {
+export interface DatePickerFieldProps extends GenericProps {
     /** The month to display by default. */
     defaultMonth?: Date;
     /** Whether the component is disabled or not. */
@@ -38,7 +38,7 @@ interface DatePickerFieldProps extends GenericProps {
  */
 const COMPONENT_NAME = 'DatePickerField';
 
-const DatePickerField = ({
+export const DatePickerField = ({
     defaultMonth,
     disabled,
     isDisabled = disabled,
@@ -131,5 +131,3 @@ const DatePickerField = ({
     );
 };
 DatePickerField.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, COMPONENT_NAME, DatePickerField, DatePickerFieldProps };

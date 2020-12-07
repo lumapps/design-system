@@ -14,17 +14,14 @@ import { getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { CoreSelectProps, SelectVariant } from './constants';
 
-/** Defines the props of the component. */
-interface SelectProps extends CoreSelectProps {}
-
 /** The display name of the component. */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Select`;
 
 /** The default class name and classes prefix for this component. */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /** The default value of props. */
-const DEFAULT_PROPS: Partial<SelectProps> = {
+export const DEFAULT_PROPS: Partial<CoreSelectProps> = {
     theme: Theme.light,
     variant: SelectVariant.input,
 };
@@ -77,10 +74,10 @@ function useHandleElementFocus(
             element.removeEventListener('focus', setFocus);
             element.removeEventListener('blur', setBlur);
         };
-    }, [element, isOpen, onBlur, wasBlurred]);
+    }, [element, isOpen, onBlur, setIsFocus, setWasBlurred, wasBlurred]);
 }
 
-const withSelectContext = (
+export const WithSelectContext = (
     SelectElement: any,
     {
         children,
@@ -109,7 +106,7 @@ const withSelectContext = (
         value,
         variant = DEFAULT_PROPS.variant,
         ...forwardedProps
-    }: SelectProps,
+    }: CoreSelectProps,
 ): React.ReactElement => {
     const selectId = useMemo(() => id || `select-${uuid()}`, [id]);
     const anchorRef = useRef<HTMLElement>(null);
@@ -184,9 +181,9 @@ const withSelectContext = (
             <Dropdown
                 anchorRef={anchorRef}
                 closeOnClick={closeOnClick}
-                closeOnClickAway={true}
-                closeOnEscape={true}
-                isOpen={isOpen!}
+                closeOnClickAway
+                closeOnEscape
+                isOpen={!!isOpen}
                 placement={Placement.BOTTOM_START}
                 onClose={onClose}
                 onInfiniteScroll={onInfiniteScroll}
@@ -206,5 +203,3 @@ const withSelectContext = (
         </div>
     );
 };
-
-export { DEFAULT_PROPS, withSelectContext };

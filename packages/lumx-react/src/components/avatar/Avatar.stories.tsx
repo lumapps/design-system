@@ -31,6 +31,7 @@ export const AvatarSizes = () =>
 export const AvatarWithActions = () =>
     AVATAR_SIZES.map((size) => (
         <Avatar
+            key={size}
             image={avatarImageKnob('Avatar', AVATAR_IMAGES.avatar2)}
             size={size}
             actions={

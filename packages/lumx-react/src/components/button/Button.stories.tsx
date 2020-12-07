@@ -8,7 +8,7 @@ export default { title: 'LumX components/button/Button' };
 
 const DEFAULT_PROPS = Button.defaultProps as any;
 
-export const simpleButton = ({ theme }: any) => {
+export const SimpleButton = ({ theme }: any) => {
     return (
         <Button
             emphasis={select('Emphasis', Emphasis, DEFAULT_PROPS.emphasis)}
@@ -27,8 +27,12 @@ export const simpleButton = ({ theme }: any) => {
     );
 };
 
-export const withHref = () => <Button href="https://google.com">Button with redirection</Button>;
+export const WithHref = () => <Button href="https://google.com">Button with redirection</Button>;
 
-export const disabled = () => <Button isDisabled>Disabled button</Button>;
+export const Disabled = () => <Button isDisabled>Disabled button</Button>;
 
-export const disabledWithHref = () => <Button href="https://google.com" isDisabled>Disabled button with redirection</Button>;
+export const DisabledWithHref = () => (
+    <Button href="https://google.com" isDisabled>
+        Disabled button with redirection
+    </Button>
+);

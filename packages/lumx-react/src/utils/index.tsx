@@ -1,10 +1,8 @@
-export { getBasicClass, handleBasicClasses, detectSwipe, onEnterPressed, onEscapePressed } from '@lumx/core/js/utils';
+export * from '@lumx/core/js/utils';
 
-export * from './calculatePopoverPlacement';
+export * from './getRootClassName';
 
-export { getRootClassName } from './getRootClassName';
-
-export { htmlDecode } from './htmlDecode';
+export * from './htmlDecode';
 
 export * from './partitionMulti';
 

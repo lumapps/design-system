@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
  * @param transitionDuration time in ms that the transition takes for the specific component.
  * @return true if the component should be rendered
  */
-function useDelayedVisibility(isComponentVisible: boolean, transitionDuration: number) {
+export function useDelayedVisibility(isComponentVisible: boolean, transitionDuration: number) {
     // Delay visibility to account for the 400ms of CSS opacity animation.
     const [isVisible, setVisible] = useState(isComponentVisible);
 
@@ -18,9 +18,7 @@ function useDelayedVisibility(isComponentVisible: boolean, transitionDuration: n
         } else {
             setTimeout(() => setVisible(false), transitionDuration);
         }
-    }, [isComponentVisible]);
+    }, [isComponentVisible, transitionDuration]);
 
     return isComponentVisible || isVisible;
 }
-
-export { useDelayedVisibility };

@@ -34,7 +34,7 @@ export const InlineTooltip = () => (
 
 export const MultilineTooltip = () => (
     <>
-        <Tooltip label={'Only one sentence.'}>
+        <Tooltip label="Only one sentence.">
             <Button>One line</Button>
         </Tooltip>
         <Tooltip label={'First sentence.\nSecond sentence.\nThird sentence.\n'}>
@@ -45,7 +45,7 @@ export const MultilineTooltip = () => (
 
 export const EmptyTooltip = () => (
     <>
-        <Tooltip label={''}>
+        <Tooltip label="">
             <Button>Empty</Button>
         </Tooltip>
         <Tooltip label={false && 'tooltip'}>
@@ -58,7 +58,7 @@ export const TooltipWithDropdown = () => {
     const buttonRef = useRef(null);
     return (
         <>
-            <Tooltip label={'Tooltip'}>
+            <Tooltip label="Tooltip">
                 <Button buttonRef={buttonRef}>Anchor</Button>
             </Tooltip>
             <Dropdown anchorRef={buttonRef} isOpen>
@@ -76,7 +76,7 @@ export const TooltipOnDisabledButton = () => {
             <Switch isChecked={disabled} onChange={setDisabled}>
                 Toggle button disabled
             </Switch>
-            <Tooltip label={'Tooltip on disabled button'}>
+            <Tooltip label="Tooltip on disabled button">
                 <Button isDisabled={disabled} onClick={noop}>
                     Click to disable button
                 </Button>

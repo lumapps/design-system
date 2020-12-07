@@ -6,12 +6,12 @@ import classNames from 'classnames';
 import React, { ReactNode } from 'react';
 import { useRovingTabIndex } from '../../hooks/useRovingTabIndex';
 
-enum TabListLayout {
+export enum TabListLayout {
     clustered = 'clustered',
     fixed = 'fixed',
 }
 
-enum TabListPosition {
+export enum TabListPosition {
     center = 'center',
     left = 'left',
     right = 'right',
@@ -20,7 +20,7 @@ enum TabListPosition {
 /**
  * Defines the props of the component.
  */
-interface TabListProps extends GenericProps {
+export interface TabListProps extends GenericProps {
     /** The label that describes the purpose of the set of tabs. */
     ['aria-label']: string;
     /** The children elements. */
@@ -43,7 +43,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}TabList`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME = `${CSS_PREFIX}-tabs`;
+export const CLASSNAME = `${CSS_PREFIX}-tabs`;
 
 /**
  * The default value of props.
@@ -62,9 +62,9 @@ const DEFAULT_PROPS: Partial<TabListProps> = {
  * @param  props Component props.
  * @return React element.
  */
-const TabList: React.FC<TabListProps> = (props) => {
+export const TabList: React.FC<TabListProps> = (props) => {
     const {
-        ['aria-label']: ariaLabel,
+        'aria-label': ariaLabel,
         children,
         className,
         layout,
@@ -97,5 +97,3 @@ const TabList: React.FC<TabListProps> = (props) => {
 };
 TabList.displayName = COMPONENT_NAME;
 TabList.defaultProps = DEFAULT_PROPS;
-
-export { CLASSNAME, TabList, TabListProps, TabListLayout, TabListPosition };

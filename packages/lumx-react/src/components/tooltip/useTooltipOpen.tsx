@@ -14,7 +14,7 @@ export function useTooltipOpen(delay: number, anchorElement: HTMLElement | null)
 
     useEffect(() => {
         if (!anchorElement) {
-            return;
+            return undefined;
         }
         const handleMouseEnter = () => {
             timer.current = setTimeout(() => {
@@ -46,7 +46,7 @@ export function useTooltipOpen(delay: number, anchorElement: HTMLElement | null)
                 clearTimeout(timer.current);
             }
         };
-    }, [anchorElement, timer]);
+    }, [anchorElement, delay, timer]);
 
     return isOpen;
 }

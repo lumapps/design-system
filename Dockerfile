@@ -2,7 +2,7 @@ FROM node:10.16-buster AS builder
 
 WORKDIR /tmp
 
-COPY package.json lerna.json .yarn yarn.lock tsconfig.json tslint.json ./
+COPY package.json lerna.json .yarn yarn.lock tsconfig.json ./
 COPY configs ./configs
 COPY packages ./packages/
 
