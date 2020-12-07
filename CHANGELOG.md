@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Added `headerActions` prop to `CommentBlock` component to add actions to the header.
+
+### Fixed
+
+-   Fixed `text` prop of the `CommentBlock` component to accept `ReactNode` type.
+
 ## [0.28.1][] - 2020-12-03
 
 ### Fixed

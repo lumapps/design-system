@@ -13,11 +13,13 @@ import isFunction from 'lodash/isFunction';
  */
 interface CommentBlockProps extends GenericProps {
     /* Actions elements to be transcluded into the component */
-    actions?: HTMLElement | ReactNode;
+    actions?: ReactNode;
+    /** The title action elements. */
+    headerActions?: ReactNode;
     /* The url of the avatar picture we want to display */
     avatar: string;
     /* Children elements to be transcluded into the component */
-    children?: HTMLElement | ReactNode;
+    children?: ReactNode;
     /* Comment timestamp */
     date: string;
     /* Where the component has actions to display */
@@ -33,7 +35,7 @@ interface CommentBlockProps extends GenericProps {
     /* Username display */
     name: string;
     /* Content to be displayed */
-    text: HTMLElement | string;
+    text: ReactNode | string;
     /* Component theme */
     theme?: Theme;
     /* Callback for the click event. */
@@ -82,6 +84,7 @@ const CommentBlock: React.FC<CommentBlockProps> = ({
     onMouseLeave,
     text,
     theme,
+    headerActions,
 }: CommentBlockProps): React.ReactElement => {
     const enterKeyPress: KeyboardEventHandler<HTMLElement> = (evt: KeyboardEvent<HTMLElement>) => {
         if (evt.which === ENTER_KEY_CODE && isFunction(onClick)) {
@@ -128,6 +131,7 @@ const CommentBlock: React.FC<CommentBlockProps> = ({
                                 {name}
                             </span>
                             {date && <span className={`${CLASSNAME}__date`}>{date}</span>}
+                            {headerActions && <span className={`${CLASSNAME}__header-actions`}>{headerActions}</span>}
                         </div>
 
                         <div className={`${CLASSNAME}__text`}>{text}</div>
