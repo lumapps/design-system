@@ -5,7 +5,7 @@
 .#{$lumx-base-prefix}-popover {
     $self: &;
 
-    z-index: map-get($lumx-base-layers, 'medium');
+    z-index: map-get($lumx-base-layers, 'high');
     display: flex;
     background-color: lumx-color-variant('light', 'N');
     border-radius: $lumx-border-radius;

@@ -4,7 +4,7 @@
 
 .#{$lumx-base-prefix}-lightbox {
     position: fixed;
-    z-index: map-get($lumx-base-layers, 'low');
+    z-index: map-get($lumx-base-layers, 'high');
     top: 0;
     right: 0;
     bottom: 0;
