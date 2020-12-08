@@ -29,12 +29,16 @@ export type ImageBlockSize = Size.xl | Size.xxl;
 export interface ImageBlockProps extends GenericProps {
     /** The action elements. */
     actions?: ReactNode;
+    /** The thumbnail alignment. */
+    align?: Alignment.right | Alignment.center | Alignment.left;
     /** The position of the caption. */
     captionPosition?: ImageBlockCaptionPosition;
     /** The style to apply to the caption section. */
     captionStyle?: CSSProperties;
     /** The image description. Can be either a string, or sanitized html. */
     description?: string | { __html: string };
+    /** Whether the image has to fill its container height or not. */
+    fillHeight?: boolean;
     /**
      * The url of the image we want to display.
      * @see {@link ThumbnailProps#image}
@@ -76,10 +80,12 @@ const DEFAULT_PROPS: Partial<ImageBlockProps> = {
 
 export const ImageBlock: Comp<ImageBlockProps> = ({
     actions,
+    align: propAlign,
     captionPosition,
     captionStyle,
     className,
     description,
+    fillHeight: propFillHeight,
     image,
     size,
     tags,
@@ -88,25 +94,29 @@ export const ImageBlock: Comp<ImageBlockProps> = ({
     title,
     ...forwardedProps
 }) => {
+    const fillHeight = propFillHeight || thumbnailProps?.fillHeight;
+    const align = propAlign || thumbnailProps?.align || DEFAULT_PROPS?.thumbnailProps?.align;
+
     return (
         <div
             {...forwardedProps}
             className={classNames(
                 className,
                 handleBasicClasses({
-                    align: thumbnailProps?.align,
-                    aspectRatio: thumbnailProps?.aspectRatio,
-                    fillHeight: thumbnailProps?.fillHeight,
-                    captionPosition,
                     prefix: CLASSNAME,
+                    captionPosition,
+                    align,
                     size,
                     theme,
                 }),
+                fillHeight && `${CLASSNAME}--fill-height`,
             )}
         >
             <Thumbnail
                 {...thumbnailProps}
                 className={classNames(`${CLASSNAME}__image`, thumbnailProps?.className)}
+                fillHeight={fillHeight}
+                align={align}
                 image={image}
                 size={size}
                 theme={theme}

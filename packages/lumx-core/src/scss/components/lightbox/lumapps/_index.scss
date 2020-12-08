@@ -16,6 +16,10 @@
     opacity: 1;
     transition: opacity $lumx-lightbox-transition-duration;
 
+    &--is-shown {
+        display: block;
+    }
+
     &--is-hidden {
         opacity: 0;
     }

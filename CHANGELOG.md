@@ -57,7 +57,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   _[BREAKING]_ Removed `onOpen` prop from `Dialog` component. User should use `isOpen` from its side.
 -   _[BREAKING]_ Removed `thumbnailAspectRatio` prop from `PostBlock` component. User should pass it using `thumbnailProps` instead.
 -   _[BREAKING]_ Removed `onOpen`, `role` and `noWrapper` props from `Lightbox` component.
--   _[BREAKING]_ `align`, `aspectRatio`, `crossOrigin`, `fillHeight`, `focusPoint`, `isCrossOriginEnabled` and `onClick` props have been removed from `ImageBlock` component. These props will now be passed using the `ImageBlock.thumbnailProps` prop.
+-   _[BREAKING]_ `aspectRatio`, `crossOrigin`, `focusPoint`, `isCrossOriginEnabled` and `onClick` props have been removed from `ImageBlock` component. These props will now be passed using the `ImageBlock.thumbnailProps` prop.
 -   _[BREAKING]_ Removed `Tabs` component replaced by the `TabProvider` and `TabList` components.
 -   _[BREAKING]_ Removed `thumbnails.url` prop on the `Mosaic` (use `image` instead).
 

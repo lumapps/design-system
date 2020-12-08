@@ -1,8 +1,6 @@
-import React, { RefObject, useCallback, useEffect, useRef, useState } from 'react';
+import React, { RefObject, useRef } from 'react';
 
-import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import classNames from 'classnames';
-import FocusTrap from 'focus-trap-react';
 import { createPortal } from 'react-dom';
 
 import { mdiClose } from '@lumx/icons';
@@ -10,9 +8,12 @@ import { ColorPalette, Emphasis, IconButton, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, DOCUMENT } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
-import isFunction from 'lodash/isFunction';
+import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
+import { useDelayedVisibility, useFocus } from '@lumx/react/hooks';
+import { useDisableBodyScroll } from '@lumx/react/hooks/useDisableBodyScroll';
+import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 
-const _TRANSITION_DURATION = 400;
+const LIGHTBOX_TRANSITION_DURATION = 400;
 
 /**
  * Defines the props of the component.
@@ -79,144 +80,62 @@ export const Lightbox: Comp<LightboxProps> = ({
     }
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const buttonRef: React.RefObject<HTMLButtonElement> = useRef(null);
+    const childrenRef = useRef<any>(null);
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const childrenRef: React.RefObject<any> = useRef(null);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [isTrapActive, setTrapActive] = useState(false);
-    const modalElement: Element | null = document.querySelector(`.${CLASSNAME}`);
+    const wrapperRef = useRef<HTMLDivElement>(null);
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    useEffect(() => {
-        if (!isOpen || !modalElement) {
-            return undefined;
-        }
-        disableBodyScroll(modalElement);
-        return () => enableBodyScroll(modalElement);
-    }, [isOpen, modalElement]);
+    useDisableBodyScroll(isOpen && wrapperRef.current);
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    useEffect(() => {
-        if (isOpen) {
-            setTrapActive(true);
-        } else {
-            setTimeout(() => {
-                setTrapActive(false);
-            }, _TRANSITION_DURATION);
-        }
-    }, [isOpen]);
+    const isVisible = useDelayedVisibility(!!isOpen, LIGHTBOX_TRANSITION_DURATION);
 
-    /**
-     * Callback on activation of focus trap.
-     */
-    const handleFocusActivation = () => {
-        if (childrenRef && childrenRef.current && childrenRef.current.firstChild) {
-            // Set focus inside lightbox.
-            childrenRef.current.firstChild.focus();
-        }
-    };
-
-    /**
-     * Callback on deactivation of focus trap.
-     */
-    const handleFocusDeactivation = () => {
-        if (parentElement && parentElement.current) {
-            // Set focus back on parent element.
-            parentElement.current.focus();
-        }
-        if (isFunction(onClose)) {
-            onClose();
-        }
-    };
-
-    /**
-     * Desactivate trap and modal.
-     *
-     * @param evt Click event.
-     */
+    // Handle focus trap.
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const handleClose = useCallback(
-        (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-            if (preventAutoClose) {
-                return;
-            }
-            evt.stopPropagation();
-            if (isFunction(onClose)) {
-                onClose();
-            }
-        },
-        [onClose, preventAutoClose],
-    );
+    useFocusTrap(wrapperRef.current, childrenRef.current?.firstChild);
 
-    /**
-     * Prevent click bubbling to parent.
-     *
-     * @param evt Click event.
-     */
-    const preventClick = (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        evt.stopPropagation();
-    };
+    // Focus the parent element on close.
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useFocus(parentElement?.current, !isOpen);
 
-    return (
-        <>
-            {isTrapActive &&
-                createPortal(
-                    <FocusTrap
-                        active={isTrapActive}
-                        focusTrapOptions={{
-                            clickOutsideDeactivates: !preventAutoClose,
-                            escapeDeactivates: !preventAutoClose,
-                            fallbackFocus: `.${CLASSNAME}`,
-                            onActivate: handleFocusActivation,
-                            onDeactivate: handleFocusDeactivation,
-                            returnFocusOnDeactivate: true,
-                        }}
-                    >
-                        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
-                        <div
-                            {...forwardedProps}
-                            aria-label={ariaLabel}
-                            aria-modal="true"
-                            className={classNames(
-                                className,
-                                handleBasicClasses({
-                                    hidden: !isOpen,
-                                    prefix: CLASSNAME,
-                                    theme,
-                                }),
-                            )}
-                            style={{
-                                display: isTrapActive ? 'block' : '',
-                                zIndex,
-                            }}
-                            onClick={handleClose}
-                        >
-                            {isCloseButtonVisible && (
-                                <IconButton
-                                    aria-labelledby="close-modal"
-                                    buttonRef={buttonRef}
-                                    className={`${CLASSNAME}__close`}
-                                    color={ColorPalette.light}
-                                    emphasis={Emphasis.low}
-                                    icon={mdiClose}
-                                    theme={theme}
-                                    type="button"
-                                    onClick={handleClose}
-                                />
-                            )}
-                            <div
-                                ref={childrenRef}
-                                className={`${CLASSNAME}__wrapper`}
-                                role="presentation"
-                                onClick={preventClick}
-                            >
-                                {children}
-                            </div>
-                        </div>
-                    </FocusTrap>,
-                    document.body,
-                )}
-        </>
+    if (!isOpen && !isVisible) return null;
+
+    return createPortal(
+        /* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */
+        <div
+            {...forwardedProps}
+            aria-label={ariaLabel}
+            aria-modal="true"
+            className={classNames(
+                className,
+                handleBasicClasses({
+                    prefix: CLASSNAME,
+                    isHidden: !isOpen,
+                    isShown: isOpen || isVisible,
+                    theme,
+                }),
+            )}
+            style={{ zIndex }}
+            ref={wrapperRef}
+        >
+            {isCloseButtonVisible && (
+                <IconButton
+                    className={`${CLASSNAME}__close`}
+                    color={ColorPalette.light}
+                    emphasis={Emphasis.low}
+                    icon={mdiClose}
+                    theme={theme}
+                    type="button"
+                    onClick={onClose}
+                />
+            )}
+            <ClickAwayProvider callback={!preventAutoClose && onClose} refs={[wrapperRef]}>
+                <div ref={childrenRef} className={`${CLASSNAME}__wrapper`} role="presentation">
+                    {children}
+                </div>
+            </ClickAwayProvider>
+        </div>,
+        document.body,
     );
 };
 Lightbox.displayName = COMPONENT_NAME;
