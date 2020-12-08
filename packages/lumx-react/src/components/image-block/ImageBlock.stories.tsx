@@ -23,7 +23,7 @@ const corsOptions = {
 const groupId = 'Image block';
 
 export const DefaultImageBlock = ({ theme }: any) => {
-    const align = select<Alignment>('Alignment', Alignment, Alignment.center, groupId);
+    const align = select<Alignment>('Alignment', Alignment, Alignment.center, groupId) as any;
     const aspectRatio = select<AspectRatio>('Aspect ratio', AspectRatio, AspectRatio.square, groupId);
     const title = text('Title', 'Hello world', groupId);
     const description = text('Description', 'My awesome description', groupId);
@@ -65,8 +65,8 @@ export const DefaultImageBlock = ({ theme }: any) => {
             tags={isDisplayedTags && tags}
             title={title}
             theme={theme}
+            align={align}
             thumbnailProps={{
-                align,
                 aspectRatio,
                 crossOrigin,
                 focusPoint,

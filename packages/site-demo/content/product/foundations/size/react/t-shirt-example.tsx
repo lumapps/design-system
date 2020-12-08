@@ -6,7 +6,7 @@ export const App = () => (
         <UserBlock
             name="Emmitt O. Lum"
             fields={['Creative developer', 'Denpasar']}
-            avatar={{ image: '../../components/avatar/assets/persona.png' }}
+            avatar="/demo-assets/persona.png"
             size={Size.m}
             className="lumx-spacing-margin-right-huge"
         />

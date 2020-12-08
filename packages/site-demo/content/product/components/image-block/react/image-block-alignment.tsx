@@ -18,9 +18,7 @@ export const App = ({ theme }: any) => (
         }
         theme={theme}
         title="Lorem ipsum"
-        thumbnailProps={{
-            align: Alignment.center,
-            aspectRatio: AspectRatio.original,
-        }}
+        align={Alignment.center}
+        thumbnailProps={{ aspectRatio: AspectRatio.original }}
     />
 );
