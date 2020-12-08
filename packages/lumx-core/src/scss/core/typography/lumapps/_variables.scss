@@ -13,7 +13,7 @@ $lumx-typography-font-size: (
     'body2': 16px,
     'body1': 14px,
     'caption': 12px,
-    'overline': 10px
+    'overline': 10px,
 ) !default;
 
 $lumx-typography-font-weight: (
@@ -25,7 +25,7 @@ $lumx-typography-font-weight: (
     'body2': 400,
     'body1': 400,
     'caption': 400,
-    'overline': 700
+    'overline': 700,
 ) !default;
 
 $lumx-typography-line-height: (
@@ -37,7 +37,7 @@ $lumx-typography-line-height: (
     'body2': 24px,
     'body1': 20px,
     'caption': 16px,
-    'overline': 12px
+    'overline': 12px,
 ) !default;
 
 $lumx-typography-styles: 'overline', 'caption', 'body1', 'body2', 'subtitle1', 'subtitle2', 'title', 'headline',
