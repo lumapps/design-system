@@ -7,7 +7,7 @@ import isObject from 'lodash/isObject';
 import { Alignment, AspectRatio, Size, Theme, Thumbnail } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { ThumbnailProps } from '../thumbnail/Thumbnail';
 
 /**
@@ -60,7 +60,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}ImageBlock`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -74,7 +74,7 @@ const DEFAULT_PROPS: Partial<ImageBlockProps> = {
     },
 };
 
-export const ImageBlock: React.FC<ImageBlockProps> = ({
+export const ImageBlock: Comp<ImageBlockProps> = ({
     actions,
     captionPosition,
     captionStyle,
@@ -119,6 +119,7 @@ export const ImageBlock: React.FC<ImageBlockProps> = ({
                             {/* Add an `&nbsp;` when there is description and title. */}
                             {title && description && '\u00A0'}
                             {isObject(description) && description.__html ? (
+                                // eslint-disable-next-line react/no-danger
                                 <span dangerouslySetInnerHTML={description} className={`${CLASSNAME}__description`} />
                             ) : (
                                 <span className={`${CLASSNAME}__description`}>{description}</span>
@@ -133,4 +134,5 @@ export const ImageBlock: React.FC<ImageBlockProps> = ({
     );
 };
 ImageBlock.displayName = COMPONENT_NAME;
+ImageBlock.className = CLASSNAME;
 ImageBlock.defaultProps = DEFAULT_PROPS;

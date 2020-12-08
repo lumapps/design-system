@@ -1,13 +1,12 @@
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 import React, { ReactElement } from 'react';
+import { CommonSetup, commonTestsSuite, expectStoriesToMatchSnapshots, Wrapper } from '@lumx/react/testing/utils';
 
-import { CommonSetup, Wrapper, commonTestsSuite, expectStoriesToMatchSnapshots } from '@lumx/react/testing/utils';
-
-import { CLASSNAME, FlexBox, FlexBoxProps } from './FlexBox';
+import { FlexBox, FlexBoxProps } from './FlexBox';
 import * as stories from './FlexBox.stories';
 
-/////////////////////////////
+const CLASSNAME = FlexBox.className as string;
 
 /**
  * Define the overriding properties waited by the `setup` function.
@@ -22,19 +21,13 @@ interface Setup extends CommonSetup {
     wrapper: Wrapper;
 }
 
-/////////////////////////////
-
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
- *
- * @param  propsOverrides          The props to use to override the default props of the component.
- * @param  [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup = (propsOverrides: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = (propsOverride: SetupProps = {}, shallowRendering = true): Setup => {
     const props: FlexBoxProps = {
         children: null,
-        ...propsOverrides,
+        ...propsOverride,
     };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
     const wrapper = renderer(<FlexBox {...props} />);

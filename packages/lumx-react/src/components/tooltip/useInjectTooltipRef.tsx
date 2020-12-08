@@ -1,6 +1,6 @@
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 import get from 'lodash/get';
-import React, { ReactNode, cloneElement, useMemo } from 'react';
+import React, { cloneElement, ReactNode, useMemo } from 'react';
 
 /**
  * Add ref and ARIA attribute(s) in tooltip children or wrapped children.
@@ -14,7 +14,7 @@ import React, { ReactNode, cloneElement, useMemo } from 'react';
  * @return tooltip anchor.
  */
 export const useInjectTooltipRef = (
-    children: any,
+    children: ReactNode,
     setAnchorElement: (e: HTMLDivElement) => void,
     isOpen: boolean,
     id: string,
@@ -31,31 +31,34 @@ export const useInjectTooltipRef = (
 
             // Base React HTML element.
             if (typeof type === 'string') {
-                if (children.ref) {
-                    setAnchorElement(children.ref.current);
+                const element = children as any;
+                if (element.ref) {
+                    setAnchorElement(element.ref.current);
                 }
-                return cloneElement(children, {
-                    ...children.props,
+                return cloneElement(element, {
+                    ...element.props,
                     ...ariaProps,
-                    ref: mergeRefs(children.ref, setAnchorElement),
+                    ref: mergeRefs(element.ref, setAnchorElement),
                 });
             }
 
             // Button, IconButton
             if (type?.displayName === 'Button' || type?.displayName === 'IconButton') {
-                return cloneElement(children, {
-                    ...children.props,
+                const element = children as any;
+                return cloneElement(element, {
+                    ...element.props,
                     ...ariaProps,
-                    buttonRef: mergeRefs(children.props.buttonRef, setAnchorElement),
+                    buttonRef: mergeRefs(element.props.buttonRef, setAnchorElement),
                 });
             }
 
             // Icon
             if (type?.displayName === 'Icon') {
-                return cloneElement(children, {
-                    ...children.props,
+                const element = children as any;
+                return cloneElement(element, {
+                    ...element.props,
                     ...ariaProps,
-                    iconRef: mergeRefs(children.props.iconRef, setAnchorElement),
+                    iconRef: mergeRefs(element.props.iconRef, setAnchorElement),
                 });
             }
         }
@@ -64,5 +67,5 @@ export const useInjectTooltipRef = (
                 {children}
             </div>
         );
-    }, [children, isOpen, id]);
+    }, [isOpen, id, children, setAnchorElement]);
 };

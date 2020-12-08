@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react';
 import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { useRovingTabIndex } from '../../hooks/useRovingTabIndex';
 import { useTabProviderContextState } from '../tabs/state';
 
@@ -25,7 +25,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}ProgressTracker`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -40,7 +40,7 @@ const DEFAULT_PROPS: Partial<ProgressTrackerProps> = {};
  * @param  props Component props.
  * @return React element.
  */
-export const ProgressTracker: React.FC<ProgressTrackerProps> = (props) => {
+export const ProgressTracker: Comp<ProgressTrackerProps> = (props) => {
     const { 'aria-label': ariaLabel, children, className, ...forwardedProps } = props;
     const stepListRef = React.useRef(null);
     useRovingTabIndex({
@@ -83,4 +83,5 @@ export const ProgressTracker: React.FC<ProgressTrackerProps> = (props) => {
     );
 };
 ProgressTracker.displayName = COMPONENT_NAME;
+ProgressTracker.className = CLASSNAME;
 ProgressTracker.defaultProps = DEFAULT_PROPS;

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { Icon, Size } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
 
 import { mdiArrowDown, mdiArrowUp } from '@lumx/icons';
 
@@ -60,7 +60,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}TableCell`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME, true);
+const CLASSNAME = getRootClassName(COMPONENT_NAME, true);
 
 /**
  * The default value of props.
@@ -69,7 +69,7 @@ const DEFAULT_PROPS: Partial<TableCellProps> = {
     variant: TableCellVariant.body,
 };
 
-export const TableCell: React.FC<TableCellProps> = ({
+export const TableCell: Comp<TableCellProps> = ({
     children,
     className,
     icon,
@@ -133,4 +133,5 @@ export const TableCell: React.FC<TableCellProps> = ({
     );
 };
 TableCell.displayName = COMPONENT_NAME;
+TableCell.className = CLASSNAME;
 TableCell.defaultProps = DEFAULT_PROPS;

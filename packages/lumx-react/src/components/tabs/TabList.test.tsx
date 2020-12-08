@@ -7,8 +7,10 @@ import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 import React, { ReactElement } from 'react';
 import { build, oneOf } from 'test-data-bot';
-import { CLASSNAME, TabList, TabListLayout, TabListPosition, TabListProps } from './TabList';
+import { TabList, TabListLayout, TabListPosition, TabListProps } from './TabList';
 import { setupTabProviderMocks } from './test.mocks';
+
+const CLASSNAME = TabList.className as string;
 
 // Mock useTabProviderContext.
 jest.mock('./state', () => {
@@ -34,18 +36,13 @@ interface Setup extends CommonSetup {
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
- *
- * @param props  The props to use to override the default props of the component.
- * @param     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
- *                       component.
  */
-const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true): Setup => {
     const tabs = [<Tab key={0} label="Tab 0" />, <Tab key={1} label="Tab 1" />];
     const props: TabListProps = {
         children: tabs,
         'aria-label': 'Tab list',
-        ...propsOverrides,
+        ...propsOverride,
     };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
 
@@ -77,7 +74,7 @@ describe(`<${TabList.displayName}>`, () => {
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         it('should use the given props', () => {
-            const modifiedPropsBuilder: () => SetupProps = build('props').fields!({
+            const modifiedPropsBuilder: () => SetupProps = build('props').fields({
                 layout: TabListLayout.clustered,
                 position: oneOf(TabListPosition.center, TabListPosition.right),
             });
@@ -86,7 +83,7 @@ describe(`<${TabList.displayName}>`, () => {
 
             const { wrapper } = setup({ ...modifiedProps });
 
-            Object.keys(modifiedProps).forEach((prop: string) => {
+            Object.keys(modifiedProps).forEach((prop) => {
                 expect(wrapper).toHaveClassName(
                     getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop] }),
                 );

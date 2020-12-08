@@ -6,7 +6,7 @@ import isEmpty from 'lodash/isEmpty';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
 import { ListProps, Size } from '@lumx/react';
-import { GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
 import { renderLink } from '@lumx/react/utils/renderLink';
 
 /**
@@ -58,7 +58,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}ListItem`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -75,7 +75,7 @@ export function isClickable({ linkProps, onItemSelected }: Partial<ListItemProps
     return !isEmpty(linkProps?.href) || !!onItemSelected;
 }
 
-export const ListItem: React.FC<ListItemProps> = (props) => {
+export const ListItem: Comp<ListItemProps> = (props) => {
     const {
         after,
         before,
@@ -144,4 +144,5 @@ export const ListItem: React.FC<ListItemProps> = (props) => {
     );
 };
 ListItem.displayName = COMPONENT_NAME;
+ListItem.className = CLASSNAME;
 ListItem.defaultProps = DEFAULT_PROPS;

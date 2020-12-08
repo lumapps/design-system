@@ -13,10 +13,7 @@ export const App = ({ theme }: any) => {
     const [value, setValue] = React.useState<string>('');
     const [filterValue, setFilterValue] = React.useState('');
     const filteredChoices = CHOICES.filter((choice) =>
-        choice
-            .replace(' ', '')
-            .toLowerCase()
-            .includes(filterValue.replace(' ', '').toLowerCase()),
+        choice.replace(' ', '').toLowerCase().includes(filterValue.replace(' ', '').toLowerCase()),
     );
 
     const clearSelected = (event: SyntheticEvent) => {

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { SyntheticEvent, useMemo, useRef } from 'react';
 
 import classNames from 'classnames';
@@ -6,7 +7,7 @@ import { InputHelper, InputLabel, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import useEventCallback from '@lumx/react/hooks/useEventCallback';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import uuid from 'uuid/v4';
 
@@ -52,7 +53,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Slider`;
  * The default class name and classes prefix for this component.
  *
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -72,7 +73,15 @@ const DEFAULT_PROPS: Partial<SliderProps> = {
  * @param max   Maximum value.
  * @return Clamped value.
  */
-const clamp = (value: number, min: number, max: number): number => (value < min ? min : value > max ? max : value);
+const clamp = (value: number, min: number, max: number): number => {
+    if (value < min) {
+        return min;
+    }
+    if (value > max) {
+        return max;
+    }
+    return value;
+};
 
 /**
  * Convert a percent value to a value in range min - max.
@@ -83,7 +92,7 @@ const clamp = (value: number, min: number, max: number): number => (value < min 
  * @param precision Precision.
  * @return Value in range min - max
  */
-const computeValueFromPercent = (percent: number, min: number, max: number, precision: number): number =>
+const computeValueFromPercent = (percent: number, min: number, max: number, precision = 0): number =>
     Number((min + percent * (max - min)).toFixed(precision));
 
 /**
@@ -97,7 +106,7 @@ const computeValueFromPercent = (percent: number, min: number, max: number, prec
 const computePercentFromValue = (value: number, min: number, max: number): number =>
     Number((value - min) / (max - min));
 
-export const Slider: React.FC<SliderProps> = ({
+export const Slider: Comp<SliderProps> = ({
     className,
     disabled,
     helper,
@@ -117,23 +126,22 @@ export const Slider: React.FC<SliderProps> = ({
     ...forwardedProps
 }) => {
     const sliderId = useMemo(() => id || `slider-${uuid()}`, [id]);
+    const sliderLabelId = useMemo(() => `label-${sliderId}`, [sliderId]);
     const sliderRef = useRef<HTMLDivElement>(null);
-    const availableSteps: number[] = [];
 
     // build a lookup array for the steps.
-    if (steps) {
-        availableSteps.push(0);
+    const availableSteps = useMemo((): number[] => {
+        if (!steps) return [];
+
+        const available = [0];
         const percentStep = 1 / ((max - min) / steps);
         let ptr = 0;
-        while (true) {
-            if (ptr + percentStep < 1) {
-                ptr += percentStep;
-                availableSteps.push(ptr);
-            } else {
-                break;
-            }
+        while (ptr + percentStep < 1) {
+            ptr += percentStep;
+            available.push(ptr);
         }
-    }
+        return available;
+    }, [steps, min, max]);
 
     /**
      * Try to find the closest step to the current slider position.
@@ -177,11 +185,9 @@ export const Slider: React.FC<SliderProps> = ({
      */
     const handleMove = useEventCallback((event: React.MouseEvent) => {
         const { current: slider } = sliderRef;
-        const newValue = getPercentValue(event, slider!);
-
-        if (onChange) {
-            onChange(computeValueFromPercent(newValue, min, max, precision!), name, event);
-        }
+        if (!slider || !onChange) return;
+        const newValue = getPercentValue(event, slider);
+        onChange(computeValueFromPercent(newValue, min, max, precision), name, event);
     });
 
     /**
@@ -199,7 +205,7 @@ export const Slider: React.FC<SliderProps> = ({
      * Move to the next or previous value (i.e. + or - 10%) or next step
      * @param previous Should seek the previous value.
      */
-    const hopToValue = (previous: boolean = false) => {
+    const hopToValue = (previous = false) => {
         const oldPercent = computePercentFromValue(value, min, max);
         let percent = clamp(oldPercent + (previous ? -0.1 : 0.1), 0, 1);
         if (steps) {
@@ -207,7 +213,7 @@ export const Slider: React.FC<SliderProps> = ({
             percent = findClosestStep(percent);
         }
         if (onChange) {
-            onChange(computeValueFromPercent(percent, min, max, precision!), name);
+            onChange(computeValueFromPercent(percent, min, max, precision), name);
         }
     };
 
@@ -226,16 +232,13 @@ export const Slider: React.FC<SliderProps> = ({
      * Register a handler for the mouseDown event.
      */
     const handleMouseDown = useEventCallback((event: React.MouseEvent) => {
-        if (onMouseDown) {
-            onMouseDown(event);
-        }
-        if (isDisabled) {
-            return;
-        }
+        onMouseDown?.(event);
+
         const { current: slider } = sliderRef;
-        const newValue = getPercentValue(event, slider!);
+        if (isDisabled || !slider) return;
+        const newValue = getPercentValue(event, slider);
         if (onChange) {
-            onChange(computeValueFromPercent(newValue, min, max, precision!), name, event);
+            onChange(computeValueFromPercent(newValue, min, max, precision), name, event);
         }
 
         document.body.addEventListener('mousemove', handleMove);
@@ -254,7 +257,7 @@ export const Slider: React.FC<SliderProps> = ({
             aria-disabled={isDisabled}
         >
             {label && (
-                <InputLabel htmlFor={sliderId} className={`${CLASSNAME}__label`} theme={theme}>
+                <InputLabel id={sliderLabelId} htmlFor={sliderId} className={`${CLASSNAME}__label`} theme={theme}>
                     {label}
                 </InputLabel>
             )}
@@ -277,18 +280,18 @@ export const Slider: React.FC<SliderProps> = ({
                     />
                     {steps ? (
                         <div className={`${CLASSNAME}__ticks`}>
-                            {availableSteps.map((step: number, idx: number) => {
-                                return (
-                                    <div
-                                        key={`tick_${idx}`}
-                                        className={`${CLASSNAME}__tick`}
-                                        style={{ left: `${step * 100}%` }}
-                                    />
-                                );
-                            })}
+                            {availableSteps.map((step, idx) => (
+                                <div
+                                    key={`tick_${idx}`}
+                                    className={`${CLASSNAME}__tick`}
+                                    style={{ left: `${step * 100}%` }}
+                                />
+                            ))}
                         </div>
                     ) : null}
                     <button
+                        type="button"
+                        aria-labelledby={sliderLabelId}
                         name={name}
                         id={sliderId}
                         className={`${CLASSNAME}__handle`}
@@ -305,4 +308,5 @@ export const Slider: React.FC<SliderProps> = ({
     );
 };
 Slider.displayName = COMPONENT_NAME;
+Slider.className = CLASSNAME;
 Slider.defaultProps = DEFAULT_PROPS;

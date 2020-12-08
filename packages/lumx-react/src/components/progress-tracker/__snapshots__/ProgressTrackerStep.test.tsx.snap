@@ -11,6 +11,7 @@ exports[`<ProgressTrackerStep> Snapshots and structure should render 1`] = `
   onKeyPress={[Function]}
   role="tab"
   tabIndex={-1}
+  type="button"
 >
   <Icon
     className="lumx-progress-tracker-step__state"
@@ -37,6 +38,7 @@ exports[`<ProgressTrackerStep> Snapshots and structure should render active erro
   onKeyPress={[Function]}
   role="tab"
   tabIndex={0}
+  type="button"
 >
   <Icon
     className="lumx-progress-tracker-step__state"
@@ -63,6 +65,7 @@ exports[`<ProgressTrackerStep> Snapshots and structure should render active stat
   onKeyPress={[Function]}
   role="tab"
   tabIndex={0}
+  type="button"
 >
   <Icon
     className="lumx-progress-tracker-step__state"
@@ -89,6 +92,7 @@ exports[`<ProgressTrackerStep> Snapshots and structure should render complete st
   onKeyPress={[Function]}
   role="tab"
   tabIndex={-1}
+  type="button"
 >
   <Icon
     className="lumx-progress-tracker-step__state"
@@ -115,6 +119,7 @@ exports[`<ProgressTrackerStep> Snapshots and structure should render erroneous s
   onKeyPress={[Function]}
   role="tab"
   tabIndex={-1}
+  type="button"
 >
   <Icon
     className="lumx-progress-tracker-step__state"

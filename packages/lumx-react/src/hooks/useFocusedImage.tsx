@@ -23,13 +23,13 @@ export const useFocusedImage = (
     debounceTime: number,
     isFollowingWindowSize: boolean,
     thumbnailState: ThumbnailStates,
-) => {
+): ((e: HTMLImageElement) => any) => {
     const focusRef = useRef<FocusedImage | null>(null);
 
     useEffect(
         () => {
             if (focusRef.current) {
-                focusRef.current.setFocus(focus!);
+                focusRef.current.setFocus(focus);
             }
         },
         // eslint-disable-next-line react-hooks/exhaustive-deps

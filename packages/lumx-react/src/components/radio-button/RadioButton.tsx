@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { InputHelper, InputLabel, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import uniqueId from 'lodash/uniqueId';
 
@@ -43,7 +43,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}RadioButton`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -52,7 +52,7 @@ const DEFAULT_PROPS: Partial<RadioButtonProps> = {
     theme: Theme.light,
 };
 
-export const RadioButton: React.FC<RadioButtonProps> = ({
+export const RadioButton: Comp<RadioButtonProps> = ({
     checked,
     className,
     disabled,
@@ -125,4 +125,5 @@ export const RadioButton: React.FC<RadioButtonProps> = ({
     );
 };
 RadioButton.displayName = COMPONENT_NAME;
+RadioButton.className = CLASSNAME;
 RadioButton.defaultProps = DEFAULT_PROPS;

@@ -1,3 +1,4 @@
+/* eslint-disable */
 const packageJson = require('./package.json');
 
 module.exports = {

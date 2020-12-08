@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { ReactElement, ReactNode } from 'react';
+
+interface Props {
+    linkAs: any;
+}
 
 /**
  * Render link with default <a> HTML component or a custom one provided by `linkAs`.
@@ -9,5 +13,5 @@ import React from 'react';
  * @param children  Link children.
  * @return          A link.
  */
-export const renderLink = ({ linkAs, ...forwardedProps }: any, ...children: any) =>
+export const renderLink = <P extends Props>({ linkAs, ...forwardedProps }: P, ...children: ReactNode[]): ReactElement =>
     React.createElement(linkAs || 'a', forwardedProps, ...children);

@@ -3,8 +3,10 @@ import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 import React, { ReactElement } from 'react';
 
-import { CLASSNAME, TabPanel, TabPanelProps } from './TabPanel';
+import { TabPanel, TabPanelProps } from './TabPanel';
 import { setupTabProviderMocks } from './test.mocks';
+
+const CLASSNAME = TabPanel.className as string;
 
 // Mock useTabProviderContext.
 jest.mock('./state', () => {
@@ -30,14 +32,9 @@ interface Setup extends CommonSetup {
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
- *
- * @param props  The props to use to override the default props of the component.
- * @param     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
- *                       component.
  */
-const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering = true): Setup => {
-    const props: TabPanelProps = { ...propsOverrides, children: 'Tab panel content' };
+const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true): Setup => {
+    const props: TabPanelProps = { ...propsOverride, children: 'Tab panel content' };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
     const wrapper: Wrapper = renderer(<TabPanel {...props} />);
 

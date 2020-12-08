@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react';
 import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
@@ -18,7 +18,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}<%= componentName %>`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -48,4 +48,5 @@ export const <%= componentName %>: React.FC<<%= componentName %>Props> = (props:
     );
 };
 <%= componentName %>.displayName = COMPONENT_NAME;
+<%= componentName %>.className = CLASSNAME;
 <%= componentName %>.defaultProps = DEFAULT_PROPS;

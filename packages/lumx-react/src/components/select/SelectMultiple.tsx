@@ -12,7 +12,7 @@ import { InputLabel } from '@lumx/react/components/input-label/InputLabel';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { WithSelectContext } from './WithSelectContext';
 import { CoreSelectProps, SelectVariant } from './constants';
@@ -35,7 +35,7 @@ export interface SelectMultipleProps extends CoreSelectProps {
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Select`;
 
 /** The default class name and classes prefix for this component. */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /** The default value of props. */
 const DEFAULT_PROPS: Partial<SelectMultipleProps> = {
@@ -58,7 +58,7 @@ const DEFAULT_PROPS: Partial<SelectMultipleProps> = {
     selectedValueRender: (choice) => choice,
 };
 
-export const SelectMultipleField: React.FC<SelectMultipleProps> = ({
+export const SelectMultipleField: Comp<SelectMultipleProps> = ({
     anchorRef,
     handleKeyboardNav,
     hasError,
@@ -93,6 +93,7 @@ export const SelectMultipleField: React.FC<SelectMultipleProps> = ({
                     </div>
                 )}
 
+                {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
                 <div
                     ref={anchorRef as RefObject<HTMLDivElement>}
                     id={id}
@@ -105,8 +106,8 @@ export const SelectMultipleField: React.FC<SelectMultipleProps> = ({
                     <div className={`${CLASSNAME}__chips`}>
                         {!isEmpty && (
                             <ChipGroup theme={theme}>
-                                {value.map((val: string, index: number) =>
-                                    selectedChipRender!(val, index, onClear, isDisabled, theme),
+                                {value.map((val, index) =>
+                                    selectedChipRender?.(val, index, onClear, isDisabled, theme),
                                 )}
                             </ChipGroup>
                         )}
@@ -151,7 +152,7 @@ export const SelectMultipleField: React.FC<SelectMultipleProps> = ({
 
                 {!isEmpty && (
                     <span>
-                        <span>{selectedValueRender!(value[0])}</span>
+                        <span>{selectedValueRender?.(value[0])}</span>
 
                         {value.length > 1 && <span>&nbsp;+{value.length - 1}</span>}
                     </span>
@@ -161,7 +162,7 @@ export const SelectMultipleField: React.FC<SelectMultipleProps> = ({
     </>
 );
 
-export const SelectMultiple: React.FC<SelectMultipleProps> = (props) =>
+export const SelectMultiple: Comp<SelectMultipleProps> = (props) =>
     WithSelectContext(SelectMultipleField, {
         ...props,
         className: classNames(
@@ -176,4 +177,5 @@ export const SelectMultiple: React.FC<SelectMultipleProps> = (props) =>
     });
 
 SelectMultiple.displayName = COMPONENT_NAME;
+SelectMultiple.className = CLASSNAME;
 SelectMultiple.defaultProps = DEFAULT_PROPS;

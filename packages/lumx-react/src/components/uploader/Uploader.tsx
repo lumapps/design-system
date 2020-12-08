@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { AspectRatio, Icon, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 export enum UploaderVariant {
     square = 'square',
@@ -42,7 +42,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Uploader`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -54,7 +54,7 @@ const DEFAULT_PROPS: Partial<UploaderProps> = {
     variant: UploaderVariant.square,
 };
 
-export const Uploader: React.FC<UploaderProps> = ({
+export const Uploader: Comp<UploaderProps> = ({
     aspectRatio,
     className,
     label,
@@ -96,4 +96,5 @@ export const Uploader: React.FC<UploaderProps> = ({
     );
 };
 Uploader.displayName = COMPONENT_NAME;
+Uploader.className = CLASSNAME;
 Uploader.defaultProps = DEFAULT_PROPS;

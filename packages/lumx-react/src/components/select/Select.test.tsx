@@ -1,19 +1,21 @@
 import React, { ReactElement, RefObject } from 'react';
 
-import { ReactWrapper, ShallowWrapper, mount, shallow } from 'enzyme';
+import { mount, ReactWrapper, shallow, ShallowWrapper } from 'enzyme';
 import 'jest-enzyme';
 
 import { Kind, Theme } from '@lumx/react/components';
 import { Chip } from '@lumx/react/components/chip/Chip';
 import { Icon } from '@lumx/react/components/icon/Icon';
 
-import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { CommonSetup, commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
 import { mdiCloseCircle, mdiMenuDown } from '@lumx/icons';
 import { Dropdown } from '@lumx/react/components/dropdown/Dropdown';
-import { CLASSNAME, Select, SelectProps, SelectVariant } from './Select';
+import { Select, SelectProps, SelectVariant } from './Select';
 import { DEFAULT_PROPS } from './WithSelectContext';
+
+const CLASSNAME = Select.className as string;
 
 jest.mock('uuid/v4', () => () => 'uuid');
 
@@ -23,11 +25,6 @@ type SetupProps = Partial<SelectProps>;
 /** Defines what the `setup` function will return. */
 interface Setup extends CommonSetup {
     props: SetupProps;
-
-    /**
-     * [Enter the description of this wrapper].
-     * [You should also probably change the name of the wrapper to something more meaningful].
-     */
     input: Wrapper;
     dropdown: Wrapper;
     helper: Wrapper;
@@ -37,16 +34,12 @@ interface Setup extends CommonSetup {
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
- *
- * @param  props  The props to use to override the default props of the component.
- * @param  [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true): Setup => {
     const props: SelectProps = {
         children: <span>Select Component</span>,
         value: '',
-        ...propsOverrides,
+        ...propsOverride,
     };
 
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
@@ -238,10 +231,7 @@ describe(`<${Select.displayName}>`, () => {
             const onClear: jest.Mock = jest.fn();
             const { input } = setup({ value, onClear }, false);
 
-            input
-                .find(`.${CLASSNAME}__input-clear`)
-                .first()
-                .simulate('click');
+            input.find(`.${CLASSNAME}__input-clear`).first().simulate('click');
             expect(onClear).toHaveBeenCalled();
         });
     });
@@ -267,12 +257,7 @@ describe(`<${Select.displayName}>`, () => {
                 it('should render the value selected if not multiple ', () => {
                     const { input } = setup({ ...hasValueProps }, false);
 
-                    expect(
-                        input
-                            .find(`.${CLASSNAME}__input-native span`)
-                            .first()
-                            .text(),
-                    ).toBe(value);
+                    expect(input.find(`.${CLASSNAME}__input-native span`).first().text()).toBe(value);
                 });
             });
 
@@ -287,12 +272,9 @@ describe(`<${Select.displayName}>`, () => {
                 it('should render the placeholder when empty', () => {
                     const { input } = setup({ ...hasNoValueProps }, false);
 
-                    expect(
-                        input
-                            .find(`.${CLASSNAME}__input-native--placeholder span`)
-                            .first()
-                            .text(),
-                    ).toBe(placeholder);
+                    expect(input.find(`.${CLASSNAME}__input-native--placeholder span`).first().text()).toBe(
+                        placeholder,
+                    );
                 });
             });
         });
@@ -328,12 +310,7 @@ describe(`<${Select.displayName}>`, () => {
                 it('should render a close icon if there is a value', () => {
                     const { input } = setup({ ...hasValueProps }, false);
 
-                    expect(
-                        input
-                            .find(Icon)
-                            .first()
-                            .prop('icon'),
-                    ).toBe(mdiCloseCircle);
+                    expect(input.find(Icon).first().prop('icon')).toBe(mdiCloseCircle);
                 });
             });
 
@@ -353,12 +330,7 @@ describe(`<${Select.displayName}>`, () => {
                 it('should render a MenuDown icon', () => {
                     const { input } = setup({ ...hasNoValue }, false);
 
-                    expect(
-                        input
-                            .find(Icon)
-                            .first()
-                            .prop('icon'),
-                    ).toBe(mdiMenuDown);
+                    expect(input.find(Icon).first().prop('icon')).toBe(mdiMenuDown);
                 });
             });
         });

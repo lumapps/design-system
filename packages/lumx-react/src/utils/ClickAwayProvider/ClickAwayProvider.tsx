@@ -3,6 +3,7 @@ import React, { createContext, useCallback, useContext, useMemo, useState } from
 import { ClickAwayParameters, useClickAway } from '@lumx/react/hooks';
 
 import uniq from 'lodash/uniq';
+import { Comp } from '@lumx/react/utils';
 
 type appendChildrenRefsType = (refs: ClickAwayParameters['refs']) => void;
 const ClickAwayAncestorContext = createContext<appendChildrenRefsType | null>(null);
@@ -13,7 +14,7 @@ const ClickAwayAncestorContext = createContext<appendChildrenRefsType | null>(nu
  *
  * @return the react component.
  */
-export const ClickAwayProvider: React.FC<ClickAwayParameters> = ({ children, callback, refs }) => {
+export const ClickAwayProvider: Comp<ClickAwayParameters> = ({ children, callback, refs }) => {
     const appendAncestorChildrenRefs = useContext(ClickAwayAncestorContext);
     const [childrenRefs, setChildrenRefs] = useState<ClickAwayParameters['refs']>([]);
 
@@ -34,9 +35,9 @@ export const ClickAwayProvider: React.FC<ClickAwayParameters> = ({ children, cal
         appendAncestorChildrenRefs?.(concatenatedRefs);
 
         return concatenatedRefs;
-    }, [refs, childrenRefs]);
+    }, [refs, childrenRefs, appendAncestorChildrenRefs]);
 
     useClickAway({ callback, refs: clickAwayRefs });
-    return <ClickAwayAncestorContext.Provider value={appendChildrenRefs} children={children} />;
+    return <ClickAwayAncestorContext.Provider value={appendChildrenRefs}>{children}</ClickAwayAncestorContext.Provider>;
 };
 ClickAwayProvider.displayName = 'ClickAwayProvider';

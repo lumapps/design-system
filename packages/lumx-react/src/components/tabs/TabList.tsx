@@ -1,6 +1,6 @@
 import { Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
-import { GenericProps, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, handleBasicClasses } from '@lumx/react/utils';
 
 import classNames from 'classnames';
 import React, { ReactNode } from 'react';
@@ -43,7 +43,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}TabList`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = `${CSS_PREFIX}-tabs`;
+const CLASSNAME = `${CSS_PREFIX}-tabs`;
 
 /**
  * The default value of props.
@@ -62,7 +62,7 @@ const DEFAULT_PROPS: Partial<TabListProps> = {
  * @param  props Component props.
  * @return React element.
  */
-export const TabList: React.FC<TabListProps> = (props) => {
+export const TabList: Comp<TabListProps> = (props) => {
     const {
         'aria-label': ariaLabel,
         children,
@@ -96,4 +96,5 @@ export const TabList: React.FC<TabListProps> = (props) => {
     );
 };
 TabList.displayName = COMPONENT_NAME;
+TabList.className = CLASSNAME;
 TabList.defaultProps = DEFAULT_PROPS;

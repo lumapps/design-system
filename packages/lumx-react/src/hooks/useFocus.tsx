@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
  * @param element       Element to focus.
  * @param shouldFocus   Boolean flag to trigger the focus
  */
-export function useFocus(element: HTMLElement | null | undefined, shouldFocus = true) {
+export function useFocus(element: HTMLElement | null | undefined, shouldFocus = true): void {
     const [wasFocus, setWasFocus] = useState(false);
     useEffect(
         () => {

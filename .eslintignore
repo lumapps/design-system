@@ -4,3 +4,5 @@
 yo-generators/**
 **/.yarn/**
 **/style-dictionary
+**/*.config.js
+packages/site-demo/plugins

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { PageHead } from '@lumx/demo/components/PageHead';
 
-const Page404 = () => (
+const Page404: React.FC = () => (
     <>
         <PageHead title="404: Not Found" />
         <h1>Not Found</h1>

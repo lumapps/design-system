@@ -8,7 +8,9 @@ import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/util
 import { getBasicClass } from '@lumx/react/utils';
 
 import { Kind } from '@lumx/react';
-import { CLASSNAME, TextField, TextFieldProps } from './TextField';
+import { TextField, TextFieldProps } from './TextField';
+
+const CLASSNAME = TextField.className as string;
 
 /**
  * Define the overriding properties waited by the `setup` function.
@@ -40,14 +42,10 @@ interface Setup extends CommonSetup {
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
- *
- * @param  props                   The props to use to override the default props of the component.
- * @param  [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup = (props: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = (propsOverride: SetupProps = {}, shallowRendering = true): Setup => {
+    const props: any = { ...propsOverride };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    // @ts-ignore
     const wrapper: Wrapper = renderer(<TextField {...props} />);
 
     const textarea = wrapper.find('textarea');
@@ -106,7 +104,7 @@ describe(`<${TextField.displayName}>`, () => {
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         it('should add all class names (except has-error)', () => {
-            const modifiedPropsBuilder: () => SetupProps = build('props').fields!({
+            const modifiedPropsBuilder: () => SetupProps = build('props').fields({
                 icon: 'icon',
                 isDisabled: true,
                 isValid: true,
@@ -130,7 +128,7 @@ describe(`<${TextField.displayName}>`, () => {
         });
 
         it('should add "has-error" class name', () => {
-            const modifiedPropsBuilder: () => SetupProps = build('props').fields!({
+            const modifiedPropsBuilder: () => SetupProps = build('props').fields({
                 hasError: true,
             });
 

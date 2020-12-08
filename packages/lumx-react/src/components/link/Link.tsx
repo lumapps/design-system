@@ -6,7 +6,7 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import classNames from 'classnames';
 
 import { Color, ColorVariant, Icon, Size, Typography } from '@lumx/react';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { renderLink } from '@lumx/react/utils/renderLink';
 
 type HTMLAnchorProps = React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
@@ -51,7 +51,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Link`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 const getIconSize = (typography?: Typography) => {
     switch (typography) {
@@ -77,7 +77,7 @@ const getIconSize = (typography?: Typography) => {
     }
 };
 
-export const Link: React.FC<LinkProps> = ({
+export const Link: Comp<LinkProps> = ({
     children,
     className,
     color,
@@ -115,7 +115,7 @@ export const Link: React.FC<LinkProps> = ({
                 )}
             </>
         ),
-        [typography, leftIcon, rightIcon],
+        [leftIcon, typography, children, rightIcon],
     );
 
     /**
@@ -125,6 +125,7 @@ export const Link: React.FC<LinkProps> = ({
     if ((!linkAs && isEmpty(href)) || isDisabled) {
         return (
             <button
+                type="button"
                 {...forwardedProps}
                 disabled={isDisabled}
                 ref={linkRef as any}
@@ -147,3 +148,4 @@ export const Link: React.FC<LinkProps> = ({
     );
 };
 Link.displayName = COMPONENT_NAME;
+Link.className = CLASSNAME;

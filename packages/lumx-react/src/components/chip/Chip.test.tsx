@@ -1,11 +1,13 @@
-import { ShallowWrapper, mount, shallow } from 'enzyme';
+import { mount, shallow, ShallowWrapper } from 'enzyme';
 import 'jest-enzyme';
 import React, { ReactElement } from 'react';
 
 import { ColorPalette, Theme } from '@lumx/react';
 import { CommonSetup, Wrapper } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
-import { CLASSNAME, Chip, ChipProps } from './Chip';
+import { Chip, ChipProps } from './Chip';
+
+const CLASSNAME = Chip.className as string;
 
 interface Setup extends CommonSetup {
     after: ShallowWrapper;
@@ -14,10 +16,6 @@ interface Setup extends CommonSetup {
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
- *
- * @param  propOverrides An object that will extend the default properties.
- * @param  [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return An object with some shortcuts to elements or data required in tests.
  */
 const setup = (propOverrides: Partial<ChipProps> = {}, shallowRendering = true): Setup => {
     const props = {

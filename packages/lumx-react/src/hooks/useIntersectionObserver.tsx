@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+export type Intersections<T> = Map<T, IntersectionObserverEntry>;
+
 /**
  * Convenient hook to create interaction observers.
  *
@@ -10,8 +12,8 @@ import { useEffect, useState } from 'react';
 export function useIntersectionObserver<T extends Element>(
     elements: Array<T | null | undefined>,
     options?: IntersectionObserverInit,
-) {
-    const [intersections, setIntersections] = useState<Map<T, IntersectionObserverEntry>>(() => new Map());
+): Intersections<T> {
+    const [intersections, setIntersections] = useState<Intersections<T>>(() => new Map());
 
     useEffect(
         () => {
@@ -27,7 +29,9 @@ export function useIntersectionObserver<T extends Element>(
             }, options);
 
             for (const element of elements) {
-                observer.observe(element!);
+                if (element) {
+                    observer.observe(element);
+                }
             }
             return () => observer.disconnect();
         },

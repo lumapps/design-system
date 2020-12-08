@@ -6,7 +6,6 @@ const ts = require('typescript');
 const docgen = require('react-docgen-typescript');
 
 const rewriteJSXComponents = require('../utils/rewriteJSXComponents');
-const fixCompTypeProgramProvider = require('../utils/fixCompTypeProgramProvider');
 const aliasPropType = require('../utils/aliasPropType');
 const debug = require('../utils/debug');
 
@@ -38,7 +37,7 @@ const getDocgenParser = async () => {
         parserConfig = { tsDocParser, options };
     }
 
-    return (path) => parserConfig.tsDocParser.parseWithProgramProvider(path, fixCompTypeProgramProvider([path], parserConfig.options));
+    return (path) => parserConfig.tsDocParser.parse(path);
 };
 
 /** Find LumX react component path by component name. */

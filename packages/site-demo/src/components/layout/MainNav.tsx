@@ -100,7 +100,7 @@ const getParentPaths = (path: string) => {
     let parentPath = path;
     const parentPaths: string[] = [];
     do {
-        parentPaths.push((parentPath = parentPath.replace(/[^\/]*\/?$/, '')));
+        parentPaths.push((parentPath = parentPath.replace(/[^/]*\/?$/, '')));
     } while (parentPath.length > 1);
     return parentPaths;
 };
@@ -131,7 +131,7 @@ export const MainNav: React.FC<{ location?: Location }> = ({ location }) => {
                 <Link className="main-nav__logo" to="/">
                     <img src={LumXLogo} width="24px" height="24px" alt="LumX" />
                     <span>
-                        <strong>{'LumApps'}</strong>
+                        <strong>LumApps</strong>
                         {' design system'}
                     </span>
                 </Link>

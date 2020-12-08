@@ -3,14 +3,15 @@ import React, { ReactElement } from 'react';
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
-import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { CommonSetup, commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
 import { mdiAccount } from '@lumx/icons';
 
-import { CLASSNAME, SideNavigationItem, SideNavigationItemProps } from './SideNavigationItem';
+import { SideNavigationItem, SideNavigationItemProps } from './SideNavigationItem';
 
 const DEFAULT_PROPS = SideNavigationItem.defaultProps as any;
+const CLASSNAME = SideNavigationItem.className as string;
 
 /**
  * Define the overriding properties waited by the `setup` function.
@@ -33,19 +34,10 @@ interface Setup extends CommonSetup {
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
- *
- * @param  props                    The props to use to override the default props of the component.
- * @param  [shallowRendering=true]  Indicates if we want to do a shallow or a full rendering.
- * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering = true): Setup => {
-    const props: Partial<SideNavigationItemProps> = {
-        ...propsOverrides,
-    };
-
+const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true): Setup => {
+    const props: any = { ...propsOverride };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-
-    // @ts-ignore
     const wrapper: Wrapper = renderer(<SideNavigationItem {...props} />);
 
     return {

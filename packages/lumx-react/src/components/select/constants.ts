@@ -1,5 +1,5 @@
 import { Theme } from '@lumx/react/components';
-import { GenericProps } from '@lumx/react/utils';
+import { Comp, GenericProps } from '@lumx/react/utils';
 import { ReactNode, SyntheticEvent } from 'react';
 
 /**

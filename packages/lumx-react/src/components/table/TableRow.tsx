@@ -3,7 +3,7 @@ import React from 'react';
 import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
@@ -25,14 +25,14 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}TableRow`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME, true);
+const CLASSNAME = getRootClassName(COMPONENT_NAME, true);
 
 /**
  * The default value of props.
  */
 const DEFAULT_PROPS: Partial<TableRowProps> = {};
 
-export const TableRow: React.FC<TableRowProps> = ({
+export const TableRow: Comp<TableRowProps> = ({
     children,
     className,
     disabled,
@@ -60,4 +60,5 @@ export const TableRow: React.FC<TableRowProps> = ({
 );
 
 TableRow.displayName = COMPONENT_NAME;
+TableRow.className = CLASSNAME;
 TableRow.defaultProps = DEFAULT_PROPS;

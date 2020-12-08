@@ -3,6 +3,7 @@
 exports[`<Link> Snapshots and structure should render a button if href attribute is missing 1`] = `
 <button
   className="lumx-link"
+  type="button"
 />
 `;
 

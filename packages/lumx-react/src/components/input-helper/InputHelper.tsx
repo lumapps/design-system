@@ -1,6 +1,6 @@
 import { Kind, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
 import React, { ReactNode } from 'react';
 
@@ -12,7 +12,7 @@ import { INPUT_HELPER_CONFIGURATION } from './constants';
 export interface InputHelperProps extends GenericProps {
     /** The children elements. */
     children: string | ReactNode;
-    /** The kind of helper (error or sucess for exemple). */
+    /** The kind of helper (error or success for example). */
     kind?: Kind;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
@@ -26,7 +26,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}InputHelper`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -36,7 +36,7 @@ const DEFAULT_PROPS: Partial<InputHelperProps> = {
     theme: Theme.light,
 };
 
-export const InputHelper: React.FC<InputHelperProps> = ({ children, className, kind, theme, ...forwardedProps }) => {
+export const InputHelper: Comp<InputHelperProps> = ({ children, className, kind, theme, ...forwardedProps }) => {
     const { color } = INPUT_HELPER_CONFIGURATION[kind as any] || {};
 
     return (
@@ -50,4 +50,5 @@ export const InputHelper: React.FC<InputHelperProps> = ({ children, className, k
 };
 
 InputHelper.displayName = COMPONENT_NAME;
+InputHelper.className = CLASSNAME;
 InputHelper.defaultProps = DEFAULT_PROPS;

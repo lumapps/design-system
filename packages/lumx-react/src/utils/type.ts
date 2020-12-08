@@ -17,6 +17,12 @@ const NAME_PROPERTIES: string[] = [
     '_reactInternalFiber.elementType.name',
 ];
 
+/** LumX Component Type. */
+export type Comp<P> = React.FC<P> & {
+    /** Component base class name. */
+    className?: string;
+};
+
 /**
  * Define a generic props types.
  */
@@ -31,7 +37,7 @@ export interface GenericProps {
 /**
  * Defines a generic component type.
  */
-export type ComponentType = ReactNode | React.FC<any> | React.PureComponent<any, any> | React.Component<any, any>;
+export type ComponentType = ReactNode | Comp<any> | React.PureComponent<any, any> | React.Component<any, any>;
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 /**
@@ -69,9 +75,9 @@ export function isElementOfType(el: ReactNode, type: string | ComponentType): bo
     const typeName: string | ComponentType = getTypeName(type);
 
     if (!isString(typeName) || isEmpty(typeName)) {
-        console.debug('Un-computable type', type, '\nResulted in', typeName);
         throw new Error(
-            `The type you want to check is not valid. Waiting a JSX element, a component or a string (got \`${type!.toString()}\`)`,
+            `Un-computable type ${type}, resulted in ${typeName}
+The type you want to check is not valid. Waiting a JSX element, a component or a string (got \`${type?.toString()}\`)`,
         );
     }
 
@@ -113,7 +119,7 @@ export type Predicate<T> = (t: T) => boolean;
  * @param  component React function component or the component name
  * @return predicate returning true if value is instance of the component
  */
-export const isComponent = <C>(component: React.FC<C> | string) => (instance: ReactNode): instance is ReactElement => {
+export const isComponent = <C>(component: Comp<C> | string) => (instance: ReactNode): instance is ReactElement => {
     const componentName = typeof component === 'string' ? component : component.displayName;
 
     return (

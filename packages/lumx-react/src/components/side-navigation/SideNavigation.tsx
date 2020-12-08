@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { SideNavigationItem, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses, isComponent } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, isComponent } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
@@ -27,9 +27,9 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}SideNavigation`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
-export const SideNavigation: React.FC<SideNavigationProps> = ({
+export const SideNavigation: Comp<SideNavigationProps> = ({
     children,
     className,
     theme,
@@ -52,3 +52,4 @@ export const SideNavigation: React.FC<SideNavigationProps> = ({
     );
 };
 SideNavigation.displayName = COMPONENT_NAME;
+SideNavigation.className = CLASSNAME;

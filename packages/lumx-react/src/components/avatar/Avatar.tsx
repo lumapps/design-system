@@ -6,7 +6,7 @@ import { Size, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
  * Authorized size values.
@@ -37,7 +37,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Avatar`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -47,7 +47,7 @@ const DEFAULT_PROPS: Partial<AvatarProps> = {
     theme: Theme.light,
 };
 
-export const Avatar: React.FC<AvatarProps> = ({ actions, badge, className, image, size, theme, ...forwardedProps }) => {
+export const Avatar: Comp<AvatarProps> = ({ actions, badge, className, image, size, theme, ...forwardedProps }) => {
     const style: CSSProperties = {
         backgroundImage: `url(${image})`,
     };
@@ -66,4 +66,5 @@ export const Avatar: React.FC<AvatarProps> = ({ actions, badge, className, image
     );
 };
 Avatar.displayName = COMPONENT_NAME;
+Avatar.className = CLASSNAME;
 Avatar.defaultProps = DEFAULT_PROPS;

@@ -7,7 +7,7 @@ import React, { SyntheticEvent, useCallback, useRef, useState } from 'react';
 
 import { ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
 import { useFocus } from '@lumx/react/hooks/useFocus';
-import { GenericProps } from '@lumx/react/utils';
+import { Comp, GenericProps } from '@lumx/react/utils';
 
 import { DatePicker } from './DatePicker';
 
@@ -38,7 +38,7 @@ export interface DatePickerFieldProps extends GenericProps {
  */
 const COMPONENT_NAME = 'DatePickerField';
 
-export const DatePickerField = ({
+export const DatePickerField: Comp<DatePickerFieldProps> = ({
     defaultMonth,
     disabled,
     isDisabled = disabled,
@@ -49,7 +49,7 @@ export const DatePickerField = ({
     onChange,
     value,
     ...textFieldProps
-}: DatePickerFieldProps) => {
+}) => {
     const wrapperRef = useRef(null);
     const anchorRef = useRef(null);
 
@@ -92,13 +92,7 @@ export const DatePickerField = ({
                 name={name}
                 forceFocusStyle={isOpen}
                 textFieldRef={anchorRef}
-                value={
-                    value
-                        ? moment(value)
-                              .locale(locale)
-                              .format('LL')
-                        : ''
-                }
+                value={value ? moment(value).locale(locale).format('LL') : ''}
                 onClick={toggleSimpleMenu}
                 onChange={onTextFieldChange}
                 onKeyPress={handleKeyboardNav}

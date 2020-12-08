@@ -2,8 +2,8 @@ import filter from 'lodash/filter';
 import first from 'lodash/first';
 import last from 'lodash/last';
 import partition from 'lodash/partition';
-import React, { useMemo, useState } from 'react';
-import { renderLines } from './CodeBlock';
+import React, { ReactElement, useMemo, useState } from 'react';
+import { renderLines } from '@lumx/demo/components/CodeBlock/renderLines';
 import { RenderLineParams, Token, TokenLines } from './types';
 
 const isToken = (token: Token | undefined, type: string, content: string) =>
@@ -59,6 +59,7 @@ export const CollapsedImports: React.FC<RenderLineParams> = (props) => {
                 onClick={toggleCollapsed}
                 aria-label="Expand imports"
                 title="Expand imports"
+                type="button"
             >
                 <span {...props.getTokenProps({ token: { types: ['keyword'], content: 'import' } })} />
                 <span className="lumx-spacing-margin-left-tiny lumx-spacing-padding-horizontal  lumx-color-background-dark-L5">
@@ -70,7 +71,7 @@ export const CollapsedImports: React.FC<RenderLineParams> = (props) => {
     );
 };
 
-export const renderJSXLinesWithCollapsedImports = (renderParams: RenderLineParams) => {
+export const renderJSXLinesWithCollapsedImports = (renderParams: RenderLineParams): ReactElement => {
     const { imports, others } = partitionImports(renderParams.tokens);
 
     return (

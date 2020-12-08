@@ -5,8 +5,10 @@ import 'jest-enzyme';
 
 import { CommonSetup, Wrapper, commonTestsSuite, expectStoriesToMatchSnapshots } from '@lumx/react/testing/utils';
 
-import { CLASSNAME, UserBlock, UserBlockProps } from './UserBlock';
+import { UserBlock, UserBlockProps } from './UserBlock';
 import * as stories from './UserBlock.stories';
+
+const CLASSNAME = UserBlock.className as string;
 
 /**
  * Defines what the `setup` function will return.
@@ -22,15 +24,10 @@ interface Setup extends CommonSetup {
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
- *
- * @param props  The props to use to override the default props of the component.
- * @param     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
- *                       component.
  */
-const setup = ({ ...propsOverrides }: Partial<UserBlockProps> = {}, shallowRendering = true): Setup => {
+const setup = ({ ...propsOverride }: Partial<UserBlockProps> = {}, shallowRendering = true): Setup => {
     const props: UserBlockProps = {
-        ...propsOverrides,
+        ...propsOverride,
     };
 
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;

@@ -1,14 +1,14 @@
 import React, { FocusEventHandler, KeyboardEventHandler, useCallback } from 'react';
-import { useTabProviderContext } from '../tabs/state';
 
 import classNames from 'classnames';
 
 import { Icon, InputHelper, InputLabel, Kind, Size } from '@lumx/react';
 
 import { COMPONENT_PREFIX, ENTER_KEY_CODE } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiRadioboxBlank, mdiRadioboxMarked } from '@lumx/icons';
+import { useTabProviderContext } from '../tabs/state';
 
 /**
  * Defines the props of the component.
@@ -40,7 +40,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}ProgressTrackerStep`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -55,7 +55,7 @@ const DEFAULT_PROPS: Partial<ProgressTrackerStepProps> = {};
  * @param  props Component props.
  * @return React element.
  */
-export const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = (props) => {
+export const ProgressTrackerStep: Comp<ProgressTrackerStepProps> = (props) => {
     const {
         className,
         disabled,
@@ -79,7 +79,7 @@ export const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = (props) =
             return;
         }
         state?.changeToTab();
-    }, [isDisabled, state?.changeToTab]);
+    }, [isDisabled, state]);
 
     const handleFocus: FocusEventHandler = useCallback(
         (event) => {
@@ -88,7 +88,7 @@ export const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = (props) =
                 changeToCurrentTab();
             }
         },
-        [onFocus, state?.shouldActivateOnFocus],
+        [changeToCurrentTab, onFocus, state?.shouldActivateOnFocus],
     );
 
     const handleKeyPress: KeyboardEventHandler = useCallback(
@@ -100,7 +100,7 @@ export const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = (props) =
             }
             changeToCurrentTab();
         },
-        [onKeyPress],
+        [changeToCurrentTab, onKeyPress],
     );
 
     const getIcon = (): string => {
@@ -118,6 +118,7 @@ export const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = (props) =
     return (
         <button
             {...forwardedProps}
+            type="button"
             id={state?.tabId}
             className={classNames(
                 className,
@@ -152,4 +153,5 @@ export const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = (props) =
 };
 
 ProgressTrackerStep.displayName = COMPONENT_NAME;
+ProgressTrackerStep.className = CLASSNAME;
 ProgressTrackerStep.defaultProps = DEFAULT_PROPS;

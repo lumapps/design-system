@@ -1,6 +1,6 @@
 import { useTabProviderContext } from '@lumx/react/components/tabs/state';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
-import { GenericProps, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, handleBasicClasses } from '@lumx/react/utils';
 
 import classNames from 'classnames';
 import React from 'react';
@@ -23,7 +23,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}TabPanel`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = `${CSS_PREFIX}-tab-panel`;
+const CLASSNAME = `${CSS_PREFIX}-tab-panel`;
 
 /**
  * The default value of props.
@@ -38,7 +38,7 @@ const DEFAULT_PROPS: Partial<TabPanelProps> = {};
  * @param  props Component props.
  * @return React element.
  */
-export const TabPanel: React.FC<TabPanelProps> = (props) => {
+export const TabPanel: Comp<TabPanelProps> = (props) => {
     const { children, id, className, isActive: propIsActive, ...forwardedProps } = props;
 
     const state = useTabProviderContext('tabPanel', id);
@@ -58,4 +58,5 @@ export const TabPanel: React.FC<TabPanelProps> = (props) => {
     );
 };
 TabPanel.displayName = COMPONENT_NAME;
+TabPanel.className = CLASSNAME;
 TabPanel.defaultProps = DEFAULT_PROPS;

@@ -5,11 +5,7 @@ exports[`<Autocomplete> Props should render correctly when the dropdown is close
   className="lumx-autocomplete"
 >
   <TextField
-    inputRef={
-      Object {
-        "current": null,
-      }
-    }
+    inputRef={[Function]}
     onChange={[MockFunction]}
     textFieldRef={
       Object {
@@ -112,11 +108,7 @@ exports[`<Autocomplete> Snapshots and structure should render correctly 1`] = `
   className="lumx-autocomplete"
 >
   <TextField
-    inputRef={
-      Object {
-        "current": null,
-      }
-    }
+    inputRef={[Function]}
     onChange={[MockFunction]}
     textFieldRef={
       Object {

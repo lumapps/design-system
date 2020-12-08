@@ -40,7 +40,7 @@ const flexViewKnobConfigs: Array<
 const setupFlexBoxKnobs = (group: string, knobs: FlexBoxPropName[] = []) =>
     fromPairs(
         knobs.map((knob: FlexBoxPropName) => {
-            const [prop, knobFn, selectOptions] = flexViewKnobConfigs.find(([k]) => k === knob)! as any;
+            const [prop, knobFn, selectOptions] = flexViewKnobConfigs.find(([k]) => k === knob) as any;
             if (selectOptions) {
                 const defaultValue = isArray(selectOptions) ? selectOptions[0] : DEFAULT_PROPS[prop];
                 return [prop, knobFn(prop, selectOptions, defaultValue, group)];

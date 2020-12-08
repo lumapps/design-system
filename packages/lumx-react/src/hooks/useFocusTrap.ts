@@ -35,7 +35,7 @@ export function useFocusTrap(
     focusZoneElement: HTMLElement | null,
     focusElement?: HTMLElement | null,
     rootElement = DOCUMENT?.body,
-) {
+): void {
     useEffect(() => {
         if (rootElement && focusZoneElement) {
             (document.activeElement as HTMLElement)?.blur();

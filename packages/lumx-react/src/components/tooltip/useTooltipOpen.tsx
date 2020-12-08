@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from 'react';
  * @param  anchorElement Tooltip anchor element.
  * @return whether or not to show the tooltip.
  */
-export function useTooltipOpen(delay: number, anchorElement: HTMLElement | null) {
+export function useTooltipOpen(delay: number, anchorElement: HTMLElement | null): boolean {
     const timer = useRef<number>();
     const [isOpen, setIsOpen] = useState(false);
 

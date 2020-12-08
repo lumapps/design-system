@@ -6,6 +6,7 @@ exports[`<ButtonRoot> Props should not have default color in low or medium empha
 >
   <button
     className="lumx-button lumx-button--color-dark lumx-button--emphasis-low"
+    type="button"
   />
 </ButtonRoot>
 `;
@@ -14,6 +15,7 @@ exports[`<ButtonRoot> Props should use default color 1`] = `
 <ButtonRoot>
   <button
     className="lumx-button lumx-button--color-dark"
+    type="button"
   />
 </ButtonRoot>
 `;
@@ -40,6 +42,7 @@ exports[`<ButtonRoot> Props should use given props 1`] = `
     >
       <button
         className="lumx-button lumx-button--color-red lumx-button--emphasis-high lumx-button--size-s lumx-button--theme-dark lumx-button--variant-icon"
+        type="button"
       />
     </ButtonRoot>
   </div>
@@ -92,6 +95,7 @@ exports[`<ButtonRoot> Snapshots and structure should render button with label 1`
 <ButtonRoot>
   <button
     className="lumx-button lumx-button--color-dark"
+    type="button"
   >
     Label
   </button>
@@ -111,6 +115,7 @@ exports[`<ButtonRoot> Snapshots and structure should render button with wrapper 
     >
       <button
         className="lumx-button lumx-button--color-dark"
+        type="button"
       >
         Label
       </button>

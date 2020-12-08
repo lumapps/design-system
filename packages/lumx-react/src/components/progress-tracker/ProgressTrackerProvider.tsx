@@ -1,4 +1,5 @@
 import React, { ReactNode, useEffect, useReducer } from 'react';
+import { Comp } from '@lumx/react/utils';
 import { INIT_STATE, TabProviderContext, reducer } from '../tabs/state';
 
 export interface ProgressTrackerProviderProps {
@@ -31,28 +32,36 @@ const DEFAULT_PROPS: Partial<ProgressTrackerProviderProps> = {
  * @param  props React component props.
  * @return React element.
  */
-export const ProgressTrackerProvider: React.FC<ProgressTrackerProviderProps> = (props) => {
+export const ProgressTrackerProvider: Comp<ProgressTrackerProviderProps> = (props) => {
     const { children, onChange, activeStepIndex, ...propState } = props;
     const [state, dispatch] = useReducer(reducer, INIT_STATE);
 
     // On prop state change => dispatch update.
-    useEffect(() => {
-        dispatch({
-            type: 'update',
-            payload: {
-                ...propState,
-                activeTabIndex: activeStepIndex,
-            },
-        });
-    }, [dispatch, ...Object.values(propState), activeStepIndex]);
+    useEffect(
+        () => {
+            dispatch({
+                type: 'update',
+                payload: {
+                    ...propState,
+                    activeTabIndex: activeStepIndex,
+                },
+            });
+        },
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [dispatch, ...Object.values(propState), activeStepIndex],
+    );
 
     // On active tab index state change => send update to the onChange.
-    useEffect(() => {
-        if (state === INIT_STATE || !onChange || activeStepIndex === state.activeTabIndex) {
-            return;
-        }
-        onChange(state.activeTabIndex);
-    }, [onChange, state.activeTabIndex]);
+    useEffect(
+        () => {
+            if (state === INIT_STATE || !onChange || activeStepIndex === state.activeTabIndex) {
+                return;
+            }
+            onChange(state.activeTabIndex);
+        },
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [onChange, state.activeTabIndex],
+    );
 
     return <TabProviderContext.Provider value={[state, dispatch]}>{children}</TabProviderContext.Provider>;
 };

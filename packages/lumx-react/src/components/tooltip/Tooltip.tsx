@@ -9,7 +9,7 @@ import { Placement } from '@lumx/react/components/popover/Popover';
 
 import { COMPONENT_PREFIX, DOCUMENT } from '@lumx/react/constants';
 
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { useInjectTooltipRef } from './useInjectTooltipRef';
 import { useTooltipOpen } from './useTooltipOpen';
@@ -41,7 +41,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Tooltip`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -56,7 +56,7 @@ const DEFAULT_PROPS: Partial<TooltipProps> = {
  */
 const OFFSET = 8;
 
-export const Tooltip: React.FC<TooltipProps> = (props) => {
+export const Tooltip: Comp<TooltipProps> = (props) => {
     if (!DOCUMENT) {
         // Can't render in SSR.
         return null;
@@ -118,4 +118,5 @@ export const Tooltip: React.FC<TooltipProps> = (props) => {
     );
 };
 Tooltip.displayName = COMPONENT_NAME;
+Tooltip.className = CLASSNAME;
 Tooltip.defaultProps = DEFAULT_PROPS;

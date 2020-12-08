@@ -15,7 +15,7 @@ import {
 } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
@@ -53,7 +53,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}LinkPreview`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -63,7 +63,7 @@ const DEFAULT_PROPS: Partial<LinkPreviewProps> = {
     theme: Theme.light,
 };
 
-export const LinkPreview: React.FC<LinkPreviewProps> = ({
+export const LinkPreview: Comp<LinkPreviewProps> = ({
     className,
     description,
     link,
@@ -139,4 +139,5 @@ export const LinkPreview: React.FC<LinkPreviewProps> = ({
 };
 
 LinkPreview.displayName = COMPONENT_NAME;
+LinkPreview.className = CLASSNAME;
 LinkPreview.defaultProps = DEFAULT_PROPS;

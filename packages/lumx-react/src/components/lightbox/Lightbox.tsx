@@ -8,7 +8,7 @@ import { createPortal } from 'react-dom';
 import { mdiClose } from '@lumx/icons';
 import { ColorPalette, Emphasis, IconButton, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, DOCUMENT } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import isFunction from 'lodash/isFunction';
 
@@ -44,7 +44,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Lightbox`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -60,7 +60,7 @@ const DEFAULT_PROPS: Partial<LightboxProps> = {
  *
  * @return Lightbox.
  */
-export const Lightbox: React.FC<LightboxProps> = ({
+export const Lightbox: Comp<LightboxProps> = ({
     ariaLabel,
     children,
     className,
@@ -172,6 +172,7 @@ export const Lightbox: React.FC<LightboxProps> = ({
                             returnFocusOnDeactivate: true,
                         }}
                     >
+                        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
                         <div
                             {...forwardedProps}
                             aria-label={ariaLabel}
@@ -219,4 +220,5 @@ export const Lightbox: React.FC<LightboxProps> = ({
     );
 };
 Lightbox.displayName = COMPONENT_NAME;
+Lightbox.className = CLASSNAME;
 Lightbox.defaultProps = DEFAULT_PROPS;

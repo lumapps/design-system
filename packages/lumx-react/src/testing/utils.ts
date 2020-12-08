@@ -5,7 +5,7 @@ import React from 'react';
 import isArray from 'lodash/isArray';
 import isEmpty from 'lodash/isEmpty';
 
-import { GenericProps } from '@lumx/react/utils';
+import { Comp, GenericProps } from '@lumx/react/utils';
 
 /**
  * The type of a wrapper that can be
@@ -86,7 +86,7 @@ export function commonTestsSuite(
  * @param stories   Stories module.
  * @param component Component to dive into (expanding the shallow rendering fot this particular component).
  */
-export function expectStoriesToMatchSnapshots(stories: Record<string, any>, component: React.FC<any>) {
+export function expectStoriesToMatchSnapshots(stories: Record<string, any>, component: Comp<any>) {
     for (const [storyName, Story] of Object.entries(stories)) {
         if (typeof Story !== 'function') {
             continue;

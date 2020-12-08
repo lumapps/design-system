@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-tabindex,jsx-a11y/no-static-element-interactions */
 import React, { ImgHTMLAttributes, ReactElement, ReactNode, useEffect, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
@@ -9,7 +8,7 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
 import isFunction from 'lodash/isFunction';
 
-import { GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
 
 import { mdiImageBrokenVariant } from '@lumx/icons';
 import { useFocusedImage } from '@lumx/react/hooks/useFocusedImage';
@@ -22,7 +21,7 @@ import { isInternetExplorer } from '@lumx/react/utils/isInternetExplorer';
  */
 declare module 'react' {
     interface ImgHTMLAttributes<T> extends React.HTMLAttributes<T> {
-        loading?: 'auto' | 'eager' | 'lazy';
+        loading?: 'eager' | 'lazy';
     }
 }
 
@@ -59,15 +58,6 @@ export enum ThumbnailVariant {
 }
 
 /**
- * Authorized types of image loading.
- */
-export enum ImageLoading {
-    auto = 'auto',
-    lazy = 'lazy',
-    eager = 'eager',
-}
-
-/**
  * Defines the props of the component.
  */
 export interface ThumbnailProps extends GenericProps {
@@ -97,7 +87,7 @@ export interface ThumbnailProps extends GenericProps {
     /** The size variant of the component. */
     size?: ThumbnailSize;
     /** The image loading mode. */
-    loading?: ImageLoading;
+    loading?: 'eager' | 'lazy';
     /** The time before recalculating focal point if isFollowingWindowSize is activated. */
     resizeDebounceTime?: number;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
@@ -114,7 +104,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Thumbnail`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -127,13 +117,14 @@ const DEFAULT_PROPS: Partial<ThumbnailProps> = {
     focusPoint: { x: 0, y: 0 },
     isCrossOriginEnabled: true,
     isFollowingWindowSize: true,
-    loading: ImageLoading.lazy,
+    loading: 'lazy',
     resizeDebounceTime: 20,
     theme: Theme.light,
     variant: ThumbnailVariant.squared,
 };
 
-export const Thumbnail: React.FC<ThumbnailProps> = ({
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex,jsx-a11y/no-static-element-interactions */
+export const Thumbnail: Comp<ThumbnailProps> = ({
     align,
     alt = 'Thumbnail',
     aspectRatio,
@@ -156,11 +147,11 @@ export const Thumbnail: React.FC<ThumbnailProps> = ({
 }: ThumbnailProps): ReactElement => {
     const [thumbnailState, setThumbnailState] = useState<ThumbnailStates>('isLoading');
     const focusImageRef = useFocusedImage(
-        focusPoint!,
-        aspectRatio!,
-        size!,
-        resizeDebounceTime!,
-        isFollowingWindowSize!,
+        focusPoint as FocusPoint,
+        aspectRatio as AspectRatio,
+        size as Size,
+        resizeDebounceTime as number,
+        isFollowingWindowSize as boolean,
         thumbnailState,
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -236,4 +227,5 @@ export const Thumbnail: React.FC<ThumbnailProps> = ({
     );
 };
 Thumbnail.displayName = COMPONENT_NAME;
+Thumbnail.className = CLASSNAME;
 Thumbnail.defaultProps = DEFAULT_PROPS;

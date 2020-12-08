@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import { Button } from '@lumx/react';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 import React, { useCallback, useRef, useState } from 'react';
@@ -11,6 +12,7 @@ export default {
     },
 };
 
+// eslint-disable-next-line react/display-name
 const Card = React.forwardRef<any, any>(({ children, close }, ref) => (
     <ClickAwayProvider callback={close} refs={[ref as any]}>
         {createPortal(

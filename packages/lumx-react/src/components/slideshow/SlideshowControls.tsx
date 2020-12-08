@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks,@typescript-eslint/no-use-before-define,jsx-a11y/control-has-associated-label,react-hooks/exhaustive-deps */
 import React, { RefObject, useCallback, useEffect, useState } from 'react';
 
 import classNames from 'classnames';
@@ -11,7 +10,7 @@ import {
     PAGINATION_ITEM_SIZE,
 } from '@lumx/react/components/slideshow/constants';
 import { COMPONENT_PREFIX, LEFT_KEY_CODE, RIGHT_KEY_CODE } from '@lumx/react/constants';
-import { GenericProps, detectSwipe, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, detectSwipe, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import isFunction from 'lodash/isFunction';
 
@@ -51,7 +50,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}SlideshowControls`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -61,7 +60,8 @@ const DEFAULT_PROPS: Partial<SlideshowControlsProps> = {
     theme: Theme.light,
 };
 
-export const SlideshowControls: React.FC<SlideshowControlsProps> = ({
+/* eslint-disable react-hooks/rules-of-hooks,@typescript-eslint/no-use-before-define,jsx-a11y/control-has-associated-label,react-hooks/exhaustive-deps */
+export const SlideshowControls: Comp<SlideshowControlsProps> = ({
     activeIndex,
     className,
     onNextClick,
@@ -285,4 +285,5 @@ export const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     );
 };
 SlideshowControls.displayName = COMPONENT_NAME;
+SlideshowControls.className = CLASSNAME;
 SlideshowControls.defaultProps = DEFAULT_PROPS;

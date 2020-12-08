@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { Alignment } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
@@ -26,9 +26,9 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}GridItem`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
-export const GridItem: React.FC<GridItemProps> = ({ children, className, width, align, order, ...forwardedProps }) => {
+export const GridItem: Comp<GridItemProps> = ({ children, className, width, align, order, ...forwardedProps }) => {
     return (
         <div
             {...forwardedProps}
@@ -39,3 +39,4 @@ export const GridItem: React.FC<GridItemProps> = ({ children, className, width, 
     );
 };
 GridItem.displayName = COMPONENT_NAME;
+GridItem.className = CLASSNAME;

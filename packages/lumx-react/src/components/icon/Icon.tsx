@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { Color, ColorPalette, ColorVariant, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 export type IconSizes = Size.xxs | Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
 
@@ -39,14 +39,14 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Icon`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
 const DEFAULT_PROPS: Partial<IconProps> = {};
 
-export const Icon: React.FC<IconProps> = ({
+export const Icon: Comp<IconProps> = ({
     className,
     color,
     colorVariant,
@@ -113,4 +113,5 @@ export const Icon: React.FC<IconProps> = ({
     );
 };
 Icon.displayName = COMPONENT_NAME;
+Icon.className = CLASSNAME;
 Icon.defaultProps = DEFAULT_PROPS;

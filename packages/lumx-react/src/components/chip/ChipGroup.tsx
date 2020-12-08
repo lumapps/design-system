@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { useChipGroupNavigation, useChipGroupNavigationType } from '@lumx/react/hooks/useChipGroupNavigation';
 
@@ -34,13 +34,13 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}ChipGroup`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 interface ChipGroup {
     useChipGroupNavigation: useChipGroupNavigationType;
 }
 
-export const ChipGroup: React.FC<ChipGroupProps> & ChipGroup = ({ align, children, className, ...forwardedProps }) => {
+export const ChipGroup: Comp<ChipGroupProps> & ChipGroup = ({ align, children, className, ...forwardedProps }) => {
     const chipGroupClassName = handleBasicClasses({
         align,
         prefix: CLASSNAME,
@@ -54,5 +54,6 @@ export const ChipGroup: React.FC<ChipGroupProps> & ChipGroup = ({ align, childre
 };
 
 ChipGroup.displayName = COMPONENT_NAME;
+ChipGroup.className = CLASSNAME;
 ChipGroup.defaultProps = DEFAULT_PROPS;
 ChipGroup.useChipGroupNavigation = useChipGroupNavigation;

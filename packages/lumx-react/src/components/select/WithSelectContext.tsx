@@ -78,7 +78,7 @@ function useHandleElementFocus(
 }
 
 export const WithSelectContext = (
-    SelectElement: any,
+    SelectElement: React.FC<any>,
     {
         children,
         className,

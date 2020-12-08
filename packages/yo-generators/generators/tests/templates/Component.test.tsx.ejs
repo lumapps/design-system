@@ -6,9 +6,10 @@ import 'jest-enzyme';
 import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
-import { CLASSNAME, <%= componentName %>, <%= componentName %>Props } from './<%= componentName %>';
+import { <%= componentName %>, <%= componentName %>Props } from './<%= componentName %>';
 
 const DEFAULT_PROPS = <%= componentName %>.defaultProps as any;
+const CLASSNAME = <%= componentName %>.className as any;
 
 /**
  * Define the overriding properties waited by the `setup` function.
@@ -20,25 +21,15 @@ type SetupProps = Partial<<%= componentName %>Props>;
  */
 interface Setup extends CommonSetup {
     props: SetupProps;
-
-    /**
-     * [Enter the description of this wrapper].
-     * [You should also probably change the name of the wrapper to something more meaningful].
-     */
     wrapper: Wrapper;
 }
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
- *
- * @param  props  The props to use to override the default props of the component.
- * @param  [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup = (props: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = (propsOverride: SetupProps = {}, shallowRendering = true): Setup => {
+    const props: any = { ...propsOverride };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-
-    // @ts-ignore
     const wrapper: Wrapper = renderer(<<%= componentName %> {...props} />);
 
     return {

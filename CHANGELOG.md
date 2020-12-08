@@ -49,6 +49,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `ProgressTrackerStep` components are button instead of anchor for better a11y. Aria attributes have been added according to [WAI ARIA `tab` role](https://www.w3.org/TR/wai-aria-practices-1.1/examples/tabs/tabs-1/tabs.html) since stepper are similar to tabs in term of a11y.
 -   _[BREAKING]_ `onClick` prop for `ProgressTrackerStep` component is not used anymore. `ProgressTrackerProvider` component has an `onChange` prop instead. Therefore, a step is now clickable if it is not disabled.
 -   _[BREAKING]_ `DatePicker` and `DatePickerField` `value` prop can no longer be a `Moment` object. This will allow us to remove `moment` dep in the future without generating breaking change later. The `value` prop can no longer be a `string` to avoid handling incompatible values. `value` can only be a `Date` (or `undefined` for non selectable values).
+-   _[BREAKING]_ Thumbnail `loading` prop now take `eager` or `lazy` string (instead of enum).
 
 ### Removed
 
@@ -58,6 +59,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   _[BREAKING]_ Removed `onOpen`, `role` and `noWrapper` props from `Lightbox` component.
 -   _[BREAKING]_ `align`, `aspectRatio`, `crossOrigin`, `fillHeight`, `focusPoint`, `isCrossOriginEnabled` and `onClick` props have been removed from `ImageBlock` component. These props will now be passed using the `ImageBlock.thumbnailProps` prop.
 -   _[BREAKING]_ Removed `Tabs` component replaced by the `TabProvider` and `TabList` components.
+-   _[BREAKING]_ Removed `thumbnails.url` prop on the `Mosaic` (use `image` instead).
 
 ## [0.28.1][] - 2020-12-03
 
