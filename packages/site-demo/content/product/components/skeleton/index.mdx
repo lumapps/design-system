@@ -1,41 +1,41 @@
-# Skeleton <ReactStabilityFlag status="unstable" />
+# Skeleton <ReactStabilityFlag status="stable" />
 
 **Skeleton are primitives shapes which mimic a piece of content in a recognizable way. It communicate [loading states](/product/foundations/loading-state).**
 
-There are three variants: `round`, `rectangular`, `typography`. When designing loading states with skeletons, use a combination of variants that best mimic the replaced content.
+There are three variants: `circle`, `rectangular`, `typography`. When designing loading states with skeletons, use a combination of variants that best mimic the replaced content.
 
 ## Circle
 
 Use circle skeletons to mimic components like [avatar](/product/components/avatar/), [icon](/product/components/icon). Respect at best the size of replaced element using the T-shirt [sizes](/product/foundations/sizes).
 
-<DemoBlock withThemeSwitcher>
-    <img src="react/circle.png" style="width:100%; height:auto" />
-</DemoBlock>
+<DemoBlock demo="circle" orientation="horizontal" withThemeSwitcher />
 
 ## Rectangle
 
 Use rectangular skeletons to mimic [thumbnail](/product/components/thumbnail), [button](/product/components/button), [chip](/product/components/chip), [text field](/product/components/text-field) and so on. `width`, `height` and `border-radius` are adjustable.
 
-<DemoBlock withThemeSwitcher>
-    <img src="react/rectangle.png" style="width:100%; height:auto" />
-</DemoBlock>
+<DemoBlock demo="rectangle" orientation="horizontal" withThemeSwitcher />
 
 ## Typography
 
 Use typography skeletons to mimic text. Use [text style](/product/foundations/typography) as parameter to easily set a replacement for texts. `width`, is adjustable.
 
-<DemoBlock withThemeSwitcher>
-    <img src="react/typography.png" style="width:100%; height:auto" />
-</DemoBlock>
+<DemoBlock demo="typography" withThemeSwitcher />
 
 ## Animation and style
 
 Skeletons have a unique animation and style: pulsating grey or white depending on the theme.
 
-<DemoBlock withThemeSwitcher>
-    <img src="react/animation-style.png" style="width:100%; height:auto" />
-</DemoBlock>
+<DemoBlock demo="animation" orientation="horizontal" withThemeSwitcher />
 
-### Properties
+### Skeleton circle properties
 
-<PropTable component="Slider" />
+<PropTable component="SkeletonCircle" />
+
+### Skeleton rectangle properties
+
+<PropTable component="SkeletonRectangle" />
+
+### Skeleton typography properties
+
+<PropTable component="SkeletonTypography" />
