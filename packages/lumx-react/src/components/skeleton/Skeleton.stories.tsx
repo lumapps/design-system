@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {
+    AspectRatio, GlobalSize,
     Size,
     SkeletonCircle,
     SkeletonRectangle,
@@ -11,7 +12,7 @@ import {
 
 export default { title: 'LumX components/skeleton/Skeleton' };
 
-const skeletonSizes: Size[] = [Size.xxs, Size.xs, Size.s, Size.m, Size.l, Size.xl, Size.xxl];
+const skeletonSizes: GlobalSize[] = [Size.xxs, Size.xs, Size.s, Size.m, Size.l, Size.xl, Size.xxl];
 
 export const skeletonCircle = () =>
     skeletonSizes.map((size) =>
@@ -27,6 +28,7 @@ export const skeletonRectangular = () => (
                 className="lumx-spacing-margin-bottom"
             />
             <SkeletonRectangle width={Size.l} height={Size.s} variant={SkeletonRectangleVariant.pill} />
+            <SkeletonRectangle width={Size.l} aspectRatio={AspectRatio.horizontal} />
         </>
     );
 

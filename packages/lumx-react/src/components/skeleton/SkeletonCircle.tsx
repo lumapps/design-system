@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { Size } from '@lumx/react';
+import { GlobalSize, Size } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
@@ -10,7 +10,7 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
  */
 interface SkeletonCircleProps extends GenericProps {
     /** The size variant of the component. */
-    size: Size;
+    size: GlobalSize;
 }
 
 /**

@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { Size } from '@lumx/react';
+import { AspectRatio, GlobalSize } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
@@ -19,11 +19,17 @@ enum SkeletonRectangleVariant {
  */
 interface SkeletonRectangleProps extends GenericProps {
     /** The height of the component from Size enum. */
-    height: Size;
+    height?: GlobalSize;
     /** The variant of the component. */
-    variant: SkeletonRectangleVariant;
+    variant?: SkeletonRectangleVariant;
     /** The width of the component from Size enum. */
-    width: Size;
+    width?: GlobalSize;
+    /** The skeleton aspect ratio (use with width prop only). */
+    aspectRatio?: AspectRatio.square | AspectRatio.horizontal | AspectRatio.vertical;
+}
+
+const DEFAULT_PROPS: Partial<SkeletonRectangleProps> = {
+    variant: SkeletonRectangleVariant.squared,
 }
 
 /**
@@ -37,6 +43,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}SkeletonRectangle`;
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 const SkeletonRectangle: React.FC<SkeletonRectangleProps> = ({
+    aspectRatio,
     className,
     height,
     variant,
@@ -46,10 +53,17 @@ const SkeletonRectangle: React.FC<SkeletonRectangleProps> = ({
     return (
         <div
             {...forwardedProps}
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, height, variant, width }))}
+            className={classNames(className, handleBasicClasses({
+                prefix: CLASSNAME,
+                aspectRatio,
+                height: aspectRatio ? undefined : height,
+                variant,
+                width,
+            }))}
         />
     );
 };
 SkeletonRectangle.displayName = COMPONENT_NAME;
+SkeletonRectangle.defaultProps = DEFAULT_PROPS;
 
 export { CLASSNAME, COMPONENT_NAME, SkeletonRectangle, SkeletonRectangleProps, SkeletonRectangleVariant };
