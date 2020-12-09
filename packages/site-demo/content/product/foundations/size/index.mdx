@@ -1,0 +1,78 @@
+import { Alignment, FlexBox, Orientation, Size } from '@lumx/react';
+
+# Size
+
+**Sizes are names given to steps of dimension scales. They help design with visual consistency and give imaged names to easily refer to.**
+
+There are two scales, **T-shirt** scale, and **Abstract** scale.
+
+## T-shirt
+
+T-shirt sizes correspond to standardised values accross all the design system. T-shirt sizes go from `xxs` to `xxl`. Use t-shirt sizes to define precise and unvariable dimensions to elements. An element doesn’t have to exist in each of every sizes.
+
+<table style={{ textAlign: "left"}}>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Value</th>
+            <th>Example</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>xxs</strong></td>
+            <td>14dp</td>
+            <td><FlexBox hAlign={Alignment.center} vAlign={Alignment.center}
+                className="lumx-color-background-dark-L5" style={{width: "14px", height: "14px"}}></FlexBox></td>
+        </tr>
+        <tr>
+            <td><strong>xs</strong></td>
+            <td>20dp</td>
+            <td><FlexBox hAlign={Alignment.center} vAlign={Alignment.center} className="lumx-color-background-dark-L5" style={{width: "20px", height: "20px"}}></FlexBox>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>s</strong></td>
+            <td>24dp</td>
+            <td><FlexBox hAlign={Alignment.center} vAlign={Alignment.center} className="lumx-color-background-dark-L5" style={{width: "24px", height: "24px"}}></FlexBox>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>m</strong></td>
+            <td>36dp</td>
+            <td><FlexBox hAlign={Alignment.center} vAlign={Alignment.center} className="lumx-color-background-dark-L5" style={{width: "36px", height: "36px"}}></FlexBox>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>l</strong></td>
+            <td>64dp</td>
+            <td><FlexBox hAlign={Alignment.center} vAlign={Alignment.center} className="lumx-color-background-dark-L5" style={{width: "64px", height: "64px"}}></FlexBox>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>xl</strong></td>
+            <td>128dp</td>
+            <td><FlexBox hAlign={Alignment.center} vAlign={Alignment.center} className="lumx-color-background-dark-L5" style={{width: "128px", height: "128px"}}></FlexBox>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>xxl</strong></td>
+            <td>256dp</td>
+            <td><FlexBox hAlign={Alignment.center} vAlign={Alignment.center} className="lumx-color-background-dark-L5" style={{width: "256px", height: "256px"}}></FlexBox>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+### Example of user block in T-shirt size `m`
+
+<DemoBlock orientation="horizontal" demo="t-shirt-example" />
+
+## Abstract
+
+Abstract sizes don’t correspond to standardised values across the design system, they represent specific dimensions at a component level. They can be values like 400px or a specific behavior like full-screen with margins (see [Dialog](/product/components/dialog)). Abstract sizes are: `tiny`, `regular`, `big`, `huge`. Use Abstract sizes to define elements dimensions that don’t need to or can’t be standardised. An element doesn’t have to exist in each of every sizes.
+
+
+Example of a `big` [list](/product/components/list) component and a `big` [link-preview](/product/components/link-preview)
+
+<DemoBlock orientation="horizontal" demo="abstract-example" />
