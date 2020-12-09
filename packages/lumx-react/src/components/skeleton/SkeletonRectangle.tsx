@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { AspectRatio, GlobalSize } from '@lumx/react';
+import { AspectRatio, GlobalSize, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
@@ -18,14 +18,16 @@ enum SkeletonRectangleVariant {
  * Defines the props of the component.
  */
 interface SkeletonRectangleProps extends GenericProps {
+    /** The skeleton aspect ratio (use with width prop only). */
+    aspectRatio?: AspectRatio.square | AspectRatio.horizontal | AspectRatio.vertical;
     /** The height of the component from Size enum. */
     height?: GlobalSize;
+    /** Theme. */
+    theme?: Theme;
     /** The variant of the component. */
     variant?: SkeletonRectangleVariant;
     /** The width of the component from Size enum. */
     width?: GlobalSize;
-    /** The skeleton aspect ratio (use with width prop only). */
-    aspectRatio?: AspectRatio.square | AspectRatio.horizontal | AspectRatio.vertical;
 }
 
 const DEFAULT_PROPS: Partial<SkeletonRectangleProps> = {
@@ -46,6 +48,7 @@ const SkeletonRectangle: React.FC<SkeletonRectangleProps> = ({
     aspectRatio,
     className,
     height,
+    theme,
     variant,
     width,
     ...forwardedProps
@@ -57,6 +60,7 @@ const SkeletonRectangle: React.FC<SkeletonRectangleProps> = ({
                 prefix: CLASSNAME,
                 aspectRatio,
                 height: aspectRatio ? undefined : height,
+                theme,
                 variant,
                 width,
             }))}

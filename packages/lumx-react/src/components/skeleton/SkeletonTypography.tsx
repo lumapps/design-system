@@ -1,7 +1,7 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { CSSProperties } from 'react';
 
-import { Typography } from '@lumx/react';
+import { Theme, Typography } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
@@ -9,10 +9,12 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
  * Defines the props of the component.
  */
 interface SkeletonTypographyProps extends GenericProps {
+    /** Theme. */
+    theme?: Theme;
     /** The typography variant of the component. */
     typography: Typography;
-    /** The width of the component. */
-    width?: string;
+    /** The width of the component (CSS width property). */
+    width?: CSSProperties['width'];
 }
 
 /**
@@ -25,12 +27,12 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}SkeletonTypography`;
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
-const SkeletonTypography: React.FC<SkeletonTypographyProps> = ({ className, typography, width, ...forwardedProps }) => {
+const SkeletonTypography: React.FC<SkeletonTypographyProps> = ({ className, theme, typography, width, ...forwardedProps }) => {
     return (
         <div
             {...forwardedProps}
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, typography }))}
-            style={{ width }}
+            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, typography }))}
+            style={{ ...forwardedProps.style, width }}
         >
             <div className={`${CLASSNAME}__wrapper`} />
         </div>

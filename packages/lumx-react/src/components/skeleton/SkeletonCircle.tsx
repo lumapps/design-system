@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { GlobalSize, Size } from '@lumx/react';
+import { GlobalSize, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
@@ -11,6 +11,8 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 interface SkeletonCircleProps extends GenericProps {
     /** The size variant of the component. */
     size: GlobalSize;
+    /** Theme. */
+    theme?: Theme;
 }
 
 /**
@@ -23,9 +25,9 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}SkeletonCircle`;
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
-const SkeletonCircle: React.FC<SkeletonCircleProps> = ({ className, size, ...forwardedProps }) => {
+const SkeletonCircle: React.FC<SkeletonCircleProps> = ({ className, size, theme, ...forwardedProps }) => {
     return (
-        <div {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, size }))} />
+        <div {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, size, theme }))} />
     );
 };
 SkeletonCircle.displayName = COMPONENT_NAME;
