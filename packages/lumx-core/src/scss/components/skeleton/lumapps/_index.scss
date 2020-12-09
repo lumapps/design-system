@@ -30,10 +30,10 @@
     }
 }
 
-/* Rectangular
+/* Rectangle
    ========================================================================== */
 
-.#{$lumx-base-prefix}-skeleton-rectangular {
+.#{$lumx-base-prefix}-skeleton-rectangle {
     animation: skeleton-loading 1s ease-in-out 0s infinite;
     background-color: $lumx-color-dark-L5;
 
@@ -43,15 +43,15 @@
 }
 
 @each $key, $size in $lumx-sizes {
-    .#{$lumx-base-prefix}-skeleton-rectangular--width-#{$key} {
+    .#{$lumx-base-prefix}-skeleton-rectangle--width-#{$key} {
         width: map-get($lumx-sizes, $key);
     }
 
-    .#{$lumx-base-prefix}-skeleton-rectangular--height-#{$key} {
+    .#{$lumx-base-prefix}-skeleton-rectangle--height-#{$key} {
         height: map-get($lumx-sizes, $key);
     }
 
-    .#{$lumx-base-prefix}-skeleton-rectangular--variant-pill.#{$lumx-base-prefix}-skeleton-rectangular--height-#{$key} {
+    .#{$lumx-base-prefix}-skeleton-rectangle--variant-pill.#{$lumx-base-prefix}-skeleton-rectangle--height-#{$key} {
         border-radius: map-get($lumx-sizes, $key) / 2;
     }
 }
