@@ -19,8 +19,15 @@
 
 .#{$lumx-base-prefix}-skeleton-circle {
     animation: skeleton-loading 1s ease-in-out 0s infinite;
-    background-color: $lumx-color-dark-L5;
     border-radius: 50%;
+
+    &--theme-light {
+        background-color: lumx-color-variant('dark', 'L5');
+    }
+
+    &--theme-dark {
+        background-color: lumx-color-variant('light', 'L5');
+    }
 }
 
 @each $key, $size in $lumx-sizes {
@@ -35,10 +42,17 @@
 
 .#{$lumx-base-prefix}-skeleton-rectangle {
     animation: skeleton-loading 1s ease-in-out 0s infinite;
-    background-color: $lumx-color-dark-L5;
 
     &--variant-rounded {
         border-radius: $lumx-border-radius;
+    }
+
+    &--theme-light {
+        background-color: lumx-color-variant('dark', 'L5');
+    }
+
+    &--theme-dark {
+        background-color: lumx-color-variant('light', 'L5');
     }
 }
 
@@ -78,14 +92,23 @@ $typography-skeleton-size: (
 );
 
 .#{$lumx-base-prefix}-skeleton-typography {
+    $self: &;
+
     display: flex;
     align-items: center;
 
     &__inner {
         width: 100%;
         animation: skeleton-loading 1s ease-in-out 0s infinite;
-        background-color: $lumx-color-dark-L5;
         border-radius: $lumx-border-radius;
+
+        #{$self}--theme-light & {
+            background-color: lumx-color-variant('dark', 'L5');
+        }
+
+        #{$self}--theme-dark & {
+            background-color: lumx-color-variant('light', 'L5');
+        }
     }
 }
 
