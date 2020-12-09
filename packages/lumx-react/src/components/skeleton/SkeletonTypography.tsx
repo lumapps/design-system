@@ -27,14 +27,20 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}SkeletonTypography`;
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
-const SkeletonTypography: React.FC<SkeletonTypographyProps> = ({ className, theme, typography, width, ...forwardedProps }) => {
+const SkeletonTypography: React.FC<SkeletonTypographyProps> = ({
+    className,
+    theme,
+    typography,
+    width,
+    ...forwardedProps
+}) => {
     return (
         <div
             {...forwardedProps}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, typography }))}
             style={{ ...forwardedProps.style, width }}
         >
-            <div className={`${CLASSNAME}__wrapper`} />
+            <div className={`${CLASSNAME}__inner`} />
         </div>
     );
 };

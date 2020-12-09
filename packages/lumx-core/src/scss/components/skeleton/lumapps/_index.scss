@@ -56,6 +56,12 @@
     }
 }
 
+@each $key, $aspect-ratio in $lumx-thumbnail-aspect-ratio {
+    .#{$lumx-base-prefix}-skeleton-rectangle--aspect-ratio-#{$key} .#{$lumx-base-prefix}-skeleton-rectangle__inner {
+        padding-top: $aspect-ratio;
+    }
+}
+
 /* Typography
    ========================================================================== */
 
@@ -75,7 +81,7 @@ $typography-skeleton-size: (
     display: flex;
     align-items: center;
 
-    &__wrapper {
+    &__inner {
         width: 100%;
         animation: skeleton-loading 1s ease-in-out 0s infinite;
         background-color: $lumx-color-dark-L5;
@@ -88,7 +94,7 @@ $typography-skeleton-size: (
         height: map-get($lumx-typography-line-height, $key);
     }
 
-    .#{$lumx-base-prefix}-skeleton-typography--typography-#{$key} .#{$lumx-base-prefix}-skeleton-typography__wrapper {
+    .#{$lumx-base-prefix}-skeleton-typography--typography-#{$key} .#{$lumx-base-prefix}-skeleton-typography__inner {
         height: map-get($typography-skeleton-size, $key);
     }
 }

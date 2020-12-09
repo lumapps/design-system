@@ -32,7 +32,7 @@ interface SkeletonRectangleProps extends GenericProps {
 
 const DEFAULT_PROPS: Partial<SkeletonRectangleProps> = {
     variant: SkeletonRectangleVariant.squared,
-}
+};
 
 /**
  * The display name of the component.
@@ -56,15 +56,20 @@ const SkeletonRectangle: React.FC<SkeletonRectangleProps> = ({
     return (
         <div
             {...forwardedProps}
-            className={classNames(className, handleBasicClasses({
-                prefix: CLASSNAME,
-                aspectRatio,
-                height: aspectRatio ? undefined : height,
-                theme,
-                variant,
-                width,
-            }))}
-        />
+            className={classNames(
+                className,
+                handleBasicClasses({
+                    prefix: CLASSNAME,
+                    aspectRatio,
+                    height: aspectRatio ? undefined : height,
+                    theme,
+                    variant,
+                    width,
+                }),
+            )}
+        >
+            <div className={`${CLASSNAME}__inner`} />
+        </div>
     );
 };
 SkeletonRectangle.displayName = COMPONENT_NAME;
