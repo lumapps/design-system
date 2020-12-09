@@ -1,12 +1,13 @@
 import { ProgressTrackerStep } from '@lumx/react';
-
-import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { CommonSetup, commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 import React, { ReactElement } from 'react';
 import { setupTabProviderMocks } from '../tabs/test.mocks';
-import { CLASSNAME, ProgressTracker, ProgressTrackerProps } from './ProgressTracker';
+import { ProgressTracker, ProgressTrackerProps } from './ProgressTracker';
+
+const CLASSNAME = ProgressTracker.className as string;
 
 // Mock useTabProviderContext.
 jest.mock('../tabs/state', () => {
@@ -32,18 +33,13 @@ interface Setup extends CommonSetup {
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
- *
- * @param props  The props to use to override the default props of the component.
- * @param     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
- *                       component.
  */
-const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true): Setup => {
     const steps = [<ProgressTrackerStep key={0} label="Step 0" />, <ProgressTrackerStep key={1} label="Step 1" />];
     const props: ProgressTrackerProps = {
         children: steps,
         'aria-label': 'Steps',
-        ...propsOverrides,
+        ...propsOverride,
     };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
 

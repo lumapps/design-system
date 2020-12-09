@@ -9,7 +9,7 @@ import { Button, Emphasis, Icon, Size, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX, DOCUMENT, NOTIFICATION_TRANSITION_DURATION } from '@lumx/react/constants';
 import { NOTIFICATION_CONFIGURATION } from '@lumx/react/components/notification/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
 
@@ -53,7 +53,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Notification`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -63,12 +63,8 @@ const DEFAULT_PROPS: Partial<NotificationProps> = {
     zIndex: 9999,
 };
 
-/**
- * Notification.
- *
- * @return The notification component.
- */
-export const Notification: React.FC<NotificationProps> = ({
+/* eslint-disable react-hooks/rules-of-hooks, jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */
+export const Notification: Comp<NotificationProps> = ({
     actionLabel,
     className,
     content,
@@ -128,4 +124,5 @@ export const Notification: React.FC<NotificationProps> = ({
         : null;
 };
 Notification.displayName = COMPONENT_NAME;
+Notification.className = CLASSNAME;
 Notification.defaultProps = DEFAULT_PROPS;

@@ -6,7 +6,7 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
 import { mdiDragVertical } from '@lumx/icons';
 import { ColorPalette, Icon, Size, Theme } from '@lumx/react';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
@@ -24,11 +24,12 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}DragHandle`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
-export const DragHandle: React.FC<DragHandleProps> = ({ className, theme, ...forwardedProps }) => (
+export const DragHandle: Comp<DragHandleProps> = ({ className, theme, ...forwardedProps }) => (
     <div {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }))}>
         <Icon icon={mdiDragVertical} color={theme === Theme.dark ? ColorPalette.light : undefined} size={Size.xs} />
     </div>
 );
 DragHandle.displayName = COMPONENT_NAME;
+DragHandle.className = CLASSNAME;

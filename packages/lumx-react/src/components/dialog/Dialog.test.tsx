@@ -1,13 +1,14 @@
 import { ESCAPE_KEY_CODE } from '@lumx/core/js/constants';
-import { CLASSNAME, Dialog, DialogProps } from '@lumx/react/components/dialog/Dialog';
-
-import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { Dialog, DialogProps } from '@lumx/react/components/dialog/Dialog';
+import { CommonSetup, commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import * as stories from './Dialog.stories';
+
+const CLASSNAME = Dialog.className as string;
 
 // Mock out the useIntersectionObserver hook since it can't work with Jest/Enzyme.
 jest.mock('@lumx/react/hooks/useIntersectionObserver', () => ({
@@ -34,15 +35,10 @@ interface Setup extends CommonSetup {
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
- *
- * @param props  The props to use to override the default props of the component.
- * @param     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
- *                       component.
  */
-const setup = ({ ...props }: SetupProps = {}, shallowRendering = true): Setup => {
-    const renderer = shallowRendering ? shallow : mount;
-    // @ts-ignore
+const setup = (propsOverride: SetupProps = {}, shallowRendering = true): Setup => {
+    const props: any = { ...propsOverride };
+    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
     const wrapper = renderer(<Dialog isOpen {...props} />);
     const dialog = wrapper.find(`.${CLASSNAME}`);
 
@@ -63,7 +59,6 @@ describe(`<${Dialog.displayName}>`, () => {
             }
 
             it(`should render story ${storyName}`, () => {
-                // @ts-ignore
                 const wrapper = shallow(<Story />);
                 expect(wrapper).toMatchSnapshot();
             });
@@ -77,8 +72,7 @@ describe(`<${Dialog.displayName}>`, () => {
 
     // 3. Test events.
     describe('Events', () => {
-        // @ts-ignore
-        const keyDown = (keyCode) => new KeyboardEvent('keydown', { keyCode });
+        const keyDown = (keyCode: any) => new KeyboardEvent('keydown', { keyCode });
 
         it('should trigger `onClose` when pressing `escape` key', () => {
             const onClose = jest.fn();

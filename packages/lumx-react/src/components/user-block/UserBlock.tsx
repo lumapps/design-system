@@ -6,7 +6,7 @@ import { Avatar, Orientation, Size, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { AvatarProps } from '../avatar/Avatar';
 
 /**
@@ -57,7 +57,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}UserBlock`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -68,7 +68,7 @@ const DEFAULT_PROPS: Partial<UserBlockProps> = {
     theme: Theme.light,
 };
 
-export const UserBlock: React.FC<UserBlockProps> = ({
+export const UserBlock: Comp<UserBlockProps> = ({
     avatar,
     avatarProps,
     className,
@@ -148,4 +148,5 @@ export const UserBlock: React.FC<UserBlockProps> = ({
     );
 };
 UserBlock.displayName = COMPONENT_NAME;
+UserBlock.className = CLASSNAME;
 UserBlock.defaultProps = DEFAULT_PROPS;

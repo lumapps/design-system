@@ -3,7 +3,7 @@ import { Size } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 
 import { useKeyboardListNavigation, useKeyboardListNavigationType } from '@lumx/react/hooks/useKeyboardListNavigation';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
 import classNames from 'classnames';
@@ -45,13 +45,14 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}List`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 interface List {
     useKeyboardListNavigation: useKeyboardListNavigationType;
 }
 
-export const List: React.FC<ListProps> & List = ({
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
+export const List: Comp<ListProps> & List = ({
     children,
     className,
     isClickable,
@@ -90,4 +91,5 @@ export const List: React.FC<ListProps> & List = ({
 };
 
 List.displayName = COMPONENT_NAME;
+List.className = CLASSNAME;
 List.useKeyboardListNavigation = useKeyboardListNavigation;

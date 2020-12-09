@@ -27,7 +27,7 @@ export interface ClickAwayParameters {
  *
  * Warning: If you need to detect click away on nested React portals, please use the `ClickAwayProvider` component.
  */
-export function useClickAway({ callback, refs }: ClickAwayParameters) {
+export function useClickAway({ callback, refs }: ClickAwayParameters): void {
     useEffect(() => {
         if (!callback || !refs || isEmpty(refs)) {
             return undefined;

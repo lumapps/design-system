@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import React, { CSSProperties, useCallback, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
@@ -8,7 +7,7 @@ import { Theme } from '@lumx/react';
 import { AUTOPLAY_DEFAULT_INTERVAL, FULL_WIDTH_PERCENT } from '@lumx/react/components/slideshow/constants';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { useInterval } from '@lumx/react/hooks';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { SlideshowControls } from './SlideshowControls';
 
@@ -32,7 +31,7 @@ export interface SlideshowProps extends GenericProps {
     theme?: Theme;
     /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
-    /* Callback when slide changes */
+    /** Callback when slide changes */
     onChange?(index: number): void;
 }
 
@@ -44,7 +43,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Slideshow`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -56,7 +55,8 @@ const DEFAULT_PROPS: Partial<SlideshowProps> = {
     theme: Theme.light,
 };
 
-export const Slideshow: React.FC<SlideshowProps> = ({
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
+export const Slideshow: Comp<SlideshowProps> = ({
     activeIndex,
     autoPlay,
     children,
@@ -123,7 +123,7 @@ export const Slideshow: React.FC<SlideshowProps> = ({
 
     useEffect(() => {
         if (currentIndex > slidesCount - 1) {
-            setCurrentIndex(DEFAULT_PROPS.activeIndex!);
+            setCurrentIndex(DEFAULT_PROPS.activeIndex as number);
         }
     }, [currentIndex, slidesCount]);
 
@@ -213,4 +213,5 @@ export const Slideshow: React.FC<SlideshowProps> = ({
     );
 };
 Slideshow.displayName = COMPONENT_NAME;
+Slideshow.className = CLASSNAME;
 Slideshow.defaultProps = DEFAULT_PROPS;

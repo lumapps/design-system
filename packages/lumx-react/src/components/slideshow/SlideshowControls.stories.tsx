@@ -53,7 +53,7 @@ export const ControllingSlideshow = ({ theme }: any) => {
                 activeIndex={activeIndex}
                 hasControls={false}
                 theme={theme}
-                autoPlay={true}
+                autoPlay
                 groupBy={1}
                 style={slideshowStyle}
                 onChange={setActiveIndex}

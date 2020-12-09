@@ -8,7 +8,7 @@ import isEmpty from 'lodash/isEmpty';
 import { InputHelper, InputLabel, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 export enum SwitchPosition {
     left = 'left',
@@ -47,7 +47,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Switch`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -57,7 +57,7 @@ const DEFAULT_PROPS: Partial<SwitchProps> = {
     theme: Theme.light,
 };
 
-export const Switch: React.FC<SwitchProps> = ({
+export const Switch: Comp<SwitchProps> = ({
     checked,
     children,
     className,
@@ -132,4 +132,5 @@ export const Switch: React.FC<SwitchProps> = ({
     );
 };
 Switch.displayName = COMPONENT_NAME;
+Switch.className = CLASSNAME;
 Switch.defaultProps = DEFAULT_PROPS;

@@ -10,7 +10,7 @@ import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
 /**
@@ -172,7 +172,7 @@ const applyMaxHeight = {
     },
 };
 
-export const Popover: React.FC<PopoverProps> = (props) => {
+export const Popover: Comp<PopoverProps> = (props) => {
     if (!DOCUMENT) {
         // Can't render in SSR.
         return null;
@@ -272,4 +272,5 @@ export const Popover: React.FC<PopoverProps> = (props) => {
         : null;
 };
 Popover.displayName = COMPONENT_NAME;
+Popover.className = CLASSNAME;
 Popover.defaultProps = DEFAULT_PROPS;

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
@@ -26,14 +26,14 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Toolbar`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
 const DEFAULT_PROPS: Partial<ToolbarProps> = {};
 
-export const Toolbar: React.FC<ToolbarProps> = ({ after, before, className, label, ...forwardedProps }) => {
+export const Toolbar: Comp<ToolbarProps> = ({ after, before, className, label, ...forwardedProps }) => {
     return (
         <div
             {...forwardedProps}
@@ -54,4 +54,5 @@ export const Toolbar: React.FC<ToolbarProps> = ({ after, before, className, labe
     );
 };
 Toolbar.displayName = COMPONENT_NAME;
+Toolbar.className = CLASSNAME;
 Toolbar.defaultProps = DEFAULT_PROPS;

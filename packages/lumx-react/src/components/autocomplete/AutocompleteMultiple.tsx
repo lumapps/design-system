@@ -2,7 +2,7 @@ import { mdiClose } from '@lumx/icons';
 import { Autocomplete, AutocompleteProps, Chip, ChipGroup, Icon, Size } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import classNames from 'classnames';
 import React, { ReactNode } from 'react';
@@ -14,7 +14,7 @@ export interface AutocompleteMultipleProps extends AutocompleteProps {
     /**
      * The list of selected values.
      */
-    values: object[];
+    values: any[];
 
     /**
      * How the chips are aligned on the autocomplete
@@ -27,9 +27,9 @@ export interface AutocompleteMultipleProps extends AutocompleteProps {
      * in order to reflect that.
      */
     selectedChipRender(
-        choice: object,
+        choice: any,
         index: number,
-        onClear?: (event: React.MouseEvent, choice: object) => void,
+        onClear?: (event: React.MouseEvent, choice: any) => void,
         isDisabled?: boolean,
     ): ReactNode | string;
 }
@@ -42,7 +42,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}AutocompleteMultiple`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -68,7 +68,7 @@ const DEFAULT_PROPS: Partial<AutocompleteMultipleProps> = {
     values: [],
 };
 
-export const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = ({
+export const AutocompleteMultiple: Comp<AutocompleteMultipleProps> = ({
     anchorToInput,
     children,
     chipsAlignment,
@@ -126,7 +126,7 @@ export const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = ({
         inputRef={inputRef}
         chips={
             <ChipGroup align={chipsAlignment}>
-                {values!.map((chip: object, index: number) => selectedChipRender!(chip, index, onClear))}
+                {values && values.map((chip, index) => selectedChipRender(chip, index, onClear))}
             </ChipGroup>
         }
         isDisabled={isDisabled}
@@ -150,4 +150,5 @@ export const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = ({
     </Autocomplete>
 );
 AutocompleteMultiple.displayName = COMPONENT_NAME;
+AutocompleteMultiple.className = CLASSNAME;
 AutocompleteMultiple.defaultProps = DEFAULT_PROPS;

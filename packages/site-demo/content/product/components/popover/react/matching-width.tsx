@@ -26,7 +26,7 @@ export const App = ({ theme }: any) => {
                 placement={Placement.BOTTOM_START}
                 fitToAnchorWidth
             >
-                Popover's width matching anchor's
+                Popover&apos;s width matching anchor&apos;s
             </Popover>
         </>
     );

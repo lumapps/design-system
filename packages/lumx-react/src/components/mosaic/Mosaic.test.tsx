@@ -1,13 +1,14 @@
-import { CLASSNAME, Mosaic, MosaicProps } from '@lumx/react/components/mosaic/Mosaic';
-
-import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { Mosaic, MosaicProps } from '@lumx/react/components/mosaic/Mosaic';
+import { CommonSetup, commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
-import React from 'react';
 
+import React, { ReactElement } from 'react';
 import { Theme } from '..';
 import * as stories from './Mosaic.stories';
+
+const CLASSNAME = Mosaic.className as string;
 
 // Mock out the useIntersectionObserver hook since it can't work with Jest/Enzyme.
 jest.mock('@lumx/react/hooks/useIntersectionObserver', () => ({
@@ -35,15 +36,10 @@ interface Setup extends CommonSetup {
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
- *
- * @param props  The props to use to override the default props of the component.
- * @param     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
- *                       component.
  */
-const setup = ({ ...props }: SetupProps = {}, shallowRendering = true): Setup => {
-    const renderer = shallowRendering ? shallow : mount;
-    // @ts-ignore
+const setup = (propsOverride: SetupProps = {}, shallowRendering = true): Setup => {
+    const props: any = { ...propsOverride };
+    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
     const wrapper = renderer(<Mosaic {...props} />);
 
     return {
@@ -63,7 +59,6 @@ describe(`<${Mosaic.displayName}>`, () => {
             }
 
             it(`should render story ${storyName}`, () => {
-                // @ts-ignore
                 const wrapper = shallow(<Story />);
                 expect(wrapper.find('Mosaic').dive()).toMatchSnapshot();
             });

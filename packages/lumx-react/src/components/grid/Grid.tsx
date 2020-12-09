@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { Alignment, Orientation, Size } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 type GridGutterSize = Size.regular | Size.big | Size.huge;
 
@@ -32,7 +32,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Grid`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -42,7 +42,7 @@ const DEFAULT_PROPS: Partial<GridProps> = {
     wrap: 'nowrap',
 };
 
-export const Grid: React.FC<GridProps> = ({
+export const Grid: Comp<GridProps> = ({
     children,
     className,
     gutter,
@@ -68,4 +68,5 @@ export const Grid: React.FC<GridProps> = ({
     );
 };
 Grid.displayName = COMPONENT_NAME;
+Grid.className = CLASSNAME;
 Grid.defaultProps = DEFAULT_PROPS;

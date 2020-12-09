@@ -10,6 +10,7 @@ import { Emphasis, Icon, Size } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import {
     Callback,
+    Comp,
     GenericProps,
     getRootClassName,
     handleBasicClasses,
@@ -54,7 +55,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}SideNavigationItem`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -63,7 +64,7 @@ const DEFAULT_PROPS: Partial<SideNavigationItemProps> = {
     emphasis: Emphasis.high,
 };
 
-export const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
+export const SideNavigationItem: Comp<SideNavigationItemProps> = (props) => {
     const {
         children,
         className,
@@ -145,4 +146,5 @@ export const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => 
     );
 };
 SideNavigationItem.displayName = COMPONENT_NAME;
+SideNavigationItem.className = CLASSNAME;
 SideNavigationItem.defaultProps = DEFAULT_PROPS;

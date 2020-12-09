@@ -10,7 +10,7 @@ import { Callback } from '../utils';
  * @param callback Function called by setInterval.
  * @param     delay    Delay for setInterval.
  */
-export function useInterval(callback: Callback, delay: number | null) {
+export function useInterval(callback: Callback, delay: number | null): void {
     const savedCallback = useRef<Callback>();
 
     useEffect(() => {

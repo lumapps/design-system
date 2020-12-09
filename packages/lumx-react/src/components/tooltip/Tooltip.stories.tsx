@@ -37,7 +37,7 @@ export const MultilineTooltip = () => (
         <Tooltip label="Only one sentence.">
             <Button>One line</Button>
         </Tooltip>
-        <Tooltip label={'First sentence.\nSecond sentence.\nThird sentence.\n'}>
+        <Tooltip label="First sentence.\nSecond sentence.\nThird sentence.\n">
             <Button>Multiline</Button>
         </Tooltip>
     </>
@@ -48,7 +48,7 @@ export const EmptyTooltip = () => (
         <Tooltip label="">
             <Button>Empty</Button>
         </Tooltip>
-        <Tooltip label={false && 'tooltip'}>
+        <Tooltip label={false}>
             <Button>Conditionnaly not displayed</Button>
         </Tooltip>
     </>

@@ -55,8 +55,8 @@
 
 // Hover state
 .#{$lumx-base-prefix}-switch--is-unchecked
-.#{$lumx-base-prefix}-switch__input-native:hover
-+ .#{$lumx-base-prefix}-switch__input-placeholder {
+    .#{$lumx-base-prefix}-switch__input-native:hover
+    + .#{$lumx-base-prefix}-switch__input-placeholder {
     .#{$lumx-base-prefix}-switch__input-indicator {
         @include lumx-state(
             lumx-base-const('state', 'HOVER'),
@@ -68,8 +68,8 @@
 }
 
 .#{$lumx-base-prefix}-switch--is-checked
-.#{$lumx-base-prefix}-switch__input-native:hover
-+ .#{$lumx-base-prefix}-switch__input-placeholder {
+    .#{$lumx-base-prefix}-switch__input-native:hover
+    + .#{$lumx-base-prefix}-switch__input-placeholder {
     .#{$lumx-base-prefix}-switch__input-indicator {
         @include lumx-state(
             lumx-base-const('state', 'HOVER'),
@@ -82,8 +82,8 @@
 
 // Active state
 .#{$lumx-base-prefix}-switch--is-unchecked
-.#{$lumx-base-prefix}-switch__input-native:active
-+ .#{$lumx-base-prefix}-switch__input-placeholder {
+    .#{$lumx-base-prefix}-switch__input-native:active
+    + .#{$lumx-base-prefix}-switch__input-placeholder {
     .#{$lumx-base-prefix}-switch__input-indicator {
         @include lumx-state(
             lumx-base-const('state', 'ACTIVE'),
@@ -95,8 +95,8 @@
 }
 
 .#{$lumx-base-prefix}-switch--is-checked
-.#{$lumx-base-prefix}-switch__input-native:active
-+ .#{$lumx-base-prefix}-switch__input-placeholder {
+    .#{$lumx-base-prefix}-switch__input-native:active
+    + .#{$lumx-base-prefix}-switch__input-placeholder {
     .#{$lumx-base-prefix}-switch__input-indicator {
         @include lumx-state(
             lumx-base-const('state', 'ACTIVE'),
@@ -109,8 +109,8 @@
 
 // Focus state
 .#{$lumx-base-prefix}-switch--is-unchecked
-.#{$lumx-base-prefix}-switch__input-native[data-focus-visible-added]
-+ .#{$lumx-base-prefix}-switch__input-placeholder {
+    .#{$lumx-base-prefix}-switch__input-native[data-focus-visible-added]
+    + .#{$lumx-base-prefix}-switch__input-placeholder {
     box-shadow: none !important;
 
     .#{$lumx-base-prefix}-switch__input-indicator {
@@ -124,8 +124,8 @@
 }
 
 .#{$lumx-base-prefix}-switch--is-checked
-.#{$lumx-base-prefix}-switch__input-native[data-focus-visible-added]
-+ .#{$lumx-base-prefix}-switch__input-placeholder {
+    .#{$lumx-base-prefix}-switch__input-native[data-focus-visible-added]
+    + .#{$lumx-base-prefix}-switch__input-placeholder {
     box-shadow: none !important;
 
     .#{$lumx-base-prefix}-switch__input-indicator {

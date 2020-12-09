@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { Avatar, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, ENTER_KEY_CODE } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import isFunction from 'lodash/isFunction';
 import { AvatarProps } from '../avatar/Avatar';
@@ -58,7 +58,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}CommentBlock`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -67,7 +67,7 @@ const DEFAULT_PROPS: Partial<CommentBlockProps> = {
     theme: Theme.light,
 };
 
-export const CommentBlock: React.FC<CommentBlockProps> = ({
+export const CommentBlock: Comp<CommentBlockProps> = ({
     actions,
     avatar,
     avatarProps,
@@ -144,4 +144,5 @@ export const CommentBlock: React.FC<CommentBlockProps> = ({
     );
 };
 CommentBlock.displayName = COMPONENT_NAME;
+CommentBlock.className = CLASSNAME;
 CommentBlock.defaultProps = DEFAULT_PROPS;

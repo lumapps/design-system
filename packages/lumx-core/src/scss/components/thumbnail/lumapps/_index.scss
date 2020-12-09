@@ -82,7 +82,7 @@
 
 @each $key, $aspect-ratio in $lumx-thumbnail-aspect-ratio {
     .#{$lumx-base-prefix}-thumbnail--aspect-ratio-#{$key}:not(.#{$lumx-base-prefix}-thumbnail--fill-height)
-    .#{$lumx-base-prefix}-thumbnail__background {
+        .#{$lumx-base-prefix}-thumbnail__background {
         padding-top: $aspect-ratio;
     }
 }

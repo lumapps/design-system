@@ -1,4 +1,5 @@
 import React, { ReactNode, useEffect, useReducer } from 'react';
+import { Comp } from '@lumx/react/utils';
 import { INIT_STATE, TabProviderContext, reducer } from './state';
 
 export interface TabProviderProps {
@@ -30,22 +31,30 @@ const DEFAULT_PROPS: Partial<TabProviderProps> = {
  * @param  props React component props.
  * @return React element.
  */
-export const TabProvider: React.FC<TabProviderProps> = (props) => {
+export const TabProvider: Comp<TabProviderProps> = (props) => {
     const { children, onChange, ...propState } = props;
     const [state, dispatch] = useReducer(reducer, INIT_STATE);
 
     // On prop state change => dispatch update.
-    useEffect(() => {
-        dispatch({ type: 'update', payload: propState });
-    }, [dispatch, ...Object.values(propState)]);
+    useEffect(
+        () => {
+            dispatch({ type: 'update', payload: propState });
+        },
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [dispatch, ...Object.values(propState)],
+    );
 
     // On active tab index state change => send update to the onChange.
-    useEffect(() => {
-        if (state === INIT_STATE || !onChange || propState.activeTabIndex === state.activeTabIndex) {
-            return;
-        }
-        onChange(state.activeTabIndex);
-    }, [onChange, state.activeTabIndex]);
+    useEffect(
+        () => {
+            if (state === INIT_STATE || !onChange || propState.activeTabIndex === state.activeTabIndex) {
+                return;
+            }
+            onChange(state.activeTabIndex);
+        },
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [onChange, propState.activeTabIndex],
+    );
 
     return <TabProviderContext.Provider value={[state, dispatch]}>{children}</TabProviderContext.Provider>;
 };

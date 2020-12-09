@@ -1,16 +1,11 @@
 import React from 'react';
-
 import moment from 'moment';
-
 import classNames from 'classnames';
-
-import { Emphasis, IconButton, Toolbar } from '@lumx/react';
-
+import { DatePickerProps, Emphasis, IconButton, Toolbar } from '@lumx/react';
 import { mdiChevronLeft, mdiChevronRight } from '@lumx/icons';
-
 import { getAnnotatedMonthCalendar, getWeekDays } from '@lumx/core/js/date-picker';
-
-import { DatePickerProps, CLASSNAME } from './base';
+import { Comp } from '@lumx/react/utils';
+import { CLASSNAME } from './constants';
 
 /**
  * Defines the props of the component.
@@ -29,7 +24,7 @@ export interface DatePickerControlledProps extends DatePickerProps {
  */
 const COMPONENT_NAME = 'DatePickerControlled';
 
-export const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
+export const DatePickerControlled: Comp<DatePickerControlledProps> = ({
     locale,
     maxDate,
     minDate,
@@ -106,3 +101,4 @@ export const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
     );
 };
 DatePickerControlled.displayName = COMPONENT_NAME;
+DatePickerControlled.className = CLASSNAME;

@@ -7,7 +7,7 @@ import isObject from 'lodash/isObject';
 import { Orientation, Theme, Thumbnail, ThumbnailProps, ThumbnailVariant } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
@@ -50,7 +50,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}PostBlock`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -60,7 +60,7 @@ const DEFAULT_PROPS: Partial<PostBlockProps> = {
     theme: Theme.light,
 };
 
-export const PostBlock: React.FC<PostBlockProps> = ({
+export const PostBlock: Comp<PostBlockProps> = ({
     actions,
     attachments,
     author,
@@ -94,14 +94,15 @@ export const PostBlock: React.FC<PostBlockProps> = ({
                 {author && <div className={`${CLASSNAME}__author`}>{author}</div>}
 
                 {title && (
-                    <a className={`${CLASSNAME}__title`} onClick={onClick}>
+                    <button type="button" className={`${CLASSNAME}__title`} onClick={onClick}>
                         {title}
-                    </a>
+                    </button>
                 )}
 
                 {meta && <span className={`${CLASSNAME}__meta`}>{meta}</span>}
 
                 {isObject(text) && text.__html ? (
+                    // eslint-disable-next-line react/no-danger
                     <p dangerouslySetInnerHTML={text} className={`${CLASSNAME}__text`} />
                 ) : (
                     <p className={`${CLASSNAME}__text`}>{text}</p>
@@ -120,4 +121,5 @@ export const PostBlock: React.FC<PostBlockProps> = ({
 };
 
 PostBlock.displayName = COMPONENT_NAME;
+PostBlock.className = CLASSNAME;
 PostBlock.defaultProps = DEFAULT_PROPS;

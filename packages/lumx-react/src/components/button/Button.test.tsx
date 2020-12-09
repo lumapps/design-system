@@ -4,11 +4,12 @@ import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
 import { mdiCheck, mdiChevronDown, mdiPlus } from '@lumx/icons';
-import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { CommonSetup, commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
-import { Button, ButtonProps, CLASSNAME } from './Button';
+import { Button, ButtonProps } from './Button';
 
 const DEFAULT_PROPS = Button.defaultProps as any;
+const CLASSNAME = Button.className as string;
 
 /**
  * Define the overriding properties waited by the `setup` function.
@@ -34,14 +35,11 @@ interface Setup extends CommonSetup {
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
- *
- * @param  props                   The props to use to override the default props of the component.
- * @param  [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup = ({ ...props }: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = (propsOverride: SetupProps = {}, shallowRendering = true): Setup => {
+    const props: any = { ...propsOverride };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    // @ts-ignore
+
     const wrapper: Wrapper = renderer(<Button {...props} />);
 
     return {

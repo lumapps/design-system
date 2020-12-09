@@ -1,6 +1,6 @@
 import { useTabProviderContext } from '@lumx/react/components/tabs/state';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
-import { GenericProps, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, handleBasicClasses } from '@lumx/react/utils';
 
 import classNames from 'classnames';
 import React from 'react';
@@ -23,7 +23,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}ProgressTrackerStepPanel`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = `${CSS_PREFIX}-step-panel`;
+const CLASSNAME = `${CSS_PREFIX}-step-panel`;
 
 /**
  * The default value of props.
@@ -38,7 +38,7 @@ const DEFAULT_PROPS: Partial<ProgressTrackerStepPanelProps> = {};
  * @param  props Component props.
  * @return React element.
  */
-export const ProgressTrackerStepPanel: React.FC<ProgressTrackerStepPanelProps> = (props) => {
+export const ProgressTrackerStepPanel: Comp<ProgressTrackerStepPanelProps> = (props) => {
     const { children, id, className, isActive: propIsActive, ...forwardedProps } = props;
 
     const state = useTabProviderContext('tabPanel', id);
@@ -58,4 +58,5 @@ export const ProgressTrackerStepPanel: React.FC<ProgressTrackerStepPanelProps> =
     );
 };
 ProgressTrackerStepPanel.displayName = COMPONENT_NAME;
+ProgressTrackerStepPanel.className = CLASSNAME;
 ProgressTrackerStepPanel.defaultProps = DEFAULT_PROPS;

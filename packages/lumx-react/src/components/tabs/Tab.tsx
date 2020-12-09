@@ -1,6 +1,6 @@
 import { Icon, IconProps, Size } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX, ENTER_KEY_CODE } from '@lumx/react/constants';
-import { GenericProps, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, handleBasicClasses } from '@lumx/react/utils';
 
 import classNames from 'classnames';
 import React, { FocusEventHandler, KeyboardEventHandler, ReactNode, useCallback } from 'react';
@@ -32,7 +32,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Tab`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = `${CSS_PREFIX}-tabs__link`;
+const CLASSNAME = `${CSS_PREFIX}-tabs__link`;
 
 /**
  * The default value of props.
@@ -47,7 +47,7 @@ const DEFAULT_PROPS: Partial<TabProps> = {};
  * @param  props Component props.
  * @return React element.
  */
-export const Tab: React.FC<TabProps> = (props) => {
+export const Tab: Comp<TabProps> = (props) => {
     const {
         className,
         disabled,
@@ -69,7 +69,7 @@ export const Tab: React.FC<TabProps> = (props) => {
             return;
         }
         state?.changeToTab();
-    }, [isDisabled, state?.changeToTab]);
+    }, [isDisabled, state]);
 
     const handleFocus: FocusEventHandler = useCallback(
         (event) => {
@@ -78,7 +78,7 @@ export const Tab: React.FC<TabProps> = (props) => {
                 changeToCurrentTab();
             }
         },
-        [onFocus, state?.shouldActivateOnFocus],
+        [changeToCurrentTab, onFocus, state?.shouldActivateOnFocus],
     );
 
     const handleKeyPress: KeyboardEventHandler = useCallback(
@@ -90,12 +90,13 @@ export const Tab: React.FC<TabProps> = (props) => {
             }
             changeToCurrentTab();
         },
-        [onKeyPress],
+        [changeToCurrentTab, onKeyPress],
     );
 
     return (
         <button
             {...forwardedProps}
+            type="button"
             id={state?.tabId}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, isActive, isDisabled }))}
             onClick={changeToCurrentTab}
@@ -113,4 +114,5 @@ export const Tab: React.FC<TabProps> = (props) => {
     );
 };
 Tab.displayName = COMPONENT_NAME;
+Tab.className = CLASSNAME;
 Tab.defaultProps = DEFAULT_PROPS;

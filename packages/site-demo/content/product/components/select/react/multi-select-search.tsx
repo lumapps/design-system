@@ -45,10 +45,7 @@ export const App = ({ theme }: any) => {
 
     const [filterValue, setFilterValue] = React.useState('');
     const filteredChoices = CHOICES_WITH_ICONS.filter((choice) =>
-        choice.label
-            .replace(' ', '')
-            .toLowerCase()
-            .includes(filterValue.replace(' ', '').toLowerCase()),
+        choice.label.replace(' ', '').toLowerCase().includes(filterValue.replace(' ', '').toLowerCase()),
     );
 
     const selectedChipRender = (choice: string, index: number, onClear: any, isDisabled: boolean) => {

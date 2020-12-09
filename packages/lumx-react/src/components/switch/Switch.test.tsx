@@ -10,9 +10,10 @@ import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/util
 import { getBasicClass } from '@lumx/react/utils';
 
 import { Theme } from '@lumx/react';
-import { CLASSNAME, Switch, SwitchPosition, SwitchProps } from './Switch';
+import { Switch, SwitchPosition, SwitchProps } from './Switch';
 
 const DEFAULT_PROPS = Switch.defaultProps as any;
+const CLASSNAME = Switch.className as string;
 
 /**
  * Define the overriding properties waited by the `setup` function.
@@ -58,15 +59,10 @@ interface Setup extends CommonSetup {
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
- *
- * @param props  The props to use to override the default props of the component.
- * @param     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
- *                       component.
  */
-const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true): Setup => {
     const props: SwitchProps = {
-        ...propsOverrides,
+        ...propsOverride,
     };
 
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
@@ -147,6 +143,7 @@ describe(`<${Switch.displayName}>`, () => {
                 let defaultProp: any = DEFAULT_PROPS[prop];
 
                 if (prop === 'checked') {
+                    // eslint-disable-next-line no-param-reassign
                     prop = 'unchecked';
                     defaultProp = true;
                 }
@@ -170,7 +167,7 @@ describe(`<${Switch.displayName}>`, () => {
                 if (prop === 'checked') {
                     if (modifiedProps[prop]) {
                         expect(root).toHaveClassName(
-                            getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop]! }),
+                            getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop] }),
                         );
                     } else {
                         expect(root).toHaveClassName(

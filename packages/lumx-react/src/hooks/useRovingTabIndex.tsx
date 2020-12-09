@@ -13,7 +13,7 @@ export const useRovingTabIndex = ({
     elementSelector,
     keepTabIndex,
     extraDependencies = [],
-}: UseRovingTabIndexOptions) => {
+}: UseRovingTabIndexOptions): void => {
     useEffect(
         () => {
             const parent = parentRef?.current;

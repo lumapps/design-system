@@ -1,10 +1,10 @@
 import classNames from 'classnames';
 import isString from 'lodash/isString';
-import Highlight, { Language, defaultProps } from 'prism-react-renderer';
+import Highlight, { defaultProps, Language } from 'prism-react-renderer';
 import React from 'react';
 import { theme } from './init-prism';
 import { renderJSXLinesWithCollapsedImports } from './renderJSXLinesWithCollapsedImports';
-import { RenderLineParams } from './types';
+import { renderLines } from './renderLines';
 
 interface Props {
     /** Class name. */
@@ -14,15 +14,6 @@ interface Props {
     /** Code language (tsx, jsx, etc.) */
     language?: Language | 'tsx';
 }
-
-export const renderLines = ({ tokens, getLineProps, getTokenProps }: RenderLineParams) =>
-    tokens.map((line, i) => (
-        <div {...getLineProps({ line, key: i })}>
-            {line.map((token, key) => (
-                <span {...getTokenProps({ token, key })} />
-            ))}
-        </div>
-    ));
 
 export const CodeBlock: React.FC<Props> = ({ className, codeString, language: propLanguage, children }) => {
     const language = propLanguage || className?.match(/language-(\w+)/)?.[1];

@@ -10,7 +10,14 @@ import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { useIntersectionObserver } from '@lumx/react/hooks/useIntersectionObserver';
-import { GenericProps, getRootClassName, handleBasicClasses, isComponent, partitionMulti } from '@lumx/react/utils';
+import {
+    Comp,
+    GenericProps,
+    getRootClassName,
+    handleBasicClasses,
+    isComponent,
+    partitionMulti,
+} from '@lumx/react/utils';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 
 import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
@@ -60,7 +67,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Dialog`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -69,7 +76,7 @@ const DEFAULT_PROPS: Partial<DialogProps> = {
     size: Size.big,
 };
 
-export const Dialog: React.FC<DialogProps> = (props) => {
+export const Dialog: Comp<DialogProps> = (props) => {
     if (!DOCUMENT) {
         // Can't render in SSR.
         return null;
@@ -85,7 +92,6 @@ export const Dialog: React.FC<DialogProps> = (props) => {
         footer,
         isLoading,
         isOpen,
-        onOpen,
         onClose,
         parentElement,
         contentRef,
@@ -118,8 +124,8 @@ export const Dialog: React.FC<DialogProps> = (props) => {
         threshold: [0, 1],
     });
 
-    const hasTopIntersection = !(intersections.get(sentinelTop!)?.isIntersecting ?? true);
-    const hasBottomIntersection = !(intersections.get(sentinelBottom!)?.isIntersecting ?? true);
+    const hasTopIntersection = sentinelTop && !(intersections.get(sentinelTop)?.isIntersecting ?? true);
+    const hasBottomIntersection = sentinelBottom && !(intersections.get(sentinelBottom)?.isIntersecting ?? true);
 
     // Separate header, footer and dialog content from children.
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -214,4 +220,5 @@ export const Dialog: React.FC<DialogProps> = (props) => {
         : null;
 };
 Dialog.displayName = COMPONENT_NAME;
+Dialog.className = CLASSNAME;
 Dialog.defaultProps = DEFAULT_PROPS;

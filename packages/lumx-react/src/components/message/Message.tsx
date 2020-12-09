@@ -1,7 +1,7 @@
 import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiInformation } from '@lumx/icons';
 import { ColorPalette, Icon, Size } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
 import React, { ReactNode } from 'react';
 
@@ -32,7 +32,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Message`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -61,7 +61,7 @@ const KIND_ICON = {
     [MessageKind.warning]: mdiAlertCircle,
 };
 
-export const Message: React.FC<MessageProps> = ({ children, className, hasBackground, kind, ...forwardedProps }) => {
+export const Message: Comp<MessageProps> = ({ children, className, hasBackground, kind, ...forwardedProps }) => {
     const icon = kind ? KIND_ICON[kind] : null;
 
     const color = kind ? KIND_COLOR[kind] : DEFAULT_PROPS.color;
@@ -83,4 +83,5 @@ export const Message: React.FC<MessageProps> = ({ children, className, hasBackgr
     );
 };
 Message.displayName = COMPONENT_NAME;
+Message.className = CLASSNAME;
 Message.defaultProps = DEFAULT_PROPS;

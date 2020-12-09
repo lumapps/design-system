@@ -2,6 +2,7 @@ import { mdiPencil } from '@lumx/icons';
 import { ColorPalette, Link, Theme, Typography } from '@lumx/react';
 import React from 'react';
 
+/* eslint-disable jsx-a11y/anchor-is-valid */
 export const App = ({ theme }: any) => {
     const color = theme === Theme.light ? ColorPalette.primary : ColorPalette.light;
     return (

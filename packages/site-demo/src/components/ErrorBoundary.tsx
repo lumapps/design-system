@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropsWithChildren, ReactNode } from 'react';
 
 /**
  * Defines the state of the component
@@ -11,8 +11,8 @@ interface State {
 /**
  * This component is in charge of catching any error and avoid to the whole application to crash.
  */
-export class ErrorBoundary extends React.Component<{}, State> {
-    constructor(props: any) {
+export class ErrorBoundary extends React.Component<PropsWithChildren<any>, State> {
+    constructor(props: PropsWithChildren<any>) {
         super(props);
         this.state = {
             error: undefined,
@@ -30,7 +30,7 @@ export class ErrorBoundary extends React.Component<{}, State> {
         return { error, hasError: true };
     }
 
-    public render() {
+    render(): ReactNode {
         const { error, hasError } = this.state;
 
         if (hasError) {
@@ -42,7 +42,6 @@ export class ErrorBoundary extends React.Component<{}, State> {
                 </>
             );
         }
-        // eslint-disable-next-line react/destructuring-assignment
         return this.props.children;
     }
 }

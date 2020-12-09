@@ -13,7 +13,7 @@ export const App = () => {
 
             <Dropdown
                 closeOnClickAway={false}
-                closeOnEscape={true}
+                closeOnEscape
                 onClose={closeDropdown}
                 placement={Placement.BOTTOM_START}
                 isOpen={isDropdownOpen}

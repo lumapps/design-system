@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import { Dispatch, createContext, useCallback, useContext, useEffect, useMemo } from 'react';
 import uuid from 'uuid/v4';
 
@@ -21,7 +20,7 @@ export type Action =
     | { type: 'setActiveTabIndex'; payload: number }
     | { type: 'register'; payload: { type: TabType; id: string } };
 
-export const reducer = (state: State, action: Action) => {
+export const reducer = (state: State, action: Action): State => {
     switch (action.type) {
         case 'update':
             return { ...state, ...action.payload };
@@ -51,6 +50,7 @@ export type TabState = Pick<Required<State>, 'isLazy' | 'shouldActivateOnFocus'>
     changeToTab(): void;
 };
 
+/* eslint-disable react-hooks/rules-of-hooks */
 export const useTabProviderContext = (type: TabType, originalId?: string): undefined | TabState => {
     const context = useContext(TabProviderContext);
     if (!context) {

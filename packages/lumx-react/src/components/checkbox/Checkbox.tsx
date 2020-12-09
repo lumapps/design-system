@@ -6,7 +6,7 @@ import { mdiCheck } from '@lumx/icons';
 
 import { Icon, InputHelper, InputLabel, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import uniqueId from 'lodash/uniqueId';
 
@@ -44,7 +44,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Checkbox`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -58,7 +58,7 @@ const DEFAULT_PROPS: Partial<CheckboxProps> = {
  *
  * @return The component.
  */
-export const Checkbox: React.FC<CheckboxProps> = ({
+export const Checkbox: Comp<CheckboxProps> = ({
     checked,
     className,
     disabled,
@@ -133,4 +133,5 @@ export const Checkbox: React.FC<CheckboxProps> = ({
     );
 };
 Checkbox.displayName = COMPONENT_NAME;
+Checkbox.className = CLASSNAME;
 Checkbox.defaultProps = DEFAULT_PROPS;

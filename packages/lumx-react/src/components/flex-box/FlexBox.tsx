@@ -1,6 +1,6 @@
 import { Alignment, Orientation } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
 import castArray from 'lodash/castArray';
 import React, { ReactNode } from 'react';
@@ -41,9 +41,9 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}FlexBox`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
-export const FlexBox: React.FC<FlexBoxProps> = ({
+export const FlexBox: Comp<FlexBoxProps> = ({
     children,
     className,
     fillSpace,
@@ -77,3 +77,4 @@ export const FlexBox: React.FC<FlexBoxProps> = ({
     </div>
 );
 FlexBox.displayName = COMPONENT_NAME;
+FlexBox.className = CLASSNAME;

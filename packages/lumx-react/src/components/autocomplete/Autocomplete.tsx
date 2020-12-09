@@ -5,9 +5,10 @@ import classNames from 'classnames';
 import { Dropdown, Offset, Placement, TextField, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { useFocus } from '@lumx/react/hooks/useFocus';
+import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
 /**
  * Defines the props of the component.
@@ -160,7 +161,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Autocomplete`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -173,7 +174,7 @@ const DEFAULT_PROPS: Partial<AutocompleteProps> = {
     shouldFocusOnClose: false,
 };
 
-export const Autocomplete: React.FC<AutocompleteProps> = ({
+export const Autocomplete: Comp<AutocompleteProps> = ({
     anchorToInput,
     children,
     chips,
@@ -187,7 +188,7 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
     hasError,
     helper,
     icon,
-    inputRef = useRef(null),
+    inputRef,
     isClearable,
     isDisabled = disabled,
     isOpen,
@@ -207,8 +208,9 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
     value,
     ...forwardedProps
 }) => {
+    const inputAnchorRef = useRef<HTMLElement>(null);
     const textFieldRef = useRef(null);
-    useFocus(inputRef.current, !isOpen && shouldFocusOnClose);
+    useFocus(inputAnchorRef.current, !isOpen && shouldFocusOnClose);
 
     return (
         <div
@@ -226,7 +228,7 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
                 hasError={hasError}
                 helper={helper}
                 icon={icon}
-                inputRef={inputRef}
+                inputRef={mergeRefs(inputAnchorRef, inputRef) as any}
                 isClearable={isClearable}
                 isDisabled={isDisabled}
                 isValid={isValid}
@@ -241,7 +243,7 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
                 value={value}
             />
             <Dropdown
-                anchorRef={anchorToInput ? inputRef : textFieldRef}
+                anchorRef={anchorToInput ? inputAnchorRef : textFieldRef}
                 closeOnClick={closeOnClick}
                 closeOnClickAway={closeOnClickAway}
                 closeOnEscape={closeOnEscape}
@@ -260,4 +262,5 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
     );
 };
 Autocomplete.displayName = COMPONENT_NAME;
+Autocomplete.className = CLASSNAME;
 Autocomplete.defaultProps = DEFAULT_PROPS;

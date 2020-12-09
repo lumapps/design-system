@@ -4,10 +4,11 @@ import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
 import noop from 'lodash/noop';
-
 import { CommonSetup, Wrapper } from '@lumx/react/testing/utils';
 
-import { CLASSNAME, Notification, NotificationProps, NotificationType } from './Notification';
+import { Notification, NotificationProps, NotificationType } from './Notification';
+
+const CLASSNAME = Notification.className as string;
 
 /**
  * Define the overriding properties waited by the `setup` function.
@@ -48,14 +49,10 @@ interface Setup extends CommonSetup {
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
- *
- * @param  props                   The props to use to override the default props of the component.
- * @param  [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup = (props: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = (propsOverride: SetupProps = {}, shallowRendering = true): Setup => {
+    const props: any = { ...propsOverride };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    // @ts-ignore
     const wrapper: Wrapper = renderer(<Notification {...props} />);
 
     const notification: Wrapper = wrapper.find('.lumx-notification');

@@ -7,12 +7,12 @@ import { flattenChildren } from '@lumx/react/utils/flattenChildren';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 import get from 'lodash/get';
 import {
+    cloneElement,
     Key,
     ReactElement,
     ReactNode,
     RefObject,
     SyntheticEvent,
-    cloneElement,
     useEffect,
     useMemo,
     useState,
@@ -25,6 +25,7 @@ interface Options {
     items: ReactNode[] | ReactNode;
     /** Reference to the list-like element controlling the navigation. */
     ref: RefObject<HTMLElement>;
+
     /**
      * Callback triggered on ARROW key navigation on a list item.
      *
@@ -32,6 +33,7 @@ interface Options {
      * @param key   React key of the navigated item.
      */
     onListItemNavigated?(index: number, key: Key | null): void;
+
     /**
      * Callback triggered on list item selection (via ENTER key or click).
      *
@@ -92,7 +94,7 @@ export const useInteractiveList: useInteractiveList = (options) => {
     useEffect(() => {
         const { current: listElement } = ref;
         if (!listElement) {
-            return;
+            return undefined;
         }
 
         /**
@@ -135,7 +137,7 @@ export const useInteractiveList: useInteractiveList = (options) => {
             // Move to next navigable item.
             do {
                 nextIndex = getNextIndex(nextIndex, keyCode);
-                iterations++;
+                iterations += 1;
             } while (
                 nextIndex !== INITIAL_INDEX &&
                 nextIndex !== activeItemIndex &&
@@ -165,7 +167,7 @@ export const useInteractiveList: useInteractiveList = (options) => {
             listElement.removeEventListener('focusout', onFocusOut);
             listElement.removeEventListener('keydown', onArrowPressed);
         };
-    }, [ref, activeItemIndex]);
+    }, [ref, activeItemIndex, items, onListItemNavigated]);
 
     return useMemo(() => {
         let hasClickableItem = false;
@@ -197,5 +199,5 @@ export const useInteractiveList: useInteractiveList = (options) => {
             });
         });
         return { items: transformedItems, hasClickableItem };
-    }, [items, activeItemIndex]);
+    }, [items, activeItemIndex, onListItemSelected]);
 };

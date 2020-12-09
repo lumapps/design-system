@@ -6,7 +6,7 @@ import { List, ListProps } from '@lumx/react/components/list/List';
 import { Offset, Placement, Popover } from '@lumx/react/components/popover/Popover';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { useInfiniteScroll } from '@lumx/react/hooks/useInfiniteScroll';
-import { GenericProps, getRootClassName, handleBasicClasses, isComponent } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, isComponent } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
@@ -81,7 +81,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Dropdown`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -96,7 +96,7 @@ const DEFAULT_PROPS: Partial<DropdownProps> = {
     shouldFocusOnOpen: true,
 };
 
-export const Dropdown: React.FC<DropdownProps> = (props) => {
+export const Dropdown: Comp<DropdownProps> = (props) => {
     const {
         anchorRef,
         children,
@@ -135,7 +135,7 @@ export const Dropdown: React.FC<DropdownProps> = (props) => {
                   isClickable: true,
               })
             : children;
-    }, [listElement, innerRef, children, className, closeOnClick, props]);
+    }, [children, closeOnClick, onClose]);
 
     return isOpen ? (
         <Popover
@@ -160,4 +160,5 @@ export const Dropdown: React.FC<DropdownProps> = (props) => {
     ) : null;
 };
 Dropdown.displayName = COMPONENT_NAME;
+Dropdown.className = CLASSNAME;
 Dropdown.defaultProps = DEFAULT_PROPS;

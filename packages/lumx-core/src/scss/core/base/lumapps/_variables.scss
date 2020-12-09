@@ -4,14 +4,14 @@ $lumx-base-constants: (
     'emphasis': (
         'HIGH': 'emphasis-high',
         'MEDIUM': 'emphasis-medium',
-        'LOW': 'emphasis-low'
+        'LOW': 'emphasis-low',
     ),
     'position': (
         'TOP': 'position-top',
         'RIGHT': 'position-right',
         'BOTTOM': 'position-bottom',
         'LEFT': 'position-left',
-        'CENTER': 'position-center'
+        'CENTER': 'position-center',
     ),
     'size': (
         'XXS': 'xxs',
@@ -20,21 +20,21 @@ $lumx-base-constants: (
         'M': 'm',
         'L': 'l',
         'XL': 'xl',
-        'XXL': 'xxl'
+        'XXL': 'xxl',
     ),
     'state': (
         'DEFAULT': 'state-default',
         'HOVER': 'state-hover',
         'ACTIVE': 'state-active',
-        'FOCUS': 'state-focus'
+        'FOCUS': 'state-focus',
     ),
     'theme': (
         'LIGHT': 'theme-light',
-        'DARK': 'theme-dark'
-    )
+        'DARK': 'theme-dark',
+    ),
 );
 
 $lumx-base-layers: (
     'high': 999,
-    'higher': 9999
+    'higher': 9999,
 );

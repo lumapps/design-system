@@ -3,7 +3,7 @@ import React from 'react';
 import { Emphasis, Icon, Size, Theme } from '@lumx/react';
 import { BaseButtonProps, ButtonRoot } from '@lumx/react/components/button/ButtonRoot';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { getRootClassName } from '@lumx/react/utils';
+import { Comp, getRootClassName } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
@@ -24,7 +24,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}IconButton`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -35,7 +35,7 @@ const DEFAULT_PROPS: Partial<IconButtonProps> = {
     theme: Theme.light,
 };
 
-export const IconButton: React.FC<IconButtonProps> = (props) => {
+export const IconButton: Comp<IconButtonProps> = (props) => {
     const { emphasis, icon, size, theme, ...forwardedProps } = props;
 
     return (
@@ -45,4 +45,5 @@ export const IconButton: React.FC<IconButtonProps> = (props) => {
     );
 };
 IconButton.displayName = COMPONENT_NAME;
+IconButton.className = CLASSNAME;
 IconButton.defaultProps = DEFAULT_PROPS;

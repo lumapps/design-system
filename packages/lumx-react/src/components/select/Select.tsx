@@ -13,7 +13,7 @@ import { InputLabel } from '@lumx/react/components/input-label/InputLabel';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { WithSelectContext } from './WithSelectContext';
 import { CoreSelectProps, SelectVariant } from './constants';
@@ -30,7 +30,7 @@ export { SelectVariant };
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Select`;
 
 /** The default class name and classes prefix for this component. */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /** The default value of props. */
 const DEFAULT_PROPS: Partial<SelectProps> = {
@@ -44,7 +44,7 @@ const stopPropagation = (evt: Event) => evt.stopPropagation();
  *
  * @return The component.
  */
-const SelectField: React.FC<SelectProps> = ({
+const SelectField: Comp<SelectProps> = ({
     anchorRef,
     handleKeyboardNav,
     hasError,
@@ -80,6 +80,7 @@ const SelectField: React.FC<SelectProps> = ({
                         </div>
                     )}
 
+                    {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
                     <div
                         ref={anchorRef as RefObject<HTMLDivElement>}
                         id={id}
@@ -95,7 +96,7 @@ const SelectField: React.FC<SelectProps> = ({
                                 isEmpty && placeholder && `${CLASSNAME}__input-native--placeholder`,
                             ])}
                         >
-                            {!isEmpty && <span>{selectedValueRender!(value)}</span>}
+                            {!isEmpty && <span>{selectedValueRender?.(value)}</span>}
 
                             {isEmpty && placeholder && <span>{placeholder}</span>}
                         </div>
@@ -138,14 +139,14 @@ const SelectField: React.FC<SelectProps> = ({
                 >
                     {isEmpty && <span>{label}</span>}
 
-                    {!isEmpty && <span>{selectedValueRender!(value)}</span>}
+                    {!isEmpty && <span>{selectedValueRender?.(value)}</span>}
                 </Chip>
             )}
         </>
     );
 };
 
-export const Select: React.FC<SelectProps> = (props) => {
+export const Select: Comp<SelectProps> = (props) => {
     const isEmpty = lodashIsEmpty(props.value);
     const hasInputClear = props.onClear && !isEmpty;
 
@@ -165,4 +166,6 @@ export const Select: React.FC<SelectProps> = (props) => {
 };
 
 Select.displayName = COMPONENT_NAME;
+Select.className = CLASSNAME;
 Select.defaultProps = DEFAULT_PROPS;
+Select.className = CLASSNAME;

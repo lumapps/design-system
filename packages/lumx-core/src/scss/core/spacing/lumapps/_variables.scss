@@ -11,12 +11,12 @@ $lumx-spacing-directions: (
     '-bottom': '-bottom',
     '-left': '-left',
     '-horizontal': '-left' '-right',
-    '-vertical': '-top' '-bottom'
+    '-vertical': '-top' '-bottom',
 );
 
 $lumx-spacing-properties: (
     'padding': 'padding',
-    'margin': 'margin'
+    'margin': 'margin',
 );
 
 $lumx-spacing-sizes: (
@@ -25,5 +25,5 @@ $lumx-spacing-sizes: (
     '-regular': $lumx-spacing-unit-regular,
     '-big': $lumx-spacing-unit-big,
     '-huge': $lumx-spacing-unit-huge,
-    '-none': 0
+    '-none': 0,
 );

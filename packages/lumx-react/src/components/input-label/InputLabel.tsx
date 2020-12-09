@@ -1,6 +1,6 @@
 import { Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
 import React, { ReactNode } from 'react';
 
@@ -24,7 +24,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}InputLabel`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -33,13 +33,7 @@ const DEFAULT_PROPS: Partial<InputLabelProps> = {
     theme: Theme.light,
 };
 
-export const InputLabel: React.FC<InputLabelProps> = ({
-    children,
-    className,
-    isRequired,
-    theme,
-    ...forwardedProps
-}) => (
+export const InputLabel: Comp<InputLabelProps> = ({ children, className, isRequired, theme, ...forwardedProps }) => (
     // eslint-disable-next-line jsx-a11y/label-has-associated-control
     <label
         {...forwardedProps}
@@ -50,4 +44,5 @@ export const InputLabel: React.FC<InputLabelProps> = ({
 );
 
 InputLabel.displayName = COMPONENT_NAME;
+InputLabel.className = CLASSNAME;
 InputLabel.defaultProps = DEFAULT_PROPS;

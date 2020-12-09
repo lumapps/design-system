@@ -5,7 +5,9 @@ import 'jest-enzyme';
 
 import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 
-import { CLASSNAME, SideNavigation, SideNavigationProps } from './SideNavigation';
+import { SideNavigation, SideNavigationProps } from './SideNavigation';
+
+const CLASSNAME = SideNavigation.className as string;
 
 /**
  * Define the overriding properties waited by the `setup` function.
@@ -23,19 +25,10 @@ interface Setup extends CommonSetup {
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
- *
- * @param  props                    The props to use to override the default props of the component.
- * @param  [shallowRendering=true]  Indicates if we want to do a shallow or a full rendering.
- * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering = true): Setup => {
-    const props: Partial<SideNavigationProps> = {
-        ...propsOverrides,
-    };
-
+const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true): Setup => {
+    const props: any = { ...propsOverride };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-
-    // @ts-ignore
     const wrapper: Wrapper = renderer(<SideNavigation {...props} />);
 
     return {

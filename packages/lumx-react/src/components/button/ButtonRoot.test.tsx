@@ -3,7 +3,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import 'jest-enzyme';
 
-import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { CommonSetup, commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 
 import { ColorPalette, Emphasis, Size, Theme } from '@lumx/react';
 import {
@@ -38,12 +38,9 @@ interface Setup extends CommonSetup {
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
- *
- * @param  props                   The props to use to override the default props of the component.
- * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup = ({ ...props }: SetupProps = {}): Setup => {
-    // @ts-ignore
+const setup = (propsOverride: SetupProps = {}): Setup => {
+    const props: any = { ...propsOverride };
     const wrapper: Wrapper = mount(<ButtonRoot {...props} />);
 
     return {

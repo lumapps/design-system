@@ -1,4 +1,4 @@
-import React, { RefObject } from 'react';
+import React, { ButtonHTMLAttributes, DetailedHTMLProps, RefObject } from 'react';
 
 import isEmpty from 'lodash/isEmpty';
 
@@ -8,6 +8,8 @@ import { Color, ColorPalette, Emphasis, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { GenericProps, handleBasicClasses } from '@lumx/react/utils';
 import { renderLink } from '@lumx/react/utils/renderLink';
+
+type HTMLButtonProps = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
 
 /**
  * The authorized values for the `size` prop.
@@ -37,6 +39,8 @@ export interface BaseButtonProps extends GenericProps {
     target?: '_self' | '_blank' | '_parent' | '_top';
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
+    /** The native button type. */
+    type?: HTMLButtonProps['type'];
     /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
     /**
@@ -81,6 +85,7 @@ const renderButtonWrapper: React.FC<ButtonRootProps> = (props) => {
 
     return (
         <div className={wrapperClassName}>
+            {/* eslint-disable-next-line @typescript-eslint/no-use-before-define */}
             <ButtonRoot {...buttonProps} />
         </div>
     );
@@ -105,6 +110,7 @@ export const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
         theme,
         useCustomColors,
         variant,
+        type = 'button',
         ...forwardedProps
     } = props;
 
@@ -159,6 +165,10 @@ export const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
             ref={buttonRef as RefObject<HTMLButtonElement>}
             className={buttonClassName}
             name={name}
+            type={
+                // eslint-disable-next-line react/button-has-type
+                type
+            }
         >
             {children}
         </button>

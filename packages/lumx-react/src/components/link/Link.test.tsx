@@ -1,11 +1,13 @@
-import React, { ReactElement, createRef } from 'react';
+import React, { createRef, ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
 import { ColorPalette, ColorVariant, Typography } from '@lumx/react';
-import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
-import { CLASSNAME, Link, LinkProps } from './Link';
+import { CommonSetup, commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
+import { Link, LinkProps } from './Link';
+
+const CLASSNAME = Link.className as string;
 
 /**
  * Define the overriding properties waited by the `setup` function.
@@ -21,15 +23,10 @@ interface Setup extends CommonSetup {
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
- *
- * @param props  The props to use to override the default props of the component.
- * @param     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
- *                       component.
  */
-const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true): Setup => {
     const props: LinkProps = {
-        ...propsOverrides,
+        ...propsOverride,
     };
 
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
@@ -51,7 +48,11 @@ describe(`<${Link.displayName}>`, () => {
         });
 
         it('should render color & color variant', () => {
-            const { wrapper } = setup({ href: 'https://google.com', color: ColorPalette.primary, colorVariant: ColorVariant.D1 });
+            const { wrapper } = setup({
+                href: 'https://google.com',
+                color: ColorPalette.primary,
+                colorVariant: ColorVariant.D1,
+            });
             expect(wrapper).toMatchSnapshot();
         });
 

@@ -20,13 +20,13 @@ interface Setup extends CommonSetup {
     props: SetupProps;
 }
 
-const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true): Setup => {
     const props: DatePickerFieldProps = {
         label: 'DatePickerField',
         locale: 'fr',
         onChange: jest.fn(),
         value: mockedDate,
-        ...propsOverrides,
+        ...propsOverride,
     };
 
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;

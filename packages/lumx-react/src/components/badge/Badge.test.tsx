@@ -7,9 +7,10 @@ import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/util
 import { getBasicClass } from '@lumx/react/utils';
 
 import { Theme } from '@lumx/react';
-import { Badge, BadgeProps, CLASSNAME } from './Badge';
+import { Badge, BadgeProps } from './Badge';
 
 const DEFAULT_PROPS = Badge.defaultProps as any;
+const CLASSNAME = Badge.className as string;
 
 /**
  * Defines what the `setup` function will return.
@@ -26,16 +27,11 @@ interface Setup extends CommonSetup {
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
- *
- * @param props  The props to use to override the default props of the component.
- * @param     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
- *                       component.
  */
-const setup = ({ ...propsOverrides }: Partial<BadgeProps> = {}, shallowRendering = true): Setup => {
+const setup = ({ ...propsOverride }: Partial<BadgeProps> = {}, shallowRendering = true): Setup => {
     const props: BadgeProps = {
         children: <span>30</span>,
-        ...propsOverrides,
+        ...propsOverride,
     };
 
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;

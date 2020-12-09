@@ -1,6 +1,6 @@
 import React, { ReactElement, RefObject } from 'react';
 
-import { ReactWrapper, ShallowWrapper, mount, shallow } from 'enzyme';
+import { mount, ReactWrapper, shallow, ShallowWrapper } from 'enzyme';
 import 'jest-enzyme';
 
 import { mdiCloseCircle, mdiMenuDown } from '@lumx/icons';
@@ -9,12 +9,13 @@ import { Chip } from '@lumx/react/components/chip/Chip';
 import { Dropdown } from '@lumx/react/components/dropdown/Dropdown';
 import { Icon } from '@lumx/react/components/icon/Icon';
 
-import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { CommonSetup, commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
-
-import { CLASSNAME, SelectMultiple, SelectMultipleProps } from './SelectMultiple';
+import { SelectMultiple, SelectMultipleProps } from './SelectMultiple';
 import { DEFAULT_PROPS } from './WithSelectContext';
 import { SelectVariant } from './constants';
+
+const CLASSNAME = SelectMultiple.className as string;
 
 jest.mock('uuid/v4', () => () => 'uuid');
 
@@ -36,10 +37,6 @@ interface Setup extends CommonSetup {
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
- *
- * @param  props  The props to use to override the default props of the component.
- * @param  [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
 const setup = (props: SetupProps = {}, shallowRendering = true): Setup => {
     const setupProps: SelectMultipleProps = {
@@ -244,10 +241,7 @@ describe(`<SelectMultiple>`, () => {
                 false,
             );
 
-            input
-                .find('Chip')
-                .first()
-                .simulate('click');
+            input.find('Chip').first().simulate('click');
 
             expect(onClear).toHaveBeenCalled();
         });
@@ -266,10 +260,7 @@ describe(`<SelectMultiple>`, () => {
                 false,
             );
 
-            (input
-                .find('Chip')
-                .first()
-                .props() as any).onAfterClick();
+            (input.find('Chip').first().props() as any).onAfterClick();
 
             expect(onClear).toHaveBeenCalled();
         });
@@ -298,28 +289,10 @@ describe(`<SelectMultiple>`, () => {
                 it('should render the values selected in Chips if multiple ', () => {
                     const { input, props } = setup({ ...hasMultipleValues }, false);
 
-                    expect(input.find(Chip).length).toBe(props.value!.length);
-                    expect(
-                        input
-                            .find(Chip)
-                            .at(0)
-                            .children()
-                            .text(),
-                    ).toBe(props.value![0]);
-                    expect(
-                        input
-                            .find(Chip)
-                            .at(1)
-                            .children()
-                            .text(),
-                    ).toBe(props.value![1]);
-                    expect(
-                        input
-                            .find(Chip)
-                            .at(2)
-                            .children()
-                            .text(),
-                    ).toBe(props.value![2]);
+                    expect(input.find(Chip).length).toBe(props.value?.length);
+                    expect(input.find(Chip).at(0).children().text()).toBe(props.value?.[0]);
+                    expect(input.find(Chip).at(1).children().text()).toBe(props.value?.[1]);
+                    expect(input.find(Chip).at(2).children().text()).toBe(props.value?.[2]);
                 });
             });
 
@@ -334,12 +307,9 @@ describe(`<SelectMultiple>`, () => {
                 it('should render the placeholder when empty', () => {
                     const { input } = setup({ ...hasNoValueProps }, false);
 
-                    expect(
-                        input
-                            .find(`.${CLASSNAME}__input-native--placeholder span`)
-                            .first()
-                            .text(),
-                    ).toBe(placeholder);
+                    expect(input.find(`.${CLASSNAME}__input-native--placeholder span`).first().text()).toBe(
+                        placeholder,
+                    );
                 });
             });
         });
@@ -375,12 +345,7 @@ describe(`<SelectMultiple>`, () => {
                 it('should render a close icon if there is a value', () => {
                     const { input } = setup({ ...hasValueProps }, false);
 
-                    expect(
-                        input
-                            .find(Icon)
-                            .first()
-                            .prop('icon'),
-                    ).toBe(mdiCloseCircle);
+                    expect(input.find(Icon).first().prop('icon')).toBe(mdiCloseCircle);
                 });
             });
 
@@ -417,12 +382,7 @@ describe(`<SelectMultiple>`, () => {
                 it('should render a MenuDown icon', () => {
                     const { input } = setup({ ...hasNoValue }, false);
 
-                    expect(
-                        input
-                            .find(Icon)
-                            .first()
-                            .prop('icon'),
-                    ).toBe(mdiMenuDown);
+                    expect(input.find(Icon).first().prop('icon')).toBe(mdiMenuDown);
                 });
             });
         });

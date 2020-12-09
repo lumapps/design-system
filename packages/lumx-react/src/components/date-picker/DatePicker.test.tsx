@@ -3,7 +3,7 @@ import { CommonSetup, Wrapper } from '@lumx/react/testing/utils';
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 import React, { ReactElement } from 'react';
-import { DatePickerProps } from './base';
+import { DatePickerProps } from '@lumx/react';
 import { DatePicker } from './DatePicker';
 
 const mockedDate = new Date(
@@ -19,12 +19,12 @@ interface Setup extends CommonSetup {
     props: SetupProps;
 }
 
-const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true): Setup => {
     const props: DatePickerProps = {
         locale: 'fr',
         onChange: jest.fn(),
         value: mockedDate,
-        ...propsOverrides,
+        ...propsOverride,
     };
 
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;

@@ -5,7 +5,7 @@ import isEmpty from 'lodash/isEmpty';
 
 import { Emphasis, Icon, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { getBasicClass, getRootClassName } from '@lumx/react/utils';
+import { Comp, getBasicClass, getRootClassName } from '@lumx/react/utils';
 import { BaseButtonProps, ButtonRoot } from './ButtonRoot';
 
 /**
@@ -40,7 +40,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Button`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -51,7 +51,7 @@ const DEFAULT_PROPS: Partial<ButtonProps> = {
     theme: Theme.light,
 };
 
-export const Button: React.FC<ButtonProps> = (props) => {
+export const Button: Comp<ButtonProps> = (props) => {
     const { children, className, emphasis, leftIcon, rightIcon, size, theme, ...forwardedProps } = props;
 
     const buttonClassName = classNames(
@@ -69,4 +69,5 @@ export const Button: React.FC<ButtonProps> = (props) => {
     );
 };
 Button.displayName = COMPONENT_NAME;
+Button.className = CLASSNAME;
 Button.defaultProps = DEFAULT_PROPS;

@@ -12,6 +12,7 @@ import { ColorPalette, DragHandle, Emphasis, IconButton, Theme } from '@lumx/rea
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import {
     Callback,
+    Comp,
     GenericProps,
     getRootClassName,
     handleBasicClasses,
@@ -49,7 +50,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}ExpansionPanel`;
 /**
  * The default class name and classes prefix for this component.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -62,7 +63,7 @@ const isDragHandle = isComponent(DragHandle);
 const isHeader = isComponent('header');
 const isFooter = isComponent('footer');
 
-export const ExpansionPanel: React.FC<ExpansionPanelProps> = (props) => {
+export const ExpansionPanel: Comp<ExpansionPanelProps> = (props) => {
     const {
         className,
         hasBackground,
@@ -83,7 +84,7 @@ export const ExpansionPanel: React.FC<ExpansionPanelProps> = (props) => {
     const [[dragHandle], [header], [footer], content] = partitionMulti(children, [isDragHandle, isHeader, isFooter]);
 
     // Either take the header in children or create one with the label.
-    const headerProps: PropsWithChildren<{}> = React.isValidElement(header) ? header.props : {};
+    const headerProps: PropsWithChildren<any> = React.isValidElement(header) ? header.props : {};
     const headerContent = !isEmpty(headerProps.children) ? (
         headerProps.children
     ) : (
@@ -157,4 +158,5 @@ export const ExpansionPanel: React.FC<ExpansionPanelProps> = (props) => {
     );
 };
 ExpansionPanel.displayName = COMPONENT_NAME;
+ExpansionPanel.className = CLASSNAME;
 ExpansionPanel.defaultProps = DEFAULT_PROPS;
