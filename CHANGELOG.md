@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.28.2][] - 2020-12-11
+
 ### Added
 
 -   Added `headerActions` prop to `CommentBlock` component to add actions to the header.
@@ -818,3 +820,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.28.0]: https://github.com/lumapps/design-system/tree/v0.28.0
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.28.1...HEAD
 [0.28.1]: https://github.com/lumapps/design-system/tree/v0.28.1
+
+
+[Unreleased]: https://github.com/lumapps/design-system/compare/v0.28.2...HEAD
+[0.28.2]: https://github.com/lumapps/design-system/tree/v0.28.2
