@@ -86,6 +86,16 @@ export { Select, SelectProps, SelectVariant } from './components/select/Select';
 
 export { SelectMultiple, SelectMultipleProps } from './components/select/SelectMultiple';
 
+export { SkeletonCircle, SkeletonCircleProps } from './components/skeleton/SkeletonCircle';
+
+export {
+    SkeletonRectangle,
+    SkeletonRectangleProps,
+    SkeletonRectangleVariant,
+} from './components/skeleton/SkeletonRectangle';
+
+export { SkeletonTypography, SkeletonTypographyProps } from './components/skeleton/SkeletonTypography';
+
 export { Slideshow, SlideshowProps } from './components/slideshow/Slideshow';
 
 export { SlideshowItem } from './components/slideshow/SlideshowItem';
