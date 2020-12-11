@@ -2,18 +2,6 @@ import { GlobalTheme } from '@lumx/core/js/types';
 
 const DELAY_THEME_DISABLE = 200;
 
-export function createGlobalThemeSwitcher(defaultGlobalTheme: GlobalTheme) {
-    const linkStylesheet = document.querySelector('link[rel=stylesheet]:not(#font)');
-    if (linkStylesheet) {
-        return createDevThemeSwitcher(defaultGlobalTheme, linkStylesheet);
-    }
-
-    const styleSheet = document.querySelector('style');
-    if (styleSheet) {
-        return createProdThemeSwitcher(defaultGlobalTheme, styleSheet);
-    }
-}
-
 /**
  * In development both themes are loaded in <link> that need to be disabled.
  */
@@ -49,7 +37,7 @@ function createDevThemeSwitcher(defaultGlobalTheme: GlobalTheme, defaultLinkStyl
  * In production, the default theme is loaded in a <style> and the other theme in a <link>.
  */
 function createProdThemeSwitcher(defaultGlobalTheme: GlobalTheme, defaultStylesheet: any) {
-    let otherLinkStylesheet: any;
+    let otherStylesheet: any;
     let oldGlobalTheme = defaultGlobalTheme;
     return async (newGlobalTheme: GlobalTheme) => {
         if (oldGlobalTheme === newGlobalTheme) {
@@ -57,21 +45,34 @@ function createProdThemeSwitcher(defaultGlobalTheme: GlobalTheme, defaultStylesh
         }
         oldGlobalTheme = newGlobalTheme;
         if (newGlobalTheme !== defaultGlobalTheme) {
-            if (!otherLinkStylesheet) {
+            if (!otherStylesheet) {
                 await import(`../style/theme/${newGlobalTheme}.scss`);
-                otherLinkStylesheet = document.querySelectorAll('link[rel=stylesheet]:not(#font)')[0];
+                const styles = document.querySelectorAll('style');
+                otherStylesheet = styles[styles.length - 1];
+            } else {
+                document.head.appendChild(otherStylesheet);
             }
-            otherLinkStylesheet.disabled = false;
             setTimeout(() => {
                 defaultStylesheet.parentNode.removeChild(defaultStylesheet);
             }, DELAY_THEME_DISABLE);
         } else {
             document.head.appendChild(defaultStylesheet);
             setTimeout(() => {
-                if (otherLinkStylesheet) {
-                    otherLinkStylesheet.disabled = true;
-                }
+                otherStylesheet.parentNode.removeChild(otherStylesheet);
             }, DELAY_THEME_DISABLE);
         }
     };
+}
+
+export function createGlobalThemeSwitcher(defaultGlobalTheme: GlobalTheme) {
+    const linkStylesheet = document.querySelector('link[rel=stylesheet]:not(#font)');
+    if (linkStylesheet) {
+        return createDevThemeSwitcher(defaultGlobalTheme, linkStylesheet);
+    }
+
+    const styleSheet = document.querySelector('style');
+    if (styleSheet) {
+        return createProdThemeSwitcher(defaultGlobalTheme, styleSheet);
+    }
+    return undefined;
 }
