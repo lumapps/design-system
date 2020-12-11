@@ -13,7 +13,7 @@
         "classnames": "^2.2.6",
         "react-is": "^16.13.0",
         "react-popper": "^2.2.4",
-        "uuid": "^3.3.2"
+        "uid": "^2.0.0"
     },
     "devDependencies": {
         "@babel/core": "^7.8.3",
@@ -41,7 +41,6 @@
         "@types/react": "^16.9.11",
         "@types/react-dom": "^16.9.4",
         "@types/react-is": "^16.7.1",
-        "@types/uuid": "^3.4.7",
         "autoprefixer": "^9.7.4",
         "babel-loader": "^8.0.6",
         "chromatic": "^5.4.0",

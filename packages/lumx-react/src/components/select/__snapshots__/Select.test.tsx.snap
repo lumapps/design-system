@@ -11,7 +11,7 @@ exports[`<Select> Snapshots and structure should render correctly 1`] = `
       }
     }
     handleKeyboardNav={[Function]}
-    id="select-uuid"
+    id="select-uid"
     isEmpty={true}
     selectedValueRender={[Function]}
     theme="light"

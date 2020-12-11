@@ -1,5 +1,5 @@
 import { Dispatch, createContext, useCallback, useContext, useEffect, useMemo } from 'react';
-import uuid from 'uuid/v4';
+import { uid } from 'uid';
 
 type TabType = 'tab' | 'tabPanel';
 
@@ -60,7 +60,7 @@ export const useTabProviderContext = (type: TabType, originalId?: string): undef
 
     // Current tab or tab panel id.
     const id = useMemo(
-        () => originalId || `${type}-${uuid()}`,
+        () => originalId || `${type}-${uid()}`,
         // eslint-disable-next-line react-hooks/exhaustive-deps
         [],
     );

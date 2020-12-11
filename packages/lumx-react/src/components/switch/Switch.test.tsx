@@ -84,7 +84,8 @@ const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true): 
     };
 };
 
-jest.mock('uuid/v4', (): (() => string) => (): string => 'a7b5d992-fe30-4d58-967a-89b8bb7e109c');
+jest.mock('uid', () => ({ uid: () => 'uid' }));
+
 describe(`<${Switch.displayName}>`, () => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', () => {

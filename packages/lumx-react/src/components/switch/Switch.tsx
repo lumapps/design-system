@@ -1,7 +1,7 @@
 import React, { Children, SyntheticEvent, useMemo } from 'react';
 
 import classNames from 'classnames';
-import uuid from 'uuid/v4';
+import { uid } from 'uid';
 
 import isEmpty from 'lodash/isEmpty';
 
@@ -74,7 +74,7 @@ export const Switch: Comp<SwitchProps> = ({
     value,
     ...forwardedProps
 }) => {
-    const switchId = useMemo(() => id || `switch-${uuid()}`, [id]);
+    const switchId = useMemo(() => id || `switch-${uid()}`, [id]);
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (onChange) {
             onChange(!isChecked, value, name, event);

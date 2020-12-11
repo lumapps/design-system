@@ -3,7 +3,7 @@
 exports[`<Tooltip> Snapshots and structure should not wrap Button 1`] = `
 <Fragment>
   <Button
-    aria-describedby="tooltip-123"
+    aria-describedby="tooltip-uid"
     buttonRef={[Function]}
     emphasis="high"
     size="m"
@@ -17,7 +17,7 @@ exports[`<Tooltip> Snapshots and structure should not wrap Button 1`] = `
     <div
       aria-label="tooltip1"
       className="lumx-tooltip lumx-tooltip--position-bottom"
-      id="tooltip-123"
+      id="tooltip-uid"
       role="tooltip"
       style={
         Object {
@@ -43,7 +43,7 @@ exports[`<Tooltip> Snapshots and structure should not wrap Button 1`] = `
 exports[`<Tooltip> Snapshots and structure should not wrap Icon 1`] = `
 <Fragment>
   <Icon
-    aria-describedby="tooltip-123"
+    aria-describedby="tooltip-uid"
     icon="icon"
     iconRef={[Function]}
   />
@@ -53,7 +53,7 @@ exports[`<Tooltip> Snapshots and structure should not wrap Icon 1`] = `
     <div
       aria-label="tooltip1"
       className="lumx-tooltip lumx-tooltip--position-bottom"
-      id="tooltip-123"
+      id="tooltip-uid"
       role="tooltip"
       style={
         Object {
@@ -79,7 +79,7 @@ exports[`<Tooltip> Snapshots and structure should not wrap Icon 1`] = `
 exports[`<Tooltip> Snapshots and structure should render correctly 1`] = `
 <Fragment>
   <div
-    aria-describedby="tooltip-123"
+    aria-describedby="tooltip-uid"
     className="lumx-tooltip-anchor-wrapper"
   >
     Anchor
@@ -90,7 +90,7 @@ exports[`<Tooltip> Snapshots and structure should render correctly 1`] = `
     <div
       aria-label="Tooltip"
       className="lumx-tooltip lumx-tooltip--position-bottom"
-      id="tooltip-123"
+      id="tooltip-uid"
       role="tooltip"
       style={
         Object {
@@ -124,7 +124,7 @@ exports[`<Tooltip> Snapshots and structure should return children when empty lab
 exports[`<Tooltip> Snapshots and structure should work on disabled elements 1`] = `
 <Fragment>
   <div
-    aria-describedby="tooltip-123"
+    aria-describedby="tooltip-uid"
     className="lumx-tooltip-anchor-wrapper"
   >
     <Button
@@ -142,7 +142,7 @@ exports[`<Tooltip> Snapshots and structure should work on disabled elements 1`] 
     <div
       aria-label="Tooltip on disabled button"
       className="lumx-tooltip lumx-tooltip--position-bottom"
-      id="tooltip-123"
+      id="tooltip-uid"
       role="tooltip"
       style={
         Object {
@@ -168,7 +168,7 @@ exports[`<Tooltip> Snapshots and structure should work on disabled elements 1`] 
 exports[`<Tooltip> Snapshots and structure should wrap children 1`] = `
 <Fragment>
   <div
-    aria-describedby="tooltip-123"
+    aria-describedby="tooltip-uid"
     className="lumx-tooltip-anchor-wrapper"
   >
     children
@@ -179,7 +179,7 @@ exports[`<Tooltip> Snapshots and structure should wrap children 1`] = `
     <div
       aria-label="tooltip1"
       className="lumx-tooltip lumx-tooltip--position-bottom"
-      id="tooltip-123"
+      id="tooltip-uid"
       role="tooltip"
       style={
         Object {
@@ -205,7 +205,7 @@ exports[`<Tooltip> Snapshots and structure should wrap children 1`] = `
 exports[`<Tooltip> Snapshots and structure should wrap children 2`] = `
 <Fragment>
   <div
-    aria-describedby="tooltip-123"
+    aria-describedby="tooltip-uid"
     className="lumx-tooltip-anchor-wrapper"
   >
     children
@@ -216,7 +216,7 @@ exports[`<Tooltip> Snapshots and structure should wrap children 2`] = `
     <div
       aria-label="tooltip1"
       className="lumx-tooltip lumx-tooltip--position-bottom"
-      id="tooltip-123"
+      id="tooltip-uid"
       role="tooltip"
       style={
         Object {

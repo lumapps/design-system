@@ -10,7 +10,7 @@ import { Tooltip, TooltipProps } from './Tooltip';
 
 const CLASSNAME = Tooltip.className as string;
 
-jest.mock('uuid/v4', () => () => 123);
+jest.mock('uid', () => ({ uid: () => 'uid' }));
 
 /**
  * Define the overriding properties waited by the `setup` function.

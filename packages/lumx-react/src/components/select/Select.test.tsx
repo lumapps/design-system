@@ -17,7 +17,7 @@ import { DEFAULT_PROPS } from './WithSelectContext';
 
 const CLASSNAME = Select.className as string;
 
-jest.mock('uuid/v4', () => () => 'uuid');
+jest.mock('uid', () => ({ uid: () => 'uid' }));
 
 /** Define the overriding properties waited by the `setup` function. */
 type SetupProps = Partial<SelectProps>;
@@ -56,7 +56,7 @@ const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true): 
         helper: wrapper.findWhere(
             (n: ShallowWrapper | ReactWrapper) => n.name() === 'InputHelper' && n.prop('kind') === Kind.info,
         ),
-        input: wrapper.find('#select-uuid:not(SelectField)').first(),
+        input: wrapper.find('#select-uid:not(SelectField)').first(),
         props,
         wrapper,
     };
