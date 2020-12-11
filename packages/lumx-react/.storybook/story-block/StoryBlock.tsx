@@ -7,6 +7,8 @@ import classNames from 'classnames';
 import { styles } from './styles';
 import { useInjectTheme } from './useInjectTheme';
 
+import 'focus-visible';
+
 interface StoryBlockProps {
     children(p: { theme: Theme }): ReactElement;
 }

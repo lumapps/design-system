@@ -50,6 +50,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   _[BREAKING]_ `onClick` prop for `ProgressTrackerStep` component is not used anymore. `ProgressTrackerProvider` component has an `onChange` prop instead. Therefore, a step is now clickable if it is not disabled.
 -   _[BREAKING]_ `DatePicker` and `DatePickerField` `value` prop can no longer be a `Moment` object. This will allow us to remove `moment` dep in the future without generating breaking change later. The `value` prop can no longer be a `string` to avoid handling incompatible values. `value` can only be a `Date` (or `undefined` for non selectable values).
 -   _[BREAKING]_ Thumbnail `loading` prop now take `eager` or `lazy` string (instead of enum).
+-   _[BREAKING]_ `@lumx/react` is now exported as an ESM module targeting the [browserlist `defaults` query](https://github.com/browserslist/browserslist#full-list). The package is not compatible with IE anymore. You can keep the compatibility by configuring your own polyfills and/or transpilation in your build setup.
+-   _[BREAKING]_ `lodash` is now defined as a `peerDependencies`. You must install them separately from the `@lumx/react` package.
 
 ### Removed
 
