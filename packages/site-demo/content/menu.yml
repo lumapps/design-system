@@ -3,6 +3,7 @@
         - Color
         - Iconography
         - Typography
+        - Size
     - Components: '*'
     - Patterns:
         - Filter and sort

@@ -61,6 +61,7 @@ export enum Size {
     big = 'big',
     huge = 'huge',
 }
+export type GlobalSize = Size.xxs | Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
 
 export enum Orientation {
     horizontal = 'horizontal',

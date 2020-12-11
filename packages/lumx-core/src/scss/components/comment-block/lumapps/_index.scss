@@ -6,8 +6,12 @@
     $self: &;
 
     position: relative;
+    margin-bottom: $lumx-spacing-unit * 2;
 
-    &--has-children#{$self}--has-indented-children::before,
+    &:last-child {
+        margin-bottom: 0;
+    }
+
     &--has-children#{$self}--has-indented-children &::before {
         position: absolute;
         top: 52px;
@@ -17,18 +21,16 @@
         content: '';
     }
 
-    &--has-children#{$self}--has-indented-children#{$self}--theme-light::before,
     &--has-children#{$self}--has-indented-children#{$self}--theme-light &::before {
         background-color: lumx-color-variant('dark', 'L5');
     }
 
-    &--has-children#{$self}--has-indented-children#{$self}--theme-dark::before,
     &--has-children#{$self}--has-indented-children#{$self}--theme-dark &::before {
         background-color: lumx-color-variant('light', 'L5');
     }
 
-    &__children & {
-        margin-top: $lumx-spacing-unit * 2;
+    &--has-children#{$self}--has-indented-children &:last-child::before {
+        display: none;
     }
 
     &__wrapper {
@@ -70,8 +72,7 @@
     &__content {
         position: relative;
         overflow: hidden;
-        padding: $lumx-spacing-unit * 1.5;
-        padding-top: $lumx-spacing-unit;
+        padding: $lumx-spacing-unit $lumx-spacing-unit * 1.5;
         border-radius: $lumx-border-radius;
 
         #{$self}--theme-light > #{$self}__wrapper & {
@@ -135,6 +136,10 @@
         }
     }
 
+    &__header-actions {
+        margin-left: auto;
+    }
+
     &__text {
         @include lumx-typography('body1');
 
@@ -154,6 +159,8 @@
     }
 
     &__children {
+        margin-top: $lumx-spacing-unit * 2;
+
         #{$self}--has-indented-children & {
             margin-left: map-get($lumx-sizes, lumx-base-const('size', 'M')) + $lumx-spacing-unit * 2;
         }

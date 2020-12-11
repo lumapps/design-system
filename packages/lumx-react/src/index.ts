@@ -32,6 +32,7 @@ export * from './components/progress-tracker';
 export * from './components/radio-button';
 export * from './components/select';
 export * from './components/side-navigation';
+export * from './components/skeleton';
 export * from './components/slider';
 export * from './components/slideshow';
 export * from './components/switch';

@@ -81,9 +81,17 @@
         & > img,
         table {
             margin-bottom: $lumx-spacing-unit * 2;
-
             &:last-child {
                 margin-bottom: 0;
+            }
+        }
+
+        table tr {
+            border: solid 1px $lumx-color-dark-L5;
+
+            & th,
+            & td {
+                padding: $lumx-spacing-unit * 2;
             }
         }
     }
