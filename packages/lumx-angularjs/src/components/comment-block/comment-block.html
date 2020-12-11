@@ -28,11 +28,12 @@
                     </span>
 
                     <span class="lumx-comment-block__date" ng-if="lx.date">{{ lx.date }}</span>
+                    <span class="lumx-comment-block__header-actions" ng-if="lx.headerActions"
+                        >{{ lx.headerActions }}</span
+                    >
                 </div>
 
-                <p class="lumx-comment-block__text">
-                    {{ lx.text }}
-                </p>
+                <p class="lumx-comment-block__text">{{ lx.text }}</p>
             </div>
 
             <div class="lumx-comment-block__actions" ng-transclude="actions" ng-if="lx.hasActions"></div>

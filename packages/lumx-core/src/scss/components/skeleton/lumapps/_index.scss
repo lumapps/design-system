@@ -1,0 +1,123 @@
+/* ==========================================================================
+   Skeleton
+   ========================================================================== */
+
+@keyframes skeleton-loading {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Circle
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-skeleton-circle {
+    animation: skeleton-loading 1s ease-in-out 0s infinite;
+    border-radius: 50%;
+
+    &--theme-light {
+        background-color: lumx-color-variant('dark', 'L5');
+    }
+
+    &--theme-dark {
+        background-color: lumx-color-variant('light', 'L5');
+    }
+}
+
+@each $key, $size in $lumx-sizes {
+    .#{$lumx-base-prefix}-skeleton-circle--size-#{$key} {
+        width: map-get($lumx-sizes, $key);
+        height: map-get($lumx-sizes, $key);
+    }
+}
+
+/* Rectangle
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-skeleton-rectangle {
+    animation: skeleton-loading 1s ease-in-out 0s infinite;
+
+    &--variant-rounded {
+        border-radius: $lumx-border-radius;
+    }
+
+    &--theme-light {
+        background-color: lumx-color-variant('dark', 'L5');
+    }
+
+    &--theme-dark {
+        background-color: lumx-color-variant('light', 'L5');
+    }
+}
+
+@each $key, $size in $lumx-sizes {
+    .#{$lumx-base-prefix}-skeleton-rectangle--width-#{$key} {
+        width: map-get($lumx-sizes, $key);
+    }
+
+    .#{$lumx-base-prefix}-skeleton-rectangle--height-#{$key} {
+        height: map-get($lumx-sizes, $key);
+    }
+
+    .#{$lumx-base-prefix}-skeleton-rectangle--variant-pill.#{$lumx-base-prefix}-skeleton-rectangle--height-#{$key} {
+        border-radius: map-get($lumx-sizes, $key) / 2;
+    }
+}
+
+@each $key, $aspect-ratio in $lumx-thumbnail-aspect-ratio {
+    .#{$lumx-base-prefix}-skeleton-rectangle--aspect-ratio-#{$key} .#{$lumx-base-prefix}-skeleton-rectangle__inner {
+        padding-top: $aspect-ratio;
+    }
+}
+
+/* Typography
+   ========================================================================== */
+
+$typography-skeleton-size: (
+    'display1': 24px,
+    'headline': 20px,
+    'title': 14px,
+    'subtitle2': 12px,
+    'subtitle1': 10px,
+    'body2': 12px,
+    'body1': 10px,
+    'caption': 8px,
+    'overline': 8px,
+);
+
+.#{$lumx-base-prefix}-skeleton-typography {
+    $self: &;
+
+    display: flex;
+    align-items: center;
+
+    &__inner {
+        width: 100%;
+        animation: skeleton-loading 1s ease-in-out 0s infinite;
+        border-radius: $lumx-border-radius;
+
+        #{$self}--theme-light & {
+            background-color: lumx-color-variant('dark', 'L5');
+        }
+
+        #{$self}--theme-dark & {
+            background-color: lumx-color-variant('light', 'L5');
+        }
+    }
+}
+
+@each $key, $line-height in $lumx-typography-line-height {
+    .#{$lumx-base-prefix}-skeleton-typography--typography-#{$key} {
+        height: map-get($lumx-typography-line-height, $key);
+    }
+
+    .#{$lumx-base-prefix}-skeleton-typography--typography-#{$key} .#{$lumx-base-prefix}-skeleton-typography__inner {
+        height: map-get($typography-skeleton-size, $key);
+    }
+}

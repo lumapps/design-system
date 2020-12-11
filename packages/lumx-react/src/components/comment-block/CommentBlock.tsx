@@ -14,7 +14,7 @@ import { AvatarProps } from '../avatar/Avatar';
  */
 export interface CommentBlockProps extends GenericProps {
     /** The action elements. */
-    actions?: HTMLElement | ReactNode;
+    actions?: ReactNode;
     /**
      * The url of the avatar picture we want to display.
      * @see {@link AvatarProps#image}
@@ -23,7 +23,7 @@ export interface CommentBlockProps extends GenericProps {
     /** The props to pass to the avatar, minus those already set by the CommentBlock props. */
     avatarProps?: Omit<AvatarProps, 'image' | 'size' | 'tabIndex' | 'onClick' | 'onKeyPress'>;
     /** The children elements. */
-    children?: HTMLElement | ReactNode;
+    children?: ReactNode;
     /** The timestamp of the component. */
     date: string;
     /** Whether the component has actions to display or not. */
@@ -32,6 +32,8 @@ export interface CommentBlockProps extends GenericProps {
     hasChildren?: boolean;
     /** Whether the component children are indented below parent or not. */
     hasIndentedChildren?: boolean;
+    /** The title action elements. */
+    headerActions?: ReactNode;
     /** Whether the component is open or not. */
     isOpen?: boolean;
     /** Whether the comment is relevant or not. */
@@ -39,7 +41,7 @@ export interface CommentBlockProps extends GenericProps {
     /** The name of the comment author. */
     name: string;
     /** The content of the comment. */
-    text: HTMLElement | string;
+    text: ReactNode | string;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
     /** The function called on click. */
@@ -76,6 +78,7 @@ export const CommentBlock: Comp<CommentBlockProps> = ({
     hasActions,
     hasChildren,
     hasIndentedChildren,
+    headerActions,
     isOpen,
     isRelevant,
     name,
@@ -131,6 +134,7 @@ export const CommentBlock: Comp<CommentBlockProps> = ({
                                 {name}
                             </span>
                             {date && <span className={`${CLASSNAME}__date`}>{date}</span>}
+                            {headerActions && <span className={`${CLASSNAME}__header-actions`}>{headerActions}</span>}
                         </div>
 
                         <div className={`${CLASSNAME}__text`}>{text}</div>
