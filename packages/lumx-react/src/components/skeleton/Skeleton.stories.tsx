@@ -1,40 +1,77 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
+    Alignment,
     AspectRatio,
-    GlobalSize,
+    Button,
+    FlexBox,
+    Orientation,
     Size,
     SkeletonCircle,
     SkeletonRectangle,
     SkeletonRectangleVariant,
     SkeletonTypography,
+    Thumbnail,
     Typography,
 } from '@lumx/react';
 
 export default { title: 'LumX components/skeleton/Skeleton' };
 
-const sizes: GlobalSize[] = [Size.xxs, Size.xs, Size.s, Size.m, Size.l, Size.xl, Size.xxl];
+const variants = [
+    SkeletonRectangleVariant.squared,
+    SkeletonRectangleVariant.rounded,
+    SkeletonRectangleVariant.pill,
+] as const;
+const sizes = [Size.xxs, Size.xs, Size.s, Size.m, Size.l, Size.xl, Size.xxl] as const;
+const aspectRatios = [AspectRatio.vertical, AspectRatio.square, AspectRatio.horizontal] as const;
 
-export const skeletonCircle = ({ theme }: any) =>
-    sizes.map((size) => <SkeletonCircle theme={theme} key={size} size={size} />);
+export const skeletonCircle = ({ theme }: any) => (
+    <FlexBox orientation={Orientation.horizontal}>
+        {sizes.map((size) => (
+            <SkeletonCircle theme={theme} key={size} size={size} className="lumx-spacing-margin" />
+        ))}
+    </FlexBox>
+);
 
 export const skeletonRectangle = ({ theme }: any) => (
     <>
-        <SkeletonRectangle
-            theme={theme}
-            width={Size.xl}
-            height={Size.m}
-            variant={SkeletonRectangleVariant.rounded}
-            className="lumx-spacing-margin-bottom"
-        />
-        <SkeletonRectangle
-            theme={theme}
-            width={Size.l}
-            height={Size.s}
-            variant={SkeletonRectangleVariant.pill}
-            className="lumx-spacing-margin-bottom"
-        />
-        <SkeletonRectangle theme={theme} width={Size.xxl} aspectRatio={AspectRatio.horizontal} />
+        Sizes:
+        <FlexBox orientation={Orientation.horizontal}>
+            {sizes.map((size) => (
+                <SkeletonRectangle
+                    key={size}
+                    className="lumx-spacing-margin"
+                    theme={theme}
+                    height={size}
+                    width={size}
+                />
+            ))}
+        </FlexBox>
+        Variants:
+        <FlexBox orientation={Orientation.horizontal}>
+            {variants.map((variant) => (
+                <SkeletonRectangle
+                    key={variant}
+                    className="lumx-spacing-margin"
+                    theme={theme}
+                    width={Size.xl}
+                    height={Size.m}
+                    variant={variant}
+                />
+            ))}
+        </FlexBox>
+        Ratios:
+        <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.top}>
+            {aspectRatios.map((aspectRatio) => (
+                <SkeletonRectangle
+                    key={aspectRatio}
+                    className="lumx-spacing-margin"
+                    theme={theme}
+                    width={Size.xl}
+                    aspectRatio={aspectRatio}
+                />
+            ))}
+        </FlexBox>
     </>
 );
 
@@ -52,3 +89,28 @@ export const skeletonTypography = ({ theme }: any) => (
         <SkeletonTypography theme={theme} typography={Typography.body1} width="70%" />
     </>
 );
+
+export const skeletonRectangleLoadingThumbnail = ({ theme }: any) => {
+    const [loading, setLoading] = useState(true);
+    const fakeLoad = () => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 2000);
+    };
+    useEffect(fakeLoad, []);
+    const size = Size.xl;
+
+    return (
+        <>
+            <Button onClick={fakeLoad}>Reload</Button> (fake 2sec loading)
+            <Thumbnail
+                style={{ display: loading ? 'none' : undefined }}
+                image="https://picsum.photos/72/72/?random"
+                aspectRatio={AspectRatio.square}
+                size={size}
+            />
+            {loading && <SkeletonRectangle theme={theme} width={size} aspectRatio={AspectRatio.square} />}
+        </>
+    );
+};

@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { GlobalSize, Size, Theme } from '@lumx/react';
+import { GlobalSize, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
@@ -27,7 +27,10 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 const SkeletonCircle: React.FC<SkeletonCircleProps> = ({ className, size, theme, ...forwardedProps }) => {
     return (
-        <div {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, size, theme }))} />
+        <div
+            {...forwardedProps}
+            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, size, theme }))}
+        />
     );
 };
 SkeletonCircle.displayName = COMPONENT_NAME;
