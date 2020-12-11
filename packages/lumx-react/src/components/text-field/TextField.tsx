@@ -2,7 +2,7 @@ import React, { ReactNode, RefObject, SyntheticEvent, useEffect, useMemo, useRef
 
 import classNames from 'classnames';
 import get from 'lodash/get';
-import uuid from 'uuid/v4';
+import { uid } from 'uid';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiCloseCircle } from '@lumx/icons';
 import { Emphasis, Icon, IconButton, InputHelper, InputLabel, Kind, Size, Theme } from '@lumx/react';
@@ -26,7 +26,7 @@ export interface TextFieldProps extends GenericProps {
     helper?: string | ReactNode;
     /** Text field icon (SVG path). */
     icon?: string;
-    /** The id that will be passed to input element. An id is generated (uuid) if no id is provided. */
+    /** The id that will be passed to input element. An id is generated (uid) if no id is provided. */
     id?: string;
     /** The reference passed to the <input> or <textarea> element. */
     inputRef?: RefObject<HTMLInputElement> | RefObject<HTMLTextAreaElement>;
@@ -253,7 +253,7 @@ export const TextField: Comp<TextFieldProps> = ({
     value,
     ...forwardedProps
 }) => {
-    const textFieldId = useMemo(() => id || `text-field-${uuid()}`, [id]);
+    const textFieldId = useMemo(() => id || `text-field-${uid()}`, [id]);
     const [isFocus, setFocus] = useState(false);
     const { rows, recomputeNumberOfRows } = useComputeNumberOfRows(multiline ? minimumRows || DEFAULT_MIN_ROWS : 0);
     const valueLength = (value || '').length;

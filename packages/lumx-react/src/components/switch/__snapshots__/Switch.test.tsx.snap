@@ -9,7 +9,7 @@ exports[`<Switch> Conditions should not display the \`helper\` if no \`label\` i
   >
     <input
       className="lumx-switch__input-native"
-      id="switch-a7b5d992-fe30-4d58-967a-89b8bb7e109c"
+      id="switch-uid"
       onChange={[Function]}
       type="checkbox"
     />
@@ -36,7 +36,7 @@ exports[`<Switch> Snapshots and structure should render correctly with a \`label
   >
     <input
       className="lumx-switch__input-native"
-      id="switch-a7b5d992-fe30-4d58-967a-89b8bb7e109c"
+      id="switch-uid"
       onChange={[Function]}
       type="checkbox"
     />
@@ -56,7 +56,7 @@ exports[`<Switch> Snapshots and structure should render correctly with a \`label
   >
     <InputLabel
       className="lumx-switch__label"
-      htmlFor="switch-a7b5d992-fe30-4d58-967a-89b8bb7e109c"
+      htmlFor="switch-uid"
       theme="light"
     >
       Label
@@ -81,7 +81,7 @@ exports[`<Switch> Snapshots and structure should render correctly with only a \`
   >
     <input
       className="lumx-switch__input-native"
-      id="switch-a7b5d992-fe30-4d58-967a-89b8bb7e109c"
+      id="switch-uid"
       onChange={[Function]}
       type="checkbox"
     />
@@ -101,7 +101,7 @@ exports[`<Switch> Snapshots and structure should render correctly with only a \`
   >
     <InputLabel
       className="lumx-switch__label"
-      htmlFor="switch-a7b5d992-fe30-4d58-967a-89b8bb7e109c"
+      htmlFor="switch-uid"
       theme="light"
     >
       Label
@@ -119,7 +119,7 @@ exports[`<Switch> Snapshots and structure should render correctly without any la
   >
     <input
       className="lumx-switch__input-native"
-      id="switch-a7b5d992-fe30-4d58-967a-89b8bb7e109c"
+      id="switch-uid"
       onChange={[Function]}
       type="checkbox"
     />

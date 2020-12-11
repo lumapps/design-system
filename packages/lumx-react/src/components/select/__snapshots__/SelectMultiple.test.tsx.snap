@@ -11,7 +11,7 @@ exports[`<SelectMultiple> Snapshots and structure should render chips 1`] = `
       }
     }
     handleKeyboardNav={[Function]}
-    id="select-uuid"
+    id="select-uid"
     isEmpty={true}
     selectedChipRender={[Function]}
     selectedValueRender={[Function]}
@@ -53,7 +53,7 @@ exports[`<SelectMultiple> Snapshots and structure should render defaults 1`] = `
       }
     }
     handleKeyboardNav={[Function]}
-    id="select-uuid"
+    id="select-uid"
     isEmpty={true}
     selectedChipRender={[Function]}
     selectedValueRender={[Function]}
