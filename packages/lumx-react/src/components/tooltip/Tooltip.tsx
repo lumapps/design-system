@@ -1,7 +1,7 @@
 import React, { ReactNode, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { usePopper } from 'react-popper';
-import uuid from 'uuid/v4';
+import { uid } from 'uid';
 
 import classNames from 'classnames';
 
@@ -67,7 +67,7 @@ export const Tooltip: Comp<TooltipProps> = (props) => {
     }
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const id = useMemo(() => `tooltip-${uuid()}`, []);
+    const id = useMemo(() => `tooltip-${uid()}`, []);
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [popperElement, setPopperElement] = useState<null | HTMLElement>(null);

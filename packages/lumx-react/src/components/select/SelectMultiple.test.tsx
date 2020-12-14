@@ -17,7 +17,7 @@ import { SelectVariant } from './constants';
 
 const CLASSNAME = SelectMultiple.className as string;
 
-jest.mock('uuid/v4', () => () => 'uuid');
+jest.mock('uid', () => ({ uid: () => 'uid' }));
 
 /** Define the overriding properties waited by the `setup` function. */
 type SetupProps = Partial<SelectMultipleProps>;
@@ -59,7 +59,7 @@ const setup = (props: SetupProps = {}, shallowRendering = true): Setup => {
         helper: wrapper.findWhere(
             (n: ShallowWrapper | ReactWrapper) => n.name() === 'InputHelper' && n.prop('kind') === Kind.info,
         ),
-        input: wrapper.find('#select-uuid:not(SelectMultipleField)').first(),
+        input: wrapper.find('#select-uid:not(SelectMultipleField)').first(),
         props,
         wrapper,
     };

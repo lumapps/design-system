@@ -9,7 +9,7 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import useEventCallback from '@lumx/react/hooks/useEventCallback';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
-import uuid from 'uuid/v4';
+import { uid } from 'uid';
 
 /**
  * Defines the props of the component.
@@ -125,7 +125,7 @@ export const Slider: Comp<SliderProps> = ({
     value,
     ...forwardedProps
 }) => {
-    const sliderId = useMemo(() => id || `slider-${uuid()}`, [id]);
+    const sliderId = useMemo(() => id || `slider-${uid()}`, [id]);
     const sliderLabelId = useMemo(() => `label-${sliderId}`, [sliderId]);
     const sliderRef = useRef<HTMLDivElement>(null);
 

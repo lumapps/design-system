@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import classNames from 'classnames';
-import uuid from 'uuid/v4';
+import { uid } from 'uid';
 
 import { Kind, Theme } from '@lumx/react/components';
 import { Dropdown } from '@lumx/react/components/dropdown/Dropdown';
@@ -108,7 +108,7 @@ export const WithSelectContext = (
         ...forwardedProps
     }: CoreSelectProps,
 ): React.ReactElement => {
-    const selectId = useMemo(() => id || `select-${uuid()}`, [id]);
+    const selectId = useMemo(() => id || `select-${uid()}`, [id]);
     const anchorRef = useRef<HTMLElement>(null);
     const selectRef = useRef<HTMLDivElement>(null);
     const [isFocus, setIsFocus] = useState(Boolean(isOpen));
