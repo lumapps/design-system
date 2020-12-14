@@ -96,10 +96,8 @@ export const SixThumbnails = ({ theme }: any) => {
                             <ImageBlock
                                 image={thumbnail.image}
                                 theme={Theme.dark}
-                                thumbnailProps={{
-                                    align: Alignment.center,
-                                    fillHeight: true,
-                                }}
+                                align={Alignment.center}
+                                fillHeight
                             />
                         </SlideshowItem>
                     ))}

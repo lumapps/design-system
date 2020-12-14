@@ -62,7 +62,7 @@ export enum ThumbnailVariant {
  */
 export interface ThumbnailProps extends GenericProps {
     /** The thumbnail alignment. */
-    align?: Alignment;
+    align?: Alignment.right | Alignment.center | Alignment.left;
     /** The image aspect ratio. */
     aspectRatio?: AspectRatio;
     /**

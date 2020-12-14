@@ -21,6 +21,7 @@ import {
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 
 import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
+import { useDisableBodyScroll } from '@lumx/react/hooks/useDisableBodyScroll';
 
 /**
  * Defines the props of the component.
@@ -114,6 +115,9 @@ export const Dialog: Comp<DialogProps> = (props) => {
     // Handle focus trap.
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useFocusTrap(wrapperRef.current, focusElement?.current);
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useDisableBodyScroll(isOpen && wrapperRef.current);
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [sentinelTop, setSentinelTop] = useState<Element | null>(null);
