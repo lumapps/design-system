@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useContext, useMemo, useState } from 'react';
 
-import { ClickAwayParameters, useClickAway } from '@lumx/react/hooks';
+import { ClickAwayParameters, useClickAway } from '@lumx/react/hooks/useClickAway';
 
 import uniq from 'lodash/uniq';
 

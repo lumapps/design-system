@@ -9,7 +9,8 @@ import { COMPONENT_PREFIX, DOCUMENT } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
-import { useDelayedVisibility, useFocus } from '@lumx/react/hooks';
+import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
+import { useFocus } from '@lumx/react/hooks/useFocus';
 import { useDisableBodyScroll } from '@lumx/react/hooks/useDisableBodyScroll';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';

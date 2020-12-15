@@ -22,7 +22,7 @@ export const App = () => (
             <LinkPreview
                 title="Link title"
                 description="Description"
-                url="https://google.com"
+                link="https://google.com"
                 size={Size.big}
                 thumbnail="https://picsum.photos/320/240"
             />
