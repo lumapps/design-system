@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Added `clearButtonProps` prop to `Select` component to allow setting custom props to the `IconButton`s used to clear the select. This prop is not required since the icon button is not automatically displayed. However, when used to display the button, the `label` prop inside the `clearButtonProps` prop will be required because translation are not handled inside the Design System and the `IconButton` now requires a `label` for a11y purposes.
 -   Added `clearButtonProps` prop to `TextField` component to allow setting custom props to the `IconButton`s used to clear the field. This prop is not required since the icon button is not automatically displayed. However, when used to display the button, the `label` prop inside the `clearButtonProps` prop will be required because translation are not handled inside the Design System and the `IconButton` now requires a `label` for a11y purposes.
 -   Added `closeButtonProps` prop to `Lightbox` component to allow setting custom props to the `IconButton`s used to close the lightbox. This prop is not required since the icon button is not automatically displayed. However, when used to display the button, the `label` prop inside the `closeButtonProps` prop will be required because translation are not handled inside the Design System and the `IconButton` now requires a `label` for a11y purposes.
+-   Added `tooltipProps` to `IconButton` to allow setting custom props to the tooltip.
 
 ### Changed
 
@@ -74,6 +75,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   _[BREAKING]_ `isClosingButtonVisible` prop of `Lightbox` component has been removed. Passing the `label` prop using `closeButtonProps` prop is enough to determine the visibility of the icon button.
 -   _[BREAKING]_ `isClearable` prop of `TextField`, `Autocomplete` and `AutocompleteMultiple` components has been removed. Passing the `label` prop using `clearButtonProps` prop is enough to determine the visibility of the icon button.
 -   _[BREAKING]_ `hasControls` prop of `Slideshow` component has been removed. Using `slideshowControlsProps` prop is enough to determine the visibility of the slideshow controls.
+
+### Fixed
+
+-   Fixed `DatePicker` component to prevent switching month when selecting a date.
+-   Fixed `Tooltip` placement on `Icon` and `IconButton`.
 
 ## [0.28.2][] - 2020-12-11
 
