@@ -13,7 +13,7 @@ export const App = ({ theme }: any) => {
         <FlexBox style={{ padding: 80 }} orientation={Orientation.horizontal}>
             {popovers.map(([placement, ref]) => (
                 <FlexBox key={placement} fillSpace vAlign={Alignment.center} hAlign={Alignment.center}>
-                    <Chip chipRef={ref} theme={theme} size={Size.s}>
+                    <Chip ref={ref} theme={theme} size={Size.s}>
                         {placement.toUpperCase()}
                     </Chip>
 

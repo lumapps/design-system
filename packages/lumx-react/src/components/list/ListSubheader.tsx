@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { forwardRef, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -24,10 +24,21 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}ListSubheader`;
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
-export const ListSubheader: Comp<ListSubheaderProps> = ({ children, className, ...forwardedProps }) => (
-    <li {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))}>
-        {children}
-    </li>
-);
+/**
+ * ListSubheader component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const ListSubheader: Comp<ListSubheaderProps, HTMLLIElement> = forwardRef((props, ref) => {
+    const { children, className, ...forwardedProps } = props;
+
+    return (
+        <li ref={ref} {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))}>
+            {children}
+        </li>
+    );
+});
 ListSubheader.displayName = COMPONENT_NAME;
 ListSubheader.className = CLASSNAME;

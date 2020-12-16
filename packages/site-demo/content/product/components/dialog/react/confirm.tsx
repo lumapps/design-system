@@ -11,7 +11,7 @@ export const App = ({ theme }: any) => {
 
     return (
         <>
-            <Button leftIcon={mdiPlay} buttonRef={buttonRef} onClick={toggle} theme={theme}>
+            <Button leftIcon={mdiPlay} ref={buttonRef} onClick={toggle} theme={theme}>
                 Try confirm dialog
             </Button>
 

@@ -7,7 +7,7 @@ import { Comp, GenericProps, getRootClassName, handleBasicClasses, onEnterPresse
 import classNames from 'classnames';
 
 import isFunction from 'lodash/isFunction';
-import React, { MouseEventHandler, ReactNode, Ref } from 'react';
+import React, { forwardRef, MouseEventHandler, ReactNode } from 'react';
 
 /**
  * Authorized size values.
@@ -22,8 +22,6 @@ export interface ChipProps extends GenericProps {
     after?: ReactNode;
     /** A component to be rendered before the content. */
     before?: ReactNode;
-    /** The reference passed to the <a> element. */
-    chipRef?: Ref<HTMLAnchorElement>;
     /** The color variant of the component. */
     color?: Color;
     /** Whether the component is clickable or not. */
@@ -64,26 +62,33 @@ const DEFAULT_PROPS: Partial<ChipProps> = {
     theme: Theme.light,
 };
 
-export const Chip: Comp<ChipProps> = ({
-    after,
-    before,
-    children,
-    chipRef,
-    className,
-    color,
-    disabled,
-    isClickable,
-    isDisabled = disabled,
-    isHighlighted,
-    isSelected,
-    onAfterClick,
-    onBeforeClick,
-    onClick,
-    size,
-    theme,
-    useCustomColors,
-    ...forwardedProps
-}) => {
+/**
+ * Chip component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const Chip: Comp<ChipProps, HTMLAnchorElement> = forwardRef((props, ref) => {
+    const {
+        after,
+        before,
+        children,
+        className,
+        color,
+        disabled,
+        isClickable,
+        isDisabled = disabled,
+        isHighlighted,
+        isSelected,
+        onAfterClick,
+        onBeforeClick,
+        onClick,
+        size,
+        theme,
+        useCustomColors,
+        ...forwardedProps
+    } = props;
     const hasAfterClick = isFunction(onAfterClick);
     const hasBeforeClick = isFunction(onBeforeClick);
     const hasOnClick = isFunction(onClick);
@@ -98,7 +103,7 @@ export const Chip: Comp<ChipProps> = ({
         // eslint-disable-next-line jsx-a11y/no-static-element-interactions
         <a
             {...forwardedProps}
-            ref={chipRef}
+            ref={ref}
             className={classNames(
                 className,
                 handleBasicClasses({
@@ -148,8 +153,7 @@ export const Chip: Comp<ChipProps> = ({
             )}
         </a>
     );
-};
-
+});
 Chip.displayName = COMPONENT_NAME;
 Chip.className = CLASSNAME;
 Chip.defaultProps = DEFAULT_PROPS;

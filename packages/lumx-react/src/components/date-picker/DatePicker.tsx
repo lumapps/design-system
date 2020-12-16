@@ -1,11 +1,19 @@
 import moment from 'moment';
-import React, { useState } from 'react';
+import React, { forwardRef, useState } from 'react';
 import { Comp } from '@lumx/react/utils';
 import { CLASSNAME, COMPONENT_NAME } from './constants';
 import { DatePickerControlled } from './DatePickerControlled';
 import { DatePickerProps } from './types';
 
-export const DatePicker: Comp<DatePickerProps> = ({ defaultMonth, locale, value, onChange, ...forwardedProps }) => {
+/**
+ * DatePicker component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const DatePicker: Comp<DatePickerProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const { defaultMonth, locale, value, onChange, ...forwardedProps } = props;
     let castedValue;
     if (value) {
         castedValue = moment(value);
@@ -32,6 +40,7 @@ export const DatePicker: Comp<DatePickerProps> = ({ defaultMonth, locale, value,
 
     return (
         <DatePickerControlled
+            ref={ref}
             {...forwardedProps}
             defaultMonth={defaultMonth}
             locale={locale}
@@ -42,6 +51,6 @@ export const DatePicker: Comp<DatePickerProps> = ({ defaultMonth, locale, value,
             onChange={onDatePickerChange}
         />
     );
-};
+});
 DatePicker.displayName = COMPONENT_NAME;
 DatePicker.className = CLASSNAME;

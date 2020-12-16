@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import { GlobalSize, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
@@ -25,13 +25,23 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}SkeletonCircle`;
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
-export const SkeletonCircle: Comp<SkeletonCircleProps> = ({ className, size, theme, ...forwardedProps }) => {
+/**
+ * SkeletonCircle component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const SkeletonCircle: Comp<SkeletonCircleProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const { className, size, theme, ...forwardedProps } = props;
+
     return (
         <div
+            ref={ref}
             {...forwardedProps}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, size, theme }))}
         />
     );
-};
+});
 SkeletonCircle.displayName = COMPONENT_NAME;
 SkeletonCircle.className = CLASSNAME;

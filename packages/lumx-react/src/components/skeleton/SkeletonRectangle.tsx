@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import { AspectRatio, GlobalSize, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
@@ -44,17 +44,19 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}SkeletonRectangle`;
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
-export const SkeletonRectangle: Comp<SkeletonRectangleProps> = ({
-    aspectRatio,
-    className,
-    height,
-    theme,
-    variant,
-    width,
-    ...forwardedProps
-}) => {
+/**
+ * SkeletonRectangle component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const SkeletonRectangle: Comp<SkeletonRectangleProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const { aspectRatio, className, height, theme, variant, width, ...forwardedProps } = props;
+
     return (
         <div
+            ref={ref}
             {...forwardedProps}
             className={classNames(
                 className,
@@ -71,7 +73,7 @@ export const SkeletonRectangle: Comp<SkeletonRectangleProps> = ({
             <div className={`${CLASSNAME}__inner`} />
         </div>
     );
-};
+});
 SkeletonRectangle.displayName = COMPONENT_NAME;
 SkeletonRectangle.className = CLASSNAME;
 SkeletonRectangle.defaultProps = DEFAULT_PROPS;

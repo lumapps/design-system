@@ -1,4 +1,4 @@
-import React, { createRef, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
@@ -40,7 +40,6 @@ const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true): 
 };
 
 describe(`<${Link.displayName}>`, () => {
-    // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', () => {
         it('should render correctly', () => {
             const { wrapper } = setup({ href: 'https://google.com' });
@@ -65,30 +64,6 @@ describe(`<${Link.displayName}>`, () => {
             const { wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
         });
-    });
-
-    // 2. Test defaultProps value and important props custom values.
-    describe('Props', () => {
-        it('should use ref', () => {
-            const linkRef = createRef<HTMLAnchorElement>();
-            const { wrapper } = setup({ linkRef }, false);
-            expect(linkRef.current).toBe(wrapper.getDOMNode());
-        });
-    });
-
-    // 3. Test events.
-    describe('Events', () => {
-        // Nothing to do here.
-    });
-
-    // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', () => {
-        // Nothing to do here
-    });
-
-    // 5. Test state.
-    describe('State', () => {
-        // Nothing to do here.
     });
 
     // Common tests suite.

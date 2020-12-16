@@ -1,4 +1,4 @@
-import React, { Children, ReactNode } from 'react';
+import React, { Children, forwardRef, ReactNode } from 'react';
 
 import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
@@ -65,7 +65,14 @@ const DEFAULT_PROPS: Partial<SideNavigationItemProps> = {
     emphasis: Emphasis.high,
 };
 
-export const SideNavigationItem: Comp<SideNavigationItemProps> = (props) => {
+/**
+ * SideNavigationItem component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const SideNavigationItem: Comp<SideNavigationItemProps, HTMLLIElement> = forwardRef((props, ref) => {
     const {
         children,
         className,
@@ -88,6 +95,7 @@ export const SideNavigationItem: Comp<SideNavigationItemProps> = (props) => {
 
     return (
         <li
+            ref={ref}
             {...forwardedProps}
             className={classNames(
                 className,
@@ -147,7 +155,7 @@ export const SideNavigationItem: Comp<SideNavigationItemProps> = (props) => {
             {hasContent && isOpen && <ul className={`${CLASSNAME}__children`}>{content}</ul>}
         </li>
     );
-};
+});
 SideNavigationItem.displayName = COMPONENT_NAME;
 SideNavigationItem.className = CLASSNAME;
 SideNavigationItem.defaultProps = DEFAULT_PROPS;

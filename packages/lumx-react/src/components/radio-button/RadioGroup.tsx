@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { forwardRef, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -23,18 +23,30 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}RadioGroup`;
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
-export const RadioGroup: Comp<RadioGroupProps> = ({ children, className, ...forwardedProps }) => (
-    <div
-        {...forwardedProps}
-        className={classNames(
-            className,
-            handleBasicClasses({
-                prefix: CLASSNAME,
-            }),
-        )}
-    >
-        {children}
-    </div>
-);
+/**
+ * RadioGroup component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const RadioGroup: Comp<RadioGroupProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const { children, className, ...forwardedProps } = props;
+
+    return (
+        <div
+            ref={ref}
+            {...forwardedProps}
+            className={classNames(
+                className,
+                handleBasicClasses({
+                    prefix: CLASSNAME,
+                }),
+            )}
+        >
+            {children}
+        </div>
+    );
+});
 RadioGroup.displayName = COMPONENT_NAME;
 RadioGroup.className = CLASSNAME;

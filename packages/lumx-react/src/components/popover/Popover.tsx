@@ -1,5 +1,5 @@
 import { detectOverflow } from '@popperjs/core';
-import React, { ReactNode, RefObject, useEffect, useMemo, useRef, useState } from 'react';
+import React, { forwardRef, ReactNode, RefObject, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { usePopper } from 'react-popper';
 
@@ -86,8 +86,6 @@ export interface PopoverProps extends GenericProps {
     offset?: Offset;
     /** The desired placement. */
     placement?: Placement;
-    /** The reference of the popover. */
-    popoverRef?: React.RefObject<HTMLDivElement>;
     /** The z-axis position. */
     zIndex?: number;
     /** The function to be called when the user clicks away or Escape is pressed. */
@@ -172,7 +170,14 @@ const applyMaxHeight = {
     },
 };
 
-export const Popover: Comp<PopoverProps> = (props) => {
+/**
+ * Popover component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const Popover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, ref) => {
     if (!DOCUMENT) {
         // Can't render in SSR.
         return null;
@@ -193,7 +198,6 @@ export const Popover: Comp<PopoverProps> = (props) => {
         offset,
         onClose,
         placement,
-        popoverRef,
         style,
         zIndex,
         ...forwardedProps
@@ -254,7 +258,7 @@ export const Popover: Comp<PopoverProps> = (props) => {
         ? createPortal(
               <div
                   {...forwardedProps}
-                  ref={mergeRefs(setPopperElement, popoverRef, clickAwayRef)}
+                  ref={mergeRefs(setPopperElement, ref, clickAwayRef)}
                   className={classNames(
                       className,
                       handleBasicClasses({ prefix: CLASSNAME, elevation: Math.min(elevation || 0, 5), position }),
@@ -270,7 +274,7 @@ export const Popover: Comp<PopoverProps> = (props) => {
               document.body,
           )
         : null;
-};
+});
 Popover.displayName = COMPONENT_NAME;
 Popover.className = CLASSNAME;
 Popover.defaultProps = DEFAULT_PROPS;

@@ -1,4 +1,4 @@
-import React, { Ref, useMemo } from 'react';
+import React, { forwardRef, RefObject, useMemo } from 'react';
 
 import isEmpty from 'lodash/isEmpty';
 
@@ -30,8 +30,6 @@ export interface LinkProps extends GenericProps {
     leftIcon?: string;
     /** Sets a custom react component for the link (can be used to inject react router Link). */
     linkAs?: 'a' | any;
-    /** The reference passed to the <a> element. */
-    linkRef?: Ref<HTMLAnchorElement>;
     /**
      * The icon name to place at the right of the icon.
      * @see {@link IconProps#icon}
@@ -77,22 +75,29 @@ const getIconSize = (typography?: Typography) => {
     }
 };
 
-export const Link: Comp<LinkProps> = ({
-    children,
-    className,
-    color,
-    colorVariant,
-    disabled,
-    isDisabled = disabled,
-    href,
-    leftIcon,
-    linkAs,
-    linkRef,
-    rightIcon,
-    target,
-    typography,
-    ...forwardedProps
-}) => {
+/**
+ * Link component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const Link: Comp<LinkProps, HTMLAnchorElement | HTMLButtonElement> = forwardRef((props, ref) => {
+    const {
+        children,
+        className,
+        color,
+        colorVariant,
+        disabled,
+        isDisabled = disabled,
+        href,
+        leftIcon,
+        linkAs,
+        rightIcon,
+        target,
+        typography,
+        ...forwardedProps
+    } = props;
     const renderedChildren = useMemo(
         () => (
             <>
@@ -127,8 +132,8 @@ export const Link: Comp<LinkProps> = ({
             <button
                 type="button"
                 {...forwardedProps}
+                ref={ref as RefObject<HTMLButtonElement>}
                 disabled={isDisabled}
-                ref={linkRef as any}
                 className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color, colorVariant }))}
             >
                 {renderedChildren}
@@ -142,10 +147,10 @@ export const Link: Comp<LinkProps> = ({
             href,
             target,
             className: classNames(className, handleBasicClasses({ prefix: CLASSNAME, color, colorVariant })),
-            ref: linkRef,
+            ref: ref as RefObject<HTMLAnchorElement>,
         },
         renderedChildren,
     );
-};
+});
 Link.displayName = COMPONENT_NAME;
 Link.className = CLASSNAME;

@@ -62,6 +62,11 @@ exports[`<List> Snapshots and structure should render story AsLink 1`] = `
 exports[`<List> Snapshots and structure should render story KeyboardNavigation 1`] = `
 <ul
   className="lumx-list lumx-list--item-padding-big"
+  listElementRef={
+    Object {
+      "current": undefined,
+    }
+  }
   tabIndex={0}
 >
   <ListItem

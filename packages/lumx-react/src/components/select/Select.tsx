@@ -1,4 +1,4 @@
-import React, { RefObject } from 'react';
+import React, { forwardRef, RefObject } from 'react';
 
 import classNames from 'classnames';
 import lodashIsEmpty from 'lodash/isEmpty';
@@ -44,7 +44,7 @@ const stopPropagation = (evt: Event) => evt.stopPropagation();
  *
  * @return The component.
  */
-const SelectField: Comp<SelectProps> = ({
+const SelectField: React.FC<SelectProps> = ({
     anchorRef,
     clearButtonProps,
     handleKeyboardNav,
@@ -136,7 +136,7 @@ const SelectField: Comp<SelectProps> = ({
                     after={<Icon icon={isEmpty ? mdiMenuDown : mdiCloseCircle} />}
                     onAfterClick={isEmpty ? onInputClick : onClear}
                     onClick={onInputClick}
-                    chipRef={anchorRef as RefObject<HTMLAnchorElement>}
+                    ref={anchorRef as RefObject<HTMLAnchorElement>}
                     theme={theme}
                 >
                     {isEmpty && <span>{label}</span>}
@@ -148,25 +148,35 @@ const SelectField: Comp<SelectProps> = ({
     );
 };
 
-export const Select: Comp<SelectProps> = (props) => {
+/**
+ * Select component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const Select: Comp<SelectProps, HTMLDivElement> = forwardRef((props, ref) => {
     const isEmpty = lodashIsEmpty(props.value);
     const hasInputClear = props.onClear && props.clearButtonProps && !isEmpty;
 
-    return WithSelectContext(SelectField, {
-        ...props,
-        className: classNames(
-            props.className,
-            handleBasicClasses({
-                hasInputClear,
-                hasUnique: !props.isEmpty,
-                prefix: CLASSNAME,
-            }),
-        ),
-        hasInputClear,
-        isEmpty,
-    });
-};
-
+    return WithSelectContext(
+        SelectField,
+        {
+            ...props,
+            className: classNames(
+                props.className,
+                handleBasicClasses({
+                    hasInputClear,
+                    hasUnique: !props.isEmpty,
+                    prefix: CLASSNAME,
+                }),
+            ),
+            hasInputClear,
+            isEmpty,
+        },
+        ref,
+    );
+});
 Select.displayName = COMPONENT_NAME;
 Select.className = CLASSNAME;
 Select.defaultProps = DEFAULT_PROPS;

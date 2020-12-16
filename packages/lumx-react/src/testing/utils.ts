@@ -86,7 +86,7 @@ export function commonTestsSuite(
  * @param stories   Stories module.
  * @param component Component to dive into (expanding the shallow rendering fot this particular component).
  */
-export function expectStoriesToMatchSnapshots(stories: Record<string, any>, component: Comp<any>) {
+export function expectStoriesToMatchSnapshots(stories: Record<string, any>, component: Comp<any, any>) {
     for (const [storyName, Story] of Object.entries(stories)) {
         if (typeof Story !== 'function') {
             continue;

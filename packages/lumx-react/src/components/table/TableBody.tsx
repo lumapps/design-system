@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -20,10 +20,25 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}TableBody`;
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME, true);
 
-export const TableBody: Comp<TableBodyProps> = ({ children, className, ...forwardedProps }) => (
-    <tbody {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))}>
-        {children}
-    </tbody>
-);
+/**
+ * TableBody component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const TableBody: Comp<TableBodyProps, HTMLTableSectionElement> = forwardRef((props, ref) => {
+    const { children, className, ...forwardedProps } = props;
+
+    return (
+        <tbody
+            ref={ref}
+            {...forwardedProps}
+            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))}
+        >
+            {children}
+        </tbody>
+    );
+});
 TableBody.displayName = COMPONENT_NAME;
 TableBody.className = CLASSNAME;

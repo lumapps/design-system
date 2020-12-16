@@ -41,11 +41,17 @@ export interface LumHTMLImageElement extends HTMLImageElement {
 
 export class FocusedImage {
     public focus: FocusPoint;
+
     public options: FocusedImageOptions;
+
     public container: HTMLElement;
+
     public img: LumHTMLImageElement;
+
     public resizeListenerObject?: HTMLObjectElement;
-    public listening: boolean = false;
+
+    public listening = false;
+
     public debounceApplyShift: () => void;
 
     constructor(private readonly imageNode: LumHTMLImageElement, options: FocusedImageOptions) {

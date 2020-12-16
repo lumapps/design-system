@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactNode } from 'react';
+import React, { CSSProperties, forwardRef, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -78,24 +78,34 @@ const DEFAULT_PROPS: Partial<ImageBlockProps> = {
     },
 };
 
-export const ImageBlock: Comp<ImageBlockProps> = ({
-    actions,
-    align,
-    captionPosition,
-    captionStyle,
-    className,
-    description,
-    fillHeight,
-    image,
-    size,
-    tags,
-    theme,
-    thumbnailProps,
-    title,
-    ...forwardedProps
-}) => {
+/**
+ * ImageBlock component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const ImageBlock: Comp<ImageBlockProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const {
+        actions,
+        align,
+        captionPosition,
+        captionStyle,
+        className,
+        description,
+        fillHeight,
+        image,
+        size,
+        tags,
+        theme,
+        thumbnailProps,
+        title,
+        ...forwardedProps
+    } = props;
+
     return (
         <div
+            ref={ref}
             {...forwardedProps}
             className={classNames(
                 className,
@@ -139,7 +149,7 @@ export const ImageBlock: Comp<ImageBlockProps> = ({
             {actions && <div className={`${CLASSNAME}__actions`}>{actions}</div>}
         </div>
     );
-};
+});
 ImageBlock.displayName = COMPONENT_NAME;
 ImageBlock.className = CLASSNAME;
 ImageBlock.defaultProps = DEFAULT_PROPS;

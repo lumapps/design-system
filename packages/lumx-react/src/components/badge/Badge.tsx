@@ -2,7 +2,7 @@ import { Color, ColorPalette } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
-import React, { ReactNode } from 'react';
+import React, { forwardRef, ReactNode } from 'react';
 
 /**
  * Defines the props of the component.
@@ -31,14 +31,25 @@ const DEFAULT_PROPS: Partial<BadgeProps> = {
     color: ColorPalette.primary,
 };
 
-export const Badge: Comp<BadgeProps> = ({ children, className, color, ...forwardedProps }) => {
+/**
+ * Badge component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const Badge: Comp<BadgeProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const { children, className, color, ...forwardedProps } = props;
     return (
-        <div {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color }))}>
+        <div
+            ref={ref}
+            {...forwardedProps}
+            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color }))}
+        >
             {children}
         </div>
     );
-};
-
+});
 Badge.displayName = COMPONENT_NAME;
 Badge.className = CLASSNAME;
 Badge.defaultProps = DEFAULT_PROPS;

@@ -6,7 +6,7 @@ export const App = ({ theme }: any) => {
 
     return (
         <>
-            <Chip style={{ margin: 80 }} chipRef={anchorRef} theme={theme} size={Size.s}>
+            <Chip style={{ margin: 80 }} ref={anchorRef} theme={theme} size={Size.s}>
                 Anchor
             </Chip>
 

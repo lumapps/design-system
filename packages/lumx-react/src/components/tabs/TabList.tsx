@@ -1,9 +1,10 @@
 import { Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, handleBasicClasses } from '@lumx/react/utils';
+import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
 import classNames from 'classnames';
-import React, { ReactNode } from 'react';
+import React, { forwardRef, ReactNode } from 'react';
 import { useRovingTabIndex } from '../../hooks/useRovingTabIndex';
 
 export enum TabListLayout {
@@ -60,9 +61,10 @@ const DEFAULT_PROPS: Partial<TabListProps> = {
  * Implements WAI-ARIA `tablist` role {@see https://www.w3.org/TR/wai-aria-practices-1.1/examples/tabs/tabs-1/tabs.html#rps_label}
  *
  * @param  props Component props.
+ * @param  ref   Component ref.
  * @return React element.
  */
-export const TabList: Comp<TabListProps> = (props) => {
+export const TabList: Comp<TabListProps, HTMLDivElement> = forwardRef((props, ref) => {
     const {
         'aria-label': ariaLabel,
         children,
@@ -83,18 +85,18 @@ export const TabList: Comp<TabListProps> = (props) => {
 
     return (
         <div
+            ref={mergeRefs(ref, tabListRef)}
             {...forwardedProps}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, layout, position, theme }), {
                 [`${CSS_PREFIX}-custom-colors`]: useCustomColors,
             })}
-            ref={tabListRef}
         >
             <div className={`${CLASSNAME}__links`} role="tablist" aria-label={ariaLabel}>
                 {children}
             </div>
         </div>
     );
-};
+});
 TabList.displayName = COMPONENT_NAME;
 TabList.className = CLASSNAME;
 TabList.defaultProps = DEFAULT_PROPS;

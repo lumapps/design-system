@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -23,8 +23,6 @@ export interface IconProps extends GenericProps {
      * @see {@link https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths}
      */
     icon: string;
-    /** The reference passed to the <i> element. */
-    iconRef?: React.RefObject<HTMLElement>;
     /** The size variant of the component. */
     size?: IconSizes;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
@@ -46,17 +44,15 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: Partial<IconProps> = {};
 
-export const Icon: Comp<IconProps> = ({
-    className,
-    color,
-    colorVariant,
-    hasShape,
-    icon,
-    iconRef,
-    size,
-    theme,
-    ...forwardedProps
-}) => {
+/**
+ * Icon component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const Icon: Comp<IconProps, HTMLElement> = forwardRef((props, ref) => {
+    const { className, color, colorVariant, hasShape, icon, size, theme, ...forwardedProps } = props;
     let iconColor;
     if (color) {
         iconColor = color;
@@ -85,8 +81,8 @@ export const Icon: Comp<IconProps> = ({
 
     return (
         <i
+            ref={ref}
             {...forwardedProps}
-            ref={iconRef}
             className={classNames(
                 className,
                 handleBasicClasses({
@@ -111,7 +107,7 @@ export const Icon: Comp<IconProps> = ({
             </svg>
         </i>
     );
-};
+});
 Icon.displayName = COMPONENT_NAME;
 Icon.className = CLASSNAME;
 Icon.defaultProps = DEFAULT_PROPS;

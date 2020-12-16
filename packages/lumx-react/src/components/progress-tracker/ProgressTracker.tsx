@@ -1,9 +1,10 @@
-import React, { ReactNode } from 'react';
+import React, { forwardRef, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 import { useRovingTabIndex } from '../../hooks/useRovingTabIndex';
 import { useTabProviderContextState } from '../tabs/state';
 
@@ -38,9 +39,10 @@ const DEFAULT_PROPS: Partial<ProgressTrackerProps> = {};
  * Implements WAI-ARIA `tablist` role {@see https://www.w3.org/TR/wai-aria-practices-1.1/examples/tabs/tabs-1/tabs.html#rps_label}
  *
  * @param  props Component props.
+ * @param  ref   Component ref.
  * @return React element.
  */
-export const ProgressTracker: Comp<ProgressTrackerProps> = (props) => {
+export const ProgressTracker: Comp<ProgressTrackerProps, HTMLDivElement> = forwardRef((props, ref) => {
     const { 'aria-label': ariaLabel, children, className, ...forwardedProps } = props;
     const stepListRef = React.useRef(null);
     useRovingTabIndex({
@@ -58,7 +60,7 @@ export const ProgressTracker: Comp<ProgressTrackerProps> = (props) => {
 
     return (
         <div
-            ref={stepListRef}
+            ref={mergeRefs(ref, stepListRef)}
             {...forwardedProps}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))}
         >
@@ -81,7 +83,7 @@ export const ProgressTracker: Comp<ProgressTrackerProps> = (props) => {
             />
         </div>
     );
-};
+});
 ProgressTracker.displayName = COMPONENT_NAME;
 ProgressTracker.className = CLASSNAME;
 ProgressTracker.defaultProps = DEFAULT_PROPS;

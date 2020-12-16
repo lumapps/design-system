@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactElement, ReactNode } from 'react';
+import React, { CSSProperties, forwardRef, ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -47,12 +47,21 @@ const DEFAULT_PROPS: Partial<AvatarProps> = {
     theme: Theme.light,
 };
 
-export const Avatar: Comp<AvatarProps> = ({ actions, badge, className, image, size, theme, ...forwardedProps }) => {
+/**
+ * Avatar component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const Avatar: Comp<AvatarProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const { actions, badge, className, image, size, theme, ...forwardedProps } = props;
     const style: CSSProperties = {
         backgroundImage: `url(${image})`,
     };
     return (
         <div
+            ref={ref}
             {...forwardedProps}
             className={classNames(
                 className,
@@ -64,7 +73,7 @@ export const Avatar: Comp<AvatarProps> = ({ actions, badge, className, image, si
             {badge && <div className={`${CLASSNAME}__badge`}>{badge}</div>}
         </div>
     );
-};
+});
 Avatar.displayName = COMPONENT_NAME;
 Avatar.className = CLASSNAME;
 Avatar.defaultProps = DEFAULT_PROPS;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -36,15 +36,26 @@ const DEFAULT_PROPS: Partial<TableProps> = {
     theme: Theme.light,
 };
 
-export const Table: Comp<TableProps> = ({ children, className, hasBefore, hasDividers, theme, ...forwardedProps }) => (
-    <table
-        {...forwardedProps}
-        className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, hasBefore, hasDividers, theme }))}
-    >
-        {children}
-    </table>
-);
+/**
+ * Table component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const Table: Comp<TableProps, HTMLTableElement> = forwardRef((props, ref) => {
+    const { children, className, hasBefore, hasDividers, theme, ...forwardedProps } = props;
 
+    return (
+        <table
+            ref={ref}
+            {...forwardedProps}
+            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, hasBefore, hasDividers, theme }))}
+        >
+            {children}
+        </table>
+    );
+});
 Table.displayName = COMPONENT_NAME;
 Table.className = CLASSNAME;
 Table.defaultProps = DEFAULT_PROPS;

@@ -3,7 +3,7 @@ import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, handleBasicClasses } from '@lumx/react/utils';
 
 import classNames from 'classnames';
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 /**
  * Defines the props of the component.
@@ -36,9 +36,10 @@ const DEFAULT_PROPS: Partial<TabPanelProps> = {};
  * Implements WAI-ARIA `tabpanel` role {@see https://www.w3.org/TR/wai-aria-practices-1.1/examples/tabs/tabs-1/tabs.html#rps_label}
  *
  * @param  props Component props.
+ * @param  ref   Component ref.
  * @return React element.
  */
-export const TabPanel: Comp<TabPanelProps> = (props) => {
+export const TabPanel: Comp<TabPanelProps, HTMLDivElement> = forwardRef((props, ref) => {
     const { children, id, className, isActive: propIsActive, ...forwardedProps } = props;
 
     const state = useTabProviderContext('tabPanel', id);
@@ -46,6 +47,7 @@ export const TabPanel: Comp<TabPanelProps> = (props) => {
 
     return (
         <div
+            ref={ref}
             {...forwardedProps}
             id={state?.tabPanelId}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, isActive }))}
@@ -56,7 +58,7 @@ export const TabPanel: Comp<TabPanelProps> = (props) => {
             {(!state?.isLazy || isActive) && children}
         </div>
     );
-};
+});
 TabPanel.displayName = COMPONENT_NAME;
 TabPanel.className = CLASSNAME;
 TabPanel.defaultProps = DEFAULT_PROPS;

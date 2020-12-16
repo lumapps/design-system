@@ -1,4 +1,4 @@
-import React, { ReactNode, SyntheticEvent } from 'react';
+import React, { forwardRef, ReactNode, SyntheticEvent } from 'react';
 
 import classNames from 'classnames';
 
@@ -52,22 +52,30 @@ const DEFAULT_PROPS: Partial<RadioButtonProps> = {
     theme: Theme.light,
 };
 
-export const RadioButton: Comp<RadioButtonProps> = ({
-    checked,
-    className,
-    disabled,
-    helper,
-    id,
-    isChecked = checked,
-    isDisabled = disabled,
-    label,
-    name,
-    onChange,
-    theme,
-    useCustomColors,
-    value,
-    ...forwardedProps
-}) => {
+/**
+ * RadioButton component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const RadioButton: Comp<RadioButtonProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const {
+        checked,
+        className,
+        disabled,
+        helper,
+        id,
+        isChecked = checked,
+        isDisabled = disabled,
+        label,
+        name,
+        onChange,
+        theme,
+        useCustomColors,
+        value,
+        ...forwardedProps
+    } = props;
     const radioButtonId: string = id || uniqueId(`${CLASSNAME.toLowerCase()}-`);
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (onChange) {
@@ -77,6 +85,8 @@ export const RadioButton: Comp<RadioButtonProps> = ({
 
     return (
         <div
+            ref={ref}
+            {...forwardedProps}
             className={classNames(
                 className,
                 handleBasicClasses({
@@ -91,7 +101,6 @@ export const RadioButton: Comp<RadioButtonProps> = ({
         >
             <div className={`${CLASSNAME}__input-wrapper`}>
                 <input
-                    {...forwardedProps}
                     className={`${CLASSNAME}__input-native`}
                     disabled={isDisabled}
                     id={radioButtonId}
@@ -123,7 +132,7 @@ export const RadioButton: Comp<RadioButtonProps> = ({
             </div>
         </div>
     );
-};
+});
 RadioButton.displayName = COMPONENT_NAME;
 RadioButton.className = CLASSNAME;
 RadioButton.defaultProps = DEFAULT_PROPS;

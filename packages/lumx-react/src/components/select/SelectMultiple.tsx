@@ -1,4 +1,4 @@
-import React, { ReactNode, RefObject, SyntheticEvent } from 'react';
+import React, { forwardRef, ReactNode, RefObject, SyntheticEvent } from 'react';
 
 import classNames from 'classnames';
 
@@ -58,7 +58,7 @@ const DEFAULT_PROPS: Partial<SelectMultipleProps> = {
     selectedValueRender: (choice) => choice,
 };
 
-export const SelectMultipleField: Comp<SelectMultipleProps> = ({
+export const SelectMultipleField: React.FC<SelectMultipleProps> = ({
     anchorRef,
     handleKeyboardNav,
     hasError,
@@ -145,7 +145,7 @@ export const SelectMultipleField: Comp<SelectMultipleProps> = ({
                 after={<Icon icon={isEmpty ? mdiMenuDown : mdiCloseCircle} />}
                 onAfterClick={isEmpty ? onInputClick : onClear}
                 onClick={onInputClick}
-                chipRef={anchorRef as RefObject<HTMLAnchorElement>}
+                ref={anchorRef as RefObject<HTMLAnchorElement>}
                 theme={theme}
             >
                 {isEmpty && <span>{label}</span>}
@@ -162,20 +162,31 @@ export const SelectMultipleField: Comp<SelectMultipleProps> = ({
     </>
 );
 
-export const SelectMultiple: Comp<SelectMultipleProps> = (props) =>
-    WithSelectContext(SelectMultipleField, {
-        ...props,
-        className: classNames(
-            props.className,
-            handleBasicClasses({
-                hasMultiple: !props.isEmpty,
-                prefix: CLASSNAME,
-            }),
-        ),
-        isEmpty: props.value.length === 0,
-        isMultiple: true,
-    });
-
+/**
+ * SelectMultiple component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const SelectMultiple: Comp<SelectMultipleProps, HTMLDivElement> = forwardRef((props, ref) => {
+    return WithSelectContext(
+        SelectMultipleField,
+        {
+            ...props,
+            className: classNames(
+                props.className,
+                handleBasicClasses({
+                    hasMultiple: !props.isEmpty,
+                    prefix: CLASSNAME,
+                }),
+            ),
+            isEmpty: props.value.length === 0,
+            isMultiple: true,
+        },
+        ref,
+    );
+});
 SelectMultiple.displayName = COMPONENT_NAME;
 SelectMultiple.className = CLASSNAME;
 SelectMultiple.defaultProps = DEFAULT_PROPS;

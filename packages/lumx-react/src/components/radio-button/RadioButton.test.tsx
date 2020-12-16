@@ -150,5 +150,5 @@ describe(`<${RadioButton.displayName}>`, () => {
     });
 
     // Common tests suite.
-    commonTestsSuite(setup, { prop: 'input', className: 'wrapper' }, { className: CLASSNAME });
+    commonTestsSuite(setup, { prop: 'wrapper', className: 'wrapper' }, { className: CLASSNAME });
 });

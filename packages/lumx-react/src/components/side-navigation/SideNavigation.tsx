@@ -1,4 +1,4 @@
-import React, { Children, ReactNode } from 'react';
+import React, { Children, forwardRef, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -29,16 +29,20 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}SideNavigation`;
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
-export const SideNavigation: Comp<SideNavigationProps> = ({
-    children,
-    className,
-    theme,
-    useCustomColors,
-    ...forwardedProps
-}) => {
+/**
+ * SideNavigation component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const SideNavigation: Comp<SideNavigationProps, HTMLUListElement> = forwardRef((props, ref) => {
+    const { children, className, theme, useCustomColors, ...forwardedProps } = props;
     const content = Children.toArray(children).filter(isComponent(SideNavigationItem));
+
     return (
         <ul
+            ref={ref}
             {...forwardedProps}
             className={classNames(
                 className,
@@ -50,6 +54,6 @@ export const SideNavigation: Comp<SideNavigationProps> = ({
             {content}
         </ul>
     );
-};
+});
 SideNavigation.displayName = COMPONENT_NAME;
 SideNavigation.className = CLASSNAME;

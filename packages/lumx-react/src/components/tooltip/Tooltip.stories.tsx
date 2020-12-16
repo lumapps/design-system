@@ -78,7 +78,7 @@ export const TooltipWithDropdown = () => {
     return (
         <>
             <Tooltip label="Tooltip">
-                <Button buttonRef={buttonRef}>Anchor</Button>
+                <Button ref={buttonRef}>Anchor</Button>
             </Tooltip>
             <Dropdown anchorRef={buttonRef} isOpen>
                 Dropdown

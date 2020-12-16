@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { forwardRef, useCallback } from 'react';
 
 import classNames from 'classnames';
 
@@ -69,16 +69,16 @@ const DEFAULT_PROPS: Partial<TableCellProps> = {
     variant: TableCellVariant.body,
 };
 
-export const TableCell: Comp<TableCellProps> = ({
-    children,
-    className,
-    icon,
-    isSortable,
-    onHeaderClick,
-    sortOrder,
-    variant,
-    ...forwardedProps
-}) => {
+/**
+ * TableCell component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const TableCell: Comp<TableCellProps, HTMLTableCellElement> = forwardRef((props, ref) => {
+    const { children, className, icon, isSortable, onHeaderClick, sortOrder, variant, ...forwardedProps } = props;
+
     /**
      * Handle click on the ordered thead.
      */
@@ -92,6 +92,7 @@ export const TableCell: Comp<TableCellProps> = ({
         <>
             {variant === TableCellVariant.head && (
                 <th
+                    ref={ref}
                     {...forwardedProps}
                     className={classNames(
                         handleBasicClasses({ prefix: CLASSNAME, isSortable }),
@@ -131,7 +132,7 @@ export const TableCell: Comp<TableCellProps> = ({
             )}
         </>
     );
-};
+});
 TableCell.displayName = COMPONENT_NAME;
 TableCell.className = CLASSNAME;
 TableCell.defaultProps = DEFAULT_PROPS;

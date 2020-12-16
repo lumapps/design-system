@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -25,12 +25,26 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME, true);
  */
 const DEFAULT_PROPS: Partial<TableHeaderProps> = {};
 
-export const TableHeader: Comp<TableHeaderProps> = ({ children, className, ...forwardedProps }) => (
-    <thead {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))}>
-        {children}
-    </thead>
-);
+/**
+ * TableHeader component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const TableHeader: Comp<TableHeaderProps, HTMLTableSectionElement> = forwardRef((props, ref) => {
+    const { children, className, ...forwardedProps } = props;
 
+    return (
+        <thead
+            ref={ref}
+            {...forwardedProps}
+            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))}
+        >
+            {children}
+        </thead>
+    );
+});
 TableHeader.displayName = COMPONENT_NAME;
 TableHeader.className = CLASSNAME;
 TableHeader.defaultProps = DEFAULT_PROPS;

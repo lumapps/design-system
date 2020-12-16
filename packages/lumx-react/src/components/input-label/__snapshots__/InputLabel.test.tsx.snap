@@ -3,6 +3,7 @@
 exports[`<InputLabel> Snapshots and structure should render defaults 1`] = `
 <label
   className="lumx-input-label lumx-input-label--theme-light"
+  htmlFor="id"
 >
   The Label text
 </label>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -31,9 +31,24 @@ export const DEFAULT_PROPS: Partial<DividerProps> = {
     theme: Theme.light,
 };
 
-export const Divider: Comp<DividerProps> = ({ className, theme, ...forwardedProps }) => (
-    <hr {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }))} />
-);
+/**
+ * Divider component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const Divider: Comp<DividerProps, HTMLHRElement> = forwardRef((props, ref) => {
+    const { className, theme, ...forwardedProps } = props;
+
+    return (
+        <hr
+            ref={ref}
+            {...forwardedProps}
+            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }))}
+        />
+    );
+});
 Divider.displayName = COMPONENT_NAME;
 Divider.className = CLASSNAME;
 Divider.defaultProps = DEFAULT_PROPS;

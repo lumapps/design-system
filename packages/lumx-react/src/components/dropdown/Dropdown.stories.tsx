@@ -24,13 +24,13 @@ export const MatchAnchorWithMinWidth = () => {
         <>
             <div>Match anchor width only if the dropdown is smaller</div>
             <FlexBox orientation={Orientation.horizontal}>
-                <IconButton label="Home" icon={mdiHome} buttonRef={buttonRef1} />
+                <IconButton label="Home" icon={mdiHome} ref={buttonRef1} />
                 <Dropdown anchorRef={buttonRef1} isOpen>
                     Big dropdown
                 </Dropdown>
 
                 <FlexBox marginAuto={Alignment.left}>
-                    <Button buttonRef={buttonRef2}>Big button with long text</Button>
+                    <Button ref={buttonRef2}>Big button with long text</Button>
                 </FlexBox>
                 <Dropdown anchorRef={buttonRef2} isOpen>
                     Small Dropdown
@@ -75,7 +75,7 @@ export const LongPagePlacement = () => {
         <div className="demo-grid">
             Scroll down and open the dropdown.
             <div style={{ marginTop: '100px' }}>
-                <Button buttonRef={anchorFirstRef} onClick={toggleFirstMenu}>
+                <Button ref={anchorFirstRef} onClick={toggleFirstMenu}>
                     First Menu
                 </Button>
 
@@ -111,7 +111,7 @@ export const LongPagePlacement = () => {
                 </Dropdown>
             </div>
             <div style={{ marginTop: '1000px' }}>
-                <Button buttonRef={anchorSecondRef} onClick={toggleSecondMenu}>
+                <Button ref={anchorSecondRef} onClick={toggleSecondMenu}>
                     Second Menu
                 </Button>
 
@@ -147,7 +147,7 @@ export const LongPagePlacement = () => {
                 </Dropdown>
             </div>
             <div style={{ marginTop: '2000px' }}>
-                <Button buttonRef={anchorThirdRef} onClick={toggleThirdMenu}>
+                <Button ref={anchorThirdRef} onClick={toggleThirdMenu}>
                     Third Menu
                 </Button>
 
@@ -199,7 +199,7 @@ export const InfiniteScroll = () => {
 
     return (
         <>
-            <Button buttonRef={buttonRef}>Anchor</Button>
+            <Button ref={buttonRef}>Anchor</Button>
             <Dropdown anchorRef={buttonRef} isOpen onInfiniteScroll={onInfiniteScroll}>
                 <List>
                     {items.map((item) => (

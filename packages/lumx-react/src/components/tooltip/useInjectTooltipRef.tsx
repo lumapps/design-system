@@ -27,44 +27,15 @@ export const useInjectTooltipRef = (
             get(children, 'props.disabled') !== true &&
             get(children, 'props.isDisabled') !== true
         ) {
-            const type = get(children, 'type');
-
-            // Base React HTML element.
-            if (typeof type === 'string') {
-                const element = children as any;
-                if (element.ref) {
-                    setAnchorElement(element.ref.current);
-                }
-                return cloneElement(element, {
-                    ...element.props,
-                    ...ariaProps,
-                    ref: mergeRefs(element.ref, setAnchorElement),
-                });
+            const element = children as any;
+            if (element.ref) {
+                setAnchorElement(element.ref.current);
             }
-
-            // Button, IconButton
-            if (
-                type?.displayName === 'Button' ||
-                type?.displayName === 'ButtonRoot' ||
-                type?.displayName === 'IconButton'
-            ) {
-                const element = children as any;
-                return cloneElement(element, {
-                    ...element.props,
-                    ...ariaProps,
-                    buttonRef: mergeRefs(element.props.buttonRef, setAnchorElement),
-                });
-            }
-
-            // Icon
-            if (type?.displayName === 'Icon') {
-                const element = children as any;
-                return cloneElement(element, {
-                    ...element.props,
-                    ...ariaProps,
-                    iconRef: mergeRefs(element.props.iconRef, setAnchorElement),
-                });
-            }
+            return cloneElement(element, {
+                ...element.props,
+                ...ariaProps,
+                ref: mergeRefs(element.ref, setAnchorElement),
+            });
         }
         return (
             <div className="lumx-tooltip-anchor-wrapper" ref={setAnchorElement} {...ariaProps}>

@@ -1,4 +1,4 @@
-import React, { ReactNode, RefObject, SyntheticEvent, useEffect, useMemo, useRef, useState } from 'react';
+import React, { forwardRef, ReactNode, RefObject, SyntheticEvent, useEffect, useMemo, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 import get from 'lodash/get';
@@ -157,7 +157,7 @@ interface InputNativeProps {
     onBlur?(value: React.FocusEvent): void;
 }
 
-const renderInputNative: Comp<InputNativeProps> = (props) => {
+const renderInputNative: React.FC<InputNativeProps> = (props) => {
     const {
         id,
         isDisabled,
@@ -223,37 +223,45 @@ const renderInputNative: Comp<InputNativeProps> = (props) => {
     return <Component {...inputProps} />;
 };
 
-export const TextField: Comp<TextFieldProps> = ({
-    chips,
-    className,
-    clearButtonProps,
-    disabled,
-    error,
-    forceFocusStyle,
-    hasError,
-    helper,
-    icon,
-    id,
-    inputRef,
-    isDisabled = disabled,
-    isRequired,
-    isValid,
-    label,
-    maxLength,
-    minimumRows,
-    multiline,
-    name,
-    onBlur,
-    onChange,
-    onFocus,
-    placeholder,
-    textFieldRef,
-    theme,
-    type,
-    useCustomColors,
-    value,
-    ...forwardedProps
-}) => {
+/**
+ * TextField component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const TextField: Comp<TextFieldProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const {
+        chips,
+        className,
+        clearButtonProps,
+        disabled,
+        error,
+        forceFocusStyle,
+        hasError,
+        helper,
+        icon,
+        id,
+        inputRef,
+        isDisabled = disabled,
+        isRequired,
+        isValid,
+        label,
+        maxLength,
+        minimumRows,
+        multiline,
+        name,
+        onBlur,
+        onChange,
+        onFocus,
+        placeholder,
+        textFieldRef,
+        theme,
+        type,
+        useCustomColors,
+        value,
+        ...forwardedProps
+    } = props;
     const textFieldId = useMemo(() => id || `text-field-${uid()}`, [id]);
     const [isFocus, setFocus] = useState(false);
     const { rows, recomputeNumberOfRows } = useComputeNumberOfRows(multiline ? minimumRows || DEFAULT_MIN_ROWS : 0);
@@ -276,6 +284,7 @@ export const TextField: Comp<TextFieldProps> = ({
 
     return (
         <div
+            ref={ref}
             className={classNames(
                 className,
                 handleBasicClasses({
@@ -387,7 +396,7 @@ export const TextField: Comp<TextFieldProps> = ({
             )}
         </div>
     );
-};
+});
 TextField.displayName = COMPONENT_NAME;
 TextField.className = CLASSNAME;
 TextField.defaultProps = DEFAULT_PROPS;

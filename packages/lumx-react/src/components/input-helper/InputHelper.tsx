@@ -2,7 +2,7 @@ import { Kind, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
-import React, { ReactNode } from 'react';
+import React, { forwardRef, ReactNode } from 'react';
 
 import { INPUT_HELPER_CONFIGURATION } from './constants';
 
@@ -36,18 +36,27 @@ const DEFAULT_PROPS: Partial<InputHelperProps> = {
     theme: Theme.light,
 };
 
-export const InputHelper: Comp<InputHelperProps> = ({ children, className, kind, theme, ...forwardedProps }) => {
+/**
+ * InputHelper component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const InputHelper: Comp<InputHelperProps, HTMLSpanElement> = forwardRef((props, ref) => {
+    const { children, className, kind, theme, ...forwardedProps } = props;
     const { color } = INPUT_HELPER_CONFIGURATION[kind as any] || {};
 
     return (
         <span
+            ref={ref}
             {...forwardedProps}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color, theme }))}
         >
             {children}
         </span>
     );
-};
+});
 
 InputHelper.displayName = COMPONENT_NAME;
 InputHelper.className = CLASSNAME;

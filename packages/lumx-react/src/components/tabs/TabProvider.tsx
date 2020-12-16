@@ -1,5 +1,4 @@
 import React, { ReactNode, useEffect, useReducer } from 'react';
-import { Comp } from '@lumx/react/utils';
 import { INIT_STATE, TabProviderContext, reducer } from './state';
 
 export interface TabProviderProps {
@@ -31,7 +30,7 @@ const DEFAULT_PROPS: Partial<TabProviderProps> = {
  * @param  props React component props.
  * @return React element.
  */
-export const TabProvider: Comp<TabProviderProps> = (props) => {
+export const TabProvider: React.FC<TabProviderProps> = (props) => {
     const { children, onChange, ...propState } = props;
     const [state, dispatch] = useReducer(reducer, INIT_STATE);
 

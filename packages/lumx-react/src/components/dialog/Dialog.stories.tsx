@@ -38,7 +38,7 @@ function useOpenButton(theme: Theme) {
 
     return {
         button: (
-            <Button buttonRef={buttonRef} onClick={openDialog} theme={theme}>
+            <Button ref={buttonRef} onClick={openDialog} theme={theme}>
                 Open dialog
             </Button>
         ),

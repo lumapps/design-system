@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { ReactNode, useMemo, useState } from 'react';
+import React, { forwardRef, ReactNode, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { usePopper } from 'react-popper';
 import { uid } from 'uid';
@@ -11,6 +11,7 @@ import { Placement } from '@lumx/react/components/popover/Popover';
 import { COMPONENT_PREFIX, DOCUMENT } from '@lumx/react/constants';
 
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
 import { useInjectTooltipRef } from './useInjectTooltipRef';
 import { useTooltipOpen } from './useTooltipOpen';
@@ -57,7 +58,14 @@ const DEFAULT_PROPS: Partial<TooltipProps> = {
  */
 const OFFSET = 8;
 
-export const Tooltip: Comp<TooltipProps> = (props) => {
+/**
+ * Tooltip component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const Tooltip: Comp<TooltipProps, HTMLDivElement> = forwardRef((props, ref) => {
     if (!DOCUMENT) {
         // Can't render in SSR.
         return null;
@@ -91,9 +99,9 @@ export const Tooltip: Comp<TooltipProps> = (props) => {
             {isOpen &&
                 createPortal(
                     <div
+                        ref={mergeRefs(ref, setPopperElement)}
                         {...forwardedProps}
                         id={id}
-                        ref={setPopperElement}
                         role="tooltip"
                         aria-label={label}
                         className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, position }))}
@@ -103,7 +111,7 @@ export const Tooltip: Comp<TooltipProps> = (props) => {
                         <div className={`${CLASSNAME}__arrow`} />
                         <div className={`${CLASSNAME}__inner`}>
                             {label.indexOf('\n') !== -1
-                                ? label.split('\n').map((sentence) => <p key={sentence}>{sentence}</p>)
+                                ? label.split('\n').map((sentence: string) => <p key={sentence}>{sentence}</p>)
                                 : label}
                         </div>
                     </div>,
@@ -111,7 +119,7 @@ export const Tooltip: Comp<TooltipProps> = (props) => {
                 )}
         </>
     );
-};
+});
 Tooltip.displayName = COMPONENT_NAME;
 Tooltip.className = CLASSNAME;
 Tooltip.defaultProps = DEFAULT_PROPS;

@@ -1,4 +1,4 @@
-import React, { cloneElement, useMemo, useRef } from 'react';
+import React, { cloneElement, forwardRef, useMemo, useRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -96,7 +96,14 @@ const DEFAULT_PROPS: Partial<DropdownProps> = {
     shouldFocusOnOpen: true,
 };
 
-export const Dropdown: Comp<DropdownProps> = (props) => {
+/**
+ * Dropdown component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const Dropdown: Comp<DropdownProps, HTMLDivElement> = forwardRef((props, ref) => {
     const {
         anchorRef,
         children,
@@ -124,7 +131,7 @@ export const Dropdown: Comp<DropdownProps> = (props) => {
         return !Array.isArray(children) && isComponent(List)(children)
             ? cloneElement<ListProps>(children, {
                   ...children.props,
-                  listElementRef: listElement,
+                  ref: listElement,
                   onClick(evt: MouseEvent) {
                       children.props.onClick?.(evt);
 
@@ -139,6 +146,7 @@ export const Dropdown: Comp<DropdownProps> = (props) => {
 
     return isOpen ? (
         <Popover
+            ref={ref}
             {...forwardedProps}
             anchorRef={anchorRef}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))}
@@ -158,7 +166,7 @@ export const Dropdown: Comp<DropdownProps> = (props) => {
             </div>
         </Popover>
     ) : null;
-};
+});
 Dropdown.displayName = COMPONENT_NAME;
 Dropdown.className = CLASSNAME;
 Dropdown.defaultProps = DEFAULT_PROPS;

@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes, DetailedHTMLProps, RefObject } from 'react';
+import React, { ButtonHTMLAttributes, DetailedHTMLProps, forwardRef, RefObject } from 'react';
 
 import isEmpty from 'lodash/isEmpty';
 
@@ -6,7 +6,7 @@ import classNames from 'classnames';
 
 import { Color, ColorPalette, Emphasis, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
-import { GenericProps, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, handleBasicClasses } from '@lumx/react/utils';
 import { renderLink } from '@lumx/react/utils/renderLink';
 
 type HTMLButtonProps = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
@@ -19,8 +19,6 @@ export type ButtonSize = Size.s | Size.m;
 export interface BaseButtonProps extends GenericProps {
     /** The label that describes the button if necessary. */
     ['aria-label']?: string;
-    /** The reference passed to the <a> or <button> element. */
-    buttonRef?: RefObject<HTMLButtonElement> | RefObject<HTMLAnchorElement>;
     /** The color variant of the component. */
     color?: Color;
     /** The emphasis variant of the component. */
@@ -93,10 +91,16 @@ const renderButtonWrapper: React.FC<ButtonRootProps> = (props) => {
     );
 };
 
-export const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
+/**
+ * ButtonRoot component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const ButtonRoot: Comp<ButtonRootProps, HTMLButtonElement | HTMLAnchorElement> = forwardRef((props, ref) => {
     const {
         'aria-label': ariaLabel,
-        buttonRef,
         children,
         className,
         color,
@@ -124,7 +128,7 @@ export const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
         ColorPalette.dark;
 
     if (hasBackground) {
-        return renderButtonWrapper({ ...props, color: adaptedColor });
+        return renderButtonWrapper({ ...props, variant, color: adaptedColor });
     }
 
     const buttonClassName = classNames(
@@ -157,7 +161,7 @@ export const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
                 href,
                 target,
                 className: buttonClassName,
-                ref: buttonRef as RefObject<HTMLAnchorElement>,
+                ref: ref as RefObject<HTMLAnchorElement>,
             },
             children,
         );
@@ -168,7 +172,7 @@ export const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
             disabled={isDisabled}
             aria-disabled={isDisabled}
             aria-label={ariaLabel}
-            ref={buttonRef as RefObject<HTMLButtonElement>}
+            ref={ref as RefObject<HTMLButtonElement>}
             className={buttonClassName}
             name={name}
             type={
@@ -179,6 +183,6 @@ export const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
             {children}
         </button>
     );
-};
+});
 ButtonRoot.displayName = COMPONENT_NAME;
 ButtonRoot.defaultProps = {};

@@ -1,4 +1,4 @@
-import React, { FocusEventHandler, KeyboardEventHandler, useCallback } from 'react';
+import React, { FocusEventHandler, forwardRef, KeyboardEventHandler, useCallback } from 'react';
 
 import classNames from 'classnames';
 
@@ -53,9 +53,10 @@ const DEFAULT_PROPS: Partial<ProgressTrackerStepProps> = {};
  * Implements WAI-ARIA `tab` role {@see https://www.w3.org/TR/wai-aria-practices-1.1/examples/tabs/tabs-1/tabs.html#rps_label}
  *
  * @param  props Component props.
+ * @param  ref   Component ref.
  * @return React element.
  */
-export const ProgressTrackerStep: Comp<ProgressTrackerStepProps> = (props) => {
+export const ProgressTrackerStep: Comp<ProgressTrackerStepProps, HTMLButtonElement> = forwardRef((props, ref) => {
     const {
         className,
         disabled,
@@ -117,6 +118,7 @@ export const ProgressTrackerStep: Comp<ProgressTrackerStepProps> = (props) => {
 
     return (
         <button
+            ref={ref}
             {...forwardedProps}
             type="button"
             id={state?.tabId}
@@ -141,7 +143,9 @@ export const ProgressTrackerStep: Comp<ProgressTrackerStepProps> = (props) => {
         >
             <Icon className={`${CLASSNAME}__state`} icon={getIcon()} size={Size.s} />
 
-            <InputLabel className={`${CLASSNAME}__label`}>{label}</InputLabel>
+            <InputLabel htmlFor={state?.tabId || ''} className={`${CLASSNAME}__label`}>
+                {label}
+            </InputLabel>
 
             {helper && (
                 <InputHelper kind={hasError ? Kind.error : Kind.info} className={`${CLASSNAME}__helper`}>
@@ -150,8 +154,7 @@ export const ProgressTrackerStep: Comp<ProgressTrackerStepProps> = (props) => {
             )}
         </button>
     );
-};
-
+});
 ProgressTrackerStep.displayName = COMPONENT_NAME;
 ProgressTrackerStep.className = CLASSNAME;
 ProgressTrackerStep.defaultProps = DEFAULT_PROPS;

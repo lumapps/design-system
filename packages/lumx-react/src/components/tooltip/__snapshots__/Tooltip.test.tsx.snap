@@ -4,7 +4,6 @@ exports[`<Tooltip> Snapshots and structure should not wrap Button 1`] = `
 <Fragment>
   <Button
     aria-describedby="tooltip-uid"
-    buttonRef={[Function]}
     emphasis="high"
     size="m"
     theme="light"
@@ -45,7 +44,6 @@ exports[`<Tooltip> Snapshots and structure should not wrap Icon 1`] = `
   <Icon
     aria-describedby="tooltip-uid"
     icon="icon"
-    iconRef={[Function]}
   />
   <Portal
     containerInfo={<body />}
@@ -204,12 +202,7 @@ exports[`<Tooltip> Snapshots and structure should wrap children 1`] = `
 
 exports[`<Tooltip> Snapshots and structure should wrap children 2`] = `
 <Fragment>
-  <div
-    aria-describedby="tooltip-uid"
-    className="lumx-tooltip-anchor-wrapper"
-  >
-    children
-  </div>
+  children
   <Portal
     containerInfo={<body />}
   >

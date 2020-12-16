@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { Ref, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 import { uid } from 'uid';
@@ -11,6 +11,7 @@ import { Placement } from '@lumx/react/components/popover/Popover';
 import { COMPONENT_PREFIX, CSS_PREFIX, DOWN_KEY_CODE, ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
 
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
 import { CoreSelectProps, SelectVariant } from './constants';
 
@@ -107,6 +108,7 @@ export const WithSelectContext = (
         variant = DEFAULT_PROPS.variant,
         ...forwardedProps
     }: CoreSelectProps,
+    ref: Ref<HTMLDivElement>,
 ): React.ReactElement => {
     const selectId = useMemo(() => id || `select-${uid()}`, [id]);
     const anchorRef = useRef<HTMLElement>(null);
@@ -140,7 +142,7 @@ export const WithSelectContext = (
 
     return (
         <div
-            ref={selectRef}
+            ref={mergeRefs(ref, selectRef)}
             className={classNames(
                 className,
                 handleBasicClasses({

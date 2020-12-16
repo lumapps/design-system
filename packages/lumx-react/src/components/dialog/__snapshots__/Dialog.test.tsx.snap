@@ -3,11 +3,6 @@
 exports[`<Dialog> Snapshots and structure should render story DialogWithFocusableElements 1`] = `
 <Fragment>
   <Button
-    buttonRef={
-      Object {
-        "current": undefined,
-      }
-    }
     emphasis="high"
     onClick={[Function]}
     size="m"
@@ -131,11 +126,6 @@ exports[`<Dialog> Snapshots and structure should render story DialogWithFocusabl
 exports[`<Dialog> Snapshots and structure should render story DialogWithHeaderFooterAndDivider 1`] = `
 <Fragment>
   <Button
-    buttonRef={
-      Object {
-        "current": undefined,
-      }
-    }
     emphasis="high"
     onClick={[Function]}
     size="m"
@@ -190,11 +180,6 @@ tertiam. Cras mattis iudicium purus sit amet fermentum
 exports[`<Dialog> Snapshots and structure should render story DialogWithHeaderFooterChildren 1`] = `
 <Fragment>
   <Button
-    buttonRef={
-      Object {
-        "current": undefined,
-      }
-    }
     emphasis="high"
     onClick={[Function]}
     size="m"
@@ -247,11 +232,6 @@ tertiam. Cras mattis iudicium purus sit amet fermentum
 exports[`<Dialog> Snapshots and structure should render story DialogWithHeaderFooterProps 1`] = `
 <Fragment>
   <Button
-    buttonRef={
-      Object {
-        "current": undefined,
-      }
-    }
     emphasis="high"
     onClick={[Function]}
     size="m"
@@ -296,11 +276,6 @@ tertiam. Cras mattis iudicium purus sit amet fermentum
 exports[`<Dialog> Snapshots and structure should render story DialogWithHeaderFooterPropsAndChildren 1`] = `
 <Fragment>
   <Button
-    buttonRef={
-      Object {
-        "current": undefined,
-      }
-    }
     emphasis="high"
     onClick={[Function]}
     size="m"
@@ -355,11 +330,6 @@ tertiam. Cras mattis iudicium purus sit amet fermentum
 exports[`<Dialog> Snapshots and structure should render story LoadingDialog 1`] = `
 <Fragment>
   <Button
-    buttonRef={
-      Object {
-        "current": undefined,
-      }
-    }
     emphasis="high"
     onClick={[Function]}
     size="m"
@@ -403,11 +373,6 @@ tertiam. Cras mattis iudicium purus sit amet fermentum
 exports[`<Dialog> Snapshots and structure should render story PreventDialogAutoClose 1`] = `
 <Fragment>
   <Button
-    buttonRef={
-      Object {
-        "current": undefined,
-      }
-    }
     emphasis="high"
     onClick={[Function]}
     size="m"
@@ -465,11 +430,6 @@ tertiam. Cras mattis iudicium purus sit amet fermentum
 exports[`<Dialog> Snapshots and structure should render story ScrollableDialog 1`] = `
 <Fragment>
   <Button
-    buttonRef={
-      Object {
-        "current": undefined,
-      }
-    }
     emphasis="high"
     onClick={[Function]}
     size="m"
@@ -554,11 +514,6 @@ Aquitani, tertiam.
 exports[`<Dialog> Snapshots and structure should render story ScrollableDialogWithHeaderAndFooter 1`] = `
 <Fragment>
   <Button
-    buttonRef={
-      Object {
-        "current": undefined,
-      }
-    }
     emphasis="high"
     onClick={[Function]}
     size="m"
@@ -653,11 +608,6 @@ Aquitani, tertiam.
 exports[`<Dialog> Snapshots and structure should render story SimpleDialog 1`] = `
 <Fragment>
   <Button
-    buttonRef={
-      Object {
-        "current": undefined,
-      }
-    }
     emphasis="high"
     onClick={[Function]}
     size="m"
@@ -700,11 +650,6 @@ tertiam. Cras mattis iudicium purus sit amet fermentum
 exports[`<Dialog> Snapshots and structure should render story Sizes 1`] = `
 <Fragment>
   <Button
-    buttonRef={
-      Object {
-        "current": undefined,
-      }
-    }
     emphasis="high"
     onClick={[Function]}
     size="m"

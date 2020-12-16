@@ -1,4 +1,4 @@
-import React, { ReactNode, Ref } from 'react';
+import React, { forwardRef, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -39,8 +39,6 @@ export interface UserBlockProps extends GenericProps {
     size?: UserBlockSize;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
-    /** The reference passed to the wrapper. */
-    userBlockRef?: Ref<HTMLDivElement>;
     /** The function called on click. */
     onClick?(): void;
     /** The function called when the cursor enters the component. */
@@ -68,23 +66,30 @@ const DEFAULT_PROPS: Partial<UserBlockProps> = {
     theme: Theme.light,
 };
 
-export const UserBlock: Comp<UserBlockProps> = ({
-    avatar,
-    avatarProps,
-    className,
-    fields,
-    multipleActions,
-    name,
-    onClick,
-    onMouseEnter,
-    onMouseLeave,
-    orientation,
-    simpleAction,
-    size,
-    theme,
-    userBlockRef,
-    ...forwardedProps
-}) => {
+/**
+ * UserBlock component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const UserBlock: Comp<UserBlockProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const {
+        avatar,
+        avatarProps,
+        className,
+        fields,
+        multipleActions,
+        name,
+        onClick,
+        onMouseEnter,
+        onMouseLeave,
+        orientation,
+        simpleAction,
+        size,
+        theme,
+        ...forwardedProps
+    } = props;
     let componentSize = size;
 
     // Special case - When using vertical orientation force the size to be Sizes.l.
@@ -113,8 +118,8 @@ export const UserBlock: Comp<UserBlockProps> = ({
 
     return (
         <div
+            ref={ref}
             {...forwardedProps}
-            ref={userBlockRef}
             className={classNames(
                 className,
                 handleBasicClasses({ prefix: CLASSNAME, orientation, size: componentSize, theme }),
@@ -146,7 +151,7 @@ export const UserBlock: Comp<UserBlockProps> = ({
             )}
         </div>
     );
-};
+});
 UserBlock.displayName = COMPONENT_NAME;
 UserBlock.className = CLASSNAME;
 UserBlock.defaultProps = DEFAULT_PROPS;

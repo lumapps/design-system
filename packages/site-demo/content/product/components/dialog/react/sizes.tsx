@@ -21,7 +21,7 @@ export const App = ({ theme }: any) => {
             <Button
                 className="lumx-spacing-margin-horizontal-tiny"
                 leftIcon={mdiPlay}
-                buttonRef={buttonRef}
+                ref={buttonRef}
                 onClick={onClickSize(Size.tiny)}
                 theme={theme}
             >
@@ -31,7 +31,7 @@ export const App = ({ theme }: any) => {
             <Button
                 className="lumx-spacing-margin-horizontal-tiny"
                 leftIcon={mdiPlay}
-                buttonRef={buttonRef}
+                ref={buttonRef}
                 onClick={onClickSize(Size.regular)}
                 theme={theme}
             >
@@ -41,7 +41,7 @@ export const App = ({ theme }: any) => {
             <Button
                 className="lumx-spacing-margin-horizontal-tiny"
                 leftIcon={mdiPlay}
-                buttonRef={buttonRef}
+                ref={buttonRef}
                 onClick={onClickSize(Size.big)}
                 theme={theme}
             >
@@ -51,7 +51,7 @@ export const App = ({ theme }: any) => {
             <Button
                 className="lumx-spacing-margin-horizontal-tiny"
                 leftIcon={mdiPlay}
-                buttonRef={buttonRef}
+                ref={buttonRef}
                 onClick={onClickSize(Size.huge)}
                 theme={theme}
             >

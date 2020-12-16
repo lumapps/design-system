@@ -9,7 +9,7 @@ export const App = () => {
 
     return (
         <>
-            <Chip chipRef={anchorRef}>I am the anchor</Chip>
+            <Chip ref={anchorRef}>I am the anchor</Chip>
 
             <Dropdown
                 closeOnClickAway={false}

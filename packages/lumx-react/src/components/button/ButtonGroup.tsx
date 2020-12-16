@@ -1,4 +1,4 @@
-import React, { Ref } from 'react';
+import React, { forwardRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -8,10 +8,7 @@ import { Comp, GenericProps, getRootClassName } from '@lumx/react/utils';
 /**
  * Defines the props of the component
  */
-export interface ButtonGroupProps extends GenericProps {
-    /** The reference passed to the wrapper. */
-    buttonGroupRef?: Ref<HTMLDivElement>;
-}
+export type ButtonGroupProps = GenericProps;
 
 /**
  * The display name of the component.
@@ -28,11 +25,22 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: Partial<ButtonGroupProps> = {};
 
-export const ButtonGroup: Comp<ButtonGroupProps> = ({ buttonGroupRef, children, className, ...forwardedProps }) => (
-    <div {...forwardedProps} className={classNames(className, CLASSNAME)} ref={buttonGroupRef}>
-        {children}
-    </div>
-);
+/**
+ * ButtonGroup component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const ButtonGroup: Comp<ButtonGroupProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const { children, className, ...forwardedProps } = props;
+
+    return (
+        <div ref={ref} {...forwardedProps} className={classNames(className, CLASSNAME)}>
+            {children}
+        </div>
+    );
+});
 ButtonGroup.displayName = COMPONENT_NAME;
 ButtonGroup.className = CLASSNAME;
 ButtonGroup.defaultProps = DEFAULT_PROPS;

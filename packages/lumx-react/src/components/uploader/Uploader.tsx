@@ -1,4 +1,4 @@
-import React, { MouseEventHandler } from 'react';
+import React, { forwardRef, MouseEventHandler } from 'react';
 
 import classNames from 'classnames';
 
@@ -54,21 +54,21 @@ const DEFAULT_PROPS: Partial<UploaderProps> = {
     variant: UploaderVariant.square,
 };
 
-export const Uploader: Comp<UploaderProps> = ({
-    aspectRatio,
-    className,
-    label,
-    icon,
-    size,
-    theme,
-    variant,
-    ...forwardedProps
-}) => {
+/**
+ * Uploader component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const Uploader: Comp<UploaderProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const { aspectRatio, className, label, icon, size, theme, variant, ...forwardedProps } = props;
     // Adjust to square aspect ratio when using circle variants.
     const adjustedAspectRatio = variant === UploaderVariant.circle ? AspectRatio.square : aspectRatio;
 
     return (
         <div
+            ref={ref}
             {...forwardedProps}
             className={classNames(
                 className,
@@ -94,7 +94,7 @@ export const Uploader: Comp<UploaderProps> = ({
             </div>
         </div>
     );
-};
+});
 Uploader.displayName = COMPONENT_NAME;
 Uploader.className = CLASSNAME;
 Uploader.defaultProps = DEFAULT_PROPS;

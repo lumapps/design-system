@@ -35,7 +35,7 @@ interface Setup extends CommonSetup {
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
 const setup = (propsOverride: SetupProps = {}, shallowRendering = true): Setup => {
-    const props: any = { ...propsOverride };
+    const props: any = { htmlFor: 'id', ...propsOverride };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
     const wrapper: Wrapper = renderer(<InputLabel {...props} />);
     const label: Wrapper = wrapper.find('.lumx-input-label');
@@ -73,18 +73,10 @@ describe(`<${InputLabel.displayName}>`, () => {
 
             const { label } = setup({
                 children,
+                htmlFor: '123',
             });
             expect(label).toContainReact(children);
-        });
-
-        it('should add custom props', () => {
-            const data = {
-                children: 'The Label',
-                htmlFor: 'toto',
-            };
-
-            const { label } = setup(data);
-            expect(label).toHaveProp('htmlFor', data.htmlFor);
+            expect(label).toHaveProp('htmlFor', '123');
         });
 
         it('should render dark theme', () => {
