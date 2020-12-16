@@ -1,4 +1,4 @@
-import { AspectRatio, ImageBlock, Slideshow, SlideshowItem } from '@lumx/react';
+import { AspectRatio, ImageBlock, Slideshow, SlideshowItem, SlideshowProps } from '@lumx/react';
 import { IMAGES, imageKnob } from '@lumx/react/stories/knobs';
 import { boolean, number } from '@storybook/addon-knobs';
 import React from 'react';
@@ -16,18 +16,24 @@ export const Simple = ({ theme }: any) => {
     ];
     const activeIndex = number('Active index', 0);
     const groupBy = number('Group by', 1);
-    const hasControls = boolean('Has controls', true);
     const autoPlay = boolean('Autoplay', false);
     const interval = number('Autoplay interval (in milliseconds)', 1000);
+
+    const slideshowControlsProps: SlideshowProps['slideshowControlsProps'] = {
+        nextButtonProps: { label: 'Next' },
+        previousButtonProps: { label: 'Previous' },
+    };
     return (
         <Slideshow
             activeIndex={activeIndex}
             autoPlay={autoPlay}
             interval={interval}
-            hasControls={hasControls}
+            slideshowControlsProps={slideshowControlsProps}
             theme={theme}
             groupBy={groupBy}
             style={{ width: '50%' }}
+            nextButtonProps={{ label: 'Next' }}
+            previousButtonProps={{ label: 'Previous' }}
         >
             {images.map((image, index) => (
                 <SlideshowItem key={`${image}-${index}`}>

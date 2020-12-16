@@ -22,6 +22,6 @@ export const WithHeaderActions = ({ theme }: any) => (
         date="4 hours ago"
         name="Emmitt O. Lum"
         text="All the rumors have finally died down and many skeptics have tightened their lips, the iPod does support video format now on its fifth generation."
-        headerActions={<IconButton icon={mdiDotsHorizontal} emphasis={Emphasis.low} size={Size.s} />}
+        headerActions={<IconButton label="Actions" icon={mdiDotsHorizontal} emphasis={Emphasis.low} size={Size.s} />}
     />
 );

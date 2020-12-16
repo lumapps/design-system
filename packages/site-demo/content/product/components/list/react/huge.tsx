@@ -49,7 +49,7 @@ export const App = () => (
         <ListItem
             size={Size.huge}
             before={<Thumbnail variant={ThumbnailVariant.rounded} image="/demo-assets/square1.jpg" size={Size.m} />}
-            after={<IconButton emphasis={Emphasis.low} icon={mdiDotsHorizontal} />}
+            after={<IconButton label="More" emphasis={Emphasis.low} icon={mdiDotsHorizontal} />}
         >
             <div>
                 <span>Multi-line item</span>

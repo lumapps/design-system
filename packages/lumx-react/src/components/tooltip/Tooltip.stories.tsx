@@ -1,8 +1,19 @@
-import { Button, Placement, Switch, Tooltip } from '@lumx/react';
+import { mdiHelp, mdiPrinter } from '@lumx/icons';
+import {
+    Button,
+    Dropdown,
+    FlexBox,
+    Icon,
+    IconButton,
+    Orientation,
+    Placement,
+    Size,
+    Switch,
+    Tooltip,
+} from '@lumx/react';
 import { select, text } from '@storybook/addon-knobs';
 import noop from 'lodash/noop';
 import React, { useRef, useState } from 'react';
-import { Dropdown } from '../dropdown/Dropdown';
 
 export default { title: 'LumX components/tooltip/Tooltip' };
 
@@ -23,13 +34,21 @@ export const ForceOpen = () => {
 };
 
 export const InlineTooltip = () => (
-    <>
-        {'Some text with a '}
-        <Tooltip label="A tooltip on the word 'tooltip'">
-            <span>tooltip</span>
+    <div className="lumx-spacing-margin-huge">
+        Some text with a
+        <Tooltip label="extremely complex and difficult to follow" forceOpen>
+            <abbr style={{ borderBottom: '1px dotted', margin: '0 4px' }}>convoluted</abbr>
         </Tooltip>
-        {' on one word.'}
-    </>
+        word in it. And some text with a contextual help at the end
+        <Tooltip
+            label="A contextual help is help that is displayed in your product or web site"
+            placement={Placement.TOP}
+            forceOpen
+        >
+            <Icon icon={mdiHelp} size={Size.xxs} style={{ display: 'inline-block', verticalAlign: 'super' }} />
+        </Tooltip>
+        .
+    </div>
 );
 
 export const MultilineTooltip = () => (
@@ -82,5 +101,36 @@ export const TooltipOnDisabledButton = () => {
                 </Button>
             </Tooltip>
         </>
+    );
+};
+
+export const TooltipOnDifferentComponents = () => {
+    return (
+        <FlexBox orientation={Orientation.horizontal} className="lumx-spacing-margin-top-huge">
+            <FlexBox fillSpace />
+            <FlexBox fillSpace>
+                <Tooltip forceOpen label="Tooltip on Button">
+                    <Button>Button</Button>
+                </Tooltip>
+            </FlexBox>
+            <FlexBox fillSpace>
+                <IconButton icon={mdiPrinter} label="Tooltip on IconButton" tooltipProps={{ forceOpen: true }} />
+            </FlexBox>
+            <FlexBox fillSpace>
+                <Tooltip forceOpen label="Tooltip on Icon">
+                    <Icon icon={mdiPrinter} style={{ display: 'inline-block' }} />
+                </Tooltip>
+            </FlexBox>
+            <FlexBox fillSpace>
+                <Tooltip forceOpen label="Tooltip on shaped Icon">
+                    <Icon icon={mdiPrinter} hasShape />
+                </Tooltip>
+            </FlexBox>
+            <FlexBox fillSpace>
+                <Tooltip forceOpen label="Tooltip on word">
+                    <span>word</span>
+                </Tooltip>
+            </FlexBox>
+        </FlexBox>
     );
 };

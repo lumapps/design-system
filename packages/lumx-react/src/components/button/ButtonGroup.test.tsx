@@ -38,7 +38,7 @@ const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true): 
         children: (
             <>
                 <Button>Label</Button>
-                <IconButton icon={mdiPlus} />
+                <IconButton label="Add" icon={mdiPlus} />
             </>
         ),
         ...propsOverride,

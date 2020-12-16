@@ -33,6 +33,7 @@ export const App = ({ theme }: any) => {
             after={
                 <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
                     <IconButton
+                        label="Grid"
                         className="lumx-spacing-margin-right-regular"
                         emphasis={Emphasis.low}
                         theme={theme}

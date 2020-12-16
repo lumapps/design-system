@@ -34,6 +34,7 @@ export const DefaultSelectMultiple = ({ theme }: any) => {
             isOpen={isOpen}
             value={values}
             onClear={clearSelected}
+            clearButtonProps={{ label: 'Clear' }}
             label={LABEL}
             placeholder={PLACEHOLDER}
             theme={theme}
@@ -68,6 +69,7 @@ export const SelectMultipleWithNoData = ({ theme }: any) => {
             isOpen
             value={[]}
             onClear={noop}
+            clearButtonProps={{ label: 'Clear' }}
             label="Select label"
             placeholder="Select values"
             theme={theme}
@@ -89,6 +91,7 @@ export const DisabledSelectMultiple = ({ theme }: any) => {
             isOpen
             value={[]}
             onClear={noop}
+            clearButtonProps={{ label: 'Clear' }}
             label="Select label"
             placeholder="Select values"
             theme={theme}
@@ -123,6 +126,7 @@ export const ChipsSelectMultiple = ({ theme }: any) => {
             isOpen={isOpen}
             value={values}
             onClear={clearSelected}
+            clearButtonProps={{ label: 'Clear' }}
             label={LABEL}
             placeholder={PLACEHOLDER}
             theme={theme}
@@ -190,6 +194,7 @@ export const ChipsCustomSelectMultiple = ({ theme }: any) => {
             isOpen={isOpen}
             value={values}
             onClear={clearSelected}
+            clearButtonProps={{ label: 'Clear' }}
             label={LABEL}
             placeholder={PLACEHOLDER}
             theme={theme}

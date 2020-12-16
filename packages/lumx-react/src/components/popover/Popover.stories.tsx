@@ -149,6 +149,7 @@ export const WithUpdatingChildren = ({ theme }: any) => {
     return (
         <div style={{ float: 'right' }} className="lumx-spacing-margin-right-huge">
             <IconButton
+                label="Notifications"
                 className="lumx-spacing-margin-right-huge"
                 buttonRef={anchorRef}
                 emphasis={Emphasis.low}
@@ -185,6 +186,7 @@ export const WithScrollingPopover = ({ theme }: any) => {
     return (
         <div style={{ float: 'right' }} className="lumx-spacing-margin-right-huge">
             <IconButton
+                label="Notifications"
                 className="lumx-spacing-margin-right-huge"
                 buttonRef={anchorRef}
                 emphasis={Emphasis.low}

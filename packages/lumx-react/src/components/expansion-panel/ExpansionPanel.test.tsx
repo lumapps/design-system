@@ -34,6 +34,7 @@ interface Setup extends CommonSetup {
  */
 const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true): Setup => {
     const props: ExpansionPanelProps = {
+        toggleButtonProps: { label: 'Toggle' },
         ...propsOverride,
     };
 

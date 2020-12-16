@@ -11,26 +11,29 @@ const CustomLink: React.FC = ({ children, ...props }) =>
 
 export const Simple = () => (
     <SideNavigation>
-        <SideNavigationItem label="Navigation item" emphasis={Emphasis.low} />
-        <SideNavigationItem label="Navigation item" emphasis={Emphasis.low} />
-        <SideNavigationItem label="Navigation item" emphasis={Emphasis.low} />
+        <SideNavigationItem label="Navigation item" emphasis={Emphasis.low} toggleButtonProps={{ label: 'Toggle' }} />
+        <SideNavigationItem label="Navigation item" emphasis={Emphasis.low} toggleButtonProps={{ label: 'Toggle' }} />
+        <SideNavigationItem label="Navigation item" emphasis={Emphasis.low} toggleButtonProps={{ label: 'Toggle' }} />
         <SideNavigationItem
             label="Navigation item"
             emphasis={Emphasis.low}
             linkProps={{ href: 'https://www.google.com' }}
+            toggleButtonProps={{ label: 'Toggle' }}
         />
         <SideNavigationItem
             label="Navigation item"
             emphasis={Emphasis.low}
             linkProps={{ href: 'https://www.google.com/not-visited' }}
+            toggleButtonProps={{ label: 'Toggle' }}
         />
         <SideNavigationItem
             label="Navigation item (custom link)"
             emphasis={Emphasis.low}
             linkAs={CustomLink}
             linkProps={{ href: 'https://www.google.com/not-visited-1' }}
+            toggleButtonProps={{ label: 'Toggle' }}
         />
-        <SideNavigationItem label="Navigation item" emphasis={Emphasis.low} />
+        <SideNavigationItem label="Navigation item" emphasis={Emphasis.low} toggleButtonProps={{ label: 'Toggle' }} />
     </SideNavigation>
 );
 
@@ -42,9 +45,25 @@ export const With3Levels = () => {
 
     return (
         <SideNavigation>
-            <SideNavigationItem label="Level 1" emphasis={Emphasis.high} isOpen={l1IsOpen} onClick={toggleL1}>
-                <SideNavigationItem label="Level 2" emphasis={Emphasis.medium} isOpen={l2IsOpen} onClick={toggleL2}>
-                    <SideNavigationItem label="Level 3" emphasis={Emphasis.low} />
+            <SideNavigationItem
+                label="Level 1"
+                emphasis={Emphasis.high}
+                isOpen={l1IsOpen}
+                onClick={toggleL1}
+                toggleButtonProps={{ label: 'Toggle' }}
+            >
+                <SideNavigationItem
+                    label="Level 2"
+                    emphasis={Emphasis.medium}
+                    isOpen={l2IsOpen}
+                    onClick={toggleL2}
+                    toggleButtonProps={{ label: 'Toggle' }}
+                >
+                    <SideNavigationItem
+                        label="Level 3"
+                        emphasis={Emphasis.low}
+                        toggleButtonProps={{ label: 'Toggle' }}
+                    />
                 </SideNavigationItem>
             </SideNavigationItem>
         </SideNavigation>
@@ -65,6 +84,7 @@ export const With3LevelsAndIcons = () => {
                 isOpen={l1IsOpen}
                 onClick={toggleL1}
                 icon={mdiAccount}
+                toggleButtonProps={{ label: 'Toggle' }}
             >
                 <SideNavigationItem
                     label="Level 2"
@@ -72,10 +92,26 @@ export const With3LevelsAndIcons = () => {
                     isOpen={l2IsOpen}
                     onClick={toggleL2}
                     icon={mdiAccount}
+                    toggleButtonProps={{ label: 'Toggle' }}
                 >
-                    <SideNavigationItem label="Level 3.1" emphasis={Emphasis.low} isSelected />
-                    <SideNavigationItem label="Level 3.2" emphasis={Emphasis.low} icon={mdiAccount} />
-                    <SideNavigationItem label="Level 3.3" emphasis={Emphasis.low} icon={mdiAccount} />
+                    <SideNavigationItem
+                        label="Level 3.1"
+                        emphasis={Emphasis.low}
+                        isSelected
+                        toggleButtonProps={{ label: 'Toggle' }}
+                    />
+                    <SideNavigationItem
+                        label="Level 3.2"
+                        emphasis={Emphasis.low}
+                        icon={mdiAccount}
+                        toggleButtonProps={{ label: 'Toggle' }}
+                    />
+                    <SideNavigationItem
+                        label="Level 3.3"
+                        emphasis={Emphasis.low}
+                        icon={mdiAccount}
+                        toggleButtonProps={{ label: 'Toggle' }}
+                    />
                 </SideNavigationItem>
             </SideNavigationItem>
         </SideNavigation>
@@ -98,6 +134,7 @@ export const With3LevelsAndMultiActions = () => {
                 linkProps={{ href: 'javascript:alert("Level 1")' }}
                 icon={mdiAccount}
                 onActionClick={toggleL1}
+                toggleButtonProps={{ label: 'Toggle' }}
             >
                 <SideNavigationItem
                     label="Level 2"
@@ -105,18 +142,21 @@ export const With3LevelsAndMultiActions = () => {
                     isOpen={l2IsOpen}
                     linkProps={{ href: 'javascript:alert("Level 2")' }}
                     onActionClick={toggleL2}
+                    toggleButtonProps={{ label: 'Toggle' }}
                 >
                     <SideNavigationItem
                         label="Level 3.1"
                         emphasis={Emphasis.low}
                         linkProps={{ href: 'javascript:alert("Level 3.1 item is clicked")' }}
                         onActionClick={alertMessage('Level 3.1 action is clicked')}
+                        toggleButtonProps={{ label: 'Toggle' }}
                     />
                     <SideNavigationItem
                         label="Level 3.2"
                         emphasis={Emphasis.low}
                         onClick={alertMessage('Level 3.2 item is clicked')}
                         onActionClick={alertMessage('Level 3.2 action is clicked')}
+                        toggleButtonProps={{ label: 'Toggle' }}
                     />
                 </SideNavigationItem>
             </SideNavigationItem>

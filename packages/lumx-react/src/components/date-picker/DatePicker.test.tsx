@@ -1,8 +1,9 @@
-import { CommonSetup, Wrapper } from '@lumx/react/testing/utils';
+import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
-import React, { ReactElement } from 'react';
+
+import { CommonSetup, Wrapper } from '@lumx/react/testing/utils';
 import { DatePickerProps } from '@lumx/react';
 import { DatePicker } from './DatePicker';
 
@@ -24,6 +25,8 @@ const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true): 
         locale: 'fr',
         onChange: jest.fn(),
         value: mockedDate,
+        nextButtonProps: { label: 'Next month' },
+        previousButtonProps: { label: 'Previous month' },
         ...propsOverride,
     };
 

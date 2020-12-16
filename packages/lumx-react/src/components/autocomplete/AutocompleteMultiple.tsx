@@ -80,7 +80,7 @@ export const AutocompleteMultiple: Comp<AutocompleteMultipleProps> = ({
     helper,
     icon,
     inputRef,
-    isClearable,
+    clearButtonProps,
     isDisabled,
     isOpen,
     isValid,
@@ -130,7 +130,7 @@ export const AutocompleteMultiple: Comp<AutocompleteMultipleProps> = ({
             </ChipGroup>
         }
         isDisabled={isDisabled}
-        isClearable={isClearable}
+        clearButtonProps={clearButtonProps}
         isValid={isValid}
         label={label}
         placeholder={placeholder}

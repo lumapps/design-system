@@ -46,6 +46,7 @@ const stopPropagation = (evt: Event) => evt.stopPropagation();
  */
 const SelectField: Comp<SelectProps> = ({
     anchorRef,
+    clearButtonProps,
     handleKeyboardNav,
     hasError,
     hasInputClear,
@@ -107,8 +108,9 @@ const SelectField: Comp<SelectProps> = ({
                             </div>
                         )}
 
-                        {hasInputClear && (
+                        {hasInputClear && clearButtonProps && (
                             <IconButton
+                                {...clearButtonProps}
                                 className={`${CLASSNAME}__input-clear`}
                                 icon={mdiCloseCircle}
                                 emphasis={Emphasis.low}
@@ -148,7 +150,7 @@ const SelectField: Comp<SelectProps> = ({
 
 export const Select: Comp<SelectProps> = (props) => {
     const isEmpty = lodashIsEmpty(props.value);
-    const hasInputClear = props.onClear && !isEmpty;
+    const hasInputClear = props.onClear && props.clearButtonProps && !isEmpty;
 
     return WithSelectContext(SelectField, {
         ...props,

@@ -44,8 +44,22 @@ export const App = () => {
 
     return (
         <div style={{ width: 536, margin: '0 auto' }}>
-            <Lightbox isOpen={isOpen} parentElement={triggerElement} onClose={close}>
-                <Slideshow activeIndex={activeIndex} hasControls autoPlay fillHeight theme={Theme.dark}>
+            <Lightbox
+                isOpen={isOpen}
+                parentElement={triggerElement}
+                onClose={close}
+                closeButtonProps={{ label: 'Close' }}
+            >
+                <Slideshow
+                    activeIndex={activeIndex}
+                    slideshowControlsProps={{
+                        nextButtonProps: { label: 'Next' },
+                        previousButtonProps: { label: 'Previous' },
+                    }}
+                    autoPlay
+                    fillHeight
+                    theme={Theme.dark}
+                >
                     {images.map(({ image }) => (
                         <SlideshowItem key={image}>
                             <ImageBlock

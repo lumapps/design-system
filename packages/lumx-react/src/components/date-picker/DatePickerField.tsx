@@ -1,4 +1,4 @@
-import { Placement, Popover, TextField } from '@lumx/react';
+import { Placement, Popover, TextField, IconButtonProps } from '@lumx/react';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 
 import moment from 'moment';
@@ -27,6 +27,11 @@ export interface DatePickerFieldProps extends GenericProps {
     minDate?: Date;
     /** The native input name property. */
     name?: string;
+    /** The props to pass to the next month change button, minus those already set by the DatePickerControlled props. */
+    nextButtonProps: Pick<IconButtonProps, 'label'> & Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis'>;
+    /** The props to pass to the previous month change button, minus those already set by the DatePickerControlled props. */
+    previousButtonProps: Pick<IconButtonProps, 'label'> &
+        Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis'>;
     /** The current value of the text field. */
     value: Date | undefined;
     /** The function called on change. */
@@ -46,7 +51,9 @@ export const DatePickerField: Comp<DatePickerFieldProps> = ({
     maxDate,
     minDate,
     name,
+    nextButtonProps,
     onChange,
+    previousButtonProps,
     value,
     ...textFieldProps
 }) => {
@@ -117,6 +124,8 @@ export const DatePickerField: Comp<DatePickerFieldProps> = ({
                             onChange={onDatePickerChange}
                             todayOrSelectedDateRef={todayOrSelectedDateRef}
                             defaultMonth={defaultMonth}
+                            nextButtonProps={nextButtonProps}
+                            previousButtonProps={previousButtonProps}
                         />
                     </div>
                 </Popover>

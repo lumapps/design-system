@@ -28,6 +28,8 @@ const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true): 
         onPrevMonthChange: jest.fn(),
         selectedMonth: mockedDate,
         value: mockedDate,
+        nextButtonProps: { label: 'Next month' },
+        previousButtonProps: { label: 'Previous month' },
         ...propsOverride,
     };
 

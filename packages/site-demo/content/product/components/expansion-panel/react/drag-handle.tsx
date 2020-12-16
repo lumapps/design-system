@@ -7,7 +7,14 @@ export const App = ({ theme }: any) => {
     const [isOpen, setOpen] = useState(false);
 
     return (
-        <ExpansionPanel hasBackground label="Lorem ipsum" theme={theme} isOpen={isOpen} onToggleOpen={setOpen}>
+        <ExpansionPanel
+            hasBackground
+            label="Lorem ipsum"
+            theme={theme}
+            isOpen={isOpen}
+            onToggleOpen={setOpen}
+            toggleButtonProps={{ label: 'Toggle' }}
+        >
             <DragHandle theme={theme} />
 
             <div className="lumx-spacing-padding-big lumx-spacing-padding-top-none">

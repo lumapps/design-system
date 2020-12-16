@@ -36,7 +36,10 @@ interface Setup extends CommonSetup {
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
 const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true): Setup => {
-    const props: any = { ...propsOverride };
+    const props: any = {
+        toggleButtonProps: { label: 'Toggle' },
+        ...propsOverride,
+    };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
     const wrapper: Wrapper = renderer(<SideNavigationItem {...props} />);
 
@@ -107,7 +110,10 @@ describe(`<${SideNavigationItem.displayName}>`, () => {
     describe('Conditions', () => {
         // Here is an example of children types check.
 
-        const items = [<SideNavigationItem key="a" label="a" />, <SideNavigationItem key="b" label="b" />];
+        const items = [
+            <SideNavigationItem key="a" label="a" toggleButtonProps={{ label: 'Toggle' }} />,
+            <SideNavigationItem key="b" label="b" toggleButtonProps={{ label: 'Toggle' }} />,
+        ];
 
         it('should hide chevron when no children are passed', () => {
             const { chevron } = setup({

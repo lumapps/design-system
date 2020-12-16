@@ -82,6 +82,7 @@ Array [
             emphasis="low"
             hasBackground={true}
             icon="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"
+            label="Edit"
             size="s"
             theme="light"
           />
@@ -94,6 +95,7 @@ Array [
             emphasis="low"
             hasBackground={true}
             icon="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z"
+            label="See"
             size="s"
             theme="light"
           />
@@ -104,6 +106,7 @@ Array [
             emphasis="low"
             hasBackground={true}
             icon="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"
+            label="Delete"
             size="s"
             theme="light"
           />
@@ -138,6 +141,7 @@ Array [
             emphasis="low"
             hasBackground={true}
             icon="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"
+            label="Edit"
             size="s"
             theme="light"
           />
@@ -150,6 +154,7 @@ Array [
             emphasis="low"
             hasBackground={true}
             icon="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z"
+            label="See"
             size="s"
             theme="light"
           />
@@ -160,6 +165,7 @@ Array [
             emphasis="low"
             hasBackground={true}
             icon="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"
+            label="Delete"
             size="s"
             theme="light"
           />
@@ -194,6 +200,7 @@ Array [
             emphasis="low"
             hasBackground={true}
             icon="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"
+            label="Edit"
             size="s"
             theme="light"
           />
@@ -206,6 +213,7 @@ Array [
             emphasis="low"
             hasBackground={true}
             icon="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z"
+            label="See"
             size="s"
             theme="light"
           />
@@ -216,6 +224,7 @@ Array [
             emphasis="low"
             hasBackground={true}
             icon="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"
+            label="Delete"
             size="s"
             theme="light"
           />
@@ -250,6 +259,7 @@ Array [
             emphasis="low"
             hasBackground={true}
             icon="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"
+            label="Edit"
             size="s"
             theme="light"
           />
@@ -262,6 +272,7 @@ Array [
             emphasis="low"
             hasBackground={true}
             icon="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z"
+            label="See"
             size="s"
             theme="light"
           />
@@ -272,6 +283,7 @@ Array [
             emphasis="low"
             hasBackground={true}
             icon="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"
+            label="Delete"
             size="s"
             theme="light"
           />
@@ -306,6 +318,7 @@ Array [
             emphasis="low"
             hasBackground={true}
             icon="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"
+            label="Edit"
             size="s"
             theme="light"
           />
@@ -318,6 +331,7 @@ Array [
             emphasis="low"
             hasBackground={true}
             icon="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z"
+            label="See"
             size="s"
             theme="light"
           />
@@ -328,6 +342,7 @@ Array [
             emphasis="low"
             hasBackground={true}
             icon="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"
+            label="Delete"
             size="s"
             theme="light"
           />
@@ -362,6 +377,7 @@ Array [
             emphasis="low"
             hasBackground={true}
             icon="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"
+            label="Edit"
             size="s"
             theme="light"
           />
@@ -374,6 +390,7 @@ Array [
             emphasis="low"
             hasBackground={true}
             icon="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z"
+            label="See"
             size="s"
             theme="light"
           />
@@ -384,6 +401,7 @@ Array [
             emphasis="low"
             hasBackground={true}
             icon="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"
+            label="Delete"
             size="s"
             theme="light"
           />

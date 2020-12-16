@@ -9,8 +9,22 @@ export const App = () => {
 
     return (
         <>
-            <DatePicker value={datePicked} locale="en" onChange={setDatePicked} minDate={minDate} />
-            <DatePicker value={datePicked} locale="en" onChange={setDatePicked} maxDate={maxDate} />
+            <DatePicker
+                value={datePicked}
+                locale="en"
+                onChange={setDatePicked}
+                minDate={minDate}
+                nextButtonProps={{ label: 'Next month' }}
+                previousButtonProps={{ label: 'Previous month' }}
+            />
+            <DatePicker
+                value={datePicked}
+                locale="en"
+                onChange={setDatePicked}
+                maxDate={maxDate}
+                nextButtonProps={{ label: 'Next month' }}
+                previousButtonProps={{ label: 'Previous month' }}
+            />
         </>
     );
 };

@@ -23,6 +23,8 @@ export const Simple = () => {
             onNextClick={onNextClick}
             onPreviousClick={onPreviousClick}
             onPaginationClick={onPaginationClick}
+            nextButtonProps={{ label: 'Next' }}
+            previousButtonProps={{ label: 'Previous' }}
         />
     );
 };
@@ -51,7 +53,6 @@ export const ControllingSlideshow = ({ theme }: any) => {
         <div style={{ height: 400, width: 500, position: 'relative' }}>
             <Slideshow
                 activeIndex={activeIndex}
-                hasControls={false}
                 theme={theme}
                 autoPlay
                 groupBy={1}
@@ -72,6 +73,8 @@ export const ControllingSlideshow = ({ theme }: any) => {
                     onNextClick={onNextClick}
                     onPreviousClick={onPreviousClick}
                     onPaginationClick={onPaginationClick}
+                    nextButtonProps={{ label: 'Next' }}
+                    previousButtonProps={{ label: 'Previous' }}
                 />
             </div>
         </div>

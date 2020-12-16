@@ -31,6 +31,7 @@ export const App = ({ theme }: any) => {
             isOpen={isOpen}
             value={value}
             onClear={clearSelected}
+            clearButtonProps={{ label: 'Clear' }}
             label={LABEL}
             placeholder={PLACEHOLDER}
             theme={theme}

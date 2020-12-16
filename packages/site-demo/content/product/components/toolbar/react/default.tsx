@@ -17,6 +17,6 @@ export const App = ({ theme }: any) => (
                 Toolbar title
             </span>
         }
-        after={<IconButton emphasis={Emphasis.low} theme={theme} icon={mdiMagnify} />}
+        after={<IconButton label="Search" emphasis={Emphasis.low} theme={theme} icon={mdiMagnify} />}
     />
 );

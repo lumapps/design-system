@@ -5,7 +5,7 @@ import isEmpty from 'lodash/isEmpty';
 
 import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
 
-import { Emphasis, Icon, Size } from '@lumx/react';
+import { Emphasis, Icon, Size, IconButton, IconButtonProps } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import {
@@ -18,8 +18,6 @@ import {
     onEnterPressed,
 } from '@lumx/react/utils';
 import { renderLink } from '@lumx/react/utils/renderLink';
-
-import { IconButton } from '../button/IconButton';
 
 /**
  * Defines the props of the component.
@@ -41,6 +39,9 @@ export interface SideNavigationItemProps extends GenericProps {
     linkAs?: 'a' | any;
     /** The props to pass to the link, minus those already set by the SideNavigationItem props. */
     linkProps?: React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
+    /** The props to pass to the toggle button, minus those already set by the SideNavigationItem props. */
+    toggleButtonProps: Pick<IconButtonProps, 'label'> &
+        Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis' | 'color' | 'size'>;
     /** The function called on click on the action button. */
     onActionClick?(evt: React.MouseEvent): void;
     /** The function called on click on the component. */
@@ -77,6 +78,7 @@ export const SideNavigationItem: Comp<SideNavigationItemProps> = (props) => {
         linkProps,
         onActionClick,
         onClick,
+        toggleButtonProps,
         ...forwardedProps
     } = props;
 
@@ -112,6 +114,7 @@ export const SideNavigationItem: Comp<SideNavigationItemProps> = (props) => {
                     )}
 
                     <IconButton
+                        {...toggleButtonProps}
                         className={`${CLASSNAME}__toggle`}
                         icon={isOpen ? mdiChevronUp : mdiChevronDown}
                         size={Size.m}

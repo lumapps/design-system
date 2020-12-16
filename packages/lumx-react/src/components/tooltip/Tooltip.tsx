@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { ReactNode, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { usePopper } from 'react-popper';
@@ -66,14 +67,10 @@ export const Tooltip: Comp<TooltipProps> = (props) => {
         return <>{children}</>;
     }
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const id = useMemo(() => `tooltip-${uid()}`, []);
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [popperElement, setPopperElement] = useState<null | HTMLElement>(null);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const { styles, attributes } = usePopper(anchorElement, popperElement, {
         placement,
         modifiers: [
@@ -85,9 +82,7 @@ export const Tooltip: Comp<TooltipProps> = (props) => {
     });
 
     const position = attributes?.popper?.['data-popper-placement'] ?? placement;
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const isOpen = useTooltipOpen(delay as number, anchorElement) || forceOpen;
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const wrappedChildren = useInjectTooltipRef(children, setAnchorElement, isOpen as boolean, id);
 
     return (

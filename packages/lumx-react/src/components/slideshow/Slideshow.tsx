@@ -2,14 +2,12 @@ import React, { CSSProperties, useCallback, useEffect, useRef, useState } from '
 
 import classNames from 'classnames';
 
-import { Theme } from '@lumx/react';
+import { SlideshowControls, SlideshowControlsProps, Theme } from '@lumx/react';
 
 import { AUTOPLAY_DEFAULT_INTERVAL, FULL_WIDTH_PERCENT } from '@lumx/react/components/slideshow/constants';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { useInterval } from '@lumx/react/hooks';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
-
-import { SlideshowControls } from './SlideshowControls';
 
 /**
  * Defines the props of the component.
@@ -23,10 +21,20 @@ export interface SlideshowProps extends GenericProps {
     fillHeight?: boolean;
     /** The number of slides to group together. */
     groupBy?: number;
-    /** Whether slideshow has controls or not. */
-    hasControls?: boolean;
     /** The interval between each slide when automatic rotation is enabled. */
     interval?: number;
+    /** The props to pass to the slideshow controls, minus those already set by the Slideshow props. */
+    slideshowControlsProps?: Pick<SlideshowControlsProps, 'nextButtonProps' | 'previousButtonProps'> &
+        Omit<
+            SlideshowControlsProps,
+            | 'activeIndex'
+            | 'onPaginationClick'
+            | 'onNextClick'
+            | 'onPreviousClick'
+            | 'slidesCount'
+            | 'parentRef'
+            | 'theme'
+        >;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
     /** Whether custom colors are applied to this component or not. */
@@ -63,11 +71,11 @@ export const Slideshow: Comp<SlideshowProps> = ({
     className,
     fillHeight,
     groupBy,
-    hasControls,
     interval,
+    onChange,
+    slideshowControlsProps,
     theme,
     useCustomColors,
-    onChange,
     ...forwardedProps
 }) => {
     const [currentIndex, setCurrentIndex] = useState<number>(activeIndex as number);
@@ -168,12 +176,12 @@ export const Slideshow: Comp<SlideshowProps> = ({
     };
 
     /* If the activeIndex props changes, update the current slide */
-    React.useEffect(() => {
+    useEffect(() => {
         setCurrentIndex(activeIndex as number);
     }, [activeIndex]);
 
     /* If the slide changes, with autoplay for example, trigger "onChange" */
-    React.useEffect(() => {
+    useEffect(() => {
         if (onChange) {
             onChange(currentIndex);
         }
@@ -196,9 +204,10 @@ export const Slideshow: Comp<SlideshowProps> = ({
                 </div>
             </div>
 
-            {hasControls && slidesCount > 1 && (
+            {slideshowControlsProps && slidesCount > 1 && (
                 <div className={`${CLASSNAME}__controls`}>
                     <SlideshowControls
+                        {...slideshowControlsProps}
                         activeIndex={currentIndex}
                         onPaginationClick={handleControlGotToSlide}
                         onNextClick={handleControlNextSlide}

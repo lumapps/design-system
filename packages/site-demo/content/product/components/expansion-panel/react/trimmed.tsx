@@ -7,7 +7,13 @@ export const App = ({ theme }: any) => {
     const [isOpen, setOpen] = useState(false);
 
     return (
-        <ExpansionPanel label="Lorem ipsum" theme={theme} isOpen={isOpen} onToggleOpen={setOpen}>
+        <ExpansionPanel
+            label="Lorem ipsum"
+            theme={theme}
+            isOpen={isOpen}
+            onToggleOpen={setOpen}
+            toggleButtonProps={{ label: 'Toggle' }}
+        >
             <div className="lumx-spacing-padding-top">
                 <p
                     className={classNames(

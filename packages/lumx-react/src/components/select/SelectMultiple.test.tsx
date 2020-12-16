@@ -237,6 +237,7 @@ describe(`<SelectMultiple>`, () => {
                     onClear,
                     value: ['val 1', 'val 2'],
                     variant: SelectVariant.input,
+                    clearButtonProps: { label: 'Clear' },
                 },
                 false,
             );
@@ -256,6 +257,7 @@ describe(`<SelectMultiple>`, () => {
                     onClear,
                     value: [value1, value2],
                     variant: SelectVariant.chip,
+                    clearButtonProps: { label: 'Clear' },
                 },
                 false,
             );

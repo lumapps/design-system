@@ -17,15 +17,15 @@ export const App = ({ theme }: any) => (
         actions={
             <FlexBox orientation={Orientation.horizontal}>
                 <div className="lumx-spacing-margin-right-regular">
-                    <IconButton color="dark" emphasis={Emphasis.low} hasBackground icon={mdiPencil} />
+                    <IconButton label="Edit" color="dark" emphasis={Emphasis.low} hasBackground icon={mdiPencil} />
                 </div>
 
                 <div className="lumx-spacing-margin-right-regular">
-                    <IconButton color="dark" emphasis={Emphasis.low} hasBackground icon={mdiEye} />
+                    <IconButton label="See" color="dark" emphasis={Emphasis.low} hasBackground icon={mdiEye} />
                 </div>
 
                 <div>
-                    <IconButton color="dark" emphasis={Emphasis.low} hasBackground icon={mdiDelete} />
+                    <IconButton label="Delete" color="dark" emphasis={Emphasis.low} hasBackground icon={mdiDelete} />
                 </div>
             </FlexBox>
         }

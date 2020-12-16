@@ -9,9 +9,30 @@ export const App = ({ theme }: any) => (
         size={Size.xl}
         actions={
             <FlexBox orientation={Orientation.horizontal} vAlign={Alignment.center} gap={Size.regular}>
-                <IconButton color="dark" emphasis={Emphasis.low} hasBackground icon={mdiPencil} size={Size.s} />
-                <IconButton color="dark" emphasis={Emphasis.low} hasBackground icon={mdiEye} size={Size.s} />
-                <IconButton color="dark" emphasis={Emphasis.low} hasBackground icon={mdiDelete} size={Size.s} />
+                <IconButton
+                    label="Edit"
+                    color="dark"
+                    emphasis={Emphasis.low}
+                    hasBackground
+                    icon={mdiPencil}
+                    size={Size.s}
+                />
+                <IconButton
+                    label="See"
+                    color="dark"
+                    emphasis={Emphasis.low}
+                    hasBackground
+                    icon={mdiEye}
+                    size={Size.s}
+                />
+                <IconButton
+                    label="Delete"
+                    color="dark"
+                    emphasis={Emphasis.low}
+                    hasBackground
+                    icon={mdiDelete}
+                    size={Size.s}
+                />
             </FlexBox>
         }
     />

@@ -17,7 +17,17 @@ export const App = ({ theme }: any) => {
     ];
 
     return (
-        <Slideshow activeIndex={0} hasControls theme={theme} autoPlay groupBy={2} style={{ width: '100%' }}>
+        <Slideshow
+            activeIndex={0}
+            slideshowControlsProps={{
+                nextButtonProps: { label: 'Next' },
+                previousButtonProps: { label: 'Previous' },
+            }}
+            theme={theme}
+            autoPlay
+            groupBy={2}
+            style={{ width: '100%' }}
+        >
             {images.map((image) => (
                 <SlideshowItem key={image}>
                     <ImageBlock

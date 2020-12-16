@@ -20,9 +20,9 @@ export const App = ({ theme }: any) => (
 
         <ButtonGroup>
             <Button theme={theme}>Split</Button>
-            <IconButton icon={mdiMenuDown} theme={theme} />
+            <IconButton label="More" icon={mdiMenuDown} theme={theme} />
         </ButtonGroup>
 
-        <IconButton icon={mdiPlus} theme={theme} />
+        <IconButton label="Add" icon={mdiPlus} theme={theme} />
     </>
 );

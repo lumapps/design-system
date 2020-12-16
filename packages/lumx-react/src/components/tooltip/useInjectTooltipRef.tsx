@@ -43,7 +43,11 @@ export const useInjectTooltipRef = (
             }
 
             // Button, IconButton
-            if (type?.displayName === 'Button' || type?.displayName === 'IconButton') {
+            if (
+                type?.displayName === 'Button' ||
+                type?.displayName === 'ButtonRoot' ||
+                type?.displayName === 'IconButton'
+            ) {
                 const element = children as any;
                 return cloneElement(element, {
                     ...element.props,
