@@ -15,6 +15,7 @@ export const App = () => (
                 </ChipGroup>
             }
             title="Lorem ipsum"
+            alt="Lorem ipsum"
             thumbnailProps={{ aspectRatio: AspectRatio.horizontal }}
         />
     </div>

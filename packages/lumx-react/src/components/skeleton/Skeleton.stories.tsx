@@ -14,6 +14,7 @@ import {
     Thumbnail,
     Typography,
 } from '@lumx/react';
+import { imageKnob } from '@lumx/react/stories/knobs';
 
 export default { title: 'LumX components/skeleton/Skeleton' };
 
@@ -105,8 +106,9 @@ export const LoadingThumbnail = ({ theme }: any) => {
         <>
             <Button onClick={fakeLoad}>Reload</Button> (fake 2sec loading)
             <Thumbnail
+                image={imageKnob()}
+                alt="Image"
                 style={{ display: loading ? 'none' : undefined }}
-                image="https://picsum.photos/72/72/?random"
                 aspectRatio={AspectRatio.square}
                 size={size}
             />

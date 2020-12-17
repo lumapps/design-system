@@ -44,6 +44,7 @@ export const App = ({ theme }: any) => (
         }
         theme={theme}
         title="Lorem ipsum"
+        alt="Lorem ipsum"
         thumbnailProps={{ aspectRatio: AspectRatio.horizontal }}
     />
 );

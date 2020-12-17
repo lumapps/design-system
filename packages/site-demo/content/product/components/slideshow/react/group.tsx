@@ -1,20 +1,27 @@
-import { AspectRatio, ImageBlock, ImageBlockCaptionPosition, Slideshow, SlideshowItem } from '@lumx/react';
+import {
+    AspectRatio,
+    ImageBlock,
+    ImageBlockCaptionPosition,
+    Slideshow,
+    SlideshowItem,
+    ThumbnailProps,
+} from '@lumx/react';
 import React from 'react';
+
+const IMAGES: ThumbnailProps[] = [
+    { image: '/demo-assets/landscape1.jpg', alt: 'Landscape 1' },
+    { image: '/demo-assets/portrait1.jpg', alt: 'Portrait 1' },
+    { image: '/demo-assets/landscape2.jpg', alt: 'Landscape 2' },
+    { image: '/demo-assets/portrait2.jpg', alt: 'Portrait 2' },
+    { image: '/demo-assets/landscape3.jpg', alt: 'Landscape 3' },
+    { image: '/demo-assets/portrait3.jpg', alt: 'Portrait 3' },
+];
 
 export const App = ({ theme }: any) => {
     const imageBlockDemoProps = {
         description: 'What an image',
         title: 'Nice Image',
     };
-
-    const images = [
-        '/demo-assets/landscape1.jpg',
-        '/demo-assets/portrait1.jpg',
-        '/demo-assets/landscape2.jpg',
-        '/demo-assets/portrait2.jpg',
-        '/demo-assets/landscape3.jpg',
-        '/demo-assets/portrait3.jpg',
-    ];
 
     return (
         <Slideshow
@@ -28,11 +35,12 @@ export const App = ({ theme }: any) => {
             groupBy={2}
             style={{ width: '100%' }}
         >
-            {images.map((image) => (
+            {IMAGES.map(({ image, alt }) => (
                 <SlideshowItem key={image}>
                     <ImageBlock
                         captionPosition={ImageBlockCaptionPosition.over}
                         image={image}
+                        alt={alt}
                         theme={theme}
                         thumbnailProps={{ aspectRatio: AspectRatio.horizontal }}
                         {...imageBlockDemoProps}

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import isObject from 'lodash/isObject';
 
-import { Alignment, AspectRatio, Size, Theme, Thumbnail } from '@lumx/react';
+import { Alignment, HorizontalAlignment, Size, Theme, Thumbnail } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
@@ -30,7 +30,9 @@ export interface ImageBlockProps extends GenericProps {
     /** The action elements. */
     actions?: ReactNode;
     /** The thumbnail alignment. */
-    align?: Alignment.right | Alignment.center | Alignment.left;
+    align?: HorizontalAlignment;
+    /** The thumbnail image alternative text. */
+    alt: string;
     /** The position of the caption. */
     captionPosition?: ImageBlockCaptionPosition;
     /** The style to apply to the caption section. */
@@ -47,7 +49,7 @@ export interface ImageBlockProps extends GenericProps {
     /** The size variant of the component. */
     size?: ImageBlockSize;
     /** The tags elements. */
-    tags?: HTMLElement | ReactNode;
+    tags?: ReactNode;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
     /** The props to pass to the thumbnail, minus those already set by the ImageBlock props. */
@@ -73,9 +75,6 @@ const DEFAULT_PROPS: Partial<ImageBlockProps> = {
     captionPosition: ImageBlockCaptionPosition.below,
     theme: Theme.light,
     align: Alignment.left,
-    thumbnailProps: {
-        aspectRatio: AspectRatio.original,
-    },
 };
 
 /**
@@ -89,6 +88,7 @@ export const ImageBlock: Comp<ImageBlockProps, HTMLDivElement> = forwardRef((pro
     const {
         actions,
         align,
+        alt,
         captionPosition,
         captionStyle,
         className,
@@ -102,9 +102,8 @@ export const ImageBlock: Comp<ImageBlockProps, HTMLDivElement> = forwardRef((pro
         title,
         ...forwardedProps
     } = props;
-
     return (
-        <div
+        <figure
             ref={ref}
             {...forwardedProps}
             className={classNames(
@@ -127,9 +126,10 @@ export const ImageBlock: Comp<ImageBlockProps, HTMLDivElement> = forwardRef((pro
                 image={image}
                 size={size}
                 theme={theme}
+                alt={(alt || title) as string}
             />
             {(title || description || tags) && (
-                <div className={`${CLASSNAME}__wrapper`} style={captionStyle}>
+                <figcaption className={`${CLASSNAME}__wrapper`} style={captionStyle}>
                     {(title || description) && (
                         <div className={`${CLASSNAME}__caption`}>
                             {title && <span className={`${CLASSNAME}__title`}>{title}</span>}
@@ -144,10 +144,10 @@ export const ImageBlock: Comp<ImageBlockProps, HTMLDivElement> = forwardRef((pro
                         </div>
                     )}
                     {tags && <div className={`${CLASSNAME}__tags`}>{tags}</div>}
-                </div>
+                </figcaption>
             )}
             {actions && <div className={`${CLASSNAME}__actions`}>{actions}</div>}
-        </div>
+        </figure>
     );
 });
 ImageBlock.displayName = COMPONENT_NAME;

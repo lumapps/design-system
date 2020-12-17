@@ -184,7 +184,7 @@ export const useInteractiveList: useInteractiveList = (options) => {
             return cloneElement<ListItemProps>(item, {
                 ...item.props,
                 isHighlighted: item.props.isHighlighted ?? isHighlighted,
-                linkRef: mergeRefs(item.props.linkRef, (element) => {
+                linkRef: mergeRefs(item.props.linkRef, (element: any) => {
                     if (isHighlighted) {
                         element?.focus();
                     }

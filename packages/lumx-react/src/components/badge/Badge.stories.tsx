@@ -16,11 +16,13 @@ export const simpleBadgeWithIcon = () => (
         <Icon icon={mdiHeart} />
     </Badge>
 );
+
 export const simpleBadgeWithThumbnail = () => (
     <Badge color={select('Colors', ColorPalette, ColorPalette.light)}>
         <Thumbnail
+            alt="Logo"
             aspectRatio={AspectRatio.square}
-            image="https://www.lumapps.com/wp-content/uploads/2018/09/brandmark-color-1-150x150.png"
+            image="/logo.svg"
             size={Size.xxs}
             variant={ThumbnailVariant.rounded}
         />

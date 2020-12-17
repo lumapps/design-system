@@ -34,13 +34,8 @@ export interface LinkPreviewProps extends GenericProps {
     size?: Size.regular | Size.big;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
-    /**
-     * The image URL of the Thumbnail.
-     * @see {@link ThumbnailProps#image}
-     */
-    thumbnail?: string;
-    /** The props to pass to the thumbnail, minus those already set by the LinkPreview props. */
-    thumbnailProps?: Omit<ThumbnailProps, 'aspectRatio' | 'fillHeight' | 'image' | 'onClick' | 'role' | 'tabIndex'>;
+    /** The thumbnail image for the link preview. */
+    thumbnailProps?: ThumbnailProps;
     /** The title of the link. */
     title?: string;
 }
@@ -71,18 +66,9 @@ const DEFAULT_PROPS: Partial<LinkPreviewProps> = {
  * @return React element.
  */
 export const LinkPreview: Comp<LinkPreviewProps, HTMLDivElement> = forwardRef((props, ref) => {
-    const {
-        className,
-        description,
-        link,
-        linkProps,
-        size,
-        theme,
-        thumbnail = '',
-        thumbnailProps,
-        title,
-        ...forwardedProps
-    } = props;
+    const { className, description, link, linkProps, size, theme, thumbnailProps, title, ...forwardedProps } = props;
+
+    //TODO: a11y
     const goToUrl = useCallback(() => window.open(link, '_blank'), [link]);
 
     return (
@@ -93,20 +79,18 @@ export const LinkPreview: Comp<LinkPreviewProps, HTMLDivElement> = forwardRef((p
                 className,
                 handleBasicClasses({
                     prefix: CLASSNAME,
-                    size: size === Size.big && thumbnail ? Size.big : Size.regular,
+                    size: size === Size.big && thumbnailProps ? Size.big : Size.regular,
                     theme,
                 }),
             )}
         >
             <div className={`${CLASSNAME}__wrapper`}>
-                {thumbnail && (
+                {thumbnailProps && (
                     <div className={`${CLASSNAME}__thumbnail`}>
                         <Thumbnail
                             {...thumbnailProps}
                             onClick={goToUrl}
                             role="link"
-                            tabIndex={0}
-                            image={thumbnail}
                             aspectRatio={AspectRatio.free}
                             fillHeight
                         />

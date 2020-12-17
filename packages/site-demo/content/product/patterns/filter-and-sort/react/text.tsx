@@ -47,7 +47,14 @@ export const App = () => {
                     <ListItem
                         key={index}
                         size={Size.big}
-                        before={<Thumbnail variant={ThumbnailVariant.rounded} image={result.thumbnail} size={Size.m} />}
+                        before={
+                            <Thumbnail
+                                variant={ThumbnailVariant.rounded}
+                                alt={result.label}
+                                image={result.thumbnail}
+                                size={Size.m}
+                            />
+                        }
                     >
                         <div>
                             <span>{result.label}</span>

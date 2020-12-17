@@ -29,13 +29,8 @@ export interface PostBlockProps extends GenericProps {
     text?: string | { __html: string };
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
-    /**
-     * The url of the image we want to display.
-     * @see {@link ThumbnailProps#image}
-     */
-    thumbnail?: string;
-    /** The props to pass to the thumbnail, minus those already set by the PostBlock props. */
-    thumbnailProps?: Omit<ThumbnailProps, 'image' | 'theme' | 'onClick' | 'variant' | 'tabIndex'>;
+    /** The post block thumbnail. */
+    thumbnailProps?: ThumbnailProps;
     /** The title of the post. */
     title: string;
     /** The function called on click. */
@@ -79,23 +74,15 @@ export const PostBlock: Comp<PostBlockProps, HTMLDivElement> = forwardRef((props
         tags,
         text,
         theme,
-        thumbnail,
         thumbnailProps,
         title,
     } = props;
 
     return (
         <div ref={ref} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, orientation, theme }))}>
-            {thumbnail && (
+            {thumbnailProps && (
                 <div className={`${CLASSNAME}__thumbnail`}>
-                    <Thumbnail
-                        {...thumbnailProps}
-                        image={thumbnail}
-                        theme={theme}
-                        onClick={onClick}
-                        variant={ThumbnailVariant.rounded}
-                        tabIndex="0"
-                    />
+                    <Thumbnail {...thumbnailProps} theme={theme} variant={ThumbnailVariant.rounded} />
                 </div>
             )}
 

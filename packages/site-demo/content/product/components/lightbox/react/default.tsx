@@ -14,14 +14,15 @@ import {
     SlideshowItem,
     Theme,
     Thumbnail,
+    ThumbnailProps,
 } from '@lumx/react';
 import React, { useCallback, useRef, useState } from 'react';
 
-const images = [
-    { image: '/demo-assets/portrait1.jpg' },
-    { image: '/demo-assets/portrait2.jpg' },
-    { image: '/demo-assets/landscape3.jpg' },
-    { image: '/demo-assets/landscape2.jpg' },
+const IMAGES: ThumbnailProps[] = [
+    { image: '/demo-assets/portrait1.jpg', alt: 'Portrait 1' },
+    { image: '/demo-assets/portrait2.jpg', alt: 'Portrait 2' },
+    { image: '/demo-assets/landscape3.jpg', alt: 'Landscape 3' },
+    { image: '/demo-assets/landscape2.jpg', alt: 'Landscape 2' },
 ];
 
 export const App = () => {
@@ -60,11 +61,12 @@ export const App = () => {
                     fillHeight
                     theme={Theme.dark}
                 >
-                    {images.map(({ image }) => (
+                    {IMAGES.map(({ image }) => (
                         <SlideshowItem key={image}>
                             <ImageBlock
                                 fillHeight
                                 title="Nice Image"
+                                alt="Nice Image"
                                 description="What an image"
                                 theme={Theme.dark}
                                 image={image}
@@ -87,10 +89,11 @@ export const App = () => {
             </Lightbox>
 
             <FlexBox orientation={Orientation.horizontal} gap={Size.regular}>
-                {images.map(({ image }, index) => (
+                {IMAGES.map(({ image, alt }, index) => (
                     <Thumbnail
                         key={image}
                         image={image}
+                        alt={alt}
                         size={Size.xl}
                         aspectRatio={AspectRatio.square}
                         onClick={handleClick(index)}

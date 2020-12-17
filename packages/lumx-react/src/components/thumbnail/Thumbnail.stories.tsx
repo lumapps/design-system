@@ -1,79 +1,66 @@
-import { mdiAbTesting } from '@lumx/icons';
-import { Alignment, AspectRatio, CrossOrigin, Icon, Size, Theme, Thumbnail, ThumbnailVariant } from '@lumx/react';
-import { ThumbnailSize } from '@lumx/react/components/thumbnail/Thumbnail';
-import { IMAGES, imageKnob } from '@lumx/react/stories/knobs';
-import { htmlDecode } from '@lumx/react/utils/htmlDecode';
-import { boolean, number, select } from '@storybook/addon-knobs';
 import React from 'react';
+
+import { mdiAbTesting } from '@lumx/icons';
+import { Alignment, AspectRatio, Size, Thumbnail, ThumbnailVariant } from '@lumx/react';
+import { imageKnob, IMAGES } from '@lumx/react/stories/knobs';
+import { htmlDecode } from '@lumx/react/utils/htmlDecode';
+import { boolean, select, text } from '@storybook/addon-knobs';
+import { enumKnob } from '@lumx/react/stories/knobs/enumKnob';
+import { focusKnob } from '@lumx/react/stories/knobs/focusKnob';
+import { sizeKnob } from '@lumx/react/stories/knobs/sizeKnob';
 
 export default { title: 'LumX components/thumbnail/Thumbnail' };
 
-interface StoryProps {
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
-    theme: Theme;
-}
+export const Default = () => <Thumbnail alt="Image alt text" image={imageKnob()} size={Size.xxl} />;
 
-const numberKnobOptions = {
-    max: 1,
-    min: -1,
-    range: true,
-    step: 0.1,
+export const Clickable = () => <Thumbnail alt="Click me" image={imageKnob()} size={Size.xxl} onClick={console.log} />;
+
+export const DefaultFallback = () => <Thumbnail alt="foo" image="foo" />;
+
+export const IconFallback = () => <Thumbnail alt="foo" image="foo" fallback={mdiAbTesting} />;
+
+export const CustomFallback = () => (
+    <Thumbnail alt="foo" image="foo" fallback={<Thumbnail alt="missing image" image="/logo.svg" />} />
+);
+
+export const ParentSizeConstraint = () => {
+    const aspectRatio = enumKnob('Aspect ratio', [undefined, ...Object.values(AspectRatio)]);
+    const fillHeight = boolean('Fill Height', true);
+
+    return (
+        <div style={{ border: '1px solid red', width: '300px', height: '400px', resize: 'both', overflow: 'auto' }}>
+            <Thumbnail alt="Grid" image="/demo-assets/grid.jpg" aspectRatio={aspectRatio} fillHeight={fillHeight} />
+        </div>
+    );
 };
 
-const corsOptions = {
-    None: undefined,
-    Anonymous: CrossOrigin.anonymous,
-    UseCredentials: CrossOrigin.useCredentials,
-};
-
-const groupId = 'Options';
-
-const ThumbnailSizes: Record<any, ThumbnailSize | undefined> = {
-    None: undefined,
-    XXS: Size.xxs,
-    XS: Size.xs,
-    S: Size.s,
-    M: Size.m,
-    L: Size.l,
-    XL: Size.xl,
-    XXL: Size.xxl,
-};
-
-/**
- * Thumbnail story
- * @return simple Thumbnail.
- */
-export const DefaultThumbnail = ({ theme }: StoryProps) => {
-    const align = select<Alignment>('Alignment', Alignment, Alignment.left, groupId);
-    const aspectRatio = select<AspectRatio>('Aspect ratio', AspectRatio, AspectRatio.square, groupId);
-    const isCrossOriginEnabled = boolean('Is CORS enabled', false, groupId);
-    const crossOrigin = select('CORS', corsOptions, corsOptions.None, groupId);
-    const fillHeight = boolean('Fill Height', false, groupId);
-    const focusPoint = {
-        x: number('focusX', 0, numberKnobOptions, groupId),
-        y: number('focusY', 0, numberKnobOptions, groupId),
-    };
-    const image = imageKnob('Image', IMAGES.landscape1, groupId);
-    const isFollowingWindowSize = boolean('Update on window resize', true, groupId);
-    const resizeDebounceTime = number('Debounce time after resize', 20, undefined, groupId);
-    const variant = select<ThumbnailVariant>('Variant', ThumbnailVariant, ThumbnailVariant.squared, groupId);
+export const Knobs = ({ theme }: any) => {
+    const alt = text('Alternative text', 'Image alt text');
+    const align = enumKnob(
+        'Alignment',
+        [undefined, Alignment.center, Alignment.left, Alignment.right] as const,
+        undefined,
+    );
+    const aspectRatio = enumKnob('Aspect ratio', [undefined, ...Object.values(AspectRatio)], undefined);
+    const crossOrigin = enumKnob('CORS', [undefined, 'anonymous', 'use-credentials'] as const, undefined);
+    const fillHeight = boolean('Fill Height', false);
+    const focusPoint = { x: focusKnob('Focus X'), y: focusKnob('Focus Y') };
+    const image = imageKnob('Image', IMAGES.landscape1);
+    const variant = select<ThumbnailVariant>('Variant', ThumbnailVariant, ThumbnailVariant.squared);
+    const size = sizeKnob(Size.xxl);
 
     return (
         <Thumbnail
+            alt={alt}
             align={align}
             aspectRatio={aspectRatio}
-            isCrossOriginEnabled={isCrossOriginEnabled}
             crossOrigin={crossOrigin}
             fillHeight={fillHeight}
             focusPoint={focusPoint}
             image={htmlDecode(image)}
-            isFollowingWindowSize={isFollowingWindowSize}
-            resizeDebounceTime={resizeDebounceTime}
-            size={select('Size', ThumbnailSizes, Size.xxl, groupId)}
+            size={size}
             theme={theme}
             variant={variant}
         />
     );
 };
-
-export const ThumbnailFallBack = () => <Thumbnail image="foo" fallback={<Icon icon={mdiAbTesting} size={Size.xl} />} />;

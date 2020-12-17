@@ -7,7 +7,7 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
-import { useChipGroupNavigation, useChipGroupNavigationType } from '@lumx/react/hooks/useChipGroupNavigation';
+import { useChipGroupNavigation } from '@lumx/react/hooks/useChipGroupNavigation';
 
 /**
  * Defines the props of the component.
@@ -43,9 +43,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * @param  ref   Component ref.
  * @return React element.
  */
-export const ChipGroup: Comp<ChipGroupProps, HTMLDivElement> & {
-    useChipGroupNavigation?: useChipGroupNavigationType;
-} = forwardRef((props, ref) => {
+const InternalChipGroup: Comp<ChipGroupProps, HTMLDivElement> = forwardRef((props, ref) => {
     const { align, children, className, ...forwardedProps } = props;
     const chipGroupClassName = handleBasicClasses({
         align,
@@ -58,7 +56,8 @@ export const ChipGroup: Comp<ChipGroupProps, HTMLDivElement> & {
         </div>
     );
 });
-ChipGroup.displayName = COMPONENT_NAME;
-ChipGroup.className = CLASSNAME;
-ChipGroup.defaultProps = DEFAULT_PROPS;
-ChipGroup.useChipGroupNavigation = useChipGroupNavigation;
+InternalChipGroup.displayName = COMPONENT_NAME;
+InternalChipGroup.className = CLASSNAME;
+InternalChipGroup.defaultProps = DEFAULT_PROPS;
+
+export const ChipGroup = Object.assign(InternalChipGroup, { useChipGroupNavigation });

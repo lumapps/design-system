@@ -1,4 +1,4 @@
-import { DatePicker, Placement, Popover, TextField, IconButtonProps, TextFieldProps } from '@lumx/react';
+import { DatePicker, Placement, Popover, TextField, IconButtonProps } from '@lumx/react';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 
 import moment from 'moment';

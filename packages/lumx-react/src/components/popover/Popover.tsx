@@ -203,7 +203,7 @@ export const Popover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, re
         ...forwardedProps
     } = props;
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [popperElement, setPopperElement] = useState<null | HTMLElement>(null);
+    const [popperElement, setPopperElement] = useState<HTMLDivElement>();
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [arrowElement, setArrowElement] = useState<null | HTMLElement>(null);
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -258,7 +258,7 @@ export const Popover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, re
         ? createPortal(
               <div
                   {...forwardedProps}
-                  ref={mergeRefs(setPopperElement, ref, clickAwayRef)}
+                  ref={mergeRefs<HTMLDivElement>(setPopperElement, ref, clickAwayRef)}
                   className={classNames(
                       className,
                       handleBasicClasses({ prefix: CLASSNAME, elevation: Math.min(elevation || 0, 5), position }),

@@ -12,6 +12,8 @@ export enum Alignment {
     start = 'start',
     top = 'top',
 }
+export type VerticalAlignment = Alignment.top | Alignment.center | Alignment.bottom;
+export type HorizontalAlignment = Alignment.right | Alignment.center | Alignment.left;
 
 /**
  * See SCSS variable $lumx-color-palette

@@ -72,58 +72,53 @@ describe(`<${Mosaic.displayName}>`, () => {
             const { thumbnails } = setup({
                 theme: expectedTheme,
                 thumbnails: [
-                    { image: 'image/file/path/0' },
-                    { image: 'image/file/path/1' },
-                    { image: 'image/file/path/2' },
-                    { image: 'image/file/path/3' },
+                    { alt: 'image0', image: 'image/file/path/0' },
+                    { alt: 'image1', image: 'image/file/path/1' },
+                    { alt: 'image2', image: 'image/file/path/2' },
+                    { alt: 'image3', image: 'image/file/path/3' },
                 ],
             });
             thumbnails.forEach((thumbnail: Wrapper) => {
                 expect(thumbnail.prop('theme')).toBe(expectedTheme);
             });
         });
-
-        it('should only set tabIndex at 0 if thumbnail has onClick', () => {
-            const expectedTheme = Theme.dark;
-            const onClick = jest.fn();
-            const { thumbnails } = setup({
-                theme: expectedTheme,
-                thumbnails: [
-                    { image: 'image/file/path/0' },
-                    { image: 'image/file/path/1', onClick },
-                    { image: 'image/file/path/2' },
-                    { image: 'image/file/path/3', onClick },
-                ],
-            });
-            thumbnails.forEach((thumbnail: Wrapper, index: number) => {
-                if (index === 1 || index === 3) {
-                    expect(thumbnail.prop('tabIndex')).toBe('0');
-                } else {
-                    expect(thumbnail.prop('tabIndex')).toBeUndefined();
-                }
-            });
-        });
     });
 
     // 3. Test events.
     describe('Events', () => {
-        const clickOnFirstThumbnail = jest.fn();
-        it('should call onClick callback when Thumbnail is clicked', () => {
+        it('should keep Thumbnail onClick', () => {
+            const onClick = jest.fn();
             const { thumbnails } = setup({
                 thumbnails: [
-                    {
-                        onClick: clickOnFirstThumbnail,
-                        image: 'image/file/path/0',
-                    },
-                    { image: 'image/file/path/1' },
-                    { image: 'image/file/path/2' },
-                    { image: 'image/file/path/3' },
+                    { alt: 'image0', image: 'image/file/path/0', onClick },
+                    { alt: 'image1', image: 'image/file/path/1' },
+                    { alt: 'image2', image: 'image/file/path/2' },
+                    { alt: 'image3', image: 'image/file/path/3' },
                 ],
             });
             thumbnails.forEach((thumbnail: Wrapper) => {
                 thumbnail.simulate('click');
             });
-            expect(clickOnFirstThumbnail).toHaveBeenCalledTimes(1);
+            expect(onClick).toHaveBeenCalledTimes(1);
+        });
+
+        it('should handle both Thumbnail onClick and Mosaic onImageClick', () => {
+            const onImageClick = jest.fn();
+            const onClick = jest.fn();
+            const { thumbnails } = setup({
+                onImageClick,
+                thumbnails: [
+                    { alt: 'image0', image: 'image/file/path/0', onClick },
+                    { alt: 'image1', image: 'image/file/path/1' },
+                    { alt: 'image2', image: 'image/file/path/2' },
+                    { alt: 'image3', image: 'image/file/path/3' },
+                ],
+            });
+            thumbnails.forEach((thumbnail: Wrapper) => {
+                thumbnail.simulate('click');
+            });
+            expect(onClick).toHaveBeenCalledTimes(1);
+            expect(onImageClick).toHaveBeenCalledTimes(4);
         });
     });
 

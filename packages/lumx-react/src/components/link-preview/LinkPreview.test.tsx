@@ -5,6 +5,7 @@ import 'jest-enzyme';
 
 import { CommonSetup, commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
+import { Thumbnail } from '@lumx/react';
 
 import { Size, Theme } from '..';
 import { LinkPreview, LinkPreviewProps } from './LinkPreview';
@@ -44,7 +45,7 @@ const setup = (propsOverride: SetupProps = {}, shallowRendering = true): Setup =
 
     return {
         props,
-        thumbnail: wrapper.find('Thumbnail'),
+        thumbnail: wrapper.find(Thumbnail),
         wrapper,
     };
 };
@@ -90,13 +91,6 @@ describe(`<${LinkPreview.displayName}>`, () => {
             expect(wrapper).toHaveClassName(expectedClassName);
         });
 
-        it('should pass `thumbnail` prop to the `Thumbnail` component as `image` prop', () => {
-            const expectedThumbnail = 'https://expected.thumbnail';
-            const { thumbnail } = setup({ thumbnail: expectedThumbnail });
-
-            expect(thumbnail).toHaveProp('image', expectedThumbnail);
-        });
-
         it('should set --theme-dark class variant on wrapper if theme = Theme.dark', () => {
             const { wrapper } = setup({ theme: Theme.dark });
 
@@ -107,7 +101,10 @@ describe(`<${LinkPreview.displayName}>`, () => {
     // 3. Test events.
     describe('Events', () => {
         const expectedUrl = 'https://expected.url';
-        const { thumbnail } = setup({ link: expectedUrl, thumbnail: 'https://expected.url/image.png' });
+        const { thumbnail } = setup({
+            link: expectedUrl,
+            thumbnailProps: { image: 'https://expected.url/image.png', alt: 'Alt' },
+        });
         window.open = jest.fn();
 
         thumbnail.simulate('click');

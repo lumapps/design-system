@@ -1,4 +1,4 @@
-import { Alignment, Orientation } from '@lumx/react';
+import { Alignment, HorizontalAlignment, Orientation, VerticalAlignment } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
@@ -20,7 +20,7 @@ export interface FlexBoxProps extends GenericProps {
     /** The gap space between flexbox items. */
     gap?: GapSize;
     /** The flex horizontal alignment. */
-    hAlign?: Alignment.top | Alignment.center | Alignment.bottom;
+    hAlign?: VerticalAlignment;
     /** Whether the "auto margin" is enabled all around or not. */
     marginAuto?: MarginAutoAlignment | MarginAutoAlignment[];
     /** Whether the "content shrink" is disabled or not. */
@@ -28,7 +28,7 @@ export interface FlexBoxProps extends GenericProps {
     /** The flex direction. */
     orientation?: Orientation;
     /** The flex vertical alignment. */
-    vAlign?: Alignment.left | Alignment.center | Alignment.right;
+    vAlign?: HorizontalAlignment;
     /** Whether the "flex wrap" is enabled or not. */
     wrap?: boolean;
 }

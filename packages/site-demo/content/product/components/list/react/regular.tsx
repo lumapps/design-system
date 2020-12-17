@@ -26,7 +26,14 @@ export const App = () => (
         <ListItem before={<Icon icon={mdiSend} size={Size.xs} />}>Single-line item</ListItem>
 
         <ListItem
-            before={<Thumbnail variant={ThumbnailVariant.rounded} image="/demo-assets/square1.jpg" size={Size.m} />}
+            before={
+                <Thumbnail
+                    variant={ThumbnailVariant.rounded}
+                    alt="Thumbnail"
+                    image="/demo-assets/square1.jpg"
+                    size={Size.m}
+                />
+            }
             after={<IconButton label="More" emphasis={Emphasis.low} icon={mdiDotsHorizontal} />}
         >
             Single-line item

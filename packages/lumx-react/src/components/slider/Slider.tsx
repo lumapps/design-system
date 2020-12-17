@@ -10,6 +10,7 @@ import useEventCallback from '@lumx/react/hooks/useEventCallback';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { uid } from 'uid';
+import { clamp } from '@lumx/react/utils/clamp';
 
 /**
  * Defines the props of the component.
@@ -63,24 +64,6 @@ const DEFAULT_PROPS: Partial<SliderProps> = {
     precision: 0,
     steps: 0,
     theme: Theme.light,
-};
-
-/**
- * Clamp value in range.
- *
- * @param value Value to clamp.
- * @param min   Minimum value.
- * @param max   Maximum value.
- * @return Clamped value.
- */
-const clamp = (value: number, min: number, max: number): number => {
-    if (value < min) {
-        return min;
-    }
-    if (value > max) {
-        return max;
-    }
-    return value;
 };
 
 /**

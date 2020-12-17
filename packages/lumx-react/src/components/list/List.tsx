@@ -2,7 +2,7 @@ import { Size } from '@lumx/react';
 
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 
-import { useKeyboardListNavigation, useKeyboardListNavigationType } from '@lumx/react/hooks/useKeyboardListNavigation';
+import { useKeyboardListNavigation } from '@lumx/react/hooks/useKeyboardListNavigation';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
@@ -53,9 +53,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * @param  ref   Component ref.
  * @return React element.
  */
-export const List: Comp<ListProps, HTMLUListElement> & {
-    useKeyboardListNavigation?: useKeyboardListNavigationType;
-} = forwardRef((props, ref) => {
+const InternalList: Comp<ListProps, HTMLUListElement> = forwardRef((props, ref) => {
     const {
         children,
         className,
@@ -92,6 +90,7 @@ export const List: Comp<ListProps, HTMLUListElement> & {
         </ul>
     );
 });
-List.displayName = COMPONENT_NAME;
-List.className = CLASSNAME;
-List.useKeyboardListNavigation = useKeyboardListNavigation;
+InternalList.displayName = COMPONENT_NAME;
+InternalList.className = CLASSNAME;
+
+export const List = Object.assign(InternalList, { useKeyboardListNavigation });
