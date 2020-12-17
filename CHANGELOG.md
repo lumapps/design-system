@@ -80,6 +80,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Fixed `DatePicker` component to prevent switching month when selecting a date.
 -   Fixed `Tooltip` placement on `Icon` and `IconButton`.
+-   Fixed `Switch` component. Its content should not take the full width of its parent.
 
 ## [0.28.2][] - 2020-12-11
 
