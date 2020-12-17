@@ -1,5 +1,5 @@
 import { Alignment } from '@lumx/react/components';
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -36,23 +36,28 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}ChipGroup`;
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
-interface ChipGroup {
-    useChipGroupNavigation: useChipGroupNavigationType;
-}
-
-export const ChipGroup: Comp<ChipGroupProps> & ChipGroup = ({ align, children, className, ...forwardedProps }) => {
+/**
+ * ChipGroup component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const ChipGroup: Comp<ChipGroupProps, HTMLDivElement> & {
+    useChipGroupNavigation?: useChipGroupNavigationType;
+} = forwardRef((props, ref) => {
+    const { align, children, className, ...forwardedProps } = props;
     const chipGroupClassName = handleBasicClasses({
         align,
         prefix: CLASSNAME,
     });
 
     return (
-        <div {...forwardedProps} className={classNames(className, chipGroupClassName)}>
+        <div ref={ref} {...forwardedProps} className={classNames(className, chipGroupClassName)}>
             {children}
         </div>
     );
-};
-
+});
 ChipGroup.displayName = COMPONENT_NAME;
 ChipGroup.className = CLASSNAME;
 ChipGroup.defaultProps = DEFAULT_PROPS;

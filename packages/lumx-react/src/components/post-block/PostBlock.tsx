@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { forwardRef, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -60,23 +60,32 @@ const DEFAULT_PROPS: Partial<PostBlockProps> = {
     theme: Theme.light,
 };
 
-export const PostBlock: Comp<PostBlockProps> = ({
-    actions,
-    attachments,
-    author,
-    className,
-    meta,
-    onClick,
-    orientation,
-    tags,
-    text,
-    theme,
-    thumbnail,
-    thumbnailProps,
-    title,
-}) => {
+/**
+ * PostBlock component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const PostBlock: Comp<PostBlockProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const {
+        actions,
+        attachments,
+        author,
+        className,
+        meta,
+        onClick,
+        orientation,
+        tags,
+        text,
+        theme,
+        thumbnail,
+        thumbnailProps,
+        title,
+    } = props;
+
     return (
-        <div className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, orientation, theme }))}>
+        <div ref={ref} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, orientation, theme }))}>
             {thumbnail && (
                 <div className={`${CLASSNAME}__thumbnail`}>
                     <Thumbnail
@@ -118,8 +127,7 @@ export const PostBlock: Comp<PostBlockProps> = ({
             </div>
         </div>
     );
-};
-
+});
 PostBlock.displayName = COMPONENT_NAME;
 PostBlock.className = CLASSNAME;
 PostBlock.defaultProps = DEFAULT_PROPS;

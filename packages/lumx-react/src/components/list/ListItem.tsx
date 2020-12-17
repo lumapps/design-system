@@ -1,4 +1,4 @@
-import React, { ReactNode, Ref, SyntheticEvent, useMemo } from 'react';
+import React, { forwardRef, ReactNode, Ref, SyntheticEvent, useMemo } from 'react';
 
 import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
@@ -75,7 +75,14 @@ export function isClickable({ linkProps, onItemSelected }: Partial<ListItemProps
     return !isEmpty(linkProps?.href) || !!onItemSelected;
 }
 
-export const ListItem: Comp<ListItemProps> = (props) => {
+/**
+ * ListItem component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const ListItem: Comp<ListItemProps, HTMLLIElement> = forwardRef((props, ref) => {
     const {
         after,
         before,
@@ -86,7 +93,6 @@ export const ListItem: Comp<ListItemProps> = (props) => {
         linkAs,
         linkProps = {},
         linkRef,
-        listItemRef,
         onItemSelected,
         size,
         ...forwardedProps
@@ -105,8 +111,8 @@ export const ListItem: Comp<ListItemProps> = (props) => {
 
     return (
         <li
+            ref={ref}
             {...forwardedProps}
-            ref={listItemRef}
             className={classNames(
                 className,
                 handleBasicClasses({
@@ -142,7 +148,7 @@ export const ListItem: Comp<ListItemProps> = (props) => {
             )}
         </li>
     );
-};
+});
 ListItem.displayName = COMPONENT_NAME;
 ListItem.className = CLASSNAME;
 ListItem.defaultProps = DEFAULT_PROPS;

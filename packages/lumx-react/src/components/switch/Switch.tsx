@@ -1,4 +1,4 @@
-import React, { Children, SyntheticEvent, useMemo } from 'react';
+import React, { Children, forwardRef, SyntheticEvent, useMemo } from 'react';
 
 import classNames from 'classnames';
 import { uid } from 'uid';
@@ -57,23 +57,31 @@ const DEFAULT_PROPS: Partial<SwitchProps> = {
     theme: Theme.light,
 };
 
-export const Switch: Comp<SwitchProps> = ({
-    checked,
-    children,
-    className,
-    disabled,
-    helper,
-    id,
-    isChecked = checked,
-    isDisabled = disabled,
-    name,
-    onChange,
-    position,
-    theme,
-    useCustomColors,
-    value,
-    ...forwardedProps
-}) => {
+/**
+ * Switch component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const Switch: Comp<SwitchProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const {
+        checked,
+        children,
+        className,
+        disabled,
+        helper,
+        id,
+        isChecked = checked,
+        isDisabled = disabled,
+        name,
+        onChange,
+        position,
+        theme,
+        useCustomColors,
+        value,
+        ...forwardedProps
+    } = props;
     const switchId = useMemo(() => id || `switch-${uid()}`, [id]);
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (onChange) {
@@ -83,6 +91,7 @@ export const Switch: Comp<SwitchProps> = ({
 
     return (
         <div
+            ref={ref}
             {...forwardedProps}
             className={classNames(
                 className,
@@ -130,7 +139,7 @@ export const Switch: Comp<SwitchProps> = ({
             )}
         </div>
     );
-};
+});
 Switch.displayName = COMPONENT_NAME;
 Switch.className = CLASSNAME;
 Switch.defaultProps = DEFAULT_PROPS;

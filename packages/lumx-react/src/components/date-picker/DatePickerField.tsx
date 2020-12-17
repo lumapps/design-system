@@ -1,15 +1,13 @@
-import { Placement, Popover, TextField, IconButtonProps } from '@lumx/react';
+import { DatePicker, Placement, Popover, TextField, IconButtonProps, TextFieldProps } from '@lumx/react';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 
 import moment from 'moment';
 
-import React, { SyntheticEvent, useCallback, useRef, useState } from 'react';
+import React, { forwardRef, SyntheticEvent, useCallback, useRef, useState } from 'react';
 
 import { ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { Comp, GenericProps } from '@lumx/react/utils';
-
-import { DatePicker } from './DatePicker';
 
 /**
  * Defines the props of the component.
@@ -43,20 +41,28 @@ export interface DatePickerFieldProps extends GenericProps {
  */
 const COMPONENT_NAME = 'DatePickerField';
 
-export const DatePickerField: Comp<DatePickerFieldProps> = ({
-    defaultMonth,
-    disabled,
-    isDisabled = disabled,
-    locale,
-    maxDate,
-    minDate,
-    name,
-    nextButtonProps,
-    onChange,
-    previousButtonProps,
-    value,
-    ...textFieldProps
-}) => {
+/**
+ * DatePickerField component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const DatePickerField: Comp<DatePickerFieldProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const {
+        defaultMonth,
+        disabled,
+        isDisabled = disabled,
+        locale,
+        maxDate,
+        minDate,
+        name,
+        nextButtonProps,
+        onChange,
+        previousButtonProps,
+        value,
+        ...forwardedProps
+    } = props;
     const wrapperRef = useRef(null);
     const anchorRef = useRef(null);
 
@@ -95,7 +101,8 @@ export const DatePickerField: Comp<DatePickerFieldProps> = ({
     return (
         <>
             <TextField
-                {...textFieldProps}
+                ref={ref}
+                {...forwardedProps}
                 name={name}
                 forceFocusStyle={isOpen}
                 textFieldRef={anchorRef}
@@ -132,5 +139,5 @@ export const DatePickerField: Comp<DatePickerFieldProps> = ({
             ) : null}
         </>
     );
-};
+});
 DatePickerField.displayName = COMPONENT_NAME;

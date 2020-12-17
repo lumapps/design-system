@@ -1,4 +1,4 @@
-import React, { Children, ReactElement, ReactNode, RefObject, useMemo, useRef, useState } from 'react';
+import React, { Children, forwardRef, ReactElement, ReactNode, RefObject, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import classNames from 'classnames';
@@ -77,7 +77,14 @@ const DEFAULT_PROPS: Partial<DialogProps> = {
     size: Size.big,
 };
 
-export const Dialog: Comp<DialogProps> = (props) => {
+/**
+ * Dialog component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const Dialog: Comp<DialogProps, HTMLDivElement> = forwardRef((props, ref) => {
     if (!DOCUMENT) {
         // Can't render in SSR.
         return null;
@@ -148,6 +155,7 @@ export const Dialog: Comp<DialogProps> = (props) => {
     return isOpen || isVisible
         ? createPortal(
               <div
+                  ref={ref}
                   {...forwardedProps}
                   className={classNames(
                       className,
@@ -222,7 +230,7 @@ export const Dialog: Comp<DialogProps> = (props) => {
               document.body,
           )
         : null;
-};
+});
 Dialog.displayName = COMPONENT_NAME;
 Dialog.className = CLASSNAME;
 Dialog.defaultProps = DEFAULT_PROPS;

@@ -1,4 +1,4 @@
-import React, { Children, PropsWithChildren, ReactNode, useEffect, useRef, useState } from 'react';
+import React, { Children, forwardRef, PropsWithChildren, ReactNode, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -66,7 +66,14 @@ const isDragHandle = isComponent(DragHandle);
 const isHeader = isComponent('header');
 const isFooter = isComponent('footer');
 
-export const ExpansionPanel: Comp<ExpansionPanelProps> = (props) => {
+/**
+ * ExpansionPanel component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const ExpansionPanel: Comp<ExpansionPanelProps, HTMLDivElement> = forwardRef((props, ref) => {
     const {
         className,
         children: anyChildren,
@@ -135,7 +142,7 @@ export const ExpansionPanel: Comp<ExpansionPanelProps> = (props) => {
     }, [children, isOpen]);
 
     return (
-        <section {...forwardedProps} className={rootClassName}>
+        <section ref={ref} {...forwardedProps} className={rootClassName}>
             {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
             <header className={`${CLASSNAME}__header`} onClick={toggleOpen}>
                 {dragHandle && <div className={`${CLASSNAME}__header-drag`}>{dragHandle}</div>}
@@ -165,7 +172,7 @@ export const ExpansionPanel: Comp<ExpansionPanelProps> = (props) => {
             )}
         </section>
     );
-};
+});
 ExpansionPanel.displayName = COMPONENT_NAME;
 ExpansionPanel.className = CLASSNAME;
 ExpansionPanel.defaultProps = DEFAULT_PROPS;

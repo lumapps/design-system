@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import moment from 'moment';
 import classNames from 'classnames';
 import { DatePickerProps, Emphasis, IconButton, Toolbar } from '@lumx/react';
@@ -24,19 +24,27 @@ export interface DatePickerControlledProps extends DatePickerProps {
  */
 const COMPONENT_NAME = 'DatePickerControlled';
 
-export const DatePickerControlled: Comp<DatePickerControlledProps> = ({
-    locale,
-    maxDate,
-    minDate,
-    nextButtonProps,
-    onChange,
-    onNextMonthChange,
-    onPrevMonthChange,
-    previousButtonProps,
-    selectedMonth,
-    todayOrSelectedDateRef,
-    value,
-}) => {
+/**
+ * DatePickerControlled component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const DatePickerControlled: Comp<DatePickerControlledProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const {
+        locale,
+        maxDate,
+        minDate,
+        nextButtonProps,
+        onChange,
+        onNextMonthChange,
+        onPrevMonthChange,
+        previousButtonProps,
+        selectedMonth,
+        todayOrSelectedDateRef,
+        value,
+    } = props;
     const days = React.useMemo(() => {
         return getAnnotatedMonthCalendar(locale, minDate, maxDate, moment(selectedMonth));
     }, [locale, minDate, maxDate, selectedMonth]);
@@ -46,7 +54,7 @@ export const DatePickerControlled: Comp<DatePickerControlledProps> = ({
     }, [locale]);
 
     return (
-        <div className={`${CLASSNAME}`}>
+        <div ref={ref} className={`${CLASSNAME}`}>
             <Toolbar
                 className={`${CLASSNAME}__toolbar`}
                 after={
@@ -115,6 +123,6 @@ export const DatePickerControlled: Comp<DatePickerControlledProps> = ({
             </div>
         </div>
     );
-};
+});
 DatePickerControlled.displayName = COMPONENT_NAME;
 DatePickerControlled.className = CLASSNAME;

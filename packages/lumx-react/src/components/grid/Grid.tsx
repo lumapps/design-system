@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -42,18 +42,19 @@ const DEFAULT_PROPS: Partial<GridProps> = {
     wrap: 'nowrap',
 };
 
-export const Grid: Comp<GridProps> = ({
-    children,
-    className,
-    gutter,
-    hAlign,
-    orientation,
-    vAlign,
-    wrap,
-    ...forwardedProps
-}) => {
+/**
+ * Grid component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const Grid: Comp<GridProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const { children, className, gutter, hAlign, orientation, vAlign, wrap, ...forwardedProps } = props;
+
     return (
         <div
+            ref={ref}
             {...forwardedProps}
             className={classNames(
                 className,
@@ -66,7 +67,7 @@ export const Grid: Comp<GridProps> = ({
             {children}
         </div>
     );
-};
+});
 Grid.displayName = COMPONENT_NAME;
 Grid.className = CLASSNAME;
 Grid.defaultProps = DEFAULT_PROPS;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { createPortal } from 'react-dom';
 
 import classNames from 'classnames';
@@ -64,18 +64,26 @@ const DEFAULT_PROPS: Partial<NotificationProps> = {
 };
 
 /* eslint-disable react-hooks/rules-of-hooks, jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */
-export const Notification: Comp<NotificationProps> = ({
-    actionLabel,
-    className,
-    content,
-    isOpen,
-    onActionClick,
-    onClick,
-    theme,
-    type,
-    zIndex,
-    ...forwardedProps
-}) => {
+/**
+ * Notification component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const Notification: Comp<NotificationProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const {
+        actionLabel,
+        className,
+        content,
+        isOpen,
+        onActionClick,
+        onClick,
+        theme,
+        type,
+        zIndex,
+        ...forwardedProps
+    } = props;
     if (!DOCUMENT) {
         // Can't render in SSR.
         return null;
@@ -94,11 +102,12 @@ export const Notification: Comp<NotificationProps> = ({
     return type && isVisible
         ? createPortal(
               <div
+                  ref={ref}
                   {...forwardedProps}
                   className={classNames(
                       className,
                       handleBasicClasses({
-                          color: `${NOTIFICATION_CONFIGURATION[type].color}`,
+                          color: `${NOTIFICATION_CONFIGURATION[type as NotificationType].color}`,
                           hasAction,
                           isHidden: !isOpen,
                           prefix: CLASSNAME,
@@ -108,7 +117,7 @@ export const Notification: Comp<NotificationProps> = ({
                   style={{ zIndex }}
               >
                   <div className={`${CLASSNAME}__icon`}>
-                      <Icon icon={NOTIFICATION_CONFIGURATION[type].icon} size={Size.s} />
+                      <Icon icon={NOTIFICATION_CONFIGURATION[type as NotificationType].icon} size={Size.s} />
                   </div>
                   <div className={`${CLASSNAME}__content`}>{content}</div>
                   {hasAction && (
@@ -122,7 +131,7 @@ export const Notification: Comp<NotificationProps> = ({
               document.body,
           )
         : null;
-};
+});
 Notification.displayName = COMPONENT_NAME;
 Notification.className = CLASSNAME;
 Notification.defaultProps = DEFAULT_PROPS;

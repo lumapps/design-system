@@ -8,7 +8,7 @@ export const App = ({ theme }: any) => {
     return (
         <>
             <FlexBox marginAuto={Alignment.right} style={{ marginTop: 80 }}>
-                <Chip chipRef={topStartAnchorRef} theme={theme} size={Size.s}>
+                <Chip ref={topStartAnchorRef} theme={theme} size={Size.s}>
                     TOP_START
                 </Chip>
             </FlexBox>
@@ -23,7 +23,7 @@ export const App = ({ theme }: any) => {
             </Popover>
 
             <FlexBox marginAuto={Alignment.left} style={{ marginTop: 80 }}>
-                <Chip chipRef={topEndAnchorRef} theme={theme} size={Size.s}>
+                <Chip ref={topEndAnchorRef} theme={theme} size={Size.s}>
                     TOP_END
                 </Chip>
             </FlexBox>

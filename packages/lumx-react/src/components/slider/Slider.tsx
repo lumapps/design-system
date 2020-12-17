@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { SyntheticEvent, useMemo, useRef } from 'react';
+import React, { forwardRef, SyntheticEvent, useMemo, useRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -106,25 +106,33 @@ const computeValueFromPercent = (percent: number, min: number, max: number, prec
 const computePercentFromValue = (value: number, min: number, max: number): number =>
     Number((value - min) / (max - min));
 
-export const Slider: Comp<SliderProps> = ({
-    className,
-    disabled,
-    helper,
-    hideMinMaxLabel,
-    id,
-    isDisabled = disabled,
-    label,
-    max,
-    min,
-    name,
-    onChange,
-    onMouseDown,
-    precision,
-    steps,
-    theme,
-    value,
-    ...forwardedProps
-}) => {
+/**
+ * Slider component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const Slider: Comp<SliderProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const {
+        className,
+        disabled,
+        helper,
+        hideMinMaxLabel,
+        id,
+        isDisabled = disabled,
+        label,
+        max,
+        min,
+        name,
+        onChange,
+        onMouseDown,
+        precision,
+        steps,
+        theme,
+        value,
+        ...forwardedProps
+    } = props;
     const sliderId = useMemo(() => id || `slider-${uid()}`, [id]);
     const sliderLabelId = useMemo(() => `label-${sliderId}`, [sliderId]);
     const sliderRef = useRef<HTMLDivElement>(null);
@@ -248,6 +256,7 @@ export const Slider: Comp<SliderProps> = ({
     const percentString = `${computePercentFromValue(value, min, max) * 100}%`;
     return (
         <div
+            ref={ref}
             {...forwardedProps}
             className={classNames(
                 className,
@@ -306,7 +315,7 @@ export const Slider: Comp<SliderProps> = ({
             </div>
         </div>
     );
-};
+});
 Slider.displayName = COMPONENT_NAME;
 Slider.className = CLASSNAME;
 Slider.defaultProps = DEFAULT_PROPS;

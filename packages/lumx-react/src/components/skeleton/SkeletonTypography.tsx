@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, forwardRef } from 'react';
 
 import { Theme, Typography } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
@@ -27,15 +27,19 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}SkeletonTypography`;
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
-export const SkeletonTypography: Comp<SkeletonTypographyProps> = ({
-    className,
-    theme,
-    typography,
-    width,
-    ...forwardedProps
-}) => {
+/**
+ * SkeletonTypography component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const SkeletonTypography: Comp<SkeletonTypographyProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const { className, theme, typography, width, ...forwardedProps } = props;
+
     return (
         <div
+            ref={ref}
             {...forwardedProps}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, typography }))}
             style={{ ...forwardedProps.style, width }}
@@ -43,6 +47,6 @@ export const SkeletonTypography: Comp<SkeletonTypographyProps> = ({
             <div className={`${CLASSNAME}__inner`} />
         </div>
     );
-};
+});
 SkeletonTypography.displayName = COMPONENT_NAME;
 SkeletonTypography.className = CLASSNAME;

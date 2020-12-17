@@ -24,7 +24,7 @@ export const App = () => {
     return (
         <>
             {/* Simple menu */}
-            <Button buttonRef={anchorSimpleRef} onClick={toggleSimpleMenu}>
+            <Button ref={anchorSimpleRef} onClick={toggleSimpleMenu}>
                 Simple Menu
             </Button>
 
@@ -53,7 +53,7 @@ export const App = () => {
             </Dropdown>
 
             {/* Complex menu */}
-            <Button buttonRef={anchorComplexRef} onClick={toggleComplexMenu}>
+            <Button ref={anchorComplexRef} onClick={toggleComplexMenu}>
                 Complex Menu
             </Button>
 

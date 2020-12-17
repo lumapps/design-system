@@ -1,4 +1,4 @@
-import React, { ImgHTMLAttributes, ReactElement, ReactNode, useEffect, useMemo, useState } from 'react';
+import React, { forwardRef, ImgHTMLAttributes, ReactNode, useEffect, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -124,27 +124,35 @@ const DEFAULT_PROPS: Partial<ThumbnailProps> = {
 };
 
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex,jsx-a11y/no-static-element-interactions */
-export const Thumbnail: Comp<ThumbnailProps> = ({
-    align,
-    alt = 'Thumbnail',
-    aspectRatio,
-    className,
-    crossOrigin,
-    fallback,
-    fillHeight,
-    focusPoint,
-    image,
-    imgProps,
-    isCrossOriginEnabled,
-    isFollowingWindowSize,
-    loading,
-    onClick,
-    resizeDebounceTime,
-    size,
-    theme,
-    variant,
-    ...forwardedProps
-}: ThumbnailProps): ReactElement => {
+/**
+ * Thumbnail component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const Thumbnail: Comp<ThumbnailProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const {
+        align,
+        alt = 'Thumbnail',
+        aspectRatio,
+        className,
+        crossOrigin,
+        fallback,
+        fillHeight,
+        focusPoint,
+        image,
+        imgProps,
+        isCrossOriginEnabled,
+        isFollowingWindowSize,
+        loading,
+        onClick,
+        resizeDebounceTime,
+        size,
+        theme,
+        variant,
+        ...forwardedProps
+    } = props;
     const [thumbnailState, setThumbnailState] = useState<ThumbnailStates>('isLoading');
     const focusImageRef = useFocusedImage(
         focusPoint as FocusPoint,
@@ -210,6 +218,7 @@ export const Thumbnail: Comp<ThumbnailProps> = ({
 
     return (
         <div
+            ref={ref}
             {...forwardedProps}
             className={classNames(
                 className,
@@ -225,7 +234,7 @@ export const Thumbnail: Comp<ThumbnailProps> = ({
             {thumbnailState === 'hasError' ? renderedFallback : renderedImage}
         </div>
     );
-};
+});
 Thumbnail.displayName = COMPONENT_NAME;
 Thumbnail.className = CLASSNAME;
 Thumbnail.defaultProps = DEFAULT_PROPS;

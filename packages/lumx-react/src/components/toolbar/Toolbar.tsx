@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { forwardRef, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -33,9 +33,19 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: Partial<ToolbarProps> = {};
 
-export const Toolbar: Comp<ToolbarProps> = ({ after, before, className, label, ...forwardedProps }) => {
+/**
+ * Toolbar component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const Toolbar: Comp<ToolbarProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const { after, before, className, label, ...forwardedProps } = props;
+
     return (
         <div
+            ref={ref}
             {...forwardedProps}
             className={classNames(
                 className,
@@ -52,7 +62,7 @@ export const Toolbar: Comp<ToolbarProps> = ({ after, before, className, label, .
             {after && <div className={`${CLASSNAME}__after`}>{after}</div>}
         </div>
     );
-};
+});
 Toolbar.displayName = COMPONENT_NAME;
 Toolbar.className = CLASSNAME;
 Toolbar.defaultProps = DEFAULT_PROPS;

@@ -1,4 +1,4 @@
-import React, { ReactNode, SyntheticEvent } from 'react';
+import React, { forwardRef, ReactNode, SyntheticEvent } from 'react';
 
 import classNames from 'classnames';
 
@@ -54,26 +54,29 @@ const DEFAULT_PROPS: Partial<CheckboxProps> = {
 };
 
 /**
- * Defines a checkbox.
+ * Checkbox component.
  *
- * @return The component.
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
  */
-export const Checkbox: Comp<CheckboxProps> = ({
-    checked,
-    className,
-    disabled,
-    helper,
-    id,
-    isChecked = checked,
-    isDisabled = disabled,
-    label,
-    name,
-    onChange,
-    theme,
-    useCustomColors,
-    value,
-    ...forwardedProps
-}) => {
+export const Checkbox: Comp<CheckboxProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const {
+        checked,
+        className,
+        disabled,
+        helper,
+        id,
+        isChecked = checked,
+        isDisabled = disabled,
+        label,
+        name,
+        onChange,
+        theme,
+        useCustomColors,
+        value,
+        ...forwardedProps
+    } = props;
     const inputId = id || uniqueId(`${CLASSNAME.toLowerCase()}-`);
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (onChange) {
@@ -83,6 +86,7 @@ export const Checkbox: Comp<CheckboxProps> = ({
 
     return (
         <div
+            ref={ref}
             {...forwardedProps}
             className={classNames(
                 className,
@@ -131,7 +135,7 @@ export const Checkbox: Comp<CheckboxProps> = ({
             </div>
         </div>
     );
-};
+});
 Checkbox.displayName = COMPONENT_NAME;
 Checkbox.className = CLASSNAME;
 Checkbox.defaultProps = DEFAULT_PROPS;

@@ -1,4 +1,4 @@
-import React, { RefObject, useRef } from 'react';
+import React, { forwardRef, RefObject, useRef } from 'react';
 
 import classNames from 'classnames';
 import { createPortal } from 'react-dom';
@@ -12,6 +12,7 @@ import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { useDelayedVisibility, useFocus } from '@lumx/react/hooks';
 import { useDisableBodyScroll } from '@lumx/react/hooks/useDisableBodyScroll';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
+import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
 const LIGHTBOX_TRANSITION_DURATION = 400;
 
@@ -57,23 +58,26 @@ const DEFAULT_PROPS: Partial<LightboxProps> = {
 };
 
 /**
- * Displays content within a modal.
+ * Lightbox component.
  *
- * @return Lightbox.
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
  */
-export const Lightbox: Comp<LightboxProps> = ({
-    ariaLabel,
-    children,
-    className,
-    closeButtonProps,
-    isOpen,
-    onClose,
-    parentElement,
-    preventAutoClose,
-    theme,
-    zIndex,
-    ...forwardedProps
-}) => {
+export const Lightbox: Comp<LightboxProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const {
+        ariaLabel,
+        children,
+        className,
+        closeButtonProps,
+        isOpen,
+        onClose,
+        parentElement,
+        preventAutoClose,
+        theme,
+        zIndex,
+        ...forwardedProps
+    } = props;
     if (!DOCUMENT) {
         // Can't render in SSR.
         return null;
@@ -103,6 +107,7 @@ export const Lightbox: Comp<LightboxProps> = ({
     return createPortal(
         /* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */
         <div
+            ref={mergeRefs(ref, wrapperRef)}
             {...forwardedProps}
             aria-label={ariaLabel}
             aria-modal="true"
@@ -116,7 +121,6 @@ export const Lightbox: Comp<LightboxProps> = ({
                 }),
             )}
             style={{ zIndex }}
-            ref={wrapperRef}
         >
             {closeButtonProps && (
                 <IconButton
@@ -138,7 +142,7 @@ export const Lightbox: Comp<LightboxProps> = ({
         </div>,
         document.body,
     );
-};
+});
 Lightbox.displayName = COMPONENT_NAME;
 Lightbox.className = CLASSNAME;
 Lightbox.defaultProps = DEFAULT_PROPS;

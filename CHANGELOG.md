@@ -36,6 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Added `clearButtonProps` prop to `TextField` component to allow setting custom props to the `IconButton`s used to clear the field. This prop is not required since the icon button is not automatically displayed. However, when used to display the button, the `label` prop inside the `clearButtonProps` prop will be required because translation are not handled inside the Design System and the `IconButton` now requires a `label` for a11y purposes.
 -   Added `closeButtonProps` prop to `Lightbox` component to allow setting custom props to the `IconButton`s used to close the lightbox. This prop is not required since the icon button is not automatically displayed. However, when used to display the button, the `label` prop inside the `closeButtonProps` prop will be required because translation are not handled inside the Design System and the `IconButton` now requires a `label` for a11y purposes.
 -   Added `tooltipProps` to `IconButton` to allow setting custom props to the tooltip.
+-   _[BREAKING]_ Added `htmlFor` prop required for `InputLabel` since it is required for `<label>` for a11y purposes.
 
 ### Changed
 
@@ -62,6 +63,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   _[BREAKING]_ Thumbnail `loading` prop now take `eager` or `lazy` string (instead of enum).
 -   _[BREAKING]_ `@lumx/react` is now exported as an ESM module targeting the [browserlist `defaults` query](https://github.com/browserslist/browserslist#full-list). The package is not compatible with IE anymore. You can keep the compatibility by configuring your own polyfills and/or transpilation in your build setup.
 -   _[BREAKING]_ `lodash` is now defined as a `peerDependencies`. You must install them separately from the `@lumx/react` package.
+-   _[BREAKING]_ Replaced `buttonRef` by `ref` in `Button` and `IconButton` components.
+-   _[BREAKING]_ Replaced `buttonGroupRef` by `ref` in `ButtonGroup` component.
+-   _[BREAKING]_ Replaced `chipRef` by `ref` in `Chip` component.
+-   _[BREAKING]_ Replaced `iconRef` by `ref` in `Icon` component.
+-   _[BREAKING]_ Replaced `linkRef` by `ref` in `Link` component.
+-   _[BREAKING]_ Replaced `listElementRef` by `ref` in `List` component.
+-   _[BREAKING]_ Replaced `popoverRef` by `ref` in `Popover` component.
+-   _[BREAKING]_ Replaced `userBlockRef` by `ref` in `UserBlock` component.
 
 ### Removed
 

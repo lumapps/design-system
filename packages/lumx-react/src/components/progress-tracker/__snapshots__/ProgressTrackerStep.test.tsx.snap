@@ -20,6 +20,7 @@ exports[`<ProgressTrackerStep> Snapshots and structure should render 1`] = `
   />
   <InputLabel
     className="lumx-progress-tracker-step__label"
+    htmlFor="tab-1"
     theme="light"
   >
     Test Step Label
@@ -47,6 +48,7 @@ exports[`<ProgressTrackerStep> Snapshots and structure should render active erro
   />
   <InputLabel
     className="lumx-progress-tracker-step__label"
+    htmlFor="tab-3"
     theme="light"
   >
     Test Step Label
@@ -74,6 +76,7 @@ exports[`<ProgressTrackerStep> Snapshots and structure should render active stat
   />
   <InputLabel
     className="lumx-progress-tracker-step__label"
+    htmlFor="tab-3"
     theme="light"
   >
     Test Step Label
@@ -101,6 +104,7 @@ exports[`<ProgressTrackerStep> Snapshots and structure should render complete st
   />
   <InputLabel
     className="lumx-progress-tracker-step__label"
+    htmlFor="tab-3"
     theme="light"
   >
     Test Step Label
@@ -128,6 +132,7 @@ exports[`<ProgressTrackerStep> Snapshots and structure should render erroneous s
   />
   <InputLabel
     className="lumx-progress-tracker-step__label"
+    htmlFor="tab-3"
     theme="light"
   >
     Test Step Label

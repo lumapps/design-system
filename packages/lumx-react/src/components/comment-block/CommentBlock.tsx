@@ -1,4 +1,4 @@
-import React, { KeyboardEvent, KeyboardEventHandler, ReactNode } from 'react';
+import React, { forwardRef, KeyboardEvent, KeyboardEventHandler, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -69,25 +69,33 @@ const DEFAULT_PROPS: Partial<CommentBlockProps> = {
     theme: Theme.light,
 };
 
-export const CommentBlock: Comp<CommentBlockProps> = ({
-    actions,
-    avatar,
-    avatarProps,
-    children,
-    date,
-    hasActions,
-    hasChildren,
-    hasIndentedChildren,
-    headerActions,
-    isOpen,
-    isRelevant,
-    name,
-    onClick,
-    onMouseEnter,
-    onMouseLeave,
-    text,
-    theme,
-}) => {
+/**
+ * CommentBlock component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const CommentBlock: Comp<CommentBlockProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const {
+        actions,
+        avatar,
+        avatarProps,
+        children,
+        date,
+        hasActions,
+        hasChildren,
+        hasIndentedChildren,
+        headerActions,
+        isOpen,
+        isRelevant,
+        name,
+        onClick,
+        onMouseEnter,
+        onMouseLeave,
+        text,
+        theme,
+    } = props;
     const enterKeyPress: KeyboardEventHandler<HTMLElement> = (evt: KeyboardEvent<HTMLElement>) => {
         if (evt.which === ENTER_KEY_CODE && isFunction(onClick)) {
             onClick();
@@ -96,6 +104,7 @@ export const CommentBlock: Comp<CommentBlockProps> = ({
 
     return (
         <div
+            ref={ref}
             className={classNames(
                 handleBasicClasses({
                     hasChildren: hasChildren && isOpen,
@@ -146,7 +155,7 @@ export const CommentBlock: Comp<CommentBlockProps> = ({
             {hasChildren && isOpen && <div className={`${CLASSNAME}__children`}>{children}</div>}
         </div>
     );
-};
+});
 CommentBlock.displayName = COMPONENT_NAME;
 CommentBlock.className = CLASSNAME;
 CommentBlock.defaultProps = DEFAULT_PROPS;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import { Emphasis, Icon, Size, Theme, Tooltip, TooltipProps } from '@lumx/react';
 import { BaseButtonProps, ButtonRoot } from '@lumx/react/components/button/ButtonRoot';
@@ -42,17 +42,24 @@ const DEFAULT_PROPS: Partial<IconButtonProps> = {
     theme: Theme.light,
 };
 
-export const IconButton: Comp<IconButtonProps> = (props) => {
+/**
+ * IconButton component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const IconButton: Comp<IconButtonProps, HTMLButtonElement> = forwardRef((props, ref) => {
     const { emphasis, icon, label, size, theme, tooltipProps, ...forwardedProps } = props;
 
     return (
         <Tooltip label={label} {...tooltipProps}>
-            <ButtonRoot {...{ emphasis, size, theme, ...forwardedProps }} aria-label={label} variant="icon">
+            <ButtonRoot ref={ref} {...{ emphasis, size, theme, ...forwardedProps }} aria-label={label} variant="icon">
                 <Icon icon={icon} />
             </ButtonRoot>
         </Tooltip>
     );
-};
+});
 IconButton.displayName = COMPONENT_NAME;
 IconButton.className = CLASSNAME;
 IconButton.defaultProps = DEFAULT_PROPS;

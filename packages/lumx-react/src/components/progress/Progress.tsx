@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -44,10 +44,19 @@ const DEFAULT_PROPS: Partial<ProgressProps> = {
     theme: Theme.light,
     variant: ProgressVariant.circular,
 };
+/**
+ * Progress component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const Progress: Comp<ProgressProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const { className, theme, useCustomColors, variant, ...forwardedProps } = props;
 
-export const Progress: Comp<ProgressProps> = ({ className, theme, useCustomColors, variant, ...forwardedProps }) => {
     return (
         <div
+            ref={ref}
             {...forwardedProps}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, variant }), {
                 [`${CSS_PREFIX}-custom-colors`]: useCustomColors,
@@ -80,7 +89,7 @@ export const Progress: Comp<ProgressProps> = ({ className, theme, useCustomColor
             </div>
         </div>
     );
-};
+});
 Progress.displayName = COMPONENT_NAME;
 Progress.className = CLASSNAME;
 Progress.defaultProps = DEFAULT_PROPS;

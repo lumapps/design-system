@@ -1,4 +1,4 @@
-import React, { ReactNode, RefObject, SyntheticEvent, useRef } from 'react';
+import React, { forwardRef, ReactNode, RefObject, SyntheticEvent, useRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -176,46 +176,55 @@ const DEFAULT_PROPS: Partial<AutocompleteProps> = {
     shouldFocusOnClose: false,
 };
 
-export const Autocomplete: Comp<AutocompleteProps> = ({
-    anchorToInput,
-    children,
-    chips,
-    className,
-    closeOnClick,
-    closeOnClickAway,
-    closeOnEscape,
-    disabled,
-    error,
-    fitToAnchorWidth,
-    hasError,
-    helper,
-    icon,
-    inputRef,
-    clearButtonProps,
-    isDisabled = disabled,
-    isOpen,
-    isValid,
-    label,
-    name,
-    offset,
-    onBlur,
-    onChange,
-    onClose,
-    onFocus,
-    onInfiniteScroll,
-    placeholder,
-    placement,
-    shouldFocusOnClose,
-    theme,
-    value,
-    ...forwardedProps
-}) => {
+/**
+ * Autocomplete component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const Autocomplete: Comp<AutocompleteProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const {
+        anchorToInput,
+        children,
+        chips,
+        className,
+        closeOnClick,
+        closeOnClickAway,
+        closeOnEscape,
+        disabled,
+        error,
+        fitToAnchorWidth,
+        hasError,
+        helper,
+        icon,
+        inputRef,
+        clearButtonProps,
+        isDisabled = disabled,
+        isOpen,
+        isValid,
+        label,
+        name,
+        offset,
+        onBlur,
+        onChange,
+        onClose,
+        onFocus,
+        onInfiniteScroll,
+        placeholder,
+        placement,
+        shouldFocusOnClose,
+        theme,
+        value,
+        ...forwardedProps
+    } = props;
     const inputAnchorRef = useRef<HTMLElement>(null);
     const textFieldRef = useRef(null);
     useFocus(inputAnchorRef.current, !isOpen && shouldFocusOnClose);
 
     return (
         <div
+            ref={ref}
             {...forwardedProps}
             className={classNames(
                 className,
@@ -262,7 +271,7 @@ export const Autocomplete: Comp<AutocompleteProps> = ({
             </Dropdown>
         </div>
     );
-};
+});
 Autocomplete.displayName = COMPONENT_NAME;
 Autocomplete.className = CLASSNAME;
 Autocomplete.defaultProps = DEFAULT_PROPS;

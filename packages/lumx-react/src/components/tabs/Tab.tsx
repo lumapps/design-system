@@ -3,7 +3,7 @@ import { COMPONENT_PREFIX, CSS_PREFIX, ENTER_KEY_CODE } from '@lumx/react/consta
 import { Comp, GenericProps, handleBasicClasses } from '@lumx/react/utils';
 
 import classNames from 'classnames';
-import React, { FocusEventHandler, KeyboardEventHandler, ReactNode, useCallback } from 'react';
+import React, { FocusEventHandler, forwardRef, KeyboardEventHandler, ReactNode, useCallback } from 'react';
 import { useTabProviderContext } from './state';
 
 /**
@@ -45,9 +45,10 @@ const DEFAULT_PROPS: Partial<TabProps> = {};
  * Implements WAI-ARIA `tab` role {@see https://www.w3.org/TR/wai-aria-practices-1.1/examples/tabs/tabs-1/tabs.html#rps_label}
  *
  * @param  props Component props.
+ * @param  ref   Component ref.
  * @return React element.
  */
-export const Tab: Comp<TabProps> = (props) => {
+export const Tab: Comp<TabProps, HTMLButtonElement> = forwardRef((props, ref) => {
     const {
         className,
         disabled,
@@ -95,6 +96,7 @@ export const Tab: Comp<TabProps> = (props) => {
 
     return (
         <button
+            ref={ref}
             {...forwardedProps}
             type="button"
             id={state?.tabId}
@@ -112,7 +114,7 @@ export const Tab: Comp<TabProps> = (props) => {
             {label && <span>{label}</span>}
         </button>
     );
-};
+});
 Tab.displayName = COMPONENT_NAME;
 Tab.className = CLASSNAME;
 Tab.defaultProps = DEFAULT_PROPS;

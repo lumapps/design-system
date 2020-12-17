@@ -35,7 +35,7 @@ export const App = () => {
                     <Chip
                         before={<Icon icon={mdiFilterVariant} size={Size.xs} />}
                         after={<Icon icon={mdiMenuDown} size={Size.xs} />}
-                        chipRef={anchorRef}
+                        ref={anchorRef}
                         onClick={togglePopover}
                     >
                         Filters

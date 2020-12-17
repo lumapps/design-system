@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useCallback } from 'react';
+import React, { forwardRef, MouseEventHandler, useCallback } from 'react';
 
 import { AspectRatio, Theme, Thumbnail, ThumbnailProps } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
@@ -35,7 +35,15 @@ const DEFAULT_PROPS: Partial<MosaicProps> = {
     theme: Theme.light,
 };
 
-export const Mosaic: Comp<MosaicProps> = ({ className, theme, thumbnails, onImageClick, ...forwardedProps }) => {
+/**
+ * Mosaic component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const Mosaic: Comp<MosaicProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const { className, theme, thumbnails, onImageClick, ...forwardedProps } = props;
     const handleImageClick = useCallback(
         (index: number, onClick?: MouseEventHandler): MouseEventHandler => (event) => {
             onClick?.(event);
@@ -45,6 +53,7 @@ export const Mosaic: Comp<MosaicProps> = ({ className, theme, thumbnails, onImag
     );
     return (
         <div
+            ref={ref}
             {...forwardedProps}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }), {
                 [`${CLASSNAME}--has-1-thumbnail`]: thumbnails?.length === 1,
@@ -54,30 +63,33 @@ export const Mosaic: Comp<MosaicProps> = ({ className, theme, thumbnails, onImag
             })}
         >
             <div className={`${CLASSNAME}__wrapper`}>
-                {take(thumbnails, 4).map(({ image, onClick, ...thumbnail }, index) => (
-                    <div key={index} className={`${CLASSNAME}__thumbnail`}>
-                        <Thumbnail
-                            {...thumbnail}
-                            image={image}
-                            theme={theme}
-                            aspectRatio={AspectRatio.free}
-                            fillHeight
-                            tabIndex={(onClick || onImageClick) && '0'}
-                            onClick={handleImageClick(index, onClick)}
-                        />
+                {take(thumbnails, 4).map((thumbnail: any, index: number) => {
+                    const { image, onClick, ...thumbnailProps } = thumbnail;
 
-                        {thumbnails.length > 4 && index === 3 && (
-                            <div className={`${CLASSNAME}__overlay`}>
-                                <span>+{thumbnails.length - 4}</span>
-                            </div>
-                        )}
-                    </div>
-                ))}
+                    return (
+                        <div key={index} className={`${CLASSNAME}__thumbnail`}>
+                            <Thumbnail
+                                {...thumbnailProps}
+                                image={image}
+                                theme={theme}
+                                aspectRatio={AspectRatio.free}
+                                fillHeight
+                                tabIndex={(onClick || onImageClick) && '0'}
+                                onClick={handleImageClick(index, onClick)}
+                            />
+
+                            {thumbnails.length > 4 && index === 3 && (
+                                <div className={`${CLASSNAME}__overlay`}>
+                                    <span>+{thumbnails.length - 4}</span>
+                                </div>
+                            )}
+                        </div>
+                    );
+                })}
             </div>
         </div>
     );
-};
-
+});
 Mosaic.displayName = COMPONENT_NAME;
 Mosaic.className = CLASSNAME;
 Mosaic.defaultProps = DEFAULT_PROPS;

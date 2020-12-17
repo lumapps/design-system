@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { forwardRef, ReactNode } from 'react';
 
 import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
@@ -51,7 +51,14 @@ const DEFAULT_PROPS: Partial<ButtonProps> = {
     theme: Theme.light,
 };
 
-export const Button: Comp<ButtonProps> = (props) => {
+/**
+ * Button component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const Button: Comp<ButtonProps, HTMLButtonElement | HTMLAnchorElement> = forwardRef((props, ref) => {
     const { children, className, emphasis, leftIcon, rightIcon, size, theme, ...forwardedProps } = props;
 
     const buttonClassName = classNames(
@@ -61,13 +68,18 @@ export const Button: Comp<ButtonProps> = (props) => {
     );
 
     return (
-        <ButtonRoot {...{ emphasis, size, theme, ...forwardedProps }} className={buttonClassName} variant="button">
+        <ButtonRoot
+            ref={ref}
+            {...{ emphasis, size, theme, ...forwardedProps }}
+            className={buttonClassName}
+            variant="button"
+        >
             {leftIcon && !isEmpty(leftIcon) && <Icon icon={leftIcon} />}
             {children && <span>{children}</span>}
             {rightIcon && !isEmpty(rightIcon) && <Icon icon={rightIcon} />}
         </ButtonRoot>
     );
-};
+});
 Button.displayName = COMPONENT_NAME;
 Button.className = CLASSNAME;
 Button.defaultProps = DEFAULT_PROPS;

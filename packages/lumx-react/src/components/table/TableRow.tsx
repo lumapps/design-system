@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -32,32 +32,36 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME, true);
  */
 const DEFAULT_PROPS: Partial<TableRowProps> = {};
 
-export const TableRow: Comp<TableRowProps> = ({
-    children,
-    className,
-    disabled,
-    isClickable,
-    isDisabled = disabled,
-    isSelected,
-    ...forwardedProps
-}) => (
-    <tr
-        {...forwardedProps}
-        className={classNames(
-            className,
-            handleBasicClasses({
-                isClickable: isClickable && !isDisabled,
-                isDisabled,
-                isSelected: isSelected && !isDisabled,
-                prefix: CLASSNAME,
-            }),
-        )}
-        tabIndex={isClickable && !isDisabled ? 0 : -1}
-        aria-disabled={isDisabled}
-    >
-        {children}
-    </tr>
-);
+/**
+ * TableRow component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const TableRow: Comp<TableRowProps, HTMLTableRowElement> = forwardRef((props, ref) => {
+    const { children, className, disabled, isClickable, isDisabled = disabled, isSelected, ...forwardedProps } = props;
+
+    return (
+        <tr
+            ref={ref}
+            {...forwardedProps}
+            className={classNames(
+                className,
+                handleBasicClasses({
+                    isClickable: isClickable && !isDisabled,
+                    isDisabled,
+                    isSelected: isSelected && !isDisabled,
+                    prefix: CLASSNAME,
+                }),
+            )}
+            tabIndex={isClickable && !isDisabled ? 0 : -1}
+            aria-disabled={isDisabled}
+        >
+            {children}
+        </tr>
+    );
+});
 
 TableRow.displayName = COMPONENT_NAME;
 TableRow.className = CLASSNAME;

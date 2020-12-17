@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -26,10 +26,25 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}DragHandle`;
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
-export const DragHandle: Comp<DragHandleProps> = ({ className, theme, ...forwardedProps }) => (
-    <div {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }))}>
-        <Icon icon={mdiDragVertical} color={theme === Theme.dark ? ColorPalette.light : undefined} size={Size.xs} />
-    </div>
-);
+/**
+ * DragHandle component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const DragHandle: Comp<DragHandleProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const { className, theme, ...forwardedProps } = props;
+
+    return (
+        <div
+            ref={ref}
+            {...forwardedProps}
+            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }))}
+        >
+            <Icon icon={mdiDragVertical} color={theme === Theme.dark ? ColorPalette.light : undefined} size={Size.xs} />
+        </div>
+    );
+});
 DragHandle.displayName = COMPONENT_NAME;
 DragHandle.className = CLASSNAME;

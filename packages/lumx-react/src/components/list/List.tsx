@@ -7,7 +7,7 @@ import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
 import classNames from 'classnames';
-import React, { Key, ReactNode, Ref, SyntheticEvent, useRef } from 'react';
+import React, { forwardRef, Key, ReactNode, SyntheticEvent, useRef } from 'react';
 import { useInteractiveList } from './useInteractiveList';
 
 /**
@@ -23,8 +23,6 @@ export interface ListProps extends GenericProps {
     isClickable?: boolean;
     /** The item padding size. */
     itemPadding?: Size.big | Size.huge;
-    /** The reference passed to the <ul> element. */
-    listElementRef?: Ref<HTMLUListElement>;
     /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
     /**
@@ -47,26 +45,31 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}List`;
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
-interface List {
-    useKeyboardListNavigation: useKeyboardListNavigationType;
-}
-
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
-export const List: Comp<ListProps> & List = ({
-    children,
-    className,
-    isClickable,
-    itemPadding,
-    listElementRef,
-    onListItemSelected,
-    useCustomColors,
-    ...forwardedProps
-}) => {
-    const ref = useRef<HTMLUListElement>(null);
+/**
+ * List component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const List: Comp<ListProps, HTMLUListElement> & {
+    useKeyboardListNavigation?: useKeyboardListNavigationType;
+} = forwardRef((props, ref) => {
+    const {
+        children,
+        className,
+        isClickable,
+        itemPadding,
+        onListItemSelected,
+        useCustomColors,
+        ...forwardedProps
+    } = props;
+    const listElementRef = useRef<HTMLUListElement>(null);
 
     const { items, hasClickableItem } = useInteractiveList({
         items: children,
-        ref,
+        ref: listElementRef,
         onListItemSelected,
     });
     const clickable = hasClickableItem || isClickable;
@@ -83,13 +86,12 @@ export const List: Comp<ListProps> & List = ({
                 useCustomColors && `${CSS_PREFIX}-custom-colors`,
             )}
             tabIndex={clickable ? 0 : -1}
-            ref={mergeRefs(listElementRef, ref)}
+            ref={mergeRefs(ref, listElementRef)}
         >
             {items}
         </ul>
     );
-};
-
+});
 List.displayName = COMPONENT_NAME;
 List.className = CLASSNAME;
 List.useKeyboardListNavigation = useKeyboardListNavigation;

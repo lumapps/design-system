@@ -281,10 +281,9 @@ describe(`<${Select.displayName}>`, () => {
 
         describe('Chip variant', () => {
             it('should render a Chip as the select input', () => {
-                const { dropdown, input } = setup({ variant: SelectVariant.chip }, false);
+                const { input } = setup({ variant: SelectVariant.chip }, false);
 
                 expect(input.type()).toEqual(Chip);
-                expect(input.prop('chipRef')).toBe(dropdown.prop('anchorRef'));
             });
 
             describe('Has value', () => {

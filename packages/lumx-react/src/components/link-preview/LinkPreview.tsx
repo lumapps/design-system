@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { forwardRef, useCallback } from 'react';
 
 import classNames from 'classnames';
 
@@ -63,22 +63,31 @@ const DEFAULT_PROPS: Partial<LinkPreviewProps> = {
     theme: Theme.light,
 };
 
-export const LinkPreview: Comp<LinkPreviewProps> = ({
-    className,
-    description,
-    link,
-    linkProps,
-    size,
-    theme,
-    thumbnail = '',
-    thumbnailProps,
-    title,
-    ...forwardedProps
-}) => {
+/**
+ * LinkPreview component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const LinkPreview: Comp<LinkPreviewProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const {
+        className,
+        description,
+        link,
+        linkProps,
+        size,
+        theme,
+        thumbnail = '',
+        thumbnailProps,
+        title,
+        ...forwardedProps
+    } = props;
     const goToUrl = useCallback(() => window.open(link, '_blank'), [link]);
 
     return (
         <div
+            ref={ref}
             {...forwardedProps}
             className={classNames(
                 className,
@@ -136,7 +145,7 @@ export const LinkPreview: Comp<LinkPreviewProps> = ({
             </div>
         </div>
     );
-};
+});
 
 LinkPreview.displayName = COMPONENT_NAME;
 LinkPreview.className = CLASSNAME;

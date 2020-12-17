@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -28,15 +28,25 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}GridItem`;
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
-export const GridItem: Comp<GridItemProps> = ({ children, className, width, align, order, ...forwardedProps }) => {
+/**
+ * GridItem component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const GridItem: Comp<GridItemProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const { children, className, width, align, order, ...forwardedProps } = props;
+
     return (
         <div
+            ref={ref}
             {...forwardedProps}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, width, order, align }))}
         >
             {children}
         </div>
     );
-};
+});
 GridItem.displayName = COMPONENT_NAME;
 GridItem.className = CLASSNAME;

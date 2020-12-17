@@ -3,7 +3,7 @@ import { ColorPalette, Icon, Size } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
-import React, { ReactNode } from 'react';
+import React, { forwardRef, ReactNode } from 'react';
 
 export enum MessageKind {
     error = 'error',
@@ -61,12 +61,21 @@ const KIND_ICON = {
     [MessageKind.warning]: mdiAlertCircle,
 };
 
-export const Message: Comp<MessageProps> = ({ children, className, hasBackground, kind, ...forwardedProps }) => {
-    const icon = kind ? KIND_ICON[kind] : null;
+/**
+ * Message component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const Message: Comp<MessageProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const { children, className, hasBackground, kind, ...forwardedProps } = props;
+    const icon = kind ? KIND_ICON[kind as MessageKind] : null;
 
-    const color = kind ? KIND_COLOR[kind] : DEFAULT_PROPS.color;
+    const color = kind ? KIND_COLOR[kind as MessageKind] : DEFAULT_PROPS.color;
     return (
         <div
+            ref={ref}
             className={classNames(
                 className,
                 handleBasicClasses({
@@ -81,7 +90,7 @@ export const Message: Comp<MessageProps> = ({ children, className, hasBackground
             <div className="lumx-message__text">{children}</div>
         </div>
     );
-};
+});
 Message.displayName = COMPONENT_NAME;
 Message.className = CLASSNAME;
 Message.defaultProps = DEFAULT_PROPS;

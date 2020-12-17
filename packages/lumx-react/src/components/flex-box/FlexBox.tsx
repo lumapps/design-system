@@ -3,7 +3,7 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
 import castArray from 'lodash/castArray';
-import React, { ReactNode } from 'react';
+import React, { forwardRef, ReactNode } from 'react';
 import { Size } from '..';
 
 export type MarginAutoAlignment = Alignment.top | Alignment.bottom | Alignment.right | Alignment.left;
@@ -43,38 +43,50 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}FlexBox`;
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
-export const FlexBox: Comp<FlexBoxProps> = ({
-    children,
-    className,
-    fillSpace,
-    gap,
-    hAlign,
-    marginAuto,
-    noShrink,
-    orientation,
-    vAlign,
-    wrap,
-    ...forwardedProps
-}) => (
-    <div
-        {...forwardedProps}
-        className={classNames(
-            className,
-            handleBasicClasses({
-                prefix: CLASSNAME,
-                orientation: orientation ?? (wrap || hAlign || vAlign ? Orientation.horizontal : null),
-                vAlign,
-                hAlign,
-                gap,
-            }),
-            wrap && `${CLASSNAME}--wrap`,
-            fillSpace && `${CLASSNAME}--fill-space`,
-            noShrink && `${CLASSNAME}--no-shrink`,
-            marginAuto && castArray(marginAuto).map((align) => `${CLASSNAME}--margin-auto-${align}`),
-        )}
-    >
-        {children}
-    </div>
-);
+/**
+ * FlexBox component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const FlexBox: Comp<FlexBoxProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const {
+        children,
+        className,
+        fillSpace,
+        gap,
+        hAlign,
+        marginAuto,
+        noShrink,
+        orientation,
+        vAlign,
+        wrap,
+        ...forwardedProps
+    } = props;
+
+    return (
+        <div
+            ref={ref}
+            {...forwardedProps}
+            className={classNames(
+                className,
+                handleBasicClasses({
+                    prefix: CLASSNAME,
+                    orientation: orientation ?? (wrap || hAlign || vAlign ? Orientation.horizontal : null),
+                    vAlign,
+                    hAlign,
+                    gap,
+                }),
+                wrap && `${CLASSNAME}--wrap`,
+                fillSpace && `${CLASSNAME}--fill-space`,
+                noShrink && `${CLASSNAME}--no-shrink`,
+                marginAuto && castArray(marginAuto).map((align) => `${CLASSNAME}--margin-auto-${align}`),
+            )}
+        >
+            {children}
+        </div>
+    );
+});
 FlexBox.displayName = COMPONENT_NAME;
 FlexBox.className = CLASSNAME;

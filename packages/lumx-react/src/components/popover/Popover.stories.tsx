@@ -41,7 +41,7 @@ export const Positions = ({ theme }: any) => {
                 const placementVariant = (placement + align) as any;
                 return (
                     <FlexBox key={placement} fillSpace vAlign={Alignment.center} hAlign={Alignment.center}>
-                        <Chip chipRef={ref} theme={theme} size={Size.s}>
+                        <Chip ref={ref} theme={theme} size={Size.s}>
                             {startCase(placementVariant).toUpperCase()}
                         </Chip>
 
@@ -84,7 +84,7 @@ export const Auto = ({ theme }: any) => {
     return (
         <div style={container}>
             <div>
-                <Chip chipRef={anchorRef} theme={theme} size={Size.s}>
+                <Chip ref={anchorRef} theme={theme} size={Size.s}>
                     Anchor
                 </Chip>
             </div>
@@ -117,7 +117,7 @@ export const Top = ({ theme }: any) => {
     return (
         <div style={container}>
             <div>
-                <Chip chipRef={anchorRef} theme={theme} size={Size.s}>
+                <Chip ref={anchorRef} theme={theme} size={Size.s}>
                     Anchor
                 </Chip>
             </div>
@@ -151,7 +151,7 @@ export const WithUpdatingChildren = ({ theme }: any) => {
             <IconButton
                 label="Notifications"
                 className="lumx-spacing-margin-right-huge"
-                buttonRef={anchorRef}
+                ref={anchorRef}
                 emphasis={Emphasis.low}
                 icon={mdiBell}
                 size={Size.m}
@@ -188,7 +188,7 @@ export const WithScrollingPopover = ({ theme }: any) => {
             <IconButton
                 label="Notifications"
                 className="lumx-spacing-margin-right-huge"
-                buttonRef={anchorRef}
+                ref={anchorRef}
                 emphasis={Emphasis.low}
                 icon={mdiBell}
                 size={Size.m}

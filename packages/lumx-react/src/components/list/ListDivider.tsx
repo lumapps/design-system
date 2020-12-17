@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -21,8 +21,23 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}ListDivider`;
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
-export const ListDivider: Comp<ListDividerProps> = ({ className, ...forwardedProps }) => (
-    <li {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} />
-);
+/**
+ * ListDivider component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const ListDivider: Comp<ListDividerProps, HTMLLIElement> = forwardRef((props, ref) => {
+    const { className, ...forwardedProps } = props;
+
+    return (
+        <li
+            ref={ref}
+            {...forwardedProps}
+            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))}
+        />
+    );
+});
 ListDivider.displayName = COMPONENT_NAME;
 ListDivider.className = CLASSNAME;

@@ -1,5 +1,4 @@
 import React, { ReactNode, useEffect, useReducer } from 'react';
-import { Comp } from '@lumx/react/utils';
 import { INIT_STATE, TabProviderContext, reducer } from '../tabs/state';
 
 export interface ProgressTrackerProviderProps {
@@ -32,7 +31,7 @@ const DEFAULT_PROPS: Partial<ProgressTrackerProviderProps> = {
  * @param  props React component props.
  * @return React element.
  */
-export const ProgressTrackerProvider: Comp<ProgressTrackerProviderProps> = (props) => {
+export const ProgressTrackerProvider: React.FC<ProgressTrackerProviderProps> = (props) => {
     const { children, onChange, activeStepIndex, ...propState } = props;
     const [state, dispatch] = useReducer(reducer, INIT_STATE);
 

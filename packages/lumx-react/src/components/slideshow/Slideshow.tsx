@@ -1,4 +1,4 @@
-import React, { CSSProperties, useCallback, useEffect, useRef, useState } from 'react';
+import React, { CSSProperties, forwardRef, useCallback, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -8,6 +8,7 @@ import { AUTOPLAY_DEFAULT_INTERVAL, FULL_WIDTH_PERCENT } from '@lumx/react/compo
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { useInterval } from '@lumx/react/hooks';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
 /**
  * Defines the props of the component.
@@ -64,20 +65,28 @@ const DEFAULT_PROPS: Partial<SlideshowProps> = {
 };
 
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
-export const Slideshow: Comp<SlideshowProps> = ({
-    activeIndex,
-    autoPlay,
-    children,
-    className,
-    fillHeight,
-    groupBy,
-    interval,
-    onChange,
-    slideshowControlsProps,
-    theme,
-    useCustomColors,
-    ...forwardedProps
-}) => {
+/**
+ * Slideshow component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const {
+        activeIndex,
+        autoPlay,
+        children,
+        className,
+        fillHeight,
+        groupBy,
+        interval,
+        onChange,
+        slideshowControlsProps,
+        theme,
+        useCustomColors,
+        ...forwardedProps
+    } = props;
     const [currentIndex, setCurrentIndex] = useState<number>(activeIndex as number);
     const [isAutoPlaying, setIsAutoPlaying] = useState(Boolean(autoPlay));
     const parentRef: React.MutableRefObject<null> = useRef(null);
@@ -189,6 +198,7 @@ export const Slideshow: Comp<SlideshowProps> = ({
 
     return (
         <div
+            ref={mergeRefs(ref, parentRef)}
             {...forwardedProps}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }), {
                 [`${CLASSNAME}--fill-height`]: fillHeight,
@@ -196,7 +206,6 @@ export const Slideshow: Comp<SlideshowProps> = ({
                 [`${CSS_PREFIX}-custom-colors`]: useCustomColors,
             })}
             tabIndex={0}
-            ref={parentRef}
         >
             <div className={`${CLASSNAME}__slides`}>
                 <div className={`${CLASSNAME}__wrapper`} style={wrapperStyle}>
@@ -220,7 +229,7 @@ export const Slideshow: Comp<SlideshowProps> = ({
             )}
         </div>
     );
-};
+});
 Slideshow.displayName = COMPONENT_NAME;
 Slideshow.className = CLASSNAME;
 Slideshow.defaultProps = DEFAULT_PROPS;

@@ -1,4 +1,4 @@
-import React, { RefObject, useCallback, useEffect, useState } from 'react';
+import React, { forwardRef, RefObject, useCallback, useEffect, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -67,19 +67,27 @@ const DEFAULT_PROPS: Partial<SlideshowControlsProps> = {
 };
 
 /* eslint-disable react-hooks/rules-of-hooks,@typescript-eslint/no-use-before-define,jsx-a11y/control-has-associated-label,react-hooks/exhaustive-deps */
-export const SlideshowControls: Comp<SlideshowControlsProps> = ({
-    activeIndex,
-    className,
-    nextButtonProps,
-    onNextClick,
-    onPaginationClick,
-    onPreviousClick,
-    parentRef,
-    previousButtonProps,
-    slidesCount,
-    theme,
-    ...forwardedProps
-}) => {
+/**
+ * SlideshowControls component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const SlideshowControls: Comp<SlideshowControlsProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const {
+        activeIndex,
+        className,
+        nextButtonProps,
+        onNextClick,
+        onPaginationClick,
+        onPreviousClick,
+        parentRef,
+        previousButtonProps,
+        slidesCount,
+        theme,
+        ...forwardedProps
+    } = props;
     if (typeof activeIndex === 'undefined' || typeof slidesCount === 'undefined') {
         return null;
     }
@@ -263,6 +271,7 @@ export const SlideshowControls: Comp<SlideshowControlsProps> = ({
 
     return (
         <div
+            ref={ref}
             {...forwardedProps}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }), {
                 [`${CLASSNAME}--has-infinite-pagination`]: slidesCount > PAGINATION_ITEMS_MAX,
@@ -293,7 +302,7 @@ export const SlideshowControls: Comp<SlideshowControlsProps> = ({
             />
         </div>
     );
-};
+});
 SlideshowControls.displayName = COMPONENT_NAME;
 SlideshowControls.className = CLASSNAME;
 SlideshowControls.defaultProps = DEFAULT_PROPS;
