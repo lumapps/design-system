@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 18 Dec 2020 14:38:41 GMT
+ * Generated on Fri, 18 Dec 2020 16:02:24 GMT
  */
 
 export const CORE = {
@@ -8,6 +8,7 @@ export const CORE = {
         dark: {
             N: {
                 version: '0.22',
+                comment: 'Neutral dark color',
                 attributes: {
                     category: 'color',
                     type: 'dark',
@@ -23,6 +24,7 @@ export const CORE = {
             },
             L1: {
                 version: '0.22',
+                comment: 'Base dark color with 80% opacity',
                 attributes: {
                     category: 'color',
                     type: 'dark',
@@ -38,6 +40,7 @@ export const CORE = {
             },
             L2: {
                 version: '0.22',
+                comment: 'Base dark color with 54% opacity',
                 attributes: {
                     category: 'color',
                     type: 'dark',
@@ -53,6 +56,7 @@ export const CORE = {
             },
             L3: {
                 version: '0.22',
+                comment: 'Base dark color with 38% opacity',
                 attributes: {
                     category: 'color',
                     type: 'dark',
@@ -68,6 +72,7 @@ export const CORE = {
             },
             L4: {
                 version: '0.22',
+                comment: 'Base dark color with 20% opacity',
                 attributes: {
                     category: 'color',
                     type: 'dark',
@@ -83,6 +88,7 @@ export const CORE = {
             },
             L5: {
                 version: '0.22',
+                comment: 'Base dark color with 12% opacity',
                 attributes: {
                     category: 'color',
                     type: 'dark',
@@ -98,6 +104,7 @@ export const CORE = {
             },
             L6: {
                 version: '0.22',
+                comment: 'Base dark color with 5% opacity',
                 attributes: {
                     category: 'color',
                     type: 'dark',
@@ -115,6 +122,7 @@ export const CORE = {
         light: {
             N: {
                 version: '0.22',
+                comment: 'Neutral light color',
                 attributes: {
                     category: 'color',
                     type: 'light',
@@ -130,6 +138,7 @@ export const CORE = {
             },
             L1: {
                 version: '0.22',
+                comment: 'Base light color with 90% opacity',
                 attributes: {
                     category: 'color',
                     type: 'light',
@@ -145,6 +154,7 @@ export const CORE = {
             },
             L2: {
                 version: '0.22',
+                comment: 'Base light color with 80% opacity',
                 attributes: {
                     category: 'color',
                     type: 'light',
@@ -160,6 +170,7 @@ export const CORE = {
             },
             L3: {
                 version: '0.22',
+                comment: 'Base light color with 60% opacity',
                 attributes: {
                     category: 'color',
                     type: 'light',
@@ -175,6 +186,7 @@ export const CORE = {
             },
             L4: {
                 version: '0.22',
+                comment: 'Base light color with 40% opacity',
                 attributes: {
                     category: 'color',
                     type: 'light',
@@ -190,6 +202,7 @@ export const CORE = {
             },
             L5: {
                 version: '0.22',
+                comment: 'Base light color with 20% opacity',
                 attributes: {
                     category: 'color',
                     type: 'light',
@@ -205,6 +218,7 @@ export const CORE = {
             },
             L6: {
                 version: '0.22',
+                comment: 'Base light color with 10% opacity',
                 attributes: {
                     category: 'color',
                     type: 'light',
@@ -222,6 +236,7 @@ export const CORE = {
         blue: {
             D2: {
                 version: '0.22',
+                comment: 'Darkest blue color',
                 attributes: {
                     category: 'color',
                     type: 'blue',
@@ -237,6 +252,7 @@ export const CORE = {
             },
             D1: {
                 version: '0.22',
+                comment: 'Dark blue color',
                 attributes: {
                     category: 'color',
                     type: 'blue',
@@ -252,6 +268,7 @@ export const CORE = {
             },
             N: {
                 version: '0.22',
+                comment: 'Neutral blue color',
                 attributes: {
                     category: 'color',
                     type: 'blue',
@@ -267,6 +284,7 @@ export const CORE = {
             },
             L1: {
                 version: '0.22',
+                comment: 'Base blue color with 80% opacity',
                 attributes: {
                     category: 'color',
                     type: 'blue',
@@ -282,6 +300,7 @@ export const CORE = {
             },
             L2: {
                 version: '0.22',
+                comment: 'Base blue color with 60% opacity',
                 attributes: {
                     category: 'color',
                     type: 'blue',
@@ -297,6 +316,7 @@ export const CORE = {
             },
             L3: {
                 version: '0.22',
+                comment: 'Base blue color with 40% opacity',
                 attributes: {
                     category: 'color',
                     type: 'blue',
@@ -312,6 +332,7 @@ export const CORE = {
             },
             L4: {
                 version: '0.22',
+                comment: 'Base blue color with 20% opacity',
                 attributes: {
                     category: 'color',
                     type: 'blue',
@@ -327,6 +348,7 @@ export const CORE = {
             },
             L5: {
                 version: '0.22',
+                comment: 'Base blue color with 10% opacity',
                 attributes: {
                     category: 'color',
                     type: 'blue',
@@ -342,6 +364,7 @@ export const CORE = {
             },
             L6: {
                 version: '0.22',
+                comment: 'Base blue color with 5% opacity',
                 attributes: {
                     category: 'color',
                     type: 'blue',
@@ -359,6 +382,7 @@ export const CORE = {
         green: {
             D2: {
                 version: '0.22',
+                comment: 'Darkest green color',
                 attributes: {
                     category: 'color',
                     type: 'green',
@@ -374,6 +398,7 @@ export const CORE = {
             },
             D1: {
                 version: '0.22',
+                comment: 'Dark green color',
                 attributes: {
                     category: 'color',
                     type: 'green',
@@ -389,6 +414,7 @@ export const CORE = {
             },
             N: {
                 version: '0.22',
+                comment: 'Neutral green color',
                 attributes: {
                     category: 'color',
                     type: 'green',
@@ -404,6 +430,7 @@ export const CORE = {
             },
             L1: {
                 version: '0.22',
+                comment: 'Base green color with 80% opacity',
                 attributes: {
                     category: 'color',
                     type: 'green',
@@ -419,6 +446,7 @@ export const CORE = {
             },
             L2: {
                 version: '0.22',
+                comment: 'Base green color with 60% opacity',
                 attributes: {
                     category: 'color',
                     type: 'green',
@@ -434,6 +462,7 @@ export const CORE = {
             },
             L3: {
                 version: '0.22',
+                comment: 'Base green color with 40% opacity',
                 attributes: {
                     category: 'color',
                     type: 'green',
@@ -449,6 +478,7 @@ export const CORE = {
             },
             L4: {
                 version: '0.22',
+                comment: 'Base green color with 20% opacity',
                 attributes: {
                     category: 'color',
                     type: 'green',
@@ -464,6 +494,7 @@ export const CORE = {
             },
             L5: {
                 version: '0.22',
+                comment: 'Base green color with 10% opacity',
                 attributes: {
                     category: 'color',
                     type: 'green',
@@ -479,6 +510,7 @@ export const CORE = {
             },
             L6: {
                 version: '0.22',
+                comment: 'Base green color with 5% opacity',
                 attributes: {
                     category: 'color',
                     type: 'green',
@@ -496,6 +528,7 @@ export const CORE = {
         yellow: {
             D2: {
                 version: '0.22',
+                comment: 'Darkest yellow color',
                 attributes: {
                     category: 'color',
                     type: 'yellow',
@@ -511,6 +544,7 @@ export const CORE = {
             },
             D1: {
                 version: '0.22',
+                comment: 'Dark yellow color',
                 attributes: {
                     category: 'color',
                     type: 'yellow',
@@ -526,6 +560,7 @@ export const CORE = {
             },
             N: {
                 version: '0.22',
+                comment: 'Neutral yellow color',
                 attributes: {
                     category: 'color',
                     type: 'yellow',
@@ -541,6 +576,7 @@ export const CORE = {
             },
             L1: {
                 version: '0.22',
+                comment: 'Base yellow color with 80% opacity',
                 attributes: {
                     category: 'color',
                     type: 'yellow',
@@ -556,6 +592,7 @@ export const CORE = {
             },
             L2: {
                 version: '0.22',
+                comment: 'Base yellow color with 70% opacity',
                 attributes: {
                     category: 'color',
                     type: 'yellow',
@@ -571,6 +608,7 @@ export const CORE = {
             },
             L3: {
                 version: '0.22',
+                comment: 'Base yellow color with 60% opacity',
                 attributes: {
                     category: 'color',
                     type: 'yellow',
@@ -586,6 +624,7 @@ export const CORE = {
             },
             L4: {
                 version: '0.22',
+                comment: 'Base yellow color with 40% opacity',
                 attributes: {
                     category: 'color',
                     type: 'yellow',
@@ -601,6 +640,7 @@ export const CORE = {
             },
             L5: {
                 version: '0.22',
+                comment: 'Base yellow color with 20% opacity',
                 attributes: {
                     category: 'color',
                     type: 'yellow',
@@ -616,6 +656,7 @@ export const CORE = {
             },
             L6: {
                 version: '0.22',
+                comment: 'Base yellow color with 10% opacity',
                 attributes: {
                     category: 'color',
                     type: 'yellow',
@@ -633,6 +674,7 @@ export const CORE = {
         red: {
             D2: {
                 version: '0.22',
+                comment: 'Darkest red color',
                 attributes: {
                     category: 'color',
                     type: 'red',
@@ -648,6 +690,7 @@ export const CORE = {
             },
             D1: {
                 version: '0.22',
+                comment: 'Dark red color',
                 attributes: {
                     category: 'color',
                     type: 'red',
@@ -663,6 +706,7 @@ export const CORE = {
             },
             N: {
                 version: '0.22',
+                comment: 'Neutral red color',
                 attributes: {
                     category: 'color',
                     type: 'red',
@@ -678,6 +722,7 @@ export const CORE = {
             },
             L1: {
                 version: '0.22',
+                comment: 'Base red color with 80% opacity',
                 attributes: {
                     category: 'color',
                     type: 'red',
@@ -693,6 +738,7 @@ export const CORE = {
             },
             L2: {
                 version: '0.22',
+                comment: 'Base red color with 60% opacity',
                 attributes: {
                     category: 'color',
                     type: 'red',
@@ -708,6 +754,7 @@ export const CORE = {
             },
             L3: {
                 version: '0.22',
+                comment: 'Base red color with 40% opacity',
                 attributes: {
                     category: 'color',
                     type: 'red',
@@ -723,6 +770,7 @@ export const CORE = {
             },
             L4: {
                 version: '0.22',
+                comment: 'Base red color with 20% opacity',
                 attributes: {
                     category: 'color',
                     type: 'red',
@@ -738,6 +786,7 @@ export const CORE = {
             },
             L5: {
                 version: '0.22',
+                comment: 'Base red color with 10% opacity',
                 attributes: {
                     category: 'color',
                     type: 'red',
@@ -753,6 +802,7 @@ export const CORE = {
             },
             L6: {
                 version: '0.22',
+                comment: 'Base red color with 5% opacity',
                 attributes: {
                     category: 'color',
                     type: 'red',
@@ -770,6 +820,7 @@ export const CORE = {
         grey: {
             N: {
                 version: '0.22',
+                comment: 'Neutral grey color',
                 attributes: {
                     category: 'color',
                     type: 'grey',
@@ -785,6 +836,7 @@ export const CORE = {
             },
             L1: {
                 version: '0.22',
+                comment: 'Base grey color with 80% opacity',
                 attributes: {
                     category: 'color',
                     type: 'grey',
@@ -800,6 +852,7 @@ export const CORE = {
             },
             L2: {
                 version: '0.22',
+                comment: 'Base grey color with 60% opacity',
                 attributes: {
                     category: 'color',
                     type: 'grey',
@@ -815,6 +868,7 @@ export const CORE = {
             },
             L3: {
                 version: '0.22',
+                comment: 'Base grey color with 40% opacity',
                 attributes: {
                     category: 'color',
                     type: 'grey',
@@ -830,6 +884,7 @@ export const CORE = {
             },
             L4: {
                 version: '0.22',
+                comment: 'Base grey color with 20% opacity',
                 attributes: {
                     category: 'color',
                     type: 'grey',
@@ -845,6 +900,7 @@ export const CORE = {
             },
             L5: {
                 version: '0.22',
+                comment: 'Base grey color with 10% opacity',
                 attributes: {
                     category: 'color',
                     type: 'grey',
@@ -860,6 +916,7 @@ export const CORE = {
             },
             L6: {
                 version: '0.22',
+                comment: 'Base grey color with 5% opacity',
                 attributes: {
                     category: 'color',
                     type: 'grey',
@@ -877,6 +934,7 @@ export const CORE = {
         primary: {
             D2: {
                 version: '0.22',
+                comment: 'Darkest blue color',
                 attributes: {
                     category: 'color',
                     type: 'primary',
@@ -892,6 +950,7 @@ export const CORE = {
             },
             D1: {
                 version: '0.22',
+                comment: 'Dark blue color',
                 attributes: {
                     category: 'color',
                     type: 'primary',
@@ -907,6 +966,7 @@ export const CORE = {
             },
             N: {
                 version: '0.22',
+                comment: 'Neutral blue color',
                 attributes: {
                     category: 'color',
                     type: 'primary',
@@ -922,6 +982,7 @@ export const CORE = {
             },
             L1: {
                 version: '0.22',
+                comment: 'Base blue color with 80% opacity',
                 attributes: {
                     category: 'color',
                     type: 'primary',
@@ -937,6 +998,7 @@ export const CORE = {
             },
             L2: {
                 version: '0.22',
+                comment: 'Base blue color with 60% opacity',
                 attributes: {
                     category: 'color',
                     type: 'primary',
@@ -952,6 +1014,7 @@ export const CORE = {
             },
             L3: {
                 version: '0.22',
+                comment: 'Base blue color with 40% opacity',
                 attributes: {
                     category: 'color',
                     type: 'primary',
@@ -967,6 +1030,7 @@ export const CORE = {
             },
             L4: {
                 version: '0.22',
+                comment: 'Base blue color with 20% opacity',
                 attributes: {
                     category: 'color',
                     type: 'primary',
@@ -982,6 +1046,7 @@ export const CORE = {
             },
             L5: {
                 version: '0.22',
+                comment: 'Base blue color with 10% opacity',
                 attributes: {
                     category: 'color',
                     type: 'primary',
@@ -997,6 +1062,7 @@ export const CORE = {
             },
             L6: {
                 version: '0.22',
+                comment: 'Base blue color with 5% opacity',
                 attributes: {
                     category: 'color',
                     type: 'primary',
@@ -1014,6 +1080,7 @@ export const CORE = {
         secondary: {
             D2: {
                 version: '0.22',
+                comment: 'Darkest green color',
                 attributes: {
                     category: 'color',
                     type: 'secondary',
@@ -1029,6 +1096,7 @@ export const CORE = {
             },
             D1: {
                 version: '0.22',
+                comment: 'Dark green color',
                 attributes: {
                     category: 'color',
                     type: 'secondary',
@@ -1044,6 +1112,7 @@ export const CORE = {
             },
             N: {
                 version: '0.22',
+                comment: 'Neutral green color',
                 attributes: {
                     category: 'color',
                     type: 'secondary',
@@ -1059,6 +1128,7 @@ export const CORE = {
             },
             L1: {
                 version: '0.22',
+                comment: 'Base green color with 80% opacity',
                 attributes: {
                     category: 'color',
                     type: 'secondary',
@@ -1074,6 +1144,7 @@ export const CORE = {
             },
             L2: {
                 version: '0.22',
+                comment: 'Base green color with 60% opacity',
                 attributes: {
                     category: 'color',
                     type: 'secondary',
@@ -1089,6 +1160,7 @@ export const CORE = {
             },
             L3: {
                 version: '0.22',
+                comment: 'Base green color with 40% opacity',
                 attributes: {
                     category: 'color',
                     type: 'secondary',
@@ -1104,6 +1176,7 @@ export const CORE = {
             },
             L4: {
                 version: '0.22',
+                comment: 'Base green color with 20% opacity',
                 attributes: {
                     category: 'color',
                     type: 'secondary',
@@ -1119,6 +1192,7 @@ export const CORE = {
             },
             L5: {
                 version: '0.22',
+                comment: 'Base green color with 10% opacity',
                 attributes: {
                     category: 'color',
                     type: 'secondary',
@@ -1134,6 +1208,7 @@ export const CORE = {
             },
             L6: {
                 version: '0.22',
+                comment: 'Base green color with 5% opacity',
                 attributes: {
                     category: 'color',
                     type: 'secondary',
@@ -1151,6 +1226,7 @@ export const CORE = {
         accent: {
             D2: {
                 version: '0.22',
+                comment: 'Darkest green color',
                 attributes: {
                     category: 'color',
                     type: 'accent',
@@ -1166,6 +1242,7 @@ export const CORE = {
             },
             D1: {
                 version: '0.22',
+                comment: 'Dark green color',
                 attributes: {
                     category: 'color',
                     type: 'accent',
@@ -1181,6 +1258,7 @@ export const CORE = {
             },
             N: {
                 version: '0.22',
+                comment: 'Neutral green color',
                 attributes: {
                     category: 'color',
                     type: 'accent',
@@ -1196,6 +1274,7 @@ export const CORE = {
             },
             L1: {
                 version: '0.22',
+                comment: 'Base green color with 80% opacity',
                 attributes: {
                     category: 'color',
                     type: 'accent',
@@ -1211,6 +1290,7 @@ export const CORE = {
             },
             L2: {
                 version: '0.22',
+                comment: 'Base green color with 60% opacity',
                 attributes: {
                     category: 'color',
                     type: 'accent',
@@ -1226,6 +1306,7 @@ export const CORE = {
             },
             L3: {
                 version: '0.22',
+                comment: 'Base green color with 40% opacity',
                 attributes: {
                     category: 'color',
                     type: 'accent',
@@ -1241,6 +1322,7 @@ export const CORE = {
             },
             L4: {
                 version: '0.22',
+                comment: 'Base green color with 20% opacity',
                 attributes: {
                     category: 'color',
                     type: 'accent',
@@ -1256,6 +1338,7 @@ export const CORE = {
             },
             L5: {
                 version: '0.22',
+                comment: 'Base green color with 10% opacity',
                 attributes: {
                     category: 'color',
                     type: 'accent',
@@ -1271,6 +1354,7 @@ export const CORE = {
             },
             L6: {
                 version: '0.22',
+                comment: 'Base green color with 5% opacity',
                 attributes: {
                     category: 'color',
                     type: 'accent',
@@ -1288,6 +1372,7 @@ export const CORE = {
         black: {
             N: {
                 version: '0.22',
+                comment: 'Neutral dark color',
                 attributes: {
                     category: 'color',
                     type: 'black',
@@ -1303,6 +1388,7 @@ export const CORE = {
             },
             L1: {
                 version: '0.22',
+                comment: 'Base dark color with 80% opacity',
                 attributes: {
                     category: 'color',
                     type: 'black',
@@ -1318,6 +1404,7 @@ export const CORE = {
             },
             L2: {
                 version: '0.22',
+                comment: 'Base dark color with 54% opacity',
                 attributes: {
                     category: 'color',
                     type: 'black',
@@ -1333,6 +1420,7 @@ export const CORE = {
             },
             L3: {
                 version: '0.22',
+                comment: 'Base dark color with 38% opacity',
                 attributes: {
                     category: 'color',
                     type: 'black',
@@ -1348,6 +1436,7 @@ export const CORE = {
             },
             L4: {
                 version: '0.22',
+                comment: 'Base dark color with 20% opacity',
                 attributes: {
                     category: 'color',
                     type: 'black',
@@ -1363,6 +1452,7 @@ export const CORE = {
             },
             L5: {
                 version: '0.22',
+                comment: 'Base dark color with 12% opacity',
                 attributes: {
                     category: 'color',
                     type: 'black',
@@ -1378,6 +1468,7 @@ export const CORE = {
             },
             L6: {
                 version: '0.22',
+                comment: 'Base dark color with 5% opacity',
                 attributes: {
                     category: 'color',
                     type: 'black',
@@ -1395,6 +1486,7 @@ export const CORE = {
         white: {
             N: {
                 version: '0.22',
+                comment: 'Neutral light color',
                 attributes: {
                     category: 'color',
                     type: 'white',
@@ -1410,6 +1502,7 @@ export const CORE = {
             },
             L1: {
                 version: '0.22',
+                comment: 'Base light color with 90% opacity',
                 attributes: {
                     category: 'color',
                     type: 'white',
@@ -1425,6 +1518,7 @@ export const CORE = {
             },
             L2: {
                 version: '0.22',
+                comment: 'Base light color with 80% opacity',
                 attributes: {
                     category: 'color',
                     type: 'white',
@@ -1440,6 +1534,7 @@ export const CORE = {
             },
             L3: {
                 version: '0.22',
+                comment: 'Base light color with 60% opacity',
                 attributes: {
                     category: 'color',
                     type: 'white',
@@ -1455,6 +1550,7 @@ export const CORE = {
             },
             L4: {
                 version: '0.22',
+                comment: 'Base light color with 40% opacity',
                 attributes: {
                     category: 'color',
                     type: 'white',
@@ -1470,6 +1566,7 @@ export const CORE = {
             },
             L5: {
                 version: '0.22',
+                comment: 'Base light color with 20% opacity',
                 attributes: {
                     category: 'color',
                     type: 'white',
@@ -1485,6 +1582,7 @@ export const CORE = {
             },
             L6: {
                 version: '0.22',
+                comment: 'Base light color with 10% opacity',
                 attributes: {
                     category: 'color',
                     type: 'white',
@@ -1502,6 +1600,7 @@ export const CORE = {
         orange: {
             D2: {
                 version: '0.22',
+                comment: 'Darkest yellow color',
                 attributes: {
                     category: 'color',
                     type: 'orange',
@@ -1517,6 +1616,7 @@ export const CORE = {
             },
             D1: {
                 version: '0.22',
+                comment: 'Dark yellow color',
                 attributes: {
                     category: 'color',
                     type: 'orange',
@@ -1532,6 +1632,7 @@ export const CORE = {
             },
             N: {
                 version: '0.22',
+                comment: 'Neutral yellow color',
                 attributes: {
                     category: 'color',
                     type: 'orange',
@@ -1547,6 +1648,7 @@ export const CORE = {
             },
             L1: {
                 version: '0.22',
+                comment: 'Base yellow color with 80% opacity',
                 attributes: {
                     category: 'color',
                     type: 'orange',
@@ -1562,6 +1664,7 @@ export const CORE = {
             },
             L2: {
                 version: '0.22',
+                comment: 'Base yellow color with 70% opacity',
                 attributes: {
                     category: 'color',
                     type: 'orange',
@@ -1577,6 +1680,7 @@ export const CORE = {
             },
             L3: {
                 version: '0.22',
+                comment: 'Base yellow color with 60% opacity',
                 attributes: {
                     category: 'color',
                     type: 'orange',
@@ -1592,6 +1696,7 @@ export const CORE = {
             },
             L4: {
                 version: '0.22',
+                comment: 'Base yellow color with 40% opacity',
                 attributes: {
                     category: 'color',
                     type: 'orange',
@@ -1607,6 +1712,7 @@ export const CORE = {
             },
             L5: {
                 version: '0.22',
+                comment: 'Base yellow color with 20% opacity',
                 attributes: {
                     category: 'color',
                     type: 'orange',
@@ -1622,6 +1728,7 @@ export const CORE = {
             },
             L6: {
                 version: '0.22',
+                comment: 'Base yellow color with 10% opacity',
                 attributes: {
                     category: 'color',
                     type: 'orange',
