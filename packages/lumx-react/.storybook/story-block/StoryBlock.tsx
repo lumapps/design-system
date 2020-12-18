@@ -1,7 +1,7 @@
 import { Switch, SwitchPosition, Theme } from '@lumx/react';
 import isChromatic from 'chromatic/isChromatic';
 import React, { ReactElement, useState } from 'react';
-
+import '@lumx/core/scss/lumx.scss';
 import classNames from 'classnames';
 import { styles } from './styles';
 
