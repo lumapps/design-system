@@ -1,28 +1,5 @@
 const StyleDictionary = require('style-dictionary');
-
-/**
- * Transform SCSS variable names.
- */
-const lumxVariableName = 'name/scss/lumx-variables';
-StyleDictionary.registerTransform({
-    name: lumxVariableName,
-    type: 'name',
-    transformer: (prop) => `lumx-${prop.path.join('-')}`,
-});
-
-/**
- * Transform group:
- */
-const transformGroup = 'scss-custom';
-StyleDictionary.registerTransformGroup({
-    name: transformGroup,
-    transforms: [
-        'attribute/cti',
-        lumxVariableName,
-        require('./utils/_color-opacity'),
-        'color/css',
-    ],
-});
+const transformGroup = require('./utils/_css-transform-group');
 
 /**
  * SCSS generator

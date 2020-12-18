@@ -1,6 +1,6 @@
 const exec = require('child_process').exec;
 
-const CONFIGS = ['gen-scss-variables', 'gen-ts-variables'];
+const CONFIGS = ['gen-scss-variables', 'gen-ts-variables', 'gen-css-variables'];
 const GLOBAL_THEMES = ['lumapps', 'material'];
 
 // For each config

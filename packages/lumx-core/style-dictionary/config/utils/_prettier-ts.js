@@ -5,7 +5,7 @@ module.exports = function ({ buildPath }) {
     const name = 'prettier/ts';
     StyleDictionary.registerAction({
         name,
-        do: () => execSync(`yarn prettier-tslint fix '${buildPath}'`),
+        do: () => execSync(`yarn eslint --fix '${buildPath}'`),
     });
     return name;
 };
