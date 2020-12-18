@@ -93,6 +93,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   _[BREAKING]_ `hasChildren` and `hasIndentedChildren` props for `CommentBlock` component have been removed.
 -   _[BREAKING]_ Removed `isFollowingWindowSize` and `resizeDebounceTime` on `Thumbnail`.
 -   _[BREAKING]_ Removed `useCustomColors` props (component colors will be customizable using CSS variable overrides).
+-   _[BREAKING]_ Removed `lumapps` & `material` theme in `@lumx/color` (we now provide a single theme overridable with CSS variables)
 
 ### Fixed
 
