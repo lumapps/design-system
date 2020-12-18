@@ -7,7 +7,7 @@ import isEmpty from 'lodash/isEmpty';
 
 import { InputHelper, InputLabel, Theme } from '@lumx/react';
 
-import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
+import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 export enum SwitchPosition {
@@ -31,8 +31,6 @@ export interface SwitchProps extends GenericProps {
     position?: SwitchPosition;
     /** Theme adapting the component to light or dark background. */
     theme?: Theme;
-    /** Whether custom colors are applied to this component or not. */
-    useCustomColors?: boolean;
     /** Native input value property. */
     value?: string;
     /** On change callback. */
@@ -78,7 +76,6 @@ export const Switch: Comp<SwitchProps, HTMLDivElement> = forwardRef((props, ref)
         onChange,
         position,
         theme,
-        useCustomColors,
         value,
         ...forwardedProps
     } = props;
@@ -103,7 +100,6 @@ export const Switch: Comp<SwitchProps, HTMLDivElement> = forwardRef((props, ref)
                     theme,
                     isUnchecked: !isChecked,
                 }),
-                { [`${CSS_PREFIX}-custom-colors`]: useCustomColors },
             )}
             aria-disabled={isDisabled}
         >

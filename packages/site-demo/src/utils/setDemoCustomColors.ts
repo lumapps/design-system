@@ -5,7 +5,7 @@ import { setCustomColors } from '@lumx/core/js/custom-colors';
  *
  * @param theme The theme to apply the custom color palette on.
  */
-export function setDemoCustomColors() {
+export function setDemoCustomColors(): void {
     const styleTag = document.createElement('style');
     styleTag.id = 'custom-colors';
 

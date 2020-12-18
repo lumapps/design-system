@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { SlideshowControls, SlideshowControlsProps, Theme } from '@lumx/react';
 
 import { AUTOPLAY_DEFAULT_INTERVAL, FULL_WIDTH_PERCENT } from '@lumx/react/components/slideshow/constants';
-import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
+import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { useInterval } from '@lumx/react/hooks/useInterval';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
@@ -38,8 +38,6 @@ export interface SlideshowProps extends GenericProps {
         >;
     /** Theme adapting the component to light or dark background. */
     theme?: Theme;
-    /** Whether custom colors are applied to this component or not. */
-    useCustomColors?: boolean;
     /** Callback when slide changes */
     onChange?(index: number): void;
 }
@@ -84,7 +82,6 @@ export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props
         onChange,
         slideshowControlsProps,
         theme,
-        useCustomColors,
         ...forwardedProps
     } = props;
     const [currentIndex, setCurrentIndex] = useState<number>(activeIndex as number);
@@ -203,7 +200,6 @@ export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }), {
                 [`${CLASSNAME}--fill-height`]: fillHeight,
                 [`${CLASSNAME}--group-by-${groupBy}`]: Boolean(groupBy),
-                [`${CSS_PREFIX}-custom-colors`]: useCustomColors,
             })}
             tabIndex={0}
         >

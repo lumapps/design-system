@@ -32,8 +32,6 @@ export interface TabListProps extends GenericProps {
     position?: TabListPosition;
     /** Theme adapting the component to light or dark background. */
     theme?: Theme;
-    /** Whether custom colors are applied to this component or not. */
-    useCustomColors?: boolean;
 }
 
 /**
@@ -65,16 +63,7 @@ const DEFAULT_PROPS: Partial<TabListProps> = {
  * @return React element.
  */
 export const TabList: Comp<TabListProps, HTMLDivElement> = forwardRef((props, ref) => {
-    const {
-        'aria-label': ariaLabel,
-        children,
-        className,
-        layout,
-        position,
-        theme,
-        useCustomColors,
-        ...forwardedProps
-    } = props;
+    const { 'aria-label': ariaLabel, children, className, layout, position, theme, ...forwardedProps } = props;
     const tabListRef = React.useRef(null);
     useRovingTabIndex({
         parentRef: tabListRef,
@@ -87,9 +76,7 @@ export const TabList: Comp<TabListProps, HTMLDivElement> = forwardRef((props, re
         <div
             ref={mergeRefs(ref, tabListRef)}
             {...forwardedProps}
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, layout, position, theme }), {
-                [`${CSS_PREFIX}-custom-colors`]: useCustomColors,
-            })}
+            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, layout, position, theme }))}
         >
             <div className={`${CLASSNAME}__links`} role="tablist" aria-label={ariaLabel}>
                 {children}

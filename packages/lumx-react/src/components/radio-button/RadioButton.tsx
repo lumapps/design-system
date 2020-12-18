@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { InputHelper, InputLabel, Theme } from '@lumx/react';
 
-import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
+import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import uniqueId from 'lodash/uniqueId';
@@ -27,8 +27,6 @@ export interface RadioButtonProps extends GenericProps {
     name?: string;
     /** Theme adapting the component to light or dark background. */
     theme?: Theme;
-    /** Whether custom colors are applied to this component or not. */
-    useCustomColors?: boolean;
     /** Native input value property. */
     value?: string;
     /** On change callback. */
@@ -72,7 +70,6 @@ export const RadioButton: Comp<RadioButtonProps, HTMLDivElement> = forwardRef((p
         name,
         onChange,
         theme,
-        useCustomColors,
         value,
         ...forwardedProps
     } = props;
@@ -96,7 +93,6 @@ export const RadioButton: Comp<RadioButtonProps, HTMLDivElement> = forwardRef((p
                     prefix: CLASSNAME,
                     theme,
                 }),
-                { [`${CSS_PREFIX}-custom-colors`]: useCustomColors },
             )}
         >
             <div className={`${CLASSNAME}__input-wrapper`}>

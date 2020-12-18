@@ -8,7 +8,7 @@ import { Dropdown } from '@lumx/react/components/dropdown/Dropdown';
 import { InputHelper } from '@lumx/react/components/input-helper/InputHelper';
 import { Placement } from '@lumx/react/components/popover/Popover';
 
-import { COMPONENT_PREFIX, CSS_PREFIX, DOWN_KEY_CODE, ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
+import { COMPONENT_PREFIX, DOWN_KEY_CODE, ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
 
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
@@ -103,7 +103,6 @@ export const WithSelectContext = (
         onInputClick,
         placeholder,
         theme = DEFAULT_PROPS.theme,
-        useCustomColors,
         value,
         variant = DEFAULT_PROPS.variant,
         ...forwardedProps
@@ -158,7 +157,6 @@ export const WithSelectContext = (
                     prefix: CLASSNAME,
                     theme: theme === Theme.light ? Theme.light : Theme.dark,
                 }),
-                { [`${CSS_PREFIX}-custom-colors`]: useCustomColors },
             )}
         >
             <SelectElement

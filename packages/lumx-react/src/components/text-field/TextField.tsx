@@ -6,7 +6,7 @@ import { uid } from 'uid';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiCloseCircle } from '@lumx/icons';
 import { Emphasis, Icon, IconButton, IconButtonProps, InputHelper, InputLabel, Kind, Size, Theme } from '@lumx/react';
-import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
+import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
@@ -55,8 +55,6 @@ export interface TextFieldProps extends GenericProps {
     textFieldRef?: RefObject<HTMLDivElement>;
     /** Theme adapting the component to light or dark background. */
     theme?: Theme;
-    /** Whether custom colors are applied to this component or not. */
-    useCustomColors?: boolean;
     /** Value. */
     value?: string;
     /** On blur callback. */
@@ -258,7 +256,6 @@ export const TextField: Comp<TextFieldProps, HTMLDivElement> = forwardRef((props
         textFieldRef,
         theme,
         type,
-        useCustomColors,
         value,
         ...forwardedProps
     } = props;
@@ -303,7 +300,6 @@ export const TextField: Comp<TextFieldProps, HTMLDivElement> = forwardRef((props
                     prefix: CLASSNAME,
                     theme,
                 }),
-                { [`${CSS_PREFIX}-custom-colors`]: useCustomColors },
             )}
         >
             {label && (
