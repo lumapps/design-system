@@ -7,6 +7,7 @@
     - Components: '*'
     - Patterns:
         - Filter and sort
+        - Loading state
     - Utilities:
         - Color
         - Spacing
