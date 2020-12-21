@@ -1,15 +1,15 @@
 /**
  * Do not edit directly
- * Generated on Thu, 18 Jun 2020 13:00:52 GMT
+ * Generated on Mon, 21 Dec 2020 13:48:05 GMT
  */
 
-$lumx-color-dark-N: #28336d !default; // Neutral dark color
-$lumx-color-dark-L1: rgba(40, 51, 109, 0.8) !default; // Base dark color with 80% opacity
-$lumx-color-dark-L2: rgba(40, 51, 109, 0.6) !default; // Base dark color with 60% opacity
-$lumx-color-dark-L3: rgba(40, 51, 109, 0.4) !default; // Base dark color with 40% opacity
-$lumx-color-dark-L4: rgba(40, 51, 109, 0.2) !default; // Base dark color with 20% opacity
-$lumx-color-dark-L5: rgba(40, 51, 109, 0.1) !default; // Base dark color with 10% opacity
-$lumx-color-dark-L6: rgba(40, 51, 109, 0.05) !default; // Base dark color with 5% opacity
+$lumx-color-dark-N: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
+$lumx-color-dark-L1: rgba(0, 0, 0, 0.8) !default; // Base dark color with 80% opacity
+$lumx-color-dark-L2: rgba(0, 0, 0, 0.54) !default; // Base dark color with 60% opacity
+$lumx-color-dark-L3: rgba(0, 0, 0, 0.38) !default; // Base dark color with 40% opacity
+$lumx-color-dark-L4: rgba(0, 0, 0, 0.2) !default; // Base dark color with 20% opacity
+$lumx-color-dark-L5: rgba(0, 0, 0, 0.12) !default; // Base dark color with 10% opacity
+$lumx-color-dark-L6: rgba(0, 0, 0, 0.05) !default; // Base dark color with 5% opacity
 $lumx-color-light-N: #ffffff !default; // Neutral light color
 $lumx-color-light-L1: rgba(255, 255, 255, 0.9) !default; // Light color with 90% opacity
 $lumx-color-light-L2: rgba(255, 255, 255, 0.8) !default; // Light color with 80% opacity
@@ -17,76 +17,83 @@ $lumx-color-light-L3: rgba(255, 255, 255, 0.6) !default; // Light color with 60%
 $lumx-color-light-L4: rgba(255, 255, 255, 0.4) !default; // Light color with 40% opacity
 $lumx-color-light-L5: rgba(255, 255, 255, 0.2) !default; // Light color with 20% opacity
 $lumx-color-light-L6: rgba(255, 255, 255, 0.1) !default; // Light color with 10% opacity
-$lumx-color-blue-D2: #2972e2 !default; // Darkest blue color
-$lumx-color-blue-D1: #2885f6 !default; // Dark blue color
-$lumx-color-blue-N: #2493ff !default; // Neutral blue color
-$lumx-color-blue-L1: rgba(36, 147, 255, 0.8) !default; // Base blue color with 80% opacity
-$lumx-color-blue-L2: rgba(36, 147, 255, 0.6) !default; // Base blue color with 60% opacity
-$lumx-color-blue-L3: rgba(36, 147, 255, 0.4) !default; // Base blue color with 40% opacity
-$lumx-color-blue-L4: rgba(36, 147, 255, 0.2) !default; // Base blue color with 20% opacity
-$lumx-color-blue-L5: rgba(36, 147, 255, 0.1) !default; // Base blue color with 10% opacity
-$lumx-color-blue-L6: rgba(36, 147, 255, 0.05) !default; // Base blue color with 5% opacity
-$lumx-color-yellow-D2: #e16b00 !default; // Darkest yellow color
-$lumx-color-yellow-D1: #fea41c !default; // Dark yellow color
-$lumx-color-yellow-N: #ffc525 !default; // Neutral yellow color
-$lumx-color-yellow-L1: rgba(255, 197, 37, 0.8) !default; // Yellow color with 80% opacity
-$lumx-color-yellow-L2: rgba(255, 197, 37, 0.7) !default; // Yellow color with 60% opacity
-$lumx-color-yellow-L3: rgba(255, 197, 37, 0.6) !default; // Yellow color with 40% opacity
-$lumx-color-yellow-L4: rgba(255, 197, 37, 0.4) !default; // Yellow color with 20% opacity
-$lumx-color-yellow-L5: rgba(255, 197, 37, 0.2) !default; // Yellow color with 10% opacity
-$lumx-color-yellow-L6: rgba(255, 197, 37, 0.1) !default; // Yellow color with 5% opacity
-$lumx-color-red-D2: #c2395a !default; // Darkest red color
-$lumx-color-red-D1: #d83e5e !default; // Dark red color
-$lumx-color-red-N: #e94361 !default; // Neutral red color
-$lumx-color-red-L1: rgba(233, 67, 97, 0.8) !default; // Red color with 80% opacity
-$lumx-color-red-L2: rgba(233, 67, 97, 0.6) !default; // Red color with 60% opacity
-$lumx-color-red-L3: rgba(233, 67, 97, 0.4) !default; // Red color with 40% opacity
-$lumx-color-red-L4: rgba(233, 67, 97, 0.2) !default; // Red color with 20% opacity
-$lumx-color-red-L5: rgba(233, 67, 97, 0.1) !default; // Red color with 10% opacity
-$lumx-color-red-L6: rgba(233, 67, 97, 0.05) !default; // Red color with 5% opacity
-$lumx-color-green-D2: #008f4e !default; // Darkest green color
-$lumx-color-green-D1: #0fa15a !default; // Dark green color
-$lumx-color-green-N: #19b065 !default; // Neutral green color
-$lumx-color-green-L1: rgba(25, 176, 101, 0.8) !default; // Green color with 80% opacity
-$lumx-color-green-L2: rgba(25, 176, 101, 0.6) !default; // Green color with 60% opacity
-$lumx-color-green-L3: rgba(25, 176, 101, 0.4) !default; // Green color with 40% opacity
-$lumx-color-green-L4: rgba(25, 176, 101, 0.2) !default; // Green color with 20% opacity
-$lumx-color-green-L5: rgba(25, 176, 101, 0.1) !default; // Green color with 10% opacity
-$lumx-color-green-L6: rgba(25, 176, 101, 0.05) !default; // Green color with 5% opacity
-$lumx-color-primary-D2: #2972e2 !default; // Darkest blue color
-$lumx-color-primary-D1: #2885f6 !default; // Dark blue color
-$lumx-color-primary-N: #2493ff !default; // Neutral blue color
-$lumx-color-primary-L1: rgba(36, 147, 255, 0.8) !default; // Base blue color with 80% opacity
-$lumx-color-primary-L2: rgba(36, 147, 255, 0.6) !default; // Base blue color with 60% opacity
-$lumx-color-primary-L3: rgba(36, 147, 255, 0.4) !default; // Base blue color with 40% opacity
-$lumx-color-primary-L4: rgba(36, 147, 255, 0.2) !default; // Base blue color with 20% opacity
-$lumx-color-primary-L5: rgba(36, 147, 255, 0.1) !default; // Base blue color with 10% opacity
-$lumx-color-primary-L6: rgba(36, 147, 255, 0.05) !default; // Base blue color with 5% opacity
-$lumx-color-secondary-D2: #e16b00 !default; // Darkest yellow color
-$lumx-color-secondary-D1: #fea41c !default; // Dark yellow color
-$lumx-color-secondary-N: #ffc525 !default; // Neutral yellow color
-$lumx-color-secondary-L1: rgba(255, 197, 37, 0.8) !default; // Yellow color with 80% opacity
-$lumx-color-secondary-L2: rgba(255, 197, 37, 0.7) !default; // Yellow color with 60% opacity
-$lumx-color-secondary-L3: rgba(255, 197, 37, 0.6) !default; // Yellow color with 40% opacity
-$lumx-color-secondary-L4: rgba(255, 197, 37, 0.4) !default; // Yellow color with 20% opacity
-$lumx-color-secondary-L5: rgba(255, 197, 37, 0.2) !default; // Yellow color with 10% opacity
-$lumx-color-secondary-L6: rgba(255, 197, 37, 0.1) !default; // Yellow color with 5% opacity
-$lumx-color-accent-D2: #e16b00 !default; // Darkest yellow color
-$lumx-color-accent-D1: #fea41c !default; // Dark yellow color
-$lumx-color-accent-N: #ffc525 !default; // Neutral yellow color
-$lumx-color-accent-L1: rgba(255, 197, 37, 0.8) !default; // Yellow color with 80% opacity
-$lumx-color-accent-L2: rgba(255, 197, 37, 0.7) !default; // Yellow color with 60% opacity
-$lumx-color-accent-L3: rgba(255, 197, 37, 0.6) !default; // Yellow color with 40% opacity
-$lumx-color-accent-L4: rgba(255, 197, 37, 0.4) !default; // Yellow color with 20% opacity
-$lumx-color-accent-L5: rgba(255, 197, 37, 0.2) !default; // Yellow color with 10% opacity
-$lumx-color-accent-L6: rgba(255, 197, 37, 0.1) !default; // Yellow color with 5% opacity
-$lumx-color-black-N: #28336d !default; // Neutral dark color
-$lumx-color-black-L1: rgba(40, 51, 109, 0.8) !default; // Base dark color with 80% opacity
-$lumx-color-black-L2: rgba(40, 51, 109, 0.6) !default; // Base dark color with 60% opacity
-$lumx-color-black-L3: rgba(40, 51, 109, 0.4) !default; // Base dark color with 40% opacity
-$lumx-color-black-L4: rgba(40, 51, 109, 0.2) !default; // Base dark color with 20% opacity
-$lumx-color-black-L5: rgba(40, 51, 109, 0.1) !default; // Base dark color with 10% opacity
-$lumx-color-black-L6: rgba(40, 51, 109, 0.05) !default; // Base dark color with 5% opacity
+$lumx-color-blue-D2: #1976d2 !default; // Darkest blue color
+$lumx-color-blue-D1: #1e88e5 !default; // Dark blue color
+$lumx-color-blue-N: #2196f3 !default; // Neutral blue color
+$lumx-color-blue-L1: rgba(33, 150, 243, 0.8) !default; // Base blue color with 80% opacity
+$lumx-color-blue-L2: rgba(33, 150, 243, 0.6) !default; // Base blue color with 60% opacity
+$lumx-color-blue-L3: rgba(33, 150, 243, 0.4) !default; // Base blue color with 40% opacity
+$lumx-color-blue-L4: rgba(33, 150, 243, 0.2) !default; // Base blue color with 20% opacity
+$lumx-color-blue-L5: rgba(33, 150, 243, 0.1) !default; // Base blue color with 10% opacity
+$lumx-color-blue-L6: rgba(33, 150, 243, 0.05) !default; // Base blue color with 5% opacity
+$lumx-color-yellow-D2: #ff6f00 !default; // Darkest yellow color
+$lumx-color-yellow-D1: #ff8f00 !default; // Dark yellow color
+$lumx-color-yellow-N: #ffb300 !default; // Neutral yellow color
+$lumx-color-yellow-L1: rgba(255, 179, 0, 0.8) !default; // Yellow color with 80% opacity
+$lumx-color-yellow-L2: rgba(255, 179, 0, 0.7) !default; // Yellow color with 60% opacity
+$lumx-color-yellow-L3: rgba(255, 179, 0, 0.6) !default; // Yellow color with 40% opacity
+$lumx-color-yellow-L4: rgba(255, 179, 0, 0.4) !default; // Yellow color with 20% opacity
+$lumx-color-yellow-L5: rgba(255, 179, 0, 0.2) !default; // Yellow color with 10% opacity
+$lumx-color-yellow-L6: rgba(255, 179, 0, 0.1) !default; // Yellow color with 5% opacity
+$lumx-color-red-D2: #d32f2f !default; // Darkest red color
+$lumx-color-red-D1: #e53935 !default; // Dark red color
+$lumx-color-red-N: #f44336 !default; // Neutral red color
+$lumx-color-red-L1: rgba(244, 67, 54, 0.8) !default; // Red color with 80% opacity
+$lumx-color-red-L2: rgba(244, 67, 54, 0.6) !default; // Red color with 60% opacity
+$lumx-color-red-L3: rgba(244, 67, 54, 0.4) !default; // Red color with 40% opacity
+$lumx-color-red-L4: rgba(244, 67, 54, 0.2) !default; // Red color with 20% opacity
+$lumx-color-red-L5: rgba(244, 67, 54, 0.1) !default; // Red color with 10% opacity
+$lumx-color-red-L6: rgba(244, 67, 54, 0.05) !default; // Red color with 5% opacity
+$lumx-color-green-D2: #388e3c !default; // Darkest green color
+$lumx-color-green-D1: #43a047 !default; // Dark green color
+$lumx-color-green-N: #4caf50 !default; // Neutral green color
+$lumx-color-green-L1: rgba(76, 175, 80, 0.8) !default; // Green color with 80% opacity
+$lumx-color-green-L2: rgba(76, 175, 80, 0.6) !default; // Green color with 60% opacity
+$lumx-color-green-L3: rgba(76, 175, 80, 0.4) !default; // Green color with 40% opacity
+$lumx-color-green-L4: rgba(76, 175, 80, 0.2) !default; // Green color with 20% opacity
+$lumx-color-green-L5: rgba(76, 175, 80, 0.1) !default; // Green color with 10% opacity
+$lumx-color-green-L6: rgba(76, 175, 80, 0.05) !default; // Green color with 5% opacity
+$lumx-color-primary-D2: #1976d2 !default; // Darkest blue color
+$lumx-color-primary-D1: #1e88e5 !default; // Dark blue color
+$lumx-color-primary-N: #2196f3 !default; // Neutral blue color
+$lumx-color-primary-L1: rgba(33, 150, 243, 0.8) !default; // Base blue color with 80% opacity
+$lumx-color-primary-L2: rgba(33, 150, 243, 0.6) !default; // Base blue color with 60% opacity
+$lumx-color-primary-L3: rgba(33, 150, 243, 0.4) !default; // Base blue color with 40% opacity
+$lumx-color-primary-L4: rgba(33, 150, 243, 0.2) !default; // Base blue color with 20% opacity
+$lumx-color-primary-L5: rgba(33, 150, 243, 0.1) !default; // Base blue color with 10% opacity
+$lumx-color-primary-L6: rgba(33, 150, 243, 0.05) !default; // Base blue color with 5% opacity
+$lumx-color-secondary-D2: #388e3c !default; // Darkest green color
+$lumx-color-secondary-D1: #43a047 !default; // Dark green color
+$lumx-color-secondary-N: #4caf50 !default; // Neutral green color
+$lumx-color-secondary-L1: rgba(76, 175, 80, 0.8) !default; // Green color with 80% opacity
+$lumx-color-secondary-L2: rgba(76, 175, 80, 0.6) !default; // Green color with 60% opacity
+$lumx-color-secondary-L3: rgba(76, 175, 80, 0.4) !default; // Green color with 40% opacity
+$lumx-color-secondary-L4: rgba(76, 175, 80, 0.2) !default; // Green color with 20% opacity
+$lumx-color-secondary-L5: rgba(76, 175, 80, 0.1) !default; // Green color with 10% opacity
+$lumx-color-secondary-L6: rgba(76, 175, 80, 0.05) !default; // Green color with 5% opacity
+$lumx-color-grey-N: #757575 !default;
+$lumx-color-grey-L1: rgba(117, 117, 117, 0.8) !default;
+$lumx-color-grey-L2: rgba(117, 117, 117, 0.6) !default;
+$lumx-color-grey-L3: rgba(117, 117, 117, 0.4) !default;
+$lumx-color-grey-L4: rgba(117, 117, 117, 0.2) !default;
+$lumx-color-grey-L5: rgba(117, 117, 117, 0.1) !default;
+$lumx-color-grey-L6: rgba(117, 117, 117, 0.05) !default;
+$lumx-color-accent-D2: #388e3c !default; // Darkest green color
+$lumx-color-accent-D1: #43a047 !default; // Dark green color
+$lumx-color-accent-N: #4caf50 !default; // Neutral green color
+$lumx-color-accent-L1: rgba(76, 175, 80, 0.8) !default; // Green color with 80% opacity
+$lumx-color-accent-L2: rgba(76, 175, 80, 0.6) !default; // Green color with 60% opacity
+$lumx-color-accent-L3: rgba(76, 175, 80, 0.4) !default; // Green color with 40% opacity
+$lumx-color-accent-L4: rgba(76, 175, 80, 0.2) !default; // Green color with 20% opacity
+$lumx-color-accent-L5: rgba(76, 175, 80, 0.1) !default; // Green color with 10% opacity
+$lumx-color-accent-L6: rgba(76, 175, 80, 0.05) !default; // Green color with 5% opacity
+$lumx-color-black-N: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
+$lumx-color-black-L1: rgba(0, 0, 0, 0.8) !default; // Base dark color with 80% opacity
+$lumx-color-black-L2: rgba(0, 0, 0, 0.54) !default; // Base dark color with 60% opacity
+$lumx-color-black-L3: rgba(0, 0, 0, 0.38) !default; // Base dark color with 40% opacity
+$lumx-color-black-L4: rgba(0, 0, 0, 0.2) !default; // Base dark color with 20% opacity
+$lumx-color-black-L5: rgba(0, 0, 0, 0.12) !default; // Base dark color with 10% opacity
+$lumx-color-black-L6: rgba(0, 0, 0, 0.05) !default; // Base dark color with 5% opacity
 $lumx-color-white-N: #ffffff !default; // Neutral light color
 $lumx-color-white-L1: rgba(255, 255, 255, 0.9) !default; // Light color with 90% opacity
 $lumx-color-white-L2: rgba(255, 255, 255, 0.8) !default; // Light color with 80% opacity
@@ -94,15 +101,15 @@ $lumx-color-white-L3: rgba(255, 255, 255, 0.6) !default; // Light color with 60%
 $lumx-color-white-L4: rgba(255, 255, 255, 0.4) !default; // Light color with 40% opacity
 $lumx-color-white-L5: rgba(255, 255, 255, 0.2) !default; // Light color with 20% opacity
 $lumx-color-white-L6: rgba(255, 255, 255, 0.1) !default; // Light color with 10% opacity
-$lumx-color-orange-D2: #e16b00 !default; // Darkest yellow color
-$lumx-color-orange-D1: #fea41c !default; // Dark yellow color
-$lumx-color-orange-N: #ffc525 !default; // Neutral yellow color
-$lumx-color-orange-L1: rgba(255, 197, 37, 0.8) !default; // Yellow color with 80% opacity
-$lumx-color-orange-L2: rgba(255, 197, 37, 0.7) !default; // Yellow color with 60% opacity
-$lumx-color-orange-L3: rgba(255, 197, 37, 0.6) !default; // Yellow color with 40% opacity
-$lumx-color-orange-L4: rgba(255, 197, 37, 0.4) !default; // Yellow color with 20% opacity
-$lumx-color-orange-L5: rgba(255, 197, 37, 0.2) !default; // Yellow color with 10% opacity
-$lumx-color-orange-L6: rgba(255, 197, 37, 0.1) !default; // Yellow color with 5% opacity
+$lumx-color-orange-D2: #ff6f00 !default; // Darkest yellow color
+$lumx-color-orange-D1: #ff8f00 !default; // Dark yellow color
+$lumx-color-orange-N: #ffb300 !default; // Neutral yellow color
+$lumx-color-orange-L1: rgba(255, 179, 0, 0.8) !default; // Yellow color with 80% opacity
+$lumx-color-orange-L2: rgba(255, 179, 0, 0.7) !default; // Yellow color with 60% opacity
+$lumx-color-orange-L3: rgba(255, 179, 0, 0.6) !default; // Yellow color with 40% opacity
+$lumx-color-orange-L4: rgba(255, 179, 0, 0.4) !default; // Yellow color with 20% opacity
+$lumx-color-orange-L5: rgba(255, 179, 0, 0.2) !default; // Yellow color with 10% opacity
+$lumx-color-orange-L6: rgba(255, 179, 0, 0.1) !default; // Yellow color with 5% opacity
 
 $lumx-core: (
     'color': (
@@ -189,6 +196,15 @@ $lumx-core: (
             'L4': $lumx-color-secondary-L4,
             'L5': $lumx-color-secondary-L5,
             'L6': $lumx-color-secondary-L6,
+        ),
+        'grey': (
+            'N': $lumx-color-grey-N,
+            'L1': $lumx-color-grey-L1,
+            'L2': $lumx-color-grey-L2,
+            'L3': $lumx-color-grey-L3,
+            'L4': $lumx-color-grey-L4,
+            'L5': $lumx-color-grey-L5,
+            'L6': $lumx-color-grey-L6,
         ),
         'accent': (
             'D2': $lumx-color-accent-D2,

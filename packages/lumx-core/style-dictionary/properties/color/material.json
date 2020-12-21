@@ -1,81 +1,81 @@
 {
-   "color": {
-       "primary": "{color.blue}",
-       "secondary": "{color.green}",
-       "dark": {
-           "N": { "value": "#000000", "opacity": "0.87" },
-           "L1": { "value": "#000000", "opacity": "0.8" },
-           "L2": { "value": "#000000", "opacity": "0.54" },
-           "L3": { "value": "#000000", "opacity": "0.38" },
-           "L4": { "value": "#000000", "opacity": "0.2" },
-           "L5": { "value": "#000000", "opacity": "0.12" },
-           "L6": { "value": "#000000", "opacity": "0.05" }
-       },
-       "grey": {
-           "N": { "value": "#757575" },
-           "L1": { "value": "{color.grey.N.value}", "opacity": "0.8" },
-           "L2": { "value": "{color.grey.N.value}", "opacity": "0.6" },
-           "L3": { "value": "{color.grey.N.value}", "opacity": "0.4" },
-           "L4": { "value": "{color.grey.N.value}", "opacity": "0.2" },
-           "L5": { "value": "{color.grey.N.value}", "opacity": "0.1" },
-           "L6": { "value": "{color.grey.N.value}", "opacity": "0.05" }
-       },
-       "light": {
-           "N": { "value": "#fff" },
-           "L1": { "value": "{color.light.N.value}", "opacity": "0.9" },
-           "L2": { "value": "{color.light.N.value}", "opacity": "0.8" },
-           "L3": { "value": "{color.light.N.value}", "opacity": "0.6" },
-           "L4": { "value": "{color.light.N.value}", "opacity": "0.4" },
-           "L5": { "value": "{color.light.N.value}", "opacity": "0.2" },
-           "L6": { "value": "{color.light.N.value}", "opacity": "0.1" }
-       },
-       "blue": {
-           "D2": { "value": "#1976d2" },
-           "D1": { "value": "#1e88e5" },
-           "N": { "value": "#2196f3" },
-           "L1": { "value": "{color.blue.N.value}", "opacity": "0.8" },
-           "L2": { "value": "{color.blue.N.value}", "opacity": "0.6" },
-           "L3": { "value": "{color.blue.N.value}", "opacity": "0.4" },
-           "L4": { "value": "{color.blue.N.value}", "opacity": "0.2" },
-           "L5": { "value": "{color.blue.N.value}", "opacity": "0.1" },
-           "L6": { "value": "{color.blue.N.value}", "opacity": "0.05" }
-       },
-       "yellow": {
-           "D2": { "value": "#ff6f00" },
-           "D1": { "value": "#ff8f00" },
-           "N": { "value": "#ffb300" },
-           "L1": { "value": "{color.yellow.N.value}", "opacity": "0.8" },
-           "L2": { "value": "{color.yellow.N.value}", "opacity": "0.7" },
-           "L3": { "value": "{color.yellow.N.value}", "opacity": "0.6" },
-           "L4": { "value": "{color.yellow.N.value}", "opacity": "0.4" },
-           "L5": { "value": "{color.yellow.N.value}", "opacity": "0.2" },
-           "L6": { "value": "{color.yellow.N.value}", "opacity": "0.1" }
-       },
-       "red": {
-           "D2": { "value": "#d32f2f" },
-           "D1": { "value": "#e53935" },
-           "N": { "value": "#f44336" },
-           "L1": { "value": "{color.red.N.value}", "opacity": "0.8" },
-           "L2": { "value": "{color.red.N.value}", "opacity": "0.6" },
-           "L3": { "value": "{color.red.N.value}", "opacity": "0.4" },
-           "L4": { "value": "{color.red.N.value}", "opacity": "0.2" },
-           "L5": { "value": "{color.red.N.value}", "opacity": "0.1" },
-           "L6": { "value": "{color.red.N.value}", "opacity": "0.05" }
-       },
-       "green": {
-           "D2": { "value": "#388e3c" },
-           "D1": { "value": "#43a047" },
-           "N": { "value": "#4caf50" },
-           "L1": { "value": "{color.green.N.value}", "opacity": "0.8" },
-           "L2": { "value": "{color.green.N.value}", "opacity": "0.6" },
-           "L3": { "value": "{color.green.N.value}", "opacity": "0.4" },
-           "L4": { "value": "{color.green.N.value}", "opacity": "0.2" },
-           "L5": { "value": "{color.green.N.value}", "opacity": "0.1" },
-           "L6": { "value": "{color.green.N.value}", "opacity": "0.05" }
-       },
-       "accent": "{color.secondary}",
-       "black": "{color.dark}",
-       "white": "{color.light}",
-       "orange": "{color.yellow}"
-   }
+    "color": {
+        "primary": "{color.blue}",
+        "secondary": "{color.green}",
+        "dark": {
+            "N": { "value": "#000000", "opacity": "0.87" },
+            "L1": { "value": "#000000", "opacity": "0.8" },
+            "L2": { "value": "#000000", "opacity": "0.54" },
+            "L3": { "value": "#000000", "opacity": "0.38" },
+            "L4": { "value": "#000000", "opacity": "0.2" },
+            "L5": { "value": "#000000", "opacity": "0.12" },
+            "L6": { "value": "#000000", "opacity": "0.05" }
+        },
+        "grey": {
+            "N": { "value": "#757575" },
+            "L1": { "value": "{color.grey.N.value}", "opacity": "0.8" },
+            "L2": { "value": "{color.grey.N.value}", "opacity": "0.6" },
+            "L3": { "value": "{color.grey.N.value}", "opacity": "0.4" },
+            "L4": { "value": "{color.grey.N.value}", "opacity": "0.2" },
+            "L5": { "value": "{color.grey.N.value}", "opacity": "0.1" },
+            "L6": { "value": "{color.grey.N.value}", "opacity": "0.05" }
+        },
+        "light": {
+            "N": { "value": "#fff" },
+            "L1": { "value": "{color.light.N.value}", "opacity": "0.9" },
+            "L2": { "value": "{color.light.N.value}", "opacity": "0.8" },
+            "L3": { "value": "{color.light.N.value}", "opacity": "0.6" },
+            "L4": { "value": "{color.light.N.value}", "opacity": "0.4" },
+            "L5": { "value": "{color.light.N.value}", "opacity": "0.2" },
+            "L6": { "value": "{color.light.N.value}", "opacity": "0.1" }
+        },
+        "blue": {
+            "D2": { "value": "#1976d2" },
+            "D1": { "value": "#1e88e5" },
+            "N": { "value": "#2196f3" },
+            "L1": { "value": "{color.blue.N.value}", "opacity": "0.8" },
+            "L2": { "value": "{color.blue.N.value}", "opacity": "0.6" },
+            "L3": { "value": "{color.blue.N.value}", "opacity": "0.4" },
+            "L4": { "value": "{color.blue.N.value}", "opacity": "0.2" },
+            "L5": { "value": "{color.blue.N.value}", "opacity": "0.1" },
+            "L6": { "value": "{color.blue.N.value}", "opacity": "0.05" }
+        },
+        "yellow": {
+            "D2": { "value": "#ff6f00" },
+            "D1": { "value": "#ff8f00" },
+            "N": { "value": "#ffb300" },
+            "L1": { "value": "{color.yellow.N.value}", "opacity": "0.8" },
+            "L2": { "value": "{color.yellow.N.value}", "opacity": "0.7" },
+            "L3": { "value": "{color.yellow.N.value}", "opacity": "0.6" },
+            "L4": { "value": "{color.yellow.N.value}", "opacity": "0.4" },
+            "L5": { "value": "{color.yellow.N.value}", "opacity": "0.2" },
+            "L6": { "value": "{color.yellow.N.value}", "opacity": "0.1" }
+        },
+        "red": {
+            "D2": { "value": "#d32f2f" },
+            "D1": { "value": "#e53935" },
+            "N": { "value": "#f44336" },
+            "L1": { "value": "{color.red.N.value}", "opacity": "0.8" },
+            "L2": { "value": "{color.red.N.value}", "opacity": "0.6" },
+            "L3": { "value": "{color.red.N.value}", "opacity": "0.4" },
+            "L4": { "value": "{color.red.N.value}", "opacity": "0.2" },
+            "L5": { "value": "{color.red.N.value}", "opacity": "0.1" },
+            "L6": { "value": "{color.red.N.value}", "opacity": "0.05" }
+        },
+        "green": {
+            "D2": { "value": "#388e3c" },
+            "D1": { "value": "#43a047" },
+            "N": { "value": "#4caf50" },
+            "L1": { "value": "{color.green.N.value}", "opacity": "0.8" },
+            "L2": { "value": "{color.green.N.value}", "opacity": "0.6" },
+            "L3": { "value": "{color.green.N.value}", "opacity": "0.4" },
+            "L4": { "value": "{color.green.N.value}", "opacity": "0.2" },
+            "L5": { "value": "{color.green.N.value}", "opacity": "0.1" },
+            "L6": { "value": "{color.green.N.value}", "opacity": "0.05" }
+        },
+        "accent": "{color.secondary}",
+        "black": "{color.dark}",
+        "white": "{color.light}",
+        "orange": "{color.yellow}"
+    }
 }
