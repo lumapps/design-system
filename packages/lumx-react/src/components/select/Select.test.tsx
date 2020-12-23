@@ -30,6 +30,8 @@ interface Setup extends CommonSetup {
     helper: Wrapper;
     error: Wrapper;
     container: Wrapper;
+    chip: Wrapper;
+    inputWrapper: Wrapper;
 }
 
 /**
@@ -57,6 +59,8 @@ const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true): 
             (n: ShallowWrapper | ReactWrapper) => n.name() === 'InputHelper' && n.prop('kind') === Kind.info,
         ),
         input: wrapper.find('#select-uid:not(SelectField)').first(),
+        chip: wrapper.find('Chip'),
+        inputWrapper: wrapper.find('.lumx-select__wrapper'),
         props,
         wrapper,
     };
@@ -197,6 +201,29 @@ describe(`<${Select.displayName}>`, () => {
 
             expect(error).toExist();
             expect(helper).toExist();
+        });
+
+        it('should have a data-id as prop', () => {
+            const { inputWrapper } = setup(
+                {
+                    'data-id': 'select',
+                },
+                false,
+            );
+
+            expect(inputWrapper.prop('data-id')).toEqual('select');
+        });
+
+        it('should have a data-id as prop with Chip variant', () => {
+            const { chip } = setup(
+                {
+                    'data-id': 'select',
+                    variant: SelectVariant.chip,
+                },
+                false,
+            );
+
+            expect(chip.prop('data-id')).toEqual('select');
         });
     });
 
