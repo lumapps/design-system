@@ -37,6 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Added `closeButtonProps` prop to `Lightbox` component to allow setting custom props to the `IconButton`s used to close the lightbox. This prop is not required since the icon button is not automatically displayed. However, when used to display the button, the `label` prop inside the `closeButtonProps` prop will be required because translation are not handled inside the Design System and the `IconButton` now requires a `label` for a11y purposes.
 -   Added `tooltipProps` to `IconButton` to allow setting custom props to the tooltip.
 -   _[BREAKING]_ Added `htmlFor` prop required for `InputLabel` since it is required for `<label>` for a11y purposes.
+-   Added forwarded props to the `Select` component.
 
 ### Changed
 

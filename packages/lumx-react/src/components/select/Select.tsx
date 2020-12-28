@@ -63,6 +63,7 @@ const SelectField: React.FC<SelectProps> = ({
     theme,
     value,
     variant,
+    ...forwardedProps
 }) => {
     return (
         <>
@@ -90,6 +91,7 @@ const SelectField: React.FC<SelectProps> = ({
                         onKeyDown={handleKeyboardNav}
                         tabIndex={isDisabled ? undefined : 0}
                         aria-disabled={isDisabled || undefined}
+                        {...forwardedProps}
                     >
                         <div
                             className={classNames([
@@ -138,6 +140,7 @@ const SelectField: React.FC<SelectProps> = ({
                     onClick={onInputClick}
                     ref={anchorRef as RefObject<HTMLAnchorElement>}
                     theme={theme}
+                    {...forwardedProps}
                 >
                     {isEmpty && <span>{label}</span>}
 
