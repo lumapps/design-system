@@ -31,7 +31,7 @@
 @mixin lumx-state-medium($state, $color, $has-focus-inset: false) {
     @if $state == lumx-base-const('state', 'DEFAULT') {
         background-color: lumx-color-variant($color, 'L5');
-        color: lumx-color-variant($color, 'N');
+        color: lumx-color-variant($color, 'D3');
     } @else if $state == lumx-base-const('state', 'HOVER') {
         background-color: lumx-color-variant($color, 'L4');
     } @else if $state == lumx-base-const('state', 'ACTIVE') {
@@ -49,7 +49,7 @@
     @if $theme == lumx-base-const('theme', 'LIGHT') {
         @if $state == lumx-base-const('state', 'DEFAULT') {
             background-color: lumx-color-variant('primary', 'L4');
-            color: lumx-color-variant('primary', 'D2');
+            color: lumx-color-variant('primary', 'D3');
         } @else if $state == lumx-base-const('state', 'HOVER') {
             background-color: lumx-color-variant('primary', 'L3');
         } @else if $state == lumx-base-const('state', 'ACTIVE') {
@@ -107,7 +107,7 @@
 }
 
 @mixin lumx-state-disabled-input() {
-    opacity: 0.5;
+    opacity: 0.7;
     pointer-events: none;
 }
 
