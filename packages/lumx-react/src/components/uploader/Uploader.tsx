@@ -6,6 +6,9 @@ import { AspectRatio, Icon, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
+/**
+ * The authorized variants.
+ */
 export enum UploaderVariant {
     square = 'square',
     rounded = 'rounded',
@@ -28,7 +31,7 @@ export interface UploaderProps extends GenericProps {
     size?: UploaderSize;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
-    /** The variant of the component. */
+    /** The component variant. */
     variant?: UploaderVariant;
     /** The function called on click. */
     onClick?: MouseEventHandler<HTMLDivElement>;

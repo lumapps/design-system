@@ -46,7 +46,7 @@ export interface TableCellProps extends GenericProps {
     scope?: ThScope;
     /** The initial sort order (sortable thead only). */
     sortOrder?: ThOrder;
-    /** The variant of the cell. */
+    /** The component variant. */
     variant?: TableCellVariant;
     /** The function called on click on header. */
     onHeaderClick?(): void;

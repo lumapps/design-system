@@ -6,7 +6,7 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
- * Authorized variants.
+ * The authorized variants.
  */
 export enum SkeletonRectangleVariant {
     squared = 'squared',
@@ -24,7 +24,7 @@ export interface SkeletonRectangleProps extends GenericProps {
     height?: GlobalSize;
     /** Theme. */
     theme?: Theme;
-    /** The variant of the component. */
+    /** The component variant. */
     variant?: SkeletonRectangleVariant;
     /** The width of the component from Size enum. */
     width?: GlobalSize;

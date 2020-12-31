@@ -1,4 +1,4 @@
-import React, { forwardRef, KeyboardEvent, KeyboardEventHandler, ReactNode } from 'react';
+import React, { Children, forwardRef, KeyboardEvent, KeyboardEventHandler, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -8,6 +8,14 @@ import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/
 
 import isFunction from 'lodash/isFunction';
 import { AvatarProps } from '../avatar/Avatar';
+
+/**
+ * The authorized variants.
+ */
+export enum CommentBlockVariant {
+    indented = 'indented',
+    linear = 'linear',
+}
 
 /**
  * Defines the props of the component.
@@ -28,10 +36,6 @@ export interface CommentBlockProps extends GenericProps {
     date: string;
     /** Whether the component has actions to display or not. */
     hasActions?: boolean;
-    /** Whether the component has children blocks to display or not. */
-    hasChildren?: boolean;
-    /** Whether the component children are indented below parent or not. */
-    hasIndentedChildren?: boolean;
     /** The title action elements. */
     headerActions?: ReactNode;
     /** Whether the component is open or not. */
@@ -40,16 +44,18 @@ export interface CommentBlockProps extends GenericProps {
     isRelevant?: boolean;
     /** The name of the comment author. */
     name: string;
-    /** The content of the comment. */
-    text: ReactNode | string;
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
-    theme?: Theme;
     /** The function called on click. */
     onClick?(): void;
     /** The function called when the cursor enters the component. */
     onMouseEnter?(): void;
     /** The function called when the cursor exists the component. */
     onMouseLeave?(): void;
+    /** The content of the comment. */
+    text: ReactNode | string;
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    theme?: Theme;
+    /** The component variant. */
+    variant?: CommentBlockVariant;
 }
 
 /**
@@ -67,6 +73,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: Partial<CommentBlockProps> = {
     theme: Theme.light,
+    variant: CommentBlockVariant.indented,
 };
 
 /**
@@ -84,8 +91,6 @@ export const CommentBlock: Comp<CommentBlockProps, HTMLDivElement> = forwardRef(
         children,
         date,
         hasActions,
-        hasChildren,
-        hasIndentedChildren,
         headerActions,
         isOpen,
         isRelevant,
@@ -95,12 +100,14 @@ export const CommentBlock: Comp<CommentBlockProps, HTMLDivElement> = forwardRef(
         onMouseLeave,
         text,
         theme,
+        variant,
     } = props;
     const enterKeyPress: KeyboardEventHandler<HTMLElement> = (evt: KeyboardEvent<HTMLElement>) => {
         if (evt.which === ENTER_KEY_CODE && isFunction(onClick)) {
             onClick();
         }
     };
+    const hasChildren = Children.count(children) > 0;
 
     return (
         <div
@@ -108,8 +115,8 @@ export const CommentBlock: Comp<CommentBlockProps, HTMLDivElement> = forwardRef(
             className={classNames(
                 handleBasicClasses({
                     hasChildren: hasChildren && isOpen,
-                    hasIndentedChildren: hasChildren && hasIndentedChildren,
-                    hasLinearChildren: hasChildren && !hasIndentedChildren,
+                    hasIndentedChildren: hasChildren && variant === CommentBlockVariant.indented,
+                    hasLinearChildren: hasChildren && variant === CommentBlockVariant.linear,
                     isRelevant,
                     prefix: CLASSNAME,
                     theme,
