@@ -6,7 +6,6 @@ export const App = ({ theme }: any) => (
     <>
         <CommentBlock
             hasActions
-            hasChildren
             isOpen
             actions={[
                 <Button key="button0" emphasis={Emphasis.low} size={Size.s} leftIcon={mdiHeart}>

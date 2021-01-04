@@ -8,7 +8,6 @@ export default { title: 'LumX components/comment-block/CommentBlock' };
 export const WithHeaderActions = ({ theme }: any) => (
     <CommentBlock
         hasActions
-        hasChildren
         actions={[
             <Button key="button0" emphasis={Emphasis.low} size={Size.s} leftIcon={mdiHeart}>
                 24 likes

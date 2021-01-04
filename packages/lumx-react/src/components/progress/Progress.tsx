@@ -8,7 +8,7 @@ import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
- * Authorized variants.
+ * The authorized variants.
  */
 export enum ProgressVariant {
     linear = 'linear',
