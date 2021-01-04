@@ -1,4 +1,4 @@
-FROM node:10.16-buster AS builder
+FROM node:12.20.0-buster AS builder
 
 WORKDIR /tmp
 
