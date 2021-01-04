@@ -116,7 +116,7 @@
     "scripts": {
         "build": "rollup -c",
         "postbuild": "dts-bundle-generator --no-check --external-types=react --external-imports=moment -o dist/types.d.ts src/index.ts",
-        "prepare": "install-peers",
+        "prepare": "install-peers || exit 0",
         "prepublishOnly": "yarn build",
         "test": "jest --config jest/index.js --coverage --notify --passWithNoTests --detectOpenHandles --runInBand",
         "storybook": "start-storybook -s ../site-demo/static/ -p 9000"

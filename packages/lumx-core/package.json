@@ -38,7 +38,7 @@
         "build": "webpack",
         "postbuild": "rm -rf ./dist/*.js ./dist/*.js.map",
         "postversion": "version-changelog ../../CHANGELOG.md && git add ../../CHANGELOG.md && git commit --amend",
-        "prepare": "install-peers",
+        "prepare": "install-peers || exit 0",
         "prepublishOnly": "yarn build"
     },
     "sideEffects": false,

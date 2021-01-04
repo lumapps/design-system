@@ -79,7 +79,7 @@
         "preversion": "git symbolic-ref --short -q HEAD | egrep -q '^master$' && echo 'ERROR: You can not release from the master branch.' && exit 1 || true",
         "release": "yarn lerna publish --force-publish",
         "scaffold": "yo ./packages/yo-generators --with-tests --with-demo",
-        "setup:git-hooks": "yarn husky uninstall && yarn husky install",
+        "setup:git-hooks": "yarn husky uninstall && yarn husky install || exit 0",
         "start": "yarn --cwd packages/site-demo start",
         "test": "lerna run --stream test",
         "storybook:react": "yarn --cwd packages/lumx-react storybook",

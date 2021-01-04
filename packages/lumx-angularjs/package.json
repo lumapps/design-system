@@ -37,7 +37,7 @@
     },
     "scripts": {
         "build": "webpack",
-        "prepare": "install-peers",
+        "prepare": "install-peers || exit 0",
         "prepublishOnly": "yarn build"
     },
     "version": "0.28.2",
