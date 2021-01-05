@@ -38,7 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Added `tooltipProps` to `IconButton` to allow setting custom props to the tooltip.
 -   _[BREAKING]_ Added `htmlFor` prop required for `InputLabel` since it is required for `<label>` for a11y purposes.
 -   Added forwarded props to the `Select` component.
--   Added `variant` prop for `CommentBlock` component (either `indented` by default or `linear`).
+-   Added `variant` prop for `CommentBlock` component (either `indented` by default or `linear`).
 
 ### Changed
 
@@ -73,6 +73,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   _[BREAKING]_ Replaced `listElementRef` by `ref` in `List` component.
 -   _[BREAKING]_ Replaced `popoverRef` by `ref` in `Popover` component.
 -   _[BREAKING]_ Replaced `userBlockRef` by `ref` in `UserBlock` component.
+-   _[BREAKING]_ The alternative text is now required (`alt` prop in `Thumbnail`, `thumbnails[].alt` in `Mosaic`, `alt` in `ImageBlock`, `thumbnailProps.alt` in `PostBlock` and `thumbnailProps.alt` in `LinkPreview`).
+-   _[BREAKING]_ The title is now required in `ImageBlock`.
+-   _[BREAKING]_ Reworked Thumbnail CORS default. `crossOrigin` now default to `undefined` instead of `'anonymous'`. `isCrossOriginEnabled` prop was removed (use `crossOrigin={undefined}` instead).
 
 ### Removed
 
@@ -87,12 +90,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   _[BREAKING]_ `isClearable` prop of `TextField`, `Autocomplete` and `AutocompleteMultiple` components has been removed. Passing the `label` prop using `clearButtonProps` prop is enough to determine the visibility of the icon button.
 -   _[BREAKING]_ `hasControls` prop of `Slideshow` component has been removed. Using `slideshowControlsProps` prop is enough to determine the visibility of the slideshow controls.
 -   _[BREAKING]_ `hasChildren` and `hasIndentedChildren` props for `CommentBlock` component have been removed.
+-   _[BREAKING]_ Removed `isFollowingWindowSize` and `resizeDebounceTime` on `Thumbnail`.
 
 ### Fixed
 
 -   Fixed `DatePicker` component to prevent switching month when selecting a date.
 -   Fixed `Tooltip` placement on `Icon` and `IconButton`.
 -   Fixed `Switch` component. Its content should not take the full width of its parent.
+-   Fixed image cache in `Thumbnail`.
+-   Fixed focus point performance in `Thumbnail` (full rewrite using react hooks).
 
 ## [0.28.2][] - 2020-12-11
 

@@ -9,7 +9,7 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
- * Authorized size values.
+ * Avatar sizes.
  */
 export type AvatarSize = Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
 
@@ -17,30 +17,30 @@ export type AvatarSize = Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl
  * Defines the props of the component.
  */
 export interface AvatarProps extends GenericProps {
-    /** The action elements. */
-    actions?: HTMLElement | ReactNode;
-    /** The optional avatar badge. */
+    /** Action toolbar content. */
+    actions?: ReactNode;
+    /** Badge. */
     badge?: ReactElement;
-    /** The avatar image URL. */
+    /** Image URL. */
     image: string;
-    /** The size variant of the component. */
+    /** Size variant. */
     size?: AvatarSize;
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    /** Theme adapting the component to light or dark background. */
     theme?: Theme;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Avatar`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<AvatarProps> = {
     size: Size.m,

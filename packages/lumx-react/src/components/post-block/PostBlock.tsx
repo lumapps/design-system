@@ -13,47 +13,42 @@ import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/
  * Defines the props of the component.
  */
 export interface PostBlockProps extends GenericProps {
-    /** The action elements. */
+    /** Action toolbar content. */
     actions?: ReactNode;
-    /** The attachment elements. */
+    /** Attachment content. */
     attachments?: ReactNode;
-    /** The author element. */
+    /** Author content. */
     author?: ReactNode;
-    /** The meta elements. */
+    /** Metadata content. */
     meta?: ReactNode;
-    /** The orientation. */
+    /** Orientation. */
     orientation?: Orientation;
-    /** The tag elements. */
+    /** Tag content. */
     tags?: ReactNode;
-    /** Content text. Can be either a string, or sanitized html. */
+    /** Content (string, or sanitized html). */
     text?: string | { __html: string };
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    /** Theme adapting the component to light or dark background. */
     theme?: Theme;
-    /**
-     * The url of the image we want to display.
-     * @see {@link ThumbnailProps#image}
-     */
-    thumbnail?: string;
-    /** The props to pass to the thumbnail, minus those already set by the PostBlock props. */
-    thumbnailProps?: Omit<ThumbnailProps, 'image' | 'theme' | 'onClick' | 'variant' | 'tabIndex'>;
-    /** The title of the post. */
+    /** Thumbnail. */
+    thumbnailProps?: ThumbnailProps;
+    /** Title. */
     title: string;
-    /** The function called on click. */
+    /** On click callback. */
     onClick?(): void;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}PostBlock`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<PostBlockProps> = {
     orientation: Orientation.horizontal,
@@ -79,23 +74,15 @@ export const PostBlock: Comp<PostBlockProps, HTMLDivElement> = forwardRef((props
         tags,
         text,
         theme,
-        thumbnail,
         thumbnailProps,
         title,
     } = props;
 
     return (
         <div ref={ref} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, orientation, theme }))}>
-            {thumbnail && (
+            {thumbnailProps && (
                 <div className={`${CLASSNAME}__thumbnail`}>
-                    <Thumbnail
-                        {...thumbnailProps}
-                        image={thumbnail}
-                        theme={theme}
-                        onClick={onClick}
-                        variant={ThumbnailVariant.rounded}
-                        tabIndex="0"
-                    />
+                    <Thumbnail {...thumbnailProps} theme={theme} variant={ThumbnailVariant.rounded} />
                 </div>
             )}
 

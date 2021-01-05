@@ -10,26 +10,26 @@ import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/
  * Defines the props of the component.
  */
 export interface ToolbarProps extends GenericProps {
-    /** A component to be rendered after the content. */
+    /** After content (placed after the label). */
     after?: ReactNode;
-    /** A component to be rendered before the content. */
+    /** Before content (placed before the label). */
     before?: ReactNode;
-    /** The label of the toolbar. */
+    /** Label content. */
     label?: ReactNode;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Toolbar`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<ToolbarProps> = {};
 

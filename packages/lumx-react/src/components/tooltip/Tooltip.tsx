@@ -23,30 +23,30 @@ export type TooltipPlacement = Placement.TOP | Placement.RIGHT | Placement.BOTTO
  * Defines the props of the component.
  */
 export interface TooltipProps extends GenericProps {
-    /** The children elements. Will act as the tooltip anchor. */
+    /** Anchor (element on which we activate the tooltip). */
     children: ReactNode;
-    /** The delay (in ms) before closing the tooltip. */
+    /** Delay (in ms) before closing the tooltip. */
     delay?: number;
     /** Whether the tooltip is displayed even without the mouse hovering the anchor. */
     forceOpen?: boolean;
-    /** The label of the tooltip. */
+    /** Label text. */
     label?: string | null | false;
-    /** The placement of the tooltip based on the anchor element placement. */
+    /** Placement of the tooltip relative to the anchor. */
     placement?: TooltipPlacement;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Tooltip`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<TooltipProps> = {
     delay: 500,
@@ -54,9 +54,9 @@ const DEFAULT_PROPS: Partial<TooltipProps> = {
 };
 
 /**
- * The offset from the target.
+ * Arrow size (in pixel).
  */
-const OFFSET = 8;
+const ARROW_SIZE = 8;
 
 /**
  * Tooltip component.
@@ -84,7 +84,7 @@ export const Tooltip: Comp<TooltipProps, HTMLDivElement> = forwardRef((props, re
         modifiers: [
             {
                 name: 'offset',
-                options: { offset: [0, OFFSET] },
+                options: { offset: [0, ARROW_SIZE] },
             },
         ],
     });

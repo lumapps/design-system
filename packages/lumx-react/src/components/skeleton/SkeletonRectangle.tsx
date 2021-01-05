@@ -6,7 +6,7 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
- * The authorized variants.
+ * Skeleton variants.
  */
 export enum SkeletonRectangleVariant {
     squared = 'squared',
@@ -18,15 +18,15 @@ export enum SkeletonRectangleVariant {
  * Defines the props of the component.
  */
 export interface SkeletonRectangleProps extends GenericProps {
-    /** The skeleton aspect ratio (use with width prop only). */
+    /** Aspect ratio (use with width and not height). */
     aspectRatio?: AspectRatio.square | AspectRatio.horizontal | AspectRatio.vertical;
-    /** The height of the component from Size enum. */
+    /** Height size. */
     height?: GlobalSize;
-    /** Theme. */
+    /** Theme adapting the component to light or dark background. */
     theme?: Theme;
-    /** The component variant. */
+    /** Border variant. */
     variant?: SkeletonRectangleVariant;
-    /** The width of the component from Size enum. */
+    /** Width size. */
     width?: GlobalSize;
 }
 
@@ -35,12 +35,12 @@ const DEFAULT_PROPS: Partial<SkeletonRectangleProps> = {
 };
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}SkeletonRectangle`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 

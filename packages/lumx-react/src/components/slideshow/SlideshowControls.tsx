@@ -18,25 +18,25 @@ import isFunction from 'lodash/isFunction';
  * Defines the props of the component.
  */
 export interface SlideshowControlsProps extends GenericProps {
-    /** The index of the current slide. */
+    /** Index of the current slide. */
     activeIndex?: number;
-    /** The props to pass to the next button, minus those already set by the SlideshowControls props. */
+    /** Props to pass to the next button (minus those already set by the SlideshowControls props). */
     nextButtonProps: Pick<IconButtonProps, 'label'> &
         Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis' | 'color'>;
-    /** The reference of the parent element. */
+    /** Reference to the parent element. */
     parentRef: RefObject<HTMLDivElement>;
-    /** The props to pass to the previous button, minus those already set by the SlideshowControls props. */
+    /** Props to pass to the previous button (minus those already set by the SlideshowControls props). */
     previousButtonProps: Pick<IconButtonProps, 'label'> &
         Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis' | 'color'>;
-    /** The number of slides. */
+    /** Number of slides. */
     slidesCount: number;
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    /** Theme adapting the component to light or dark background. */
     theme?: Theme;
-    /** The function called on click on the "next" arrow */
+    /** On next button click callback. */
     onNextClick?(): void;
-    /** The function called on click on a navigation item */
+    /** On pagination change callback. */
     onPaginationClick?(index: number): void;
-    /** The function called on click on the "previous" arrow */
+    /** On previous button click callback. */
     onPreviousClick?(): void;
 }
 
@@ -49,17 +49,17 @@ export interface PaginationRange {
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}SlideshowControls`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<SlideshowControlsProps> = {
     activeIndex: 0,

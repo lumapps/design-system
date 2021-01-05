@@ -1,36 +1,22 @@
 import { LANDSCAPE_IMAGES, landscapeImageKnob } from '@lumx/react/stories/knobs';
 import React from 'react';
 
-import { Alignment, AspectRatio, Chip, ChipGroup, CrossOrigin, ImageBlock, Size } from '@lumx/react';
+import { Alignment, AspectRatio, Chip, ChipGroup, ImageBlock, Size } from '@lumx/react';
 import { htmlDecode } from '@lumx/react/utils/htmlDecode';
-import { boolean, number, select, text } from '@storybook/addon-knobs';
+import { boolean, select, text } from '@storybook/addon-knobs';
+import { enumKnob } from '@lumx/react/stories/knobs/enumKnob';
+import { focusKnob } from '@lumx/react/stories/knobs/focusKnob';
 
 export default { title: 'LumX components/image-block/Image Block' };
 
-const numberKnobOptions = {
-    max: 1,
-    min: -1,
-    range: true,
-    step: 0.1,
-};
-
-const corsOptions = {
-    None: undefined,
-    Anonymous: CrossOrigin.anonymous,
-    UseCredentials: CrossOrigin.useCredentials,
-};
-
-const groupId = 'Image block';
-
 export const DefaultImageBlock = ({ theme }: any) => {
-    const align = select<Alignment>('Alignment', Alignment, Alignment.center, groupId) as any;
-    const aspectRatio = select<AspectRatio>('Aspect ratio', AspectRatio, AspectRatio.square, groupId);
-    const title = text('Title', 'Hello world', groupId);
-    const description = text('Description', 'My awesome description', groupId);
-    const isCrossOriginEnabled = boolean('Is CORS enabled', false, groupId);
-    const crossOrigin = select('CORS', corsOptions, corsOptions.None, groupId);
-    const isDisplayedTags = boolean('Display tags', true, groupId);
-    const tags = (
+    const alt = text('Alternative text', 'Image alt text');
+    const align = select<Alignment>('Alignment', Alignment, Alignment.center) as any;
+    const aspectRatio = select<AspectRatio>('Aspect ratio', AspectRatio, AspectRatio.square);
+    const title = text('Title', 'Hello world');
+    const description = text('Description', 'My awesome description');
+    const crossOrigin = enumKnob('CORS', [undefined, 'anonymous', 'use-credentials'], undefined);
+    const tags = boolean('Display tags', true) && (
         <ChipGroup align={Alignment.left}>
             <Chip size={Size.s} theme={theme}>
                 Tag 1
@@ -41,28 +27,17 @@ export const DefaultImageBlock = ({ theme }: any) => {
             </Chip>
         </ChipGroup>
     );
-    const imageUrl = landscapeImageKnob('Url image', LANDSCAPE_IMAGES.landscape1, groupId);
-    const focusPoint = {
-        x: number('Focus X', 1, numberKnobOptions, groupId),
-        y: number('Focus Y', 0, numberKnobOptions, groupId),
-    };
-    const size = select(
-        'Size',
-        {
-            None: undefined,
-            XL: Size.xl,
-            XXL: Size.xxl,
-        },
-        Size.xxl,
-        groupId,
-    );
+    const imageUrl = landscapeImageKnob('Url image', LANDSCAPE_IMAGES.landscape1);
+    const focusPoint = { x: focusKnob('Focus X'), y: focusKnob('Focus Y') };
+    const size = enumKnob('Size', [undefined, Size.xl, Size.xxl] as const, Size.xxl);
 
     return (
         <ImageBlock
+            alt={alt}
             description={description}
             image={htmlDecode(imageUrl)}
             size={size}
-            tags={isDisplayedTags && tags}
+            tags={tags}
             title={title}
             theme={theme}
             align={align}
@@ -70,7 +45,6 @@ export const DefaultImageBlock = ({ theme }: any) => {
                 aspectRatio,
                 crossOrigin,
                 focusPoint,
-                isCrossOriginEnabled,
             }}
         />
     );

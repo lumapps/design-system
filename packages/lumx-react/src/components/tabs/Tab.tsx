@@ -12,30 +12,30 @@ import { useTabProviderContext } from './state';
 export interface TabProps extends GenericProps {
     /** Children are not supported. */
     children?: never;
-    /** The icon of the tab. */
+    /** Icon (SVG path). */
     icon?: IconProps['icon'];
-    /** The tab HTML id. */
+    /** Native id property. */
     id?: string;
     /** Whether the tab is active or not. */
     isActive?: boolean;
     /** Whether the component is disabled or not. */
     isDisabled?: boolean;
-    /** The label of the tab. */
+    /** Label content. */
     label: string | ReactNode;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Tab`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = `${CSS_PREFIX}-tabs__link`;
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<TabProps> = {};
 

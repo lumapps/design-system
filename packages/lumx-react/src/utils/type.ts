@@ -1,8 +1,8 @@
 import get from 'lodash/get';
-import { ForwardRefExoticComponent, PropsWithoutRef, ReactElement, ReactNode, RefAttributes } from 'react';
+import { ForwardRefExoticComponent, ReactElement, ReactNode, RefAttributes } from 'react';
 
 /**
- * The properties of a component to use to determine it's name.
+ * Properties of a component to use to determine it's name.
  * In the order of preference.
  */
 const NAME_PROPERTIES: string[] = [

@@ -7,9 +7,6 @@ import isEmpty from 'lodash/isEmpty';
 
 import { Comp, GenericProps } from '@lumx/react/utils';
 
-/**
- * The type of a wrapper that can be
- */
 export type Wrapper = ShallowWrapper | ReactWrapper;
 
 /**
@@ -17,14 +14,7 @@ export type Wrapper = ShallowWrapper | ReactWrapper;
  * Note that `props` should be retyped in the specific interface extending this one.
  */
 export interface CommonSetup {
-    /**
-     * The properties of the tested component.
-     */
     props: GenericProps;
-
-    /**
-     * The Enzyme wrapper around of the tested component.
-     */
     wrapper: Wrapper;
 }
 

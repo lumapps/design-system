@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useContext, useMemo, useState } from 'react';
 
-import { ClickAwayParameters, useClickAway } from '@lumx/react/hooks';
+import { ClickAwayParameters, useClickAway } from '@lumx/react/hooks/useClickAway';
 
 import uniq from 'lodash/uniq';
 
@@ -8,7 +8,7 @@ type appendChildrenRefsType = (refs: ClickAwayParameters['refs']) => void;
 const ClickAwayAncestorContext = createContext<appendChildrenRefsType | null>(null);
 
 /**
- * The `ClickAwayProvider` component combines the `useClickAway` hook with a React context to hook into the React
+ * Component combining the `useClickAway` hook with a React context to hook into the React
  * component tree and make sure we take into account both the DOM tree and the React tree we trying to detect click away.
  *
  * @return the react component.

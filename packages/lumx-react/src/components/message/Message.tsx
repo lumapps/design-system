@@ -16,33 +16,33 @@ export enum MessageKind {
  * Defines the props of the component.
  */
 export interface MessageProps extends GenericProps {
-    /** The children elements. */
+    /** Content. */
     children?: ReactNode;
     /** Whether the message has a background or not. */
     hasBackground?: boolean;
-    /** The kind of helper (error or sucess for exemple). */
+    /** Message variant. */
     kind?: MessageKind;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Message`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<MessageProps> = {
     color: ColorPalette.dark,
 };
 
 /**
- * The color according to kind props.
+ * Associative map from message kind to color.
  */
 const KIND_COLOR = {
     [MessageKind.error]: ColorPalette.red,
@@ -52,7 +52,7 @@ const KIND_COLOR = {
 };
 
 /**
- * The icons according to kind props.
+ * Associative map from message kind to icon.
  */
 const KIND_ICON = {
     [MessageKind.error]: mdiAlert,

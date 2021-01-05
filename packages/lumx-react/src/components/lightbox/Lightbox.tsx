@@ -9,7 +9,8 @@ import { COMPONENT_PREFIX, DOCUMENT } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
-import { useDelayedVisibility, useFocus } from '@lumx/react/hooks';
+import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
+import { useFocus } from '@lumx/react/hooks/useFocus';
 import { useDisableBodyScroll } from '@lumx/react/hooks/useDisableBodyScroll';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
@@ -20,37 +21,35 @@ const LIGHTBOX_TRANSITION_DURATION = 400;
  * Defines the props of the component.
  */
 export interface LightboxProps extends GenericProps {
-    /** The label for accessibility assistive devices. */
-    ariaLabel?: string;
-    /** The props to pass to the close button, minus those already set by the Lightbox props. */
+    /** Props to pass to the close button (minus those already set by the Lightbox props). */
     closeButtonProps?: Pick<IconButtonProps, 'label'> &
         Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis' | 'color'>;
     /** Whether the component is open or not. */
     isOpen?: boolean;
-    /** The reference of the element that triggered modal opening to set focus on. */
+    /** Reference to the element that triggered modal opening to set focus on. */
     parentElement: RefObject<any>;
     /** Whether to keep the dialog open on clickaway or escape press. */
     preventAutoClose?: boolean;
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    /** Theme adapting the component to light or dark background. */
     theme?: Theme;
-    /** The z-axis position. */
+    /** Z-axis position. */
     zIndex?: number;
-    /** The function called on close. */
+    /** On close callback. */
     onClose?(): void;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Lightbox`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<LightboxProps> = {
     ariaLabel: 'Lightbox',

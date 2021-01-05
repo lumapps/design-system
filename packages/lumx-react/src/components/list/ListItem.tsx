@@ -10,7 +10,7 @@ import { Comp, GenericProps, getRootClassName, handleBasicClasses, onEnterPresse
 import { renderLink } from '@lumx/react/utils/renderLink';
 
 /**
- *  Authorized size values.
+ *  List item sizes.
  *  @deprecated use Size instead.
  */
 export const ListItemSize = {
@@ -30,38 +30,38 @@ export interface ListItemProps extends GenericProps {
     after?: ReactNode;
     /** A component to be rendered before the content. */
     before?: ReactNode;
-    /** The children elements. */
+    /** Content. */
     children: string | ReactNode;
     /** Whether the list item should be highlighted or not. */
     isHighlighted?: boolean;
     /** Whether the component is selected or not. */
     isSelected?: boolean;
-    /** The reference passed to the <li> element. */
+    /** Reference to the <li> element. */
     listItemRef?: Ref<HTMLLIElement>;
-    /** Sets a custom react component for the link (can be used to inject react router Link). */
+    /** Custom react component for the link (can be used to inject react router Link). */
     linkAs?: 'a' | any;
-    /** props that will be passed on to the Link */
+    /** Props that will be passed on to the Link */
     linkProps?: React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
-    /** The reference passed to the <a> element. */
+    /** Reference to the link element. */
     linkRef?: Ref<HTMLAnchorElement>;
-    /** The size variant of the component. */
+    /** Size variant. */
     size?: ListItemSizes;
-    /** The function called when an item is selected. */
+    /** On selected callback. */
     onItemSelected?(evt: SyntheticEvent): void;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}ListItem`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<ListProps> = {
     size: Size.regular,

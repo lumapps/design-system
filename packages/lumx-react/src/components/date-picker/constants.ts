@@ -2,11 +2,11 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { getRootClassName } from '@lumx/react/utils';
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 export const COMPONENT_NAME = `${COMPONENT_PREFIX}DatePicker`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 export const CLASSNAME = getRootClassName(COMPONENT_NAME);

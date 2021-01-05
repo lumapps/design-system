@@ -21,25 +21,9 @@ type SetupProps = Partial<RadioButtonProps>;
  */
 interface Setup extends CommonSetup {
     props: SetupProps;
-
-    /**
-     * The <div> element that wraps radio button
-     */
     wrapper: Wrapper;
-
-    /**
-     * Radio button label element.
-     */
     label: Wrapper;
-
-    /**
-     * Radio button helper element.
-     */
     helper: Wrapper;
-
-    /**
-     * Radio button input element.
-     */
     input: Wrapper;
 }
 

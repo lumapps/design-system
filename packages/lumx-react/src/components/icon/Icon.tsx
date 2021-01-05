@@ -12,35 +12,35 @@ export type IconSizes = Size.xxs | Size.xs | Size.s | Size.m | Size.l | Size.xl 
  * Defines the props of the component.
  */
 export interface IconProps extends GenericProps {
-    /** The color of the icon. */
+    /** Color variant. */
     color?: Color;
-    /** The degree of lightness and darkness of the selected icon color. */
+    /** Lightened or darkened variant of the selected icon color. */
     colorVariant?: ColorVariant;
     /** Whether the icon has a shape. */
     hasShape?: boolean;
     /**
-     * The icon SVG path draw code (`d` property of the `<path>` SVG element).
+     * Icon (SVG path).draw code (`d` property of the `<path>` SVG element).
      * @see {@link https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths}
      */
     icon: string;
-    /** The size variant of the component. */
+    /** Size variant. */
     size?: IconSizes;
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    /** Theme adapting the component to light or dark background. */
     theme?: Theme;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Icon`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<IconProps> = {};
 

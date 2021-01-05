@@ -12,24 +12,24 @@ import { useTabProviderContextState } from '../tabs/state';
  * Defines the props of the component.
  */
 export interface ProgressTrackerProps extends GenericProps {
-    /** The label that describes the purpose of the set of steps. */
+    /** ARIA label (purpose of the set of steps). */
     ['aria-label']: string;
-    /** The children elements. */
+    /** Step list. */
     children: ReactNode;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}ProgressTracker`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<ProgressTrackerProps> = {};
 

@@ -1,5 +1,5 @@
 import { mdiClose } from '@lumx/icons';
-import { Autocomplete, AutocompleteProps, Chip, ChipGroup, Icon, Size } from '@lumx/react';
+import { Autocomplete, AutocompleteProps, Chip, ChipGroup, HorizontalAlignment, Icon, Size } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
@@ -11,21 +11,11 @@ import React, { forwardRef, ReactNode } from 'react';
  * Defines the props of the component.
  */
 export interface AutocompleteMultipleProps extends AutocompleteProps {
-    /**
-     * The list of selected values.
-     */
+    /** Selected values. */
     values: any[];
-
-    /**
-     * How the chips are aligned on the autocomplete
-     */
-    chipsAlignment?: string;
-
-    /**
-     * This function will be executed to render the values that are already selected. By default, it will assume that
-     * the values are strings, and will render them as such. If that is not the case, this function needs to be overrided
-     * in order to reflect that.
-     */
+    /** Alignment of the chips in the autocomplete. */
+    chipsAlignment?: HorizontalAlignment;
+    /** Selected value render function. Default: Renders the value inside of a Chip. */
     selectedChipRender(
         choice: any,
         index: number,
@@ -35,17 +25,17 @@ export interface AutocompleteMultipleProps extends AutocompleteProps {
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}AutocompleteMultiple`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<AutocompleteMultipleProps> = {
     closeOnClickAway: true,

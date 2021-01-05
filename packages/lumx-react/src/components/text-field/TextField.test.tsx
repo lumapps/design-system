@@ -22,21 +22,9 @@ type SetupProps = Partial<TextFieldProps>;
  */
 interface Setup extends CommonSetup {
     props: SetupProps;
-
-    /**
-     * The <div> element that wraps checkbox and children elements.
-     */
     wrapper: Wrapper;
-
-    /**
-     * The <input> or <textarea> element.
-     */
     inputNative: Wrapper;
-
-    /** The <InputHelper> info */
     helper: Wrapper;
-
-    /** The <InputHelper> error */
     error: Wrapper;
 }
 

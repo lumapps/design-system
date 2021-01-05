@@ -48,7 +48,14 @@ export const App = () => (
 
         <ListItem
             size={Size.huge}
-            before={<Thumbnail variant={ThumbnailVariant.rounded} image="/demo-assets/square1.jpg" size={Size.m} />}
+            before={
+                <Thumbnail
+                    variant={ThumbnailVariant.rounded}
+                    alt="Thumbnail"
+                    image="/demo-assets/square1.jpg"
+                    size={Size.m}
+                />
+            }
             after={<IconButton label="More" emphasis={Emphasis.low} icon={mdiDotsHorizontal} />}
         >
             <div>

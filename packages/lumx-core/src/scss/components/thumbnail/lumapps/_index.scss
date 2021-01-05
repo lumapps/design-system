@@ -5,7 +5,11 @@
 .#{$lumx-base-prefix}-thumbnail {
     $self: &;
 
+    overflow: hidden;
     flex-shrink: 0;
+    padding: 0;
+    border: none;
+    background: none;
     outline: none;
 
     &--fill-height {
@@ -16,6 +20,10 @@
         flex: 1 1 auto;
         flex-direction: column;
         justify-content: center;
+    }
+
+    &--variant-rounded {
+        border-radius: $lumx-border-radius;
     }
 
     &__background {
@@ -63,6 +71,7 @@
     }
 
     &__fallback {
+        width: fit-content;
         /* Center fallback icon when using fill-height prop */
         margin: 0 auto;
     }

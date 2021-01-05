@@ -2,7 +2,7 @@ import { Size } from '@lumx/react';
 
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 
-import { useKeyboardListNavigation, useKeyboardListNavigationType } from '@lumx/react/hooks/useKeyboardListNavigation';
+import { useKeyboardListNavigation } from '@lumx/react/hooks/useKeyboardListNavigation';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
@@ -14,19 +14,19 @@ import { useInteractiveList } from './useInteractiveList';
  * Defines the props of the component.
  */
 export interface ListProps extends GenericProps {
-    /** The children elements. Should be ListItem, ListSubheader or ListDivider. */
+    /** List content (should be ListItem, ListSubheader or ListDivider). */
     children: ReactNode;
     /**
      * Whether the list items are clickable.
      * @deprecated not needed anymore.
      */
     isClickable?: boolean;
-    /** The item padding size. */
+    /** Item padding size. */
     itemPadding?: Size.big | Size.huge;
     /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
     /**
-     * Callback used to retrieved the select entry.
+     * On list item selected callback.
      *
      * @param key   React key of the selected item.
      * @param index Index of the selected item among the sibling items.
@@ -36,12 +36,12 @@ export interface ListProps extends GenericProps {
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}List`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
@@ -53,9 +53,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * @param  ref   Component ref.
  * @return React element.
  */
-export const List: Comp<ListProps, HTMLUListElement> & {
-    useKeyboardListNavigation?: useKeyboardListNavigationType;
-} = forwardRef((props, ref) => {
+const InternalList: Comp<ListProps, HTMLUListElement> = forwardRef((props, ref) => {
     const {
         children,
         className,
@@ -92,6 +90,7 @@ export const List: Comp<ListProps, HTMLUListElement> & {
         </ul>
     );
 });
-List.displayName = COMPONENT_NAME;
-List.className = CLASSNAME;
-List.useKeyboardListNavigation = useKeyboardListNavigation;
+InternalList.displayName = COMPONENT_NAME;
+InternalList.className = CLASSNAME;
+
+export const List = Object.assign(InternalList, { useKeyboardListNavigation });

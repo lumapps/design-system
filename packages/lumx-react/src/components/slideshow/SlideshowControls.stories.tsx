@@ -1,7 +1,7 @@
-import { IMAGES, imageKnob } from '@lumx/react/stories/knobs';
 import React from 'react';
 
 import { AspectRatio, ImageBlock, Slideshow, SlideshowControls, SlideshowItem } from '@lumx/react';
+import { thumbnailsKnob } from '@lumx/react/stories/knobs/thumbnailsKnob';
 
 export default { title: 'LumX components/slideshow/Slideshow controls' };
 
@@ -31,14 +31,7 @@ export const Simple = () => {
 
 export const ControllingSlideshow = ({ theme }: any) => {
     const parentRef = React.useRef(null);
-    const items = [
-        imageKnob('Image 1', IMAGES.landscape1),
-        imageKnob('Image 2', IMAGES.landscape2),
-        imageKnob('Image 3', IMAGES.landscape3),
-        imageKnob('Image 5', IMAGES.portrait1),
-        imageKnob('Image 6', IMAGES.portrait2),
-        imageKnob('Image 7', IMAGES.portrait3),
-    ];
+    const items = thumbnailsKnob(6);
     const [activeIndex, setActiveIndex] = React.useState(0);
     const maxIndex = items.length - 1;
     const slideshowStyle = {
@@ -59,9 +52,14 @@ export const ControllingSlideshow = ({ theme }: any) => {
                 style={slideshowStyle}
                 onChange={setActiveIndex}
             >
-                {items.map((item) => (
-                    <SlideshowItem key={item}>
-                        <ImageBlock image={item} thumbnailProps={{ aspectRatio: AspectRatio.vertical }} theme={theme} />
+                {items.map(({ image, alt }) => (
+                    <SlideshowItem key={image}>
+                        <ImageBlock
+                            image={image}
+                            alt={alt}
+                            thumbnailProps={{ aspectRatio: AspectRatio.vertical }}
+                            theme={theme}
+                        />
                     </SlideshowItem>
                 ))}
             </Slideshow>

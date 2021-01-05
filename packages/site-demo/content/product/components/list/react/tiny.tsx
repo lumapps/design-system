@@ -19,7 +19,14 @@ export const App = () => (
 
         <ListItem
             size={Size.tiny}
-            before={<Thumbnail variant={ThumbnailVariant.rounded} image="/demo-assets/square1.jpg" size={Size.xs} />}
+            before={
+                <Thumbnail
+                    variant={ThumbnailVariant.rounded}
+                    alt="Thumbnail"
+                    image="/demo-assets/square1.jpg"
+                    size={Size.xs}
+                />
+            }
         >
             Single-line item
         </ListItem>

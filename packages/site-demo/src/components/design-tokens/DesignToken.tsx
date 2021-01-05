@@ -12,7 +12,7 @@ interface DesignTokenProps {
     description?: string;
     /** From which version the design token is available. */
     version?: string;
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    /** Theme adapting the component to light or dark background. */
     theme?: Theme;
     /** The design token demo. */
     children?: ReactNode;

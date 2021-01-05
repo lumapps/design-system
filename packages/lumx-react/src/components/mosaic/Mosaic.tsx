@@ -1,6 +1,6 @@
-import React, { forwardRef, MouseEventHandler, useCallback } from 'react';
+import React, { forwardRef, MouseEventHandler, useMemo } from 'react';
 
-import { AspectRatio, Theme, Thumbnail, ThumbnailProps } from '@lumx/react';
+import { Alignment, AspectRatio, Theme, Thumbnail, ThumbnailProps } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
@@ -10,26 +10,26 @@ import take from 'lodash/take';
  * Defines the props of the component.
  */
 export interface MosaicProps extends GenericProps {
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    /** Theme adapting the component to light or dark background. */
     theme?: Theme;
-    /** The list of thumbnails. */
-    thumbnails: Array<Omit<ThumbnailProps, 'theme' | 'aspectRatio' | 'fillHeight' | 'tabIndex'>>;
-    /** The function called on click on a mosaic image. */
+    /** Thumbnails. */
+    thumbnails: ThumbnailProps[];
+    /** On image click callback. */
     onImageClick?(index: number): void;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Mosaic`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<MosaicProps> = {
     theme: Theme.light,
@@ -44,13 +44,15 @@ const DEFAULT_PROPS: Partial<MosaicProps> = {
  */
 export const Mosaic: Comp<MosaicProps, HTMLDivElement> = forwardRef((props, ref) => {
     const { className, theme, thumbnails, onImageClick, ...forwardedProps } = props;
-    const handleImageClick = useCallback(
-        (index: number, onClick?: MouseEventHandler): MouseEventHandler => (event) => {
+    const handleImageClick = useMemo(() => {
+        if (!onImageClick) return undefined;
+
+        return (index: number, onClick?: MouseEventHandler): MouseEventHandler => (event) => {
             onClick?.(event);
             onImageClick?.(index);
-        },
-        [onImageClick],
-    );
+        };
+    }, [onImageClick]);
+
     return (
         <div
             ref={ref}
@@ -64,18 +66,18 @@ export const Mosaic: Comp<MosaicProps, HTMLDivElement> = forwardRef((props, ref)
         >
             <div className={`${CLASSNAME}__wrapper`}>
                 {take(thumbnails, 4).map((thumbnail: any, index: number) => {
-                    const { image, onClick, ...thumbnailProps } = thumbnail;
+                    const { image, onClick, align, ...thumbnailProps } = thumbnail;
 
                     return (
                         <div key={index} className={`${CLASSNAME}__thumbnail`}>
                             <Thumbnail
                                 {...thumbnailProps}
+                                align={align || Alignment.left}
                                 image={image}
                                 theme={theme}
                                 aspectRatio={AspectRatio.free}
                                 fillHeight
-                                tabIndex={(onClick || onImageClick) && '0'}
-                                onClick={handleImageClick(index, onClick)}
+                                onClick={handleImageClick?.(index, onClick) || onClick}
                             />
 
                             {thumbnails.length > 4 && index === 3 && (

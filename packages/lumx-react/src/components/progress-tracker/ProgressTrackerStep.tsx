@@ -18,9 +18,9 @@ export interface ProgressTrackerStepProps extends GenericProps {
     children?: never;
     /** Whether the step should be in error state or not. */
     hasError?: boolean;
-    /** The helper of the step. */
+    /** Helper text. */
     helper?: string | null;
-    /** The step HTML id. */
+    /** Native id property. */
     id?: string;
     /** Whether the current step is active or not. */
     isActive?: boolean;
@@ -28,22 +28,22 @@ export interface ProgressTrackerStepProps extends GenericProps {
     isComplete?: boolean;
     /** Whether the component is disabled or not. */
     isDisabled?: boolean;
-    /** The label of the step. */
+    /** Label text. */
     label?: string | null;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}ProgressTrackerStep`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<ProgressTrackerStepProps> = {};
 

@@ -10,7 +10,7 @@ import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/
 import { AvatarProps } from '../avatar/Avatar';
 
 /**
- * Authorized size values.
+ * User block sizes.
  */
 export type UserBlockSize = Size.s | Size.m | Size.l;
 
@@ -18,47 +18,44 @@ export type UserBlockSize = Size.s | Size.m | Size.l;
  * Defines the props of the component.
  */
 export interface UserBlockProps extends GenericProps {
-    /**
-     * The url of the avatar picture we want to display.
-     * @see {@link AvatarProps#image}
-     */
+    /** Avatar image URL. */
     avatar?: string;
-    /** The props to pass to the avatar, minus those already set by the UserBlock props. */
+    /** Props to pass to the avatar (minus those already set by the UserBlock props). */
     avatarProps?: Omit<AvatarProps, 'image' | 'size' | 'onClick' | 'tabIndex' | 'theme'>;
-    /** The single action element. */
+    /** Simple action toolbar content. */
     simpleAction?: ReactNode;
-    /** The group of action elements. */
+    /** Multiple action toolbar content. */
     multipleActions?: ReactNode;
-    /** The additional fields used to describe the user. */
+    /** Additional fields used to describe the user. */
     fields?: string[];
-    /** The name of the user.. */
+    /** User name. */
     name?: string;
-    /** The orientation of the user block. */
+    /** Orientation. */
     orientation?: Orientation;
-    /** The size variant of the component. */
+    /** Size variant. */
     size?: UserBlockSize;
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    /** Theme adapting the component to light or dark background. */
     theme?: Theme;
-    /** The function called on click. */
+    /** On click callback. */
     onClick?(): void;
-    /** The function called when the cursor enters the component. */
+    /** On mouse enter callback. */
     onMouseEnter?(): void;
-    /** The function called when the cursor exits the component. */
+    /** On mouse leave callback. */
     onMouseLeave?(): void;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}UserBlock`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<UserBlockProps> = {
     orientation: Orientation.horizontal,

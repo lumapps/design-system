@@ -14,24 +14,24 @@ import { mergeRefs } from '@lumx/react/utils/mergeRefs';
  * Defines the props of the component.
  */
 export interface TextFieldProps extends GenericProps {
-    /** A Chip Group to be rendered before the main text input. */
+    /** Chip Group to be rendered before the main text input. */
     chips?: HTMLElement | ReactNode;
-    /** The props to pass to the clear button, minus those already set by the TextField props. If not specified, the button won't be displayed. */
+    /** Props to pass to the clear button (minus those already set by the TextField props). If not specified, the button won't be displayed. */
     clearButtonProps?: Pick<IconButtonProps, 'label'> &
         Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis'>;
-    /** The error related to the TextField. */
+    /** Error message. */
     error?: string | ReactNode;
     /** Whether we force the focus style or not. */
     forceFocusStyle?: boolean;
     /** Whether the text field is displayed with error style or not. */
     hasError?: boolean;
-    /** The helper related to the TextField. */
+    /** Helper text. */
     helper?: string | ReactNode;
-    /** Text field icon (SVG path). */
+    /** Icon (SVG path). */
     icon?: string;
-    /** The id that will be passed to input element. An id is generated (uid) if no id is provided. */
+    /** Native input id property (generated if not provided to link the label element). */
     id?: string;
-    /** The reference passed to the <input> or <textarea> element. */
+    /** Reference to the <input> or <textarea> element. */
     inputRef?: RefObject<HTMLInputElement> | RefObject<HTMLTextAreaElement>;
     /** Whether the component is disabled or not. */
     isDisabled?: boolean;
@@ -39,51 +39,51 @@ export interface TextFieldProps extends GenericProps {
     isRequired?: boolean;
     /** Whether the text field is displayed with valid style or not. */
     isValid?: boolean;
-    /** The label of the text field. */
+    /** Label text. */
     label?: string;
-    /** The max length the input accepts. If set, a character counter will be displayed. */
+    /** Max string length the input accepts (constrains the input and displays a character counter). */
     maxLength?: number;
-    /** The minimum rows to be displayed (requires multiline to be enabled). */
+    /** Minimum number of rows displayed in multiline mode (requires `multiline` to be enabled). */
     minimumRows?: number;
     /** Whether the text field is a textarea or an input. */
     multiline?: boolean;
-    /** The native input name property. */
+    /** Native input name property. */
     name?: string;
-    /** The placeholder message of the text field. */
+    /** Placeholder text. */
     placeholder?: string;
-    /** The reference passed to the wrapper. */
+    /** Reference to the wrapper. */
     textFieldRef?: RefObject<HTMLDivElement>;
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    /** Theme adapting the component to light or dark background. */
     theme?: Theme;
     /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
-    /** The value of the text field. */
+    /** Value. */
     value?: string;
-    /** The function called on blur. */
+    /** On blur callback. */
     onBlur?(event: React.FocusEvent): void;
-    /** The function called on change. */
+    /** On change callback. */
     onChange(value: string, name?: string, event?: SyntheticEvent): void;
-    /** The function called on focus. */
+    /** On focus callback. */
     onFocus?(event: React.FocusEvent): void;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}TextField`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The minimum number of rows that we want to display on the text area
+ * Default minimum number of rows in the multiline mode.
  */
 const DEFAULT_MIN_ROWS = 2;
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<TextFieldProps> = {
     theme: Theme.light,

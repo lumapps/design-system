@@ -9,21 +9,21 @@ import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/
  * Defines the props of the component.
  */
 export interface SkeletonTypographyProps extends GenericProps {
-    /** Theme. */
+    /** Theme adapting the component to light or dark background. */
     theme?: Theme;
-    /** The typography variant of the component. */
+    /** Typography variant. */
     typography: Typography;
-    /** The width of the component (CSS width property). */
+    /** Width CSS property. */
     width?: CSSProperties['width'];
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}SkeletonTypography`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 

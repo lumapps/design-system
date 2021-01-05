@@ -27,11 +27,11 @@ import { useDisableBodyScroll } from '@lumx/react/hooks/useDisableBodyScroll';
  * Defines the props of the component.
  */
 export interface DialogProps extends GenericProps {
-    /** The elements to display in the footer part. */
+    /** Footer content. */
     footer?: ReactNode;
     /** Whether the divider between the dialog content and the footer is always displayed (instead of showing it on scroll). */
     forceFooterDivider?: boolean;
-    /** The elements to display in the header part. */
+    /** Header content. */
     header?: ReactNode;
     /** Whether the divider between the dialog content and the footer is always displayed (instead of showing it on scroll). */
     forceHeaderDivider?: boolean;
@@ -39,19 +39,19 @@ export interface DialogProps extends GenericProps {
     isLoading?: boolean;
     /** Whether the component is open or not. */
     isOpen?: boolean;
-    /** The reference of the element that triggered modal opening to set focus on. */
+    /** Reference to the parent element that triggered modal opening (will get back focus on close). */
     parentElement?: RefObject<HTMLElement>;
-    /** The reference passed to the content. */
+    /** Reference to the dialog content element. */
     contentRef?: RefObject<HTMLDivElement>;
-    /** The reference of the element that should get the focus when the dialogs opens. By default, the first child will take focus. */
+    /** Reference to the of the element that should get the focus when the dialogs opens. By default, the first child will take focus. */
     focusElement?: RefObject<HTMLElement>;
     /** Whether to keep the dialog open on clickaway or escape press. */
     preventAutoClose?: boolean;
-    /** The size variant of the component. */
+    /** Size variant. */
     size?: DialogSizes;
-    /** The z-axis position. */
+    /** Z-axis position. */
     zIndex?: number;
-    /** The function called on close. */
+    /** On close callback. */
     onClose?(): void;
 }
 
@@ -61,17 +61,17 @@ const isHeader = isComponent('header');
 const isFooter = isComponent('footer');
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Dialog`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<DialogProps> = {
     size: Size.big,

@@ -12,8 +12,8 @@ export const App = ({ theme }: any) => (
             Subscribed
         </Button>
 
-        <IconButton theme={theme} emphasis={Emphasis.medium} icon={mdiBellPlus} />
+        <IconButton theme={theme} label="Subscribe" emphasis={Emphasis.medium} icon={mdiBellPlus} />
 
-        <IconButton theme={theme} emphasis={Emphasis.medium} icon={mdiBellRing} isSelected />
+        <IconButton theme={theme} label="Subscribed" emphasis={Emphasis.medium} icon={mdiBellRing} isSelected />
     </>
 );

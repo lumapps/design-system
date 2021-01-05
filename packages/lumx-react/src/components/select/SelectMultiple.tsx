@@ -19,9 +19,9 @@ import { CoreSelectProps, SelectVariant } from './constants';
 
 /** Defines the props of the component. */
 export interface SelectMultipleProps extends CoreSelectProps {
-    /** The list of selected values. */
+    /** Selected values. */
     value: string[];
-    /** The function called to render a selected value when `isMultiple` is true. Default: Renders the value inside of a Chip. */
+    /** Selected value render function. Default: Renders the value inside of a Chip. */
     selectedChipRender?(
         choice: string,
         index: number,

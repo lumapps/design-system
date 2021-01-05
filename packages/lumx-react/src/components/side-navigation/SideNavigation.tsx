@@ -11,21 +11,21 @@ import { Comp, GenericProps, getRootClassName, handleBasicClasses, isComponent }
  * Defines the props of the component.
  */
 export interface SideNavigationProps extends GenericProps {
-    /** The children elements. Should use SideNavigationItem. */
+    /** SideNavigationItem elements. */
     children: ReactNode;
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    /** Theme adapting the component to light or dark background. */
     theme?: Theme;
     /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}SideNavigation`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 

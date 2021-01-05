@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Mosaic> Snapshots and structure should render story ClickableThumbnails 1`] = `
+exports[`<Mosaic> Snapshots and structure should render story FiveThumbnails 1`] = `
 <div
   className="lumx-mosaic lumx-mosaic--theme-light lumx-mosaic--has-4-thumbnails"
 >
@@ -13,25 +13,13 @@ exports[`<Mosaic> Snapshots and structure should render story ClickableThumbnail
     >
       <Thumbnail
         align="left"
+        alt="Image 1"
         aspectRatio="free"
-        crossOrigin="anonymous"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        focusPoint={
-          Object {
-            "x": 0,
-            "y": 0,
-          }
-        }
         image="landscape1.jpg"
-        isCrossOriginEnabled={true}
-        isFollowingWindowSize={true}
         loading="lazy"
-        onClick={[Function]}
-        resizeDebounceTime={20}
-        tabIndex="0"
         theme="light"
-        variant="squared"
       />
     </div>
     <div
@@ -40,25 +28,13 @@ exports[`<Mosaic> Snapshots and structure should render story ClickableThumbnail
     >
       <Thumbnail
         align="left"
+        alt="Image 2"
         aspectRatio="free"
-        crossOrigin="anonymous"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        focusPoint={
-          Object {
-            "x": 0,
-            "y": 0,
-          }
-        }
         image="landscape2.jpg"
-        isCrossOriginEnabled={true}
-        isFollowingWindowSize={true}
         loading="lazy"
-        onClick={[Function]}
-        resizeDebounceTime={20}
-        tabIndex="0"
         theme="light"
-        variant="squared"
       />
     </div>
     <div
@@ -67,25 +43,13 @@ exports[`<Mosaic> Snapshots and structure should render story ClickableThumbnail
     >
       <Thumbnail
         align="left"
+        alt="Image 3"
         aspectRatio="free"
-        crossOrigin="anonymous"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        focusPoint={
-          Object {
-            "x": 0,
-            "y": 0,
-          }
-        }
         image="landscape3.jpg"
-        isCrossOriginEnabled={true}
-        isFollowingWindowSize={true}
         loading="lazy"
-        onClick={[Function]}
-        resizeDebounceTime={20}
-        tabIndex="0"
         theme="light"
-        variant="squared"
       />
     </div>
     <div
@@ -94,26 +58,22 @@ exports[`<Mosaic> Snapshots and structure should render story ClickableThumbnail
     >
       <Thumbnail
         align="left"
+        alt="Image 4"
         aspectRatio="free"
-        crossOrigin="anonymous"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        focusPoint={
-          Object {
-            "x": 0,
-            "y": 0,
-          }
-        }
         image="portrait1.jpg"
-        isCrossOriginEnabled={true}
-        isFollowingWindowSize={true}
         loading="lazy"
-        onClick={[Function]}
-        resizeDebounceTime={20}
-        tabIndex="0"
         theme="light"
-        variant="squared"
       />
+      <div
+        className="lumx-mosaic__overlay"
+      >
+        <span>
+          +
+          1
+        </span>
+      </div>
     </div>
   </div>
 </div>
@@ -132,24 +92,13 @@ exports[`<Mosaic> Snapshots and structure should render story FourThumbnails 1`]
     >
       <Thumbnail
         align="left"
+        alt="Image 1"
         aspectRatio="free"
-        crossOrigin="anonymous"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        focusPoint={
-          Object {
-            "x": 0,
-            "y": 0,
-          }
-        }
         image="landscape1.jpg"
-        isCrossOriginEnabled={true}
-        isFollowingWindowSize={true}
         loading="lazy"
-        onClick={[Function]}
-        resizeDebounceTime={20}
         theme="light"
-        variant="squared"
       />
     </div>
     <div
@@ -158,24 +107,13 @@ exports[`<Mosaic> Snapshots and structure should render story FourThumbnails 1`]
     >
       <Thumbnail
         align="left"
+        alt="Image 2"
         aspectRatio="free"
-        crossOrigin="anonymous"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        focusPoint={
-          Object {
-            "x": 0,
-            "y": 0,
-          }
-        }
         image="landscape2.jpg"
-        isCrossOriginEnabled={true}
-        isFollowingWindowSize={true}
         loading="lazy"
-        onClick={[Function]}
-        resizeDebounceTime={20}
         theme="light"
-        variant="squared"
       />
     </div>
     <div
@@ -184,24 +122,13 @@ exports[`<Mosaic> Snapshots and structure should render story FourThumbnails 1`]
     >
       <Thumbnail
         align="left"
+        alt="Image 3"
         aspectRatio="free"
-        crossOrigin="anonymous"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        focusPoint={
-          Object {
-            "x": 0,
-            "y": 0,
-          }
-        }
         image="landscape3.jpg"
-        isCrossOriginEnabled={true}
-        isFollowingWindowSize={true}
         loading="lazy"
-        onClick={[Function]}
-        resizeDebounceTime={20}
         theme="light"
-        variant="squared"
       />
     </div>
     <div
@@ -210,24 +137,13 @@ exports[`<Mosaic> Snapshots and structure should render story FourThumbnails 1`]
     >
       <Thumbnail
         align="left"
+        alt="Image 4"
         aspectRatio="free"
-        crossOrigin="anonymous"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        focusPoint={
-          Object {
-            "x": 0,
-            "y": 0,
-          }
-        }
         image="portrait1.jpg"
-        isCrossOriginEnabled={true}
-        isFollowingWindowSize={true}
         loading="lazy"
-        onClick={[Function]}
-        resizeDebounceTime={20}
         theme="light"
-        variant="squared"
       />
     </div>
   </div>
@@ -247,24 +163,13 @@ exports[`<Mosaic> Snapshots and structure should render story OneThumbnail 1`] =
     >
       <Thumbnail
         align="left"
+        alt="Image 1"
         aspectRatio="free"
-        crossOrigin="anonymous"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        focusPoint={
-          Object {
-            "x": 0,
-            "y": 0,
-          }
-        }
         image="landscape1.jpg"
-        isCrossOriginEnabled={true}
-        isFollowingWindowSize={true}
         loading="lazy"
-        onClick={[Function]}
-        resizeDebounceTime={20}
         theme="light"
-        variant="squared"
       />
     </div>
   </div>
@@ -284,25 +189,14 @@ exports[`<Mosaic> Snapshots and structure should render story SixThumbnails 1`] 
     >
       <Thumbnail
         align="left"
+        alt="Image 1"
         aspectRatio="free"
-        crossOrigin="anonymous"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        focusPoint={
-          Object {
-            "x": 0,
-            "y": 0,
-          }
-        }
         image="landscape1.jpg"
-        isCrossOriginEnabled={true}
-        isFollowingWindowSize={true}
         loading="lazy"
         onClick={[Function]}
-        resizeDebounceTime={20}
-        tabIndex="0"
         theme="light"
-        variant="squared"
       />
     </div>
     <div
@@ -311,25 +205,14 @@ exports[`<Mosaic> Snapshots and structure should render story SixThumbnails 1`] 
     >
       <Thumbnail
         align="left"
+        alt="Image 2"
         aspectRatio="free"
-        crossOrigin="anonymous"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        focusPoint={
-          Object {
-            "x": 0,
-            "y": 0,
-          }
-        }
         image="landscape2.jpg"
-        isCrossOriginEnabled={true}
-        isFollowingWindowSize={true}
         loading="lazy"
         onClick={[Function]}
-        resizeDebounceTime={20}
-        tabIndex="0"
         theme="light"
-        variant="squared"
       />
     </div>
     <div
@@ -338,25 +221,14 @@ exports[`<Mosaic> Snapshots and structure should render story SixThumbnails 1`] 
     >
       <Thumbnail
         align="left"
+        alt="Image 3"
         aspectRatio="free"
-        crossOrigin="anonymous"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        focusPoint={
-          Object {
-            "x": 0,
-            "y": 0,
-          }
-        }
         image="landscape3.jpg"
-        isCrossOriginEnabled={true}
-        isFollowingWindowSize={true}
         loading="lazy"
         onClick={[Function]}
-        resizeDebounceTime={20}
-        tabIndex="0"
         theme="light"
-        variant="squared"
       />
     </div>
     <div
@@ -365,25 +237,14 @@ exports[`<Mosaic> Snapshots and structure should render story SixThumbnails 1`] 
     >
       <Thumbnail
         align="left"
+        alt="Image 4"
         aspectRatio="free"
-        crossOrigin="anonymous"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        focusPoint={
-          Object {
-            "x": 0,
-            "y": 0,
-          }
-        }
         image="portrait1.jpg"
-        isCrossOriginEnabled={true}
-        isFollowingWindowSize={true}
         loading="lazy"
         onClick={[Function]}
-        resizeDebounceTime={20}
-        tabIndex="0"
         theme="light"
-        variant="squared"
       />
       <div
         className="lumx-mosaic__overlay"
@@ -411,24 +272,13 @@ exports[`<Mosaic> Snapshots and structure should render story ThreeThumbnails 1`
     >
       <Thumbnail
         align="left"
+        alt="Image 1"
         aspectRatio="free"
-        crossOrigin="anonymous"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        focusPoint={
-          Object {
-            "x": 0,
-            "y": 0,
-          }
-        }
         image="landscape1.jpg"
-        isCrossOriginEnabled={true}
-        isFollowingWindowSize={true}
         loading="lazy"
-        onClick={[Function]}
-        resizeDebounceTime={20}
         theme="light"
-        variant="squared"
       />
     </div>
     <div
@@ -437,24 +287,13 @@ exports[`<Mosaic> Snapshots and structure should render story ThreeThumbnails 1`
     >
       <Thumbnail
         align="left"
+        alt="Image 2"
         aspectRatio="free"
-        crossOrigin="anonymous"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        focusPoint={
-          Object {
-            "x": 0,
-            "y": 0,
-          }
-        }
         image="landscape2.jpg"
-        isCrossOriginEnabled={true}
-        isFollowingWindowSize={true}
         loading="lazy"
-        onClick={[Function]}
-        resizeDebounceTime={20}
         theme="light"
-        variant="squared"
       />
     </div>
     <div
@@ -463,24 +302,13 @@ exports[`<Mosaic> Snapshots and structure should render story ThreeThumbnails 1`
     >
       <Thumbnail
         align="left"
+        alt="Image 3"
         aspectRatio="free"
-        crossOrigin="anonymous"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        focusPoint={
-          Object {
-            "x": 0,
-            "y": 0,
-          }
-        }
         image="landscape3.jpg"
-        isCrossOriginEnabled={true}
-        isFollowingWindowSize={true}
         loading="lazy"
-        onClick={[Function]}
-        resizeDebounceTime={20}
         theme="light"
-        variant="squared"
       />
     </div>
   </div>
@@ -500,24 +328,13 @@ exports[`<Mosaic> Snapshots and structure should render story TwoThumbnails 1`] 
     >
       <Thumbnail
         align="left"
+        alt="Image 1"
         aspectRatio="free"
-        crossOrigin="anonymous"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        focusPoint={
-          Object {
-            "x": 0,
-            "y": 0,
-          }
-        }
         image="landscape1.jpg"
-        isCrossOriginEnabled={true}
-        isFollowingWindowSize={true}
         loading="lazy"
-        onClick={[Function]}
-        resizeDebounceTime={20}
         theme="light"
-        variant="squared"
       />
     </div>
     <div
@@ -526,24 +343,13 @@ exports[`<Mosaic> Snapshots and structure should render story TwoThumbnails 1`] 
     >
       <Thumbnail
         align="left"
+        alt="Image 2"
         aspectRatio="free"
-        crossOrigin="anonymous"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        focusPoint={
-          Object {
-            "x": 0,
-            "y": 0,
-          }
-        }
         image="landscape2.jpg"
-        isCrossOriginEnabled={true}
-        isFollowingWindowSize={true}
         loading="lazy"
-        onClick={[Function]}
-        resizeDebounceTime={20}
         theme="light"
-        variant="squared"
       />
     </div>
   </div>

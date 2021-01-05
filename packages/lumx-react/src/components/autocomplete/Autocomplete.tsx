@@ -20,14 +20,14 @@ export interface AutocompleteProps extends GenericProps {
      */
     anchorToInput?: boolean;
     /**
-     * The props to pass to the clear button, minus those already set by the TextField props.
+     * Props to pass to the clear button (minus those already set by the TextField props).
      * If not specified, the button won't be displayed.
      * @see {@link TextFieldProps#clearButtonProps}
      */
     clearButtonProps?: Pick<IconButtonProps, 'label'> &
         Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis'>;
     /**
-     * The reference passed to the <input> or <textarea> element.
+     * Reference to the <input> or <textarea> element.
      * @see {@link TextFieldProps#inputRef}
      */
     inputRef?: RefObject<HTMLInputElement>;
@@ -90,9 +90,9 @@ export interface AutocompleteProps extends GenericProps {
      * @see {@link TextFieldProps#placeholder}
      */
     placeholder?: string;
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    /** Theme adapting the component to light or dark background. */
     theme?: Theme;
-    /** The children elements. Should be a list of suggestions. */
+    /** List of suggestions to display during autocomplete. */
     children: React.ReactNode;
     /**
      * The list of chips to be displayed before the text field input.
@@ -134,7 +134,7 @@ export interface AutocompleteProps extends GenericProps {
      */
     onBlur?(event: React.FocusEvent): void;
     /**
-     * The function called on change.
+     * On change callback.
      * @see {@link TextFieldProps#onChange}
      */
     onChange(value: string, name?: string, event?: SyntheticEvent): void;
@@ -156,17 +156,17 @@ export interface AutocompleteProps extends GenericProps {
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Autocomplete`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<AutocompleteProps> = {
     anchorToInput: false,
