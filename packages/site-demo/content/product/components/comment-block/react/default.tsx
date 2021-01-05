@@ -5,7 +5,6 @@ import React from 'react';
 export const App = ({ theme }: any) => (
     <CommentBlock
         hasActions
-        hasChildren
         actions={[
             <Button key="button0" emphasis={Emphasis.low} size={Size.s} leftIcon={mdiHeart}>
                 24 likes

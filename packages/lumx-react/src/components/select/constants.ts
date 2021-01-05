@@ -39,7 +39,7 @@ export interface CoreSelectProps extends GenericProps {
     theme?: Theme;
     /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
-    /** The selected choices area style. */
+    /** The component variant. */
     variant?: SelectVariant;
     /** The function called when the clear button is clicked. If not specified, the button won't be displayed. */
     onClear?(event: SyntheticEvent, value?: string): void;

@@ -50,7 +50,7 @@ export enum CrossOrigin {
 }
 
 /**
- * Authorized variants.
+ * The authorized variants.
  */
 export enum ThumbnailVariant {
     squared = 'squared',
@@ -92,7 +92,7 @@ export interface ThumbnailProps extends GenericProps {
     resizeDebounceTime?: number;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
-    /** The variant of the component. */
+    /** The component variant. */
     variant?: ThumbnailVariant;
 }
 
