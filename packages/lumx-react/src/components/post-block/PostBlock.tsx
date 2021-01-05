@@ -13,42 +13,42 @@ import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/
  * Defines the props of the component.
  */
 export interface PostBlockProps extends GenericProps {
-    /** The action elements. */
+    /** Action toolbar content. */
     actions?: ReactNode;
-    /** The attachment elements. */
+    /** Attachment content. */
     attachments?: ReactNode;
-    /** The author element. */
+    /** Author content. */
     author?: ReactNode;
-    /** The meta elements. */
+    /** Metadata content. */
     meta?: ReactNode;
-    /** The orientation. */
+    /** Orientation. */
     orientation?: Orientation;
-    /** The tag elements. */
+    /** Tag content. */
     tags?: ReactNode;
-    /** Content text. Can be either a string, or sanitized html. */
+    /** Content (string, or sanitized html). */
     text?: string | { __html: string };
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    /** Theme adapting the component to light or dark background. */
     theme?: Theme;
-    /** The post block thumbnail. */
+    /** Thumbnail. */
     thumbnailProps?: ThumbnailProps;
-    /** The title of the post. */
+    /** Title. */
     title: string;
-    /** The function called on click. */
+    /** On click callback. */
     onClick?(): void;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}PostBlock`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<PostBlockProps> = {
     orientation: Orientation.horizontal,

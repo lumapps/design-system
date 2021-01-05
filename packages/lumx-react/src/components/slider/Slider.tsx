@@ -16,49 +16,46 @@ import { clamp } from '@lumx/react/utils/clamp';
  * Defines the props of the component.
  */
 export interface SliderProps extends GenericProps {
-    /** The helper message of the slider. */
+    /** Helper text. */
     helper?: string;
     /** Whether the min and max labels should be hidden or not. */
     hideMinMaxLabel?: boolean;
     /** Whether the component is disabled or not. */
     isDisabled?: boolean;
-    /** The label of the slider. */
+    /** Label text. */
     label?: string;
-    /** The maximum value of the slider range. */
+    /** Maximum value on the range. */
     max: number;
-    /** The minimum value of the slider range. */
+    /** Minimum value of the range. */
     min: number;
-    /** The native input name property. */
+    /** Native input name property. */
     name?: string;
-    /** The number of figures used for the fractional part of the value. */
+    /** Number of digits in the fractional part of the selected value. */
     precision?: number;
-    /** The value between two steps. */
+    /** Range step value. */
     steps?: number;
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    /** Theme adapting the component to light or dark background. */
     theme?: Theme;
-    /** The current selected value of the slider. */
+    /** Selected ranged value. */
     value: number;
-    /** The function called on change. */
+    /** On change callback. */
     onChange(value: number, name?: string, event?: SyntheticEvent): void;
-    /** The function called on click. */
+    /** On click callback. */
     onMouseDown?(event: React.SyntheticEvent): void;
 }
 
 /**
- * The display name of the component.
- *
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Slider`;
 
 /**
- * The default class name and classes prefix for this component.
- *
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
- *
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<SliderProps> = {
     precision: 0,

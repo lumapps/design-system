@@ -4,7 +4,7 @@ import { GenericProps } from '@lumx/react/utils';
 import { ReactNode, SyntheticEvent } from 'react';
 
 /**
- * The authorized variants.
+ * Select variants.
  */
 export enum SelectVariant {
     input = 'input',
@@ -12,14 +12,14 @@ export enum SelectVariant {
 }
 
 export interface CoreSelectProps extends GenericProps {
-    /** The props to pass to the clear button, minus those already set by the Select props. If not specified, the button won't be displayed. */
+    /** Props to pass to the clear button (minus those already set by the Select props). If not specified, the button won't be displayed. */
     clearButtonProps?: Pick<IconButtonProps, 'label'> &
         Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis'>;
     /** Whether the select (input variant) is displayed with error style or not. */
     hasError?: boolean;
-    /** The error related to the component. */
+    /** Error message. */
     error?: string | ReactNode;
-    /** The helper to display within the popover (last position). */
+    /** Helper text. */
     helper?: string;
     /** Whether the select should close on click. */
     closeOnClick?: boolean;
@@ -31,28 +31,28 @@ export interface CoreSelectProps extends GenericProps {
     isOpen?: boolean;
     /** Whether the select (input variant) is displayed with valid style or not. */
     isValid?: boolean;
-    /** The select label. */
+    /** Label text. */
     label?: string;
-    /** The select placeholder (input variant). */
+    /** Placeholder input text. */
     placeholder?: string;
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    /** Theme adapting the component to light or dark background. */
     theme?: Theme;
     /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
-    /** The component variant. */
+    /** Select variant. */
     variant?: SelectVariant;
-    /** The function called when the clear button is clicked. If not specified, the button won't be displayed. */
+    /** On clear callback. */
     onClear?(event: SyntheticEvent, value?: string): void;
-    /** The function called when the select field is blurred. */
+    /** On blur callback. */
     onBlur?(): void;
-    /** The function called on integrated search field change (500ms debounce). */
+    /** On filter text change callback (with 500ms debounce). */
     onFilter?(): void;
-    /** The function called when the select input is clicked, can be used for dropdown toggle. */
+    /** On input click callback (can be used for dropdown toggle). */
     onInputClick?(): void;
-    /** The function called when the dropdown is closed. */
+    /** On dropdown close callback. */
     onDropdownClose?(): void;
-    /** The function called when the bottom of the dropdown is reached. */
+    /** On scroll end callback. */
     onInfiniteScroll?(): void;
-    /** The function called to render the selected value. Default: Renders the value as a string. */
+    /** Render value function. Default: Renders the value as a string. */
     selectedValueRender?(choice: string): ReactNode | string;
 }

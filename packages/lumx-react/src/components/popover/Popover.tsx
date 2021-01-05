@@ -54,23 +54,23 @@ export interface Offset {
 export type Elevation = 1 | 2 | 3 | 4 | 5;
 
 /**
- * The offset from the target in case of arrow.
+ * Arrow size (in pixel).
  */
-const OFFSET = 8;
+const ARROW_SIZE = 8;
 
 /**
  * Defines the props of the component.
  */
 export interface PopoverProps extends GenericProps {
-    /** The reference of the DOM element used to set the position of the popover. */
+    /** Reference to the DOM element used to set the position of the popover. */
     anchorRef: React.RefObject<HTMLElement>;
-    /** The children elements. */
+    /** Content. */
     children: ReactNode;
     /** Whether a click anywhere out of the popover would close it. */
     closeOnClickAway?: boolean;
     /** Whether an escape key press would close the popover. */
     closeOnEscape?: boolean;
-    /** How high the component is flying. */
+    /** Shadow elevation. */
     elevation?: Elevation;
     /** Whether the dropdown should fit to the anchor width (if dropdown is smaller). */
     fitToAnchorWidth?: boolean;
@@ -82,28 +82,28 @@ export interface PopoverProps extends GenericProps {
     hasArrow?: boolean;
     /** Whether the popover is open or not. */
     isOpen: boolean;
-    /** The desired offset. */
+    /** Offset placement relative to anchor. */
     offset?: Offset;
-    /** The desired placement. */
+    /** Placement relative to anchor. */
     placement?: Placement;
-    /** The z-axis position. */
+    /** Z-axis position. */
     zIndex?: number;
-    /** The function to be called when the user clicks away or Escape is pressed. */
+    /** On close callback (on click away or Escape pressed). */
     onClose?(): void;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Popover`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<PopoverProps> = {
     elevation: 3,
@@ -166,7 +166,7 @@ const applyMaxHeight = {
     fn({ state }: any) {
         const { height } = state.modifiersData.maxSize;
         // eslint-disable-next-line no-param-reassign
-        state.elements.popper.style.maxHeight = `${height - OFFSET}px`;
+        state.elements.popper.style.maxHeight = `${height - ARROW_SIZE}px`;
     },
 };
 
@@ -210,13 +210,13 @@ export const Popover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, re
     const clickAwayRef = useRef<HTMLDivElement>(null);
 
     const modifiers: any = [];
-    const actualOffset: [number, number] = [offset?.along ?? 0, (offset?.away ?? 0) + (hasArrow ? OFFSET : 0)];
+    const actualOffset: [number, number] = [offset?.along ?? 0, (offset?.away ?? 0) + (hasArrow ? ARROW_SIZE : 0)];
     modifiers.push({
         name: 'offset',
         options: { offset: actualOffset },
     });
     if (hasArrow && arrowElement) {
-        modifiers.push({ name: 'arrow', options: { element: arrowElement, padding: OFFSET } });
+        modifiers.push({ name: 'arrow', options: { element: arrowElement, padding: ARROW_SIZE } });
     }
 
     if (fitToAnchorWidth) {

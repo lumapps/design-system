@@ -25,35 +25,11 @@ type SetupProps = Partial<SwitchProps>;
  */
 interface Setup extends CommonSetup {
     props: SetupProps;
-
-    /**
-     * The main container.
-     */
     root: Wrapper;
-
-    /**
-     * The wrapper of the hidden checkbox.
-     */
     inputWrapper: Wrapper;
-
-    /**
-     * The hidden checkbox.
-     */
     input: Wrapper;
-
-    /**
-     * The wrapper of the label and helper.
-     */
     content: Wrapper;
-
-    /**
-     * The helper.
-     */
     helper: Wrapper;
-
-    /**
-     * The label.
-     */
     label: Wrapper;
 }
 

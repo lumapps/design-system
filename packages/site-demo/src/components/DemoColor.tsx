@@ -5,7 +5,7 @@ import { useThemeColorVariants } from '@lumx/demo/utils/hooks/useThemeColorVaria
 import { Theme } from '@lumx/react';
 
 interface DemoColorProps {
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    /** Theme adapting the component to light or dark background. */
     theme: Theme;
     color: string;
 }

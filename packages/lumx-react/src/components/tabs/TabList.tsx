@@ -1,4 +1,4 @@
-import { Theme } from '@lumx/react';
+import { Alignment, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, handleBasicClasses } from '@lumx/react/utils';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
@@ -22,32 +22,32 @@ export enum TabListPosition {
  * Defines the props of the component.
  */
 export interface TabListProps extends GenericProps {
-    /** The label that describes the purpose of the set of tabs. */
+    /** ARIA label (purpose of the set of tabs). */
     ['aria-label']: string;
-    /** The children elements. */
+    /** Tab list. */
     children: ReactNode;
-    /** The layout of the tabs. */
+    /** Layout of the tabs in the list. */
     layout?: TabListLayout;
-    /** The position of the tabs. */
+    /** Position of the tabs in the list (requires 'clustered' layout). */
     position?: TabListPosition;
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    /** Theme adapting the component to light or dark background. */
     theme?: Theme;
     /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}TabList`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = `${CSS_PREFIX}-tabs`;
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<TabListProps> = {
     layout: TabListLayout.fixed,

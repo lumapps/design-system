@@ -11,17 +11,17 @@ import { Comp, GenericProps, getRootClassName } from '@lumx/react/utils';
 export type ButtonGroupProps = GenericProps;
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}ButtonGroup`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<ButtonGroupProps> = {};
 

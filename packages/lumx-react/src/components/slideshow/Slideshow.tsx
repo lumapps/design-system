@@ -14,17 +14,17 @@ import { mergeRefs } from '@lumx/react/utils/mergeRefs';
  * Defines the props of the component.
  */
 export interface SlideshowProps extends GenericProps {
-    /** The index of the current slide. */
+    /** Index of the current slide. */
     activeIndex?: number;
     /** Whether the automatic rotation of the slideshow is enabled or not. */
     autoPlay?: boolean;
     /** Whether the image has to fill its container height or not. */
     fillHeight?: boolean;
-    /** The number of slides to group together. */
+    /** Number of slides to group together. */
     groupBy?: number;
-    /** The interval between each slide when automatic rotation is enabled. */
+    /** Interval between each slide when automatic rotation is enabled. */
     interval?: number;
-    /** The props to pass to the slideshow controls, minus those already set by the Slideshow props. */
+    /** Props to pass to the slideshow controls (minus those already set by the Slideshow props). */
     slideshowControlsProps?: Pick<SlideshowControlsProps, 'nextButtonProps' | 'previousButtonProps'> &
         Omit<
             SlideshowControlsProps,
@@ -36,7 +36,7 @@ export interface SlideshowProps extends GenericProps {
             | 'parentRef'
             | 'theme'
         >;
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    /** Theme adapting the component to light or dark background. */
     theme?: Theme;
     /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
@@ -45,17 +45,17 @@ export interface SlideshowProps extends GenericProps {
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Slideshow`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<SlideshowProps> = {
     activeIndex: 0,

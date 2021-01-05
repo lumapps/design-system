@@ -8,7 +8,7 @@ import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
- * The authorized variants.
+ * Progress variants.
  */
 export enum ProgressVariant {
     linear = 'linear',
@@ -19,26 +19,26 @@ export enum ProgressVariant {
  * Defines the props of the component.
  */
 export interface ProgressProps extends GenericProps {
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    /** Theme adapting the component to light or dark background. */
     theme?: Theme;
     /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
-    /** The component variant. */
+    /** Progress variant. */
     variant?: ProgressVariant;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Progress`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<ProgressProps> = {
     theme: Theme.light,

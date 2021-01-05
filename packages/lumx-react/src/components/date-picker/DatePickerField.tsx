@@ -13,31 +13,31 @@ import { Comp, GenericProps } from '@lumx/react/utils';
  * Defines the props of the component.
  */
 export interface DatePickerFieldProps extends GenericProps {
-    /** The month to display by default. */
+    /** Default month. */
     defaultMonth?: Date;
     /** Whether the component is disabled or not. */
     isDisabled?: boolean;
-    /** The locale (language or region) to use. */
+    /** Locale (language or region) to use. */
     locale: string;
-    /** The date after which no date can be selected. */
+    /** Date after which dates can't be selected. */
     maxDate?: Date;
-    /** The date before which no date can be selected. */
+    /** Date before which dates can't be selected. */
     minDate?: Date;
-    /** The native input name property. */
+    /** Native input name property. */
     name?: string;
-    /** The props to pass to the next month change button, minus those already set by the DatePickerControlled props. */
+    /** Props to pass to the next month button (minus those already set by the DatePickerControlled props). */
     nextButtonProps: Pick<IconButtonProps, 'label'> & Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis'>;
-    /** The props to pass to the previous month change button, minus those already set by the DatePickerControlled props. */
+    /** Props to pass to the previous month button (minus those already set by the DatePickerControlled props). */
     previousButtonProps: Pick<IconButtonProps, 'label'> &
         Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis'>;
-    /** The current value of the text field. */
+    /** Currently selected date. */
     value: Date | undefined;
-    /** The function called on change. */
+    /** On change callback. */
     onChange(value: Date | undefined, name?: string, event?: SyntheticEvent): void;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = 'DatePickerField';
 

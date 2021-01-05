@@ -1,4 +1,4 @@
-import { Alignment } from '@lumx/react/components';
+import { Alignment, HorizontalAlignment } from '@lumx/react/components';
 import React, { forwardRef } from 'react';
 
 import classNames from 'classnames';
@@ -13,26 +13,26 @@ import { useChipGroupNavigation } from '@lumx/react/hooks/useChipGroupNavigation
  * Defines the props of the component.
  */
 export interface ChipGroupProps extends GenericProps {
-    /** The alignment of the component. */
-    align?: string;
-    /** The children elements. Should be a list of Chip. */
+    /** Chip horizontal alignment. */
+    align?: HorizontalAlignment;
+    /** List of Chip. */
     children: React.ReactNode;
 }
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<ChipGroupProps> = {
     align: Alignment.left,
 };
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}ChipGroup`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 

@@ -14,7 +14,7 @@ export {
 } from '@lumx/core/js/constants';
 
 /**
- * The prefix to use to name the React component.
+ * Component name prefix.
  */
 export const COMPONENT_PREFIX = '';
 

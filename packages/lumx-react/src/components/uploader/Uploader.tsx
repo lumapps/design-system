@@ -7,7 +7,7 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
- * The authorized variants.
+ * Uploader variants.
  */
 export enum UploaderVariant {
     square = 'square',
@@ -15,40 +15,43 @@ export enum UploaderVariant {
     circle = 'circle',
 }
 
+/**
+ * Uploader sizes.
+ */
 export type UploaderSize = Size.xl | Size.xxl;
 
 /**
  * Defines the props of the component.
  */
 export interface UploaderProps extends GenericProps {
-    /** The aspect ratio the image will get. */
+    /** Image aspect ratio. */
     aspectRatio?: AspectRatio;
-    /** The icon of the uploader. */
+    /** Icon (SVG path). */
     icon?: string;
-    /** The label of the uploader. */
+    /** Label text. */
     label?: string;
-    /** The size variant of the component. */
+    /** Size variant. */
     size?: UploaderSize;
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    /** Theme adapting the component to light or dark background. */
     theme?: Theme;
-    /** The component variant. */
+    /** Variant. */
     variant?: UploaderVariant;
-    /** The function called on click. */
+    /** On click callback. */
     onClick?: MouseEventHandler<HTMLDivElement>;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Uploader`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<UploaderProps> = {
     aspectRatio: AspectRatio.horizontal,

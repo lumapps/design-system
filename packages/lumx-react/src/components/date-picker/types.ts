@@ -6,24 +6,23 @@ import { RefObject } from 'react';
  * Defines the props of the component.
  */
 export interface DatePickerProps extends GenericProps {
-    /** The month to display by default. */
+    /** Default month. */
     defaultMonth?: Date;
-    /** The locale (language or region) to use. */
+    /** Locale (language or region) to use. */
     locale: string;
-    /** The date after which no date can be selected. */
+    /** Date after which dates can't be selected. */
     maxDate?: Date;
-    /** The date before which no date can be selected. */
+    /** Date before which dates can't be selected. */
     minDate?: Date;
-    /** The props to pass to the next month change button, minus those already set by the DatePickerControlled props. */
+    /** Props to pass to the next month button (minus those already set by the DatePickerControlled props). */
     nextButtonProps: Pick<IconButtonProps, 'label'> & Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis'>;
-    /** The props to pass to the previous month change button, minus those already set by the DatePickerControlled props. */
+    /** Props to pass to the previous month button (minus those already set by the DatePickerControlled props). */
     previousButtonProps: Pick<IconButtonProps, 'label'> &
         Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis'>;
-    /** The reference passed to the <button> element if it corresponds to the current date or the selected date. */
+    /** Reference to the <button> element corresponding to the current date or the selected date. */
     todayOrSelectedDateRef?: RefObject<HTMLButtonElement>;
-    /** The current value of the text field. */
+    /** Currently selected date. */
     value: Date | undefined;
-
-    /** The function called on change. */
+    /** On change callback. */
     onChange(value: Date | undefined): void;
 }

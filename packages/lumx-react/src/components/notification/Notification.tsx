@@ -27,36 +27,36 @@ export enum NotificationType {
  * Defines the props of the component.
  */
 export interface NotificationProps extends GenericProps {
-    /** The label of the action button. */
+    /** Action button label. */
     actionLabel?: string;
-    /** The content of the notification. */
+    /** Content. */
     content?: React.ReactNode;
     /** Whether the component is open or not. */
     isOpen?: boolean;
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    /** Theme adapting the component to light or dark background. */
     theme?: Theme;
-    /** The type of notification (error or success for example). */
+    /** Notification type. */
     type?: NotificationType;
-    /** The z-axis position. */
+    /** Z-axis position. */
     zIndex?: number;
-    /** The function called on click on the action button. */
+    /** On action button click callback. */
     onActionClick?(): void;
-    /** The function called on click on the component. */
+    /** On click callback. */
     onClick?(): void;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Notification`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<NotificationProps> = {
     theme: Theme.light,

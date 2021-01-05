@@ -21,13 +21,13 @@ import {
 type Listener = (evt: KeyboardEvent) => void;
 
 interface Options {
-    /** The list of items to navigate on. */
+    /** List of items to navigate on. */
     items: ReactNode[] | ReactNode;
     /** Reference to the list-like element controlling the navigation. */
     ref: RefObject<HTMLElement>;
 
     /**
-     * Callback triggered on ARROW key navigation on a list item.
+     * On list item navigated callback (triggered on ARROW key navigation).
      *
      * @param index Index of the navigated item among the sibling items.
      * @param key   React key of the navigated item.
@@ -35,7 +35,7 @@ interface Options {
     onListItemNavigated?(index: number, key: Key | null): void;
 
     /**
-     * Callback triggered on list item selection (via ENTER key or click).
+     * On list item selected callback (via ENTER key or click).
      *
      * @param index Index of the selected item among the sibling items.
      * @param key   React key of the selected item.
@@ -45,7 +45,7 @@ interface Options {
 }
 
 interface Output {
-    /** The list of items transformed to accommodate keyboard navigation. */
+    /** List of items transformed to accommodate keyboard navigation. */
     items: ReactNode[];
     /** Whether the list contains clickable items or not. */
     hasClickableItem: boolean;

@@ -12,11 +12,11 @@ import { Comp, GenericProps, getRootClassName, handleBasicClasses, isComponent }
  * Defines the props of the component.
  */
 export interface DropdownProps extends GenericProps {
-    /** The reference of the DOM element used to set the position of the popover.
+    /** Reference to the element around which the dropdown is placed.
      * @see {@link PopoverProps#anchorRef}
      */
     anchorRef: React.RefObject<HTMLElement>;
-    /** The children elements. */
+    /** Dropdown content. */
     children: React.ReactNode;
     /**
      * Whether a click anywhere out of the Dropdown would close it or not.
@@ -48,43 +48,43 @@ export interface DropdownProps extends GenericProps {
      */
     isOpen: boolean;
     /**
-     * The offset that will be applied to the Dropdown position.
+     * Offset applied to the Dropdown position.
      * @see {@link PopoverProps#offset}
      */
     offset?: Offset;
     /**
-     * The preferred Dropdown location against the anchor element.
+     * Preferred Dropdown placement against the anchor element.
      * @see {@link PopoverProps#placement}
      */
     placement?: Placement;
     /** Whether the focus should be set on the list when the dropdown is open or not. */
     shouldFocusOnOpen?: boolean;
     /**
-     * The z-axis position.
+     * Z-axis position.
      * @see {@link PopoverProps#zIndex}
      */
     zIndex?: number;
     /**
-     * The function called on close.
+     * On close callback.
      * @see {@link PopoverProps#onClose}
      */
     onClose?(): void;
-    /** The callback function called when the bottom of the dropdown is reached. */
+    /** On scroll end callback. */
     onInfiniteScroll?(): void;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Dropdown`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<DropdownProps> = {
     closeOnClick: true,

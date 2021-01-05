@@ -10,26 +10,26 @@ import take from 'lodash/take';
  * Defines the props of the component.
  */
 export interface MosaicProps extends GenericProps {
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    /** Theme adapting the component to light or dark background. */
     theme?: Theme;
-    /** The list of thumbnails. */
+    /** Thumbnails. */
     thumbnails: ThumbnailProps[];
-    /** The function called on click on a mosaic image. */
+    /** On image click callback. */
     onImageClick?(index: number): void;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Mosaic`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<MosaicProps> = {
     theme: Theme.light,

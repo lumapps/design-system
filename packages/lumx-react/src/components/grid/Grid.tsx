@@ -12,30 +12,30 @@ type GridGutterSize = Size.regular | Size.big | Size.huge;
  * Defines the props of the component.
  */
 export interface GridProps extends GenericProps {
-    /** The grid orientation. */
+    /** Orientation. */
     orientation?: Orientation;
     /** Whether the children are wrapped or not. */
     wrap?: string;
-    /** The grid vertical alignment. */
+    /** Vertical alignment. */
     vAlign?: Alignment;
-    /** The grid horizontal alignment. */
+    /** Horizontal alignment. */
     hAlign?: Alignment;
-    /** The grid gutter size. */
+    /** Gutter size. */
     gutter?: GridGutterSize;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Grid`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<GridProps> = {
     orientation: Orientation.horizontal,

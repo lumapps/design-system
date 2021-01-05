@@ -15,39 +15,33 @@ type HTMLAnchorProps = React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAn
  * Defines the props of the component.
  */
 export interface LinkProps extends GenericProps {
-    /** The color of the link. */
+    /** Color variant. */
     color?: Color;
-    /** The degree of lightness and darkness of the selected link color. */
+    /** Lightened or darkened variant of the selected icon color. */
     colorVariant?: ColorVariant;
     /** Link href. */
     href?: HTMLAnchorProps['href'];
     /** Whether the component is disabled or not. */
     isDisabled?: boolean;
-    /**
-     * The icon name to place at the left of the icon.
-     * @see {@link IconProps#icon}
-     */
+    /** Left icon (SVG path). */
     leftIcon?: string;
-    /** Sets a custom react component for the link (can be used to inject react router Link). */
+    /** Custom react component for the link (can be used to inject react router Link). */
     linkAs?: 'a' | any;
-    /**
-     * The icon name to place at the right of the icon.
-     * @see {@link IconProps#icon}
-     */
+    /** Right icon (SVG path). */
     rightIcon?: string;
     /** Link target. */
     target?: HTMLAnchorProps['target'];
-    /** The typography of the link. */
+    /** Typography variant. */
     typography?: Typography;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Link`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 

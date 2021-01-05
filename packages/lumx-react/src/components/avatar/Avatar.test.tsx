@@ -15,10 +15,6 @@ const CLASSNAME = Avatar.className as string;
 interface Setup extends CommonSetup {
     avatar: Wrapper;
     props: Partial<AvatarProps>;
-
-    /**
-     * The <div> element wrapper.
-     */
     wrapper: Wrapper;
 }
 

@@ -13,33 +13,33 @@ export type GapSize = Size.regular | Size.big | Size.huge;
  * Defines the props of the component.
  */
 export interface FlexBoxProps extends GenericProps {
-    /** The children elements. */
+    /** Children elements. */
     children?: ReactNode;
     /** Whether the "content filling space" is enabled or not. */
     fillSpace?: boolean;
-    /** The gap space between flexbox items. */
+    /** Gap space between flexbox items. */
     gap?: GapSize;
-    /** The flex horizontal alignment. */
+    /** Flex horizontal alignment. */
     hAlign?: VerticalAlignment;
     /** Whether the "auto margin" is enabled all around or not. */
     marginAuto?: MarginAutoAlignment | MarginAutoAlignment[];
     /** Whether the "content shrink" is disabled or not. */
     noShrink?: boolean;
-    /** The flex direction. */
+    /** Flex direction. */
     orientation?: Orientation;
-    /** The flex vertical alignment. */
+    /** Flex vertical alignment. */
     vAlign?: HorizontalAlignment;
     /** Whether the "flex wrap" is enabled or not. */
     wrap?: boolean;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}FlexBox`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 

@@ -10,7 +10,7 @@ import isFunction from 'lodash/isFunction';
 import { AvatarProps } from '../avatar/Avatar';
 
 /**
- * The authorized variants.
+ * Comment block variants.
  */
 export enum CommentBlockVariant {
     indented = 'indented',
@@ -21,55 +21,52 @@ export enum CommentBlockVariant {
  * Defines the props of the component.
  */
 export interface CommentBlockProps extends GenericProps {
-    /** The action elements. */
+    /** Action toolbar content. */
     actions?: ReactNode;
-    /**
-     * The url of the avatar picture we want to display.
-     * @see {@link AvatarProps#image}
-     */
+    /** Avatar image URL. */
     avatar: string;
-    /** The props to pass to the avatar, minus those already set by the CommentBlock props. */
+    /** Props to pass to the avatar (minus those already set by the CommentBlock props). */
     avatarProps?: Omit<AvatarProps, 'image' | 'size' | 'tabIndex' | 'onClick' | 'onKeyPress'>;
-    /** The children elements. */
+    /** Comment block replies. */
     children?: ReactNode;
-    /** The timestamp of the component. */
+    /** Comment date. */
     date: string;
     /** Whether the component has actions to display or not. */
     hasActions?: boolean;
-    /** The title action elements. */
+    /** Action toolbar header content. */
     headerActions?: ReactNode;
     /** Whether the component is open or not. */
     isOpen?: boolean;
     /** Whether the comment is relevant or not. */
     isRelevant?: boolean;
-    /** The name of the comment author. */
+    /** Comment author name. */
     name: string;
-    /** The function called on click. */
+    /** On click callback. */
     onClick?(): void;
-    /** The function called when the cursor enters the component. */
+    /** On mouse enter callback. */
     onMouseEnter?(): void;
-    /** The function called when the cursor exists the component. */
+    /** On mouse leave callback. */
     onMouseLeave?(): void;
-    /** The content of the comment. */
+    /** Comment content. */
     text: ReactNode | string;
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    /** Theme adapting the component to light or dark background. */
     theme?: Theme;
-    /** The component variant. */
+    /** Comment variant. */
     variant?: CommentBlockVariant;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}CommentBlock`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<CommentBlockProps> = {
     theme: Theme.light,

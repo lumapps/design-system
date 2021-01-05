@@ -25,11 +25,7 @@ type SetupProps = Partial<DialogProps>;
  */
 interface Setup extends CommonSetup {
     props: SetupProps;
-
-    /** The portal that wraps the dialog and children elements. */
     wrapper: Wrapper;
-
-    /** The dialog div */
     dialog: Wrapper;
 }
 
@@ -72,7 +68,7 @@ describe(`<${Dialog.displayName}>`, () => {
 
     // 3. Test events.
     describe('Events', () => {
-        const keyDown = (keyCode: any) => new KeyboardEvent('keydown', { keyCode });
+        const keyDown = (keyCode: any) => new KeyboardEvent('keydown', { keyCode } as any);
 
         it('should trigger `onClose` when pressing `escape` key', () => {
             const onClose = jest.fn();

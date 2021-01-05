@@ -12,41 +12,38 @@ import { renderLink } from '@lumx/react/utils/renderLink';
 type HTMLButtonProps = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
 
 /**
- * The authorized values for the `size` prop.
+ * Button size definition.
  */
 export type ButtonSize = Size.s | Size.m;
 
 export interface BaseButtonProps extends GenericProps {
-    /** The label that describes the button if necessary. */
+    /** ARIA button label. */
     ['aria-label']?: string;
-    /** The color variant of the component. */
+    /** Color variant. */
     color?: Color;
-    /** The emphasis variant of the component. */
+    /** Emphasis variant. */
     emphasis?: Emphasis;
     /** Whether or not the button has a background color in low emphasis. */
     hasBackground?: boolean;
-    /** The native anchor href property. It determines whether the Button will be a <button> or an <a>. */
+    /** Native anchor href property. It determines whether the Button will be a <button> or an <a>. */
     href?: string;
     /** Whether the component is disabled or not. */
     isDisabled?: boolean;
     /** Whether the component is selected or not. */
     isSelected?: boolean;
-    /** The native input name property. */
+    /** Native button name property. */
     name?: string;
-    /** The size variant of the component. */
+    /** Size variant. */
     size?: ButtonSize;
-    /** The native anchor target property. */
+    /** Native anchor target property. */
     target?: '_self' | '_blank' | '_parent' | '_top';
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    /** Theme adapting the component to light or dark background. */
     theme?: Theme;
-    /** The native button type. */
+    /** Native button type. */
     type?: HTMLButtonProps['type'];
     /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
-    /**
-     * Use this property if you specified a URL in the `href` property and you want to customize the react component
-     * for the link (can be used to inject react router Link).
-     */
+    /** Custom react component for the link (can be used to inject react router Link). */
     linkAs?: 'a' | any;
 }
 
@@ -55,7 +52,7 @@ export interface ButtonRootProps extends BaseButtonProps {
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}ButtonRoot`;
 
@@ -65,8 +62,8 @@ export const BUTTON_CLASSNAME = `${CSS_PREFIX}-button`;
 /**
  * Render a button wrapper with the ButtonRoot inside.
  *
- * @param  props The component props.
- * @return The component.
+ * @param  props Component props.
+ * @return React element.
  */
 const renderButtonWrapper: React.FC<ButtonRootProps> = (props) => {
     const { color, emphasis, variant } = props;

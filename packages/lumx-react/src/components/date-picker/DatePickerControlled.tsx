@@ -11,16 +11,16 @@ import { CLASSNAME } from './constants';
  * Defines the props of the component.
  */
 export interface DatePickerControlledProps extends DatePickerProps {
-    /** The selected month to display. */
+    /** Selected month to display. */
     selectedMonth: Date;
-    /** The function called when switching to previous month. */
+    /** On previous month change callback. */
     onPrevMonthChange(): void;
-    /** The function called when switching to next month. */
+    /** On next month change callback. */
     onNextMonthChange(): void;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = 'DatePickerControlled';
 

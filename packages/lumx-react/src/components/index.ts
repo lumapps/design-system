@@ -1,5 +1,5 @@
 /**
- * Authorized alignments.
+ * Alignments.
  */
 export enum Alignment {
     bottom = 'bottom',

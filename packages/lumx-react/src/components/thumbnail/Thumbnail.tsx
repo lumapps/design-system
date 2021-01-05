@@ -39,15 +39,15 @@ export interface ThumbnailProps extends GenericProps {
     crossOrigin?: ImgHTMLProps['crossOrigin'];
     /** Fallback icon (SVG path) or react node when image fails to load. */
     fallback?: string | ReactNode;
-    /** Make the thumbnail fill it's parent size (requires flex parent). */
+    /** Whether the thumbnail should fill it's parent size (requires flex parent) or not. */
     fillHeight?: boolean;
-    /** Focus image on relative coordinates. */
+    /** Apply relative vertical and horizontal shift (from -1 to 1) on the image position inside the thumbnail. */
     focusPoint?: FocusPoint;
     /** Image URL. */
     image: string;
     /** Props to inject into the native <img> element. */
     imgProps?: ImgHTMLProps;
-    /** Reference of the native <img> element. */
+    /** Reference to the native <img> element. */
     imgRef?: Ref<HTMLImageElement>;
     /** Callback on mouse click. */
     onClick?: MouseEventHandler;
@@ -55,24 +55,24 @@ export interface ThumbnailProps extends GenericProps {
     size?: ThumbnailSize;
     /** Image loading mode. */
     loading?: ImgHTMLProps['loading'];
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    /** Theme adapting the component to light or dark background. */
     theme?: Theme;
     /** Variant of the component. */
     variant?: ThumbnailVariant;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Thumbnail`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<ThumbnailProps> = {
     fallback: mdiImageBrokenVariant,

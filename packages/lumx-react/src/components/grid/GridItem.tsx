@@ -6,25 +6,27 @@ import { Alignment } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
+type Columns = '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | '11' | '12';
+
 /**
  * Defines the props of the component.
  */
 export interface GridItemProps extends GenericProps {
-    /** The alignment of the grid item. */
+    /** Alignment. */
     align?: Alignment;
-    /** The order of the grid item. */
-    order?: string;
-    /** The width of the grid item. */
-    width?: string;
+    /** Order. */
+    order?: Columns;
+    /** Width. */
+    width?: Columns;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}GridItem`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 

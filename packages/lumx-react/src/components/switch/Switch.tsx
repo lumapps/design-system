@@ -19,38 +19,38 @@ export enum SwitchPosition {
  * Defines the props of the component.
  */
 export interface SwitchProps extends GenericProps {
-    /** The helper of the switch. */
+    /** Helper text. */
     helper?: string;
     /** Whether it is checked or not. */
     isChecked?: boolean;
     /** Whether the component is disabled or not. */
     isDisabled?: boolean;
-    /** The native input name property. */
+    /** Native input name property. */
     name?: string;
-    /** The position of the toggle regarding the label. */
+    /** Position of the switch relative to the label. */
     position?: SwitchPosition;
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    /** Theme adapting the component to light or dark background. */
     theme?: Theme;
     /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
-    /** The native input value property. */
+    /** Native input value property. */
     value?: string;
-    /** The function called on change. */
+    /** On change callback. */
     onChange?(isChecked: boolean, value?: string, name?: string, event?: SyntheticEvent): void;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Switch`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<SwitchProps> = {
     position: SwitchPosition.left,

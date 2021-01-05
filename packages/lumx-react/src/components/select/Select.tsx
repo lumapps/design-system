@@ -20,7 +20,7 @@ import { CoreSelectProps, SelectVariant } from './constants';
 
 /** Defines the props of the component. */
 export interface SelectProps extends CoreSelectProps {
-    /** The selected value. */
+    /** Selected value. */
     value: string;
 }
 
@@ -41,8 +41,6 @@ const stopPropagation = (evt: Event) => evt.stopPropagation();
 
 /**
  * Select component.
- *
- * @return The component.
  */
 const SelectField: React.FC<SelectProps> = ({
     anchorRef,

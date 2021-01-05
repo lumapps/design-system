@@ -15,10 +15,6 @@ const CLASSNAME = UserBlock.className as string;
  */
 interface Setup extends CommonSetup {
     props: Partial<UserBlockProps>;
-
-    /**
-     * The <div> element wrapper.
-     */
     wrapper: Wrapper;
 }
 

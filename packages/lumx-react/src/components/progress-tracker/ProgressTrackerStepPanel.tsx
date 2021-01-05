@@ -9,24 +9,24 @@ import React, { forwardRef } from 'react';
  * Defines the props of the component.
  */
 export interface ProgressTrackerStepPanelProps extends GenericProps {
-    /** The step panel HTML id. */
+    /** Native id property. */
     id?: string;
     /** Whether the step is active or not. */
     isActive?: boolean;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}ProgressTrackerStepPanel`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = `${CSS_PREFIX}-step-panel`;
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<ProgressTrackerStepPanelProps> = {};
 

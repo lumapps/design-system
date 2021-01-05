@@ -9,19 +9,19 @@ import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/
  * Defines the props of the component.
  */
 export interface SkeletonCircleProps extends GenericProps {
-    /** The size variant of the component. */
+    /** Size variant. */
     size: GlobalSize;
     /** Theme. */
     theme?: Theme;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}SkeletonCircle`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 

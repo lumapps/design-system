@@ -8,9 +8,9 @@ import { DesignToken } from './DesignToken';
 import { DesignTokenGroup } from './DesignTokenGroup';
 
 interface Props {
-    /** The color name (blue, red, dark, etc.). */
+    /** Color name (blue, red, dark, etc.). */
     color: string;
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    /** Theme adapting the component to light or dark background. */
     theme: Theme;
 }
 

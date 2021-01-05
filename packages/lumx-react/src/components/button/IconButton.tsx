@@ -9,32 +9,29 @@ import { Comp, getRootClassName } from '@lumx/react/utils';
  * Defines the props of the component.
  */
 export interface IconButtonProps extends BaseButtonProps {
-    /**
-     * The icon name to use as the button label.
-     * @see {@link IconProps#icon}
-     */
+    /** Icon (SVG path). */
     icon: string;
     /**
-     * The label of the tooltip. It is required for a11y purpose.
+     * Label text (required for a11y purpose).
      * If you really don't want a tooltip and aria-label, you can give an empty label (this is not recommended).
      */
     label: string;
-    /** The props to pass to the tooltip, minus those already set by the IconButton props. */
+    /** Props to pass to the tooltip (minus those already set by the IconButton props). */
     tooltipProps?: Omit<TooltipProps, 'label'>;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}IconButton`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<IconButtonProps> = {
     emphasis: Emphasis.high,

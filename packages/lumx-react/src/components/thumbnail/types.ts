@@ -24,12 +24,12 @@ declare module 'react' {
 export const ThumbnailAspectRatio: Record<string, AspectRatio> = { ...AspectRatio };
 
 /**
- *  Authorized size values.
+ *  Thumbnail sizes.
  */
 export type ThumbnailSize = Size.xxs | Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
 
 /**
- * Authorized variants.
+ * Thumbnail variants.
  */
 export enum ThumbnailVariant {
     squared = 'squared',

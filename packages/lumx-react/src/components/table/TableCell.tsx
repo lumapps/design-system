@@ -11,7 +11,7 @@ import { mdiArrowDown, mdiArrowUp } from '@lumx/icons';
 import isFunction from 'lodash/isFunction';
 
 /**
- * The authorized values for the `sortOrder` prop.
+ * Table head cell sort order.
  */
 export enum ThOrder {
     asc = 'asc',
@@ -19,7 +19,8 @@ export enum ThOrder {
 }
 
 /**
- * The authorized values for the `scope` prop.
+ * Table cell scope.
+ * @deprecated
  */
 export enum ThScope {
     col = 'col',
@@ -27,7 +28,7 @@ export enum ThScope {
 }
 
 /**
- * The authorized variants.
+ * Table cell variants.
  */
 export enum TableCellVariant {
     body = 'body',
@@ -38,32 +39,35 @@ export enum TableCellVariant {
  * Defines the props of the component.
  */
 export interface TableCellProps extends GenericProps {
-    /** The name of the icon (thead only). */
+    /** Icon (SVG path).(thead only). */
     icon?: string;
     /** Whether the column is sortable or not (thead only). */
     isSortable?: boolean;
-    /** The scope of the thead. */
+    /**
+     * Scope of the thead.
+     * @deprecated
+     */
     scope?: ThScope;
-    /** The initial sort order (sortable thead only). */
+    /** Sort order displayed as icon (sortable thead only). */
     sortOrder?: ThOrder;
-    /** The component variant. */
+    /** Variant. */
     variant?: TableCellVariant;
-    /** The function called on click on header. */
+    /** On header cell click callback. */
     onHeaderClick?(): void;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}TableCell`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME, true);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<TableCellProps> = {
     variant: TableCellVariant.body,

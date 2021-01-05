@@ -30,33 +30,33 @@ export interface ExpansionPanelProps extends GenericProps {
     hasHeaderDivider?: boolean;
     /** Whether the component is open or not. */
     isOpen?: boolean;
-    /** The label text used when no `<header>` was provided in the children. */
+    /** Label text (overwritten if a `<header>` is provided in the children). */
     label?: string;
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    /** Theme adapting the component to light or dark background. */
     theme?: Theme;
-    /** The function called on open. */
+    /** On open callback. */
     onOpen?: Callback;
-    /** The function called on close. */
+    /** On close callback. */
     onClose?: Callback;
-    /** The props to pass to the toggle button, minus those already set by the ExpansionPanel props. */
+    /** Props to pass to the toggle button (minus those already set by the ExpansionPanel props). */
     toggleButtonProps: Pick<IconButtonProps, 'label'> &
         Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis' | 'color'>;
-    /** The function called on open or close. */
+    /** On toggle open or close callback. */
     onToggleOpen?(shouldOpen: boolean): void;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}ExpansionPanel`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<ExpansionPanelProps> = {
     theme: Theme.light,

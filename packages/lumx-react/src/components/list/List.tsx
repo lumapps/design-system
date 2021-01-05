@@ -14,19 +14,19 @@ import { useInteractiveList } from './useInteractiveList';
  * Defines the props of the component.
  */
 export interface ListProps extends GenericProps {
-    /** The children elements. Should be ListItem, ListSubheader or ListDivider. */
+    /** List content (should be ListItem, ListSubheader or ListDivider). */
     children: ReactNode;
     /**
      * Whether the list items are clickable.
      * @deprecated not needed anymore.
      */
     isClickable?: boolean;
-    /** The item padding size. */
+    /** Item padding size. */
     itemPadding?: Size.big | Size.huge;
     /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
     /**
-     * Callback used to retrieved the select entry.
+     * On list item selected callback.
      *
      * @param key   React key of the selected item.
      * @param index Index of the selected item among the sibling items.
@@ -36,12 +36,12 @@ export interface ListProps extends GenericProps {
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}List`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 

@@ -21,37 +21,34 @@ import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/
  * Defines the props of the component.
  */
 export interface LinkPreviewProps extends GenericProps {
-    /** The text of the link. Can be either a string, or sanitized html. */
+    /** Description (either a string, or sanitized html). */
     description?: string | { __html: string };
-    /**
-     * The url of the link.
-     * @see {@link LinkProps#image}
-     */
+    /** Link URL. */
     link: string;
-    /** The props to pass to the link, minus those already set by the LinkPreview props. */
+    /** Props to pass to the link (minus those already set by the LinkPreview props). */
     linkProps?: Omit<LinkProps, 'color' | 'colorVariant' | 'href' | 'target'>;
-    /** The size variant of the component. */
+    /** Size variant. */
     size?: Size.regular | Size.big;
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    /** Theme adapting the component to light or dark background. */
     theme?: Theme;
-    /** The thumbnail image for the link preview. */
+    /** Thumbnail for the link preview. */
     thumbnailProps?: ThumbnailProps;
-    /** The title of the link. */
+    /** Title. */
     title?: string;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}LinkPreview`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<LinkPreviewProps> = {
     size: Size.regular,

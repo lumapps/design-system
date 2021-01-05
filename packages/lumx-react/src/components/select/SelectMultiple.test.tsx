@@ -25,8 +25,6 @@ type SetupProps = Partial<SelectMultipleProps>;
 /** Defines what the `setup` function will return. */
 interface Setup extends CommonSetup {
     props: SetupProps;
-
-    /** The <div> element that wraps multiSelect button and children elements. */
     wrapper: Wrapper;
     input: Wrapper;
     dropdown: Wrapper;

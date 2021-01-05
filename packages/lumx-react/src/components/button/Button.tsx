@@ -9,7 +9,7 @@ import { Comp, getBasicClass, getRootClassName } from '@lumx/react/utils';
 import { BaseButtonProps, ButtonRoot } from './ButtonRoot';
 
 /**
- * The authorized values for the `emphasis` prop.
+ * Button emphasis definition.
  * @deprecated Use Emphasis instead.
  */
 export const ButtonEmphasis = Emphasis;
@@ -18,32 +18,26 @@ export const ButtonEmphasis = Emphasis;
  * Defines the props of the component.
  */
 export interface ButtonProps extends BaseButtonProps {
-    /** The children elements. */
+    /** Button content. */
     children?: ReactNode;
-    /**
-     * The icon name to place at the left of the button label.
-     * @see {@link IconProps#icon}
-     */
+    /** Left icon (SVG path). */
     leftIcon?: string;
-    /**
-     * The icon name to place at the right of the button label.
-     * @see {@link IconProps#icon}
-     */
+    /** Right icon (SVG path). */
     rightIcon?: string;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Button`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<ButtonProps> = {
     emphasis: Emphasis.high,

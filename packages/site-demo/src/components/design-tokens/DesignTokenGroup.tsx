@@ -4,7 +4,7 @@ import React, { ReactNode } from 'react';
 import { Theme } from '@lumx/react';
 
 interface DesignTokenGroupProps {
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    /** Theme adapting the component to light or dark background. */
     theme?: Theme;
     /** The design tokens. */
     children?: ReactNode;

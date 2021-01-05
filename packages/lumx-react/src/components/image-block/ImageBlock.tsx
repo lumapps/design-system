@@ -11,7 +11,7 @@ import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/
 import { ThumbnailProps } from '../thumbnail/Thumbnail';
 
 /**
- * Authorized variants.
+ * Image block variants.
  */
 export enum ImageBlockCaptionPosition {
     below = 'below',
@@ -19,7 +19,7 @@ export enum ImageBlockCaptionPosition {
 }
 
 /**
- *  Authorized size values.
+ *  Image block sizes.
  */
 export type ImageBlockSize = Size.xl | Size.xxl;
 
@@ -27,49 +27,46 @@ export type ImageBlockSize = Size.xl | Size.xxl;
  * Defines the props of the component.
  */
 export interface ImageBlockProps extends GenericProps {
-    /** The action elements. */
+    /** Action toolbar content. */
     actions?: ReactNode;
-    /** The thumbnail alignment. */
+    /** Alignment. */
     align?: HorizontalAlignment;
-    /** The thumbnail image alternative text. */
+    /** Image alternative text. */
     alt: string;
-    /** The position of the caption. */
+    /** Caption position. */
     captionPosition?: ImageBlockCaptionPosition;
-    /** The style to apply to the caption section. */
+    /** Caption custom CSS style. */
     captionStyle?: CSSProperties;
-    /** The image description. Can be either a string, or sanitized html. */
+    /** Image description. Can be either a string, or sanitized html. */
     description?: string | { __html: string };
     /** Whether the image has to fill its container height or not. */
     fillHeight?: boolean;
-    /**
-     * The url of the image we want to display.
-     * @see {@link ThumbnailProps#image}
-     */
+    /** Image URL. */
     image: string;
-    /** The size variant of the component. */
+    /** Size variant. */
     size?: ImageBlockSize;
-    /** The tags elements. */
+    /** Tag content. */
     tags?: ReactNode;
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    /** Theme adapting the component to light or dark background. */
     theme?: Theme;
-    /** The props to pass to the thumbnail, minus those already set by the ImageBlock props. */
+    /** Props to pass to the thumbnail (minus those already set by the ImageBlock props). */
     thumbnailProps?: Omit<ThumbnailProps, 'image' | 'size' | 'theme' | 'align' | 'fillHeight'>;
-    /** The image title to display in the caption. */
+    /** Image title to display in the caption. */
     title?: string;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}ImageBlock`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<ImageBlockProps> = {
     captionPosition: ImageBlockCaptionPosition.below,

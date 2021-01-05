@@ -10,7 +10,7 @@ import isFunction from 'lodash/isFunction';
 import React, { forwardRef, MouseEventHandler, ReactNode } from 'react';
 
 /**
- * Authorized size values.
+ * Chip sizes.
  */
 type ChipSize = Size.s | Size.m;
 
@@ -22,7 +22,7 @@ export interface ChipProps extends GenericProps {
     after?: ReactNode;
     /** A component to be rendered before the content. */
     before?: ReactNode;
-    /** The color variant of the component. */
+    /** Color variant. */
     color?: Color;
     /** Whether the component is clickable or not. */
     isClickable?: boolean;
@@ -32,30 +32,30 @@ export interface ChipProps extends GenericProps {
     isHighlighted?: boolean;
     /** Whether the component is selected or not. */
     isSelected?: boolean;
-    /** The size variant of the component. */
+    /** Size variant. */
     size?: ChipSize;
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    /** Theme adapting the component to light or dark background. */
     theme?: Theme;
     /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
-    /** The function called when the "after" element is clicked. */
+    /** On "after" element clicked callback. */
     onAfterClick?: MouseEventHandler;
-    /** The function called when the "before" element is clicked. */
+    /** On "before" element clicked callback. */
     onBeforeClick?: MouseEventHandler;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Chip`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<ChipProps> = {
     size: Size.m,

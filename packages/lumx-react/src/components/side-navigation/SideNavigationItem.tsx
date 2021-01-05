@@ -23,43 +23,43 @@ import { renderLink } from '@lumx/react/utils/renderLink';
  * Defines the props of the component.
  */
 export interface SideNavigationItemProps extends GenericProps {
-    /** The children elements. Should use SideNavigationItem. */
+    /** SideNavigationItem elements. */
     children?: ReactNode;
-    /** The emphasis variant of the component. */
+    /** Emphasis variant. */
     emphasis?: Emphasis;
-    /** The label of the menu item. */
+    /** Label content. */
     label: string | ReactNode;
-    /** The icon the menu item (SVG path code). */
+    /** Icon (SVG path). */
     icon?: string;
     /** Whether the component is open or not. */
     isOpen?: boolean;
     /** Whether the component is selected or not. */
     isSelected?: boolean;
-    /** Sets a custom react component for the link (can be used to inject react router Link). */
+    /** Custom react component for the link (can be used to inject react router Link). */
     linkAs?: 'a' | any;
-    /** The props to pass to the link, minus those already set by the SideNavigationItem props. */
+    /** Props to pass to the link (minus those already set by the SideNavigationItem props). */
     linkProps?: React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
-    /** The props to pass to the toggle button, minus those already set by the SideNavigationItem props. */
+    /** Props to pass to the toggle button (minus those already set by the SideNavigationItem props). */
     toggleButtonProps: Pick<IconButtonProps, 'label'> &
         Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis' | 'color' | 'size'>;
-    /** The function called on click on the action button. */
+    /** On action button click callback. */
     onActionClick?(evt: React.MouseEvent): void;
-    /** The function called on click on the component. */
+    /** On click callback. */
     onClick?(evt: React.MouseEvent): void;
 }
 
 /**
- * The display name of the component.
+ * Component display name.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}SideNavigationItem`;
 
 /**
- * The default class name and classes prefix for this component.
+ * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
+ * Component default props.
  */
 const DEFAULT_PROPS: Partial<SideNavigationItemProps> = {
     emphasis: Emphasis.high,
