@@ -30,11 +30,7 @@ export declare const mdiBible: string;
 
 export declare const mdiAudiobook: string;
 
-export declare const mdiBookOpenVariant: string;
-
 export declare const mdiSquareInc: string;
-
-export declare const mdiBowl: string;
 
 export declare const mdiCalendarRepeat: string;
 
@@ -75,8 +71,6 @@ export declare const mdiSettingsTransfer: string;
 export declare const mdiSettingsTransferOutline: string;
 
 export declare const mdiCoinOutline: string;
-
-export declare const mdiDatabaseRefresh: string;
 
 export declare const mdiFileSettingsVariant: string;
 
@@ -192,15 +186,11 @@ export declare const mdiTwitterCircle: string;
 
 export declare const mdiLibraryVideo: string;
 
-export declare const mdiPot: string;
-
 export declare const mdiCiscoWebex: string;
 
 export declare const mdiNetworkRouter: string;
 
 export declare const mdiSailing: string;
-
-export declare const mdiCurrentAc: string;
 
 export declare const mdiPlaystation: string;
 
@@ -208,11 +198,7 @@ export declare const mdiSortAlphabetical: string;
 
 export declare const mdiSortNumeric: string;
 
-export declare const mdiStarHalf: string;
-
-export declare const mdiSticker: string;
-
-export declare const mdiStorefront: string;
+export declare const mdiLinkedinBox: string;
 
 export declare const mdiFileDocumentBox: string;
 
@@ -242,10 +228,6 @@ export declare const mdiFileDocumentBoxSearch: string;
 
 export declare const mdiFileDocumentBoxSearchOutline: string;
 
-export declare const mdiTimerOff: string;
-
-export declare const mdiTimer: string;
-
 export declare const mdiTowing: string;
 
 export declare const mdiCamcorderBox: string;
@@ -257,6 +239,3 @@ export declare const mdiWallSconceVariant: string;
 export declare const mdiHackernews: string;
 
 export declare const mdiYoutubeCreatorStudio: string;
-
-export declare const mdiLinkedinBox: string;
-

@@ -62,16 +62,8 @@
     @extend .mdi-book-music;
 }
 
-.mdi-book-open-variant {
-    @extend .mdi-book-open-blank-variant;
-}
-
 .mdi-square-inc {
     @extend .mdi-book-remove-multiple-outline;
-}
-
-.mdi-bowl {
-    @extend .mdi-bowl-mix;
 }
 
 .mdi-calendar-repeat {
@@ -152,10 +144,6 @@
 
 .mdi-coin-outline {
     @extend .mdi-currency-usd-circle-outline;
-}
-
-.mdi-database-refresh {
-    @extend .mdi-database-sync;
 }
 
 .mdi-file-settings-variant {
@@ -380,10 +368,6 @@
     @extend .mdi-play-box-multiple;
 }
 
-.mdi-pot {
-    @extend .mdi-pot-steam;
-}
-
 .mdi-cisco-webex {
     @extend .mdi-roller-skate-off;
 }
@@ -394,10 +378,6 @@
 
 .mdi-sailing {
     @extend .mdi-sail-boat;
-}
-
-.mdi-current-ac {
-    @extend .mdi-sine-wave;
 }
 
 .mdi-playstation {
@@ -412,16 +392,8 @@
     @extend .mdi-sort-numeric-variant;
 }
 
-.mdi-star-half {
-    @extend .mdi-star-half-full;
-}
-
-.mdi-sticker {
-    @extend .mdi-sticker-circle-outline;
-}
-
-.mdi-storefront {
-    @extend .mdi-storefront-outline;
+.mdi-linkedin-box {
+    @extend .mdi-linkedin;
 }
 
 .mdi-file-document-box {
@@ -480,14 +452,6 @@
     @extend .mdi-text-box-search-outline;
 }
 
-.mdi-timer-off {
-    @extend .mdi-timer-off-outline;
-}
-
-.mdi-timer {
-    @extend .mdi-timer-outline;
-}
-
 .mdi-towing {
     @extend .mdi-tow-truck;
 }
@@ -511,8 +475,3 @@
 .mdi-youtube-creator-studio {
     @extend .mdi-youtube-studio;
 }
-
-.mdi-linkedin-box {
-    @extend .mdi-linkedin;
-}
-
