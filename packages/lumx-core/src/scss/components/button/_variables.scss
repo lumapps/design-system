@@ -1,11 +1,14 @@
 $lumx-button-text-sizes: (
     'm': 14px,
-    's': 12px,
+    's': 10px,
 );
 
-$lumx-button-text-weight: 700;
+$lumx-button-text-weight: 500;
+$lumx-button-text-transform: uppercase;
 
 $lumx-button-icon-sizes: (
     'm': map-get($lumx-sizes, lumx-base-const('size', 'XS')),
     's': map-get($lumx-sizes, lumx-base-const('size', 'XXS')),
 );
+
+$lumx-button-variant-icon-border-radius: 50%;

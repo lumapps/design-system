@@ -1,5 +1,4 @@
-$lumx-typography-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Fira Sans',
-    'Droid Sans', 'Helvetica Neue', sans-serif;
+$lumx-typography-font-family: 'Roboto', sans-serif;
 
 $lumx-typography-default-font-size: 16px;
 $lumx-typography-default-line-height: 24px;
@@ -17,15 +16,15 @@ $lumx-typography-font-size: (
 );
 
 $lumx-typography-font-weight: (
-    'display1': 700,
-    'headline': 700,
-    'title': 700,
-    'subtitle2': 700,
-    'subtitle1': 700,
+    'display1': 500,
+    'headline': 500,
+    'title': 500,
+    'subtitle2': 500,
+    'subtitle1': 500,
     'body2': 400,
     'body1': 400,
     'caption': 400,
-    'overline': 700,
+    'overline': 500,
 );
 
 $lumx-typography-line-height: (
