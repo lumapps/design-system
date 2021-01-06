@@ -13,7 +13,7 @@ export const Sizes = () => {
             <UserBlock
                 name="Emmitt O. Lum"
                 fields={['Creative developer', 'Denpasar']}
-                avatar={avatarImageKnob()}
+                avatarProps={{ image: avatarImageKnob(), alt: 'Avatar' }}
                 size={size}
                 onMouseEnter={logAction('Mouse entered')}
                 onMouseLeave={logAction('Mouse left')}
@@ -30,8 +30,9 @@ export const WithBadge = () => {
             <UserBlock
                 name="Emmitt O. Lum"
                 fields={['Creative developer', 'Denpasar']}
-                avatar={avatarImageKnob()}
                 avatarProps={{
+                    image: avatarImageKnob(),
+                    alt: 'Avatar',
                     badge: (
                         <Badge color={ColorPalette.blue}>
                             <Icon icon={mdiStar} />
@@ -56,8 +57,9 @@ export const InList = () => {
                     <UserBlock
                         name="Emmitt O. Lum"
                         fields={['Creative developer', 'Denpasar']}
-                        avatar={avatarImageKnob('Avatar 1', AVATAR_IMAGES.avatar1)}
                         avatarProps={{
+                            image: avatarImageKnob('Avatar 1', AVATAR_IMAGES.avatar1),
+                            alt: 'Avatar',
                             badge: (
                                 <Badge color={ColorPalette.blue}>
                                     <Icon icon={mdiStar} />
@@ -74,8 +76,9 @@ export const InList = () => {
                     <UserBlock
                         name="Emmitt O. Lum"
                         fields={['Creative developer', 'Denpasar']}
-                        avatar={avatarImageKnob('Avatar 2', AVATAR_IMAGES.avatar2)}
                         avatarProps={{
+                            image: avatarImageKnob('Avatar 2', AVATAR_IMAGES.avatar2),
+                            alt: 'Avatar',
                             badge: (
                                 <Badge color={ColorPalette.blue}>
                                     <Icon icon={mdiStar} />
@@ -92,8 +95,9 @@ export const InList = () => {
                     <UserBlock
                         name="Emmitt O. Lum"
                         fields={['Creative developer', 'Denpasar']}
-                        avatar={avatarImageKnob('Avatar 3', AVATAR_IMAGES.avatar3)}
                         avatarProps={{
+                            image: avatarImageKnob('Avatar 3', AVATAR_IMAGES.avatar3),
+                            alt: 'Avatar',
                             badge: (
                                 <Badge color={ColorPalette.blue}>
                                     <Icon icon={mdiStar} />

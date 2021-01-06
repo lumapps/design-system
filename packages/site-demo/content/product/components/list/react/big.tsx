@@ -64,7 +64,7 @@ export const App = () => (
 
         <ListItem
             size={Size.big}
-            before={<Avatar image="/demo-assets/persona.png" size={Size.m} />}
+            before={<Avatar image="/demo-assets/persona.png" alt="Avatar" size={Size.m} />}
             after={<Button emphasis={Emphasis.low}>Button</Button>}
         >
             <div>

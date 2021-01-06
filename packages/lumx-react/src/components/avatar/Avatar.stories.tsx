@@ -20,6 +20,7 @@ export const AvatarSizes = () =>
             key={size}
             className="lumx-spacing-margin-bottom"
             image={avatarImageKnob('Avatar', AVATAR_IMAGES.avatar1)}
+            alt={size}
             size={size}
         />
     ));
@@ -33,6 +34,7 @@ export const AvatarWithActions = () =>
         <Avatar
             key={size}
             image={avatarImageKnob('Avatar', AVATAR_IMAGES.avatar2)}
+            alt={size}
             size={size}
             actions={
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -79,6 +81,7 @@ export const AvatarWithBadge = () =>
             key={size}
             className="lumx-spacing-margin-bottom"
             image={avatarImageKnob('Avatar', AVATAR_IMAGES.avatar3)}
+            alt={size}
             badge={
                 <Badge color={select('Colors', ColorPalette, ColorPalette.blue)}>
                     <Icon icon={mdiStar} />

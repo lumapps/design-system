@@ -11,6 +11,7 @@ Array [
       className="lumx-user-block__avatar"
     >
       <Avatar
+        alt="Avatar"
         badge={
           <Badge
             color="blue"
@@ -64,6 +65,7 @@ Array [
       className="lumx-user-block__avatar"
     >
       <Avatar
+        alt="Avatar"
         badge={
           <Badge
             color="blue"
@@ -117,6 +119,7 @@ Array [
       className="lumx-user-block__avatar"
     >
       <Avatar
+        alt="Avatar"
         badge={
           <Badge
             color="blue"
@@ -175,6 +178,7 @@ Array [
       className="lumx-user-block__avatar"
     >
       <Avatar
+        alt="Avatar"
         image="avatar1.jpg"
         onClick={[Function]}
         size="s"
@@ -203,6 +207,7 @@ Array [
       className="lumx-user-block__avatar"
     >
       <Avatar
+        alt="Avatar"
         image="avatar1.jpg"
         onClick={[Function]}
         size="m"
@@ -247,6 +252,7 @@ Array [
       className="lumx-user-block__avatar"
     >
       <Avatar
+        alt="Avatar"
         image="avatar1.jpg"
         onClick={[Function]}
         size="l"
@@ -295,6 +301,7 @@ exports[`<UserBlock> Snapshots and structure should render story WithBadge 1`] =
     className="lumx-user-block__avatar"
   >
     <Avatar
+      alt="Avatar"
       badge={
         <Badge
           color="blue"

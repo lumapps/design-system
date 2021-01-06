@@ -31,7 +31,7 @@ export const App = () => (
             Single-line item
         </ListItem>
 
-        <ListItem size={Size.tiny} before={<Avatar image="/demo-assets/persona.png" size={Size.xs} />}>
+        <ListItem size={Size.tiny} before={<Avatar image="/demo-assets/persona.png" alt="Avatar" size={Size.xs} />}>
             Single-line item
         </ListItem>
     </List>

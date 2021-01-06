@@ -9,6 +9,7 @@ export const App = () => (
 
         <Avatar
             image="/demo-assets/persona.png"
+            alt="Avatar with label"
             size={Size.m}
             badge={
                 <Badge color={ColorPalette.red}>

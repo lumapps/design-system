@@ -23,10 +23,8 @@ export enum CommentBlockVariant {
 export interface CommentBlockProps extends GenericProps {
     /** Action toolbar content. */
     actions?: ReactNode;
-    /** Avatar image URL. */
-    avatar: string;
-    /** Props to pass to the avatar (minus those already set by the CommentBlock props). */
-    avatarProps?: Omit<AvatarProps, 'image' | 'size' | 'tabIndex' | 'onClick' | 'onKeyPress'>;
+    /** Props to pass to the avatar. */
+    avatarProps: AvatarProps;
     /** Comment block replies. */
     children?: ReactNode;
     /** Comment date. */
@@ -83,7 +81,6 @@ const DEFAULT_PROPS: Partial<CommentBlockProps> = {
 export const CommentBlock: Comp<CommentBlockProps, HTMLDivElement> = forwardRef((props, ref) => {
     const {
         actions,
-        avatar,
         avatarProps,
         children,
         date,
@@ -124,7 +121,6 @@ export const CommentBlock: Comp<CommentBlockProps, HTMLDivElement> = forwardRef(
                 <div className={`${CLASSNAME}__avatar`}>
                     <Avatar
                         {...avatarProps}
-                        image={avatar}
                         size={Size.m}
                         tabIndex={onClick ? 0 : -1}
                         onClick={onClick}
