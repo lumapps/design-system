@@ -97,7 +97,7 @@ export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props
     /**
      * Number of slides when using groupBy prop.
      */
-    const slidesCount = Math.ceil(itemsCount / (groupBy as number));
+    const slidesCount = Math.ceil(itemsCount / Math.min(groupBy as number, itemsCount));
 
     /**
      * Inline style of wrapper element.
