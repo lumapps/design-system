@@ -3,7 +3,7 @@ import React, { Children, forwardRef, KeyboardEvent, KeyboardEventHandler, React
 import classNames from 'classnames';
 
 import { Avatar, Size, Theme } from '@lumx/react';
-import { COMPONENT_PREFIX, ENTER_KEY_CODE } from '@lumx/react/constants';
+import { ENTER_KEY_CODE } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses, ValueOf } from '@lumx/react/utils';
 
 import isFunction from 'lodash/isFunction';
@@ -57,7 +57,7 @@ export interface CommentBlockProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}CommentBlock`;
+const COMPONENT_NAME = 'CommentBlock';
 
 /**
  * Component default class name and class prefix.

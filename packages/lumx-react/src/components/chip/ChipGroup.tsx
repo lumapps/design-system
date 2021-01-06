@@ -3,8 +3,6 @@ import React, { forwardRef, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
-
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { useChipGroupNavigation } from '@lumx/react/hooks/useChipGroupNavigation';
@@ -29,7 +27,7 @@ const DEFAULT_PROPS: Partial<ChipGroupProps> = {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}ChipGroup`;
+const COMPONENT_NAME = 'ChipGroup';
 
 /**
  * Component default class name and class prefix.

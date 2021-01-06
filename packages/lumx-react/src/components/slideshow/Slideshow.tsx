@@ -5,7 +5,6 @@ import classNames from 'classnames';
 import { SlideshowControls, SlideshowControlsProps, Theme } from '@lumx/react';
 
 import { AUTOPLAY_DEFAULT_INTERVAL, FULL_WIDTH_PERCENT } from '@lumx/react/components/slideshow/constants';
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { useInterval } from '@lumx/react/hooks/useInterval';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
@@ -45,7 +44,7 @@ export interface SlideshowProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}Slideshow`;
+const COMPONENT_NAME = 'Slideshow';
 
 /**
  * Component default class name and class prefix.

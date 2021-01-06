@@ -12,8 +12,6 @@ import classNames from 'classnames';
 
 import { AspectRatio, HorizontalAlignment, Icon, Size, Theme } from '@lumx/react';
 
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
-
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { mdiImageBrokenVariant } from '@lumx/icons';
@@ -64,7 +62,7 @@ export interface ThumbnailProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}Thumbnail`;
+const COMPONENT_NAME = 'Thumbnail';
 
 /**
  * Component default class name and class prefix.

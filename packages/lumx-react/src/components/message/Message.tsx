@@ -1,6 +1,5 @@
 import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiInformation } from '@lumx/icons';
 import { ColorPalette, Icon, Kind, Size } from '@lumx/react';
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
 import React, { forwardRef, ReactNode } from 'react';
@@ -20,7 +19,7 @@ export interface MessageProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}Message`;
+const COMPONENT_NAME = 'Message';
 
 /**
  * Component default class name and class prefix.

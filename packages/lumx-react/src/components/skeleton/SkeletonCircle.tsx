@@ -2,7 +2,6 @@ import classNames from 'classnames';
 import React, { forwardRef } from 'react';
 
 import { GlobalSize, Theme } from '@lumx/react';
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
@@ -18,7 +17,7 @@ export interface SkeletonCircleProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}SkeletonCircle`;
+const COMPONENT_NAME = 'SkeletonCircle';
 
 /**
  * Component default class name and class prefix.

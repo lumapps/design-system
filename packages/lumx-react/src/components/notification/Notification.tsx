@@ -7,7 +7,7 @@ import isFunction from 'lodash/isFunction';
 
 import { Button, Emphasis, Icon, Kind, Size, Theme } from '@lumx/react';
 
-import { COMPONENT_PREFIX, DOCUMENT, NOTIFICATION_TRANSITION_DURATION } from '@lumx/react/constants';
+import { DOCUMENT, NOTIFICATION_TRANSITION_DURATION } from '@lumx/react/constants';
 import { NOTIFICATION_CONFIGURATION } from '@lumx/react/components/notification/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
@@ -38,7 +38,7 @@ export interface NotificationProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}Notification`;
+const COMPONENT_NAME = 'Notification';
 
 /**
  * Component default class name and class prefix.

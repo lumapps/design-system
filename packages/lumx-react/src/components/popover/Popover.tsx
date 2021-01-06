@@ -5,7 +5,7 @@ import { usePopper } from 'react-popper';
 
 import classNames from 'classnames';
 
-import { COMPONENT_PREFIX, DOCUMENT, WINDOW } from '@lumx/react/constants';
+import { DOCUMENT, WINDOW } from '@lumx/react/constants';
 import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
@@ -96,7 +96,7 @@ export interface PopoverProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}Popover`;
+const COMPONENT_NAME = 'Popover';
 
 /**
  * Component default class name and class prefix.

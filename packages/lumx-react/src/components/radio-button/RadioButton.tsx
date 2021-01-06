@@ -4,7 +4,6 @@ import classNames from 'classnames';
 
 import { InputHelper, InputLabel, Theme } from '@lumx/react';
 
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import uniqueId from 'lodash/uniqueId';
@@ -36,7 +35,7 @@ export interface RadioButtonProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}RadioButton`;
+const COMPONENT_NAME = 'RadioButton';
 
 /**
  * Component default class name and class prefix.

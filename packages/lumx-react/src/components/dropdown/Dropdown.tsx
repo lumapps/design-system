@@ -4,7 +4,6 @@ import classNames from 'classnames';
 
 import { List, ListProps } from '@lumx/react/components/list/List';
 import { Offset, Placement, Popover } from '@lumx/react/components/popover/Popover';
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { useInfiniteScroll } from '@lumx/react/hooks/useInfiniteScroll';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses, isComponent } from '@lumx/react/utils';
 
@@ -76,7 +75,7 @@ export interface DropdownProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}Dropdown`;
+const COMPONENT_NAME = 'Dropdown';
 
 /**
  * Component default class name and class prefix.

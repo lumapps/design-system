@@ -3,8 +3,6 @@ import React, { forwardRef, ReactNode, Ref, SyntheticEvent, useMemo } from 'reac
 import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
 
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
-
 import { ListProps, Size } from '@lumx/react';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
 import { renderLink } from '@lumx/react/utils/renderLink';
@@ -42,7 +40,7 @@ export interface ListItemProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}ListItem`;
+const COMPONENT_NAME = 'ListItem';
 
 /**
  * Component default class name and class prefix.

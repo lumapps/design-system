@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom';
 
 import { mdiClose } from '@lumx/icons';
 import { ColorPalette, Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
-import { COMPONENT_PREFIX, DOCUMENT } from '@lumx/react/constants';
+import { DOCUMENT } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
@@ -41,7 +41,7 @@ export interface LightboxProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}Lightbox`;
+const COMPONENT_NAME = 'Lightbox';
 
 /**
  * Component default class name and class prefix.

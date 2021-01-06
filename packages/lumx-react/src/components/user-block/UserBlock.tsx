@@ -4,8 +4,6 @@ import classNames from 'classnames';
 
 import { Avatar, Orientation, Size, Theme } from '@lumx/react';
 
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
-
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { AvatarProps } from '../avatar/Avatar';
 
@@ -45,7 +43,7 @@ export interface UserBlockProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}UserBlock`;
+const COMPONENT_NAME = 'UserBlock';
 
 /**
  * Component default class name and class prefix.

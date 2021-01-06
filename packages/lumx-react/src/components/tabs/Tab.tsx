@@ -1,5 +1,5 @@
 import { Icon, IconProps, Size } from '@lumx/react';
-import { COMPONENT_PREFIX, CSS_PREFIX, ENTER_KEY_CODE } from '@lumx/react/constants';
+import { CSS_PREFIX, ENTER_KEY_CODE } from '@lumx/react/constants';
 import { Comp, GenericProps, handleBasicClasses } from '@lumx/react/utils';
 
 import classNames from 'classnames';
@@ -27,7 +27,7 @@ export interface TabProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}Tab`;
+const COMPONENT_NAME = 'Tab';
 
 /**
  * Component default class name and class prefix.

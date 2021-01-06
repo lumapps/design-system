@@ -2,8 +2,6 @@ import React, { forwardRef } from 'react';
 
 import classNames from 'classnames';
 
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
-
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
@@ -14,7 +12,7 @@ export type ListDividerProps = GenericProps;
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}ListDivider`;
+const COMPONENT_NAME = 'ListDivider';
 
 /**
  * Component default class name and class prefix.

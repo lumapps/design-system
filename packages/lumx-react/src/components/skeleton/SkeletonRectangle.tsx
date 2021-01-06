@@ -2,7 +2,6 @@ import classNames from 'classnames';
 import React, { forwardRef } from 'react';
 
 import { AspectRatio, GlobalSize, Theme } from '@lumx/react';
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses, ValueOf } from '@lumx/react/utils';
 
 /**
@@ -34,7 +33,7 @@ const DEFAULT_PROPS: Partial<SkeletonRectangleProps> = {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}SkeletonRectangle`;
+const COMPONENT_NAME = 'SkeletonRectangle';
 
 /**
  * Component default class name and class prefix.

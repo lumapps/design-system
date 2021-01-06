@@ -2,7 +2,6 @@ import React, { forwardRef } from 'react';
 
 import classNames from 'classnames';
 
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
@@ -13,7 +12,7 @@ export type SlideshowItemProps = GenericProps;
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}SlideshowItem`;
+const COMPONENT_NAME = 'SlideshowItem';
 
 /**
  * Component default class name and class prefix.

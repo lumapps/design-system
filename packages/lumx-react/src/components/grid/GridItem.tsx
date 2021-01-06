@@ -3,7 +3,6 @@ import React, { forwardRef } from 'react';
 import classNames from 'classnames';
 
 import { Alignment } from '@lumx/react';
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 type Columns = '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | '11' | '12';
@@ -23,7 +22,7 @@ export interface GridItemProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}GridItem`;
+const COMPONENT_NAME = 'GridItem';
 
 /**
  * Component default class name and class prefix.

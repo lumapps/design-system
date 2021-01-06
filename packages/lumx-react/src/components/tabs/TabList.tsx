@@ -1,5 +1,5 @@
 import { Alignment, Theme } from '@lumx/react';
-import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
+import { CSS_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, handleBasicClasses } from '@lumx/react/utils';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
@@ -31,7 +31,7 @@ export interface TabListProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}TabList`;
+const COMPONENT_NAME = 'TabList';
 
 /**
  * Component default class name and class prefix.

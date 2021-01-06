@@ -3,7 +3,6 @@ import React, { forwardRef, useCallback } from 'react';
 import classNames from 'classnames';
 
 import { Icon, Size } from '@lumx/react';
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses, onEnterPressed, ValueOf } from '@lumx/react/utils';
 
 import { mdiArrowDown, mdiArrowUp } from '@lumx/icons';
@@ -41,7 +40,7 @@ export interface TableCellProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}TableCell`;
+const COMPONENT_NAME = 'TableCell';
 
 /**
  * Component default class name and class prefix.

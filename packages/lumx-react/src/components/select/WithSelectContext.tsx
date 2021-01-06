@@ -8,7 +8,7 @@ import { Dropdown } from '@lumx/react/components/dropdown/Dropdown';
 import { InputHelper } from '@lumx/react/components/input-helper/InputHelper';
 import { Placement } from '@lumx/react/components/popover/Popover';
 
-import { COMPONENT_PREFIX, DOWN_KEY_CODE, ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
+import { DOWN_KEY_CODE, ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
 
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
@@ -16,7 +16,7 @@ import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 import { CoreSelectProps, SelectVariant } from './constants';
 
 /** The display name of the component. */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}Select`;
+const COMPONENT_NAME = 'Select';
 
 /** The default class name and classes prefix for this component. */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
