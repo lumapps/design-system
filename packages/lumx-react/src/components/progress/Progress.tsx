@@ -5,15 +5,13 @@ import classNames from 'classnames';
 import { Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, ValueOf } from '@lumx/react/utils';
 
 /**
  * Progress variants.
  */
-export enum ProgressVariant {
-    linear = 'linear',
-    circular = 'circular',
-}
+export const ProgressVariant = { linear: 'linear', circular: 'circular' } as const;
+export type ProgressVariant = ValueOf<typeof ProgressVariant>;
 
 /**
  * Defines the props of the component.

@@ -1,113 +1,125 @@
+import { ValueOf } from '@lumx/react/utils';
+
 /**
  * Alignments.
  */
-export enum Alignment {
-    bottom = 'bottom',
-    center = 'center',
-    end = 'end',
-    left = 'left',
-    right = 'right',
-    spaceAround = 'space-around',
-    spaceBetween = 'space-between',
-    start = 'start',
-    top = 'top',
-}
-export type VerticalAlignment = Alignment.top | Alignment.center | Alignment.bottom;
-export type HorizontalAlignment = Alignment.right | Alignment.center | Alignment.left;
+export const Alignment = {
+    bottom: 'bottom',
+    center: 'center',
+    end: 'end',
+    left: 'left',
+    right: 'right',
+    spaceAround: 'space-around',
+    spaceBetween: 'space-between',
+    start: 'start',
+    top: 'top',
+} as const;
+export type Alignment = ValueOf<typeof Alignment>;
+export type VerticalAlignment = Extract<Alignment, 'top' | 'center' | 'bottom'>;
+export type HorizontalAlignment = Extract<Alignment, 'right' | 'center' | 'left'>;
 
 /**
  * See SCSS variable $lumx-color-palette
  */
-export enum ColorPalette {
-    primary = 'primary',
-    secondary = 'secondary',
-    blue = 'blue',
-    dark = 'dark',
-    green = 'green',
-    yellow = 'yellow',
-    red = 'red',
-    light = 'light',
-}
+export const ColorPalette = {
+    primary: 'primary',
+    secondary: 'secondary',
+    blue: 'blue',
+    dark: 'dark',
+    green: 'green',
+    yellow: 'yellow',
+    red: 'red',
+    light: 'light',
+} as const;
+export type ColorPalette = ValueOf<typeof ColorPalette>;
 export type Color = ColorPalette | string;
 
 /**
  * See SCSS variable $lumx-color-variants
  */
-export enum ColorVariant {
-    D1 = 'D1',
-    D2 = 'D2',
-    L1 = 'L1',
-    L2 = 'L2',
-    L3 = 'L3',
-    L4 = 'L4',
-    L5 = 'L5',
-    L6 = 'L6',
-    N = 'N',
-}
+export const ColorVariant = {
+    D1: 'D1',
+    D2: 'D2',
+    L1: 'L1',
+    L2: 'L2',
+    L3: 'L3',
+    L4: 'L4',
+    L5: 'L5',
+    L6: 'L6',
+    N: 'N',
+} as const;
+export type ColorVariant = ValueOf<typeof ColorVariant>;
 
-export enum Theme {
-    light = 'light',
-    dark = 'dark',
-}
+export const Theme = {
+    light: 'light',
+    dark: 'dark',
+} as const;
+export type Theme = ValueOf<typeof Theme>;
 
-export enum Size {
-    xxs = 'xxs',
-    xs = 'xs',
-    s = 's',
-    m = 'm',
-    l = 'l',
-    xl = 'xl',
-    xxl = 'xxl',
-    tiny = 'tiny',
-    regular = 'regular',
-    big = 'big',
-    huge = 'huge',
-}
-export type GlobalSize = Size.xxs | Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
+export const Size = {
+    xxs: 'xxs',
+    xs: 'xs',
+    s: 's',
+    m: 'm',
+    l: 'l',
+    xl: 'xl',
+    xxl: 'xxl',
+    tiny: 'tiny',
+    regular: 'regular',
+    big: 'big',
+    huge: 'huge',
+} as const;
+export type Size = ValueOf<typeof Size>;
+export type GlobalSize = Extract<Size, 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl'>;
 
-export enum Orientation {
-    horizontal = 'horizontal',
-    vertical = 'vertical',
-}
+export const Orientation = {
+    horizontal: 'horizontal',
+    vertical: 'vertical',
+} as const;
+export type Orientation = ValueOf<typeof Orientation>;
 
-export enum Emphasis {
-    low = 'low',
-    medium = 'medium',
-    high = 'high',
-}
+export const Emphasis = {
+    low: 'low',
+    medium: 'medium',
+    high: 'high',
+} as const;
+export type Emphasis = ValueOf<typeof Emphasis>;
 
 /**
  * List of typographies.
  */
-export enum Typography {
-    overline = 'overline',
-    caption = 'caption',
-    body1 = 'body1',
-    body2 = 'body2',
-    subtitle1 = 'subtitle1',
-    subtitle2 = 'subtitle2',
-    title = 'title',
-    headline = 'headline',
-    display1 = 'display1',
-}
+export const Typography = {
+    overline: 'overline',
+    caption: 'caption',
+    body1: 'body1',
+    body2: 'body2',
+    subtitle1: 'subtitle1',
+    subtitle2: 'subtitle2',
+    title: 'title',
+    headline: 'headline',
+    display1: 'display1',
+} as const;
+export type Typography = ValueOf<typeof Typography>;
 
 /**
  * All available aspect ratios.
  */
-export enum AspectRatio {
-    original = 'original',
-    horizontal = 'horizontal',
-    vertical = 'vertical',
-    square = 'square',
-    free = 'free',
-}
+export const AspectRatio = {
+    original: 'original',
+    horizontal: 'horizontal',
+    vertical: 'vertical',
+    square: 'square',
+    free: 'free',
+} as const;
+export type AspectRatio = ValueOf<typeof AspectRatio>;
 
 /**
  * Semantic info about the purpose of the component
  */
-export enum Kind {
-    info = 'info',
-    valid = 'success',
-    warning = 'warning',
-    error = 'error',
-}
+export const Kind = {
+    info: 'info',
+    success: 'success',
+    warning: 'warning',
+    error: 'error',
+} as const;
+export type Kind = ValueOf<typeof Kind>;

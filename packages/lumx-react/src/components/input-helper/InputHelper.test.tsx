@@ -57,9 +57,9 @@ const properties = {
         children: 'Info',
         kind: Kind.info,
     },
-    valid: {
+    success: {
         children: 'Success',
-        kind: Kind.valid,
+        kind: Kind.success,
     },
     warning: {
         children: 'Warning',
@@ -93,8 +93,8 @@ describe(`<${InputHelper.displayName}>`, () => {
             expect(helper).toIncludeText(properties.error.children);
         });
         it('should render valid', () => {
-            const { helper } = setup(properties.valid);
-            expect(helper).toIncludeText(properties.valid.children);
+            const { helper } = setup(properties.success);
+            expect(helper).toIncludeText(properties.success.children);
         });
         it('should render warning', () => {
             const { helper } = setup(properties.warning);

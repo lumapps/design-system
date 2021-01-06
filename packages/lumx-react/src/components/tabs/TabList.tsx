@@ -12,12 +12,6 @@ export enum TabListLayout {
     fixed = 'fixed',
 }
 
-export enum TabListPosition {
-    center = 'center',
-    left = 'left',
-    right = 'right',
-}
-
 /**
  * Defines the props of the component.
  */
@@ -29,7 +23,7 @@ export interface TabListProps extends GenericProps {
     /** Layout of the tabs in the list. */
     layout?: TabListLayout;
     /** Position of the tabs in the list (requires 'clustered' layout). */
-    position?: TabListPosition;
+    position?: Alignment;
     /** Theme adapting the component to light or dark background. */
     theme?: Theme;
 }
@@ -49,7 +43,7 @@ const CLASSNAME = `${CSS_PREFIX}-tabs`;
  */
 const DEFAULT_PROPS: Partial<TabListProps> = {
     layout: TabListLayout.fixed,
-    position: TabListPosition.left,
+    position: Alignment.left,
     theme: Theme.light,
 };
 

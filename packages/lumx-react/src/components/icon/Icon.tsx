@@ -6,7 +6,7 @@ import { Color, ColorPalette, ColorVariant, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
-export type IconSizes = Size.xxs | Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
+export type IconSizes = Extract<Size, 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl'>;
 
 /**
  * Defines the props of the component.

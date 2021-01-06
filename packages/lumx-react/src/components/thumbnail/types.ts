@@ -1,5 +1,6 @@
 import React from 'react';
 import { AspectRatio, Size } from '@lumx/react';
+import { ValueOf } from '@lumx/react/utils';
 
 /**
  *  Focal point using vertical alignment, horizontal alignment or coordinates (from -1 to 1).
@@ -26,12 +27,13 @@ export const ThumbnailAspectRatio: Record<string, AspectRatio> = { ...AspectRati
 /**
  *  Thumbnail sizes.
  */
-export type ThumbnailSize = Size.xxs | Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
+export type ThumbnailSize = Extract<Size, 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl'>;
 
 /**
  * Thumbnail variants.
  */
-export enum ThumbnailVariant {
-    squared = 'squared',
-    rounded = 'rounded',
-}
+export const ThumbnailVariant = {
+    squared: 'squared',
+    rounded: 'rounded',
+} as const;
+export type ThumbnailVariant = ValueOf<typeof ThumbnailVariant>;

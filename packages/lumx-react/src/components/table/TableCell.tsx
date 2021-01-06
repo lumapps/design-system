@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { Icon, Size } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, onEnterPressed, ValueOf } from '@lumx/react/utils';
 
 import { mdiArrowDown, mdiArrowUp } from '@lumx/icons';
 
@@ -13,27 +13,14 @@ import isFunction from 'lodash/isFunction';
 /**
  * Table head cell sort order.
  */
-export enum ThOrder {
-    asc = 'asc',
-    desc = 'desc',
-}
-
-/**
- * Table cell scope.
- * @deprecated
- */
-export enum ThScope {
-    col = 'col',
-    row = 'row',
-}
+export const ThOrder = { asc: 'asc', desc: 'desc' } as const;
+export type ThOrder = ValueOf<typeof ThOrder>;
 
 /**
  * Table cell variants.
  */
-export enum TableCellVariant {
-    body = 'body',
-    head = 'head',
-}
+export const TableCellVariant = { body: 'body', head: 'head' } as const;
+export type TableCellVariant = ValueOf<typeof TableCellVariant>;
 
 /**
  * Defines the props of the component.
@@ -43,11 +30,6 @@ export interface TableCellProps extends GenericProps {
     icon?: string;
     /** Whether the column is sortable or not (thead only). */
     isSortable?: boolean;
-    /**
-     * Scope of the thead.
-     * @deprecated
-     */
-    scope?: ThScope;
     /** Sort order displayed as icon (sortable thead only). */
     sortOrder?: ThOrder;
     /** Variant. */

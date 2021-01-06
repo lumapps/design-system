@@ -1,6 +1,9 @@
 import get from 'lodash/get';
 import { ForwardRefExoticComponent, ReactElement, ReactNode, RefAttributes } from 'react';
 
+/** Get types of the values of a record. */
+export type ValueOf<T extends Record<any, any>> = T[keyof T];
+
 /**
  * Properties of a component to use to determine it's name.
  * In the order of preference.

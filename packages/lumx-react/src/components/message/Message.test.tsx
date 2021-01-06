@@ -1,11 +1,11 @@
 import { CommonSetup, commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
+import { Kind } from '@lumx/react';
 import { getBasicClass } from '@lumx/react/utils';
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 import React, { ReactElement } from 'react';
-import { Message, MessageKind, MessageProps } from './Message';
+import { Message, MessageProps } from './Message';
 
-const DEFAULT_PROPS = Message.defaultProps as any;
 const CLASSNAME = Message.className as string;
 
 /**
@@ -61,28 +61,15 @@ describe(`<${Message.displayName}>`, () => {
     describe('Props', () => {
         // Here are some examples of basic props check.
 
-        it('should use default props', () => {
-            const { wrapper } = setup();
-
-            Object.keys(DEFAULT_PROPS).forEach((prop: string) => {
-                expect(wrapper).toHaveClassName(
-                    getBasicClass({ prefix: CLASSNAME, type: prop, value: DEFAULT_PROPS[prop] }),
-                );
-            });
-        });
-
         it('should use the given `kind`', () => {
             const testedProp = 'kind';
             const modifiedProps: Partial<MessageProps> = {
-                [testedProp]: MessageKind.success,
+                [testedProp]: Kind.success,
             };
 
             const { message } = setup(modifiedProps);
 
             expect(message).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'color', value: `green` }));
-            expect(message).not.toHaveClassName(
-                getBasicClass({ prefix: CLASSNAME, type: testedProp, value: DEFAULT_PROPS[testedProp] }),
-            );
         });
     });
 

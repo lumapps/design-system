@@ -1,4 +1,4 @@
-import { Tab } from '@lumx/react';
+import { Tab, Alignment } from '@lumx/react';
 
 import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
@@ -7,7 +7,7 @@ import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 import React, { ReactElement } from 'react';
 import { build, oneOf } from 'test-data-bot';
-import { TabList, TabListLayout, TabListPosition, TabListProps } from './TabList';
+import { TabList, TabListLayout, TabListProps } from './TabList';
 import { setupTabProviderMocks } from './test.mocks';
 
 const CLASSNAME = TabList.className as string;
@@ -76,7 +76,7 @@ describe(`<${TabList.displayName}>`, () => {
         it('should use the given props', () => {
             const modifiedPropsBuilder: () => SetupProps = build('props').fields({
                 layout: TabListLayout.clustered,
-                position: oneOf(TabListPosition.center, TabListPosition.right),
+                position: oneOf(Alignment.center, Alignment.right),
             });
 
             const modifiedProps: SetupProps = modifiedPropsBuilder();

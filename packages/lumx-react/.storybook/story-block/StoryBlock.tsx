@@ -1,4 +1,4 @@
-import { Switch, SwitchPosition, Theme } from '@lumx/react';
+import { Switch, Alignment, Theme } from '@lumx/react';
 import isChromatic from 'chromatic/isChromatic';
 import React, { ReactElement, useState } from 'react';
 import '@lumx/core/scss/lumx.scss';
@@ -16,7 +16,7 @@ const CLASSNAME = 'story-block';
 export const StoryBlock: React.FC<StoryBlockProps> = (props) => {
     const { children } = props;
 
-    const [theme, setTheme] = useState(Theme.light);
+    const [theme, setTheme] = useState<Theme>(Theme.light);
     const toggleTheme = () => setTheme(theme === Theme.light ? Theme.dark : Theme.light);
 
     if (isChromatic()) {
@@ -35,7 +35,7 @@ export const StoryBlock: React.FC<StoryBlockProps> = (props) => {
                 <Switch
                     isChecked={theme === Theme.dark}
                     onChange={toggleTheme}
-                    position={SwitchPosition.right}
+                    position={Alignment.right}
                     theme={theme}
                 >
                     <span className="lumx-typography-overline lumx-spacing-margin-tiny">Dark Background</span>

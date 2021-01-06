@@ -17,7 +17,7 @@ import { useInjectTooltipRef } from './useInjectTooltipRef';
 import { useTooltipOpen } from './useTooltipOpen';
 
 /** Position of the tooltip relative to the anchor element. */
-export type TooltipPlacement = Placement.TOP | Placement.RIGHT | Placement.BOTTOM | Placement.LEFT;
+export type TooltipPlacement = Extract<Placement, 'top' | 'right' | 'bottom' | 'left'>;
 
 /**
  * Defines the props of the component.

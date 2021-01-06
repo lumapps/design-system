@@ -12,7 +12,7 @@ import { AvatarProps } from '../avatar/Avatar';
 /**
  * User block sizes.
  */
-export type UserBlockSize = Size.s | Size.m | Size.l;
+export type UserBlockSize = Extract<Size, 's' | 'm' | 'l'>;
 
 /**
  * Defines the props of the component.

@@ -9,18 +9,7 @@ import { ListProps, Size } from '@lumx/react';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
 import { renderLink } from '@lumx/react/utils/renderLink';
 
-/**
- *  List item sizes.
- *  @deprecated use Size instead.
- */
-export const ListItemSize = {
-    big: Size.big,
-    huge: Size.huge,
-    regular: Size.regular,
-    tiny: Size.tiny,
-};
-
-export type ListItemSizes = Size.tiny | Size.regular | Size.big | Size.huge;
+export type ListItemSize = Extract<Size, 'tiny' | 'regular' | 'big' | 'huge'>;
 
 /**
  * Defines the props of the component.
@@ -45,7 +34,7 @@ export interface ListItemProps extends GenericProps {
     /** Reference to the link element. */
     linkRef?: Ref<HTMLAnchorElement>;
     /** Size variant. */
-    size?: ListItemSizes;
+    size?: ListItemSize;
     /** On selected callback. */
     onItemSelected?(evt: SyntheticEvent): void;
 }

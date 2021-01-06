@@ -1,5 +1,5 @@
 import { Alignment, HorizontalAlignment } from '@lumx/react/components';
-import React, { forwardRef } from 'react';
+import React, { forwardRef, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -16,7 +16,7 @@ export interface ChipGroupProps extends GenericProps {
     /** Chip horizontal alignment. */
     align?: HorizontalAlignment;
     /** List of Chip. */
-    children: React.ReactNode;
+    children: ReactNode;
 }
 
 /**

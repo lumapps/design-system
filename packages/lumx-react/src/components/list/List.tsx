@@ -22,7 +22,7 @@ export interface ListProps extends GenericProps {
      */
     isClickable?: boolean;
     /** Item padding size. */
-    itemPadding?: Size.big | Size.huge;
+    itemPadding?: Extract<Size, 'big' | 'huge'>;
     /**
      * On list item selected callback.
      *

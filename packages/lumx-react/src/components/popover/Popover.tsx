@@ -10,33 +10,34 @@ import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, ValueOf } from '@lumx/react/utils';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
 /**
  * Different possible placements for the popover.
  */
-export enum Placement {
-    AUTO = 'auto',
-    AUTO_END = 'auto-end',
-    AUTO_START = 'auto-start',
+export const Placement = {
+    AUTO: 'auto',
+    AUTO_END: 'auto-end',
+    AUTO_START: 'auto-start',
 
-    TOP = 'top',
-    TOP_END = 'top-end',
-    TOP_START = 'top-start',
+    TOP: 'top',
+    TOP_END: 'top-end',
+    TOP_START: 'top-start',
 
-    RIGHT = 'right',
-    RIGHT_END = 'right-end',
-    RIGHT_START = 'right-start',
+    RIGHT: 'right',
+    RIGHT_END: 'right-end',
+    RIGHT_START: 'right-start',
 
-    BOTTOM = 'bottom',
-    BOTTOM_END = 'bottom-end',
-    BOTTOM_START = 'bottom-start',
+    BOTTOM: 'bottom',
+    BOTTOM_END: 'bottom-end',
+    BOTTOM_START: 'bottom-start',
 
-    LEFT = 'left',
-    LEFT_END = 'left-end',
-    LEFT_START = 'left-start',
-}
+    LEFT: 'left',
+    LEFT_END: 'left-end',
+    LEFT_START: 'left-start',
+} as const;
+export type Placement = ValueOf<typeof Placement>;
 
 /**
  * Offset of the popover.

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { Avatar, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, ENTER_KEY_CODE } from '@lumx/react/constants';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, ValueOf } from '@lumx/react/utils';
 
 import isFunction from 'lodash/isFunction';
 import { AvatarProps } from '../avatar/Avatar';
@@ -12,10 +12,11 @@ import { AvatarProps } from '../avatar/Avatar';
 /**
  * Comment block variants.
  */
-export enum CommentBlockVariant {
-    indented = 'indented',
-    linear = 'linear',
-}
+export const CommentBlockVariant = {
+    indented: 'indented',
+    linear: 'linear',
+} as const;
+export type CommentBlockVariant = ValueOf<typeof CommentBlockVariant>;
 
 /**
  * Defines the props of the component.

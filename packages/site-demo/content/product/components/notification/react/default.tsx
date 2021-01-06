@@ -1,5 +1,5 @@
 import { mdiPlay } from '@lumx/icons';
-import { Button, Notification, NotificationType } from '@lumx/react';
+import { Button, Notification, Kind } from '@lumx/react';
 
 import React, { useState } from 'react';
 
@@ -7,24 +7,24 @@ export const App = () => {
     const properties = {
         error: {
             content: 'Error',
-            type: NotificationType.error,
+            type: Kind.error,
         },
         info: {
             content: 'Info',
-            type: NotificationType.info,
+            type: Kind.info,
         },
         infoWithCallback: {
             actionLabel: 'Undo',
             content: 'Info with callback',
-            type: NotificationType.info,
+            type: Kind.info,
         },
         success: {
             content: 'Success',
-            type: NotificationType.success,
+            type: Kind.success,
         },
         warning: {
             content: 'Warning',
-            type: NotificationType.warning,
+            type: Kind.warning,
         },
     };
 

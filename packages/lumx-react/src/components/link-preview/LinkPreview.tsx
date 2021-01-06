@@ -28,7 +28,7 @@ export interface LinkPreviewProps extends GenericProps {
     /** Props to pass to the link (minus those already set by the LinkPreview props). */
     linkProps?: Omit<LinkProps, 'color' | 'colorVariant' | 'href' | 'target'>;
     /** Size variant. */
-    size?: Size.regular | Size.big;
+    size?: Extract<Size, 'regular' | 'big'>;
     /** Theme adapting the component to light or dark background. */
     theme?: Theme;
     /** Thumbnail for the link preview. */

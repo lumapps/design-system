@@ -11,7 +11,7 @@ import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/
 /**
  * Avatar sizes.
  */
-export type AvatarSize = Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
+export type AvatarSize = Extract<Size, 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl'>;
 
 /**
  * Defines the props of the component.

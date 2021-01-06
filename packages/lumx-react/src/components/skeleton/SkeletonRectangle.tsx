@@ -3,23 +3,20 @@ import React, { forwardRef } from 'react';
 
 import { AspectRatio, GlobalSize, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, ValueOf } from '@lumx/react/utils';
 
 /**
  * Skeleton variants.
  */
-export enum SkeletonRectangleVariant {
-    squared = 'squared',
-    rounded = 'rounded',
-    pill = 'pill',
-}
+export const SkeletonRectangleVariant = { squared: 'squared', rounded: 'rounded', pill: 'pill' } as const;
+export type SkeletonRectangleVariant = ValueOf<typeof SkeletonRectangleVariant>;
 
 /**
  * Defines the props of the component.
  */
 export interface SkeletonRectangleProps extends GenericProps {
     /** Aspect ratio (use with width and not height). */
-    aspectRatio?: AspectRatio.square | AspectRatio.horizontal | AspectRatio.vertical;
+    aspectRatio?: Extract<AspectRatio, 'square' | 'horizontal' | 'vertical'>;
     /** Height size. */
     height?: GlobalSize;
     /** Theme adapting the component to light or dark background. */

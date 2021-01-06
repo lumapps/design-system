@@ -6,8 +6,8 @@ import castArray from 'lodash/castArray';
 import React, { forwardRef, ReactNode } from 'react';
 import { Size } from '..';
 
-export type MarginAutoAlignment = Alignment.top | Alignment.bottom | Alignment.right | Alignment.left;
-export type GapSize = Size.regular | Size.big | Size.huge;
+export type MarginAutoAlignment = Extract<Alignment, 'top' | 'bottom' | 'right' | 'left'>;
+export type GapSize = Extract<Size, 'regular' | 'big' | 'huge'>;
 
 /**
  * Defines the props of the component.

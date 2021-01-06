@@ -79,6 +79,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   _[BREAKING]_ Upgrade to mdi v5.8.55 and handle backward compatibility (see [details]([./packages/lumx-icons/README-v4-to-v5-migration.md])).
 -   `Avatar` component now uses `Thumbnail` component.
 -   _[BREAKING]_ Since `alt` in now required for `Avatar`, `avatar` and `avatarProps` props have been merged into `avatarProps` for both `CommentBlock` and `UserBlock`.
+-   _[BREAKING]_ Removed `ListItemSize` (use `Size` instead), `TabListPosition` (use `Alignment` instead), `SwitchPosition` (use `Alignment` instead), `ThScope` (was not used).
+-   _[BREAKING]_ Renamed `Kind.valid` into `Kind.success` and removed `MessageKind` and `NotificationType` (use `Kind` instead).
+-   Loosened enum type so you can use the string value instead (ex: you can use `'s'` instead of `Size.s`).
 
 ### Removed
 

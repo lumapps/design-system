@@ -5,23 +5,13 @@ import classNames from 'classnames';
 
 import isFunction from 'lodash/isFunction';
 
-import { Button, Emphasis, Icon, Size, Theme } from '@lumx/react';
+import { Button, Emphasis, Icon, Kind, Size, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX, DOCUMENT, NOTIFICATION_TRANSITION_DURATION } from '@lumx/react/constants';
 import { NOTIFICATION_CONFIGURATION } from '@lumx/react/components/notification/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
-
-/**
- * Different types of notification.
- */
-export enum NotificationType {
-    info = 'info',
-    success = 'success',
-    warning = 'warning',
-    error = 'error',
-}
 
 /**
  * Defines the props of the component.
@@ -36,7 +26,7 @@ export interface NotificationProps extends GenericProps {
     /** Theme adapting the component to light or dark background. */
     theme?: Theme;
     /** Notification type. */
-    type?: NotificationType;
+    type?: Kind;
     /** Z-axis position. */
     zIndex?: number;
     /** On action button click callback. */
@@ -88,9 +78,9 @@ export const Notification: Comp<NotificationProps, HTMLDivElement> = forwardRef(
         // Can't render in SSR.
         return null;
     }
-    const hasAction: boolean = Boolean(onActionClick) && Boolean(actionLabel);
-
+    const { color, icon } = NOTIFICATION_CONFIGURATION[type as Kind] || {};
     const isVisible = useDelayedVisibility(!!isOpen, NOTIFICATION_TRANSITION_DURATION);
+    const hasAction: boolean = Boolean(onActionClick) && Boolean(actionLabel);
 
     const handleCallback = (evt: React.MouseEvent) => {
         if (isFunction(onActionClick)) {
@@ -107,7 +97,7 @@ export const Notification: Comp<NotificationProps, HTMLDivElement> = forwardRef(
                   className={classNames(
                       className,
                       handleBasicClasses({
-                          color: `${NOTIFICATION_CONFIGURATION[type as NotificationType].color}`,
+                          color,
                           hasAction,
                           isHidden: !isOpen,
                           prefix: CLASSNAME,
@@ -117,7 +107,7 @@ export const Notification: Comp<NotificationProps, HTMLDivElement> = forwardRef(
                   style={{ zIndex }}
               >
                   <div className={`${CLASSNAME}__icon`}>
-                      <Icon icon={NOTIFICATION_CONFIGURATION[type as NotificationType].icon} size={Size.s} />
+                      <Icon icon={icon} size={Size.s} />
                   </div>
                   <div className={`${CLASSNAME}__content`}>{content}</div>
                   {hasAction && (

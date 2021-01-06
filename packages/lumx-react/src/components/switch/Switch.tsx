@@ -5,15 +5,10 @@ import { uid } from 'uid';
 
 import isEmpty from 'lodash/isEmpty';
 
-import { InputHelper, InputLabel, Theme } from '@lumx/react';
+import { Alignment, InputHelper, InputLabel, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
-
-export enum SwitchPosition {
-    left = 'left',
-    right = 'right',
-}
 
 /**
  * Defines the props of the component.
@@ -28,7 +23,7 @@ export interface SwitchProps extends GenericProps {
     /** Native input name property. */
     name?: string;
     /** Position of the switch relative to the label. */
-    position?: SwitchPosition;
+    position?: Extract<Alignment, 'right' | 'left'>;
     /** Theme adapting the component to light or dark background. */
     theme?: Theme;
     /** Native input value property. */
@@ -51,7 +46,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * Component default props.
  */
 const DEFAULT_PROPS: Partial<SwitchProps> = {
-    position: SwitchPosition.left,
+    position: Alignment.left,
     theme: Theme.light,
 };
 

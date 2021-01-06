@@ -12,7 +12,7 @@ import React, { forwardRef, MouseEventHandler, ReactNode } from 'react';
 /**
  * Chip sizes.
  */
-type ChipSize = Size.s | Size.m;
+type ChipSize = Extract<Size, 's' | 'm'>;
 
 /**
  * Defines the props of the component.

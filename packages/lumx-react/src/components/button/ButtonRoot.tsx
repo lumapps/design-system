@@ -14,7 +14,7 @@ type HTMLButtonProps = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>
 /**
  * Button size definition.
  */
-export type ButtonSize = Size.s | Size.m;
+export type ButtonSize = Extract<Size, 's' | 'm'>;
 
 export interface BaseButtonProps extends GenericProps {
     /** ARIA button label. */

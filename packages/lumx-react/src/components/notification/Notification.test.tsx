@@ -4,9 +4,10 @@ import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
 import noop from 'lodash/noop';
+import { Kind } from '@lumx/react';
 import { CommonSetup, Wrapper } from '@lumx/react/testing/utils';
 
-import { Notification, NotificationProps, NotificationType } from './Notification';
+import { Notification, NotificationProps } from './Notification';
 
 const CLASSNAME = Notification.className as string;
 
@@ -75,13 +76,13 @@ const properties = {
         content: 'Error',
         onClick: noop,
         isOpen: true,
-        type: NotificationType.error,
+        type: Kind.error,
     },
     info: {
         content: 'Info',
         onClick: noop,
         isOpen: true,
-        type: NotificationType.info,
+        type: Kind.info,
     },
     infoWithCallback: {
         onActionClick: noop,
@@ -89,20 +90,20 @@ const properties = {
         content: 'Info with callback',
         onClick: noop,
         isOpen: true,
-        type: NotificationType.info,
+        type: Kind.info,
     },
     success: {
         content: 'Success',
         onClick: noop,
         isOpen: true,
-        type: NotificationType.success,
+        type: Kind.success,
     },
 
     warning: {
         content: 'Warning',
         onClick: noop,
         isOpen: true,
-        type: NotificationType.warning,
+        type: Kind.warning,
     },
 };
 

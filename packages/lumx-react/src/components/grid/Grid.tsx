@@ -6,7 +6,7 @@ import { Alignment, Orientation, Size } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
-type GridGutterSize = Size.regular | Size.big | Size.huge;
+type GridGutterSize = Extract<Size, 'regular' | 'big' | 'huge'>;
 
 /**
  * Defines the props of the component.

@@ -1,4 +1,4 @@
-import { Switch, SwitchPosition } from '@lumx/react';
+import { Switch, Alignment } from '@lumx/react';
 import { text } from '@storybook/addon-knobs';
 import noop from 'lodash/noop';
 import React from 'react';
@@ -30,7 +30,7 @@ export const DisabledSwitch = ({ theme }: any) => (
 );
 
 export const LeftPositionSwitch = ({ theme }: any) => (
-    <Switch position={SwitchPosition.right} onChange={noop} theme={theme}>
+    <Switch position={Alignment.right} onChange={noop} theme={theme}>
         {text('text', 'The switch')}
     </Switch>
 );

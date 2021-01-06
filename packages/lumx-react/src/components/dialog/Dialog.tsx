@@ -55,7 +55,7 @@ export interface DialogProps extends GenericProps {
     onClose?(): void;
 }
 
-export type DialogSizes = Size.tiny | Size.regular | Size.big | Size.huge;
+export type DialogSizes = Extract<Size, 'tiny' | 'regular' | 'big' | 'huge'>;
 
 const isHeader = isComponent('header');
 const isFooter = isComponent('footer');
