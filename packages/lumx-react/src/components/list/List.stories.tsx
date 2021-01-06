@@ -34,7 +34,7 @@ export const KeyboardNavigation = () => {
             <button type="button" onClick={focusFirsItem}>
                 focus first item
             </button>
-            <List onListItemSelected={action('List onListItemSelected')} listElementRef={listRef}>
+            <List onListItemSelected={action('List onListItemSelected')} ref={listRef}>
                 <ListItem linkRef={firstItemRef} onItemSelected={action('onItemSelected: Clickable item 1')}>
                     Clickable item 1
                 </ListItem>

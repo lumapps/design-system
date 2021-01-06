@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { SideNavigationItem, Theme } from '@lumx/react';
 
-import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
+import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses, isComponent } from '@lumx/react/utils';
 
 /**
@@ -15,8 +15,6 @@ export interface SideNavigationProps extends GenericProps {
     children: ReactNode;
     /** Theme adapting the component to light or dark background. */
     theme?: Theme;
-    /** Whether custom colors are applied to this component or not. */
-    useCustomColors?: boolean;
 }
 
 /**
@@ -37,7 +35,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * @return React element.
  */
 export const SideNavigation: Comp<SideNavigationProps, HTMLUListElement> = forwardRef((props, ref) => {
-    const { children, className, theme, useCustomColors, ...forwardedProps } = props;
+    const { children, className, theme, ...forwardedProps } = props;
     const content = Children.toArray(children).filter(isComponent(SideNavigationItem));
 
     return (
@@ -48,7 +46,6 @@ export const SideNavigation: Comp<SideNavigationProps, HTMLUListElement> = forwa
                 className,
                 theme === Theme.dark && 'lumx-color-font-light-N',
                 handleBasicClasses({ prefix: CLASSNAME }),
-                { [`${CSS_PREFIX}-custom-colors`]: useCustomColors },
             )}
         >
             {content}

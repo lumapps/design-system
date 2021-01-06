@@ -37,8 +37,6 @@ export interface CoreSelectProps extends GenericProps {
     placeholder?: string;
     /** Theme adapting the component to light or dark background. */
     theme?: Theme;
-    /** Whether custom colors are applied to this component or not. */
-    useCustomColors?: boolean;
     /** Select variant. */
     variant?: SelectVariant;
     /** On clear callback. */

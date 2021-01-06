@@ -1,5 +1,5 @@
 import { Color, ColorPalette, Size, Theme } from '@lumx/react';
-import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
+import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { useStopPropagation } from '@lumx/react/hooks/useStopPropagation';
 
 import { Comp, GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
@@ -36,8 +36,6 @@ export interface ChipProps extends GenericProps {
     size?: ChipSize;
     /** Theme adapting the component to light or dark background. */
     theme?: Theme;
-    /** Whether custom colors are applied to this component or not. */
-    useCustomColors?: boolean;
     /** On "after" element clicked callback. */
     onAfterClick?: MouseEventHandler;
     /** On "before" element clicked callback. */
@@ -86,7 +84,6 @@ export const Chip: Comp<ChipProps, HTMLAnchorElement> = forwardRef((props, ref) 
         onClick,
         size,
         theme,
-        useCustomColors,
         ...forwardedProps
     } = props;
     const hasAfterClick = isFunction(onAfterClick);
@@ -118,7 +115,6 @@ export const Chip: Comp<ChipProps, HTMLAnchorElement> = forwardRef((props, ref) 
                     size,
                     unselected: Boolean(!isSelected),
                 }),
-                { [`${CSS_PREFIX}-custom-colors`]: useCustomColors },
             )}
             role={hasOnClick ? 'button' : undefined}
             tabIndex={isDisabled || !hasOnClick ? -1 : 0}

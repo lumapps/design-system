@@ -41,8 +41,6 @@ export interface BaseButtonProps extends GenericProps {
     theme?: Theme;
     /** Native button type. */
     type?: HTMLButtonProps['type'];
-    /** Whether custom colors are applied to this component or not. */
-    useCustomColors?: boolean;
     /** Custom react component for the link (can be used to inject react router Link). */
     linkAs?: 'a' | any;
 }
@@ -112,7 +110,6 @@ export const ButtonRoot: Comp<ButtonRootProps, HTMLButtonElement | HTMLAnchorEle
         size,
         target,
         theme,
-        useCustomColors,
         variant,
         type = 'button',
         ...forwardedProps
@@ -140,7 +137,6 @@ export const ButtonRoot: Comp<ButtonRootProps, HTMLButtonElement | HTMLAnchorEle
             theme: emphasis === Emphasis.high && theme,
             variant,
         }),
-        { [`${CSS_PREFIX}-custom-colors`]: useCustomColors },
     );
 
     /**

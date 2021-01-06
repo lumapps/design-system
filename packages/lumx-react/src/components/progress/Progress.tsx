@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { Theme } from '@lumx/react';
 
-import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
+import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
@@ -21,8 +21,6 @@ export enum ProgressVariant {
 export interface ProgressProps extends GenericProps {
     /** Theme adapting the component to light or dark background. */
     theme?: Theme;
-    /** Whether custom colors are applied to this component or not. */
-    useCustomColors?: boolean;
     /** Progress variant. */
     variant?: ProgressVariant;
 }
@@ -52,15 +50,13 @@ const DEFAULT_PROPS: Partial<ProgressProps> = {
  * @return React element.
  */
 export const Progress: Comp<ProgressProps, HTMLDivElement> = forwardRef((props, ref) => {
-    const { className, theme, useCustomColors, variant, ...forwardedProps } = props;
+    const { className, theme, variant, ...forwardedProps } = props;
 
     return (
         <div
             ref={ref}
             {...forwardedProps}
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, variant }), {
-                [`${CSS_PREFIX}-custom-colors`]: useCustomColors,
-            })}
+            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, variant }))}
         >
             <div className={classNames(`${CLASSNAME}-${variant}`)}>
                 {variant === ProgressVariant.circular && (

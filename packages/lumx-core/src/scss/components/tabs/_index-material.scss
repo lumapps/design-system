@@ -1,0 +1,58 @@
+.#{$lumx-base-prefix}-tabs {
+    $self: &;
+
+    &__links::after {
+        height: 1px !important;
+    }
+
+    &__link {
+        background-color: transparent !important;
+        text-transform: uppercase;
+
+        #{$self}--theme-light & {
+            color: lumx-color-variant('dark', 'L2');
+        }
+
+        #{$self}--theme-dark & {
+            color: lumx-color-variant('light', 'L2');
+        }
+    }
+}
+
+/* Tabs link states
+   ========================================================================== */
+
+// Hover state
+.#{$lumx-base-prefix}-tabs__link:hover {
+    .#{$lumx-base-prefix}-tabs--theme-light & {
+        color: lumx-color-variant('primary', 'N');
+    }
+
+    .#{$lumx-base-prefix}-tabs--theme-dark & {
+        color: lumx-color-variant('light', 'N');
+    }
+}
+
+// Disabled state
+.#{$lumx-base-prefix}-tabs__link--is-disabled {
+    .#{$lumx-base-prefix}-tabs--theme-light & {
+        color: lumx-color-variant('dark', 'L4');
+    }
+
+    .#{$lumx-base-prefix}-tabs--theme-dark & {
+        color: lumx-color-variant('light', 'L4');
+    }
+}
+
+/* Tabs link active
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-tabs__link--is-active {
+    .#{$lumx-base-prefix}-tabs--theme-light & {
+        color: lumx-color-variant('primary', 'N');
+    }
+
+    .#{$lumx-base-prefix}-tabs--theme-dark & {
+        color: lumx-color-variant('light', 'N');
+    }
+}

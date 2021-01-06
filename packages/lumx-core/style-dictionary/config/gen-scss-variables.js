@@ -1,28 +1,5 @@
 const StyleDictionary = require('style-dictionary');
-
-/**
- * Transform SCSS variable names.
- */
-const lumxVariableName = 'name/scss/lumx-variables';
-StyleDictionary.registerTransform({
-    name: lumxVariableName,
-    type: 'name',
-    transformer: (prop) => `lumx-${prop.path.join('-')}`,
-});
-
-/**
- * Transform group:
- */
-const transformGroup = 'scss-custom';
-StyleDictionary.registerTransformGroup({
-    name: transformGroup,
-    transforms: [
-        'attribute/cti',
-        lumxVariableName,
-        require('./utils/_color-opacity'),
-        'color/css',
-    ],
-});
+const transformGroup = require('./utils/_css-transform-group');
 
 /**
  * SCSS generator
@@ -33,9 +10,9 @@ StyleDictionary.registerFormat({
     name: format,
     formatter(dictionary, depth = 0) {
         // List SCSS variables.
-        const scssVariables = dictionary.allProperties.map(({name, value, comment}) =>
-            `$${name}: ${value} !default;${comment ? ` // ${comment}`: ''}`
-        ).join('\n');
+        const scssVariables = dictionary.allProperties
+            .map(({ name, value, comment }) => `$${name}: ${value} !default;${comment ? ` // ${comment}` : ''}`)
+            .join('\n');
 
         // Build SCSS map (from SCSS variable values).
         function processProperties(prop) {
@@ -43,14 +20,14 @@ StyleDictionary.registerFormat({
             if (prop.hasOwnProperty('value')) {
                 return `$${prop.name}`;
             } else {
-                const subProps = Object.keys(prop).map((key) =>
-                    `${indent}'${key}': ${processProperties(prop[key], depth + 1)}`,
-                ).join(',\n');
+                const subProps = Object.keys(prop)
+                    .map((key) => `${indent}'${key}': ${processProperties(prop[key], depth + 1)}`)
+                    .join(',\n');
                 return `(\n${subProps}\n${'  '.repeat(depth)})`;
             }
         }
         const scssMapName = this.mapName || 'tokens';
-        const scssMap = `$${scssMapName}: ${processProperties(dictionary.properties)} !default;`
+        const scssMap = `$${scssMapName}: ${processProperties(dictionary.properties)} !default;`;
 
         return `
             ${require('./utils/_genHeader')()}
@@ -62,23 +39,22 @@ StyleDictionary.registerFormat({
     },
 });
 
-module.exports = ({ globalTheme }) => {
+module.exports = () => {
     const baseDir = `${__dirname}/../`;
-    const buildPath = `${baseDir}/../src/scss/core/generated/${globalTheme}/`;
+    const buildPath = `${baseDir}/../src/scss/core/generated/`;
     return {
-        source: [
-            `${baseDir}/properties/**/base.json`,
-            `${baseDir}/properties/**/${globalTheme}.json`,
-        ],
+        source: [`${baseDir}/properties/**/base.json`],
         platforms: {
             scss: {
                 transformGroup,
                 buildPath,
-                files: [{
-                    destination: '_variables.scss',
-                    format,
-                    mapName: 'lumx-core'
-                }],
+                files: [
+                    {
+                        destination: '_variables.scss',
+                        format,
+                        mapName: 'lumx-core',
+                    },
+                ],
                 actions: [require('./utils/_prettier-scss')({ buildPath })],
             },
         },

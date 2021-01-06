@@ -11,13 +11,7 @@ export const App = () => {
 
     return (
         <>
-            <Button
-                emphasis={Emphasis.low}
-                leftIcon={mdiSort}
-                rightIcon={mdiMenuDown}
-                buttonRef={anchorRef}
-                onClick={toggle}
-            >
+            <Button emphasis={Emphasis.low} leftIcon={mdiSort} rightIcon={mdiMenuDown} ref={anchorRef} onClick={toggle}>
                 Most relevant
             </Button>
 

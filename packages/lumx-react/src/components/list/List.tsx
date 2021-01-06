@@ -1,6 +1,6 @@
 import { Size } from '@lumx/react';
 
-import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
+import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
 import { useKeyboardListNavigation } from '@lumx/react/hooks/useKeyboardListNavigation';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
@@ -23,8 +23,6 @@ export interface ListProps extends GenericProps {
     isClickable?: boolean;
     /** Item padding size. */
     itemPadding?: Size.big | Size.huge;
-    /** Whether custom colors are applied to this component or not. */
-    useCustomColors?: boolean;
     /**
      * On list item selected callback.
      *
@@ -54,15 +52,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * @return React element.
  */
 const InternalList: Comp<ListProps, HTMLUListElement> = forwardRef((props, ref) => {
-    const {
-        children,
-        className,
-        isClickable,
-        itemPadding,
-        onListItemSelected,
-        useCustomColors,
-        ...forwardedProps
-    } = props;
+    const { children, className, isClickable, itemPadding, onListItemSelected, ...forwardedProps } = props;
     const listElementRef = useRef<HTMLUListElement>(null);
 
     const { items, hasClickableItem } = useInteractiveList({
@@ -81,7 +71,6 @@ const InternalList: Comp<ListProps, HTMLUListElement> = forwardRef((props, ref) 
                     prefix: CLASSNAME,
                     itemPadding: itemPadding ?? (clickable ? Size.big : undefined),
                 }),
-                useCustomColors && `${CSS_PREFIX}-custom-colors`,
             )}
             tabIndex={clickable ? 0 : -1}
             ref={mergeRefs(ref, listElementRef)}
