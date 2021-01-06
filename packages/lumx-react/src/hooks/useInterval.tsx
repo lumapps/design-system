@@ -17,18 +17,15 @@ export function useInterval(callback: Callback, delay: number | null): void {
         savedCallback.current = callback;
     });
 
-    useEffect((): Callback | void => {
+    useEffect(() => {
+        if (delay === null) return undefined;
+
         function tick() {
             if (isFunction(savedCallback.current)) {
                 savedCallback.current();
             }
         }
-
-        if (delay !== null) {
-            const id = setInterval(tick, delay);
-
-            return () => clearInterval(id);
-        }
-        return undefined;
+        const id = setInterval(tick, delay);
+        return () => clearInterval(id);
     }, [delay]);
 }

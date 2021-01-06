@@ -25,8 +25,6 @@ export const Simple = ({ theme }: any) => {
             theme={theme}
             groupBy={groupBy}
             style={{ width: '50%' }}
-            nextButtonProps={{ label: 'Next' }}
-            previousButtonProps={{ label: 'Previous' }}
         >
             {images.map(({ image, alt }, index) => (
                 <SlideshowItem key={`${image}-${index}`}>

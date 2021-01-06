@@ -2,7 +2,7 @@ import React from 'react';
 
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
-import { CommonSetup, commonTestsSuite, expectStoriesToMatchSnapshots } from '@lumx/react/testing/utils';
+import { CommonSetup, commonTestsSuite, itShouldRenderStories } from '@lumx/react/testing/utils';
 
 import { ListItem, ListItemProps } from './ListItem';
 import * as stories from './ListItem.stories';
@@ -21,7 +21,7 @@ const setup = (props: Partial<ListItemProps> = {}, shallowRendering = true): Com
 describe(`<${ListItem.displayName}>`, () => {
     // 1. Test render via snapshot.
     describe('Snapshots and structure', () => {
-        expectStoriesToMatchSnapshots(stories, ListItem);
+        itShouldRenderStories(stories, ListItem);
     });
 
     // Common tests suite.

@@ -1,11 +1,10 @@
-import { ReactWrapper, ShallowWrapper, shallow } from 'enzyme';
+import { ReactWrapper, ShallowWrapper } from 'enzyme';
 import 'jest-enzyme';
-import React from 'react';
 
 import isArray from 'lodash/isArray';
 import isEmpty from 'lodash/isEmpty';
 
-import { Comp, GenericProps } from '@lumx/react/utils';
+import { GenericProps } from '@lumx/react/utils';
 
 export type Wrapper = ShallowWrapper | ReactWrapper;
 
@@ -31,7 +30,7 @@ export function commonTestsSuite(
     setup: (props?: GenericProps, shallowRendering?: boolean) => CommonSetup,
     { ...tests }: { className?: string | string[]; prop?: string | string[] },
     { ...params }: GenericProps,
-) {
+): void {
     if (isEmpty(tests)) {
         return;
     }
@@ -46,8 +45,8 @@ export function commonTestsSuite(
                 const wrappers: any = setup(modifiedProps);
 
                 const wrappersToTest = isArray(tests.className)
-                    ? tests.className!
-                    : [tests.className!, tests.className!];
+                    ? tests.className
+                    : [tests.className as string, tests.className as string];
                 expect(wrappers[wrappersToTest[0]]).toHaveClassName(params.className);
                 expect(wrappers[wrappersToTest[1]]).toHaveClassName(modifiedProps.className);
             });
@@ -62,31 +61,11 @@ export function commonTestsSuite(
 
                 const wrappers: any = setup(modifiedProps);
 
-                const wrappersToTest: string[] = isArray(tests.prop) ? tests.prop! : [tests.prop!];
-                wrappersToTest.forEach((wrapper: string) => {
+                const wrappersToTest = isArray(tests.prop) ? tests.prop : [tests.prop as string];
+                wrappersToTest.forEach((wrapper) => {
                     expect(wrappers[wrapper]).toHaveProp(testedProp, modifiedProps[testedProp]);
                 });
             });
         }
     });
-}
-
-/**
- * Generate snapshots for StoryBook stories (diving into the given component).
- * @param stories   Stories module.
- * @param component Component to dive into (expanding the shallow rendering fot this particular component).
- */
-export function expectStoriesToMatchSnapshots(stories: Record<string, any>, component: Comp<any, any>) {
-    for (const [storyName, Story] of Object.entries(stories)) {
-        if (typeof Story !== 'function') {
-            continue;
-        }
-
-        it(`should render story ${storyName}`, () => {
-            const actual = shallow(React.createElement(Story))
-                .find(component.displayName as string)
-                .map((parts) => parts.dive());
-            expect(actual.length === 1 ? actual[0] : actual).toMatchSnapshot();
-        });
-    }
 }

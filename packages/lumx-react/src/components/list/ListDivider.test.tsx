@@ -2,7 +2,7 @@ import React from 'react';
 
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
-import { CommonSetup, commonTestsSuite, expectStoriesToMatchSnapshots } from '@lumx/react/testing/utils';
+import { CommonSetup, commonTestsSuite, itShouldRenderStories } from '@lumx/react/testing/utils';
 
 import { ListDivider, ListDividerProps } from './ListDivider';
 import * as stories from './ListDivider.stories';
@@ -21,7 +21,7 @@ const setup = (props: Partial<ListDividerProps> = {}, shallowRendering = true): 
 describe(`<${ListDivider.displayName}>`, () => {
     // 1. Test render via snapshot.
     describe('Snapshots and structure', () => {
-        expectStoriesToMatchSnapshots(stories, ListDivider);
+        itShouldRenderStories(stories, ListDivider);
     });
 
     // Common tests suite.
