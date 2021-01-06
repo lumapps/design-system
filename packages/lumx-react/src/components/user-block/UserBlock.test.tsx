@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react';
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
-import { CommonSetup, Wrapper, commonTestsSuite, expectStoriesToMatchSnapshots } from '@lumx/react/testing/utils';
+import { CommonSetup, Wrapper, commonTestsSuite, itShouldRenderStories } from '@lumx/react/testing/utils';
 
 import { UserBlock, UserBlockProps } from './UserBlock';
 import * as stories from './UserBlock.stories';
@@ -39,7 +39,7 @@ const setup = ({ ...propsOverride }: Partial<UserBlockProps> = {}, shallowRender
 describe(`<${UserBlock.displayName}>`, () => {
     // 1. Test render via snapshot.
     describe('Snapshots and structure', () => {
-        expectStoriesToMatchSnapshots(stories, UserBlock);
+        itShouldRenderStories(stories, UserBlock);
     });
 
     // Common tests suite.

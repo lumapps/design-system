@@ -6,7 +6,7 @@ type Range = { min: number; max: number };
 /**
  * Calculate the currently visible pagination "bullet" range.
  */
-export function usePaginationVisibleRange(activeIndex: number, slideCount: number) {
+export function usePaginationVisibleRange(activeIndex: number, slideCount: number): Range {
     const previousVisibleRangeRef = useRef<Range>();
     return useMemo(() => {
         const lastSlide = slideCount - 1;

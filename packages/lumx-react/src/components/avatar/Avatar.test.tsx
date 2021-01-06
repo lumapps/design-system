@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react';
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
-import { CommonSetup, Wrapper, commonTestsSuite, expectStoriesToMatchSnapshots } from '@lumx/react/testing/utils';
+import { CommonSetup, Wrapper, commonTestsSuite, itShouldRenderStories } from '@lumx/react/testing/utils';
 import { Avatar, AvatarProps } from './Avatar';
 import * as stories from './Avatar.stories';
 
@@ -42,7 +42,7 @@ const setup = ({ ...propsOverride }: Partial<AvatarProps> = {}, shallowRendering
 describe(`<${Avatar.displayName}>`, () => {
     // 1. Test render via snapshot.
     describe('Snapshots and structure', () => {
-        expectStoriesToMatchSnapshots(stories, Avatar);
+        itShouldRenderStories(stories, Avatar);
     });
 
     // Common tests suite.

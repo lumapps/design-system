@@ -5,7 +5,11 @@ import { detectSwipe } from '@lumx/core/js/utils';
 /**
  * Listen keyboard and swipe to navigate left and right.
  */
-export function useKeyOrSwipeNavigate(element?: HTMLElement | null, onNext?: () => void, onPrevious?: () => void) {
+export function useKeyOrSwipeNavigate(
+    element?: HTMLElement | null,
+    onNext?: () => void,
+    onPrevious?: () => void,
+): void {
     useEffect(() => {
         if (!element) return undefined;
 

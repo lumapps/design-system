@@ -1,0 +1,233 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Slideshow> Snapshots and structure should render story 'LumX components/slideshow/Slideshow/Simple' 1`] = `
+Array [
+  <div
+    className="lumx-slideshow lumx-slideshow--theme-light lumx-slideshow--group-by-1"
+    style={
+      Object {
+        "width": "50%",
+      }
+    }
+    tabIndex={0}
+  >
+    <div
+      className="lumx-slideshow__slides"
+    >
+      <div
+        className="lumx-slideshow__wrapper"
+        style={
+          Object {
+            "transform": "translateX(-0%)",
+          }
+        }
+      >
+        <SlideshowItem
+          key="landscape1.jpg-0"
+        >
+          <ImageBlock
+            align="left"
+            alt="Image 1"
+            captionPosition="below"
+            image="landscape1.jpg"
+            theme="light"
+            thumbnailProps={
+              Object {
+                "aspectRatio": "horizontal",
+              }
+            }
+          />
+        </SlideshowItem>
+        <SlideshowItem
+          key="landscape2.jpg-1"
+        >
+          <ImageBlock
+            align="left"
+            alt="Image 2"
+            captionPosition="below"
+            image="landscape2.jpg"
+            theme="light"
+            thumbnailProps={
+              Object {
+                "aspectRatio": "horizontal",
+              }
+            }
+          />
+        </SlideshowItem>
+        <SlideshowItem
+          key="landscape3.jpg-2"
+        >
+          <ImageBlock
+            align="left"
+            alt="Image 3"
+            captionPosition="below"
+            image="landscape3.jpg"
+            theme="light"
+            thumbnailProps={
+              Object {
+                "aspectRatio": "horizontal",
+              }
+            }
+          />
+        </SlideshowItem>
+        <SlideshowItem
+          key="portrait1.jpg-3"
+        >
+          <ImageBlock
+            align="left"
+            alt="Image 4"
+            captionPosition="below"
+            image="portrait1.jpg"
+            theme="light"
+            thumbnailProps={
+              Object {
+                "aspectRatio": "horizontal",
+              }
+            }
+          />
+        </SlideshowItem>
+        <SlideshowItem
+          key="portrait2.jpg-4"
+        >
+          <ImageBlock
+            align="left"
+            alt="Image 5"
+            captionPosition="below"
+            image="portrait2.jpg"
+            theme="light"
+            thumbnailProps={
+              Object {
+                "aspectRatio": "horizontal",
+              }
+            }
+          />
+        </SlideshowItem>
+        <SlideshowItem
+          key="portrait3.jpg-5"
+        >
+          <ImageBlock
+            align="left"
+            alt="Image 6"
+            captionPosition="below"
+            image="portrait3.jpg"
+            theme="light"
+            thumbnailProps={
+              Object {
+                "aspectRatio": "horizontal",
+              }
+            }
+          />
+        </SlideshowItem>
+      </div>
+    </div>
+    <div
+      className="lumx-slideshow__controls"
+    >
+      <SlideshowControls
+        activeIndex={0}
+        nextButtonProps={
+          Object {
+            "label": "Next",
+          }
+        }
+        onNextClick={[Function]}
+        onPaginationClick={[Function]}
+        onPreviousClick={[Function]}
+        parentRef={
+          Object {
+            "current": null,
+          }
+        }
+        previousButtonProps={
+          Object {
+            "label": "Previous",
+          }
+        }
+        slidesCount={6}
+        theme="light"
+      />
+    </div>
+  </div>,
+  <div
+    className="lumx-slideshow-controls lumx-slideshow-controls--theme-light lumx-slideshow-controls--has-infinite-pagination"
+  >
+    <IconButton
+      className="lumx-slideshow-controls__navigation"
+      color="dark"
+      emphasis="low"
+      icon="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z"
+      label="Previous"
+      onClick={[Function]}
+      size="m"
+      tabIndex={-1}
+      theme="light"
+    />
+    <div
+      className="lumx-slideshow-controls__pagination"
+    >
+      <div
+        className="lumx-slideshow-controls__pagination-items"
+        style={
+          Object {
+            "transform": "translateX(-0px)",
+          }
+        }
+      >
+        <button
+          className="lumx-slideshow-controls__pagination-item lumx-slideshow-controls__pagination-item--is-active"
+          key="0"
+          onClick={[Function]}
+          tabIndex={-1}
+          type="button"
+        />
+        <button
+          className="lumx-slideshow-controls__pagination-item"
+          key="1"
+          onClick={[Function]}
+          tabIndex={-1}
+          type="button"
+        />
+        <button
+          className="lumx-slideshow-controls__pagination-item"
+          key="2"
+          onClick={[Function]}
+          tabIndex={-1}
+          type="button"
+        />
+        <button
+          className="lumx-slideshow-controls__pagination-item"
+          key="3"
+          onClick={[Function]}
+          tabIndex={-1}
+          type="button"
+        />
+        <button
+          className="lumx-slideshow-controls__pagination-item lumx-slideshow-controls__pagination-item--is-on-edge"
+          key="4"
+          onClick={[Function]}
+          tabIndex={-1}
+          type="button"
+        />
+        <button
+          className="lumx-slideshow-controls__pagination-item lumx-slideshow-controls__pagination-item--is-out-range"
+          key="5"
+          onClick={[Function]}
+          tabIndex={-1}
+          type="button"
+        />
+      </div>
+    </div>
+    <IconButton
+      className="lumx-slideshow-controls__navigation"
+      color="dark"
+      emphasis="low"
+      icon="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"
+      label="Next"
+      onClick={[Function]}
+      size="m"
+      tabIndex={-1}
+      theme="light"
+    />
+  </div>,
+]
+`;

@@ -1,7 +1,7 @@
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 import React, { ReactElement } from 'react';
-import { CommonSetup, commonTestsSuite, expectStoriesToMatchSnapshots, Wrapper } from '@lumx/react/testing/utils';
+import { CommonSetup, commonTestsSuite, itShouldRenderStories, Wrapper } from '@lumx/react/testing/utils';
 
 import { FlexBox, FlexBoxProps } from './FlexBox';
 import * as stories from './FlexBox.stories';
@@ -41,7 +41,7 @@ const setup = (propsOverride: SetupProps = {}, shallowRendering = true): Setup =
 describe(`<${FlexBox.displayName}>`, () => {
     // 1. Test render via snapshot.
     describe('Snapshots and structure', () => {
-        expectStoriesToMatchSnapshots(stories, FlexBox);
+        itShouldRenderStories(stories, FlexBox);
     });
 
     /////////////////////////////

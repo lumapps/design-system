@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<UserBlock> Snapshots and structure should render story InList 1`] = `
+exports[`<UserBlock> Snapshots and structure should render story 'LumX components/user-block/UserBlock/InList' 1`] = `
 Array [
   <div
     className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-m lumx-user-block--theme-light"
@@ -167,7 +167,7 @@ Array [
 ]
 `;
 
-exports[`<UserBlock> Snapshots and structure should render story Sizes 1`] = `
+exports[`<UserBlock> Snapshots and structure should render story 'LumX components/user-block/UserBlock/Sizes' 1`] = `
 Array [
   <div
     className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-s lumx-user-block--theme-light"
@@ -291,7 +291,7 @@ Array [
 ]
 `;
 
-exports[`<UserBlock> Snapshots and structure should render story WithBadge 1`] = `
+exports[`<UserBlock> Snapshots and structure should render story 'LumX components/user-block/UserBlock/WithBadge' 1`] = `
 <div
   className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-m lumx-user-block--theme-light"
   onMouseEnter={[Function]}

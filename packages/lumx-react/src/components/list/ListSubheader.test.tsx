@@ -1,5 +1,5 @@
 import React from 'react';
-import { CommonSetup, commonTestsSuite, expectStoriesToMatchSnapshots } from '@lumx/react/testing/utils';
+import { CommonSetup, commonTestsSuite, itShouldRenderStories } from '@lumx/react/testing/utils';
 
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
@@ -21,7 +21,7 @@ const setup = (props: Partial<ListSubheaderProps> = {}, shallowRendering = true)
 describe(`<${ListSubheader.displayName}>`, () => {
     // 1. Test render via snapshot.
     describe('Snapshots and structure', () => {
-        expectStoriesToMatchSnapshots(stories, ListSubheader);
+        itShouldRenderStories(stories, ListSubheader);
     });
 
     // Common tests suite.

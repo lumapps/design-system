@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ListItem> Snapshots and structure should render story Default 1`] = `
+exports[`<ListItem> Snapshots and structure should render story 'LumX components/list/ListItem/Default' 1`] = `
 <li
   className="lumx-list-item lumx-list-item--size-regular"
 >
@@ -16,7 +16,7 @@ exports[`<ListItem> Snapshots and structure should render story Default 1`] = `
 </li>
 `;
 
-exports[`<ListItem> Snapshots and structure should render story Highlighted 1`] = `
+exports[`<ListItem> Snapshots and structure should render story 'LumX components/list/ListItem/Highlighted' 1`] = `
 <li
   className="lumx-list-item lumx-list-item--size-regular"
 >
@@ -34,7 +34,7 @@ exports[`<ListItem> Snapshots and structure should render story Highlighted 1`] 
 </li>
 `;
 
-exports[`<ListItem> Snapshots and structure should render story Selected 1`] = `
+exports[`<ListItem> Snapshots and structure should render story 'LumX components/list/ListItem/Selected' 1`] = `
 <li
   className="lumx-list-item lumx-list-item--size-regular"
 >
@@ -52,7 +52,7 @@ exports[`<ListItem> Snapshots and structure should render story Selected 1`] = `
 </li>
 `;
 
-exports[`<ListItem> Snapshots and structure should render story Sizes 1`] = `
+exports[`<ListItem> Snapshots and structure should render story 'LumX components/list/ListItem/Sizes' 1`] = `
 <li
   className="lumx-list-item lumx-list-item--size-tiny"
 >
@@ -68,7 +68,7 @@ exports[`<ListItem> Snapshots and structure should render story Sizes 1`] = `
 </li>
 `;
 
-exports[`<ListItem> Snapshots and structure should render story WithCustomLink 1`] = `
+exports[`<ListItem> Snapshots and structure should render story 'LumX components/list/ListItem/WithCustomLink' 1`] = `
 <li
   className="lumx-list-item lumx-list-item--size-regular"
 >

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Avatar> Snapshots and structure should render story AvatarSizes 1`] = `
+exports[`<Avatar> Snapshots and structure should render story 'LumX components/avatar/Avatar/AvatarSizes' 1`] = `
 Array [
   <div
     className="lumx-spacing-margin-bottom lumx-avatar lumx-avatar--size-xs lumx-avatar--theme-light"
@@ -71,7 +71,7 @@ Array [
 ]
 `;
 
-exports[`<Avatar> Snapshots and structure should render story AvatarWithActions 1`] = `
+exports[`<Avatar> Snapshots and structure should render story 'LumX components/avatar/Avatar/AvatarWithActions' 1`] = `
 Array [
   <div
     className="lumx-avatar lumx-avatar--size-xs lumx-avatar--theme-light"
@@ -442,7 +442,7 @@ Array [
 ]
 `;
 
-exports[`<Avatar> Snapshots and structure should render story AvatarWithBadge 1`] = `
+exports[`<Avatar> Snapshots and structure should render story 'LumX components/avatar/Avatar/AvatarWithBadge' 1`] = `
 Array [
   <div
     className="lumx-spacing-margin-bottom lumx-avatar lumx-avatar--size-xs lumx-avatar--theme-light"
