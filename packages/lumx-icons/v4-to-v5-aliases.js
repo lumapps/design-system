@@ -15,9 +15,7 @@ import {
     mdiBookAlphabet,
     mdiBookCross,
     mdiBookMusic,
-    mdiBookOpenBlankVariant,
     mdiBookRemoveMultipleOutline,
-    mdiBowlMix,
     mdiCalendarSync,
     mdiCalendarSyncOutline,
     mdiCardAccountDetails,
@@ -38,7 +36,6 @@ import {
     mdiCogTransfer,
     mdiCogTransferOutline,
     mdiCurrencyUsdCircleOutline,
-    mdiDatabaseSync,
     mdiFileCog,
     mdiFileCogOutline,
     mdiFilmstripBox,
@@ -94,17 +91,13 @@ import {
     mdiNpm,
     mdiTwitter,
     mdiPlayBoxMultiple,
-    mdiPotSteam,
     mdiRollerSkateOff,
     mdiRouterNetwork,
     mdiSailBoat,
-    mdiSineWave,
     mdiSonyPlaystation,
     mdiSortAlphabeticalVariant,
     mdiSortNumericVariant,
-    mdiStarHalfFull,
-    mdiStickerCircleOutline,
-    mdiStorefrontOutline,
+    mdiLinkedin,
     mdiTextBox,
     mdiTextBoxCheck,
     mdiTextBoxCheckOutline,
@@ -119,15 +112,12 @@ import {
     mdiTextBoxRemoveOutline,
     mdiTextBoxSearch,
     mdiTextBoxSearchOutline,
-    mdiTimerOffOutline,
-    mdiTimerOutline,
     mdiTowTruck,
     mdiVideoBox,
     mdiVideoBoxOff,
     mdiWallSconceRoundVariant,
     mdiYCombinator,
     mdiYoutubeStudio,
-    mdiLinkedin,
 } from '@mdi/js';
 
 export const mdiCowboy = mdiAccountCowboyHat;
@@ -162,11 +152,7 @@ export const mdiBible = mdiBookCross;
 
 export const mdiAudiobook = mdiBookMusic;
 
-export const mdiBookOpenVariant = mdiBookOpenBlankVariant;
-
 export const mdiSquareInc = mdiBookRemoveMultipleOutline;
-
-export const mdiBowl = mdiBowlMix;
 
 export const mdiCalendarRepeat = mdiCalendarSync;
 
@@ -207,8 +193,6 @@ export const mdiSettingsTransfer = mdiCogTransfer;
 export const mdiSettingsTransferOutline = mdiCogTransferOutline;
 
 export const mdiCoinOutline = mdiCurrencyUsdCircleOutline;
-
-export const mdiDatabaseRefresh = mdiDatabaseSync;
 
 export const mdiFileSettingsVariant = mdiFileCog;
 
@@ -324,15 +308,11 @@ export const mdiTwitterCircle = mdiTwitter;
 
 export const mdiLibraryVideo = mdiPlayBoxMultiple;
 
-export const mdiPot = mdiPotSteam;
-
 export const mdiCiscoWebex = mdiRollerSkateOff;
 
 export const mdiNetworkRouter = mdiRouterNetwork;
 
 export const mdiSailing = mdiSailBoat;
-
-export const mdiCurrentAc = mdiSineWave;
 
 export const mdiPlaystation = mdiSonyPlaystation;
 
@@ -340,11 +320,7 @@ export const mdiSortAlphabetical = mdiSortAlphabeticalVariant;
 
 export const mdiSortNumeric = mdiSortNumericVariant;
 
-export const mdiStarHalf = mdiStarHalfFull;
-
-export const mdiSticker = mdiStickerCircleOutline;
-
-export const mdiStorefront = mdiStorefrontOutline;
+export const mdiLinkedinBox = mdiLinkedin;
 
 export const mdiFileDocumentBox = mdiTextBox;
 
@@ -374,10 +350,6 @@ export const mdiFileDocumentBoxSearch = mdiTextBoxSearch;
 
 export const mdiFileDocumentBoxSearchOutline = mdiTextBoxSearchOutline;
 
-export const mdiTimerOff = mdiTimerOffOutline;
-
-export const mdiTimer = mdiTimerOutline;
-
 export const mdiTowing = mdiTowTruck;
 
 export const mdiCamcorderBox = mdiVideoBox;
@@ -389,6 +361,3 @@ export const mdiWallSconceVariant = mdiWallSconceRoundVariant;
 export const mdiHackernews = mdiYCombinator;
 
 export const mdiYoutubeCreatorStudio = mdiYoutubeStudio;
-
-export const mdiLinkedinBox = mdiLinkedin;
-
