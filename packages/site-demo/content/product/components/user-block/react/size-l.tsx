@@ -9,7 +9,7 @@ export const App = ({ theme }: any) => {
             theme={theme}
             name="Emmitt O. Lum"
             fields={['Creative developer', 'Denpasar']}
-            avatar="/demo-assets/persona.png"
+            avatarProps={{ image: '/demo-assets/persona.png', alt: 'Avatar' }}
             size={Size.l}
             onMouseEnter={logAction('Mouse entered')}
             onMouseLeave={logAction('Mouse left')}

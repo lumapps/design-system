@@ -18,10 +18,8 @@ export type UserBlockSize = Size.s | Size.m | Size.l;
  * Defines the props of the component.
  */
 export interface UserBlockProps extends GenericProps {
-    /** Avatar image URL. */
-    avatar?: string;
-    /** Props to pass to the avatar (minus those already set by the UserBlock props). */
-    avatarProps?: Omit<AvatarProps, 'image' | 'size' | 'onClick' | 'tabIndex' | 'theme'>;
+    /** Props to pass to the avatar. */
+    avatarProps?: AvatarProps;
     /** Simple action toolbar content. */
     simpleAction?: ReactNode;
     /** Multiple action toolbar content. */
@@ -72,7 +70,6 @@ const DEFAULT_PROPS: Partial<UserBlockProps> = {
  */
 export const UserBlock: Comp<UserBlockProps, HTMLDivElement> = forwardRef((props, ref) => {
     const {
-        avatar,
         avatarProps,
         className,
         fields,
@@ -124,11 +121,10 @@ export const UserBlock: Comp<UserBlockProps, HTMLDivElement> = forwardRef((props
             onMouseLeave={onMouseLeave}
             onMouseEnter={onMouseEnter}
         >
-            {avatar && (
+            {avatarProps && (
                 <div className={`${CLASSNAME}__avatar`}>
                     <Avatar
                         {...avatarProps}
-                        image={avatar}
                         size={componentSize}
                         onClick={onClick}
                         tabIndex={onClick ? 0 : -1}

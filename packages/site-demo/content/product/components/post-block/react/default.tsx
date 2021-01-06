@@ -41,7 +41,7 @@ export const App = ({ theme }: any) => (
             }
             attachments={
                 <UserBlock
-                    avatar="/demo-assets/persona.png"
+                    avatarProps={{ image: '/demo-assets/persona.png', alt: 'Avatar' }}
                     name="Matthias Manoukian"
                     fields={['Head of Design', 'Lyon']}
                     orientation={Orientation.vertical}
@@ -50,7 +50,12 @@ export const App = ({ theme }: any) => (
                 />
             }
             author={
-                <UserBlock avatar="/demo-assets/avatar2.jpg" name="Matthias Manoukian" size={Size.s} theme={theme} />
+                <UserBlock
+                    avatarProps={{ image: '/demo-assets/avatar2.jpg', alt: 'Avatar' }}
+                    name="Matthias Manoukian"
+                    size={Size.s}
+                    theme={theme}
+                />
             }
             tags={
                 <ChipGroup>

@@ -24,6 +24,7 @@ interface Setup extends CommonSetup {
 const setup = ({ ...propsOverride }: Partial<AvatarProps> = {}, shallowRendering = true): Setup => {
     const props: AvatarProps = {
         image: 'path/to/avatar/image.png',
+        alt: 'Image',
         ...propsOverride,
     };
 

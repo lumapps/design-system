@@ -6,6 +6,7 @@ export const App = ({ theme }: any) => (
     <Avatar
         theme={theme}
         image="/demo-assets/persona.png"
+        alt="Avatar with actions"
         size={Size.xl}
         actions={
             <FlexBox orientation={Orientation.horizontal} vAlign={Alignment.center} gap={Size.regular}>

@@ -15,6 +15,7 @@ export const App = () => (
 
         <Avatar
             image="/demo-assets/persona.png"
+            alt="Avatar with icon"
             size={Size.m}
             badge={
                 <Badge color={ColorPalette.yellow}>
@@ -25,6 +26,7 @@ export const App = () => (
 
         <Avatar
             image="/demo-assets/persona.png"
+            alt="Avatar with icon"
             size={Size.m}
             badge={
                 <Badge color={ColorPalette.red}>

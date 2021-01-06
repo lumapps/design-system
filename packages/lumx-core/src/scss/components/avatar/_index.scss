@@ -10,6 +10,10 @@
     border-radius: 50%;
     outline: none;
 
+    .#{$lumx-base-prefix}-thumbnail__image {
+        border-radius: 50%;
+    }
+
     &__actions {
         position: absolute;
         top: 50%;
@@ -32,6 +36,11 @@
     .#{$lumx-base-prefix}-avatar--size-#{$key} {
         width: $size;
         height: $size;
+
+        .#{$lumx-base-prefix}-thumbnail__image {
+            width: $size;
+            height: $size;
+        }
     }
 }
 
