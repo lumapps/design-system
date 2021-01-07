@@ -4,14 +4,12 @@ import classNames from 'classnames';
 
 import { Size, Theme, Thumbnail, ThumbnailProps } from '@lumx/react';
 
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
-
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
  * Avatar sizes.
  */
-export type AvatarSize = Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
+export type AvatarSize = Extract<Size, 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl'>;
 
 /**
  * Defines the props of the component.
@@ -36,7 +34,7 @@ export interface AvatarProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}Avatar`;
+const COMPONENT_NAME = 'Avatar';
 
 /**
  * Component default class name and class prefix.

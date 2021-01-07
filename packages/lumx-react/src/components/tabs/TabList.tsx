@@ -1,5 +1,5 @@
 import { Alignment, Theme } from '@lumx/react';
-import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
+import { CSS_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, handleBasicClasses } from '@lumx/react/utils';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
@@ -10,12 +10,6 @@ import { useRovingTabIndex } from '../../hooks/useRovingTabIndex';
 export enum TabListLayout {
     clustered = 'clustered',
     fixed = 'fixed',
-}
-
-export enum TabListPosition {
-    center = 'center',
-    left = 'left',
-    right = 'right',
 }
 
 /**
@@ -29,7 +23,7 @@ export interface TabListProps extends GenericProps {
     /** Layout of the tabs in the list. */
     layout?: TabListLayout;
     /** Position of the tabs in the list (requires 'clustered' layout). */
-    position?: TabListPosition;
+    position?: Alignment;
     /** Theme adapting the component to light or dark background. */
     theme?: Theme;
 }
@@ -37,7 +31,7 @@ export interface TabListProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}TabList`;
+const COMPONENT_NAME = 'TabList';
 
 /**
  * Component default class name and class prefix.
@@ -49,7 +43,7 @@ const CLASSNAME = `${CSS_PREFIX}-tabs`;
  */
 const DEFAULT_PROPS: Partial<TabListProps> = {
     layout: TabListLayout.fixed,
-    position: TabListPosition.left,
+    position: Alignment.left,
     theme: Theme.light,
 };
 

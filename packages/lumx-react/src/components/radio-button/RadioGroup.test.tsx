@@ -3,42 +3,21 @@ import React, { ReactElement } from 'react';
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
-import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 
 import { RadioButton } from '@lumx/react';
 import { RadioGroup, RadioGroupProps } from './RadioGroup';
 
 const CLASSNAME = RadioGroup.className as string;
 
-/**
- * Define the overriding properties waited by the `setup` function.
- */
 type SetupProps = Partial<RadioGroupProps>;
-
-/**
- * Defines what the `setup` function will return.
- */
-interface Setup extends CommonSetup {
-    props: SetupProps;
-
-    /**
-     * The <div> element that wraps radio button and children elements.
-     */
-    wrapper: Wrapper;
-
-    /**
-     * RadioButton elements in the children.
-     */
-    radioButtons: Wrapper;
-}
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = (propsOverride: SetupProps = {}, shallowRendering = true) => {
     const props: any = { ...propsOverride };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-
     const wrapper = renderer(<RadioGroup {...props} />);
 
     return {

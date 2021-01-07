@@ -1,5 +1,4 @@
 import { Color, ColorPalette } from '@lumx/react';
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
 import React, { forwardRef, ReactNode } from 'react';
@@ -17,7 +16,7 @@ export interface BadgeProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}Badge`;
+const COMPONENT_NAME = 'Badge';
 
 /**
  * Component default class name and class prefix.

@@ -14,11 +14,6 @@ export {
 } from '@lumx/core/js/constants';
 
 /**
- * Component name prefix.
- */
-export const COMPONENT_PREFIX = '';
-
-/**
  * Optional global `window` instance (not defined when running SSR).
  */
 export const WINDOW = typeof window !== `undefined` ? window : undefined;

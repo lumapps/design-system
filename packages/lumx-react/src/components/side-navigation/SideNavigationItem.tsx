@@ -7,7 +7,6 @@ import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
 
 import { Emphasis, Icon, Size, IconButton, IconButtonProps } from '@lumx/react';
 
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import {
     Callback,
     Comp,
@@ -51,7 +50,7 @@ export interface SideNavigationItemProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}SideNavigationItem`;
+const COMPONENT_NAME = 'SideNavigationItem';
 
 /**
  * Component default class name and class prefix.

@@ -8,7 +8,6 @@ import {
     TableHeaderProps,
     TableRow,
     ThOrder,
-    ThScope,
 } from '@lumx/react';
 
 import orderBy from 'lodash/orderBy';
@@ -43,26 +42,22 @@ const initialHeaders: Array<Partial<TableHeaderProps>> = [
         isSortable: true,
         label: 'Dessert',
         name: 'dessert',
-        scope: ThScope.col,
     },
     {
         isSortable: true,
         label: 'Calories',
         name: 'calories',
-        scope: ThScope.col,
     },
     {
         isSortable: true,
         label: 'Fat (g)',
         name: 'fat',
-        scope: ThScope.col,
     },
     {
         icon: mdiCommentOutline,
         isSortable: false,
         label: 'Comments',
         name: 'comments',
-        scope: ThScope.col,
     },
 ];
 
@@ -94,7 +89,6 @@ export const App = ({ theme }: any) => {
                                 key={header.name}
                                 icon={header.icon}
                                 isSortable={header.isSortable}
-                                scope={header.scope}
                                 sortOrder={header.sortOrder}
                                 variant={TableCellVariant.head}
                                 onHeaderClick={onHeaderClick}

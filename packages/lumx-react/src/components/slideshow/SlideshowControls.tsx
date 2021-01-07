@@ -5,8 +5,6 @@ import range from 'lodash/range';
 
 import { mdiChevronLeft, mdiChevronRight } from '@lumx/icons';
 import { Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
-
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { useKeyOrSwipeNavigate } from '@lumx/react/components/slideshow/useKeyOrSwipeNavigate';
 
@@ -42,7 +40,7 @@ export interface SlideshowControlsProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}SlideshowControls`;
+const COMPONENT_NAME = 'SlideshowControls';
 
 /**
  * Component default class name and class prefix.

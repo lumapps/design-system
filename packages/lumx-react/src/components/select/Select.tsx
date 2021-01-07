@@ -11,8 +11,6 @@ import { Chip } from '@lumx/react/components/chip/Chip';
 import { Icon } from '@lumx/react/components/icon/Icon';
 import { InputLabel } from '@lumx/react/components/input-label/InputLabel';
 
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
-
 import { Comp, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { WithSelectContext } from './WithSelectContext';
@@ -27,7 +25,7 @@ export interface SelectProps extends CoreSelectProps {
 export { SelectVariant };
 
 /** The display name of the component. */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}Select`;
+const COMPONENT_NAME = 'Select';
 
 /** The default class name and classes prefix for this component. */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);

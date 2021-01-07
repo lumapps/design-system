@@ -4,7 +4,6 @@ import classNames from 'classnames';
 
 import { Dropdown, IconButtonProps, Offset, Placement, TextField, Theme } from '@lumx/react';
 
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { useFocus } from '@lumx/react/hooks/useFocus';
@@ -158,7 +157,7 @@ export interface AutocompleteProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}Autocomplete`;
+const COMPONENT_NAME = 'Autocomplete';
 
 /**
  * Component default class name and class prefix.

@@ -1,7 +1,6 @@
 import React, { forwardRef, MouseEventHandler, useMemo } from 'react';
 
 import { Alignment, AspectRatio, Theme, Thumbnail, ThumbnailProps } from '@lumx/react';
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
 import take from 'lodash/take';
@@ -21,7 +20,7 @@ export interface MosaicProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}Mosaic`;
+const COMPONENT_NAME = 'Mosaic';
 
 /**
  * Component default class name and class prefix.

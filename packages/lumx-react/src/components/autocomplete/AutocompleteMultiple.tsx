@@ -1,7 +1,6 @@
 import { mdiClose } from '@lumx/icons';
 import { Autocomplete, AutocompleteProps, Chip, ChipGroup, HorizontalAlignment, Icon, Size } from '@lumx/react';
 
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import classNames from 'classnames';
@@ -27,7 +26,7 @@ export interface AutocompleteMultipleProps extends AutocompleteProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}AutocompleteMultiple`;
+const COMPONENT_NAME = 'AutocompleteMultiple';
 
 /**
  * Component default class name and class prefix.

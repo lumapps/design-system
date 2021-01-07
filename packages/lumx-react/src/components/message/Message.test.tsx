@@ -1,34 +1,21 @@
-import { CommonSetup, commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
+import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
+import { Kind } from '@lumx/react';
 import { getBasicClass } from '@lumx/react/utils';
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 import React, { ReactElement } from 'react';
-import { Message, MessageKind, MessageProps } from './Message';
+import { Message, MessageProps } from './Message';
 
-const DEFAULT_PROPS = Message.defaultProps as any;
 const CLASSNAME = Message.className as string;
 
-/**
- * Define the overriding properties waited by the `setup` function.
- */
 type SetupProps = Partial<MessageProps>;
-
-/**
- * Defines what the `setup` function will return.
- */
-interface Setup extends CommonSetup {
-    props: SetupProps;
-    message: Wrapper;
-    wrapper: Wrapper;
-}
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = (propsOverride: SetupProps = {}, shallowRendering = true) => {
     const props: any = { ...propsOverride };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-
     const wrapper: Wrapper = renderer(
         <Message {...props}>
             <span>Lorem Ipsum</span>
@@ -36,11 +23,7 @@ const setup = (propsOverride: SetupProps = {}, shallowRendering = true): Setup =
     );
     const message: Wrapper = wrapper.find('div').first();
 
-    return {
-        message,
-        props,
-        wrapper,
-    };
+    return { message, props, wrapper };
 };
 
 describe(`<${Message.displayName}>`, () => {
@@ -61,28 +44,15 @@ describe(`<${Message.displayName}>`, () => {
     describe('Props', () => {
         // Here are some examples of basic props check.
 
-        it('should use default props', () => {
-            const { wrapper } = setup();
-
-            Object.keys(DEFAULT_PROPS).forEach((prop: string) => {
-                expect(wrapper).toHaveClassName(
-                    getBasicClass({ prefix: CLASSNAME, type: prop, value: DEFAULT_PROPS[prop] }),
-                );
-            });
-        });
-
         it('should use the given `kind`', () => {
             const testedProp = 'kind';
             const modifiedProps: Partial<MessageProps> = {
-                [testedProp]: MessageKind.success,
+                [testedProp]: Kind.success,
             };
 
             const { message } = setup(modifiedProps);
 
             expect(message).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'color', value: `green` }));
-            expect(message).not.toHaveClassName(
-                getBasicClass({ prefix: CLASSNAME, type: testedProp, value: DEFAULT_PROPS[testedProp] }),
-            );
         });
     });
 

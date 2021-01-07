@@ -7,12 +7,9 @@ import {
     FlexBox,
     Orientation,
     Size,
-    SkeletonCircle,
     SkeletonRectangle,
     SkeletonRectangleVariant,
-    SkeletonTypography,
     Thumbnail,
-    Typography,
 } from '@lumx/react';
 import { imageKnob } from '@lumx/react/stories/knobs';
 
@@ -25,14 +22,6 @@ const variants = [
 ] as const;
 const sizes = [Size.xxs, Size.xs, Size.s, Size.m, Size.l, Size.xl, Size.xxl] as const;
 const aspectRatios = [AspectRatio.vertical, AspectRatio.square, AspectRatio.horizontal] as const;
-
-export const Circle = ({ theme }: any) => (
-    <FlexBox orientation={Orientation.horizontal}>
-        {sizes.map((size) => (
-            <SkeletonCircle theme={theme} key={size} size={size} className="lumx-spacing-margin" />
-        ))}
-    </FlexBox>
-);
 
 export const Rectangle = ({ theme }: any) => (
     <>
@@ -73,21 +62,6 @@ export const Rectangle = ({ theme }: any) => (
                 />
             ))}
         </FlexBox>
-    </>
-);
-
-export const TextTypography = ({ theme }: any) => (
-    <>
-        <SkeletonTypography
-            theme={theme}
-            typography={Typography.title}
-            width="30%"
-            className="lumx-spacing-margin-bottom"
-        />
-        <SkeletonTypography theme={theme} typography={Typography.body1} />
-        <SkeletonTypography theme={theme} typography={Typography.body1} />
-        <SkeletonTypography theme={theme} typography={Typography.body1} />
-        <SkeletonTypography theme={theme} typography={Typography.body1} width="70%" />
     </>
 );
 

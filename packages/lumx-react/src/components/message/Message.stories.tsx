@@ -1,20 +1,19 @@
-import { Message, MessageKind } from '@lumx/react';
-import { boolean, select, text } from '@storybook/addon-knobs';
+import { Kind, Message } from '@lumx/react';
+import { boolean, text } from '@storybook/addon-knobs';
 import React from 'react';
+import { enumKnob } from '@lumx/react/stories/knobs/enumKnob';
 
 export default { title: 'LumX components/message/Message' };
 
 export const Default = () => (
     <Message
-        kind={select('Kind of message', MessageKind, MessageKind.error)}
+        kind={enumKnob('Kind of message', [undefined, ...Object.values(Kind)], undefined)}
         hasBackground={boolean('Has background', false)}
     >
-        <span>
-            {text(
-                'Message',
-                `Message text quisque tincidunt lobortis dui non auctor.Donec porta,
+        {text(
+            'Message',
+            `Message text quisque tincidunt lobortis dui non auctor.Donec porta,
                 ligula volutpat vehicula aliquet, dui sapien tempus felis, sed.`,
-            )}
-        </span>
+        )}
     </Message>
 );

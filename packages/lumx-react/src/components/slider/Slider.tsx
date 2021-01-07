@@ -5,7 +5,6 @@ import classNames from 'classnames';
 
 import { InputHelper, InputLabel, Theme } from '@lumx/react';
 
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import useEventCallback from '@lumx/react/hooks/useEventCallback';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
@@ -47,7 +46,7 @@ export interface SliderProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}Slider`;
+const COMPONENT_NAME = 'Slider';
 
 /**
  * Component default class name and class prefix.

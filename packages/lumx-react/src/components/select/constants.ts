@@ -1,15 +1,13 @@
 import { IconButtonProps } from '@lumx/react';
 import { Theme } from '@lumx/react/components';
-import { GenericProps } from '@lumx/react/utils';
+import { GenericProps, ValueOf } from '@lumx/react/utils';
 import { ReactNode, SyntheticEvent } from 'react';
 
 /**
  * Select variants.
  */
-export enum SelectVariant {
-    input = 'input',
-    chip = 'chip',
-}
+export const SelectVariant = { input: 'input', chip: 'chip' } as const;
+export type SelectVariant = ValueOf<typeof SelectVariant>;
 
 export interface CoreSelectProps extends GenericProps {
     /** Props to pass to the clear button (minus those already set by the Select props). If not specified, the button won't be displayed. */

@@ -1,13 +1,12 @@
 import { Alignment, HorizontalAlignment, Orientation, VerticalAlignment } from '@lumx/react';
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
 import castArray from 'lodash/castArray';
 import React, { forwardRef, ReactNode } from 'react';
 import { Size } from '..';
 
-export type MarginAutoAlignment = Alignment.top | Alignment.bottom | Alignment.right | Alignment.left;
-export type GapSize = Size.regular | Size.big | Size.huge;
+export type MarginAutoAlignment = Extract<Alignment, 'top' | 'bottom' | 'right' | 'left'>;
+export type GapSize = Extract<Size, 'regular' | 'big' | 'huge'>;
 
 /**
  * Defines the props of the component.
@@ -36,7 +35,7 @@ export interface FlexBoxProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}FlexBox`;
+const COMPONENT_NAME = 'FlexBox';
 
 /**
  * Component default class name and class prefix.

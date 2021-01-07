@@ -2,8 +2,6 @@ import React, { forwardRef, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
-
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
@@ -21,7 +19,7 @@ export interface ToolbarProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}Toolbar`;
+const COMPONENT_NAME = 'Toolbar';
 
 /**
  * Component default class name and class prefix.

@@ -4,39 +4,19 @@ import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
 import { mdiCheck, mdiChevronDown, mdiPlus } from '@lumx/icons';
-import { CommonSetup, commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
+import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 import { Button, ButtonProps } from './Button';
 
 const DEFAULT_PROPS = Button.defaultProps as any;
 const CLASSNAME = Button.className as string;
 
-/**
- * Define the overriding properties waited by the `setup` function.
- */
 type SetupProps = Partial<ButtonProps>;
-
-/**
- * Defines what the `setup` function will return.
- */
-interface Setup extends CommonSetup {
-    props: SetupProps;
-
-    /**
-     * ButtonRoot element.
-     */
-    buttonRoot: Wrapper;
-
-    /**
-     * Button icons.
-     */
-    icon: Wrapper;
-}
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = (propsOverride: SetupProps = {}, shallowRendering = true) => {
     const props: any = { ...propsOverride };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
 
@@ -122,7 +102,7 @@ describe(`<${Button.displayName}>`, () => {
         it('should use default props', () => {
             const { buttonRoot } = setup();
 
-            const actualProps: ButtonProps = buttonRoot.props();
+            const actualProps = buttonRoot.props() as Partial<ButtonProps>;
             expect(actualProps.variant).toEqual('button');
             for (const [propName, propValue] of Object.entries(DEFAULT_PROPS)) {
                 expect(actualProps[propName]).toEqual(propValue);

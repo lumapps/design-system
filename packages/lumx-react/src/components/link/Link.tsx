@@ -2,7 +2,6 @@ import React, { forwardRef, RefObject, useMemo } from 'react';
 
 import isEmpty from 'lodash/isEmpty';
 
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import classNames from 'classnames';
 
 import { Color, ColorVariant, Icon, Size, Typography } from '@lumx/react';
@@ -38,7 +37,7 @@ export interface LinkProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}Link`;
+const COMPONENT_NAME = 'Link';
 
 /**
  * Component default class name and class prefix.

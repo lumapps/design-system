@@ -3,10 +3,9 @@ import React, { forwardRef } from 'react';
 import classNames from 'classnames';
 
 import { Color, ColorPalette, ColorVariant, Size, Theme } from '@lumx/react';
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
-export type IconSizes = Size.xxs | Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
+export type IconSizes = Extract<Size, 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl'>;
 
 /**
  * Defines the props of the component.
@@ -32,7 +31,7 @@ export interface IconProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}Icon`;
+const COMPONENT_NAME = 'Icon';
 
 /**
  * Component default class name and class prefix.

@@ -5,7 +5,7 @@ import isEmpty from 'lodash/isEmpty';
 import classNames from 'classnames';
 
 import { Color, ColorPalette, Emphasis, Size, Theme } from '@lumx/react';
-import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
+import { CSS_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, handleBasicClasses } from '@lumx/react/utils';
 import { renderLink } from '@lumx/react/utils/renderLink';
 
@@ -14,7 +14,7 @@ type HTMLButtonProps = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>
 /**
  * Button size definition.
  */
-export type ButtonSize = Size.s | Size.m;
+export type ButtonSize = Extract<Size, 's' | 'm'>;
 
 export interface BaseButtonProps extends GenericProps {
     /** ARIA button label. */
@@ -52,7 +52,7 @@ export interface ButtonRootProps extends BaseButtonProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}ButtonRoot`;
+const COMPONENT_NAME = 'ButtonRoot';
 
 export const BUTTON_WRAPPER_CLASSNAME = `${CSS_PREFIX}-button-wrapper`;
 export const BUTTON_CLASSNAME = `${CSS_PREFIX}-button`;

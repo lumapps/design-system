@@ -3,22 +3,22 @@ import React, { forwardRef, MouseEventHandler } from 'react';
 import classNames from 'classnames';
 
 import { AspectRatio, Icon, Size, Theme } from '@lumx/react';
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, ValueOf } from '@lumx/react/utils';
 
 /**
  * Uploader variants.
  */
-export enum UploaderVariant {
-    square = 'square',
-    rounded = 'rounded',
-    circle = 'circle',
-}
+export const UploaderVariant = {
+    square: 'square',
+    rounded: 'rounded',
+    circle: 'circle',
+} as const;
+export type UploaderVariant = ValueOf<typeof UploaderVariant>;
 
 /**
  * Uploader sizes.
  */
-export type UploaderSize = Size.xl | Size.xxl;
+export type UploaderSize = Extract<Size, 'xl' | 'xxl'>;
 
 /**
  * Defines the props of the component.
@@ -43,7 +43,7 @@ export interface UploaderProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}Uploader`;
+const COMPONENT_NAME = 'Uploader';
 
 /**
  * Component default class name and class prefix.

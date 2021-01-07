@@ -6,7 +6,6 @@ import isObject from 'lodash/isObject';
 
 import { Orientation, Theme, Thumbnail, ThumbnailProps, ThumbnailVariant } from '@lumx/react';
 
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
@@ -40,7 +39,7 @@ export interface PostBlockProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}PostBlock`;
+const COMPONENT_NAME = 'PostBlock';
 
 /**
  * Component default class name and class prefix.
@@ -76,10 +75,15 @@ export const PostBlock: Comp<PostBlockProps, HTMLDivElement> = forwardRef((props
         theme,
         thumbnailProps,
         title,
+        ...forwardedProps
     } = props;
 
     return (
-        <div ref={ref} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, orientation, theme }))}>
+        <div
+            ref={ref}
+            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, orientation, theme }))}
+            {...forwardedProps}
+        >
             {thumbnailProps && (
                 <div className={`${CLASSNAME}__thumbnail`}>
                     <Thumbnail {...thumbnailProps} theme={theme} variant={ThumbnailVariant.rounded} />

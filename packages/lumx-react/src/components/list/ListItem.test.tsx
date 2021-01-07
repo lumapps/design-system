@@ -2,7 +2,7 @@ import React from 'react';
 
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
-import { CommonSetup, commonTestsSuite, itShouldRenderStories } from '@lumx/react/testing/utils';
+import { commonTestsSuite, itShouldRenderStories } from '@lumx/react/testing/utils';
 
 import { ListItem, ListItemProps } from './ListItem';
 import * as stories from './ListItem.stories';
@@ -12,7 +12,7 @@ const CLASSNAME = ListItem.className as string;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (props: Partial<ListItemProps> = {}, shallowRendering = true): CommonSetup => {
+const setup = (props: Partial<ListItemProps> = {}, shallowRendering = true) => {
     const renderer: any = shallowRendering ? shallow : mount;
     const wrapper: any = renderer(<ListItem {...(props as any)} />);
     return { props, wrapper };

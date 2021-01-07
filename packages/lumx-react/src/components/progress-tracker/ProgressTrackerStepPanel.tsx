@@ -1,5 +1,5 @@
 import { useTabProviderContext } from '@lumx/react/components/tabs/state';
-import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
+import { CSS_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, handleBasicClasses } from '@lumx/react/utils';
 
 import classNames from 'classnames';
@@ -18,7 +18,7 @@ export interface ProgressTrackerStepPanelProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}ProgressTrackerStepPanel`;
+const COMPONENT_NAME = 'ProgressTrackerStepPanel';
 
 /**
  * Component default class name and class prefix.

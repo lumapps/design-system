@@ -9,7 +9,6 @@ import isEmpty from 'lodash/isEmpty';
 import isFunction from 'lodash/isFunction';
 
 import { ColorPalette, DragHandle, Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import {
     Callback,
     Comp,
@@ -48,7 +47,7 @@ export interface ExpansionPanelProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}ExpansionPanel`;
+const COMPONENT_NAME = 'ExpansionPanel';
 
 /**
  * Component default class name and class prefix.

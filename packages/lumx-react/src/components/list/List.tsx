@@ -1,7 +1,5 @@
 import { Size } from '@lumx/react';
 
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
-
 import { useKeyboardListNavigation } from '@lumx/react/hooks/useKeyboardListNavigation';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
@@ -22,7 +20,7 @@ export interface ListProps extends GenericProps {
      */
     isClickable?: boolean;
     /** Item padding size. */
-    itemPadding?: Size.big | Size.huge;
+    itemPadding?: Extract<Size, 'big' | 'huge'>;
     /**
      * On list item selected callback.
      *
@@ -36,7 +34,7 @@ export interface ListProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}List`;
+const COMPONENT_NAME = 'List';
 
 /**
  * Component default class name and class prefix.

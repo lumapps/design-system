@@ -1,4 +1,4 @@
-/* eslint-disable import/unambiguous,import/no-commonjs */
+/* eslint-disable */
 const tsconfig = require('../../../tsconfig');
 const CONFIGS = require('../../../configs');
 
@@ -12,7 +12,7 @@ const moduleNameMapper = fromPairs(
 );
 
 module.exports = {
-    collectCoverageFrom: ['src/**/*.{ts,tsx}'],
+    collectCoverageFrom: ['src/**/*.{ts,tsx}', '!src/**/*.stories.tsx'],
     coverageDirectory: '<rootDir>jest/reports/coverage',
     coverageReporters: ['json', 'lcov', 'html', 'text'],
     moduleDirectories: [`${CONFIGS.path.ROOT_PATH}/node_modules`],

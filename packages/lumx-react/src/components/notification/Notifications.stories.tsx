@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Button, Notification, NotificationType } from '@lumx/react';
+import { Button, Notification, Kind } from '@lumx/react';
 
 import noop from 'lodash/noop';
 
@@ -17,13 +17,13 @@ const properties = {
         content: 'Error',
         onClick: noop,
         isOpen: true,
-        type: NotificationType.error,
+        type: Kind.error,
     },
     info: {
         content: 'Info',
         onClick: noop,
         isOpen: true,
-        type: NotificationType.info,
+        type: Kind.info,
     },
     infoWithCallback: {
         onActionClick: noop,
@@ -31,20 +31,20 @@ const properties = {
         content: 'Info with callback',
         onClick: noop,
         isOpen: true,
-        type: NotificationType.info,
+        type: Kind.info,
     },
     success: {
         content: 'Success',
         onClick: noop,
         isOpen: true,
-        type: NotificationType.success,
+        type: Kind.success,
     },
 
     warning: {
         content: 'Warning',
         onClick: noop,
         isOpen: true,
-        type: NotificationType.warning,
+        type: Kind.warning,
     },
 };
 

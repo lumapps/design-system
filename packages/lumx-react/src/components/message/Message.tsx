@@ -1,16 +1,8 @@
 import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiInformation } from '@lumx/icons';
-import { ColorPalette, Icon, Size } from '@lumx/react';
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
+import { ColorPalette, Icon, Kind, Size } from '@lumx/react';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
 import React, { forwardRef, ReactNode } from 'react';
-
-export enum MessageKind {
-    error = 'error',
-    info = 'info',
-    success = 'success',
-    warning = 'warning',
-}
 
 /**
  * Defines the props of the component.
@@ -21,13 +13,13 @@ export interface MessageProps extends GenericProps {
     /** Whether the message has a background or not. */
     hasBackground?: boolean;
     /** Message variant. */
-    kind?: MessageKind;
+    kind?: Kind;
 }
 
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}Message`;
+const COMPONENT_NAME = 'Message';
 
 /**
  * Component default class name and class prefix.
@@ -35,30 +27,13 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Message`;
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
- * Component default props.
+ * Associative map from message kind to color and icon.
  */
-const DEFAULT_PROPS: Partial<MessageProps> = {
-    color: ColorPalette.dark,
-};
-
-/**
- * Associative map from message kind to color.
- */
-const KIND_COLOR = {
-    [MessageKind.error]: ColorPalette.red,
-    [MessageKind.info]: ColorPalette.dark,
-    [MessageKind.success]: ColorPalette.green,
-    [MessageKind.warning]: ColorPalette.yellow,
-};
-
-/**
- * Associative map from message kind to icon.
- */
-const KIND_ICON = {
-    [MessageKind.error]: mdiAlert,
-    [MessageKind.info]: mdiInformation,
-    [MessageKind.success]: mdiCheckCircle,
-    [MessageKind.warning]: mdiAlertCircle,
+const CONFIG = {
+    [Kind.error]: { color: ColorPalette.red, icon: mdiAlert },
+    [Kind.info]: { color: ColorPalette.dark, icon: mdiInformation },
+    [Kind.success]: { color: ColorPalette.green, icon: mdiCheckCircle },
+    [Kind.warning]: { color: ColorPalette.yellow, icon: mdiAlertCircle },
 };
 
 /**
@@ -70,9 +45,8 @@ const KIND_ICON = {
  */
 export const Message: Comp<MessageProps, HTMLDivElement> = forwardRef((props, ref) => {
     const { children, className, hasBackground, kind, ...forwardedProps } = props;
-    const icon = kind ? KIND_ICON[kind as MessageKind] : null;
+    const { color, icon } = CONFIG[kind as Kind] || {};
 
-    const color = kind ? KIND_COLOR[kind as MessageKind] : DEFAULT_PROPS.color;
     return (
         <div
             ref={ref}
@@ -93,4 +67,3 @@ export const Message: Comp<MessageProps, HTMLDivElement> = forwardRef((props, re
 });
 Message.displayName = COMPONENT_NAME;
 Message.className = CLASSNAME;
-Message.defaultProps = DEFAULT_PROPS;

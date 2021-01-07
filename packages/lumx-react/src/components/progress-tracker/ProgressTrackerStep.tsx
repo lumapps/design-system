@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { Icon, InputHelper, InputLabel, Kind, Size } from '@lumx/react';
 
-import { COMPONENT_PREFIX, ENTER_KEY_CODE } from '@lumx/react/constants';
+import { ENTER_KEY_CODE } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiRadioboxBlank, mdiRadioboxMarked } from '@lumx/icons';
@@ -35,7 +35,7 @@ export interface ProgressTrackerStepProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}ProgressTrackerStep`;
+const COMPONENT_NAME = 'ProgressTrackerStep';
 
 /**
  * Component default class name and class prefix.

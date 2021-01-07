@@ -8,7 +8,7 @@ import classNames from 'classnames';
 
 import { Placement } from '@lumx/react/components/popover/Popover';
 
-import { COMPONENT_PREFIX, DOCUMENT } from '@lumx/react/constants';
+import { DOCUMENT } from '@lumx/react/constants';
 
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
@@ -17,7 +17,7 @@ import { useInjectTooltipRef } from './useInjectTooltipRef';
 import { useTooltipOpen } from './useTooltipOpen';
 
 /** Position of the tooltip relative to the anchor element. */
-export type TooltipPlacement = Placement.TOP | Placement.RIGHT | Placement.BOTTOM | Placement.LEFT;
+export type TooltipPlacement = Extract<Placement, 'top' | 'right' | 'bottom' | 'left'>;
 
 /**
  * Defines the props of the component.
@@ -38,7 +38,7 @@ export interface TooltipProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}Tooltip`;
+const COMPONENT_NAME = 'Tooltip';
 
 /**
  * Component default class name and class prefix.

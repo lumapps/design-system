@@ -1,13 +1,13 @@
-import { Tab } from '@lumx/react';
+import { Tab, Alignment } from '@lumx/react';
 
-import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 import React, { ReactElement } from 'react';
 import { build, oneOf } from 'test-data-bot';
-import { TabList, TabListLayout, TabListPosition, TabListProps } from './TabList';
+import { TabList, TabListLayout, TabListProps } from './TabList';
 import { setupTabProviderMocks } from './test.mocks';
 
 const CLASSNAME = TabList.className as string;
@@ -17,27 +17,12 @@ jest.mock('./state', () => {
     return { useTabProviderContext: jest.fn(), useTabProviderContextState: jest.fn() };
 });
 
-/**
- * Define the overriding properties waited by the `setup` function.
- */
 type SetupProps = Partial<TabListProps>;
-
-/**
- * Defines what the `setup` function will return.
- */
-interface Setup extends CommonSetup {
-    props: SetupProps;
-
-    /**
-     * The <div> element that wraps tabs and content elements.
-     */
-    wrapper: Wrapper;
-}
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true) => {
     const tabs = [<Tab key={0} label="Tab 0" />, <Tab key={1} label="Tab 1" />];
     const props: TabListProps = {
         children: tabs,
@@ -45,9 +30,7 @@ const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true): 
         ...propsOverride,
     };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-
-    // noinspection RequiredAttributes
-    const wrapper: Wrapper = renderer(<TabList {...props} />);
+    const wrapper = renderer(<TabList {...props} />);
 
     return { props, wrapper };
 };
@@ -76,7 +59,7 @@ describe(`<${TabList.displayName}>`, () => {
         it('should use the given props', () => {
             const modifiedPropsBuilder: () => SetupProps = build('props').fields({
                 layout: TabListLayout.clustered,
-                position: oneOf(TabListPosition.center, TabListPosition.right),
+                position: oneOf(Alignment.center, Alignment.right),
             });
 
             const modifiedProps: SetupProps = modifiedPropsBuilder();

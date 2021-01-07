@@ -1,17 +1,6 @@
 import { CodeBlock } from '@lumx/demo/components/CodeBlock';
 import { mdiCodeTags } from '@lumx/icons';
-import {
-    Alignment,
-    Button,
-    Emphasis,
-    FlexBox,
-    FlexBoxProps,
-    Orientation,
-    Size,
-    Switch,
-    SwitchPosition,
-    Theme,
-} from '@lumx/react';
+import { Alignment, Button, Emphasis, FlexBox, FlexBoxProps, Orientation, Size, Switch, Theme } from '@lumx/react';
 
 import classNames from 'classnames';
 import isFunction from 'lodash/isFunction';
@@ -37,7 +26,7 @@ export const DemoBlock: React.FC<DemoBlockProps> = ({
     hasPlayButton = false,
     ...flexBoxProps
 }) => {
-    const [theme, setTheme] = useState(Theme.light);
+    const [theme, setTheme] = useState<Theme>(Theme.light);
     const toggleTheme = (isChecked: boolean) => {
         setTheme(isChecked ? Theme.dark : Theme.light);
     };
@@ -80,7 +69,7 @@ export const DemoBlock: React.FC<DemoBlockProps> = ({
                     <div className="demo-block__theme-toggle">
                         <Switch
                             disabled={!children}
-                            position={SwitchPosition.right}
+                            position={Alignment.right}
                             isChecked={theme === Theme.dark}
                             onChange={toggleTheme}
                         >

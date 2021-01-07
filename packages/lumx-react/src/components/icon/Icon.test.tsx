@@ -6,58 +6,30 @@ import { build, fake, oneOf } from 'test-data-bot';
 
 import { mdiCheck, mdiPlus } from '@lumx/icons';
 import { ColorPalette, ColorVariant, Size } from '@lumx/react';
-import { CommonSetup, commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
+import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
 import { Icon, IconProps } from './Icon';
 
 const CLASSNAME = Icon.className as string;
 
-/**
- * Define the overriding properties waited by the `setup` function.
- */
 type SetupProps = Partial<IconProps>;
-
-/**
- * Defines what the `setup` function will return.
- */
-interface Setup extends CommonSetup {
-    props: SetupProps;
-
-    /**
-     * The <i> element that wraps the <svg> element.
-     */
-    i: Wrapper;
-
-    /**
-     * The <path> element that holds the icon path.
-     */
-    path: Wrapper;
-
-    /**
-     * The <svg> element that holds the SVG <path> of the icon.
-     */
-    svg: Wrapper;
-}
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true) => {
     const props: IconProps = {
         icon: 'mdiPlus',
         ...propsOverride,
     };
-
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-
     const wrapper: Wrapper = renderer(<Icon {...props} />);
 
     return {
         i: wrapper.find('i'),
         path: wrapper.find('path'),
         svg: wrapper.find('svg'),
-
         props,
         wrapper,
     };

@@ -17,7 +17,7 @@ export const ErrorHelper = ({ theme }: any) => (
 );
 
 export const ValidHelper = ({ theme }: any) => (
-    <InputHelper kind={Kind.valid} theme={theme}>
+    <InputHelper kind={Kind.success} theme={theme}>
         {text('Text', 'Great, you are bold')}
     </InputHelper>
 );

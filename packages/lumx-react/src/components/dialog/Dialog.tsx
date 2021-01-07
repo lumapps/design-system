@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 import { Progress, ProgressVariant, Size } from '@lumx/react';
 
-import { COMPONENT_PREFIX, DIALOG_TRANSITION_DURATION, DOCUMENT } from '@lumx/react/constants';
+import { DIALOG_TRANSITION_DURATION, DOCUMENT } from '@lumx/react/constants';
 import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
@@ -55,7 +55,7 @@ export interface DialogProps extends GenericProps {
     onClose?(): void;
 }
 
-export type DialogSizes = Size.tiny | Size.regular | Size.big | Size.huge;
+export type DialogSizes = Extract<Size, 'tiny' | 'regular' | 'big' | 'huge'>;
 
 const isHeader = isComponent('header');
 const isFooter = isComponent('footer');
@@ -63,7 +63,7 @@ const isFooter = isComponent('footer');
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}Dialog`;
+const COMPONENT_NAME = 'Dialog';
 
 /**
  * Component default class name and class prefix.

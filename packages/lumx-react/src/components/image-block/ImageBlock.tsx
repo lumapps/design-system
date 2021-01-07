@@ -6,22 +6,22 @@ import isObject from 'lodash/isObject';
 
 import { Alignment, HorizontalAlignment, Size, Theme, Thumbnail } from '@lumx/react';
 
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, ValueOf } from '@lumx/react/utils';
 import { ThumbnailProps } from '../thumbnail/Thumbnail';
 
 /**
  * Image block variants.
  */
-export enum ImageBlockCaptionPosition {
-    below = 'below',
-    over = 'over',
-}
+export const ImageBlockCaptionPosition = {
+    below: 'below',
+    over: 'over',
+} as const;
+export type ImageBlockCaptionPosition = ValueOf<typeof ImageBlockCaptionPosition>;
 
 /**
  *  Image block sizes.
  */
-export type ImageBlockSize = Size.xl | Size.xxl;
+export type ImageBlockSize = Extract<Size, 'xl' | 'xxl'>;
 
 /**
  * Defines the props of the component.
@@ -58,7 +58,7 @@ export interface ImageBlockProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}ImageBlock`;
+const COMPONENT_NAME = 'ImageBlock';
 
 /**
  * Component default class name and class prefix.

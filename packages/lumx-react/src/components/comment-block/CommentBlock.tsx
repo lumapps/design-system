@@ -3,8 +3,8 @@ import React, { Children, forwardRef, KeyboardEvent, KeyboardEventHandler, React
 import classNames from 'classnames';
 
 import { Avatar, Size, Theme } from '@lumx/react';
-import { COMPONENT_PREFIX, ENTER_KEY_CODE } from '@lumx/react/constants';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { ENTER_KEY_CODE } from '@lumx/react/constants';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, ValueOf } from '@lumx/react/utils';
 
 import isFunction from 'lodash/isFunction';
 import { AvatarProps } from '../avatar/Avatar';
@@ -12,10 +12,11 @@ import { AvatarProps } from '../avatar/Avatar';
 /**
  * Comment block variants.
  */
-export enum CommentBlockVariant {
-    indented = 'indented',
-    linear = 'linear',
-}
+export const CommentBlockVariant = {
+    indented: 'indented',
+    linear: 'linear',
+} as const;
+export type CommentBlockVariant = ValueOf<typeof CommentBlockVariant>;
 
 /**
  * Defines the props of the component.
@@ -56,7 +57,7 @@ export interface CommentBlockProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}CommentBlock`;
+const COMPONENT_NAME = 'CommentBlock';
 
 /**
  * Component default class name and class prefix.
@@ -83,6 +84,7 @@ export const CommentBlock: Comp<CommentBlockProps, HTMLDivElement> = forwardRef(
         actions,
         avatarProps,
         children,
+        className,
         date,
         hasActions,
         headerActions,
@@ -95,6 +97,7 @@ export const CommentBlock: Comp<CommentBlockProps, HTMLDivElement> = forwardRef(
         text,
         theme,
         variant,
+        ...forwardedProps
     } = props;
     const enterKeyPress: KeyboardEventHandler<HTMLElement> = (evt: KeyboardEvent<HTMLElement>) => {
         if (evt.which === ENTER_KEY_CODE && isFunction(onClick)) {
@@ -107,6 +110,7 @@ export const CommentBlock: Comp<CommentBlockProps, HTMLDivElement> = forwardRef(
         <div
             ref={ref}
             className={classNames(
+                className,
                 handleBasicClasses({
                     hasChildren: hasChildren && isOpen,
                     hasIndentedChildren: hasChildren && variant === CommentBlockVariant.indented,
@@ -116,6 +120,7 @@ export const CommentBlock: Comp<CommentBlockProps, HTMLDivElement> = forwardRef(
                     theme,
                 }),
             )}
+            {...forwardedProps}
         >
             <div className={`${CLASSNAME}__wrapper`}>
                 <div className={`${CLASSNAME}__avatar`}>

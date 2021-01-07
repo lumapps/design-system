@@ -2,8 +2,6 @@ import React, { forwardRef } from 'react';
 
 import classNames from 'classnames';
 
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
-
 import { mdiDragVertical } from '@lumx/icons';
 import { ColorPalette, Icon, Size, Theme } from '@lumx/react';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
@@ -19,7 +17,7 @@ export interface DragHandleProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}DragHandle`;
+const COMPONENT_NAME = 'DragHandle';
 
 /**
  * Component default class name and class prefix.

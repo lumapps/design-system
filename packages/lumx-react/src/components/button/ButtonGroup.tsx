@@ -2,7 +2,6 @@ import React, { forwardRef } from 'react';
 
 import classNames from 'classnames';
 
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName } from '@lumx/react/utils';
 
 /**
@@ -13,7 +12,7 @@ export type ButtonGroupProps = GenericProps;
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}ButtonGroup`;
+const COMPONENT_NAME = 'ButtonGroup';
 
 /**
  * Component default class name and class prefix.

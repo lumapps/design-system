@@ -1,6 +1,6 @@
 import { ESCAPE_KEY_CODE } from '@lumx/core/js/constants';
 import { Dialog, DialogProps } from '@lumx/react/components/dialog/Dialog';
-import { CommonSetup, commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
+import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
@@ -15,34 +15,18 @@ jest.mock('@lumx/react/hooks/useIntersectionObserver', () => ({
     useIntersectionObserver: () => new Map(),
 }));
 
-/**
- * Define the overriding properties waited by the `setup` function.
- */
 type SetupProps = Partial<DialogProps>;
-
-/**
- * Defines what the `setup` function will return.
- */
-interface Setup extends CommonSetup {
-    props: SetupProps;
-    wrapper: Wrapper;
-    dialog: Wrapper;
-}
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = (propsOverride: SetupProps = {}, shallowRendering = true) => {
     const props: any = { ...propsOverride };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
     const wrapper = renderer(<Dialog isOpen {...props} />);
     const dialog = wrapper.find(`.${CLASSNAME}`);
 
-    return {
-        props,
-        wrapper,
-        dialog,
-    };
+    return { props, wrapper, dialog };
 };
 
 describe(`<${Dialog.displayName}>`, () => {

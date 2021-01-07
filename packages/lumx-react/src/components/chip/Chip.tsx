@@ -1,5 +1,4 @@
 import { Color, ColorPalette, Size, Theme } from '@lumx/react';
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { useStopPropagation } from '@lumx/react/hooks/useStopPropagation';
 
 import { Comp, GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
@@ -12,7 +11,7 @@ import React, { forwardRef, MouseEventHandler, ReactNode } from 'react';
 /**
  * Chip sizes.
  */
-type ChipSize = Size.s | Size.m;
+type ChipSize = Extract<Size, 's' | 'm'>;
 
 /**
  * Defines the props of the component.
@@ -45,7 +44,7 @@ export interface ChipProps extends GenericProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}Chip`;
+const COMPONENT_NAME = 'Chip';
 
 /**
  * Component default class name and class prefix.

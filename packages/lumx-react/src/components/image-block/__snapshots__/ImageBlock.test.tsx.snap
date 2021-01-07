@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ImageBlock> Snapshots and structure should render story 'LumX components/image-block/Image Block/DefaultImageBlock' 1`] = `
+<figure
+  className="lumx-image-block lumx-image-block--caption-position-below lumx-image-block--align-center lumx-image-block--size-xxl lumx-image-block--theme-light"
+>
+  <Thumbnail
+    align="center"
+    alt="Image alt text"
+    aspectRatio="square"
+    className="lumx-image-block__image"
+    fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
+    focusPoint={
+      Object {
+        "x": 0,
+        "y": 0,
+      }
+    }
+    image="landscape1.jpg"
+    loading="lazy"
+    size="xxl"
+    theme="light"
+  />
+  <figcaption
+    className="lumx-image-block__wrapper"
+  >
+    <div
+      className="lumx-image-block__caption"
+    >
+      <span
+        className="lumx-image-block__title"
+      >
+        Hello world
+      </span>
+       
+      <span
+        className="lumx-image-block__description"
+      >
+        My awesome description
+      </span>
+    </div>
+    <div
+      className="lumx-image-block__tags"
+    >
+      <ChipGroup
+        align="left"
+      >
+        <Chip
+          size="s"
+          theme="light"
+        >
+          Tag 1
+        </Chip>
+        <Chip
+          size="s"
+          theme="light"
+        >
+          Tag 2
+        </Chip>
+      </ChipGroup>
+    </div>
+  </figcaption>
+</figure>
+`;

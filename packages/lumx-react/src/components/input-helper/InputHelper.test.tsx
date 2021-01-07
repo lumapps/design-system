@@ -4,48 +4,23 @@ import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
 import { Kind, Theme } from '@lumx/react';
-import { CommonSetup, Wrapper } from '@lumx/react/testing/utils';
+import { Wrapper } from '@lumx/react/testing/utils';
 import { InputHelper, InputHelperProps } from './InputHelper';
 
 const CLASSNAME = InputHelper.className as string;
 
-/**
- * Define the overriding properties waited by the `setup` function.
- */
 type SetupProps = Partial<InputHelperProps>;
-
-/**
- * Defines what the `setup` function will return.
- */
-interface Setup extends CommonSetup {
-    props: SetupProps;
-
-    /**
-     * The <Portal> element that wraps inputHelper elements.
-     */
-    wrapper: Wrapper;
-
-    /**
-     * The element itself
-     */
-    helper: Wrapper;
-}
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = (propsOverride: SetupProps = {}, shallowRendering = true) => {
     const props: any = { ...propsOverride };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-
     const wrapper: Wrapper = renderer(<InputHelper {...props} />);
     const helper: Wrapper = wrapper.find('.lumx-input-helper');
 
-    return {
-        helper,
-        props,
-        wrapper,
-    };
+    return { helper, props, wrapper };
 };
 
 const properties = {
@@ -57,9 +32,9 @@ const properties = {
         children: 'Info',
         kind: Kind.info,
     },
-    valid: {
+    success: {
         children: 'Success',
-        kind: Kind.valid,
+        kind: Kind.success,
     },
     warning: {
         children: 'Warning',
@@ -93,8 +68,8 @@ describe(`<${InputHelper.displayName}>`, () => {
             expect(helper).toIncludeText(properties.error.children);
         });
         it('should render valid', () => {
-            const { helper } = setup(properties.valid);
-            expect(helper).toIncludeText(properties.valid.children);
+            const { helper } = setup(properties.success);
+            expect(helper).toIncludeText(properties.success.children);
         });
         it('should render warning', () => {
             const { helper } = setup(properties.warning);

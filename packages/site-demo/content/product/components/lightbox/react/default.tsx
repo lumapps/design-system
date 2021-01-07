@@ -7,7 +7,7 @@ import {
     ImageBlock,
     Lightbox,
     Message,
-    MessageKind,
+    Kind,
     Orientation,
     Size,
     Slideshow,
@@ -101,7 +101,7 @@ export const App = () => {
                 ))}
             </FlexBox>
 
-            <Message className="lumx-spacing-margin-top-big" kind={MessageKind.info} hasBackground>
+            <Message className="lumx-spacing-margin-top-big" kind={Kind.info} hasBackground>
                 <span>Click on a picture to lauch a slideshow on lightbox mode.</span>
             </Message>
         </div>
