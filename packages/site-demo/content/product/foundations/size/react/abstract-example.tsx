@@ -6,7 +6,7 @@ export const App = () => (
         <List className="lumx-spacing-margin-right-huge">
             <ListItem
                 size={Size.big}
-                before={<Avatar image="../../components/avatar/assets/persona.png" size={Size.m} />}
+                before={<Avatar alt="User" image="../../components/avatar/assets/persona.png" size={Size.m} />}
                 after={<Button emphasis={Emphasis.low}>Button</Button>}
             >
                 <div>
