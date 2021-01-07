@@ -78,7 +78,7 @@ export const App = ({ theme }: any) => (
                     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rhoncus libero aliquet pharetra luctus. Fusce nisl turpis, posuere ac tellus at, euismod vulputate libero...',
             }}
             theme={theme}
-            thumbnail="/demo-assets/landscape1.jpg"
+            thumbnailProps={{ image: '/demo-assets/landscape1.jpg', alt: 'Landscape' }}
             title="Annual Bonus Payments"
         />
     </>

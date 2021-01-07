@@ -21,7 +21,7 @@ export const RegularLinkPreview = ({ theme }: any) => (
         description={text('Description', LONG_LOREM_IPSUM)}
         link={text('URL', 'https://google.com')}
         theme={theme}
-        thumbnail={portraitImageKnob()}
+        thumbnailProps={{ image: portraitImageKnob(), alt: 'Portrait' }}
     />
 );
 
@@ -55,7 +55,7 @@ export const BigLinkPreview = ({ theme }: any) => (
             description={text('Description', LONG_LOREM_IPSUM)}
             link={text('URL', 'https://google.com')}
             theme={theme}
-            thumbnail={landscapeImageKnob()}
+            thumbnailProps={{ image: landscapeImageKnob(), alt: 'Landscape' }}
             size={Size.big}
         />
     </div>
