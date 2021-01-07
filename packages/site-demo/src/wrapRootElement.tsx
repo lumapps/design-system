@@ -2,7 +2,6 @@ import { CodeBlock } from '@lumx/demo/components/CodeBlock';
 import { DemoBlock } from '@lumx/demo/components/DemoBlock';
 import { Link } from '@lumx/demo/components/Link';
 import { PropTable } from '@lumx/demo/components/PropTable';
-import { ReactStabilityFlag } from '@lumx/demo/components/ReactStabilityFlag';
 
 import { MDXProvider } from '@mdx-js/react';
 import 'focus-visible';
@@ -25,7 +24,6 @@ const mdxComponents = {
     inlineCode: (props: any) => <code {...props} />,
     // Use router link when possible.
     a: Link,
-    ReactStabilityFlag,
     DemoBlock,
     PropTable,
 };
