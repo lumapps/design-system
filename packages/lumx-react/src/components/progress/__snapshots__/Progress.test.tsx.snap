@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Progress> Snapshots and structure should render story 'LumX components/progress/Demos/Circular' 1`] = `
+<div
+  className="lumx-progress lumx-progress--theme-light lumx-progress--variant-circular"
+>
+  <div
+    className="lumx-progress-circular"
+  >
+    <div
+      className="lumx-progress-circular__double-bounce1"
+    />
+    <div
+      className="lumx-progress-circular__double-bounce2"
+    />
+    <svg
+      className="lumx-progress-circular__svg"
+      viewBox="25 25 50 50"
+    >
+      <circle
+        className="lumx-progress-circular__path"
+        cx="50"
+        cy="50"
+        fill="none"
+        r="20"
+        strokeWidth="5"
+      />
+    </svg>
+  </div>
+</div>
+`;
+
+exports[`<Progress> Snapshots and structure should render story 'LumX components/progress/Demos/Linear' 1`] = `
+<div
+  className="lumx-progress lumx-progress--theme-light lumx-progress--variant-linear"
+>
+  <div
+    className="lumx-progress-linear"
+  >
+    <div
+      className="lumx-progress-linear__line1"
+    />
+    <div
+      className="lumx-progress-linear__line2"
+    />
+  </div>
+</div>
+`;

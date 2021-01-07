@@ -84,6 +84,7 @@ export const CommentBlock: Comp<CommentBlockProps, HTMLDivElement> = forwardRef(
         actions,
         avatarProps,
         children,
+        className,
         date,
         hasActions,
         headerActions,
@@ -96,6 +97,7 @@ export const CommentBlock: Comp<CommentBlockProps, HTMLDivElement> = forwardRef(
         text,
         theme,
         variant,
+        ...forwardedProps
     } = props;
     const enterKeyPress: KeyboardEventHandler<HTMLElement> = (evt: KeyboardEvent<HTMLElement>) => {
         if (evt.which === ENTER_KEY_CODE && isFunction(onClick)) {
@@ -108,6 +110,7 @@ export const CommentBlock: Comp<CommentBlockProps, HTMLDivElement> = forwardRef(
         <div
             ref={ref}
             className={classNames(
+                className,
                 handleBasicClasses({
                     hasChildren: hasChildren && isOpen,
                     hasIndentedChildren: hasChildren && variant === CommentBlockVariant.indented,
@@ -117,6 +120,7 @@ export const CommentBlock: Comp<CommentBlockProps, HTMLDivElement> = forwardRef(
                     theme,
                 }),
             )}
+            {...forwardedProps}
         >
             <div className={`${CLASSNAME}__wrapper`}>
                 <div className={`${CLASSNAME}__avatar`}>

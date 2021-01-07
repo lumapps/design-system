@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SkeletonTypography> Snapshots and structure should render story 'LumX components/skeleton/Skeleton/TextTypography' 1`] = `
+Array [
+  <div
+    className="lumx-spacing-margin-bottom lumx-skeleton-typography lumx-skeleton-typography--typography-title"
+    style={
+      Object {
+        "width": "30%",
+      }
+    }
+  >
+    <div
+      className="lumx-skeleton-typography__inner"
+    />
+  </div>,
+  <div
+    className="lumx-skeleton-typography lumx-skeleton-typography--typography-body1"
+    style={
+      Object {
+        "width": undefined,
+      }
+    }
+  >
+    <div
+      className="lumx-skeleton-typography__inner"
+    />
+  </div>,
+  <div
+    className="lumx-skeleton-typography lumx-skeleton-typography--typography-body1"
+    style={
+      Object {
+        "width": undefined,
+      }
+    }
+  >
+    <div
+      className="lumx-skeleton-typography__inner"
+    />
+  </div>,
+  <div
+    className="lumx-skeleton-typography lumx-skeleton-typography--typography-body1"
+    style={
+      Object {
+        "width": undefined,
+      }
+    }
+  >
+    <div
+      className="lumx-skeleton-typography__inner"
+    />
+  </div>,
+  <div
+    className="lumx-skeleton-typography lumx-skeleton-typography--typography-body1"
+    style={
+      Object {
+        "width": "70%",
+      }
+    }
+  >
+    <div
+      className="lumx-skeleton-typography__inner"
+    />
+  </div>,
+]
+`;

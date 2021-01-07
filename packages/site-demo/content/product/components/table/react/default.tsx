@@ -89,7 +89,6 @@ export const App = ({ theme }: any) => {
                                 key={header.name}
                                 icon={header.icon}
                                 isSortable={header.isSortable}
-                                scope={header.scope}
                                 sortOrder={header.sortOrder}
                                 variant={TableCellVariant.head}
                                 onHeaderClick={onHeaderClick}

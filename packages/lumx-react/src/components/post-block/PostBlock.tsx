@@ -75,10 +75,15 @@ export const PostBlock: Comp<PostBlockProps, HTMLDivElement> = forwardRef((props
         theme,
         thumbnailProps,
         title,
+        ...forwardedProps
     } = props;
 
     return (
-        <div ref={ref} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, orientation, theme }))}>
+        <div
+            ref={ref}
+            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, orientation, theme }))}
+            {...forwardedProps}
+        >
             {thumbnailProps && (
                 <div className={`${CLASSNAME}__thumbnail`}>
                     <Thumbnail {...thumbnailProps} theme={theme} variant={ThumbnailVariant.rounded} />

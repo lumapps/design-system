@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CommentBlock> Snapshots and structure should render story 'LumX components/comment-block/CommentBlock/WithHeaderActions' 1`] = `
+<div
+  className="lumx-comment-block lumx-comment-block--theme-light"
+>
+  <div
+    className="lumx-comment-block__wrapper"
+  >
+    <div
+      className="lumx-comment-block__avatar"
+    >
+      <Avatar
+        alt="Avatar"
+        image="https://i.pravatar.cc/40"
+        onKeyPress={[Function]}
+        size="m"
+        tabIndex={-1}
+        theme="light"
+      />
+    </div>
+    <div
+      className="lumx-comment-block__container"
+    >
+      <div
+        className="lumx-comment-block__content"
+      >
+        <div
+          className="lumx-comment-block__meta"
+        >
+          <span
+            className="lumx-comment-block__name"
+            onKeyPress={[Function]}
+            role="button"
+            tabIndex={-1}
+          >
+            Emmitt O. Lum
+          </span>
+          <span
+            className="lumx-comment-block__date"
+          >
+            4 hours ago
+          </span>
+          <span
+            className="lumx-comment-block__header-actions"
+          >
+            <IconButton
+              emphasis="low"
+              icon="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"
+              label="Actions"
+              size="s"
+              theme="light"
+            />
+          </span>
+        </div>
+        <div
+          className="lumx-comment-block__text"
+        >
+          All the rumors have finally died down and many skeptics have tightened their lips, the iPod does support video format now on its fifth generation.
+        </div>
+      </div>
+      <div
+        className="lumx-comment-block__actions"
+      >
+        <Button
+          emphasis="low"
+          key="button0"
+          leftIcon="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"
+          size="s"
+          theme="light"
+        >
+          24 likes
+        </Button>
+        <Button
+          emphasis="low"
+          key="button1"
+          leftIcon="M10,9V5L3,12L10,19V14.9C15,14.9 18.5,16.5 21,20C20,15 17,10 10,9Z"
+          size="s"
+          theme="light"
+        >
+          Reply
+        </Button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

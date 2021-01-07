@@ -1,0 +1,119 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Table> Snapshots and structure should render story 'LumX components/table/Demos/Default' 1`] = `
+<table
+  className="lumx-table lumx-table--has-dividers lumx-table--theme-light"
+>
+  <TableHeader>
+    <TableRow>
+      <TableCell
+        isSortable={true}
+        key="dessert"
+        onHeaderClick={[Function]}
+        variant="head"
+      >
+        Dessert
+      </TableCell>
+      <TableCell
+        isSortable={true}
+        key="calories"
+        onHeaderClick={[Function]}
+        variant="head"
+      >
+        Calories
+      </TableCell>
+      <TableCell
+        isSortable={true}
+        key="fat"
+        onHeaderClick={[Function]}
+        variant="head"
+      >
+        Fat (g)
+      </TableCell>
+      <TableCell
+        icon="M9,22A1,1 0 0,1 8,21V18H4A2,2 0 0,1 2,16V4C2,2.89 2.9,2 4,2H20A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H13.9L10.2,21.71C10,21.9 9.75,22 9.5,22V22H9M10,16V19.08L13.08,16H20V4H4V16H10Z"
+        isSortable={false}
+        key="comments"
+        onHeaderClick={[Function]}
+        variant="head"
+      >
+        Comments
+      </TableCell>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow
+      key="1"
+    >
+      <TableCell
+        variant="body"
+      >
+        Frozen yogurt
+      </TableCell>
+      <TableCell
+        variant="body"
+      >
+        159
+      </TableCell>
+      <TableCell
+        variant="body"
+      >
+        6
+      </TableCell>
+      <TableCell
+        variant="body"
+      >
+        Lorem ipsum
+      </TableCell>
+    </TableRow>
+    <TableRow
+      key="2"
+    >
+      <TableCell
+        variant="body"
+      >
+        Ice cream sandwich
+      </TableCell>
+      <TableCell
+        variant="body"
+      >
+        237
+      </TableCell>
+      <TableCell
+        variant="body"
+      >
+        9
+      </TableCell>
+      <TableCell
+        variant="body"
+      >
+        Lorem ipsum
+      </TableCell>
+    </TableRow>
+    <TableRow
+      key="3"
+    >
+      <TableCell
+        variant="body"
+      >
+        Eclair
+      </TableCell>
+      <TableCell
+        variant="body"
+      >
+        262
+      </TableCell>
+      <TableCell
+        variant="body"
+      >
+        16
+      </TableCell>
+      <TableCell
+        variant="body"
+      >
+        Lorem ipsum
+      </TableCell>
+    </TableRow>
+  </TableBody>
+</table>
+`;

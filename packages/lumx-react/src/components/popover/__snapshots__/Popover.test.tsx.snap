@@ -1,0 +1,323 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Popover> Snapshots and structure should render story 'LumX components/popover/Demos/Alignments' 1`] = `
+Array [
+  <Portal
+    containerInfo={<body />}
+  >
+    <div
+      className="lumx-spacing-padding-huge lumx-popover lumx-popover--elevation-3 lumx-popover--position-top-start"
+      style={
+        Object {
+          "left": "0",
+          "position": "absolute",
+          "top": "0",
+          "zIndex": 9999,
+        }
+      }
+    >
+      <ClickAwayProvider
+        refs={
+          Array [
+            Object {
+              "current": null,
+            },
+            Object {
+              "current": null,
+            },
+          ]
+        }
+      >
+        Popover aligned on start of the top side
+      </ClickAwayProvider>
+    </div>
+  </Portal>,
+  <Portal
+    containerInfo={<body />}
+  >
+    <div
+      className="lumx-spacing-padding-huge lumx-popover lumx-popover--elevation-3 lumx-popover--position-top-end"
+      style={
+        Object {
+          "left": "0",
+          "position": "absolute",
+          "top": "0",
+          "zIndex": 9999,
+        }
+      }
+    >
+      <ClickAwayProvider
+        refs={
+          Array [
+            Object {
+              "current": null,
+            },
+            Object {
+              "current": null,
+            },
+          ]
+        }
+      >
+        Popover aligned on start of the top side
+      </ClickAwayProvider>
+    </div>
+  </Portal>,
+]
+`;
+
+exports[`<Popover> Snapshots and structure should render story 'LumX components/popover/Demos/Auto' 1`] = `
+<Portal
+  containerInfo={<body />}
+>
+  <div
+    className="lumx-spacing-padding-huge lumx-popover lumx-popover--elevation-3 lumx-popover--position-auto"
+    style={
+      Object {
+        "left": "0",
+        "position": "absolute",
+        "top": "0",
+        "zIndex": 9999,
+      }
+    }
+  >
+    <ClickAwayProvider
+      refs={
+        Array [
+          Object {
+            "current": null,
+          },
+          Object {
+            "current": null,
+          },
+        ]
+      }
+    >
+      Popover
+    </ClickAwayProvider>
+  </div>
+</Portal>
+`;
+
+exports[`<Popover> Snapshots and structure should render story 'LumX components/popover/Demos/Default' 1`] = `
+<Portal
+  containerInfo={<body />}
+>
+  <div
+    className="lumx-spacing-padding-huge lumx-popover lumx-popover--elevation-3 lumx-popover--position-bottom"
+    style={
+      Object {
+        "left": "0",
+        "position": "absolute",
+        "top": "0",
+        "zIndex": 9999,
+      }
+    }
+  >
+    <ClickAwayProvider
+      refs={
+        Array [
+          Object {
+            "current": null,
+          },
+          Object {
+            "current": null,
+          },
+        ]
+      }
+    >
+      Popover
+    </ClickAwayProvider>
+  </div>
+</Portal>
+`;
+
+exports[`<Popover> Snapshots and structure should render story 'LumX components/popover/Demos/MatchingWidth' 1`] = `
+<Portal
+  containerInfo={<body />}
+>
+  <div
+    className="lumx-spacing-padding-huge lumx-popover lumx-popover--elevation-3 lumx-popover--position-bottom-start"
+    style={
+      Object {
+        "left": "0",
+        "position": "absolute",
+        "top": "0",
+        "zIndex": 9999,
+      }
+    }
+  >
+    <ClickAwayProvider
+      refs={
+        Array [
+          Object {
+            "current": null,
+          },
+          Object {
+            "current": null,
+          },
+        ]
+      }
+    >
+      Popover's width matching anchor's
+    </ClickAwayProvider>
+  </div>
+</Portal>
+`;
+
+exports[`<Popover> Snapshots and structure should render story 'LumX components/popover/Demos/Offset' 1`] = `
+<Portal
+  containerInfo={<body />}
+>
+  <div
+    className="lumx-spacing-padding-huge lumx-popover lumx-popover--elevation-3 lumx-popover--position-right"
+    style={
+      Object {
+        "left": "0",
+        "position": "absolute",
+        "top": "0",
+        "zIndex": 9999,
+      }
+    }
+  >
+    <ClickAwayProvider
+      refs={
+        Array [
+          Object {
+            "current": null,
+          },
+          Object {
+            "current": null,
+          },
+        ]
+      }
+    >
+      Popover
+    </ClickAwayProvider>
+  </div>
+</Portal>
+`;
+
+exports[`<Popover> Snapshots and structure should render story 'LumX components/popover/Demos/Positions' 1`] = `
+Array [
+  <Portal
+    containerInfo={<body />}
+  >
+    <div
+      className="lumx-spacing-padding-huge lumx-popover lumx-popover--elevation-3 lumx-popover--position-left"
+      style={
+        Object {
+          "left": "0",
+          "position": "absolute",
+          "top": "0",
+          "zIndex": 9999,
+        }
+      }
+    >
+      <ClickAwayProvider
+        refs={
+          Array [
+            Object {
+              "current": null,
+            },
+            Object {
+              "current": null,
+            },
+          ]
+        }
+      >
+        Popover
+      </ClickAwayProvider>
+    </div>
+  </Portal>,
+  <Portal
+    containerInfo={<body />}
+  >
+    <div
+      className="lumx-spacing-padding-huge lumx-popover lumx-popover--elevation-3 lumx-popover--position-top"
+      style={
+        Object {
+          "left": "0",
+          "position": "absolute",
+          "top": "0",
+          "zIndex": 9999,
+        }
+      }
+    >
+      <ClickAwayProvider
+        refs={
+          Array [
+            Object {
+              "current": null,
+            },
+            Object {
+              "current": null,
+            },
+          ]
+        }
+      >
+        Popover
+      </ClickAwayProvider>
+    </div>
+  </Portal>,
+  <Portal
+    containerInfo={<body />}
+  >
+    <div
+      className="lumx-spacing-padding-huge lumx-popover lumx-popover--elevation-3 lumx-popover--position-bottom"
+      style={
+        Object {
+          "left": "0",
+          "position": "absolute",
+          "top": "0",
+          "zIndex": 9999,
+        }
+      }
+    >
+      <ClickAwayProvider
+        refs={
+          Array [
+            Object {
+              "current": null,
+            },
+            Object {
+              "current": null,
+            },
+          ]
+        }
+      >
+        Popover
+      </ClickAwayProvider>
+    </div>
+  </Portal>,
+  <Portal
+    containerInfo={<body />}
+  >
+    <div
+      className="lumx-spacing-padding-huge lumx-popover lumx-popover--elevation-3 lumx-popover--position-right"
+      style={
+        Object {
+          "left": "0",
+          "position": "absolute",
+          "top": "0",
+          "zIndex": 9999,
+        }
+      }
+    >
+      <ClickAwayProvider
+        refs={
+          Array [
+            Object {
+              "current": null,
+            },
+            Object {
+              "current": null,
+            },
+          ]
+        }
+      >
+        Popover
+      </ClickAwayProvider>
+    </div>
+  </Portal>,
+]
+`;
