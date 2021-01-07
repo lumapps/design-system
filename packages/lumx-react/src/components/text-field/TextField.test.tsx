@@ -4,7 +4,7 @@ import { ReactWrapper, ShallowWrapper, mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 import { build } from 'test-data-bot';
 
-import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
 import { Kind } from '@lumx/react';
@@ -12,26 +12,12 @@ import { TextField, TextFieldProps } from './TextField';
 
 const CLASSNAME = TextField.className as string;
 
-/**
- * Define the overriding properties waited by the `setup` function.
- */
 type SetupProps = Partial<TextFieldProps>;
-
-/**
- * Defines what the `setup` function will return.
- */
-interface Setup extends CommonSetup {
-    props: SetupProps;
-    wrapper: Wrapper;
-    inputNative: Wrapper;
-    helper: Wrapper;
-    error: Wrapper;
-}
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = (propsOverride: SetupProps = {}, shallowRendering = true) => {
     const props: any = { ...propsOverride };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
     const wrapper: Wrapper = renderer(<TextField {...props} />);

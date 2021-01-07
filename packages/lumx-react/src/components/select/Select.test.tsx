@@ -7,7 +7,7 @@ import { Kind, Theme } from '@lumx/react/components';
 import { Chip } from '@lumx/react/components/chip/Chip';
 import { Icon } from '@lumx/react/components/icon/Icon';
 
-import { CommonSetup, commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
+import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
 import { mdiCloseCircle, mdiMenuDown } from '@lumx/icons';
@@ -19,25 +19,12 @@ const CLASSNAME = Select.className as string;
 
 jest.mock('uid', () => ({ uid: () => 'uid' }));
 
-/** Define the overriding properties waited by the `setup` function. */
 type SetupProps = Partial<SelectProps>;
-
-/** Defines what the `setup` function will return. */
-interface Setup extends CommonSetup {
-    props: SetupProps;
-    input: Wrapper;
-    dropdown: Wrapper;
-    helper: Wrapper;
-    error: Wrapper;
-    container: Wrapper;
-    chip: Wrapper;
-    inputWrapper: Wrapper;
-}
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true) => {
     const props: SelectProps = {
         children: <span>Select Component</span>,
         value: '',
@@ -81,7 +68,7 @@ describe(`<${Select.displayName}>`, () => {
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         it('should have default classNames', () => {
-            const { wrapper, container }: Setup = setup();
+            const { wrapper, container } = setup();
             wrapper.update();
 
             expect(container).toHaveClassName(CLASSNAME);

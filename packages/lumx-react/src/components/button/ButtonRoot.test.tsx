@@ -3,7 +3,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import 'jest-enzyme';
 
-import { CommonSetup, commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
+import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 
 import { ColorPalette, Emphasis, Size, Theme } from '@lumx/react';
 import {
@@ -14,32 +14,12 @@ import {
 } from '@lumx/react/components/button/ButtonRoot';
 import { getBasicClass } from '@lumx/react/utils';
 
-/**
- * Define the overriding properties waited by the `setup` function.
- */
 type SetupProps = Partial<ButtonRootProps>;
-
-/**
- * Defines what the `setup` function will return.
- */
-interface Setup extends CommonSetup {
-    props: SetupProps;
-
-    /**
-     * Button element (<a> or <button> depending on the button type).
-     */
-    button: Wrapper;
-
-    /**
-     * Button wrapper element (if `hasBackground` props is passed).
-     */
-    buttonWrapper: Wrapper;
-}
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}): Setup => {
+const setup = (propsOverride: SetupProps = {}) => {
     const props: any = { ...propsOverride };
     const wrapper: Wrapper = mount(<ButtonRoot {...props} />);
 

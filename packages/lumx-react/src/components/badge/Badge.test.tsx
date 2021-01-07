@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react';
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
-import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
 import { Theme } from '@lumx/react';
@@ -13,29 +13,14 @@ const DEFAULT_PROPS = Badge.defaultProps as any;
 const CLASSNAME = Badge.className as string;
 
 /**
- * Defines what the `setup` function will return.
- */
-interface Setup extends CommonSetup {
-    badge: Wrapper;
-    props: Partial<BadgeProps>;
-
-    /**
-     * The <div> element wrapper.
-     */
-    wrapper: Wrapper;
-}
-
-/**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = ({ ...propsOverride }: Partial<BadgeProps> = {}, shallowRendering = true): Setup => {
+const setup = ({ ...propsOverride }: Partial<BadgeProps> = {}, shallowRendering = true) => {
     const props: BadgeProps = {
         children: <span>30</span>,
         ...propsOverride,
     };
-
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-
     const wrapper: Wrapper = renderer(<Badge {...props} />);
 
     return {

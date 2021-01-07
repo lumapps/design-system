@@ -1,5 +1,5 @@
 import { Mosaic, MosaicProps } from '@lumx/react/components/mosaic/Mosaic';
-import { CommonSetup, commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
+import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
@@ -15,36 +15,19 @@ jest.mock('@lumx/react/hooks/useIntersectionObserver', () => ({
     useIntersectionObserver: () => new Map(),
 }));
 
-/**
- * Define the overriding properties waited by the `setup` function.
- */
 type SetupProps = Partial<MosaicProps>;
-
-/**
- * Defines what the `setup` function will return.
- */
-interface Setup extends CommonSetup {
-    props: SetupProps;
-
-    /**
-     * The <div> element that wraps the dialog and children elements.
-     */
-    wrapper: Wrapper;
-
-    thumbnails: Wrapper;
-}
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = (propsOverride: SetupProps = {}, shallowRendering = true) => {
     const props: any = { ...propsOverride };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
     const wrapper = renderer(<Mosaic {...props} />);
 
     return {
-        props,
         thumbnails: wrapper.find('Thumbnail'),
+        props,
         wrapper,
     };
 };

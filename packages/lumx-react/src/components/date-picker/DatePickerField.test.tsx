@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react';
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
-import { CommonSetup, Wrapper } from '@lumx/react/testing/utils';
+import { Wrapper } from '@lumx/react/testing/utils';
 
 import { DatePickerField, DatePickerFieldProps } from './DatePickerField';
 
@@ -16,11 +16,7 @@ Date.now = jest.fn(() => mockedDate.valueOf());
 
 type SetupProps = Partial<DatePickerFieldProps>;
 
-interface Setup extends CommonSetup {
-    props: SetupProps;
-}
-
-const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true) => {
     const props: DatePickerFieldProps = {
         label: 'DatePickerField',
         locale: 'fr',
@@ -30,15 +26,10 @@ const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true): 
         previousButtonProps: { label: 'Previous month' },
         ...propsOverride,
     };
-
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-
     const wrapper: Wrapper = renderer(<DatePickerField {...props} />);
 
-    return {
-        props,
-        wrapper,
-    };
+    return { props, wrapper };
 };
 
 describe(`<${DatePickerField.displayName}>`, () => {

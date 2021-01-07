@@ -1,5 +1,5 @@
 import React from 'react';
-import { CommonSetup, commonTestsSuite, itShouldRenderStories } from '@lumx/react/testing/utils';
+import { commonTestsSuite, itShouldRenderStories } from '@lumx/react/testing/utils';
 
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
@@ -12,7 +12,7 @@ const CLASSNAME = ListSubheader.className as string;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (props: Partial<ListSubheaderProps> = {}, shallowRendering = true): CommonSetup => {
+const setup = (props: Partial<ListSubheaderProps> = {}, shallowRendering = true) => {
     const renderer: any = shallowRendering ? shallow : mount;
     const wrapper: any = renderer(<ListSubheader {...(props as any)} />);
     return { props, wrapper };

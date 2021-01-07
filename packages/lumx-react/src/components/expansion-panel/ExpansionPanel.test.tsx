@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react';
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
-import { CommonSetup, commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
+import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
 import { Theme } from '@lumx/react';
@@ -12,34 +12,17 @@ import { ExpansionPanel, ExpansionPanelProps } from './ExpansionPanel';
 const DEFAULT_PROPS = ExpansionPanel.defaultProps as any;
 const CLASSNAME = ExpansionPanel.className as string;
 
-/**
- * Define the overriding properties waited by the `setup` function.
- */
 type SetupProps = Partial<ExpansionPanelProps>;
-
-/**
- * Defines what the `setup` function will return.
- */
-interface Setup extends CommonSetup {
-    props: SetupProps;
-
-    root: Wrapper;
-    header: Wrapper;
-    label: Wrapper;
-    content: Wrapper;
-}
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true) => {
     const props: ExpansionPanelProps = {
         toggleButtonProps: { label: 'Toggle' },
         ...propsOverride,
     };
-
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-
     const wrapper: Wrapper = renderer(<ExpansionPanel {...props} />);
 
     return {

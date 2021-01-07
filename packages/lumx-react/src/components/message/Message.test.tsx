@@ -1,4 +1,4 @@
-import { CommonSetup, commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
+import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 import { Kind } from '@lumx/react';
 import { getBasicClass } from '@lumx/react/utils';
 import { mount, shallow } from 'enzyme';
@@ -8,27 +8,14 @@ import { Message, MessageProps } from './Message';
 
 const CLASSNAME = Message.className as string;
 
-/**
- * Define the overriding properties waited by the `setup` function.
- */
 type SetupProps = Partial<MessageProps>;
-
-/**
- * Defines what the `setup` function will return.
- */
-interface Setup extends CommonSetup {
-    props: SetupProps;
-    message: Wrapper;
-    wrapper: Wrapper;
-}
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = (propsOverride: SetupProps = {}, shallowRendering = true) => {
     const props: any = { ...propsOverride };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-
     const wrapper: Wrapper = renderer(
         <Message {...props}>
             <span>Lorem Ipsum</span>
@@ -36,11 +23,7 @@ const setup = (propsOverride: SetupProps = {}, shallowRendering = true): Setup =
     );
     const message: Wrapper = wrapper.find('div').first();
 
-    return {
-        message,
-        props,
-        wrapper,
-    };
+    return { message, props, wrapper };
 };
 
 describe(`<${Message.displayName}>`, () => {

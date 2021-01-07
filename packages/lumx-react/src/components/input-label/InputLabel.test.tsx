@@ -4,47 +4,23 @@ import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
 import { Theme } from '@lumx/react';
-import { CommonSetup, Wrapper } from '@lumx/react/testing/utils';
+import { Wrapper } from '@lumx/react/testing/utils';
 import { InputLabel, InputLabelProps } from './InputLabel';
 
 const CLASSNAME = InputLabel.className as string;
 
-/**
- * Define the overriding properties waited by the `setup` function.
- */
 type SetupProps = Partial<InputLabelProps>;
-
-/**
- * Defines what the `setup` function will return.
- */
-interface Setup extends CommonSetup {
-    props: SetupProps;
-
-    /**
-     * The <Portal> element that wraps inputLabel elements.
-     */
-    wrapper: Wrapper;
-
-    /**
-     * The element itselt
-     */
-    label: Wrapper;
-}
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = (propsOverride: SetupProps = {}, shallowRendering = true) => {
     const props: any = { htmlFor: 'id', ...propsOverride };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
     const wrapper: Wrapper = renderer(<InputLabel {...props} />);
     const label: Wrapper = wrapper.find('.lumx-input-label');
 
-    return {
-        label,
-        props,
-        wrapper,
-    };
+    return { label, props, wrapper };
 };
 
 describe(`<${InputLabel.displayName}>`, () => {

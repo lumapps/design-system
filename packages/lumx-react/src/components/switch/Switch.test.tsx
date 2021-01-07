@@ -6,7 +6,7 @@ import { build, oneOf } from 'test-data-bot';
 
 import without from 'lodash/without';
 
-import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
 import { Theme, Alignment } from '@lumx/react';
@@ -15,28 +15,12 @@ import { Switch, SwitchProps } from './Switch';
 const DEFAULT_PROPS = Switch.defaultProps as any;
 const CLASSNAME = Switch.className as string;
 
-/**
- * Define the overriding properties waited by the `setup` function.
- */
 type SetupProps = Partial<SwitchProps>;
-
-/**
- * Defines what the `setup` function will return.
- */
-interface Setup extends CommonSetup {
-    props: SetupProps;
-    root: Wrapper;
-    inputWrapper: Wrapper;
-    input: Wrapper;
-    content: Wrapper;
-    helper: Wrapper;
-    label: Wrapper;
-}
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true) => {
     const props: SwitchProps = {
         ...propsOverride,
     };

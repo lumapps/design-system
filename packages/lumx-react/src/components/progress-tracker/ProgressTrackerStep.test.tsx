@@ -1,4 +1,4 @@
-import { CommonSetup, commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
+import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
 import { mount, shallow } from 'enzyme';
@@ -15,27 +15,12 @@ jest.mock('../tabs/state', () => {
     return { useTabProviderContext: jest.fn(), useTabProviderContextState: jest.fn() };
 });
 
-/**
- * Define the overriding properties waited by the `setup` function.
- */
 type SetupProps = Partial<ProgressTrackerStepProps>;
-
-/**
- * Defines what the `setup` function will return.
- */
-interface Setup extends CommonSetup {
-    props: SetupProps;
-
-    /**
-     * The <div> element that wraps step.
-     */
-    wrapper: Wrapper;
-}
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true) => {
     const props: ProgressTrackerStepProps = { label: 'Test Step Label', ...propsOverride };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
     const wrapper: Wrapper = renderer(<ProgressTrackerStep {...props} />);

@@ -9,7 +9,7 @@ import { Chip } from '@lumx/react/components/chip/Chip';
 import { Dropdown } from '@lumx/react/components/dropdown/Dropdown';
 import { Icon } from '@lumx/react/components/icon/Icon';
 
-import { CommonSetup, commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
+import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 import { SelectMultiple, SelectMultipleProps } from './SelectMultiple';
 import { DEFAULT_PROPS } from './WithSelectContext';
@@ -19,24 +19,12 @@ const CLASSNAME = SelectMultiple.className as string;
 
 jest.mock('uid', () => ({ uid: () => 'uid' }));
 
-/** Define the overriding properties waited by the `setup` function. */
 type SetupProps = Partial<SelectMultipleProps>;
-
-/** Defines what the `setup` function will return. */
-interface Setup extends CommonSetup {
-    props: SetupProps;
-    wrapper: Wrapper;
-    input: Wrapper;
-    dropdown: Wrapper;
-    helper: Wrapper;
-    error: Wrapper;
-    container: Wrapper;
-}
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (props: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = (props: SetupProps = {}, shallowRendering = true) => {
     const setupProps: SelectMultipleProps = {
         children: <span>Select Component</span>,
         value: [],
@@ -83,7 +71,7 @@ describe(`<SelectMultiple>`, () => {
 
     describe('Props', () => {
         it('should have default classNames', () => {
-            const { wrapper, container }: Setup = setup();
+            const { wrapper, container } = setup();
             wrapper.update();
 
             expect(container).toHaveClassName(CLASSNAME);

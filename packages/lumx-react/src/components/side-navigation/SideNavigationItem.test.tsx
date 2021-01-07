@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react';
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
-import { CommonSetup, commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
+import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
 import { mdiAccount } from '@lumx/icons';
@@ -13,29 +13,12 @@ import { SideNavigationItem, SideNavigationItemProps } from './SideNavigationIte
 const DEFAULT_PROPS = SideNavigationItem.defaultProps as any;
 const CLASSNAME = SideNavigationItem.className as string;
 
-/**
- * Define the overriding properties waited by the `setup` function.
- */
 type SetupProps = Partial<SideNavigationItemProps>;
-
-/**
- * Defines what the `setup` function will return.
- */
-interface Setup extends CommonSetup {
-    props: SetupProps;
-
-    root: Wrapper;
-    link: Wrapper;
-    chevron: Wrapper;
-    children: Wrapper;
-    icon: Wrapper;
-    label: Wrapper;
-}
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true) => {
     const props: any = {
         toggleButtonProps: { label: 'Toggle' },
         ...propsOverride,

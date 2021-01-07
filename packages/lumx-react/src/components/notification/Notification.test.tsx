@@ -5,53 +5,18 @@ import 'jest-enzyme';
 
 import noop from 'lodash/noop';
 import { Kind } from '@lumx/react';
-import { CommonSetup, Wrapper } from '@lumx/react/testing/utils';
+import { Wrapper } from '@lumx/react/testing/utils';
 
 import { Notification, NotificationProps } from './Notification';
 
 const CLASSNAME = Notification.className as string;
 
-/**
- * Define the overriding properties waited by the `setup` function.
- */
 type SetupProps = Partial<NotificationProps>;
-
-/**
- * Defines what the `setup` function will return.
- */
-interface Setup extends CommonSetup {
-    props: SetupProps;
-
-    /**
-     * The <Portal> element that wraps notification elements.
-     */
-    wrapper: Wrapper;
-
-    /**
-     * The <div> element that wraps notification elements.
-     */
-    notification: Wrapper;
-
-    /**
-     * The <div> element that wraps the <icon> element.
-     */
-    icon: Wrapper;
-
-    /**
-     * The <div> element that wraps the content.
-     */
-    content: Wrapper;
-
-    /**
-     * The <div> element that wraps the action elements.
-     */
-    action: Wrapper;
-}
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = (propsOverride: SetupProps = {}, shallowRendering = true) => {
     const props: any = { ...propsOverride };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
     const wrapper: Wrapper = renderer(<Notification {...props} />);
@@ -61,14 +26,7 @@ const setup = (propsOverride: SetupProps = {}, shallowRendering = true): Setup =
     const content: Wrapper = wrapper.find('.lumx-notification__content');
     const action: Wrapper = wrapper.find('.lumx-notification__action');
 
-    return {
-        action,
-        content,
-        icon,
-        notification,
-        props,
-        wrapper,
-    };
+    return { action, content, icon, notification, props, wrapper };
 };
 
 const properties = {

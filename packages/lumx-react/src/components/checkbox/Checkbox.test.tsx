@@ -3,47 +3,21 @@ import React, { ReactElement } from 'react';
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
-import { CommonSetup, commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
+import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
 import { Checkbox, CheckboxProps } from './Checkbox';
 
 const CLASSNAME = Checkbox.className as string;
 
-/**
- * Define the overriding properties waited by the `setup` function.
- */
 type SetupProps = Partial<CheckboxProps>;
-
-/**
- * Defines what the `setup` function will return.
- */
-interface Setup extends CommonSetup {
-    props: SetupProps;
-
-    /**
-     * The <div> element that wraps checkbox and children elements.
-     */
-    wrapper: Wrapper;
-
-    /**
-     * The <div> element for the label.
-     */
-    label: Wrapper;
-
-    /**
-     * The <div> element for the helper.
-     */
-    helper: Wrapper;
-}
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = (propsOverride: SetupProps = {}, shallowRendering = true) => {
     const props: any = { ...propsOverride };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-
     const wrapper: Wrapper = renderer(<Checkbox {...props} />);
 
     return {

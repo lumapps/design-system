@@ -4,39 +4,14 @@ import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
 import { List, ListItem, Size } from '@lumx/react';
-import { CommonSetup, commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
+import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 import { Autocomplete, AutocompleteProps } from './Autocomplete';
 
 import { CITIES as suggestions } from './__mockData__';
 
 const CLASSNAME = Autocomplete.className as string;
 
-/**
- * Define the overriding properties expected by the `setup` function.
- */
 type SetupProps = Partial<AutocompleteProps>;
-
-/**
- * Defines what the `setup` function will return.
- */
-interface Setup extends CommonSetup {
-    props: SetupProps;
-
-    /**
-     * The <div> element that holds the autocomplete content.
-     */
-    wrapper: Wrapper;
-
-    /**
-     * Text Field component.
-     */
-    textField: Wrapper;
-
-    /**
-     * Dropdown component.
-     */
-    dropdown: Wrapper;
-}
 
 interface Suggestion {
     id: string;
@@ -46,7 +21,7 @@ interface Suggestion {
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = (propsOverride: SetupProps = {}, shallowRendering = true) => {
     const props: any = { ...propsOverride };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
 
@@ -55,12 +30,7 @@ const setup = (propsOverride: SetupProps = {}, shallowRendering = true): Setup =
     const textField: Wrapper = wrapper.find('TextField');
     const dropdown: Wrapper = wrapper.find('Dropdown');
 
-    return {
-        dropdown,
-        props,
-        textField,
-        wrapper,
-    };
+    return { dropdown, props, textField, wrapper };
 };
 
 describe(`<${Autocomplete.displayName}>`, () => {
@@ -97,7 +67,7 @@ describe(`<${Autocomplete.displayName}>`, () => {
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         it('should use default props', () => {
-            const { wrapper }: Setup = setup();
+            const { wrapper } = setup();
 
             expect(wrapper).toHaveClassName(CLASSNAME);
         });

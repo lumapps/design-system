@@ -5,35 +5,17 @@ import 'jest-enzyme';
 
 import { mdiPlus } from '@lumx/icons';
 import { Button, IconButton } from '@lumx/react';
-import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 import { ButtonGroup, ButtonGroupProps } from './ButtonGroup';
 
 const CLASSNAME = ButtonGroup.className as string;
 
-/**
- * Define the overriding properties waited by the `setup` function.
- */
 type SetupProps = Partial<ButtonGroupProps>;
-
-/**
- * Defines what is returned by the setup function.
- */
-interface Setup extends CommonSetup {
-    /**
-     * The properties of the tested component.
-     */
-    props: SetupProps;
-
-    /**
-     * The <div> element that is used as a wrapper for the buttons inside of the <ButtonGroup>.
-     */
-    group: Wrapper;
-}
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true) => {
     const props: ButtonGroupProps = {
         children: (
             <>
@@ -43,14 +25,11 @@ const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true): 
         ),
         ...propsOverride,
     };
-
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-
     const wrapper: Wrapper = renderer(<ButtonGroup {...props} />);
 
     return {
         group: wrapper.find(`.${CLASSNAME}`),
-
         props,
         wrapper,
     };

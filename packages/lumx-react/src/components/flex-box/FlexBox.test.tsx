@@ -1,30 +1,19 @@
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 import React, { ReactElement } from 'react';
-import { CommonSetup, commonTestsSuite, itShouldRenderStories, Wrapper } from '@lumx/react/testing/utils';
+import { commonTestsSuite, itShouldRenderStories, Wrapper } from '@lumx/react/testing/utils';
 
 import { FlexBox, FlexBoxProps } from './FlexBox';
 import * as stories from './FlexBox.stories';
 
 const CLASSNAME = FlexBox.className as string;
 
-/**
- * Define the overriding properties waited by the `setup` function.
- */
 type SetupProps = Partial<FlexBoxProps>;
-
-/**
- * Defines what the `setup` function will return.
- */
-interface Setup extends CommonSetup {
-    props: SetupProps;
-    wrapper: Wrapper;
-}
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = (propsOverride: SetupProps = {}, shallowRendering = true) => {
     const props: FlexBoxProps = {
         children: null,
         ...propsOverride,
@@ -32,10 +21,7 @@ const setup = (propsOverride: SetupProps = {}, shallowRendering = true): Setup =
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
     const wrapper = renderer(<FlexBox {...props} />);
 
-    return {
-        props,
-        wrapper,
-    };
+    return { props, wrapper };
 };
 
 describe(`<${FlexBox.displayName}>`, () => {

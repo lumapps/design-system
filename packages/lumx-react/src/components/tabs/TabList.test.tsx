@@ -1,6 +1,6 @@
 import { Tab, Alignment } from '@lumx/react';
 
-import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
 import { mount, shallow } from 'enzyme';
@@ -17,27 +17,12 @@ jest.mock('./state', () => {
     return { useTabProviderContext: jest.fn(), useTabProviderContextState: jest.fn() };
 });
 
-/**
- * Define the overriding properties waited by the `setup` function.
- */
 type SetupProps = Partial<TabListProps>;
-
-/**
- * Defines what the `setup` function will return.
- */
-interface Setup extends CommonSetup {
-    props: SetupProps;
-
-    /**
-     * The <div> element that wraps tabs and content elements.
-     */
-    wrapper: Wrapper;
-}
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true): Setup => {
+const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true) => {
     const tabs = [<Tab key={0} label="Tab 0" />, <Tab key={1} label="Tab 1" />];
     const props: TabListProps = {
         children: tabs,
@@ -45,9 +30,7 @@ const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true): 
         ...propsOverride,
     };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-
-    // noinspection RequiredAttributes
-    const wrapper: Wrapper = renderer(<TabList {...props} />);
+    const wrapper = renderer(<TabList {...props} />);
 
     return { props, wrapper };
 };
