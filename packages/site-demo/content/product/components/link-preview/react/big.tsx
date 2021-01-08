@@ -9,7 +9,7 @@ export const App = ({ theme }: any) => (
             link="https://google.com"
             size={Size.big}
             theme={theme}
-            thumbnail="/demo-assets/landscape3.jpg"
+            thumbnailProps={{ image: '/demo-assets/landscape3.jpg', alt: 'Landscape' }}
         />
     </div>
 );
