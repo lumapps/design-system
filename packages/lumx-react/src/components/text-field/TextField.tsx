@@ -166,10 +166,15 @@ interface InputNativeProps {
     rows: number;
     type: string;
     value?: string | number;
+
     setFocus(focus: boolean): void;
+
     recomputeNumberOfRows(target: Element): void;
+
     onChange(value: string): void;
+
     onFocus?(value: React.FocusEvent): void;
+
     onBlur?(value: React.FocusEvent): void;
 }
 
@@ -306,6 +311,50 @@ const TextField: React.FC<TextFieldProps> = (props) => {
         onChange('');
     };
 
+    const inputWrapper = <div className={`${CLASSNAME}__input-wrapper`}>
+        <div className={`${CLASSNAME}__input-native`}>
+            {renderInputNative({
+                id,
+                inputRef,
+                isDisabled,
+                isRequired,
+                maxLength,
+                multiline,
+                onBlur,
+                onChange,
+                onFocus,
+                placeholder,
+                recomputeNumberOfRows,
+                rows,
+                setFocus,
+                type,
+                value,
+                ...forwardedProps,
+            })}
+        </div>
+
+        {(isValid || hasError) && (
+            <Icon
+                className={`${CLASSNAME}__input-validity`}
+                color={theme === Theme.dark ? 'light' : undefined}
+                icon={isValid ? mdiCheckCircle : mdiAlertCircle}
+                size={Size.xxs}
+            />
+        )}
+
+        {isClearable && isNotEmpty && (
+            <IconButton
+                className={`${CLASSNAME}__input-clear`}
+                icon={mdiCloseCircle}
+                emphasis={Emphasis.low}
+                size={Size.s}
+                theme={theme}
+                onClick={onClear}
+                type="button"
+            />
+        )}
+    </div>;
+
     return (
         <div
             className={classNames(
@@ -354,51 +403,12 @@ const TextField: React.FC<TextFieldProps> = (props) => {
                     />
                 )}
 
-                {chips && <div className={`${CLASSNAME}__chips`}>{chips}</div>}
-
-                <div className={`${CLASSNAME}__input-wrapper`}>
-                    <div className={`${CLASSNAME}__input-native`}>
-                        {renderInputNative({
-                            id,
-                            inputRef,
-                            isDisabled,
-                            isRequired,
-                            maxLength,
-                            multiline,
-                            onBlur,
-                            onChange,
-                            onFocus,
-                            placeholder,
-                            recomputeNumberOfRows,
-                            rows,
-                            setFocus,
-                            type,
-                            value,
-                            ...forwardedProps,
-                        })}
+                {chips ? (
+                    <div className={`${CLASSNAME}__chips-wrapper`}>
+                        <div className={`${CLASSNAME}__chips`}>{chips}</div>
+                        {inputWrapper}
                     </div>
-
-                    {(isValid || hasError) && (
-                        <Icon
-                            className={`${CLASSNAME}__input-validity`}
-                            color={theme === Theme.dark ? 'light' : undefined}
-                            icon={isValid ? mdiCheckCircle : mdiAlertCircle}
-                            size={Size.xxs}
-                        />
-                    )}
-
-                    {isClearable && isNotEmpty && (
-                        <IconButton
-                            className={`${CLASSNAME}__input-clear`}
-                            icon={mdiCloseCircle}
-                            emphasis={Emphasis.low}
-                            size={Size.s}
-                            theme={theme}
-                            onClick={onClear}
-                            type="button"
-                        />
-                    )}
-                </div>
+                ) : inputWrapper}
             </div>
             {hasError && error && (
                 <InputHelper className={`${CLASSNAME}__helper`} kind={Kind.error} theme={theme}>

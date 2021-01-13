@@ -1,4 +1,5 @@
-import { TextField } from '@lumx/react';
+import { mdiFlag } from '@lumx/icons/';
+import { Chip, ChipGroup, TextField } from '@lumx/react';
 import { number, text } from '@storybook/addon-knobs';
 import noop from 'lodash/noop';
 import React from 'react';
@@ -120,5 +121,22 @@ export const TextAreaWithKnobValue = ({ theme }: any) => (
         minimumRows={1}
         theme={theme}
         onChange={noop}
+    />
+);
+
+export const LongChips = ({ theme }: any) => (
+    <TextField
+        onChange={noop}
+        value="value"
+        theme={theme}
+        chips={<ChipGroup>
+            <Chip>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</Chip>
+            <Chip>BBBBBBBB</Chip>
+            <Chip>CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC</Chip>
+            <Chip>DDDDDDDDDDDDDDDDDDDDDDDDD</Chip>
+            <Chip>EEEEE</Chip>
+            <Chip>FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF</Chip>
+        </ChipGroup>}
+        icon={mdiFlag}
     />
 );
