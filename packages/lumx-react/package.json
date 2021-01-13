@@ -104,6 +104,7 @@
     ],
     "license": "MIT",
     "module": "esm/index.js",
+    "main": "esm/index.js",
     "types": "types.d.ts",
     "name": "@lumx/react",
     "publishConfig": {
