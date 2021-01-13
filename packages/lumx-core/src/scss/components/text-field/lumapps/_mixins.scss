@@ -97,7 +97,7 @@
 }
 
 @mixin lumx-text-field-chips() {
-    margin: $lumx-chip-group-spacing 0;
+    margin: $lumx-chip-group-spacing * 2 0;
 }
 
 @mixin lumx-text-field-placeholder($theme) {
