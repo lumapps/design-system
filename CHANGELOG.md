@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1][] - 2021-01-13
+
 ### Fixed
 
 -   Fix `@lumx/react` `package.json` metadata
@@ -932,3 +934,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.28.2]: https://github.com/lumapps/design-system/tree/v0.28.2
 [unreleased]: https://github.com/lumapps/design-system/compare/v1.0.0...HEAD
 [1.0.0]: https://github.com/lumapps/design-system/tree/v1.0.0
+[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/lumapps/design-system/tree/v1.0.1
