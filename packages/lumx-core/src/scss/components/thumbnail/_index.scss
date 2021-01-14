@@ -24,7 +24,7 @@
     }
 
     &--variant-rounded {
-        border-radius: $lumx-border-radius;
+        border-radius: var(--lumx-border-radius);
     }
 
     &__background {
@@ -35,7 +35,7 @@
         background-size: cover;
 
         #{$self}--variant-rounded & {
-            border-radius: $lumx-border-radius;
+            border-radius: var(--lumx-border-radius);
         }
     }
 
@@ -64,7 +64,7 @@
         }
 
         #{$self}--variant-rounded & {
-            border-radius: $lumx-border-radius;
+            border-radius: var(--lumx-border-radius);
         }
     }
 
@@ -130,7 +130,7 @@
 
 .#{$lumx-base-prefix}-thumbnail--variant-rounded.#{$lumx-base-prefix}-thumbnail[tabindex='0'] {
     &[data-focus-visible-added]::after {
-        border-radius: $lumx-border-radius;
+        border-radius: var(--lumx-border-radius);
     }
 }
 

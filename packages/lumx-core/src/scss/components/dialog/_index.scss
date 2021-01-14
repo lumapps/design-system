@@ -51,7 +51,7 @@
         max-height: 100%;
         flex-direction: column;
         background-color: lumx-color-variant('light', 'N');
-        border-radius: $lumx-border-radius;
+        border-radius: var(--lumx-border-radius);
 
         #{$self}--size-huge & {
             height: 100%;
@@ -89,7 +89,7 @@
         align-items: center;
         justify-content: center;
         background-color: lumx-color-variant('light', 'L2');
-        border-radius: $lumx-border-radius;
+        border-radius: var(--lumx-border-radius);
     }
 }
 

@@ -73,7 +73,7 @@
         position: relative;
         overflow: hidden;
         padding: $lumx-spacing-unit $lumx-spacing-unit * 1.5;
-        border-radius: $lumx-border-radius;
+        border-radius: var(--lumx-border-radius);
 
         #{$self}--theme-light > #{$self}__wrapper & {
             background-color: lumx-color-variant('dark', 'L6');

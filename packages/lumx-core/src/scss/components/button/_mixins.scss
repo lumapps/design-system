@@ -21,7 +21,7 @@
     height: map-get($lumx-sizes, $size);
 
     @if $variant == 'button' {
-        border-radius: $lumx-border-radius;
+        border-radius: var(--lumx-border-radius);
 
         @if $emphasis == lumx-base-const('emphasis', 'HIGH') or $emphasis == lumx-base-const('emphasis', 'MEDIUM') {
             @if $size == lumx-base-const('size', 'M') {

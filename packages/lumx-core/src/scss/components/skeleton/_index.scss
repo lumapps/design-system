@@ -44,7 +44,7 @@
     animation: skeleton-loading 1s ease-in-out 0s infinite;
 
     &--variant-rounded {
-        border-radius: $lumx-border-radius;
+        border-radius: var(--lumx-border-radius);
     }
 
     &--theme-light {
@@ -100,7 +100,7 @@ $typography-skeleton-size: (
     &__inner {
         width: 100%;
         animation: skeleton-loading 1s ease-in-out 0s infinite;
-        border-radius: $lumx-border-radius;
+        border-radius: var(--lumx-border-radius);
 
         #{$self}--theme-light & {
             background-color: lumx-color-variant('dark', 'L5');

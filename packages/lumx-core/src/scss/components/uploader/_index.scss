@@ -48,7 +48,7 @@
     }
 
     &--variant-rounded {
-        border-radius: $lumx-border-radius;
+        border-radius: var(--lumx-border-radius);
     }
 
     &--variant-circle {

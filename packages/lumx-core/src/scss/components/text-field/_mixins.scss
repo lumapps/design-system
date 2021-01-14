@@ -3,7 +3,7 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    border-radius: $lumx-border-radius;
+    border-radius: var(--lumx-border-radius);
     outline: none;
     transition-duration: $lumx-text-field-transition-duration;
     transition-property: background-color, box-shadow;

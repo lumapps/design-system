@@ -3,7 +3,7 @@
    ========================================================================== */
 
 .design-token-group {
-    border-radius: $lumx-border-radius;
+    border-radius: var(--lumx-border-radius);
 
     &--theme-light {
         border: 1px solid lumx-color-variant('dark', $lumx-divider-color-variant);

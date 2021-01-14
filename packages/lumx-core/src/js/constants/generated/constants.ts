@@ -1,9 +1,14 @@
 /**
  * Do not edit directly
- * Generated on Fri, 18 Dec 2020 16:02:24 GMT
+ * Generated on Thu, 14 Jan 2021 09:58:19 GMT
  */
 
 export const CORE = {
+    'border-radius': {
+        attributes: {
+            category: 'border-radius',
+        },
+    },
     color: {
         dark: {
             N: {

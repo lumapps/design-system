@@ -16,7 +16,7 @@
     align-items: center;
     animation: lumx-notification-show $lumx-notification-transition-duration;
     background-color: lumx-color-variant('light', 'N');
-    border-radius: $lumx-border-radius;
+    border-radius: var(--lumx-border-radius);
     transition: opacity $lumx-notification-transition-duration;
 
     &--is-hidden {

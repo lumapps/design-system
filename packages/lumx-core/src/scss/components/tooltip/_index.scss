@@ -13,7 +13,7 @@
     left: 0;
     padding: $lumx-spacing-unit / 2 $lumx-spacing-unit;
     background-color: $lumx-tooltip-background-color;
-    border-radius: $lumx-border-radius;
+    border-radius: var(--lumx-border-radius);
     will-change: transform;
 
     &__arrow {

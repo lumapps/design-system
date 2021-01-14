@@ -5,7 +5,7 @@
 .demo-block {
     $self: &;
     border: 1px solid $lumx-color-dark-L4;
-    border-radius: $lumx-border-radius;
+    border-radius: var(--lumx-border-radius);
 
     &__content {
         padding: $lumx-spacing-unit * 3;

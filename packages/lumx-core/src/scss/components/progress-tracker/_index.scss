@@ -43,7 +43,7 @@
     padding: $lumx-spacing-unit 0;
     border: none;
     background: none;
-    border-radius: $lumx-border-radius;
+    border-radius: var(--lumx-border-radius);
     outline: none;
 
     &--is-clickable {
