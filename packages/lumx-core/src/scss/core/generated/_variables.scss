@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Thu, 14 Jan 2021 09:58:19 GMT
+ * Generated on Thu, 14 Jan 2021 19:16:04 GMT
  */
 
 $lumx-border-radius: 4px !default;
@@ -111,6 +111,9 @@ $lumx-color-orange-L3: rgba(255, 179, 0, 0.6) !default; // Base yellow color wit
 $lumx-color-orange-L4: rgba(255, 179, 0, 0.4) !default; // Base yellow color with 40% opacity
 $lumx-color-orange-L5: rgba(255, 179, 0, 0.2) !default; // Base yellow color with 20% opacity
 $lumx-color-orange-L6: rgba(255, 179, 0, 0.1) !default; // Base yellow color with 10% opacity
+$lumx-typography-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif !default;
+$lumx-typography-bold-weight: 700 !default;
 
 $lumx-core: (
     'border-radius': $lumx-border-radius,
@@ -248,5 +251,9 @@ $lumx-core: (
             'L5': $lumx-color-orange-L5,
             'L6': $lumx-color-orange-L6,
         ),
+    ),
+    'typography': (
+        'font-family': $lumx-typography-font-family,
+        'bold-weight': $lumx-typography-bold-weight,
     ),
 ) !default;
