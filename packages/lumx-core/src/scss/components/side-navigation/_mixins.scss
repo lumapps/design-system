@@ -20,7 +20,7 @@
     flex-direction: row;
     align-items: center;
     padding: 0 $lumx-spacing-unit;
-    border-radius: $lumx-border-radius;
+    border-radius: var(--lumx-border-radius);
     color: lumx-color-variant('dark', 'N');
     outline: none;
     text-decoration: none;

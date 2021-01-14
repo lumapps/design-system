@@ -8,7 +8,7 @@
 
     &--has-background {
         padding: $lumx-spacing-unit * 2;
-        border-radius: $lumx-border-radius;
+        border-radius: var(--lumx-border-radius);
     }
 
     &__icon {

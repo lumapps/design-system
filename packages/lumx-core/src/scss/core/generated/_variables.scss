@@ -1,8 +1,9 @@
 /**
  * Do not edit directly
- * Generated on Fri, 18 Dec 2020 16:02:24 GMT
+ * Generated on Thu, 14 Jan 2021 09:58:19 GMT
  */
 
+$lumx-border-radius: 4px !default;
 $lumx-color-dark-N: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
 $lumx-color-dark-L1: rgba(0, 0, 0, 0.8) !default; // Base dark color with 80% opacity
 $lumx-color-dark-L2: rgba(0, 0, 0, 0.54) !default; // Base dark color with 54% opacity
@@ -112,6 +113,7 @@ $lumx-color-orange-L5: rgba(255, 179, 0, 0.2) !default; // Base yellow color wit
 $lumx-color-orange-L6: rgba(255, 179, 0, 0.1) !default; // Base yellow color with 10% opacity
 
 $lumx-core: (
+    'border-radius': $lumx-border-radius,
     'color': (
         'dark': (
             'N': $lumx-color-dark-N,

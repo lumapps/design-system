@@ -15,6 +15,6 @@
 
         overflow: auto;
         background-color: lumx-color-variant('light', 'N');
-        border-radius: $lumx-border-radius;
+        border-radius: var(--lumx-border-radius);
     }
 }

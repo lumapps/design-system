@@ -4,7 +4,7 @@
 
 .asset-block {
     border: 1px solid lumx-color-variant('dark', 'L4');
-    border-radius: $lumx-border-radius;
+    border-radius: var(--lumx-border-radius);
 
     &__content {
         padding: $lumx-spacing-unit * 3;

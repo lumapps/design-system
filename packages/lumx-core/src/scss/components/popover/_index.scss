@@ -8,7 +8,7 @@
     z-index: map-get($lumx-base-layers, 'high');
     display: flex;
     background-color: lumx-color-variant('light', 'N');
-    border-radius: $lumx-border-radius;
+    border-radius: var(--lumx-border-radius);
 
     > * {
         flex: 1 auto;
