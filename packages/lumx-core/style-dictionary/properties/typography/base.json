@@ -1,0 +1,6 @@
+{
+    "typography": {
+        "font-family": { "value": "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif" },
+        "bold-weight": { "value": "700" }
+    }
+}

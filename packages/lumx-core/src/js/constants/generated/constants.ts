@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Thu, 14 Jan 2021 09:58:19 GMT
+ * Generated on Thu, 14 Jan 2021 19:16:04 GMT
  */
 
 export const CORE = {
@@ -1746,6 +1746,20 @@ export const CORE = {
                         a: 0.1,
                     },
                 },
+            },
+        },
+    },
+    typography: {
+        'font-family': {
+            attributes: {
+                category: 'typography',
+                type: 'font-family',
+            },
+        },
+        'bold-weight': {
+            attributes: {
+                category: 'typography',
+                type: 'bold-weight',
             },
         },
     },

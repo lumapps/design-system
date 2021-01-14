@@ -1,3 +1,5 @@
 :root {
     --lumx-border-radius: 2px;
+    --lumx-typography-bold-weight: 500;
+    --lumx-typography-font-family: 'Roboto', sans-serif;
 }
