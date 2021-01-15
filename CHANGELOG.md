@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Fix angular z-index system (revert to previous system)
+
 ## [1.0.1][] - 2021-01-13
 
 ### Fixed
