@@ -5,4 +5,6 @@
     --lumx-button-text-transform: uppercase;
     --lumx-button-variant-icon-border-radius: 50%;
     --lumx-button-size-s-font-size: 10px;
+    --lumx-checkbox-wrapper-size: 24px;
+    --lumx-checkbox-control-size: 18px;
 }
