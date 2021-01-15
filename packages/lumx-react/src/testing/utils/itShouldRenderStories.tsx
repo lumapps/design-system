@@ -4,7 +4,6 @@ import { shallow, ShallowWrapper } from 'enzyme';
 import React from 'react';
 import isArray from 'lodash/isArray';
 import isPlainObject from 'lodash/isPlainObject';
-import noop from 'lodash/noop';
 
 /** Equivalent to CSS `selector1 > selector2 > selector3` selector */
 interface PathSelector {
@@ -52,15 +51,8 @@ function findAndDive(wrappers: Wrappers, selector: Selector): Wrappers {
 }
 
 interface Options {
-    /**
-     * Use this flag if you want to mock the Redux provider context component.
-     *
-     * This should not be used on stories of connected components, but rather on stories of controlled components that
-     * use connected components.
-     * Since we use shallow rendering, these connected component won't be rendered and thus won't crash trying to access
-     * the mocked Redux context.
-     */
-    mockReduxProvider?: boolean;
+    /** Inject props in stories. */
+    props?: any;
 }
 
 /** Render stories and find wrapper to snapshot using selector. */
@@ -70,9 +62,8 @@ export function generateRenderedStories(
     options?: Options,
 ): Record<string, Wrappers> {
     const storyProps: any = {};
-    if (options?.mockReduxProvider) {
-        storyProps.Provider = ({ children }: any) => children;
-        storyProps.configureStore = noop;
+    if (options?.props) {
+        Object.assign(storyProps, options.props);
     }
     const title = stories?.default?.title;
     const rendered: Record<string, Wrappers> = {};
