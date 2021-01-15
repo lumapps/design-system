@@ -4,7 +4,15 @@ import template from './dialog.html';
 
 /////////////////////////////
 
-function DialogController($element, $rootScope, $scope, $timeout, LxEventSchedulerService, LxFocusTrapService) {
+function DialogController(
+    $element,
+    $rootScope,
+    $scope,
+    $timeout,
+    LxDepthService,
+    LxEventSchedulerService,
+    LxFocusTrapService,
+) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
@@ -221,7 +229,12 @@ function DialogController($element, $rootScope, $scope, $timeout, LxEventSchedul
             _idEventScheduler = LxEventSchedulerService.register('keydown', _onKeyDown);
         }
 
-        _dialog.appendTo('body').addClass(`${CSS_PREFIX}-dialog--is-shown`);
+        LxDepthService.increase();
+
+        _dialog
+            .css('z-index', LxDepthService.get())
+            .appendTo('body')
+            .addClass(`${CSS_PREFIX}-dialog--is-shown`);
 
         $timeout(() => {
             $rootScope.$broadcast('lx-dialog__open-start', lx.id, params);
