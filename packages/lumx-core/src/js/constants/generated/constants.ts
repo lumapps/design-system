@@ -1,12 +1,38 @@
 /**
  * Do not edit directly
- * Generated on Thu, 14 Jan 2021 19:16:04 GMT
+ * Generated on Fri, 15 Jan 2021 08:52:24 GMT
  */
 
 export const CORE = {
     'border-radius': {
         attributes: {
             category: 'border-radius',
+        },
+    },
+    button: {
+        'text-transform': {
+            attributes: {
+                category: 'button',
+                type: 'text-transform',
+            },
+        },
+        'variant-icon-border-radius': {
+            attributes: {
+                category: 'button',
+                type: 'variant-icon-border-radius',
+            },
+        },
+        'size-m-font-size': {
+            attributes: {
+                category: 'button',
+                type: 'size-m-font-size',
+            },
+        },
+        'size-s-font-size': {
+            attributes: {
+                category: 'button',
+                type: 'size-s-font-size',
+            },
         },
     },
     color: {

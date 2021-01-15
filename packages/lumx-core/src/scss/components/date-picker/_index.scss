@@ -54,7 +54,7 @@
         }
 
         &--is-today span {
-            font-weight: $lumx-button-text-weight;
+            font-weight: var(--lumx-typography-bold-weight);
         }
 
         &--is-selected {

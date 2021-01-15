@@ -2,4 +2,7 @@
     --lumx-border-radius: 2px;
     --lumx-typography-bold-weight: 500;
     --lumx-typography-font-family: 'Roboto', sans-serif;
+    --lumx-button-text-transform: uppercase;
+    --lumx-button-variant-icon-border-radius: 50%;
+    --lumx-button-size-s-font-size: 10px;
 }
