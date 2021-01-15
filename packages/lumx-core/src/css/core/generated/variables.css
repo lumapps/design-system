@@ -1,10 +1,14 @@
 /**
  * Do not edit directly
- * Generated on Thu, 14 Jan 2021 19:16:04 GMT
+ * Generated on Fri, 15 Jan 2021 08:52:24 GMT
  */
 
 :root {
     --lumx-border-radius: 4px;
+    --lumx-button-text-transform: none;
+    --lumx-button-variant-icon-border-radius: 4px;
+    --lumx-button-size-m-font-size: 14px;
+    --lumx-button-size-s-font-size: 12px;
     --lumx-color-dark-N: rgba(0, 0, 0, 0.87); /* Neutral dark color */
     --lumx-color-dark-L1: rgba(0, 0, 0, 0.8); /* Base dark color with 80% opacity */
     --lumx-color-dark-L2: rgba(0, 0, 0, 0.54); /* Base dark color with 54% opacity */

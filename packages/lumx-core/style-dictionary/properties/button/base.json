@@ -1,0 +1,8 @@
+{
+    "button": {
+        "text-transform": { "value": "none" },
+        "variant-icon-border-radius": { "value": "4px" },
+        "size-m-font-size": { "value": "14px" },
+        "size-s-font-size": { "value": "12px" }
+    }
+}
