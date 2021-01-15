@@ -14,6 +14,7 @@ import { useFocus } from '@lumx/react/hooks/useFocus';
 import { useDisableBodyScroll } from '@lumx/react/hooks/useDisableBodyScroll';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
+import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 
 const LIGHTBOX_TRANSITION_DURATION = 400;
 
@@ -47,14 +48,6 @@ const COMPONENT_NAME = 'Lightbox';
  * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
-
-/**
- * Component default props.
- */
-const DEFAULT_PROPS: Partial<LightboxProps> = {
-    ariaLabel: 'Lightbox',
-    theme: Theme.light,
-};
 
 /**
  * Lightbox component.
@@ -101,6 +94,10 @@ export const Lightbox: Comp<LightboxProps, HTMLDivElement> = forwardRef((props, 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useFocus(parentElement?.current, !isOpen);
 
+    // Close lightbox on escape key pressed.
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useCallbackOnEscape(onClose, true);
+
     if (!isOpen && !isVisible) return null;
 
     return createPortal(
@@ -144,4 +141,3 @@ export const Lightbox: Comp<LightboxProps, HTMLDivElement> = forwardRef((props, 
 });
 Lightbox.displayName = COMPONENT_NAME;
 Lightbox.className = CLASSNAME;
-Lightbox.defaultProps = DEFAULT_PROPS;
