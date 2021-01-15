@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 15 Jan 2021 13:29:56 GMT
+ * Generated on Fri, 15 Jan 2021 13:51:09 GMT
  */
 
 export const CORE = {
@@ -46,6 +46,54 @@ export const CORE = {
             attributes: {
                 category: 'checkbox',
                 type: 'control-size',
+            },
+        },
+    },
+    chip: {
+        'size-m': {
+            height: {
+                attributes: {
+                    category: 'chip',
+                    type: 'size-m',
+                    item: 'height',
+                },
+            },
+            'border-radius': {
+                attributes: {
+                    category: 'chip',
+                    type: 'size-m',
+                    item: 'border-radius',
+                },
+            },
+            'padding-vertical': {
+                attributes: {
+                    category: 'chip',
+                    type: 'size-m',
+                    item: 'padding-vertical',
+                },
+            },
+        },
+        'size-s': {
+            height: {
+                attributes: {
+                    category: 'chip',
+                    type: 'size-s',
+                    item: 'height',
+                },
+            },
+            'border-radius': {
+                attributes: {
+                    category: 'chip',
+                    type: 'size-s',
+                    item: 'border-radius',
+                },
+            },
+            'padding-vertical': {
+                attributes: {
+                    category: 'chip',
+                    type: 'size-s',
+                    item: 'padding-vertical',
+                },
             },
         },
     },

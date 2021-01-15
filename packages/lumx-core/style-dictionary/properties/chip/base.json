@@ -1,0 +1,14 @@
+{
+    "chip": {
+        "size-m": {
+            "height": { "value": "36px" },
+            "border-radius": { "value": "18px" },
+            "padding-vertical": { "value": "16px" }
+        },
+        "size-s": {
+            "height": { "value": "24px" },
+            "border-radius": { "value": "12px" },
+            "padding-vertical": { "value": "12px" }
+        }
+    }
+}

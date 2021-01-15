@@ -7,4 +7,10 @@
     --lumx-button-size-s-font-size: 10px;
     --lumx-checkbox-wrapper-size: 24px;
     --lumx-checkbox-control-size: 18px;
+    --lumx-chip-size-m-height: 32px;
+    --lumx-chip-size-m-border-radius: 16px;
+    --lumx-chip-size-m-padding-vertical: 12px;
+    --lumx-chip-size-s-height: 20px;
+    --lumx-chip-size-s-border-radius: 2px;
+    --lumx-chip-size-s-padding-vertical: 8px;
 }
