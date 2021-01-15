@@ -22,7 +22,7 @@ const setup = (props: Partial<LightboxProps> = {}, shallowRendering = true) => {
 describe(`<${Lightbox.displayName}>`, () => {
     // 1. Test render via snapshot.
     describe('Snapshots and structure', () => {
-        itShouldRenderStories(stories, Lightbox);
+        itShouldRenderStories(stories, Lightbox, { props: { defaultIsOpen: true } });
     });
 
     // Common tests suite.
