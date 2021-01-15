@@ -1,0 +1,6 @@
+{
+    "checkbox": {
+        "wrapper-size": { "value": "20px" },
+        "control-size": { "value": "16px" }
+    }
+}

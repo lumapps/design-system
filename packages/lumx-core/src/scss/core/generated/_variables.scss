@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 15 Jan 2021 08:52:24 GMT
+ * Generated on Fri, 15 Jan 2021 13:29:56 GMT
  */
 
 $lumx-border-radius: 4px !default;
@@ -8,6 +8,8 @@ $lumx-button-text-transform: none !default;
 $lumx-button-variant-icon-border-radius: 4px !default;
 $lumx-button-size-m-font-size: 14px !default;
 $lumx-button-size-s-font-size: 12px !default;
+$lumx-checkbox-wrapper-size: 20px !default;
+$lumx-checkbox-control-size: 16px !default;
 $lumx-color-dark-N: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
 $lumx-color-dark-L1: rgba(0, 0, 0, 0.8) !default; // Base dark color with 80% opacity
 $lumx-color-dark-L2: rgba(0, 0, 0, 0.54) !default; // Base dark color with 54% opacity
@@ -126,6 +128,10 @@ $lumx-core: (
         'variant-icon-border-radius': $lumx-button-variant-icon-border-radius,
         'size-m-font-size': $lumx-button-size-m-font-size,
         'size-s-font-size': $lumx-button-size-s-font-size,
+    ),
+    'checkbox': (
+        'wrapper-size': $lumx-checkbox-wrapper-size,
+        'control-size': $lumx-checkbox-control-size,
     ),
     'color': (
         'dark': (

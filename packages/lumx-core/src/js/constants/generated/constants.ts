@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 15 Jan 2021 08:52:24 GMT
+ * Generated on Fri, 15 Jan 2021 13:29:56 GMT
  */
 
 export const CORE = {
@@ -32,6 +32,20 @@ export const CORE = {
             attributes: {
                 category: 'button',
                 type: 'size-s-font-size',
+            },
+        },
+    },
+    checkbox: {
+        'wrapper-size': {
+            attributes: {
+                category: 'checkbox',
+                type: 'wrapper-size',
+            },
+        },
+        'control-size': {
+            attributes: {
+                category: 'checkbox',
+                type: 'control-size',
             },
         },
     },
