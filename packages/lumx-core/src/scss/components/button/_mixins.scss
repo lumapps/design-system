@@ -136,14 +136,9 @@
 }
 
 @mixin lumx-button-text($size) {
+    font-size: var(--lumx-button-size-#{$size}-font-size);
     font-weight: var(--lumx-typography-bold-weight);
     line-height: map-get($lumx-sizes, $size);
     pointer-events: none;
     text-transform: var(--lumx-button-text-transform);
-
-    @if $size == lumx-base-const('size', 'M') {
-        font-size: var(--lumx-button-size-m-font-size);
-    } @else if $size == lumx-base-const('size', 'S') {
-        font-size: var(--lumx-button-size-s-font-size);
-    }
 }
