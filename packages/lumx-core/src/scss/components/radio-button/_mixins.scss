@@ -1,7 +1,7 @@
 @mixin lumx-radio-button-input-wrapper() {
     position: relative;
-    width: $lumx-radio-button-wrapper-size;
-    height: $lumx-radio-button-wrapper-size;
+    width: var(--lumx-radio-button-wrapper-size);
+    height: var(--lumx-radio-button-wrapper-size);
 }
 
 @mixin lumx-radio-button-input-native() {
@@ -9,8 +9,8 @@
     z-index: 4;
     top: 0;
     left: 0;
-    width: $lumx-radio-button-wrapper-size;
-    height: $lumx-radio-button-wrapper-size;
+    width: var(--lumx-radio-button-wrapper-size);
+    height: var(--lumx-radio-button-wrapper-size);
     padding: 0;
     margin: 0;
     opacity: 0;
@@ -19,10 +19,10 @@
 @mixin lumx-radio-button-placeholder() {
     position: absolute;
     z-index: 1;
-    top: ($lumx-radio-button-wrapper-size - $lumx-radio-button-control-size) / 2;
-    left: ($lumx-radio-button-wrapper-size - $lumx-radio-button-control-size) / 2;
-    width: $lumx-radio-button-control-size;
-    height: $lumx-radio-button-control-size;
+    top: calc(calc(var(--lumx-radio-button-wrapper-size) - var(--lumx-radio-button-control-size)) / 2);
+    left: calc(calc(var(--lumx-radio-button-wrapper-size) - var(--lumx-radio-button-control-size)) / 2);
+    width: var(--lumx-radio-button-control-size);
+    height: var(--lumx-radio-button-control-size);
     border-radius: 50%;
 }
 
@@ -41,7 +41,7 @@
 @mixin lumx-radio-button-input-background-status($status, $theme) {
     @if $status == 'checked' {
         @if $theme == lumx-base-const('theme', 'LIGHT') {
-            color: lumx-color-variant($lumx-radio-button-color, 'N');
+            color: lumx-color-variant('primary', 'N');
         } @else if $theme == lumx-base-const('theme', 'DARK') {
             color: lumx-color-variant('light', 'N');
         }
@@ -57,11 +57,11 @@
 @mixin lumx-radio-button-input-indicator() {
     position: absolute;
     z-index: 3;
-    top: ($lumx-radio-button-control-size - $lumx-radio-button-indicator-size) / 2;
-    left: ($lumx-radio-button-control-size - $lumx-radio-button-indicator-size) / 2;
+    top: calc(calc(var(--lumx-radio-button-control-size) - var(--lumx-radio-button-indicator-size)) / 2);
+    left: calc(calc(var(--lumx-radio-button-control-size) - var(--lumx-radio-button-indicator-size)) / 2);
     display: flex;
-    width: $lumx-radio-button-indicator-size;
-    height: $lumx-radio-button-indicator-size;
+    width: var(--lumx-radio-button-indicator-size);
+    height: var(--lumx-radio-button-indicator-size);
     align-items: center;
     justify-content: center;
     border-radius: 50%;
@@ -75,7 +75,7 @@
     }
 
     @if $theme == lumx-base-const('theme', 'LIGHT') {
-        background-color: lumx-color-variant($lumx-radio-button-color, 'N');
+        background-color: lumx-color-variant('primary', 'N');
     } @else if $theme == lumx-base-const('theme', 'DARK') {
         background-color: lumx-color-variant('light', 'N');
     }
