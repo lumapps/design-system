@@ -1,9 +1,8 @@
 /**
  * Do not edit directly
- * Generated on Fri, 15 Jan 2021 13:51:09 GMT
+ * Generated on Fri, 15 Jan 2021 15:58:30 GMT
  */
 
-$lumx-border-radius: 4px !default;
 $lumx-button-text-transform: none !default;
 $lumx-button-variant-icon-border-radius: 4px !default;
 $lumx-button-size-m-font-size: 14px !default;
@@ -16,6 +15,7 @@ $lumx-chip-size-m-padding-vertical: 16px !default;
 $lumx-chip-size-s-height: 24px !default;
 $lumx-chip-size-s-border-radius: 12px !default;
 $lumx-chip-size-s-padding-vertical: 12px !default;
+$lumx-border-radius: 4px !default;
 $lumx-color-dark-N: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
 $lumx-color-dark-L1: rgba(0, 0, 0, 0.8) !default; // Base dark color with 80% opacity
 $lumx-color-dark-L2: rgba(0, 0, 0, 0.54) !default; // Base dark color with 54% opacity
@@ -127,8 +127,7 @@ $lumx-typography-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Ro
     'Droid Sans', 'Helvetica Neue', sans-serif !default;
 $lumx-typography-bold-weight: 700 !default;
 
-$lumx-core: (
-    'border-radius': $lumx-border-radius,
+$lumx-design-tokens: (
     'button': (
         'text-transform': $lumx-button-text-transform,
         'variant-icon-border-radius': $lumx-button-variant-icon-border-radius,
@@ -151,6 +150,7 @@ $lumx-core: (
             'padding-vertical': $lumx-chip-size-s-padding-vertical,
         ),
     ),
+    'border-radius': $lumx-border-radius,
     'color': (
         'dark': (
             'N': $lumx-color-dark-N,

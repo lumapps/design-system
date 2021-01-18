@@ -1,14 +1,9 @@
 /**
  * Do not edit directly
- * Generated on Fri, 15 Jan 2021 13:51:09 GMT
+ * Generated on Fri, 15 Jan 2021 15:58:30 GMT
  */
 
-export const CORE = {
-    'border-radius': {
-        attributes: {
-            category: 'border-radius',
-        },
-    },
+export const DESIGN_TOKENS = {
     button: {
         'text-transform': {
             attributes: {
@@ -95,6 +90,11 @@ export const CORE = {
                     item: 'padding-vertical',
                 },
             },
+        },
+    },
+    'border-radius': {
+        attributes: {
+            category: 'border-radius',
         },
     },
     color: {
