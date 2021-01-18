@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 18 Jan 2021 08:56:45 GMT
+ * Generated on Mon, 18 Jan 2021 09:25:40 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -1878,6 +1878,45 @@ export const DESIGN_TOKENS = {
             attributes: {
                 category: 'size',
                 type: 'xxm',
+            },
+        },
+    },
+    spacing: {
+        unit: {
+            tiny: {
+                attributes: {
+                    category: 'spacing',
+                    type: 'unit',
+                    item: 'tiny',
+                },
+            },
+            regular: {
+                attributes: {
+                    category: 'spacing',
+                    type: 'unit',
+                    item: 'regular',
+                },
+            },
+            medium: {
+                attributes: {
+                    category: 'spacing',
+                    type: 'unit',
+                    item: 'medium',
+                },
+            },
+            big: {
+                attributes: {
+                    category: 'spacing',
+                    type: 'unit',
+                    item: 'big',
+                },
+            },
+            huge: {
+                attributes: {
+                    category: 'spacing',
+                    type: 'unit',
+                    item: 'huge',
+                },
             },
         },
     },
