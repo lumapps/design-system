@@ -17,4 +17,6 @@
     --lumx-typography-variant-input-label-line-height: 24px;
     --lumx-typography-variant-input-helper-font-size: 14px;
     --lumx-typography-variant-input-helper-line-height: 20px;
+    --lumx-progress-bounce: none;
+    --lumx-progress-rotate: block;
 }

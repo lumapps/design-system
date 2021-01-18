@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 18 Jan 2021 09:42:22 GMT
+ * Generated on Mon, 18 Jan 2021 10:32:06 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -1834,6 +1834,20 @@ export const DESIGN_TOKENS = {
                         a: 0.1,
                     },
                 },
+            },
+        },
+    },
+    progress: {
+        bounce: {
+            attributes: {
+                category: 'progress',
+                type: 'bounce',
+            },
+        },
+        rotate: {
+            attributes: {
+                category: 'progress',
+                type: 'rotate',
             },
         },
     },
