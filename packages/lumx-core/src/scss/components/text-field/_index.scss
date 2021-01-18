@@ -22,7 +22,9 @@
         margin-left: $lumx-spacing-unit;
 
         span {
-            @include lumx-typography($lumx-input-label-typography);
+            font-size: var(--lumx-typography-variant-input-label-font-size);
+            font-weight: var(--lumx-typography-variant-input-label-font-weight);
+            line-height: var(--lumx-typography-variant-input-label-line-height);
 
             #{$self}--theme-light & {
                 color: lumx-color-variant('dark', 'L2');

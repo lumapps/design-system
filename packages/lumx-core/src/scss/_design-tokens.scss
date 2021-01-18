@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 18 Jan 2021 09:25:40 GMT
+ * Generated on Mon, 18 Jan 2021 09:42:22 GMT
  */
 
 $lumx-button-text-transform: none !default;
@@ -138,6 +138,12 @@ $lumx-spacing-unit-huge: 24px !default;
 $lumx-typography-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Fira Sans',
     'Droid Sans', 'Helvetica Neue', sans-serif !default;
 $lumx-typography-bold-weight: 700 !default;
+$lumx-typography-variant-input-label-font-size: 14px !default;
+$lumx-typography-variant-input-label-font-weight: 400 !default;
+$lumx-typography-variant-input-label-line-height: 20px !default;
+$lumx-typography-variant-input-helper-font-size: 12px !default;
+$lumx-typography-variant-input-helper-font-weight: 400 !default;
+$lumx-typography-variant-input-helper-line-height: 16px !default;
 
 $lumx-design-tokens: (
     'button': (
@@ -319,5 +325,17 @@ $lumx-design-tokens: (
     'typography': (
         'font-family': $lumx-typography-font-family,
         'bold-weight': $lumx-typography-bold-weight,
+        'variant': (
+            'input-label': (
+                'font-size': $lumx-typography-variant-input-label-font-size,
+                'font-weight': $lumx-typography-variant-input-label-font-weight,
+                'line-height': $lumx-typography-variant-input-label-line-height,
+            ),
+            'input-helper': (
+                'font-size': $lumx-typography-variant-input-helper-font-size,
+                'font-weight': $lumx-typography-variant-input-helper-font-weight,
+                'line-height': $lumx-typography-variant-input-helper-line-height,
+            ),
+        ),
     ),
 ) !default;
