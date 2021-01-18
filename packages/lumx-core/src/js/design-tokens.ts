@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 18 Jan 2021 09:25:40 GMT
+ * Generated on Mon, 18 Jan 2021 09:42:22 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -1931,6 +1931,54 @@ export const DESIGN_TOKENS = {
             attributes: {
                 category: 'typography',
                 type: 'bold-weight',
+            },
+        },
+        variant: {
+            'input-label': {
+                'font-size': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'variant',
+                        item: 'input-label',
+                    },
+                },
+                'font-weight': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'variant',
+                        item: 'input-label',
+                    },
+                },
+                'line-height': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'variant',
+                        item: 'input-label',
+                    },
+                },
+            },
+            'input-helper': {
+                'font-size': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'variant',
+                        item: 'input-helper',
+                    },
+                },
+                'font-weight': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'variant',
+                        item: 'input-helper',
+                    },
+                },
+                'line-height': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'variant',
+                        item: 'input-helper',
+                    },
+                },
             },
         },
     },

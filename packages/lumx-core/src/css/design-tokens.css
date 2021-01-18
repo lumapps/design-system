@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 18 Jan 2021 09:25:40 GMT
+ * Generated on Mon, 18 Jan 2021 09:42:22 GMT
  */
 
 :root {
@@ -138,4 +138,10 @@
   --lumx-spacing-unit-huge: 24px;
   --lumx-typography-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   --lumx-typography-bold-weight: 700;
+  --lumx-typography-variant-input-label-font-size: 14px;
+  --lumx-typography-variant-input-label-font-weight: 400;
+  --lumx-typography-variant-input-label-line-height: 20px;
+  --lumx-typography-variant-input-helper-font-size: 12px;
+  --lumx-typography-variant-input-helper-font-weight: 400;
+  --lumx-typography-variant-input-helper-line-height: 16px;
 }
