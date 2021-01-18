@@ -1,0 +1,7 @@
+{
+    "radio-button": {
+        "wrapper-size": { "value": "20px" },
+        "control-size": { "value": "16px" },
+        "indicator-size": { "value": "8px" }
+    }
+}

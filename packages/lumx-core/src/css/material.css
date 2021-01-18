@@ -19,4 +19,7 @@
     --lumx-typography-variant-input-helper-line-height: 20px;
     --lumx-progress-bounce: none;
     --lumx-progress-rotate: block;
+    --lumx-radio-button-wrapper-size: 24px;
+    --lumx-radio-button-control-size: 20px;
+    --lumx-radio-button-indicator-size: 10px;
 }

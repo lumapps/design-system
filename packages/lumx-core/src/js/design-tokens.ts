@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 18 Jan 2021 10:32:06 GMT
+ * Generated on Mon, 18 Jan 2021 10:39:05 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -89,6 +89,26 @@ export const DESIGN_TOKENS = {
                     type: 'size-s',
                     item: 'padding-vertical',
                 },
+            },
+        },
+    },
+    'radio-button': {
+        'wrapper-size': {
+            attributes: {
+                category: 'radio-button',
+                type: 'wrapper-size',
+            },
+        },
+        'control-size': {
+            attributes: {
+                category: 'radio-button',
+                type: 'control-size',
+            },
+        },
+        'indicator-size': {
+            attributes: {
+                category: 'radio-button',
+                type: 'indicator-size',
             },
         },
     },
