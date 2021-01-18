@@ -1,6 +1,8 @@
 /** LUMX THEME */
 
 @import '~sass-mq';
+@import '../css/design-tokens';
+@import './design-tokens';
 @import './core';
 @import './components';
 @import './core/base/normalize';

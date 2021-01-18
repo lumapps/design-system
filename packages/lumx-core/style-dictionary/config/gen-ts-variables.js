@@ -23,16 +23,16 @@ StyleDictionary.registerFormat({
         return `
             ${require('./utils/_genHeader')()}
 
-            export const CORE = ${JSON.stringify(properties, null, 2)}
+            export const DESIGN_TOKENS = ${JSON.stringify(properties, null, 2)}
         `;
     },
 });
 
 module.exports = () => {
     const baseDir = `${__dirname}/../`;
-    const buildPath = `${baseDir}/../src/js/constants/generated/`;
+    const buildPath = `${baseDir}/../src/js/`;
     return {
-        source: [`${baseDir}/properties/**/base.json`],
+        source: [`${baseDir}/properties/**/*.json`],
         platforms: {
             ts: {
                 transformGroup,
@@ -40,7 +40,7 @@ module.exports = () => {
                 files: [
                     {
                         format,
-                        destination: 'constants.ts',
+                        destination: 'design-tokens.ts',
                         pickFields: [
                             'version',
                             'comment',

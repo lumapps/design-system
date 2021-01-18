@@ -41,18 +41,18 @@ StyleDictionary.registerFormat({
 
 module.exports = () => {
     const baseDir = `${__dirname}/../`;
-    const buildPath = `${baseDir}/../src/scss/core/generated/`;
+    const buildPath = `${baseDir}/../src/scss/`;
     return {
-        source: [`${baseDir}/properties/**/base.json`],
+        source: [`${baseDir}/properties/**/*.json`],
         platforms: {
             scss: {
                 transformGroup,
                 buildPath,
                 files: [
                     {
-                        destination: '_variables.scss',
+                        destination: '_design-tokens.scss',
                         format,
-                        mapName: 'lumx-core',
+                        mapName: 'lumx-design-tokens',
                     },
                 ],
                 actions: [require('./utils/_prettier-scss')({ buildPath })],

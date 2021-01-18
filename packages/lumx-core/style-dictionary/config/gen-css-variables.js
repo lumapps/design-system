@@ -2,9 +2,10 @@ const transformGroup = require('./utils/_css-transform-group');
 
 module.exports = () => {
     const baseDir = `${__dirname}/../`;
-    const buildPath = `${baseDir}/../src/css/core/generated/`;
+    const buildPath = `${baseDir}/../src/css/`;
+
     return {
-        source: [`${baseDir}/properties/**/base.json`],
+        source: [`${baseDir}/properties/**/*.json`],
         platforms: {
             css: {
                 transformGroup,
@@ -12,8 +13,8 @@ module.exports = () => {
                 files: [
                     {
                         format: 'css/variables',
-                        destination: 'variables.css',
-                        mapName: 'lumx-core',
+                        destination: 'design-tokens.css',
+                        mapName: 'lumx-design-tokens',
                     },
                 ],
             },
