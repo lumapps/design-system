@@ -1,17 +1,1 @@
-$lumx-sizes: (
-    'xxs': 14px,
-    'xs': 20px,
-    's': 24px,
-    'm': 36px,
-    'l': 64px,
-    'xl': 128px,
-    'xxl': 256px,
-);
-
-$lumx-size-xxs: 14px;
-$lumx-size-xs: 20px;
-$lumx-size-s: 24px;
-$lumx-size-m: 36px;
-$lumx-size-l: 64px;
-$lumx-size-xl: 128px;
-$lumx-size-xxl: 256px;
+$lumx-sizes: map-get($lumx-design-tokens, 'size');

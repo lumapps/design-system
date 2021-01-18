@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 15 Jan 2021 15:58:30 GMT
+ * Generated on Mon, 18 Jan 2021 08:56:45 GMT
  */
 
 $lumx-button-text-transform: none !default;
@@ -123,6 +123,13 @@ $lumx-color-orange-L3: rgba(255, 179, 0, 0.6) !default; // Base yellow color wit
 $lumx-color-orange-L4: rgba(255, 179, 0, 0.4) !default; // Base yellow color with 40% opacity
 $lumx-color-orange-L5: rgba(255, 179, 0, 0.2) !default; // Base yellow color with 20% opacity
 $lumx-color-orange-L6: rgba(255, 179, 0, 0.1) !default; // Base yellow color with 10% opacity
+$lumx-size-xxs: 14px !default;
+$lumx-size-xs: 20px !default;
+$lumx-size-s: 24px !default;
+$lumx-size-m: 36px !default;
+$lumx-size-l: 64px !default;
+$lumx-size-xl: 128px !default;
+$lumx-size-xxm: 256px !default;
 $lumx-typography-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Fira Sans',
     'Droid Sans', 'Helvetica Neue', sans-serif !default;
 $lumx-typography-bold-weight: 700 !default;
@@ -285,6 +292,15 @@ $lumx-design-tokens: (
             'L5': $lumx-color-orange-L5,
             'L6': $lumx-color-orange-L6,
         ),
+    ),
+    'size': (
+        'xxs': $lumx-size-xxs,
+        'xs': $lumx-size-xs,
+        's': $lumx-size-s,
+        'm': $lumx-size-m,
+        'l': $lumx-size-l,
+        'xl': $lumx-size-xl,
+        'xxm': $lumx-size-xxm,
     ),
     'typography': (
         'font-family': $lumx-typography-font-family,

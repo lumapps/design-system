@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 15 Jan 2021 15:58:30 GMT
+ * Generated on Mon, 18 Jan 2021 08:56:45 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -1834,6 +1834,50 @@ export const DESIGN_TOKENS = {
                         a: 0.1,
                     },
                 },
+            },
+        },
+    },
+    size: {
+        xxs: {
+            attributes: {
+                category: 'size',
+                type: 'xxs',
+            },
+        },
+        xs: {
+            attributes: {
+                category: 'size',
+                type: 'xs',
+            },
+        },
+        s: {
+            attributes: {
+                category: 'size',
+                type: 's',
+            },
+        },
+        m: {
+            attributes: {
+                category: 'size',
+                type: 'm',
+            },
+        },
+        l: {
+            attributes: {
+                category: 'size',
+                type: 'l',
+            },
+        },
+        xl: {
+            attributes: {
+                category: 'size',
+                type: 'xl',
+            },
+        },
+        xxm: {
+            attributes: {
+                category: 'size',
+                type: 'xxm',
             },
         },
     },
