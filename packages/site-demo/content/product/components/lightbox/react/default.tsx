@@ -25,8 +25,8 @@ const IMAGES: ThumbnailProps[] = [
     { image: '/demo-assets/landscape2.jpg', alt: 'Landscape 2' },
 ];
 
-export const App = () => {
-    const [isOpen, setOpen] = useState(false);
+export const App = ({ defaultIsOpen }: any) => {
+    const [isOpen, setOpen] = useState(!!defaultIsOpen);
     const [activeIndex, setActiveIndex] = useState(0);
 
     const triggerElement = useRef(null);

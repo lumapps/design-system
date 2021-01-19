@@ -6,7 +6,7 @@ import template from './lightbox.html';
 
 /////////////////////////////
 
-function LightboxController($element, $scope, LxFocusTrapService, LxEventSchedulerService, $timeout) {
+function LightboxController($element, $scope, LxDepthService, LxFocusTrapService, LxEventSchedulerService, $timeout) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
@@ -111,7 +111,12 @@ function LightboxController($element, $scope, LxFocusTrapService, LxEventSchedul
             return;
         }
 
-        _lightbox.appendTo('body').show();
+        LxDepthService.increase();
+
+        _lightbox
+            .css('z-index', LxDepthService.get())
+            .appendTo('body')
+            .show();
 
         _idEventScheduler = LxEventSchedulerService.register('keyup', _onKeyUp);
 
