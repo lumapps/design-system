@@ -11,15 +11,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
--   Fix angular z-index system (revert to previous system)
--   Fix `Lightbox` close on escape.
+-   Fixed angular z-index system (revert to previous system)
+-   Fixed `Lightbox` close on escape.
+-   Fixed `Switch` content placement for `right` position.
 
 ## [1.0.1][] - 2021-01-13
 
 ### Fixed
 
--   Fix `@lumx/react` `package.json` metadata
--   Fix component TS type
+-   Fixed `@lumx/react` `package.json` metadata
+-   Fixed component TS type
 
 ## [1.0.0][] - 2021-01-07
 

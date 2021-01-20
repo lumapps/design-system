@@ -29,7 +29,7 @@ export const DisabledSwitch = ({ theme }: any) => (
     </Switch>
 );
 
-export const LeftPositionSwitch = ({ theme }: any) => (
+export const RightPositionSwitch = ({ theme }: any) => (
     <Switch position={Alignment.right} onChange={noop} theme={theme}>
         {text('text', 'The switch')}
     </Switch>
