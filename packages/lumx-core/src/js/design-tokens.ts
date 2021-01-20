@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 18 Jan 2021 10:39:05 GMT
+ * Generated on Wed, 20 Jan 2021 09:08:28 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -109,6 +109,56 @@ export const DESIGN_TOKENS = {
             attributes: {
                 category: 'radio-button',
                 type: 'indicator-size',
+            },
+        },
+    },
+    switch: {
+        wrapper: {
+            width: {
+                attributes: {
+                    category: 'switch',
+                    type: 'wrapper',
+                    item: 'width',
+                },
+            },
+            height: {
+                attributes: {
+                    category: 'switch',
+                    type: 'wrapper',
+                    item: 'height',
+                },
+            },
+        },
+        control: {
+            width: {
+                attributes: {
+                    category: 'switch',
+                    type: 'control',
+                    item: 'width',
+                },
+            },
+            height: {
+                attributes: {
+                    category: 'switch',
+                    type: 'control',
+                    item: 'height',
+                },
+            },
+        },
+        indicator: {
+            size: {
+                attributes: {
+                    category: 'switch',
+                    type: 'indicator',
+                    item: 'size',
+                },
+            },
+            offset: {
+                attributes: {
+                    category: 'switch',
+                    type: 'indicator',
+                    item: 'offset',
+                },
             },
         },
     },
