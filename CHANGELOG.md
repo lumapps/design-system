@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Fixed `Lightbox` close on escape witch slideshow inside.
 -   Fixed `Thumbnail` focus point when clickable.
 -   Fixed `Thumbnail` focus state style.
+-   Fixed `Thumbnail` fallback placement.
 
 ## [1.0.2][] - 2021-01-18
 

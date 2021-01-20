@@ -131,16 +131,21 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
 
     return (
         <div {...wrapperProps}>
-            <div className={`${CLASSNAME}__background`} style={style?.wrapper}>
+            <div
+                className={`${CLASSNAME}__background`}
+                style={{
+                    ...style?.wrapper,
+                    // Remove from layout if image not loaded correctly (use fallback)
+                    display: hasError ? 'none' : undefined,
+                    // Hide while loading.
+                    visibility: isLoading ? 'hidden' : undefined,
+                }}
+            >
                 <img
                     {...imgProps}
                     style={{
                         ...imgProps?.style,
                         ...style?.image,
-                        // Remove from layout if image not loaded correctly (use fallback)
-                        display: hasError ? 'none' : undefined,
-                        // Hide while loading.
-                        visibility: isLoading ? 'hidden' : undefined,
                     }}
                     ref={mergeRefs(imgRef, propImgRef)}
                     className={style?.image ? `${CLASSNAME}__focused-image` : `${CLASSNAME}__image`}
@@ -149,18 +154,13 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
                     alt={alt}
                     loading={loading}
                 />
-                {hasError &&
-                    (typeof fallback === 'string' ? (
-                        <Icon
-                            className={`${CLASSNAME}__fallback`}
-                            icon={fallback}
-                            size={size || Size.m}
-                            theme={theme}
-                        />
-                    ) : (
-                        <div className={`${CLASSNAME}__fallback`}>{fallback}</div>
-                    ))}
             </div>
+            {hasError &&
+                (typeof fallback === 'string' ? (
+                    <Icon className={`${CLASSNAME}__fallback`} icon={fallback} size={size || Size.m} theme={theme} />
+                ) : (
+                    <div className={`${CLASSNAME}__fallback`}>{fallback}</div>
+                ))}
         </div>
     );
 });
