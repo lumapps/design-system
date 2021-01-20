@@ -1,4 +1,3 @@
-import { ESCAPE_KEY_CODE } from '@lumx/core/js/constants';
 import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
@@ -64,21 +63,21 @@ describe(`<${Dropdown.displayName}>`, () => {
                 false,
             );
 
-            eventListeners.keydown?.({ keyCode: ESCAPE_KEY_CODE });
+            eventListeners.keydown?.({ key: 'Escape' });
             expect(onClose).toHaveBeenCalled();
         });
 
         it('should not trigger `onClose` when pressing any other key', () => {
             setup({ isOpen: true, onClose, closeOnEscape: true }, false);
 
-            eventListeners.keydown?.({ keyCode: 26 });
+            eventListeners.keydown?.({ key: 'a' });
             expect(onClose).not.toHaveBeenCalled();
         });
 
         it('should not trigger `onClose` when pressing `escape` key with `closeOnEscape` set to `false`', () => {
             setup({ isOpen: true, onClose, closeOnEscape: false }, false);
 
-            eventListeners.keydown?.({ keyCode: ESCAPE_KEY_CODE });
+            eventListeners.keydown?.({ key: 'Escape' });
             expect(onClose).not.toHaveBeenCalled();
         });
     });

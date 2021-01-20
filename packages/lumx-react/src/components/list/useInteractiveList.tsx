@@ -1,7 +1,6 @@
 import { ListItemProps } from '@lumx/react';
 import { isClickable } from '@lumx/react/components/list/ListItem';
 
-import { DOWN_KEY_CODE, UP_KEY_CODE } from '@lumx/react/constants';
 import { isComponent } from '@lumx/react/utils';
 import { flattenChildren } from '@lumx/react/utils/flattenChildren';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
@@ -99,15 +98,15 @@ export const useInteractiveList: useInteractiveList = (options) => {
 
         /**
          * This function calculates the next index in the list to be active
-         * @param  index      current index
-         * @param  keyPressed key code pressed
+         * @param  index current index
+         * @param  code  key code pressed
          * @return next index
          */
-        const getNextIndex = (index: number, keyPressed: number): number => {
-            switch (keyPressed) {
-                case DOWN_KEY_CODE:
+        const getNextIndex = (index: number, key: string): number => {
+            switch (key) {
+                case 'ArrowDown':
                     return index + 1 < items.length ? index + 1 : 0;
-                case UP_KEY_CODE:
+                case 'ArrowUp':
                     return index - 1 >= 0 ? index - 1 : items.length - 1;
                 default:
                     return INITIAL_INDEX;
@@ -126,8 +125,8 @@ export const useInteractiveList: useInteractiveList = (options) => {
          * @param evt Key event
          */
         const onArrowPressed: Listener = (evt) => {
-            const { keyCode } = evt;
-            if (keyCode !== UP_KEY_CODE && keyCode !== DOWN_KEY_CODE) {
+            const { key } = evt;
+            if (key !== 'ArrowUp' && key !== 'ArrowDown') {
                 return;
             }
 
@@ -136,7 +135,7 @@ export const useInteractiveList: useInteractiveList = (options) => {
 
             // Move to next navigable item.
             do {
-                nextIndex = getNextIndex(nextIndex, keyCode);
+                nextIndex = getNextIndex(nextIndex, key);
                 iterations += 1;
             } while (
                 nextIndex !== INITIAL_INDEX &&

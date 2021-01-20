@@ -102,7 +102,7 @@ describe(`<${ProgressTrackerStep.displayName}>`, () => {
             const { changeToTab } = setupTabProviderMocks();
             const { wrapper } = setup({}, false);
 
-            wrapper.simulate('keypress', { keyCode: 13 });
+            wrapper.simulate('keypress', { key: 'Enter' });
             expect(changeToTab).toHaveBeenCalledTimes(1);
         });
 
@@ -110,7 +110,7 @@ describe(`<${ProgressTrackerStep.displayName}>`, () => {
             const { changeToTab } = setupTabProviderMocks();
             const { wrapper } = setup({}, false);
 
-            wrapper.simulate('keypress', { keyCode: 12 });
+            wrapper.simulate('keypress', { key: 'a' });
             expect(changeToTab).not.toHaveBeenCalled();
         });
     });

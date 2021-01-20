@@ -16,31 +16,31 @@ export function useTooltipOpen(delay: number, anchorElement: HTMLElement | null)
         if (!anchorElement) {
             return undefined;
         }
-        const handleMouseEnter = () => {
+        const open = () => {
             timer.current = setTimeout(() => {
                 setIsOpen(true);
             }, delay) as any;
         };
-
-        const handleMouseLeave = () => {
+        const close = () => {
             if (timer.current) {
                 clearTimeout(timer.current);
                 timer.current = undefined;
             }
             setIsOpen(false);
         };
+        const handleEscapeKeyPressed = onEscapePressed(close);
 
-        anchorElement.addEventListener('mouseenter', handleMouseEnter);
-        anchorElement.addEventListener('focusin', handleMouseEnter);
-        anchorElement.addEventListener('mouseleave', handleMouseLeave);
-        anchorElement.addEventListener('focusout', handleMouseLeave);
-        anchorElement.addEventListener('keydown', onEscapePressed(handleMouseLeave));
+        anchorElement.addEventListener('mouseenter', open);
+        anchorElement.addEventListener('focusin', open);
+        anchorElement.addEventListener('mouseleave', close);
+        anchorElement.addEventListener('focusout', close);
+        anchorElement.addEventListener('keydown', handleEscapeKeyPressed);
         return () => {
-            anchorElement.removeEventListener('mouseenter', handleMouseEnter);
-            anchorElement.removeEventListener('focusin', handleMouseEnter);
-            anchorElement.removeEventListener('mouseleave', handleMouseLeave);
-            anchorElement.removeEventListener('focusout', handleMouseLeave);
-            anchorElement.removeEventListener('keydown', onEscapePressed(handleMouseLeave));
+            anchorElement.removeEventListener('mouseenter', open);
+            anchorElement.removeEventListener('focusin', open);
+            anchorElement.removeEventListener('mouseleave', close);
+            anchorElement.removeEventListener('focusout', close);
+            anchorElement.removeEventListener('keydown', handleEscapeKeyPressed);
 
             if (timer.current) {
                 clearTimeout(timer.current);

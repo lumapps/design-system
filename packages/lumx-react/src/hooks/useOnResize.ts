@@ -18,10 +18,8 @@ export function useOnResize(element: HTMLElement | Falsy, update: RefObject<Call
         const observer =
             observerRef.current ||
             new ResizeObserver(([entry]) => {
-                if (
-                    previousSize.current?.width === entry.contentRect.width &&
-                    previousSize.current?.height === entry.contentRect.height
-                ) {
+                const { width, height } = entry.contentRect;
+                if (previousSize.current?.width === width && previousSize.current?.height === height) {
                     return;
                 }
                 update.current?.();

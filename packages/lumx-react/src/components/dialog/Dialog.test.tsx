@@ -1,4 +1,3 @@
-import { ESCAPE_KEY_CODE } from '@lumx/core/js/constants';
 import { Dialog, DialogProps } from '@lumx/react/components/dialog/Dialog';
 import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 
@@ -52,13 +51,13 @@ describe(`<${Dialog.displayName}>`, () => {
 
     // 3. Test events.
     describe('Events', () => {
-        const keyDown = (keyCode: any) => new KeyboardEvent('keydown', { keyCode } as any);
+        const keyDown = (key: string) => new KeyboardEvent('keydown', { key } as any);
 
         it('should trigger `onClose` when pressing `escape` key', () => {
             const onClose = jest.fn();
             setup({ isOpen: true, onClose }, false);
 
-            document.body.dispatchEvent(keyDown(ESCAPE_KEY_CODE));
+            document.body.dispatchEvent(keyDown('Escape'));
             expect(onClose).toHaveBeenCalled();
         });
 
@@ -66,7 +65,7 @@ describe(`<${Dialog.displayName}>`, () => {
             const onClose = jest.fn();
             setup({ isOpen: true, onClose }, false);
 
-            document.body.dispatchEvent(keyDown(26));
+            document.body.dispatchEvent(keyDown('a'));
             expect(onClose).not.toHaveBeenCalled();
         });
 
@@ -74,7 +73,7 @@ describe(`<${Dialog.displayName}>`, () => {
             const onClose = jest.fn();
             setup({ isOpen: true, onClose, preventAutoClose: true }, false);
 
-            document.body.dispatchEvent(keyDown(ESCAPE_KEY_CODE));
+            document.body.dispatchEvent(keyDown('Escape'));
             expect(onClose).not.toHaveBeenCalled();
         });
     });

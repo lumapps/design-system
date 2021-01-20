@@ -1,7 +1,5 @@
 import { RefObject, SetStateAction, useEffect, useState } from 'react';
 
-import { BACKSPACE_KEY_CODE, DOWN_KEY_CODE, ENTER_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from '@lumx/react/constants';
-
 import get from 'lodash/get';
 
 type Listener = (evt: KeyboardEvent) => void;
@@ -61,14 +59,14 @@ export const useKeyboardListNavigation: useKeyboardListNavigationType = (
 
     /**
      * This function calculates the next index in the list to be highlighted
-     * @param keyPressed - key code pressed
+     * @param key - key code pressed
      * @return next active index
      */
-    const calculateActiveIndex = (keyPressed: number): number => {
-        switch (keyPressed) {
-            case DOWN_KEY_CODE:
+    const calculateActiveIndex = (key: string): number => {
+        switch (key) {
+            case 'ArrowDown':
                 return activeItemIndex + 1 < items.length ? activeItemIndex + 1 : 0;
-            case UP_KEY_CODE:
+            case 'ArrowUp':
                 return activeItemIndex - 1 >= 0 ? activeItemIndex - 1 : items.length - 1;
             default:
                 return initialIndex;
@@ -96,8 +94,8 @@ export const useKeyboardListNavigation: useKeyboardListNavigationType = (
      * @param evt - key pressed event
      */
     const onArrowPressed: Listener = (evt) => {
-        const { keyCode } = evt;
-        const nextActiveIndex = calculateActiveIndex(keyCode);
+        const { key } = evt;
+        const nextActiveIndex = calculateActiveIndex(key);
         setActiveItemIndex(nextActiveIndex);
         preventDefaultAndStopPropagation(evt);
         if (onListItemNavigated) {
@@ -162,11 +160,11 @@ export const useKeyboardListNavigation: useKeyboardListNavigationType = (
      * here, and as a value, the handler for said key.
      */
     const eventsForKeyPressed: Record<string, Listener> = {
-        [DOWN_KEY_CODE]: onArrowPressed,
-        [TAB_KEY_CODE]: onTabKeyPressed,
-        [UP_KEY_CODE]: onArrowPressed,
-        [ENTER_KEY_CODE]: onEnterKeyPressed,
-        [BACKSPACE_KEY_CODE]: onBackspaceKeyPressed,
+        ArrowDown: onArrowPressed,
+        Tab: onTabKeyPressed,
+        ArrowUp: onArrowPressed,
+        Enter: onEnterKeyPressed,
+        Backspace: onBackspaceKeyPressed,
     };
 
     /**
@@ -176,8 +174,8 @@ export const useKeyboardListNavigation: useKeyboardListNavigationType = (
      * @param evt - key pressed or key down event
      */
     const onKeyboardNavigation: Listener = (evt) => {
-        const { keyCode } = evt;
-        const handler = eventsForKeyPressed[keyCode];
+        const { key } = evt;
+        const handler = eventsForKeyPressed[key];
 
         if (handler) {
             handler(evt);

@@ -1,5 +1,5 @@
 import { Icon, IconProps, Size } from '@lumx/react';
-import { CSS_PREFIX, ENTER_KEY_CODE } from '@lumx/react/constants';
+import { CSS_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, handleBasicClasses } from '@lumx/react/utils';
 
 import classNames from 'classnames';
@@ -85,8 +85,7 @@ export const Tab: Comp<TabProps, HTMLButtonElement> = forwardRef((props, ref) =>
     const handleKeyPress: KeyboardEventHandler = useCallback(
         (event) => {
             onKeyPress?.(event);
-            const keyCode = event.which ?? event.keyCode;
-            if (keyCode !== ENTER_KEY_CODE) {
+            if (event.key !== 'Enter') {
                 return;
             }
             changeToCurrentTab();
