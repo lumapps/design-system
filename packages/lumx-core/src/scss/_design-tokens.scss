@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 18 Jan 2021 10:39:05 GMT
+ * Generated on Wed, 20 Jan 2021 09:08:28 GMT
  */
 
 $lumx-button-text-transform: none !default;
@@ -18,6 +18,12 @@ $lumx-chip-size-s-padding-vertical: 12px !default;
 $lumx-radio-button-wrapper-size: 20px !default;
 $lumx-radio-button-control-size: 16px !default;
 $lumx-radio-button-indicator-size: 8px !default;
+$lumx-switch-wrapper-width: 30px !default;
+$lumx-switch-wrapper-height: 20px !default;
+$lumx-switch-control-width: 30px !default;
+$lumx-switch-control-height: 16px !default;
+$lumx-switch-indicator-size: 8px !default;
+$lumx-switch-indicator-offset: 4px !default;
 $lumx-border-radius: 4px !default;
 $lumx-color-dark-N: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
 $lumx-color-dark-L1: rgba(0, 0, 0, 0.8) !default; // Base dark color with 80% opacity
@@ -177,6 +183,20 @@ $lumx-design-tokens: (
         'wrapper-size': $lumx-radio-button-wrapper-size,
         'control-size': $lumx-radio-button-control-size,
         'indicator-size': $lumx-radio-button-indicator-size,
+    ),
+    'switch': (
+        'wrapper': (
+            'width': $lumx-switch-wrapper-width,
+            'height': $lumx-switch-wrapper-height,
+        ),
+        'control': (
+            'width': $lumx-switch-control-width,
+            'height': $lumx-switch-control-height,
+        ),
+        'indicator': (
+            'size': $lumx-switch-indicator-size,
+            'offset': $lumx-switch-indicator-offset,
+        ),
     ),
     'border-radius': $lumx-border-radius,
     'color': (
