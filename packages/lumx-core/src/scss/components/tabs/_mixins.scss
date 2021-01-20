@@ -39,6 +39,7 @@
     background: none;
     cursor: pointer;
     outline: none;
+    text-transform: var(--lumx-button-text-transform);
 
     &::after {
         position: absolute;
