@@ -104,7 +104,7 @@
 
             &:hover,
             &--is-active {
-                background-color: lumx-color-variant($lumx-slideshow-pagination-item-color, 'N');
+                background-color: lumx-color-variant('primary', 'N');
             }
         }
 
