@@ -20,6 +20,7 @@ exports[`<Dropdown> Snapshots and structure should render correctly 1`] = `
   }
   isOpen={true}
   placement="bottom-start"
+  usePortal={true}
   zIndex={9999}
 >
   <div

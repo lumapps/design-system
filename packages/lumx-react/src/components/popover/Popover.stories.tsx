@@ -221,3 +221,43 @@ export const WithScrollingPopover = ({ theme }: any) => {
         </div>
     );
 };
+
+export const WithoutPortal = ({ theme }: any) => {
+    const popovers: Array<[Placement, RefObject<any>]> = [
+        [Placement.LEFT, useRef(null)],
+        [Placement.TOP, useRef(null)],
+        [Placement.BOTTOM, useRef(null)],
+        [Placement.RIGHT, useRef(null)],
+    ];
+    const hasArrow = boolean('Has arrow', DEFAULT_PROPS.hasArrow as any);
+    const elevation: any = select('Elevation', [5, 4, 3, 2, 1], DEFAULT_PROPS.elevation);
+    const alignOptions = { middle: '', start: '-start', end: '-end' };
+    const align = select('Placement variant', alignOptions, alignOptions.middle);
+
+    return (
+        <FlexBox style={{ padding: 80 }} orientation={Orientation.horizontal}>
+            {popovers.map(([placement, ref]) => {
+                const placementVariant = (placement + align) as any;
+                return (
+                    <FlexBox key={placement} fillSpace vAlign={Alignment.center} hAlign={Alignment.center}>
+                        <Chip ref={ref} theme={theme} size={Size.s}>
+                            {startCase(placementVariant).toUpperCase()}
+                        </Chip>
+
+                        <Popover
+                            isOpen
+                            theme={theme}
+                            anchorRef={ref}
+                            placement={placementVariant}
+                            elevation={elevation}
+                            hasArrow={hasArrow}
+                            usePortal={false}
+                        >
+                            <div className="lumx-spacing-margin-huge">Popover</div>
+                        </Popover>
+                    </FlexBox>
+                );
+            })}
+        </FlexBox>
+    );
+};

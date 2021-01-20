@@ -87,6 +87,8 @@ export interface PopoverProps extends GenericProps {
     offset?: Offset;
     /** Placement relative to anchor. */
     placement?: Placement;
+    /** Whether the popover should be rendered into a DOM node that exists outside the DOM hierarchy of the parent component. */
+    usePortal?: boolean;
     /** Z-axis position. */
     zIndex?: number;
     /** On close callback (on click away or Escape pressed). */
@@ -109,6 +111,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
 const DEFAULT_PROPS: Partial<PopoverProps> = {
     elevation: 3,
     placement: Placement.AUTO,
+    usePortal: true,
     zIndex: 9999,
 };
 
@@ -171,6 +174,11 @@ const applyMaxHeight = {
     },
 };
 
+/** Method to render the popover inside a portal if usePortal is true */
+const renderPopover = (children: ReactNode, usePortal?: boolean): any => {
+    return usePortal ? createPortal(children, document.body) : children;
+};
+
 /**
  * Popover component.
  *
@@ -200,6 +208,7 @@ export const Popover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, re
         onClose,
         placement,
         style,
+        usePortal,
         zIndex,
         ...forwardedProps
     } = props;
@@ -256,7 +265,7 @@ export const Popover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, re
     useFocus(focusElement?.current, isOpen && (state?.rects?.popper?.y ?? -1) >= 0);
 
     return isOpen
-        ? createPortal(
+        ? renderPopover(
               <div
                   {...forwardedProps}
                   ref={mergeRefs<HTMLDivElement>(setPopperElement, ref, clickAwayRef)}
@@ -272,7 +281,7 @@ export const Popover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, re
                       {children}
                   </ClickAwayProvider>
               </div>,
-              document.body,
+              usePortal,
           )
         : null;
 });
