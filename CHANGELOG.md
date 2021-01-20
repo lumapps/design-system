@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Fixed `Switch` content placement for `right` position.
 -   Fixed `Lightbox` close on escape witch slideshow inside.
+-   Fixed `Thumbnail` focus point when clickable.
 
 ## [1.0.2][] - 2021-01-18
 

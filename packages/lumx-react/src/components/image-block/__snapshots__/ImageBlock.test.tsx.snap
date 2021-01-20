@@ -2,7 +2,7 @@
 
 exports[`<ImageBlock> Snapshots and structure should render story 'LumX components/image-block/Image Block/DefaultImageBlock' 1`] = `
 <figure
-  className="lumx-image-block lumx-image-block--caption-position-below lumx-image-block--align-center lumx-image-block--size-xxl lumx-image-block--theme-light"
+  className="lumx-image-block lumx-image-block--caption-position-below lumx-image-block--align-center lumx-image-block--theme-light"
 >
   <Thumbnail
     align="center"
@@ -18,7 +18,7 @@ exports[`<ImageBlock> Snapshots and structure should render story 'LumX componen
     }
     image="landscape1.jpg"
     loading="lazy"
-    size="xxl"
+    onClick={false}
     theme="light"
   />
   <figcaption

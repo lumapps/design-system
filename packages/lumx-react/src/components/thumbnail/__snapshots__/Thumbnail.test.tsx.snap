@@ -1,11 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Thumbnail> Snapshots and structure should render story 'LumX components/thumbnail/Thumbnail/Clickable' 1`] = `
-<button
+<div
   className="lumx-thumbnail lumx-thumbnail--size-xxl lumx-thumbnail--theme-light"
   onClick={[Function]}
+  onKeyPress={[Function]}
+  role="button"
   tabIndex={0}
-  type="button"
 >
   <div
     className="lumx-thumbnail__background"
@@ -23,7 +24,7 @@ exports[`<Thumbnail> Snapshots and structure should render story 'LumX component
       }
     />
   </div>
-</button>
+</div>
 `;
 
 exports[`<Thumbnail> Snapshots and structure should render story 'LumX components/thumbnail/Thumbnail/CustomFallback' 1`] = `
