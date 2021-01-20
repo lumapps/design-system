@@ -7,13 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Added `usePortal` prop to `Popover` component (default value is `true`) to be able to not use a portal in some cases.
+
+### Fixed
+
+-   Fixed `Switch` content placement for `right` position.
+
 ## [1.0.2][] - 2021-01-18
 
 ### Fixed
 
 -   Fixed angular z-index system (revert to previous system)
 -   Fixed `Lightbox` close on escape.
--   Fixed `Switch` content placement for `right` position.
 
 ## [1.0.1][] - 2021-01-13
 
