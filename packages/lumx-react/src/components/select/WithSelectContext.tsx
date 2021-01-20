@@ -8,8 +8,6 @@ import { Dropdown } from '@lumx/react/components/dropdown/Dropdown';
 import { InputHelper } from '@lumx/react/components/input-helper/InputHelper';
 import { Placement } from '@lumx/react/components/popover/Popover';
 
-import { DOWN_KEY_CODE, ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
-
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
@@ -119,10 +117,7 @@ export const WithSelectContext = (
 
     const handleKeyboardNav = useCallback(
         (evt: React.KeyboardEvent<HTMLElement>) => {
-            if (
-                (evt.which === ENTER_KEY_CODE || evt.which === SPACE_KEY_CODE || evt.which === DOWN_KEY_CODE) &&
-                onInputClick
-            ) {
+            if ((evt.key === 'Enter' || evt.key === ' ' || evt.key === 'ArrowDown') && onInputClick) {
                 evt.preventDefault();
                 onInputClick();
             }

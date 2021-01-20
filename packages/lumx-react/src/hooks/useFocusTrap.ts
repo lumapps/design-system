@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { DOCUMENT, TAB_KEY_CODE } from '@lumx/react/constants';
+import { DOCUMENT } from '@lumx/react/constants';
 
 /**
  * Get first and last elements focusable in an element.
@@ -44,8 +44,8 @@ export function useFocusTrap(
             }
 
             const onKeyDown = (evt: KeyboardEvent) => {
-                const { keyCode } = evt;
-                if (keyCode !== TAB_KEY_CODE) {
+                const { key } = evt;
+                if (key !== 'Tab') {
                     return;
                 }
                 const { first, last } = getFocusable(focusZoneElement);

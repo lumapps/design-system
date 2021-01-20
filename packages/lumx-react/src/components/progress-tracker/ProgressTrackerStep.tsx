@@ -4,7 +4,6 @@ import classNames from 'classnames';
 
 import { Icon, InputHelper, InputLabel, Kind, Size } from '@lumx/react';
 
-import { ENTER_KEY_CODE } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiRadioboxBlank, mdiRadioboxMarked } from '@lumx/icons';
@@ -95,8 +94,7 @@ export const ProgressTrackerStep: Comp<ProgressTrackerStepProps, HTMLButtonEleme
     const handleKeyPress: KeyboardEventHandler = useCallback(
         (event) => {
             onKeyPress?.(event);
-            const keyCode = event.which ?? event.keyCode;
-            if (keyCode !== ENTER_KEY_CODE) {
+            if (event.key !== 'Enter') {
                 return;
             }
             changeToCurrentTab();

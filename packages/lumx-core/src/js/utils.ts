@@ -6,8 +6,6 @@ import isEmpty from 'lodash/isEmpty';
 import kebabCase from 'lodash/kebabCase';
 import noop from 'lodash/noop';
 
-import { ESCAPE_KEY_CODE } from './constants';
-
 /**
  * Enhance isEmpty method to also works with numbers.
  *
@@ -184,8 +182,8 @@ export function onEnterPressed<E extends KeyboardEvent | React.KeyboardEvent>(
 export function onEscapePressed<E extends KeyboardEvent | React.KeyboardEvent>(
     handler: KeyboardEventHandler<E>,
 ): KeyboardEventHandler<E> {
-    return (evt: any) => {
-        if (evt.keyCode !== ESCAPE_KEY_CODE) {
+    return (evt) => {
+        if (evt.key !== 'Escape') {
             return;
         }
         handler(evt);

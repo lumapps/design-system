@@ -96,7 +96,7 @@ export const Lightbox: Comp<LightboxProps, HTMLDivElement> = forwardRef((props, 
 
     // Close lightbox on escape key pressed.
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    useCallbackOnEscape(onClose, true);
+    useCallbackOnEscape(onClose);
 
     if (!isOpen && !isVisible) return null;
 

@@ -5,7 +5,6 @@ import moment from 'moment';
 
 import React, { forwardRef, SyntheticEvent, useCallback, useRef, useState } from 'react';
 
-import { ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { Comp, GenericProps } from '@lumx/react/utils';
 
@@ -78,7 +77,7 @@ export const DatePickerField: Comp<DatePickerFieldProps, HTMLDivElement> = forwa
 
     useFocus(anchorRef.current, isOpen);
     const handleKeyboardNav = (evt: React.KeyboardEvent) => {
-        if ((evt.which === ENTER_KEY_CODE || evt.which === SPACE_KEY_CODE) && toggleSimpleMenu) {
+        if ((evt.key === 'Enter' || evt.key === ' ') && toggleSimpleMenu) {
             toggleSimpleMenu();
         }
     };

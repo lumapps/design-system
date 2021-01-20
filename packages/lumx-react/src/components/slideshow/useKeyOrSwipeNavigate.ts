@@ -1,4 +1,3 @@
-import { LEFT_KEY_CODE, RIGHT_KEY_CODE } from '@lumx/core/js/constants';
 import { useEffect } from 'react';
 import { detectSwipe } from '@lumx/core/js/utils';
 
@@ -14,13 +13,15 @@ export function useKeyOrSwipeNavigate(
         if (!element) return undefined;
 
         const onNavigate = (evt: KeyboardEvent | string) => {
-            if (typeof evt === 'string' ? evt === 'right' : evt?.keyCode === RIGHT_KEY_CODE) {
-                onPrevious?.();
-            } else if (typeof evt === 'string' ? evt === 'left' : evt?.keyCode === LEFT_KEY_CODE) {
-                onNext?.();
+            let callback;
+            if (typeof evt === 'string' ? evt === 'right' : evt?.key === 'ArrowRight') {
+                callback = onPrevious;
+            } else if (typeof evt === 'string' ? evt === 'left' : evt?.key === 'ArrowLeft') {
+                callback = onNext;
             }
 
-            if (typeof evt !== 'string') {
+            callback?.();
+            if (callback && typeof evt !== 'string') {
                 evt.preventDefault();
                 evt.stopPropagation();
             }

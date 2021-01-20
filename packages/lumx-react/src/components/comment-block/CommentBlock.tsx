@@ -3,7 +3,6 @@ import React, { Children, forwardRef, KeyboardEvent, KeyboardEventHandler, React
 import classNames from 'classnames';
 
 import { Avatar, Size, Theme } from '@lumx/react';
-import { ENTER_KEY_CODE } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses, ValueOf } from '@lumx/react/utils';
 
 import isFunction from 'lodash/isFunction';
@@ -100,7 +99,7 @@ export const CommentBlock: Comp<CommentBlockProps, HTMLDivElement> = forwardRef(
         ...forwardedProps
     } = props;
     const enterKeyPress: KeyboardEventHandler<HTMLElement> = (evt: KeyboardEvent<HTMLElement>) => {
-        if (evt.which === ENTER_KEY_CODE && isFunction(onClick)) {
+        if (evt.key === 'Enter' && isFunction(onClick)) {
             onClick();
         }
     };
