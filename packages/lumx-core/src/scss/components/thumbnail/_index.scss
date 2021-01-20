@@ -11,7 +11,8 @@
     background: none;
     outline: none;
 
-    &--fill-height {
+    &--fill-height,
+    &--fill-height &__background {
         display: flex;
         /* Safari hack to force the image ratio */
         height: fit-content;
@@ -31,10 +32,6 @@
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
-
-        #{$self}--fill-height & {
-            flex: 1 1 auto;
-        }
 
         #{$self}--variant-rounded & {
             border-radius: $lumx-border-radius;
