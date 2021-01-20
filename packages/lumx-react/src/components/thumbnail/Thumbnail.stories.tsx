@@ -48,6 +48,7 @@ export const Knobs = ({ theme }: any) => {
     const image = imageKnob('Image', IMAGES.landscape1);
     const variant = select<ThumbnailVariant>('Variant', ThumbnailVariant, ThumbnailVariant.squared);
     const size = sizeKnob(Size.xxl);
+    const onClick = boolean('clickable?', false) ? () => console.log('ok') : undefined;
 
     return (
         <Thumbnail
@@ -61,6 +62,7 @@ export const Knobs = ({ theme }: any) => {
             size={size}
             theme={theme}
             variant={variant}
+            onClick={onClick}
         />
     );
 };

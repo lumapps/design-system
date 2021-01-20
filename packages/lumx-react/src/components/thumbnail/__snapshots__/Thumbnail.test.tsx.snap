@@ -1,29 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Thumbnail> Snapshots and structure should render story 'LumX components/thumbnail/Thumbnail/Clickable' 1`] = `
-<button
+<div
   className="lumx-thumbnail lumx-thumbnail--size-xxl lumx-thumbnail--theme-light"
   onClick={[Function]}
+  onKeyPress={[Function]}
+  role="button"
   tabIndex={0}
-  type="button"
 >
   <div
     className="lumx-thumbnail__background"
+    style={
+      Object {
+        "display": undefined,
+        "visibility": "hidden",
+      }
+    }
   >
     <img
       alt="Click me"
       className="lumx-thumbnail__image"
       loading="lazy"
       src="landscape1.jpg"
-      style={
-        Object {
-          "display": undefined,
-          "visibility": "hidden",
-        }
-      }
+      style={Object {}}
     />
   </div>
-</button>
+</div>
 `;
 
 exports[`<Thumbnail> Snapshots and structure should render story 'LumX components/thumbnail/Thumbnail/CustomFallback' 1`] = `
@@ -32,18 +34,19 @@ exports[`<Thumbnail> Snapshots and structure should render story 'LumX component
 >
   <div
     className="lumx-thumbnail__background"
+    style={
+      Object {
+        "display": undefined,
+        "visibility": "hidden",
+      }
+    }
   >
     <img
       alt="foo"
       className="lumx-thumbnail__image"
       loading="lazy"
       src="foo"
-      style={
-        Object {
-          "display": undefined,
-          "visibility": "hidden",
-        }
-      }
+      style={Object {}}
     />
   </div>
 </div>
@@ -55,18 +58,19 @@ exports[`<Thumbnail> Snapshots and structure should render story 'LumX component
 >
   <div
     className="lumx-thumbnail__background"
+    style={
+      Object {
+        "display": undefined,
+        "visibility": "hidden",
+      }
+    }
   >
     <img
       alt="Image alt text"
       className="lumx-thumbnail__image"
       loading="lazy"
       src="landscape1.jpg"
-      style={
-        Object {
-          "display": undefined,
-          "visibility": "hidden",
-        }
-      }
+      style={Object {}}
     />
   </div>
 </div>
@@ -78,18 +82,19 @@ exports[`<Thumbnail> Snapshots and structure should render story 'LumX component
 >
   <div
     className="lumx-thumbnail__background"
+    style={
+      Object {
+        "display": undefined,
+        "visibility": "hidden",
+      }
+    }
   >
     <img
       alt="foo"
       className="lumx-thumbnail__image"
       loading="lazy"
       src="foo"
-      style={
-        Object {
-          "display": undefined,
-          "visibility": "hidden",
-        }
-      }
+      style={Object {}}
     />
   </div>
 </div>
@@ -101,18 +106,19 @@ exports[`<Thumbnail> Snapshots and structure should render story 'LumX component
 >
   <div
     className="lumx-thumbnail__background"
+    style={
+      Object {
+        "display": undefined,
+        "visibility": "hidden",
+      }
+    }
   >
     <img
       alt="foo"
       className="lumx-thumbnail__image"
       loading="lazy"
       src="foo"
-      style={
-        Object {
-          "display": undefined,
-          "visibility": "hidden",
-        }
-      }
+      style={Object {}}
     />
   </div>
 </div>
@@ -124,18 +130,19 @@ exports[`<Thumbnail> Snapshots and structure should render story 'LumX component
 >
   <div
     className="lumx-thumbnail__background"
+    style={
+      Object {
+        "display": undefined,
+        "visibility": "hidden",
+      }
+    }
   >
     <img
       alt="Image alt text"
       className="lumx-thumbnail__image"
       loading="lazy"
       src="landscape1.jpg"
-      style={
-        Object {
-          "display": undefined,
-          "visibility": "hidden",
-        }
-      }
+      style={Object {}}
     />
   </div>
 </div>
@@ -147,18 +154,19 @@ exports[`<Thumbnail> Snapshots and structure should render story 'LumX component
 >
   <div
     className="lumx-thumbnail__background"
+    style={
+      Object {
+        "display": undefined,
+        "visibility": "hidden",
+      }
+    }
   >
     <img
       alt="Grid"
       className="lumx-thumbnail__image"
       loading="lazy"
       src="/demo-assets/grid.jpg"
-      style={
-        Object {
-          "display": undefined,
-          "visibility": "hidden",
-        }
-      }
+      style={Object {}}
     />
   </div>
 </div>

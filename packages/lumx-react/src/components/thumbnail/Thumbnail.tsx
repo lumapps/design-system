@@ -19,6 +19,7 @@ import { isInternetExplorer } from '@lumx/react/utils/isInternetExplorer';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 import { useFocusPoint } from '@lumx/react/components/thumbnail/useFocusPoint';
 import { useImageLoad } from '@lumx/react/components/thumbnail/useImageLoad';
+import { useClickable } from '@lumx/react/components/thumbnail/useClickable';
 import { FocusPoint, ThumbnailSize, ThumbnailVariant } from './types';
 
 type ImgHTMLProps = ImgHTMLAttributes<HTMLImageElement>;
@@ -99,7 +100,6 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
         imgProps,
         imgRef: propImgRef,
         loading,
-        onClick,
         size,
         theme,
         variant,
@@ -112,9 +112,6 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
     const hasError = loadingState === 'hasError';
     const isLoading = loadingState === 'isLoading';
 
-    // Update img style according to focus point and aspect ratio.
-    const style = useFocusPoint({ focusPoint, aspectRatio, imgRef, loadingState, fillHeight });
-
     const [wrapper, setWrapper] = useState<HTMLElement>();
     const wrapperProps: any = {
         ...forwardedProps,
@@ -125,26 +122,30 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
             isLoading && wrapper?.getBoundingClientRect()?.height && 'lumx-color-background-dark-L6',
             fillHeight && `${CLASSNAME}--fill-height`,
         ),
+        // Handle clickable Thumbnail a11y.
+        ...useClickable(props),
     };
 
-    // Handle clickable Thumbnail a11y.
-    const Wrapper = onClick ? 'button' : 'div';
-    if (onClick) {
-        Object.assign(wrapperProps, { tabIndex: 0, onClick, type: 'button' } as HTMLProps<HTMLButtonElement>);
-    }
+    // Update img style according to focus point and aspect ratio.
+    const style = useFocusPoint({ focusPoint, aspectRatio, imgRef, loadingState, wrapper });
 
     return (
-        <Wrapper {...wrapperProps}>
-            <div className={`${CLASSNAME}__background`} style={style?.wrapper}>
+        <div {...wrapperProps}>
+            <div
+                className={`${CLASSNAME}__background`}
+                style={{
+                    ...style?.wrapper,
+                    // Remove from layout if image not loaded correctly (use fallback)
+                    display: hasError ? 'none' : undefined,
+                    // Hide while loading.
+                    visibility: isLoading ? 'hidden' : undefined,
+                }}
+            >
                 <img
-                    {...(imgProps || {})}
+                    {...imgProps}
                     style={{
                         ...imgProps?.style,
                         ...style?.image,
-                        // Remove from layout if image not loaded correctly (use fallback)
-                        display: hasError ? 'none' : undefined,
-                        // Hide while loading.
-                        visibility: isLoading ? 'hidden' : undefined,
                     }}
                     ref={mergeRefs(imgRef, propImgRef)}
                     className={style?.image ? `${CLASSNAME}__focused-image` : `${CLASSNAME}__image`}
@@ -153,19 +154,14 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
                     alt={alt}
                     loading={loading}
                 />
-                {hasError &&
-                    (typeof fallback === 'string' ? (
-                        <Icon
-                            className={`${CLASSNAME}__fallback`}
-                            icon={fallback}
-                            size={size || Size.m}
-                            theme={theme}
-                        />
-                    ) : (
-                        <div className={`${CLASSNAME}__fallback`}>{fallback}</div>
-                    ))}
             </div>
-        </Wrapper>
+            {hasError &&
+                (typeof fallback === 'string' ? (
+                    <Icon className={`${CLASSNAME}__fallback`} icon={fallback} size={size || Size.m} theme={theme} />
+                ) : (
+                    <div className={`${CLASSNAME}__fallback`}>{fallback}</div>
+                ))}
+        </div>
     );
 });
 Thumbnail.displayName = COMPONENT_NAME;

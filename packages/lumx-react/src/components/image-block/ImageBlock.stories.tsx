@@ -29,7 +29,8 @@ export const DefaultImageBlock = ({ theme }: any) => {
     );
     const imageUrl = landscapeImageKnob('Url image', LANDSCAPE_IMAGES.landscape1);
     const focusPoint = { x: focusKnob('Focus X'), y: focusKnob('Focus Y') };
-    const size = enumKnob('Size', [undefined, Size.xl, Size.xxl] as const, Size.xxl);
+    const size = enumKnob('Size', [undefined, Size.xl, Size.xxl] as const, undefined);
+    const onClick = boolean('clickable?', false) && (() => console.log('ok'));
 
     return (
         <ImageBlock
@@ -45,6 +46,7 @@ export const DefaultImageBlock = ({ theme }: any) => {
                 aspectRatio,
                 crossOrigin,
                 focusPoint,
+                onClick,
             }}
         />
     );

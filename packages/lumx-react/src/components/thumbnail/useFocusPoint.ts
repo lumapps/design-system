@@ -30,10 +30,14 @@ type Sizes = {
     aspectRatio?: AspectRatio;
 };
 
-function calculateSizes(img: HTMLImageElement | null | undefined, aspectRatio?: AspectRatio): Sizes | undefined {
-    if (!aspectRatio || aspectRatio === AspectRatio.original) return undefined;
-    const { naturalWidth: imgWidth, naturalHeight: imgHeight } = img || { naturalWidth: 0, naturalHeight: 0 };
-    const { width: containerWidth, height: containerHeight } = img?.parentElement?.getBoundingClientRect() || {
+function calculateSizes(
+    imageElement?: HTMLImageElement | null | undefined,
+    parentElement?: HTMLElement | null,
+    aspectRatio?: AspectRatio,
+): Sizes | undefined {
+    if (!imageElement || !parentElement || !aspectRatio || aspectRatio === AspectRatio.original) return undefined;
+    const { naturalWidth: imgWidth, naturalHeight: imgHeight } = imageElement || { naturalWidth: 0, naturalHeight: 0 };
+    const { width: containerWidth, height: containerHeight } = parentElement?.getBoundingClientRect() || {
         width: 0,
         height: 0,
     };
@@ -108,9 +112,9 @@ export const useFocusPoint = (options: {
     aspectRatio?: AspectRatio;
     imgRef: RefObject<HTMLImageElement>;
     loadingState: LoadingState;
-    fillHeight?: boolean;
+    wrapper?: HTMLElement;
 }): Styles | undefined => {
-    const { aspectRatio, focusPoint, imgRef, loadingState, fillHeight } = options;
+    const { aspectRatio, focusPoint, imgRef, loadingState, wrapper } = options;
 
     const point = parseFocusPoint(focusPoint);
 
@@ -119,30 +123,31 @@ export const useFocusPoint = (options: {
     const [style, setStyle] = useState<Styles>();
 
     // Update style.
+    const updateRef = useRef<Callback>(null);
     const update = useMemo(
-        () => () => {
-            const sizes = calculateSizes(imgRef?.current, aspectRatio);
-            if (!sizes || (isEqual(sizes, previousSizes.current) && isEqual(point, previousPoint.current))) {
-                // Nothing changed.
-                return;
-            }
-            setStyle(calculateImageStyle(sizes, point));
-            previousPoint.current = point;
-            previousSizes.current = sizes;
+        () => {
+            const updateFunction = () => {
+                const sizes = calculateSizes(imgRef?.current, wrapper, aspectRatio);
+                if (!sizes || (isEqual(sizes, previousSizes.current) && isEqual(point, previousPoint.current))) {
+                    // Nothing changed.
+                    return;
+                }
+                setStyle(calculateImageStyle(sizes, point));
+                previousPoint.current = point;
+                previousSizes.current = sizes;
+            };
+            (updateRef as MutableRefObject<Callback>).current = updateFunction;
+            return updateFunction;
         },
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        [...Object.values(point), imgRef, aspectRatio, fillHeight],
+        [...Object.values(point), imgRef, wrapper, aspectRatio],
     );
 
     // Update on image loaded.
     useLayoutEffect(update, [update, loadingState]);
 
     // Update on parent resize.
-    const updateRef = useRef<Callback>(null);
-    useLayoutEffect(() => {
-        (updateRef as MutableRefObject<Callback>).current = update;
-    }, [update]);
-    useOnResize(imgRef?.current?.parentElement, updateRef);
+    useOnResize(wrapper, updateRef);
 
     return style;
 };
