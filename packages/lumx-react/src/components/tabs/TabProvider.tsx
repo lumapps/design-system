@@ -52,7 +52,7 @@ export const TabProvider: React.FC<TabProviderProps> = (props) => {
             onChange(state.activeTabIndex);
         },
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        [onChange, propState.activeTabIndex],
+        [onChange, state.activeTabIndex],
     );
 
     return <TabProviderContext.Provider value={[state, dispatch]}>{children}</TabProviderContext.Provider>;

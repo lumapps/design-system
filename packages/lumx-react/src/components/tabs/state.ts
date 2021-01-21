@@ -18,7 +18,8 @@ export const INIT_STATE: State = {
 export type Action =
     | { type: 'update'; payload: Partial<State> }
     | { type: 'setActiveTabIndex'; payload: number }
-    | { type: 'register'; payload: { type: TabType; id: string } };
+    | { type: 'register'; payload: { type: TabType; id: string } }
+    | { type: 'unregister'; payload: { type: TabType; id: string } };
 
 export const reducer = (state: State, action: Action): State => {
     switch (action.type) {
@@ -35,6 +36,20 @@ export const reducer = (state: State, action: Action): State => {
             const { type, id } = action.payload;
             // Append tab/tabPanel id in state.
             return { ...state, ids: { ...state.ids, [type]: [...state.ids[type], id] } };
+        }
+        case 'unregister': {
+            const { type, id } = action.payload;
+            const index = state.ids[type].indexOf(id);
+            if (index === -1) return state;
+            // Remove tab & tab panel at index.
+            const tabIds = [...state.ids.tab];
+            tabIds.splice(index, 1);
+            const tabPanelIds = [...state.ids.tabPanel];
+            tabPanelIds.splice(index, 1);
+            return {
+                ...state,
+                ids: { tab: tabIds, tabPanel: tabPanelIds },
+            };
         }
         default:
             return state;
@@ -68,6 +83,10 @@ export const useTabProviderContext = (type: TabType, originalId?: string): undef
         () => {
             // On mount: register tab or tab panel id.
             dispatch({ type: 'register', payload: { type, id } });
+            return () => {
+                // On unmount: unregister tab or tab panel id.
+                dispatch({ type: 'unregister', payload: { type, id } });
+            };
         },
         // eslint-disable-next-line react-hooks/exhaustive-deps
         [],

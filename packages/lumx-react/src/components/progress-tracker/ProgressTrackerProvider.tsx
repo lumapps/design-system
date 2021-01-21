@@ -32,7 +32,7 @@ const DEFAULT_PROPS: Partial<ProgressTrackerProviderProps> = {
  * @return React element.
  */
 export const ProgressTrackerProvider: React.FC<ProgressTrackerProviderProps> = (props) => {
-    const { children, onChange, activeStepIndex, ...propState } = props;
+    const { children, onChange, ...propState } = props;
     const [state, dispatch] = useReducer(reducer, INIT_STATE);
 
     // On prop state change => dispatch update.
@@ -42,18 +42,18 @@ export const ProgressTrackerProvider: React.FC<ProgressTrackerProviderProps> = (
                 type: 'update',
                 payload: {
                     ...propState,
-                    activeTabIndex: activeStepIndex,
+                    activeTabIndex: propState.activeStepIndex,
                 },
             });
         },
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        [dispatch, ...Object.values(propState), activeStepIndex],
+        [dispatch, ...Object.values(propState)],
     );
 
     // On active tab index state change => send update to the onChange.
     useEffect(
         () => {
-            if (state === INIT_STATE || !onChange || activeStepIndex === state.activeTabIndex) {
+            if (state === INIT_STATE || !onChange || propState.activeStepIndex === state.activeTabIndex) {
                 return;
             }
             onChange(state.activeTabIndex);
