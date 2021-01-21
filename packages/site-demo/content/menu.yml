@@ -4,6 +4,7 @@
         - Iconography
         - Typography
         - Size
+        - Spacing
     - Components: '*'
     - Patterns:
         - Filter and sort
