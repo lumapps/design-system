@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.3][] - 2021-01-21
+
 ### Added
 
 -   Added `usePortal` prop to `Popover` component (default value is `true`) to be able to not use a portal in some cases.
@@ -959,3 +961,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.0.1]: https://github.com/lumapps/design-system/tree/v1.0.1
 [unreleased]: https://github.com/lumapps/design-system/compare/v1.0.2...HEAD
 [1.0.2]: https://github.com/lumapps/design-system/tree/v1.0.2
+[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.3...HEAD
+[1.0.3]: https://github.com/lumapps/design-system/tree/v1.0.3
