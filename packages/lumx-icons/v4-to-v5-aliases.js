@@ -5,6 +5,7 @@ import {
     mdiAccountMusicOutline,
     mdiAccountVoice,
     mdiAppleAirplay,
+    mdiAt,
     mdiBadgeAccount,
     mdiBadgeAccountAlert,
     mdiBadgeAccountAlertOutline,
@@ -38,11 +39,11 @@ import {
     mdiCurrencyUsdCircleOutline,
     mdiFileCog,
     mdiFileCogOutline,
-    mdiFilmstripBox,
     mdiFilmstripBoxMultiple,
     mdiFolderCog,
     mdiFolderCogOutline,
     mdiFolderRefreshOutline,
+    mdiFormatTitle,
     mdiFormTextarea,
     mdiFormTextbox,
     mdiFormTextboxPassword,
@@ -198,7 +199,7 @@ export const mdiFileSettingsVariant = mdiFileCog;
 
 export const mdiFileSettingsVariantOutline = mdiFileCogOutline;
 
-export const mdiLibraryBooks = mdiFilmstripBox;
+export const mdiLibraryBooks = mdiTextBoxOutline;
 
 export const mdiLibraryMovie = mdiFilmstripBoxMultiple;
 
@@ -361,3 +362,7 @@ export const mdiWallSconceVariant = mdiWallSconceRoundVariant;
 export const mdiHackernews = mdiYCombinator;
 
 export const mdiYoutubeCreatorStudio = mdiYoutubeStudio;
+
+export const mdiInstapaper = mdiFormatTitle;
+
+export const mdiMailRu = mdiAt;

@@ -1,3 +1,5 @@
+import { mdiFormatTitle } from '@mdi/js';
+
 export declare const mdiCowboy: string;
 
 export declare const mdiWorker: string;
@@ -239,3 +241,7 @@ export declare const mdiWallSconceVariant: string;
 export declare const mdiHackernews: string;
 
 export declare const mdiYoutubeCreatorStudio: string;
+
+export declare const mdiInstapaper: string;
+
+export declare const mdiMailRu: string;
