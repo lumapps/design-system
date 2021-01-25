@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.4][] - 2021-01-25
+
 ### Fixed
 
 -   Restored JS mdi icon `google-pages` that was removed with mdi v4.
@@ -967,3 +969,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.0.2]: https://github.com/lumapps/design-system/tree/v1.0.2
 [unreleased]: https://github.com/lumapps/design-system/compare/v1.0.3...HEAD
 [1.0.3]: https://github.com/lumapps/design-system/tree/v1.0.3
+[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.4...HEAD
+[1.0.4]: https://github.com/lumapps/design-system/tree/v1.0.4
