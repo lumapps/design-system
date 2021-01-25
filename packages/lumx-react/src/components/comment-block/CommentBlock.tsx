@@ -20,6 +20,8 @@ interface CommentBlockProps extends GenericProps {
     avatar: string;
     /* Children elements to be transcluded into the component */
     children?: ReactNode;
+    /* CSS class name. */
+    className?: string;
     /* Comment timestamp */
     date: string;
     /* Where the component has actions to display */
@@ -72,6 +74,7 @@ const CommentBlock: React.FC<CommentBlockProps> = ({
     actions,
     avatar,
     children,
+    className,
     date,
     hasActions,
     hasChildren,
@@ -95,6 +98,7 @@ const CommentBlock: React.FC<CommentBlockProps> = ({
     return (
         <div
             className={classNames(
+                className,
                 handleBasicClasses({
                     hasChildren: hasChildren && isOpen,
                     hasIndentedChildren: hasChildren && hasIndentedChildren,

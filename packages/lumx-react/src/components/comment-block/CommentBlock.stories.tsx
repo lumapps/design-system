@@ -17,6 +17,7 @@ export const WithHeaderActions = ({ theme }: any) => (
                 Reply
             </Button>,
         ]}
+        className="foo"
         theme={theme}
         avatar="https://i.pravatar.cc/40"
         date="4 hours ago"

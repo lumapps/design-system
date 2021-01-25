@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Added `className` prop to `CommentBlock` component.
+
 ## [0.28.2][] - 2020-12-11
 
 ### Added
