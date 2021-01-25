@@ -49,30 +49,21 @@
     }
 
     &__wrapper {
-        #{$self}--has-input#{$self}--theme-light & {
-            @include lumx-text-field-wrapper(lumx-base-const('theme', 'LIGHT'), 'input');
+        #{$self}--theme-light & {
+            @include lumx-text-field-wrapper(lumx-base-const('theme', 'LIGHT'));
         }
 
-        #{$self}--has-input#{$self}--theme-dark & {
-            @include lumx-text-field-wrapper(lumx-base-const('theme', 'DARK'), 'input');
-        }
-
-        #{$self}--has-textarea#{$self}--theme-light & {
-            @include lumx-text-field-wrapper(lumx-base-const('theme', 'LIGHT'), 'textarea');
-        }
-
-        #{$self}--has-textarea#{$self}--theme-dark & {
-            @include lumx-text-field-wrapper(lumx-base-const('theme', 'DARK'), 'textarea');
+        #{$self}--theme-dark & {
+            @include lumx-text-field-wrapper(lumx-base-const('theme', 'DARK'));
         }
 
         #{$self}--has-input-clear & {
-            @include lumx-text-field-wrapper-has-input-clear;
+            padding-right: $lumx-text-field-vertical-padding +
+                (($lumx-text-field-input-height - map-get($lumx-sizes, lumx-base-const('size', 'S'))) / 2) !important;
         }
     }
 
     &__input-icon {
-        flex-shrink: 0;
-
         #{$self}--theme-light & {
             @include lumx-text-field-input-icon(lumx-base-const('theme', 'LIGHT'));
         }
@@ -87,43 +78,32 @@
     }
 
     &__input-native {
-        flex: 1 1 auto;
+        #{$self}--theme-light & {
+            @include lumx-text-field-input-native(lumx-base-const('theme', 'LIGHT'));
 
-        input,
-        textarea {
-            #{$self}--theme-light &::placeholder {
+            &::placeholder {
                 @include lumx-text-field-placeholder(lumx-base-const('theme', 'LIGHT'));
             }
+        }
 
-            #{$self}--theme-dark &::placeholder {
+        #{$self}--theme-dark & {
+            @include lumx-text-field-input-native(lumx-base-const('theme', 'DARK'));
+
+            &::placeholder {
                 @include lumx-text-field-placeholder(lumx-base-const('theme', 'DARK'));
             }
         }
 
-        input {
-            #{$self}--has-chips & {
-                min-width: $lumx-text-field-min-width;
-            }
-
-            #{$self}--theme-light & {
-                @include lumx-text-field-input-native(lumx-base-const('theme', 'LIGHT'), 'input');
-            }
-
-            #{$self}--theme-dark & {
-                @include lumx-text-field-input-native(lumx-base-const('theme', 'DARK'), 'input');
-            }
+        #{$self}--has-chips & {
+            width: auto;
+            min-width: $lumx-text-field-min-width;
+            flex: 1 1 auto;
+            margin: $lumx-chip-group-spacing 0;
+            line-height: var(--lumx-chip-size-s-height);
         }
 
-        textarea {
+        &--textarea {
             resize: none;
-
-            #{$self}--theme-light & {
-                @include lumx-text-field-input-native(lumx-base-const('theme', 'LIGHT'), 'textarea');
-            }
-
-            #{$self}--theme-dark & {
-                @include lumx-text-field-input-native(lumx-base-const('theme', 'DARK'), 'textarea');
-            }
         }
     }
 

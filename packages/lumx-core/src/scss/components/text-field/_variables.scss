@@ -1,5 +1,6 @@
-$lumx-text-field-height: 32px;
-$lumx-text-field-horizontal-padding: 0;
-$lumx-text-field-vertical-padding: 4px;
+$lumx-text-field-input-typography: 'body1';
+$lumx-text-field-input-height: map-get($lumx-typography-line-height, $lumx-text-field-input-typography);
+$lumx-text-field-horizontal-padding: $lumx-spacing-unit * 1.5;
+$lumx-text-field-vertical-padding: $lumx-spacing-unit;
 $lumx-text-field-transition-duration: 100ms;
 $lumx-text-field-min-width: 100px;

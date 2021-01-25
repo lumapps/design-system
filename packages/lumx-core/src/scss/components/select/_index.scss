@@ -10,7 +10,6 @@
     }
 
     &__wrapper {
-        flex-wrap: nowrap !important;
         cursor: pointer;
 
         #{$self}--theme-light & {
@@ -24,17 +23,15 @@
 
     &__chips {
         @include lumx-text-field-chips;
-
-        flex: 1 1 auto;
     }
 
     &__input-native {
         #{$self}--theme-light & {
-            @include lumx-text-field-input-native(lumx-base-const('theme', 'LIGHT'), 'select');
+            @include lumx-text-field-input-native(lumx-base-const('theme', 'LIGHT'));
         }
 
         #{$self}--theme-dark & {
-            @include lumx-text-field-input-native(lumx-base-const('theme', 'DARK'), 'select');
+            @include lumx-text-field-input-native(lumx-base-const('theme', 'DARK'));
         }
 
         &--placeholder {
@@ -58,23 +55,13 @@
         @include lumx-text-field-input-clear;
     }
 
-    &__input-validity {
-        flex-shrink: 0;
-    }
-
     &__input-indicator {
-        flex-shrink: 0;
-
         #{$self}--theme-light & {
             @include lumx-select-input-indicator(lumx-base-const('theme', 'LIGHT'));
         }
 
         #{$self}--theme-dark & {
             @include lumx-select-input-indicator(lumx-base-const('theme', 'DARK'));
-        }
-
-        #{$self}--has-input-clear & {
-            margin-left: $lumx-spacing-unit / 2;
         }
     }
 
@@ -90,7 +77,7 @@
         }
 
         input {
-            @include lumx-text-field-input-native(lumx-base-const('theme', 'LIGHT'), 'input');
+            @include lumx-text-field-input-native(lumx-base-const('theme', 'LIGHT'));
 
             &::placeholder {
                 @include lumx-text-field-placeholder(lumx-base-const('theme', 'LIGHT'));

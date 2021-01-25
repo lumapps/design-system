@@ -102,13 +102,8 @@ export const SelectMultipleField: React.FC<SelectMultipleProps> = ({
                     aria-disabled={isDisabled || undefined}
                 >
                     <div className={`${CLASSNAME}__chips`}>
-                        {!isEmpty && (
-                            <ChipGroup theme={theme}>
-                                {value.map((val, index) =>
-                                    selectedChipRender?.(val, index, onClear, isDisabled, theme),
-                                )}
-                            </ChipGroup>
-                        )}
+                        {!isEmpty &&
+                            value.map((val, index) => selectedChipRender?.(val, index, onClear, isDisabled, theme))}
                     </div>
 
                     {isEmpty && placeholder && (
