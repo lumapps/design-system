@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Restored JS mdi icon `google-pages` that was removed with mdi v4.
+
 ## [1.0.3][] - 2021-01-21
 
 ### Added
