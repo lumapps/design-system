@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.28.3][] - 2021-01-25
+
 ### Added
 
 -   Added `className` prop to `CommentBlock` component.
@@ -826,5 +828,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.28.1]: https://github.com/lumapps/design-system/tree/v0.28.1
 
 
-[Unreleased]: https://github.com/lumapps/design-system/compare/v0.28.2...HEAD
+[Unreleased]: https://github.com/lumapps/design-system/compare/v0.28.3...HEAD
+[0.28.3]: https://github.com/lumapps/design-system/compare/v0.28.2...v0.28.3
 [0.28.2]: https://github.com/lumapps/design-system/tree/v0.28.2
