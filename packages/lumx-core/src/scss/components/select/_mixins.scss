@@ -1,5 +1,5 @@
 @mixin lumx-select-input-indicator($theme) {
-    margin-left: $lumx-spacing-unit;
+    @include lumx-text-field-input-clear;
 
     @if $theme == lumx-base-const('theme', 'LIGHT') {
         color: lumx-color-variant('dark', 'N');

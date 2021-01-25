@@ -1,8 +1,8 @@
-@mixin lumx-text-field-wrapper($theme, $type: 'input') {
+@mixin lumx-text-field-wrapper($theme) {
     position: relative;
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
+    align-items: flex-start;
+    padding: 0 $lumx-text-field-horizontal-padding;
     border-radius: var(--lumx-border-radius);
     outline: none;
     transition-duration: $lumx-text-field-transition-duration;
@@ -14,97 +14,6 @@
     } @else if $theme == lumx-base-const('theme', 'DARK') {
         background-color: lumx-color-variant('light', 'L6');
         box-shadow: inset 0 0 0 1px lumx-color-variant('light', 'L4');
-    }
-
-    @if $type == 'input' {
-        min-height: $lumx-text-field-height;
-        padding: 0 $lumx-text-field-horizontal-padding;
-    } @else {
-        padding: $lumx-text-field-vertical-padding $lumx-text-field-horizontal-padding;
-    }
-}
-
-@mixin lumx-text-field-wrapper-has-input-clear() {
-    padding-right: $lumx-spacing-unit !important;
-}
-
-@mixin lumx-text-field-input-wrapper() {
-    display: flex;
-    flex: 1 1 auto;
-    align-items: center;
-}
-
-@mixin lumx-text-field-input-icon($theme) {
-    margin-right: $lumx-spacing-unit;
-
-    @if $theme == lumx-base-const('theme', 'LIGHT') {
-        color: lumx-color-variant('dark', 'N');
-    } @else if $theme == lumx-base-const('theme', 'DARK') {
-        color: lumx-color-variant('light', 'N');
-    }
-}
-
-@mixin lumx-text-field-input-native($theme, $type) {
-    @include lumx-typography('body1');
-
-    display: block;
-    width: 100%;
-    padding: 0;
-    border: none;
-    margin: 0;
-    background-color: transparent;
-    outline: none;
-
-    &[type='number'] {
-        appearance: textfield;
-    }
-
-    &[type='number']::-webkit-inner-spin-button,
-    &[type='number']::-webkit-outer-spin-button {
-        appearance: none;
-    }
-
-    @if $theme == lumx-base-const('theme', 'LIGHT') {
-        color: lumx-color-variant('dark', 'N');
-    } @else if $theme == lumx-base-const('theme', 'DARK') {
-        color: lumx-color-variant('light', 'N');
-    }
-
-    @if $type == 'input' {
-        height: $lumx-text-field-height;
-        line-height: $lumx-text-field-height;
-    }
-}
-
-@mixin lumx-text-field-input-validity($validity, $theme) {
-    flex-shrink: 0;
-    margin-left: $lumx-spacing-unit;
-
-    @if $theme == lumx-base-const('theme', 'LIGHT') {
-        @if $validity == 'valid' {
-            color: lumx-color-variant('green', 'N');
-        } @else if $validity == 'error' {
-            color: lumx-color-variant('red', 'N');
-        }
-    } @else if $theme == lumx-base-const('theme', 'DARK') {
-        color: lumx-color-variant('light', 'N');
-    }
-}
-
-@mixin lumx-text-field-input-clear() {
-    flex-shrink: 0;
-    margin-left: $lumx-spacing-unit / 2;
-}
-
-@mixin lumx-text-field-chips() {
-    margin: $lumx-chip-group-spacing 0;
-}
-
-@mixin lumx-text-field-placeholder($theme) {
-    @if $theme == lumx-base-const('theme', 'LIGHT') {
-        color: lumx-color-variant('dark', 'L2');
-    } @else if $theme == lumx-base-const('theme', 'DARK') {
-        color: lumx-color-variant('light', 'L2');
     }
 }
 
@@ -135,5 +44,94 @@
         }
     } @else if $theme == lumx-base-const('theme', 'DARK') {
         box-shadow: inset 0 0 0 2px lumx-color-variant('light', 'N');
+    }
+}
+
+@mixin lumx-text-field-input-icon($theme) {
+    flex-shrink: 0;
+    margin-top: $lumx-text-field-vertical-padding;
+    margin-right: $lumx-spacing-unit;
+
+    @if $theme == lumx-base-const('theme', 'LIGHT') {
+        color: lumx-color-variant('dark', 'N');
+    } @else if $theme == lumx-base-const('theme', 'DARK') {
+        color: lumx-color-variant('light', 'N');
+    }
+}
+
+@mixin lumx-text-field-input-wrapper() {
+    flex: 1 1 auto;
+    padding: $lumx-text-field-vertical-padding 0;
+}
+
+@mixin lumx-text-field-input-native($theme) {
+    @include lumx-typography($lumx-text-field-input-typography);
+
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: none;
+    margin: 0;
+    background-color: transparent;
+    outline: none;
+
+    &[type='number'] {
+        appearance: textfield;
+    }
+
+    &[type='number']::-webkit-inner-spin-button,
+    &[type='number']::-webkit-outer-spin-button {
+        appearance: none;
+    }
+
+    @if $theme == lumx-base-const('theme', 'LIGHT') {
+        color: lumx-color-variant('dark', 'N');
+    } @else if $theme == lumx-base-const('theme', 'DARK') {
+        color: lumx-color-variant('light', 'N');
+    }
+}
+
+@mixin lumx-text-field-input-validity($validity, $theme) {
+    flex-shrink: 0;
+    margin-top: $lumx-text-field-vertical-padding +
+        (($lumx-text-field-input-height - map-get($lumx-sizes, lumx-base-const('size', 'XXS'))) / 2);
+    margin-left: $lumx-spacing-unit;
+
+    @if $theme == lumx-base-const('theme', 'LIGHT') {
+        @if $validity == 'valid' {
+            color: lumx-color-variant('green', 'N');
+        } @else if $validity == 'error' {
+            color: lumx-color-variant('red', 'N');
+        }
+    } @else if $theme == lumx-base-const('theme', 'DARK') {
+        color: lumx-color-variant('light', 'N');
+    }
+}
+
+@mixin lumx-text-field-input-clear() {
+    flex-shrink: 0;
+    margin-top: $lumx-text-field-vertical-padding +
+        (($lumx-text-field-input-height - map-get($lumx-sizes, lumx-base-const('size', 'S'))) / 2);
+    margin-left: $lumx-spacing-unit / 2;
+}
+
+@mixin lumx-text-field-chips() {
+    display: flex;
+    flex: 1 1 auto;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: $lumx-chip-group-spacing 0;
+
+    .#{$lumx-base-prefix}-chip {
+        margin: $lumx-chip-group-spacing 0;
+        margin-right: $lumx-chip-group-spacing * 2;
+    }
+}
+
+@mixin lumx-text-field-placeholder($theme) {
+    @if $theme == lumx-base-const('theme', 'LIGHT') {
+        color: lumx-color-variant('dark', 'L2');
+    } @else if $theme == lumx-base-const('theme', 'DARK') {
+        color: lumx-color-variant('light', 'L2');
     }
 }

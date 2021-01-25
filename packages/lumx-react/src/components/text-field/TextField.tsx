@@ -202,6 +202,9 @@ const renderInputNative: React.FC<InputNativeProps> = (props) => {
     const inputProps: any = {
         ...forwardedProps,
         id,
+        className: multiline
+            ? `${CLASSNAME}__input-native ${CLASSNAME}__input-native--textarea`
+            : `${CLASSNAME}__input-native ${CLASSNAME}__input-native--text`,
         placeholder,
         value,
         name,
@@ -331,10 +334,10 @@ export const TextField: Comp<TextFieldProps, HTMLDivElement> = forwardRef((props
                     />
                 )}
 
-                {chips && <div className={`${CLASSNAME}__chips`}>{chips}</div>}
+                {chips && (
+                    <div className={`${CLASSNAME}__chips`}>
+                        {chips}
 
-                <div className={`${CLASSNAME}__input-wrapper`}>
-                    <div className={`${CLASSNAME}__input-native`}>
                         {renderInputNative({
                             id: textFieldId,
                             inputRef,
@@ -355,35 +358,61 @@ export const TextField: Comp<TextFieldProps, HTMLDivElement> = forwardRef((props
                             ...forwardedProps,
                         })}
                     </div>
+                )}
 
-                    {(isValid || hasError) && (
-                        <Icon
-                            className={`${CLASSNAME}__input-validity`}
-                            color={theme === Theme.dark ? 'light' : undefined}
-                            icon={isValid ? mdiCheckCircle : mdiAlertCircle}
-                            size={Size.xxs}
-                        />
-                    )}
+                {!chips && (
+                    <div className={`${CLASSNAME}__input-wrapper`}>
+                        {renderInputNative({
+                            id: textFieldId,
+                            inputRef,
+                            isDisabled,
+                            isRequired,
+                            maxLength,
+                            multiline,
+                            onBlur,
+                            onChange,
+                            onFocus,
+                            placeholder,
+                            recomputeNumberOfRows,
+                            rows,
+                            setFocus,
+                            type,
+                            value,
+                            name,
+                            ...forwardedProps,
+                        })}
+                    </div>
+                )}
 
-                    {clearButtonProps && isNotEmpty && (
-                        <IconButton
-                            {...clearButtonProps}
-                            className={`${CLASSNAME}__input-clear`}
-                            icon={mdiCloseCircle}
-                            emphasis={Emphasis.low}
-                            size={Size.s}
-                            theme={theme}
-                            onClick={onClear}
-                            type="button"
-                        />
-                    )}
-                </div>
+                {(isValid || hasError) && (
+                    <Icon
+                        className={`${CLASSNAME}__input-validity`}
+                        color={theme === Theme.dark ? 'light' : undefined}
+                        icon={isValid ? mdiCheckCircle : mdiAlertCircle}
+                        size={Size.xxs}
+                    />
+                )}
+
+                {clearButtonProps && isNotEmpty && (
+                    <IconButton
+                        {...clearButtonProps}
+                        className={`${CLASSNAME}__input-clear`}
+                        icon={mdiCloseCircle}
+                        emphasis={Emphasis.low}
+                        size={Size.s}
+                        theme={theme}
+                        onClick={onClear}
+                        type="button"
+                    />
+                )}
             </div>
+
             {hasError && error && (
                 <InputHelper className={`${CLASSNAME}__helper`} kind={Kind.error} theme={theme}>
                     {error}
                 </InputHelper>
             )}
+
             {helper && (
                 <InputHelper className={`${CLASSNAME}__helper`} theme={theme}>
                     {helper}
