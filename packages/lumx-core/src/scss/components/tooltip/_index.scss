@@ -5,14 +5,12 @@
 .#{$lumx-base-prefix}-tooltip {
     $self: &;
 
-    @include lumx-elevation($lumx-tooltip-elevation);
-
     position: absolute;
     z-index: map-get($lumx-base-layers, 'higher');
     top: 0;
     left: 0;
-    padding: $lumx-spacing-unit / 2 $lumx-spacing-unit;
-    background-color: $lumx-tooltip-background-color;
+    padding: $lumx-spacing-unit / 2;
+    background-color: lumx-color-variant('dark', 'N');
     border-radius: var(--lumx-border-radius);
     will-change: transform;
 
@@ -21,7 +19,7 @@
         width: 0;
         height: 0;
         border-style: solid;
-        border-color: lumx-color-variant('light', 'N');
+        border-color: lumx-color-variant('dark', 'N');
         margin: $lumx-tooltip-arrow-size;
 
         #{$self}--position-top & {
