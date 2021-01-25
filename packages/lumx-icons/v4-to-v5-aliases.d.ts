@@ -245,3 +245,5 @@ export declare const mdiYoutubeCreatorStudio: string;
 export declare const mdiInstapaper: string;
 
 export declare const mdiMailRu: string;
+
+export declare const mdiGooglePages: string;
