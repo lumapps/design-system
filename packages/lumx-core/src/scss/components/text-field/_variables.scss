@@ -1,3 +1,4 @@
+$lumx-text-field-min-height: map-get($lumx-sizes, lumx-base-const('size', 'M'));
 $lumx-text-field-input-typography: 'body1';
 $lumx-text-field-input-height: map-get($lumx-typography-line-height, $lumx-text-field-input-typography);
 $lumx-text-field-horizontal-padding: $lumx-spacing-unit * 1.5;

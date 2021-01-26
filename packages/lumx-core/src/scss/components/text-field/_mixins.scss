@@ -1,6 +1,7 @@
 @mixin lumx-text-field-wrapper($theme) {
     position: relative;
     display: flex;
+    min-height: $lumx-text-field-min-height;
     align-items: flex-start;
     padding: 0 $lumx-text-field-horizontal-padding;
     border-radius: var(--lumx-border-radius);
