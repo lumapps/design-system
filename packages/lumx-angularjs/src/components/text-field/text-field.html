@@ -16,39 +16,30 @@
     </div>
 
     <div class="lumx-text-field__wrapper">
+        <lx-icon class="lumx-text-field__input-icon" lx-path="{{ lx.icon }}" lx-size="xs" ng-if="::lx.icon"></lx-icon>
+
+        <div class="lumx-text-field__input-wrapper" ng-transclude ng-if="::!lx.hasInput"></div>
+        <div class="lumx-text-field__input-wrapper" ng-transclude="input" ng-if="::lx.hasInput"></div>
+
         <lx-icon
-            class="lumx-text-field__input-icon"
-            lx-path="{{ lx.icon }}"
-            lx-size="xs"
-            ng-if="::lx.icon && !lx.hasChips"
+            class="lumx-text-field__input-validity"
+            lx-path="{{ lx.isValid ? lx.icons.mdiCheckCircle : lx.icons.mdiAlertCircle }}"
+            lx-size="xxs"
+            ng-if="lx.isValid || lx.hasError"
         ></lx-icon>
 
-        <div class="lumx-text-field__chips" ng-transclude="chips" ng-if="::lx.hasChips"></div>
-
-        <div class="lumx-text-field__input-wrapper">
-            <div class="lumx-text-field__input-native" ng-transclude ng-if="::!lx.hasInput"></div>
-            <div class="lumx-text-field__input-native" ng-transclude="input" ng-if="::lx.hasInput"></div>
-
-            <lx-icon
-                class="lumx-text-field__input-validity"
-                lx-path="{{ lx.isValid ? lx.icons.mdiCheckCircle : lx.icons.mdiAlertCircle }}"
-                lx-size="xxs"
-                ng-if="lx.isValid || lx.hasError"
-            ></lx-icon>
-
-            <lx-button
-                type="button"
-                class="lumx-text-field__input-clear"
-                lx-emphasis="low"
-                lx-size="s"
-                lx-theme="{{ lx.theme }}"
-                lx-variant="icon"
-                ng-if="lx.isClearable && lx.getValueLength() > 0"
-                ng-click="lx.clearModel($event)"
-            >
-                <lx-icon lx-path="{{ lx.icons.mdiCloseCircle }}"></lx-icon>
-            </lx-button>
-        </div>
+        <lx-button
+            type="button"
+            class="lumx-text-field__input-clear"
+            lx-emphasis="low"
+            lx-size="s"
+            lx-theme="{{ lx.theme }}"
+            lx-variant="icon"
+            ng-if="lx.isClearable && lx.getValueLength() > 0"
+            ng-click="lx.clearModel($event)"
+        >
+            <lx-icon lx-path="{{ lx.icons.mdiCloseCircle }}"></lx-icon>
+        </lx-button>
     </div>
 
     <lx-input-helper class="lumx-text-field__helper" lx-kind="error" lx-theme="{{ lx.theme }}" ng-if="lx.error">

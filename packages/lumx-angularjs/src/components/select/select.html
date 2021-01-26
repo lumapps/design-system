@@ -1,8 +1,6 @@
 <div class="lumx-select" ng-class="lx.getClasses()">
     <div class="lumx-select__header" ng-if="::lx.label && (!lx.variant || lx.variant === 'input')">
-        <lx-input-label class="lumx-select__label" lx-theme="{{ lx.theme }}">
-            {{ lx.label }}
-        </lx-input-label>
+        <lx-input-label class="lumx-select__label" lx-theme="{{ lx.theme }}"> {{ lx.label }} </lx-input-label>
     </div>
 
     <div
@@ -26,21 +24,20 @@
         </div>
 
         <div class="lumx-select__chips" ng-if="lx.multiple">
-            <lx-chip-group ng-if="!lx.isModelEmpty()">
-                <lx-chip
-                    lx-on-click="lx.select(selected, $event)"
-                    lx-size="s"
-                    lx-theme="{{ lx.theme === 'dark' ? 'dark' : 'light' }}"
-                    ng-repeat="selected in lx.viewValue track by $index"
-                    ng-disabled="lx.isDisabled"
-                >
-                    <lx-chip-label ng-bind-html="lx.displaySelected(selected)"></lx-chip-label>
+            <lx-chip
+                lx-on-click="lx.select(selected, $event)"
+                lx-size="s"
+                lx-theme="{{ lx.theme === 'dark' ? 'dark' : 'light' }}"
+                ng-repeat="selected in lx.viewValue track by $index"
+                ng-disabled="lx.isDisabled"
+                ng-if="!lx.isModelEmpty()"
+            >
+                <lx-chip-label ng-bind-html="lx.displaySelected(selected)"></lx-chip-label>
 
-                    <lx-chip-after>
-                        <lx-icon lx-path="{{ lx.icons.mdiClose }}" lx-size="xxs"></lx-icon>
-                    </lx-chip-after>
-                </lx-chip>
-            </lx-chip-group>
+                <lx-chip-after>
+                    <lx-icon lx-path="{{ lx.icons.mdiClose }}" lx-size="xxs"></lx-icon>
+                </lx-chip-after>
+            </lx-chip>
         </div>
 
         <div class="lumx-select__input-validity" ng-if="lx.isValid || lx.hasError">
@@ -99,7 +96,7 @@
         </lx-chip-after>
     </lx-chip>
 
-    <lx-input-helper class="lumx-select__helper " lx-kind="error" lx-theme="{{ lx.theme }}" ng-if="lx.error">
+    <lx-input-helper class="lumx-select__helper" lx-kind="error" lx-theme="{{ lx.theme }}" ng-if="lx.error">
         {{ lx.error }}
     </lx-input-helper>
 
