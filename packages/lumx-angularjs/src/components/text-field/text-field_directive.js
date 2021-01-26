@@ -198,17 +198,20 @@ function TextFieldDirective($timeout) {
             input = el.find('input');
 
             if (input.length === 1) {
+                input.addClass(`${CSS_PREFIX}-text-field__input-native ${CSS_PREFIX}-text-field__input-native--text`);
                 el.addClass(`${CSS_PREFIX}-text-field--has-input`);
             } else {
                 const minRows = 2;
 
                 input = el.find('textarea');
 
-                input.on('input', (evt) => {
-                    evt.target.rows = minRows;
-                    const currentRows = evt.target.scrollHeight / (evt.target.clientHeight / minRows);
-                    evt.target.rows = currentRows;
-                });
+                input
+                    .addClass(`${CSS_PREFIX}-text-field__input-native ${CSS_PREFIX}-text-field__input-native--textarea`)
+                    .on('input', (evt) => {
+                        evt.target.rows = minRows;
+                        const currentRows = evt.target.scrollHeight / (evt.target.clientHeight / minRows);
+                        evt.target.rows = currentRows;
+                    });
 
                 el.addClass(`${CSS_PREFIX}-text-field--has-textarea`);
             }
