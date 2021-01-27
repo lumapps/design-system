@@ -5,8 +5,15 @@
 .#{$lumx-base-prefix}-select {
     $self: &;
 
+    padding-top: var(--lumx-text-field-padding-top);
+    padding-bottom: var(--lumx-text-field-padding-bottom);
+
     &__header {
-        margin-bottom: $lumx-spacing-unit;
+        margin-bottom: var(--lumx-text-field-header-margin-bottom);
+    }
+
+    &__label {
+        @include lumx-text-field-label;
     }
 
     &__wrapper {
@@ -46,7 +53,7 @@
 
         span {
             display: block;
-            margin: $lumx-spacing-unit 0;
+            margin: var(--lumx-text-field-wrapper-padding-vertical) 0;
             word-break: break-word;
         }
     }

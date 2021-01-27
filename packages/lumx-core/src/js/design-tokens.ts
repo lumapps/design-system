@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Wed, 20 Jan 2021 09:08:28 GMT
+ * Generated on Wed, 27 Jan 2021 10:13:22 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -159,6 +159,286 @@ export const DESIGN_TOKENS = {
                     type: 'indicator',
                     item: 'offset',
                 },
+            },
+        },
+    },
+    'text-field': {
+        padding: {
+            top: {
+                attributes: {
+                    category: 'text-field',
+                    type: 'padding',
+                    item: 'top',
+                },
+            },
+            bottom: {
+                attributes: {
+                    category: 'text-field',
+                    type: 'padding',
+                    item: 'bottom',
+                },
+            },
+        },
+        header: {
+            'margin-bottom': {
+                attributes: {
+                    category: 'text-field',
+                    type: 'header',
+                    item: 'margin-bottom',
+                },
+            },
+        },
+        label: {
+            'font-size': {
+                attributes: {
+                    category: 'text-field',
+                    type: 'label',
+                    item: 'font-size',
+                },
+            },
+            'font-weight': {
+                attributes: {
+                    category: 'text-field',
+                    type: 'label',
+                    item: 'font-weight',
+                },
+            },
+            'line-height': {
+                attributes: {
+                    category: 'text-field',
+                    type: 'label',
+                    item: 'line-height',
+                },
+            },
+        },
+        wrapper: {
+            'min-height': {
+                attributes: {
+                    category: 'text-field',
+                    type: 'wrapper',
+                    item: 'min-height',
+                },
+            },
+            'border-radius': {
+                attributes: {
+                    category: 'text-field',
+                    type: 'wrapper',
+                    item: 'border-radius',
+                },
+            },
+            padding: {
+                vertical: {
+                    attributes: {
+                        category: 'text-field',
+                        type: 'wrapper',
+                        item: 'padding',
+                    },
+                },
+                horizontal: {
+                    attributes: {
+                        category: 'text-field',
+                        type: 'wrapper',
+                        item: 'padding',
+                    },
+                },
+            },
+        },
+        'state-default': {
+            border: {
+                top: {
+                    width: {
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-default',
+                            item: 'border',
+                        },
+                    },
+                },
+                right: {
+                    width: {
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-default',
+                            item: 'border',
+                        },
+                    },
+                },
+                bottom: {
+                    width: {
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-default',
+                            item: 'border',
+                        },
+                    },
+                },
+                left: {
+                    width: {
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-default',
+                            item: 'border',
+                        },
+                    },
+                },
+            },
+            'theme-light': {
+                'background-color': {
+                    attributes: {
+                        category: 'text-field',
+                        type: 'state-default',
+                        item: 'theme-light',
+                    },
+                },
+                'border-color': {
+                    attributes: {
+                        category: 'text-field',
+                        type: 'state-default',
+                        item: 'theme-light',
+                    },
+                },
+            },
+            'theme-dark': {
+                'background-color': {
+                    attributes: {
+                        category: 'text-field',
+                        type: 'state-default',
+                        item: 'theme-dark',
+                    },
+                },
+                'border-color': {
+                    attributes: {
+                        category: 'text-field',
+                        type: 'state-default',
+                        item: 'theme-dark',
+                    },
+                },
+            },
+        },
+        'state-hover': {
+            'theme-light': {
+                'background-color': {
+                    attributes: {
+                        category: 'text-field',
+                        type: 'state-hover',
+                        item: 'theme-light',
+                    },
+                },
+            },
+            'theme-dark': {
+                'background-color': {
+                    attributes: {
+                        category: 'text-field',
+                        type: 'state-hover',
+                        item: 'theme-dark',
+                    },
+                },
+            },
+        },
+        'state-focus': {
+            border: {
+                top: {
+                    width: {
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-focus',
+                            item: 'border',
+                        },
+                    },
+                },
+                right: {
+                    width: {
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-focus',
+                            item: 'border',
+                        },
+                    },
+                },
+                bottom: {
+                    width: {
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-focus',
+                            item: 'border',
+                        },
+                    },
+                },
+                left: {
+                    width: {
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-focus',
+                            item: 'border',
+                        },
+                    },
+                },
+            },
+            'theme-light': {
+                'background-color': {
+                    attributes: {
+                        category: 'text-field',
+                        type: 'state-focus',
+                        item: 'theme-light',
+                    },
+                },
+                'border-color': {
+                    attributes: {
+                        category: 'text-field',
+                        type: 'state-focus',
+                        item: 'theme-light',
+                    },
+                },
+            },
+            'theme-dark': {
+                'background-color': {
+                    attributes: {
+                        category: 'text-field',
+                        type: 'state-focus',
+                        item: 'theme-dark',
+                    },
+                },
+                'border-color': {
+                    attributes: {
+                        category: 'text-field',
+                        type: 'state-focus',
+                        item: 'theme-dark',
+                    },
+                },
+            },
+        },
+        'input-icon-size': {
+            attributes: {
+                category: 'text-field',
+                type: 'input-icon-size',
+            },
+        },
+        input: {
+            'font-size': {
+                attributes: {
+                    category: 'text-field',
+                    type: 'input',
+                    item: 'font-size',
+                },
+            },
+            height: {
+                attributes: {
+                    category: 'text-field',
+                    type: 'input',
+                    item: 'height',
+                },
+            },
+        },
+        'input-validity-size': {
+            attributes: {
+                category: 'text-field',
+                type: 'input-validity-size',
+            },
+        },
+        'input-clear-size': {
+            attributes: {
+                category: 'text-field',
+                type: 'input-clear-size',
             },
         },
     },

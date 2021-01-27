@@ -1,0 +1,87 @@
+{
+    "text-field": {
+        "padding": {
+            "top": { "value": "0" },
+            "bottom": { "value": "0" }
+        },
+        "header": {
+            "margin-bottom": { "value": "{spacing.unit.regular.value}" }
+        },
+        "label": {
+            "font-size": { "value": "14px" },
+            "font-weight": { "value": "400" },
+            "line-height": { "value": "20px" }
+        },
+        "wrapper": {
+            "min-height": { "value": "{size.m.value}" },
+            "border-radius": { "value": "{border-radius.value}" },
+            "padding": {
+                "vertical": { "value": "{spacing.unit.regular.value}" },
+                "horizontal": { "value": "{spacing.unit.medium.value}" }
+            }
+        },
+        "state-default": {
+            "border": {
+                "top": {
+                    "width": { "value": "1px" }
+                },
+                "right": {
+                    "width": { "value": "1px" }
+                },
+                "bottom": {
+                    "width": { "value": "1px" }
+                },
+                "left": {
+                    "width": { "value": "1px" }
+                }
+            },
+            "theme-light": {
+                "background-color": { "value": "rgba(0, 0, 0, 0.05)" },
+                "border-color": { "value": "rgba(0, 0, 0, 0.2)" }
+            },
+            "theme-dark": {
+                "background-color": { "value": "rgba(255, 255, 255, 0.1)" },
+                "border-color": { "value": "rgba(255, 255, 255, 0.4)" }
+            }
+        },
+        "state-hover": {
+            "theme-light": {
+                "background-color": { "value": "rgba(0, 0, 0, 0.12)" }
+            },
+            "theme-dark": {
+                "background-color": { "value": "rgba(255, 255, 255, 0.2)" }
+            }
+        },
+        "state-focus": {
+            "border": {
+                "top": {
+                    "width": { "value": "2px" }
+                },
+                "right": {
+                    "width": { "value": "2px" }
+                },
+                "bottom": {
+                    "width": { "value": "2px" }
+                },
+                "left": {
+                    "width": { "value": "2px" }
+                }
+            },
+            "theme-light": {
+                "background-color": { "value": "#ffffff" },
+                "border-color": { "value": "rgba(33, 150, 243, 0.6)" }
+            },
+            "theme-dark": {
+                "background-color": { "value": "transparent" },
+                "border-color": { "value": "rgba(255, 255, 255, 0.8)" }
+            }
+        },
+        "input-icon-size": { "value": "{size.xs.value}" },
+        "input": {
+            "font-size": { "value": "14px" },
+            "height": { "value": "20px" }
+        },
+        "input-validity-size": { "value": "{size.xxs.value}" },
+        "input-clear-size": { "value": "{size.s.value}" }
+    }
+}
