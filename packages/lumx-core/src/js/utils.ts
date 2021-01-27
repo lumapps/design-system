@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import React from 'react';
 
 import isBoolean from 'lodash/isBoolean';

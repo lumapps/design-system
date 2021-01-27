@@ -8,7 +8,7 @@ const name = 'color/opacity';
 StyleDictionary.registerTransform({
     name,
     type: 'value',
-    matcher: (prop) => prop.attributes.category === 'color' && !!prop.opacity,
+    matcher: (prop) => /\bcolor\b/.exec(prop.name) && !!prop.opacity,
     transformer: (prop) => tinycolor2(prop.value).setAlpha(prop.opacity).toRgbString(),
 });
 module.exports = name;
