@@ -3,41 +3,4 @@ $lumx-typography-font-family: 'Roboto', sans-serif !default;
 $lumx-typography-default-font-size: 16px;
 $lumx-typography-default-line-height: 24px;
 
-$lumx-typography-font-size: (
-    'display1': 34px,
-    'headline': 24px,
-    'title': 20px,
-    'subtitle2': 16px,
-    'subtitle1': 14px,
-    'body2': 16px,
-    'body1': 14px,
-    'caption': 12px,
-    'overline': 10px,
-);
-
-$lumx-typography-font-weight: (
-    'display1': var(--lumx-typography-bold-weight),
-    'headline': var(--lumx-typography-bold-weight),
-    'title': var(--lumx-typography-bold-weight),
-    'subtitle2': var(--lumx-typography-bold-weight),
-    'subtitle1': var(--lumx-typography-bold-weight),
-    'body2': 400,
-    'body1': 400,
-    'caption': 400,
-    'overline': var(--lumx-typography-bold-weight),
-);
-
-$lumx-typography-line-height: (
-    'display1': 40px,
-    'headline': 32px,
-    'title': 30px,
-    'subtitle2': 24px,
-    'subtitle1': 20px,
-    'body2': 24px,
-    'body1': 20px,
-    'caption': 16px,
-    'overline': 12px,
-);
-
-$lumx-typography-styles: 'overline', 'caption', 'body1', 'body2', 'subtitle1', 'subtitle2', 'title', 'headline',
-    'display1';
+$lumx-typography-styles: map-get(map-get($lumx-design-tokens, 'typography'), 'style');

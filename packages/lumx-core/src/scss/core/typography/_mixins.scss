@@ -4,12 +4,12 @@
     -webkit-font-smoothing: antialiased;
 }
 
-@mixin lumx-typography($style) {
-    font-size: map-get($lumx-typography-font-size, $style);
-    font-weight: map-get($lumx-typography-font-weight, $style);
-    line-height: map-get($lumx-typography-line-height, $style);
+@mixin lumx-typography($key) {
+    font-size: var(--lumx-typography-style-#{$key}-font-size);
+    font-weight: var(--lumx-typography-style-#{$key}-font-weight);
+    line-height: var(--lumx-typography-style-#{$key}-line-height);
 
-    @if $style == 'overline' {
+    @if $key == 'overline' {
         text-transform: uppercase;
     }
 }

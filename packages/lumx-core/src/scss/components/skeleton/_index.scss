@@ -112,9 +112,9 @@ $typography-skeleton-size: (
     }
 }
 
-@each $key, $line-height in $lumx-typography-line-height {
+@each $key, $style in $lumx-typography-styles {
     .#{$lumx-base-prefix}-skeleton-typography--typography-#{$key} {
-        height: map-get($lumx-typography-line-height, $key);
+        height: map-get(map-get($lumx-typography-styles, $key), 'line-height');
     }
 
     .#{$lumx-base-prefix}-skeleton-typography--typography-#{$key} .#{$lumx-base-prefix}-skeleton-typography__inner {

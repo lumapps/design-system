@@ -30,7 +30,7 @@ StyleDictionary.registerFormat({
 
 module.exports = () => {
     const baseDir = `${__dirname}/../`;
-    const buildPath = `${baseDir}/../src/js/`;
+    const buildPath = `${baseDir}/../src/js/constants/`;
     return {
         source: [`${baseDir}/properties/**/*.json`],
         platforms: {

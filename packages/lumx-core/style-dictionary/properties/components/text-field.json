@@ -7,11 +7,7 @@
         "header": {
             "margin-bottom": { "value": "{spacing.unit.regular.value}" }
         },
-        "label": {
-            "font-size": { "value": "14px" },
-            "font-weight": { "value": "400" },
-            "line-height": { "value": "20px" }
-        },
+        "label": "{typography.style.body1}",
         "wrapper": {
             "min-height": { "value": "{size.m.value}" },
             "border-radius": { "value": "{border-radius.value}" },
@@ -36,20 +32,20 @@
                 }
             },
             "theme-light": {
-                "background-color": { "value": "rgba(0, 0, 0, 0.05)" },
-                "border-color": { "value": "rgba(0, 0, 0, 0.2)" }
+                "background-color": "{color.dark.L6}",
+                "border-color": "{color.dark.L4}"
             },
             "theme-dark": {
-                "background-color": { "value": "rgba(255, 255, 255, 0.1)" },
-                "border-color": { "value": "rgba(255, 255, 255, 0.4)" }
+                "background-color": "{color.light.L6}",
+                "border-color": "{color.light.L4}"
             }
         },
         "state-hover": {
             "theme-light": {
-                "background-color": { "value": "rgba(0, 0, 0, 0.12)" }
+                "background-color": "{color.dark.L5}"
             },
             "theme-dark": {
-                "background-color": { "value": "rgba(255, 255, 255, 0.2)" }
+                "background-color": "{color.light.L5}"
             }
         },
         "state-focus": {
@@ -68,19 +64,16 @@
                 }
             },
             "theme-light": {
-                "background-color": { "value": "#ffffff" },
-                "border-color": { "value": "rgba(33, 150, 243, 0.6)" }
+                "background-color": "{color.light.N}",
+                "border-color": "{color.primary.L2}"
             },
             "theme-dark": {
                 "background-color": { "value": "transparent" },
-                "border-color": { "value": "rgba(255, 255, 255, 0.8)" }
+                "border-color": "{color.light.L2}"
             }
         },
         "input-icon-size": { "value": "{size.xs.value}" },
-        "input": {
-            "font-size": { "value": "14px" },
-            "height": { "value": "20px" }
-        },
+        "input": "{typography.style.body1}",
         "input-validity-size": { "value": "{size.xxs.value}" },
         "input-clear-size": { "value": "{size.s.value}" }
     }
