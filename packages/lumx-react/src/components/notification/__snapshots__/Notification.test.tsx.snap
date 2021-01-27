@@ -7,6 +7,7 @@ exports[`<Notification> Snapshots and structure should render defaults 1`] = `
   <div
     className="lumx-notification lumx-notification--color-dark"
     onClick={[Function]}
+    role="alert"
     style={
       Object {
         "zIndex": 9999,
