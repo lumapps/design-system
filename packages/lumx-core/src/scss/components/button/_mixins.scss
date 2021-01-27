@@ -137,7 +137,7 @@
 
 @mixin lumx-button-text($size) {
     font-size: var(--lumx-button-size-#{$size}-font-size);
-    font-weight: var(--lumx-typography-bold-weight);
+    font-weight: var(--lumx-button-font-weight);
     line-height: map-get($lumx-sizes, $size);
     pointer-events: none;
     text-transform: var(--lumx-button-text-transform);

@@ -2,7 +2,7 @@ import get from 'lodash/get';
 import mapValues from 'lodash/mapValues';
 import { useMemo } from 'react';
 
-import { CORE } from '@lumx/core/js/constants/generated/constants';
+import { DESIGN_TOKENS } from '@lumx/core/js/constants/design-tokens';
 
 interface ColorDocumentation {
     colorName: string;
@@ -33,7 +33,7 @@ function getFontColor(colorName: string, colorVariant: string): 'dark' | 'light'
 }
 
 function formatColorDescription(colorName: string): ColorVariants {
-    const colorWithVariants = get(CORE, ['color', colorName]);
+    const colorWithVariants = get(DESIGN_TOKENS, ['color', colorName]);
 
     return mapValues(
         colorWithVariants,
