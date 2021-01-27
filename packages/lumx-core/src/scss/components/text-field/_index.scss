@@ -5,13 +5,18 @@
 .#{$lumx-base-prefix}-text-field {
     $self: &;
 
+    padding-top: var(--lumx-text-field-padding-top);
+    padding-bottom: var(--lumx-text-field-padding-bottom);
+
     &__header {
         display: flex;
         align-items: center;
-        margin-bottom: $lumx-spacing-unit;
+        margin-bottom: var(--lumx-text-field-header-margin-bottom);
     }
 
     &__label {
+        @include lumx-text-field-label;
+
         flex: 1 1 auto;
     }
 
@@ -22,9 +27,9 @@
         margin-left: $lumx-spacing-unit;
 
         span {
-            font-size: var(--lumx-typography-variant-input-label-font-size);
-            font-weight: var(--lumx-typography-variant-input-label-font-weight);
-            line-height: var(--lumx-typography-variant-input-label-line-height);
+            font-size: var(--lumx-text-field-label-font-size);
+            font-weight: var(--lumx-text-field-label-font-weight);
+            line-height: var(--lumx-text-field-label-font-size);
 
             #{$self}--theme-light & {
                 color: lumx-color-variant('dark', 'L2');
@@ -55,11 +60,6 @@
 
         #{$self}--theme-dark & {
             @include lumx-text-field-wrapper(lumx-base-const('theme', 'DARK'));
-        }
-
-        #{$self}--has-input-clear & {
-            padding-right: $lumx-text-field-vertical-padding +
-                (($lumx-text-field-input-height - map-get($lumx-sizes, lumx-base-const('size', 'S'))) / 2) !important;
         }
     }
 
