@@ -93,6 +93,7 @@ export const Notification: Comp<NotificationProps, HTMLDivElement> = forwardRef(
         ? createPortal(
               <div
                   ref={ref}
+                  role="alert"
                   {...forwardedProps}
                   className={classNames(
                       className,

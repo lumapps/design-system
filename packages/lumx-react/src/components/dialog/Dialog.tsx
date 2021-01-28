@@ -7,7 +7,6 @@ import { Progress, ProgressVariant, Size } from '@lumx/react';
 
 import { DIALOG_TRANSITION_DURATION, DOCUMENT } from '@lumx/react/constants';
 import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
-import { useFocus } from '@lumx/react/hooks/useFocus';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { useIntersectionObserver } from '@lumx/react/hooks/useIntersectionObserver';
 import {
@@ -51,6 +50,8 @@ export interface DialogProps extends GenericProps {
     size?: DialogSizes;
     /** Z-axis position. */
     zIndex?: number;
+    /** Z-axis position. */
+    dialogProps?: GenericProps;
     /** On close callback. */
     onClose?(): void;
 }
@@ -106,18 +107,25 @@ export const Dialog: Comp<DialogProps, HTMLDivElement> = forwardRef((props, ref)
         preventAutoClose,
         size,
         zIndex,
+        dialogProps,
         ...forwardedProps
     } = props;
 
+    const handleClose = onClose
+        ? () => {
+              onClose();
+              // Focus the parent element on close.
+              if (parentElement && parentElement.current) {
+                  parentElement.current.focus();
+              }
+          }
+        : undefined;
+
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    useCallbackOnEscape(onClose, isOpen && !preventAutoClose);
+    useCallbackOnEscape(handleClose, isOpen && !preventAutoClose);
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const wrapperRef = useRef<HTMLDivElement>(null);
-
-    // Focus the parent element on close.
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useFocus(parentElement?.current, !isOpen);
 
     // Handle focus trap.
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -171,8 +179,8 @@ export const Dialog: Comp<DialogProps, HTMLDivElement> = forwardRef((props, ref)
               >
                   <div className={`${CLASSNAME}__overlay`} />
 
-                  <section className={`${CLASSNAME}__container`} role="dialog">
-                      <ClickAwayProvider callback={!preventAutoClose && onClose} refs={[wrapperRef]}>
+                  <section className={`${CLASSNAME}__container`} role="dialog" aria-modal="true" {...dialogProps}>
+                      <ClickAwayProvider callback={!preventAutoClose && handleClose} refs={[wrapperRef]}>
                           <div className={`${CLASSNAME}__wrapper`} ref={wrapperRef}>
                               {(header || headerChildContent) && (
                                   <header

@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Added `dialogProps` prop to `Dialog` component to app props the dialog element itself.
+-   Added `AlertDialog` component that is a `Dialog` contextualized to show short messages and
+    that follows the [WAI-ARIA `alertdialog` a11y patterns](https://www.w3.org/TR/wai-aria-practices-1.1/examples/dialog-modal/alertdialog.html).
+-   Added `alert` role to `Notification` component for a11y purposes.
+
+### Fixed
+
+-   Fixed focus on parentElement of the `Dialog` component.
+
 ## [1.0.4][] - 2021-01-25
 
 ### Fixed
