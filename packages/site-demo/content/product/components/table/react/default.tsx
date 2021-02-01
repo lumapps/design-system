@@ -1,5 +1,13 @@
-import { mdiCommentOutline } from '@lumx/icons';
+import { mdiCommentOutline, mdiDotsVertical, mdiInformationOutline } from '@lumx/icons';
 import {
+    Alignment,
+    AspectRatio,
+    Emphasis,
+    FlexBox,
+    IconButton,
+    Link,
+    Orientation,
+    Size,
     Table,
     TableBody,
     TableCell,
@@ -8,6 +16,8 @@ import {
     TableHeaderProps,
     TableRow,
     ThOrder,
+    Thumbnail,
+    ThumbnailVariant,
 } from '@lumx/react';
 
 import orderBy from 'lodash/orderBy';
@@ -20,6 +30,7 @@ const initialTable = [
         dessert: 'Frozen yogurt',
         fat: 6.0,
         id: 1,
+        image: '/demo-assets/landscape1.jpg',
     },
     {
         calories: 237,
@@ -27,6 +38,7 @@ const initialTable = [
         dessert: 'Ice cream sandwich',
         fat: 9.0,
         id: 2,
+        image: '/demo-assets/landscape2.jpg',
     },
     {
         calories: 262,
@@ -34,6 +46,7 @@ const initialTable = [
         dessert: 'Eclair',
         fat: 16.0,
         id: 3,
+        image: '/demo-assets/landscape3.jpg',
     },
 ];
 
@@ -47,17 +60,21 @@ const initialHeaders: Array<Partial<TableHeaderProps>> = [
         isSortable: true,
         label: 'Calories',
         name: 'calories',
+        width: '100',
     },
     {
         isSortable: true,
         label: 'Fat (g)',
         name: 'fat',
+        sortOrder: ThOrder.asc,
+        width: '100',
     },
     {
         icon: mdiCommentOutline,
         isSortable: false,
         label: 'Comments',
         name: 'comments',
+        width: '150',
     },
 ];
 
@@ -92,6 +109,7 @@ export const App = ({ theme }: any) => {
                                 sortOrder={header.sortOrder}
                                 variant={TableCellVariant.head}
                                 onHeaderClick={onHeaderClick}
+                                width={header.width}
                             >
                                 {header.label}
                             </TableCell>
@@ -103,7 +121,40 @@ export const App = ({ theme }: any) => {
             <TableBody>
                 {tableBody.map((body) => (
                     <TableRow key={body.id}>
-                        <TableCell>{body.dessert}</TableCell>
+                        <TableCell>
+                            <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
+                                <Thumbnail
+                                    className="lumx-spacing-margin-right-big"
+                                    image={body.image}
+                                    aspectRatio={AspectRatio.square}
+                                    alt={body.dessert}
+                                    size={Size.m}
+                                    variant={ThumbnailVariant.rounded}
+                                />
+                                <Link color={theme === 'dark' ? 'light' : 'dark'} href="./">
+                                    <span className="lumx-typography-subtitle1">{body.dessert}</span>
+                                </Link>
+
+                                <FlexBox
+                                    orientation={Orientation.horizontal}
+                                    hAlign={Alignment.center}
+                                    marginAuto={Alignment.left}
+                                >
+                                    <IconButton
+                                        emphasis={Emphasis.low}
+                                        icon={mdiInformationOutline}
+                                        label="Informations"
+                                        theme={theme}
+                                    />
+                                    <IconButton
+                                        emphasis={Emphasis.low}
+                                        icon={mdiDotsVertical}
+                                        label="More options"
+                                        theme={theme}
+                                    />
+                                </FlexBox>
+                            </FlexBox>
+                        </TableCell>
                         <TableCell>{String(body.calories)}</TableCell>
                         <TableCell>{String(body.fat)}</TableCell>
                         <TableCell>{body.comments}</TableCell>
