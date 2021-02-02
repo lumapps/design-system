@@ -1,7 +1,8 @@
 @mixin lumx-input-label($theme) {
-    @include lumx-typography($lumx-input-label-typography);
-
     display: block;
+    font-size: var(--lumx-typography-variant-input-label-font-size);
+    font-weight: var(--lumx-typography-variant-input-label-font-weight);
+    line-height: var(--lumx-typography-variant-input-label-line-height);
 
     @if $theme == lumx-base-const('theme', 'LIGHT') {
         color: lumx-color-variant('dark', 'N');

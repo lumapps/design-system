@@ -46,7 +46,7 @@
             @include lumx-state(
                 lumx-base-const('state', 'DEFAULT'),
                 lumx-base-const('emphasis', 'HIGH'),
-                $lumx-checkbox-color,
+                'primary',
                 lumx-base-const('theme', 'LIGHT')
             );
         }
@@ -55,7 +55,7 @@
             @include lumx-state(
                 lumx-base-const('state', 'DEFAULT'),
                 lumx-base-const('emphasis', 'HIGH'),
-                $lumx-checkbox-color,
+                'primary',
                 lumx-base-const('theme', 'DARK')
             );
         }
@@ -131,7 +131,7 @@
         @include lumx-state(
             lumx-base-const('state', 'HOVER'),
             lumx-base-const('emphasis', 'HIGH'),
-            $lumx-checkbox-color,
+            'primary',
             lumx-base-const('theme', 'LIGHT')
         );
     }
@@ -144,7 +144,7 @@
         @include lumx-state(
             lumx-base-const('state', 'HOVER'),
             lumx-base-const('emphasis', 'HIGH'),
-            $lumx-checkbox-color,
+            'primary',
             lumx-base-const('theme', 'DARK')
         );
     }
@@ -174,7 +174,7 @@
         @include lumx-state(
             lumx-base-const('state', 'ACTIVE'),
             lumx-base-const('emphasis', 'HIGH'),
-            $lumx-checkbox-color,
+            'primary',
             lumx-base-const('theme', 'LIGHT')
         );
     }
@@ -187,7 +187,7 @@
         @include lumx-state(
             lumx-base-const('state', 'ACTIVE'),
             lumx-base-const('emphasis', 'HIGH'),
-            $lumx-checkbox-color,
+            'primary',
             lumx-base-const('theme', 'DARK')
         );
     }
@@ -212,7 +212,7 @@
     @include lumx-state(
         lumx-base-const('state', 'FOCUS'),
         lumx-base-const('emphasis', 'HIGH'),
-        $lumx-checkbox-color,
+        'primary',
         lumx-base-const('theme', 'LIGHT')
     );
 }
@@ -223,7 +223,7 @@
     @include lumx-state(
         lumx-base-const('state', 'FOCUS'),
         lumx-base-const('emphasis', 'HIGH'),
-        $lumx-checkbox-color,
+        'primary',
         lumx-base-const('theme', 'DARK')
     );
 }

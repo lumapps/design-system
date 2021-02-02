@@ -16,11 +16,11 @@
 @mixin lumx-side-navigation-link() {
     display: flex;
     min-height: map-get($lumx-sizes, lumx-base-const('size', 'M'));
-    flex: 1;
+    flex: 1 1 auto;
     flex-direction: row;
     align-items: center;
     padding: 0 $lumx-spacing-unit;
-    border-radius: $lumx-border-radius;
+    border-radius: var(--lumx-border-radius);
     color: lumx-color-variant('dark', 'N');
     outline: none;
     text-decoration: none;

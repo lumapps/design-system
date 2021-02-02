@@ -124,11 +124,7 @@ export const AutocompleteMultiple: Comp<AutocompleteMultipleProps, HTMLDivElemen
             helper={helper}
             icon={icon}
             inputRef={inputRef}
-            chips={
-                <ChipGroup align={chipsAlignment}>
-                    {values && values.map((chip: any, index: number) => selectedChipRender(chip, index, onClear))}
-                </ChipGroup>
-            }
+            chips={values && values.map((chip: any, index: number) => selectedChipRender(chip, index, onClear))}
             isDisabled={isDisabled}
             clearButtonProps={clearButtonProps}
             isValid={isValid}

@@ -1,8 +1,4 @@
-$lumx-spacing-unit: 8px;
-$lumx-spacing-unit-tiny: $lumx-spacing-unit / 2;
-$lumx-spacing-unit-regular: $lumx-spacing-unit;
-$lumx-spacing-unit-big: $lumx-spacing-unit * 2;
-$lumx-spacing-unit-huge: $lumx-spacing-unit * 3;
+$lumx-spacing-unit: $lumx-spacing-unit-regular;
 
 $lumx-spacing-directions: (
     null: null,

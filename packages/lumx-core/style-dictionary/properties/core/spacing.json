@@ -1,0 +1,11 @@
+{
+    "spacing": {
+        "unit": {
+            "tiny": { "value": "4px" },
+            "regular": { "value": "8px" },
+            "medium": { "value": "12px" },
+            "big": { "value": "16px" },
+            "huge": { "value": "24px" }
+        }
+    }
+}

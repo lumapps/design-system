@@ -1,9 +1,452 @@
 /**
  * Do not edit directly
- * Generated on Fri, 18 Dec 2020 16:02:24 GMT
+ * Generated on Wed, 27 Jan 2021 10:13:22 GMT
  */
 
-export const CORE = {
+export const DESIGN_TOKENS = {
+    button: {
+        'text-transform': {
+            attributes: {
+                category: 'button',
+                type: 'text-transform',
+            },
+        },
+        'variant-icon-border-radius': {
+            attributes: {
+                category: 'button',
+                type: 'variant-icon-border-radius',
+            },
+        },
+        'size-m-font-size': {
+            attributes: {
+                category: 'button',
+                type: 'size-m-font-size',
+            },
+        },
+        'size-s-font-size': {
+            attributes: {
+                category: 'button',
+                type: 'size-s-font-size',
+            },
+        },
+    },
+    checkbox: {
+        'wrapper-size': {
+            attributes: {
+                category: 'checkbox',
+                type: 'wrapper-size',
+            },
+        },
+        'control-size': {
+            attributes: {
+                category: 'checkbox',
+                type: 'control-size',
+            },
+        },
+    },
+    chip: {
+        'size-m': {
+            height: {
+                attributes: {
+                    category: 'chip',
+                    type: 'size-m',
+                    item: 'height',
+                },
+            },
+            'border-radius': {
+                attributes: {
+                    category: 'chip',
+                    type: 'size-m',
+                    item: 'border-radius',
+                },
+            },
+            'padding-vertical': {
+                attributes: {
+                    category: 'chip',
+                    type: 'size-m',
+                    item: 'padding-vertical',
+                },
+            },
+        },
+        'size-s': {
+            height: {
+                attributes: {
+                    category: 'chip',
+                    type: 'size-s',
+                    item: 'height',
+                },
+            },
+            'border-radius': {
+                attributes: {
+                    category: 'chip',
+                    type: 'size-s',
+                    item: 'border-radius',
+                },
+            },
+            'padding-vertical': {
+                attributes: {
+                    category: 'chip',
+                    type: 'size-s',
+                    item: 'padding-vertical',
+                },
+            },
+        },
+    },
+    'radio-button': {
+        'wrapper-size': {
+            attributes: {
+                category: 'radio-button',
+                type: 'wrapper-size',
+            },
+        },
+        'control-size': {
+            attributes: {
+                category: 'radio-button',
+                type: 'control-size',
+            },
+        },
+        'indicator-size': {
+            attributes: {
+                category: 'radio-button',
+                type: 'indicator-size',
+            },
+        },
+    },
+    switch: {
+        wrapper: {
+            width: {
+                attributes: {
+                    category: 'switch',
+                    type: 'wrapper',
+                    item: 'width',
+                },
+            },
+            height: {
+                attributes: {
+                    category: 'switch',
+                    type: 'wrapper',
+                    item: 'height',
+                },
+            },
+        },
+        control: {
+            width: {
+                attributes: {
+                    category: 'switch',
+                    type: 'control',
+                    item: 'width',
+                },
+            },
+            height: {
+                attributes: {
+                    category: 'switch',
+                    type: 'control',
+                    item: 'height',
+                },
+            },
+        },
+        indicator: {
+            size: {
+                attributes: {
+                    category: 'switch',
+                    type: 'indicator',
+                    item: 'size',
+                },
+            },
+            offset: {
+                attributes: {
+                    category: 'switch',
+                    type: 'indicator',
+                    item: 'offset',
+                },
+            },
+        },
+    },
+    'text-field': {
+        padding: {
+            top: {
+                attributes: {
+                    category: 'text-field',
+                    type: 'padding',
+                    item: 'top',
+                },
+            },
+            bottom: {
+                attributes: {
+                    category: 'text-field',
+                    type: 'padding',
+                    item: 'bottom',
+                },
+            },
+        },
+        header: {
+            'margin-bottom': {
+                attributes: {
+                    category: 'text-field',
+                    type: 'header',
+                    item: 'margin-bottom',
+                },
+            },
+        },
+        label: {
+            'font-size': {
+                attributes: {
+                    category: 'text-field',
+                    type: 'label',
+                    item: 'font-size',
+                },
+            },
+            'font-weight': {
+                attributes: {
+                    category: 'text-field',
+                    type: 'label',
+                    item: 'font-weight',
+                },
+            },
+            'line-height': {
+                attributes: {
+                    category: 'text-field',
+                    type: 'label',
+                    item: 'line-height',
+                },
+            },
+        },
+        wrapper: {
+            'min-height': {
+                attributes: {
+                    category: 'text-field',
+                    type: 'wrapper',
+                    item: 'min-height',
+                },
+            },
+            'border-radius': {
+                attributes: {
+                    category: 'text-field',
+                    type: 'wrapper',
+                    item: 'border-radius',
+                },
+            },
+            padding: {
+                vertical: {
+                    attributes: {
+                        category: 'text-field',
+                        type: 'wrapper',
+                        item: 'padding',
+                    },
+                },
+                horizontal: {
+                    attributes: {
+                        category: 'text-field',
+                        type: 'wrapper',
+                        item: 'padding',
+                    },
+                },
+            },
+        },
+        'state-default': {
+            border: {
+                top: {
+                    width: {
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-default',
+                            item: 'border',
+                        },
+                    },
+                },
+                right: {
+                    width: {
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-default',
+                            item: 'border',
+                        },
+                    },
+                },
+                bottom: {
+                    width: {
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-default',
+                            item: 'border',
+                        },
+                    },
+                },
+                left: {
+                    width: {
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-default',
+                            item: 'border',
+                        },
+                    },
+                },
+            },
+            'theme-light': {
+                'background-color': {
+                    attributes: {
+                        category: 'text-field',
+                        type: 'state-default',
+                        item: 'theme-light',
+                    },
+                },
+                'border-color': {
+                    attributes: {
+                        category: 'text-field',
+                        type: 'state-default',
+                        item: 'theme-light',
+                    },
+                },
+            },
+            'theme-dark': {
+                'background-color': {
+                    attributes: {
+                        category: 'text-field',
+                        type: 'state-default',
+                        item: 'theme-dark',
+                    },
+                },
+                'border-color': {
+                    attributes: {
+                        category: 'text-field',
+                        type: 'state-default',
+                        item: 'theme-dark',
+                    },
+                },
+            },
+        },
+        'state-hover': {
+            'theme-light': {
+                'background-color': {
+                    attributes: {
+                        category: 'text-field',
+                        type: 'state-hover',
+                        item: 'theme-light',
+                    },
+                },
+            },
+            'theme-dark': {
+                'background-color': {
+                    attributes: {
+                        category: 'text-field',
+                        type: 'state-hover',
+                        item: 'theme-dark',
+                    },
+                },
+            },
+        },
+        'state-focus': {
+            border: {
+                top: {
+                    width: {
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-focus',
+                            item: 'border',
+                        },
+                    },
+                },
+                right: {
+                    width: {
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-focus',
+                            item: 'border',
+                        },
+                    },
+                },
+                bottom: {
+                    width: {
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-focus',
+                            item: 'border',
+                        },
+                    },
+                },
+                left: {
+                    width: {
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-focus',
+                            item: 'border',
+                        },
+                    },
+                },
+            },
+            'theme-light': {
+                'background-color': {
+                    attributes: {
+                        category: 'text-field',
+                        type: 'state-focus',
+                        item: 'theme-light',
+                    },
+                },
+                'border-color': {
+                    attributes: {
+                        category: 'text-field',
+                        type: 'state-focus',
+                        item: 'theme-light',
+                    },
+                },
+            },
+            'theme-dark': {
+                'background-color': {
+                    attributes: {
+                        category: 'text-field',
+                        type: 'state-focus',
+                        item: 'theme-dark',
+                    },
+                },
+                'border-color': {
+                    attributes: {
+                        category: 'text-field',
+                        type: 'state-focus',
+                        item: 'theme-dark',
+                    },
+                },
+            },
+        },
+        'input-icon-size': {
+            attributes: {
+                category: 'text-field',
+                type: 'input-icon-size',
+            },
+        },
+        input: {
+            'font-size': {
+                attributes: {
+                    category: 'text-field',
+                    type: 'input',
+                    item: 'font-size',
+                },
+            },
+            height: {
+                attributes: {
+                    category: 'text-field',
+                    type: 'input',
+                    item: 'height',
+                },
+            },
+        },
+        'input-validity-size': {
+            attributes: {
+                category: 'text-field',
+                type: 'input-validity-size',
+            },
+        },
+        'input-clear-size': {
+            attributes: {
+                category: 'text-field',
+                type: 'input-clear-size',
+            },
+        },
+    },
+    'border-radius': {
+        attributes: {
+            category: 'border-radius',
+        },
+    },
     color: {
         dark: {
             N: {
@@ -1739,6 +2182,165 @@ export const CORE = {
                         g: 179,
                         b: 0,
                         a: 0.1,
+                    },
+                },
+            },
+        },
+    },
+    progress: {
+        bounce: {
+            attributes: {
+                category: 'progress',
+                type: 'bounce',
+            },
+        },
+        rotate: {
+            attributes: {
+                category: 'progress',
+                type: 'rotate',
+            },
+        },
+    },
+    size: {
+        xxs: {
+            attributes: {
+                category: 'size',
+                type: 'xxs',
+            },
+        },
+        xs: {
+            attributes: {
+                category: 'size',
+                type: 'xs',
+            },
+        },
+        s: {
+            attributes: {
+                category: 'size',
+                type: 's',
+            },
+        },
+        m: {
+            attributes: {
+                category: 'size',
+                type: 'm',
+            },
+        },
+        l: {
+            attributes: {
+                category: 'size',
+                type: 'l',
+            },
+        },
+        xl: {
+            attributes: {
+                category: 'size',
+                type: 'xl',
+            },
+        },
+        xxm: {
+            attributes: {
+                category: 'size',
+                type: 'xxm',
+            },
+        },
+    },
+    spacing: {
+        unit: {
+            tiny: {
+                attributes: {
+                    category: 'spacing',
+                    type: 'unit',
+                    item: 'tiny',
+                },
+            },
+            regular: {
+                attributes: {
+                    category: 'spacing',
+                    type: 'unit',
+                    item: 'regular',
+                },
+            },
+            medium: {
+                attributes: {
+                    category: 'spacing',
+                    type: 'unit',
+                    item: 'medium',
+                },
+            },
+            big: {
+                attributes: {
+                    category: 'spacing',
+                    type: 'unit',
+                    item: 'big',
+                },
+            },
+            huge: {
+                attributes: {
+                    category: 'spacing',
+                    type: 'unit',
+                    item: 'huge',
+                },
+            },
+        },
+    },
+    typography: {
+        'font-family': {
+            attributes: {
+                category: 'typography',
+                type: 'font-family',
+            },
+        },
+        'bold-weight': {
+            attributes: {
+                category: 'typography',
+                type: 'bold-weight',
+            },
+        },
+        variant: {
+            'input-label': {
+                'font-size': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'variant',
+                        item: 'input-label',
+                    },
+                },
+                'font-weight': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'variant',
+                        item: 'input-label',
+                    },
+                },
+                'line-height': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'variant',
+                        item: 'input-label',
+                    },
+                },
+            },
+            'input-helper': {
+                'font-size': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'variant',
+                        item: 'input-helper',
+                    },
+                },
+                'font-weight': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'variant',
+                        item: 'input-helper',
+                    },
+                },
+                'line-height': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'variant',
+                        item: 'input-helper',
                     },
                 },
             },

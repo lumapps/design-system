@@ -12,9 +12,9 @@
     &:hover {
         @if $theme == lumx-base-const('theme', 'LIGHT') {
             @if $is-selected == true {
-                background-color: lumx-color-variant($lumx-table-selected-color, 'L5');
+                background-color: lumx-color-variant('dark', 'L5');
             } @else {
-                background-color: lumx-color-variant($lumx-table-selected-color, 'L6');
+                background-color: lumx-color-variant('dark', 'L6');
             }
         } @else if $theme == lumx-base-const('theme', 'DARK') {
             @if $is-selected == true {
@@ -48,7 +48,7 @@
 
 @mixin lumx-table-row-is-selected($theme) {
     @if $theme == lumx-base-const('theme', 'LIGHT') {
-        background-color: lumx-color-variant($lumx-table-selected-color, 'L6');
+        background-color: lumx-color-variant('dark', 'L6');
     } @else if $theme == lumx-base-const('theme', 'DARK') {
         background-color: lumx-color-variant('light', 'L6');
     }

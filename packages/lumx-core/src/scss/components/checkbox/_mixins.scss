@@ -1,7 +1,7 @@
 @mixin lumx-checkbox-input-wrapper() {
     position: relative;
-    width: $lumx-checkbox-wrapper-size;
-    height: $lumx-checkbox-wrapper-size;
+    width: var(--lumx-checkbox-wrapper-size);
+    height: var(--lumx-checkbox-wrapper-size);
 }
 
 @mixin lumx-checkbox-input-native() {
@@ -9,8 +9,8 @@
     z-index: 4;
     top: 0;
     left: 0;
-    width: $lumx-checkbox-wrapper-size;
-    height: $lumx-checkbox-wrapper-size;
+    width: var(--lumx-checkbox-wrapper-size);
+    height: var(--lumx-checkbox-wrapper-size);
     padding: 0;
     margin: 0;
     opacity: 0;
@@ -19,10 +19,10 @@
 @mixin lumx-checkbox-placeholder() {
     position: absolute;
     z-index: 1;
-    top: ($lumx-checkbox-wrapper-size - $lumx-checkbox-control-size) / 2;
-    left: ($lumx-checkbox-wrapper-size - $lumx-checkbox-control-size) / 2;
-    width: $lumx-checkbox-control-size;
-    height: $lumx-checkbox-control-size;
+    top: calc(calc(var(--lumx-checkbox-wrapper-size) - var(--lumx-checkbox-control-size)) / 2);
+    left: calc(calc(var(--lumx-checkbox-wrapper-size) - var(--lumx-checkbox-control-size)) / 2);
+    width: var(--lumx-checkbox-control-size);
+    height: var(--lumx-checkbox-control-size);
     border-radius: 2px;
 }
 
@@ -57,7 +57,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 2px;
-    font-size: $lumx-checkbox-control-size;
+    font-size: var(--lumx-checkbox-control-size);
 }
 
 @mixin lumx-checkbox-input-indicator-status($status) {

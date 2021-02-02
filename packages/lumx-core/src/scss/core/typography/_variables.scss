@@ -1,4 +1,4 @@
-$lumx-typography-font-family: 'Roboto', sans-serif;
+$lumx-typography-font-family: var(--lumx-typography-font-family);
 
 $lumx-typography-default-font-size: 16px;
 $lumx-typography-default-line-height: 24px;
@@ -16,15 +16,15 @@ $lumx-typography-font-size: (
 );
 
 $lumx-typography-font-weight: (
-    'display1': 500,
-    'headline': 500,
-    'title': 500,
-    'subtitle2': 500,
-    'subtitle1': 500,
+    'display1': var(--lumx-typography-bold-weight),
+    'headline': var(--lumx-typography-bold-weight),
+    'title': var(--lumx-typography-bold-weight),
+    'subtitle2': var(--lumx-typography-bold-weight),
+    'subtitle1': var(--lumx-typography-bold-weight),
     'body2': 400,
     'body1': 400,
     'caption': 400,
-    'overline': 500,
+    'overline': var(--lumx-typography-bold-weight),
 );
 
 $lumx-typography-line-height: (

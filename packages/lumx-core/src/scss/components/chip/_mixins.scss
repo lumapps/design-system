@@ -11,8 +11,8 @@
 }
 
 @mixin lumx-chip-size($size) {
-    height: map-get($lumx-chip-sizes, $size);
-    border-radius: (map-get($lumx-chip-sizes, $size)) / 2;
+    height: var(--lumx-chip-size-#{$size}-height);
+    border-radius: var(--lumx-chip-size-#{$size}-border-radius);
 }
 
 @mixin lumx-chip-before() {

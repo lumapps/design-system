@@ -149,11 +149,11 @@
 
 .#{$lumx-base-prefix}-button-wrapper {
     &--variant-button {
-        border-radius: $lumx-border-radius;
+        border-radius: var(--lumx-border-radius);
     }
 
     &--variant-icon {
-        border-radius: $lumx-border-radius;
+        border-radius: var(--lumx-border-radius);
     }
 
     &--color-light {
@@ -177,12 +177,12 @@
         border-radius: 0 !important;
 
         &:first-child {
-            border-radius: $lumx-border-radius 0 0 $lumx-border-radius !important;
+            border-radius: var(--lumx-border-radius) 0 0 var(--lumx-border-radius) !important;
         }
 
         &:last-child {
             margin-right: 0;
-            border-radius: 0 $lumx-border-radius $lumx-border-radius 0 !important;
+            border-radius: 0 var(--lumx-border-radius) var(--lumx-border-radius) 0 !important;
         }
     }
 }

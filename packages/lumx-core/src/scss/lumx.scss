@@ -1,6 +1,8 @@
 /** LUMX THEME */
 
 @import '~sass-mq';
+@import '../css/design-tokens';
+@import './design-tokens';
 @import './core';
 @import './components';
 @import './core/base/normalize';
@@ -14,7 +16,6 @@
 @import './components/button/index';
 @import './components/checkbox/index';
 @import './components/chip/index';
-@import './components/chip/index-material';
 @import './components/comment-block/index';
 @import './components/date-picker/index';
 @import './components/dialog/index';
@@ -39,22 +40,17 @@
 @import './components/popover/index';
 @import './components/post-block/index';
 @import './components/progress/index';
-@import './components/progress/index-material';
 @import './components/progress-tracker/index';
 @import './components/radio-button/index';
 @import './components/select/index';
-@import './components/select/index-material';
 @import './components/side-navigation/index';
 @import './components/skeleton/index';
 @import './components/slideshow/index';
 @import './components/slider/index';
 @import './components/switch/index';
-@import './components/switch/index-material';
 @import './components/table/index';
 @import './components/tabs/index';
-@import './components/tabs/index-material';
 @import './components/text-field/index';
-@import './components/text-field/index-material';
 @import './components/thumbnail/index';
 @import './components/toolbar/index';
 @import './components/tooltip/index';
