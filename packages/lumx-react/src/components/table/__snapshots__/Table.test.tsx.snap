@@ -19,6 +19,7 @@ exports[`<Table> Snapshots and structure should render story 'LumX components/ta
         key="calories"
         onHeaderClick={[Function]}
         variant="head"
+        width="100"
       >
         Calories
       </TableCell>
@@ -26,7 +27,9 @@ exports[`<Table> Snapshots and structure should render story 'LumX components/ta
         isSortable={true}
         key="fat"
         onHeaderClick={[Function]}
+        sortOrder="asc"
         variant="head"
+        width="100"
       >
         Fat (g)
       </TableCell>
@@ -36,6 +39,7 @@ exports[`<Table> Snapshots and structure should render story 'LumX components/ta
         key="comments"
         onHeaderClick={[Function]}
         variant="head"
+        width="150"
       >
         Comments
       </TableCell>
@@ -48,7 +52,52 @@ exports[`<Table> Snapshots and structure should render story 'LumX components/ta
       <TableCell
         variant="body"
       >
-        Frozen yogurt
+        <FlexBox
+          hAlign="center"
+          orientation="horizontal"
+        >
+          <Thumbnail
+            alt="Frozen yogurt"
+            aspectRatio="square"
+            className="lumx-spacing-margin-right-big"
+            fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
+            image="/demo-assets/landscape1.jpg"
+            loading="lazy"
+            size="m"
+            theme="light"
+            variant="rounded"
+          />
+          <Link
+            color="dark"
+            href="./"
+          >
+            <span
+              className="lumx-typography-subtitle1"
+            >
+              Frozen yogurt
+            </span>
+          </Link>
+          <FlexBox
+            hAlign="center"
+            marginAuto="left"
+            orientation="horizontal"
+          >
+            <IconButton
+              emphasis="low"
+              icon="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z"
+              label="Informations"
+              size="m"
+              theme="light"
+            />
+            <IconButton
+              emphasis="low"
+              icon="M12,16A2,2 0 0,1 14,18A2,2 0 0,1 12,20A2,2 0 0,1 10,18A2,2 0 0,1 12,16M12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12A2,2 0 0,1 12,10M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4Z"
+              label="More options"
+              size="m"
+              theme="light"
+            />
+          </FlexBox>
+        </FlexBox>
       </TableCell>
       <TableCell
         variant="body"
@@ -72,7 +121,52 @@ exports[`<Table> Snapshots and structure should render story 'LumX components/ta
       <TableCell
         variant="body"
       >
-        Ice cream sandwich
+        <FlexBox
+          hAlign="center"
+          orientation="horizontal"
+        >
+          <Thumbnail
+            alt="Ice cream sandwich"
+            aspectRatio="square"
+            className="lumx-spacing-margin-right-big"
+            fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
+            image="/demo-assets/landscape2.jpg"
+            loading="lazy"
+            size="m"
+            theme="light"
+            variant="rounded"
+          />
+          <Link
+            color="dark"
+            href="./"
+          >
+            <span
+              className="lumx-typography-subtitle1"
+            >
+              Ice cream sandwich
+            </span>
+          </Link>
+          <FlexBox
+            hAlign="center"
+            marginAuto="left"
+            orientation="horizontal"
+          >
+            <IconButton
+              emphasis="low"
+              icon="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z"
+              label="Informations"
+              size="m"
+              theme="light"
+            />
+            <IconButton
+              emphasis="low"
+              icon="M12,16A2,2 0 0,1 14,18A2,2 0 0,1 12,20A2,2 0 0,1 10,18A2,2 0 0,1 12,16M12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12A2,2 0 0,1 12,10M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4Z"
+              label="More options"
+              size="m"
+              theme="light"
+            />
+          </FlexBox>
+        </FlexBox>
       </TableCell>
       <TableCell
         variant="body"
@@ -96,7 +190,52 @@ exports[`<Table> Snapshots and structure should render story 'LumX components/ta
       <TableCell
         variant="body"
       >
-        Eclair
+        <FlexBox
+          hAlign="center"
+          orientation="horizontal"
+        >
+          <Thumbnail
+            alt="Eclair"
+            aspectRatio="square"
+            className="lumx-spacing-margin-right-big"
+            fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
+            image="/demo-assets/landscape3.jpg"
+            loading="lazy"
+            size="m"
+            theme="light"
+            variant="rounded"
+          />
+          <Link
+            color="dark"
+            href="./"
+          >
+            <span
+              className="lumx-typography-subtitle1"
+            >
+              Eclair
+            </span>
+          </Link>
+          <FlexBox
+            hAlign="center"
+            marginAuto="left"
+            orientation="horizontal"
+          >
+            <IconButton
+              emphasis="low"
+              icon="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z"
+              label="Informations"
+              size="m"
+              theme="light"
+            />
+            <IconButton
+              emphasis="low"
+              icon="M12,16A2,2 0 0,1 14,18A2,2 0 0,1 12,20A2,2 0 0,1 10,18A2,2 0 0,1 12,16M12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12A2,2 0 0,1 12,10M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4Z"
+              label="More options"
+              size="m"
+              theme="light"
+            />
+          </FlexBox>
+        </FlexBox>
       </TableCell>
       <TableCell
         variant="body"
