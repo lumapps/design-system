@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.5][] - 2021-02-02
+
 ### Added
 
 -   Added `dialogProps` prop to `Dialog` component to app props the dialog element itself.
@@ -983,3 +985,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.0.3]: https://github.com/lumapps/design-system/tree/v1.0.3
 [unreleased]: https://github.com/lumapps/design-system/compare/v1.0.4...HEAD
 [1.0.4]: https://github.com/lumapps/design-system/tree/v1.0.4
+[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.5...HEAD
+[1.0.5]: https://github.com/lumapps/design-system/tree/v1.0.5
