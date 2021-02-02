@@ -3,11 +3,7 @@
 exports[`<AutocompleteMultiple> Snapshots and structure should render correctly 1`] = `
 <Autocomplete
   anchorToInput={false}
-  chips={
-    <ChipGroup
-      align="left"
-    />
-  }
+  chips={Array []}
   className="lumx-autocomplete-multiple"
   closeOnClick={false}
   closeOnClickAway={true}
