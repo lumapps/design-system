@@ -1,5 +1,60 @@
-import { onEscapePressed } from '@lumx/react/utils';
+import { Callback, onEscapePressed } from '@lumx/react/utils';
 import { useEffect, useRef, useState } from 'react';
+import pull from 'lodash/pull';
+import debounce from 'lodash/debounce';
+
+type Tooltip = { open: Callback; close: Callback; anchorElement: HTMLElement };
+
+/**
+ * This singleton handle a global `mouseover` event listener on the `document` in order to toggle tooltips when
+ * entering and leaving their anchor element.
+ */
+const tooltipMouseToggle = (() => {
+    /** List of tooltips to toggle on anchor enter/leave. */
+    let tooltips: Array<Tooltip> | undefined;
+
+    /** Global listener added on the document. */
+    let globalListener: undefined | ((evt: MouseEvent) => void);
+
+    function addGlobalListener() {
+        if (globalListener) return;
+        globalListener = debounce((evt) => {
+            if (!tooltips || !evt.target) return;
+            for (const { open, close, anchorElement } of tooltips) {
+                if (anchorElement.contains(evt.target as any)) {
+                    open();
+                } else {
+                    close();
+                }
+            }
+        }, 10);
+        document.addEventListener('mouseover', globalListener);
+    }
+
+    function removeGlobalListener() {
+        if (!globalListener) return;
+        document.removeEventListener('mouseover', globalListener);
+        globalListener = undefined;
+    }
+
+    return {
+        addTooltip(tooltip: Tooltip) {
+            if (!tooltips) {
+                tooltips = [];
+                addGlobalListener();
+            }
+            tooltips.push(tooltip);
+        },
+        removeTooltip(actions: Tooltip) {
+            if (!tooltips) return;
+            pull(tooltips, actions);
+            if (tooltips.length === 0) {
+                removeGlobalListener();
+                tooltips = undefined;
+            }
+        },
+    };
+})();
 
 /**
  * Hook controlling tooltip visibility using mouse hover the anchor and delay.
@@ -10,43 +65,48 @@ import { useEffect, useRef, useState } from 'react';
  */
 export function useTooltipOpen(delay: number, anchorElement: HTMLElement | null): boolean {
     const timer = useRef<number>();
+    const shouldOpen = useRef<boolean>(false);
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
         if (!anchorElement) {
             return undefined;
         }
-        const open = () => {
-            timer.current = setTimeout(() => {
-                setIsOpen(true);
-            }, delay) as any;
+        const tooltip: Tooltip = {
+            anchorElement,
+            open() {
+                if (!shouldOpen.current) {
+                    shouldOpen.current = true;
+                    timer.current = setTimeout(() => {
+                        setIsOpen(shouldOpen.current);
+                    }, delay) as any;
+                }
+            },
+            close() {
+                if (timer.current) {
+                    clearTimeout(timer.current);
+                    timer.current = undefined;
+                }
+                if (shouldOpen.current) {
+                    shouldOpen.current = false;
+                    setIsOpen(shouldOpen.current);
+                }
+            },
         };
-        const close = () => {
-            if (timer.current) {
-                clearTimeout(timer.current);
-                timer.current = undefined;
-            }
-            setIsOpen(false);
-        };
-        const handleEscapeKeyPressed = onEscapePressed(close);
+        const keydown = onEscapePressed(tooltip.close);
 
-        anchorElement.addEventListener('mouseenter', open);
-        anchorElement.addEventListener('focusin', open);
-        anchorElement.addEventListener('mouseleave', close);
-        anchorElement.addEventListener('focusout', close);
-        anchorElement.addEventListener('keydown', handleEscapeKeyPressed);
+        tooltipMouseToggle.addTooltip(tooltip);
+        anchorElement.addEventListener('focusin', tooltip.open);
+        anchorElement.addEventListener('focusout', tooltip.close);
+        anchorElement.addEventListener('keydown', keydown);
         return () => {
-            anchorElement.removeEventListener('mouseenter', open);
-            anchorElement.removeEventListener('focusin', open);
-            anchorElement.removeEventListener('mouseleave', close);
-            anchorElement.removeEventListener('focusout', close);
-            anchorElement.removeEventListener('keydown', handleEscapeKeyPressed);
-
-            if (timer.current) {
-                clearTimeout(timer.current);
-            }
+            tooltipMouseToggle.removeTooltip(tooltip);
+            anchorElement.removeEventListener('focusin', tooltip.open);
+            anchorElement.removeEventListener('focusout', tooltip.close);
+            anchorElement.removeEventListener('keydown', keydown);
+            tooltip.close();
         };
-    }, [anchorElement, delay, timer]);
+    }, [anchorElement, delay, timer, shouldOpen]);
 
     return isOpen;
 }

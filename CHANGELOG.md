@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   Fixed focus on parentElement of the `Dialog` component.
+-   Fixed closing of tooltip when the anchor element gets hidden by another element.
 
 ## [1.0.4][] - 2021-01-25
 

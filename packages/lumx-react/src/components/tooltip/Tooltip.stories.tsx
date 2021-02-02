@@ -1,6 +1,7 @@
 import { mdiHelp, mdiPrinter } from '@lumx/icons';
 import {
     Button,
+    Dialog,
     Dropdown,
     FlexBox,
     Icon,
@@ -13,7 +14,8 @@ import {
 } from '@lumx/react';
 import { select, text } from '@storybook/addon-knobs';
 import noop from 'lodash/noop';
-import React, { useRef, useState } from 'react';
+import range from 'lodash/range';
+import React, { Fragment, useRef, useState } from 'react';
 
 export default { title: 'LumX components/tooltip/Tooltip' };
 
@@ -56,7 +58,7 @@ export const MultilineTooltip = () => (
         <Tooltip label="Only one sentence.">
             <Button>One line</Button>
         </Tooltip>
-        <Tooltip label="First sentence.\nSecond sentence.\nThird sentence.\n">
+        <Tooltip label={'First sentence.\nSecond sentence.\nThird sentence.\n'}>
             <Button>Multiline</Button>
         </Tooltip>
     </>
@@ -133,4 +135,35 @@ export const TooltipOnDifferentComponents = () => {
             </FlexBox>
         </FlexBox>
     );
+};
+
+export const HideTooltipOnHiddenAnchor = () => {
+    const anchorRef = useRef(null);
+    const [isOpen, setOpen] = useState(false);
+    return (
+        <>
+            The tooltip should show when the button is hovered but it should disappear when the popover get in-between
+            the mouse and the button
+            <br />
+            <Tooltip label="Tooltip label">
+                <Button ref={anchorRef} onClick={() => setOpen((wasOpen) => !wasOpen)}>
+                    Open popover
+                </Button>
+            </Tooltip>
+            <Dialog isOpen={isOpen} onClose={() => setOpen(false)}>
+                Dialog
+            </Dialog>
+        </>
+    );
+};
+
+export const StressTest = () => {
+    return range(1000).map((i) => (
+        <Fragment key={i}>
+            <Tooltip label={`Label ${i}`}>
+                <Button>Button {i}</Button>
+            </Tooltip>
+            <br />
+        </Fragment>
+    ));
 };
