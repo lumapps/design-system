@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.6][] - 2021-02-02
+
 ### Fixed
 
 -   Fixed initial internal state for `TabProvider` (fixes lazy feature that would still render children once).
@@ -991,3 +993,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.0.4]: https://github.com/lumapps/design-system/tree/v1.0.4
 [unreleased]: https://github.com/lumapps/design-system/compare/v1.0.5...HEAD
 [1.0.5]: https://github.com/lumapps/design-system/tree/v1.0.5
+[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.6...HEAD
+[1.0.6]: https://github.com/lumapps/design-system/tree/v1.0.6
