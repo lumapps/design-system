@@ -11,7 +11,8 @@ const CLASSNAME = ProgressTracker.className as string;
 
 // Mock useTabProviderContext.
 jest.mock('../tabs/state', () => {
-    return { useTabProviderContext: jest.fn(), useTabProviderContextState: jest.fn() };
+    const state = jest.requireActual('../tabs/state');
+    return { ...state, useTabProviderContext: jest.fn(), useTabProviderContextState: jest.fn() };
 });
 
 type SetupProps = Partial<ProgressTrackerProps>;

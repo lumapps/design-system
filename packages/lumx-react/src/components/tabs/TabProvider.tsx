@@ -16,9 +16,9 @@ export interface TabProviderProps {
 }
 
 const DEFAULT_PROPS: Partial<TabProviderProps> = {
-    activeTabIndex: 0,
-    isLazy: true,
-    shouldActivateOnFocus: false,
+    activeTabIndex: INIT_STATE.activeTabIndex,
+    isLazy: INIT_STATE.isLazy,
+    shouldActivateOnFocus: INIT_STATE.shouldActivateOnFocus,
 };
 
 /**

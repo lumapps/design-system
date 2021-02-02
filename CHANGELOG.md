@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Fixed initial internal state for `TabProvider` (fixes lazy feature that would still render children once).
+
 ## [1.0.5][] - 2021-02-02
 
 ### Added
