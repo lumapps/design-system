@@ -1,16 +1,19 @@
 import { Dispatch, createContext, useCallback, useContext, useEffect, useMemo } from 'react';
+import { clamp } from '@lumx/react/utils/clamp';
 import { uid } from 'uid';
 
 type TabType = 'tab' | 'tabPanel';
 
 export interface State {
-    isLazy?: boolean;
-    shouldActivateOnFocus?: boolean;
+    isLazy: boolean;
+    shouldActivateOnFocus: boolean;
     activeTabIndex: number;
     ids: Record<TabType, string[]>;
 }
 
 export const INIT_STATE: State = {
+    isLazy: true,
+    shouldActivateOnFocus: false,
     activeTabIndex: 0,
     ids: { tab: [], tabPanel: [] },
 };
@@ -48,6 +51,7 @@ export const reducer = (state: State, action: Action): State => {
             tabPanelIds.splice(index, 1);
             return {
                 ...state,
+                activeTabIndex: clamp(state.activeTabIndex, 0, tabPanelIds.length - 1),
                 ids: { tab: tabIds, tabPanel: tabPanelIds },
             };
         }
@@ -99,8 +103,8 @@ export const useTabProviderContext = (type: TabType, originalId?: string): undef
     const isActive = useMemo(() => state.activeTabIndex === index, [state, index]);
     const changeToTab = useCallback(() => dispatch({ type: 'setActiveTabIndex', payload: index }), [dispatch, index]);
     return {
-        isLazy: !!state.isLazy,
-        shouldActivateOnFocus: !!state.shouldActivateOnFocus,
+        isLazy: state.isLazy,
+        shouldActivateOnFocus: state.shouldActivateOnFocus,
         tabId,
         tabPanelId,
         isActive,
