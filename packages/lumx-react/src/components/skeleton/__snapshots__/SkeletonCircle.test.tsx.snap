@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<SkeletonCircle> Snapshots and structure should render story 'LumX components/skeleton/Skeleton/Circle' 1`] = `
+exports[`<SkeletonCircle> Snapshots and structure should render story 'Circle' 1`] = `
 Array [
   <div
     className="lumx-spacing-margin lumx-skeleton-circle lumx-skeleton-circle--size-xxs"

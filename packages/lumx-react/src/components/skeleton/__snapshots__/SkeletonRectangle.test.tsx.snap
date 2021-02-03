@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<SkeletonRectangle> Snapshots and structure should render story 'LumX components/skeleton/Skeleton/LoadingThumbnail' 1`] = `
+exports[`<SkeletonRectangle> Snapshots and structure should render story 'LoadingThumbnail' 1`] = `
 <div
   className="lumx-skeleton-rectangle lumx-skeleton-rectangle--aspect-ratio-square lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-xl"
 >
@@ -10,7 +10,7 @@ exports[`<SkeletonRectangle> Snapshots and structure should render story 'LumX c
 </div>
 `;
 
-exports[`<SkeletonRectangle> Snapshots and structure should render story 'LumX components/skeleton/Skeleton/Rectangle' 1`] = `
+exports[`<SkeletonRectangle> Snapshots and structure should render story 'Rectangle' 1`] = `
 Array [
   <div
     className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--height-xxs lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-xxs"

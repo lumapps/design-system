@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<List> Snapshots and structure should render story 'LumX components/list/List/AsLink' 1`] = `
+exports[`<List> Snapshots and structure should render story 'AsLink' 1`] = `
 <ul
   className="lumx-list lumx-list--item-padding-big"
   tabIndex={0}
@@ -59,7 +59,7 @@ exports[`<List> Snapshots and structure should render story 'LumX components/lis
 </ul>
 `;
 
-exports[`<List> Snapshots and structure should render story 'LumX components/list/List/KeyboardNavigation' 1`] = `
+exports[`<List> Snapshots and structure should render story 'KeyboardNavigation' 1`] = `
 <ul
   className="lumx-list lumx-list--item-padding-big"
   tabIndex={0}
@@ -152,7 +152,7 @@ exports[`<List> Snapshots and structure should render story 'LumX components/lis
 </ul>
 `;
 
-exports[`<List> Snapshots and structure should render story 'LumX components/list/List/WithCustomChildren' 1`] = `
+exports[`<List> Snapshots and structure should render story 'WithCustomChildren' 1`] = `
 <ul
   className="lumx-list"
   tabIndex={-1}
@@ -169,7 +169,7 @@ exports[`<List> Snapshots and structure should render story 'LumX components/lis
 </ul>
 `;
 
-exports[`<List> Snapshots and structure should render story 'LumX components/list/List/WithItemPadding' 1`] = `
+exports[`<List> Snapshots and structure should render story 'WithItemPadding' 1`] = `
 Array [
   <ul
     className="lumx-list lumx-list--item-padding-big"

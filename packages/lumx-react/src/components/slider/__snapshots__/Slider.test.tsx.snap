@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Slider> Snapshots and structure should render story 'LumX components/slider/Slider/DefaultSlider' 1`] = `
+exports[`<Slider> Snapshots and structure should render story 'DefaultSlider' 1`] = `
 <div
   className="lumx-slider lumx-slider--theme-light lumx-slider--has-label"
   onMouseDown={[Function]}
@@ -57,7 +57,7 @@ exports[`<Slider> Snapshots and structure should render story 'LumX components/s
 </div>
 `;
 
-exports[`<Slider> Snapshots and structure should render story 'LumX components/slider/Slider/WithHelperSlider' 1`] = `
+exports[`<Slider> Snapshots and structure should render story 'WithHelperSlider' 1`] = `
 <div
   className="lumx-slider lumx-slider--theme-light lumx-slider--has-label"
   onMouseDown={[Function]}

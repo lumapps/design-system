@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Popover> Snapshots and structure should render story 'LumX components/popover/Demos/Alignments' 1`] = `
+exports[`<Popover> Snapshots and structure should render story 'Alignments' 1`] = `
 Array [
   <Portal
     containerInfo={<body />}
@@ -65,7 +65,7 @@ Array [
 ]
 `;
 
-exports[`<Popover> Snapshots and structure should render story 'LumX components/popover/Demos/Auto' 1`] = `
+exports[`<Popover> Snapshots and structure should render story 'Auto' 1`] = `
 <Portal
   containerInfo={<body />}
 >
@@ -98,7 +98,7 @@ exports[`<Popover> Snapshots and structure should render story 'LumX components/
 </Portal>
 `;
 
-exports[`<Popover> Snapshots and structure should render story 'LumX components/popover/Demos/Default' 1`] = `
+exports[`<Popover> Snapshots and structure should render story 'Default' 1`] = `
 <Portal
   containerInfo={<body />}
 >
@@ -131,7 +131,7 @@ exports[`<Popover> Snapshots and structure should render story 'LumX components/
 </Portal>
 `;
 
-exports[`<Popover> Snapshots and structure should render story 'LumX components/popover/Demos/MatchingWidth' 1`] = `
+exports[`<Popover> Snapshots and structure should render story 'MatchingWidth' 1`] = `
 <Portal
   containerInfo={<body />}
 >
@@ -164,7 +164,7 @@ exports[`<Popover> Snapshots and structure should render story 'LumX components/
 </Portal>
 `;
 
-exports[`<Popover> Snapshots and structure should render story 'LumX components/popover/Demos/Offset' 1`] = `
+exports[`<Popover> Snapshots and structure should render story 'Offset' 1`] = `
 <Portal
   containerInfo={<body />}
 >
@@ -197,7 +197,7 @@ exports[`<Popover> Snapshots and structure should render story 'LumX components/
 </Portal>
 `;
 
-exports[`<Popover> Snapshots and structure should render story 'LumX components/popover/Demos/Positions' 1`] = `
+exports[`<Popover> Snapshots and structure should render story 'Positions' 1`] = `
 Array [
   <Portal
     containerInfo={<body />}

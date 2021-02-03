@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<CommentBlock> Snapshots and structure should render story 'LumX components/comment-block/CommentBlock/WithHeaderActions' 1`] = `
+exports[`<CommentBlock> Snapshots and structure should render story 'WithHeaderActions' 1`] = `
 <div
   className="lumx-comment-block lumx-comment-block--theme-light"
 >

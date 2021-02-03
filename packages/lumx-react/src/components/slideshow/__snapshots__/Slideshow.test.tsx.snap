@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Slideshow> Snapshots and structure should render story 'LumX components/slideshow/Slideshow/Simple' 1`] = `
+exports[`<Slideshow> Snapshots and structure should render story 'Simple' 1`] = `
 Array [
   <div
     className="lumx-slideshow lumx-slideshow--theme-light lumx-slideshow--group-by-1"
