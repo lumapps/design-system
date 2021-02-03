@@ -1,4 +1,13 @@
-import React, { forwardRef, ImgHTMLAttributes, MouseEventHandler, ReactNode, Ref, useRef, useState } from 'react';
+import React, {
+    forwardRef,
+    ImgHTMLAttributes,
+    MouseEventHandler,
+    ReactElement,
+    ReactNode,
+    Ref,
+    useRef,
+    useState,
+} from 'react';
 import classNames from 'classnames';
 
 import { AspectRatio, HorizontalAlignment, Icon, Size, Theme } from '@lumx/react';
@@ -26,7 +35,7 @@ export interface ThumbnailProps extends GenericProps {
     /** Image aspect ratio. */
     aspectRatio?: AspectRatio;
     /** Badge. */
-    badge?: ReactNode;
+    badge?: ReactElement;
     /** Image cross origin resource policy. */
     crossOrigin?: ImgHTMLProps['crossOrigin'];
     /** Fallback icon (SVG path) or react node when image fails to load. */
@@ -112,7 +121,7 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
         ref: mergeRefs(setWrapper, ref),
         className: classNames(
             className,
-            handleBasicClasses({ align, aspectRatio, prefix: CLASSNAME, size, theme, variant }),
+            handleBasicClasses({ align, aspectRatio, prefix: CLASSNAME, size, theme, variant, hasBadge: !!badge }),
             isLoading && wrapper?.getBoundingClientRect()?.height && 'lumx-color-background-dark-L6',
             fillHeight && `${CLASSNAME}--fill-height`,
         ),
@@ -155,7 +164,8 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
                 ) : (
                     <div className={`${CLASSNAME}__fallback`}>{fallback}</div>
                 ))}
-            {badge && <div className={`${CLASSNAME}__badge`}>{badge}</div>}
+            {badge &&
+                React.cloneElement(badge, { className: classNames(`${CLASSNAME}__badge`, badge.props.className) })}
         </div>
     );
 });

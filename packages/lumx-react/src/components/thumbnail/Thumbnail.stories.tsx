@@ -34,14 +34,15 @@ export const CustomFallback = () => (
 );
 
 export const WithBadge = () => {
-    const thumbnailSize = sizeKnob('Thumbnail size', Size.xxl);
-    const variant = select<ThumbnailVariant>('Thumbnail variant', ThumbnailVariant, ThumbnailVariant.squared);
-    const badgeColor = select('Badge color', ColorPalette, ColorPalette.light);
+    const thumbnailSize = sizeKnob('Thumbnail size', Size.l);
+    const variant = select<ThumbnailVariant>('Thumbnail variant', ThumbnailVariant, ThumbnailVariant.rounded);
+    const badgeColor = select('Badge color', ColorPalette, ColorPalette.primary);
     return (
         <Thumbnail
             alt="Image alt text"
             image={imageKnob()}
             variant={variant}
+            aspectRatio={AspectRatio.square}
             size={thumbnailSize}
             badge={
                 <Badge color={badgeColor}>
