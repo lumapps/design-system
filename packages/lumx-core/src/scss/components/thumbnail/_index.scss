@@ -5,6 +5,7 @@
 .#{$lumx-base-prefix}-thumbnail {
     $self: &;
 
+    position: relative;
     flex-shrink: 0;
     padding: 0;
     border: none;
@@ -70,6 +71,12 @@
         width: fit-content;
         /* Center fallback icon when using fill-height prop */
         margin: 0 auto;
+    }
+
+    &__badge {
+        position: absolute;
+        right: -$lumx-spacing-unit / 2;
+        bottom: -$lumx-spacing-unit / 2;
     }
 }
 

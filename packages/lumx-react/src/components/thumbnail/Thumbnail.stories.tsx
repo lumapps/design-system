@@ -1,7 +1,17 @@
 import React from 'react';
 
 import { mdiAbTesting } from '@lumx/icons';
-import { Alignment, AspectRatio, FlexBox, Size, Thumbnail, ThumbnailVariant } from '@lumx/react';
+import {
+    Alignment,
+    AspectRatio,
+    Badge,
+    ColorPalette,
+    FlexBox,
+    Icon,
+    Size,
+    Thumbnail,
+    ThumbnailVariant,
+} from '@lumx/react';
 import { imageKnob, IMAGES } from '@lumx/react/stories/knobs';
 import { htmlDecode } from '@lumx/react/utils/htmlDecode';
 import { boolean, select, text } from '@storybook/addon-knobs';
@@ -22,6 +32,25 @@ export const IconFallback = () => <Thumbnail alt="foo" image="foo" fallback={mdi
 export const CustomFallback = () => (
     <Thumbnail alt="foo" image="foo" fallback={<Thumbnail alt="missing image" image="/logo.svg" />} />
 );
+
+export const WithBadge = () => {
+    const thumbnailSize = sizeKnob('Thumbnail size', Size.xxl);
+    const variant = select<ThumbnailVariant>('Thumbnail variant', ThumbnailVariant, ThumbnailVariant.squared);
+    const badgeColor = select('Badge color', ColorPalette, ColorPalette.light);
+    return (
+        <Thumbnail
+            alt="Image alt text"
+            image={imageKnob()}
+            variant={variant}
+            size={thumbnailSize}
+            badge={
+                <Badge color={badgeColor}>
+                    <Icon icon={mdiAbTesting} />
+                </Badge>
+            }
+        />
+    );
+};
 
 export const ParentSizeConstraint = () => {
     const fillHeight = boolean('Fill Height', true);
@@ -57,7 +86,7 @@ export const Knobs = ({ theme }: any) => {
     const focusPoint = { x: focusKnob('Focus X'), y: focusKnob('Focus Y') };
     const image = imageKnob('Image', IMAGES.landscape1);
     const variant = select<ThumbnailVariant>('Variant', ThumbnailVariant, ThumbnailVariant.squared);
-    const size = sizeKnob(Size.xxl);
+    const size = sizeKnob('Size', Size.xxl);
     const onClick = boolean('clickable?', false) ? () => console.log('ok') : undefined;
 
     return (

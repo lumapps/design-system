@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   Added `light` theme by default on Skeleton components.
+-   Added `badge` prop on `Thumbnail` component.
 
 ## [1.0.7][] - 2021-02-03
 

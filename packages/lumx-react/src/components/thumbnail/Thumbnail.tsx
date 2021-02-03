@@ -1,13 +1,4 @@
-import React, {
-    forwardRef,
-    HTMLProps,
-    ImgHTMLAttributes,
-    MouseEventHandler,
-    ReactNode,
-    Ref,
-    useRef,
-    useState,
-} from 'react';
+import React, { forwardRef, ImgHTMLAttributes, MouseEventHandler, ReactNode, Ref, useRef, useState } from 'react';
 import classNames from 'classnames';
 
 import { AspectRatio, HorizontalAlignment, Icon, Size, Theme } from '@lumx/react';
@@ -34,6 +25,8 @@ export interface ThumbnailProps extends GenericProps {
     alt: string;
     /** Image aspect ratio. */
     aspectRatio?: AspectRatio;
+    /** Badge. */
+    badge?: ReactNode;
     /** Image cross origin resource policy. */
     crossOrigin?: ImgHTMLProps['crossOrigin'];
     /** Fallback icon (SVG path) or react node when image fails to load. */
@@ -91,6 +84,7 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
         align,
         alt,
         aspectRatio,
+        badge,
         className,
         crossOrigin,
         fallback,
@@ -161,6 +155,7 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
                 ) : (
                     <div className={`${CLASSNAME}__fallback`}>{fallback}</div>
                 ))}
+            {badge && <div className={`${CLASSNAME}__badge`}>{badge}</div>}
         </div>
     );
 });
