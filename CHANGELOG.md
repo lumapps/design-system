@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   Fixed `AlertDialog` export.
+-   Fixed `Thumbnail` image overflowing instead of scaling to the parent height.
 
 ## [1.0.6][] - 2021-02-02
 

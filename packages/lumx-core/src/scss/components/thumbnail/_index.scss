@@ -42,7 +42,7 @@
         max-width: none;
     }
 
-    &__image {
+    &__background, &__image {
         display: block;
         max-width: 100%;
         /* IE11 hack related to a bug with IE flexbox implementation (cf. https://stackoverflow.com/a/54054592) */

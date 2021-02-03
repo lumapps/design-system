@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { mdiAbTesting } from '@lumx/icons';
-import { Alignment, AspectRatio, Size, Thumbnail, ThumbnailVariant } from '@lumx/react';
+import { Alignment, AspectRatio, FlexBox, Size, Thumbnail, ThumbnailVariant } from '@lumx/react';
 import { imageKnob, IMAGES } from '@lumx/react/stories/knobs';
 import { htmlDecode } from '@lumx/react/utils/htmlDecode';
 import { boolean, select, text } from '@storybook/addon-knobs';
@@ -24,14 +24,24 @@ export const CustomFallback = () => (
 );
 
 export const ParentSizeConstraint = () => {
-    const aspectRatio = enumKnob('Aspect ratio', [undefined, ...Object.values(AspectRatio)]);
     const fillHeight = boolean('Fill Height', true);
+    return Object.values(AspectRatio).map((aspectRatio) => (
+        <FlexBox key={aspectRatio} orientation="horizontal" gap="huge">
+            <h1>ratio: {aspectRatio}</h1>
 
-    return (
-        <div style={{ border: '1px solid red', width: '300px', height: '400px', resize: 'both', overflow: 'auto' }}>
-            <Thumbnail alt="Grid" image="/demo-assets/grid.jpg" aspectRatio={aspectRatio} fillHeight={fillHeight} />
-        </div>
-    );
+            <div style={{ border: '1px solid red', width: 200, height: 400, resize: 'both', overflow: 'auto' }}>
+                <Thumbnail alt="Grid" image="/demo-assets/grid.jpg" aspectRatio={aspectRatio} fillHeight={fillHeight} />
+            </div>
+
+            <div style={{ border: '1px solid red', width: 300, height: 300, resize: 'both', overflow: 'auto' }}>
+                <Thumbnail alt="Grid" image="/demo-assets/grid.jpg" aspectRatio={aspectRatio} fillHeight={fillHeight} />
+            </div>
+
+            <div style={{ border: '1px solid red', width: 400, height: 200, resize: 'both', overflow: 'auto' }}>
+                <Thumbnail alt="Grid" image="/demo-assets/grid.jpg" aspectRatio={aspectRatio} fillHeight={fillHeight} />
+            </div>
+        </FlexBox>
+    ));
 };
 
 export const Knobs = ({ theme }: any) => {
