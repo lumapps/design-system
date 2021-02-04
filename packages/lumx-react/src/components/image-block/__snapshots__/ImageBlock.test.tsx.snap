@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ImageBlock> Snapshots and structure should render story 'LumX components/image-block/Image Block/DefaultImageBlock' 1`] = `
+exports[`<ImageBlock> Snapshots and structure should render story 'DefaultImageBlock' 1`] = `
 <figure
   className="lumx-image-block lumx-image-block--caption-position-below lumx-image-block--align-center lumx-image-block--theme-light"
 >

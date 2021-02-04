@@ -13,6 +13,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   New lumapps theme applied by default
     -   Old Material theme applicable using variables in `css/material.css`
 
+## [1.0.7][] - 2021-02-03
+
+### Fixed
+
+-   Fixed `AlertDialog` export.
+-   Fixed `Thumbnail` image overflowing instead of scaling to the parent height.
+
 ## [1.0.6][] - 2021-02-02
 
 ### Fixed
@@ -1001,3 +1008,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.0.5]: https://github.com/lumapps/design-system/tree/v1.0.5
 [unreleased]: https://github.com/lumapps/design-system/compare/v1.0.6...HEAD
 [1.0.6]: https://github.com/lumapps/design-system/tree/v1.0.6
+[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.7...HEAD
+[1.0.7]: https://github.com/lumapps/design-system/tree/v1.0.7

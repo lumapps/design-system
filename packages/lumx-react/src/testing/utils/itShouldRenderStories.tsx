@@ -65,7 +65,6 @@ export function generateRenderedStories(
     if (options?.props) {
         Object.assign(storyProps, options.props);
     }
-    const title = stories?.default?.title;
     const rendered: Record<string, Wrappers> = {};
 
     for (const [name, Story] of Object.entries(stories)) {
@@ -81,7 +80,7 @@ export function generateRenderedStories(
                 toSnapshot = toSnapshot[0];
             }
         }
-        rendered[`${title}/${name}`] = toSnapshot;
+        rendered[name] = toSnapshot;
     }
     return rendered;
 }

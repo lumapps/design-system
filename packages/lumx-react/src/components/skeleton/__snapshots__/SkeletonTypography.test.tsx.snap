@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<SkeletonTypography> Snapshots and structure should render story 'LumX components/skeleton/Skeleton/TextTypography' 1`] = `
+exports[`<SkeletonTypography> Snapshots and structure should render story 'TextTypography' 1`] = `
 Array [
   <div
     className="lumx-spacing-margin-bottom lumx-skeleton-typography lumx-skeleton-typography--typography-title"

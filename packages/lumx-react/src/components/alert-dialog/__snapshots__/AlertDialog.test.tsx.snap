@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<AlertDialog> Snapshots and structure should render story 'LumX components/alert-dialog/AlertDialog/Default' 1`] = `
+exports[`<AlertDialog> Snapshots and structure should render story 'Default' 1`] = `
 <Dialog
   className="lumx-alert-dialog lumx-alert-dialog--kind-info"
   dialogProps={
@@ -73,7 +73,7 @@ exports[`<AlertDialog> Snapshots and structure should render story 'LumX compone
 </Dialog>
 `;
 
-exports[`<AlertDialog> Snapshots and structure should render story 'LumX components/alert-dialog/AlertDialog/Error' 1`] = `
+exports[`<AlertDialog> Snapshots and structure should render story 'Error' 1`] = `
 <Dialog
   className="lumx-alert-dialog lumx-alert-dialog--kind-error"
   dialogProps={
@@ -146,7 +146,7 @@ exports[`<AlertDialog> Snapshots and structure should render story 'LumX compone
 </Dialog>
 `;
 
-exports[`<AlertDialog> Snapshots and structure should render story 'LumX components/alert-dialog/AlertDialog/RichDescription' 1`] = `
+exports[`<AlertDialog> Snapshots and structure should render story 'RichDescription' 1`] = `
 <Dialog
   className="lumx-alert-dialog lumx-alert-dialog--kind-info"
   dialogProps={
@@ -232,7 +232,7 @@ exports[`<AlertDialog> Snapshots and structure should render story 'LumX compone
 </Dialog>
 `;
 
-exports[`<AlertDialog> Snapshots and structure should render story 'LumX components/alert-dialog/AlertDialog/Success' 1`] = `
+exports[`<AlertDialog> Snapshots and structure should render story 'Success' 1`] = `
 <Dialog
   className="lumx-alert-dialog lumx-alert-dialog--kind-success"
   dialogProps={
@@ -305,7 +305,7 @@ exports[`<AlertDialog> Snapshots and structure should render story 'LumX compone
 </Dialog>
 `;
 
-exports[`<AlertDialog> Snapshots and structure should render story 'LumX components/alert-dialog/AlertDialog/Warning' 1`] = `
+exports[`<AlertDialog> Snapshots and structure should render story 'Warning' 1`] = `
 <Dialog
   className="lumx-alert-dialog lumx-alert-dialog--kind-warning"
   dialogProps={
@@ -378,7 +378,7 @@ exports[`<AlertDialog> Snapshots and structure should render story 'LumX compone
 </Dialog>
 `;
 
-exports[`<AlertDialog> Snapshots and structure should render story 'LumX components/alert-dialog/AlertDialog/WithCancel' 1`] = `
+exports[`<AlertDialog> Snapshots and structure should render story 'WithCancel' 1`] = `
 <Dialog
   className="lumx-alert-dialog lumx-alert-dialog--kind-info"
   dialogProps={

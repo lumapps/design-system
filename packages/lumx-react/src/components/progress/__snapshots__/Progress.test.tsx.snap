@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Progress> Snapshots and structure should render story 'LumX components/progress/Demos/Circular' 1`] = `
+exports[`<Progress> Snapshots and structure should render story 'Circular' 1`] = `
 <div
   className="lumx-progress lumx-progress--theme-light lumx-progress--variant-circular"
 >
@@ -30,7 +30,7 @@ exports[`<Progress> Snapshots and structure should render story 'LumX components
 </div>
 `;
 
-exports[`<Progress> Snapshots and structure should render story 'LumX components/progress/Demos/Linear' 1`] = `
+exports[`<Progress> Snapshots and structure should render story 'Linear' 1`] = `
 <div
   className="lumx-progress lumx-progress--theme-light lumx-progress--variant-linear"
 >
