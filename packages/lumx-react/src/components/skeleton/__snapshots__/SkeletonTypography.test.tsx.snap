@@ -3,7 +3,7 @@
 exports[`<SkeletonTypography> Snapshots and structure should render story 'TextTypography' 1`] = `
 Array [
   <div
-    className="lumx-spacing-margin-bottom lumx-skeleton-typography lumx-skeleton-typography--typography-title"
+    className="lumx-spacing-margin-bottom lumx-skeleton-typography lumx-skeleton-typography--theme-light lumx-skeleton-typography--typography-title"
     style={
       Object {
         "width": "30%",
@@ -15,7 +15,7 @@ Array [
     />
   </div>,
   <div
-    className="lumx-skeleton-typography lumx-skeleton-typography--typography-body1"
+    className="lumx-skeleton-typography lumx-skeleton-typography--theme-light lumx-skeleton-typography--typography-body1"
     style={
       Object {
         "width": undefined,
@@ -27,7 +27,7 @@ Array [
     />
   </div>,
   <div
-    className="lumx-skeleton-typography lumx-skeleton-typography--typography-body1"
+    className="lumx-skeleton-typography lumx-skeleton-typography--theme-light lumx-skeleton-typography--typography-body1"
     style={
       Object {
         "width": undefined,
@@ -39,7 +39,7 @@ Array [
     />
   </div>,
   <div
-    className="lumx-skeleton-typography lumx-skeleton-typography--typography-body1"
+    className="lumx-skeleton-typography lumx-skeleton-typography--theme-light lumx-skeleton-typography--typography-body1"
     style={
       Object {
         "width": undefined,
@@ -51,7 +51,7 @@ Array [
     />
   </div>,
   <div
-    className="lumx-skeleton-typography lumx-skeleton-typography--typography-body1"
+    className="lumx-skeleton-typography lumx-skeleton-typography--theme-light lumx-skeleton-typography--typography-body1"
     style={
       Object {
         "width": "70%",

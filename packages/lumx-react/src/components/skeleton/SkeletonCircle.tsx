@@ -14,6 +14,10 @@ export interface SkeletonCircleProps extends GenericProps {
     theme?: Theme;
 }
 
+const DEFAULT_PROPS: Partial<SkeletonCircleProps> = {
+    theme: Theme.light,
+};
+
 /**
  * Component display name.
  */
@@ -43,4 +47,5 @@ export const SkeletonCircle: Comp<SkeletonCircleProps, HTMLDivElement> = forward
     );
 });
 SkeletonCircle.displayName = COMPONENT_NAME;
+SkeletonCircle.defaultProps = DEFAULT_PROPS;
 SkeletonCircle.className = CLASSNAME;
