@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<FlexBox> Snapshots and structure should render story 'LumX components/flex-box/FlexBox/Align' 1`] = `
+exports[`<FlexBox> Snapshots and structure should render story 'Align' 1`] = `
 Array [
   <div
     className="lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--v-align-center lumx-flex-box--h-align-center"
@@ -40,7 +40,7 @@ Array [
 ]
 `;
 
-exports[`<FlexBox> Snapshots and structure should render story 'LumX components/flex-box/FlexBox/Flex' 1`] = `
+exports[`<FlexBox> Snapshots and structure should render story 'Flex' 1`] = `
 Array [
   <div
     className="lumx-flex-box"
@@ -89,7 +89,7 @@ Array [
 ]
 `;
 
-exports[`<FlexBox> Snapshots and structure should render story 'LumX components/flex-box/FlexBox/HorizontalFlex' 1`] = `
+exports[`<FlexBox> Snapshots and structure should render story 'HorizontalFlex' 1`] = `
 Array [
   <div
     className="lumx-flex-box lumx-flex-box--orientation-horizontal"
@@ -179,7 +179,7 @@ Array [
 ]
 `;
 
-exports[`<FlexBox> Snapshots and structure should render story 'LumX components/flex-box/FlexBox/NoShrinkFlex' 1`] = `
+exports[`<FlexBox> Snapshots and structure should render story 'NoShrinkFlex' 1`] = `
 Array [
   <div
     className="lumx-flex-box lumx-flex-box--orientation-horizontal"
@@ -218,7 +218,7 @@ Array [
 ]
 `;
 
-exports[`<FlexBox> Snapshots and structure should render story 'LumX components/flex-box/FlexBox/VerticalFlex' 1`] = `
+exports[`<FlexBox> Snapshots and structure should render story 'VerticalFlex' 1`] = `
 Array [
   <div
     className="lumx-flex-box lumx-flex-box--orientation-vertical"
@@ -308,7 +308,7 @@ Array [
 ]
 `;
 
-exports[`<FlexBox> Snapshots and structure should render story 'LumX components/flex-box/FlexBox/WrapFlex' 1`] = `
+exports[`<FlexBox> Snapshots and structure should render story 'WrapFlex' 1`] = `
 Array [
   <div
     className="lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--wrap"

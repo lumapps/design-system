@@ -1,4 +1,5 @@
 export * from './components';
+export * from './components/alert-dialog';
 export * from './components/autocomplete';
 export * from './components/avatar';
 export * from './components/badge';

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Thumbnail> Snapshots and structure should render story 'LumX components/thumbnail/Thumbnail/Clickable' 1`] = `
+exports[`<Thumbnail> Snapshots and structure should render story 'Clickable' 1`] = `
 <div
   className="lumx-thumbnail lumx-thumbnail--size-xxl lumx-thumbnail--theme-light"
   onClick={[Function]}
@@ -28,7 +28,7 @@ exports[`<Thumbnail> Snapshots and structure should render story 'LumX component
 </div>
 `;
 
-exports[`<Thumbnail> Snapshots and structure should render story 'LumX components/thumbnail/Thumbnail/CustomFallback' 1`] = `
+exports[`<Thumbnail> Snapshots and structure should render story 'CustomFallback' 1`] = `
 <div
   className="lumx-thumbnail lumx-thumbnail--theme-light"
 >
@@ -52,7 +52,7 @@ exports[`<Thumbnail> Snapshots and structure should render story 'LumX component
 </div>
 `;
 
-exports[`<Thumbnail> Snapshots and structure should render story 'LumX components/thumbnail/Thumbnail/Default' 1`] = `
+exports[`<Thumbnail> Snapshots and structure should render story 'Default' 1`] = `
 <div
   className="lumx-thumbnail lumx-thumbnail--size-xxl lumx-thumbnail--theme-light"
 >
@@ -76,7 +76,7 @@ exports[`<Thumbnail> Snapshots and structure should render story 'LumX component
 </div>
 `;
 
-exports[`<Thumbnail> Snapshots and structure should render story 'LumX components/thumbnail/Thumbnail/DefaultFallback' 1`] = `
+exports[`<Thumbnail> Snapshots and structure should render story 'DefaultFallback' 1`] = `
 <div
   className="lumx-thumbnail lumx-thumbnail--theme-light"
 >
@@ -100,7 +100,7 @@ exports[`<Thumbnail> Snapshots and structure should render story 'LumX component
 </div>
 `;
 
-exports[`<Thumbnail> Snapshots and structure should render story 'LumX components/thumbnail/Thumbnail/IconFallback' 1`] = `
+exports[`<Thumbnail> Snapshots and structure should render story 'IconFallback' 1`] = `
 <div
   className="lumx-thumbnail lumx-thumbnail--theme-light"
 >
@@ -118,54 +118,6 @@ exports[`<Thumbnail> Snapshots and structure should render story 'LumX component
       className="lumx-thumbnail__image"
       loading="lazy"
       src="foo"
-      style={Object {}}
-    />
-  </div>
-</div>
-`;
-
-exports[`<Thumbnail> Snapshots and structure should render story 'LumX components/thumbnail/Thumbnail/Knobs' 1`] = `
-<div
-  className="lumx-thumbnail lumx-thumbnail--size-xxl lumx-thumbnail--theme-light lumx-thumbnail--variant-squared"
->
-  <div
-    className="lumx-thumbnail__background"
-    style={
-      Object {
-        "display": undefined,
-        "visibility": "hidden",
-      }
-    }
-  >
-    <img
-      alt="Image alt text"
-      className="lumx-thumbnail__image"
-      loading="lazy"
-      src="landscape1.jpg"
-      style={Object {}}
-    />
-  </div>
-</div>
-`;
-
-exports[`<Thumbnail> Snapshots and structure should render story 'LumX components/thumbnail/Thumbnail/ParentSizeConstraint' 1`] = `
-<div
-  className="lumx-thumbnail lumx-thumbnail--theme-light lumx-thumbnail--fill-height"
->
-  <div
-    className="lumx-thumbnail__background"
-    style={
-      Object {
-        "display": undefined,
-        "visibility": "hidden",
-      }
-    }
-  >
-    <img
-      alt="Grid"
-      className="lumx-thumbnail__image"
-      loading="lazy"
-      src="/demo-assets/grid.jpg"
       style={Object {}}
     />
   </div>

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Lightbox> Snapshots and structure should render story 'LumX components/lightbox/Demos/Default' 1`] = `
+exports[`<Lightbox> Snapshots and structure should render story 'Default' 1`] = `
 <Portal
   containerInfo={<body />}
 >

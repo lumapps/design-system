@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<PostBlock> Snapshots and structure should render story 'LumX components/post-block/Demos/Default' 1`] = `
+exports[`<PostBlock> Snapshots and structure should render story 'Default' 1`] = `
 <div
   className="lumx-post-block lumx-post-block--orientation-horizontal lumx-post-block--theme-light"
 >
