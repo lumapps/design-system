@@ -130,7 +130,7 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
     };
 
     // Update img style according to focus point and aspect ratio.
-    const style = useFocusPoint({ focusPoint, aspectRatio, imgRef, loadingState, wrapper });
+    const style = useFocusPoint({ image, focusPoint, aspectRatio, imgRef, loadingState, wrapper });
 
     return (
         <div {...wrapperProps}>

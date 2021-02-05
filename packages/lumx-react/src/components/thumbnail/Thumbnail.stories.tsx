@@ -37,10 +37,12 @@ export const WithBadge = () => {
     const thumbnailSize = sizeKnob('Thumbnail size', Size.l);
     const variant = select<ThumbnailVariant>('Thumbnail variant', ThumbnailVariant, ThumbnailVariant.rounded);
     const badgeColor = select('Badge color', ColorPalette, ColorPalette.primary);
+    const activateFallback = boolean('Activate fallback', false);
+    const image = imageKnob();
     return (
         <Thumbnail
             alt="Image alt text"
-            image={imageKnob()}
+            image={activateFallback ? '' : image}
             variant={variant}
             aspectRatio={AspectRatio.square}
             size={thumbnailSize}
