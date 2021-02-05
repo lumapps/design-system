@@ -30,6 +30,7 @@ export const ColorPalette = {
     yellow: 'yellow',
     red: 'red',
     light: 'light',
+    grey: 'grey',
 } as const;
 export type ColorPalette = ValueOf<typeof ColorPalette>;
 export type Color = ColorPalette | string;
