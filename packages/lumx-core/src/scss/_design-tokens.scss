@@ -1,8 +1,9 @@
 /**
  * Do not edit directly
- * Generated on Wed, 27 Jan 2021 10:13:22 GMT
+ * Generated on Thu, 28 Jan 2021 09:05:59 GMT
  */
 
+$lumx-button-font-weight: 700 !default;
 $lumx-button-text-transform: none !default;
 $lumx-button-variant-icon-border-radius: 4px !default;
 $lumx-button-size-m-font-size: 14px !default;
@@ -15,6 +16,12 @@ $lumx-chip-size-m-padding-vertical: 16px !default;
 $lumx-chip-size-s-height: 24px !default;
 $lumx-chip-size-s-border-radius: 12px !default;
 $lumx-chip-size-s-padding-vertical: 12px !default;
+$lumx-input-helper-font-size: 12px !default;
+$lumx-input-helper-font-weight: 400 !default;
+$lumx-input-helper-line-height: 16px !default;
+$lumx-input-label-font-size: 14px !default;
+$lumx-input-label-font-weight: 400 !default;
+$lumx-input-label-line-height: 20px !default;
 $lumx-radio-button-wrapper-size: 20px !default;
 $lumx-radio-button-control-size: 16px !default;
 $lumx-radio-button-indicator-size: 8px !default;
@@ -38,23 +45,64 @@ $lumx-text-field-state-default-border-top-width: 1px !default;
 $lumx-text-field-state-default-border-right-width: 1px !default;
 $lumx-text-field-state-default-border-bottom-width: 1px !default;
 $lumx-text-field-state-default-border-left-width: 1px !default;
-$lumx-text-field-state-default-theme-light-background-color: rgba(0, 0, 0, 0.05) !default;
-$lumx-text-field-state-default-theme-light-border-color: rgba(0, 0, 0, 0.2) !default;
-$lumx-text-field-state-default-theme-dark-background-color: rgba(255, 255, 255, 0.1) !default;
-$lumx-text-field-state-default-theme-dark-border-color: rgba(255, 255, 255, 0.4) !default;
-$lumx-text-field-state-hover-theme-light-background-color: rgba(0, 0, 0, 0.12) !default;
-$lumx-text-field-state-hover-theme-dark-background-color: rgba(255, 255, 255, 0.2) !default;
+$lumx-text-field-state-default-theme-light-background-color: rgba(
+    0,
+    0,
+    0,
+    0.05
+) !default; // Base dark color with 5% opacity
+$lumx-text-field-state-default-theme-light-border-color: rgba(
+    0,
+    0,
+    0,
+    0.2
+) !default; // Base dark color with 20% opacity
+$lumx-text-field-state-default-theme-dark-background-color: rgba(
+    255,
+    255,
+    255,
+    0.1
+) !default; // Base light color with 10% opacity
+$lumx-text-field-state-default-theme-dark-border-color: rgba(
+    255,
+    255,
+    255,
+    0.4
+) !default; // Base light color with 40% opacity
+$lumx-text-field-state-hover-theme-light-background-color: rgba(
+    0,
+    0,
+    0,
+    0.12
+) !default; // Base dark color with 12% opacity
+$lumx-text-field-state-hover-theme-dark-background-color: rgba(
+    255,
+    255,
+    255,
+    0.2
+) !default; // Base light color with 20% opacity
 $lumx-text-field-state-focus-border-top-width: 2px !default;
 $lumx-text-field-state-focus-border-right-width: 2px !default;
 $lumx-text-field-state-focus-border-bottom-width: 2px !default;
 $lumx-text-field-state-focus-border-left-width: 2px !default;
-$lumx-text-field-state-focus-theme-light-background-color: #ffffff !default;
-$lumx-text-field-state-focus-theme-light-border-color: rgba(33, 150, 243, 0.6) !default;
+$lumx-text-field-state-focus-theme-light-background-color: #fff !default; // Neutral light color
+$lumx-text-field-state-focus-theme-light-border-color: rgba(
+    33,
+    150,
+    243,
+    0.6
+) !default; // Base blue color with 60% opacity
 $lumx-text-field-state-focus-theme-dark-background-color: transparent !default;
-$lumx-text-field-state-focus-theme-dark-border-color: rgba(255, 255, 255, 0.8) !default;
+$lumx-text-field-state-focus-theme-dark-border-color: rgba(
+    255,
+    255,
+    255,
+    0.8
+) !default; // Base light color with 80% opacity
 $lumx-text-field-input-icon-size: 20px !default;
 $lumx-text-field-input-font-size: 14px !default;
-$lumx-text-field-input-height: 20px !default;
+$lumx-text-field-input-font-weight: 400 !default;
+$lumx-text-field-input-line-height: 20px !default;
 $lumx-text-field-input-validity-size: 14px !default;
 $lumx-text-field-input-clear-size: 24px !default;
 $lumx-border-radius: 4px !default;
@@ -181,16 +229,37 @@ $lumx-spacing-unit-big: 16px !default;
 $lumx-spacing-unit-huge: 24px !default;
 $lumx-typography-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Fira Sans',
     'Droid Sans', 'Helvetica Neue', sans-serif !default;
-$lumx-typography-bold-weight: 700 !default;
-$lumx-typography-variant-input-label-font-size: 14px !default;
-$lumx-typography-variant-input-label-font-weight: 400 !default;
-$lumx-typography-variant-input-label-line-height: 20px !default;
-$lumx-typography-variant-input-helper-font-size: 12px !default;
-$lumx-typography-variant-input-helper-font-weight: 400 !default;
-$lumx-typography-variant-input-helper-line-height: 16px !default;
+$lumx-typography-style-display1-font-size: 34px !default;
+$lumx-typography-style-display1-font-weight: 700 !default;
+$lumx-typography-style-display1-line-height: 40px !default;
+$lumx-typography-style-headline-font-size: 24px !default;
+$lumx-typography-style-headline-font-weight: 700 !default;
+$lumx-typography-style-headline-line-height: 32px !default;
+$lumx-typography-style-title-font-size: 20px !default;
+$lumx-typography-style-title-font-weight: 700 !default;
+$lumx-typography-style-title-line-height: 30px !default;
+$lumx-typography-style-subtitle2-font-size: 16px !default;
+$lumx-typography-style-subtitle2-font-weight: 700 !default;
+$lumx-typography-style-subtitle2-line-height: 24px !default;
+$lumx-typography-style-subtitle1-font-size: 14px !default;
+$lumx-typography-style-subtitle1-font-weight: 700 !default;
+$lumx-typography-style-subtitle1-line-height: 20px !default;
+$lumx-typography-style-body2-font-size: 16px !default;
+$lumx-typography-style-body2-font-weight: 400 !default;
+$lumx-typography-style-body2-line-height: 24px !default;
+$lumx-typography-style-body1-font-size: 14px !default;
+$lumx-typography-style-body1-font-weight: 400 !default;
+$lumx-typography-style-body1-line-height: 20px !default;
+$lumx-typography-style-caption-font-size: 12px !default;
+$lumx-typography-style-caption-font-weight: 400 !default;
+$lumx-typography-style-caption-line-height: 16px !default;
+$lumx-typography-style-overline-font-size: 10px !default;
+$lumx-typography-style-overline-font-weight: 700 !default;
+$lumx-typography-style-overline-line-height: 12px !default;
 
 $lumx-design-tokens: (
     'button': (
+        'font-weight': $lumx-button-font-weight,
         'text-transform': $lumx-button-text-transform,
         'variant-icon-border-radius': $lumx-button-variant-icon-border-radius,
         'size-m-font-size': $lumx-button-size-m-font-size,
@@ -211,6 +280,16 @@ $lumx-design-tokens: (
             'border-radius': $lumx-chip-size-s-border-radius,
             'padding-vertical': $lumx-chip-size-s-padding-vertical,
         ),
+    ),
+    'input-helper': (
+        'font-size': $lumx-input-helper-font-size,
+        'font-weight': $lumx-input-helper-font-weight,
+        'line-height': $lumx-input-helper-line-height,
+    ),
+    'input-label': (
+        'font-size': $lumx-input-label-font-size,
+        'font-weight': $lumx-input-label-font-weight,
+        'line-height': $lumx-input-label-line-height,
     ),
     'radio-button': (
         'wrapper-size': $lumx-radio-button-wrapper-size,
@@ -311,7 +390,8 @@ $lumx-design-tokens: (
         'input-icon-size': $lumx-text-field-input-icon-size,
         'input': (
             'font-size': $lumx-text-field-input-font-size,
-            'height': $lumx-text-field-input-height,
+            'font-weight': $lumx-text-field-input-font-weight,
+            'line-height': $lumx-text-field-input-line-height,
         ),
         'input-validity-size': $lumx-text-field-input-validity-size,
         'input-clear-size': $lumx-text-field-input-clear-size,
@@ -476,17 +556,51 @@ $lumx-design-tokens: (
     ),
     'typography': (
         'font-family': $lumx-typography-font-family,
-        'bold-weight': $lumx-typography-bold-weight,
-        'variant': (
-            'input-label': (
-                'font-size': $lumx-typography-variant-input-label-font-size,
-                'font-weight': $lumx-typography-variant-input-label-font-weight,
-                'line-height': $lumx-typography-variant-input-label-line-height,
+        'style': (
+            'display1': (
+                'font-size': $lumx-typography-style-display1-font-size,
+                'font-weight': $lumx-typography-style-display1-font-weight,
+                'line-height': $lumx-typography-style-display1-line-height,
             ),
-            'input-helper': (
-                'font-size': $lumx-typography-variant-input-helper-font-size,
-                'font-weight': $lumx-typography-variant-input-helper-font-weight,
-                'line-height': $lumx-typography-variant-input-helper-line-height,
+            'headline': (
+                'font-size': $lumx-typography-style-headline-font-size,
+                'font-weight': $lumx-typography-style-headline-font-weight,
+                'line-height': $lumx-typography-style-headline-line-height,
+            ),
+            'title': (
+                'font-size': $lumx-typography-style-title-font-size,
+                'font-weight': $lumx-typography-style-title-font-weight,
+                'line-height': $lumx-typography-style-title-line-height,
+            ),
+            'subtitle2': (
+                'font-size': $lumx-typography-style-subtitle2-font-size,
+                'font-weight': $lumx-typography-style-subtitle2-font-weight,
+                'line-height': $lumx-typography-style-subtitle2-line-height,
+            ),
+            'subtitle1': (
+                'font-size': $lumx-typography-style-subtitle1-font-size,
+                'font-weight': $lumx-typography-style-subtitle1-font-weight,
+                'line-height': $lumx-typography-style-subtitle1-line-height,
+            ),
+            'body2': (
+                'font-size': $lumx-typography-style-body2-font-size,
+                'font-weight': $lumx-typography-style-body2-font-weight,
+                'line-height': $lumx-typography-style-body2-line-height,
+            ),
+            'body1': (
+                'font-size': $lumx-typography-style-body1-font-size,
+                'font-weight': $lumx-typography-style-body1-font-weight,
+                'line-height': $lumx-typography-style-body1-line-height,
+            ),
+            'caption': (
+                'font-size': $lumx-typography-style-caption-font-size,
+                'font-weight': $lumx-typography-style-caption-font-weight,
+                'line-height': $lumx-typography-style-caption-line-height,
+            ),
+            'overline': (
+                'font-size': $lumx-typography-style-overline-font-size,
+                'font-weight': $lumx-typography-style-overline-font-weight,
+                'line-height': $lumx-typography-style-overline-line-height,
             ),
         ),
     ),
