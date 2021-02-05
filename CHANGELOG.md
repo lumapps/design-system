@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Added `boundaryRef` prop to `Popover` component to override default boundary settings.
+
 ## [1.0.10][] - 2021-02-25
 
 ### Fixed
