@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.8][] - 2021-02-08
+
 ### Added
 
 -   Added `light` theme by default on Skeleton components.
@@ -1009,3 +1011,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.0.6]: https://github.com/lumapps/design-system/tree/v1.0.6
 [unreleased]: https://github.com/lumapps/design-system/compare/v1.0.7...HEAD
 [1.0.7]: https://github.com/lumapps/design-system/tree/v1.0.7
+[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.8...HEAD
+[1.0.8]: https://github.com/lumapps/design-system/tree/v1.0.8
