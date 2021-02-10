@@ -3,25 +3,25 @@
 exports[`<SkeletonCircle> Snapshots and structure should render story 'Circle' 1`] = `
 Array [
   <div
-    className="lumx-spacing-margin lumx-skeleton-circle lumx-skeleton-circle--size-xxs"
+    className="lumx-spacing-margin lumx-skeleton-circle lumx-skeleton-circle--size-xxs lumx-skeleton-circle--theme-light"
   />,
   <div
-    className="lumx-spacing-margin lumx-skeleton-circle lumx-skeleton-circle--size-xs"
+    className="lumx-spacing-margin lumx-skeleton-circle lumx-skeleton-circle--size-xs lumx-skeleton-circle--theme-light"
   />,
   <div
-    className="lumx-spacing-margin lumx-skeleton-circle lumx-skeleton-circle--size-s"
+    className="lumx-spacing-margin lumx-skeleton-circle lumx-skeleton-circle--size-s lumx-skeleton-circle--theme-light"
   />,
   <div
-    className="lumx-spacing-margin lumx-skeleton-circle lumx-skeleton-circle--size-m"
+    className="lumx-spacing-margin lumx-skeleton-circle lumx-skeleton-circle--size-m lumx-skeleton-circle--theme-light"
   />,
   <div
-    className="lumx-spacing-margin lumx-skeleton-circle lumx-skeleton-circle--size-l"
+    className="lumx-spacing-margin lumx-skeleton-circle lumx-skeleton-circle--size-l lumx-skeleton-circle--theme-light"
   />,
   <div
-    className="lumx-spacing-margin lumx-skeleton-circle lumx-skeleton-circle--size-xl"
+    className="lumx-spacing-margin lumx-skeleton-circle lumx-skeleton-circle--size-xl lumx-skeleton-circle--theme-light"
   />,
   <div
-    className="lumx-spacing-margin lumx-skeleton-circle lumx-skeleton-circle--size-xxl"
+    className="lumx-spacing-margin lumx-skeleton-circle lumx-skeleton-circle--size-xxl lumx-skeleton-circle--theme-light"
   />,
 ]
 `;

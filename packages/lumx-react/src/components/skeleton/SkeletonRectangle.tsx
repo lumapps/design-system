@@ -27,6 +27,7 @@ export interface SkeletonRectangleProps extends GenericProps {
 }
 
 const DEFAULT_PROPS: Partial<SkeletonRectangleProps> = {
+    theme: Theme.light,
     variant: SkeletonRectangleVariant.squared,
 };
 

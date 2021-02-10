@@ -16,6 +16,10 @@ export interface SkeletonTypographyProps extends GenericProps {
     width?: CSSProperties['width'];
 }
 
+const DEFAULT_PROPS: Partial<SkeletonTypographyProps> = {
+    theme: Theme.light,
+};
+
 /**
  * Component display name.
  */
@@ -48,4 +52,5 @@ export const SkeletonTypography: Comp<SkeletonTypographyProps, HTMLDivElement> =
     );
 });
 SkeletonTypography.displayName = COMPONENT_NAME;
+SkeletonTypography.defaultProps = DEFAULT_PROPS;
 SkeletonTypography.className = CLASSNAME;

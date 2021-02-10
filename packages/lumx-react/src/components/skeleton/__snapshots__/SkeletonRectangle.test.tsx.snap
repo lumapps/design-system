@@ -2,7 +2,7 @@
 
 exports[`<SkeletonRectangle> Snapshots and structure should render story 'LoadingThumbnail' 1`] = `
 <div
-  className="lumx-skeleton-rectangle lumx-skeleton-rectangle--aspect-ratio-square lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-xl"
+  className="lumx-skeleton-rectangle lumx-skeleton-rectangle--aspect-ratio-square lumx-skeleton-rectangle--theme-light lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-xl"
 >
   <div
     className="lumx-skeleton-rectangle__inner"
@@ -13,91 +13,91 @@ exports[`<SkeletonRectangle> Snapshots and structure should render story 'Loadin
 exports[`<SkeletonRectangle> Snapshots and structure should render story 'Rectangle' 1`] = `
 Array [
   <div
-    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--height-xxs lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-xxs"
+    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--height-xxs lumx-skeleton-rectangle--theme-light lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-xxs"
   >
     <div
       className="lumx-skeleton-rectangle__inner"
     />
   </div>,
   <div
-    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--height-xs lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-xs"
+    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--height-xs lumx-skeleton-rectangle--theme-light lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-xs"
   >
     <div
       className="lumx-skeleton-rectangle__inner"
     />
   </div>,
   <div
-    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--height-s lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-s"
+    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--height-s lumx-skeleton-rectangle--theme-light lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-s"
   >
     <div
       className="lumx-skeleton-rectangle__inner"
     />
   </div>,
   <div
-    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--height-m lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-m"
+    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--height-m lumx-skeleton-rectangle--theme-light lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-m"
   >
     <div
       className="lumx-skeleton-rectangle__inner"
     />
   </div>,
   <div
-    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--height-l lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-l"
+    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--height-l lumx-skeleton-rectangle--theme-light lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-l"
   >
     <div
       className="lumx-skeleton-rectangle__inner"
     />
   </div>,
   <div
-    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--height-xl lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-xl"
+    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--height-xl lumx-skeleton-rectangle--theme-light lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-xl"
   >
     <div
       className="lumx-skeleton-rectangle__inner"
     />
   </div>,
   <div
-    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--height-xxl lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-xxl"
+    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--height-xxl lumx-skeleton-rectangle--theme-light lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-xxl"
   >
     <div
       className="lumx-skeleton-rectangle__inner"
     />
   </div>,
   <div
-    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--height-m lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-xl"
+    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--height-m lumx-skeleton-rectangle--theme-light lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-xl"
   >
     <div
       className="lumx-skeleton-rectangle__inner"
     />
   </div>,
   <div
-    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--height-m lumx-skeleton-rectangle--variant-rounded lumx-skeleton-rectangle--width-xl"
+    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--height-m lumx-skeleton-rectangle--theme-light lumx-skeleton-rectangle--variant-rounded lumx-skeleton-rectangle--width-xl"
   >
     <div
       className="lumx-skeleton-rectangle__inner"
     />
   </div>,
   <div
-    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--height-m lumx-skeleton-rectangle--variant-pill lumx-skeleton-rectangle--width-xl"
+    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--height-m lumx-skeleton-rectangle--theme-light lumx-skeleton-rectangle--variant-pill lumx-skeleton-rectangle--width-xl"
   >
     <div
       className="lumx-skeleton-rectangle__inner"
     />
   </div>,
   <div
-    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--aspect-ratio-vertical lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-xl"
+    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--aspect-ratio-vertical lumx-skeleton-rectangle--theme-light lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-xl"
   >
     <div
       className="lumx-skeleton-rectangle__inner"
     />
   </div>,
   <div
-    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--aspect-ratio-square lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-xl"
+    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--aspect-ratio-square lumx-skeleton-rectangle--theme-light lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-xl"
   >
     <div
       className="lumx-skeleton-rectangle__inner"
     />
   </div>,
   <div
-    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--aspect-ratio-horizontal lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-xl"
+    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--aspect-ratio-horizontal lumx-skeleton-rectangle--theme-light lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-xl"
   >
     <div
       className="lumx-skeleton-rectangle__inner"

@@ -1,8 +1,8 @@
 import React, {
     forwardRef,
-    HTMLProps,
     ImgHTMLAttributes,
     MouseEventHandler,
+    ReactElement,
     ReactNode,
     Ref,
     useRef,
@@ -34,6 +34,8 @@ export interface ThumbnailProps extends GenericProps {
     alt: string;
     /** Image aspect ratio. */
     aspectRatio?: AspectRatio;
+    /** Badge. */
+    badge?: ReactElement;
     /** Image cross origin resource policy. */
     crossOrigin?: ImgHTMLProps['crossOrigin'];
     /** Fallback icon (SVG path) or react node when image fails to load. */
@@ -91,6 +93,7 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
         align,
         alt,
         aspectRatio,
+        badge,
         className,
         crossOrigin,
         fallback,
@@ -118,7 +121,7 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
         ref: mergeRefs(setWrapper, ref),
         className: classNames(
             className,
-            handleBasicClasses({ align, aspectRatio, prefix: CLASSNAME, size, theme, variant }),
+            handleBasicClasses({ align, aspectRatio, prefix: CLASSNAME, size, theme, variant, hasBadge: !!badge }),
             isLoading && wrapper?.getBoundingClientRect()?.height && 'lumx-color-background-dark-L6',
             fillHeight && `${CLASSNAME}--fill-height`,
         ),
@@ -127,7 +130,7 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
     };
 
     // Update img style according to focus point and aspect ratio.
-    const style = useFocusPoint({ focusPoint, aspectRatio, imgRef, loadingState, wrapper });
+    const style = useFocusPoint({ image, focusPoint, aspectRatio, imgRef, loadingState, wrapper });
 
     return (
         <div {...wrapperProps}>
@@ -161,6 +164,8 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
                 ) : (
                     <div className={`${CLASSNAME}__fallback`}>{fallback}</div>
                 ))}
+            {badge &&
+                React.cloneElement(badge, { className: classNames(`${CLASSNAME}__badge`, badge.props.className) })}
         </div>
     );
 });
