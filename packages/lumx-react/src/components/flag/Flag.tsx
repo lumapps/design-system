@@ -17,10 +17,9 @@ export interface FlagProps extends GenericProps {
 }
 
 const COMPONENT_NAME = 'Flag';
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 const DEFAULT_PROPS: Partial<FlagProps> = {
     theme: Theme.light,
-    color: ColorPalette.primary,
 };
 
 /**
@@ -30,8 +29,10 @@ const DEFAULT_PROPS: Partial<FlagProps> = {
  * @return React element.
  */
 export const Flag: React.FC<FlagProps> = ({ label, icon, color, className, theme }) => {
+    const flagColor = color || (theme === Theme.light ? ColorPalette.dark : ColorPalette.light);
+
     return (
-        <span className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, color }))}>
+        <span className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color: flagColor }))}>
             {icon && <Icon icon={icon} color={color} colorVariant={ColorVariant.D2} className={`${CLASSNAME}__icon`} />}
             {label}
         </span>

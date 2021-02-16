@@ -2,11 +2,11 @@ import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 import React, { ReactElement } from 'react';
 
-import { ColorPalette } from '@lumx/react';
+import { ColorPalette, Theme } from '@lumx/react';
 import { mdiAbTesting } from '@lumx/icons';
 import { Wrapper } from '@lumx/react/testing/utils';
-import { getBasicClass, getRootClassName } from '@lumx/react/utils';
-import { Flag, FlagProps } from './Flag';
+import { getBasicClass } from '@lumx/react/utils';
+import { Flag, FlagProps, CLASSNAME } from './Flag';
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -44,6 +44,28 @@ describe('<Flag />', () => {
             expect(iconEl.prop('icon')).toEqual(mdiAbTesting);
         });
 
+        it('should have correct default color', () => {
+            const { wrapper } = setup({});
+            expect(wrapper).toHaveClassName(
+                getBasicClass({
+                    prefix: CLASSNAME,
+                    type: 'color',
+                    value: ColorPalette.dark,
+                }),
+            );
+        });
+
+        it('should switch color with theme', () => {
+            const { wrapper } = setup({ theme: Theme.dark });
+            expect(wrapper).toHaveClassName(
+                getBasicClass({
+                    prefix: CLASSNAME,
+                    type: 'color',
+                    value: ColorPalette.light,
+                }),
+            );
+        });
+
         it('should use the color', () => {
             const color = ColorPalette.green;
             const { wrapper, iconEl } = setup({ icon: mdiAbTesting, color });
@@ -51,7 +73,7 @@ describe('<Flag />', () => {
             expect(iconEl.prop('color')).toEqual(color);
             expect(wrapper).toHaveClassName(
                 getBasicClass({
-                    prefix: getRootClassName('Flag'),
+                    prefix: CLASSNAME,
                     type: 'color',
                     value: color,
                 }),
