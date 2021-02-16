@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Flag /> Snapshot should render correctly Flag component 1`] = `
+<span
+  className="lumx-flag lumx-flag--theme-light lumx-flag--color-primary"
+>
+  default
+</span>
+`;
