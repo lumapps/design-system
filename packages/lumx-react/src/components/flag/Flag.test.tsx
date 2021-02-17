@@ -4,9 +4,11 @@ import React, { ReactElement } from 'react';
 
 import { ColorPalette, Theme } from '@lumx/react';
 import { mdiAbTesting } from '@lumx/icons';
-import { Wrapper } from '@lumx/react/testing/utils';
+import { itShouldRenderStories, commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
+
 import { Flag, FlagProps, CLASSNAME } from './Flag';
+import * as stories from './Flag.stories';
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -22,17 +24,15 @@ const setup = (propOverrides: Partial<FlagProps> = {}, shallowRendering = true) 
     return {
         props,
         iconEl: wrapper.find('Icon'),
+        flag: wrapper.find('span'),
         wrapper,
     };
 };
 
 describe('<Flag />', () => {
     // 1. Test render via snapshot (default state of component).
-    describe('Snapshot', () => {
-        it('should render correctly Flag component', () => {
-            const { wrapper } = setup();
-            expect(wrapper).toMatchSnapshot();
-        });
+    describe('Snapshots and structure', () => {
+        itShouldRenderStories(stories, Flag);
     });
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
@@ -81,6 +81,6 @@ describe('<Flag />', () => {
         });
     });
 
-    // 5. Test state.
-    // N/A.
+    // Common tests suite.
+    commonTestsSuite(setup, { className: 'flag', prop: 'flag' }, { className: CLASSNAME });
 });

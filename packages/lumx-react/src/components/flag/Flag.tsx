@@ -1,18 +1,17 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import classNames from 'classnames';
 
-import { Theme, ColorPalette, Icon } from '@lumx/react';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
-import { ColorVariant } from '..';
+import { Theme, ColorPalette, Icon, ColorVariant } from '@lumx/react';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 export interface FlagProps extends GenericProps {
     /** Theme adapting the component to light or dark background. */
     theme?: Theme;
-    /** The color of the component */
+    /** Color of the component. */
     color?: ColorPalette;
-    /** icon */
+    /** Icon to use before the label. */
     icon?: string;
-    /** label of the flag */
+    /** Text label of the flag. */
     label: string;
 }
 
@@ -28,15 +27,21 @@ const DEFAULT_PROPS: Partial<FlagProps> = {
  * @param  props Component props.
  * @return React element.
  */
-export const Flag: React.FC<FlagProps> = ({ label, icon, color, className, theme }) => {
+export const Flag: Comp<FlagProps, HTMLSpanElement> = forwardRef((props, ref) => {
+    const { label, icon, color, className, theme, ...forwardedProps } = props;
     const flagColor = color || (theme === Theme.light ? ColorPalette.dark : ColorPalette.light);
 
     return (
-        <span className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color: flagColor }))}>
+        <span
+            {...forwardedProps}
+            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color: flagColor }))}
+            ref={ref}
+        >
             {icon && <Icon icon={icon} color={color} colorVariant={ColorVariant.D2} className={`${CLASSNAME}__icon`} />}
             {label}
         </span>
     );
-};
+});
 Flag.displayName = COMPONENT_NAME;
+Flag.className = CLASSNAME;
 Flag.defaultProps = DEFAULT_PROPS;
