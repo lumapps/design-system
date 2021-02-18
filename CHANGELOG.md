@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   Fixed `TabProvider` & `ProgressTrackerProvider` not calling `onChange` when the index is not provided via the props.
+-   Fixed `Link` default style when in button mode (padding + text align).
 
 ## [1.0.8][] - 2021-02-08
 
