@@ -56,7 +56,7 @@ export const Controlled = ({ theme }: any) => {
 /* Control active tab internally (with activate tab on focus). */
 export const NotControlled = ({ theme }: any) => {
     return (
-        <TabProvider shouldActivateOnFocus>
+        <TabProvider shouldActivateOnFocus onChange={console.log}>
             <TabList theme={theme} aria-label="Tab list">
                 <Tab label="Tab a" />
                 <Tab label="Tab b" />

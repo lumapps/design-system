@@ -116,11 +116,13 @@ export const Controlled = () => {
                                 >
                                     Toggle error
                                 </Button>
-                                {index === steps.length - 1 && step.isComplete ? undefined : (
-                                    <Button onClick={next(index)} color={ColorPalette.primary}>
-                                        {index === steps.length - 1 ? 'Complete' : 'Next with success'}
-                                    </Button>
-                                )}
+                                <Button
+                                    onClick={next(index)}
+                                    color={ColorPalette.primary}
+                                    isDisabled={index === steps.length - 1 && step.isComplete}
+                                >
+                                    {index === steps.length - 1 ? 'Complete' : 'Next with success'}
+                                </Button>
                             </FlexBox>
                         </FlexBox>
                         <FlexBox fillSpace />
@@ -130,3 +132,14 @@ export const Controlled = () => {
         </ProgressTrackerProvider>
     );
 };
+
+export const NotControlled = () => (
+    <ProgressTrackerProvider onChange={console.log}>
+        <ProgressTracker aria-label="Steps with a linear progression">
+            <ProgressTrackerStep label="Step 1" />
+            <ProgressTrackerStep label="Step 2" />
+        </ProgressTracker>
+        <ProgressTrackerStepPanel className="lumx-spacing-padding">Step 1 panel</ProgressTrackerStepPanel>
+        <ProgressTrackerStepPanel className="lumx-spacing-padding">Step 2 panel</ProgressTrackerStepPanel>
+    </ProgressTrackerProvider>
+);

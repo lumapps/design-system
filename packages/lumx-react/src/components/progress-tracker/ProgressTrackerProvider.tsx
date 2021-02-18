@@ -15,9 +15,8 @@ export interface ProgressTrackerProviderProps {
 }
 
 const DEFAULT_PROPS: Partial<ProgressTrackerProviderProps> = {
-    activeStepIndex: 0,
-    isLazy: true,
-    shouldActivateOnFocus: false,
+    isLazy: INIT_STATE.isLazy,
+    shouldActivateOnFocus: INIT_STATE.shouldActivateOnFocus,
 };
 
 /**
@@ -42,7 +41,7 @@ export const ProgressTrackerProvider: React.FC<ProgressTrackerProviderProps> = (
                 type: 'update',
                 payload: {
                     ...propState,
-                    activeTabIndex: propState.activeStepIndex,
+                    activeTabIndex: propState.activeStepIndex || INIT_STATE.activeTabIndex,
                 },
             });
         },
