@@ -29,7 +29,7 @@ const setup = (propOverrides: Partial<FlagProps> = {}, shallowRendering = true) 
     };
 };
 
-describe('<Flag />', () => {
+describe(`<${Flag.displayName} />`, () => {
     // 1. Test render via snapshot (default state of component).
     describe('Snapshots and structure', () => {
         itShouldRenderStories(stories, Flag);

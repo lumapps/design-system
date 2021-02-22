@@ -25,6 +25,7 @@ const DEFAULT_PROPS: Partial<FlagProps> = {
  * Flag component.
  *
  * @param  props Component props.
+ * @param  ref   Component ref.
  * @return React element.
  */
 export const Flag: Comp<FlagProps, HTMLSpanElement> = forwardRef((props, ref) => {
