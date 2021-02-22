@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import classNames from 'classnames';
 
-import { Theme, ColorPalette, Icon, ColorVariant } from '@lumx/react';
+import { ColorPalette, ColorVariant, Icon, Size, Theme } from '@lumx/react';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 export interface FlagProps extends GenericProps {
@@ -28,19 +28,27 @@ const DEFAULT_PROPS: Partial<FlagProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Flag: Comp<FlagProps, HTMLSpanElement> = forwardRef((props, ref) => {
+export const Flag: Comp<FlagProps, HTMLDivElement> = forwardRef((props, ref) => {
     const { label, icon, color, className, theme, ...forwardedProps } = props;
     const flagColor = color || (theme === Theme.light ? ColorPalette.dark : ColorPalette.light);
 
     return (
-        <span
+        <div
             {...forwardedProps}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color: flagColor }))}
             ref={ref}
         >
-            {icon && <Icon icon={icon} color={color} colorVariant={ColorVariant.D2} className={`${CLASSNAME}__icon`} />}
-            {label}
-        </span>
+            {icon && (
+                <Icon
+                    icon={icon}
+                    color={color}
+                    colorVariant={ColorVariant.D2}
+                    size={Size.xxs}
+                    className={`${CLASSNAME}__icon`}
+                />
+            )}
+            <span className={`${CLASSNAME}__label`}>{label}</span>
+        </div>
     );
 });
 Flag.displayName = COMPONENT_NAME;
