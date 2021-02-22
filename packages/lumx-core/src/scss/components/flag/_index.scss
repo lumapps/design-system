@@ -3,26 +3,31 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-flag {
-    $self: &;
-
-    @include lumx-typography('overline');
     display: inline-flex;
+    height: map-get($lumx-sizes, lumx-base-const('size', 'XS'));
     align-items: center;
-    padding: $lumx-spacing-unit-tiny $lumx-spacing-unit-regular;
+    padding: 0 $lumx-spacing-unit;
     margin: 0;
-    border-radius: var(--lumx-chip-size-m-border-radius);
-    outline: none;
-    text-decoration: none;
+    border-radius: map-get($lumx-sizes, lumx-base-const('size', 'XS')) / 2;
 
     &__icon {
         margin-right: $lumx-spacing-unit-tiny;
     }
 
-    @each $key, $color in $lumx-color-palette {
-        &.#{$lumx-base-prefix}-flag--color-#{$key} {
-            border: 2px solid lumx-color-variant($key, 'L4');
-            background-color: transparent;
-            color: lumx-color-variant($key, 'D2');
-        }
+    &__label {
+        @include lumx-typography('overline');
+    }
+}
+
+/* Flag colors
+   ========================================================================== */
+
+@each $key, $color in $lumx-color-palette {
+    .#{$lumx-base-prefix}-flag--color-#{$key} {
+        border: 2px solid lumx-color-variant($key, 'L4');
+    }
+
+    .#{$lumx-base-prefix}-flag--color-#{$key} .#{$lumx-base-prefix}-flag__label {
+        color: lumx-color-variant($key, 'D2');
     }
 }

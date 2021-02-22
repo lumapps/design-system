@@ -1,16 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Flag /> Snapshots and structure should render story 'defaultProps' 1`] = `
-<span
+<div
   className="lumx-flag lumx-flag--color-dark"
 >
-  hearing
-</span>
+  <span
+    className="lumx-flag__label"
+  >
+    hearing
+  </span>
+</div>
 `;
 
 exports[`<Flag /> Snapshots and structure should render story 'withColor' 1`] = `
 Array [
-  <span
+  <div
     className="lumx-flag lumx-flag--color-blue"
   >
     <Icon
@@ -18,10 +22,15 @@ Array [
       color="blue"
       colorVariant="D2"
       icon="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"
+      size="xxs"
     />
-    blue
-  </span>,
-  <span
+    <span
+      className="lumx-flag__label"
+    >
+      blue
+    </span>
+  </div>,
+  <div
     className="lumx-flag lumx-flag--color-dark"
   >
     <Icon
@@ -29,10 +38,15 @@ Array [
       color="dark"
       colorVariant="D2"
       icon="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"
+      size="xxs"
     />
-    dark
-  </span>,
-  <span
+    <span
+      className="lumx-flag__label"
+    >
+      dark
+    </span>
+  </div>,
+  <div
     className="lumx-flag lumx-flag--color-green"
   >
     <Icon
@@ -40,10 +54,15 @@ Array [
       color="green"
       colorVariant="D2"
       icon="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"
+      size="xxs"
     />
-    green
-  </span>,
-  <span
+    <span
+      className="lumx-flag__label"
+    >
+      green
+    </span>
+  </div>,
+  <div
     className="lumx-flag lumx-flag--color-primary"
   >
     <Icon
@@ -51,10 +70,15 @@ Array [
       color="primary"
       colorVariant="D2"
       icon="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"
+      size="xxs"
     />
-    primary
-  </span>,
-  <span
+    <span
+      className="lumx-flag__label"
+    >
+      primary
+    </span>
+  </div>,
+  <div
     className="lumx-flag lumx-flag--color-red"
   >
     <Icon
@@ -62,10 +86,15 @@ Array [
       color="red"
       colorVariant="D2"
       icon="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"
+      size="xxs"
     />
-    red
-  </span>,
-  <span
+    <span
+      className="lumx-flag__label"
+    >
+      red
+    </span>
+  </div>,
+  <div
     className="lumx-flag lumx-flag--color-secondary"
   >
     <Icon
@@ -73,10 +102,15 @@ Array [
       color="secondary"
       colorVariant="D2"
       icon="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"
+      size="xxs"
     />
-    secondary
-  </span>,
-  <span
+    <span
+      className="lumx-flag__label"
+    >
+      secondary
+    </span>
+  </div>,
+  <div
     className="lumx-flag lumx-flag--color-yellow"
   >
     <Icon
@@ -84,21 +118,31 @@ Array [
       color="yellow"
       colorVariant="D2"
       icon="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"
+      size="xxs"
     />
-    yellow
-  </span>,
+    <span
+      className="lumx-flag__label"
+    >
+      yellow
+    </span>
+  </div>,
 ]
 `;
 
 exports[`<Flag /> Snapshots and structure should render story 'withIcon' 1`] = `
-<span
+<div
   className="lumx-flag lumx-flag--color-dark"
 >
   <Icon
     className="lumx-flag__icon"
     colorVariant="D2"
     icon="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"
+    size="xxs"
   />
-  hearing
-</span>
+  <span
+    className="lumx-flag__label"
+  >
+    hearing
+  </span>
+</div>
 `;
