@@ -13,6 +13,7 @@ export * from './components/divider';
 export * from './components/drag-handle';
 export * from './components/dropdown';
 export * from './components/expansion-panel';
+export * from './components/flag';
 export * from './components/flex-box';
 export * from './components/grid';
 export * from './components/icon';

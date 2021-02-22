@@ -1,0 +1,28 @@
+/* ==========================================================================
+   Flag
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-flag {
+    $self: &;
+
+    @include lumx-typography('overline');
+    display: inline-flex;
+    align-items: center;
+    padding: $lumx-spacing-unit-tiny $lumx-spacing-unit-regular;
+    margin: 0;
+    border-radius: var(--lumx-chip-size-m-border-radius);
+    outline: none;
+    text-decoration: none;
+
+    &__icon {
+        margin-right: $lumx-spacing-unit-tiny;
+    }
+
+    @each $key, $color in $lumx-color-palette {
+        &.#{$lumx-base-prefix}-flag--color-#{$key} {
+            border: 2px solid lumx-color-variant($key, 'L4');
+            background-color: transparent;
+            color: lumx-color-variant($key, 'D2');
+        }
+    }
+}
