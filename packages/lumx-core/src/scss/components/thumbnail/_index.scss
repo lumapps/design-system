@@ -5,6 +5,7 @@
 .#{$lumx-base-prefix}-thumbnail {
     $self: &;
 
+    position: relative;
     flex-shrink: 0;
     padding: 0;
     border: none;
@@ -72,6 +73,12 @@
         /* Center fallback icon when using fill-height prop */
         margin: 0 auto;
     }
+
+    &__badge {
+        position: absolute;
+        right: -$lumx-spacing-unit / 2;
+        bottom: -$lumx-spacing-unit / 2;
+    }
 }
 
 /* Thumbnail sizes
@@ -136,5 +143,24 @@
 .#{$lumx-base-prefix}-thumbnail--theme-dark.#{$lumx-base-prefix}-thumbnail[tabindex='0'] {
     &[data-focus-visible-added]::after {
         @include lumx-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('emphasis', 'LOW'), 'light');
+    }
+}
+
+/* Thumbnail badge mask
+   ========================================================================== */
+
+@each $key, $size in $lumx-sizes {
+    $mask-size: map-get($lumx-sizes, lumx-base-const('size', 'XS')) - $lumx-spacing-unit;
+    $mask-offset: $size - 6;
+
+    .#{$lumx-base-prefix}-thumbnail--has-badge.#{$lumx-base-prefix}-thumbnail--size-#{$key} {
+        .#{$lumx-base-prefix}-thumbnail__background,
+        .#{$lumx-base-prefix}-thumbnail__fallback {
+            mask-image: radial-gradient(
+                circle at $mask-offset $mask-offset,
+                transparent $mask-size,
+                /* offset circle size (+1) to soften the edge */ black $mask-size + 1
+            );
+        }
     }
 }

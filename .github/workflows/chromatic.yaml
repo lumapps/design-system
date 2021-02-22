@@ -14,12 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout repository"
-        uses: actions/checkout@5a4ac90 #v2.3.4
+        uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f #v2.3.4
         with:
           fetch-depth: 0 # Required to retrieve git history
 
       - name: "Setup node env"
-        uses: actions/setup-node@c6fd00c #v2.1.2
+        uses: actions/setup-node@c6fd00ceb9747fb23ffdf72987450a2664414867 #v2.1.2
         with:
             node-version: '13.7.0'
 
@@ -28,7 +28,7 @@ jobs:
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
       - name: "Dependency cache"
-        uses: actions/cache@0781355 #v2.1.3
+        uses: actions/cache@26968a09c0ea4f3e233fdddbafd1166051a095f6 #v2.1.4
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
@@ -39,7 +39,7 @@ jobs:
         run: yarn install --frozen-lockfile --ignore-optional
 
       - name: "Deploy chromatic"
-        uses: chromaui/action@e649c93 #v1
+        uses: chromaui/action@e649c933d14575142ba0c25a806807752c60dad5 #v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           projectToken: ${{ secrets.CHROMATIC_TOKEN }}
