@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.9][] - 2021-02-22
+
 ### Fixed
 
 -   Fixed `TabProvider` & `ProgressTrackerProvider` not calling `onChange` when the index is not provided via the props.
@@ -1022,3 +1024,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.0.7]: https://github.com/lumapps/design-system/tree/v1.0.7
 [unreleased]: https://github.com/lumapps/design-system/compare/v1.0.8...HEAD
 [1.0.8]: https://github.com/lumapps/design-system/tree/v1.0.8
+[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.9...HEAD
+[1.0.9]: https://github.com/lumapps/design-system/tree/v1.0.9

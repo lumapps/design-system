@@ -1,6 +1,6 @@
 {
     "name": "lumx-site-demo",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "private": true,
     "description": "The official LumApps Design System (LumX) demo site",
     "bugs": {
@@ -20,10 +20,10 @@
         "start": "NODE_OPTIONS=--no-warnings gatsby develop"
     },
     "dependencies": {
-        "@lumx/angularjs": "^1.0.8",
-        "@lumx/core": "^1.0.8",
-        "@lumx/icons": "^1.0.8",
-        "@lumx/react": "^1.0.8",
+        "@lumx/angularjs": "^1.0.9",
+        "@lumx/core": "^1.0.9",
+        "@lumx/icons": "^1.0.9",
+        "@lumx/react": "^1.0.9",
         "@mdx-js/mdx": "^1.6.19",
         "@mdx-js/react": "^1.6.19",
         "@reach/router": "^1.2.1",
