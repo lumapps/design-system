@@ -47,7 +47,7 @@
     --lumx-text-field-state-focus-border-bottom-width: 2px;
     --lumx-text-field-state-focus-border-left-width: 0;
     --lumx-text-field-state-focus-theme-light-background-color: transparent;
-    --lumx-text-field-state-focus-theme-light-border-color: #2196f3;
+    --lumx-text-field-state-focus-theme-light-border-color: var(--lumx-color-primary-N);
     --lumx-text-field-state-focus-theme-dark-background-color: transparent;
     --lumx-text-field-state-focus-theme-dark-border-color: #ffffff;
     --lumx-text-field-input-font-size: 16px;
