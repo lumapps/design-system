@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { mdiChevronDown, mdiLink } from '@lumx/icons';
 import { ColorPalette, ColorVariant, Link, Typography } from '@lumx/react';
 import { boolean, select, text } from '@storybook/addon-knobs';
@@ -41,8 +42,12 @@ export const SimpleLink = () => (
     </>
 );
 
-// eslint-disable-next-line jsx-a11y/anchor-is-valid
-export const WithoutHref = () => <Link onClick={onClick}>Link without redirection</Link>;
+export const WithoutHref = () => (
+    // The constrained width should show that the button does not have centered text align.
+    <div style={{ border: '1px solid red', width: 100, height: 100, resize: 'both', overflow: 'auto' }}>
+        <Link onClick={onClick}>Link without href (renders as a button for a11y)</Link>
+    </div>
+);
 
 const CustomLink: React.FC = ({ children, ...props }) =>
     React.createElement('a', { ...props, style: { color: 'red' } }, children);

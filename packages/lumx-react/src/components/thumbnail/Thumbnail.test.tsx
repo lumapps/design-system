@@ -5,7 +5,7 @@ import 'jest-enzyme';
 import { commonTestsSuite, itShouldRenderStories } from '@lumx/react/testing/utils';
 
 import { Thumbnail, ThumbnailProps } from './Thumbnail';
-import { Clickable, CustomFallback, Default, DefaultFallback, IconFallback } from './Thumbnail.stories';
+import { Clickable, CustomFallback, Default, DefaultFallback, IconFallback, WithBadge } from './Thumbnail.stories';
 
 const CLASSNAME = Thumbnail.className as string;
 
@@ -21,7 +21,10 @@ const setup = (props: Partial<ThumbnailProps> = {}, shallowRendering = true) => 
 describe(`<${Thumbnail.displayName}>`, () => {
     // 1. Test render via snapshot.
     describe('Snapshots and structure', () => {
-        itShouldRenderStories({ Default, Clickable, DefaultFallback, CustomFallback, IconFallback }, Thumbnail);
+        itShouldRenderStories(
+            { Default, Clickable, DefaultFallback, CustomFallback, IconFallback, WithBadge },
+            Thumbnail,
+        );
     });
 
     // Common tests suite.

@@ -13,6 +13,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   New lumapps theme applied by default
     -   Old Material theme applicable using variables in `css/material.css`
 
+## [1.0.9][] - 2021-02-22
+
+### Fixed
+
+-   Fixed `TabProvider` & `ProgressTrackerProvider` not calling `onChange` when the index is not provided via the props.
+-   Fixed `Link` default style when in button mode (padding + text align).
+
+### Added
+
+-   New component in React: `Flag`
+
+## [1.0.8][] - 2021-02-08
+
+### Added
+
+-   Added `light` theme by default on Skeleton components.
+-   Added `badge` prop on `Thumbnail` component.
+
 ## [1.0.7][] - 2021-02-03
 
 ### Fixed

@@ -108,13 +108,14 @@ function calculateImageStyle(sizes: Sizes, point: Required<FocusPoint>): Styles 
  * Hook that calculate CSS style to shift the image in it's container according to the focus point.
  */
 export const useFocusPoint = (options: {
+    image: string;
     focusPoint?: FocusPoint;
     aspectRatio?: AspectRatio;
     imgRef: RefObject<HTMLImageElement>;
     loadingState: LoadingState;
     wrapper?: HTMLElement;
 }): Styles | undefined => {
-    const { aspectRatio, focusPoint, imgRef, loadingState, wrapper } = options;
+    const { image, aspectRatio, focusPoint, imgRef, loadingState, wrapper } = options;
 
     const point = parseFocusPoint(focusPoint);
 
@@ -144,7 +145,7 @@ export const useFocusPoint = (options: {
     );
 
     // Update on image loaded.
-    useLayoutEffect(update, [update, loadingState]);
+    useLayoutEffect(update, [image, update, loadingState]);
 
     // Update on parent resize.
     useOnResize(wrapper, updateRef);
