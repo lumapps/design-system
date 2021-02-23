@@ -1,13 +1,12 @@
-import React, { forwardRef, ReactNode, SyntheticEvent } from 'react';
+import React, { useMemo, forwardRef, ReactNode, SyntheticEvent } from 'react';
 
 import classNames from 'classnames';
+import { uid } from 'uid';
 
 import { mdiCheck } from '@lumx/icons';
 
 import { Icon, InputHelper, InputLabel, Theme } from '@lumx/react';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
-
-import uniqueId from 'lodash/uniqueId';
 
 /**
  * Defines the props of the component.
@@ -73,7 +72,8 @@ export const Checkbox: Comp<CheckboxProps, HTMLDivElement> = forwardRef((props, 
         value,
         ...forwardedProps
     } = props;
-    const inputId = id || uniqueId(`${CLASSNAME.toLowerCase()}-`);
+    const inputId = useMemo(() => id || `${CLASSNAME.toLowerCase()}-${uid()}`, [id]);
+
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (onChange) {
             onChange(!isChecked, value, name, event);
