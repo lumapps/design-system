@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   Cleanup `Flag` makup and styles
+
 ## [1.0.9][] - 2021-02-22
 
 ### Fixed
