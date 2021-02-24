@@ -7,9 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Make `TableRow` component's `tabIndex` controllable
+
 ### Changed
 
 -   Cleanup `Flag` makup and styles
+-   Use `uid` instead of `uniqueid` for `Checkbox` default id.
+-   Use `uid` instead of `uniqueid` for `RadioButton` default id.
 
 ## [1.0.9][] - 2021-02-22
 
