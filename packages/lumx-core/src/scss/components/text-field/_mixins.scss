@@ -1,7 +1,7 @@
 @mixin lumx-text-field-label() {
     font-size: var(--lumx-text-field-label-font-size);
     font-weight: var(--lumx-text-field-label-font-weight);
-    line-height: var(--lumx-text-field-label-font-size);
+    line-height: var(--lumx-text-field-label-line-height);
 }
 
 @mixin lumx-text-field-wrapper($theme) {
