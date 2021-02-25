@@ -2,7 +2,7 @@ import React, { forwardRef, ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
-import { Size, Theme, Thumbnail, ThumbnailProps } from '@lumx/react';
+import { AspectRatio, Size, Theme, Thumbnail, ThumbnailProps } from '@lumx/react';
 
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
@@ -47,6 +47,9 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
 const DEFAULT_PROPS: Partial<AvatarProps> = {
     size: Size.m,
     theme: Theme.light,
+    thumbnailProps: {
+        aspectRatio: AspectRatio.square,
+    },
 };
 
 /**

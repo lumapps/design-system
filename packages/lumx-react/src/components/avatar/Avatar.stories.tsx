@@ -1,6 +1,6 @@
 import { mdiDelete, mdiEye, mdiPencil, mdiStar } from '@lumx/icons';
 import { AvatarSize, Badge, ColorPalette, Emphasis, Icon, IconButton, Size } from '@lumx/react';
-import { AVATAR_IMAGES, avatarImageKnob } from '@lumx/react/stories/knobs';
+import { AVATAR_IMAGES, avatarImageKnob, PORTRAIT_IMAGES } from '@lumx/react/stories/knobs';
 import { select } from '@storybook/addon-knobs';
 import React from 'react';
 
@@ -87,6 +87,17 @@ export const AvatarWithBadge = () =>
                     <Icon icon={mdiStar} />
                 </Badge>
             }
+            size={size}
+        />
+    ));
+
+export const AvatarWithRectangularImage = () =>
+    AVATAR_SIZES.map((size) => (
+        <Avatar
+            key={size}
+            className="lumx-spacing-margin-bottom"
+            image={PORTRAIT_IMAGES.portrait3}
+            alt={size}
             size={size}
         />
     ));
