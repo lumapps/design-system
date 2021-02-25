@@ -6,8 +6,8 @@
         "url": "https://github.com/lumapps/design-system/issues"
     },
     "dependencies": {
-        "@lumx/core": "^1.0.9",
-        "@lumx/icons": "^1.0.9",
+        "@lumx/core": "^1.0.10",
+        "@lumx/icons": "^1.0.10",
         "focus-visible": "^5.0.2",
         "lodash": "4.17.19",
         "popper.js": "^1.16.0"
@@ -40,7 +40,7 @@
         "prepare": "install-peers || exit 0",
         "prepublishOnly": "yarn build"
     },
-    "version": "1.0.9",
+    "version": "1.0.10",
     "devDependencies": {
         "@babel/core": "^7.8.3",
         "@babel/plugin-proposal-class-properties": "^7.8.3",

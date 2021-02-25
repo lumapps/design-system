@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.10][] - 2021-02-25
+
 ### Fixed
 
 -   Make `TableRow` component's `tabIndex` controllable.
@@ -1038,3 +1040,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.0.8]: https://github.com/lumapps/design-system/tree/v1.0.8
 [unreleased]: https://github.com/lumapps/design-system/compare/v1.0.9...HEAD
 [1.0.9]: https://github.com/lumapps/design-system/tree/v1.0.9
+[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.10...HEAD
+[1.0.10]: https://github.com/lumapps/design-system/tree/v1.0.10
