@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
--   Make `TableRow` component's `tabIndex` controllable
+-   Make `TableRow` component's `tabIndex` controllable.
+-   Allow `typography` to be overriden.
 
 ### Changed
 
