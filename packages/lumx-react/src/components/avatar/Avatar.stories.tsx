@@ -101,3 +101,15 @@ export const AvatarWithRectangularImage = () =>
             size={size}
         />
     ));
+
+export const AvatarClickable = () =>
+    AVATAR_SIZES.map((size) => (
+        <Avatar
+            key={size}
+            className="lumx-spacing-margin-bottom"
+            image={AVATAR_IMAGES.avatar2}
+            alt={size}
+            size={size}
+            onClick={() => alert('clicked on avatar')}
+        />
+    ));
