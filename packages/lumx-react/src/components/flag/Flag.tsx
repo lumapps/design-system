@@ -16,7 +16,7 @@ export interface FlagProps extends GenericProps {
 }
 
 const COMPONENT_NAME = 'Flag';
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 const DEFAULT_PROPS: Partial<FlagProps> = {
     theme: Theme.light,
 };

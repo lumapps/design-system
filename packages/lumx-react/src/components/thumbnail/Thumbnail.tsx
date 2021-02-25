@@ -1,6 +1,7 @@
 import React, {
     forwardRef,
     ImgHTMLAttributes,
+    KeyboardEventHandler,
     MouseEventHandler,
     ReactElement,
     ReactNode,
@@ -50,12 +51,14 @@ export interface ThumbnailProps extends GenericProps {
     imgProps?: ImgHTMLProps;
     /** Reference to the native <img> element. */
     imgRef?: Ref<HTMLImageElement>;
-    /** Callback on mouse click. */
-    onClick?: MouseEventHandler;
     /** Size variant of the component. */
     size?: ThumbnailSize;
     /** Image loading mode. */
     loading?: ImgHTMLProps['loading'];
+    /** On click callback. */
+    onClick?: MouseEventHandler<HTMLDivElement>;
+    /** On key press callback. */
+    onKeyPress?: KeyboardEventHandler<HTMLDivElement>;
     /** Theme adapting the component to light or dark background. */
     theme?: Theme;
     /** Variant of the component. */

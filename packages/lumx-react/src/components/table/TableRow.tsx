@@ -44,6 +44,7 @@ export const TableRow: Comp<TableRowProps, HTMLTableRowElement> = forwardRef((pr
     return (
         <tr
             ref={ref}
+            tabIndex={isClickable && !isDisabled ? 0 : -1}
             {...forwardedProps}
             className={classNames(
                 className,
@@ -54,7 +55,6 @@ export const TableRow: Comp<TableRowProps, HTMLTableRowElement> = forwardRef((pr
                     prefix: CLASSNAME,
                 }),
             )}
-            tabIndex={isClickable && !isDisabled ? 0 : -1}
             aria-disabled={isDisabled}
         >
             {children}

@@ -9,7 +9,7 @@ exports[`<Checkbox> Props should use the given props 1`] = `
   >
     <input
       className="lumx-checkbox__input-native"
-      id="lumx-checkbox-3"
+      id="fixedId"
       onChange={[Function]}
       tabIndex={0}
       type="checkbox"
@@ -34,7 +34,7 @@ exports[`<Checkbox> Props should use the given props 1`] = `
   >
     <InputLabel
       className="lumx-checkbox__label"
-      htmlFor="lumx-checkbox-3"
+      htmlFor="fixedId"
       theme="light"
     >
       Test label
@@ -59,7 +59,7 @@ exports[`<Checkbox> Snapshots and structure should render correctly 1`] = `
   >
     <input
       className="lumx-checkbox__input-native"
-      id="lumx-checkbox-1"
+      id="fixedId"
       onChange={[Function]}
       tabIndex={0}
       type="checkbox"

@@ -4,15 +4,12 @@
 
 .#{$lumx-base-prefix}-avatar {
     position: relative;
+    overflow: hidden;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 50%;
     outline: none;
-
-    .#{$lumx-base-prefix}-thumbnail__image {
-        border-radius: 50%;
-    }
 
     &__actions {
         position: absolute;
@@ -36,50 +33,5 @@
     .#{$lumx-base-prefix}-avatar--size-#{$key} {
         width: $size;
         height: $size;
-
-        .#{$lumx-base-prefix}-thumbnail__image {
-            width: $size;
-            height: $size;
-        }
-    }
-}
-
-/* Avatar states
-   ========================================================================== */
-
-.#{$lumx-base-prefix}-avatar[tabindex='0'] {
-    cursor: pointer;
-
-    &::after {
-        @include lumx-state-transition;
-
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        border-radius: 50%;
-        content: '';
-        pointer-events: none;
-    }
-
-    &:hover::after {
-        @include lumx-state(lumx-base-const('state', 'HOVER'), lumx-base-const('emphasis', 'LOW'), 'dark');
-    }
-
-    &:active::after {
-        @include lumx-state(lumx-base-const('state', 'ACTIVE'), lumx-base-const('emphasis', 'LOW'), 'dark');
-    }
-}
-
-.#{$lumx-base-prefix}-avatar--theme-light.#{$lumx-base-prefix}-avatar[tabindex='0'] {
-    &[data-focus-visible-added]::after {
-        @include lumx-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('emphasis', 'LOW'), 'dark');
-    }
-}
-
-.#{$lumx-base-prefix}-avatar--theme-dark.#{$lumx-base-prefix}-avatar[tabindex='0'] {
-    &[data-focus-visible-added]::after {
-        @include lumx-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('emphasis', 'LOW'), 'light');
     }
 }
