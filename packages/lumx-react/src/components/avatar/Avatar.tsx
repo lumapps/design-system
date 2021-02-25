@@ -68,7 +68,7 @@ export const Avatar: Comp<AvatarProps, HTMLDivElement> = forwardRef((props, ref)
             {...forwardedProps}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, size, theme }))}
         >
-            <Thumbnail {...thumbnailProps} image={image} alt={alt} />
+            <Thumbnail {...thumbnailProps} size={size} image={image} alt={alt} />
             {actions && <div className={`${CLASSNAME}__actions`}>{actions}</div>}
             {badge && <div className={`${CLASSNAME}__badge`}>{badge}</div>}
         </div>
