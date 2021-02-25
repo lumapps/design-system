@@ -1,8 +1,8 @@
-import React, { forwardRef, ReactElement, ReactNode } from 'react';
+import React, { forwardRef, KeyboardEventHandler, MouseEventHandler, ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
-import { Size, Theme, Thumbnail, ThumbnailProps } from '@lumx/react';
+import { AspectRatio, Size, Theme, Thumbnail, ThumbnailProps } from '@lumx/react';
 
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
@@ -23,12 +23,19 @@ export interface AvatarProps extends GenericProps {
     badge?: ReactElement;
     /** Image URL. */
     image: string;
+    /** On click callback. */
+    onClick?: MouseEventHandler<HTMLDivElement>;
+    /** On key press callback. */
+    onKeyPress?: KeyboardEventHandler<HTMLDivElement>;
     /** Size variant. */
     size?: AvatarSize;
     /** Theme adapting the component to light or dark background. */
     theme?: Theme;
     /** Props to pass to the thumbnail (minus those already set by the Avatar props). */
-    thumbnailProps?: Omit<ThumbnailProps, 'image' | 'alt' | 'size' | 'theme' | 'align' | 'fillHeight' | 'variant'>;
+    thumbnailProps?: Omit<
+        ThumbnailProps,
+        'image' | 'alt' | 'size' | 'theme' | 'align' | 'fillHeight' | 'variant' | 'aspectRatio'
+    >;
 }
 
 /**
@@ -57,7 +64,19 @@ const DEFAULT_PROPS: Partial<AvatarProps> = {
  * @return React element.
  */
 export const Avatar: Comp<AvatarProps, HTMLDivElement> = forwardRef((props, ref) => {
-    const { actions, alt, badge, className, image, size, theme, thumbnailProps, ...forwardedProps } = props;
+    const {
+        actions,
+        alt,
+        badge,
+        className,
+        image,
+        onClick,
+        onKeyPress,
+        size,
+        theme,
+        thumbnailProps,
+        ...forwardedProps
+    } = props;
 
     return (
         <div
@@ -65,7 +84,15 @@ export const Avatar: Comp<AvatarProps, HTMLDivElement> = forwardRef((props, ref)
             {...forwardedProps}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, size, theme }))}
         >
-            <Thumbnail {...thumbnailProps} image={image} alt={alt} />
+            <Thumbnail
+                onClick={onClick}
+                onKeyPress={onKeyPress}
+                {...thumbnailProps}
+                aspectRatio={AspectRatio.square}
+                size={size}
+                image={image}
+                alt={alt}
+            />
             {actions && <div className={`${CLASSNAME}__actions`}>{actions}</div>}
             {badge && <div className={`${CLASSNAME}__badge`}>{badge}</div>}
         </div>

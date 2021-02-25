@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Make `TableRow` component's `tabIndex` controllable.
 -   Allow `typography` to be overriden.
+-   `Thumbnail` aspect ratio for `Avatar` is now fixed to `square`. This is not a breaking change since the style has been modified to result in the same render as before. This modification prevents rectangular avatars to have a broken ratio.
 
 ### Changed
 
