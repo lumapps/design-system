@@ -1,15 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Avatar> Snapshots and structure should render story 'AvatarSizes' 1`] = `
+exports[`<Avatar> Snapshots and structure should render story 'AvatarClickable' 1`] = `
 Array [
   <div
     className="lumx-spacing-margin-bottom lumx-avatar lumx-avatar--size-xs lumx-avatar--theme-light"
   >
     <Thumbnail
       alt="xs"
+      aspectRatio="square"
       fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
-      image="avatar1.jpg"
+      image="avatar2.jpg"
       loading="lazy"
+      onClick={[Function]}
+      size="xs"
       theme="light"
     />
   </div>,
@@ -18,9 +21,12 @@ Array [
   >
     <Thumbnail
       alt="s"
+      aspectRatio="square"
       fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
-      image="avatar1.jpg"
+      image="avatar2.jpg"
       loading="lazy"
+      onClick={[Function]}
+      size="s"
       theme="light"
     />
   </div>,
@@ -29,9 +35,12 @@ Array [
   >
     <Thumbnail
       alt="m"
+      aspectRatio="square"
       fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
-      image="avatar1.jpg"
+      image="avatar2.jpg"
       loading="lazy"
+      onClick={[Function]}
+      size="m"
       theme="light"
     />
   </div>,
@@ -40,9 +49,12 @@ Array [
   >
     <Thumbnail
       alt="l"
+      aspectRatio="square"
       fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
-      image="avatar1.jpg"
+      image="avatar2.jpg"
       loading="lazy"
+      onClick={[Function]}
+      size="l"
       theme="light"
     />
   </div>,
@@ -51,9 +63,12 @@ Array [
   >
     <Thumbnail
       alt="xl"
+      aspectRatio="square"
       fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
-      image="avatar1.jpg"
+      image="avatar2.jpg"
       loading="lazy"
+      onClick={[Function]}
+      size="xl"
       theme="light"
     />
   </div>,
@@ -62,9 +77,95 @@ Array [
   >
     <Thumbnail
       alt="xxl"
+      aspectRatio="square"
+      fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
+      image="avatar2.jpg"
+      loading="lazy"
+      onClick={[Function]}
+      size="xxl"
+      theme="light"
+    />
+  </div>,
+]
+`;
+
+exports[`<Avatar> Snapshots and structure should render story 'AvatarSizes' 1`] = `
+Array [
+  <div
+    className="lumx-spacing-margin-bottom lumx-avatar lumx-avatar--size-xs lumx-avatar--theme-light"
+  >
+    <Thumbnail
+      alt="xs"
+      aspectRatio="square"
       fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
       image="avatar1.jpg"
       loading="lazy"
+      size="xs"
+      theme="light"
+    />
+  </div>,
+  <div
+    className="lumx-spacing-margin-bottom lumx-avatar lumx-avatar--size-s lumx-avatar--theme-light"
+  >
+    <Thumbnail
+      alt="s"
+      aspectRatio="square"
+      fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
+      image="avatar1.jpg"
+      loading="lazy"
+      size="s"
+      theme="light"
+    />
+  </div>,
+  <div
+    className="lumx-spacing-margin-bottom lumx-avatar lumx-avatar--size-m lumx-avatar--theme-light"
+  >
+    <Thumbnail
+      alt="m"
+      aspectRatio="square"
+      fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
+      image="avatar1.jpg"
+      loading="lazy"
+      size="m"
+      theme="light"
+    />
+  </div>,
+  <div
+    className="lumx-spacing-margin-bottom lumx-avatar lumx-avatar--size-l lumx-avatar--theme-light"
+  >
+    <Thumbnail
+      alt="l"
+      aspectRatio="square"
+      fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
+      image="avatar1.jpg"
+      loading="lazy"
+      size="l"
+      theme="light"
+    />
+  </div>,
+  <div
+    className="lumx-spacing-margin-bottom lumx-avatar lumx-avatar--size-xl lumx-avatar--theme-light"
+  >
+    <Thumbnail
+      alt="xl"
+      aspectRatio="square"
+      fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
+      image="avatar1.jpg"
+      loading="lazy"
+      size="xl"
+      theme="light"
+    />
+  </div>,
+  <div
+    className="lumx-spacing-margin-bottom lumx-avatar lumx-avatar--size-xxl lumx-avatar--theme-light"
+  >
+    <Thumbnail
+      alt="xxl"
+      aspectRatio="square"
+      fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
+      image="avatar1.jpg"
+      loading="lazy"
+      size="xxl"
       theme="light"
     />
   </div>,
@@ -78,9 +179,11 @@ Array [
   >
     <Thumbnail
       alt="xs"
+      aspectRatio="square"
       fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
       image="avatar2.jpg"
       loading="lazy"
+      size="xs"
       theme="light"
     />
     <div
@@ -139,9 +242,11 @@ Array [
   >
     <Thumbnail
       alt="s"
+      aspectRatio="square"
       fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
       image="avatar2.jpg"
       loading="lazy"
+      size="s"
       theme="light"
     />
     <div
@@ -200,9 +305,11 @@ Array [
   >
     <Thumbnail
       alt="m"
+      aspectRatio="square"
       fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
       image="avatar2.jpg"
       loading="lazy"
+      size="m"
       theme="light"
     />
     <div
@@ -261,9 +368,11 @@ Array [
   >
     <Thumbnail
       alt="l"
+      aspectRatio="square"
       fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
       image="avatar2.jpg"
       loading="lazy"
+      size="l"
       theme="light"
     />
     <div
@@ -322,9 +431,11 @@ Array [
   >
     <Thumbnail
       alt="xl"
+      aspectRatio="square"
       fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
       image="avatar2.jpg"
       loading="lazy"
+      size="xl"
       theme="light"
     />
     <div
@@ -383,9 +494,11 @@ Array [
   >
     <Thumbnail
       alt="xxl"
+      aspectRatio="square"
       fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
       image="avatar2.jpg"
       loading="lazy"
+      size="xxl"
       theme="light"
     />
     <div
@@ -449,9 +562,11 @@ Array [
   >
     <Thumbnail
       alt="xs"
+      aspectRatio="square"
       fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
       image="avatar3.jpg"
       loading="lazy"
+      size="xs"
       theme="light"
     />
     <div
@@ -471,9 +586,11 @@ Array [
   >
     <Thumbnail
       alt="s"
+      aspectRatio="square"
       fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
       image="avatar3.jpg"
       loading="lazy"
+      size="s"
       theme="light"
     />
     <div
@@ -493,9 +610,11 @@ Array [
   >
     <Thumbnail
       alt="m"
+      aspectRatio="square"
       fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
       image="avatar3.jpg"
       loading="lazy"
+      size="m"
       theme="light"
     />
     <div
@@ -515,9 +634,11 @@ Array [
   >
     <Thumbnail
       alt="l"
+      aspectRatio="square"
       fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
       image="avatar3.jpg"
       loading="lazy"
+      size="l"
       theme="light"
     />
     <div
@@ -537,9 +658,11 @@ Array [
   >
     <Thumbnail
       alt="xl"
+      aspectRatio="square"
       fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
       image="avatar3.jpg"
       loading="lazy"
+      size="xl"
       theme="light"
     />
     <div
@@ -559,9 +682,11 @@ Array [
   >
     <Thumbnail
       alt="xxl"
+      aspectRatio="square"
       fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
       image="avatar3.jpg"
       loading="lazy"
+      size="xxl"
       theme="light"
     />
     <div
@@ -575,6 +700,89 @@ Array [
         />
       </Badge>
     </div>
+  </div>,
+]
+`;
+
+exports[`<Avatar> Snapshots and structure should render story 'AvatarWithRectangularImage' 1`] = `
+Array [
+  <div
+    className="lumx-spacing-margin-bottom lumx-avatar lumx-avatar--size-xs lumx-avatar--theme-light"
+  >
+    <Thumbnail
+      alt="xs"
+      aspectRatio="square"
+      fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
+      image="portrait3.jpg"
+      loading="lazy"
+      size="xs"
+      theme="light"
+    />
+  </div>,
+  <div
+    className="lumx-spacing-margin-bottom lumx-avatar lumx-avatar--size-s lumx-avatar--theme-light"
+  >
+    <Thumbnail
+      alt="s"
+      aspectRatio="square"
+      fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
+      image="portrait3.jpg"
+      loading="lazy"
+      size="s"
+      theme="light"
+    />
+  </div>,
+  <div
+    className="lumx-spacing-margin-bottom lumx-avatar lumx-avatar--size-m lumx-avatar--theme-light"
+  >
+    <Thumbnail
+      alt="m"
+      aspectRatio="square"
+      fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
+      image="portrait3.jpg"
+      loading="lazy"
+      size="m"
+      theme="light"
+    />
+  </div>,
+  <div
+    className="lumx-spacing-margin-bottom lumx-avatar lumx-avatar--size-l lumx-avatar--theme-light"
+  >
+    <Thumbnail
+      alt="l"
+      aspectRatio="square"
+      fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
+      image="portrait3.jpg"
+      loading="lazy"
+      size="l"
+      theme="light"
+    />
+  </div>,
+  <div
+    className="lumx-spacing-margin-bottom lumx-avatar lumx-avatar--size-xl lumx-avatar--theme-light"
+  >
+    <Thumbnail
+      alt="xl"
+      aspectRatio="square"
+      fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
+      image="portrait3.jpg"
+      loading="lazy"
+      size="xl"
+      theme="light"
+    />
+  </div>,
+  <div
+    className="lumx-spacing-margin-bottom lumx-avatar lumx-avatar--size-xxl lumx-avatar--theme-light"
+  >
+    <Thumbnail
+      alt="xxl"
+      aspectRatio="square"
+      fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
+      image="portrait3.jpg"
+      loading="lazy"
+      size="xxl"
+      theme="light"
+    />
   </div>,
 ]
 `;

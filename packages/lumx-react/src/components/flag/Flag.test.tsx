@@ -7,8 +7,10 @@ import { mdiAbTesting } from '@lumx/icons';
 import { itShouldRenderStories, commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
-import { Flag, FlagProps, CLASSNAME } from './Flag';
+import { Flag, FlagProps } from './Flag';
 import * as stories from './Flag.stories';
+
+const CLASSNAME = Flag.className as string;
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -24,7 +26,6 @@ const setup = (propOverrides: Partial<FlagProps> = {}, shallowRendering = true) 
     return {
         props,
         iconEl: wrapper.find('Icon'),
-        flag: wrapper.find('span'),
         wrapper,
     };
 };
@@ -82,5 +83,5 @@ describe(`<${Flag.displayName} />`, () => {
     });
 
     // Common tests suite.
-    commonTestsSuite(setup, { className: 'flag', prop: 'flag' }, { className: CLASSNAME });
+    commonTestsSuite(setup, { className: 'wrapper', prop: 'wrapper' }, { className: CLASSNAME });
 });

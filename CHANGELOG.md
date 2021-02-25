@@ -13,6 +13,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   New lumapps theme applied by default
     -   Old Material theme applicable using variables in `css/material.css`
 
+## [1.0.10][] - 2021-02-25
+
+### Fixed
+
+-   Make `TableRow` component's `tabIndex` controllable.
+-   Allow `typography` to be overriden.
+-   `Thumbnail` aspect ratio for `Avatar` is now fixed to `square`. This is not a breaking change since the style has been modified to result in the same render as before. This modification prevents rectangular avatars to have a broken ratio.
+
+### Changed
+
+-   Cleanup `Flag` makup and styles
+-   Use `uid` instead of `uniqueid` for `Checkbox` default id.
+-   Use `uid` instead of `uniqueid` for `RadioButton` default id.
+
 ## [1.0.9][] - 2021-02-22
 
 ### Fixed
@@ -1028,3 +1042,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.0.6]: https://github.com/lumapps/design-system/tree/v1.0.6
 [unreleased]: https://github.com/lumapps/design-system/compare/v1.0.7...HEAD
 [1.0.7]: https://github.com/lumapps/design-system/tree/v1.0.7
+[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.8...HEAD
+[1.0.8]: https://github.com/lumapps/design-system/tree/v1.0.8
+[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.9...HEAD
+[1.0.9]: https://github.com/lumapps/design-system/tree/v1.0.9
+[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.10...HEAD
+[1.0.10]: https://github.com/lumapps/design-system/tree/v1.0.10

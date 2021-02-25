@@ -16,7 +16,7 @@ type SetupProps = Partial<CheckboxProps>;
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
 const setup = (propsOverride: SetupProps = {}, shallowRendering = true) => {
-    const props: any = { ...propsOverride };
+    const props: any = { id: 'fixedId', ...propsOverride };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
     const wrapper: Wrapper = renderer(<Checkbox {...props} />);
 

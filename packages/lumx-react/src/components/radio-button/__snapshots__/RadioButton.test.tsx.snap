@@ -42,7 +42,7 @@ exports[`<RadioButton> Snapshots and structure should render defaults 1`] = `
   >
     <input
       className="lumx-radio-button__input-native"
-      id="lumx-radio-button-1"
+      id="fixedId"
       onChange={[Function]}
       tabIndex={0}
       type="radio"
@@ -73,7 +73,7 @@ exports[`<RadioButton> Snapshots and structure should render label & helper 1`] 
   >
     <input
       className="lumx-radio-button__input-native"
-      id="lumx-radio-button-2"
+      id="fixedId"
       onChange={[Function]}
       tabIndex={0}
       type="radio"
@@ -94,7 +94,7 @@ exports[`<RadioButton> Snapshots and structure should render label & helper 1`] 
   >
     <InputLabel
       className="lumx-radio-button__label"
-      htmlFor="lumx-radio-button-2"
+      htmlFor="fixedId"
       theme="light"
     >
       Label
