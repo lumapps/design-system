@@ -62,6 +62,11 @@ const plugins = [
         },
         {
             context: SRC_PATH,
+            from: `${SRC_PATH}/css`,
+            to: `${DIST_PATH}/css`,
+        },
+        {
+            context: SRC_PATH,
             from: `${SRC_PATH}/js`,
             to: `${DIST_PATH}/js`,
         },
