@@ -85,6 +85,7 @@ export const Avatar: Comp<AvatarProps, HTMLDivElement> = forwardRef((props, ref)
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, size, theme }))}
         >
             <Thumbnail
+                className={`${CLASSNAME}__thumbnail`}
                 onClick={onClick}
                 onKeyPress={onKeyPress}
                 {...thumbnailProps}

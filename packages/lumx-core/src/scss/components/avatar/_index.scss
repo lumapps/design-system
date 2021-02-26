@@ -4,12 +4,15 @@
 
 .#{$lumx-base-prefix}-avatar {
     position: relative;
-    overflow: hidden;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    border-radius: 50%;
     outline: none;
+
+    &__thumbnail {
+        overflow: hidden;
+        border-radius: 50%;
+    }
 
     &__actions {
         position: absolute;
