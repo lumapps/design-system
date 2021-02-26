@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Added `boundaryRef` prop to `Popover` component to override default boundary settings.
 
+### Fixed
+
+-   Fixed overflow on avatar badge.
+
 ## [1.0.10][] - 2021-02-25
 
 ### Fixed
