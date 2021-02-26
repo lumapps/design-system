@@ -65,6 +65,8 @@ const ARROW_SIZE = 8;
 export interface PopoverProps extends GenericProps {
     /** Reference to the DOM element used to set the position of the popover. */
     anchorRef: React.RefObject<HTMLElement>;
+    /** Element which will act as boundary when opening the popover. */
+    boundaryRef?: RefObject<HTMLElement>;
     /** Content. */
     children: ReactNode;
     /** Whether a click anywhere out of the popover would close it. */
@@ -194,6 +196,7 @@ export const Popover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, re
 
     const {
         anchorRef,
+        boundaryRef,
         children,
         className,
         closeOnClickAway,
@@ -233,7 +236,10 @@ export const Popover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, re
         modifiers.push(sameWidth);
     }
     if (fitWithinViewportHeight) {
-        modifiers.push(maxSize, applyMaxHeight);
+        modifiers.push({ ...maxSize, options: boundaryRef ? { boundary: boundaryRef.current } : {} }, applyMaxHeight);
+    }
+    if (boundaryRef) {
+        modifiers.push({ name: 'flip', options: { boundary: boundaryRef.current } });
     }
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
