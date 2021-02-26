@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.11][] - 2021-02-26
+
 ### Added
 
 -   Added `boundaryRef` prop to `Popover` component to override default boundary settings.
@@ -1050,3 +1052,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.0.9]: https://github.com/lumapps/design-system/tree/v1.0.9
 [unreleased]: https://github.com/lumapps/design-system/compare/v1.0.10...HEAD
 [1.0.10]: https://github.com/lumapps/design-system/tree/v1.0.10
+[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.11...HEAD
+[1.0.11]: https://github.com/lumapps/design-system/tree/v1.0.11
