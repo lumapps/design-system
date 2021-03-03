@@ -1,5 +1,5 @@
 @mixin lumx-typography-base() {
-    font-family: $lumx-typography-font-family;
+    font-family: var(--lumx-typography-font-family);
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
 }
