@@ -8,6 +8,7 @@
     - Components: '*'
     - Patterns:
         - Filter and sort
+        - Form Validation
         - Loading state
     - Utilities:
         - Color
