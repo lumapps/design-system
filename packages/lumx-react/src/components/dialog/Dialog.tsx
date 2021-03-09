@@ -21,6 +21,10 @@ import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 
 import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
 import { useDisableBodyScroll } from '@lumx/react/hooks/useDisableBodyScroll';
+import { IntersectionContext } from './intersection-context';
+import { DialogHeader } from './DialogHeader';
+import { DialogContent } from './DialogContent';
+import { DialogFooter } from './DialogFooter';
 
 /**
  * Defines the props of the component.
@@ -58,8 +62,8 @@ export interface DialogProps extends GenericProps {
 
 export type DialogSizes = Extract<Size, 'tiny' | 'regular' | 'big' | 'huge'>;
 
-const isHeader = isComponent('header');
-const isFooter = isComponent('footer');
+const isHeader = (component: ReactNode) => isComponent('header')(component) || isComponent('DialogHeader')(component);
+const isFooter = (component: ReactNode) => isComponent('footer')(component) || isComponent('DialogFooter')(component);
 
 /**
  * Component display name.
@@ -108,6 +112,7 @@ export const Dialog: Comp<DialogProps, HTMLDivElement> = forwardRef((props, ref)
         size,
         zIndex,
         dialogProps,
+        wrapContent = true,
         ...forwardedProps
     } = props;
 
@@ -143,15 +148,13 @@ export const Dialog: Comp<DialogProps, HTMLDivElement> = forwardRef((props, ref)
         threshold: [0, 1],
     });
 
-    const hasTopIntersection = sentinelTop && !(intersections.get(sentinelTop)?.isIntersecting ?? true);
-    const hasBottomIntersection = sentinelBottom && !(intersections.get(sentinelBottom)?.isIntersecting ?? true);
-
     // Separate header, footer and dialog content from children.
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [[headerChild], [footerChild], content] = useMemo(
         () => partitionMulti(Children.toArray(children), [isHeader, isFooter]),
         [children],
     );
+
     const headerChildProps = (headerChild as ReactElement)?.props;
     const headerChildContent = headerChildProps?.children;
     const footerChildProps = (footerChild as ReactElement)?.props;
@@ -179,58 +182,40 @@ export const Dialog: Comp<DialogProps, HTMLDivElement> = forwardRef((props, ref)
               >
                   <div className={`${CLASSNAME}__overlay`} />
 
-                  <section className={`${CLASSNAME}__container`} role="dialog" aria-modal="true" {...dialogProps}>
+                  <section className={`${CLASSNAME}__container`} {...dialogProps}>
                       <ClickAwayProvider callback={!preventAutoClose && handleClose} refs={[wrapperRef]}>
-                          <div className={`${CLASSNAME}__wrapper`} ref={wrapperRef}>
-                              {(header || headerChildContent) && (
-                                  <header
-                                      {...headerChildProps}
-                                      className={classNames(
-                                          `${CLASSNAME}__header`,
-                                          (forceHeaderDivider || hasTopIntersection) &&
-                                              `${CLASSNAME}__header--has-divider`,
-                                          headerChildProps?.className,
-                                      )}
-                                  >
-                                      {header}
-                                      {headerChildContent}
-                                  </header>
-                              )}
+                          <div role="dialog" aria-modal="true" className={`${CLASSNAME}__wrapper`} ref={wrapperRef}>
+                              <IntersectionContext.Provider
+                                  value={{
+                                      intersections,
+                                      sentinelTop,
+                                      sentinelBottom,
+                                      setSentinelTop,
+                                      setSentinelBottom,
+                                  }}
+                              >
+                                  {(header || headerChildContent) && (
+                                      <DialogHeader forceDivider={forceHeaderDivider} {...headerChildProps}>
+                                          {header}
+                                          {headerChildContent}
+                                      </DialogHeader>
+                                  )}
 
-                              <div ref={contentRef} className={`${CLASSNAME}__content`}>
-                                  <div
-                                      className={`${CLASSNAME}__sentinel ${CLASSNAME}__sentinel--top`}
-                                      ref={setSentinelTop}
-                                  />
+                                  {wrapContent ? <DialogContent ref={contentRef}>{content}</DialogContent> : content}
 
-                                  {content}
+                                  {(footer || footerChildContent) && (
+                                      <DialogFooter forceDivider={forceFooterDivider} {...footerChildContent}>
+                                          {footer}
+                                          {footerChildContent}
+                                      </DialogFooter>
+                                  )}
 
-                                  <div
-                                      className={`${CLASSNAME}__sentinel ${CLASSNAME}__sentinel--bottom`}
-                                      ref={setSentinelBottom}
-                                  />
-                              </div>
-
-                              {(footer || footerChildContent) && (
-                                  <footer
-                                      {...footerChildProps}
-                                      className={classNames(
-                                          `${CLASSNAME}__footer`,
-                                          (forceFooterDivider || hasBottomIntersection) &&
-                                              `${CLASSNAME}__footer--has-divider`,
-                                          footerChildProps?.className,
-                                      )}
-                                  >
-                                      {footer}
-                                      {footerChildContent}
-                                  </footer>
-                              )}
-
-                              {isLoading && (
-                                  <div className={`${CLASSNAME}__progress-overlay`}>
-                                      <Progress variant={ProgressVariant.circular} />
-                                  </div>
-                              )}
+                                  {isLoading && (
+                                      <div className={`${CLASSNAME}__progress-overlay`}>
+                                          <Progress variant={ProgressVariant.circular} />
+                                      </div>
+                                  )}
+                              </IntersectionContext.Provider>
                           </div>
                       </ClickAwayProvider>
                   </section>
