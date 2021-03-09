@@ -84,10 +84,18 @@ export const DisabledTab = ({ theme }: any) => (
 /* Display tabs far from their tab panels. */
 export const SplitTabListAndTabPanels = ({ theme }: any) => {
     const [isOpen, setOpen] = useState(true);
+    const [activeTabIndex, onChange] = useState(1);
 
     return (
-        <TabProvider isLazy={false}>
-            <Button onClick={() => setOpen(!isOpen)}>Open dialog with tabs in footer</Button>
+        <TabProvider activeTabIndex={activeTabIndex} onChange={onChange} isLazy={false}>
+            <Button
+                onClick={() => {
+                    setOpen(!isOpen);
+                    onChange(1);
+                }}
+            >
+                Open dialog with tabs in footer
+            </Button>
             <Dialog isOpen={isOpen} forceFooterDivider onClose={() => setOpen(false)}>
                 <TabPanel className="lumx-spacing-padding-huge">Tab 1 content</TabPanel>
                 <TabPanel className="lumx-spacing-padding-huge">Tab 2 content</TabPanel>
@@ -96,7 +104,7 @@ export const SplitTabListAndTabPanels = ({ theme }: any) => {
                 <footer>
                     <TabList theme={theme} aria-label="Tab list">
                         <Tab label="Tab 1" />
-                        <Tab label="Tab 2" isDisabled />
+                        <Tab label="Tab 2" />
                         <Tab label="Tab 3" />
                     </TabList>
                 </footer>
