@@ -13,6 +13,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   New lumapps theme applied by default
     -   Old Material theme applicable using variables in `css/material.css`
 
+## [1.0.12][] - 2021-03-11
+
+### Fixed
+
+-   Fixed tabs and progress tracker active index synchronization.
+
 ## [1.0.11][] - 2021-02-26
 
 ### Added
@@ -1060,3 +1066,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.0.10]: https://github.com/lumapps/design-system/tree/v1.0.10
 [unreleased]: https://github.com/lumapps/design-system/compare/v1.0.11...HEAD
 [1.0.11]: https://github.com/lumapps/design-system/tree/v1.0.11
+
+
+[Unreleased]: https://github.com/lumapps/design-system/compare/v1.0.12...HEAD
+[1.0.12]: https://github.com/lumapps/design-system/tree/v1.0.12
