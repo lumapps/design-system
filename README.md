@@ -71,10 +71,14 @@ This will produce the target build for `@lumx/core`, `@lumx/angularjs`, `@lumx/r
 ## How to publish packages
 
 1. Create a release branch (ex: `release/vX.Y.Z`)
-2. Login to NPM: `yarn login`
-3. Publish the packages to NPM: `yarn release`
+2. Push it to remote (`git push origin release/vX.Y.Z`)
+3. Login to NPM with an authorized account: `npm login`
+4. Make sure your packages are up to date: `yarn`
+5. (Optionnal) Make sure the build doesn't crash: `yarn build`
+6. Publish the packages to NPM: `yarn release`
    (you will be asked what version bump to apply)
-4. Create a PR for the release branch to merge into master
+7. Update the tag `git tag -f vX.Y.Z && git push --tags`
+8. Create a PR for the release branch to merge into master
 
 ## Copyright and license
 
