@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.13][] - 2021-04-13
+
 ### Fixed
 
 -   Limit thumbnail resize update using `requestAnimationFrame` to avoid the `ResizeObserver loop limit exceeded` error.
@@ -1066,3 +1068,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.0.11]: https://github.com/lumapps/design-system/tree/v1.0.11
 [unreleased]: https://github.com/lumapps/design-system/compare/v1.0.12...HEAD
 [1.0.12]: https://github.com/lumapps/design-system/tree/v1.0.12
+[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.13...HEAD
+[1.0.13]: https://github.com/lumapps/design-system/tree/v1.0.13
