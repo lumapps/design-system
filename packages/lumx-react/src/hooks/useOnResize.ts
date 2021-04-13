@@ -18,11 +18,17 @@ export function useOnResize(element: HTMLElement | Falsy, update: RefObject<Call
         const observer =
             observerRef.current ||
             new ResizeObserver(([entry]) => {
+                const updateFunction = update.current;
+                if (!updateFunction) {
+                    return;
+                }
+
                 const { width, height } = entry.contentRect;
                 if (previousSize.current?.width === width && previousSize.current?.height === height) {
                     return;
                 }
-                update.current?.();
+
+                window.requestAnimationFrame(() => updateFunction());
                 previousSize.current = entry.contentRect;
             });
         if (!observerRef.current) observerRef.current = observer;
