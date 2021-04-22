@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Increase specificity of link color CSS classes to avoid incorrect color overrides.
+
 ## [1.0.13][] - 2021-04-13
 
 ### Fixed
