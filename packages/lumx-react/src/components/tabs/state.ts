@@ -51,7 +51,6 @@ export const reducer = (state: State, action: Action): State => {
             tabPanelIds.splice(index, 1);
             return {
                 ...state,
-                activeTabIndex: clamp(state.activeTabIndex, 0, tabPanelIds.length - 1),
                 ids: { tab: tabIds, tabPanel: tabPanelIds },
             };
         }
