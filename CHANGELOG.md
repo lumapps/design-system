@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.14][] - 2021-04-23
+
 ### Fixed
 
 -   Increase specificity of link color CSS classes to avoid incorrect color overrides.
@@ -1074,3 +1076,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.0.12]: https://github.com/lumapps/design-system/tree/v1.0.12
 [unreleased]: https://github.com/lumapps/design-system/compare/v1.0.13...HEAD
 [1.0.13]: https://github.com/lumapps/design-system/tree/v1.0.13
+[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.14...HEAD
+[1.0.14]: https://github.com/lumapps/design-system/tree/v1.0.14
