@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Added `hideTooltip` prop to `IconButton` component to control whether the tooltip should be hidden or not.
+    Default at `false`.
+
+### Changed
+
+- Changed `IconButton` jsdoc.
+
 ## [1.0.14][] - 2021-04-23
 
 ### Fixed
