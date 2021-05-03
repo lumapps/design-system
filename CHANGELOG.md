@@ -13,6 +13,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   New lumapps theme applied by default
     -   Old Material theme applicable using variables in `css/material.css`
 
+## [1.0.15][] - 2021-05-03
+
+### Added
+
+-   Added `hideTooltip` prop to `IconButton` component to control whether the tooltip should be hidden or not.
+    Default at `false`.
+
+### Changed
+
+-   Changed `IconButton` jsdoc.
+
 ## [1.0.14][] - 2021-04-23
 
 ### Fixed
@@ -1084,3 +1095,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.0.13]: https://github.com/lumapps/design-system/tree/v1.0.13
 [unreleased]: https://github.com/lumapps/design-system/compare/v1.0.14...HEAD
 [1.0.14]: https://github.com/lumapps/design-system/tree/v1.0.14
+[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.15...HEAD
+[1.0.15]: https://github.com/lumapps/design-system/tree/v1.0.15

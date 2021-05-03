@@ -12,11 +12,16 @@ export interface IconButtonProps extends BaseButtonProps {
     icon: string;
     /**
      * Label text (required for a11y purpose).
-     * If you really don't want a tooltip and aria-label, you can give an empty label (this is not recommended).
+     * If you really don't want an aria-label, you can set an empty label (this is not recommended).
      */
     label: string;
-    /** Props to pass to the tooltip (minus those already set by the IconButton props). */
-    tooltipProps?: Omit<TooltipProps, 'label'>;
+    /**
+     * Props to pass to the tooltip.
+     * If undefined or if tooltipProps.label is undefined, the label prop will be used as tooltip label.
+     * */
+    tooltipProps?: Partial<TooltipProps>;
+    /** Whether the tooltip should be hidden or not. */
+    hideTooltip?: boolean;
 }
 
 /**
@@ -46,10 +51,10 @@ const DEFAULT_PROPS: Partial<IconButtonProps> = {
  * @return React element.
  */
 export const IconButton: Comp<IconButtonProps, HTMLButtonElement> = forwardRef((props, ref) => {
-    const { emphasis, icon, label, size, theme, tooltipProps, ...forwardedProps } = props;
+    const { emphasis, icon, label, size, theme, tooltipProps, hideTooltip, ...forwardedProps } = props;
 
     return (
-        <Tooltip label={label} {...tooltipProps}>
+        <Tooltip label={hideTooltip ? '' : label} {...tooltipProps}>
             <ButtonRoot ref={ref} {...{ emphasis, size, theme, ...forwardedProps }} aria-label={label} variant="icon">
                 <Icon icon={icon} />
             </ButtonRoot>
