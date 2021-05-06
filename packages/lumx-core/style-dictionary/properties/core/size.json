@@ -6,6 +6,6 @@
         "m": { "value": "36px" },
         "l": { "value": "64px" },
         "xl": { "value": "128px" },
-        "xxm": { "value": "256px" }
+        "xxl": { "value": "256px" }
     }
 }
