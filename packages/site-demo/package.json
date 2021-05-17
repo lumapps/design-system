@@ -42,7 +42,7 @@
         "gatsby-source-filesystem": "^2.3.36",
         "gatsby-transformer-remark": "^2.8.46",
         "intersection-observer": "^0.7.0",
-        "lodash": "4.17.19",
+        "lodash": "4.17.21",
         "moment": "^2.24.0",
         "moment-range": "^4.0.2",
         "prism-react-renderer": "^0.1.5",

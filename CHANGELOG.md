@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   Keep slideshow swipe only on touch device.
+
+### Fixed
+
+-   Updated lodash from 4.17.19 to 4.17.21 to fix potential security risks.
+
 ## [1.0.15][] - 2021-05-03
 
 ### Added
