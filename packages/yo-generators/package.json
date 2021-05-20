@@ -1,7 +1,7 @@
 {
     "dependencies": {
         "chalk": "^2.4.2",
-        "lodash": "4.17.19",
+        "lodash": "4.17.21",
         "yeoman-generator": "^4.1.0",
         "yosay": "^2.0.2"
     },
@@ -12,5 +12,5 @@
     "main": "generators/index.js",
     "name": "generator-lumx-component",
     "private": true,
-    "version": "1.0.15"
+    "version": "1.0.16"
 }
