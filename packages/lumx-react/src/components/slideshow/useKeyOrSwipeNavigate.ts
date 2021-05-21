@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { detectSwipe } from '@lumx/core/js/utils';
 
+const isTouchDevice = () => 'ontouchstart' in window;
+
 /**
  * Listen keyboard and swipe to navigate left and right.
  */
@@ -28,10 +30,10 @@ export function useKeyOrSwipeNavigate(
         };
 
         element.addEventListener('keydown', onNavigate);
-        const removeSwipeListeners = detectSwipe(element, onNavigate);
+        const removeSwipeListeners = isTouchDevice() ? detectSwipe(element, onNavigate) : undefined;
         return () => {
             element.removeEventListener('keydown', onNavigate);
-            removeSwipeListeners();
+            removeSwipeListeners?.();
         };
     }, [onPrevious, onNext, element]);
 }
