@@ -8,7 +8,7 @@ import { styles } from './styles';
 import 'focus-visible';
 
 interface StoryBlockProps {
-    children(p: { theme: Theme }): ReactElement;
+    children(p: { theme: Theme, today?: Date }): ReactElement;
 }
 
 const CLASSNAME = 'story-block';
@@ -20,7 +20,8 @@ export const StoryBlock: React.FC<StoryBlockProps> = (props) => {
     const toggleTheme = () => setTheme(theme === Theme.light ? Theme.dark : Theme.light);
 
     if (isChromatic()) {
-        return children({ theme });
+        // Hard code today date for chromatic.
+        return children({ theme, today: new Date('May 25 2021 01:00') });
     }
 
     return (
