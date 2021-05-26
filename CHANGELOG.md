@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Fixed slideshow swipe on touch devices
+    -   Fix vertical scroll (previously blocked)
+    -   Fix mouse/touch click in a slide (previously blocked)
+    -   Do not loopback to the end or start when trying to swipe on the last or first slide
+    -   Improved performance
+
 ## [1.0.16][] - 2021-05-20
 
 ### Changed

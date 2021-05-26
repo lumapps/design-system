@@ -1,4 +1,4 @@
-import React, { CSSProperties, forwardRef, useCallback, useEffect, useRef, useState } from 'react';
+import React, { CSSProperties, forwardRef, useCallback, useEffect, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -83,7 +83,8 @@ export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props
         ...forwardedProps
     } = props;
     const [currentIndex, setCurrentIndex] = useState(activeIndex as number);
-    const rootRef: React.MutableRefObject<null> = useRef(null);
+    // Use state instead of a ref to make the slideshow controls update directly when the element is set.
+    const [element, setElement] = useState<HTMLDivElement>();
 
     // Number of slideshow items.
     const itemsCount = React.Children.count(children);
@@ -93,22 +94,40 @@ export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props
     const wrapperStyle: CSSProperties = { transform: `translateX(-${FULL_WIDTH_PERCENT * currentIndex}%)` };
 
     // Change current index to display next slide.
-    const goToNextSlide = useCallback(() => {
-        if (currentIndex === slidesCount - 1) {
-            setCurrentIndex(0);
-        } else if (currentIndex < slidesCount - 1) {
-            setCurrentIndex((index) => index + 1);
-        }
-    }, [currentIndex, slidesCount, setCurrentIndex]);
+    const goToNextSlide = useCallback(
+        (loopback = true) => {
+            setCurrentIndex((index) => {
+                if (loopback && index === slidesCount - 1) {
+                    // Loopback to the start.
+                    return 0;
+                }
+                if (index < slidesCount - 1) {
+                    // Next slide.
+                    return index + 1;
+                }
+                return index;
+            });
+        },
+        [slidesCount, setCurrentIndex],
+    );
 
     // Change current index to display previous slide.
-    const goToPreviousSlide = useCallback(() => {
-        if (currentIndex === 0) {
-            setCurrentIndex(slidesCount - 1);
-        } else if (currentIndex > 0) {
-            setCurrentIndex((index) => index - 1);
-        }
-    }, [currentIndex, slidesCount, setCurrentIndex]);
+    const goToPreviousSlide = useCallback(
+        (loopback = true) => {
+            setCurrentIndex((index) => {
+                if (loopback && index === 0) {
+                    // Loopback to the end.
+                    return slidesCount - 1;
+                }
+                if (index > 0) {
+                    // Previous slide.
+                    return index - 1;
+                }
+                return index;
+            });
+        },
+        [slidesCount, setCurrentIndex],
+    );
 
     // Auto play
     const [isAutoPlaying, setIsAutoPlaying] = useState(Boolean(autoPlay));
@@ -135,16 +154,22 @@ export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props
     );
 
     // Handle click or keyboard event to go to next slide.
-    const handleControlNextSlide = useCallback(() => {
-        setIsAutoPlaying(false);
-        goToNextSlide();
-    }, [goToNextSlide]);
+    const handleControlNextSlide = useCallback(
+        (loopback = true) => {
+            setIsAutoPlaying(false);
+            goToNextSlide(loopback);
+        },
+        [goToNextSlide],
+    );
 
     // Handle click or keyboard event to go to previous slide.
-    const handleControlPreviousSlide = useCallback(() => {
-        setIsAutoPlaying(false);
-        goToPreviousSlide();
-    }, [goToPreviousSlide]);
+    const handleControlPreviousSlide = useCallback(
+        (loopback = true) => {
+            setIsAutoPlaying(false);
+            goToPreviousSlide(loopback);
+        },
+        [goToPreviousSlide],
+    );
 
     // If the activeIndex props changes, update the current slide
     useEffect(() => {
@@ -160,7 +185,7 @@ export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props
     /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
     return (
         <div
-            ref={mergeRefs(ref, rootRef)}
+            ref={mergeRefs(ref, setElement)}
             {...forwardedProps}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }), {
                 [`${CLASSNAME}--fill-height`]: fillHeight,
@@ -183,7 +208,7 @@ export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props
                         onNextClick={handleControlNextSlide}
                         onPreviousClick={handleControlPreviousSlide}
                         slidesCount={slidesCount}
-                        parentRef={rootRef}
+                        parentRef={element}
                         theme={theme}
                     />
                 </div>

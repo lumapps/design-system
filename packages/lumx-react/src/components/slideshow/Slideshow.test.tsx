@@ -1,4 +1,5 @@
 import React, { ReactElement } from 'react';
+import pick from 'lodash/pick';
 
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
@@ -28,7 +29,9 @@ const setup = ({ ...propsOverride }: Partial<SlideshowProps> = {}, shallowRender
 describe(`<${Slideshow.displayName}>`, () => {
     // 1. Test render via snapshot.
     describe('Snapshots and structure', () => {
-        itShouldRenderStories(stories, { or: [Slideshow, { path: [Slideshow, SlideshowControls] }] });
+        itShouldRenderStories(pick(stories, ['default', 'Simple']), {
+            or: [Slideshow, { path: [Slideshow, SlideshowControls] }],
+        });
     });
 
     // Common tests suite.

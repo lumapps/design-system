@@ -1,4 +1,4 @@
-import React, { forwardRef, RefObject, useMemo } from 'react';
+import React, { forwardRef, RefObject, useCallback, useMemo } from 'react';
 
 import classNames from 'classnames';
 import range from 'lodash/range';
@@ -6,7 +6,8 @@ import range from 'lodash/range';
 import { mdiChevronLeft, mdiChevronRight } from '@lumx/icons';
 import { Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
-import { useKeyOrSwipeNavigate } from '@lumx/react/components/slideshow/useKeyOrSwipeNavigate';
+import { useSwipeNavigate } from './useSwipeNavigate';
+import { useKeyNavigate } from './useKeyNavigate';
 
 import { PAGINATION_ITEM_SIZE, PAGINATION_ITEMS_MAX } from './constants';
 import { usePaginationVisibleRange } from './usePaginationVisibleRange';
@@ -20,8 +21,8 @@ export interface SlideshowControlsProps extends GenericProps {
     /** Props to pass to the next button (minus those already set by the SlideshowControls props). */
     nextButtonProps: Pick<IconButtonProps, 'label'> &
         Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis' | 'color'>;
-    /** Reference to the parent element. */
-    parentRef: RefObject<HTMLDivElement>;
+    /** Reference to the parent element on which we want to listen touch swipe. */
+    parentRef?: RefObject<HTMLDivElement> | HTMLDivElement;
     /** Props to pass to the previous button (minus those already set by the SlideshowControls props). */
     previousButtonProps: Pick<IconButtonProps, 'label'> &
         Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis' | 'color'>;
@@ -30,11 +31,11 @@ export interface SlideshowControlsProps extends GenericProps {
     /** Theme adapting the component to light or dark background. */
     theme?: Theme;
     /** On next button click callback. */
-    onNextClick?(): void;
+    onNextClick?(loopback?: boolean): void;
     /** On pagination change callback. */
     onPaginationClick?(index: number): void;
     /** On previous button click callback. */
-    onPreviousClick?(): void;
+    onPreviousClick?(loopback?: boolean): void;
 }
 
 /**
@@ -77,8 +78,17 @@ export const SlideshowControls: Comp<SlideshowControlsProps, HTMLDivElement> = f
         ...forwardedProps
     } = props;
 
-    // Listen to keyboard & touch swipe to navigate left & right.
-    useKeyOrSwipeNavigate(parentRef.current, onNextClick, onPreviousClick);
+    const parent = parentRef instanceof HTMLElement ? parentRef : parentRef?.current;
+    // Listen to keyboard navigate left & right.
+    useKeyNavigate(parent, onNextClick, onPreviousClick);
+    // Listen to touch swipe navigate left & right.
+    useSwipeNavigate(
+        parent,
+        // Go next without loopback.
+        useCallback(() => onNextClick?.(false), [onNextClick]),
+        // Go previous without loopback.
+        useCallback(() => onPreviousClick?.(false), [onPreviousClick]),
+    );
 
     // Pagination "bullet" range.
     const visibleRange = usePaginationVisibleRange(activeIndex as number, slidesCount);
