@@ -6,9 +6,10 @@ import range from 'lodash/range';
 import { mdiChevronLeft, mdiChevronRight } from '@lumx/icons';
 import { Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { WINDOW } from '@lumx/react/constants';
+
 import { useSwipeNavigate } from './useSwipeNavigate';
 import { useKeyNavigate } from './useKeyNavigate';
-
 import { PAGINATION_ITEM_SIZE, PAGINATION_ITEMS_MAX } from './constants';
 import { usePaginationVisibleRange } from './usePaginationVisibleRange';
 
@@ -78,7 +79,11 @@ export const SlideshowControls: Comp<SlideshowControlsProps, HTMLDivElement> = f
         ...forwardedProps
     } = props;
 
-    const parent = parentRef instanceof HTMLElement ? parentRef : parentRef?.current;
+    let parent;
+    if (WINDOW) {
+        // Checking window object to avoid errors in SSR.
+        parent = parentRef instanceof HTMLElement ? parentRef : parentRef?.current;
+    }
     // Listen to keyboard navigate left & right.
     useKeyNavigate(parent, onNextClick, onPreviousClick);
     // Listen to touch swipe navigate left & right.
