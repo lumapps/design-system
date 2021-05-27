@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.17][] - 2021-05-27
+
+### Fixed
+
+-   Fixed slideshow swipe on touch devices
+    -   Fix vertical scroll (previously blocked)
+    -   Fix mouse/touch click in a slide (previously blocked)
+    -   Do not loopback to the end or start when trying to swipe on the last or first slide
+    -   Improved performance
+
 ## [1.0.16][] - 2021-05-20
 
 ### Changed
@@ -1103,3 +1113,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.0.15]: https://github.com/lumapps/design-system/tree/v1.0.15
 [unreleased]: https://github.com/lumapps/design-system/compare/v1.0.16...HEAD
 [1.0.16]: https://github.com/lumapps/design-system/tree/v1.0.16
+[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.17...HEAD
+[1.0.17]: https://github.com/lumapps/design-system/tree/v1.0.17

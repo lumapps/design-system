@@ -6,7 +6,6 @@ import { thumbnailsKnob } from '@lumx/react/stories/knobs/thumbnailsKnob';
 export default { title: 'LumX components/slideshow/Slideshow controls' };
 
 export const Simple = () => {
-    const parentRef = React.useRef(null);
     const slidesCount = 9;
     const [activeIndex, setActiveIndex] = React.useState(0);
     const maxIndex = slidesCount - 1;
@@ -19,7 +18,6 @@ export const Simple = () => {
         <SlideshowControls
             activeIndex={activeIndex}
             slidesCount={slidesCount}
-            parentRef={parentRef}
             onNextClick={onNextClick}
             onPreviousClick={onPreviousClick}
             onPaginationClick={onPaginationClick}
@@ -30,7 +28,6 @@ export const Simple = () => {
 };
 
 export const ControllingSlideshow = ({ theme }: any) => {
-    const parentRef = React.useRef(null);
     const items = thumbnailsKnob(6);
     const [activeIndex, setActiveIndex] = React.useState(0);
     const maxIndex = items.length - 1;
@@ -67,7 +64,6 @@ export const ControllingSlideshow = ({ theme }: any) => {
                 <SlideshowControls
                     activeIndex={activeIndex}
                     slidesCount={items.length}
-                    parentRef={parentRef}
                     onNextClick={onNextClick}
                     onPreviousClick={onPreviousClick}
                     onPaginationClick={onPaginationClick}
