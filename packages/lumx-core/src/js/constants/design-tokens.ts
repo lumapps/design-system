@@ -2362,26 +2362,26 @@ export const DESIGN_TOKENS = {
                 type: 'font-family',
             },
         },
-        style: {
+        interface: {
             display1: {
                 'font-size': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'display1',
                     },
                 },
                 'font-weight': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'display1',
                     },
                 },
                 'line-height': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'display1',
                     },
                 },
@@ -2390,21 +2390,21 @@ export const DESIGN_TOKENS = {
                 'font-size': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'headline',
                     },
                 },
                 'font-weight': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'headline',
                     },
                 },
                 'line-height': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'headline',
                     },
                 },
@@ -2413,21 +2413,21 @@ export const DESIGN_TOKENS = {
                 'font-size': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'title',
                     },
                 },
                 'font-weight': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'title',
                     },
                 },
                 'line-height': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'title',
                     },
                 },
@@ -2436,21 +2436,21 @@ export const DESIGN_TOKENS = {
                 'font-size': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'subtitle2',
                     },
                 },
                 'font-weight': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'subtitle2',
                     },
                 },
                 'line-height': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'subtitle2',
                     },
                 },
@@ -2459,21 +2459,21 @@ export const DESIGN_TOKENS = {
                 'font-size': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'subtitle1',
                     },
                 },
                 'font-weight': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'subtitle1',
                     },
                 },
                 'line-height': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'subtitle1',
                     },
                 },
@@ -2482,21 +2482,21 @@ export const DESIGN_TOKENS = {
                 'font-size': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'body2',
                     },
                 },
                 'font-weight': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'body2',
                     },
                 },
                 'line-height': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'body2',
                     },
                 },
@@ -2505,21 +2505,21 @@ export const DESIGN_TOKENS = {
                 'font-size': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'body1',
                     },
                 },
                 'font-weight': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'body1',
                     },
                 },
                 'line-height': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'body1',
                     },
                 },
@@ -2528,21 +2528,21 @@ export const DESIGN_TOKENS = {
                 'font-size': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'caption',
                     },
                 },
                 'font-weight': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'caption',
                     },
                 },
                 'line-height': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'caption',
                     },
                 },
@@ -2551,22 +2551,47 @@ export const DESIGN_TOKENS = {
                 'font-size': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'overline',
                     },
                 },
                 'font-weight': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'overline',
                     },
                 },
                 'line-height': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'overline',
+                    },
+                },
+            },
+        },
+        custom: {
+            title1: {
+                'font-size': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title1',
+                    },
+                },
+                'font-weight': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title1',
+                    },
+                },
+                'line-height': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title1',
                     },
                 },
             },

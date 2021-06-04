@@ -229,33 +229,36 @@ $lumx-spacing-unit-big: 16px !default;
 $lumx-spacing-unit-huge: 24px !default;
 $lumx-typography-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Fira Sans',
     'Droid Sans', 'Helvetica Neue', sans-serif !default;
-$lumx-typography-style-display1-font-size: 34px !default;
-$lumx-typography-style-display1-font-weight: 700 !default;
-$lumx-typography-style-display1-line-height: 40px !default;
-$lumx-typography-style-headline-font-size: 24px !default;
-$lumx-typography-style-headline-font-weight: 700 !default;
-$lumx-typography-style-headline-line-height: 32px !default;
-$lumx-typography-style-title-font-size: 20px !default;
-$lumx-typography-style-title-font-weight: 700 !default;
-$lumx-typography-style-title-line-height: 30px !default;
-$lumx-typography-style-subtitle2-font-size: 16px !default;
-$lumx-typography-style-subtitle2-font-weight: 700 !default;
-$lumx-typography-style-subtitle2-line-height: 24px !default;
-$lumx-typography-style-subtitle1-font-size: 14px !default;
-$lumx-typography-style-subtitle1-font-weight: 700 !default;
-$lumx-typography-style-subtitle1-line-height: 20px !default;
-$lumx-typography-style-body2-font-size: 16px !default;
-$lumx-typography-style-body2-font-weight: 400 !default;
-$lumx-typography-style-body2-line-height: 24px !default;
-$lumx-typography-style-body1-font-size: 14px !default;
-$lumx-typography-style-body1-font-weight: 400 !default;
-$lumx-typography-style-body1-line-height: 20px !default;
-$lumx-typography-style-caption-font-size: 12px !default;
-$lumx-typography-style-caption-font-weight: 400 !default;
-$lumx-typography-style-caption-line-height: 16px !default;
-$lumx-typography-style-overline-font-size: 10px !default;
-$lumx-typography-style-overline-font-weight: 700 !default;
-$lumx-typography-style-overline-line-height: 12px !default;
+$lumx-typography-interface-display1-font-size: 34px !default;
+$lumx-typography-interface-display1-font-weight: 700 !default;
+$lumx-typography-interface-display1-line-height: 40px !default;
+$lumx-typography-interface-headline-font-size: 24px !default;
+$lumx-typography-interface-headline-font-weight: 700 !default;
+$lumx-typography-interface-headline-line-height: 32px !default;
+$lumx-typography-interface-title-font-size: 20px !default;
+$lumx-typography-interface-title-font-weight: 700 !default;
+$lumx-typography-interface-title-line-height: 30px !default;
+$lumx-typography-interface-subtitle2-font-size: 16px !default;
+$lumx-typography-interface-subtitle2-font-weight: 700 !default;
+$lumx-typography-interface-subtitle2-line-height: 24px !default;
+$lumx-typography-interface-subtitle1-font-size: 14px !default;
+$lumx-typography-interface-subtitle1-font-weight: 700 !default;
+$lumx-typography-interface-subtitle1-line-height: 20px !default;
+$lumx-typography-interface-body2-font-size: 16px !default;
+$lumx-typography-interface-body2-font-weight: 400 !default;
+$lumx-typography-interface-body2-line-height: 24px !default;
+$lumx-typography-interface-body1-font-size: 14px !default;
+$lumx-typography-interface-body1-font-weight: 400 !default;
+$lumx-typography-interface-body1-line-height: 20px !default;
+$lumx-typography-interface-caption-font-size: 12px !default;
+$lumx-typography-interface-caption-font-weight: 400 !default;
+$lumx-typography-interface-caption-line-height: 16px !default;
+$lumx-typography-interface-overline-font-size: 10px !default;
+$lumx-typography-interface-overline-font-weight: 700 !default;
+$lumx-typography-interface-overline-line-height: 12px !default;
+$lumx-typography-custom-title1-font-size: 40px !default;
+$lumx-typography-custom-title1-font-weight: 700 !default;
+$lumx-typography-custom-title1-line-height: 50px !default;
 
 $lumx-design-tokens: (
     'button': (
@@ -556,51 +559,58 @@ $lumx-design-tokens: (
     ),
     'typography': (
         'font-family': $lumx-typography-font-family,
-        'style': (
+        'interface': (
             'display1': (
-                'font-size': $lumx-typography-style-display1-font-size,
-                'font-weight': $lumx-typography-style-display1-font-weight,
-                'line-height': $lumx-typography-style-display1-line-height,
+                'font-size': $lumx-typography-interface-display1-font-size,
+                'font-weight': $lumx-typography-interface-display1-font-weight,
+                'line-height': $lumx-typography-interface-display1-line-height,
             ),
             'headline': (
-                'font-size': $lumx-typography-style-headline-font-size,
-                'font-weight': $lumx-typography-style-headline-font-weight,
-                'line-height': $lumx-typography-style-headline-line-height,
+                'font-size': $lumx-typography-interface-headline-font-size,
+                'font-weight': $lumx-typography-interface-headline-font-weight,
+                'line-height': $lumx-typography-interface-headline-line-height,
             ),
             'title': (
-                'font-size': $lumx-typography-style-title-font-size,
-                'font-weight': $lumx-typography-style-title-font-weight,
-                'line-height': $lumx-typography-style-title-line-height,
+                'font-size': $lumx-typography-interface-title-font-size,
+                'font-weight': $lumx-typography-interface-title-font-weight,
+                'line-height': $lumx-typography-interface-title-line-height,
             ),
             'subtitle2': (
-                'font-size': $lumx-typography-style-subtitle2-font-size,
-                'font-weight': $lumx-typography-style-subtitle2-font-weight,
-                'line-height': $lumx-typography-style-subtitle2-line-height,
+                'font-size': $lumx-typography-interface-subtitle2-font-size,
+                'font-weight': $lumx-typography-interface-subtitle2-font-weight,
+                'line-height': $lumx-typography-interface-subtitle2-line-height,
             ),
             'subtitle1': (
-                'font-size': $lumx-typography-style-subtitle1-font-size,
-                'font-weight': $lumx-typography-style-subtitle1-font-weight,
-                'line-height': $lumx-typography-style-subtitle1-line-height,
+                'font-size': $lumx-typography-interface-subtitle1-font-size,
+                'font-weight': $lumx-typography-interface-subtitle1-font-weight,
+                'line-height': $lumx-typography-interface-subtitle1-line-height,
             ),
             'body2': (
-                'font-size': $lumx-typography-style-body2-font-size,
-                'font-weight': $lumx-typography-style-body2-font-weight,
-                'line-height': $lumx-typography-style-body2-line-height,
+                'font-size': $lumx-typography-interface-body2-font-size,
+                'font-weight': $lumx-typography-interface-body2-font-weight,
+                'line-height': $lumx-typography-interface-body2-line-height,
             ),
             'body1': (
-                'font-size': $lumx-typography-style-body1-font-size,
-                'font-weight': $lumx-typography-style-body1-font-weight,
-                'line-height': $lumx-typography-style-body1-line-height,
+                'font-size': $lumx-typography-interface-body1-font-size,
+                'font-weight': $lumx-typography-interface-body1-font-weight,
+                'line-height': $lumx-typography-interface-body1-line-height,
             ),
             'caption': (
-                'font-size': $lumx-typography-style-caption-font-size,
-                'font-weight': $lumx-typography-style-caption-font-weight,
-                'line-height': $lumx-typography-style-caption-line-height,
+                'font-size': $lumx-typography-interface-caption-font-size,
+                'font-weight': $lumx-typography-interface-caption-font-weight,
+                'line-height': $lumx-typography-interface-caption-line-height,
             ),
             'overline': (
-                'font-size': $lumx-typography-style-overline-font-size,
-                'font-weight': $lumx-typography-style-overline-font-weight,
-                'line-height': $lumx-typography-style-overline-line-height,
+                'font-size': $lumx-typography-interface-overline-font-size,
+                'font-weight': $lumx-typography-interface-overline-font-weight,
+                'line-height': $lumx-typography-interface-overline-line-height,
+            ),
+        ),
+        'custom': (
+            'title1': (
+                'font-size': $lumx-typography-custom-title1-font-size,
+                'font-weight': $lumx-typography-custom-title1-font-weight,
+                'line-height': $lumx-typography-custom-title1-line-height,
             ),
         ),
     ),

@@ -2,8 +2,15 @@
    Typography
    ========================================================================== */
 
-@each $key, $style in $lumx-typography-styles {
-    .#{$lumx-base-prefix}-typography-#{$key} {
+@each $key, $style in $lumx-typography-interface {
+    .#{$lumx-base-prefix}-typography-#{$key},
+    .#{$lumx-base-prefix}-typography-interface-#{$key} {
         @include lumx-typography($key);
+    }
+}
+
+@each $key, $style in $lumx-typography-custom {
+    .#{$lumx-base-prefix}-typography-custom-#{$key} {
+        @include lumx-typography($key, 'custom');
     }
 }
