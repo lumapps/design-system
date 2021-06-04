@@ -1,4 +1,5 @@
 $lumx-typography-default-font-size: 16px;
 $lumx-typography-default-line-height: 24px;
 
-$lumx-typography-styles: map-get(map-get($lumx-design-tokens, 'typography'), 'style');
+$lumx-typography-interface: map-get(map-get($lumx-design-tokens, 'typography'), 'interface');
+$lumx-typography-custom: map-get(map-get($lumx-design-tokens, 'typography'), 'custom');

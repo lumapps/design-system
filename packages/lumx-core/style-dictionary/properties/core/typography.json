@@ -3,7 +3,7 @@
         "font-family": {
             "value": "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif"
         },
-        "style": {
+        "interface": {
             "display1": {
                 "font-size": { "value": "34px" },
                 "font-weight": { "value": "700" },
@@ -48,6 +48,13 @@
                 "font-size": { "value": "10px" },
                 "font-weight": { "value": "700" },
                 "line-height": { "value": "12px" }
+            }
+        },
+        "custom": {
+            "title1": {
+                "font-size": { "value": "40px" },
+                "font-weight": { "value": "700" },
+                "line-height": { "value": "50px" }
             }
         }
     }

@@ -7,7 +7,7 @@
         "header": {
             "margin-bottom": { "value": "{spacing.unit.regular.value}" }
         },
-        "label": "{typography.style.body1}",
+        "label": "{typography.interface.body1}",
         "wrapper": {
             "min-height": { "value": "{size.m.value}" },
             "border-radius": { "value": "{border-radius.value}" },
@@ -73,7 +73,7 @@
             }
         },
         "input-icon-size": { "value": "{size.xs.value}" },
-        "input": "{typography.style.body1}",
+        "input": "{typography.interface.body1}",
         "input-validity-size": { "value": "{size.xxs.value}" },
         "input-clear-size": { "value": "{size.s.value}" }
     }
