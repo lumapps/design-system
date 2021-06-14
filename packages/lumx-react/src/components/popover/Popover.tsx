@@ -65,6 +65,7 @@ const ARROW_SIZE = 8;
 export interface PopoverProps extends GenericProps {
     /** Reference to the DOM element used to set the position of the popover. */
     anchorRef: React.RefObject<HTMLElement>;
+    virtualElement?: any;
     /** Element which will act as boundary when opening the popover. */
     boundaryRef?: RefObject<HTMLElement>;
     /** Content. */
@@ -195,6 +196,7 @@ export const Popover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, re
     }
 
     const {
+        virtualElement,
         anchorRef,
         boundaryRef,
         children,
@@ -243,7 +245,7 @@ export const Popover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, re
     }
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const { styles, attributes, state, update } = usePopper(anchorRef.current, popperElement, {
+    const { styles, attributes, state, update } = usePopper(virtualElement || anchorRef.current, popperElement, {
         placement,
         modifiers,
     });

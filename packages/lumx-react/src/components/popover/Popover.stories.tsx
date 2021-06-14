@@ -263,6 +263,19 @@ export const WithoutPortal = ({ theme }: any) => {
     );
 };
 
+const virtualElement = (parentElement) => ({
+    getBoundingClientRect() {
+        return {
+            top: parentElement.getBoundingClientRect().y,
+            left: parentElement.getBoundingClientRect().x,
+            bottom: 20,
+            right: 100,
+            width: 90,
+            height: 10,
+        };
+    },
+});
+
 export const NestedWithoutPortal = () => {
     const rootButtonRef = React.useRef(null);
     const firstButtonRef = React.useRef(null);
@@ -275,7 +288,7 @@ export const NestedWithoutPortal = () => {
     const [thirdOpen, setThirdOpen] = React.useState(false);
     const [fourthOpen, setFourthOpen] = React.useState(false);
     const boundaryReference = React.useRef(document.querySelector('body'));
-
+    console.log(rootButtonRef);
     return (
         <div style={{ height: '100vh' }}>
             <Button ref={rootButtonRef} onClick={() => setRootOpen(!rootOpen)}>
@@ -289,6 +302,7 @@ export const NestedWithoutPortal = () => {
                 isOpen={rootOpen}
                 anchorRef={rootButtonRef}
                 usePortal={false}
+                // virtualElement={virtualElement(rootButtonRef.current)}
             >
                 <div className="lumx-spacing-margin-huge" style={{ overflowY: 'auto' }}>
                     <List>
@@ -301,7 +315,7 @@ export const NestedWithoutPortal = () => {
                                 isOpen={firstOpen}
                                 anchorRef={firstButtonRef}
                                 usePortal={false}
-                                offset={{ along: -16 }}
+                                // virtualElement={virtualElement(firstButtonRef.current)}
                             >
                                 <div className="lumx-spacing-margin-huge" style={{ overflowY: 'auto' }}>
                                     <List>
@@ -314,7 +328,7 @@ export const NestedWithoutPortal = () => {
                                                 isOpen={secondOpen}
                                                 anchorRef={secondButtonRef}
                                                 usePortal={false}
-                                                offset={{ along: -16 }}
+                                                // virtualElement={virtualElement(secondButtonRef.current)}
                                             >
                                                 <div className="lumx-spacing-margin-huge" style={{ overflowY: 'auto' }}>
                                                     <List>
@@ -329,7 +343,7 @@ export const NestedWithoutPortal = () => {
                                                                 isOpen={thirdOpen}
                                                                 anchorRef={thirdButtonRef}
                                                                 usePortal={false}
-                                                                offset={{ along: -16 }}
+                                                                // virtualElement={virtualElement(thirdButtonRef.current)}
                                                             >
                                                                 <div
                                                                     className="lumx-spacing-margin-huge"
@@ -351,7 +365,9 @@ export const NestedWithoutPortal = () => {
                                                                                 isOpen={fourthOpen}
                                                                                 anchorRef={fourthButtonRef}
                                                                                 usePortal={false}
-                                                                                offset={{ along: -16 }}
+                                                                                // virtualElement={virtualElement(
+                                                                                //     fourthButtonRef.current,
+                                                                                // )}
                                                                             >
                                                                                 <div
                                                                                     className="lumx-spacing-margin-huge"
