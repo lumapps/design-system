@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 15 Jun 2021 12:53:07 GMT
+ * Generated on Tue, 15 Jun 2021 13:02:33 GMT
  */
 
 :root {
@@ -29,12 +29,12 @@
   --lumx-material-radio-button-wrapper-size: 20px;
   --lumx-material-radio-button-control-size: 16px;
   --lumx-material-radio-button-indicator-size: 8px;
-  --lumx-switch-wrapper-width: 30px;
-  --lumx-switch-wrapper-height: 20px;
-  --lumx-switch-control-width: 30px;
-  --lumx-switch-control-height: 16px;
-  --lumx-switch-indicator-size: 8px;
-  --lumx-switch-indicator-offset: 4px;
+  --lumx-material-switch-wrapper-width: 30px;
+  --lumx-material-switch-wrapper-height: 20px;
+  --lumx-material-switch-control-width: 30px;
+  --lumx-material-switch-control-height: 16px;
+  --lumx-material-switch-indicator-size: 8px;
+  --lumx-material-switch-indicator-offset: 4px;
   --lumx-text-field-padding-top: 0;
   --lumx-text-field-padding-bottom: 0;
   --lumx-text-field-header-margin-bottom: 8px;

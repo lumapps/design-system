@@ -1,7 +1,7 @@
 @mixin lumx-switch-input-wrapper() {
     position: relative;
-    width: var(--lumx-switch-wrapper-width);
-    height: var(--lumx-switch-wrapper-height);
+    width: var(--lumx-material-switch-wrapper-width);
+    height: var(--lumx-material-switch-wrapper-height);
 }
 
 @mixin lumx-switch-input-native() {
@@ -9,8 +9,8 @@
     z-index: 4;
     top: 0;
     left: 0;
-    width: var(--lumx-switch-wrapper-width);
-    height: var(--lumx-switch-wrapper-height);
+    width: var(--lumx-material-switch-wrapper-width);
+    height: var(--lumx-material-switch-wrapper-height);
     padding: 0;
     margin: 0;
     opacity: 0;
@@ -19,11 +19,11 @@
 @mixin lumx-switch-placeholder() {
     position: absolute;
     z-index: 1;
-    top: calc(calc(var(--lumx-switch-wrapper-height) - var(--lumx-switch-control-height)) / 2);
+    top: calc(calc(var(--lumx-material-switch-wrapper-height) - var(--lumx-material-switch-control-height)) / 2);
     left: 0;
-    width: var(--lumx-switch-control-width);
-    height: var(--lumx-switch-control-height);
-    border-radius: calc(var(--lumx-switch-control-height) / 2);
+    width: var(--lumx-material-switch-control-width);
+    height: var(--lumx-material-switch-control-height);
+    border-radius: calc(var(--lumx-material-switch-control-height) / 2);
 }
 
 @mixin lumx-switch-input-background($status) {
@@ -33,7 +33,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    border-radius: calc(var(--lumx-switch-control-height) / 2);
+    border-radius: calc(var(--lumx-material-switch-control-height) / 2);
 
     @if $status == 'unchecked' {
         border-width: 2px;
@@ -44,13 +44,13 @@
 @mixin lumx-switch-input-indicator($status, $theme) {
     position: absolute;
     z-index: 3;
-    top: calc(calc(var(--lumx-switch-control-height) - var(--lumx-switch-indicator-size)) / 2);
-    width: var(--lumx-switch-indicator-size);
-    height: var(--lumx-switch-indicator-size);
-    border-radius: calc(var(--lumx-switch-indicator-size) / 2);
+    top: calc(calc(var(--lumx-material-switch-control-height) - var(--lumx-material-switch-indicator-size)) / 2);
+    width: var(--lumx-material-switch-indicator-size);
+    height: var(--lumx-material-switch-indicator-size);
+    border-radius: calc(var(--lumx-material-switch-indicator-size) / 2);
 
     @if $status == 'checked' {
-        right: var(--lumx-switch-indicator-offset);
+        right: var(--lumx-material-switch-indicator-offset);
 
         @if $theme == lumx-base-const('theme', 'LIGHT') {
             background-color: lumx-color-variant('light', 'N');
@@ -58,7 +58,7 @@
             background-color: lumx-color-variant('primary', 'N');
         }
     } @else if $status == 'unchecked' {
-        left: var(--lumx-switch-indicator-offset);
+        left: var(--lumx-material-switch-indicator-offset);
 
         @if $theme == lumx-base-const('theme', 'LIGHT') {
             background-color: lumx-color-variant('dark', 'N');

@@ -30,6 +30,20 @@
             "wrapper-size": { "value": "20px" },
             "control-size": { "value": "16px" },
             "indicator-size": { "value": "8px" }
+        },
+        "switch": {
+            "wrapper": {
+                "width": { "value": "30px" },
+                "height": { "value": "20px" }
+            },
+            "control": {
+                "width": { "value": "30px" },
+                "height": { "value": "16px" }
+            },
+            "indicator": {
+                "size": { "value": "8px" },
+                "offset": { "value": "4px" }
+            }
         }
     }
 }
