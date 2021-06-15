@@ -20,6 +20,8 @@
                 "padding-vertical": { "value": "{spacing.unit.medium.value}" }
             }
         },
+        "input-helper": "{typography.interface.caption}",
+        "input-label": "{typography.interface.body1}",
         "progress": {
             "bounce": { "value": "block" },
             "rotate": { "value": "none" }
