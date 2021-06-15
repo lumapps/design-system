@@ -4,9 +4,6 @@
     --lumx-button-size-m-font-weight: 500;
     --lumx-button-size-s-font-size: 10px;
     --lumx-button-size-s-font-weight: 500;
-    --lumx-radio-button-wrapper-size: 24px;
-    --lumx-radio-button-control-size: 20px;
-    --lumx-radio-button-indicator-size: 10px;
     --lumx-switch-wrapper-height: 24px;
     --lumx-text-field-padding-top: 20px;
     --lumx-text-field-padding-bottom: 8px;
@@ -53,4 +50,7 @@
     --lumx-material-input-helper-line-height: 20px;
     --lumx-material-progress-bounce: none;
     --lumx-material-progress-rotate: block;
+    --lumx-material-radio-button-wrapper-size: 24px;
+    --lumx-material-radio-button-control-size: 20px;
+    --lumx-material-radio-button-indicator-size: 10px;
 }

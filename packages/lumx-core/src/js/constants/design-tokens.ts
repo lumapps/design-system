@@ -181,24 +181,27 @@ export const DESIGN_TOKENS = {
                 },
             },
         },
-    },
-    'radio-button': {
-        'wrapper-size': {
-            attributes: {
-                category: 'radio-button',
-                type: 'wrapper-size',
+        'radio-button': {
+            'wrapper-size': {
+                attributes: {
+                    category: 'material',
+                    type: 'radio-button',
+                    item: 'wrapper-size',
+                },
             },
-        },
-        'control-size': {
-            attributes: {
-                category: 'radio-button',
-                type: 'control-size',
+            'control-size': {
+                attributes: {
+                    category: 'material',
+                    type: 'radio-button',
+                    item: 'control-size',
+                },
             },
-        },
-        'indicator-size': {
-            attributes: {
-                category: 'radio-button',
-                type: 'indicator-size',
+            'indicator-size': {
+                attributes: {
+                    category: 'material',
+                    type: 'radio-button',
+                    item: 'indicator-size',
+                },
             },
         },
     },

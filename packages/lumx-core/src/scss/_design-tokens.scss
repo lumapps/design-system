@@ -25,9 +25,9 @@ $lumx-material-input-label-font-weight: 400 !default;
 $lumx-material-input-label-line-height: 20px !default;
 $lumx-material-progress-bounce: block !default;
 $lumx-material-progress-rotate: none !default;
-$lumx-radio-button-wrapper-size: 20px !default;
-$lumx-radio-button-control-size: 16px !default;
-$lumx-radio-button-indicator-size: 8px !default;
+$lumx-material-radio-button-wrapper-size: 20px !default;
+$lumx-material-radio-button-control-size: 16px !default;
+$lumx-material-radio-button-indicator-size: 8px !default;
 $lumx-switch-wrapper-width: 30px !default;
 $lumx-switch-wrapper-height: 20px !default;
 $lumx-switch-control-width: 30px !default;
@@ -335,11 +335,11 @@ $lumx-design-tokens: (
             'bounce': $lumx-material-progress-bounce,
             'rotate': $lumx-material-progress-rotate,
         ),
-    ),
-    'radio-button': (
-        'wrapper-size': $lumx-radio-button-wrapper-size,
-        'control-size': $lumx-radio-button-control-size,
-        'indicator-size': $lumx-radio-button-indicator-size,
+        'radio-button': (
+            'wrapper-size': $lumx-material-radio-button-wrapper-size,
+            'control-size': $lumx-material-radio-button-control-size,
+            'indicator-size': $lumx-material-radio-button-indicator-size,
+        ),
     ),
     'switch': (
         'wrapper': (
