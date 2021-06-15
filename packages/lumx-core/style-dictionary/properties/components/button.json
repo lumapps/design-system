@@ -1,9 +1,12 @@
 {
     "button": {
-        "font-weight": { "value": "700" },
-        "text-transform": { "value": "none" },
-        "variant-icon-border-radius": { "value": "{border-radius.value}" },
-        "size-m-font-size": { "value": "14px" },
-        "size-s-font-size": { "value": "12px" }
+        "size-m": {
+            "font-size": { "value": "14px" },
+            "font-weight": { "value": "700" }
+        },
+        "size-s": {
+            "font-size": { "value": "12px" },
+            "font-weight": { "value": "700" }
+        }
     }
 }
