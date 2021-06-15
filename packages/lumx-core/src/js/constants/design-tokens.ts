@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 15 Jun 2021 12:43:28 GMT
+ * Generated on Tue, 15 Jun 2021 12:53:07 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -181,24 +181,27 @@ export const DESIGN_TOKENS = {
                 },
             },
         },
-    },
-    'radio-button': {
-        'wrapper-size': {
-            attributes: {
-                category: 'radio-button',
-                type: 'wrapper-size',
+        'radio-button': {
+            'wrapper-size': {
+                attributes: {
+                    category: 'material',
+                    type: 'radio-button',
+                    item: 'wrapper-size',
+                },
             },
-        },
-        'control-size': {
-            attributes: {
-                category: 'radio-button',
-                type: 'control-size',
+            'control-size': {
+                attributes: {
+                    category: 'material',
+                    type: 'radio-button',
+                    item: 'control-size',
+                },
             },
-        },
-        'indicator-size': {
-            attributes: {
-                category: 'radio-button',
-                type: 'indicator-size',
+            'indicator-size': {
+                attributes: {
+                    category: 'material',
+                    type: 'radio-button',
+                    item: 'indicator-size',
+                },
             },
         },
     },
