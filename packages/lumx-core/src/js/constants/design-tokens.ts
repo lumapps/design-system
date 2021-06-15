@@ -38,54 +38,6 @@ export const DESIGN_TOKENS = {
             },
         },
     },
-    chip: {
-        'size-m': {
-            height: {
-                attributes: {
-                    category: 'chip',
-                    type: 'size-m',
-                    item: 'height',
-                },
-            },
-            'border-radius': {
-                attributes: {
-                    category: 'chip',
-                    type: 'size-m',
-                    item: 'border-radius',
-                },
-            },
-            'padding-vertical': {
-                attributes: {
-                    category: 'chip',
-                    type: 'size-m',
-                    item: 'padding-vertical',
-                },
-            },
-        },
-        'size-s': {
-            height: {
-                attributes: {
-                    category: 'chip',
-                    type: 'size-s',
-                    item: 'height',
-                },
-            },
-            'border-radius': {
-                attributes: {
-                    category: 'chip',
-                    type: 'size-s',
-                    item: 'border-radius',
-                },
-            },
-            'padding-vertical': {
-                attributes: {
-                    category: 'chip',
-                    type: 'size-s',
-                    item: 'padding-vertical',
-                },
-            },
-        },
-    },
     'input-helper': {
         'font-size': {
             attributes: {
@@ -156,6 +108,54 @@ export const DESIGN_TOKENS = {
                     category: 'material',
                     type: 'checkbox',
                     item: 'control-size',
+                },
+            },
+        },
+        chip: {
+            'size-m': {
+                height: {
+                    attributes: {
+                        category: 'material',
+                        type: 'chip',
+                        item: 'size-m',
+                    },
+                },
+                'border-radius': {
+                    attributes: {
+                        category: 'material',
+                        type: 'chip',
+                        item: 'size-m',
+                    },
+                },
+                'padding-vertical': {
+                    attributes: {
+                        category: 'material',
+                        type: 'chip',
+                        item: 'size-m',
+                    },
+                },
+            },
+            'size-s': {
+                height: {
+                    attributes: {
+                        category: 'material',
+                        type: 'chip',
+                        item: 'size-s',
+                    },
+                },
+                'border-radius': {
+                    attributes: {
+                        category: 'material',
+                        type: 'chip',
+                        item: 'size-s',
+                    },
+                },
+                'padding-vertical': {
+                    attributes: {
+                        category: 'material',
+                        type: 'chip',
+                        item: 'size-s',
+                    },
                 },
             },
         },

@@ -7,12 +7,6 @@ $lumx-button-size-m-font-size: 14px !default;
 $lumx-button-size-m-font-weight: 700 !default;
 $lumx-button-size-s-font-size: 12px !default;
 $lumx-button-size-s-font-weight: 700 !default;
-$lumx-chip-size-m-height: 36px !default;
-$lumx-chip-size-m-border-radius: 18px !default;
-$lumx-chip-size-m-padding-vertical: 16px !default;
-$lumx-chip-size-s-height: 24px !default;
-$lumx-chip-size-s-border-radius: 12px !default;
-$lumx-chip-size-s-padding-vertical: 12px !default;
 $lumx-input-helper-font-size: 12px !default;
 $lumx-input-helper-font-weight: 400 !default;
 $lumx-input-helper-line-height: 16px !default;
@@ -23,6 +17,12 @@ $lumx-material-button-text-transform: none !default;
 $lumx-material-button-variant-icon-border-radius: 4px !default;
 $lumx-material-checkbox-wrapper-size: 20px !default;
 $lumx-material-checkbox-control-size: 16px !default;
+$lumx-material-chip-size-m-height: 36px !default;
+$lumx-material-chip-size-m-border-radius: 18px !default;
+$lumx-material-chip-size-m-padding-vertical: 16px !default;
+$lumx-material-chip-size-s-height: 24px !default;
+$lumx-material-chip-size-s-border-radius: 12px !default;
+$lumx-material-chip-size-s-padding-vertical: 12px !default;
 $lumx-material-progress-bounce: block !default;
 $lumx-material-progress-rotate: none !default;
 $lumx-radio-button-wrapper-size: 20px !default;
@@ -300,18 +300,6 @@ $lumx-design-tokens: (
             'font-weight': $lumx-button-size-s-font-weight,
         ),
     ),
-    'chip': (
-        'size-m': (
-            'height': $lumx-chip-size-m-height,
-            'border-radius': $lumx-chip-size-m-border-radius,
-            'padding-vertical': $lumx-chip-size-m-padding-vertical,
-        ),
-        'size-s': (
-            'height': $lumx-chip-size-s-height,
-            'border-radius': $lumx-chip-size-s-border-radius,
-            'padding-vertical': $lumx-chip-size-s-padding-vertical,
-        ),
-    ),
     'input-helper': (
         'font-size': $lumx-input-helper-font-size,
         'font-weight': $lumx-input-helper-font-weight,
@@ -330,6 +318,18 @@ $lumx-design-tokens: (
         'checkbox': (
             'wrapper-size': $lumx-material-checkbox-wrapper-size,
             'control-size': $lumx-material-checkbox-control-size,
+        ),
+        'chip': (
+            'size-m': (
+                'height': $lumx-material-chip-size-m-height,
+                'border-radius': $lumx-material-chip-size-m-border-radius,
+                'padding-vertical': $lumx-material-chip-size-m-padding-vertical,
+            ),
+            'size-s': (
+                'height': $lumx-material-chip-size-s-height,
+                'border-radius': $lumx-material-chip-size-s-border-radius,
+                'padding-vertical': $lumx-material-chip-size-s-padding-vertical,
+            ),
         ),
         'progress': (
             'bounce': $lumx-material-progress-bounce,

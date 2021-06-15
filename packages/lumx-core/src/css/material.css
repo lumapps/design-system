@@ -4,12 +4,6 @@
     --lumx-button-size-m-font-weight: 500;
     --lumx-button-size-s-font-size: 10px;
     --lumx-button-size-s-font-weight: 500;
-    --lumx-chip-size-m-height: 32px;
-    --lumx-chip-size-m-border-radius: 16px;
-    --lumx-chip-size-m-padding-vertical: 12px;
-    --lumx-chip-size-s-height: 20px;
-    --lumx-chip-size-s-border-radius: 2px;
-    --lumx-chip-size-s-padding-vertical: 8px;
     --lumx-input-label-font-size: 16px;
     --lumx-input-label-line-height: 24px;
     --lumx-input-helper-font-size: 14px;
@@ -51,6 +45,12 @@
     --lumx-material-button-variant-icon-border-radius: 50%;
     --lumx-material-checkbox-wrapper-size: 24px;
     --lumx-material-checkbox-control-size: 18px;
+    --lumx-material-chip-size-m-height: 32px;
+    --lumx-material-chip-size-m-border-radius: 16px;
+    --lumx-material-chip-size-m-padding-vertical: 12px;
+    --lumx-material-chip-size-s-height: 20px;
+    --lumx-material-chip-size-s-border-radius: 2px;
+    --lumx-material-chip-size-s-padding-vertical: 8px;
     --lumx-material-progress-bounce: none;
     --lumx-material-progress-rotate: block;
 }

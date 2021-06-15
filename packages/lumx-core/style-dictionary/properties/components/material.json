@@ -8,6 +8,18 @@
             "wrapper-size": { "value": "20px" },
             "control-size": { "value": "16px" }
         },
+        "chip": {
+            "size-m": {
+                "height": { "value": "{size.m.value}" },
+                "border-radius": { "value": "18px" },
+                "padding-vertical": { "value": "{spacing.unit.big.value}" }
+            },
+            "size-s": {
+                "height": { "value": "{size.s.value}" },
+                "border-radius": { "value": "12px" },
+                "padding-vertical": { "value": "{spacing.unit.medium.value}" }
+            }
+        },
         "progress": {
             "bounce": { "value": "block" },
             "rotate": { "value": "none" }
