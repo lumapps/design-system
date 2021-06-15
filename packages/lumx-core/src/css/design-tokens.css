@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 04 Jun 2021 07:38:44 GMT
+ * Generated on Tue, 15 Jun 2021 06:30:24 GMT
  */
 
 :root {
@@ -255,4 +255,32 @@
     --lumx-typography-custom-title1-font-size: 40px;
     --lumx-typography-custom-title1-font-weight: 700;
     --lumx-typography-custom-title1-line-height: 50px;
+    --lumx-typography-custom-title2-font-size: 30px;
+    --lumx-typography-custom-title2-font-weight: 700;
+    --lumx-typography-custom-title2-line-height: 40px;
+    --lumx-typography-custom-title3-font-size: 24px;
+    --lumx-typography-custom-title3-font-weight: 700;
+    --lumx-typography-custom-title3-line-height: 32px;
+    --lumx-typography-custom-title4-font-size: 20px;
+    --lumx-typography-custom-title4-font-weight: 700;
+    --lumx-typography-custom-title4-line-height: 30px;
+    --lumx-typography-custom-title5-font-size: 16px;
+    --lumx-typography-custom-title5-font-weight: 700;
+    --lumx-typography-custom-title5-line-height: 24px;
+    --lumx-typography-custom-title6-font-size: 14px;
+    --lumx-typography-custom-title6-font-weight: 700;
+    --lumx-typography-custom-title6-line-height: 20px;
+    --lumx-typography-custom-intro-font-size: 18px;
+    --lumx-typography-custom-intro-font-weight: 700;
+    --lumx-typography-custom-intro-line-height: 30px;
+    --lumx-typography-custom-body-large-font-size: 16px;
+    --lumx-typography-custom-body-large-font-weight: 400;
+    --lumx-typography-custom-body-large-line-height: 24px;
+    --lumx-typography-custom-body-font-size: 14px;
+    --lumx-typography-custom-body-font-weight: 400;
+    --lumx-typography-custom-body-line-height: 20px;
+    --lumx-typography-custom-quote-font-size: 16px;
+    --lumx-typography-custom-quote-font-weight: 300;
+    --lumx-typography-custom-quote-font-style: italic;
+    --lumx-typography-custom-quote-line-height: 24px;
 }

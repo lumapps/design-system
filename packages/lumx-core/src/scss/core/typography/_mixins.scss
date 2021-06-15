@@ -8,6 +8,7 @@
     @if $type == 'custom' {
         font-family: var(--lumx-typography-style-custom-font-family, --lumx-typography-font-family);
         font-size: var(--lumx-typography-style-custom-font-size);
+        font-style: var(--lumx-typography-style-custom-font-style);
         font-weight: var(--lumx-typography-style-custom-font-weight);
         line-height: var(--lumx-typography-style-custom-line-height);
     } @else if $type == 'interface' {
