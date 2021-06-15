@@ -4,6 +4,10 @@
             "text-transform": { "value": "none" },
             "variant-icon-border-radius": { "value": "{border-radius.value}" }
         },
+        "checkbox": {
+            "wrapper-size": { "value": "20px" },
+            "control-size": { "value": "16px" }
+        },
         "progress": {
             "bounce": { "value": "block" },
             "rotate": { "value": "none" }

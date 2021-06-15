@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 15 Jun 2021 08:29:49 GMT
+ * Generated on Tue, 15 Jun 2021 08:50:21 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -35,20 +35,6 @@ export const DESIGN_TOKENS = {
                     type: 'size-s',
                     item: 'font-weight',
                 },
-            },
-        },
-    },
-    checkbox: {
-        'wrapper-size': {
-            attributes: {
-                category: 'checkbox',
-                type: 'wrapper-size',
-            },
-        },
-        'control-size': {
-            attributes: {
-                category: 'checkbox',
-                type: 'control-size',
             },
         },
     },
@@ -154,6 +140,22 @@ export const DESIGN_TOKENS = {
                     category: 'material',
                     type: 'button',
                     item: 'variant-icon-border-radius',
+                },
+            },
+        },
+        checkbox: {
+            'wrapper-size': {
+                attributes: {
+                    category: 'material',
+                    type: 'checkbox',
+                    item: 'wrapper-size',
+                },
+            },
+            'control-size': {
+                attributes: {
+                    category: 'material',
+                    type: 'checkbox',
+                    item: 'control-size',
                 },
             },
         },

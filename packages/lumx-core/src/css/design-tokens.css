@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 15 Jun 2021 08:29:49 GMT
+ * Generated on Tue, 15 Jun 2021 08:50:21 GMT
  */
 
 :root {
@@ -8,8 +8,6 @@
   --lumx-button-size-m-font-weight: 700;
   --lumx-button-size-s-font-size: 12px;
   --lumx-button-size-s-font-weight: 700;
-  --lumx-checkbox-wrapper-size: 20px;
-  --lumx-checkbox-control-size: 16px;
   --lumx-chip-size-m-height: 36px;
   --lumx-chip-size-m-border-radius: 18px;
   --lumx-chip-size-m-padding-vertical: 16px;
@@ -24,6 +22,8 @@
   --lumx-input-label-line-height: 20px;
   --lumx-material-button-text-transform: none;
   --lumx-material-button-variant-icon-border-radius: 4px;
+  --lumx-material-checkbox-wrapper-size: 20px;
+  --lumx-material-checkbox-control-size: 16px;
   --lumx-material-progress-bounce: block;
   --lumx-material-progress-rotate: none;
   --lumx-radio-button-wrapper-size: 20px;
