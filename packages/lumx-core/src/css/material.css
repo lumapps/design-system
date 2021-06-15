@@ -1,10 +1,9 @@
 :root {
     --lumx-border-radius: 2px;
     --lumx-typography-font-family: 'Roboto', sans-serif;
-    --lumx-button-font-weight: 500;
-    --lumx-button-text-transform: uppercase;
-    --lumx-button-variant-icon-border-radius: 50%;
+    --lumx-button-size-m-font-weight: 500;
     --lumx-button-size-s-font-size: 10px;
+    --lumx-button-size-s-font-weight: 500;
     --lumx-checkbox-wrapper-size: 24px;
     --lumx-checkbox-control-size: 18px;
     --lumx-chip-size-m-height: 32px;
@@ -17,8 +16,6 @@
     --lumx-input-label-line-height: 24px;
     --lumx-input-helper-font-size: 14px;
     --lumx-input-helper-line-height: 20px;
-    --lumx-progress-bounce: none;
-    --lumx-progress-rotate: block;
     --lumx-radio-button-wrapper-size: 24px;
     --lumx-radio-button-control-size: 20px;
     --lumx-radio-button-indicator-size: 10px;
@@ -52,4 +49,8 @@
     --lumx-text-field-state-focus-theme-dark-border-color: #ffffff;
     --lumx-text-field-input-font-size: 16px;
     --lumx-text-field-input-line-height: 24px;
+    --lumx-material-button-text-transform: uppercase;
+    --lumx-material-button-variant-icon-border-radius: 50%;
+    --lumx-material-progress-bounce: none;
+    --lumx-material-progress-rotate: block;
 }

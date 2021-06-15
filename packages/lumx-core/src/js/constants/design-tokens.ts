@@ -5,34 +5,36 @@
 
 export const DESIGN_TOKENS = {
     button: {
-        'font-weight': {
-            attributes: {
-                category: 'button',
-                type: 'font-weight',
+        'size-m': {
+            'font-size': {
+                attributes: {
+                    category: 'button',
+                    type: 'size-m',
+                    item: 'font-size',
+                },
+            },
+            'font-weight': {
+                attributes: {
+                    category: 'button',
+                    type: 'size-m',
+                    item: 'font-weight',
+                },
             },
         },
-        'text-transform': {
-            attributes: {
-                category: 'button',
-                type: 'text-transform',
+        'size-s': {
+            'font-size': {
+                attributes: {
+                    category: 'button',
+                    type: 'size-s',
+                    item: 'font-size',
+                },
             },
-        },
-        'variant-icon-border-radius': {
-            attributes: {
-                category: 'button',
-                type: 'variant-icon-border-radius',
-            },
-        },
-        'size-m-font-size': {
-            attributes: {
-                category: 'button',
-                type: 'size-m-font-size',
-            },
-        },
-        'size-s-font-size': {
-            attributes: {
-                category: 'button',
-                type: 'size-s-font-size',
+            'font-weight': {
+                attributes: {
+                    category: 'button',
+                    type: 'size-s',
+                    item: 'font-weight',
+                },
             },
         },
     },
@@ -135,6 +137,40 @@ export const DESIGN_TOKENS = {
             attributes: {
                 category: 'input-label',
                 type: 'line-height',
+            },
+        },
+    },
+    material: {
+        button: {
+            'text-transform': {
+                attributes: {
+                    category: 'material',
+                    type: 'button',
+                    item: 'text-transform',
+                },
+            },
+            'variant-icon-border-radius': {
+                attributes: {
+                    category: 'material',
+                    type: 'button',
+                    item: 'variant-icon-border-radius',
+                },
+            },
+        },
+        progress: {
+            bounce: {
+                attributes: {
+                    category: 'material',
+                    type: 'progress',
+                    item: 'bounce',
+                },
+            },
+            rotate: {
+                attributes: {
+                    category: 'material',
+                    type: 'progress',
+                    item: 'rotate',
+                },
             },
         },
     },
@@ -2255,20 +2291,6 @@ export const DESIGN_TOKENS = {
                         a: 1,
                     },
                 },
-            },
-        },
-    },
-    progress: {
-        bounce: {
-            attributes: {
-                category: 'progress',
-                type: 'bounce',
-            },
-        },
-        rotate: {
-            attributes: {
-                category: 'progress',
-                type: 'rotate',
             },
         },
     },

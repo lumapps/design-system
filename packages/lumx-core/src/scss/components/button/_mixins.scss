@@ -34,7 +34,7 @@
         }
     } @else if $variant == 'icon' {
         width: map-get($lumx-sizes, $size);
-        border-radius: var(--lumx-button-variant-icon-border-radius);
+        border-radius: var(--lumx-material-button-variant-icon-border-radius);
     }
 }
 
@@ -136,9 +136,10 @@
 }
 
 @mixin lumx-button-text($size) {
+    font-family: var(--lumx-button-size-#{$size}-font-family, var(--lumx-typography-font-family));
     font-size: var(--lumx-button-size-#{$size}-font-size);
-    font-weight: var(--lumx-button-font-weight);
+    font-weight: var(--lumx-button-size-#{$size}-font-weight);
     line-height: map-get($lumx-sizes, $size);
     pointer-events: none;
-    text-transform: var(--lumx-button-text-transform);
+    text-transform: var(--lumx-material-button-text-transform);
 }

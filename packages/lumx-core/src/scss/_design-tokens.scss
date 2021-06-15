@@ -3,11 +3,10 @@
  * Generated on Thu, 06 May 2021 08:43:34 GMT
  */
 
-$lumx-button-font-weight: 700 !default;
-$lumx-button-text-transform: none !default;
-$lumx-button-variant-icon-border-radius: 4px !default;
 $lumx-button-size-m-font-size: 14px !default;
+$lumx-button-size-m-font-weight: 700 !default;
 $lumx-button-size-s-font-size: 12px !default;
+$lumx-button-size-s-font-weight: 700 !default;
 $lumx-checkbox-wrapper-size: 20px !default;
 $lumx-checkbox-control-size: 16px !default;
 $lumx-chip-size-m-height: 36px !default;
@@ -22,6 +21,10 @@ $lumx-input-helper-line-height: 16px !default;
 $lumx-input-label-font-size: 14px !default;
 $lumx-input-label-font-weight: 400 !default;
 $lumx-input-label-line-height: 20px !default;
+$lumx-material-button-text-transform: none !default;
+$lumx-material-button-variant-icon-border-radius: 4px !default;
+$lumx-material-progress-bounce: block !default;
+$lumx-material-progress-rotate: none !default;
 $lumx-radio-button-wrapper-size: 20px !default;
 $lumx-radio-button-control-size: 16px !default;
 $lumx-radio-button-indicator-size: 8px !default;
@@ -213,8 +216,6 @@ $lumx-color-orange-L3: rgba(255, 179, 0, 0.6) !default; // Base yellow color wit
 $lumx-color-orange-L4: rgba(255, 179, 0, 0.4) !default; // Base yellow color with 40% opacity
 $lumx-color-orange-L5: rgba(255, 179, 0, 0.2) !default; // Base yellow color with 20% opacity
 $lumx-color-orange-L6: rgba(255, 179, 0, 0.1) !default; // Base yellow color with 10% opacity
-$lumx-progress-bounce: block !default;
-$lumx-progress-rotate: none !default;
 $lumx-size-xxs: 14px !default;
 $lumx-size-xs: 20px !default;
 $lumx-size-s: 24px !default;
@@ -290,11 +291,14 @@ $lumx-typography-custom-quote-line-height: 24px !default;
 
 $lumx-design-tokens: (
     'button': (
-        'font-weight': $lumx-button-font-weight,
-        'text-transform': $lumx-button-text-transform,
-        'variant-icon-border-radius': $lumx-button-variant-icon-border-radius,
-        'size-m-font-size': $lumx-button-size-m-font-size,
-        'size-s-font-size': $lumx-button-size-s-font-size,
+        'size-m': (
+            'font-size': $lumx-button-size-m-font-size,
+            'font-weight': $lumx-button-size-m-font-weight,
+        ),
+        'size-s': (
+            'font-size': $lumx-button-size-s-font-size,
+            'font-weight': $lumx-button-size-s-font-weight,
+        ),
     ),
     'checkbox': (
         'wrapper-size': $lumx-checkbox-wrapper-size,
@@ -321,6 +325,16 @@ $lumx-design-tokens: (
         'font-size': $lumx-input-label-font-size,
         'font-weight': $lumx-input-label-font-weight,
         'line-height': $lumx-input-label-line-height,
+    ),
+    'material': (
+        'button': (
+            'text-transform': $lumx-material-button-text-transform,
+            'variant-icon-border-radius': $lumx-material-button-variant-icon-border-radius,
+        ),
+        'progress': (
+            'bounce': $lumx-material-progress-bounce,
+            'rotate': $lumx-material-progress-rotate,
+        ),
     ),
     'radio-button': (
         'wrapper-size': $lumx-radio-button-wrapper-size,
@@ -562,10 +576,6 @@ $lumx-design-tokens: (
             'L5': $lumx-color-orange-L5,
             'L6': $lumx-color-orange-L6,
         ),
-    ),
-    'progress': (
-        'bounce': $lumx-progress-bounce,
-        'rotate': $lumx-progress-rotate,
     ),
     'size': (
         'xxs': $lumx-size-xxs,
