@@ -259,6 +259,34 @@ $lumx-typography-interface-overline-line-height: 12px !default;
 $lumx-typography-custom-title1-font-size: 40px !default;
 $lumx-typography-custom-title1-font-weight: 700 !default;
 $lumx-typography-custom-title1-line-height: 50px !default;
+$lumx-typography-custom-title2-font-size: 30px !default;
+$lumx-typography-custom-title2-font-weight: 700 !default;
+$lumx-typography-custom-title2-line-height: 40px !default;
+$lumx-typography-custom-title3-font-size: 24px !default;
+$lumx-typography-custom-title3-font-weight: 700 !default;
+$lumx-typography-custom-title3-line-height: 32px !default;
+$lumx-typography-custom-title4-font-size: 20px !default;
+$lumx-typography-custom-title4-font-weight: 700 !default;
+$lumx-typography-custom-title4-line-height: 30px !default;
+$lumx-typography-custom-title5-font-size: 16px !default;
+$lumx-typography-custom-title5-font-weight: 700 !default;
+$lumx-typography-custom-title5-line-height: 24px !default;
+$lumx-typography-custom-title6-font-size: 14px !default;
+$lumx-typography-custom-title6-font-weight: 700 !default;
+$lumx-typography-custom-title6-line-height: 20px !default;
+$lumx-typography-custom-intro-font-size: 18px !default;
+$lumx-typography-custom-intro-font-weight: 700 !default;
+$lumx-typography-custom-intro-line-height: 30px !default;
+$lumx-typography-custom-body-large-font-size: 16px !default;
+$lumx-typography-custom-body-large-font-weight: 400 !default;
+$lumx-typography-custom-body-large-line-height: 24px !default;
+$lumx-typography-custom-body-font-size: 14px !default;
+$lumx-typography-custom-body-font-weight: 400 !default;
+$lumx-typography-custom-body-line-height: 20px !default;
+$lumx-typography-custom-quote-font-size: 16px !default;
+$lumx-typography-custom-quote-font-weight: 300 !default;
+$lumx-typography-custom-quote-font-style: italic !default;
+$lumx-typography-custom-quote-line-height: 24px !default;
 
 $lumx-design-tokens: (
     'button': (
@@ -611,6 +639,52 @@ $lumx-design-tokens: (
                 'font-size': $lumx-typography-custom-title1-font-size,
                 'font-weight': $lumx-typography-custom-title1-font-weight,
                 'line-height': $lumx-typography-custom-title1-line-height,
+            ),
+            'title2': (
+                'font-size': $lumx-typography-custom-title2-font-size,
+                'font-weight': $lumx-typography-custom-title2-font-weight,
+                'line-height': $lumx-typography-custom-title2-line-height,
+            ),
+            'title3': (
+                'font-size': $lumx-typography-custom-title3-font-size,
+                'font-weight': $lumx-typography-custom-title3-font-weight,
+                'line-height': $lumx-typography-custom-title3-line-height,
+            ),
+            'title4': (
+                'font-size': $lumx-typography-custom-title4-font-size,
+                'font-weight': $lumx-typography-custom-title4-font-weight,
+                'line-height': $lumx-typography-custom-title4-line-height,
+            ),
+            'title5': (
+                'font-size': $lumx-typography-custom-title5-font-size,
+                'font-weight': $lumx-typography-custom-title5-font-weight,
+                'line-height': $lumx-typography-custom-title5-line-height,
+            ),
+            'title6': (
+                'font-size': $lumx-typography-custom-title6-font-size,
+                'font-weight': $lumx-typography-custom-title6-font-weight,
+                'line-height': $lumx-typography-custom-title6-line-height,
+            ),
+            'intro': (
+                'font-size': $lumx-typography-custom-intro-font-size,
+                'font-weight': $lumx-typography-custom-intro-font-weight,
+                'line-height': $lumx-typography-custom-intro-line-height,
+            ),
+            'body-large': (
+                'font-size': $lumx-typography-custom-body-large-font-size,
+                'font-weight': $lumx-typography-custom-body-large-font-weight,
+                'line-height': $lumx-typography-custom-body-large-line-height,
+            ),
+            'body': (
+                'font-size': $lumx-typography-custom-body-font-size,
+                'font-weight': $lumx-typography-custom-body-font-weight,
+                'line-height': $lumx-typography-custom-body-line-height,
+            ),
+            'quote': (
+                'font-size': $lumx-typography-custom-quote-font-size,
+                'font-weight': $lumx-typography-custom-quote-font-weight,
+                'font-style': $lumx-typography-custom-quote-font-style,
+                'line-height': $lumx-typography-custom-quote-line-height,
             ),
         ),
     ),

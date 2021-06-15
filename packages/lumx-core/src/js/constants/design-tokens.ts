@@ -2595,6 +2595,220 @@ export const DESIGN_TOKENS = {
                     },
                 },
             },
+            title2: {
+                'font-size': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title2',
+                    },
+                },
+                'font-weight': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title2',
+                    },
+                },
+                'line-height': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title2',
+                    },
+                },
+            },
+            title3: {
+                'font-size': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title3',
+                    },
+                },
+                'font-weight': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title3',
+                    },
+                },
+                'line-height': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title3',
+                    },
+                },
+            },
+            title4: {
+                'font-size': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title4',
+                    },
+                },
+                'font-weight': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title4',
+                    },
+                },
+                'line-height': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title4',
+                    },
+                },
+            },
+            title5: {
+                'font-size': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title5',
+                    },
+                },
+                'font-weight': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title5',
+                    },
+                },
+                'line-height': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title5',
+                    },
+                },
+            },
+            title6: {
+                'font-size': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title6',
+                    },
+                },
+                'font-weight': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title6',
+                    },
+                },
+                'line-height': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title6',
+                    },
+                },
+            },
+            intro: {
+                'font-size': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'intro',
+                    },
+                },
+                'font-weight': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'intro',
+                    },
+                },
+                'line-height': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'intro',
+                    },
+                },
+            },
+            'body-large': {
+                'font-size': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'body-large',
+                    },
+                },
+                'font-weight': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'body-large',
+                    },
+                },
+                'line-height': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'body-large',
+                    },
+                },
+            },
+            body: {
+                'font-size': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'body',
+                    },
+                },
+                'font-weight': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'body',
+                    },
+                },
+                'line-height': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'body',
+                    },
+                },
+            },
+            quote: {
+                'font-size': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'quote',
+                    },
+                },
+                'font-weight': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'quote',
+                    },
+                },
+                'font-style': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'quote',
+                    },
+                },
+                'line-height': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'quote',
+                    },
+                },
+            },
         },
     },
 };
