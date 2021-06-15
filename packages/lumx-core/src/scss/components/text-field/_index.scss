@@ -99,7 +99,7 @@
             min-width: $lumx-text-field-min-width;
             flex: 1 1 auto;
             margin: $lumx-chip-group-spacing 0;
-            line-height: var(--lumx-chip-size-s-height);
+            line-height: var(--lumx-material-chip-size-s-height);
         }
 
         &--textarea {

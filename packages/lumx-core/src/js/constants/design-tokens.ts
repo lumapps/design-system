@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 15 Jun 2021 08:50:21 GMT
+ * Generated on Tue, 15 Jun 2021 12:32:23 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -34,54 +34,6 @@ export const DESIGN_TOKENS = {
                     category: 'button',
                     type: 'size-s',
                     item: 'font-weight',
-                },
-            },
-        },
-    },
-    chip: {
-        'size-m': {
-            height: {
-                attributes: {
-                    category: 'chip',
-                    type: 'size-m',
-                    item: 'height',
-                },
-            },
-            'border-radius': {
-                attributes: {
-                    category: 'chip',
-                    type: 'size-m',
-                    item: 'border-radius',
-                },
-            },
-            'padding-vertical': {
-                attributes: {
-                    category: 'chip',
-                    type: 'size-m',
-                    item: 'padding-vertical',
-                },
-            },
-        },
-        'size-s': {
-            height: {
-                attributes: {
-                    category: 'chip',
-                    type: 'size-s',
-                    item: 'height',
-                },
-            },
-            'border-radius': {
-                attributes: {
-                    category: 'chip',
-                    type: 'size-s',
-                    item: 'border-radius',
-                },
-            },
-            'padding-vertical': {
-                attributes: {
-                    category: 'chip',
-                    type: 'size-s',
-                    item: 'padding-vertical',
                 },
             },
         },
@@ -156,6 +108,54 @@ export const DESIGN_TOKENS = {
                     category: 'material',
                     type: 'checkbox',
                     item: 'control-size',
+                },
+            },
+        },
+        chip: {
+            'size-m': {
+                height: {
+                    attributes: {
+                        category: 'material',
+                        type: 'chip',
+                        item: 'size-m',
+                    },
+                },
+                'border-radius': {
+                    attributes: {
+                        category: 'material',
+                        type: 'chip',
+                        item: 'size-m',
+                    },
+                },
+                'padding-vertical': {
+                    attributes: {
+                        category: 'material',
+                        type: 'chip',
+                        item: 'size-m',
+                    },
+                },
+            },
+            'size-s': {
+                height: {
+                    attributes: {
+                        category: 'material',
+                        type: 'chip',
+                        item: 'size-s',
+                    },
+                },
+                'border-radius': {
+                    attributes: {
+                        category: 'material',
+                        type: 'chip',
+                        item: 'size-s',
+                    },
+                },
+                'padding-vertical': {
+                    attributes: {
+                        category: 'material',
+                        type: 'chip',
+                        item: 'size-s',
+                    },
                 },
             },
         },
