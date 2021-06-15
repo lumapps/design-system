@@ -1,8 +1,8 @@
 @mixin lumx-input-helper($theme) {
     display: block;
-    font-size: var(--lumx-input-helper-font-size);
-    font-weight: var(--lumx-input-helper-font-weight);
-    line-height: var(--lumx-input-helper-line-height);
+    font-size: var(--lumx-material-input-helper-font-size);
+    font-weight: var(--lumx-material-input-helper-font-weight);
+    line-height: var(--lumx-material-input-helper-line-height);
 
     @if $theme == lumx-base-const('theme', 'LIGHT') {
         color: lumx-color-variant('dark', 'L2');

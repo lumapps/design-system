@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 15 Jun 2021 12:32:23 GMT
+ * Generated on Tue, 15 Jun 2021 12:43:28 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -35,46 +35,6 @@ export const DESIGN_TOKENS = {
                     type: 'size-s',
                     item: 'font-weight',
                 },
-            },
-        },
-    },
-    'input-helper': {
-        'font-size': {
-            attributes: {
-                category: 'input-helper',
-                type: 'font-size',
-            },
-        },
-        'font-weight': {
-            attributes: {
-                category: 'input-helper',
-                type: 'font-weight',
-            },
-        },
-        'line-height': {
-            attributes: {
-                category: 'input-helper',
-                type: 'line-height',
-            },
-        },
-    },
-    'input-label': {
-        'font-size': {
-            attributes: {
-                category: 'input-label',
-                type: 'font-size',
-            },
-        },
-        'font-weight': {
-            attributes: {
-                category: 'input-label',
-                type: 'font-weight',
-            },
-        },
-        'line-height': {
-            attributes: {
-                category: 'input-label',
-                type: 'line-height',
             },
         },
     },
@@ -156,6 +116,52 @@ export const DESIGN_TOKENS = {
                         type: 'chip',
                         item: 'size-s',
                     },
+                },
+            },
+        },
+        'input-helper': {
+            'font-size': {
+                attributes: {
+                    category: 'material',
+                    type: 'input-helper',
+                    item: 'font-size',
+                },
+            },
+            'font-weight': {
+                attributes: {
+                    category: 'material',
+                    type: 'input-helper',
+                    item: 'font-weight',
+                },
+            },
+            'line-height': {
+                attributes: {
+                    category: 'material',
+                    type: 'input-helper',
+                    item: 'line-height',
+                },
+            },
+        },
+        'input-label': {
+            'font-size': {
+                attributes: {
+                    category: 'material',
+                    type: 'input-label',
+                    item: 'font-size',
+                },
+            },
+            'font-weight': {
+                attributes: {
+                    category: 'material',
+                    type: 'input-label',
+                    item: 'font-weight',
+                },
+            },
+            'line-height': {
+                attributes: {
+                    category: 'material',
+                    type: 'input-label',
+                    item: 'line-height',
                 },
             },
         },
