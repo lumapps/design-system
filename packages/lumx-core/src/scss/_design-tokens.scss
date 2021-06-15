@@ -28,12 +28,12 @@ $lumx-material-progress-rotate: none !default;
 $lumx-material-radio-button-wrapper-size: 20px !default;
 $lumx-material-radio-button-control-size: 16px !default;
 $lumx-material-radio-button-indicator-size: 8px !default;
-$lumx-switch-wrapper-width: 30px !default;
-$lumx-switch-wrapper-height: 20px !default;
-$lumx-switch-control-width: 30px !default;
-$lumx-switch-control-height: 16px !default;
-$lumx-switch-indicator-size: 8px !default;
-$lumx-switch-indicator-offset: 4px !default;
+$lumx-material-switch-wrapper-width: 30px !default;
+$lumx-material-switch-wrapper-height: 20px !default;
+$lumx-material-switch-control-width: 30px !default;
+$lumx-material-switch-control-height: 16px !default;
+$lumx-material-switch-indicator-size: 8px !default;
+$lumx-material-switch-indicator-offset: 4px !default;
 $lumx-text-field-padding-top: 0 !default;
 $lumx-text-field-padding-bottom: 0 !default;
 $lumx-text-field-header-margin-bottom: 8px !default;
@@ -340,19 +340,19 @@ $lumx-design-tokens: (
             'control-size': $lumx-material-radio-button-control-size,
             'indicator-size': $lumx-material-radio-button-indicator-size,
         ),
-    ),
-    'switch': (
-        'wrapper': (
-            'width': $lumx-switch-wrapper-width,
-            'height': $lumx-switch-wrapper-height,
-        ),
-        'control': (
-            'width': $lumx-switch-control-width,
-            'height': $lumx-switch-control-height,
-        ),
-        'indicator': (
-            'size': $lumx-switch-indicator-size,
-            'offset': $lumx-switch-indicator-offset,
+        'switch': (
+            'wrapper': (
+                'width': $lumx-material-switch-wrapper-width,
+                'height': $lumx-material-switch-wrapper-height,
+            ),
+            'control': (
+                'width': $lumx-material-switch-control-width,
+                'height': $lumx-material-switch-control-height,
+            ),
+            'indicator': (
+                'size': $lumx-material-switch-indicator-size,
+                'offset': $lumx-material-switch-indicator-offset,
+            ),
         ),
     ),
     'text-field': (

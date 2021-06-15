@@ -204,53 +204,53 @@ export const DESIGN_TOKENS = {
                 },
             },
         },
-    },
-    switch: {
-        wrapper: {
-            width: {
-                attributes: {
-                    category: 'switch',
-                    type: 'wrapper',
-                    item: 'width',
+        switch: {
+            wrapper: {
+                width: {
+                    attributes: {
+                        category: 'material',
+                        type: 'switch',
+                        item: 'wrapper',
+                    },
+                },
+                height: {
+                    attributes: {
+                        category: 'material',
+                        type: 'switch',
+                        item: 'wrapper',
+                    },
                 },
             },
-            height: {
-                attributes: {
-                    category: 'switch',
-                    type: 'wrapper',
-                    item: 'height',
+            control: {
+                width: {
+                    attributes: {
+                        category: 'material',
+                        type: 'switch',
+                        item: 'control',
+                    },
+                },
+                height: {
+                    attributes: {
+                        category: 'material',
+                        type: 'switch',
+                        item: 'control',
+                    },
                 },
             },
-        },
-        control: {
-            width: {
-                attributes: {
-                    category: 'switch',
-                    type: 'control',
-                    item: 'width',
+            indicator: {
+                size: {
+                    attributes: {
+                        category: 'material',
+                        type: 'switch',
+                        item: 'indicator',
+                    },
                 },
-            },
-            height: {
-                attributes: {
-                    category: 'switch',
-                    type: 'control',
-                    item: 'height',
-                },
-            },
-        },
-        indicator: {
-            size: {
-                attributes: {
-                    category: 'switch',
-                    type: 'indicator',
-                    item: 'size',
-                },
-            },
-            offset: {
-                attributes: {
-                    category: 'switch',
-                    type: 'indicator',
-                    item: 'offset',
+                offset: {
+                    attributes: {
+                        category: 'material',
+                        type: 'switch',
+                        item: 'indicator',
+                    },
                 },
             },
         },
