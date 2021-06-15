@@ -38,20 +38,6 @@ export const DESIGN_TOKENS = {
             },
         },
     },
-    checkbox: {
-        'wrapper-size': {
-            attributes: {
-                category: 'checkbox',
-                type: 'wrapper-size',
-            },
-        },
-        'control-size': {
-            attributes: {
-                category: 'checkbox',
-                type: 'control-size',
-            },
-        },
-    },
     chip: {
         'size-m': {
             height: {
@@ -154,6 +140,22 @@ export const DESIGN_TOKENS = {
                     category: 'material',
                     type: 'button',
                     item: 'variant-icon-border-radius',
+                },
+            },
+        },
+        checkbox: {
+            'wrapper-size': {
+                attributes: {
+                    category: 'material',
+                    type: 'checkbox',
+                    item: 'wrapper-size',
+                },
+            },
+            'control-size': {
+                attributes: {
+                    category: 'material',
+                    type: 'checkbox',
+                    item: 'control-size',
                 },
             },
         },

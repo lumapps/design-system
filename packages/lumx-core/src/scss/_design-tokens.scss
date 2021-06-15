@@ -7,8 +7,6 @@ $lumx-button-size-m-font-size: 14px !default;
 $lumx-button-size-m-font-weight: 700 !default;
 $lumx-button-size-s-font-size: 12px !default;
 $lumx-button-size-s-font-weight: 700 !default;
-$lumx-checkbox-wrapper-size: 20px !default;
-$lumx-checkbox-control-size: 16px !default;
 $lumx-chip-size-m-height: 36px !default;
 $lumx-chip-size-m-border-radius: 18px !default;
 $lumx-chip-size-m-padding-vertical: 16px !default;
@@ -23,6 +21,8 @@ $lumx-input-label-font-weight: 400 !default;
 $lumx-input-label-line-height: 20px !default;
 $lumx-material-button-text-transform: none !default;
 $lumx-material-button-variant-icon-border-radius: 4px !default;
+$lumx-material-checkbox-wrapper-size: 20px !default;
+$lumx-material-checkbox-control-size: 16px !default;
 $lumx-material-progress-bounce: block !default;
 $lumx-material-progress-rotate: none !default;
 $lumx-radio-button-wrapper-size: 20px !default;
@@ -300,10 +300,6 @@ $lumx-design-tokens: (
             'font-weight': $lumx-button-size-s-font-weight,
         ),
     ),
-    'checkbox': (
-        'wrapper-size': $lumx-checkbox-wrapper-size,
-        'control-size': $lumx-checkbox-control-size,
-    ),
     'chip': (
         'size-m': (
             'height': $lumx-chip-size-m-height,
@@ -330,6 +326,10 @@ $lumx-design-tokens: (
         'button': (
             'text-transform': $lumx-material-button-text-transform,
             'variant-icon-border-radius': $lumx-material-button-variant-icon-border-radius,
+        ),
+        'checkbox': (
+            'wrapper-size': $lumx-material-checkbox-wrapper-size,
+            'control-size': $lumx-material-checkbox-control-size,
         ),
         'progress': (
             'bounce': $lumx-material-progress-bounce,
