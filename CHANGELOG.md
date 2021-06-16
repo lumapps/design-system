@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   AlertDialog: props forwarding on the confirm and cancel buttons.
+
 ## [1.0.17][] - 2021-05-27
 
 ### Fixed

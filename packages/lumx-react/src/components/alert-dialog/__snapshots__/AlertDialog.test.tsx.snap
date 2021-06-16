@@ -458,3 +458,94 @@ exports[`<AlertDialog> Snapshots and structure should render story 'WithCancel' 
   </footer>
 </Dialog>
 `;
+
+exports[`<AlertDialog> Snapshots and structure should render story 'WithForwardedProps' 1`] = `
+<Dialog
+  className="lumx-alert-dialog lumx-alert-dialog--kind-info"
+  dialogProps={
+    Object {
+      "aria-describedby": "alert-dialog-description",
+      "aria-labelledby": "alert-dialog-title",
+      "id": "alert-dialog",
+      "role": "alertdialog",
+    }
+  }
+  focusElement={
+    Object {
+      "current": null,
+    }
+  }
+  isOpen={true}
+  onClose={[Function]}
+  parentElement={
+    Object {
+      "current": undefined,
+    }
+  }
+  size="tiny"
+>
+  <header>
+    <Toolbar
+      before={
+        <Icon
+          color="blue"
+          icon="M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"
+          size="s"
+        />
+      }
+      className="lumx-spacing-margin-horizontal"
+      label={
+        <h2
+          className="lumx-typography-title"
+          id="alert-dialog-title"
+        >
+          With Forwarded Props
+        </h2>
+      }
+    />
+  </header>
+  <p
+    className="lumx-typography-body2 lumx-spacing-padding-vertical-big lumx-spacing-padding-horizontal-huge"
+    id="alert-dialog-description"
+  >
+    Consequat deserunt officia aute laborum tempor anim sint est.
+  </p>
+  <footer>
+    <Toolbar
+      after={
+        <React.Fragment>
+          <Button
+            emphasis="medium"
+            onClick={[Function]}
+            size="m"
+            style={
+              Object {
+                "color": "blue",
+              }
+            }
+            theme="light"
+          >
+            Cancel
+          </Button>
+          <Button
+            className="lumx-spacing-margin-left-regular"
+            color="blue"
+            emphasis="high"
+            onClick={[Function]}
+            size="m"
+            style={
+              Object {
+                "color": "red",
+              }
+            }
+            theme="light"
+          >
+            OK
+          </Button>
+        </React.Fragment>
+      }
+      className="lumx-spacing-margin-horizontal"
+    />
+  </footer>
+</Dialog>
+`;
