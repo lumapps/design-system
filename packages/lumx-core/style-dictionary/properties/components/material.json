@@ -44,6 +44,21 @@
                 "size": { "value": "8px" },
                 "offset": { "value": "4px" }
             }
+        },
+        "text-field": {
+            "padding": {
+                "top": { "value": "0" },
+                "bottom": { "value": "0" }
+            },
+            "header": {
+                "wrapper": {
+                    "margin-bottom": { "value": "{spacing.unit.regular.value}" }
+                },
+                "label": "{typography.interface.body1}"
+            },
+            "input": {
+                "content": "{typography.interface.body1}"
+            }
         }
     }
 }

@@ -5,13 +5,17 @@
 .#{$lumx-base-prefix}-text-field {
     $self: &;
 
-    padding-top: var(--lumx-text-field-padding-top);
-    padding-bottom: var(--lumx-text-field-padding-bottom);
+    --lumx-text-field-wrapper-padding-vertical: calc(
+        calc(var(--lumx-text-field-input-min-height) - var(--lumx-material-text-field-input-content-line-height)) / 2
+    );
+
+    padding-top: var(--lumx-material-text-field-padding-top);
+    padding-bottom: var(--lumx-material-text-field-padding-bottom);
 
     &__header {
         display: flex;
         align-items: center;
-        margin-bottom: var(--lumx-text-field-header-margin-bottom);
+        margin-bottom: var(--lumx-material-text-field-header-wrapper-margin-bottom);
     }
 
     &__label {
@@ -27,9 +31,9 @@
         margin-left: $lumx-spacing-unit;
 
         span {
-            font-size: var(--lumx-text-field-label-font-size);
-            font-weight: var(--lumx-text-field-label-font-weight);
-            line-height: var(--lumx-text-field-label-font-size);
+            font-size: var(--lumx-material-text-field-header-label-font-size);
+            font-weight: var(--lumx-material-text-field-header-label-font-weight);
+            line-height: var(--lumx-material-text-field-header-label-line-height);
 
             #{$self}--theme-light & {
                 color: lumx-color-variant('dark', 'L2');

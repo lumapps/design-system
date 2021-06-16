@@ -34,80 +34,140 @@ $lumx-material-switch-control-width: 30px !default;
 $lumx-material-switch-control-height: 16px !default;
 $lumx-material-switch-indicator-size: 8px !default;
 $lumx-material-switch-indicator-offset: 4px !default;
-$lumx-text-field-padding-top: 0 !default;
-$lumx-text-field-padding-bottom: 0 !default;
-$lumx-text-field-header-margin-bottom: 8px !default;
-$lumx-text-field-label-font-size: 14px !default;
-$lumx-text-field-label-font-weight: 400 !default;
-$lumx-text-field-label-line-height: 20px !default;
-$lumx-text-field-wrapper-min-height: 36px !default;
-$lumx-text-field-wrapper-border-radius: 4px !default;
-$lumx-text-field-wrapper-padding-vertical: 8px !default;
-$lumx-text-field-wrapper-padding-horizontal: 12px !default;
-$lumx-text-field-state-default-border-top-width: 1px !default;
-$lumx-text-field-state-default-border-right-width: 1px !default;
-$lumx-text-field-state-default-border-bottom-width: 1px !default;
-$lumx-text-field-state-default-border-left-width: 1px !default;
-$lumx-text-field-state-default-theme-light-background-color: rgba(
+$lumx-material-text-field-padding-top: 0 !default;
+$lumx-material-text-field-padding-bottom: 0 !default;
+$lumx-material-text-field-header-wrapper-margin-bottom: 8px !default;
+$lumx-material-text-field-header-label-font-size: 14px !default;
+$lumx-material-text-field-header-label-font-weight: 400 !default;
+$lumx-material-text-field-header-label-line-height: 20px !default;
+$lumx-material-text-field-input-content-font-size: 14px !default;
+$lumx-material-text-field-input-content-font-weight: 400 !default;
+$lumx-material-text-field-input-content-line-height: 20px !default;
+$lumx-text-field-input-min-height: 36px !default;
+$lumx-text-field-input-padding-horizontal: 12px !default;
+$lumx-text-field-input-border-radius: 4px !default;
+$lumx-text-field-state-default-input-border-top-width: 1px !default;
+$lumx-text-field-state-default-input-border-right-width: 1px !default;
+$lumx-text-field-state-default-input-border-bottom-width: 1px !default;
+$lumx-text-field-state-default-input-border-left-width: 1px !default;
+$lumx-text-field-state-default-theme-light-header-label-color: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
+$lumx-text-field-state-default-theme-light-input-background-color: rgba(
     0,
     0,
     0,
     0.05
 ) !default; // Base dark color with 5% opacity
-$lumx-text-field-state-default-theme-light-border-color: rgba(
+$lumx-text-field-state-default-theme-light-input-border-color: rgba(
     0,
     0,
     0,
     0.2
 ) !default; // Base dark color with 20% opacity
-$lumx-text-field-state-default-theme-dark-background-color: rgba(
+$lumx-text-field-state-default-theme-light-input-content-color: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
+$lumx-text-field-state-default-theme-light-input-placeholder-color: rgba(
+    0,
+    0,
+    0,
+    0.54
+) !default; // Base dark color with 54% opacity
+$lumx-text-field-state-default-theme-dark-header-label-color: #fff !default; // Neutral light color
+$lumx-text-field-state-default-theme-dark-input-background-color: rgba(
     255,
     255,
     255,
     0.1
 ) !default; // Base light color with 10% opacity
-$lumx-text-field-state-default-theme-dark-border-color: rgba(
+$lumx-text-field-state-default-theme-dark-input-border-color: rgba(
     255,
     255,
     255,
     0.4
 ) !default; // Base light color with 40% opacity
-$lumx-text-field-state-hover-theme-light-background-color: rgba(
-    0,
-    0,
-    0,
-    0.12
-) !default; // Base dark color with 12% opacity
-$lumx-text-field-state-hover-theme-dark-background-color: rgba(
-    255,
-    255,
-    255,
-    0.2
-) !default; // Base light color with 20% opacity
-$lumx-text-field-state-focus-border-top-width: 2px !default;
-$lumx-text-field-state-focus-border-right-width: 2px !default;
-$lumx-text-field-state-focus-border-bottom-width: 2px !default;
-$lumx-text-field-state-focus-border-left-width: 2px !default;
-$lumx-text-field-state-focus-theme-light-background-color: #fff !default; // Neutral light color
-$lumx-text-field-state-focus-theme-light-border-color: rgba(
-    33,
-    150,
-    243,
-    0.6
-) !default; // Base blue color with 60% opacity
-$lumx-text-field-state-focus-theme-dark-background-color: transparent !default;
-$lumx-text-field-state-focus-theme-dark-border-color: rgba(
+$lumx-text-field-state-default-theme-dark-input-content-color: #fff !default; // Neutral light color
+$lumx-text-field-state-default-theme-dark-input-placeholder-color: rgba(
     255,
     255,
     255,
     0.8
 ) !default; // Base light color with 80% opacity
-$lumx-text-field-input-icon-size: 20px !default;
-$lumx-text-field-input-font-size: 14px !default;
-$lumx-text-field-input-font-weight: 400 !default;
-$lumx-text-field-input-line-height: 20px !default;
-$lumx-text-field-input-validity-size: 14px !default;
-$lumx-text-field-input-clear-size: 24px !default;
+$lumx-text-field-state-hover-input-border-top-width: 1px !default;
+$lumx-text-field-state-hover-input-border-right-width: 1px !default;
+$lumx-text-field-state-hover-input-border-bottom-width: 1px !default;
+$lumx-text-field-state-hover-input-border-left-width: 1px !default;
+$lumx-text-field-state-hover-theme-light-header-label-color: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
+$lumx-text-field-state-hover-theme-light-input-background-color: rgba(
+    0,
+    0,
+    0,
+    0.12
+) !default; // Base dark color with 12% opacity
+$lumx-text-field-state-hover-theme-light-input-border-color: rgba(
+    0,
+    0,
+    0,
+    0.2
+) !default; // Base dark color with 20% opacity
+$lumx-text-field-state-hover-theme-light-input-content-color: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
+$lumx-text-field-state-hover-theme-light-input-placeholder-color: rgba(
+    0,
+    0,
+    0,
+    0.54
+) !default; // Base dark color with 54% opacity
+$lumx-text-field-state-hover-theme-dark-header-label-color: #fff !default; // Neutral light color
+$lumx-text-field-state-hover-theme-dark-input-background-color: rgba(
+    255,
+    255,
+    255,
+    0.2
+) !default; // Base light color with 20% opacity
+$lumx-text-field-state-hover-theme-dark-input-border-color: rgba(
+    255,
+    255,
+    255,
+    0.4
+) !default; // Base light color with 40% opacity
+$lumx-text-field-state-hover-theme-dark-input-content-color: #fff !default; // Neutral light color
+$lumx-text-field-state-hover-theme-dark-input-placeholder-color: rgba(
+    255,
+    255,
+    255,
+    0.8
+) !default; // Base light color with 80% opacity
+$lumx-text-field-state-focus-input-border-top-width: 2px !default;
+$lumx-text-field-state-focus-input-border-right-width: 2px !default;
+$lumx-text-field-state-focus-input-border-bottom-width: 2px !default;
+$lumx-text-field-state-focus-input-border-left-width: 2px !default;
+$lumx-text-field-state-focus-theme-light-header-label-color: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
+$lumx-text-field-state-focus-theme-light-input-background-color: #fff !default; // Neutral light color
+$lumx-text-field-state-focus-theme-light-input-border-color: rgba(
+    33,
+    150,
+    243,
+    0.6
+) !default; // Base blue color with 60% opacity
+$lumx-text-field-state-focus-theme-light-input-content-color: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
+$lumx-text-field-state-focus-theme-light-input-placeholder-color: rgba(
+    0,
+    0,
+    0,
+    0.54
+) !default; // Base dark color with 54% opacity
+$lumx-text-field-state-focus-theme-dark-header-label-color: #fff !default; // Neutral light color
+$lumx-text-field-state-focus-theme-dark-input-background-color: transparent !default;
+$lumx-text-field-state-focus-theme-dark-input-border-color: rgba(
+    255,
+    255,
+    255,
+    0.8
+) !default; // Base light color with 80% opacity
+$lumx-text-field-state-focus-theme-dark-input-content-color: #fff !default; // Neutral light color
+$lumx-text-field-state-focus-theme-dark-input-placeholder-color: rgba(
+    255,
+    255,
+    255,
+    0.8
+) !default; // Base light color with 80% opacity
 $lumx-border-radius: 4px !default;
 $lumx-color-dark-N: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
 $lumx-color-dark-L1: rgba(0, 0, 0, 0.8) !default; // Base dark color with 80% opacity
@@ -354,92 +414,194 @@ $lumx-design-tokens: (
                 'offset': $lumx-material-switch-indicator-offset,
             ),
         ),
-    ),
-    'text-field': (
-        'padding': (
-            'top': $lumx-text-field-padding-top,
-            'bottom': $lumx-text-field-padding-bottom,
-        ),
-        'header': (
-            'margin-bottom': $lumx-text-field-header-margin-bottom,
-        ),
-        'label': (
-            'font-size': $lumx-text-field-label-font-size,
-            'font-weight': $lumx-text-field-label-font-weight,
-            'line-height': $lumx-text-field-label-line-height,
-        ),
-        'wrapper': (
-            'min-height': $lumx-text-field-wrapper-min-height,
-            'border-radius': $lumx-text-field-wrapper-border-radius,
+        'text-field': (
             'padding': (
-                'vertical': $lumx-text-field-wrapper-padding-vertical,
-                'horizontal': $lumx-text-field-wrapper-padding-horizontal,
+                'top': $lumx-material-text-field-padding-top,
+                'bottom': $lumx-material-text-field-padding-bottom,
+            ),
+            'header': (
+                'wrapper': (
+                    'margin-bottom': $lumx-material-text-field-header-wrapper-margin-bottom,
+                ),
+                'label': (
+                    'font-size': $lumx-material-text-field-header-label-font-size,
+                    'font-weight': $lumx-material-text-field-header-label-font-weight,
+                    'line-height': $lumx-material-text-field-header-label-line-height,
+                ),
+            ),
+            'input': (
+                'content': (
+                    'font-size': $lumx-material-text-field-input-content-font-size,
+                    'font-weight': $lumx-material-text-field-input-content-font-weight,
+                    'line-height': $lumx-material-text-field-input-content-line-height,
+                ),
             ),
         ),
+    ),
+    'text-field': (
+        'input': (
+            'min-height': $lumx-text-field-input-min-height,
+            'padding': (
+                'horizontal': $lumx-text-field-input-padding-horizontal,
+            ),
+            'border-radius': $lumx-text-field-input-border-radius,
+        ),
         'state-default': (
-            'border': (
-                'top': (
-                    'width': $lumx-text-field-state-default-border-top-width,
-                ),
-                'right': (
-                    'width': $lumx-text-field-state-default-border-right-width,
-                ),
-                'bottom': (
-                    'width': $lumx-text-field-state-default-border-bottom-width,
-                ),
-                'left': (
-                    'width': $lumx-text-field-state-default-border-left-width,
+            'input': (
+                'border': (
+                    'top': (
+                        'width': $lumx-text-field-state-default-input-border-top-width,
+                    ),
+                    'right': (
+                        'width': $lumx-text-field-state-default-input-border-right-width,
+                    ),
+                    'bottom': (
+                        'width': $lumx-text-field-state-default-input-border-bottom-width,
+                    ),
+                    'left': (
+                        'width': $lumx-text-field-state-default-input-border-left-width,
+                    ),
                 ),
             ),
             'theme-light': (
-                'background-color': $lumx-text-field-state-default-theme-light-background-color,
-                'border-color': $lumx-text-field-state-default-theme-light-border-color,
+                'header': (
+                    'label': (
+                        'color': $lumx-text-field-state-default-theme-light-header-label-color,
+                    ),
+                ),
+                'input': (
+                    'background-color': $lumx-text-field-state-default-theme-light-input-background-color,
+                    'border-color': $lumx-text-field-state-default-theme-light-input-border-color,
+                    'content': (
+                        'color': $lumx-text-field-state-default-theme-light-input-content-color,
+                    ),
+                    'placeholder': (
+                        'color': $lumx-text-field-state-default-theme-light-input-placeholder-color,
+                    ),
+                ),
             ),
             'theme-dark': (
-                'background-color': $lumx-text-field-state-default-theme-dark-background-color,
-                'border-color': $lumx-text-field-state-default-theme-dark-border-color,
+                'header': (
+                    'label': (
+                        'color': $lumx-text-field-state-default-theme-dark-header-label-color,
+                    ),
+                ),
+                'input': (
+                    'background-color': $lumx-text-field-state-default-theme-dark-input-background-color,
+                    'border-color': $lumx-text-field-state-default-theme-dark-input-border-color,
+                    'content': (
+                        'color': $lumx-text-field-state-default-theme-dark-input-content-color,
+                    ),
+                    'placeholder': (
+                        'color': $lumx-text-field-state-default-theme-dark-input-placeholder-color,
+                    ),
+                ),
             ),
         ),
         'state-hover': (
+            'input': (
+                'border': (
+                    'top': (
+                        'width': $lumx-text-field-state-hover-input-border-top-width,
+                    ),
+                    'right': (
+                        'width': $lumx-text-field-state-hover-input-border-right-width,
+                    ),
+                    'bottom': (
+                        'width': $lumx-text-field-state-hover-input-border-bottom-width,
+                    ),
+                    'left': (
+                        'width': $lumx-text-field-state-hover-input-border-left-width,
+                    ),
+                ),
+            ),
             'theme-light': (
-                'background-color': $lumx-text-field-state-hover-theme-light-background-color,
+                'header': (
+                    'label': (
+                        'color': $lumx-text-field-state-hover-theme-light-header-label-color,
+                    ),
+                ),
+                'input': (
+                    'background-color': $lumx-text-field-state-hover-theme-light-input-background-color,
+                    'border-color': $lumx-text-field-state-hover-theme-light-input-border-color,
+                    'content': (
+                        'color': $lumx-text-field-state-hover-theme-light-input-content-color,
+                    ),
+                    'placeholder': (
+                        'color': $lumx-text-field-state-hover-theme-light-input-placeholder-color,
+                    ),
+                ),
             ),
             'theme-dark': (
-                'background-color': $lumx-text-field-state-hover-theme-dark-background-color,
+                'header': (
+                    'label': (
+                        'color': $lumx-text-field-state-hover-theme-dark-header-label-color,
+                    ),
+                ),
+                'input': (
+                    'background-color': $lumx-text-field-state-hover-theme-dark-input-background-color,
+                    'border-color': $lumx-text-field-state-hover-theme-dark-input-border-color,
+                    'content': (
+                        'color': $lumx-text-field-state-hover-theme-dark-input-content-color,
+                    ),
+                    'placeholder': (
+                        'color': $lumx-text-field-state-hover-theme-dark-input-placeholder-color,
+                    ),
+                ),
             ),
         ),
         'state-focus': (
-            'border': (
-                'top': (
-                    'width': $lumx-text-field-state-focus-border-top-width,
-                ),
-                'right': (
-                    'width': $lumx-text-field-state-focus-border-right-width,
-                ),
-                'bottom': (
-                    'width': $lumx-text-field-state-focus-border-bottom-width,
-                ),
-                'left': (
-                    'width': $lumx-text-field-state-focus-border-left-width,
+            'input': (
+                'border': (
+                    'top': (
+                        'width': $lumx-text-field-state-focus-input-border-top-width,
+                    ),
+                    'right': (
+                        'width': $lumx-text-field-state-focus-input-border-right-width,
+                    ),
+                    'bottom': (
+                        'width': $lumx-text-field-state-focus-input-border-bottom-width,
+                    ),
+                    'left': (
+                        'width': $lumx-text-field-state-focus-input-border-left-width,
+                    ),
                 ),
             ),
             'theme-light': (
-                'background-color': $lumx-text-field-state-focus-theme-light-background-color,
-                'border-color': $lumx-text-field-state-focus-theme-light-border-color,
+                'header': (
+                    'label': (
+                        'color': $lumx-text-field-state-focus-theme-light-header-label-color,
+                    ),
+                ),
+                'input': (
+                    'background-color': $lumx-text-field-state-focus-theme-light-input-background-color,
+                    'border-color': $lumx-text-field-state-focus-theme-light-input-border-color,
+                    'content': (
+                        'color': $lumx-text-field-state-focus-theme-light-input-content-color,
+                    ),
+                    'placeholder': (
+                        'color': $lumx-text-field-state-focus-theme-light-input-placeholder-color,
+                    ),
+                ),
             ),
             'theme-dark': (
-                'background-color': $lumx-text-field-state-focus-theme-dark-background-color,
-                'border-color': $lumx-text-field-state-focus-theme-dark-border-color,
+                'header': (
+                    'label': (
+                        'color': $lumx-text-field-state-focus-theme-dark-header-label-color,
+                    ),
+                ),
+                'input': (
+                    'background-color': $lumx-text-field-state-focus-theme-dark-input-background-color,
+                    'border-color': $lumx-text-field-state-focus-theme-dark-input-border-color,
+                    'content': (
+                        'color': $lumx-text-field-state-focus-theme-dark-input-content-color,
+                    ),
+                    'placeholder': (
+                        'color': $lumx-text-field-state-focus-theme-dark-input-placeholder-color,
+                    ),
+                ),
             ),
         ),
-        'input-icon-size': $lumx-text-field-input-icon-size,
-        'input': (
-            'font-size': $lumx-text-field-input-font-size,
-            'font-weight': $lumx-text-field-input-font-weight,
-            'line-height': $lumx-text-field-input-line-height,
-        ),
-        'input-validity-size': $lumx-text-field-input-validity-size,
-        'input-clear-size': $lumx-text-field-input-clear-size,
     ),
     'border-radius': $lumx-border-radius,
     'color': (

@@ -254,309 +254,574 @@ export const DESIGN_TOKENS = {
                 },
             },
         },
+        'text-field': {
+            padding: {
+                top: {
+                    attributes: {
+                        category: 'material',
+                        type: 'text-field',
+                        item: 'padding',
+                    },
+                },
+                bottom: {
+                    attributes: {
+                        category: 'material',
+                        type: 'text-field',
+                        item: 'padding',
+                    },
+                },
+            },
+            header: {
+                wrapper: {
+                    'margin-bottom': {
+                        attributes: {
+                            category: 'material',
+                            type: 'text-field',
+                            item: 'header',
+                        },
+                    },
+                },
+                label: {
+                    'font-size': {
+                        attributes: {
+                            category: 'material',
+                            type: 'text-field',
+                            item: 'header',
+                        },
+                    },
+                    'font-weight': {
+                        attributes: {
+                            category: 'material',
+                            type: 'text-field',
+                            item: 'header',
+                        },
+                    },
+                    'line-height': {
+                        attributes: {
+                            category: 'material',
+                            type: 'text-field',
+                            item: 'header',
+                        },
+                    },
+                },
+            },
+            input: {
+                content: {
+                    'font-size': {
+                        attributes: {
+                            category: 'material',
+                            type: 'text-field',
+                            item: 'input',
+                        },
+                    },
+                    'font-weight': {
+                        attributes: {
+                            category: 'material',
+                            type: 'text-field',
+                            item: 'input',
+                        },
+                    },
+                    'line-height': {
+                        attributes: {
+                            category: 'material',
+                            type: 'text-field',
+                            item: 'input',
+                        },
+                    },
+                },
+            },
+        },
     },
     'text-field': {
-        padding: {
-            top: {
-                attributes: {
-                    category: 'text-field',
-                    type: 'padding',
-                    item: 'top',
-                },
-            },
-            bottom: {
-                attributes: {
-                    category: 'text-field',
-                    type: 'padding',
-                    item: 'bottom',
-                },
-            },
-        },
-        header: {
-            'margin-bottom': {
-                attributes: {
-                    category: 'text-field',
-                    type: 'header',
-                    item: 'margin-bottom',
-                },
-            },
-        },
-        label: {
-            'font-size': {
-                attributes: {
-                    category: 'text-field',
-                    type: 'label',
-                    item: 'font-size',
-                },
-            },
-            'font-weight': {
-                attributes: {
-                    category: 'text-field',
-                    type: 'label',
-                    item: 'font-weight',
-                },
-            },
-            'line-height': {
-                attributes: {
-                    category: 'text-field',
-                    type: 'label',
-                    item: 'line-height',
-                },
-            },
-        },
-        wrapper: {
+        input: {
             'min-height': {
                 attributes: {
                     category: 'text-field',
-                    type: 'wrapper',
+                    type: 'input',
                     item: 'min-height',
+                },
+            },
+            padding: {
+                horizontal: {
+                    attributes: {
+                        category: 'text-field',
+                        type: 'input',
+                        item: 'padding',
+                    },
                 },
             },
             'border-radius': {
                 attributes: {
                     category: 'text-field',
-                    type: 'wrapper',
+                    type: 'input',
                     item: 'border-radius',
-                },
-            },
-            padding: {
-                vertical: {
-                    attributes: {
-                        category: 'text-field',
-                        type: 'wrapper',
-                        item: 'padding',
-                    },
-                },
-                horizontal: {
-                    attributes: {
-                        category: 'text-field',
-                        type: 'wrapper',
-                        item: 'padding',
-                    },
                 },
             },
         },
         'state-default': {
-            border: {
-                top: {
-                    width: {
-                        attributes: {
-                            category: 'text-field',
-                            type: 'state-default',
-                            item: 'border',
+            input: {
+                border: {
+                    top: {
+                        width: {
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-default',
+                                item: 'input',
+                            },
                         },
                     },
-                },
-                right: {
-                    width: {
-                        attributes: {
-                            category: 'text-field',
-                            type: 'state-default',
-                            item: 'border',
+                    right: {
+                        width: {
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-default',
+                                item: 'input',
+                            },
                         },
                     },
-                },
-                bottom: {
-                    width: {
-                        attributes: {
-                            category: 'text-field',
-                            type: 'state-default',
-                            item: 'border',
+                    bottom: {
+                        width: {
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-default',
+                                item: 'input',
+                            },
                         },
                     },
-                },
-                left: {
-                    width: {
-                        attributes: {
-                            category: 'text-field',
-                            type: 'state-default',
-                            item: 'border',
+                    left: {
+                        width: {
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-default',
+                                item: 'input',
+                            },
                         },
                     },
                 },
             },
             'theme-light': {
-                'background-color': {
-                    version: '0.22',
-                    comment: 'Base dark color with 5% opacity',
-                    attributes: {
-                        category: 'text-field',
-                        type: 'state-default',
-                        item: 'theme-light',
+                header: {
+                    label: {
+                        color: {
+                            version: '0.22',
+                            comment: 'Neutral dark color',
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-default',
+                                item: 'theme-light',
+                            },
+                        },
                     },
                 },
-                'border-color': {
-                    version: '0.22',
-                    comment: 'Base dark color with 20% opacity',
-                    attributes: {
-                        category: 'text-field',
-                        type: 'state-default',
-                        item: 'theme-light',
+                input: {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base dark color with 5% opacity',
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-default',
+                            item: 'theme-light',
+                        },
+                    },
+                    'border-color': {
+                        version: '0.22',
+                        comment: 'Base dark color with 20% opacity',
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-default',
+                            item: 'theme-light',
+                        },
+                    },
+                    content: {
+                        color: {
+                            version: '0.22',
+                            comment: 'Neutral dark color',
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-default',
+                                item: 'theme-light',
+                            },
+                        },
+                    },
+                    placeholder: {
+                        color: {
+                            version: '0.22',
+                            comment: 'Base dark color with 54% opacity',
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-default',
+                                item: 'theme-light',
+                            },
+                        },
                     },
                 },
             },
             'theme-dark': {
-                'background-color': {
-                    version: '0.22',
-                    comment: 'Base light color with 10% opacity',
-                    attributes: {
-                        category: 'text-field',
-                        type: 'state-default',
-                        item: 'theme-dark',
+                header: {
+                    label: {
+                        color: {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-default',
+                                item: 'theme-dark',
+                            },
+                        },
                     },
                 },
-                'border-color': {
-                    version: '0.22',
-                    comment: 'Base light color with 40% opacity',
-                    attributes: {
-                        category: 'text-field',
-                        type: 'state-default',
-                        item: 'theme-dark',
+                input: {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base light color with 10% opacity',
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-default',
+                            item: 'theme-dark',
+                        },
+                    },
+                    'border-color': {
+                        version: '0.22',
+                        comment: 'Base light color with 40% opacity',
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-default',
+                            item: 'theme-dark',
+                        },
+                    },
+                    content: {
+                        color: {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-default',
+                                item: 'theme-dark',
+                            },
+                        },
+                    },
+                    placeholder: {
+                        color: {
+                            version: '0.22',
+                            comment: 'Base light color with 80% opacity',
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-default',
+                                item: 'theme-dark',
+                            },
+                        },
                     },
                 },
             },
         },
         'state-hover': {
+            input: {
+                border: {
+                    top: {
+                        width: {
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-hover',
+                                item: 'input',
+                            },
+                        },
+                    },
+                    right: {
+                        width: {
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-hover',
+                                item: 'input',
+                            },
+                        },
+                    },
+                    bottom: {
+                        width: {
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-hover',
+                                item: 'input',
+                            },
+                        },
+                    },
+                    left: {
+                        width: {
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-hover',
+                                item: 'input',
+                            },
+                        },
+                    },
+                },
+            },
             'theme-light': {
-                'background-color': {
-                    version: '0.22',
-                    comment: 'Base dark color with 12% opacity',
-                    attributes: {
-                        category: 'text-field',
-                        type: 'state-hover',
-                        item: 'theme-light',
+                header: {
+                    label: {
+                        color: {
+                            version: '0.22',
+                            comment: 'Neutral dark color',
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-hover',
+                                item: 'theme-light',
+                            },
+                        },
+                    },
+                },
+                input: {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base dark color with 12% opacity',
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-hover',
+                            item: 'theme-light',
+                        },
+                    },
+                    'border-color': {
+                        version: '0.22',
+                        comment: 'Base dark color with 20% opacity',
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-hover',
+                            item: 'theme-light',
+                        },
+                    },
+                    content: {
+                        color: {
+                            version: '0.22',
+                            comment: 'Neutral dark color',
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-hover',
+                                item: 'theme-light',
+                            },
+                        },
+                    },
+                    placeholder: {
+                        color: {
+                            version: '0.22',
+                            comment: 'Base dark color with 54% opacity',
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-hover',
+                                item: 'theme-light',
+                            },
+                        },
                     },
                 },
             },
             'theme-dark': {
-                'background-color': {
-                    version: '0.22',
-                    comment: 'Base light color with 20% opacity',
-                    attributes: {
-                        category: 'text-field',
-                        type: 'state-hover',
-                        item: 'theme-dark',
+                header: {
+                    label: {
+                        color: {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-hover',
+                                item: 'theme-dark',
+                            },
+                        },
+                    },
+                },
+                input: {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base light color with 20% opacity',
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-hover',
+                            item: 'theme-dark',
+                        },
+                    },
+                    'border-color': {
+                        version: '0.22',
+                        comment: 'Base light color with 40% opacity',
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-hover',
+                            item: 'theme-dark',
+                        },
+                    },
+                    content: {
+                        color: {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-hover',
+                                item: 'theme-dark',
+                            },
+                        },
+                    },
+                    placeholder: {
+                        color: {
+                            version: '0.22',
+                            comment: 'Base light color with 80% opacity',
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-hover',
+                                item: 'theme-dark',
+                            },
+                        },
                     },
                 },
             },
         },
         'state-focus': {
-            border: {
-                top: {
-                    width: {
-                        attributes: {
-                            category: 'text-field',
-                            type: 'state-focus',
-                            item: 'border',
+            input: {
+                border: {
+                    top: {
+                        width: {
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-focus',
+                                item: 'input',
+                            },
                         },
                     },
-                },
-                right: {
-                    width: {
-                        attributes: {
-                            category: 'text-field',
-                            type: 'state-focus',
-                            item: 'border',
+                    right: {
+                        width: {
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-focus',
+                                item: 'input',
+                            },
                         },
                     },
-                },
-                bottom: {
-                    width: {
-                        attributes: {
-                            category: 'text-field',
-                            type: 'state-focus',
-                            item: 'border',
+                    bottom: {
+                        width: {
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-focus',
+                                item: 'input',
+                            },
                         },
                     },
-                },
-                left: {
-                    width: {
-                        attributes: {
-                            category: 'text-field',
-                            type: 'state-focus',
-                            item: 'border',
+                    left: {
+                        width: {
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-focus',
+                                item: 'input',
+                            },
                         },
                     },
                 },
             },
             'theme-light': {
-                'background-color': {
-                    version: '0.22',
-                    comment: 'Neutral light color',
-                    attributes: {
-                        category: 'text-field',
-                        type: 'state-focus',
-                        item: 'theme-light',
+                header: {
+                    label: {
+                        color: {
+                            version: '0.22',
+                            comment: 'Neutral dark color',
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-focus',
+                                item: 'theme-light',
+                            },
+                        },
                     },
                 },
-                'border-color': {
-                    version: '0.22',
-                    comment: 'Base blue color with 60% opacity',
-                    attributes: {
-                        category: 'text-field',
-                        type: 'state-focus',
-                        item: 'theme-light',
+                input: {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Neutral light color',
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-focus',
+                            item: 'theme-light',
+                        },
+                    },
+                    'border-color': {
+                        version: '0.22',
+                        comment: 'Base blue color with 60% opacity',
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-focus',
+                            item: 'theme-light',
+                        },
+                    },
+                    content: {
+                        color: {
+                            version: '0.22',
+                            comment: 'Neutral dark color',
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-focus',
+                                item: 'theme-light',
+                            },
+                        },
+                    },
+                    placeholder: {
+                        color: {
+                            version: '0.22',
+                            comment: 'Base dark color with 54% opacity',
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-focus',
+                                item: 'theme-light',
+                            },
+                        },
                     },
                 },
             },
             'theme-dark': {
-                'background-color': {
-                    attributes: {
-                        category: 'text-field',
-                        type: 'state-focus',
-                        item: 'theme-dark',
+                header: {
+                    label: {
+                        color: {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-focus',
+                                item: 'theme-dark',
+                            },
+                        },
                     },
                 },
-                'border-color': {
-                    version: '0.22',
-                    comment: 'Base light color with 80% opacity',
-                    attributes: {
-                        category: 'text-field',
-                        type: 'state-focus',
-                        item: 'theme-dark',
+                input: {
+                    'background-color': {
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-focus',
+                            item: 'theme-dark',
+                        },
+                    },
+                    'border-color': {
+                        version: '0.22',
+                        comment: 'Base light color with 80% opacity',
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-focus',
+                            item: 'theme-dark',
+                        },
+                    },
+                    content: {
+                        color: {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-focus',
+                                item: 'theme-dark',
+                            },
+                        },
+                    },
+                    placeholder: {
+                        color: {
+                            version: '0.22',
+                            comment: 'Base light color with 80% opacity',
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-focus',
+                                item: 'theme-dark',
+                            },
+                        },
                     },
                 },
-            },
-        },
-        'input-icon-size': {
-            attributes: {
-                category: 'text-field',
-                type: 'input-icon-size',
-            },
-        },
-        input: {
-            'font-size': {
-                attributes: {
-                    category: 'text-field',
-                    type: 'input',
-                    item: 'font-size',
-                },
-            },
-            'font-weight': {
-                attributes: {
-                    category: 'text-field',
-                    type: 'input',
-                    item: 'font-weight',
-                },
-            },
-            'line-height': {
-                attributes: {
-                    category: 'text-field',
-                    type: 'input',
-                    item: 'line-height',
-                },
-            },
-        },
-        'input-validity-size': {
-            attributes: {
-                category: 'text-field',
-                type: 'input-validity-size',
-            },
-        },
-        'input-clear-size': {
-            attributes: {
-                category: 'text-field',
-                type: 'input-clear-size',
             },
         },
     },
