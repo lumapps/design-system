@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Thu, 28 Jan 2021 09:05:59 GMT
+ * Generated on Thu, 06 May 2021 08:43:34 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -2309,10 +2309,10 @@ export const DESIGN_TOKENS = {
                 type: 'xl',
             },
         },
-        xxm: {
+        xxl: {
             attributes: {
                 category: 'size',
-                type: 'xxm',
+                type: 'xxl',
             },
         },
     },
