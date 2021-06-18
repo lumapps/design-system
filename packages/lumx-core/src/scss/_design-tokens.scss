@@ -3,12 +3,141 @@
  * Generated on Thu, 06 May 2021 08:43:34 GMT
  */
 
-$lumx-button-size-m-font-size: 14px !default;
-$lumx-button-size-m-font-weight: 700 !default;
-$lumx-button-size-s-font-size: 12px !default;
-$lumx-button-size-s-font-weight: 700 !default;
+$lumx-button-height: 36px !default;
+$lumx-button-border-radius: var(--lumx-border-radius) !default;
+$lumx-button-emphasis-high-state-default-padding-horizontal: 16px !default;
+$lumx-button-emphasis-high-state-default-border-width: 0 !default;
+$lumx-button-emphasis-high-state-default-theme-light-background-color: var(--lumx-color-primary-N) !default;
+$lumx-button-emphasis-high-state-default-theme-light-color: #fff !default; // Neutral light color
+$lumx-button-emphasis-high-state-default-theme-light-border-color: transparent !default;
+$lumx-button-emphasis-high-state-default-theme-dark-background-color: #fff !default; // Neutral light color
+$lumx-button-emphasis-high-state-default-theme-dark-color: var(--lumx-color-primary-N) !default;
+$lumx-button-emphasis-high-state-default-theme-dark-border-color: transparent !default;
+$lumx-button-emphasis-high-state-hover-padding-horizontal: 16px !default;
+$lumx-button-emphasis-high-state-hover-border-width: 0 !default;
+$lumx-button-emphasis-high-state-hover-theme-light-background-color: var(--lumx-color-primary-D1) !default;
+$lumx-button-emphasis-high-state-hover-theme-light-color: #fff !default; // Neutral light color
+$lumx-button-emphasis-high-state-hover-theme-light-border-color: transparent !default;
+$lumx-button-emphasis-high-state-hover-theme-dark-background-color: rgba(
+    255,
+    255,
+    255,
+    0.9
+) !default; // Base light color with 90% opacity
+$lumx-button-emphasis-high-state-hover-theme-dark-color: var(--lumx-color-primary-N) !default;
+$lumx-button-emphasis-high-state-hover-theme-dark-border-color: transparent !default;
+$lumx-button-emphasis-high-state-active-padding-horizontal: 16px !default;
+$lumx-button-emphasis-high-state-active-border-width: 0 !default;
+$lumx-button-emphasis-high-state-active-theme-light-background-color: var(--lumx-color-primary-D2) !default;
+$lumx-button-emphasis-high-state-active-theme-light-color: #fff !default; // Neutral light color
+$lumx-button-emphasis-high-state-active-theme-light-border-color: transparent !default;
+$lumx-button-emphasis-high-state-active-theme-dark-background-color: rgba(
+    255,
+    255,
+    255,
+    0.8
+) !default; // Base light color with 80% opacity
+$lumx-button-emphasis-high-state-active-theme-dark-color: var(--lumx-color-primary-N) !default;
+$lumx-button-emphasis-high-state-active-theme-dark-border-color: transparent !default;
+$lumx-button-emphasis-medium-state-default-padding-horizontal: 16px !default;
+$lumx-button-emphasis-medium-state-default-border-width: 0 !default;
+$lumx-button-emphasis-medium-state-default-theme-light-background-color: rgba(
+    0,
+    0,
+    0,
+    0.12
+) !default; // Base dark color with 12% opacity
+$lumx-button-emphasis-medium-state-default-theme-light-color: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
+$lumx-button-emphasis-medium-state-default-theme-light-border-color: transparent !default;
+$lumx-button-emphasis-medium-state-default-theme-dark-background-color: rgba(
+    255,
+    255,
+    255,
+    0.2
+) !default; // Base light color with 20% opacity
+$lumx-button-emphasis-medium-state-default-theme-dark-color: #fff !default; // Neutral light color
+$lumx-button-emphasis-medium-state-default-theme-dark-border-color: transparent !default;
+$lumx-button-emphasis-medium-state-hover-padding-horizontal: 16px !default;
+$lumx-button-emphasis-medium-state-hover-border-width: 0 !default;
+$lumx-button-emphasis-medium-state-hover-theme-light-background-color: rgba(
+    0,
+    0,
+    0,
+    0.2
+) !default; // Base dark color with 20% opacity
+$lumx-button-emphasis-medium-state-hover-theme-light-color: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
+$lumx-button-emphasis-medium-state-hover-theme-light-border-color: transparent !default;
+$lumx-button-emphasis-medium-state-hover-theme-dark-background-color: rgba(
+    255,
+    255,
+    255,
+    0.4
+) !default; // Base light color with 40% opacity
+$lumx-button-emphasis-medium-state-hover-theme-dark-color: #fff !default; // Neutral light color
+$lumx-button-emphasis-medium-state-hover-theme-dark-border-color: transparent !default;
+$lumx-button-emphasis-medium-state-active-padding-horizontal: 16px !default;
+$lumx-button-emphasis-medium-state-active-border-width: 0 !default;
+$lumx-button-emphasis-medium-state-active-theme-light-background-color: rgba(
+    0,
+    0,
+    0,
+    0.38
+) !default; // Base dark color with 38% opacity
+$lumx-button-emphasis-medium-state-active-theme-light-color: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
+$lumx-button-emphasis-medium-state-active-theme-light-border-color: transparent !default;
+$lumx-button-emphasis-medium-state-active-theme-dark-background-color: rgba(
+    255,
+    255,
+    255,
+    0.6
+) !default; // Base light color with 60% opacity
+$lumx-button-emphasis-medium-state-active-theme-dark-color: #fff !default; // Neutral light color
+$lumx-button-emphasis-medium-state-active-theme-dark-border-color: transparent !default;
+$lumx-button-emphasis-low-state-default-padding-horizontal: 16px !default;
+$lumx-button-emphasis-low-state-default-border-width: 0 !default;
+$lumx-button-emphasis-low-state-default-theme-light-background-color: transparent !default;
+$lumx-button-emphasis-low-state-default-theme-light-color: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
+$lumx-button-emphasis-low-state-default-theme-light-border-color: transparent !default;
+$lumx-button-emphasis-low-state-default-theme-dark-background-color: transparent !default;
+$lumx-button-emphasis-low-state-default-theme-dark-color: #fff !default; // Neutral light color
+$lumx-button-emphasis-low-state-default-theme-dark-border-color: transparent !default;
+$lumx-button-emphasis-low-state-hover-padding-horizontal: 16px !default;
+$lumx-button-emphasis-low-state-hover-border-width: 0 !default;
+$lumx-button-emphasis-low-state-hover-theme-light-background-color: rgba(
+    0,
+    0,
+    0,
+    0.12
+) !default; // Base dark color with 12% opacity
+$lumx-button-emphasis-low-state-hover-theme-light-color: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
+$lumx-button-emphasis-low-state-hover-theme-light-border-color: transparent !default;
+$lumx-button-emphasis-low-state-hover-theme-dark-background-color: rgba(
+    255,
+    255,
+    255,
+    0.2
+) !default; // Base light color with 20% opacity
+$lumx-button-emphasis-low-state-hover-theme-dark-color: #fff !default; // Neutral light color
+$lumx-button-emphasis-low-state-hover-theme-dark-border-color: transparent !default;
+$lumx-button-emphasis-low-state-active-padding-horizontal: 16px !default;
+$lumx-button-emphasis-low-state-active-border-width: 0 !default;
+$lumx-button-emphasis-low-state-active-theme-light-background-color: rgba(
+    0,
+    0,
+    0,
+    0.2
+) !default; // Base dark color with 20% opacity
+$lumx-button-emphasis-low-state-active-theme-light-color: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
+$lumx-button-emphasis-low-state-active-theme-light-border-color: transparent !default;
+$lumx-button-emphasis-low-state-active-theme-dark-background-color: rgba(
+    255,
+    255,
+    255,
+    0.4
+) !default; // Base light color with 40% opacity
+$lumx-button-emphasis-low-state-active-theme-dark-color: #fff !default; // Neutral light color
+$lumx-button-emphasis-low-state-active-theme-dark-border-color: transparent !default;
 $lumx-material-button-text-transform: none !default;
-$lumx-material-button-variant-icon-border-radius: 4px !default;
 $lumx-material-checkbox-wrapper-size: 20px !default;
 $lumx-material-checkbox-control-size: 16px !default;
 $lumx-material-chip-size-m-height: 36px !default;
@@ -317,53 +446,213 @@ $lumx-typography-interface-caption-line-height: 16px !default;
 $lumx-typography-interface-overline-font-size: 10px !default;
 $lumx-typography-interface-overline-font-weight: 700 !default;
 $lumx-typography-interface-overline-line-height: 12px !default;
+$lumx-typography-custom-title1-font-family: var(--lumx-typography-font-family) !default;
 $lumx-typography-custom-title1-font-size: 40px !default;
 $lumx-typography-custom-title1-font-weight: 700 !default;
 $lumx-typography-custom-title1-line-height: 50px !default;
+$lumx-typography-custom-title2-font-family: var(--lumx-typography-font-family) !default;
 $lumx-typography-custom-title2-font-size: 30px !default;
 $lumx-typography-custom-title2-font-weight: 700 !default;
 $lumx-typography-custom-title2-line-height: 40px !default;
+$lumx-typography-custom-title3-font-family: var(--lumx-typography-font-family) !default;
 $lumx-typography-custom-title3-font-size: 24px !default;
 $lumx-typography-custom-title3-font-weight: 700 !default;
 $lumx-typography-custom-title3-line-height: 32px !default;
+$lumx-typography-custom-title4-font-family: var(--lumx-typography-font-family) !default;
 $lumx-typography-custom-title4-font-size: 20px !default;
 $lumx-typography-custom-title4-font-weight: 700 !default;
 $lumx-typography-custom-title4-line-height: 30px !default;
+$lumx-typography-custom-title5-font-family: var(--lumx-typography-font-family) !default;
 $lumx-typography-custom-title5-font-size: 16px !default;
 $lumx-typography-custom-title5-font-weight: 700 !default;
 $lumx-typography-custom-title5-line-height: 24px !default;
+$lumx-typography-custom-title6-font-family: var(--lumx-typography-font-family) !default;
 $lumx-typography-custom-title6-font-size: 14px !default;
 $lumx-typography-custom-title6-font-weight: 700 !default;
 $lumx-typography-custom-title6-line-height: 20px !default;
+$lumx-typography-custom-intro-font-family: var(--lumx-typography-font-family) !default;
 $lumx-typography-custom-intro-font-size: 18px !default;
 $lumx-typography-custom-intro-font-weight: 700 !default;
 $lumx-typography-custom-intro-line-height: 30px !default;
+$lumx-typography-custom-body-large-font-family: var(--lumx-typography-font-family) !default;
 $lumx-typography-custom-body-large-font-size: 16px !default;
 $lumx-typography-custom-body-large-font-weight: 400 !default;
 $lumx-typography-custom-body-large-line-height: 24px !default;
+$lumx-typography-custom-body-font-family: var(--lumx-typography-font-family) !default;
 $lumx-typography-custom-body-font-size: 14px !default;
 $lumx-typography-custom-body-font-weight: 400 !default;
 $lumx-typography-custom-body-line-height: 20px !default;
+$lumx-typography-custom-quote-font-family: var(--lumx-typography-font-family) !default;
 $lumx-typography-custom-quote-font-size: 16px !default;
 $lumx-typography-custom-quote-font-weight: 300 !default;
 $lumx-typography-custom-quote-font-style: italic !default;
 $lumx-typography-custom-quote-line-height: 24px !default;
+$lumx-typography-custom-button-size-m-font-family: var(--lumx-typography-font-family) !default;
+$lumx-typography-custom-button-size-m-font-size: 14px !default;
+$lumx-typography-custom-button-size-m-font-weight: 700 !default;
+$lumx-typography-custom-button-size-s-font-family: var(--lumx-typography-font-family) !default;
+$lumx-typography-custom-button-size-s-font-size: 12px !default;
+$lumx-typography-custom-button-size-s-font-weight: 700 !default;
 
 $lumx-design-tokens: (
     'button': (
-        'size-m': (
-            'font-size': $lumx-button-size-m-font-size,
-            'font-weight': $lumx-button-size-m-font-weight,
+        'height': $lumx-button-height,
+        'border-radius': $lumx-button-border-radius,
+        'emphasis-high': (
+            'state-default': (
+                'padding': (
+                    'horizontal': $lumx-button-emphasis-high-state-default-padding-horizontal,
+                ),
+                'border-width': $lumx-button-emphasis-high-state-default-border-width,
+                'theme-light': (
+                    'background-color': $lumx-button-emphasis-high-state-default-theme-light-background-color,
+                    'color': $lumx-button-emphasis-high-state-default-theme-light-color,
+                    'border-color': $lumx-button-emphasis-high-state-default-theme-light-border-color,
+                ),
+                'theme-dark': (
+                    'background-color': $lumx-button-emphasis-high-state-default-theme-dark-background-color,
+                    'color': $lumx-button-emphasis-high-state-default-theme-dark-color,
+                    'border-color': $lumx-button-emphasis-high-state-default-theme-dark-border-color,
+                ),
+            ),
+            'state-hover': (
+                'padding': (
+                    'horizontal': $lumx-button-emphasis-high-state-hover-padding-horizontal,
+                ),
+                'border-width': $lumx-button-emphasis-high-state-hover-border-width,
+                'theme-light': (
+                    'background-color': $lumx-button-emphasis-high-state-hover-theme-light-background-color,
+                    'color': $lumx-button-emphasis-high-state-hover-theme-light-color,
+                    'border-color': $lumx-button-emphasis-high-state-hover-theme-light-border-color,
+                ),
+                'theme-dark': (
+                    'background-color': $lumx-button-emphasis-high-state-hover-theme-dark-background-color,
+                    'color': $lumx-button-emphasis-high-state-hover-theme-dark-color,
+                    'border-color': $lumx-button-emphasis-high-state-hover-theme-dark-border-color,
+                ),
+            ),
+            'state-active': (
+                'padding': (
+                    'horizontal': $lumx-button-emphasis-high-state-active-padding-horizontal,
+                ),
+                'border-width': $lumx-button-emphasis-high-state-active-border-width,
+                'theme-light': (
+                    'background-color': $lumx-button-emphasis-high-state-active-theme-light-background-color,
+                    'color': $lumx-button-emphasis-high-state-active-theme-light-color,
+                    'border-color': $lumx-button-emphasis-high-state-active-theme-light-border-color,
+                ),
+                'theme-dark': (
+                    'background-color': $lumx-button-emphasis-high-state-active-theme-dark-background-color,
+                    'color': $lumx-button-emphasis-high-state-active-theme-dark-color,
+                    'border-color': $lumx-button-emphasis-high-state-active-theme-dark-border-color,
+                ),
+            ),
         ),
-        'size-s': (
-            'font-size': $lumx-button-size-s-font-size,
-            'font-weight': $lumx-button-size-s-font-weight,
+        'emphasis-medium': (
+            'state-default': (
+                'padding': (
+                    'horizontal': $lumx-button-emphasis-medium-state-default-padding-horizontal,
+                ),
+                'border-width': $lumx-button-emphasis-medium-state-default-border-width,
+                'theme-light': (
+                    'background-color': $lumx-button-emphasis-medium-state-default-theme-light-background-color,
+                    'color': $lumx-button-emphasis-medium-state-default-theme-light-color,
+                    'border-color': $lumx-button-emphasis-medium-state-default-theme-light-border-color,
+                ),
+                'theme-dark': (
+                    'background-color': $lumx-button-emphasis-medium-state-default-theme-dark-background-color,
+                    'color': $lumx-button-emphasis-medium-state-default-theme-dark-color,
+                    'border-color': $lumx-button-emphasis-medium-state-default-theme-dark-border-color,
+                ),
+            ),
+            'state-hover': (
+                'padding': (
+                    'horizontal': $lumx-button-emphasis-medium-state-hover-padding-horizontal,
+                ),
+                'border-width': $lumx-button-emphasis-medium-state-hover-border-width,
+                'theme-light': (
+                    'background-color': $lumx-button-emphasis-medium-state-hover-theme-light-background-color,
+                    'color': $lumx-button-emphasis-medium-state-hover-theme-light-color,
+                    'border-color': $lumx-button-emphasis-medium-state-hover-theme-light-border-color,
+                ),
+                'theme-dark': (
+                    'background-color': $lumx-button-emphasis-medium-state-hover-theme-dark-background-color,
+                    'color': $lumx-button-emphasis-medium-state-hover-theme-dark-color,
+                    'border-color': $lumx-button-emphasis-medium-state-hover-theme-dark-border-color,
+                ),
+            ),
+            'state-active': (
+                'padding': (
+                    'horizontal': $lumx-button-emphasis-medium-state-active-padding-horizontal,
+                ),
+                'border-width': $lumx-button-emphasis-medium-state-active-border-width,
+                'theme-light': (
+                    'background-color': $lumx-button-emphasis-medium-state-active-theme-light-background-color,
+                    'color': $lumx-button-emphasis-medium-state-active-theme-light-color,
+                    'border-color': $lumx-button-emphasis-medium-state-active-theme-light-border-color,
+                ),
+                'theme-dark': (
+                    'background-color': $lumx-button-emphasis-medium-state-active-theme-dark-background-color,
+                    'color': $lumx-button-emphasis-medium-state-active-theme-dark-color,
+                    'border-color': $lumx-button-emphasis-medium-state-active-theme-dark-border-color,
+                ),
+            ),
+        ),
+        'emphasis-low': (
+            'state-default': (
+                'padding': (
+                    'horizontal': $lumx-button-emphasis-low-state-default-padding-horizontal,
+                ),
+                'border-width': $lumx-button-emphasis-low-state-default-border-width,
+                'theme-light': (
+                    'background-color': $lumx-button-emphasis-low-state-default-theme-light-background-color,
+                    'color': $lumx-button-emphasis-low-state-default-theme-light-color,
+                    'border-color': $lumx-button-emphasis-low-state-default-theme-light-border-color,
+                ),
+                'theme-dark': (
+                    'background-color': $lumx-button-emphasis-low-state-default-theme-dark-background-color,
+                    'color': $lumx-button-emphasis-low-state-default-theme-dark-color,
+                    'border-color': $lumx-button-emphasis-low-state-default-theme-dark-border-color,
+                ),
+            ),
+            'state-hover': (
+                'padding': (
+                    'horizontal': $lumx-button-emphasis-low-state-hover-padding-horizontal,
+                ),
+                'border-width': $lumx-button-emphasis-low-state-hover-border-width,
+                'theme-light': (
+                    'background-color': $lumx-button-emphasis-low-state-hover-theme-light-background-color,
+                    'color': $lumx-button-emphasis-low-state-hover-theme-light-color,
+                    'border-color': $lumx-button-emphasis-low-state-hover-theme-light-border-color,
+                ),
+                'theme-dark': (
+                    'background-color': $lumx-button-emphasis-low-state-hover-theme-dark-background-color,
+                    'color': $lumx-button-emphasis-low-state-hover-theme-dark-color,
+                    'border-color': $lumx-button-emphasis-low-state-hover-theme-dark-border-color,
+                ),
+            ),
+            'state-active': (
+                'padding': (
+                    'horizontal': $lumx-button-emphasis-low-state-active-padding-horizontal,
+                ),
+                'border-width': $lumx-button-emphasis-low-state-active-border-width,
+                'theme-light': (
+                    'background-color': $lumx-button-emphasis-low-state-active-theme-light-background-color,
+                    'color': $lumx-button-emphasis-low-state-active-theme-light-color,
+                    'border-color': $lumx-button-emphasis-low-state-active-theme-light-border-color,
+                ),
+                'theme-dark': (
+                    'background-color': $lumx-button-emphasis-low-state-active-theme-dark-background-color,
+                    'color': $lumx-button-emphasis-low-state-active-theme-dark-color,
+                    'border-color': $lumx-button-emphasis-low-state-active-theme-dark-border-color,
+                ),
+            ),
         ),
     ),
     'material': (
         'button': (
             'text-transform': $lumx-material-button-text-transform,
-            'variant-icon-border-radius': $lumx-material-button-variant-icon-border-radius,
+            'variant-icon-border-radius': (),
         ),
         'checkbox': (
             'wrapper-size': $lumx-material-checkbox-wrapper-size,
@@ -808,55 +1097,77 @@ $lumx-design-tokens: (
         ),
         'custom': (
             'title1': (
+                'font-family': $lumx-typography-custom-title1-font-family,
                 'font-size': $lumx-typography-custom-title1-font-size,
                 'font-weight': $lumx-typography-custom-title1-font-weight,
                 'line-height': $lumx-typography-custom-title1-line-height,
             ),
             'title2': (
+                'font-family': $lumx-typography-custom-title2-font-family,
                 'font-size': $lumx-typography-custom-title2-font-size,
                 'font-weight': $lumx-typography-custom-title2-font-weight,
                 'line-height': $lumx-typography-custom-title2-line-height,
             ),
             'title3': (
+                'font-family': $lumx-typography-custom-title3-font-family,
                 'font-size': $lumx-typography-custom-title3-font-size,
                 'font-weight': $lumx-typography-custom-title3-font-weight,
                 'line-height': $lumx-typography-custom-title3-line-height,
             ),
             'title4': (
+                'font-family': $lumx-typography-custom-title4-font-family,
                 'font-size': $lumx-typography-custom-title4-font-size,
                 'font-weight': $lumx-typography-custom-title4-font-weight,
                 'line-height': $lumx-typography-custom-title4-line-height,
             ),
             'title5': (
+                'font-family': $lumx-typography-custom-title5-font-family,
                 'font-size': $lumx-typography-custom-title5-font-size,
                 'font-weight': $lumx-typography-custom-title5-font-weight,
                 'line-height': $lumx-typography-custom-title5-line-height,
             ),
             'title6': (
+                'font-family': $lumx-typography-custom-title6-font-family,
                 'font-size': $lumx-typography-custom-title6-font-size,
                 'font-weight': $lumx-typography-custom-title6-font-weight,
                 'line-height': $lumx-typography-custom-title6-line-height,
             ),
             'intro': (
+                'font-family': $lumx-typography-custom-intro-font-family,
                 'font-size': $lumx-typography-custom-intro-font-size,
                 'font-weight': $lumx-typography-custom-intro-font-weight,
                 'line-height': $lumx-typography-custom-intro-line-height,
             ),
             'body-large': (
+                'font-family': $lumx-typography-custom-body-large-font-family,
                 'font-size': $lumx-typography-custom-body-large-font-size,
                 'font-weight': $lumx-typography-custom-body-large-font-weight,
                 'line-height': $lumx-typography-custom-body-large-line-height,
             ),
             'body': (
+                'font-family': $lumx-typography-custom-body-font-family,
                 'font-size': $lumx-typography-custom-body-font-size,
                 'font-weight': $lumx-typography-custom-body-font-weight,
                 'line-height': $lumx-typography-custom-body-line-height,
             ),
             'quote': (
+                'font-family': $lumx-typography-custom-quote-font-family,
                 'font-size': $lumx-typography-custom-quote-font-size,
                 'font-weight': $lumx-typography-custom-quote-font-weight,
                 'font-style': $lumx-typography-custom-quote-font-style,
                 'line-height': $lumx-typography-custom-quote-line-height,
+            ),
+            'button': (
+                'size-m': (
+                    'font-family': $lumx-typography-custom-button-size-m-font-family,
+                    'font-size': $lumx-typography-custom-button-size-m-font-size,
+                    'font-weight': $lumx-typography-custom-button-size-m-font-weight,
+                ),
+                'size-s': (
+                    'font-family': $lumx-typography-custom-button-size-s-font-family,
+                    'font-size': $lumx-typography-custom-button-size-s-font-size,
+                    'font-weight': $lumx-typography-custom-button-size-s-font-weight,
+                ),
             ),
         ),
     ),

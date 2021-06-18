@@ -5,35 +5,653 @@
 
 export const DESIGN_TOKENS = {
     button: {
-        'size-m': {
-            'font-size': {
-                attributes: {
-                    category: 'button',
-                    type: 'size-m',
-                    item: 'font-size',
+        height: {
+            attributes: {
+                category: 'button',
+                type: 'height',
+            },
+        },
+        'border-radius': {
+            attributes: {
+                category: 'button',
+                type: 'border-radius',
+            },
+        },
+        'emphasis-high': {
+            'state-default': {
+                padding: {
+                    horizontal: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-default',
+                        },
+                    },
+                },
+                'border-width': {
+                    attributes: {
+                        category: 'button',
+                        type: 'emphasis-high',
+                        item: 'state-default',
+                    },
+                },
+                'theme-light': {
+                    'background-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-default',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral light color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-default',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-default',
+                        },
+                    },
+                },
+                'theme-dark': {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Neutral light color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-default',
+                        },
+                    },
+                    color: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-default',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-default',
+                        },
+                    },
                 },
             },
-            'font-weight': {
-                attributes: {
-                    category: 'button',
-                    type: 'size-m',
-                    item: 'font-weight',
+            'state-hover': {
+                padding: {
+                    horizontal: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-hover',
+                        },
+                    },
+                },
+                'border-width': {
+                    attributes: {
+                        category: 'button',
+                        type: 'emphasis-high',
+                        item: 'state-hover',
+                    },
+                },
+                'theme-light': {
+                    'background-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-hover',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral light color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-hover',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-hover',
+                        },
+                    },
+                },
+                'theme-dark': {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base light color with 90% opacity',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-hover',
+                        },
+                    },
+                    color: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-hover',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-hover',
+                        },
+                    },
+                },
+            },
+            'state-active': {
+                padding: {
+                    horizontal: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-active',
+                        },
+                    },
+                },
+                'border-width': {
+                    attributes: {
+                        category: 'button',
+                        type: 'emphasis-high',
+                        item: 'state-active',
+                    },
+                },
+                'theme-light': {
+                    'background-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-active',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral light color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-active',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-active',
+                        },
+                    },
+                },
+                'theme-dark': {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base light color with 80% opacity',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-active',
+                        },
+                    },
+                    color: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-active',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-active',
+                        },
+                    },
                 },
             },
         },
-        'size-s': {
-            'font-size': {
-                attributes: {
-                    category: 'button',
-                    type: 'size-s',
-                    item: 'font-size',
+        'emphasis-medium': {
+            'state-default': {
+                padding: {
+                    horizontal: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-default',
+                        },
+                    },
+                },
+                'border-width': {
+                    attributes: {
+                        category: 'button',
+                        type: 'emphasis-medium',
+                        item: 'state-default',
+                    },
+                },
+                'theme-light': {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base dark color with 12% opacity',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-default',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral dark color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-default',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-default',
+                        },
+                    },
+                },
+                'theme-dark': {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base light color with 20% opacity',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-default',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral light color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-default',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-default',
+                        },
+                    },
                 },
             },
-            'font-weight': {
-                attributes: {
-                    category: 'button',
-                    type: 'size-s',
-                    item: 'font-weight',
+            'state-hover': {
+                padding: {
+                    horizontal: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-hover',
+                        },
+                    },
+                },
+                'border-width': {
+                    attributes: {
+                        category: 'button',
+                        type: 'emphasis-medium',
+                        item: 'state-hover',
+                    },
+                },
+                'theme-light': {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base dark color with 20% opacity',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-hover',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral dark color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-hover',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-hover',
+                        },
+                    },
+                },
+                'theme-dark': {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base light color with 40% opacity',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-hover',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral light color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-hover',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-hover',
+                        },
+                    },
+                },
+            },
+            'state-active': {
+                padding: {
+                    horizontal: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-active',
+                        },
+                    },
+                },
+                'border-width': {
+                    attributes: {
+                        category: 'button',
+                        type: 'emphasis-medium',
+                        item: 'state-active',
+                    },
+                },
+                'theme-light': {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base dark color with 38% opacity',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-active',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral dark color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-active',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-active',
+                        },
+                    },
+                },
+                'theme-dark': {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base light color with 60% opacity',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-active',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral light color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-active',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-active',
+                        },
+                    },
+                },
+            },
+        },
+        'emphasis-low': {
+            'state-default': {
+                padding: {
+                    horizontal: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-default',
+                        },
+                    },
+                },
+                'border-width': {
+                    attributes: {
+                        category: 'button',
+                        type: 'emphasis-low',
+                        item: 'state-default',
+                    },
+                },
+                'theme-light': {
+                    'background-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-default',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral dark color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-default',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-default',
+                        },
+                    },
+                },
+                'theme-dark': {
+                    'background-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-default',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral light color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-default',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-default',
+                        },
+                    },
+                },
+            },
+            'state-hover': {
+                padding: {
+                    horizontal: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-hover',
+                        },
+                    },
+                },
+                'border-width': {
+                    attributes: {
+                        category: 'button',
+                        type: 'emphasis-low',
+                        item: 'state-hover',
+                    },
+                },
+                'theme-light': {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base dark color with 12% opacity',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-hover',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral dark color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-hover',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-hover',
+                        },
+                    },
+                },
+                'theme-dark': {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base light color with 20% opacity',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-hover',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral light color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-hover',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-hover',
+                        },
+                    },
+                },
+            },
+            'state-active': {
+                padding: {
+                    horizontal: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-active',
+                        },
+                    },
+                },
+                'border-width': {
+                    attributes: {
+                        category: 'button',
+                        type: 'emphasis-low',
+                        item: 'state-active',
+                    },
+                },
+                'theme-light': {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base dark color with 20% opacity',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-active',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral dark color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-active',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-active',
+                        },
+                    },
+                },
+                'theme-dark': {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base light color with 40% opacity',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-active',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral light color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-active',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-active',
+                        },
+                    },
                 },
             },
         },
@@ -45,13 +663,6 @@ export const DESIGN_TOKENS = {
                     category: 'material',
                     type: 'button',
                     item: 'text-transform',
-                },
-            },
-            'variant-icon-border-radius': {
-                attributes: {
-                    category: 'material',
-                    type: 'button',
-                    item: 'variant-icon-border-radius',
                 },
             },
         },
@@ -2871,6 +3482,13 @@ export const DESIGN_TOKENS = {
         },
         custom: {
             title1: {
+                'font-family': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title1',
+                    },
+                },
                 'font-size': {
                     attributes: {
                         category: 'typography',
@@ -2894,6 +3512,13 @@ export const DESIGN_TOKENS = {
                 },
             },
             title2: {
+                'font-family': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title2',
+                    },
+                },
                 'font-size': {
                     attributes: {
                         category: 'typography',
@@ -2917,6 +3542,13 @@ export const DESIGN_TOKENS = {
                 },
             },
             title3: {
+                'font-family': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title3',
+                    },
+                },
                 'font-size': {
                     attributes: {
                         category: 'typography',
@@ -2940,6 +3572,13 @@ export const DESIGN_TOKENS = {
                 },
             },
             title4: {
+                'font-family': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title4',
+                    },
+                },
                 'font-size': {
                     attributes: {
                         category: 'typography',
@@ -2963,6 +3602,13 @@ export const DESIGN_TOKENS = {
                 },
             },
             title5: {
+                'font-family': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title5',
+                    },
+                },
                 'font-size': {
                     attributes: {
                         category: 'typography',
@@ -2986,6 +3632,13 @@ export const DESIGN_TOKENS = {
                 },
             },
             title6: {
+                'font-family': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title6',
+                    },
+                },
                 'font-size': {
                     attributes: {
                         category: 'typography',
@@ -3009,6 +3662,13 @@ export const DESIGN_TOKENS = {
                 },
             },
             intro: {
+                'font-family': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'intro',
+                    },
+                },
                 'font-size': {
                     attributes: {
                         category: 'typography',
@@ -3032,6 +3692,13 @@ export const DESIGN_TOKENS = {
                 },
             },
             'body-large': {
+                'font-family': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'body-large',
+                    },
+                },
                 'font-size': {
                     attributes: {
                         category: 'typography',
@@ -3055,6 +3722,13 @@ export const DESIGN_TOKENS = {
                 },
             },
             body: {
+                'font-family': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'body',
+                    },
+                },
                 'font-size': {
                     attributes: {
                         category: 'typography',
@@ -3078,6 +3752,13 @@ export const DESIGN_TOKENS = {
                 },
             },
             quote: {
+                'font-family': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'quote',
+                    },
+                },
                 'font-size': {
                     attributes: {
                         category: 'typography',
@@ -3104,6 +3785,54 @@ export const DESIGN_TOKENS = {
                         category: 'typography',
                         type: 'custom',
                         item: 'quote',
+                    },
+                },
+            },
+            button: {
+                'size-m': {
+                    'font-family': {
+                        attributes: {
+                            category: 'typography',
+                            type: 'custom',
+                            item: 'button',
+                        },
+                    },
+                    'font-size': {
+                        attributes: {
+                            category: 'typography',
+                            type: 'custom',
+                            item: 'button',
+                        },
+                    },
+                    'font-weight': {
+                        attributes: {
+                            category: 'typography',
+                            type: 'custom',
+                            item: 'button',
+                        },
+                    },
+                },
+                'size-s': {
+                    'font-family': {
+                        attributes: {
+                            category: 'typography',
+                            type: 'custom',
+                            item: 'button',
+                        },
+                    },
+                    'font-size': {
+                        attributes: {
+                            category: 'typography',
+                            type: 'custom',
+                            item: 'button',
+                        },
+                    },
+                    'font-weight': {
+                        attributes: {
+                            category: 'typography',
+                            type: 'custom',
+                            item: 'button',
+                        },
                     },
                 },
             },
