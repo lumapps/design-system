@@ -1,12 +1,156 @@
 {
     "button": {
-        "size-m": {
-            "font-size": { "value": "14px" },
-            "font-weight": { "value": "700" }
+        "height": { "value": "{size.m.value}" },
+        "border-radius": { "value": "var(--lumx-border-radius)" },
+        "emphasis-high": {
+            "state-default": {
+                "padding": {
+                    "horizontal": { "value": "{spacing.unit.big.value}" }
+                },
+                "border-width": { "value": "0" },
+                "theme-light": {
+                    "background-color": { "value": "var(--lumx-color-primary-N)" },
+                    "color": "{color.light.N}",
+                    "border-color": { "value": "transparent" }
+                },
+                "theme-dark": {
+                    "background-color": "{color.light.N}",
+                    "color": { "value": "var(--lumx-color-primary-N)" },
+                    "border-color": { "value": "transparent" }
+                }
+            },
+            "state-hover": {
+                "padding": {
+                    "horizontal": { "value": "{spacing.unit.big.value}" }
+                },
+                "border-width": { "value": "0" },
+                "theme-light": {
+                    "background-color": { "value": "var(--lumx-color-primary-D1)" },
+                    "color": "{color.light.N}",
+                    "border-color": { "value": "transparent" }
+                },
+                "theme-dark": {
+                    "background-color": "{color.light.L1}",
+                    "color": { "value": "var(--lumx-color-primary-N)" },
+                    "border-color": { "value": "transparent" }
+                }
+            },
+            "state-active": {
+                "padding": {
+                    "horizontal": { "value": "{spacing.unit.big.value}" }
+                },
+                "border-width": { "value": "0" },
+                "theme-light": {
+                    "background-color": { "value": "var(--lumx-color-primary-D2)" },
+                    "color": "{color.light.N}",
+                    "border-color": { "value": "transparent" }
+                },
+                "theme-dark": {
+                    "background-color": "{color.light.L2}",
+                    "color": { "value": "var(--lumx-color-primary-N)" },
+                    "border-color": { "value": "transparent" }
+                }
+            }
         },
-        "size-s": {
-            "font-size": { "value": "12px" },
-            "font-weight": { "value": "700" }
+        "emphasis-medium": {
+            "state-default": {
+                "padding": {
+                    "horizontal": { "value": "{spacing.unit.big.value}" }
+                },
+                "border-width": { "value": "0" },
+                "theme-light": {
+                    "background-color": "{color.dark.L5}",
+                    "color": "{color.dark.N}",
+                    "border-color": { "value": "transparent" }
+                },
+                "theme-dark": {
+                    "background-color": "{color.light.L5}",
+                    "color": "{color.light.N}",
+                    "border-color": { "value": "transparent" }
+                }
+            },
+            "state-hover": {
+                "padding": {
+                    "horizontal": { "value": "{spacing.unit.big.value}" }
+                },
+                "border-width": { "value": "0" },
+                "theme-light": {
+                    "background-color": "{color.dark.L4}",
+                    "color": "{color.dark.N}",
+                    "border-color": { "value": "transparent" }
+                },
+                "theme-dark": {
+                    "background-color": "{color.light.L4}",
+                    "color": "{color.light.N}",
+                    "border-color": { "value": "transparent" }
+                }
+            },
+            "state-active": {
+                "padding": {
+                    "horizontal": { "value": "{spacing.unit.big.value}" }
+                },
+                "border-width": { "value": "0" },
+                "theme-light": {
+                    "background-color": "{color.dark.L3}",
+                    "color": "{color.dark.N}",
+                    "border-color": { "value": "transparent" }
+                },
+                "theme-dark": {
+                    "background-color": "{color.light.L3}",
+                    "color": "{color.light.N}",
+                    "border-color": { "value": "transparent" }
+                }
+            }
+        },
+        "emphasis-low": {
+            "state-default": {
+                "padding": {
+                    "horizontal": { "value": "{spacing.unit.big.value}" }
+                },
+                "border-width": { "value": "0" },
+                "theme-light": {
+                    "background-color": { "value": "transparent" },
+                    "color": "{color.dark.N}",
+                    "border-color": { "value": "transparent" }
+                },
+                "theme-dark": {
+                    "background-color": { "value": "transparent" },
+                    "color": "{color.light.N}",
+                    "border-color": { "value": "transparent" }
+                }
+            },
+            "state-hover": {
+                "padding": {
+                    "horizontal": { "value": "{spacing.unit.big.value}" }
+                },
+                "border-width": { "value": "0" },
+                "theme-light": {
+                    "background-color": "{color.dark.L5}",
+                    "color": "{color.dark.N}",
+                    "border-color": { "value": "transparent" }
+                },
+                "theme-dark": {
+                    "background-color": "{color.light.L5}",
+                    "color": "{color.light.N}",
+                    "border-color": { "value": "transparent" }
+                }
+            },
+            "state-active": {
+                "padding": {
+                    "horizontal": { "value": "{spacing.unit.big.value}" }
+                },
+                "border-width": { "value": "0" },
+                "theme-light": {
+                    "background-color": "{color.dark.L4}",
+                    "color": "{color.dark.N}",
+                    "border-color": { "value": "transparent" }
+                },
+                "theme-dark": {
+                    "background-color": "{color.light.L4}",
+                    "color": "{color.light.N}",
+                    "border-color": { "value": "transparent" }
+                }
+            }
         }
     }
 }

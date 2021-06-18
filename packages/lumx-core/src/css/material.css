@@ -1,9 +1,9 @@
 :root {
     --lumx-border-radius: 2px;
     --lumx-typography-font-family: 'Roboto', sans-serif;
-    --lumx-button-size-m-font-weight: 500;
-    --lumx-button-size-s-font-size: 10px;
-    --lumx-button-size-s-font-weight: 500;
+    --lumx-typography-custom-button-size-m-font-weight: 500;
+    --lumx-typography-custom-button-size-s-font-size: 10px;
+    --lumx-typography-custom-button-size-s-font-weight: 500;
     --lumx-text-field-input-min-height: 32px;
     --lumx-text-field-input-padding-horizontal: 0;
     --lumx-text-field-input-border-radius: 0;
