@@ -38,8 +38,11 @@
     border: none;
     background: none;
     cursor: pointer;
+    font-family: var(--lumx-typography-custom-button-size-m-font-family);
+    font-size: var(--lumx-typography-custom-button-size-m-font-size);
+    font-weight: var(--lumx-typography-custom-button-size-m-font-weight);
     outline: none;
-    text-transform: var(--lumx-button-text-transform);
+    text-transform: var(--lumx-material-button-text-transform);
 
     &::after {
         position: absolute;
