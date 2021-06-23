@@ -3,7 +3,6 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-button {
-    @include lumx-state-transition;
     @include lumx-button-base;
 
     .#{$lumx-base-prefix}-badge {
