@@ -9,8 +9,8 @@
     background-color: transparent;
     outline: none;
     text-decoration: none;
-    transition-duration: 200ms;
-    transition-property: padding, border-radius, background-color, color, border-color;
+    transition-duration: $lumx-state-transition-duration;
+    transition-property: padding, border-radius, border-width, background-color, color, border-color;
     user-select: none;
     vertical-align: top;
 
