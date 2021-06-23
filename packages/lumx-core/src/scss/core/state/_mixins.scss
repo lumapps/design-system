@@ -52,8 +52,10 @@
             color: lumx-color-variant('primary', 'D2');
         } @else if $state == lumx-base-const('state', 'HOVER') {
             background-color: lumx-color-variant('primary', 'L3');
+            color: lumx-color-variant('primary', 'D2');
         } @else if $state == lumx-base-const('state', 'ACTIVE') {
             background-color: lumx-color-variant('primary', 'L2');
+            color: lumx-color-variant('primary', 'D2');
         } @else if $state == lumx-base-const('state', 'FOCUS') {
             @if $has-focus-inset == true {
                 box-shadow: inset 0 0 0 2px lumx-color-variant('primary', 'L3');
@@ -67,8 +69,10 @@
             color: lumx-color-variant('dark', 'N');
         } @else if $state == lumx-base-const('state', 'HOVER') {
             background-color: lumx-color-variant('light', 'L3');
+            color: lumx-color-variant('dark', 'N');
         } @else if $state == lumx-base-const('state', 'ACTIVE') {
             background-color: lumx-color-variant('light', 'L4');
+            color: lumx-color-variant('dark', 'N');
         } @else if $state == lumx-base-const('state', 'FOCUS') {
             @if $has-focus-inset == true {
                 box-shadow: inset 0 0 0 2px lumx-color-variant('light', 'L3');
