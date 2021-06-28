@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   Fix Select/Dropdown inside Dialog not closing when clicking outside.
+-   Fix Select focus state not updating correctly.
 
 ## [1.0.17][] - 2021-05-27
 
