@@ -39,7 +39,7 @@ jobs:
         run: yarn install --frozen-lockfile --ignore-optional
 
       - name: "Deploy chromatic"
-        uses: chromaui/action@e649c933d14575142ba0c25a806807752c60dad5 #v1
+        uses: chromaui/action@5c36690a7d85fc6345aa786cc5b3d3d9742af4fb #v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           projectToken: ${{ secrets.CHROMATIC_TOKEN }}
