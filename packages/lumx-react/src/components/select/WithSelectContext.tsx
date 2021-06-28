@@ -1,4 +1,4 @@
-import React, { Ref, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { Ref, useCallback, useMemo, useRef } from 'react';
 
 import classNames from 'classnames';
 import { uid } from 'uid';
@@ -10,7 +10,7 @@ import { Placement } from '@lumx/react/components/popover/Popover';
 
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
-
+import { useListenFocus } from '@lumx/react/hooks/useListenFocus';
 import { CoreSelectProps, SelectVariant } from './constants';
 
 /** The display name of the component. */
@@ -24,57 +24,6 @@ export const DEFAULT_PROPS: Partial<CoreSelectProps> = {
     theme: Theme.light,
     variant: SelectVariant.input,
 };
-
-/**
- * Listen on element focus to store the focus status.
- *
- * @param element    Element to focus.
- * @param setIsFocus Setter used to store the focus status of the element.
- * @param isOpen Is the list opened
- * @param wasBlurred is it blurred
- * @param setWasBlurred set blurred
- * @param onBlur when its blurred
- */
-function useHandleElementFocus(
-    element: HTMLElement | null,
-    setIsFocus: (b: boolean) => void,
-    isOpen: boolean,
-    wasBlurred: boolean,
-    setWasBlurred: (b: boolean) => void,
-    onBlur?: () => void,
-) {
-    useEffect((): VoidFunction | void => {
-        if (!element) {
-            return undefined;
-        }
-
-        const setFocus = () => {
-            if (!isOpen) {
-                setIsFocus(true);
-            }
-        };
-
-        const setBlur = () => {
-            if (!isOpen) {
-                setIsFocus(false);
-
-                if (onBlur) {
-                    onBlur();
-                }
-            }
-
-            setWasBlurred(true);
-        };
-
-        element.addEventListener('focus', setFocus);
-        element.addEventListener('blur', setBlur);
-
-        return () => {
-            element.removeEventListener('focus', setFocus);
-            element.removeEventListener('blur', setBlur);
-        };
-    }, [element, isOpen, onBlur, setIsFocus, setWasBlurred, wasBlurred]);
-}
 
 export const WithSelectContext = (
     SelectElement: React.FC<any>,
@@ -94,7 +43,6 @@ export const WithSelectContext = (
         isRequired,
         isValid,
         label,
-        onBlur,
         onClear,
         onDropdownClose,
         onInfiniteScroll,
@@ -110,10 +58,7 @@ export const WithSelectContext = (
     const selectId = useMemo(() => id || `select-${uid()}`, [id]);
     const anchorRef = useRef<HTMLElement>(null);
     const selectRef = useRef<HTMLDivElement>(null);
-    const [isFocus, setIsFocus] = useState(Boolean(isOpen));
-    const [wasBlurred, setWasBlurred] = useState(false);
-
-    useHandleElementFocus(anchorRef.current, setIsFocus, Boolean(isOpen), wasBlurred, setWasBlurred, onBlur);
+    const isFocus = useListenFocus(anchorRef);
 
     const handleKeyboardNav = useCallback(
         (evt: React.KeyboardEvent<HTMLElement>) => {
@@ -129,8 +74,6 @@ export const WithSelectContext = (
         if (onDropdownClose) {
             onDropdownClose();
         }
-
-        setWasBlurred(false);
         anchorRef?.current?.blur();
     };
 

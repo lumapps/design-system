@@ -18,14 +18,16 @@ Array [
     >
       <ClickAwayProvider
         refs={
-          Array [
-            Object {
-              "current": null,
-            },
-            Object {
-              "current": null,
-            },
-          ]
+          Object {
+            "current": Array [
+              Object {
+                "current": null,
+              },
+              Object {
+                "current": null,
+              },
+            ],
+          }
         }
       >
         Popover aligned on start of the top side
@@ -48,14 +50,16 @@ Array [
     >
       <ClickAwayProvider
         refs={
-          Array [
-            Object {
-              "current": null,
-            },
-            Object {
-              "current": null,
-            },
-          ]
+          Object {
+            "current": Array [
+              Object {
+                "current": null,
+              },
+              Object {
+                "current": null,
+              },
+            ],
+          }
         }
       >
         Popover aligned on start of the top side
@@ -82,14 +86,16 @@ exports[`<Popover> Snapshots and structure should render story 'Auto' 1`] = `
   >
     <ClickAwayProvider
       refs={
-        Array [
-          Object {
-            "current": null,
-          },
-          Object {
-            "current": null,
-          },
-        ]
+        Object {
+          "current": Array [
+            Object {
+              "current": null,
+            },
+            Object {
+              "current": null,
+            },
+          ],
+        }
       }
     >
       Popover
@@ -115,14 +121,16 @@ exports[`<Popover> Snapshots and structure should render story 'Default' 1`] = `
   >
     <ClickAwayProvider
       refs={
-        Array [
-          Object {
-            "current": null,
-          },
-          Object {
-            "current": null,
-          },
-        ]
+        Object {
+          "current": Array [
+            Object {
+              "current": null,
+            },
+            Object {
+              "current": null,
+            },
+          ],
+        }
       }
     >
       Popover
@@ -148,14 +156,16 @@ exports[`<Popover> Snapshots and structure should render story 'MatchingWidth' 1
   >
     <ClickAwayProvider
       refs={
-        Array [
-          Object {
-            "current": null,
-          },
-          Object {
-            "current": null,
-          },
-        ]
+        Object {
+          "current": Array [
+            Object {
+              "current": null,
+            },
+            Object {
+              "current": null,
+            },
+          ],
+        }
       }
     >
       Popover's width matching anchor's
@@ -181,14 +191,16 @@ exports[`<Popover> Snapshots and structure should render story 'Offset' 1`] = `
   >
     <ClickAwayProvider
       refs={
-        Array [
-          Object {
-            "current": null,
-          },
-          Object {
-            "current": null,
-          },
-        ]
+        Object {
+          "current": Array [
+            Object {
+              "current": null,
+            },
+            Object {
+              "current": null,
+            },
+          ],
+        }
       }
     >
       Popover
@@ -215,14 +227,16 @@ Array [
     >
       <ClickAwayProvider
         refs={
-          Array [
-            Object {
-              "current": null,
-            },
-            Object {
-              "current": null,
-            },
-          ]
+          Object {
+            "current": Array [
+              Object {
+                "current": null,
+              },
+              Object {
+                "current": null,
+              },
+            ],
+          }
         }
       >
         Popover
@@ -245,14 +259,16 @@ Array [
     >
       <ClickAwayProvider
         refs={
-          Array [
-            Object {
-              "current": null,
-            },
-            Object {
-              "current": null,
-            },
-          ]
+          Object {
+            "current": Array [
+              Object {
+                "current": null,
+              },
+              Object {
+                "current": null,
+              },
+            ],
+          }
         }
       >
         Popover
@@ -275,14 +291,16 @@ Array [
     >
       <ClickAwayProvider
         refs={
-          Array [
-            Object {
-              "current": null,
-            },
-            Object {
-              "current": null,
-            },
-          ]
+          Object {
+            "current": Array [
+              Object {
+                "current": null,
+              },
+              Object {
+                "current": null,
+              },
+            ],
+          }
         }
       >
         Popover
@@ -305,14 +323,16 @@ Array [
     >
       <ClickAwayProvider
         refs={
-          Array [
-            Object {
-              "current": null,
-            },
-            Object {
-              "current": null,
-            },
-          ]
+          Object {
+            "current": Array [
+              Object {
+                "current": null,
+              },
+              Object {
+                "current": null,
+              },
+            ],
+          }
         }
       >
         Popover

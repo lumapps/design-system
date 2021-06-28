@@ -1,42 +1,33 @@
-import React, { createContext, useCallback, useContext, useMemo, useState } from 'react';
-
+import React, { createContext, useContext, useEffect } from 'react';
+import pull from 'lodash/pull';
 import { ClickAwayParameters, useClickAway } from '@lumx/react/hooks/useClickAway';
 
-import uniq from 'lodash/uniq';
-
-type appendChildrenRefsType = (refs: ClickAwayParameters['refs']) => void;
-const ClickAwayAncestorContext = createContext<appendChildrenRefsType | null>(null);
+const ClickAwayAncestorContext = createContext<ClickAwayParameters['refs'] | null>(null);
 
 /**
- * Component combining the `useClickAway` hook with a React context to hook into the React
- * component tree and make sure we take into account both the DOM tree and the React tree we trying to detect click away.
+ * Component combining the `useClickAway` hook with a React context to hook into the React component tree and make sure
+ * we take into account both the DOM tree and the React tree we trying to detect click away.
  *
  * @return the react component.
  */
 export const ClickAwayProvider: React.FC<ClickAwayParameters> = ({ children, callback, refs }) => {
-    const appendAncestorChildrenRefs = useContext(ClickAwayAncestorContext);
-    const [childrenRefs, setChildrenRefs] = useState<ClickAwayParameters['refs']>([]);
+    const ancestorChildrenRefs = useContext(ClickAwayAncestorContext);
 
-    const appendChildrenRefs = useCallback(
-        (newChildrenRefs: ClickAwayParameters['refs']) => {
-            setTimeout(() => {
-                setChildrenRefs(uniq([...childrenRefs, ...newChildrenRefs]));
-            });
-        },
-        [childrenRefs, setChildrenRefs],
-    );
+    useEffect(() => {
+        const { current: currentRefs } = refs;
+        const { current: currentAncestorChildrenRefs } = ancestorChildrenRefs || {};
+        if (!currentAncestorChildrenRefs || !currentRefs) {
+            return undefined;
+        }
+        // Push current refs to parent.
+        currentAncestorChildrenRefs.push(...currentRefs);
+        return () => {
+            // Pull current refs from parent.
+            pull(currentAncestorChildrenRefs, ...currentRefs);
+        };
+    }, [ancestorChildrenRefs, refs]);
 
-    const clickAwayRefs = useMemo(() => {
-        // Use current refs and children refs in click away detection.
-        const concatenatedRefs = [...refs, ...childrenRefs];
-
-        // Forward refs to parent click away context.
-        appendAncestorChildrenRefs?.(concatenatedRefs);
-
-        return concatenatedRefs;
-    }, [refs, childrenRefs, appendAncestorChildrenRefs]);
-
-    useClickAway({ callback, refs: clickAwayRefs });
-    return <ClickAwayAncestorContext.Provider value={appendChildrenRefs}>{children}</ClickAwayAncestorContext.Provider>;
+    useClickAway({ callback, refs });
+    return <ClickAwayAncestorContext.Provider value={refs}>{children}</ClickAwayAncestorContext.Provider>;
 };
 ClickAwayProvider.displayName = 'ClickAwayProvider';
