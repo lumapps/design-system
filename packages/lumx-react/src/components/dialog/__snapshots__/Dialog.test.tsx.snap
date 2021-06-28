@@ -75,44 +75,65 @@ exports[`<Dialog> Snapshots and structure should render story DialogWithFocusabl
         onChange={[Function]}
         theme="light"
       />
-      <Select
-        className="lumx-spacing-margin-bottom-huge"
-        isOpen={false}
-        label="Select label"
-        onDropdownClose={[Function]}
-        onInputClick={[Function]}
-        selectedValueRender={[Function]}
-        value=""
+      <FlexBox
+        orientation="horizontal"
       >
-        <List
-          isClickable={true}
+        <DatePickerField
+          label="Start date"
+          locale="fr"
+          nextButtonProps={
+            Object {
+              "label": "Next month",
+            }
+          }
+          onChange={[Function]}
+          placeholder="Pick a date"
+          previousButtonProps={
+            Object {
+              "label": "Previous month",
+            }
+          }
+          value={2020-05-18T00:00:00.000Z}
+        />
+        <Select
+          className="lumx-spacing-margin-left-huge"
+          isOpen={false}
+          label="Select label"
+          onDropdownClose={[Function]}
+          onInputClick={[Function]}
+          selectedValueRender={[Function]}
+          value="First item"
         >
-          <ListItem
-            isSelected={false}
-            key="First item"
-            onItemSelected={[Function]}
-            size="tiny"
+          <List
+            isClickable={true}
           >
-            First item
-          </ListItem>
-          <ListItem
-            isSelected={false}
-            key="Second item"
-            onItemSelected={[Function]}
-            size="tiny"
-          >
-            Second item
-          </ListItem>
-          <ListItem
-            isSelected={false}
-            key="Third item"
-            onItemSelected={[Function]}
-            size="tiny"
-          >
-            Third item
-          </ListItem>
-        </List>
-      </Select>
+            <ListItem
+              isSelected={true}
+              key="First item"
+              onItemSelected={[Function]}
+              size="tiny"
+            >
+              First item
+            </ListItem>
+            <ListItem
+              isSelected={false}
+              key="Second item"
+              onItemSelected={[Function]}
+              size="tiny"
+            >
+              Second item
+            </ListItem>
+            <ListItem
+              isSelected={false}
+              key="Third item"
+              onItemSelected={[Function]}
+              size="tiny"
+            >
+              Third item
+            </ListItem>
+          </List>
+        </Select>
+      </FlexBox>
       <div
         tabIndex={0}
       >

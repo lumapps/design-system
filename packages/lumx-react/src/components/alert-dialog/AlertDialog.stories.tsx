@@ -158,3 +158,32 @@ export const RichDescription = ({ theme }: any) => {
         </>
     );
 };
+
+export const WithForwardedProps = ({ theme }: any) => {
+    const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
+
+    return (
+        <>
+            {button}
+            <AlertDialog
+                {...defaultProps}
+                title="With Forwarded Props"
+                isOpen={isOpen}
+                onClose={closeDialog}
+                parentElement={buttonRef}
+                cancelProps={{
+                    label: 'Cancel',
+                    onClick: closeDialog,
+                    style: { color: 'blue' },
+                }}
+                confirmProps={{
+                    onClick: () => alert('confirm'),
+                    label: 'OK',
+                    style: { color: 'red' },
+                }}
+            >
+                Consequat deserunt officia aute laborum tempor anim sint est.
+            </AlertDialog>
+        </>
+    );
+};

@@ -1,7 +1,8 @@
+import React from 'react';
 import { mdiDotsHorizontal, mdiHeart, mdiReply } from '@lumx/icons';
 import { Button, CommentBlock, Emphasis, Size } from '@lumx/react';
 import { IconButton } from '@lumx/react/components/button/IconButton';
-import React from 'react';
+import { avatarImageKnob } from '@lumx/react/stories/knobs';
 
 export default { title: 'LumX components/comment-block/CommentBlock' };
 
@@ -17,7 +18,7 @@ export const WithHeaderActions = ({ theme }: any) => (
             </Button>,
         ]}
         theme={theme}
-        avatarProps={{ image: 'https://i.pravatar.cc/40', alt: 'Avatar' }}
+        avatarProps={{ image: avatarImageKnob(), alt: 'Avatar' }}
         date="4 hours ago"
         name="Emmitt O. Lum"
         text="All the rumors have finally died down and many skeptics have tightened their lips, the iPod does support video format now on its fifth generation."

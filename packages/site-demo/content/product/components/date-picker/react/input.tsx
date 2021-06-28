@@ -2,8 +2,8 @@ import { mdiCalendar } from '@lumx/icons';
 import { DatePickerField } from '@lumx/react';
 import React, { useState } from 'react';
 
-export const App = () => {
-    const [datePicked, setDatePicked] = useState<Date | undefined>(new Date());
+export const App = ({ today }: any) => {
+    const [datePicked, setDatePicked] = useState<Date | undefined>(new Date(today));
 
     return (
         <DatePickerField

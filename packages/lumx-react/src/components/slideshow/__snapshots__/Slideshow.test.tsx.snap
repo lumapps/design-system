@@ -133,11 +133,6 @@ Array [
         onNextClick={[Function]}
         onPaginationClick={[Function]}
         onPreviousClick={[Function]}
-        parentRef={
-          Object {
-            "current": null,
-          }
-        }
         previousButtonProps={
           Object {
             "label": "Previous",

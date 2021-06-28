@@ -98,6 +98,9 @@ export const Lightbox: Comp<LightboxProps, HTMLDivElement> = forwardRef((props, 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useCallbackOnEscape(onClose);
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const clickAwayRefs = useRef([wrapperRef]);
+
     if (!isOpen && !isVisible) return null;
 
     return createPortal(
@@ -130,7 +133,7 @@ export const Lightbox: Comp<LightboxProps, HTMLDivElement> = forwardRef((props, 
                     onClick={onClose}
                 />
             )}
-            <ClickAwayProvider callback={!preventAutoClose && onClose} refs={[wrapperRef]}>
+            <ClickAwayProvider callback={!preventAutoClose && onClose} refs={clickAwayRefs}>
                 <div ref={childrenRef} className={`${CLASSNAME}__wrapper`} role="presentation">
                     {children}
                 </div>
