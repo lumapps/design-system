@@ -2,7 +2,9 @@ import { mdiClose } from '@lumx/icons';
 import {
     Button,
     Checkbox,
+    DatePickerField,
     Emphasis,
+    FlexBox,
     IconButton,
     List,
     ListItem,
@@ -217,7 +219,7 @@ export const DialogWithFocusableElements = ({ theme }: any) => {
     const inputRef = useRef(null);
 
     const selectChoices = ['First item', 'Second item', 'Third item'];
-    const [value, setValue] = React.useState<string>('');
+    const [value, setValue] = React.useState<string>(selectChoices[0]);
     const [isSelectOpen, setSelectOpen] = useState(false);
     const toggleSelect = () => setSelectOpen(!isSelectOpen);
     const closeSelect = () => setSelectOpen(false);
@@ -225,6 +227,8 @@ export const DialogWithFocusableElements = ({ theme }: any) => {
         closeSelect();
         setValue(item);
     };
+    const [date, setDate] = useState<Date | undefined>(new Date('2020-05-18'));
+
     return (
         <>
             {button}
@@ -258,27 +262,41 @@ export const DialogWithFocusableElements = ({ theme }: any) => {
                         label="Checkbox input"
                     />
 
-                    <Select
-                        className="lumx-spacing-margin-bottom-huge"
-                        isOpen={isSelectOpen}
-                        value={value}
-                        label="Select label"
-                        onInputClick={toggleSelect}
-                        onDropdownClose={closeSelect}
-                    >
-                        <List isClickable>
-                            {selectChoices.map((choice) => (
-                                <ListItem
-                                    key={choice}
-                                    isSelected={value === choice}
-                                    onItemSelected={selectItem(choice)}
-                                    size={Size.tiny}
-                                >
-                                    {choice}
-                                </ListItem>
-                            ))}
-                        </List>
-                    </Select>
+                    <FlexBox orientation="horizontal">
+                        <DatePickerField
+                            locale="fr"
+                            label="Start date"
+                            placeholder="Pick a date"
+                            theme={theme}
+                            onChange={setDate}
+                            value={date}
+                            nextButtonProps={{ label: 'Next month' }}
+                            previousButtonProps={{ label: 'Previous month' }}
+                        />
+
+                        <Select
+                            className="lumx-spacing-margin-left-huge"
+                            isOpen={isSelectOpen}
+                            value={value}
+                            label="Select label"
+                            onInputClick={toggleSelect}
+                            onDropdownClose={closeSelect}
+                        >
+                            <List isClickable>
+                                {selectChoices.map((choice) => (
+                                    <ListItem
+                                        key={choice}
+                                        isSelected={value === choice}
+                                        onItemSelected={selectItem(choice)}
+                                        size={Size.tiny}
+                                    >
+                                        {choice}
+                                    </ListItem>
+                                ))}
+                            </List>
+                        </Select>
+                    </FlexBox>
+
                     {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
                     <div tabIndex={0}>Focus div</div>
                 </div>
