@@ -160,6 +160,9 @@ export const Dialog: Comp<DialogProps, HTMLDivElement> = forwardRef((props, ref)
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const isVisible = useDelayedVisibility(Boolean(isOpen), DIALOG_TRANSITION_DURATION);
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const clickAwayRefs = useRef([wrapperRef]);
+
     return isOpen || isVisible
         ? createPortal(
               <div
@@ -180,7 +183,7 @@ export const Dialog: Comp<DialogProps, HTMLDivElement> = forwardRef((props, ref)
                   <div className={`${CLASSNAME}__overlay`} />
 
                   <section className={`${CLASSNAME}__container`} role="dialog" aria-modal="true" {...dialogProps}>
-                      <ClickAwayProvider callback={!preventAutoClose && handleClose} refs={[wrapperRef]}>
+                      <ClickAwayProvider callback={!preventAutoClose && handleClose} refs={clickAwayRefs}>
                           <div className={`${CLASSNAME}__wrapper`} ref={wrapperRef}>
                               {(header || headerChildContent) && (
                                   <header

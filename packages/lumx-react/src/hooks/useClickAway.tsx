@@ -8,7 +8,7 @@ const EVENT_TYPES = ['mousedown', 'touchstart'];
 
 function isClickAway(target: HTMLElement, refs: Array<RefObject<HTMLElement>>): boolean {
     // The target element is not contained in any of the listed element references.
-    return !refs.some((e) => e && e.current && e.current.contains(target));
+    return !refs.some((e) => e?.current?.contains(target));
 }
 
 export interface ClickAwayParameters {
@@ -19,7 +19,7 @@ export interface ClickAwayParameters {
     /**
      * Elements from which we want to detect the click away.
      */
-    refs: Array<RefObject<HTMLElement>>;
+    refs: RefObject<Array<RefObject<HTMLElement>>>;
 }
 
 /**
@@ -29,12 +29,13 @@ export interface ClickAwayParameters {
  */
 export function useClickAway({ callback, refs }: ClickAwayParameters): void {
     useEffect(() => {
-        if (!callback || !refs || isEmpty(refs)) {
+        const { current: currentRefs } = refs;
+        if (!callback || !currentRefs || isEmpty(currentRefs)) {
             return undefined;
         }
         const listener: EventListener = (evt) => {
-            if (isClickAway(evt.target as HTMLElement, refs)) {
-                setTimeout(() => callback(evt));
+            if (isClickAway(evt.target as HTMLElement, currentRefs)) {
+                callback(evt);
             }
         };
 

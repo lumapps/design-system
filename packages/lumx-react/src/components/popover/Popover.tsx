@@ -270,6 +270,9 @@ export const Popover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, re
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useFocus(focusElement?.current, isOpen && (state?.rects?.popper?.y ?? -1) >= 0);
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const clickAwayRefs = useRef([clickAwayRef, anchorRef]);
+
     return isOpen
         ? renderPopover(
               <div
@@ -282,7 +285,7 @@ export const Popover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, re
                   style={popoverStyle}
                   {...attributes.popper}
               >
-                  <ClickAwayProvider callback={closeOnClickAway && onClose} refs={[clickAwayRef, anchorRef]}>
+                  <ClickAwayProvider callback={closeOnClickAway && onClose} refs={clickAwayRefs}>
                       {hasArrow && <div ref={setArrowElement} className={`${CLASSNAME}__arrow`} style={styles.arrow} />}
                       {children}
                   </ClickAwayProvider>
