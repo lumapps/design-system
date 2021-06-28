@@ -16,6 +16,9 @@ import { select } from '@storybook/addon-knobs';
 import React, { RefObject, useRef, useState } from 'react';
 import { Dialog, DialogSizes } from './Dialog';
 import { loremIpsum } from '../../stories/knobs';
+import { DialogHeader } from './DialogHeader';
+import { DialogContent } from './DialogContent';
+import { DialogFooter } from './DialogFooter';
 
 export default {
     title: 'LumX components/dialog/Dialog',
@@ -205,6 +208,39 @@ export const ScrollableDialogWithHeaderAndFooter = ({ theme }: any) => {
                 {header}
                 {longContent}
                 {footer}
+            </Dialog>
+        </>
+    );
+};
+
+export const ComposedDialog = ({ theme }: any) => {
+    const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
+    return (
+        <>
+            {button}
+            <Dialog isOpen={isOpen} onClose={closeDialog} parentElement={buttonRef}>
+                <DialogHeader className="lumx-spacing-padding lumx-typography-title">Dialog Header</DialogHeader>
+                {longContent}
+                <DialogFooter className="lumx-spacing-padding">Dialog Footer</DialogFooter>
+            </Dialog>
+        </>
+    );
+};
+
+const IntermediateComponent = ({ children }: any) => (
+    <DialogHeader className="lumx-spacing-padding lumx-typography-title">{children}</DialogHeader>
+);
+export const ComposedDialogIntermediateComponents = ({ theme }: any) => {
+    const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
+    return (
+        <>
+            {button}
+            <Dialog isOpen={isOpen} onClose={closeDialog} parentElement={buttonRef} wrapContent={false}>
+                <>
+                    <IntermediateComponent>Dialog Header</IntermediateComponent>
+                    <DialogContent>{longContent}</DialogContent>
+                    <DialogFooter className="lumx-spacing-padding">Dialog Footer</DialogFooter>
+                </>
             </Dialog>
         </>
     );
