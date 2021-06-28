@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.18][] - 2021-06-28
+
 ### Added
 
 -   AlertDialog: props forwarding on the confirm and cancel buttons.
@@ -1124,3 +1126,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.0.16]: https://github.com/lumapps/design-system/tree/v1.0.16
 [unreleased]: https://github.com/lumapps/design-system/compare/v1.0.17...HEAD
 [1.0.17]: https://github.com/lumapps/design-system/tree/v1.0.17
+[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.18...HEAD
+[1.0.18]: https://github.com/lumapps/design-system/tree/v1.0.18
