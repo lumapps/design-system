@@ -2,7 +2,18 @@ import React, { forwardRef } from 'react';
 
 import classNames from 'classnames';
 
-import { DialogProps, Dialog, Button, Emphasis, ColorPalette, Icon, Size, Kind, Toolbar } from '@lumx/react';
+import {
+    DialogProps,
+    Dialog,
+    Button,
+    Emphasis,
+    ColorPalette,
+    Icon,
+    Size,
+    Kind,
+    Toolbar,
+    ButtonProps,
+} from '@lumx/react';
 
 import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiInformation } from '@lumx/icons/';
 import { uid } from 'uid';
@@ -13,16 +24,16 @@ export interface AlertDialogProps extends Omit<DialogProps, 'header' | 'footer'>
     kind?: Kind;
     /** Dialog title. */
     title?: string;
-    /** The props to the confirm button */
-    confirmProps: {
+    /** Props forwarded to the confirm button */
+    confirmProps: ButtonProps & {
         onClick(): void;
         label: string;
     };
     /**
-     * The props to the cancel button.
+     * Props forwarded to the cancel button.
      * Will not render a cancel button if undefined.
      */
-    cancelProps?: {
+    cancelProps?: ButtonProps & {
         onClick(): void;
         label: string;
     };
@@ -91,6 +102,9 @@ export const AlertDialog: Comp<AlertDialogProps, HTMLDivElement> = forwardRef((p
     // If content is a string, set in a paragraph.
     const DescriptionElement = typeof children === 'string' ? 'p' : 'div';
 
+    const { label: confirmLabel, onClick: confirmOnClick, ...forwardedConfirmProps } = confirmProps;
+    const { label: cancelLabel, onClick: cancelOnClick, ...forwardedCancelProps } = cancelProps || {};
+
     return (
         <Dialog
             ref={ref}
@@ -139,17 +153,23 @@ export const AlertDialog: Comp<AlertDialogProps, HTMLDivElement> = forwardRef((p
                     after={
                         <>
                             {cancelProps && (
-                                <Button ref={cancelButtonRef} emphasis={Emphasis.medium} onClick={cancelProps.onClick}>
-                                    {cancelProps.label}
+                                <Button
+                                    {...forwardedCancelProps}
+                                    ref={cancelButtonRef}
+                                    emphasis={Emphasis.medium}
+                                    onClick={cancelOnClick}
+                                >
+                                    {cancelLabel}
                                 </Button>
                             )}
                             <Button
+                                {...forwardedConfirmProps}
                                 ref={confirmationButtonRef}
                                 color={color}
                                 className="lumx-spacing-margin-left-regular"
-                                onClick={confirmProps.onClick}
+                                onClick={confirmOnClick}
                             >
-                                {confirmProps.label}
+                                {confirmLabel}
                             </Button>
                         </>
                     }
