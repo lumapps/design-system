@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 18 Jun 2021 15:14:37 GMT
+ * Generated on Wed, 30 Jun 2021 13:31:17 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -1167,19 +1167,6 @@ export const DESIGN_TOKENS = {
                 },
             },
             'theme-light': {
-                header: {
-                    label: {
-                        color: {
-                            version: '0.22',
-                            comment: 'Neutral dark color',
-                            attributes: {
-                                category: 'text-field',
-                                type: 'state-hover',
-                                item: 'theme-light',
-                            },
-                        },
-                    },
-                },
                 input: {
                     'background-color': {
                         version: '0.22',
@@ -1224,19 +1211,6 @@ export const DESIGN_TOKENS = {
                 },
             },
             'theme-dark': {
-                header: {
-                    label: {
-                        color: {
-                            version: '0.22',
-                            comment: 'Neutral light color',
-                            attributes: {
-                                category: 'text-field',
-                                type: 'state-hover',
-                                item: 'theme-dark',
-                            },
-                        },
-                    },
-                },
                 input: {
                     'background-color': {
                         version: '0.22',

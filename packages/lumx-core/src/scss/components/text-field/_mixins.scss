@@ -4,6 +4,10 @@
     line-height: var(--lumx-material-text-field-header-label-line-height);
 }
 
+@mixin lumx-text-field-label-color($state, $theme) {
+    color: var(--lumx-text-field-#{$state}-#{$theme}-header-label-color);
+}
+
 @mixin lumx-text-field-wrapper($theme) {
     position: relative;
     display: flex;
@@ -112,6 +116,14 @@
     }
 }
 
+@mixin lumx-text-field-input-content-color($state, $theme) {
+    color: var(--lumx-text-field-#{$state}-#{$theme}-input-content-color);
+}
+
+@mixin lumx-text-field-input-placeholder-color($state, $theme) {
+    color: var(--lumx-text-field-#{$state}-#{$theme}-input-placeholder-color);
+}
+
 @mixin lumx-text-field-input-validity($validity, $theme) {
     flex-shrink: 0;
     margin-top: calc(
@@ -135,7 +147,10 @@
     flex-shrink: 0;
     margin-top: calc(
         var(--lumx-text-field-wrapper-padding-vertical) +
-            calc(calc(var(--lumx-material-text-field-input-content-line-height) - var(--lumx-size-s)) / 2)
+            calc(
+                calc(var(--lumx-material-text-field-input-content-line-height) - calc(var(--lumx-button-height) / 1.5)) /
+                    2
+            )
     );
     margin-left: $lumx-spacing-unit / 2;
 }
@@ -145,18 +160,10 @@
     flex: 1 1 auto;
     flex-wrap: wrap;
     align-items: center;
-    margin: $lumx-chip-group-spacing 0;
+    margin: calc(calc(var(--lumx-text-field-input-min-height) - calc(var(--lumx-size-s) + 6px)) / 2) 0;
 
     .#{$lumx-base-prefix}-chip {
         margin: $lumx-chip-group-spacing 0;
         margin-right: $lumx-chip-group-spacing * 2;
-    }
-}
-
-@mixin lumx-text-field-placeholder($theme) {
-    @if $theme == lumx-base-const('theme', 'LIGHT') {
-        color: lumx-color-variant('dark', 'L2');
-    } @else if $theme == lumx-base-const('theme', 'DARK') {
-        color: lumx-color-variant('light', 'L2');
     }
 }
