@@ -22,6 +22,17 @@
         @include lumx-text-field-label;
 
         flex: 1 1 auto;
+
+        #{$self}--theme-light & {
+            @include lumx-text-field-label-color(
+                lumx-base-const('state', 'DEFAULT'),
+                lumx-base-const('theme', 'LIGHT')
+            );
+        }
+
+        #{$self}--theme-dark & {
+            @include lumx-text-field-label-color(lumx-base-const('state', 'DEFAULT'), lumx-base-const('theme', 'DARK'));
+        }
     }
 
     &__char-counter {
@@ -70,10 +81,18 @@
     &__input-icon {
         #{$self}--theme-light & {
             @include lumx-text-field-input-icon(lumx-base-const('theme', 'LIGHT'));
+            @include lumx-text-field-input-content-color(
+                lumx-base-const('state', 'DEFAULT'),
+                lumx-base-const('theme', 'LIGHT')
+            );
         }
 
         #{$self}--theme-dark & {
             @include lumx-text-field-input-icon(lumx-base-const('theme', 'DARK'));
+            @include lumx-text-field-input-content-color(
+                lumx-base-const('state', 'DEFAULT'),
+                lumx-base-const('theme', 'DARK')
+            );
         }
     }
 
@@ -84,17 +103,31 @@
     &__input-native {
         #{$self}--theme-light & {
             @include lumx-text-field-input-native(lumx-base-const('theme', 'LIGHT'));
+            @include lumx-text-field-input-content-color(
+                lumx-base-const('state', 'DEFAULT'),
+                lumx-base-const('theme', 'LIGHT')
+            );
 
             &::placeholder {
-                @include lumx-text-field-placeholder(lumx-base-const('theme', 'LIGHT'));
+                @include lumx-text-field-input-placeholder-color(
+                    lumx-base-const('state', 'DEFAULT'),
+                    lumx-base-const('theme', 'LIGHT')
+                );
             }
         }
 
         #{$self}--theme-dark & {
             @include lumx-text-field-input-native(lumx-base-const('theme', 'DARK'));
+            @include lumx-text-field-input-content-color(
+                lumx-base-const('state', 'DEFAULT'),
+                lumx-base-const('theme', 'DARK')
+            );
 
             &::placeholder {
-                @include lumx-text-field-placeholder(lumx-base-const('theme', 'DARK'));
+                @include lumx-text-field-input-placeholder-color(
+                    lumx-base-const('state', 'DEFAULT'),
+                    lumx-base-const('theme', 'DARK')
+                );
             }
         }
 
@@ -153,24 +186,92 @@
     .#{$lumx-base-prefix}-text-field__wrapper:hover {
         @include lumx-text-field-wrapper-state(lumx-base-const('state', 'HOVER'), lumx-base-const('theme', 'LIGHT'));
     }
+
+    .#{$lumx-base-prefix}-text-field__input-icon,
+    .#{$lumx-base-prefix}-text-field__input-native {
+        @include lumx-text-field-input-content-color(
+            lumx-base-const('state', 'HOVER'),
+            lumx-base-const('theme', 'LIGHT')
+        );
+    }
+
+    .#{$lumx-base-prefix}-text-field__input-native::placeholder {
+        @include lumx-text-field-input-placeholder-color(
+            lumx-base-const('state', 'HOVER'),
+            lumx-base-const('theme', 'LIGHT')
+        );
+    }
 }
 
 .#{$lumx-base-prefix}-text-field--theme-dark {
     .#{$lumx-base-prefix}-text-field__wrapper:hover {
         @include lumx-text-field-wrapper-state(lumx-base-const('state', 'HOVER'), lumx-base-const('theme', 'DARK'));
     }
+
+    .#{$lumx-base-prefix}-text-field__input-icon,
+    .#{$lumx-base-prefix}-text-field__input-native {
+        @include lumx-text-field-input-content-color(
+            lumx-base-const('state', 'HOVER'),
+            lumx-base-const('theme', 'DARK')
+        );
+    }
+
+    .#{$lumx-base-prefix}-text-field__input-native::placeholder {
+        @include lumx-text-field-input-placeholder-color(
+            lumx-base-const('state', 'HOVER'),
+            lumx-base-const('theme', 'DARK')
+        );
+    }
 }
 
 // Focus state
 .#{$lumx-base-prefix}-text-field--theme-light.#{$lumx-base-prefix}-text-field--is-focus {
+    .#{$lumx-base-prefix}-text-field__label {
+        @include lumx-text-field-label-color(lumx-base-const('state', 'FOCUS'), lumx-base-const('theme', 'LIGHT'));
+    }
+
     .#{$lumx-base-prefix}-text-field__wrapper {
         @include lumx-text-field-wrapper-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('theme', 'LIGHT'));
+    }
+
+    .#{$lumx-base-prefix}-text-field__input-icon,
+    .#{$lumx-base-prefix}-text-field__input-native {
+        @include lumx-text-field-input-content-color(
+            lumx-base-const('state', 'FOCUS'),
+            lumx-base-const('theme', 'LIGHT')
+        );
+    }
+
+    .#{$lumx-base-prefix}-text-field__input-native::placeholder {
+        @include lumx-text-field-input-placeholder-color(
+            lumx-base-const('state', 'FOCUS'),
+            lumx-base-const('theme', 'LIGHT')
+        );
     }
 }
 
 .#{$lumx-base-prefix}-text-field--theme-dark.#{$lumx-base-prefix}-text-field--is-focus {
+    .#{$lumx-base-prefix}-text-field__label {
+        @include lumx-text-field-label-color(lumx-base-const('state', 'FOCUS'), lumx-base-const('theme', 'DARK'));
+    }
+
     .#{$lumx-base-prefix}-text-field__wrapper {
         @include lumx-text-field-wrapper-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('theme', 'DARK'));
+    }
+
+    .#{$lumx-base-prefix}-text-field__input-icon,
+    .#{$lumx-base-prefix}-text-field__input-native {
+        @include lumx-text-field-input-content-color(
+            lumx-base-const('state', 'FOCUS'),
+            lumx-base-const('theme', 'DARK')
+        );
+    }
+
+    .#{$lumx-base-prefix}-text-field__input-native::placeholder {
+        @include lumx-text-field-input-placeholder-color(
+            lumx-base-const('state', 'FOCUS'),
+            lumx-base-const('theme', 'DARK')
+        );
     }
 }
 

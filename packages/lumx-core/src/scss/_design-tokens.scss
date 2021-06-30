@@ -223,7 +223,6 @@ $lumx-text-field-state-hover-input-border-top-width: 1px !default;
 $lumx-text-field-state-hover-input-border-right-width: 1px !default;
 $lumx-text-field-state-hover-input-border-bottom-width: 1px !default;
 $lumx-text-field-state-hover-input-border-left-width: 1px !default;
-$lumx-text-field-state-hover-theme-light-header-label-color: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
 $lumx-text-field-state-hover-theme-light-input-background-color: rgba(
     0,
     0,
@@ -243,7 +242,6 @@ $lumx-text-field-state-hover-theme-light-input-placeholder-color: rgba(
     0,
     0.54
 ) !default; // Base dark color with 54% opacity
-$lumx-text-field-state-hover-theme-dark-header-label-color: #fff !default; // Neutral light color
 $lumx-text-field-state-hover-theme-dark-input-background-color: rgba(
     255,
     255,
@@ -805,11 +803,6 @@ $lumx-design-tokens: (
                 ),
             ),
             'theme-light': (
-                'header': (
-                    'label': (
-                        'color': $lumx-text-field-state-hover-theme-light-header-label-color,
-                    ),
-                ),
                 'input': (
                     'background-color': $lumx-text-field-state-hover-theme-light-input-background-color,
                     'border-color': $lumx-text-field-state-hover-theme-light-input-border-color,
@@ -822,11 +815,6 @@ $lumx-design-tokens: (
                 ),
             ),
             'theme-dark': (
-                'header': (
-                    'label': (
-                        'color': $lumx-text-field-state-hover-theme-dark-header-label-color,
-                    ),
-                ),
                 'input': (
                     'background-color': $lumx-text-field-state-hover-theme-dark-input-background-color,
                     'border-color': $lumx-text-field-state-hover-theme-dark-input-border-color,
