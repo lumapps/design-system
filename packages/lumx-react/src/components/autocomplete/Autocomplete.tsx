@@ -75,6 +75,11 @@ export interface AutocompleteProps extends GenericProps {
      */
     isDisabled?: boolean;
     /**
+     * Whether the component is required or not.
+     * @see {@link TextFieldProps#isRequired}
+     */
+    isRequired?: boolean;
+    /**
      * Whether the text field is displayed with valid style or not.
      * @see {@link TextFieldProps#isValid}
      */
@@ -200,6 +205,7 @@ export const Autocomplete: Comp<AutocompleteProps, HTMLDivElement> = forwardRef(
         inputRef,
         clearButtonProps,
         isDisabled = disabled,
+        isRequired,
         isOpen,
         isValid,
         label,
@@ -241,6 +247,7 @@ export const Autocomplete: Comp<AutocompleteProps, HTMLDivElement> = forwardRef(
                 inputRef={mergeRefs(inputAnchorRef, inputRef) as any}
                 clearButtonProps={clearButtonProps}
                 isDisabled={isDisabled}
+                isRequired={isRequired}
                 isValid={isValid}
                 label={label}
                 name={name}

@@ -55,7 +55,9 @@ describe(`<${AutocompleteMultiple.displayName}>`, () => {
                         text: 'Montevideo',
                     },
                 ],
+                label: 'Field label',
                 isOpen: true,
+                isRequired: true,
                 onChange: jest.fn(),
                 value: '',
             });
