@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 -   TextField: Add space after asterisk if component has `isRequired` props
+-   AutoComplete: Added `isRequired` prop to the component to indicated if field is required
+-   AutoCompleteMultiple: Added `isRequired` prop to the component to indicated if field is required
 
 ## [1.0.18][] - 2021-06-28
 

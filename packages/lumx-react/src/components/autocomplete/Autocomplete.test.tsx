@@ -49,7 +49,9 @@ describe(`<${Autocomplete.displayName}>`, () => {
                         ))}
                     </List>
                 ),
+                label: 'Field label',
                 isOpen: true,
+                isRequired: true,
                 onChange: jest.fn(),
                 value: '',
             });
