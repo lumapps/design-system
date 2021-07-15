@@ -63,9 +63,9 @@
         }
     }
 
-    &__title,
+    &__title .lumx-link__content,
     &__description,
-    &__link {
+    &__link .lumx-link__content {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -73,6 +73,10 @@
 
     &__title {
         @include lumx-typography('subtitle1');
+
+        & .lumx-link {
+            width: 100%;
+        }
     }
 
     &__description {
@@ -89,5 +93,9 @@
 
     &__link {
         @include lumx-typography('body1');
+
+        & .lumx-link {
+            width: 100%;
+        }
     }
 }
