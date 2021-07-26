@@ -9,6 +9,8 @@ exports[`<AutocompleteMultiple> Snapshots and structure should render correctly 
   closeOnClickAway={true}
   closeOnEscape={true}
   isOpen={true}
+  isRequired={true}
+  label="Field label"
   onChange={[MockFunction]}
   shouldFocusOnClose={false}
   value=""
