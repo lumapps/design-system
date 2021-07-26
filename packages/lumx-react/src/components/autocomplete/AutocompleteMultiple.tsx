@@ -79,6 +79,7 @@ export const AutocompleteMultiple: Comp<AutocompleteMultipleProps, HTMLDivElemen
         inputRef,
         clearButtonProps,
         isDisabled,
+        isRequired,
         isOpen,
         isValid,
         label,
@@ -126,6 +127,7 @@ export const AutocompleteMultiple: Comp<AutocompleteMultipleProps, HTMLDivElemen
             inputRef={inputRef}
             chips={values && values.map((chip: any, index: number) => selectedChipRender(chip, index, onClear))}
             isDisabled={isDisabled}
+            isRequired={isRequired}
             clearButtonProps={clearButtonProps}
             isValid={isValid}
             label={label}

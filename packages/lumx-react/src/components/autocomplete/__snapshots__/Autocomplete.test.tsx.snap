@@ -109,6 +109,8 @@ exports[`<Autocomplete> Snapshots and structure should render correctly 1`] = `
 >
   <TextField
     inputRef={[Function]}
+    isRequired={true}
+    label="Field label"
     onChange={[MockFunction]}
     textFieldRef={
       Object {

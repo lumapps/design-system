@@ -4,6 +4,7 @@
 
 .#{$lumx-base-prefix}-input-label {
     &--is-required:before {
+        margin-right: $lumx-spacing-unit-tiny;
         content: '*';
         font-weight: 700;
     }
