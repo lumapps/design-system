@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.19][] - 2021-07-15
+
 ### Added
 
 -   AutoComplete: Added `isRequired` prop to the component to indicated if field is required
@@ -1137,3 +1139,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.0.17]: https://github.com/lumapps/design-system/tree/v1.0.17
 [unreleased]: https://github.com/lumapps/design-system/compare/v1.0.18...HEAD
 [1.0.18]: https://github.com/lumapps/design-system/tree/v1.0.18
+[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.19...HEAD
+[1.0.19]: https://github.com/lumapps/design-system/tree/v1.0.19
