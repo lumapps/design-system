@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   Icon: Add missing class to style svg correctly
+-   Dialog/Lightbox: Fix unexpected scroll to top when opening a dialog or lightbox.
 
 ## [1.0.19][] - 2021-07-15
 
