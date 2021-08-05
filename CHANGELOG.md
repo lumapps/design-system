@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   ProgressTracker: Fix progress tracker step style regression introduced in v1.0.20
+
 ## [1.0.20][] - 2021-08-05
 
 ### Fixed
