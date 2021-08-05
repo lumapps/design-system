@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.20][] - 2021-08-05
+
 ### Fixed
 
 -   Icon: Add missing class to style svg correctly
@@ -1146,3 +1148,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.0.18]: https://github.com/lumapps/design-system/tree/v1.0.18
 [unreleased]: https://github.com/lumapps/design-system/compare/v1.0.19...HEAD
 [1.0.19]: https://github.com/lumapps/design-system/tree/v1.0.19
+[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.20...HEAD
+[1.0.20]: https://github.com/lumapps/design-system/tree/v1.0.20
