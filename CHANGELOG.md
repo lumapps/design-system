@@ -13,6 +13,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   New lumapps theme applied by default
     -   Old Material theme applicable using variables in `css/material.css`
 
+## [1.0.20][] - 2021-08-05
+
+### Fixed
+
+-   Icon: Add missing class to style svg correctly
+-   Dialog/Lightbox: Fix unexpected scroll to top when opening a dialog or lightbox.
+
 ## [1.0.19][] - 2021-07-15
 
 ### Added
@@ -1147,3 +1154,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.0.18]: https://github.com/lumapps/design-system/tree/v1.0.18
 [unreleased]: https://github.com/lumapps/design-system/compare/v1.0.19...HEAD
 [1.0.19]: https://github.com/lumapps/design-system/tree/v1.0.19
+[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.20...HEAD
+[1.0.20]: https://github.com/lumapps/design-system/tree/v1.0.20
