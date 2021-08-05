@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.21][] - 2021-08-05
+
 ### Fixed
 
 -   ProgressTracker: Fix progress tracker step style regression introduced in v1.0.20
@@ -1154,3 +1156,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.0.19]: https://github.com/lumapps/design-system/tree/v1.0.19
 [unreleased]: https://github.com/lumapps/design-system/compare/v1.0.20...HEAD
 [1.0.20]: https://github.com/lumapps/design-system/tree/v1.0.20
+[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.21...HEAD
+[1.0.21]: https://github.com/lumapps/design-system/tree/v1.0.21
