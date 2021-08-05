@@ -2,7 +2,7 @@
 
 exports[`<Icon> Snapshots and structure should render color & color variant 1`] = `
 <i
-  className="lumx-icon lumx-icon--color-primary lumx-icon--color-variant-D1 lumx-icon--no-shape"
+  className="lumx-icon lumx-icon--color-primary lumx-icon--color-variant-D1 lumx-icon--no-shape lumx-icon--path"
 >
   <svg
     aria-hidden="true"
@@ -26,7 +26,7 @@ exports[`<Icon> Snapshots and structure should render color & color variant 1`] 
 
 exports[`<Icon> Snapshots and structure should render correctly 1`] = `
 <i
-  className="lumx-icon lumx-icon--no-shape"
+  className="lumx-icon lumx-icon--no-shape lumx-icon--path"
 >
   <svg
     aria-hidden="true"
