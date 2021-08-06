@@ -92,6 +92,7 @@ export const Icon: Comp<IconProps, HTMLElement> = forwardRef((props, ref) => {
                     size: iconSize,
                 }),
                 !hasShape && `${CLASSNAME}--no-shape`,
+                `${CLASSNAME}--path`,
             )}
         >
             <svg
