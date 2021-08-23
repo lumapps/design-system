@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Switch: Add role `switch` to improve screen reader behavior.
+
 ## [1.0.21][] - 2021-08-05
 
 ### Fixed
