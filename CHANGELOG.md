@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Switch: add role `switch` for screen readers correct behavior.
 
+### Fixed
+
+-   IconButton: Fix missing tooltip when activating `hasBackground`
+
 ## [1.0.21][] - 2021-08-05
 
 ### Fixed
