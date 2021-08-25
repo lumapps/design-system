@@ -13,6 +13,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   New lumapps theme applied by default
     -   Old Material theme applicable using variables in `css/material.css`
 
+## [1.0.22][] - 2021-08-25
+
+### Added
+
+-   Switch: add role `switch` for screen readers correct behavior.
+
+### Fixed
+
+-   IconButton: Fix missing tooltip when activating `hasBackground`
+-   IconButton: Fix border radius when activating `hasBackground`
+
 ## [1.0.21][] - 2021-08-05
 
 ### Fixed
@@ -1164,3 +1175,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.0.20]: https://github.com/lumapps/design-system/tree/v1.0.20
 [unreleased]: https://github.com/lumapps/design-system/compare/v1.0.21...HEAD
 [1.0.21]: https://github.com/lumapps/design-system/tree/v1.0.21
+[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.22...HEAD
+[1.0.22]: https://github.com/lumapps/design-system/tree/v1.0.22
