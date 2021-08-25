@@ -102,11 +102,12 @@
     }
 
     &::before {
-        @if (
-            ($color == 'primary' and $emphasis == lumx-base-const('emphasis', 'HIGH')) or
-                (($color == 'dark' or $color == 'light') and $emphasis != lumx-base-const('emphasis', 'HIGH'))
-        ) {
+        @if $color == 'primary' and $emphasis == lumx-base-const('emphasis', 'HIGH') {
             border-color: var(--lumx-button-#{$emphasis}-state-default-#{$theme}-border-color);
+        } @else if $color == 'dark' and $emphasis != lumx-base-const('emphasis', 'HIGH') {
+            border-color: var(--lumx-button-#{$emphasis}-state-default-theme-light-border-color);
+        } @else if $color == 'light' and $emphasis != lumx-base-const('emphasis', 'HIGH') {
+            border-color: var(--lumx-button-#{$emphasis}-state-default-theme-dark-border-color);
         } @else {
             border-color: transparent;
         }
@@ -127,11 +128,12 @@
         }
 
         &::before {
-            @if (
-                ($color == 'primary' and $emphasis == lumx-base-const('emphasis', 'HIGH')) or
-                    (($color == 'dark' or $color == 'light') and $emphasis != lumx-base-const('emphasis', 'HIGH'))
-            ) {
+            @if $color == 'primary' and $emphasis == lumx-base-const('emphasis', 'HIGH') {
                 border-color: var(--lumx-button-#{$emphasis}-state-hover-#{$theme}-border-color);
+            } @else if $color == 'dark' and $emphasis != lumx-base-const('emphasis', 'HIGH') {
+                border-color: var(--lumx-button-#{$emphasis}-state-hover-theme-light-border-color);
+            } @else if $color == 'light' and $emphasis != lumx-base-const('emphasis', 'HIGH') {
+                border-color: var(--lumx-button-#{$emphasis}-state-hover-theme-dark-border-color);
             }
         }
     }
@@ -151,11 +153,12 @@
         }
 
         &::before {
-            @if (
-                ($color == 'primary' and $emphasis == lumx-base-const('emphasis', 'HIGH')) or
-                    (($color == 'dark' or $color == 'light') and $emphasis != lumx-base-const('emphasis', 'HIGH'))
-            ) {
+            @if $color == 'primary' and $emphasis == lumx-base-const('emphasis', 'HIGH') {
                 border-color: var(--lumx-button-#{$emphasis}-state-active-#{$theme}-border-color);
+            } @else if $color == 'dark' and $emphasis != lumx-base-const('emphasis', 'HIGH') {
+                border-color: var(--lumx-button-#{$emphasis}-state-active-theme-light-border-color);
+            } @else if $color == 'light' and $emphasis != lumx-base-const('emphasis', 'HIGH') {
+                border-color: var(--lumx-button-#{$emphasis}-state-active-theme-dark-border-color);
             }
         }
     }
