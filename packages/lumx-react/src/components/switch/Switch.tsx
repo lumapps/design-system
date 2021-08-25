@@ -100,6 +100,7 @@ export const Switch: Comp<SwitchProps, HTMLDivElement> = forwardRef((props, ref)
             <div className={`${CLASSNAME}__input-wrapper`}>
                 <input
                     type="checkbox"
+                    role="switch"
                     id={switchId}
                     className={`${CLASSNAME}__input-native`}
                     name={name}

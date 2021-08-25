@@ -122,7 +122,7 @@ export const ButtonRoot: Comp<ButtonRootProps, HTMLButtonElement | HTMLAnchorEle
         ColorPalette.dark;
 
     if (hasBackground) {
-        return renderButtonWrapper({ ...props, variant, color: adaptedColor });
+        return renderButtonWrapper({ ...props, ref, variant, color: adaptedColor });
     }
 
     const buttonClassName = classNames(

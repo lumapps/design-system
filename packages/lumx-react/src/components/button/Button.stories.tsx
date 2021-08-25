@@ -1,6 +1,6 @@
-import { mdiSend } from '@lumx/icons';
+import { mdiSend, mdiClose } from '@lumx/icons';
 
-import { Button, ColorPalette, Emphasis, Size } from '@lumx/react';
+import { Button, ColorPalette, Emphasis, IconButton, Size } from '@lumx/react';
 import { boolean, select, text } from '@storybook/addon-knobs';
 import React from 'react';
 
@@ -35,4 +35,10 @@ export const DisabledWithHref = () => (
     <Button href="https://google.com" isDisabled>
         Disabled button with redirection
     </Button>
+);
+
+export const IconButtonLowEmphasis = () => <IconButton emphasis={Emphasis.low} icon={mdiClose} label="Close" />;
+
+export const IconButtonLowEmphasisHasBackground = () => (
+    <IconButton emphasis={Emphasis.low} hasBackground icon={mdiClose} label="Close" />
 );
