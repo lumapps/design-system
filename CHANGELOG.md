@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.22][] - 2021-08-25
+
 ### Added
 
 -   Switch: add role `switch` for screen readers correct behavior.
@@ -1167,3 +1169,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.0.20]: https://github.com/lumapps/design-system/tree/v1.0.20
 [unreleased]: https://github.com/lumapps/design-system/compare/v1.0.21...HEAD
 [1.0.21]: https://github.com/lumapps/design-system/tree/v1.0.21
+[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.22...HEAD
+[1.0.22]: https://github.com/lumapps/design-system/tree/v1.0.22
