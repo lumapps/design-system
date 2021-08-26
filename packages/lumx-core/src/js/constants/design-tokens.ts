@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Wed, 25 Aug 2021 13:17:50 GMT
+ * Generated on Thu, 26 Aug 2021 11:54:53 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -938,6 +938,402 @@ export const DESIGN_TOKENS = {
                             type: 'text-field',
                             item: 'input',
                         },
+                    },
+                },
+            },
+        },
+    },
+    tabs: {
+        height: {
+            attributes: {
+                category: 'tabs',
+                type: 'height',
+            },
+        },
+        'border-radius': {
+            attributes: {
+                category: 'tabs',
+                type: 'border-radius',
+            },
+        },
+        'state-default': {
+            border: {
+                top: {
+                    width: {
+                        attributes: {
+                            category: 'tabs',
+                            type: 'state-default',
+                            item: 'border',
+                        },
+                    },
+                },
+                right: {
+                    width: {
+                        attributes: {
+                            category: 'tabs',
+                            type: 'state-default',
+                            item: 'border',
+                        },
+                    },
+                },
+                bottom: {
+                    width: {
+                        attributes: {
+                            category: 'tabs',
+                            type: 'state-default',
+                            item: 'border',
+                        },
+                    },
+                },
+                left: {
+                    width: {
+                        attributes: {
+                            category: 'tabs',
+                            type: 'state-default',
+                            item: 'border',
+                        },
+                    },
+                },
+            },
+            'theme-light': {
+                'background-color': {
+                    attributes: {
+                        category: 'tabs',
+                        type: 'state-default',
+                        item: 'theme-light',
+                    },
+                },
+                color: {
+                    version: '0.22',
+                    comment: 'Neutral dark color',
+                    attributes: {
+                        category: 'tabs',
+                        type: 'state-default',
+                        item: 'theme-light',
+                    },
+                },
+                'border-color': {
+                    version: '0.22',
+                    comment: 'Base dark color with 12% opacity',
+                    attributes: {
+                        category: 'tabs',
+                        type: 'state-default',
+                        item: 'theme-light',
+                    },
+                },
+            },
+            'theme-dark': {
+                'background-color': {
+                    attributes: {
+                        category: 'tabs',
+                        type: 'state-default',
+                        item: 'theme-dark',
+                    },
+                },
+                color: {
+                    version: '0.22',
+                    comment: 'Neutral light color',
+                    attributes: {
+                        category: 'tabs',
+                        type: 'state-default',
+                        item: 'theme-dark',
+                    },
+                },
+                'border-color': {
+                    version: '0.22',
+                    comment: 'Base light color with 20% opacity',
+                    attributes: {
+                        category: 'tabs',
+                        type: 'state-default',
+                        item: 'theme-dark',
+                    },
+                },
+            },
+        },
+        'state-hover': {
+            border: {
+                top: {
+                    width: {
+                        attributes: {
+                            category: 'tabs',
+                            type: 'state-hover',
+                            item: 'border',
+                        },
+                    },
+                },
+                right: {
+                    width: {
+                        attributes: {
+                            category: 'tabs',
+                            type: 'state-hover',
+                            item: 'border',
+                        },
+                    },
+                },
+                bottom: {
+                    width: {
+                        attributes: {
+                            category: 'tabs',
+                            type: 'state-hover',
+                            item: 'border',
+                        },
+                    },
+                },
+                left: {
+                    width: {
+                        attributes: {
+                            category: 'tabs',
+                            type: 'state-hover',
+                            item: 'border',
+                        },
+                    },
+                },
+            },
+            'theme-light': {
+                'background-color': {
+                    version: '0.22',
+                    comment: 'Base dark color with 12% opacity',
+                    attributes: {
+                        category: 'tabs',
+                        type: 'state-hover',
+                        item: 'theme-light',
+                    },
+                },
+                color: {
+                    version: '0.22',
+                    comment: 'Neutral dark color',
+                    attributes: {
+                        category: 'tabs',
+                        type: 'state-hover',
+                        item: 'theme-light',
+                    },
+                },
+                'border-color': {
+                    version: '0.22',
+                    comment: 'Base dark color with 12% opacity',
+                    attributes: {
+                        category: 'tabs',
+                        type: 'state-hover',
+                        item: 'theme-light',
+                    },
+                },
+            },
+            'theme-dark': {
+                'background-color': {
+                    version: '0.22',
+                    comment: 'Base light color with 20% opacity',
+                    attributes: {
+                        category: 'tabs',
+                        type: 'state-hover',
+                        item: 'theme-dark',
+                    },
+                },
+                color: {
+                    version: '0.22',
+                    comment: 'Neutral light color',
+                    attributes: {
+                        category: 'tabs',
+                        type: 'state-hover',
+                        item: 'theme-dark',
+                    },
+                },
+                'border-color': {
+                    version: '0.22',
+                    comment: 'Base light color with 20% opacity',
+                    attributes: {
+                        category: 'tabs',
+                        type: 'state-hover',
+                        item: 'theme-dark',
+                    },
+                },
+            },
+        },
+        'state-active': {
+            border: {
+                top: {
+                    width: {
+                        attributes: {
+                            category: 'tabs',
+                            type: 'state-active',
+                            item: 'border',
+                        },
+                    },
+                },
+                right: {
+                    width: {
+                        attributes: {
+                            category: 'tabs',
+                            type: 'state-active',
+                            item: 'border',
+                        },
+                    },
+                },
+                bottom: {
+                    width: {
+                        attributes: {
+                            category: 'tabs',
+                            type: 'state-active',
+                            item: 'border',
+                        },
+                    },
+                },
+                left: {
+                    width: {
+                        attributes: {
+                            category: 'tabs',
+                            type: 'state-active',
+                            item: 'border',
+                        },
+                    },
+                },
+            },
+            'theme-light': {
+                'background-color': {
+                    version: '0.22',
+                    comment: 'Base dark color with 20% opacity',
+                    attributes: {
+                        category: 'tabs',
+                        type: 'state-active',
+                        item: 'theme-light',
+                    },
+                },
+                color: {
+                    version: '0.22',
+                    comment: 'Neutral dark color',
+                    attributes: {
+                        category: 'tabs',
+                        type: 'state-active',
+                        item: 'theme-light',
+                    },
+                },
+                'border-color': {
+                    version: '0.22',
+                    comment: 'Base dark color with 12% opacity',
+                    attributes: {
+                        category: 'tabs',
+                        type: 'state-active',
+                        item: 'theme-light',
+                    },
+                },
+            },
+            'theme-dark': {
+                'background-color': {
+                    version: '0.22',
+                    comment: 'Base light color with 40% opacity',
+                    attributes: {
+                        category: 'tabs',
+                        type: 'state-active',
+                        item: 'theme-dark',
+                    },
+                },
+                color: {
+                    version: '0.22',
+                    comment: 'Neutral light color',
+                    attributes: {
+                        category: 'tabs',
+                        type: 'state-active',
+                        item: 'theme-dark',
+                    },
+                },
+                'border-color': {
+                    version: '0.22',
+                    comment: 'Base light color with 20% opacity',
+                    attributes: {
+                        category: 'tabs',
+                        type: 'state-active',
+                        item: 'theme-dark',
+                    },
+                },
+            },
+        },
+        'state-selected': {
+            border: {
+                top: {
+                    width: {
+                        attributes: {
+                            category: 'tabs',
+                            type: 'state-selected',
+                            item: 'border',
+                        },
+                    },
+                },
+                right: {
+                    width: {
+                        attributes: {
+                            category: 'tabs',
+                            type: 'state-selected',
+                            item: 'border',
+                        },
+                    },
+                },
+                bottom: {
+                    width: {
+                        attributes: {
+                            category: 'tabs',
+                            type: 'state-selected',
+                            item: 'border',
+                        },
+                    },
+                },
+                left: {
+                    width: {
+                        attributes: {
+                            category: 'tabs',
+                            type: 'state-selected',
+                            item: 'border',
+                        },
+                    },
+                },
+            },
+            'theme-light': {
+                'background-color': {
+                    attributes: {
+                        category: 'tabs',
+                        type: 'state-selected',
+                        item: 'theme-light',
+                    },
+                },
+                color: {
+                    version: '0.22',
+                    comment: 'Neutral dark color',
+                    attributes: {
+                        category: 'tabs',
+                        type: 'state-selected',
+                        item: 'theme-light',
+                    },
+                },
+                'border-color': {
+                    attributes: {
+                        category: 'tabs',
+                        type: 'state-selected',
+                        item: 'theme-light',
+                    },
+                },
+            },
+            'theme-dark': {
+                'background-color': {
+                    attributes: {
+                        category: 'tabs',
+                        type: 'state-selected',
+                        item: 'theme-dark',
+                    },
+                },
+                color: {
+                    version: '0.22',
+                    comment: 'Neutral light color',
+                    attributes: {
+                        category: 'tabs',
+                        type: 'state-selected',
+                        item: 'theme-dark',
+                    },
+                },
+                'border-color': {
+                    version: '0.22',
+                    comment: 'Neutral light color',
+                    attributes: {
+                        category: 'tabs',
+                        type: 'state-selected',
+                        item: 'theme-dark',
                     },
                 },
             },
