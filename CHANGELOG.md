@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Switch: add attribute `aria-checked` for screen readers correct behavior.
+
 ## [1.0.22][] - 2021-08-25
 
 ### Added
