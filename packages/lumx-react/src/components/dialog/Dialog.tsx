@@ -54,6 +54,8 @@ export interface DialogProps extends GenericProps {
     dialogProps?: GenericProps;
     /** On close callback. */
     onClose?(): void;
+    /** Callback called when the open animation starts and the close animation finishes. */
+    onVisibilityChange?(isVisible: boolean): void;
 }
 
 export type DialogSizes = Extract<Size, 'tiny' | 'regular' | 'big' | 'huge'>;
@@ -108,6 +110,7 @@ export const Dialog: Comp<DialogProps, HTMLDivElement> = forwardRef((props, ref)
         size,
         zIndex,
         dialogProps,
+        onVisibilityChange,
         ...forwardedProps
     } = props;
 
@@ -158,7 +161,7 @@ export const Dialog: Comp<DialogProps, HTMLDivElement> = forwardRef((props, ref)
     const footerChildContent = footerChildProps?.children;
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const isVisible = useDelayedVisibility(Boolean(isOpen), DIALOG_TRANSITION_DURATION);
+    const isVisible = useDelayedVisibility(Boolean(isOpen), DIALOG_TRANSITION_DURATION, onVisibilityChange);
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const clickAwayRefs = useRef([wrapperRef]);
