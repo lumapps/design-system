@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   Switch: add attribute `aria-checked` for screen readers correct behavior.
+-   Dialog: add `onVisibilityChange` prop to trigger an action when the dialog is actually visible / invisible.
 
 ## [1.0.22][] - 2021-08-25
 
