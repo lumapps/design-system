@@ -16,12 +16,12 @@
 @mixin lumx-tabs-link() {
     position: relative;
     display: flex;
-    height: var(--lumx-tabs-height);
+    height: var(--lumx-tabs-link-height);
     align-items: center;
     justify-content: center;
     padding: 0 $lumx-spacing-unit * 3;
     border: none;
-    border-radius: var(--lumx-tabs-border-radius);
+    border-radius: var(--lumx-tabs-link-border-radius);
     cursor: pointer;
     outline: none;
 
@@ -32,27 +32,27 @@
         bottom: 0;
         left: 0;
         border-style: solid;
-        border-top-width: var(--lumx-tabs-state-default-border-top-width);
-        border-right-width: var(--lumx-tabs-state-default-border-right-width);
-        border-bottom-width: var(--lumx-tabs-state-default-border-bottom-width);
-        border-left-width: var(--lumx-tabs-state-default-border-left-width);
-        border-radius: var(--lumx-tabs-border-radius);
+        border-top-width: var(--lumx-tabs-link-state-default-border-top-width);
+        border-right-width: var(--lumx-tabs-link-state-default-border-right-width);
+        border-bottom-width: var(--lumx-tabs-link-state-default-border-bottom-width);
+        border-left-width: var(--lumx-tabs-link-state-default-border-left-width);
+        border-radius: var(--lumx-tabs-link-border-radius);
         content: '';
         pointer-events: none;
     }
 
     &:hover::after {
-        border-top-width: var(--lumx-tabs-state-hover-border-top-width);
-        border-right-width: var(--lumx-tabs-state-hover-border-right-width);
-        border-bottom-width: var(--lumx-tabs-state-hover-border-bottom-width);
-        border-left-width: var(--lumx-tabs-state-hover-border-left-width);
+        border-top-width: var(--lumx-tabs-link-state-hover-border-top-width);
+        border-right-width: var(--lumx-tabs-link-state-hover-border-right-width);
+        border-bottom-width: var(--lumx-tabs-link-state-hover-border-bottom-width);
+        border-left-width: var(--lumx-tabs-link-state-hover-border-left-width);
     }
 
     &:active::after {
-        border-top-width: var(--lumx-tabs-state-active-border-top-width);
-        border-right-width: var(--lumx-tabs-state-active-border-right-width);
-        border-bottom-width: var(--lumx-tabs-state-active-border-bottom-width);
-        border-left-width: var(--lumx-tabs-state-active-border-left-width);
+        border-top-width: var(--lumx-tabs-link-state-active-border-top-width);
+        border-right-width: var(--lumx-tabs-link-state-active-border-right-width);
+        border-bottom-width: var(--lumx-tabs-link-state-active-border-bottom-width);
+        border-left-width: var(--lumx-tabs-link-state-active-border-left-width);
     }
 
     i {
@@ -68,28 +68,28 @@
 }
 
 @mixin lumx-tabs-link-color($theme) {
-    background-color: var(--lumx-tabs-state-default-#{$theme}-background-color);
-    color: var(--lumx-tabs-state-default-#{$theme}-color);
+    background-color: var(--lumx-tabs-link-state-default-#{$theme}-background-color);
+    color: var(--lumx-tabs-link-state-default-#{$theme}-color);
 
     &::after {
-        border-color: var(--lumx-tabs-state-default-#{$theme}-border-color);
+        border-color: var(--lumx-tabs-link-state-default-#{$theme}-border-color);
     }
 
     &:hover {
-        background-color: var(--lumx-tabs-state-hover-#{$theme}-background-color);
-        color: var(--lumx-tabs-state-hover-#{$theme}-color);
+        background-color: var(--lumx-tabs-link-state-hover-#{$theme}-background-color);
+        color: var(--lumx-tabs-link-state-hover-#{$theme}-color);
 
         &::after {
-            border-color: var(--lumx-tabs-state-hover-#{$theme}-border-color);
+            border-color: var(--lumx-tabs-link-state-hover-#{$theme}-border-color);
         }
     }
 
     &:active {
-        background-color: var(--lumx-tabs-state-active-#{$theme}-background-color);
-        color: var(--lumx-tabs-state-active-#{$theme}-color);
+        background-color: var(--lumx-tabs-link-state-active-#{$theme}-background-color);
+        color: var(--lumx-tabs-link-state-active-#{$theme}-color);
 
         &::after {
-            border-color: var(--lumx-tabs-state-active-#{$theme}-border-color);
+            border-color: var(--lumx-tabs-link-state-active-#{$theme}-border-color);
         }
     }
 
@@ -103,15 +103,15 @@
 }
 
 @mixin lumx-tabs-link-active($theme) {
-    background-color: var(--lumx-tabs-state-selected-#{$theme}-background-color);
-    color: var(--lumx-tabs-state-selected-#{$theme}-color);
+    background-color: var(--lumx-tabs-link-state-selected-#{$theme}-background-color);
+    color: var(--lumx-tabs-link-state-selected-#{$theme}-color);
 
     &::after {
-        border-color: var(--lumx-tabs-state-selected-#{$theme}-border-color) !important;
-        border-top-width: var(--lumx-tabs-state-selected-border-top-width);
-        border-right-width: var(--lumx-tabs-state-selected-border-right-width);
-        border-bottom-width: var(--lumx-tabs-state-selected-border-bottom-width);
-        border-left-width: var(--lumx-tabs-state-selected-border-left-width);
+        border-color: var(--lumx-tabs-link-state-selected-#{$theme}-border-color) !important;
+        border-top-width: var(--lumx-tabs-link-state-selected-border-top-width);
+        border-right-width: var(--lumx-tabs-link-state-selected-border-right-width);
+        border-bottom-width: var(--lumx-tabs-link-state-selected-border-bottom-width);
+        border-left-width: var(--lumx-tabs-link-state-selected-border-left-width);
     }
 }
 
