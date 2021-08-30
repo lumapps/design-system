@@ -8,6 +8,7 @@ exports[`<Switch> Conditions should not display the \`helper\` if no \`label\` i
     className="lumx-switch__input-wrapper"
   >
     <input
+      aria-checked={false}
       className="lumx-switch__input-native"
       id="switch-uid"
       onChange={[Function]}
@@ -36,6 +37,7 @@ exports[`<Switch> Snapshots and structure should render correctly with a \`label
     className="lumx-switch__input-wrapper"
   >
     <input
+      aria-checked={false}
       className="lumx-switch__input-native"
       id="switch-uid"
       onChange={[Function]}
@@ -82,6 +84,7 @@ exports[`<Switch> Snapshots and structure should render correctly with only a \`
     className="lumx-switch__input-wrapper"
   >
     <input
+      aria-checked={false}
       className="lumx-switch__input-native"
       id="switch-uid"
       onChange={[Function]}
@@ -121,6 +124,7 @@ exports[`<Switch> Snapshots and structure should render correctly without any la
     className="lumx-switch__input-wrapper"
   >
     <input
+      aria-checked={false}
       className="lumx-switch__input-native"
       id="switch-uid"
       onChange={[Function]}
