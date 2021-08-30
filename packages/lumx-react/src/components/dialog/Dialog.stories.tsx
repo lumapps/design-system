@@ -198,6 +198,28 @@ export const ScrollableDialog = ({ theme }: any) => {
     );
 };
 
+export const WithAnimationCallbacks = ({ theme }: any) => {
+    const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
+    const handleVisibiltyCallback = (isVisible: boolean) => {
+        alert(isVisible ? 'OPEN' : 'CLOSE');
+    };
+
+    return (
+        <>
+            {button}
+            <Dialog
+                isOpen={isOpen}
+                onClose={closeDialog}
+                size={Size.regular}
+                parentElement={buttonRef}
+                onVisibilityChange={handleVisibiltyCallback}
+            >
+                {content}
+            </Dialog>
+        </>
+    );
+};
+
 export const ScrollableDialogWithHeaderAndFooter = ({ theme }: any) => {
     const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
     return (

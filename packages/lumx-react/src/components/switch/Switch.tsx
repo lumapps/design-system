@@ -107,6 +107,7 @@ export const Switch: Comp<SwitchProps, HTMLDivElement> = forwardRef((props, ref)
                     value={value}
                     disabled={isDisabled}
                     checked={isChecked}
+                    aria-checked={Boolean(isChecked)}
                     onChange={handleChange}
                 />
 

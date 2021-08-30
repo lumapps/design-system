@@ -13,6 +13,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   New lumapps theme applied by default
     -   Old Material theme applicable using variables in `css/material.css`
 
+## [1.0.23][] - 2021-08-27
+
+### Added
+
+-   Switch: add attribute `aria-checked` for screen readers correct behavior.
+-   Dialog: add `onVisibilityChange` prop to trigger an action when the dialog is actually visible / invisible.
+
 ## [1.0.22][] - 2021-08-25
 
 ### Added
@@ -1177,3 +1184,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.0.21]: https://github.com/lumapps/design-system/tree/v1.0.21
 [unreleased]: https://github.com/lumapps/design-system/compare/v1.0.22...HEAD
 [1.0.22]: https://github.com/lumapps/design-system/tree/v1.0.22
+[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.23...HEAD
+[1.0.23]: https://github.com/lumapps/design-system/tree/v1.0.23
