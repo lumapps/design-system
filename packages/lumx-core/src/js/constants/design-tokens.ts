@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 27 Aug 2021 13:27:49 GMT
+ * Generated on Wed, 01 Sep 2021 08:45:56 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -649,6 +649,212 @@ export const DESIGN_TOKENS = {
                         attributes: {
                             category: 'button',
                             type: 'emphasis-low',
+                            item: 'state-active',
+                        },
+                    },
+                },
+            },
+        },
+        'emphasis-selected': {
+            'state-default': {
+                padding: {
+                    horizontal: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-default',
+                        },
+                    },
+                },
+                'border-width': {
+                    attributes: {
+                        category: 'button',
+                        type: 'emphasis-selected',
+                        item: 'state-default',
+                    },
+                },
+                'theme-light': {
+                    'background-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-default',
+                        },
+                    },
+                    color: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-default',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-default',
+                        },
+                    },
+                },
+                'theme-dark': {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base light color with 80% opacity',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-default',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral dark color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-default',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-default',
+                        },
+                    },
+                },
+            },
+            'state-hover': {
+                padding: {
+                    horizontal: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-hover',
+                        },
+                    },
+                },
+                'border-width': {
+                    attributes: {
+                        category: 'button',
+                        type: 'emphasis-selected',
+                        item: 'state-hover',
+                    },
+                },
+                'theme-light': {
+                    'background-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-hover',
+                        },
+                    },
+                    color: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-hover',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-hover',
+                        },
+                    },
+                },
+                'theme-dark': {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base light color with 60% opacity',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-hover',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral dark color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-hover',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-hover',
+                        },
+                    },
+                },
+            },
+            'state-active': {
+                padding: {
+                    horizontal: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-active',
+                        },
+                    },
+                },
+                'border-width': {
+                    attributes: {
+                        category: 'button',
+                        type: 'emphasis-selected',
+                        item: 'state-active',
+                    },
+                },
+                'theme-light': {
+                    'background-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-active',
+                        },
+                    },
+                    color: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-active',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-active',
+                        },
+                    },
+                },
+                'theme-dark': {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base light color with 40% opacity',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-active',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral dark color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-active',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
                             item: 'state-active',
                         },
                     },
