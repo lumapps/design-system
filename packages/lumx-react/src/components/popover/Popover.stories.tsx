@@ -274,7 +274,7 @@ export const NestedWithoutPortal = () => {
     const [secondOpen, setSecondOpen] = React.useState(false);
     const [thirdOpen, setThirdOpen] = React.useState(false);
     const [fourthOpen, setFourthOpen] = React.useState(false);
-    const boundaryReference = React.useRef(document.querySelector('body'));
+    const boundaryRef = React.useRef(document.querySelector('body'));
 
     return (
         <div style={{ height: '100vh' }}>
@@ -282,7 +282,7 @@ export const NestedWithoutPortal = () => {
                 Click
             </Button>
             <Popover
-                boundaryReference={boundaryReference}
+                boundaryRef={boundaryRef}
                 fitWithinViewportHeight
                 offset={{ along: -16 }}
                 placement={Placement.RIGHT_START}
@@ -295,7 +295,7 @@ export const NestedWithoutPortal = () => {
                         <li ref={firstButtonRef}>
                             <Button onClick={() => setFirstOpen(!firstOpen)}>Click</Button>
                             <Popover
-                                boundaryReference={boundaryReference}
+                                boundaryRef={boundaryRef}
                                 fitWithinViewportHeight
                                 placement={Placement.RIGHT_START}
                                 isOpen={firstOpen}
@@ -308,7 +308,7 @@ export const NestedWithoutPortal = () => {
                                         <li ref={secondButtonRef}>
                                             <Button onClick={() => setSecondOpen(!secondOpen)}>Click</Button>
                                             <Popover
-                                                boundaryReference={boundaryReference}
+                                                boundaryRef={boundaryRef}
                                                 fitWithinViewportHeight
                                                 placement={Placement.RIGHT_START}
                                                 isOpen={secondOpen}
@@ -323,7 +323,7 @@ export const NestedWithoutPortal = () => {
                                                                 Click
                                                             </Button>
                                                             <Popover
-                                                                boundaryReference={boundaryReference}
+                                                                boundaryRef={boundaryRef}
                                                                 fitWithinViewportHeight
                                                                 placement={Placement.RIGHT_START}
                                                                 isOpen={thirdOpen}
@@ -345,7 +345,7 @@ export const NestedWithoutPortal = () => {
                                                                                 Click
                                                                             </Button>
                                                                             <Popover
-                                                                                boundaryReference={boundaryReference}
+                                                                                boundaryRef={boundaryRef}
                                                                                 fitWithinViewportHeight
                                                                                 placement={Placement.RIGHT_START}
                                                                                 isOpen={fourthOpen}
