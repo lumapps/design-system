@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.24][] - 2021-09-01
+
 ### Added
 
 -   Message: add `icon` prop to customize the message icon.
@@ -1184,3 +1186,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.0.22]: https://github.com/lumapps/design-system/tree/v1.0.22
 [unreleased]: https://github.com/lumapps/design-system/compare/v1.0.23...HEAD
 [1.0.23]: https://github.com/lumapps/design-system/tree/v1.0.23
+[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.24...HEAD
+[1.0.24]: https://github.com/lumapps/design-system/tree/v1.0.24
