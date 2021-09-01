@@ -10,12 +10,17 @@
     outline: none;
     text-decoration: none;
     transition-duration: $lumx-state-transition-duration;
-    transition-property: padding, border-radius, border-width, background-color, color, border-color;
+    transition-property: padding, border-radius, background-color, color;
     user-select: none;
     vertical-align: top;
 
     &:hover {
         cursor: pointer;
+    }
+
+    &::before {
+        transition-duration: $lumx-state-transition-duration;
+        transition-property: border-radius, border-width, border-color;
     }
 }
 

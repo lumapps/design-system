@@ -16,15 +16,34 @@
     }
 
     &__link {
-        @include lumx-tabs-link;
-        @include lumx-state-transition;
+        &:not(&--is-active) {
+            @include lumx-tabs-link(lumx-base-const('emphasis', 'LOW'));
 
-        #{$self}--theme-light & {
-            @include lumx-tabs-link-color(lumx-base-const('theme', 'LIGHT'));
+            #{$self}--theme-light & {
+                @include lumx-tabs-link-color(lumx-base-const('emphasis', 'LOW'), lumx-base-const('theme', 'LIGHT'));
+            }
+
+            #{$self}--theme-dark & {
+                @include lumx-tabs-link-color(lumx-base-const('emphasis', 'LOW'), lumx-base-const('theme', 'DARK'));
+            }
         }
 
-        #{$self}--theme-dark & {
-            @include lumx-tabs-link-color(lumx-base-const('theme', 'DARK'));
+        &--is-active {
+            @include lumx-tabs-link(lumx-base-const('emphasis', 'SELECTED'));
+
+            #{$self}--theme-light & {
+                @include lumx-tabs-link-color(
+                    lumx-base-const('emphasis', 'SELECTED'),
+                    lumx-base-const('theme', 'LIGHT')
+                );
+            }
+
+            #{$self}--theme-dark & {
+                @include lumx-tabs-link-color(
+                    lumx-base-const('emphasis', 'SELECTED'),
+                    lumx-base-const('theme', 'DARK')
+                );
+            }
         }
     }
 }
@@ -61,17 +80,6 @@
 
 /* Tabs link states
    ========================================================================== */
-
-// Active state
-.#{$lumx-base-prefix}-tabs__link--is-active {
-    .#{$lumx-base-prefix}-tabs--theme-light & {
-        @include lumx-tabs-link-active(lumx-base-const('theme', 'LIGHT'));
-    }
-
-    .#{$lumx-base-prefix}-tabs--theme-dark & {
-        @include lumx-tabs-link-active(lumx-base-const('theme', 'DARK'));
-    }
-}
 
 // Disabled state
 .#{$lumx-base-prefix}-tabs__link--is-disabled {

@@ -13,7 +13,7 @@
     }
 }
 
-@mixin lumx-tabs-link() {
+@mixin lumx-tabs-link($emphasis) {
     position: relative;
     display: flex;
     height: var(--lumx-tabs-link-height);
@@ -24,6 +24,8 @@
     border-radius: var(--lumx-tabs-link-border-radius);
     cursor: pointer;
     outline: none;
+    transition-duration: $lumx-state-transition-duration;
+    transition-property: border-radius, background-color, color;
 
     &::after {
         position: absolute;
@@ -32,27 +34,29 @@
         bottom: 0;
         left: 0;
         border-style: solid;
-        border-top-width: var(--lumx-tabs-link-state-default-border-top-width);
-        border-right-width: var(--lumx-tabs-link-state-default-border-right-width);
-        border-bottom-width: var(--lumx-tabs-link-state-default-border-bottom-width);
-        border-left-width: var(--lumx-tabs-link-state-default-border-left-width);
+        border-top-width: var(--lumx-tabs-link-#{$emphasis}-state-default-border-top-width);
+        border-right-width: var(--lumx-tabs-link-#{$emphasis}-state-default-border-right-width);
+        border-bottom-width: var(--lumx-tabs-link-#{$emphasis}-state-default-border-bottom-width);
+        border-left-width: var(--lumx-tabs-link-#{$emphasis}-state-default-border-left-width);
         border-radius: var(--lumx-tabs-link-border-radius);
         content: '';
         pointer-events: none;
+        transition-duration: $lumx-state-transition-duration;
+        transition-property: border-radius, border-width, border-color;
     }
 
     &:hover::after {
-        border-top-width: var(--lumx-tabs-link-state-hover-border-top-width);
-        border-right-width: var(--lumx-tabs-link-state-hover-border-right-width);
-        border-bottom-width: var(--lumx-tabs-link-state-hover-border-bottom-width);
-        border-left-width: var(--lumx-tabs-link-state-hover-border-left-width);
+        border-top-width: var(--lumx-tabs-link-#{$emphasis}-state-hover-border-top-width);
+        border-right-width: var(--lumx-tabs-link-#{$emphasis}-state-hover-border-right-width);
+        border-bottom-width: var(--lumx-tabs-link-#{$emphasis}-state-hover-border-bottom-width);
+        border-left-width: var(--lumx-tabs-link-#{$emphasis}-state-hover-border-left-width);
     }
 
     &:active::after {
-        border-top-width: var(--lumx-tabs-link-state-active-border-top-width);
-        border-right-width: var(--lumx-tabs-link-state-active-border-right-width);
-        border-bottom-width: var(--lumx-tabs-link-state-active-border-bottom-width);
-        border-left-width: var(--lumx-tabs-link-state-active-border-left-width);
+        border-top-width: var(--lumx-tabs-link-#{$emphasis}-state-active-border-top-width);
+        border-right-width: var(--lumx-tabs-link-#{$emphasis}-state-active-border-right-width);
+        border-bottom-width: var(--lumx-tabs-link-#{$emphasis}-state-active-border-bottom-width);
+        border-left-width: var(--lumx-tabs-link-#{$emphasis}-state-active-border-left-width);
     }
 
     i {
@@ -67,29 +71,29 @@
     }
 }
 
-@mixin lumx-tabs-link-color($theme) {
-    background-color: var(--lumx-tabs-link-state-default-#{$theme}-background-color);
-    color: var(--lumx-tabs-link-state-default-#{$theme}-color);
+@mixin lumx-tabs-link-color($emphasis, $theme) {
+    background-color: var(--lumx-tabs-link-#{$emphasis}-state-default-#{$theme}-background-color);
+    color: var(--lumx-tabs-link-#{$emphasis}-state-default-#{$theme}-color);
 
     &::after {
-        border-color: var(--lumx-tabs-link-state-default-#{$theme}-border-color);
+        border-color: var(--lumx-tabs-link-#{$emphasis}-state-default-#{$theme}-border-color);
     }
 
     &:hover {
-        background-color: var(--lumx-tabs-link-state-hover-#{$theme}-background-color);
-        color: var(--lumx-tabs-link-state-hover-#{$theme}-color);
+        background-color: var(--lumx-tabs-link-#{$emphasis}-state-hover-#{$theme}-background-color);
+        color: var(--lumx-tabs-link-#{$emphasis}-state-hover-#{$theme}-color);
 
         &::after {
-            border-color: var(--lumx-tabs-link-state-hover-#{$theme}-border-color);
+            border-color: var(--lumx-tabs-link-#{$emphasis}-state-hover-#{$theme}-border-color);
         }
     }
 
     &:active {
-        background-color: var(--lumx-tabs-link-state-active-#{$theme}-background-color);
-        color: var(--lumx-tabs-link-state-active-#{$theme}-color);
+        background-color: var(--lumx-tabs-link-#{$emphasis}-state-active-#{$theme}-background-color);
+        color: var(--lumx-tabs-link-#{$emphasis}-state-active-#{$theme}-color);
 
         &::after {
-            border-color: var(--lumx-tabs-link-state-active-#{$theme}-border-color);
+            border-color: var(--lumx-tabs-link-#{$emphasis}-state-active-#{$theme}-border-color);
         }
     }
 
@@ -99,19 +103,6 @@
         } @else if $theme == lumx-base-const('theme', 'DARK') {
             @include lumx-state-low(lumx-base-const('state', 'FOCUS'), 'light');
         }
-    }
-}
-
-@mixin lumx-tabs-link-active($theme) {
-    background-color: var(--lumx-tabs-link-state-selected-#{$theme}-background-color);
-    color: var(--lumx-tabs-link-state-selected-#{$theme}-color);
-
-    &::after {
-        border-color: var(--lumx-tabs-link-state-selected-#{$theme}-border-color) !important;
-        border-top-width: var(--lumx-tabs-link-state-selected-border-top-width);
-        border-right-width: var(--lumx-tabs-link-state-selected-border-right-width);
-        border-bottom-width: var(--lumx-tabs-link-state-selected-border-bottom-width);
-        border-left-width: var(--lumx-tabs-link-state-selected-border-left-width);
     }
 }
 

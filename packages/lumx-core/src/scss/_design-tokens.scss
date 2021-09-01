@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Wed, 01 Sep 2021 08:45:55 GMT
+ * Generated on Wed, 01 Sep 2021 09:01:01 GMT
  */
 
 $lumx-button-height: 36px !default;
@@ -213,86 +213,136 @@ $lumx-material-text-field-input-content-font-weight: 400 !default;
 $lumx-material-text-field-input-content-line-height: 20px !default;
 $lumx-tabs-link-height: 48px !default;
 $lumx-tabs-link-border-radius: 0 !default;
-$lumx-tabs-link-state-default-border-top-width: 0 !default;
-$lumx-tabs-link-state-default-border-right-width: 0 !default;
-$lumx-tabs-link-state-default-border-bottom-width: 2px !default;
-$lumx-tabs-link-state-default-border-left-width: 0 !default;
-$lumx-tabs-link-state-default-theme-light-background-color: transparent !default;
-$lumx-tabs-link-state-default-theme-light-color: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
-$lumx-tabs-link-state-default-theme-light-border-color: rgba(
+$lumx-tabs-link-emphasis-low-state-default-border-top-width: 0 !default;
+$lumx-tabs-link-emphasis-low-state-default-border-right-width: 0 !default;
+$lumx-tabs-link-emphasis-low-state-default-border-bottom-width: 2px !default;
+$lumx-tabs-link-emphasis-low-state-default-border-left-width: 0 !default;
+$lumx-tabs-link-emphasis-low-state-default-theme-light-background-color: transparent !default;
+$lumx-tabs-link-emphasis-low-state-default-theme-light-color: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
+$lumx-tabs-link-emphasis-low-state-default-theme-light-border-color: rgba(
     0,
     0,
     0,
     0.12
 ) !default; // Base dark color with 12% opacity
-$lumx-tabs-link-state-default-theme-dark-background-color: transparent !default;
-$lumx-tabs-link-state-default-theme-dark-color: #fff !default; // Neutral light color
-$lumx-tabs-link-state-default-theme-dark-border-color: rgba(
+$lumx-tabs-link-emphasis-low-state-default-theme-dark-background-color: transparent !default;
+$lumx-tabs-link-emphasis-low-state-default-theme-dark-color: #fff !default; // Neutral light color
+$lumx-tabs-link-emphasis-low-state-default-theme-dark-border-color: rgba(
     255,
     255,
     255,
     0.2
 ) !default; // Base light color with 20% opacity
-$lumx-tabs-link-state-hover-border-top-width: 0 !default;
-$lumx-tabs-link-state-hover-border-right-width: 0 !default;
-$lumx-tabs-link-state-hover-border-bottom-width: 2px !default;
-$lumx-tabs-link-state-hover-border-left-width: 0 !default;
-$lumx-tabs-link-state-hover-theme-light-background-color: rgba(
+$lumx-tabs-link-emphasis-low-state-hover-border-top-width: 0 !default;
+$lumx-tabs-link-emphasis-low-state-hover-border-right-width: 0 !default;
+$lumx-tabs-link-emphasis-low-state-hover-border-bottom-width: 2px !default;
+$lumx-tabs-link-emphasis-low-state-hover-border-left-width: 0 !default;
+$lumx-tabs-link-emphasis-low-state-hover-theme-light-background-color: rgba(
     0,
     0,
     0,
     0.12
 ) !default; // Base dark color with 12% opacity
-$lumx-tabs-link-state-hover-theme-light-color: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
-$lumx-tabs-link-state-hover-theme-light-border-color: rgba(0, 0, 0, 0.12) !default; // Base dark color with 12% opacity
-$lumx-tabs-link-state-hover-theme-dark-background-color: rgba(
+$lumx-tabs-link-emphasis-low-state-hover-theme-light-color: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
+$lumx-tabs-link-emphasis-low-state-hover-theme-light-border-color: rgba(
+    0,
+    0,
+    0,
+    0.12
+) !default; // Base dark color with 12% opacity
+$lumx-tabs-link-emphasis-low-state-hover-theme-dark-background-color: rgba(
     255,
     255,
     255,
     0.2
 ) !default; // Base light color with 20% opacity
-$lumx-tabs-link-state-hover-theme-dark-color: #fff !default; // Neutral light color
-$lumx-tabs-link-state-hover-theme-dark-border-color: rgba(
+$lumx-tabs-link-emphasis-low-state-hover-theme-dark-color: #fff !default; // Neutral light color
+$lumx-tabs-link-emphasis-low-state-hover-theme-dark-border-color: rgba(
     255,
     255,
     255,
     0.2
 ) !default; // Base light color with 20% opacity
-$lumx-tabs-link-state-active-border-top-width: 0 !default;
-$lumx-tabs-link-state-active-border-right-width: 0 !default;
-$lumx-tabs-link-state-active-border-bottom-width: 2px !default;
-$lumx-tabs-link-state-active-border-left-width: 0 !default;
-$lumx-tabs-link-state-active-theme-light-background-color: rgba(
+$lumx-tabs-link-emphasis-low-state-active-border-top-width: 0 !default;
+$lumx-tabs-link-emphasis-low-state-active-border-right-width: 0 !default;
+$lumx-tabs-link-emphasis-low-state-active-border-bottom-width: 2px !default;
+$lumx-tabs-link-emphasis-low-state-active-border-left-width: 0 !default;
+$lumx-tabs-link-emphasis-low-state-active-theme-light-background-color: rgba(
     0,
     0,
     0,
     0.2
 ) !default; // Base dark color with 20% opacity
-$lumx-tabs-link-state-active-theme-light-color: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
-$lumx-tabs-link-state-active-theme-light-border-color: rgba(0, 0, 0, 0.12) !default; // Base dark color with 12% opacity
-$lumx-tabs-link-state-active-theme-dark-background-color: rgba(
+$lumx-tabs-link-emphasis-low-state-active-theme-light-color: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
+$lumx-tabs-link-emphasis-low-state-active-theme-light-border-color: rgba(
+    0,
+    0,
+    0,
+    0.12
+) !default; // Base dark color with 12% opacity
+$lumx-tabs-link-emphasis-low-state-active-theme-dark-background-color: rgba(
     255,
     255,
     255,
     0.4
 ) !default; // Base light color with 40% opacity
-$lumx-tabs-link-state-active-theme-dark-color: #fff !default; // Neutral light color
-$lumx-tabs-link-state-active-theme-dark-border-color: rgba(
+$lumx-tabs-link-emphasis-low-state-active-theme-dark-color: #fff !default; // Neutral light color
+$lumx-tabs-link-emphasis-low-state-active-theme-dark-border-color: rgba(
     255,
     255,
     255,
     0.2
 ) !default; // Base light color with 20% opacity
-$lumx-tabs-link-state-selected-border-top-width: 0 !default;
-$lumx-tabs-link-state-selected-border-right-width: 0 !default;
-$lumx-tabs-link-state-selected-border-bottom-width: 2px !default;
-$lumx-tabs-link-state-selected-border-left-width: 0 !default;
-$lumx-tabs-link-state-selected-theme-light-background-color: transparent !default;
-$lumx-tabs-link-state-selected-theme-light-color: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
-$lumx-tabs-link-state-selected-theme-light-border-color: var(--lumx-color-primary-N) !default;
-$lumx-tabs-link-state-selected-theme-dark-background-color: transparent !default;
-$lumx-tabs-link-state-selected-theme-dark-color: #fff !default; // Neutral light color
-$lumx-tabs-link-state-selected-theme-dark-border-color: #fff !default; // Neutral light color
+$lumx-tabs-link-emphasis-selected-state-default-border-top-width: 0 !default;
+$lumx-tabs-link-emphasis-selected-state-default-border-right-width: 0 !default;
+$lumx-tabs-link-emphasis-selected-state-default-border-bottom-width: 2px !default;
+$lumx-tabs-link-emphasis-selected-state-default-border-left-width: 0 !default;
+$lumx-tabs-link-emphasis-selected-state-default-theme-light-background-color: transparent !default;
+$lumx-tabs-link-emphasis-selected-state-default-theme-light-color: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
+$lumx-tabs-link-emphasis-selected-state-default-theme-light-border-color: var(--lumx-color-primary-N) !default;
+$lumx-tabs-link-emphasis-selected-state-default-theme-dark-background-color: transparent !default;
+$lumx-tabs-link-emphasis-selected-state-default-theme-dark-color: #fff !default; // Neutral light color
+$lumx-tabs-link-emphasis-selected-state-default-theme-dark-border-color: #fff !default; // Neutral light color
+$lumx-tabs-link-emphasis-selected-state-hover-border-top-width: 0 !default;
+$lumx-tabs-link-emphasis-selected-state-hover-border-right-width: 0 !default;
+$lumx-tabs-link-emphasis-selected-state-hover-border-bottom-width: 2px !default;
+$lumx-tabs-link-emphasis-selected-state-hover-border-left-width: 0 !default;
+$lumx-tabs-link-emphasis-selected-state-hover-theme-light-background-color: rgba(
+    0,
+    0,
+    0,
+    0.12
+) !default; // Base dark color with 12% opacity
+$lumx-tabs-link-emphasis-selected-state-hover-theme-light-color: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
+$lumx-tabs-link-emphasis-selected-state-hover-theme-light-border-color: var(--lumx-color-primary-N) !default;
+$lumx-tabs-link-emphasis-selected-state-hover-theme-dark-background-color: rgba(
+    255,
+    255,
+    255,
+    0.2
+) !default; // Base light color with 20% opacity
+$lumx-tabs-link-emphasis-selected-state-hover-theme-dark-color: #fff !default; // Neutral light color
+$lumx-tabs-link-emphasis-selected-state-hover-theme-dark-border-color: #fff !default; // Neutral light color
+$lumx-tabs-link-emphasis-selected-state-active-border-top-width: 0 !default;
+$lumx-tabs-link-emphasis-selected-state-active-border-right-width: 0 !default;
+$lumx-tabs-link-emphasis-selected-state-active-border-bottom-width: 2px !default;
+$lumx-tabs-link-emphasis-selected-state-active-border-left-width: 0 !default;
+$lumx-tabs-link-emphasis-selected-state-active-theme-light-background-color: rgba(
+    0,
+    0,
+    0,
+    0.2
+) !default; // Base dark color with 20% opacity
+$lumx-tabs-link-emphasis-selected-state-active-theme-light-color: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
+$lumx-tabs-link-emphasis-selected-state-active-theme-light-border-color: var(--lumx-color-primary-N) !default;
+$lumx-tabs-link-emphasis-selected-state-active-theme-dark-background-color: rgba(
+    255,
+    255,
+    255,
+    0.4
+) !default; // Base light color with 40% opacity
+$lumx-tabs-link-emphasis-selected-state-active-theme-dark-color: #fff !default; // Neutral light color
+$lumx-tabs-link-emphasis-selected-state-active-theme-dark-border-color: #fff !default; // Neutral light color
 $lumx-text-field-input-min-height: 36px !default;
 $lumx-text-field-input-padding-horizontal: 12px !default;
 $lumx-text-field-input-border-radius: 4px !default;
@@ -900,108 +950,164 @@ $lumx-design-tokens: (
         'link': (
             'height': $lumx-tabs-link-height,
             'border-radius': $lumx-tabs-link-border-radius,
-            'state-default': (
-                'border': (
-                    'top': (
-                        'width': $lumx-tabs-link-state-default-border-top-width,
+            'emphasis-low': (
+                'state-default': (
+                    'border': (
+                        'top': (
+                            'width': $lumx-tabs-link-emphasis-low-state-default-border-top-width,
+                        ),
+                        'right': (
+                            'width': $lumx-tabs-link-emphasis-low-state-default-border-right-width,
+                        ),
+                        'bottom': (
+                            'width': $lumx-tabs-link-emphasis-low-state-default-border-bottom-width,
+                        ),
+                        'left': (
+                            'width': $lumx-tabs-link-emphasis-low-state-default-border-left-width,
+                        ),
                     ),
-                    'right': (
-                        'width': $lumx-tabs-link-state-default-border-right-width,
+                    'theme-light': (
+                        'background-color': $lumx-tabs-link-emphasis-low-state-default-theme-light-background-color,
+                        'color': $lumx-tabs-link-emphasis-low-state-default-theme-light-color,
+                        'border-color': $lumx-tabs-link-emphasis-low-state-default-theme-light-border-color,
                     ),
-                    'bottom': (
-                        'width': $lumx-tabs-link-state-default-border-bottom-width,
-                    ),
-                    'left': (
-                        'width': $lumx-tabs-link-state-default-border-left-width,
+                    'theme-dark': (
+                        'background-color': $lumx-tabs-link-emphasis-low-state-default-theme-dark-background-color,
+                        'color': $lumx-tabs-link-emphasis-low-state-default-theme-dark-color,
+                        'border-color': $lumx-tabs-link-emphasis-low-state-default-theme-dark-border-color,
                     ),
                 ),
-                'theme-light': (
-                    'background-color': $lumx-tabs-link-state-default-theme-light-background-color,
-                    'color': $lumx-tabs-link-state-default-theme-light-color,
-                    'border-color': $lumx-tabs-link-state-default-theme-light-border-color,
+                'state-hover': (
+                    'border': (
+                        'top': (
+                            'width': $lumx-tabs-link-emphasis-low-state-hover-border-top-width,
+                        ),
+                        'right': (
+                            'width': $lumx-tabs-link-emphasis-low-state-hover-border-right-width,
+                        ),
+                        'bottom': (
+                            'width': $lumx-tabs-link-emphasis-low-state-hover-border-bottom-width,
+                        ),
+                        'left': (
+                            'width': $lumx-tabs-link-emphasis-low-state-hover-border-left-width,
+                        ),
+                    ),
+                    'theme-light': (
+                        'background-color': $lumx-tabs-link-emphasis-low-state-hover-theme-light-background-color,
+                        'color': $lumx-tabs-link-emphasis-low-state-hover-theme-light-color,
+                        'border-color': $lumx-tabs-link-emphasis-low-state-hover-theme-light-border-color,
+                    ),
+                    'theme-dark': (
+                        'background-color': $lumx-tabs-link-emphasis-low-state-hover-theme-dark-background-color,
+                        'color': $lumx-tabs-link-emphasis-low-state-hover-theme-dark-color,
+                        'border-color': $lumx-tabs-link-emphasis-low-state-hover-theme-dark-border-color,
+                    ),
                 ),
-                'theme-dark': (
-                    'background-color': $lumx-tabs-link-state-default-theme-dark-background-color,
-                    'color': $lumx-tabs-link-state-default-theme-dark-color,
-                    'border-color': $lumx-tabs-link-state-default-theme-dark-border-color,
+                'state-active': (
+                    'border': (
+                        'top': (
+                            'width': $lumx-tabs-link-emphasis-low-state-active-border-top-width,
+                        ),
+                        'right': (
+                            'width': $lumx-tabs-link-emphasis-low-state-active-border-right-width,
+                        ),
+                        'bottom': (
+                            'width': $lumx-tabs-link-emphasis-low-state-active-border-bottom-width,
+                        ),
+                        'left': (
+                            'width': $lumx-tabs-link-emphasis-low-state-active-border-left-width,
+                        ),
+                    ),
+                    'theme-light': (
+                        'background-color': $lumx-tabs-link-emphasis-low-state-active-theme-light-background-color,
+                        'color': $lumx-tabs-link-emphasis-low-state-active-theme-light-color,
+                        'border-color': $lumx-tabs-link-emphasis-low-state-active-theme-light-border-color,
+                    ),
+                    'theme-dark': (
+                        'background-color': $lumx-tabs-link-emphasis-low-state-active-theme-dark-background-color,
+                        'color': $lumx-tabs-link-emphasis-low-state-active-theme-dark-color,
+                        'border-color': $lumx-tabs-link-emphasis-low-state-active-theme-dark-border-color,
+                    ),
                 ),
             ),
-            'state-hover': (
-                'border': (
-                    'top': (
-                        'width': $lumx-tabs-link-state-hover-border-top-width,
+            'emphasis-selected': (
+                'state-default': (
+                    'border': (
+                        'top': (
+                            'width': $lumx-tabs-link-emphasis-selected-state-default-border-top-width,
+                        ),
+                        'right': (
+                            'width': $lumx-tabs-link-emphasis-selected-state-default-border-right-width,
+                        ),
+                        'bottom': (
+                            'width': $lumx-tabs-link-emphasis-selected-state-default-border-bottom-width,
+                        ),
+                        'left': (
+                            'width': $lumx-tabs-link-emphasis-selected-state-default-border-left-width,
+                        ),
                     ),
-                    'right': (
-                        'width': $lumx-tabs-link-state-hover-border-right-width,
+                    'theme-light': (
+                        'background-color': $lumx-tabs-link-emphasis-selected-state-default-theme-light-background-color,
+                        'color': $lumx-tabs-link-emphasis-selected-state-default-theme-light-color,
+                        'border-color': $lumx-tabs-link-emphasis-selected-state-default-theme-light-border-color,
                     ),
-                    'bottom': (
-                        'width': $lumx-tabs-link-state-hover-border-bottom-width,
-                    ),
-                    'left': (
-                        'width': $lumx-tabs-link-state-hover-border-left-width,
-                    ),
-                ),
-                'theme-light': (
-                    'background-color': $lumx-tabs-link-state-hover-theme-light-background-color,
-                    'color': $lumx-tabs-link-state-hover-theme-light-color,
-                    'border-color': $lumx-tabs-link-state-hover-theme-light-border-color,
-                ),
-                'theme-dark': (
-                    'background-color': $lumx-tabs-link-state-hover-theme-dark-background-color,
-                    'color': $lumx-tabs-link-state-hover-theme-dark-color,
-                    'border-color': $lumx-tabs-link-state-hover-theme-dark-border-color,
-                ),
-            ),
-            'state-active': (
-                'border': (
-                    'top': (
-                        'width': $lumx-tabs-link-state-active-border-top-width,
-                    ),
-                    'right': (
-                        'width': $lumx-tabs-link-state-active-border-right-width,
-                    ),
-                    'bottom': (
-                        'width': $lumx-tabs-link-state-active-border-bottom-width,
-                    ),
-                    'left': (
-                        'width': $lumx-tabs-link-state-active-border-left-width,
+                    'theme-dark': (
+                        'background-color': $lumx-tabs-link-emphasis-selected-state-default-theme-dark-background-color,
+                        'color': $lumx-tabs-link-emphasis-selected-state-default-theme-dark-color,
+                        'border-color': $lumx-tabs-link-emphasis-selected-state-default-theme-dark-border-color,
                     ),
                 ),
-                'theme-light': (
-                    'background-color': $lumx-tabs-link-state-active-theme-light-background-color,
-                    'color': $lumx-tabs-link-state-active-theme-light-color,
-                    'border-color': $lumx-tabs-link-state-active-theme-light-border-color,
-                ),
-                'theme-dark': (
-                    'background-color': $lumx-tabs-link-state-active-theme-dark-background-color,
-                    'color': $lumx-tabs-link-state-active-theme-dark-color,
-                    'border-color': $lumx-tabs-link-state-active-theme-dark-border-color,
-                ),
-            ),
-            'state-selected': (
-                'border': (
-                    'top': (
-                        'width': $lumx-tabs-link-state-selected-border-top-width,
+                'state-hover': (
+                    'border': (
+                        'top': (
+                            'width': $lumx-tabs-link-emphasis-selected-state-hover-border-top-width,
+                        ),
+                        'right': (
+                            'width': $lumx-tabs-link-emphasis-selected-state-hover-border-right-width,
+                        ),
+                        'bottom': (
+                            'width': $lumx-tabs-link-emphasis-selected-state-hover-border-bottom-width,
+                        ),
+                        'left': (
+                            'width': $lumx-tabs-link-emphasis-selected-state-hover-border-left-width,
+                        ),
                     ),
-                    'right': (
-                        'width': $lumx-tabs-link-state-selected-border-right-width,
+                    'theme-light': (
+                        'background-color': $lumx-tabs-link-emphasis-selected-state-hover-theme-light-background-color,
+                        'color': $lumx-tabs-link-emphasis-selected-state-hover-theme-light-color,
+                        'border-color': $lumx-tabs-link-emphasis-selected-state-hover-theme-light-border-color,
                     ),
-                    'bottom': (
-                        'width': $lumx-tabs-link-state-selected-border-bottom-width,
-                    ),
-                    'left': (
-                        'width': $lumx-tabs-link-state-selected-border-left-width,
+                    'theme-dark': (
+                        'background-color': $lumx-tabs-link-emphasis-selected-state-hover-theme-dark-background-color,
+                        'color': $lumx-tabs-link-emphasis-selected-state-hover-theme-dark-color,
+                        'border-color': $lumx-tabs-link-emphasis-selected-state-hover-theme-dark-border-color,
                     ),
                 ),
-                'theme-light': (
-                    'background-color': $lumx-tabs-link-state-selected-theme-light-background-color,
-                    'color': $lumx-tabs-link-state-selected-theme-light-color,
-                    'border-color': $lumx-tabs-link-state-selected-theme-light-border-color,
-                ),
-                'theme-dark': (
-                    'background-color': $lumx-tabs-link-state-selected-theme-dark-background-color,
-                    'color': $lumx-tabs-link-state-selected-theme-dark-color,
-                    'border-color': $lumx-tabs-link-state-selected-theme-dark-border-color,
+                'state-active': (
+                    'border': (
+                        'top': (
+                            'width': $lumx-tabs-link-emphasis-selected-state-active-border-top-width,
+                        ),
+                        'right': (
+                            'width': $lumx-tabs-link-emphasis-selected-state-active-border-right-width,
+                        ),
+                        'bottom': (
+                            'width': $lumx-tabs-link-emphasis-selected-state-active-border-bottom-width,
+                        ),
+                        'left': (
+                            'width': $lumx-tabs-link-emphasis-selected-state-active-border-left-width,
+                        ),
+                    ),
+                    'theme-light': (
+                        'background-color': $lumx-tabs-link-emphasis-selected-state-active-theme-light-background-color,
+                        'color': $lumx-tabs-link-emphasis-selected-state-active-theme-light-color,
+                        'border-color': $lumx-tabs-link-emphasis-selected-state-active-theme-light-border-color,
+                    ),
+                    'theme-dark': (
+                        'background-color': $lumx-tabs-link-emphasis-selected-state-active-theme-dark-background-color,
+                        'color': $lumx-tabs-link-emphasis-selected-state-active-theme-dark-color,
+                        'border-color': $lumx-tabs-link-emphasis-selected-state-active-theme-dark-border-color,
+                    ),
                 ),
             ),
         ),
