@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Message: add `icon` prop to customize the message icon.
+
 ## [1.0.23][] - 2021-08-27
 
 ### Added
