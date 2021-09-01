@@ -14,6 +14,8 @@ export interface MessageProps extends GenericProps {
     hasBackground?: boolean;
     /** Message variant. */
     kind?: Kind;
+    /** Message custom icon SVG path. */
+    icon?: string;
 }
 
 /**
@@ -44,7 +46,7 @@ const CONFIG = {
  * @return React element.
  */
 export const Message: Comp<MessageProps, HTMLDivElement> = forwardRef((props, ref) => {
-    const { children, className, hasBackground, kind, ...forwardedProps } = props;
+    const { children, className, hasBackground, kind, icon: customIcon, ...forwardedProps } = props;
     const { color, icon } = CONFIG[kind as Kind] || {};
 
     return (
@@ -60,7 +62,7 @@ export const Message: Comp<MessageProps, HTMLDivElement> = forwardRef((props, re
             )}
             {...forwardedProps}
         >
-            {icon && <Icon className="lumx-message__icon" icon={icon} size={Size.xs} />}
+            {(customIcon || icon) && <Icon className="lumx-message__icon" icon={customIcon || icon} size={Size.xs} />}
             <div className="lumx-message__text">{children}</div>
         </div>
     );
