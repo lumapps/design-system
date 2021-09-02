@@ -117,7 +117,7 @@
     }
 
     &--variant-icon {
-        border-radius: var(--lumx-button-variant-icon-border-radius);
+        border-radius: var(--lumx-material-button-variant-icon-border-radius, var(--lumx-button-border-radius));
     }
 
     &--color-light {
