@@ -2,7 +2,7 @@
     "material": {
         "button": {
             "text-transform": { "value": "none" },
-            "variant-icon-border-radius": {}
+            "variant-icon-border-radius": { "value": "50%" }
         },
         "checkbox": {
             "wrapper-size": { "value": "20px" },

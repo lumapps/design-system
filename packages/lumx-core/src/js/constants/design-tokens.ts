@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 13 Sep 2021 07:20:36 GMT
+ * Generated on Mon, 13 Sep 2021 12:45:36 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -869,6 +869,13 @@ export const DESIGN_TOKENS = {
                     category: 'material',
                     type: 'button',
                     item: 'text-transform',
+                },
+            },
+            'variant-icon-border-radius': {
+                attributes: {
+                    category: 'material',
+                    type: 'button',
+                    item: 'variant-icon-border-radius',
                 },
             },
         },

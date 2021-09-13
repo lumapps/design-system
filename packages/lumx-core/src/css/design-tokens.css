@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 13 Sep 2021 07:20:36 GMT
+ * Generated on Mon, 13 Sep 2021 12:45:36 GMT
  */
 
 :root {
@@ -178,6 +178,7 @@
     --lumx-button-emphasis-selected-state-active-theme-dark-color: #fff; /* Neutral light color */
     --lumx-button-emphasis-selected-state-active-theme-dark-border-color: transparent;
     --lumx-material-button-text-transform: none;
+    --lumx-material-button-variant-icon-border-radius: 50%;
     --lumx-material-checkbox-wrapper-size: 20px;
     --lumx-material-checkbox-control-size: 16px;
     --lumx-material-chip-size-m-height: 36px;
