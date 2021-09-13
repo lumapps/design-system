@@ -6,11 +6,11 @@
 
 @mixin lumx-typography($key, $type: 'interface') {
     @if $type == 'custom' {
-        font-family: var(--lumx-typography-style-custom-font-family);
-        font-size: var(--lumx-typography-style-custom-font-size);
-        font-style: var(--lumx-typography-style-custom-font-style);
-        font-weight: var(--lumx-typography-style-custom-font-weight);
-        line-height: var(--lumx-typography-style-custom-line-height);
+        font-family: var(--lumx-typography-custom-#{$key}-font-family, var(--lumx-typography-font-family));
+        font-size: var(--lumx-typography-custom-#{$key}-font-size);
+        font-style: var(--lumx-typography-custom-#{$key}-font-style);
+        font-weight: var(--lumx-typography-custom-#{$key}-font-weight);
+        line-height: var(--lumx-typography-custom-#{$key}-line-height);
     } @else if $type == 'interface' {
         font-size: map-get(map-get($lumx-typography-interface, $key), 'font-size');
         font-weight: map-get(map-get($lumx-typography-interface, $key), 'font-weight');
