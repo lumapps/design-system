@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Thu, 02 Sep 2021 08:36:03 GMT
+ * Generated on Mon, 13 Sep 2021 07:00:55 GMT
  */
 
 :root {
@@ -140,42 +140,42 @@
     --lumx-button-emphasis-low-state-active-theme-dark-border-color: transparent;
     --lumx-button-emphasis-selected-state-default-padding-horizontal: 16px;
     --lumx-button-emphasis-selected-state-default-border-width: 0;
-    --lumx-button-emphasis-selected-state-default-theme-light-background-color: var(--lumx-color-primary-L4);
+    --lumx-button-emphasis-selected-state-default-theme-light-background-color: var(--lumx-color-primary-L5);
     --lumx-button-emphasis-selected-state-default-theme-light-color: var(--lumx-color-primary-D2);
     --lumx-button-emphasis-selected-state-default-theme-light-border-color: transparent;
     --lumx-button-emphasis-selected-state-default-theme-dark-background-color: rgba(
         255,
         255,
         255,
-        0.8
-    ); /* Base light color with 80% opacity */
-    --lumx-button-emphasis-selected-state-default-theme-dark-color: rgba(0, 0, 0, 0.87); /* Neutral dark color */
+        0.6
+    ); /* Base light color with 60% opacity */
+    --lumx-button-emphasis-selected-state-default-theme-dark-color: #fff; /* Neutral light color */
     --lumx-button-emphasis-selected-state-default-theme-dark-border-color: transparent;
     --lumx-button-emphasis-selected-state-hover-padding-horizontal: 16px;
     --lumx-button-emphasis-selected-state-hover-border-width: 0;
-    --lumx-button-emphasis-selected-state-hover-theme-light-background-color: var(--lumx-color-primary-L3);
+    --lumx-button-emphasis-selected-state-hover-theme-light-background-color: var(--lumx-color-primary-L4);
     --lumx-button-emphasis-selected-state-hover-theme-light-color: var(--lumx-color-primary-D2);
     --lumx-button-emphasis-selected-state-hover-theme-light-border-color: transparent;
     --lumx-button-emphasis-selected-state-hover-theme-dark-background-color: rgba(
         255,
         255,
         255,
-        0.6
-    ); /* Base light color with 60% opacity */
-    --lumx-button-emphasis-selected-state-hover-theme-dark-color: rgba(0, 0, 0, 0.87); /* Neutral dark color */
+        0.4
+    ); /* Base light color with 40% opacity */
+    --lumx-button-emphasis-selected-state-hover-theme-dark-color: #fff; /* Neutral light color */
     --lumx-button-emphasis-selected-state-hover-theme-dark-border-color: transparent;
     --lumx-button-emphasis-selected-state-active-padding-horizontal: 16px;
     --lumx-button-emphasis-selected-state-active-border-width: 0;
-    --lumx-button-emphasis-selected-state-active-theme-light-background-color: var(--lumx-color-primary-L2);
+    --lumx-button-emphasis-selected-state-active-theme-light-background-color: var(--lumx-color-primary-L3);
     --lumx-button-emphasis-selected-state-active-theme-light-color: var(--lumx-color-primary-D2);
     --lumx-button-emphasis-selected-state-active-theme-light-border-color: transparent;
     --lumx-button-emphasis-selected-state-active-theme-dark-background-color: rgba(
         255,
         255,
         255,
-        0.4
-    ); /* Base light color with 40% opacity */
-    --lumx-button-emphasis-selected-state-active-theme-dark-color: rgba(0, 0, 0, 0.87); /* Neutral dark color */
+        0.2
+    ); /* Base light color with 20% opacity */
+    --lumx-button-emphasis-selected-state-active-theme-dark-color: #fff; /* Neutral light color */
     --lumx-button-emphasis-selected-state-active-theme-dark-border-color: transparent;
     --lumx-material-button-text-transform: none;
     --lumx-material-checkbox-wrapper-size: 20px;
@@ -212,6 +212,264 @@
     --lumx-material-text-field-input-content-font-size: 14px;
     --lumx-material-text-field-input-content-font-weight: 400;
     --lumx-material-text-field-input-content-line-height: 20px;
+    --lumx-navigation-item-padding-horizontal: 8px;
+    --lumx-navigation-item-min-height: 36px;
+    --lumx-navigation-item-border-radius: var(--lumx-border-radius);
+    --lumx-navigation-item-emphasis-low-state-default-border-top-width: 0;
+    --lumx-navigation-item-emphasis-low-state-default-border-right-width: 0;
+    --lumx-navigation-item-emphasis-low-state-default-border-bottom-width: 0;
+    --lumx-navigation-item-emphasis-low-state-default-border-left-width: 0;
+    --lumx-navigation-item-emphasis-low-state-default-theme-light-background-color: transparent;
+    --lumx-navigation-item-emphasis-low-state-default-theme-light-border-color: rgba(
+        0,
+        0,
+        0,
+        0.12
+    ); /* Base dark color with 12% opacity */
+    --lumx-navigation-item-emphasis-low-state-default-theme-light-icon-color: rgba(
+        0,
+        0,
+        0,
+        0.87
+    ); /* Neutral dark color */
+    --lumx-navigation-item-emphasis-low-state-default-theme-light-label-color: rgba(
+        0,
+        0,
+        0,
+        0.87
+    ); /* Neutral dark color */
+    --lumx-navigation-item-emphasis-low-state-default-theme-light-chevron-background-color: transparent;
+    --lumx-navigation-item-emphasis-low-state-default-theme-light-chevron-color: rgba(
+        0,
+        0,
+        0,
+        0.87
+    ); /* Neutral dark color */
+    --lumx-navigation-item-emphasis-low-state-default-theme-dark-background-color: transparent;
+    --lumx-navigation-item-emphasis-low-state-default-theme-dark-border-color: rgba(
+        255,
+        255,
+        255,
+        0.2
+    ); /* Base light color with 20% opacity */
+    --lumx-navigation-item-emphasis-low-state-default-theme-dark-icon-color: #fff; /* Neutral light color */
+    --lumx-navigation-item-emphasis-low-state-default-theme-dark-label-color: #fff; /* Neutral light color */
+    --lumx-navigation-item-emphasis-low-state-default-theme-dark-chevron-background-color: transparent;
+    --lumx-navigation-item-emphasis-low-state-default-theme-dark-chevron-color: #fff; /* Neutral light color */
+    --lumx-navigation-item-emphasis-low-state-hover-border-top-width: 0;
+    --lumx-navigation-item-emphasis-low-state-hover-border-right-width: 0;
+    --lumx-navigation-item-emphasis-low-state-hover-border-bottom-width: 0;
+    --lumx-navigation-item-emphasis-low-state-hover-border-left-width: 0;
+    --lumx-navigation-item-emphasis-low-state-hover-theme-light-background-color: rgba(
+        0,
+        0,
+        0,
+        0.12
+    ); /* Base dark color with 12% opacity */
+    --lumx-navigation-item-emphasis-low-state-hover-theme-light-border-color: rgba(
+        0,
+        0,
+        0,
+        0.12
+    ); /* Base dark color with 12% opacity */
+    --lumx-navigation-item-emphasis-low-state-hover-theme-light-icon-color: rgba(
+        0,
+        0,
+        0,
+        0.87
+    ); /* Neutral dark color */
+    --lumx-navigation-item-emphasis-low-state-hover-theme-light-label-color: rgba(
+        0,
+        0,
+        0,
+        0.87
+    ); /* Neutral dark color */
+    --lumx-navigation-item-emphasis-low-state-hover-theme-light-chevron-background-color: rgba(
+        0,
+        0,
+        0,
+        0.12
+    ); /* Base dark color with 12% opacity */
+    --lumx-navigation-item-emphasis-low-state-hover-theme-light-chevron-color: rgba(
+        0,
+        0,
+        0,
+        0.87
+    ); /* Neutral dark color */
+    --lumx-navigation-item-emphasis-low-state-hover-theme-dark-background-color: rgba(
+        255,
+        255,
+        255,
+        0.2
+    ); /* Base light color with 20% opacity */
+    --lumx-navigation-item-emphasis-low-state-hover-theme-dark-border-color: rgba(
+        255,
+        255,
+        255,
+        0.2
+    ); /* Base light color with 20% opacity */
+    --lumx-navigation-item-emphasis-low-state-hover-theme-dark-icon-color: #fff; /* Neutral light color */
+    --lumx-navigation-item-emphasis-low-state-hover-theme-dark-label-color: #fff; /* Neutral light color */
+    --lumx-navigation-item-emphasis-low-state-hover-theme-dark-chevron-background-color: rgba(
+        255,
+        255,
+        255,
+        0.2
+    ); /* Base light color with 20% opacity */
+    --lumx-navigation-item-emphasis-low-state-hover-theme-dark-chevron-color: #fff; /* Neutral light color */
+    --lumx-navigation-item-emphasis-low-state-active-border-top-width: 0;
+    --lumx-navigation-item-emphasis-low-state-active-border-right-width: 0;
+    --lumx-navigation-item-emphasis-low-state-active-border-bottom-width: 0;
+    --lumx-navigation-item-emphasis-low-state-active-border-left-width: 0;
+    --lumx-navigation-item-emphasis-low-state-active-theme-light-background-color: rgba(
+        0,
+        0,
+        0,
+        0.2
+    ); /* Base dark color with 20% opacity */
+    --lumx-navigation-item-emphasis-low-state-active-theme-light-border-color: rgba(
+        0,
+        0,
+        0,
+        0.12
+    ); /* Base dark color with 12% opacity */
+    --lumx-navigation-item-emphasis-low-state-active-theme-light-icon-color: rgba(
+        0,
+        0,
+        0,
+        0.87
+    ); /* Neutral dark color */
+    --lumx-navigation-item-emphasis-low-state-active-theme-light-label-color: rgba(
+        0,
+        0,
+        0,
+        0.87
+    ); /* Neutral dark color */
+    --lumx-navigation-item-emphasis-low-state-active-theme-light-chevron-background-color: rgba(
+        0,
+        0,
+        0,
+        0.2
+    ); /* Base dark color with 20% opacity */
+    --lumx-navigation-item-emphasis-low-state-active-theme-light-chevron-color: rgba(
+        0,
+        0,
+        0,
+        0.87
+    ); /* Neutral dark color */
+    --lumx-navigation-item-emphasis-low-state-active-theme-dark-background-color: rgba(
+        255,
+        255,
+        255,
+        0.4
+    ); /* Base light color with 40% opacity */
+    --lumx-navigation-item-emphasis-low-state-active-theme-dark-border-color: rgba(
+        255,
+        255,
+        255,
+        0.2
+    ); /* Base light color with 20% opacity */
+    --lumx-navigation-item-emphasis-low-state-active-theme-dark-icon-color: #fff; /* Neutral light color */
+    --lumx-navigation-item-emphasis-low-state-active-theme-dark-label-color: #fff; /* Neutral light color */
+    --lumx-navigation-item-emphasis-low-state-active-theme-dark-chevron-background-color: rgba(
+        255,
+        255,
+        255,
+        0.4
+    ); /* Base light color with 40% opacity */
+    --lumx-navigation-item-emphasis-low-state-active-theme-dark-chevron-color: #fff; /* Neutral light color */
+    --lumx-navigation-item-emphasis-selected-state-default-border-top-width: 0;
+    --lumx-navigation-item-emphasis-selected-state-default-border-right-width: 0;
+    --lumx-navigation-item-emphasis-selected-state-default-border-bottom-width: 0;
+    --lumx-navigation-item-emphasis-selected-state-default-border-left-width: 0;
+    --lumx-navigation-item-emphasis-selected-state-default-theme-light-background-color: var(--lumx-color-primary-L5);
+    --lumx-navigation-item-emphasis-selected-state-default-theme-light-border-color: var(--lumx-color-primary-N);
+    --lumx-navigation-item-emphasis-selected-state-default-theme-light-icon-color: var(--lumx-color-primary-D2);
+    --lumx-navigation-item-emphasis-selected-state-default-theme-light-label-color: var(--lumx-color-primary-D2);
+    --lumx-navigation-item-emphasis-selected-state-default-theme-light-chevron-background-color: transparent;
+    --lumx-navigation-item-emphasis-selected-state-default-theme-light-chevron-color: var(--lumx-color-primary-D2);
+    --lumx-navigation-item-emphasis-selected-state-default-theme-dark-background-color: rgba(
+        255,
+        255,
+        255,
+        0.6
+    ); /* Base light color with 60% opacity */
+    --lumx-navigation-item-emphasis-selected-state-default-theme-dark-border-color: rgba(
+        255,
+        255,
+        255,
+        0.2
+    ); /* Base light color with 20% opacity */
+    --lumx-navigation-item-emphasis-selected-state-default-theme-dark-icon-color: #fff; /* Neutral light color */
+    --lumx-navigation-item-emphasis-selected-state-default-theme-dark-label-color: #fff; /* Neutral light color */
+    --lumx-navigation-item-emphasis-selected-state-default-theme-dark-chevron-background-color: transparent;
+    --lumx-navigation-item-emphasis-selected-state-default-theme-dark-chevron-color: #fff; /* Neutral light color */
+    --lumx-navigation-item-emphasis-selected-state-hover-border-top-width: 0;
+    --lumx-navigation-item-emphasis-selected-state-hover-border-right-width: 0;
+    --lumx-navigation-item-emphasis-selected-state-hover-border-bottom-width: 0;
+    --lumx-navigation-item-emphasis-selected-state-hover-border-left-width: 0;
+    --lumx-navigation-item-emphasis-selected-state-hover-theme-light-background-color: var(--lumx-color-primary-L4);
+    --lumx-navigation-item-emphasis-selected-state-hover-theme-light-border-color: var(--lumx-color-primary-N);
+    --lumx-navigation-item-emphasis-selected-state-hover-theme-light-icon-color: var(--lumx-color-primary-D2);
+    --lumx-navigation-item-emphasis-selected-state-hover-theme-light-label-color: var(--lumx-color-primary-D2);
+    --lumx-navigation-item-emphasis-selected-state-hover-theme-light-chevron-background-color: var(
+        --lumx-color-primary-L4
+    );
+    --lumx-navigation-item-emphasis-selected-state-hover-theme-light-chevron-color: var(--lumx-color-primary-D2);
+    --lumx-navigation-item-emphasis-selected-state-hover-theme-dark-background-color: rgba(
+        255,
+        255,
+        255,
+        0.4
+    ); /* Base light color with 40% opacity */
+    --lumx-navigation-item-emphasis-selected-state-hover-theme-dark-border-color: rgba(
+        255,
+        255,
+        255,
+        0.2
+    ); /* Base light color with 20% opacity */
+    --lumx-navigation-item-emphasis-selected-state-hover-theme-dark-icon-color: #fff; /* Neutral light color */
+    --lumx-navigation-item-emphasis-selected-state-hover-theme-dark-label-color: #fff; /* Neutral light color */
+    --lumx-navigation-item-emphasis-selected-state-hover-theme-dark-chevron-background-color: rgba(
+        255,
+        255,
+        255,
+        0.4
+    ); /* Base light color with 40% opacity */
+    --lumx-navigation-item-emphasis-selected-state-hover-theme-dark-chevron-color: #fff; /* Neutral light color */
+    --lumx-navigation-item-emphasis-selected-state-active-border-top-width: 0;
+    --lumx-navigation-item-emphasis-selected-state-active-border-right-width: 0;
+    --lumx-navigation-item-emphasis-selected-state-active-border-bottom-width: 0;
+    --lumx-navigation-item-emphasis-selected-state-active-border-left-width: 0;
+    --lumx-navigation-item-emphasis-selected-state-active-theme-light-background-color: var(--lumx-color-primary-L3);
+    --lumx-navigation-item-emphasis-selected-state-active-theme-light-border-color: var(--lumx-color-primary-N);
+    --lumx-navigation-item-emphasis-selected-state-active-theme-light-icon-color: var(--lumx-color-primary-D2);
+    --lumx-navigation-item-emphasis-selected-state-active-theme-light-label-color: var(--lumx-color-primary-D2);
+    --lumx-navigation-item-emphasis-selected-state-active-theme-light-chevron-background-color: var(
+        --lumx-color-primary-L3
+    );
+    --lumx-navigation-item-emphasis-selected-state-active-theme-light-chevron-color: var(--lumx-color-primary-D2);
+    --lumx-navigation-item-emphasis-selected-state-active-theme-dark-background-color: rgba(
+        255,
+        255,
+        255,
+        0.2
+    ); /* Base light color with 20% opacity */
+    --lumx-navigation-item-emphasis-selected-state-active-theme-dark-border-color: rgba(
+        255,
+        255,
+        255,
+        0.2
+    ); /* Base light color with 20% opacity */
+    --lumx-navigation-item-emphasis-selected-state-active-theme-dark-icon-color: #fff; /* Neutral light color */
+    --lumx-navigation-item-emphasis-selected-state-active-theme-dark-label-color: #fff; /* Neutral light color */
+    --lumx-navigation-item-emphasis-selected-state-active-theme-dark-chevron-background-color: rgba(
+        255,
+        255,
+        255,
+        0.2
+    ); /* Base light color with 20% opacity */
+    --lumx-navigation-item-emphasis-selected-state-active-theme-dark-chevron-color: #fff; /* Neutral light color */
     --lumx-tabs-link-height: 48px;
     --lumx-tabs-link-border-radius: 0;
     --lumx-tabs-link-emphasis-low-state-default-border-top-width: 0;

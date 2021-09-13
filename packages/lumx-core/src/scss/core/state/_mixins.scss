@@ -48,13 +48,13 @@
 @mixin lumx-state-as-selected($state, $theme, $has-focus-inset: false) {
     @if $theme == lumx-base-const('theme', 'LIGHT') {
         @if $state == lumx-base-const('state', 'DEFAULT') {
-            background-color: lumx-color-variant('primary', 'L4');
+            background-color: lumx-color-variant('primary', 'L5');
             color: lumx-color-variant('primary', 'D2');
         } @else if $state == lumx-base-const('state', 'HOVER') {
-            background-color: lumx-color-variant('primary', 'L3');
+            background-color: lumx-color-variant('primary', 'L4');
             color: lumx-color-variant('primary', 'D2');
         } @else if $state == lumx-base-const('state', 'ACTIVE') {
-            background-color: lumx-color-variant('primary', 'L2');
+            background-color: lumx-color-variant('primary', 'L3');
             color: lumx-color-variant('primary', 'D2');
         } @else if $state == lumx-base-const('state', 'FOCUS') {
             @if $has-focus-inset == true {
@@ -65,14 +65,14 @@
         }
     } @else if $theme == lumx-base-const('theme', 'DARK') {
         @if $state == lumx-base-const('state', 'DEFAULT') {
-            background-color: lumx-color-variant('light', 'L2');
-            color: lumx-color-variant('dark', 'N');
-        } @else if $state == lumx-base-const('state', 'HOVER') {
             background-color: lumx-color-variant('light', 'L3');
-            color: lumx-color-variant('dark', 'N');
-        } @else if $state == lumx-base-const('state', 'ACTIVE') {
+            color: lumx-color-variant('light', 'N');
+        } @else if $state == lumx-base-const('state', 'HOVER') {
             background-color: lumx-color-variant('light', 'L4');
-            color: lumx-color-variant('dark', 'N');
+            color: lumx-color-variant('light', 'N');
+        } @else if $state == lumx-base-const('state', 'ACTIVE') {
+            background-color: lumx-color-variant('light', 'L5');
+            color: lumx-color-variant('light', 'N');
         } @else if $state == lumx-base-const('state', 'FOCUS') {
             @if $has-focus-inset == true {
                 box-shadow: inset 0 0 0 2px lumx-color-variant('light', 'L3');

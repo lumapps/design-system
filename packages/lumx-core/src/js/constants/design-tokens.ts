@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Thu, 02 Sep 2021 08:36:04 GMT
+ * Generated on Mon, 13 Sep 2021 07:00:55 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -699,7 +699,7 @@ export const DESIGN_TOKENS = {
                 'theme-dark': {
                     'background-color': {
                         version: '0.22',
-                        comment: 'Base light color with 80% opacity',
+                        comment: 'Base light color with 60% opacity',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-selected',
@@ -708,7 +708,7 @@ export const DESIGN_TOKENS = {
                     },
                     color: {
                         version: '0.22',
-                        comment: 'Neutral dark color',
+                        comment: 'Neutral light color',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-selected',
@@ -767,7 +767,7 @@ export const DESIGN_TOKENS = {
                 'theme-dark': {
                     'background-color': {
                         version: '0.22',
-                        comment: 'Base light color with 60% opacity',
+                        comment: 'Base light color with 40% opacity',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-selected',
@@ -776,7 +776,7 @@ export const DESIGN_TOKENS = {
                     },
                     color: {
                         version: '0.22',
-                        comment: 'Neutral dark color',
+                        comment: 'Neutral light color',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-selected',
@@ -835,7 +835,7 @@ export const DESIGN_TOKENS = {
                 'theme-dark': {
                     'background-color': {
                         version: '0.22',
-                        comment: 'Base light color with 40% opacity',
+                        comment: 'Base light color with 20% opacity',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-selected',
@@ -844,7 +844,7 @@ export const DESIGN_TOKENS = {
                     },
                     color: {
                         version: '0.22',
-                        comment: 'Neutral dark color',
+                        comment: 'Neutral light color',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-selected',
@@ -1143,6 +1143,903 @@ export const DESIGN_TOKENS = {
                             category: 'material',
                             type: 'text-field',
                             item: 'input',
+                        },
+                    },
+                },
+            },
+        },
+    },
+    navigation: {
+        item: {
+            padding: {
+                horizontal: {
+                    attributes: {
+                        category: 'navigation',
+                        type: 'item',
+                        item: 'padding',
+                    },
+                },
+            },
+            'min-height': {
+                attributes: {
+                    category: 'navigation',
+                    type: 'item',
+                    item: 'min-height',
+                },
+            },
+            'border-radius': {
+                attributes: {
+                    category: 'navigation',
+                    type: 'item',
+                    item: 'border-radius',
+                },
+            },
+            'emphasis-low': {
+                'state-default': {
+                    border: {
+                        top: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                        right: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                        bottom: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                        left: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                    },
+                    'theme-light': {
+                        'background-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'border-color': {
+                            version: '0.22',
+                            comment: 'Base dark color with 12% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'icon-color': {
+                            version: '0.22',
+                            comment: 'Neutral dark color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'label-color': {
+                            version: '0.22',
+                            comment: 'Neutral dark color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'chevron-background-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'chevron-color': {
+                            version: '0.22',
+                            comment: 'Neutral dark color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                    },
+                    'theme-dark': {
+                        'background-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'border-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 20% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'icon-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'label-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'chevron-background-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'chevron-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                    },
+                },
+                'state-hover': {
+                    border: {
+                        top: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                        right: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                        bottom: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                        left: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                    },
+                    'theme-light': {
+                        'background-color': {
+                            version: '0.22',
+                            comment: 'Base dark color with 12% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'border-color': {
+                            version: '0.22',
+                            comment: 'Base dark color with 12% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'icon-color': {
+                            version: '0.22',
+                            comment: 'Neutral dark color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'label-color': {
+                            version: '0.22',
+                            comment: 'Neutral dark color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'chevron-background-color': {
+                            version: '0.22',
+                            comment: 'Base dark color with 12% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'chevron-color': {
+                            version: '0.22',
+                            comment: 'Neutral dark color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                    },
+                    'theme-dark': {
+                        'background-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 20% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'border-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 20% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'icon-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'label-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'chevron-background-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 20% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'chevron-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                    },
+                },
+                'state-active': {
+                    border: {
+                        top: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                        right: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                        bottom: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                        left: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                    },
+                    'theme-light': {
+                        'background-color': {
+                            version: '0.22',
+                            comment: 'Base dark color with 20% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'border-color': {
+                            version: '0.22',
+                            comment: 'Base dark color with 12% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'icon-color': {
+                            version: '0.22',
+                            comment: 'Neutral dark color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'label-color': {
+                            version: '0.22',
+                            comment: 'Neutral dark color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'chevron-background-color': {
+                            version: '0.22',
+                            comment: 'Base dark color with 20% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'chevron-color': {
+                            version: '0.22',
+                            comment: 'Neutral dark color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                    },
+                    'theme-dark': {
+                        'background-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 40% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'border-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 20% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'icon-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'label-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'chevron-background-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 40% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'chevron-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                    },
+                },
+            },
+            'emphasis-selected': {
+                'state-default': {
+                    border: {
+                        top: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                        right: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                        bottom: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                        left: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                    },
+                    'theme-light': {
+                        'background-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'border-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'icon-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'label-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'chevron-background-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'chevron-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                    },
+                    'theme-dark': {
+                        'background-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 60% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'border-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 20% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'icon-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'label-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'chevron-background-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'chevron-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                    },
+                },
+                'state-hover': {
+                    border: {
+                        top: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                        right: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                        bottom: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                        left: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                    },
+                    'theme-light': {
+                        'background-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'border-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'icon-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'label-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'chevron-background-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'chevron-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                    },
+                    'theme-dark': {
+                        'background-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 40% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'border-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 20% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'icon-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'label-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'chevron-background-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 40% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'chevron-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                    },
+                },
+                'state-active': {
+                    border: {
+                        top: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                        right: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                        bottom: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                        left: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                    },
+                    'theme-light': {
+                        'background-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'border-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'icon-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'label-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'chevron-background-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'chevron-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                    },
+                    'theme-dark': {
+                        'background-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 20% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'border-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 20% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'icon-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'label-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'chevron-background-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 20% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'chevron-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
                         },
                     },
                 },

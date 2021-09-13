@@ -159,17 +159,33 @@
                 },
                 "border-width": { "value": "0" },
                 "theme-light": {
+                    "background-color": { "value": "var(--lumx-color-primary-L5)" },
+                    "color": { "value": "var(--lumx-color-primary-D2)" },
+                    "border-color": { "value": "transparent" }
+                },
+                "theme-dark": {
+                    "background-color": "{color.light.L3}",
+                    "color": "{color.light.N}",
+                    "border-color": { "value": "transparent" }
+                }
+            },
+            "state-hover": {
+                "padding": {
+                    "horizontal": { "value": "{spacing.unit.big.value}" }
+                },
+                "border-width": { "value": "0" },
+                "theme-light": {
                     "background-color": { "value": "var(--lumx-color-primary-L4)" },
                     "color": { "value": "var(--lumx-color-primary-D2)" },
                     "border-color": { "value": "transparent" }
                 },
                 "theme-dark": {
-                    "background-color": "{color.light.L2}",
-                    "color": "{color.dark.N}",
+                    "background-color": "{color.light.L4}",
+                    "color": "{color.light.N}",
                     "border-color": { "value": "transparent" }
                 }
             },
-            "state-hover": {
+            "state-active": {
                 "padding": {
                     "horizontal": { "value": "{spacing.unit.big.value}" }
                 },
@@ -180,24 +196,8 @@
                     "border-color": { "value": "transparent" }
                 },
                 "theme-dark": {
-                    "background-color": "{color.light.L3}",
-                    "color": "{color.dark.N}",
-                    "border-color": { "value": "transparent" }
-                }
-            },
-            "state-active": {
-                "padding": {
-                    "horizontal": { "value": "{spacing.unit.big.value}" }
-                },
-                "border-width": { "value": "0" },
-                "theme-light": {
-                    "background-color": { "value": "var(--lumx-color-primary-L2)" },
-                    "color": { "value": "var(--lumx-color-primary-D2)" },
-                    "border-color": { "value": "transparent" }
-                },
-                "theme-dark": {
-                    "background-color": "{color.light.L4}",
-                    "color": "{color.dark.N}",
+                    "background-color": "{color.light.L5}",
+                    "color": "{color.light.N}",
                     "border-color": { "value": "transparent" }
                 }
             }
