@@ -7,11 +7,11 @@
 
     &__links {
         #{$self}--theme-light & {
-            @include lumx-tabs-links(lumx-base-const('theme', 'LIGHT'));
+            @include lumx-tabs-links;
         }
 
         #{$self}--theme-dark & {
-            @include lumx-tabs-links(lumx-base-const('theme', 'DARK'));
+            @include lumx-tabs-links;
         }
     }
 
