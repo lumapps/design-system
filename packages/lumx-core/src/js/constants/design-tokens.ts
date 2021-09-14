@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 14 Sep 2021 07:17:45 GMT
+ * Generated on Tue, 14 Sep 2021 08:34:49 GMT
  */
 
 export const DESIGN_TOKENS = {

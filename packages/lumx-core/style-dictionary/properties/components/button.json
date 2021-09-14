@@ -105,7 +105,7 @@
         "emphasis-low": {
             "state-default": {
                 "padding": {
-                    "horizontal": { "value": "{spacing.unit.big.value}" }
+                    "horizontal": { "value": "{spacing.unit.regular.value}" }
                 },
                 "border-width": { "value": "0" },
                 "theme-light": {
@@ -121,7 +121,7 @@
             },
             "state-hover": {
                 "padding": {
-                    "horizontal": { "value": "{spacing.unit.big.value}" }
+                    "horizontal": { "value": "{spacing.unit.regular.value}" }
                 },
                 "border-width": { "value": "0" },
                 "theme-light": {
@@ -137,7 +137,7 @@
             },
             "state-active": {
                 "padding": {
-                    "horizontal": { "value": "{spacing.unit.big.value}" }
+                    "horizontal": { "value": "{spacing.unit.regular.value}" }
                 },
                 "border-width": { "value": "0" },
                 "theme-light": {
