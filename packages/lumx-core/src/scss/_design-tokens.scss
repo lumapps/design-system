@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 13 Sep 2021 12:45:36 GMT
+ * Generated on Tue, 14 Sep 2021 07:17:45 GMT
  */
 
 $lumx-button-height: 36px !default;
@@ -919,6 +919,10 @@ $lumx-typography-custom-quote-font-size: 16px !default;
 $lumx-typography-custom-quote-font-weight: 300 !default;
 $lumx-typography-custom-quote-font-style: italic !default;
 $lumx-typography-custom-quote-line-height: 24px !default;
+$lumx-typography-custom-publish-info-font-family: var(--lumx-typography-font-family) !default;
+$lumx-typography-custom-publish-info-font-size: 14px !default;
+$lumx-typography-custom-publish-info-font-weight: 400 !default;
+$lumx-typography-custom-publish-info-line-height: 20px !default;
 $lumx-typography-custom-button-size-m-font-family: var(--lumx-typography-font-family) !default;
 $lumx-typography-custom-button-size-m-font-size: 14px !default;
 $lumx-typography-custom-button-size-m-font-weight: 700 !default;
@@ -2018,6 +2022,12 @@ $lumx-design-tokens: (
                 'font-weight': $lumx-typography-custom-quote-font-weight,
                 'font-style': $lumx-typography-custom-quote-font-style,
                 'line-height': $lumx-typography-custom-quote-line-height,
+            ),
+            'publish-info': (
+                'font-family': $lumx-typography-custom-publish-info-font-family,
+                'font-size': $lumx-typography-custom-publish-info-font-size,
+                'font-weight': $lumx-typography-custom-publish-info-font-weight,
+                'line-height': $lumx-typography-custom-publish-info-line-height,
             ),
             'button': (
                 'size-m': (

@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 13 Sep 2021 12:45:36 GMT
+ * Generated on Tue, 14 Sep 2021 07:17:45 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -5465,6 +5465,36 @@ export const DESIGN_TOKENS = {
                         category: 'typography',
                         type: 'custom',
                         item: 'quote',
+                    },
+                },
+            },
+            'publish-info': {
+                'font-family': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'publish-info',
+                    },
+                },
+                'font-size': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'publish-info',
+                    },
+                },
+                'font-weight': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'publish-info',
+                    },
+                },
+                'line-height': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'publish-info',
                     },
                 },
             },

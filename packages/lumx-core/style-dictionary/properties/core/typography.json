@@ -112,6 +112,12 @@
                 "font-style": { "value": "italic" },
                 "line-height": { "value": "24px" }
             },
+            "publish-info": {
+                "font-family": { "value": "var(--lumx-typography-font-family)" },
+                "font-size": { "value": "14px" },
+                "font-weight": { "value": "400" },
+                "line-height": { "value": "20px" }
+            },
             "button": {
                 "size-m": {
                     "font-family": { "value": "var(--lumx-typography-font-family)" },
