@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Dialog/Lightbox: Fix unexpected scroll to top when closing a dialog or lightbox.
+
 ## [2.0.0][] - 2021-09-01
 
 ### Added
