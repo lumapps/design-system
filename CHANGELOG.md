@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   Dialog/Lightbox: Fix unexpected scroll to top when closing a dialog or lightbox.
+-   useInfiniteScroll: Add an error margin of 5px for triggering the infinite scroll so edge cases browser sizes also work.
 
 ## [2.0.0][] - 2021-09-01
 
