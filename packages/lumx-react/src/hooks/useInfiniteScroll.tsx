@@ -7,6 +7,9 @@ type useInfiniteScrollType = (
 ) => void;
 type EventCallback = (evt?: Event) => void;
 
+// The error margin in px we want to have for triggering infinite scroll
+const SCROLL_TRIGGER_MARGIN = 5;
+
 /**
  * Listen to clicks away from a given element and callback the passed in function.
  *
@@ -14,14 +17,22 @@ type EventCallback = (evt?: Event) => void;
  * @param  [callback]        A callback function to call when the bottom of the reference element is reached.
  * @param  [callbackOnMount] A callback function to call when the component is mounted.
  */
-export const useInfiniteScroll: useInfiniteScrollType = (ref, callback, callbackOnMount = false) => {
+export const useInfiniteScroll: useInfiniteScrollType = (
+    ref,
+    callback,
+    callbackOnMount = false,
+    scrollTriggerMargin = SCROLL_TRIGGER_MARGIN,
+) => {
     useEffect(() => {
         const { current } = ref;
         if (!callback || !current) {
             return undefined;
         }
 
-        const isAtBottom = () => Boolean(current && current.scrollTop + current.clientHeight >= current.scrollHeight);
+        const isAtBottom = () =>
+            Boolean(
+                current && current.scrollHeight - (current.scrollTop + current.clientHeight) <= scrollTriggerMargin,
+            );
 
         const onScroll = (e?: Event): void => {
             if (isAtBottom()) {
@@ -39,7 +50,7 @@ export const useInfiniteScroll: useInfiniteScrollType = (ref, callback, callback
             current.removeEventListener('scroll', onScroll);
             current.removeEventListener('resize', onScroll);
         };
-    }, [ref, callback]);
+    }, [ref, callback, scrollTriggerMargin]);
 
     useEffect(() => {
         if (callback && callbackOnMount) {
