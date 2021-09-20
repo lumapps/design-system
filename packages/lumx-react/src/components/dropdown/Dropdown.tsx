@@ -149,6 +149,7 @@ export const Dropdown: Comp<DropdownProps, HTMLDivElement> = forwardRef((props, 
             {...forwardedProps}
             anchorRef={anchorRef}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))}
+            elevation={0 as any}
             closeOnClickAway={closeOnClickAway}
             closeOnEscape={closeOnEscape}
             fitToAnchorWidth={fitToAnchorWidth}
