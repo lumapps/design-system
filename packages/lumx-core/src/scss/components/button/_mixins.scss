@@ -61,17 +61,21 @@
         }
     }
 
-    @if $size == lumx-base-const('size', 'M') {
-        padding: 0 var(--lumx-button-#{$emphasis}-state-default-padding-horizontal);
-    } @else if $size == lumx-base-const('size', 'S') {
-        padding: 0 calc(var(--lumx-button-#{$emphasis}-state-default-padding-horizontal) / 1.5);
+    @if $variant == 'button' {
+        @if $size == lumx-base-const('size', 'M') {
+            padding: 0 var(--lumx-button-#{$emphasis}-state-default-padding-horizontal);
+        } @else if $size == lumx-base-const('size', 'S') {
+            padding: 0 calc(var(--lumx-button-#{$emphasis}-state-default-padding-horizontal) / 1.5);
+        }
     }
 
     &:hover {
-        @if $size == lumx-base-const('size', 'M') {
-            padding: 0 var(--lumx-button-#{$emphasis}-state-hover-padding-horizontal);
-        } @else if $size == lumx-base-const('size', 'S') {
-            padding: 0 calc(var(--lumx-button-#{$emphasis}-state-hover-padding-horizontal) / 1.5);
+        @if $variant == 'button' {
+            @if $size == lumx-base-const('size', 'M') {
+                padding: 0 var(--lumx-button-#{$emphasis}-state-hover-padding-horizontal);
+            } @else if $size == lumx-base-const('size', 'S') {
+                padding: 0 calc(var(--lumx-button-#{$emphasis}-state-hover-padding-horizontal) / 1.5);
+            }
         }
 
         &::before {
@@ -80,10 +84,12 @@
     }
 
     &:active {
-        @if $size == lumx-base-const('size', 'M') {
-            padding: 0 var(--lumx-button-#{$emphasis}-state-active-padding-horizontal);
-        } @else if $size == lumx-base-const('size', 'S') {
-            padding: 0 calc(var(--lumx-button-#{$emphasis}-state-active-padding-horizontal) / 1.5);
+        @if $variant == 'button' {
+            @if $size == lumx-base-const('size', 'M') {
+                padding: 0 var(--lumx-button-#{$emphasis}-state-active-padding-horizontal);
+            } @else if $size == lumx-base-const('size', 'S') {
+                padding: 0 calc(var(--lumx-button-#{$emphasis}-state-active-padding-horizontal) / 1.5);
+            }
         }
 
         &::before {
