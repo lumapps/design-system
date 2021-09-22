@@ -18,6 +18,7 @@ import {
     partitionMulti,
 } from '@lumx/react/utils';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
+import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
 import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
 import { useDisableBodyScroll } from '@lumx/react/hooks/useDisableBodyScroll';
@@ -129,13 +130,18 @@ export const Dialog: Comp<DialogProps, HTMLDivElement> = forwardRef((props, ref)
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const wrapperRef = useRef<HTMLDivElement>(null);
-
+    /**
+     * Since the `contentRef` comes from the parent and is optional,
+     * we need to create a stable contentRef that will always be available.
+     */
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const localContentRef = useRef<HTMLDivElement>(null);
     // Handle focus trap.
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useFocusTrap(wrapperRef.current, focusElement?.current);
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    useDisableBodyScroll(isOpen && wrapperRef.current);
+    useDisableBodyScroll(isOpen && localContentRef.current);
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [sentinelTop, setSentinelTop] = useState<Element | null>(null);
@@ -203,7 +209,7 @@ export const Dialog: Comp<DialogProps, HTMLDivElement> = forwardRef((props, ref)
                                   </header>
                               )}
 
-                              <div ref={contentRef} className={`${CLASSNAME}__content`}>
+                              <div ref={mergeRefs(contentRef, localContentRef)} className={`${CLASSNAME}__content`}>
                                   <div
                                       className={`${CLASSNAME}__sentinel ${CLASSNAME}__sentinel--top`}
                                       ref={setSentinelTop}
