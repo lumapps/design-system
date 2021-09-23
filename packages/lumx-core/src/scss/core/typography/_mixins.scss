@@ -12,8 +12,9 @@
         font-weight: var(--lumx-typography-custom-#{$key}-font-weight);
         line-height: var(--lumx-typography-custom-#{$key}-line-height);
     } @else if $type == 'interface' {
+        font-family: var(--lumx-typography-font-family);
         font-size: map-get(map-get($lumx-typography-interface, $key), 'font-size');
-        font-weight: map-get(map-get($lumx-typography-interface, $key), 'font-weight');
+        font-weight: var(--lumx-typography-interface-#{$key}-font-weight);
         line-height: map-get(map-get($lumx-typography-interface, $key), 'line-height');
     }
 

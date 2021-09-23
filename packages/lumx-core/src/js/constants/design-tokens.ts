@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 21 Sep 2021 07:58:47 GMT
+ * Generated on Thu, 23 Sep 2021 06:47:16 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -4942,6 +4942,29 @@ export const DESIGN_TOKENS = {
             attributes: {
                 category: 'typography',
                 type: 'font-family',
+            },
+        },
+        'font-weight': {
+            regular: {
+                attributes: {
+                    category: 'typography',
+                    type: 'font-weight',
+                    item: 'regular',
+                },
+            },
+            bold: {
+                attributes: {
+                    category: 'typography',
+                    type: 'font-weight',
+                    item: 'bold',
+                },
+            },
+            light: {
+                attributes: {
+                    category: 'typography',
+                    type: 'font-weight',
+                    item: 'light',
+                },
             },
         },
         interface: {

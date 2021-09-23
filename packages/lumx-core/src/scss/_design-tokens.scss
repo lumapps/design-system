@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 21 Sep 2021 07:58:47 GMT
+ * Generated on Thu, 23 Sep 2021 06:47:16 GMT
  */
 
 $lumx-button-height: 36px !default;
@@ -186,10 +186,10 @@ $lumx-material-chip-size-s-height: 24px !default;
 $lumx-material-chip-size-s-border-radius: 12px !default;
 $lumx-material-chip-size-s-padding-vertical: 12px !default;
 $lumx-material-input-helper-font-size: 12px !default;
-$lumx-material-input-helper-font-weight: 400 !default;
+$lumx-material-input-helper-font-weight: var(--lumx-typography-font-weight-regular) !default;
 $lumx-material-input-helper-line-height: 16px !default;
 $lumx-material-input-label-font-size: 14px !default;
-$lumx-material-input-label-font-weight: 400 !default;
+$lumx-material-input-label-font-weight: var(--lumx-typography-font-weight-regular) !default;
 $lumx-material-input-label-line-height: 20px !default;
 $lumx-material-progress-bounce: block !default;
 $lumx-material-progress-rotate: none !default;
@@ -206,10 +206,10 @@ $lumx-material-text-field-padding-top: 0 !default;
 $lumx-material-text-field-padding-bottom: 0 !default;
 $lumx-material-text-field-header-wrapper-margin-bottom: 8px !default;
 $lumx-material-text-field-header-label-font-size: 14px !default;
-$lumx-material-text-field-header-label-font-weight: 400 !default;
+$lumx-material-text-field-header-label-font-weight: var(--lumx-typography-font-weight-regular) !default;
 $lumx-material-text-field-header-label-line-height: 20px !default;
 $lumx-material-text-field-input-content-font-size: 14px !default;
-$lumx-material-text-field-input-content-font-weight: 400 !default;
+$lumx-material-text-field-input-content-font-weight: var(--lumx-typography-font-weight-regular) !default;
 $lumx-material-text-field-input-content-line-height: 20px !default;
 $lumx-navigation-item-padding-horizontal: 8px !default;
 $lumx-navigation-item-min-height: 36px !default;
@@ -850,84 +850,87 @@ $lumx-spacing-unit-big: 16px !default;
 $lumx-spacing-unit-huge: 24px !default;
 $lumx-typography-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Fira Sans',
     'Droid Sans', 'Helvetica Neue', sans-serif !default;
+$lumx-typography-font-weight-regular: 400 !default;
+$lumx-typography-font-weight-bold: 700 !default;
+$lumx-typography-font-weight-light: 300 !default;
 $lumx-typography-interface-display1-font-size: 34px !default;
-$lumx-typography-interface-display1-font-weight: 700 !default;
+$lumx-typography-interface-display1-font-weight: var(--lumx-typography-font-weight-bold) !default;
 $lumx-typography-interface-display1-line-height: 40px !default;
 $lumx-typography-interface-headline-font-size: 24px !default;
-$lumx-typography-interface-headline-font-weight: 700 !default;
+$lumx-typography-interface-headline-font-weight: var(--lumx-typography-font-weight-bold) !default;
 $lumx-typography-interface-headline-line-height: 32px !default;
 $lumx-typography-interface-title-font-size: 20px !default;
-$lumx-typography-interface-title-font-weight: 700 !default;
+$lumx-typography-interface-title-font-weight: var(--lumx-typography-font-weight-bold) !default;
 $lumx-typography-interface-title-line-height: 30px !default;
 $lumx-typography-interface-subtitle2-font-size: 16px !default;
-$lumx-typography-interface-subtitle2-font-weight: 700 !default;
+$lumx-typography-interface-subtitle2-font-weight: var(--lumx-typography-font-weight-bold) !default;
 $lumx-typography-interface-subtitle2-line-height: 24px !default;
 $lumx-typography-interface-subtitle1-font-size: 14px !default;
-$lumx-typography-interface-subtitle1-font-weight: 700 !default;
+$lumx-typography-interface-subtitle1-font-weight: var(--lumx-typography-font-weight-bold) !default;
 $lumx-typography-interface-subtitle1-line-height: 20px !default;
 $lumx-typography-interface-body2-font-size: 16px !default;
-$lumx-typography-interface-body2-font-weight: 400 !default;
+$lumx-typography-interface-body2-font-weight: var(--lumx-typography-font-weight-regular) !default;
 $lumx-typography-interface-body2-line-height: 24px !default;
 $lumx-typography-interface-body1-font-size: 14px !default;
-$lumx-typography-interface-body1-font-weight: 400 !default;
+$lumx-typography-interface-body1-font-weight: var(--lumx-typography-font-weight-regular) !default;
 $lumx-typography-interface-body1-line-height: 20px !default;
 $lumx-typography-interface-caption-font-size: 12px !default;
-$lumx-typography-interface-caption-font-weight: 400 !default;
+$lumx-typography-interface-caption-font-weight: var(--lumx-typography-font-weight-regular) !default;
 $lumx-typography-interface-caption-line-height: 16px !default;
 $lumx-typography-interface-overline-font-size: 10px !default;
-$lumx-typography-interface-overline-font-weight: 700 !default;
+$lumx-typography-interface-overline-font-weight: var(--lumx-typography-font-weight-bold) !default;
 $lumx-typography-interface-overline-line-height: 12px !default;
 $lumx-typography-custom-title1-font-family: var(--lumx-typography-font-family) !default;
 $lumx-typography-custom-title1-font-size: 40px !default;
-$lumx-typography-custom-title1-font-weight: 700 !default;
+$lumx-typography-custom-title1-font-weight: var(--lumx-typography-font-weight-bold) !default;
 $lumx-typography-custom-title1-line-height: 50px !default;
 $lumx-typography-custom-title2-font-family: var(--lumx-typography-font-family) !default;
 $lumx-typography-custom-title2-font-size: 30px !default;
-$lumx-typography-custom-title2-font-weight: 700 !default;
+$lumx-typography-custom-title2-font-weight: var(--lumx-typography-font-weight-bold) !default;
 $lumx-typography-custom-title2-line-height: 40px !default;
 $lumx-typography-custom-title3-font-family: var(--lumx-typography-font-family) !default;
 $lumx-typography-custom-title3-font-size: 24px !default;
-$lumx-typography-custom-title3-font-weight: 700 !default;
+$lumx-typography-custom-title3-font-weight: var(--lumx-typography-font-weight-bold) !default;
 $lumx-typography-custom-title3-line-height: 32px !default;
 $lumx-typography-custom-title4-font-family: var(--lumx-typography-font-family) !default;
 $lumx-typography-custom-title4-font-size: 20px !default;
-$lumx-typography-custom-title4-font-weight: 700 !default;
+$lumx-typography-custom-title4-font-weight: var(--lumx-typography-font-weight-bold) !default;
 $lumx-typography-custom-title4-line-height: 30px !default;
 $lumx-typography-custom-title5-font-family: var(--lumx-typography-font-family) !default;
 $lumx-typography-custom-title5-font-size: 16px !default;
-$lumx-typography-custom-title5-font-weight: 700 !default;
+$lumx-typography-custom-title5-font-weight: var(--lumx-typography-font-weight-bold) !default;
 $lumx-typography-custom-title5-line-height: 24px !default;
 $lumx-typography-custom-title6-font-family: var(--lumx-typography-font-family) !default;
 $lumx-typography-custom-title6-font-size: 14px !default;
-$lumx-typography-custom-title6-font-weight: 700 !default;
+$lumx-typography-custom-title6-font-weight: var(--lumx-typography-font-weight-bold) !default;
 $lumx-typography-custom-title6-line-height: 20px !default;
 $lumx-typography-custom-intro-font-family: var(--lumx-typography-font-family) !default;
 $lumx-typography-custom-intro-font-size: 18px !default;
-$lumx-typography-custom-intro-font-weight: 700 !default;
+$lumx-typography-custom-intro-font-weight: var(--lumx-typography-font-weight-bold) !default;
 $lumx-typography-custom-intro-line-height: 30px !default;
 $lumx-typography-custom-body-large-font-family: var(--lumx-typography-font-family) !default;
 $lumx-typography-custom-body-large-font-size: 16px !default;
-$lumx-typography-custom-body-large-font-weight: 400 !default;
+$lumx-typography-custom-body-large-font-weight: var(--lumx-typography-font-weight-regular) !default;
 $lumx-typography-custom-body-large-line-height: 24px !default;
 $lumx-typography-custom-body-font-family: var(--lumx-typography-font-family) !default;
 $lumx-typography-custom-body-font-size: 14px !default;
-$lumx-typography-custom-body-font-weight: 400 !default;
+$lumx-typography-custom-body-font-weight: var(--lumx-typography-font-weight-regular) !default;
 $lumx-typography-custom-body-line-height: 20px !default;
 $lumx-typography-custom-quote-font-family: var(--lumx-typography-font-family) !default;
 $lumx-typography-custom-quote-font-size: 16px !default;
-$lumx-typography-custom-quote-font-weight: 300 !default;
+$lumx-typography-custom-quote-font-weight: var(--lumx-typography-font-weight-light) !default;
 $lumx-typography-custom-quote-font-style: italic !default;
 $lumx-typography-custom-quote-line-height: 24px !default;
 $lumx-typography-custom-publish-info-font-family: var(--lumx-typography-font-family) !default;
 $lumx-typography-custom-publish-info-font-size: 14px !default;
-$lumx-typography-custom-publish-info-font-weight: 400 !default;
+$lumx-typography-custom-publish-info-font-weight: var(--lumx-typography-font-weight-regular) !default;
 $lumx-typography-custom-publish-info-line-height: 20px !default;
 $lumx-typography-custom-button-size-m-font-family: var(--lumx-typography-font-family) !default;
 $lumx-typography-custom-button-size-m-font-size: 14px !default;
-$lumx-typography-custom-button-size-m-font-weight: 700 !default;
+$lumx-typography-custom-button-size-m-font-weight: var(--lumx-typography-font-weight-bold) !default;
 $lumx-typography-custom-button-size-s-font-family: var(--lumx-typography-font-family) !default;
 $lumx-typography-custom-button-size-s-font-size: 12px !default;
-$lumx-typography-custom-button-size-s-font-weight: 700 !default;
+$lumx-typography-custom-button-size-s-font-weight: var(--lumx-typography-font-weight-bold) !default;
 
 $lumx-design-tokens: (
     'button': (
@@ -1913,6 +1916,11 @@ $lumx-design-tokens: (
     ),
     'typography': (
         'font-family': $lumx-typography-font-family,
+        'font-weight': (
+            'regular': $lumx-typography-font-weight-regular,
+            'bold': $lumx-typography-font-weight-bold,
+            'light': $lumx-typography-font-weight-light,
+        ),
         'interface': (
             'display1': (
                 'font-size': $lumx-typography-interface-display1-font-size,
