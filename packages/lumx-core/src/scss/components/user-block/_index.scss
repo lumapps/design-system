@@ -39,14 +39,7 @@
     &__name {
         outline: none;
 
-        #{$self}--size-s & {
-            @include lumx-typography('caption');
-        }
-
-        #{$self}--size-m &,
-        #{$self}--size-l & {
-            @include lumx-typography('body1');
-        }
+        @include lumx-typography('subtitle1');
 
         #{$self}--orientation-vertical & {
             text-align: center;
@@ -87,7 +80,7 @@
     }
 
     &__field {
-        @include lumx-typography('caption');
+        @include lumx-typography('body1');
 
         #{$self}--size-m & {
             &::after {
