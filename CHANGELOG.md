@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.3][] - 2021-10-04
+
 ### Added
 
 -   New `wide` 16/9 aspect ratio for `Thumbnail`, `Uploader` and `SkeletonRectangle`.
@@ -1220,3 +1222,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [2.0.1]: https://github.com/lumapps/design-system/tree/v2.0.1
 [unreleased]: https://github.com/lumapps/design-system/compare/v2.0.2...HEAD
 [2.0.2]: https://github.com/lumapps/design-system/tree/v2.0.2
+[unreleased]: https://github.com/lumapps/design-system/compare/v2.0.3...HEAD
+[2.0.3]: https://github.com/lumapps/design-system/tree/v2.0.3
