@@ -15,7 +15,7 @@ export type SkeletonRectangleVariant = ValueOf<typeof SkeletonRectangleVariant>;
  */
 export interface SkeletonRectangleProps extends GenericProps {
     /** Aspect ratio (use with width and not height). */
-    aspectRatio?: Extract<AspectRatio, 'square' | 'horizontal' | 'vertical'>;
+    aspectRatio?: Extract<AspectRatio, 'square' | 'horizontal' | 'vertical' | 'wide'>;
     /** Height size. */
     height?: GlobalSize;
     /** Theme adapting the component to light or dark background. */

@@ -1,5 +1,10 @@
 $lumx-thumbnail-aspect-ratio: (
+    // Ratio 3:2
     'horizontal': 66.66%,
+    // Ratio 16:9
+    'wide': 56.25%,
+    // Ratio 1:1
     'square': 100%,
+    // Ratio 2:3
     'vertical': 150%,
 );

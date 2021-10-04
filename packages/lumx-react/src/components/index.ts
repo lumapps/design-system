@@ -106,10 +106,17 @@ export type Typography = ValueOf<typeof Typography>;
  * All available aspect ratios.
  */
 export const AspectRatio = {
+    /** Intrinsic content ratio. */
     original: 'original',
+    /** Ratio 16:9 */
+    wide: 'wide',
+    /** Ratio 3:2 */
     horizontal: 'horizontal',
+    /** Ratio 3:2 */
     vertical: 'vertical',
+    /** Ratio 1:1 */
     square: 'square',
+    /** Ratio constrained by the parent. */
     free: 'free',
 } as const;
 export type AspectRatio = ValueOf<typeof AspectRatio>;

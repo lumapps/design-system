@@ -21,7 +21,7 @@ const variants = [
     SkeletonRectangleVariant.pill,
 ] as const;
 const sizes = [Size.xxs, Size.xs, Size.s, Size.m, Size.l, Size.xl, Size.xxl] as const;
-const aspectRatios = [AspectRatio.vertical, AspectRatio.square, AspectRatio.horizontal] as const;
+const aspectRatios = [AspectRatio.vertical, AspectRatio.square, AspectRatio.horizontal, AspectRatio.wide] as const;
 
 export const Rectangle = ({ theme }: any) => (
     <>

@@ -103,5 +103,12 @@ Array [
       className="lumx-skeleton-rectangle__inner"
     />
   </div>,
+  <div
+    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--aspect-ratio-wide lumx-skeleton-rectangle--theme-light lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-xl"
+  >
+    <div
+      className="lumx-skeleton-rectangle__inner"
+    />
+  </div>,
 ]
 `;
