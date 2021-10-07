@@ -19,8 +19,8 @@
 @mixin lumx-checkbox-placeholder() {
     position: absolute;
     z-index: 1;
-    top: calc(calc(var(--lumx-material-checkbox-wrapper-size) - var(--lumx-material-checkbox-control-size)) / 2);
-    left: calc(calc(var(--lumx-material-checkbox-wrapper-size) - var(--lumx-material-checkbox-control-size)) / 2);
+    top: calc((var(--lumx-material-checkbox-wrapper-size) - var(--lumx-material-checkbox-control-size)) / 2);
+    left: calc((var(--lumx-material-checkbox-wrapper-size) - var(--lumx-material-checkbox-control-size)) / 2);
     width: var(--lumx-material-checkbox-control-size);
     height: var(--lumx-material-checkbox-control-size);
     border-radius: 2px;

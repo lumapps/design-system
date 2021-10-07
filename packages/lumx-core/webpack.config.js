@@ -78,7 +78,19 @@ const plugins = [
     ]),
     new OptimizeCSSAssetsPlugin({
         cssProcessorOptions: CONFIGS.cssNano,
-        cssProcessorPluginOptions: {},
+        cssProcessorPluginOptions: {
+            preset: [
+                'default',
+                {
+                    discardComments: {
+                        removeAll: true,
+                    },
+                    calc: false,
+                    reduceTransforms: false,
+                    minifySelectors: false,
+                },
+            ],
+        },
     }),
     new ForkTsCheckerWebpackPlugin(),
 ];

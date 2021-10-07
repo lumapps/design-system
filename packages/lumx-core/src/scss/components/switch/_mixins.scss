@@ -19,7 +19,7 @@
 @mixin lumx-switch-placeholder() {
     position: absolute;
     z-index: 1;
-    top: calc(calc(var(--lumx-material-switch-wrapper-height) - var(--lumx-material-switch-control-height)) / 2);
+    top: calc((var(--lumx-material-switch-wrapper-height) - var(--lumx-material-switch-control-height)) / 2);
     left: 0;
     width: var(--lumx-material-switch-control-width);
     height: var(--lumx-material-switch-control-height);
@@ -44,7 +44,7 @@
 @mixin lumx-switch-input-indicator($status, $theme) {
     position: absolute;
     z-index: 3;
-    top: calc(calc(var(--lumx-material-switch-control-height) - var(--lumx-material-switch-indicator-size)) / 2);
+    top: calc((var(--lumx-material-switch-control-height) - var(--lumx-material-switch-indicator-size)) / 2);
     width: var(--lumx-material-switch-indicator-size);
     height: var(--lumx-material-switch-indicator-size);
     border-radius: calc(var(--lumx-material-switch-indicator-size) / 2);

@@ -73,7 +73,7 @@
     flex-shrink: 0;
     margin-top: calc(
         var(--lumx-text-field-wrapper-padding-vertical) +
-            calc(calc(var(--lumx-material-text-field-input-content-line-height) - var(--lumx-size-xs)) / 2)
+            ((var(--lumx-material-text-field-input-content-line-height) - var(--lumx-size-xs)) / 2)
     );
     margin-right: $lumx-spacing-unit;
 
@@ -128,7 +128,7 @@
     flex-shrink: 0;
     margin-top: calc(
         var(--lumx-text-field-wrapper-padding-vertical) +
-            calc(calc(var(--lumx-material-text-field-input-content-line-height) - var(--lumx-size-xxs)) / 2)
+            ((var(--lumx-material-text-field-input-content-line-height) - var(--lumx-size-xxs)) / 2)
     );
     margin-left: $lumx-spacing-unit;
 
@@ -147,10 +147,7 @@
     flex-shrink: 0;
     margin-top: calc(
         var(--lumx-text-field-wrapper-padding-vertical) +
-            calc(
-                calc(var(--lumx-material-text-field-input-content-line-height) - calc(var(--lumx-button-height) / 1.5)) /
-                    2
-            )
+            ((var(--lumx-material-text-field-input-content-line-height) - (var(--lumx-button-height) / 1.5)) / 2)
     );
     margin-left: $lumx-spacing-unit / 2;
 }
@@ -160,7 +157,7 @@
     flex: 1 1 auto;
     flex-wrap: wrap;
     align-items: center;
-    margin: calc(calc(var(--lumx-text-field-input-min-height) - calc(var(--lumx-size-s) + 6px)) / 2) 0;
+    margin: calc((var(--lumx-text-field-input-min-height) - (var(--lumx-size-s) - 6px)) / 2) 0;
 
     .#{$lumx-base-prefix}-chip {
         margin: $lumx-chip-group-spacing 0;
