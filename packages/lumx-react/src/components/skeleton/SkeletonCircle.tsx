@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React, { forwardRef } from 'react';
 
-import { GlobalSize, Theme } from '@lumx/react';
+import { GlobalSize, Theme, ColorPalette } from '@lumx/react';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
@@ -12,6 +12,8 @@ export interface SkeletonCircleProps extends GenericProps {
     size: GlobalSize;
     /** Theme. */
     theme?: Theme;
+    /** The color of the skeleton. */
+    color?: ColorPalette;
 }
 
 const DEFAULT_PROPS: Partial<SkeletonCircleProps> = {
@@ -36,13 +38,13 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * @return React element.
  */
 export const SkeletonCircle: Comp<SkeletonCircleProps, HTMLDivElement> = forwardRef((props, ref) => {
-    const { className, size, theme, ...forwardedProps } = props;
+    const { className, size, color, theme, ...forwardedProps } = props;
 
     return (
         <div
             ref={ref}
             {...forwardedProps}
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, size, theme }))}
+            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, size, color, theme }))}
         />
     );
 });

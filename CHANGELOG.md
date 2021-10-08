@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   New `color` prop for `SkeletonRectangle`, `SkeletonCircle` and `SkeletonTypography`.
+
 ## [2.0.3][] - 2021-10-04
 
 ### Added

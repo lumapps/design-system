@@ -110,5 +110,68 @@ Array [
       className="lumx-skeleton-rectangle__inner"
     />
   </div>,
+  <div
+    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--height-m lumx-skeleton-rectangle--theme-light lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-xl lumx-skeleton-rectangle--color-primary"
+  >
+    <div
+      className="lumx-skeleton-rectangle__inner"
+    />
+  </div>,
+  <div
+    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--height-m lumx-skeleton-rectangle--theme-light lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-xl lumx-skeleton-rectangle--color-secondary"
+  >
+    <div
+      className="lumx-skeleton-rectangle__inner"
+    />
+  </div>,
+  <div
+    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--height-m lumx-skeleton-rectangle--theme-light lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-xl lumx-skeleton-rectangle--color-blue"
+  >
+    <div
+      className="lumx-skeleton-rectangle__inner"
+    />
+  </div>,
+  <div
+    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--height-m lumx-skeleton-rectangle--theme-light lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-xl lumx-skeleton-rectangle--color-dark"
+  >
+    <div
+      className="lumx-skeleton-rectangle__inner"
+    />
+  </div>,
+  <div
+    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--height-m lumx-skeleton-rectangle--theme-light lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-xl lumx-skeleton-rectangle--color-green"
+  >
+    <div
+      className="lumx-skeleton-rectangle__inner"
+    />
+  </div>,
+  <div
+    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--height-m lumx-skeleton-rectangle--theme-light lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-xl lumx-skeleton-rectangle--color-yellow"
+  >
+    <div
+      className="lumx-skeleton-rectangle__inner"
+    />
+  </div>,
+  <div
+    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--height-m lumx-skeleton-rectangle--theme-light lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-xl lumx-skeleton-rectangle--color-red"
+  >
+    <div
+      className="lumx-skeleton-rectangle__inner"
+    />
+  </div>,
+  <div
+    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--height-m lumx-skeleton-rectangle--theme-light lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-xl lumx-skeleton-rectangle--color-light"
+  >
+    <div
+      className="lumx-skeleton-rectangle__inner"
+    />
+  </div>,
+  <div
+    className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--height-m lumx-skeleton-rectangle--theme-light lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-xl lumx-skeleton-rectangle--color-grey"
+  >
+    <div
+      className="lumx-skeleton-rectangle__inner"
+    />
+  </div>,
 ]
 `;

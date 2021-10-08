@@ -10,6 +10,7 @@ import {
     SkeletonRectangle,
     SkeletonRectangleVariant,
     Thumbnail,
+    ColorPalette,
 } from '@lumx/react';
 import { imageKnob } from '@lumx/react/stories/knobs';
 
@@ -22,6 +23,7 @@ const variants = [
 ] as const;
 const sizes = [Size.xxs, Size.xs, Size.s, Size.m, Size.l, Size.xl, Size.xxl] as const;
 const aspectRatios = [AspectRatio.vertical, AspectRatio.square, AspectRatio.horizontal, AspectRatio.wide] as const;
+const colors = Object.values(ColorPalette);
 
 export const Rectangle = ({ theme }: any) => (
     <>
@@ -59,6 +61,19 @@ export const Rectangle = ({ theme }: any) => (
                     theme={theme}
                     width={Size.xl}
                     aspectRatio={aspectRatio}
+                />
+            ))}
+        </FlexBox>
+        Colors:
+        <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.top}>
+            {colors.map((color) => (
+                <SkeletonRectangle
+                    key={color}
+                    className="lumx-spacing-margin"
+                    theme={theme}
+                    width={Size.xl}
+                    height={Size.m}
+                    color={color}
                 />
             ))}
         </FlexBox>
