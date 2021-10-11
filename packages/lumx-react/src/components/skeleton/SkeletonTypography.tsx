@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React, { CSSProperties, forwardRef } from 'react';
 
-import { Theme, Typography } from '@lumx/react';
+import { Theme, Typography, ColorPalette } from '@lumx/react';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
@@ -14,6 +14,8 @@ export interface SkeletonTypographyProps extends GenericProps {
     typography: Typography;
     /** Width CSS property. */
     width?: CSSProperties['width'];
+    /** The color of the skeleton. */
+    color?: ColorPalette;
 }
 
 const DEFAULT_PROPS: Partial<SkeletonTypographyProps> = {
@@ -38,13 +40,13 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * @return React element.
  */
 export const SkeletonTypography: Comp<SkeletonTypographyProps, HTMLDivElement> = forwardRef((props, ref) => {
-    const { className, theme, typography, width, ...forwardedProps } = props;
+    const { className, theme, typography, width, color, ...forwardedProps } = props;
 
     return (
         <div
             ref={ref}
             {...forwardedProps}
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, typography }))}
+            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, typography, color }))}
             style={{ ...forwardedProps.style, width }}
         >
             <div className={`${CLASSNAME}__inner`} />

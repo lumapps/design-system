@@ -1,8 +1,10 @@
 import React from 'react';
 
-import { SkeletonTypography, Typography } from '@lumx/react';
+import { SkeletonTypography, Typography, ColorPalette } from '@lumx/react';
 
 export default { title: 'LumX components/skeleton/Skeleton' };
+
+const colors = Object.values(ColorPalette);
 
 export const TextTypography = ({ theme }: any) => (
     <>
@@ -16,5 +18,9 @@ export const TextTypography = ({ theme }: any) => (
         <SkeletonTypography theme={theme} typography={Typography.body1} />
         <SkeletonTypography theme={theme} typography={Typography.body1} />
         <SkeletonTypography theme={theme} typography={Typography.body1} width="70%" />
+        Colors:
+        {colors.map((color) => (
+            <SkeletonTypography key={color} color={color} theme={theme} typography={Typography.body1} />
+        ))}
     </>
 );

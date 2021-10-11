@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React, { forwardRef } from 'react';
 
-import { AspectRatio, GlobalSize, Theme } from '@lumx/react';
+import { AspectRatio, GlobalSize, Theme, ColorPalette } from '@lumx/react';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses, ValueOf } from '@lumx/react/utils';
 
 /**
@@ -24,6 +24,8 @@ export interface SkeletonRectangleProps extends GenericProps {
     variant?: SkeletonRectangleVariant;
     /** Width size. */
     width?: GlobalSize;
+    /** The color of the skeleton. */
+    color?: ColorPalette;
 }
 
 const DEFAULT_PROPS: Partial<SkeletonRectangleProps> = {
@@ -49,7 +51,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * @return React element.
  */
 export const SkeletonRectangle: Comp<SkeletonRectangleProps, HTMLDivElement> = forwardRef((props, ref) => {
-    const { aspectRatio, className, height, theme, variant, width, ...forwardedProps } = props;
+    const { aspectRatio, className, height, theme, variant, width, color, ...forwardedProps } = props;
 
     return (
         <div
@@ -64,6 +66,7 @@ export const SkeletonRectangle: Comp<SkeletonRectangleProps, HTMLDivElement> = f
                     theme,
                     variant,
                     width,
+                    color,
                 }),
             )}
         >
