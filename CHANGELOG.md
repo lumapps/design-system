@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   `@lumx/core`: Reworked style dictionary
+    -   **Warning: Deprecating CSS and SCSS variables listed in `css/_retro-compat-v2.css` and `_retro-compat-v2.scss`. They will be removed in the next major version!**
+    -   Expanded list of customizable CSS variables
+    -   Centralized material only design tokens
+
 ## [2.0.5][] - 2021-10-20
 
 ### Fixed

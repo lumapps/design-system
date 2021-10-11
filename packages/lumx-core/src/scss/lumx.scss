@@ -2,7 +2,11 @@
 
 @import '~sass-mq';
 @import '../css/design-tokens';
+// TODO: remove in next major version
+@import '../css/retro-compat-v2';
 @import './design-tokens';
+// TODO: remove in next major version
+@import './retro-compat-v2';
 @import './core';
 @import './components';
 @import './core/base/normalize';

@@ -1,0 +1,117 @@
+/**
+ * List of deprecated v2 variables that have been removed or renamed.
+ * Warning: These will be removed in the next major version.
+ */
+:root {
+    --lumx-button-font-weight: var(--lumx-typography-font-weight-bold);
+    --lumx-button-text-transform: var(--lumx-material-button-text-transform);
+    --lumx-button-variant-icon-border-radius: var(--lumx-material-button-variant-icon-border-radius);
+    --lumx-button-size-m-font-size: var(--lumx-typography-custom-button-size-m-font-size);
+    --lumx-button-size-s-font-size: var(--lumx-typography-custom-button-size-s-font-size);
+    --lumx-checkbox-wrapper-size: var(--lumx-material-checkbox-wrapper-size);
+    --lumx-checkbox-control-size: var(--lumx-material-checkbox-control-size);
+    --lumx-chip-size-m-height: var(--lumx-material-chip-size-m-height);
+    --lumx-chip-size-m-border-radius: var(--lumx-material-chip-size-m-border-radius);
+    --lumx-chip-size-m-padding-vertical: var(--lumx-material-chip-size-m-padding-vertical);
+    --lumx-chip-size-s-height: var(--lumx-material-chip-size-s-height);
+    --lumx-chip-size-s-border-radius: var(--lumx-material-chip-size-s-border-radius);
+    --lumx-chip-size-s-padding-vertical: var(--lumx-material-chip-size-s-padding-vertical);
+    --lumx-input-helper-font-size: var(--lumx-material-input-helper-font-size);
+    --lumx-input-helper-font-weight: var(--lumx-material-input-helper-font-weight);
+    --lumx-input-helper-line-height: var(--lumx-material-input-helper-line-height);
+    --lumx-input-label-font-size: var(--lumx-material-input-label-font-size);
+    --lumx-input-label-font-weight: var(--lumx-material-input-label-font-weight);
+    --lumx-input-label-line-height: var(--lumx-material-input-label-line-height);
+    --lumx-radio-button-wrapper-size: var(--lumx-material-radio-button-wrapper-size);
+    --lumx-radio-button-control-size: var(--lumx-material-radio-button-control-size);
+    --lumx-radio-button-indicator-size: var(--lumx-material-radio-button-indicator-size);
+    --lumx-switch-wrapper-width: var(--lumx-material-switch-wrapper-width);
+    --lumx-switch-wrapper-height: var(--lumx-material-switch-wrapper-height);
+    --lumx-switch-control-width: var(--lumx-material-switch-control-width);
+    --lumx-switch-control-height: var(--lumx-material-switch-control-height);
+    --lumx-switch-indicator-size: var(--lumx-material-switch-indicator-size);
+    --lumx-switch-indicator-offset: var(--lumx-material-switch-indicator-offset);
+    --lumx-text-field-padding-top: var(--lumx-material-text-field-padding-top);
+    --lumx-text-field-padding-bottom: var(--lumx-material-text-field-padding-bottom);
+    --lumx-text-field-header-margin-bottom: var(--lumx-material-text-field-header-wrapper-margin-bottom);
+    --lumx-text-field-label-font-size: var(--lumx-material-text-field-header-label-font-size);
+    --lumx-text-field-label-font-weight: var(--lumx-material-text-field-header-label-font-weight);
+    --lumx-text-field-label-line-height: var(--lumx-material-text-field-header-label-line-height);
+    --lumx-text-field-wrapper-min-height: var(--lumx-text-field-input-min-height);
+    --lumx-text-field-wrapper-border-radius: var(--lumx-text-field-input-border-radius);
+    --lumx-text-field-wrapper-padding-vertical: var(--lumx-spacing-unit-tiny);
+    --lumx-text-field-wrapper-padding-horizontal: var(--lumx-text-field-input-padding-horizontal);
+    --lumx-text-field-state-default-border-top-width: var(--lumx-text-field-state-default-input-border-top-width);
+    --lumx-text-field-state-default-border-right-width: var(--lumx-text-field-state-default-input-border-right-width);
+    --lumx-text-field-state-default-border-bottom-width: var(--lumx-text-field-state-default-input-border-bottom-width);
+    --lumx-text-field-state-default-border-left-width: var(--lumx-text-field-state-default-input-border-left-width);
+    --lumx-text-field-state-default-theme-light-background-color: var(
+        --lumx-text-field-state-default-theme-light-input-background-color
+    );
+    --lumx-text-field-state-default-theme-light-border-color: var(
+        --lumx-text-field-state-default-theme-light-input-border-color
+    );
+    --lumx-text-field-state-default-theme-dark-background-color: var(
+        --lumx-text-field-state-default-theme-dark-input-background-color
+    );
+    --lumx-text-field-state-default-theme-dark-border-color: var(
+        --lumx-text-field-state-default-theme-dark-input-border-color
+    );
+    --lumx-text-field-state-hover-theme-light-background-color: var(
+        --lumx-text-field-state-hover-theme-light-input-background-color
+    );
+    --lumx-text-field-state-hover-theme-dark-background-color: var(
+        --lumx-text-field-state-hover-theme-dark-input-background-color
+    );
+    --lumx-text-field-state-focus-border-top-width: var(--lumx-text-field-state-focus-input-border-top-width);
+    --lumx-text-field-state-focus-border-right-width: var(--lumx-text-field-state-focus-input-border-right-width);
+    --lumx-text-field-state-focus-border-bottom-width: var(--lumx-text-field-state-focus-input-border-bottom-width);
+    --lumx-text-field-state-focus-border-left-width: var(--lumx-text-field-state-focus-input-border-left-width);
+    --lumx-text-field-state-focus-theme-light-background-color: var(
+        --lumx-text-field-state-focus-theme-light-input-background-color
+    );
+    --lumx-text-field-state-focus-theme-light-border-color: var(
+        --lumx-text-field-state-focus-theme-light-input-border-color
+    );
+    --lumx-text-field-state-focus-theme-dark-background-color: var(
+        --lumx-text-field-state-focus-theme-dark-input-background-color
+    );
+    --lumx-text-field-state-focus-theme-dark-border-color: var(
+        --lumx-text-field-state-focus-theme-dark-input-border-color
+    );
+    --lumx-text-field-input-icon-size: var(--lumx-size-xs);
+    --lumx-text-field-input-font-size: var(--lumx-material-text-field-input-content-font-size);
+    --lumx-text-field-input-font-weight: var(--lumx-material-text-field-input-content-font-weight);
+    --lumx-text-field-input-line-height: var(--lumx-material-text-field-input-content-line-height);
+    --lumx-text-field-input-validity-size: var(--lumx-size-xxs);
+    --lumx-text-field-input-clear-size: var(--lumx-size-s);
+    --lumx-progress-bounce: var(--lumx-material-progress-bounce);
+    --lumx-progress-rotate: var(--lumx-material-progress-rotate);
+    --lumx-typography-style-display1-font-size: var(--lumx-typography-interface-display1-font-size);
+    --lumx-typography-style-display1-font-weight: var(--lumx-typography-interface-display1-font-weight);
+    --lumx-typography-style-display1-line-height: var(--lumx-typography-interface-display1-line-height);
+    --lumx-typography-style-headline-font-size: var(--lumx-typography-interface-headline-font-size);
+    --lumx-typography-style-headline-font-weight: var(--lumx-typography-interface-headline-font-weight);
+    --lumx-typography-style-headline-line-height: var(--lumx-typography-interface-headline-line-height);
+    --lumx-typography-style-title-font-size: var(--lumx-typography-interface-title-font-size);
+    --lumx-typography-style-title-font-weight: var(--lumx-typography-interface-title-font-weight);
+    --lumx-typography-style-title-line-height: var(--lumx-typography-interface-title-line-height);
+    --lumx-typography-style-subtitle2-font-size: var(--lumx-typography-interface-subtitle2-font-size);
+    --lumx-typography-style-subtitle2-font-weight: var(--lumx-typography-interface-subtitle2-font-weight);
+    --lumx-typography-style-subtitle2-line-height: var(--lumx-typography-interface-subtitle2-line-height);
+    --lumx-typography-style-subtitle1-font-size: var(--lumx-typography-interface-subtitle1-font-size);
+    --lumx-typography-style-subtitle1-font-weight: var(--lumx-typography-interface-subtitle1-font-weight);
+    --lumx-typography-style-subtitle1-line-height: var(--lumx-typography-interface-subtitle1-line-height);
+    --lumx-typography-style-body2-font-size: var(--lumx-typography-interface-body2-font-size);
+    --lumx-typography-style-body2-font-weight: var(--lumx-typography-interface-body2-font-weight);
+    --lumx-typography-style-body2-line-height: var(--lumx-typography-interface-body2-line-height);
+    --lumx-typography-style-body1-font-size: var(--lumx-typography-interface-body1-font-size);
+    --lumx-typography-style-body1-font-weight: var(--lumx-typography-interface-body1-font-weight);
+    --lumx-typography-style-body1-line-height: var(--lumx-typography-interface-body1-line-height);
+    --lumx-typography-style-caption-font-size: var(--lumx-typography-interface-caption-font-size);
+    --lumx-typography-style-caption-font-weight: var(--lumx-typography-interface-caption-font-weight);
+    --lumx-typography-style-caption-line-height: var(--lumx-typography-interface-caption-line-height);
+    --lumx-typography-style-overline-font-size: var(--lumx-typography-interface-overline-font-size);
+    --lumx-typography-style-overline-font-weight: var(--lumx-typography-interface-overline-font-weight);
+    --lumx-typography-style-overline-line-height: var(--lumx-typography-interface-overline-line-height);
+}
