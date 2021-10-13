@@ -4,7 +4,7 @@ import isEmpty from 'lodash/isEmpty';
 
 import classNames from 'classnames';
 
-import { Color, ColorVariant, Icon, Size, Typography } from '@lumx/react';
+import { Color, ColorVariant, Icon, Size, Typography, TypographyInterface, TypographyTitleCustom } from '@lumx/react';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { renderLink } from '@lumx/react/utils/renderLink';
 
@@ -31,7 +31,7 @@ export interface LinkProps extends GenericProps {
     /** Link target. */
     target?: HTMLAnchorProps['target'];
     /** Typography variant. */
-    typography?: Typography;
+    typography?: TypographyInterface | TypographyTitleCustom;
 }
 
 /**
@@ -51,6 +51,12 @@ const getIconSize = (typography?: Typography) => {
 
         case Typography.headline:
         case Typography.title:
+        case Typography.custom.title1:
+        case Typography.custom.title2:
+        case Typography.custom.title3:
+        case Typography.custom.title4:
+        case Typography.custom.title5:
+        case Typography.custom.title6:
         case Typography.body2:
         case Typography.subtitle2:
             return Size.s;

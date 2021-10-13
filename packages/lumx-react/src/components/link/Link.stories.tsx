@@ -1,12 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { mdiChevronDown, mdiLink } from '@lumx/icons';
-import { ColorPalette, ColorVariant, Link, Typography } from '@lumx/react';
+import { ColorPalette, ColorVariant, Link, Typography, TypographyInterface, TypographyTitleCustom } from '@lumx/react';
 import { boolean, select, text } from '@storybook/addon-knobs';
 import React, { Fragment } from 'react';
 
 export default { title: 'LumX components/link/Link' };
 
 const onClick = () => console.log('clicked link');
+
+const linkTypographies = { ...TypographyInterface, ...TypographyTitleCustom };
 
 export const SimpleLink = () => (
     <>
@@ -15,7 +17,7 @@ export const SimpleLink = () => (
             target={boolean('target: _blank', false, 'Link 1') ? '_blank' : ''}
             color={select('Color', ColorPalette, ColorPalette.blue, 'Link 1')}
             colorVariant={select('Color Variant', ColorVariant, ColorVariant.N, 'Link 1')}
-            typography={select('Typography', Typography, Typography.body2, 'Link 1')}
+            typography={select('Typography', linkTypographies, Typography.body2, 'Link 1')}
         >
             {text('Value', 'Here is a first link', 'Link 1')}
         </Link>
@@ -25,7 +27,7 @@ export const SimpleLink = () => (
             target={boolean('target: _blank', false, 'Link 2') ? '_blank' : ''}
             color={select('Color', ColorPalette, ColorPalette.blue, 'Link 2')}
             colorVariant={select('Color Variant', ColorVariant, ColorVariant.N, 'Link 2')}
-            typography={select('Typography', Typography, Typography.body1, 'Link 2')}
+            typography={select('Typography', linkTypographies, Typography.body1, 'Link 2')}
         >
             {text('Value', 'Here is a second link', 'Link 2')}
         </Link>
@@ -35,7 +37,7 @@ export const SimpleLink = () => (
             target={boolean('target: _blank', false, 'Link 3') ? '_blank' : ''}
             color={select('Color', ColorPalette, ColorPalette.blue, 'Link 3')}
             colorVariant={select('Color Variant', ColorVariant, ColorVariant.N, 'Link 3')}
-            typography={select('Typography', Typography, Typography.caption, 'Link 3')}
+            typography={select('Typography', linkTypographies, Typography.caption, 'Link 3')}
         >
             {text('Value', 'Here is a third link', 'Link 3')}
         </Link>
@@ -67,15 +69,16 @@ export const DisabledLink = () => (
 
 export const WithIcon = () => (
     <>
-        {Object.values(Typography).map((typography) => (
+        {Object.values(linkTypographies).map((typography) => (
             <Fragment key={typography}>
+                {typography}
                 <p>
-                    <Link rightIcon={mdiLink} href="https://www.google.com" typography={typography}>
+                    <Link rightIcon={mdiLink} href="https://www.google.com" typography={typography as any}>
                         With right icon
                     </Link>
                 </p>
                 <p>
-                    <Link leftIcon={mdiChevronDown} href="https://www.google.com" typography={typography}>
+                    <Link leftIcon={mdiChevronDown} href="https://www.google.com" typography={typography as any}>
                         With left icon
                     </Link>
                 </p>
@@ -84,12 +87,25 @@ export const WithIcon = () => (
                         leftIcon={mdiChevronDown}
                         rightIcon={mdiLink}
                         href="https://www.google.com"
-                        typography={typography}
+                        typography={typography as any}
                     >
                         With right and left icon
                     </Link>
                 </p>
             </Fragment>
         ))}
+    </>
+);
+
+export const WithCustomizableTypography = () => (
+    <>
+        <style>{`
+        :root {
+            --lumx-typography-custom-title1-font-size: 5px;
+        }
+        `}</style>
+        <Link typography={Typography.custom.title1} href="https://google.com">
+            Link with customizable `body` typography
+        </Link>
     </>
 );

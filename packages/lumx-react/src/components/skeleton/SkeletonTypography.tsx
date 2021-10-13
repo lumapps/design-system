@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React, { CSSProperties, forwardRef } from 'react';
 
-import { Theme, Typography, ColorPalette } from '@lumx/react';
+import { Theme, TypographyInterface, ColorPalette } from '@lumx/react';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
@@ -11,7 +11,7 @@ export interface SkeletonTypographyProps extends GenericProps {
     /** Theme adapting the component to light or dark background. */
     theme?: Theme;
     /** Typography variant. */
-    typography: Typography;
+    typography: TypographyInterface;
     /** Width CSS property. */
     width?: CSSProperties['width'];
     /** The color of the skeleton. */
