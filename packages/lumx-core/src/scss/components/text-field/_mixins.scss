@@ -26,8 +26,7 @@
         right: 0;
         bottom: 0;
         left: 0;
-        border-style: solid;
-        border-color: var(--lumx-text-field-state-default-#{$theme}-input-border-color);
+        border: 0 solid var(--lumx-text-field-state-default-#{$theme}-input-border-color);
         border-top-width: var(--lumx-text-field-state-default-input-border-top-width);
         border-right-width: var(--lumx-text-field-state-default-input-border-right-width);
         border-bottom-width: var(--lumx-text-field-state-default-input-border-bottom-width);
