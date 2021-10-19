@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Thu, 23 Sep 2021 06:47:16 GMT
+ * Generated on Tue, 19 Oct 2021 08:35:24 GMT
  */
 
 :root {
@@ -877,55 +877,42 @@
     --lumx-typography-interface-overline-font-size: 10px;
     --lumx-typography-interface-overline-font-weight: var(--lumx-typography-font-weight-bold);
     --lumx-typography-interface-overline-line-height: 12px;
-    --lumx-typography-custom-title1-font-family: var(--lumx-typography-font-family);
     --lumx-typography-custom-title1-font-size: 40px;
     --lumx-typography-custom-title1-font-weight: var(--lumx-typography-font-weight-bold);
     --lumx-typography-custom-title1-line-height: 50px;
-    --lumx-typography-custom-title2-font-family: var(--lumx-typography-font-family);
     --lumx-typography-custom-title2-font-size: 30px;
     --lumx-typography-custom-title2-font-weight: var(--lumx-typography-font-weight-bold);
     --lumx-typography-custom-title2-line-height: 40px;
-    --lumx-typography-custom-title3-font-family: var(--lumx-typography-font-family);
     --lumx-typography-custom-title3-font-size: 24px;
     --lumx-typography-custom-title3-font-weight: var(--lumx-typography-font-weight-bold);
     --lumx-typography-custom-title3-line-height: 32px;
-    --lumx-typography-custom-title4-font-family: var(--lumx-typography-font-family);
     --lumx-typography-custom-title4-font-size: 20px;
     --lumx-typography-custom-title4-font-weight: var(--lumx-typography-font-weight-bold);
     --lumx-typography-custom-title4-line-height: 30px;
-    --lumx-typography-custom-title5-font-family: var(--lumx-typography-font-family);
     --lumx-typography-custom-title5-font-size: 16px;
     --lumx-typography-custom-title5-font-weight: var(--lumx-typography-font-weight-bold);
     --lumx-typography-custom-title5-line-height: 24px;
-    --lumx-typography-custom-title6-font-family: var(--lumx-typography-font-family);
     --lumx-typography-custom-title6-font-size: 14px;
     --lumx-typography-custom-title6-font-weight: var(--lumx-typography-font-weight-bold);
     --lumx-typography-custom-title6-line-height: 20px;
-    --lumx-typography-custom-intro-font-family: var(--lumx-typography-font-family);
     --lumx-typography-custom-intro-font-size: 18px;
     --lumx-typography-custom-intro-font-weight: var(--lumx-typography-font-weight-bold);
     --lumx-typography-custom-intro-line-height: 30px;
-    --lumx-typography-custom-body-large-font-family: var(--lumx-typography-font-family);
     --lumx-typography-custom-body-large-font-size: 16px;
     --lumx-typography-custom-body-large-font-weight: var(--lumx-typography-font-weight-regular);
     --lumx-typography-custom-body-large-line-height: 24px;
-    --lumx-typography-custom-body-font-family: var(--lumx-typography-font-family);
     --lumx-typography-custom-body-font-size: 14px;
     --lumx-typography-custom-body-font-weight: var(--lumx-typography-font-weight-regular);
     --lumx-typography-custom-body-line-height: 20px;
-    --lumx-typography-custom-quote-font-family: var(--lumx-typography-font-family);
     --lumx-typography-custom-quote-font-size: 16px;
     --lumx-typography-custom-quote-font-weight: var(--lumx-typography-font-weight-light);
     --lumx-typography-custom-quote-font-style: italic;
     --lumx-typography-custom-quote-line-height: 24px;
-    --lumx-typography-custom-publish-info-font-family: var(--lumx-typography-font-family);
     --lumx-typography-custom-publish-info-font-size: 14px;
     --lumx-typography-custom-publish-info-font-weight: var(--lumx-typography-font-weight-regular);
     --lumx-typography-custom-publish-info-line-height: 20px;
-    --lumx-typography-custom-button-size-m-font-family: var(--lumx-typography-font-family);
     --lumx-typography-custom-button-size-m-font-size: 14px;
     --lumx-typography-custom-button-size-m-font-weight: var(--lumx-typography-font-weight-bold);
-    --lumx-typography-custom-button-size-s-font-family: var(--lumx-typography-font-family);
     --lumx-typography-custom-button-size-s-font-size: 12px;
     --lumx-typography-custom-button-size-s-font-weight: var(--lumx-typography-font-weight-bold);
 }

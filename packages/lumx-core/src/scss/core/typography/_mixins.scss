@@ -6,7 +6,7 @@
 
 @mixin lumx-typography($key, $type: 'interface') {
     @if $type == 'custom' {
-        font-family: var(--lumx-typography-custom-#{$key}-font-family, var(--lumx-typography-font-family));
+        font-family: var(--lumx-typography-custom-#{$key}-font-family);
         font-size: var(--lumx-typography-custom-#{$key}-font-size);
         font-style: var(--lumx-typography-custom-#{$key}-font-style);
         font-weight: var(--lumx-typography-custom-#{$key}-font-weight);

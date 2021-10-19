@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Thu, 23 Sep 2021 06:47:16 GMT
+ * Generated on Tue, 19 Oct 2021 08:35:25 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -5178,13 +5178,6 @@ export const DESIGN_TOKENS = {
         },
         custom: {
             title1: {
-                'font-family': {
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'title1',
-                    },
-                },
                 'font-size': {
                     attributes: {
                         category: 'typography',
@@ -5208,13 +5201,6 @@ export const DESIGN_TOKENS = {
                 },
             },
             title2: {
-                'font-family': {
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'title2',
-                    },
-                },
                 'font-size': {
                     attributes: {
                         category: 'typography',
@@ -5238,13 +5224,6 @@ export const DESIGN_TOKENS = {
                 },
             },
             title3: {
-                'font-family': {
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'title3',
-                    },
-                },
                 'font-size': {
                     attributes: {
                         category: 'typography',
@@ -5268,13 +5247,6 @@ export const DESIGN_TOKENS = {
                 },
             },
             title4: {
-                'font-family': {
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'title4',
-                    },
-                },
                 'font-size': {
                     attributes: {
                         category: 'typography',
@@ -5298,13 +5270,6 @@ export const DESIGN_TOKENS = {
                 },
             },
             title5: {
-                'font-family': {
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'title5',
-                    },
-                },
                 'font-size': {
                     attributes: {
                         category: 'typography',
@@ -5328,13 +5293,6 @@ export const DESIGN_TOKENS = {
                 },
             },
             title6: {
-                'font-family': {
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'title6',
-                    },
-                },
                 'font-size': {
                     attributes: {
                         category: 'typography',
@@ -5358,13 +5316,6 @@ export const DESIGN_TOKENS = {
                 },
             },
             intro: {
-                'font-family': {
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'intro',
-                    },
-                },
                 'font-size': {
                     attributes: {
                         category: 'typography',
@@ -5388,13 +5339,6 @@ export const DESIGN_TOKENS = {
                 },
             },
             'body-large': {
-                'font-family': {
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'body-large',
-                    },
-                },
                 'font-size': {
                     attributes: {
                         category: 'typography',
@@ -5418,13 +5362,6 @@ export const DESIGN_TOKENS = {
                 },
             },
             body: {
-                'font-family': {
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'body',
-                    },
-                },
                 'font-size': {
                     attributes: {
                         category: 'typography',
@@ -5448,13 +5385,6 @@ export const DESIGN_TOKENS = {
                 },
             },
             quote: {
-                'font-family': {
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'quote',
-                    },
-                },
                 'font-size': {
                     attributes: {
                         category: 'typography',
@@ -5485,13 +5415,6 @@ export const DESIGN_TOKENS = {
                 },
             },
             'publish-info': {
-                'font-family': {
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'publish-info',
-                    },
-                },
                 'font-size': {
                     attributes: {
                         category: 'typography',
@@ -5516,13 +5439,6 @@ export const DESIGN_TOKENS = {
             },
             button: {
                 'size-m': {
-                    'font-family': {
-                        attributes: {
-                            category: 'typography',
-                            type: 'custom',
-                            item: 'button',
-                        },
-                    },
                     'font-size': {
                         attributes: {
                             category: 'typography',
@@ -5539,13 +5455,6 @@ export const DESIGN_TOKENS = {
                     },
                 },
                 'size-s': {
-                    'font-family': {
-                        attributes: {
-                            category: 'typography',
-                            type: 'custom',
-                            item: 'button',
-                        },
-                    },
                     'font-size': {
                         attributes: {
                             category: 'typography',
