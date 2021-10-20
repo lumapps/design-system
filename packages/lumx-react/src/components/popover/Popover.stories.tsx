@@ -4,6 +4,7 @@ import { mdiAccount, mdiBell } from '@lumx/icons';
 import {
     Alignment,
     Chip,
+    Button,
     Emphasis,
     FlexBox,
     Icon,
@@ -18,7 +19,6 @@ import {
 import { boolean, select } from '@storybook/addon-knobs';
 import range from 'lodash/range';
 import startCase from 'lodash/startCase';
-import { Button } from '../button';
 
 export default { title: 'LumX components/popover/Popover' };
 
@@ -264,118 +264,53 @@ export const WithoutPortal = ({ theme }: any) => {
 };
 
 export const NestedWithoutPortal = () => {
-    const rootButtonRef = React.useRef(null);
-    const firstButtonRef = React.useRef(null);
-    const secondButtonRef = React.useRef(null);
-    const thirdButtonRef = React.useRef(null);
-    const fourthButtonRef = React.useRef(null);
-    const [rootOpen, setRootOpen] = React.useState(false);
-    const [firstOpen, setFirstOpen] = React.useState(false);
-    const [secondOpen, setSecondOpen] = React.useState(false);
-    const [thirdOpen, setThirdOpen] = React.useState(false);
-    const [fourthOpen, setFourthOpen] = React.useState(false);
     const boundaryRef = React.useRef(document.querySelector('body'));
 
+    const Entry = ({ children, placement = Placement.RIGHT_START }: any) => {
+        const rootButtonRef = React.useRef(null);
+        const [rootOpen, setRootOpen] = React.useState(false);
+
+        return (
+            <>
+                <li ref={rootButtonRef}>
+                    <Button onClick={() => setRootOpen(!rootOpen)}>Click</Button>
+                </li>
+                {children && (
+                    <Popover
+                        boundaryRef={boundaryRef}
+                        fitWithinViewportHeight
+                        //offset={{ along: -16 }}
+                        placement={placement}
+                        isOpen={rootOpen}
+                        anchorRef={rootButtonRef}
+                        usePortal={false}
+                    >
+                        <div className="lumx-spacing-margin-huge" style={{ overflowY: 'auto' }}>
+                            <List style={{ minWidth: '150px' }}>{children}</List>
+                        </div>
+                    </Popover>
+                )}
+            </>
+        );
+    };
+
     return (
-        <div style={{ height: '100vh' }}>
-            <Button ref={rootButtonRef} onClick={() => setRootOpen(!rootOpen)}>
-                Click
-            </Button>
-            <Popover
-                boundaryRef={boundaryRef}
-                fitWithinViewportHeight
-                offset={{ along: -16 }}
-                placement={Placement.RIGHT_START}
-                isOpen={rootOpen}
-                anchorRef={rootButtonRef}
-                usePortal={false}
-            >
-                <div className="lumx-spacing-margin-huge" style={{ overflowY: 'auto' }}>
-                    <List>
-                        <li ref={firstButtonRef}>
-                            <Button onClick={() => setFirstOpen(!firstOpen)}>Click</Button>
-                            <Popover
-                                boundaryRef={boundaryRef}
-                                fitWithinViewportHeight
-                                placement={Placement.RIGHT_START}
-                                isOpen={firstOpen}
-                                anchorRef={firstButtonRef}
-                                usePortal={false}
-                                offset={{ along: -16 }}
-                            >
-                                <div className="lumx-spacing-margin-huge" style={{ overflowY: 'auto' }}>
-                                    <List>
-                                        <li ref={secondButtonRef}>
-                                            <Button onClick={() => setSecondOpen(!secondOpen)}>Click</Button>
-                                            <Popover
-                                                boundaryRef={boundaryRef}
-                                                fitWithinViewportHeight
-                                                placement={Placement.RIGHT_START}
-                                                isOpen={secondOpen}
-                                                anchorRef={secondButtonRef}
-                                                usePortal={false}
-                                                offset={{ along: -16 }}
-                                            >
-                                                <div className="lumx-spacing-margin-huge" style={{ overflowY: 'auto' }}>
-                                                    <List>
-                                                        <li ref={thirdButtonRef}>
-                                                            <Button onClick={() => setThirdOpen(!thirdOpen)}>
-                                                                Click
-                                                            </Button>
-                                                            <Popover
-                                                                boundaryRef={boundaryRef}
-                                                                fitWithinViewportHeight
-                                                                placement={Placement.RIGHT_START}
-                                                                isOpen={thirdOpen}
-                                                                anchorRef={thirdButtonRef}
-                                                                usePortal={false}
-                                                                offset={{ along: -16 }}
-                                                            >
-                                                                <div
-                                                                    className="lumx-spacing-margin-huge"
-                                                                    style={{ overflowY: 'auto' }}
-                                                                >
-                                                                    <List>
-                                                                        <li ref={fourthButtonRef}>
-                                                                            <Button
-                                                                                onClick={() =>
-                                                                                    setFourthOpen(!fourthOpen)
-                                                                                }
-                                                                            >
-                                                                                Click
-                                                                            </Button>
-                                                                            <Popover
-                                                                                boundaryRef={boundaryRef}
-                                                                                fitWithinViewportHeight
-                                                                                placement={Placement.RIGHT_START}
-                                                                                isOpen={fourthOpen}
-                                                                                anchorRef={fourthButtonRef}
-                                                                                usePortal={false}
-                                                                                offset={{ along: -16 }}
-                                                                            >
-                                                                                <div
-                                                                                    className="lumx-spacing-margin-huge"
-                                                                                    style={{ overflowY: 'auto' }}
-                                                                                >
-                                                                                    <List>Popover</List>
-                                                                                </div>
-                                                                            </Popover>
-                                                                        </li>
-                                                                    </List>
-                                                                </div>
-                                                            </Popover>
-                                                        </li>
-                                                    </List>
-                                                </div>
-                                            </Popover>
-                                        </li>
-                                    </List>
-                                </div>
-                            </Popover>
-                        </li>
-                    </List>
-                </div>
-            </Popover>
+        <div style={{ height: '100vh', width: '50px' }}>
+            <List>
+                <Entry placement={Placement.BOTTOM_START}>
+                    <Entry />
+                    <Entry />
+                    <Entry>
+                        <Entry />
+                        <Entry />
+                        <Entry>
+                            <Entry>
+                                <Entry />
+                            </Entry>
+                        </Entry>
+                    </Entry>
+                </Entry>
+            </List>
         </div>
     );
 };
