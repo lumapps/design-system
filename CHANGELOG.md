@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.5][] - 2021-10-20
+
 ### Fixed
 
 -   Popover: fix prevent overflow when provided a boundary ref.
@@ -1236,3 +1238,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [2.0.3]: https://github.com/lumapps/design-system/tree/v2.0.3
 [unreleased]: https://github.com/lumapps/design-system/compare/v2.0.4...HEAD
 [2.0.4]: https://github.com/lumapps/design-system/tree/v2.0.4
+[unreleased]: https://github.com/lumapps/design-system/compare/v2.0.5...HEAD
+[2.0.5]: https://github.com/lumapps/design-system/tree/v2.0.5
