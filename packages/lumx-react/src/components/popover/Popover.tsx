@@ -236,10 +236,11 @@ export const Popover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, re
         modifiers.push(sameWidth);
     }
     if (fitWithinViewportHeight) {
-        modifiers.push({ ...maxSize, options: boundaryRef ? { boundary: boundaryRef.current } : {} }, applyMaxHeight);
+        modifiers.push({ ...maxSize, options: { boundary: boundaryRef?.current } }, applyMaxHeight);
     }
     if (boundaryRef) {
         modifiers.push({ name: 'flip', options: { boundary: boundaryRef.current } });
+        modifiers.push({ name: 'preventOverflow', options: { boundary: boundaryRef.current } });
     }
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
