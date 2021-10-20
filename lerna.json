@@ -10,7 +10,7 @@
             "message": "chore(release): release %s"
         }
     },
-    "version": "2.0.4",
+    "version": "2.0.4-fix-popover-boundary",
     "useWorkspaces": true,
     "npmClient": "yarn"
 }
