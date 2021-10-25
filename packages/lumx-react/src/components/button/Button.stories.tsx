@@ -1,6 +1,7 @@
 import { mdiSend, mdiClose } from '@lumx/icons';
 
 import { Button, ColorPalette, Emphasis, IconButton, Size } from '@lumx/react';
+import { squareImageKnob } from '@lumx/react/stories/knobs';
 import { boolean, select, text } from '@storybook/addon-knobs';
 import React from 'react';
 
@@ -41,4 +42,18 @@ export const IconButtonLowEmphasis = () => <IconButton emphasis={Emphasis.low} i
 
 export const IconButtonLowEmphasisHasBackground = () => (
     <IconButton emphasis={Emphasis.low} hasBackground icon={mdiClose} label="Close" />
+);
+
+export const IconButtonWithImage = ({ theme }: any) => (
+    <div>
+        <IconButton
+            theme={theme}
+            label="Image label"
+            image={squareImageKnob()}
+            size={select('Size', [Size.m, Size.s], DEFAULT_PROPS.size)}
+            hasBackground={boolean('Has background', false)}
+            emphasis={select('Emphasis', Emphasis, DEFAULT_PROPS.emphasis)}
+            color={select('color', ColorPalette, DEFAULT_PROPS.color)}
+        />
+    </div>
 );

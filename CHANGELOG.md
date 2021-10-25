@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   New `image` prop for `IconButton`, allowing to use an image url instead of an svg path. Will render a `<img>` tag an can only be set if `icon` prop is undefined (and vice-versa);
+
 ## [2.1.0][] - 2021-10-26
 
 ### Changed

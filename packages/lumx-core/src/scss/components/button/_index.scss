@@ -59,7 +59,9 @@
             }
 
             &.#{$lumx-base-prefix}-button--variant-icon {
-                & > i {
+                & > i,
+                & > img
+                 {
                     @include lumx-button-icon('icon', $key);
                 }
             }
