@@ -11,7 +11,16 @@ Check [size foundations](/product/foundations/size) for more details.
 
 ## Ratios
 
-Thumbnails come in 4 ratios: `square`, `original`, `vertical`, and `horizontal`.
+Thumbnails come in 6 aspect ratios: `free`, `horizontal`, `original`, `square`, `vertical` and `wide`.
+
+- `free`: define width and height as wanted, there is not relation between them.
+- `horizontal`: 3:2 (width:height) ratio, define width, height is calculated.
+- `original`: source image ratio, define width, height is calculated.
+- `square`:1:1 ratio, define width, height is calculated.
+- `vertical`: 2:3 ratio, define width, height is calculated.
+- `wide`: 16:9 ratio, define width, height is calculated.
+
+*For any ratio except `original` the source image might be cropped.*
 
 <DemoBlock orientation="horizontal" demo="ratios" />
 
@@ -24,6 +33,10 @@ Thumbnails come in two variants: `squared` and `rounded`
 ## Sizes, ratios, and variants combined
 
 <DemoBlock orientation="horizontal" demo="combined" />
+
+## Loading and error states
+
+<DemoBlock orientation="horizontal" demo="loading-error" withThemeSwitcher />
 
 ### Properties
 
