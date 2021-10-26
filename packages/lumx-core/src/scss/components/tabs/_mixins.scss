@@ -1,21 +1,6 @@
-@mixin lumx-tabs-links($theme) {
+@mixin lumx-tabs-links() {
     position: relative;
     display: flex;
-
-    &::after {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        height: 2px;
-        content: '';
-
-        @if $theme == lumx-base-const('theme', 'LIGHT') {
-            background-color: lumx-color-variant('dark', $lumx-divider-color-variant);
-        } @else if $theme == lumx-base-const('theme', 'DARK') {
-            background-color: lumx-color-variant('light', $lumx-divider-color-variant);
-        }
-    }
 }
 
 @mixin lumx-tabs-links-position($position) {
@@ -28,26 +13,50 @@
     }
 }
 
-@mixin lumx-tabs-link() {
+@mixin lumx-tabs-link($emphasis) {
     position: relative;
     display: flex;
-    height: 48px;
+    height: var(--lumx-tabs-link-height);
     align-items: center;
     justify-content: center;
     padding: 0 $lumx-spacing-unit * 3;
     border: none;
-    background: none;
+    border-radius: var(--lumx-tabs-link-border-radius);
     cursor: pointer;
     outline: none;
-    text-transform: var(--lumx-button-text-transform);
+    transition-duration: $lumx-state-transition-duration;
+    transition-property: border-radius, background-color, color;
 
     &::after {
         position: absolute;
+        top: 0;
         right: 0;
         bottom: 0;
         left: 0;
-        height: 2px;
+        border-style: solid;
+        border-top-width: var(--lumx-tabs-link-#{$emphasis}-state-default-border-top-width);
+        border-right-width: var(--lumx-tabs-link-#{$emphasis}-state-default-border-right-width);
+        border-bottom-width: var(--lumx-tabs-link-#{$emphasis}-state-default-border-bottom-width);
+        border-left-width: var(--lumx-tabs-link-#{$emphasis}-state-default-border-left-width);
+        border-radius: var(--lumx-tabs-link-border-radius);
         content: '';
+        pointer-events: none;
+        transition-duration: $lumx-state-transition-duration;
+        transition-property: border-radius, border-width, border-color;
+    }
+
+    &:hover::after {
+        border-top-width: var(--lumx-tabs-link-#{$emphasis}-state-hover-border-top-width);
+        border-right-width: var(--lumx-tabs-link-#{$emphasis}-state-hover-border-right-width);
+        border-bottom-width: var(--lumx-tabs-link-#{$emphasis}-state-hover-border-bottom-width);
+        border-left-width: var(--lumx-tabs-link-#{$emphasis}-state-hover-border-left-width);
+    }
+
+    &:active::after {
+        border-top-width: var(--lumx-tabs-link-#{$emphasis}-state-active-border-top-width);
+        border-right-width: var(--lumx-tabs-link-#{$emphasis}-state-active-border-right-width);
+        border-bottom-width: var(--lumx-tabs-link-#{$emphasis}-state-active-border-bottom-width);
+        border-left-width: var(--lumx-tabs-link-#{$emphasis}-state-active-border-left-width);
     }
 
     i {
@@ -55,24 +64,50 @@
     }
 
     span {
-        @include lumx-typography('subtitle1');
+        font-family: var(--lumx-typography-custom-button-size-m-font-family);
+        font-size: var(--lumx-typography-custom-button-size-m-font-size);
+        font-weight: var(--lumx-typography-custom-button-size-m-font-weight);
+        text-transform: var(--lumx-material-button-text-transform);
+    }
+}
+
+@mixin lumx-tabs-link-color($emphasis, $theme) {
+    background-color: var(--lumx-tabs-link-#{$emphasis}-state-default-#{$theme}-background-color);
+    color: var(--lumx-tabs-link-#{$emphasis}-state-default-#{$theme}-color);
+
+    &::after {
+        border-color: var(--lumx-tabs-link-#{$emphasis}-state-default-#{$theme}-border-color);
+    }
+
+    &:hover {
+        background-color: var(--lumx-tabs-link-#{$emphasis}-state-hover-#{$theme}-background-color);
+        color: var(--lumx-tabs-link-#{$emphasis}-state-hover-#{$theme}-color);
+
+        &::after {
+            border-color: var(--lumx-tabs-link-#{$emphasis}-state-hover-#{$theme}-border-color);
+        }
+    }
+
+    &:active {
+        background-color: var(--lumx-tabs-link-#{$emphasis}-state-active-#{$theme}-background-color);
+        color: var(--lumx-tabs-link-#{$emphasis}-state-active-#{$theme}-color);
+
+        &::after {
+            border-color: var(--lumx-tabs-link-#{$emphasis}-state-active-#{$theme}-border-color);
+        }
+    }
+
+    &[data-focus-visible-added] {
+        @if $theme == lumx-base-const('theme', 'LIGHT') {
+            @include lumx-state-low(lumx-base-const('state', 'FOCUS'), 'dark');
+        } @else if $theme == lumx-base-const('theme', 'DARK') {
+            @include lumx-state-low(lumx-base-const('state', 'FOCUS'), 'light');
+        }
     }
 }
 
 @mixin lumx-tabs-link-layout($layout) {
     @if $layout == 'fixed' {
         flex: 1 1 auto;
-    }
-}
-
-@mixin lumx-tabs-link-active($theme) {
-    @if $theme == lumx-base-const('theme', 'LIGHT') {
-        &::after {
-            background-color: lumx-color-variant('primary', 'N');
-        }
-    } @else if $theme == lumx-base-const('theme', 'DARK') {
-        &::after {
-            background-color: lumx-color-variant('light', 'N');
-        }
     }
 }

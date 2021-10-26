@@ -1,0 +1,64 @@
+{
+    "material": {
+        "button": {
+            "text-transform": { "value": "none" },
+            "variant-icon-border-radius": {}
+        },
+        "checkbox": {
+            "wrapper-size": { "value": "20px" },
+            "control-size": { "value": "16px" }
+        },
+        "chip": {
+            "size-m": {
+                "height": { "value": "{size.m.value}" },
+                "border-radius": { "value": "18px" },
+                "padding-vertical": { "value": "{spacing.unit.big.value}" }
+            },
+            "size-s": {
+                "height": { "value": "{size.s.value}" },
+                "border-radius": { "value": "12px" },
+                "padding-vertical": { "value": "{spacing.unit.medium.value}" }
+            }
+        },
+        "input-helper": "{typography.interface.caption}",
+        "input-label": "{typography.interface.body1}",
+        "progress": {
+            "bounce": { "value": "block" },
+            "rotate": { "value": "none" }
+        },
+        "radio-button": {
+            "wrapper-size": { "value": "20px" },
+            "control-size": { "value": "16px" },
+            "indicator-size": { "value": "8px" }
+        },
+        "switch": {
+            "wrapper": {
+                "width": { "value": "30px" },
+                "height": { "value": "20px" }
+            },
+            "control": {
+                "width": { "value": "30px" },
+                "height": { "value": "16px" }
+            },
+            "indicator": {
+                "size": { "value": "8px" },
+                "offset": { "value": "4px" }
+            }
+        },
+        "text-field": {
+            "padding": {
+                "top": { "value": "0" },
+                "bottom": { "value": "0" }
+            },
+            "header": {
+                "wrapper": {
+                    "margin-bottom": { "value": "{spacing.unit.regular.value}" }
+                },
+                "label": "{typography.interface.body1}"
+            },
+            "input": {
+                "content": "{typography.interface.body1}"
+            }
+        }
+    }
+}

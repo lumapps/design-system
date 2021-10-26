@@ -1,515 +1,3111 @@
 /**
  * Do not edit directly
- * Generated on Thu, 06 May 2021 08:43:34 GMT
+ * Generated on Tue, 19 Oct 2021 08:35:25 GMT
  */
 
 export const DESIGN_TOKENS = {
     button: {
-        'font-weight': {
+        height: {
             attributes: {
                 category: 'button',
-                type: 'font-weight',
+                type: 'height',
             },
         },
-        'text-transform': {
+        'border-radius': {
             attributes: {
                 category: 'button',
-                type: 'text-transform',
+                type: 'border-radius',
             },
         },
-        'variant-icon-border-radius': {
-            attributes: {
-                category: 'button',
-                type: 'variant-icon-border-radius',
+        'emphasis-high': {
+            'state-default': {
+                padding: {
+                    horizontal: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-default',
+                        },
+                    },
+                },
+                'border-width': {
+                    attributes: {
+                        category: 'button',
+                        type: 'emphasis-high',
+                        item: 'state-default',
+                    },
+                },
+                'theme-light': {
+                    'background-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-default',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral light color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-default',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-default',
+                        },
+                    },
+                },
+                'theme-dark': {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Neutral light color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-default',
+                        },
+                    },
+                    color: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-default',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-default',
+                        },
+                    },
+                },
+            },
+            'state-hover': {
+                padding: {
+                    horizontal: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-hover',
+                        },
+                    },
+                },
+                'border-width': {
+                    attributes: {
+                        category: 'button',
+                        type: 'emphasis-high',
+                        item: 'state-hover',
+                    },
+                },
+                'theme-light': {
+                    'background-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-hover',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral light color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-hover',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-hover',
+                        },
+                    },
+                },
+                'theme-dark': {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base light color with 90% opacity',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-hover',
+                        },
+                    },
+                    color: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-hover',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-hover',
+                        },
+                    },
+                },
+            },
+            'state-active': {
+                padding: {
+                    horizontal: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-active',
+                        },
+                    },
+                },
+                'border-width': {
+                    attributes: {
+                        category: 'button',
+                        type: 'emphasis-high',
+                        item: 'state-active',
+                    },
+                },
+                'theme-light': {
+                    'background-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-active',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral light color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-active',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-active',
+                        },
+                    },
+                },
+                'theme-dark': {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base light color with 80% opacity',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-active',
+                        },
+                    },
+                    color: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-active',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-high',
+                            item: 'state-active',
+                        },
+                    },
+                },
             },
         },
-        'size-m-font-size': {
-            attributes: {
-                category: 'button',
-                type: 'size-m-font-size',
+        'emphasis-medium': {
+            'state-default': {
+                padding: {
+                    horizontal: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-default',
+                        },
+                    },
+                },
+                'border-width': {
+                    attributes: {
+                        category: 'button',
+                        type: 'emphasis-medium',
+                        item: 'state-default',
+                    },
+                },
+                'theme-light': {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base dark color with 12% opacity',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-default',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral dark color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-default',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-default',
+                        },
+                    },
+                },
+                'theme-dark': {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base light color with 20% opacity',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-default',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral light color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-default',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-default',
+                        },
+                    },
+                },
+            },
+            'state-hover': {
+                padding: {
+                    horizontal: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-hover',
+                        },
+                    },
+                },
+                'border-width': {
+                    attributes: {
+                        category: 'button',
+                        type: 'emphasis-medium',
+                        item: 'state-hover',
+                    },
+                },
+                'theme-light': {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base dark color with 20% opacity',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-hover',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral dark color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-hover',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-hover',
+                        },
+                    },
+                },
+                'theme-dark': {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base light color with 40% opacity',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-hover',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral light color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-hover',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-hover',
+                        },
+                    },
+                },
+            },
+            'state-active': {
+                padding: {
+                    horizontal: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-active',
+                        },
+                    },
+                },
+                'border-width': {
+                    attributes: {
+                        category: 'button',
+                        type: 'emphasis-medium',
+                        item: 'state-active',
+                    },
+                },
+                'theme-light': {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base dark color with 38% opacity',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-active',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral dark color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-active',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-active',
+                        },
+                    },
+                },
+                'theme-dark': {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base light color with 60% opacity',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-active',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral light color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-active',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-medium',
+                            item: 'state-active',
+                        },
+                    },
+                },
             },
         },
-        'size-s-font-size': {
-            attributes: {
-                category: 'button',
-                type: 'size-s-font-size',
+        'emphasis-low': {
+            'state-default': {
+                padding: {
+                    horizontal: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-default',
+                        },
+                    },
+                },
+                'border-width': {
+                    attributes: {
+                        category: 'button',
+                        type: 'emphasis-low',
+                        item: 'state-default',
+                    },
+                },
+                'theme-light': {
+                    'background-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-default',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral dark color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-default',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-default',
+                        },
+                    },
+                },
+                'theme-dark': {
+                    'background-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-default',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral light color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-default',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-default',
+                        },
+                    },
+                },
+            },
+            'state-hover': {
+                padding: {
+                    horizontal: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-hover',
+                        },
+                    },
+                },
+                'border-width': {
+                    attributes: {
+                        category: 'button',
+                        type: 'emphasis-low',
+                        item: 'state-hover',
+                    },
+                },
+                'theme-light': {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base dark color with 12% opacity',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-hover',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral dark color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-hover',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-hover',
+                        },
+                    },
+                },
+                'theme-dark': {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base light color with 20% opacity',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-hover',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral light color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-hover',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-hover',
+                        },
+                    },
+                },
+            },
+            'state-active': {
+                padding: {
+                    horizontal: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-active',
+                        },
+                    },
+                },
+                'border-width': {
+                    attributes: {
+                        category: 'button',
+                        type: 'emphasis-low',
+                        item: 'state-active',
+                    },
+                },
+                'theme-light': {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base dark color with 20% opacity',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-active',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral dark color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-active',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-active',
+                        },
+                    },
+                },
+                'theme-dark': {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base light color with 40% opacity',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-active',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral light color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-active',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-low',
+                            item: 'state-active',
+                        },
+                    },
+                },
+            },
+        },
+        'emphasis-selected': {
+            'state-default': {
+                padding: {
+                    horizontal: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-default',
+                        },
+                    },
+                },
+                'border-width': {
+                    attributes: {
+                        category: 'button',
+                        type: 'emphasis-selected',
+                        item: 'state-default',
+                    },
+                },
+                'theme-light': {
+                    'background-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-default',
+                        },
+                    },
+                    color: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-default',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-default',
+                        },
+                    },
+                },
+                'theme-dark': {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base light color with 60% opacity',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-default',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral light color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-default',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-default',
+                        },
+                    },
+                },
+            },
+            'state-hover': {
+                padding: {
+                    horizontal: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-hover',
+                        },
+                    },
+                },
+                'border-width': {
+                    attributes: {
+                        category: 'button',
+                        type: 'emphasis-selected',
+                        item: 'state-hover',
+                    },
+                },
+                'theme-light': {
+                    'background-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-hover',
+                        },
+                    },
+                    color: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-hover',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-hover',
+                        },
+                    },
+                },
+                'theme-dark': {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base light color with 40% opacity',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-hover',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral light color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-hover',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-hover',
+                        },
+                    },
+                },
+            },
+            'state-active': {
+                padding: {
+                    horizontal: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-active',
+                        },
+                    },
+                },
+                'border-width': {
+                    attributes: {
+                        category: 'button',
+                        type: 'emphasis-selected',
+                        item: 'state-active',
+                    },
+                },
+                'theme-light': {
+                    'background-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-active',
+                        },
+                    },
+                    color: {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-active',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-active',
+                        },
+                    },
+                },
+                'theme-dark': {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base light color with 20% opacity',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-active',
+                        },
+                    },
+                    color: {
+                        version: '0.22',
+                        comment: 'Neutral light color',
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-active',
+                        },
+                    },
+                    'border-color': {
+                        attributes: {
+                            category: 'button',
+                            type: 'emphasis-selected',
+                            item: 'state-active',
+                        },
+                    },
+                },
             },
         },
     },
-    checkbox: {
-        'wrapper-size': {
-            attributes: {
-                category: 'checkbox',
-                type: 'wrapper-size',
-            },
-        },
-        'control-size': {
-            attributes: {
-                category: 'checkbox',
-                type: 'control-size',
-            },
-        },
-    },
-    chip: {
-        'size-m': {
-            height: {
+    material: {
+        button: {
+            'text-transform': {
                 attributes: {
-                    category: 'chip',
-                    type: 'size-m',
-                    item: 'height',
-                },
-            },
-            'border-radius': {
-                attributes: {
-                    category: 'chip',
-                    type: 'size-m',
-                    item: 'border-radius',
-                },
-            },
-            'padding-vertical': {
-                attributes: {
-                    category: 'chip',
-                    type: 'size-m',
-                    item: 'padding-vertical',
+                    category: 'material',
+                    type: 'button',
+                    item: 'text-transform',
                 },
             },
         },
-        'size-s': {
-            height: {
+        checkbox: {
+            'wrapper-size': {
                 attributes: {
-                    category: 'chip',
-                    type: 'size-s',
-                    item: 'height',
+                    category: 'material',
+                    type: 'checkbox',
+                    item: 'wrapper-size',
                 },
             },
-            'border-radius': {
+            'control-size': {
                 attributes: {
-                    category: 'chip',
-                    type: 'size-s',
-                    item: 'border-radius',
-                },
-            },
-            'padding-vertical': {
-                attributes: {
-                    category: 'chip',
-                    type: 'size-s',
-                    item: 'padding-vertical',
+                    category: 'material',
+                    type: 'checkbox',
+                    item: 'control-size',
                 },
             },
         },
-    },
-    'input-helper': {
-        'font-size': {
-            attributes: {
-                category: 'input-helper',
-                type: 'font-size',
-            },
-        },
-        'font-weight': {
-            attributes: {
-                category: 'input-helper',
-                type: 'font-weight',
-            },
-        },
-        'line-height': {
-            attributes: {
-                category: 'input-helper',
-                type: 'line-height',
-            },
-        },
-    },
-    'input-label': {
-        'font-size': {
-            attributes: {
-                category: 'input-label',
-                type: 'font-size',
-            },
-        },
-        'font-weight': {
-            attributes: {
-                category: 'input-label',
-                type: 'font-weight',
-            },
-        },
-        'line-height': {
-            attributes: {
-                category: 'input-label',
-                type: 'line-height',
-            },
-        },
-    },
-    'radio-button': {
-        'wrapper-size': {
-            attributes: {
-                category: 'radio-button',
-                type: 'wrapper-size',
-            },
-        },
-        'control-size': {
-            attributes: {
-                category: 'radio-button',
-                type: 'control-size',
-            },
-        },
-        'indicator-size': {
-            attributes: {
-                category: 'radio-button',
-                type: 'indicator-size',
-            },
-        },
-    },
-    switch: {
-        wrapper: {
-            width: {
-                attributes: {
-                    category: 'switch',
-                    type: 'wrapper',
-                    item: 'width',
+        chip: {
+            'size-m': {
+                height: {
+                    attributes: {
+                        category: 'material',
+                        type: 'chip',
+                        item: 'size-m',
+                    },
+                },
+                'border-radius': {
+                    attributes: {
+                        category: 'material',
+                        type: 'chip',
+                        item: 'size-m',
+                    },
+                },
+                'padding-vertical': {
+                    attributes: {
+                        category: 'material',
+                        type: 'chip',
+                        item: 'size-m',
+                    },
                 },
             },
-            height: {
-                attributes: {
-                    category: 'switch',
-                    type: 'wrapper',
-                    item: 'height',
+            'size-s': {
+                height: {
+                    attributes: {
+                        category: 'material',
+                        type: 'chip',
+                        item: 'size-s',
+                    },
+                },
+                'border-radius': {
+                    attributes: {
+                        category: 'material',
+                        type: 'chip',
+                        item: 'size-s',
+                    },
+                },
+                'padding-vertical': {
+                    attributes: {
+                        category: 'material',
+                        type: 'chip',
+                        item: 'size-s',
+                    },
                 },
             },
         },
-        control: {
-            width: {
-                attributes: {
-                    category: 'switch',
-                    type: 'control',
-                    item: 'width',
-                },
-            },
-            height: {
-                attributes: {
-                    category: 'switch',
-                    type: 'control',
-                    item: 'height',
-                },
-            },
-        },
-        indicator: {
-            size: {
-                attributes: {
-                    category: 'switch',
-                    type: 'indicator',
-                    item: 'size',
-                },
-            },
-            offset: {
-                attributes: {
-                    category: 'switch',
-                    type: 'indicator',
-                    item: 'offset',
-                },
-            },
-        },
-    },
-    'text-field': {
-        padding: {
-            top: {
-                attributes: {
-                    category: 'text-field',
-                    type: 'padding',
-                    item: 'top',
-                },
-            },
-            bottom: {
-                attributes: {
-                    category: 'text-field',
-                    type: 'padding',
-                    item: 'bottom',
-                },
-            },
-        },
-        header: {
-            'margin-bottom': {
-                attributes: {
-                    category: 'text-field',
-                    type: 'header',
-                    item: 'margin-bottom',
-                },
-            },
-        },
-        label: {
+        'input-helper': {
             'font-size': {
                 attributes: {
-                    category: 'text-field',
-                    type: 'label',
+                    category: 'material',
+                    type: 'input-helper',
                     item: 'font-size',
                 },
             },
             'font-weight': {
                 attributes: {
-                    category: 'text-field',
-                    type: 'label',
+                    category: 'material',
+                    type: 'input-helper',
                     item: 'font-weight',
                 },
             },
             'line-height': {
                 attributes: {
-                    category: 'text-field',
-                    type: 'label',
+                    category: 'material',
+                    type: 'input-helper',
                     item: 'line-height',
                 },
             },
         },
-        wrapper: {
+        'input-label': {
+            'font-size': {
+                attributes: {
+                    category: 'material',
+                    type: 'input-label',
+                    item: 'font-size',
+                },
+            },
+            'font-weight': {
+                attributes: {
+                    category: 'material',
+                    type: 'input-label',
+                    item: 'font-weight',
+                },
+            },
+            'line-height': {
+                attributes: {
+                    category: 'material',
+                    type: 'input-label',
+                    item: 'line-height',
+                },
+            },
+        },
+        progress: {
+            bounce: {
+                attributes: {
+                    category: 'material',
+                    type: 'progress',
+                    item: 'bounce',
+                },
+            },
+            rotate: {
+                attributes: {
+                    category: 'material',
+                    type: 'progress',
+                    item: 'rotate',
+                },
+            },
+        },
+        'radio-button': {
+            'wrapper-size': {
+                attributes: {
+                    category: 'material',
+                    type: 'radio-button',
+                    item: 'wrapper-size',
+                },
+            },
+            'control-size': {
+                attributes: {
+                    category: 'material',
+                    type: 'radio-button',
+                    item: 'control-size',
+                },
+            },
+            'indicator-size': {
+                attributes: {
+                    category: 'material',
+                    type: 'radio-button',
+                    item: 'indicator-size',
+                },
+            },
+        },
+        switch: {
+            wrapper: {
+                width: {
+                    attributes: {
+                        category: 'material',
+                        type: 'switch',
+                        item: 'wrapper',
+                    },
+                },
+                height: {
+                    attributes: {
+                        category: 'material',
+                        type: 'switch',
+                        item: 'wrapper',
+                    },
+                },
+            },
+            control: {
+                width: {
+                    attributes: {
+                        category: 'material',
+                        type: 'switch',
+                        item: 'control',
+                    },
+                },
+                height: {
+                    attributes: {
+                        category: 'material',
+                        type: 'switch',
+                        item: 'control',
+                    },
+                },
+            },
+            indicator: {
+                size: {
+                    attributes: {
+                        category: 'material',
+                        type: 'switch',
+                        item: 'indicator',
+                    },
+                },
+                offset: {
+                    attributes: {
+                        category: 'material',
+                        type: 'switch',
+                        item: 'indicator',
+                    },
+                },
+            },
+        },
+        'text-field': {
+            padding: {
+                top: {
+                    attributes: {
+                        category: 'material',
+                        type: 'text-field',
+                        item: 'padding',
+                    },
+                },
+                bottom: {
+                    attributes: {
+                        category: 'material',
+                        type: 'text-field',
+                        item: 'padding',
+                    },
+                },
+            },
+            header: {
+                wrapper: {
+                    'margin-bottom': {
+                        attributes: {
+                            category: 'material',
+                            type: 'text-field',
+                            item: 'header',
+                        },
+                    },
+                },
+                label: {
+                    'font-size': {
+                        attributes: {
+                            category: 'material',
+                            type: 'text-field',
+                            item: 'header',
+                        },
+                    },
+                    'font-weight': {
+                        attributes: {
+                            category: 'material',
+                            type: 'text-field',
+                            item: 'header',
+                        },
+                    },
+                    'line-height': {
+                        attributes: {
+                            category: 'material',
+                            type: 'text-field',
+                            item: 'header',
+                        },
+                    },
+                },
+            },
+            input: {
+                content: {
+                    'font-size': {
+                        attributes: {
+                            category: 'material',
+                            type: 'text-field',
+                            item: 'input',
+                        },
+                    },
+                    'font-weight': {
+                        attributes: {
+                            category: 'material',
+                            type: 'text-field',
+                            item: 'input',
+                        },
+                    },
+                    'line-height': {
+                        attributes: {
+                            category: 'material',
+                            type: 'text-field',
+                            item: 'input',
+                        },
+                    },
+                },
+            },
+        },
+    },
+    navigation: {
+        item: {
+            padding: {
+                horizontal: {
+                    attributes: {
+                        category: 'navigation',
+                        type: 'item',
+                        item: 'padding',
+                    },
+                },
+            },
             'min-height': {
                 attributes: {
-                    category: 'text-field',
-                    type: 'wrapper',
+                    category: 'navigation',
+                    type: 'item',
                     item: 'min-height',
                 },
             },
             'border-radius': {
                 attributes: {
-                    category: 'text-field',
-                    type: 'wrapper',
+                    category: 'navigation',
+                    type: 'item',
                     item: 'border-radius',
                 },
             },
-            padding: {
-                vertical: {
-                    attributes: {
-                        category: 'text-field',
-                        type: 'wrapper',
-                        item: 'padding',
+            'emphasis-low': {
+                'state-default': {
+                    border: {
+                        top: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                        right: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                        bottom: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                        left: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                    },
+                    'theme-light': {
+                        'background-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'border-color': {
+                            version: '0.22',
+                            comment: 'Base dark color with 12% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'icon-color': {
+                            version: '0.22',
+                            comment: 'Neutral dark color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'label-color': {
+                            version: '0.22',
+                            comment: 'Neutral dark color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'chevron-background-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'chevron-color': {
+                            version: '0.22',
+                            comment: 'Neutral dark color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                    },
+                    'theme-dark': {
+                        'background-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'border-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 20% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'icon-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'label-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'chevron-background-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'chevron-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
                     },
                 },
-                horizontal: {
-                    attributes: {
-                        category: 'text-field',
-                        type: 'wrapper',
-                        item: 'padding',
+                'state-hover': {
+                    border: {
+                        top: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                        right: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                        bottom: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                        left: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                    },
+                    'theme-light': {
+                        'background-color': {
+                            version: '0.22',
+                            comment: 'Base dark color with 12% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'border-color': {
+                            version: '0.22',
+                            comment: 'Base dark color with 12% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'icon-color': {
+                            version: '0.22',
+                            comment: 'Neutral dark color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'label-color': {
+                            version: '0.22',
+                            comment: 'Neutral dark color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'chevron-background-color': {
+                            version: '0.22',
+                            comment: 'Base dark color with 12% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'chevron-color': {
+                            version: '0.22',
+                            comment: 'Neutral dark color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                    },
+                    'theme-dark': {
+                        'background-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 20% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'border-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 20% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'icon-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'label-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'chevron-background-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 20% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'chevron-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                    },
+                },
+                'state-active': {
+                    border: {
+                        top: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                        right: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                        bottom: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                        left: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                    },
+                    'theme-light': {
+                        'background-color': {
+                            version: '0.22',
+                            comment: 'Base dark color with 20% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'border-color': {
+                            version: '0.22',
+                            comment: 'Base dark color with 12% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'icon-color': {
+                            version: '0.22',
+                            comment: 'Neutral dark color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'label-color': {
+                            version: '0.22',
+                            comment: 'Neutral dark color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'chevron-background-color': {
+                            version: '0.22',
+                            comment: 'Base dark color with 20% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'chevron-color': {
+                            version: '0.22',
+                            comment: 'Neutral dark color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                    },
+                    'theme-dark': {
+                        'background-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 40% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'border-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 20% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'icon-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'label-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'chevron-background-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 40% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'chevron-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-low',
+                            },
+                        },
+                    },
+                },
+            },
+            'emphasis-selected': {
+                'state-default': {
+                    border: {
+                        top: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                        right: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                        bottom: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                        left: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                    },
+                    'theme-light': {
+                        'background-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'border-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'icon-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'label-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'chevron-background-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'chevron-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                    },
+                    'theme-dark': {
+                        'background-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 60% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'border-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 20% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'icon-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'label-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'chevron-background-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'chevron-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                    },
+                },
+                'state-hover': {
+                    border: {
+                        top: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                        right: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                        bottom: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                        left: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                    },
+                    'theme-light': {
+                        'background-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'border-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'icon-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'label-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'chevron-background-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'chevron-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                    },
+                    'theme-dark': {
+                        'background-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 40% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'border-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 20% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'icon-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'label-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'chevron-background-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 40% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'chevron-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                    },
+                },
+                'state-active': {
+                    border: {
+                        top: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                        right: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                        bottom: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                        left: {
+                            width: {
+                                attributes: {
+                                    category: 'navigation',
+                                    type: 'item',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                    },
+                    'theme-light': {
+                        'background-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'border-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'icon-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'label-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'chevron-background-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'chevron-color': {
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                    },
+                    'theme-dark': {
+                        'background-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 20% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'border-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 20% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'icon-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'label-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'chevron-background-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 20% opacity',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'chevron-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'navigation',
+                                type: 'item',
+                                item: 'emphasis-selected',
+                            },
+                        },
                     },
                 },
             },
         },
+    },
+    tabs: {
+        link: {
+            height: {
+                attributes: {
+                    category: 'tabs',
+                    type: 'link',
+                    item: 'height',
+                },
+            },
+            'border-radius': {
+                attributes: {
+                    category: 'tabs',
+                    type: 'link',
+                    item: 'border-radius',
+                },
+            },
+            'emphasis-low': {
+                'state-default': {
+                    border: {
+                        top: {
+                            width: {
+                                attributes: {
+                                    category: 'tabs',
+                                    type: 'link',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                        right: {
+                            width: {
+                                attributes: {
+                                    category: 'tabs',
+                                    type: 'link',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                        bottom: {
+                            width: {
+                                attributes: {
+                                    category: 'tabs',
+                                    type: 'link',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                        left: {
+                            width: {
+                                attributes: {
+                                    category: 'tabs',
+                                    type: 'link',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                    },
+                    'theme-light': {
+                        'background-color': {
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        color: {
+                            version: '0.22',
+                            comment: 'Neutral dark color',
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'border-color': {
+                            version: '0.22',
+                            comment: 'Base dark color with 12% opacity',
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-low',
+                            },
+                        },
+                    },
+                    'theme-dark': {
+                        'background-color': {
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        color: {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'border-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 20% opacity',
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-low',
+                            },
+                        },
+                    },
+                },
+                'state-hover': {
+                    border: {
+                        top: {
+                            width: {
+                                attributes: {
+                                    category: 'tabs',
+                                    type: 'link',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                        right: {
+                            width: {
+                                attributes: {
+                                    category: 'tabs',
+                                    type: 'link',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                        bottom: {
+                            width: {
+                                attributes: {
+                                    category: 'tabs',
+                                    type: 'link',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                        left: {
+                            width: {
+                                attributes: {
+                                    category: 'tabs',
+                                    type: 'link',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                    },
+                    'theme-light': {
+                        'background-color': {
+                            version: '0.22',
+                            comment: 'Base dark color with 12% opacity',
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        color: {
+                            version: '0.22',
+                            comment: 'Neutral dark color',
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'border-color': {
+                            version: '0.22',
+                            comment: 'Base dark color with 12% opacity',
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-low',
+                            },
+                        },
+                    },
+                    'theme-dark': {
+                        'background-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 20% opacity',
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        color: {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'border-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 20% opacity',
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-low',
+                            },
+                        },
+                    },
+                },
+                'state-active': {
+                    border: {
+                        top: {
+                            width: {
+                                attributes: {
+                                    category: 'tabs',
+                                    type: 'link',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                        right: {
+                            width: {
+                                attributes: {
+                                    category: 'tabs',
+                                    type: 'link',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                        bottom: {
+                            width: {
+                                attributes: {
+                                    category: 'tabs',
+                                    type: 'link',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                        left: {
+                            width: {
+                                attributes: {
+                                    category: 'tabs',
+                                    type: 'link',
+                                    item: 'emphasis-low',
+                                },
+                            },
+                        },
+                    },
+                    'theme-light': {
+                        'background-color': {
+                            version: '0.22',
+                            comment: 'Base dark color with 20% opacity',
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        color: {
+                            version: '0.22',
+                            comment: 'Neutral dark color',
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'border-color': {
+                            version: '0.22',
+                            comment: 'Base dark color with 12% opacity',
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-low',
+                            },
+                        },
+                    },
+                    'theme-dark': {
+                        'background-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 40% opacity',
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        color: {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-low',
+                            },
+                        },
+                        'border-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 20% opacity',
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-low',
+                            },
+                        },
+                    },
+                },
+            },
+            'emphasis-selected': {
+                'state-default': {
+                    border: {
+                        top: {
+                            width: {
+                                attributes: {
+                                    category: 'tabs',
+                                    type: 'link',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                        right: {
+                            width: {
+                                attributes: {
+                                    category: 'tabs',
+                                    type: 'link',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                        bottom: {
+                            width: {
+                                attributes: {
+                                    category: 'tabs',
+                                    type: 'link',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                        left: {
+                            width: {
+                                attributes: {
+                                    category: 'tabs',
+                                    type: 'link',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                    },
+                    'theme-light': {
+                        'background-color': {
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        color: {
+                            version: '0.22',
+                            comment: 'Neutral dark color',
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'border-color': {
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                    },
+                    'theme-dark': {
+                        'background-color': {
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        color: {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'border-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                    },
+                },
+                'state-hover': {
+                    border: {
+                        top: {
+                            width: {
+                                attributes: {
+                                    category: 'tabs',
+                                    type: 'link',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                        right: {
+                            width: {
+                                attributes: {
+                                    category: 'tabs',
+                                    type: 'link',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                        bottom: {
+                            width: {
+                                attributes: {
+                                    category: 'tabs',
+                                    type: 'link',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                        left: {
+                            width: {
+                                attributes: {
+                                    category: 'tabs',
+                                    type: 'link',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                    },
+                    'theme-light': {
+                        'background-color': {
+                            version: '0.22',
+                            comment: 'Base dark color with 12% opacity',
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        color: {
+                            version: '0.22',
+                            comment: 'Neutral dark color',
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'border-color': {
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                    },
+                    'theme-dark': {
+                        'background-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 20% opacity',
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        color: {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'border-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                    },
+                },
+                'state-active': {
+                    border: {
+                        top: {
+                            width: {
+                                attributes: {
+                                    category: 'tabs',
+                                    type: 'link',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                        right: {
+                            width: {
+                                attributes: {
+                                    category: 'tabs',
+                                    type: 'link',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                        bottom: {
+                            width: {
+                                attributes: {
+                                    category: 'tabs',
+                                    type: 'link',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                        left: {
+                            width: {
+                                attributes: {
+                                    category: 'tabs',
+                                    type: 'link',
+                                    item: 'emphasis-selected',
+                                },
+                            },
+                        },
+                    },
+                    'theme-light': {
+                        'background-color': {
+                            version: '0.22',
+                            comment: 'Base dark color with 20% opacity',
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        color: {
+                            version: '0.22',
+                            comment: 'Neutral dark color',
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'border-color': {
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                    },
+                    'theme-dark': {
+                        'background-color': {
+                            version: '0.22',
+                            comment: 'Base light color with 40% opacity',
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        color: {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                        'border-color': {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'tabs',
+                                type: 'link',
+                                item: 'emphasis-selected',
+                            },
+                        },
+                    },
+                },
+            },
+        },
+    },
+    'text-field': {
+        input: {
+            'min-height': {
+                attributes: {
+                    category: 'text-field',
+                    type: 'input',
+                    item: 'min-height',
+                },
+            },
+            padding: {
+                horizontal: {
+                    attributes: {
+                        category: 'text-field',
+                        type: 'input',
+                        item: 'padding',
+                    },
+                },
+            },
+            'border-radius': {
+                attributes: {
+                    category: 'text-field',
+                    type: 'input',
+                    item: 'border-radius',
+                },
+            },
+        },
         'state-default': {
-            border: {
-                top: {
-                    width: {
-                        attributes: {
-                            category: 'text-field',
-                            type: 'state-default',
-                            item: 'border',
+            input: {
+                border: {
+                    top: {
+                        width: {
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-default',
+                                item: 'input',
+                            },
                         },
                     },
-                },
-                right: {
-                    width: {
-                        attributes: {
-                            category: 'text-field',
-                            type: 'state-default',
-                            item: 'border',
+                    right: {
+                        width: {
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-default',
+                                item: 'input',
+                            },
                         },
                     },
-                },
-                bottom: {
-                    width: {
-                        attributes: {
-                            category: 'text-field',
-                            type: 'state-default',
-                            item: 'border',
+                    bottom: {
+                        width: {
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-default',
+                                item: 'input',
+                            },
                         },
                     },
-                },
-                left: {
-                    width: {
-                        attributes: {
-                            category: 'text-field',
-                            type: 'state-default',
-                            item: 'border',
+                    left: {
+                        width: {
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-default',
+                                item: 'input',
+                            },
                         },
                     },
                 },
             },
             'theme-light': {
-                'background-color': {
-                    version: '0.22',
-                    comment: 'Base dark color with 5% opacity',
-                    attributes: {
-                        category: 'text-field',
-                        type: 'state-default',
-                        item: 'theme-light',
+                header: {
+                    label: {
+                        color: {
+                            version: '0.22',
+                            comment: 'Neutral dark color',
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-default',
+                                item: 'theme-light',
+                            },
+                        },
                     },
                 },
-                'border-color': {
-                    version: '0.22',
-                    comment: 'Base dark color with 20% opacity',
-                    attributes: {
-                        category: 'text-field',
-                        type: 'state-default',
-                        item: 'theme-light',
+                input: {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base dark color with 5% opacity',
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-default',
+                            item: 'theme-light',
+                        },
+                    },
+                    'border-color': {
+                        version: '0.22',
+                        comment: 'Base dark color with 20% opacity',
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-default',
+                            item: 'theme-light',
+                        },
+                    },
+                    content: {
+                        color: {
+                            version: '0.22',
+                            comment: 'Neutral dark color',
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-default',
+                                item: 'theme-light',
+                            },
+                        },
+                    },
+                    placeholder: {
+                        color: {
+                            version: '0.22',
+                            comment: 'Base dark color with 54% opacity',
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-default',
+                                item: 'theme-light',
+                            },
+                        },
                     },
                 },
             },
             'theme-dark': {
-                'background-color': {
-                    version: '0.22',
-                    comment: 'Base light color with 10% opacity',
-                    attributes: {
-                        category: 'text-field',
-                        type: 'state-default',
-                        item: 'theme-dark',
+                header: {
+                    label: {
+                        color: {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-default',
+                                item: 'theme-dark',
+                            },
+                        },
                     },
                 },
-                'border-color': {
-                    version: '0.22',
-                    comment: 'Base light color with 40% opacity',
-                    attributes: {
-                        category: 'text-field',
-                        type: 'state-default',
-                        item: 'theme-dark',
+                input: {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base light color with 10% opacity',
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-default',
+                            item: 'theme-dark',
+                        },
+                    },
+                    'border-color': {
+                        version: '0.22',
+                        comment: 'Base light color with 40% opacity',
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-default',
+                            item: 'theme-dark',
+                        },
+                    },
+                    content: {
+                        color: {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-default',
+                                item: 'theme-dark',
+                            },
+                        },
+                    },
+                    placeholder: {
+                        color: {
+                            version: '0.22',
+                            comment: 'Base light color with 80% opacity',
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-default',
+                                item: 'theme-dark',
+                            },
+                        },
                     },
                 },
             },
         },
         'state-hover': {
+            input: {
+                border: {
+                    top: {
+                        width: {
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-hover',
+                                item: 'input',
+                            },
+                        },
+                    },
+                    right: {
+                        width: {
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-hover',
+                                item: 'input',
+                            },
+                        },
+                    },
+                    bottom: {
+                        width: {
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-hover',
+                                item: 'input',
+                            },
+                        },
+                    },
+                    left: {
+                        width: {
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-hover',
+                                item: 'input',
+                            },
+                        },
+                    },
+                },
+            },
             'theme-light': {
-                'background-color': {
-                    version: '0.22',
-                    comment: 'Base dark color with 12% opacity',
-                    attributes: {
-                        category: 'text-field',
-                        type: 'state-hover',
-                        item: 'theme-light',
+                input: {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base dark color with 12% opacity',
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-hover',
+                            item: 'theme-light',
+                        },
+                    },
+                    'border-color': {
+                        version: '0.22',
+                        comment: 'Base dark color with 20% opacity',
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-hover',
+                            item: 'theme-light',
+                        },
+                    },
+                    content: {
+                        color: {
+                            version: '0.22',
+                            comment: 'Neutral dark color',
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-hover',
+                                item: 'theme-light',
+                            },
+                        },
+                    },
+                    placeholder: {
+                        color: {
+                            version: '0.22',
+                            comment: 'Base dark color with 54% opacity',
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-hover',
+                                item: 'theme-light',
+                            },
+                        },
                     },
                 },
             },
             'theme-dark': {
-                'background-color': {
-                    version: '0.22',
-                    comment: 'Base light color with 20% opacity',
-                    attributes: {
-                        category: 'text-field',
-                        type: 'state-hover',
-                        item: 'theme-dark',
+                input: {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Base light color with 20% opacity',
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-hover',
+                            item: 'theme-dark',
+                        },
+                    },
+                    'border-color': {
+                        version: '0.22',
+                        comment: 'Base light color with 40% opacity',
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-hover',
+                            item: 'theme-dark',
+                        },
+                    },
+                    content: {
+                        color: {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-hover',
+                                item: 'theme-dark',
+                            },
+                        },
+                    },
+                    placeholder: {
+                        color: {
+                            version: '0.22',
+                            comment: 'Base light color with 80% opacity',
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-hover',
+                                item: 'theme-dark',
+                            },
+                        },
                     },
                 },
             },
         },
         'state-focus': {
-            border: {
-                top: {
-                    width: {
-                        attributes: {
-                            category: 'text-field',
-                            type: 'state-focus',
-                            item: 'border',
+            input: {
+                border: {
+                    top: {
+                        width: {
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-focus',
+                                item: 'input',
+                            },
                         },
                     },
-                },
-                right: {
-                    width: {
-                        attributes: {
-                            category: 'text-field',
-                            type: 'state-focus',
-                            item: 'border',
+                    right: {
+                        width: {
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-focus',
+                                item: 'input',
+                            },
                         },
                     },
-                },
-                bottom: {
-                    width: {
-                        attributes: {
-                            category: 'text-field',
-                            type: 'state-focus',
-                            item: 'border',
+                    bottom: {
+                        width: {
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-focus',
+                                item: 'input',
+                            },
                         },
                     },
-                },
-                left: {
-                    width: {
-                        attributes: {
-                            category: 'text-field',
-                            type: 'state-focus',
-                            item: 'border',
+                    left: {
+                        width: {
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-focus',
+                                item: 'input',
+                            },
                         },
                     },
                 },
             },
             'theme-light': {
-                'background-color': {
-                    version: '0.22',
-                    comment: 'Neutral light color',
-                    attributes: {
-                        category: 'text-field',
-                        type: 'state-focus',
-                        item: 'theme-light',
+                header: {
+                    label: {
+                        color: {
+                            version: '0.22',
+                            comment: 'Neutral dark color',
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-focus',
+                                item: 'theme-light',
+                            },
+                        },
                     },
                 },
-                'border-color': {
-                    version: '0.22',
-                    comment: 'Base blue color with 60% opacity',
-                    attributes: {
-                        category: 'text-field',
-                        type: 'state-focus',
-                        item: 'theme-light',
+                input: {
+                    'background-color': {
+                        version: '0.22',
+                        comment: 'Neutral light color',
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-focus',
+                            item: 'theme-light',
+                        },
+                    },
+                    'border-color': {
+                        version: '0.22',
+                        comment: 'Base blue color with 60% opacity',
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-focus',
+                            item: 'theme-light',
+                        },
+                    },
+                    content: {
+                        color: {
+                            version: '0.22',
+                            comment: 'Neutral dark color',
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-focus',
+                                item: 'theme-light',
+                            },
+                        },
+                    },
+                    placeholder: {
+                        color: {
+                            version: '0.22',
+                            comment: 'Base dark color with 54% opacity',
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-focus',
+                                item: 'theme-light',
+                            },
+                        },
                     },
                 },
             },
             'theme-dark': {
-                'background-color': {
-                    attributes: {
-                        category: 'text-field',
-                        type: 'state-focus',
-                        item: 'theme-dark',
+                header: {
+                    label: {
+                        color: {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-focus',
+                                item: 'theme-dark',
+                            },
+                        },
                     },
                 },
-                'border-color': {
-                    version: '0.22',
-                    comment: 'Base light color with 80% opacity',
-                    attributes: {
-                        category: 'text-field',
-                        type: 'state-focus',
-                        item: 'theme-dark',
+                input: {
+                    'background-color': {
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-focus',
+                            item: 'theme-dark',
+                        },
+                    },
+                    'border-color': {
+                        version: '0.22',
+                        comment: 'Base light color with 80% opacity',
+                        attributes: {
+                            category: 'text-field',
+                            type: 'state-focus',
+                            item: 'theme-dark',
+                        },
+                    },
+                    content: {
+                        color: {
+                            version: '0.22',
+                            comment: 'Neutral light color',
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-focus',
+                                item: 'theme-dark',
+                            },
+                        },
+                    },
+                    placeholder: {
+                        color: {
+                            version: '0.22',
+                            comment: 'Base light color with 80% opacity',
+                            attributes: {
+                                category: 'text-field',
+                                type: 'state-focus',
+                                item: 'theme-dark',
+                            },
+                        },
                     },
                 },
-            },
-        },
-        'input-icon-size': {
-            attributes: {
-                category: 'text-field',
-                type: 'input-icon-size',
-            },
-        },
-        input: {
-            'font-size': {
-                attributes: {
-                    category: 'text-field',
-                    type: 'input',
-                    item: 'font-size',
-                },
-            },
-            'font-weight': {
-                attributes: {
-                    category: 'text-field',
-                    type: 'input',
-                    item: 'font-weight',
-                },
-            },
-            'line-height': {
-                attributes: {
-                    category: 'text-field',
-                    type: 'input',
-                    item: 'line-height',
-                },
-            },
-        },
-        'input-validity-size': {
-            attributes: {
-                category: 'text-field',
-                type: 'input-validity-size',
-            },
-        },
-        'input-clear-size': {
-            attributes: {
-                category: 'text-field',
-                type: 'input-clear-size',
             },
         },
     },
@@ -2258,20 +4854,6 @@ export const DESIGN_TOKENS = {
             },
         },
     },
-    progress: {
-        bounce: {
-            attributes: {
-                category: 'progress',
-                type: 'bounce',
-            },
-        },
-        rotate: {
-            attributes: {
-                category: 'progress',
-                type: 'rotate',
-            },
-        },
-    },
     size: {
         xxs: {
             attributes: {
@@ -2362,26 +4944,49 @@ export const DESIGN_TOKENS = {
                 type: 'font-family',
             },
         },
-        style: {
+        'font-weight': {
+            regular: {
+                attributes: {
+                    category: 'typography',
+                    type: 'font-weight',
+                    item: 'regular',
+                },
+            },
+            bold: {
+                attributes: {
+                    category: 'typography',
+                    type: 'font-weight',
+                    item: 'bold',
+                },
+            },
+            light: {
+                attributes: {
+                    category: 'typography',
+                    type: 'font-weight',
+                    item: 'light',
+                },
+            },
+        },
+        interface: {
             display1: {
                 'font-size': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'display1',
                     },
                 },
                 'font-weight': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'display1',
                     },
                 },
                 'line-height': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'display1',
                     },
                 },
@@ -2390,21 +4995,21 @@ export const DESIGN_TOKENS = {
                 'font-size': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'headline',
                     },
                 },
                 'font-weight': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'headline',
                     },
                 },
                 'line-height': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'headline',
                     },
                 },
@@ -2413,21 +5018,21 @@ export const DESIGN_TOKENS = {
                 'font-size': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'title',
                     },
                 },
                 'font-weight': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'title',
                     },
                 },
                 'line-height': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'title',
                     },
                 },
@@ -2436,21 +5041,21 @@ export const DESIGN_TOKENS = {
                 'font-size': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'subtitle2',
                     },
                 },
                 'font-weight': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'subtitle2',
                     },
                 },
                 'line-height': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'subtitle2',
                     },
                 },
@@ -2459,21 +5064,21 @@ export const DESIGN_TOKENS = {
                 'font-size': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'subtitle1',
                     },
                 },
                 'font-weight': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'subtitle1',
                     },
                 },
                 'line-height': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'subtitle1',
                     },
                 },
@@ -2482,21 +5087,21 @@ export const DESIGN_TOKENS = {
                 'font-size': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'body2',
                     },
                 },
                 'font-weight': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'body2',
                     },
                 },
                 'line-height': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'body2',
                     },
                 },
@@ -2505,21 +5110,21 @@ export const DESIGN_TOKENS = {
                 'font-size': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'body1',
                     },
                 },
                 'font-weight': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'body1',
                     },
                 },
                 'line-height': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'body1',
                     },
                 },
@@ -2528,21 +5133,21 @@ export const DESIGN_TOKENS = {
                 'font-size': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'caption',
                     },
                 },
                 'font-weight': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'caption',
                     },
                 },
                 'line-height': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'caption',
                     },
                 },
@@ -2551,22 +5156,318 @@ export const DESIGN_TOKENS = {
                 'font-size': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'overline',
                     },
                 },
                 'font-weight': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'overline',
                     },
                 },
                 'line-height': {
                     attributes: {
                         category: 'typography',
-                        type: 'style',
+                        type: 'interface',
                         item: 'overline',
+                    },
+                },
+            },
+        },
+        custom: {
+            title1: {
+                'font-size': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title1',
+                    },
+                },
+                'font-weight': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title1',
+                    },
+                },
+                'line-height': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title1',
+                    },
+                },
+            },
+            title2: {
+                'font-size': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title2',
+                    },
+                },
+                'font-weight': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title2',
+                    },
+                },
+                'line-height': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title2',
+                    },
+                },
+            },
+            title3: {
+                'font-size': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title3',
+                    },
+                },
+                'font-weight': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title3',
+                    },
+                },
+                'line-height': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title3',
+                    },
+                },
+            },
+            title4: {
+                'font-size': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title4',
+                    },
+                },
+                'font-weight': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title4',
+                    },
+                },
+                'line-height': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title4',
+                    },
+                },
+            },
+            title5: {
+                'font-size': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title5',
+                    },
+                },
+                'font-weight': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title5',
+                    },
+                },
+                'line-height': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title5',
+                    },
+                },
+            },
+            title6: {
+                'font-size': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title6',
+                    },
+                },
+                'font-weight': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title6',
+                    },
+                },
+                'line-height': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'title6',
+                    },
+                },
+            },
+            intro: {
+                'font-size': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'intro',
+                    },
+                },
+                'font-weight': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'intro',
+                    },
+                },
+                'line-height': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'intro',
+                    },
+                },
+            },
+            'body-large': {
+                'font-size': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'body-large',
+                    },
+                },
+                'font-weight': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'body-large',
+                    },
+                },
+                'line-height': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'body-large',
+                    },
+                },
+            },
+            body: {
+                'font-size': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'body',
+                    },
+                },
+                'font-weight': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'body',
+                    },
+                },
+                'line-height': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'body',
+                    },
+                },
+            },
+            quote: {
+                'font-size': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'quote',
+                    },
+                },
+                'font-weight': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'quote',
+                    },
+                },
+                'font-style': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'quote',
+                    },
+                },
+                'line-height': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'quote',
+                    },
+                },
+            },
+            'publish-info': {
+                'font-size': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'publish-info',
+                    },
+                },
+                'font-weight': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'publish-info',
+                    },
+                },
+                'line-height': {
+                    attributes: {
+                        category: 'typography',
+                        type: 'custom',
+                        item: 'publish-info',
+                    },
+                },
+            },
+            button: {
+                'size-m': {
+                    'font-size': {
+                        attributes: {
+                            category: 'typography',
+                            type: 'custom',
+                            item: 'button',
+                        },
+                    },
+                    'font-weight': {
+                        attributes: {
+                            category: 'typography',
+                            type: 'custom',
+                            item: 'button',
+                        },
+                    },
+                },
+                'size-s': {
+                    'font-size': {
+                        attributes: {
+                            category: 'typography',
+                            type: 'custom',
+                            item: 'button',
+                        },
+                    },
+                    'font-weight': {
+                        attributes: {
+                            category: 'typography',
+                            type: 'custom',
+                            item: 'button',
+                        },
                     },
                 },
             },

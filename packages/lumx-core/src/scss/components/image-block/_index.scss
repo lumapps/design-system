@@ -63,12 +63,9 @@
         }
     }
 
-    &__title,
-    &__description {
-        @include lumx-typography('body1');
-    }
-
     &__title {
+        @include lumx-typography('subtitle1');
+
         #{$self}--theme-light & {
             color: lumx-color-variant('dark', 'N');
         }
@@ -79,6 +76,8 @@
     }
 
     &__description {
+        @include lumx-typography('body1');
+
         #{$self}--theme-light & {
             color: lumx-color-variant('dark', 'L2');
         }

@@ -1,5 +1,10 @@
 @mixin lumx-select-input-indicator($theme) {
-    @include lumx-text-field-input-clear;
+    flex-shrink: 0;
+    margin-top: calc(
+        var(--lumx-text-field-wrapper-padding-vertical) +
+            ((var(--lumx-material-text-field-input-content-line-height) - var(--lumx-size-s)) / 2)
+    );
+    margin-left: $lumx-spacing-unit / 2;
 
     @if $theme == lumx-base-const('theme', 'LIGHT') {
         color: lumx-color-variant('dark', 'N');

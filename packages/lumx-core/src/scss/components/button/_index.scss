@@ -3,7 +3,6 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-button {
-    @include lumx-state-transition;
     @include lumx-button-base;
 
     .#{$lumx-base-prefix}-badge {
@@ -72,32 +71,6 @@
     }
 }
 
-/* Button reduced spacing
-   ========================================================================== */
-
-.#{$lumx-base-prefix}-button--variant-button.#{$lumx-base-prefix}-button--emphasis-high,
-.#{$lumx-base-prefix}-button--variant-button.#{$lumx-base-prefix}-button--emphasis-medium {
-    &.#{$lumx-base-prefix}-button--size-m {
-        &.#{$lumx-base-prefix}-button--has-left-icon {
-            @include lumx-button-reduced-spacing(lumx-base-const('size', 'M'), lumx-base-const('position', 'LEFT'));
-        }
-
-        &.#{$lumx-base-prefix}-button--has-right-icon {
-            @include lumx-button-reduced-spacing(lumx-base-const('size', 'M'), lumx-base-const('position', 'RIGHT'));
-        }
-    }
-
-    &.#{$lumx-base-prefix}-button--size-s {
-        &.#{$lumx-base-prefix}-button--has-left-icon {
-            @include lumx-button-reduced-spacing(lumx-base-const('size', 'S'), lumx-base-const('position', 'LEFT'));
-        }
-
-        &.#{$lumx-base-prefix}-button--has-right-icon {
-            @include lumx-button-reduced-spacing(lumx-base-const('size', 'S'), lumx-base-const('position', 'RIGHT'));
-        }
-    }
-}
-
 /* Button colors
    ========================================================================== */
 
@@ -121,26 +94,17 @@
 
 @each $key, $color in $lumx-color-palette {
     .#{$lumx-base-prefix}-button--color-#{$key} {
-        &.#{$lumx-base-prefix}-button--emphasis-medium {
+        &:not(.#{$lumx-base-prefix}-button--is-selected).#{$lumx-base-prefix}-button--emphasis-medium {
             @include lumx-button-color(lumx-base-const('emphasis', 'MEDIUM'), $key);
         }
 
-        &.#{$lumx-base-prefix}-button--emphasis-low {
+        &:not(.#{$lumx-base-prefix}-button--is-selected).#{$lumx-base-prefix}-button--emphasis-low {
             @include lumx-button-color(lumx-base-const('emphasis', 'LOW'), $key);
         }
-    }
-}
 
-/* Toggle button
-   ========================================================================== */
-
-.#{$lumx-base-prefix}-button--is-selected {
-    &.#{$lumx-base-prefix}-button--color-dark {
-        @include lumx-button-is-selected(lumx-base-const('theme', 'LIGHT'));
-    }
-
-    &.#{$lumx-base-prefix}-button--color-light {
-        @include lumx-button-is-selected(lumx-base-const('theme', 'DARK'));
+        &.#{$lumx-base-prefix}-button--is-selected {
+            @include lumx-button-color(lumx-base-const('emphasis', 'SELECTED'), $key);
+        }
     }
 }
 
@@ -153,7 +117,7 @@
     }
 
     &--variant-icon {
-        border-radius: var(--lumx-button-variant-icon-border-radius);
+        border-radius: var(--lumx-material-button-variant-icon-border-radius, var(--lumx-button-border-radius));
     }
 
     &--color-light {

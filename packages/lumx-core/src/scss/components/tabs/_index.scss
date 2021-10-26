@@ -7,24 +7,43 @@
 
     &__links {
         #{$self}--theme-light & {
-            @include lumx-tabs-links(lumx-base-const('theme', 'LIGHT'));
+            @include lumx-tabs-links;
         }
 
         #{$self}--theme-dark & {
-            @include lumx-tabs-links(lumx-base-const('theme', 'DARK'));
+            @include lumx-tabs-links;
         }
     }
 
     &__link {
-        @include lumx-tabs-link;
-        @include lumx-state-transition;
+        &:not(&--is-active) {
+            @include lumx-tabs-link(lumx-base-const('emphasis', 'LOW'));
 
-        #{$self}--theme-light & {
-            @include lumx-state(lumx-base-const('state', 'DEFAULT'), lumx-base-const('emphasis', 'LOW'), 'dark');
+            #{$self}--theme-light & {
+                @include lumx-tabs-link-color(lumx-base-const('emphasis', 'LOW'), lumx-base-const('theme', 'LIGHT'));
+            }
+
+            #{$self}--theme-dark & {
+                @include lumx-tabs-link-color(lumx-base-const('emphasis', 'LOW'), lumx-base-const('theme', 'DARK'));
+            }
         }
 
-        #{$self}--theme-dark & {
-            @include lumx-state(lumx-base-const('state', 'DEFAULT'), lumx-base-const('emphasis', 'LOW'), 'light');
+        &--is-active {
+            @include lumx-tabs-link(lumx-base-const('emphasis', 'SELECTED'));
+
+            #{$self}--theme-light & {
+                @include lumx-tabs-link-color(
+                    lumx-base-const('emphasis', 'SELECTED'),
+                    lumx-base-const('theme', 'LIGHT')
+                );
+            }
+
+            #{$self}--theme-dark & {
+                @include lumx-tabs-link-color(
+                    lumx-base-const('emphasis', 'SELECTED'),
+                    lumx-base-const('theme', 'DARK')
+                );
+            }
         }
     }
 }
@@ -62,40 +81,6 @@
 /* Tabs link states
    ========================================================================== */
 
-// Hover state
-.#{$lumx-base-prefix}-tabs__link:hover {
-    .#{$lumx-base-prefix}-tabs--theme-light & {
-        @include lumx-state(lumx-base-const('state', 'HOVER'), lumx-base-const('emphasis', 'LOW'), 'dark');
-    }
-
-    .#{$lumx-base-prefix}-tabs--theme-dark & {
-        @include lumx-state(lumx-base-const('state', 'HOVER'), lumx-base-const('emphasis', 'LOW'), 'light');
-    }
-}
-
-// Active state
-/* stylelint-disable-next-line no-descending-specificity */
-.#{$lumx-base-prefix}-tabs__link:active {
-    .#{$lumx-base-prefix}-tabs--theme-light & {
-        @include lumx-state(lumx-base-const('state', 'ACTIVE'), lumx-base-const('emphasis', 'LOW'), 'dark');
-    }
-
-    .#{$lumx-base-prefix}-tabs--theme-dark & {
-        @include lumx-state(lumx-base-const('state', 'ACTIVE'), lumx-base-const('emphasis', 'LOW'), 'light');
-    }
-}
-
-// Focus state
-.#{$lumx-base-prefix}-tabs__link[data-focus-visible-added] {
-    .#{$lumx-base-prefix}-tabs--theme-light & {
-        @include lumx-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('emphasis', 'LOW'), 'dark', null, true);
-    }
-
-    .#{$lumx-base-prefix}-tabs--theme-dark & {
-        @include lumx-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('emphasis', 'LOW'), 'light', null, true);
-    }
-}
-
 // Disabled state
 .#{$lumx-base-prefix}-tabs__link--is-disabled {
     .#{$lumx-base-prefix}-tabs--theme-light & {
@@ -104,19 +89,6 @@
 
     .#{$lumx-base-prefix}-tabs--theme-dark & {
         @include lumx-state-disabled-text(lumx-base-const('theme', 'DARK'));
-    }
-}
-
-/* Tabs link active
-   ========================================================================== */
-
-.#{$lumx-base-prefix}-tabs__link--is-active {
-    .#{$lumx-base-prefix}-tabs--theme-light & {
-        @include lumx-tabs-link-active(lumx-base-const('theme', 'LIGHT'));
-    }
-
-    .#{$lumx-base-prefix}-tabs--theme-dark & {
-        @include lumx-tabs-link-active(lumx-base-const('theme', 'DARK'));
     }
 }
 

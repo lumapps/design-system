@@ -1,80 +1,157 @@
 {
     "text-field": {
-        "padding": {
-            "top": { "value": "0" },
-            "bottom": { "value": "0" }
-        },
-        "header": {
-            "margin-bottom": { "value": "{spacing.unit.regular.value}" }
-        },
-        "label": "{typography.style.body1}",
-        "wrapper": {
+        "input": {
             "min-height": { "value": "{size.m.value}" },
-            "border-radius": { "value": "{border-radius.value}" },
             "padding": {
-                "vertical": { "value": "{spacing.unit.regular.value}" },
                 "horizontal": { "value": "{spacing.unit.medium.value}" }
-            }
+            },
+            "border-radius": { "value": "{border-radius.value}" }
         },
         "state-default": {
-            "border": {
-                "top": {
-                    "width": { "value": "1px" }
-                },
-                "right": {
-                    "width": { "value": "1px" }
-                },
-                "bottom": {
-                    "width": { "value": "1px" }
-                },
-                "left": {
-                    "width": { "value": "1px" }
+            "input": {
+                "border": {
+                    "top": {
+                        "width": { "value": "1px" }
+                    },
+                    "right": {
+                        "width": { "value": "1px" }
+                    },
+                    "bottom": {
+                        "width": { "value": "1px" }
+                    },
+                    "left": {
+                        "width": { "value": "1px" }
+                    }
                 }
             },
             "theme-light": {
-                "background-color": "{color.dark.L6}",
-                "border-color": "{color.dark.L4}"
+                "header": {
+                    "label": {
+                        "color": "{color.dark.N}"
+                    }
+                },
+                "input": {
+                    "background-color": "{color.dark.L6}",
+                    "border-color": "{color.dark.L4}",
+                    "content": {
+                        "color": "{color.dark.N}"
+                    },
+                    "placeholder": {
+                        "color": "{color.dark.L2}"
+                    }
+                }
             },
             "theme-dark": {
-                "background-color": "{color.light.L6}",
-                "border-color": "{color.light.L4}"
+                "header": {
+                    "label": {
+                        "color": "{color.light.N}"
+                    }
+                },
+                "input": {
+                    "background-color": "{color.light.L6}",
+                    "border-color": "{color.light.L4}",
+                    "content": {
+                        "color": "{color.light.N}"
+                    },
+                    "placeholder": {
+                        "color": "{color.light.L2}"
+                    }
+                }
             }
         },
         "state-hover": {
-            "theme-light": {
-                "background-color": "{color.dark.L5}"
-            },
-            "theme-dark": {
-                "background-color": "{color.light.L5}"
-            }
-        },
-        "state-focus": {
-            "border": {
-                "top": {
-                    "width": { "value": "2px" }
-                },
-                "right": {
-                    "width": { "value": "2px" }
-                },
-                "bottom": {
-                    "width": { "value": "2px" }
-                },
-                "left": {
-                    "width": { "value": "2px" }
+            "input": {
+                "border": {
+                    "top": {
+                        "width": { "value": "1px" }
+                    },
+                    "right": {
+                        "width": { "value": "1px" }
+                    },
+                    "bottom": {
+                        "width": { "value": "1px" }
+                    },
+                    "left": {
+                        "width": { "value": "1px" }
+                    }
                 }
             },
             "theme-light": {
-                "background-color": "{color.light.N}",
-                "border-color": "{color.primary.L2}"
+                "input": {
+                    "background-color": "{color.dark.L5}",
+                    "border-color": "{color.dark.L4}",
+                    "content": {
+                        "color": "{color.dark.N}"
+                    },
+                    "placeholder": {
+                        "color": "{color.dark.L2}"
+                    }
+                }
             },
             "theme-dark": {
-                "background-color": { "value": "transparent" },
-                "border-color": "{color.light.L2}"
+                "input": {
+                    "background-color": "{color.light.L5}",
+                    "border-color": "{color.light.L4}",
+                    "content": {
+                        "color": "{color.light.N}"
+                    },
+                    "placeholder": {
+                        "color": "{color.light.L2}"
+                    }
+                }
             }
         },
-        "input-icon-size": { "value": "{size.xs.value}" },
-        "input": "{typography.style.body1}",
-        "input-validity-size": { "value": "{size.xxs.value}" },
-        "input-clear-size": { "value": "{size.s.value}" }
+        "state-focus": {
+            "input": {
+                "border": {
+                    "top": {
+                        "width": { "value": "2px" }
+                    },
+                    "right": {
+                        "width": { "value": "2px" }
+                    },
+                    "bottom": {
+                        "width": { "value": "2px" }
+                    },
+                    "left": {
+                        "width": { "value": "2px" }
+                    }
+                }
+            },
+            "theme-light": {
+                "header": {
+                    "label": {
+                        "color": "{color.dark.N}"
+                    }
+                },
+                "input": {
+                    "background-color": "{color.light.N}",
+                    "border-color": "{color.primary.L2}",
+                    "content": {
+                        "color": "{color.dark.N}"
+                    },
+                    "placeholder": {
+                        "color": "{color.dark.L2}"
+                    }
+                }
+            },
+            "theme-dark": {
+                "header": {
+                    "label": {
+                        "color": "{color.light.N}"
+                    }
+                },
+                "input": {
+                    "background-color": { "value": "transparent" },
+                    "border-color": "{color.light.L2}",
+                    "content": {
+                        "color": "{color.light.N}"
+                    },
+                    "placeholder": {
+                        "color": "{color.light.L2}"
+                    }
+                }
+            }
+        }
     }
 }
