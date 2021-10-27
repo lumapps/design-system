@@ -24,6 +24,7 @@ const setup = (propsOverride: SetupProps = {}, shallowRendering = true) => {
     return {
         buttonRoot: wrapper.find('ButtonRoot'),
         icon: wrapper.find('Icon'),
+        img: wrapper.find('img'),
         props,
         wrapper,
     };
@@ -33,10 +34,19 @@ describe(`<${IconButton.displayName}>`, () => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', () => {
         it('should render icon button', () => {
-            const { buttonRoot, icon, wrapper } = setup({});
+            const { buttonRoot, icon, img, wrapper } = setup({});
             expect(wrapper).toMatchSnapshot();
             expect(buttonRoot).toExist();
             expect(icon).toExist();
+            expect(img).not.toExist();
+        });
+
+        it('should render icon button with an image', () => {
+            const { buttonRoot, icon, img, wrapper } = setup({ image: 'http://foo.com' });
+            expect(wrapper).toMatchSnapshot();
+            expect(buttonRoot).toExist();
+            expect(icon).not.toExist();
+            expect(img).toExist();
         });
     });
 

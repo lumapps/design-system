@@ -4,12 +4,27 @@ import { Emphasis, Icon, Size, Theme, Tooltip, TooltipProps } from '@lumx/react'
 import { BaseButtonProps, ButtonRoot } from '@lumx/react/components/button/ButtonRoot';
 import { Comp, getRootClassName } from '@lumx/react/utils';
 
-/**
- * Defines the props of the component.
- */
-export interface IconButtonProps extends BaseButtonProps {
-    /** Icon (SVG path). */
-    icon: string;
+/** Either icon or image prop must be defined */
+type ImageOrIconType =
+    /** Svg path type icon */
+    | {
+          /**
+           * Icon SVG path (recommended over an image).
+           */
+          icon: string;
+          image?: undefined;
+      }
+    /** Image url type icon */
+    | {
+          /**
+           * Image URL (use icon SVG path when possible).
+           */
+          image: string;
+          icon?: undefined;
+      };
+
+/** Props common to icon and image type icon. */
+export interface IconButtonBaseProps {
     /**
      * Label text (required for a11y purpose).
      * If you really don't want an aria-label, you can set an empty label (this is not recommended).
@@ -23,6 +38,11 @@ export interface IconButtonProps extends BaseButtonProps {
     /** Whether the tooltip should be hidden or not. */
     hideTooltip?: boolean;
 }
+
+/**
+ * Defines the props of the component.
+ */
+export type IconButtonProps = IconButtonBaseProps & ImageOrIconType & BaseButtonProps;
 
 /**
  * Component display name.
@@ -51,12 +71,20 @@ const DEFAULT_PROPS: Partial<IconButtonProps> = {
  * @return React element.
  */
 export const IconButton: Comp<IconButtonProps, HTMLButtonElement> = forwardRef((props, ref) => {
-    const { emphasis, icon, label, size, theme, tooltipProps, hideTooltip, ...forwardedProps } = props;
+    const { emphasis, image, icon, label, size, theme, tooltipProps, hideTooltip, ...forwardedProps } = props;
 
     return (
         <Tooltip label={hideTooltip ? '' : label} {...tooltipProps}>
             <ButtonRoot ref={ref} {...{ emphasis, size, theme, ...forwardedProps }} aria-label={label} variant="icon">
-                <Icon icon={icon} />
+                {image ? (
+                    <img
+                        // no need to set alt as an aria-label is already set on the button
+                        alt=""
+                        src={image}
+                    />
+                ) : (
+                    <Icon icon={icon as string} />
+                )}
             </ButtonRoot>
         </Tooltip>
     );
