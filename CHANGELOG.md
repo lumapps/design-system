@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.1][] - 2021-10-28
+
 ### Added
 
 -   New `image` prop for `IconButton`, allowing to use an image url instead of an svg path. Will render a `<img>` tag an can only be set if `icon` prop is undefined (and vice-versa);
@@ -1255,3 +1257,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [2.0.5]: https://github.com/lumapps/design-system/tree/v2.0.5
 [unreleased]: https://github.com/lumapps/design-system/compare/v2.1.0...HEAD
 [2.1.0]: https://github.com/lumapps/design-system/tree/v2.1.0
+[unreleased]: https://github.com/lumapps/design-system/compare/v2.1.1...HEAD
+[2.1.1]: https://github.com/lumapps/design-system/tree/v2.1.1
