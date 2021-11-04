@@ -22,6 +22,10 @@ import classNames from 'classnames';
 
 export default { title: 'LumX components/thumbnail/Thumbnail' };
 
+const Resizable = ({ initialSize: { width, height }, children }: any) => (
+    <div style={{ border: '1px solid red', overflow: 'hidden', resize: 'both', width, height }}>{children}</div>
+);
+
 /** Default thumbnail props (editable via knobs) */
 export const Default = ({ theme }: any) => {
     const alt = text('Alternative text', 'Image alt text');
@@ -76,6 +80,40 @@ export const WithBadge = () => {
                 </Badge>
             }
         />
+    );
+};
+
+export const FocusPoint = () => {
+    const focusPoint = { x: focusKnob('Focus X ', -0.2), y: focusKnob('Focus Y', -0.3) };
+    const aspectRatio = enumKnob('Aspect ratio', [undefined, ...Object.values(AspectRatio)], AspectRatio.wide);
+    const fillHeight = aspectRatio === AspectRatio.free;
+    return (
+        <>
+            <small>Focus point will delay the display of the image if the original image size is not accessible.</small>
+            <Resizable initialSize={{ height: 200, width: 300 }}>
+                <Thumbnail
+                    alt="Image"
+                    image={IMAGES.portrait1s200}
+                    aspectRatio={aspectRatio}
+                    fillHeight={fillHeight}
+                    focusPoint={focusPoint}
+                    style={{ width: '100%' }}
+                />
+            </Resizable>
+
+            <small>Providing the width & height in imgProps should avoid the delay shown above</small>
+            <Resizable initialSize={{ height: 200, width: 300 }}>
+                <Thumbnail
+                    alt="Image"
+                    image={IMAGES.portrait2}
+                    imgProps={IMAGE_SIZES.portrait2}
+                    fillHeight={fillHeight}
+                    aspectRatio={aspectRatio}
+                    focusPoint={focusPoint}
+                    style={{ width: '100%' }}
+                />
+            </Resizable>
+        </>
     );
 };
 
