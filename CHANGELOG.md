@@ -10,7 +10,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 -   Always use colors css variables.
--   Thumbnail badge now have a mask around it even if the `size` prop is undefined
+-   Thumbnail badge now have a mask around it even if the `size` prop is undefined.
+-   Full internal rework of the Thumbnail component
+    -   No change in React API
+    -   Improved performance and reduced layout shift
+    -   Improved button accessibility with `onClick`
+    -   Improved link accessibility with `linkProps` and `linkAs`
+    -   Focus point is now implemented in CSS (instead of JS)
+    -   Improved default error fallback state
+    -   New skeleton loading state
+    -   **Compatibility warning**: using the `aspectRatio` without a `size`, a `fillHeight` or a size constraint from
+        the parent element will produce a thumbnail shrunk to 0 pixel
 
 ## [2.1.9][] - 2021-12-15
 

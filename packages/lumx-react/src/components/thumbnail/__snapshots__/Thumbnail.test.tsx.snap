@@ -1,124 +1,91 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Thumbnail> Snapshots and structure should render story 'Clickable' 1`] = `
-<div
-  className="lumx-thumbnail lumx-thumbnail--size-xxl lumx-thumbnail--theme-light"
+<button
+  className="lumx-thumbnail lumx-thumbnail--aspect-ratio-original lumx-thumbnail--size-xxl lumx-thumbnail--theme-light lumx-thumbnail--is-clickable lumx-thumbnail--is-loading"
   onClick={[Function]}
-  onKeyPress={[Function]}
-  role="button"
-  tabIndex={0}
 >
   <div
     className="lumx-thumbnail__background"
-    style={
-      Object {
-        "display": undefined,
-        "visibility": "hidden",
-      }
-    }
   >
     <img
       alt="Click me"
-      className="lumx-thumbnail__image"
+      className="lumx-thumbnail__image lumx-thumbnail__image--is-loading"
       loading="lazy"
       src="/demo-assets/landscape1.jpg"
-      style={Object {}}
+      style={
+        Object {
+          "objectPosition": undefined,
+        }
+      }
     />
   </div>
-</div>
+</button>
 `;
 
-exports[`<Thumbnail> Snapshots and structure should render story 'CustomFallback' 1`] = `
-<div
-  className="lumx-thumbnail lumx-thumbnail--theme-light"
+exports[`<Thumbnail> Snapshots and structure should render story 'ClickableCustomLink' 1`] = `
+<CustomLinkComponent
+  className="custom-class-name lumx-thumbnail lumx-thumbnail--aspect-ratio-original lumx-thumbnail--size-xxl lumx-thumbnail--theme-light lumx-thumbnail--is-clickable lumx-thumbnail--is-loading"
+  href="https://google.fr"
 >
   <div
     className="lumx-thumbnail__background"
-    style={
-      Object {
-        "display": undefined,
-        "visibility": "hidden",
-      }
-    }
   >
     <img
-      alt="foo"
-      className="lumx-thumbnail__image"
+      alt="Click me"
+      className="lumx-thumbnail__image lumx-thumbnail__image--is-loading"
       loading="lazy"
-      src="foo"
-      style={Object {}}
+      src="/demo-assets/landscape1.jpg"
+      style={
+        Object {
+          "objectPosition": undefined,
+        }
+      }
     />
   </div>
-</div>
+</CustomLinkComponent>
+`;
+
+exports[`<Thumbnail> Snapshots and structure should render story 'ClickableLink' 1`] = `
+<a
+  className="lumx-thumbnail lumx-thumbnail--aspect-ratio-original lumx-thumbnail--size-xxl lumx-thumbnail--theme-light lumx-thumbnail--is-clickable lumx-thumbnail--is-loading"
+  href="https://google.fr"
+>
+  <div
+    className="lumx-thumbnail__background"
+  >
+    <img
+      alt="Click me"
+      className="lumx-thumbnail__image lumx-thumbnail__image--is-loading"
+      loading="lazy"
+      src="/demo-assets/landscape1.jpg"
+      style={
+        Object {
+          "objectPosition": undefined,
+        }
+      }
+    />
+  </div>
+</a>
 `;
 
 exports[`<Thumbnail> Snapshots and structure should render story 'Default' 1`] = `
 <div
-  className="lumx-thumbnail lumx-thumbnail--size-xxl lumx-thumbnail--theme-light"
+  className="lumx-thumbnail lumx-thumbnail--aspect-ratio-original lumx-thumbnail--theme-light lumx-thumbnail--variant-squared lumx-thumbnail--is-loading"
 >
   <div
     className="lumx-thumbnail__background"
-    style={
-      Object {
-        "display": undefined,
-        "visibility": "hidden",
-      }
-    }
   >
     <img
       alt="Image alt text"
-      className="lumx-thumbnail__image"
+      className="lumx-thumbnail__image lumx-thumbnail__image--is-loading"
       loading="lazy"
       src="/demo-assets/landscape1.jpg"
-      style={Object {}}
-    />
-  </div>
-</div>
-`;
-
-exports[`<Thumbnail> Snapshots and structure should render story 'DefaultFallback' 1`] = `
-<div
-  className="lumx-thumbnail lumx-thumbnail--theme-light"
->
-  <div
-    className="lumx-thumbnail__background"
-    style={
-      Object {
-        "display": undefined,
-        "visibility": "hidden",
+      style={
+        Object {
+          "objectPosition": undefined,
+        }
       }
-    }
-  >
-    <img
-      alt="foo"
-      className="lumx-thumbnail__image"
-      loading="lazy"
-      src="foo"
-      style={Object {}}
-    />
-  </div>
-</div>
-`;
-
-exports[`<Thumbnail> Snapshots and structure should render story 'IconFallback' 1`] = `
-<div
-  className="lumx-thumbnail lumx-thumbnail--theme-light"
->
-  <div
-    className="lumx-thumbnail__background"
-    style={
-      Object {
-        "display": undefined,
-        "visibility": "hidden",
-      }
-    }
-  >
-    <img
-      alt="foo"
-      className="lumx-thumbnail__image"
-      loading="lazy"
-      src="foo"
-      style={Object {}}
     />
   </div>
 </div>
@@ -126,23 +93,21 @@ exports[`<Thumbnail> Snapshots and structure should render story 'IconFallback' 
 
 exports[`<Thumbnail> Snapshots and structure should render story 'WithBadge' 1`] = `
 <div
-  className="lumx-thumbnail lumx-thumbnail--aspect-ratio-square lumx-thumbnail--size-l lumx-thumbnail--theme-light lumx-thumbnail--variant-rounded lumx-thumbnail--has-badge"
+  className="lumx-thumbnail lumx-thumbnail--aspect-ratio-square lumx-thumbnail--size-l lumx-thumbnail--theme-light lumx-thumbnail--variant-rounded lumx-thumbnail--is-loading lumx-thumbnail--has-badge"
 >
   <div
     className="lumx-thumbnail__background"
-    style={
-      Object {
-        "display": undefined,
-        "visibility": "hidden",
-      }
-    }
   >
     <img
       alt="Image alt text"
-      className="lumx-thumbnail__image"
+      className="lumx-thumbnail__image lumx-thumbnail__image--is-loading"
       loading="lazy"
       src="/demo-assets/landscape1.jpg"
-      style={Object {}}
+      style={
+        Object {
+          "objectPosition": undefined,
+        }
+      }
     />
   </div>
   <Badge

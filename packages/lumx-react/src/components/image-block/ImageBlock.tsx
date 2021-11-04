@@ -118,7 +118,6 @@ export const ImageBlock: Comp<ImageBlockProps, HTMLDivElement> = forwardRef((pro
             <Thumbnail
                 {...thumbnailProps}
                 className={classNames(`${CLASSNAME}__image`, thumbnailProps?.className)}
-                fillHeight={fillHeight}
                 align={align}
                 image={image}
                 size={size}

@@ -39,11 +39,27 @@ Array [
           />
         </SlideshowItem>
         <SlideshowItem
-          key="/demo-assets/landscape2.jpg-1"
+          key="/demo-assets/landscape1-s200.jpg-1"
         >
           <ImageBlock
             align="left"
             alt="Image 2"
+            captionPosition="below"
+            image="/demo-assets/landscape1-s200.jpg"
+            theme="light"
+            thumbnailProps={
+              Object {
+                "aspectRatio": "horizontal",
+              }
+            }
+          />
+        </SlideshowItem>
+        <SlideshowItem
+          key="/demo-assets/landscape2.jpg-2"
+        >
+          <ImageBlock
+            align="left"
+            alt="Image 3"
             captionPosition="below"
             image="/demo-assets/landscape2.jpg"
             theme="light"
@@ -55,11 +71,11 @@ Array [
           />
         </SlideshowItem>
         <SlideshowItem
-          key="/demo-assets/landscape3.jpg-2"
+          key="/demo-assets/landscape3.jpg-3"
         >
           <ImageBlock
             align="left"
-            alt="Image 3"
+            alt="Image 4"
             captionPosition="below"
             image="/demo-assets/landscape3.jpg"
             theme="light"
@@ -71,11 +87,11 @@ Array [
           />
         </SlideshowItem>
         <SlideshowItem
-          key="/demo-assets/portrait1.jpg-3"
+          key="/demo-assets/portrait1.jpg-4"
         >
           <ImageBlock
             align="left"
-            alt="Image 4"
+            alt="Image 5"
             captionPosition="below"
             image="/demo-assets/portrait1.jpg"
             theme="light"
@@ -87,29 +103,13 @@ Array [
           />
         </SlideshowItem>
         <SlideshowItem
-          key="/demo-assets/portrait2.jpg-4"
-        >
-          <ImageBlock
-            align="left"
-            alt="Image 5"
-            captionPosition="below"
-            image="/demo-assets/portrait2.jpg"
-            theme="light"
-            thumbnailProps={
-              Object {
-                "aspectRatio": "horizontal",
-              }
-            }
-          />
-        </SlideshowItem>
-        <SlideshowItem
-          key="/demo-assets/portrait3.jpg-5"
+          key="/demo-assets/portrait1-s200.jpg-5"
         >
           <ImageBlock
             align="left"
             alt="Image 6"
             captionPosition="below"
-            image="/demo-assets/portrait3.jpg"
+            image="/demo-assets/portrait1-s200.jpg"
             theme="light"
             thumbnailProps={
               Object {

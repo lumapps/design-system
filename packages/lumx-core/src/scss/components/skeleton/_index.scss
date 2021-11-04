@@ -18,15 +18,14 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-skeleton-circle {
-    animation: skeleton-loading 1s ease-in-out 0s infinite;
     border-radius: 50%;
 
     &--theme-light {
-        background-color: lumx-color-variant('dark', 'L5');
+        @include lumx-skeleton('light');
     }
 
     &--theme-dark {
-        background-color: lumx-color-variant('light', 'L5');
+        @include lumx-skeleton('dark');
     }
 }
 
@@ -47,18 +46,16 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-skeleton-rectangle {
-    animation: skeleton-loading 1s ease-in-out 0s infinite;
-
     &--variant-rounded {
         border-radius: var(--lumx-border-radius);
     }
 
     &--theme-light {
-        background-color: lumx-color-variant('dark', 'L5');
+        @include lumx-skeleton('light');
     }
 
     &--theme-dark {
-        background-color: lumx-color-variant('light', 'L5');
+        @include lumx-skeleton('dark');
     }
 }
 

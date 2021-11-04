@@ -12,44 +12,22 @@
     background: none;
     outline: none;
 
-    &--fill-height,
-    &--fill-height &__background {
-        display: flex;
-        /* Safari hack to force the image ratio */
-        height: fit-content;
-        min-height: 100%;
-        flex: 1 1 auto;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    &--variant-rounded {
-        border-radius: var(--lumx-border-radius);
-    }
-
     &__background {
-        position: relative;
         width: 100%;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-
-        #{$self}--variant-rounded & {
-            border-radius: var(--lumx-border-radius);
-        }
+        position: relative;
     }
 
-    &__focused-image {
-        max-width: none;
+    &__image {
+        height: fit-content;
+        width: fit-content;
+        max-width: 100%;
+        max-height: 100%;
     }
 
     &__background,
     &__image {
         display: block;
-        max-width: 100%;
-        /* IE11 hack related to a bug with IE flexbox implementation (cf. https://stackoverflow.com/a/54054592) */
-        min-height: 1px;
-        max-height: 100%;
+        overflow: hidden;
 
         #{$self}--align-left & {
             margin-right: auto;
@@ -62,22 +40,29 @@
         #{$self}--align-right & {
             margin-left: auto;
         }
-
-        #{$self}--variant-rounded & {
-            border-radius: var(--lumx-border-radius);
-        }
     }
 
-    &__fallback {
-        width: fit-content;
-        /* Center fallback icon when using fill-height prop */
-        margin: 0 auto;
-    }
-
+    /* Badge */
     &__badge {
         position: absolute;
         right: -$lumx-spacing-unit / 2;
         bottom: -$lumx-spacing-unit / 2;
+    }
+
+    /* Rounded variant */
+    &--variant-rounded &__background {
+        border-radius: var(--lumx-border-radius);
+    }
+
+    /* Fill height */
+    &--fill-height,
+    &--fill-height &__background,
+    &--fill-height &__image {
+        flex: 1 1 auto;
+        height: 100%;
+        width: unset;
+        max-width: unset;
+        max-height: unset;
     }
 }
 
@@ -87,15 +72,33 @@
 @each $key, $size in $lumx-sizes {
     .#{$lumx-base-prefix}-thumbnail--size-#{$key} {
         width: $size;
+
+        .#{$lumx-base-prefix}-thumbnail__background,
+        .#{$lumx-base-prefix}-thumbnail__image {
+            width: 100%;
+        }
     }
 }
 
 /* Thumbnail aspect ratio
    ========================================================================== */
 
+.#{$lumx-base-prefix}-thumbnail:not(.#{$lumx-base-prefix}-thumbnail--aspect-ratio-original) {
+    .#{$lumx-base-prefix}-thumbnail__image {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+}
+
 @each $key, $aspect-ratio in $lumx-thumbnail-aspect-ratio {
-    .#{$lumx-base-prefix}-thumbnail--aspect-ratio-#{$key}:not(.#{$lumx-base-prefix}-thumbnail--fill-height)
-        .#{$lumx-base-prefix}-thumbnail__background {
+    .#{$lumx-base-prefix}-thumbnail--aspect-ratio-#{$key} .#{$lumx-base-prefix}-thumbnail__background {
         padding-top: $aspect-ratio;
     }
 }
@@ -103,8 +106,9 @@
 /* Thumbnail states
    ========================================================================== */
 
-.#{$lumx-base-prefix}-thumbnail[tabindex='0'] {
+.#{$lumx-base-prefix}-thumbnail--is-clickable {
     position: relative;
+    display: block;
     cursor: pointer;
 
     &::after {
@@ -119,30 +123,76 @@
         pointer-events: none;
     }
 
-    &:hover::after {
+    /* Hover */
+    &:hover::after,
+    &:focus::after {
         @include lumx-state(lumx-base-const('state', 'HOVER'), lumx-base-const('emphasis', 'LOW'), 'dark');
     }
 
+    /* Active */
     &:active::after {
         @include lumx-state(lumx-base-const('state', 'ACTIVE'), lumx-base-const('emphasis', 'LOW'), 'dark');
     }
 }
 
-.#{$lumx-base-prefix}-thumbnail--variant-rounded.#{$lumx-base-prefix}-thumbnail[tabindex='0'] {
+/* Focused (variant rounded) */
+.#{$lumx-base-prefix}-thumbnail--variant-rounded.#{$lumx-base-prefix}-thumbnail--is-clickable {
     &[data-focus-visible-added]::after {
         border-radius: var(--lumx-border-radius);
     }
 }
 
-.#{$lumx-base-prefix}-thumbnail--theme-light.#{$lumx-base-prefix}-thumbnail[tabindex='0'] {
+/* Focused (light theme) */
+.#{$lumx-base-prefix}-thumbnail--theme-light.#{$lumx-base-prefix}-thumbnail--is-clickable {
     &[data-focus-visible-added]::after {
         @include lumx-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('emphasis', 'LOW'), 'dark');
     }
 }
 
-.#{$lumx-base-prefix}-thumbnail--theme-dark.#{$lumx-base-prefix}-thumbnail[tabindex='0'] {
+/* Focused (dark theme) */
+.#{$lumx-base-prefix}-thumbnail--theme-dark.#{$lumx-base-prefix}-thumbnail--is-clickable {
     &[data-focus-visible-added]::after {
         @include lumx-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('emphasis', 'LOW'), 'light');
+    }
+}
+
+/* Loading state */
+.#{$lumx-base-prefix}-thumbnail--is-loading  {
+    .#{$lumx-base-prefix}-thumbnail__background {
+        @include lumx-skeleton('light');
+    }
+    &.#{$lumx-base-prefix}-thumbnail--theme-dark .#{$lumx-base-prefix}-thumbnail__background {
+        @include lumx-skeleton('dark');
+    }
+}
+
+/* Error state */
+.#{$lumx-base-prefix}-thumbnail--has-error  {
+    /** Icon fallback */
+    &.#{$lumx-base-prefix}-thumbnail--has-icon-error-fallback {
+        .#{$lumx-base-prefix}-thumbnail__fallback {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: lumx-color-variant('dark', 'L6');
+
+            #{$lumx-base-prefix}-thumbnail--theme-dark & {
+                background-color: lumx-color-variant('light', 'L6');
+            }
+        }
+    }
+
+    /* Custom fallback */
+    &.#{$lumx-base-prefix}-thumbnail--has-custom-error-fallback {
+        // Disable aspect ratio
+        .#{$lumx-base-prefix}-thumbnail__background {
+            padding-top: 0;
+        }
     }
 }
 
