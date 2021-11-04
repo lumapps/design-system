@@ -13,6 +13,10 @@
     transition-property: padding, border-radius, background-color, color;
     user-select: none;
     vertical-align: top;
+    overflow: hidden;
+    // TODO: fix this. Having it breaks the :hover background but removing it breaks the ::after background
+    //https://jsfiddle.net/L5dgsqwa/20/
+    z-index: 0;
 
     &:hover {
         cursor: pointer;

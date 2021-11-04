@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   `Button` & `IconButton`: fix inconsistent button width with `hasBackground` prop in a flex parent (**Warning: changes the CSS and markup!**)
+
 ### Added
 
 -   New `image` prop for `IconButton`, allowing to use an image url instead of an svg path. Will render a `<img>` tag an can only be set if `icon` prop is undefined (and vice-versa);

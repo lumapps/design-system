@@ -6,12 +6,7 @@ import 'jest-enzyme';
 import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 
 import { ColorPalette, Emphasis, Size, Theme } from '@lumx/react';
-import {
-    BUTTON_CLASSNAME,
-    BUTTON_WRAPPER_CLASSNAME,
-    ButtonRoot,
-    ButtonRootProps,
-} from '@lumx/react/components/button/ButtonRoot';
+import { BUTTON_CLASSNAME, ButtonRoot, ButtonRootProps } from '@lumx/react/components/button/ButtonRoot';
 import { getBasicClass } from '@lumx/react/utils';
 
 type SetupProps = Partial<ButtonRootProps>;
@@ -25,7 +20,6 @@ const setup = (propsOverride: SetupProps = {}) => {
 
     return {
         button: wrapper.find(`.${BUTTON_CLASSNAME}`),
-        buttonWrapper: wrapper.find(`.${BUTTON_WRAPPER_CLASSNAME}`),
         props,
         wrapper,
     };
@@ -38,10 +32,8 @@ describe(`<${ButtonRoot.displayName}>`, () => {
             const props: Partial<ButtonRootProps> = {
                 children: 'Label',
             };
-            const { button, buttonWrapper, wrapper } = setup(props);
+            const { button, wrapper } = setup(props);
             expect(wrapper).toMatchSnapshot();
-
-            expect(buttonWrapper).not.toExist();
 
             expect(button).toExist();
             expect(button.type()).toEqual('button');
@@ -54,12 +46,11 @@ describe(`<${ButtonRoot.displayName}>`, () => {
                 children: 'Label',
                 hasBackground: true,
             };
-            const { button, buttonWrapper, wrapper } = setup(props);
+            const { button, wrapper } = setup(props);
             expect(wrapper).toMatchSnapshot();
 
-            expect(buttonWrapper).toExist();
-
             expect(button).toExist();
+            expect(button.prop('className')).toContain('--background-color-light');
             expect(button.type()).toEqual('button');
 
             expect(button.contains(props.children)).toBe(true);
@@ -71,10 +62,8 @@ describe(`<${ButtonRoot.displayName}>`, () => {
                 href: 'example.com',
                 target: '_blank',
             };
-            const { button, buttonWrapper, wrapper } = setup(props);
+            const { button, wrapper } = setup(props);
             expect(wrapper).toMatchSnapshot();
-
-            expect(buttonWrapper).not.toExist();
 
             expect(button).toExist();
             expect(button.type()).toEqual('a');
@@ -92,10 +81,8 @@ describe(`<${ButtonRoot.displayName}>`, () => {
                 href: 'example.com',
                 target: '_blank',
             };
-            const { button, buttonWrapper, wrapper } = setup(props);
+            const { button, wrapper } = setup(props);
             expect(wrapper).toMatchSnapshot();
-
-            expect(buttonWrapper).toExist();
 
             expect(button).toExist();
             expect(button.type()).toEqual('a');
@@ -148,11 +135,7 @@ describe(`<${ButtonRoot.displayName}>`, () => {
                 theme: Theme.dark,
                 variant: 'icon',
             };
-            // Props used for the button wrapper.
-            const buttonWrapperProps: Partial<ButtonRootProps> = {
-                variant: buttonProps.variant,
-            };
-            const { button, buttonWrapper, wrapper } = setup({
+            const { button, wrapper } = setup({
                 ...buttonProps,
                 hasBackground: true,
             });
@@ -161,11 +144,6 @@ describe(`<${ButtonRoot.displayName}>`, () => {
             // The button wrapper classes.
             for (const [type, value] of Object.entries(buttonProps)) {
                 expect(button).toHaveClassName(getBasicClass({ prefix: BUTTON_CLASSNAME, type, value }));
-            }
-
-            // The button wrapper classes.
-            for (const [type, value] of Object.entries(buttonWrapperProps)) {
-                expect(buttonWrapper).toHaveClassName(getBasicClass({ prefix: BUTTON_WRAPPER_CLASSNAME, type, value }));
             }
         });
     });

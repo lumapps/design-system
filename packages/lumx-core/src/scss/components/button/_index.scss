@@ -10,6 +10,25 @@
         top: -$lumx-spacing-unit / 2;
         right: -$lumx-spacing-unit / 2;
     }
+
+    &--has-background::after {
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        content: '';
+        z-index: -1;
+    }
+
+    &--background-color-light::after {
+        background-color: lumx-color-variant('light', 'N');
+    }
+
+    &--background-color-dark::after {
+        background-color: lumx-color-variant('dark', 'N');
+    }
 }
 
 /* Button sizes
@@ -122,13 +141,6 @@
         border-radius: var(--lumx-material-button-variant-icon-border-radius, var(--lumx-button-border-radius));
     }
 
-    &--color-light {
-        background-color: lumx-color-variant('light', 'N');
-    }
-
-    &--color-dark {
-        background-color: lumx-color-variant('dark', 'N');
-    }
 }
 
 /* Button group

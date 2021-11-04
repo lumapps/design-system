@@ -54,37 +54,7 @@ export interface ButtonRootProps extends BaseButtonProps {
  */
 const COMPONENT_NAME = 'ButtonRoot';
 
-export const BUTTON_WRAPPER_CLASSNAME = `${CSS_PREFIX}-button-wrapper`;
 export const BUTTON_CLASSNAME = `${CSS_PREFIX}-button`;
-
-/**
- * Render a button wrapper with the ButtonRoot inside.
- *
- * @param  props Component props.
- * @return React element.
- */
-const renderButtonWrapper: React.FC<ButtonRootProps> = (props) => {
-    const { color, emphasis, variant } = props;
-
-    const adaptedColor =
-        emphasis === Emphasis.low && (color === ColorPalette.light ? ColorPalette.dark : ColorPalette.light);
-
-    const wrapperClassName = classNames(
-        handleBasicClasses({
-            color: adaptedColor,
-            prefix: BUTTON_WRAPPER_CLASSNAME,
-            variant,
-        }),
-    );
-    const buttonProps = { ...props, hasBackground: false };
-
-    return (
-        <div className={wrapperClassName}>
-            {/* eslint-disable-next-line @typescript-eslint/no-use-before-define */}
-            <ButtonRoot {...buttonProps} />
-        </div>
-    );
-};
 
 /**
  * ButtonRoot component.
@@ -121,9 +91,10 @@ export const ButtonRoot: Comp<ButtonRootProps, HTMLButtonElement | HTMLAnchorEle
         (emphasis === Emphasis.high && ColorPalette.primary) ||
         ColorPalette.dark;
 
-    if (hasBackground) {
-        return renderButtonWrapper({ ...props, ref, variant, color: adaptedColor });
-    }
+    const backgroundColor =
+        hasBackground &&
+        emphasis === Emphasis.low &&
+        (adaptedColor === ColorPalette.light ? ColorPalette.dark : ColorPalette.light);
 
     const buttonClassName = classNames(
         className,
@@ -135,6 +106,8 @@ export const ButtonRoot: Comp<ButtonRootProps, HTMLButtonElement | HTMLAnchorEle
             prefix: BUTTON_CLASSNAME,
             size,
             theme: emphasis === Emphasis.high && theme,
+            hasBackground,
+            backgroundColor,
             variant,
         }),
     );
