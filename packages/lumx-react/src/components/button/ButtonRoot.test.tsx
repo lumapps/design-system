@@ -168,6 +168,19 @@ describe(`<${ButtonRoot.displayName}>`, () => {
                 expect(buttonWrapper).toHaveClassName(getBasicClass({ prefix: BUTTON_WRAPPER_CLASSNAME, type, value }));
             }
         });
+
+        it('should be full width', () => {
+            const buttonProps: Partial<ButtonRootProps> = {
+                fullWidth: true,
+                emphasis: Emphasis.high,
+                theme: Theme.light,
+            };
+
+            const { wrapper, button } = setup(buttonProps);
+            expect(wrapper).toMatchSnapshot();
+
+            expect(button).toHaveClassName(getBasicClass({ prefix: BUTTON_CLASSNAME, type: 'fullWidth', value: true }));
+        });
     });
 
     // 3. Test events.

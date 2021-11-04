@@ -14,7 +14,8 @@
     user-select: none;
     vertical-align: top;
 
-    &:hover {
+    &:hover,
+    &[class*='--is-hovered'] {
         cursor: pointer;
     }
 
@@ -69,7 +70,8 @@
         }
     }
 
-    &:hover {
+    &:hover,
+    &[class*='--is-hovered'] {
         @if $variant == 'button' {
             @if $size == lumx-base-const('size', 'M') {
                 padding: 0 var(--lumx-button-#{$emphasis}-state-hover-padding-horizontal);
@@ -83,7 +85,8 @@
         }
     }
 
-    &:active {
+    &:active,
+    &[class*='--is-active'] {
         @if $variant == 'button' {
             @if $size == lumx-base-const('size', 'M') {
                 padding: 0 var(--lumx-button-#{$emphasis}-state-active-padding-horizontal);
@@ -124,7 +127,8 @@
         }
     }
 
-    &:hover {
+    &:hover,
+    &[class*='--is-hovered'] {
         @if $color == 'primary' and $emphasis == lumx-base-const('emphasis', 'HIGH') {
             background-color: var(--lumx-button-#{$emphasis}-state-hover-#{$theme}-background-color);
             color: var(--lumx-button-#{$emphasis}-state-hover-#{$theme}-color);
@@ -149,7 +153,8 @@
         }
     }
 
-    &:active {
+    &:active,
+    &[class*='--is-active'] {
         @if $color == 'primary' and $emphasis == lumx-base-const('emphasis', 'HIGH') {
             background-color: var(--lumx-button-#{$emphasis}-state-active-#{$theme}-background-color);
             color: var(--lumx-button-#{$emphasis}-state-active-#{$theme}-color);
@@ -174,7 +179,8 @@
         }
     }
 
-    &[data-focus-visible-added] {
+    &[data-focus-visible-added],
+    &[class*='--is-focused'] {
         @include lumx-state(lumx-base-const('state', 'FOCUS'), $emphasis, $color, $theme);
     }
 
@@ -187,15 +193,18 @@
 @mixin lumx-button-is-selected($theme) {
     @include lumx-state-as-selected(lumx-base-const('state', 'DEFAULT'), $theme);
 
-    &:hover {
+    &:hover,
+    &[class*='--is-hovered'] {
         @include lumx-state-as-selected(lumx-base-const('state', 'HOVER'), $theme);
     }
 
-    &:active {
+    &:active,
+    &[class*='--is-active'] {
         @include lumx-state-as-selected(lumx-base-const('state', 'ACTIVE'), $theme);
     }
 
-    &[data-focus-visible-added] {
+    &[data-focus-visible-added],
+    &[class*='--is-focused'] {
         @include lumx-state-as-selected(lumx-base-const('state', 'FOCUS'), $theme);
     }
 }

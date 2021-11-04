@@ -60,8 +60,7 @@
 
             &.#{$lumx-base-prefix}-button--variant-icon {
                 & > i,
-                & > img
-                 {
+                & > img {
                     @include lumx-button-icon('icon', $key);
                 }
             }
@@ -114,6 +113,8 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-button-wrapper {
+    width: fit-content;
+
     &--variant-button {
         border-radius: var(--lumx-border-radius);
     }
@@ -151,4 +152,13 @@
             border-radius: 0 var(--lumx-border-radius) var(--lumx-border-radius) 0 !important;
         }
     }
+}
+
+/* Button full width
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-button--is-full-width:not(.#{$lumx-base-prefix}-button--variant-icon),
+.#{$lumx-base-prefix}-button-wrapper--is-full-width:not(.#{$lumx-base-prefix}-button-wrapper--variant-icon) {
+    width: 100%;
+    flex-grow: 1;
 }
