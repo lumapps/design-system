@@ -4,27 +4,17 @@ import { Emphasis, Icon, Size, Theme, Tooltip, TooltipProps } from '@lumx/react'
 import { BaseButtonProps, ButtonRoot } from '@lumx/react/components/button/ButtonRoot';
 import { Comp, getRootClassName } from '@lumx/react/utils';
 
-/** Either icon or image prop must be defined */
-type ImageOrIconType =
-    /** Svg path type icon */
-    | {
-          /**
-           * Icon SVG path (recommended over an image).
-           */
-          icon: string;
-          image?: undefined;
-      }
-    /** Image url type icon */
-    | {
-          /**
-           * Image URL (use icon SVG path when possible).
-           */
-          image: string;
-          icon?: undefined;
-      };
-
-/** Props common to icon and image type icon. */
-export interface IconButtonBaseProps {
+export interface IconButtonProps extends BaseButtonProps {
+    /**
+     * Icon (SVG path).
+     * If `image` is also set, `image` will be used instead.
+     */
+    icon?: string;
+    /**
+     * Image (image url).
+     * Has priority over `icon`.
+     */
+    image?: string;
     /**
      * Label text (required for a11y purpose).
      * If you really don't want an aria-label, you can set an empty label (this is not recommended).
@@ -38,11 +28,6 @@ export interface IconButtonBaseProps {
     /** Whether the tooltip should be hidden or not. */
     hideTooltip?: boolean;
 }
-
-/**
- * Defines the props of the component.
- */
-export type IconButtonProps = IconButtonBaseProps & ImageOrIconType & BaseButtonProps;
 
 /**
  * Component display name.
