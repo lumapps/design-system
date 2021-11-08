@@ -1,9 +1,8 @@
-import { mdiSend, mdiClose } from '@lumx/icons';
-
+import React, { Fragment } from 'react';
+import { mdiSend } from '@lumx/icons';
 import { Button, ColorPalette, Emphasis, IconButton, Size } from '@lumx/react';
 import { squareImageKnob } from '@lumx/react/stories/knobs';
 import { boolean, select, text } from '@storybook/addon-knobs';
-import React from 'react';
 
 export default { title: 'LumX components/button/Button' };
 
@@ -38,12 +37,6 @@ export const DisabledWithHref = () => (
     </Button>
 );
 
-export const IconButtonLowEmphasis = () => <IconButton emphasis={Emphasis.low} icon={mdiClose} label="Close" />;
-
-export const IconButtonLowEmphasisHasBackground = () => (
-    <IconButton emphasis={Emphasis.low} hasBackground icon={mdiClose} label="Close" />
-);
-
 export const IconButtonWithImage = ({ theme }: any) => (
     <div>
         <IconButton
@@ -57,3 +50,78 @@ export const IconButtonWithImage = ({ theme }: any) => (
         />
     </div>
 );
+
+export const FullWidthButton = () => <Button fullWidth>Full width button</Button>;
+
+/**
+ * Template story to generate all variants for button and icon button.
+ */
+const AllVariantTemplate = (Component: any, props: any) => () => {
+    // Major variants.
+    const variants = {
+        'Default (emphasis high)': {},
+        'Full width': { fullWidth: true },
+        'Emphasis medium': { emphasis: 'medium' },
+        'Emphasis low': { emphasis: 'low' },
+        'Has background (emphasis low)': { emphasis: 'low', hasBackground: true },
+        'Has background + Full width': { emphasis: 'low', hasBackground: true, fullWidth: true },
+    } as const;
+
+    // Color modifiers.
+    const colorModifiers = {
+        Default: {},
+        'Color: light': { color: 'light' },
+        'Color: dark': { color: 'dark' },
+        'Color: red': { color: 'red' },
+        'Theme: dark': { theme: 'dark' },
+    } as const;
+
+    // State modifiers.
+    const stateModifiers = {
+        'Default state': {},
+        Selected: { isSelected: true },
+        Hovered: { isHovered: true },
+        Focused: { isFocused: true },
+        Active: { isActive: true },
+        Disabled: { isDisabled: true },
+    };
+
+    return (
+        <div style={{ background: 'lightgray' }}>
+            {Object.entries(stateModifiers).map(([stateKey, state]) => (
+                <Fragment key={stateKey}>
+                    <h2>{stateKey}</h2>
+                    <table style={{ width: '100%' }}>
+                        <tr>
+                            <td style={{ whiteSpace: 'nowrap', width: 200 }} />
+                            {Object.keys(colorModifiers).map((colorKey) => (
+                                <td key={colorKey}>{colorKey}</td>
+                            ))}
+                        </tr>
+
+                        {Object.entries(variants).map(([variantKey, variant]: any) => (
+                            <tr key={variantKey}>
+                                <td>{variantKey}</td>
+                                {Object.entries(colorModifiers).map(([colorKey, color]) => (
+                                    <td key={colorKey}>
+                                        <Component {...props} {...variant} {...color} {...state} />
+                                    </td>
+                                ))}
+                            </tr>
+                        ))}
+                    </table>
+                </Fragment>
+            ))}
+        </div>
+    );
+};
+
+/**
+ * Check button style variations (color, states, emphasis, etc.)
+ */
+export const ButtonVariations = AllVariantTemplate(Button, { children: 'Button' });
+
+/**
+ * Check icon button style variations (color, states, emphasis, etc.)
+ */
+export const IconButtonVariations = AllVariantTemplate(IconButton, { label: 'Send', icon: mdiSend });

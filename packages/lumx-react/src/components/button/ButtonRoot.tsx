@@ -64,7 +64,7 @@ export const BUTTON_CLASSNAME = `${CSS_PREFIX}-button`;
  * @return React element.
  */
 const renderButtonWrapper: React.FC<ButtonRootProps> = (props) => {
-    const { color, emphasis, variant } = props;
+    const { color, emphasis, variant, fullWidth } = props;
 
     const adaptedColor =
         emphasis === Emphasis.low && (color === ColorPalette.light ? ColorPalette.dark : ColorPalette.light);
@@ -74,6 +74,7 @@ const renderButtonWrapper: React.FC<ButtonRootProps> = (props) => {
             color: adaptedColor,
             prefix: BUTTON_WRAPPER_CLASSNAME,
             variant,
+            fullWidth,
         }),
     );
     const buttonProps = { ...props, hasBackground: false };
@@ -105,6 +106,9 @@ export const ButtonRoot: Comp<ButtonRootProps, HTMLButtonElement | HTMLAnchorEle
         href,
         isDisabled = disabled,
         isSelected,
+        isActive,
+        isFocused,
+        isHovered,
         linkAs,
         name,
         size,
@@ -112,6 +116,7 @@ export const ButtonRoot: Comp<ButtonRootProps, HTMLButtonElement | HTMLAnchorEle
         theme,
         variant,
         type = 'button',
+        fullWidth,
         ...forwardedProps
     } = props;
 
@@ -132,10 +137,14 @@ export const ButtonRoot: Comp<ButtonRootProps, HTMLButtonElement | HTMLAnchorEle
             emphasis,
             isSelected,
             isDisabled,
+            isActive,
+            isFocused,
+            isHovered,
             prefix: BUTTON_CLASSNAME,
             size,
             theme: emphasis === Emphasis.high && theme,
             variant,
+            fullWidth,
         }),
     );
 

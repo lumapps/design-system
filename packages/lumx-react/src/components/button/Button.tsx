@@ -23,6 +23,8 @@ export interface ButtonProps extends BaseButtonProps {
     leftIcon?: string;
     /** Right icon (SVG path). */
     rightIcon?: string;
+    /** When `true`, the button gets as large as possible. */
+    fullWidth?: boolean;
 }
 
 /**

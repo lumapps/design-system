@@ -1,5 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<ButtonRoot> Props should be full width 1`] = `
+<ButtonRoot
+  emphasis="high"
+  fullWidth={true}
+  theme="light"
+>
+  <button
+    className="lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--theme-light lumx-button--is-full-width"
+    type="button"
+  />
+</ButtonRoot>
+`;
+
 exports[`<ButtonRoot> Props should not have default color in low or medium emphasis 1`] = `
 <ButtonRoot
   emphasis="low"

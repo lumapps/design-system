@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Fixed `IconButton` typing by making both `icon` and `image` props conditional.
     This fixes an issue that would occur when extending the interface and forwarding parent props to a children `IconButton`.
 
+### Added
+
+-   `Button`: Added `fullWidth` prop to match the parent width when possible.
+
 ## [2.1.1][] - 2021-10-28
 
 ### Added
