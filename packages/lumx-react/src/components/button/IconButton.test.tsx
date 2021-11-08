@@ -4,6 +4,7 @@ import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
 import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
+import { mdiClose } from '@lumx/icons';
 
 import { IconButton, IconButtonProps } from './IconButton';
 
@@ -43,6 +44,14 @@ describe(`<${IconButton.displayName}>`, () => {
 
         it('should render icon button with an image', () => {
             const { buttonRoot, icon, img, wrapper } = setup({ image: 'http://foo.com' });
+            expect(wrapper).toMatchSnapshot();
+            expect(buttonRoot).toExist();
+            expect(icon).not.toExist();
+            expect(img).toExist();
+        });
+
+        it('should render icon button with an image if both props are set', () => {
+            const { buttonRoot, icon, img, wrapper } = setup({ image: 'http://foo.com', icon: mdiClose });
             expect(wrapper).toMatchSnapshot();
             expect(buttonRoot).toExist();
             expect(icon).not.toExist();

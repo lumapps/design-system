@@ -67,3 +67,22 @@ exports[`<IconButton> Snapshots and structure should render icon button with an 
   </ButtonRoot>
 </Tooltip>
 `;
+
+exports[`<IconButton> Snapshots and structure should render icon button with an image if both props are set 1`] = `
+<Tooltip
+  delay={500}
+  placement="bottom"
+>
+  <ButtonRoot
+    emphasis="high"
+    size="m"
+    theme="light"
+    variant="icon"
+  >
+    <img
+      alt=""
+      src="http://foo.com"
+    />
+  </ButtonRoot>
+</Tooltip>
+`;
