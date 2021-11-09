@@ -1,5 +1,5 @@
 /* istanbul ignore file */
-import { landscapeImageKnob, portraitImageKnob } from '@lumx/react/stories/knobs';
+import { landscapeImageKnob, portraitImageKnob } from '@lumx/react/stories/knobs/image';
 import { text } from '@storybook/addon-knobs';
 import React from 'react';
 import { Size } from '..';

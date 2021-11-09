@@ -2,7 +2,7 @@ import React from 'react';
 import { mdiDotsHorizontal, mdiHeart, mdiReply } from '@lumx/icons';
 import { Button, CommentBlock, Emphasis, Size } from '@lumx/react';
 import { IconButton } from '@lumx/react/components/button/IconButton';
-import { avatarImageKnob } from '@lumx/react/stories/knobs';
+import { avatarImageKnob } from '@lumx/react/stories/knobs/image';
 
 export default { title: 'LumX components/comment-block/CommentBlock' };
 

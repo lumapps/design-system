@@ -1,90 +1,87 @@
-import { TextField } from '@lumx/react';
-import { text } from '@storybook/addon-knobs';
-import noop from 'lodash/noop';
 import React from 'react';
+import { mdiTranslate } from '@lumx/icons/';
+import { Emphasis, IconButton, Size, TextField } from '@lumx/react';
+import { boolean, number, text } from '@storybook/addon-knobs';
+import { buttonSize } from '@lumx/react/stories/knobs/buttonKnob';
+import { emphasis } from '@lumx/react/stories/knobs/emphasisKnob';
 
 export default { title: 'LumX components/text-field/TextField' };
 
-/**
- * TextField story
- * @return simple TextField.
- */
-export const SimpleTextField = ({ theme }: any) => (
-    <TextField
-        value={text('Value', 'myvalue')}
-        label={text('Label', 'I am the label')}
-        placeholder={text('Placeholder', 'ex: A value')}
-        theme={theme}
-        onChange={noop}
-    />
-);
-
-export const SimpleTextNumberField = ({ theme }: any) => (
-    <TextField
-        value={text('Value', '2')}
-        label={text('Label', 'I am the label')}
-        placeholder={text('Placeholder', 'ex: A value')}
-        theme={theme}
-        onChange={noop}
-        type="number"
-    />
-);
-
-export const TextFieldWithHelp = ({ theme }: any) => (
-    <TextField
-        value={text('Value', 'myvalue')}
-        label={text('Label', 'I am the label')}
-        placeholder={text('Placeholder', 'ex: A value')}
-        theme={theme}
-        onChange={noop}
-        helper={<span>{text('Helper', 'ex: toto@acme.com')}</span>}
-    />
-);
-
-export const TextFieldWithError = ({ theme }: any) => (
-    <TextField
-        value={text('Value', 'myvalue')}
-        label={text('Label', 'I am the label')}
-        placeholder={text('Placeholder', 'ex: A value')}
-        theme={theme}
-        onChange={noop}
-        helper={<span>{text('Helper', 'ex: toto@acme.com')}</span>}
-        hasError
-        error={
-            <span>
-                You must provide <strong>something</strong>
-            </span>
-        }
-    />
-);
-
-export const TextArea = ({ theme }: any) => {
-    const [value, setValue] = React.useState('my value');
+export const TextField_ = ({ theme }: any) => {
+    const [value, onChange] = React.useState('Value');
     return (
         <TextField
             value={value}
-            label={text('Label', 'I am the label')}
-            placeholder={text('Placeholder', 'ex: A value')}
-            multiline
-            minimumRows={1}
+            onChange={onChange}
+            label={text('Label', 'Label')}
+            placeholder={text('Placeholder', 'Placeholder')}
             theme={theme}
-            onChange={setValue}
-            helper={<span>{text('Helper', 'ex: toto@acme.com')}</span>}
         />
     );
 };
-export const TextAreaWith2Lines = ({ theme }: any) => {
-    const [value, setValue] = React.useState('the value');
+
+export const Clearable = ({ theme }: any) => {
+    const [value, onChange] = React.useState('Value');
     return (
         <TextField
             value={value}
-            label={text('Label', 'I am the label')}
-            placeholder={text('Placeholder', 'ex: A value')}
+            onChange={onChange}
+            label={text('Label', 'Label')}
+            clearButtonProps={{ label: 'Clear' }}
+            theme={theme}
+        />
+    );
+};
+
+export const States = ({ theme }: any) => {
+    const [value1, onChange1] = React.useState('Value');
+    const [value2, onChange2] = React.useState('Value');
+    return (
+        <>
+            <TextField
+                label="Has error"
+                hasError
+                error="Error message"
+                theme={theme}
+                value={value1}
+                onChange={onChange1}
+            />
+            <TextField label="Is valid" isValid theme={theme} value={value2} onChange={onChange2} />
+        </>
+    );
+};
+
+export const NumberField = ({ theme }: any) => {
+    const [value, onChange] = React.useState('0');
+    return <TextField value={value} onChange={onChange} label={text('Label', 'Label')} theme={theme} type="number" />;
+};
+
+export const WithHelper = ({ theme }: any) => {
+    const [value, onChange] = React.useState('Value');
+    return (
+        <TextField
+            value={value}
+            onChange={onChange}
+            label={text('Label', 'Label')}
+            placeholder={text('Placeholder', 'Placeholder')}
+            theme={theme}
+            helper={<span>{text('Helper', 'Helper')}</span>}
+        />
+    );
+};
+
+export const TextArea = ({ theme }: any) => {
+    const [value, setValue] = React.useState('Value');
+    return (
+        <TextField
+            value={value}
+            label={text('Label', 'Label')}
+            placeholder={text('Placeholder', 'Placeholder')}
             multiline
-            minimumRows={2}
+            minimumRows={number('Minimum number of rows', 1, { min: 0, max: 100 })}
             theme={theme}
             onChange={setValue}
-            helper={<span>{text('Helper', 'ex: toto@acme.com')}</span>}
+            helper={<span>{text('Helper', 'Helper')}</span>}
         />
     );
 };
@@ -99,26 +96,44 @@ text`;
     return (
         <TextField
             value={value}
-            label={text('Label', 'I am the label')}
-            placeholder={text('Placeholder', 'ex: A value')}
+            label={text('Label', 'Label')}
+            placeholder={text('Placeholder', 'Placeholder')}
             multiline
-            minimumRows={2}
+            minimumRows={number('Minimum number of rows', 2, { min: 0, max: 100 })}
             theme={theme}
             onChange={setValue}
-            helper={<span>{text('Helper', 'ex: toto@acme.com')}</span>}
+            helper={<span>{text('Helper', 'Helper')}</span>}
         />
     );
 };
 
-// Even with value set programmatically, the number of rows should be updated
-export const TextAreaWithKnobValue = ({ theme }: any) => (
-    <TextField
-        value={text('Value', 'myvalue')}
-        label={text('Label', 'I am the label')}
-        placeholder={text('Placeholder', 'ex: A value')}
-        multiline
-        minimumRows={1}
-        theme={theme}
-        onChange={noop}
-    />
-);
+export const WithAfterElement = ({ theme }: any) => {
+    const [value, onChange] = React.useState('Value');
+    const multiline = boolean('Multiline', true);
+    const minimumRows = number('Minimum number of rows', 2, { min: 0, max: 100 });
+    const isClearable = boolean('Clearable', true);
+    const hasError = boolean('Has error', true);
+    return (
+        <TextField
+            value={value}
+            label={text('Label', 'Label')}
+            placeholder={text('Placeholder', 'Placeholder')}
+            theme={theme}
+            onChange={onChange}
+            multiline={multiline}
+            minimumRows={minimumRows}
+            hasError={hasError}
+            maxLength={200}
+            clearButtonProps={isClearable ? { label: 'Clear' } : undefined}
+            helper={<span>{text('Helper', 'Helper')}</span>}
+            afterElement={
+                <IconButton
+                    label="foo"
+                    emphasis={emphasis('Button emphasis', Emphasis.medium, 'After element')}
+                    size={buttonSize('Button size', Size.s, 'After element')}
+                    icon={mdiTranslate}
+                />
+            }
+        />
+    );
+};

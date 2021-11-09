@@ -1,6 +1,6 @@
 import { mdiStar } from '@lumx/icons';
 import { Badge, ColorPalette, Icon, List, ListItem, Size } from '@lumx/react';
-import { AVATAR_IMAGES, avatarImageKnob } from '@lumx/react/stories/knobs';
+import { AVATAR_IMAGES, avatarImageKnob } from '@lumx/react/stories/knobs/image';
 import React from 'react';
 import { UserBlock } from './UserBlock';
 

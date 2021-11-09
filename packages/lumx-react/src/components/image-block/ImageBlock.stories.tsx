@@ -1,4 +1,4 @@
-import { LANDSCAPE_IMAGES, landscapeImageKnob } from '@lumx/react/stories/knobs';
+import { LANDSCAPE_IMAGES, landscapeImageKnob } from '@lumx/react/stories/knobs/image';
 import React from 'react';
 
 import { Alignment, AspectRatio, Chip, ChipGroup, ImageBlock, Size } from '@lumx/react';

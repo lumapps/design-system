@@ -1,7 +1,9 @@
 import React, { Fragment } from 'react';
 import { mdiSend } from '@lumx/icons';
-import { Button, ColorPalette, Emphasis, IconButton, Size } from '@lumx/react';
-import { squareImageKnob } from '@lumx/react/stories/knobs';
+import { Button, ColorPalette, IconButton } from '@lumx/react';
+import { squareImageKnob } from '@lumx/react/stories/knobs/image';
+import { buttonSize } from '@lumx/react/stories/knobs/buttonKnob';
+import { emphasis } from '@lumx/react/stories/knobs/emphasisKnob';
 import { boolean, select, text } from '@storybook/addon-knobs';
 
 export default { title: 'LumX components/button/Button' };
@@ -11,11 +13,11 @@ const DEFAULT_PROPS = Button.defaultProps as any;
 export const SimpleButton = ({ theme }: any) => {
     return (
         <Button
-            emphasis={select('Emphasis', Emphasis, DEFAULT_PROPS.emphasis)}
+            emphasis={emphasis('Emphasis', DEFAULT_PROPS.emphasis)}
             theme={theme}
             rightIcon={select('Right icon', { none: undefined, mdiSend }, undefined)}
             leftIcon={select('Left icon', { none: undefined, mdiSend }, undefined)}
-            size={select('Size', [Size.m, Size.s], DEFAULT_PROPS.size)}
+            size={buttonSize()}
             isSelected={boolean('isSelected', Boolean(DEFAULT_PROPS.isSelected))}
             isDisabled={boolean('isDisabled', Boolean(DEFAULT_PROPS.isDisabled))}
             color={select('color', ColorPalette, DEFAULT_PROPS.color)}
@@ -43,9 +45,9 @@ export const IconButtonWithImage = ({ theme }: any) => (
             theme={theme}
             label="Image label"
             image={squareImageKnob()}
-            size={select('Size', [Size.m, Size.s], DEFAULT_PROPS.size)}
+            size={buttonSize()}
             hasBackground={boolean('Has background', false)}
-            emphasis={select('Emphasis', Emphasis, DEFAULT_PROPS.emphasis)}
+            emphasis={emphasis('Emphasis', DEFAULT_PROPS.emphasis)}
             color={select('color', ColorPalette, DEFAULT_PROPS.color)}
         />
     </div>

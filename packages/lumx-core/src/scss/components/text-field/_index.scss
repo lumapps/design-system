@@ -144,7 +144,8 @@
         }
     }
 
-    &__input-clear {
+    &__input-clear,
+    &__after-element {
         @include lumx-text-field-input-clear;
     }
 
