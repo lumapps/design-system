@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.2][] - 2021-11-10
+
 ### Fixed
 
 -   Fixed `IconButton` typing by making both `icon` and `image` props conditional.
@@ -1269,3 +1271,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [2.1.0]: https://github.com/lumapps/design-system/tree/v2.1.0
 [unreleased]: https://github.com/lumapps/design-system/compare/v2.1.1...HEAD
 [2.1.1]: https://github.com/lumapps/design-system/tree/v2.1.1
+[unreleased]: https://github.com/lumapps/design-system/compare/v2.1.2...HEAD
+[2.1.2]: https://github.com/lumapps/design-system/tree/v2.1.2
