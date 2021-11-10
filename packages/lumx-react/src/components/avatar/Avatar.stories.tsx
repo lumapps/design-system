@@ -1,6 +1,6 @@
 import { mdiDelete, mdiEye, mdiPencil, mdiStar } from '@lumx/icons';
 import { AvatarSize, Badge, ColorPalette, Emphasis, Icon, IconButton, Size } from '@lumx/react';
-import { AVATAR_IMAGES, avatarImageKnob, PORTRAIT_IMAGES } from '@lumx/react/stories/knobs';
+import { AVATAR_IMAGES, avatarImageKnob, PORTRAIT_IMAGES } from '@lumx/react/stories/knobs/image';
 import { select } from '@storybook/addon-knobs';
 import React from 'react';
 

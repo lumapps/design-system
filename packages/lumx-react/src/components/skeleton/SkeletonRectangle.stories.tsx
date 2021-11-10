@@ -12,7 +12,7 @@ import {
     Thumbnail,
     ColorPalette,
 } from '@lumx/react';
-import { imageKnob } from '@lumx/react/stories/knobs';
+import { imageKnob } from '@lumx/react/stories/knobs/image';
 
 export default { title: 'LumX components/skeleton/Skeleton' };
 

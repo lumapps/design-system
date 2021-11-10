@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   `Button`: Added `fullWidth` prop to match the parent width when possible.
+-   `TextField`: Added `afterElement` prop to add a custom element at the end of the text field.
 
 ## [2.1.1][] - 2021-10-28
 

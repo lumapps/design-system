@@ -12,7 +12,7 @@ import {
     Thumbnail,
     ThumbnailVariant,
 } from '@lumx/react';
-import { imageKnob, IMAGES } from '@lumx/react/stories/knobs';
+import { imageKnob, IMAGES } from '@lumx/react/stories/knobs/image';
 import { htmlDecode } from '@lumx/react/utils/htmlDecode';
 import { boolean, select, text } from '@storybook/addon-knobs';
 import { enumKnob } from '@lumx/react/stories/knobs/enumKnob';

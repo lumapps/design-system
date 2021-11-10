@@ -17,7 +17,7 @@ import {
 import { select } from '@storybook/addon-knobs';
 import React, { RefObject, useRef, useState } from 'react';
 import { Dialog, DialogSizes } from './Dialog';
-import { loremIpsum } from '../../stories/knobs';
+import { loremIpsum } from '../../stories/knobs/lorem';
 
 export default {
     title: 'LumX components/dialog/Dialog',

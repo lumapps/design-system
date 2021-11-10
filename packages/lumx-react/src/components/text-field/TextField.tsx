@@ -24,6 +24,8 @@ export interface TextFieldProps extends GenericProps {
     forceFocusStyle?: boolean;
     /** Whether the text field is displayed with error style or not. */
     hasError?: boolean;
+    /** Additional element to put at the end of the text field. */
+    afterElement?: ReactNode;
     /** Helper text. */
     helper?: string | ReactNode;
     /** Icon (SVG path). */
@@ -259,6 +261,7 @@ export const TextField: Comp<TextFieldProps, HTMLDivElement> = forwardRef((props
         theme,
         type,
         value,
+        afterElement,
         ...forwardedProps
     } = props;
     const textFieldId = useMemo(() => id || `text-field-${uid()}`, [id]);
@@ -405,6 +408,8 @@ export const TextField: Comp<TextFieldProps, HTMLDivElement> = forwardRef((props
                         type="button"
                     />
                 )}
+
+                {afterElement && <div className={`${CLASSNAME}__after-element`}>{afterElement}</div>}
             </div>
 
             {hasError && error && (
