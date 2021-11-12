@@ -14,6 +14,7 @@ async function toggleMaterialTheme(wasEnabled: boolean) {
 
     // Inject the material theme CSS file.
     if (!globalState.styleSheet) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         const cssCode = await import('!!raw-loader!@lumx/core/css/material.css');
 
@@ -28,12 +29,16 @@ async function toggleMaterialTheme(wasEnabled: boolean) {
     globalState.styleSheet.disabled = !globalState.isEnabled;
 }
 
-export const MaterialThemeSwitcher = ({ theme }: any) => {
+export const MaterialThemeSwitcher: React.FC<any> = ({ theme }) => {
     const [isEnabled, setEnabled] = useState(globalState.isEnabled);
-    const toggleTheme = useCallback(() => setEnabled((wasEnabled) => {
-        toggleMaterialTheme(wasEnabled);
-        return !wasEnabled;
-    }), []);
+    const toggleTheme = useCallback(
+        () =>
+            setEnabled((wasEnabled) => {
+                toggleMaterialTheme(wasEnabled);
+                return !wasEnabled;
+            }),
+        [],
+    );
 
     return (
         <Switch

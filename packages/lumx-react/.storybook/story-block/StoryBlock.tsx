@@ -2,7 +2,7 @@ import React, { ReactElement, useState } from 'react';
 import classNames from 'classnames';
 import isChromatic from 'chromatic/isChromatic';
 import { Alignment, Switch, Theme } from '@lumx/react';
-import { MaterialThemeSwitcher } from './MaterialThemeSwitcher';
+import { MaterialThemeSwitcher } from '@lumx/react/utils/MaterialThemeSwitcher';
 
 import '@lumx/core/scss/lumx.scss';
 import './index.scss';
