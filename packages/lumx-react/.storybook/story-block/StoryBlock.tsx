@@ -1,10 +1,11 @@
-import { Switch, Alignment, Theme } from '@lumx/react';
-import isChromatic from 'chromatic/isChromatic';
 import React, { ReactElement, useState } from 'react';
-import '@lumx/core/scss/lumx.scss';
-import '@lumx/core/css/material.css';
 import classNames from 'classnames';
-import { styles } from './styles';
+import isChromatic from 'chromatic/isChromatic';
+import { Alignment, Switch, Theme } from '@lumx/react';
+import { MaterialThemeSwitcher } from './MaterialThemeSwitcher';
+
+import '@lumx/core/scss/lumx.scss';
+import './index.scss';
 
 import 'focus-visible';
 
@@ -26,22 +27,18 @@ export const StoryBlock: React.FC<StoryBlockProps> = (props) => {
     }
 
     return (
-        <div
-            className={classNames(
-                CLASSNAME,
-                theme === Theme.dark && 'lumx-color-background-dark-N lumx-color-font-light-N',
-            )}
-            style={styles.block}
-        >
-            <div style={styles.selector}>
+        <div className={classNames(CLASSNAME, `${CLASSNAME}--theme-${theme}`)}>
+            <div className={`${CLASSNAME}__toolbar`}>
                 <Switch
+                    className="dark-theme-switcher"
                     isChecked={theme === Theme.dark}
                     onChange={toggleTheme}
                     position={Alignment.right}
                     theme={theme}
                 >
-                    <span className="lumx-typography-overline lumx-spacing-margin-tiny">Dark Background</span>
+                    Dark Background
                 </Switch>
+                <MaterialThemeSwitcher theme={theme} />
             </div>
 
             {children({ theme })}

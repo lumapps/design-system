@@ -1,0 +1,15 @@
+@import '~@lumx/core/src/scss/design-tokens';
+@import '~@lumx/core/src/scss/core';
+
+.story-block {
+    &--theme-dark {
+        background: lumx-color-variant('dark', 'N');
+        color: lumx-color-variant('light', 'N');
+    }
+
+    &__toolbar {
+        display: flex;
+        margin-bottom: $lumx-spacing-unit-big;
+        gap: $lumx-spacing-unit-big;
+    }
+}
