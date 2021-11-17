@@ -20,7 +20,7 @@ npm install @lumx/react
 
 ## Documentation
 
-You can find an online version of the demo and documentation site at https://design-system.lumapps.com.
+You can find an online version of the demo and documentation site at https://design.lumapps.com.
 
 ## How to get help, contribute, or provide feedback
 
