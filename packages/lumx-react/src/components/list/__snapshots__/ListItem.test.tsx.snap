@@ -16,6 +16,24 @@ exports[`<ListItem> Snapshots and structure should render story 'Default' 1`] = 
 </li>
 `;
 
+exports[`<ListItem> Snapshots and structure should render story 'Disabled' 1`] = `
+<li
+  className="lumx-list-item lumx-list-item--size-regular"
+>
+  <a
+    aria-disabled={true}
+    className="lumx-list-item__link lumx-list-item__link--is-disabled"
+    tabIndex={0}
+  >
+    <div
+      className="lumx-list-item__content"
+    >
+      Text
+    </div>
+  </a>
+</li>
+`;
+
 exports[`<ListItem> Snapshots and structure should render story 'Highlighted' 1`] = `
 <li
   className="lumx-list-item lumx-list-item--size-regular"

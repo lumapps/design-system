@@ -75,7 +75,7 @@ function onKeyboardFocus(props: any, handler: (evt: FocusEvent) => void) {
 }
 
 const isNavigableItem = (node: ReactNode): node is ReactElement => {
-    return isComponent('ListItem')(node) && isClickable(node.props);
+    return isComponent('ListItem')(node) && isClickable(node.props) && !node.props.isDisabled;
 };
 
 /**
