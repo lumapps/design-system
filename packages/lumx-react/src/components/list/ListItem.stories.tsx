@@ -9,6 +9,12 @@ export default { title: 'LumX components/list/ListItem' };
 
 export const Default = ({ theme }: any) => <ListItem theme={theme}>{text('text', 'Text')}</ListItem>;
 
+export const Disabled = ({ theme }: any) => (
+    <ListItem theme={theme} linkProps={{ href: '#' }} isDisabled>
+        {text('text', 'Text')}
+    </ListItem>
+);
+
 export const Selected = ({ theme }: any) => (
     <ListItem theme={theme} linkProps={{ href: '#' }} isSelected>
         {text('text', 'Text')}

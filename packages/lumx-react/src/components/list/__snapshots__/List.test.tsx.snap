@@ -129,12 +129,24 @@ exports[`<List> Snapshots and structure should render story 'KeyboardNavigation'
   >
     Header
   </ListSubheader>
-  <CustomListItem
+  <ListItem
+    isDisabled={true}
     key=".4"
+    linkProps={
+      Object {
+        "href": "#",
+      }
+    }
+    size="regular"
+  >
+    Link item 3
+  </ListItem>
+  <CustomListItem
+    key=".5"
   />
   <ListItem
     isHighlighted={false}
-    key=".5:$1"
+    key=".6:$1"
     linkProps={
       Object {
         "href": "#",
@@ -147,7 +159,7 @@ exports[`<List> Snapshots and structure should render story 'KeyboardNavigation'
     onMouseUp={[Function]}
     size="regular"
   >
-    Link item 3
+    Link item 4
   </ListItem>
 </ul>
 `;

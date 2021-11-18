@@ -46,10 +46,13 @@ export const KeyboardNavigation = () => {
                     <ListItem linkProps={{ href: '#' }}>Link item 2</ListItem>
                     <ListSubheader>Header</ListSubheader>
                 </>
+                <ListItem linkProps={{ href: '#' }} isDisabled>
+                    Link item 3
+                </ListItem>
                 <CustomListItem />
                 {[
                     <ListItem key="1" linkProps={{ href: '#' }}>
-                        Link item 3
+                        Link item 4
                     </ListItem>,
                 ]}
             </List>

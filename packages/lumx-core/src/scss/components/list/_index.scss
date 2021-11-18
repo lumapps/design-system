@@ -41,6 +41,11 @@
     &__link--is-selected {
         @include lumx-list-item-selected;
     }
+
+    &__link--is-disabled,
+    &__link[aria-disabled='true'] {
+        @include lumx-state-disabled-input;
+    }
 }
 
 /* Item spacing

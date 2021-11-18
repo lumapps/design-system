@@ -23,6 +23,8 @@ export interface ListItemProps extends GenericProps {
     isHighlighted?: boolean;
     /** Whether the component is selected or not. */
     isSelected?: boolean;
+    /** Whether link/button is disabled or not. */
+    isDisabled?: boolean;
     /** Reference to the <li> element. */
     listItemRef?: Ref<HTMLLIElement>;
     /** Custom react component for the link (can be used to inject react router Link). */
@@ -33,6 +35,7 @@ export interface ListItemProps extends GenericProps {
     linkRef?: Ref<HTMLAnchorElement>;
     /** Size variant. */
     size?: ListItemSize;
+
     /** On selected callback. */
     onItemSelected?(evt: SyntheticEvent): void;
 }
@@ -77,6 +80,7 @@ export const ListItem: Comp<ListItemProps, HTMLLIElement> = forwardRef((props, r
         className,
         isHighlighted,
         isSelected,
+        isDisabled,
         linkAs,
         linkProps = {},
         linkRef,
@@ -115,15 +119,18 @@ export const ListItem: Comp<ListItemProps, HTMLLIElement> = forwardRef((props, r
                         linkAs,
                         tabIndex: 0,
                         role: onItemSelected ? 'button' : undefined,
+                        'aria-disabled': isDisabled,
                         ...linkProps,
+                        href: isDisabled ? undefined : linkProps.href,
                         className: classNames(
                             handleBasicClasses({
                                 prefix: `${CLASSNAME}__link`,
                                 isHighlighted,
                                 isSelected,
+                                isDisabled,
                             }),
                         ),
-                        onClick: onItemSelected,
+                        onClick: isDisabled ? undefined : onItemSelected,
                         onKeyDown,
                         ref: linkRef,
                     },
