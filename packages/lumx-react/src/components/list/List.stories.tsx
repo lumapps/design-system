@@ -47,7 +47,10 @@ export const KeyboardNavigation = () => {
                     <ListSubheader>Header</ListSubheader>
                 </>
                 <ListItem linkProps={{ href: '#' }} isDisabled>
-                    Link item 3
+                    Disabled link item
+                </ListItem>
+                <ListItem onItemSelected={action('onItemSelected')} isDisabled>
+                    Disabled button item
                 </ListItem>
                 <CustomListItem />
                 {[

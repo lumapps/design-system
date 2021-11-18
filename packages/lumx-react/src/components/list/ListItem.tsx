@@ -4,7 +4,14 @@ import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
 
 import { ListProps, Size } from '@lumx/react';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
+import {
+    Comp,
+    GenericProps,
+    getRootClassName,
+    handleBasicClasses,
+    onEnterPressed,
+    onButtonPressed,
+} from '@lumx/react/utils';
 import { renderLink } from '@lumx/react/utils/renderLink';
 
 export type ListItemSize = Extract<Size, 'tiny' | 'regular' | 'big' | 'huge'>;
@@ -88,9 +95,13 @@ export const ListItem: Comp<ListItemProps, HTMLLIElement> = forwardRef((props, r
         size,
         ...forwardedProps
     } = props;
-    const onKeyDown = useMemo(() => (onItemSelected ? onEnterPressed(onItemSelected as any) : undefined), [
-        onItemSelected,
-    ]);
+
+    const role = linkAs || linkProps.href ? 'link' : 'button';
+    const onKeyDown = useMemo(() => {
+        if (onItemSelected && role === 'link') return onEnterPressed(onItemSelected as any);
+        if (onItemSelected && role === 'button') return onButtonPressed(onItemSelected as any);
+        return undefined;
+    }, [role, onItemSelected]);
 
     const content = (
         <>
@@ -117,8 +128,8 @@ export const ListItem: Comp<ListItemProps, HTMLLIElement> = forwardRef((props, r
                 renderLink(
                     {
                         linkAs,
-                        tabIndex: 0,
-                        role: onItemSelected ? 'button' : undefined,
+                        tabIndex: !isDisabled && role === 'button' ? 0 : undefined,
+                        role,
                         'aria-disabled': isDisabled,
                         ...linkProps,
                         href: isDisabled ? undefined : linkProps.href,

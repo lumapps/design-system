@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   `ListItem`: Added `isDisabled` prop to disable a clickable list item.
+-   `ListItem`: improve a11y keyboard activation on button list item.
 
 ## [2.1.2][] - 2021-11-10
 
