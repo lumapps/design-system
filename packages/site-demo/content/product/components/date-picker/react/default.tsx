@@ -1,7 +1,7 @@
 import { DatePicker } from '@lumx/react';
 import React, { useState } from 'react';
 
-export const App = ({ today }: any) => {
+export const App = ({ today = new Date() }: any) => {
     const [datePicked, setDatePicked] = useState<Date | undefined>(new Date(today));
 
     return (

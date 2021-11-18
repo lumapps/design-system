@@ -41,7 +41,7 @@ export const StoryBlock: React.FC<StoryBlockProps> = (props) => {
                 <MaterialThemeSwitcher theme={theme} />
             </div>
 
-            {children({ theme })}
+            {children({ theme, today: new Date() })}
         </div>
     );
 };
