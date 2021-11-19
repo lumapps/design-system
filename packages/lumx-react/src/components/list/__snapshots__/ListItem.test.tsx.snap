@@ -1,29 +1,34 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ListItem> Snapshots and structure should render story 'Default' 1`] = `
+exports[`<ListItem> Snapshots and structure should render story 'Button' 1`] = `
 <li
   className="lumx-list-item lumx-list-item--size-regular"
 >
-  <div
-    className="lumx-list-item__wrapper"
+  <a
+    className="lumx-list-item__link"
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    role="button"
+    tabIndex={0}
   >
     <div
       className="lumx-list-item__content"
     >
       Text
     </div>
-  </div>
+  </a>
 </li>
 `;
 
-exports[`<ListItem> Snapshots and structure should render story 'Disabled' 1`] = `
+exports[`<ListItem> Snapshots and structure should render story 'ButtonDisabled' 1`] = `
 <li
   className="lumx-list-item lumx-list-item--size-regular"
 >
   <a
     aria-disabled={true}
     className="lumx-list-item__link lumx-list-item__link--is-disabled"
-    tabIndex={0}
+    onKeyDown={[Function]}
+    role="button"
   >
     <div
       className="lumx-list-item__content"
@@ -41,7 +46,7 @@ exports[`<ListItem> Snapshots and structure should render story 'Highlighted' 1`
   <a
     className="lumx-list-item__link lumx-list-item__link--is-highlighted"
     href="#"
-    tabIndex={0}
+    role="link"
   >
     <div
       className="lumx-list-item__content"
@@ -52,6 +57,58 @@ exports[`<ListItem> Snapshots and structure should render story 'Highlighted' 1`
 </li>
 `;
 
+exports[`<ListItem> Snapshots and structure should render story 'Link' 1`] = `
+<li
+  className="lumx-list-item lumx-list-item--size-regular"
+>
+  <a
+    className="lumx-list-item__link"
+    href="#"
+    role="link"
+  >
+    <div
+      className="lumx-list-item__content"
+    >
+      Text
+    </div>
+  </a>
+</li>
+`;
+
+exports[`<ListItem> Snapshots and structure should render story 'LinkDisabled' 1`] = `
+<li
+  className="lumx-list-item lumx-list-item--size-regular"
+>
+  <a
+    aria-disabled={true}
+    className="lumx-list-item__link lumx-list-item__link--is-disabled"
+    role="link"
+  >
+    <div
+      className="lumx-list-item__content"
+    >
+      Text
+    </div>
+  </a>
+</li>
+`;
+
+exports[`<ListItem> Snapshots and structure should render story 'NonClickable' 1`] = `
+<li
+  className="lumx-list-item lumx-list-item--size-regular"
+>
+  <div
+    className="lumx-list-item__wrapper"
+  >
+    <div
+      className="lumx-list-item__content"
+    >
+      Text
+    </div>
+  </div>
+</li>
+`;
+
 exports[`<ListItem> Snapshots and structure should render story 'Selected' 1`] = `
 <li
   className="lumx-list-item lumx-list-item--size-regular"
@@ -59,7 +116,7 @@ exports[`<ListItem> Snapshots and structure should render story 'Selected' 1`] =
   <a
     className="lumx-list-item__link lumx-list-item__link--is-selected"
     href="#"
-    tabIndex={0}
+    role="link"
   >
     <div
       className="lumx-list-item__content"
@@ -90,16 +147,14 @@ exports[`<ListItem> Snapshots and structure should render story 'WithCustomLink'
 <li
   className="lumx-list-item lumx-list-item--size-regular"
 >
-  <CustomLink
-    className="lumx-list-item__link"
-    href="http://google.com"
-    tabIndex={0}
+  <div
+    className="lumx-list-item__wrapper"
   >
     <div
       className="lumx-list-item__content"
     >
       My custom link
     </div>
-  </CustomLink>
+  </div>
 </li>
 `;

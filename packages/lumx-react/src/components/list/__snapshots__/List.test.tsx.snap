@@ -139,14 +139,22 @@ exports[`<List> Snapshots and structure should render story 'KeyboardNavigation'
     }
     size="regular"
   >
-    Link item 3
+    Disabled link item
+  </ListItem>
+  <ListItem
+    isDisabled={true}
+    key=".5"
+    onItemSelected={[Function]}
+    size="regular"
+  >
+    Disabled button item
   </ListItem>
   <CustomListItem
-    key=".5"
+    key=".6"
   />
   <ListItem
     isHighlighted={false}
-    key=".6:$1"
+    key=".7:$1"
     linkProps={
       Object {
         "href": "#",
