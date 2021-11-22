@@ -56,6 +56,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Soften medium and low dark buttons color.
 
+### Changed
+
+-   Soften medium and low dark buttons color.
+
 ## [2.1.3][] - 2021-11-19
 
 ### Added

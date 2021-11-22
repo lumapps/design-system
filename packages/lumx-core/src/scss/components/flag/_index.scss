@@ -25,9 +25,14 @@
 @each $key, $color in $lumx-color-palette {
     .#{$lumx-base-prefix}-flag--color-#{$key} {
         border: 2px solid lumx-color-variant($key, 'L4');
-    }
 
-    .#{$lumx-base-prefix}-flag--color-#{$key} .#{$lumx-base-prefix}-flag__label {
-        color: lumx-color-variant($key, 'D2');
+        .#{$lumx-base-prefix}-flag__label,
+        .#{$lumx-base-prefix}-flag__icon {
+            @if $key == 'dark' {
+                color: lumx-color-variant($key, 'L1');
+            } @else {
+                color: lumx-color-variant($key, 'D2');
+            }
+        }
     }
 }
