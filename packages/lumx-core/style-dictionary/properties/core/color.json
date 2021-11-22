@@ -4,7 +4,7 @@
             "N": { "value": "#000000", "opacity": "0.87", "version": "0.22", "comment": "Neutral dark color" },
             "L1": {
                 "value": "#000000",
-                "opacity": "0.8",
+                "opacity": "0.7",
                 "version": "0.22",
                 "comment": "Base dark color with 80% opacity"
             },

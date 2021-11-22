@@ -62,8 +62,8 @@ export const Message: Comp<MessageProps, HTMLDivElement> = forwardRef((props, re
             )}
             {...forwardedProps}
         >
-            {(customIcon || icon) && <Icon className="lumx-message__icon" icon={customIcon || icon} size={Size.xs} />}
-            <div className="lumx-message__text">{children}</div>
+            {(customIcon || icon) && <Icon className={`${CLASSNAME}__icon`} icon={customIcon || icon} size={Size.xs} />}
+            <div className={`${CLASSNAME}__text`}>{children}</div>
         </div>
     );
 });

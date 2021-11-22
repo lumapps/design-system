@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import classNames from 'classnames';
 
-import { ColorPalette, ColorVariant, Icon, Size, Theme } from '@lumx/react';
+import { ColorPalette, Icon, Size, Theme } from '@lumx/react';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 export interface FlagProps extends GenericProps {
@@ -38,15 +38,7 @@ export const Flag: Comp<FlagProps, HTMLDivElement> = forwardRef((props, ref) => 
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color: flagColor }))}
             ref={ref}
         >
-            {icon && (
-                <Icon
-                    icon={icon}
-                    color={color}
-                    colorVariant={ColorVariant.D2}
-                    size={Size.xxs}
-                    className={`${CLASSNAME}__icon`}
-                />
-            )}
+            {icon && <Icon icon={icon} size={Size.xxs} className={`${CLASSNAME}__icon`} />}
             <span className={`${CLASSNAME}__label`}>{label}</span>
         </div>
     );

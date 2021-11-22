@@ -23,7 +23,8 @@
 }
 
 @mixin lumx-list-item-clickable() {
-    color: lumx-color-variant('dark', 'N');
+    @include lumx-state(lumx-base-const('state', 'DEFAULT'), lumx-base-const('emphasis', 'LOW'), 'dark');
+
     cursor: pointer;
 
     &:hover,
