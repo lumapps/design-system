@@ -1,9 +1,10 @@
-
 module.exports = {
     cacheDirectory: true,
     plugins: [
         ['angularjs-annotate', { explicitOnly: true }],
         '@babel/plugin-proposal-class-properties',
+        ['@babel/plugin-proposal-private-property-in-object', { 'loose': false }],
+        ['@babel/plugin-proposal-private-methods', { 'loose': false }],
         '@babel/plugin-proposal-export-default-from',
         '@babel/plugin-proposal-object-rest-spread',
         '@babel/plugin-proposal-optional-chaining',

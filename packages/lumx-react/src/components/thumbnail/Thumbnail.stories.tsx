@@ -56,7 +56,7 @@ export const CustomFallback = () => (
 
 export const WithBadge = () => {
     const thumbnailSize = sizeKnob('Thumbnail size', Size.l);
-    const variant = select<ThumbnailVariant>('Thumbnail variant', ThumbnailVariant, ThumbnailVariant.rounded);
+    const variant = select('Thumbnail variant', ThumbnailVariant, ThumbnailVariant.rounded);
     const badgeColor = select('Badge color', ColorPalette, ColorPalette.primary);
     const activateFallback = boolean('Activate fallback', false);
     const image = imageKnob();
@@ -109,7 +109,7 @@ export const Knobs = ({ theme }: any) => {
     const fillHeight = boolean('Fill Height', false);
     const focusPoint = { x: focusKnob('Focus X'), y: focusKnob('Focus Y') };
     const image = imageKnob('Image', IMAGES.landscape1);
-    const variant = select<ThumbnailVariant>('Variant', ThumbnailVariant, ThumbnailVariant.squared);
+    const variant = select('Variant', ThumbnailVariant, ThumbnailVariant.squared);
     const size = sizeKnob('Size', Size.xxl);
     const onClick = boolean('clickable?', false) ? () => console.log('ok') : undefined;
 

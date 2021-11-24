@@ -1,7 +1,7 @@
 /**
  * File generated when storybook is started. Do not edit directly!
  */
-export default { title: 'LumX components/thumbnail/Demos' };
+export default { title: 'LumX components/thumbnail/Thumbnail Demos' };
 
 export { App as Combined } from './combined';
 export { App as Ratios } from './ratios';

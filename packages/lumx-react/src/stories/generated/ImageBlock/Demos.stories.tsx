@@ -1,7 +1,7 @@
 /**
  * File generated when storybook is started. Do not edit directly!
  */
-export default { title: 'LumX components/image-block/Demos' };
+export default { title: 'LumX components/image-block/ImageBlock Demos' };
 
 export { App as Default } from './default';
 export { App as ImageBlockAbove } from './image-block-above';

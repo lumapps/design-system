@@ -2,7 +2,7 @@ import React from 'react';
 
 import { FlexBox, Orientation, Size, SkeletonCircle, ColorPalette } from '@lumx/react';
 
-export default { title: 'LumX components/skeleton/Skeleton' };
+export default { title: 'LumX components/skeleton/Skeleton Circle' };
 
 const sizes = [Size.xxs, Size.xs, Size.s, Size.m, Size.l, Size.xl, Size.xxl] as const;
 const colors = Object.values(ColorPalette);

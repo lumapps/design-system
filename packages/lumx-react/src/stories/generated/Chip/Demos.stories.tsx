@@ -1,7 +1,7 @@
 /**
  * File generated when storybook is started. Do not edit directly!
  */
-export default { title: 'LumX components/chip/Demos' };
+export default { title: 'LumX components/chip/Chip Demos' };
 
 export { App as Choice } from './choice';
 export { App as Default } from './default';

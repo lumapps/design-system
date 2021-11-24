@@ -1,7 +1,7 @@
 /**
  * File generated when storybook is started. Do not edit directly!
  */
-export default { title: 'LumX components/user-block/Demos' };
+export default { title: 'LumX components/user-block/UserBlock Demos' };
 
 export { App as Extended } from './extended';
 export { App as SizeL } from './size-l';

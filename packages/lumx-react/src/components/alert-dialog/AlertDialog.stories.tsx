@@ -1,13 +1,20 @@
 import React, { RefObject, useRef, useState } from 'react';
 import { Button, Theme, Link } from '@lumx/react';
+import { DIALOG_TRANSITION_DURATION } from '@lumx/core/js/constants';
+import { chromaticForceScreenSize } from '../../stories/chromaticForceScreenSize';
 import { AlertDialog } from './AlertDialog';
 
 export default {
     title: 'LumX components/alert-dialog/AlertDialog',
     parameters: {
-        // Notifies Chromatic to pause the animations when they finish for the specific story.
-        chromatic: { pauseAnimationAtEnd: true },
+        // Delay Chromatic snapshot to wait for dialog to open.
+        chromatic: {
+            pauseAnimationAtEnd: true,
+            delay: DIALOG_TRANSITION_DURATION,
+        },
     },
+    // Force minimum chromatic screen size to make sure the dialog appears in view.
+    decorators: [chromaticForceScreenSize],
 };
 
 const defaultProps = {

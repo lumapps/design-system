@@ -1,7 +1,7 @@
 /**
  * File generated when storybook is started. Do not edit directly!
  */
-export default { title: 'LumX components/side-navigation/Demos' };
+export default { title: 'LumX components/side-navigation/SideNavigation Demos' };
 
 export { App as Default } from './default';
 export { App as Emphasis } from './emphasis';

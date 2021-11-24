@@ -1,7 +1,7 @@
 /**
  * File generated when storybook is started. Do not edit directly!
  */
-export default { title: 'LumX components/text-field/Demos' };
+export default { title: 'LumX components/text-field/TextField Demos' };
 
 export { App as CharacterCounter } from './character-counter';
 export { App as Clearable } from './clearable';

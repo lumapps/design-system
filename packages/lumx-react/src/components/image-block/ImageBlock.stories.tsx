@@ -11,8 +11,8 @@ export default { title: 'LumX components/image-block/Image Block' };
 
 export const DefaultImageBlock = ({ theme }: any) => {
     const alt = text('Alternative text', 'Image alt text');
-    const align = select<Alignment>('Alignment', Alignment, Alignment.center) as any;
-    const aspectRatio = select<AspectRatio>('Aspect ratio', AspectRatio, AspectRatio.square);
+    const align = select('Alignment', Alignment, Alignment.center) as any;
+    const aspectRatio = select('Aspect ratio', AspectRatio, AspectRatio.square);
     const title = text('Title', 'Hello world');
     const description = text('Description', 'My awesome description');
     const crossOrigin = enumKnob('CORS', [undefined, 'anonymous', 'use-credentials'], undefined);

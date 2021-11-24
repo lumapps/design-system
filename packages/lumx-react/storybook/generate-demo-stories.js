@@ -6,7 +6,7 @@ const lodash = require('lodash');
 const generateStory = (component, storyFiles) => `/**
  * File generated when storybook is started. Do not edit directly!
  */
-export default { title: 'LumX components/${lodash.kebabCase(component)}/Demos' };
+export default { title: 'LumX components/${lodash.kebabCase(component)}/${component} Demos' };
 
 ${storyFiles
     .map((storyFile) => {

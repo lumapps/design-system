@@ -1,7 +1,7 @@
 /**
  * File generated when storybook is started. Do not edit directly!
  */
-export default { title: 'LumX components/toolbar/Demos' };
+export default { title: 'LumX components/toolbar/Toolbar Demos' };
 
 export { App as Back } from './back';
 export { App as Default } from './default';

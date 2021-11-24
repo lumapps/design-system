@@ -1,7 +1,7 @@
 /**
  * File generated when storybook is started. Do not edit directly!
  */
-export default { title: 'LumX components/dialog/Demos' };
+export default { title: 'LumX components/dialog/Dialog Demos' };
 
 export { App as Alert } from './alert';
 export { App as Confirm } from './confirm';

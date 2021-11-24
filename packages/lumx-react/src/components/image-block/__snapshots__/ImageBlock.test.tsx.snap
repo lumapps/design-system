@@ -16,7 +16,7 @@ exports[`<ImageBlock> Snapshots and structure should render story 'DefaultImageB
         "y": 0,
       }
     }
-    image="landscape1.jpg"
+    image="/demo-assets/landscape1.jpg"
     loading="lazy"
     onClick={false}
     theme="light"

@@ -1,7 +1,7 @@
 /**
  * File generated when storybook is started. Do not edit directly!
  */
-export default { title: 'LumX components/select/Demos' };
+export default { title: 'LumX components/select/Select Demos' };
 
 export { App as MultiSelectChip } from './multi-select-chip';
 export { App as MultiSelectSearch } from './multi-select-search';

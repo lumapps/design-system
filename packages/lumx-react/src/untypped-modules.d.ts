@@ -3,3 +3,5 @@
  */
 declare module 'test-data-bot';
 declare module '*.jpg';
+declare module '@storybook/addon-knobs';
+declare module '@storybook/addon-actions';

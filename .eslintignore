@@ -3,6 +3,7 @@
 **/public/*
 yo-generators/**
 **/.yarn/**
+storybook
 **/style-dictionary
 **/*.config.js
 packages/site-demo/plugins

@@ -10,5 +10,5 @@ export function enumKnob<T>(
     const values: Record<string, T> = !isArray(enumObj)
         ? enumObj
         : Object.fromEntries(Object.values(enumObj).map((value) => [value, value]));
-    return select<any>(name, values, defaultValue, groupId);
+    return select(name, values, defaultValue, groupId);
 }

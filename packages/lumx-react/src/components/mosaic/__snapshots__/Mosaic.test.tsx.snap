@@ -17,7 +17,7 @@ exports[`<Mosaic> Snapshots and structure should render story FiveThumbnails 1`]
         aspectRatio="free"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        image="landscape1.jpg"
+        image="/demo-assets/landscape1.jpg"
         loading="lazy"
         theme="light"
       />
@@ -32,7 +32,7 @@ exports[`<Mosaic> Snapshots and structure should render story FiveThumbnails 1`]
         aspectRatio="free"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        image="landscape2.jpg"
+        image="/demo-assets/landscape2.jpg"
         loading="lazy"
         theme="light"
       />
@@ -47,7 +47,7 @@ exports[`<Mosaic> Snapshots and structure should render story FiveThumbnails 1`]
         aspectRatio="free"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        image="landscape3.jpg"
+        image="/demo-assets/landscape3.jpg"
         loading="lazy"
         theme="light"
       />
@@ -62,7 +62,7 @@ exports[`<Mosaic> Snapshots and structure should render story FiveThumbnails 1`]
         aspectRatio="free"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        image="portrait1.jpg"
+        image="/demo-assets/portrait1.jpg"
         loading="lazy"
         theme="light"
       />
@@ -96,7 +96,7 @@ exports[`<Mosaic> Snapshots and structure should render story FourThumbnails 1`]
         aspectRatio="free"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        image="landscape1.jpg"
+        image="/demo-assets/landscape1.jpg"
         loading="lazy"
         theme="light"
       />
@@ -111,7 +111,7 @@ exports[`<Mosaic> Snapshots and structure should render story FourThumbnails 1`]
         aspectRatio="free"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        image="landscape2.jpg"
+        image="/demo-assets/landscape2.jpg"
         loading="lazy"
         theme="light"
       />
@@ -126,7 +126,7 @@ exports[`<Mosaic> Snapshots and structure should render story FourThumbnails 1`]
         aspectRatio="free"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        image="landscape3.jpg"
+        image="/demo-assets/landscape3.jpg"
         loading="lazy"
         theme="light"
       />
@@ -141,7 +141,7 @@ exports[`<Mosaic> Snapshots and structure should render story FourThumbnails 1`]
         aspectRatio="free"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        image="portrait1.jpg"
+        image="/demo-assets/portrait1.jpg"
         loading="lazy"
         theme="light"
       />
@@ -167,7 +167,7 @@ exports[`<Mosaic> Snapshots and structure should render story OneThumbnail 1`] =
         aspectRatio="free"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        image="landscape1.jpg"
+        image="/demo-assets/landscape1.jpg"
         loading="lazy"
         theme="light"
       />
@@ -193,7 +193,7 @@ exports[`<Mosaic> Snapshots and structure should render story SixThumbnails 1`] 
         aspectRatio="free"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        image="landscape1.jpg"
+        image="/demo-assets/landscape1.jpg"
         loading="lazy"
         onClick={[Function]}
         theme="light"
@@ -209,7 +209,7 @@ exports[`<Mosaic> Snapshots and structure should render story SixThumbnails 1`] 
         aspectRatio="free"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        image="landscape2.jpg"
+        image="/demo-assets/landscape2.jpg"
         loading="lazy"
         onClick={[Function]}
         theme="light"
@@ -225,7 +225,7 @@ exports[`<Mosaic> Snapshots and structure should render story SixThumbnails 1`] 
         aspectRatio="free"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        image="landscape3.jpg"
+        image="/demo-assets/landscape3.jpg"
         loading="lazy"
         onClick={[Function]}
         theme="light"
@@ -241,7 +241,7 @@ exports[`<Mosaic> Snapshots and structure should render story SixThumbnails 1`] 
         aspectRatio="free"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        image="portrait1.jpg"
+        image="/demo-assets/portrait1.jpg"
         loading="lazy"
         onClick={[Function]}
         theme="light"
@@ -276,7 +276,7 @@ exports[`<Mosaic> Snapshots and structure should render story ThreeThumbnails 1`
         aspectRatio="free"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        image="landscape1.jpg"
+        image="/demo-assets/landscape1.jpg"
         loading="lazy"
         theme="light"
       />
@@ -291,7 +291,7 @@ exports[`<Mosaic> Snapshots and structure should render story ThreeThumbnails 1`
         aspectRatio="free"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        image="landscape2.jpg"
+        image="/demo-assets/landscape2.jpg"
         loading="lazy"
         theme="light"
       />
@@ -306,7 +306,7 @@ exports[`<Mosaic> Snapshots and structure should render story ThreeThumbnails 1`
         aspectRatio="free"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        image="landscape3.jpg"
+        image="/demo-assets/landscape3.jpg"
         loading="lazy"
         theme="light"
       />
@@ -332,7 +332,7 @@ exports[`<Mosaic> Snapshots and structure should render story TwoThumbnails 1`] 
         aspectRatio="free"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        image="landscape1.jpg"
+        image="/demo-assets/landscape1.jpg"
         loading="lazy"
         theme="light"
       />
@@ -347,7 +347,7 @@ exports[`<Mosaic> Snapshots and structure should render story TwoThumbnails 1`] 
         aspectRatio="free"
         fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
-        image="landscape2.jpg"
+        image="/demo-assets/landscape2.jpg"
         loading="lazy"
         theme="light"
       />
