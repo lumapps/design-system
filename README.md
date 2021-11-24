@@ -40,6 +40,16 @@ For an automatic installation:
 yarn install
 ```
 
+### Git hooks
+
+Git hooks are optional, they provide lint and commit message validation on commit if you install them with the command:
+
+```bash
+yarn setup:git-hooks
+```
+
+You can uninstall the git hooks using `yarn clean:git-hooks`.
+
 ### To start development server
 
 For development server:
