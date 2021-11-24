@@ -9,9 +9,9 @@ export function useKeyNavigate(element?: HTMLElement | null, onNext?: () => void
         const onKeyNavigate = (evt: KeyboardEvent) => {
             let callback;
             if (evt?.key === 'ArrowRight') {
-                callback = onPrevious;
-            } else if (evt?.key === 'ArrowLeft') {
                 callback = onNext;
+            } else if (evt?.key === 'ArrowLeft') {
+                callback = onPrevious;
             }
             if (!callback) return;
 
