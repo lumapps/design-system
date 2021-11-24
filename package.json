@@ -46,7 +46,10 @@
     "homepage": "https://github.com/lumapps/design-system",
     "lint-staged": {
         "*.{ts,tsx,js,jsx}": "eslint --cache --fix",
-        "*.{scss,css}": ["prettier --write", "stylelint"],
+        "*.{scss,css}": [
+            "prettier --write",
+            "stylelint"
+        ],
         "*.{md,html}": "prettier --write"
     },
     "keywords": [
@@ -65,8 +68,8 @@
     },
     "scripts": {
         "build": "lerna run --stream build",
-        "build:site": "yarn --cwd packages/site-demo clean && yarn --cwd packages/site-demo build",
-        "build:storybook": "yarn --cwd packages/lumx-react build-storybook -s ../site-demo/static",
+        "build:site": "yarn workspace lumx-site-demo clean && yarn workspace lumx-site-demo build",
+        "build:storybook": "yarn workspace @lumx/react build-storybook -s ../site-demo/static",
         "chromatic": "npx chromatic -b build:storybook",
         "clean": "rm -rf packages/*/dist && lerna clean --yes && lerna run --stream clean",
         "clean:git-hooks": "yarn husky uninstall",
@@ -81,17 +84,13 @@
         "release": "yarn lerna publish --force-publish",
         "scaffold": "yo ./packages/yo-generators --with-tests --with-demo",
         "setup:git-hooks": "yarn husky uninstall && yarn husky install || exit 0",
-        "start": "yarn --cwd packages/site-demo start",
+        "start": "yarn workspace lumx-site-demo start",
         "test": "lerna run --stream test",
-        "storybook:react": "yarn --cwd packages/lumx-react storybook",
-        "generate:design-tokens": "yarn --cwd packages/lumx-core generate:design-tokens"
+        "storybook:react": "yarn workspace @lumx/react storybook",
+        "generate:design-tokens": "yarn workspace @lumx/core generate:design-tokens"
     },
     "workspaces": [
         "packages/*"
     ],
-    "resolutions": {
-        "**/style-loader": "^1.0.0",
-        "**/@typescript-eslint/eslint-plugin": "^4.9.0",
-        "**/@typescript-eslint/parser": "^4.9.0"
-    }
+    "packageManager": "yarn@3.1.0"
 }

@@ -123,8 +123,5 @@
         "storybook": "start-storybook -s ../site-demo/static/ -p 9000"
     },
     "sideEffects": false,
-    "version": "2.1.3",
-    "resolutions": {
-        "**/style-loader": "^1.0.0"
-    }
+    "version": "2.1.3"
 }
