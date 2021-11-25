@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.4][] - 2021-11-25
+
 ### Fixed
 
 -   Slideshow : fixed keyboard navigation, now the right arrow goes to the next slides and the left to the previous one.
@@ -1291,3 +1293,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [2.1.2]: https://github.com/lumapps/design-system/tree/v2.1.2
 [unreleased]: https://github.com/lumapps/design-system/compare/v2.1.3...HEAD
 [2.1.3]: https://github.com/lumapps/design-system/tree/v2.1.3
+[unreleased]: https://github.com/lumapps/design-system/compare/v2.1.4...HEAD
+[2.1.4]: https://github.com/lumapps/design-system/tree/v2.1.4
