@@ -115,18 +115,22 @@ export const Dialog: Comp<DialogProps, HTMLDivElement> = forwardRef((props, ref)
         ...forwardedProps
     } = props;
 
-    const handleClose = onClose
-        ? () => {
-              onClose();
-              // Focus the parent element on close.
-              if (parentElement && parentElement.current) {
-                  parentElement.current.focus();
-              }
-          }
-        : undefined;
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const previousOpen = React.useRef(isOpen);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    React.useEffect(() => {
+        if (isOpen !== previousOpen.current) {
+            previousOpen.current = isOpen;
+
+            // Focus the parent element on close.
+            if (!isOpen && parentElement && parentElement.current) {
+                parentElement.current.focus();
+            }
+        }
+    }, [isOpen, parentElement]);
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    useCallbackOnEscape(handleClose, isOpen && !preventAutoClose);
+    useCallbackOnEscape(onClose, isOpen && !preventAutoClose);
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const wrapperRef = useRef<HTMLDivElement>(null);
@@ -192,7 +196,7 @@ export const Dialog: Comp<DialogProps, HTMLDivElement> = forwardRef((props, ref)
                   <div className={`${CLASSNAME}__overlay`} />
 
                   <section className={`${CLASSNAME}__container`} role="dialog" aria-modal="true" {...dialogProps}>
-                      <ClickAwayProvider callback={!preventAutoClose && handleClose} refs={clickAwayRefs}>
+                      <ClickAwayProvider callback={!preventAutoClose && onClose} refs={clickAwayRefs}>
                           <div className={`${CLASSNAME}__wrapper`} ref={wrapperRef}>
                               {(header || headerChildContent) && (
                                   <header
