@@ -1,5 +1,81 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<Dialog> Snapshots and structure should render story DialogWithAlertDialog 1`] = `
+<Fragment>
+  <Button
+    emphasis="high"
+    onClick={[Function]}
+    size="m"
+    theme="light"
+  >
+    Open dialog
+  </Button>
+  <Dialog
+    isOpen={true}
+    onClose={[Function]}
+    parentElement={
+      Object {
+        "current": undefined,
+      }
+    }
+    size="big"
+  >
+    <div
+      className="lumx-spacing-padding"
+    >
+      
+Nihil hic munitissimus habendi senatus locus, nihil horum? At nos hinc posthac, sitientis piros
+Afros. Magna pars studiorum, prodita quaerimus. Integer legentibus erat a ante historiarum
+dapibus. Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea
+commodi consequat. Inmensae subtilitatis, obscuris et malesuada fames. Me non paenitet nullum
+festiviorem excogitasse ad hoc. Cum ceteris in veneratione tui montes, nascetur mus. Etiam
+habebis sem dicantur magna mollis euismod. Quis aute iure reprehenderit in voluptate velit esse.
+Phasellus laoreet lorem vel dolor tempus vehicula. Ambitioni dedisse scripsisse iudicaretur.
+Paullum deliquit, ponderibus modulisque suis ratio utitur. Ab illo tempore, ab est sed
+immemorabili. Nec dubitamus multa iter quae et nos invenerat. Tu quoque, Brute, fili mi, nihil
+timor populi, nihil! Morbi fringilla convallis sapien, id pulvinar odio volutpat. Cras mattis
+iudicium purus sit amet fermentum. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.
+Quisque ut dolor gravida, placerat libero vel, euismod. Unam incolunt Belgae, aliam Aquitani,
+tertiam. Cras mattis iudicium purus sit amet fermentum
+    </div>
+    <footer>
+      <Toolbar
+        after={
+          <Button
+            emphasis="low"
+            onClick={[Function]}
+            size="m"
+            theme="light"
+          >
+            Close
+          </Button>
+        }
+      />
+    </footer>
+  </Dialog>
+  <AlertDialog
+    confirmProps={
+      Object {
+        "label": "Confirm",
+        "onClick": [Function],
+      }
+    }
+    isOpen={false}
+    kind="info"
+    onClose={[Function]}
+    parentElement={
+      Object {
+        "current": undefined,
+      }
+    }
+    size="tiny"
+    title="Default (info)"
+  >
+    Consequat deserunt officia aute laborum tempor anim sint est.
+  </AlertDialog>
+</Fragment>
+`;
+
 exports[`<Dialog> Snapshots and structure should render story DialogWithFocusableElements 1`] = `
 <Fragment>
   <Button

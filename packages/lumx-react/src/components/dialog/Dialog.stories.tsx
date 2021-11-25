@@ -1,5 +1,6 @@
 import { mdiClose } from '@lumx/icons';
 import {
+    AlertDialog,
     Button,
     Checkbox,
     DatePickerField,
@@ -32,9 +33,9 @@ const content = <div className="lumx-spacing-padding">{loremIpsum('short')}</div
 const longContent = <div className="lumx-spacing-padding">{loremIpsum('long')}</div>;
 const footer = <footer className="lumx-spacing-padding">Dialog footer</footer>;
 
-function useOpenButton(theme: Theme) {
+function useOpenButton(theme: Theme, defaultState = true) {
     const buttonRef = useRef() as RefObject<HTMLButtonElement>;
-    const [isOpen, setOpen] = useState(true);
+    const [isOpen, setOpen] = useState(defaultState);
     const openDialog = () => setOpen(true);
     const closeDialog = () => setOpen(false);
 
@@ -45,6 +46,7 @@ function useOpenButton(theme: Theme) {
             </Button>
         ),
         buttonRef,
+        openDialog,
         closeDialog,
         isOpen,
     };
@@ -79,6 +81,46 @@ export const PreventDialogAutoClose = ({ theme }: any) => {
                     />
                 </footer>
             </Dialog>
+        </>
+    );
+};
+
+export const DialogWithAlertDialog = ({ theme }: any) => {
+    const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
+    const { openDialog: openAlertDialog, closeDialog: closeAlertDialog, isOpen: isAlertDialogOpen } = useOpenButton(
+        theme,
+        false,
+    );
+
+    const handleSubmitDialog = () => {
+        closeDialog();
+        openAlertDialog();
+    };
+
+    return (
+        <>
+            {button}
+            <Dialog isOpen={isOpen} onClose={closeDialog} parentElement={buttonRef}>
+                {content}
+                <footer>
+                    <Toolbar
+                        after={
+                            <Button onClick={handleSubmitDialog} emphasis={Emphasis.low}>
+                                Close
+                            </Button>
+                        }
+                    />
+                </footer>
+            </Dialog>
+            <AlertDialog
+                isOpen={isAlertDialogOpen}
+                onClose={closeDialog}
+                parentElement={buttonRef}
+                title="Default (info)"
+                confirmProps={{ onClick: closeAlertDialog, label: 'Confirm' }}
+            >
+                Consequat deserunt officia aute laborum tempor anim sint est.
+            </AlertDialog>
         </>
     );
 };
