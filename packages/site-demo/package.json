@@ -46,7 +46,7 @@
         "moment": "^2.24.0",
         "moment-range": "^4.0.2",
         "prism-react-renderer": "^0.1.5",
-        "prismjs": "^1.17.1",
+        "prismjs": "^1.25.0",
         "react": "^16.13.0",
         "react-docgen-typescript": "^1.20.5",
         "react-dom": "^16.13.0",
