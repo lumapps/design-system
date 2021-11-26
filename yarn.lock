@@ -5824,7 +5824,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lumx/angularjs@^2.1.3, @lumx/angularjs@workspace:packages/lumx-angularjs":
+"@lumx/angularjs@^2.1.4, @lumx/angularjs@workspace:packages/lumx-angularjs":
   version: 0.0.0-use.local
   resolution: "@lumx/angularjs@workspace:packages/lumx-angularjs"
   dependencies:
@@ -5836,8 +5836,8 @@ __metadata:
     "@babel/plugin-proposal-optional-chaining": ^7.8.3
     "@babel/preset-env": ^7.8.3
     "@babel/preset-typescript": ^7.12.7
-    "@lumx/core": ^2.1.3
-    "@lumx/icons": ^2.1.3
+    "@lumx/core": ^2.1.4
+    "@lumx/icons": ^2.1.4
     babel-plugin-angularjs-annotate: ^0.10.0
     clean-webpack-plugin: ^3.0.0
     copy-webpack-plugin: ^5.1.1
@@ -5862,7 +5862,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@lumx/core@^2.1.3, @lumx/core@workspace:packages/lumx-core":
+"@lumx/core@^2.1.4, @lumx/core@workspace:packages/lumx-core":
   version: 0.0.0-use.local
   resolution: "@lumx/core@workspace:packages/lumx-core"
   dependencies:
@@ -5906,7 +5906,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@lumx/icons@^2.1.3, @lumx/icons@workspace:packages/lumx-icons":
+"@lumx/icons@^2.1.4, @lumx/icons@workspace:packages/lumx-icons":
   version: 0.0.0-use.local
   resolution: "@lumx/icons@workspace:packages/lumx-icons"
   dependencies:
@@ -5954,7 +5954,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@lumx/react@^2.1.3, @lumx/react@workspace:packages/lumx-react":
+"@lumx/react@^2.1.4, @lumx/react@workspace:packages/lumx-react":
   version: 0.0.0-use.local
   resolution: "@lumx/react@workspace:packages/lumx-react"
   dependencies:
@@ -5968,8 +5968,8 @@ __metadata:
     "@babel/preset-react": ^7.8.3
     "@babel/preset-typescript": ^7.12.7
     "@juggle/resize-observer": ^3.2.0
-    "@lumx/core": ^2.1.3
-    "@lumx/icons": ^2.1.3
+    "@lumx/core": ^2.1.4
+    "@lumx/icons": ^2.1.4
     "@popperjs/core": ^2.5.4
     "@rollup/plugin-commonjs": ^15.0.0
     "@rollup/plugin-node-resolve": 9.0.0
@@ -24022,10 +24022,10 @@ fsevents@~2.1.2:
   version: 0.0.0-use.local
   resolution: "lumx-site-demo@workspace:packages/site-demo"
   dependencies:
-    "@lumx/angularjs": ^2.1.3
-    "@lumx/core": ^2.1.3
-    "@lumx/icons": ^2.1.3
-    "@lumx/react": ^2.1.3
+    "@lumx/angularjs": ^2.1.4
+    "@lumx/core": ^2.1.4
+    "@lumx/icons": ^2.1.4
+    "@lumx/react": ^2.1.4
     "@mdx-js/mdx": ^1.6.19
     "@mdx-js/react": ^1.6.19
     "@reach/router": ^1.2.1
