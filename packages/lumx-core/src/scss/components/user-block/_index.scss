@@ -38,6 +38,7 @@
 
     &__name {
         outline: none;
+        width: fit-content;
 
         @include lumx-typography('subtitle1');
 
@@ -47,16 +48,6 @@
 
         #{$self}--theme-dark & {
             color: lumx-color-variant('light', 'N');
-        }
-
-        &[tabindex='0'] {
-            #{$self}--theme-light & {
-                @include lumx-link('dark');
-            }
-
-            #{$self}--theme-dark & {
-                @include lumx-link('light');
-            }
         }
     }
 

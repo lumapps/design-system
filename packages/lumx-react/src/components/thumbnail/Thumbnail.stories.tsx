@@ -19,6 +19,7 @@ import { focusKnob } from '@lumx/react/stories/knobs/focusKnob';
 import { sizeKnob } from '@lumx/react/stories/knobs/sizeKnob';
 import { action } from '@storybook/addon-actions';
 import classNames from 'classnames';
+import { CustomLink } from '@lumx/react/stories/utils/CustomLink';
 
 export default { title: 'LumX components/thumbnail/Thumbnail' };
 
@@ -130,18 +131,12 @@ export const ClickableLink = () => (
     />
 );
 
-const CustomLinkComponent = (props: any) => (
-    <a {...props} className={classNames('custom-link-component', props.className)}>
-        {props.children}
-    </a>
-);
-
 export const ClickableCustomLink = () => (
     <Thumbnail
         alt="Click me"
         image={imageKnob()}
         size={sizeKnob('Size', Size.xxl)}
-        linkAs={CustomLinkComponent}
+        linkAs={CustomLink}
         linkProps={{ href: 'https://google.fr', className: 'custom-class-name' }}
     />
 );
