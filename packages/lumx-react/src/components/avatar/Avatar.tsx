@@ -23,6 +23,10 @@ export interface AvatarProps extends GenericProps {
     badge?: ReactElement;
     /** Image URL. */
     image: string;
+    /** Props to pass to the link wrapping the thumbnail. */
+    linkProps?: React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
+    /** Custom react component for the link (can be used to inject react router Link). */
+    linkAs?: 'a' | any;
     /** On click callback. */
     onClick?: MouseEventHandler<HTMLDivElement>;
     /** On key press callback. */
@@ -70,6 +74,8 @@ export const Avatar: Comp<AvatarProps, HTMLDivElement> = forwardRef((props, ref)
         badge,
         className,
         image,
+        linkProps,
+        linkAs,
         onClick,
         onKeyPress,
         size,
@@ -85,6 +91,8 @@ export const Avatar: Comp<AvatarProps, HTMLDivElement> = forwardRef((props, ref)
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, size, theme }))}
         >
             <Thumbnail
+                linkProps={linkProps}
+                linkAs={linkAs}
                 className={`${CLASSNAME}__thumbnail`}
                 onClick={onClick}
                 onKeyPress={onKeyPress}

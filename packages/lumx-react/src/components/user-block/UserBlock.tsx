@@ -1,10 +1,11 @@
 import React, { forwardRef, ReactNode } from 'react';
-
+import { isEmpty } from 'lodash';
 import classNames from 'classnames';
 
 import { Avatar, Orientation, Size, Theme } from '@lumx/react';
-
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { renderLink } from '@lumx/react/utils/renderLink';
+
 import { AvatarProps } from '../avatar/Avatar';
 
 /**
@@ -18,16 +19,20 @@ export type UserBlockSize = Extract<Size, 's' | 'm' | 'l'>;
 export interface UserBlockProps extends GenericProps {
     /** Props to pass to the avatar. */
     avatarProps?: AvatarProps;
-    /** Simple action toolbar content. */
-    simpleAction?: ReactNode;
-    /** Multiple action toolbar content. */
-    multipleActions?: ReactNode;
     /** Additional fields used to describe the user. */
     fields?: string[];
+    /** Props to pass to the link wrapping the avatar thumbnail. */
+    linkProps?: React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
+    /** Custom react component for the link (can be used to inject react router Link). */
+    linkAs?: 'a' | any;
+    /** Multiple action toolbar content. */
+    multipleActions?: ReactNode;
     /** User name. */
     name?: string;
     /** Orientation. */
     orientation?: Orientation;
+    /** Simple action toolbar content. */
+    simpleAction?: ReactNode;
     /** Size variant. */
     size?: UserBlockSize;
     /** Theme adapting the component to light or dark background. */
@@ -71,6 +76,8 @@ export const UserBlock: Comp<UserBlockProps, HTMLDivElement> = forwardRef((props
         avatarProps,
         className,
         fields,
+        linkProps,
+        linkAs,
         multipleActions,
         name,
         onClick,
@@ -91,18 +98,35 @@ export const UserBlock: Comp<UserBlockProps, HTMLDivElement> = forwardRef((props
 
     const shouldDisplayActions: boolean = orientation === Orientation.vertical;
 
-    const nameBlock: ReactNode = name && (
-        // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-tabindex,jsx-a11y/no-static-element-interactions
-        <span className={`${CLASSNAME}__name`} onClick={onClick} tabIndex={onClick ? 0 : -1}>
-            {name}
-        </span>
-    );
+    const isLink = Boolean(linkProps?.href || linkAs);
+    const isClickable = !!onClick || isLink;
+
+    const nameBlock: ReactNode = React.useMemo(() => {
+        if (isEmpty(name)) {
+            return null;
+        }
+        const nameClassName = classNames(
+            handleBasicClasses({ prefix: `${CLASSNAME}__name`, isClickable }),
+            isLink && linkProps?.className,
+        );
+        if (isLink) {
+            return renderLink({ ...linkProps, linkAs, className: nameClassName }, name);
+        }
+        if (onClick) {
+            return (
+                <button onClick={onClick} type="button" className={nameClassName}>
+                    {name}
+                </button>
+            );
+        }
+        return <span className={nameClassName}>{name}</span>;
+    }, [isClickable, isLink, linkAs, linkProps, name, onClick]);
 
     const fieldsBlock: ReactNode = fields && componentSize !== Size.s && (
         <div className={`${CLASSNAME}__fields`}>
-            {fields.map((aField: string, idx: number) => (
+            {fields.map((field: string, idx: number) => (
                 <span key={idx} className={`${CLASSNAME}__field`}>
-                    {aField}
+                    {field}
                 </span>
             ))}
         </div>
@@ -114,21 +138,21 @@ export const UserBlock: Comp<UserBlockProps, HTMLDivElement> = forwardRef((props
             {...forwardedProps}
             className={classNames(
                 className,
-                handleBasicClasses({ prefix: CLASSNAME, orientation, size: componentSize, theme }),
+                handleBasicClasses({ prefix: CLASSNAME, orientation, size: componentSize, theme, isClickable }),
             )}
             onMouseLeave={onMouseLeave}
             onMouseEnter={onMouseEnter}
         >
             {avatarProps && (
-                <div className={`${CLASSNAME}__avatar`}>
-                    <Avatar
-                        {...avatarProps}
-                        size={componentSize}
-                        onClick={onClick}
-                        tabIndex={onClick ? 0 : -1}
-                        theme={theme}
-                    />
-                </div>
+                <Avatar
+                    linkAs={linkAs}
+                    linkProps={linkProps}
+                    {...avatarProps}
+                    className={classNames(`${CLASSNAME}__avatar`, avatarProps.className)}
+                    size={componentSize}
+                    onClick={onClick}
+                    theme={theme}
+                />
             )}
             {(fields || name) && (
                 <div className={`${CLASSNAME}__wrapper`}>

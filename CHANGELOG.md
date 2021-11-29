@@ -22,6 +22,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   **Compatibility warning**: using the `aspectRatio` without a `size`, a `fillHeight` or a size constraint from
         the parent element will produce a thumbnail shrunk to 0 pixel
 
+## Added
+
+-   Avatar: Added a `linkProps` and `linkAs` props which will be passed to the Thumbnail child.
+-   UserBlock: Added a `linkProps` and `linkAs` props which will be passed to the Thumbnail child and used to wrap the username.
+
 ## [2.1.9][] - 2021-12-15
 
 ### Fixed
