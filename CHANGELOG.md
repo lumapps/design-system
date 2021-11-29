@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## Added
+
+-   Thumbnail: Added `linkProps` prop to allow the user to turn a thumbnail into an accessible link.
+-   Thumbnail: Added `linkAs` prop into this new prop, to customize the link component.
+-   Avatar: Added a `linkProps` and `linkAs` props which will be passed to the Thumbnail child.
+-   UserBlock: Added a `linkProps` and `linkAs` props which will be passed to the Thumbnail child and used to wrap the username.
+
 ## [2.1.4][] - 2021-11-25
 
 ### Fixed
