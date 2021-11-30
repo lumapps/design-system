@@ -5947,6 +5947,7 @@ __metadata:
     stylelint-prettier: ^1.1.2
     stylelint-scss: ^3.18.0
     typescript: ^4.1.2
+    version-changelog: ^3.1.1
     webpack: ^4.44.1
     webpack-cli: ^4.2.0
     yeoman-generator: ^4.1.0
@@ -6028,7 +6029,6 @@ __metadata:
     tsconfig-paths-webpack-plugin: ^3.2.0
     typescript: ^4.1.2
     uid: ^2.0.0
-    version-changelog: ^3.1.1
     yargs: ^15.4.1
     yarn: ^1.19.1
   peerDependencies:
