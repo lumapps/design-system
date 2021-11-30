@@ -1,8 +1,9 @@
+const path = require('path');
 const transformGroup = require('./utils/_css-transform-group');
 
 module.exports = () => {
     const baseDir = `${__dirname}/../`;
-    const buildPath = `${baseDir}/../src/css/`;
+    const buildPath = `${path.resolve(baseDir, `../src/css/`)}/`;
 
     return {
         source: [`${baseDir}/properties/**/*.json`],

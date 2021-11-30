@@ -1,4 +1,5 @@
 const StyleDictionary = require('style-dictionary');
+const path = require('path');
 const pickFieldsInTree = require('./utils/_pickFieldsInTree');
 
 /**
@@ -30,7 +31,8 @@ StyleDictionary.registerFormat({
 
 module.exports = () => {
     const baseDir = `${__dirname}/../`;
-    const buildPath = `${baseDir}/../src/js/constants/`;
+    const buildPath = `${path.resolve(baseDir, `../src/js/constants/`)}/`;
+
     return {
         source: [`${baseDir}/properties/**/*.json`],
         platforms: {
