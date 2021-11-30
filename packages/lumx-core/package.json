@@ -35,8 +35,8 @@
     },
     "scripts": {
         "generate:design-tokens": "yarn node style-dictionary",
-        "build": "webpack",
-        "postbuild": "rm -rf ./dist/*.js ./dist/*.js.map",
+        "build": "webpack && yarn clean:unwanted-dist",
+        "clean:unwanted-dist": "rm -rf ./dist/*.js ./dist/*.js.map",
         "prepare": "install-peers || exit 0",
         "prepublishOnly": "yarn build"
     },
