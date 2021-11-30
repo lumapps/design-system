@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Thu, 18 Nov 2021 15:14:46 GMT
+ * Generated on Tue, 30 Nov 2021 09:20:10 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -253,7 +253,7 @@ export const DESIGN_TOKENS = {
                     },
                     color: {
                         version: '0.22',
-                        comment: 'Base dark color with 80% opacity',
+                        comment: 'Base dark color with 70% opacity',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-medium',
@@ -325,7 +325,7 @@ export const DESIGN_TOKENS = {
                     },
                     color: {
                         version: '0.22',
-                        comment: 'Base dark color with 80% opacity',
+                        comment: 'Base dark color with 70% opacity',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-medium',
@@ -397,7 +397,7 @@ export const DESIGN_TOKENS = {
                     },
                     color: {
                         version: '0.22',
-                        comment: 'Base dark color with 80% opacity',
+                        comment: 'Base dark color with 70% opacity',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-medium',
@@ -469,7 +469,7 @@ export const DESIGN_TOKENS = {
                     },
                     color: {
                         version: '0.22',
-                        comment: 'Base dark color with 80% opacity',
+                        comment: 'Base dark color with 70% opacity',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-low',
@@ -539,7 +539,7 @@ export const DESIGN_TOKENS = {
                     },
                     color: {
                         version: '0.22',
-                        comment: 'Base dark color with 80% opacity',
+                        comment: 'Base dark color with 70% opacity',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-low',
@@ -611,7 +611,7 @@ export const DESIGN_TOKENS = {
                     },
                     color: {
                         version: '0.22',
-                        comment: 'Base dark color with 80% opacity',
+                        comment: 'Base dark color with 70% opacity',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-low',
@@ -1233,7 +1233,7 @@ export const DESIGN_TOKENS = {
                         },
                         'icon-color': {
                             version: '0.22',
-                            comment: 'Base dark color with 80% opacity',
+                            comment: 'Base dark color with 70% opacity',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1242,7 +1242,7 @@ export const DESIGN_TOKENS = {
                         },
                         'label-color': {
                             version: '0.22',
-                            comment: 'Base dark color with 80% opacity',
+                            comment: 'Neutral dark color',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1258,7 +1258,7 @@ export const DESIGN_TOKENS = {
                         },
                         'chevron-color': {
                             version: '0.22',
-                            comment: 'Base dark color with 80% opacity',
+                            comment: 'Base dark color with 70% opacity',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1379,7 +1379,7 @@ export const DESIGN_TOKENS = {
                         },
                         'icon-color': {
                             version: '0.22',
-                            comment: 'Base dark color with 80% opacity',
+                            comment: 'Base dark color with 70% opacity',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1388,7 +1388,7 @@ export const DESIGN_TOKENS = {
                         },
                         'label-color': {
                             version: '0.22',
-                            comment: 'Base dark color with 80% opacity',
+                            comment: 'Neutral dark color',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1406,7 +1406,7 @@ export const DESIGN_TOKENS = {
                         },
                         'chevron-color': {
                             version: '0.22',
-                            comment: 'Base dark color with 80% opacity',
+                            comment: 'Base dark color with 70% opacity',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1531,7 +1531,7 @@ export const DESIGN_TOKENS = {
                         },
                         'icon-color': {
                             version: '0.22',
-                            comment: 'Base dark color with 80% opacity',
+                            comment: 'Base dark color with 70% opacity',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1540,7 +1540,7 @@ export const DESIGN_TOKENS = {
                         },
                         'label-color': {
                             version: '0.22',
-                            comment: 'Base dark color with 80% opacity',
+                            comment: 'Neutral dark color',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1558,7 +1558,7 @@ export const DESIGN_TOKENS = {
                         },
                         'chevron-color': {
                             version: '0.22',
-                            comment: 'Base dark color with 80% opacity',
+                            comment: 'Base dark color with 70% opacity',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -2112,7 +2112,7 @@ export const DESIGN_TOKENS = {
                         },
                         color: {
                             version: '0.22',
-                            comment: 'Base dark color with 80% opacity',
+                            comment: 'Base dark color with 70% opacity',
                             attributes: {
                                 category: 'tabs',
                                 type: 'link',
@@ -2208,7 +2208,7 @@ export const DESIGN_TOKENS = {
                         },
                         color: {
                             version: '0.22',
-                            comment: 'Base dark color with 80% opacity',
+                            comment: 'Base dark color with 70% opacity',
                             attributes: {
                                 category: 'tabs',
                                 type: 'link',
@@ -2306,7 +2306,7 @@ export const DESIGN_TOKENS = {
                         },
                         color: {
                             version: '0.22',
-                            comment: 'Base dark color with 80% opacity',
+                            comment: 'Base dark color with 70% opacity',
                             attributes: {
                                 category: 'tabs',
                                 type: 'link',
@@ -2404,7 +2404,7 @@ export const DESIGN_TOKENS = {
                         },
                         color: {
                             version: '0.22',
-                            comment: 'Base dark color with 80% opacity',
+                            comment: 'Base dark color with 70% opacity',
                             attributes: {
                                 category: 'tabs',
                                 type: 'link',
@@ -2498,7 +2498,7 @@ export const DESIGN_TOKENS = {
                         },
                         color: {
                             version: '0.22',
-                            comment: 'Base dark color with 80% opacity',
+                            comment: 'Base dark color with 70% opacity',
                             attributes: {
                                 category: 'tabs',
                                 type: 'link',
@@ -2594,7 +2594,7 @@ export const DESIGN_TOKENS = {
                         },
                         color: {
                             version: '0.22',
-                            comment: 'Base dark color with 80% opacity',
+                            comment: 'Base dark color with 70% opacity',
                             attributes: {
                                 category: 'tabs',
                                 type: 'link',
@@ -3134,7 +3134,7 @@ export const DESIGN_TOKENS = {
             },
             L1: {
                 version: '0.22',
-                comment: 'Base dark color with 80% opacity',
+                comment: 'Base dark color with 70% opacity',
                 attributes: {
                     category: 'color',
                     type: 'dark',
@@ -4498,7 +4498,7 @@ export const DESIGN_TOKENS = {
             },
             L1: {
                 version: '0.22',
-                comment: 'Base dark color with 80% opacity',
+                comment: 'Base dark color with 70% opacity',
                 attributes: {
                     category: 'color',
                     type: 'black',
