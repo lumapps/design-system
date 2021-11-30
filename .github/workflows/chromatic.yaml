@@ -36,7 +36,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: "Install dependencies"
-        run: yarn install --frozen-lockfile --ignore-optional
+        run: yarn install --frozen-lockfile
 
       - name: "Deploy chromatic"
         uses: chromaui/action@5c36690a7d85fc6345aa786cc5b3d3d9742af4fb #v1
