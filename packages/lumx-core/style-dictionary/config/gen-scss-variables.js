@@ -1,4 +1,5 @@
 const StyleDictionary = require('style-dictionary');
+const path = require('path');
 const transformGroup = require('./utils/_css-transform-group');
 
 /**
@@ -41,7 +42,7 @@ StyleDictionary.registerFormat({
 
 module.exports = () => {
     const baseDir = `${__dirname}/../`;
-    const buildPath = `${baseDir}/../src/scss/`;
+    const buildPath = `${path.resolve(baseDir, `../src/scss/`)}/`;
     return {
         source: [`${baseDir}/properties/**/*.json`],
         platforms: {
