@@ -70,7 +70,7 @@
     "scripts": {
         "build": "lerna run --stream build",
         "build:site": "yarn workspace lumx-site-demo clean && yarn workspace lumx-site-demo build",
-        "build:storybook": "yarn workspace @lumx/react build-storybook -s ../site-demo/static",
+        "build:storybook": "yarn workspace @lumx/react build:storybook",
         "chromatic": "npx chromatic -b build:storybook",
         "clean": "rm -rf packages/*/dist && lerna clean --yes && lerna run --stream clean",
         "clean:git-hooks": "yarn husky uninstall",
@@ -82,7 +82,7 @@
         "lint:code": "eslint packages/**/*.{ts,tsx,js}",
         "prepare": "lerna run --stream prepare",
         "preversion": "git symbolic-ref --short -q HEAD | egrep -q '^master$' && echo 'ERROR: You can not release from the master branch.' && exit 1 || true",
-        "version": "yarn && yarn version-changelog CHANGELOG.md && git add CHANGELOG.md",
+        "version": "yarn --immutable && yarn version-changelog CHANGELOG.md && git add CHANGELOG.md",
         "release": "yarn lerna publish --force-publish",
         "scaffold": "yo ./packages/yo-generators --with-tests --with-demo",
         "setup:git-hooks": "yarn husky uninstall && yarn husky install || exit 0",
