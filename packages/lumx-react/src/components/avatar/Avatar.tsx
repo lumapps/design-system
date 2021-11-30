@@ -36,6 +36,10 @@ export interface AvatarProps extends GenericProps {
         ThumbnailProps,
         'image' | 'alt' | 'size' | 'theme' | 'align' | 'fillHeight' | 'variant' | 'aspectRatio'
     >;
+    /** Props to pass to the link wrapping the thumbnail. */
+    linkProps?: React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
+    /** Custom react component for the link (can be used to inject react router Link). */
+    linkAs?: 'a' | any;
 }
 
 /**
@@ -75,6 +79,8 @@ export const Avatar: Comp<AvatarProps, HTMLDivElement> = forwardRef((props, ref)
         size,
         theme,
         thumbnailProps,
+        linkProps,
+        linkAs,
         ...forwardedProps
     } = props;
 
@@ -85,6 +91,8 @@ export const Avatar: Comp<AvatarProps, HTMLDivElement> = forwardRef((props, ref)
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, size, theme }))}
         >
             <Thumbnail
+                linkProps={linkProps}
+                linkAs={linkAs}
                 className={`${CLASSNAME}__thumbnail`}
                 onClick={onClick}
                 onKeyPress={onKeyPress}

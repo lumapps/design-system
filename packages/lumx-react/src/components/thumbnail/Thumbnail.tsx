@@ -20,7 +20,6 @@ import { isInternetExplorer } from '@lumx/react/utils/isInternetExplorer';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 import { useFocusPoint } from '@lumx/react/components/thumbnail/useFocusPoint';
 import { useImageLoad } from '@lumx/react/components/thumbnail/useImageLoad';
-import { useClickable } from '@lumx/react/components/thumbnail/useClickable';
 import { FocusPoint, ThumbnailSize, ThumbnailVariant } from './types';
 
 type ImgHTMLProps = ImgHTMLAttributes<HTMLImageElement>;
@@ -63,6 +62,10 @@ export interface ThumbnailProps extends GenericProps {
     theme?: Theme;
     /** Variant of the component. */
     variant?: ThumbnailVariant;
+    /** Props to pass to the link wrapping the thumbnail. */
+    linkProps?: React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
+    /** Custom react component for the link (can be used to inject react router Link). */
+    linkAs?: 'a' | any;
 }
 
 /**
@@ -109,6 +112,8 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
         size,
         theme,
         variant,
+        linkProps,
+        linkAs,
         ...forwardedProps
     } = props;
     const imgRef = useRef<HTMLImageElement>(null);
@@ -119,24 +124,44 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
     const isLoading = loadingState === 'isLoading';
 
     const [wrapper, setWrapper] = useState<HTMLElement>();
-    const wrapperProps: any = {
-        ...forwardedProps,
-        ref: mergeRefs(setWrapper, ref),
-        className: classNames(
-            className,
-            handleBasicClasses({ align, aspectRatio, prefix: CLASSNAME, size, theme, variant, hasBadge: !!badge }),
-            isLoading && wrapper?.getBoundingClientRect()?.height && 'lumx-color-background-dark-L6',
-            fillHeight && `${CLASSNAME}--fill-height`,
-        ),
-        // Handle clickable Thumbnail a11y.
-        ...useClickable(props),
-    };
+
+    const isLink = Boolean(linkProps?.href || linkAs);
+    const isButton = !!forwardedProps.onClick;
+    const isClickable = isButton || isLink;
+
+    let Wrapper: any = 'div';
+    const wrapperProps = { ...forwardedProps };
+    if (isLink) {
+        Wrapper = linkAs || 'a';
+        Object.assign(wrapperProps, linkProps);
+    } else if (isButton) {
+        Wrapper = 'button';
+    }
 
     // Update img style according to focus point and aspect ratio.
     const style = useFocusPoint({ image, focusPoint, aspectRatio, imgRef, loadingState, wrapper });
 
     return (
-        <div {...wrapperProps}>
+        <Wrapper
+            {...wrapperProps}
+            ref={mergeRefs(setWrapper, ref) as any}
+            className={classNames(
+                linkProps?.className,
+                className,
+                handleBasicClasses({
+                    align,
+                    aspectRatio,
+                    prefix: CLASSNAME,
+                    size,
+                    theme,
+                    variant,
+                    isClickable,
+                    hasBadge: !!badge,
+                }),
+                isLoading && wrapper?.getBoundingClientRect()?.height && 'lumx-color-background-dark-L6',
+                fillHeight && `${CLASSNAME}--fill-height`,
+            )}
+        >
             <div
                 className={`${CLASSNAME}__background`}
                 style={{
@@ -169,7 +194,7 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
                 ))}
             {badge &&
                 React.cloneElement(badge, { className: classNames(`${CLASSNAME}__badge`, badge.props.className) })}
-        </div>
+        </Wrapper>
     );
 });
 Thumbnail.displayName = COMPONENT_NAME;

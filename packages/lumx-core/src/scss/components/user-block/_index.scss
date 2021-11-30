@@ -49,7 +49,7 @@
             color: lumx-color-variant('light', 'N');
         }
 
-        &[tabindex='0'] {
+        &--is-clickable {
             #{$self}--theme-light & {
                 @include lumx-link('dark');
             }

@@ -3,41 +3,37 @@
 exports[`<UserBlock> Snapshots and structure should render story 'InList' 1`] = `
 Array [
   <div
-    className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-m lumx-user-block--theme-light"
+    className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-m lumx-user-block--theme-light lumx-user-block--is-clickable"
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
-    <div
+    <Avatar
+      alt="Avatar"
+      badge={
+        <Badge
+          color="blue"
+        >
+          <Icon
+            icon="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
+          />
+        </Badge>
+      }
       className="lumx-user-block__avatar"
-    >
-      <Avatar
-        alt="Avatar"
-        badge={
-          <Badge
-            color="blue"
-          >
-            <Icon
-              icon="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
-            />
-          </Badge>
-        }
-        image="avatar1.jpg"
-        onClick={[Function]}
-        size="m"
-        tabIndex={0}
-        theme="light"
-      />
-    </div>
+      image="avatar1.jpg"
+      onClick={[Function]}
+      size="m"
+      theme="light"
+    />
     <div
       className="lumx-user-block__wrapper"
     >
-      <span
-        className="lumx-user-block__name"
+      <button
+        className="lumx-user-block__name lumx-user-block__name--is-clickable"
         onClick={[Function]}
-        tabIndex={0}
+        type="button"
       >
         Emmitt O. Lum
-      </span>
+      </button>
       <div
         className="lumx-user-block__fields"
       >
@@ -57,41 +53,37 @@ Array [
     </div>
   </div>,
   <div
-    className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-m lumx-user-block--theme-light"
+    className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-m lumx-user-block--theme-light lumx-user-block--is-clickable"
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
-    <div
+    <Avatar
+      alt="Avatar"
+      badge={
+        <Badge
+          color="blue"
+        >
+          <Icon
+            icon="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
+          />
+        </Badge>
+      }
       className="lumx-user-block__avatar"
-    >
-      <Avatar
-        alt="Avatar"
-        badge={
-          <Badge
-            color="blue"
-          >
-            <Icon
-              icon="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
-            />
-          </Badge>
-        }
-        image="avatar2.jpg"
-        onClick={[Function]}
-        size="m"
-        tabIndex={0}
-        theme="light"
-      />
-    </div>
+      image="avatar2.jpg"
+      onClick={[Function]}
+      size="m"
+      theme="light"
+    />
     <div
       className="lumx-user-block__wrapper"
     >
-      <span
-        className="lumx-user-block__name"
+      <button
+        className="lumx-user-block__name lumx-user-block__name--is-clickable"
         onClick={[Function]}
-        tabIndex={0}
+        type="button"
       >
         Emmitt O. Lum
-      </span>
+      </button>
       <div
         className="lumx-user-block__fields"
       >
@@ -111,41 +103,37 @@ Array [
     </div>
   </div>,
   <div
-    className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-m lumx-user-block--theme-light"
+    className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-m lumx-user-block--theme-light lumx-user-block--is-clickable"
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
-    <div
+    <Avatar
+      alt="Avatar"
+      badge={
+        <Badge
+          color="blue"
+        >
+          <Icon
+            icon="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
+          />
+        </Badge>
+      }
       className="lumx-user-block__avatar"
-    >
-      <Avatar
-        alt="Avatar"
-        badge={
-          <Badge
-            color="blue"
-          >
-            <Icon
-              icon="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
-            />
-          </Badge>
-        }
-        image="avatar3.jpg"
-        onClick={[Function]}
-        size="m"
-        tabIndex={0}
-        theme="light"
-      />
-    </div>
+      image="avatar3.jpg"
+      onClick={[Function]}
+      size="m"
+      theme="light"
+    />
     <div
       className="lumx-user-block__wrapper"
     >
-      <span
-        className="lumx-user-block__name"
+      <button
+        className="lumx-user-block__name lumx-user-block__name--is-clickable"
         onClick={[Function]}
-        tabIndex={0}
+        type="button"
       >
         Emmitt O. Lum
-      </span>
+      </button>
       <div
         className="lumx-user-block__fields"
       >
@@ -170,61 +158,53 @@ Array [
 exports[`<UserBlock> Snapshots and structure should render story 'Sizes' 1`] = `
 Array [
   <div
-    className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-s lumx-user-block--theme-light"
+    className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-s lumx-user-block--theme-light lumx-user-block--is-clickable"
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
-    <div
+    <Avatar
+      alt="Avatar"
       className="lumx-user-block__avatar"
-    >
-      <Avatar
-        alt="Avatar"
-        image="avatar1.jpg"
-        onClick={[Function]}
-        size="s"
-        tabIndex={0}
-        theme="light"
-      />
-    </div>
+      image="avatar1.jpg"
+      onClick={[Function]}
+      size="s"
+      theme="light"
+    />
     <div
       className="lumx-user-block__wrapper"
     >
-      <span
-        className="lumx-user-block__name"
+      <button
+        className="lumx-user-block__name lumx-user-block__name--is-clickable"
         onClick={[Function]}
-        tabIndex={0}
+        type="button"
       >
         Emmitt O. Lum
-      </span>
+      </button>
     </div>
   </div>,
   <div
-    className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-m lumx-user-block--theme-light"
+    className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-m lumx-user-block--theme-light lumx-user-block--is-clickable"
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
-    <div
+    <Avatar
+      alt="Avatar"
       className="lumx-user-block__avatar"
-    >
-      <Avatar
-        alt="Avatar"
-        image="avatar1.jpg"
-        onClick={[Function]}
-        size="m"
-        tabIndex={0}
-        theme="light"
-      />
-    </div>
+      image="avatar1.jpg"
+      onClick={[Function]}
+      size="m"
+      theme="light"
+    />
     <div
       className="lumx-user-block__wrapper"
     >
-      <span
-        className="lumx-user-block__name"
+      <button
+        className="lumx-user-block__name lumx-user-block__name--is-clickable"
         onClick={[Function]}
-        tabIndex={0}
+        type="button"
       >
         Emmitt O. Lum
-      </span>
+      </button>
       <div
         className="lumx-user-block__fields"
       >
@@ -244,32 +224,28 @@ Array [
     </div>
   </div>,
   <div
-    className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-l lumx-user-block--theme-light"
+    className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-l lumx-user-block--theme-light lumx-user-block--is-clickable"
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
-    <div
+    <Avatar
+      alt="Avatar"
       className="lumx-user-block__avatar"
-    >
-      <Avatar
-        alt="Avatar"
-        image="avatar1.jpg"
-        onClick={[Function]}
-        size="l"
-        tabIndex={0}
-        theme="light"
-      />
-    </div>
+      image="avatar1.jpg"
+      onClick={[Function]}
+      size="l"
+      theme="light"
+    />
     <div
       className="lumx-user-block__wrapper"
     >
-      <span
-        className="lumx-user-block__name"
+      <button
+        className="lumx-user-block__name lumx-user-block__name--is-clickable"
         onClick={[Function]}
-        tabIndex={0}
+        type="button"
       >
         Emmitt O. Lum
-      </span>
+      </button>
       <div
         className="lumx-user-block__fields"
       >
@@ -297,34 +273,27 @@ exports[`<UserBlock> Snapshots and structure should render story 'WithBadge' 1`]
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
 >
-  <div
+  <Avatar
+    alt="Avatar"
+    badge={
+      <Badge
+        color="blue"
+      >
+        <Icon
+          icon="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
+        />
+      </Badge>
+    }
     className="lumx-user-block__avatar"
-  >
-    <Avatar
-      alt="Avatar"
-      badge={
-        <Badge
-          color="blue"
-        >
-          <Icon
-            icon="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
-          />
-        </Badge>
-      }
-      image="avatar1.jpg"
-      onClick={[Function]}
-      size="m"
-      tabIndex={0}
-      theme="light"
-    />
-  </div>
+    image="avatar1.jpg"
+    size="m"
+    theme="light"
+  />
   <div
     className="lumx-user-block__wrapper"
   >
     <span
       className="lumx-user-block__name"
-      onClick={[Function]}
-      tabIndex={0}
     >
       Emmitt O. Lum
     </span>
@@ -346,4 +315,134 @@ exports[`<UserBlock> Snapshots and structure should render story 'WithBadge' 1`]
     </div>
   </div>
 </div>
+`;
+
+exports[`<UserBlock> Snapshots and structure should render story 'WithLinks' 1`] = `
+Array [
+  <div
+    className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-s lumx-user-block--theme-light lumx-user-block--is-clickable"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <Avatar
+      alt="Avatar"
+      className="lumx-user-block__avatar"
+      image="avatar1.jpg"
+      linkProps={
+        Object {
+          "href": "https://www.lumapps.com",
+          "target": "_blank",
+        }
+      }
+      onClick={[Function]}
+      size="s"
+      theme="light"
+    />
+    <div
+      className="lumx-user-block__wrapper"
+    >
+      <a
+        className="lumx-user-block__name lumx-user-block__name--is-clickable"
+        href="https://www.lumapps.com"
+        target="_blank"
+      >
+        Emmitt O. Lum
+      </a>
+    </div>
+  </div>,
+  <div
+    className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-m lumx-user-block--theme-light lumx-user-block--is-clickable"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <Avatar
+      alt="Avatar"
+      className="lumx-user-block__avatar"
+      image="avatar1.jpg"
+      linkProps={
+        Object {
+          "href": "https://www.lumapps.com",
+          "target": "_blank",
+        }
+      }
+      onClick={[Function]}
+      size="m"
+      theme="light"
+    />
+    <div
+      className="lumx-user-block__wrapper"
+    >
+      <a
+        className="lumx-user-block__name lumx-user-block__name--is-clickable"
+        href="https://www.lumapps.com"
+        target="_blank"
+      >
+        Emmitt O. Lum
+      </a>
+      <div
+        className="lumx-user-block__fields"
+      >
+        <span
+          className="lumx-user-block__field"
+          key="0"
+        >
+          Creative developer
+        </span>
+        <span
+          className="lumx-user-block__field"
+          key="1"
+        >
+          Denpasar
+        </span>
+      </div>
+    </div>
+  </div>,
+  <div
+    className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-l lumx-user-block--theme-light lumx-user-block--is-clickable"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <Avatar
+      alt="Avatar"
+      className="lumx-user-block__avatar"
+      image="avatar1.jpg"
+      linkProps={
+        Object {
+          "href": "https://www.lumapps.com",
+          "target": "_blank",
+        }
+      }
+      onClick={[Function]}
+      size="l"
+      theme="light"
+    />
+    <div
+      className="lumx-user-block__wrapper"
+    >
+      <a
+        className="lumx-user-block__name lumx-user-block__name--is-clickable"
+        href="https://www.lumapps.com"
+        target="_blank"
+      >
+        Emmitt O. Lum
+      </a>
+      <div
+        className="lumx-user-block__fields"
+      >
+        <span
+          className="lumx-user-block__field"
+          key="0"
+        >
+          Creative developer
+        </span>
+        <span
+          className="lumx-user-block__field"
+          key="1"
+        >
+          Denpasar
+        </span>
+      </div>
+    </div>
+  </div>,
+]
 `;
