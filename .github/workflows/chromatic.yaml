@@ -6,6 +6,7 @@ on:
   push:
     tags:
         - v*
+        - '!v*-alpha.*' # ignore alpha versions
 
 env:
     node_version: '13.7.0'

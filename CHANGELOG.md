@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Fixed generated typescript types for NPM publication.
+-   Fixed release script version and changelog update.
+
 ## [2.1.5][] - 2021-11-30
 
 ## Added
@@ -339,7 +344,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Added `ProgressTrackerStepPanel` component that wraps the content of a step. Implements the [WAI-ARIA `tabpanel` role](https://www.w3.org/TR/wai-aria-practices-1.1/examples/tabs/tabs-1/tabs.html#rps_label).
 -   Added `isDisabled` prop to `ProgressTrackerStep` component.
 -   Added `rightIcon` and `leftIcon` props for `Link` component. Sizes of icons are based on `typography` prop.
--   _[BREAKING]_ Added required `label` prop for `IconButton`. The label is used as `aria-label` for the button and to add a tooltip. This prop is required for a11y purpose. If you really don't want a tooltip, you can give an empty label (this is not recommended).
+-   _[BREAKING]_ Added required `label` prop for `IconButton`. The label is used as `aria-label` for the button and to add a tooltip. This prop is required for a11y purpose. If you really don't want a tooltip, you can give an empty label (this is not recommended).
 -   _[BREAKING]_ Added `nextButtonProps` and `previousButtonProps` props to `DatePickerControlled`, `DatePicker` and `DatePickerField` components to allow setting custom props to the `IconButton`s used to change month. These fields are **required** because translation are not handled inside the Design System and the `IconButton` now requires a `label` for a11y purposes.
 -   _[BREAKING]_ Added `nextButtonProps` and `previousButtonProps` props to `SlideshowControls` component to allow setting custom props to the `IconButton`s used to change image. These fields are **required** because translation are not handled inside the Design System and the `IconButton` now requires a `label` for a11y purposes.
 -   Added `slideshowControlsProps` to the `Slideshow` component to allow setting custom props to the slideshow controls. Controls are not displayed if this prop is not set.
@@ -895,8 +900,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Remove useless `List` auto-focus on mount if is clickable
 
-## [0.21.0-alpha.0][] - 2020-01-30
-
 ### Changed
 
 -   _[BREAKING]_ Externalized `moment` and `moment-range` dependencies from @lumx/react bundle
@@ -966,14 +969,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   When we are using the AutocompleteMultiple, you can now just display the suggestions with the same size as the input.
 -   For the Autocomplete simple, we add the possibility to prevent refocus on close.
 
-## [0.18.8][] - 2019-12-12
-
 ## [0.18.7][] - 2019-12-06
 
 -   Added `maxLength` prop to `textField` component
 -   _[BREAKING]_ Removed `helper` prop from `textField` component
-
-## [0.18.6][] - 2019-12-04
 
 ## [0.18.5][] - 2019-12-04
 
@@ -981,19 +980,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Add `zIndex` props on every appearing component
 
-## [0.18.4][] - 2019-12-03
-
-## [0.18.3][] - 2019-12-03
-
-## [0.18.2][] - 2019-12-03
-
-## [0.18.1][] - 2019-12-03
-
-## [0.18.0][] - 2019-11-28
-
 ## [0.17.0][] - 2019-11-28
-
-## [0.16.4-alpha.0][] - 2019-11-26
 
 ### Changed
 
@@ -1031,9 +1018,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
--   Multiple Autocomplete component [#209](https://github.com/lumapps/design-system/pull/209)
--   `isHighlighted` prop for `Chip` component [#209](https://github.com/lumapps/design-system/pull/209)
--   Added `isClearable` and `chips` props for Autocomplete [#209](https://github.com/lumapps/design-system/pull/209)
+-   Multiple Autocomplete component [#209](https://github.com/lumapps/design-system/pull/209)
+-   `isHighlighted` prop for `Chip` component [#209](https://github.com/lumapps/design-system/pull/209)
+-   Added `isClearable` and `chips` props for Autocomplete [#209](https://github.com/lumapps/design-system/pull/209)
 
 ### Changed
 
@@ -1098,7 +1085,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   The `tsx` demo of the `Checkbox` and `List` component has been removed
 
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.10.0...HEAD
 [0.10.0]: https://github.com/lumapps/design-system/tree/v0.10.0
 [0.11.0]: https://github.com/lumapps/design-system/tree/v0.11.0
 [0.12.0]: https://github.com/lumapps/design-system/tree/v0.12.0
@@ -1108,205 +1094,103 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.15.1]: https://github.com/lumapps/design-system/tree/v0.15.1
 [0.15.2]: https://github.com/lumapps/design-system/tree/v0.15.2
 [0.15.3]: https://github.com/lumapps/design-system/tree/v0.15.3
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.16.4-alpha.0...HEAD
-[0.16.4-alpha.0]: https://github.com/lumapps/design-system/tree/v0.16.4-alpha.0
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.17.0...HEAD
 [0.17.0]: https://github.com/lumapps/design-system/tree/v0.17.0
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.18.0...HEAD
 [0.18.0]: https://github.com/lumapps/design-system/tree/v0.18.0
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.18.1...HEAD
 [0.18.1]: https://github.com/lumapps/design-system/tree/v0.18.1
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.18.2...HEAD
 [0.18.2]: https://github.com/lumapps/design-system/tree/v0.18.2
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.18.3...HEAD
 [0.18.3]: https://github.com/lumapps/design-system/tree/v0.18.3
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.18.4...HEAD
 [0.18.4]: https://github.com/lumapps/design-system/tree/v0.18.4
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.18.5...HEAD
 [0.18.5]: https://github.com/lumapps/design-system/tree/v0.18.5
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.18.6...HEAD
 [0.18.6]: https://github.com/lumapps/design-system/tree/v0.18.6
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.18.7...HEAD
 [0.18.7]: https://github.com/lumapps/design-system/tree/v0.18.7
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.18.8...HEAD
 [0.18.8]: https://github.com/lumapps/design-system/tree/v0.18.8
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.18.9...HEAD
 [0.18.9]: https://github.com/lumapps/design-system/tree/v0.18.9
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.19.0...HEAD
 [0.19.0]: https://github.com/lumapps/design-system/tree/v0.19.0
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.20.0...HEAD
-[0.20.0]: https://github.com/lumapps/design-system/tree/vundefined
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.20.1...HEAD
+[0.20.0]: https://github.com/lumapps/design-system/tree/v0.20.0
 [0.20.1]: https://github.com/lumapps/design-system/tree/v0.20.1
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.21.0-alpha.0...HEAD
-[0.21.0-alpha.0]: https://github.com/lumapps/design-system/tree/v0.21.0-alpha.0
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.21.0...HEAD
 [0.21.0]: https://github.com/lumapps/design-system/tree/v0.21.0
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.21.1...HEAD
 [0.21.1]: https://github.com/lumapps/design-system/tree/v0.21.1
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.21.2...HEAD
 [0.21.2]: https://github.com/lumapps/design-system/tree/v0.21.2
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.21.3...HEAD
 [0.21.3]: https://github.com/lumapps/design-system/tree/v0.21.3
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.21.4...HEAD
 [0.21.4]: https://github.com/lumapps/design-system/tree/v0.21.4
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.21.5...HEAD
 [0.21.5]: https://github.com/lumapps/design-system/tree/v0.21.5
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.21.6...HEAD
 [0.21.6]: https://github.com/lumapps/design-system/tree/v0.21.6
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.21.7...HEAD
 [0.21.7]: https://github.com/lumapps/design-system/tree/v0.21.7
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.21.8...HEAD
 [0.21.8]: https://github.com/lumapps/design-system/tree/v0.21.8
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.21.9...HEAD
 [0.21.9]: https://github.com/lumapps/design-system/tree/v0.21.9
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.21.10...HEAD
 [0.21.10]: https://github.com/lumapps/design-system/tree/v0.21.10
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.21.11...HEAD
 [0.21.11]: https://github.com/lumapps/design-system/tree/v0.21.11
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.21.12...HEAD
 [0.21.12]: https://github.com/lumapps/design-system/tree/v0.21.12
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.21.13...HEAD
 [0.21.13]: https://github.com/lumapps/design-system/tree/v0.21.13
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.21.14...HEAD
 [0.21.14]: https://github.com/lumapps/design-system/tree/v0.21.14
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.21.15...HEAD
 [0.21.15]: https://github.com/lumapps/design-system/tree/v0.21.15
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.21.16...HEAD
 [0.21.16]: https://github.com/lumapps/design-system/tree/v0.21.16
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.21.17...HEAD
 [0.21.17]: https://github.com/lumapps/design-system/tree/v0.21.17
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.21.18...HEAD
 [0.21.18]: https://github.com/lumapps/design-system/tree/v0.21.18
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.21.19...HEAD
 [0.21.19]: https://github.com/lumapps/design-system/tree/v0.21.19
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.22.0...HEAD
 [0.22.0]: https://github.com/lumapps/design-system/tree/v0.22.0
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.23.0...HEAD
 [0.23.0]: https://github.com/lumapps/design-system/tree/v0.23.0
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.24.0...HEAD
 [0.24.0]: https://github.com/lumapps/design-system/tree/v0.24.0
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.24.2...HEAD
 [0.24.2]: https://github.com/lumapps/design-system/tree/v0.24.2
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.24.3...HEAD
 [0.24.3]: https://github.com/lumapps/design-system/tree/v0.24.3
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.25.0...HEAD
 [0.25.0]: https://github.com/lumapps/design-system/tree/v0.25.0
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.25.2...HEAD
 [0.25.2]: https://github.com/lumapps/design-system/tree/v0.25.2
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.25.3...HEAD
 [0.25.3]: https://github.com/lumapps/design-system/tree/v0.25.3
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.25.4...HEAD
 [0.25.4]: https://github.com/lumapps/design-system/tree/v0.25.4
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.25.5...HEAD
 [0.25.5]: https://github.com/lumapps/design-system/tree/v0.25.5
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.25.6...HEAD
 [0.25.6]: https://github.com/lumapps/design-system/tree/v0.25.6
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.25.7...HEAD
 [0.25.7]: https://github.com/lumapps/design-system/tree/v0.25.7
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.25.8...HEAD
 [0.25.8]: https://github.com/lumapps/design-system/tree/v0.25.8
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.25.9...HEAD
 [0.25.9]: https://github.com/lumapps/design-system/tree/v0.25.9
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.25.10...HEAD
 [0.25.10]: https://github.com/lumapps/design-system/tree/v0.25.10
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.25.11...HEAD
 [0.25.11]: https://github.com/lumapps/design-system/tree/v0.25.11
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.25.12...HEAD
 [0.25.12]: https://github.com/lumapps/design-system/tree/v0.25.12
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.25.13...HEAD
 [0.25.13]: https://github.com/lumapps/design-system/tree/v0.25.13
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.25.14...HEAD
 [0.25.14]: https://github.com/lumapps/design-system/tree/v0.25.14
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.25.15...HEAD
 [0.25.15]: https://github.com/lumapps/design-system/tree/v0.25.15
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.25.16...HEAD
 [0.25.16]: https://github.com/lumapps/design-system/tree/v0.25.16
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.26.0...HEAD
 [0.26.0]: https://github.com/lumapps/design-system/tree/v0.26.0
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.26.1...HEAD
 [0.26.1]: https://github.com/lumapps/design-system/tree/v0.26.1
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.26.2...HEAD
 [0.26.2]: https://github.com/lumapps/design-system/tree/v0.26.2
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.27.0...HEAD
 [0.27.0]: https://github.com/lumapps/design-system/tree/v0.27.0
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.28.0...HEAD
 [0.28.0]: https://github.com/lumapps/design-system/tree/v0.28.0
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.28.1...HEAD
 [0.28.1]: https://github.com/lumapps/design-system/tree/v0.28.1
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.28.2...HEAD
 [0.28.2]: https://github.com/lumapps/design-system/tree/v0.28.2
-[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.0...HEAD
 [1.0.0]: https://github.com/lumapps/design-system/tree/v1.0.0
-[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.1...HEAD
 [1.0.1]: https://github.com/lumapps/design-system/tree/v1.0.1
-[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.2...HEAD
 [1.0.2]: https://github.com/lumapps/design-system/tree/v1.0.2
-[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.3...HEAD
 [1.0.3]: https://github.com/lumapps/design-system/tree/v1.0.3
-[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.4...HEAD
 [1.0.4]: https://github.com/lumapps/design-system/tree/v1.0.4
-[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.5...HEAD
 [1.0.5]: https://github.com/lumapps/design-system/tree/v1.0.5
-[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.6...HEAD
 [1.0.6]: https://github.com/lumapps/design-system/tree/v1.0.6
-[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.7...HEAD
 [1.0.7]: https://github.com/lumapps/design-system/tree/v1.0.7
-[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.8...HEAD
 [1.0.8]: https://github.com/lumapps/design-system/tree/v1.0.8
-[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.9...HEAD
 [1.0.9]: https://github.com/lumapps/design-system/tree/v1.0.9
-[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.10...HEAD
 [1.0.10]: https://github.com/lumapps/design-system/tree/v1.0.10
-[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.11...HEAD
 [1.0.11]: https://github.com/lumapps/design-system/tree/v1.0.11
-[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.12...HEAD
 [1.0.12]: https://github.com/lumapps/design-system/tree/v1.0.12
-[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.13...HEAD
 [1.0.13]: https://github.com/lumapps/design-system/tree/v1.0.13
-[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.14...HEAD
 [1.0.14]: https://github.com/lumapps/design-system/tree/v1.0.14
-[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.15...HEAD
 [1.0.15]: https://github.com/lumapps/design-system/tree/v1.0.15
-[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.16...HEAD
 [1.0.16]: https://github.com/lumapps/design-system/tree/v1.0.16
-[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.17...HEAD
 [1.0.17]: https://github.com/lumapps/design-system/tree/v1.0.17
-[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.18...HEAD
 [1.0.18]: https://github.com/lumapps/design-system/tree/v1.0.18
-[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.19...HEAD
 [1.0.19]: https://github.com/lumapps/design-system/tree/v1.0.19
-[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.20...HEAD
 [1.0.20]: https://github.com/lumapps/design-system/tree/v1.0.20
-[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.21...HEAD
 [1.0.21]: https://github.com/lumapps/design-system/tree/v1.0.21
-[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.22...HEAD
 [1.0.22]: https://github.com/lumapps/design-system/tree/v1.0.22
-[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.23...HEAD
 [1.0.23]: https://github.com/lumapps/design-system/tree/v1.0.23
-[unreleased]: https://github.com/lumapps/design-system/compare/v1.0.24...HEAD
 [1.0.24]: https://github.com/lumapps/design-system/tree/v1.0.24
-[unreleased]: https://github.com/lumapps/design-system/compare/v2.0.0...HEAD
 [2.0.0]: https://github.com/lumapps/design-system/tree/v2.0.0
-[unreleased]: https://github.com/lumapps/design-system/compare/v2.0.1...HEAD
 [2.0.1]: https://github.com/lumapps/design-system/tree/v2.0.1
-[unreleased]: https://github.com/lumapps/design-system/compare/v2.0.2...HEAD
 [2.0.2]: https://github.com/lumapps/design-system/tree/v2.0.2
-[unreleased]: https://github.com/lumapps/design-system/compare/v2.0.3...HEAD
 [2.0.3]: https://github.com/lumapps/design-system/tree/v2.0.3
-[unreleased]: https://github.com/lumapps/design-system/compare/v2.0.4...HEAD
 [2.0.4]: https://github.com/lumapps/design-system/tree/v2.0.4
-[unreleased]: https://github.com/lumapps/design-system/compare/v2.0.5...HEAD
 [2.0.5]: https://github.com/lumapps/design-system/tree/v2.0.5
-[unreleased]: https://github.com/lumapps/design-system/compare/v2.1.0...HEAD
 [2.1.0]: https://github.com/lumapps/design-system/tree/v2.1.0
-[unreleased]: https://github.com/lumapps/design-system/compare/v2.1.1...HEAD
 [2.1.1]: https://github.com/lumapps/design-system/tree/v2.1.1
-[unreleased]: https://github.com/lumapps/design-system/compare/v2.1.2...HEAD
 [2.1.2]: https://github.com/lumapps/design-system/tree/v2.1.2
-[unreleased]: https://github.com/lumapps/design-system/compare/v2.1.3...HEAD
 [2.1.3]: https://github.com/lumapps/design-system/tree/v2.1.3
-[unreleased]: https://github.com/lumapps/design-system/compare/v2.1.4...HEAD
 [2.1.4]: https://github.com/lumapps/design-system/tree/v2.1.4
-[unreleased]: https://github.com/lumapps/design-system/compare/v2.1.5...HEAD
 [2.1.5]: https://github.com/lumapps/design-system/tree/v2.1.5
+[unreleased]: https://github.com/lumapps/design-system/compare/v2.1.5...HEAD

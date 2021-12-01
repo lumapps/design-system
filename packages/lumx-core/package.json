@@ -35,10 +35,11 @@
     },
     "scripts": {
         "generate:design-tokens": "yarn node style-dictionary",
-        "build": "webpack",
-        "postbuild": "rm -rf ./dist/*.js ./dist/*.js.map",
+        "build": "webpack && yarn clean:unwanted-dist",
+        "clean:unwanted-dist": "rm -rf ./dist/*.js ./dist/*.js.map",
         "prepare": "install-peers || exit 0",
-        "prepublishOnly": "yarn build"
+        "prepublishOnly": "yarn build",
+        "version": "yarn version-changelog ../../CHANGELOG.md && yarn changelog-verify ../../CHANGELOG.md && git add ../../CHANGELOG.md"
     },
     "sideEffects": false,
     "version": "2.1.5",
@@ -52,6 +53,7 @@
         "@babel/preset-env": "^7.8.3",
         "@babel/preset-typescript": "^7.12.7",
         "autoprefixer": "^9.7.4",
+        "changelog-verify": "^1.1.2",
         "clean-webpack-plugin": "^3.0.0",
         "copy-webpack-plugin": "^5.1.1",
         "core-js": "^3.6.4",
@@ -70,6 +72,7 @@
         "style-dictionary": "^2.10.0",
         "tinycolor2": "^1.4.1",
         "unminified-webpack-plugin": "^2.0.0",
+        "version-changelog": "^3.1.1",
         "webpack": "^4.44.1",
         "webpack-notifier": "^1.8.0",
         "webpackbar": "^4.0.0"
