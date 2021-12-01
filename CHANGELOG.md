@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.5][] - 2021-11-30
+
 ## Added
 
 -   Thumbnail: Added `linkProps` prop to allow the user to turn a thumbnail into an accessible link.
@@ -1306,3 +1308,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [2.1.3]: https://github.com/lumapps/design-system/tree/v2.1.3
 [unreleased]: https://github.com/lumapps/design-system/compare/v2.1.4...HEAD
 [2.1.4]: https://github.com/lumapps/design-system/tree/v2.1.4
+[unreleased]: https://github.com/lumapps/design-system/compare/v2.1.5...HEAD
+[2.1.5]: https://github.com/lumapps/design-system/tree/v2.1.5
