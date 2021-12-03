@@ -1500,6 +1500,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/plugin-proposal-private-methods@npm:^7.16.0":
+  version: 7.16.0
+  resolution: "@babel/plugin-proposal-private-methods@npm:7.16.0"
+  dependencies:
+    "@babel/helper-create-class-features-plugin": ^7.16.0
+    "@babel/helper-plugin-utils": ^7.14.5
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 6f648f54ea1219262b7a05f86f94de7cb466dc81ffd86e4f37ba536037762457ef13408083eb4325d44d2a5aae27c097756efe1067f5c1fbddb8078b923580f5
+  languageName: node
+  linkType: hard
+
 "@babel/plugin-proposal-private-property-in-object@npm:^7.16.0":
   version: 7.16.0
   resolution: "@babel/plugin-proposal-private-property-in-object@npm:7.16.0"
@@ -4864,6 +4876,7 @@ __metadata:
     "@babel/plugin-proposal-nullish-coalescing-operator": ^7.8.3
     "@babel/plugin-proposal-object-rest-spread": ^7.8.3
     "@babel/plugin-proposal-optional-chaining": ^7.8.3
+    "@babel/plugin-proposal-private-methods": ^7.16.0
     "@babel/plugin-proposal-private-property-in-object": ^7.16.0
     "@babel/preset-env": ^7.8.3
     "@babel/preset-react": ^7.8.3
