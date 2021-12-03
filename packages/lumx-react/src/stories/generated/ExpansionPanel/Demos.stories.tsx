@@ -1,7 +1,7 @@
 /**
  * File generated when storybook is started. Do not edit directly!
  */
-export default { title: 'LumX components/expansion-panel/Demos' };
+export default { title: 'LumX components/expansion-panel/ExpansionPanel Demos' };
 
 export { App as Default } from './default';
 export { App as DragHandle } from './drag-handle';

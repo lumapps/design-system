@@ -1,0 +1,13 @@
+{
+  "devDependencies": {
+    "@storybook/addon-a11y": "^6.4.5",
+    "@storybook/addon-essentials": "^6.4.5",
+    "@storybook/addon-knobs": "^6.4.0",
+    "@storybook/react": "^6.4.5"
+  },
+  "license": "MIT",
+  "scripts": {
+    "start": "start-storybook -c . -p 9000",
+    "build": "build-storybook -c ."
+  }
+}

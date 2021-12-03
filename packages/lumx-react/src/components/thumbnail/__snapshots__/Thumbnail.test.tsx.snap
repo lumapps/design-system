@@ -18,7 +18,7 @@ exports[`<Thumbnail> Snapshots and structure should render story 'Clickable' 1`]
       alt="Click me"
       className="lumx-thumbnail__image"
       loading="lazy"
-      src="landscape1.jpg"
+      src="/demo-assets/landscape1.jpg"
       style={Object {}}
     />
   </div>
@@ -43,7 +43,7 @@ exports[`<Thumbnail> Snapshots and structure should render story 'ClickableCusto
       alt="Click me"
       className="lumx-thumbnail__image"
       loading="lazy"
-      src="landscape1.jpg"
+      src="/demo-assets/landscape1.jpg"
       style={Object {}}
     />
   </div>
@@ -68,7 +68,7 @@ exports[`<Thumbnail> Snapshots and structure should render story 'ClickableLink'
       alt="Click me"
       className="lumx-thumbnail__image"
       loading="lazy"
-      src="landscape1.jpg"
+      src="/demo-assets/landscape1.jpg"
       style={Object {}}
     />
   </div>
@@ -116,7 +116,7 @@ exports[`<Thumbnail> Snapshots and structure should render story 'Default' 1`] =
       alt="Image alt text"
       className="lumx-thumbnail__image"
       loading="lazy"
-      src="landscape1.jpg"
+      src="/demo-assets/landscape1.jpg"
       style={Object {}}
     />
   </div>
@@ -188,7 +188,7 @@ exports[`<Thumbnail> Snapshots and structure should render story 'WithBadge' 1`]
       alt="Image alt text"
       className="lumx-thumbnail__image"
       loading="lazy"
-      src="landscape1.jpg"
+      src="/demo-assets/landscape1.jpg"
       style={Object {}}
     />
   </div>

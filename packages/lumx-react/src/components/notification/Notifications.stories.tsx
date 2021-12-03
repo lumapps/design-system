@@ -1,48 +1,54 @@
 import React, { useState } from 'react';
 
 import { Button, Notification, Kind } from '@lumx/react';
-
-import noop from 'lodash/noop';
+import { NOTIFICATION_TRANSITION_DURATION } from '@lumx/core/js/constants';
+import { action } from '@storybook/addon-actions';
+import { chromaticForceScreenSize } from '../../stories/chromaticForceScreenSize';
 
 export default {
     title: 'LumX components/notification/Notification',
     parameters: {
-        // Notifies Chromatic to pause the animations when they finish for the specific story.
-        chromatic: { pauseAnimationAtEnd: true },
+        // Delay Chromatic snapshot to wait for notification to open.
+        chromatic: {
+            pauseAnimationAtEnd: true,
+            delay: NOTIFICATION_TRANSITION_DURATION,
+        },
     },
+    // Force minimum chromatic screen size to make sure the dialog appears in view.
+    decorators: [chromaticForceScreenSize],
 };
 
 const properties = {
     error: {
         content: 'Error',
-        onClick: noop,
+        onClick: action('onClick'),
         isOpen: true,
         type: Kind.error,
     },
     info: {
         content: 'Info',
-        onClick: noop,
+        onClick: action('onClick'),
         isOpen: true,
         type: Kind.info,
     },
     infoWithCallback: {
-        onActionClick: noop,
+        onActionClick: action('onClick'),
         actionLabel: 'Undo',
         content: 'Info with callback',
-        onClick: noop,
+        onClick: action('onClick'),
         isOpen: true,
         type: Kind.info,
     },
     success: {
         content: 'Success',
-        onClick: noop,
+        onClick: action('onClick'),
         isOpen: true,
         type: Kind.success,
     },
 
     warning: {
         content: 'Warning',
-        onClick: noop,
+        onClick: action('onClick'),
         isOpen: true,
         type: Kind.warning,
     },

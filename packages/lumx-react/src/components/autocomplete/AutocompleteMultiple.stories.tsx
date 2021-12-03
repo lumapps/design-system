@@ -6,7 +6,7 @@ import { mdiClose, mdiFlag } from '@lumx/icons';
 
 import { CITIES } from './__mockData__';
 
-export default { title: 'LumX components/autocomplete/Autocomplete Multiple' };
+export default { title: 'LumX components/autocomplete/AutocompleteMultiple' };
 
 interface City {
     id: string;

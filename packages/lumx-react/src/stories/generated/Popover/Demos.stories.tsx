@@ -1,7 +1,7 @@
 /**
  * File generated when storybook is started. Do not edit directly!
  */
-export default { title: 'LumX components/popover/Demos' };
+export default { title: 'LumX components/popover/Popover Demos' };
 
 export { App as Alignments } from './alignments';
 export { App as Auto } from './auto';

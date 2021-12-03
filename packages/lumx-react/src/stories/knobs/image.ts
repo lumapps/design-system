@@ -1,17 +1,17 @@
 import { select } from '@storybook/addon-knobs';
 
-import avatar1 from '../demo-assets/avatar1.jpg';
-import avatar2 from '../demo-assets/avatar2.jpg';
-import avatar3 from '../demo-assets/avatar3.jpg';
-import avatar4 from '../demo-assets/avatar4.jpg';
-import landscape1 from '../demo-assets/landscape1.jpg';
-import landscape2 from '../demo-assets/landscape2.jpg';
-import landscape3 from '../demo-assets/landscape3.jpg';
-import portrait1 from '../demo-assets/portrait1.jpg';
-import portrait2 from '../demo-assets/portrait2.jpg';
-import portrait3 from '../demo-assets/portrait3.jpg';
-import square1 from '../demo-assets/square1.jpg';
-import square2 from '../demo-assets/square2.jpg';
+const avatar1 = '/demo-assets/avatar1.jpg';
+const avatar2 = '/demo-assets/avatar2.jpg';
+const avatar3 = '/demo-assets/avatar3.jpg';
+const avatar4 = '/demo-assets/avatar4.jpg';
+const landscape1 = '/demo-assets/landscape1.jpg';
+const landscape2 = '/demo-assets/landscape2.jpg';
+const landscape3 = '/demo-assets/landscape3.jpg';
+const portrait1 = '/demo-assets/portrait1.jpg';
+const portrait2 = '/demo-assets/portrait2.jpg';
+const portrait3 = '/demo-assets/portrait3.jpg';
+const square1 = '/demo-assets/square1.jpg';
+const square2 = '/demo-assets/square2.jpg';
 
 export const AVATAR_IMAGES = { avatar1, avatar2, avatar3, avatar4 };
 

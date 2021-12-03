@@ -15,17 +15,24 @@ import {
     Theme,
     Toolbar,
 } from '@lumx/react';
+import { DIALOG_TRANSITION_DURATION } from '@lumx/core/js/constants';
 import { select } from '@storybook/addon-knobs';
 import React, { RefObject, useRef, useState } from 'react';
 import { Dialog, DialogSizes } from './Dialog';
 import { loremIpsum } from '../../stories/knobs/lorem';
+import { chromaticForceScreenSize } from '../../stories/chromaticForceScreenSize';
 
 export default {
     title: 'LumX components/dialog/Dialog',
     parameters: {
-        // Notifies Chromatic to pause the animations when they finish for the specific story.
-        chromatic: { pauseAnimationAtEnd: true },
+        // Delay Chromatic snapshot to wait for dialog to open.
+        chromatic: {
+            pauseAnimationAtEnd: true,
+            delay: DIALOG_TRANSITION_DURATION,
+        },
     },
+    // Force minimum chromatic screen size to make sure the dialog appears in view.
+    decorators: [chromaticForceScreenSize],
 };
 
 const header = <header className="lumx-spacing-padding lumx-typography-title">Dialog header</header>;

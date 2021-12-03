@@ -1,7 +1,7 @@
 /**
  * File generated when storybook is started. Do not edit directly!
  */
-export default { title: 'LumX components/tabs/Demos' };
+export default { title: 'LumX components/tabs/Tabs Demos' };
 
 export { App as Default } from './default';
 export { App as IconTabs } from './icon-tabs';

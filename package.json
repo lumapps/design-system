@@ -68,10 +68,10 @@
     "scripts": {
         "build": "lerna run --stream build",
         "build:site": "yarn workspace lumx-site-demo clean && yarn workspace lumx-site-demo build",
-        "build:storybook": "yarn workspace @lumx/react build:storybook",
         "build:react": "yarn workspace @lumx/react build",
         "build:core": "yarn workspace @lumx/core build",
         "build:angularjs": "yarn workspace @lumx/angularjs build",
+        "build:storybook": "yarn workspace @lumx/react build:storybook",
         "chromatic": "npx chromatic -b build:storybook",
         "clean": "rm -rf packages/*/dist && lerna clean --yes && lerna run --stream clean",
         "clean:git-hooks": "yarn husky uninstall",
@@ -86,8 +86,9 @@
         "scaffold": "yo ./packages/yo-generators --with-tests --with-demo",
         "setup:git-hooks": "yarn husky uninstall && yarn husky install || exit 0",
         "start": "yarn workspace lumx-site-demo start",
-        "test": "lerna run --stream test",
+        "test": "yarn workspace @lumx/react test",
         "storybook:react": "yarn workspace @lumx/react storybook",
+        "storybook": "yarn storybook:react",
         "check:not-master": "git symbolic-ref --short -q HEAD | egrep -q '^master$' && echo 'ERROR: You can not release from the master branch.' && exit 1 || true",
         "version": "yarn check:not-master && yarn && git add yarn.lock",
         "generate:design-tokens": "yarn workspace @lumx/core generate:design-tokens"

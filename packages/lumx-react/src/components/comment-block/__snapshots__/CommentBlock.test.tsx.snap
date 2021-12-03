@@ -12,7 +12,7 @@ exports[`<CommentBlock> Snapshots and structure should render story 'WithHeaderA
     >
       <Avatar
         alt="Avatar"
-        image="avatar1.jpg"
+        image="/demo-assets/avatar1.jpg"
         onKeyPress={[Function]}
         size="m"
         tabIndex={-1}

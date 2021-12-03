@@ -14,7 +14,7 @@ import {
 } from '@lumx/react';
 import { imageKnob } from '@lumx/react/stories/knobs/image';
 
-export default { title: 'LumX components/skeleton/Skeleton' };
+export default { title: 'LumX components/skeleton/Skeleton Rectangle' };
 
 const variants = [
     SkeletonRectangleVariant.squared,

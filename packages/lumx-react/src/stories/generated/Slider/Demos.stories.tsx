@@ -1,7 +1,7 @@
 /**
  * File generated when storybook is started. Do not edit directly!
  */
-export default { title: 'LumX components/slider/Demos' };
+export default { title: 'LumX components/slider/Slider Demos' };
 
 export { App as Default } from './default';
 export { App as Precision } from './precision';
