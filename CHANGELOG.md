@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Fixed generated typescript types for NPM publication.
 -   Fixed release script version and changelog update.
+-   Lightbox : Focus parent element only when his lightbox was previously opened.
 
 ## [2.1.5][] - 2021-11-30
 
