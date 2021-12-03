@@ -10,7 +10,6 @@ import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/
 
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
-import { useFocus } from '@lumx/react/hooks/useFocus';
 import { useDisableBodyScroll } from '@lumx/react/hooks/useDisableBodyScroll';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
@@ -90,9 +89,18 @@ export const Lightbox: Comp<LightboxProps, HTMLDivElement> = forwardRef((props, 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useFocusTrap(wrapperRef.current, childrenRef.current?.firstChild);
 
-    // Focus the parent element on close.
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useFocus(parentElement?.current, !isOpen);
+    const previousOpen = React.useRef(isOpen);
+
+    React.useEffect(() => {
+        if (isOpen !== previousOpen.current) {
+            previousOpen.current = isOpen;
+
+            // Focus the parent element on close.
+            if (!isOpen && parentElement && parentElement.current) {
+                parentElement.current.focus();
+            }
+        }
+    }, [isOpen, parentElement]);
 
     // Close lightbox on escape key pressed.
     // eslint-disable-next-line react-hooks/rules-of-hooks
