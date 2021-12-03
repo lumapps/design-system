@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.6][] - 2021-12-03
+
 ### Fixed
 
 -   Fixed generated typescript types for NPM publication.
@@ -1195,3 +1197,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [2.1.4]: https://github.com/lumapps/design-system/tree/v2.1.4
 [2.1.5]: https://github.com/lumapps/design-system/tree/v2.1.5
 [unreleased]: https://github.com/lumapps/design-system/compare/v2.1.5...HEAD
+[unreleased]: https://github.com/lumapps/design-system/compare/v2.1.6...HEAD
+[2.1.6]: https://github.com/lumapps/design-system/tree/v2.1.6
