@@ -307,16 +307,18 @@ export const TextField: Comp<TextFieldProps, HTMLDivElement> = forwardRef((props
                 }),
             )}
         >
-            {label && (
+            {(label || maxLength) && (
                 <div className={`${CLASSNAME}__header`}>
-                    <InputLabel
-                        htmlFor={textFieldId}
-                        className={`${CLASSNAME}__label`}
-                        isRequired={isRequired}
-                        theme={theme}
-                    >
-                        {label}
-                    </InputLabel>
+                    {label && (
+                        <InputLabel
+                            htmlFor={textFieldId}
+                            className={`${CLASSNAME}__label`}
+                            isRequired={isRequired}
+                            theme={theme}
+                        >
+                            {label}
+                        </InputLabel>
+                    )}
 
                     {maxLength && (
                         <div className={`${CLASSNAME}__char-counter`}>
