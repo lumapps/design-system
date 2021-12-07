@@ -31,7 +31,10 @@ export const WithLinks = ({ theme }: any) => {
             <UserBlock
                 theme={theme}
                 name="Emmitt O. Lum"
-                linkProps={{ href: 'https://www.lumapps.com', target: '_blank' }}
+                linkProps={{
+                    href: 'https://www.lumapps.com',
+                    target: '_blank',
+                }}
                 fields={['Creative developer', 'Denpasar']}
                 avatarProps={{ image: avatarImageKnob(), alt: 'Avatar' }}
                 size={size}
