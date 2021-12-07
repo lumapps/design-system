@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
--   Textfield: show the maxlength counter on textfields with no label
+-   Textfield: show the maxlength counter on textfields with no label.
+-   UserBlock : Pass `linkAs` prop to Avatar child.
 
 ## [2.1.6][] - 2021-12-03
 
