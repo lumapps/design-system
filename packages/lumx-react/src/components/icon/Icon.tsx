@@ -4,6 +4,7 @@ import classNames from 'classnames';
 
 import { Color, ColorPalette, ColorVariant, Size, Theme } from '@lumx/react';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { mdiAlertCircle } from '@lumx/icons';
 
 export type IconSizes = Extract<Size, 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl'>;
 
@@ -101,6 +102,10 @@ export const Icon: Comp<IconProps, HTMLElement> = forwardRef((props, ref) => {
                     size: iconSize,
                 }),
                 !hasShape && `${CLASSNAME}--no-shape`,
+                !hasShape &&
+                    iconColor === ColorPalette.yellow &&
+                    icon === mdiAlertCircle &&
+                    `${CLASSNAME}--has-dark-layer`,
                 `${CLASSNAME}--path`,
             )}
         >

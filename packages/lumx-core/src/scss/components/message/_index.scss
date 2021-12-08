@@ -20,6 +20,7 @@
         @include lumx-typography('body1');
 
         flex: 1 1 auto;
+        color: lumx-color-variant('dark', 'N');
     }
 }
 
@@ -30,11 +31,6 @@
     .#{$lumx-base-prefix}-message--color-#{$color} {
         &.#{$lumx-base-prefix}-message--has-background {
             background-color: lumx-color-variant($color, 'L6');
-        }
-
-        .#{$lumx-base-prefix}-message__icon,
-        .#{$lumx-base-prefix}-message__text {
-            color: lumx-color-variant($color, 'D2');
         }
     }
 }

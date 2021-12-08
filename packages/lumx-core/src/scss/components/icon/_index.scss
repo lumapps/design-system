@@ -33,6 +33,28 @@
             display: none;
         }
     }
+
+    &--has-dark-layer {
+        position: relative;
+
+        &::after {
+            position: absolute;
+            z-index: 0;
+            top: $lumx-spacing-unit / 2;
+            right: $lumx-spacing-unit / 2;
+            bottom: $lumx-spacing-unit / 2;
+            left: $lumx-spacing-unit / 2;
+            background-color: lumx-color-variant('dark', 'L1');
+            border-radius: 50%;
+            content: '';
+        }
+
+        &::before,
+        svg {
+            position: relative;
+            z-index: 1;
+        }
+    }
 }
 
 /* Icon sizes
