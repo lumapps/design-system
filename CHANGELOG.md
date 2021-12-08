@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.7][] - 2021-12-08
+
 ### Fixed
 
 -   Textfield: show the maxlength counter on textfields with no label.
@@ -1204,3 +1206,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [unreleased]: https://github.com/lumapps/design-system/compare/v2.1.5...HEAD
 [unreleased]: https://github.com/lumapps/design-system/compare/v2.1.6...HEAD
 [2.1.6]: https://github.com/lumapps/design-system/tree/v2.1.6
+[unreleased]: https://github.com/lumapps/design-system/compare/v2.1.7...HEAD
+[2.1.7]: https://github.com/lumapps/design-system/tree/v2.1.7
