@@ -137,3 +137,33 @@ export const WithAfterElement = ({ theme }: any) => {
         />
     );
 };
+
+export const WithMaxLengthNoLabel = ({ theme }: any) => {
+    const [value, onChange] = React.useState('Value');
+    const multiline = boolean('Multiline', true);
+    const minimumRows = number('Minimum number of rows', 2, { min: 0, max: 100 });
+    const isClearable = boolean('Clearable', true);
+    const hasError = boolean('Has error', true);
+    return (
+        <TextField
+            value={value}
+            placeholder={text('Placeholder', 'Placeholder')}
+            theme={theme}
+            onChange={onChange}
+            multiline={multiline}
+            minimumRows={minimumRows}
+            hasError={hasError}
+            maxLength={200}
+            clearButtonProps={isClearable ? { label: 'Clear' } : undefined}
+            helper={<span>{text('Helper', 'Helper')}</span>}
+            afterElement={
+                <IconButton
+                    label="foo"
+                    emphasis={emphasis('Button emphasis', Emphasis.medium, 'After element')}
+                    size={buttonSize('Button size', Size.s, 'After element')}
+                    icon={mdiTranslate}
+                />
+            }
+        />
+    );
+};

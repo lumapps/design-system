@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Textfield: show the maxlength counter on textfields with no label
+
 ## [2.1.6][] - 2021-12-03
 
 ### Fixed
