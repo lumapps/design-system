@@ -115,7 +115,7 @@ export const LinkPreview: Comp<LinkPreviewProps, HTMLDivElement> = forwardRef((p
                             className={classNames(`${CLASSNAME}__link`, linkProps?.className)}
                             target="_blank"
                             href={link}
-                            color={theme === Theme.light ? ColorPalette.blue : ColorPalette.light}
+                            color={theme === Theme.light ? ColorPalette.primary : ColorPalette.light}
                             colorVariant={ColorVariant.N}
                         >
                             {link}

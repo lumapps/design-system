@@ -62,7 +62,9 @@ export const Message: Comp<MessageProps, HTMLDivElement> = forwardRef((props, re
             )}
             {...forwardedProps}
         >
-            {(customIcon || icon) && <Icon className={`${CLASSNAME}__icon`} icon={customIcon || icon} size={Size.xs} />}
+            {(customIcon || icon) && (
+                <Icon className={`${CLASSNAME}__icon`} icon={customIcon || icon} size={Size.xs} color={color} />
+            )}
             <div className={`${CLASSNAME}__text`}>{children}</div>
         </div>
     );

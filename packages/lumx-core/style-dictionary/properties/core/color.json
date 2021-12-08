@@ -103,19 +103,19 @@
         },
         "blue": {
             "D2": {
-                "value": "#1976d2",
+                "value": "#1546c1",
                 "version": "0.22",
                 "comment": "Darkest blue color",
                 "preferCSSVariable": true
             },
             "D1": {
-                "value": "#1e88e5",
+                "value": "#184ed8",
                 "version": "0.22",
                 "comment": "Dark blue color",
                 "preferCSSVariable": true
             },
             "N": {
-                "value": "#2196f3",
+                "value": "#245be7",
                 "version": "0.22",
                 "comment": "Neutral blue color",
                 "preferCSSVariable": true
@@ -165,19 +165,19 @@
         },
         "green": {
             "D2": {
-                "value": "#388e3c",
+                "value": "#1a6e59",
                 "version": "0.22",
                 "comment": "Darkest green color",
                 "preferCSSVariable": true
             },
             "D1": {
-                "value": "#43a047",
+                "value": "#177a61",
                 "version": "0.22",
                 "comment": "Dark green color",
                 "preferCSSVariable": true
             },
             "N": {
-                "value": "#4caf50",
+                "value": "#138669",
                 "version": "0.22",
                 "comment": "Neutral green color",
                 "preferCSSVariable": true
@@ -227,33 +227,33 @@
         },
         "yellow": {
             "D2": {
-                "value": "#ff6f00",
+                "value": "#ffa125",
                 "version": "0.22",
                 "comment": "Darkest yellow color",
                 "preferCSSVariable": true
             },
             "D1": {
-                "value": "#ff8f00",
+                "value": "#ffb325",
                 "version": "0.22",
                 "comment": "Dark yellow color",
                 "preferCSSVariable": true
             },
             "N": {
-                "value": "#ffb300",
+                "value": "#ffc425",
                 "version": "0.22",
                 "comment": "Neutral yellow color",
                 "preferCSSVariable": true
             },
             "L1": {
                 "value": "{color.yellow.N.value}",
-                "opacity": "0.8",
+                "opacity": "0.9",
                 "version": "0.22",
                 "comment": "Base yellow color with 80% opacity",
                 "preferCSSVariable": true
             },
             "L2": {
                 "value": "{color.yellow.N.value}",
-                "opacity": "0.7",
+                "opacity": "0.8",
                 "version": "0.22",
                 "comment": "Base yellow color with 70% opacity",
                 "preferCSSVariable": true
@@ -267,21 +267,21 @@
             },
             "L4": {
                 "value": "{color.yellow.N.value}",
-                "opacity": "0.4",
+                "opacity": "0.48",
                 "version": "0.22",
                 "comment": "Base yellow color with 40% opacity",
                 "preferCSSVariable": true
             },
             "L5": {
                 "value": "{color.yellow.N.value}",
-                "opacity": "0.2",
+                "opacity": "0.24",
                 "version": "0.22",
                 "comment": "Base yellow color with 20% opacity",
                 "preferCSSVariable": true
             },
             "L6": {
                 "value": "{color.yellow.N.value}",
-                "opacity": "0.1",
+                "opacity": "0.12",
                 "version": "0.22",
                 "comment": "Base yellow color with 10% opacity",
                 "preferCSSVariable": true
@@ -289,19 +289,19 @@
         },
         "red": {
             "D2": {
-                "value": "#d32f2f",
+                "value": "#be1E46",
                 "version": "0.22",
                 "comment": "Darkest red color",
                 "preferCSSVariable": true
             },
             "D1": {
-                "value": "#e53935",
+                "value": "#d42148",
                 "version": "0.22",
                 "comment": "Dark red color",
                 "preferCSSVariable": true
             },
             "N": {
-                "value": "#f44336",
+                "value": "#df3050",
                 "version": "0.22",
                 "comment": "Neutral red color",
                 "preferCSSVariable": true
@@ -399,8 +399,88 @@
                 "preferCSSVariable": true
             }
         },
-        "primary": "{color.blue}",
-        "secondary": "{color.green}",
+        "primary": {
+            "D2": { "value": "#1976d2", "version": "0.22", "comment": "Darkest primary color" },
+            "D1": { "value": "#1e88e5", "version": "0.22", "comment": "Dark primary color" },
+            "N": { "value": "#2196f3", "version": "0.22", "comment": "Neutral primary color" },
+            "L1": {
+                "value": "{color.primary.N.value}",
+                "opacity": "0.8",
+                "version": "0.22",
+                "comment": "Base primary color with 80% opacity"
+            },
+            "L2": {
+                "value": "{color.primary.N.value}",
+                "opacity": "0.6",
+                "version": "0.22",
+                "comment": "Base primary color with 60% opacity"
+            },
+            "L3": {
+                "value": "{color.primary.N.value}",
+                "opacity": "0.4",
+                "version": "0.22",
+                "comment": "Base primary color with 40% opacity"
+            },
+            "L4": {
+                "value": "{color.primary.N.value}",
+                "opacity": "0.2",
+                "version": "0.22",
+                "comment": "Base primary color with 20% opacity"
+            },
+            "L5": {
+                "value": "{color.primary.N.value}",
+                "opacity": "0.1",
+                "version": "0.22",
+                "comment": "Base primary color with 10% opacity"
+            },
+            "L6": {
+                "value": "{color.primary.N.value}",
+                "opacity": "0.05",
+                "version": "0.22",
+                "comment": "Base blue color with 5% opacity"
+            }
+        },
+        "secondary": {
+            "D2": { "value": "#388e3c", "version": "0.22", "comment": "Darkest secondary color" },
+            "D1": { "value": "#43a047", "version": "0.22", "comment": "Dark secondary color" },
+            "N": { "value": "#4caf50", "version": "0.22", "comment": "Neutral secondary color" },
+            "L1": {
+                "value": "{color.secondary.N.value}",
+                "opacity": "0.8",
+                "version": "0.22",
+                "comment": "Base secondary color with 80% opacity"
+            },
+            "L2": {
+                "value": "{color.secondary.N.value}",
+                "opacity": "0.6",
+                "version": "0.22",
+                "comment": "Base secondary color with 60% opacity"
+            },
+            "L3": {
+                "value": "{color.secondary.N.value}",
+                "opacity": "0.4",
+                "version": "0.22",
+                "comment": "Base secondary color with 40% opacity"
+            },
+            "L4": {
+                "value": "{color.secondary.N.value}",
+                "opacity": "0.2",
+                "version": "0.22",
+                "comment": "Base secondary color with 20% opacity"
+            },
+            "L5": {
+                "value": "{color.secondary.N.value}",
+                "opacity": "0.1",
+                "version": "0.22",
+                "comment": "Base secondary color with 10% opacity"
+            },
+            "L6": {
+                "value": "{color.secondary.N.value}",
+                "opacity": "0.05",
+                "version": "0.22",
+                "comment": "Base secondary color with 5% opacity"
+            }
+        },
         "accent": "{color.secondary}",
         "black": "{color.dark}",
         "white": "{color.light}",
