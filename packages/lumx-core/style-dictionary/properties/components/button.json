@@ -60,7 +60,7 @@
                 "border-width": { "value": "0" },
                 "theme-light": {
                     "background-color": "{color.dark.L5}",
-                    "color": "{color.dark.L1}",
+                    "color": "{color.dark.N}",
                     "border-color": { "value": "transparent" }
                 },
                 "theme-dark": {
@@ -76,7 +76,7 @@
                 "border-width": { "value": "0" },
                 "theme-light": {
                     "background-color": "{color.dark.L4}",
-                    "color": "{color.dark.L1}",
+                    "color": "{color.dark.N}",
                     "border-color": { "value": "transparent" }
                 },
                 "theme-dark": {
@@ -92,7 +92,7 @@
                 "border-width": { "value": "0" },
                 "theme-light": {
                     "background-color": "{color.dark.L3}",
-                    "color": "{color.dark.L1}",
+                    "color": "{color.dark.N}",
                     "border-color": { "value": "transparent" }
                 },
                 "theme-dark": {
@@ -110,7 +110,7 @@
                 "border-width": { "value": "0" },
                 "theme-light": {
                     "background-color": { "value": "transparent" },
-                    "color": "{color.dark.L1}",
+                    "color": "{color.dark.N}",
                     "border-color": { "value": "transparent" }
                 },
                 "theme-dark": {
@@ -126,7 +126,7 @@
                 "border-width": { "value": "0" },
                 "theme-light": {
                     "background-color": "{color.dark.L5}",
-                    "color": "{color.dark.L1}",
+                    "color": "{color.dark.N}",
                     "border-color": { "value": "transparent" }
                 },
                 "theme-dark": {
@@ -142,7 +142,7 @@
                 "border-width": { "value": "0" },
                 "theme-light": {
                     "background-color": "{color.dark.L4}",
-                    "color": "{color.dark.L1}",
+                    "color": "{color.dark.N}",
                     "border-color": { "value": "transparent" }
                 },
                 "theme-dark": {

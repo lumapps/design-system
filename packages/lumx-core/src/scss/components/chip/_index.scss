@@ -82,12 +82,6 @@
         &.#{$lumx-base-prefix}-chip--is-highlighted {
             @include lumx-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('emphasis', 'MEDIUM'), $key);
         }
-
-        @if $key == 'dark' {
-            .#{$lumx-base-prefix}-chip__label {
-                color: lumx-color-variant('dark', 'L1');
-            }
-        }
     }
 }
 

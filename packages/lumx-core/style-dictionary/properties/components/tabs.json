@@ -21,7 +21,7 @@
                     },
                     "theme-light": {
                         "background-color": { "value": "transparent" },
-                        "color": "{color.dark.L1}",
+                        "color": "{color.dark.N}",
                         "border-color": "{color.dark.L5}"
                     },
                     "theme-dark": {
@@ -47,7 +47,7 @@
                     },
                     "theme-light": {
                         "background-color": "{color.dark.L5}",
-                        "color": "{color.dark.L1}",
+                        "color": "{color.dark.N}",
                         "border-color": "{color.dark.L5}"
                     },
                     "theme-dark": {
@@ -73,7 +73,7 @@
                     },
                     "theme-light": {
                         "background-color": "{color.dark.L4}",
-                        "color": "{color.dark.L1}",
+                        "color": "{color.dark.N}",
                         "border-color": "{color.dark.L5}"
                     },
                     "theme-dark": {
@@ -101,7 +101,7 @@
                     },
                     "theme-light": {
                         "background-color": { "value": "transparent" },
-                        "color": "{color.dark.L1}",
+                        "color": "{color.dark.N}",
                         "border-color": { "value": "var(--lumx-color-primary-N)" }
                     },
                     "theme-dark": {
@@ -127,7 +127,7 @@
                     },
                     "theme-light": {
                         "background-color": "{color.dark.L5}",
-                        "color": "{color.dark.L1}",
+                        "color": "{color.dark.N}",
                         "border-color": { "value": "var(--lumx-color-primary-N)" }
                     },
                     "theme-dark": {
@@ -153,7 +153,7 @@
                     },
                     "theme-light": {
                         "background-color": "{color.dark.L4}",
-                        "color": "{color.dark.L1}",
+                        "color": "{color.dark.N}",
                         "border-color": { "value": "var(--lumx-color-primary-N)" }
                     },
                     "theme-dark": {

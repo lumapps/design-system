@@ -25,10 +25,10 @@
                     "theme-light": {
                         "background-color": { "value": "transparent" },
                         "border-color": "{color.dark.L5}",
-                        "icon-color": "{color.dark.L1}",
+                        "icon-color": "{color.dark.N}",
                         "label-color": "{color.dark.N}",
                         "chevron-background-color": { "value": "transparent" },
-                        "chevron-color": "{color.dark.L1}"
+                        "chevron-color": "{color.dark.N}"
                     },
                     "theme-dark": {
                         "background-color": { "value": "transparent" },
@@ -57,10 +57,10 @@
                     "theme-light": {
                         "background-color": "{color.dark.L5}",
                         "border-color": "{color.dark.L5}",
-                        "icon-color": "{color.dark.L1}",
+                        "icon-color": "{color.dark.N}",
                         "label-color": "{color.dark.N}",
                         "chevron-background-color": "{color.dark.L5}",
-                        "chevron-color": "{color.dark.L1}"
+                        "chevron-color": "{color.dark.N}"
                     },
                     "theme-dark": {
                         "background-color": "{color.light.L5}",
@@ -89,10 +89,10 @@
                     "theme-light": {
                         "background-color": "{color.dark.L4}",
                         "border-color": "{color.dark.L5}",
-                        "icon-color": "{color.dark.L1}",
+                        "icon-color": "{color.dark.N}",
                         "label-color": "{color.dark.N}",
                         "chevron-background-color": "{color.dark.L4}",
-                        "chevron-color": "{color.dark.L1}"
+                        "chevron-color": "{color.dark.N}"
                     },
                     "theme-dark": {
                         "background-color": "{color.light.L4}",
