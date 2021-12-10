@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Reverted soften dark color on icons that caused issues.
+
 ## [2.1.7][] - 2021-12-08
 
 ### Fixed
@@ -31,12 +35,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Avatar: Added a `linkProps` and `linkAs` props which will be passed to the Thumbnail child.
 -   UserBlock: Added a `linkProps` and `linkAs` props which will be passed to the Thumbnail child and used to wrap the username.
 
+### Changed
+
+-   Limit lighten dark color to components: `Button`, `IconButton`, `Chip`, `Flags`, `Tabs`, `Icon`.
+
 ## [2.1.4][] - 2021-11-25
 
 ### Fixed
 
 -   Slideshow : fixed keyboard navigation, now the right arrow goes to the next slides and the left to the previous one.
 -   Dialog : Focus parent element everytime the dialog closes, not only on escape and clickaway.
+
+### Changed
+
+-   Soften medium and low dark buttons color.
 
 ## [2.1.3][] - 2021-11-19
 
