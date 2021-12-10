@@ -26,7 +26,7 @@
                         "background-color": { "value": "transparent" },
                         "border-color": "{color.dark.L5}",
                         "icon-color": "{color.dark.L1}",
-                        "label-color": "{color.dark.N}",
+                        "label-color": "{color.dark.L1}",
                         "chevron-background-color": { "value": "transparent" },
                         "chevron-color": "{color.dark.L1}"
                     },
@@ -58,7 +58,7 @@
                         "background-color": "{color.dark.L5}",
                         "border-color": "{color.dark.L5}",
                         "icon-color": "{color.dark.L1}",
-                        "label-color": "{color.dark.N}",
+                        "label-color": "{color.dark.L1}",
                         "chevron-background-color": "{color.dark.L5}",
                         "chevron-color": "{color.dark.L1}"
                     },
@@ -90,7 +90,7 @@
                         "background-color": "{color.dark.L4}",
                         "border-color": "{color.dark.L5}",
                         "icon-color": "{color.dark.L1}",
-                        "label-color": "{color.dark.N}",
+                        "label-color": "{color.dark.L1}",
                         "chevron-background-color": "{color.dark.L4}",
                         "chevron-color": "{color.dark.L1}"
                     },

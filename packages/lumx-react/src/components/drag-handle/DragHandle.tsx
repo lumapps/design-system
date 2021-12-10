@@ -40,11 +40,7 @@ export const DragHandle: Comp<DragHandleProps, HTMLDivElement> = forwardRef((pro
             {...forwardedProps}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }))}
         >
-            <Icon
-                icon={mdiDragVertical}
-                color={theme === Theme.dark ? ColorPalette.light : ColorPalette.dark}
-                size={Size.xs}
-            />
+            <Icon icon={mdiDragVertical} color={theme === Theme.dark ? ColorPalette.light : undefined} size={Size.xs} />
         </div>
     );
 });

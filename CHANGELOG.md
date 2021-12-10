@@ -31,10 +31,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Avatar: Added a `linkProps` and `linkAs` props which will be passed to the Thumbnail child.
 -   UserBlock: Added a `linkProps` and `linkAs` props which will be passed to the Thumbnail child and used to wrap the username.
 
-### Changed
-
--   Limit lighten dark color to components: `Button`, `IconButton`, `Chip`, `Flags`, `Tabs`, `Icon`.
-
 ## [2.1.4][] - 2021-11-25
 
 ### Fixed
