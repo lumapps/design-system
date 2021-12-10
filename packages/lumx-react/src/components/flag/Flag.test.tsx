@@ -69,8 +69,9 @@ describe(`<${Flag.displayName} />`, () => {
 
         it('should use the color', () => {
             const color = ColorPalette.green;
-            const { wrapper } = setup({ icon: mdiAbTesting, color });
+            const { wrapper, iconEl } = setup({ icon: mdiAbTesting, color });
 
+            expect(iconEl.prop('color')).toEqual(color);
             expect(wrapper).toHaveClassName(
                 getBasicClass({
                     prefix: CLASSNAME,

@@ -31,12 +31,7 @@
 @mixin lumx-state-medium($state, $color, $has-focus-inset: false) {
     @if $state == lumx-base-const('state', 'DEFAULT') {
         background-color: lumx-color-variant($color, 'L5');
-
-        @if $color == 'dark' {
-            color: lumx-color-variant($color, 'L1');
-        } @else {
-            color: lumx-color-variant($color, 'N');
-        }
+        color: lumx-color-variant($color, 'N');
     } @else if $state == lumx-base-const('state', 'HOVER') {
         background-color: lumx-color-variant($color, 'L4');
     } @else if $state == lumx-base-const('state', 'ACTIVE') {
@@ -91,12 +86,7 @@
 @mixin lumx-state-low($state, $color, $has-focus-inset: false) {
     @if $state == lumx-base-const('state', 'DEFAULT') {
         background-color: transparent;
-
-        @if $color == 'dark' {
-            color: lumx-color-variant($color, 'L1');
-        } @else {
-            color: lumx-color-variant($color, 'N');
-        }
+        color: lumx-color-variant($color, 'N');
     } @else if $state == lumx-base-const('state', 'HOVER') {
         background-color: lumx-color-variant($color, 'L5');
     } @else if $state == lumx-base-const('state', 'ACTIVE') {

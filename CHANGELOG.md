@@ -38,10 +38,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Slideshow : fixed keyboard navigation, now the right arrow goes to the next slides and the left to the previous one.
 -   Dialog : Focus parent element everytime the dialog closes, not only on escape and clickaway.
 
-### Changed
-
--   Soften medium and low dark buttons color.
-
 ## [2.1.3][] - 2021-11-19
 
 ### Added
