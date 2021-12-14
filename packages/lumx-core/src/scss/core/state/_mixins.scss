@@ -32,12 +32,6 @@
     @if $state == lumx-base-const('state', 'DEFAULT') {
         background-color: lumx-color-variant($color, 'L5');
         color: lumx-color-variant($color, 'N');
-
-        @if $color == 'dark' {
-            .#{$lumx-base-prefix}-icon {
-                color: lumx-color-variant('dark', 'L1');
-            }
-        }
     } @else if $state == lumx-base-const('state', 'HOVER') {
         background-color: lumx-color-variant($color, 'L4');
     } @else if $state == lumx-base-const('state', 'ACTIVE') {
@@ -56,10 +50,6 @@
         @if $state == lumx-base-const('state', 'DEFAULT') {
             background-color: lumx-color-variant('primary', 'L5');
             color: lumx-color-variant('primary', 'D2');
-
-            .#{$lumx-base-prefix}-icon {
-                color: lumx-color-variant('primary', 'D2');
-            }
         } @else if $state == lumx-base-const('state', 'HOVER') {
             background-color: lumx-color-variant('primary', 'L4');
         } @else if $state == lumx-base-const('state', 'ACTIVE') {
@@ -75,10 +65,6 @@
         @if $state == lumx-base-const('state', 'DEFAULT') {
             background-color: lumx-color-variant('light', 'L3');
             color: lumx-color-variant('light', 'N');
-
-            .#{$lumx-base-prefix}-icon {
-                color: lumx-color-variant('light', 'N');
-            }
         } @else if $state == lumx-base-const('state', 'HOVER') {
             background-color: lumx-color-variant('light', 'L4');
         } @else if $state == lumx-base-const('state', 'ACTIVE') {
@@ -96,13 +82,6 @@
 @mixin lumx-state-low($state, $color, $has-focus-inset: false) {
     @if $state == lumx-base-const('state', 'DEFAULT') {
         background-color: transparent;
-        color: lumx-color-variant($color, 'N');
-
-        @if $color == 'dark' {
-            .#{$lumx-base-prefix}-icon {
-                color: lumx-color-variant('dark', 'L1');
-            }
-        }
     } @else if $state == lumx-base-const('state', 'HOVER') {
         background-color: lumx-color-variant($color, 'L5');
     } @else if $state == lumx-base-const('state', 'ACTIVE') {
