@@ -52,11 +52,20 @@ const DEFAULT_PROPS: Partial<IconProps> = {};
  */
 export const Icon: Comp<IconProps, HTMLElement> = forwardRef((props, ref) => {
     const { className, color, colorVariant, hasShape, icon, size, theme, ...forwardedProps } = props;
+
     let iconColor;
+    let iconColorVariant;
     if (color) {
         iconColor = color;
+        iconColorVariant = colorVariant;
     } else if (theme) {
         iconColor = theme === Theme.light ? ColorPalette.dark : ColorPalette.light;
+
+        if (colorVariant) {
+            iconColorVariant = colorVariant;
+        } else {
+            iconColorVariant = Theme.light ? 'L1' : 'N';
+        }
     } else if (hasShape) {
         iconColor = ColorPalette.dark;
     }
@@ -86,7 +95,7 @@ export const Icon: Comp<IconProps, HTMLElement> = forwardRef((props, ref) => {
                 className,
                 handleBasicClasses({
                     color: iconColor,
-                    colorVariant,
+                    colorVariant: iconColorVariant,
                     hasShape,
                     prefix: CLASSNAME,
                     size: iconSize,

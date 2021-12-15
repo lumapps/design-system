@@ -82,6 +82,7 @@
 @mixin lumx-state-low($state, $color, $has-focus-inset: false) {
     @if $state == lumx-base-const('state', 'DEFAULT') {
         background-color: transparent;
+        color: lumx-color-variant($color, 'N');
     } @else if $state == lumx-base-const('state', 'HOVER') {
         background-color: lumx-color-variant($color, 'L5');
     } @else if $state == lumx-base-const('state', 'ACTIVE') {
