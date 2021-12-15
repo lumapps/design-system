@@ -146,7 +146,6 @@ export const UserBlock: Comp<UserBlockProps, HTMLDivElement> = forwardRef((props
         >
             {avatarProps && (
                 <Avatar
-                    linkAs={linkAs}
                     linkProps={linkProps}
                     {...avatarProps}
                     className={classNames(`${CLASSNAME}__avatar`, avatarProps.className)}
