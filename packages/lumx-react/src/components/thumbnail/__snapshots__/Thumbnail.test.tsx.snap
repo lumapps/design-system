@@ -1,9 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Thumbnail> Snapshots and structure should render story 'Clickable' 1`] = `
-<button
-  className="lumx-thumbnail lumx-thumbnail--size-xxl lumx-thumbnail--theme-light lumx-thumbnail--is-clickable"
+<div
+  className="lumx-thumbnail lumx-thumbnail--size-xxl lumx-thumbnail--theme-light"
   onClick={[Function]}
+  onKeyPress={[Function]}
+  role="button"
+  tabIndex={0}
 >
   <div
     className="lumx-thumbnail__background"
@@ -22,57 +25,7 @@ exports[`<Thumbnail> Snapshots and structure should render story 'Clickable' 1`]
       style={Object {}}
     />
   </div>
-</button>
-`;
-
-exports[`<Thumbnail> Snapshots and structure should render story 'ClickableCustomLink' 1`] = `
-<CustomLinkComponent
-  className="custom-class-name lumx-thumbnail lumx-thumbnail--size-xxl lumx-thumbnail--theme-light lumx-thumbnail--is-clickable"
-  href="https://google.fr"
->
-  <div
-    className="lumx-thumbnail__background"
-    style={
-      Object {
-        "display": undefined,
-        "visibility": "hidden",
-      }
-    }
-  >
-    <img
-      alt="Click me"
-      className="lumx-thumbnail__image"
-      loading="lazy"
-      src="/demo-assets/landscape1.jpg"
-      style={Object {}}
-    />
-  </div>
-</CustomLinkComponent>
-`;
-
-exports[`<Thumbnail> Snapshots and structure should render story 'ClickableLink' 1`] = `
-<a
-  className="lumx-thumbnail lumx-thumbnail--size-xxl lumx-thumbnail--theme-light lumx-thumbnail--is-clickable"
-  href="https://google.fr"
->
-  <div
-    className="lumx-thumbnail__background"
-    style={
-      Object {
-        "display": undefined,
-        "visibility": "hidden",
-      }
-    }
-  >
-    <img
-      alt="Click me"
-      className="lumx-thumbnail__image"
-      loading="lazy"
-      src="/demo-assets/landscape1.jpg"
-      style={Object {}}
-    />
-  </div>
-</a>
+</div>
 `;
 
 exports[`<Thumbnail> Snapshots and structure should render story 'CustomFallback' 1`] = `

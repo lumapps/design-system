@@ -18,33 +18,12 @@ import { boolean, select, text } from '@storybook/addon-knobs';
 import { enumKnob } from '@lumx/react/stories/knobs/enumKnob';
 import { focusKnob } from '@lumx/react/stories/knobs/focusKnob';
 import { sizeKnob } from '@lumx/react/stories/knobs/sizeKnob';
-import classNames from 'classnames';
 
 export default { title: 'LumX components/thumbnail/Thumbnail' };
 
 export const Default = () => <Thumbnail alt="Image alt text" image={imageKnob()} size={Size.xxl} />;
 
 export const Clickable = () => <Thumbnail alt="Click me" image={imageKnob()} size={Size.xxl} onClick={console.log} />;
-
-export const ClickableLink = () => (
-    <Thumbnail alt="Click me" image={imageKnob()} size={Size.xxl} linkProps={{ href: 'https://google.fr' }} />
-);
-
-const CustomLinkComponent = (props: any) => (
-    <a {...props} className={classNames('custom-link-component', props.className)}>
-        {props.children}
-    </a>
-);
-
-export const ClickableCustomLink = () => (
-    <Thumbnail
-        alt="Click me"
-        image={imageKnob()}
-        size={Size.xxl}
-        linkAs={CustomLinkComponent}
-        linkProps={{ href: 'https://google.fr', className: 'custom-class-name' }}
-    />
-);
 
 export const DefaultFallback = () => <Thumbnail alt="foo" image="foo" />;
 
