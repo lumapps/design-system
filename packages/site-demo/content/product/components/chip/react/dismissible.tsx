@@ -8,14 +8,14 @@ export const App = ({ theme }: any) => {
 
     return (
         <>
-            <Chip theme={theme} after={<Icon icon={mdiClose} size={Size.xs} />} onClick={onClick}>
+            <Chip theme={theme} after={<Icon icon={mdiClose} size={Size.xs} theme={theme} />} onClick={onClick}>
                 Dismissible
             </Chip>
 
             <Chip
                 theme={theme}
-                before={<Icon icon={mdiEmail} size={Size.xs} />}
-                after={<Icon icon={mdiClose} size={Size.xs} />}
+                before={<Icon icon={mdiEmail} size={Size.xs} theme={theme} />}
+                after={<Icon icon={mdiClose} size={Size.xs} theme={theme} />}
                 onClick={onClick}
             >
                 Dismissible rich
