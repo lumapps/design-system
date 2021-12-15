@@ -103,9 +103,8 @@
 /* Thumbnail states
    ========================================================================== */
 
-.#{$lumx-base-prefix}-thumbnail--is-clickable {
+.#{$lumx-base-prefix}-thumbnail[tabindex='0'] {
     position: relative;
-    display: block;
     cursor: pointer;
 
     &::after {
@@ -120,8 +119,7 @@
         pointer-events: none;
     }
 
-    &:hover::after,
-    &:focus::after {
+    &:hover::after {
         @include lumx-state(lumx-base-const('state', 'HOVER'), lumx-base-const('emphasis', 'LOW'), 'dark');
     }
 
@@ -130,19 +128,19 @@
     }
 }
 
-.#{$lumx-base-prefix}-thumbnail--variant-rounded.#{$lumx-base-prefix}-thumbnail--is-clickable {
+.#{$lumx-base-prefix}-thumbnail--variant-rounded.#{$lumx-base-prefix}-thumbnail[tabindex='0'] {
     &[data-focus-visible-added]::after {
         border-radius: var(--lumx-border-radius);
     }
 }
 
-.#{$lumx-base-prefix}-thumbnail--theme-light.#{$lumx-base-prefix}-thumbnail--is-clickable {
+.#{$lumx-base-prefix}-thumbnail--theme-light.#{$lumx-base-prefix}-thumbnail[tabindex='0'] {
     &[data-focus-visible-added]::after {
         @include lumx-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('emphasis', 'LOW'), 'dark');
     }
 }
 
-.#{$lumx-base-prefix}-thumbnail--theme-dark.#{$lumx-base-prefix}-thumbnail--is-clickable {
+.#{$lumx-base-prefix}-thumbnail--theme-dark.#{$lumx-base-prefix}-thumbnail[tabindex='0'] {
     &[data-focus-visible-added]::after {
         @include lumx-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('emphasis', 'LOW'), 'light');
     }

@@ -6,12 +6,11 @@ import { UserBlock } from './UserBlock';
 
 export default { title: 'LumX components/user-block/UserBlock' };
 
-export const Sizes = ({ theme }: any) => {
+export const Sizes = () => {
     const logAction = (action: string) => () => console.log(action);
     return [Size.s, Size.m, Size.l].map((size: any) => (
         <div className="demo-grid" key={size}>
             <UserBlock
-                theme={theme}
                 name="Emmitt O. Lum"
                 fields={['Creative developer', 'Denpasar']}
                 avatarProps={{ image: avatarImageKnob(), alt: 'Avatar' }}
@@ -24,34 +23,11 @@ export const Sizes = ({ theme }: any) => {
     ));
 };
 
-export const WithLinks = ({ theme }: any) => {
-    const logAction = (action: string) => () => console.log(action);
-    return [Size.s, Size.m, Size.l].map((size: any) => (
-        <div className="demo-grid" key={size}>
-            <UserBlock
-                theme={theme}
-                name="Emmitt O. Lum"
-                linkProps={{
-                    href: 'https://www.lumapps.com',
-                    target: '_blank',
-                }}
-                fields={['Creative developer', 'Denpasar']}
-                avatarProps={{ image: avatarImageKnob(), alt: 'Avatar' }}
-                size={size}
-                onMouseEnter={logAction('Mouse entered')}
-                onMouseLeave={logAction('Mouse left')}
-                onClick={logAction('UserBlock clicked')}
-            />
-        </div>
-    ));
-};
-
-export const WithBadge = ({ theme }: any) => {
+export const WithBadge = () => {
     const logAction = (action: string) => () => console.log(action);
     return (
         <div className="demo-grid">
             <UserBlock
-                theme={theme}
                 name="Emmitt O. Lum"
                 fields={['Creative developer', 'Denpasar']}
                 avatarProps={{
@@ -66,19 +42,19 @@ export const WithBadge = ({ theme }: any) => {
                 size={Size.m}
                 onMouseEnter={logAction('Mouse entered')}
                 onMouseLeave={logAction('Mouse left')}
+                onClick={logAction('UserBlock clicked')}
             />
         </div>
     );
 };
 
-export const InList = ({ theme }: any) => {
+export const InList = () => {
     const logAction = (action: string) => () => console.log(action);
     return (
         <div className="demo-grid">
             <List itemPadding={Size.big}>
                 <ListItem className="lumx-color-background-dark-L6" size={Size.big}>
                     <UserBlock
-                        theme={theme}
                         name="Emmitt O. Lum"
                         fields={['Creative developer', 'Denpasar']}
                         avatarProps={{
@@ -98,7 +74,6 @@ export const InList = ({ theme }: any) => {
                 </ListItem>
                 <ListItem className="lumx-color-background-dark-L6" size={Size.big}>
                     <UserBlock
-                        theme={theme}
                         name="Emmitt O. Lum"
                         fields={['Creative developer', 'Denpasar']}
                         avatarProps={{
@@ -118,7 +93,6 @@ export const InList = ({ theme }: any) => {
                 </ListItem>
                 <ListItem className="lumx-color-background-dark-L6" size={Size.big}>
                     <UserBlock
-                        theme={theme}
                         name="Emmitt O. Lum"
                         fields={['Creative developer', 'Denpasar']}
                         avatarProps={{

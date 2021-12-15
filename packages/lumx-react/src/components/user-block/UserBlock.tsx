@@ -5,8 +5,6 @@ import classNames from 'classnames';
 import { Avatar, Orientation, Size, Theme } from '@lumx/react';
 
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
-import { isEmpty } from 'lodash';
-import { renderLink } from '@lumx/react/utils/renderLink';
 import { AvatarProps } from '../avatar/Avatar';
 
 /**
@@ -20,10 +18,6 @@ export type UserBlockSize = Extract<Size, 's' | 'm' | 'l'>;
 export interface UserBlockProps extends GenericProps {
     /** Props to pass to the avatar. */
     avatarProps?: AvatarProps;
-    /** Props to pass to the link wrapping the avatar thumbnail. */
-    linkProps?: React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
-    /** Custom react component for the link (can be used to inject react router Link). */
-    linkAs?: 'a' | any;
     /** Simple action toolbar content. */
     simpleAction?: ReactNode;
     /** Multiple action toolbar content. */
@@ -86,8 +80,6 @@ export const UserBlock: Comp<UserBlockProps, HTMLDivElement> = forwardRef((props
         simpleAction,
         size,
         theme,
-        linkProps,
-        linkAs,
         ...forwardedProps
     } = props;
     let componentSize = size;
@@ -99,29 +91,12 @@ export const UserBlock: Comp<UserBlockProps, HTMLDivElement> = forwardRef((props
 
     const shouldDisplayActions: boolean = orientation === Orientation.vertical;
 
-    const isLink = Boolean(linkProps?.href || linkAs);
-    const isClickable = !!onClick || isLink;
-
-    const nameBlock: ReactNode = React.useMemo(() => {
-        if (isEmpty(name)) {
-            return null;
-        }
-        const nameClassName = classNames(
-            handleBasicClasses({ prefix: `${CLASSNAME}__name`, isClickable }),
-            isLink && linkProps?.className,
-        );
-        if (isLink) {
-            return renderLink({ ...linkProps, linkAs, className: nameClassName }, name);
-        }
-        if (onClick) {
-            return (
-                <button onClick={onClick} type="button" className={nameClassName}>
-                    {name}
-                </button>
-            );
-        }
-        return <span className={nameClassName}>{name}</span>;
-    }, [isClickable, isLink, linkAs, linkProps, name, onClick]);
+    const nameBlock: ReactNode = name && (
+        // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-tabindex,jsx-a11y/no-static-element-interactions
+        <span className={`${CLASSNAME}__name`} onClick={onClick} tabIndex={onClick ? 0 : -1}>
+            {name}
+        </span>
+    );
 
     const fieldsBlock: ReactNode = fields && componentSize !== Size.s && (
         <div className={`${CLASSNAME}__fields`}>
@@ -139,21 +114,21 @@ export const UserBlock: Comp<UserBlockProps, HTMLDivElement> = forwardRef((props
             {...forwardedProps}
             className={classNames(
                 className,
-                handleBasicClasses({ prefix: CLASSNAME, orientation, size: componentSize, theme, isClickable }),
+                handleBasicClasses({ prefix: CLASSNAME, orientation, size: componentSize, theme }),
             )}
             onMouseLeave={onMouseLeave}
             onMouseEnter={onMouseEnter}
         >
             {avatarProps && (
-                <Avatar
-                    linkAs={linkAs}
-                    linkProps={linkProps}
-                    {...avatarProps}
-                    className={classNames(`${CLASSNAME}__avatar`, avatarProps.className)}
-                    size={componentSize}
-                    onClick={onClick}
-                    theme={theme}
-                />
+                <div className={`${CLASSNAME}__avatar`}>
+                    <Avatar
+                        {...avatarProps}
+                        size={componentSize}
+                        onClick={onClick}
+                        tabIndex={onClick ? 0 : -1}
+                        theme={theme}
+                    />
+                </div>
             )}
             {(fields || name) && (
                 <div className={`${CLASSNAME}__wrapper`}>

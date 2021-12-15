@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Reverted a11y link improvements (`linkAs` and `linkProps`) on Thumbnail, Avatar and UserBlock introduced in v2.1.5 that introduced a regression on the Thumbnail style.
+
 ## [2.1.8][] - 2021-12-10
 
 ### Fixed
