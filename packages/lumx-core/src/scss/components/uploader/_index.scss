@@ -73,7 +73,7 @@
         margin-bottom: $lumx-spacing-unit;
 
         #{$self}--theme-light & {
-            color: lumx-color-variant('dark', 'N');
+            color: lumx-color-variant('dark', 'L1');
         }
 
         #{$self}--theme-dark & {
@@ -87,7 +87,7 @@
         text-align: center;
 
         #{$self}--theme-light & {
-            color: lumx-color-variant('dark', 'N');
+            color: lumx-color-variant('dark', 'L1');
         }
 
         #{$self}--theme-dark & {

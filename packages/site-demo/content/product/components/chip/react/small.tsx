@@ -12,11 +12,16 @@ export const App = ({ theme }: any) => {
                 Small
             </Chip>
 
-            <Chip theme={theme} size={Size.s} before={<Icon icon={mdiEmail} size={Size.xxs} />}>
+            <Chip theme={theme} size={Size.s} before={<Icon icon={mdiEmail} size={Size.xxs} theme={theme} />}>
                 Small rich
             </Chip>
 
-            <Chip theme={theme} size={Size.s} after={<Icon icon={mdiClose} size={Size.xxs} />} onClick={onClick}>
+            <Chip
+                theme={theme}
+                size={Size.s}
+                after={<Icon icon={mdiClose} size={Size.xxs} theme={theme} />}
+                onClick={onClick}
+            >
                 Small dismissible
             </Chip>
         </>

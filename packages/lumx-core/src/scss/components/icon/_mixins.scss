@@ -16,6 +16,10 @@
         background-color: lumx-color-variant($color, 'L5');
         color: lumx-color-variant($color, 'L2');
     } @else if $has-shape == false {
-        color: lumx-color-variant($color, 'N');
+        @if $color == 'dark' {
+            color: lumx-color-variant('dark', 'L1');
+        } @else {
+            color: lumx-color-variant($color, 'N');
+        }
     }
 }
