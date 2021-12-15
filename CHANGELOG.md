@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 -   Always use colors css variables.
+-   Thumbnail badge now have a mask around it even if the `size` prop is undefined
 
 ## [2.1.9][] - 2021-12-15
 

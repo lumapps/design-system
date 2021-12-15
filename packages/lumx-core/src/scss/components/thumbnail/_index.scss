@@ -149,18 +149,15 @@
 /* Thumbnail badge mask
    ========================================================================== */
 
-@each $key, $size in $lumx-sizes {
-    $mask-size: map-get($lumx-sizes, lumx-base-const('size', 'XS')) - $lumx-spacing-unit;
-    $mask-offset: $size - 6;
+$badge-radius-size: map-get($lumx-sizes, lumx-base-const('size', 'XS')) / 2 + 2;
 
-    .#{$lumx-base-prefix}-thumbnail--has-badge.#{$lumx-base-prefix}-thumbnail--size-#{$key} {
-        .#{$lumx-base-prefix}-thumbnail__background,
-        .#{$lumx-base-prefix}-thumbnail__fallback {
-            mask-image: radial-gradient(
-                circle at $mask-offset $mask-offset,
-                transparent $mask-size,
-                /* offset circle size (+1) to soften the edge */ black $mask-size + 1
-            );
-        }
+.#{$lumx-base-prefix}-thumbnail--has-badge {
+    .#{$lumx-base-prefix}-thumbnail__background,
+    .#{$lumx-base-prefix}-thumbnail__fallback {
+        mask-image: radial-gradient(
+            circle at calc(100% - #{$badge-radius-size - 6}) calc(100% - #{$badge-radius-size - 6}),
+            transparent $badge-radius-size,
+            /* offset circle size (+1) to soften the edge */ black $badge-radius-size + 1
+        );
     }
 }
