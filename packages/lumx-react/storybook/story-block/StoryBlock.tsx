@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ElementType, useState } from 'react';
 import classNames from 'classnames';
 import isChromatic from 'chromatic/isChromatic';
 import { Alignment, Switch, Theme } from '@lumx/react';
@@ -10,21 +10,23 @@ import './index.scss';
 import 'focus-visible';
 
 interface StoryBlockProps {
-    children(p: { theme: Theme, today?: Date }): ReactElement;
+    Story: ElementType;
+    context: any;
 }
 
 const CLASSNAME = 'story-block';
 
 export const StoryBlock: React.FC<StoryBlockProps> = (props) => {
-    const { children } = props;
+    const { Story, context } = props;
 
     const [theme, setTheme] = useState<Theme>(Theme.light);
+    context.args.theme = theme;
     const toggleTheme = () => setTheme(theme === Theme.light ? Theme.dark : Theme.light);
 
-    if (isChromatic()) {
-        // Hard code today date for chromatic.
-        return children({ theme, today: new Date('May 25 2021 01:00') });
-    }
+    // Hard code today date for chromatic.
+    context.args.today = isChromatic() ? new Date('May 25 2021 01:00') : new Date();
+
+    if (isChromatic()) return <Story />;
 
     return (
         <div className={classNames(CLASSNAME, `${CLASSNAME}--theme-${theme}`)}>
@@ -41,7 +43,7 @@ export const StoryBlock: React.FC<StoryBlockProps> = (props) => {
                 <MaterialThemeSwitcher theme={theme} />
             </div>
 
-            {children({ theme, today: new Date() })}
+            <Story />
         </div>
     );
 };
