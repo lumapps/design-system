@@ -46,6 +46,7 @@ module.exports = () => {
                         pickFields: [
                             'version',
                             'comment',
+                            'value',
                             'attributes.category',
                             'attributes.type',
                             'attributes.item',
