@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.9][] - 2021-12-15
+
 ### Fixed
 
 -   Reverted a11y link improvements (`linkAs` and `linkProps`) on Thumbnail, Avatar and UserBlock introduced in v2.1.5 that introduced a regression on the Thumbnail style.
@@ -1224,3 +1226,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [2.1.7]: https://github.com/lumapps/design-system/tree/v2.1.7
 [unreleased]: https://github.com/lumapps/design-system/compare/v2.1.8...HEAD
 [2.1.8]: https://github.com/lumapps/design-system/tree/v2.1.8
+[unreleased]: https://github.com/lumapps/design-system/compare/v2.1.9...HEAD
+[2.1.9]: https://github.com/lumapps/design-system/tree/v2.1.9
