@@ -2,4 +2,6 @@ import React from 'react';
 
 import { StoryBlock } from './StoryBlock';
 
-export const withStoryBlockDecorator = (storyFn) => <StoryBlock>{storyFn}</StoryBlock>;
+export const withStoryBlockDecorator = (Story, context) => {
+    return <StoryBlock Story={Story} context={context}/>;
+};
