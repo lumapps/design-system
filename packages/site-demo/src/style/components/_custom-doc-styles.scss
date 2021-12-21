@@ -1,0 +1,29 @@
+.highlighted-block {
+    display: flex;
+    flex-direction: column;
+    padding: $lumx-spacing-unit * 1.5 $lumx-spacing-unit * 2;
+    background: lumx-color-variant('green', 'L5');
+    color: lumx-color-variant('green', 'N');
+}
+
+.example-block {
+    display: flex;
+    flex-direction: column;
+    background: lumx-color-variant('blue', 'L5');
+    color: lumx-color-variant('blue', 'N');
+
+    &__inner {
+        display: flex;
+        flex-direction: column;
+        padding: $lumx-spacing-unit * 1.5 $lumx-spacing-unit * 2;
+
+        & > ul,
+        & > ol {
+            margin-left: $lumx-spacing-unit-huge * 2;
+        }
+    }
+
+    &__image {
+        margin: 2px;
+    }
+}

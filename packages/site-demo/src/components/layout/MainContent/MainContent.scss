@@ -53,7 +53,8 @@
             background-color: $lumx-color-dark-L5;
         }
 
-        & > ul {
+        & > ul,
+        & > ol {
             margin-left: $lumx-spacing-unit-huge * 2;
         }
 
@@ -69,6 +70,7 @@
         & > h4,
         & > p,
         & > ul,
+        & > ol,
         & > div,
         & > pre,
         & > img,
