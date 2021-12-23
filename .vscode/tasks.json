@@ -1,15 +1,23 @@
 {
     // See https://go.microsoft.com/fwlink/?LinkId=733558
     // for the documentation about the tasks.json format
-    "version": "0.1.0",
+    "version": "2.0.0",
     "tasks": [
         {
+            "label": "prettier eslint",
+            "type": "shell",
             "command": "node",
-            "isShellCommand": true,
-            "showOutput": "always",
-            "isBuildCommand": true,
-            "taskName": "prettier eslint",
-            "args": ["./node_modules/.bin/prettier-eslint", "--write", "--prettier-last", "${file}"]
+            "args": [
+                "./node_modules/.bin/prettier-eslint",
+                "--write",
+                "--prettier-last",
+                "${file}"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "_id": "build",
+                "isDefault": false
+            }
         }
     ]
 }
