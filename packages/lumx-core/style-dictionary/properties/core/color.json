@@ -3,37 +3,37 @@
         "dark": {
             "N": { "value": "#000000", "opacity": "0.87", "version": "0.22", "comment": "Neutral dark color" },
             "L1": {
-                "value": "#000000",
+                "value": "{color.dark.N.value}",
                 "opacity": "0.7",
                 "version": "0.22",
                 "comment": "Base dark color with 70% opacity"
             },
             "L2": {
-                "value": "#000000",
+                "value": "{color.dark.N.value}",
                 "opacity": "0.54",
                 "version": "0.22",
                 "comment": "Base dark color with 54% opacity"
             },
             "L3": {
-                "value": "#000000",
+                "value": "{color.dark.N.value}",
                 "opacity": "0.38",
                 "version": "0.22",
                 "comment": "Base dark color with 38% opacity"
             },
             "L4": {
-                "value": "#000000",
+                "value": "{color.dark.N.value}",
                 "opacity": "0.2",
                 "version": "0.22",
                 "comment": "Base dark color with 20% opacity"
             },
             "L5": {
-                "value": "#000000",
+                "value": "{color.dark.N.value}",
                 "opacity": "0.12",
                 "version": "0.22",
                 "comment": "Base dark color with 12% opacity"
             },
             "L6": {
-                "value": "#000000",
+                "value": "{color.dark.N.value}",
                 "opacity": "0.05",
                 "version": "0.22",
                 "comment": "Base dark color with 5% opacity"

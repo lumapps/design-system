@@ -1,11 +1,7 @@
 @function lumx-color-variant($color, $variant) {
     @if map-has-key($lumx-color-palette, $color) {
-        @if $color == 'primary' or $color == 'secondary' {
-            @return var(--lumx-color-#{$color}-#{$variant});
-        } @else {
-            @return map-get(map-get($lumx-color-palette, $color), $variant);
-        }
+        @return var(--lumx-color-#{$color}-#{$variant});
     } @else {
-        @return map-get(map-get($lumx-color-palette, 'dark'), $variant);
+        @return var(--lumx-color-dark-N);
     }
 }

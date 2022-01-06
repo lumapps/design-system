@@ -24,19 +24,19 @@
                     },
                     "theme-light": {
                         "background-color": { "value": "transparent" },
-                        "border-color": "{color.dark.L5}",
-                        "icon-color": "{color.dark.L1}",
-                        "label-color": "{color.dark.N}",
+                        "border-color": { "value": "var(--lumx-color-dark-L5)" },
+                        "icon-color": { "value": "var(--lumx-color-dark-L1)" },
+                        "label-color": { "value": "var(--lumx-color-dark-N)" },
                         "chevron-background-color": { "value": "transparent" },
-                        "chevron-color": "{color.dark.L1}"
+                        "chevron-color": { "value": "var(--lumx-color-dark-L1)" }
                     },
                     "theme-dark": {
                         "background-color": { "value": "transparent" },
-                        "border-color": "{color.light.L5}",
-                        "icon-color": "{color.light.N}",
-                        "label-color": "{color.light.N}",
+                        "border-color": { "value": "var(--lumx-color-light-L5)" },
+                        "icon-color": { "value": "var(--lumx-color-light-N)" },
+                        "label-color": { "value": "var(--lumx-color-light-N)" },
                         "chevron-background-color": { "value": "transparent" },
-                        "chevron-color": "{color.light.N}"
+                        "chevron-color": { "value": "var(--lumx-color-light-N)" }
                     }
                 },
                 "state-hover": {
@@ -55,20 +55,20 @@
                         }
                     },
                     "theme-light": {
-                        "background-color": "{color.dark.L5}",
-                        "border-color": "{color.dark.L5}",
-                        "icon-color": "{color.dark.L1}",
-                        "label-color": "{color.dark.N}",
-                        "chevron-background-color": "{color.dark.L5}",
-                        "chevron-color": "{color.dark.L1}"
+                        "background-color": { "value": "var(--lumx-color-dark-L5)" },
+                        "border-color": { "value": "var(--lumx-color-dark-L5)" },
+                        "icon-color": { "value": "var(--lumx-color-dark-L1)" },
+                        "label-color": { "value": "var(--lumx-color-dark-N)" },
+                        "chevron-background-color": { "value": "var(--lumx-color-dark-L5)" },
+                        "chevron-color": { "value": "var(--lumx-color-dark-L1)" }
                     },
                     "theme-dark": {
-                        "background-color": "{color.light.L5}",
-                        "border-color": "{color.light.L5}",
-                        "icon-color": "{color.light.N}",
-                        "label-color": "{color.light.N}",
-                        "chevron-background-color": "{color.light.L5}",
-                        "chevron-color": "{color.light.N}"
+                        "background-color": { "value": "var(--lumx-color-light-L5)" },
+                        "border-color": { "value": "var(--lumx-color-light-L5)" },
+                        "icon-color": { "value": "var(--lumx-color-light-N)" },
+                        "label-color": { "value": "var(--lumx-color-light-N)" },
+                        "chevron-background-color": { "value": "var(--lumx-color-light-L5)" },
+                        "chevron-color": { "value": "var(--lumx-color-light-N)" }
                     }
                 },
                 "state-active": {
@@ -87,20 +87,20 @@
                         }
                     },
                     "theme-light": {
-                        "background-color": "{color.dark.L4}",
-                        "border-color": "{color.dark.L5}",
-                        "icon-color": "{color.dark.L1}",
-                        "label-color": "{color.dark.N}",
-                        "chevron-background-color": "{color.dark.L4}",
-                        "chevron-color": "{color.dark.L1}"
+                        "background-color": { "value": "var(--lumx-color-dark-L4)" },
+                        "border-color": { "value": "var(--lumx-color-dark-L5)" },
+                        "icon-color": { "value": "var(--lumx-color-dark-L1)" },
+                        "label-color": { "value": "var(--lumx-color-dark-N)" },
+                        "chevron-background-color": { "value": "var(--lumx-color-dark-L4)" },
+                        "chevron-color": { "value": "var(--lumx-color-dark-L1)" }
                     },
                     "theme-dark": {
-                        "background-color": "{color.light.L4}",
-                        "border-color": "{color.light.L5}",
-                        "icon-color": "{color.light.N}",
-                        "label-color": "{color.light.N}",
-                        "chevron-background-color": "{color.light.L4}",
-                        "chevron-color": "{color.light.N}"
+                        "background-color": { "value": "var(--lumx-color-light-L4)" },
+                        "border-color": { "value": "var(--lumx-color-light-L5)" },
+                        "icon-color": { "value": "var(--lumx-color-light-N)" },
+                        "label-color": { "value": "var(--lumx-color-light-N)" },
+                        "chevron-background-color": { "value": "var(--lumx-color-light-L4)" },
+                        "chevron-color": { "value": "var(--lumx-color-light-N)" }
                     }
                 }
             },
@@ -129,12 +129,12 @@
                         "chevron-color": { "value": "var(--lumx-color-primary-D2)" }
                     },
                     "theme-dark": {
-                        "background-color": "{color.light.L3}",
-                        "border-color": "{color.light.L5}",
-                        "icon-color": "{color.light.N}",
-                        "label-color": "{color.light.N}",
+                        "background-color": { "value": "var(--lumx-color-light-L3)" },
+                        "border-color": { "value": "var(--lumx-color-light-L5)" },
+                        "icon-color": { "value": "var(--lumx-color-light-N)" },
+                        "label-color": { "value": "var(--lumx-color-light-N)" },
                         "chevron-background-color": { "value": "transparent" },
-                        "chevron-color": "{color.light.N}"
+                        "chevron-color": { "value": "var(--lumx-color-light-N)" }
                     }
                 },
                 "state-hover": {
@@ -161,12 +161,12 @@
                         "chevron-color": { "value": "var(--lumx-color-primary-D2)" }
                     },
                     "theme-dark": {
-                        "background-color": "{color.light.L4}",
-                        "border-color": "{color.light.L5}",
-                        "icon-color": "{color.light.N}",
-                        "label-color": "{color.light.N}",
-                        "chevron-background-color": "{color.light.L4}",
-                        "chevron-color": "{color.light.N}"
+                        "background-color": { "value": "var(--lumx-color-light-L4)" },
+                        "border-color": { "value": "var(--lumx-color-light-L5)" },
+                        "icon-color": { "value": "var(--lumx-color-light-N)" },
+                        "label-color": { "value": "var(--lumx-color-light-N)" },
+                        "chevron-background-color": { "value": "var(--lumx-color-light-L4)" },
+                        "chevron-color": { "value": "var(--lumx-color-light-N)" }
                     }
                 },
                 "state-active": {
@@ -193,12 +193,12 @@
                         "chevron-color": { "value": "var(--lumx-color-primary-D2)" }
                     },
                     "theme-dark": {
-                        "background-color": "{color.light.L5}",
-                        "border-color": "{color.light.L5}",
-                        "icon-color": "{color.light.N}",
-                        "label-color": "{color.light.N}",
-                        "chevron-background-color": "{color.light.L5}",
-                        "chevron-color": "{color.light.N}"
+                        "background-color": { "value": "var(--lumx-color-light-L5)" },
+                        "border-color": { "value": "var(--lumx-color-light-L5)" },
+                        "icon-color": { "value": "var(--lumx-color-light-N)" },
+                        "label-color": { "value": "var(--lumx-color-light-N)" },
+                        "chevron-background-color": { "value": "var(--lumx-color-light-L5)" },
+                        "chevron-color": { "value": "var(--lumx-color-light-N)" }
                     }
                 }
             }

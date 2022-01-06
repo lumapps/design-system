@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Thu, 16 Dec 2021 09:34:25 GMT
+ * Generated on Thu, 06 Jan 2022 09:15:29 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -49,9 +49,7 @@ export const DESIGN_TOKENS = {
                         },
                     },
                     color: {
-                        version: '0.22',
-                        comment: 'Neutral light color',
-                        value: '#fff',
+                        value: 'var(--lumx-color-light-N)',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-high',
@@ -69,9 +67,7 @@ export const DESIGN_TOKENS = {
                 },
                 'theme-dark': {
                     'background-color': {
-                        version: '0.22',
-                        comment: 'Neutral light color',
-                        value: '#fff',
+                        value: 'var(--lumx-color-light-N)',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-high',
@@ -125,9 +121,7 @@ export const DESIGN_TOKENS = {
                         },
                     },
                     color: {
-                        version: '0.22',
-                        comment: 'Neutral light color',
-                        value: '#fff',
+                        value: 'var(--lumx-color-light-N)',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-high',
@@ -145,9 +139,7 @@ export const DESIGN_TOKENS = {
                 },
                 'theme-dark': {
                     'background-color': {
-                        version: '0.22',
-                        comment: 'Base light color with 90% opacity',
-                        value: '#fff',
+                        value: 'var(--lumx-color-light-L1)',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-high',
@@ -201,9 +193,7 @@ export const DESIGN_TOKENS = {
                         },
                     },
                     color: {
-                        version: '0.22',
-                        comment: 'Neutral light color',
-                        value: '#fff',
+                        value: 'var(--lumx-color-light-N)',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-high',
@@ -221,9 +211,7 @@ export const DESIGN_TOKENS = {
                 },
                 'theme-dark': {
                     'background-color': {
-                        version: '0.22',
-                        comment: 'Base light color with 80% opacity',
-                        value: '#fff',
+                        value: 'var(--lumx-color-light-L2)',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-high',
@@ -271,9 +259,7 @@ export const DESIGN_TOKENS = {
                 },
                 'theme-light': {
                     'background-color': {
-                        version: '0.22',
-                        comment: 'Base dark color with 12% opacity',
-                        value: '#000000',
+                        value: 'var(--lumx-color-dark-L5)',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-medium',
@@ -281,9 +267,7 @@ export const DESIGN_TOKENS = {
                         },
                     },
                     color: {
-                        version: '0.22',
-                        comment: 'Base dark color with 70% opacity',
-                        value: '#000000',
+                        value: 'var(--lumx-color-dark-L1)',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-medium',
@@ -301,9 +285,7 @@ export const DESIGN_TOKENS = {
                 },
                 'theme-dark': {
                     'background-color': {
-                        version: '0.22',
-                        comment: 'Base light color with 20% opacity',
-                        value: '#fff',
+                        value: 'var(--lumx-color-light-L5)',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-medium',
@@ -311,9 +293,7 @@ export const DESIGN_TOKENS = {
                         },
                     },
                     color: {
-                        version: '0.22',
-                        comment: 'Neutral light color',
-                        value: '#fff',
+                        value: 'var(--lumx-color-light-N)',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-medium',
@@ -351,9 +331,7 @@ export const DESIGN_TOKENS = {
                 },
                 'theme-light': {
                     'background-color': {
-                        version: '0.22',
-                        comment: 'Base dark color with 20% opacity',
-                        value: '#000000',
+                        value: 'var(--lumx-color-dark-L4)',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-medium',
@@ -361,9 +339,7 @@ export const DESIGN_TOKENS = {
                         },
                     },
                     color: {
-                        version: '0.22',
-                        comment: 'Base dark color with 70% opacity',
-                        value: '#000000',
+                        value: 'var(--lumx-color-dark-L1)',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-medium',
@@ -381,9 +357,7 @@ export const DESIGN_TOKENS = {
                 },
                 'theme-dark': {
                     'background-color': {
-                        version: '0.22',
-                        comment: 'Base light color with 40% opacity',
-                        value: '#fff',
+                        value: 'var(--lumx-color-light-L4)',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-medium',
@@ -391,9 +365,7 @@ export const DESIGN_TOKENS = {
                         },
                     },
                     color: {
-                        version: '0.22',
-                        comment: 'Neutral light color',
-                        value: '#fff',
+                        value: 'var(--lumx-color-light-N)',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-medium',
@@ -431,9 +403,7 @@ export const DESIGN_TOKENS = {
                 },
                 'theme-light': {
                     'background-color': {
-                        version: '0.22',
-                        comment: 'Base dark color with 38% opacity',
-                        value: '#000000',
+                        value: 'var(--lumx-color-dark-L3)',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-medium',
@@ -441,9 +411,7 @@ export const DESIGN_TOKENS = {
                         },
                     },
                     color: {
-                        version: '0.22',
-                        comment: 'Base dark color with 70% opacity',
-                        value: '#000000',
+                        value: 'var(--lumx-color-dark-L1)',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-medium',
@@ -461,9 +429,7 @@ export const DESIGN_TOKENS = {
                 },
                 'theme-dark': {
                     'background-color': {
-                        version: '0.22',
-                        comment: 'Base light color with 60% opacity',
-                        value: '#fff',
+                        value: 'var(--lumx-color-light-L3)',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-medium',
@@ -471,9 +437,7 @@ export const DESIGN_TOKENS = {
                         },
                     },
                     color: {
-                        version: '0.22',
-                        comment: 'Neutral light color',
-                        value: '#fff',
+                        value: 'var(--lumx-color-light-N)',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-medium',
@@ -521,9 +485,7 @@ export const DESIGN_TOKENS = {
                         },
                     },
                     color: {
-                        version: '0.22',
-                        comment: 'Base dark color with 70% opacity',
-                        value: '#000000',
+                        value: 'var(--lumx-color-dark-L1)',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-low',
@@ -549,9 +511,7 @@ export const DESIGN_TOKENS = {
                         },
                     },
                     color: {
-                        version: '0.22',
-                        comment: 'Neutral light color',
-                        value: '#fff',
+                        value: 'var(--lumx-color-light-N)',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-low',
@@ -589,9 +549,7 @@ export const DESIGN_TOKENS = {
                 },
                 'theme-light': {
                     'background-color': {
-                        version: '0.22',
-                        comment: 'Base dark color with 12% opacity',
-                        value: '#000000',
+                        value: 'var(--lumx-color-dark-L5)',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-low',
@@ -599,9 +557,7 @@ export const DESIGN_TOKENS = {
                         },
                     },
                     color: {
-                        version: '0.22',
-                        comment: 'Base dark color with 70% opacity',
-                        value: '#000000',
+                        value: 'var(--lumx-color-dark-L1)',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-low',
@@ -619,9 +575,7 @@ export const DESIGN_TOKENS = {
                 },
                 'theme-dark': {
                     'background-color': {
-                        version: '0.22',
-                        comment: 'Base light color with 20% opacity',
-                        value: '#fff',
+                        value: 'var(--lumx-color-light-L5)',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-low',
@@ -629,9 +583,7 @@ export const DESIGN_TOKENS = {
                         },
                     },
                     color: {
-                        version: '0.22',
-                        comment: 'Neutral light color',
-                        value: '#fff',
+                        value: 'var(--lumx-color-light-N)',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-low',
@@ -669,9 +621,7 @@ export const DESIGN_TOKENS = {
                 },
                 'theme-light': {
                     'background-color': {
-                        version: '0.22',
-                        comment: 'Base dark color with 20% opacity',
-                        value: '#000000',
+                        value: 'var(--lumx-color-dark-L4)',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-low',
@@ -679,9 +629,7 @@ export const DESIGN_TOKENS = {
                         },
                     },
                     color: {
-                        version: '0.22',
-                        comment: 'Base dark color with 70% opacity',
-                        value: '#000000',
+                        value: 'var(--lumx-color-dark-L1)',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-low',
@@ -699,9 +647,7 @@ export const DESIGN_TOKENS = {
                 },
                 'theme-dark': {
                     'background-color': {
-                        version: '0.22',
-                        comment: 'Base light color with 40% opacity',
-                        value: '#fff',
+                        value: 'var(--lumx-color-light-L4)',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-low',
@@ -709,9 +655,7 @@ export const DESIGN_TOKENS = {
                         },
                     },
                     color: {
-                        version: '0.22',
-                        comment: 'Neutral light color',
-                        value: '#fff',
+                        value: 'var(--lumx-color-light-N)',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-low',
@@ -777,9 +721,7 @@ export const DESIGN_TOKENS = {
                 },
                 'theme-dark': {
                     'background-color': {
-                        version: '0.22',
-                        comment: 'Base light color with 60% opacity',
-                        value: '#fff',
+                        value: 'var(--lumx-color-light-L3)',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-selected',
@@ -787,9 +729,7 @@ export const DESIGN_TOKENS = {
                         },
                     },
                     color: {
-                        version: '0.22',
-                        comment: 'Neutral light color',
-                        value: '#fff',
+                        value: 'var(--lumx-color-light-N)',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-selected',
@@ -853,9 +793,7 @@ export const DESIGN_TOKENS = {
                 },
                 'theme-dark': {
                     'background-color': {
-                        version: '0.22',
-                        comment: 'Base light color with 40% opacity',
-                        value: '#fff',
+                        value: 'var(--lumx-color-light-L4)',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-selected',
@@ -863,9 +801,7 @@ export const DESIGN_TOKENS = {
                         },
                     },
                     color: {
-                        version: '0.22',
-                        comment: 'Neutral light color',
-                        value: '#fff',
+                        value: 'var(--lumx-color-light-N)',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-selected',
@@ -929,9 +865,7 @@ export const DESIGN_TOKENS = {
                 },
                 'theme-dark': {
                     'background-color': {
-                        version: '0.22',
-                        comment: 'Base light color with 20% opacity',
-                        value: '#fff',
+                        value: 'var(--lumx-color-light-L5)',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-selected',
@@ -939,9 +873,7 @@ export const DESIGN_TOKENS = {
                         },
                     },
                     color: {
-                        version: '0.22',
-                        comment: 'Neutral light color',
-                        value: '#fff',
+                        value: 'var(--lumx-color-light-N)',
                         attributes: {
                             category: 'button',
                             type: 'emphasis-selected',
@@ -1364,9 +1296,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'border-color': {
-                            version: '0.22',
-                            comment: 'Base dark color with 12% opacity',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-L5)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1374,9 +1304,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'icon-color': {
-                            version: '0.22',
-                            comment: 'Base dark color with 70% opacity',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-L1)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1384,9 +1312,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'label-color': {
-                            version: '0.22',
-                            comment: 'Neutral dark color',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-N)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1402,9 +1328,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'chevron-color': {
-                            version: '0.22',
-                            comment: 'Base dark color with 70% opacity',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-L1)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1422,9 +1346,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'border-color': {
-                            version: '0.22',
-                            comment: 'Base light color with 20% opacity',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-L5)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1432,9 +1354,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'icon-color': {
-                            version: '0.22',
-                            comment: 'Neutral light color',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-N)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1442,9 +1362,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'label-color': {
-                            version: '0.22',
-                            comment: 'Neutral light color',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-N)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1460,9 +1378,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'chevron-color': {
-                            version: '0.22',
-                            comment: 'Neutral light color',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-N)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1516,9 +1432,7 @@ export const DESIGN_TOKENS = {
                     },
                     'theme-light': {
                         'background-color': {
-                            version: '0.22',
-                            comment: 'Base dark color with 12% opacity',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-L5)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1526,9 +1440,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'border-color': {
-                            version: '0.22',
-                            comment: 'Base dark color with 12% opacity',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-L5)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1536,9 +1448,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'icon-color': {
-                            version: '0.22',
-                            comment: 'Base dark color with 70% opacity',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-L1)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1546,9 +1456,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'label-color': {
-                            version: '0.22',
-                            comment: 'Neutral dark color',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-N)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1556,9 +1464,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'chevron-background-color': {
-                            version: '0.22',
-                            comment: 'Base dark color with 12% opacity',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-L5)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1566,9 +1472,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'chevron-color': {
-                            version: '0.22',
-                            comment: 'Base dark color with 70% opacity',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-L1)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1578,9 +1482,7 @@ export const DESIGN_TOKENS = {
                     },
                     'theme-dark': {
                         'background-color': {
-                            version: '0.22',
-                            comment: 'Base light color with 20% opacity',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-L5)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1588,9 +1490,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'border-color': {
-                            version: '0.22',
-                            comment: 'Base light color with 20% opacity',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-L5)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1598,9 +1498,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'icon-color': {
-                            version: '0.22',
-                            comment: 'Neutral light color',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-N)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1608,9 +1506,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'label-color': {
-                            version: '0.22',
-                            comment: 'Neutral light color',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-N)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1618,9 +1514,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'chevron-background-color': {
-                            version: '0.22',
-                            comment: 'Base light color with 20% opacity',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-L5)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1628,9 +1522,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'chevron-color': {
-                            version: '0.22',
-                            comment: 'Neutral light color',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-N)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1684,9 +1576,7 @@ export const DESIGN_TOKENS = {
                     },
                     'theme-light': {
                         'background-color': {
-                            version: '0.22',
-                            comment: 'Base dark color with 20% opacity',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-L4)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1694,9 +1584,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'border-color': {
-                            version: '0.22',
-                            comment: 'Base dark color with 12% opacity',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-L5)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1704,9 +1592,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'icon-color': {
-                            version: '0.22',
-                            comment: 'Base dark color with 70% opacity',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-L1)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1714,9 +1600,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'label-color': {
-                            version: '0.22',
-                            comment: 'Neutral dark color',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-N)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1724,9 +1608,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'chevron-background-color': {
-                            version: '0.22',
-                            comment: 'Base dark color with 20% opacity',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-L4)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1734,9 +1616,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'chevron-color': {
-                            version: '0.22',
-                            comment: 'Base dark color with 70% opacity',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-L1)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1746,9 +1626,7 @@ export const DESIGN_TOKENS = {
                     },
                     'theme-dark': {
                         'background-color': {
-                            version: '0.22',
-                            comment: 'Base light color with 40% opacity',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-L4)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1756,9 +1634,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'border-color': {
-                            version: '0.22',
-                            comment: 'Base light color with 20% opacity',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-L5)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1766,9 +1642,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'icon-color': {
-                            version: '0.22',
-                            comment: 'Neutral light color',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-N)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1776,9 +1650,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'label-color': {
-                            version: '0.22',
-                            comment: 'Neutral light color',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-N)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1786,9 +1658,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'chevron-background-color': {
-                            version: '0.22',
-                            comment: 'Base light color with 40% opacity',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-L4)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1796,9 +1666,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'chevron-color': {
-                            version: '0.22',
-                            comment: 'Neutral light color',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-N)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1904,9 +1772,7 @@ export const DESIGN_TOKENS = {
                     },
                     'theme-dark': {
                         'background-color': {
-                            version: '0.22',
-                            comment: 'Base light color with 60% opacity',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-L3)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1914,9 +1780,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'border-color': {
-                            version: '0.22',
-                            comment: 'Base light color with 20% opacity',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-L5)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1924,9 +1788,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'icon-color': {
-                            version: '0.22',
-                            comment: 'Neutral light color',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-N)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1934,9 +1796,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'label-color': {
-                            version: '0.22',
-                            comment: 'Neutral light color',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-N)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -1952,9 +1812,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'chevron-color': {
-                            version: '0.22',
-                            comment: 'Neutral light color',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-N)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -2058,9 +1916,7 @@ export const DESIGN_TOKENS = {
                     },
                     'theme-dark': {
                         'background-color': {
-                            version: '0.22',
-                            comment: 'Base light color with 40% opacity',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-L4)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -2068,9 +1924,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'border-color': {
-                            version: '0.22',
-                            comment: 'Base light color with 20% opacity',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-L5)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -2078,9 +1932,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'icon-color': {
-                            version: '0.22',
-                            comment: 'Neutral light color',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-N)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -2088,9 +1940,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'label-color': {
-                            version: '0.22',
-                            comment: 'Neutral light color',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-N)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -2098,9 +1948,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'chevron-background-color': {
-                            version: '0.22',
-                            comment: 'Base light color with 40% opacity',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-L4)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -2108,9 +1956,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'chevron-color': {
-                            version: '0.22',
-                            comment: 'Neutral light color',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-N)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -2214,9 +2060,7 @@ export const DESIGN_TOKENS = {
                     },
                     'theme-dark': {
                         'background-color': {
-                            version: '0.22',
-                            comment: 'Base light color with 20% opacity',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-L5)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -2224,9 +2068,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'border-color': {
-                            version: '0.22',
-                            comment: 'Base light color with 20% opacity',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-L5)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -2234,9 +2076,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'icon-color': {
-                            version: '0.22',
-                            comment: 'Neutral light color',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-N)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -2244,9 +2084,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'label-color': {
-                            version: '0.22',
-                            comment: 'Neutral light color',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-N)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -2254,9 +2092,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'chevron-background-color': {
-                            version: '0.22',
-                            comment: 'Base light color with 20% opacity',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-L5)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -2264,9 +2100,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'chevron-color': {
-                            version: '0.22',
-                            comment: 'Neutral light color',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-N)',
                             attributes: {
                                 category: 'navigation',
                                 type: 'item',
@@ -2350,9 +2184,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         color: {
-                            version: '0.22',
-                            comment: 'Base dark color with 70% opacity',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-L1)',
                             attributes: {
                                 category: 'tabs',
                                 type: 'link',
@@ -2360,9 +2192,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'border-color': {
-                            version: '0.22',
-                            comment: 'Base dark color with 12% opacity',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-L5)',
                             attributes: {
                                 category: 'tabs',
                                 type: 'link',
@@ -2380,9 +2210,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         color: {
-                            version: '0.22',
-                            comment: 'Neutral light color',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-N)',
                             attributes: {
                                 category: 'tabs',
                                 type: 'link',
@@ -2390,9 +2218,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'border-color': {
-                            version: '0.22',
-                            comment: 'Base light color with 20% opacity',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-L5)',
                             attributes: {
                                 category: 'tabs',
                                 type: 'link',
@@ -2446,9 +2272,7 @@ export const DESIGN_TOKENS = {
                     },
                     'theme-light': {
                         'background-color': {
-                            version: '0.22',
-                            comment: 'Base dark color with 12% opacity',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-L5)',
                             attributes: {
                                 category: 'tabs',
                                 type: 'link',
@@ -2456,9 +2280,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         color: {
-                            version: '0.22',
-                            comment: 'Base dark color with 70% opacity',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-L1)',
                             attributes: {
                                 category: 'tabs',
                                 type: 'link',
@@ -2466,9 +2288,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'border-color': {
-                            version: '0.22',
-                            comment: 'Base dark color with 12% opacity',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-L5)',
                             attributes: {
                                 category: 'tabs',
                                 type: 'link',
@@ -2478,9 +2298,7 @@ export const DESIGN_TOKENS = {
                     },
                     'theme-dark': {
                         'background-color': {
-                            version: '0.22',
-                            comment: 'Base light color with 20% opacity',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-L5)',
                             attributes: {
                                 category: 'tabs',
                                 type: 'link',
@@ -2488,9 +2306,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         color: {
-                            version: '0.22',
-                            comment: 'Neutral light color',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-N)',
                             attributes: {
                                 category: 'tabs',
                                 type: 'link',
@@ -2498,9 +2314,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'border-color': {
-                            version: '0.22',
-                            comment: 'Base light color with 20% opacity',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-L5)',
                             attributes: {
                                 category: 'tabs',
                                 type: 'link',
@@ -2554,9 +2368,7 @@ export const DESIGN_TOKENS = {
                     },
                     'theme-light': {
                         'background-color': {
-                            version: '0.22',
-                            comment: 'Base dark color with 20% opacity',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-L4)',
                             attributes: {
                                 category: 'tabs',
                                 type: 'link',
@@ -2564,9 +2376,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         color: {
-                            version: '0.22',
-                            comment: 'Base dark color with 70% opacity',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-L1)',
                             attributes: {
                                 category: 'tabs',
                                 type: 'link',
@@ -2574,9 +2384,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'border-color': {
-                            version: '0.22',
-                            comment: 'Base dark color with 12% opacity',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-L5)',
                             attributes: {
                                 category: 'tabs',
                                 type: 'link',
@@ -2586,9 +2394,7 @@ export const DESIGN_TOKENS = {
                     },
                     'theme-dark': {
                         'background-color': {
-                            version: '0.22',
-                            comment: 'Base light color with 40% opacity',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-L4)',
                             attributes: {
                                 category: 'tabs',
                                 type: 'link',
@@ -2596,9 +2402,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         color: {
-                            version: '0.22',
-                            comment: 'Neutral light color',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-N)',
                             attributes: {
                                 category: 'tabs',
                                 type: 'link',
@@ -2606,9 +2410,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'border-color': {
-                            version: '0.22',
-                            comment: 'Base light color with 20% opacity',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-L5)',
                             attributes: {
                                 category: 'tabs',
                                 type: 'link',
@@ -2672,9 +2474,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         color: {
-                            version: '0.22',
-                            comment: 'Base dark color with 70% opacity',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-L1)',
                             attributes: {
                                 category: 'tabs',
                                 type: 'link',
@@ -2700,9 +2500,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         color: {
-                            version: '0.22',
-                            comment: 'Neutral light color',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-N)',
                             attributes: {
                                 category: 'tabs',
                                 type: 'link',
@@ -2710,9 +2508,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'border-color': {
-                            version: '0.22',
-                            comment: 'Neutral light color',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-N)',
                             attributes: {
                                 category: 'tabs',
                                 type: 'link',
@@ -2766,9 +2562,7 @@ export const DESIGN_TOKENS = {
                     },
                     'theme-light': {
                         'background-color': {
-                            version: '0.22',
-                            comment: 'Base dark color with 12% opacity',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-L5)',
                             attributes: {
                                 category: 'tabs',
                                 type: 'link',
@@ -2776,9 +2570,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         color: {
-                            version: '0.22',
-                            comment: 'Base dark color with 70% opacity',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-L1)',
                             attributes: {
                                 category: 'tabs',
                                 type: 'link',
@@ -2796,9 +2588,7 @@ export const DESIGN_TOKENS = {
                     },
                     'theme-dark': {
                         'background-color': {
-                            version: '0.22',
-                            comment: 'Base light color with 20% opacity',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-L5)',
                             attributes: {
                                 category: 'tabs',
                                 type: 'link',
@@ -2806,9 +2596,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         color: {
-                            version: '0.22',
-                            comment: 'Neutral light color',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-N)',
                             attributes: {
                                 category: 'tabs',
                                 type: 'link',
@@ -2816,9 +2604,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'border-color': {
-                            version: '0.22',
-                            comment: 'Neutral light color',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-N)',
                             attributes: {
                                 category: 'tabs',
                                 type: 'link',
@@ -2872,9 +2658,7 @@ export const DESIGN_TOKENS = {
                     },
                     'theme-light': {
                         'background-color': {
-                            version: '0.22',
-                            comment: 'Base dark color with 20% opacity',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-L4)',
                             attributes: {
                                 category: 'tabs',
                                 type: 'link',
@@ -2882,9 +2666,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         color: {
-                            version: '0.22',
-                            comment: 'Base dark color with 70% opacity',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-L1)',
                             attributes: {
                                 category: 'tabs',
                                 type: 'link',
@@ -2902,9 +2684,7 @@ export const DESIGN_TOKENS = {
                     },
                     'theme-dark': {
                         'background-color': {
-                            version: '0.22',
-                            comment: 'Base light color with 40% opacity',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-L4)',
                             attributes: {
                                 category: 'tabs',
                                 type: 'link',
@@ -2912,9 +2692,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         color: {
-                            version: '0.22',
-                            comment: 'Neutral light color',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-N)',
                             attributes: {
                                 category: 'tabs',
                                 type: 'link',
@@ -2922,9 +2700,7 @@ export const DESIGN_TOKENS = {
                             },
                         },
                         'border-color': {
-                            version: '0.22',
-                            comment: 'Neutral light color',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-N)',
                             attributes: {
                                 category: 'tabs',
                                 type: 'link',
@@ -3014,9 +2790,7 @@ export const DESIGN_TOKENS = {
                 header: {
                     label: {
                         color: {
-                            version: '0.22',
-                            comment: 'Neutral dark color',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-N)',
                             attributes: {
                                 category: 'text-field',
                                 type: 'state-default',
@@ -3027,9 +2801,7 @@ export const DESIGN_TOKENS = {
                 },
                 input: {
                     'background-color': {
-                        version: '0.22',
-                        comment: 'Base dark color with 5% opacity',
-                        value: '#000000',
+                        value: 'var(--lumx-color-dark-L6)',
                         attributes: {
                             category: 'text-field',
                             type: 'state-default',
@@ -3037,9 +2809,7 @@ export const DESIGN_TOKENS = {
                         },
                     },
                     'border-color': {
-                        version: '0.22',
-                        comment: 'Base dark color with 20% opacity',
-                        value: '#000000',
+                        value: 'var(--lumx-color-dark-L4)',
                         attributes: {
                             category: 'text-field',
                             type: 'state-default',
@@ -3048,9 +2818,7 @@ export const DESIGN_TOKENS = {
                     },
                     content: {
                         color: {
-                            version: '0.22',
-                            comment: 'Neutral dark color',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-N)',
                             attributes: {
                                 category: 'text-field',
                                 type: 'state-default',
@@ -3060,9 +2828,7 @@ export const DESIGN_TOKENS = {
                     },
                     placeholder: {
                         color: {
-                            version: '0.22',
-                            comment: 'Base dark color with 54% opacity',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-L2)',
                             attributes: {
                                 category: 'text-field',
                                 type: 'state-default',
@@ -3076,9 +2842,7 @@ export const DESIGN_TOKENS = {
                 header: {
                     label: {
                         color: {
-                            version: '0.22',
-                            comment: 'Neutral light color',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-N)',
                             attributes: {
                                 category: 'text-field',
                                 type: 'state-default',
@@ -3089,9 +2853,7 @@ export const DESIGN_TOKENS = {
                 },
                 input: {
                     'background-color': {
-                        version: '0.22',
-                        comment: 'Base light color with 10% opacity',
-                        value: '#fff',
+                        value: 'var(--lumx-color-light-L6)',
                         attributes: {
                             category: 'text-field',
                             type: 'state-default',
@@ -3099,9 +2861,7 @@ export const DESIGN_TOKENS = {
                         },
                     },
                     'border-color': {
-                        version: '0.22',
-                        comment: 'Base light color with 40% opacity',
-                        value: '#fff',
+                        value: 'var(--lumx-color-light-L4)',
                         attributes: {
                             category: 'text-field',
                             type: 'state-default',
@@ -3110,9 +2870,7 @@ export const DESIGN_TOKENS = {
                     },
                     content: {
                         color: {
-                            version: '0.22',
-                            comment: 'Neutral light color',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-N)',
                             attributes: {
                                 category: 'text-field',
                                 type: 'state-default',
@@ -3122,9 +2880,7 @@ export const DESIGN_TOKENS = {
                     },
                     placeholder: {
                         color: {
-                            version: '0.22',
-                            comment: 'Base light color with 80% opacity',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-L2)',
                             attributes: {
                                 category: 'text-field',
                                 type: 'state-default',
@@ -3183,9 +2939,7 @@ export const DESIGN_TOKENS = {
             'theme-light': {
                 input: {
                     'background-color': {
-                        version: '0.22',
-                        comment: 'Base dark color with 12% opacity',
-                        value: '#000000',
+                        value: 'var(--lumx-color-dark-L5)',
                         attributes: {
                             category: 'text-field',
                             type: 'state-hover',
@@ -3193,9 +2947,7 @@ export const DESIGN_TOKENS = {
                         },
                     },
                     'border-color': {
-                        version: '0.22',
-                        comment: 'Base dark color with 20% opacity',
-                        value: '#000000',
+                        value: 'var(--lumx-color-dark-L4)',
                         attributes: {
                             category: 'text-field',
                             type: 'state-hover',
@@ -3204,9 +2956,7 @@ export const DESIGN_TOKENS = {
                     },
                     content: {
                         color: {
-                            version: '0.22',
-                            comment: 'Neutral dark color',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-N)',
                             attributes: {
                                 category: 'text-field',
                                 type: 'state-hover',
@@ -3216,9 +2966,7 @@ export const DESIGN_TOKENS = {
                     },
                     placeholder: {
                         color: {
-                            version: '0.22',
-                            comment: 'Base dark color with 54% opacity',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-L2)',
                             attributes: {
                                 category: 'text-field',
                                 type: 'state-hover',
@@ -3231,9 +2979,7 @@ export const DESIGN_TOKENS = {
             'theme-dark': {
                 input: {
                     'background-color': {
-                        version: '0.22',
-                        comment: 'Base light color with 20% opacity',
-                        value: '#fff',
+                        value: 'var(--lumx-color-light-L5)',
                         attributes: {
                             category: 'text-field',
                             type: 'state-hover',
@@ -3241,9 +2987,7 @@ export const DESIGN_TOKENS = {
                         },
                     },
                     'border-color': {
-                        version: '0.22',
-                        comment: 'Base light color with 40% opacity',
-                        value: '#fff',
+                        value: 'var(--lumx-color-light-L4)',
                         attributes: {
                             category: 'text-field',
                             type: 'state-hover',
@@ -3252,9 +2996,7 @@ export const DESIGN_TOKENS = {
                     },
                     content: {
                         color: {
-                            version: '0.22',
-                            comment: 'Neutral light color',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-N)',
                             attributes: {
                                 category: 'text-field',
                                 type: 'state-hover',
@@ -3264,9 +3006,7 @@ export const DESIGN_TOKENS = {
                     },
                     placeholder: {
                         color: {
-                            version: '0.22',
-                            comment: 'Base light color with 80% opacity',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-L2)',
                             attributes: {
                                 category: 'text-field',
                                 type: 'state-hover',
@@ -3326,9 +3066,7 @@ export const DESIGN_TOKENS = {
                 header: {
                     label: {
                         color: {
-                            version: '0.22',
-                            comment: 'Neutral dark color',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-N)',
                             attributes: {
                                 category: 'text-field',
                                 type: 'state-focus',
@@ -3339,9 +3077,7 @@ export const DESIGN_TOKENS = {
                 },
                 input: {
                     'background-color': {
-                        version: '0.22',
-                        comment: 'Neutral light color',
-                        value: '#fff',
+                        value: 'var(--lumx-color-light-N)',
                         attributes: {
                             category: 'text-field',
                             type: 'state-focus',
@@ -3349,9 +3085,7 @@ export const DESIGN_TOKENS = {
                         },
                     },
                     'border-color': {
-                        version: '0.22',
-                        comment: 'Base blue color with 60% opacity',
-                        value: '#2196f3',
+                        value: 'var(--lumx-color-primary-L2)',
                         attributes: {
                             category: 'text-field',
                             type: 'state-focus',
@@ -3360,9 +3094,7 @@ export const DESIGN_TOKENS = {
                     },
                     content: {
                         color: {
-                            version: '0.22',
-                            comment: 'Neutral dark color',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-N)',
                             attributes: {
                                 category: 'text-field',
                                 type: 'state-focus',
@@ -3372,9 +3104,7 @@ export const DESIGN_TOKENS = {
                     },
                     placeholder: {
                         color: {
-                            version: '0.22',
-                            comment: 'Base dark color with 54% opacity',
-                            value: '#000000',
+                            value: 'var(--lumx-color-dark-L2)',
                             attributes: {
                                 category: 'text-field',
                                 type: 'state-focus',
@@ -3388,9 +3118,7 @@ export const DESIGN_TOKENS = {
                 header: {
                     label: {
                         color: {
-                            version: '0.22',
-                            comment: 'Neutral light color',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-N)',
                             attributes: {
                                 category: 'text-field',
                                 type: 'state-focus',
@@ -3409,9 +3137,7 @@ export const DESIGN_TOKENS = {
                         },
                     },
                     'border-color': {
-                        version: '0.22',
-                        comment: 'Base light color with 80% opacity',
-                        value: '#fff',
+                        value: 'var(--lumx-color-light-L2)',
                         attributes: {
                             category: 'text-field',
                             type: 'state-focus',
@@ -3420,9 +3146,7 @@ export const DESIGN_TOKENS = {
                     },
                     content: {
                         color: {
-                            version: '0.22',
-                            comment: 'Neutral light color',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-N)',
                             attributes: {
                                 category: 'text-field',
                                 type: 'state-focus',
@@ -3432,9 +3156,7 @@ export const DESIGN_TOKENS = {
                     },
                     placeholder: {
                         color: {
-                            version: '0.22',
-                            comment: 'Base light color with 80% opacity',
-                            value: '#fff',
+                            value: 'var(--lumx-color-light-L2)',
                             attributes: {
                                 category: 'text-field',
                                 type: 'state-focus',

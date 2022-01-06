@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Thu, 16 Dec 2021 09:34:25 GMT
+ * Generated on Thu, 06 Jan 2022 09:15:29 GMT
  */
 
 $lumx-button-height: 36px !default;
@@ -8,203 +8,98 @@ $lumx-button-border-radius: var(--lumx-border-radius) !default;
 $lumx-button-emphasis-high-state-default-padding-horizontal: 16px !default;
 $lumx-button-emphasis-high-state-default-border-width: 0 !default;
 $lumx-button-emphasis-high-state-default-theme-light-background-color: var(--lumx-color-primary-N) !default;
-$lumx-button-emphasis-high-state-default-theme-light-color: #fff !default; // Neutral light color
+$lumx-button-emphasis-high-state-default-theme-light-color: var(--lumx-color-light-N) !default;
 $lumx-button-emphasis-high-state-default-theme-light-border-color: transparent !default;
-$lumx-button-emphasis-high-state-default-theme-dark-background-color: #fff !default; // Neutral light color
+$lumx-button-emphasis-high-state-default-theme-dark-background-color: var(--lumx-color-light-N) !default;
 $lumx-button-emphasis-high-state-default-theme-dark-color: var(--lumx-color-primary-N) !default;
 $lumx-button-emphasis-high-state-default-theme-dark-border-color: transparent !default;
 $lumx-button-emphasis-high-state-hover-padding-horizontal: 16px !default;
 $lumx-button-emphasis-high-state-hover-border-width: 0 !default;
 $lumx-button-emphasis-high-state-hover-theme-light-background-color: var(--lumx-color-primary-D1) !default;
-$lumx-button-emphasis-high-state-hover-theme-light-color: #fff !default; // Neutral light color
+$lumx-button-emphasis-high-state-hover-theme-light-color: var(--lumx-color-light-N) !default;
 $lumx-button-emphasis-high-state-hover-theme-light-border-color: transparent !default;
-$lumx-button-emphasis-high-state-hover-theme-dark-background-color: rgba(
-    255,
-    255,
-    255,
-    0.9
-) !default; // Base light color with 90% opacity
+$lumx-button-emphasis-high-state-hover-theme-dark-background-color: var(--lumx-color-light-L1) !default;
 $lumx-button-emphasis-high-state-hover-theme-dark-color: var(--lumx-color-primary-N) !default;
 $lumx-button-emphasis-high-state-hover-theme-dark-border-color: transparent !default;
 $lumx-button-emphasis-high-state-active-padding-horizontal: 16px !default;
 $lumx-button-emphasis-high-state-active-border-width: 0 !default;
 $lumx-button-emphasis-high-state-active-theme-light-background-color: var(--lumx-color-primary-D2) !default;
-$lumx-button-emphasis-high-state-active-theme-light-color: #fff !default; // Neutral light color
+$lumx-button-emphasis-high-state-active-theme-light-color: var(--lumx-color-light-N) !default;
 $lumx-button-emphasis-high-state-active-theme-light-border-color: transparent !default;
-$lumx-button-emphasis-high-state-active-theme-dark-background-color: rgba(
-    255,
-    255,
-    255,
-    0.8
-) !default; // Base light color with 80% opacity
+$lumx-button-emphasis-high-state-active-theme-dark-background-color: var(--lumx-color-light-L2) !default;
 $lumx-button-emphasis-high-state-active-theme-dark-color: var(--lumx-color-primary-N) !default;
 $lumx-button-emphasis-high-state-active-theme-dark-border-color: transparent !default;
 $lumx-button-emphasis-medium-state-default-padding-horizontal: 16px !default;
 $lumx-button-emphasis-medium-state-default-border-width: 0 !default;
-$lumx-button-emphasis-medium-state-default-theme-light-background-color: rgba(
-    0,
-    0,
-    0,
-    0.12
-) !default; // Base dark color with 12% opacity
-$lumx-button-emphasis-medium-state-default-theme-light-color: rgba(
-    0,
-    0,
-    0,
-    0.7
-) !default; // Base dark color with 70% opacity
+$lumx-button-emphasis-medium-state-default-theme-light-background-color: var(--lumx-color-dark-L5) !default;
+$lumx-button-emphasis-medium-state-default-theme-light-color: var(--lumx-color-dark-L1) !default;
 $lumx-button-emphasis-medium-state-default-theme-light-border-color: transparent !default;
-$lumx-button-emphasis-medium-state-default-theme-dark-background-color: rgba(
-    255,
-    255,
-    255,
-    0.2
-) !default; // Base light color with 20% opacity
-$lumx-button-emphasis-medium-state-default-theme-dark-color: #fff !default; // Neutral light color
+$lumx-button-emphasis-medium-state-default-theme-dark-background-color: var(--lumx-color-light-L5) !default;
+$lumx-button-emphasis-medium-state-default-theme-dark-color: var(--lumx-color-light-N) !default;
 $lumx-button-emphasis-medium-state-default-theme-dark-border-color: transparent !default;
 $lumx-button-emphasis-medium-state-hover-padding-horizontal: 16px !default;
 $lumx-button-emphasis-medium-state-hover-border-width: 0 !default;
-$lumx-button-emphasis-medium-state-hover-theme-light-background-color: rgba(
-    0,
-    0,
-    0,
-    0.2
-) !default; // Base dark color with 20% opacity
-$lumx-button-emphasis-medium-state-hover-theme-light-color: rgba(
-    0,
-    0,
-    0,
-    0.7
-) !default; // Base dark color with 70% opacity
+$lumx-button-emphasis-medium-state-hover-theme-light-background-color: var(--lumx-color-dark-L4) !default;
+$lumx-button-emphasis-medium-state-hover-theme-light-color: var(--lumx-color-dark-L1) !default;
 $lumx-button-emphasis-medium-state-hover-theme-light-border-color: transparent !default;
-$lumx-button-emphasis-medium-state-hover-theme-dark-background-color: rgba(
-    255,
-    255,
-    255,
-    0.4
-) !default; // Base light color with 40% opacity
-$lumx-button-emphasis-medium-state-hover-theme-dark-color: #fff !default; // Neutral light color
+$lumx-button-emphasis-medium-state-hover-theme-dark-background-color: var(--lumx-color-light-L4) !default;
+$lumx-button-emphasis-medium-state-hover-theme-dark-color: var(--lumx-color-light-N) !default;
 $lumx-button-emphasis-medium-state-hover-theme-dark-border-color: transparent !default;
 $lumx-button-emphasis-medium-state-active-padding-horizontal: 16px !default;
 $lumx-button-emphasis-medium-state-active-border-width: 0 !default;
-$lumx-button-emphasis-medium-state-active-theme-light-background-color: rgba(
-    0,
-    0,
-    0,
-    0.38
-) !default; // Base dark color with 38% opacity
-$lumx-button-emphasis-medium-state-active-theme-light-color: rgba(
-    0,
-    0,
-    0,
-    0.7
-) !default; // Base dark color with 70% opacity
+$lumx-button-emphasis-medium-state-active-theme-light-background-color: var(--lumx-color-dark-L3) !default;
+$lumx-button-emphasis-medium-state-active-theme-light-color: var(--lumx-color-dark-L1) !default;
 $lumx-button-emphasis-medium-state-active-theme-light-border-color: transparent !default;
-$lumx-button-emphasis-medium-state-active-theme-dark-background-color: rgba(
-    255,
-    255,
-    255,
-    0.6
-) !default; // Base light color with 60% opacity
-$lumx-button-emphasis-medium-state-active-theme-dark-color: #fff !default; // Neutral light color
+$lumx-button-emphasis-medium-state-active-theme-dark-background-color: var(--lumx-color-light-L3) !default;
+$lumx-button-emphasis-medium-state-active-theme-dark-color: var(--lumx-color-light-N) !default;
 $lumx-button-emphasis-medium-state-active-theme-dark-border-color: transparent !default;
 $lumx-button-emphasis-low-state-default-padding-horizontal: 8px !default;
 $lumx-button-emphasis-low-state-default-border-width: 0 !default;
 $lumx-button-emphasis-low-state-default-theme-light-background-color: transparent !default;
-$lumx-button-emphasis-low-state-default-theme-light-color: rgba(
-    0,
-    0,
-    0,
-    0.7
-) !default; // Base dark color with 70% opacity
+$lumx-button-emphasis-low-state-default-theme-light-color: var(--lumx-color-dark-L1) !default;
 $lumx-button-emphasis-low-state-default-theme-light-border-color: transparent !default;
 $lumx-button-emphasis-low-state-default-theme-dark-background-color: transparent !default;
-$lumx-button-emphasis-low-state-default-theme-dark-color: #fff !default; // Neutral light color
+$lumx-button-emphasis-low-state-default-theme-dark-color: var(--lumx-color-light-N) !default;
 $lumx-button-emphasis-low-state-default-theme-dark-border-color: transparent !default;
 $lumx-button-emphasis-low-state-hover-padding-horizontal: 8px !default;
 $lumx-button-emphasis-low-state-hover-border-width: 0 !default;
-$lumx-button-emphasis-low-state-hover-theme-light-background-color: rgba(
-    0,
-    0,
-    0,
-    0.12
-) !default; // Base dark color with 12% opacity
-$lumx-button-emphasis-low-state-hover-theme-light-color: rgba(
-    0,
-    0,
-    0,
-    0.7
-) !default; // Base dark color with 70% opacity
+$lumx-button-emphasis-low-state-hover-theme-light-background-color: var(--lumx-color-dark-L5) !default;
+$lumx-button-emphasis-low-state-hover-theme-light-color: var(--lumx-color-dark-L1) !default;
 $lumx-button-emphasis-low-state-hover-theme-light-border-color: transparent !default;
-$lumx-button-emphasis-low-state-hover-theme-dark-background-color: rgba(
-    255,
-    255,
-    255,
-    0.2
-) !default; // Base light color with 20% opacity
-$lumx-button-emphasis-low-state-hover-theme-dark-color: #fff !default; // Neutral light color
+$lumx-button-emphasis-low-state-hover-theme-dark-background-color: var(--lumx-color-light-L5) !default;
+$lumx-button-emphasis-low-state-hover-theme-dark-color: var(--lumx-color-light-N) !default;
 $lumx-button-emphasis-low-state-hover-theme-dark-border-color: transparent !default;
 $lumx-button-emphasis-low-state-active-padding-horizontal: 8px !default;
 $lumx-button-emphasis-low-state-active-border-width: 0 !default;
-$lumx-button-emphasis-low-state-active-theme-light-background-color: rgba(
-    0,
-    0,
-    0,
-    0.2
-) !default; // Base dark color with 20% opacity
-$lumx-button-emphasis-low-state-active-theme-light-color: rgba(
-    0,
-    0,
-    0,
-    0.7
-) !default; // Base dark color with 70% opacity
+$lumx-button-emphasis-low-state-active-theme-light-background-color: var(--lumx-color-dark-L4) !default;
+$lumx-button-emphasis-low-state-active-theme-light-color: var(--lumx-color-dark-L1) !default;
 $lumx-button-emphasis-low-state-active-theme-light-border-color: transparent !default;
-$lumx-button-emphasis-low-state-active-theme-dark-background-color: rgba(
-    255,
-    255,
-    255,
-    0.4
-) !default; // Base light color with 40% opacity
-$lumx-button-emphasis-low-state-active-theme-dark-color: #fff !default; // Neutral light color
+$lumx-button-emphasis-low-state-active-theme-dark-background-color: var(--lumx-color-light-L4) !default;
+$lumx-button-emphasis-low-state-active-theme-dark-color: var(--lumx-color-light-N) !default;
 $lumx-button-emphasis-low-state-active-theme-dark-border-color: transparent !default;
 $lumx-button-emphasis-selected-state-default-padding-horizontal: 16px !default;
 $lumx-button-emphasis-selected-state-default-border-width: 0 !default;
 $lumx-button-emphasis-selected-state-default-theme-light-background-color: var(--lumx-color-primary-L5) !default;
 $lumx-button-emphasis-selected-state-default-theme-light-color: var(--lumx-color-primary-D2) !default;
 $lumx-button-emphasis-selected-state-default-theme-light-border-color: transparent !default;
-$lumx-button-emphasis-selected-state-default-theme-dark-background-color: rgba(
-    255,
-    255,
-    255,
-    0.6
-) !default; // Base light color with 60% opacity
-$lumx-button-emphasis-selected-state-default-theme-dark-color: #fff !default; // Neutral light color
+$lumx-button-emphasis-selected-state-default-theme-dark-background-color: var(--lumx-color-light-L3) !default;
+$lumx-button-emphasis-selected-state-default-theme-dark-color: var(--lumx-color-light-N) !default;
 $lumx-button-emphasis-selected-state-default-theme-dark-border-color: transparent !default;
 $lumx-button-emphasis-selected-state-hover-padding-horizontal: 16px !default;
 $lumx-button-emphasis-selected-state-hover-border-width: 0 !default;
 $lumx-button-emphasis-selected-state-hover-theme-light-background-color: var(--lumx-color-primary-L4) !default;
 $lumx-button-emphasis-selected-state-hover-theme-light-color: var(--lumx-color-primary-D2) !default;
 $lumx-button-emphasis-selected-state-hover-theme-light-border-color: transparent !default;
-$lumx-button-emphasis-selected-state-hover-theme-dark-background-color: rgba(
-    255,
-    255,
-    255,
-    0.4
-) !default; // Base light color with 40% opacity
-$lumx-button-emphasis-selected-state-hover-theme-dark-color: #fff !default; // Neutral light color
+$lumx-button-emphasis-selected-state-hover-theme-dark-background-color: var(--lumx-color-light-L4) !default;
+$lumx-button-emphasis-selected-state-hover-theme-dark-color: var(--lumx-color-light-N) !default;
 $lumx-button-emphasis-selected-state-hover-theme-dark-border-color: transparent !default;
 $lumx-button-emphasis-selected-state-active-padding-horizontal: 16px !default;
 $lumx-button-emphasis-selected-state-active-border-width: 0 !default;
 $lumx-button-emphasis-selected-state-active-theme-light-background-color: var(--lumx-color-primary-L3) !default;
 $lumx-button-emphasis-selected-state-active-theme-light-color: var(--lumx-color-primary-D2) !default;
 $lumx-button-emphasis-selected-state-active-theme-light-border-color: transparent !default;
-$lumx-button-emphasis-selected-state-active-theme-dark-background-color: rgba(
-    255,
-    255,
-    255,
-    0.2
-) !default; // Base light color with 20% opacity
-$lumx-button-emphasis-selected-state-active-theme-dark-color: #fff !default; // Neutral light color
+$lumx-button-emphasis-selected-state-active-theme-dark-background-color: var(--lumx-color-light-L5) !default;
+$lumx-button-emphasis-selected-state-active-theme-dark-color: var(--lumx-color-light-N) !default;
 $lumx-button-emphasis-selected-state-active-theme-dark-border-color: transparent !default;
 $lumx-material-button-text-transform: none !default;
 $lumx-material-checkbox-wrapper-size: 20px !default;
@@ -249,164 +144,53 @@ $lumx-navigation-item-emphasis-low-state-default-border-right-width: 0 !default;
 $lumx-navigation-item-emphasis-low-state-default-border-bottom-width: 0 !default;
 $lumx-navigation-item-emphasis-low-state-default-border-left-width: 0 !default;
 $lumx-navigation-item-emphasis-low-state-default-theme-light-background-color: transparent !default;
-$lumx-navigation-item-emphasis-low-state-default-theme-light-border-color: rgba(
-    0,
-    0,
-    0,
-    0.12
-) !default; // Base dark color with 12% opacity
-$lumx-navigation-item-emphasis-low-state-default-theme-light-icon-color: rgba(
-    0,
-    0,
-    0,
-    0.7
-) !default; // Base dark color with 70% opacity
-$lumx-navigation-item-emphasis-low-state-default-theme-light-label-color: rgba(
-    0,
-    0,
-    0,
-    0.87
-) !default; // Neutral dark color
+$lumx-navigation-item-emphasis-low-state-default-theme-light-border-color: var(--lumx-color-dark-L5) !default;
+$lumx-navigation-item-emphasis-low-state-default-theme-light-icon-color: var(--lumx-color-dark-L1) !default;
+$lumx-navigation-item-emphasis-low-state-default-theme-light-label-color: var(--lumx-color-dark-N) !default;
 $lumx-navigation-item-emphasis-low-state-default-theme-light-chevron-background-color: transparent !default;
-$lumx-navigation-item-emphasis-low-state-default-theme-light-chevron-color: rgba(
-    0,
-    0,
-    0,
-    0.7
-) !default; // Base dark color with 70% opacity
+$lumx-navigation-item-emphasis-low-state-default-theme-light-chevron-color: var(--lumx-color-dark-L1) !default;
 $lumx-navigation-item-emphasis-low-state-default-theme-dark-background-color: transparent !default;
-$lumx-navigation-item-emphasis-low-state-default-theme-dark-border-color: rgba(
-    255,
-    255,
-    255,
-    0.2
-) !default; // Base light color with 20% opacity
-$lumx-navigation-item-emphasis-low-state-default-theme-dark-icon-color: #fff !default; // Neutral light color
-$lumx-navigation-item-emphasis-low-state-default-theme-dark-label-color: #fff !default; // Neutral light color
+$lumx-navigation-item-emphasis-low-state-default-theme-dark-border-color: var(--lumx-color-light-L5) !default;
+$lumx-navigation-item-emphasis-low-state-default-theme-dark-icon-color: var(--lumx-color-light-N) !default;
+$lumx-navigation-item-emphasis-low-state-default-theme-dark-label-color: var(--lumx-color-light-N) !default;
 $lumx-navigation-item-emphasis-low-state-default-theme-dark-chevron-background-color: transparent !default;
-$lumx-navigation-item-emphasis-low-state-default-theme-dark-chevron-color: #fff !default; // Neutral light color
+$lumx-navigation-item-emphasis-low-state-default-theme-dark-chevron-color: var(--lumx-color-light-N) !default;
 $lumx-navigation-item-emphasis-low-state-hover-border-top-width: 0 !default;
 $lumx-navigation-item-emphasis-low-state-hover-border-right-width: 0 !default;
 $lumx-navigation-item-emphasis-low-state-hover-border-bottom-width: 0 !default;
 $lumx-navigation-item-emphasis-low-state-hover-border-left-width: 0 !default;
-$lumx-navigation-item-emphasis-low-state-hover-theme-light-background-color: rgba(
-    0,
-    0,
-    0,
-    0.12
-) !default; // Base dark color with 12% opacity
-$lumx-navigation-item-emphasis-low-state-hover-theme-light-border-color: rgba(
-    0,
-    0,
-    0,
-    0.12
-) !default; // Base dark color with 12% opacity
-$lumx-navigation-item-emphasis-low-state-hover-theme-light-icon-color: rgba(
-    0,
-    0,
-    0,
-    0.7
-) !default; // Base dark color with 70% opacity
-$lumx-navigation-item-emphasis-low-state-hover-theme-light-label-color: rgba(
-    0,
-    0,
-    0,
-    0.87
-) !default; // Neutral dark color
-$lumx-navigation-item-emphasis-low-state-hover-theme-light-chevron-background-color: rgba(
-    0,
-    0,
-    0,
-    0.12
-) !default; // Base dark color with 12% opacity
-$lumx-navigation-item-emphasis-low-state-hover-theme-light-chevron-color: rgba(
-    0,
-    0,
-    0,
-    0.7
-) !default; // Base dark color with 70% opacity
-$lumx-navigation-item-emphasis-low-state-hover-theme-dark-background-color: rgba(
-    255,
-    255,
-    255,
-    0.2
-) !default; // Base light color with 20% opacity
-$lumx-navigation-item-emphasis-low-state-hover-theme-dark-border-color: rgba(
-    255,
-    255,
-    255,
-    0.2
-) !default; // Base light color with 20% opacity
-$lumx-navigation-item-emphasis-low-state-hover-theme-dark-icon-color: #fff !default; // Neutral light color
-$lumx-navigation-item-emphasis-low-state-hover-theme-dark-label-color: #fff !default; // Neutral light color
-$lumx-navigation-item-emphasis-low-state-hover-theme-dark-chevron-background-color: rgba(
-    255,
-    255,
-    255,
-    0.2
-) !default; // Base light color with 20% opacity
-$lumx-navigation-item-emphasis-low-state-hover-theme-dark-chevron-color: #fff !default; // Neutral light color
+$lumx-navigation-item-emphasis-low-state-hover-theme-light-background-color: var(--lumx-color-dark-L5) !default;
+$lumx-navigation-item-emphasis-low-state-hover-theme-light-border-color: var(--lumx-color-dark-L5) !default;
+$lumx-navigation-item-emphasis-low-state-hover-theme-light-icon-color: var(--lumx-color-dark-L1) !default;
+$lumx-navigation-item-emphasis-low-state-hover-theme-light-label-color: var(--lumx-color-dark-N) !default;
+$lumx-navigation-item-emphasis-low-state-hover-theme-light-chevron-background-color: var(--lumx-color-dark-L5) !default;
+$lumx-navigation-item-emphasis-low-state-hover-theme-light-chevron-color: var(--lumx-color-dark-L1) !default;
+$lumx-navigation-item-emphasis-low-state-hover-theme-dark-background-color: var(--lumx-color-light-L5) !default;
+$lumx-navigation-item-emphasis-low-state-hover-theme-dark-border-color: var(--lumx-color-light-L5) !default;
+$lumx-navigation-item-emphasis-low-state-hover-theme-dark-icon-color: var(--lumx-color-light-N) !default;
+$lumx-navigation-item-emphasis-low-state-hover-theme-dark-label-color: var(--lumx-color-light-N) !default;
+$lumx-navigation-item-emphasis-low-state-hover-theme-dark-chevron-background-color: var(--lumx-color-light-L5) !default;
+$lumx-navigation-item-emphasis-low-state-hover-theme-dark-chevron-color: var(--lumx-color-light-N) !default;
 $lumx-navigation-item-emphasis-low-state-active-border-top-width: 0 !default;
 $lumx-navigation-item-emphasis-low-state-active-border-right-width: 0 !default;
 $lumx-navigation-item-emphasis-low-state-active-border-bottom-width: 0 !default;
 $lumx-navigation-item-emphasis-low-state-active-border-left-width: 0 !default;
-$lumx-navigation-item-emphasis-low-state-active-theme-light-background-color: rgba(
-    0,
-    0,
-    0,
-    0.2
-) !default; // Base dark color with 20% opacity
-$lumx-navigation-item-emphasis-low-state-active-theme-light-border-color: rgba(
-    0,
-    0,
-    0,
-    0.12
-) !default; // Base dark color with 12% opacity
-$lumx-navigation-item-emphasis-low-state-active-theme-light-icon-color: rgba(
-    0,
-    0,
-    0,
-    0.7
-) !default; // Base dark color with 70% opacity
-$lumx-navigation-item-emphasis-low-state-active-theme-light-label-color: rgba(
-    0,
-    0,
-    0,
-    0.87
-) !default; // Neutral dark color
-$lumx-navigation-item-emphasis-low-state-active-theme-light-chevron-background-color: rgba(
-    0,
-    0,
-    0,
-    0.2
-) !default; // Base dark color with 20% opacity
-$lumx-navigation-item-emphasis-low-state-active-theme-light-chevron-color: rgba(
-    0,
-    0,
-    0,
-    0.7
-) !default; // Base dark color with 70% opacity
-$lumx-navigation-item-emphasis-low-state-active-theme-dark-background-color: rgba(
-    255,
-    255,
-    255,
-    0.4
-) !default; // Base light color with 40% opacity
-$lumx-navigation-item-emphasis-low-state-active-theme-dark-border-color: rgba(
-    255,
-    255,
-    255,
-    0.2
-) !default; // Base light color with 20% opacity
-$lumx-navigation-item-emphasis-low-state-active-theme-dark-icon-color: #fff !default; // Neutral light color
-$lumx-navigation-item-emphasis-low-state-active-theme-dark-label-color: #fff !default; // Neutral light color
-$lumx-navigation-item-emphasis-low-state-active-theme-dark-chevron-background-color: rgba(
-    255,
-    255,
-    255,
-    0.4
-) !default; // Base light color with 40% opacity
-$lumx-navigation-item-emphasis-low-state-active-theme-dark-chevron-color: #fff !default; // Neutral light color
+$lumx-navigation-item-emphasis-low-state-active-theme-light-background-color: var(--lumx-color-dark-L4) !default;
+$lumx-navigation-item-emphasis-low-state-active-theme-light-border-color: var(--lumx-color-dark-L5) !default;
+$lumx-navigation-item-emphasis-low-state-active-theme-light-icon-color: var(--lumx-color-dark-L1) !default;
+$lumx-navigation-item-emphasis-low-state-active-theme-light-label-color: var(--lumx-color-dark-N) !default;
+$lumx-navigation-item-emphasis-low-state-active-theme-light-chevron-background-color: var(
+    --lumx-color-dark-L4
+) !default;
+$lumx-navigation-item-emphasis-low-state-active-theme-light-chevron-color: var(--lumx-color-dark-L1) !default;
+$lumx-navigation-item-emphasis-low-state-active-theme-dark-background-color: var(--lumx-color-light-L4) !default;
+$lumx-navigation-item-emphasis-low-state-active-theme-dark-border-color: var(--lumx-color-light-L5) !default;
+$lumx-navigation-item-emphasis-low-state-active-theme-dark-icon-color: var(--lumx-color-light-N) !default;
+$lumx-navigation-item-emphasis-low-state-active-theme-dark-label-color: var(--lumx-color-light-N) !default;
+$lumx-navigation-item-emphasis-low-state-active-theme-dark-chevron-background-color: var(
+    --lumx-color-light-L4
+) !default;
+$lumx-navigation-item-emphasis-low-state-active-theme-dark-chevron-color: var(--lumx-color-light-N) !default;
 $lumx-navigation-item-emphasis-selected-state-default-border-top-width: 0 !default;
 $lumx-navigation-item-emphasis-selected-state-default-border-right-width: 0 !default;
 $lumx-navigation-item-emphasis-selected-state-default-border-bottom-width: 0 !default;
@@ -419,22 +203,12 @@ $lumx-navigation-item-emphasis-selected-state-default-theme-light-icon-color: va
 $lumx-navigation-item-emphasis-selected-state-default-theme-light-label-color: var(--lumx-color-primary-D2) !default;
 $lumx-navigation-item-emphasis-selected-state-default-theme-light-chevron-background-color: transparent !default;
 $lumx-navigation-item-emphasis-selected-state-default-theme-light-chevron-color: var(--lumx-color-primary-D2) !default;
-$lumx-navigation-item-emphasis-selected-state-default-theme-dark-background-color: rgba(
-    255,
-    255,
-    255,
-    0.6
-) !default; // Base light color with 60% opacity
-$lumx-navigation-item-emphasis-selected-state-default-theme-dark-border-color: rgba(
-    255,
-    255,
-    255,
-    0.2
-) !default; // Base light color with 20% opacity
-$lumx-navigation-item-emphasis-selected-state-default-theme-dark-icon-color: #fff !default; // Neutral light color
-$lumx-navigation-item-emphasis-selected-state-default-theme-dark-label-color: #fff !default; // Neutral light color
+$lumx-navigation-item-emphasis-selected-state-default-theme-dark-background-color: var(--lumx-color-light-L3) !default;
+$lumx-navigation-item-emphasis-selected-state-default-theme-dark-border-color: var(--lumx-color-light-L5) !default;
+$lumx-navigation-item-emphasis-selected-state-default-theme-dark-icon-color: var(--lumx-color-light-N) !default;
+$lumx-navigation-item-emphasis-selected-state-default-theme-dark-label-color: var(--lumx-color-light-N) !default;
 $lumx-navigation-item-emphasis-selected-state-default-theme-dark-chevron-background-color: transparent !default;
-$lumx-navigation-item-emphasis-selected-state-default-theme-dark-chevron-color: #fff !default; // Neutral light color
+$lumx-navigation-item-emphasis-selected-state-default-theme-dark-chevron-color: var(--lumx-color-light-N) !default;
 $lumx-navigation-item-emphasis-selected-state-hover-border-top-width: 0 !default;
 $lumx-navigation-item-emphasis-selected-state-hover-border-right-width: 0 !default;
 $lumx-navigation-item-emphasis-selected-state-hover-border-bottom-width: 0 !default;
@@ -447,27 +221,14 @@ $lumx-navigation-item-emphasis-selected-state-hover-theme-light-chevron-backgrou
     --lumx-color-primary-L4
 ) !default;
 $lumx-navigation-item-emphasis-selected-state-hover-theme-light-chevron-color: var(--lumx-color-primary-D2) !default;
-$lumx-navigation-item-emphasis-selected-state-hover-theme-dark-background-color: rgba(
-    255,
-    255,
-    255,
-    0.4
-) !default; // Base light color with 40% opacity
-$lumx-navigation-item-emphasis-selected-state-hover-theme-dark-border-color: rgba(
-    255,
-    255,
-    255,
-    0.2
-) !default; // Base light color with 20% opacity
-$lumx-navigation-item-emphasis-selected-state-hover-theme-dark-icon-color: #fff !default; // Neutral light color
-$lumx-navigation-item-emphasis-selected-state-hover-theme-dark-label-color: #fff !default; // Neutral light color
-$lumx-navigation-item-emphasis-selected-state-hover-theme-dark-chevron-background-color: rgba(
-    255,
-    255,
-    255,
-    0.4
-) !default; // Base light color with 40% opacity
-$lumx-navigation-item-emphasis-selected-state-hover-theme-dark-chevron-color: #fff !default; // Neutral light color
+$lumx-navigation-item-emphasis-selected-state-hover-theme-dark-background-color: var(--lumx-color-light-L4) !default;
+$lumx-navigation-item-emphasis-selected-state-hover-theme-dark-border-color: var(--lumx-color-light-L5) !default;
+$lumx-navigation-item-emphasis-selected-state-hover-theme-dark-icon-color: var(--lumx-color-light-N) !default;
+$lumx-navigation-item-emphasis-selected-state-hover-theme-dark-label-color: var(--lumx-color-light-N) !default;
+$lumx-navigation-item-emphasis-selected-state-hover-theme-dark-chevron-background-color: var(
+    --lumx-color-light-L4
+) !default;
+$lumx-navigation-item-emphasis-selected-state-hover-theme-dark-chevron-color: var(--lumx-color-light-N) !default;
 $lumx-navigation-item-emphasis-selected-state-active-border-top-width: 0 !default;
 $lumx-navigation-item-emphasis-selected-state-active-border-right-width: 0 !default;
 $lumx-navigation-item-emphasis-selected-state-active-border-bottom-width: 0 !default;
@@ -482,27 +243,14 @@ $lumx-navigation-item-emphasis-selected-state-active-theme-light-chevron-backgro
     --lumx-color-primary-L3
 ) !default;
 $lumx-navigation-item-emphasis-selected-state-active-theme-light-chevron-color: var(--lumx-color-primary-D2) !default;
-$lumx-navigation-item-emphasis-selected-state-active-theme-dark-background-color: rgba(
-    255,
-    255,
-    255,
-    0.2
-) !default; // Base light color with 20% opacity
-$lumx-navigation-item-emphasis-selected-state-active-theme-dark-border-color: rgba(
-    255,
-    255,
-    255,
-    0.2
-) !default; // Base light color with 20% opacity
-$lumx-navigation-item-emphasis-selected-state-active-theme-dark-icon-color: #fff !default; // Neutral light color
-$lumx-navigation-item-emphasis-selected-state-active-theme-dark-label-color: #fff !default; // Neutral light color
-$lumx-navigation-item-emphasis-selected-state-active-theme-dark-chevron-background-color: rgba(
-    255,
-    255,
-    255,
-    0.2
-) !default; // Base light color with 20% opacity
-$lumx-navigation-item-emphasis-selected-state-active-theme-dark-chevron-color: #fff !default; // Neutral light color
+$lumx-navigation-item-emphasis-selected-state-active-theme-dark-background-color: var(--lumx-color-light-L5) !default;
+$lumx-navigation-item-emphasis-selected-state-active-theme-dark-border-color: var(--lumx-color-light-L5) !default;
+$lumx-navigation-item-emphasis-selected-state-active-theme-dark-icon-color: var(--lumx-color-light-N) !default;
+$lumx-navigation-item-emphasis-selected-state-active-theme-dark-label-color: var(--lumx-color-light-N) !default;
+$lumx-navigation-item-emphasis-selected-state-active-theme-dark-chevron-background-color: var(
+    --lumx-color-light-L5
+) !default;
+$lumx-navigation-item-emphasis-selected-state-active-theme-dark-chevron-color: var(--lumx-color-light-N) !default;
 $lumx-tabs-link-height: 48px !default;
 $lumx-tabs-link-border-radius: 0 !default;
 $lumx-tabs-link-emphasis-low-state-default-border-top-width: 0 !default;
@@ -510,161 +258,61 @@ $lumx-tabs-link-emphasis-low-state-default-border-right-width: 0 !default;
 $lumx-tabs-link-emphasis-low-state-default-border-bottom-width: 2px !default;
 $lumx-tabs-link-emphasis-low-state-default-border-left-width: 0 !default;
 $lumx-tabs-link-emphasis-low-state-default-theme-light-background-color: transparent !default;
-$lumx-tabs-link-emphasis-low-state-default-theme-light-color: rgba(
-    0,
-    0,
-    0,
-    0.7
-) !default; // Base dark color with 70% opacity
-$lumx-tabs-link-emphasis-low-state-default-theme-light-border-color: rgba(
-    0,
-    0,
-    0,
-    0.12
-) !default; // Base dark color with 12% opacity
+$lumx-tabs-link-emphasis-low-state-default-theme-light-color: var(--lumx-color-dark-L1) !default;
+$lumx-tabs-link-emphasis-low-state-default-theme-light-border-color: var(--lumx-color-dark-L5) !default;
 $lumx-tabs-link-emphasis-low-state-default-theme-dark-background-color: transparent !default;
-$lumx-tabs-link-emphasis-low-state-default-theme-dark-color: #fff !default; // Neutral light color
-$lumx-tabs-link-emphasis-low-state-default-theme-dark-border-color: rgba(
-    255,
-    255,
-    255,
-    0.2
-) !default; // Base light color with 20% opacity
+$lumx-tabs-link-emphasis-low-state-default-theme-dark-color: var(--lumx-color-light-N) !default;
+$lumx-tabs-link-emphasis-low-state-default-theme-dark-border-color: var(--lumx-color-light-L5) !default;
 $lumx-tabs-link-emphasis-low-state-hover-border-top-width: 0 !default;
 $lumx-tabs-link-emphasis-low-state-hover-border-right-width: 0 !default;
 $lumx-tabs-link-emphasis-low-state-hover-border-bottom-width: 2px !default;
 $lumx-tabs-link-emphasis-low-state-hover-border-left-width: 0 !default;
-$lumx-tabs-link-emphasis-low-state-hover-theme-light-background-color: rgba(
-    0,
-    0,
-    0,
-    0.12
-) !default; // Base dark color with 12% opacity
-$lumx-tabs-link-emphasis-low-state-hover-theme-light-color: rgba(
-    0,
-    0,
-    0,
-    0.7
-) !default; // Base dark color with 70% opacity
-$lumx-tabs-link-emphasis-low-state-hover-theme-light-border-color: rgba(
-    0,
-    0,
-    0,
-    0.12
-) !default; // Base dark color with 12% opacity
-$lumx-tabs-link-emphasis-low-state-hover-theme-dark-background-color: rgba(
-    255,
-    255,
-    255,
-    0.2
-) !default; // Base light color with 20% opacity
-$lumx-tabs-link-emphasis-low-state-hover-theme-dark-color: #fff !default; // Neutral light color
-$lumx-tabs-link-emphasis-low-state-hover-theme-dark-border-color: rgba(
-    255,
-    255,
-    255,
-    0.2
-) !default; // Base light color with 20% opacity
+$lumx-tabs-link-emphasis-low-state-hover-theme-light-background-color: var(--lumx-color-dark-L5) !default;
+$lumx-tabs-link-emphasis-low-state-hover-theme-light-color: var(--lumx-color-dark-L1) !default;
+$lumx-tabs-link-emphasis-low-state-hover-theme-light-border-color: var(--lumx-color-dark-L5) !default;
+$lumx-tabs-link-emphasis-low-state-hover-theme-dark-background-color: var(--lumx-color-light-L5) !default;
+$lumx-tabs-link-emphasis-low-state-hover-theme-dark-color: var(--lumx-color-light-N) !default;
+$lumx-tabs-link-emphasis-low-state-hover-theme-dark-border-color: var(--lumx-color-light-L5) !default;
 $lumx-tabs-link-emphasis-low-state-active-border-top-width: 0 !default;
 $lumx-tabs-link-emphasis-low-state-active-border-right-width: 0 !default;
 $lumx-tabs-link-emphasis-low-state-active-border-bottom-width: 2px !default;
 $lumx-tabs-link-emphasis-low-state-active-border-left-width: 0 !default;
-$lumx-tabs-link-emphasis-low-state-active-theme-light-background-color: rgba(
-    0,
-    0,
-    0,
-    0.2
-) !default; // Base dark color with 20% opacity
-$lumx-tabs-link-emphasis-low-state-active-theme-light-color: rgba(
-    0,
-    0,
-    0,
-    0.7
-) !default; // Base dark color with 70% opacity
-$lumx-tabs-link-emphasis-low-state-active-theme-light-border-color: rgba(
-    0,
-    0,
-    0,
-    0.12
-) !default; // Base dark color with 12% opacity
-$lumx-tabs-link-emphasis-low-state-active-theme-dark-background-color: rgba(
-    255,
-    255,
-    255,
-    0.4
-) !default; // Base light color with 40% opacity
-$lumx-tabs-link-emphasis-low-state-active-theme-dark-color: #fff !default; // Neutral light color
-$lumx-tabs-link-emphasis-low-state-active-theme-dark-border-color: rgba(
-    255,
-    255,
-    255,
-    0.2
-) !default; // Base light color with 20% opacity
+$lumx-tabs-link-emphasis-low-state-active-theme-light-background-color: var(--lumx-color-dark-L4) !default;
+$lumx-tabs-link-emphasis-low-state-active-theme-light-color: var(--lumx-color-dark-L1) !default;
+$lumx-tabs-link-emphasis-low-state-active-theme-light-border-color: var(--lumx-color-dark-L5) !default;
+$lumx-tabs-link-emphasis-low-state-active-theme-dark-background-color: var(--lumx-color-light-L4) !default;
+$lumx-tabs-link-emphasis-low-state-active-theme-dark-color: var(--lumx-color-light-N) !default;
+$lumx-tabs-link-emphasis-low-state-active-theme-dark-border-color: var(--lumx-color-light-L5) !default;
 $lumx-tabs-link-emphasis-selected-state-default-border-top-width: 0 !default;
 $lumx-tabs-link-emphasis-selected-state-default-border-right-width: 0 !default;
 $lumx-tabs-link-emphasis-selected-state-default-border-bottom-width: 2px !default;
 $lumx-tabs-link-emphasis-selected-state-default-border-left-width: 0 !default;
 $lumx-tabs-link-emphasis-selected-state-default-theme-light-background-color: transparent !default;
-$lumx-tabs-link-emphasis-selected-state-default-theme-light-color: rgba(
-    0,
-    0,
-    0,
-    0.7
-) !default; // Base dark color with 70% opacity
+$lumx-tabs-link-emphasis-selected-state-default-theme-light-color: var(--lumx-color-dark-L1) !default;
 $lumx-tabs-link-emphasis-selected-state-default-theme-light-border-color: var(--lumx-color-primary-N) !default;
 $lumx-tabs-link-emphasis-selected-state-default-theme-dark-background-color: transparent !default;
-$lumx-tabs-link-emphasis-selected-state-default-theme-dark-color: #fff !default; // Neutral light color
-$lumx-tabs-link-emphasis-selected-state-default-theme-dark-border-color: #fff !default; // Neutral light color
+$lumx-tabs-link-emphasis-selected-state-default-theme-dark-color: var(--lumx-color-light-N) !default;
+$lumx-tabs-link-emphasis-selected-state-default-theme-dark-border-color: var(--lumx-color-light-N) !default;
 $lumx-tabs-link-emphasis-selected-state-hover-border-top-width: 0 !default;
 $lumx-tabs-link-emphasis-selected-state-hover-border-right-width: 0 !default;
 $lumx-tabs-link-emphasis-selected-state-hover-border-bottom-width: 2px !default;
 $lumx-tabs-link-emphasis-selected-state-hover-border-left-width: 0 !default;
-$lumx-tabs-link-emphasis-selected-state-hover-theme-light-background-color: rgba(
-    0,
-    0,
-    0,
-    0.12
-) !default; // Base dark color with 12% opacity
-$lumx-tabs-link-emphasis-selected-state-hover-theme-light-color: rgba(
-    0,
-    0,
-    0,
-    0.7
-) !default; // Base dark color with 70% opacity
+$lumx-tabs-link-emphasis-selected-state-hover-theme-light-background-color: var(--lumx-color-dark-L5) !default;
+$lumx-tabs-link-emphasis-selected-state-hover-theme-light-color: var(--lumx-color-dark-L1) !default;
 $lumx-tabs-link-emphasis-selected-state-hover-theme-light-border-color: var(--lumx-color-primary-N) !default;
-$lumx-tabs-link-emphasis-selected-state-hover-theme-dark-background-color: rgba(
-    255,
-    255,
-    255,
-    0.2
-) !default; // Base light color with 20% opacity
-$lumx-tabs-link-emphasis-selected-state-hover-theme-dark-color: #fff !default; // Neutral light color
-$lumx-tabs-link-emphasis-selected-state-hover-theme-dark-border-color: #fff !default; // Neutral light color
+$lumx-tabs-link-emphasis-selected-state-hover-theme-dark-background-color: var(--lumx-color-light-L5) !default;
+$lumx-tabs-link-emphasis-selected-state-hover-theme-dark-color: var(--lumx-color-light-N) !default;
+$lumx-tabs-link-emphasis-selected-state-hover-theme-dark-border-color: var(--lumx-color-light-N) !default;
 $lumx-tabs-link-emphasis-selected-state-active-border-top-width: 0 !default;
 $lumx-tabs-link-emphasis-selected-state-active-border-right-width: 0 !default;
 $lumx-tabs-link-emphasis-selected-state-active-border-bottom-width: 2px !default;
 $lumx-tabs-link-emphasis-selected-state-active-border-left-width: 0 !default;
-$lumx-tabs-link-emphasis-selected-state-active-theme-light-background-color: rgba(
-    0,
-    0,
-    0,
-    0.2
-) !default; // Base dark color with 20% opacity
-$lumx-tabs-link-emphasis-selected-state-active-theme-light-color: rgba(
-    0,
-    0,
-    0,
-    0.7
-) !default; // Base dark color with 70% opacity
+$lumx-tabs-link-emphasis-selected-state-active-theme-light-background-color: var(--lumx-color-dark-L4) !default;
+$lumx-tabs-link-emphasis-selected-state-active-theme-light-color: var(--lumx-color-dark-L1) !default;
 $lumx-tabs-link-emphasis-selected-state-active-theme-light-border-color: var(--lumx-color-primary-N) !default;
-$lumx-tabs-link-emphasis-selected-state-active-theme-dark-background-color: rgba(
-    255,
-    255,
-    255,
-    0.4
-) !default; // Base light color with 40% opacity
-$lumx-tabs-link-emphasis-selected-state-active-theme-dark-color: #fff !default; // Neutral light color
-$lumx-tabs-link-emphasis-selected-state-active-theme-dark-border-color: #fff !default; // Neutral light color
+$lumx-tabs-link-emphasis-selected-state-active-theme-dark-background-color: var(--lumx-color-light-L4) !default;
+$lumx-tabs-link-emphasis-selected-state-active-theme-dark-color: var(--lumx-color-light-N) !default;
+$lumx-tabs-link-emphasis-selected-state-active-theme-dark-border-color: var(--lumx-color-light-N) !default;
 $lumx-text-field-input-min-height: 36px !default;
 $lumx-text-field-input-padding-horizontal: 12px !default;
 $lumx-text-field-input-border-radius: 4px !default;
@@ -672,122 +320,42 @@ $lumx-text-field-state-default-input-border-top-width: 1px !default;
 $lumx-text-field-state-default-input-border-right-width: 1px !default;
 $lumx-text-field-state-default-input-border-bottom-width: 1px !default;
 $lumx-text-field-state-default-input-border-left-width: 1px !default;
-$lumx-text-field-state-default-theme-light-header-label-color: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
-$lumx-text-field-state-default-theme-light-input-background-color: rgba(
-    0,
-    0,
-    0,
-    0.05
-) !default; // Base dark color with 5% opacity
-$lumx-text-field-state-default-theme-light-input-border-color: rgba(
-    0,
-    0,
-    0,
-    0.2
-) !default; // Base dark color with 20% opacity
-$lumx-text-field-state-default-theme-light-input-content-color: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
-$lumx-text-field-state-default-theme-light-input-placeholder-color: rgba(
-    0,
-    0,
-    0,
-    0.54
-) !default; // Base dark color with 54% opacity
-$lumx-text-field-state-default-theme-dark-header-label-color: #fff !default; // Neutral light color
-$lumx-text-field-state-default-theme-dark-input-background-color: rgba(
-    255,
-    255,
-    255,
-    0.1
-) !default; // Base light color with 10% opacity
-$lumx-text-field-state-default-theme-dark-input-border-color: rgba(
-    255,
-    255,
-    255,
-    0.4
-) !default; // Base light color with 40% opacity
-$lumx-text-field-state-default-theme-dark-input-content-color: #fff !default; // Neutral light color
-$lumx-text-field-state-default-theme-dark-input-placeholder-color: rgba(
-    255,
-    255,
-    255,
-    0.8
-) !default; // Base light color with 80% opacity
+$lumx-text-field-state-default-theme-light-header-label-color: var(--lumx-color-dark-N) !default;
+$lumx-text-field-state-default-theme-light-input-background-color: var(--lumx-color-dark-L6) !default;
+$lumx-text-field-state-default-theme-light-input-border-color: var(--lumx-color-dark-L4) !default;
+$lumx-text-field-state-default-theme-light-input-content-color: var(--lumx-color-dark-N) !default;
+$lumx-text-field-state-default-theme-light-input-placeholder-color: var(--lumx-color-dark-L2) !default;
+$lumx-text-field-state-default-theme-dark-header-label-color: var(--lumx-color-light-N) !default;
+$lumx-text-field-state-default-theme-dark-input-background-color: var(--lumx-color-light-L6) !default;
+$lumx-text-field-state-default-theme-dark-input-border-color: var(--lumx-color-light-L4) !default;
+$lumx-text-field-state-default-theme-dark-input-content-color: var(--lumx-color-light-N) !default;
+$lumx-text-field-state-default-theme-dark-input-placeholder-color: var(--lumx-color-light-L2) !default;
 $lumx-text-field-state-hover-input-border-top-width: 1px !default;
 $lumx-text-field-state-hover-input-border-right-width: 1px !default;
 $lumx-text-field-state-hover-input-border-bottom-width: 1px !default;
 $lumx-text-field-state-hover-input-border-left-width: 1px !default;
-$lumx-text-field-state-hover-theme-light-input-background-color: rgba(
-    0,
-    0,
-    0,
-    0.12
-) !default; // Base dark color with 12% opacity
-$lumx-text-field-state-hover-theme-light-input-border-color: rgba(
-    0,
-    0,
-    0,
-    0.2
-) !default; // Base dark color with 20% opacity
-$lumx-text-field-state-hover-theme-light-input-content-color: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
-$lumx-text-field-state-hover-theme-light-input-placeholder-color: rgba(
-    0,
-    0,
-    0,
-    0.54
-) !default; // Base dark color with 54% opacity
-$lumx-text-field-state-hover-theme-dark-input-background-color: rgba(
-    255,
-    255,
-    255,
-    0.2
-) !default; // Base light color with 20% opacity
-$lumx-text-field-state-hover-theme-dark-input-border-color: rgba(
-    255,
-    255,
-    255,
-    0.4
-) !default; // Base light color with 40% opacity
-$lumx-text-field-state-hover-theme-dark-input-content-color: #fff !default; // Neutral light color
-$lumx-text-field-state-hover-theme-dark-input-placeholder-color: rgba(
-    255,
-    255,
-    255,
-    0.8
-) !default; // Base light color with 80% opacity
+$lumx-text-field-state-hover-theme-light-input-background-color: var(--lumx-color-dark-L5) !default;
+$lumx-text-field-state-hover-theme-light-input-border-color: var(--lumx-color-dark-L4) !default;
+$lumx-text-field-state-hover-theme-light-input-content-color: var(--lumx-color-dark-N) !default;
+$lumx-text-field-state-hover-theme-light-input-placeholder-color: var(--lumx-color-dark-L2) !default;
+$lumx-text-field-state-hover-theme-dark-input-background-color: var(--lumx-color-light-L5) !default;
+$lumx-text-field-state-hover-theme-dark-input-border-color: var(--lumx-color-light-L4) !default;
+$lumx-text-field-state-hover-theme-dark-input-content-color: var(--lumx-color-light-N) !default;
+$lumx-text-field-state-hover-theme-dark-input-placeholder-color: var(--lumx-color-light-L2) !default;
 $lumx-text-field-state-focus-input-border-top-width: 2px !default;
 $lumx-text-field-state-focus-input-border-right-width: 2px !default;
 $lumx-text-field-state-focus-input-border-bottom-width: 2px !default;
 $lumx-text-field-state-focus-input-border-left-width: 2px !default;
-$lumx-text-field-state-focus-theme-light-header-label-color: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
-$lumx-text-field-state-focus-theme-light-input-background-color: #fff !default; // Neutral light color
-$lumx-text-field-state-focus-theme-light-input-border-color: rgba(
-    33,
-    150,
-    243,
-    0.6
-) !default; // Base blue color with 60% opacity
-$lumx-text-field-state-focus-theme-light-input-content-color: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
-$lumx-text-field-state-focus-theme-light-input-placeholder-color: rgba(
-    0,
-    0,
-    0,
-    0.54
-) !default; // Base dark color with 54% opacity
-$lumx-text-field-state-focus-theme-dark-header-label-color: #fff !default; // Neutral light color
+$lumx-text-field-state-focus-theme-light-header-label-color: var(--lumx-color-dark-N) !default;
+$lumx-text-field-state-focus-theme-light-input-background-color: var(--lumx-color-light-N) !default;
+$lumx-text-field-state-focus-theme-light-input-border-color: var(--lumx-color-primary-L2) !default;
+$lumx-text-field-state-focus-theme-light-input-content-color: var(--lumx-color-dark-N) !default;
+$lumx-text-field-state-focus-theme-light-input-placeholder-color: var(--lumx-color-dark-L2) !default;
+$lumx-text-field-state-focus-theme-dark-header-label-color: var(--lumx-color-light-N) !default;
 $lumx-text-field-state-focus-theme-dark-input-background-color: transparent !default;
-$lumx-text-field-state-focus-theme-dark-input-border-color: rgba(
-    255,
-    255,
-    255,
-    0.8
-) !default; // Base light color with 80% opacity
-$lumx-text-field-state-focus-theme-dark-input-content-color: #fff !default; // Neutral light color
-$lumx-text-field-state-focus-theme-dark-input-placeholder-color: rgba(
-    255,
-    255,
-    255,
-    0.8
-) !default; // Base light color with 80% opacity
+$lumx-text-field-state-focus-theme-dark-input-border-color: var(--lumx-color-light-L2) !default;
+$lumx-text-field-state-focus-theme-dark-input-content-color: var(--lumx-color-light-N) !default;
+$lumx-text-field-state-focus-theme-dark-input-placeholder-color: var(--lumx-color-light-L2) !default;
 $lumx-border-radius: 4px !default;
 $lumx-color-dark-N: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
 $lumx-color-dark-L1: rgba(0, 0, 0, 0.7) !default; // Base dark color with 70% opacity

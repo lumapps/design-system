@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Thu, 16 Dec 2021 09:34:25 GMT
+ * Generated on Thu, 06 Jan 2022 09:15:29 GMT
  */
 
 :root {
@@ -9,198 +9,98 @@
     --lumx-button-emphasis-high-state-default-padding-horizontal: 16px;
     --lumx-button-emphasis-high-state-default-border-width: 0;
     --lumx-button-emphasis-high-state-default-theme-light-background-color: var(--lumx-color-primary-N);
-    --lumx-button-emphasis-high-state-default-theme-light-color: #fff; /* Neutral light color */
+    --lumx-button-emphasis-high-state-default-theme-light-color: var(--lumx-color-light-N);
     --lumx-button-emphasis-high-state-default-theme-light-border-color: transparent;
-    --lumx-button-emphasis-high-state-default-theme-dark-background-color: #fff; /* Neutral light color */
+    --lumx-button-emphasis-high-state-default-theme-dark-background-color: var(--lumx-color-light-N);
     --lumx-button-emphasis-high-state-default-theme-dark-color: var(--lumx-color-primary-N);
     --lumx-button-emphasis-high-state-default-theme-dark-border-color: transparent;
     --lumx-button-emphasis-high-state-hover-padding-horizontal: 16px;
     --lumx-button-emphasis-high-state-hover-border-width: 0;
     --lumx-button-emphasis-high-state-hover-theme-light-background-color: var(--lumx-color-primary-D1);
-    --lumx-button-emphasis-high-state-hover-theme-light-color: #fff; /* Neutral light color */
+    --lumx-button-emphasis-high-state-hover-theme-light-color: var(--lumx-color-light-N);
     --lumx-button-emphasis-high-state-hover-theme-light-border-color: transparent;
-    --lumx-button-emphasis-high-state-hover-theme-dark-background-color: rgba(
-        255,
-        255,
-        255,
-        0.9
-    ); /* Base light color with 90% opacity */
+    --lumx-button-emphasis-high-state-hover-theme-dark-background-color: var(--lumx-color-light-L1);
     --lumx-button-emphasis-high-state-hover-theme-dark-color: var(--lumx-color-primary-N);
     --lumx-button-emphasis-high-state-hover-theme-dark-border-color: transparent;
     --lumx-button-emphasis-high-state-active-padding-horizontal: 16px;
     --lumx-button-emphasis-high-state-active-border-width: 0;
     --lumx-button-emphasis-high-state-active-theme-light-background-color: var(--lumx-color-primary-D2);
-    --lumx-button-emphasis-high-state-active-theme-light-color: #fff; /* Neutral light color */
+    --lumx-button-emphasis-high-state-active-theme-light-color: var(--lumx-color-light-N);
     --lumx-button-emphasis-high-state-active-theme-light-border-color: transparent;
-    --lumx-button-emphasis-high-state-active-theme-dark-background-color: rgba(
-        255,
-        255,
-        255,
-        0.8
-    ); /* Base light color with 80% opacity */
+    --lumx-button-emphasis-high-state-active-theme-dark-background-color: var(--lumx-color-light-L2);
     --lumx-button-emphasis-high-state-active-theme-dark-color: var(--lumx-color-primary-N);
     --lumx-button-emphasis-high-state-active-theme-dark-border-color: transparent;
     --lumx-button-emphasis-medium-state-default-padding-horizontal: 16px;
     --lumx-button-emphasis-medium-state-default-border-width: 0;
-    --lumx-button-emphasis-medium-state-default-theme-light-background-color: rgba(
-        0,
-        0,
-        0,
-        0.12
-    ); /* Base dark color with 12% opacity */
-    --lumx-button-emphasis-medium-state-default-theme-light-color: rgba(
-        0,
-        0,
-        0,
-        0.7
-    ); /* Base dark color with 70% opacity */
+    --lumx-button-emphasis-medium-state-default-theme-light-background-color: var(--lumx-color-dark-L5);
+    --lumx-button-emphasis-medium-state-default-theme-light-color: var(--lumx-color-dark-L1);
     --lumx-button-emphasis-medium-state-default-theme-light-border-color: transparent;
-    --lumx-button-emphasis-medium-state-default-theme-dark-background-color: rgba(
-        255,
-        255,
-        255,
-        0.2
-    ); /* Base light color with 20% opacity */
-    --lumx-button-emphasis-medium-state-default-theme-dark-color: #fff; /* Neutral light color */
+    --lumx-button-emphasis-medium-state-default-theme-dark-background-color: var(--lumx-color-light-L5);
+    --lumx-button-emphasis-medium-state-default-theme-dark-color: var(--lumx-color-light-N);
     --lumx-button-emphasis-medium-state-default-theme-dark-border-color: transparent;
     --lumx-button-emphasis-medium-state-hover-padding-horizontal: 16px;
     --lumx-button-emphasis-medium-state-hover-border-width: 0;
-    --lumx-button-emphasis-medium-state-hover-theme-light-background-color: rgba(
-        0,
-        0,
-        0,
-        0.2
-    ); /* Base dark color with 20% opacity */
-    --lumx-button-emphasis-medium-state-hover-theme-light-color: rgba(
-        0,
-        0,
-        0,
-        0.7
-    ); /* Base dark color with 70% opacity */
+    --lumx-button-emphasis-medium-state-hover-theme-light-background-color: var(--lumx-color-dark-L4);
+    --lumx-button-emphasis-medium-state-hover-theme-light-color: var(--lumx-color-dark-L1);
     --lumx-button-emphasis-medium-state-hover-theme-light-border-color: transparent;
-    --lumx-button-emphasis-medium-state-hover-theme-dark-background-color: rgba(
-        255,
-        255,
-        255,
-        0.4
-    ); /* Base light color with 40% opacity */
-    --lumx-button-emphasis-medium-state-hover-theme-dark-color: #fff; /* Neutral light color */
+    --lumx-button-emphasis-medium-state-hover-theme-dark-background-color: var(--lumx-color-light-L4);
+    --lumx-button-emphasis-medium-state-hover-theme-dark-color: var(--lumx-color-light-N);
     --lumx-button-emphasis-medium-state-hover-theme-dark-border-color: transparent;
     --lumx-button-emphasis-medium-state-active-padding-horizontal: 16px;
     --lumx-button-emphasis-medium-state-active-border-width: 0;
-    --lumx-button-emphasis-medium-state-active-theme-light-background-color: rgba(
-        0,
-        0,
-        0,
-        0.38
-    ); /* Base dark color with 38% opacity */
-    --lumx-button-emphasis-medium-state-active-theme-light-color: rgba(
-        0,
-        0,
-        0,
-        0.7
-    ); /* Base dark color with 70% opacity */
+    --lumx-button-emphasis-medium-state-active-theme-light-background-color: var(--lumx-color-dark-L3);
+    --lumx-button-emphasis-medium-state-active-theme-light-color: var(--lumx-color-dark-L1);
     --lumx-button-emphasis-medium-state-active-theme-light-border-color: transparent;
-    --lumx-button-emphasis-medium-state-active-theme-dark-background-color: rgba(
-        255,
-        255,
-        255,
-        0.6
-    ); /* Base light color with 60% opacity */
-    --lumx-button-emphasis-medium-state-active-theme-dark-color: #fff; /* Neutral light color */
+    --lumx-button-emphasis-medium-state-active-theme-dark-background-color: var(--lumx-color-light-L3);
+    --lumx-button-emphasis-medium-state-active-theme-dark-color: var(--lumx-color-light-N);
     --lumx-button-emphasis-medium-state-active-theme-dark-border-color: transparent;
     --lumx-button-emphasis-low-state-default-padding-horizontal: 8px;
     --lumx-button-emphasis-low-state-default-border-width: 0;
     --lumx-button-emphasis-low-state-default-theme-light-background-color: transparent;
-    --lumx-button-emphasis-low-state-default-theme-light-color: rgba(
-        0,
-        0,
-        0,
-        0.7
-    ); /* Base dark color with 70% opacity */
+    --lumx-button-emphasis-low-state-default-theme-light-color: var(--lumx-color-dark-L1);
     --lumx-button-emphasis-low-state-default-theme-light-border-color: transparent;
     --lumx-button-emphasis-low-state-default-theme-dark-background-color: transparent;
-    --lumx-button-emphasis-low-state-default-theme-dark-color: #fff; /* Neutral light color */
+    --lumx-button-emphasis-low-state-default-theme-dark-color: var(--lumx-color-light-N);
     --lumx-button-emphasis-low-state-default-theme-dark-border-color: transparent;
     --lumx-button-emphasis-low-state-hover-padding-horizontal: 8px;
     --lumx-button-emphasis-low-state-hover-border-width: 0;
-    --lumx-button-emphasis-low-state-hover-theme-light-background-color: rgba(
-        0,
-        0,
-        0,
-        0.12
-    ); /* Base dark color with 12% opacity */
-    --lumx-button-emphasis-low-state-hover-theme-light-color: rgba(0, 0, 0, 0.7); /* Base dark color with 70% opacity */
+    --lumx-button-emphasis-low-state-hover-theme-light-background-color: var(--lumx-color-dark-L5);
+    --lumx-button-emphasis-low-state-hover-theme-light-color: var(--lumx-color-dark-L1);
     --lumx-button-emphasis-low-state-hover-theme-light-border-color: transparent;
-    --lumx-button-emphasis-low-state-hover-theme-dark-background-color: rgba(
-        255,
-        255,
-        255,
-        0.2
-    ); /* Base light color with 20% opacity */
-    --lumx-button-emphasis-low-state-hover-theme-dark-color: #fff; /* Neutral light color */
+    --lumx-button-emphasis-low-state-hover-theme-dark-background-color: var(--lumx-color-light-L5);
+    --lumx-button-emphasis-low-state-hover-theme-dark-color: var(--lumx-color-light-N);
     --lumx-button-emphasis-low-state-hover-theme-dark-border-color: transparent;
     --lumx-button-emphasis-low-state-active-padding-horizontal: 8px;
     --lumx-button-emphasis-low-state-active-border-width: 0;
-    --lumx-button-emphasis-low-state-active-theme-light-background-color: rgba(
-        0,
-        0,
-        0,
-        0.2
-    ); /* Base dark color with 20% opacity */
-    --lumx-button-emphasis-low-state-active-theme-light-color: rgba(
-        0,
-        0,
-        0,
-        0.7
-    ); /* Base dark color with 70% opacity */
+    --lumx-button-emphasis-low-state-active-theme-light-background-color: var(--lumx-color-dark-L4);
+    --lumx-button-emphasis-low-state-active-theme-light-color: var(--lumx-color-dark-L1);
     --lumx-button-emphasis-low-state-active-theme-light-border-color: transparent;
-    --lumx-button-emphasis-low-state-active-theme-dark-background-color: rgba(
-        255,
-        255,
-        255,
-        0.4
-    ); /* Base light color with 40% opacity */
-    --lumx-button-emphasis-low-state-active-theme-dark-color: #fff; /* Neutral light color */
+    --lumx-button-emphasis-low-state-active-theme-dark-background-color: var(--lumx-color-light-L4);
+    --lumx-button-emphasis-low-state-active-theme-dark-color: var(--lumx-color-light-N);
     --lumx-button-emphasis-low-state-active-theme-dark-border-color: transparent;
     --lumx-button-emphasis-selected-state-default-padding-horizontal: 16px;
     --lumx-button-emphasis-selected-state-default-border-width: 0;
     --lumx-button-emphasis-selected-state-default-theme-light-background-color: var(--lumx-color-primary-L5);
     --lumx-button-emphasis-selected-state-default-theme-light-color: var(--lumx-color-primary-D2);
     --lumx-button-emphasis-selected-state-default-theme-light-border-color: transparent;
-    --lumx-button-emphasis-selected-state-default-theme-dark-background-color: rgba(
-        255,
-        255,
-        255,
-        0.6
-    ); /* Base light color with 60% opacity */
-    --lumx-button-emphasis-selected-state-default-theme-dark-color: #fff; /* Neutral light color */
+    --lumx-button-emphasis-selected-state-default-theme-dark-background-color: var(--lumx-color-light-L3);
+    --lumx-button-emphasis-selected-state-default-theme-dark-color: var(--lumx-color-light-N);
     --lumx-button-emphasis-selected-state-default-theme-dark-border-color: transparent;
     --lumx-button-emphasis-selected-state-hover-padding-horizontal: 16px;
     --lumx-button-emphasis-selected-state-hover-border-width: 0;
     --lumx-button-emphasis-selected-state-hover-theme-light-background-color: var(--lumx-color-primary-L4);
     --lumx-button-emphasis-selected-state-hover-theme-light-color: var(--lumx-color-primary-D2);
     --lumx-button-emphasis-selected-state-hover-theme-light-border-color: transparent;
-    --lumx-button-emphasis-selected-state-hover-theme-dark-background-color: rgba(
-        255,
-        255,
-        255,
-        0.4
-    ); /* Base light color with 40% opacity */
-    --lumx-button-emphasis-selected-state-hover-theme-dark-color: #fff; /* Neutral light color */
+    --lumx-button-emphasis-selected-state-hover-theme-dark-background-color: var(--lumx-color-light-L4);
+    --lumx-button-emphasis-selected-state-hover-theme-dark-color: var(--lumx-color-light-N);
     --lumx-button-emphasis-selected-state-hover-theme-dark-border-color: transparent;
     --lumx-button-emphasis-selected-state-active-padding-horizontal: 16px;
     --lumx-button-emphasis-selected-state-active-border-width: 0;
     --lumx-button-emphasis-selected-state-active-theme-light-background-color: var(--lumx-color-primary-L3);
     --lumx-button-emphasis-selected-state-active-theme-light-color: var(--lumx-color-primary-D2);
     --lumx-button-emphasis-selected-state-active-theme-light-border-color: transparent;
-    --lumx-button-emphasis-selected-state-active-theme-dark-background-color: rgba(
-        255,
-        255,
-        255,
-        0.2
-    ); /* Base light color with 20% opacity */
-    --lumx-button-emphasis-selected-state-active-theme-dark-color: #fff; /* Neutral light color */
+    --lumx-button-emphasis-selected-state-active-theme-dark-background-color: var(--lumx-color-light-L5);
+    --lumx-button-emphasis-selected-state-active-theme-dark-color: var(--lumx-color-light-N);
     --lumx-button-emphasis-selected-state-active-theme-dark-border-color: transparent;
     --lumx-material-button-text-transform: none;
     --lumx-material-checkbox-wrapper-size: 20px;
@@ -245,164 +145,49 @@
     --lumx-navigation-item-emphasis-low-state-default-border-bottom-width: 0;
     --lumx-navigation-item-emphasis-low-state-default-border-left-width: 0;
     --lumx-navigation-item-emphasis-low-state-default-theme-light-background-color: transparent;
-    --lumx-navigation-item-emphasis-low-state-default-theme-light-border-color: rgba(
-        0,
-        0,
-        0,
-        0.12
-    ); /* Base dark color with 12% opacity */
-    --lumx-navigation-item-emphasis-low-state-default-theme-light-icon-color: rgba(
-        0,
-        0,
-        0,
-        0.7
-    ); /* Base dark color with 70% opacity */
-    --lumx-navigation-item-emphasis-low-state-default-theme-light-label-color: rgba(
-        0,
-        0,
-        0,
-        0.87
-    ); /* Neutral dark color */
+    --lumx-navigation-item-emphasis-low-state-default-theme-light-border-color: var(--lumx-color-dark-L5);
+    --lumx-navigation-item-emphasis-low-state-default-theme-light-icon-color: var(--lumx-color-dark-L1);
+    --lumx-navigation-item-emphasis-low-state-default-theme-light-label-color: var(--lumx-color-dark-N);
     --lumx-navigation-item-emphasis-low-state-default-theme-light-chevron-background-color: transparent;
-    --lumx-navigation-item-emphasis-low-state-default-theme-light-chevron-color: rgba(
-        0,
-        0,
-        0,
-        0.7
-    ); /* Base dark color with 70% opacity */
+    --lumx-navigation-item-emphasis-low-state-default-theme-light-chevron-color: var(--lumx-color-dark-L1);
     --lumx-navigation-item-emphasis-low-state-default-theme-dark-background-color: transparent;
-    --lumx-navigation-item-emphasis-low-state-default-theme-dark-border-color: rgba(
-        255,
-        255,
-        255,
-        0.2
-    ); /* Base light color with 20% opacity */
-    --lumx-navigation-item-emphasis-low-state-default-theme-dark-icon-color: #fff; /* Neutral light color */
-    --lumx-navigation-item-emphasis-low-state-default-theme-dark-label-color: #fff; /* Neutral light color */
+    --lumx-navigation-item-emphasis-low-state-default-theme-dark-border-color: var(--lumx-color-light-L5);
+    --lumx-navigation-item-emphasis-low-state-default-theme-dark-icon-color: var(--lumx-color-light-N);
+    --lumx-navigation-item-emphasis-low-state-default-theme-dark-label-color: var(--lumx-color-light-N);
     --lumx-navigation-item-emphasis-low-state-default-theme-dark-chevron-background-color: transparent;
-    --lumx-navigation-item-emphasis-low-state-default-theme-dark-chevron-color: #fff; /* Neutral light color */
+    --lumx-navigation-item-emphasis-low-state-default-theme-dark-chevron-color: var(--lumx-color-light-N);
     --lumx-navigation-item-emphasis-low-state-hover-border-top-width: 0;
     --lumx-navigation-item-emphasis-low-state-hover-border-right-width: 0;
     --lumx-navigation-item-emphasis-low-state-hover-border-bottom-width: 0;
     --lumx-navigation-item-emphasis-low-state-hover-border-left-width: 0;
-    --lumx-navigation-item-emphasis-low-state-hover-theme-light-background-color: rgba(
-        0,
-        0,
-        0,
-        0.12
-    ); /* Base dark color with 12% opacity */
-    --lumx-navigation-item-emphasis-low-state-hover-theme-light-border-color: rgba(
-        0,
-        0,
-        0,
-        0.12
-    ); /* Base dark color with 12% opacity */
-    --lumx-navigation-item-emphasis-low-state-hover-theme-light-icon-color: rgba(
-        0,
-        0,
-        0,
-        0.7
-    ); /* Base dark color with 70% opacity */
-    --lumx-navigation-item-emphasis-low-state-hover-theme-light-label-color: rgba(
-        0,
-        0,
-        0,
-        0.87
-    ); /* Neutral dark color */
-    --lumx-navigation-item-emphasis-low-state-hover-theme-light-chevron-background-color: rgba(
-        0,
-        0,
-        0,
-        0.12
-    ); /* Base dark color with 12% opacity */
-    --lumx-navigation-item-emphasis-low-state-hover-theme-light-chevron-color: rgba(
-        0,
-        0,
-        0,
-        0.7
-    ); /* Base dark color with 70% opacity */
-    --lumx-navigation-item-emphasis-low-state-hover-theme-dark-background-color: rgba(
-        255,
-        255,
-        255,
-        0.2
-    ); /* Base light color with 20% opacity */
-    --lumx-navigation-item-emphasis-low-state-hover-theme-dark-border-color: rgba(
-        255,
-        255,
-        255,
-        0.2
-    ); /* Base light color with 20% opacity */
-    --lumx-navigation-item-emphasis-low-state-hover-theme-dark-icon-color: #fff; /* Neutral light color */
-    --lumx-navigation-item-emphasis-low-state-hover-theme-dark-label-color: #fff; /* Neutral light color */
-    --lumx-navigation-item-emphasis-low-state-hover-theme-dark-chevron-background-color: rgba(
-        255,
-        255,
-        255,
-        0.2
-    ); /* Base light color with 20% opacity */
-    --lumx-navigation-item-emphasis-low-state-hover-theme-dark-chevron-color: #fff; /* Neutral light color */
+    --lumx-navigation-item-emphasis-low-state-hover-theme-light-background-color: var(--lumx-color-dark-L5);
+    --lumx-navigation-item-emphasis-low-state-hover-theme-light-border-color: var(--lumx-color-dark-L5);
+    --lumx-navigation-item-emphasis-low-state-hover-theme-light-icon-color: var(--lumx-color-dark-L1);
+    --lumx-navigation-item-emphasis-low-state-hover-theme-light-label-color: var(--lumx-color-dark-N);
+    --lumx-navigation-item-emphasis-low-state-hover-theme-light-chevron-background-color: var(--lumx-color-dark-L5);
+    --lumx-navigation-item-emphasis-low-state-hover-theme-light-chevron-color: var(--lumx-color-dark-L1);
+    --lumx-navigation-item-emphasis-low-state-hover-theme-dark-background-color: var(--lumx-color-light-L5);
+    --lumx-navigation-item-emphasis-low-state-hover-theme-dark-border-color: var(--lumx-color-light-L5);
+    --lumx-navigation-item-emphasis-low-state-hover-theme-dark-icon-color: var(--lumx-color-light-N);
+    --lumx-navigation-item-emphasis-low-state-hover-theme-dark-label-color: var(--lumx-color-light-N);
+    --lumx-navigation-item-emphasis-low-state-hover-theme-dark-chevron-background-color: var(--lumx-color-light-L5);
+    --lumx-navigation-item-emphasis-low-state-hover-theme-dark-chevron-color: var(--lumx-color-light-N);
     --lumx-navigation-item-emphasis-low-state-active-border-top-width: 0;
     --lumx-navigation-item-emphasis-low-state-active-border-right-width: 0;
     --lumx-navigation-item-emphasis-low-state-active-border-bottom-width: 0;
     --lumx-navigation-item-emphasis-low-state-active-border-left-width: 0;
-    --lumx-navigation-item-emphasis-low-state-active-theme-light-background-color: rgba(
-        0,
-        0,
-        0,
-        0.2
-    ); /* Base dark color with 20% opacity */
-    --lumx-navigation-item-emphasis-low-state-active-theme-light-border-color: rgba(
-        0,
-        0,
-        0,
-        0.12
-    ); /* Base dark color with 12% opacity */
-    --lumx-navigation-item-emphasis-low-state-active-theme-light-icon-color: rgba(
-        0,
-        0,
-        0,
-        0.7
-    ); /* Base dark color with 70% opacity */
-    --lumx-navigation-item-emphasis-low-state-active-theme-light-label-color: rgba(
-        0,
-        0,
-        0,
-        0.87
-    ); /* Neutral dark color */
-    --lumx-navigation-item-emphasis-low-state-active-theme-light-chevron-background-color: rgba(
-        0,
-        0,
-        0,
-        0.2
-    ); /* Base dark color with 20% opacity */
-    --lumx-navigation-item-emphasis-low-state-active-theme-light-chevron-color: rgba(
-        0,
-        0,
-        0,
-        0.7
-    ); /* Base dark color with 70% opacity */
-    --lumx-navigation-item-emphasis-low-state-active-theme-dark-background-color: rgba(
-        255,
-        255,
-        255,
-        0.4
-    ); /* Base light color with 40% opacity */
-    --lumx-navigation-item-emphasis-low-state-active-theme-dark-border-color: rgba(
-        255,
-        255,
-        255,
-        0.2
-    ); /* Base light color with 20% opacity */
-    --lumx-navigation-item-emphasis-low-state-active-theme-dark-icon-color: #fff; /* Neutral light color */
-    --lumx-navigation-item-emphasis-low-state-active-theme-dark-label-color: #fff; /* Neutral light color */
-    --lumx-navigation-item-emphasis-low-state-active-theme-dark-chevron-background-color: rgba(
-        255,
-        255,
-        255,
-        0.4
-    ); /* Base light color with 40% opacity */
-    --lumx-navigation-item-emphasis-low-state-active-theme-dark-chevron-color: #fff; /* Neutral light color */
+    --lumx-navigation-item-emphasis-low-state-active-theme-light-background-color: var(--lumx-color-dark-L4);
+    --lumx-navigation-item-emphasis-low-state-active-theme-light-border-color: var(--lumx-color-dark-L5);
+    --lumx-navigation-item-emphasis-low-state-active-theme-light-icon-color: var(--lumx-color-dark-L1);
+    --lumx-navigation-item-emphasis-low-state-active-theme-light-label-color: var(--lumx-color-dark-N);
+    --lumx-navigation-item-emphasis-low-state-active-theme-light-chevron-background-color: var(--lumx-color-dark-L4);
+    --lumx-navigation-item-emphasis-low-state-active-theme-light-chevron-color: var(--lumx-color-dark-L1);
+    --lumx-navigation-item-emphasis-low-state-active-theme-dark-background-color: var(--lumx-color-light-L4);
+    --lumx-navigation-item-emphasis-low-state-active-theme-dark-border-color: var(--lumx-color-light-L5);
+    --lumx-navigation-item-emphasis-low-state-active-theme-dark-icon-color: var(--lumx-color-light-N);
+    --lumx-navigation-item-emphasis-low-state-active-theme-dark-label-color: var(--lumx-color-light-N);
+    --lumx-navigation-item-emphasis-low-state-active-theme-dark-chevron-background-color: var(--lumx-color-light-L4);
+    --lumx-navigation-item-emphasis-low-state-active-theme-dark-chevron-color: var(--lumx-color-light-N);
     --lumx-navigation-item-emphasis-selected-state-default-border-top-width: 0;
     --lumx-navigation-item-emphasis-selected-state-default-border-right-width: 0;
     --lumx-navigation-item-emphasis-selected-state-default-border-bottom-width: 0;
@@ -413,22 +198,12 @@
     --lumx-navigation-item-emphasis-selected-state-default-theme-light-label-color: var(--lumx-color-primary-D2);
     --lumx-navigation-item-emphasis-selected-state-default-theme-light-chevron-background-color: transparent;
     --lumx-navigation-item-emphasis-selected-state-default-theme-light-chevron-color: var(--lumx-color-primary-D2);
-    --lumx-navigation-item-emphasis-selected-state-default-theme-dark-background-color: rgba(
-        255,
-        255,
-        255,
-        0.6
-    ); /* Base light color with 60% opacity */
-    --lumx-navigation-item-emphasis-selected-state-default-theme-dark-border-color: rgba(
-        255,
-        255,
-        255,
-        0.2
-    ); /* Base light color with 20% opacity */
-    --lumx-navigation-item-emphasis-selected-state-default-theme-dark-icon-color: #fff; /* Neutral light color */
-    --lumx-navigation-item-emphasis-selected-state-default-theme-dark-label-color: #fff; /* Neutral light color */
+    --lumx-navigation-item-emphasis-selected-state-default-theme-dark-background-color: var(--lumx-color-light-L3);
+    --lumx-navigation-item-emphasis-selected-state-default-theme-dark-border-color: var(--lumx-color-light-L5);
+    --lumx-navigation-item-emphasis-selected-state-default-theme-dark-icon-color: var(--lumx-color-light-N);
+    --lumx-navigation-item-emphasis-selected-state-default-theme-dark-label-color: var(--lumx-color-light-N);
     --lumx-navigation-item-emphasis-selected-state-default-theme-dark-chevron-background-color: transparent;
-    --lumx-navigation-item-emphasis-selected-state-default-theme-dark-chevron-color: #fff; /* Neutral light color */
+    --lumx-navigation-item-emphasis-selected-state-default-theme-dark-chevron-color: var(--lumx-color-light-N);
     --lumx-navigation-item-emphasis-selected-state-hover-border-top-width: 0;
     --lumx-navigation-item-emphasis-selected-state-hover-border-right-width: 0;
     --lumx-navigation-item-emphasis-selected-state-hover-border-bottom-width: 0;
@@ -441,27 +216,14 @@
         --lumx-color-primary-L4
     );
     --lumx-navigation-item-emphasis-selected-state-hover-theme-light-chevron-color: var(--lumx-color-primary-D2);
-    --lumx-navigation-item-emphasis-selected-state-hover-theme-dark-background-color: rgba(
-        255,
-        255,
-        255,
-        0.4
-    ); /* Base light color with 40% opacity */
-    --lumx-navigation-item-emphasis-selected-state-hover-theme-dark-border-color: rgba(
-        255,
-        255,
-        255,
-        0.2
-    ); /* Base light color with 20% opacity */
-    --lumx-navigation-item-emphasis-selected-state-hover-theme-dark-icon-color: #fff; /* Neutral light color */
-    --lumx-navigation-item-emphasis-selected-state-hover-theme-dark-label-color: #fff; /* Neutral light color */
-    --lumx-navigation-item-emphasis-selected-state-hover-theme-dark-chevron-background-color: rgba(
-        255,
-        255,
-        255,
-        0.4
-    ); /* Base light color with 40% opacity */
-    --lumx-navigation-item-emphasis-selected-state-hover-theme-dark-chevron-color: #fff; /* Neutral light color */
+    --lumx-navigation-item-emphasis-selected-state-hover-theme-dark-background-color: var(--lumx-color-light-L4);
+    --lumx-navigation-item-emphasis-selected-state-hover-theme-dark-border-color: var(--lumx-color-light-L5);
+    --lumx-navigation-item-emphasis-selected-state-hover-theme-dark-icon-color: var(--lumx-color-light-N);
+    --lumx-navigation-item-emphasis-selected-state-hover-theme-dark-label-color: var(--lumx-color-light-N);
+    --lumx-navigation-item-emphasis-selected-state-hover-theme-dark-chevron-background-color: var(
+        --lumx-color-light-L4
+    );
+    --lumx-navigation-item-emphasis-selected-state-hover-theme-dark-chevron-color: var(--lumx-color-light-N);
     --lumx-navigation-item-emphasis-selected-state-active-border-top-width: 0;
     --lumx-navigation-item-emphasis-selected-state-active-border-right-width: 0;
     --lumx-navigation-item-emphasis-selected-state-active-border-bottom-width: 0;
@@ -474,27 +236,14 @@
         --lumx-color-primary-L3
     );
     --lumx-navigation-item-emphasis-selected-state-active-theme-light-chevron-color: var(--lumx-color-primary-D2);
-    --lumx-navigation-item-emphasis-selected-state-active-theme-dark-background-color: rgba(
-        255,
-        255,
-        255,
-        0.2
-    ); /* Base light color with 20% opacity */
-    --lumx-navigation-item-emphasis-selected-state-active-theme-dark-border-color: rgba(
-        255,
-        255,
-        255,
-        0.2
-    ); /* Base light color with 20% opacity */
-    --lumx-navigation-item-emphasis-selected-state-active-theme-dark-icon-color: #fff; /* Neutral light color */
-    --lumx-navigation-item-emphasis-selected-state-active-theme-dark-label-color: #fff; /* Neutral light color */
-    --lumx-navigation-item-emphasis-selected-state-active-theme-dark-chevron-background-color: rgba(
-        255,
-        255,
-        255,
-        0.2
-    ); /* Base light color with 20% opacity */
-    --lumx-navigation-item-emphasis-selected-state-active-theme-dark-chevron-color: #fff; /* Neutral light color */
+    --lumx-navigation-item-emphasis-selected-state-active-theme-dark-background-color: var(--lumx-color-light-L5);
+    --lumx-navigation-item-emphasis-selected-state-active-theme-dark-border-color: var(--lumx-color-light-L5);
+    --lumx-navigation-item-emphasis-selected-state-active-theme-dark-icon-color: var(--lumx-color-light-N);
+    --lumx-navigation-item-emphasis-selected-state-active-theme-dark-label-color: var(--lumx-color-light-N);
+    --lumx-navigation-item-emphasis-selected-state-active-theme-dark-chevron-background-color: var(
+        --lumx-color-light-L5
+    );
+    --lumx-navigation-item-emphasis-selected-state-active-theme-dark-chevron-color: var(--lumx-color-light-N);
     --lumx-tabs-link-height: 48px;
     --lumx-tabs-link-border-radius: 0;
     --lumx-tabs-link-emphasis-low-state-default-border-top-width: 0;
@@ -502,161 +251,61 @@
     --lumx-tabs-link-emphasis-low-state-default-border-bottom-width: 2px;
     --lumx-tabs-link-emphasis-low-state-default-border-left-width: 0;
     --lumx-tabs-link-emphasis-low-state-default-theme-light-background-color: transparent;
-    --lumx-tabs-link-emphasis-low-state-default-theme-light-color: rgba(
-        0,
-        0,
-        0,
-        0.7
-    ); /* Base dark color with 70% opacity */
-    --lumx-tabs-link-emphasis-low-state-default-theme-light-border-color: rgba(
-        0,
-        0,
-        0,
-        0.12
-    ); /* Base dark color with 12% opacity */
+    --lumx-tabs-link-emphasis-low-state-default-theme-light-color: var(--lumx-color-dark-L1);
+    --lumx-tabs-link-emphasis-low-state-default-theme-light-border-color: var(--lumx-color-dark-L5);
     --lumx-tabs-link-emphasis-low-state-default-theme-dark-background-color: transparent;
-    --lumx-tabs-link-emphasis-low-state-default-theme-dark-color: #fff; /* Neutral light color */
-    --lumx-tabs-link-emphasis-low-state-default-theme-dark-border-color: rgba(
-        255,
-        255,
-        255,
-        0.2
-    ); /* Base light color with 20% opacity */
+    --lumx-tabs-link-emphasis-low-state-default-theme-dark-color: var(--lumx-color-light-N);
+    --lumx-tabs-link-emphasis-low-state-default-theme-dark-border-color: var(--lumx-color-light-L5);
     --lumx-tabs-link-emphasis-low-state-hover-border-top-width: 0;
     --lumx-tabs-link-emphasis-low-state-hover-border-right-width: 0;
     --lumx-tabs-link-emphasis-low-state-hover-border-bottom-width: 2px;
     --lumx-tabs-link-emphasis-low-state-hover-border-left-width: 0;
-    --lumx-tabs-link-emphasis-low-state-hover-theme-light-background-color: rgba(
-        0,
-        0,
-        0,
-        0.12
-    ); /* Base dark color with 12% opacity */
-    --lumx-tabs-link-emphasis-low-state-hover-theme-light-color: rgba(
-        0,
-        0,
-        0,
-        0.7
-    ); /* Base dark color with 70% opacity */
-    --lumx-tabs-link-emphasis-low-state-hover-theme-light-border-color: rgba(
-        0,
-        0,
-        0,
-        0.12
-    ); /* Base dark color with 12% opacity */
-    --lumx-tabs-link-emphasis-low-state-hover-theme-dark-background-color: rgba(
-        255,
-        255,
-        255,
-        0.2
-    ); /* Base light color with 20% opacity */
-    --lumx-tabs-link-emphasis-low-state-hover-theme-dark-color: #fff; /* Neutral light color */
-    --lumx-tabs-link-emphasis-low-state-hover-theme-dark-border-color: rgba(
-        255,
-        255,
-        255,
-        0.2
-    ); /* Base light color with 20% opacity */
+    --lumx-tabs-link-emphasis-low-state-hover-theme-light-background-color: var(--lumx-color-dark-L5);
+    --lumx-tabs-link-emphasis-low-state-hover-theme-light-color: var(--lumx-color-dark-L1);
+    --lumx-tabs-link-emphasis-low-state-hover-theme-light-border-color: var(--lumx-color-dark-L5);
+    --lumx-tabs-link-emphasis-low-state-hover-theme-dark-background-color: var(--lumx-color-light-L5);
+    --lumx-tabs-link-emphasis-low-state-hover-theme-dark-color: var(--lumx-color-light-N);
+    --lumx-tabs-link-emphasis-low-state-hover-theme-dark-border-color: var(--lumx-color-light-L5);
     --lumx-tabs-link-emphasis-low-state-active-border-top-width: 0;
     --lumx-tabs-link-emphasis-low-state-active-border-right-width: 0;
     --lumx-tabs-link-emphasis-low-state-active-border-bottom-width: 2px;
     --lumx-tabs-link-emphasis-low-state-active-border-left-width: 0;
-    --lumx-tabs-link-emphasis-low-state-active-theme-light-background-color: rgba(
-        0,
-        0,
-        0,
-        0.2
-    ); /* Base dark color with 20% opacity */
-    --lumx-tabs-link-emphasis-low-state-active-theme-light-color: rgba(
-        0,
-        0,
-        0,
-        0.7
-    ); /* Base dark color with 70% opacity */
-    --lumx-tabs-link-emphasis-low-state-active-theme-light-border-color: rgba(
-        0,
-        0,
-        0,
-        0.12
-    ); /* Base dark color with 12% opacity */
-    --lumx-tabs-link-emphasis-low-state-active-theme-dark-background-color: rgba(
-        255,
-        255,
-        255,
-        0.4
-    ); /* Base light color with 40% opacity */
-    --lumx-tabs-link-emphasis-low-state-active-theme-dark-color: #fff; /* Neutral light color */
-    --lumx-tabs-link-emphasis-low-state-active-theme-dark-border-color: rgba(
-        255,
-        255,
-        255,
-        0.2
-    ); /* Base light color with 20% opacity */
+    --lumx-tabs-link-emphasis-low-state-active-theme-light-background-color: var(--lumx-color-dark-L4);
+    --lumx-tabs-link-emphasis-low-state-active-theme-light-color: var(--lumx-color-dark-L1);
+    --lumx-tabs-link-emphasis-low-state-active-theme-light-border-color: var(--lumx-color-dark-L5);
+    --lumx-tabs-link-emphasis-low-state-active-theme-dark-background-color: var(--lumx-color-light-L4);
+    --lumx-tabs-link-emphasis-low-state-active-theme-dark-color: var(--lumx-color-light-N);
+    --lumx-tabs-link-emphasis-low-state-active-theme-dark-border-color: var(--lumx-color-light-L5);
     --lumx-tabs-link-emphasis-selected-state-default-border-top-width: 0;
     --lumx-tabs-link-emphasis-selected-state-default-border-right-width: 0;
     --lumx-tabs-link-emphasis-selected-state-default-border-bottom-width: 2px;
     --lumx-tabs-link-emphasis-selected-state-default-border-left-width: 0;
     --lumx-tabs-link-emphasis-selected-state-default-theme-light-background-color: transparent;
-    --lumx-tabs-link-emphasis-selected-state-default-theme-light-color: rgba(
-        0,
-        0,
-        0,
-        0.7
-    ); /* Base dark color with 70% opacity */
+    --lumx-tabs-link-emphasis-selected-state-default-theme-light-color: var(--lumx-color-dark-L1);
     --lumx-tabs-link-emphasis-selected-state-default-theme-light-border-color: var(--lumx-color-primary-N);
     --lumx-tabs-link-emphasis-selected-state-default-theme-dark-background-color: transparent;
-    --lumx-tabs-link-emphasis-selected-state-default-theme-dark-color: #fff; /* Neutral light color */
-    --lumx-tabs-link-emphasis-selected-state-default-theme-dark-border-color: #fff; /* Neutral light color */
+    --lumx-tabs-link-emphasis-selected-state-default-theme-dark-color: var(--lumx-color-light-N);
+    --lumx-tabs-link-emphasis-selected-state-default-theme-dark-border-color: var(--lumx-color-light-N);
     --lumx-tabs-link-emphasis-selected-state-hover-border-top-width: 0;
     --lumx-tabs-link-emphasis-selected-state-hover-border-right-width: 0;
     --lumx-tabs-link-emphasis-selected-state-hover-border-bottom-width: 2px;
     --lumx-tabs-link-emphasis-selected-state-hover-border-left-width: 0;
-    --lumx-tabs-link-emphasis-selected-state-hover-theme-light-background-color: rgba(
-        0,
-        0,
-        0,
-        0.12
-    ); /* Base dark color with 12% opacity */
-    --lumx-tabs-link-emphasis-selected-state-hover-theme-light-color: rgba(
-        0,
-        0,
-        0,
-        0.7
-    ); /* Base dark color with 70% opacity */
+    --lumx-tabs-link-emphasis-selected-state-hover-theme-light-background-color: var(--lumx-color-dark-L5);
+    --lumx-tabs-link-emphasis-selected-state-hover-theme-light-color: var(--lumx-color-dark-L1);
     --lumx-tabs-link-emphasis-selected-state-hover-theme-light-border-color: var(--lumx-color-primary-N);
-    --lumx-tabs-link-emphasis-selected-state-hover-theme-dark-background-color: rgba(
-        255,
-        255,
-        255,
-        0.2
-    ); /* Base light color with 20% opacity */
-    --lumx-tabs-link-emphasis-selected-state-hover-theme-dark-color: #fff; /* Neutral light color */
-    --lumx-tabs-link-emphasis-selected-state-hover-theme-dark-border-color: #fff; /* Neutral light color */
+    --lumx-tabs-link-emphasis-selected-state-hover-theme-dark-background-color: var(--lumx-color-light-L5);
+    --lumx-tabs-link-emphasis-selected-state-hover-theme-dark-color: var(--lumx-color-light-N);
+    --lumx-tabs-link-emphasis-selected-state-hover-theme-dark-border-color: var(--lumx-color-light-N);
     --lumx-tabs-link-emphasis-selected-state-active-border-top-width: 0;
     --lumx-tabs-link-emphasis-selected-state-active-border-right-width: 0;
     --lumx-tabs-link-emphasis-selected-state-active-border-bottom-width: 2px;
     --lumx-tabs-link-emphasis-selected-state-active-border-left-width: 0;
-    --lumx-tabs-link-emphasis-selected-state-active-theme-light-background-color: rgba(
-        0,
-        0,
-        0,
-        0.2
-    ); /* Base dark color with 20% opacity */
-    --lumx-tabs-link-emphasis-selected-state-active-theme-light-color: rgba(
-        0,
-        0,
-        0,
-        0.7
-    ); /* Base dark color with 70% opacity */
+    --lumx-tabs-link-emphasis-selected-state-active-theme-light-background-color: var(--lumx-color-dark-L4);
+    --lumx-tabs-link-emphasis-selected-state-active-theme-light-color: var(--lumx-color-dark-L1);
     --lumx-tabs-link-emphasis-selected-state-active-theme-light-border-color: var(--lumx-color-primary-N);
-    --lumx-tabs-link-emphasis-selected-state-active-theme-dark-background-color: rgba(
-        255,
-        255,
-        255,
-        0.4
-    ); /* Base light color with 40% opacity */
-    --lumx-tabs-link-emphasis-selected-state-active-theme-dark-color: #fff; /* Neutral light color */
-    --lumx-tabs-link-emphasis-selected-state-active-theme-dark-border-color: #fff; /* Neutral light color */
+    --lumx-tabs-link-emphasis-selected-state-active-theme-dark-background-color: var(--lumx-color-light-L4);
+    --lumx-tabs-link-emphasis-selected-state-active-theme-dark-color: var(--lumx-color-light-N);
+    --lumx-tabs-link-emphasis-selected-state-active-theme-dark-border-color: var(--lumx-color-light-N);
     --lumx-text-field-input-min-height: 36px;
     --lumx-text-field-input-padding-horizontal: 12px;
     --lumx-text-field-input-border-radius: 4px;
@@ -664,122 +313,42 @@
     --lumx-text-field-state-default-input-border-right-width: 1px;
     --lumx-text-field-state-default-input-border-bottom-width: 1px;
     --lumx-text-field-state-default-input-border-left-width: 1px;
-    --lumx-text-field-state-default-theme-light-header-label-color: rgba(0, 0, 0, 0.87); /* Neutral dark color */
-    --lumx-text-field-state-default-theme-light-input-background-color: rgba(
-        0,
-        0,
-        0,
-        0.05
-    ); /* Base dark color with 5% opacity */
-    --lumx-text-field-state-default-theme-light-input-border-color: rgba(
-        0,
-        0,
-        0,
-        0.2
-    ); /* Base dark color with 20% opacity */
-    --lumx-text-field-state-default-theme-light-input-content-color: rgba(0, 0, 0, 0.87); /* Neutral dark color */
-    --lumx-text-field-state-default-theme-light-input-placeholder-color: rgba(
-        0,
-        0,
-        0,
-        0.54
-    ); /* Base dark color with 54% opacity */
-    --lumx-text-field-state-default-theme-dark-header-label-color: #fff; /* Neutral light color */
-    --lumx-text-field-state-default-theme-dark-input-background-color: rgba(
-        255,
-        255,
-        255,
-        0.1
-    ); /* Base light color with 10% opacity */
-    --lumx-text-field-state-default-theme-dark-input-border-color: rgba(
-        255,
-        255,
-        255,
-        0.4
-    ); /* Base light color with 40% opacity */
-    --lumx-text-field-state-default-theme-dark-input-content-color: #fff; /* Neutral light color */
-    --lumx-text-field-state-default-theme-dark-input-placeholder-color: rgba(
-        255,
-        255,
-        255,
-        0.8
-    ); /* Base light color with 80% opacity */
+    --lumx-text-field-state-default-theme-light-header-label-color: var(--lumx-color-dark-N);
+    --lumx-text-field-state-default-theme-light-input-background-color: var(--lumx-color-dark-L6);
+    --lumx-text-field-state-default-theme-light-input-border-color: var(--lumx-color-dark-L4);
+    --lumx-text-field-state-default-theme-light-input-content-color: var(--lumx-color-dark-N);
+    --lumx-text-field-state-default-theme-light-input-placeholder-color: var(--lumx-color-dark-L2);
+    --lumx-text-field-state-default-theme-dark-header-label-color: var(--lumx-color-light-N);
+    --lumx-text-field-state-default-theme-dark-input-background-color: var(--lumx-color-light-L6);
+    --lumx-text-field-state-default-theme-dark-input-border-color: var(--lumx-color-light-L4);
+    --lumx-text-field-state-default-theme-dark-input-content-color: var(--lumx-color-light-N);
+    --lumx-text-field-state-default-theme-dark-input-placeholder-color: var(--lumx-color-light-L2);
     --lumx-text-field-state-hover-input-border-top-width: 1px;
     --lumx-text-field-state-hover-input-border-right-width: 1px;
     --lumx-text-field-state-hover-input-border-bottom-width: 1px;
     --lumx-text-field-state-hover-input-border-left-width: 1px;
-    --lumx-text-field-state-hover-theme-light-input-background-color: rgba(
-        0,
-        0,
-        0,
-        0.12
-    ); /* Base dark color with 12% opacity */
-    --lumx-text-field-state-hover-theme-light-input-border-color: rgba(
-        0,
-        0,
-        0,
-        0.2
-    ); /* Base dark color with 20% opacity */
-    --lumx-text-field-state-hover-theme-light-input-content-color: rgba(0, 0, 0, 0.87); /* Neutral dark color */
-    --lumx-text-field-state-hover-theme-light-input-placeholder-color: rgba(
-        0,
-        0,
-        0,
-        0.54
-    ); /* Base dark color with 54% opacity */
-    --lumx-text-field-state-hover-theme-dark-input-background-color: rgba(
-        255,
-        255,
-        255,
-        0.2
-    ); /* Base light color with 20% opacity */
-    --lumx-text-field-state-hover-theme-dark-input-border-color: rgba(
-        255,
-        255,
-        255,
-        0.4
-    ); /* Base light color with 40% opacity */
-    --lumx-text-field-state-hover-theme-dark-input-content-color: #fff; /* Neutral light color */
-    --lumx-text-field-state-hover-theme-dark-input-placeholder-color: rgba(
-        255,
-        255,
-        255,
-        0.8
-    ); /* Base light color with 80% opacity */
+    --lumx-text-field-state-hover-theme-light-input-background-color: var(--lumx-color-dark-L5);
+    --lumx-text-field-state-hover-theme-light-input-border-color: var(--lumx-color-dark-L4);
+    --lumx-text-field-state-hover-theme-light-input-content-color: var(--lumx-color-dark-N);
+    --lumx-text-field-state-hover-theme-light-input-placeholder-color: var(--lumx-color-dark-L2);
+    --lumx-text-field-state-hover-theme-dark-input-background-color: var(--lumx-color-light-L5);
+    --lumx-text-field-state-hover-theme-dark-input-border-color: var(--lumx-color-light-L4);
+    --lumx-text-field-state-hover-theme-dark-input-content-color: var(--lumx-color-light-N);
+    --lumx-text-field-state-hover-theme-dark-input-placeholder-color: var(--lumx-color-light-L2);
     --lumx-text-field-state-focus-input-border-top-width: 2px;
     --lumx-text-field-state-focus-input-border-right-width: 2px;
     --lumx-text-field-state-focus-input-border-bottom-width: 2px;
     --lumx-text-field-state-focus-input-border-left-width: 2px;
-    --lumx-text-field-state-focus-theme-light-header-label-color: rgba(0, 0, 0, 0.87); /* Neutral dark color */
-    --lumx-text-field-state-focus-theme-light-input-background-color: #fff; /* Neutral light color */
-    --lumx-text-field-state-focus-theme-light-input-border-color: rgba(
-        33,
-        150,
-        243,
-        0.6
-    ); /* Base blue color with 60% opacity */
-    --lumx-text-field-state-focus-theme-light-input-content-color: rgba(0, 0, 0, 0.87); /* Neutral dark color */
-    --lumx-text-field-state-focus-theme-light-input-placeholder-color: rgba(
-        0,
-        0,
-        0,
-        0.54
-    ); /* Base dark color with 54% opacity */
-    --lumx-text-field-state-focus-theme-dark-header-label-color: #fff; /* Neutral light color */
+    --lumx-text-field-state-focus-theme-light-header-label-color: var(--lumx-color-dark-N);
+    --lumx-text-field-state-focus-theme-light-input-background-color: var(--lumx-color-light-N);
+    --lumx-text-field-state-focus-theme-light-input-border-color: var(--lumx-color-primary-L2);
+    --lumx-text-field-state-focus-theme-light-input-content-color: var(--lumx-color-dark-N);
+    --lumx-text-field-state-focus-theme-light-input-placeholder-color: var(--lumx-color-dark-L2);
+    --lumx-text-field-state-focus-theme-dark-header-label-color: var(--lumx-color-light-N);
     --lumx-text-field-state-focus-theme-dark-input-background-color: transparent;
-    --lumx-text-field-state-focus-theme-dark-input-border-color: rgba(
-        255,
-        255,
-        255,
-        0.8
-    ); /* Base light color with 80% opacity */
-    --lumx-text-field-state-focus-theme-dark-input-content-color: #fff; /* Neutral light color */
-    --lumx-text-field-state-focus-theme-dark-input-placeholder-color: rgba(
-        255,
-        255,
-        255,
-        0.8
-    ); /* Base light color with 80% opacity */
+    --lumx-text-field-state-focus-theme-dark-input-border-color: var(--lumx-color-light-L2);
+    --lumx-text-field-state-focus-theme-dark-input-content-color: var(--lumx-color-light-N);
+    --lumx-text-field-state-focus-theme-dark-input-placeholder-color: var(--lumx-color-light-L2);
     --lumx-border-radius: 4px;
     --lumx-color-dark-N: rgba(0, 0, 0, 0.87); /* Neutral dark color */
     --lumx-color-dark-L1: rgba(0, 0, 0, 0.7); /* Base dark color with 70% opacity */
