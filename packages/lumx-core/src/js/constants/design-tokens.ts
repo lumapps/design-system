@@ -1,1677 +1,631 @@
 /**
  * Do not edit directly
- * Generated on Thu, 06 Jan 2022 09:15:29 GMT
+ * Generated on Fri, 07 Jan 2022 12:33:59 GMT
  */
 
 export const DESIGN_TOKENS = {
     button: {
-        height: {
-            value: '36px',
-            attributes: {
-                category: 'button',
-                type: 'height',
-            },
-        },
-        'border-radius': {
-            value: 'var(--lumx-border-radius)',
-            attributes: {
-                category: 'button',
-                type: 'border-radius',
-            },
-        },
+        height: { value: '36px', $aliasedFrom: 'size.m' },
+        'border-radius': { value: 'var(--lumx-border-radius)' },
         'emphasis-high': {
             'state-default': {
-                padding: {
-                    horizontal: {
-                        value: '16px',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-high',
-                            item: 'state-default',
-                        },
-                    },
-                },
-                'border-width': {
-                    value: '0',
-                    attributes: {
-                        category: 'button',
-                        type: 'emphasis-high',
-                        item: 'state-default',
-                    },
-                },
+                padding: { horizontal: { value: '16px', $aliasedFrom: 'spacing.unit.big' } },
+                'border-width': { value: '0' },
                 'theme-light': {
                     'background-color': {
                         value: 'var(--lumx-color-primary-N)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-high',
-                            item: 'state-default',
-                        },
+                        attributes: { hex: '2196f3', rgb: { r: 33, g: 150, b: 243, a: 1 } },
+                        $aliasedFrom: 'color.primary.N',
                     },
                     color: {
                         value: 'var(--lumx-color-light-N)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-high',
-                            item: 'state-default',
-                        },
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                        $aliasedFrom: 'color.light.N',
                     },
-                    'border-color': {
-                        value: 'transparent',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-high',
-                            item: 'state-default',
-                        },
-                    },
+                    'border-color': { value: 'transparent' },
                 },
                 'theme-dark': {
                     'background-color': {
                         value: 'var(--lumx-color-light-N)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-high',
-                            item: 'state-default',
-                        },
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                        $aliasedFrom: 'color.light.N',
                     },
                     color: {
                         value: 'var(--lumx-color-primary-N)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-high',
-                            item: 'state-default',
-                        },
+                        attributes: { hex: '2196f3', rgb: { r: 33, g: 150, b: 243, a: 1 } },
+                        $aliasedFrom: 'color.primary.N',
                     },
-                    'border-color': {
-                        value: 'transparent',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-high',
-                            item: 'state-default',
-                        },
-                    },
+                    'border-color': { value: 'transparent' },
                 },
             },
             'state-hover': {
-                padding: {
-                    horizontal: {
-                        value: '16px',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-high',
-                            item: 'state-hover',
-                        },
-                    },
-                },
-                'border-width': {
-                    value: '0',
-                    attributes: {
-                        category: 'button',
-                        type: 'emphasis-high',
-                        item: 'state-hover',
-                    },
-                },
+                padding: { horizontal: { value: '16px', $aliasedFrom: 'spacing.unit.big' } },
+                'border-width': { value: '0' },
                 'theme-light': {
                     'background-color': {
                         value: 'var(--lumx-color-primary-D1)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-high',
-                            item: 'state-hover',
-                        },
+                        attributes: { hex: '1e88e5', rgb: { r: 30, g: 136, b: 229, a: 1 } },
+                        $aliasedFrom: 'color.primary.D1',
                     },
                     color: {
                         value: 'var(--lumx-color-light-N)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-high',
-                            item: 'state-hover',
-                        },
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                        $aliasedFrom: 'color.light.N',
                     },
-                    'border-color': {
-                        value: 'transparent',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-high',
-                            item: 'state-hover',
-                        },
-                    },
+                    'border-color': { value: 'transparent' },
                 },
                 'theme-dark': {
                     'background-color': {
                         value: 'var(--lumx-color-light-L1)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-high',
-                            item: 'state-hover',
-                        },
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.9 } },
+                        $aliasedFrom: 'color.light.L1',
                     },
                     color: {
                         value: 'var(--lumx-color-primary-N)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-high',
-                            item: 'state-hover',
-                        },
+                        attributes: { hex: '2196f3', rgb: { r: 33, g: 150, b: 243, a: 1 } },
+                        $aliasedFrom: 'color.primary.N',
                     },
-                    'border-color': {
-                        value: 'transparent',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-high',
-                            item: 'state-hover',
-                        },
-                    },
+                    'border-color': { value: 'transparent' },
                 },
             },
             'state-active': {
-                padding: {
-                    horizontal: {
-                        value: '16px',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-high',
-                            item: 'state-active',
-                        },
-                    },
-                },
-                'border-width': {
-                    value: '0',
-                    attributes: {
-                        category: 'button',
-                        type: 'emphasis-high',
-                        item: 'state-active',
-                    },
-                },
+                padding: { horizontal: { value: '16px', $aliasedFrom: 'spacing.unit.big' } },
+                'border-width': { value: '0' },
                 'theme-light': {
                     'background-color': {
                         value: 'var(--lumx-color-primary-D2)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-high',
-                            item: 'state-active',
-                        },
+                        attributes: { hex: '1976d2', rgb: { r: 25, g: 118, b: 210, a: 1 } },
+                        $aliasedFrom: 'color.primary.D2',
                     },
                     color: {
                         value: 'var(--lumx-color-light-N)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-high',
-                            item: 'state-active',
-                        },
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                        $aliasedFrom: 'color.light.N',
                     },
-                    'border-color': {
-                        value: 'transparent',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-high',
-                            item: 'state-active',
-                        },
-                    },
+                    'border-color': { value: 'transparent' },
                 },
                 'theme-dark': {
                     'background-color': {
                         value: 'var(--lumx-color-light-L2)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-high',
-                            item: 'state-active',
-                        },
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.8 } },
+                        $aliasedFrom: 'color.light.L2',
                     },
                     color: {
                         value: 'var(--lumx-color-primary-N)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-high',
-                            item: 'state-active',
-                        },
+                        attributes: { hex: '2196f3', rgb: { r: 33, g: 150, b: 243, a: 1 } },
+                        $aliasedFrom: 'color.primary.N',
                     },
-                    'border-color': {
-                        value: 'transparent',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-high',
-                            item: 'state-active',
-                        },
-                    },
+                    'border-color': { value: 'transparent' },
                 },
             },
         },
         'emphasis-medium': {
             'state-default': {
-                padding: {
-                    horizontal: {
-                        value: '16px',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-medium',
-                            item: 'state-default',
-                        },
-                    },
-                },
-                'border-width': {
-                    value: '0',
-                    attributes: {
-                        category: 'button',
-                        type: 'emphasis-medium',
-                        item: 'state-default',
-                    },
-                },
+                padding: { horizontal: { value: '16px', $aliasedFrom: 'spacing.unit.big' } },
+                'border-width': { value: '0' },
                 'theme-light': {
                     'background-color': {
                         value: 'var(--lumx-color-dark-L5)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-medium',
-                            item: 'state-default',
-                        },
+                        attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.12 } },
+                        $aliasedFrom: 'color.dark.L5',
                     },
                     color: {
                         value: 'var(--lumx-color-dark-L1)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-medium',
-                            item: 'state-default',
-                        },
+                        attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.7 } },
+                        $aliasedFrom: 'color.dark.L1',
                     },
-                    'border-color': {
-                        value: 'transparent',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-medium',
-                            item: 'state-default',
-                        },
-                    },
+                    'border-color': { value: 'transparent' },
                 },
                 'theme-dark': {
                     'background-color': {
                         value: 'var(--lumx-color-light-L5)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-medium',
-                            item: 'state-default',
-                        },
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.2 } },
+                        $aliasedFrom: 'color.light.L5',
                     },
                     color: {
                         value: 'var(--lumx-color-light-N)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-medium',
-                            item: 'state-default',
-                        },
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                        $aliasedFrom: 'color.light.N',
                     },
-                    'border-color': {
-                        value: 'transparent',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-medium',
-                            item: 'state-default',
-                        },
-                    },
+                    'border-color': { value: 'transparent' },
                 },
             },
             'state-hover': {
-                padding: {
-                    horizontal: {
-                        value: '16px',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-medium',
-                            item: 'state-hover',
-                        },
-                    },
-                },
-                'border-width': {
-                    value: '0',
-                    attributes: {
-                        category: 'button',
-                        type: 'emphasis-medium',
-                        item: 'state-hover',
-                    },
-                },
+                padding: { horizontal: { value: '16px', $aliasedFrom: 'spacing.unit.big' } },
+                'border-width': { value: '0' },
                 'theme-light': {
                     'background-color': {
                         value: 'var(--lumx-color-dark-L4)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-medium',
-                            item: 'state-hover',
-                        },
+                        attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.2 } },
+                        $aliasedFrom: 'color.dark.L4',
                     },
                     color: {
                         value: 'var(--lumx-color-dark-L1)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-medium',
-                            item: 'state-hover',
-                        },
+                        attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.7 } },
+                        $aliasedFrom: 'color.dark.L1',
                     },
-                    'border-color': {
-                        value: 'transparent',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-medium',
-                            item: 'state-hover',
-                        },
-                    },
+                    'border-color': { value: 'transparent' },
                 },
                 'theme-dark': {
                     'background-color': {
                         value: 'var(--lumx-color-light-L4)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-medium',
-                            item: 'state-hover',
-                        },
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.4 } },
+                        $aliasedFrom: 'color.light.L4',
                     },
                     color: {
                         value: 'var(--lumx-color-light-N)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-medium',
-                            item: 'state-hover',
-                        },
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                        $aliasedFrom: 'color.light.N',
                     },
-                    'border-color': {
-                        value: 'transparent',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-medium',
-                            item: 'state-hover',
-                        },
-                    },
+                    'border-color': { value: 'transparent' },
                 },
             },
             'state-active': {
-                padding: {
-                    horizontal: {
-                        value: '16px',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-medium',
-                            item: 'state-active',
-                        },
-                    },
-                },
-                'border-width': {
-                    value: '0',
-                    attributes: {
-                        category: 'button',
-                        type: 'emphasis-medium',
-                        item: 'state-active',
-                    },
-                },
+                padding: { horizontal: { value: '16px', $aliasedFrom: 'spacing.unit.big' } },
+                'border-width': { value: '0' },
                 'theme-light': {
                     'background-color': {
                         value: 'var(--lumx-color-dark-L3)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-medium',
-                            item: 'state-active',
-                        },
+                        attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.38 } },
+                        $aliasedFrom: 'color.dark.L3',
                     },
                     color: {
                         value: 'var(--lumx-color-dark-L1)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-medium',
-                            item: 'state-active',
-                        },
+                        attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.7 } },
+                        $aliasedFrom: 'color.dark.L1',
                     },
-                    'border-color': {
-                        value: 'transparent',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-medium',
-                            item: 'state-active',
-                        },
-                    },
+                    'border-color': { value: 'transparent' },
                 },
                 'theme-dark': {
                     'background-color': {
                         value: 'var(--lumx-color-light-L3)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-medium',
-                            item: 'state-active',
-                        },
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.6 } },
+                        $aliasedFrom: 'color.light.L3',
                     },
                     color: {
                         value: 'var(--lumx-color-light-N)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-medium',
-                            item: 'state-active',
-                        },
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                        $aliasedFrom: 'color.light.N',
                     },
-                    'border-color': {
-                        value: 'transparent',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-medium',
-                            item: 'state-active',
-                        },
-                    },
+                    'border-color': { value: 'transparent' },
                 },
             },
         },
         'emphasis-low': {
             'state-default': {
-                padding: {
-                    horizontal: {
-                        value: '8px',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-low',
-                            item: 'state-default',
-                        },
-                    },
-                },
-                'border-width': {
-                    value: '0',
-                    attributes: {
-                        category: 'button',
-                        type: 'emphasis-low',
-                        item: 'state-default',
-                    },
-                },
+                padding: { horizontal: { value: '8px', $aliasedFrom: 'spacing.unit.regular' } },
+                'border-width': { value: '0' },
                 'theme-light': {
-                    'background-color': {
-                        value: 'transparent',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-low',
-                            item: 'state-default',
-                        },
-                    },
+                    'background-color': { value: 'transparent' },
                     color: {
                         value: 'var(--lumx-color-dark-L1)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-low',
-                            item: 'state-default',
-                        },
+                        attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.7 } },
+                        $aliasedFrom: 'color.dark.L1',
                     },
-                    'border-color': {
-                        value: 'transparent',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-low',
-                            item: 'state-default',
-                        },
-                    },
+                    'border-color': { value: 'transparent' },
                 },
                 'theme-dark': {
-                    'background-color': {
-                        value: 'transparent',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-low',
-                            item: 'state-default',
-                        },
-                    },
+                    'background-color': { value: 'transparent' },
                     color: {
                         value: 'var(--lumx-color-light-N)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-low',
-                            item: 'state-default',
-                        },
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                        $aliasedFrom: 'color.light.N',
                     },
-                    'border-color': {
-                        value: 'transparent',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-low',
-                            item: 'state-default',
-                        },
-                    },
+                    'border-color': { value: 'transparent' },
                 },
             },
             'state-hover': {
-                padding: {
-                    horizontal: {
-                        value: '8px',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-low',
-                            item: 'state-hover',
-                        },
-                    },
-                },
-                'border-width': {
-                    value: '0',
-                    attributes: {
-                        category: 'button',
-                        type: 'emphasis-low',
-                        item: 'state-hover',
-                    },
-                },
+                padding: { horizontal: { value: '8px', $aliasedFrom: 'spacing.unit.regular' } },
+                'border-width': { value: '0' },
                 'theme-light': {
                     'background-color': {
                         value: 'var(--lumx-color-dark-L5)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-low',
-                            item: 'state-hover',
-                        },
+                        attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.12 } },
+                        $aliasedFrom: 'color.dark.L5',
                     },
                     color: {
                         value: 'var(--lumx-color-dark-L1)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-low',
-                            item: 'state-hover',
-                        },
+                        attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.7 } },
+                        $aliasedFrom: 'color.dark.L1',
                     },
-                    'border-color': {
-                        value: 'transparent',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-low',
-                            item: 'state-hover',
-                        },
-                    },
+                    'border-color': { value: 'transparent' },
                 },
                 'theme-dark': {
                     'background-color': {
                         value: 'var(--lumx-color-light-L5)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-low',
-                            item: 'state-hover',
-                        },
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.2 } },
+                        $aliasedFrom: 'color.light.L5',
                     },
                     color: {
                         value: 'var(--lumx-color-light-N)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-low',
-                            item: 'state-hover',
-                        },
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                        $aliasedFrom: 'color.light.N',
                     },
-                    'border-color': {
-                        value: 'transparent',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-low',
-                            item: 'state-hover',
-                        },
-                    },
+                    'border-color': { value: 'transparent' },
                 },
             },
             'state-active': {
-                padding: {
-                    horizontal: {
-                        value: '8px',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-low',
-                            item: 'state-active',
-                        },
-                    },
-                },
-                'border-width': {
-                    value: '0',
-                    attributes: {
-                        category: 'button',
-                        type: 'emphasis-low',
-                        item: 'state-active',
-                    },
-                },
+                padding: { horizontal: { value: '8px', $aliasedFrom: 'spacing.unit.regular' } },
+                'border-width': { value: '0' },
                 'theme-light': {
                     'background-color': {
                         value: 'var(--lumx-color-dark-L4)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-low',
-                            item: 'state-active',
-                        },
+                        attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.2 } },
+                        $aliasedFrom: 'color.dark.L4',
                     },
                     color: {
                         value: 'var(--lumx-color-dark-L1)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-low',
-                            item: 'state-active',
-                        },
+                        attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.7 } },
+                        $aliasedFrom: 'color.dark.L1',
                     },
-                    'border-color': {
-                        value: 'transparent',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-low',
-                            item: 'state-active',
-                        },
-                    },
+                    'border-color': { value: 'transparent' },
                 },
                 'theme-dark': {
                     'background-color': {
                         value: 'var(--lumx-color-light-L4)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-low',
-                            item: 'state-active',
-                        },
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.4 } },
+                        $aliasedFrom: 'color.light.L4',
                     },
                     color: {
                         value: 'var(--lumx-color-light-N)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-low',
-                            item: 'state-active',
-                        },
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                        $aliasedFrom: 'color.light.N',
                     },
-                    'border-color': {
-                        value: 'transparent',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-low',
-                            item: 'state-active',
-                        },
-                    },
+                    'border-color': { value: 'transparent' },
                 },
             },
         },
         'emphasis-selected': {
             'state-default': {
-                padding: {
-                    horizontal: {
-                        value: '16px',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-selected',
-                            item: 'state-default',
-                        },
-                    },
-                },
-                'border-width': {
-                    value: '0',
-                    attributes: {
-                        category: 'button',
-                        type: 'emphasis-selected',
-                        item: 'state-default',
-                    },
-                },
+                padding: { horizontal: { value: '16px', $aliasedFrom: 'spacing.unit.big' } },
+                'border-width': { value: '0' },
                 'theme-light': {
                     'background-color': {
                         value: 'var(--lumx-color-primary-L5)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-selected',
-                            item: 'state-default',
-                        },
+                        attributes: { hex: '2196f3', rgb: { r: 33, g: 150, b: 243, a: 0.1 } },
+                        $aliasedFrom: 'color.primary.L5',
                     },
                     color: {
                         value: 'var(--lumx-color-primary-D2)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-selected',
-                            item: 'state-default',
-                        },
+                        attributes: { hex: '1976d2', rgb: { r: 25, g: 118, b: 210, a: 1 } },
+                        $aliasedFrom: 'color.primary.D2',
                     },
-                    'border-color': {
-                        value: 'transparent',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-selected',
-                            item: 'state-default',
-                        },
-                    },
+                    'border-color': { value: 'transparent' },
                 },
                 'theme-dark': {
                     'background-color': {
                         value: 'var(--lumx-color-light-L3)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-selected',
-                            item: 'state-default',
-                        },
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.6 } },
+                        $aliasedFrom: 'color.light.L3',
                     },
                     color: {
                         value: 'var(--lumx-color-light-N)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-selected',
-                            item: 'state-default',
-                        },
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                        $aliasedFrom: 'color.light.N',
                     },
-                    'border-color': {
-                        value: 'transparent',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-selected',
-                            item: 'state-default',
-                        },
-                    },
+                    'border-color': { value: 'transparent' },
                 },
             },
             'state-hover': {
-                padding: {
-                    horizontal: {
-                        value: '16px',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-selected',
-                            item: 'state-hover',
-                        },
-                    },
-                },
-                'border-width': {
-                    value: '0',
-                    attributes: {
-                        category: 'button',
-                        type: 'emphasis-selected',
-                        item: 'state-hover',
-                    },
-                },
+                padding: { horizontal: { value: '16px', $aliasedFrom: 'spacing.unit.big' } },
+                'border-width': { value: '0' },
                 'theme-light': {
                     'background-color': {
                         value: 'var(--lumx-color-primary-L4)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-selected',
-                            item: 'state-hover',
-                        },
+                        attributes: { hex: '2196f3', rgb: { r: 33, g: 150, b: 243, a: 0.2 } },
+                        $aliasedFrom: 'color.primary.L4',
                     },
                     color: {
                         value: 'var(--lumx-color-primary-D2)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-selected',
-                            item: 'state-hover',
-                        },
+                        attributes: { hex: '1976d2', rgb: { r: 25, g: 118, b: 210, a: 1 } },
+                        $aliasedFrom: 'color.primary.D2',
                     },
-                    'border-color': {
-                        value: 'transparent',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-selected',
-                            item: 'state-hover',
-                        },
-                    },
+                    'border-color': { value: 'transparent' },
                 },
                 'theme-dark': {
                     'background-color': {
                         value: 'var(--lumx-color-light-L4)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-selected',
-                            item: 'state-hover',
-                        },
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.4 } },
+                        $aliasedFrom: 'color.light.L4',
                     },
                     color: {
                         value: 'var(--lumx-color-light-N)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-selected',
-                            item: 'state-hover',
-                        },
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                        $aliasedFrom: 'color.light.N',
                     },
-                    'border-color': {
-                        value: 'transparent',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-selected',
-                            item: 'state-hover',
-                        },
-                    },
+                    'border-color': { value: 'transparent' },
                 },
             },
             'state-active': {
-                padding: {
-                    horizontal: {
-                        value: '16px',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-selected',
-                            item: 'state-active',
-                        },
-                    },
-                },
-                'border-width': {
-                    value: '0',
-                    attributes: {
-                        category: 'button',
-                        type: 'emphasis-selected',
-                        item: 'state-active',
-                    },
-                },
+                padding: { horizontal: { value: '16px', $aliasedFrom: 'spacing.unit.big' } },
+                'border-width': { value: '0' },
                 'theme-light': {
                     'background-color': {
                         value: 'var(--lumx-color-primary-L3)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-selected',
-                            item: 'state-active',
-                        },
+                        attributes: { hex: '2196f3', rgb: { r: 33, g: 150, b: 243, a: 0.4 } },
+                        $aliasedFrom: 'color.primary.L3',
                     },
                     color: {
                         value: 'var(--lumx-color-primary-D2)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-selected',
-                            item: 'state-active',
-                        },
+                        attributes: { hex: '1976d2', rgb: { r: 25, g: 118, b: 210, a: 1 } },
+                        $aliasedFrom: 'color.primary.D2',
                     },
-                    'border-color': {
-                        value: 'transparent',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-selected',
-                            item: 'state-active',
-                        },
-                    },
+                    'border-color': { value: 'transparent' },
                 },
                 'theme-dark': {
                     'background-color': {
                         value: 'var(--lumx-color-light-L5)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-selected',
-                            item: 'state-active',
-                        },
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.2 } },
+                        $aliasedFrom: 'color.light.L5',
                     },
                     color: {
                         value: 'var(--lumx-color-light-N)',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-selected',
-                            item: 'state-active',
-                        },
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                        $aliasedFrom: 'color.light.N',
                     },
-                    'border-color': {
-                        value: 'transparent',
-                        attributes: {
-                            category: 'button',
-                            type: 'emphasis-selected',
-                            item: 'state-active',
-                        },
-                    },
+                    'border-color': { value: 'transparent' },
                 },
             },
         },
     },
     material: {
-        button: {
-            'text-transform': {
-                value: 'none',
-                attributes: {
-                    category: 'material',
-                    type: 'button',
-                    item: 'text-transform',
-                },
-            },
-        },
-        checkbox: {
-            'wrapper-size': {
-                value: '20px',
-                attributes: {
-                    category: 'material',
-                    type: 'checkbox',
-                    item: 'wrapper-size',
-                },
-            },
-            'control-size': {
-                value: '16px',
-                attributes: {
-                    category: 'material',
-                    type: 'checkbox',
-                    item: 'control-size',
-                },
-            },
-        },
+        button: { 'text-transform': { value: 'none' } },
+        checkbox: { 'wrapper-size': { value: '20px' }, 'control-size': { value: '16px' } },
         chip: {
             'size-m': {
-                height: {
-                    value: '36px',
-                    attributes: {
-                        category: 'material',
-                        type: 'chip',
-                        item: 'size-m',
-                    },
-                },
-                'border-radius': {
-                    value: '18px',
-                    attributes: {
-                        category: 'material',
-                        type: 'chip',
-                        item: 'size-m',
-                    },
-                },
-                'padding-vertical': {
-                    value: '16px',
-                    attributes: {
-                        category: 'material',
-                        type: 'chip',
-                        item: 'size-m',
-                    },
-                },
+                height: { value: '36px' },
+                'border-radius': { value: '18px' },
+                'padding-vertical': { value: '16px' },
             },
             'size-s': {
-                height: {
-                    value: '24px',
-                    attributes: {
-                        category: 'material',
-                        type: 'chip',
-                        item: 'size-s',
-                    },
-                },
-                'border-radius': {
-                    value: '12px',
-                    attributes: {
-                        category: 'material',
-                        type: 'chip',
-                        item: 'size-s',
-                    },
-                },
-                'padding-vertical': {
-                    value: '12px',
-                    attributes: {
-                        category: 'material',
-                        type: 'chip',
-                        item: 'size-s',
-                    },
-                },
+                height: { value: '24px' },
+                'border-radius': { value: '12px' },
+                'padding-vertical': { value: '12px' },
             },
         },
         'input-helper': {
-            'font-size': {
-                value: '12px',
-                attributes: {
-                    category: 'material',
-                    type: 'input-helper',
-                    item: 'font-size',
-                },
-            },
-            'font-weight': {
-                value: 'var(--lumx-typography-font-weight-regular)',
-                attributes: {
-                    category: 'material',
-                    type: 'input-helper',
-                    item: 'font-weight',
-                },
-            },
-            'line-height': {
-                value: '16px',
-                attributes: {
-                    category: 'material',
-                    type: 'input-helper',
-                    item: 'line-height',
-                },
-            },
+            'font-size': { value: '12px' },
+            'font-weight': { value: 'var(--lumx-typography-font-weight-regular)' },
+            'line-height': { value: '16px' },
         },
         'input-label': {
-            'font-size': {
-                value: '14px',
-                attributes: {
-                    category: 'material',
-                    type: 'input-label',
-                    item: 'font-size',
-                },
-            },
-            'font-weight': {
-                value: 'var(--lumx-typography-font-weight-regular)',
-                attributes: {
-                    category: 'material',
-                    type: 'input-label',
-                    item: 'font-weight',
-                },
-            },
-            'line-height': {
-                value: '20px',
-                attributes: {
-                    category: 'material',
-                    type: 'input-label',
-                    item: 'line-height',
-                },
-            },
+            'font-size': { value: '14px' },
+            'font-weight': { value: 'var(--lumx-typography-font-weight-regular)' },
+            'line-height': { value: '20px' },
         },
-        progress: {
-            bounce: {
-                value: 'block',
-                attributes: {
-                    category: 'material',
-                    type: 'progress',
-                    item: 'bounce',
-                },
-            },
-            rotate: {
-                value: 'none',
-                attributes: {
-                    category: 'material',
-                    type: 'progress',
-                    item: 'rotate',
-                },
-            },
-        },
+        progress: { bounce: { value: 'block' }, rotate: { value: 'none' } },
         'radio-button': {
-            'wrapper-size': {
-                value: '20px',
-                attributes: {
-                    category: 'material',
-                    type: 'radio-button',
-                    item: 'wrapper-size',
-                },
-            },
-            'control-size': {
-                value: '16px',
-                attributes: {
-                    category: 'material',
-                    type: 'radio-button',
-                    item: 'control-size',
-                },
-            },
-            'indicator-size': {
-                value: '8px',
-                attributes: {
-                    category: 'material',
-                    type: 'radio-button',
-                    item: 'indicator-size',
-                },
-            },
+            'wrapper-size': { value: '20px' },
+            'control-size': { value: '16px' },
+            'indicator-size': { value: '8px' },
         },
         switch: {
-            wrapper: {
-                width: {
-                    value: '30px',
-                    attributes: {
-                        category: 'material',
-                        type: 'switch',
-                        item: 'wrapper',
-                    },
-                },
-                height: {
-                    value: '20px',
-                    attributes: {
-                        category: 'material',
-                        type: 'switch',
-                        item: 'wrapper',
-                    },
-                },
-            },
-            control: {
-                width: {
-                    value: '30px',
-                    attributes: {
-                        category: 'material',
-                        type: 'switch',
-                        item: 'control',
-                    },
-                },
-                height: {
-                    value: '16px',
-                    attributes: {
-                        category: 'material',
-                        type: 'switch',
-                        item: 'control',
-                    },
-                },
-            },
-            indicator: {
-                size: {
-                    value: '8px',
-                    attributes: {
-                        category: 'material',
-                        type: 'switch',
-                        item: 'indicator',
-                    },
-                },
-                offset: {
-                    value: '4px',
-                    attributes: {
-                        category: 'material',
-                        type: 'switch',
-                        item: 'indicator',
-                    },
-                },
-            },
+            wrapper: { width: { value: '30px' }, height: { value: '20px' } },
+            control: { width: { value: '30px' }, height: { value: '16px' } },
+            indicator: { size: { value: '8px' }, offset: { value: '4px' } },
         },
         'text-field': {
-            padding: {
-                top: {
-                    value: '0',
-                    attributes: {
-                        category: 'material',
-                        type: 'text-field',
-                        item: 'padding',
-                    },
-                },
-                bottom: {
-                    value: '0',
-                    attributes: {
-                        category: 'material',
-                        type: 'text-field',
-                        item: 'padding',
-                    },
-                },
-            },
+            padding: { top: { value: '0' }, bottom: { value: '0' } },
             header: {
-                wrapper: {
-                    'margin-bottom': {
-                        value: '8px',
-                        attributes: {
-                            category: 'material',
-                            type: 'text-field',
-                            item: 'header',
-                        },
-                    },
-                },
+                wrapper: { 'margin-bottom': { value: '8px' } },
                 label: {
-                    'font-size': {
-                        value: '14px',
-                        attributes: {
-                            category: 'material',
-                            type: 'text-field',
-                            item: 'header',
-                        },
-                    },
-                    'font-weight': {
-                        value: 'var(--lumx-typography-font-weight-regular)',
-                        attributes: {
-                            category: 'material',
-                            type: 'text-field',
-                            item: 'header',
-                        },
-                    },
-                    'line-height': {
-                        value: '20px',
-                        attributes: {
-                            category: 'material',
-                            type: 'text-field',
-                            item: 'header',
-                        },
-                    },
+                    'font-size': { value: '14px' },
+                    'font-weight': { value: 'var(--lumx-typography-font-weight-regular)' },
+                    'line-height': { value: '20px' },
                 },
             },
             input: {
                 content: {
-                    'font-size': {
-                        value: '14px',
-                        attributes: {
-                            category: 'material',
-                            type: 'text-field',
-                            item: 'input',
-                        },
-                    },
-                    'font-weight': {
-                        value: 'var(--lumx-typography-font-weight-regular)',
-                        attributes: {
-                            category: 'material',
-                            type: 'text-field',
-                            item: 'input',
-                        },
-                    },
-                    'line-height': {
-                        value: '20px',
-                        attributes: {
-                            category: 'material',
-                            type: 'text-field',
-                            item: 'input',
-                        },
-                    },
+                    'font-size': { value: '14px' },
+                    'font-weight': { value: 'var(--lumx-typography-font-weight-regular)' },
+                    'line-height': { value: '20px' },
                 },
             },
         },
     },
     navigation: {
         item: {
-            padding: {
-                horizontal: {
-                    value: '8px',
-                    attributes: {
-                        category: 'navigation',
-                        type: 'item',
-                        item: 'padding',
-                    },
-                },
-            },
-            'min-height': {
-                value: '36px',
-                attributes: {
-                    category: 'navigation',
-                    type: 'item',
-                    item: 'min-height',
-                },
-            },
-            'border-radius': {
-                value: 'var(--lumx-border-radius)',
-                attributes: {
-                    category: 'navigation',
-                    type: 'item',
-                    item: 'border-radius',
-                },
-            },
+            padding: { horizontal: { value: '8px', $aliasedFrom: 'spacing.unit.regular' } },
+            'min-height': { value: '36px', $aliasedFrom: 'size.m' },
+            'border-radius': { value: 'var(--lumx-border-radius)' },
             'emphasis-low': {
                 'state-default': {
                     border: {
-                        top: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'navigation',
-                                    type: 'item',
-                                    item: 'emphasis-low',
-                                },
-                            },
-                        },
-                        right: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'navigation',
-                                    type: 'item',
-                                    item: 'emphasis-low',
-                                },
-                            },
-                        },
-                        bottom: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'navigation',
-                                    type: 'item',
-                                    item: 'emphasis-low',
-                                },
-                            },
-                        },
-                        left: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'navigation',
-                                    type: 'item',
-                                    item: 'emphasis-low',
-                                },
-                            },
-                        },
+                        top: { width: { value: '0' } },
+                        right: { width: { value: '0' } },
+                        bottom: { width: { value: '0' } },
+                        left: { width: { value: '0' } },
                     },
                     'theme-light': {
-                        'background-color': {
-                            value: 'transparent',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
-                        },
+                        'background-color': { value: 'transparent' },
                         'border-color': {
                             value: 'var(--lumx-color-dark-L5)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.12 } },
+                            $aliasedFrom: 'color.dark.L5',
                         },
                         'icon-color': {
                             value: 'var(--lumx-color-dark-L1)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.7 } },
+                            $aliasedFrom: 'color.dark.L1',
                         },
                         'label-color': {
                             value: 'var(--lumx-color-dark-N)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.87 } },
+                            $aliasedFrom: 'color.dark.N',
                         },
-                        'chevron-background-color': {
-                            value: 'transparent',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
-                        },
+                        'chevron-background-color': { value: 'transparent' },
                         'chevron-color': {
                             value: 'var(--lumx-color-dark-L1)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.7 } },
+                            $aliasedFrom: 'color.dark.L1',
                         },
                     },
                     'theme-dark': {
-                        'background-color': {
-                            value: 'transparent',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
-                        },
+                        'background-color': { value: 'transparent' },
                         'border-color': {
                             value: 'var(--lumx-color-light-L5)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.2 } },
+                            $aliasedFrom: 'color.light.L5',
                         },
                         'icon-color': {
                             value: 'var(--lumx-color-light-N)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                            $aliasedFrom: 'color.light.N',
                         },
                         'label-color': {
                             value: 'var(--lumx-color-light-N)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                            $aliasedFrom: 'color.light.N',
                         },
-                        'chevron-background-color': {
-                            value: 'transparent',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
-                        },
+                        'chevron-background-color': { value: 'transparent' },
                         'chevron-color': {
                             value: 'var(--lumx-color-light-N)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                            $aliasedFrom: 'color.light.N',
                         },
                     },
                 },
                 'state-hover': {
                     border: {
-                        top: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'navigation',
-                                    type: 'item',
-                                    item: 'emphasis-low',
-                                },
-                            },
-                        },
-                        right: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'navigation',
-                                    type: 'item',
-                                    item: 'emphasis-low',
-                                },
-                            },
-                        },
-                        bottom: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'navigation',
-                                    type: 'item',
-                                    item: 'emphasis-low',
-                                },
-                            },
-                        },
-                        left: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'navigation',
-                                    type: 'item',
-                                    item: 'emphasis-low',
-                                },
-                            },
-                        },
+                        top: { width: { value: '0' } },
+                        right: { width: { value: '0' } },
+                        bottom: { width: { value: '0' } },
+                        left: { width: { value: '0' } },
                     },
                     'theme-light': {
                         'background-color': {
                             value: 'var(--lumx-color-dark-L5)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.12 } },
+                            $aliasedFrom: 'color.dark.L5',
                         },
                         'border-color': {
                             value: 'var(--lumx-color-dark-L5)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.12 } },
+                            $aliasedFrom: 'color.dark.L5',
                         },
                         'icon-color': {
                             value: 'var(--lumx-color-dark-L1)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.7 } },
+                            $aliasedFrom: 'color.dark.L1',
                         },
                         'label-color': {
                             value: 'var(--lumx-color-dark-N)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.87 } },
+                            $aliasedFrom: 'color.dark.N',
                         },
                         'chevron-background-color': {
                             value: 'var(--lumx-color-dark-L5)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.12 } },
+                            $aliasedFrom: 'color.dark.L5',
                         },
                         'chevron-color': {
                             value: 'var(--lumx-color-dark-L1)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.7 } },
+                            $aliasedFrom: 'color.dark.L1',
                         },
                     },
                     'theme-dark': {
                         'background-color': {
                             value: 'var(--lumx-color-light-L5)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.2 } },
+                            $aliasedFrom: 'color.light.L5',
                         },
                         'border-color': {
                             value: 'var(--lumx-color-light-L5)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.2 } },
+                            $aliasedFrom: 'color.light.L5',
                         },
                         'icon-color': {
                             value: 'var(--lumx-color-light-N)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                            $aliasedFrom: 'color.light.N',
                         },
                         'label-color': {
                             value: 'var(--lumx-color-light-N)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                            $aliasedFrom: 'color.light.N',
                         },
                         'chevron-background-color': {
                             value: 'var(--lumx-color-light-L5)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.2 } },
+                            $aliasedFrom: 'color.light.L5',
                         },
                         'chevron-color': {
                             value: 'var(--lumx-color-light-N)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                            $aliasedFrom: 'color.light.N',
                         },
                     },
                 },
                 'state-active': {
                     border: {
-                        top: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'navigation',
-                                    type: 'item',
-                                    item: 'emphasis-low',
-                                },
-                            },
-                        },
-                        right: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'navigation',
-                                    type: 'item',
-                                    item: 'emphasis-low',
-                                },
-                            },
-                        },
-                        bottom: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'navigation',
-                                    type: 'item',
-                                    item: 'emphasis-low',
-                                },
-                            },
-                        },
-                        left: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'navigation',
-                                    type: 'item',
-                                    item: 'emphasis-low',
-                                },
-                            },
-                        },
+                        top: { width: { value: '0' } },
+                        right: { width: { value: '0' } },
+                        bottom: { width: { value: '0' } },
+                        left: { width: { value: '0' } },
                     },
                     'theme-light': {
                         'background-color': {
                             value: 'var(--lumx-color-dark-L4)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.2 } },
+                            $aliasedFrom: 'color.dark.L4',
                         },
                         'border-color': {
                             value: 'var(--lumx-color-dark-L5)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.12 } },
+                            $aliasedFrom: 'color.dark.L5',
                         },
                         'icon-color': {
                             value: 'var(--lumx-color-dark-L1)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.7 } },
+                            $aliasedFrom: 'color.dark.L1',
                         },
                         'label-color': {
                             value: 'var(--lumx-color-dark-N)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.87 } },
+                            $aliasedFrom: 'color.dark.N',
                         },
                         'chevron-background-color': {
                             value: 'var(--lumx-color-dark-L4)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.2 } },
+                            $aliasedFrom: 'color.dark.L4',
                         },
                         'chevron-color': {
                             value: 'var(--lumx-color-dark-L1)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.7 } },
+                            $aliasedFrom: 'color.dark.L1',
                         },
                     },
                     'theme-dark': {
                         'background-color': {
                             value: 'var(--lumx-color-light-L4)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.4 } },
+                            $aliasedFrom: 'color.light.L4',
                         },
                         'border-color': {
                             value: 'var(--lumx-color-light-L5)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.2 } },
+                            $aliasedFrom: 'color.light.L5',
                         },
                         'icon-color': {
                             value: 'var(--lumx-color-light-N)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                            $aliasedFrom: 'color.light.N',
                         },
                         'label-color': {
                             value: 'var(--lumx-color-light-N)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                            $aliasedFrom: 'color.light.N',
                         },
                         'chevron-background-color': {
                             value: 'var(--lumx-color-light-L4)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.4 } },
+                            $aliasedFrom: 'color.light.L4',
                         },
                         'chevron-color': {
                             value: 'var(--lumx-color-light-N)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                            $aliasedFrom: 'color.light.N',
                         },
                     },
                 },
@@ -1679,433 +633,209 @@ export const DESIGN_TOKENS = {
             'emphasis-selected': {
                 'state-default': {
                     border: {
-                        top: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'navigation',
-                                    type: 'item',
-                                    item: 'emphasis-selected',
-                                },
-                            },
-                        },
-                        right: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'navigation',
-                                    type: 'item',
-                                    item: 'emphasis-selected',
-                                },
-                            },
-                        },
-                        bottom: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'navigation',
-                                    type: 'item',
-                                    item: 'emphasis-selected',
-                                },
-                            },
-                        },
-                        left: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'navigation',
-                                    type: 'item',
-                                    item: 'emphasis-selected',
-                                },
-                            },
-                        },
+                        top: { width: { value: '0' } },
+                        right: { width: { value: '0' } },
+                        bottom: { width: { value: '0' } },
+                        left: { width: { value: '0' } },
                     },
                     'theme-light': {
                         'background-color': {
                             value: 'var(--lumx-color-primary-L5)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: '2196f3', rgb: { r: 33, g: 150, b: 243, a: 0.1 } },
+                            $aliasedFrom: 'color.primary.L5',
                         },
                         'border-color': {
                             value: 'var(--lumx-color-primary-N)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: '2196f3', rgb: { r: 33, g: 150, b: 243, a: 1 } },
+                            $aliasedFrom: 'color.primary.N',
                         },
                         'icon-color': {
                             value: 'var(--lumx-color-primary-D2)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: '1976d2', rgb: { r: 25, g: 118, b: 210, a: 1 } },
+                            $aliasedFrom: 'color.primary.D2',
                         },
                         'label-color': {
                             value: 'var(--lumx-color-primary-D2)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: '1976d2', rgb: { r: 25, g: 118, b: 210, a: 1 } },
+                            $aliasedFrom: 'color.primary.D2',
                         },
-                        'chevron-background-color': {
-                            value: 'transparent',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
-                        },
+                        'chevron-background-color': { value: 'transparent' },
                         'chevron-color': {
                             value: 'var(--lumx-color-primary-D2)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: '1976d2', rgb: { r: 25, g: 118, b: 210, a: 1 } },
+                            $aliasedFrom: 'color.primary.D2',
                         },
                     },
                     'theme-dark': {
                         'background-color': {
                             value: 'var(--lumx-color-light-L3)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.6 } },
+                            $aliasedFrom: 'color.light.L3',
                         },
                         'border-color': {
                             value: 'var(--lumx-color-light-L5)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.2 } },
+                            $aliasedFrom: 'color.light.L5',
                         },
                         'icon-color': {
                             value: 'var(--lumx-color-light-N)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                            $aliasedFrom: 'color.light.N',
                         },
                         'label-color': {
                             value: 'var(--lumx-color-light-N)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                            $aliasedFrom: 'color.light.N',
                         },
-                        'chevron-background-color': {
-                            value: 'transparent',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
-                        },
+                        'chevron-background-color': { value: 'transparent' },
                         'chevron-color': {
                             value: 'var(--lumx-color-light-N)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                            $aliasedFrom: 'color.light.N',
                         },
                     },
                 },
                 'state-hover': {
                     border: {
-                        top: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'navigation',
-                                    type: 'item',
-                                    item: 'emphasis-selected',
-                                },
-                            },
-                        },
-                        right: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'navigation',
-                                    type: 'item',
-                                    item: 'emphasis-selected',
-                                },
-                            },
-                        },
-                        bottom: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'navigation',
-                                    type: 'item',
-                                    item: 'emphasis-selected',
-                                },
-                            },
-                        },
-                        left: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'navigation',
-                                    type: 'item',
-                                    item: 'emphasis-selected',
-                                },
-                            },
-                        },
+                        top: { width: { value: '0' } },
+                        right: { width: { value: '0' } },
+                        bottom: { width: { value: '0' } },
+                        left: { width: { value: '0' } },
                     },
                     'theme-light': {
                         'background-color': {
                             value: 'var(--lumx-color-primary-L4)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: '2196f3', rgb: { r: 33, g: 150, b: 243, a: 0.2 } },
+                            $aliasedFrom: 'color.primary.L4',
                         },
                         'border-color': {
                             value: 'var(--lumx-color-primary-N)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: '2196f3', rgb: { r: 33, g: 150, b: 243, a: 1 } },
+                            $aliasedFrom: 'color.primary.N',
                         },
                         'icon-color': {
                             value: 'var(--lumx-color-primary-D2)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: '1976d2', rgb: { r: 25, g: 118, b: 210, a: 1 } },
+                            $aliasedFrom: 'color.primary.D2',
                         },
                         'label-color': {
                             value: 'var(--lumx-color-primary-D2)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: '1976d2', rgb: { r: 25, g: 118, b: 210, a: 1 } },
+                            $aliasedFrom: 'color.primary.D2',
                         },
                         'chevron-background-color': {
                             value: 'var(--lumx-color-primary-L4)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: '2196f3', rgb: { r: 33, g: 150, b: 243, a: 0.2 } },
+                            $aliasedFrom: 'color.primary.L4',
                         },
                         'chevron-color': {
                             value: 'var(--lumx-color-primary-D2)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: '1976d2', rgb: { r: 25, g: 118, b: 210, a: 1 } },
+                            $aliasedFrom: 'color.primary.D2',
                         },
                     },
                     'theme-dark': {
                         'background-color': {
                             value: 'var(--lumx-color-light-L4)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.4 } },
+                            $aliasedFrom: 'color.light.L4',
                         },
                         'border-color': {
                             value: 'var(--lumx-color-light-L5)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.2 } },
+                            $aliasedFrom: 'color.light.L5',
                         },
                         'icon-color': {
                             value: 'var(--lumx-color-light-N)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                            $aliasedFrom: 'color.light.N',
                         },
                         'label-color': {
                             value: 'var(--lumx-color-light-N)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                            $aliasedFrom: 'color.light.N',
                         },
                         'chevron-background-color': {
                             value: 'var(--lumx-color-light-L4)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.4 } },
+                            $aliasedFrom: 'color.light.L4',
                         },
                         'chevron-color': {
                             value: 'var(--lumx-color-light-N)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                            $aliasedFrom: 'color.light.N',
                         },
                     },
                 },
                 'state-active': {
                     border: {
-                        top: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'navigation',
-                                    type: 'item',
-                                    item: 'emphasis-selected',
-                                },
-                            },
-                        },
-                        right: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'navigation',
-                                    type: 'item',
-                                    item: 'emphasis-selected',
-                                },
-                            },
-                        },
-                        bottom: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'navigation',
-                                    type: 'item',
-                                    item: 'emphasis-selected',
-                                },
-                            },
-                        },
-                        left: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'navigation',
-                                    type: 'item',
-                                    item: 'emphasis-selected',
-                                },
-                            },
-                        },
+                        top: { width: { value: '0' } },
+                        right: { width: { value: '0' } },
+                        bottom: { width: { value: '0' } },
+                        left: { width: { value: '0' } },
                     },
                     'theme-light': {
                         'background-color': {
                             value: 'var(--lumx-color-primary-L3)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: '2196f3', rgb: { r: 33, g: 150, b: 243, a: 0.4 } },
+                            $aliasedFrom: 'color.primary.L3',
                         },
                         'border-color': {
                             value: 'var(--lumx-color-primary-N)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: '2196f3', rgb: { r: 33, g: 150, b: 243, a: 1 } },
+                            $aliasedFrom: 'color.primary.N',
                         },
                         'icon-color': {
                             value: 'var(--lumx-color-primary-D2)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: '1976d2', rgb: { r: 25, g: 118, b: 210, a: 1 } },
+                            $aliasedFrom: 'color.primary.D2',
                         },
                         'label-color': {
                             value: 'var(--lumx-color-primary-D2)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: '1976d2', rgb: { r: 25, g: 118, b: 210, a: 1 } },
+                            $aliasedFrom: 'color.primary.D2',
                         },
                         'chevron-background-color': {
                             value: 'var(--lumx-color-primary-L3)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: '2196f3', rgb: { r: 33, g: 150, b: 243, a: 0.4 } },
+                            $aliasedFrom: 'color.primary.L3',
                         },
                         'chevron-color': {
                             value: 'var(--lumx-color-primary-D2)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: '1976d2', rgb: { r: 25, g: 118, b: 210, a: 1 } },
+                            $aliasedFrom: 'color.primary.D2',
                         },
                     },
                     'theme-dark': {
                         'background-color': {
                             value: 'var(--lumx-color-light-L5)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.2 } },
+                            $aliasedFrom: 'color.light.L5',
                         },
                         'border-color': {
                             value: 'var(--lumx-color-light-L5)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.2 } },
+                            $aliasedFrom: 'color.light.L5',
                         },
                         'icon-color': {
                             value: 'var(--lumx-color-light-N)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                            $aliasedFrom: 'color.light.N',
                         },
                         'label-color': {
                             value: 'var(--lumx-color-light-N)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                            $aliasedFrom: 'color.light.N',
                         },
                         'chevron-background-color': {
                             value: 'var(--lumx-color-light-L5)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.2 } },
+                            $aliasedFrom: 'color.light.L5',
                         },
                         'chevron-color': {
                             value: 'var(--lumx-color-light-N)',
-                            attributes: {
-                                category: 'navigation',
-                                type: 'item',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                            $aliasedFrom: 'color.light.N',
                         },
                     },
                 },
@@ -2114,308 +844,124 @@ export const DESIGN_TOKENS = {
     },
     tabs: {
         link: {
-            height: {
-                value: '48px',
-                attributes: {
-                    category: 'tabs',
-                    type: 'link',
-                    item: 'height',
-                },
-            },
-            'border-radius': {
-                value: '0',
-                attributes: {
-                    category: 'tabs',
-                    type: 'link',
-                    item: 'border-radius',
-                },
-            },
+            height: { value: '48px' },
+            'border-radius': { value: '0' },
             'emphasis-low': {
                 'state-default': {
                     border: {
-                        top: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'tabs',
-                                    type: 'link',
-                                    item: 'emphasis-low',
-                                },
-                            },
-                        },
-                        right: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'tabs',
-                                    type: 'link',
-                                    item: 'emphasis-low',
-                                },
-                            },
-                        },
-                        bottom: {
-                            width: {
-                                value: '2px',
-                                attributes: {
-                                    category: 'tabs',
-                                    type: 'link',
-                                    item: 'emphasis-low',
-                                },
-                            },
-                        },
-                        left: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'tabs',
-                                    type: 'link',
-                                    item: 'emphasis-low',
-                                },
-                            },
-                        },
+                        top: { width: { value: '0' } },
+                        right: { width: { value: '0' } },
+                        bottom: { width: { value: '2px' } },
+                        left: { width: { value: '0' } },
                     },
                     'theme-light': {
-                        'background-color': {
-                            value: 'transparent',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-low',
-                            },
-                        },
+                        'background-color': { value: 'transparent' },
                         color: {
                             value: 'var(--lumx-color-dark-L1)',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.7 } },
+                            $aliasedFrom: 'color.dark.L1',
                         },
                         'border-color': {
                             value: 'var(--lumx-color-dark-L5)',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.12 } },
+                            $aliasedFrom: 'color.dark.L5',
                         },
                     },
                     'theme-dark': {
-                        'background-color': {
-                            value: 'transparent',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-low',
-                            },
-                        },
+                        'background-color': { value: 'transparent' },
                         color: {
                             value: 'var(--lumx-color-light-N)',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                            $aliasedFrom: 'color.light.N',
                         },
                         'border-color': {
                             value: 'var(--lumx-color-light-L5)',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.2 } },
+                            $aliasedFrom: 'color.light.L5',
                         },
                     },
                 },
                 'state-hover': {
                     border: {
-                        top: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'tabs',
-                                    type: 'link',
-                                    item: 'emphasis-low',
-                                },
-                            },
-                        },
-                        right: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'tabs',
-                                    type: 'link',
-                                    item: 'emphasis-low',
-                                },
-                            },
-                        },
-                        bottom: {
-                            width: {
-                                value: '2px',
-                                attributes: {
-                                    category: 'tabs',
-                                    type: 'link',
-                                    item: 'emphasis-low',
-                                },
-                            },
-                        },
-                        left: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'tabs',
-                                    type: 'link',
-                                    item: 'emphasis-low',
-                                },
-                            },
-                        },
+                        top: { width: { value: '0' } },
+                        right: { width: { value: '0' } },
+                        bottom: { width: { value: '2px' } },
+                        left: { width: { value: '0' } },
                     },
                     'theme-light': {
                         'background-color': {
                             value: 'var(--lumx-color-dark-L5)',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.12 } },
+                            $aliasedFrom: 'color.dark.L5',
                         },
                         color: {
                             value: 'var(--lumx-color-dark-L1)',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.7 } },
+                            $aliasedFrom: 'color.dark.L1',
                         },
                         'border-color': {
                             value: 'var(--lumx-color-dark-L5)',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.12 } },
+                            $aliasedFrom: 'color.dark.L5',
                         },
                     },
                     'theme-dark': {
                         'background-color': {
                             value: 'var(--lumx-color-light-L5)',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.2 } },
+                            $aliasedFrom: 'color.light.L5',
                         },
                         color: {
                             value: 'var(--lumx-color-light-N)',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                            $aliasedFrom: 'color.light.N',
                         },
                         'border-color': {
                             value: 'var(--lumx-color-light-L5)',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.2 } },
+                            $aliasedFrom: 'color.light.L5',
                         },
                     },
                 },
                 'state-active': {
                     border: {
-                        top: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'tabs',
-                                    type: 'link',
-                                    item: 'emphasis-low',
-                                },
-                            },
-                        },
-                        right: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'tabs',
-                                    type: 'link',
-                                    item: 'emphasis-low',
-                                },
-                            },
-                        },
-                        bottom: {
-                            width: {
-                                value: '2px',
-                                attributes: {
-                                    category: 'tabs',
-                                    type: 'link',
-                                    item: 'emphasis-low',
-                                },
-                            },
-                        },
-                        left: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'tabs',
-                                    type: 'link',
-                                    item: 'emphasis-low',
-                                },
-                            },
-                        },
+                        top: { width: { value: '0' } },
+                        right: { width: { value: '0' } },
+                        bottom: { width: { value: '2px' } },
+                        left: { width: { value: '0' } },
                     },
                     'theme-light': {
                         'background-color': {
                             value: 'var(--lumx-color-dark-L4)',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.2 } },
+                            $aliasedFrom: 'color.dark.L4',
                         },
                         color: {
                             value: 'var(--lumx-color-dark-L1)',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.7 } },
+                            $aliasedFrom: 'color.dark.L1',
                         },
                         'border-color': {
                             value: 'var(--lumx-color-dark-L5)',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.12 } },
+                            $aliasedFrom: 'color.dark.L5',
                         },
                     },
                     'theme-dark': {
                         'background-color': {
                             value: 'var(--lumx-color-light-L4)',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.4 } },
+                            $aliasedFrom: 'color.light.L4',
                         },
                         color: {
                             value: 'var(--lumx-color-light-N)',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                            $aliasedFrom: 'color.light.N',
                         },
                         'border-color': {
                             value: 'var(--lumx-color-light-L5)',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-low',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.2 } },
+                            $aliasedFrom: 'color.light.L5',
                         },
                     },
                 },
@@ -2423,289 +969,119 @@ export const DESIGN_TOKENS = {
             'emphasis-selected': {
                 'state-default': {
                     border: {
-                        top: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'tabs',
-                                    type: 'link',
-                                    item: 'emphasis-selected',
-                                },
-                            },
-                        },
-                        right: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'tabs',
-                                    type: 'link',
-                                    item: 'emphasis-selected',
-                                },
-                            },
-                        },
-                        bottom: {
-                            width: {
-                                value: '2px',
-                                attributes: {
-                                    category: 'tabs',
-                                    type: 'link',
-                                    item: 'emphasis-selected',
-                                },
-                            },
-                        },
-                        left: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'tabs',
-                                    type: 'link',
-                                    item: 'emphasis-selected',
-                                },
-                            },
-                        },
+                        top: { width: { value: '0' } },
+                        right: { width: { value: '0' } },
+                        bottom: { width: { value: '2px' } },
+                        left: { width: { value: '0' } },
                     },
                     'theme-light': {
-                        'background-color': {
-                            value: 'transparent',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-selected',
-                            },
-                        },
+                        'background-color': { value: 'transparent' },
                         color: {
                             value: 'var(--lumx-color-dark-L1)',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.7 } },
+                            $aliasedFrom: 'color.dark.L1',
                         },
                         'border-color': {
                             value: 'var(--lumx-color-primary-N)',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: '2196f3', rgb: { r: 33, g: 150, b: 243, a: 1 } },
+                            $aliasedFrom: 'color.primary.N',
                         },
                     },
                     'theme-dark': {
-                        'background-color': {
-                            value: 'transparent',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-selected',
-                            },
-                        },
+                        'background-color': { value: 'transparent' },
                         color: {
                             value: 'var(--lumx-color-light-N)',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                            $aliasedFrom: 'color.light.N',
                         },
                         'border-color': {
                             value: 'var(--lumx-color-light-N)',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                            $aliasedFrom: 'color.light.N',
                         },
                     },
                 },
                 'state-hover': {
                     border: {
-                        top: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'tabs',
-                                    type: 'link',
-                                    item: 'emphasis-selected',
-                                },
-                            },
-                        },
-                        right: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'tabs',
-                                    type: 'link',
-                                    item: 'emphasis-selected',
-                                },
-                            },
-                        },
-                        bottom: {
-                            width: {
-                                value: '2px',
-                                attributes: {
-                                    category: 'tabs',
-                                    type: 'link',
-                                    item: 'emphasis-selected',
-                                },
-                            },
-                        },
-                        left: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'tabs',
-                                    type: 'link',
-                                    item: 'emphasis-selected',
-                                },
-                            },
-                        },
+                        top: { width: { value: '0' } },
+                        right: { width: { value: '0' } },
+                        bottom: { width: { value: '2px' } },
+                        left: { width: { value: '0' } },
                     },
                     'theme-light': {
                         'background-color': {
                             value: 'var(--lumx-color-dark-L5)',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.12 } },
+                            $aliasedFrom: 'color.dark.L5',
                         },
                         color: {
                             value: 'var(--lumx-color-dark-L1)',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.7 } },
+                            $aliasedFrom: 'color.dark.L1',
                         },
                         'border-color': {
                             value: 'var(--lumx-color-primary-N)',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: '2196f3', rgb: { r: 33, g: 150, b: 243, a: 1 } },
+                            $aliasedFrom: 'color.primary.N',
                         },
                     },
                     'theme-dark': {
                         'background-color': {
                             value: 'var(--lumx-color-light-L5)',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.2 } },
+                            $aliasedFrom: 'color.light.L5',
                         },
                         color: {
                             value: 'var(--lumx-color-light-N)',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                            $aliasedFrom: 'color.light.N',
                         },
                         'border-color': {
                             value: 'var(--lumx-color-light-N)',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                            $aliasedFrom: 'color.light.N',
                         },
                     },
                 },
                 'state-active': {
                     border: {
-                        top: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'tabs',
-                                    type: 'link',
-                                    item: 'emphasis-selected',
-                                },
-                            },
-                        },
-                        right: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'tabs',
-                                    type: 'link',
-                                    item: 'emphasis-selected',
-                                },
-                            },
-                        },
-                        bottom: {
-                            width: {
-                                value: '2px',
-                                attributes: {
-                                    category: 'tabs',
-                                    type: 'link',
-                                    item: 'emphasis-selected',
-                                },
-                            },
-                        },
-                        left: {
-                            width: {
-                                value: '0',
-                                attributes: {
-                                    category: 'tabs',
-                                    type: 'link',
-                                    item: 'emphasis-selected',
-                                },
-                            },
-                        },
+                        top: { width: { value: '0' } },
+                        right: { width: { value: '0' } },
+                        bottom: { width: { value: '2px' } },
+                        left: { width: { value: '0' } },
                     },
                     'theme-light': {
                         'background-color': {
                             value: 'var(--lumx-color-dark-L4)',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.2 } },
+                            $aliasedFrom: 'color.dark.L4',
                         },
                         color: {
                             value: 'var(--lumx-color-dark-L1)',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.7 } },
+                            $aliasedFrom: 'color.dark.L1',
                         },
                         'border-color': {
                             value: 'var(--lumx-color-primary-N)',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: '2196f3', rgb: { r: 33, g: 150, b: 243, a: 1 } },
+                            $aliasedFrom: 'color.primary.N',
                         },
                     },
                     'theme-dark': {
                         'background-color': {
                             value: 'var(--lumx-color-light-L4)',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.4 } },
+                            $aliasedFrom: 'color.light.L4',
                         },
                         color: {
                             value: 'var(--lumx-color-light-N)',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                            $aliasedFrom: 'color.light.N',
                         },
                         'border-color': {
                             value: 'var(--lumx-color-light-N)',
-                            attributes: {
-                                category: 'tabs',
-                                type: 'link',
-                                item: 'emphasis-selected',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                            $aliasedFrom: 'color.light.N',
                         },
                     },
                 },
@@ -2714,76 +1090,17 @@ export const DESIGN_TOKENS = {
     },
     'text-field': {
         input: {
-            'min-height': {
-                value: '36px',
-                attributes: {
-                    category: 'text-field',
-                    type: 'input',
-                    item: 'min-height',
-                },
-            },
-            padding: {
-                horizontal: {
-                    value: '12px',
-                    attributes: {
-                        category: 'text-field',
-                        type: 'input',
-                        item: 'padding',
-                    },
-                },
-            },
-            'border-radius': {
-                value: '4px',
-                attributes: {
-                    category: 'text-field',
-                    type: 'input',
-                    item: 'border-radius',
-                },
-            },
+            'min-height': { value: '36px', $aliasedFrom: 'size.m' },
+            padding: { horizontal: { value: '12px', $aliasedFrom: 'spacing.unit.medium' } },
+            'border-radius': { value: '4px', $aliasedFrom: 'border-radius' },
         },
         'state-default': {
             input: {
                 border: {
-                    top: {
-                        width: {
-                            value: '1px',
-                            attributes: {
-                                category: 'text-field',
-                                type: 'state-default',
-                                item: 'input',
-                            },
-                        },
-                    },
-                    right: {
-                        width: {
-                            value: '1px',
-                            attributes: {
-                                category: 'text-field',
-                                type: 'state-default',
-                                item: 'input',
-                            },
-                        },
-                    },
-                    bottom: {
-                        width: {
-                            value: '1px',
-                            attributes: {
-                                category: 'text-field',
-                                type: 'state-default',
-                                item: 'input',
-                            },
-                        },
-                    },
-                    left: {
-                        width: {
-                            value: '1px',
-                            attributes: {
-                                category: 'text-field',
-                                type: 'state-default',
-                                item: 'input',
-                            },
-                        },
-                    },
+                    top: { width: { value: '1px' } },
+                    right: { width: { value: '1px' } },
+                    bottom: { width: { value: '1px' } },
+                    left: { width: { value: '1px' } },
                 },
             },
             'theme-light': {
@@ -2791,49 +1108,34 @@ export const DESIGN_TOKENS = {
                     label: {
                         color: {
                             value: 'var(--lumx-color-dark-N)',
-                            attributes: {
-                                category: 'text-field',
-                                type: 'state-default',
-                                item: 'theme-light',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.87 } },
+                            $aliasedFrom: 'color.dark.N',
                         },
                     },
                 },
                 input: {
                     'background-color': {
                         value: 'var(--lumx-color-dark-L6)',
-                        attributes: {
-                            category: 'text-field',
-                            type: 'state-default',
-                            item: 'theme-light',
-                        },
+                        attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.05 } },
+                        $aliasedFrom: 'color.dark.L6',
                     },
                     'border-color': {
                         value: 'var(--lumx-color-dark-L4)',
-                        attributes: {
-                            category: 'text-field',
-                            type: 'state-default',
-                            item: 'theme-light',
-                        },
+                        attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.2 } },
+                        $aliasedFrom: 'color.dark.L4',
                     },
                     content: {
                         color: {
                             value: 'var(--lumx-color-dark-N)',
-                            attributes: {
-                                category: 'text-field',
-                                type: 'state-default',
-                                item: 'theme-light',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.87 } },
+                            $aliasedFrom: 'color.dark.N',
                         },
                     },
                     placeholder: {
                         color: {
                             value: 'var(--lumx-color-dark-L2)',
-                            attributes: {
-                                category: 'text-field',
-                                type: 'state-default',
-                                item: 'theme-light',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.54 } },
+                            $aliasedFrom: 'color.dark.L2',
                         },
                     },
                 },
@@ -2843,49 +1145,34 @@ export const DESIGN_TOKENS = {
                     label: {
                         color: {
                             value: 'var(--lumx-color-light-N)',
-                            attributes: {
-                                category: 'text-field',
-                                type: 'state-default',
-                                item: 'theme-dark',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                            $aliasedFrom: 'color.light.N',
                         },
                     },
                 },
                 input: {
                     'background-color': {
                         value: 'var(--lumx-color-light-L6)',
-                        attributes: {
-                            category: 'text-field',
-                            type: 'state-default',
-                            item: 'theme-dark',
-                        },
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.1 } },
+                        $aliasedFrom: 'color.light.L6',
                     },
                     'border-color': {
                         value: 'var(--lumx-color-light-L4)',
-                        attributes: {
-                            category: 'text-field',
-                            type: 'state-default',
-                            item: 'theme-dark',
-                        },
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.4 } },
+                        $aliasedFrom: 'color.light.L4',
                     },
                     content: {
                         color: {
                             value: 'var(--lumx-color-light-N)',
-                            attributes: {
-                                category: 'text-field',
-                                type: 'state-default',
-                                item: 'theme-dark',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                            $aliasedFrom: 'color.light.N',
                         },
                     },
                     placeholder: {
                         color: {
                             value: 'var(--lumx-color-light-L2)',
-                            attributes: {
-                                category: 'text-field',
-                                type: 'state-default',
-                                item: 'theme-dark',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.8 } },
+                            $aliasedFrom: 'color.light.L2',
                         },
                     },
                 },
@@ -2894,84 +1181,36 @@ export const DESIGN_TOKENS = {
         'state-hover': {
             input: {
                 border: {
-                    top: {
-                        width: {
-                            value: '1px',
-                            attributes: {
-                                category: 'text-field',
-                                type: 'state-hover',
-                                item: 'input',
-                            },
-                        },
-                    },
-                    right: {
-                        width: {
-                            value: '1px',
-                            attributes: {
-                                category: 'text-field',
-                                type: 'state-hover',
-                                item: 'input',
-                            },
-                        },
-                    },
-                    bottom: {
-                        width: {
-                            value: '1px',
-                            attributes: {
-                                category: 'text-field',
-                                type: 'state-hover',
-                                item: 'input',
-                            },
-                        },
-                    },
-                    left: {
-                        width: {
-                            value: '1px',
-                            attributes: {
-                                category: 'text-field',
-                                type: 'state-hover',
-                                item: 'input',
-                            },
-                        },
-                    },
+                    top: { width: { value: '1px' } },
+                    right: { width: { value: '1px' } },
+                    bottom: { width: { value: '1px' } },
+                    left: { width: { value: '1px' } },
                 },
             },
             'theme-light': {
                 input: {
                     'background-color': {
                         value: 'var(--lumx-color-dark-L5)',
-                        attributes: {
-                            category: 'text-field',
-                            type: 'state-hover',
-                            item: 'theme-light',
-                        },
+                        attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.12 } },
+                        $aliasedFrom: 'color.dark.L5',
                     },
                     'border-color': {
                         value: 'var(--lumx-color-dark-L4)',
-                        attributes: {
-                            category: 'text-field',
-                            type: 'state-hover',
-                            item: 'theme-light',
-                        },
+                        attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.2 } },
+                        $aliasedFrom: 'color.dark.L4',
                     },
                     content: {
                         color: {
                             value: 'var(--lumx-color-dark-N)',
-                            attributes: {
-                                category: 'text-field',
-                                type: 'state-hover',
-                                item: 'theme-light',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.87 } },
+                            $aliasedFrom: 'color.dark.N',
                         },
                     },
                     placeholder: {
                         color: {
                             value: 'var(--lumx-color-dark-L2)',
-                            attributes: {
-                                category: 'text-field',
-                                type: 'state-hover',
-                                item: 'theme-light',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.54 } },
+                            $aliasedFrom: 'color.dark.L2',
                         },
                     },
                 },
@@ -2980,38 +1219,26 @@ export const DESIGN_TOKENS = {
                 input: {
                     'background-color': {
                         value: 'var(--lumx-color-light-L5)',
-                        attributes: {
-                            category: 'text-field',
-                            type: 'state-hover',
-                            item: 'theme-dark',
-                        },
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.2 } },
+                        $aliasedFrom: 'color.light.L5',
                     },
                     'border-color': {
                         value: 'var(--lumx-color-light-L4)',
-                        attributes: {
-                            category: 'text-field',
-                            type: 'state-hover',
-                            item: 'theme-dark',
-                        },
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.4 } },
+                        $aliasedFrom: 'color.light.L4',
                     },
                     content: {
                         color: {
                             value: 'var(--lumx-color-light-N)',
-                            attributes: {
-                                category: 'text-field',
-                                type: 'state-hover',
-                                item: 'theme-dark',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                            $aliasedFrom: 'color.light.N',
                         },
                     },
                     placeholder: {
                         color: {
                             value: 'var(--lumx-color-light-L2)',
-                            attributes: {
-                                category: 'text-field',
-                                type: 'state-hover',
-                                item: 'theme-dark',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.8 } },
+                            $aliasedFrom: 'color.light.L2',
                         },
                     },
                 },
@@ -3020,46 +1247,10 @@ export const DESIGN_TOKENS = {
         'state-focus': {
             input: {
                 border: {
-                    top: {
-                        width: {
-                            value: '2px',
-                            attributes: {
-                                category: 'text-field',
-                                type: 'state-focus',
-                                item: 'input',
-                            },
-                        },
-                    },
-                    right: {
-                        width: {
-                            value: '2px',
-                            attributes: {
-                                category: 'text-field',
-                                type: 'state-focus',
-                                item: 'input',
-                            },
-                        },
-                    },
-                    bottom: {
-                        width: {
-                            value: '2px',
-                            attributes: {
-                                category: 'text-field',
-                                type: 'state-focus',
-                                item: 'input',
-                            },
-                        },
-                    },
-                    left: {
-                        width: {
-                            value: '2px',
-                            attributes: {
-                                category: 'text-field',
-                                type: 'state-focus',
-                                item: 'input',
-                            },
-                        },
-                    },
+                    top: { width: { value: '2px' } },
+                    right: { width: { value: '2px' } },
+                    bottom: { width: { value: '2px' } },
+                    left: { width: { value: '2px' } },
                 },
             },
             'theme-light': {
@@ -3067,49 +1258,34 @@ export const DESIGN_TOKENS = {
                     label: {
                         color: {
                             value: 'var(--lumx-color-dark-N)',
-                            attributes: {
-                                category: 'text-field',
-                                type: 'state-focus',
-                                item: 'theme-light',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.87 } },
+                            $aliasedFrom: 'color.dark.N',
                         },
                     },
                 },
                 input: {
                     'background-color': {
                         value: 'var(--lumx-color-light-N)',
-                        attributes: {
-                            category: 'text-field',
-                            type: 'state-focus',
-                            item: 'theme-light',
-                        },
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                        $aliasedFrom: 'color.light.N',
                     },
                     'border-color': {
                         value: 'var(--lumx-color-primary-L2)',
-                        attributes: {
-                            category: 'text-field',
-                            type: 'state-focus',
-                            item: 'theme-light',
-                        },
+                        attributes: { hex: '2196f3', rgb: { r: 33, g: 150, b: 243, a: 0.6 } },
+                        $aliasedFrom: 'color.primary.L2',
                     },
                     content: {
                         color: {
                             value: 'var(--lumx-color-dark-N)',
-                            attributes: {
-                                category: 'text-field',
-                                type: 'state-focus',
-                                item: 'theme-light',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.87 } },
+                            $aliasedFrom: 'color.dark.N',
                         },
                     },
                     placeholder: {
                         color: {
                             value: 'var(--lumx-color-dark-L2)',
-                            attributes: {
-                                category: 'text-field',
-                                type: 'state-focus',
-                                item: 'theme-light',
-                            },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.54 } },
+                            $aliasedFrom: 'color.dark.L2',
                         },
                     },
                 },
@@ -3119,2605 +1295,843 @@ export const DESIGN_TOKENS = {
                     label: {
                         color: {
                             value: 'var(--lumx-color-light-N)',
-                            attributes: {
-                                category: 'text-field',
-                                type: 'state-focus',
-                                item: 'theme-dark',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                            $aliasedFrom: 'color.light.N',
                         },
                     },
                 },
                 input: {
-                    'background-color': {
-                        value: 'transparent',
-                        attributes: {
-                            category: 'text-field',
-                            type: 'state-focus',
-                            item: 'theme-dark',
-                        },
-                    },
+                    'background-color': { value: 'transparent' },
                     'border-color': {
                         value: 'var(--lumx-color-light-L2)',
-                        attributes: {
-                            category: 'text-field',
-                            type: 'state-focus',
-                            item: 'theme-dark',
-                        },
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.8 } },
+                        $aliasedFrom: 'color.light.L2',
                     },
                     content: {
                         color: {
                             value: 'var(--lumx-color-light-N)',
-                            attributes: {
-                                category: 'text-field',
-                                type: 'state-focus',
-                                item: 'theme-dark',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                            $aliasedFrom: 'color.light.N',
                         },
                     },
                     placeholder: {
                         color: {
                             value: 'var(--lumx-color-light-L2)',
-                            attributes: {
-                                category: 'text-field',
-                                type: 'state-focus',
-                                item: 'theme-dark',
-                            },
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.8 } },
+                            $aliasedFrom: 'color.light.L2',
                         },
                     },
                 },
             },
         },
     },
-    'border-radius': {
-        value: '4px',
-        attributes: {
-            category: 'border-radius',
-        },
-    },
+    'border-radius': { value: '4px' },
     color: {
         dark: {
             N: {
                 version: '0.22',
                 comment: 'Neutral dark color',
-                value: '#000000',
-                attributes: {
-                    category: 'color',
-                    type: 'dark',
-                    item: 'N',
-                    hex: '000000',
-                    rgb: {
-                        r: 0,
-                        g: 0,
-                        b: 0,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(0, 0, 0, 0.87)',
+                attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.87 } },
             },
             L1: {
                 version: '0.22',
                 comment: 'Base dark color with 70% opacity',
-                value: '#000000',
-                attributes: {
-                    category: 'color',
-                    type: 'dark',
-                    item: 'L1',
-                    hex: '000000',
-                    rgb: {
-                        r: 0,
-                        g: 0,
-                        b: 0,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(0, 0, 0, 0.7)',
+                attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.7 } },
             },
             L2: {
                 version: '0.22',
                 comment: 'Base dark color with 54% opacity',
-                value: '#000000',
-                attributes: {
-                    category: 'color',
-                    type: 'dark',
-                    item: 'L2',
-                    hex: '000000',
-                    rgb: {
-                        r: 0,
-                        g: 0,
-                        b: 0,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(0, 0, 0, 0.54)',
+                attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.54 } },
             },
             L3: {
                 version: '0.22',
                 comment: 'Base dark color with 38% opacity',
-                value: '#000000',
-                attributes: {
-                    category: 'color',
-                    type: 'dark',
-                    item: 'L3',
-                    hex: '000000',
-                    rgb: {
-                        r: 0,
-                        g: 0,
-                        b: 0,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(0, 0, 0, 0.38)',
+                attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.38 } },
             },
             L4: {
                 version: '0.22',
                 comment: 'Base dark color with 20% opacity',
-                value: '#000000',
-                attributes: {
-                    category: 'color',
-                    type: 'dark',
-                    item: 'L4',
-                    hex: '000000',
-                    rgb: {
-                        r: 0,
-                        g: 0,
-                        b: 0,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(0, 0, 0, 0.2)',
+                attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.2 } },
             },
             L5: {
                 version: '0.22',
                 comment: 'Base dark color with 12% opacity',
-                value: '#000000',
-                attributes: {
-                    category: 'color',
-                    type: 'dark',
-                    item: 'L5',
-                    hex: '000000',
-                    rgb: {
-                        r: 0,
-                        g: 0,
-                        b: 0,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(0, 0, 0, 0.12)',
+                attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.12 } },
             },
             L6: {
                 version: '0.22',
                 comment: 'Base dark color with 5% opacity',
-                value: '#000000',
-                attributes: {
-                    category: 'color',
-                    type: 'dark',
-                    item: 'L6',
-                    hex: '000000',
-                    rgb: {
-                        r: 0,
-                        g: 0,
-                        b: 0,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(0, 0, 0, 0.05)',
+                attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.05 } },
             },
         },
         light: {
             N: {
                 version: '0.22',
                 comment: 'Neutral light color',
-                value: '#ffffff',
-                attributes: {
-                    category: 'color',
-                    type: 'light',
-                    item: 'N',
-                    hex: 'ffffff',
-                    rgb: {
-                        r: 255,
-                        g: 255,
-                        b: 255,
-                        a: 1,
-                    },
-                },
+                value: 'rgb(255, 255, 255)',
+                attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
             },
             L1: {
                 version: '0.22',
                 comment: 'Base light color with 90% opacity',
-                value: '#ffffff',
-                attributes: {
-                    category: 'color',
-                    type: 'light',
-                    item: 'L1',
-                    hex: 'ffffff',
-                    rgb: {
-                        r: 255,
-                        g: 255,
-                        b: 255,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(255, 255, 255, 0.9)',
+                attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.9 } },
             },
             L2: {
                 version: '0.22',
                 comment: 'Base light color with 80% opacity',
-                value: '#ffffff',
-                attributes: {
-                    category: 'color',
-                    type: 'light',
-                    item: 'L2',
-                    hex: 'ffffff',
-                    rgb: {
-                        r: 255,
-                        g: 255,
-                        b: 255,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(255, 255, 255, 0.8)',
+                attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.8 } },
             },
             L3: {
                 version: '0.22',
                 comment: 'Base light color with 60% opacity',
-                value: '#ffffff',
-                attributes: {
-                    category: 'color',
-                    type: 'light',
-                    item: 'L3',
-                    hex: 'ffffff',
-                    rgb: {
-                        r: 255,
-                        g: 255,
-                        b: 255,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(255, 255, 255, 0.6)',
+                attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.6 } },
             },
             L4: {
                 version: '0.22',
                 comment: 'Base light color with 40% opacity',
-                value: '#ffffff',
-                attributes: {
-                    category: 'color',
-                    type: 'light',
-                    item: 'L4',
-                    hex: 'ffffff',
-                    rgb: {
-                        r: 255,
-                        g: 255,
-                        b: 255,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(255, 255, 255, 0.4)',
+                attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.4 } },
             },
             L5: {
                 version: '0.22',
                 comment: 'Base light color with 20% opacity',
-                value: '#ffffff',
-                attributes: {
-                    category: 'color',
-                    type: 'light',
-                    item: 'L5',
-                    hex: 'ffffff',
-                    rgb: {
-                        r: 255,
-                        g: 255,
-                        b: 255,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(255, 255, 255, 0.2)',
+                attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.2 } },
             },
             L6: {
                 version: '0.22',
                 comment: 'Base light color with 10% opacity',
-                value: '#ffffff',
-                attributes: {
-                    category: 'color',
-                    type: 'light',
-                    item: 'L6',
-                    hex: 'ffffff',
-                    rgb: {
-                        r: 255,
-                        g: 255,
-                        b: 255,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(255, 255, 255, 0.1)',
+                attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.1 } },
             },
         },
         blue: {
             D2: {
                 version: '0.22',
                 comment: 'Darkest blue color',
-                value: '#1976d2',
-                attributes: {
-                    category: 'color',
-                    type: 'blue',
-                    item: 'D2',
-                    hex: '1976d2',
-                    rgb: {
-                        r: 25,
-                        g: 118,
-                        b: 210,
-                        a: 1,
-                    },
-                },
+                value: 'rgb(25, 118, 210)',
+                attributes: { hex: '1976d2', rgb: { r: 25, g: 118, b: 210, a: 1 } },
             },
             D1: {
                 version: '0.22',
                 comment: 'Dark blue color',
-                value: '#1e88e5',
-                attributes: {
-                    category: 'color',
-                    type: 'blue',
-                    item: 'D1',
-                    hex: '1e88e5',
-                    rgb: {
-                        r: 30,
-                        g: 136,
-                        b: 229,
-                        a: 1,
-                    },
-                },
+                value: 'rgb(30, 136, 229)',
+                attributes: { hex: '1e88e5', rgb: { r: 30, g: 136, b: 229, a: 1 } },
             },
             N: {
                 version: '0.22',
                 comment: 'Neutral blue color',
-                value: '#2196f3',
-                attributes: {
-                    category: 'color',
-                    type: 'blue',
-                    item: 'N',
-                    hex: '2196f3',
-                    rgb: {
-                        r: 33,
-                        g: 150,
-                        b: 243,
-                        a: 1,
-                    },
-                },
+                value: 'rgb(33, 150, 243)',
+                attributes: { hex: '2196f3', rgb: { r: 33, g: 150, b: 243, a: 1 } },
             },
             L1: {
                 version: '0.22',
                 comment: 'Base blue color with 80% opacity',
-                value: '#2196f3',
-                attributes: {
-                    category: 'color',
-                    type: 'blue',
-                    item: 'L1',
-                    hex: '2196f3',
-                    rgb: {
-                        r: 33,
-                        g: 150,
-                        b: 243,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(33, 150, 243, 0.8)',
+                attributes: { hex: '2196f3', rgb: { r: 33, g: 150, b: 243, a: 0.8 } },
             },
             L2: {
                 version: '0.22',
                 comment: 'Base blue color with 60% opacity',
-                value: '#2196f3',
-                attributes: {
-                    category: 'color',
-                    type: 'blue',
-                    item: 'L2',
-                    hex: '2196f3',
-                    rgb: {
-                        r: 33,
-                        g: 150,
-                        b: 243,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(33, 150, 243, 0.6)',
+                attributes: { hex: '2196f3', rgb: { r: 33, g: 150, b: 243, a: 0.6 } },
             },
             L3: {
                 version: '0.22',
                 comment: 'Base blue color with 40% opacity',
-                value: '#2196f3',
-                attributes: {
-                    category: 'color',
-                    type: 'blue',
-                    item: 'L3',
-                    hex: '2196f3',
-                    rgb: {
-                        r: 33,
-                        g: 150,
-                        b: 243,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(33, 150, 243, 0.4)',
+                attributes: { hex: '2196f3', rgb: { r: 33, g: 150, b: 243, a: 0.4 } },
             },
             L4: {
                 version: '0.22',
                 comment: 'Base blue color with 20% opacity',
-                value: '#2196f3',
-                attributes: {
-                    category: 'color',
-                    type: 'blue',
-                    item: 'L4',
-                    hex: '2196f3',
-                    rgb: {
-                        r: 33,
-                        g: 150,
-                        b: 243,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(33, 150, 243, 0.2)',
+                attributes: { hex: '2196f3', rgb: { r: 33, g: 150, b: 243, a: 0.2 } },
             },
             L5: {
                 version: '0.22',
                 comment: 'Base blue color with 10% opacity',
-                value: '#2196f3',
-                attributes: {
-                    category: 'color',
-                    type: 'blue',
-                    item: 'L5',
-                    hex: '2196f3',
-                    rgb: {
-                        r: 33,
-                        g: 150,
-                        b: 243,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(33, 150, 243, 0.1)',
+                attributes: { hex: '2196f3', rgb: { r: 33, g: 150, b: 243, a: 0.1 } },
             },
             L6: {
                 version: '0.22',
                 comment: 'Base blue color with 5% opacity',
-                value: '#2196f3',
-                attributes: {
-                    category: 'color',
-                    type: 'blue',
-                    item: 'L6',
-                    hex: '2196f3',
-                    rgb: {
-                        r: 33,
-                        g: 150,
-                        b: 243,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(33, 150, 243, 0.05)',
+                attributes: { hex: '2196f3', rgb: { r: 33, g: 150, b: 243, a: 0.05 } },
             },
         },
         green: {
             D2: {
                 version: '0.22',
                 comment: 'Darkest green color',
-                value: '#388e3c',
-                attributes: {
-                    category: 'color',
-                    type: 'green',
-                    item: 'D2',
-                    hex: '388e3c',
-                    rgb: {
-                        r: 56,
-                        g: 142,
-                        b: 60,
-                        a: 1,
-                    },
-                },
+                value: 'rgb(56, 142, 60)',
+                attributes: { hex: '388e3c', rgb: { r: 56, g: 142, b: 60, a: 1 } },
             },
             D1: {
                 version: '0.22',
                 comment: 'Dark green color',
-                value: '#43a047',
-                attributes: {
-                    category: 'color',
-                    type: 'green',
-                    item: 'D1',
-                    hex: '43a047',
-                    rgb: {
-                        r: 67,
-                        g: 160,
-                        b: 71,
-                        a: 1,
-                    },
-                },
+                value: 'rgb(67, 160, 71)',
+                attributes: { hex: '43a047', rgb: { r: 67, g: 160, b: 71, a: 1 } },
             },
             N: {
                 version: '0.22',
                 comment: 'Neutral green color',
-                value: '#4caf50',
-                attributes: {
-                    category: 'color',
-                    type: 'green',
-                    item: 'N',
-                    hex: '4caf50',
-                    rgb: {
-                        r: 76,
-                        g: 175,
-                        b: 80,
-                        a: 1,
-                    },
-                },
+                value: 'rgb(76, 175, 80)',
+                attributes: { hex: '4caf50', rgb: { r: 76, g: 175, b: 80, a: 1 } },
             },
             L1: {
                 version: '0.22',
                 comment: 'Base green color with 80% opacity',
-                value: '#4caf50',
-                attributes: {
-                    category: 'color',
-                    type: 'green',
-                    item: 'L1',
-                    hex: '4caf50',
-                    rgb: {
-                        r: 76,
-                        g: 175,
-                        b: 80,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(76, 175, 80, 0.8)',
+                attributes: { hex: '4caf50', rgb: { r: 76, g: 175, b: 80, a: 0.8 } },
             },
             L2: {
                 version: '0.22',
                 comment: 'Base green color with 60% opacity',
-                value: '#4caf50',
-                attributes: {
-                    category: 'color',
-                    type: 'green',
-                    item: 'L2',
-                    hex: '4caf50',
-                    rgb: {
-                        r: 76,
-                        g: 175,
-                        b: 80,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(76, 175, 80, 0.6)',
+                attributes: { hex: '4caf50', rgb: { r: 76, g: 175, b: 80, a: 0.6 } },
             },
             L3: {
                 version: '0.22',
                 comment: 'Base green color with 40% opacity',
-                value: '#4caf50',
-                attributes: {
-                    category: 'color',
-                    type: 'green',
-                    item: 'L3',
-                    hex: '4caf50',
-                    rgb: {
-                        r: 76,
-                        g: 175,
-                        b: 80,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(76, 175, 80, 0.4)',
+                attributes: { hex: '4caf50', rgb: { r: 76, g: 175, b: 80, a: 0.4 } },
             },
             L4: {
                 version: '0.22',
                 comment: 'Base green color with 20% opacity',
-                value: '#4caf50',
-                attributes: {
-                    category: 'color',
-                    type: 'green',
-                    item: 'L4',
-                    hex: '4caf50',
-                    rgb: {
-                        r: 76,
-                        g: 175,
-                        b: 80,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(76, 175, 80, 0.2)',
+                attributes: { hex: '4caf50', rgb: { r: 76, g: 175, b: 80, a: 0.2 } },
             },
             L5: {
                 version: '0.22',
                 comment: 'Base green color with 10% opacity',
-                value: '#4caf50',
-                attributes: {
-                    category: 'color',
-                    type: 'green',
-                    item: 'L5',
-                    hex: '4caf50',
-                    rgb: {
-                        r: 76,
-                        g: 175,
-                        b: 80,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(76, 175, 80, 0.1)',
+                attributes: { hex: '4caf50', rgb: { r: 76, g: 175, b: 80, a: 0.1 } },
             },
             L6: {
                 version: '0.22',
                 comment: 'Base green color with 5% opacity',
-                value: '#4caf50',
-                attributes: {
-                    category: 'color',
-                    type: 'green',
-                    item: 'L6',
-                    hex: '4caf50',
-                    rgb: {
-                        r: 76,
-                        g: 175,
-                        b: 80,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(76, 175, 80, 0.05)',
+                attributes: { hex: '4caf50', rgb: { r: 76, g: 175, b: 80, a: 0.05 } },
             },
         },
         yellow: {
             D2: {
                 version: '0.22',
                 comment: 'Darkest yellow color',
-                value: '#ff6f00',
-                attributes: {
-                    category: 'color',
-                    type: 'yellow',
-                    item: 'D2',
-                    hex: 'ff6f00',
-                    rgb: {
-                        r: 255,
-                        g: 111,
-                        b: 0,
-                        a: 1,
-                    },
-                },
+                value: 'rgb(255, 111, 0)',
+                attributes: { hex: 'ff6f00', rgb: { r: 255, g: 111, b: 0, a: 1 } },
             },
             D1: {
                 version: '0.22',
                 comment: 'Dark yellow color',
-                value: '#ff8f00',
-                attributes: {
-                    category: 'color',
-                    type: 'yellow',
-                    item: 'D1',
-                    hex: 'ff8f00',
-                    rgb: {
-                        r: 255,
-                        g: 143,
-                        b: 0,
-                        a: 1,
-                    },
-                },
+                value: 'rgb(255, 143, 0)',
+                attributes: { hex: 'ff8f00', rgb: { r: 255, g: 143, b: 0, a: 1 } },
             },
             N: {
                 version: '0.22',
                 comment: 'Neutral yellow color',
-                value: '#ffb300',
-                attributes: {
-                    category: 'color',
-                    type: 'yellow',
-                    item: 'N',
-                    hex: 'ffb300',
-                    rgb: {
-                        r: 255,
-                        g: 179,
-                        b: 0,
-                        a: 1,
-                    },
-                },
+                value: 'rgb(255, 179, 0)',
+                attributes: { hex: 'ffb300', rgb: { r: 255, g: 179, b: 0, a: 1 } },
             },
             L1: {
                 version: '0.22',
                 comment: 'Base yellow color with 80% opacity',
-                value: '#ffb300',
-                attributes: {
-                    category: 'color',
-                    type: 'yellow',
-                    item: 'L1',
-                    hex: 'ffb300',
-                    rgb: {
-                        r: 255,
-                        g: 179,
-                        b: 0,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(255, 179, 0, 0.8)',
+                attributes: { hex: 'ffb300', rgb: { r: 255, g: 179, b: 0, a: 0.8 } },
             },
             L2: {
                 version: '0.22',
                 comment: 'Base yellow color with 70% opacity',
-                value: '#ffb300',
-                attributes: {
-                    category: 'color',
-                    type: 'yellow',
-                    item: 'L2',
-                    hex: 'ffb300',
-                    rgb: {
-                        r: 255,
-                        g: 179,
-                        b: 0,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(255, 179, 0, 0.7)',
+                attributes: { hex: 'ffb300', rgb: { r: 255, g: 179, b: 0, a: 0.7 } },
             },
             L3: {
                 version: '0.22',
                 comment: 'Base yellow color with 60% opacity',
-                value: '#ffb300',
-                attributes: {
-                    category: 'color',
-                    type: 'yellow',
-                    item: 'L3',
-                    hex: 'ffb300',
-                    rgb: {
-                        r: 255,
-                        g: 179,
-                        b: 0,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(255, 179, 0, 0.6)',
+                attributes: { hex: 'ffb300', rgb: { r: 255, g: 179, b: 0, a: 0.6 } },
             },
             L4: {
                 version: '0.22',
                 comment: 'Base yellow color with 40% opacity',
-                value: '#ffb300',
-                attributes: {
-                    category: 'color',
-                    type: 'yellow',
-                    item: 'L4',
-                    hex: 'ffb300',
-                    rgb: {
-                        r: 255,
-                        g: 179,
-                        b: 0,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(255, 179, 0, 0.4)',
+                attributes: { hex: 'ffb300', rgb: { r: 255, g: 179, b: 0, a: 0.4 } },
             },
             L5: {
                 version: '0.22',
                 comment: 'Base yellow color with 20% opacity',
-                value: '#ffb300',
-                attributes: {
-                    category: 'color',
-                    type: 'yellow',
-                    item: 'L5',
-                    hex: 'ffb300',
-                    rgb: {
-                        r: 255,
-                        g: 179,
-                        b: 0,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(255, 179, 0, 0.2)',
+                attributes: { hex: 'ffb300', rgb: { r: 255, g: 179, b: 0, a: 0.2 } },
             },
             L6: {
                 version: '0.22',
                 comment: 'Base yellow color with 10% opacity',
-                value: '#ffb300',
-                attributes: {
-                    category: 'color',
-                    type: 'yellow',
-                    item: 'L6',
-                    hex: 'ffb300',
-                    rgb: {
-                        r: 255,
-                        g: 179,
-                        b: 0,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(255, 179, 0, 0.1)',
+                attributes: { hex: 'ffb300', rgb: { r: 255, g: 179, b: 0, a: 0.1 } },
             },
         },
         red: {
             D2: {
                 version: '0.22',
                 comment: 'Darkest red color',
-                value: '#d32f2f',
-                attributes: {
-                    category: 'color',
-                    type: 'red',
-                    item: 'D2',
-                    hex: 'd32f2f',
-                    rgb: {
-                        r: 211,
-                        g: 47,
-                        b: 47,
-                        a: 1,
-                    },
-                },
+                value: 'rgb(211, 47, 47)',
+                attributes: { hex: 'd32f2f', rgb: { r: 211, g: 47, b: 47, a: 1 } },
             },
             D1: {
                 version: '0.22',
                 comment: 'Dark red color',
-                value: '#e53935',
-                attributes: {
-                    category: 'color',
-                    type: 'red',
-                    item: 'D1',
-                    hex: 'e53935',
-                    rgb: {
-                        r: 229,
-                        g: 57,
-                        b: 53,
-                        a: 1,
-                    },
-                },
+                value: 'rgb(229, 57, 53)',
+                attributes: { hex: 'e53935', rgb: { r: 229, g: 57, b: 53, a: 1 } },
             },
             N: {
                 version: '0.22',
                 comment: 'Neutral red color',
-                value: '#f44336',
-                attributes: {
-                    category: 'color',
-                    type: 'red',
-                    item: 'N',
-                    hex: 'f44336',
-                    rgb: {
-                        r: 244,
-                        g: 67,
-                        b: 54,
-                        a: 1,
-                    },
-                },
+                value: 'rgb(244, 67, 54)',
+                attributes: { hex: 'f44336', rgb: { r: 244, g: 67, b: 54, a: 1 } },
             },
             L1: {
                 version: '0.22',
                 comment: 'Base red color with 80% opacity',
-                value: '#f44336',
-                attributes: {
-                    category: 'color',
-                    type: 'red',
-                    item: 'L1',
-                    hex: 'f44336',
-                    rgb: {
-                        r: 244,
-                        g: 67,
-                        b: 54,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(244, 67, 54, 0.8)',
+                attributes: { hex: 'f44336', rgb: { r: 244, g: 67, b: 54, a: 0.8 } },
             },
             L2: {
                 version: '0.22',
                 comment: 'Base red color with 60% opacity',
-                value: '#f44336',
-                attributes: {
-                    category: 'color',
-                    type: 'red',
-                    item: 'L2',
-                    hex: 'f44336',
-                    rgb: {
-                        r: 244,
-                        g: 67,
-                        b: 54,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(244, 67, 54, 0.6)',
+                attributes: { hex: 'f44336', rgb: { r: 244, g: 67, b: 54, a: 0.6 } },
             },
             L3: {
                 version: '0.22',
                 comment: 'Base red color with 40% opacity',
-                value: '#f44336',
-                attributes: {
-                    category: 'color',
-                    type: 'red',
-                    item: 'L3',
-                    hex: 'f44336',
-                    rgb: {
-                        r: 244,
-                        g: 67,
-                        b: 54,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(244, 67, 54, 0.4)',
+                attributes: { hex: 'f44336', rgb: { r: 244, g: 67, b: 54, a: 0.4 } },
             },
             L4: {
                 version: '0.22',
                 comment: 'Base red color with 20% opacity',
-                value: '#f44336',
-                attributes: {
-                    category: 'color',
-                    type: 'red',
-                    item: 'L4',
-                    hex: 'f44336',
-                    rgb: {
-                        r: 244,
-                        g: 67,
-                        b: 54,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(244, 67, 54, 0.2)',
+                attributes: { hex: 'f44336', rgb: { r: 244, g: 67, b: 54, a: 0.2 } },
             },
             L5: {
                 version: '0.22',
                 comment: 'Base red color with 10% opacity',
-                value: '#f44336',
-                attributes: {
-                    category: 'color',
-                    type: 'red',
-                    item: 'L5',
-                    hex: 'f44336',
-                    rgb: {
-                        r: 244,
-                        g: 67,
-                        b: 54,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(244, 67, 54, 0.1)',
+                attributes: { hex: 'f44336', rgb: { r: 244, g: 67, b: 54, a: 0.1 } },
             },
             L6: {
                 version: '0.22',
                 comment: 'Base red color with 5% opacity',
-                value: '#f44336',
-                attributes: {
-                    category: 'color',
-                    type: 'red',
-                    item: 'L6',
-                    hex: 'f44336',
-                    rgb: {
-                        r: 244,
-                        g: 67,
-                        b: 54,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(244, 67, 54, 0.05)',
+                attributes: { hex: 'f44336', rgb: { r: 244, g: 67, b: 54, a: 0.05 } },
             },
         },
         grey: {
             N: {
                 version: '0.22',
                 comment: 'Neutral grey color',
-                value: '#757575',
-                attributes: {
-                    category: 'color',
-                    type: 'grey',
-                    item: 'N',
-                    hex: '757575',
-                    rgb: {
-                        r: 117,
-                        g: 117,
-                        b: 117,
-                        a: 1,
-                    },
-                },
+                value: 'rgb(117, 117, 117)',
+                attributes: { hex: '757575', rgb: { r: 117, g: 117, b: 117, a: 1 } },
             },
             L1: {
                 version: '0.22',
                 comment: 'Base grey color with 80% opacity',
-                value: '#757575',
-                attributes: {
-                    category: 'color',
-                    type: 'grey',
-                    item: 'L1',
-                    hex: '757575',
-                    rgb: {
-                        r: 117,
-                        g: 117,
-                        b: 117,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(117, 117, 117, 0.8)',
+                attributes: { hex: '757575', rgb: { r: 117, g: 117, b: 117, a: 0.8 } },
             },
             L2: {
                 version: '0.22',
                 comment: 'Base grey color with 60% opacity',
-                value: '#757575',
-                attributes: {
-                    category: 'color',
-                    type: 'grey',
-                    item: 'L2',
-                    hex: '757575',
-                    rgb: {
-                        r: 117,
-                        g: 117,
-                        b: 117,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(117, 117, 117, 0.6)',
+                attributes: { hex: '757575', rgb: { r: 117, g: 117, b: 117, a: 0.6 } },
             },
             L3: {
                 version: '0.22',
                 comment: 'Base grey color with 40% opacity',
-                value: '#757575',
-                attributes: {
-                    category: 'color',
-                    type: 'grey',
-                    item: 'L3',
-                    hex: '757575',
-                    rgb: {
-                        r: 117,
-                        g: 117,
-                        b: 117,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(117, 117, 117, 0.4)',
+                attributes: { hex: '757575', rgb: { r: 117, g: 117, b: 117, a: 0.4 } },
             },
             L4: {
                 version: '0.22',
                 comment: 'Base grey color with 20% opacity',
-                value: '#757575',
-                attributes: {
-                    category: 'color',
-                    type: 'grey',
-                    item: 'L4',
-                    hex: '757575',
-                    rgb: {
-                        r: 117,
-                        g: 117,
-                        b: 117,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(117, 117, 117, 0.2)',
+                attributes: { hex: '757575', rgb: { r: 117, g: 117, b: 117, a: 0.2 } },
             },
             L5: {
                 version: '0.22',
                 comment: 'Base grey color with 10% opacity',
-                value: '#757575',
-                attributes: {
-                    category: 'color',
-                    type: 'grey',
-                    item: 'L5',
-                    hex: '757575',
-                    rgb: {
-                        r: 117,
-                        g: 117,
-                        b: 117,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(117, 117, 117, 0.1)',
+                attributes: { hex: '757575', rgb: { r: 117, g: 117, b: 117, a: 0.1 } },
             },
             L6: {
                 version: '0.22',
                 comment: 'Base grey color with 5% opacity',
-                value: '#757575',
-                attributes: {
-                    category: 'color',
-                    type: 'grey',
-                    item: 'L6',
-                    hex: '757575',
-                    rgb: {
-                        r: 117,
-                        g: 117,
-                        b: 117,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(117, 117, 117, 0.05)',
+                attributes: { hex: '757575', rgb: { r: 117, g: 117, b: 117, a: 0.05 } },
             },
         },
         primary: {
             D2: {
                 version: '0.22',
                 comment: 'Darkest blue color',
-                value: '#1976d2',
-                attributes: {
-                    category: 'color',
-                    type: 'primary',
-                    item: 'D2',
-                    hex: '1976d2',
-                    rgb: {
-                        r: 25,
-                        g: 118,
-                        b: 210,
-                        a: 1,
-                    },
-                },
+                value: 'rgb(25, 118, 210)',
+                attributes: { hex: '1976d2', rgb: { r: 25, g: 118, b: 210, a: 1 } },
             },
             D1: {
                 version: '0.22',
                 comment: 'Dark blue color',
-                value: '#1e88e5',
-                attributes: {
-                    category: 'color',
-                    type: 'primary',
-                    item: 'D1',
-                    hex: '1e88e5',
-                    rgb: {
-                        r: 30,
-                        g: 136,
-                        b: 229,
-                        a: 1,
-                    },
-                },
+                value: 'rgb(30, 136, 229)',
+                attributes: { hex: '1e88e5', rgb: { r: 30, g: 136, b: 229, a: 1 } },
             },
             N: {
                 version: '0.22',
                 comment: 'Neutral blue color',
-                value: '#2196f3',
-                attributes: {
-                    category: 'color',
-                    type: 'primary',
-                    item: 'N',
-                    hex: '2196f3',
-                    rgb: {
-                        r: 33,
-                        g: 150,
-                        b: 243,
-                        a: 1,
-                    },
-                },
+                value: 'rgb(33, 150, 243)',
+                attributes: { hex: '2196f3', rgb: { r: 33, g: 150, b: 243, a: 1 } },
             },
             L1: {
                 version: '0.22',
                 comment: 'Base blue color with 80% opacity',
-                value: '#2196f3',
-                attributes: {
-                    category: 'color',
-                    type: 'primary',
-                    item: 'L1',
-                    hex: '2196f3',
-                    rgb: {
-                        r: 33,
-                        g: 150,
-                        b: 243,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(33, 150, 243, 0.8)',
+                attributes: { hex: '2196f3', rgb: { r: 33, g: 150, b: 243, a: 0.8 } },
             },
             L2: {
                 version: '0.22',
                 comment: 'Base blue color with 60% opacity',
-                value: '#2196f3',
-                attributes: {
-                    category: 'color',
-                    type: 'primary',
-                    item: 'L2',
-                    hex: '2196f3',
-                    rgb: {
-                        r: 33,
-                        g: 150,
-                        b: 243,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(33, 150, 243, 0.6)',
+                attributes: { hex: '2196f3', rgb: { r: 33, g: 150, b: 243, a: 0.6 } },
             },
             L3: {
                 version: '0.22',
                 comment: 'Base blue color with 40% opacity',
-                value: '#2196f3',
-                attributes: {
-                    category: 'color',
-                    type: 'primary',
-                    item: 'L3',
-                    hex: '2196f3',
-                    rgb: {
-                        r: 33,
-                        g: 150,
-                        b: 243,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(33, 150, 243, 0.4)',
+                attributes: { hex: '2196f3', rgb: { r: 33, g: 150, b: 243, a: 0.4 } },
             },
             L4: {
                 version: '0.22',
                 comment: 'Base blue color with 20% opacity',
-                value: '#2196f3',
-                attributes: {
-                    category: 'color',
-                    type: 'primary',
-                    item: 'L4',
-                    hex: '2196f3',
-                    rgb: {
-                        r: 33,
-                        g: 150,
-                        b: 243,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(33, 150, 243, 0.2)',
+                attributes: { hex: '2196f3', rgb: { r: 33, g: 150, b: 243, a: 0.2 } },
             },
             L5: {
                 version: '0.22',
                 comment: 'Base blue color with 10% opacity',
-                value: '#2196f3',
-                attributes: {
-                    category: 'color',
-                    type: 'primary',
-                    item: 'L5',
-                    hex: '2196f3',
-                    rgb: {
-                        r: 33,
-                        g: 150,
-                        b: 243,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(33, 150, 243, 0.1)',
+                attributes: { hex: '2196f3', rgb: { r: 33, g: 150, b: 243, a: 0.1 } },
             },
             L6: {
                 version: '0.22',
                 comment: 'Base blue color with 5% opacity',
-                value: '#2196f3',
-                attributes: {
-                    category: 'color',
-                    type: 'primary',
-                    item: 'L6',
-                    hex: '2196f3',
-                    rgb: {
-                        r: 33,
-                        g: 150,
-                        b: 243,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(33, 150, 243, 0.05)',
+                attributes: { hex: '2196f3', rgb: { r: 33, g: 150, b: 243, a: 0.05 } },
             },
         },
         secondary: {
             D2: {
                 version: '0.22',
                 comment: 'Darkest green color',
-                value: '#388e3c',
-                attributes: {
-                    category: 'color',
-                    type: 'secondary',
-                    item: 'D2',
-                    hex: '388e3c',
-                    rgb: {
-                        r: 56,
-                        g: 142,
-                        b: 60,
-                        a: 1,
-                    },
-                },
+                value: 'rgb(56, 142, 60)',
+                attributes: { hex: '388e3c', rgb: { r: 56, g: 142, b: 60, a: 1 } },
             },
             D1: {
                 version: '0.22',
                 comment: 'Dark green color',
-                value: '#43a047',
-                attributes: {
-                    category: 'color',
-                    type: 'secondary',
-                    item: 'D1',
-                    hex: '43a047',
-                    rgb: {
-                        r: 67,
-                        g: 160,
-                        b: 71,
-                        a: 1,
-                    },
-                },
+                value: 'rgb(67, 160, 71)',
+                attributes: { hex: '43a047', rgb: { r: 67, g: 160, b: 71, a: 1 } },
             },
             N: {
                 version: '0.22',
                 comment: 'Neutral green color',
-                value: '#4caf50',
-                attributes: {
-                    category: 'color',
-                    type: 'secondary',
-                    item: 'N',
-                    hex: '4caf50',
-                    rgb: {
-                        r: 76,
-                        g: 175,
-                        b: 80,
-                        a: 1,
-                    },
-                },
+                value: 'rgb(76, 175, 80)',
+                attributes: { hex: '4caf50', rgb: { r: 76, g: 175, b: 80, a: 1 } },
             },
             L1: {
                 version: '0.22',
                 comment: 'Base green color with 80% opacity',
-                value: '#4caf50',
-                attributes: {
-                    category: 'color',
-                    type: 'secondary',
-                    item: 'L1',
-                    hex: '4caf50',
-                    rgb: {
-                        r: 76,
-                        g: 175,
-                        b: 80,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(76, 175, 80, 0.8)',
+                attributes: { hex: '4caf50', rgb: { r: 76, g: 175, b: 80, a: 0.8 } },
             },
             L2: {
                 version: '0.22',
                 comment: 'Base green color with 60% opacity',
-                value: '#4caf50',
-                attributes: {
-                    category: 'color',
-                    type: 'secondary',
-                    item: 'L2',
-                    hex: '4caf50',
-                    rgb: {
-                        r: 76,
-                        g: 175,
-                        b: 80,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(76, 175, 80, 0.6)',
+                attributes: { hex: '4caf50', rgb: { r: 76, g: 175, b: 80, a: 0.6 } },
             },
             L3: {
                 version: '0.22',
                 comment: 'Base green color with 40% opacity',
-                value: '#4caf50',
-                attributes: {
-                    category: 'color',
-                    type: 'secondary',
-                    item: 'L3',
-                    hex: '4caf50',
-                    rgb: {
-                        r: 76,
-                        g: 175,
-                        b: 80,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(76, 175, 80, 0.4)',
+                attributes: { hex: '4caf50', rgb: { r: 76, g: 175, b: 80, a: 0.4 } },
             },
             L4: {
                 version: '0.22',
                 comment: 'Base green color with 20% opacity',
-                value: '#4caf50',
-                attributes: {
-                    category: 'color',
-                    type: 'secondary',
-                    item: 'L4',
-                    hex: '4caf50',
-                    rgb: {
-                        r: 76,
-                        g: 175,
-                        b: 80,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(76, 175, 80, 0.2)',
+                attributes: { hex: '4caf50', rgb: { r: 76, g: 175, b: 80, a: 0.2 } },
             },
             L5: {
                 version: '0.22',
                 comment: 'Base green color with 10% opacity',
-                value: '#4caf50',
-                attributes: {
-                    category: 'color',
-                    type: 'secondary',
-                    item: 'L5',
-                    hex: '4caf50',
-                    rgb: {
-                        r: 76,
-                        g: 175,
-                        b: 80,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(76, 175, 80, 0.1)',
+                attributes: { hex: '4caf50', rgb: { r: 76, g: 175, b: 80, a: 0.1 } },
             },
             L6: {
                 version: '0.22',
                 comment: 'Base green color with 5% opacity',
-                value: '#4caf50',
-                attributes: {
-                    category: 'color',
-                    type: 'secondary',
-                    item: 'L6',
-                    hex: '4caf50',
-                    rgb: {
-                        r: 76,
-                        g: 175,
-                        b: 80,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(76, 175, 80, 0.05)',
+                attributes: { hex: '4caf50', rgb: { r: 76, g: 175, b: 80, a: 0.05 } },
             },
         },
         accent: {
             D2: {
                 version: '0.22',
                 comment: 'Darkest green color',
-                value: '#388e3c',
-                attributes: {
-                    category: 'color',
-                    type: 'accent',
-                    item: 'D2',
-                    hex: '388e3c',
-                    rgb: {
-                        r: 56,
-                        g: 142,
-                        b: 60,
-                        a: 1,
-                    },
-                },
+                value: 'rgb(56, 142, 60)',
+                attributes: { hex: '388e3c', rgb: { r: 56, g: 142, b: 60, a: 1 } },
             },
             D1: {
                 version: '0.22',
                 comment: 'Dark green color',
-                value: '#43a047',
-                attributes: {
-                    category: 'color',
-                    type: 'accent',
-                    item: 'D1',
-                    hex: '43a047',
-                    rgb: {
-                        r: 67,
-                        g: 160,
-                        b: 71,
-                        a: 1,
-                    },
-                },
+                value: 'rgb(67, 160, 71)',
+                attributes: { hex: '43a047', rgb: { r: 67, g: 160, b: 71, a: 1 } },
             },
             N: {
                 version: '0.22',
                 comment: 'Neutral green color',
-                value: '#4caf50',
-                attributes: {
-                    category: 'color',
-                    type: 'accent',
-                    item: 'N',
-                    hex: '4caf50',
-                    rgb: {
-                        r: 76,
-                        g: 175,
-                        b: 80,
-                        a: 1,
-                    },
-                },
+                value: 'rgb(76, 175, 80)',
+                attributes: { hex: '4caf50', rgb: { r: 76, g: 175, b: 80, a: 1 } },
             },
             L1: {
                 version: '0.22',
                 comment: 'Base green color with 80% opacity',
-                value: '#4caf50',
-                attributes: {
-                    category: 'color',
-                    type: 'accent',
-                    item: 'L1',
-                    hex: '4caf50',
-                    rgb: {
-                        r: 76,
-                        g: 175,
-                        b: 80,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(76, 175, 80, 0.8)',
+                attributes: { hex: '4caf50', rgb: { r: 76, g: 175, b: 80, a: 0.8 } },
             },
             L2: {
                 version: '0.22',
                 comment: 'Base green color with 60% opacity',
-                value: '#4caf50',
-                attributes: {
-                    category: 'color',
-                    type: 'accent',
-                    item: 'L2',
-                    hex: '4caf50',
-                    rgb: {
-                        r: 76,
-                        g: 175,
-                        b: 80,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(76, 175, 80, 0.6)',
+                attributes: { hex: '4caf50', rgb: { r: 76, g: 175, b: 80, a: 0.6 } },
             },
             L3: {
                 version: '0.22',
                 comment: 'Base green color with 40% opacity',
-                value: '#4caf50',
-                attributes: {
-                    category: 'color',
-                    type: 'accent',
-                    item: 'L3',
-                    hex: '4caf50',
-                    rgb: {
-                        r: 76,
-                        g: 175,
-                        b: 80,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(76, 175, 80, 0.4)',
+                attributes: { hex: '4caf50', rgb: { r: 76, g: 175, b: 80, a: 0.4 } },
             },
             L4: {
                 version: '0.22',
                 comment: 'Base green color with 20% opacity',
-                value: '#4caf50',
-                attributes: {
-                    category: 'color',
-                    type: 'accent',
-                    item: 'L4',
-                    hex: '4caf50',
-                    rgb: {
-                        r: 76,
-                        g: 175,
-                        b: 80,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(76, 175, 80, 0.2)',
+                attributes: { hex: '4caf50', rgb: { r: 76, g: 175, b: 80, a: 0.2 } },
             },
             L5: {
                 version: '0.22',
                 comment: 'Base green color with 10% opacity',
-                value: '#4caf50',
-                attributes: {
-                    category: 'color',
-                    type: 'accent',
-                    item: 'L5',
-                    hex: '4caf50',
-                    rgb: {
-                        r: 76,
-                        g: 175,
-                        b: 80,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(76, 175, 80, 0.1)',
+                attributes: { hex: '4caf50', rgb: { r: 76, g: 175, b: 80, a: 0.1 } },
             },
             L6: {
                 version: '0.22',
                 comment: 'Base green color with 5% opacity',
-                value: '#4caf50',
-                attributes: {
-                    category: 'color',
-                    type: 'accent',
-                    item: 'L6',
-                    hex: '4caf50',
-                    rgb: {
-                        r: 76,
-                        g: 175,
-                        b: 80,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(76, 175, 80, 0.05)',
+                attributes: { hex: '4caf50', rgb: { r: 76, g: 175, b: 80, a: 0.05 } },
             },
         },
         black: {
             N: {
                 version: '0.22',
                 comment: 'Neutral dark color',
-                value: '#000000',
-                attributes: {
-                    category: 'color',
-                    type: 'black',
-                    item: 'N',
-                    hex: '000000',
-                    rgb: {
-                        r: 0,
-                        g: 0,
-                        b: 0,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(0, 0, 0, 0.87)',
+                attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.87 } },
             },
             L1: {
                 version: '0.22',
                 comment: 'Base dark color with 70% opacity',
-                value: '#000000',
-                attributes: {
-                    category: 'color',
-                    type: 'black',
-                    item: 'L1',
-                    hex: '000000',
-                    rgb: {
-                        r: 0,
-                        g: 0,
-                        b: 0,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(0, 0, 0, 0.7)',
+                attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.7 } },
             },
             L2: {
                 version: '0.22',
                 comment: 'Base dark color with 54% opacity',
-                value: '#000000',
-                attributes: {
-                    category: 'color',
-                    type: 'black',
-                    item: 'L2',
-                    hex: '000000',
-                    rgb: {
-                        r: 0,
-                        g: 0,
-                        b: 0,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(0, 0, 0, 0.54)',
+                attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.54 } },
             },
             L3: {
                 version: '0.22',
                 comment: 'Base dark color with 38% opacity',
-                value: '#000000',
-                attributes: {
-                    category: 'color',
-                    type: 'black',
-                    item: 'L3',
-                    hex: '000000',
-                    rgb: {
-                        r: 0,
-                        g: 0,
-                        b: 0,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(0, 0, 0, 0.38)',
+                attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.38 } },
             },
             L4: {
                 version: '0.22',
                 comment: 'Base dark color with 20% opacity',
-                value: '#000000',
-                attributes: {
-                    category: 'color',
-                    type: 'black',
-                    item: 'L4',
-                    hex: '000000',
-                    rgb: {
-                        r: 0,
-                        g: 0,
-                        b: 0,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(0, 0, 0, 0.2)',
+                attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.2 } },
             },
             L5: {
                 version: '0.22',
                 comment: 'Base dark color with 12% opacity',
-                value: '#000000',
-                attributes: {
-                    category: 'color',
-                    type: 'black',
-                    item: 'L5',
-                    hex: '000000',
-                    rgb: {
-                        r: 0,
-                        g: 0,
-                        b: 0,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(0, 0, 0, 0.12)',
+                attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.12 } },
             },
             L6: {
                 version: '0.22',
                 comment: 'Base dark color with 5% opacity',
-                value: '#000000',
-                attributes: {
-                    category: 'color',
-                    type: 'black',
-                    item: 'L6',
-                    hex: '000000',
-                    rgb: {
-                        r: 0,
-                        g: 0,
-                        b: 0,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(0, 0, 0, 0.05)',
+                attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.05 } },
             },
         },
         white: {
             N: {
                 version: '0.22',
                 comment: 'Neutral light color',
-                value: '#ffffff',
-                attributes: {
-                    category: 'color',
-                    type: 'white',
-                    item: 'N',
-                    hex: 'ffffff',
-                    rgb: {
-                        r: 255,
-                        g: 255,
-                        b: 255,
-                        a: 1,
-                    },
-                },
+                value: 'rgb(255, 255, 255)',
+                attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
             },
             L1: {
                 version: '0.22',
                 comment: 'Base light color with 90% opacity',
-                value: '#ffffff',
-                attributes: {
-                    category: 'color',
-                    type: 'white',
-                    item: 'L1',
-                    hex: 'ffffff',
-                    rgb: {
-                        r: 255,
-                        g: 255,
-                        b: 255,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(255, 255, 255, 0.9)',
+                attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.9 } },
             },
             L2: {
                 version: '0.22',
                 comment: 'Base light color with 80% opacity',
-                value: '#ffffff',
-                attributes: {
-                    category: 'color',
-                    type: 'white',
-                    item: 'L2',
-                    hex: 'ffffff',
-                    rgb: {
-                        r: 255,
-                        g: 255,
-                        b: 255,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(255, 255, 255, 0.8)',
+                attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.8 } },
             },
             L3: {
                 version: '0.22',
                 comment: 'Base light color with 60% opacity',
-                value: '#ffffff',
-                attributes: {
-                    category: 'color',
-                    type: 'white',
-                    item: 'L3',
-                    hex: 'ffffff',
-                    rgb: {
-                        r: 255,
-                        g: 255,
-                        b: 255,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(255, 255, 255, 0.6)',
+                attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.6 } },
             },
             L4: {
                 version: '0.22',
                 comment: 'Base light color with 40% opacity',
-                value: '#ffffff',
-                attributes: {
-                    category: 'color',
-                    type: 'white',
-                    item: 'L4',
-                    hex: 'ffffff',
-                    rgb: {
-                        r: 255,
-                        g: 255,
-                        b: 255,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(255, 255, 255, 0.4)',
+                attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.4 } },
             },
             L5: {
                 version: '0.22',
                 comment: 'Base light color with 20% opacity',
-                value: '#ffffff',
-                attributes: {
-                    category: 'color',
-                    type: 'white',
-                    item: 'L5',
-                    hex: 'ffffff',
-                    rgb: {
-                        r: 255,
-                        g: 255,
-                        b: 255,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(255, 255, 255, 0.2)',
+                attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.2 } },
             },
             L6: {
                 version: '0.22',
                 comment: 'Base light color with 10% opacity',
-                value: '#ffffff',
-                attributes: {
-                    category: 'color',
-                    type: 'white',
-                    item: 'L6',
-                    hex: 'ffffff',
-                    rgb: {
-                        r: 255,
-                        g: 255,
-                        b: 255,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(255, 255, 255, 0.1)',
+                attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.1 } },
             },
         },
         orange: {
             D2: {
                 version: '0.22',
                 comment: 'Darkest yellow color',
-                value: '#ff6f00',
-                attributes: {
-                    category: 'color',
-                    type: 'orange',
-                    item: 'D2',
-                    hex: 'ff6f00',
-                    rgb: {
-                        r: 255,
-                        g: 111,
-                        b: 0,
-                        a: 1,
-                    },
-                },
+                value: 'rgb(255, 111, 0)',
+                attributes: { hex: 'ff6f00', rgb: { r: 255, g: 111, b: 0, a: 1 } },
             },
             D1: {
                 version: '0.22',
                 comment: 'Dark yellow color',
-                value: '#ff8f00',
-                attributes: {
-                    category: 'color',
-                    type: 'orange',
-                    item: 'D1',
-                    hex: 'ff8f00',
-                    rgb: {
-                        r: 255,
-                        g: 143,
-                        b: 0,
-                        a: 1,
-                    },
-                },
+                value: 'rgb(255, 143, 0)',
+                attributes: { hex: 'ff8f00', rgb: { r: 255, g: 143, b: 0, a: 1 } },
             },
             N: {
                 version: '0.22',
                 comment: 'Neutral yellow color',
-                value: '#ffb300',
-                attributes: {
-                    category: 'color',
-                    type: 'orange',
-                    item: 'N',
-                    hex: 'ffb300',
-                    rgb: {
-                        r: 255,
-                        g: 179,
-                        b: 0,
-                        a: 1,
-                    },
-                },
+                value: 'rgb(255, 179, 0)',
+                attributes: { hex: 'ffb300', rgb: { r: 255, g: 179, b: 0, a: 1 } },
             },
             L1: {
                 version: '0.22',
                 comment: 'Base yellow color with 80% opacity',
-                value: '#ffb300',
-                attributes: {
-                    category: 'color',
-                    type: 'orange',
-                    item: 'L1',
-                    hex: 'ffb300',
-                    rgb: {
-                        r: 255,
-                        g: 179,
-                        b: 0,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(255, 179, 0, 0.8)',
+                attributes: { hex: 'ffb300', rgb: { r: 255, g: 179, b: 0, a: 0.8 } },
             },
             L2: {
                 version: '0.22',
                 comment: 'Base yellow color with 70% opacity',
-                value: '#ffb300',
-                attributes: {
-                    category: 'color',
-                    type: 'orange',
-                    item: 'L2',
-                    hex: 'ffb300',
-                    rgb: {
-                        r: 255,
-                        g: 179,
-                        b: 0,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(255, 179, 0, 0.7)',
+                attributes: { hex: 'ffb300', rgb: { r: 255, g: 179, b: 0, a: 0.7 } },
             },
             L3: {
                 version: '0.22',
                 comment: 'Base yellow color with 60% opacity',
-                value: '#ffb300',
-                attributes: {
-                    category: 'color',
-                    type: 'orange',
-                    item: 'L3',
-                    hex: 'ffb300',
-                    rgb: {
-                        r: 255,
-                        g: 179,
-                        b: 0,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(255, 179, 0, 0.6)',
+                attributes: { hex: 'ffb300', rgb: { r: 255, g: 179, b: 0, a: 0.6 } },
             },
             L4: {
                 version: '0.22',
                 comment: 'Base yellow color with 40% opacity',
-                value: '#ffb300',
-                attributes: {
-                    category: 'color',
-                    type: 'orange',
-                    item: 'L4',
-                    hex: 'ffb300',
-                    rgb: {
-                        r: 255,
-                        g: 179,
-                        b: 0,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(255, 179, 0, 0.4)',
+                attributes: { hex: 'ffb300', rgb: { r: 255, g: 179, b: 0, a: 0.4 } },
             },
             L5: {
                 version: '0.22',
                 comment: 'Base yellow color with 20% opacity',
-                value: '#ffb300',
-                attributes: {
-                    category: 'color',
-                    type: 'orange',
-                    item: 'L5',
-                    hex: 'ffb300',
-                    rgb: {
-                        r: 255,
-                        g: 179,
-                        b: 0,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(255, 179, 0, 0.2)',
+                attributes: { hex: 'ffb300', rgb: { r: 255, g: 179, b: 0, a: 0.2 } },
             },
             L6: {
                 version: '0.22',
                 comment: 'Base yellow color with 10% opacity',
-                value: '#ffb300',
-                attributes: {
-                    category: 'color',
-                    type: 'orange',
-                    item: 'L6',
-                    hex: 'ffb300',
-                    rgb: {
-                        r: 255,
-                        g: 179,
-                        b: 0,
-                        a: 1,
-                    },
-                },
+                value: 'rgba(255, 179, 0, 0.1)',
+                attributes: { hex: 'ffb300', rgb: { r: 255, g: 179, b: 0, a: 0.1 } },
             },
         },
     },
     size: {
-        xxs: {
-            value: '14px',
-            attributes: {
-                category: 'size',
-                type: 'xxs',
-            },
-        },
-        xs: {
-            value: '20px',
-            attributes: {
-                category: 'size',
-                type: 'xs',
-            },
-        },
-        s: {
-            value: '24px',
-            attributes: {
-                category: 'size',
-                type: 's',
-            },
-        },
-        m: {
-            value: '36px',
-            attributes: {
-                category: 'size',
-                type: 'm',
-            },
-        },
-        l: {
-            value: '64px',
-            attributes: {
-                category: 'size',
-                type: 'l',
-            },
-        },
-        xl: {
-            value: '128px',
-            attributes: {
-                category: 'size',
-                type: 'xl',
-            },
-        },
-        xxl: {
-            value: '256px',
-            attributes: {
-                category: 'size',
-                type: 'xxl',
-            },
-        },
+        xxs: { value: '14px' },
+        xs: { value: '20px' },
+        s: { value: '24px' },
+        m: { value: '36px' },
+        l: { value: '64px' },
+        xl: { value: '128px' },
+        xxl: { value: '256px' },
     },
     spacing: {
         unit: {
-            tiny: {
-                value: '4px',
-                attributes: {
-                    category: 'spacing',
-                    type: 'unit',
-                    item: 'tiny',
-                },
-            },
-            regular: {
-                value: '8px',
-                attributes: {
-                    category: 'spacing',
-                    type: 'unit',
-                    item: 'regular',
-                },
-            },
-            medium: {
-                value: '12px',
-                attributes: {
-                    category: 'spacing',
-                    type: 'unit',
-                    item: 'medium',
-                },
-            },
-            big: {
-                value: '16px',
-                attributes: {
-                    category: 'spacing',
-                    type: 'unit',
-                    item: 'big',
-                },
-            },
-            huge: {
-                value: '24px',
-                attributes: {
-                    category: 'spacing',
-                    type: 'unit',
-                    item: 'huge',
-                },
-            },
+            tiny: { value: '4px' },
+            regular: { value: '8px' },
+            medium: { value: '12px' },
+            big: { value: '16px' },
+            huge: { value: '24px' },
         },
     },
     typography: {
         'font-family': {
             value:
                 "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
-            attributes: {
-                category: 'typography',
-                type: 'font-family',
-            },
         },
-        'font-weight': {
-            regular: {
-                value: '400',
-                attributes: {
-                    category: 'typography',
-                    type: 'font-weight',
-                    item: 'regular',
-                },
-            },
-            bold: {
-                value: '700',
-                attributes: {
-                    category: 'typography',
-                    type: 'font-weight',
-                    item: 'bold',
-                },
-            },
-            light: {
-                value: '300',
-                attributes: {
-                    category: 'typography',
-                    type: 'font-weight',
-                    item: 'light',
-                },
-            },
-        },
+        'font-weight': { regular: { value: '400' }, bold: { value: '700' }, light: { value: '300' } },
         interface: {
             display1: {
-                'font-size': {
-                    value: '34px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'interface',
-                        item: 'display1',
-                    },
-                },
-                'font-weight': {
-                    value: 'var(--lumx-typography-font-weight-bold)',
-                    attributes: {
-                        category: 'typography',
-                        type: 'interface',
-                        item: 'display1',
-                    },
-                },
-                'line-height': {
-                    value: '40px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'interface',
-                        item: 'display1',
-                    },
-                },
+                'font-size': { value: '34px' },
+                'font-weight': { value: 'var(--lumx-typography-font-weight-bold)' },
+                'line-height': { value: '40px' },
             },
             headline: {
-                'font-size': {
-                    value: '24px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'interface',
-                        item: 'headline',
-                    },
-                },
-                'font-weight': {
-                    value: 'var(--lumx-typography-font-weight-bold)',
-                    attributes: {
-                        category: 'typography',
-                        type: 'interface',
-                        item: 'headline',
-                    },
-                },
-                'line-height': {
-                    value: '32px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'interface',
-                        item: 'headline',
-                    },
-                },
+                'font-size': { value: '24px' },
+                'font-weight': { value: 'var(--lumx-typography-font-weight-bold)' },
+                'line-height': { value: '32px' },
             },
             title: {
-                'font-size': {
-                    value: '20px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'interface',
-                        item: 'title',
-                    },
-                },
-                'font-weight': {
-                    value: 'var(--lumx-typography-font-weight-bold)',
-                    attributes: {
-                        category: 'typography',
-                        type: 'interface',
-                        item: 'title',
-                    },
-                },
-                'line-height': {
-                    value: '30px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'interface',
-                        item: 'title',
-                    },
-                },
+                'font-size': { value: '20px' },
+                'font-weight': { value: 'var(--lumx-typography-font-weight-bold)' },
+                'line-height': { value: '30px' },
             },
             subtitle2: {
-                'font-size': {
-                    value: '16px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'interface',
-                        item: 'subtitle2',
-                    },
-                },
-                'font-weight': {
-                    value: 'var(--lumx-typography-font-weight-bold)',
-                    attributes: {
-                        category: 'typography',
-                        type: 'interface',
-                        item: 'subtitle2',
-                    },
-                },
-                'line-height': {
-                    value: '24px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'interface',
-                        item: 'subtitle2',
-                    },
-                },
+                'font-size': { value: '16px' },
+                'font-weight': { value: 'var(--lumx-typography-font-weight-bold)' },
+                'line-height': { value: '24px' },
             },
             subtitle1: {
-                'font-size': {
-                    value: '14px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'interface',
-                        item: 'subtitle1',
-                    },
-                },
-                'font-weight': {
-                    value: 'var(--lumx-typography-font-weight-bold)',
-                    attributes: {
-                        category: 'typography',
-                        type: 'interface',
-                        item: 'subtitle1',
-                    },
-                },
-                'line-height': {
-                    value: '20px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'interface',
-                        item: 'subtitle1',
-                    },
-                },
+                'font-size': { value: '14px' },
+                'font-weight': { value: 'var(--lumx-typography-font-weight-bold)' },
+                'line-height': { value: '20px' },
             },
             body2: {
-                'font-size': {
-                    value: '16px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'interface',
-                        item: 'body2',
-                    },
-                },
-                'font-weight': {
-                    value: 'var(--lumx-typography-font-weight-regular)',
-                    attributes: {
-                        category: 'typography',
-                        type: 'interface',
-                        item: 'body2',
-                    },
-                },
-                'line-height': {
-                    value: '24px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'interface',
-                        item: 'body2',
-                    },
-                },
+                'font-size': { value: '16px' },
+                'font-weight': { value: 'var(--lumx-typography-font-weight-regular)' },
+                'line-height': { value: '24px' },
             },
             body1: {
-                'font-size': {
-                    value: '14px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'interface',
-                        item: 'body1',
-                    },
-                },
-                'font-weight': {
-                    value: 'var(--lumx-typography-font-weight-regular)',
-                    attributes: {
-                        category: 'typography',
-                        type: 'interface',
-                        item: 'body1',
-                    },
-                },
-                'line-height': {
-                    value: '20px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'interface',
-                        item: 'body1',
-                    },
-                },
+                'font-size': { value: '14px' },
+                'font-weight': { value: 'var(--lumx-typography-font-weight-regular)' },
+                'line-height': { value: '20px' },
             },
             caption: {
-                'font-size': {
-                    value: '12px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'interface',
-                        item: 'caption',
-                    },
-                },
-                'font-weight': {
-                    value: 'var(--lumx-typography-font-weight-regular)',
-                    attributes: {
-                        category: 'typography',
-                        type: 'interface',
-                        item: 'caption',
-                    },
-                },
-                'line-height': {
-                    value: '16px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'interface',
-                        item: 'caption',
-                    },
-                },
+                'font-size': { value: '12px' },
+                'font-weight': { value: 'var(--lumx-typography-font-weight-regular)' },
+                'line-height': { value: '16px' },
             },
             overline: {
-                'font-size': {
-                    value: '10px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'interface',
-                        item: 'overline',
-                    },
-                },
-                'font-weight': {
-                    value: 'var(--lumx-typography-font-weight-bold)',
-                    attributes: {
-                        category: 'typography',
-                        type: 'interface',
-                        item: 'overline',
-                    },
-                },
-                'line-height': {
-                    value: '12px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'interface',
-                        item: 'overline',
-                    },
-                },
+                'font-size': { value: '10px' },
+                'font-weight': { value: 'var(--lumx-typography-font-weight-bold)' },
+                'line-height': { value: '12px' },
             },
         },
         custom: {
             title1: {
-                'font-size': {
-                    value: '40px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'title1',
-                    },
-                },
-                'font-weight': {
-                    value: 'var(--lumx-typography-font-weight-bold)',
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'title1',
-                    },
-                },
-                'line-height': {
-                    value: '50px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'title1',
-                    },
-                },
+                'font-size': { value: '40px' },
+                'font-weight': { value: 'var(--lumx-typography-font-weight-bold)' },
+                'line-height': { value: '50px' },
             },
             title2: {
-                'font-size': {
-                    value: '30px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'title2',
-                    },
-                },
-                'font-weight': {
-                    value: 'var(--lumx-typography-font-weight-bold)',
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'title2',
-                    },
-                },
-                'line-height': {
-                    value: '40px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'title2',
-                    },
-                },
+                'font-size': { value: '30px' },
+                'font-weight': { value: 'var(--lumx-typography-font-weight-bold)' },
+                'line-height': { value: '40px' },
             },
             title3: {
-                'font-size': {
-                    value: '24px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'title3',
-                    },
-                },
-                'font-weight': {
-                    value: 'var(--lumx-typography-font-weight-bold)',
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'title3',
-                    },
-                },
-                'line-height': {
-                    value: '32px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'title3',
-                    },
-                },
+                'font-size': { value: '24px' },
+                'font-weight': { value: 'var(--lumx-typography-font-weight-bold)' },
+                'line-height': { value: '32px' },
             },
             title4: {
-                'font-size': {
-                    value: '20px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'title4',
-                    },
-                },
-                'font-weight': {
-                    value: 'var(--lumx-typography-font-weight-bold)',
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'title4',
-                    },
-                },
-                'line-height': {
-                    value: '30px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'title4',
-                    },
-                },
+                'font-size': { value: '20px' },
+                'font-weight': { value: 'var(--lumx-typography-font-weight-bold)' },
+                'line-height': { value: '30px' },
             },
             title5: {
-                'font-size': {
-                    value: '16px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'title5',
-                    },
-                },
-                'font-weight': {
-                    value: 'var(--lumx-typography-font-weight-bold)',
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'title5',
-                    },
-                },
-                'line-height': {
-                    value: '24px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'title5',
-                    },
-                },
+                'font-size': { value: '16px' },
+                'font-weight': { value: 'var(--lumx-typography-font-weight-bold)' },
+                'line-height': { value: '24px' },
             },
             title6: {
-                'font-size': {
-                    value: '14px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'title6',
-                    },
-                },
-                'font-weight': {
-                    value: 'var(--lumx-typography-font-weight-bold)',
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'title6',
-                    },
-                },
-                'line-height': {
-                    value: '20px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'title6',
-                    },
-                },
+                'font-size': { value: '14px' },
+                'font-weight': { value: 'var(--lumx-typography-font-weight-bold)' },
+                'line-height': { value: '20px' },
             },
             intro: {
-                'font-size': {
-                    value: '18px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'intro',
-                    },
-                },
-                'font-weight': {
-                    value: 'var(--lumx-typography-font-weight-bold)',
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'intro',
-                    },
-                },
-                'line-height': {
-                    value: '30px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'intro',
-                    },
-                },
+                'font-size': { value: '18px' },
+                'font-weight': { value: 'var(--lumx-typography-font-weight-bold)' },
+                'line-height': { value: '30px' },
             },
             'body-large': {
-                'font-size': {
-                    value: '16px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'body-large',
-                    },
-                },
-                'font-weight': {
-                    value: 'var(--lumx-typography-font-weight-regular)',
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'body-large',
-                    },
-                },
-                'line-height': {
-                    value: '24px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'body-large',
-                    },
-                },
+                'font-size': { value: '16px' },
+                'font-weight': { value: 'var(--lumx-typography-font-weight-regular)' },
+                'line-height': { value: '24px' },
             },
             body: {
-                'font-size': {
-                    value: '14px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'body',
-                    },
-                },
-                'font-weight': {
-                    value: 'var(--lumx-typography-font-weight-regular)',
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'body',
-                    },
-                },
-                'line-height': {
-                    value: '20px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'body',
-                    },
-                },
+                'font-size': { value: '14px' },
+                'font-weight': { value: 'var(--lumx-typography-font-weight-regular)' },
+                'line-height': { value: '20px' },
             },
             quote: {
-                'font-size': {
-                    value: '16px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'quote',
-                    },
-                },
-                'font-weight': {
-                    value: 'var(--lumx-typography-font-weight-light)',
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'quote',
-                    },
-                },
-                'font-style': {
-                    value: 'italic',
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'quote',
-                    },
-                },
-                'line-height': {
-                    value: '24px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'quote',
-                    },
-                },
+                'font-size': { value: '16px' },
+                'font-weight': { value: 'var(--lumx-typography-font-weight-light)' },
+                'font-style': { value: 'italic' },
+                'line-height': { value: '24px' },
             },
             'publish-info': {
-                'font-size': {
-                    value: '14px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'publish-info',
-                    },
-                },
-                'font-weight': {
-                    value: 'var(--lumx-typography-font-weight-regular)',
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'publish-info',
-                    },
-                },
-                'line-height': {
-                    value: '20px',
-                    attributes: {
-                        category: 'typography',
-                        type: 'custom',
-                        item: 'publish-info',
-                    },
-                },
+                'font-size': { value: '14px' },
+                'font-weight': { value: 'var(--lumx-typography-font-weight-regular)' },
+                'line-height': { value: '20px' },
             },
             button: {
                 'size-m': {
-                    'font-size': {
-                        value: '14px',
-                        attributes: {
-                            category: 'typography',
-                            type: 'custom',
-                            item: 'button',
-                        },
-                    },
-                    'font-weight': {
-                        value: 'var(--lumx-typography-font-weight-bold)',
-                        attributes: {
-                            category: 'typography',
-                            type: 'custom',
-                            item: 'button',
-                        },
-                    },
+                    'font-size': { value: '14px' },
+                    'font-weight': { value: 'var(--lumx-typography-font-weight-bold)' },
                 },
                 'size-s': {
-                    'font-size': {
-                        value: '12px',
-                        attributes: {
-                            category: 'typography',
-                            type: 'custom',
-                            item: 'button',
-                        },
-                    },
-                    'font-weight': {
-                        value: 'var(--lumx-typography-font-weight-bold)',
-                        attributes: {
-                            category: 'typography',
-                            type: 'custom',
-                            item: 'button',
-                        },
-                    },
+                    'font-size': { value: '12px' },
+                    'font-weight': { value: 'var(--lumx-typography-font-weight-bold)' },
                 },
             },
         },

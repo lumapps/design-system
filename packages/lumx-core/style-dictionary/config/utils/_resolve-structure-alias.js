@@ -1,4 +1,4 @@
-const _ = require('lodash');
+const _ = require("lodash");
 const RGX = /^{([^}]+)}$/;
 
 // Returns the string path matching the regexp or null if invalid.
@@ -7,14 +7,15 @@ const asAliasPath = (maybePath) => _.get(_.isString(maybePath) && maybePath.matc
 function getNested(tree, path) {
     function recur(node, path) {
         if (!path || !node) return undefined;
-        const [first, ...rest] = path.split('.');
+        const [first, ...rest] = path.split(".");
         const value = node[first];
         if (rest.length === 0 || !value) return value;
         const aliasPath = asAliasPath(value);
-        if (aliasPath) return recur(recur(tree, aliasPath), rest.join('.'));
-        if (_.isPlainObject(value)) return recur(value, rest.join('.'));
+        if (aliasPath) return recur(recur(tree, aliasPath), rest.join("."));
+        if (_.isPlainObject(value)) return recur(value, rest.join("."));
         return value;
     }
+
     return recur(tree, path);
 }
 
@@ -34,14 +35,33 @@ module.exports = function(tree) {
 
         // Resolve alias (if any).
         for (const [key, value] of Object.entries(node)) {
-            const aliasValue = getNested(tree, asAliasPath(value));
-            if (aliasValue) {
+            let aliasPath = asAliasPath(value);
+            let aliasValue = getNested(tree, aliasPath);
+            if (typeof aliasValue === "object" && "value" in aliasValue) {
+                aliasValue = _.omit(aliasValue, ["version", "comment"]);
+            }
+            if (key === "$extend") {
+                if (typeof aliasValue !== "object") {
+                    throw new Error("Can't $extend a value that is not an object.");
+                }
+                delete node["$extend"];
+                for (let [key, value] of Object.entries(node)) {
+                    if (key !== "$extend") {
+                        node[key] = value;
+                    }
+                }
+                Object.assign(node, aliasValue); node["$aliasedFrom"] = aliasPath;
+            } else if (aliasValue) {
                 node[key] = aliasValue;
+                if (typeof aliasValue === "object" && "value" in aliasValue) {
+                    node[key]["$aliasedFrom"] = aliasPath;
+                }
             } else if (_.isPlainObject(value)) {
                 resolveAliasInNode(value);
             }
         }
     }
 
+    resolveAliasInNode(tree);
     resolveAliasInNode(tree);
 };

@@ -1,15 +1,7 @@
 const StyleDictionary = require('style-dictionary');
 const path = require('path');
 const pickFieldsInTree = require('./utils/_pickFieldsInTree');
-
-/**
- * Transform group:
- */
-const transformGroup = 'ts-custom';
-StyleDictionary.registerTransformGroup({
-    name: transformGroup,
-    transforms: ['attribute/cti', 'name/cti/pascal', require('./utils/_color-opacity'), 'color/css', 'attribute/color'],
-});
+const transformGroup = require('./_transform-group');
 
 /**
  * Typescript generator:
@@ -24,7 +16,7 @@ StyleDictionary.registerFormat({
         return `
             ${require('./utils/_genHeader')()}
 
-            export const DESIGN_TOKENS = ${JSON.stringify(properties, null, 2)}
+            export const DESIGN_TOKENS = ${JSON.stringify(properties)}
         `;
     },
 });
@@ -47,11 +39,9 @@ module.exports = () => {
                             'version',
                             'comment',
                             'value',
-                            'attributes.category',
-                            'attributes.type',
-                            'attributes.item',
                             'attributes.hex',
                             'attributes.rgb',
+                            '$aliasedFrom'
                         ],
                     },
                 ],
