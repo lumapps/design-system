@@ -37,9 +37,11 @@ function formatColorDescription(colorName: string): ColorVariants {
 
     return mapValues(
         colorWithVariants,
-        (variant): ColorDocumentation => {
+        (variant, name): ColorDocumentation => {
+            // Last segment of the name
+            const colorVariant = name.replace(/.*-([^-]+)$/, '$1');
             const { attributes } = variant;
-            const { item: colorVariant, hex, rgb } = attributes;
+            const { hex, rgb } = attributes;
             return {
                 colorName,
                 colorVariant,

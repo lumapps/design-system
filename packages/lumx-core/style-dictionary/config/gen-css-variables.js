@@ -1,5 +1,5 @@
 const path = require('path');
-const transformGroup = require('./utils/_css-transform-group');
+const transformGroup = require('./_transform-group');
 
 module.exports = () => {
     const baseDir = `${__dirname}/../`;

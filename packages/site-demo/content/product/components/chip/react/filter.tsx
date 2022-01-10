@@ -11,7 +11,7 @@ export const App = ({ theme }: any) => {
         <>
             <Chip
                 theme={theme}
-                after={<Icon icon={isSelected ? mdiCloseCircle : mdiMenuDown} size={Size.xs} theme={theme} />}
+                after={<Icon icon={isSelected ? mdiCloseCircle : mdiMenuDown} size={Size.xs} />}
                 isSelected={isSelected}
                 onClick={onClick}
                 onAfterClick={onAfterClick}
@@ -21,8 +21,8 @@ export const App = ({ theme }: any) => {
 
             <Chip
                 theme={theme}
-                before={<Icon icon={mdiFilterVariant} size={Size.xs} theme={theme} />}
-                after={<Icon icon={isSelected ? mdiCloseCircle : mdiMenuDown} size={Size.xs} theme={theme} />}
+                before={<Icon icon={mdiFilterVariant} size={Size.xs} />}
+                after={<Icon icon={isSelected ? mdiCloseCircle : mdiMenuDown} size={Size.xs} />}
                 isSelected={isSelected}
                 onClick={onClick}
                 onAfterClick={onAfterClick}

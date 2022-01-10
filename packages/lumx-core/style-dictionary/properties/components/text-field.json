@@ -1,11 +1,11 @@
 {
     "text-field": {
         "input": {
-            "min-height": { "value": "{size.m.value}" },
+            "min-height": "{size.m}",
             "padding": {
-                "horizontal": { "value": "{spacing.unit.medium.value}" }
+                "horizontal": "{spacing.unit.medium}"
             },
-            "border-radius": { "value": "{border-radius.value}" }
+            "border-radius": "{border-radius}"
         },
         "state-default": {
             "input": {

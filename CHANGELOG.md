@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   Always use colors css variables.
+
 ## [2.1.9][] - 2021-12-15
 
 ### Fixed
