@@ -7,7 +7,7 @@ module.exports = function ({ buildPath }) {
     const name = 'prettier/ts';
     StyleDictionary.registerAction({
         name,
-        do: () => execSync(`${bin}/eslint --fix '${path.resolve('/home/gcornut/git/design-system/packages/lumx-core/src/js/constants/design-tokens.ts')}'`),
+        do: () => execSync(`${bin}/eslint --fix '${path.resolve(buildPath)}'`),
     });
     return name;
 };
