@@ -77,6 +77,11 @@
                 }
             },
             "theme-light": {
+                "header": {
+                    "label": {
+                        "color": "{color.dark.N}"
+                    }
+                },
                 "input": {
                     "background-color": "{color.dark.L5}",
                     "border-color": "{color.dark.L4}",
@@ -89,6 +94,11 @@
                 }
             },
             "theme-dark": {
+                "header": {
+                    "label": {
+                        "color": "{color.light.N}"
+                    }
+                },
                 "input": {
                     "background-color": "{color.light.L5}",
                     "border-color": "{color.light.L4}",

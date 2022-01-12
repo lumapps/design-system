@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 07 Jan 2022 12:33:59 GMT
+ * Generated on Wed, 12 Jan 2022 07:13:33 GMT
  */
 
 :root {
@@ -327,10 +327,12 @@
     --lumx-text-field-state-hover-input-border-right-width: 1px;
     --lumx-text-field-state-hover-input-border-bottom-width: 1px;
     --lumx-text-field-state-hover-input-border-left-width: 1px;
+    --lumx-text-field-state-hover-theme-light-header-label-color: var(--lumx-color-dark-N);
     --lumx-text-field-state-hover-theme-light-input-background-color: var(--lumx-color-dark-L5);
     --lumx-text-field-state-hover-theme-light-input-border-color: var(--lumx-color-dark-L4);
     --lumx-text-field-state-hover-theme-light-input-content-color: var(--lumx-color-dark-N);
     --lumx-text-field-state-hover-theme-light-input-placeholder-color: var(--lumx-color-dark-L2);
+    --lumx-text-field-state-hover-theme-dark-header-label-color: var(--lumx-color-light-N);
     --lumx-text-field-state-hover-theme-dark-input-background-color: var(--lumx-color-light-L5);
     --lumx-text-field-state-hover-theme-dark-input-border-color: var(--lumx-color-light-L4);
     --lumx-text-field-state-hover-theme-dark-input-content-color: var(--lumx-color-light-N);
