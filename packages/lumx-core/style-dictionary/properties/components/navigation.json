@@ -5,7 +5,7 @@
                 "horizontal": "{spacing.unit.regular}"
             },
             "min-height": "{size.m}",
-            "border-radius": { "value": "var(--lumx-border-radius)" },
+            "border-radius": "{border-radius}",
             "emphasis-low": {
                 "state-default": {
                     "border": {

@@ -3,6 +3,8 @@
     --lumx-typography-font-family: 'Roboto', sans-serif;
     --lumx-typography-font-weight-bold: 500;
     --lumx-typography-custom-button-size-s-font-size: 10px;
+    --lumx-button-border-radius: var(--lumx-border-radius);
+    --lumx-navigation-item-border-radius: var(--lumx-border-radius);
     --lumx-text-field-input-min-height: 32px;
     --lumx-text-field-input-padding-horizontal: 0;
     --lumx-text-field-input-border-radius: 0;
