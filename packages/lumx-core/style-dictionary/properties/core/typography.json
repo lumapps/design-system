@@ -103,7 +103,7 @@
             },
             "quote": {
                 "font-size": { "value": "16px" },
-                "font-weight": { "value": "var(--lumx-typography-font-weight-light)" },
+                "font-weight": { "value": "var(--lumx-typography-font-weight-regular)" },
                 "font-style": { "value": "italic" },
                 "line-height": { "value": "24px" }
             },
