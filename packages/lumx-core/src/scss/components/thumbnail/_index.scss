@@ -12,15 +12,30 @@
     background: none;
     outline: none;
 
+    &--fill-height,
+    &--fill-height &__background,
+    &--fill-height &__image {
+        width: unset;
+        max-width: unset;
+        height: 100%;
+        max-height: unset;
+        flex: 1 1 auto;
+    }
+
     &__background {
-        width: 100%;
         position: relative;
+        width: 100%;
+
+        #{$self}--variant-rounded & {
+            border-radius: var(--lumx-border-radius);
+        }
     }
 
     &__image {
-        height: fit-content;
+        font-size: 0;
         width: fit-content;
         max-width: 100%;
+        height: fit-content;
         max-height: 100%;
     }
 
@@ -42,27 +57,10 @@
         }
     }
 
-    /* Badge */
     &__badge {
         position: absolute;
         right: -$lumx-spacing-unit / 2;
         bottom: -$lumx-spacing-unit / 2;
-    }
-
-    /* Rounded variant */
-    &--variant-rounded &__background {
-        border-radius: var(--lumx-border-radius);
-    }
-
-    /* Fill height */
-    &--fill-height,
-    &--fill-height &__background,
-    &--fill-height &__image {
-        flex: 1 1 auto;
-        height: 100%;
-        width: unset;
-        max-width: unset;
-        max-height: unset;
     }
 }
 
@@ -72,11 +70,13 @@
 @each $key, $size in $lumx-sizes {
     .#{$lumx-base-prefix}-thumbnail--size-#{$key} {
         width: $size;
+    }
+}
 
-        .#{$lumx-base-prefix}-thumbnail__background,
-        .#{$lumx-base-prefix}-thumbnail__image {
-            width: 100%;
-        }
+.#{$lumx-base-prefix}-thumbnail[class*="#{$lumx-base-prefix}-thumbnail--size-"] {
+    .#{$lumx-base-prefix}-thumbnail__background,
+    .#{$lumx-base-prefix}-thumbnail__image {
+        width: 100%;
     }
 }
 
@@ -157,17 +157,18 @@
 }
 
 /* Loading state */
-.#{$lumx-base-prefix}-thumbnail--is-loading  {
-    .#{$lumx-base-prefix}-thumbnail__background {
+.#{$lumx-base-prefix}-thumbnail--is-loading {
+    &.#{$lumx-base-prefix}-thumbnail--theme-light .#{$lumx-base-prefix}-thumbnail__background {
         @include lumx-skeleton('light');
     }
+
     &.#{$lumx-base-prefix}-thumbnail--theme-dark .#{$lumx-base-prefix}-thumbnail__background {
         @include lumx-skeleton('dark');
     }
 }
 
 /* Error state */
-.#{$lumx-base-prefix}-thumbnail--has-error  {
+.#{$lumx-base-prefix}-thumbnail--has-error {
     /** Icon fallback */
     &.#{$lumx-base-prefix}-thumbnail--has-icon-error-fallback {
         .#{$lumx-base-prefix}-thumbnail__fallback {
@@ -179,17 +180,20 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: lumx-color-variant('dark', 'L6');
+        }
 
-            #{$lumx-base-prefix}-thumbnail--theme-dark & {
-                background-color: lumx-color-variant('light', 'L6');
-            }
+        &.#{$lumx-base-prefix}-thumbnail--theme-light .#{$lumx-base-prefix}-thumbnail__fallback {
+            background-color: lumx-color-variant('dark', 'L6');
+        }
+
+        &.#{$lumx-base-prefix}-thumbnail--theme-dark .#{$lumx-base-prefix}-thumbnail__fallback {
+            background-color: lumx-color-variant('light', 'L6');
         }
     }
 
     /* Custom fallback */
     &.#{$lumx-base-prefix}-thumbnail--has-custom-error-fallback {
-        // Disable aspect ratio
+        /* Disable aspect ratio */
         .#{$lumx-base-prefix}-thumbnail__background {
             padding-top: 0;
         }
