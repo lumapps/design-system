@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Wed, 12 Jan 2022 13:55:35 GMT
+ * Generated on Wed, 12 Jan 2022 16:44:48 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -2133,7 +2133,7 @@ export const DESIGN_TOKENS = {
             },
             quote: {
                 'font-size': { value: '16px' },
-                'font-weight': { value: 'var(--lumx-typography-font-weight-light)' },
+                'font-weight': { value: 'var(--lumx-typography-font-weight-regular)' },
                 'font-style': { value: 'italic' },
                 'line-height': { value: '24px' },
             },
