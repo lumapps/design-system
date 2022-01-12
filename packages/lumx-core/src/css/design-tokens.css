@@ -1,11 +1,11 @@
 /**
  * Do not edit directly
- * Generated on Wed, 12 Jan 2022 07:13:33 GMT
+ * Generated on Wed, 12 Jan 2022 13:55:35 GMT
  */
 
 :root {
     --lumx-button-height: 36px;
-    --lumx-button-border-radius: var(--lumx-border-radius);
+    --lumx-button-border-radius: 4px;
     --lumx-button-emphasis-high-state-default-padding-horizontal: 16px;
     --lumx-button-emphasis-high-state-default-border-width: 0;
     --lumx-button-emphasis-high-state-default-theme-light-background-color: var(--lumx-color-primary-N);
@@ -139,7 +139,7 @@
     --lumx-material-text-field-input-content-line-height: 20px;
     --lumx-navigation-item-padding-horizontal: 8px;
     --lumx-navigation-item-min-height: 36px;
-    --lumx-navigation-item-border-radius: var(--lumx-border-radius);
+    --lumx-navigation-item-border-radius: 4px;
     --lumx-navigation-item-emphasis-low-state-default-border-top-width: 0;
     --lumx-navigation-item-emphasis-low-state-default-border-right-width: 0;
     --lumx-navigation-item-emphasis-low-state-default-border-bottom-width: 0;

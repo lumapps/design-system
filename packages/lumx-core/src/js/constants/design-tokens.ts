@@ -1,12 +1,12 @@
 /**
  * Do not edit directly
- * Generated on Wed, 12 Jan 2022 07:13:33 GMT
+ * Generated on Wed, 12 Jan 2022 13:55:35 GMT
  */
 
 export const DESIGN_TOKENS = {
     button: {
         height: { value: '36px', $aliasedFrom: 'size.m' },
-        'border-radius': { value: 'var(--lumx-border-radius)' },
+        'border-radius': { value: '4px', $aliasedFrom: 'border-radius' },
         'emphasis-high': {
             'state-default': {
                 padding: { horizontal: { value: '16px', $aliasedFrom: 'spacing.unit.big' } },
@@ -427,7 +427,7 @@ export const DESIGN_TOKENS = {
         item: {
             padding: { horizontal: { value: '8px', $aliasedFrom: 'spacing.unit.regular' } },
             'min-height': { value: '36px', $aliasedFrom: 'size.m' },
-            'border-radius': { value: 'var(--lumx-border-radius)' },
+            'border-radius': { value: '4px', $aliasedFrom: 'border-radius' },
             'emphasis-low': {
                 'state-default': {
                     border: {
