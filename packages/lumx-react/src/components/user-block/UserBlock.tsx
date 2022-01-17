@@ -19,6 +19,8 @@ export type UserBlockSize = Extract<Size, 's' | 'm' | 'l'>;
 export interface UserBlockProps extends GenericProps {
     /** Props to pass to the avatar. */
     avatarProps?: AvatarProps;
+    /** Props to pass to the name block. */
+    nameProps?: GenericProps;
     /** Additional fields used to describe the user. */
     fields?: string[];
     /** Props to pass to the link wrapping the avatar thumbnail. */
@@ -74,6 +76,7 @@ const DEFAULT_PROPS: Partial<UserBlockProps> = {
 export const UserBlock: Comp<UserBlockProps, HTMLDivElement> = forwardRef((props, ref) => {
     const {
         avatarProps,
+        nameProps,
         className,
         fields,
         linkProps,
@@ -110,17 +113,17 @@ export const UserBlock: Comp<UserBlockProps, HTMLDivElement> = forwardRef((props
             isLink && linkProps?.className,
         );
         if (isLink) {
-            return renderLink({ ...linkProps, linkAs, className: nameClassName }, name);
+            return renderLink({ ...linkProps, linkAs, className: nameClassName, ...nameProps }, name);
         }
         if (onClick) {
             return (
-                <button onClick={onClick} type="button" className={nameClassName}>
+                <button onClick={onClick} type="button" className={nameClassName} {...nameProps}>
                     {name}
                 </button>
             );
         }
-        return <span className={nameClassName}>{name}</span>;
-    }, [isClickable, isLink, linkAs, linkProps, name, onClick]);
+        return <span className={nameClassName} {...nameProps}>{name}</span>;
+    }, [isClickable, isLink, linkAs, linkProps, name, nameProps, onClick]);
 
     const fieldsBlock: ReactNode = fields && componentSize !== Size.s && (
         <div className={`${CLASSNAME}__fields`}>
