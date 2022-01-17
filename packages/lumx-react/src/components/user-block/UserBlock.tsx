@@ -28,6 +28,8 @@ export interface UserBlockProps extends GenericProps {
     multipleActions?: ReactNode;
     /** User name. */
     name?: string;
+    /** Props to pass to the name block. */
+    nameProps?: GenericProps;
     /** Orientation. */
     orientation?: Orientation;
     /** Simple action toolbar content. */
@@ -79,6 +81,7 @@ export const UserBlock: Comp<UserBlockProps, HTMLDivElement> = forwardRef((props
         linkAs,
         multipleActions,
         name,
+        nameProps,
         onClick,
         onMouseEnter,
         onMouseLeave,
@@ -104,16 +107,21 @@ export const UserBlock: Comp<UserBlockProps, HTMLDivElement> = forwardRef((props
         if (isEmpty(name)) {
             return null;
         }
-        const nameClassName = classNames(handleBasicClasses({ prefix: `${CLASSNAME}__name` }), linkProps?.className);
-        const color = theme === Theme.dark ? ColorPalette.light : ColorPalette.dark;
-        return isClickable ? (
-            <Link {...(linkProps as any)} color={color} linkAs={linkAs} className={nameClassName}>
-                {name}
-            </Link>
-        ) : (
-            <span className={nameClassName}>{name}</span>
-        );
-    }, [isClickable, linkAs, linkProps, name, theme]);
+        let NameComponent: any = 'span';
+        const nProps: any = {
+            ...nameProps,
+            className: classNames(`${CLASSNAME}__name`, linkProps?.className, nameProps?.className),
+        };
+        if (isClickable) {
+            NameComponent = Link;
+            Object.assign(nProps, {
+                ...linkProps,
+                linkAs,
+                color: ColorPalette.dark,
+            });
+        }
+        return <NameComponent {...nProps}>{name}</NameComponent>;
+    }, [isClickable, linkAs, linkProps, name, nameProps]);
 
     const fieldsBlock: ReactNode = fields && componentSize !== Size.s && (
         <div className={`${CLASSNAME}__fields`}>
