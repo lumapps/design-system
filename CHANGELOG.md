@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   UserBlock: Added a `linkProps` and `linkAs` props which will be passed to the Thumbnail child and used to wrap the username.
 -   UserBlock: Added a `nameProps` props which will be passed to the name block.
 
+### Fixed
+
+-   Fixed Tooltip with target element using a function ref instead of object ref.
+
 ## [2.2.0][] - 2022-01-21
 
 ### Changed
