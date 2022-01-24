@@ -2,8 +2,10 @@
 
 exports[`<Thumbnail> Snapshots and structure should render story 'Clickable' 1`] = `
 <button
+  aria-label="Click me"
   className="lumx-thumbnail lumx-thumbnail--aspect-ratio-original lumx-thumbnail--size-xxl lumx-thumbnail--theme-light lumx-thumbnail--is-clickable lumx-thumbnail--is-loading"
   onClick={[Function]}
+  type="button"
 >
   <div
     className="lumx-thumbnail__background"
