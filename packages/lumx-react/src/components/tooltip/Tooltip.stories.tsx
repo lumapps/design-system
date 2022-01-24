@@ -76,13 +76,16 @@ export const EmptyTooltip = () => (
 );
 
 export const TooltipWithDropdown = () => {
-    const buttonRef = useRef(null);
+    const [button, setButton] = useState<HTMLElement | null>(null);
+    const [isOpen, setOpen] = useState(false);
     return (
         <>
-            <Tooltip label="Tooltip">
-                <Button ref={buttonRef}>Anchor</Button>
+            <Tooltip label={!isOpen && 'Tooltip'} placement="top">
+                <Button ref={setButton} onClick={() => setOpen((o) => !o)}>
+                    Anchor
+                </Button>
             </Tooltip>
-            <Dropdown anchorRef={buttonRef} isOpen>
+            <Dropdown anchorRef={{ current: button }} isOpen={isOpen}>
                 Dropdown
             </Dropdown>
         </>

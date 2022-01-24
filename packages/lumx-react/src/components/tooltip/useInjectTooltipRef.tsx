@@ -28,9 +28,7 @@ export const useInjectTooltipRef = (
             get(children, 'props.isDisabled') !== true
         ) {
             const element = children as any;
-            if (element.ref) {
-                setAnchorElement(element.ref.current);
-            }
+
             return cloneElement(element, {
                 ...element.props,
                 ...ariaProps,
