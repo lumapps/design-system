@@ -151,6 +151,8 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
         Object.assign(wrapperProps, linkProps);
     } else if (isButton) {
         Wrapper = 'button';
+        wrapperProps.type = forwardedProps.type || 'button';
+        wrapperProps['aria-label'] = forwardedProps['aria-label'] || alt;
     }
 
     return (
