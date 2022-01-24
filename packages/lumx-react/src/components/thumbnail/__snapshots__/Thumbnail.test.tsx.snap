@@ -20,7 +20,7 @@ exports[`<Thumbnail> Snapshots and structure should render story 'Clickable' 1`]
 `;
 
 exports[`<Thumbnail> Snapshots and structure should render story 'ClickableCustomLink' 1`] = `
-<CustomLinkComponent
+<CustomLink
   className="custom-class-name lumx-thumbnail lumx-thumbnail--aspect-ratio-original lumx-thumbnail--size-xxl lumx-thumbnail--theme-light lumx-thumbnail--is-clickable lumx-thumbnail--is-loading"
   href="https://google.fr"
 >
@@ -35,7 +35,7 @@ exports[`<Thumbnail> Snapshots and structure should render story 'ClickableCusto
       style={Object {}}
     />
   </div>
-</CustomLinkComponent>
+</CustomLink>
 `;
 
 exports[`<Thumbnail> Snapshots and structure should render story 'ClickableLink' 1`] = `

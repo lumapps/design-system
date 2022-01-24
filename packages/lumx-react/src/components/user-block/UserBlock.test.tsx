@@ -25,6 +25,12 @@ describe(`<${UserBlock.displayName}>`, () => {
     // 1. Test render via snapshot.
     describe('Snapshots and structure', () => {
         itShouldRenderStories(stories, UserBlock);
+
+        it('should forward name props', () => {
+            const { wrapper } = setup({ name: 'John Doe', nameProps: { 'data-custom-attribute': true } });
+
+            expect(wrapper.find('.lumx-user-block__name[data-custom-attribute]')).toHaveLength(1);
+        });
     });
 
     // Common tests suite.

@@ -5,13 +5,7 @@ import 'jest-enzyme';
 import { commonTestsSuite, itShouldRenderStories } from '@lumx/react/testing/utils';
 
 import { Thumbnail, ThumbnailProps } from './Thumbnail';
-import {
-    Clickable,
-    ClickableCustomLink,
-    ClickableLink,
-    Default,
-    WithBadge,
-} from './Thumbnail.stories';
+import { Clickable, ClickableCustomLink, ClickableLink, Default, WithBadge } from './Thumbnail.stories';
 
 const CLASSNAME = Thumbnail.className as string;
 
