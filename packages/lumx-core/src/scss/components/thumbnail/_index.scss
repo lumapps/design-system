@@ -79,13 +79,6 @@
     }
 }
 
-.#{$lumx-base-prefix}-thumbnail[class*='#{$lumx-base-prefix}-thumbnail--size-'] {
-    .#{$lumx-base-prefix}-thumbnail__background,
-    .#{$lumx-base-prefix}-thumbnail__image {
-        width: 100%;
-    }
-}
-
 /* Thumbnail aspect ratio
    ========================================================================== */
 

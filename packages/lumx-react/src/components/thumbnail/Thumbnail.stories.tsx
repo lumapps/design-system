@@ -275,11 +275,13 @@ export const Vertical = () => (
             <Thumbnail alt="" aspectRatio="vertical" image={IMAGES.portrait1s200} size="xxl" />
         </FlexBox>
         <h2>With size & smaller image & fill height</h2>
+        <small>Unsupported use case (use ratio free with fill height)</small>
         <FlexBox orientation="horizontal" vAlign="center" gap="huge">
             <Thumbnail alt="" aspectRatio="vertical" image={IMAGES.landscape1s200} size="xxl" fillHeight />
             <Thumbnail alt="" aspectRatio="vertical" image={IMAGES.portrait1s200} size="xxl" fillHeight />
         </FlexBox>
         <h2>Constrained parent size & smaller image & fill height</h2>
+        <small>Unsupported use case (use ratio free with fill height)</small>
         <FlexBox orientation="horizontal" vAlign="center" gap="huge">
             <div className="parent" style={{ width: 220 }}>
                 <Thumbnail alt="" aspectRatio="vertical" image={IMAGES.landscape1s200} fillHeight />
@@ -329,11 +331,13 @@ export const Wide = () => (
             <Thumbnail alt="" aspectRatio="wide" image={IMAGES.portrait1s200} size="xxl" />
         </FlexBox>
         <h2>With size & smaller image & fill height</h2>
+        <small>Unsupported use case (use ratio free with fill height)</small>
         <FlexBox orientation="horizontal" vAlign="center" gap="huge">
             <Thumbnail alt="" aspectRatio="wide" image={IMAGES.landscape1s200} size="xxl" fillHeight />
             <Thumbnail alt="" aspectRatio="wide" image={IMAGES.portrait1s200} size="xxl" fillHeight />
         </FlexBox>
         <h2>Constrained parent size & smaller image & fill height</h2>
+        <small>Unsupported use case (use ratio free with fill height)</small>
         <FlexBox orientation="horizontal" vAlign="center" gap="huge">
             <div className="parent" style={{ width: 220 }}>
                 <Thumbnail alt="" aspectRatio="wide" image={IMAGES.landscape1s200} fillHeight />
@@ -383,11 +387,13 @@ export const Square = () => (
             <Thumbnail alt="" aspectRatio="square" image={IMAGES.portrait1s200} size="xxl" />
         </FlexBox>
         <h2>With size & smaller image & fill height</h2>
+        <small>Unsupported use case (use ratio free with fill height)</small>
         <FlexBox orientation="horizontal" vAlign="center" gap="huge">
             <Thumbnail alt="" aspectRatio="square" image={IMAGES.landscape1s200} size="xxl" fillHeight />
             <Thumbnail alt="" aspectRatio="square" image={IMAGES.portrait1s200} size="xxl" fillHeight />
         </FlexBox>
         <h2>Constrained parent size & smaller image & fill height</h2>
+        <small>Unsupported use case (use ratio free with fill height)</small>
         <FlexBox orientation="horizontal" vAlign="center" gap="huge">
             <div className="parent" style={{ width: 220 }}>
                 <Thumbnail alt="" aspectRatio="square" image={IMAGES.landscape1s200} fillHeight />
