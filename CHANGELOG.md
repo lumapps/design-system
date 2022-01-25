@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   Fixed Tooltip with target element using a function ref instead of object ref.
+-   Thumbnail: fix smaller image than the `size` prop.
 
 ## [2.2.0][] - 2022-01-21
 
