@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.1][] - 2022-01-25
+
 ## Added
 
 -   Avatar: Added a `linkProps` and `linkAs` props which will be passed to the Thumbnail child.
@@ -1259,3 +1261,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [2.1.9]: https://github.com/lumapps/design-system/tree/v2.1.9
 [unreleased]: https://github.com/lumapps/design-system/compare/v2.2.0...HEAD
 [2.2.0]: https://github.com/lumapps/design-system/tree/v2.2.0
+[unreleased]: https://github.com/lumapps/design-system/compare/v2.2.1...HEAD
+[2.2.1]: https://github.com/lumapps/design-system/tree/v2.2.1
