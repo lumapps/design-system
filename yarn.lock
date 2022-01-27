@@ -20340,7 +20340,7 @@ fsevents@~2.1.2:
     prism-react-renderer: ^0.1.5
     prismjs: ^1.25.0
     react: ^16.13.0
-    react-docgen-typescript: ^1.20.5
+    react-docgen-typescript: ^2.2.2
     react-dom: ^16.13.0
     react-helmet: ^6.1.0
     tsconfig-paths-webpack-plugin: ^3.2.0
@@ -25137,12 +25137,12 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"react-docgen-typescript@npm:^1.20.5":
-  version: 1.20.5
-  resolution: "react-docgen-typescript@npm:1.20.5"
+"react-docgen-typescript@npm:^2.2.2":
+  version: 2.2.2
+  resolution: "react-docgen-typescript@npm:2.2.2"
   peerDependencies:
-    typescript: ">= 3.x"
-  checksum: f6194edd707966066c5404c60eb8dcc93738a8f45396e47469bbfe2a78e0a69ccfe4d77e975dece45759e28444fa8f120c13614bd99ca06833fbcc566d6aa3a6
+    typescript: ">= 4.3.x"
+  checksum: a9826459ea44e818f21402728dd47f5cae60bd936574cefd4f90ad101ff3eebacd67b6e017b793309734ce62c037aa3072dbc855d2b0e29bad1a38cbf5bac115
   languageName: node
   linkType: hard
 
@@ -30064,13 +30064,13 @@ typescript@^3.9.3:
   languageName: node
   linkType: hard
 
-typescript@^4.1.2:
-  version: 4.1.2
-  resolution: "typescript@npm:4.1.2"
+"typescript@npm:^4.1.2":
+  version: 4.5.5
+  resolution: "typescript@npm:4.5.5"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: a0bd309f001592b400a9e7ee3a6efe557cdd1a6bc84ebbfdaa179f994185e5276a1ea30e248d7139df08eee8ad2aa30b6108c27a9dd3b524a5e1c5669e25399e
+  checksum: 506f4c919dc8aeaafa92068c997f1d213b9df4d9756d0fae1a1e7ab66b585ab3498050e236113a1c9e57ee08c21ec6814ca7a7f61378c058d79af50a4b1f5a5e
   languageName: node
   linkType: hard
 
@@ -30095,12 +30095,12 @@ typescript@^4.1.2:
   linkType: hard
 
 "typescript@patch:typescript@^4.1.2#~builtin<compat/typescript>":
-  version: 4.1.2
-  resolution: "typescript@patch:typescript@npm%3A4.1.2#~builtin<compat/typescript>::version=4.1.2&hash=ddd1e8"
+  version: 4.5.5
+  resolution: "typescript@patch:typescript@npm%3A4.5.5#~builtin<compat/typescript>::version=4.5.5&hash=ddd1e8"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 1f1df4c7412c3e383001c30dd7301b395d8e42b6c35d3b7fb5b9833f528cd21831b5ed0ffb0729db28918436cd443228de079c573b367441e3be841b8dc4d85d
+  checksum: 9cdde4aae20b2904431f3f2ca8acaf3b0cc52faddf68aa88b288c9d0520221817da43783a756fce7ab9360033ada0371c3ff93dfc4bdb4b13f6e9bac64e1658d
   languageName: node
   linkType: hard
 
