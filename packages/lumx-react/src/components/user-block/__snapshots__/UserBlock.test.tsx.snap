@@ -19,6 +19,7 @@ Array [
       <Link
         className="lumx-user-block__name"
         color="dark"
+        onClick={[Function]}
       >
         Emmitt O. Lum
       </Link>
