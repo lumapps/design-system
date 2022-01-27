@@ -116,12 +116,13 @@ export const UserBlock: Comp<UserBlockProps, HTMLDivElement> = forwardRef((props
             NameComponent = Link;
             Object.assign(nProps, {
                 ...linkProps,
+                onClick,
                 linkAs,
                 color: ColorPalette.dark,
             });
         }
         return <NameComponent {...nProps}>{name}</NameComponent>;
-    }, [isClickable, linkAs, linkProps, name, nameProps]);
+    }, [isClickable, linkAs, linkProps, name, nameProps, onClick]);
 
     const fieldsBlock: ReactNode = fields && componentSize !== Size.s && (
         <div className={`${CLASSNAME}__fields`}>
