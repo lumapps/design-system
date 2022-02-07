@@ -7,8 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- Switch: Added a `inputProps` prop which will be passed to the input tag inside the Switch
-- Checkbox: Added a `inputProps` prop which will be passed to the input tag inside the Checkbox
+## [2.2.3][] - 2022-02-07
+
+### Added
+
+-   Switch: Added a `inputProps` prop which will be passed to the input tag inside the Switch
+-   Checkbox: Added a `inputProps` prop which will be passed to the input tag inside the Checkbox
 
 ## [2.2.2][] - 2022-01-27
 
@@ -1274,3 +1278,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [2.2.1]: https://github.com/lumapps/design-system/tree/v2.2.1
 [unreleased]: https://github.com/lumapps/design-system/compare/v2.2.2...HEAD
 [2.2.2]: https://github.com/lumapps/design-system/tree/v2.2.2
+[unreleased]: https://github.com/lumapps/design-system/compare/v2.2.3...HEAD
+[2.2.3]: https://github.com/lumapps/design-system/tree/v2.2.3
