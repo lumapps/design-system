@@ -1,4 +1,4 @@
-import React, { Children, forwardRef, SyntheticEvent, useMemo } from 'react';
+import React, { Children, forwardRef, InputHTMLAttributes, SyntheticEvent, useMemo } from 'react';
 
 import classNames from 'classnames';
 import { uid } from 'uid';
@@ -29,6 +29,8 @@ export interface SwitchProps extends GenericProps {
     value?: string;
     /** On change callback. */
     onChange?(isChecked: boolean, value?: string, name?: string, event?: SyntheticEvent): void;
+    /** optional props for input */
+    inputProps?: InputHTMLAttributes<HTMLInputElement>;
 }
 
 /**
@@ -71,6 +73,7 @@ export const Switch: Comp<SwitchProps, HTMLDivElement> = forwardRef((props, ref)
         position,
         theme,
         value,
+        inputProps = {},
         ...forwardedProps
     } = props;
     const switchId = useMemo(() => id || `switch-${uid()}`, [id]);
@@ -109,6 +112,7 @@ export const Switch: Comp<SwitchProps, HTMLDivElement> = forwardRef((props, ref)
                     checked={isChecked}
                     aria-checked={Boolean(isChecked)}
                     onChange={handleChange}
+                    {...inputProps}
                 />
 
                 <div className={`${CLASSNAME}__input-placeholder`}>

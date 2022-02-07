@@ -29,6 +29,36 @@ exports[`<Switch> Conditions should not display the \`helper\` if no \`label\` i
 </div>
 `;
 
+exports[`<Switch> Props should use the given props while passing custom props to input 1`] = `
+<div
+  className="lumx-switch lumx-switch--position-left lumx-switch--theme-light lumx-switch--is-unchecked"
+>
+  <div
+    className="lumx-switch__input-wrapper"
+  >
+    <input
+      aria-checked={false}
+      aria-labelledby="labelledby-id"
+      className="lumx-switch__input-native"
+      id="switch-uid"
+      onChange={[Function]}
+      role="switch"
+      type="checkbox"
+    />
+    <div
+      className="lumx-switch__input-placeholder"
+    >
+      <div
+        className="lumx-switch__input-background"
+      />
+      <div
+        className="lumx-switch__input-indicator"
+      />
+    </div>
+  </div>
+</div>
+`;
+
 exports[`<Switch> Snapshots and structure should render correctly with a \`label\` and a \`helper\` 1`] = `
 <div
   className="lumx-switch lumx-switch--position-left lumx-switch--theme-light lumx-switch--is-unchecked"

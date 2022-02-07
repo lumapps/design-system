@@ -1,4 +1,4 @@
-import React, { useMemo, forwardRef, ReactNode, SyntheticEvent } from 'react';
+import React, { useMemo, forwardRef, ReactNode, SyntheticEvent, InputHTMLAttributes } from 'react';
 
 import classNames from 'classnames';
 import { uid } from 'uid';
@@ -30,6 +30,8 @@ export interface CheckboxProps extends GenericProps {
     value?: string;
     /** On change callback. */
     onChange?(isChecked: boolean, value?: string, name?: string, event?: SyntheticEvent): void;
+    /** optional props for input */
+    inputProps?: InputHTMLAttributes<HTMLInputElement>;
 }
 
 /**
@@ -70,6 +72,7 @@ export const Checkbox: Comp<CheckboxProps, HTMLDivElement> = forwardRef((props, 
         onChange,
         theme,
         value,
+        inputProps = {},
         ...forwardedProps
     } = props;
     const inputId = useMemo(() => id || `${CLASSNAME.toLowerCase()}-${uid()}`, [id]);
@@ -105,6 +108,7 @@ export const Checkbox: Comp<CheckboxProps, HTMLDivElement> = forwardRef((props, 
                     value={value}
                     checked={isChecked}
                     onChange={handleChange}
+                    {...inputProps}
                 />
 
                 <div className={`${CLASSNAME}__input-placeholder`}>
