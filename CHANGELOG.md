@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Switch: Added a `inputProps` prop which will be passed to the input tag inside the Switch
+- Checkbox: Added a `inputProps` prop which will be passed to the input tag inside the Checkbox
+
 ## [2.2.2][] - 2022-01-27
 
 ### Fixed

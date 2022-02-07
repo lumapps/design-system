@@ -142,6 +142,16 @@ describe(`<${Switch.displayName}>`, () => {
                 }
             });
         });
+
+        it('should use the given props while passing custom props to input', () => {
+            const { wrapper } = setup({
+                inputProps: {
+                    'aria-labelledby': 'labelledby-id',
+                },
+            });
+
+            expect(wrapper).toMatchSnapshot();
+        });
     });
 
     // 3. Test events.

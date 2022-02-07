@@ -50,6 +50,57 @@ exports[`<Checkbox> Props should use the given props 1`] = `
 </div>
 `;
 
+exports[`<Checkbox> Props should use the given props while passing custom props to input 1`] = `
+<div
+  className="lumx-checkbox lumx-checkbox--is-unchecked lumx-checkbox--theme-light"
+>
+  <div
+    className="lumx-checkbox__input-wrapper"
+  >
+    <input
+      aria-labelledby="labelledby-id"
+      className="lumx-checkbox__input-native"
+      id="fixedId"
+      onChange={[Function]}
+      tabIndex={0}
+      type="checkbox"
+    />
+    <div
+      className="lumx-checkbox__input-placeholder"
+    >
+      <div
+        className="lumx-checkbox__input-background"
+      />
+      <div
+        className="lumx-checkbox__input-indicator"
+      >
+        <Icon
+          icon="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="lumx-checkbox__content"
+  >
+    <InputLabel
+      className="lumx-checkbox__label"
+      htmlFor="fixedId"
+      theme="light"
+    >
+      Test label
+    </InputLabel>
+    <InputHelper
+      className="lumx-checkbox__helper"
+      kind="info"
+      theme="light"
+    >
+      Test helper
+    </InputHelper>
+  </div>
+</div>
+`;
+
 exports[`<Checkbox> Snapshots and structure should render correctly 1`] = `
 <div
   className="lumx-checkbox lumx-checkbox--is-unchecked lumx-checkbox--theme-light"

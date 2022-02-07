@@ -64,6 +64,20 @@ describe(`<${Checkbox.displayName}>`, () => {
             expect(label).toExist();
             expect(wrapper).toMatchSnapshot();
         });
+
+        it('should use the given props while passing custom props to input', () => {
+            const { helper, label, wrapper } = setup({
+                helper: 'Test helper',
+                label: 'Test label',
+                inputProps: {
+                    'aria-labelledby': 'labelledby-id',
+                },
+            });
+
+            expect(helper).toExist();
+            expect(label).toExist();
+            expect(wrapper).toMatchSnapshot();
+        });
     });
 
     // 3. Test events.
