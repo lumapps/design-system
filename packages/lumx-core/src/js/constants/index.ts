@@ -14,3 +14,21 @@ export * from './keycodes';
  */
 export const DIALOG_TRANSITION_DURATION = 400;
 export const NOTIFICATION_TRANSITION_DURATION = 200;
+
+/**
+ * Delay on hover after which we open or close the tooltip.
+ * Only applies to devices supporting pointer hover.
+ */
+export const TOOLTIP_HOVER_DELAY = {
+    open: 500,
+    close: 0,
+};
+
+/**
+ * Delay on long press after which we open or close the tooltip.
+ * Only applies to devices not supporting pointer hover.
+ */
+export const TOOLTIP_LONG_PRESS_DELAY = {
+    open: 250,
+    close: 3000,
+};

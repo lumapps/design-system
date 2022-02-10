@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   Tooltip: rework of the activation method to fit more devices
+    -   On device with touch screen:
+        -   The Tooltip shows when the tooltip's anchor is pressed for more than 250 ms (long press).
+            This disables the default anchor's `click`/`touchend` event.
+        -   The tooltip hides 3 seconds after the long press is ended.
+        -   The tooltip is not activated on a short `click`/`tap`.
+    -   On devices supporting pointer hovering:
+        -   The tooltip shows when hovering (500 ms delay).
+        -   The tooltip hides when moving the pointer outside the anchor or clicking the anchor.
+    -   On every device:
+        -   The tooltip shows when focusing the anchor.
+        -   The tooltip hides when loosing focus on the anchor.
+        -   The tooltip hides when the escape key is pressed.
+
 ## [2.2.3][] - 2022-02-07
 
 ### Added
