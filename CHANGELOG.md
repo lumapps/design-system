@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+-   @lumx/core: all CSS `:hover` style are now disable on devices that do not support pointer hover.
+    **warning**: this is not applied on the SCSS, use the postcss plugin `postcss-hover-media-feature` to reproduce this in your project.
 -   Tooltip: rework of the activation method to fit more devices
     -   On device with touch screen:
         -   The Tooltip shows when the tooltip's anchor is pressed for more than 250 ms (long press).
