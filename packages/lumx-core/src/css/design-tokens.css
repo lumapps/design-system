@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Wed, 12 Jan 2022 16:44:48 GMT
+ * Generated on Wed, 16 Feb 2022 15:35:03 GMT
  */
 
 :root {
@@ -366,42 +366,42 @@
     --lumx-color-light-L4: rgba(255, 255, 255, 0.4); /* Base light color with 40% opacity */
     --lumx-color-light-L5: rgba(255, 255, 255, 0.2); /* Base light color with 20% opacity */
     --lumx-color-light-L6: rgba(255, 255, 255, 0.1); /* Base light color with 10% opacity */
-    --lumx-color-blue-D2: rgb(25, 118, 210); /* Darkest blue color */
-    --lumx-color-blue-D1: rgb(30, 136, 229); /* Dark blue color */
-    --lumx-color-blue-N: rgb(33, 150, 243); /* Neutral blue color */
-    --lumx-color-blue-L1: rgba(33, 150, 243, 0.8); /* Base blue color with 80% opacity */
-    --lumx-color-blue-L2: rgba(33, 150, 243, 0.6); /* Base blue color with 60% opacity */
-    --lumx-color-blue-L3: rgba(33, 150, 243, 0.4); /* Base blue color with 40% opacity */
-    --lumx-color-blue-L4: rgba(33, 150, 243, 0.2); /* Base blue color with 20% opacity */
-    --lumx-color-blue-L5: rgba(33, 150, 243, 0.1); /* Base blue color with 10% opacity */
-    --lumx-color-blue-L6: rgba(33, 150, 243, 0.05); /* Base blue color with 5% opacity */
-    --lumx-color-green-D2: rgb(56, 142, 60); /* Darkest green color */
-    --lumx-color-green-D1: rgb(67, 160, 71); /* Dark green color */
-    --lumx-color-green-N: rgb(76, 175, 80); /* Neutral green color */
-    --lumx-color-green-L1: rgba(76, 175, 80, 0.8); /* Base green color with 80% opacity */
-    --lumx-color-green-L2: rgba(76, 175, 80, 0.6); /* Base green color with 60% opacity */
-    --lumx-color-green-L3: rgba(76, 175, 80, 0.4); /* Base green color with 40% opacity */
-    --lumx-color-green-L4: rgba(76, 175, 80, 0.2); /* Base green color with 20% opacity */
-    --lumx-color-green-L5: rgba(76, 175, 80, 0.1); /* Base green color with 10% opacity */
-    --lumx-color-green-L6: rgba(76, 175, 80, 0.05); /* Base green color with 5% opacity */
-    --lumx-color-yellow-D2: rgb(255, 111, 0); /* Darkest yellow color */
-    --lumx-color-yellow-D1: rgb(255, 143, 0); /* Dark yellow color */
-    --lumx-color-yellow-N: rgb(255, 179, 0); /* Neutral yellow color */
-    --lumx-color-yellow-L1: rgba(255, 179, 0, 0.8); /* Base yellow color with 80% opacity */
-    --lumx-color-yellow-L2: rgba(255, 179, 0, 0.7); /* Base yellow color with 70% opacity */
-    --lumx-color-yellow-L3: rgba(255, 179, 0, 0.6); /* Base yellow color with 60% opacity */
-    --lumx-color-yellow-L4: rgba(255, 179, 0, 0.4); /* Base yellow color with 40% opacity */
-    --lumx-color-yellow-L5: rgba(255, 179, 0, 0.2); /* Base yellow color with 20% opacity */
-    --lumx-color-yellow-L6: rgba(255, 179, 0, 0.1); /* Base yellow color with 10% opacity */
-    --lumx-color-red-D2: rgb(211, 47, 47); /* Darkest red color */
-    --lumx-color-red-D1: rgb(229, 57, 53); /* Dark red color */
-    --lumx-color-red-N: rgb(244, 67, 54); /* Neutral red color */
-    --lumx-color-red-L1: rgba(244, 67, 54, 0.8); /* Base red color with 80% opacity */
-    --lumx-color-red-L2: rgba(244, 67, 54, 0.6); /* Base red color with 60% opacity */
-    --lumx-color-red-L3: rgba(244, 67, 54, 0.4); /* Base red color with 40% opacity */
-    --lumx-color-red-L4: rgba(244, 67, 54, 0.2); /* Base red color with 20% opacity */
-    --lumx-color-red-L5: rgba(244, 67, 54, 0.1); /* Base red color with 10% opacity */
-    --lumx-color-red-L6: rgba(244, 67, 54, 0.05); /* Base red color with 5% opacity */
+    --lumx-color-blue-D2: rgb(21, 70, 193); /* Darkest blue color */
+    --lumx-color-blue-D1: rgb(24, 78, 216); /* Dark blue color */
+    --lumx-color-blue-N: rgb(36, 91, 231); /* Neutral blue color */
+    --lumx-color-blue-L1: rgba(36, 91, 231, 0.8); /* Base blue color with 80% opacity */
+    --lumx-color-blue-L2: rgba(36, 91, 231, 0.6); /* Base blue color with 60% opacity */
+    --lumx-color-blue-L3: rgba(36, 91, 231, 0.4); /* Base blue color with 40% opacity */
+    --lumx-color-blue-L4: rgba(36, 91, 231, 0.2); /* Base blue color with 20% opacity */
+    --lumx-color-blue-L5: rgba(36, 91, 231, 0.1); /* Base blue color with 10% opacity */
+    --lumx-color-blue-L6: rgba(36, 91, 231, 0.05); /* Base blue color with 5% opacity */
+    --lumx-color-green-D2: rgb(26, 110, 89); /* Darkest green color */
+    --lumx-color-green-D1: rgb(23, 122, 97); /* Dark green color */
+    --lumx-color-green-N: rgb(19, 134, 105); /* Neutral green color */
+    --lumx-color-green-L1: rgba(19, 134, 105, 0.8); /* Base green color with 80% opacity */
+    --lumx-color-green-L2: rgba(19, 134, 105, 0.6); /* Base green color with 60% opacity */
+    --lumx-color-green-L3: rgba(19, 134, 105, 0.4); /* Base green color with 40% opacity */
+    --lumx-color-green-L4: rgba(19, 134, 105, 0.2); /* Base green color with 20% opacity */
+    --lumx-color-green-L5: rgba(19, 134, 105, 0.1); /* Base green color with 10% opacity */
+    --lumx-color-green-L6: rgba(19, 134, 105, 0.05); /* Base green color with 5% opacity */
+    --lumx-color-yellow-D2: rgb(255, 161, 37); /* Darkest yellow color */
+    --lumx-color-yellow-D1: rgb(255, 179, 37); /* Dark yellow color */
+    --lumx-color-yellow-N: rgb(255, 196, 37); /* Neutral yellow color */
+    --lumx-color-yellow-L1: rgba(255, 196, 37, 0.9); /* Base yellow color with 80% opacity */
+    --lumx-color-yellow-L2: rgba(255, 196, 37, 0.8); /* Base yellow color with 70% opacity */
+    --lumx-color-yellow-L3: rgba(255, 196, 37, 0.6); /* Base yellow color with 60% opacity */
+    --lumx-color-yellow-L4: rgba(255, 196, 37, 0.48); /* Base yellow color with 40% opacity */
+    --lumx-color-yellow-L5: rgba(255, 196, 37, 0.24); /* Base yellow color with 20% opacity */
+    --lumx-color-yellow-L6: rgba(255, 196, 37, 0.12); /* Base yellow color with 10% opacity */
+    --lumx-color-red-D2: rgb(190, 30, 70); /* Darkest red color */
+    --lumx-color-red-D1: rgb(212, 33, 72); /* Dark red color */
+    --lumx-color-red-N: rgb(223, 48, 80); /* Neutral red color */
+    --lumx-color-red-L1: rgba(223, 48, 80, 0.8); /* Base red color with 80% opacity */
+    --lumx-color-red-L2: rgba(223, 48, 80, 0.6); /* Base red color with 60% opacity */
+    --lumx-color-red-L3: rgba(223, 48, 80, 0.4); /* Base red color with 40% opacity */
+    --lumx-color-red-L4: rgba(223, 48, 80, 0.2); /* Base red color with 20% opacity */
+    --lumx-color-red-L5: rgba(223, 48, 80, 0.1); /* Base red color with 10% opacity */
+    --lumx-color-red-L6: rgba(223, 48, 80, 0.05); /* Base red color with 5% opacity */
     --lumx-color-grey-N: rgb(117, 117, 117); /* Neutral grey color */
     --lumx-color-grey-L1: rgba(117, 117, 117, 0.8); /* Base grey color with 80% opacity */
     --lumx-color-grey-L2: rgba(117, 117, 117, 0.6); /* Base grey color with 60% opacity */
@@ -409,33 +409,33 @@
     --lumx-color-grey-L4: rgba(117, 117, 117, 0.2); /* Base grey color with 20% opacity */
     --lumx-color-grey-L5: rgba(117, 117, 117, 0.1); /* Base grey color with 10% opacity */
     --lumx-color-grey-L6: rgba(117, 117, 117, 0.05); /* Base grey color with 5% opacity */
-    --lumx-color-primary-D2: rgb(25, 118, 210); /* Darkest blue color */
-    --lumx-color-primary-D1: rgb(30, 136, 229); /* Dark blue color */
-    --lumx-color-primary-N: rgb(33, 150, 243); /* Neutral blue color */
-    --lumx-color-primary-L1: rgba(33, 150, 243, 0.8); /* Base blue color with 80% opacity */
-    --lumx-color-primary-L2: rgba(33, 150, 243, 0.6); /* Base blue color with 60% opacity */
-    --lumx-color-primary-L3: rgba(33, 150, 243, 0.4); /* Base blue color with 40% opacity */
-    --lumx-color-primary-L4: rgba(33, 150, 243, 0.2); /* Base blue color with 20% opacity */
-    --lumx-color-primary-L5: rgba(33, 150, 243, 0.1); /* Base blue color with 10% opacity */
-    --lumx-color-primary-L6: rgba(33, 150, 243, 0.05); /* Base blue color with 5% opacity */
-    --lumx-color-secondary-D2: rgb(56, 142, 60); /* Darkest green color */
-    --lumx-color-secondary-D1: rgb(67, 160, 71); /* Dark green color */
-    --lumx-color-secondary-N: rgb(76, 175, 80); /* Neutral green color */
-    --lumx-color-secondary-L1: rgba(76, 175, 80, 0.8); /* Base green color with 80% opacity */
-    --lumx-color-secondary-L2: rgba(76, 175, 80, 0.6); /* Base green color with 60% opacity */
-    --lumx-color-secondary-L3: rgba(76, 175, 80, 0.4); /* Base green color with 40% opacity */
-    --lumx-color-secondary-L4: rgba(76, 175, 80, 0.2); /* Base green color with 20% opacity */
-    --lumx-color-secondary-L5: rgba(76, 175, 80, 0.1); /* Base green color with 10% opacity */
-    --lumx-color-secondary-L6: rgba(76, 175, 80, 0.05); /* Base green color with 5% opacity */
-    --lumx-color-accent-D2: rgb(56, 142, 60); /* Darkest green color */
-    --lumx-color-accent-D1: rgb(67, 160, 71); /* Dark green color */
-    --lumx-color-accent-N: rgb(76, 175, 80); /* Neutral green color */
-    --lumx-color-accent-L1: rgba(76, 175, 80, 0.8); /* Base green color with 80% opacity */
-    --lumx-color-accent-L2: rgba(76, 175, 80, 0.6); /* Base green color with 60% opacity */
-    --lumx-color-accent-L3: rgba(76, 175, 80, 0.4); /* Base green color with 40% opacity */
-    --lumx-color-accent-L4: rgba(76, 175, 80, 0.2); /* Base green color with 20% opacity */
-    --lumx-color-accent-L5: rgba(76, 175, 80, 0.1); /* Base green color with 10% opacity */
-    --lumx-color-accent-L6: rgba(76, 175, 80, 0.05); /* Base green color with 5% opacity */
+    --lumx-color-primary-D2: rgb(21, 70, 193); /* Darkest blue color */
+    --lumx-color-primary-D1: rgb(24, 78, 216); /* Dark blue color */
+    --lumx-color-primary-N: rgb(36, 91, 231); /* Neutral blue color */
+    --lumx-color-primary-L1: rgba(36, 91, 231, 0.8); /* Base blue color with 80% opacity */
+    --lumx-color-primary-L2: rgba(36, 91, 231, 0.6); /* Base blue color with 60% opacity */
+    --lumx-color-primary-L3: rgba(36, 91, 231, 0.4); /* Base blue color with 40% opacity */
+    --lumx-color-primary-L4: rgba(36, 91, 231, 0.2); /* Base blue color with 20% opacity */
+    --lumx-color-primary-L5: rgba(36, 91, 231, 0.1); /* Base blue color with 10% opacity */
+    --lumx-color-primary-L6: rgba(36, 91, 231, 0.05); /* Base blue color with 5% opacity */
+    --lumx-color-secondary-D2: rgb(26, 110, 89); /* Darkest green color */
+    --lumx-color-secondary-D1: rgb(23, 122, 97); /* Dark green color */
+    --lumx-color-secondary-N: rgb(19, 134, 105); /* Neutral green color */
+    --lumx-color-secondary-L1: rgba(19, 134, 105, 0.8); /* Base green color with 80% opacity */
+    --lumx-color-secondary-L2: rgba(19, 134, 105, 0.6); /* Base green color with 60% opacity */
+    --lumx-color-secondary-L3: rgba(19, 134, 105, 0.4); /* Base green color with 40% opacity */
+    --lumx-color-secondary-L4: rgba(19, 134, 105, 0.2); /* Base green color with 20% opacity */
+    --lumx-color-secondary-L5: rgba(19, 134, 105, 0.1); /* Base green color with 10% opacity */
+    --lumx-color-secondary-L6: rgba(19, 134, 105, 0.05); /* Base green color with 5% opacity */
+    --lumx-color-accent-D2: rgb(26, 110, 89); /* Darkest green color */
+    --lumx-color-accent-D1: rgb(23, 122, 97); /* Dark green color */
+    --lumx-color-accent-N: rgb(19, 134, 105); /* Neutral green color */
+    --lumx-color-accent-L1: rgba(19, 134, 105, 0.8); /* Base green color with 80% opacity */
+    --lumx-color-accent-L2: rgba(19, 134, 105, 0.6); /* Base green color with 60% opacity */
+    --lumx-color-accent-L3: rgba(19, 134, 105, 0.4); /* Base green color with 40% opacity */
+    --lumx-color-accent-L4: rgba(19, 134, 105, 0.2); /* Base green color with 20% opacity */
+    --lumx-color-accent-L5: rgba(19, 134, 105, 0.1); /* Base green color with 10% opacity */
+    --lumx-color-accent-L6: rgba(19, 134, 105, 0.05); /* Base green color with 5% opacity */
     --lumx-color-black-N: rgba(0, 0, 0, 0.87); /* Neutral dark color */
     --lumx-color-black-L1: rgba(0, 0, 0, 0.7); /* Base dark color with 70% opacity */
     --lumx-color-black-L2: rgba(0, 0, 0, 0.54); /* Base dark color with 54% opacity */
@@ -450,15 +450,15 @@
     --lumx-color-white-L4: rgba(255, 255, 255, 0.4); /* Base light color with 40% opacity */
     --lumx-color-white-L5: rgba(255, 255, 255, 0.2); /* Base light color with 20% opacity */
     --lumx-color-white-L6: rgba(255, 255, 255, 0.1); /* Base light color with 10% opacity */
-    --lumx-color-orange-D2: rgb(255, 111, 0); /* Darkest yellow color */
-    --lumx-color-orange-D1: rgb(255, 143, 0); /* Dark yellow color */
-    --lumx-color-orange-N: rgb(255, 179, 0); /* Neutral yellow color */
-    --lumx-color-orange-L1: rgba(255, 179, 0, 0.8); /* Base yellow color with 80% opacity */
-    --lumx-color-orange-L2: rgba(255, 179, 0, 0.7); /* Base yellow color with 70% opacity */
-    --lumx-color-orange-L3: rgba(255, 179, 0, 0.6); /* Base yellow color with 60% opacity */
-    --lumx-color-orange-L4: rgba(255, 179, 0, 0.4); /* Base yellow color with 40% opacity */
-    --lumx-color-orange-L5: rgba(255, 179, 0, 0.2); /* Base yellow color with 20% opacity */
-    --lumx-color-orange-L6: rgba(255, 179, 0, 0.1); /* Base yellow color with 10% opacity */
+    --lumx-color-orange-D2: rgb(255, 161, 37); /* Darkest yellow color */
+    --lumx-color-orange-D1: rgb(255, 179, 37); /* Dark yellow color */
+    --lumx-color-orange-N: rgb(255, 196, 37); /* Neutral yellow color */
+    --lumx-color-orange-L1: rgba(255, 196, 37, 0.9); /* Base yellow color with 80% opacity */
+    --lumx-color-orange-L2: rgba(255, 196, 37, 0.8); /* Base yellow color with 70% opacity */
+    --lumx-color-orange-L3: rgba(255, 196, 37, 0.6); /* Base yellow color with 60% opacity */
+    --lumx-color-orange-L4: rgba(255, 196, 37, 0.48); /* Base yellow color with 40% opacity */
+    --lumx-color-orange-L5: rgba(255, 196, 37, 0.24); /* Base yellow color with 20% opacity */
+    --lumx-color-orange-L6: rgba(255, 196, 37, 0.12); /* Base yellow color with 10% opacity */
     --lumx-size-xxs: 14px;
     --lumx-size-xs: 20px;
     --lumx-size-s: 24px;
