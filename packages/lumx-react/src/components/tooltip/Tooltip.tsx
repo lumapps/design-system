@@ -49,7 +49,6 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * Component default props.
  */
 const DEFAULT_PROPS: Partial<TooltipProps> = {
-    delay: 500,
     placement: Placement.BOTTOM,
 };
 
@@ -90,7 +89,7 @@ export const Tooltip: Comp<TooltipProps, HTMLDivElement> = forwardRef((props, re
     });
 
     const position = attributes?.popper?.['data-popper-placement'] ?? placement;
-    const isOpen = useTooltipOpen(delay as number, anchorElement) || forceOpen;
+    const isOpen = useTooltipOpen(delay, anchorElement) || forceOpen;
     const wrappedChildren = useInjectTooltipRef(children, setAnchorElement, isOpen as boolean, id);
 
     return (

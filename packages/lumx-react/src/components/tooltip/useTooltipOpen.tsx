@@ -1,60 +1,7 @@
-import { Callback, onEscapePressed } from '@lumx/react/utils';
-import { useEffect, useRef, useState } from 'react';
-import pull from 'lodash/pull';
-import debounce from 'lodash/debounce';
-
-type Tooltip = { open: Callback; close: Callback; anchorElement: HTMLElement };
-
-/**
- * This singleton handle a global `mouseover` event listener on the `document` in order to toggle tooltips when
- * entering and leaving their anchor element.
- */
-const tooltipMouseToggle = (() => {
-    /** List of tooltips to toggle on anchor enter/leave. */
-    let tooltips: Array<Tooltip> | undefined;
-
-    /** Global listener added on the document. */
-    let globalListener: undefined | ((evt: MouseEvent) => void);
-
-    function addGlobalListener() {
-        if (globalListener) return;
-        globalListener = debounce((evt) => {
-            if (!tooltips || !evt.target) return;
-            for (const { open, close, anchorElement } of tooltips) {
-                if (anchorElement.contains(evt.target as any)) {
-                    open();
-                } else {
-                    close();
-                }
-            }
-        }, 10);
-        document.addEventListener('mouseover', globalListener);
-    }
-
-    function removeGlobalListener() {
-        if (!globalListener) return;
-        document.removeEventListener('mouseover', globalListener);
-        globalListener = undefined;
-    }
-
-    return {
-        addTooltip(tooltip: Tooltip) {
-            if (!tooltips) {
-                tooltips = [];
-                addGlobalListener();
-            }
-            tooltips.push(tooltip);
-        },
-        removeTooltip(actions: Tooltip) {
-            if (!tooltips) return;
-            pull(tooltips, actions);
-            if (tooltips.length === 0) {
-                removeGlobalListener();
-                tooltips = undefined;
-            }
-        },
-    };
-})();
+import { onEscapePressed } from '@lumx/react/utils';
+import { useEffect, useState } from 'react';
+import { browserDoesNotSupportHover } from '@lumx/react/utils/browserDoesNotSupportHover';
+import { TOOLTIP_HOVER_DELAY, TOOLTIP_LONG_PRESS_DELAY } from '@lumx/react/constants';
 
 /**
  * Hook controlling tooltip visibility using mouse hover the anchor and delay.
@@ -63,50 +10,102 @@ const tooltipMouseToggle = (() => {
  * @param  anchorElement Tooltip anchor element.
  * @return whether or not to show the tooltip.
  */
-export function useTooltipOpen(delay: number, anchorElement: HTMLElement | null): boolean {
-    const timer = useRef<number>();
-    const shouldOpen = useRef<boolean>(false);
+export function useTooltipOpen(delay: number | undefined, anchorElement: HTMLElement | null): boolean {
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
         if (!anchorElement) {
             return undefined;
         }
-        const tooltip: Tooltip = {
-            anchorElement,
-            open() {
-                if (!shouldOpen.current) {
-                    shouldOpen.current = true;
-                    timer.current = setTimeout(() => {
-                        setIsOpen(shouldOpen.current);
-                    }, delay) as any;
-                }
-            },
-            close() {
-                if (timer.current) {
-                    clearTimeout(timer.current);
-                    timer.current = undefined;
-                }
-                if (shouldOpen.current) {
-                    shouldOpen.current = false;
-                    setIsOpen(shouldOpen.current);
-                }
-            },
-        };
-        const keydown = onEscapePressed(tooltip.close);
+        let timer: number | undefined;
+        let openStartTime: number | undefined;
+        let shouldOpen: boolean | undefined;
 
-        tooltipMouseToggle.addTooltip(tooltip);
-        anchorElement.addEventListener('focusin', tooltip.open);
-        anchorElement.addEventListener('focusout', tooltip.close);
-        anchorElement.addEventListener('keydown', keydown);
-        return () => {
-            tooltipMouseToggle.removeTooltip(tooltip);
-            anchorElement.removeEventListener('focusin', tooltip.open);
-            anchorElement.removeEventListener('focusout', tooltip.close);
-            anchorElement.removeEventListener('keydown', keydown);
-            tooltip.close();
+        // Run timer to defer updating the isOpen state.
+        const deferUpdate = (duration: number) => {
+            if (timer) clearTimeout(timer);
+            timer = setTimeout(() => {
+                setIsOpen(!!shouldOpen);
+            }, duration) as any;
         };
-    }, [anchorElement, delay, timer, shouldOpen]);
+
+        const hoverNotSupported = browserDoesNotSupportHover();
+        const hasTouch = 'ontouchstart' in window;
+
+        // Adapt open/close delay
+        const openDelay = delay || (hoverNotSupported ? TOOLTIP_LONG_PRESS_DELAY.open : TOOLTIP_HOVER_DELAY.open);
+        const closeDelay = hoverNotSupported ? TOOLTIP_LONG_PRESS_DELAY.close : TOOLTIP_HOVER_DELAY.close;
+
+        // Open (or/and cancel closing) of tooltip.
+        const open = () => {
+            if (shouldOpen && !timer) return;
+            shouldOpen = true;
+            openStartTime = Date.now();
+            deferUpdate(openDelay);
+        };
+
+        // Close or cancel opening of tooltip
+        const close = (overrideDelay = closeDelay) => {
+            if (!shouldOpen && !timer) return;
+            shouldOpen = false;
+            deferUpdate(overrideDelay);
+        };
+        const closeImmediately = () => close(0);
+
+        /**
+         * Handle touchend event
+         * If `touchend` comes before the open delay => cancel tooltip (close immediate).
+         * Else if `touchend` comes after the open delay => tooltip takes priority, the anchor's default touch end event is prevented.
+         */
+        const touchEnd = (evt: Event) => {
+            if (!openStartTime) return;
+            if (Date.now() - openStartTime >= openDelay) {
+                // Tooltip take priority, event prevented.
+                evt.stopPropagation();
+                evt.preventDefault();
+                anchorElement.focus();
+                // Close with delay.
+                close();
+            } else {
+                // Close immediately.
+                closeImmediately();
+            }
+        };
+
+        // Adapt event to browsers with or without `hover` support.
+        const events: Array<[Node, Event['type'], any]> = hoverNotSupported
+            ? [
+                  [anchorElement, hasTouch ? 'touchstart' : 'mousedown', open],
+                  [anchorElement, hasTouch ? 'touchend' : 'mouseup', touchEnd],
+              ]
+            : [
+                  [anchorElement, 'mouseenter', open],
+                  [anchorElement, 'mouseleave', close],
+                  [anchorElement, 'mouseup', closeImmediately],
+              ];
+
+        // Events always applied no matter the browser:.
+        events.push(
+            // Open on focus.
+            [anchorElement, 'focusin', open],
+            // Close on lost focus.
+            [anchorElement, 'focusout', closeImmediately],
+            // Close on ESC keydown
+            [anchorElement, 'keydown', onEscapePressed(closeImmediately)],
+        );
+
+        // Attach events
+        for (const [node, eventType, evenHandler] of events) {
+            node.addEventListener(eventType, evenHandler);
+        }
+        return () => {
+            // Detach events.
+            for (const [node, eventType, evenHandler] of events) {
+                node.removeEventListener(eventType, evenHandler);
+            }
+            closeImmediately();
+        };
+    }, [anchorElement, delay]);
 
     return isOpen;
 }

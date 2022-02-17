@@ -78,3 +78,10 @@
         line-height: $lumx-tooltip-line-height;
     }
 }
+
+.#{$lumx-base-prefix}-tooltip-anchor-wrapper {
+    width: fit-content;
+    // Prevent text selection on mobile device that would hinder long press.
+    -webkit-touch-callout: none;
+    user-select: none;
+}
