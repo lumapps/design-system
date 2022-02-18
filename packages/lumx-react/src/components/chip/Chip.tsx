@@ -1,5 +1,5 @@
 import { Color, ColorPalette, Size, Theme } from '@lumx/react';
-import { useStopPropagation } from '@lumx/react/hooks/useStopPropagation';
+import { useStopPropagation } from '@lumx/react/_internal/hooks/useStopPropagation';
 
 import { Comp, GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
 

@@ -6,7 +6,7 @@ import { Dropdown, IconButtonProps, Offset, Placement, TextField, Theme } from '
 
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
-import { useFocus } from '@lumx/react/hooks/useFocus';
+import { useFocus } from '@lumx/react/_internal/hooks/useFocus';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
 /**

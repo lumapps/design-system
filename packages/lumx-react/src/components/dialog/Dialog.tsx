@@ -6,9 +6,9 @@ import classNames from 'classnames';
 import { Progress, ProgressVariant, Size } from '@lumx/react';
 
 import { DIALOG_TRANSITION_DURATION, DOCUMENT } from '@lumx/react/constants';
-import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
-import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
-import { useIntersectionObserver } from '@lumx/react/hooks/useIntersectionObserver';
+import { useCallbackOnEscape } from '@lumx/react/_internal/hooks/useCallbackOnEscape';
+import { useFocusTrap } from '@lumx/react/_internal/hooks/useFocusTrap';
+import { useIntersectionObserver } from '@lumx/react/_internal/hooks/useIntersectionObserver';
 import {
     Comp,
     GenericProps,
@@ -20,8 +20,8 @@ import {
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
-import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
-import { useDisableBodyScroll } from '@lumx/react/hooks/useDisableBodyScroll';
+import { useDelayedVisibility } from '@lumx/react/_internal/hooks/useDelayedVisibility';
+import { useDisableBodyScroll } from '@lumx/react/_internal/hooks/useDisableBodyScroll';
 
 /**
  * Defines the props of the component.

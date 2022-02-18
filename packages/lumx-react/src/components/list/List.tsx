@@ -1,6 +1,6 @@
 import { Size } from '@lumx/react';
 
-import { useKeyboardListNavigation } from '@lumx/react/hooks/useKeyboardListNavigation';
+import { useKeyboardListNavigation } from '@lumx/react/_internal/hooks/useKeyboardListNavigation';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 

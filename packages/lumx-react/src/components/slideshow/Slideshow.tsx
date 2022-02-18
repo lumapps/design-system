@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { SlideshowControls, SlideshowControlsProps, Theme } from '@lumx/react';
 
 import { AUTOPLAY_DEFAULT_INTERVAL, FULL_WIDTH_PERCENT } from '@lumx/react/components/slideshow/constants';
-import { useInterval } from '@lumx/react/hooks/useInterval';
+import { useInterval } from '@lumx/react/_internal/hooks/useInterval';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 

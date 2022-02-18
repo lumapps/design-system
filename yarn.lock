@@ -4901,7 +4901,6 @@ __metadata:
     chromatic: ^6.0.6
     classnames: ^2.2.6
     core-js: ^3.6.4
-    dts-bundle-generator: ^5.5.0
     enzyme: ^3.11.0
     enzyme-adapter-react-16: ^1.15.2
     enzyme-to-json: ^3.5.0
@@ -4928,6 +4927,7 @@ __metadata:
     rollup-plugin-babel: ^4.4.0
     rollup-plugin-cleaner: ^1.0.0
     rollup-plugin-copy: ^3.3.0
+    rollup-plugin-dts: ^4.1.0
     rollup-plugin-peer-deps-external: ^2.2.4
     rollup-plugin-ts-paths-resolve: ^1.3.0
     rollup-plugin-typescript-paths: ^1.2.2
@@ -11523,18 +11523,6 @@ __metadata:
     default-uid: ^1.0.0
     is-root: ^1.0.0
   checksum: f401453ac6c66ec3803c9a4ff1f083fb380f2aac3026c83a77c2de5ec03168f01028c04809a09432cbec84b7a68904f03a04dea161e744ecb82507e200b4b018
-  languageName: node
-  linkType: hard
-
-"dts-bundle-generator@npm:^5.5.0":
-  version: 5.6.0
-  resolution: "dts-bundle-generator@npm:5.6.0"
-  dependencies:
-    typescript: ">=3.0.1"
-    yargs: ^15.3.1
-  bin:
-    dts-bundle-generator: dist/bin/dts-bundle-generator.js
-  checksum: c9f388508614f9de2a8b8fdada99d7791247d9da063835df7eff92ed7315e67a52cdae7811862b82dc18d397acc86af62441919e03096e83e8d446295b5ca5ce
   languageName: node
   linkType: hard
 
@@ -26735,6 +26723,22 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"rollup-plugin-dts@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "rollup-plugin-dts@npm:4.1.0"
+  dependencies:
+    "@babel/code-frame": ^7.16.0
+    magic-string: ^0.25.7
+  peerDependencies:
+    rollup: ^2.55
+    typescript: ~4.1 || ~4.2 || ~4.3 || ~4.4 || ~4.5
+  dependenciesMeta:
+    "@babel/code-frame":
+      optional: true
+  checksum: add2715d4906dccb8bbad63e02668303eee553b68e2ae8c7c686abc5ea7936ef316db43845eb12bf978002f461e43b00ecfe61bd2ffedd6c570e12a289de7c18
+  languageName: node
+  linkType: hard
+
 "rollup-plugin-peer-deps-external@npm:^2.2.4":
   version: 2.2.4
   resolution: "rollup-plugin-peer-deps-external@npm:2.2.4"
@@ -30044,16 +30048,6 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-typescript@>=3.0.1:
-  version: 4.1.3
-  resolution: "typescript@npm:4.1.3"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 0a25f7d7cebbc5ad23f41cb30918643460477be265bd3bcd400ffedb77d16e97d46f2b0c31393b2f990c5cf5b9f7a829ad6aff8636988b8f30abf81c656237c0
-  languageName: node
-  linkType: hard
-
 typescript@^3.9.3:
   version: 3.9.7
   resolution: "typescript@npm:3.9.7"
@@ -30071,16 +30065,6 @@ typescript@^3.9.3:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 506f4c919dc8aeaafa92068c997f1d213b9df4d9756d0fae1a1e7ab66b585ab3498050e236113a1c9e57ee08c21ec6814ca7a7f61378c058d79af50a4b1f5a5e
-  languageName: node
-  linkType: hard
-
-"typescript@patch:typescript@>=3.0.1#~builtin<compat/typescript>":
-  version: 4.1.3
-  resolution: "typescript@patch:typescript@npm%3A4.1.3#~builtin<compat/typescript>::version=4.1.3&hash=ddd1e8"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: ed3df76d9b6efb448e5e73bca671698cda353a3807199ad95c78782a857e7685ccc94b799ac885423ced65ee21c87cbbeb823642c5dfd715efae5ebbc6137070
   languageName: node
   linkType: hard
 

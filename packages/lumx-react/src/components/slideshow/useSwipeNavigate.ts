@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { detectHorizontalSwipe } from '@lumx/core/js/utils';
+import { detectHorizontalSwipe } from '@lumx/core/js/utils/detectHorizontalSwipe';
 
 const isTouchDevice = () => 'ontouchstart' in window;
 

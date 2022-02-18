@@ -1,6 +1,6 @@
 /* istanbul ignore file */
 import { Chip, List, ListItem, SelectMultiple, Size } from '@lumx/react';
-import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
+import { useBooleanState } from '@lumx/react/_internal/hooks/useBooleanState';
 import noop from 'lodash/noop';
 import React, { MouseEventHandler, SyntheticEvent, useState } from 'react';
 import { SelectVariant } from './constants';

@@ -11,7 +11,7 @@ import * as stories from './Mosaic.stories';
 const CLASSNAME = Mosaic.className as string;
 
 // Mock out the useIntersectionObserver hook since it can't work with Jest/Enzyme.
-jest.mock('@lumx/react/hooks/useIntersectionObserver', () => ({
+jest.mock('@lumx/react/_internal/hooks/useIntersectionObserver', () => ({
     useIntersectionObserver: () => new Map(),
 }));
 

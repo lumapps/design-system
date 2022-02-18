@@ -8,13 +8,13 @@ import classNames from 'classnames';
 
 import { Placement } from '@lumx/react/components/popover/Popover';
 
-import { DOCUMENT } from '@lumx/react/constants';
+import { DOCUMENT, TOOLTIP_HOVER_DELAY, TOOLTIP_LONG_PRESS_DELAY } from '@lumx/react/constants';
 
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
+import { useOpenHoverOrLongPress } from '@lumx/react/hooks/useOpenHoverOrLongPress';
 import { useInjectTooltipRef } from './useInjectTooltipRef';
-import { useTooltipOpen } from './useTooltipOpen';
 
 /** Position of the tooltip relative to the anchor element. */
 export type TooltipPlacement = Extract<Placement, 'top' | 'right' | 'bottom' | 'left'>;
@@ -89,7 +89,11 @@ export const Tooltip: Comp<TooltipProps, HTMLDivElement> = forwardRef((props, re
     });
 
     const position = attributes?.popper?.['data-popper-placement'] ?? placement;
-    const isOpen = useTooltipOpen(delay, anchorElement) || forceOpen;
+    const isOpen =
+        useOpenHoverOrLongPress(anchorElement, {
+            hover: { openDelay: delay ?? TOOLTIP_HOVER_DELAY.openDelay, closeDelay: TOOLTIP_HOVER_DELAY.closeDelay },
+            longPress: TOOLTIP_LONG_PRESS_DELAY,
+        }) || forceOpen;
     const wrappedChildren = useInjectTooltipRef(children, setAnchorElement, isOpen as boolean, id);
 
     return (

@@ -1,5 +1,5 @@
 import { List, ListItem, Select, Size, TextField } from '@lumx/react';
-import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
+import { useBooleanState } from '@lumx/react/_internal/hooks/useBooleanState';
 import { text } from '@storybook/addon-knobs';
 import noop from 'lodash/noop';
 import range from 'lodash/range';

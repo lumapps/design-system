@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
-import { useChipGroupNavigation } from '@lumx/react/hooks/useChipGroupNavigation';
+import { useChipGroupNavigation } from '@lumx/react/_internal/hooks/useChipGroupNavigation';
 
 /**
  * Defines the props of the component.

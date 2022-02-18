@@ -11,7 +11,7 @@ import { DOCUMENT, NOTIFICATION_TRANSITION_DURATION } from '@lumx/react/constant
 import { NOTIFICATION_CONFIGURATION } from '@lumx/react/components/notification/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
-import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
+import { useDelayedVisibility } from '@lumx/react/_internal/hooks/useDelayedVisibility';
 
 /**
  * Defines the props of the component.

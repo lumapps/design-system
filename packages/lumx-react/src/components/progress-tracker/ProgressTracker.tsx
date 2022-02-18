@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
-import { useRovingTabIndex } from '../../hooks/useRovingTabIndex';
+import { useRovingTabIndex } from '@lumx/react/_internal/hooks/useRovingTabIndex';
 import { useTabProviderContextState } from '../tabs/state';
 
 /**

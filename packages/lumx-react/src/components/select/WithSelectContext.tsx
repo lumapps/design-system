@@ -10,7 +10,7 @@ import { Placement } from '@lumx/react/components/popover/Popover';
 
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
-import { useListenFocus } from '@lumx/react/hooks/useListenFocus';
+import { useListenFocus } from '@lumx/react/_internal/hooks/useListenFocus';
 import { CoreSelectProps, SelectVariant } from './constants';
 
 /** The display name of the component. */

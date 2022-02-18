@@ -20,8 +20,8 @@ export const NOTIFICATION_TRANSITION_DURATION = 200;
  * Only applies to devices supporting pointer hover.
  */
 export const TOOLTIP_HOVER_DELAY = {
-    open: 500,
-    close: 0,
+    openDelay: 500,
+    closeDelay: 0,
 };
 
 /**
@@ -29,6 +29,6 @@ export const TOOLTIP_HOVER_DELAY = {
  * Only applies to devices not supporting pointer hover.
  */
 export const TOOLTIP_LONG_PRESS_DELAY = {
-    open: 250,
-    close: 3000,
+    openDelay: 250,
+    closeDelay: 3000,
 };

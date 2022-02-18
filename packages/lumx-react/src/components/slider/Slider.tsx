@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 import { InputHelper, InputLabel, Theme } from '@lumx/react';
 
-import useEventCallback from '@lumx/react/hooks/useEventCallback';
+import useEventCallback from '@lumx/react/_internal/hooks/useEventCallback';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { uid } from 'uid';

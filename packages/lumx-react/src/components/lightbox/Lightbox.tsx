@@ -8,12 +8,12 @@ import { ColorPalette, Emphasis, IconButton, IconButtonProps, Theme } from '@lum
 import { DOCUMENT } from '@lumx/react/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
-import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
-import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
-import { useDisableBodyScroll } from '@lumx/react/hooks/useDisableBodyScroll';
+import { useFocusTrap } from '@lumx/react/_internal/hooks/useFocusTrap';
+import { useDelayedVisibility } from '@lumx/react/_internal/hooks/useDelayedVisibility';
+import { useDisableBodyScroll } from '@lumx/react/_internal/hooks/useDisableBodyScroll';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
-import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
+import { useCallbackOnEscape } from '@lumx/react/_internal/hooks/useCallbackOnEscape';
 
 const LIGHTBOX_TRANSITION_DURATION = 400;
 

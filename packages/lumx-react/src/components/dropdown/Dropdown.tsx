@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { List, ListProps } from '@lumx/react/components/list/List';
 import { Offset, Placement, Popover } from '@lumx/react/components/popover/Popover';
-import { useInfiniteScroll } from '@lumx/react/hooks/useInfiniteScroll';
+import { useInfiniteScroll } from '@lumx/react/_internal/hooks/useInfiniteScroll';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses, isComponent } from '@lumx/react/utils';
 
 /**

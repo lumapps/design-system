@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect } from 'react';
 import pull from 'lodash/pull';
-import { ClickAwayParameters, useClickAway } from '@lumx/react/hooks/useClickAway';
+import { ClickAwayParameters, useClickAway } from '@lumx/react/_internal/hooks/useClickAway';
 
 const ClickAwayAncestorContext = createContext<ClickAwayParameters['refs'] | null>(null);
 

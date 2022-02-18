@@ -1,11 +1,11 @@
+import classNames from 'classnames';
+import React, { forwardRef, ReactNode } from 'react';
+
 import { Alignment, Theme } from '@lumx/react';
 import { CSS_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, handleBasicClasses } from '@lumx/react/utils';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
-
-import classNames from 'classnames';
-import React, { forwardRef, ReactNode } from 'react';
-import { useRovingTabIndex } from '../../hooks/useRovingTabIndex';
+import { useRovingTabIndex } from '@lumx/react/_internal/hooks/useRovingTabIndex';
 
 export enum TabListLayout {
     clustered = 'clustered',

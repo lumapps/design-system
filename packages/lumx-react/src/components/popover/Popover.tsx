@@ -6,8 +6,8 @@ import { usePopper } from 'react-popper';
 import classNames from 'classnames';
 
 import { DOCUMENT, WINDOW } from '@lumx/react/constants';
-import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
-import { useFocus } from '@lumx/react/hooks/useFocus';
+import { useCallbackOnEscape } from '@lumx/react/_internal/hooks/useCallbackOnEscape';
+import { useFocus } from '@lumx/react/_internal/hooks/useFocus';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 
 import { Comp, GenericProps, getRootClassName, handleBasicClasses, ValueOf } from '@lumx/react/utils';

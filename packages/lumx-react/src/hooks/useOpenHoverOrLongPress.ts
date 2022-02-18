@@ -1,17 +1,44 @@
 import { onEscapePressed } from '@lumx/react/utils';
 import { useEffect, useState } from 'react';
 import { browserDoesNotSupportHover } from '@lumx/react/utils/browserDoesNotSupportHover';
-import { TOOLTIP_HOVER_DELAY, TOOLTIP_LONG_PRESS_DELAY } from '@lumx/react/constants';
+
+interface OpenCloseConfig {
+    openDelay: number;
+    closeDelay: number;
+}
+
+interface Config {
+    hover: OpenCloseConfig;
+    longPress: OpenCloseConfig;
+}
+
+export const DEFAULT_CONFIG: Config = {
+    hover: {
+        openDelay: 500,
+        closeDelay: 0,
+    },
+    longPress: {
+        openDelay: 250,
+        closeDelay: 3000,
+    },
+};
 
 /**
- * Hook controlling tooltip visibility using mouse hover the anchor and delay.
+ * Hook controlling an open/close action on hover on device supporting pointer hover
+ * and on long press on device not supporting pointer hover.
  *
- * @param  delay         Delay in millisecond to display the tooltip.
- * @param  anchorElement Tooltip anchor element.
- * @return whether or not to show the tooltip.
+ * @param  anchorElement Anchor element on which the hover or longPress is watched.
+ * @param  config        Open/close delay configuration.
+ * @return true/false boolean.
  */
-export function useTooltipOpen(delay: number | undefined, anchorElement: HTMLElement | null): boolean {
+export function useOpenHoverOrLongPress(
+    anchorElement: HTMLElement | null,
+    config: { hover?: Partial<OpenCloseConfig>; longPress?: Partial<OpenCloseConfig> } = {},
+): boolean {
     const [isOpen, setIsOpen] = useState(false);
+    const activation = browserDoesNotSupportHover() ? 'longPress' : 'hover';
+    const { openDelay: defaultOpenDelay, closeDelay: defaultCloseDelay } = DEFAULT_CONFIG[activation];
+    const { openDelay = defaultOpenDelay, closeDelay = defaultCloseDelay } = config?.[activation] || {};
 
     useEffect(() => {
         if (!anchorElement) {
@@ -29,14 +56,9 @@ export function useTooltipOpen(delay: number | undefined, anchorElement: HTMLEle
             }, duration) as any;
         };
 
-        const hoverNotSupported = browserDoesNotSupportHover();
         const hasTouch = 'ontouchstart' in window;
 
-        // Adapt open/close delay
-        const openDelay = delay || (hoverNotSupported ? TOOLTIP_LONG_PRESS_DELAY.open : TOOLTIP_HOVER_DELAY.open);
-        const closeDelay = hoverNotSupported ? TOOLTIP_LONG_PRESS_DELAY.close : TOOLTIP_HOVER_DELAY.close;
-
-        // Open (or/and cancel closing) of tooltip.
+        // Open (or/and cancel closing).
         const open = () => {
             if (shouldOpen && !timer) return;
             shouldOpen = true;
@@ -44,7 +66,7 @@ export function useTooltipOpen(delay: number | undefined, anchorElement: HTMLEle
             deferUpdate(openDelay);
         };
 
-        // Close or cancel opening of tooltip
+        // Close or cancel opening
         const close = (overrideDelay = closeDelay) => {
             if (!shouldOpen && !timer) return;
             shouldOpen = false;
@@ -54,8 +76,8 @@ export function useTooltipOpen(delay: number | undefined, anchorElement: HTMLEle
 
         /**
          * Handle touchend event
-         * If `touchend` comes before the open delay => cancel tooltip (close immediate).
-         * Else if `touchend` comes after the open delay => tooltip takes priority, the anchor's default touch end event is prevented.
+         * If `touchend` comes before the open delay => cancel open (close immediate).
+         * Else if `touchend` comes after the open delay => open takes priority, the anchor's default touch end event is prevented.
          */
         const touchEnd = (evt: Event) => {
             if (!openStartTime) return;
@@ -72,19 +94,26 @@ export function useTooltipOpen(delay: number | undefined, anchorElement: HTMLEle
             }
         };
 
-        // Adapt event to browsers with or without `hover` support.
-        const events: Array<[Node, Event['type'], any]> = hoverNotSupported
-            ? [
-                  [anchorElement, hasTouch ? 'touchstart' : 'mousedown', open],
-                  [anchorElement, hasTouch ? 'touchend' : 'mouseup', touchEnd],
-              ]
-            : [
-                  [anchorElement, 'mouseenter', open],
-                  [anchorElement, 'mouseleave', close],
-                  [anchorElement, 'mouseup', closeImmediately],
-              ];
+        const events: Array<[Node, Event['type'], any]> = [];
 
-        // Events always applied no matter the browser:.
+        // Long press activation.
+        if (activation === 'longPress') {
+            events.push(
+                [anchorElement, hasTouch ? 'touchstart' : 'mousedown', open],
+                [anchorElement, hasTouch ? 'touchend' : 'mouseup', touchEnd],
+            );
+        }
+
+        // Hover activation.
+        if (activation === 'hover') {
+            events.push(
+                [anchorElement, 'mouseenter', open],
+                [anchorElement, 'mouseleave', close],
+                [anchorElement, 'mouseup', closeImmediately],
+            );
+        }
+
+        // Events always applied no matter the browser:
         events.push(
             // Open on focus.
             [anchorElement, 'focusin', open],
@@ -105,7 +134,7 @@ export function useTooltipOpen(delay: number | undefined, anchorElement: HTMLEle
             }
             closeImmediately();
         };
-    }, [anchorElement, delay]);
+    }, [activation, anchorElement, closeDelay, openDelay]);
 
     return isOpen;
 }

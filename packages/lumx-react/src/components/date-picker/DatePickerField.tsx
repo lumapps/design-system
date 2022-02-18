@@ -1,11 +1,11 @@
 import { DatePicker, Placement, Popover, TextField, IconButtonProps } from '@lumx/react';
-import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
+import { useFocusTrap } from '@lumx/react/_internal/hooks/useFocusTrap';
 
 import moment from 'moment';
 
 import React, { forwardRef, SyntheticEvent, useCallback, useRef, useState } from 'react';
 
-import { useFocus } from '@lumx/react/hooks/useFocus';
+import { useFocus } from '@lumx/react/_internal/hooks/useFocus';
 import { Comp, GenericProps } from '@lumx/react/utils';
 
 /**
