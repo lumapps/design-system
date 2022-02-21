@@ -4848,6 +4848,7 @@ __metadata:
     jsx-ast-utils: ^3.1.0
     lerna: ^3.18.4
     lint-staged: ^10.5.3
+    postcss-hover-media-feature: ^0.3.1
     prettier: ^2.2.1
     prettier-eslint: ^12.0.0
     prettier-stylelint: ^0.4.2
@@ -23802,6 +23803,15 @@ fsevents@~2.1.2:
   dependencies:
     postcss: ^7.0.26
   checksum: 51a626bc80dbe42fcc8b0895b4f23a558bb809ec52cdc05aa27fb24cdffd4c9dc53f25218085ddf407c53d76573bc6d7568219c912161609f02532a8f5f59b43
+  languageName: node
+  linkType: hard
+
+"postcss-hover-media-feature@npm:^0.3.1":
+  version: 0.3.1
+  resolution: "postcss-hover-media-feature@npm:0.3.1"
+  dependencies:
+    postcss: ^7.0.26
+  checksum: b8f56fce8ef05650890771100c7b5af9179c5f9cddc4d1c2f2f05f84292db1139076faecf36703e5445d3e4c7018a576900fd9d1a5c26d7b8c8012a0ceff5971
   languageName: node
   linkType: hard
 
