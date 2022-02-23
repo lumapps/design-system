@@ -25,6 +25,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
         -   The tooltip hides when loosing focus on the anchor.
         -   The tooltip hides when the escape key is pressed.
 
+### Fixed
+
+-   Thumbnail: fix image original aspect ratio on ios safari.
+
 ## [2.2.3][] - 2022-02-07
 
 ### Added

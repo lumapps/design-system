@@ -188,7 +188,13 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
                         ...focusPointStyle,
                     }}
                     ref={mergeRefs(setImgElement, propImgRef)}
-                    className={classNames(`${CLASSNAME}__image`, isLoading && `${CLASSNAME}__image--is-loading`)}
+                    className={classNames(
+                        handleBasicClasses({
+                            prefix: `${CLASSNAME}__image`,
+                            isLoading,
+                            hasDefinedSize: Boolean(imgProps?.height && imgProps.width),
+                        }),
+                    )}
                     crossOrigin={crossOrigin}
                     src={image}
                     alt={alt}
