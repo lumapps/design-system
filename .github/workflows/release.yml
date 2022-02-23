@@ -113,7 +113,7 @@ jobs:
                 run: |
                     for package in $(echo packages/lumx-*);
                     do
-                        (echo "Publishing $package"; cd $package; npm publish --tag $DIST_TAG)
+                        (echo "Publishing $package"; cd $package/dist; npm publish --tag $DIST_TAG)
                     done
 
             -   name: "Git commit, tag & push"
