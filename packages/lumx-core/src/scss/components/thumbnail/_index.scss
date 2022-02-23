@@ -39,11 +39,14 @@
 
     &__image {
         display: block;
-        width: fit-content;
         max-width: 100%;
-        height: fit-content;
         max-height: 100%;
         font-size: 0;
+
+        &--has-defined-size {
+            width: fit-content;
+            height: fit-content;
+        }
     }
 
     &__background,
