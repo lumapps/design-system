@@ -15,7 +15,7 @@ exports[`<LinkPreview> Snapshots and structure should render correctly 1`] = `
       >
         <Link
           className="lumx-link-preview__link"
-          color="blue"
+          color="primary"
           colorVariant="N"
           target="_blank"
         />
@@ -40,7 +40,7 @@ exports[`<LinkPreview> Snapshots and structure should render correctly 2`] = `
       >
         <Link
           className="lumx-link-preview__link"
-          color="blue"
+          color="primary"
           colorVariant="N"
           target="_blank"
         />

@@ -29,7 +29,6 @@
         height: $lumx-notification-height;
         align-items: center;
         justify-content: center;
-        color: lumx-color-variant('light', 'L3');
     }
 
     &__content {
@@ -62,5 +61,11 @@
 @each $color in $lumx-notification-color-palette {
     .#{$lumx-base-prefix}-notification--color-#{$color} .#{$lumx-base-prefix}-notification__icon {
         background-color: lumx-color-variant($color, 'N');
+
+        @if $color == 'yellow' {
+            color: lumx-color-variant('dark', 'L1');
+        } @else {
+            color: lumx-color-variant('light', 'N');
+        }
     }
 }

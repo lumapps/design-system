@@ -35,7 +35,11 @@
         @if $key == 'light' {
             @include lumx-elevation(2);
         } @else {
-            color: lumx-color-variant('light', 'N');
+            @if $key == 'yellow' {
+                color: lumx-color-variant('dark', 'L1');
+            } @else {
+                color: lumx-color-variant('light', 'N');
+            }
         }
     }
 }
