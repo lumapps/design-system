@@ -84,6 +84,31 @@ export const WithBadge = () => {
     );
 };
 
+export const WithCustomImageClassName = () => {
+    const thumbnailSize = sizeKnob('Size', Size.l);
+    const variant = select('Variant', ThumbnailVariant, ThumbnailVariant.rounded);
+    const badgeColor = select('Badge color', ColorPalette, ColorPalette.primary);
+    const activateFallback = boolean('Activate fallback', false);
+    const image = imageKnob();
+    return (
+        <Thumbnail
+            alt="Image alt text"
+            image={activateFallback ? '' : image}
+            variant={variant}
+            aspectRatio={AspectRatio.square}
+            size={thumbnailSize}
+            badge={
+                <Badge color={badgeColor}>
+                    <Icon icon={mdiAbTesting} />
+                </Badge>
+            }
+            imgProps={{
+                className: 'custom-image-class-name',
+            }}
+        />
+    );
+};
+
 export const FocusPoint = () => {
     const focusPoint = { x: focusKnob('Focus X ', -0.2), y: focusKnob('Focus Y', -0.3) };
     const aspectRatio = enumKnob('Aspect ratio', [undefined, ...Object.values(AspectRatio)], AspectRatio.wide);

@@ -25,6 +25,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
         -   The tooltip hides when loosing focus on the anchor.
         -   The tooltip hides when the escape key is pressed.
 
+### Fixed
+
+-   Thumbnail: className is now correctly passed from `imgProps` into the `img` tag
+
 ## [2.2.5][] - 2022-02-24
 
 ### Changed
