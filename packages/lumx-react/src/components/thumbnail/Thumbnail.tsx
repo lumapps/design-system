@@ -194,6 +194,7 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
                             isLoading,
                             hasDefinedSize: Boolean(imgProps?.height && imgProps.width),
                         }),
+                        imgProps?.className,
                     )}
                     crossOrigin={crossOrigin}
                     src={image}
