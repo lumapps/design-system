@@ -29,6 +29,7 @@ If undefined, `aria-hidden=true` will be applied to `svg` element.
         -   The tooltip shows when focusing the anchor.
         -   The tooltip hides when loosing focus on the anchor.
         -   The tooltip hides when the escape key is pressed.
+-   Colors: SCSS primary & secondary colors now use the CSS variables
 
 ### Fixed
 

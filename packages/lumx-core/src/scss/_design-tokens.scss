@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Wed, 16 Feb 2022 15:35:03 GMT
+ * Generated on Wed, 02 Mar 2022 10:51:14 GMT
  */
 
 $lumx-button-height: 36px !default;
@@ -416,33 +416,33 @@ $lumx-color-grey-L3: rgba(117, 117, 117, 0.4) !default; // Base grey color with 
 $lumx-color-grey-L4: rgba(117, 117, 117, 0.2) !default; // Base grey color with 20% opacity
 $lumx-color-grey-L5: rgba(117, 117, 117, 0.1) !default; // Base grey color with 10% opacity
 $lumx-color-grey-L6: rgba(117, 117, 117, 0.05) !default; // Base grey color with 5% opacity
-$lumx-color-primary-D2: rgb(21, 70, 193) !default; // Darkest blue color
-$lumx-color-primary-D1: rgb(24, 78, 216) !default; // Dark blue color
-$lumx-color-primary-N: rgb(36, 91, 231) !default; // Neutral blue color
-$lumx-color-primary-L1: rgba(36, 91, 231, 0.8) !default; // Base blue color with 80% opacity
-$lumx-color-primary-L2: rgba(36, 91, 231, 0.6) !default; // Base blue color with 60% opacity
-$lumx-color-primary-L3: rgba(36, 91, 231, 0.4) !default; // Base blue color with 40% opacity
-$lumx-color-primary-L4: rgba(36, 91, 231, 0.2) !default; // Base blue color with 20% opacity
-$lumx-color-primary-L5: rgba(36, 91, 231, 0.1) !default; // Base blue color with 10% opacity
-$lumx-color-primary-L6: rgba(36, 91, 231, 0.05) !default; // Base blue color with 5% opacity
-$lumx-color-secondary-D2: rgb(26, 110, 89) !default; // Darkest green color
-$lumx-color-secondary-D1: rgb(23, 122, 97) !default; // Dark green color
-$lumx-color-secondary-N: rgb(19, 134, 105) !default; // Neutral green color
-$lumx-color-secondary-L1: rgba(19, 134, 105, 0.8) !default; // Base green color with 80% opacity
-$lumx-color-secondary-L2: rgba(19, 134, 105, 0.6) !default; // Base green color with 60% opacity
-$lumx-color-secondary-L3: rgba(19, 134, 105, 0.4) !default; // Base green color with 40% opacity
-$lumx-color-secondary-L4: rgba(19, 134, 105, 0.2) !default; // Base green color with 20% opacity
-$lumx-color-secondary-L5: rgba(19, 134, 105, 0.1) !default; // Base green color with 10% opacity
-$lumx-color-secondary-L6: rgba(19, 134, 105, 0.05) !default; // Base green color with 5% opacity
-$lumx-color-accent-D2: rgb(26, 110, 89) !default; // Darkest green color
-$lumx-color-accent-D1: rgb(23, 122, 97) !default; // Dark green color
-$lumx-color-accent-N: rgb(19, 134, 105) !default; // Neutral green color
-$lumx-color-accent-L1: rgba(19, 134, 105, 0.8) !default; // Base green color with 80% opacity
-$lumx-color-accent-L2: rgba(19, 134, 105, 0.6) !default; // Base green color with 60% opacity
-$lumx-color-accent-L3: rgba(19, 134, 105, 0.4) !default; // Base green color with 40% opacity
-$lumx-color-accent-L4: rgba(19, 134, 105, 0.2) !default; // Base green color with 20% opacity
-$lumx-color-accent-L5: rgba(19, 134, 105, 0.1) !default; // Base green color with 10% opacity
-$lumx-color-accent-L6: rgba(19, 134, 105, 0.05) !default; // Base green color with 5% opacity
+$lumx-color-primary-D2: var(--lumx-color-primary-D2) !default; // Darkest blue color
+$lumx-color-primary-D1: var(--lumx-color-primary-D1) !default; // Dark blue color
+$lumx-color-primary-N: var(--lumx-color-primary-N) !default; // Neutral blue color
+$lumx-color-primary-L1: var(--lumx-color-primary-L1) !default; // Base blue color with 80% opacity
+$lumx-color-primary-L2: var(--lumx-color-primary-L2) !default; // Base blue color with 60% opacity
+$lumx-color-primary-L3: var(--lumx-color-primary-L3) !default; // Base blue color with 40% opacity
+$lumx-color-primary-L4: var(--lumx-color-primary-L4) !default; // Base blue color with 20% opacity
+$lumx-color-primary-L5: var(--lumx-color-primary-L5) !default; // Base blue color with 10% opacity
+$lumx-color-primary-L6: var(--lumx-color-primary-L6) !default; // Base blue color with 5% opacity
+$lumx-color-secondary-D2: var(--lumx-color-secondary-D2) !default; // Darkest green color
+$lumx-color-secondary-D1: var(--lumx-color-secondary-D1) !default; // Dark green color
+$lumx-color-secondary-N: var(--lumx-color-secondary-N) !default; // Neutral green color
+$lumx-color-secondary-L1: var(--lumx-color-secondary-L1) !default; // Base green color with 80% opacity
+$lumx-color-secondary-L2: var(--lumx-color-secondary-L2) !default; // Base green color with 60% opacity
+$lumx-color-secondary-L3: var(--lumx-color-secondary-L3) !default; // Base green color with 40% opacity
+$lumx-color-secondary-L4: var(--lumx-color-secondary-L4) !default; // Base green color with 20% opacity
+$lumx-color-secondary-L5: var(--lumx-color-secondary-L5) !default; // Base green color with 10% opacity
+$lumx-color-secondary-L6: var(--lumx-color-secondary-L6) !default; // Base green color with 5% opacity
+$lumx-color-accent-D2: var(--lumx-color-accent-D2) !default; // Darkest green color
+$lumx-color-accent-D1: var(--lumx-color-accent-D1) !default; // Dark green color
+$lumx-color-accent-N: var(--lumx-color-accent-N) !default; // Neutral green color
+$lumx-color-accent-L1: var(--lumx-color-accent-L1) !default; // Base green color with 80% opacity
+$lumx-color-accent-L2: var(--lumx-color-accent-L2) !default; // Base green color with 60% opacity
+$lumx-color-accent-L3: var(--lumx-color-accent-L3) !default; // Base green color with 40% opacity
+$lumx-color-accent-L4: var(--lumx-color-accent-L4) !default; // Base green color with 20% opacity
+$lumx-color-accent-L5: var(--lumx-color-accent-L5) !default; // Base green color with 10% opacity
+$lumx-color-accent-L6: var(--lumx-color-accent-L6) !default; // Base green color with 5% opacity
 $lumx-color-black-N: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
 $lumx-color-black-L1: rgba(0, 0, 0, 0.7) !default; // Base dark color with 70% opacity
 $lumx-color-black-L2: rgba(0, 0, 0, 0.54) !default; // Base dark color with 54% opacity
