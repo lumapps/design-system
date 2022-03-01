@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Icon: Add `alt` attribute to set an alternative text to the icon. If defined, `role="img"` will also be applied to `svg` element.
+If undefined, `aria-hidden=true` will be applied to `svg` element.
+
 ### Changed
 
 -   @lumx/core: all CSS `:hover` style are now disable on devices that do not support pointer hover.

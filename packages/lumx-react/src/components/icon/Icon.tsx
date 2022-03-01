@@ -27,6 +27,8 @@ export interface IconProps extends GenericProps {
     size?: IconSizes;
     /** Theme adapting the component to light or dark background. */
     theme?: Theme;
+    /** Sets an alternative text on the svg. Will set an `img` role to the svg. */
+    alt?: string;
 }
 
 /**
@@ -52,7 +54,7 @@ const DEFAULT_PROPS: Partial<IconProps> = {};
  * @return React element.
  */
 export const Icon: Comp<IconProps, HTMLElement> = forwardRef((props, ref) => {
-    const { className, color, colorVariant, hasShape, icon, size, theme, ...forwardedProps } = props;
+    const { className, color, colorVariant, hasShape, icon, size, theme, alt, ...forwardedProps } = props;
 
     let iconColor;
     let iconColorVariant;
@@ -110,7 +112,9 @@ export const Icon: Comp<IconProps, HTMLElement> = forwardRef((props, ref) => {
             )}
         >
             <svg
-                aria-hidden="true"
+                aria-hidden={alt ? undefined : 'true'}
+                role={alt ? 'img' : undefined}
+                aria-label={alt}
                 height="1em"
                 preserveAspectRatio="xMidYMid meet"
                 style={{ verticalAlign: '-0.125em' }}
