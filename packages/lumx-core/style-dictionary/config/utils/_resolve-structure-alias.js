@@ -19,6 +19,18 @@ function getNested(tree, path) {
     return recur(tree, path);
 }
 
+function copyPropsRecursively(node, props) {
+    if (_.isPlainObject(node)) {
+        if ('value' in node) {
+            Object.assign(node, props);
+        } else {
+            for (let value of Object.values(node)) {
+                copyPropsRecursively(value, props)
+            }
+        }
+    }
+}
+
 /**
  * Style dictionary does not resolve alias in the property tree, only in property object (= object with a value key).
  *
@@ -38,19 +50,16 @@ module.exports = function(tree) {
             let aliasPath = asAliasPath(value);
             let aliasValue = getNested(tree, aliasPath);
             if (typeof aliasValue === "object" && "value" in aliasValue) {
-                aliasValue = _.omit(aliasValue, ["version", "comment"]);
+                aliasValue = Object.fromEntries(Object.entries(aliasValue).filter(([key]) => !key.startsWith('$config') && key !== "version" && key !== "comment"));
             }
             if (key === "$extend") {
                 if (typeof aliasValue !== "object") {
                     throw new Error("Can't $extend a value that is not an object.");
                 }
                 delete node["$extend"];
-                for (let [key, value] of Object.entries(node)) {
-                    if (key !== "$extend") {
-                        node[key] = value;
-                    }
-                }
-                Object.assign(node, aliasValue); node["$aliasedFrom"] = aliasPath;
+                const baseProps = _.cloneDeep(node);
+                Object.assign(node, _.cloneDeep(aliasValue));
+                copyPropsRecursively(node, baseProps);
             } else if (aliasValue) {
                 node[key] = aliasValue;
                 if (typeof aliasValue === "object" && "value" in aliasValue) {

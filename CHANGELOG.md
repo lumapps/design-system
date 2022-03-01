@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   Colors: SCSS primary & secondary colors now use the CSS variables
+
 ## [2.2.5][] - 2022-02-24
 
 ### Changed
