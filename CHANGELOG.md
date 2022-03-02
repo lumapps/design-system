@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.6][] - 2022-03-02
+
 ### Changed
 
 -   Colors: SCSS primary & secondary colors now use the CSS variables
@@ -1301,3 +1303,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [2.2.4]: https://github.com/lumapps/design-system/tree/v2.2.4
 [unreleased]: https://github.com/lumapps/design-system/compare/v2.2.5...HEAD
 [2.2.5]: https://github.com/lumapps/design-system/tree/v2.2.5
+[unreleased]: https://github.com/lumapps/design-system/compare/v2.2.6...HEAD
+[2.2.6]: https://github.com/lumapps/design-system/tree/v2.2.6
