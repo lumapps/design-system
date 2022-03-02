@@ -13,8 +13,8 @@ env:
 
 jobs:
   deploy:
-    # Run on push version tag OR on PR with the "need: review-design" label
-    if: "github.event_name == 'push' || contains(github.event.pull_request.labels.*.name, 'need: review-design')"
+    # Run on push version tag OR on PR with the "need: deploy-chromatic" label
+    if: "github.event_name == 'push' || contains(github.event.pull_request.labels.*.name, 'need: deploy-chromatic')"
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout repository"
@@ -36,3 +36,11 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           projectToken: ${{ secrets.CHROMATIC_TOKEN }}
           buildScriptName: build:storybook
+
+      - if: "contains(github.event.pull_request.labels.*.name, 'need: deploy-chromatic')"
+        name: "Remove label"
+        uses: ./dev-packages/ga-remove-label
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          LABEL: "need: deploy-chromatic"
+

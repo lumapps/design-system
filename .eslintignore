@@ -7,3 +7,4 @@ storybook
 **/style-dictionary
 **/*.config.js
 packages/site-demo/plugins
+dev-packages/**

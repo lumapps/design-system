@@ -95,7 +95,8 @@
         "generate:design-tokens": "yarn workspace @lumx/core generate:design-tokens"
     },
     "workspaces": [
-        "packages/*"
+        "packages/*",
+        "dev-packages/*"
     ],
     "packageManager": "yarn@3.1.0"
 }
