@@ -2,17 +2,22 @@
 
 exports[`<Slideshow> Snapshots and structure should render story 'Simple' 1`] = `
 Array [
-  <div
+  <section
+    aria-live="polite"
+    aria-roledescription="carousel"
     className="lumx-slideshow lumx-slideshow--theme-light lumx-slideshow--group-by-1"
+    id="slideshow1"
     style={
       Object {
         "width": "50%",
       }
     }
-    tabIndex={0}
   >
     <div
       className="lumx-slideshow__slides"
+      id="slideshow-slides2"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
     >
       <div
         className="lumx-slideshow__wrapper"
@@ -23,7 +28,9 @@ Array [
         }
       >
         <SlideshowItem
-          key="/demo-assets/landscape1.jpg-0"
+          aria-hidden={false}
+          key=".$/demo-assets/landscape1.jpg-0"
+          style={Object {}}
         >
           <ImageBlock
             align="left"
@@ -34,12 +41,19 @@ Array [
             thumbnailProps={
               Object {
                 "aspectRatio": "horizontal",
+                "loading": "eager",
               }
             }
           />
         </SlideshowItem>
         <SlideshowItem
-          key="/demo-assets/landscape1-s200.jpg-1"
+          aria-hidden={true}
+          key=".$/demo-assets/landscape1-s200.jpg-1"
+          style={
+            Object {
+              "visibility": "hidden",
+            }
+          }
         >
           <ImageBlock
             align="left"
@@ -50,12 +64,19 @@ Array [
             thumbnailProps={
               Object {
                 "aspectRatio": "horizontal",
+                "loading": "eager",
               }
             }
           />
         </SlideshowItem>
         <SlideshowItem
-          key="/demo-assets/landscape2.jpg-2"
+          aria-hidden={true}
+          key=".$/demo-assets/landscape2.jpg-2"
+          style={
+            Object {
+              "visibility": "hidden",
+            }
+          }
         >
           <ImageBlock
             align="left"
@@ -66,12 +87,19 @@ Array [
             thumbnailProps={
               Object {
                 "aspectRatio": "horizontal",
+                "loading": "eager",
               }
             }
           />
         </SlideshowItem>
         <SlideshowItem
-          key="/demo-assets/landscape3.jpg-3"
+          aria-hidden={true}
+          key=".$/demo-assets/landscape3.jpg-3"
+          style={
+            Object {
+              "visibility": "hidden",
+            }
+          }
         >
           <ImageBlock
             align="left"
@@ -82,12 +110,19 @@ Array [
             thumbnailProps={
               Object {
                 "aspectRatio": "horizontal",
+                "loading": "eager",
               }
             }
           />
         </SlideshowItem>
         <SlideshowItem
-          key="/demo-assets/portrait1.jpg-4"
+          aria-hidden={true}
+          key=".$/demo-assets/portrait1.jpg-4"
+          style={
+            Object {
+              "visibility": "hidden",
+            }
+          }
         >
           <ImageBlock
             align="left"
@@ -98,12 +133,19 @@ Array [
             thumbnailProps={
               Object {
                 "aspectRatio": "horizontal",
+                "loading": "eager",
               }
             }
           />
         </SlideshowItem>
         <SlideshowItem
-          key="/demo-assets/portrait1-s200.jpg-5"
+          aria-hidden={true}
+          key=".$/demo-assets/portrait1-s200.jpg-5"
+          style={
+            Object {
+              "visibility": "hidden",
+            }
+          }
         >
           <ImageBlock
             align="left"
@@ -114,6 +156,7 @@ Array [
             thumbnailProps={
               Object {
                 "aspectRatio": "horizontal",
+                "loading": "eager",
               }
             }
           />
@@ -127,6 +170,7 @@ Array [
         activeIndex={0}
         nextButtonProps={
           Object {
+            "aria-controls": "slideshow-slides2",
             "label": "Next",
           }
         }
@@ -135,6 +179,7 @@ Array [
         onPreviousClick={[Function]}
         previousButtonProps={
           Object {
+            "aria-controls": "slideshow-slides2",
             "label": "Previous",
           }
         }
@@ -142,11 +187,12 @@ Array [
         theme="light"
       />
     </div>
-  </div>,
+  </section>,
   <div
     className="lumx-slideshow-controls lumx-slideshow-controls--theme-light lumx-slideshow-controls--has-infinite-pagination"
   >
     <IconButton
+      aria-controls="slideshow-slides4"
       className="lumx-slideshow-controls__navigation"
       color="dark"
       emphasis="low"
@@ -154,7 +200,6 @@ Array [
       label="Previous"
       onClick={[Function]}
       size="m"
-      tabIndex={-1}
       theme="light"
     />
     <div
@@ -172,47 +217,42 @@ Array [
           className="lumx-slideshow-controls__pagination-item lumx-slideshow-controls__pagination-item--is-active"
           key="0"
           onClick={[Function]}
-          tabIndex={-1}
           type="button"
         />
         <button
           className="lumx-slideshow-controls__pagination-item"
           key="1"
           onClick={[Function]}
-          tabIndex={-1}
           type="button"
         />
         <button
           className="lumx-slideshow-controls__pagination-item"
           key="2"
           onClick={[Function]}
-          tabIndex={-1}
           type="button"
         />
         <button
           className="lumx-slideshow-controls__pagination-item"
           key="3"
           onClick={[Function]}
-          tabIndex={-1}
           type="button"
         />
         <button
           className="lumx-slideshow-controls__pagination-item lumx-slideshow-controls__pagination-item--is-on-edge"
           key="4"
           onClick={[Function]}
-          tabIndex={-1}
           type="button"
         />
         <button
           className="lumx-slideshow-controls__pagination-item lumx-slideshow-controls__pagination-item--is-out-range"
           key="5"
           onClick={[Function]}
-          tabIndex={-1}
           type="button"
         />
       </div>
     </div>
     <IconButton
+      aria-controls="slideshow-slides4"
       className="lumx-slideshow-controls__navigation"
       color="dark"
       emphasis="low"
@@ -220,7 +260,6 @@ Array [
       label="Next"
       onClick={[Function]}
       size="m"
-      tabIndex={-1}
       theme="light"
     />
   </div>,

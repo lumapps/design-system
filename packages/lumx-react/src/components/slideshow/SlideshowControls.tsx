@@ -116,7 +116,6 @@ export const SlideshowControls: Comp<SlideshowControlsProps, HTMLDivElement> = f
                 color={theme === Theme.dark ? 'light' : 'dark'}
                 emphasis={Emphasis.low}
                 onClick={onPreviousClick}
-                tabIndex={-1}
             />
             <div className={`${CLASSNAME}__pagination`}>
                 <div className={`${CLASSNAME}__pagination-items`} style={wrapperStyle}>
@@ -143,7 +142,6 @@ export const SlideshowControls: Comp<SlideshowControlsProps, HTMLDivElement> = f
                                         key={index}
                                         type="button"
                                         onClick={() => onPaginationClick?.(index)}
-                                        tabIndex={-1}
                                     />
                                 );
                             }),
@@ -158,7 +156,6 @@ export const SlideshowControls: Comp<SlideshowControlsProps, HTMLDivElement> = f
                 color={theme === Theme.dark ? 'light' : 'dark'}
                 emphasis={Emphasis.low}
                 onClick={onNextClick}
-                tabIndex={-1}
             />
         </div>
     );

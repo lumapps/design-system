@@ -32,17 +32,20 @@ export const SlideshowItem: Comp<SlideshowItemProps, HTMLDivElement> = forwardRe
     return (
         <div
             ref={ref}
-            {...forwardedProps}
             className={classNames(
                 className,
                 handleBasicClasses({
                     prefix: CLASSNAME,
                 }),
             )}
+            aria-roledescription="slide"
+            role="group"
+            {...forwardedProps}
         >
             {children}
         </div>
     );
 });
+
 SlideshowItem.displayName = COMPONENT_NAME;
 SlideshowItem.className = CLASSNAME;
