@@ -1,5 +1,6 @@
 const StyleDictionary = require('style-dictionary');
 const path = require('path');
+const _ = require('lodash');
 const transformGroup = require('./_transform-group');
 
 /**
@@ -22,6 +23,7 @@ StyleDictionary.registerFormat({
                 return `$${prop.name}`;
             } else {
                 const subProps = Object.keys(prop)
+                    .filter(key => !key.startsWith('$') &&_.isPlainObject(prop[key]))
                     .map((key) => `${indent}'${key}': ${processProperties(prop[key], depth + 1)}`)
                     .join(',\n');
                 return `(\n${subProps}\n${'  '.repeat(depth)})`;

@@ -7,19 +7,18 @@ StyleDictionary.registerTransform({
     type: "value",
     matcher: (prop) => prop.preferCSSVariable,
     transformer: (prop, config) => {
+        const extension = config.files[0].destination.replace(/.*\./, '');
         let name;
-        /*if (config.files[0].destination.endsWith('scss') && !prop.$aliasedFrom) {
-            // In SCSS we'll always use the CSS variable
+        if ((prop[`$config.${extension}`] || {}).aliasEquivalentCSSVariable) {
+            // Keep original prop name.
             name = prop.name;
-        } else*/
-        if (prop.$aliasedFrom) {
-            // In other formats we'll only use the CSS variable if the value was
-            // aliased.
-            name = prop.$aliasedFrom.replace(/\./g, '-');
+        } else if (prop.$aliasedFrom) {
+            // Use the prop name for the original prop.
+            name = ('lumx.'+prop.$aliasedFrom).replace(/\./g, '-');
         }
 
         if (!name) return prop.value;
-        return`var(--lumx-${name})`;
+        return`var(--${name})`;
     }
 });
 module.exports = name;

@@ -399,8 +399,20 @@
                 "preferCSSVariable": true
             }
         },
-        "primary": "{color.blue}",
-        "secondary": "{color.green}",
+        "primary": {
+            "$extend": "{color.blue}",
+            "preferCSSVariable": true,
+            "$config.scss": {
+                "aliasEquivalentCSSVariable": true
+            }
+        },
+        "secondary": {
+            "$extend": "{color.green}",
+            "preferCSSVariable": true,
+            "$config.scss": {
+                "aliasEquivalentCSSVariable": true
+            }
+        },
         "accent": "{color.secondary}",
         "black": "{color.dark}",
         "white": "{color.light}",
