@@ -1,25 +1,31 @@
-import { AspectRatio, Size, Thumbnail, ThumbnailVariant } from '@lumx/react';
+import { AspectRatio, Badge, Icon, Size, Thumbnail, ThumbnailVariant } from '@lumx/react';
 import React from 'react';
+import { mdiApps, mdiClose } from '@lumx/icons';
 
 export const App = ({ theme }: any) => (
     <>
         <Thumbnail
-            isLoading
-            image="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8Xw8AAoMBgDTD2qgAAAAASUVORK5CYII="
-            alt="loading image"
+            image="brokenurl.jpg"
+            alt="Fallback to MDI icon"
             aspectRatio={AspectRatio.square}
             size={Size.xl}
             variant={ThumbnailVariant.rounded}
             theme={theme}
+            fallback={mdiApps}
         />
 
         <Thumbnail
             image="brokenurl.jpg"
-            alt="broken url image"
+            alt="Fallback react node"
             aspectRatio={AspectRatio.square}
             size={Size.xl}
             variant={ThumbnailVariant.rounded}
             theme={theme}
+            fallback={
+                <Badge color="red">
+                    <Icon icon={mdiClose} />
+                </Badge>
+            }
         />
     </>
 );
