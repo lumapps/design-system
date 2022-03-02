@@ -9,8 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Icon: Add `alt` attribute to set an alternative text to the icon. If defined, `role="img"` will also be applied to `svg` element.
-If undefined, `aria-hidden=true` will be applied to `svg` element.
+-   Icon: Add `alt` attribute to set an alternative text to the icon. If defined, `role="img"` will also be applied to `svg` element.
+    If undefined, `aria-hidden=true` will be applied to `svg` element.
 
 ### Changed
 
@@ -29,11 +29,16 @@ If undefined, `aria-hidden=true` will be applied to `svg` element.
         -   The tooltip shows when focusing the anchor.
         -   The tooltip hides when loosing focus on the anchor.
         -   The tooltip hides when the escape key is pressed.
--   Colors: SCSS primary & secondary colors now use the CSS variables
 
 ### Fixed
 
 -   Thumbnail: className is now correctly passed from `imgProps` into the `img` tag
+
+## [2.2.6][] - 2022-03-02
+
+### Changed
+
+-   Colors: SCSS primary & secondary colors now use the CSS variables
 
 ## [2.2.5][] - 2022-02-24
 
@@ -1325,3 +1330,5 @@ If undefined, `aria-hidden=true` will be applied to `svg` element.
 [2.2.4]: https://github.com/lumapps/design-system/tree/v2.2.4
 [unreleased]: https://github.com/lumapps/design-system/compare/v2.2.5...HEAD
 [2.2.5]: https://github.com/lumapps/design-system/tree/v2.2.5
+[unreleased]: https://github.com/lumapps/design-system/compare/v2.2.6...HEAD
+[2.2.6]: https://github.com/lumapps/design-system/tree/v2.2.6
