@@ -47,13 +47,9 @@ Array [
           />
         </SlideshowItem>
         <SlideshowItem
-          aria-hidden={true}
+          aria-hidden={false}
           key=".$/demo-assets/landscape1-s200.jpg-1"
-          style={
-            Object {
-              "visibility": "hidden",
-            }
-          }
+          style={Object {}}
         >
           <ImageBlock
             align="left"

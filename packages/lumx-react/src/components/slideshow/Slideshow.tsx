@@ -218,6 +218,10 @@ export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props
         };
     }, [autoPlay, element]);
 
+    // Start index and end index of visible slides.
+    const startIndexVisible = currentIndex * (groupBy as number);
+    const endIndexVisible = startIndexVisible + (groupBy as number);
+
     /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
     return (
         <section
@@ -240,13 +244,13 @@ export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props
                 <div className={`${CLASSNAME}__wrapper`} style={wrapperStyle}>
                     {React.Children.map(children, (child: React.ReactNode, index: number) => {
                         if (React.isValidElement(child)) {
-                            const isCurrentlyNotVisible = index !== currentIndex;
+                            const isCurrentlyVisible = index >= startIndexVisible && index <= endIndexVisible;
 
                             return React.cloneElement(child, {
-                                style: isCurrentlyNotVisible
+                                style: !isCurrentlyVisible
                                     ? { visibility: 'hidden', ...(child.props.style || {}) }
                                     : child.props.style || {},
-                                'aria-hidden': isCurrentlyNotVisible,
+                                'aria-hidden': !isCurrentlyVisible,
                             });
                         }
 
