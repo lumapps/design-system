@@ -12846,6 +12846,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eslint-plugin-lumapps@workspace:dev-packages/eslint-plugin-lumapps":
+  version: 0.0.0-use.local
+  resolution: "eslint-plugin-lumapps@workspace:dev-packages/eslint-plugin-lumapps"
+  languageName: unknown
+  linkType: soft
+
 "eslint-plugin-prettier@npm:^3.2.0":
   version: 3.2.0
   resolution: "eslint-plugin-prettier@npm:3.2.0"
