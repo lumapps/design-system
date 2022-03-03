@@ -101,7 +101,7 @@
     },
     "overrides": [
         {
-            "files": ["*.stories.tsx", "**/site-demo/content/**"],
+            "files": ["*/stories/*" ,"*.stories.tsx", "**/site-demo/content/**"],
             "rules": {
                 "@typescript-eslint/explicit-module-boundary-types": "off",
                 "no-alert": "off",
