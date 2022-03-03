@@ -18,6 +18,7 @@ const setup = ({ ...propsOverride }: Partial<AlertDialogProps> = {}, shallowRend
     const props: AlertDialogProps = {
         title: 'Alert',
         description: 'Deserunt et sunt qui consequat sint sit.',
+        // eslint-disable-next-line no-alert
         confirmProps: { onClick: () => alert('confirm'), label: 'OK' },
         ...propsOverride,
     };

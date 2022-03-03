@@ -1,5 +1,5 @@
 import { mdiClose } from '@lumx/icons';
-import { Autocomplete, AutocompleteProps, Chip, ChipGroup, HorizontalAlignment, Icon, Size } from '@lumx/react';
+import { Autocomplete, AutocompleteProps, Chip, HorizontalAlignment, Icon, Size } from '@lumx/react';
 
 import { Comp, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
@@ -68,6 +68,8 @@ export const AutocompleteMultiple: Comp<AutocompleteMultipleProps, HTMLDivElemen
     const {
         anchorToInput,
         children,
+        // `chipsAlignment` needs to be here to remove it from `forwardedProps`.
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         chipsAlignment,
         className,
         closeOnClickAway,

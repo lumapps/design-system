@@ -29,6 +29,7 @@ const RowItem: React.FC<RowItemProps> = ({ image }) => {
         <>
             <Toolbar
                 label={
+                    // eslint-disable-next-line jsx-a11y/anchor-is-valid
                     <Link ref={linkRef} typography={Typography.subtitle1} onClick={() => setOpen(true)}>
                         {name}
                     </Link>

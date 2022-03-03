@@ -1,5 +1,3 @@
-import { mdiFormatTitle } from '@mdi/js';
-
 export declare const mdiCowboy: string;
 
 export declare const mdiWorker: string;

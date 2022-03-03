@@ -1,4 +1,4 @@
-import { List, ListItem, ListSubheader, Size } from '@lumx/react';
+import { List, ListItem } from '@lumx/react';
 import React from 'react';
 
 export const App = () => (

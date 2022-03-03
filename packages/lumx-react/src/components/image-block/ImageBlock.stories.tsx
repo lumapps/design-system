@@ -2,7 +2,6 @@ import { LANDSCAPE_IMAGES, landscapeImageKnob } from '@lumx/react/stories/knobs/
 import React from 'react';
 
 import { Alignment, AspectRatio, Chip, ChipGroup, ImageBlock, Size } from '@lumx/react';
-import { htmlDecode } from '@lumx/react/utils/htmlDecode';
 import { boolean, select, text } from '@storybook/addon-knobs';
 import { enumKnob } from '@lumx/react/stories/knobs/enumKnob';
 import { focusKnob } from '@lumx/react/stories/knobs/focusKnob';
@@ -36,7 +35,7 @@ export const DefaultImageBlock = ({ theme }: any) => {
         <ImageBlock
             alt={alt}
             description={description}
-            image={htmlDecode(imageUrl)}
+            image={imageUrl}
             size={size}
             tags={tags}
             title={title}

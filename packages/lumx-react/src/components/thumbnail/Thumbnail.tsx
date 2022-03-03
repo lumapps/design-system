@@ -105,6 +105,8 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
         crossOrigin,
         fallback,
         fillHeight,
+        // `focusPoint` needs to be here to remove it from `forwardedProps`.
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         focusPoint,
         image,
         imgProps,

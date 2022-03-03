@@ -18,7 +18,6 @@ import { enumKnob } from '@lumx/react/stories/knobs/enumKnob';
 import { focusKnob } from '@lumx/react/stories/knobs/focusKnob';
 import { sizeKnob } from '@lumx/react/stories/knobs/sizeKnob';
 import { action } from '@storybook/addon-actions';
-import classNames from 'classnames';
 import { CustomLink } from '@lumx/react/stories/utils/CustomLink';
 
 export default { title: 'LumX components/thumbnail/Thumbnail' };
