@@ -1,13 +1,14 @@
-import React, { CSSProperties, forwardRef, useCallback, useEffect, useState } from 'react';
+import React, { CSSProperties, forwardRef, useCallback, useEffect, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
 
 import { SlideshowControls, SlideshowControlsProps, Theme } from '@lumx/react';
-
 import { AUTOPLAY_DEFAULT_INTERVAL, FULL_WIDTH_PERCENT } from '@lumx/react/components/slideshow/constants';
 import { useInterval } from '@lumx/react/hooks/useInterval';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
+
+import uniqueId from 'lodash/uniqueId';
 
 /**
  * Defines the props of the component.
@@ -39,6 +40,10 @@ export interface SlideshowProps extends GenericProps {
     theme?: Theme;
     /** Callback when slide changes */
     onChange?(index: number): void;
+    /** slideshow HTML id attribute */
+    id?: string;
+    /** slides wrapper HTML id attribute */
+    slidesId?: string;
 }
 
 /**
@@ -80,6 +85,8 @@ export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props
         onChange,
         slideshowControlsProps,
         theme,
+        id,
+        slidesId,
         ...forwardedProps
     } = props;
     const [currentIndex, setCurrentIndex] = useState(activeIndex as number);
@@ -182,20 +189,69 @@ export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props
         onChange(currentIndex);
     }, [currentIndex, onChange]);
 
+    const slideshowId = useMemo(() => id || uniqueId('slideshow'), [id]);
+    const slideshowSlidesId = useMemo(() => slidesId || uniqueId('slideshow-slides'), [slidesId]);
+
+    useEffect(() => {
+        const slideshow = element;
+
+        const startAutoPlay = () => {
+            setIsAutoPlaying(Boolean(autoPlay));
+        };
+
+        const stopAutoPlay = () => {
+            setIsAutoPlaying(false);
+        };
+
+        if (slideshow) {
+            slideshow.addEventListener('focusin', stopAutoPlay);
+
+            slideshow.addEventListener('focusout', startAutoPlay);
+        }
+
+        return () => {
+            if (slideshow) {
+                slideshow.removeEventListener('focusin', stopAutoPlay);
+
+                slideshow.addEventListener('focusout', startAutoPlay);
+            }
+        };
+    }, [autoPlay, element]);
+
     /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
     return (
-        <div
+        <section
+            id={slideshowId}
             ref={mergeRefs(ref, setElement)}
             {...forwardedProps}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }), {
                 [`${CLASSNAME}--fill-height`]: fillHeight,
                 [`${CLASSNAME}--group-by-${groupBy}`]: Boolean(groupBy),
             })}
-            tabIndex={0}
+            aria-roledescription="carousel"
+            aria-live={isAutoPlaying ? 'off' : 'polite'}
         >
-            <div className={`${CLASSNAME}__slides`}>
+            <div
+                id={slideshowSlidesId}
+                className={`${CLASSNAME}__slides`}
+                onMouseEnter={() => setIsAutoPlaying(false)}
+                onMouseLeave={() => setIsAutoPlaying(Boolean(autoPlay))}
+            >
                 <div className={`${CLASSNAME}__wrapper`} style={wrapperStyle}>
-                    {children}
+                    {React.Children.map(children, (child: React.ReactNode, index: number) => {
+                        if (React.isValidElement(child)) {
+                            const isCurrentlyNotVisible = index !== currentIndex;
+
+                            return React.cloneElement(child, {
+                                style: isCurrentlyNotVisible
+                                    ? { visibility: 'hidden', ...(child.props.style || {}) }
+                                    : child.props.style || {},
+                                'aria-hidden': isCurrentlyNotVisible,
+                            });
+                        }
+
+                        return null;
+                    })}
                 </div>
             </div>
 
@@ -210,12 +266,21 @@ export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props
                         slidesCount={slidesCount}
                         parentRef={element}
                         theme={theme}
+                        nextButtonProps={{
+                            'aria-controls': slideshowSlidesId,
+                            ...slideshowControlsProps.nextButtonProps,
+                        }}
+                        previousButtonProps={{
+                            'aria-controls': slideshowSlidesId,
+                            ...slideshowControlsProps.previousButtonProps,
+                        }}
                     />
                 </div>
             )}
-        </div>
+        </section>
     );
 });
+
 Slideshow.displayName = COMPONENT_NAME;
 Slideshow.className = CLASSNAME;
 Slideshow.defaultProps = DEFAULT_PROPS;
