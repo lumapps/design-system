@@ -1,5 +1,5 @@
 import { TextField } from '@lumx/react';
-import { noop } from 'lodash';
+import noop from 'lodash/noop';
 import React from 'react';
 
 export const App = ({ theme }: any) => {

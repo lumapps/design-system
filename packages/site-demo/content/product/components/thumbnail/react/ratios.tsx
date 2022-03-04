@@ -1,15 +1,10 @@
-import { AspectRatio, Thumbnail, Size } from '@lumx/react';
+import { AspectRatio, Thumbnail } from '@lumx/react';
 import React from 'react';
 
 export const App = () => (
     <>
         <div style={{ width: 100, height: 10 }}>
-            <Thumbnail
-                image="/demo-assets/landscape2.jpg"
-                alt="Free"
-                aspectRatio={AspectRatio.free}
-                fillHeight="true"
-            />
+            <Thumbnail image="/demo-assets/landscape2.jpg" alt="Free" aspectRatio={AspectRatio.free} fillHeight />
         </div>
 
         <div style={{ width: 100 }}>

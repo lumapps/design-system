@@ -1,5 +1,4 @@
 import { Dispatch, createContext, useCallback, useContext, useEffect, useMemo } from 'react';
-import { clamp } from '@lumx/react/utils/clamp';
 import { uid } from 'uid';
 
 type TabType = 'tab' | 'tabPanel';

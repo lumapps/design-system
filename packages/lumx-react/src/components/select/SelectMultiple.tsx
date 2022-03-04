@@ -6,7 +6,6 @@ import { mdiAlertCircle, mdiCheckCircle, mdiClose, mdiCloseCircle, mdiMenuDown }
 
 import { Size } from '@lumx/react/components';
 import { Chip } from '@lumx/react/components/chip/Chip';
-import { ChipGroup } from '@lumx/react/components/chip/ChipGroup';
 import { Icon } from '@lumx/react/components/icon/Icon';
 import { InputLabel } from '@lumx/react/components/input-label/InputLabel';
 

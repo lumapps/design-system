@@ -25,7 +25,8 @@
         "eslint-plugin-prettier",
         "react",
         "jsx-a11y",
-        "import"
+        "import",
+        "lumapps"
     ],
     "rules": {
         "prettier/prettier": "error",
@@ -92,7 +93,8 @@
         "@typescript-eslint/no-use-before-define": ["error"],
         "no-shadow": "off",
         "@typescript-eslint/no-shadow": "error",
-        "spaced-comment": "off"
+        "spaced-comment": "off",
+        "lumapps/do-not-import-all-lodash": 2
     },
     "env": {
         "jest": true,
@@ -101,7 +103,7 @@
     },
     "overrides": [
         {
-            "files": ["*.stories.tsx", "**/site-demo/content/**"],
+            "files": ["*/stories/*" ,"*.stories.tsx", "**/site-demo/content/**"],
             "rules": {
                 "@typescript-eslint/explicit-module-boundary-types": "off",
                 "no-alert": "off",

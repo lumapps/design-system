@@ -1,6 +1,6 @@
 import { mdiMenuDown, mdiSort } from '@lumx/icons';
 import { Button, Dropdown, Emphasis, List, ListItem, Placement, Size } from '@lumx/react';
-import { noop } from 'lodash';
+import noop from 'lodash/noop';
 import React, { useRef, useState } from 'react';
 
 export const App = () => {

@@ -58,7 +58,7 @@ export function getAnnotatedMonthCalendar(
 ): AnnotatedDate[] {
     const month = moment(selectedMonth).locale(locale).month();
 
-    const clickableRange = moment.range(minDate!, maxDate!);
+    const clickableRange = moment.range(minDate as Date, maxDate as Date);
 
     return getMonthCalendar(locale, selectedMonth).map((date) => {
         return {

@@ -1,5 +1,5 @@
 import { Falsy } from '@lumx/react/utils/type';
-import { MutableRefObject, Ref } from 'react';
+import { MutableRefObject } from 'react';
 
 type FnRef<T> = (value: T) => void;
 

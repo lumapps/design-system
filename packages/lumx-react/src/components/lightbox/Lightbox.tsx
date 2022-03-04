@@ -1,4 +1,4 @@
-import React, { forwardRef, RefObject, useRef } from 'react';
+import React, { forwardRef, RefObject, useRef, useEffect } from 'react';
 
 import classNames from 'classnames';
 import { createPortal } from 'react-dom';
@@ -89,9 +89,11 @@ export const Lightbox: Comp<LightboxProps, HTMLDivElement> = forwardRef((props, 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useFocusTrap(wrapperRef.current, childrenRef.current?.firstChild);
 
-    const previousOpen = React.useRef(isOpen);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const previousOpen = useRef(isOpen);
 
-    React.useEffect(() => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useEffect(() => {
         if (isOpen !== previousOpen.current) {
             previousOpen.current = isOpen;
 
