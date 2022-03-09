@@ -2,7 +2,6 @@ import React from 'react';
 
 import { AspectRatio, ImageBlock, Slideshow, SlideshowControls, SlideshowItem } from '@lumx/react';
 import { thumbnailsKnob } from '@lumx/react/stories/knobs/thumbnailsKnob';
-import { useSlideshowControls } from '@lumx/react/hooks/useSlideshowControls';
 
 export default { title: 'LumX components/slideshow/Slideshow controls' };
 
@@ -13,7 +12,7 @@ export const Simple = () => {
         onNextClick,
         onPreviousClick,
         onPaginationClick,
-    } = useSlideshowControls({
+    } = SlideshowControls.useSlideshowControls({
         itemsCount: 9,
     });
 
@@ -42,7 +41,7 @@ export const ControllingSlideshow = ({ theme }: any) => {
         onNextClick,
         onPreviousClick,
         onPaginationClick,
-    } = useSlideshowControls({
+    } = SlideshowControls.useSlideshowControls({
         itemsCount: 6,
     });
 

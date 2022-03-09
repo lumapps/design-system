@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useMemo } from 'react';
+import { useState, useCallback, useEffect, useMemo } from 'react';
 
 import { useInterval } from '@lumx/react/hooks/useInterval';
 import uniqueId from 'lodash/uniqueId';
@@ -75,7 +75,7 @@ export const useSlideshowControls = ({
     onChange,
     itemsCount,
     id,
-    slidesId
+    slidesId,
 }: UseSlideshowControlsOptions): UseSlideshowControls => {
     const [currentIndex, setCurrentIndex] = useState(activeIndex as number);
     // Use state instead of a ref to make the slideshow controls update directly when the element is set.
@@ -130,7 +130,7 @@ export const useSlideshowControls = ({
         if (currentIndex > slidesCount - 1) {
             setCurrentIndex(defaultActiveIndex as number);
         }
-    }, [currentIndex, slidesCount]);
+    }, [currentIndex, slidesCount, defaultActiveIndex]);
 
     // Handle click on a bullet to go to a specific slide.
     const onPaginationClick = useCallback(
@@ -188,7 +188,7 @@ export const useSlideshowControls = ({
         element,
         onFocusIn: stopAutoPlay,
         onFocusOut: startAutoPlay,
-    })
+    });
 
     // Start index and end index of visible slides.
     const startIndexVisible = currentIndex * (groupBy as number);
@@ -210,4 +210,4 @@ export const useSlideshowControls = ({
         slidesCount,
         setActiveIndex: setCurrentIndex,
     };
-}
+};

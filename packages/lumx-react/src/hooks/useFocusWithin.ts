@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 export interface UseFocusWithinOptions {
     /** element to add the focus within to */
@@ -30,4 +30,4 @@ export const useFocusWithin = ({ element, onFocusIn, onFocusOut }: UseFocusWithi
             }
         };
     }, [onFocusIn, element, onFocusOut]);
-}
+};

@@ -1,10 +1,10 @@
-import React, { CSSProperties, forwardRef, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { CSSProperties, forwardRef } from 'react';
 
 import classNames from 'classnames';
 
 import { SlideshowControls, SlideshowControlsProps, Theme } from '@lumx/react';
-import { AUTOPLAY_DEFAULT_INTERVAL, FULL_WIDTH_PERCENT } from '@lumx/react/components/slideshow/constants';
-import { useSlideshowControls, DEFAULT_OPTIONS } from '@lumx/react/hooks/useSlideshowControls';
+import { DEFAULT_OPTIONS } from '@lumx/react/hooks/useSlideshowControls';
+import { FULL_WIDTH_PERCENT } from '@lumx/react/components/slideshow/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
@@ -24,16 +24,16 @@ export interface SlideshowProps extends GenericProps {
     interval?: number;
     /** Props to pass to the slideshow controls (minus those already set by the Slideshow props). */
     slideshowControlsProps?: Pick<SlideshowControlsProps, 'nextButtonProps' | 'previousButtonProps'> &
-    Omit<
-        SlideshowControlsProps,
-        | 'activeIndex'
-        | 'onPaginationClick'
-        | 'onNextClick'
-        | 'onPreviousClick'
-        | 'slidesCount'
-        | 'parentRef'
-        | 'theme'
-    >;
+        Omit<
+            SlideshowControlsProps,
+            | 'activeIndex'
+            | 'onPaginationClick'
+            | 'onNextClick'
+            | 'onPreviousClick'
+            | 'slidesCount'
+            | 'parentRef'
+            | 'theme'
+        >;
     /** Theme adapting the component to light or dark background. */
     theme?: Theme;
     /** Callback when slide changes */
@@ -102,7 +102,7 @@ export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props
         onPaginationClick,
         onPreviousClick,
         slideshow,
-    } = useSlideshowControls({
+    } = SlideshowControls.useSlideshowControls({
         activeIndex,
         defaultActiveIndex: DEFAULT_PROPS.activeIndex as number,
         autoPlay: Boolean(autoPlay),

@@ -7,6 +7,7 @@ import { mdiChevronLeft, mdiChevronRight } from '@lumx/icons';
 import { Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { WINDOW } from '@lumx/react/constants';
+import { useSlideshowControls, DEFAULT_OPTIONS } from '@lumx/react/hooks/useSlideshowControls';
 
 import { useSwipeNavigate } from './useSwipeNavigate';
 import { useKeyNavigate } from './useKeyNavigate';
@@ -64,7 +65,7 @@ const DEFAULT_PROPS: Partial<SlideshowControlsProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const SlideshowControls: Comp<SlideshowControlsProps, HTMLDivElement> = forwardRef((props, ref) => {
+const InternalSlideshowControls: Comp<SlideshowControlsProps, HTMLDivElement> = forwardRef((props, ref) => {
     const {
         activeIndex,
         className,
@@ -160,6 +161,12 @@ export const SlideshowControls: Comp<SlideshowControlsProps, HTMLDivElement> = f
         </div>
     );
 });
-SlideshowControls.displayName = COMPONENT_NAME;
-SlideshowControls.className = CLASSNAME;
-SlideshowControls.defaultProps = DEFAULT_PROPS;
+
+InternalSlideshowControls.displayName = COMPONENT_NAME;
+InternalSlideshowControls.className = CLASSNAME;
+InternalSlideshowControls.defaultProps = DEFAULT_PROPS;
+
+export const SlideshowControls = Object.assign(InternalSlideshowControls, {
+    useSlideshowControls,
+    useSlideshowControlsDefaultOptions: DEFAULT_OPTIONS,
+});
