@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.7][] - 2022-03-09
+
 ### Added
 
 -   Icon: Add `alt` attribute to set an alternative text to the icon. If defined, `role="img"` will also be applied to `svg` element.
@@ -1334,3 +1336,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [2.2.5]: https://github.com/lumapps/design-system/tree/v2.2.5
 [unreleased]: https://github.com/lumapps/design-system/compare/v2.2.6...HEAD
 [2.2.6]: https://github.com/lumapps/design-system/tree/v2.2.6
+[unreleased]: https://github.com/lumapps/design-system/compare/v2.2.7...HEAD
+[2.2.7]: https://github.com/lumapps/design-system/tree/v2.2.7

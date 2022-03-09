@@ -1,6 +1,6 @@
 {
   "name": "@lumapps/ga-remove-label",
-  "version": "1.0.0",
+  "version": "2.2.7",
   "description": "Github action for removing a label",
   "main": "index.js",
   "license": "MIT",
