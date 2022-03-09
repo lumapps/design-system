@@ -6,13 +6,15 @@ import { thumbnailsKnob } from '@lumx/react/stories/knobs/thumbnailsKnob';
 export default { title: 'LumX components/slideshow/Slideshow controls' };
 
 export const Simple = () => {
-    const slidesCount = 9;
-    const [activeIndex, setActiveIndex] = React.useState(0);
-    const maxIndex = slidesCount - 1;
-
-    const onNextClick = () => setActiveIndex(activeIndex === maxIndex ? 0 : activeIndex + 1);
-    const onPreviousClick = () => setActiveIndex(activeIndex === 0 ? maxIndex : activeIndex - 1);
-    const onPaginationClick = (index: number) => setActiveIndex(index);
+    const {
+        activeIndex,
+        slidesCount,
+        onNextClick,
+        onPreviousClick,
+        onPaginationClick,
+    } = SlideshowControls.useSlideshowControls({
+        itemsCount: 9,
+    });
 
     return (
         <SlideshowControls
@@ -29,15 +31,19 @@ export const Simple = () => {
 
 export const ControllingSlideshow = ({ theme }: any) => {
     const items = thumbnailsKnob(6);
-    const [activeIndex, setActiveIndex] = React.useState(0);
-    const maxIndex = items.length - 1;
     const slideshowStyle = {
         width: '50%',
     };
 
-    const onNextClick = () => setActiveIndex(activeIndex === maxIndex ? 0 : activeIndex + 1);
-    const onPreviousClick = () => setActiveIndex(activeIndex === 0 ? maxIndex : activeIndex - 1);
-    const onPaginationClick = (index: number) => setActiveIndex(index);
+    const {
+        activeIndex,
+        setActiveIndex,
+        onNextClick,
+        onPreviousClick,
+        onPaginationClick,
+    } = SlideshowControls.useSlideshowControls({
+        itemsCount: 6,
+    });
 
     return (
         <div style={{ height: 400, width: 500, position: 'relative' }}>

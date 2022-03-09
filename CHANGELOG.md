@@ -29,7 +29,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
         -   The tooltip shows when focusing the anchor.
         -   The tooltip hides when loosing focus on the anchor.
         -   The tooltip hides when the escape key is pressed.
--   Slideshow: improve aria labels and make controls focusable
+-   Slideshow: improve aria labels and make controls focusable.
+-   Hooks: created hooks `useFocusWithin` and `useSlideshowControls`.
 
 ### Fixed
 
