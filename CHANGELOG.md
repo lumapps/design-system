@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Hooks: Export `useFocusWithin` hook in `@lumx/react/hooks/useFocusWithin`
+
 ## [2.2.17][] - 2022-04-28
 
 ### Fixed
