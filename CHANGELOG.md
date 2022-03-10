@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [2.2.7][] - 2022-03-09
+## [2.2.8][] - 2022-03-10
 
 ### Added
 
@@ -37,6 +37,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   Thumbnail: className is now correctly passed from `imgProps` into the `img` tag
+
+## [2.2.7][] - 2022-03-09
+
+_Failed released_
 
 ## [2.2.6][] - 2022-03-02
 
@@ -1338,3 +1342,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [2.2.6]: https://github.com/lumapps/design-system/tree/v2.2.6
 [unreleased]: https://github.com/lumapps/design-system/compare/v2.2.7...HEAD
 [2.2.7]: https://github.com/lumapps/design-system/tree/v2.2.7
+[unreleased]: https://github.com/lumapps/design-system/compare/v2.2.8...HEAD
+[2.2.8]: https://github.com/lumapps/design-system/tree/v2.2.8

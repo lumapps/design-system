@@ -1,4 +1,4 @@
-FROM node:12.20.0-buster AS builder
+FROM node:13.7.0-buster AS builder
 
 WORKDIR /tmp
 
@@ -6,7 +6,7 @@ COPY package.json lerna.json .yarn yarn.lock tsconfig.json ./
 COPY configs ./configs
 COPY packages ./packages/
 
-RUN yarn install \
+RUN yarn install --ignore-engines \
     && yarn build:site
 
 
