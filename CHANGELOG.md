@@ -7,8 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [2.2.7][] - 2022-03-09
-
 ### Added
 
 -   Icon: Add `alt` attribute to set an alternative text to the icon. If defined, `role="img"` will also be applied to `svg` element.
@@ -37,6 +35,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   Thumbnail: className is now correctly passed from `imgProps` into the `img` tag
+
+## [2.2.7][] - 2022-03-09
+
+_Failed released_
 
 ## [2.2.6][] - 2022-03-02
 
