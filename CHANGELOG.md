@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   New package: new `@lumx/react-utils` package exporting re-usable hooks and functions.
+
 ## [2.2.19][] - 2022-06-03
 
 ### Fixed

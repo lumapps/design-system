@@ -18,6 +18,7 @@
             "@lumx/angularjs/*": ["lumx-angularjs/src/*"],
             "@lumx/react": ["lumx-react/src"],
             "@lumx/react/*": ["lumx-react/src/*"],
+            "@lumx/react-utils/*": ["lumx-react-utils/src/*"],
             "@lumx/demo/*": ["site-demo/src/*"],
             "@lumx/icons/*": ["lumx-icons/*"]
         },

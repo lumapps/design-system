@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Falsy } from '@lumx/react/utils';
+import { Falsy } from '../utils/types';
 
 export interface UseFocusWithinOptions {
     /**
@@ -20,16 +20,15 @@ export interface UseFocusWithinOptions {
  */
 export const useFocusWithin = ({ element, onFocusIn, onFocusOut }: UseFocusWithinOptions) => {
     useEffect(() => {
-        if (element) {
-            element.addEventListener('focusin', onFocusIn);
-            element.addEventListener('focusout', onFocusOut);
-
-            return () => {
-                element.removeEventListener('focusin', onFocusIn);
-                element.removeEventListener('focusout', onFocusOut);
-            };
+        if (!element) {
+            return undefined;
         }
 
-        return undefined;
+        element.addEventListener('focusin', onFocusIn);
+        element.addEventListener('focusout', onFocusOut);
+        return () => {
+            element.removeEventListener('focusin', onFocusIn);
+            element.removeEventListener('focusout', onFocusOut);
+        };
     }, [onFocusIn, element, onFocusOut]);
 };
