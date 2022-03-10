@@ -98,10 +98,12 @@
         "React"
     ],
     "license": "MIT",
-    "module": "index.js",
-    "main": "index.js",
-    "types": "index.d.ts",
+    "type": "module",
     "name": "@lumx/react",
+    "exports": {
+        ".": "./index.js",
+        "./hooks/*": "./hooks/*.js"
+    },
     "publishConfig": {
         "directory": "dist"
     },
