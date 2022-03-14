@@ -2,262 +2,155 @@
 
 exports[`<Slideshow> Snapshots and structure should render story 'Simple' 1`] = `
 Array [
-  <section
-    aria-live="polite"
-    aria-roledescription="carousel"
-    className="lumx-slideshow lumx-slideshow--theme-light lumx-slideshow--group-by-1"
+  <Slideshow
+    activeIndex={0}
+    afterSlides={
+      <div
+        className="lumx-slideshow__controls"
+      >
+        <SlideshowControls
+          activeIndex={0}
+          isAutoPlaying={false}
+          nextButtonProps={
+            Object {
+              "aria-controls": "slideshow-slides2",
+              "label": "Next",
+            }
+          }
+          onNextClick={[Function]}
+          onPaginationClick={[Function]}
+          onPreviousClick={[Function]}
+          previousButtonProps={
+            Object {
+              "aria-controls": "slideshow-slides2",
+              "label": "Previous",
+            }
+          }
+          slidesCount={6}
+          theme="light"
+        />
+      </div>
+    }
+    autoPlay={false}
+    endIndexVisible={1}
+    groupBy={1}
     id="slideshow1"
+    interval={1000}
+    isAutoPlaying={false}
+    setIsAutoPlaying={[Function]}
+    setSlideshow={[Function]}
+    slidesId="slideshow-slides2"
+    startIndexVisible={0}
     style={
       Object {
         "width": "50%",
       }
     }
+    theme="light"
   >
-    <div
-      className="lumx-slideshow__slides"
-      id="slideshow-slides2"
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
+    <SlideshowItem
+      key="/demo-assets/landscape1.jpg-0"
     >
-      <div
-        className="lumx-slideshow__wrapper"
-        style={
-          Object {
-            "transform": "translateX(-0%)",
-          }
-        }
-      >
-        <SlideshowItem
-          aria-hidden={false}
-          key=".$/demo-assets/landscape1.jpg-0"
-          style={Object {}}
-        >
-          <ImageBlock
-            align="left"
-            alt="Image 1"
-            captionPosition="below"
-            image="/demo-assets/landscape1.jpg"
-            theme="light"
-            thumbnailProps={
-              Object {
-                "aspectRatio": "horizontal",
-                "loading": "eager",
-              }
-            }
-          />
-        </SlideshowItem>
-        <SlideshowItem
-          aria-hidden={false}
-          key=".$/demo-assets/landscape1-s200.jpg-1"
-          style={Object {}}
-        >
-          <ImageBlock
-            align="left"
-            alt="Image 2"
-            captionPosition="below"
-            image="/demo-assets/landscape1-s200.jpg"
-            theme="light"
-            thumbnailProps={
-              Object {
-                "aspectRatio": "horizontal",
-                "loading": "eager",
-              }
-            }
-          />
-        </SlideshowItem>
-        <SlideshowItem
-          aria-hidden={true}
-          key=".$/demo-assets/landscape2.jpg-2"
-          style={
-            Object {
-              "visibility": "hidden",
-            }
-          }
-        >
-          <ImageBlock
-            align="left"
-            alt="Image 3"
-            captionPosition="below"
-            image="/demo-assets/landscape2.jpg"
-            theme="light"
-            thumbnailProps={
-              Object {
-                "aspectRatio": "horizontal",
-                "loading": "eager",
-              }
-            }
-          />
-        </SlideshowItem>
-        <SlideshowItem
-          aria-hidden={true}
-          key=".$/demo-assets/landscape3.jpg-3"
-          style={
-            Object {
-              "visibility": "hidden",
-            }
-          }
-        >
-          <ImageBlock
-            align="left"
-            alt="Image 4"
-            captionPosition="below"
-            image="/demo-assets/landscape3.jpg"
-            theme="light"
-            thumbnailProps={
-              Object {
-                "aspectRatio": "horizontal",
-                "loading": "eager",
-              }
-            }
-          />
-        </SlideshowItem>
-        <SlideshowItem
-          aria-hidden={true}
-          key=".$/demo-assets/portrait1.jpg-4"
-          style={
-            Object {
-              "visibility": "hidden",
-            }
-          }
-        >
-          <ImageBlock
-            align="left"
-            alt="Image 5"
-            captionPosition="below"
-            image="/demo-assets/portrait1.jpg"
-            theme="light"
-            thumbnailProps={
-              Object {
-                "aspectRatio": "horizontal",
-                "loading": "eager",
-              }
-            }
-          />
-        </SlideshowItem>
-        <SlideshowItem
-          aria-hidden={true}
-          key=".$/demo-assets/portrait1-s200.jpg-5"
-          style={
-            Object {
-              "visibility": "hidden",
-            }
-          }
-        >
-          <ImageBlock
-            align="left"
-            alt="Image 6"
-            captionPosition="below"
-            image="/demo-assets/portrait1-s200.jpg"
-            theme="light"
-            thumbnailProps={
-              Object {
-                "aspectRatio": "horizontal",
-                "loading": "eager",
-              }
-            }
-          />
-        </SlideshowItem>
-      </div>
-    </div>
-    <div
-      className="lumx-slideshow__controls"
-    >
-      <SlideshowControls
-        activeIndex={0}
-        nextButtonProps={
-          Object {
-            "aria-controls": "slideshow-slides2",
-            "label": "Next",
-          }
-        }
-        onNextClick={[Function]}
-        onPaginationClick={[Function]}
-        onPreviousClick={[Function]}
-        previousButtonProps={
-          Object {
-            "aria-controls": "slideshow-slides2",
-            "label": "Previous",
-          }
-        }
-        slidesCount={6}
+      <ImageBlock
+        align="left"
+        alt="Image 1"
+        captionPosition="below"
+        image="/demo-assets/landscape1.jpg"
         theme="light"
-      />
-    </div>
-  </section>,
-  <div
-    className="lumx-slideshow-controls lumx-slideshow-controls--theme-light lumx-slideshow-controls--has-infinite-pagination"
-  >
-    <IconButton
-      aria-controls="slideshow-slides4"
-      className="lumx-slideshow-controls__navigation"
-      color="dark"
-      emphasis="low"
-      icon="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z"
-      label="Previous"
-      onClick={[Function]}
-      size="m"
-      theme="light"
-    />
-    <div
-      className="lumx-slideshow-controls__pagination"
-    >
-      <div
-        className="lumx-slideshow-controls__pagination-items"
-        style={
+        thumbnailProps={
           Object {
-            "transform": "translateX(-0px)",
+            "aspectRatio": "horizontal",
+            "loading": "eager",
           }
         }
-      >
-        <button
-          className="lumx-slideshow-controls__pagination-item lumx-slideshow-controls__pagination-item--is-active"
-          key="0"
-          onClick={[Function]}
-          type="button"
-        />
-        <button
-          className="lumx-slideshow-controls__pagination-item"
-          key="1"
-          onClick={[Function]}
-          type="button"
-        />
-        <button
-          className="lumx-slideshow-controls__pagination-item"
-          key="2"
-          onClick={[Function]}
-          type="button"
-        />
-        <button
-          className="lumx-slideshow-controls__pagination-item"
-          key="3"
-          onClick={[Function]}
-          type="button"
-        />
-        <button
-          className="lumx-slideshow-controls__pagination-item lumx-slideshow-controls__pagination-item--is-on-edge"
-          key="4"
-          onClick={[Function]}
-          type="button"
-        />
-        <button
-          className="lumx-slideshow-controls__pagination-item lumx-slideshow-controls__pagination-item--is-out-range"
-          key="5"
-          onClick={[Function]}
-          type="button"
-        />
-      </div>
-    </div>
-    <IconButton
-      aria-controls="slideshow-slides4"
-      className="lumx-slideshow-controls__navigation"
-      color="dark"
-      emphasis="low"
-      icon="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"
-      label="Next"
-      onClick={[Function]}
-      size="m"
-      theme="light"
-    />
-  </div>,
+      />
+    </SlideshowItem>
+    <SlideshowItem
+      key="/demo-assets/landscape1-s200.jpg-1"
+    >
+      <ImageBlock
+        align="left"
+        alt="Image 2"
+        captionPosition="below"
+        image="/demo-assets/landscape1-s200.jpg"
+        theme="light"
+        thumbnailProps={
+          Object {
+            "aspectRatio": "horizontal",
+            "loading": "eager",
+          }
+        }
+      />
+    </SlideshowItem>
+    <SlideshowItem
+      key="/demo-assets/landscape2.jpg-2"
+    >
+      <ImageBlock
+        align="left"
+        alt="Image 3"
+        captionPosition="below"
+        image="/demo-assets/landscape2.jpg"
+        theme="light"
+        thumbnailProps={
+          Object {
+            "aspectRatio": "horizontal",
+            "loading": "eager",
+          }
+        }
+      />
+    </SlideshowItem>
+    <SlideshowItem
+      key="/demo-assets/landscape3.jpg-3"
+    >
+      <ImageBlock
+        align="left"
+        alt="Image 4"
+        captionPosition="below"
+        image="/demo-assets/landscape3.jpg"
+        theme="light"
+        thumbnailProps={
+          Object {
+            "aspectRatio": "horizontal",
+            "loading": "eager",
+          }
+        }
+      />
+    </SlideshowItem>
+    <SlideshowItem
+      key="/demo-assets/portrait1.jpg-4"
+    >
+      <ImageBlock
+        align="left"
+        alt="Image 5"
+        captionPosition="below"
+        image="/demo-assets/portrait1.jpg"
+        theme="light"
+        thumbnailProps={
+          Object {
+            "aspectRatio": "horizontal",
+            "loading": "eager",
+          }
+        }
+      />
+    </SlideshowItem>
+    <SlideshowItem
+      key="/demo-assets/portrait1-s200.jpg-5"
+    >
+      <ImageBlock
+        align="left"
+        alt="Image 6"
+        captionPosition="below"
+        image="/demo-assets/portrait1-s200.jpg"
+        theme="light"
+        thumbnailProps={
+          Object {
+            "aspectRatio": "horizontal",
+            "loading": "eager",
+          }
+        }
+      />
+    </SlideshowItem>
+  </Slideshow>,
+  null,
 ]
 `;

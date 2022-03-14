@@ -158,14 +158,15 @@ const InternalSlideshowControls: Comp<SlideshowControlsProps, HTMLDivElement> = 
                 </div>
             </div>
 
-            {playButtonProps ?
+            {playButtonProps ? (
                 <IconButton
                     {...playButtonProps}
                     icon={isAutoPlaying ? mdiPauseCircleOutline : mdiPlayCircleOutline}
                     className={`${CLASSNAME}__play`}
                     color={theme === Theme.dark ? 'light' : 'dark'}
+                    emphasis={Emphasis.low}
                 />
-            : null}
+            ) : null}
 
             <IconButton
                 {...nextButtonProps}

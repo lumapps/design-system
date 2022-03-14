@@ -4,8 +4,6 @@ import { useInterval } from '@lumx/react/hooks/useInterval';
 import uniqueId from 'lodash/uniqueId';
 import { AUTOPLAY_DEFAULT_INTERVAL } from '@lumx/react/components/slideshow/constants';
 
-import { useFocusWithin } from './useFocusWithin';
-
 export interface UseSlideshowControlsOptions {
     /** default active index to be displayed */
     defaultActiveIndex?: number;
@@ -52,12 +50,16 @@ export interface UseSlideshowControls {
     onPaginationClick: (index: number) => void;
     /** whether the slideshow is autoplaying or not */
     isAutoPlaying: boolean;
+    isForcePaused: boolean;
+    setIsForcePaused: (isForcePaused: boolean) => void;
     /** callback to change whether the slideshow is autoplaying or not */
     setIsAutoPlaying: (isAutoPlaying: boolean) => void;
     /** current active slide index  */
     activeIndex: number;
     /** set the current index as the active one */
     setActiveIndex: (index: number) => void;
+    stopAutoPlay: () => void;
+    startAutoPlay: () => void;
 }
 
 export const DEFAULT_OPTIONS: Partial<UseSlideshowControlsOptions> = {
@@ -122,8 +124,11 @@ export const useSlideshowControls = ({
 
     // Auto play
     const [isAutoPlaying, setIsAutoPlaying] = useState(Boolean(autoPlay));
+    const [isForcePaused, setIsForcePaused] = useState(false);
+
+    const isSlideshowAutoPlaying = isForcePaused ? false : isAutoPlaying;
     // Start
-    useInterval(goToNextSlide, isAutoPlaying && slidesCount > 1 ? (interval as number) : null);
+    useInterval(goToNextSlide, isSlideshowAutoPlaying && slidesCount > 1 ? (interval as number) : null);
 
     // Reset current index if it become invalid.
     useEffect(() => {
@@ -184,11 +189,15 @@ export const useSlideshowControls = ({
         setIsAutoPlaying(false);
     };
 
-    useFocusWithin({
-        element,
-        onFocusIn: stopAutoPlay,
-        onFocusOut: startAutoPlay,
-    });
+    const forcePause = (isPaused: boolean) => {
+        setIsForcePaused(isPaused);
+
+        if (isPaused) {
+            stopAutoPlay();
+        } else {
+            startAutoPlay();
+        }
+    };
 
     // Start index and end index of visible slides.
     const startIndexVisible = currentIndex * (groupBy as number);
@@ -204,10 +213,14 @@ export const useSlideshowControls = ({
         onPreviousClick,
         onNextClick,
         onPaginationClick,
-        isAutoPlaying,
+        isAutoPlaying: isSlideshowAutoPlaying,
         setIsAutoPlaying,
         activeIndex: currentIndex,
         slidesCount,
         setActiveIndex: setCurrentIndex,
+        startAutoPlay,
+        stopAutoPlay,
+        isForcePaused,
+        setIsForcePaused: forcePause,
     };
 };
