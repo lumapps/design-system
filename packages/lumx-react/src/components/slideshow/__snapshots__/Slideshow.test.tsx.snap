@@ -38,7 +38,6 @@ Array [
     interval={1000}
     isAutoPlaying={false}
     setIsAutoPlaying={[Function]}
-    setSlideshow={[Function]}
     slidesId="slideshow-slides2"
     startIndexVisible={0}
     style={

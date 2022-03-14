@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
--   Slideshow Controls: Added Play/Pause Button and added focus styles to bullets.
+-   Slideshow Controls: Added Play/Pause Button and added focus styles to bullets. Allow to pass in a label for each bullet.
 
 ### Fixed
 

@@ -40,6 +40,8 @@ export interface SlideshowControlsProps extends GenericProps {
     onPreviousClick?(loopback?: boolean): void;
     /** whether the slideshow is currently playing */
     isAutoPlaying?: boolean;
+    /** function to be executed in order to retrieve the label for the pagination item */
+    paginationItemLabel?: (index: number) => string;
     /** Props to pass to the lay button (minus those already set by the SlideshowControls props). */
     playButtonProps?: Pick<IconButtonProps, 'label'> &
         Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis' | 'color'>;
@@ -84,6 +86,7 @@ const InternalSlideshowControls: Comp<SlideshowControlsProps, HTMLDivElement> = 
         theme,
         isAutoPlaying = false,
         playButtonProps,
+        paginationItemLabel,
         ...forwardedProps
     } = props;
 
@@ -137,7 +140,6 @@ const InternalSlideshowControls: Comp<SlideshowControlsProps, HTMLDivElement> = 
                                 const isActive = activeIndex === index;
                                 const isOutRange = index < visibleRange.min || index > visibleRange.max;
                                 return (
-                                    // eslint-disable-next-line jsx-a11y/control-has-associated-label
                                     <button
                                         className={classNames(
                                             handleBasicClasses({
@@ -150,10 +152,22 @@ const InternalSlideshowControls: Comp<SlideshowControlsProps, HTMLDivElement> = 
                                         key={index}
                                         type="button"
                                         onClick={() => onPaginationClick?.(index)}
+                                        {...{
+                                            'aria-label': paginationItemLabel
+                                                ? paginationItemLabel(index)
+                                                : `${index + 1} / ${slidesCount}`,
+                                        }}
                                     />
                                 );
                             }),
-                        [slidesCount, visibleRange.min, visibleRange.max, activeIndex, onPaginationClick],
+                        [
+                            slidesCount,
+                            visibleRange.min,
+                            visibleRange.max,
+                            activeIndex,
+                            paginationItemLabel,
+                            onPaginationClick,
+                        ],
                     )}
                 </div>
             </div>

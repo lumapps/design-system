@@ -70,7 +70,7 @@ export const ControllingSlideshow = ({ theme }: any) => {
         <Slides
             activeIndex={currentIndex}
             id={slideshowId}
-            setSlideshow={setSlideshow}
+            ref={setSlideshow}
             theme={theme}
             isAutoPlaying={isAutoPlaying}
             autoPlay
@@ -98,6 +98,7 @@ export const ControllingSlideshow = ({ theme }: any) => {
                             'aria-controls': slideshowSlidesId,
                             onClick: () => setIsForcePaused(!isForcePaused),
                         }}
+                        paginationItemLabel={(index) => `Slide ${index}`}
                     />
                 </div>
             }

@@ -50,7 +50,9 @@ export interface UseSlideshowControls {
     onPaginationClick: (index: number) => void;
     /** whether the slideshow is autoplaying or not */
     isAutoPlaying: boolean;
+    /** whether the slideshow was force paused or not */
     isForcePaused: boolean;
+    /** callback to enable/disable the force pause feature */
     setIsForcePaused: (isForcePaused: boolean) => void;
     /** callback to change whether the slideshow is autoplaying or not */
     setIsAutoPlaying: (isAutoPlaying: boolean) => void;
@@ -58,7 +60,9 @@ export interface UseSlideshowControls {
     activeIndex: number;
     /** set the current index as the active one */
     setActiveIndex: (index: number) => void;
+    /** callback that stops the auto play */
     stopAutoPlay: () => void;
+    /** callback that starts the auto play */
     startAutoPlay: () => void;
 }
 

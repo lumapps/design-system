@@ -4,7 +4,6 @@ import classNames from 'classnames';
 
 import { FULL_WIDTH_PERCENT } from '@lumx/react/components/slideshow/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
-import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 import { Theme } from '@lumx/react';
 
 export interface SlidesProps extends GenericProps {
@@ -12,8 +11,6 @@ export interface SlidesProps extends GenericProps {
     activeIndex?: number;
     /** slides id to be added to the wrapper */
     id?: string;
-    /** callback to set a reference to the slideshow */
-    setSlideshow: (slideshow: HTMLDivElement | undefined) => void;
     /** custom classname */
     className?: string;
     /** custom theme */
@@ -24,8 +21,6 @@ export interface SlidesProps extends GenericProps {
     fillHeight?: boolean;
     /** Number of slides to group together. */
     groupBy?: number;
-    /** Interval between each slide when automatic rotation is enabled. */
-    interval?: number;
     /** whether the slides are currently playing or not */
     isAutoPlaying?: boolean;
     /** id to be passed in into the slides */
@@ -61,7 +56,6 @@ export const Slides: Comp<any, HTMLDivElement> = forwardRef((props, ref) => {
     const {
         activeIndex,
         id,
-        setSlideshow,
         className,
         theme,
         fillHeight,
@@ -74,30 +68,28 @@ export const Slides: Comp<any, HTMLDivElement> = forwardRef((props, ref) => {
         endIndexVisible,
         children,
         afterSlides,
-        interval,
         ...forwardedProps
     } = props;
     // Inline style of wrapper element.
     const wrapperStyle: CSSProperties = { transform: `translateX(-${FULL_WIDTH_PERCENT * activeIndex}%)` };
 
-    /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
     return (
         <section
             id={id}
-            ref={mergeRefs(ref, setSlideshow)}
+            ref={ref}
             {...forwardedProps}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }), {
                 [`${CLASSNAME}--fill-height`]: fillHeight,
                 [`${CLASSNAME}--group-by-${groupBy}`]: Boolean(groupBy),
             })}
             aria-roledescription="carousel"
-            aria-live={isAutoPlaying ? 'off' : 'polite'}
         >
             <div
                 id={slidesId}
                 className={`${CLASSNAME}__slides`}
                 onMouseEnter={() => setIsAutoPlaying(false)}
                 onMouseLeave={() => setIsAutoPlaying(Boolean(autoPlay))}
+                aria-live={isAutoPlaying ? 'off' : 'polite'}
             >
                 <div className={`${CLASSNAME}__wrapper`} style={wrapperStyle}>
                     {React.Children.map(children, (child: React.ReactNode, index: number) => {
@@ -106,7 +98,6 @@ export const Slides: Comp<any, HTMLDivElement> = forwardRef((props, ref) => {
 
                             return React.cloneElement(child, {
                                 isCurrentlyVisible,
-                                interval,
                             });
                         }
 

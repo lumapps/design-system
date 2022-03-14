@@ -6,7 +6,7 @@ import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/
 
 import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
 
-import { AUTOPLAY_DEFAULT_INTERVAL } from '@lumx/react/components/slideshow/constants';
+import { SLIDESHOW_TRANSITION_DURATION } from '@lumx/core/js/constants';
 
 /**
  * Defines the props of the component.
@@ -36,16 +36,10 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * @return React element.
  */
 export const SlideshowItem: Comp<SlideshowItemProps, HTMLDivElement> = forwardRef((props, ref) => {
-    const {
-        className,
-        children,
-        isCurrentlyVisible = false,
-        interval = AUTOPLAY_DEFAULT_INTERVAL,
-        ...forwardedProps
-    } = props;
+    const { className, children, isCurrentlyVisible = false, ...forwardedProps } = props;
     const [isVisible, setIsVisible] = useState<boolean>(isCurrentlyVisible);
 
-    useDelayedVisibility(isCurrentlyVisible, interval, (isNowVisible) => {
+    useDelayedVisibility(isCurrentlyVisible, SLIDESHOW_TRANSITION_DURATION, (isNowVisible) => {
         setIsVisible(isNowVisible);
     });
 

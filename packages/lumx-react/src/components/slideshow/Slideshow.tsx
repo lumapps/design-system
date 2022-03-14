@@ -4,6 +4,7 @@ import { SlideshowControls, SlideshowControlsProps, Theme, Slides, SlidesProps }
 import { DEFAULT_OPTIONS } from '@lumx/react/hooks/useSlideshowControls';
 import { Comp, GenericProps } from '@lumx/react/utils';
 import { useFocusWithin } from '@lumx/react/hooks/useFocusWithin';
+import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
 /**
  * Defines the props of the component.
@@ -12,15 +13,7 @@ export interface SlideshowProps
     extends GenericProps,
         Pick<
             SlidesProps,
-            | 'activeIndex'
-            | 'autoPlay'
-            | 'fillHeight'
-            | 'slidesId'
-            | 'id'
-            | 'theme'
-            | 'fillHeight'
-            | 'groupBy'
-            | 'interval'
+            'activeIndex' | 'autoPlay' | 'fillHeight' | 'slidesId' | 'id' | 'theme' | 'fillHeight' | 'groupBy'
         > {
     /** Interval between each slide when automatic rotation is enabled. */
     interval?: number;
@@ -110,12 +103,10 @@ export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props
         onFocusOut: startAutoPlay,
     });
 
-    /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
     return (
         <Slides
             activeIndex={currentIndex}
             id={slideshowId}
-            setSlideshow={setSlideshow}
             className={className}
             theme={theme}
             fillHeight={fillHeight}
@@ -127,7 +118,7 @@ export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props
             startIndexVisible={startIndexVisible}
             endIndexVisible={endIndexVisible}
             interval={interval}
-            ref={ref}
+            ref={mergeRefs(ref, setSlideshow)}
             afterSlides={
                 slideshowControlsProps && slidesCount > 1 ? (
                     <div className={`${Slides.className}__controls`}>
