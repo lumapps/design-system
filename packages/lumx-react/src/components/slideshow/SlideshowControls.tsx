@@ -3,7 +3,7 @@ import React, { forwardRef, RefObject, useCallback, useMemo } from 'react';
 import classNames from 'classnames';
 import range from 'lodash/range';
 
-import { mdiChevronLeft, mdiChevronRight } from '@lumx/icons';
+import { mdiChevronLeft, mdiChevronRight, mdiPlayCircleOutline, mdiPauseCircleOutline } from '@lumx/icons';
 import { Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { WINDOW } from '@lumx/react/constants';
@@ -38,6 +38,11 @@ export interface SlideshowControlsProps extends GenericProps {
     onPaginationClick?(index: number): void;
     /** On previous button click callback. */
     onPreviousClick?(loopback?: boolean): void;
+    /** whether the slideshow is currently playing */
+    isAutoPlaying?: boolean;
+    /** Props to pass to the lay button (minus those already set by the SlideshowControls props). */
+    playButtonProps?: Pick<IconButtonProps, 'label'> &
+        Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis' | 'color'>;
 }
 
 /**
@@ -77,6 +82,8 @@ const InternalSlideshowControls: Comp<SlideshowControlsProps, HTMLDivElement> = 
         previousButtonProps,
         slidesCount,
         theme,
+        isAutoPlaying = false,
+        playButtonProps,
         ...forwardedProps
     } = props;
 
@@ -150,6 +157,16 @@ const InternalSlideshowControls: Comp<SlideshowControlsProps, HTMLDivElement> = 
                     )}
                 </div>
             </div>
+
+            {playButtonProps ?
+                <IconButton
+                    {...playButtonProps}
+                    icon={isAutoPlaying ? mdiPauseCircleOutline : mdiPlayCircleOutline}
+                    className={`${CLASSNAME}__play`}
+                    color={theme === Theme.dark ? 'light' : 'dark'}
+                />
+            : null}
+
             <IconButton
                 {...nextButtonProps}
                 icon={mdiChevronRight}
