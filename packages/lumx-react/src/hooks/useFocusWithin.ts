@@ -26,7 +26,7 @@ export const useFocusWithin = ({ element, onFocusIn, onFocusOut }: UseFocusWithi
             if (element) {
                 element.removeEventListener('focusin', onFocusIn);
 
-                element.addEventListener('focusout', onFocusOut);
+                element.removeEventListener('focusout', onFocusOut);
             }
         };
     }, [onFocusIn, element, onFocusOut]);

@@ -1,12 +1,8 @@
-import React, { CSSProperties, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 
-import classNames from 'classnames';
-
-import { SlideshowControls, SlideshowControlsProps, Theme } from '@lumx/react';
+import { SlideshowControls, SlideshowControlsProps, Theme, Slides } from '@lumx/react';
 import { DEFAULT_OPTIONS } from '@lumx/react/hooks/useSlideshowControls';
-import { FULL_WIDTH_PERCENT } from '@lumx/react/components/slideshow/constants';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
-import { mergeRefs } from '@lumx/react/utils/mergeRefs';
+import { Comp, GenericProps, getRootClassName } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
@@ -24,16 +20,16 @@ export interface SlideshowProps extends GenericProps {
     interval?: number;
     /** Props to pass to the slideshow controls (minus those already set by the Slideshow props). */
     slideshowControlsProps?: Pick<SlideshowControlsProps, 'nextButtonProps' | 'previousButtonProps'> &
-        Omit<
-            SlideshowControlsProps,
-            | 'activeIndex'
-            | 'onPaginationClick'
-            | 'onNextClick'
-            | 'onPreviousClick'
-            | 'slidesCount'
-            | 'parentRef'
-            | 'theme'
-        >;
+    Omit<
+        SlideshowControlsProps,
+        | 'activeIndex'
+        | 'onPaginationClick'
+        | 'onNextClick'
+        | 'onPreviousClick'
+        | 'slidesCount'
+        | 'parentRef'
+        | 'theme'
+    >;
     /** Theme adapting the component to light or dark background. */
     theme?: Theme;
     /** Callback when slide changes */
@@ -114,47 +110,24 @@ export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props
         slidesId,
     });
 
-    // Inline style of wrapper element.
-    const wrapperStyle: CSSProperties = { transform: `translateX(-${FULL_WIDTH_PERCENT * currentIndex}%)` };
-
     /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
     return (
-        <section
-            id={slideshowId}
-            ref={mergeRefs(ref, setSlideshow)}
-            {...forwardedProps}
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }), {
-                [`${CLASSNAME}--fill-height`]: fillHeight,
-                [`${CLASSNAME}--group-by-${groupBy}`]: Boolean(groupBy),
-            })}
-            aria-roledescription="carousel"
-            aria-live={isAutoPlaying ? 'off' : 'polite'}
-        >
-            <div
-                id={slideshowSlidesId}
-                className={`${CLASSNAME}__slides`}
-                onMouseEnter={() => setIsAutoPlaying(false)}
-                onMouseLeave={() => setIsAutoPlaying(Boolean(autoPlay))}
-            >
-                <div className={`${CLASSNAME}__wrapper`} style={wrapperStyle}>
-                    {React.Children.map(children, (child: React.ReactNode, index: number) => {
-                        if (React.isValidElement(child)) {
-                            const isCurrentlyVisible = index >= startIndexVisible && index <= endIndexVisible;
-
-                            return React.cloneElement(child, {
-                                style: !isCurrentlyVisible
-                                    ? { visibility: 'hidden', ...(child.props.style || {}) }
-                                    : child.props.style || {},
-                                'aria-hidden': !isCurrentlyVisible,
-                            });
-                        }
-
-                        return null;
-                    })}
-                </div>
-            </div>
-
-            {slideshowControlsProps && slidesCount > 1 && (
+        <Slides
+            activeIndex={currentIndex}
+            slideshowId={slideshowId}
+            setSlideshow={setSlideshow}
+            className={className}
+            theme={theme}
+            fillHeight={fillHeight}
+            groupBy={groupBy}
+            isAutoPlaying={isAutoPlaying}
+            autoPlay={autoPlay}
+            slideshowSlidesId={slideshowSlidesId}
+            setIsAutoPlaying={setIsAutoPlaying}
+            startIndexVisible={startIndexVisible}
+            endIndexVisible={endIndexVisible}
+            children={children}
+            afterSlides={slideshowControlsProps && slidesCount > 1 ? (
                 <div className={`${CLASSNAME}__controls`}>
                     <SlideshowControls
                         {...slideshowControlsProps}
@@ -175,8 +148,9 @@ export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props
                         }}
                     />
                 </div>
-            )}
-        </section>
+            ) : undefined}
+            {...forwardedProps}
+        />
     );
 });
 
