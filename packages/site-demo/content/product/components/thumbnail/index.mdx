@@ -13,10 +13,10 @@ Check [size foundations](/product/foundations/size) for more details.
 
 Thumbnails come in 6 aspect ratios: `free`, `horizontal`, `original`, `square`, `vertical` and `wide`.
 
-- `free`: define width and height as wanted, there is not relation between them.
+- `free`: define width and height as wanted, there is no relation between them.
 - `horizontal`: 3:2 (width:height) ratio, define width, height is calculated.
 - `original`: source image ratio, define width, height is calculated.
-- `square`:1:1 ratio, define width, height is calculated.
+- `square`: 1:1 ratio, define width, height is calculated.
 - `vertical`: 2:3 ratio, define width, height is calculated.
 - `wide`: 16:9 ratio, define width, height is calculated.
 
@@ -34,9 +34,27 @@ Thumbnails come in two variants: `squared` and `rounded`
 
 <DemoBlock orientation="horizontal" demo="combined" />
 
-## Loading and error states
+## Loading state
 
-<DemoBlock orientation="horizontal" demo="loading-error" withThemeSwitcher />
+<DemoBlock orientation="horizontal" demo="loading" withThemeSwitcher />
+
+Thumbnails display a loading state while loading the image if they are configured with sufficient size constraints.
+Three type of size constraints can be used:
+
+- using `imgProps={{ width, height }}` to set the original image size (or same original size ratio).
+  Thumbnails will scale down if the given `width` and `height` are bigger than allowed space.
+- using `fillHeight` to fit the parent height.
+- using a fixed ratio (any ratio except `free` and `original`) and a width constraint (using `size` prop or manual CSS).
+
+## Error state
+
+Thumbnails will display an error state by default when the image fails to load correctly.
+
+<DemoBlock orientation="horizontal" demo="error" withThemeSwitcher />
+
+The `fallback` prop can be used to change the icon or even replace the error state with a custom React node.
+
+<DemoBlock orientation="horizontal" demo="error-fallback" withThemeSwitcher />
 
 ### Properties
 
