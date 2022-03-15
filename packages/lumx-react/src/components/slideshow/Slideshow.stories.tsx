@@ -40,6 +40,40 @@ export const Simple = ({ theme }: any) => {
     );
 };
 
+export const SimpleWithAutoPlay = ({ theme }: any) => {
+    const images = thumbnailsKnob(6);
+    const activeIndex = number('Active index', 0);
+    const groupBy = number('Group by', 1);
+    const interval = number('Autoplay interval (in milliseconds)', 1000);
+
+    return (
+        <Slideshow
+            activeIndex={activeIndex}
+            autoPlay
+            interval={interval}
+            slideshowControlsProps={{
+                nextButtonProps: { label: 'Next' },
+                previousButtonProps: { label: 'Previous' },
+                playButtonProps: { label: 'Play/Pause' },
+            }}
+            theme={theme}
+            groupBy={groupBy}
+            style={{ width: '50%' }}
+        >
+            {images.map(({ image, alt }, index) => (
+                <SlideshowItem key={`${image}-${index}`}>
+                    <ImageBlock
+                        thumbnailProps={{ aspectRatio: AspectRatio.horizontal, loading: 'eager' }}
+                        image={image}
+                        alt={alt}
+                        theme={theme}
+                    />
+                </SlideshowItem>
+            ))}
+        </Slideshow>
+    );
+};
+
 export const ResponsiveSlideShowSwipe = () => {
     const slides = range(3);
     return (

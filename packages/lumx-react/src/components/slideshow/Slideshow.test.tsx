@@ -35,5 +35,5 @@ describe(`<${Slideshow.displayName}>`, () => {
     });
 
     // Common tests suite.
-    commonTestsSuite(setup, { className: 'wrapper', prop: 'wrapper' }, { className: CLASSNAME });
+    commonTestsSuite(setup, { prop: 'wrapper' }, { className: CLASSNAME });
 });

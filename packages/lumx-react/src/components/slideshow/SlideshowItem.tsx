@@ -1,13 +1,22 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useState } from 'react';
 
 import classNames from 'classnames';
 
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
+import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
+
+import { SLIDESHOW_TRANSITION_DURATION } from '@lumx/core/js/constants';
+
 /**
  * Defines the props of the component.
  */
-export type SlideshowItemProps = GenericProps;
+export interface SlideshowItemProps extends GenericProps {
+    /** whether the slideshow item is currently visible */
+    isCurrentlyVisible?: boolean;
+    /** interval in which slides are automatically shown */
+    interval?: number;
+}
 
 /**
  * Component display name.
@@ -27,7 +36,12 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * @return React element.
  */
 export const SlideshowItem: Comp<SlideshowItemProps, HTMLDivElement> = forwardRef((props, ref) => {
-    const { className, children, ...forwardedProps } = props;
+    const { className, children, isCurrentlyVisible = false, ...forwardedProps } = props;
+    const [isVisible, setIsVisible] = useState<boolean>(isCurrentlyVisible);
+
+    useDelayedVisibility(isCurrentlyVisible, SLIDESHOW_TRANSITION_DURATION, (isNowVisible) => {
+        setIsVisible(isNowVisible);
+    });
 
     return (
         <div
@@ -41,6 +55,8 @@ export const SlideshowItem: Comp<SlideshowItemProps, HTMLDivElement> = forwardRe
             aria-roledescription="slide"
             role="group"
             {...forwardedProps}
+            style={!isVisible ? { visibility: 'hidden', ...(forwardedProps.style || {}) } : forwardedProps.style || {}}
+            aria-hidden={!isVisible}
         >
             {children}
         </div>

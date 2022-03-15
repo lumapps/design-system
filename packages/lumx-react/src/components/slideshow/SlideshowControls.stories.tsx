@@ -1,7 +1,8 @@
 import React from 'react';
 
-import { AspectRatio, ImageBlock, Slideshow, SlideshowControls, SlideshowItem } from '@lumx/react';
+import { AspectRatio, ImageBlock, Slides, SlideshowControls, SlideshowItem } from '@lumx/react';
 import { thumbnailsKnob } from '@lumx/react/stories/knobs/thumbnailsKnob';
+import { useFocusWithin } from '@lumx/react/hooks/useFocusWithin';
 
 export default { title: 'LumX components/slideshow/Slideshow controls' };
 
@@ -30,53 +31,88 @@ export const Simple = () => {
 };
 
 export const ControllingSlideshow = ({ theme }: any) => {
-    const items = thumbnailsKnob(6);
-    const slideshowStyle = {
-        width: '50%',
-    };
+    const images = thumbnailsKnob(6);
 
     const {
-        activeIndex,
-        setActiveIndex,
+        activeIndex: currentIndex,
+        slideshowId,
+        setSlideshow,
+        isAutoPlaying,
+        slideshowSlidesId,
+        setIsAutoPlaying,
+        startIndexVisible,
+        endIndexVisible,
+        slidesCount,
         onNextClick,
-        onPreviousClick,
         onPaginationClick,
+        onPreviousClick,
+        slideshow,
+        isForcePaused,
+        setIsForcePaused,
+        stopAutoPlay,
+        startAutoPlay,
     } = SlideshowControls.useSlideshowControls({
+        activeIndex: 0,
+        defaultActiveIndex: 0,
+        autoPlay: true,
         itemsCount: 6,
+        groupBy: 1,
     });
 
+    useFocusWithin({
+        element: slideshow,
+        onFocusIn: stopAutoPlay,
+        onFocusOut: startAutoPlay,
+    });
+
+    /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
     return (
-        <div style={{ height: 400, width: 500, position: 'relative' }}>
-            <Slideshow
-                activeIndex={activeIndex}
-                theme={theme}
-                autoPlay
-                groupBy={1}
-                style={slideshowStyle}
-                onChange={setActiveIndex}
-            >
-                {items.map(({ image, alt }) => (
-                    <SlideshowItem key={image}>
-                        <ImageBlock
-                            image={image}
-                            alt={alt}
-                            thumbnailProps={{ aspectRatio: AspectRatio.vertical }}
-                            theme={theme}
-                        />
-                    </SlideshowItem>
-                ))}
-            </Slideshow>
-            <div style={{ position: 'absolute', bottom: 0, right: -24 }}>
-                <SlideshowControls
-                    activeIndex={activeIndex}
-                    slidesCount={items.length}
-                    onNextClick={onNextClick}
-                    onPreviousClick={onPreviousClick}
-                    onPaginationClick={onPaginationClick}
-                    nextButtonProps={{ label: 'Next' }}
-                    previousButtonProps={{ label: 'Previous' }}
-                />
-            </div>
-        </div>
+        <Slides
+            activeIndex={currentIndex}
+            id={slideshowId}
+            ref={setSlideshow}
+            theme={theme}
+            isAutoPlaying={isAutoPlaying}
+            autoPlay
+            slidesId={slideshowSlidesId}
+            setIsAutoPlaying={setIsAutoPlaying}
+            startIndexVisible={startIndexVisible}
+            endIndexVisible={endIndexVisible}
+            groupBy={1}
+            style={{ width: '50%' }}
+            afterSlides={
+                <div className={`${Slides.className}__controls`}>
+                    <SlideshowControls
+                        activeIndex={currentIndex}
+                        onPaginationClick={onPaginationClick}
+                        onNextClick={onNextClick}
+                        onPreviousClick={onPreviousClick}
+                        slidesCount={slidesCount}
+                        parentRef={slideshow}
+                        theme={theme}
+                        isAutoPlaying={isAutoPlaying}
+                        nextButtonProps={{ label: 'Next', 'aria-controls': slideshowSlidesId }}
+                        previousButtonProps={{ label: 'Previous', 'aria-controls': slideshowSlidesId }}
+                        playButtonProps={{
+                            label: 'Play/Pause',
+                            'aria-controls': slideshowSlidesId,
+                            onClick: () => setIsForcePaused(!isForcePaused),
+                        }}
+                        paginationItemLabel={(index) => `Slide ${index}`}
+                    />
+                </div>
+            }
+        >
+            {images.map(({ image, alt }, index) => (
+                <SlideshowItem key={`${image}-${index}`}>
+                    <ImageBlock
+                        thumbnailProps={{ aspectRatio: AspectRatio.horizontal, loading: 'eager' }}
+                        image={image}
+                        alt={alt}
+                        theme={theme}
+                    />
+                </SlideshowItem>
+            ))}
+        </Slides>
     );
 };

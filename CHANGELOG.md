@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Slideshow Controls: Added Play/Pause Button and added focus styles to bullets. Allow to pass in a label for each bullet.
+
+### Fixed
+
+-   Slideshow: slides no longer appear as blank while transitioning.
+
 ## [2.2.8][] - 2022-03-10
 
 ### Added

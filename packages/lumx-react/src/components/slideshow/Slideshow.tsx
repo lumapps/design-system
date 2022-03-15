@@ -1,25 +1,20 @@
-import React, { CSSProperties, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 
-import classNames from 'classnames';
-
-import { SlideshowControls, SlideshowControlsProps, Theme } from '@lumx/react';
+import { SlideshowControls, SlideshowControlsProps, Theme, Slides, SlidesProps } from '@lumx/react';
 import { DEFAULT_OPTIONS } from '@lumx/react/hooks/useSlideshowControls';
-import { FULL_WIDTH_PERCENT } from '@lumx/react/components/slideshow/constants';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps } from '@lumx/react/utils';
+import { useFocusWithin } from '@lumx/react/hooks/useFocusWithin';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
 /**
  * Defines the props of the component.
  */
-export interface SlideshowProps extends GenericProps {
-    /** Index of the current slide. */
-    activeIndex?: number;
-    /** Whether the automatic rotation of the slideshow is enabled or not. */
-    autoPlay?: boolean;
-    /** Whether the image has to fill its container height or not. */
-    fillHeight?: boolean;
-    /** Number of slides to group together. */
-    groupBy?: number;
+export interface SlideshowProps
+    extends GenericProps,
+        Pick<
+            SlidesProps,
+            'activeIndex' | 'autoPlay' | 'fillHeight' | 'slidesId' | 'id' | 'theme' | 'fillHeight' | 'groupBy'
+        > {
     /** Interval between each slide when automatic rotation is enabled. */
     interval?: number;
     /** Props to pass to the slideshow controls (minus those already set by the Slideshow props). */
@@ -34,25 +29,9 @@ export interface SlideshowProps extends GenericProps {
             | 'parentRef'
             | 'theme'
         >;
-    /** Theme adapting the component to light or dark background. */
-    theme?: Theme;
     /** Callback when slide changes */
     onChange?(index: number): void;
-    /** slideshow HTML id attribute */
-    id?: string;
-    /** slides wrapper HTML id attribute */
-    slidesId?: string;
 }
-
-/**
- * Component display name.
- */
-const COMPONENT_NAME = 'Slideshow';
-
-/**
- * Component default class name and class prefix.
- */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * Component default props.
@@ -102,6 +81,10 @@ export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props
         onPaginationClick,
         onPreviousClick,
         slideshow,
+        stopAutoPlay,
+        startAutoPlay,
+        isForcePaused,
+        setIsForcePaused,
     } = SlideshowControls.useSlideshowControls({
         activeIndex,
         defaultActiveIndex: DEFAULT_PROPS.activeIndex as number,
@@ -114,72 +97,68 @@ export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props
         slidesId,
     });
 
-    // Inline style of wrapper element.
-    const wrapperStyle: CSSProperties = { transform: `translateX(-${FULL_WIDTH_PERCENT * currentIndex}%)` };
+    useFocusWithin({
+        element: slideshow,
+        onFocusIn: stopAutoPlay,
+        onFocusOut: startAutoPlay,
+    });
 
-    /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
     return (
-        <section
+        <Slides
+            activeIndex={currentIndex}
             id={slideshowId}
+            className={className}
+            theme={theme}
+            fillHeight={fillHeight}
+            groupBy={groupBy}
+            isAutoPlaying={isAutoPlaying}
+            autoPlay={autoPlay}
+            slidesId={slideshowSlidesId}
+            setIsAutoPlaying={setIsAutoPlaying}
+            startIndexVisible={startIndexVisible}
+            endIndexVisible={endIndexVisible}
+            interval={interval}
             ref={mergeRefs(ref, setSlideshow)}
+            afterSlides={
+                slideshowControlsProps && slidesCount > 1 ? (
+                    <div className={`${Slides.className}__controls`}>
+                        <SlideshowControls
+                            {...slideshowControlsProps}
+                            activeIndex={currentIndex}
+                            onPaginationClick={onPaginationClick}
+                            onNextClick={onNextClick}
+                            onPreviousClick={onPreviousClick}
+                            slidesCount={slidesCount}
+                            parentRef={slideshow}
+                            theme={theme}
+                            isAutoPlaying={isAutoPlaying}
+                            nextButtonProps={{
+                                'aria-controls': slideshowSlidesId,
+                                ...slideshowControlsProps.nextButtonProps,
+                            }}
+                            previousButtonProps={{
+                                'aria-controls': slideshowSlidesId,
+                                ...slideshowControlsProps.previousButtonProps,
+                            }}
+                            playButtonProps={
+                                autoPlay
+                                    ? {
+                                          'aria-controls': slideshowSlidesId,
+                                          onClick: () => setIsForcePaused(!isForcePaused),
+                                          ...slideshowControlsProps.playButtonProps,
+                                      }
+                                    : undefined
+                            }
+                        />
+                    </div>
+                ) : undefined
+            }
             {...forwardedProps}
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }), {
-                [`${CLASSNAME}--fill-height`]: fillHeight,
-                [`${CLASSNAME}--group-by-${groupBy}`]: Boolean(groupBy),
-            })}
-            aria-roledescription="carousel"
-            aria-live={isAutoPlaying ? 'off' : 'polite'}
         >
-            <div
-                id={slideshowSlidesId}
-                className={`${CLASSNAME}__slides`}
-                onMouseEnter={() => setIsAutoPlaying(false)}
-                onMouseLeave={() => setIsAutoPlaying(Boolean(autoPlay))}
-            >
-                <div className={`${CLASSNAME}__wrapper`} style={wrapperStyle}>
-                    {React.Children.map(children, (child: React.ReactNode, index: number) => {
-                        if (React.isValidElement(child)) {
-                            const isCurrentlyVisible = index >= startIndexVisible && index <= endIndexVisible;
-
-                            return React.cloneElement(child, {
-                                style: !isCurrentlyVisible
-                                    ? { visibility: 'hidden', ...(child.props.style || {}) }
-                                    : child.props.style || {},
-                                'aria-hidden': !isCurrentlyVisible,
-                            });
-                        }
-
-                        return null;
-                    })}
-                </div>
-            </div>
-
-            {slideshowControlsProps && slidesCount > 1 && (
-                <div className={`${CLASSNAME}__controls`}>
-                    <SlideshowControls
-                        {...slideshowControlsProps}
-                        activeIndex={currentIndex}
-                        onPaginationClick={onPaginationClick}
-                        onNextClick={onNextClick}
-                        onPreviousClick={onPreviousClick}
-                        slidesCount={slidesCount}
-                        parentRef={slideshow}
-                        theme={theme}
-                        nextButtonProps={{
-                            'aria-controls': slideshowSlidesId,
-                            ...slideshowControlsProps.nextButtonProps,
-                        }}
-                        previousButtonProps={{
-                            'aria-controls': slideshowSlidesId,
-                            ...slideshowControlsProps.previousButtonProps,
-                        }}
-                    />
-                </div>
-            )}
-        </section>
+            {children}
+        </Slides>
     );
 });
 
-Slideshow.displayName = COMPONENT_NAME;
-Slideshow.className = CLASSNAME;
+Slideshow.displayName = 'Slideshow';
 Slideshow.defaultProps = DEFAULT_PROPS;

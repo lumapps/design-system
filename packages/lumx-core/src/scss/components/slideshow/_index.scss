@@ -81,9 +81,11 @@
         display: flex;
         align-items: center;
         transition: transform $lumx-slideshow-transition-duration;
+        padding: 4px 0;
     }
 
     &__pagination-item {
+        $item: &;
         width: 8px;
         height: 8px;
         flex-shrink: 0;
@@ -102,18 +104,34 @@
         #{$self}--theme-light & {
             background-color: lumx-color-variant('dark', 'L4');
 
+            &[data-focus-visible-added]{
+                @include lumx-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('emphasis', 'LOW'), 'dark');
+            }
+
             &:hover,
             &--is-active {
                 background-color: lumx-color-variant('primary', 'N');
+
+                &[data-focus-visible-added]{
+                    @include lumx-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('emphasis', 'LOW'), 'primary');
+                }
             }
         }
 
         #{$self}--theme-dark & {
             background-color: lumx-color-variant('light', 'L4');
 
+            &[data-focus-visible-added]{
+                @include lumx-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('emphasis', 'LOW'), 'light');
+            }
+
             &:hover,
             &--is-active {
                 background-color: lumx-color-variant('light', 'N');
+
+                &[data-focus-visible-added]{
+                    @include lumx-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('emphasis', 'LOW'), 'light');
+                }
             }
         }
 
