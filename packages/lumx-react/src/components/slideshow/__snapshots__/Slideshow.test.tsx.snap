@@ -20,6 +20,7 @@ Array [
           onNextClick={[Function]}
           onPaginationClick={[Function]}
           onPreviousClick={[Function]}
+          parentRef={null}
           previousButtonProps={
             Object {
               "aria-controls": "slideshow-slides2",

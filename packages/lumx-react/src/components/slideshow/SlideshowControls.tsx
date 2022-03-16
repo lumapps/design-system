@@ -24,7 +24,7 @@ export interface SlideshowControlsProps extends GenericProps {
     nextButtonProps: Pick<IconButtonProps, 'label'> &
         Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis' | 'color'>;
     /** Reference to the parent element on which we want to listen touch swipe. */
-    parentRef?: RefObject<HTMLDivElement> | HTMLDivElement;
+    parentRef?: RefObject<HTMLDivElement> | HTMLDivElement | null;
     /** Props to pass to the previous button (minus those already set by the SlideshowControls props). */
     previousButtonProps: Pick<IconButtonProps, 'label'> &
         Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis' | 'color'>;

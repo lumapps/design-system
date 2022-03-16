@@ -35,9 +35,9 @@ export interface UseSlideshowControls {
     /** total slides to be displayed */
     slidesCount: number;
     /** callback to set  */
-    setSlideshow: (element: HTMLDivElement | undefined) => void;
+    setSlideshow: (element: HTMLDivElement | null) => void;
     /** reference to the slideshow element */
-    slideshow: HTMLDivElement | undefined;
+    slideshow: HTMLDivElement | null;
     /** id to be used for the slideshow */
     slideshowId: string;
     /** id to be used for the wrapper that contains the slides */
@@ -85,7 +85,7 @@ export const useSlideshowControls = ({
 }: UseSlideshowControlsOptions): UseSlideshowControls => {
     const [currentIndex, setCurrentIndex] = useState(activeIndex as number);
     // Use state instead of a ref to make the slideshow controls update directly when the element is set.
-    const [element, setElement] = useState<HTMLDivElement>();
+    const [element, setElement] = useState<HTMLDivElement | null>(null);
 
     // Number of slides when using groupBy prop.
     const slidesCount = Math.ceil(itemsCount / Math.min(groupBy as number, itemsCount));
