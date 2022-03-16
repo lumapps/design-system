@@ -2,16 +2,18 @@ import { mdiAlert, mdiAlertCircle, mdiArrowRight, mdiBullhorn, mdiCheck, mdiMess
 import { ColorPalette, Icon, Size } from '@lumx/react';
 import React from 'react';
 
-export const App = () => (
+export const App = ({ theme }: any) => (
     <>
         <Icon icon={mdiArrowRight} size={Size.s} color={ColorPalette.blue} />
         <Icon icon={mdiCheck} size={Size.s} color={ColorPalette.green} />
         <Icon icon={mdiAlertCircle} size={Size.s} color={ColorPalette.yellow} />
         <Icon icon={mdiAlert} size={Size.s} color={ColorPalette.red} />
-        <Icon icon={mdiBullhorn} size={Size.m} color={ColorPalette.blue} hasShape />
-        <Icon icon={mdiAlertCircle} size={Size.m} color={ColorPalette.yellow} hasShape />
-        <Icon icon={mdiAlert} size={Size.m} color={ColorPalette.red} hasShape />
-        <Icon icon={mdiCheck} size={Size.m} color={ColorPalette.green} hasShape />
-        <Icon icon={mdiMessageText} size={Size.m} hasShape />
+        <Icon icon={mdiBullhorn} size={Size.m} color={ColorPalette.blue} theme={theme} hasShape />
+        <Icon icon={mdiAlertCircle} size={Size.m} color={ColorPalette.yellow} theme={theme} hasShape />
+        <Icon icon={mdiAlert} size={Size.m} theme={theme} color={ColorPalette.red} hasShape />
+        <Icon icon={mdiCheck} size={Size.m} theme={theme} color={ColorPalette.green} hasShape />
+        <Icon icon={mdiMessageText} size={Size.m} color={ColorPalette.dark} theme={theme} hasShape />
+        <span className={theme === 'dark' ? 'lumx-color-font-light-N' : ''}>Without color:</span>
+        <Icon icon={mdiMessageText} size={Size.m} theme={theme} hasShape />
     </>
 );

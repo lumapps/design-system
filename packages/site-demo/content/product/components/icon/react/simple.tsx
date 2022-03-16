@@ -2,13 +2,13 @@ import { mdiEmail } from '@lumx/icons';
 import { Icon, Size } from '@lumx/react';
 import React from 'react';
 
-export const App = () => (
+export const App = ({ theme }: any) => (
     <>
-        <Icon icon={mdiEmail} size={Size.xxs} />
-        <Icon icon={mdiEmail} size={Size.xs} />
-        <Icon icon={mdiEmail} size={Size.s} />
-        <Icon icon={mdiEmail} size={Size.m} />
-        <Icon icon={mdiEmail} size={Size.l} />
-        <Icon icon={mdiEmail} size={Size.xl} />
+        <Icon icon={mdiEmail} size={Size.xxs} theme={theme} />
+        <Icon icon={mdiEmail} size={Size.xs} theme={theme} />
+        <Icon icon={mdiEmail} size={Size.s} theme={theme} />
+        <Icon icon={mdiEmail} size={Size.m} theme={theme} />
+        <Icon icon={mdiEmail} size={Size.l} theme={theme} />
+        <Icon icon={mdiEmail} size={Size.xl} theme={theme} />
     </>
 );

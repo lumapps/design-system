@@ -29,7 +29,7 @@ export const StoryBlock: React.FC<StoryBlockProps> = (props) => {
     if (isChromatic()) return <Story />;
 
     return (
-        <div className={classNames(CLASSNAME, `${CLASSNAME}--theme-${theme}`)}>
+        <div className={classNames(CLASSNAME, context.parameters.hasGreyBackground && `${CLASSNAME}--has-grey-background`, `${CLASSNAME}--theme-${theme}`)}>
             <div className={`${CLASSNAME}__toolbar`}>
                 <Switch
                     className="dark-theme-switcher"

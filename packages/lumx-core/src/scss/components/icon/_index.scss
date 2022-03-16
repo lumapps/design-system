@@ -82,12 +82,22 @@
         }
 
         &.#{$lumx-base-prefix}-icon--has-shape {
-            @include lumx-icon-color($color-key, true);
+            @include lumx-icon-color($color-key, true, lumx-base-const('theme', 'LIGHT'));
+
+            &.#{$lumx-base-prefix}-icon--theme-dark {
+                @include lumx-icon-color($color-key, true, lumx-base-const('theme', 'DARK'));
+            }
         }
     }
 
     @each $color-variant in $lumx-color-variants {
         .#{$lumx-base-prefix}-icon--color-#{$color-key}.#{$lumx-base-prefix}-icon--color-variant-#{$color-variant} {
+            @if $color-key == 'yellow' {
+                &.#{$lumx-base-prefix}-icon--has-shape {
+                    color: lumx-color-variant('dark', 'L1');
+                }
+            }
+
             color: lumx-color-variant($color-key, $color-variant);
         }
     }
