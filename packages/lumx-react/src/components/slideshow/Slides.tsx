@@ -8,7 +8,7 @@ import { Theme } from '@lumx/react';
 
 export interface SlidesProps extends GenericProps {
     /** current slide active */
-    activeIndex?: number;
+    activeIndex: number;
     /** slides id to be added to the wrapper */
     id?: string;
     /** custom classname */
@@ -52,7 +52,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Slides: Comp<any, HTMLDivElement> = forwardRef((props, ref) => {
+export const Slides: Comp<SlidesProps, HTMLDivElement> = forwardRef((props, ref) => {
     const {
         activeIndex,
         id,

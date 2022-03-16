@@ -11,10 +11,9 @@ import { mergeRefs } from '@lumx/react/utils/mergeRefs';
  */
 export interface SlideshowProps
     extends GenericProps,
-        Pick<
-            SlidesProps,
-            'activeIndex' | 'autoPlay' | 'fillHeight' | 'slidesId' | 'id' | 'theme' | 'fillHeight' | 'groupBy'
-        > {
+        Pick<SlidesProps, 'autoPlay' | 'slidesId' | 'id' | 'theme' | 'fillHeight' | 'groupBy'> {
+    /** current slide active */
+    activeIndex?: SlidesProps['activeIndex'];
     /** Interval between each slide when automatic rotation is enabled. */
     interval?: number;
     /** Props to pass to the slideshow controls (minus those already set by the Slideshow props). */

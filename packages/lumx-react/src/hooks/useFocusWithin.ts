@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 export interface UseFocusWithinOptions {
     /** element to add the focus within to */
-    element: HTMLElement | undefined;
+    element: HTMLElement | null;
     /** callback to be executed on focus in */
     onFocusIn: (ev: FocusEvent) => void;
     /** callback to be executed on focus out */

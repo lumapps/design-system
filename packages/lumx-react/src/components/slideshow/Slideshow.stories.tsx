@@ -86,6 +86,7 @@ export const ResponsiveSlideShowSwipe = () => {
             </ul>
             <FlexBox vAlign="center">
                 <Slideshow
+                    activeIndex={0}
                     slideshowControlsProps={{
                         nextButtonProps: { label: 'Next' },
                         previousButtonProps: { label: 'Previous' },
