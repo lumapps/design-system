@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.11][] - 2022-03-17
+
 ### Fixed
 
 -   Slideshow: temporarily remove slide `visibility: hidden`.
@@ -1366,3 +1368,5 @@ _Failed released_
 [2.2.9]: https://github.com/lumapps/design-system/tree/v2.2.9
 [unreleased]: https://github.com/lumapps/design-system/compare/v2.2.10...HEAD
 [2.2.10]: https://github.com/lumapps/design-system/tree/v2.2.10
+[unreleased]: https://github.com/lumapps/design-system/compare/v2.2.11...HEAD
+[2.2.11]: https://github.com/lumapps/design-system/tree/v2.2.11
