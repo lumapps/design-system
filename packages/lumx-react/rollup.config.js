@@ -113,7 +113,7 @@ const bundleTypes = [
     // Root file
     // TODO: this produce better, stricter types than currently exported
     //   we need a major Lumx version announcing breaking change on types
-    // { input: 'src/index.ts', output: 'index.d.ts' },
+    // { input: ['src/index.ts', 'src/components/index.ts'], output: 'index.d.ts' },
     // Hook files
     ...Object.values(input)
         .filter(isHookPath)

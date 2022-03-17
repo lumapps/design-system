@@ -1,7 +1,5 @@
 import { ValueOf } from '@lumx/react/utils';
 
-export { GenericProps, Callback } from '../utils/type';
-
 /**
  * Alignments.
  */
