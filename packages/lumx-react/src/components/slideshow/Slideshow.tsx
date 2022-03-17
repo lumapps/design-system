@@ -72,9 +72,6 @@ export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props
         setSlideshow,
         isAutoPlaying,
         slideshowSlidesId,
-        setIsAutoPlaying,
-        startIndexVisible,
-        endIndexVisible,
         slidesCount,
         onNextClick,
         onPaginationClick,
@@ -82,8 +79,8 @@ export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props
         slideshow,
         stopAutoPlay,
         startAutoPlay,
-        isForcePaused,
-        setIsForcePaused,
+        toggleAutoPlay,
+        toggleForcePause,
     } = SlideshowControls.useSlideshowControls({
         activeIndex,
         defaultActiveIndex: DEFAULT_PROPS.activeIndex as number,
@@ -113,9 +110,7 @@ export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props
             isAutoPlaying={isAutoPlaying}
             autoPlay={autoPlay}
             slidesId={slideshowSlidesId}
-            setIsAutoPlaying={setIsAutoPlaying}
-            startIndexVisible={startIndexVisible}
-            endIndexVisible={endIndexVisible}
+            toggleAutoPlay={toggleAutoPlay}
             interval={interval}
             ref={mergeRefs(ref, setSlideshow)}
             afterSlides={
@@ -143,7 +138,7 @@ export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props
                                 autoPlay
                                     ? {
                                           'aria-controls': slideshowSlidesId,
-                                          onClick: () => setIsForcePaused(!isForcePaused),
+                                          onClick: toggleForcePause,
                                           ...slideshowControlsProps.playButtonProps,
                                       }
                                     : undefined

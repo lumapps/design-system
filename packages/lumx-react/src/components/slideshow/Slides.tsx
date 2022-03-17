@@ -26,11 +26,7 @@ export interface SlidesProps extends GenericProps {
     /** id to be passed in into the slides */
     slidesId?: string;
     /** callback to change whether the slideshow is playing or not */
-    setIsAutoPlaying: (isAutoPlaying: boolean) => void;
-    /** starting visible index */
-    startIndexVisible: number;
-    /** ending visible index */
-    endIndexVisible: number;
+    toggleAutoPlay: () => void;
     /** component to be rendered after the slides */
     afterSlides?: React.ReactNode;
 }
@@ -61,11 +57,8 @@ export const Slides: Comp<SlidesProps, HTMLDivElement> = forwardRef((props, ref)
         fillHeight,
         groupBy,
         isAutoPlaying,
-        autoPlay,
+        toggleAutoPlay,
         slidesId,
-        setIsAutoPlaying,
-        startIndexVisible,
-        endIndexVisible,
         children,
         afterSlides,
         ...forwardedProps
@@ -87,22 +80,12 @@ export const Slides: Comp<SlidesProps, HTMLDivElement> = forwardRef((props, ref)
             <div
                 id={slidesId}
                 className={`${CLASSNAME}__slides`}
-                onMouseEnter={() => setIsAutoPlaying(false)}
-                onMouseLeave={() => setIsAutoPlaying(Boolean(autoPlay))}
+                onMouseEnter={toggleAutoPlay}
+                onMouseLeave={toggleAutoPlay}
                 aria-live={isAutoPlaying ? 'off' : 'polite'}
             >
                 <div className={`${CLASSNAME}__wrapper`} style={wrapperStyle}>
-                    {React.Children.map(children, (child: React.ReactNode, index: number) => {
-                        if (React.isValidElement(child)) {
-                            const isCurrentlyVisible = index >= startIndexVisible && index < endIndexVisible;
-
-                            return React.cloneElement(child, {
-                                isCurrentlyVisible,
-                            });
-                        }
-
-                        return null;
-                    })}
+                    {children}
                 </div>
             </div>
 

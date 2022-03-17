@@ -33,20 +33,18 @@ Array [
       </div>
     }
     autoPlay={false}
-    endIndexVisible={1}
     groupBy={1}
     id="slideshow1"
     interval={1000}
     isAutoPlaying={false}
-    setIsAutoPlaying={[Function]}
     slidesId="slideshow-slides2"
-    startIndexVisible={0}
     style={
       Object {
         "width": "50%",
       }
     }
     theme="light"
+    toggleAutoPlay={[Function]}
   >
     <SlideshowItem
       key="/demo-assets/landscape1.jpg-0"
