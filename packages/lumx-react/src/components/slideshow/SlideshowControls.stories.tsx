@@ -39,18 +39,15 @@ export const ControllingSlideshow = ({ theme }: any) => {
         setSlideshow,
         isAutoPlaying,
         slideshowSlidesId,
-        setIsAutoPlaying,
-        startIndexVisible,
-        endIndexVisible,
         slidesCount,
         onNextClick,
         onPaginationClick,
         onPreviousClick,
         slideshow,
-        isForcePaused,
-        setIsForcePaused,
         stopAutoPlay,
         startAutoPlay,
+        toggleAutoPlay,
+        toggleForcePause,
     } = SlideshowControls.useSlideshowControls({
         activeIndex: 0,
         defaultActiveIndex: 0,
@@ -73,11 +70,8 @@ export const ControllingSlideshow = ({ theme }: any) => {
             ref={setSlideshow}
             theme={theme}
             isAutoPlaying={isAutoPlaying}
-            autoPlay
             slidesId={slideshowSlidesId}
-            setIsAutoPlaying={setIsAutoPlaying}
-            startIndexVisible={startIndexVisible}
-            endIndexVisible={endIndexVisible}
+            toggleAutoPlay={toggleAutoPlay}
             groupBy={1}
             style={{ width: '50%' }}
             afterSlides={
@@ -96,7 +90,7 @@ export const ControllingSlideshow = ({ theme }: any) => {
                         playButtonProps={{
                             label: 'Play/Pause',
                             'aria-controls': slideshowSlidesId,
-                            onClick: () => setIsForcePaused(!isForcePaused),
+                            onClick: toggleForcePause,
                         }}
                         paginationItemLabel={(index) => `Slide ${index}`}
                     />

@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Slideshow: temporarily remove slide `visibility: hidden`.
+
 ## [2.2.10][] - 2022-03-16
 
 ### Added

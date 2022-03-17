@@ -52,10 +52,10 @@ export interface UseSlideshowControls {
     isAutoPlaying: boolean;
     /** whether the slideshow was force paused or not */
     isForcePaused: boolean;
-    /** callback to enable/disable the force pause feature */
-    setIsForcePaused: (isForcePaused: boolean) => void;
     /** callback to change whether the slideshow is autoplaying or not */
-    setIsAutoPlaying: (isAutoPlaying: boolean) => void;
+    toggleAutoPlay: () => void;
+    /** calback to change whether the slideshow should be force paused or not */
+    toggleForcePause: () => void;
     /** current active slide index  */
     activeIndex: number;
     /** set the current index as the active one */
@@ -141,10 +141,19 @@ export const useSlideshowControls = ({
         }
     }, [currentIndex, slidesCount, defaultActiveIndex]);
 
+    const startAutoPlay = () => {
+        setIsAutoPlaying(Boolean(autoPlay));
+    };
+
+    const stopAutoPlay = () => {
+        setIsAutoPlaying(false);
+    };
+
     // Handle click on a bullet to go to a specific slide.
     const onPaginationClick = useCallback(
         (index: number) => {
-            setIsAutoPlaying(false);
+            stopAutoPlay();
+            setIsForcePaused(true);
 
             if (index >= 0 && index < slidesCount) {
                 setCurrentIndex(index);
@@ -156,7 +165,8 @@ export const useSlideshowControls = ({
     // Handle click or keyboard event to go to next slide.
     const onNextClick = useCallback(
         (loopback = true) => {
-            setIsAutoPlaying(false);
+            stopAutoPlay();
+            setIsForcePaused(true);
             goToNextSlide(loopback);
         },
         [goToNextSlide],
@@ -165,7 +175,8 @@ export const useSlideshowControls = ({
     // Handle click or keyboard event to go to previous slide.
     const onPreviousClick = useCallback(
         (loopback = true) => {
-            setIsAutoPlaying(false);
+            stopAutoPlay();
+            setIsForcePaused(true);
             goToPreviousSlide(loopback);
         },
         [goToPreviousSlide],
@@ -185,21 +196,23 @@ export const useSlideshowControls = ({
     const slideshowId = useMemo(() => id || uniqueId('slideshow'), [id]);
     const slideshowSlidesId = useMemo(() => slidesId || uniqueId('slideshow-slides'), [slidesId]);
 
-    const startAutoPlay = () => {
-        setIsAutoPlaying(Boolean(autoPlay));
-    };
-
-    const stopAutoPlay = () => {
-        setIsAutoPlaying(false);
-    };
-
-    const forcePause = (isPaused: boolean) => {
-        setIsForcePaused(isPaused);
-
-        if (isPaused) {
+    const toggleAutoPlay = () => {
+        if (isSlideshowAutoPlaying) {
             stopAutoPlay();
         } else {
             startAutoPlay();
+        }
+    };
+
+    const toggleForcePause = () => {
+        const shouldBePaused = !isForcePaused;
+
+        setIsForcePaused(shouldBePaused);
+
+        if (!shouldBePaused) {
+            startAutoPlay();
+        } else {
+            stopAutoPlay();
         }
     };
 
@@ -218,13 +231,13 @@ export const useSlideshowControls = ({
         onNextClick,
         onPaginationClick,
         isAutoPlaying: isSlideshowAutoPlaying,
-        setIsAutoPlaying,
+        toggleAutoPlay,
         activeIndex: currentIndex,
         slidesCount,
         setActiveIndex: setCurrentIndex,
         startAutoPlay,
         stopAutoPlay,
         isForcePaused,
-        setIsForcePaused: forcePause,
+        toggleForcePause,
     };
 };
