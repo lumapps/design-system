@@ -58,6 +58,8 @@ export interface DropdownProps extends GenericProps {
     placement?: Placement;
     /** Whether the focus should be set on the list when the dropdown is open or not. */
     shouldFocusOnOpen?: boolean;
+    /** Whether the focus should go back on the anchor when dropdown closes and focus is within. */
+    focusAnchorOnClose?: boolean;
     /**
      * Z-axis position.
      * @see {@link PopoverProps#zIndex}
@@ -93,6 +95,7 @@ const DEFAULT_PROPS: Partial<DropdownProps> = {
     fitWithinViewportHeight: true,
     placement: Placement.BOTTOM_START,
     shouldFocusOnOpen: true,
+    focusAnchorOnClose: true,
 };
 
 /**
@@ -114,6 +117,7 @@ export const Dropdown: Comp<DropdownProps, HTMLDivElement> = forwardRef((props, 
         fitWithinViewportHeight,
         isOpen,
         offset,
+        focusAnchorOnClose,
         onClose,
         onInfiniteScroll,
         placement,
@@ -147,6 +151,7 @@ export const Dropdown: Comp<DropdownProps, HTMLDivElement> = forwardRef((props, 
         <Popover
             ref={ref}
             {...forwardedProps}
+            focusAnchorOnClose={focusAnchorOnClose}
             anchorRef={anchorRef}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))}
             elevation={0 as any}

@@ -7,9 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Popover: Added `focusAnchorOnClose` prop to reset the focus back to the anchor element when popover closes and focus is set within. Default to `true`;
+-   Dropdown: Added `focusAnchorOnClose` prop to reset the focus back to the anchor element when popover closes and focus is set within. Default to `true`;
+-   List: Added `tabIndex` prop to control the list tabIndex. Default to `-1` to avoid breaking changes.
+
 ### Fixed
 
 -   Icon: better `dark` theme on icon with shape.
+-   List: Removed default `tabIndex={0}`.
 
 ## [2.2.11][] - 2022-03-17
 
