@@ -21,6 +21,8 @@ export interface ListProps extends GenericProps {
     isClickable?: boolean;
     /** Item padding size. */
     itemPadding?: Extract<Size, 'big' | 'huge'>;
+    /** Tab index of the list. Default to -1 */
+    tabIndex?: -1 | 0;
     /**
      * On list item selected callback.
      *
@@ -41,6 +43,13 @@ const COMPONENT_NAME = 'List';
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
+/**
+ * Component default props.
+ */
+ const DEFAULT_PROPS: Partial<ListProps> = {
+    tabIndex: -1,
+};
+
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 /**
  * List component.
@@ -50,7 +59,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * @return React element.
  */
 const InternalList: Comp<ListProps, HTMLUListElement> = forwardRef((props, ref) => {
-    const { children, className, isClickable, itemPadding, onListItemSelected, ...forwardedProps } = props;
+    const { children, className, isClickable, itemPadding, onListItemSelected, tabIndex, ...forwardedProps } = props;
     const listElementRef = useRef<HTMLUListElement>(null);
 
     const { items, hasClickableItem } = useInteractiveList({
@@ -70,7 +79,8 @@ const InternalList: Comp<ListProps, HTMLUListElement> = forwardRef((props, ref) 
                     itemPadding: itemPadding ?? (clickable ? Size.big : undefined),
                 }),
             )}
-            tabIndex={clickable ? 0 : -1}
+            tabIndex={tabIndex}
+
             ref={mergeRefs(ref, listElementRef)}
         >
             {items}
@@ -79,5 +89,6 @@ const InternalList: Comp<ListProps, HTMLUListElement> = forwardRef((props, ref) 
 });
 InternalList.displayName = COMPONENT_NAME;
 InternalList.className = CLASSNAME;
+InternalList.defaultProps = DEFAULT_PROPS;
 
 export const List = Object.assign(InternalList, { useKeyboardListNavigation });
