@@ -19,8 +19,8 @@ export interface IconProps extends GenericProps {
     /** Whether the icon has a shape. */
     hasShape?: boolean;
     /**
-     * Icon (SVG path).draw code (`d` property of the `<path>` SVG element).
-     * @see {@link https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths}
+     * Icon (SVG path) draw code (`d` property of the `<path>` SVG element).
+     * See https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths
      */
     icon: string;
     /** Size variant. */
@@ -56,35 +56,25 @@ const DEFAULT_PROPS: Partial<IconProps> = {};
 export const Icon: Comp<IconProps, HTMLElement> = forwardRef((props, ref) => {
     const { className, color, colorVariant, hasShape, icon, size, theme, alt, ...forwardedProps } = props;
 
-    let iconColor;
-    let iconColorVariant;
-    if (color) {
-        iconColor = color;
-        iconColorVariant = colorVariant;
-    } else if (theme) {
-        iconColor = theme === Theme.light ? ColorPalette.dark : ColorPalette.light;
-
-        if (colorVariant) {
-            iconColorVariant = colorVariant;
-        } else {
-            iconColorVariant = Theme.light ? 'L1' : 'N';
-        }
-    } else if (hasShape) {
-        iconColor = ColorPalette.dark;
+    // Color
+    let iconColor = color;
+    if (!iconColor && (hasShape || theme)) {
+        iconColor = theme === Theme.dark ? ColorPalette.light : ColorPalette.dark;
     }
 
-    let iconSize;
-    if (size) {
-        if (hasShape) {
-            if (size === Size.xxs || size === Size.xs) {
-                iconSize = Size.s;
-            } else if (size === Size.xxl) {
-                iconSize = Size.xl;
-            } else {
-                iconSize = size;
-            }
-        } else {
-            iconSize = size;
+    // Color variant
+    let iconColorVariant = colorVariant;
+    if (!iconColorVariant && hasShape && iconColor === ColorPalette.dark) {
+        iconColorVariant = 'L2';
+    }
+
+    // Size
+    let iconSize = size;
+    if (size && hasShape) {
+        if (size === Size.xxs || size === Size.xs) {
+            iconSize = Size.s;
+        } else if (size === Size.xxl) {
+            iconSize = Size.xl;
         }
     } else if (hasShape) {
         iconSize = Size.m;
@@ -101,6 +91,7 @@ export const Icon: Comp<IconProps, HTMLElement> = forwardRef((props, ref) => {
                     colorVariant: iconColorVariant,
                     hasShape,
                     prefix: CLASSNAME,
+                    theme,
                     size: iconSize,
                 }),
                 !hasShape && `${CLASSNAME}--no-shape`,

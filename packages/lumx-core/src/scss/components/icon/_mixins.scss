@@ -11,9 +11,18 @@
     }
 }
 
-@mixin lumx-icon-color($color, $has-shape: false) {
+@mixin lumx-icon-color($color, $has-shape: false, $theme: light) {
     @if $has-shape == true {
-        background-color: lumx-color-variant($color, 'L6');
+        $base-color: lumx-color-variant($color, 'L6');
+
+        @if $theme == lumx-base-const('theme', 'DARK') and $color != 'light' {
+            // adds a white background for dark theme
+            background-color: lumx-color-variant('light', 'N');
+            // Custom color is set as a background gradient to be on top of background-color
+            background-image: linear-gradient(to right, $base-color, $base-color);
+        } @else {
+            background-color: $base-color;
+        }
 
         @if $color == 'yellow' {
             color: lumx-color-variant('dark', 'L1');
