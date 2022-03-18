@@ -22,7 +22,7 @@ export interface ListProps extends GenericProps {
     /** Item padding size. */
     itemPadding?: Extract<Size, 'big' | 'huge'>;
     /** Tab index of the list. Default to -1 */
-    tabIndex?: -1 | 0;
+    tabIndex?: number;
     /**
      * On list item selected callback.
      *
@@ -46,7 +46,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
 /**
  * Component default props.
  */
- const DEFAULT_PROPS: Partial<ListProps> = {
+const DEFAULT_PROPS: Partial<ListProps> = {
     tabIndex: -1,
 };
 
@@ -80,7 +80,6 @@ const InternalList: Comp<ListProps, HTMLUListElement> = forwardRef((props, ref) 
                 }),
             )}
             tabIndex={tabIndex}
-
             ref={mergeRefs(ref, listElementRef)}
         >
             {items}

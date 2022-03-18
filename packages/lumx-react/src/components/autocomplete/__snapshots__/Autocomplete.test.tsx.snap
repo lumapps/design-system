@@ -27,12 +27,14 @@ exports[`<Autocomplete> Props should render correctly when the dropdown is close
     closeOnEscape={true}
     fitToAnchorWidth={true}
     fitWithinViewportHeight={true}
+    focusAnchorOnClose={true}
     isOpen={false}
     placement="bottom-start"
     shouldFocusOnOpen={false}
   >
     <List
       isClickable={true}
+      tabIndex={-1}
     >
       <ListItem
         key="losangeles"
@@ -132,12 +134,14 @@ exports[`<Autocomplete> Snapshots and structure should render correctly 1`] = `
     closeOnEscape={true}
     fitToAnchorWidth={true}
     fitWithinViewportHeight={true}
+    focusAnchorOnClose={true}
     isOpen={true}
     placement="bottom-start"
     shouldFocusOnOpen={false}
   >
     <List
       isClickable={true}
+      tabIndex={-1}
     >
       <ListItem
         key="losangeles"

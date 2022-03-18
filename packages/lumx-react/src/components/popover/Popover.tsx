@@ -197,8 +197,6 @@ export const Popover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, re
         return null;
     }
 
-
-
     const {
         anchorRef,
         boundaryRef,
@@ -228,24 +226,27 @@ export const Popover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, re
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const clickAwayRef = useRef<HTMLDivElement>(null);
 
-
     /**
      * Track whether the focus is currently set in the
      * popover.
      * */
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [isFocusedWithin, setIsFocusedWithin] = useState(false);
+    const isFocusedWithin = useRef(false);
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useFocusWithin({
         element: popperElement || null,
-        onFocusIn: () => setIsFocusedWithin(true),
-        onFocusOut: () => setIsFocusedWithin(false)
+        onFocusIn: () => {
+            isFocusedWithin.current = true;
+        },
+        onFocusOut: () => {
+            isFocusedWithin.current = false;
+        },
     });
 
     /** Action on close */
     const handleClose = () => {
-        if(!onClose){
+        if (!onClose) {
             return;
         }
 
@@ -254,12 +255,12 @@ export const Popover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, re
          * when the popover closes, reset the focus back to the anchor element
          * unless specifically requested not to.
          */
-        if(isFocusedWithin && focusAnchorOnClose){
-            anchorRef.current?.focus()
+        if (isFocusedWithin.current && focusAnchorOnClose) {
+            anchorRef.current?.focus();
         }
 
         onClose();
-    }
+    };
 
     const modifiers: any = [];
     const actualOffset: [number, number] = [offset?.along ?? 0, (offset?.away ?? 0) + (hasArrow ? ARROW_SIZE : 0)];
