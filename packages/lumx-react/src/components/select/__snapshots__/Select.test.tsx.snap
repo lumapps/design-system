@@ -29,6 +29,7 @@ exports[`<Select> Snapshots and structure should render correctly 1`] = `
     closeOnEscape={true}
     fitToAnchorWidth={true}
     fitWithinViewportHeight={true}
+    focusAnchorOnClose={true}
     isOpen={false}
     onClose={[Function]}
     placement="bottom-start"

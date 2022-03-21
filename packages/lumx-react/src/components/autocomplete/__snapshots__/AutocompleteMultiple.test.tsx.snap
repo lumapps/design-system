@@ -17,6 +17,7 @@ exports[`<AutocompleteMultiple> Snapshots and structure should render correctly 
 >
   <List
     isClickable={true}
+    tabIndex={-1}
   >
     <ListItem
       key="losangeles"

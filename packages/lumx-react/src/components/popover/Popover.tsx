@@ -12,6 +12,7 @@ import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 
 import { Comp, GenericProps, getRootClassName, handleBasicClasses, ValueOf } from '@lumx/react/utils';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
+import { useFocusWithin } from '@lumx/react/hooks/useFocusWithin';
 
 /**
  * Different possible placements for the popover.
@@ -81,6 +82,8 @@ export interface PopoverProps extends GenericProps {
     fitWithinViewportHeight?: boolean;
     /** Element to focus when opening the popover. */
     focusElement?: RefObject<HTMLElement>;
+    /** Whether the focus should go back on the anchor when popover closes and focus is within. */
+    focusAnchorOnClose?: boolean;
     /** Whether we put an arrow or not. */
     hasArrow?: boolean;
     /** Whether the popover is open or not. */
@@ -213,6 +216,7 @@ export const Popover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, re
         style,
         usePortal,
         zIndex,
+        focusAnchorOnClose = true,
         ...forwardedProps
     } = props;
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -221,6 +225,42 @@ export const Popover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, re
     const [arrowElement, setArrowElement] = useState<null | HTMLElement>(null);
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const clickAwayRef = useRef<HTMLDivElement>(null);
+
+    /**
+     * Track whether the focus is currently set in the
+     * popover.
+     * */
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const isFocusedWithin = useRef(false);
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useFocusWithin({
+        element: popperElement || null,
+        onFocusIn: () => {
+            isFocusedWithin.current = true;
+        },
+        onFocusOut: () => {
+            isFocusedWithin.current = false;
+        },
+    });
+
+    /** Action on close */
+    const handleClose = () => {
+        if (!onClose) {
+            return;
+        }
+
+        /**
+         * If the focus is currently within the popover
+         * when the popover closes, reset the focus back to the anchor element
+         * unless specifically requested not to.
+         */
+        if (isFocusedWithin.current && focusAnchorOnClose) {
+            anchorRef.current?.focus();
+        }
+
+        onClose();
+    };
 
     const modifiers: any = [];
     const actualOffset: [number, number] = [offset?.along ?? 0, (offset?.away ?? 0) + (hasArrow ? ARROW_SIZE : 0)];
@@ -267,7 +307,7 @@ export const Popover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, re
     }, [style, styles.popper, zIndex, fitWithinViewportHeight]);
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    useCallbackOnEscape(onClose, isOpen && closeOnEscape);
+    useCallbackOnEscape(handleClose, isOpen && closeOnEscape);
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useFocus(focusElement?.current, isOpen && (state?.rects?.popper?.y ?? -1) >= 0);
 
@@ -286,7 +326,7 @@ export const Popover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, re
                   style={popoverStyle}
                   {...attributes.popper}
               >
-                  <ClickAwayProvider callback={closeOnClickAway && onClose} refs={clickAwayRefs}>
+                  <ClickAwayProvider callback={closeOnClickAway && handleClose} refs={clickAwayRefs}>
                       {hasArrow && <div ref={setArrowElement} className={`${CLASSNAME}__arrow`} style={styles.arrow} />}
                       {children}
                   </ClickAwayProvider>

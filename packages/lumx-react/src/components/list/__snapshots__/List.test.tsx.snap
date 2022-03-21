@@ -3,7 +3,7 @@
 exports[`<List> Snapshots and structure should render story 'AsLink' 1`] = `
 <ul
   className="lumx-list lumx-list--item-padding-big"
-  tabIndex={0}
+  tabIndex={-1}
 >
   <ListItem
     before={
@@ -62,7 +62,7 @@ exports[`<List> Snapshots and structure should render story 'AsLink' 1`] = `
 exports[`<List> Snapshots and structure should render story 'KeyboardNavigation' 1`] = `
 <ul
   className="lumx-list lumx-list--item-padding-big"
-  tabIndex={0}
+  tabIndex={-1}
 >
   <ListItem
     isHighlighted={false}
@@ -193,7 +193,7 @@ exports[`<List> Snapshots and structure should render story 'WithItemPadding' 1`
 Array [
   <ul
     className="lumx-list lumx-list--item-padding-big"
-    tabIndex={0}
+    tabIndex={-1}
   >
     <ListItem
       className="lumx-color-background-dark-L6"
@@ -248,7 +248,7 @@ Array [
   </ul>,
   <ul
     className="lumx-list lumx-list--item-padding-big"
-    tabIndex={0}
+    tabIndex={-1}
   >
     <ListItem
       className="lumx-color-background-dark-L6"
@@ -303,7 +303,7 @@ Array [
   </ul>,
   <ul
     className="lumx-list lumx-list--item-padding-huge"
-    tabIndex={0}
+    tabIndex={-1}
   >
     <ListItem
       className="lumx-color-background-dark-L6"

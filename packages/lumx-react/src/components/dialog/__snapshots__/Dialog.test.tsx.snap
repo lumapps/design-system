@@ -182,6 +182,7 @@ exports[`<Dialog> Snapshots and structure should render story DialogWithFocusabl
         >
           <List
             isClickable={true}
+            tabIndex={-1}
           >
             <ListItem
               isSelected={true}
