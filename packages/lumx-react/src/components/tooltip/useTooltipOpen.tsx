@@ -103,7 +103,6 @@ export function useTooltipOpen(delay: number | undefined, anchorElement: HTMLEle
             for (const [node, eventType, evenHandler] of events) {
                 node.removeEventListener(eventType, evenHandler);
             }
-            closeImmediately();
         };
     }, [anchorElement, delay]);
 
