@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Icon: better `dark` theme on icon with shape.
 -   List: Removed default `tabIndex={0}`.
+-   Tooltip: Removed unecessary set state on unmount causing warnings in React dev tools.
 
 ## [2.2.11][] - 2022-03-17
 
