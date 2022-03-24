@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.12][] - 2022-03-24
+
 ### Added
 
 -   Popover: Added `focusAnchorOnClose` prop to reset the focus back to the anchor element when popover closes and focus is set within. Default to `true`;
@@ -1382,3 +1384,5 @@ _Failed released_
 [2.2.10]: https://github.com/lumapps/design-system/tree/v2.2.10
 [unreleased]: https://github.com/lumapps/design-system/compare/v2.2.11...HEAD
 [2.2.11]: https://github.com/lumapps/design-system/tree/v2.2.11
+[unreleased]: https://github.com/lumapps/design-system/compare/v2.2.12...HEAD
+[2.2.12]: https://github.com/lumapps/design-system/tree/v2.2.12
