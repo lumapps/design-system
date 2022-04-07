@@ -16,6 +16,18 @@ The avatar recommended size to display actions is `xl`.
 
 <DemoBlock orientation="horizontal" demo="actions" />
 
+### Accessibility concerns
+
+Avatars can have 3 different accessibility use cases:
+- **default**: avatars are usually decorative images, so you can use an empty `alt` attribute
+  (See [the MDN `img` documentation for more info](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#accessibility_concerns))
+- **button**: using the `onClick` transforms avatars into a button, you **should also provide an `aria-label`** in
+  `thumbnailProps` to describe the action to screen readers
+- **link**: using the `linkAs` and/or `linkProps` transforms avatars into a link, you **should also provide an `aria-label`**
+  in the `linkProps` to describe the link for screen readers
+
+See the [button page](../button#accessibility-concerns) for the accessibility concerns on actions button.
+
 ### Properties
 
 <PropTable component="Avatar" />
