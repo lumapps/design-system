@@ -9,7 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
--   CommentBlock: Move the comment date to below comment text and add a tooltip to display the full date with the added `fullDate` prop;
+-   CommentBlock: Added `fullDate` prop displaying when hovering the date with the mouse;
+
+### Changed
+
+-   CommentBlock: Move the comment date to below comment text;
 
 ### Fixed
 
