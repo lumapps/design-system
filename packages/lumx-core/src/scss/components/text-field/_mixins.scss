@@ -160,7 +160,7 @@
     flex: 1 1 auto;
     flex-wrap: wrap;
     align-items: center;
-    margin: calc((var(--lumx-text-field-input-min-height) - (var(--lumx-size-s) - 6px)) / 2) 0;
+    margin: calc((var(--lumx-text-field-input-min-height) - var(--lumx-size-s) - 6px) / 2) 0;
 
     .#{$lumx-base-prefix}-chip {
         margin: $lumx-chip-group-spacing 0;
