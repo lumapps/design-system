@@ -8,10 +8,10 @@ export const App = ({ theme }: any) => (
             hasActions
             isOpen
             actions={[
-                <Button key="button0" emphasis={Emphasis.low} size={Size.s} leftIcon={mdiHeart}>
+                <Button key="button0" theme={theme} emphasis={Emphasis.low} size={Size.s} leftIcon={mdiHeart}>
                     24 likes
                 </Button>,
-                <Button key="button1" emphasis={Emphasis.low} size={Size.s} leftIcon={mdiReply}>
+                <Button key="button1" theme={theme} emphasis={Emphasis.low} size={Size.s} leftIcon={mdiReply}>
                     2 replies
                 </Button>,
             ]}
@@ -24,7 +24,7 @@ export const App = ({ theme }: any) => (
             <CommentBlock
                 hasActions
                 actions={
-                    <Button emphasis={Emphasis.low} size={Size.s} leftIcon={mdiHeart}>
+                    <Button theme={theme} emphasis={Emphasis.low} size={Size.s} leftIcon={mdiHeart}>
                         24 likes
                     </Button>
                 }
@@ -37,7 +37,7 @@ export const App = ({ theme }: any) => (
             <CommentBlock
                 hasActions
                 actions={
-                    <Button emphasis={Emphasis.low} size={Size.s} leftIcon={mdiHeart}>
+                    <Button theme={theme} emphasis={Emphasis.low} size={Size.s} leftIcon={mdiHeart}>
                         16 likes
                     </Button>
                 }
@@ -52,10 +52,10 @@ export const App = ({ theme }: any) => (
         <CommentBlock
             hasActions
             actions={[
-                <Button key="button0" emphasis={Emphasis.low} size={Size.s} leftIcon={mdiHeart}>
+                <Button key="button0" theme={theme} emphasis={Emphasis.low} size={Size.s} leftIcon={mdiHeart}>
                     24 likes
                 </Button>,
-                <Button key="button1" emphasis={Emphasis.low} size={Size.s} leftIcon={mdiReply}>
+                <Button key="button1" theme={theme} emphasis={Emphasis.low} size={Size.s} leftIcon={mdiReply}>
                     2 replies
                 </Button>,
             ]}
