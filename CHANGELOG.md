@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.13][] - 2022-04-08
+
 ### Added
 
 -   CommentBlock: Added `fullDate` prop displaying when hovering the date with the mouse;
@@ -1398,3 +1400,5 @@ _Failed released_
 [2.2.11]: https://github.com/lumapps/design-system/tree/v2.2.11
 [unreleased]: https://github.com/lumapps/design-system/compare/v2.2.12...HEAD
 [2.2.12]: https://github.com/lumapps/design-system/tree/v2.2.12
+[unreleased]: https://github.com/lumapps/design-system/compare/v2.2.13...HEAD
+[2.2.13]: https://github.com/lumapps/design-system/tree/v2.2.13
