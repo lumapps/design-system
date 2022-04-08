@@ -6,10 +6,10 @@ export const App = ({ theme }: any) => (
     <CommentBlock
         hasActions
         actions={[
-            <Button key="button0" emphasis={Emphasis.low} size={Size.s} leftIcon={mdiHeart}>
+            <Button key="button0" theme={theme} emphasis={Emphasis.low} size={Size.s} leftIcon={mdiHeart}>
                 24 likes
             </Button>,
-            <Button key="button1" emphasis={Emphasis.low} size={Size.s} leftIcon={mdiReply}>
+            <Button key="button1" theme={theme} emphasis={Emphasis.low} size={Size.s} leftIcon={mdiReply}>
                 Reply
             </Button>,
         ]}

@@ -2,7 +2,7 @@ import React, { Children, forwardRef, KeyboardEvent, KeyboardEventHandler, React
 
 import classNames from 'classnames';
 
-import { Avatar, Size, Theme } from '@lumx/react';
+import { Avatar, Size, Theme, Tooltip } from '@lumx/react';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses, ValueOf } from '@lumx/react/utils';
 
 import isFunction from 'lodash/isFunction';
@@ -27,8 +27,10 @@ export interface CommentBlockProps extends GenericProps {
     avatarProps: AvatarProps;
     /** Comment block replies. */
     children?: ReactNode;
-    /** Comment date. */
+    /** Comment date with the minimal timestamp informations (xx minutes, x hours, yesterday, 6 days, Month Day, Month Day Year)*/
     date: string;
+    /** Comment date with the full timestamp informations (day, month, year, time) */
+    fullDate?: string;
     /** Whether the component has actions to display or not. */
     hasActions?: boolean;
     /** Action toolbar header content. */
@@ -85,6 +87,7 @@ export const CommentBlock: Comp<CommentBlockProps, HTMLDivElement> = forwardRef(
         children,
         className,
         date,
+        fullDate,
         hasActions,
         headerActions,
         isOpen,
@@ -146,11 +149,18 @@ export const CommentBlock: Comp<CommentBlockProps, HTMLDivElement> = forwardRef(
                             >
                                 {name}
                             </span>
-                            {date && <span className={`${CLASSNAME}__date`}>{date}</span>}
                             {headerActions && <span className={`${CLASSNAME}__header-actions`}>{headerActions}</span>}
                         </div>
 
                         <div className={`${CLASSNAME}__text`}>{text}</div>
+                        {date &&
+                            (fullDate ? (
+                                <Tooltip label={fullDate} placement="top">
+                                    <span className={`${CLASSNAME}__date`}>{date}</span>
+                                </Tooltip>
+                            ) : (
+                                <span className={`${CLASSNAME}__date`}>{date}</span>
+                            ))}
                     </div>
                     {hasActions && <div className={`${CLASSNAME}__actions`}>{actions}</div>}
                 </div>
