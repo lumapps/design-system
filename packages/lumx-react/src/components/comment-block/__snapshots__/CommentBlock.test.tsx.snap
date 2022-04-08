@@ -37,11 +37,6 @@ exports[`<CommentBlock> Snapshots and structure should render story 'WithHeaderA
             Emmitt O. Lum
           </span>
           <span
-            className="lumx-comment-block__date"
-          >
-            4 hours ago
-          </span>
-          <span
             className="lumx-comment-block__header-actions"
           >
             <IconButton
@@ -58,6 +53,16 @@ exports[`<CommentBlock> Snapshots and structure should render story 'WithHeaderA
         >
           All the rumors have finally died down and many skeptics have tightened their lips, the iPod does support video format now on its fifth generation.
         </div>
+        <Tooltip
+          label="Monday, March 30, 2021 at 4:06 PM"
+          placement="top"
+        >
+          <span
+            className="lumx-comment-block__date"
+          >
+            5 days
+          </span>
+        </Tooltip>
       </div>
       <div
         className="lumx-comment-block__actions"
