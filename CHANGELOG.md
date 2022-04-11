@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Slideshow: Avoid slides that are not displayed to be focusable and read by a screen reader.
+
 ## [2.2.25][] - 2022-08-04
 
 ### Changed
