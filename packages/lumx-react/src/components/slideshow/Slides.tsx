@@ -4,6 +4,7 @@ import classNames from 'classnames';
 
 import { FULL_WIDTH_PERCENT } from '@lumx/react/components/slideshow/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme } from '@lumx/react/utils';
+import { useSlideFocusManagement } from './useSlideFocusManagement';
 
 export interface SlidesProps extends GenericProps, HasTheme {
     /** current slide active */
@@ -58,6 +59,10 @@ export const Slides: Comp<SlidesProps, HTMLDivElement> = forwardRef((props, ref)
         afterSlides,
         ...forwardedProps
     } = props;
+    const wrapperRef = React.useRef<HTMLDivElement>(null);
+
+    useSlideFocusManagement({ wrapperRef, activeIndex, groupBy });
+
     // Inline style of wrapper element.
     const wrapperStyle: CSSProperties = { transform: `translateX(-${FULL_WIDTH_PERCENT * activeIndex}%)` };
 
@@ -77,9 +82,13 @@ export const Slides: Comp<SlidesProps, HTMLDivElement> = forwardRef((props, ref)
                 className={`${CLASSNAME}__slides`}
                 onMouseEnter={toggleAutoPlay}
                 onMouseLeave={toggleAutoPlay}
-                aria-live={isAutoPlaying ? 'off' : 'polite'}
             >
-                <div className={`${CLASSNAME}__wrapper`} style={wrapperStyle}>
+                <div
+                    ref={wrapperRef}
+                    className={classNames(`${CLASSNAME}__wrapper`)}
+                    style={wrapperStyle}
+                    aria-live={isAutoPlaying ? 'off' : 'polite'}
+                >
                     {children}
                 </div>
             </div>

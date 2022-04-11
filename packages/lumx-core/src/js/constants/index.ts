@@ -33,3 +33,12 @@ export const TOOLTIP_LONG_PRESS_DELAY = {
     open: 250,
     close: 3000,
 };
+
+/**
+ * List of elements that receives focus and can be interacted with.
+ */
+export const INTERACTIVE_ELEMENTS = ['a', 'button', 'select', 'input', 'textarea', '[tabindex="0"]'];
+/**
+ * List of elements that receives focus and can be interacted, as a string.
+ */
+export const INTERACTIVE_ELEMENTS_STRING = INTERACTIVE_ELEMENTS.join(',');
