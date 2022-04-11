@@ -69,6 +69,10 @@
         overflow: hidden;
         transition: max-height $lumx-expansion-panel-transition-duration;
 
+        @media (prefers-reduced-motion: reduce) {
+            transition: none;
+        }
+
         #{$self}--is-close & {
             max-height: 0 !important;
         }

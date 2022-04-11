@@ -15,6 +15,10 @@
     opacity: 1;
     transition: opacity $lumx-dialog-transition-duration;
 
+    @media (prefers-reduced-motion: reduce) {
+        transition: none;
+    }
+
     &--is-shown {
         display: block;
     }
@@ -32,6 +36,10 @@
         left: 0;
         animation: lumx-dialog-overlay-show $lumx-dialog-transition-duration;
         background-color: lumx-color-variant('dark', 'L1');
+
+        @media (prefers-reduced-motion: reduce) {
+            animation: none;
+        }
     }
 
     &__container {
@@ -41,6 +49,10 @@
         flex-direction: column;
         animation: lumx-dialog-show $lumx-dialog-transition-duration;
         transform: translateY(0);
+
+        @media (prefers-reduced-motion: reduce) {
+            animation: none;
+        }
     }
 
     &__wrapper {

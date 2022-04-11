@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   @lumx/core: all CSS animations and transitions are now disabled on browsers with `prefers-reduced-motion` media feature enabled.
+
 ## [2.2.13][] - 2022-04-08
 
 ### Added

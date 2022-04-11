@@ -27,6 +27,10 @@
         background-color: lumx-color-variant('primary', 'N');
         transform-origin: left;
         transition: transform $lumx-progress-tracker-transition-duration;
+
+        @media (prefers-reduced-motion: reduce) {
+            transition: none;
+        }
     }
 }
 

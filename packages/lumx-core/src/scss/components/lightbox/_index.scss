@@ -16,6 +16,11 @@
     opacity: 1;
     transition: opacity $lumx-lightbox-transition-duration;
 
+    @media (prefers-reduced-motion: reduce) {
+        animation: none;
+        transition: none;
+    }
+
     &--is-shown {
         display: block;
     }
