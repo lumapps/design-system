@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
--   RadioButton: Added `inputRef` prop to forward a ref on the native input;
+-   RadioButton: Added `inputRef` prop to forward a ref on the native input.
+-   Checkbox: Added `inputRef` prop to forward a ref on the native input.
 
 ### Changed
 
