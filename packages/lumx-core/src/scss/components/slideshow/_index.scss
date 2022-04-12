@@ -28,6 +28,10 @@
         display: flex;
         transition: transform $lumx-slideshow-transition-duration;
 
+        @media (prefers-reduced-motion: reduce) {
+            transition: none;
+        }
+
         #{$self}--fill-height & {
             min-height: 0;
             flex: 1 1 auto;
@@ -82,6 +86,11 @@
         align-items: center;
         transition: transform $lumx-slideshow-transition-duration;
         padding: 4px 0;
+
+        @media (prefers-reduced-motion: reduce) {
+            transition: none;
+        }
+
     }
 
     &__pagination-item {
@@ -100,6 +109,10 @@
         transform: scale(1);
         transition: transform $lumx-slideshow-transition-duration;
         user-select: none;
+
+        @media (prefers-reduced-motion: reduce) {
+            transition: none;
+        }
 
         #{$self}--theme-light & {
             background-color: lumx-color-variant('dark', 'L4');
