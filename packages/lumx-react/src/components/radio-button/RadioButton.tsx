@@ -15,6 +15,8 @@ export interface RadioButtonProps extends GenericProps {
     helper?: string;
     /** Native input id property. */
     id?: string;
+    /** Native input ref. */
+    inputRef?: React.Ref<HTMLInputElement>;
     /** Whether it is checked or not. */
     isChecked?: boolean;
     /** Whether the component is disabled or not. */
@@ -62,6 +64,7 @@ export const RadioButton: Comp<RadioButtonProps, HTMLDivElement> = forwardRef((p
         disabled,
         helper,
         id,
+        inputRef,
         isChecked = checked,
         isDisabled = disabled,
         label,
@@ -96,6 +99,7 @@ export const RadioButton: Comp<RadioButtonProps, HTMLDivElement> = forwardRef((p
         >
             <div className={`${CLASSNAME}__input-wrapper`}>
                 <input
+                    ref={inputRef}
                     className={`${CLASSNAME}__input-native`}
                     disabled={isDisabled}
                     id={radioButtonId}
