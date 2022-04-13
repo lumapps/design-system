@@ -16,6 +16,8 @@ export interface CheckboxProps extends GenericProps {
     helper?: string;
     /** Native input id property. */
     id?: string;
+    /** Native input ref. */
+    inputRef?: React.Ref<HTMLInputElement>;
     /** Whether it is checked or not. */
     isChecked?: boolean;
     /** Whether the component is disabled or not. */
@@ -65,6 +67,7 @@ export const Checkbox: Comp<CheckboxProps, HTMLDivElement> = forwardRef((props, 
         disabled,
         helper,
         id,
+        inputRef,
         isChecked = checked,
         isDisabled = disabled,
         label,
@@ -100,6 +103,7 @@ export const Checkbox: Comp<CheckboxProps, HTMLDivElement> = forwardRef((props, 
         >
             <div className={`${CLASSNAME}__input-wrapper`}>
                 <input
+                    ref={inputRef}
                     type="checkbox"
                     id={inputId}
                     className={`${CLASSNAME}__input-native`}

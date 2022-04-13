@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   RadioButton: Added `inputRef` prop to forward a ref on the native input.
+-   Checkbox: Added `inputRef` prop to forward a ref on the native input.
+
 ### Changed
 
 -   @lumx/core: all CSS animations and transitions are now disabled on browsers with `prefers-reduced-motion` media feature enabled.
