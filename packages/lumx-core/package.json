@@ -42,7 +42,7 @@
         "version": "yarn version-changelog ../../CHANGELOG.md && yarn changelog-verify ../../CHANGELOG.md && git add ../../CHANGELOG.md"
     },
     "sideEffects": false,
-    "version": "2.2.13",
+    "version": "2.2.14",
     "devDependencies": {
         "@babel/core": "^7.8.3",
         "@babel/plugin-proposal-class-properties": "^7.8.3",
