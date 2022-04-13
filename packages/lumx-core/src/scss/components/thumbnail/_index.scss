@@ -110,8 +110,10 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-thumbnail--is-clickable {
+    &:not(.#{$lumx-base-prefix}-thumbnail--fill-height) {
+        display: block;
+    }
     position: relative;
-    display: block;
     cursor: pointer;
 
     &::after {
