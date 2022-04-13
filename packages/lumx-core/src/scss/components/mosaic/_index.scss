@@ -54,6 +54,10 @@
         flex-direction: column;
         margin: 1px;
 
+        .#{$lumx-base-prefix}-thumbnail__background {
+            align-items: stretch;
+        }
+
         #{$self}--has-1-thumbnail & {
             &:nth-child(1) {
                 grid-area: b;

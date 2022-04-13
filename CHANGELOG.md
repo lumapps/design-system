@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   @lumx/core: all CSS animations and transitions are now disabled on browsers with `prefers-reduced-motion` media feature enabled.
 
+### Fixed
+
+-   Mosaic: fix mosaic thumbnail not appearing on safari when providing a `onImageClik` prop.
+
 ## [2.2.13][] - 2022-04-08
 
 ### Added
