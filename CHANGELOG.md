@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.15][] - 2022-04-14
+
 ### Fixed
 
 -   Thumbnail: fix css display when thumbnails are fill-height & clickable.
@@ -1423,3 +1425,5 @@ _Failed released_
 [2.2.13]: https://github.com/lumapps/design-system/tree/v2.2.13
 [unreleased]: https://github.com/lumapps/design-system/compare/v2.2.14...HEAD
 [2.2.14]: https://github.com/lumapps/design-system/tree/v2.2.14
+[unreleased]: https://github.com/lumapps/design-system/compare/v2.2.15...HEAD
+[2.2.15]: https://github.com/lumapps/design-system/tree/v2.2.15
