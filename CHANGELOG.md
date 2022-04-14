@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Thumbnail: fix css display when thumbnails are fill-height & clickable.
+
 ## [2.2.14][] - 2022-04-13
 
 ### Added
