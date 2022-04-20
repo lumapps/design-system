@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.16][] - 2022-04-20
+
 ### Added
 
 -   Added forwarded props to the `SelectMultiple` component.
@@ -1431,3 +1433,5 @@ _Failed released_
 [2.2.14]: https://github.com/lumapps/design-system/tree/v2.2.14
 [unreleased]: https://github.com/lumapps/design-system/compare/v2.2.15...HEAD
 [2.2.15]: https://github.com/lumapps/design-system/tree/v2.2.15
+[unreleased]: https://github.com/lumapps/design-system/compare/v2.2.16...HEAD
+[2.2.16]: https://github.com/lumapps/design-system/tree/v2.2.16
