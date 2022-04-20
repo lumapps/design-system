@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Added forwarded props to the `SelectMultiple` component.
+
 ## [2.2.15][] - 2022-04-14
 
 ### Fixed

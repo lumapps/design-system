@@ -73,6 +73,7 @@ export const SelectMultipleField: React.FC<SelectMultipleProps> = ({
     theme,
     value,
     variant,
+    ...forwardedProps
 }) => (
     <>
         {variant === SelectVariant.input && (
@@ -99,6 +100,7 @@ export const SelectMultipleField: React.FC<SelectMultipleProps> = ({
                     onKeyDown={handleKeyboardNav}
                     tabIndex={isDisabled ? undefined : 0}
                     aria-disabled={isDisabled || undefined}
+                    {...forwardedProps}
                 >
                     <div className={`${CLASSNAME}__chips`}>
                         {!isEmpty &&
@@ -139,6 +141,7 @@ export const SelectMultipleField: React.FC<SelectMultipleProps> = ({
                 onClick={onInputClick}
                 ref={anchorRef as RefObject<HTMLAnchorElement>}
                 theme={theme}
+                {...forwardedProps}
             >
                 {isEmpty && <span>{label}</span>}
 

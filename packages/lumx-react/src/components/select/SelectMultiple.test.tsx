@@ -46,6 +46,8 @@ const setup = (props: SetupProps = {}, shallowRendering = true) => {
             (n: ShallowWrapper | ReactWrapper) => n.name() === 'InputHelper' && n.prop('kind') === Kind.info,
         ),
         input: wrapper.find('#select-uid:not(SelectMultipleField)').first(),
+        chip: wrapper.find('Chip'),
+        inputWrapper: wrapper.find('.lumx-select__wrapper'),
         props,
         wrapper,
     };
@@ -187,6 +189,29 @@ describe(`<SelectMultiple>`, () => {
 
             expect(error).toExist();
             expect(helper).toExist();
+        });
+
+        it('should have a data-id as prop', () => {
+            const { inputWrapper } = setup(
+                {
+                    'data-id': 'select',
+                },
+                false,
+            );
+
+            expect(inputWrapper.prop('data-id')).toEqual('select');
+        });
+
+        it('should have a data-id as prop with Chip variant', () => {
+            const { chip } = setup(
+                {
+                    'data-id': 'select',
+                    variant: SelectVariant.chip,
+                },
+                false,
+            );
+
+            expect(chip.prop('data-id')).toEqual('select');
         });
     });
 
