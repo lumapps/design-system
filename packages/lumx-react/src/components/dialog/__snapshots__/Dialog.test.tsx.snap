@@ -152,6 +152,8 @@ exports[`<Dialog> Snapshots and structure should render story DialogWithFocusabl
         theme="light"
       />
       <FlexBox
+        gap="regular"
+        hAlign="bottom"
         orientation="horizontal"
       >
         <DatePickerField
@@ -210,6 +212,14 @@ exports[`<Dialog> Snapshots and structure should render story DialogWithFocusabl
             </ListItem>
           </List>
         </Select>
+        <Button
+          emphasis="high"
+          isDisabled={true}
+          size="m"
+          theme="light"
+        >
+          Disabled button (focus ignored)
+        </Button>
       </FlexBox>
       <div
         tabIndex={0}

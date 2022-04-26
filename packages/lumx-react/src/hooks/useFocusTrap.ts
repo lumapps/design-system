@@ -2,6 +2,15 @@ import { useEffect } from 'react';
 
 import { DOCUMENT } from '@lumx/react/constants';
 
+/** CSS selector listing all tabbable elements. */
+const TABBABLE_ELEMENTS_SELECTOR = `a[href]:not([tabindex="-1"], [disabled], [aria-disabled]),
+button:not([tabindex="-1"], [disabled], [aria-disabled]),
+textarea:not([tabindex="-1"], [disabled], [aria-disabled]),
+input[type="text"]:not([tabindex="-1"], [disabled], [aria-disabled]),
+input[type="radio"]:not([tabindex="-1"], [disabled], [aria-disabled]),
+input[type="checkbox"]:not([tabindex="-1"], [disabled], [aria-disabled]),
+[tabindex]:not([tabindex="-1"], [disabled], [aria-disabled])`;
+
 /**
  * Get first and last elements focusable in an element.
  *
@@ -9,9 +18,7 @@ import { DOCUMENT } from '@lumx/react/constants';
  * @return first and last focusable elements
  */
 function getFocusable(parentElement: HTMLElement) {
-    const focusableElements = parentElement.querySelectorAll<HTMLElement>(
-        'a[href]:not([tabindex="-1"]), button:not([tabindex="-1"]), textarea:not([tabindex="-1"]), input[type="text"]:not([tabindex="-1"]), input[type="radio"]:not([tabindex="-1"]), input[type="checkbox"]:not([tabindex="-1"]), [tabindex]:not([tabindex="-1"])',
-    );
+    const focusableElements = parentElement.querySelectorAll<HTMLElement>(TABBABLE_ELEMENTS_SELECTOR);
 
     if (focusableElements.length <= 0) {
         return {};
@@ -48,21 +55,34 @@ export function useFocusTrap(
                 if (key !== 'Tab') {
                     return;
                 }
-                const { first, last } = getFocusable(focusZoneElement);
+                const focusable = getFocusable(focusZoneElement);
 
                 // Prevent focus switch if no focusable available.
-                if (!first) {
+                if (!focusable.first) {
                     evt.preventDefault();
                     return;
                 }
 
-                if (evt.shiftKey) {
-                    if (document.activeElement === first) {
-                        last?.focus();
-                        evt.preventDefault();
-                    }
-                } else if (document.activeElement === last) {
-                    first?.focus();
+                if (
+                    // No previous focus
+                    !document.activeElement ||
+                    // Previous focus is at the end of the focus zone.
+                    (!evt.shiftKey && document.activeElement === focusable.last) ||
+                    // Previous focus is outside the focus zone
+                    !focusZoneElement.contains(document.activeElement)
+                ) {
+                    focusable.first.focus();
+                    evt.preventDefault();
+                    return;
+                }
+
+                if (
+                    // Focus order reversed
+                    evt.shiftKey &&
+                    // Previous focus is at the start of the focus zone.
+                    document.activeElement === focusable.first
+                ) {
+                    focusable.last.focus();
                     evt.preventDefault();
                 }
             };
