@@ -6,7 +6,7 @@ import React, { forwardRef, ReactNode } from 'react';
 import { Size } from '..';
 
 export type MarginAutoAlignment = Extract<Alignment, 'top' | 'bottom' | 'right' | 'left'>;
-export type GapSize = Extract<Size, 'regular' | 'big' | 'huge'>;
+export type GapSize = Extract<Size, 'regular' | 'medium' | 'big' | 'huge'>;
 
 /**
  * Defines the props of the component.

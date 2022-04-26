@@ -89,6 +89,86 @@ Array [
 ]
 `;
 
+exports[`<FlexBox> Snapshots and structure should render story 'GapSizeFlex' 1`] = `
+Array [
+  <div
+    className="lumx-flex-box lumx-flex-box--orientation-vertical lumx-flex-box--gap-regular"
+  >
+    <Button
+      emphasis="high"
+      size="m"
+      theme="light"
+    >
+      Item 1
+    </Button>
+    <FlexBox
+      vAlign="left"
+    >
+      <Button
+        emphasis="high"
+        size="m"
+        theme="light"
+      >
+        Item 2
+      </Button>
+    </FlexBox>
+    <FlexBox>
+      <Button
+        emphasis="high"
+        size="m"
+        theme="light"
+      >
+        Item 3
+      </Button>
+    </FlexBox>
+    <FlexBox
+      vAlign="right"
+    >
+      <Button
+        emphasis="high"
+        size="m"
+        theme="light"
+      >
+        Item 4
+      </Button>
+    </FlexBox>
+  </div>,
+  <div
+    className="lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--v-align-left"
+  >
+    <Button
+      emphasis="high"
+      size="m"
+      theme="light"
+    >
+      Item 2
+    </Button>
+  </div>,
+  <div
+    className="lumx-flex-box"
+  >
+    <Button
+      emphasis="high"
+      size="m"
+      theme="light"
+    >
+      Item 3
+    </Button>
+  </div>,
+  <div
+    className="lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--v-align-right"
+  >
+    <Button
+      emphasis="high"
+      size="m"
+      theme="light"
+    >
+      Item 4
+    </Button>
+  </div>,
+]
+`;
+
 exports[`<FlexBox> Snapshots and structure should render story 'HorizontalFlex' 1`] = `
 Array [
   <div

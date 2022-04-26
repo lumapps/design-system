@@ -99,6 +99,10 @@
     gap: $lumx-spacing-unit;
 }
 
+.#{$lumx-base-prefix}-flex-box--gap-medium {
+    gap: $lumx-spacing-unit-medium;
+}
+
 .#{$lumx-base-prefix}-flex-box--gap-big {
     gap: $lumx-spacing-unit-big;
 }

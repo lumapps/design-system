@@ -67,6 +67,7 @@ export const Size = {
     xxl: 'xxl',
     tiny: 'tiny',
     regular: 'regular',
+    medium: 'medium',
     big: 'big',
     huge: 'huge',
 } as const;

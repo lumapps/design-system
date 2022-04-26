@@ -1,5 +1,5 @@
 import { mdiPencil } from '@lumx/icons';
-import { Alignment, Button, Icon, Orientation } from '@lumx/react';
+import { Alignment, Button, Icon, Orientation, Size } from '@lumx/react';
 import { boolean, number, select, text } from '@storybook/addon-knobs';
 import fromPairs from 'lodash/fromPairs';
 import React from 'react';
@@ -18,6 +18,7 @@ const flexViewKnobConfigs: Array<
     ['fillSpace', boolean],
     ['noShrink', boolean],
     ['wrap', boolean],
+    ['gap', select, [DEFAULT_PROPS.gap, Size.regular, Size.medium, Size.big, Size.huge]],
     ['hAlign', select, [DEFAULT_PROPS.hAlign, Alignment.center, Alignment.top, Alignment.bottom]],
     ['vAlign', select, [DEFAULT_PROPS.vAlign, Alignment.center, Alignment.right, Alignment.left]],
     ['orientation', select, [undefined, Orientation.horizontal, Orientation.vertical]],
@@ -52,7 +53,7 @@ const setupFlexBoxKnobs = (group: string, knobs: FlexBoxPropName[] = []) =>
 const flexChildKnobs: FlexBoxPropName[] = ['fillSpace', 'noShrink', 'marginAuto'];
 
 export const Flex = () => (
-    <FlexBox {...setupFlexBoxKnobs('-flex container', ['orientation', 'hAlign', 'vAlign', 'wrap'])}>
+    <FlexBox {...setupFlexBoxKnobs('-flex container', ['orientation', 'hAlign', 'vAlign', 'wrap', 'gap'])}>
         <FlexBox {...setupFlexBoxKnobs('start', flexChildKnobs)}>
             <Icon icon={mdiPencil} />
         </FlexBox>
@@ -77,6 +78,16 @@ const vAlign = (prefix?: string) =>
         [Alignment.center, Alignment.left, Alignment.right],
         Alignment.center,
     );
+
+const orientation = (prefix?: string) =>
+    select(
+        `${prefix ? `${prefix}: ` : ''}Set orientation`,
+        [Orientation.vertical, Orientation.horizontal],
+        Orientation.vertical,
+    );
+
+const gapSize = (prefix?: string) =>
+    select(`${prefix ? `${prefix}: ` : ''}Gap size`, [Size.regular, Size.medium, Size.big, Size.huge], Size.regular);
 
 export const HorizontalFlex = () => (
     <FlexBox
@@ -118,6 +129,21 @@ export const VerticalFlex = () => (
         </FlexBox>
         <FlexBox vAlign={Alignment.right}>
             <Button>Right</Button>
+        </FlexBox>
+    </FlexBox>
+);
+
+export const GapSizeFlex = () => (
+    <FlexBox orientation={orientation()} gap={gapSize()}>
+        <Button>Item 1</Button>
+        <FlexBox vAlign={Alignment.left}>
+            <Button>Item 2</Button>
+        </FlexBox>
+        <FlexBox>
+            <Button>Item 3</Button>
+        </FlexBox>
+        <FlexBox vAlign={Alignment.right}>
+            <Button>Item 4</Button>
         </FlexBox>
     </FlexBox>
 );
