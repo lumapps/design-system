@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Dialog & Lightbox: fixed focus trap on disabled elements and protect against focus breaking out.
+
 ## [2.2.16][] - 2022-04-20
 
 ### Added

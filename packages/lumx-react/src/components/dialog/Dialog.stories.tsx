@@ -333,7 +333,7 @@ export const DialogWithFocusableElements = ({ theme }: any) => {
                         label="Checkbox input"
                     />
 
-                    <FlexBox orientation="horizontal">
+                    <FlexBox orientation="horizontal" hAlign="bottom" gap="regular">
                         <DatePickerField
                             locale="fr"
                             label="Start date"
@@ -366,6 +366,8 @@ export const DialogWithFocusableElements = ({ theme }: any) => {
                                 ))}
                             </List>
                         </Select>
+
+                        <Button isDisabled>Disabled button (focus ignored)</Button>
                     </FlexBox>
 
                     {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
