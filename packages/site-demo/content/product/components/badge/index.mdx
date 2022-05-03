@@ -26,6 +26,24 @@ Badges with thumbnail are often used to display custom logos images.
 
 <DemoBlock orientation="horizontal" demo="colors" />
 
+### Accessibility concerns
+
+
+A badge can contain two types of informations: 
+- **An icon/image**, if the information given by this icon is not given by another element next to the badged item,
+then you have to add an alt on the icon to explicit what it means. 
+(Ex: a badge icon telling the user is an admin, the alt could be "This user is an administrator" ).
+If the information is already available as a text near the badged element, then you don't have to repeat the
+information. Leave the icon's `alt` empty.
+- **A number**, if the information given by this icon is not given by another element next to the badged item, 
+then you have to wrap your number in a span with a `aria-hidden=true` attribute and add a `aria-label` on the badge that
+gives the information.
+(Ex: a badge number counting the number of unread notifications, the aria-label could be "You have X unread notifications").
+If the information is already available as a text near the badged element, then you don't have to repeat the
+information. Keep the number wrapped in `aria-hidden=true` span, and leave no `aria-label` on the Badge component.
+
+Keep in mind that the color can also carry an information, it may be translated for screen-readers through alt texts.
+
 ### Properties
 
 <PropTable component="Badge" />
