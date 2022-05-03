@@ -1,0 +1,25 @@
+@import '~sass-mq';
+@import '~@lumx/core/scss/design-tokens';
+@import '~@lumx/core/scss/core';
+@import '../variables';
+
+/* ==========================================================================
+   Main
+   ========================================================================== */
+
+.main {
+    padding: $lumx-spacing-unit 0;
+
+    // Non responsive: add spacings
+    @include mq($from: desktop) {
+        padding: $lumx-spacing-unit * 6 0;
+        margin-left: $main-nav-width;
+    }
+
+    &__wrapper {
+        position: relative;
+        max-width: 800px;
+        padding: 0 $lumx-spacing-unit-big;
+        margin: 0 auto;
+    }
+}

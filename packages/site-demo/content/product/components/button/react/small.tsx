@@ -5,7 +5,7 @@ import React from 'react';
 
 export const App = ({ theme }: any) => (
     <>
-        <FlexBox gap={Size.big} orientation={Orientation.horizontal}>
+        <FlexBox gap={Size.big} orientation={Orientation.horizontal} wrap>
             <Button size={Size.s} theme={theme}>
                 Default
             </Button>
@@ -32,7 +32,7 @@ export const App = ({ theme }: any) => (
             <IconButton label="Add" icon={mdiPlus} size={Size.s} theme={theme} />
         </FlexBox>
 
-        <FlexBox gap={Size.big} orientation={Orientation.horizontal}>
+        <FlexBox gap={Size.big} orientation={Orientation.horizontal} wrap>
             <Button emphasis={Emphasis.medium} size={Size.s} theme={theme}>
                 Default
             </Button>
@@ -58,7 +58,7 @@ export const App = ({ theme }: any) => (
             <IconButton label="Add" icon={mdiPlus} emphasis={Emphasis.medium} size={Size.s} theme={theme} />
         </FlexBox>
 
-        <FlexBox gap={Size.big} orientation={Orientation.horizontal}>
+        <FlexBox gap={Size.big} orientation={Orientation.horizontal} wrap>
             <Button emphasis={Emphasis.low} size={Size.s} theme={theme}>
                 Default
             </Button>

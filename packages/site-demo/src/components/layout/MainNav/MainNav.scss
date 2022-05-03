@@ -1,0 +1,90 @@
+@import '~sass-mq';
+@import '~@lumx/core/scss/design-tokens';
+@import '~@lumx/core/scss/core';
+@import '~@lumx/core/scss/components/link/mixins';
+@import '../variables';
+
+/* ==========================================================================
+   Main nav
+   ========================================================================== */
+
+$transition-duration: 300ms;
+
+.main-nav {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: $main-nav-width;
+    background-color: white;
+    overflow-y: auto;
+
+    // Non responsive: hide side nav close button
+    @include mq($from: desktop) {
+        &__close-button {
+            display: none !important;
+        }
+    }
+
+    // Responsive: side nav overlay
+    @include mq($until: desktop) {
+        @include lumx-elevation(4);
+        z-index: 1000;
+        opacity: 0;
+        transform: translateX(-24px);
+        transition: visibility $transition-duration, transform $transition-duration,
+            opacity $transition-duration linear 100ms;
+        visibility: hidden;
+
+        @media (prefers-reduced-motion: reduce) {
+            transition: none;
+        }
+
+        &--is-open {
+            opacity: 1;
+            transform: translateX(0px);
+            visibility: visible;
+        }
+
+        &__close-button {
+            position: absolute !important;
+            top: $lumx-spacing-unit;
+            right: $lumx-spacing-unit;
+        }
+    }
+
+    &__wrapper {
+        position: relative;
+        min-height: 100%;
+        padding: $lumx-spacing-unit * 6 $lumx-spacing-unit * 4;
+        background-color: lumx-color-variant(dark, L6);
+    }
+
+    &__overlay {
+        position: fixed;
+        z-index: 999;
+        border: none;
+        appearance: none !important;
+        background-color: lumx-color-variant(dark, L1);
+        inset: 0;
+        opacity: 0;
+        transition: opacity $transition-duration, visibility $transition-duration;
+        visibility: hidden;
+
+        @media (prefers-reduced-motion: reduce) {
+            transition: none;
+        }
+
+        // Backdrop when responsive nav is open
+        @include mq($until: desktop) {
+            &--is-open {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    }
+
+    .home-logo-link {
+        margin-bottom: $lumx-spacing-unit * 4;
+    }
+}
