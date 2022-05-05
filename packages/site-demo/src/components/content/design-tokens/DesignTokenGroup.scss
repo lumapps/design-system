@@ -1,0 +1,19 @@
+@import '~@lumx/core/scss/design-tokens';
+@import '~@lumx/core/scss/core';
+@import '~@lumx/core/scss/components/divider/variables';
+
+/* ==========================================================================
+   Design token group
+   ========================================================================== */
+
+.design-token-group {
+    border-radius: var(--lumx-border-radius);
+
+    &--theme-light {
+        border: 1px solid lumx-color-variant('dark', $lumx-divider-color-variant);
+    }
+
+    &--theme-dark {
+        background-color: lumx-color-variant('dark', 'N');
+    }
+}

@@ -1,7 +1,7 @@
-import { CodeBlock } from '@lumx/demo/components/CodeBlock';
-import { DemoBlock } from '@lumx/demo/components/DemoBlock';
-import { Link } from '@lumx/demo/components/Link';
-import { PropTable } from '@lumx/demo/components/PropTable';
+import { CodeBlock } from '@lumx/demo/components/content/CodeBlock/CodeBlock';
+import { DemoBlock } from '@lumx/demo/components/content/DemoBlock/DemoBlock';
+import { PropTable } from '@lumx/demo/components/content/PropTable/PropTable';
+import { Link } from '@lumx/demo/components/base/Link';
 
 import { MDXProvider } from '@mdx-js/react';
 import 'focus-visible';

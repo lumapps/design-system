@@ -1,0 +1,16 @@
+@import '~sass-mq';
+@import '~@lumx/core/scss/design-tokens';
+@import '~@lumx/core/scss/core';
+
+/* ==========================================================================
+   Responsive top bar
+   ========================================================================== */
+
+.responsive-top-bar {
+    padding: $lumx-spacing-unit;
+    margin-bottom: $lumx-spacing-unit;
+
+    @include mq($from: desktop) {
+        display: none !important;
+    }
+}

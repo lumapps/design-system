@@ -1,0 +1,15 @@
+@import '~@lumx/core/scss/design-tokens';
+@import '~@lumx/core/scss/core';
+
+/* ==========================================================================
+   Code block
+   ========================================================================== */
+
+.code-block {
+    display: block;
+    padding: $lumx-spacing-unit * 2;
+    background-color: transparent;
+    color: #333;
+    font-size: 14px;
+    overflow-x: auto;
+}

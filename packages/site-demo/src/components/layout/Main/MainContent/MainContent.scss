@@ -1,0 +1,86 @@
+@import '~@lumx/core/scss/design-tokens';
+@import '~@lumx/core/scss/core';
+@import '~@lumx/core/scss/components/link/mixins';
+
+/* Main content
+   ========================================================================== */
+
+.main-content {
+    &__loading {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+
+        & > h1 {
+            @include lumx-typography(display1);
+
+            display: flex;
+        }
+
+        & > h2 {
+            @include lumx-typography(headline);
+        }
+
+        & > h3 {
+            @include lumx-typography(subtitle2);
+        }
+
+        & > p > strong {
+            @include lumx-typography(subtitle2);
+        }
+
+        & p a {
+            @include lumx-link('primary');
+        }
+
+        /* stylelint-disable-next-line selector-type-no-unknown */
+        code {
+            padding: 0 $lumx-spacing-unit-tiny;
+            background-color: $lumx-color-dark-L5;
+            color: $lumx-color-dark-N;
+            font-family: monospace;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        & > ul {
+            margin-left: $lumx-spacing-unit-huge * 2;
+        }
+
+        & > h2,
+        & > h3,
+        & > h4 {
+            margin-top: $lumx-spacing-unit * 2;
+        }
+
+        & > h1,
+        & > h2,
+        & > h3,
+        & > h4,
+        & > p,
+        & > ul,
+        & > div,
+        & > img,
+        & > table {
+            margin-bottom: $lumx-spacing-unit * 2;
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        & > table tr {
+            border: solid 1px $lumx-color-dark-L5;
+
+            & th,
+            & td {
+                padding: $lumx-spacing-unit * 2;
+            }
+        }
+    }
+}

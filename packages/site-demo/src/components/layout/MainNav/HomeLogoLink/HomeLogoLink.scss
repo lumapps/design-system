@@ -1,0 +1,13 @@
+@import '~@lumx/core/scss/design-tokens';
+@import '~@lumx/core/scss/core';
+
+/* Home logo link
+   ========================================================================== */
+
+.home-logo-link {
+    .lumx-link__content {
+        display: inline-flex;
+        align-items: center;
+        gap: $lumx-spacing-unit-medium;
+    }
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { PageHead } from '@lumx/demo/components/PageHead';
+import { PageHead } from '../components/base/PageHead';
 
 const Page404: React.FC = () => (
     <>

@@ -9,7 +9,7 @@ const CONFIGS = require('../../configs');
 
 exports.createPages = async ({ graphql, actions }) => {
     const { createPage } = actions;
-    const pageTemplate = path.resolve('./src/components/templates/MDXPageTemplate.tsx');
+    const pageTemplate = path.resolve('./src/templates/MDXPageTemplate.tsx');
     const result = await graphql(
         `
             {
