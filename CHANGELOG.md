@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.17][] - 2022-04-28
+
 ### Fixed
 
 -   Dialog & Lightbox: fixed focus trap on disabled elements and protect against focus breaking out.
@@ -1444,3 +1446,5 @@ _Failed released_
 [2.2.15]: https://github.com/lumapps/design-system/tree/v2.2.15
 [unreleased]: https://github.com/lumapps/design-system/compare/v2.2.16...HEAD
 [2.2.16]: https://github.com/lumapps/design-system/tree/v2.2.16
+[unreleased]: https://github.com/lumapps/design-system/compare/v2.2.17...HEAD
+[2.2.17]: https://github.com/lumapps/design-system/tree/v2.2.17
