@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.18-alpha-hooks.1][] - 2022-05-09
+
 ### Added
 
 -   Hooks: Export `useFocusWithin` hook in `@lumx/react/hooks/useFocusWithin`
@@ -1452,3 +1454,5 @@ _Failed released_
 [2.2.16]: https://github.com/lumapps/design-system/tree/v2.2.16
 [unreleased]: https://github.com/lumapps/design-system/compare/v2.2.17...HEAD
 [2.2.17]: https://github.com/lumapps/design-system/tree/v2.2.17
+[unreleased]: https://github.com/lumapps/design-system/compare/v2.2.18-alpha-hooks.1...HEAD
+[2.2.18-alpha-hooks.1]: https://github.com/lumapps/design-system/tree/v2.2.18-alpha-hooks.1

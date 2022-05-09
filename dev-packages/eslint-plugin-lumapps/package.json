@@ -1,7 +1,7 @@
 {
     "name": "eslint-plugin-lumapps",
     "private": true,
-    "version": "2.2.17",
+    "version": "2.2.18-alpha-hooks.1",
     "license": "MIT",
     "main": "index.js"
 }
