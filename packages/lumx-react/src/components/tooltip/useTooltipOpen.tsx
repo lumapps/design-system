@@ -95,13 +95,16 @@ export function useTooltipOpen(delay: number | undefined, anchorElement: HTMLEle
         );
 
         // Attach events
-        for (const [node, eventType, evenHandler] of events) {
-            node.addEventListener(eventType, evenHandler);
+        for (const [node, eventType, eventHandler] of events) {
+            node.addEventListener(eventType, eventHandler);
         }
         return () => {
+            // Clear pending timers.
+            if (timer) clearTimeout(timer);
+
             // Detach events.
-            for (const [node, eventType, evenHandler] of events) {
-                node.removeEventListener(eventType, evenHandler);
+            for (const [node, eventType, eventHandler] of events) {
+                node.removeEventListener(eventType, eventHandler);
             }
         };
     }, [anchorElement, delay]);

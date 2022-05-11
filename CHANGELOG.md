@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Tooltip: clear pending timers when the component unmounts
+
 ## [2.2.17][] - 2022-04-28
 
 ### Fixed
