@@ -75,7 +75,7 @@ export const MainNav: React.FC<MainNavProps> = (props) => {
     useEffect(() => {
         if (locationPath) {
             // Close responsive menu on location change.
-            close();
+            closeMenu();
             // Open menus for current location path.
             setOpenPaths([locationPath]);
             // Scroll to current page link.
