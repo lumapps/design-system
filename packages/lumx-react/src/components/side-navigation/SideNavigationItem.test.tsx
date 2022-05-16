@@ -2,6 +2,7 @@ import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
+import without from 'lodash/without';
 
 import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
@@ -51,12 +52,27 @@ describe(`<${SideNavigationItem.displayName}>`, () => {
             expect(root).toHaveClassName(CLASSNAME);
         });
 
-        it('should render correctly with splitted actions', () => {
+        it('should render correctly with split actions', () => {
             const { root, wrapper } = setup({ linkProps: { href: 'http://toto.com' }, onClick: () => null });
             expect(wrapper).toMatchSnapshot();
 
             expect(root).toExist();
             expect(root).toHaveClassName(CLASSNAME);
+        });
+
+        it('should unmount children by default when closed', () => {
+            const { children } = setup({
+                children: <SideNavigationItem label="Child 1" toggleButtonProps={{ label: 'Toggle' }} />,
+            });
+            expect(children).not.toExist();
+        });
+
+        it('should keep children in DOM when closed and with closeMode="hide"', () => {
+            const { children } = setup({
+                closeMode: 'hide',
+                children: <SideNavigationItem key="1" label="Child 1" toggleButtonProps={{ label: 'Toggle' }} />,
+            });
+            expect(children).toExist();
         });
     });
 
@@ -67,7 +83,8 @@ describe(`<${SideNavigationItem.displayName}>`, () => {
         it('should use default props', () => {
             const { root } = setup();
 
-            for (const prop of Object.keys(DEFAULT_PROPS)) {
+            const propNames = without(Object.keys(DEFAULT_PROPS), 'closeMode');
+            for (const prop of propNames) {
                 const className = getBasicClass({ prefix: CLASSNAME, type: prop, value: DEFAULT_PROPS[prop] });
                 if (className) {
                     expect(root).toHaveClassName(className);

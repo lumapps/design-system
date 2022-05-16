@@ -163,3 +163,29 @@ export const With3LevelsAndMultiActions = () => {
         </SideNavigation>
     );
 };
+
+/** Using closeMode="hide" keeps children in DOM on close */
+export const CloseModeHide = () => {
+    const [isOpen, setIsOpen] = React.useState(false);
+    const toggleL1 = () => setIsOpen(!isOpen);
+
+    return (
+        <SideNavigation>
+            <SideNavigationItem
+                closeMode="hide"
+                label="Level 1"
+                emphasis={Emphasis.high}
+                isOpen={isOpen}
+                onClick={toggleL1}
+                toggleButtonProps={{ label: 'Toggle' }}
+            >
+                <SideNavigationItem
+                    closeMode="hide"
+                    label="Level 2"
+                    emphasis={Emphasis.medium}
+                    toggleButtonProps={{ label: 'Toggle' }}
+                />
+            </SideNavigationItem>
+        </SideNavigation>
+    );
+};
