@@ -4,3 +4,4 @@
 declare module 'prismjs';
 declare module '@mdx-js/react';
 declare module '*.svg';
+declare module 'highlight-words-core';

@@ -72,7 +72,7 @@
         "rollup-plugin-typescript-paths": "^1.2.2",
         "test-data-bot": "^0.8.0",
         "ts-jest": "^26.2.0",
-        "tsconfig-paths-webpack-plugin": "^3.2.0",
+        "tsconfig-paths-webpack-plugin": "^3.3.0",
         "typescript": "^4.1.2",
         "yargs": "^15.4.1",
         "yarn": "^1.19.1"

@@ -1,0 +1,89 @@
+@import 'sass-mq';
+@import '~@lumx/core/scss/design-tokens';
+@import '~@lumx/core/scss/core';
+
+.search-dialog {
+    header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: $lumx-spacing-unit;
+        gap: $lumx-spacing-unit;
+
+        form {
+            flex-grow: 1;
+        }
+    }
+
+    // On small screens
+    @include mq($until: desktop) {
+        .lumx-dialog__container {
+            right: 0 !important;
+            left: 0 !important;
+        }
+    }
+
+    // Center the progress spinner
+    .lumx-progress {
+        margin: $lumx-spacing-unit-big auto;
+    }
+
+    /* Search box */
+    .search-box {
+        --lumx-text-field-input-padding-horizontal: 16px;
+        --lumx-text-field-input-min-height: 52px;
+
+        input[type='search']::-webkit-search-cancel-button {
+            -webkit-appearance: none;
+        }
+    }
+
+    /* Search result list */
+    .search-results {
+        padding: 0;
+    }
+
+    /* Search result list item */
+    .search-result {
+        border-top: 1px solid lumx-color-variant('dark', 'L5');
+
+        .lumx-list-item__link {
+            padding-top: $lumx-spacing-unit-big;
+            padding-bottom: $lumx-spacing-unit-big;
+        }
+
+        .lumx-list-item__link,
+        .lumx-list-item__content {
+            overflow: hidden;
+            width: 100%;
+        }
+
+        &__path {
+            // Parent paths
+            span:not(:last-child),
+            span:not(:first-child)::before {
+                @include lumx-typography('caption');
+                color: lumx-color-variant('dark', 'L2');
+                content: ' > ';
+            }
+            // Title
+            span:last-child {
+                @include lumx-typography('subtitle2');
+            }
+        }
+
+        &__content {
+            @include lumx-typography('caption');
+            overflow: hidden;
+            color: lumx-color-variant('dark', 'L2');
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    }
+
+    // Reset text color when item selected
+    .lumx-list-item__link--is-selected .search-result__path span,
+    .lumx-list-item__link--is-selected .search-result__content {
+        color: inherit;
+    }
+}

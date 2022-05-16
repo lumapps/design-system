@@ -5,6 +5,7 @@ import { mdiMenu } from '@lumx/icons';
 import { IconButton } from '@lumx/react';
 import { MaterialThemeSwitcher } from '@lumx/react/utils/MaterialThemeSwitcher';
 import { HomeLogoLink } from '@lumx/demo/components/layout/MainNav/HomeLogoLink/HomeLogoLink';
+import { SearchButton } from '@lumx/demo/components/search/SearchButton';
 
 import { LumxVersion } from './LumxVersion';
 import './MainHeader.scss';
@@ -35,5 +36,6 @@ export const MainHeader: React.FC<MainHeaderProps> = ({ openMenu, openNavButtonR
                 )
             }
         </Match>
+        <SearchButton />
     </div>
 );

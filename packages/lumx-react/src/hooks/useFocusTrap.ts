@@ -6,6 +6,7 @@ import { DOCUMENT } from '@lumx/react/constants';
 const TABBABLE_ELEMENTS_SELECTOR = `a[href]:not([tabindex="-1"], [disabled], [aria-disabled]),
 button:not([tabindex="-1"], [disabled], [aria-disabled]),
 textarea:not([tabindex="-1"], [disabled], [aria-disabled]),
+input[type="search"]:not([tabindex="-1"], [disabled], [aria-disabled]),
 input[type="text"]:not([tabindex="-1"], [disabled], [aria-disabled]),
 input[type="radio"]:not([tabindex="-1"], [disabled], [aria-disabled]),
 input[type="checkbox"]:not([tabindex="-1"], [disabled], [aria-disabled]),
