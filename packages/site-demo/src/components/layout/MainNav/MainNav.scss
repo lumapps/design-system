@@ -63,6 +63,7 @@ $transition-duration: 300ms;
     &__overlay {
         position: fixed;
         z-index: 999;
+        width: 100vw;
         border: none;
         appearance: none !important;
         background-color: lumx-color-variant(dark, L1);
