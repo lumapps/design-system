@@ -13,7 +13,7 @@ exports[`<SideNavigationItem> Snapshots and structure should render correctly 1`
 </li>
 `;
 
-exports[`<SideNavigationItem> Snapshots and structure should render correctly with splitted actions 1`] = `
+exports[`<SideNavigationItem> Snapshots and structure should render correctly with split actions 1`] = `
 <li
   className="lumx-side-navigation-item lumx-side-navigation-item--emphasis-high"
 >

@@ -8,7 +8,6 @@ module.exports = {
         description: packageJson.description,
         version: packageJson.version,
     },
-    pathPrefix: '__PATH_PREFIX__',
     plugins: [
         // Inject path prefix at runtime (detected with a RegExp pattern).
         {

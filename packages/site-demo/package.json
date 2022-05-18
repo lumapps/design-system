@@ -16,7 +16,7 @@
     },
     "scripts": {
         "clean": "NODE_OPTIONS=--no-warnings gatsby clean",
-        "build": "NODE_OPTIONS=--no-warnings gatsby build --prefix-paths",
+        "build": "NODE_OPTIONS=--no-warnings gatsby build",
         "start": "NODE_OPTIONS=--no-warnings gatsby develop"
     },
     "dependencies": {

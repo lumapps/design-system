@@ -32,8 +32,8 @@ const renderNavItem = (
     const level = path.split('/').length - 2;
     const props: SideNavigationItemProps = {
         label,
+        closeMode: 'hide',
         emphasis: EMPHASIS_BY_LEVEL[level],
-        isOpen: includes(openPaths, path),
         isSelected: locationPath === path,
         toggleButtonProps: { label: 'Toggle' },
     };
@@ -45,18 +45,10 @@ const renderNavItem = (
     } else {
         props.onClick = partial(toggleOpenPath, path);
         props.children = children.map(partial(renderNavItem, openPaths, toggleOpenPath, getChildren, locationPath));
+        props.isOpen = openPaths.some((openPath) => openPath.startsWith(path));
     }
 
     return <SideNavigationItem key={path} {...props} />;
-};
-
-const getParentPaths = (path: string) => {
-    let parentPath = path;
-    const parentPaths: string[] = [];
-    do {
-        parentPaths.push((parentPath = parentPath.replace(/[^/]*\/?$/, '')));
-    } while (parentPath.length > 1);
-    return parentPaths;
 };
 
 /**
@@ -70,7 +62,7 @@ export const MainNav: React.FC<{ location?: Location }> = ({ location }) => {
     const { rootMenuEntries, getChildren } = useMenuItems();
 
     // List of path opened in the menu.
-    const [openPaths, setOpenPaths] = useState<string[]>(() => getParentPaths(locationPath));
+    const [openPaths, setOpenPaths] = useState<string[]>([locationPath]);
     const toggleOpenPath = (path: string) =>
         setOpenPaths((previousOpenPaths) => {
             return includes(previousOpenPaths, path) ? without(previousOpenPaths, path) : [...previousOpenPaths, path];
@@ -97,10 +89,16 @@ export const MainNav: React.FC<{ location?: Location }> = ({ location }) => {
         }
     }, []);
 
-    // Close on location change.
     useEffect(() => {
         if (locationPath) {
+            // Close responsive menu on location change.
             close();
+            // Open menus for current location path.
+            setOpenPaths([locationPath]);
+            // Scroll to current page link.
+            setTimeout(() => {
+                document.querySelector('[aria-current]')?.scrollIntoView();
+            }, 100);
         }
     }, [close, locationPath]);
 

@@ -41,6 +41,11 @@ export interface SideNavigationItemProps extends GenericProps {
     /** Props to pass to the toggle button (minus those already set by the SideNavigationItem props). */
     toggleButtonProps: Pick<IconButtonProps, 'label'> &
         Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis' | 'color' | 'size'>;
+    /**
+     * Choose how the children are hidden when closed
+     * ('hide' keeps the children in DOM but hide them, 'unmount' remove the children from the DOM).
+     */
+    closeMode?: 'hide' | 'unmount';
     /** On action button click callback. */
     onActionClick?(evt: React.MouseEvent): void;
     /** On click callback. */
@@ -62,6 +67,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: Partial<SideNavigationItemProps> = {
     emphasis: Emphasis.high,
+    closeMode: 'unmount',
 };
 
 /**
@@ -85,12 +91,14 @@ export const SideNavigationItem: Comp<SideNavigationItemProps, HTMLLIElement> = 
         onActionClick,
         onClick,
         toggleButtonProps,
+        closeMode = 'unmount',
         ...forwardedProps
     } = props;
 
     const content = children && Children.toArray(children).filter(isComponent(SideNavigationItem));
     const hasContent = !isEmpty(content);
     const shouldSplitActions = Boolean(onActionClick);
+    const showChildren = hasContent && isOpen;
 
     return (
         <li
@@ -100,7 +108,7 @@ export const SideNavigationItem: Comp<SideNavigationItemProps, HTMLLIElement> = 
                 className,
                 handleBasicClasses({
                     emphasis,
-                    isOpen,
+                    isOpen: showChildren,
                     isSelected,
                     prefix: CLASSNAME,
                 }),
@@ -151,7 +159,7 @@ export const SideNavigationItem: Comp<SideNavigationItemProps, HTMLLIElement> = 
                 )
             )}
 
-            {hasContent && isOpen && <ul className={`${CLASSNAME}__children`}>{content}</ul>}
+            {(closeMode === 'hide' || showChildren) && <ul className={`${CLASSNAME}__children`}>{content}</ul>}
         </li>
     );
 });

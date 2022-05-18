@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Tooltip: clear pending timers when the component unmounts
 
+### Added
+
+-   SideNavigationItem: added `closeMode` to `"unmount"` or `"hide"` children when the item is closed.
+
 ## [2.2.17][] - 2022-04-28
 
 ### Fixed
