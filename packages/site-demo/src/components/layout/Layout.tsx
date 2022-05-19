@@ -1,6 +1,11 @@
 import React, { useEffect } from 'react';
-import { Main } from './Main/Main';
+
+import { MainHeader } from './MainHeader/MainHeader';
+import { MainContent } from './MainContent/MainContent';
 import { MainNav } from './MainNav/MainNav';
+import { useResponsiveNavState } from './MainNav/useResponsiveNavState';
+
+import './Layout.scss';
 
 interface Props {
     location?: Location;
@@ -12,10 +17,24 @@ export const Layout: React.FC<Props> = ({ children, location }) => {
     useEffect(() => {
         document.getElementById('gatsby-focus-wrapper')?.removeAttribute('tabIndex');
     }, []);
+
+    // Handle responsive menu open/close.
+    const { openNavButtonRef, closeNavButtonRef, isMenuOpen, openMenu, closeMenu } = useResponsiveNavState();
+
     return (
-        <div className="layout">
-            <MainNav location={location} />
-            <Main>{children}</Main>
-        </div>
+        <>
+            <MainNav
+                location={location}
+                closeMenu={closeMenu}
+                isMenuOpen={isMenuOpen}
+                closeNavButtonRef={closeNavButtonRef}
+            />
+            <main className="main">
+                <div className="main__wrapper">
+                    <MainHeader openNavButtonRef={openNavButtonRef} openMenu={openMenu} />
+                    <MainContent>{children}</MainContent>
+                </div>
+            </main>
+        </>
     );
 };

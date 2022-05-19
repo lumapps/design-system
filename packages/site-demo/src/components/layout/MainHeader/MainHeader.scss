@@ -1,0 +1,40 @@
+@import 'sass-mq';
+@import '~@lumx/core/scss/design-tokens';
+@import '~@lumx/core/scss/core';
+
+/* Main header
+   ========================================================================== */
+
+.main-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: $lumx-spacing-unit-big;
+
+    .home-logo-link {
+        flex-grow: 1;
+    }
+
+    // On big screen
+    @include mq($from: desktop) {
+        // Hide the responsive nav button and home logo link
+        .responsive-nav-button,
+        .home-logo-link {
+            display: none !important;
+        }
+    }
+
+    // On small screens
+    @include mq($until: desktop) {
+        margin-right: -$lumx-spacing-unit;
+        margin-bottom: $lumx-spacing-unit-huge;
+        margin-left: -$lumx-spacing-unit;
+
+        // Move material theme switcher and lumx version link to the end (wrapped on new line)
+        .material-theme-switcher,
+        .lumx-version-link {
+            order: 5;
+        }
+    }
+}

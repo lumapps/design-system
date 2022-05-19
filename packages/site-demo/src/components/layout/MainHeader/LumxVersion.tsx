@@ -18,6 +18,7 @@ export const LumxVersion: React.FC = () => {
     const { version } = data.site.siteMetadata;
     return (
         <Button
+            className="lumx-version-link"
             emphasis={Emphasis.low}
             size={Size.s}
             leftIcon={mdiTagOutline}
