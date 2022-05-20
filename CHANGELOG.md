@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.18][] - 2022-05-20
+
 ### Fixed
 
 -   Tooltip: clear pending timers when the component unmounts
@@ -1456,3 +1458,5 @@ _Failed released_
 [2.2.16]: https://github.com/lumapps/design-system/tree/v2.2.16
 [unreleased]: https://github.com/lumapps/design-system/compare/v2.2.17...HEAD
 [2.2.17]: https://github.com/lumapps/design-system/tree/v2.2.17
+[unreleased]: https://github.com/lumapps/design-system/compare/v2.2.18...HEAD
+[2.2.18]: https://github.com/lumapps/design-system/tree/v2.2.18
