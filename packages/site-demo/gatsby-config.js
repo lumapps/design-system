@@ -1,5 +1,8 @@
 /* eslint-disable */
 const packageJson = require('./package.json');
+const getParentTitlePath = require('./plugins/utils/getParentTitlePath');
+const extractTextFromHTMLPage = require('./plugins/utils/extractTextFromHTMLPage');
+const path = require('path');
 
 module.exports = {
     siteMetadata: {
@@ -9,14 +12,6 @@ module.exports = {
         version: packageJson.version,
     },
     plugins: [
-        // Inject path prefix at runtime (detected with a RegExp pattern).
-        {
-            resolve: 'gatsby-plugin-swarm',
-            options: {
-                prefix: '__PATH_PREFIX__',
-                pattern: /^(\/lumapps-[^/]+)/,
-            },
-        },
         // Load content source files.
         {
             resolve: 'gatsby-source-filesystem',
@@ -72,5 +67,38 @@ module.exports = {
         },
         // Prevent styles from being squashed into a single CSS file.
         'gatsby-plugin-split-css',
+        // LunR search indexing
+        {
+            resolve: `./lumx-lunr-search`,
+            options: {
+                filename: 'search_index.json',
+                getDocumentsForTypes: {
+                    // Index site page with at least a title.
+                    async SitePage({ context = {} }) {
+                        const { title, slug } = context;
+                        if (!title) return;
+                        let content;
+                        if (process.env.NODE_ENV === 'production') {
+                            // In PROD, extract text from the generated page HTML.
+                            content = await extractTextFromHTMLPage(
+                                title,
+                                path.resolve(path.join(__dirname, 'public', slug, 'index.html')),
+                            );
+                        } else {
+                            // In DEV, just use an excerpt.
+                            content = context.excerpt;
+                        }
+                        const parentTitlePath = getParentTitlePath(context);
+                        return { title, content, slug, parentTitlePath };
+                    },
+                },
+                fields: [
+                    { name: 'title', index: true, store: true, attributes: { boost: 20 } },
+                    { name: 'content', index: true, store: true },
+                    { name: 'slug', index: false, store: true },
+                    { name: 'parentTitlePath', index: false, store: true },
+                ],
+            },
+        },
     ],
 };

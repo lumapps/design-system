@@ -5015,7 +5015,7 @@ __metadata:
     rollup-plugin-typescript-paths: ^1.2.2
     test-data-bot: ^0.8.0
     ts-jest: ^26.2.0
-    tsconfig-paths-webpack-plugin: ^3.2.0
+    tsconfig-paths-webpack-plugin: ^3.3.0
     typescript: ^4.1.2
     uid: ^2.0.0
     yargs: ^15.4.1
@@ -14905,20 +14905,6 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"gatsby-plugin-swarm@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "gatsby-plugin-swarm@npm:1.0.3"
-  dependencies:
-    globby: ^11.0.1
-    is-text-path: ^2.0.0
-    p-map: ^4.0.0
-    uglify-js: ^3.10.0
-  peerDependencies:
-    gatsby: ^2.20.0
-  checksum: 65a75db0f85bb6fdaf1efb7ce3a9cca1da8b7305029b479a42017ae983be35ad3ee8c94d2176f3f0d43718a1f151fa8bf97897033396d70746f9c204b4db1433
-  languageName: node
-  linkType: hard
-
 "gatsby-plugin-typescript@npm:^2.4.24":
   version: 2.4.24
   resolution: "gatsby-plugin-typescript@npm:2.4.24"
@@ -16708,6 +16694,13 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"highlight-words-core@npm:^1.2.2":
+  version: 1.2.2
+  resolution: "highlight-words-core@npm:1.2.2"
+  checksum: 737758a8a572c82919552b031df300016164b7d0db6a819d24bc6c7ca2279d3cd6d03497728930d6402423c7a3fc2f42c628a9b01b025c704a0b56a635377511
+  languageName: node
+  linkType: hard
+
 "highlight.js@npm:^8.1.0":
   version: 8.9.1
   resolution: "highlight.js@npm:8.9.1"
@@ -16927,7 +16920,7 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"htmlparser2@npm:^3.10.0, htmlparser2@npm:^3.3.0, htmlparser2@npm:^3.9.1, htmlparser2@npm:^3.9.2":
+"htmlparser2@npm:^3.10.0, htmlparser2@npm:^3.10.1, htmlparser2@npm:^3.3.0, htmlparser2@npm:^3.9.1, htmlparser2@npm:^3.9.2":
   version: 3.10.1
   resolution: "htmlparser2@npm:3.10.1"
   dependencies:
@@ -18566,15 +18559,6 @@ fsevents@~2.1.2:
   dependencies:
     text-extensions: ^1.0.0
   checksum: fb5d78752c22b3f73a7c9540768f765ffcfa38c9e421e2b9af869565307fa1ae5e3d3a2ba016a43549742856846566d327da406e94a5846ec838a288b1704fd2
-  languageName: node
-  linkType: hard
-
-"is-text-path@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "is-text-path@npm:2.0.0"
-  dependencies:
-    text-extensions: ^2.0.0
-  checksum: 3a8725fc7c0d4c7741a97993bc2fecc09a0963660394d3ee76145274366c98ad57c6791d20d4ef829835f573b1137265051c05ecd65fbe72f69bb9ab9e3babbd
   languageName: node
   linkType: hard
 
@@ -20280,6 +20264,17 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"loader-utils@npm:^2.0.0":
+  version: 2.0.2
+  resolution: "loader-utils@npm:2.0.2"
+  dependencies:
+    big.js: ^5.2.2
+    emojis-list: ^3.0.0
+    json5: ^2.1.2
+  checksum: 9078d1ed47cadc57f4c6ddbdb2add324ee7da544cea41de3b7f1128e8108fcd41cd3443a85b7ee8d7d8ac439148aa221922774efe4cf87506d4fb054d5889303
+  languageName: node
+  linkType: hard
+
 "loadjs@npm:^4.2.0":
   version: 4.2.0
   resolution: "loadjs@npm:4.2.0"
@@ -20891,14 +20886,16 @@ fsevents@~2.1.2:
     gatsby-plugin-react-helmet: ^3.3.14
     gatsby-plugin-sass: ^2.3.21
     gatsby-plugin-split-css: ^1.0.2
-    gatsby-plugin-swarm: ^1.0.3
     gatsby-remark-autolink-headers: ^2.3.15
     gatsby-remark-smartypants: ^2.3.13
     gatsby-source-filesystem: ^2.3.36
     gatsby-transformer-remark: ^2.8.46
     glob: ^7.1.6
+    highlight-words-core: ^1.2.2
+    htmlparser2: ^3.10.1
     intersection-observer: ^0.7.0
     lodash: 4.17.21
+    lunr: ^2.3.9
     moment: ^2.24.0
     moment-range: ^4.0.2
     prism-react-renderer: ^0.1.5
@@ -20907,11 +20904,19 @@ fsevents@~2.1.2:
     react-docgen-typescript: ^2.2.2
     react-dom: ^16.13.0
     react-helmet: ^6.1.0
-    tsconfig-paths-webpack-plugin: ^3.2.0
+    tsconfig-paths-webpack-plugin: ^3.3.0
     typescript: ^4.1.2
+    workerize-loader: ^1.3.0
     yaml: ^1.10.0
   languageName: unknown
   linkType: soft
+
+"lunr@npm:^2.3.9":
+  version: 2.3.9
+  resolution: "lunr@npm:2.3.9"
+  checksum: 176719e24fcce7d3cf1baccce9dd5633cd8bdc1f41ebe6a180112e5ee99d80373fe2454f5d4624d437e5a8319698ca6837b9950566e15d2cae5f2a543a3db4b8
+  languageName: node
+  linkType: hard
 
 "macos-release@npm:^2.2.0":
   version: 2.3.0
@@ -30044,13 +30049,6 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"text-extensions@npm:^2.0.0":
-  version: 2.1.0
-  resolution: "text-extensions@npm:2.1.0"
-  checksum: 50a9742bf8155d7fa517a10a44b239e9e134e4f22ae5a83d3eb21f9f77d9368ceb02a83d91031173213b42eecb497cead7578898de95cf5301b8ed50f7635f70
-  languageName: node
-  linkType: hard
-
 "text-table@npm:0.2.0, text-table@npm:^0.2.0":
   version: 0.2.0
   resolution: "text-table@npm:0.2.0"
@@ -30451,17 +30449,6 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"tsconfig-paths-webpack-plugin@npm:^3.2.0":
-  version: 3.2.0
-  resolution: "tsconfig-paths-webpack-plugin@npm:3.2.0"
-  dependencies:
-    chalk: ^2.3.0
-    enhanced-resolve: ^4.0.0
-    tsconfig-paths: ^3.4.0
-  checksum: af3c925c5f3f75051de3f6e95bdad5adba289920ad20392385840563bac8795a3888cd6c30753b1ad8028381e3daf191823ac3783c7118dea6198972e1547349
-  languageName: node
-  linkType: hard
-
 "tsconfig-paths-webpack-plugin@npm:^3.3.0":
   version: 3.3.0
   resolution: "tsconfig-paths-webpack-plugin@npm:3.3.0"
@@ -30781,15 +30768,6 @@ typescript@^3.9.3:
   bin:
     uglifyjs: bin/uglifyjs
   checksum: 066556eeef0d23b1fff1b183c1936b446a8b00cd0301a646780242fd69a5ee9f73190218a1868ca3a0f7f0ba6308bcb89b08eda02dcb462f0afe32e7fa0c8a4f
-  languageName: node
-  linkType: hard
-
-"uglify-js@npm:^3.10.0":
-  version: 3.11.2
-  resolution: "uglify-js@npm:3.11.2"
-  bin:
-    uglifyjs: bin/uglifyjs
-  checksum: e2b33a5fdb27d519d3a2e70c0b259b4611104239d5255157615f7b35c93a33dd23f0081e92f737898995172ee19064ce2617443837de9a73fe1b3ae66bd29b1a
   languageName: node
   linkType: hard
 
@@ -32432,6 +32410,17 @@ typescript@^3.9.3:
   dependencies:
     microevent.ts: ~0.1.1
   checksum: 8f8607506172f44c05490f3ccf13e5c1f430eeb9b6116a405919c186b8b17add13bbb22467a0dbcd18ec7fcb080709a15738182e0003c5fbe2144721ea00f357
+  languageName: node
+  linkType: hard
+
+"workerize-loader@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "workerize-loader@npm:1.3.0"
+  dependencies:
+    loader-utils: ^2.0.0
+  peerDependencies:
+    webpack: "*"
+  checksum: ac7e9e6fe45c590e6ff654ef81fd023f5fd13563931740246fd430075b22e209024f729c4e83adb60ae6e6a2ca0e509ec9b946b8bf1cbf6c2a7b98fcc447f595
   languageName: node
   linkType: hard
 

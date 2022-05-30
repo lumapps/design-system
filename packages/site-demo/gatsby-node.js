@@ -4,9 +4,14 @@ const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin');
 const path = require('path');
 const lodash = require('lodash');
 const { createFilePath } = require('gatsby-source-filesystem');
-
+const cleanExcerpt = require('./plugins/utils/cleanExcerpt');
+const mdxUtils = require('./plugins/utils/mdxUtils');
 const CONFIGS = require('../../configs');
 
+/** Get page title from slug */
+const slugToTitle = (slug) => lodash.startCase(lodash.last(slug.split('/').filter(Boolean)));
+
+/** Create pages with metadata from parsed MDX content and MDX page template. */
 exports.createPages = async ({ graphql, actions }) => {
     const { createPage } = actions;
     const pageTemplate = path.resolve('./src/templates/MDXPageTemplate.tsx');
@@ -16,6 +21,7 @@ exports.createPages = async ({ graphql, actions }) => {
                 allMdx {
                     edges {
                         node {
+                            excerpt(pruneLength: 200)
                             fields {
                                 slug
                             }
@@ -32,14 +38,13 @@ exports.createPages = async ({ graphql, actions }) => {
 
     const pages = result.data.allMdx.edges;
     pages.forEach((page) => {
-        const firstH1 = page.node.mdxAST.children.find((n) => n.type === 'heading' && n.depth === 1);
+        const slug = page.node.fields.slug;
+        const title = mdxUtils.getFirstH1Text(page.node.mdxAST) || slugToTitle(slug);
+        const excerpt = cleanExcerpt(page.node.excerpt, title);
         createPage({
-            path: page.node.fields.slug,
+            path: slug,
             component: pageTemplate,
-            context: {
-                slug: page.node.fields.slug,
-                firstH1: firstH1 && lodash.get(firstH1, ['children', 0, 'value']),
-            },
+            context: { slug, title, excerpt },
         });
     });
 };
@@ -57,7 +62,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     }
 };
 
-exports.onCreateWebpackConfig = ({ actions }) => {
+exports.onCreateWebpackConfig = ({ actions, getConfig }) => {
     actions.setWebpackConfig({
         plugins: [CONFIGS.ignoreNotFoundExport],
 
@@ -68,4 +73,13 @@ exports.onCreateWebpackConfig = ({ actions }) => {
             plugins: [new TsconfigPathsPlugin({ extensions: ['.ts', '.tsx'] })],
         },
     });
+
+    // Add `workerize-loader` to simplify loading Web Workers with standard `import`
+    const config = getConfig();
+    config.module.rules.push({
+        test: /\.worker\.js$/,
+        use: { loader: 'workerize-loader', options: { inline: true } },
+    });
+    config.output.globalObject = 'this'
+    actions.replaceWebpackConfig(config);
 };

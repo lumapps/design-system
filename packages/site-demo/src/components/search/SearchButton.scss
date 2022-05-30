@@ -1,0 +1,39 @@
+@import 'sass-mq';
+@import '~@lumx/core/scss/design-tokens';
+@import '~@lumx/core/scss/core';
+
+.search-button {
+    // Collapse button on small screen
+    @include mq($until: desktop) {
+        padding: 12px !important;
+
+        .lumx-chip__label {
+            display: none;
+        }
+        .lumx-chip__before {
+            margin: 0;
+        }
+    }
+}
+
+.search-shortcut {
+    display: inline-block;
+    min-width: 10ch;
+    margin-left: $lumx-spacing-unit-tiny;
+    font-family: monospace;
+    font-size: 10px;
+    font-weight: 700;
+    text-align: right;
+
+    kbd {
+        padding: 0 $lumx-spacing-unit-tiny;
+        border: 1px solid lumx-color-variant('dark', 'L5');
+        margin-left: $lumx-spacing-unit-tiny;
+        background-color: lumx-color-variant('light', 'L3');
+        border-radius: 5px;
+    }
+
+    &--hidden {
+        visibility: hidden;
+    }
+}
