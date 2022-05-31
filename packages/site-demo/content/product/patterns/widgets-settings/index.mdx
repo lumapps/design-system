@@ -2,7 +2,9 @@
 
 **All widgets share a common organization in terms of contents settings and style settings. This pattern focuses on the tab “Contents”.**
 
-<span class="lumx-color-font-red-D2"><i>Disclaimer: while the new DS is not implemented, some examples might seem uncorrect due to various spacings included in some components.</i></span>
+<i class="lumx-color-font-red-D2">
+    Disclaimer: while the new DS is not implemented, some examples might seem incorrect due to various spacings included in some components.
+</i>
 
 ## Anatomy
 
@@ -29,9 +31,9 @@ The “Contents” tab is divided into 4 sections: Widget Body, Widget Header, W
 
 We use an expansion panel for each section.
 
-By default, during creation, only the section Widget Body is expanded. The other are collapsed. In edition, all sections are collapsed. 
+By default, during creation, only the section Widget Body is expanded. The other are collapsed. In edition, all sections are collapsed.
 
-Only one expansion panel can be opened at the same time. If a second expansion panel is openned, the first one is automatically closed.
+Only one expansion panel can be opened at the same time. If a second expansion panel is opened, the first one is automatically closed.
 
 Between each expansion panel, a divider is used.
 
@@ -42,7 +44,7 @@ Between each expansion panel, a divider is used.
 This section regroups:
 
 **Selection**
-In this part, the origin of the contents displayed is selected. 
+In this part, the origin of the contents displayed is selected.
 
 **Filtering**
 This part regroups all criteria that filter/restrict items displayed in the widget.
@@ -62,7 +64,7 @@ Additional properties of the widget.
 
 ### Widget Header
 
-The header section includes every settings that will be displayed in the header of the widget or will have an impact on this section.
+The header section includes every setting that will be displayed in the header of the widget or will have an impact on this section.
 
 <div className="lumx-color-background-dark-L6 lumx-spacing-padding-vertical-huge" style="text-align:center">
 <img src="assets/widget-header1x.png" srcset="assets/widget-header.png 2x"/>
@@ -70,7 +72,7 @@ The header section includes every settings that will be displayed in the header 
 
 ### Footer
 
-The footer section includes every settings that will be displayed in the footer of the widget or will have an impact on this section.
+The footer section includes every setting that will be displayed in the footer of the widget or will have an impact on this section.
 
 <div className="lumx-color-background-dark-L6 lumx-spacing-padding-vertical-huge" style="text-align:center">
 <img src="assets/widget-footer1x.png" srcset="assets/widget-footer.png 2x"/>
@@ -91,16 +93,16 @@ The advanced section includes the settings that are rarely used or which don’t
 When default behavior are defined for a setting, the values are visible to the user.
  *i.e. post types or excerpt truncation*
 
- ## Switchs versus checkboxes
+## Switches versus checkboxes
 
- <img src="assets/switch-checkboxe.png"/>
+<img src="assets/switch-checkboxe.png"/>
 
  If a settings impact in real time the widget, the component used is a switch.
  *i.e.information displayed in a post*
 
- ## Main and sub settings
+## Main and sub settings
 
-  <img src="assets/main-sub-settings.png"/>
+<img src="assets/main-sub-settings.png"/>
 
 If a settings depends on the activation of another setting, the sub setting is always display close to the main setting as defined in the spacing rule.
  *i.e.type of questions, infinite scroll, or excerpt truncation.*

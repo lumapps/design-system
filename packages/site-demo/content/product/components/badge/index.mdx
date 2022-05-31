@@ -22,20 +22,20 @@ Badges with thumbnail are often used to display custom logos images.
 <DemoBlock orientation="horizontal" demo="thumbnail" />
 
 ## Colors
-**Blue** badges are often used as an accent visual, **Green** to emphasize succes, **Yellow** to emphasize warnings, **Red** to emphasize alerts and **Dark** as a neutral visual.
+**Blue** badges are often used as an accent visual, **Green** to emphasize success, **Yellow** to emphasize warnings, **Red** to emphasize alerts and **Dark** as a neutral visual.
 
 <DemoBlock orientation="horizontal" demo="colors" />
 
 ### Accessibility concerns
 
 
-A badge can contain two types of informations: 
+A badge can contain two types of information:
 - **An icon/image**, if the information given by this icon is not given by another element next to the badged item,
-then you have to add an alt on the icon to explicit what it means. 
+then you have to add an alt on the icon to explicit what it means.
 (Ex: a badge icon telling the user is an admin, the alt could be "This user is an administrator" ).
 If the information is already available as a text near the badged element, then you don't have to repeat the
 information. Leave the icon's `alt` empty.
-- **A number**, if the information given by this icon is not given by another element next to the badged item, 
+- **A number**, if the information given by this icon is not given by another element next to the badged item,
 then you have to wrap your number in a span with a `aria-hidden=true` attribute and add a `aria-label` on the badge that
 gives the information.
 (Ex: a badge number counting the number of unread notifications, the aria-label could be "You have X unread notifications").
