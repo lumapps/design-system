@@ -65,12 +65,9 @@ const ARROW_SIZE = 8;
  * @return React element.
  */
 export const Tooltip: Comp<TooltipProps, HTMLDivElement> = forwardRef((props, ref) => {
-    if (!DOCUMENT) {
-        // Can't render in SSR.
-        return null;
-    }
     const { label, children, className, delay, placement, forceOpen, ...forwardedProps } = props;
-    if (!label) {
+    // Disable in SSR or without a label.
+    if (!DOCUMENT || !label) {
         return <>{children}</>;
     }
 
