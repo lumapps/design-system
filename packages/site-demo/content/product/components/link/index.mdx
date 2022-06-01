@@ -1,6 +1,6 @@
 # Link
 
-**Display simple hyperlinks**
+**Display simple hyperlinks**.
 By default, links are in primary color. They can have an optional icon.
 
 <DemoBlock orientation="vertical" demo="default" withThemeSwitcher />
@@ -16,6 +16,14 @@ Use text styles and icon sizes so that the icon height doesn’t exceed the text
 Links can also be more subtle and appear as normal text (ex: articles titles, user name in [user-block](../user-block))
 
 <DemoBlock orientation="vertical" demo="implicit" withThemeSwitcher />
+
+### Accessibility concerns
+
+By default, and as expected, links use a real HTML `<a>` link.
+
+But there are two exceptions to this:
+- Providing a `onClick` instead of a `href` will transform the link into a button (while keeping the same link style).
+- Providing a `linkAs` will use the given component instead (e.g. a react router link), you'll have to make sure this component provides good accessibility.
 
 ### Properties
 
