@@ -283,7 +283,8 @@ export const ScrollableDialogWithHeaderAndFooter = ({ theme }: any) => {
     );
 };
 
-export const DialogWithFocusableElements = ({ theme }: any) => {
+/** Test dialog focus trap (focus is contained inside the dialog) with all kinds of focusable and non-focusable items */
+export const DialogFocusTrap = ({ theme }: any) => {
     const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
     const [textValue, setTextValue] = useState('value');
     const [checkboxValue, setCheckboxValue] = useState(false);
@@ -372,6 +373,8 @@ export const DialogWithFocusableElements = ({ theme }: any) => {
 
                     {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
                     <div tabIndex={0}>Focus div</div>
+
+                    <Button isDisabled={false}>Button explicitly not disabled (should focus)</Button>
                 </div>
             </Dialog>
         </>
