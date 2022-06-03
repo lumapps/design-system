@@ -58,19 +58,19 @@ The `fallback` prop can be used to change the icon or even replace the error sta
 
 ### Accessibility concerns
 
-Thumbnails may have 5 different accessibility use cases: 
+Thumbnails may have 5 different accessibility use cases:
 - **Decorative image** if your image is only decorative, there is no essential information in it, you can set can **let the `alt` attribute empty**
 (See [the W3C reference page for Decorative images](https://www.w3.org/WAI/tutorials/images/decorative/) for more details)
-- **Non-decorative image** if your image gives informations, is textual or helps understand better the sibling content, you will **have to 
-define an `alt` attribute**. 
+- **Non-decorative image** if your image gives information, is textual or helps understand better the sibling content, you will **have to
+define an `alt` attribute**.
 In order to find how to fill this attribute, please refer to this [decision tree](https://www.w3.org/WAI/tutorials/images/decision-tree/).
-- **Link image** if the `linkProps.href` or `linkAs` is defined, then your image will be wrapped in `<a>` tag. 
+- **Link image** if the `linkProps.href` or `linkAs` is defined, then your image will be wrapped in `<a>` tag.
 You **should define the `alt` attribute**, with a string indicating where the link will take the user.
 (See [the W3C reference page for Functional images](https://www.w3.org/WAI/tutorials/images/functional/) for more details)
-- **Clickable image** if the `onClick` prop is defined, then your image will be wrapped in a button. 
+- **Clickable image** if the `onClick` prop is defined, then your image will be wrapped in a button.
 You **should define the `alt` attribute**, with a string indicating the purpose of the button.
 (See [the W3C reference page for Functional images](https://www.w3.org/WAI/tutorials/images/functional/) for more details)
-- **Badged thumbnail** if you have a badge on your Thumbnail, then the badge should handle the accessibility of its informations.
+- **Badged thumbnail** if you have a badge on your Thumbnail, then the badge should handle the accessibility of its information.
 (See the [badge page](../badge#accessibility-concerns) for the accessibility concerns on badged thumbnails.)
 
 If you have some troubles to define how to fill the `alt` attribute, you can use the [Alt decision tree](https://www.w3.org/WAI/tutorials/images/decision-tree/).

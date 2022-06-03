@@ -10,7 +10,7 @@ export const App = ({ theme }: any) => {
                 </GridItem>
 
                 <GridItem width="4">
-                    <span className="lumx-typography-display1">Display 1</span>
+                    <h1 className="lumx-typography-display1">Display 1</h1>
                 </GridItem>
             </Grid>
 
@@ -20,7 +20,7 @@ export const App = ({ theme }: any) => {
                 </GridItem>
 
                 <GridItem width="4">
-                    <span className="lumx-typography-headline">Headline</span>
+                    <h2 className="lumx-typography-headline">Headline</h2>
                 </GridItem>
             </Grid>
 
@@ -30,7 +30,7 @@ export const App = ({ theme }: any) => {
                 </GridItem>
 
                 <GridItem width="4">
-                    <span className="lumx-typography-title">Title</span>
+                    <h3 className="lumx-typography-title">Title</h3>
                 </GridItem>
             </Grid>
 
@@ -40,7 +40,7 @@ export const App = ({ theme }: any) => {
                 </GridItem>
 
                 <GridItem width="4">
-                    <span className="lumx-typography-subtitle2">Subtitle 2</span>
+                    <h4 className="lumx-typography-subtitle2">Subtitle 2</h4>
                 </GridItem>
             </Grid>
 
@@ -50,7 +50,7 @@ export const App = ({ theme }: any) => {
                 </GridItem>
 
                 <GridItem width="4">
-                    <span className="lumx-typography-subtitle1">Subtitle 1</span>
+                    <h5 className="lumx-typography-subtitle1">Subtitle 1</h5>
                 </GridItem>
             </Grid>
 
@@ -60,7 +60,7 @@ export const App = ({ theme }: any) => {
                 </GridItem>
 
                 <GridItem width="4">
-                    <span className="lumx-typography-body2">Body 2</span>
+                    <p className="lumx-typography-body2">Body 2</p>
                 </GridItem>
             </Grid>
 
@@ -70,7 +70,7 @@ export const App = ({ theme }: any) => {
                 </GridItem>
 
                 <GridItem width="4">
-                    <span className="lumx-typography-body1">Body 1</span>
+                    <p className="lumx-typography-body1">Body 1</p>
                 </GridItem>
             </Grid>
 
@@ -80,7 +80,7 @@ export const App = ({ theme }: any) => {
                 </GridItem>
 
                 <GridItem width="4">
-                    <span className="lumx-typography-caption">Caption</span>
+                    <p className="lumx-typography-caption">Caption</p>
                 </GridItem>
             </Grid>
 
@@ -90,7 +90,7 @@ export const App = ({ theme }: any) => {
                 </GridItem>
 
                 <GridItem width="4">
-                    <span className="lumx-typography-overline">Overline</span>
+                    <p className="lumx-typography-overline">Overline</p>
                 </GridItem>
             </Grid>
         </>

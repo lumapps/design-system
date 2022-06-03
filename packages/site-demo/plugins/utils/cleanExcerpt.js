@@ -1,7 +1,7 @@
 /** Clean up a page excerpt */
 const cleanExcerpt = (excerpt, title) => excerpt
     // Remove title at the beginning
-    .replace(new RegExp(`^${title} ?`), '')
+    .replace(new RegExp(`^ *${title} ?`, 'i'), '')
     // Remove new lines
     .replace(/\n/g, ' ')
     // Remove duplicate spaces
