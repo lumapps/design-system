@@ -1,34 +1,7 @@
 import { useEffect } from 'react';
 
 import { DOCUMENT } from '@lumx/react/constants';
-
-/** CSS selector listing all tabbable elements. */
-const TABBABLE_ELEMENTS_SELECTOR = `a[href]:not([tabindex="-1"], [disabled], [aria-disabled]),
-button:not([tabindex="-1"], [disabled], [aria-disabled]),
-textarea:not([tabindex="-1"], [disabled], [aria-disabled]),
-input[type="search"]:not([tabindex="-1"], [disabled], [aria-disabled]),
-input[type="text"]:not([tabindex="-1"], [disabled], [aria-disabled]),
-input[type="radio"]:not([tabindex="-1"], [disabled], [aria-disabled]),
-input[type="checkbox"]:not([tabindex="-1"], [disabled], [aria-disabled]),
-[tabindex]:not([tabindex="-1"], [disabled], [aria-disabled])`;
-
-/**
- * Get first and last elements focusable in an element.
- *
- * @param parentElement The element in which to search focusable elements.
- * @return first and last focusable elements
- */
-function getFocusable(parentElement: HTMLElement) {
-    const focusableElements = parentElement.querySelectorAll<HTMLElement>(TABBABLE_ELEMENTS_SELECTOR);
-
-    if (focusableElements.length <= 0) {
-        return {};
-    }
-
-    const first = focusableElements[0];
-    const last = focusableElements[focusableElements.length - 1];
-    return { first, last };
-}
+import { getFirstAndLastFocusable } from '@lumx/react/utils/focus/getFirstAndLastFocusable';
 
 /**
  * Add a key down event handler to the given root element (document.body by default) to trap the move of focus
@@ -56,7 +29,7 @@ export function useFocusTrap(
                 if (key !== 'Tab') {
                     return;
                 }
-                const focusable = getFocusable(focusZoneElement);
+                const focusable = getFirstAndLastFocusable(focusZoneElement);
 
                 // Prevent focus switch if no focusable available.
                 if (!focusable.first) {
