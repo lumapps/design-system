@@ -14,7 +14,11 @@ import './SearchButton.scss';
 const NAVIGATOR: any = typeof navigator !== `undefined` ? navigator : undefined;
 const IS_MAC = (NAVIGATOR?.userAgentData?.platform || NAVIGATOR?.platform)?.toLowerCase().startsWith('mac');
 
-export const SearchButton = () => {
+interface SearchButtonProps {
+    className?: string;
+}
+
+export const SearchButton: React.FC<SearchButtonProps> = ({ className }) => {
     const { pathname } = useLocation();
     const buttonRef = useRef<HTMLElement>(null);
     const [isOpen, close, open] = useBooleanState(false);
@@ -41,10 +45,11 @@ export const SearchButton = () => {
     return (
         <>
             <Chip
-                className="search-button"
+                className={classNames(className, 'search-button')}
                 ref={buttonRef as any}
                 before={<Icon icon={mdiMagnify} />}
                 onClick={open}
+                isDisabled={isServerSide}
                 // Mount dialog (preload lazy bundle) on `focus` and `mouseenter`
                 onFocus={partial(setMountDialog, true)}
                 onMouseEnter={partial(setMountDialog, true)}

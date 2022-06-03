@@ -18,24 +18,24 @@ interface MainHeaderProps {
 export const MainHeader: React.FC<MainHeaderProps> = ({ openMenu, openNavButtonRef }) => (
     <div className="main-header">
         <IconButton
-            className="responsive-nav-button"
+            className="main-header__responsive-nav-button"
             ref={openNavButtonRef as any}
             onClick={openMenu}
             label="Open the navigation menu"
             icon={mdiMenu}
             emphasis="low"
         />
-        <HomeLogoLink />
+        <HomeLogoLink className="main-header__home-logo-link" />
         <Match path="/product/*">
             {({ match }) =>
                 match && (
-                    <>
+                    <div className="main-header__extras">
                         <MaterialThemeSwitcher />
                         <LumxVersion />
-                    </>
+                    </div>
                 )
             }
         </Match>
-        <SearchButton />
+        <SearchButton className="main-header__search-button" />
     </div>
 );
