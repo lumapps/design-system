@@ -6,21 +6,24 @@
    ========================================================================== */
 
 .main-header {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: flex-end;
-    gap: $lumx-spacing-unit-big;
+    &,
+    &__extras {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: flex-end;
+        gap: $lumx-spacing-unit-big;
+    }
 
-    .home-logo-link {
+    &__home-logo-link {
         flex-grow: 1;
     }
 
     // On big screen
     @include mq($from: desktop) {
         // Hide the responsive nav button and home logo link
-        .responsive-nav-button,
-        .home-logo-link {
+        &__responsive-nav-button,
+        &__home-logo-link {
             display: none !important;
         }
     }
@@ -32,8 +35,8 @@
         margin-left: -$lumx-spacing-unit;
 
         // Move material theme switcher and lumx version link to the end (wrapped on new line)
-        .material-theme-switcher,
-        .lumx-version-link {
+        &__extras {
+            width: 100%;
             order: 5;
         }
     }
