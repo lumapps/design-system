@@ -1,6 +1,7 @@
 import React, { forwardRef, ReactNode } from 'react';
 import isEmpty from 'lodash/isEmpty';
 import classNames from 'classnames';
+import set from 'lodash/set';
 
 import { Avatar, ColorPalette, Link, Orientation, Size, Theme } from '@lumx/react';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
@@ -17,7 +18,7 @@ export type UserBlockSize = Extract<Size, 's' | 'm' | 'l'>;
  */
 export interface UserBlockProps extends GenericProps {
     /** Props to pass to the avatar. */
-    avatarProps?: AvatarProps;
+    avatarProps?: Omit<AvatarProps, 'alt'>;
     /** Additional fields used to describe the user. */
     fields?: string[];
     /** Props to pass to the link wrapping the avatar thumbnail. */
@@ -121,8 +122,12 @@ export const UserBlock: Comp<UserBlockProps, HTMLDivElement> = forwardRef((props
                 color: ColorPalette.dark,
             });
         }
+        // Disable avatar focus since the name block is the same link / same button.
+        if (avatarProps) {
+            set(avatarProps, ['thumbnailProps', 'tabIndex'], -1);
+        }
         return <NameComponent {...nProps}>{name}</NameComponent>;
-    }, [isClickable, linkAs, linkProps, name, nameProps, onClick]);
+    }, [avatarProps, isClickable, linkAs, linkProps, name, nameProps, onClick]);
 
     const fieldsBlock: ReactNode = fields && componentSize !== Size.s && (
         <div className={`${CLASSNAME}__fields`}>
@@ -149,7 +154,8 @@ export const UserBlock: Comp<UserBlockProps, HTMLDivElement> = forwardRef((props
                 <Avatar
                     linkAs={linkAs}
                     linkProps={linkProps}
-                    {...avatarProps}
+                    alt=""
+                    {...(avatarProps as any)}
                     className={classNames(`${CLASSNAME}__avatar`, avatarProps.className)}
                     size={componentSize}
                     onClick={onClick}

@@ -36,6 +36,18 @@ When there are more than five contact actions, the fifth is replaced with an ove
 
 <DemoBlock orientation="horizontal" demo="extended" withThemeSwitcher />
 
+### Accessibility concerns
+
+User blocks can be clickable if provided with `onClick` or `linkProps` or `linkAs` props:
+- `onClick` will use buttons on the avatar and name elements
+- `linkProps` or `linkAs` will use links on the avatar and name elements
+
+Between the avatar and the name, only the name is accessible on keyboard navigation to avoid redundancy since both
+replicate the same link or button. You should set the `aria-label` on the name element (via the `nameProps`) to properly
+describe the button action or the link target.
+
+See the [button page](../button#accessibility-concerns) for the accessibility concerns on actions button.
+
 ### Properties
 
 <PropTable component="UserBlock" />

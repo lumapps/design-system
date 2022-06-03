@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   UserBlock a11y: remove avatar keyboard focus to avoid the redundant keyboard navigation with the name element
+
 ## [2.2.18][] - 2022-05-20
 
 ### Fixed

@@ -6,17 +6,23 @@ Array [
     className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-m lumx-user-block--theme-light lumx-user-block--is-clickable"
   >
     <Avatar
-      alt="Avatar"
+      alt=""
       className="lumx-user-block__avatar"
       image="/demo-assets/avatar1.jpg"
       onClick={[Function]}
       size="m"
       theme="light"
+      thumbnailProps={
+        Object {
+          "tabIndex": -1,
+        }
+      }
     />
     <div
       className="lumx-user-block__wrapper"
     >
       <Link
+        aria-label="Emmitt O. Lum - open user profile"
         className="lumx-user-block__name"
         color="dark"
         onClick={[Function]}
@@ -45,7 +51,7 @@ Array [
     className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-m lumx-user-block--theme-light lumx-user-block--is-clickable"
   >
     <Avatar
-      alt="Avatar"
+      alt=""
       className="lumx-user-block__avatar"
       image="/demo-assets/avatar1.jpg"
       linkProps={
@@ -55,11 +61,17 @@ Array [
       }
       size="m"
       theme="light"
+      thumbnailProps={
+        Object {
+          "tabIndex": -1,
+        }
+      }
     />
     <div
       className="lumx-user-block__wrapper"
     >
       <Link
+        aria-label="Emmitt O. Lum - open user profile"
         className="lumx-user-block__name"
         color="dark"
         href="https://example.com"
@@ -88,17 +100,23 @@ Array [
     className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-m lumx-user-block--theme-light lumx-user-block--is-clickable"
   >
     <Avatar
-      alt="Avatar"
+      alt=""
       className="lumx-user-block__avatar"
       image="/demo-assets/avatar1.jpg"
       linkAs={[Function]}
       size="m"
       theme="light"
+      thumbnailProps={
+        Object {
+          "tabIndex": -1,
+        }
+      }
     />
     <div
       className="lumx-user-block__wrapper"
     >
       <Link
+        aria-label="Emmitt O. Lum - open user profile"
         className="lumx-user-block__name"
         color="dark"
         linkAs={[Function]}
@@ -133,11 +151,16 @@ exports[`<UserBlock> Snapshots and structure should render story 'Default' 1`] =
   onMouseLeave={[Function]}
 >
   <Avatar
-    alt="Avatar"
+    alt=""
     className="lumx-user-block__avatar"
     image="/demo-assets/avatar1.jpg"
     size="m"
     theme="light"
+    thumbnailProps={
+      Object {
+        "tabIndex": -1,
+      }
+    }
   />
   <div
     className="lumx-user-block__wrapper"
@@ -175,11 +198,16 @@ Array [
     onMouseLeave={[Function]}
   >
     <Avatar
-      alt="Avatar"
+      alt=""
       className="lumx-user-block__avatar"
       image="/demo-assets/avatar1.jpg"
       size="s"
       theme="light"
+      thumbnailProps={
+        Object {
+          "tabIndex": -1,
+        }
+      }
     />
     <div
       className="lumx-user-block__wrapper"
@@ -197,11 +225,16 @@ Array [
     onMouseLeave={[Function]}
   >
     <Avatar
-      alt="Avatar"
+      alt=""
       className="lumx-user-block__avatar"
       image="/demo-assets/avatar1.jpg"
       size="m"
       theme="light"
+      thumbnailProps={
+        Object {
+          "tabIndex": -1,
+        }
+      }
     />
     <div
       className="lumx-user-block__wrapper"
@@ -235,11 +268,16 @@ Array [
     onMouseLeave={[Function]}
   >
     <Avatar
-      alt="Avatar"
+      alt=""
       className="lumx-user-block__avatar"
       image="/demo-assets/avatar1.jpg"
       size="l"
       theme="light"
+      thumbnailProps={
+        Object {
+          "tabIndex": -1,
+        }
+      }
     />
     <div
       className="lumx-user-block__wrapper"
@@ -275,7 +313,7 @@ exports[`<UserBlock> Snapshots and structure should render story 'WithBadge' 1`]
   className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-m lumx-user-block--theme-light"
 >
   <Avatar
-    alt="Avatar"
+    alt=""
     badge={
       <Badge
         color="blue"
@@ -289,6 +327,11 @@ exports[`<UserBlock> Snapshots and structure should render story 'WithBadge' 1`]
     image="/demo-assets/avatar1.jpg"
     size="m"
     theme="light"
+    thumbnailProps={
+      Object {
+        "tabIndex": -1,
+      }
+    }
   />
   <div
     className="lumx-user-block__wrapper"

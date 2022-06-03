@@ -3,46 +3,44 @@ import { Button, Emphasis, IconButton, Orientation, Size, Theme, UserBlock } fro
 import React from 'react';
 
 export const App = ({ theme }: any) => {
-    const createSimpleAction = () => (
-        <Button
-            emphasis={Emphasis.medium}
-            color={theme === Theme.dark ? 'light' : undefined}
-            size={Size.s}
-            theme={theme}
-        >
-            Follow
-        </Button>
-    );
-
-    const demoActions = [mdiPhone, mdiCellphone, mdiEmail, mdiGoogleHangouts, mdiSlack];
-
-    const createMultipleActions = () =>
-        demoActions.map((demoAction, idx) => (
-            <IconButton
-                key={idx}
-                label={`Action ${idx}`}
-                emphasis={Emphasis.low}
-                color={theme === Theme.dark ? 'light' : undefined}
-                icon={demoAction}
-                theme={theme}
-            />
-        ));
-
-    const logAction = (action: string) => () => console.log(action);
+    const demoActions = [
+        { label: 'Copy phone number', icon: mdiPhone },
+        { label: 'Copy cell phone number', icon: mdiCellphone },
+        { label: 'Mail to', icon: mdiEmail },
+        { label: 'Contact on google hangout', icon: mdiGoogleHangouts },
+        { label: 'Contact on slack', icon: mdiSlack },
+    ];
 
     return (
         <UserBlock
             theme={theme}
             name="Emmitt O. Lum"
+            nameProps={{ 'aria-label': 'Emmitt O. Lum - open user profile' }}
             fields={['Creative developer', 'Denpasar']}
-            avatarProps={{ image: '/demo-assets/persona.png', alt: 'Avatar' }}
+            avatarProps={{ image: '/demo-assets/persona.png' }}
             size={Size.l}
             orientation={Orientation.vertical}
-            onMouseEnter={logAction('Mouse entered')}
-            onMouseLeave={logAction('Mouse left')}
-            onClick={logAction('UserBlock clicked')}
-            simpleAction={createSimpleAction()}
-            multipleActions={createMultipleActions()}
+            onClick={console.log}
+            simpleAction={
+                <Button
+                    emphasis={Emphasis.medium}
+                    color={theme === Theme.dark ? 'light' : undefined}
+                    size={Size.s}
+                    theme={theme}
+                >
+                    Follow
+                </Button>
+            }
+            multipleActions={demoActions.map(({ icon, label }, idx) => (
+                <IconButton
+                    key={idx}
+                    label={label}
+                    emphasis={Emphasis.low}
+                    color={theme === Theme.dark ? 'light' : undefined}
+                    icon={icon}
+                    theme={theme}
+                />
+            ))}
         />
     );
 };

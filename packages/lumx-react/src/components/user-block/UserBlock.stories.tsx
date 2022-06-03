@@ -17,7 +17,7 @@ export const Default = ({ theme }: any) => (
         theme={theme}
         name="Emmitt O. Lum"
         fields={['Creative developer', 'Denpasar']}
-        avatarProps={{ image: avatarImageKnob(), alt: 'Avatar' }}
+        avatarProps={{ image: avatarImageKnob() }}
         onMouseEnter={logAction('Mouse entered')}
         onMouseLeave={logAction('Mouse left')}
     />
@@ -30,7 +30,7 @@ export const Sizes = ({ theme }: any) =>
             theme={theme}
             name="Emmitt O. Lum"
             fields={['Creative developer', 'Denpasar']}
-            avatarProps={{ image: avatarImageKnob(), alt: 'Avatar' }}
+            avatarProps={{ image: avatarImageKnob() }}
             size={size}
             onMouseEnter={logAction('Mouse entered')}
             onMouseLeave={logAction('Mouse left')}
@@ -41,8 +41,9 @@ export const Clickable = ({ theme }: any) => {
     const baseProps = {
         theme,
         name: 'Emmitt O. Lum',
+        nameProps: { 'aria-label': 'Emmitt O. Lum - open user profile' },
         fields: ['Creative developer', 'Denpasar'],
-        avatarProps: { image: avatarImageKnob(), alt: 'Avatar' },
+        avatarProps: { image: avatarImageKnob() },
     } as any;
     return (
         <>
@@ -65,7 +66,6 @@ export const WithBadge = ({ theme }: any) => (
         fields={['Creative developer', 'Denpasar']}
         avatarProps={{
             image: avatarImageKnob(),
-            alt: 'Avatar',
             badge: (
                 <Badge color={ColorPalette.blue}>
                     <Icon icon={mdiStar} />
