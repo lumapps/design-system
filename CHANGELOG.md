@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.19][] - 2022-06-03
+
 ### Fixed
 
 -   UserBlock a11y: remove avatar keyboard focus to avoid the redundant keyboard navigation with the name element.
@@ -1465,3 +1467,5 @@ _Failed released_
 [2.2.17]: https://github.com/lumapps/design-system/tree/v2.2.17
 [unreleased]: https://github.com/lumapps/design-system/compare/v2.2.18...HEAD
 [2.2.18]: https://github.com/lumapps/design-system/tree/v2.2.18
+[unreleased]: https://github.com/lumapps/design-system/compare/v2.2.19...HEAD
+[2.2.19]: https://github.com/lumapps/design-system/tree/v2.2.19
