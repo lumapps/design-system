@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes, DetailedHTMLProps, forwardRef, RefObject } from 'react';
+import React, { AriaAttributes, ButtonHTMLAttributes, DetailedHTMLProps, forwardRef, RefObject } from 'react';
 
 import isEmpty from 'lodash/isEmpty';
 
@@ -16,9 +16,9 @@ type HTMLButtonProps = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>
  */
 export type ButtonSize = Extract<Size, 's' | 'm'>;
 
-export interface BaseButtonProps extends GenericProps {
-    /** ARIA button label. */
-    ['aria-label']?: string;
+export interface BaseButtonProps
+    extends GenericProps,
+        Pick<AriaAttributes, 'aria-expanded' | 'aria-haspopup' | 'aria-pressed' | 'aria-label'> {
     /** Color variant. */
     color?: Color;
     /** Emphasis variant. */

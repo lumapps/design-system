@@ -13,6 +13,7 @@ const DEFAULT_PROPS = Button.defaultProps as any;
 export const SimpleButton = ({ theme }: any) => {
     return (
         <Button
+            aria-pressed={boolean('isSelected', Boolean(DEFAULT_PROPS.isSelected))}
             emphasis={emphasis('Emphasis', DEFAULT_PROPS.emphasis)}
             theme={theme}
             rightIcon={select('Right icon', { none: undefined, mdiSend }, undefined)}
