@@ -8,6 +8,7 @@ exports[`<Checkbox> Props should use the given props 1`] = `
     className="lumx-checkbox__input-wrapper"
   >
     <input
+      aria-describedby="fixedId-helper"
       className="lumx-checkbox__input-native"
       id="fixedId"
       onChange={[Function]}
@@ -41,6 +42,7 @@ exports[`<Checkbox> Props should use the given props 1`] = `
     </InputLabel>
     <InputHelper
       className="lumx-checkbox__helper"
+      id="fixedId-helper"
       kind="info"
       theme="light"
     >
@@ -58,6 +60,7 @@ exports[`<Checkbox> Props should use the given props while passing custom props 
     className="lumx-checkbox__input-wrapper"
   >
     <input
+      aria-describedby="fixedId-helper"
       aria-labelledby="labelledby-id"
       className="lumx-checkbox__input-native"
       id="fixedId"
@@ -92,6 +95,7 @@ exports[`<Checkbox> Props should use the given props while passing custom props 
     </InputLabel>
     <InputHelper
       className="lumx-checkbox__helper"
+      id="fixedId-helper"
       kind="info"
       theme="light"
     >
