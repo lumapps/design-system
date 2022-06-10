@@ -4,6 +4,14 @@
 
 <DemoBlock demo="default" withThemeSwitcher />
 
+### Accessibility concerns
+
+If you use the `Checkbox` component with a label, there is nothing more to add to make this component accessible.
+
+If you have no label, then, **you should provide alternatives**, you have 2 options to do so:
+- An `aria-label` passed in `inputProps`
+- A visible label referenced by the value of `aria-labelledby` passed in `inputProps` (aria-labelledby takes an id, refering to the visible element you want to use as a label)
+
 ### Properties
 
 <PropTable component="Checkbox" />

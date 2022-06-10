@@ -112,6 +112,7 @@ export const Checkbox: Comp<CheckboxProps, HTMLDivElement> = forwardRef((props, 
                     value={value}
                     checked={isChecked}
                     onChange={handleChange}
+                    aria-describedby={helper ? `${inputId}-helper` : undefined}
                     {...inputProps}
                 />
 
@@ -131,7 +132,7 @@ export const Checkbox: Comp<CheckboxProps, HTMLDivElement> = forwardRef((props, 
                     </InputLabel>
                 )}
                 {helper && (
-                    <InputHelper className={`${CLASSNAME}__helper`} theme={theme}>
+                    <InputHelper id={`${inputId}-helper`} className={`${CLASSNAME}__helper`} theme={theme}>
                         {helper}
                     </InputHelper>
                 )}
