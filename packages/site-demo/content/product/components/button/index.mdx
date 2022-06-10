@@ -40,6 +40,27 @@ Use full width when you need to get the button full width.
 
 <DemoBlock vAlign="center" demo="full-width" withThemeSwitcher />
 
+### Accessibility concerns
+
+#### Button
+
+Button will use the text within the button as the accessible name, if there is no text in it (replaced by an image, an icon, etc ...) then you **should pass an `aria-label`** describing what the button does.
+
+Buttons may have 3 specific accessibility use cases:
+
+- **Button as a link** if you set the `linkAs` or the `href` prop, then your button will use the `<a>` tag.
+In this case, the label of the button (or `aria-label`) will be enough to make your link accessible.
+- **Toggle button**, when your button as an active/inactive state (`isSelected` prop is responsible of this state). 
+If the label of the button **changes depending on the state, then it doesn't need anything more.**
+But if the label of the button **doesn't change you should add a `aria-pressed=true/false`** to specify to the user in which state the button is.
+ - **Menu button** if your button opens a dropdown. 
+ You have to set, on the button, `aria-haspopup` to `true`, and `aria-expanded` to `true` when the dropdown is open.
+ Also, when the dropdown is open, you have to add `aria-controls` on the button, referencing the id of the dropdown. If your dropdown is not present in the DOM when it is closed, then you should not provide the `aria-controls` prop.
+
+#### IconButton
+
+All concerns about the `Button` component are true for `IconButton`, but as there is no text in the button, you have to provide a `label` describing what the button does.
+
 ### Button properties
 
 <PropTable component="Button" />
