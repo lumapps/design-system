@@ -1,0 +1,85 @@
+name: "Validate Pull Request"
+
+on:
+    pull_request:
+
+concurrency:
+    group: ${{ github.head_ref }}-validate-pr
+    cancel-in-progress: true
+
+jobs:
+    lint:
+        timeout-minutes: 30
+        if: github.event.pull_request.draft == false
+        runs-on: ubuntu-latest
+        steps:
+            -   name: "Checkout repository"
+                uses: actions/checkout@v2.3.4
+
+            -   name: "Setup node env"
+                uses: actions/setup-node@v2.1.4
+                with:
+                    node-version: '13.7.0'
+
+            -   name: "Cache dependencies"
+                id: cache
+                uses: actions/cache@v2.1.4
+                with:
+                    path: "**/node_modules"
+                    key: ${{ runner.os }}-dependency-hash-${{ hashFiles('yarn.lock') }}
+
+            -   name: "Install dependencies"
+                run: yarn install
+
+            -   name: "Run packages lint"
+                run: yarn lint:code
+
+    github-actions-validator:
+        if: github.event.pull_request.draft == false
+        name: Github-actions-validator
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: lumapps/github-actions-validator@master
+
+    commit-message-validation:
+        if: github.event.pull_request.draft == false
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Checkout
+                uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f #v2.3.4
+
+            -   name: Commit message validation
+                uses: lumapps/commit-message-validator@master
+                with:
+                    no_jira: true
+                env:
+                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
+    test:
+        if: github.event.pull_request.draft == false
+        runs-on: ubuntu-latest
+        steps:
+            - name: "Checkout repository"
+              uses: actions/checkout@v2.3.4
+            - name: "Setup node env"
+              uses: actions/setup-node@v2.1.4
+              with:
+                  node-version: '13.7.0'
+
+            - name: "Cache dependencies"
+              id: cache
+              uses: actions/cache@v2.1.4
+              with:
+                  path: "~/.cache/yarn"
+                  key: ${{ runner.os }}-dependency-hash-${{ hashFiles('yarn.lock') }}
+
+            - name: Install Dependencies
+              run: yarn install --frozen-lockfile
+
+            - name: Run unit tests
+              run: |
+                sudo timedatectl set-timezone Europe/Paris
+                yarn test
+
