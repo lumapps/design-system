@@ -48,7 +48,7 @@
 
                 <lx-table-cell-body ng-repeat="th in lx.thead">
                     <span ng-if="!th.format">{{ tr[th.name] }}</span>
-                    <div ng-bind-html="lx.$sce.trustAsHtml(th.format(tr))" ng-if="th.format"></div>
+                    <div ng-bind-html="th.format(tr)" ng-if="th.format"></div>
                 </lx-table-cell-body>
             </lx-table-row>
         </lx-table-body>
