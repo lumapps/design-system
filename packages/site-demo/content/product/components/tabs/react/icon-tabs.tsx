@@ -6,6 +6,7 @@ export const App = ({ theme }: any) => {
     const [activeTab, setActiveTab] = useState(0);
 
     return (
+        <div style={{minWidth: 340}}>
         <TabProvider activeTabIndex={activeTab} onChange={setActiveTab}>
             <TabList theme={theme} aria-label="Tab list">
                 <Tab label="Tab 1" icon={mdiBowl} />
@@ -17,5 +18,6 @@ export const App = ({ theme }: any) => {
             <TabPanel className="lumx-spacing-padding-vertical-huge">Tab 2 content</TabPanel>
             <TabPanel className="lumx-spacing-padding-vertical-huge">Tab 3 content</TabPanel>
         </TabProvider>
+        </div>
     );
 };
