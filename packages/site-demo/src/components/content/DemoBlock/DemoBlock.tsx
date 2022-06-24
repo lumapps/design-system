@@ -76,7 +76,7 @@ export const DemoBlock: React.FC<DemoBlockProps> = ({
                             isChecked={theme === Theme.dark}
                             onChange={toggleTheme}
                         >
-                            Dark Background
+                           Dark theme 
                         </Switch>
                     </div>
                 )}
