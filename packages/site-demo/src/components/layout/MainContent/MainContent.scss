@@ -74,7 +74,8 @@
             }
         }
 
-        & > table tr {
+        & > table tr,
+        & > div > table tr{
             border: solid 1px $lumx-color-dark-L5;
 
             & th,
