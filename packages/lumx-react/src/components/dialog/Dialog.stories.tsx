@@ -17,7 +17,8 @@ import {
 } from '@lumx/react';
 import { DIALOG_TRANSITION_DURATION } from '@lumx/core/js/constants';
 import { select } from '@storybook/addon-knobs';
-import React, { RefObject, useRef, useState } from 'react';
+import React, { RefObject, useCallback, useRef, useState } from 'react';
+import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
 import { Dialog, DialogSizes } from './Dialog';
 import { loremIpsum } from '../../stories/knobs/lorem';
 import { chromaticForceScreenSize } from '../../stories/chromaticForceScreenSize';
@@ -43,8 +44,8 @@ const footer = <footer className="lumx-spacing-padding">Dialog footer</footer>;
 function useOpenButton(theme: Theme, defaultState = true) {
     const buttonRef = useRef() as RefObject<HTMLButtonElement>;
     const [isOpen, setOpen] = useState(defaultState);
-    const openDialog = () => setOpen(true);
-    const closeDialog = () => setOpen(false);
+    const openDialog = useCallback(() => setOpen(true), []);
+    const closeDialog = useCallback(() => setOpen(false), []);
 
     return {
         button: (
@@ -301,6 +302,9 @@ export const DialogFocusTrap = ({ theme }: any) => {
     };
     const [date, setDate] = useState<Date | undefined>(new Date('2020-05-18'));
 
+    const datePickerDialogButtonRef = useRef<HTMLButtonElement>(null);
+    const [isDatePickerDialogOpen, closeDatePickerDialogOpen, openDatePickerDialogOpen] = useBooleanState(false);
+
     return (
         <>
             {button}
@@ -335,16 +339,40 @@ export const DialogFocusTrap = ({ theme }: any) => {
                     />
 
                     <FlexBox orientation="horizontal" hAlign="bottom" gap="regular">
-                        <DatePickerField
-                            locale="fr"
-                            label="Start date"
-                            placeholder="Pick a date"
-                            theme={theme}
-                            onChange={setDate}
-                            value={date}
-                            nextButtonProps={{ label: 'Next month' }}
-                            previousButtonProps={{ label: 'Previous month' }}
-                        />
+                        <Button ref={datePickerDialogButtonRef} onClick={openDatePickerDialogOpen}>
+                            Open date picker
+                        </Button>
+                        <Dialog
+                            isOpen={isDatePickerDialogOpen}
+                            parentElement={datePickerDialogButtonRef}
+                            onClose={closeDatePickerDialogOpen}
+                        >
+                            <header>
+                                <Toolbar
+                                    label={<h1 className="lumx-typography-title">Date picker</h1>}
+                                    after={
+                                        <IconButton
+                                            label="Close"
+                                            icon={mdiClose}
+                                            onClick={closeDialog}
+                                            emphasis={Emphasis.low}
+                                        />
+                                    }
+                                />
+                            </header>
+                            <div className="lumx-spacing-padding">
+                                <DatePickerField
+                                    locale="fr"
+                                    label="Start date"
+                                    placeholder="Pick a date"
+                                    theme={theme}
+                                    onChange={setDate}
+                                    value={date}
+                                    nextButtonProps={{ label: 'Next month' }}
+                                    previousButtonProps={{ label: 'Previous month' }}
+                                />
+                            </div>
+                        </Dialog>
 
                         <Select
                             className="lumx-spacing-margin-left-huge"
