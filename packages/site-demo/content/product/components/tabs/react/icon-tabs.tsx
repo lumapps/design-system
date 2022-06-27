@@ -6,16 +6,18 @@ export const App = ({ theme }: any) => {
     const [activeTab, setActiveTab] = useState(0);
 
     return (
-        <TabProvider activeTabIndex={activeTab} onChange={setActiveTab}>
-            <TabList theme={theme} aria-label="Tab list">
-                <Tab label="Tab 1" icon={mdiBowl} />
-                <Tab label="Tab 2" icon={mdiBreadSliceOutline} />
-                <Tab label="Tab 3" icon={mdiSilverwareForkKnife} />
-            </TabList>
+        <div style={{ minWidth: 340 }}>
+            <TabProvider activeTabIndex={activeTab} onChange={setActiveTab}>
+                <TabList theme={theme} aria-label="Tab list">
+                    <Tab label="Tab 1" icon={mdiBowl} />
+                    <Tab label="Tab 2" icon={mdiBreadSliceOutline} />
+                    <Tab label="Tab 3" icon={mdiSilverwareForkKnife} />
+                </TabList>
 
-            <TabPanel className="lumx-spacing-padding-vertical-huge">Tab 1 content</TabPanel>
-            <TabPanel className="lumx-spacing-padding-vertical-huge">Tab 2 content</TabPanel>
-            <TabPanel className="lumx-spacing-padding-vertical-huge">Tab 3 content</TabPanel>
-        </TabProvider>
+                <TabPanel className="lumx-spacing-padding-vertical-huge">Tab 1 content</TabPanel>
+                <TabPanel className="lumx-spacing-padding-vertical-huge">Tab 2 content</TabPanel>
+                <TabPanel className="lumx-spacing-padding-vertical-huge">Tab 3 content</TabPanel>
+            </TabProvider>
+        </div>
     );
 };

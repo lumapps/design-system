@@ -96,7 +96,7 @@ export const App = ({ theme }: any) => {
     );
 
     return (
-        <Table hasDividers theme={theme}>
+        <Table hasDividers theme={theme} style={{ minWidth: 620 }}>
             <TableHeader>
                 <TableRow>
                     {tableHeader.map((header) => {

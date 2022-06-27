@@ -10,7 +10,7 @@ export const App = ({ theme }: any) => {
     ];
 
     return (
-        <FlexBox style={{ padding: 80 }} orientation={Orientation.horizontal}>
+        <FlexBox style={{ padding: 80, gap: 128 }} orientation={Orientation.vertical}>
             {popovers.map(([placement, ref]) => (
                 <FlexBox key={placement} fillSpace vAlign={Alignment.center} hAlign={Alignment.center}>
                     <Chip ref={ref} theme={theme} size={Size.s}>
