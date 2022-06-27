@@ -8,7 +8,7 @@ export const App = ({ theme }: any) => {
     return (
         <>
             <FlexBox style={{ marginTop: 80, gap: 128 }} orientation={Orientation.vertical}>
-                <Chip ref={topStartAnchorRef} theme={theme} size={Size.s} style={{ placeSelf: "flex-start" }}>
+                <Chip ref={topStartAnchorRef} theme={theme} size={Size.s} style={{ placeSelf: 'flex-start' }}>
                     TOP_START
                 </Chip>
                 <Popover
@@ -20,7 +20,7 @@ export const App = ({ theme }: any) => {
                 >
                     Popover aligned on start of the top side
                 </Popover>
-                <Chip ref={topEndAnchorRef} theme={theme} size={Size.s} style={{ placeSelf: "flex-end" }}>
+                <Chip ref={topEndAnchorRef} theme={theme} size={Size.s} style={{ placeSelf: 'flex-end' }}>
                     TOP_END
                 </Chip>
             </FlexBox>
