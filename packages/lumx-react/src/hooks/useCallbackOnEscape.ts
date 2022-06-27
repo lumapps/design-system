@@ -1,25 +1,54 @@
 import { DOCUMENT } from '@lumx/react/constants';
 import { Callback, onEscapePressed } from '@lumx/react/utils';
 import { useEffect } from 'react';
+import last from 'lodash/last';
+import pull from 'lodash/pull';
+
+type Listener = { enable(): void; disable(): void };
 
 /**
- * Triggers a callback when the escape key is pressed.
+ * List of all listeners.
+ */
+const LISTENERS: Listener[] = [];
+
+/**
+ * Register a global listener on 'Escape' key pressed.
+ *
+ * If multiple listener are registered, only the last one is maintained. When a listener is unregistered, the previous
+ * one gets activated again.
  *
  * @param callback      Callback
  * @param closeOnEscape Disables the hook when false
- * @param rootElement   Element on which to listen the escape key
  */
-export function useCallbackOnEscape(
-    callback: Callback | undefined,
-    closeOnEscape = true,
-    rootElement = DOCUMENT?.body,
-) {
+export function useCallbackOnEscape(callback: Callback | undefined, closeOnEscape = true) {
     useEffect(() => {
-        if (closeOnEscape && callback && rootElement) {
-            const onKeyDown = onEscapePressed(callback);
-            rootElement.addEventListener('keydown', onKeyDown);
-            return () => rootElement.removeEventListener('keydown', onKeyDown);
+        const rootElement = DOCUMENT?.body;
+        if (!closeOnEscape || !callback || !rootElement) {
+            return undefined;
         }
-        return undefined;
-    }, [callback, closeOnEscape, rootElement]);
+        const onKeyDown = onEscapePressed(callback);
+
+        const listener: Listener = {
+            enable: () => rootElement.addEventListener('keydown', onKeyDown),
+            disable: () => rootElement.removeEventListener('keydown', onKeyDown),
+        };
+
+        // SETUP:
+        // Disable previous listener.
+        last(LISTENERS)?.disable();
+        // Keep track of current listener.
+        LISTENERS.push(listener);
+        // Enable current listener.
+        listener.enable();
+
+        // TEARDOWN:
+        return () => {
+            // Disable current listener.
+            listener.disable();
+            // Remove current listener.
+            pull(LISTENERS, listener);
+            // Enable previous listener.
+            last(LISTENERS)?.enable();
+        };
+    }, [callback, closeOnEscape]);
 }
