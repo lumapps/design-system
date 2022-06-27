@@ -1,15 +1,9 @@
 import { DOCUMENT } from '@lumx/react/constants';
 import { Callback, onEscapePressed } from '@lumx/react/utils';
 import { useEffect } from 'react';
-import last from 'lodash/last';
-import pull from 'lodash/pull';
+import { Listener, makeListenerTowerContext } from '@lumx/react/utils/makeListenerTowerContext';
 
-type Listener = { enable(): void; disable(): void };
-
-/**
- * List of all listeners.
- */
-const LISTENERS: Listener[] = [];
+const LISTENERS = makeListenerTowerContext();
 
 /**
  * Register a global listener on 'Escape' key pressed.
@@ -33,22 +27,7 @@ export function useCallbackOnEscape(callback: Callback | undefined, closeOnEscap
             disable: () => rootElement.removeEventListener('keydown', onKeyDown),
         };
 
-        // SETUP:
-        // Disable previous listener.
-        last(LISTENERS)?.disable();
-        // Keep track of current listener.
-        LISTENERS.push(listener);
-        // Enable current listener.
-        listener.enable();
-
-        // TEARDOWN:
-        return () => {
-            // Disable current listener.
-            listener.disable();
-            // Remove current listener.
-            pull(LISTENERS, listener);
-            // Enable previous listener.
-            last(LISTENERS)?.enable();
-        };
+        LISTENERS.register(listener);
+        return () => LISTENERS.unregister(listener);
     }, [callback, closeOnEscape]);
 }

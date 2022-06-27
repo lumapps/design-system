@@ -62,7 +62,7 @@ export const DatePickerField: Comp<DatePickerFieldProps, HTMLDivElement> = forwa
         value,
         ...forwardedProps
     } = props;
-    const wrapperRef = useRef(null);
+    const [wrapperElement, setWrapperElement] = useState<HTMLDivElement | null>(null);
     const anchorRef = useRef(null);
 
     const [isOpen, setIsOpen] = useState(false);
@@ -83,8 +83,8 @@ export const DatePickerField: Comp<DatePickerFieldProps, HTMLDivElement> = forwa
     };
 
     // Handle focus trap.
-    const todayOrSelectedDateRef = useRef<HTMLButtonElement>(null);
-    useFocusTrap(isOpen && todayOrSelectedDateRef.current && wrapperRef.current, todayOrSelectedDateRef.current);
+    const [todayOrSelectedDate, setTodayOrSelectedDate] = useState<HTMLButtonElement | null>(null);
+    useFocusTrap(isOpen && wrapperElement, todayOrSelectedDate);
 
     const onTextFieldChange = (textFieldValue: string, textFieldName?: string, event?: SyntheticEvent) => {
         if (!textFieldValue) {
@@ -121,19 +121,18 @@ export const DatePickerField: Comp<DatePickerFieldProps, HTMLDivElement> = forwa
                     closeOnClickAway
                     closeOnEscape
                 >
-                    <div ref={wrapperRef}>
-                        <DatePicker
-                            locale={locale}
-                            maxDate={maxDate}
-                            minDate={minDate}
-                            value={value}
-                            onChange={onDatePickerChange}
-                            todayOrSelectedDateRef={todayOrSelectedDateRef}
-                            defaultMonth={defaultMonth}
-                            nextButtonProps={nextButtonProps}
-                            previousButtonProps={previousButtonProps}
-                        />
-                    </div>
+                    <DatePicker
+                        ref={setWrapperElement}
+                        locale={locale}
+                        maxDate={maxDate}
+                        minDate={minDate}
+                        value={value}
+                        onChange={onDatePickerChange}
+                        todayOrSelectedDateRef={setTodayOrSelectedDate}
+                        defaultMonth={defaultMonth}
+                        nextButtonProps={nextButtonProps}
+                        previousButtonProps={previousButtonProps}
+                    />
                 </Popover>
             ) : null}
         </>

@@ -1,3 +1,4 @@
+import noop from 'lodash/noop';
 import { mdiClose } from '@lumx/icons';
 import {
     AlertDialog,
@@ -303,7 +304,7 @@ export const DialogFocusTrap = ({ theme }: any) => {
     const [date, setDate] = useState<Date | undefined>(new Date('2020-05-18'));
 
     const datePickerDialogButtonRef = useRef<HTMLButtonElement>(null);
-    const [isDatePickerDialogOpen, closeDatePickerDialogOpen, openDatePickerDialogOpen] = useBooleanState(false);
+    const [isDatePickerDialogOpen, closeDatePickerDialog, openDatePickerDialog] = useBooleanState(false);
 
     return (
         <>
@@ -339,13 +340,13 @@ export const DialogFocusTrap = ({ theme }: any) => {
                     />
 
                     <FlexBox orientation="horizontal" hAlign="bottom" gap="regular">
-                        <Button ref={datePickerDialogButtonRef} onClick={openDatePickerDialogOpen}>
+                        <Button ref={datePickerDialogButtonRef} onClick={openDatePickerDialog}>
                             Open date picker
                         </Button>
                         <Dialog
                             isOpen={isDatePickerDialogOpen}
                             parentElement={datePickerDialogButtonRef}
-                            onClose={closeDatePickerDialogOpen}
+                            onClose={closeDatePickerDialog}
                         >
                             <header>
                                 <Toolbar
@@ -354,7 +355,7 @@ export const DialogFocusTrap = ({ theme }: any) => {
                                         <IconButton
                                             label="Close"
                                             icon={mdiClose}
-                                            onClick={closeDialog}
+                                            onClick={closeDatePickerDialog}
                                             emphasis={Emphasis.low}
                                         />
                                     }
@@ -370,6 +371,17 @@ export const DialogFocusTrap = ({ theme }: any) => {
                                     value={date}
                                     nextButtonProps={{ label: 'Next month' }}
                                     previousButtonProps={{ label: 'Previous month' }}
+                                />
+                                <DatePickerField
+                                    locale="fr"
+                                    label="Start date"
+                                    placeholder="Pick a date"
+                                    theme={theme}
+                                    onChange={noop}
+                                    value={undefined}
+                                    nextButtonProps={{ label: 'Next month' }}
+                                    previousButtonProps={{ label: 'Previous month' }}
+                                    defaultMonth={new Date('2020-05-18')}
                                 />
                             </div>
                         </Dialog>

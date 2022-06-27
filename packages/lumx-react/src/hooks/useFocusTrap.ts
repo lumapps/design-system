@@ -1,17 +1,11 @@
 import { useEffect } from 'react';
-import last from 'lodash/last';
-import pull from 'lodash/pull';
 
 import { DOCUMENT } from '@lumx/react/constants';
 import { getFirstAndLastFocusable } from '@lumx/react/utils/focus/getFirstAndLastFocusable';
 import { Falsy } from '@lumx/react/utils';
+import { Listener, makeListenerTowerContext } from '@lumx/react/utils/makeListenerTowerContext';
 
-type Listener = { enable(): void; disable(): void };
-
-/**
- * List of all focus traps.
- */
-const FOCUS_TRAPS: Listener[] = [];
+const FOCUS_TRAPS = makeListenerTowerContext();
 
 /**
  * Trap 'Tab' focus switch inside the `focusZoneElement`.
@@ -76,7 +70,6 @@ export function useFocusTrap(focusZoneElement: HTMLElement | Falsy, focusElement
         };
 
         // SETUP:
-
         if (focusElement && focusZoneElement.contains(focusElement)) {
             // Focus the given element.
             focusElement.focus();
@@ -84,22 +77,9 @@ export function useFocusTrap(focusZoneElement: HTMLElement | Falsy, focusElement
             // Focus the first focusable element in the zone.
             getFirstAndLastFocusable(focusZoneElement).first?.focus();
         }
-
-        // Disable previous focus trap.
-        last(FOCUS_TRAPS)?.disable();
-        // Keep track of current focus trap.
-        FOCUS_TRAPS.push(focusTrap);
-        // Enable current focus trap.
-        focusTrap.enable();
+        FOCUS_TRAPS.register(focusTrap);
 
         // TEARDOWN:
-        return () => {
-            // Disable current focus trap.
-            focusTrap.disable();
-            // Remove current focus trap.
-            pull(FOCUS_TRAPS, focusTrap);
-            // Enable previous focus trap.
-            last(FOCUS_TRAPS)?.enable();
-        };
+        return () => FOCUS_TRAPS.unregister(focusTrap);
     }, [focusElement, focusZoneElement]);
 }
