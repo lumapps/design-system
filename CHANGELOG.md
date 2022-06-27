@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   LinkPreview: Improve accessibility on thumbnail link, remove redundant links in focus order and improve tag semantics.
+-   Dialog & Lightbox: fixed focus trap not working when closing and reopening the same component.
 
 ## [2.2.19][] - 2022-06-03
 

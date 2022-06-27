@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 
 import { DOCUMENT } from '@lumx/react/constants';
 import { getFirstAndLastFocusable } from '@lumx/react/utils/focus/getFirstAndLastFocusable';
+import { Falsy } from '@lumx/react/utils';
 
 /**
  * Add a key down event handler to the given root element (document.body by default) to trap the move of focus
@@ -13,7 +14,7 @@ import { getFirstAndLastFocusable } from '@lumx/react/utils/focus/getFirstAndLas
  * @param rootElement      The element on which the key down event will be placed.
  */
 export function useFocusTrap(
-    focusZoneElement: HTMLElement | null,
+    focusZoneElement: HTMLElement | Falsy,
     focusElement?: HTMLElement | null,
     rootElement = DOCUMENT?.body,
 ): void {

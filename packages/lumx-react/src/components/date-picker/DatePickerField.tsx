@@ -84,7 +84,7 @@ export const DatePickerField: Comp<DatePickerFieldProps, HTMLDivElement> = forwa
 
     // Handle focus trap.
     const todayOrSelectedDateRef = useRef<HTMLButtonElement>(null);
-    useFocusTrap(todayOrSelectedDateRef.current && wrapperRef.current, todayOrSelectedDateRef.current);
+    useFocusTrap(isOpen && todayOrSelectedDateRef.current && wrapperRef.current, todayOrSelectedDateRef.current);
 
     const onTextFieldChange = (textFieldValue: string, textFieldName?: string, event?: SyntheticEvent) => {
         if (!textFieldValue) {

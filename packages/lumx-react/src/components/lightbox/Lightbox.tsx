@@ -87,7 +87,7 @@ export const Lightbox: Comp<LightboxProps, HTMLDivElement> = forwardRef((props, 
 
     // Handle focus trap.
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    useFocusTrap(wrapperRef.current, childrenRef.current?.firstChild);
+    useFocusTrap(isOpen && wrapperRef.current, childrenRef.current?.firstChild);
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const previousOpen = useRef(isOpen);

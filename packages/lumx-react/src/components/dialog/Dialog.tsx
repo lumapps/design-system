@@ -142,7 +142,7 @@ export const Dialog: Comp<DialogProps, HTMLDivElement> = forwardRef((props, ref)
     const localContentRef = useRef<HTMLDivElement>(null);
     // Handle focus trap.
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    useFocusTrap(wrapperRef.current, focusElement?.current);
+    useFocusTrap(isOpen && wrapperRef.current, focusElement?.current);
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useDisableBodyScroll(isOpen && localContentRef.current);
