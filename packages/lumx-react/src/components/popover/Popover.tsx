@@ -1,5 +1,5 @@
 import { detectOverflow } from '@popperjs/core';
-import React, { forwardRef, ReactNode, RefObject, useEffect, useMemo, useRef, useState } from 'react';
+import React, { forwardRef, ReactNode, RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { usePopper } from 'react-popper';
 
@@ -13,6 +13,7 @@ import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses, ValueOf } from '@lumx/react/utils';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 import { useFocusWithin } from '@lumx/react/hooks/useFocusWithin';
+import { getFirstAndLastFocusable } from '@lumx/react/utils/focus/getFirstAndLastFocusable';
 
 /**
  * Different possible placements for the popover.
@@ -90,6 +91,8 @@ export interface PopoverProps extends GenericProps {
     isOpen: boolean;
     /** Offset placement relative to anchor. */
     offset?: Offset;
+    /** Reference to the parent element that triggered the popover (will get back focus on close or else fallback on the anchor element). */
+    parentElement?: RefObject<HTMLElement>;
     /** Placement relative to anchor. */
     placement?: Placement;
     /** Whether the popover should be rendered into a DOM node that exists outside the DOM hierarchy of the parent component. */
@@ -212,6 +215,7 @@ export const Popover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, re
         isOpen,
         offset,
         onClose,
+        parentElement,
         placement,
         style,
         usePortal,
@@ -245,7 +249,8 @@ export const Popover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, re
     });
 
     /** Action on close */
-    const handleClose = () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const handleClose = useCallback(() => {
         if (!onClose) {
             return;
         }
@@ -256,11 +261,22 @@ export const Popover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, re
          * unless specifically requested not to.
          */
         if (isFocusedWithin.current && focusAnchorOnClose) {
-            anchorRef.current?.focus();
+            if (parentElement?.current) {
+                parentElement?.current.focus();
+            }
+
+            const firstFocusable = anchorRef?.current && getFirstAndLastFocusable(anchorRef?.current).first;
+            if (firstFocusable) {
+                // Focus the first focusable element in anchor.
+                firstFocusable.focus();
+            } else {
+                // Fallback on the anchor element.
+                anchorRef?.current?.focus();
+            }
         }
 
         onClose();
-    };
+    }, [anchorRef, focusAnchorOnClose, onClose, parentElement]);
 
     const modifiers: any = [];
     const actualOffset: [number, number] = [offset?.along ?? 0, (offset?.away ?? 0) + (hasArrow ? ARROW_SIZE : 0)];

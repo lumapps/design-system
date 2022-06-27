@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   LinkPreview: added `titleHeading` prop to customize the title heading tag.
 -   Select & SelectMultiple: add `icon` props
 -   New `GenericBlock` component
+-   Popover: focus first focusable element in anchor OR anchor on close.
 
 ### Fixed
 
