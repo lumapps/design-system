@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   LinkPreview: added `linkAs` prop to customize link component.
+-   LinkPreview: added `titleHeading` prop to customize the title heading tag.
+
+### Fixed
+
+-   LinkPreview: Improve accessibility on thumbnail link, remove redundant links in focus order and improve tag semantics.
+
 ## [2.2.19][] - 2022-06-03
 
 ### Fixed
