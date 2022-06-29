@@ -1,3 +1,4 @@
+import { mdiBullhornOutline } from '@lumx/icons/';
 import { List, ListItem, Select, Size, TextField } from '@lumx/react';
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
 import { text } from '@storybook/addon-knobs';
@@ -32,6 +33,7 @@ export const SimpleSelect = ({ theme }: any) => {
             theme={theme}
             onInputClick={toggleSelect}
             onDropdownClose={closeSelect}
+            icon={mdiBullhornOutline}
         >
             <List isClickable>
                 {CHOICES.length > 0

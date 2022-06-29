@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiClose, mdiCloseCircle, mdiMenuDown } from '@lumx/icons';
 
-import { Size } from '@lumx/react/components';
+import { Size, Theme } from '@lumx/react/components';
 import { Chip } from '@lumx/react/components/chip/Chip';
 import { Icon } from '@lumx/react/components/icon/Icon';
 import { InputLabel } from '@lumx/react/components/input-label/InputLabel';
@@ -59,6 +59,7 @@ export const SelectMultipleField: React.FC<SelectMultipleProps> = ({
     anchorRef,
     handleKeyboardNav,
     hasError,
+    icon,
     id,
     isDisabled,
     isEmpty,
@@ -102,6 +103,15 @@ export const SelectMultipleField: React.FC<SelectMultipleProps> = ({
                     aria-disabled={isDisabled || undefined}
                     {...forwardedProps}
                 >
+                    {icon && (
+                        <Icon
+                            className={`${CLASSNAME}__input-icon`}
+                            color={theme === Theme.dark ? 'light' : undefined}
+                            icon={icon}
+                            size={Size.xs}
+                        />
+                    )}
+
                     <div className={`${CLASSNAME}__chips`}>
                         {!isEmpty &&
                             value.map((val, index) => selectedChipRender?.(val, index, onClear, isDisabled, theme))}
