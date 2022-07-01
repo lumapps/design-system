@@ -73,7 +73,7 @@ describe(`<${IconButton.displayName}>`, () => {
         });
 
         it('should forward any CSS class', () => {
-            const props: Partial<IconButtonProps> = {
+            const props = {
                 className: 'component component--is-tested',
             };
             const { wrapper, buttonRoot } = setup(props);

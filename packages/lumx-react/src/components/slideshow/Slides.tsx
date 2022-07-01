@@ -11,8 +11,6 @@ export interface SlidesProps extends GenericProps {
     activeIndex: number;
     /** slides id to be added to the wrapper */
     id?: string;
-    /** custom classname */
-    className?: string;
     /** custom theme */
     theme?: Theme;
     /** Whether the automatic rotation of the slideshow is enabled or not. */
