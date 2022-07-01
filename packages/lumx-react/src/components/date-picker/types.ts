@@ -1,6 +1,6 @@
 import { IconButtonProps } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils';
-import { RefObject } from 'react';
+import { Ref } from 'react';
 
 /**
  * Defines the props of the component.
@@ -20,7 +20,7 @@ export interface DatePickerProps extends GenericProps {
     previousButtonProps: Pick<IconButtonProps, 'label'> &
         Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis'>;
     /** Reference to the <button> element corresponding to the current date or the selected date. */
-    todayOrSelectedDateRef?: RefObject<HTMLButtonElement>;
+    todayOrSelectedDateRef?: Ref<HTMLButtonElement>;
     /** Currently selected date. */
     value: Date | undefined;
     /** On change callback. */
