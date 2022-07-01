@@ -43,6 +43,24 @@
         }
     }
 
+    &__input-icon {
+        #{$self}--theme-light & {
+            @include lumx-text-field-input-icon(lumx-base-const('theme', 'LIGHT'));
+            @include lumx-text-field-input-content-color(
+                lumx-base-const('state', 'DEFAULT'),
+                lumx-base-const('theme', 'LIGHT')
+            );
+        }
+
+        #{$self}--theme-dark & {
+            @include lumx-text-field-input-icon(lumx-base-const('theme', 'DARK'));
+            @include lumx-text-field-input-content-color(
+                lumx-base-const('state', 'DEFAULT'),
+                lumx-base-const('theme', 'DARK')
+            );
+        }
+    }
+
     &__chips {
         @include lumx-text-field-chips;
     }

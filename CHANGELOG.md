@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   LinkPreview: added `linkAs` prop to customize link component.
 -   LinkPreview: added `titleHeading` prop to customize the title heading tag.
+-   Select & SelectMultiple: add `icon` props
 
 ### Fixed
 

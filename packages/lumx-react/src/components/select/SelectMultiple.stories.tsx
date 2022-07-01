@@ -1,4 +1,5 @@
 /* istanbul ignore file */
+import { mdiTram } from '@lumx/icons/';
 import { Chip, List, ListItem, SelectMultiple, Size } from '@lumx/react';
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
 import noop from 'lodash/noop';
@@ -40,6 +41,7 @@ export const DefaultSelectMultiple = ({ theme }: any) => {
             theme={theme}
             onInputClick={toggleSelect}
             onDropdownClose={closeSelect}
+            icon={mdiTram}
         >
             <List isClickable>
                 {CHOICES.length > 0

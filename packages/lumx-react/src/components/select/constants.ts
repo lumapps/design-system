@@ -21,6 +21,8 @@ export interface CoreSelectProps extends GenericProps {
     helper?: string;
     /** Whether the select should close on click. */
     closeOnClick?: boolean;
+    /** Icon (SVG path). */
+    icon?: string;
     /** Whether the component is disabled or not. */
     isDisabled?: boolean;
     /** Whether the component is required or not. */

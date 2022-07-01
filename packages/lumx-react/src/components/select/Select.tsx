@@ -5,7 +5,7 @@ import lodashIsEmpty from 'lodash/isEmpty';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiCloseCircle, mdiMenuDown } from '@lumx/icons';
 
-import { Emphasis, Size } from '@lumx/react/components';
+import { Emphasis, Size, Theme } from '@lumx/react/components';
 import { IconButton } from '@lumx/react/components/button/IconButton';
 import { Chip } from '@lumx/react/components/chip/Chip';
 import { Icon } from '@lumx/react/components/icon/Icon';
@@ -46,6 +46,7 @@ const SelectField: React.FC<SelectProps> = ({
     handleKeyboardNav,
     hasError,
     hasInputClear,
+    icon,
     id,
     isDisabled,
     isEmpty,
@@ -89,6 +90,15 @@ const SelectField: React.FC<SelectProps> = ({
                         aria-disabled={isDisabled || undefined}
                         {...forwardedProps}
                     >
+                        {icon && (
+                            <Icon
+                                className={`${CLASSNAME}__input-icon`}
+                                color={theme === Theme.dark ? 'light' : undefined}
+                                icon={icon}
+                                size={Size.xs}
+                            />
+                        )}
+
                         <div
                             className={classNames([
                                 `${CLASSNAME}__input-native`,
