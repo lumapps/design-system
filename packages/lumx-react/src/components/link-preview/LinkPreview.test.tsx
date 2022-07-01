@@ -5,7 +5,7 @@ import 'jest-enzyme';
 
 import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
-import { Thumbnail } from '@lumx/react';
+import { Link, Thumbnail } from '@lumx/react';
 
 import { Size, Theme } from '..';
 import { LinkPreview, LinkPreviewProps } from './LinkPreview';
@@ -25,81 +25,76 @@ const setup = (propsOverride: SetupProps = {}, shallowRendering = true) => {
 
     return {
         thumbnail: wrapper.find(Thumbnail),
+        title: wrapper.find(`.${CLASSNAME}__title`),
+        description: wrapper.find(`.${CLASSNAME}__description`),
+        link: wrapper.find(`.${CLASSNAME}__link`).find(Link),
         props,
         wrapper,
     };
 };
 
 describe(`<${LinkPreview.displayName}>`, () => {
-    // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', () => {
-        // Here is an example of a basic rendering check, with snapshot.
+    it('should render with default props', () => {
+        const { wrapper, thumbnail, title, link, description } = setup();
+        expect(wrapper).toHaveClassName(CLASSNAME);
 
-        it('should render correctly', () => {
-            const { wrapper } = setup();
-            expect(wrapper).toMatchSnapshot();
-
-            expect(wrapper).toExist();
-            expect(wrapper).toHaveClassName(CLASSNAME);
+        ['size', 'theme'].forEach((type) => {
+            expect(wrapper).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type, value: DEFAULT_PROPS[type] }));
         });
-
-        it('should render correctly', () => {
-            const { wrapper } = setup({ size: Size.big });
-            expect(wrapper).toMatchSnapshot();
-
-            expect(wrapper).toExist();
-            expect(wrapper).toHaveClassName(CLASSNAME);
-        });
+        expect(thumbnail).not.toExist();
+        expect(title).not.toExist();
+        expect(link).toExist();
+        expect(link).toHaveProp('tabIndex', undefined);
+        expect(description).not.toExist();
     });
 
-    // 2. Test defaultProps value and important props custom values.
-    describe('Props', () => {
-        it('should use default props', () => {
-            const { wrapper, thumbnail } = setup();
-            ['size', 'theme'].forEach((prop: string) => {
-                expect(wrapper).toHaveClassName(
-                    getBasicClass({ prefix: CLASSNAME, type: prop, value: DEFAULT_PROPS[prop] }),
-                );
-            });
-            expect(thumbnail).not.toExist();
-        });
+    it('should render with only the title', () => {
+        const { title, link } = setup({ title: 'Title' });
 
-        it('should pass className prop to the wrapper', () => {
-            const expectedClassName = 'must-be-set';
-            const { wrapper } = setup({ className: expectedClassName });
-
-            expect(wrapper).toHaveClassName(expectedClassName);
-        });
-
-        it('should set --theme-dark class variant on wrapper if theme = Theme.dark', () => {
-            const { wrapper } = setup({ theme: Theme.dark });
-
-            expect(wrapper).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'theme', value: Theme.dark }));
-        });
+        expect(title).toExist();
+        expect(link).toExist();
+        expect(link).toHaveProp('tabIndex', '-1');
     });
 
-    // 3. Test events.
-    describe('Events', () => {
-        const expectedUrl = 'https://expected.url';
-        const { thumbnail } = setup({
-            link: expectedUrl,
-            thumbnailProps: { image: 'https://expected.url/image.png', alt: 'Alt' },
+    it('should render with complete props', () => {
+        const { wrapper, thumbnail, title, link, description, props } = setup({
+            size: Size.big,
+            theme: Theme.dark,
+            thumbnailProps: { image: 'https://example.com/thumbnail.jpg', alt: '' },
+            link: 'https://example.com',
+            linkProps: { 'data-custom-attr': 'true' },
+            title: 'Title',
+            description: 'Description',
         });
-        window.open = jest.fn();
 
-        thumbnail.simulate('click');
+        const validateLink = (linkElement: any) => {
+            expect(linkElement).toHaveProp('href', props.link);
+            // Props forwarding
+            expect(linkElement).toHaveProp('data-custom-attr', 'true');
+        };
 
-        expect(window.open).toHaveBeenCalledWith(expectedUrl, '_blank');
-    });
+        expect(wrapper).toExist();
 
-    // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', () => {
-        // Nothing to do here.
-    });
+        // Thumbnail
+        expect(thumbnail).toExist();
+        validateLink((thumbnail as any).dive());
 
-    // 5. Test state.
-    describe('State', () => {
-        // Nothing to do here.
+        // Title
+        expect(title).toHaveText(props.title);
+        validateLink(title.find(Link));
+
+        // Link
+        expect(link).toHaveText(props.link);
+        validateLink(link.find(Link));
+
+        // Description
+        expect(description).toHaveText(props.description);
+
+        // Size prop applied
+        expect(wrapper).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'size', value: props.size }));
+
+        // Dark theme applied
+        expect(wrapper).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'theme', value: Theme.dark }));
     });
 
     // Common tests suite.

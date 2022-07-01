@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback } from 'react';
+import React, { forwardRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -14,16 +14,18 @@ import {
     ThumbnailProps,
 } from '@lumx/react';
 
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, HeadingElement } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
  */
 export interface LinkPreviewProps extends GenericProps {
-    /** Description (either a string, or sanitized html). */
-    description?: string | { __html: string };
+    /** Description. */
+    description?: string;
     /** Link URL. */
     link: string;
+    /** Custom react component for the link (can be used to inject react router Link). */
+    linkAs?: 'a' | any;
     /** Props to pass to the link (minus those already set by the LinkPreview props). */
     linkProps?: Omit<LinkProps, 'color' | 'colorVariant' | 'href' | 'target'>;
     /** Size variant. */
@@ -34,6 +36,8 @@ export interface LinkPreviewProps extends GenericProps {
     thumbnailProps?: ThumbnailProps;
     /** Title. */
     title?: string;
+    /** Customize the title heading tag. */
+    titleHeading?: HeadingElement;
 }
 
 /**
@@ -49,10 +53,11 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
 /**
  * Component default props.
  */
-const DEFAULT_PROPS: Partial<LinkPreviewProps> = {
+const DEFAULT_PROPS = {
     size: Size.regular,
     theme: Theme.light,
-};
+    titleHeading: 'h2',
+} as const;
 
 /**
  * LinkPreview component.
@@ -62,13 +67,24 @@ const DEFAULT_PROPS: Partial<LinkPreviewProps> = {
  * @return React element.
  */
 export const LinkPreview: Comp<LinkPreviewProps, HTMLDivElement> = forwardRef((props, ref) => {
-    const { className, description, link, linkProps, size, theme, thumbnailProps, title, ...forwardedProps } = props;
-
-    //TODO: a11y
-    const goToUrl = useCallback(() => window.open(link, '_blank'), [link]);
+    const {
+        className,
+        description,
+        link,
+        linkAs,
+        linkProps,
+        size,
+        theme,
+        thumbnailProps,
+        title,
+        titleHeading,
+        ...forwardedProps
+    } = props;
+    // Use title heading as title wrapper (see DEFAULT_PROPS for the default value).
+    const TitleHeading = titleHeading as HeadingElement;
 
     return (
-        <div
+        <article
             ref={ref}
             {...forwardedProps}
             className={classNames(
@@ -85,8 +101,14 @@ export const LinkPreview: Comp<LinkPreviewProps, HTMLDivElement> = forwardRef((p
                     <div className={`${CLASSNAME}__thumbnail`}>
                         <Thumbnail
                             {...thumbnailProps}
-                            onClick={goToUrl}
-                            role="link"
+                            linkAs={linkAs}
+                            linkProps={{
+                                ...linkProps,
+                                href: link,
+                                target: '_blank',
+                                // Avoid redundant links in focus order
+                                tabIndex: -1,
+                            }}
                             aspectRatio={AspectRatio.free}
                             fillHeight
                         />
@@ -95,9 +117,10 @@ export const LinkPreview: Comp<LinkPreviewProps, HTMLDivElement> = forwardRef((p
 
                 <div className={`${CLASSNAME}__container`}>
                     {title && (
-                        <div className={`${CLASSNAME}__title`}>
+                        <TitleHeading className={`${CLASSNAME}__title`}>
                             <Link
                                 {...linkProps}
+                                linkAs={linkAs}
                                 target="_blank"
                                 href={link}
                                 color={theme === Theme.light ? ColorPalette.dark : ColorPalette.light}
@@ -105,25 +128,29 @@ export const LinkPreview: Comp<LinkPreviewProps, HTMLDivElement> = forwardRef((p
                             >
                                 {title}
                             </Link>
-                        </div>
+                        </TitleHeading>
                     )}
+
                     {description && <p className={`${CLASSNAME}__description`}>{description}</p>}
 
                     <div className={`${CLASSNAME}__link`}>
                         <Link
                             {...linkProps}
+                            linkAs={linkAs}
                             className={classNames(`${CLASSNAME}__link`, linkProps?.className)}
                             target="_blank"
                             href={link}
                             color={theme === Theme.light ? ColorPalette.primary : ColorPalette.light}
                             colorVariant={ColorVariant.N}
+                            // Avoid redundant links in focus order
+                            tabIndex={title ? '-1' : undefined}
                         >
                             {link}
                         </Link>
                     </div>
                 </div>
             </div>
-        </div>
+        </article>
     );
 });
 
