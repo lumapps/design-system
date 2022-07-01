@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   @lumx/react build: fix export of react types in component props
+-   Dialog & Lightbox: fixed focus trap containing hidden input.
 
 ## [2.2.20][] - 2022-07-01
 
