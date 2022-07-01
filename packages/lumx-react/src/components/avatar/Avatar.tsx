@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { AspectRatio, Size, Theme, Thumbnail, ThumbnailProps } from '@lumx/react';
 
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme } from '@lumx/react/utils';
 
 /**
  * Avatar sizes.
@@ -14,7 +14,7 @@ export type AvatarSize = Extract<Size, 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl'>;
 /**
  * Defines the props of the component.
  */
-export interface AvatarProps extends GenericProps {
+export interface AvatarProps extends GenericProps, HasTheme {
     /** Action toolbar content. */
     actions?: ReactNode;
     /** Image alternative text. */
@@ -33,8 +33,6 @@ export interface AvatarProps extends GenericProps {
     onKeyPress?: KeyboardEventHandler<HTMLDivElement>;
     /** Size variant. */
     size?: AvatarSize;
-    /** Theme adapting the component to light or dark background. */
-    theme?: Theme;
     /** Props to pass to the thumbnail (minus those already set by the Avatar props). */
     thumbnailProps?: Omit<
         ThumbnailProps,

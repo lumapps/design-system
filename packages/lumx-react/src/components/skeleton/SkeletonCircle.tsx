@@ -2,16 +2,14 @@ import classNames from 'classnames';
 import React, { forwardRef } from 'react';
 
 import { GlobalSize, Theme, ColorPalette } from '@lumx/react';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
  */
-export interface SkeletonCircleProps extends GenericProps {
+export interface SkeletonCircleProps extends GenericProps, HasTheme {
     /** Size variant. */
     size: GlobalSize;
-    /** Theme. */
-    theme?: Theme;
     /** The color of the skeleton. */
     color?: ColorPalette;
 }

@@ -3,7 +3,7 @@ import React, { forwardRef, MouseEventHandler } from 'react';
 import classNames from 'classnames';
 
 import { AspectRatio, Icon, Size, Theme } from '@lumx/react';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses, ValueOf } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme, ValueOf } from '@lumx/react/utils';
 
 /**
  * Uploader variants.
@@ -23,7 +23,7 @@ export type UploaderSize = Extract<Size, 'xl' | 'xxl'>;
 /**
  * Defines the props of the component.
  */
-export interface UploaderProps extends GenericProps {
+export interface UploaderProps extends GenericProps, HasTheme {
     /** Image aspect ratio. */
     aspectRatio?: AspectRatio;
     /** Icon (SVG path). */
@@ -32,8 +32,6 @@ export interface UploaderProps extends GenericProps {
     label?: string;
     /** Size variant. */
     size?: UploaderSize;
-    /** Theme adapting the component to light or dark background. */
-    theme?: Theme;
     /** Variant. */
     variant?: UploaderVariant;
     /** On click callback. */

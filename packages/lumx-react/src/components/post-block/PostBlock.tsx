@@ -6,12 +6,12 @@ import isObject from 'lodash/isObject';
 
 import { Orientation, Theme, Thumbnail, ThumbnailProps, ThumbnailVariant } from '@lumx/react';
 
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
  */
-export interface PostBlockProps extends GenericProps {
+export interface PostBlockProps extends GenericProps, HasTheme {
     /** Action toolbar content. */
     actions?: ReactNode;
     /** Attachment content. */
@@ -26,8 +26,6 @@ export interface PostBlockProps extends GenericProps {
     tags?: ReactNode;
     /** Content (string, or sanitized html). */
     text?: string | { __html: string };
-    /** Theme adapting the component to light or dark background. */
-    theme?: Theme;
     /** Thumbnail. */
     thumbnailProps?: ThumbnailProps;
     /** Title. */

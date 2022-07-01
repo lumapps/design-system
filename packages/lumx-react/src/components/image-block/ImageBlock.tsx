@@ -6,7 +6,7 @@ import isObject from 'lodash/isObject';
 
 import { Alignment, HorizontalAlignment, Size, Theme, Thumbnail } from '@lumx/react';
 
-import { Comp, GenericProps, getRootClassName, handleBasicClasses, ValueOf } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme, ValueOf } from '@lumx/react/utils';
 import { ThumbnailProps } from '../thumbnail/Thumbnail';
 
 /**
@@ -26,7 +26,7 @@ export type ImageBlockSize = Extract<Size, 'xl' | 'xxl'>;
 /**
  * Defines the props of the component.
  */
-export interface ImageBlockProps extends GenericProps {
+export interface ImageBlockProps extends GenericProps, HasTheme {
     /** Action toolbar content. */
     actions?: ReactNode;
     /** Alignment. */
@@ -47,8 +47,6 @@ export interface ImageBlockProps extends GenericProps {
     size?: ImageBlockSize;
     /** Tag content. */
     tags?: ReactNode;
-    /** Theme adapting the component to light or dark background. */
-    theme?: Theme;
     /** Props to pass to the thumbnail (minus those already set by the ImageBlock props). */
     thumbnailProps?: Omit<ThumbnailProps, 'image' | 'size' | 'theme' | 'align' | 'fillHeight'>;
     /** Image title to display in the caption. */

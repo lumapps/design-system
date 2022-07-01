@@ -1,16 +1,14 @@
 import React, { forwardRef, MouseEventHandler, useMemo } from 'react';
 
 import { Alignment, AspectRatio, Theme, Thumbnail, ThumbnailProps } from '@lumx/react';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme } from '@lumx/react/utils';
 import classNames from 'classnames';
 import take from 'lodash/take';
 
 /**
  * Defines the props of the component.
  */
-export interface MosaicProps extends GenericProps {
-    /** Theme adapting the component to light or dark background. */
-    theme?: Theme;
+export interface MosaicProps extends GenericProps, HasTheme {
     /** Thumbnails. */
     thumbnails: ThumbnailProps[];
     /** On image click callback. */

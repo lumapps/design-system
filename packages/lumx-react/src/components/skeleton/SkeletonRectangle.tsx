@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React, { forwardRef } from 'react';
 
 import { AspectRatio, GlobalSize, Theme, ColorPalette } from '@lumx/react';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses, ValueOf } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme, ValueOf } from '@lumx/react/utils';
 
 /**
  * Skeleton variants.
@@ -13,13 +13,11 @@ export type SkeletonRectangleVariant = ValueOf<typeof SkeletonRectangleVariant>;
 /**
  * Defines the props of the component.
  */
-export interface SkeletonRectangleProps extends GenericProps {
+export interface SkeletonRectangleProps extends GenericProps, HasTheme {
     /** Aspect ratio (use with width and not height). */
     aspectRatio?: Extract<AspectRatio, 'square' | 'horizontal' | 'vertical' | 'wide'>;
     /** Height size. */
     height?: GlobalSize;
-    /** Theme adapting the component to light or dark background. */
-    theme?: Theme;
     /** Border variant. */
     variant?: SkeletonRectangleVariant;
     /** Width size. */

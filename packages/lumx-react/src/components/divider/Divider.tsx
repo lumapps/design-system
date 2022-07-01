@@ -3,15 +3,12 @@ import React, { forwardRef } from 'react';
 import classNames from 'classnames';
 
 import { Theme } from '@lumx/react';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
  */
-export interface DividerProps extends GenericProps {
-    /** Theme adapting the component to light or dark background. */
-    theme?: Theme;
-}
+export interface DividerProps extends GenericProps, HasTheme {}
 
 /**
  * Component display name.

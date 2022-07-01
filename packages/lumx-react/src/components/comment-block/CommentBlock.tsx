@@ -3,7 +3,7 @@ import React, { Children, forwardRef, KeyboardEvent, KeyboardEventHandler, React
 import classNames from 'classnames';
 
 import { Avatar, Size, Theme, Tooltip } from '@lumx/react';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses, ValueOf } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme, ValueOf } from '@lumx/react/utils';
 
 import isFunction from 'lodash/isFunction';
 import { AvatarProps } from '../avatar/Avatar';
@@ -20,7 +20,7 @@ export type CommentBlockVariant = ValueOf<typeof CommentBlockVariant>;
 /**
  * Defines the props of the component.
  */
-export interface CommentBlockProps extends GenericProps {
+export interface CommentBlockProps extends GenericProps, HasTheme {
     /** Action toolbar content. */
     actions?: ReactNode;
     /** Props to pass to the avatar. */
@@ -49,8 +49,6 @@ export interface CommentBlockProps extends GenericProps {
     onMouseLeave?(): void;
     /** Comment content. */
     text: ReactNode | string;
-    /** Theme adapting the component to light or dark background. */
-    theme?: Theme;
     /** Comment variant. */
     variant?: CommentBlockVariant;
 }

@@ -6,12 +6,12 @@ import { uid } from 'uid';
 import { mdiCheck } from '@lumx/icons';
 
 import { Icon, InputHelper, InputLabel, Theme } from '@lumx/react';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
  */
-export interface CheckboxProps extends GenericProps {
+export interface CheckboxProps extends GenericProps, HasTheme {
     /** Helper text. */
     helper?: string;
     /** Native input id property. */
@@ -26,8 +26,6 @@ export interface CheckboxProps extends GenericProps {
     label?: ReactNode;
     /** Native input name property. */
     name?: string;
-    /** Theme adapting the component to light or dark background. */
-    theme?: Theme;
     /** Native input value property. */
     value?: string;
     /** On change callback. */

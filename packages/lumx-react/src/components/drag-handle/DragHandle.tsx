@@ -4,15 +4,12 @@ import classNames from 'classnames';
 
 import { mdiDragVertical } from '@lumx/icons';
 import { ColorPalette, Icon, Size, Theme } from '@lumx/react';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
  */
-export interface DragHandleProps extends GenericProps {
-    /** Theme adapting the component to light or dark background. */
-    theme?: Theme;
-}
+export interface DragHandleProps extends GenericProps, HasTheme {}
 
 /**
  * Component display name.

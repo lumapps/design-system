@@ -14,12 +14,12 @@ import {
     ThumbnailProps,
 } from '@lumx/react';
 
-import { Comp, GenericProps, getRootClassName, handleBasicClasses, HeadingElement } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, HeadingElement, HasTheme } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
  */
-export interface LinkPreviewProps extends GenericProps {
+export interface LinkPreviewProps extends GenericProps, HasTheme {
     /** Description. */
     description?: string;
     /** Link URL. */
@@ -30,8 +30,6 @@ export interface LinkPreviewProps extends GenericProps {
     linkProps?: Omit<LinkProps, 'color' | 'colorVariant' | 'href' | 'target'>;
     /** Size variant. */
     size?: Extract<Size, 'regular' | 'big'>;
-    /** Theme adapting the component to light or dark background. */
-    theme?: Theme;
     /** Thumbnail for the link preview. */
     thumbnailProps?: ThumbnailProps;
     /** Title. */

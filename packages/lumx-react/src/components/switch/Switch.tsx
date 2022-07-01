@@ -7,12 +7,12 @@ import isEmpty from 'lodash/isEmpty';
 
 import { Alignment, InputHelper, InputLabel, Theme } from '@lumx/react';
 
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
  */
-export interface SwitchProps extends GenericProps {
+export interface SwitchProps extends GenericProps, HasTheme {
     /** Helper text. */
     helper?: string;
     /** Whether it is checked or not. */
@@ -23,8 +23,6 @@ export interface SwitchProps extends GenericProps {
     name?: string;
     /** Position of the switch relative to the label. */
     position?: Extract<Alignment, 'right' | 'left'>;
-    /** Theme adapting the component to light or dark background. */
-    theme?: Theme;
     /** Native input value property. */
     value?: string;
     /** On change callback. */

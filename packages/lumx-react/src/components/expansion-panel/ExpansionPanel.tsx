@@ -15,6 +15,7 @@ import {
     GenericProps,
     getRootClassName,
     handleBasicClasses,
+    HasTheme,
     isComponent,
     partitionMulti,
 } from '@lumx/react/utils';
@@ -22,7 +23,7 @@ import {
 /**
  * Defines the props of the component.
  */
-export interface ExpansionPanelProps extends GenericProps {
+export interface ExpansionPanelProps extends GenericProps, HasTheme {
     /** Whether the expansion panel has a background. */
     hasBackground?: boolean;
     /** Whether the header has a divider. */
@@ -31,8 +32,6 @@ export interface ExpansionPanelProps extends GenericProps {
     isOpen?: boolean;
     /** Label text (overwritten if a `<header>` is provided in the children). */
     label?: string;
-    /** Theme adapting the component to light or dark background. */
-    theme?: Theme;
     /** On open callback. */
     onOpen?: Callback;
     /** On close callback. */

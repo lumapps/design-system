@@ -6,7 +6,7 @@ import classNames from 'classnames';
 
 import { Color, ColorPalette, Emphasis, Size, Theme } from '@lumx/react';
 import { CSS_PREFIX } from '@lumx/react/constants';
-import { Comp, GenericProps, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, handleBasicClasses, HasTheme } from '@lumx/react/utils';
 import { renderLink } from '@lumx/react/utils/renderLink';
 
 type HTMLButtonProps = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
@@ -18,7 +18,8 @@ export type ButtonSize = Extract<Size, 's' | 'm'>;
 
 export interface BaseButtonProps
     extends GenericProps,
-        Pick<AriaAttributes, 'aria-expanded' | 'aria-haspopup' | 'aria-pressed' | 'aria-label'> {
+        Pick<AriaAttributes, 'aria-expanded' | 'aria-haspopup' | 'aria-pressed' | 'aria-label'>,
+        HasTheme {
     /** Color variant. */
     color?: Color;
     /** Emphasis variant. */
@@ -37,8 +38,6 @@ export interface BaseButtonProps
     size?: ButtonSize;
     /** Native anchor target property. */
     target?: '_self' | '_blank' | '_parent' | '_top';
-    /** Theme adapting the component to light or dark background. */
-    theme?: Theme;
     /** Native button type. */
     type?: HTMLButtonProps['type'];
     /** Custom react component for the link (can be used to inject react router Link). */

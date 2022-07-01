@@ -1,20 +1,18 @@
 import { Theme } from '@lumx/react';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme } from '@lumx/react/utils';
 import classNames from 'classnames';
 import React, { forwardRef, ReactNode } from 'react';
 
 /**
  * Defines the props of the component.
  */
-export interface InputLabelProps extends GenericProps {
+export interface InputLabelProps extends GenericProps, HasTheme {
     /** Label content. */
     children: string | ReactNode;
     /** Native htmlFor property. */
     htmlFor: string;
     /** Whether the component is required or not. */
     isRequired?: boolean;
-    /** Theme adapting the component to light or dark background. */
-    theme?: Theme;
 }
 
 /**
