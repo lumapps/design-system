@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<GenericBlock> Snapshots and structure should render story 'Default' 1`] = `
+Array [
+  <FlexBox
+    className="lumx-generic-block"
+    gap="regular"
+    hAlign="center"
+    orientation="vertical"
+    vAlign="center"
+  >
+    <FlexBox
+      className="lumx-generic-block__figure"
+    >
+      <Avatar
+        alt=""
+        image="/demo-assets/persona.png"
+        size="m"
+        theme="light"
+      />
+    </FlexBox>
+    <FlexBox
+      className="lumx-generic-block__content"
+      fillSpace={true}
+      orientation="vertical"
+      vAlign="center"
+    >
+      <h2>
+        Content title
+      </h2>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rhoncus libero aliquet pharetra luctus. Fusce nisl turpis, posuere ac tellus at, euismod vulputate libero...
+      </p>
+    </FlexBox>
+    <FlexBox
+      className="lumx-generic-block__actions"
+      vAlign="center"
+    >
+      <Button
+        emphasis="high"
+        size="m"
+        theme="light"
+      >
+        Actions
+      </Button>
+    </FlexBox>
+  </FlexBox>,
+  <FlexBox
+    className="lumx-generic-block"
+    gap="regular"
+    hAlign="center"
+    orientation="horizontal"
+    vAlign="center"
+  >
+    <FlexBox
+      className="lumx-generic-block__figure"
+    >
+      <Avatar
+        alt=""
+        image="/demo-assets/persona.png"
+        size="m"
+        theme="light"
+      />
+    </FlexBox>
+    <FlexBox
+      className="lumx-generic-block__content"
+      fillSpace={true}
+      orientation="vertical"
+      vAlign="left"
+    >
+      <h2>
+        Content title
+      </h2>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rhoncus libero aliquet pharetra luctus. Fusce nisl turpis, posuere ac tellus at, euismod vulputate libero...
+      </p>
+    </FlexBox>
+    <FlexBox
+      className="lumx-generic-block__actions"
+      vAlign="right"
+    >
+      <Button
+        emphasis="high"
+        size="m"
+        theme="light"
+      >
+        Actions
+      </Button>
+    </FlexBox>
+  </FlexBox>,
+]
+`;

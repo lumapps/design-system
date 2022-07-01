@@ -15,6 +15,7 @@ export * from './components/dropdown';
 export * from './components/expansion-panel';
 export * from './components/flag';
 export * from './components/flex-box';
+export * from './components/generic-block';
 export * from './components/grid';
 export * from './components/icon';
 export * from './components/image-block';
