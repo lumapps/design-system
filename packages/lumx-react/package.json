@@ -111,7 +111,7 @@
     },
     "scripts": {
         "build": "rollup -c && yarn generate:types",
-        "generate:types": "dts-bundle-generator --no-check --external-types=react --external-imports=moment -o dist/types.d.ts src/index.ts",
+        "generate:types": "dts-bundle-generator --no-check --external-imports=react -o dist/types.d.ts src/index.ts",
         "prepare": "install-peers || exit 0",
         "prepublishOnly": "yarn build",
         "test": "jest --config jest/index.js --coverage --notify --passWithNoTests --detectOpenHandles --runInBand",
