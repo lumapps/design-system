@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.20][] - 2022-07-01
+
 ### Added
 
 -   LinkPreview: added `linkAs` prop to customize link component.
@@ -1485,3 +1487,5 @@ _Failed released_
 [2.2.18]: https://github.com/lumapps/design-system/tree/v2.2.18
 [unreleased]: https://github.com/lumapps/design-system/compare/v2.2.19...HEAD
 [2.2.19]: https://github.com/lumapps/design-system/tree/v2.2.19
+[unreleased]: https://github.com/lumapps/design-system/compare/v2.2.20...HEAD
+[2.2.20]: https://github.com/lumapps/design-system/tree/v2.2.20
