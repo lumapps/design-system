@@ -319,6 +319,10 @@ export const DialogFocusTrap = ({ theme }: any) => {
                     />
                 </header>
                 <div className="lumx-spacing-padding-horizontal-huge lumx-spacing-padding-bottom-huge">
+                    {/* Testing hidden input do not count in th focus trap*/}
+                    <input hidden type="file" />
+                    <input type="hidden" />
+
                     <div className="lumx-spacing-margin-bottom-huge">
                         The text field should capture the focus on open and a focus trap should be in place.
                     </div>

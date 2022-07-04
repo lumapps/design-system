@@ -49,6 +49,13 @@ exports[`<Dialog> Snapshots and structure should render story DialogFocusTrap 1`
     <div
       className="lumx-spacing-padding-horizontal-huge lumx-spacing-padding-bottom-huge"
     >
+      <input
+        hidden={true}
+        type="file"
+      />
+      <input
+        type="hidden"
+      />
       <div
         className="lumx-spacing-margin-bottom-huge"
       >

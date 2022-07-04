@@ -124,5 +124,11 @@ describe(getFirstAndLastFocusable.name, () => {
             const focusable = getFirstAndLastFocusable(element);
             expect(focusable.first).toMatchInlineSnapshot(`<button />`);
         });
+
+        it('should skip hidden input', () => {
+            const element = htmlToElement(`<div><input hidden /><button /></div>`);
+            const focusable = getFirstAndLastFocusable(element);
+            expect(focusable.first).toMatchInlineSnapshot(`<button />`);
+        });
     });
 });
