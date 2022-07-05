@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.21][] - 2022-07-04
+
 ### Fixed
 
 -   @lumx/react build: fix export of react types in component props
@@ -1494,3 +1496,5 @@ _Failed released_
 [2.2.19]: https://github.com/lumapps/design-system/tree/v2.2.19
 [unreleased]: https://github.com/lumapps/design-system/compare/v2.2.20...HEAD
 [2.2.20]: https://github.com/lumapps/design-system/tree/v2.2.20
+[unreleased]: https://github.com/lumapps/design-system/compare/v2.2.21...HEAD
+[2.2.21]: https://github.com/lumapps/design-system/tree/v2.2.21
