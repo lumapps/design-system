@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   Thumbnail: broaden `badge` prop TS type from `ReactElement` to `ReactElement | Falsy`.
+
 ## [2.2.21][] - 2022-07-04
 
 ### Fixed
