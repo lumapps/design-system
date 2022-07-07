@@ -1,4 +1,4 @@
-import React, { Children, forwardRef, ReactElement, ReactNode, RefObject, useMemo, useRef, useState } from 'react';
+import React, { Children, forwardRef, ReactElement, ReactNode, Ref, RefObject, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import classNames from 'classnames';
@@ -42,7 +42,7 @@ export interface DialogProps extends GenericProps {
     /** Reference to the parent element that triggered modal opening (will get back focus on close). */
     parentElement?: RefObject<HTMLElement>;
     /** Reference to the dialog content element. */
-    contentRef?: RefObject<HTMLDivElement>;
+    contentRef?: Ref<HTMLDivElement>;
     /** Reference to the of the element that should get the focus when the dialogs opens. By default, the first child will take focus. */
     focusElement?: RefObject<HTMLElement>;
     /** Whether to keep the dialog open on clickaway or escape press. */
