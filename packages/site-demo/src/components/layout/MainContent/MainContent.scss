@@ -28,6 +28,10 @@
         }
 
         & > h3 {
+            @include lumx-typography(title);
+        }
+
+        & > h4 {
             @include lumx-typography(subtitle2);
         }
 
