@@ -47,8 +47,8 @@ export function commonTestsSuite(
                 const wrappersToTest = isArray(tests.className)
                     ? tests.className
                     : [tests.className as string, tests.className as string];
-                expect(wrappers[wrappersToTest[0]]).toHaveClassName(params.className);
-                expect(wrappers[wrappersToTest[1]]).toHaveClassName(modifiedProps.className);
+                expect(wrappers[wrappersToTest[0]]).toHaveClassName(params.className as string);
+                expect(wrappers[wrappersToTest[1]]).toHaveClassName(modifiedProps.className as string);
             });
         }
 

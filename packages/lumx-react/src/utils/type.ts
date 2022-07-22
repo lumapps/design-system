@@ -39,8 +39,11 @@ export type HeadingElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
  */
 export interface GenericProps {
     /**
+     * Class name forwarded to the root element of the component.
+     */
+    className?: string;
+    /**
      * Any prop (particularly any supported prop for a HTML element).
-     * E.g. classNames, onClick, disabled, ...
      */
     [propName: string]: any;
 }
