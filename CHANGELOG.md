@@ -18,6 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Dialog: avoid closing all nested dialogs if the user clicks outside a children dialog.
 
+### Added
+
+-   GenericBlock: added alternative API to specify the "figure", "content" and "actions" sections using components.
+
 ## [2.2.21][] - 2022-07-04
 
 ### Fixed
