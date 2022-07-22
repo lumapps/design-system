@@ -1,33 +1,65 @@
-import React, { createContext, useContext, useEffect } from 'react';
-import pull from 'lodash/pull';
+import React, { createContext, RefObject, useContext, useEffect, useMemo, useRef } from 'react';
 import { ClickAwayParameters, useClickAway } from '@lumx/react/hooks/useClickAway';
 
-const ClickAwayAncestorContext = createContext<ClickAwayParameters['refs'] | null>(null);
+interface ContextValue {
+    childrenRefs: Array<RefObject<HTMLElement>>;
+    addRefs(...newChildrenRefs: Array<RefObject<HTMLElement>>): void;
+}
+
+const ClickAwayAncestorContext = createContext<ContextValue | null>(null);
+
+interface ClickAwayProviderProps extends ClickAwayParameters {
+    /**
+     * (Optional) Element that should be considered as part of the parent
+     */
+    parentRef?: RefObject<HTMLElement>;
+}
 
 /**
  * Component combining the `useClickAway` hook with a React context to hook into the React component tree and make sure
- * we take into account both the DOM tree and the React tree we trying to detect click away.
+ * we take into account both the DOM tree and the React tree to detect click away.
  *
  * @return the react component.
  */
-export const ClickAwayProvider: React.FC<ClickAwayParameters> = ({ children, callback, refs }) => {
-    const ancestorChildrenRefs = useContext(ClickAwayAncestorContext);
+export const ClickAwayProvider: React.FC<ClickAwayProviderProps> = ({
+    children,
+    callback,
+    childrenRefs,
+    parentRef,
+}) => {
+    const parentContext = useContext(ClickAwayAncestorContext);
+    const currentContext = useMemo(() => {
+        const context: ContextValue = {
+            childrenRefs: [],
+            /**
+             * Add element refs to the current context and propagate to the parent context.
+             */
+            addRefs(...newChildrenRefs) {
+                // Add element refs that should be considered as inside the click away context.
+                context.childrenRefs.push(...newChildrenRefs);
+
+                if (parentContext) {
+                    // Also add then to the parent context
+                    parentContext.addRefs(...newChildrenRefs);
+                    if (parentRef) {
+                        // The parent element is also considered as inside the parent click away context but not inside the current context
+                        parentContext.addRefs(parentRef);
+                    }
+                }
+            },
+        };
+        return context;
+    }, [parentContext, parentRef]);
 
     useEffect(() => {
-        const { current: currentRefs } = refs;
-        const { current: currentAncestorChildrenRefs } = ancestorChildrenRefs || {};
-        if (!currentAncestorChildrenRefs || !currentRefs) {
-            return undefined;
+        const { current: currentRefs } = childrenRefs;
+        if (!currentRefs) {
+            return;
         }
-        // Push current refs to parent.
-        currentAncestorChildrenRefs.push(...currentRefs);
-        return () => {
-            // Pull current refs from parent.
-            pull(currentAncestorChildrenRefs, ...currentRefs);
-        };
-    }, [ancestorChildrenRefs, refs]);
+        currentContext.addRefs(...currentRefs);
+    }, [currentContext, childrenRefs]);
 
-    useClickAway({ callback, refs });
-    return <ClickAwayAncestorContext.Provider value={refs}>{children}</ClickAwayAncestorContext.Provider>;
+    useClickAway({ callback, childrenRefs: useRef(currentContext.childrenRefs) });
+    return <ClickAwayAncestorContext.Provider value={currentContext}>{children}</ClickAwayAncestorContext.Provider>;
 };
 ClickAwayProvider.displayName = 'ClickAwayProvider';

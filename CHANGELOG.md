@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   TextField: broaden `inputRef` prop TS type from `RefObject` to `Ref`.
 -   Autocomplete: broaden `inputRef` prop TS type from `RefObject` to `Ref`.
 
+### Fixed
+
+-   Dialog: avoid closing all nested dialogs if the user clicks outside a children dialog.
+
 ## [2.2.21][] - 2022-07-04
 
 ### Fixed
