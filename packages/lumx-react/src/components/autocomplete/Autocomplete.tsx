@@ -1,8 +1,8 @@
-import React, { forwardRef, ReactNode, RefObject, SyntheticEvent, useRef } from 'react';
+import React, { forwardRef, ReactNode, SyntheticEvent, useRef } from 'react';
 
 import classNames from 'classnames';
 
-import { Dropdown, IconButtonProps, Offset, Placement, TextField, Theme } from '@lumx/react';
+import { Dropdown, IconButtonProps, Offset, Placement, TextField, TextFieldProps, Theme } from '@lumx/react';
 
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
@@ -29,7 +29,7 @@ export interface AutocompleteProps extends GenericProps {
      * Reference to the <input> or <textarea> element.
      * @see {@link TextFieldProps#inputRef}
      */
-    inputRef?: RefObject<HTMLInputElement>;
+    inputRef?: TextFieldProps['inputRef'];
     /**
      * The offset that will be applied to the Dropdown position.
      * @see {@link DropdownProps#offset}
@@ -244,7 +244,7 @@ export const Autocomplete: Comp<AutocompleteProps, HTMLDivElement> = forwardRef(
                 hasError={hasError}
                 helper={helper}
                 icon={icon}
-                inputRef={mergeRefs(inputAnchorRef, inputRef) as any}
+                inputRef={mergeRefs(inputAnchorRef as React.RefObject<HTMLInputElement>, inputRef)}
                 clearButtonProps={clearButtonProps}
                 isDisabled={isDisabled}
                 isRequired={isRequired}

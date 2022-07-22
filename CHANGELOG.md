@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   Thumbnail: broaden `badge` prop TS type from `ReactElement` to `ReactElement | Falsy`.
+-   Dialog: broaden `contentRef` prop TS type from `RefObject` to `Ref`.
+-   TextField: broaden `inputRef` prop TS type from `RefObject` to `Ref`.
+-   Autocomplete: broaden `inputRef` prop TS type from `RefObject` to `Ref`.
+
 ## [2.2.21][] - 2022-07-04
 
 ### Fixed

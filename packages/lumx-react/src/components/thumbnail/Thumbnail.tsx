@@ -13,7 +13,7 @@ import classNames from 'classnames';
 
 import { AspectRatio, HorizontalAlignment, Icon, Size, Theme } from '@lumx/react';
 
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, Falsy, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { mdiImageBroken } from '@lumx/icons';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
@@ -34,7 +34,7 @@ export interface ThumbnailProps extends GenericProps {
     /** Image aspect ratio. */
     aspectRatio?: AspectRatio;
     /** Badge. */
-    badge?: ReactElement;
+    badge?: ReactElement | Falsy;
     /** Image cross origin resource policy. */
     crossOrigin?: ImgHTMLProps['crossOrigin'];
     /** Fallback icon (SVG path) or react node when image fails to load. */

@@ -1,4 +1,4 @@
-import React, { forwardRef, ReactNode, RefObject, SyntheticEvent, useEffect, useMemo, useRef, useState } from 'react';
+import React, { forwardRef, ReactNode, Ref, SyntheticEvent, useEffect, useMemo, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 import get from 'lodash/get';
@@ -33,7 +33,7 @@ export interface TextFieldProps extends GenericProps {
     /** Native input id property (generated if not provided to link the label element). */
     id?: string;
     /** Reference to the <input> or <textarea> element. */
-    inputRef?: RefObject<HTMLInputElement> | RefObject<HTMLTextAreaElement>;
+    inputRef?: Ref<HTMLInputElement | HTMLTextAreaElement>;
     /** Whether the component is disabled or not. */
     isDisabled?: boolean;
     /** Whether the component is required or not. */
@@ -53,7 +53,7 @@ export interface TextFieldProps extends GenericProps {
     /** Placeholder text. */
     placeholder?: string;
     /** Reference to the wrapper. */
-    textFieldRef?: RefObject<HTMLDivElement>;
+    textFieldRef?: Ref<HTMLDivElement>;
     /** Theme adapting the component to light or dark background. */
     theme?: Theme;
     /** Value. */
@@ -139,7 +139,7 @@ const useComputeNumberOfRows = (
 
 interface InputNativeProps {
     id?: string;
-    inputRef?: RefObject<HTMLInputElement> | RefObject<HTMLTextAreaElement>;
+    inputRef?: TextFieldProps['inputRef'];
     isDisabled?: boolean;
     isRequired?: boolean;
     multiline?: boolean;

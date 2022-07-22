@@ -3,7 +3,7 @@ import React, { cloneElement, forwardRef, useMemo, useRef } from 'react';
 import classNames from 'classnames';
 
 import { List, ListProps } from '@lumx/react/components/list/List';
-import { Offset, Placement, Popover } from '@lumx/react/components/popover/Popover';
+import { Offset, Placement, Popover, PopoverProps } from '@lumx/react/components/popover/Popover';
 import { useInfiniteScroll } from '@lumx/react/hooks/useInfiniteScroll';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses, isComponent } from '@lumx/react/utils';
 
@@ -11,10 +11,11 @@ import { Comp, GenericProps, getRootClassName, handleBasicClasses, isComponent }
  * Defines the props of the component.
  */
 export interface DropdownProps extends GenericProps {
-    /** Reference to the element around which the dropdown is placed.
+    /**
+     * Reference to the element around which the dropdown is placed.
      * @see {@link PopoverProps#anchorRef}
      */
-    anchorRef: React.RefObject<HTMLElement>;
+    anchorRef: PopoverProps['anchorRef'];
     /** Dropdown content. */
     children: React.ReactNode;
     /**
