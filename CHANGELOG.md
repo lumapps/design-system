@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.22][] - 2022-07-25
+
 ### Changed
 
 -   Thumbnail: broaden `badge` prop TS type from `ReactElement` to `ReactElement | Falsy`.
@@ -1513,3 +1515,5 @@ _Failed released_
 [2.2.20]: https://github.com/lumapps/design-system/tree/v2.2.20
 [unreleased]: https://github.com/lumapps/design-system/compare/v2.2.21...HEAD
 [2.2.21]: https://github.com/lumapps/design-system/tree/v2.2.21
+[unreleased]: https://github.com/lumapps/design-system/compare/v2.2.22...HEAD
+[2.2.22]: https://github.com/lumapps/design-system/tree/v2.2.22
