@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { Theme } from '@lumx/react';
 
-import { Comp, GenericProps, getRootClassName, handleBasicClasses, ValueOf } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme, ValueOf } from '@lumx/react/utils';
 
 /**
  * Progress variants.
@@ -15,9 +15,7 @@ export type ProgressVariant = ValueOf<typeof ProgressVariant>;
 /**
  * Defines the props of the component.
  */
-export interface ProgressProps extends GenericProps {
-    /** Theme adapting the component to light or dark background. */
-    theme?: Theme;
+export interface ProgressProps extends GenericProps, HasTheme {
     /** Progress variant. */
     variant?: ProgressVariant;
 }

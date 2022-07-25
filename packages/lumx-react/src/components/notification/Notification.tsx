@@ -9,22 +9,20 @@ import { Button, Emphasis, Icon, Kind, Size, Theme } from '@lumx/react';
 
 import { DOCUMENT, NOTIFICATION_TRANSITION_DURATION } from '@lumx/react/constants';
 import { NOTIFICATION_CONFIGURATION } from '@lumx/react/components/notification/constants';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme } from '@lumx/react/utils';
 
 import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
 
 /**
  * Defines the props of the component.
  */
-export interface NotificationProps extends GenericProps {
+export interface NotificationProps extends GenericProps, HasTheme {
     /** Action button label. */
     actionLabel?: string;
     /** Content. */
     content?: React.ReactNode;
     /** Whether the component is open or not. */
     isOpen?: boolean;
-    /** Theme adapting the component to light or dark background. */
-    theme?: Theme;
     /** Notification type. */
     type?: Kind;
     /** Z-axis position. */

@@ -1,6 +1,5 @@
 import { IconButtonProps } from '@lumx/react';
-import { Theme } from '@lumx/react/components';
-import { GenericProps, ValueOf } from '@lumx/react/utils';
+import { GenericProps, HasTheme, ValueOf } from '@lumx/react/utils';
 import { ReactNode, SyntheticEvent } from 'react';
 
 /**
@@ -9,7 +8,7 @@ import { ReactNode, SyntheticEvent } from 'react';
 export const SelectVariant = { input: 'input', chip: 'chip' } as const;
 export type SelectVariant = ValueOf<typeof SelectVariant>;
 
-export interface CoreSelectProps extends GenericProps {
+export interface CoreSelectProps extends GenericProps, HasTheme {
     /** Props to pass to the clear button (minus those already set by the Select props). If not specified, the button won't be displayed. */
     clearButtonProps?: Pick<IconButtonProps, 'label'> &
         Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis'>;
@@ -35,8 +34,6 @@ export interface CoreSelectProps extends GenericProps {
     label?: string;
     /** Placeholder input text. */
     placeholder?: string;
-    /** Theme adapting the component to light or dark background. */
-    theme?: Theme;
     /** Select variant. */
     variant?: SelectVariant;
     /** On clear callback. */

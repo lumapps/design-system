@@ -1,6 +1,6 @@
 import { Alignment, Theme } from '@lumx/react';
 import { CSS_PREFIX } from '@lumx/react/constants';
-import { Comp, GenericProps, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, handleBasicClasses, HasTheme } from '@lumx/react/utils';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
 import classNames from 'classnames';
@@ -15,7 +15,7 @@ export enum TabListLayout {
 /**
  * Defines the props of the component.
  */
-export interface TabListProps extends GenericProps {
+export interface TabListProps extends GenericProps, HasTheme {
     /** ARIA label (purpose of the set of tabs). */
     ['aria-label']: string;
     /** Tab list. */
@@ -24,8 +24,6 @@ export interface TabListProps extends GenericProps {
     layout?: TabListLayout;
     /** Position of the tabs in the list (requires 'clustered' layout). */
     position?: Alignment;
-    /** Theme adapting the component to light or dark background. */
-    theme?: Theme;
 }
 
 /**

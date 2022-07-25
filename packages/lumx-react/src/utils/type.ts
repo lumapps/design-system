@@ -1,5 +1,6 @@
 import get from 'lodash/get';
 import { ReactElement, ReactNode, Ref } from 'react';
+import { Theme } from '@lumx/react';
 
 /** Get types of the values of a record. */
 export type ValueOf<T extends Record<any, any>> = T[keyof T];
@@ -33,6 +34,13 @@ export type Comp<P, T = HTMLElement> = {
 
 /** Union type of all heading elements */
 export type HeadingElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+
+export interface HasTheme {
+    /**
+     * Theme adapting the component to light or dark background.
+     */
+    theme?: Theme;
+}
 
 /**
  * Define a generic props types.

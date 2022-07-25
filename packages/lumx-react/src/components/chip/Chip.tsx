@@ -1,7 +1,7 @@
 import { Color, ColorPalette, Size, Theme } from '@lumx/react';
 import { useStopPropagation } from '@lumx/react/hooks/useStopPropagation';
 
-import { Comp, GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme, onEnterPressed } from '@lumx/react/utils';
 
 import classNames from 'classnames';
 
@@ -16,7 +16,7 @@ type ChipSize = Extract<Size, 's' | 'm'>;
 /**
  * Defines the props of the component.
  */
-export interface ChipProps extends GenericProps {
+export interface ChipProps extends GenericProps, HasTheme {
     /** A component to be rendered after the content. */
     after?: ReactNode;
     /** A component to be rendered before the content. */
@@ -33,8 +33,6 @@ export interface ChipProps extends GenericProps {
     isSelected?: boolean;
     /** Size variant. */
     size?: ChipSize;
-    /** Theme adapting the component to light or dark background. */
-    theme?: Theme;
     /** On "after" element clicked callback. */
     onAfterClick?: MouseEventHandler;
     /** On "before" element clicked callback. */

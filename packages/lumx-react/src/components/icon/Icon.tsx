@@ -3,7 +3,7 @@ import React, { forwardRef } from 'react';
 import classNames from 'classnames';
 
 import { Color, ColorPalette, ColorVariant, Size, Theme } from '@lumx/react';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme } from '@lumx/react/utils';
 import { mdiAlertCircle } from '@lumx/icons';
 
 export type IconSizes = Extract<Size, 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl'>;
@@ -11,7 +11,7 @@ export type IconSizes = Extract<Size, 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'x
 /**
  * Defines the props of the component.
  */
-export interface IconProps extends GenericProps {
+export interface IconProps extends GenericProps, HasTheme {
     /** Color variant. */
     color?: Color;
     /** Lightened or darkened variant of the selected icon color. */
@@ -25,8 +25,6 @@ export interface IconProps extends GenericProps {
     icon: string;
     /** Size variant. */
     size?: IconSizes;
-    /** Theme adapting the component to light or dark background. */
-    theme?: Theme;
     /** Sets an alternative text on the svg. Will set an `img` role to the svg. */
     alt?: string;
 }

@@ -2,9 +2,9 @@ import React, { forwardRef, ReactNode, SyntheticEvent, useRef } from 'react';
 
 import classNames from 'classnames';
 
-import { Dropdown, IconButtonProps, Offset, Placement, TextField, TextFieldProps, Theme } from '@lumx/react';
+import { Dropdown, IconButtonProps, Offset, Placement, TextField, TextFieldProps } from '@lumx/react';
 
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme } from '@lumx/react/utils';
 
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
@@ -12,7 +12,7 @@ import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 /**
  * Defines the props of the component.
  */
-export interface AutocompleteProps extends GenericProps {
+export interface AutocompleteProps extends GenericProps, HasTheme {
     /**
      * Whether the suggestions list should display anchored to the input or to the wrapper.
      * @see {@link DropdownProps#anchorToInput}
@@ -94,8 +94,6 @@ export interface AutocompleteProps extends GenericProps {
      * @see {@link TextFieldProps#placeholder}
      */
     placeholder?: string;
-    /** Theme adapting the component to light or dark background. */
-    theme?: Theme;
     /** List of suggestions to display during autocomplete. */
     children: React.ReactNode;
     /**

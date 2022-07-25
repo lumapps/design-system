@@ -13,7 +13,7 @@ import classNames from 'classnames';
 
 import { AspectRatio, HorizontalAlignment, Icon, Size, Theme } from '@lumx/react';
 
-import { Comp, Falsy, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, Falsy, GenericProps, getRootClassName, handleBasicClasses, HasTheme } from '@lumx/react/utils';
 
 import { mdiImageBroken } from '@lumx/icons';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
@@ -26,7 +26,7 @@ type ImgHTMLProps = ImgHTMLAttributes<HTMLImageElement>;
 /**
  * Defines the props of the component.
  */
-export interface ThumbnailProps extends GenericProps {
+export interface ThumbnailProps extends GenericProps, HasTheme {
     /** Alignment of the thumbnail in it's parent (requires flex parent). */
     align?: HorizontalAlignment;
     /** Image alternative text. */
@@ -59,8 +59,6 @@ export interface ThumbnailProps extends GenericProps {
     onClick?: MouseEventHandler<HTMLDivElement>;
     /** On key press callback. */
     onKeyPress?: KeyboardEventHandler<HTMLDivElement>;
-    /** Theme adapting the component to light or dark background. */
-    theme?: Theme;
     /** Variant of the component. */
     variant?: ThumbnailVariant;
     /** Props to pass to the link wrapping the thumbnail. */

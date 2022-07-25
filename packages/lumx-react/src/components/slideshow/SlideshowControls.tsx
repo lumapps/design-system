@@ -5,7 +5,7 @@ import range from 'lodash/range';
 
 import { mdiChevronLeft, mdiChevronRight, mdiPlayCircleOutline, mdiPauseCircleOutline } from '@lumx/icons';
 import { Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme } from '@lumx/react/utils';
 import { WINDOW } from '@lumx/react/constants';
 import { useSlideshowControls, DEFAULT_OPTIONS } from '@lumx/react/hooks/useSlideshowControls';
 
@@ -17,7 +17,7 @@ import { usePaginationVisibleRange } from './usePaginationVisibleRange';
 /**
  * Defines the props of the component.
  */
-export interface SlideshowControlsProps extends GenericProps {
+export interface SlideshowControlsProps extends GenericProps, HasTheme {
     /** Index of the current slide. */
     activeIndex?: number;
     /** Props to pass to the next button (minus those already set by the SlideshowControls props). */
@@ -30,8 +30,6 @@ export interface SlideshowControlsProps extends GenericProps {
         Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis' | 'color'>;
     /** Number of slides. */
     slidesCount: number;
-    /** Theme adapting the component to light or dark background. */
-    theme?: Theme;
     /** On next button click callback. */
     onNextClick?(loopback?: boolean): void;
     /** On pagination change callback. */

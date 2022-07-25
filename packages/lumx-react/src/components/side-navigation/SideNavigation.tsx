@@ -4,16 +4,14 @@ import classNames from 'classnames';
 
 import { SideNavigationItem, Theme } from '@lumx/react';
 
-import { Comp, GenericProps, getRootClassName, handleBasicClasses, isComponent } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme, isComponent } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
  */
-export interface SideNavigationProps extends GenericProps {
+export interface SideNavigationProps extends GenericProps, HasTheme {
     /** SideNavigationItem elements. */
     children: ReactNode;
-    /** Theme adapting the component to light or dark background. */
-    theme?: Theme;
 }
 
 /**

@@ -1,5 +1,5 @@
 import { Kind, Theme } from '@lumx/react';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme } from '@lumx/react/utils';
 import classNames from 'classnames';
 import React, { forwardRef, ReactNode } from 'react';
 
@@ -8,13 +8,11 @@ import { INPUT_HELPER_CONFIGURATION } from './constants';
 /**
  * Defines the props of the component.
  */
-export interface InputHelperProps extends GenericProps {
+export interface InputHelperProps extends GenericProps, HasTheme {
     /** Helper content. */
     children: string | ReactNode;
     /** Helper variant. */
     kind?: Kind;
-    /** Theme adapting the component to light or dark background. */
-    theme?: Theme;
 }
 
 /**

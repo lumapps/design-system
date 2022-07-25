@@ -3,16 +3,13 @@ import React, { CSSProperties, forwardRef } from 'react';
 import classNames from 'classnames';
 
 import { FULL_WIDTH_PERCENT } from '@lumx/react/components/slideshow/constants';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
-import { Theme } from '@lumx/react';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme } from '@lumx/react/utils';
 
-export interface SlidesProps extends GenericProps {
+export interface SlidesProps extends GenericProps, HasTheme {
     /** current slide active */
     activeIndex: number;
     /** slides id to be added to the wrapper */
     id?: string;
-    /** custom theme */
-    theme?: Theme;
     /** Whether the automatic rotation of the slideshow is enabled or not. */
     autoPlay?: boolean;
     /** Whether the image has to fill its container height or not. */

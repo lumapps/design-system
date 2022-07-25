@@ -6,13 +6,13 @@ import { uid } from 'uid';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiCloseCircle } from '@lumx/icons';
 import { Emphasis, Icon, IconButton, IconButtonProps, InputHelper, InputLabel, Kind, Size, Theme } from '@lumx/react';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme } from '@lumx/react/utils';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
 /**
  * Defines the props of the component.
  */
-export interface TextFieldProps extends GenericProps {
+export interface TextFieldProps extends GenericProps, HasTheme {
     /** Chip Group to be rendered before the main text input. */
     chips?: HTMLElement | ReactNode;
     /** Props to pass to the clear button (minus those already set by the TextField props). If not specified, the button won't be displayed. */
@@ -54,8 +54,6 @@ export interface TextFieldProps extends GenericProps {
     placeholder?: string;
     /** Reference to the wrapper. */
     textFieldRef?: Ref<HTMLDivElement>;
-    /** Theme adapting the component to light or dark background. */
-    theme?: Theme;
     /** Value. */
     value?: string;
     /** On blur callback. */

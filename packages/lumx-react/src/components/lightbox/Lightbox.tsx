@@ -4,9 +4,9 @@ import classNames from 'classnames';
 import { createPortal } from 'react-dom';
 
 import { mdiClose } from '@lumx/icons';
-import { ColorPalette, Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
+import { ColorPalette, Emphasis, IconButton, IconButtonProps } from '@lumx/react';
 import { DOCUMENT } from '@lumx/react/constants';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme } from '@lumx/react/utils';
 
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
@@ -20,7 +20,7 @@ const LIGHTBOX_TRANSITION_DURATION = 400;
 /**
  * Defines the props of the component.
  */
-export interface LightboxProps extends GenericProps {
+export interface LightboxProps extends GenericProps, HasTheme {
     /** Props to pass to the close button (minus those already set by the Lightbox props). */
     closeButtonProps?: Pick<IconButtonProps, 'label'> &
         Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis' | 'color'>;
@@ -30,8 +30,6 @@ export interface LightboxProps extends GenericProps {
     parentElement: RefObject<any>;
     /** Whether to keep the dialog open on clickaway or escape press. */
     preventAutoClose?: boolean;
-    /** Theme adapting the component to light or dark background. */
-    theme?: Theme;
     /** Z-axis position. */
     zIndex?: number;
     /** On close callback. */

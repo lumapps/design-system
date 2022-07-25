@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import set from 'lodash/set';
 
 import { Avatar, ColorPalette, Link, Orientation, Size, Theme } from '@lumx/react';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme } from '@lumx/react/utils';
 
 import { AvatarProps } from '../avatar/Avatar';
 
@@ -16,7 +16,7 @@ export type UserBlockSize = Extract<Size, 's' | 'm' | 'l'>;
 /**
  * Defines the props of the component.
  */
-export interface UserBlockProps extends GenericProps {
+export interface UserBlockProps extends GenericProps, HasTheme {
     /** Props to pass to the avatar. */
     avatarProps?: Omit<AvatarProps, 'alt'>;
     /** Additional fields used to describe the user. */
@@ -37,8 +37,6 @@ export interface UserBlockProps extends GenericProps {
     simpleAction?: ReactNode;
     /** Size variant. */
     size?: UserBlockSize;
-    /** Theme adapting the component to light or dark background. */
-    theme?: Theme;
     /** On click callback. */
     onClick?(): void;
     /** On mouse enter callback. */

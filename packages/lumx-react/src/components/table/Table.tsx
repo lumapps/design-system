@@ -4,18 +4,16 @@ import classNames from 'classnames';
 
 import { Theme } from '@lumx/react';
 
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
  */
-export interface TableProps extends GenericProps {
+export interface TableProps extends GenericProps, HasTheme {
     /** Whether the table has checkbox or thumbnail on first cell or not. */
     hasBefore?: boolean;
     /** Whether the table has dividers or not. */
     hasDividers?: boolean;
-    /** Theme adapting the component to light or dark background. */
-    theme?: Theme;
 }
 
 /**

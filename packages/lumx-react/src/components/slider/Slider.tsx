@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { InputHelper, InputLabel, Theme } from '@lumx/react';
 
 import useEventCallback from '@lumx/react/hooks/useEventCallback';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme } from '@lumx/react/utils';
 
 import { uid } from 'uid';
 import { clamp } from '@lumx/react/utils/clamp';
@@ -14,7 +14,7 @@ import { clamp } from '@lumx/react/utils/clamp';
 /**
  * Defines the props of the component.
  */
-export interface SliderProps extends GenericProps {
+export interface SliderProps extends GenericProps, HasTheme {
     /** Helper text. */
     helper?: string;
     /** Whether the min and max labels should be hidden or not. */
@@ -33,8 +33,6 @@ export interface SliderProps extends GenericProps {
     precision?: number;
     /** Range step value. */
     steps?: number;
-    /** Theme adapting the component to light or dark background. */
-    theme?: Theme;
     /** Selected ranged value. */
     value: number;
     /** On change callback. */

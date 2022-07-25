@@ -2,11 +2,9 @@ import React, { forwardRef } from 'react';
 import classNames from 'classnames';
 
 import { ColorPalette, Icon, Size, Theme } from '@lumx/react';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme } from '@lumx/react/utils';
 
-export interface FlagProps extends GenericProps {
-    /** Theme adapting the component to light or dark background. */
-    theme?: Theme;
+export interface FlagProps extends GenericProps, HasTheme {
     /** Color of the component. */
     color?: ColorPalette;
     /** Icon to use before the label. */
