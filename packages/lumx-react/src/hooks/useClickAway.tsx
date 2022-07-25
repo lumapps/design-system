@@ -17,9 +17,9 @@ export interface ClickAwayParameters {
      */
     callback: EventListener | Falsy;
     /**
-     * Elements from which we want to detect the click away.
+     * Elements considered within the click away context (clicking outside them will trigger the click away callback).
      */
-    refs: RefObject<Array<RefObject<HTMLElement>>>;
+    childrenRefs: RefObject<Array<RefObject<HTMLElement>>>;
 }
 
 /**
@@ -27,9 +27,9 @@ export interface ClickAwayParameters {
  *
  * Warning: If you need to detect click away on nested React portals, please use the `ClickAwayProvider` component.
  */
-export function useClickAway({ callback, refs }: ClickAwayParameters): void {
+export function useClickAway({ callback, childrenRefs }: ClickAwayParameters): void {
     useEffect(() => {
-        const { current: currentRefs } = refs;
+        const { current: currentRefs } = childrenRefs;
         if (!callback || !currentRefs || isEmpty(currentRefs)) {
             return undefined;
         }
@@ -43,5 +43,5 @@ export function useClickAway({ callback, refs }: ClickAwayParameters): void {
         return () => {
             EVENT_TYPES.forEach((evtType) => document.removeEventListener(evtType, listener));
         };
-    }, [callback, refs]);
+    }, [callback, childrenRefs]);
 }

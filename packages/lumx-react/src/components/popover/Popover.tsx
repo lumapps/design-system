@@ -342,7 +342,7 @@ export const Popover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, re
                   style={popoverStyle}
                   {...attributes.popper}
               >
-                  <ClickAwayProvider callback={closeOnClickAway && handleClose} refs={clickAwayRefs}>
+                  <ClickAwayProvider callback={closeOnClickAway && handleClose} childrenRefs={clickAwayRefs}>
                       {hasArrow && <div ref={setArrowElement} className={`${CLASSNAME}__arrow`} style={styles.arrow} />}
                       {children}
                   </ClickAwayProvider>

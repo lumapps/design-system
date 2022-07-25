@@ -143,7 +143,7 @@ export const Lightbox: Comp<LightboxProps, HTMLDivElement> = forwardRef((props, 
                     onClick={onClose}
                 />
             )}
-            <ClickAwayProvider callback={!preventAutoClose && onClose} refs={clickAwayRefs}>
+            <ClickAwayProvider callback={!preventAutoClose && onClose} childrenRefs={clickAwayRefs}>
                 <div ref={childrenRef} className={`${CLASSNAME}__wrapper`} role="presentation">
                     {children}
                 </div>

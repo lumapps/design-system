@@ -176,10 +176,13 @@ export const Dialog: Comp<DialogProps, HTMLDivElement> = forwardRef((props, ref)
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const clickAwayRefs = useRef([wrapperRef]);
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const rootRef = useRef<HTMLDivElement>(null);
+
     return isOpen || isVisible
         ? createPortal(
               <div
-                  ref={ref}
+                  ref={mergeRefs(rootRef, ref)}
                   {...forwardedProps}
                   className={classNames(
                       className,
@@ -196,7 +199,11 @@ export const Dialog: Comp<DialogProps, HTMLDivElement> = forwardRef((props, ref)
                   <div className={`${CLASSNAME}__overlay`} />
 
                   <section className={`${CLASSNAME}__container`} role="dialog" aria-modal="true" {...dialogProps}>
-                      <ClickAwayProvider callback={!preventAutoClose && onClose} refs={clickAwayRefs}>
+                      <ClickAwayProvider
+                          callback={!preventAutoClose && onClose}
+                          childrenRefs={clickAwayRefs}
+                          parentRef={rootRef}
+                      >
                           <div className={`${CLASSNAME}__wrapper`} ref={wrapperRef}>
                               {(header || headerChildContent) && (
                                   <header

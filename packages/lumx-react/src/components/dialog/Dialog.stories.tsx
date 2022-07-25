@@ -1,4 +1,3 @@
-import noop from 'lodash/noop';
 import { mdiClose } from '@lumx/icons';
 import {
     AlertDialog,
@@ -302,6 +301,7 @@ export const DialogFocusTrap = ({ theme }: any) => {
         setValue(item);
     };
     const [date, setDate] = useState<Date | undefined>(new Date('2020-05-18'));
+    const [date2, setDate2] = useState<Date | undefined>();
 
     const datePickerDialogButtonRef = useRef<HTMLButtonElement>(null);
     const [isDatePickerDialogOpen, closeDatePickerDialog, openDatePickerDialog] = useBooleanState(false);
@@ -381,8 +381,8 @@ export const DialogFocusTrap = ({ theme }: any) => {
                                     label="Start date"
                                     placeholder="Pick a date"
                                     theme={theme}
-                                    onChange={noop}
-                                    value={undefined}
+                                    onChange={setDate2}
+                                    value={date2}
                                     nextButtonProps={{ label: 'Next month' }}
                                     previousButtonProps={{ label: 'Previous month' }}
                                     defaultMonth={new Date('2020-05-18')}

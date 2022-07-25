@@ -26,7 +26,7 @@ exports[`<Lightbox> Snapshots and structure should render story 'Default' 1`] = 
     />
     <ClickAwayProvider
       callback={[Function]}
-      refs={
+      childrenRefs={
         Object {
           "current": Array [
             Object {
