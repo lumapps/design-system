@@ -1,149 +1,90 @@
 import React from 'react';
 import { mdiPencil } from '@lumx/icons';
 import { GenericBlock, Button, Icon, Size, Orientation, Alignment } from '@lumx/react';
+import { HasTheme } from '@lumx/react/utils';
 
 export default { title: 'LumX components/generic-block/GenericBlock' };
 
-export const Horizontal = ({ theme }: any) => (
+const redBorderStyle = { border: '1px solid red' };
+
+/**
+ * Fill sections using props
+ */
+export const SectionsInProps = ({ theme }: HasTheme) => (
     <GenericBlock
-        orientation={Orientation.horizontal}
         figure={<Icon icon={mdiPencil} size={Size.m} />}
-        actionsProps={{
-            style: { border: '1px solid red' },
-        }}
-        figureProps={{
-            style: { border: '1px solid red' },
-        }}
-        contentProps={{
-            style: { border: '1px solid red' },
-        }}
+        actionsProps={{ style: redBorderStyle }}
+        figureProps={{ style: redBorderStyle }}
+        contentProps={{ style: redBorderStyle }}
         actions={<Button theme={theme}>Button</Button>}
     >
         Content
     </GenericBlock>
 );
 
-export const HorizontalWithAlignment = ({ theme }: any) => (
-    <GenericBlock
-        orientation={Orientation.horizontal}
-        figure={<Icon icon={mdiPencil} size={Size.m} />}
-        actionsProps={{
-            fillSpace: true,
-            style: { border: '1px solid red' },
-            vAlign: 'center',
-        }}
-        figureProps={{
-            style: { border: '1px solid red' },
-        }}
-        contentProps={{
-            style: { border: '1px solid red' },
-        }}
-        actions={<Button theme={theme}>Centered button</Button>}
-    >
-        Content
+/**
+ * Fill sections using child section components.
+ */
+export const SectionsInChildren = ({ theme }: HasTheme) => (
+    <GenericBlock>
+        <GenericBlock.Figure style={redBorderStyle}>
+            <Icon icon={mdiPencil} size={Size.m} />
+        </GenericBlock.Figure>
+        <GenericBlock.Content style={redBorderStyle}>Content</GenericBlock.Content>
+        <GenericBlock.Actions style={redBorderStyle}>
+            <Button theme={theme}>Button</Button>
+        </GenericBlock.Actions>
     </GenericBlock>
 );
 
-export const HorizontalTop = ({ theme }: any) => (
-    <GenericBlock
-        orientation={Orientation.horizontal}
-        hAlign={Alignment.top}
-        figure={<Icon icon={mdiPencil} size={Size.m} />}
-        actionsProps={{
-            style: { border: '1px solid red' },
-        }}
-        figureProps={{
-            style: { border: '1px solid red' },
-        }}
-        contentProps={{
-            style: { border: '1px solid red' },
-        }}
-        actions={<Button theme={theme}>Centered button</Button>}
-    >
-        Content
+export const Vertical = ({ theme }: HasTheme) => (
+    <GenericBlock orientation={Orientation.vertical}>
+        <GenericBlock.Figure style={redBorderStyle}>
+            <Icon icon={mdiPencil} size={Size.m} />
+        </GenericBlock.Figure>
+        <GenericBlock.Content style={redBorderStyle}>Content</GenericBlock.Content>
+        <GenericBlock.Actions fillSpace style={redBorderStyle}>
+            <Button theme={theme}>Button</Button>
+        </GenericBlock.Actions>
     </GenericBlock>
 );
 
-export const Vertical = ({ theme }: any) => (
-    <GenericBlock
-        orientation={Orientation.vertical}
-        figure={<Icon icon={mdiPencil} size={Size.m} />}
-        actionsProps={{
-            fillSpace: true,
-            style: { border: '1px solid red' },
-        }}
-        figureProps={{
-            style: { border: '1px solid red' },
-        }}
-        contentProps={{
-            style: { border: '1px solid red' },
-        }}
-        actions={<Button theme={theme}>Button</Button>}
-    >
-        Content
+export const Horizontal = ({ theme }: HasTheme) => (
+    <GenericBlock orientation={Orientation.horizontal}>
+        <GenericBlock.Figure style={redBorderStyle}>
+            <Icon icon={mdiPencil} size={Size.m} />
+        </GenericBlock.Figure>
+        <GenericBlock.Content style={redBorderStyle}>Content</GenericBlock.Content>
+        <GenericBlock.Actions style={redBorderStyle}>
+            <Button theme={theme}>Button</Button>
+        </GenericBlock.Actions>
     </GenericBlock>
 );
 
-export const GapSizes = ({ theme }: any) => (
-    <>
-        <GenericBlock
-            orientation={Orientation.vertical}
-            figure={<Icon icon={mdiPencil} size={Size.m} />}
-            gap={Size.regular}
-            style={{ marginBottom: 40 }}
-            actionsProps={{
-                style: { border: '1px solid red' },
-            }}
-            figureProps={{
-                style: { border: '1px solid red' },
-            }}
-            contentProps={{
-                style: { border: '1px solid red' },
-            }}
-            actions={<Button theme={theme}>Button</Button>}
-        >
-            <h2>Small gap size</h2>
-            <p>For small blocks</p>
-        </GenericBlock>
-
-        <GenericBlock
-            orientation={Orientation.vertical}
-            figure={<Icon icon={mdiPencil} size={Size.m} />}
-            gap={Size.big}
-            style={{ marginBottom: 40 }}
-            actionsProps={{
-                style: { border: '1px solid red' },
-            }}
-            figureProps={{
-                style: { border: '1px solid red' },
-            }}
-            contentProps={{
-                style: { border: '1px solid red' },
-            }}
-            actions={<Button theme={theme}>Button</Button>}
-        >
-            <h2>Medium gap size</h2>
-            <p>For medium blocks</p>
-        </GenericBlock>
-
-        <GenericBlock
-            orientation={Orientation.vertical}
-            figure={<Icon icon={mdiPencil} size={Size.m} />}
-            gap={Size.huge}
-            style={{ marginBottom: 40 }}
-            actionsProps={{
-                style: { border: '1px solid red' },
-            }}
-            figureProps={{
-                style: { border: '1px solid red' },
-            }}
-            contentProps={{
-                style: { border: '1px solid red' },
-            }}
-            actions={<Button theme={theme}>Button</Button>}
-        >
-            <h2>Big gap size</h2>
-            <p>For large blocks</p>
-        </GenericBlock>
-    </>
+export const HorizontalTop = ({ theme }: HasTheme) => (
+    <GenericBlock orientation={Orientation.horizontal} hAlign={Alignment.top}>
+        <GenericBlock.Figure style={redBorderStyle}>
+            <Icon icon={mdiPencil} size={Size.m} />
+        </GenericBlock.Figure>
+        <GenericBlock.Content style={redBorderStyle}>Content</GenericBlock.Content>
+        <GenericBlock.Actions style={redBorderStyle}>
+            <Button theme={theme}>Button</Button>
+        </GenericBlock.Actions>
+    </GenericBlock>
 );
+
+export const GapSizes = ({ theme }: HasTheme) =>
+    [Size.regular, Size.big, Size.huge].map((gap) => (
+        <GenericBlock key={gap} orientation={Orientation.vertical} gap={gap} style={{ marginBottom: 40 }}>
+            <GenericBlock.Figure style={redBorderStyle}>
+                <Icon icon={mdiPencil} size={Size.m} />
+            </GenericBlock.Figure>
+            <GenericBlock.Content style={redBorderStyle}>
+                <h2>{gap} gap size</h2>
+                <p>block description</p>
+            </GenericBlock.Content>
+            <GenericBlock.Actions style={redBorderStyle}>
+                <Button theme={theme}>Button</Button>
+            </GenericBlock.Actions>
+        </GenericBlock>
+    ));

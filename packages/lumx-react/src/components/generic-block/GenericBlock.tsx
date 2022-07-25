@@ -1,29 +1,46 @@
-import React, { forwardRef, ReactNode } from 'react';
+import React, { Children, forwardRef, ReactElement, ReactNode } from 'react';
 import classNames from 'classnames';
-import { Comp, getRootClassName } from '@lumx/react/utils';
+import { Comp, getRootClassName, isComponentType, partitionMulti } from '@lumx/react/utils';
 import { Orientation, Size, FlexBox, FlexBoxProps, Alignment, HorizontalAlignment } from '@lumx/react';
 
 export interface GenericBlockProps extends FlexBoxProps {
-    /** Component to use as visual element. */
+    /**
+     * Component to use as visual element.
+     */
     figure?: ReactNode;
-    /** Actions to set after the main content. */
+    /**
+     * Actions to set after the main content.
+     */
     actions?: ReactNode;
-    /** Main content to display */
+    /**
+     * Main content to display or sections components
+     * ({@see GenericBlock.Figure}, {@see GenericBlock.Content} & {@see GenericBlock.Actions})
+     */
     children: ReactNode;
-    /** Orientation of the 3 sections */
+    /**
+     * Orientation of the 3 sections
+     */
     orientation?: FlexBoxProps['orientation'];
-    /** Horizontal alignment. */
+    /**
+     * Horizontal alignment.
+     */
     hAlign?: FlexBoxProps['hAlign'];
-    /** Vertical alignment. */
+    /**
+     * Vertical alignment.
+     */
     vAlign?: FlexBoxProps['vAlign'];
     /**
      * The props to forward to the content.
      * By default, the content will have the same alignment as wrapper.
      */
     contentProps?: Omit<FlexBoxProps, 'children'>;
-    /** props to forward to the actions element. */
+    /**
+     * props to forward to the actions element.
+     */
     actionsProps?: Omit<FlexBoxProps, 'children'>;
-    /** props to forward to the figure element. */
+    /**
+     * props to forward to the figure element.
+     */
     figureProps?: Omit<FlexBoxProps, 'children'>;
 }
 
@@ -47,6 +64,35 @@ const DEFAULT_PROPS: Partial<GenericBlockProps> = {
     vAlign: Alignment.center,
 };
 
+type BaseGenericBlock = Comp<GenericBlockProps, HTMLDivElement>;
+
+interface GenericBlock extends BaseGenericBlock {
+    /**
+     * Use `GenericBlock.Figure` component as children of the `GenericBlock` component as an alternative way to inject
+     * the "figure" section of the block (instead of using `figure` and `figureProps` props).
+     */
+    Figure: Comp<FlexBoxProps>;
+    /**
+     * Use `GenericBlock.Content` component as children of the `GenericBlock` component as an alternative way to inject
+     * the "content" section of the block (instead of using `content` and `contentProps` props).
+     */
+    Content: Comp<FlexBoxProps>;
+    /**
+     * Use `GenericBlock.Actions` component as children of the `GenericBlock` component as an alternative way to inject
+     * the "actions" section of the block (instead of using `actions` and `actionsProps` props).
+     */
+    Actions: Comp<FlexBoxProps>;
+}
+
+const Figure = (() => null) as any;
+const isFigure = isComponentType(Figure);
+
+const Content = (() => null) as any;
+const isContent = isComponentType(Content);
+
+const Actions = (() => null) as any;
+const isActions = isComponentType(Actions);
+
 /**
  * The GenericBlock is a layout component made of 3 sections that can be
  * displayed either horizontally of vertically with the same gap between each section.
@@ -58,7 +104,7 @@ const DEFAULT_PROPS: Partial<GenericBlockProps> = {
  *
  * @see https://www.figma.com/file/lzzrQmsfaXRaOyRfoEogPZ/DS%3A-playground?node-id=1%3A4076
  */
-export const GenericBlock: Comp<GenericBlockProps, HTMLDivElement> = forwardRef((props, ref) => {
+const BaseGenericBlock: BaseGenericBlock = forwardRef((props, ref) => {
     const {
         className,
         figure,
@@ -71,6 +117,23 @@ export const GenericBlock: Comp<GenericBlockProps, HTMLDivElement> = forwardRef(
         contentProps,
         ...forwardedProps
     } = props;
+
+    const sections = React.useMemo(() => {
+        // Split children by section type
+        const [[figureChild], [contentChild], [actionsChild], ...otherChildren] = partitionMulti(
+            Children.toArray(children),
+            [isFigure, isContent, isActions],
+        );
+        return {
+            figureChild,
+            figureChildProps: (figureChild as ReactElement)?.props || {},
+            contentChild,
+            contentChildProps: (contentChild as ReactElement)?.props || {},
+            actionsChild,
+            actionsChildProps: (actionsChild as ReactElement)?.props || {},
+            otherChildren,
+        };
+    }, [children]);
 
     let actionsVAlign: HorizontalAlignment = Alignment.center;
     if (orientation === Orientation.horizontal) {
@@ -89,32 +152,58 @@ export const GenericBlock: Comp<GenericBlockProps, HTMLDivElement> = forwardRef(
             orientation={orientation}
             {...forwardedProps}
         >
-            <FlexBox {...figureProps} className={classNames(figureProps?.className, `${CLASSNAME}__figure`)}>
+            <FlexBox
+                ref={(sections.figureChild as any)?.ref}
+                {...figureProps}
+                {...sections.figureChildProps}
+                className={classNames(
+                    figureProps?.className,
+                    sections.figureChildProps?.className,
+                    `${CLASSNAME}__figure`,
+                )}
+            >
                 {figure}
+                {sections.figureChildProps?.children}
             </FlexBox>
 
             {children && (
                 <FlexBox
+                    ref={(sections.contentChild as any)?.ref}
                     orientation={Orientation.vertical}
                     fillSpace
                     vAlign={contentVAlign}
                     {...contentProps}
-                    className={classNames(contentProps?.className, `${CLASSNAME}__content`)}
+                    {...sections.contentChildProps}
+                    className={classNames(
+                        contentProps?.className,
+                        sections.contentChildProps?.className,
+                        `${CLASSNAME}__content`,
+                    )}
                 >
-                    {children}
+                    {sections.contentChildProps?.children}
+                    {sections.otherChildren}
                 </FlexBox>
             )}
 
             <FlexBox
+                ref={(sections.actionsChild as any)?.ref}
                 vAlign={actionsVAlign}
                 {...actionsProps}
-                className={classNames(actionsProps?.className, `${CLASSNAME}__actions`)}
+                {...sections.actionsChildProps}
+                className={classNames(
+                    actionsProps?.className,
+                    sections.actionsChildProps?.className,
+                    `${CLASSNAME}__actions`,
+                )}
             >
                 {actions}
+                {sections.actionsChildProps?.children}
             </FlexBox>
         </FlexBox>
     );
 });
-GenericBlock.displayName = COMPONENT_NAME;
-GenericBlock.className = CLASSNAME;
-GenericBlock.defaultProps = DEFAULT_PROPS;
+BaseGenericBlock.displayName = COMPONENT_NAME;
+BaseGenericBlock.className = CLASSNAME;
+BaseGenericBlock.defaultProps = DEFAULT_PROPS;
+
+export const GenericBlock: GenericBlock = Object.assign(BaseGenericBlock, { Figure, Content, Actions });

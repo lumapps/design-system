@@ -1,5 +1,5 @@
 import get from 'lodash/get';
-import { ReactElement, ReactNode, Ref } from 'react';
+import React, { ReactElement, ReactNode, Ref } from 'react';
 import { Theme } from '@lumx/react';
 
 /** Get types of the values of a record. */
@@ -76,6 +76,12 @@ export const isComponent = <C>(component: Comp<C, any> | string) => (instance: R
         NAME_PROPERTIES.some((nameProperty: string): boolean => get(instance, nameProperty) === componentName)
     );
 };
+
+/**
+ * Similar to `isComponent` but more precise as it's not based on the component `displayName` but on the component function reference.
+ */
+export const isComponentType = (type: ReactElement['type']) => (node: ReactNode): node is ReactElement =>
+    React.isValidElement(node) && node.type === type;
 
 /**
  * JS falsy values.
