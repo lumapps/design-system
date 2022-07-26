@@ -20,30 +20,14 @@ describe(`<${GenericBlock.displayName}>`, () => {
     // 1. Test render via snapshot.
     describe('Snapshots and structure', () => {
         it('should render default', () => {
-            const wrapper = shallow(<GenericBlock>Content</GenericBlock>);
+            const wrapper = shallow(
+                <GenericBlock figure="figure" actions="actions">
+                    Content
+                </GenericBlock>,
+            );
 
-            expect(wrapper.prop('gap')).toBe('regular');
-            expect(wrapper.prop('hAlign')).toBe('center');
-            expect(wrapper.prop('orientation')).toBe('vertical');
-            expect(wrapper.prop('vAlign')).toBe('center');
-
-            const figure = wrapper.find('.lumx-generic-block__figure');
-            expect(figure).toBeDefined();
-
-            const content = wrapper.find('.lumx-generic-block__content');
-            expect(content.prop('fillSpace')).toBe(true);
-            expect(content.prop('vAlign')).toBe('center');
-            expect(content.prop('orientation')).toBe('vertical');
-
-            const actions = wrapper.find('.lumx-generic-block__actions');
-            expect(actions.prop('vAlign')).toBe('center');
-        });
-
-        it('should render horizontal', () => {
-            const wrapper = shallow(<GenericBlock orientation="horizontal">Content</GenericBlock>);
-
-            expect(wrapper.prop('gap')).toBe('regular');
-            expect(wrapper.prop('hAlign')).toBe('center');
+            expect(wrapper.prop('gap')).toBe('big');
+            expect(wrapper.prop('hAlign')).toBe('top');
             expect(wrapper.prop('orientation')).toBe('horizontal');
             expect(wrapper.prop('vAlign')).toBe('center');
 
@@ -57,6 +41,30 @@ describe(`<${GenericBlock.displayName}>`, () => {
 
             const actions = wrapper.find('.lumx-generic-block__actions');
             expect(actions.prop('vAlign')).toBe('right');
+        });
+
+        it('should render vertical', () => {
+            const wrapper = shallow(
+                <GenericBlock figure="figure" actions="actions" orientation="vertical">
+                    Content
+                </GenericBlock>,
+            );
+
+            expect(wrapper.prop('gap')).toBe('big');
+            expect(wrapper.prop('hAlign')).toBe('top');
+            expect(wrapper.prop('orientation')).toBe('vertical');
+            expect(wrapper.prop('vAlign')).toBe('center');
+
+            const figure = wrapper.find('.lumx-generic-block__figure');
+            expect(figure).toBeDefined();
+
+            const content = wrapper.find('.lumx-generic-block__content');
+            expect(content.prop('fillSpace')).toBe(true);
+            expect(content.prop('vAlign')).toBe('center');
+            expect(content.prop('orientation')).toBe('vertical');
+
+            const actions = wrapper.find('.lumx-generic-block__actions');
+            expect(actions.prop('vAlign')).toBe('center');
         });
 
         it('should combine figure props', () => {
@@ -74,6 +82,9 @@ describe(`<${GenericBlock.displayName}>`, () => {
             expect(figure.prop('fillSpace')).toBe(true);
             expect(figure.prop('vAlign')).toBe('left');
             expect(figure).toHaveText('Figure 1Figure 2');
+
+            expect(wrapper.find('.lumx-generic-block__content')).toHaveLength(0);
+            expect(wrapper.find('.lumx-generic-block__actions')).toHaveLength(0);
         });
 
         it('should combine content props', () => {
@@ -92,6 +103,9 @@ describe(`<${GenericBlock.displayName}>`, () => {
             expect(content.prop('fillSpace')).toBe(true);
             expect(content.prop('vAlign')).toBe('left');
             expect(content).toHaveText('Content 2Content 1');
+
+            expect(wrapper.find('.lumx-generic-block__figure')).toHaveLength(0);
+            expect(wrapper.find('.lumx-generic-block__actions')).toHaveLength(0);
         });
 
         it('should combine actions props', () => {
@@ -109,6 +123,9 @@ describe(`<${GenericBlock.displayName}>`, () => {
             expect(actions.prop('fillSpace')).toBe(true);
             expect(actions.prop('vAlign')).toBe('left');
             expect(actions).toHaveText('Actions 1Actions 2');
+
+            expect(wrapper.find('.lumx-generic-block__figure')).toHaveLength(0);
+            expect(wrapper.find('.lumx-generic-block__content')).toHaveLength(0);
         });
 
         it('should forward refs', () => {

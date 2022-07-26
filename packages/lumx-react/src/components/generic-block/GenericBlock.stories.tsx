@@ -49,6 +49,22 @@ export const Vertical = ({ theme }: HasTheme) => (
     </GenericBlock>
 );
 
+export const VerticalOverflow = ({ theme }: HasTheme) => (
+    <div style={{ width: 300 }}>
+        <GenericBlock orientation={Orientation.vertical}>
+            <GenericBlock.Figure style={redBorderStyle}>
+                <Icon icon={mdiPencil} size={Size.m} />
+            </GenericBlock.Figure>
+            <GenericBlock.Content style={redBorderStyle}>
+                _________________________________________________________________
+            </GenericBlock.Content>
+            <GenericBlock.Actions fillSpace style={redBorderStyle}>
+                <Button theme={theme}>Button</Button>
+            </GenericBlock.Actions>
+        </GenericBlock>
+    </div>
+);
+
 export const Horizontal = ({ theme }: HasTheme) => (
     <GenericBlock orientation={Orientation.horizontal}>
         <GenericBlock.Figure style={redBorderStyle}>
@@ -61,8 +77,8 @@ export const Horizontal = ({ theme }: HasTheme) => (
     </GenericBlock>
 );
 
-export const HorizontalTop = ({ theme }: HasTheme) => (
-    <GenericBlock orientation={Orientation.horizontal} hAlign={Alignment.top}>
+export const HorizontalCenter = ({ theme }: HasTheme) => (
+    <GenericBlock orientation={Orientation.horizontal} hAlign={Alignment.center}>
         <GenericBlock.Figure style={redBorderStyle}>
             <Icon icon={mdiPencil} size={Size.m} />
         </GenericBlock.Figure>
@@ -73,6 +89,21 @@ export const HorizontalTop = ({ theme }: HasTheme) => (
     </GenericBlock>
 );
 
+export const HorizontalOverflow = ({ theme }: HasTheme) => (
+    <div style={{ width: 300 }}>
+        <GenericBlock orientation={Orientation.horizontal}>
+            <GenericBlock.Figure style={redBorderStyle}>
+                <Icon icon={mdiPencil} size={Size.m} />
+            </GenericBlock.Figure>
+            <GenericBlock.Content style={redBorderStyle}>
+                _________________________________________________________________
+            </GenericBlock.Content>
+            <GenericBlock.Actions fillSpace style={redBorderStyle}>
+                <Button theme={theme}>Button</Button>
+            </GenericBlock.Actions>
+        </GenericBlock>
+    </div>
+);
 export const GapSizes = ({ theme }: HasTheme) =>
     [Size.regular, Size.big, Size.huge].map((gap) => (
         <GenericBlock key={gap} orientation={Orientation.vertical} gap={gap} style={{ marginBottom: 40 }}>

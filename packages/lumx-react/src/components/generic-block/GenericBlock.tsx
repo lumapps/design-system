@@ -58,9 +58,9 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * Component default props.
  */
 const DEFAULT_PROPS: Partial<GenericBlockProps> = {
-    gap: Size.regular,
-    orientation: Orientation.vertical,
-    hAlign: Alignment.center,
+    gap: Size.big,
+    orientation: Orientation.horizontal,
+    hAlign: Alignment.top,
     vAlign: Alignment.center,
 };
 
@@ -98,9 +98,9 @@ const isActions = isComponentType(Actions);
  * displayed either horizontally of vertically with the same gap between each section.
  *
  * The sections are:
- * * (Optional) `Figure` => A visual element to display before the main content.
- * * (Required) `Content` => The main content displayed
- * * (Optional) `Actions` => One or more actions to set after the element.
+ * - `Figure` => A visual element to display before the main content.
+ * - `Content` => The main content displayed
+ * - `Actions` => One or more actions to set after the element.
  *
  * @see https://www.figma.com/file/lzzrQmsfaXRaOyRfoEogPZ/DS%3A-playground?node-id=1%3A4076
  */
