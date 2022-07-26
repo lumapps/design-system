@@ -1,0 +1,14 @@
+/* ==========================================================================
+   Generic Block
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-generic-block {
+    overflow: clip;
+    max-width: 100%;
+
+    &__content {
+        // Prevent blocks in content from overflowing
+        overflow: clip;
+        max-width: 100%;
+    }
+}
