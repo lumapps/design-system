@@ -1,39 +1,42 @@
+@use "sass:map";
+
 @mixin lumx-icon-size($size, $has-shape: false) {
-    width: map-get($lumx-sizes, $size);
-    height: map-get($lumx-sizes, $size);
+    width: map.get($lumx-sizes, $size);
+    height: map.get($lumx-sizes, $size);
 
     @if $has-shape == true {
-        font-size: map-get($lumx-sizes, map-get($lumx-icon-has-shape-size-map, $size));
-        line-height: map-get($lumx-sizes, map-get($lumx-icon-has-shape-size-map, $size));
+        font-size: map.get($lumx-sizes, map.get($lumx-icon-has-shape-size-map, $size));
+        line-height: map.get($lumx-sizes, map.get($lumx-icon-has-shape-size-map, $size));
     } @else if $has-shape == false {
-        font-size: map-get($lumx-sizes, $size);
-        line-height: map-get($lumx-sizes, $size);
+        font-size: map.get($lumx-sizes, $size);
+        line-height: map.get($lumx-sizes, $size);
     }
 }
 
 @mixin lumx-icon-color($color, $has-shape: false, $theme: light) {
     @if $has-shape == true {
-        $base-color: lumx-color-variant($color, 'L6');
+        $base-color: lumx-color-variant($color, "L6");
 
-        @if $theme == lumx-base-const('theme', 'DARK') and $color != 'light' {
+        @if $theme == lumx-base-const("theme", "DARK") and $color != "light" {
             // adds a white background for dark theme
-            background-color: lumx-color-variant('light', 'N');
+            background-color: lumx-color-variant("light", "N");
+
             // Custom color is set as a background gradient to be on top of background-color
             background-image: linear-gradient(to right, $base-color, $base-color);
         } @else {
             background-color: $base-color;
         }
 
-        @if $color == 'yellow' {
-            color: lumx-color-variant('dark', 'L1');
+        @if $color == "yellow" {
+            color: lumx-color-variant("dark", "L1");
         } @else {
-            color: lumx-color-variant($color, 'N');
+            color: lumx-color-variant($color, "N");
         }
     } @else if $has-shape == false {
-        @if $color == 'dark' {
-            color: lumx-color-variant('dark', 'L1');
+        @if $color == "dark" {
+            color: lumx-color-variant("dark", "L1");
         } @else {
-            color: lumx-color-variant($color, 'N');
+            color: lumx-color-variant($color, "N");
         }
     }
 }

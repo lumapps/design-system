@@ -1,3 +1,5 @@
+@use "sass:map";
+
 /* ==========================================================================
    Web bookmark
    ========================================================================== */
@@ -7,15 +9,15 @@
 
     &--size-big {
         position: relative;
-        padding-top: map-get($lumx-thumbnail-aspect-ratio, 'horizontal');
+        padding-top: map.get($lumx-thumbnail-aspect-ratio, "horizontal");
     }
 
     &--theme-light {
-        background-color: lumx-color-variant('dark', 'L6');
+        background-color: lumx-color-variant("dark", "L6");
     }
 
     &--theme-dark {
-        background-color: lumx-color-variant('light', 'L6');
+        background-color: lumx-color-variant("light", "L6");
     }
 
     &__wrapper {
@@ -50,9 +52,9 @@
 
     &__container {
         display: flex;
-        overflow: hidden;
         flex-direction: column;
         padding: $lumx-spacing-unit * 2;
+        overflow: hidden;
 
         #{$self}--size-regular & {
             flex: 1 1 auto;
@@ -72,22 +74,22 @@
     }
 
     &__title {
-        @include lumx-typography('subtitle1');
+        @include lumx-typography("subtitle1");
     }
 
     &__description {
-        @include lumx-typography('body1');
+        @include lumx-typography("body1");
 
         #{$self}--theme-light & {
-            color: lumx-color-variant('dark', 'L2');
+            color: lumx-color-variant("dark", "L2");
         }
 
         #{$self}--theme-dark & {
-            color: lumx-color-variant('light', 'L2');
+            color: lumx-color-variant("light", "L2");
         }
     }
 
     &__link {
-        @include lumx-typography('body1');
+        @include lumx-typography("body1");
     }
 }

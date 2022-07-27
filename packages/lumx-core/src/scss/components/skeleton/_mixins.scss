@@ -1,9 +1,9 @@
-@mixin lumx-skeleton($theme: 'light') {
+@mixin lumx-skeleton($theme: "light") {
     animation: skeleton-loading 1s ease-in-out 0s infinite;
 
-    @if $theme == 'light' {
-        background-color: lumx-color-variant('dark', 'L5');
+    @if $theme == "light" {
+        background-color: lumx-color-variant("dark", "L5");
     } @else {
-        background-color: lumx-color-variant('light', 'L5');
+        background-color: lumx-color-variant("light", "L5");
     }
 }

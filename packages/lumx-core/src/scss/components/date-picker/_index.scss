@@ -1,10 +1,14 @@
+@use "sass:map";
+@use "sass:string";
+@use "sass:math";
+
 /* ==========================================================================
    Date picker
    ========================================================================== */
 
 .#{$lumx-base-prefix}-date-picker {
     &__month {
-        @include lumx-typography('subtitle1');
+        @include lumx-typography("subtitle1");
 
         display: block;
         text-align: center;
@@ -17,40 +21,39 @@
 
     &__days-wrapper {
         display: flex;
-        width: map-get($lumx-sizes, lumx-base-const('size', 'M')) * 7;
         flex-wrap: wrap;
+        width: map.get($lumx-sizes, lumx-base-const("size", "M")) * 7;
     }
 
     &__day-wrapper {
         display: flex;
-        max-width: #{(100 / 7) + '%'};
-        height: map-get($lumx-sizes, lumx-base-const('size', 'M'));
-        // prettier-ignore
-        flex: unquote('0 0 #{(100 / 7) + '%'}');
+        flex: string.unquote("0 0 #{math.div(100, 7) + "%"}");
         align-items: center;
         justify-content: center;
+        max-width: #{math.div(100, 7) + "%"};
+        height: map.get($lumx-sizes, lumx-base-const("size", "M"));
     }
 
     &__week-day {
-        @include lumx-typography('body1');
+        @include lumx-typography("body1");
 
         display: block;
-        color: lumx-color-variant('dark', 'L2');
+        color: lumx-color-variant("dark", "L2");
     }
 
     &__month-day {
         @include lumx-state-transition;
         @include lumx-button-base;
-        @include lumx-button-color(lumx-base-const('emphasis', 'LOW'), 'dark');
+        @include lumx-button-color(lumx-base-const("emphasis", "LOW"), "dark");
 
-        width: map-get($lumx-sizes, lumx-base-const('size', 'M'));
-        height: map-get($lumx-sizes, lumx-base-const('size', 'M'));
-        border-radius: 50%;
-        line-height: map-get($lumx-sizes, lumx-base-const('size', 'M'));
+        width: map.get($lumx-sizes, lumx-base-const("size", "M"));
+        height: map.get($lumx-sizes, lumx-base-const("size", "M"));
+        line-height: map.get($lumx-sizes, lumx-base-const("size", "M"));
         text-align: center;
+        border-radius: 50%;
 
         span {
-            @include lumx-typography('body1');
+            @include lumx-typography("body1");
         }
 
         &--is-today span {
@@ -58,7 +61,7 @@
         }
 
         &--is-selected {
-            @include lumx-button-is-selected(lumx-base-const('theme', 'LIGHT'));
+            @include lumx-button-is-selected(lumx-base-const("theme", "LIGHT"));
         }
     }
 }

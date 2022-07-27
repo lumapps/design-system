@@ -1,3 +1,5 @@
+@use "sass:math";
+
 /* ==========================================================================
    Input helper
    ========================================================================== */
@@ -6,20 +8,20 @@
     $self: &;
 
     &--theme-light {
-        @include lumx-input-helper(lumx-base-const('theme', 'LIGHT'));
+        @include lumx-input-helper(lumx-base-const("theme", "LIGHT"));
 
         @each $color in $lumx-input-helper-color-palette {
             &#{$self}--color-#{$color} {
-                color: lumx-color-variant($color, 'D1');
+                color: lumx-color-variant($color, "D1");
             }
         }
     }
 
     &--theme-dark {
-        @include lumx-input-helper(lumx-base-const('theme', 'DARK'));
+        @include lumx-input-helper(lumx-base-const("theme", "DARK"));
     }
 
     &__icon {
-        margin-right: $lumx-spacing-unit / 2;
+        margin-right: math.div($lumx-spacing-unit, 2);
     }
 }

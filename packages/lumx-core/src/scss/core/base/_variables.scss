@@ -1,41 +1,39 @@
-$lumx-base-prefix: 'lumx';
-
+$lumx-base-prefix: "lumx";
 $lumx-base-constants: (
-    'emphasis': (
-        'HIGH': 'emphasis-high',
-        'MEDIUM': 'emphasis-medium',
-        'LOW': 'emphasis-low',
-        'SELECTED': 'emphasis-selected',
+    "emphasis": (
+        "HIGH": "emphasis-high",
+        "MEDIUM": "emphasis-medium",
+        "LOW": "emphasis-low",
+        "SELECTED": "emphasis-selected",
     ),
-    'position': (
-        'TOP': 'position-top',
-        'RIGHT': 'position-right',
-        'BOTTOM': 'position-bottom',
-        'LEFT': 'position-left',
-        'CENTER': 'position-center',
+    "position": (
+        "TOP": "position-top",
+        "RIGHT": "position-right",
+        "BOTTOM": "position-bottom",
+        "LEFT": "position-left",
+        "CENTER": "position-center",
     ),
-    'size': (
-        'XXS': 'xxs',
-        'XS': 'xs',
-        'S': 's',
-        'M': 'm',
-        'L': 'l',
-        'XL': 'xl',
-        'XXL': 'xxl',
+    "size": (
+        "XXS": "xxs",
+        "XS": "xs",
+        "S": "s",
+        "M": "m",
+        "L": "l",
+        "XL": "xl",
+        "XXL": "xxl",
     ),
-    'state': (
-        'DEFAULT': 'state-default',
-        'HOVER': 'state-hover',
-        'ACTIVE': 'state-active',
-        'FOCUS': 'state-focus',
+    "state": (
+        "DEFAULT": "state-default",
+        "HOVER": "state-hover",
+        "ACTIVE": "state-active",
+        "FOCUS": "state-focus",
     ),
-    'theme': (
-        'LIGHT': 'theme-light',
-        'DARK': 'theme-dark',
+    "theme": (
+        "LIGHT": "theme-light",
+        "DARK": "theme-dark",
     ),
 );
-
 $lumx-base-layers: (
-    'high': 999,
-    'higher': 9999,
+    "high": 999,
+    "higher": 9999,
 );

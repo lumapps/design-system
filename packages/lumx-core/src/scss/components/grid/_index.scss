@@ -1,3 +1,6 @@
+@use "sass:string";
+@use "sass:math";
+
 /* ==========================================================================
    Grid
    ========================================================================== */
@@ -105,10 +108,10 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-grid--gutter-regular {
-    margin: 0 (($lumx-spacing-unit / 2) * -1);
+    margin: 0 (math.div($lumx-spacing-unit, 2) * -1);
 
     & > .#{$lumx-base-prefix}-grid-item {
-        padding: 0 $lumx-spacing-unit / 2;
+        padding: 0 math.div($lumx-spacing-unit, 2);
     }
 }
 
@@ -133,14 +136,12 @@
 
 @for $i from 1 through 12 {
     .#{$lumx-base-prefix}-grid--orientation-horizontal > .#{$lumx-base-prefix}-grid-item--width-#{$i} {
-        max-width: #{(100 / 12) * $i + '%'};
-        // prettier-ignore
-        flex: unquote('0 0 #{(100 / 12) * $i + '%'}');
+        flex: string.unquote("0 0 #{math.div(100, 12) * $i + "%"}");
+        max-width: #{math.div(100, 12) * $i + "%"};
     }
 
     .#{$lumx-base-prefix}-grid--orientation-vertical > .#{$lumx-base-prefix}-grid-item--width-#{$i} {
-        max-height: #{(100 / 12) * $i + '%'};
-        // prettier-ignore
-        flex: unquote('0 0 #{(100 / 12) * $i + '%'}');
+        flex: string.unquote("0 0 #{math.div(100, 12) * $i + "%"}");
+        max-height: #{math.div(100, 12) * $i + "%"};
     }
 }

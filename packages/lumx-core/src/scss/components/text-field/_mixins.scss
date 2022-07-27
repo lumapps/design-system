@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @mixin lumx-text-field-label() {
     font-size: var(--lumx-material-text-field-header-label-font-size);
     font-weight: var(--lumx-material-text-field-header-label-font-weight);
@@ -11,8 +13,8 @@
 @mixin lumx-text-field-wrapper($theme) {
     position: relative;
     display: flex;
-    min-height: var(--lumx-text-field-input-min-height);
     align-items: flex-start;
+    min-height: var(--lumx-text-field-input-min-height);
     padding: 0 var(--lumx-text-field-input-padding-horizontal);
     background-color: var(--lumx-text-field-state-default-#{$theme}-input-background-color);
     border-radius: var(--lumx-text-field-input-border-radius);
@@ -26,14 +28,11 @@
         right: 0;
         bottom: 0;
         left: 0;
-        border: 0 solid var(--lumx-text-field-state-default-#{$theme}-input-border-color);
-        border-top-width: var(--lumx-text-field-state-default-input-border-top-width);
-        border-right-width: var(--lumx-text-field-state-default-input-border-right-width);
-        border-bottom-width: var(--lumx-text-field-state-default-input-border-bottom-width);
-        border-left-width: var(--lumx-text-field-state-default-input-border-left-width);
-        border-radius: var(--lumx-text-field-input-border-radius);
-        content: '';
         pointer-events: none;
+        content: "";
+        border: 0 solid var(--lumx-text-field-state-default-#{$theme}-input-border-color);
+        border-width: var(--lumx-text-field-state-default-input-border-top-width) var(--lumx-text-field-state-default-input-border-right-width) var(--lumx-text-field-state-default-input-border-bottom-width)  var(--lumx-text-field-state-default-input-border-left-width);
+        border-radius: var(--lumx-text-field-input-border-radius);
     }
 }
 
@@ -42,44 +41,35 @@
 
     &::before {
         border-color: var(--lumx-text-field-#{$state}-#{$theme}-input-border-color);
-        border-top-width: var(--lumx-text-field-#{$state}-input-border-top-width);
-        border-right-width: var(--lumx-text-field-#{$state}-input-border-right-width);
-        border-bottom-width: var(--lumx-text-field-#{$state}-input-border-bottom-width);
-        border-left-width: var(--lumx-text-field-#{$state}-input-border-left-width);
+        border-width: var(--lumx-text-field-#{$state}-input-border-top-width) var(--lumx-text-field-#{$state}-input-border-right-width) var(--lumx-text-field-#{$state}-input-border-bottom-width) var(--lumx-text-field-#{$state}-input-border-left-width);
     }
 }
 
 @mixin lumx-text-field-wrapper-validity($validity, $theme) {
     &::before {
-        border-top-width: var(--lumx-text-field-state-focus-input-border-top-width);
-        border-right-width: var(--lumx-text-field-state-focus-input-border-right-width);
-        border-bottom-width: var(--lumx-text-field-state-focus-input-border-bottom-width);
-        border-left-width: var(--lumx-text-field-state-focus-input-border-left-width);
+        border-width: var(--lumx-text-field-state-focus-input-border-top-width) var(--lumx-text-field-state-focus-input-border-right-width) var(--lumx-text-field-state-focus-input-border-bottom-width) var(--lumx-text-field-state-focus-input-border-left-width);
 
-        @if $theme == lumx-base-const('theme', 'LIGHT') {
-            @if $validity == 'valid' {
-                border-color: lumx-color-variant('green', 'N');
-            } @else if $validity == 'error' {
-                border-color: lumx-color-variant('red', 'N');
+        @if $theme == lumx-base-const("theme", "LIGHT") {
+            @if $validity == "valid" {
+                border-color: lumx-color-variant("green", "N");
+            } @else if $validity == "error" {
+                border-color: lumx-color-variant("red", "N");
             }
-        } @else if $theme == lumx-base-const('theme', 'DARK') {
-            border-color: lumx-color-variant('light', 'N');
+        } @else if $theme == lumx-base-const("theme", "DARK") {
+            border-color: lumx-color-variant("light", "N");
         }
     }
 }
 
 @mixin lumx-text-field-input-icon($theme) {
     flex-shrink: 0;
-    margin-top: calc(
-        var(--lumx-text-field-wrapper-padding-vertical) +
-            ((var(--lumx-material-text-field-input-content-line-height) - var(--lumx-size-xs)) / 2)
-    );
+    margin-top: calc(var(--lumx-text-field-wrapper-padding-vertical) + ((var(--lumx-material-text-field-input-content-line-height) - var(--lumx-size-xs)) / 2));
     margin-right: $lumx-spacing-unit;
 
-    @if $theme == lumx-base-const('theme', 'LIGHT') {
-        color: lumx-color-variant('dark', 'N');
-    } @else if $theme == lumx-base-const('theme', 'DARK') {
-        color: lumx-color-variant('light', 'N');
+    @if $theme == lumx-base-const("theme", "LIGHT") {
+        color: lumx-color-variant("dark", "N");
+    } @else if $theme == lumx-base-const("theme", "DARK") {
+        color: lumx-color-variant("light", "N");
     }
 }
 
@@ -92,26 +82,26 @@
     display: block;
     width: 100%;
     padding: 0;
-    border: none;
     margin: 0;
-    background-color: transparent;
     font-size: var(--lumx-material-text-field-input-content-font-size);
     line-height: var(--lumx-material-text-field-input-content-line-height);
+    background-color: transparent;
+    border: none;
     outline: none;
 
-    &[type='number'] {
+    &[type="number"] {
         appearance: textfield;
     }
 
-    &[type='number']::-webkit-inner-spin-button,
-    &[type='number']::-webkit-outer-spin-button {
+    &[type="number"]::-webkit-inner-spin-button,
+    &[type="number"]::-webkit-outer-spin-button {
         appearance: none;
     }
 
-    @if $theme == lumx-base-const('theme', 'LIGHT') {
-        color: lumx-color-variant('dark', 'N');
-    } @else if $theme == lumx-base-const('theme', 'DARK') {
-        color: lumx-color-variant('light', 'N');
+    @if $theme == lumx-base-const("theme", "LIGHT") {
+        color: lumx-color-variant("dark", "N");
+    } @else if $theme == lumx-base-const("theme", "DARK") {
+        color: lumx-color-variant("light", "N");
     }
 }
 
@@ -125,33 +115,23 @@
 
 @mixin lumx-text-field-input-validity($validity, $theme) {
     flex-shrink: 0;
-    margin-top: calc(
-        var(--lumx-text-field-wrapper-padding-vertical) +
-            ((var(--lumx-material-text-field-input-content-line-height) - var(--lumx-size-xxs)) / 2)
-    );
+    margin-top: calc(var(--lumx-text-field-wrapper-padding-vertical) + ((var(--lumx-material-text-field-input-content-line-height) - var(--lumx-size-xxs)) / 2));
     margin-left: $lumx-spacing-unit;
 
-    @if $theme == lumx-base-const('theme', 'LIGHT') {
-        @if $validity == 'valid' {
-            color: lumx-color-variant('green', 'N');
-        } @else if $validity == 'error' {
-            color: lumx-color-variant('red', 'N');
+    @if $theme == lumx-base-const("theme", "LIGHT") {
+        @if $validity == "valid" {
+            color: lumx-color-variant("green", "N");
+        } @else if $validity == "error" {
+            color: lumx-color-variant("red", "N");
         }
-    } @else if $theme == lumx-base-const('theme', 'DARK') {
-        color: lumx-color-variant('light', 'N');
+    } @else if $theme == lumx-base-const("theme", "DARK") {
+        color: lumx-color-variant("light", "N");
     }
 }
 
 @mixin lumx-text-field-input-clear() {
     flex-shrink: 0;
-    margin:
-        // vertical
-        calc(
-            var(--lumx-text-field-wrapper-padding-vertical) +
-                ((var(--lumx-material-text-field-input-content-line-height) - (var(--lumx-button-height) / 1.5)) / 2)
-        )
-        // horizontal
-        $lumx-spacing-unit / 2;
+    margin: calc(var(--lumx-text-field-wrapper-padding-vertical) + ((var(--lumx-material-text-field-input-content-line-height) - (var(--lumx-button-height) / 1.5)) / 2)) math.div($lumx-spacing-unit, 2);
     margin-right: 0;
 }
 

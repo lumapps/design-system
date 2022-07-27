@@ -1,3 +1,5 @@
+@use "sass:math";
+
 /* ==========================================================================
    Base
    ========================================================================== */
@@ -6,9 +8,9 @@ html {
     @include lumx-typography-base;
 
     box-sizing: border-box;
-    color: lumx-color-variant('dark', 'N');
-    font-size: ($lumx-typography-default-font-size / 16px) * 1em;
-    line-height: $lumx-typography-default-line-height / $lumx-typography-default-font-size;
+    font-size: math.div($lumx-typography-default-font-size, 16px) * 1em;
+    line-height: math.div($lumx-typography-default-line-height, $lumx-typography-default-font-size);
+    color: lumx-color-variant("dark", "N");
 }
 
 *,
@@ -47,6 +49,6 @@ li > {
 }
 
 table {
-    border-collapse: collapse;
     border-spacing: 0;
+    border-collapse: collapse;
 }

@@ -1,3 +1,6 @@
+@use "sass:map";
+@use "sass:math";
+
 /* ==========================================================================
    Tooltip
    ========================================================================== */
@@ -6,11 +9,11 @@
     $self: &;
 
     position: absolute;
-    z-index: map-get($lumx-base-layers, 'higher');
     top: 0;
     left: 0;
-    padding: $lumx-spacing-unit / 2;
-    background-color: lumx-color-variant('dark', 'N');
+    z-index: map.get($lumx-base-layers, "higher");
+    padding: math.div($lumx-spacing-unit, 2);
+    background-color: lumx-color-variant("dark", "N");
     border-radius: var(--lumx-border-radius);
     will-change: transform;
 
@@ -18,69 +21,70 @@
         position: absolute;
         width: 0;
         height: 0;
-        border-style: solid;
-        border-color: lumx-color-variant('dark', 'N');
         margin: $lumx-tooltip-arrow-size;
+        border-color: lumx-color-variant("dark", "N");
+        border-style: solid;
 
         #{$self}--position-top & {
             bottom: -$lumx-tooltip-arrow-size;
             left: 50%;
+            margin-top: 0;
+            margin-bottom: 0;
+            margin-left: -$lumx-tooltip-arrow-size;
             border-width: $lumx-tooltip-arrow-size $lumx-tooltip-arrow-size 0 $lumx-tooltip-arrow-size;
             border-right-color: transparent;
             border-bottom-color: transparent;
             border-left-color: transparent;
-            margin-top: 0;
-            margin-bottom: 0;
-            margin-left: -$lumx-tooltip-arrow-size;
         }
 
         #{$self}--position-bottom & {
             top: -$lumx-tooltip-arrow-size;
             left: 50%;
+            margin-top: 0;
+            margin-bottom: 0;
+            margin-left: -$lumx-tooltip-arrow-size;
             border-width: 0 $lumx-tooltip-arrow-size $lumx-tooltip-arrow-size $lumx-tooltip-arrow-size;
             border-top-color: transparent;
             border-right-color: transparent;
             border-left-color: transparent;
-            margin-top: 0;
-            margin-bottom: 0;
-            margin-left: -$lumx-tooltip-arrow-size;
         }
 
         #{$self}--position-left & {
             top: 50%;
             right: -$lumx-tooltip-arrow-size;
+            margin-top: -$lumx-tooltip-arrow-size;
+            margin-right: 0;
+            margin-left: 0;
             border-width: $lumx-tooltip-arrow-size 0 $lumx-tooltip-arrow-size $lumx-tooltip-arrow-size;
             border-top-color: transparent;
             border-right-color: transparent;
             border-bottom-color: transparent;
-            margin-top: -$lumx-tooltip-arrow-size;
-            margin-right: 0;
-            margin-left: 0;
         }
 
         #{$self}--position-right & {
             top: 50%;
             left: -$lumx-tooltip-arrow-size;
+            margin-top: -$lumx-tooltip-arrow-size;
+            margin-right: 0;
+            margin-left: 0;
             border-width: $lumx-tooltip-arrow-size $lumx-tooltip-arrow-size $lumx-tooltip-arrow-size 0;
             border-top-color: transparent;
             border-bottom-color: transparent;
             border-left-color: transparent;
-            margin-top: -$lumx-tooltip-arrow-size;
-            margin-right: 0;
-            margin-left: 0;
         }
     }
 
     &__inner {
         display: block;
-        color: $lumx-tooltip-color;
         font-size: $lumx-tooltip-font-size;
         line-height: $lumx-tooltip-line-height;
+        color: $lumx-tooltip-color;
     }
 }
 
 .#{$lumx-base-prefix}-tooltip-anchor-wrapper {
     width: fit-content;
+
     // Prevent text selection on mobile device that would hinder long press.
     -webkit-touch-callout: none;
     user-select: none;

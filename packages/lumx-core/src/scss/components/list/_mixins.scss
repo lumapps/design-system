@@ -1,3 +1,5 @@
+@use "sass:map";
+
 @mixin lumx-list() {
     padding: $lumx-spacing-unit 0;
     margin: 0;
@@ -7,56 +9,56 @@
 
 @mixin lumx-list-item($size) {
     display: flex;
-    outline: none;
     text-decoration: none;
+    outline: none;
 
-    @if $size == 'huge' {
+    @if $size == "huge" {
         align-items: flex-start;
         padding-top: $lumx-spacing-unit * 2;
         padding-bottom: $lumx-spacing-unit * 2;
     } @else {
-        min-height: map-get($lumx-list-item-sizes, $size);
         align-items: center;
+        min-height: map.get($lumx-list-item-sizes, $size);
         padding-top: $lumx-spacing-unit;
         padding-bottom: $lumx-spacing-unit;
     }
 }
 
 @mixin lumx-list-item-clickable() {
-    @include lumx-state(lumx-base-const('state', 'DEFAULT'), lumx-base-const('emphasis', 'LOW'), 'dark');
+    @include lumx-state(lumx-base-const("state", "DEFAULT"), lumx-base-const("emphasis", "LOW"), "dark");
 
     cursor: pointer;
 
     &:hover,
     &[data-focus-visible-added] {
-        @include lumx-state(lumx-base-const('state', 'HOVER'), lumx-base-const('emphasis', 'LOW'), 'dark');
+        @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "LOW"), "dark");
     }
 
     &:active {
-        @include lumx-state(lumx-base-const('state', 'ACTIVE'), lumx-base-const('emphasis', 'LOW'), 'dark');
+        @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "LOW"), "dark");
     }
 }
 
 @mixin lumx-list-item-highlighted() {
     cursor: pointer;
 
-    @include lumx-state(lumx-base-const('state', 'HOVER'), lumx-base-const('emphasis', 'LOW'), 'dark');
+    @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "LOW"), "dark");
 
     &:active {
-        @include lumx-state(lumx-base-const('state', 'ACTIVE'), lumx-base-const('emphasis', 'LOW'), 'dark');
+        @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "LOW"), "dark");
     }
 }
 
 @mixin lumx-list-item-selected() {
-    @include lumx-state-as-selected(lumx-base-const('state', 'DEFAULT'), lumx-base-const('theme', 'LIGHT'));
+    @include lumx-state-as-selected(lumx-base-const("state", "DEFAULT"), lumx-base-const("theme", "LIGHT"));
 
     &:hover,
     &[data-focus-visible-added] {
-        @include lumx-state-as-selected(lumx-base-const('state', 'HOVER'), lumx-base-const('theme', 'LIGHT'));
+        @include lumx-state-as-selected(lumx-base-const("state", "HOVER"), lumx-base-const("theme", "LIGHT"));
     }
 
     &:active {
-        @include lumx-state-as-selected(lumx-base-const('state', 'ACTIVE'), lumx-base-const('theme', 'LIGHT'));
+        @include lumx-state-as-selected(lumx-base-const("state", "ACTIVE"), lumx-base-const("theme", "LIGHT"));
     }
 }
 
@@ -69,17 +71,17 @@
 @mixin lumx-list-item-before($size) {
     @include lumx-list-item-edge($size);
 
-    @if $size == 'tiny' {
-        width: map-get($lumx-sizes, lumx-base-const('size', 'S'));
+    @if $size == "tiny" {
+        width: map.get($lumx-sizes, lumx-base-const("size", "S"));
         margin-right: $lumx-spacing-unit;
     } @else {
-        width: map-get($lumx-sizes, lumx-base-const('size', 'M'));
+        width: map.get($lumx-sizes, lumx-base-const("size", "M"));
         margin-right: $lumx-spacing-unit * 2;
     }
 }
 
 @mixin lumx-list-item-content() {
-    @include lumx-typography('body1');
+    @include lumx-typography("body1");
 
     flex: 1 1 auto;
 }
@@ -87,7 +89,7 @@
 @mixin lumx-list-item-after($size) {
     @include lumx-list-item-edge($size);
 
-    @if $size == 'tiny' {
+    @if $size == "tiny" {
         margin-left: $lumx-spacing-unit;
     } @else {
         margin-left: $lumx-spacing-unit * 2;
@@ -95,16 +97,16 @@
 }
 
 @mixin lumx-list-subheader() {
-    @include lumx-typography('overline');
+    @include lumx-typography("overline");
 
     display: flex;
-    height: map-get($lumx-list-item-sizes, 'tiny');
     align-items: center;
-    color: lumx-color-variant('dark', 'L3');
+    height: map.get($lumx-list-item-sizes, "tiny");
+    color: lumx-color-variant("dark", "L3");
 }
 
 @mixin lumx-list-subheader-icon {
-    @include lumx-icon-size(lumx-base-const('size', 'XXS'));
+    @include lumx-icon-size(lumx-base-const("size", "XXS"));
 
     margin-right: $lumx-spacing-unit;
 }
@@ -112,14 +114,14 @@
 @mixin lumx-list-divider() {
     height: 1px;
     margin: $lumx-spacing-unit 0;
-    background-color: lumx-color-variant('dark', $lumx-divider-color-variant);
+    background-color: lumx-color-variant("dark", $lumx-divider-color-variant);
 }
 
 @mixin lumx-list-item-padding($size) {
-    @if $size == 'big' {
+    @if $size == "big" {
         padding-right: $lumx-spacing-unit * 2;
         padding-left: $lumx-spacing-unit * 2;
-    } @else if $size == 'huge' {
+    } @else if $size == "huge" {
         padding-right: $lumx-spacing-unit * 3;
         padding-left: $lumx-spacing-unit * 3;
     }

@@ -1,3 +1,5 @@
+@use "sass:math";
+
 /* ==========================================================================
    Notification block
    ========================================================================== */
@@ -16,21 +18,21 @@
     }
 
     &__title {
-        @include lumx-typography('subtitle1');
+        @include lumx-typography("subtitle1");
 
         display: block;
-        margin-bottom: $lumx-spacing-unit / 2;
+        margin-bottom: math.div($lumx-spacing-unit, 2);
     }
 
     &__description {
-        @include lumx-typography('body1');
+        @include lumx-typography("body1");
     }
 
     &__date {
-        @include lumx-typography('body1');
+        @include lumx-typography("body1");
 
         display: block;
-        color: lumx-color-variant('dark', 'L2');
+        color: lumx-color-variant("dark", "L2");
     }
 
     &__after {

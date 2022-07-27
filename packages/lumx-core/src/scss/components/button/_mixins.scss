@@ -1,21 +1,24 @@
+@use "sass:map";
+@use "sass:math";
+
 @mixin lumx-button-base() {
     position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     padding: 0;
-    border: none;
     margin: 0;
-    background-color: transparent;
-    outline: none;
     text-decoration: none;
+    vertical-align: top;
+    user-select: none;
+    background-color: transparent;
+    border: none;
+    outline: none;
     transition-duration: $lumx-state-transition-duration;
     transition-property: padding, border-radius, background-color, color;
-    user-select: none;
-    vertical-align: top;
 
     &:hover,
-    &[class*='--is-hovered'] {
+    &[class*="--is-hovered"] {
         cursor: pointer;
     }
 
@@ -26,18 +29,18 @@
 }
 
 @mixin lumx-button-size($emphasis, $variant, $size) {
-    @if $size == lumx-base-const('size', 'M') {
+    @if $size == lumx-base-const("size", "M") {
         height: var(--lumx-button-height);
-    } @else if $size == lumx-base-const('size', 'S') {
+    } @else if $size == lumx-base-const("size", "S") {
         height: calc(var(--lumx-button-height) / 1.5);
     }
 
-    @if $variant == 'button' {
+    @if $variant == "button" {
         border-radius: var(--lumx-button-border-radius);
-    } @else if $variant == 'icon' {
-        @if $size == lumx-base-const('size', 'M') {
+    } @else if $variant == "icon" {
+        @if $size == lumx-base-const("size", "M") {
             width: var(--lumx-button-height);
-        } @else if $size == lumx-base-const('size', 'S') {
+        } @else if $size == lumx-base-const("size", "S") {
             width: calc(var(--lumx-button-height) / 1.5);
         }
 
@@ -50,32 +53,32 @@
         right: 0;
         bottom: 0;
         left: 0;
-        border-width: var(--lumx-button-#{$emphasis}-state-default-border-width);
-        border-style: solid;
-        content: '';
         pointer-events: none;
+        content: "";
+        border-style: solid;
+        border-width: var(--lumx-button-#{$emphasis}-state-default-border-width);
 
-        @if $variant == 'button' {
+        @if $variant == "button" {
             border-radius: var(--lumx-button-border-radius);
-        } @else if $variant == 'icon' {
+        } @else if $variant == "icon" {
             border-radius: var(--lumx-material-button-variant-icon-border-radius, var(--lumx-button-border-radius));
         }
     }
 
-    @if $variant == 'button' {
-        @if $size == lumx-base-const('size', 'M') {
+    @if $variant == "button" {
+        @if $size == lumx-base-const("size", "M") {
             padding: 0 var(--lumx-button-#{$emphasis}-state-default-padding-horizontal);
-        } @else if $size == lumx-base-const('size', 'S') {
+        } @else if $size == lumx-base-const("size", "S") {
             padding: 0 calc(var(--lumx-button-#{$emphasis}-state-default-padding-horizontal) / 1.5);
         }
     }
 
     &:hover,
-    &[class*='--is-hovered'] {
-        @if $variant == 'button' {
-            @if $size == lumx-base-const('size', 'M') {
+    &[class*="--is-hovered"] {
+        @if $variant == "button" {
+            @if $size == lumx-base-const("size", "M") {
                 padding: 0 var(--lumx-button-#{$emphasis}-state-hover-padding-horizontal);
-            } @else if $size == lumx-base-const('size', 'S') {
+            } @else if $size == lumx-base-const("size", "S") {
                 padding: 0 calc(var(--lumx-button-#{$emphasis}-state-hover-padding-horizontal) / 1.5);
             }
         }
@@ -86,11 +89,11 @@
     }
 
     &:active,
-    &[class*='--is-active'] {
-        @if $variant == 'button' {
-            @if $size == lumx-base-const('size', 'M') {
+    &[class*="--is-active"] {
+        @if $variant == "button" {
+            @if $size == lumx-base-const("size", "M") {
                 padding: 0 var(--lumx-button-#{$emphasis}-state-active-padding-horizontal);
-            } @else if $size == lumx-base-const('size', 'S') {
+            } @else if $size == lumx-base-const("size", "S") {
                 padding: 0 calc(var(--lumx-button-#{$emphasis}-state-active-padding-horizontal) / 1.5);
             }
         }
@@ -102,25 +105,25 @@
 }
 
 @mixin lumx-button-color($emphasis, $color, $theme: null) {
-    @if $color == 'primary' and $emphasis == lumx-base-const('emphasis', 'HIGH') {
-        background-color: var(--lumx-button-#{$emphasis}-state-default-#{$theme}-background-color);
+    @if $color == "primary" and $emphasis == lumx-base-const("emphasis", "HIGH") {
         color: var(--lumx-button-#{$emphasis}-state-default-#{$theme}-color);
-    } @else if $color == 'dark' and $emphasis != lumx-base-const('emphasis', 'HIGH') {
-        background-color: var(--lumx-button-#{$emphasis}-state-default-theme-light-background-color);
+        background-color: var(--lumx-button-#{$emphasis}-state-default-#{$theme}-background-color);
+    } @else if $color == "dark" and $emphasis != lumx-base-const("emphasis", "HIGH") {
         color: var(--lumx-button-#{$emphasis}-state-default-theme-light-color);
-    } @else if $color == 'light' and $emphasis != lumx-base-const('emphasis', 'HIGH') {
-        background-color: var(--lumx-button-#{$emphasis}-state-default-theme-dark-background-color);
+        background-color: var(--lumx-button-#{$emphasis}-state-default-theme-light-background-color);
+    } @else if $color == "light" and $emphasis != lumx-base-const("emphasis", "HIGH") {
         color: var(--lumx-button-#{$emphasis}-state-default-theme-dark-color);
+        background-color: var(--lumx-button-#{$emphasis}-state-default-theme-dark-background-color);
     } @else {
-        @include lumx-state(lumx-base-const('state', 'DEFAULT'), $emphasis, $color, $theme);
+        @include lumx-state(lumx-base-const("state", "DEFAULT"), $emphasis, $color, $theme);
     }
 
     &::before {
-        @if $color == 'primary' and $emphasis == lumx-base-const('emphasis', 'HIGH') {
+        @if $color == "primary" and $emphasis == lumx-base-const("emphasis", "HIGH") {
             border-color: var(--lumx-button-#{$emphasis}-state-default-#{$theme}-border-color);
-        } @else if $color == 'dark' and $emphasis != lumx-base-const('emphasis', 'HIGH') {
+        } @else if $color == "dark" and $emphasis != lumx-base-const("emphasis", "HIGH") {
             border-color: var(--lumx-button-#{$emphasis}-state-default-theme-light-border-color);
-        } @else if $color == 'light' and $emphasis != lumx-base-const('emphasis', 'HIGH') {
+        } @else if $color == "light" and $emphasis != lumx-base-const("emphasis", "HIGH") {
             border-color: var(--lumx-button-#{$emphasis}-state-default-theme-dark-border-color);
         } @else {
             border-color: transparent;
@@ -128,84 +131,84 @@
     }
 
     &:hover,
-    &[class*='--is-hovered'] {
-        @if $color == 'primary' and $emphasis == lumx-base-const('emphasis', 'HIGH') {
-            background-color: var(--lumx-button-#{$emphasis}-state-hover-#{$theme}-background-color);
+    &[class*="--is-hovered"] {
+        @if $color == "primary" and $emphasis == lumx-base-const("emphasis", "HIGH") {
             color: var(--lumx-button-#{$emphasis}-state-hover-#{$theme}-color);
-        } @else if $color == 'dark' and $emphasis != lumx-base-const('emphasis', 'HIGH') {
-            background-color: var(--lumx-button-#{$emphasis}-state-hover-theme-light-background-color);
+            background-color: var(--lumx-button-#{$emphasis}-state-hover-#{$theme}-background-color);
+        } @else if $color == "dark" and $emphasis != lumx-base-const("emphasis", "HIGH") {
             color: var(--lumx-button-#{$emphasis}-state-hover-theme-light-color);
-        } @else if $color == 'light' and $emphasis != lumx-base-const('emphasis', 'HIGH') {
-            background-color: var(--lumx-button-#{$emphasis}-state-hover-theme-dark-background-color);
+            background-color: var(--lumx-button-#{$emphasis}-state-hover-theme-light-background-color);
+        } @else if $color == "light" and $emphasis != lumx-base-const("emphasis", "HIGH") {
             color: var(--lumx-button-#{$emphasis}-state-hover-theme-dark-color);
+            background-color: var(--lumx-button-#{$emphasis}-state-hover-theme-dark-background-color);
         } @else {
-            @include lumx-state(lumx-base-const('state', 'HOVER'), $emphasis, $color, $theme);
+            @include lumx-state(lumx-base-const("state", "HOVER"), $emphasis, $color, $theme);
         }
 
         &::before {
-            @if $color == 'primary' and $emphasis == lumx-base-const('emphasis', 'HIGH') {
+            @if $color == "primary" and $emphasis == lumx-base-const("emphasis", "HIGH") {
                 border-color: var(--lumx-button-#{$emphasis}-state-hover-#{$theme}-border-color);
-            } @else if $color == 'dark' and $emphasis != lumx-base-const('emphasis', 'HIGH') {
+            } @else if $color == "dark" and $emphasis != lumx-base-const("emphasis", "HIGH") {
                 border-color: var(--lumx-button-#{$emphasis}-state-hover-theme-light-border-color);
-            } @else if $color == 'light' and $emphasis != lumx-base-const('emphasis', 'HIGH') {
+            } @else if $color == "light" and $emphasis != lumx-base-const("emphasis", "HIGH") {
                 border-color: var(--lumx-button-#{$emphasis}-state-hover-theme-dark-border-color);
             }
         }
     }
 
     &:active,
-    &[class*='--is-active'] {
-        @if $color == 'primary' and $emphasis == lumx-base-const('emphasis', 'HIGH') {
-            background-color: var(--lumx-button-#{$emphasis}-state-active-#{$theme}-background-color);
+    &[class*="--is-active"] {
+        @if $color == "primary" and $emphasis == lumx-base-const("emphasis", "HIGH") {
             color: var(--lumx-button-#{$emphasis}-state-active-#{$theme}-color);
-        } @else if $color == 'dark' and $emphasis != lumx-base-const('emphasis', 'HIGH') {
-            background-color: var(--lumx-button-#{$emphasis}-state-active-theme-light-background-color);
+            background-color: var(--lumx-button-#{$emphasis}-state-active-#{$theme}-background-color);
+        } @else if $color == "dark" and $emphasis != lumx-base-const("emphasis", "HIGH") {
             color: var(--lumx-button-#{$emphasis}-state-active-theme-light-color);
-        } @else if $color == 'light' and $emphasis != lumx-base-const('emphasis', 'HIGH') {
-            background-color: var(--lumx-button-#{$emphasis}-state-active-theme-dark-background-color);
+            background-color: var(--lumx-button-#{$emphasis}-state-active-theme-light-background-color);
+        } @else if $color == "light" and $emphasis != lumx-base-const("emphasis", "HIGH") {
             color: var(--lumx-button-#{$emphasis}-state-active-theme-dark-color);
+            background-color: var(--lumx-button-#{$emphasis}-state-active-theme-dark-background-color);
         } @else {
-            @include lumx-state(lumx-base-const('state', 'ACTIVE'), $emphasis, $color, $theme);
+            @include lumx-state(lumx-base-const("state", "ACTIVE"), $emphasis, $color, $theme);
         }
 
         &::before {
-            @if $color == 'primary' and $emphasis == lumx-base-const('emphasis', 'HIGH') {
+            @if $color == "primary" and $emphasis == lumx-base-const("emphasis", "HIGH") {
                 border-color: var(--lumx-button-#{$emphasis}-state-active-#{$theme}-border-color);
-            } @else if $color == 'dark' and $emphasis != lumx-base-const('emphasis', 'HIGH') {
+            } @else if $color == "dark" and $emphasis != lumx-base-const("emphasis", "HIGH") {
                 border-color: var(--lumx-button-#{$emphasis}-state-active-theme-light-border-color);
-            } @else if $color == 'light' and $emphasis != lumx-base-const('emphasis', 'HIGH') {
+            } @else if $color == "light" and $emphasis != lumx-base-const("emphasis", "HIGH") {
                 border-color: var(--lumx-button-#{$emphasis}-state-active-theme-dark-border-color);
             }
         }
     }
 
     &[data-focus-visible-added],
-    &[class*='--is-focused'] {
-        @include lumx-state(lumx-base-const('state', 'FOCUS'), $emphasis, $color, $theme);
+    &[class*="--is-focused"] {
+        @include lumx-state(lumx-base-const("state", "FOCUS"), $emphasis, $color, $theme);
     }
 
     &:disabled,
-    &[aria-disabled='true'] {
+    &[aria-disabled="true"] {
         @include lumx-state-disabled-input;
     }
 }
 
 @mixin lumx-button-is-selected($theme) {
-    @include lumx-state-as-selected(lumx-base-const('state', 'DEFAULT'), $theme);
+    @include lumx-state-as-selected(lumx-base-const("state", "DEFAULT"), $theme);
 
     &:hover,
-    &[class*='--is-hovered'] {
-        @include lumx-state-as-selected(lumx-base-const('state', 'HOVER'), $theme);
+    &[class*="--is-hovered"] {
+        @include lumx-state-as-selected(lumx-base-const("state", "HOVER"), $theme);
     }
 
     &:active,
-    &[class*='--is-active'] {
-        @include lumx-state-as-selected(lumx-base-const('state', 'ACTIVE'), $theme);
+    &[class*="--is-active"] {
+        @include lumx-state-as-selected(lumx-base-const("state", "ACTIVE"), $theme);
     }
 
     &[data-focus-visible-added],
-    &[class*='--is-focused'] {
-        @include lumx-state-as-selected(lumx-base-const('state', 'FOCUS'), $theme);
+    &[class*="--is-focused"] {
+        @include lumx-state-as-selected(lumx-base-const("state", "FOCUS"), $theme);
     }
 }
 
@@ -230,24 +233,24 @@
 }
 
 @mixin lumx-button-icon($variant, $size, $position: null) {
-    width: map-get($lumx-button-icon-sizes, $size);
-    height: map-get($lumx-button-icon-sizes, $size);
-    font-size: map-get($lumx-button-icon-sizes, $size);
-    line-height: map-get($lumx-button-icon-sizes, $size);
+    width: map.get($lumx-button-icon-sizes, $size);
+    height: map.get($lumx-button-icon-sizes, $size);
+    font-size: map.get($lumx-button-icon-sizes, $size);
+    line-height: map.get($lumx-button-icon-sizes, $size);
     pointer-events: none;
 
-    @if $variant == 'button' {
-        @if $position == lumx-base-const('position', 'LEFT') {
-            @if $size == lumx-base-const('size', 'M') {
+    @if $variant == "button" {
+        @if $position == lumx-base-const("position", "LEFT") {
+            @if $size == lumx-base-const("size", "M") {
                 margin-right: $lumx-spacing-unit;
-            } @else if $size == lumx-base-const('size', 'S') {
-                margin-right: $lumx-spacing-unit / 2;
+            } @else if $size == lumx-base-const("size", "S") {
+                margin-right: math.div($lumx-spacing-unit, 2);
             }
-        } @else if $position == lumx-base-const('position', 'RIGHT') {
-            @if $size == lumx-base-const('size', 'M') {
+        } @else if $position == lumx-base-const("position", "RIGHT") {
+            @if $size == lumx-base-const("size", "M") {
                 margin-left: $lumx-spacing-unit;
-            } @else if $size == lumx-base-const('size', 'S') {
-                margin-left: $lumx-spacing-unit / 2;
+            } @else if $size == lumx-base-const("size", "S") {
+                margin-left: math.div($lumx-spacing-unit, 2);
             }
         }
     }
@@ -257,12 +260,12 @@
     font-family: var(--lumx-typography-custom-button-size-#{$size}-font-family);
     font-size: var(--lumx-typography-custom-button-size-#{$size}-font-size);
     font-weight: var(--lumx-typography-custom-button-size-#{$size}-font-weight);
-    pointer-events: none;
     text-transform: var(--lumx-material-button-text-transform);
+    pointer-events: none;
 
-    @if $size == lumx-base-const('size', 'M') {
+    @if $size == lumx-base-const("size", "M") {
         line-height: var(--lumx-button-height);
-    } @else if $size == lumx-base-const('size', 'S') {
+    } @else if $size == lumx-base-const("size", "S") {
         line-height: calc(var(--lumx-button-height) / 1.5);
     }
 }

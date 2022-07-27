@@ -1,3 +1,5 @@
+@use "sass:math";
+
 /* ==========================================================================
    Slideshow
    ========================================================================== */
@@ -9,9 +11,9 @@
 
     &--fill-height {
         display: flex;
-        min-height: 0;
         flex: 1 1 auto;
         flex-direction: column;
+        min-height: 0;
     }
 
     &__slides {
@@ -33,8 +35,8 @@
         }
 
         #{$self}--fill-height & {
-            min-height: 0;
             flex: 1 1 auto;
+            min-height: 0;
         }
     }
 
@@ -58,9 +60,9 @@
 
 @for $i from 1 through 12 {
     .#{$lumx-base-prefix}-slideshow--group-by-#{$i} .#{$lumx-base-prefix}-slideshow-item {
+        flex: 0 0 #{math.div(100, $i) + "%"};
+        max-width: #{math.div(100, $i) + "%"};
         overflow: hidden;
-        max-width: #{100 / $i + '%'};
-        flex: 0 0 #{100 / $i + '%'};
     }
 }
 
@@ -75,75 +77,75 @@
     justify-content: center;
 
     &__pagination {
-        overflow: hidden;
-        max-width: 60px;
         align-items: center;
-        margin: 0 $lumx-spacing-unit / 2;
+        max-width: 60px;
+        margin: 0 math.div($lumx-spacing-unit, 2);
+        overflow: hidden;
     }
 
     &__pagination-items {
         display: flex;
         align-items: center;
-        transition: transform $lumx-slideshow-transition-duration;
         padding: 4px 0;
+        transition: transform $lumx-slideshow-transition-duration;
 
         @media (prefers-reduced-motion: reduce) {
             transition: none;
         }
-
     }
 
     &__pagination-item {
         $item: &;
+
+        flex-shrink: 0;
         width: 8px;
         height: 8px;
-        flex-shrink: 0;
         padding: 0;
-        border: none;
         margin: 0;
         margin: 0 2px;
-        border-radius: 50%;
-        cursor: pointer;
-        outline: none;
         text-decoration: none;
-        transform: scale(1);
-        transition: transform $lumx-slideshow-transition-duration;
+        cursor: pointer;
         user-select: none;
+        border: none;
+        border-radius: 50%;
+        outline: none;
+        transition: transform $lumx-slideshow-transition-duration;
+        transform: scale(1);
 
         @media (prefers-reduced-motion: reduce) {
             transition: none;
         }
 
         #{$self}--theme-light & {
-            background-color: lumx-color-variant('dark', 'L4');
+            background-color: lumx-color-variant("dark", "L4");
 
-            &[data-focus-visible-added]{
-                @include lumx-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('emphasis', 'LOW'), 'dark');
+            &[data-focus-visible-added] {
+                @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "LOW"), "dark");
             }
 
             &:hover,
             &--is-active {
-                background-color: lumx-color-variant('primary', 'N');
+                background-color: lumx-color-variant("primary", "N");
 
-                &[data-focus-visible-added]{
-                    @include lumx-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('emphasis', 'LOW'), 'primary');
+                &[data-focus-visible-added] {
+                    @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "LOW"), "primary");
                 }
             }
         }
 
         #{$self}--theme-dark & {
-            background-color: lumx-color-variant('light', 'L4');
+            background-color: lumx-color-variant("light", "L4");
 
-            &[data-focus-visible-added]{
-                @include lumx-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('emphasis', 'LOW'), 'light');
+            &[data-focus-visible-added] {
+                @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "LOW"), "light");
             }
 
             &:hover,
             &--is-active {
-                background-color: lumx-color-variant('light', 'N');
+                background-color: lumx-color-variant("light", "N");
 
-                &[data-focus-visible-added]{
-                    @include lumx-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('emphasis', 'LOW'), 'light');
+                &[data-focus-visible-added] {
+                    @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "LOW"), "light");
                 }
             }
         }

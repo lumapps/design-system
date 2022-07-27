@@ -1,2 +1,4 @@
-$lumx-color-palette: map-get($lumx-design-tokens, 'color') !default;
-$lumx-color-variants: ('D2', 'D1', 'N', 'L1', 'L2', 'L3', 'L4', 'L5', 'L6');
+@use "sass:map";
+
+$lumx-color-palette: map.get($lumx-design-tokens, "color") !default;
+$lumx-color-variants: ("D2", "D1", "N", "L1", "L2", "L3", "L4", "L5", "L6");

@@ -3,21 +3,21 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-input-label {
-    &--is-required:before {
+    &--is-required::before {
         margin-right: $lumx-spacing-unit-tiny;
-        content: '*';
         font-weight: 700;
+        content: "*";
     }
 
     &--theme-light {
-        @include lumx-input-label(lumx-base-const('theme', 'LIGHT'));
+        @include lumx-input-label(lumx-base-const("theme", "LIGHT"));
 
-        &:before {
-            color: lumx-color-variant('red', 'N');
+        &::before {
+            color: lumx-color-variant("red", "N");
         }
     }
 
     &--theme-dark {
-        @include lumx-input-label(lumx-base-const('theme', 'DARK'));
+        @include lumx-input-label(lumx-base-const("theme", "DARK"));
     }
 }

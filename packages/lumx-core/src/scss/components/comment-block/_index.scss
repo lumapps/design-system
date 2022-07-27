@@ -1,3 +1,5 @@
+@use "sass:map";
+
 /* ==========================================================================
    Comment block
    ========================================================================== */
@@ -18,15 +20,15 @@
         bottom: 0;
         left: 16px;
         width: 4px;
-        content: '';
+        content: "";
     }
 
     &--has-children#{$self}--has-indented-children#{$self}--theme-light &::before {
-        background-color: lumx-color-variant('dark', 'L5');
+        background-color: lumx-color-variant("dark", "L5");
     }
 
     &--has-children#{$self}--has-indented-children#{$self}--theme-dark &::before {
-        background-color: lumx-color-variant('light', 'L5');
+        background-color: lumx-color-variant("light", "L5");
     }
 
     &--has-children#{$self}--has-indented-children &:last-child::before {
@@ -44,15 +46,15 @@
             bottom: 0;
             left: 16px;
             width: 4px;
-            content: '';
+            content: "";
         }
 
         #{$self}--has-linear-children#{$self}--has-children#{$self}--theme-light &::before {
-            background-color: lumx-color-variant('dark', 'L5');
+            background-color: lumx-color-variant("dark", "L5");
         }
 
         #{$self}--has-linear-children#{$self}--has-children#{$self}--theme-dark &::before {
-            background-color: lumx-color-variant('light', 'L5');
+            background-color: lumx-color-variant("light", "L5");
         }
 
         #{$self}--has-linear-children #{$self}__children #{$self}:last-child &::before {
@@ -71,16 +73,16 @@
 
     &__content {
         position: relative;
-        overflow: hidden;
         padding: $lumx-spacing-unit $lumx-spacing-unit * 1.5;
+        overflow: hidden;
         border-radius: var(--lumx-border-radius);
 
         #{$self}--theme-light > #{$self}__wrapper & {
-            background-color: lumx-color-variant('dark', 'L6');
+            background-color: lumx-color-variant("dark", "L6");
         }
 
         #{$self}--theme-dark > #{$self}__wrapper & {
-            background-color: lumx-color-variant('light', 'L6');
+            background-color: lumx-color-variant("light", "L6");
         }
 
         #{$self}--is-relevant > #{$self}__wrapper &::before {
@@ -89,8 +91,8 @@
             bottom: 0;
             left: 0;
             width: 4px;
-            background-color: lumx-color-variant('green', 'N');
-            content: '';
+            content: "";
+            background-color: lumx-color-variant("green", "N");
         }
     }
 
@@ -100,39 +102,39 @@
     }
 
     &__name {
-        @include lumx-typography('subtitle1');
+        @include lumx-typography("subtitle1");
 
         margin-right: $lumx-spacing-unit;
         outline: none;
 
         #{$self}--theme-light > #{$self}__wrapper & {
-            color: lumx-color-variant('dark', 'N');
+            color: lumx-color-variant("dark", "N");
         }
 
         #{$self}--theme-dark > #{$self}__wrapper & {
-            color: lumx-color-variant('light', 'N');
+            color: lumx-color-variant("light", "N");
         }
 
-        &[tabindex='0'] {
+        &[tabindex="0"] {
             #{$self}--theme-light > #{$self}__wrapper & {
-                @include lumx-link('dark');
+                @include lumx-link("dark");
             }
 
             #{$self}--theme-dark > #{$self}__wrapper & {
-                @include lumx-link('light');
+                @include lumx-link("light");
             }
         }
     }
 
     &__date {
-        @include lumx-typography('body1');
+        @include lumx-typography("body1");
 
         #{$self}--theme-light > #{$self}__wrapper & {
-            color: lumx-color-variant('dark', 'L2');
+            color: lumx-color-variant("dark", "L2");
         }
 
         #{$self}--theme-dark > #{$self}__wrapper & {
-            color: lumx-color-variant('light', 'L2');
+            color: lumx-color-variant("light", "L2");
         }
     }
 
@@ -141,14 +143,14 @@
     }
 
     &__text {
-        @include lumx-typography('body1');
+        @include lumx-typography("body1");
 
         #{$self}--theme-light > #{$self}__wrapper & {
-            color: lumx-color-variant('dark', 'N');
+            color: lumx-color-variant("dark", "N");
         }
 
         #{$self}--theme-dark > #{$self}__wrapper & {
-            color: lumx-color-variant('light', 'N');
+            color: lumx-color-variant("light", "N");
         }
 
         word-break: break-word;
@@ -162,7 +164,7 @@
         margin-top: $lumx-spacing-unit * 2;
 
         #{$self}--has-indented-children & {
-            margin-left: map-get($lumx-sizes, lumx-base-const('size', 'M')) + $lumx-spacing-unit * 2;
+            margin-left: map.get($lumx-sizes, lumx-base-const("size", "M")) + $lumx-spacing-unit * 2;
         }
     }
 }

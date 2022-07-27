@@ -11,6 +11,6 @@
 
 @each $key, $style in $lumx-typography-custom {
     .#{$lumx-base-prefix}-typography-custom-#{$key} {
-        @include lumx-typography($key, 'custom');
+        @include lumx-typography($key, "custom");
     }
 }

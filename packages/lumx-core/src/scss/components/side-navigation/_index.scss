@@ -22,24 +22,24 @@
         @include lumx-side-navigation-link;
 
         & > i:first-child {
-            @include lumx-side-navigation-link-icon(lumx-base-const('position', 'LEFT'));
+            @include lumx-side-navigation-link-icon(lumx-base-const("position", "LEFT"));
         }
 
         & > i:last-child {
-            @include lumx-side-navigation-link-icon(lumx-base-const('position', 'RIGHT'));
+            @include lumx-side-navigation-link-icon(lumx-base-const("position", "RIGHT"));
         }
 
         & > span {
             #{$self}--emphasis-high & {
-                @include lumx-side-navigation-link-label(lumx-base-const('emphasis', 'HIGH'));
+                @include lumx-side-navigation-link-label(lumx-base-const("emphasis", "HIGH"));
             }
 
             #{$self}--emphasis-medium & {
-                @include lumx-side-navigation-link-label(lumx-base-const('emphasis', 'MEDIUM'));
+                @include lumx-side-navigation-link-label(lumx-base-const("emphasis", "MEDIUM"));
             }
 
             #{$self}--emphasis-low & {
-                @include lumx-side-navigation-link-label(lumx-base-const('emphasis', 'LOW'));
+                @include lumx-side-navigation-link-label(lumx-base-const("emphasis", "LOW"));
             }
         }
     }

@@ -17,31 +17,31 @@
 
     &__link {
         &:not(&--is-active) {
-            @include lumx-tabs-link(lumx-base-const('emphasis', 'LOW'));
+            @include lumx-tabs-link(lumx-base-const("emphasis", "LOW"));
 
             #{$self}--theme-light & {
-                @include lumx-tabs-link-color(lumx-base-const('emphasis', 'LOW'), lumx-base-const('theme', 'LIGHT'));
+                @include lumx-tabs-link-color(lumx-base-const("emphasis", "LOW"), lumx-base-const("theme", "LIGHT"));
             }
 
             #{$self}--theme-dark & {
-                @include lumx-tabs-link-color(lumx-base-const('emphasis', 'LOW'), lumx-base-const('theme', 'DARK'));
+                @include lumx-tabs-link-color(lumx-base-const("emphasis", "LOW"), lumx-base-const("theme", "DARK"));
             }
         }
 
         &--is-active {
-            @include lumx-tabs-link(lumx-base-const('emphasis', 'SELECTED'));
+            @include lumx-tabs-link(lumx-base-const("emphasis", "SELECTED"));
 
             #{$self}--theme-light & {
                 @include lumx-tabs-link-color(
-                    lumx-base-const('emphasis', 'SELECTED'),
-                    lumx-base-const('theme', 'LIGHT')
+                    lumx-base-const("emphasis", "SELECTED"),
+                    lumx-base-const("theme", "LIGHT")
                 );
             }
 
             #{$self}--theme-dark & {
                 @include lumx-tabs-link-color(
-                    lumx-base-const('emphasis', 'SELECTED'),
-                    lumx-base-const('theme', 'DARK')
+                    lumx-base-const("emphasis", "SELECTED"),
+                    lumx-base-const("theme", "DARK")
                 );
             }
         }
@@ -53,7 +53,7 @@
 
 .#{$lumx-base-prefix}-tabs--layout-fixed {
     .#{$lumx-base-prefix}-tabs__link {
-        @include lumx-tabs-link-layout('fixed');
+        @include lumx-tabs-link-layout("fixed");
     }
 }
 
@@ -62,19 +62,19 @@
 
 .#{$lumx-base-prefix}-tabs--layout-clustered.#{$lumx-base-prefix}-tabs--position-left {
     .#{$lumx-base-prefix}-tabs__links {
-        @include lumx-tabs-links-position(lumx-base-const('position', 'LEFT'));
+        @include lumx-tabs-links-position(lumx-base-const("position", "LEFT"));
     }
 }
 
 .#{$lumx-base-prefix}-tabs--layout-clustered.#{$lumx-base-prefix}-tabs--position-center {
     .#{$lumx-base-prefix}-tabs__links {
-        @include lumx-tabs-links-position(lumx-base-const('position', 'CENTER'));
+        @include lumx-tabs-links-position(lumx-base-const("position", "CENTER"));
     }
 }
 
 .#{$lumx-base-prefix}-tabs--layout-clustered.#{$lumx-base-prefix}-tabs--position-right {
     .#{$lumx-base-prefix}-tabs__links {
-        @include lumx-tabs-links-position(lumx-base-const('position', 'RIGHT'));
+        @include lumx-tabs-links-position(lumx-base-const("position", "RIGHT"));
     }
 }
 
@@ -84,11 +84,11 @@
 // Disabled state
 .#{$lumx-base-prefix}-tabs__link--is-disabled {
     .#{$lumx-base-prefix}-tabs--theme-light & {
-        @include lumx-state-disabled-text(lumx-base-const('theme', 'LIGHT'));
+        @include lumx-state-disabled-text(lumx-base-const("theme", "LIGHT"));
     }
 
     .#{$lumx-base-prefix}-tabs--theme-dark & {
-        @include lumx-state-disabled-text(lumx-base-const('theme', 'DARK'));
+        @include lumx-state-disabled-text(lumx-base-const("theme", "DARK"));
     }
 }
 
@@ -101,7 +101,7 @@
 
     // Focus state
     &[data-focus-visible-added] {
-        @include lumx-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('emphasis', 'LOW'), 'dark', null, true);
+        @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "LOW"), "dark", null, true);
     }
 
     // Active state

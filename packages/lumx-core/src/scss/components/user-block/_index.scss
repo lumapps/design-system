@@ -1,3 +1,5 @@
+@use "sass:math";
+
 /* ==========================================================================
    User block
    ========================================================================== */
@@ -37,17 +39,17 @@
     }
 
     &__name {
-        outline: none;
         width: fit-content;
+        outline: none;
 
-        @include lumx-typography('subtitle1');
+        @include lumx-typography("subtitle1");
 
         #{$self}--orientation-vertical & {
             text-align: center;
         }
 
         #{$self}--theme-dark & {
-            color: lumx-color-variant('light', 'N');
+            color: lumx-color-variant("light", "N");
         }
     }
 
@@ -71,12 +73,12 @@
     }
 
     &__field {
-        @include lumx-typography('body1');
+        @include lumx-typography("body1");
 
         #{$self}--size-m & {
             &::after {
-                margin: 0 $lumx-spacing-unit / 2;
-                content: '•';
+                margin: 0 math.div($lumx-spacing-unit, 2);
+                content: "•";
             }
 
             &:last-child::after {
@@ -89,11 +91,11 @@
         }
 
         #{$self}--theme-light & {
-            color: lumx-color-variant('dark', 'L2');
+            color: lumx-color-variant("dark", "L2");
         }
 
         #{$self}--theme-dark & {
-            color: lumx-color-variant('light', 'L2');
+            color: lumx-color-variant("light", "L2");
         }
     }
 

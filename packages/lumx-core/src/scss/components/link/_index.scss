@@ -14,7 +14,7 @@
     }
 
     &:disabled,
-    &[aria-disabled='true'] {
+    &[aria-disabled="true"] {
         @include lumx-state-disabled-input;
     }
 }
@@ -24,7 +24,7 @@
 
 @each $color-key, $color in $lumx-color-palette {
     .#{$lumx-base-prefix}-link.#{$lumx-base-prefix}-link--color-#{$color-key} {
-        @include lumx-link-color($color-key, 'N');
+        @include lumx-link-color($color-key, "N");
     }
 
     @each $color-variant in $lumx-color-variants {

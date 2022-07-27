@@ -1,7 +1,10 @@
-@mixin lumx-elevation($elevation, $variant: 'L4') {
+@use "sass:map";
+@use "sass:string";
+
+@mixin lumx-elevation($elevation, $variant: "L4") {
     @if $elevation == 0 {
         box-shadow: none;
     } @else {
-        box-shadow: unquote(map-get($lumx-elevation-shadows, $elevation)) lumx-color-variant('dark', $variant);
+        box-shadow: string.unquote(map.get($lumx-elevation-shadows, $elevation)) lumx-color-variant("dark", $variant);
     }
 }

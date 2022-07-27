@@ -1,20 +1,19 @@
+@use "sass:math";
+
 @mixin lumx-select-input-indicator($theme) {
     flex-shrink: 0;
-    margin-top: calc(
-        var(--lumx-text-field-wrapper-padding-vertical) +
-            ((var(--lumx-material-text-field-input-content-line-height) - var(--lumx-size-s)) / 2)
-    );
-    margin-left: $lumx-spacing-unit / 2;
+    margin-top: calc(var(--lumx-text-field-wrapper-padding-vertical) + ((var(--lumx-material-text-field-input-content-line-height) - var(--lumx-size-s)) / 2));
+    margin-left: math.div($lumx-spacing-unit, 2);
 
-    @if $theme == lumx-base-const('theme', 'LIGHT') {
-        color: lumx-color-variant('dark', 'N');
-    } @else if $theme == lumx-base-const('theme', 'DARK') {
-        color: lumx-color-variant('light', 'N');
+    @if $theme == lumx-base-const("theme", "LIGHT") {
+        color: lumx-color-variant("dark", "N");
+    } @else if $theme == lumx-base-const("theme", "DARK") {
+        color: lumx-color-variant("light", "N");
     }
 }
 
 @mixin lumx-select-choices-filter() {
-    @include lumx-has-divider(lumx-base-const('theme', 'LIGHT'));
+    @include lumx-has-divider(lumx-base-const("theme", "LIGHT"));
 
     display: flex;
     align-items: center;
@@ -28,10 +27,10 @@
 }
 
 @mixin lumx-select-choices-helper() {
-    @include lumx-typography('body1');
+    @include lumx-typography("body1");
 
     display: flex;
     justify-content: center;
     padding: $lumx-spacing-unit * 2 0;
-    color: lumx-color-variant('dark', 'L3');
+    color: lumx-color-variant("dark", "L3");
 }

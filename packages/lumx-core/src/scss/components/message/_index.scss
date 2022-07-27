@@ -17,10 +17,10 @@
     }
 
     &__text {
-        @include lumx-typography('body1');
+        @include lumx-typography("body1");
 
         flex: 1 1 auto;
-        color: lumx-color-variant('dark', 'N');
+        color: lumx-color-variant("dark", "N");
     }
 }
 
@@ -30,7 +30,7 @@
 @each $color in $lumx-notification-color-palette {
     .#{$lumx-base-prefix}-message--color-#{$color} {
         &.#{$lumx-base-prefix}-message--has-background {
-            background-color: lumx-color-variant($color, 'L6');
+            background-color: lumx-color-variant($color, "L6");
         }
     }
 }

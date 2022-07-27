@@ -1,3 +1,6 @@
+@use "sass:map";
+@use "sass:math";
+
 /* ==========================================================================
    Thumbnail
    ========================================================================== */
@@ -8,19 +11,19 @@
     position: relative;
     flex-shrink: 0;
     padding: 0;
-    border: none;
     background: none;
+    border: none;
     outline: none;
 
     &--fill-height {
         &,
         #{$self}__background {
             display: flex;
-            height: fit-content;
-            min-height: 100%;
             flex: 1 1 auto;
             flex-direction: column;
             justify-content: center;
+            height: fit-content;
+            min-height: 100%;
         }
 
         #{$self}__image {
@@ -68,8 +71,8 @@
 
     &__badge {
         position: absolute;
-        right: -$lumx-spacing-unit / 2;
-        bottom: -$lumx-spacing-unit / 2;
+        right: math.div(-$lumx-spacing-unit, 2);
+        bottom: math.div(-$lumx-spacing-unit, 2);
     }
 }
 
@@ -101,7 +104,7 @@
 
 @each $key, $aspect-ratio in $lumx-thumbnail-aspect-ratio {
     .#{$lumx-base-prefix}-thumbnail--aspect-ratio-#{$key}:not(.#{$lumx-base-prefix}-thumbnail--fill-height)
-        .#{$lumx-base-prefix}-thumbnail__background {
+    .#{$lumx-base-prefix}-thumbnail__background {
         padding-top: $aspect-ratio;
     }
 }
@@ -113,6 +116,7 @@
     &:not(.#{$lumx-base-prefix}-thumbnail--fill-height) {
         display: block;
     }
+
     position: relative;
     cursor: pointer;
 
@@ -124,19 +128,19 @@
         right: 0;
         bottom: 0;
         left: 0;
-        content: '';
         pointer-events: none;
+        content: "";
     }
 
     /* Hover */
     &:hover::after,
     &:focus::after {
-        @include lumx-state(lumx-base-const('state', 'HOVER'), lumx-base-const('emphasis', 'LOW'), 'dark');
+        @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "LOW"), "dark");
     }
 
     /* Active */
     &:active::after {
-        @include lumx-state(lumx-base-const('state', 'ACTIVE'), lumx-base-const('emphasis', 'LOW'), 'dark');
+        @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "LOW"), "dark");
     }
 }
 
@@ -150,25 +154,25 @@
 /* Focused (light theme) */
 .#{$lumx-base-prefix}-thumbnail--theme-light.#{$lumx-base-prefix}-thumbnail--is-clickable {
     &[data-focus-visible-added]::after {
-        @include lumx-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('emphasis', 'LOW'), 'dark');
+        @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "LOW"), "dark");
     }
 }
 
 /* Focused (dark theme) */
 .#{$lumx-base-prefix}-thumbnail--theme-dark.#{$lumx-base-prefix}-thumbnail--is-clickable {
     &[data-focus-visible-added]::after {
-        @include lumx-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('emphasis', 'LOW'), 'light');
+        @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "LOW"), "light");
     }
 }
 
 /* Loading state */
 .#{$lumx-base-prefix}-thumbnail--is-loading {
     &.#{$lumx-base-prefix}-thumbnail--theme-light .#{$lumx-base-prefix}-thumbnail__background {
-        @include lumx-skeleton('light');
+        @include lumx-skeleton("light");
     }
 
     &.#{$lumx-base-prefix}-thumbnail--theme-dark .#{$lumx-base-prefix}-thumbnail__background {
-        @include lumx-skeleton('dark');
+        @include lumx-skeleton("dark");
     }
 }
 
@@ -188,11 +192,11 @@
         }
 
         &.#{$lumx-base-prefix}-thumbnail--theme-light .#{$lumx-base-prefix}-thumbnail__fallback {
-            background-color: lumx-color-variant('dark', 'L6');
+            background-color: lumx-color-variant("dark", "L6");
         }
 
         &.#{$lumx-base-prefix}-thumbnail--theme-dark .#{$lumx-base-prefix}-thumbnail__fallback {
-            background-color: lumx-color-variant('light', 'L6');
+            background-color: lumx-color-variant("light", "L6");
         }
     }
 
@@ -208,15 +212,16 @@
 /* Thumbnail badge mask
    ========================================================================== */
 
-$badge-radius-size: map-get($lumx-sizes, lumx-base-const('size', 'XS')) / 2 + 2;
+$badge-radius-size: math.div(map.get($lumx-sizes, lumx-base-const("size", "XS")), 2) + 2;
 
 .#{$lumx-base-prefix}-thumbnail--has-badge {
     .#{$lumx-base-prefix}-thumbnail__background,
     .#{$lumx-base-prefix}-thumbnail__fallback {
-        mask-image: radial-gradient(
-            circle at calc(100% - #{$badge-radius-size - 6}) calc(100% - #{$badge-radius-size - 6}),
-            transparent $badge-radius-size,
-            /* offset circle size (+1) to soften the edge */ black $badge-radius-size + 1
-        );
+        mask-image:
+            radial-gradient(
+                circle at calc(100% - #{$badge-radius-size - 6}) calc(100% - #{$badge-radius-size - 6}),
+                transparent $badge-radius-size,
+                black $badge-radius-size + 1
+            );
     }
 }
