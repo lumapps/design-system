@@ -43,7 +43,21 @@ export const Vertical = ({ theme }: HasTheme) => (
             <Icon icon={mdiPencil} size={Size.m} />
         </GenericBlock.Figure>
         <GenericBlock.Content style={redBorderStyle}>Content</GenericBlock.Content>
-        <GenericBlock.Actions fillSpace style={redBorderStyle}>
+        <GenericBlock.Actions style={redBorderStyle}>
+            <Button theme={theme}>Button</Button>
+        </GenericBlock.Actions>
+    </GenericBlock>
+);
+
+export const VerticalOverflow = ({ theme }: HasTheme) => (
+    <GenericBlock orientation={Orientation.vertical} style={{ width: 300 }}>
+        <GenericBlock.Figure style={redBorderStyle}>
+            <Icon icon={mdiPencil} size={Size.m} />
+        </GenericBlock.Figure>
+        <GenericBlock.Content style={redBorderStyle}>
+            _________________________________________________________________
+        </GenericBlock.Content>
+        <GenericBlock.Actions style={redBorderStyle}>
             <Button theme={theme}>Button</Button>
         </GenericBlock.Actions>
     </GenericBlock>
@@ -61,12 +75,26 @@ export const Horizontal = ({ theme }: HasTheme) => (
     </GenericBlock>
 );
 
-export const HorizontalTop = ({ theme }: HasTheme) => (
-    <GenericBlock orientation={Orientation.horizontal} hAlign={Alignment.top}>
+export const HorizontalCenter = ({ theme }: HasTheme) => (
+    <GenericBlock orientation={Orientation.horizontal} hAlign={Alignment.center}>
         <GenericBlock.Figure style={redBorderStyle}>
             <Icon icon={mdiPencil} size={Size.m} />
         </GenericBlock.Figure>
         <GenericBlock.Content style={redBorderStyle}>Content</GenericBlock.Content>
+        <GenericBlock.Actions style={redBorderStyle}>
+            <Button theme={theme}>Button</Button>
+        </GenericBlock.Actions>
+    </GenericBlock>
+);
+
+export const HorizontalOverflow = ({ theme }: HasTheme) => (
+    <GenericBlock orientation={Orientation.horizontal} style={{ width: 300 }}>
+        <GenericBlock.Figure style={redBorderStyle}>
+            <Icon icon={mdiPencil} size={Size.m} />
+        </GenericBlock.Figure>
+        <GenericBlock.Content style={redBorderStyle}>
+            _________________________________________________________________
+        </GenericBlock.Content>
         <GenericBlock.Actions style={redBorderStyle}>
             <Button theme={theme}>Button</Button>
         </GenericBlock.Actions>

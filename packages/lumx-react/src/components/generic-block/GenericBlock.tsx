@@ -1,5 +1,6 @@
 import React, { Children, forwardRef, ReactElement, ReactNode } from 'react';
 import classNames from 'classnames';
+import isEmpty from 'lodash/isEmpty';
 import { Comp, getRootClassName, isComponentType, partitionMulti } from '@lumx/react/utils';
 import { Orientation, Size, FlexBox, FlexBoxProps, Alignment, HorizontalAlignment } from '@lumx/react';
 
@@ -58,9 +59,9 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * Component default props.
  */
 const DEFAULT_PROPS: Partial<GenericBlockProps> = {
-    gap: Size.regular,
-    orientation: Orientation.vertical,
-    hAlign: Alignment.center,
+    gap: Size.big,
+    orientation: Orientation.horizontal,
+    hAlign: Alignment.top,
     vAlign: Alignment.center,
 };
 
@@ -98,9 +99,9 @@ const isActions = isComponentType(Actions);
  * displayed either horizontally of vertically with the same gap between each section.
  *
  * The sections are:
- * * (Optional) `Figure` => A visual element to display before the main content.
- * * (Required) `Content` => The main content displayed
- * * (Optional) `Actions` => One or more actions to set after the element.
+ * - `Figure` => A visual element to display before the main content.
+ * - `Content` => The main content displayed
+ * - `Actions` => One or more actions to set after the element.
  *
  * @see https://www.figma.com/file/lzzrQmsfaXRaOyRfoEogPZ/DS%3A-playground?node-id=1%3A4076
  */
@@ -126,12 +127,12 @@ const BaseGenericBlock: BaseGenericBlock = forwardRef((props, ref) => {
         );
         return {
             figureChild,
-            figureChildProps: (figureChild as ReactElement)?.props || {},
+            figureChildProps: (figureChild as ReactElement)?.props,
             contentChild,
-            contentChildProps: (contentChild as ReactElement)?.props || {},
+            contentChildProps: (contentChild as ReactElement)?.props,
             actionsChild,
-            actionsChildProps: (actionsChild as ReactElement)?.props || {},
-            otherChildren,
+            actionsChildProps: (actionsChild as ReactElement)?.props,
+            otherChildren: otherChildren.filter((child) => !isEmpty(child)),
         };
     }, [children]);
 
@@ -152,21 +153,23 @@ const BaseGenericBlock: BaseGenericBlock = forwardRef((props, ref) => {
             orientation={orientation}
             {...forwardedProps}
         >
-            <FlexBox
-                ref={(sections.figureChild as any)?.ref}
-                {...figureProps}
-                {...sections.figureChildProps}
-                className={classNames(
-                    figureProps?.className,
-                    sections.figureChildProps?.className,
-                    `${CLASSNAME}__figure`,
-                )}
-            >
-                {figure}
-                {sections.figureChildProps?.children}
-            </FlexBox>
+            {(figure || sections.figureChildProps?.children) && (
+                <FlexBox
+                    ref={(sections.figureChild as any)?.ref}
+                    {...figureProps}
+                    {...sections.figureChildProps}
+                    className={classNames(
+                        figureProps?.className,
+                        sections.figureChildProps?.className,
+                        `${CLASSNAME}__figure`,
+                    )}
+                >
+                    {figure}
+                    {sections.figureChildProps?.children}
+                </FlexBox>
+            )}
 
-            {children && (
+            {(sections.contentChildProps?.children || sections.otherChildren.length > 0) && (
                 <FlexBox
                     ref={(sections.contentChild as any)?.ref}
                     orientation={Orientation.vertical}
@@ -185,20 +188,22 @@ const BaseGenericBlock: BaseGenericBlock = forwardRef((props, ref) => {
                 </FlexBox>
             )}
 
-            <FlexBox
-                ref={(sections.actionsChild as any)?.ref}
-                vAlign={actionsVAlign}
-                {...actionsProps}
-                {...sections.actionsChildProps}
-                className={classNames(
-                    actionsProps?.className,
-                    sections.actionsChildProps?.className,
-                    `${CLASSNAME}__actions`,
-                )}
-            >
-                {actions}
-                {sections.actionsChildProps?.children}
-            </FlexBox>
+            {(actions || sections.actionsChildProps?.children) && (
+                <FlexBox
+                    ref={(sections.actionsChild as any)?.ref}
+                    vAlign={actionsVAlign}
+                    {...actionsProps}
+                    {...sections.actionsChildProps}
+                    className={classNames(
+                        actionsProps?.className,
+                        sections.actionsChildProps?.className,
+                        `${CLASSNAME}__actions`,
+                    )}
+                >
+                    {actions}
+                    {sections.actionsChildProps?.children}
+                </FlexBox>
+            )}
         </FlexBox>
     );
 });
