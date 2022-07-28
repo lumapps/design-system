@@ -7,6 +7,13 @@
         "@mdi/font": "5.8.55",
         "@mdi/js": "5.8.55"
     },
+    "devDependencies": {
+        "@rollup/plugin-node-resolve": "9.0.0",
+        "rollup": "2.26.10",
+        "rollup-plugin-babel": "^4.4.0",
+        "rollup-plugin-cleaner": "^1.0.0",
+        "rollup-plugin-copy": "^3.3.0"
+    },
     "description": "LumX icons",
     "engines": {
         "node": ">= 12.0.0",
@@ -19,6 +26,13 @@
     "repository": {
         "type": "git",
         "url": "git+https://github.com/lumapps/design-system.git"
+    },
+    "publishConfig": {
+        "directory": "dist"
+    },
+    "scripts": {
+        "build": "rollup -c",
+        "prepublishOnly": "yarn build"
     },
     "sideEffects": false,
     "version": "2.2.22"

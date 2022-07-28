@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   GenericBlock: remove sections ("figure", "content" and "actions") if empty.
 -   GenericBlock: prevent overflow by default.
 -   FlexBox: add `tiny` to the possible `gap` sizes.
+-   @lumx/icons: inline mdi icon import in the ESM module for better tree shaking.
 
 ## [2.2.22][] - 2022-07-25
 
