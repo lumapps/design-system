@@ -95,6 +95,10 @@
 /* Gap
    ========================================================================== */
 
+.#{$lumx-base-prefix}-flex-box--gap-tiny {
+    gap: $lumx-spacing-unit-tiny;
+}
+
 .#{$lumx-base-prefix}-flex-box--gap-regular {
     gap: $lumx-spacing-unit;
 }
