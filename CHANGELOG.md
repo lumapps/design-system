@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   `gap` defaults to `big`
 -   GenericBlock: remove sections ("figure", "content" and "actions") if empty.
 -   GenericBlock: prevent overflow by default.
+-   FlexBox: add `tiny` to the possible `gap` sizes.
 
 ## [2.2.22][] - 2022-07-25
 

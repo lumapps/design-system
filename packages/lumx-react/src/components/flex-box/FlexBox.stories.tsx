@@ -18,7 +18,7 @@ const flexViewKnobConfigs: Array<
     ['fillSpace', boolean],
     ['noShrink', boolean],
     ['wrap', boolean],
-    ['gap', select, [DEFAULT_PROPS.gap, Size.regular, Size.medium, Size.big, Size.huge]],
+    ['gap', select, [DEFAULT_PROPS.gap, Size.tiny, Size.regular, Size.medium, Size.big, Size.huge]],
     ['hAlign', select, [DEFAULT_PROPS.hAlign, Alignment.center, Alignment.top, Alignment.bottom]],
     ['vAlign', select, [DEFAULT_PROPS.vAlign, Alignment.center, Alignment.right, Alignment.left]],
     ['orientation', select, [undefined, Orientation.horizontal, Orientation.vertical]],
