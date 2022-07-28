@@ -4907,6 +4907,11 @@ __metadata:
   dependencies:
     "@mdi/font": 5.8.55
     "@mdi/js": 5.8.55
+    "@rollup/plugin-node-resolve": 9.0.0
+    rollup: 2.26.10
+    rollup-plugin-babel: ^4.4.0
+    rollup-plugin-cleaner: ^1.0.0
+    rollup-plugin-copy: ^3.3.0
   languageName: unknown
   linkType: soft
 
