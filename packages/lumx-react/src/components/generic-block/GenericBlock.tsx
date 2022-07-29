@@ -1,8 +1,9 @@
 import React, { Children, forwardRef, ReactElement, ReactNode } from 'react';
 import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
+import noop from 'lodash/noop';
 import { Comp, getRootClassName, isComponentType, partitionMulti } from '@lumx/react/utils';
-import { Orientation, Size, FlexBox, FlexBoxProps, Alignment, HorizontalAlignment } from '@lumx/react';
+import { Orientation, Size, FlexBox, FlexBoxProps } from '@lumx/react';
 
 export interface GenericBlockProps extends FlexBoxProps {
     /**
@@ -61,8 +62,6 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
 const DEFAULT_PROPS: Partial<GenericBlockProps> = {
     gap: Size.big,
     orientation: Orientation.horizontal,
-    hAlign: Alignment.top,
-    vAlign: Alignment.center,
 };
 
 type BaseGenericBlock = Comp<GenericBlockProps, HTMLDivElement>;
@@ -85,13 +84,13 @@ interface GenericBlock extends BaseGenericBlock {
     Actions: Comp<FlexBoxProps>;
 }
 
-const Figure = (() => null) as any;
+const Figure = noop.bind({}) as Comp<FlexBoxProps>;
 const isFigure = isComponentType(Figure);
 
-const Content = (() => null) as any;
+const Content = noop.bind({}) as Comp<FlexBoxProps>;
 const isContent = isComponentType(Content);
 
-const Actions = (() => null) as any;
+const Actions = noop.bind({}) as Comp<FlexBoxProps>;
 const isActions = isComponentType(Actions);
 
 /**
@@ -136,15 +135,6 @@ const BaseGenericBlock: BaseGenericBlock = forwardRef((props, ref) => {
         };
     }, [children]);
 
-    let actionsVAlign: HorizontalAlignment = Alignment.center;
-    if (orientation === Orientation.horizontal) {
-        actionsVAlign = Alignment.right;
-    }
-    let contentVAlign: HorizontalAlignment = Alignment.center;
-    if (orientation === Orientation.horizontal) {
-        contentVAlign = Alignment.left;
-    }
-
     return (
         <FlexBox
             ref={ref}
@@ -156,6 +146,8 @@ const BaseGenericBlock: BaseGenericBlock = forwardRef((props, ref) => {
             {(figure || sections.figureChildProps?.children) && (
                 <FlexBox
                     ref={(sections.figureChild as any)?.ref}
+                    vAlign={forwardedProps.vAlign}
+                    hAlign={forwardedProps.hAlign}
                     {...figureProps}
                     {...sections.figureChildProps}
                     className={classNames(
@@ -174,7 +166,8 @@ const BaseGenericBlock: BaseGenericBlock = forwardRef((props, ref) => {
                     ref={(sections.contentChild as any)?.ref}
                     orientation={Orientation.vertical}
                     fillSpace
-                    vAlign={contentVAlign}
+                    vAlign={forwardedProps.vAlign}
+                    hAlign={forwardedProps.hAlign}
                     {...contentProps}
                     {...sections.contentChildProps}
                     className={classNames(
@@ -191,7 +184,8 @@ const BaseGenericBlock: BaseGenericBlock = forwardRef((props, ref) => {
             {(actions || sections.actionsChildProps?.children) && (
                 <FlexBox
                     ref={(sections.actionsChild as any)?.ref}
-                    vAlign={actionsVAlign}
+                    vAlign={forwardedProps.vAlign}
+                    hAlign={forwardedProps.hAlign}
                     {...actionsProps}
                     {...sections.actionsChildProps}
                     className={classNames(
