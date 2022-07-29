@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   FlexBox: add `tiny` to the possible `gap` sizes.
 -   @lumx/icons: inline mdi icon import in the ESM module for better tree shaking.
 -   @lumx/react: fix `TypographyCustom` values.
+-   Link: allow using all typography variants.
 
 ### Fixed
 

@@ -4,7 +4,7 @@ import isEmpty from 'lodash/isEmpty';
 
 import classNames from 'classnames';
 
-import { Color, ColorVariant, Icon, Size, Typography, TypographyInterface, TypographyTitleCustom } from '@lumx/react';
+import { Color, ColorVariant, Icon, Size, Typography } from '@lumx/react';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { renderLink } from '@lumx/react/utils/renderLink';
 
@@ -31,7 +31,7 @@ export interface LinkProps extends GenericProps {
     /** Link target. */
     target?: HTMLAnchorProps['target'];
     /** Typography variant. */
-    typography?: TypographyInterface | TypographyTitleCustom;
+    typography?: Typography;
 }
 
 /**
