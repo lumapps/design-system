@@ -3,7 +3,7 @@ import { GenericBlock, Avatar, Button, Size, Orientation } from '@lumx/react';
 
 export const App = ({ theme }: any) => (
     <>
-        <GenericBlock theme={theme}>
+        <GenericBlock theme={theme} orientation={Orientation.vertical}>
             <GenericBlock.Figure>
                 <Avatar theme={theme} image="/demo-assets/persona.png" alt="" size={Size.m} />
             </GenericBlock.Figure>
