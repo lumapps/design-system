@@ -4,7 +4,35 @@ import { Text } from './Text';
 
 export default { title: 'LumX components/text/Text' };
 
-export const Default = () => <Text>Some text</Text>;
+export const Default = () => <Text as="p">Some text</Text>;
+
+const withResizableBox = (Story: any) => (
+    <div
+        style={{
+            width: 150,
+            height: 60,
+            border: '1px solid red',
+            resize: 'both',
+            overflow: 'hidden',
+        }}
+    >
+        <Story />
+    </div>
+);
+
+export const Truncate = () => (
+    <Text as="p" truncate>
+        Some very very very long text
+    </Text>
+);
+Truncate.decorators = [withResizableBox];
+
+export const TruncateMultiline = () => (
+    <Text as="p" truncate={{ lines: 2 }}>
+        Some very very very very very very very very very long text
+    </Text>
+);
+TruncateMultiline.decorators = [withResizableBox];
 
 export const AllTypography = () => {
     const typographies = [undefined, ...Object.values(TypographyInterface), ...Object.values(TypographyCustom)];
@@ -14,7 +42,9 @@ export const AllTypography = () => {
                 <tr key={typography}>
                     <td>{typography}</td>
                     <td>
-                        <Text typography={typography}>Some text</Text>
+                        <Text as="p" typography={typography}>
+                            Some text
+                        </Text>
                     </td>
                 </tr>
             ))}
@@ -38,7 +68,7 @@ export const AllColor = () => {
                     <td>{color}</td>
                     {colorVariants.map((colorVariant) => (
                         <td key={colorVariant}>
-                            <Text color={color} colorVariant={colorVariant}>
+                            <Text as="p" color={color} colorVariant={colorVariant}>
                                 Some text
                             </Text>
                         </td>

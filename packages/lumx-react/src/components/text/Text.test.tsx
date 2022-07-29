@@ -7,7 +7,7 @@ import { commonTestsSuite } from '@lumx/react/testing/utils';
 import { Text, TextProps } from './Text';
 
 const setup = (props: Partial<TextProps> = {}) => {
-    const wrapper = shallow(<Text {...props} />);
+    const wrapper = shallow(<Text as="span" {...props} />);
     return { props, wrapper };
 };
 
@@ -41,6 +41,19 @@ describe(`<${Text.displayName}>`, () => {
             const { wrapper } = setup({ color: 'blue', colorVariant: 'D2', children: 'Some text' });
             expect(wrapper).toHaveDisplayName('span');
             expect(wrapper).toHaveClassName('lumx-color-font-blue-D2');
+        });
+
+        it('should render truncated', () => {
+            const { wrapper } = setup({ truncate: true });
+            expect(wrapper).toHaveDisplayName('span');
+            expect(wrapper).toHaveClassName('lumx-text--is-truncated');
+        });
+
+        it('should render truncated multiline', () => {
+            const { wrapper } = setup({ truncate: { lines: 2 } });
+            expect(wrapper).toHaveDisplayName('span');
+            expect(wrapper).toHaveClassName('lumx-text--is-truncated-multiline');
+            expect(wrapper).toHaveStyle({ '--lumx-text-truncate-lines': 2 });
         });
     });
 
