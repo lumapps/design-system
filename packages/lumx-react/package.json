@@ -61,7 +61,6 @@
         "jest-watch-master": "^1.0.0",
         "jest-watch-suspend": "^1.1.2",
         "jest-watch-typeahead": "^0.6.0",
-        "postcss-flexbox-unboxer": "^1.0.0",
         "rollup": "2.26.10",
         "rollup-plugin-analyzer": "^3.3.0",
         "rollup-plugin-babel": "^4.4.0",
