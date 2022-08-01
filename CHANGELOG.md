@@ -19,6 +19,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   FlexBox: add `tiny` to the possible `gap` sizes.
 -   @lumx/icons: inline mdi icon import in the ESM module for better tree shaking.
 
+### Fixed
+
+-   Thumbnail: fix a bug on focus shift calculation caused when focusPoint is equals to 0 and the image size equals the container size.
+
+
 ## [2.2.22][] - 2022-07-25
 
 ### Changed
