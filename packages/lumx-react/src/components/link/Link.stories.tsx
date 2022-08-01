@@ -1,6 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { mdiChevronDown, mdiLink } from '@lumx/icons';
-import { ColorPalette, ColorVariant, Link, Typography, TypographyInterface, TypographyTitleCustom } from '@lumx/react';
+import {
+    ColorPalette,
+    ColorVariant,
+    Link,
+    Typography,
+    TypographyCustom,
+    TypographyInterface,
+    TypographyTitleCustom,
+} from '@lumx/react';
 import { boolean, select, text } from '@storybook/addon-knobs';
 import React, { Fragment } from 'react';
 
@@ -13,7 +21,7 @@ const linkTypographies = { ...TypographyInterface, ...TypographyTitleCustom };
 export const SimpleLink = () => (
     <>
         <Link
-            href={text('href', 'https://google.com', 'Link 1')}
+            href={text('href', 'https://example.com', 'Link 1')}
             target={boolean('target: _blank', false, 'Link 1') ? '_blank' : ''}
             color={select('Color', ColorPalette, ColorPalette.blue, 'Link 1')}
             colorVariant={select('Color Variant', ColorVariant, ColorVariant.N, 'Link 1')}
@@ -51,50 +59,22 @@ export const WithoutHref = () => (
     </div>
 );
 
-const CustomLink: React.FC = ({ children, ...props }) =>
-    React.createElement('a', { ...props, style: { color: 'red' } }, children);
+export const WithCustomLink = () => {
+    const CustomLink: React.FC = ({ children, ...props }) =>
+        React.createElement('a', { ...props, style: { color: 'red' } }, children);
 
-export const WithCustomLink = () => (
-    <Link linkAs={CustomLink} href="https://google.com">
-        Custom link
-    </Link>
-);
+    return (
+        <Link linkAs={CustomLink} href="https://example.com">
+            Custom link
+        </Link>
+    );
+};
 
 export const DisabledLink = () => (
     // eslint-disable-next-line jsx-a11y/anchor-is-valid
     <Link onClick={onClick} disabled>
         Disabled link
     </Link>
-);
-
-export const WithIcon = () => (
-    <>
-        {Object.values(linkTypographies).map((typography) => (
-            <Fragment key={typography}>
-                {typography}
-                <p>
-                    <Link rightIcon={mdiLink} href="https://www.google.com" typography={typography as any}>
-                        With right icon
-                    </Link>
-                </p>
-                <p>
-                    <Link leftIcon={mdiChevronDown} href="https://www.google.com" typography={typography as any}>
-                        With left icon
-                    </Link>
-                </p>
-                <p>
-                    <Link
-                        leftIcon={mdiChevronDown}
-                        rightIcon={mdiLink}
-                        href="https://www.google.com"
-                        typography={typography as any}
-                    >
-                        With right and left icon
-                    </Link>
-                </p>
-            </Fragment>
-        ))}
-    </>
 );
 
 export const WithCustomizableTypography = () => (
@@ -104,8 +84,58 @@ export const WithCustomizableTypography = () => (
             --lumx-typography-custom-title1-font-size: 5px;
         }
         `}</style>
-        <Link typography={Typography.custom.title1} href="https://google.com">
+        <Link typography={Typography.custom.title1} href="https://example.com">
             Link with customizable `body` typography
         </Link>
     </>
 );
+
+export const AllTypography = () => {
+    const typographies = [undefined, ...Object.values(TypographyInterface), ...Object.values(TypographyCustom)];
+    return (
+        <table>
+            {typographies.map((typography) => (
+                <tr key={typography}>
+                    <td>{typography}</td>
+                    <td>
+                        <Link
+                            leftIcon={mdiChevronDown}
+                            rightIcon={mdiLink}
+                            typography={typography}
+                            href="https://example.com"
+                        >
+                            Link text
+                        </Link>
+                    </td>
+                </tr>
+            ))}
+        </table>
+    );
+};
+
+export const AllColor = () => {
+    const colorVariants = [undefined, ...Object.values(ColorVariant)];
+    const colors = [undefined, ...Object.values(ColorPalette)];
+    return (
+        <table style={{ borderCollapse: 'separate', borderSpacing: 5 }}>
+            <tr>
+                <td />
+                {colorVariants.map((colorVariant) => (
+                    <td key={colorVariant}>{colorVariant}</td>
+                ))}
+            </tr>
+            {colors.map((color) => (
+                <tr key={color}>
+                    <td>{color}</td>
+                    {colorVariants.map((colorVariant) => (
+                        <td key={colorVariant}>
+                            <Link href="https://example.com" color={color} colorVariant={colorVariant}>
+                                Some text
+                            </Link>
+                        </td>
+                    ))}
+                </tr>
+            ))}
+        </table>
+    );
+};

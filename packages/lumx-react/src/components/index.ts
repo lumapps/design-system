@@ -119,14 +119,14 @@ export type TypographyTitleCustom = ValueOf<typeof TypographyTitleCustom>;
 /**
  * List of typographies that can be customized (via CSS variables).
  */
-const TypographyCustom = {
+export const TypographyCustom = {
     ...TypographyTitleCustom,
-    intro: 'intro',
-    'body-large': 'body-large',
-    body: 'body',
-    quote: 'quote',
-    'publish-info': 'publish-info',
-    button: 'button',
+    intro: 'custom-intro',
+    'body-large': 'custom-body-large',
+    body: 'custom-body',
+    quote: 'custom-quote',
+    'publish-info': 'custom-publish-info',
+    button: 'custom-button',
 } as const;
 export type TypographyCustom = ValueOf<typeof TypographyCustom>;
 
