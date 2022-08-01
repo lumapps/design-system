@@ -2904,6 +2904,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.12.5":
+  version: 7.18.9
+  resolution: "@babel/runtime@npm:7.18.9"
+  dependencies:
+    regenerator-runtime: ^0.13.4
+  checksum: 36dd736baba7164e82b3cc9d43e081f0cb2d05ff867ad39cac515d99546cee75b7f782018b02a3dcf5f2ef3d27f319faa68965fdfec49d4912c60c6002353a2e
+  languageName: node
+  linkType: hard
+
 "@babel/runtime@npm:^7.14.8, @babel/runtime@npm:^7.15.4":
   version: 7.16.3
   resolution: "@babel/runtime@npm:7.16.3"
@@ -14676,16 +14685,16 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"gatsby-plugin-sass@npm:^2.3.21":
-  version: 2.3.21
-  resolution: "gatsby-plugin-sass@npm:2.3.21"
+"gatsby-plugin-sass@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "gatsby-plugin-sass@npm:3.2.0"
   dependencies:
-    "@babel/runtime": ^7.11.2
-    sass-loader: ^7.3.1
+    "@babel/runtime": ^7.12.5
+    sass-loader: ^10.1.0
   peerDependencies:
     gatsby: ^2.0.0
-    node-sass: ^4.9.0
-  checksum: 23bef8c7e4c3d75d587dcf7bbc86535082c8c8fe22a3d311641f73efe3e6777df0d36aecd85dd452943f424ade4bc62d4d85246127f55267e20085fb290ab2fb
+    sass: ^1.30.0
+  checksum: 59a10511bb8e33e14f233e7a1c3845316ad99c65e4c9c569251c67acb2ad8684df13d3ddb67aceb19eb1b4a4216cac41bf2a34ef7c7e7f8b62de6e94ad43202c
   languageName: node
   linkType: hard
 
@@ -19874,17 +19883,6 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"loader-utils@npm:^1.0.1, loader-utils@npm:^1.4.0":
-  version: 1.4.0
-  resolution: "loader-utils@npm:1.4.0"
-  dependencies:
-    big.js: ^5.2.2
-    emojis-list: ^3.0.0
-    json5: ^1.0.1
-  checksum: d150b15e7a42ac47d935c8b484b79e44ff6ab4c75df7cc4cb9093350cf014ec0b17bdb60c5d6f91a37b8b218bd63b973e263c65944f58ca2573e402b9a27e717
-  languageName: node
-  linkType: hard
-
 "loader-utils@npm:^1.0.2, loader-utils@npm:^1.1.0, loader-utils@npm:^1.2.3":
   version: 1.2.3
   resolution: "loader-utils@npm:1.2.3"
@@ -19893,6 +19891,17 @@ fsevents@~2.1.2:
     emojis-list: ^2.0.0
     json5: ^1.0.1
   checksum: 385407fc2683b6d664276fd41df962296de4a15030bb24389de77b175570c3b56bd896869376ba14cf8b33a9e257e17a91d395739ba7e23b5b68a8749a41df7e
+  languageName: node
+  linkType: hard
+
+"loader-utils@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "loader-utils@npm:1.4.0"
+  dependencies:
+    big.js: ^5.2.2
+    emojis-list: ^3.0.0
+    json5: ^1.0.1
+  checksum: d150b15e7a42ac47d935c8b484b79e44ff6ab4c75df7cc4cb9093350cf014ec0b17bdb60c5d6f91a37b8b218bd63b973e263c65944f58ca2573e402b9a27e717
   languageName: node
   linkType: hard
 
@@ -20509,7 +20518,7 @@ fsevents@~2.1.2:
     gatsby-plugin-copy-files-enhanced: ^1.1.1
     gatsby-plugin-mdx: ^1.2.51
     gatsby-plugin-react-helmet: ^3.3.14
-    gatsby-plugin-sass: ^2.3.21
+    gatsby-plugin-sass: ^3.2.0
     gatsby-plugin-split-css: ^1.0.2
     gatsby-remark-autolink-headers: ^2.3.15
     gatsby-remark-smartypants: ^2.3.13
@@ -26806,7 +26815,7 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"sass-loader@npm:^10.3.1":
+"sass-loader@npm:^10.1.0, sass-loader@npm:^10.3.1":
   version: 10.3.1
   resolution: "sass-loader@npm:10.3.1"
   dependencies:
@@ -26828,21 +26837,6 @@ fsevents@~2.1.2:
     sass:
       optional: true
   checksum: ab73a41a8aae1a8b4ae607b3ab661e23e12629ea2d05904727625b201e238083e37d7686f613ddd459a1f243a1146b93cd10c9a339a4f6d11871e70c914965c4
-  languageName: node
-  linkType: hard
-
-"sass-loader@npm:^7.3.1":
-  version: 7.3.1
-  resolution: "sass-loader@npm:7.3.1"
-  dependencies:
-    clone-deep: ^4.0.1
-    loader-utils: ^1.0.1
-    neo-async: ^2.5.0
-    pify: ^4.0.1
-    semver: ^6.3.0
-  peerDependencies:
-    webpack: ^3.0.0 || ^4.0.0
-  checksum: 9e7b438cbc6197970f8db7973de5904c92d6914ace03eee158b5d8a07fdc611fb97105d8fa15edea13727ec2f01cecba708662a04a70a4bfe73a7ec5d6266f8d
   languageName: node
   linkType: hard
 
