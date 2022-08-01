@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   `@lumx/core`: _[BREAKING]_ migrating from `node-sass` v4.13.1 to `sass` v1.54.0.
+    All SASS depreciation warnings have been handled, LumX is ready for SASS v2+.
+    You must do the migration too if you are using `@lumx/core` SCSS stylesheets.
+-   `@lumx/core`: update `sass-mq` from v5 to v6.
+
 ## [2.2.25][] - 2022-08-04
 
 ### Changed
