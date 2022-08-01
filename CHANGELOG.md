@@ -11,7 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   GenericBlock: improve default props values:
     -   `orientation` defaults to `horizontal`
-    -   `hAlign` defaults to `top`
+    -   `vAlign` & `hAlign` do not default to anything
+    -   `vAlign` & `hAlign` of "figure", "content" and "actions" sections default to the root `vAlign` & `hAlign` props
     -   `gap` defaults to `big`
 -   GenericBlock: remove sections ("figure", "content" and "actions") if empty.
 -   GenericBlock: prevent overflow by default.

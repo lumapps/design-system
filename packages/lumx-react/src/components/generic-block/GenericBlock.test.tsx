@@ -3,7 +3,7 @@ import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 import { commonTestsSuite } from '@lumx/react/testing/utils';
 
-import { GenericBlock, GenericBlockProps } from './GenericBlock';
+import { GenericBlock, GenericBlockProps } from '.';
 
 const CLASSNAME = GenericBlock.className as string;
 
@@ -27,44 +27,44 @@ describe(`<${GenericBlock.displayName}>`, () => {
             );
 
             expect(wrapper.prop('gap')).toBe('big');
-            expect(wrapper.prop('hAlign')).toBe('top');
             expect(wrapper.prop('orientation')).toBe('horizontal');
-            expect(wrapper.prop('vAlign')).toBe('center');
 
             const figure = wrapper.find('.lumx-generic-block__figure');
-            expect(figure).toBeDefined();
+            expect(figure).toHaveLength(1);
 
             const content = wrapper.find('.lumx-generic-block__content');
+            expect(content).toHaveLength(1);
             expect(content.prop('fillSpace')).toBe(true);
-            expect(content.prop('vAlign')).toBe('left');
             expect(content.prop('orientation')).toBe('vertical');
 
             const actions = wrapper.find('.lumx-generic-block__actions');
-            expect(actions.prop('vAlign')).toBe('right');
+            expect(actions).toHaveLength(1);
         });
 
-        it('should render vertical', () => {
+        it('should forward vAlign & hAlign', () => {
             const wrapper = shallow(
-                <GenericBlock figure="figure" actions="actions" orientation="vertical">
+                <GenericBlock figure="figure" actions="actions" vAlign="left" hAlign="bottom">
                     Content
                 </GenericBlock>,
             );
 
-            expect(wrapper.prop('gap')).toBe('big');
-            expect(wrapper.prop('hAlign')).toBe('top');
-            expect(wrapper.prop('orientation')).toBe('vertical');
-            expect(wrapper.prop('vAlign')).toBe('center');
+            expect(wrapper.prop('vAlign')).toBe('left');
+            expect(wrapper.prop('hAlign')).toBe('bottom');
 
             const figure = wrapper.find('.lumx-generic-block__figure');
-            expect(figure).toBeDefined();
+            expect(figure).toHaveLength(1);
+            expect(figure.prop('vAlign')).toBe('left');
+            expect(figure.prop('hAlign')).toBe('bottom');
 
             const content = wrapper.find('.lumx-generic-block__content');
-            expect(content.prop('fillSpace')).toBe(true);
-            expect(content.prop('vAlign')).toBe('center');
-            expect(content.prop('orientation')).toBe('vertical');
+            expect(content).toHaveLength(1);
+            expect(content.prop('vAlign')).toBe('left');
+            expect(content.prop('hAlign')).toBe('bottom');
 
             const actions = wrapper.find('.lumx-generic-block__actions');
-            expect(actions.prop('vAlign')).toBe('center');
+            expect(actions).toHaveLength(1);
+            expect(actions.prop('vAlign')).toBe('left');
+            expect(actions.prop('hAlign')).toBe('bottom');
         });
 
         it('should combine figure props', () => {
