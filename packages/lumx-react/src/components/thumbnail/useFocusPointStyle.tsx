@@ -14,8 +14,8 @@ export function shiftPosition({
     imageSize: number;
     containerSize: number;
 }) {
-    if (imageSize === containerSize) return 0;
     const scaledSize = imageSize / scale;
+    if (scaledSize === containerSize) return 0;
 
     const scaledFocusHeight = focusPoint * scaledSize;
     const startFocus = scaledFocusHeight - containerSize / 2;

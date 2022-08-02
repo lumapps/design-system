@@ -6,8 +6,8 @@ describe('shiftPosition', () => {
             shiftPosition({
                 scale: 1.5,
                 focusPoint: 0,
-                imageSize: 1000,
-                containerSize: 1000,
+                imageSize: 1200,
+                containerSize: 800,
             }),
         ).toEqual(0);
         expect(
@@ -22,16 +22,16 @@ describe('shiftPosition', () => {
             shiftPosition({
                 scale: 3,
                 focusPoint: 0.5,
-                imageSize: 1000,
-                containerSize: 1000,
+                imageSize: 1200,
+                containerSize: 400,
             }),
         ).toEqual(0);
         expect(
             shiftPosition({
                 scale: 2.4,
                 focusPoint: 1,
-                imageSize: 1000,
-                containerSize: 1000,
+                imageSize: 1200,
+                containerSize: 500,
             }),
         ).toEqual(0);
     });
