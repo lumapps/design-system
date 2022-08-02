@@ -35,5 +35,5 @@
         "prepublishOnly": "yarn build"
     },
     "sideEffects": false,
-    "version": "2.2.23"
+    "version": "2.2.24"
 }
