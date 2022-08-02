@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Thumbnail: fix a bug on focus shift calculation caused when focusPoint is equals to 0 and the scaled image size equals the container size.
+
 ## [2.2.23][] - 2022-08-01
 
 ### Changed
