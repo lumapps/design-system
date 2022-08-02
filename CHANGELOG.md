@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.23][] - 2022-08-01
+
 ### Changed
 
 -   GenericBlock: improve default props values:
@@ -24,7 +26,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   Thumbnail: fix a bug on focus shift calculation caused when focusPoint is equals to 0 and the image size equals the container size.
-
 
 ## [2.2.22][] - 2022-07-25
 
@@ -1536,3 +1537,5 @@ _Failed released_
 [2.2.21]: https://github.com/lumapps/design-system/tree/v2.2.21
 [unreleased]: https://github.com/lumapps/design-system/compare/v2.2.22...HEAD
 [2.2.22]: https://github.com/lumapps/design-system/tree/v2.2.22
+[unreleased]: https://github.com/lumapps/design-system/compare/v2.2.23...HEAD
+[2.2.23]: https://github.com/lumapps/design-system/tree/v2.2.23
