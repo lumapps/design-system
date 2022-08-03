@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.24][] - 2022-08-02
+
 ### Fixed
 
 -   Thumbnail: fix a bug on focus shift calculation caused when focusPoint is equals to 0 and the scaled image size equals the container size.
@@ -1543,3 +1545,5 @@ _Failed released_
 [2.2.22]: https://github.com/lumapps/design-system/tree/v2.2.22
 [unreleased]: https://github.com/lumapps/design-system/compare/v2.2.23...HEAD
 [2.2.23]: https://github.com/lumapps/design-system/tree/v2.2.23
+[unreleased]: https://github.com/lumapps/design-system/compare/v2.2.24...HEAD
+[2.2.24]: https://github.com/lumapps/design-system/tree/v2.2.24
