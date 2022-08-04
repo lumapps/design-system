@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.25][] - 2022-08-04
+
+### Changed
+
+-   @lumx/icons: provide both CJS and ESM module for better tooling compatibility.
+
 ## [2.2.24][] - 2022-08-02
 
 ### Fixed
@@ -1547,3 +1553,5 @@ _Failed released_
 [2.2.23]: https://github.com/lumapps/design-system/tree/v2.2.23
 [unreleased]: https://github.com/lumapps/design-system/compare/v2.2.24...HEAD
 [2.2.24]: https://github.com/lumapps/design-system/tree/v2.2.24
+[unreleased]: https://github.com/lumapps/design-system/compare/v2.2.25...HEAD
+[2.2.25]: https://github.com/lumapps/design-system/tree/v2.2.25
