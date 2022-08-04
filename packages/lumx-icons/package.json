@@ -21,7 +21,8 @@
         "yarn": ">= 1.3.0"
     },
     "license": "MIT",
-    "main": "index.js",
+    "main": "cjs/index.js",
+    "module": "index.js",
     "name": "@lumx/icons",
     "repository": {
         "type": "git",

@@ -14,11 +14,20 @@ export const extensions = ['.js'];
 
 export default {
     input: 'index.js',
-    output: {
-        format: 'esm',
-        sourcemap: true,
-        dir: DIST_PATH,
-    },
+    output: [
+        // ESM version
+        {
+            format: 'esm',
+            sourcemap: true,
+            dir: DIST_PATH,
+        },
+        // CommonJS version
+        {
+            format: 'cjs',
+            sourcemap: true,
+            dir: path.join(DIST_PATH, 'cjs'),
+        },
+    ],
     plugins: [
         /** Clean dist dir */
         cleaner({ targets: [DIST_PATH] }),

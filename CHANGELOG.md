@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   @lumx/icons: provide both CJS and ESM module for better tooling compatibility.
+
 ## [2.2.24][] - 2022-08-02
 
 ### Fixed
