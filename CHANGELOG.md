@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   FlexBox: add `as` prop to customize the root element component render.
+-   GenericBlock: add `as` prop to customize the root, the figure, the content and actions elements component render.
+
 ## [3.0.2][] - 2022-09-23
 
 ### Added

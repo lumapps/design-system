@@ -75,6 +75,22 @@ exports[`<FlexBox> Snapshots and structure should render story 'Distribution' 1`
 </div>
 `;
 
+exports[`<FlexBox> Snapshots and structure should render story 'CustomizeElement' 1`] = `
+<header
+  className="lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--gap-regular"
+>
+  <div>
+    Element 1
+  </div>
+  <div>
+    Element 2
+  </div>
+  <div>
+    Element 2
+  </div>
+</header>
+`;
+
 exports[`<FlexBox> Snapshots and structure should render story 'Flex' 1`] = `
 Array [
   <div

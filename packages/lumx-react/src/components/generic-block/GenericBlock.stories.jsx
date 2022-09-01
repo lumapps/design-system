@@ -1,6 +1,7 @@
+import { IMAGES } from '@lumx/react/stories/knobs/image';
 import React from 'react';
 import { mdiPencil } from '@lumx/icons';
-import { GenericBlock, Button, Icon, Size } from '@lumx/react';
+import { GenericBlock, Button, Icon, Size, Thumbnail } from '@lumx/react';
 
 export default { title: 'LumX components/generic-block/GenericBlock' };
 
@@ -104,3 +105,24 @@ export const GapSizes = ({ theme }) =>
             </GenericBlock.Actions>
         </GenericBlock>
     ));
+
+export const AsAFigure = () => (
+    <GenericBlock as="figure" orientation="vertical" style={{ width: '150px' }}>
+        <GenericBlock.Figure>
+            <Thumbnail alt="" image={IMAGES.portrait1s200} aspectRatio="horizontal" />
+        </GenericBlock.Figure>
+        <GenericBlock.Content as="figcaption">Rocky mountain landscape</GenericBlock.Content>
+    </GenericBlock>
+);
+
+export const AsAnArticle = () => (
+    <GenericBlock as="article" orientation="horizontal">
+        <GenericBlock.Figure>
+            <Thumbnail alt="" size="xl" image={IMAGES.portrait1s200} aspectRatio="horizontal" />
+        </GenericBlock.Figure>
+        <GenericBlock.Content>
+            <h2>Article title</h2>
+            <p>Article description...</p>
+        </GenericBlock.Content>
+    </GenericBlock>
+);
