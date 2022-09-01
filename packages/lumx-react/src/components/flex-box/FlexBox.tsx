@@ -15,6 +15,8 @@ export type FlexHorizontalAlignment = HorizontalAlignment | SpaceAlignment;
  * Defines the props of the component.
  */
 export interface FlexBoxProps extends GenericProps {
+    /** Customize the root element. */
+    as?: React.ElementType;
     /** Children elements. */
     children?: ReactNode;
     /** Whether the "content filling space" is enabled or not. */
@@ -54,6 +56,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  */
 export const FlexBox: Comp<FlexBoxProps, HTMLDivElement> = forwardRef((props, ref) => {
     const {
+        as: Component = 'div',
         children,
         className,
         fillSpace,
@@ -68,7 +71,7 @@ export const FlexBox: Comp<FlexBoxProps, HTMLDivElement> = forwardRef((props, re
     } = props;
 
     return (
-        <div
+        <Component
             ref={ref}
             {...forwardedProps}
             className={classNames(
@@ -87,7 +90,7 @@ export const FlexBox: Comp<FlexBoxProps, HTMLDivElement> = forwardRef((props, re
             )}
         >
             {children}
-        </div>
+        </Component>
     );
 });
 FlexBox.displayName = COMPONENT_NAME;

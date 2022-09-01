@@ -235,3 +235,11 @@ export const Distribution = () => (
         <Button>Button 3</Button>
     </FlexBox>
 );
+
+export const CustomizeElement = () => (
+    <FlexBox as="header" orientation="horizontal" gap="regular">
+        <div>Element 1</div>
+        <div>Element 2</div>
+        <div>Element 2</div>
+    </FlexBox>
+);
