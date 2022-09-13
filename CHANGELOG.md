@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Slideshow: Avoid slides that are not displayed to be focusable and read by a screen reader.
 
+### Changed
+
+- SlideshowControls: The bullets now use the "roving tab index" pattern to have only the current slide focusable and navigate using the left/right arrows.
+
 ## [2.2.25][] - 2022-08-04
 
 ### Changed
