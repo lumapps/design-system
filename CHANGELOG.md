@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   New `Heading` component. The component comes with a `HeadingProvider` that allows the `Heading` component to automatically use the correct heading level depending on the nested providers.
 -   New `useHeadingLevel` hook to get the current heading level.
 
+### Changed
+
+- SlideshowControls: The bullets now use the "roving tab index" pattern to have only the current slide focusable and navigate using the left/right arrows.
+
 ### Fixed
 
 - Slideshow: Avoid slides that are not displayed to be focusable and read by a screen reader.

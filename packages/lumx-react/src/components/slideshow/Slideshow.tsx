@@ -111,7 +111,6 @@ export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props
             autoPlay={autoPlay}
             slidesId={slideshowSlidesId}
             toggleAutoPlay={toggleAutoPlay}
-            interval={interval}
             ref={mergeRefs(ref, setSlideshow)}
             afterSlides={
                 slideshowControlsProps && slidesCount > 1 ? (

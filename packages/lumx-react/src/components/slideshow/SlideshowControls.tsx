@@ -8,9 +8,9 @@ import { Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme } from '@lumx/react/utils';
 import { WINDOW } from '@lumx/react/constants';
 import { useSlideshowControls, DEFAULT_OPTIONS } from '@lumx/react/hooks/useSlideshowControls';
+import { useRovingTabIndex } from '@lumx/react/hooks/useRovingTabIndex';
 
 import { useSwipeNavigate } from './useSwipeNavigate';
-import { useKeyNavigate } from './useKeyNavigate';
 import { PAGINATION_ITEM_SIZE, PAGINATION_ITEMS_MAX } from './constants';
 import { usePaginationVisibleRange } from './usePaginationVisibleRange';
 
@@ -93,8 +93,7 @@ const InternalSlideshowControls: Comp<SlideshowControlsProps, HTMLDivElement> = 
         // Checking window object to avoid errors in SSR.
         parent = parentRef instanceof HTMLElement ? parentRef : parentRef?.current;
     }
-    // Listen to keyboard navigate left & right.
-    useKeyNavigate(parent, onNextClick, onPreviousClick);
+    const paginationRef = React.useRef(null);
     // Listen to touch swipe navigate left & right.
     useSwipeNavigate(
         parent,
@@ -103,6 +102,18 @@ const InternalSlideshowControls: Comp<SlideshowControlsProps, HTMLDivElement> = 
         // Go previous without loopback.
         useCallback(() => onPreviousClick?.(false), [onPreviousClick]),
     );
+
+    /**
+     * Add roving tab index pattern to pagination items and activate slide on focus.
+     */
+    useRovingTabIndex({
+        parentRef: paginationRef,
+        elementSelector: 'button',
+        keepTabIndex: true,
+        onElementFocus: (element) => {
+            element.click();
+        },
+    });
 
     // Pagination "bullet" range.
     const visibleRange = usePaginationVisibleRange(activeIndex as number, slidesCount);
@@ -126,7 +137,7 @@ const InternalSlideshowControls: Comp<SlideshowControlsProps, HTMLDivElement> = 
                 emphasis={Emphasis.low}
                 onClick={onPreviousClick}
             />
-            <div className={`${CLASSNAME}__pagination`}>
+            <div ref={paginationRef} className={`${CLASSNAME}__pagination`}>
                 <div className={`${CLASSNAME}__pagination-items`} style={wrapperStyle}>
                     {useMemo(
                         () =>
@@ -149,6 +160,7 @@ const InternalSlideshowControls: Comp<SlideshowControlsProps, HTMLDivElement> = 
                                         )}
                                         key={index}
                                         type="button"
+                                        tabIndex={isActive ? undefined : -1}
                                         onClick={() => onPaginationClick?.(index)}
                                         {...{
                                             'aria-label': paginationItemLabel
