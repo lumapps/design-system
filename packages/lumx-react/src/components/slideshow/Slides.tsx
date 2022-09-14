@@ -1,10 +1,12 @@
-import React, { CSSProperties, forwardRef } from 'react';
+import React, { Children, CSSProperties, forwardRef } from 'react';
+import chunk from 'lodash/chunk';
 
 import classNames from 'classnames';
 
 import { FULL_WIDTH_PERCENT } from '@lumx/react/components/slideshow/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme } from '@lumx/react/utils';
 import { useSlideFocusManagement } from './useSlideFocusManagement';
+import { buildSlideShowGroupId, SlideshowItemGroup } from './SlideshowItemGroup';
 
 export interface SlidesProps extends GenericProps, HasTheme {
     /** current slide active */
@@ -25,6 +27,13 @@ export interface SlidesProps extends GenericProps, HasTheme {
     toggleAutoPlay: () => void;
     /** component to be rendered after the slides */
     afterSlides?: React.ReactNode;
+    /** Whether the slides have controls linked */
+    hasControls?: boolean;
+    /**
+     * Accessible label to set on a slide group.
+     * Receives the group position starting from 1 and the total number of groups.
+     * */
+    slideGroupLabel?: (groupPosition: number, groupTotal: number) => string;
 }
 
 /**
@@ -35,7 +44,7 @@ const COMPONENT_NAME = 'Slideshow';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * Slides component.
@@ -57,6 +66,8 @@ export const Slides: Comp<SlidesProps, HTMLDivElement> = forwardRef((props, ref)
         slidesId,
         children,
         afterSlides,
+        hasControls,
+        slideGroupLabel,
         ...forwardedProps
     } = props;
     const wrapperRef = React.useRef<HTMLDivElement>(null);
@@ -65,6 +76,11 @@ export const Slides: Comp<SlidesProps, HTMLDivElement> = forwardRef((props, ref)
 
     // Inline style of wrapper element.
     const wrapperStyle: CSSProperties = { transform: `translateX(-${FULL_WIDTH_PERCENT * activeIndex}%)` };
+
+    const groups = React.useMemo(
+        () => (groupBy && groupBy > 1 ? chunk(Children.toArray(children), groupBy) : [children]),
+        [children, groupBy],
+    );
 
     return (
         <section
@@ -82,14 +98,19 @@ export const Slides: Comp<SlidesProps, HTMLDivElement> = forwardRef((props, ref)
                 className={`${CLASSNAME}__slides`}
                 onMouseEnter={toggleAutoPlay}
                 onMouseLeave={toggleAutoPlay}
+                aria-live={isAutoPlaying ? 'off' : 'polite'}
             >
-                <div
-                    ref={wrapperRef}
-                    className={classNames(`${CLASSNAME}__wrapper`)}
-                    style={wrapperStyle}
-                    aria-live={isAutoPlaying ? 'off' : 'polite'}
-                >
-                    {children}
+                <div ref={wrapperRef} className={`${CLASSNAME}__wrapper`} style={wrapperStyle}>
+                    {groups.map((group, index) => (
+                        <SlideshowItemGroup
+                            key={index}
+                            id={slidesId && buildSlideShowGroupId(slidesId, index)}
+                            role={hasControls ? 'tabpanel' : 'group'}
+                            label={slideGroupLabel ? slideGroupLabel(index + 1, groups.length) : undefined}
+                        >
+                            {group}
+                        </SlideshowItemGroup>
+                    ))}
                 </div>
             </div>
 
