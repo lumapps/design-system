@@ -26,6 +26,7 @@ export const Simple = ({ theme }: any) => {
             theme={theme}
             groupBy={groupBy}
             style={{ width: '50%' }}
+            slideGroupLabel={(currentGroup, totalGroup) => `${currentGroup} of ${totalGroup}`}
         >
             {images.map(({ image, alt }, index) => (
                 <SlideshowItem key={`${image}-${index}`} aria-label={`${index + 1} of ${images.length}`}>
@@ -61,6 +62,7 @@ export const SimpleWithAutoPlay = ({ theme }: any) => {
             theme={theme}
             groupBy={groupBy}
             style={{ width: '50%' }}
+            slideGroupLabel={(currentGroup, totalGroup) => `${currentGroup} of ${totalGroup}`}
         >
             {images.map(({ image, alt }, index) => (
                 <SlideshowItem key={`${image}-${index}`} aria-label={`${index + 1} of ${images.length}`}>
@@ -94,9 +96,10 @@ export const ResponsiveSlideShowSwipe = () => {
                         nextButtonProps: { label: 'Next' },
                         previousButtonProps: { label: 'Previous' },
                     }}
+                    slideGroupLabel={(currentGroup, totalGroup) => `${currentGroup} of ${totalGroup}`}
                 >
-                    {slides.map((slide, key) => (
-                        <SlideshowItem key={`${slide}`} aria-label={`${key + 1} of ${slides.length}`}>
+                    {slides.map((slide) => (
+                        <SlideshowItem key={`${slide}`}>
                             <FlexBox
                                 style={{ border: '1px solid grey', maxWidth: 300, height: 300 }}
                                 hAlign="center"
@@ -120,6 +123,7 @@ export const ResponsiveSlideShowSwipe = () => {
 
 const slides = [
     {
+        id: 0,
         src: 'https://www.w3.org/WAI/ARIA/apg/example-index/carousel/images/foyleswarslide__800x600.jpg',
         alt: 'A man in a suit and fedora and a woman with coiffed hair look sternly into the camera.',
         title: 'Foyle’s War Revisited',
@@ -127,12 +131,37 @@ const slides = [
         link: '#',
     },
     {
+        id: 1,
         src: 'https://www.w3.org/WAI/ARIA/apg/example-index/carousel/images/britcomdavidslide__800x600.jpg',
         alt: 'British flag with WILL-TV host David Thiel.',
         title: 'Great Britain Vote: 7 pm Sat.',
         link: '#',
     },
     {
+        id: 2,
+        src: 'https://www.w3.org/WAI/ARIA/apg/example-index/carousel/images/mag800-2__800x600.jpg',
+        alt: 'Mid-American Gardener panelists on the set.',
+        title: 'Mid-American Gardener: Thursdays at 7 pm',
+        subtitle: 'Watch the latest episode',
+        link: '#',
+    },
+    {
+        id: 3,
+        src: 'https://www.w3.org/WAI/ARIA/apg/example-index/carousel/images/foyleswarslide__800x600.jpg',
+        alt: 'A man in a suit and fedora and a woman with coiffed hair look sternly into the camera.',
+        title: 'Foyle’s War Revisited',
+        subtitle: '8 pm Sunday, March 8, on TV: Sneak peek at the final season',
+        link: '#',
+    },
+    {
+        id: 4,
+        src: 'https://www.w3.org/WAI/ARIA/apg/example-index/carousel/images/britcomdavidslide__800x600.jpg',
+        alt: 'British flag with WILL-TV host David Thiel.',
+        title: 'Great Britain Vote: 7 pm Sat.',
+        link: '#',
+    },
+    {
+        id: 5,
         src: 'https://www.w3.org/WAI/ARIA/apg/example-index/carousel/images/mag800-2__800x600.jpg',
         alt: 'Mid-American Gardener panelists on the set.',
         title: 'Mid-American Gardener: Thursdays at 7 pm',
@@ -148,11 +177,14 @@ export const WithComplexContent = () => (
         slideshowControlsProps={{
             nextButtonProps: { label: 'Next' },
             previousButtonProps: { label: 'Previous' },
+            playButtonProps: { label: 'Play/Pause' },
+            paginationItemProps: (index) => ({ 'aria-label': `Slide ${index + 1}` }),
         }}
         autoPlay
+        slideGroupLabel={(currentGroup, totalGroup) => `${currentGroup} of ${totalGroup}`}
     >
-        {slides.map((slide, key) => (
-            <SlideshowItem aria-label={`${key + 1} of ${slides.length}`} key={slide.src}>
+        {slides.map((slide) => (
+            <SlideshowItem key={slide.id}>
                 <a href={slide.link}>
                     <img src={slide.src} alt={slide.alt} />
                 </a>

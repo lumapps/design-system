@@ -63,7 +63,6 @@ export const ControllingSlideshow = ({ theme }: any) => {
         onFocusOut: startAutoPlay,
     });
 
-    /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
     return (
         <Slides
             activeIndex={currentIndex}

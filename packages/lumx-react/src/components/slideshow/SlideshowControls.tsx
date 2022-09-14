@@ -28,6 +28,8 @@ export interface SlideshowControlsProps extends GenericProps, HasTheme {
     /** Props to pass to the previous button (minus those already set by the SlideshowControls props). */
     previousButtonProps: Pick<IconButtonProps, 'label'> &
         Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis' | 'color'>;
+    /** Props to pass to the pagination wrapper */
+    paginationProps?: Omit<React.HTMLAttributes<HTMLDivElement>, 'className' | 'style' | 'role'>;
     /** Number of slides. */
     slidesCount: number;
     /** On next button click callback. */
@@ -38,8 +40,15 @@ export interface SlideshowControlsProps extends GenericProps, HasTheme {
     onPreviousClick?(loopback?: boolean): void;
     /** whether the slideshow is currently playing */
     isAutoPlaying?: boolean;
-    /** function to be executed in order to retrieve the label for the pagination item */
+    /**
+     * function to be executed in order to retrieve the label for the pagination item
+     * @deprecated Use paginationItemProps instead.
+     * */
     paginationItemLabel?: (index: number) => string;
+    /**
+     * function to be executed in order to retrieve the props for a pagination item.
+     */
+    paginationItemProps?: (itemIndex: number) => React.HTMLAttributes<HTMLButtonElement>;
     /** Props to pass to the lay button (minus those already set by the SlideshowControls props). */
     playButtonProps?: Pick<IconButtonProps, 'label'> &
         Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis' | 'color'>;
@@ -80,11 +89,13 @@ const InternalSlideshowControls: Comp<SlideshowControlsProps, HTMLDivElement> = 
         onPreviousClick,
         parentRef,
         previousButtonProps,
+        paginationProps,
         slidesCount,
         theme,
         isAutoPlaying = false,
         playButtonProps,
         paginationItemLabel,
+        paginationItemProps,
         ...forwardedProps
     } = props;
 
@@ -138,7 +149,12 @@ const InternalSlideshowControls: Comp<SlideshowControlsProps, HTMLDivElement> = 
                 onClick={onPreviousClick}
             />
             <div ref={paginationRef} className={`${CLASSNAME}__pagination`}>
-                <div className={`${CLASSNAME}__pagination-items`} style={wrapperStyle}>
+                <div
+                    className={`${CLASSNAME}__pagination-items`}
+                    style={wrapperStyle}
+                    role="tablist"
+                    {...paginationProps}
+                >
                     {useMemo(
                         () =>
                             range(slidesCount).map((index) => {
@@ -148,6 +164,10 @@ const InternalSlideshowControls: Comp<SlideshowControlsProps, HTMLDivElement> = 
                                     (index === visibleRange.min || index === visibleRange.max);
                                 const isActive = activeIndex === index;
                                 const isOutRange = index < visibleRange.min || index > visibleRange.max;
+                                const { className: itemClassName = undefined, ...itemProps } = paginationItemProps
+                                    ? paginationItemProps(index)
+                                    : {};
+
                                 return (
                                     <button
                                         className={classNames(
@@ -157,16 +177,20 @@ const InternalSlideshowControls: Comp<SlideshowControlsProps, HTMLDivElement> = 
                                                 isOnEdge,
                                                 isOutRange,
                                             }),
+                                            itemClassName,
                                         )}
                                         key={index}
                                         type="button"
                                         tabIndex={isActive ? undefined : -1}
+                                        role="tab"
+                                        aria-selected={isActive}
                                         onClick={() => onPaginationClick?.(index)}
                                         {...{
                                             'aria-label': paginationItemLabel
                                                 ? paginationItemLabel(index)
                                                 : `${index + 1} / ${slidesCount}`,
                                         }}
+                                        {...itemProps}
                                     />
                                 );
                             }),
@@ -175,6 +199,7 @@ const InternalSlideshowControls: Comp<SlideshowControlsProps, HTMLDivElement> = 
                             visibleRange.min,
                             visibleRange.max,
                             activeIndex,
+                            paginationItemProps,
                             paginationItemLabel,
                             onPaginationClick,
                         ],

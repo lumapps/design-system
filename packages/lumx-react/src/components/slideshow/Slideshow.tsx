@@ -5,19 +5,23 @@ import { DEFAULT_OPTIONS } from '@lumx/react/hooks/useSlideshowControls';
 import { Comp, GenericProps } from '@lumx/react/utils';
 import { useFocusWithin } from '@lumx/react/hooks/useFocusWithin';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
+import { buildSlideShowGroupId } from './SlideshowItemGroup';
 
 /**
  * Defines the props of the component.
  */
 export interface SlideshowProps
     extends GenericProps,
-        Pick<SlidesProps, 'autoPlay' | 'slidesId' | 'id' | 'theme' | 'fillHeight' | 'groupBy'> {
+        Pick<SlidesProps, 'autoPlay' | 'slidesId' | 'id' | 'theme' | 'fillHeight' | 'groupBy' | 'slideGroupLabel'> {
     /** current slide active */
     activeIndex?: SlidesProps['activeIndex'];
     /** Interval between each slide when automatic rotation is enabled. */
     interval?: number;
     /** Props to pass to the slideshow controls (minus those already set by the Slideshow props). */
-    slideshowControlsProps?: Pick<SlideshowControlsProps, 'nextButtonProps' | 'previousButtonProps'> &
+    slideshowControlsProps?: Pick<
+        SlideshowControlsProps,
+        'nextButtonProps' | 'previousButtonProps' | 'paginationItemProps'
+    > &
         Omit<
             SlideshowControlsProps,
             | 'activeIndex'
@@ -61,6 +65,7 @@ export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props
         theme,
         id,
         slidesId,
+        slideGroupLabel,
         ...forwardedProps
     } = props;
     // Number of slideshow items.
@@ -99,6 +104,8 @@ export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props
         onFocusOut: startAutoPlay,
     });
 
+    const showControls = slideshowControlsProps && slidesCount > 1;
+
     return (
         <Slides
             activeIndex={currentIndex}
@@ -112,8 +119,10 @@ export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props
             slidesId={slideshowSlidesId}
             toggleAutoPlay={toggleAutoPlay}
             ref={mergeRefs(ref, setSlideshow)}
+            hasControls={showControls}
+            slideGroupLabel={slideGroupLabel}
             afterSlides={
-                slideshowControlsProps && slidesCount > 1 ? (
+                showControls ? (
                     <div className={`${Slides.className}__controls`}>
                         <SlideshowControls
                             {...slideshowControlsProps}
@@ -133,15 +142,15 @@ export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props
                                 'aria-controls': slideshowSlidesId,
                                 ...slideshowControlsProps.previousButtonProps,
                             }}
-                            playButtonProps={
-                                autoPlay
-                                    ? {
-                                          'aria-controls': slideshowSlidesId,
-                                          onClick: toggleForcePause,
-                                          ...slideshowControlsProps.playButtonProps,
-                                      }
-                                    : undefined
-                            }
+                            playButtonProps={{
+                                'aria-controls': slideshowSlidesId,
+                                onClick: autoPlay ? toggleForcePause : undefined,
+                                ...slideshowControlsProps.playButtonProps,
+                            }}
+                            paginationItemProps={(index) => ({
+                                'aria-controls': buildSlideShowGroupId(slideshowSlidesId, index),
+                                ...slideshowControlsProps.paginationItemProps?.(index),
+                            })}
                         />
                     </div>
                 ) : undefined

@@ -7,39 +7,44 @@ import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/
 /**
  * Defines the props of the component.
  */
-export interface SlideshowItemProps extends GenericProps {
-    /** interval in which slides are automatically shown */
-    interval?: number;
+export interface SlideshowItemGroupProps extends GenericProps {
+    role?: 'tabpanel' | 'group';
+    label?: string;
 }
 
 /**
  * Component display name.
  */
-const COMPONENT_NAME = 'SlideshowItem';
+const COMPONENT_NAME = 'SlideshowItemGroup';
 
 /**
  * Component default class name and class prefix.
  */
 export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
+export const buildSlideShowGroupId = (slidesId: string, index: number) => `${slidesId}-slide-${index}`;
+
 /**
- * SlideshowItem component.
+ * SlideshowItemGroup component.
  *
  * @param  props Component props.
  * @param  ref   Component ref.
  * @return React element.
  */
-export const SlideshowItem: Comp<SlideshowItemProps, HTMLDivElement> = forwardRef((props, ref) => {
-    const { className, children, ...forwardedProps } = props;
+export const SlideshowItemGroup: Comp<SlideshowItemGroupProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const { className, children, role = 'group', label, ...forwardedProps } = props;
     return (
         <div
             ref={ref}
+            role={role}
             className={classNames(
                 className,
                 handleBasicClasses({
                     prefix: CLASSNAME,
                 }),
             )}
+            aria-roledescription="slide"
+            aria-label={label}
             {...forwardedProps}
         >
             {children}
@@ -47,5 +52,5 @@ export const SlideshowItem: Comp<SlideshowItemProps, HTMLDivElement> = forwardRe
     );
 });
 
-SlideshowItem.displayName = COMPONENT_NAME;
-SlideshowItem.className = CLASSNAME;
+SlideshowItemGroup.displayName = COMPONENT_NAME;
+SlideshowItemGroup.className = CLASSNAME;

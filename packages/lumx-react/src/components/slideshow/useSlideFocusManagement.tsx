@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { getFocusableElements } from '@lumx/react/utils/focus/getFocusableElements';
 
-import { CLASSNAME as ITEM_CLASSNAME } from './SlideshowItem';
+import { CLASSNAME as ITEM_GROUP_CLASSNAME } from './SlideshowItemGroup';
 
 export interface UseSlideFocusManagementProps {
     activeIndex: number;
@@ -16,18 +16,17 @@ export interface UseSlideFocusManagementProps {
 export const useSlideFocusManagement = ({ activeIndex, groupBy = 1, wrapperRef }: UseSlideFocusManagementProps) => {
     useEffect(() => {
         const element = wrapperRef?.current;
+        const startIndexVisible = activeIndex;
+        const endIndexVisible = startIndexVisible + 1;
 
-        const startIndexVisible = activeIndex * groupBy;
-        const endIndexVisible = startIndexVisible + groupBy;
-
-        const slideshowChildren = element?.querySelectorAll<HTMLElement>(`.${ITEM_CLASSNAME}`);
+        const slideshowChildren = element?.querySelectorAll<HTMLElement>(`.${ITEM_GROUP_CLASSNAME}`);
 
         /**
          * Classname set on elements whose focus was blocked.
          * This is to easily find elements that have been tempered with,
          * and not elements whose focus was already initially blocked.
          * */
-        const elementWithBlockedFocusClass = `${ITEM_CLASSNAME}__no-focus`;
+        const elementWithBlockedFocusClass = `${ITEM_GROUP_CLASSNAME}__no-focus`;
 
         /**
          * Display given slide to screen readers and, if focus was blocked, restore focus on elements..

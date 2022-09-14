@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Slideshow: Improve accessibility by adding `tablist` / `tab` roles to slideshow pagination and `tabpanel` role to slide groups. These elements are linked together using `aria-controls` attribute.
+- Slideshow: Added the `slideGroupLabel` prop to set a label on each slide groups. The prop should be a function that receives the group position starting from 1 and the total number of groups.
+- Slideshow: Slides grouped together are now wrapper inside individual divs.
+- SlideshowControls: Added the `paginationItemProps` prop to set custom props to each pagination item. The prop should be a function that receives the item index.
 - SlideshowControls: The bullets now use the "roving tab index" pattern to have only the current slide focusable and navigate using the left/right arrows.
 
 ### Fixed
