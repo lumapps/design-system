@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { INTERACTIVE_ELEMENTS_STRING } from '@lumx/core/js/constants';
+import { getFocusableElements } from '@lumx/react/utils/focus/getFocusableElements';
 
 import { CLASSNAME as ITEM_CLASSNAME } from './SlideshowItem';
 
@@ -20,7 +20,7 @@ export const useSlideFocusManagement = ({ activeIndex, groupBy = 1, wrapperRef }
         const startIndexVisible = activeIndex * groupBy;
         const endIndexVisible = startIndexVisible + groupBy;
 
-        const slideshowChildren = element?.getElementsByClassName(ITEM_CLASSNAME);
+        const slideshowChildren = element?.querySelectorAll<HTMLElement>(`.${ITEM_CLASSNAME}`);
 
         /**
          * Classname set on elements whose focus was blocked.
@@ -32,7 +32,7 @@ export const useSlideFocusManagement = ({ activeIndex, groupBy = 1, wrapperRef }
         /**
          * Display given slide to screen readers and, if focus was blocked, restore focus on elements..
          */
-        const enableSlide = (slide: Element) => {
+        const enableSlide = (slide: HTMLElement) => {
             // Hide from screen readers
             slide.setAttribute('aria-hidden', 'false');
             // Find elements we have blocked focus on
@@ -45,14 +45,11 @@ export const useSlideFocusManagement = ({ activeIndex, groupBy = 1, wrapperRef }
         /**
          * Hide given slide from screen readers and block focus on all focusable elements within.
          */
-        const blockSlide = (slide: Element) => {
+        const blockSlide = (slide: HTMLElement) => {
             slide.setAttribute('aria-hidden', 'true');
-            slide.querySelectorAll(INTERACTIVE_ELEMENTS_STRING).forEach((focusableElement) => {
-                // If the element already has blocked focus, we leave it as is as we would remove it when slide becomes visible.
-                if (!focusableElement.hasAttribute('tabindex') || focusableElement.getAttribute('tabindex') !== '-1') {
-                    focusableElement.setAttribute('tabindex', '-1');
-                    focusableElement.classList.add(elementWithBlockedFocusClass);
-                }
+            getFocusableElements(slide).forEach((focusableElement) => {
+                focusableElement.setAttribute('tabindex', '-1');
+                focusableElement.classList.add(elementWithBlockedFocusClass);
             });
         };
 
