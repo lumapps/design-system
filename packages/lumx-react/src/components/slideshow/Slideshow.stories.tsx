@@ -29,7 +29,7 @@ export const Simple = ({ theme }: any) => {
             slideGroupLabel={(currentGroup, totalGroup) => `${currentGroup} of ${totalGroup}`}
         >
             {images.map(({ image, alt }, index) => (
-                <SlideshowItem key={`${image}-${index}`} aria-label={`${index + 1} of ${images.length}`}>
+                <SlideshowItem key={`${image}-${index}`}>
                     <ImageBlock
                         thumbnailProps={{ aspectRatio: AspectRatio.horizontal, loading: 'eager' }}
                         image={image}
@@ -65,7 +65,7 @@ export const SimpleWithAutoPlay = ({ theme }: any) => {
             slideGroupLabel={(currentGroup, totalGroup) => `${currentGroup} of ${totalGroup}`}
         >
             {images.map(({ image, alt }, index) => (
-                <SlideshowItem key={`${image}-${index}`} aria-label={`${index + 1} of ${images.length}`}>
+                <SlideshowItem key={`${image}-${index}`}>
                     <ImageBlock
                         thumbnailProps={{ aspectRatio: AspectRatio.horizontal, loading: 'eager' }}
                         image={image}

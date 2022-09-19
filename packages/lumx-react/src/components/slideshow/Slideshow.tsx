@@ -122,7 +122,7 @@ export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props
             hasControls={showControls}
             slideGroupLabel={slideGroupLabel}
             afterSlides={
-                showControls ? (
+                slideshowControlsProps && slidesCount > 1 ? (
                     <div className={`${Slides.className}__controls`}>
                         <SlideshowControls
                             {...slideshowControlsProps}
@@ -142,11 +142,15 @@ export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props
                                 'aria-controls': slideshowSlidesId,
                                 ...slideshowControlsProps.previousButtonProps,
                             }}
-                            playButtonProps={{
-                                'aria-controls': slideshowSlidesId,
-                                onClick: autoPlay ? toggleForcePause : undefined,
-                                ...slideshowControlsProps.playButtonProps,
-                            }}
+                            playButtonProps={
+                                autoPlay
+                                    ? {
+                                          'aria-controls': slideshowSlidesId,
+                                          onClick: toggleForcePause,
+                                          ...slideshowControlsProps.playButtonProps,
+                                      }
+                                    : undefined
+                            }
                             paginationItemProps={(index) => ({
                                 'aria-controls': buildSlideShowGroupId(slideshowSlidesId, index),
                                 ...slideshowControlsProps.paginationItemProps?.(index),

@@ -44,7 +44,7 @@ const COMPONENT_NAME = 'Slideshow';
 /**
  * Component default class name and class prefix.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * Slides component.
@@ -77,10 +77,10 @@ export const Slides: Comp<SlidesProps, HTMLDivElement> = forwardRef((props, ref)
     // Inline style of wrapper element.
     const wrapperStyle: CSSProperties = { transform: `translateX(-${FULL_WIDTH_PERCENT * activeIndex}%)` };
 
-    const groups = React.useMemo(
-        () => (groupBy && groupBy > 1 ? chunk(Children.toArray(children), groupBy) : [children]),
-        [children, groupBy],
-    );
+    const groups = React.useMemo(() => {
+        const childrenArray = Children.toArray(children);
+        return groupBy && groupBy > 1 ? chunk(childrenArray, groupBy) : childrenArray;
+    }, [children, groupBy]);
 
     return (
         <section

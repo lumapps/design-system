@@ -20,7 +20,7 @@ const COMPONENT_NAME = 'SlideshowItem';
 /**
  * Component default class name and class prefix.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * SlideshowItem component.

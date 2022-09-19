@@ -20,7 +20,14 @@ Array [
           onNextClick={[Function]}
           onPaginationClick={[Function]}
           onPreviousClick={[Function]}
+          paginationItemProps={[Function]}
           parentRef={null}
+          playButtonProps={
+            Object {
+              "aria-controls": "slideshow-slides2",
+              "onClick": undefined,
+            }
+          }
           previousButtonProps={
             Object {
               "aria-controls": "slideshow-slides2",
@@ -32,11 +39,13 @@ Array [
         />
       </div>
     }
+    aria-label="Simple carousel example"
     autoPlay={false}
     groupBy={1}
+    hasControls={true}
     id="slideshow1"
-    interval={1000}
     isAutoPlaying={false}
+    slideGroupLabel={[Function]}
     slidesId="slideshow-slides2"
     style={
       Object {
