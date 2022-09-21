@@ -48,7 +48,7 @@ export interface SlideshowControlsProps extends GenericProps, HasTheme {
     /**
      * function to be executed in order to retrieve the props for a pagination item.
      */
-    paginationItemProps?: (itemIndex: number) => React.HTMLAttributes<HTMLButtonElement>;
+    paginationItemProps?: (itemIndex: number) => React.HTMLAttributes<HTMLButtonElement> & { label?: string };
     /** Props to pass to the lay button (minus those already set by the SlideshowControls props). */
     playButtonProps?: Pick<IconButtonProps, 'label'> &
         Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis' | 'color'>;
@@ -164,9 +164,14 @@ const InternalSlideshowControls: Comp<SlideshowControlsProps, HTMLDivElement> = 
                                     (index === visibleRange.min || index === visibleRange.max);
                                 const isActive = activeIndex === index;
                                 const isOutRange = index < visibleRange.min || index > visibleRange.max;
-                                const { className: itemClassName = undefined, ...itemProps } = paginationItemProps
-                                    ? paginationItemProps(index)
-                                    : {};
+                                const {
+                                    className: itemClassName = undefined,
+                                    label = undefined,
+                                    ...itemProps
+                                } = paginationItemProps ? paginationItemProps(index) : {};
+
+                                const ariaLabel =
+                                    label || paginationItemLabel?.(index) || `${index + 1} / ${slidesCount}`;
 
                                 return (
                                     <button
@@ -185,11 +190,7 @@ const InternalSlideshowControls: Comp<SlideshowControlsProps, HTMLDivElement> = 
                                         role="tab"
                                         aria-selected={isActive}
                                         onClick={() => onPaginationClick?.(index)}
-                                        {...{
-                                            'aria-label': paginationItemLabel
-                                                ? paginationItemLabel(index)
-                                                : `${index + 1} / ${slidesCount}`,
-                                        }}
+                                        aria-label={ariaLabel}
                                         {...itemProps}
                                     />
                                 );

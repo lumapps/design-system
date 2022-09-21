@@ -178,27 +178,35 @@ export const WithComplexContent = () => (
             nextButtonProps: { label: 'Next' },
             previousButtonProps: { label: 'Previous' },
             playButtonProps: { label: 'Play/Pause' },
-            paginationItemProps: (index) => ({ 'aria-label': `Slide ${index + 1}` }),
+            paginationItemProps: (index) => ({ label: `Slide ${index + 1}` }),
         }}
-        autoPlay
         slideGroupLabel={(currentGroup, totalGroup) => `${currentGroup} of ${totalGroup}`}
     >
-        {slides.map((slide) => (
-            <SlideshowItem key={slide.id}>
-                <a href={slide.link}>
-                    <img src={slide.src} alt={slide.alt} />
-                </a>
-                <FlexBox orientation={Orientation.vertical}>
-                    <h3>
-                        <a href={slide.link}>{slide.title}</a>
-                        {/* Add a non focusable element to test that it stays that way after a page change. */}
-                        <button type="button" tabIndex={-1} aria-hidden="true">
-                            Not focusable
-                        </button>
-                    </h3>
-                    {slide.subtitle && <p>{slide.subtitle}</p>}
-                </FlexBox>
-            </SlideshowItem>
-        ))}
+        {range(number('Slides', 6)).map((nb) => {
+            const slide = slides[nb % slides.length];
+
+            return (
+                <SlideshowItem key={slide.id}>
+                    <a href={slide.link}>
+                        <ImageBlock
+                            thumbnailProps={{ aspectRatio: AspectRatio.horizontal, loading: 'eager' }}
+                            image={slide.src}
+                            alt={slide.alt}
+                        />
+                    </a>
+                    <FlexBox orientation={Orientation.vertical}>
+                        <h3>
+                            <a href={slide.link}>{slide.title}</a>
+                            {/* Add a non focusable element to test that it stays that way after a page change. */}
+                            <button type="button" tabIndex={-1} aria-hidden="true">
+                                Not focusable
+                            </button>
+                            <button type="button">Focusable</button>
+                        </h3>
+                        {slide.subtitle && <p>{slide.subtitle}</p>}
+                    </FlexBox>
+                </SlideshowItem>
+            );
+        })}
     </Slideshow>
 );

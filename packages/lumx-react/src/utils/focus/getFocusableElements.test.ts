@@ -23,29 +23,6 @@ describe(getFocusableElements.name, () => {
         `);
     });
 
-    // it('should get first and last', () => {
-    //     const element = htmlToElement(`
-    //         <div>
-    //             <div>Non focusable div</div>
-    //             <button>Simple button</button>
-    //             <div>Non focusable div</div>
-    //             <input />
-    //             <div>Non focusable div</div>
-    //         </div>
-    //     `);
-    //     const focusable = getFocusableElements(element);
-    //     expect(focusable.first).toMatchInlineSnapshot(`
-    //         <button>
-    //           Simple button
-    //         </button>
-    //     `);
-    //     expect(focusable.first).toMatchInlineSnapshot(`
-    //         <button>
-    //           Simple button
-    //         </button>
-    //     `);
-    // });
-
     describe('match focusable elements', () => {
         it('should match input element', () => {
             const element = htmlToElement(`<div><input /></div>`);

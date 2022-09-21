@@ -5,7 +5,6 @@ import classNames from 'classnames';
 
 import { FULL_WIDTH_PERCENT } from '@lumx/react/components/slideshow/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme } from '@lumx/react/utils';
-import { useSlideFocusManagement } from './useSlideFocusManagement';
 import { buildSlideShowGroupId, SlideshowItemGroup } from './SlideshowItemGroup';
 
 export interface SlidesProps extends GenericProps, HasTheme {
@@ -71,8 +70,8 @@ export const Slides: Comp<SlidesProps, HTMLDivElement> = forwardRef((props, ref)
         ...forwardedProps
     } = props;
     const wrapperRef = React.useRef<HTMLDivElement>(null);
-
-    useSlideFocusManagement({ wrapperRef, activeIndex, groupBy });
+    const startIndexVisible = activeIndex;
+    const endIndexVisible = startIndexVisible + 1;
 
     // Inline style of wrapper element.
     const wrapperStyle: CSSProperties = { transform: `translateX(-${FULL_WIDTH_PERCENT * activeIndex}%)` };
@@ -107,6 +106,7 @@ export const Slides: Comp<SlidesProps, HTMLDivElement> = forwardRef((props, ref)
                             id={slidesId && buildSlideShowGroupId(slidesId, index)}
                             role={hasControls ? 'tabpanel' : 'group'}
                             label={slideGroupLabel ? slideGroupLabel(index + 1, groups.length) : undefined}
+                            isDisplayed={index >= startIndexVisible && index < endIndexVisible}
                         >
                             {group}
                         </SlideshowItemGroup>

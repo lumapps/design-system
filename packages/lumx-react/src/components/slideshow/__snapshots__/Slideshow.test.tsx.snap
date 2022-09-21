@@ -22,12 +22,6 @@ Array [
           onPreviousClick={[Function]}
           paginationItemProps={[Function]}
           parentRef={null}
-          playButtonProps={
-            Object {
-              "aria-controls": "slideshow-slides2",
-              "onClick": undefined,
-            }
-          }
           previousButtonProps={
             Object {
               "aria-controls": "slideshow-slides2",

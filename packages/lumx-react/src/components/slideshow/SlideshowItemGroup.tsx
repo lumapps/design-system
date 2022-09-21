@@ -1,8 +1,10 @@
 import React, { forwardRef } from 'react';
 
 import classNames from 'classnames';
+import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { useSlideFocusManagement } from './useSlideFocusManagement';
 
 /**
  * Defines the props of the component.
@@ -10,6 +12,7 @@ import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/
 export interface SlideshowItemGroupProps extends GenericProps {
     role?: 'tabpanel' | 'group';
     label?: string;
+    isDisplayed?: boolean;
 }
 
 /**
@@ -32,10 +35,14 @@ export const buildSlideShowGroupId = (slidesId: string, index: number) => `${sli
  * @return React element.
  */
 export const SlideshowItemGroup: Comp<SlideshowItemGroupProps, HTMLDivElement> = forwardRef((props, ref) => {
-    const { className, children, role = 'group', label, ...forwardedProps } = props;
+    const { className, children, role = 'group', label, isDisplayed, ...forwardedProps } = props;
+    const groupRef = React.useRef<HTMLDivElement>(null);
+
+    useSlideFocusManagement({ isSlideDisplayed: isDisplayed, slideRef: groupRef });
+
     return (
         <div
-            ref={ref}
+            ref={mergeRefs(groupRef, ref)}
             role={role}
             className={classNames(
                 className,
