@@ -66,7 +66,6 @@
         "install-peers-cli": "^2.2.0",
         "is-ci": "^2.0.0",
         "optimize-css-assets-webpack-plugin": "^5.0.3",
-        "postcss-flexbox-unboxer": "^1.0.0",
         "postcss-loader": "^3.0.0",
         "sass": "^1.54.0",
         "sass-loader": "^10.3.1",

@@ -1,0 +1,20 @@
+/* ==========================================================================
+   Text
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-text {
+    &--is-truncated {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &--is-truncated-multiline {
+        /*autoprefixer: off */
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: var(--lumx-text-truncate-lines);
+    }
+}

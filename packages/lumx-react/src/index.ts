@@ -41,6 +41,7 @@ export * from './components/slideshow';
 export * from './components/switch';
 export * from './components/table';
 export * from './components/tabs';
+export * from './components/text';
 export * from './components/text-field';
 export * from './components/thumbnail';
 export * from './components/toolbar';
