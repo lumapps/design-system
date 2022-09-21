@@ -2,12 +2,12 @@
     display: inline-flex;
     align-items: center;
     padding: 0;
-    border: none;
     margin: 0;
-    outline: none;
     text-decoration: none;
-    user-select: none;
     vertical-align: top;
+    user-select: none;
+    border: none;
+    outline: none;
 }
 
 @mixin lumx-chip-size($size) {
@@ -24,10 +24,10 @@
     flex: 1 1 auto;
     white-space: nowrap;
 
-    @if $size == lumx-base-const('size', 'M') {
-        @include lumx-typography('body1');
-    } @else if $size == lumx-base-const('size', 'S') {
-        @include lumx-typography('caption');
+    @if $size == lumx-base-const("size", "M") {
+        @include lumx-typography("body1");
+    } @else if $size == lumx-base-const("size", "S") {
+        @include lumx-typography("caption");
     }
 }
 

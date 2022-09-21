@@ -14,19 +14,19 @@
     &__background-bar,
     &__foreground-bar {
         position: absolute;
-        z-index: 0;
         top: 19px;
+        z-index: 0;
         height: $lumx-progress-tracker-bar-height;
     }
 
     &__background-bar {
-        background-color: lumx-color-variant('dark', $lumx-divider-color-variant);
+        background-color: lumx-color-variant("dark", $lumx-divider-color-variant);
     }
 
     &__foreground-bar {
-        background-color: lumx-color-variant('primary', 'N');
-        transform-origin: left;
+        background-color: lumx-color-variant("primary", "N");
         transition: transform $lumx-progress-tracker-transition-duration;
+        transform-origin: left;
 
         @media (prefers-reduced-motion: reduce) {
             transition: none;
@@ -45,8 +45,8 @@
     flex-direction: column;
     align-items: center;
     padding: $lumx-spacing-unit 0;
-    border: none;
     background: none;
+    border: none;
     border-radius: var(--lumx-border-radius);
     outline: none;
 
@@ -58,27 +58,27 @@
 
     &__state {
         position: relative;
-        color: lumx-color-variant('dark', 'L5');
+        color: lumx-color-variant("dark", "L5");
 
         #{$self}--is-active &,
         #{$self}--is-complete & {
-            color: lumx-color-variant('primary', 'N');
+            color: lumx-color-variant("primary", "N");
         }
 
         #{$self}--has-error & {
-            color: lumx-color-variant('red', 'N');
+            color: lumx-color-variant("red", "N");
         }
 
         &::before {
-            display: block;
             position: absolute;
-            z-index: -1;
             top: 2px;
             left: 2px;
+            z-index: -1;
+            display: block;
             width: 20px;
             height: 20px;
-            background-color: lumx-color-variant('light', 'N');
-            content: '';
+            content: "";
+            background-color: lumx-color-variant("light", "N");
         }
     }
 
@@ -99,17 +99,17 @@
 
 // Hover state
 .#{$lumx-base-prefix}-progress-tracker-step--is-clickable:hover {
-    @include lumx-state(lumx-base-const('state', 'HOVER'), lumx-base-const('emphasis', 'LOW'), 'dark');
+    @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "LOW"), "dark");
 }
 
 // Active state
 .#{$lumx-base-prefix}-progress-tracker-step--is-clickable:active {
-    @include lumx-state(lumx-base-const('state', 'ACTIVE'), lumx-base-const('emphasis', 'LOW'), 'dark');
+    @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "LOW"), "dark");
 }
 
 // Focus state
 .#{$lumx-base-prefix}-progress-tracker-step[data-focus-visible-added] {
-    @include lumx-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('emphasis', 'LOW'), 'dark');
+    @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "LOW"), "dark");
 }
 
 /* Step panel
@@ -121,7 +121,7 @@
 
     // Focus state
     &[data-focus-visible-added] {
-        @include lumx-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('emphasis', 'LOW'), 'dark', null, true);
+        @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "LOW"), "dark", null, true);
     }
 
     // Active state

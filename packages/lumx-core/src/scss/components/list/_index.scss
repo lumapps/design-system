@@ -43,7 +43,7 @@
     }
 
     &__link--is-disabled,
-    &__link[aria-disabled='true'] {
+    &__link[aria-disabled="true"] {
         @include lumx-state-disabled-input;
     }
 }
@@ -54,11 +54,11 @@
 .#{$lumx-base-prefix}-list-item__link,
 .#{$lumx-base-prefix}-list-item__wrapper {
     .#{$lumx-base-prefix}-list--item-padding-big & {
-        @include lumx-list-item-padding('big');
+        @include lumx-list-item-padding("big");
     }
 
     .#{$lumx-base-prefix}-list--item-padding-huge & {
-        @include lumx-list-item-padding('huge');
+        @include lumx-list-item-padding("huge");
     }
 }
 
@@ -80,11 +80,11 @@
     }
 
     .#{$lumx-base-prefix}-list--item-padding-big & {
-        @include lumx-list-item-padding('big');
+        @include lumx-list-item-padding("big");
     }
 
     .#{$lumx-base-prefix}-list--item-padding-huge & {
-        @include lumx-list-item-padding('huge');
+        @include lumx-list-item-padding("huge");
     }
 }
 

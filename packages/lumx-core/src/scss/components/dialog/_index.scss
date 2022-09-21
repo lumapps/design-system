@@ -1,3 +1,6 @@
+@use "sass:map";
+@use "sass:math";
+
 /* ==========================================================================
    Dialog
    ========================================================================== */
@@ -6,11 +9,11 @@
     $self: &;
 
     position: fixed;
-    z-index: map-get($lumx-base-layers, 'high');
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
+    z-index: map.get($lumx-base-layers, "high");
     display: none;
     opacity: 1;
     transition: opacity $lumx-dialog-transition-duration;
@@ -29,13 +32,13 @@
 
     &__overlay {
         position: absolute;
-        z-index: 1;
         top: 0;
         right: 0;
         bottom: 0;
         left: 0;
+        z-index: 1;
+        background-color: lumx-color-variant("dark", "L1");
         animation: lumx-dialog-overlay-show $lumx-dialog-transition-duration;
-        background-color: lumx-color-variant('dark', 'L1');
 
         @media (prefers-reduced-motion: reduce) {
             animation: none;
@@ -47,8 +50,8 @@
         z-index: 2;
         display: flex;
         flex-direction: column;
-        animation: lumx-dialog-show $lumx-dialog-transition-duration;
         transform: translateY(0);
+        animation: lumx-dialog-show $lumx-dialog-transition-duration;
 
         @media (prefers-reduced-motion: reduce) {
             animation: none;
@@ -60,9 +63,9 @@
 
         position: relative;
         display: flex;
-        max-height: 100%;
         flex-direction: column;
-        background-color: lumx-color-variant('light', 'N');
+        max-height: 100%;
+        background-color: lumx-color-variant("light", "N");
         border-radius: var(--lumx-border-radius);
 
         #{$self}--size-huge & {
@@ -76,11 +79,11 @@
     }
 
     &__header--has-divider {
-        @include lumx-has-divider(lumx-base-const('theme', 'LIGHT'), lumx-base-const('position', 'BOTTOM'));
+        @include lumx-has-divider(lumx-base-const("theme", "LIGHT"), lumx-base-const("position", "BOTTOM"));
     }
 
     &__footer--has-divider {
-        @include lumx-has-divider(lumx-base-const('theme', 'LIGHT'), lumx-base-const('position', 'TOP'));
+        @include lumx-has-divider(lumx-base-const("theme", "LIGHT"), lumx-base-const("position", "TOP"));
     }
 
     &__content {
@@ -92,15 +95,15 @@
 
     &__progress-overlay {
         position: absolute;
-        z-index: map-get($lumx-base-layers, 'high');
         top: 0;
         right: 0;
         bottom: 0;
         left: 0;
+        z-index: map.get($lumx-base-layers, "high");
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: lumx-color-variant('light', 'L2');
+        background-color: lumx-color-variant("light", "L2");
         border-radius: var(--lumx-border-radius);
     }
 }
@@ -144,7 +147,7 @@
             left: 50%;
             width: $size;
             height: calc(100% - 96px);
-            margin-left: $size / -2;
+            margin-left: math.div($size, -2);
         }
     }
 }

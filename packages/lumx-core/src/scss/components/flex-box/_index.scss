@@ -15,8 +15,8 @@
 }
 
 .#{$lumx-base-prefix}-flex-box--orientation-vertical {
-    min-height: 0;
     flex-direction: column;
+    min-height: 0;
 }
 
 /* Alignment

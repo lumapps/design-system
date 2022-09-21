@@ -6,9 +6,9 @@
 
 @mixin lumx-checkbox-input-native() {
     position: relative;
-    z-index: 4;
     top: 0;
     left: 0;
+    z-index: 4;
     width: var(--lumx-material-checkbox-wrapper-size);
     height: var(--lumx-material-checkbox-wrapper-size);
     padding: 0;
@@ -18,9 +18,9 @@
 
 @mixin lumx-checkbox-placeholder() {
     position: absolute;
-    z-index: 1;
     top: calc((var(--lumx-material-checkbox-wrapper-size) - var(--lumx-material-checkbox-control-size)) / 2);
     left: calc((var(--lumx-material-checkbox-wrapper-size) - var(--lumx-material-checkbox-control-size)) / 2);
+    z-index: 1;
     width: var(--lumx-material-checkbox-control-size);
     height: var(--lumx-material-checkbox-control-size);
     border-radius: 2px;
@@ -28,42 +28,42 @@
 
 @mixin lumx-checkbox-input-background() {
     position: absolute;
-    z-index: 2;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    border-width: 2px;
+    z-index: 2;
     border-style: solid;
+    border-width: 2px;
     border-radius: 2px;
 }
 
 @mixin lumx-checkbox-input-background-status($status) {
-    @if $status == 'checked' {
+    @if $status == "checked" {
         opacity: 0;
-    } @else if $status == 'unchecked' {
+    } @else if $status == "unchecked" {
         opacity: 1;
     }
 }
 
 @mixin lumx-checkbox-input-indicator() {
     position: absolute;
-    z-index: 3;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
+    z-index: 3;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 2px;
     font-size: var(--lumx-material-checkbox-control-size);
+    border-radius: 2px;
 }
 
 @mixin lumx-checkbox-input-indicator-status($status) {
-    @if $status == 'checked' {
+    @if $status == "checked" {
         opacity: 1;
-    } @else if $status == 'unchecked' {
+    } @else if $status == "unchecked" {
         opacity: 0;
     }
 }

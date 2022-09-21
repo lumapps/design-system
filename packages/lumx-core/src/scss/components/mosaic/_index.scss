@@ -1,3 +1,5 @@
+@use "sass:map";
+
 /* ==========================================================================
    Mosaic
    ========================================================================== */
@@ -6,8 +8,8 @@
     $self: &;
 
     position: relative;
+    padding-top: map.get($lumx-thumbnail-aspect-ratio, "horizontal");
     overflow: hidden;
-    padding-top: map-get($lumx-thumbnail-aspect-ratio, 'horizontal');
 
     &__wrapper {
         position: absolute;
@@ -18,31 +20,27 @@
         display: grid;
 
         #{$self}--has-1-thumbnail & {
-            grid-template-areas: 'b';
-            grid-template-columns: 1fr;
-            grid-template-rows: 1fr;
+            grid: 1fr / 1fr;
+            grid-template-areas: "b";
         }
 
         #{$self}--has-2-thumbnails & {
-            grid-template-areas: 'b21 b22';
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr;
+            grid: 1fr / 1fr 1fr;
+            grid-template-areas: "b21 b22";
         }
 
         #{$self}--has-3-thumbnails & {
+            grid: 1fr 1fr / 3fr 1fr;
             grid-template-areas:
-                'b3 s31'
-                'b3 s32';
-            grid-template-columns: 3fr 1fr;
-            grid-template-rows: 1fr 1fr;
+                "b3 s31"
+                "b3 s32";
         }
 
         #{$self}--has-4-thumbnails & {
+            grid: 2fr 1fr / 1fr 1fr 1fr;
             grid-template-areas:
-                'b4 b4 b4'
-                's41 s42 s43';
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: 2fr 1fr;
+                "b4 b4 b4"
+                "s41 s42 s43";
         }
     }
 
@@ -110,13 +108,13 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: lumx-color-variant('dark', 'L3');
         pointer-events: none;
+        background-color: lumx-color-variant("dark", "L3");
 
         span {
-            @include lumx-typography('subtitle1');
+            @include lumx-typography("subtitle1");
 
-            color: lumx-color-variant('light', 'N');
+            color: lumx-color-variant("light", "N");
         }
     }
 }

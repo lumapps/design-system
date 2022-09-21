@@ -1,3 +1,5 @@
+@use "sass:map";
+
 /**
  * 1. https://github.com/philipwalton/flexbugs/blob/master/README.md#flexbug-3
  */
@@ -15,22 +17,22 @@
 
 @mixin lumx-side-navigation-link() {
     display: flex;
-    min-height: map-get($lumx-sizes, lumx-base-const('size', 'M'));
     flex: 1 1 auto;
     flex-direction: row;
     align-items: center;
+    min-height: map.get($lumx-sizes, lumx-base-const("size", "M"));
     padding: 0 $lumx-spacing-unit;
+    text-decoration: none;
     border-radius: var(--lumx-border-radius);
     outline: none;
-    text-decoration: none;
 }
 
 @mixin lumx-side-navigation-link-icon($position) {
     flex-shrink: 0;
 
-    @if $position == lumx-base-const('position', 'LEFT') {
+    @if $position == lumx-base-const("position", "LEFT") {
         margin-right: $lumx-spacing-unit * 2;
-    } @else if $position == lumx-base-const('position', 'RIGHT') {
+    } @else if $position == lumx-base-const("position", "RIGHT") {
         margin-left: $lumx-spacing-unit * 2;
     }
 }
@@ -38,12 +40,12 @@
 @mixin lumx-side-navigation-link-label($emphasis) {
     flex: 1 1 auto;
 
-    @if $emphasis == lumx-base-const('emphasis', 'HIGH') {
-        @include lumx-typography('title');
-    } @else if $emphasis == lumx-base-const('emphasis', 'MEDIUM') {
-        @include lumx-typography('subtitle1');
-    } @else if $emphasis == lumx-base-const('emphasis', 'LOW') {
-        @include lumx-typography('body1');
+    @if $emphasis == lumx-base-const("emphasis", "HIGH") {
+        @include lumx-typography("title");
+    } @else if $emphasis == lumx-base-const("emphasis", "MEDIUM") {
+        @include lumx-typography("subtitle1");
+    } @else if $emphasis == lumx-base-const("emphasis", "LOW") {
+        @include lumx-typography("body1");
     }
 }
 

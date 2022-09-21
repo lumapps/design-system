@@ -9,11 +9,11 @@
 
     &--has-background {
         &#{$self}--theme-light {
-            background-color: lumx-color-variant('dark', 'L6');
+            background-color: lumx-color-variant("dark", "L6");
         }
 
         &#{$self}--theme-dark {
-            background-color: lumx-color-variant('light', 'L6');
+            background-color: lumx-color-variant("light", "L6");
         }
     }
 
@@ -22,11 +22,11 @@
         align-items: center;
 
         #{$self}--theme-light#{$self}--is-open#{$self}--has-header-divider & {
-            @include lumx-has-divider(lumx-base-const('theme', 'LIGHT'));
+            @include lumx-has-divider(lumx-base-const("theme", "LIGHT"));
         }
 
         #{$self}--theme-dark#{$self}--is-open#{$self}--has-header-divider & {
-            @include lumx-has-divider(lumx-base-const('theme', 'DARK'));
+            @include lumx-has-divider(lumx-base-const("theme", "DARK"));
         }
     }
 
@@ -44,12 +44,12 @@
     }
 
     &__label {
-        @include lumx-typography('body1');
+        @include lumx-typography("body1");
 
         display: block;
 
         #{$self}--theme-dark & {
-            color: lumx-color-variant('light', 'N');
+            color: lumx-color-variant("light", "N");
         }
     }
 

@@ -1,3 +1,6 @@
+@use "sass:map";
+@use "sass:math";
+
 /* ==========================================================================
    Popover
    ========================================================================== */
@@ -5,9 +8,9 @@
 .#{$lumx-base-prefix}-popover {
     $self: &;
 
-    z-index: map-get($lumx-base-layers, 'high');
+    z-index: map.get($lumx-base-layers, "high");
     display: flex;
-    background-color: lumx-color-variant('light', 'N');
+    background-color: lumx-color-variant("light", "N");
     border-radius: var(--lumx-border-radius);
 
     > * {
@@ -28,25 +31,25 @@
         }
 
         &::before {
-            background: lumx-color-variant('light', 'N');
-            content: '';
+            content: "";
+            background: lumx-color-variant("light", "N");
             transform: rotate(45deg);
         }
 
         #{$self}[data-popper-placement^='top'] & {
-            bottom: -$lumx-popover-arrow-size/2;
+            bottom: math.div(-$lumx-popover-arrow-size, 2);
         }
 
         #{$self}[data-popper-placement^='bottom'] & {
-            top: -$lumx-popover-arrow-size/2;
+            top: math.div(-$lumx-popover-arrow-size, 2);
         }
 
         #{$self}[data-popper-placement^='left'] & {
-            right: -$lumx-popover-arrow-size/2;
+            right: math.div(-$lumx-popover-arrow-size, 2);
         }
 
         #{$self}[data-popper-placement^='righ'] & {
-            left: -$lumx-popover-arrow-size/2;
+            left: math.div(-$lumx-popover-arrow-size, 2);
         }
     }
 }

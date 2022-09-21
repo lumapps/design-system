@@ -1,3 +1,5 @@
+@use "sass:map";
+
 /* ==========================================================================
    Notification
    ========================================================================== */
@@ -8,20 +10,20 @@
     @include lumx-elevation(4);
 
     position: fixed;
-    z-index: map-get($lumx-base-layers, 'higher');
     right: $lumx-spacing-unit * 3;
     bottom: $lumx-spacing-unit * 3;
+    z-index: map.get($lumx-base-layers, "higher");
     display: flex;
-    overflow: hidden;
     align-items: center;
-    animation: lumx-notification-show $lumx-notification-transition-duration;
-    background-color: lumx-color-variant('light', 'N');
+    overflow: hidden;
+    background-color: lumx-color-variant("light", "N");
     border-radius: var(--lumx-border-radius);
     transition: opacity $lumx-notification-transition-duration;
+    animation: lumx-notification-show $lumx-notification-transition-duration;
 
     @media (prefers-reduced-motion: reduce) {
-        animation: none;
         transition: none;
+        animation: none;
     }
 
     &--is-hidden {
@@ -30,17 +32,17 @@
 
     &__icon {
         display: flex;
-        width: $lumx-notification-height;
-        height: $lumx-notification-height;
         align-items: center;
         justify-content: center;
+        width: $lumx-notification-height;
+        height: $lumx-notification-height;
     }
 
     &__content {
-        @include lumx-typography('body1');
+        @include lumx-typography("body1");
 
         padding: 0 $lumx-spacing-unit * 2;
-        color: lumx-color-variant('dark', 'N');
+        color: lumx-color-variant("dark", "N");
     }
 
     &__action {
@@ -65,12 +67,12 @@
 
 @each $color in $lumx-notification-color-palette {
     .#{$lumx-base-prefix}-notification--color-#{$color} .#{$lumx-base-prefix}-notification__icon {
-        background-color: lumx-color-variant($color, 'N');
+        background-color: lumx-color-variant($color, "N");
 
-        @if $color == 'yellow' {
-            color: lumx-color-variant('dark', 'L1');
+        @if $color == "yellow" {
+            color: lumx-color-variant("dark", "L1");
         } @else {
-            color: lumx-color-variant('light', 'N');
+            color: lumx-color-variant("light", "N");
         }
     }
 }

@@ -1,20 +1,22 @@
+@use "sass:map";
+
 /* ==========================================================================
    Badge
    ========================================================================== */
 
 .#{$lumx-base-prefix}-badge {
     display: inline-flex;
-    width: map-get($lumx-sizes, lumx-base-const('size', 'XS'));
-    height: map-get($lumx-sizes, lumx-base-const('size', 'XS'));
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
+    width: map.get($lumx-sizes, lumx-base-const("size", "XS"));
+    height: map.get($lumx-sizes, lumx-base-const("size", "XS"));
     pointer-events: none;
+    border-radius: 50%;
 
     span {
-        @include lumx-typography('overline');
+        @include lumx-typography("overline");
 
-        line-height: map-get($lumx-sizes, lumx-base-const('size', 'XS'));
+        line-height: map.get($lumx-sizes, lumx-base-const("size", "XS"));
     }
 
     i {
@@ -30,15 +32,15 @@
 
 @each $key, $color in $lumx-color-palette {
     .#{$lumx-base-prefix}-badge--color-#{$key} {
-        background-color: lumx-color-variant($key, 'N');
+        background-color: lumx-color-variant($key, "N");
 
-        @if $key == 'light' {
+        @if $key == "light" {
             @include lumx-elevation(2);
         } @else {
-            @if $key == 'yellow' {
-                color: lumx-color-variant('dark', 'L1');
+            @if $key == "yellow" {
+                color: lumx-color-variant("dark", "L1");
             } @else {
-                color: lumx-color-variant('light', 'N');
+                color: lumx-color-variant("light", "N");
             }
         }
     }

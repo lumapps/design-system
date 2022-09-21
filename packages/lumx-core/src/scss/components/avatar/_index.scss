@@ -1,11 +1,13 @@
+@use "sass:math";
+
 /* ==========================================================================
    Avatar
    ========================================================================== */
 
 .#{$lumx-base-prefix}-avatar {
     position: relative;
-    background-position: center;
     background-repeat: no-repeat;
+    background-position: center;
     background-size: cover;
     outline: none;
 
@@ -24,8 +26,8 @@
 
     &__badge {
         position: absolute;
-        right: -$lumx-spacing-unit / 2;
-        bottom: -$lumx-spacing-unit / 2;
+        right: math.div(-$lumx-spacing-unit, 2);
+        bottom: math.div(-$lumx-spacing-unit, 2);
     }
 }
 

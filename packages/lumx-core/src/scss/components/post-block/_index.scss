@@ -11,8 +11,8 @@
 
     &__thumbnail {
         #{$self}--orientation-horizontal & {
-            width: 33.33%;
             flex-shrink: 0;
+            width: 33.33%;
             margin-right: $lumx-spacing-unit * 3;
         }
 
@@ -35,46 +35,46 @@
     }
 
     &__title {
-        @include lumx-typography('title');
+        @include lumx-typography("title");
 
         display: block;
         margin-bottom: $lumx-spacing-unit;
 
         #{$self}--theme-light & {
-            @include lumx-link('dark');
+            @include lumx-link("dark");
         }
 
         #{$self}--theme-dark & {
-            @include lumx-link('light');
+            @include lumx-link("light");
         }
     }
 
     &__meta {
-        @include lumx-typography('caption');
+        @include lumx-typography("caption");
 
         display: block;
         margin-bottom: $lumx-spacing-unit;
 
         #{$self}--theme-light & {
-            color: lumx-color-variant('dark', 'L2');
+            color: lumx-color-variant("dark", "L2");
         }
 
         #{$self}--theme-dark & {
-            color: lumx-color-variant('light', 'L2');
+            color: lumx-color-variant("light", "L2");
         }
     }
 
     &__text {
-        @include lumx-typography('body1');
+        @include lumx-typography("body1");
 
         margin-bottom: $lumx-spacing-unit;
 
         #{$self}--theme-light & {
-            color: lumx-color-variant('dark', 'N');
+            color: lumx-color-variant("dark", "N");
         }
 
         #{$self}--theme-dark & {
-            color: lumx-color-variant('light', 'N');
+            color: lumx-color-variant("light", "N");
         }
     }
 

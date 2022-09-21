@@ -1,24 +1,26 @@
+@use "sass:map";
+
 /* ==========================================================================
    Lightbox
    ========================================================================== */
 
 .#{$lumx-base-prefix}-lightbox {
     position: fixed;
-    z-index: map-get($lumx-base-layers, 'high');
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
+    z-index: map.get($lumx-base-layers, "high");
     display: none;
     overflow: auto;
-    animation: lumx-lightbox-show $lumx-lightbox-transition-duration;
-    background-color: lumx-color-variant('dark', 'L1');
+    background-color: lumx-color-variant("dark", "L1");
     opacity: 1;
     transition: opacity $lumx-lightbox-transition-duration;
+    animation: lumx-lightbox-show $lumx-lightbox-transition-duration;
 
     @media (prefers-reduced-motion: reduce) {
-        animation: none;
         transition: none;
+        animation: none;
     }
 
     &--is-shown {
@@ -37,10 +39,10 @@
 
     &__wrapper {
         position: absolute;
-        top: map-get($lumx-sizes, lumx-base-const('size', 'L'));
-        right: map-get($lumx-sizes, lumx-base-const('size', 'L'));
-        bottom: map-get($lumx-sizes, lumx-base-const('size', 'L'));
-        left: map-get($lumx-sizes, lumx-base-const('size', 'L'));
+        top: map.get($lumx-sizes, lumx-base-const("size", "L"));
+        right: map.get($lumx-sizes, lumx-base-const("size", "L"));
+        bottom: map.get($lumx-sizes, lumx-base-const("size", "L"));
+        left: map.get($lumx-sizes, lumx-base-const("size", "L"));
         display: flex;
         flex-direction: column;
     }

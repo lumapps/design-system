@@ -1,1 +1,3 @@
-$lumx-sizes: map-get($lumx-design-tokens, 'size');
+@use "sass:map";
+
+$lumx-sizes: map.get($lumx-design-tokens, "size");

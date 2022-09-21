@@ -1,3 +1,6 @@
+@use "sass:map";
+@use "sass:math";
+
 /* ==========================================================================
    Slider
    ========================================================================== */
@@ -8,18 +11,18 @@
     user-select: none;
 
     &__helper {
-        margin-top: $lumx-spacing-unit / 2;
+        margin-top: math.div($lumx-spacing-unit, 2);
     }
 
     &__value-label {
         font-size: 10px;
 
         #{$self}--theme-light & {
-            color: lumx-color-variant('dark', 'L2');
+            color: lumx-color-variant("dark", "L2");
         }
 
         #{$self}--theme-dark & {
-            color: lumx-color-variant('light', 'L2');
+            color: lumx-color-variant("light", "L2");
         }
 
         &--min {
@@ -42,8 +45,8 @@
 
     &__wrapper {
         position: relative;
-        height: map-get($lumx-sizes, lumx-base-const('size', 'S'));
         flex: 1 1 auto;
+        height: map.get($lumx-sizes, lumx-base-const("size", "S"));
         cursor: pointer;
     }
 
@@ -57,21 +60,21 @@
 
         &--background {
             #{$self}--theme-light & {
-                background-color: lumx-color-variant('dark', 'L5');
+                background-color: lumx-color-variant("dark", "L5");
             }
 
             #{$self}--theme-dark & {
-                background-color: lumx-color-variant('light', 'L5');
+                background-color: lumx-color-variant("light", "L5");
             }
         }
 
         &--active {
             #{$self}--theme-light & {
-                background-color: lumx-color-variant('primary', 'N');
+                background-color: lumx-color-variant("primary", "N");
             }
 
             #{$self}--theme-dark & {
-                background-color: lumx-color-variant('light', 'N');
+                background-color: lumx-color-variant("light", "N");
             }
         }
     }
@@ -82,37 +85,37 @@
         width: 12px;
         height: 12px;
         padding: 0;
-        border: none;
         margin: 0;
-        border-radius: 50%;
-        cursor: pointer;
-        outline: none;
         text-decoration: none;
-        transform: translateX(-50%) translateY(-50%);
+        cursor: pointer;
         user-select: none;
+        border: none;
+        border-radius: 50%;
+        outline: none;
+        transform: translateX(-50%) translateY(-50%);
 
         #{$self}--theme-light & {
             @include lumx-state(
-                lumx-base-const('state', 'DEFAULT'),
-                lumx-base-const('emphasis', 'HIGH'),
-                'primary',
-                lumx-base-const('theme', 'LIGHT')
+                lumx-base-const("state", "DEFAULT"),
+                lumx-base-const("emphasis", "HIGH"),
+                "primary",
+                lumx-base-const("theme", "LIGHT")
             );
         }
 
         #{$self}--theme-dark & {
             @include lumx-state(
-                lumx-base-const('state', 'DEFAULT'),
-                lumx-base-const('emphasis', 'HIGH'),
-                'primary',
-                lumx-base-const('theme', 'DARK')
+                lumx-base-const("state", "DEFAULT"),
+                lumx-base-const("emphasis", "HIGH"),
+                "primary",
+                lumx-base-const("theme", "DARK")
             );
         }
     }
 
     &__ticks {
         position: absolute;
-        top: (map-get($lumx-sizes, s) / 2) + 2;
+        top: math.div(map.get($lumx-sizes, s), 2) + 2;
         right: 0;
         left: 0;
     }
@@ -130,11 +133,11 @@
         }
 
         #{$self}--theme-light & {
-            background-color: lumx-color-variant('dark', 'L5');
+            background-color: lumx-color-variant("dark", "L5");
         }
 
         #{$self}--theme-dark & {
-            background-color: lumx-color-variant('light', 'L5');
+            background-color: lumx-color-variant("light", "L5");
         }
     }
 }
@@ -146,19 +149,19 @@
 .#{$lumx-base-prefix}-slider__handle:hover {
     .#{$lumx-base-prefix}-slider--theme-light & {
         @include lumx-state(
-            lumx-base-const('state', 'HOVER'),
-            lumx-base-const('emphasis', 'HIGH'),
-            'primary',
-            lumx-base-const('theme', 'LIGHT')
+            lumx-base-const("state", "HOVER"),
+            lumx-base-const("emphasis", "HIGH"),
+            "primary",
+            lumx-base-const("theme", "LIGHT")
         );
     }
 
     .#{$lumx-base-prefix}-slider--theme-dark & {
         @include lumx-state(
-            lumx-base-const('state', 'HOVER'),
-            lumx-base-const('emphasis', 'HIGH'),
-            'primary',
-            lumx-base-const('theme', 'DARK')
+            lumx-base-const("state", "HOVER"),
+            lumx-base-const("emphasis", "HIGH"),
+            "primary",
+            lumx-base-const("theme", "DARK")
         );
     }
 }
@@ -167,19 +170,19 @@
 .#{$lumx-base-prefix}-slider__handle:active {
     .#{$lumx-base-prefix}-slider--theme-light & {
         @include lumx-state(
-            lumx-base-const('state', 'ACTIVE'),
-            lumx-base-const('emphasis', 'HIGH'),
-            'primary',
-            lumx-base-const('theme', 'LIGHT')
+            lumx-base-const("state", "ACTIVE"),
+            lumx-base-const("emphasis", "HIGH"),
+            "primary",
+            lumx-base-const("theme", "LIGHT")
         );
     }
 
     .#{$lumx-base-prefix}-slider--theme-dark & {
         @include lumx-state(
-            lumx-base-const('state', 'ACTIVE'),
-            lumx-base-const('emphasis', 'HIGH'),
-            'primary',
-            lumx-base-const('theme', 'DARK')
+            lumx-base-const("state", "ACTIVE"),
+            lumx-base-const("emphasis", "HIGH"),
+            "primary",
+            lumx-base-const("theme", "DARK")
         );
     }
 }
@@ -188,19 +191,19 @@
 .#{$lumx-base-prefix}-slider__handle[data-focus-visible-added] {
     .#{$lumx-base-prefix}-slider--theme-light & {
         @include lumx-state(
-            lumx-base-const('state', 'FOCUS'),
-            lumx-base-const('emphasis', 'HIGH'),
-            'primary',
-            lumx-base-const('theme', 'LIGHT')
+            lumx-base-const("state", "FOCUS"),
+            lumx-base-const("emphasis", "HIGH"),
+            "primary",
+            lumx-base-const("theme", "LIGHT")
         );
     }
 
     .#{$lumx-base-prefix}-slider--theme-dark & {
         @include lumx-state(
-            lumx-base-const('state', 'FOCUS'),
-            lumx-base-const('emphasis', 'HIGH'),
-            'primary',
-            lumx-base-const('theme', 'DARK')
+            lumx-base-const("state", "FOCUS"),
+            lumx-base-const("emphasis", "HIGH"),
+            "primary",
+            lumx-base-const("theme", "DARK")
         );
     }
 }

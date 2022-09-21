@@ -6,8 +6,8 @@
     $self: &;
 
     display: flex;
-    height: $lumx-toolbar-height;
     align-items: center;
+    height: $lumx-toolbar-height;
     padding: 0 $lumx-spacing-unit * 3;
 
     &--has-before {
