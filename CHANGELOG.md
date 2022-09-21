@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.1][] - 2022-09-21
+
 ### Changed
 
 -   `@lumx/core`: _[BREAKING]_ migrating from `node-sass` v4.13.1 to `sass` v1.54.0.
@@ -1562,3 +1564,5 @@ _Failed released_
 [2.2.24]: https://github.com/lumapps/design-system/tree/v2.2.24
 [unreleased]: https://github.com/lumapps/design-system/compare/v2.2.25...HEAD
 [2.2.25]: https://github.com/lumapps/design-system/tree/v2.2.25
+[unreleased]: https://github.com/lumapps/design-system/compare/v3.0.1...HEAD
+[3.0.1]: https://github.com/lumapps/design-system/tree/v3.0.1
