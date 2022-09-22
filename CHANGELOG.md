@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   New `Text` component.
+-   New `Heading` component. The component comes with a `HeadingProvider` that allows the `Heading` component to automatically use the correct heading level depending on the nested providers.
+-   New `useHeadingLevel` hook to get the current heading level.
 
 ## [3.0.1][] - 2022-09-21
 
