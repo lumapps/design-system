@@ -1,12 +1,15 @@
-import { Alignment, HorizontalAlignment, Orientation, VerticalAlignment } from '@lumx/react';
+import { Alignment, Orientation } from '@lumx/react';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
 import castArray from 'lodash/castArray';
 import React, { forwardRef, ReactNode } from 'react';
-import { Size } from '..';
+import { HorizontalAlignment, Size, VerticalAlignment } from '..';
 
 export type MarginAutoAlignment = Extract<Alignment, 'top' | 'bottom' | 'right' | 'left'>;
 export type GapSize = Extract<Size, 'tiny' | 'regular' | 'medium' | 'big' | 'huge'>;
+type SpaceAlignment = Extract<Alignment, 'space-between' | 'space-evenly' | 'space-around'>;
+export type FlexVerticalAlignment = VerticalAlignment | SpaceAlignment;
+export type FlexHorizontalAlignment = HorizontalAlignment | SpaceAlignment;
 
 /**
  * Defines the props of the component.
@@ -19,7 +22,7 @@ export interface FlexBoxProps extends GenericProps {
     /** Gap space between flexbox items. */
     gap?: GapSize;
     /** Flex horizontal alignment. */
-    hAlign?: VerticalAlignment;
+    hAlign?: FlexVerticalAlignment;
     /** Whether the "auto margin" is enabled all around or not. */
     marginAuto?: MarginAutoAlignment | MarginAutoAlignment[];
     /** Whether the "content shrink" is disabled or not. */
@@ -27,7 +30,7 @@ export interface FlexBoxProps extends GenericProps {
     /** Flex direction. */
     orientation?: Orientation;
     /** Flex vertical alignment. */
-    vAlign?: HorizontalAlignment;
+    vAlign?: FlexHorizontalAlignment;
     /** Whether the "flex wrap" is enabled or not. */
     wrap?: boolean;
 }

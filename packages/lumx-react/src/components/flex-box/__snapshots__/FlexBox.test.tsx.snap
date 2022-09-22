@@ -40,6 +40,41 @@ Array [
 ]
 `;
 
+exports[`<FlexBox> Snapshots and structure should render story 'Distribution' 1`] = `
+<div
+  className="lumx-flex-box lumx-flex-box--orientation-vertical lumx-flex-box--v-align-center lumx-flex-box--h-align-center lumx-flex-box--gap-regular"
+  style={
+    Object {
+      "border": "1px solid red",
+      "height": "300px",
+      "width": "720px",
+    }
+  }
+>
+  <Button
+    emphasis="high"
+    size="m"
+    theme="light"
+  >
+    Button 1
+  </Button>
+  <Button
+    emphasis="high"
+    size="m"
+    theme="light"
+  >
+    Button 2
+  </Button>
+  <Button
+    emphasis="high"
+    size="m"
+    theme="light"
+  >
+    Button 3
+  </Button>
+</div>
+`;
+
 exports[`<FlexBox> Snapshots and structure should render story 'Flex' 1`] = `
 Array [
   <div

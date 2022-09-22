@@ -19,8 +19,32 @@ const flexViewKnobConfigs: Array<
     ['noShrink', boolean],
     ['wrap', boolean],
     ['gap', select, [DEFAULT_PROPS.gap, Size.tiny, Size.regular, Size.medium, Size.big, Size.huge]],
-    ['hAlign', select, [DEFAULT_PROPS.hAlign, Alignment.center, Alignment.top, Alignment.bottom]],
-    ['vAlign', select, [DEFAULT_PROPS.vAlign, Alignment.center, Alignment.right, Alignment.left]],
+    [
+        'hAlign',
+        select,
+        [
+            DEFAULT_PROPS.hAlign,
+            Alignment.center,
+            Alignment.top,
+            Alignment.bottom,
+            Alignment.spaceAround,
+            Alignment.spaceBetween,
+            Alignment.spaceEvenly,
+        ],
+    ],
+    [
+        'vAlign',
+        select,
+        [
+            DEFAULT_PROPS.vAlign,
+            Alignment.center,
+            Alignment.right,
+            Alignment.left,
+            Alignment.spaceAround,
+            Alignment.spaceBetween,
+            Alignment.spaceEvenly,
+        ],
+    ],
     ['orientation', select, [undefined, Orientation.horizontal, Orientation.vertical]],
     [
         'marginAuto',
@@ -69,13 +93,27 @@ export const Flex = () => (
 const hAlign = (prefix?: string) =>
     select(
         `${prefix ? `${prefix}: ` : ''}Horizontal align`,
-        [Alignment.center, Alignment.top, Alignment.bottom],
+        [
+            Alignment.center,
+            Alignment.top,
+            Alignment.bottom,
+            Alignment.spaceAround,
+            Alignment.spaceBetween,
+            Alignment.spaceEvenly,
+        ],
         Alignment.center,
     );
 const vAlign = (prefix?: string) =>
     select(
         `${prefix ? `${prefix}: ` : ''}Vertical align`,
-        [Alignment.center, Alignment.left, Alignment.right],
+        [
+            Alignment.center,
+            Alignment.left,
+            Alignment.right,
+            Alignment.spaceAround,
+            Alignment.spaceBetween,
+            Alignment.spaceEvenly,
+        ],
         Alignment.center,
     );
 
@@ -177,5 +215,23 @@ export const Align = () => (
     <FlexBox orientation={Orientation.horizontal} vAlign={vAlign()} hAlign={hAlign()}>
         <Button style={{ height: 200 }}>Button</Button>
         <FlexBox style={{ height: 'fit-content' }}>Some text</FlexBox>
+    </FlexBox>
+);
+
+export const Distribution = () => (
+    <FlexBox
+        style={{
+            width: `${number('width (px)', 720)}px`,
+            height: `${number('height (px)', 300)}px`,
+            border: '1px solid red',
+        }}
+        orientation={orientation()}
+        gap={gapSize()}
+        vAlign={vAlign()}
+        hAlign={hAlign()}
+    >
+        <Button>Button 1</Button>
+        <Button>Button 2</Button>
+        <Button>Button 3</Button>
     </FlexBox>
 );
