@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.2][] - 2022-09-23
+
 ### Added
 
 -   New `Text` component.
@@ -1585,3 +1587,5 @@ _Failed released_
 [2.2.25]: https://github.com/lumapps/design-system/tree/v2.2.25
 [unreleased]: https://github.com/lumapps/design-system/compare/v3.0.1...HEAD
 [3.0.1]: https://github.com/lumapps/design-system/tree/v3.0.1
+[unreleased]: https://github.com/lumapps/design-system/compare/v3.0.2...HEAD
+[3.0.2]: https://github.com/lumapps/design-system/tree/v3.0.2
