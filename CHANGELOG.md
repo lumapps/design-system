@@ -12,18 +12,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   New `Text` component.
 -   New `Heading` component. The component comes with a `HeadingProvider` that allows the `Heading` component to automatically use the correct heading level depending on the nested providers.
 -   New `useHeadingLevel` hook to get the current heading level.
+-   FlexBox: new options added for `vAlign` and `hAlign` props (`space-between`, `space-evenly` and `space-around`).
 
 ### Changed
 
-- Slideshow: Improve accessibility by adding `tablist` / `tab` roles to slideshow pagination and `tabpanel` role to slide groups. These elements are linked together using `aria-controls` attribute.
-- Slideshow: Added the `slideGroupLabel` prop to set a label on each slide groups. The prop should be a function that receives the group position starting from 1 and the total number of groups.
-- Slideshow: Slides grouped together are now wrapper inside individual divs.
-- SlideshowControls: Added the `paginationItemProps` prop to set custom props to each pagination item. The prop should be a function that receives the item index.
-- SlideshowControls: The bullets now use the "roving tab index" pattern to have only the current slide focusable and navigate using the left/right arrows.
+-   Slideshow: Improve accessibility by adding `tablist` / `tab` roles to slideshow pagination and `tabpanel` role to slide groups. These elements are linked together using `aria-controls` attribute.
+-   Slideshow: Added the `slideGroupLabel` prop to set a label on each slide groups. The prop should be a function that receives the group position starting from 1 and the total number of groups.
+-   Slideshow: Slides grouped together are now wrapper inside individual divs.
+-   SlideshowControls: Added the `paginationItemProps` prop to set custom props to each pagination item. The prop should be a function that receives the item index.
+-   SlideshowControls: The bullets now use the "roving tab index" pattern to have only the current slide focusable and navigate using the left/right arrows.
 
 ### Fixed
 
-- Slideshow: Avoid slides that are not displayed to be focusable and read by a screen reader.
+-   Slideshow: Avoid slides that are not displayed to be focusable and read by a screen reader.
 
 ## [3.0.1][] - 2022-09-21
 

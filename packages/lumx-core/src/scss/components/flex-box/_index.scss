@@ -52,6 +52,22 @@
     justify-content: flex-end;
 }
 
+.#{$lumx-base-prefix}-flex-box--orientation-horizontal.#{$lumx-base-prefix}-flex-box--v-align-space-between,
+.#{$lumx-base-prefix}-flex-box--orientation-vertical.#{$lumx-base-prefix}-flex-box--h-align-space-between {
+    justify-content: space-between;
+}
+
+.#{$lumx-base-prefix}-flex-box--orientation-horizontal.#{$lumx-base-prefix}-flex-box--v-align-space-around, 
+.#{$lumx-base-prefix}-flex-box--orientation-vertical.#{$lumx-base-prefix}-flex-box--h-align-space-around {
+    justify-content: space-around;
+}
+
+.#{$lumx-base-prefix}-flex-box--orientation-horizontal.#{$lumx-base-prefix}-flex-box--v-align-space-evenly,
+.#{$lumx-base-prefix}-flex-box--orientation-vertical.#{$lumx-base-prefix}-flex-box--h-align-space-evenly
+ {
+    justify-content: space-evenly;
+}
+
 /* Wrap
    ========================================================================== */
 

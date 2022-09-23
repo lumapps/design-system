@@ -11,6 +11,7 @@ export const Alignment = {
     right: 'right',
     spaceAround: 'space-around',
     spaceBetween: 'space-between',
+    spaceEvenly: 'space-evenly',
     start: 'start',
     top: 'top',
 } as const;
