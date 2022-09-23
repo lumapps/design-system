@@ -26,6 +26,7 @@ export const Simple = () => {
             onPaginationClick={onPaginationClick}
             nextButtonProps={{ label: 'Next' }}
             previousButtonProps={{ label: 'Previous' }}
+            paginationItemLabel={(index) => `Slide ${index}`}
         />
     );
 };
@@ -62,7 +63,6 @@ export const ControllingSlideshow = ({ theme }: any) => {
         onFocusOut: startAutoPlay,
     });
 
-    /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
     return (
         <Slides
             activeIndex={currentIndex}

@@ -8,8 +8,6 @@ import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/
  * Defines the props of the component.
  */
 export interface SlideshowItemProps extends GenericProps {
-    /** whether the slideshow item is currently visible */
-    isCurrentlyVisible?: boolean;
     /** interval in which slides are automatically shown */
     interval?: number;
 }
@@ -33,7 +31,6 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  */
 export const SlideshowItem: Comp<SlideshowItemProps, HTMLDivElement> = forwardRef((props, ref) => {
     const { className, children, ...forwardedProps } = props;
-
     return (
         <div
             ref={ref}
@@ -43,8 +40,6 @@ export const SlideshowItem: Comp<SlideshowItemProps, HTMLDivElement> = forwardRe
                     prefix: CLASSNAME,
                 }),
             )}
-            aria-roledescription="slide"
-            role="group"
             {...forwardedProps}
         >
             {children}

@@ -1,9 +1,11 @@
-import React, { CSSProperties, forwardRef } from 'react';
+import React, { Children, CSSProperties, forwardRef } from 'react';
+import chunk from 'lodash/chunk';
 
 import classNames from 'classnames';
 
 import { FULL_WIDTH_PERCENT } from '@lumx/react/components/slideshow/constants';
 import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme } from '@lumx/react/utils';
+import { buildSlideShowGroupId, SlideshowItemGroup } from './SlideshowItemGroup';
 
 export interface SlidesProps extends GenericProps, HasTheme {
     /** current slide active */
@@ -24,6 +26,13 @@ export interface SlidesProps extends GenericProps, HasTheme {
     toggleAutoPlay: () => void;
     /** component to be rendered after the slides */
     afterSlides?: React.ReactNode;
+    /** Whether the slides have controls linked */
+    hasControls?: boolean;
+    /**
+     * Accessible label to set on a slide group.
+     * Receives the group position starting from 1 and the total number of groups.
+     * */
+    slideGroupLabel?: (groupPosition: number, groupTotal: number) => string;
 }
 
 /**
@@ -56,10 +65,21 @@ export const Slides: Comp<SlidesProps, HTMLDivElement> = forwardRef((props, ref)
         slidesId,
         children,
         afterSlides,
+        hasControls,
+        slideGroupLabel,
         ...forwardedProps
     } = props;
+    const wrapperRef = React.useRef<HTMLDivElement>(null);
+    const startIndexVisible = activeIndex;
+    const endIndexVisible = startIndexVisible + 1;
+
     // Inline style of wrapper element.
     const wrapperStyle: CSSProperties = { transform: `translateX(-${FULL_WIDTH_PERCENT * activeIndex}%)` };
+
+    const groups = React.useMemo(() => {
+        const childrenArray = Children.toArray(children);
+        return groupBy && groupBy > 1 ? chunk(childrenArray, groupBy) : childrenArray;
+    }, [children, groupBy]);
 
     return (
         <section
@@ -79,8 +99,18 @@ export const Slides: Comp<SlidesProps, HTMLDivElement> = forwardRef((props, ref)
                 onMouseLeave={toggleAutoPlay}
                 aria-live={isAutoPlaying ? 'off' : 'polite'}
             >
-                <div className={`${CLASSNAME}__wrapper`} style={wrapperStyle}>
-                    {children}
+                <div ref={wrapperRef} className={`${CLASSNAME}__wrapper`} style={wrapperStyle}>
+                    {groups.map((group, index) => (
+                        <SlideshowItemGroup
+                            key={index}
+                            id={slidesId && buildSlideShowGroupId(slidesId, index)}
+                            role={hasControls ? 'tabpanel' : 'group'}
+                            label={slideGroupLabel ? slideGroupLabel(index + 1, groups.length) : undefined}
+                            isDisplayed={index >= startIndexVisible && index < endIndexVisible}
+                        >
+                            {group}
+                        </SlideshowItemGroup>
+                    ))}
                 </div>
             </div>
 

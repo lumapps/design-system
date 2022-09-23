@@ -4,6 +4,8 @@ interface UseRovingTabIndexOptions {
     parentRef: RefObject<HTMLElement>;
     elementSelector: string;
     keepTabIndex?: boolean;
+    /** Action to trigger when an element is focused using roving tab index */
+    onElementFocus?: (element: HTMLElement) => void;
     /** List of values to be used as extra dependencies of the useEffect */
     extraDependencies?: any[];
 }
@@ -12,6 +14,7 @@ export const useRovingTabIndex = ({
     parentRef,
     elementSelector,
     keepTabIndex,
+    onElementFocus,
     extraDependencies = [],
 }: UseRovingTabIndexOptions): void => {
     useEffect(
@@ -47,6 +50,12 @@ export const useRovingTabIndex = ({
                 }
                 const newElement = elements[newTabFocus];
                 newElement?.focus();
+
+                // When an element is focused using roving tab index, trigger the onElementFocus callback
+                if (newElement && onElementFocus) {
+                    onElementFocus(newElement);
+                }
+
                 if (keepTabIndex) {
                     (evt.currentTarget as HTMLElement).setAttribute('tabindex', '-1');
                     newElement?.setAttribute('tabindex', '0');
