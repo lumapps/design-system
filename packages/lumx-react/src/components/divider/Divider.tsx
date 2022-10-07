@@ -24,7 +24,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
 /**
  * Component default props.
  */
-export const DEFAULT_PROPS: Partial<DividerProps> = {
+const DEFAULT_PROPS: Partial<DividerProps> = {
     theme: Theme.light,
 };
 
