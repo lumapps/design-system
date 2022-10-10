@@ -8,6 +8,7 @@ const docgen = require('react-docgen-typescript');
 const rewriteJSXComponents = require('../utils/rewriteJSXComponents');
 const aliasPropType = require('../utils/aliasPropType');
 const debug = require('../utils/debug');
+const ROOT_PATH = path.resolve(__dirname, '../../../..')
 
 const globPromise = (globString) => new Promise((resolve, reject) =>
     glob(globString, (err, files) => {
@@ -18,7 +19,7 @@ const globPromise = (globString) => new Promise((resolve, reject) =>
 let parserConfig;
 const getDocgenParser = async () => {
     if (!parserConfig) {
-        const tsconfigPath = path.resolve('../../tsconfig.json');
+        const tsconfigPath = path.resolve(ROOT_PATH, 'tsconfig.json');
         const basePath = path.dirname(tsconfigPath);
         const { config, error } = ts.readConfigFile(tsconfigPath, filename =>
             fs.readFileSync(filename, 'utf8'),
@@ -42,13 +43,20 @@ const getDocgenParser = async () => {
 
 /** Find LumX react component path by component name. */
 const getComponentPath = async (component) => {
-    const dir = path.resolve(`../lumx-react/src/components/`);
+    const dir = path.resolve(ROOT_PATH, `packages/lumx-react/src/components/`);
     const files = await globPromise(path.join(dir, '**', `${component}.tsx`));
     if (files.length === 0) {
         console.warn(`Could not found component ${component} in ${dir} for <PropTable> generation.`);
     }
     return files[0];
 };
+
+function isReactType(type) {
+    if (type.name === 'enum' && type.raw === 'ReactNode') return true;
+    if (type.name === 'enum' && type.raw === 'ElementType<any>') return true;
+    if (type.name === 'enum' && type.raw.match(/Ref<.*>/)) return true;
+    return !type.raw.includes(' | ') && type.raw.startsWith('React');
+}
 
 /** Format component prop documentation. */
 function formatProp(prop) {
@@ -58,8 +66,7 @@ function formatProp(prop) {
     prop.defaultValue = prop.defaultValue === 'undefined' ? null : prop.defaultValue;
 
     if (prop.type.name === 'enum') {
-        const isReactType = !prop.type.raw.includes(' | ') && prop.type.raw.startsWith('React');
-        if (isReactType) {
+        if (isReactType(prop.type)) {
             // Use raw react type.
             prop.type = [prop.type.raw];
         } else {
@@ -117,3 +124,15 @@ module.exports = async (mdxString) => {
     }
 };
 
+
+// Example updatePropTable
+if (require.main === module) {
+    (async () => {
+        const docgenParser = await getDocgenParser();
+        const props = await updatePropTable(
+            docgenParser,
+            { component: '"GenericBlock"' }
+        );
+        console.debug(JSON.stringify(JSON.parse(props.props), null, 2));
+    })();
+}
