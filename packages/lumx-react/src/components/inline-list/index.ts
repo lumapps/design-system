@@ -1,1 +1,1 @@
-export { InlineList, InlineListProps } from './InlineList';
+export * from './InlineList';

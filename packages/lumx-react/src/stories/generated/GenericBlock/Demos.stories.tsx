@@ -3,4 +3,6 @@
  */
 export default { title: 'LumX components/generic-block/GenericBlock Demos' };
 
-export { App as Default } from './default';
+export { App as HorizontalAlignment } from './horizontal-alignment';
+export { App as Sizes } from './sizes';
+export { App as VerticalAlignment } from './vertical-alignment';
