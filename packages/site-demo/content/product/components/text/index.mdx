@@ -1,0 +1,53 @@
+import { Text, Message } from '@lumx/react';
+
+# Text
+
+**Display simple text.**
+By default, text elements have no defined color or typography.
+
+<DemoBlock>
+    <Text as="p">Default text</Text>
+</DemoBlock>
+
+## Color and typography
+
+Both color and typography can be adapted on text elements (see list of [typography](/product/foundations/typography/) and [color](/product/foundations/color/) styles).
+
+<DemoBlock gap="tiny">
+    <Text as="h2" typography="title2">
+        Title
+    </Text>
+    <Text as="p" typography="body1" color="dark" colorVariant="L2">
+        Some <Text as="span" color="red">colored</Text> text
+    </Text>
+</DemoBlock>
+
+<Message kind="info">
+    Here "Title" is using <code>Text</code> for demo purpose but heading elements should generally use the <a href="/product/components/heading">Heading</a> component.
+</Message>
+
+## Truncate text
+
+Use `truncate` to cut text overflow with ellipsis. It can also truncate after multiple lines.
+
+
+<DemoBlock orientation="horizontal" vAlign="space-evenly">
+    <Text as="p" typography="body2" truncate style={{ maxWidth: 200 }}>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    </Text>
+    <Text as="p" typography="body2" truncate={{ lines: 3 }} style={{ maxWidth: 200 }}>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tempor urna dui non pretium ex porttitor ac.
+    </Text>
+</DemoBlock>
+
+### Accessibility concerns
+
+Text elements **require** the `as` prop to be filled. Semantic HTML tags should be used as much as possible to ensure screen readers gets the context.
+
+Particularly, on titles, consider using HTML heading tags (`h1`, `h2`, `h3`, etc.). The [Heading](/product/components/heading) component can help you automatically adapt to the current heading level.
+
+When using `truncate`, screen readers will read everything in text elements anyway so **make sure the truncated content is not too long** or cut it beforehand.
+
+### Properties
+
+<PropTable component="Text" />
