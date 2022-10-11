@@ -1,0 +1,39 @@
+import { Heading, Message } from '@lumx/react';
+
+# Heading
+
+**Display simple heading text.** (specialized version of the [Text](/product/components/text/) component).
+By default (no parent heading level defined), heading elements use the first heading level (`h1` tag) and `display1` typography.
+
+<DemoBlock>
+    <Heading>Default heading text</Heading>
+</DemoBlock>
+
+## Heading level & typography
+
+Use `as` to set a custom heading level and `typography` to override the default typography (see list of [typography](/product/foundations/typography/) styles).
+
+<DemoBlock orientation="horizontal" vAlign="space-evenly">
+    <Heading as="h3">Third level heading</Heading>
+    <Heading typography="overline">Custom typography</Heading>
+</DemoBlock>
+
+## Automatic heading level
+
+Use the `HeadingLevelProvider` component to help you automatically adapt heading levels by nesting them.
+
+<DemoBlock demo="automatic-heading-level" />
+
+<Message kind="info">Use <code>level</code> property to override the base level for children headings.</Message>
+
+### Accessibility concerns
+
+Heading elements use standard HTML heading elements. Make sure to properly nest heading level in pages (`HeadingLevelProvider` can help with that).
+
+### Heading Properties
+
+<PropTable component="Heading" />
+
+### HeadingLevelProvider Properties
+
+<PropTable component="HeadingLevelProvider" />

@@ -17,12 +17,19 @@ async function readSourceCode(sourcePath) {
     }
 }
 
+// Remove first level indent on code (if found).
+const removeIndent = (code) => {
+    const indentMatch = code.match(/^\n?(\s+)/);
+    if (!indentMatch) return code;
+    return code.trim().replace(new RegExp(`\n${indentMatch[1]}`, 'g'), '\n')
+}
+
 /** Update <DemoBlock/> props to import source code. */
 async function updateDemoBlock(resourceFolder, addImport, props) {
     if (props.children) {
         // <DemoBlock> with children already have a demo inside them.
         // We copy the demo as string into the `codeString` prop.
-        props.codeString = JSON.stringify(props.children.trim());
+        props.codeString = JSON.stringify(removeIndent(props.children));
         return props;
     }
 
@@ -79,3 +86,15 @@ module.exports = async (filePath, mdxString) => {
         debug(e);
     }
 };
+
+// Test code indent remove
+if (require.main === module) {
+    (async () => {
+        const props = await updateDemoBlock(
+            '.',
+            () => undefined,
+            { children: '    Foo\n    Bar'}
+        );
+        console.debug(props);
+    })();
+}
