@@ -1,4 +1,4 @@
-import { HeadingElement } from '@lumx/react/utils';
+import { HeadingElement } from '@lumx/react/utils/type';
 import React, { ReactNode } from 'react';
 import { MAX_HEADING_LEVEL } from './constants';
 import { HeadingLevelContext } from './context';

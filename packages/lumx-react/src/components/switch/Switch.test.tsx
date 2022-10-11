@@ -7,7 +7,7 @@ import { build, oneOf } from 'test-data-bot';
 import without from 'lodash/without';
 
 import { Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
-import { getBasicClass } from '@lumx/react/utils';
+import { getBasicClass } from '@lumx/react/utils/className';
 
 import { Theme, Alignment } from '@lumx/react';
 import { Switch, SwitchProps } from './Switch';

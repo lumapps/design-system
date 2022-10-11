@@ -4,14 +4,9 @@ import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
 
 import { ListProps, Size } from '@lumx/react';
-import {
-    Comp,
-    GenericProps,
-    getRootClassName,
-    handleBasicClasses,
-    onEnterPressed,
-    onButtonPressed,
-} from '@lumx/react/utils';
+import { Comp, GenericProps } from '@lumx/react/utils/type';
+import { onEnterPressed, onButtonPressed } from '@lumx/react/utils/event';
+import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { renderLink } from '@lumx/react/utils/renderLink';
 
 export type ListItemSize = Extract<Size, 'tiny' | 'regular' | 'big' | 'huge'>;

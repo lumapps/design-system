@@ -5,7 +5,7 @@ import 'jest-enzyme';
 
 import { mdiCheck, mdiChevronDown, mdiPlus } from '@lumx/icons';
 import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
-import { getBasicClass } from '@lumx/react/utils';
+import { getBasicClass } from '@lumx/react/utils/className';
 import { Button, ButtonProps } from './Button';
 
 const DEFAULT_PROPS = Button.defaultProps as any;

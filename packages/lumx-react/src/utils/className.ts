@@ -5,6 +5,8 @@ import kebabCase from 'lodash/kebabCase';
 // See https://regex101.com/r/YjS1uI/3
 const LAST_PART_CLASSNAME = /^(.*)-(.+)$/gi;
 
+export { getBasicClass, handleBasicClasses } from '@lumx/core/js/utils';
+
 /**
  * Get the name of the root CSS class of a component based on its name.
  *

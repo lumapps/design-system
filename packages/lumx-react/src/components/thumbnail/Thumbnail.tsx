@@ -13,7 +13,8 @@ import classNames from 'classnames';
 
 import { AspectRatio, HorizontalAlignment, Icon, Size, Theme } from '@lumx/react';
 
-import { Comp, Falsy, GenericProps, getRootClassName, handleBasicClasses, HasTheme } from '@lumx/react/utils';
+import { Comp, Falsy, GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 
 import { mdiImageBroken } from '@lumx/icons';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';

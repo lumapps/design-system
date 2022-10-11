@@ -1,7 +1,5 @@
-export * from '@lumx/core/js/utils';
+/**
+ * WARNING: All modules exported here are exposed to NPM in @lumx/react/utils.
+ */
 
-export * from './getRootClassName';
-
-export * from './partitionMulti';
-
-export * from './type';
+export * from './ClickAwayProvider';

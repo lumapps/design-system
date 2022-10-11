@@ -1,7 +1,7 @@
 import { Tab, Alignment } from '@lumx/react';
 
 import { Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
-import { getBasicClass } from '@lumx/react/utils';
+import { getBasicClass } from '@lumx/react/utils/className';
 
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';

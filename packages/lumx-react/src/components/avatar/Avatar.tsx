@@ -4,7 +4,8 @@ import classNames from 'classnames';
 
 import { AspectRatio, Size, Theme, Thumbnail, ThumbnailProps } from '@lumx/react';
 
-import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme } from '@lumx/react/utils';
+import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 
 /**
  * Avatar sizes.

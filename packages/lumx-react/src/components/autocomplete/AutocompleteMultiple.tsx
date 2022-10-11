@@ -1,7 +1,8 @@
 import { mdiClose } from '@lumx/icons';
 import { Autocomplete, AutocompleteProps, Chip, HorizontalAlignment, Icon, Size } from '@lumx/react';
 
-import { Comp, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp } from '@lumx/react/utils/type';
+import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 
 import classNames from 'classnames';
 import React, { forwardRef, ReactNode } from 'react';

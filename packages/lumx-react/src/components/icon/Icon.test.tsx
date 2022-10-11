@@ -7,7 +7,7 @@ import { build, fake, oneOf } from 'test-data-bot';
 import { mdiCheck, mdiPlus } from '@lumx/icons';
 import { ColorPalette, ColorVariant, Size } from '@lumx/react';
 import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
-import { getBasicClass } from '@lumx/react/utils';
+import { getBasicClass } from '@lumx/react/utils/className';
 
 import { Icon, IconProps } from './Icon';
 

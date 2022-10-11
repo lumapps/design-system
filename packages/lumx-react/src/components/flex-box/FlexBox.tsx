@@ -1,5 +1,6 @@
 import { Alignment, Orientation } from '@lumx/react';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps } from '@lumx/react/utils/type';
+import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import classNames from 'classnames';
 import castArray from 'lodash/castArray';
 import React, { forwardRef, ReactNode } from 'react';

@@ -5,7 +5,7 @@ import 'jest-enzyme';
 import without from 'lodash/without';
 
 import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
-import { getBasicClass } from '@lumx/react/utils';
+import { getBasicClass } from '@lumx/react/utils/className';
 
 import { mdiAccount } from '@lumx/icons';
 

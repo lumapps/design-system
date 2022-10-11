@@ -9,16 +9,9 @@ import isEmpty from 'lodash/isEmpty';
 import isFunction from 'lodash/isFunction';
 
 import { ColorPalette, DragHandle, Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
-import {
-    Callback,
-    Comp,
-    GenericProps,
-    getRootClassName,
-    handleBasicClasses,
-    HasTheme,
-    isComponent,
-    partitionMulti,
-} from '@lumx/react/utils';
+import { Callback, Comp, GenericProps, HasTheme, isComponent } from '@lumx/react/utils/type';
+import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { partitionMulti } from '@lumx/react/utils/partitionMulti';
 
 /**
  * Defines the props of the component.

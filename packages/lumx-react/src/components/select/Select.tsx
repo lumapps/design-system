@@ -11,7 +11,8 @@ import { Chip } from '@lumx/react/components/chip/Chip';
 import { Icon } from '@lumx/react/components/icon/Icon';
 import { InputLabel } from '@lumx/react/components/input-label/InputLabel';
 
-import { Comp, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp } from '@lumx/react/utils/type';
+import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 
 import { WithSelectContext } from './WithSelectContext';
 import { CoreSelectProps, SelectVariant } from './constants';

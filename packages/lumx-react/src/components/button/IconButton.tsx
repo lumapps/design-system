@@ -2,7 +2,8 @@ import React, { forwardRef } from 'react';
 
 import { Emphasis, Icon, Size, Theme, Tooltip, TooltipProps } from '@lumx/react';
 import { BaseButtonProps, ButtonRoot } from '@lumx/react/components/button/ButtonRoot';
-import { Comp, getRootClassName } from '@lumx/react/utils';
+import { Comp } from '@lumx/react/utils/type';
+import { getRootClassName } from '@lumx/react/utils/className';
 
 export interface IconButtonProps extends BaseButtonProps {
     /**

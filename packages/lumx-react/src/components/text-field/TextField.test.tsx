@@ -5,7 +5,7 @@ import 'jest-enzyme';
 import { build } from 'test-data-bot';
 
 import { Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
-import { getBasicClass } from '@lumx/react/utils';
+import { getBasicClass } from '@lumx/react/utils/className';
 
 import { Kind } from '@lumx/react';
 import { TextField, TextFieldProps } from './TextField';

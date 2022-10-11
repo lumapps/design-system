@@ -1,6 +1,6 @@
 import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 import { Kind } from '@lumx/react';
-import { getBasicClass } from '@lumx/react/utils';
+import { getBasicClass } from '@lumx/react/utils/className';
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 import React, { ReactElement } from 'react';

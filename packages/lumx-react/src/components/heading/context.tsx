@@ -1,4 +1,4 @@
-import { HeadingElement } from '@lumx/react/utils';
+import { HeadingElement } from '@lumx/react/utils/type';
 import { createContext } from 'react';
 
 interface HeadingLevelContext {

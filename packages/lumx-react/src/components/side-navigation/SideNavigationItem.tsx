@@ -7,15 +7,9 @@ import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
 
 import { Emphasis, Icon, Size, IconButton, IconButtonProps } from '@lumx/react';
 
-import {
-    Callback,
-    Comp,
-    GenericProps,
-    getRootClassName,
-    handleBasicClasses,
-    isComponent,
-    onEnterPressed,
-} from '@lumx/react/utils';
+import { Callback, Comp, GenericProps, isComponent } from '@lumx/react/utils/type';
+import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { onEnterPressed } from '@lumx/react/utils/event';
 import { renderLink } from '@lumx/react/utils/renderLink';
 
 /**

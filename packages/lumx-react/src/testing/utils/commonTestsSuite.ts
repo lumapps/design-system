@@ -4,7 +4,7 @@ import 'jest-enzyme';
 import isArray from 'lodash/isArray';
 import isEmpty from 'lodash/isEmpty';
 
-import { GenericProps } from '@lumx/react/utils';
+import { GenericProps } from '@lumx/react/utils/type';
 
 export type Wrapper = ShallowWrapper | ReactWrapper;
 

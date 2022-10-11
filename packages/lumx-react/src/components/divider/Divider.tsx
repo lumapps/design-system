@@ -3,7 +3,8 @@ import React, { forwardRef } from 'react';
 import classNames from 'classnames';
 
 import { Theme } from '@lumx/react';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme } from '@lumx/react/utils';
+import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 
 /**
  * Defines the props of the component.

@@ -8,7 +8,7 @@ import { Chip } from '@lumx/react/components/chip/Chip';
 import { Icon } from '@lumx/react/components/icon/Icon';
 
 import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
-import { getBasicClass } from '@lumx/react/utils';
+import { getBasicClass } from '@lumx/react/utils/className';
 
 import { mdiCloseCircle, mdiMenuDown } from '@lumx/icons';
 import { Dropdown } from '@lumx/react/components/dropdown/Dropdown';

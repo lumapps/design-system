@@ -4,7 +4,8 @@ import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
 
 import { Emphasis, Icon, Size, Theme } from '@lumx/react';
-import { Comp, getBasicClass, getRootClassName } from '@lumx/react/utils';
+import { Comp } from '@lumx/react/utils/type';
+import { getBasicClass, getRootClassName } from '@lumx/react/utils/className';
 import { BaseButtonProps, ButtonRoot } from './ButtonRoot';
 
 /**

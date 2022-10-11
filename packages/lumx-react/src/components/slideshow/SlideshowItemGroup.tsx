@@ -3,7 +3,8 @@ import React, { forwardRef } from 'react';
 import classNames from 'classnames';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps } from '@lumx/react/utils/type';
+import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { useSlideFocusManagement } from './useSlideFocusManagement';
 
 /**

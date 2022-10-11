@@ -4,7 +4,8 @@ import classNames from 'classnames';
 
 import { Icon, InputHelper, InputLabel, Kind, Size } from '@lumx/react';
 
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps } from '@lumx/react/utils/type';
+import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiRadioboxBlank, mdiRadioboxMarked } from '@lumx/icons';
 import { useTabProviderContext } from '../tabs/state';
