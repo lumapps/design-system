@@ -1,0 +1,24 @@
+import { Message } from '@lumx/react';
+
+# Miscellaneous utilities
+
+The `@lumx/react/utils` module contains utilities like React hooks, functions and component that provide re-usable logic.
+
+## ClickAwayProvider
+
+A React context provider that build a tree (both DOM and React) of elements that are considered "within" the context even if children are rendered as in a React portal. User clicks outside this context will trigger to provided `callback`.
+
+```tsx
+<ClickAwayProvider callback={close} childrenRefs={useRef([cardRef])}>
+    <article ref={cardRef}>
+        <p>Click outside this card to close it.</p>
+        <Dropdown>...</Dropdown>
+    </article>
+</ClickAwayProvider>
+```
+
+<Message kind="info">
+    In this example, clicking outside the card (referenced by <code>cardRef</code>) will trigger the <code>close</code> callback. Clicks in children DOM nodes of the card or children of nested "click away" contexts (here the dropdown) are all considered as "in" the the context and won't trigger the callback.
+</Message>
+
+This is used to provide correct "click away" behavior on nested `Dialog` or `Dropdown` even though they are not nested in the DOM tree.

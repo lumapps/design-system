@@ -1,5 +1,5 @@
-@import '~@lumx/core/src/scss/design-tokens';
-@import '~@lumx/core/src/scss/core';
+@import "~@lumx/core/src/scss/design-tokens";
+@import "~@lumx/core/src/scss/core";
 
 /* ==========================================================================
    Demo block
@@ -7,12 +7,13 @@
 
 .demo-block {
     $self: &;
+
     border: 1px solid $lumx-color-dark-L4;
     border-radius: var(--lumx-border-radius);
 
     &__content {
-        overflow: auto;
         padding: $lumx-spacing-unit * 3;
+        overflow: auto;
 
         #{$self}--has-play-button & {
             display: flex;
@@ -37,7 +38,9 @@
     }
 
     &__code {
+        border: none;
         border-top: 1px solid $lumx-color-dark-L4;
+        border-radius: 0;
     }
 
     &__filename {

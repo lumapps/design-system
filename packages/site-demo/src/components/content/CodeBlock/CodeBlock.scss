@@ -1,5 +1,5 @@
-@import '~@lumx/core/src/scss/design-tokens';
-@import '~@lumx/core/src/scss/core';
+@import "~@lumx/core/src/scss/design-tokens";
+@import "~@lumx/core/src/scss/core";
 
 /* ==========================================================================
    Code block
@@ -8,8 +8,10 @@
 .code-block {
     display: block;
     padding: $lumx-spacing-unit * 2;
-    background-color: transparent;
-    color: #333;
-    font-size: 14px;
     overflow-x: auto;
+    font-size: 14px;
+    color: #333;
+    background-color: transparent;
+    border: 1px solid $lumx-color-dark-L4;
+    border-radius: var(--lumx-border-radius);
 }
