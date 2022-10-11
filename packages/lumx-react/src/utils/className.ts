@@ -1,6 +1,7 @@
 import { CSS_PREFIX } from '@lumx/react/constants';
 
 import kebabCase from 'lodash/kebabCase';
+import { ColorPalette, ColorVariant, Typography } from '@lumx/react/components';
 
 // See https://regex101.com/r/YjS1uI/3
 const LAST_PART_CLASSNAME = /^(.*)-(.+)$/gi;
@@ -25,3 +26,19 @@ export function getRootClassName(componentName: string, subComponent?: boolean):
     }
     return formattedClassName;
 }
+
+/**
+ * Returns the classname associated to the given color and variant.
+ * For example, for 'dark' and 'L2' it returns `lumx-color-font-dark-l2`
+ */
+export const getFontColorClassName = (color: ColorPalette, colorVariant: ColorVariant = ColorVariant.N) => {
+    return `lumx-color-font-${color}-${colorVariant}`;
+};
+
+/**
+ * Returns the classname associated to the given typography.
+ * For example, for `Typography.title` it returns `lumx-typography-title`
+ */
+export const getTypographyClassName = (typography: Typography) => {
+    return `lumx-typography-${typography}`;
+};

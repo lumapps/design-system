@@ -1,11 +1,14 @@
 import React, { Children, Fragment, forwardRef } from 'react';
 
-import { Icon, Color, ColorVariant, Typography } from '@lumx/react';
-import { Comp, GenericProps, HeadingElement, isComponent } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { Icon, ColorPalette, ColorVariant, Typography } from '@lumx/react';
+import { Comp, GenericProps, TextElement, isComponent } from '@lumx/react/utils/type';
+import {
+    getFontColorClassName,
+    getRootClassName,
+    handleBasicClasses,
+    getTypographyClassName,
+} from '@lumx/react/utils/className';
 import classNames from 'classnames';
-
-type TextComponents = 'span' | 'p' | HeadingElement;
 
 /**
  * Defines the props of the component.
@@ -14,7 +17,7 @@ export interface TextProps extends GenericProps {
     /**
      * Color variant.
      */
-    color?: Color;
+    color?: ColorPalette;
     /**
      * Lightened or darkened variant of the selected color.
      */
@@ -26,7 +29,7 @@ export interface TextProps extends GenericProps {
     /**
      * Custom component to render the text.
      */
-    as: TextComponents;
+    as: TextElement;
     /**
      * Control whether the text should truncate or not.
      * Setting as `true` will make the text truncate on a single line.
@@ -64,7 +67,7 @@ const DEFAULT_PROPS = {} as const;
  */
 export const Text: Comp<TextProps> = forwardRef((props, ref) => {
     const {
-        as,
+        as: Component,
         children,
         className,
         color,
@@ -76,9 +79,8 @@ export const Text: Comp<TextProps> = forwardRef((props, ref) => {
         ...forwardedProps
     } = props;
 
-    const Component = as as TextComponents;
-    const colorClass = color && `lumx-color-font-${color}-${colorVariant || ColorVariant.N}`;
-    const typographyClass = typography && `lumx-typography-${typography}`;
+    const colorClass = color && getFontColorClassName(color, colorVariant);
+    const typographyClass = typography && getTypographyClassName(typography);
 
     // Truncate mode
     const truncateLinesStyle = typeof truncate === 'object' &&

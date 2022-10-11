@@ -35,6 +35,9 @@ export type Comp<P, T = HTMLElement> = {
 /** Union type of all heading elements */
 export type HeadingElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
+/** Union type of all text elements */
+export type TextElement = 'span' | 'p' | HeadingElement;
+
 export interface HasTheme {
     /**
      * Theme adapting the component to light or dark background.
