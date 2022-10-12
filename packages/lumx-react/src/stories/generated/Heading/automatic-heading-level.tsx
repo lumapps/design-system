@@ -1,0 +1,1 @@
+../../../../../site-demo/content/product/components/heading/react/automatic-heading-level.tsx
