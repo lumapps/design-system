@@ -1,7 +1,7 @@
-import React, { forwardRef } from 'react';
+import React, { Children, Fragment, forwardRef } from 'react';
 
-import { Color, ColorVariant, Typography } from '@lumx/react';
-import { Comp, GenericProps, HeadingElement } from '@lumx/react/utils/type';
+import { Icon, Color, ColorVariant, Typography } from '@lumx/react';
+import { Comp, GenericProps, HeadingElement, isComponent } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import classNames from 'classnames';
 
@@ -33,6 +33,11 @@ export interface TextProps extends GenericProps {
      * Setting as `{ lines: number }` will make the text truncate on a multiple lines.
      */
     truncate?: boolean | { lines: number };
+    /**
+     * Prevents text to wrap on multiple lines
+     * (automatically activated when single line text truncate is activated).
+     */
+    noWrap?: boolean;
 }
 
 /**
@@ -58,7 +63,18 @@ const DEFAULT_PROPS = {} as const;
  * @return React element.
  */
 export const Text: Comp<TextProps> = forwardRef((props, ref) => {
-    const { as, children, className, color, colorVariant, typography, truncate, style, ...forwardedProps } = props;
+    const {
+        as,
+        children,
+        className,
+        color,
+        colorVariant,
+        noWrap,
+        typography,
+        truncate,
+        style,
+        ...forwardedProps
+    } = props;
 
     const Component = as as TextComponents;
     const colorClass = color && `lumx-color-font-${color}-${colorVariant || ColorVariant.N}`;
@@ -82,11 +98,18 @@ export const Text: Comp<TextProps> = forwardRef((props, ref) => {
                 }),
                 typographyClass,
                 colorClass,
+                noWrap && `${CLASSNAME}--no-wrap`,
             )}
             style={{ ...truncateLinesStyle, ...style }}
             {...forwardedProps}
         >
-            {children}
+            {Children.toArray(children).map((child, index) => {
+                // Force wrap spaces around icons to make sure they are never stuck against text.
+                if (isComponent(Icon)(child)) {
+                    return <Fragment key={child.key || index}> {child} </Fragment>;
+                }
+                return child;
+            })}
         </Component>
     );
 });
