@@ -10,7 +10,7 @@ import { Dropdown } from '@lumx/react/components/dropdown/Dropdown';
 import { Icon } from '@lumx/react/components/icon/Icon';
 
 import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
-import { getBasicClass } from '@lumx/react/utils';
+import { getBasicClass } from '@lumx/react/utils/className';
 import { SelectMultiple, SelectMultipleProps } from './SelectMultiple';
 import { DEFAULT_PROPS } from './WithSelectContext';
 import { SelectVariant } from './constants';

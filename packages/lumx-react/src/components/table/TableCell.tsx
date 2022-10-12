@@ -3,7 +3,9 @@ import React, { forwardRef, useCallback } from 'react';
 import classNames from 'classnames';
 
 import { Icon, Size } from '@lumx/react';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses, onEnterPressed, ValueOf } from '@lumx/react/utils';
+import { Comp, GenericProps, ValueOf } from '@lumx/react/utils/type';
+import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { onEnterPressed } from '@lumx/react/utils/event';
 
 import { mdiArrowDown, mdiArrowUp } from '@lumx/icons';
 

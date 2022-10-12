@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { DatePickerProps, Emphasis, IconButton, Toolbar } from '@lumx/react';
 import { mdiChevronLeft, mdiChevronRight } from '@lumx/icons';
 import { getAnnotatedMonthCalendar, getWeekDays } from '@lumx/core/js/date-picker';
-import { Comp } from '@lumx/react/utils';
+import { Comp } from '@lumx/react/utils/type';
 import { CLASSNAME } from './constants';
 
 /**

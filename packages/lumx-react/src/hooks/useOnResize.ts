@@ -1,4 +1,4 @@
-import { Callback, Falsy } from '@lumx/react/utils';
+import { Callback, Falsy } from '@lumx/react/utils/type';
 import { MutableRefObject, RefObject, useEffect, useRef } from 'react';
 import { WINDOW } from '@lumx/react/constants';
 import { ResizeObserver as Polyfill } from '@juggle/resize-observer';

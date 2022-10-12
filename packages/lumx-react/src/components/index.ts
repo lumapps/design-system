@@ -1,4 +1,4 @@
-import { ValueOf } from '@lumx/react/utils';
+import { ValueOf } from '@lumx/react/utils/type';
 
 /**
  * Alignments.

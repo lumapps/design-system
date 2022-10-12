@@ -1,6 +1,7 @@
 import { useTabProviderContext } from '@lumx/react/components/tabs/state';
 import { CSS_PREFIX } from '@lumx/react/constants';
-import { Comp, GenericProps, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps } from '@lumx/react/utils/type';
+import { handleBasicClasses } from '@lumx/react/utils/className';
 
 import classNames from 'classnames';
 import React, { forwardRef } from 'react';

@@ -6,7 +6,8 @@ import { createPortal } from 'react-dom';
 import { mdiClose } from '@lumx/icons';
 import { ColorPalette, Emphasis, IconButton, IconButtonProps } from '@lumx/react';
 import { DOCUMENT } from '@lumx/react/constants';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme } from '@lumx/react/utils';
+import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';

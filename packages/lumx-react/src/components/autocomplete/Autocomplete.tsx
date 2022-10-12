@@ -4,8 +4,8 @@ import classNames from 'classnames';
 
 import { Dropdown, IconButtonProps, Offset, Placement, TextField, TextFieldProps } from '@lumx/react';
 
-import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme } from '@lumx/react/utils';
-
+import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 

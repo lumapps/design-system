@@ -1,7 +1,7 @@
 import { ListItemProps } from '@lumx/react';
 import { isClickable } from '@lumx/react/components/list/ListItem';
 
-import { isComponent } from '@lumx/react/utils';
+import { isComponent } from '@lumx/react/utils/type';
 import { flattenChildren } from '@lumx/react/utils/flattenChildren';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 import get from 'lodash/get';

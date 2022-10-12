@@ -17,7 +17,8 @@ import {
 
 import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiInformation } from '@lumx/icons/';
 import { uid } from 'uid';
-import { Comp, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp } from '@lumx/react/utils/type';
+import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 
 export interface AlertDialogProps extends Omit<DialogProps, 'header' | 'footer'> {
     /** Message variant. */

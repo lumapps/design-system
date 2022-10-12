@@ -1,7 +1,8 @@
 import React, { forwardRef, MouseEventHandler, useMemo } from 'react';
 
 import { Alignment, AspectRatio, Theme, Thumbnail, ThumbnailProps } from '@lumx/react';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme } from '@lumx/react/utils';
+import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import classNames from 'classnames';
 import take from 'lodash/take';
 

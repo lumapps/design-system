@@ -1,5 +1,5 @@
 import partition from 'lodash/partition';
-import { partitionMulti } from '.';
+import { partitionMulti } from './partitionMulti';
 import { isInternetExplorer } from './isInternetExplorer';
 
 describe(`partitionMulti`, () => {

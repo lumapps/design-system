@@ -4,7 +4,7 @@ import React, { ReactElement } from 'react';
 
 import { ColorPalette, Theme } from '@lumx/react';
 import { Wrapper } from '@lumx/react/testing/utils';
-import { getBasicClass } from '@lumx/react/utils';
+import { getBasicClass } from '@lumx/react/utils/className';
 import { Chip, ChipProps } from './Chip';
 
 const CLASSNAME = Chip.className as string;

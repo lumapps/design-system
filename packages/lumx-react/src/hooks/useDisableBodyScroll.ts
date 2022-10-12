@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
-import { Falsy } from '@lumx/react/utils';
+import { Falsy } from '@lumx/react/utils/type';
 
 /**
  * Disables the scroll on the body to make it only usable in the current modal element.

@@ -6,7 +6,8 @@ import classNames from 'classnames';
 
 import { Color, ColorPalette, Emphasis, Size, Theme } from '@lumx/react';
 import { CSS_PREFIX } from '@lumx/react/constants';
-import { Comp, GenericProps, handleBasicClasses, HasTheme } from '@lumx/react/utils';
+import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { handleBasicClasses } from '@lumx/react/utils/className';
 import { renderLink } from '@lumx/react/utils/renderLink';
 
 type HTMLButtonProps = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;

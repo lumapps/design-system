@@ -9,14 +9,10 @@ import { DIALOG_TRANSITION_DURATION, DOCUMENT } from '@lumx/react/constants';
 import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { useIntersectionObserver } from '@lumx/react/hooks/useIntersectionObserver';
-import {
-    Comp,
-    GenericProps,
-    getRootClassName,
-    handleBasicClasses,
-    isComponent,
-    partitionMulti,
-} from '@lumx/react/utils';
+
+import { Comp, GenericProps, isComponent } from '@lumx/react/utils/type';
+import { partitionMulti } from '@lumx/react/utils/partitionMulti';
+import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 

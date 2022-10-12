@@ -1,13 +1,13 @@
 import path from 'path';
-import glob from 'glob';
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import analyze from 'rollup-plugin-analyzer';
 import babel from 'rollup-plugin-babel';
+import cleaner from 'rollup-plugin-cleaner';
 import copy from 'rollup-plugin-copy';
+import dts from 'rollup-plugin-dts';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import tsPathsResolve from 'rollup-plugin-ts-paths-resolve';
-import cleaner from 'rollup-plugin-cleaner';
 
 import pkg from './package.json';
 const CONFIGS = require('../../configs');
@@ -16,38 +16,25 @@ const ROOT_PATH = path.resolve(__dirname, '..', '..');
 const DIST_PATH = path.resolve(__dirname, pkg.publishConfig.directory);
 export const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 
-
 /**
- * Compile index & compile separately every elements exported by it.
+ * List of entry modules that will get compiled and exported to NPM.
+ * All other modules are considered as internal and won't be exposed.
  */
 const input = Object.fromEntries([
-    ['index', 'src/index.ts'],
-    ['components', 'src/components/index.ts'],
-    ...glob.sync('src/components/*/index.ts').map((componentPath) => {
-        const [, componentName] = componentPath.match(/.*components\/(.*?)\/.*/) || [];
-        return [componentName, componentPath];
-    })
+    ['index', 'src/index.ts'],             // => @lumx/react
+    ['utils/index', 'src/utils/index.ts'], // => @lumx/react/utils
 ]);
 
-/**
- * Export non index chunks in `esm/_internal` (enables tree shaking but detracts user from importing them directly).
- */
-const renameFile = (info) => {
-    let name = info.name;
-    if (name !== 'index') {
-        name = `_internal/${name}`;
-    }
-    return `${name}.js`;
-}
-
-export default {
+// Bundle JS code
+const bundleJS = {
     input,
     output: {
         format: 'esm',
         sourcemap: true,
-        dir: path.join(DIST_PATH, 'esm'),
-        chunkFileNames: renameFile,
-        entryFileNames: renameFile
+        hoistTransitiveImports: false,
+        dir: DIST_PATH,
+        // Unnamed chunk moved to `_internal` folder
+        chunkFileNames: '_internal/[name].js',
     },
     plugins: [
         /** Clean dist dir */
@@ -70,7 +57,7 @@ export default {
             presets: [
                 ['@babel/preset-env', { targets: 'defaults' }],
                 '@babel/preset-react',
-                '@babel/preset-typescript'
+                '@babel/preset-typescript',
             ],
         }),
         /** Copy additional files to dist. */
@@ -88,3 +75,24 @@ export default {
         }),
     ],
 };
+
+// Bundle TS types in D.TS files
+const bundleType = {
+    input,
+    output: {
+        format: 'esm',
+        dir: DIST_PATH,
+        // Unnamed chunk moved to `_internal` folder
+        chunkFileNames: '_internal/[name].d.ts',
+    },
+    plugins: [
+        /** Externalize peer dependencies. */
+        peerDepsExternal(),
+        /** Resolve tsconfig paths. */
+        tsPathsResolve(),
+        /** Transform TS to D.TS file. */
+        dts({ respectExternal: true }),
+    ],
+};
+
+export default [bundleJS, bundleType];

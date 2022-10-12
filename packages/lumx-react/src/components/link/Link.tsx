@@ -5,7 +5,8 @@ import isEmpty from 'lodash/isEmpty';
 import classNames from 'classnames';
 
 import { Color, ColorVariant, Icon, Size, Typography } from '@lumx/react';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Comp, GenericProps } from '@lumx/react/utils/type';
+import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { renderLink } from '@lumx/react/utils/renderLink';
 
 type HTMLAnchorProps = React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;

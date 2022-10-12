@@ -5,7 +5,8 @@ import classNames from 'classnames';
 import { List, ListProps } from '@lumx/react/components/list/List';
 import { Offset, Placement, Popover, PopoverProps } from '@lumx/react/components/popover/Popover';
 import { useInfiniteScroll } from '@lumx/react/hooks/useInfiniteScroll';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses, isComponent } from '@lumx/react/utils';
+import { Comp, GenericProps, isComponent } from '@lumx/react/utils/type';
+import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 
 /**
  * Defines the props of the component.

@@ -1,6 +1,6 @@
 import { RefObject, useEffect } from 'react';
 
-import { Falsy } from '@lumx/react/utils';
+import { Falsy } from '@lumx/react/utils/type';
 
 import isEmpty from 'lodash/isEmpty';
 

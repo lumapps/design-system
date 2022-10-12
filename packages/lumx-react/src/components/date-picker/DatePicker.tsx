@@ -1,6 +1,6 @@
 import moment from 'moment';
 import React, { forwardRef, useState } from 'react';
-import { Comp } from '@lumx/react/utils';
+import { Comp } from '@lumx/react/utils/type';
 import { CLASSNAME, COMPONENT_NAME } from './constants';
 import { DatePickerControlled } from './DatePickerControlled';
 import { DatePickerProps } from './types';

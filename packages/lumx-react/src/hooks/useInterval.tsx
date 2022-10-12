@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 
 import isFunction from 'lodash/isFunction';
-import { Callback } from '../utils';
+import { Callback } from '@lumx/react/utils/type';
 
 /**
  * Making setInterval Declarative with React Hooks.

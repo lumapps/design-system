@@ -12,7 +12,7 @@ import {
     ButtonRoot,
     ButtonRootProps,
 } from '@lumx/react/components/button/ButtonRoot';
-import { getBasicClass } from '@lumx/react/utils';
+import { getBasicClass } from '@lumx/react/utils/className';
 
 type SetupProps = Partial<ButtonRootProps>;
 

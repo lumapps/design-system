@@ -6,7 +6,7 @@ import moment from 'moment';
 import React, { forwardRef, SyntheticEvent, useCallback, useRef, useState } from 'react';
 
 import { useFocus } from '@lumx/react/hooks/useFocus';
-import { Comp, GenericProps } from '@lumx/react/utils';
+import { Comp, GenericProps } from '@lumx/react/utils/type';
 
 /**
  * Defines the props of the component.

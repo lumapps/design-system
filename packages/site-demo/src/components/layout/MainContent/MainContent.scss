@@ -1,6 +1,6 @@
-@import '~@lumx/core/src/scss/design-tokens';
-@import '~@lumx/core/src/scss/core';
-@import '~@lumx/core/src/scss/components/link/mixins';
+@import "~@lumx/core/src/scss/design-tokens";
+@import "~@lumx/core/src/scss/core";
+@import "~@lumx/core/src/scss/components/link/mixins";
 
 /* Main content
    ========================================================================== */
@@ -8,9 +8,9 @@
 .main-content {
     &__loading {
         display: flex;
-        width: 100%;
         flex-direction: column;
         align-items: center;
+        width: 100%;
     }
 
     &__wrapper {
@@ -40,17 +40,17 @@
         }
 
         & p a {
-            @include lumx-link('primary');
+            @include lumx-link("primary");
         }
 
         /* stylelint-disable-next-line selector-type-no-unknown */
         code {
             padding: 0 $lumx-spacing-unit-tiny;
-            background-color: $lumx-color-dark-L5;
-            color: $lumx-color-dark-N;
             font-family: monospace;
             font-size: 14px;
             font-weight: 700;
+            color: $lumx-color-dark-N;
+            background-color: $lumx-color-dark-L5;
         }
 
         & > ul {
@@ -70,16 +70,18 @@
         & > p,
         & > ul,
         & > div,
+        & > pre,
         & > img,
         & > table {
             margin-bottom: $lumx-spacing-unit * 2;
+
             &:last-child {
                 margin-bottom: 0;
             }
         }
 
         & > table tr,
-        & > div > table tr{
+        & > div > table tr {
             border: solid 1px $lumx-color-dark-L5;
 
             & th,

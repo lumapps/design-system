@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 
 import { SlideshowControls, SlideshowControlsProps, Theme, Slides, SlidesProps } from '@lumx/react';
 import { DEFAULT_OPTIONS } from '@lumx/react/hooks/useSlideshowControls';
-import { Comp, GenericProps } from '@lumx/react/utils';
+import { Comp, GenericProps } from '@lumx/react/utils/type';
 import { useFocusWithin } from '@lumx/react/hooks/useFocusWithin';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 import { buildSlideShowGroupId } from './SlideshowItemGroup';

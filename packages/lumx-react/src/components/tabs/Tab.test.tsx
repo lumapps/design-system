@@ -1,6 +1,6 @@
 import { mdiCheck } from '@lumx/icons';
 import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
-import { getBasicClass } from '@lumx/react/utils';
+import { getBasicClass } from '@lumx/react/utils/className';
 
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';

@@ -3,7 +3,8 @@ import React, { forwardRef, MouseEventHandler } from 'react';
 import classNames from 'classnames';
 
 import { AspectRatio, Icon, Size, Theme } from '@lumx/react';
-import { Comp, GenericProps, getRootClassName, handleBasicClasses, HasTheme, ValueOf } from '@lumx/react/utils';
+import { Comp, GenericProps, HasTheme, ValueOf } from '@lumx/react/utils/type';
+import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 
 /**
  * Uploader variants.

@@ -16,7 +16,7 @@ const mdxComponents = {
         const { children } = props;
         const codeProps = children?.props?.mdxType === 'code' && children?.props;
         if (codeProps) {
-            return <CodeBlock {...codeProps} />;
+            return <CodeBlock {...codeProps}>{codeProps.children?.trim()}</CodeBlock>;
         }
         return <pre {...props} />;
     },

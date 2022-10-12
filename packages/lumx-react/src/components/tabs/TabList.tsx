@@ -1,6 +1,7 @@
 import { Alignment, Theme } from '@lumx/react';
 import { CSS_PREFIX } from '@lumx/react/constants';
-import { Comp, GenericProps, handleBasicClasses, HasTheme } from '@lumx/react/utils';
+import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { handleBasicClasses } from '@lumx/react/utils/className';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
 import classNames from 'classnames';

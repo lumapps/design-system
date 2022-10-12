@@ -1,4 +1,4 @@
-import { onEscapePressed } from '@lumx/react/utils';
+import { onEscapePressed } from '@lumx/react/utils/event';
 import { useEffect, useState } from 'react';
 import { browserDoesNotSupportHover } from '@lumx/react/utils/browserDoesNotSupportHover';
 import { TOOLTIP_HOVER_DELAY, TOOLTIP_LONG_PRESS_DELAY } from '@lumx/react/constants';

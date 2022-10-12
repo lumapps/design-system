@@ -5,7 +5,7 @@ import React, { ReactElement } from 'react';
 import { ColorPalette, Theme } from '@lumx/react';
 import { mdiAbTesting } from '@lumx/icons';
 import { itShouldRenderStories, commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
-import { getBasicClass } from '@lumx/react/utils';
+import { getBasicClass } from '@lumx/react/utils/className';
 
 import { Flag, FlagProps } from './Flag';
 import * as stories from './Flag.stories';
