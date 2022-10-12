@@ -14,7 +14,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             -   name: "Checkout repository"
-                uses: actions/checkout@v2.3.4
+                uses: actions/checkout@v3
 
             -   name: "Setup node env"
                 uses: actions/setup-node@v2.1.4
@@ -39,7 +39,7 @@ jobs:
         name: Github-actions-validator
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
             - uses: lumapps/github-actions-validator@master
 
     commit-message-validation:
@@ -47,7 +47,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             -   name: Checkout
-                uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f #v2.3.4
+                uses: actions/checkout@v3
 
             -   name: Commit message validation
                 uses: lumapps/commit-message-validator@master
@@ -62,7 +62,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: "Checkout repository"
-              uses: actions/checkout@v2.3.4
+              uses: actions/checkout@v3
             - name: "Setup node env"
               uses: actions/setup-node@v2.1.4
               with:

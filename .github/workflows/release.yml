@@ -19,7 +19,7 @@ jobs:
         GCP_PROD_REGISTRY: gcr.io/lumapps-registry
     steps:
         -   name: Checkout code
-            uses: actions/checkout@v2
+            uses: actions/checkout@v3
         -   name: Login to GCR
             uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
             with:
