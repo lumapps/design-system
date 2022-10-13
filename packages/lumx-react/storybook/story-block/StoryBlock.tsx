@@ -23,8 +23,8 @@ export const StoryBlock: React.FC<StoryBlockProps> = (props) => {
     context.args.theme = theme;
     const toggleTheme = () => setTheme(theme === Theme.light ? Theme.dark : Theme.light);
 
-    // Hard code today date for chromatic.
-    context.args.today = isChromatic() ? new Date('May 25 2021 01:00') : new Date();
+    // Hard code today date for stable chromatic stories snapshots.
+    context.parameters.today = isChromatic() ? new Date('May 25 2021 01:00') : new Date();
 
     if (isChromatic()) return <Story />;
 
