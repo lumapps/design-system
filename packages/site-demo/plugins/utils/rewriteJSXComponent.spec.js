@@ -14,7 +14,7 @@ describe('rewriteJSXComponents', () => {
 
     it('should rewrite components', async () => {
         const jsx = `
-            <Foo>
+            <Foo fizz={buzz} style="foo: 4px" tu={{ to: 42 }}>
             children
             </Foo>
 
@@ -25,7 +25,7 @@ describe('rewriteJSXComponents', () => {
         const transformFunction = jest.fn((e) => ({ bar: 'baz', ...e }));
         expect(await rewriteJSXComponents('Foo', jsx, transformFunction)).toMatchInlineSnapshot(`
             "
-                        <Foo bar={baz}>
+                        <Foo bar={baz} fizz={buzz} style={\\"foo: 4px\\"} tu={{ to: 42 }}>
                         children
                         </Foo>
 

@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   GenericBlock: add `as` prop to customize the root, the figure, the content and actions elements component render.
 -   New `ClickAwayProvider` utility component (exported in the new `@lumx/react/utils` module).
 
+### Changed
+
+-   Text: improve icon alignment inside text.
+-   Text: add `noWrap` prop to disable line wrap.
+
 ## [3.0.2][] - 2022-09-23
 
 ### Added

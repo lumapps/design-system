@@ -1,5 +1,5 @@
 const lodash = require('lodash');
-const PROPS_REGEXP = `(\\w+)(?:=(?:{([^}]+)}|("[^"]+")))?`;
+const PROPS_REGEXP = `(\\w+)(?:=(?:{({[^}]+})}|{([^}]+)}|("[^"]+")))?`;
 let buildJSXComponent = require('./buildJSXComponent');
 
 /**
@@ -14,8 +14,8 @@ module.exports = async (componentName, string, transformFunction) => {
         const [_, propsString, children] = match;
         const props = propsString.trim()
             ? lodash.fromPairs(propsString.match(new RegExp(PROPS_REGEXP, 'g')).map((prop) => {
-                const [_, key, value, stringValue] = prop.match(new RegExp(PROPS_REGEXP));
-                return !value && !stringValue ? [key, 'true'] : [key, value || stringValue];
+                const [_, key, objectValue, value, stringValue] = prop.match(new RegExp(PROPS_REGEXP));
+                return !objectValue && !value && !stringValue ? [key, 'true'] : [key, objectValue || value || stringValue];
             }))
             : {};
         if (children) {

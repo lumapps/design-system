@@ -4,7 +4,9 @@ import { shallow } from 'enzyme';
 import 'jest-enzyme';
 
 import { commonTestsSuite } from '@lumx/react/testing/utils';
-import { Text, TextProps } from './Text';
+import { mdiEarth } from '@lumx/icons';
+import { Icon } from '@lumx/react';
+import { Text, TextProps } from '.';
 
 const setup = (props: Partial<TextProps> = {}) => {
     const wrapper = shallow(<Text as="span" {...props} />);
@@ -54,6 +56,18 @@ describe(`<${Text.displayName}>`, () => {
             expect(wrapper).toHaveDisplayName('span');
             expect(wrapper).toHaveClassName('lumx-text--is-truncated-multiline');
             expect(wrapper).toHaveStyle({ '--lumx-text-truncate-lines': 2 });
+        });
+
+        it('should render noWrap', () => {
+            const { wrapper } = setup({ noWrap: true });
+            expect(wrapper).toHaveDisplayName('span');
+            expect(wrapper).toHaveClassName('lumx-text--no-wrap');
+        });
+
+        it('should wrap icons with spaces', () => {
+            const { wrapper } = setup({ children: ['Some text', <Icon key="icon" icon={mdiEarth} />, 'with icon'] });
+            // Spaces have been inserted around the icon.
+            expect(wrapper).toHaveText('Some text  with icon');
         });
     });
 

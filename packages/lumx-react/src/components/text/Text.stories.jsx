@@ -1,38 +1,37 @@
 import React from 'react';
-import { ColorPalette, ColorVariant, TypographyCustom, TypographyInterface } from '@lumx/react';
+import { ColorPalette, ColorVariant, Icon, TypographyCustom, TypographyInterface } from '@lumx/react';
+import { mdiEarth, mdiHeart } from '@lumx/icons';
+import { withResizableBox } from '@lumx/react/stories/withResizableBox';
 import { Text } from './Text';
 
 export default { title: 'LumX components/text/Text' };
 
 export const Default = () => <Text as="p">Some text</Text>;
 
-const withResizableBox = (Story: any) => (
-    <div
-        style={{
-            width: 150,
-            height: 60,
-            border: '1px solid red',
-            resize: 'both',
-            overflow: 'hidden',
-        }}
-    >
-        <Story />
-    </div>
-);
-
-export const Truncate = () => (
-    <Text as="p" truncate>
-        Some very very very long text
+export const WithIcon = (args) => (
+    <Text as="p" {...args}>
+        Some text <Icon icon={mdiHeart} /> with icons <Icon icon={mdiEarth} />
     </Text>
 );
-Truncate.decorators = [withResizableBox];
 
-export const TruncateMultiline = () => (
-    <Text as="p" truncate={{ lines: 2 }}>
+export const LongText = (args) => (
+    <Text as="p" {...args}>
         Some very very very very very very very very very long text
     </Text>
 );
-TruncateMultiline.decorators = [withResizableBox];
+LongText.decorators = [withResizableBox()];
+
+export const NoWrap = LongText.bind({});
+NoWrap.args = { noWrap: true };
+NoWrap.decorators = [withResizableBox()];
+
+export const Truncate = LongText.bind({});
+Truncate.args = { truncate: true };
+Truncate.decorators = [withResizableBox()];
+
+export const TruncateMultiline = LongText.bind({});
+TruncateMultiline.args = { truncate: { lines: 2 } };
+TruncateMultiline.decorators = [withResizableBox()];
 
 export const AllTypography = () => {
     const typographies = [undefined, ...Object.values(TypographyInterface), ...Object.values(TypographyCustom)];
@@ -42,9 +41,7 @@ export const AllTypography = () => {
                 <tr key={typography}>
                     <td>{typography}</td>
                     <td>
-                        <Text as="p" typography={typography}>
-                            Some text
-                        </Text>
+                        <WithIcon typography={typography} />
                     </td>
                 </tr>
             ))}
@@ -68,9 +65,7 @@ export const AllColor = () => {
                     <td>{color}</td>
                     {colorVariants.map((colorVariant) => (
                         <td key={colorVariant}>
-                            <Text as="p" color={color} colorVariant={colorVariant}>
-                                Some text
-                            </Text>
+                            <WithIcon color={color} colorVariant={colorVariant} />
                         </td>
                     ))}
                 </tr>

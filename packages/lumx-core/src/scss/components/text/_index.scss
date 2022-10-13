@@ -11,10 +11,19 @@
     }
 
     &--is-truncated-multiline {
-        /*autoprefixer: off */
+        /* autoprefixer: off */
         display: -webkit-box;
         overflow: hidden;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: var(--lumx-text-truncate-lines);
+    }
+
+    &--no-wrap {
+        white-space: nowrap;
+    }
+
+    // Fix icon alignment
+    .#{$lumx-base-prefix}-icon, .#{$lumx-base-prefix}-icon > svg {
+        display: inline;
     }
 }
