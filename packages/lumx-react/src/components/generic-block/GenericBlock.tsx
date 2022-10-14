@@ -6,6 +6,7 @@ import { Comp, isComponentType } from '@lumx/react/utils/type';
 import { getRootClassName } from '@lumx/react/utils/className';
 import { partitionMulti } from '@lumx/react/utils/partitionMulti';
 import { Orientation, Size, FlexBox, FlexBoxProps } from '@lumx/react';
+import { GenericBlockGapSize } from '@lumx/react/components/generic-block/constants';
 
 export interface GenericBlockProps extends FlexBoxProps {
     /**
@@ -46,6 +47,10 @@ export interface GenericBlockProps extends FlexBoxProps {
      * props to forward to the figure element.
      */
     figureProps?: Omit<FlexBoxProps, 'children'>;
+    /**
+     * Gap space between sections.
+     */
+    gap?: GenericBlockGapSize;
 }
 
 /**
@@ -68,22 +73,29 @@ const DEFAULT_PROPS: Partial<GenericBlockProps> = {
 
 type BaseGenericBlock = Comp<GenericBlockProps, HTMLDivElement>;
 
+interface GenericBlockSectionProps extends FlexBoxProps {
+    /**
+     * Gap space between items.
+     */
+    gap?: GenericBlockGapSize;
+}
+
 interface GenericBlock extends BaseGenericBlock {
     /**
      * Use `GenericBlock.Figure` component as children of the `GenericBlock` component as an alternative way to inject
      * the "figure" section of the block (instead of using `figure` and `figureProps` props).
      */
-    Figure: Comp<FlexBoxProps>;
+    Figure: Comp<GenericBlockSectionProps>;
     /**
      * Use `GenericBlock.Content` component as children of the `GenericBlock` component as an alternative way to inject
      * the "content" section of the block (instead of using `content` and `contentProps` props).
      */
-    Content: Comp<FlexBoxProps>;
+    Content: Comp<GenericBlockSectionProps>;
     /**
      * Use `GenericBlock.Actions` component as children of the `GenericBlock` component as an alternative way to inject
      * the "actions" section of the block (instead of using `actions` and `actionsProps` props).
      */
-    Actions: Comp<FlexBoxProps>;
+    Actions: Comp<GenericBlockSectionProps>;
 }
 
 const Figure = noop.bind({}) as Comp<FlexBoxProps>;
