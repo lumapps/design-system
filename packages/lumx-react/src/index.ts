@@ -24,6 +24,7 @@ export * from './components/heading';
 export * from './components/grid';
 export * from './components/icon';
 export * from './components/image-block';
+export * from './components/inline-list';
 export * from './components/input-helper';
 export * from './components/input-label';
 export * from './components/lightbox';

@@ -1,0 +1,15 @@
+@use "sass:list";
+
+/* ==========================================================================
+   Inline list
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-inline-list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+
+    &__item {
+        display: contents;
+    }
+}
