@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.3][] - 2022-10-14
+
 ### Added
 
 -   FlexBox: add `as` prop to customize the root element component render.
@@ -1601,3 +1603,5 @@ _Failed released_
 [3.0.1]: https://github.com/lumapps/design-system/tree/v3.0.1
 [unreleased]: https://github.com/lumapps/design-system/compare/v3.0.2...HEAD
 [3.0.2]: https://github.com/lumapps/design-system/tree/v3.0.2
+[unreleased]: https://github.com/lumapps/design-system/compare/v3.0.3...HEAD
+[3.0.3]: https://github.com/lumapps/design-system/tree/v3.0.3
