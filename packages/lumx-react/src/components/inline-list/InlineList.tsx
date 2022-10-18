@@ -62,7 +62,9 @@ export const InlineList: Comp<InlineListProps> = forwardRef((props, ref) => {
             {Children.toArray(children).map((child, index) => {
                 const key = (isValidElement(child) && child.key) || index;
                 return (
-                    <li key={key} className={`${CLASSNAME}__item`}>
+                    // We need to item is set as display: contents which removes the semantic.
+                    // eslint-disable-next-line jsx-a11y/no-redundant-roles
+                    <li key={key} role="listitem" className={`${CLASSNAME}__item`}>
                         {index !== 0 && (
                             <span className={`${CLASSNAME}__item-separator`} aria-hidden="true">
                                 {'\u00A0•\u00A0'}
