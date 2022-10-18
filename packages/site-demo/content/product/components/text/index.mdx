@@ -32,26 +32,26 @@ Both **color** and **typography** can be adapted on text elements (see list of [
 By default, long texts will wrap on multiple lines. Use `noWrap` to prevent that.
 Alternatively, `truncate` can be used to cut with ellipsis (it can also truncate after multiple lines).
 
-<DemoBlock orientation="horizontal" vAlign="space-evenly" style={{ gap: 60 }}>
-    <div style="width: 200px; overflow: hidden">
+<DemoBlock orientation="horizontal" vAlign="space-evenly" style={{ gap: 90 }}>
+    <div style="max-width: 180px; overflow: hidden">
         <code>default</code>
         <Text as="p" typography="body2">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         </Text>
     </div>
-    <div style="width: 200px; overflow: hidden">
+    <div style="max-width: 180px; overflow: hidden">
         <code>no wrap</code>
         <Text as="p" typography="body2" noWrap>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         </Text>
     </div>
-    <div style="width: 200px; overflow: hidden">
+    <div style="max-width: 180px; overflow: hidden">
         <code>truncate</code>
         <Text as="p" typography="body2" truncate>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         </Text>
     </div>
-    <div style="width: 200px; overflow: hidden">
+    <div style="max-width: 180px; overflow: hidden">
         <code>truncate multiline</code>
         <Text as="p" typography="body2" truncate={{ lines: 2 }}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
