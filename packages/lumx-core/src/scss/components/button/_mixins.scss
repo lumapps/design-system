@@ -28,22 +28,10 @@
     }
 }
 
-@mixin lumx-button-size($emphasis, $variant, $size) {
-    @if $size == lumx-base-const("size", "M") {
-        height: var(--lumx-button-height);
-    } @else if $size == lumx-base-const("size", "S") {
-        height: calc(var(--lumx-button-height) / 1.5);
-    }
-
+@mixin lumx-button-border($emphasis, $variant, $size) {
     @if $variant == "button" {
         border-radius: var(--lumx-button-border-radius);
     } @else if $variant == "icon" {
-        @if $size == lumx-base-const("size", "M") {
-            width: var(--lumx-button-height);
-        } @else if $size == lumx-base-const("size", "S") {
-            width: calc(var(--lumx-button-height) / 1.5);
-        }
-
         border-radius: var(--lumx-material-button-variant-icon-border-radius, var(--lumx-button-border-radius));
     }
 
@@ -65,6 +53,38 @@
         }
     }
 
+    &:hover,
+    &[class*="--is-hovered"] {
+        &::before {
+            border-width: var(--lumx-button-#{$emphasis}-state-hover-border-width);
+        }
+    }
+
+    &:active,
+    &[class*="--is-active"] {
+        &::before {
+            border-width: var(--lumx-button-#{$emphasis}-state-active-border-width);
+        }
+    }
+}
+
+@mixin lumx-button-size($emphasis, $variant, $size) {
+    @include lumx-button-border($emphasis, $variant, $size);
+
+    @if $size == lumx-base-const("size", "M") {
+        height: var(--lumx-button-height);
+    } @else if $size == lumx-base-const("size", "S") {
+        height: calc(var(--lumx-button-height) / 1.5);
+    }
+
+    @if $variant == "icon" {
+        @if $size == lumx-base-const("size", "M") {
+            width: var(--lumx-button-height);
+        } @else if $size == lumx-base-const("size", "S") {
+            width: calc(var(--lumx-button-height) / 1.5);
+        }
+    }
+
     @if $variant == "button" {
         @if $size == lumx-base-const("size", "M") {
             padding: 0 var(--lumx-button-#{$emphasis}-state-default-padding-horizontal);
@@ -82,10 +102,6 @@
                 padding: 0 calc(var(--lumx-button-#{$emphasis}-state-hover-padding-horizontal) / 1.5);
             }
         }
-
-        &::before {
-            border-width: var(--lumx-button-#{$emphasis}-state-hover-border-width);
-        }
     }
 
     &:active,
@@ -96,10 +112,6 @@
             } @else if $size == lumx-base-const("size", "S") {
                 padding: 0 calc(var(--lumx-button-#{$emphasis}-state-active-padding-horizontal) / 1.5);
             }
-        }
-
-        &::before {
-            border-width: var(--lumx-button-#{$emphasis}-state-active-border-width);
         }
     }
 }

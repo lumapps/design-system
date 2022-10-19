@@ -50,6 +50,16 @@
                 }
             }
 
+            &.#{$lumx-base-prefix}-button--is-selected {
+                &.#{$lumx-base-prefix}-button--variant-button {
+                    @include lumx-button-border(lumx-base-const("emphasis", "SELECTED"), "button", $key);
+                }
+
+                &.#{$lumx-base-prefix}-button--variant-icon {
+                    @include lumx-button-border(lumx-base-const("emphasis", "SELECTED"), "button", $key);
+                }
+            }
+
             &.#{$lumx-base-prefix}-button--variant-button {
                 i:first-child {
                     @include lumx-button-icon("button", $key, lumx-base-const("position", "LEFT"));
