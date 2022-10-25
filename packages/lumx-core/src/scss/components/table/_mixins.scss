@@ -32,17 +32,13 @@
             @include lumx-state(
                 lumx-base-const("state", "FOCUS"),
                 lumx-base-const("emphasis", "LOW"),
-                "dark",
-                null,
-                true
+                "dark"
             );
         } @else if $theme == lumx-base-const("theme", "DARK") {
             @include lumx-state(
                 lumx-base-const("state", "FOCUS"),
                 lumx-base-const("emphasis", "LOW"),
-                "light",
-                null,
-                true
+                "light"
             );
         }
     }

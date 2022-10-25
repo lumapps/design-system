@@ -121,7 +121,7 @@
 
     // Focus state
     &[data-focus-visible-added] {
-        @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "LOW"), "dark", null, true);
+        @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "LOW"), "dark");
     }
 
     // Active state
