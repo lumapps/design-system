@@ -60,6 +60,8 @@ export interface DropdownProps extends GenericProps {
     placement?: Placement;
     /** Whether the focus should be set on the list when the dropdown is open or not. */
     shouldFocusOnOpen?: boolean;
+    /** Whether the dropdown should be rendered into a DOM node that exists outside the DOM hierarchy of the parent component. */
+    usePortal?: boolean;
     /** Whether the focus should go back on the anchor when dropdown closes and focus is within. */
     focusAnchorOnClose?: boolean;
     /**
