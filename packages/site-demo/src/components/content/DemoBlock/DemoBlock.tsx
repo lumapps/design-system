@@ -1,6 +1,18 @@
 import { CodeBlock } from '@lumx/demo/components/content/CodeBlock/CodeBlock';
 import { mdiCodeTags } from '@lumx/icons';
-import { Alignment, Button, Emphasis, FlexBox, FlexBoxProps, Orientation, Size, Switch, Theme } from '@lumx/react';
+import {
+    Alignment,
+    Button,
+    ColorPalette,
+    ColorVariant,
+    Emphasis,
+    FlexBox,
+    FlexBoxProps,
+    Orientation,
+    Size,
+    Switch,
+    Theme,
+} from '@lumx/react';
 
 import classNames from 'classnames';
 import isFunction from 'lodash/isFunction';
@@ -13,6 +25,7 @@ interface DemoBlockProps extends FlexBoxProps {
     codeString?: string;
     withThemeSwitcher?: boolean;
     hasPlayButton?: boolean;
+    backgroundColor?: { color: ColorPalette; variant: ColorVariant };
 }
 
 const DEFAULT_PROPS: Partial<DemoBlockProps> = {
@@ -26,6 +39,7 @@ export const DemoBlock: React.FC<DemoBlockProps> = ({
     codeString,
     withThemeSwitcher = false,
     hasPlayButton = false,
+    backgroundColor: propBackgroundColor,
     ...flexBoxProps
 }) => {
     const [theme, setTheme] = useState<Theme>(Theme.light);
@@ -42,10 +56,14 @@ export const DemoBlock: React.FC<DemoBlockProps> = ({
         // eslint-disable-next-line no-param-reassign
         flexBoxProps.vAlign = flexBoxProps.vAlign || Alignment.center;
     }
+    const backgroundColor = propBackgroundColor || (theme === Theme.dark ? { color: 'dark', variant: 'N' } : undefined);
     return (
         <div className={classNames('demo-block', { 'demo-block--has-play-button': hasPlayButton })}>
             <FlexBox
-                className={classNames('demo-block__content', theme === Theme.dark && 'lumx-color-background-dark-N')}
+                className={classNames(
+                    'demo-block__content',
+                    backgroundColor && `lumx-color-background-${backgroundColor.color}-${backgroundColor.variant}`,
+                )}
                 wrap
                 {...flexBoxProps}
             >
