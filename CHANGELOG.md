@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   InlineList: Set `listitem` role to items since `display: contents` attribute removes the semantics.
 -   Text: ignore empty children to make `dangerouslySetInnerHTML` work as expected.
 
+### Changed
+
+-   `@lumx/core` a11y: Introducing a more visible outline on elements with keyboard focus.
+
 ## [3.0.3][] - 2022-10-14
 
 ### Added

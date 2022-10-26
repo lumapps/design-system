@@ -136,7 +136,7 @@
                 },
                 "input": {
                     "background-color": "{color.light.N}",
-                    "border-color": "{color.primary.L2}",
+                    "border-color": "{color.primary.N}",
                     "content": {
                         "color": "{color.dark.N}"
                     },
@@ -153,7 +153,7 @@
                 },
                 "input": {
                     "background-color": { "value": "transparent" },
-                    "border-color": "{color.light.L2}",
+                    "border-color": "{color.light.N}",
                     "content": {
                         "color": "{color.light.N}"
                     },

@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Wed, 02 Mar 2022 10:51:14 GMT
+ * Generated on Wed, 26 Oct 2022 13:20:02 GMT
  */
 
 :root {
@@ -343,12 +343,12 @@
     --lumx-text-field-state-focus-input-border-left-width: 2px;
     --lumx-text-field-state-focus-theme-light-header-label-color: var(--lumx-color-dark-N);
     --lumx-text-field-state-focus-theme-light-input-background-color: var(--lumx-color-light-N);
-    --lumx-text-field-state-focus-theme-light-input-border-color: var(--lumx-color-primary-L2);
+    --lumx-text-field-state-focus-theme-light-input-border-color: var(--lumx-color-primary-N);
     --lumx-text-field-state-focus-theme-light-input-content-color: var(--lumx-color-dark-N);
     --lumx-text-field-state-focus-theme-light-input-placeholder-color: var(--lumx-color-dark-L2);
     --lumx-text-field-state-focus-theme-dark-header-label-color: var(--lumx-color-light-N);
     --lumx-text-field-state-focus-theme-dark-input-background-color: transparent;
-    --lumx-text-field-state-focus-theme-dark-input-border-color: var(--lumx-color-light-L2);
+    --lumx-text-field-state-focus-theme-dark-input-border-color: var(--lumx-color-light-N);
     --lumx-text-field-state-focus-theme-dark-input-content-color: var(--lumx-color-light-N);
     --lumx-text-field-state-focus-theme-dark-input-placeholder-color: var(--lumx-color-light-L2);
     --lumx-border-radius: 4px;
