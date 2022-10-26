@@ -114,7 +114,7 @@
 @mixin lumx-state($state, $emphasis, $color, $theme: null) {
     @if $emphasis == lumx-base-const("emphasis", "HIGH") {
         @include lumx-state-high($state, $color, $theme);
-    } @else if $emphasis == lumx-base-const("emphasis", "MEDIUM") {
+    } @else if $emphasis == lumx-base-const("emphasis", "MEDIUM") or $emphasis == lumx-base-const("emphasis", "SELECTED") {
         @include lumx-state-medium($state, $color);
     } @else if $emphasis == lumx-base-const("emphasis", "LOW") {
         @include lumx-state-low($state, $color);
