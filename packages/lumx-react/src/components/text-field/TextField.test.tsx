@@ -1,144 +1,115 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
-import { ReactWrapper, ShallowWrapper, mount, shallow } from 'enzyme';
-import 'jest-enzyme';
-import { build } from 'test-data-bot';
+import camelCase from 'lodash/camelCase';
 
-import { Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils/className';
 
-import { Kind } from '@lumx/react';
+import { render } from '@testing-library/react';
+import { getByClassName, getByTagName, queryAllByClassName, queryByTagName } from '@lumx/react/testing/utils/queries';
+import partition from 'lodash/partition';
+import userEvent from '@testing-library/user-event';
+
 import { TextField, TextFieldProps } from './TextField';
 
 const CLASSNAME = TextField.className as string;
 
-type SetupProps = Partial<TextFieldProps>;
-
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}, shallowRendering = true) => {
+const setup = (propsOverride: Partial<TextFieldProps> = {}) => {
     const props: any = { ...propsOverride };
-    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    const wrapper: Wrapper = renderer(<TextField {...props} />);
+    const { container } = render(<TextField {...props} />);
 
-    const textarea = wrapper.find('textarea');
-    const input = wrapper.find('input');
-    const error = wrapper.findWhere(
-        (n: ShallowWrapper | ReactWrapper) => n.name() === 'InputHelper' && n.prop('kind') === Kind.error,
-    );
-    const helper = wrapper.findWhere(
-        (n: ShallowWrapper | ReactWrapper) => n.name() === 'InputHelper' && n.prop('kind') === Kind.info,
-    );
+    const element = getByClassName(container, CLASSNAME);
+    const inputNative = queryByTagName(container, 'textarea') || getByTagName(container, 'input');
+    const helpers = queryAllByClassName(container, 'lumx-text-field__helper');
+    const [[helper], [error]] = partition(helpers, (h) => !h.className.includes('lumx-input-helper--color-red'));
 
     return {
+        props,
+        container,
+        element,
+        inputNative,
         error,
         helper,
-        inputNative: textarea.length ? textarea : input,
-        props,
-        wrapper,
     };
 };
 
 describe(`<${TextField.displayName}>`, () => {
-    // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', () => {
+    describe('Render', () => {
         it('should render defaults', () => {
-            const { wrapper, inputNative } = setup({ id: 'fixedId' });
-            expect(wrapper).toMatchSnapshot();
+            const { element, inputNative } = setup({ id: 'fixedId' });
+            expect(element).toBeInTheDocument();
+            expect(element).toMatchSnapshot();
+            expect(element).not.toHaveClass(`${CLASSNAME}--is-valid`);
+            expect(element).not.toHaveClass(`${CLASSNAME}--has-error`);
+            expect(element).not.toHaveClass(`${CLASSNAME}--has-label`);
+            expect(element).not.toHaveClass(`${CLASSNAME}--is-disabled`);
+            expect(element).not.toHaveClass(`${CLASSNAME}--has-placeholder`);
+            expect(element).not.toHaveClass(`${CLASSNAME}--is-focus`);
+            expect(element).not.toHaveClass(`${CLASSNAME}--has-icon`);
 
-            expect(wrapper).toExist();
-
-            expect(wrapper).toHaveClassName(CLASSNAME);
-            expect(wrapper).not.toHaveClassName(`${CLASSNAME}--is-valid`);
-            expect(wrapper).not.toHaveClassName(`${CLASSNAME}--has-error`);
-            expect(wrapper).not.toHaveClassName(`${CLASSNAME}--has-label`);
-            expect(wrapper).not.toHaveClassName(`${CLASSNAME}--is-disabled`);
-            expect(wrapper).not.toHaveClassName(`${CLASSNAME}--has-placeholder`);
-            expect(wrapper).not.toHaveClassName(`${CLASSNAME}--is-focus`);
-            expect(wrapper).not.toHaveClassName(`${CLASSNAME}--has-icon`);
-
-            expect(wrapper).toHaveClassName(`${CLASSNAME}--theme-light`);
-
-            expect(inputNative).toExist();
-            expect(inputNative.type()).toEqual('input');
+            expect(element).toHaveClass(`${CLASSNAME}--theme-light`);
+            expect(inputNative.tagName).toBe('INPUT');
         });
 
         it('should render textarea', () => {
-            const { wrapper, inputNative } = setup({ id: 'fixedId', multiline: true });
-            expect(wrapper).toMatchSnapshot();
-
-            expect(wrapper).toExist();
-
-            expect(inputNative).toExist();
-            expect(inputNative.type()).toEqual('textarea');
+            const { element, inputNative } = setup({ id: 'fixedId', multiline: true });
+            expect(element).toBeInTheDocument();
+            expect(element).toMatchSnapshot();
+            expect(inputNative.tagName).toBe('TEXTAREA');
         });
     });
 
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         it('should add all class names (except has-error)', () => {
-            const modifiedPropsBuilder: () => SetupProps = build('props').fields({
+            const modifiedProps = {
                 icon: 'icon',
                 isDisabled: true,
                 isValid: true,
                 label: 'test',
                 placeholder: 'test',
-            });
+            };
+            const hasProps = ['icon', 'label', 'placeholder'];
+            const { element } = setup(modifiedProps);
 
-            const modifiedProps: SetupProps = modifiedPropsBuilder();
-
-            const { wrapper } = setup({ ...modifiedProps });
-
-            Object.keys(modifiedProps).forEach((prop) => {
-                const propType =
-                    prop === 'icon' || prop === 'label' || prop === 'placeholder'
-                        ? `has${prop.charAt(0).toUpperCase() + prop.slice(1)}`
-                        : prop;
-                const propValue =
-                    prop === 'icon' || prop === 'label' || prop === 'placeholder' ? true : modifiedProps[prop];
-                expect(wrapper).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: propType, value: propValue }));
-            });
+            for (const [prop, value] of Object.entries(modifiedProps)) {
+                const propType = hasProps.includes(prop) ? camelCase(`has-${prop}`) : prop;
+                const propValue = hasProps.includes(prop) ? true : value;
+                expect(element).toHaveClass(getBasicClass({ prefix: CLASSNAME, type: propType, value: propValue }));
+            }
         });
 
         it('should add "has-error" class name', () => {
-            const modifiedPropsBuilder: () => SetupProps = build('props').fields({
-                hasError: true,
-            });
+            const modifiedProps = { hasError: true };
+            const { element } = setup(modifiedProps);
 
-            const modifiedProps: SetupProps = modifiedPropsBuilder();
-
-            const { wrapper } = setup({ ...modifiedProps });
-
-            Object.keys(modifiedProps).forEach((prop) => {
-                expect(wrapper).toHaveClassName(
-                    getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop] }),
-                );
-            });
+            for (const [prop, value] of Object.entries(modifiedProps)) {
+                expect(element).toHaveClass(getBasicClass({ prefix: CLASSNAME, type: prop, value }));
+            }
         });
 
         it('should have text as value', () => {
             const value = 'test';
             const { inputNative } = setup({ value });
-
             expect(inputNative).toHaveValue(value);
         });
 
         it('should have no value', () => {
             const value = undefined;
             const { inputNative } = setup({ value });
-
-            expect(inputNative).toHaveValue(value);
+            expect(inputNative).toHaveValue('');
         });
 
         it('should have helper text', () => {
             const { helper } = setup({
-                helper: 'test',
+                helper: 'helper',
                 label: 'test',
                 placeholder: 'test',
             });
-
-            expect(helper).toHaveLength(1);
+            expect(helper).toHaveTextContent('helper');
         });
 
         it('should have error text', () => {
@@ -148,8 +119,7 @@ describe(`<${TextField.displayName}>`, () => {
                 label: 'test',
                 placeholder: 'test',
             });
-
-            expect(error).toHaveLength(1);
+            expect(error).toHaveTextContent('error');
         });
 
         it('should not have error text', () => {
@@ -159,8 +129,7 @@ describe(`<${TextField.displayName}>`, () => {
                 label: 'test',
                 placeholder: 'test',
             });
-
-            expect(error).toHaveLength(0);
+            expect(error).not.toBeDefined();
         });
 
         it('should have error and helper text', () => {
@@ -171,43 +140,32 @@ describe(`<${TextField.displayName}>`, () => {
                 label: 'test',
                 placeholder: 'test',
             });
-
-            expect(error).toHaveLength(1);
-            expect(helper).toHaveLength(1);
+            expect(error).toHaveTextContent('error');
+            expect(helper).toHaveTextContent('helper');
         });
     });
 
     // 3. Test events.
     describe('Events', () => {
-        const onChange: jest.Mock = jest.fn();
+        window.document.getSelection = jest.fn();
 
-        beforeEach(onChange.mockClear);
+        it('should trigger `onChange` when text field is changed', async () => {
+            const onChange = jest.fn();
+            const { inputNative } = setup({ value: '', name: 'name', onChange });
 
-        it('should trigger `onChange` when text field is changed', () => {
-            const onChangeMock = jest.fn();
-            const event = {
-                target: { value: 'my value' },
-            };
-            const component = shallow(<TextField value="" name="my name" onChange={onChangeMock} />);
-            component.find('input').simulate('change', event);
-            expect(onChangeMock).toBeCalledWith('my value', 'my name', {
-                target: {
-                    value: 'my value',
-                },
-            });
+            await userEvent.tab();
+            expect(inputNative).toHaveFocus();
+
+            await userEvent.keyboard('a');
+
+            expect(onChange).toHaveBeenCalledWith('a', 'name', expect.objectContaining({}));
         });
     });
 
-    // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', () => {
-        // Nothing to do here.
-    });
-
-    // 5. Test state.
-    describe('State', () => {
-        // Nothing to do here.
-    });
-
     // Common tests suite.
-    commonTestsSuite(setup, { className: 'wrapper', prop: 'inputNative' }, { className: CLASSNAME });
+    commonTestsSuiteRTL(setup, {
+        baseClassName: CLASSNAME,
+        forwardClassName: 'element',
+        forwardAttributes: 'inputNative',
+    });
 });
