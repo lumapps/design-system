@@ -7,11 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-
 ### Fixed
 
 -   InlineList: Set `listitem` role to items since `display: contents` attribute removes the semantics.
-
+-   Text: ignore empty children to make `dangerouslySetInnerHTML` work as expected.
 
 ## [3.0.3][] - 2022-10-14
 

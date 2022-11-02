@@ -92,6 +92,11 @@ describe(`<${Text.displayName}>`, () => {
                 </span>
             `);
         });
+
+        it('should render dangerouslySetInnerHTML', () => {
+            const { element } = setup({ dangerouslySetInnerHTML: { __html: '<strong>HTML text</strong>' } });
+            expect(element).toHaveTextContent('HTML text');
+        });
     });
 
     // Common tests suite.

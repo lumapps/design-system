@@ -105,13 +105,14 @@ export const Text: Comp<TextProps> = forwardRef((props, ref) => {
             style={{ ...truncateLinesStyle, ...style }}
             {...forwardedProps}
         >
-            {Children.toArray(children).map((child, index) => {
-                // Force wrap spaces around icons to make sure they are never stuck against text.
-                if (isComponent(Icon)(child)) {
-                    return <Fragment key={child.key || index}> {child} </Fragment>;
-                }
-                return child;
-            })}
+            {children &&
+                Children.toArray(children).map((child, index) => {
+                    // Force wrap spaces around icons to make sure they are never stuck against text.
+                    if (isComponent(Icon)(child)) {
+                        return <Fragment key={child.key || index}> {child} </Fragment>;
+                    }
+                    return child;
+                })}
         </Component>
     );
 });
