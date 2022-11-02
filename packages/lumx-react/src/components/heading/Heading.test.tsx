@@ -1,35 +1,37 @@
 import React from 'react';
 
-import { mount, shallow } from 'enzyme';
-import 'jest-enzyme';
+import { render, screen } from '@testing-library/react';
 
-import { commonTestsSuite } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { getByClassName } from '@lumx/react/testing/utils/queries';
 import { Heading, HeadingProps } from './Heading';
 import { HeadingLevelProvider } from './HeadingLevelProvider';
 
+const CLASSNAME = Heading.className as string;
+
 const setup = (props: Partial<HeadingProps> = {}) => {
-    const wrapper = shallow(<Heading {...props} />);
-    return { props, wrapper };
+    const { container } = render(<Heading {...props} />);
+    return { props, container, element: getByClassName(container, CLASSNAME) };
 };
 
 describe(`<${Heading.displayName}>`, () => {
-    describe('Snapshots and structure', () => {
+    describe('Render', () => {
         it('should render a Text component with h1 by default', () => {
-            const { wrapper } = setup({ children: 'Some text' });
-            expect(wrapper).toHaveDisplayName('Text');
-            expect(wrapper).toHaveProp('as', 'h1');
-            expect(wrapper.prop('className')).toBe(Heading.className);
+            setup({ children: 'Some text' });
+            const heading = screen.getByRole('heading', { level: 1, name: 'Some text' });
+            expect(heading).toBeInTheDocument();
+            expect(heading).toHaveClass(CLASSNAME);
         });
 
         it('should render with as', () => {
-            const { wrapper } = setup({ children: 'Some text', as: 'h2' });
-            expect(wrapper).toHaveDisplayName('Text');
-            expect(wrapper).toHaveProp('as', 'h2');
-            expect(wrapper.prop('className')).toBe(Heading.className);
+            setup({ children: 'Some text', as: 'h2' });
+            const heading = screen.getByRole('heading', { level: 2, name: 'Some text' });
+            expect(heading).toBeInTheDocument();
+            expect(heading).toHaveClass(CLASSNAME);
         });
 
         it('should correctly render levels nested in HeadingLevel', () => {
-            const wrapper = mount(
+            render(
                 <>
                     <Heading>Level 1</Heading>
                     <HeadingLevelProvider>
@@ -51,27 +53,30 @@ describe(`<${Heading.displayName}>`, () => {
                             </HeadingLevelProvider>
                         </HeadingLevelProvider>
                     </HeadingLevelProvider>
-                    ,
                 </>,
             );
 
-            expect(wrapper.find('h1')).toHaveText('Level 1');
-            expect(wrapper.find('h2')).toHaveText('Level 2');
-            expect(wrapper.find('h3')).toHaveText('Level 3');
-            expect(wrapper.find('h4')).toHaveText('Level 4');
+            expect(screen.getByRole('heading', { level: 1, name: 'Level 1' })).toBeInTheDocument();
+            expect(screen.getByRole('heading', { level: 2, name: 'Level 2' })).toBeInTheDocument();
+            expect(screen.getByRole('heading', { level: 3, name: 'Level 3' })).toBeInTheDocument();
+            expect(screen.getByRole('heading', { level: 4, name: 'Level 4' })).toBeInTheDocument();
 
-            const h5 = wrapper.find('h5');
+            const h5 = screen.getAllByRole('heading', { level: 5 });
             expect(h5).toHaveLength(2);
-            expect(h5.at(0)).toHaveText('Level 5 - 1');
-            expect(h5.at(1)).toHaveText('Level 5 - 2');
+            expect(h5[0]).toHaveTextContent('Level 5 - 1');
+            expect(h5[1]).toHaveTextContent('Level 5 - 2');
             // There should be 2 h6 because it is the maximum value;
-            const h6 = wrapper.find('h6');
+            const h6 = screen.getAllByRole('heading', { level: 6 });
             expect(h6).toHaveLength(2);
-            expect(h6.at(0)).toHaveText('Level 6');
-            expect(h6.at(1)).toHaveText('Level 7');
+            expect(h6[0]).toHaveTextContent('Level 6');
+            expect(h6[1]).toHaveTextContent('Level 7');
         });
     });
 
     // Common tests suite.
-    commonTestsSuite(setup, { className: 'wrapper', prop: 'wrapper' }, { className: Heading.className });
+    commonTestsSuiteRTL(setup, {
+        baseClassName: CLASSNAME,
+        forwardClassName: 'element',
+        forwardAttributes: 'element',
+    });
 });
