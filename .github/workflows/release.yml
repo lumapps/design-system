@@ -1,62 +1,67 @@
 name: "Release Workflow"
 
 on:
-  push:
-    tags:
-      - 'v[0-9].[0-9]+.[0-9]+*'
+    push:
+        tags:
+            - 'v[0-9].[0-9]+.[0-9]+*'
 
 concurrency:
-  group: "${{ github.workflow }}-${{ github.ref_name }}"
-  cancel-in-progress: true
+    group: "${{ github.workflow }}-${{ github.ref_name }}"
+    cancel-in-progress: true
 
 jobs:
 
-  push_image:
-    timeout-minutes: 30
-    name: Push the image on release
-    runs-on: ubuntu-latest
-    env:
-        GCP_PROD_REGISTRY: gcr.io/lumapps-registry
-    steps:
-        -   name: Checkout code
-            uses: actions/checkout@v3
-        -   name: Login to GCR
-            uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
-            with:
-                registry: gcr.io
-                username: _json_key
-                password: ${{ secrets.GCR_PROD_RW_CREDS }}
-        -   name: Setup buildx
-            id: buildx_setup
-            uses: docker/setup-buildx-action@94ab11c41e45d028884a99163086648e898eed25
-            with:
-                install: true
-        -   run: |
-                echo "git_commit=$(rev-parse  HEAD)" >> $GITHUB_ENV
-                echo "build_date=$(date --rfc-3339=seconds)" >> $GITHUB_ENV
-        -   name: Docker metadata
-            id: meta
-            uses: docker/metadata-action@f206c36955d3cc6213c38fb3747d9ba4113e686a
-            with:
-                tags: |
-                    type=match,pattern=/^v?(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/
-                    type=raw,enable=true,priority=200,value=${{ github.sha }},event=tag
-                images: |
-                    ${{ env.GCP_PROD_REGISTRY }}/design-system
-                labels: |
-                    com.lumapps.image.created=${{ env.build_date }}
-                    com.lumapps.image.sha1=${{ env.GITHUB_SHA }}
-                    com.lumapps.image.authors=frontend@lumapps.com
-                    com.lumapps.image.version={{tag}}
-        -   name: Build image
-            uses: docker/build-push-action@a66e35b9cbcf4ad0ea91ffcaf7bbad63ad9e0229
-            with:
-                context: ./
-                file: ${{ matrix.dockerfile}}
-                builder: ${{ steps.buildx_setup.outputs.name }}
-                build-args: version=${{ env.version }}
-                push: true
-                tags: ${{ steps.meta.outputs.tags }}
-                labels: ${{ steps.meta.outputs.labels }}
-                cache-from: type=gha, scope=${{ github.workflow }}
-                cache-to: type=gha, scope=${{ github.workflow }}, mode=max
+    push_image:
+        timeout-minutes: 30
+        name: Push the image on release
+        runs-on: ubuntu-latest
+        env:
+            GCP_PROD_REGISTRY: gcr.io/lumapps-registry
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v3
+
+            -   name: Login to GCR
+                uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
+                with:
+                    registry: gcr.io
+                    username: _json_key
+                    password: ${{ secrets.GCR_PROD_RW_CREDS }}
+
+            -   name: Setup buildx
+                id: buildx_setup
+                uses: docker/setup-buildx-action@94ab11c41e45d028884a99163086648e898eed25
+                with:
+                    install: true
+
+            -   run: |
+                    echo "git_commit=$(rev-parse  HEAD)" >> $GITHUB_ENV
+                    echo "build_date=$(date --rfc-3339=seconds)" >> $GITHUB_ENV
+
+            -   name: Docker metadata
+                id: meta
+                uses: docker/metadata-action@f206c36955d3cc6213c38fb3747d9ba4113e686a
+                with:
+                    tags: |
+                        type=match,pattern=/^v?(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/
+                        type=raw,enable=true,priority=200,value=${{ github.sha }},event=tag
+                    images: |
+                        ${{ env.GCP_PROD_REGISTRY }}/design-system
+                    labels: |
+                        com.lumapps.image.created=${{ env.build_date }}
+                        com.lumapps.image.sha1=${{ env.GITHUB_SHA }}
+                        com.lumapps.image.authors=frontend@lumapps.com
+                        com.lumapps.image.version={{tag}}
+
+            -   name: Build image
+                uses: docker/build-push-action@a66e35b9cbcf4ad0ea91ffcaf7bbad63ad9e0229
+                with:
+                    context: ./
+                    file: ${{ matrix.dockerfile}}
+                    builder: ${{ steps.buildx_setup.outputs.name }}
+                    build-args: version=${{ env.version }}
+                    push: true
+                    tags: ${{ steps.meta.outputs.tags }}
+                    labels: ${{ steps.meta.outputs.labels }}
+                    cache-from: type=gha, scope=${{ github.workflow }}
+                    cache-to: type=gha, scope=${{ github.workflow }}, mode=max
