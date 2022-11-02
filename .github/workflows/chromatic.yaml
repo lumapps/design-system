@@ -8,9 +8,6 @@ on:
             - v*
             - '!v*-alpha.*' # ignore alpha versions
 
-env:
-    node_version: '13.7.0'
-
 jobs:
     dependencies:
         name: "dependencies"
@@ -31,7 +28,7 @@ jobs:
             -   name: "Setup node env"
                 uses: actions/setup-node@v3
                 with:
-                    node-version: ${{ env.node_version }}
+                    node-version: '16.10.0'
 
             -   name: "Restore dependency cache"
                 id: cache

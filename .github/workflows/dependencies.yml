@@ -11,7 +11,7 @@ on:
                 type: string
                 description: 'Node version to use'
                 required: false
-                default: '13.7.0'
+                default: '16.10.0'
     # Run on push master so that PRs can get updated dependency cache and skip install if possible
     push:
         branches:
