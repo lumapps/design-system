@@ -1,0 +1,20 @@
+name: 'Remove label'
+description: 'Remove a label'
+
+inputs:
+    label:
+        description: Label to remove
+        required: true
+
+runs:
+  using: composite
+  steps:
+      - uses: actions/github-script@v6
+        with:
+            script: |
+                github.rest.issues.removeLabel({
+                    issue_number: context.issue.number,
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    name: '${{ inputs.label }}'
+                })

@@ -1,5 +1,0 @@
-name: 'Remove label'
-description: 'Remove a label'
-runs:
-  using: 'node12'
-  main: 'dist/index.js'

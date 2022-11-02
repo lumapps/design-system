@@ -8,6 +8,10 @@ on:
             - v*
             - '!v*-alpha.*' # ignore alpha versions
 
+concurrency:
+    group: chromatic-${{ github.head_ref || github.run_id }}
+    cancel-in-progress: true
+
 jobs:
     dependencies:
         name: "dependencies"
@@ -50,8 +54,6 @@ jobs:
 
             -   if: "contains(github.event.pull_request.labels.*.name, 'need: deploy-chromatic')"
                 name: "Remove label"
-                uses: ./dev-packages/ga-remove-label
-                env:
-                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                    LABEL: "need: deploy-chromatic"
-
+                uses: ./.github/actions/remove-label
+                with:
+                    label: "need: deploy-chromatic"
