@@ -13,12 +13,6 @@ concurrency:
     cancel-in-progress: true
 
 jobs:
-    dependencies:
-        name: "dependencies"
-        # Run on push version tag OR on PR with the "need: deploy-chromatic" label
-        if: "github.event_name == 'push' || contains(github.event.pull_request.labels.*.name, 'need: deploy-chromatic')"
-        uses: ./.github/workflows/dependencies.yml
-
     deploy:
         # Run on push version tag OR on PR with the "need: deploy-chromatic" label
         if: "github.event_name == 'push' || contains(github.event.pull_request.labels.*.name, 'need: deploy-chromatic')"
@@ -29,21 +23,8 @@ jobs:
                 with:
                     fetch-depth: 0 # retrieve all the repo history (required by chromatic)
 
-            -   name: "Setup node env"
-                uses: actions/setup-node@v3
-                with:
-                    node-version: '16.10.0'
-
-            -   name: "Restore dependency cache"
-                id: cache
-                uses: actions/cache@v3
-                with:
-                    path: "**/node_modules"
-                    key: ${{ needs.dependencies.outputs.cacheKey }}
-
-            -   name: "Install dependencies"
-                if: steps.cache.outputs.cache-hit != 'true'
-                run: yarn install
+            -   name: "Setup"
+                uses: ./.github/actions/setup
 
             -   name: "Deploy chromatic"
                 uses: chromaui/action@3f82bf5d065290658af8add6dce946809ee0f923 #v6.1.0

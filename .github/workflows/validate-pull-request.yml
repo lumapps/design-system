@@ -2,89 +2,61 @@ name: "CI"
 
 on:
     pull_request:
+        types: [ opened, synchronize, reopened, ready_for_review ]
 
 concurrency:
     group: ${{ github.head_ref }}-validate-pr
     cancel-in-progress: true
 
 jobs:
-    dependencies:
-        name: "dependencies"
-        if: github.event.pull_request.draft == false
-        uses: ./.github/workflows/dependencies.yml
-
     lint:
+        if: github.event.pull_request.draft == false
         timeout-minutes: 30
         runs-on: ubuntu-latest
-        needs: dependencies
         steps:
             -   name: "Checkout repository"
                 uses: actions/checkout@v3
 
-            -   name: "Setup node env"
-                uses: actions/setup-node@v3
-                with:
-                    node-version: '16.10.0'
-
-            -   name: "Restore dependency cache"
-                id: cache
-                uses: actions/cache@v3
-                with:
-                    path: "**/node_modules"
-                    key: ${{ needs.dependencies.outputs.cacheKey }}
-
-            -   name: "Install dependencies"
-                if: steps.cache.outputs.cache-hit != 'true'
-                run: yarn install
+            -   name: "Setup"
+                uses: ./.github/actions/setup
 
             -   name: "Run packages lint"
                 run: yarn lint:code
 
     test:
         if: github.event.pull_request.draft == false
+        timeout-minutes: 30
         runs-on: ubuntu-latest
-        needs: dependencies
         steps:
             -   name: "Checkout repository"
                 uses: actions/checkout@v3
 
-            -   name: "Setup node env"
-                uses: actions/setup-node@v3
-                with:
-                    node-version: '16.10.0'
+            -   name: "Setup"
+                uses: ./.github/actions/setup
 
-            -   name: "Restore dependency cache"
-                id: cache
-                uses: actions/cache@v3
-                with:
-                    path: "**/node_modules"
-                    key: ${{ needs.dependencies.outputs.cacheKey }}
-
-            -   name: "Install dependencies"
-                if: steps.cache.outputs.cache-hit != 'true'
-                run: yarn install
-
-            -   name: Run unit tests
+            -   name: "Run unit tests"
                 run: |
                     sudo timedatectl set-timezone Europe/Paris
                     yarn test
 
-    github-actions-validator:
-        if: github.event.pull_request.draft == false
-        name: Github-actions-validator
-        runs-on: ubuntu-latest
-        steps:
-            -   uses: actions/checkout@v3
-            -   uses: lumapps/github-actions-validator@master
-
-    commit-message-validation:
+    Github-actions-validator:
         if: github.event.pull_request.draft == false
         runs-on: ubuntu-latest
         steps:
-            -   name: Checkout
+            -   name: "Checkout repository"
                 uses: actions/checkout@v3
 
-            -   name: Commit message validation
+            -   name: "Github actions validator"
+                uses: lumapps/github-actions-validator@master
+
+    Commit-message-validation:
+        if: github.event.pull_request.draft == false
+        runs-on: ubuntu-latest
+        steps:
+            -   name: "Checkout repository"
+                uses: actions/checkout@v3
+
+            -   name: "Commit message validation"
                 uses: lumapps/commit-message-validator@master
                 with:
                     no_jira: true

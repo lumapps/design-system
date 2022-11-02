@@ -1,18 +1,7 @@
 name: Dependencies
 
+# Run on push master so that PRs can get updated dependency cache and skip install if possible
 on:
-    workflow_call:
-        outputs:
-            cacheKey:
-                description: "Key for the dependencies cache"
-                value: ${{ jobs.dependencies.outputs.cacheKey }}
-        inputs:
-            node_version:
-                type: string
-                description: 'Node version to use'
-                required: false
-                default: '16.10.0'
-    # Run on push master so that PRs can get updated dependency cache and skip install if possible
     push:
         branches:
             - master
@@ -22,31 +11,10 @@ jobs:
         timeout-minutes: 30
         name: "dependencies"
         runs-on: ubuntu-latest
-        outputs:
-            cacheKey: ${{ steps.cache-prep.outputs.cacheKey }}
         steps:
             -   name: "Checkout repository"
                 uses: actions/checkout@v3
 
-            -   name: "Setup node env"
-                uses: actions/setup-node@v3
-                with:
-                    node-version: ${{ inputs.node_version }}
+            -   name: "Setup"
+                uses: ./.github/actions/setup
 
-            -   name: "Get cache key"
-                id: cache-prep
-                run: echo "cacheKey=${{ runner.os }}-dependency-hash-${{ hashFiles('yarn.lock') }}" >> $GITHUB_OUTPUT
-
-            -   name: "Cache dependencies"
-                id: cache
-                uses: actions/cache@v3
-                with:
-                    path: "**/node_modules"
-                    key: ${{ steps.cache-prep.outputs.cacheKey }}
-                    restore-keys: |
-                        ${{ runner.os }}-dependency-hash-
-
-            -   name: "Install dependencies"
-                # Skip install here because the cache already has an entry, we won't be able to update it, so it's unnecessary to try and rebuild it
-                if: steps.cache.outputs.cache-hit != 'true'
-                run: yarn install
