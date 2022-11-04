@@ -7,17 +7,18 @@ interface Props {
     [key: string]: any;
 }
 
-const formatInternalURL = (url: string) => {
-    let formatted = url;
-    if (!formatted.endsWith('/')) {
-        // Force trailing slash on URL.
-        formatted += '/';
+// Format internal link to have the gatsby prefix and trailing slash
+const formatInternalLink = (path: string) => {
+    // origin is not important here as it's removed at the end.
+    const origin = 'http://localhost';
+    const url = new URL(path, origin);
+    if (!url.pathname.endsWith('/')) {
+        url.pathname += '/';
     }
-    if (formatted.startsWith('/')) {
-        // Absolute path should be prefixed with Gatsby path prefix.
-        formatted = withPrefix(formatted);
+    if (path.startsWith('/')) {
+        url.pathname = withPrefix(url.pathname);
     }
-    return formatted;
+    return url.toString().replace(origin, '');
 };
 
 /**
@@ -36,8 +37,8 @@ export const Link: React.FC<Props> = ({ href, ...forwardedProps }) => {
     } else {
         // User router link.
         props.linkAs = RouterLink;
-        // Format internal URL.
-        props.to = formatInternalURL(href);
+        // Format internal link.
+        props.to = formatInternalLink(href);
     }
 
     return <LumxLink {...props} />;
