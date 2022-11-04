@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   RadioButton: fix helper text accessibility
 -   Switch: fix helper text accessibility
+-   ExpansionPanel: fix toggle button a11y using the disclosure pattern.
 
 ## [3.0.4][] - 2022-11-07
 
