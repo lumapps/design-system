@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Wed, 02 Mar 2022 10:51:14 GMT
+ * Generated on Wed, 26 Oct 2022 13:20:02 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -1288,9 +1288,9 @@ export const DESIGN_TOKENS = {
                         $aliasedFrom: 'color.light.N',
                     },
                     'border-color': {
-                        value: 'var(--lumx-color-primary-L2)',
-                        attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 0.6 } },
-                        $aliasedFrom: 'color.primary.L2',
+                        value: 'var(--lumx-color-primary-N)',
+                        attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 1 } },
+                        $aliasedFrom: 'color.primary.N',
                     },
                     content: {
                         color: {
@@ -1321,9 +1321,9 @@ export const DESIGN_TOKENS = {
                 input: {
                     'background-color': { value: 'transparent' },
                     'border-color': {
-                        value: 'var(--lumx-color-light-L2)',
-                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.8 } },
-                        $aliasedFrom: 'color.light.L2',
+                        value: 'var(--lumx-color-light-N)',
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                        $aliasedFrom: 'color.light.N',
                     },
                     content: {
                         color: {
