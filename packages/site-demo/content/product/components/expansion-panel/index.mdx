@@ -20,6 +20,12 @@ Use trimmed when you don't need the left and right spacing.
 
 <DemoBlock demo="examples" />
 
+### Accessibility concerns
+
+Expansion panels use a `section` landmark combined with a disclosure button (see [WAI-ARIA disclosure pattern](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/)).
+
+Make sure the toggle button an appropriate label (defined in the `toggleButtonProps`) so that screen readers can clearly announce what the expansion panel shows once expanded.
+
 ### Properties
 
 <PropTable component="ExpansionPanel" />
