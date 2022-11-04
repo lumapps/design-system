@@ -155,6 +155,12 @@ export interface AutocompleteProps extends GenericProps, HasTheme {
      * @see {@link DropdownProps#onInfiniteScroll}
      */
     onInfiniteScroll?(): void;
+    /**
+     * Props forwarded to the underlying TextField component.
+     * Only the props not managed by the Autocomplete can be set.
+     * @see {@link TextFieldProps}
+     */
+    textFieldProps?: TextFieldProps;
 }
 
 /**
@@ -219,6 +225,7 @@ export const Autocomplete: Comp<AutocompleteProps, HTMLDivElement> = forwardRef(
         shouldFocusOnClose,
         theme,
         value,
+        textFieldProps = {},
         ...forwardedProps
     } = props;
     const inputAnchorRef = useRef<HTMLElement>(null);
@@ -237,6 +244,7 @@ export const Autocomplete: Comp<AutocompleteProps, HTMLDivElement> = forwardRef(
             )}
         >
             <TextField
+                {...textFieldProps}
                 chips={chips}
                 error={error}
                 hasError={hasError}
