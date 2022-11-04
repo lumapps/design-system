@@ -148,7 +148,7 @@ export const ExpansionPanel: Comp<ExpansionPanelProps, HTMLDivElement> = forward
                         color={color}
                         emphasis={Emphasis.low}
                         icon={isOpen ? mdiChevronUp : mdiChevronDown}
-                        aria-expanded={isOpen}
+                        aria-expanded={isOpen || 'false'}
                     />
                 </div>
             </header>
