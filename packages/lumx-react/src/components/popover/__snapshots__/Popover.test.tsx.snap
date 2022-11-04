@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Popover> Snapshots and structure should render story 'Alignments' 1`] = `
-Array [
+[
   <Portal
     containerInfo={<body />}
   >
     <div
       className="lumx-spacing-padding-huge lumx-popover lumx-popover--elevation-3 lumx-popover--position-top-start"
       style={
-        Object {
+        {
           "left": "0",
           "position": "absolute",
           "top": "0",
@@ -18,12 +18,12 @@ Array [
     >
       <ClickAwayProvider
         childrenRefs={
-          Object {
-            "current": Array [
-              Object {
+          {
+            "current": [
+              {
                 "current": null,
               },
-              Object {
+              {
                 "current": null,
               },
             ],
@@ -40,7 +40,7 @@ Array [
     <div
       className="lumx-spacing-padding-huge lumx-popover lumx-popover--elevation-3 lumx-popover--position-top-end"
       style={
-        Object {
+        {
           "left": "0",
           "position": "absolute",
           "top": "0",
@@ -50,12 +50,12 @@ Array [
     >
       <ClickAwayProvider
         childrenRefs={
-          Object {
-            "current": Array [
-              Object {
+          {
+            "current": [
+              {
                 "current": null,
               },
-              Object {
+              {
                 "current": null,
               },
             ],
@@ -76,7 +76,7 @@ exports[`<Popover> Snapshots and structure should render story 'Auto' 1`] = `
   <div
     className="lumx-spacing-padding-huge lumx-popover lumx-popover--elevation-3 lumx-popover--position-auto"
     style={
-      Object {
+      {
         "left": "0",
         "position": "absolute",
         "top": "0",
@@ -86,12 +86,12 @@ exports[`<Popover> Snapshots and structure should render story 'Auto' 1`] = `
   >
     <ClickAwayProvider
       childrenRefs={
-        Object {
-          "current": Array [
-            Object {
+        {
+          "current": [
+            {
               "current": null,
             },
-            Object {
+            {
               "current": null,
             },
           ],
@@ -111,7 +111,7 @@ exports[`<Popover> Snapshots and structure should render story 'Default' 1`] = `
   <div
     className="lumx-spacing-padding-huge lumx-popover lumx-popover--elevation-3 lumx-popover--position-bottom"
     style={
-      Object {
+      {
         "left": "0",
         "position": "absolute",
         "top": "0",
@@ -121,12 +121,12 @@ exports[`<Popover> Snapshots and structure should render story 'Default' 1`] = `
   >
     <ClickAwayProvider
       childrenRefs={
-        Object {
-          "current": Array [
-            Object {
+        {
+          "current": [
+            {
               "current": null,
             },
-            Object {
+            {
               "current": null,
             },
           ],
@@ -146,7 +146,7 @@ exports[`<Popover> Snapshots and structure should render story 'MatchingWidth' 1
   <div
     className="lumx-spacing-padding-huge lumx-popover lumx-popover--elevation-3 lumx-popover--position-bottom-start"
     style={
-      Object {
+      {
         "left": "0",
         "position": "absolute",
         "top": "0",
@@ -156,12 +156,12 @@ exports[`<Popover> Snapshots and structure should render story 'MatchingWidth' 1
   >
     <ClickAwayProvider
       childrenRefs={
-        Object {
-          "current": Array [
-            Object {
+        {
+          "current": [
+            {
               "current": null,
             },
-            Object {
+            {
               "current": null,
             },
           ],
@@ -181,7 +181,7 @@ exports[`<Popover> Snapshots and structure should render story 'Offset' 1`] = `
   <div
     className="lumx-spacing-padding-huge lumx-popover lumx-popover--elevation-3 lumx-popover--position-right"
     style={
-      Object {
+      {
         "left": "0",
         "position": "absolute",
         "top": "0",
@@ -191,12 +191,12 @@ exports[`<Popover> Snapshots and structure should render story 'Offset' 1`] = `
   >
     <ClickAwayProvider
       childrenRefs={
-        Object {
-          "current": Array [
-            Object {
+        {
+          "current": [
+            {
               "current": null,
             },
-            Object {
+            {
               "current": null,
             },
           ],
@@ -210,14 +210,14 @@ exports[`<Popover> Snapshots and structure should render story 'Offset' 1`] = `
 `;
 
 exports[`<Popover> Snapshots and structure should render story 'Positions' 1`] = `
-Array [
+[
   <Portal
     containerInfo={<body />}
   >
     <div
       className="lumx-spacing-padding-huge lumx-popover lumx-popover--elevation-3 lumx-popover--position-left"
       style={
-        Object {
+        {
           "left": "0",
           "position": "absolute",
           "top": "0",
@@ -227,12 +227,12 @@ Array [
     >
       <ClickAwayProvider
         childrenRefs={
-          Object {
-            "current": Array [
-              Object {
+          {
+            "current": [
+              {
                 "current": null,
               },
-              Object {
+              {
                 "current": null,
               },
             ],
@@ -249,7 +249,7 @@ Array [
     <div
       className="lumx-spacing-padding-huge lumx-popover lumx-popover--elevation-3 lumx-popover--position-top"
       style={
-        Object {
+        {
           "left": "0",
           "position": "absolute",
           "top": "0",
@@ -259,12 +259,12 @@ Array [
     >
       <ClickAwayProvider
         childrenRefs={
-          Object {
-            "current": Array [
-              Object {
+          {
+            "current": [
+              {
                 "current": null,
               },
-              Object {
+              {
                 "current": null,
               },
             ],
@@ -281,7 +281,7 @@ Array [
     <div
       className="lumx-spacing-padding-huge lumx-popover lumx-popover--elevation-3 lumx-popover--position-bottom"
       style={
-        Object {
+        {
           "left": "0",
           "position": "absolute",
           "top": "0",
@@ -291,12 +291,12 @@ Array [
     >
       <ClickAwayProvider
         childrenRefs={
-          Object {
-            "current": Array [
-              Object {
+          {
+            "current": [
+              {
                 "current": null,
               },
-              Object {
+              {
                 "current": null,
               },
             ],
@@ -313,7 +313,7 @@ Array [
     <div
       className="lumx-spacing-padding-huge lumx-popover lumx-popover--elevation-3 lumx-popover--position-right"
       style={
-        Object {
+        {
           "left": "0",
           "position": "absolute",
           "top": "0",
@@ -323,12 +323,12 @@ Array [
     >
       <ClickAwayProvider
         childrenRefs={
-          Object {
-            "current": Array [
-              Object {
+          {
+            "current": [
+              {
                 "current": null,
               },
-              Object {
+              {
                 "current": null,
               },
             ],

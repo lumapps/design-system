@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Slideshow> Snapshots and structure should render story 'Simple' 1`] = `
-Array [
+[
   <Slideshow
     activeIndex={0}
     afterSlides={
@@ -12,7 +12,7 @@ Array [
           activeIndex={0}
           isAutoPlaying={false}
           nextButtonProps={
-            Object {
+            {
               "aria-controls": "slideshow-slides2",
               "label": "Next",
             }
@@ -23,7 +23,7 @@ Array [
           paginationItemProps={[Function]}
           parentRef={null}
           previousButtonProps={
-            Object {
+            {
               "aria-controls": "slideshow-slides2",
               "label": "Previous",
             }
@@ -42,7 +42,7 @@ Array [
     slideGroupLabel={[Function]}
     slidesId="slideshow-slides2"
     style={
-      Object {
+      {
         "width": "50%",
       }
     }
@@ -59,7 +59,7 @@ Array [
         image="/demo-assets/landscape1.jpg"
         theme="light"
         thumbnailProps={
-          Object {
+          {
             "aspectRatio": "horizontal",
             "loading": "eager",
           }
@@ -76,7 +76,7 @@ Array [
         image="/demo-assets/landscape1-s200.jpg"
         theme="light"
         thumbnailProps={
-          Object {
+          {
             "aspectRatio": "horizontal",
             "loading": "eager",
           }
@@ -93,7 +93,7 @@ Array [
         image="/demo-assets/landscape2.jpg"
         theme="light"
         thumbnailProps={
-          Object {
+          {
             "aspectRatio": "horizontal",
             "loading": "eager",
           }
@@ -110,7 +110,7 @@ Array [
         image="/demo-assets/landscape3.jpg"
         theme="light"
         thumbnailProps={
-          Object {
+          {
             "aspectRatio": "horizontal",
             "loading": "eager",
           }
@@ -127,7 +127,7 @@ Array [
         image="/demo-assets/portrait1.jpg"
         theme="light"
         thumbnailProps={
-          Object {
+          {
             "aspectRatio": "horizontal",
             "loading": "eager",
           }
@@ -144,7 +144,7 @@ Array [
         image="/demo-assets/portrait1-s200.jpg"
         theme="light"
         thumbnailProps={
-          Object {
+          {
             "aspectRatio": "horizontal",
             "loading": "eager",
           }

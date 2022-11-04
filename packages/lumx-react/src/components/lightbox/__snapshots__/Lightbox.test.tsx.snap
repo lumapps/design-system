@@ -8,7 +8,7 @@ exports[`<Lightbox> Snapshots and structure should render story 'Default' 1`] = 
     aria-modal="true"
     className="lumx-lightbox lumx-lightbox--is-shown"
     style={
-      Object {
+      {
         "zIndex": undefined,
       }
     }
@@ -27,9 +27,9 @@ exports[`<Lightbox> Snapshots and structure should render story 'Default' 1`] = 
     <ClickAwayProvider
       callback={[Function]}
       childrenRefs={
-        Object {
-          "current": Array [
-            Object {
+        {
+          "current": [
+            {
               "current": null,
             },
           ],
@@ -47,11 +47,11 @@ exports[`<Lightbox> Snapshots and structure should render story 'Default' 1`] = 
           groupBy={1}
           interval={5000}
           slideshowControlsProps={
-            Object {
-              "nextButtonProps": Object {
+            {
+              "nextButtonProps": {
                 "label": "Next",
               },
-              "previousButtonProps": Object {
+              "previousButtonProps": {
                 "label": "Previous",
               },
             }

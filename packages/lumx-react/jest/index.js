@@ -15,45 +15,22 @@ module.exports = {
     collectCoverageFrom: ['src/**/*.{ts,tsx}', '!src/**/*.stories.tsx'],
     coverageDirectory: '<rootDir>jest/reports/coverage',
     coverageReporters: ['json', 'lcov', 'html', 'text'],
-    moduleDirectories: [`${CONFIGS.path.ROOT_PATH}/node_modules`],
     moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],
     moduleNameMapper: {
         '\\.scss$': '<rootDir>jest/__mocks__/emptyModuleMock.js',
         ...moduleNameMapper,
     },
-    preset: 'ts-jest',
-    reporters: [
-        'default',
-        [
-            'jest-html-reporters',
-            {
-                publicPath: 'jest/reports',
-                filename: 'jest_report_summary.html',
-            },
-        ],
-    ],
+    reporters: ['default'],
     rootDir: '../',
     setupFilesAfterEnv: [
-        require.resolve('jest-chain'),
-        require.resolve('expect-more-jest'),
-        require.resolve('jest-enzyme'),
         '<rootDir>jest/configure.js',
     ],
     snapshotSerializers: ['enzyme-to-json/serializer'],
-    testEnvironment: 'enzyme',
-    testEnvironmentOptions: {
-        enzymeAdapter: 'react16',
-    },
+    testEnvironment: 'jsdom',
     testMatch: ['<rootDir>src/**/?(*.)+(spec|test).[jt]s?(x)'],
     transform: {
-        '\\.(t|j)sx?$': '<rootDir>jest/transform.js',
+        '^.+\\.(t|j)sx?$': '<rootDir>jest/transform.js',
         // Mock file import returning their file path.
         '\\.(jpg|jpeg|png|gif)$': '<rootDir>jest/__mocks__/emptyFileMockTransformer.js',
     },
-    watchPlugins: [
-        'jest-watch-master',
-        'jest-watch-suspend',
-        'jest-watch-typeahead/filename',
-        'jest-watch-typeahead/testname',
-    ],
 };

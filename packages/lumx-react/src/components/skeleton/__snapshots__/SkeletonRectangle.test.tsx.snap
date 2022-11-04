@@ -11,7 +11,7 @@ exports[`<SkeletonRectangle> Snapshots and structure should render story 'Loadin
 `;
 
 exports[`<SkeletonRectangle> Snapshots and structure should render story 'Rectangle' 1`] = `
-Array [
+[
   <div
     className="lumx-spacing-margin lumx-skeleton-rectangle lumx-skeleton-rectangle--height-xxs lumx-skeleton-rectangle--theme-light lumx-skeleton-rectangle--variant-squared lumx-skeleton-rectangle--width-xxs"
   >

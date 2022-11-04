@@ -10,7 +10,7 @@ exports[`<DatePickerField> Snapshots and structure should render correctly 1`] =
     onKeyPress={[Function]}
     readOnly={true}
     textFieldRef={
-      Object {
+      {
         "current": null,
       }
     }
@@ -31,7 +31,7 @@ exports[`<DatePickerField> Snapshots and structure should render correctly when 
     onKeyPress={[Function]}
     readOnly={true}
     textFieldRef={
-      Object {
+      {
         "current": null,
       }
     }

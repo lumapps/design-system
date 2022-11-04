@@ -15,7 +15,7 @@ exports[`<List> Snapshots and structure should render story 'AsLink' 1`] = `
     isHighlighted={false}
     key=".0"
     linkProps={
-      Object {
+      {
         "href": "#",
       }
     }
@@ -40,7 +40,7 @@ exports[`<List> Snapshots and structure should render story 'AsLink' 1`] = `
     isHighlighted={false}
     key=".1"
     linkProps={
-      Object {
+      {
         "href": "http://www.google.com",
         "target": "_blank",
       }
@@ -83,7 +83,7 @@ exports[`<List> Snapshots and structure should render story 'KeyboardNavigation'
     isHighlighted={false}
     key=".2"
     linkProps={
-      Object {
+      {
         "href": "#",
       }
     }
@@ -111,7 +111,7 @@ exports[`<List> Snapshots and structure should render story 'KeyboardNavigation'
     isHighlighted={false}
     key=".3..2"
     linkProps={
-      Object {
+      {
         "href": "#",
       }
     }
@@ -133,7 +133,7 @@ exports[`<List> Snapshots and structure should render story 'KeyboardNavigation'
     isDisabled={true}
     key=".4"
     linkProps={
-      Object {
+      {
         "href": "#",
       }
     }
@@ -156,7 +156,7 @@ exports[`<List> Snapshots and structure should render story 'KeyboardNavigation'
     isHighlighted={false}
     key=".7:$1"
     linkProps={
-      Object {
+      {
         "href": "#",
       }
     }
@@ -190,7 +190,7 @@ exports[`<List> Snapshots and structure should render story 'WithCustomChildren'
 `;
 
 exports[`<List> Snapshots and structure should render story 'WithItemPadding' 1`] = `
-Array [
+[
   <ul
     className="lumx-list lumx-list--item-padding-big"
     tabIndex={-1}
@@ -200,7 +200,7 @@ Array [
       isHighlighted={false}
       key=".0"
       linkProps={
-        Object {
+        {
           "href": "#",
         }
       }
@@ -225,7 +225,7 @@ Array [
       isHighlighted={false}
       key=".1"
       linkProps={
-        Object {
+        {
           "href": "#",
         }
       }
@@ -255,7 +255,7 @@ Array [
       isHighlighted={false}
       key=".0"
       linkProps={
-        Object {
+        {
           "href": "#",
         }
       }
@@ -280,7 +280,7 @@ Array [
       isHighlighted={false}
       key=".1"
       linkProps={
-        Object {
+        {
           "href": "#",
         }
       }
@@ -310,7 +310,7 @@ Array [
       isHighlighted={false}
       key=".0"
       linkProps={
-        Object {
+        {
           "href": "#",
         }
       }
@@ -335,7 +335,7 @@ Array [
       isHighlighted={false}
       key=".1"
       linkProps={
-        Object {
+        {
           "href": "#",
         }
       }

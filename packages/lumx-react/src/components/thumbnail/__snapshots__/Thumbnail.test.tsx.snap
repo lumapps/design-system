@@ -15,7 +15,7 @@ exports[`<Thumbnail> Snapshots and structure should render story 'Clickable' 1`]
       className="lumx-thumbnail__image lumx-thumbnail__image--is-loading"
       loading="lazy"
       src="/demo-assets/landscape1.jpg"
-      style={Object {}}
+      style={{}}
     />
   </div>
 </button>
@@ -34,7 +34,7 @@ exports[`<Thumbnail> Snapshots and structure should render story 'ClickableCusto
       className="lumx-thumbnail__image lumx-thumbnail__image--is-loading"
       loading="lazy"
       src="/demo-assets/landscape1.jpg"
-      style={Object {}}
+      style={{}}
     />
   </div>
 </CustomLink>
@@ -53,7 +53,7 @@ exports[`<Thumbnail> Snapshots and structure should render story 'ClickableLink'
       className="lumx-thumbnail__image lumx-thumbnail__image--is-loading"
       loading="lazy"
       src="/demo-assets/landscape1.jpg"
-      style={Object {}}
+      style={{}}
     />
   </div>
 </a>
@@ -71,7 +71,7 @@ exports[`<Thumbnail> Snapshots and structure should render story 'Default' 1`] =
       className="lumx-thumbnail__image lumx-thumbnail__image--is-loading"
       loading="lazy"
       src="/demo-assets/landscape1.jpg"
-      style={Object {}}
+      style={{}}
     />
   </div>
 </div>
@@ -89,7 +89,7 @@ exports[`<Thumbnail> Snapshots and structure should render story 'WithBadge' 1`]
       className="lumx-thumbnail__image lumx-thumbnail__image--is-loading"
       loading="lazy"
       src="/demo-assets/landscape1.jpg"
-      style={Object {}}
+      style={{}}
     />
   </div>
   <Badge
@@ -115,7 +115,7 @@ exports[`<Thumbnail> Snapshots and structure should render story 'WithCustomImag
       className="lumx-thumbnail__image lumx-thumbnail__image--is-loading custom-image-class-name"
       loading="lazy"
       src="/demo-assets/landscape1.jpg"
-      style={Object {}}
+      style={{}}
     />
   </div>
   <Badge

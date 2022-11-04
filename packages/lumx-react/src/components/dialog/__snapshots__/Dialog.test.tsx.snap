@@ -12,14 +12,14 @@ exports[`<Dialog> Snapshots and structure should render story DialogFocusTrap 1`
   </Button>
   <Dialog
     focusElement={
-      Object {
+      {
         "current": null,
       }
     }
     isOpen={true}
     onClose={[Function]}
     parentElement={
-      Object {
+      {
         "current": undefined,
       }
     }
@@ -64,7 +64,7 @@ exports[`<Dialog> Snapshots and structure should render story DialogFocusTrap 1`
       <TextField
         className="lumx-spacing-margin-bottom-huge"
         inputRef={
-          Object {
+          {
             "current": null,
           }
         }
@@ -99,7 +99,7 @@ exports[`<Dialog> Snapshots and structure should render story DialogFocusTrap 1`
           isOpen={false}
           onClose={[Function]}
           parentElement={
-            Object {
+            {
               "current": null,
             }
           }
@@ -133,14 +133,14 @@ exports[`<Dialog> Snapshots and structure should render story DialogFocusTrap 1`
               label="Start date"
               locale="fr"
               nextButtonProps={
-                Object {
+                {
                   "label": "Next month",
                 }
               }
               onChange={[Function]}
               placeholder="Pick a date"
               previousButtonProps={
-                Object {
+                {
                   "label": "Previous month",
                 }
               }
@@ -151,14 +151,14 @@ exports[`<Dialog> Snapshots and structure should render story DialogFocusTrap 1`
               label="Start date"
               locale="fr"
               nextButtonProps={
-                Object {
+                {
                   "label": "Next month",
                 }
               }
               onChange={[Function]}
               placeholder="Pick a date"
               previousButtonProps={
-                Object {
+                {
                   "label": "Previous month",
                 }
               }
@@ -245,7 +245,7 @@ exports[`<Dialog> Snapshots and structure should render story DialogWithAlertDia
     isOpen={true}
     onClose={[Function]}
     parentElement={
-      Object {
+      {
         "current": undefined,
       }
     }
@@ -286,7 +286,7 @@ tertiam. Cras mattis iudicium purus sit amet fermentum
   </Dialog>
   <AlertDialog
     confirmProps={
-      Object {
+      {
         "label": "Confirm",
         "onClick": [Function],
       }
@@ -295,7 +295,7 @@ tertiam. Cras mattis iudicium purus sit amet fermentum
     kind="info"
     onClose={[Function]}
     parentElement={
-      Object {
+      {
         "current": undefined,
       }
     }
@@ -323,7 +323,7 @@ exports[`<Dialog> Snapshots and structure should render story DialogWithHeaderFo
     isOpen={true}
     onClose={[Function]}
     parentElement={
-      Object {
+      {
         "current": undefined,
       }
     }
@@ -375,7 +375,7 @@ exports[`<Dialog> Snapshots and structure should render story DialogWithHeaderFo
     isOpen={true}
     onClose={[Function]}
     parentElement={
-      Object {
+      {
         "current": undefined,
       }
     }
@@ -429,7 +429,7 @@ exports[`<Dialog> Snapshots and structure should render story DialogWithHeaderFo
     isOpen={true}
     onClose={[Function]}
     parentElement={
-      Object {
+      {
         "current": undefined,
       }
     }
@@ -473,7 +473,7 @@ exports[`<Dialog> Snapshots and structure should render story DialogWithHeaderFo
     isOpen={true}
     onClose={[Function]}
     parentElement={
-      Object {
+      {
         "current": undefined,
       }
     }
@@ -526,7 +526,7 @@ exports[`<Dialog> Snapshots and structure should render story LoadingDialog 1`] 
     isOpen={true}
     onClose={[Function]}
     parentElement={
-      Object {
+      {
         "current": undefined,
       }
     }
@@ -568,7 +568,7 @@ exports[`<Dialog> Snapshots and structure should render story PreventDialogAutoC
     isOpen={true}
     onClose={[Function]}
     parentElement={
-      Object {
+      {
         "current": undefined,
       }
     }
@@ -625,7 +625,7 @@ exports[`<Dialog> Snapshots and structure should render story ScrollableDialog 1
     isOpen={true}
     onClose={[Function]}
     parentElement={
-      Object {
+      {
         "current": undefined,
       }
     }
@@ -709,7 +709,7 @@ exports[`<Dialog> Snapshots and structure should render story ScrollableDialogWi
     isOpen={true}
     onClose={[Function]}
     parentElement={
-      Object {
+      {
         "current": undefined,
       }
     }
@@ -803,7 +803,7 @@ exports[`<Dialog> Snapshots and structure should render story SimpleDialog 1`] =
     isOpen={true}
     onClose={[Function]}
     parentElement={
-      Object {
+      {
         "current": undefined,
       }
     }
@@ -846,7 +846,7 @@ exports[`<Dialog> Snapshots and structure should render story Sizes 1`] = `
     isOpen={true}
     onClose={[Function]}
     parentElement={
-      Object {
+      {
         "current": undefined,
       }
     }
@@ -931,7 +931,7 @@ exports[`<Dialog> Snapshots and structure should render story WithAnimationCallb
     onClose={[Function]}
     onVisibilityChange={[Function]}
     parentElement={
-      Object {
+      {
         "current": undefined,
       }
     }

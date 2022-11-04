@@ -17,7 +17,7 @@ describe(getFocusableElements.name, () => {
         const element = htmlToElement(`<div><button /></div>`);
         const focusable = getFocusableElements(element);
         expect(focusable).toMatchInlineSnapshot(`
-            Array [
+            [
               <button />,
             ]
         `);
@@ -28,7 +28,7 @@ describe(getFocusableElements.name, () => {
             const element = htmlToElement(`<div><input /></div>`);
             const focusable = getFocusableElements(element);
             expect(focusable).toMatchInlineSnapshot(`
-                Array [
+                [
                   <input />,
                 ]
             `);
@@ -38,7 +38,7 @@ describe(getFocusableElements.name, () => {
             const element = htmlToElement(`<div><a href="#" /></div>`);
             const focusable = getFocusableElements(element);
             expect(focusable).toMatchInlineSnapshot(`
-                Array [
+                [
                   <a
                     href="#"
                   />,
@@ -50,7 +50,7 @@ describe(getFocusableElements.name, () => {
             const element = htmlToElement(`<div><textarea /></div>`);
             const focusable = getFocusableElements(element);
             expect(focusable).toMatchInlineSnapshot(`
-                Array [
+                [
                   <textarea>
                     &lt;/div&gt;
                   </textarea>,
@@ -62,7 +62,7 @@ describe(getFocusableElements.name, () => {
             const element = htmlToElement(`<div><span tabindex="0" /></div>`);
             const focusable = getFocusableElements(element);
             expect(focusable).toMatchInlineSnapshot(`
-                Array [
+                [
                   <span
                     tabindex="0"
                   />,
@@ -74,7 +74,7 @@ describe(getFocusableElements.name, () => {
             const element = htmlToElement(`<div><button disabled="false" /><button /></div>`);
             const focusable = getFocusableElements(element);
             expect(focusable).toMatchInlineSnapshot(`
-                Array [
+                [
                   <button
                     disabled="false"
                   />,
@@ -87,7 +87,7 @@ describe(getFocusableElements.name, () => {
             const element = htmlToElement(`<div><button aria-disabled="false" /><button /></div>`);
             const focusable = getFocusableElements(element);
             expect(focusable).toMatchInlineSnapshot(`
-                Array [
+                [
                   <button
                     aria-disabled="false"
                   />,
@@ -102,7 +102,7 @@ describe(getFocusableElements.name, () => {
             const element = htmlToElement(`<div><button disabled /><button /></div>`);
             const focusable = getFocusableElements(element);
             expect(focusable).toMatchInlineSnapshot(`
-                Array [
+                [
                   <button />,
                 ]
             `);
@@ -112,7 +112,7 @@ describe(getFocusableElements.name, () => {
             const element = htmlToElement(`<div><button aria-disabled /><button /></div>`);
             const focusable = getFocusableElements(element);
             expect(focusable).toMatchInlineSnapshot(`
-                Array [
+                [
                   <button />,
                 ]
             `);
@@ -122,7 +122,7 @@ describe(getFocusableElements.name, () => {
             const element = htmlToElement(`<div><button tabindex="-1" /><button /></div>`);
             const focusable = getFocusableElements(element);
             expect(focusable).toMatchInlineSnapshot(`
-                Array [
+                [
                   <button />,
                 ]
             `);
@@ -132,7 +132,7 @@ describe(getFocusableElements.name, () => {
             const element = htmlToElement(`<div><input type="hidden" /><button /></div>`);
             const focusable = getFocusableElements(element);
             expect(focusable).toMatchInlineSnapshot(`
-                Array [
+                [
                   <button />,
                 ]
             `);
@@ -142,7 +142,7 @@ describe(getFocusableElements.name, () => {
             const element = htmlToElement(`<div><input hidden /><button /></div>`);
             const focusable = getFocusableElements(element);
             expect(focusable).toMatchInlineSnapshot(`
-                Array [
+                [
                   <button />,
                 ]
             `);
