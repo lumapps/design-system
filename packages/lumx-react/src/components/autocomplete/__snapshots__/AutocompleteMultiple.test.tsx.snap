@@ -3,7 +3,7 @@
 exports[`<AutocompleteMultiple> Snapshots and structure should render correctly 1`] = `
 <Autocomplete
   anchorToInput={false}
-  chips={Array []}
+  chips={[]}
   className="lumx-autocomplete-multiple"
   closeOnClick={false}
   closeOnClickAway={true}

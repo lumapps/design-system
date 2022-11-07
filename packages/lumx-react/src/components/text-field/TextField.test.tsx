@@ -22,7 +22,9 @@ const setup = (propsOverride: Partial<TextFieldProps> = {}) => {
     const { container } = render(<TextField {...props} />);
 
     const element = getByClassName(container, CLASSNAME);
-    const inputNative = queryByTagName(container, 'textarea') || getByTagName(container, 'input');
+    const inputNative = (queryByTagName(container, 'textarea') || getByTagName(container, 'input')) as
+        | HTMLTextAreaElement
+        | HTMLInputElement;
     const helpers = queryAllByClassName(container, 'lumx-text-field__helper');
     const [[helper], [error]] = partition(helpers, (h) => !h.className.includes('lumx-input-helper--color-red'));
 
@@ -94,13 +96,13 @@ describe(`<${TextField.displayName}>`, () => {
         it('should have text as value', () => {
             const value = 'test';
             const { inputNative } = setup({ value });
-            expect(inputNative).toHaveValue(value);
+            expect(inputNative.value).toEqual(value);
         });
 
         it('should have no value', () => {
             const value = undefined;
             const { inputNative } = setup({ value });
-            expect(inputNative).toHaveValue('');
+            expect(inputNative.value).toEqual('');
         });
 
         it('should have helper text', () => {
@@ -147,8 +149,6 @@ describe(`<${TextField.displayName}>`, () => {
 
     // 3. Test events.
     describe('Events', () => {
-        window.document.getSelection = jest.fn();
-
         it('should trigger `onChange` when text field is changed', async () => {
             const onChange = jest.fn();
             const { inputNative } = setup({ value: '', name: 'name', onChange });

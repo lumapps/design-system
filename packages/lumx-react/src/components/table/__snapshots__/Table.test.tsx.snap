@@ -4,7 +4,7 @@ exports[`<Table> Snapshots and structure should render story 'Default' 1`] = `
 <table
   className="lumx-table lumx-table--has-dividers lumx-table--theme-light"
   style={
-    Object {
+    {
       "minWidth": 620,
     }
   }

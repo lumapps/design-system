@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SkeletonTypography> Snapshots and structure should render story 'TextTypography' 1`] = `
-Array [
+[
   <div
     className="lumx-spacing-margin-bottom lumx-skeleton-typography lumx-skeleton-typography--theme-light lumx-skeleton-typography--typography-title"
     style={
-      Object {
+      {
         "width": "30%",
       }
     }
@@ -17,7 +17,7 @@ Array [
   <div
     className="lumx-skeleton-typography lumx-skeleton-typography--theme-light lumx-skeleton-typography--typography-body1"
     style={
-      Object {
+      {
         "width": undefined,
       }
     }
@@ -29,7 +29,7 @@ Array [
   <div
     className="lumx-skeleton-typography lumx-skeleton-typography--theme-light lumx-skeleton-typography--typography-body1"
     style={
-      Object {
+      {
         "width": undefined,
       }
     }
@@ -41,7 +41,7 @@ Array [
   <div
     className="lumx-skeleton-typography lumx-skeleton-typography--theme-light lumx-skeleton-typography--typography-body1"
     style={
-      Object {
+      {
         "width": undefined,
       }
     }
@@ -53,7 +53,7 @@ Array [
   <div
     className="lumx-skeleton-typography lumx-skeleton-typography--theme-light lumx-skeleton-typography--typography-body1"
     style={
-      Object {
+      {
         "width": "70%",
       }
     }
@@ -65,7 +65,7 @@ Array [
   <div
     className="lumx-skeleton-typography lumx-skeleton-typography--theme-light lumx-skeleton-typography--typography-body1 lumx-skeleton-typography--color-primary"
     style={
-      Object {
+      {
         "width": undefined,
       }
     }
@@ -77,7 +77,7 @@ Array [
   <div
     className="lumx-skeleton-typography lumx-skeleton-typography--theme-light lumx-skeleton-typography--typography-body1 lumx-skeleton-typography--color-secondary"
     style={
-      Object {
+      {
         "width": undefined,
       }
     }
@@ -89,7 +89,7 @@ Array [
   <div
     className="lumx-skeleton-typography lumx-skeleton-typography--theme-light lumx-skeleton-typography--typography-body1 lumx-skeleton-typography--color-blue"
     style={
-      Object {
+      {
         "width": undefined,
       }
     }
@@ -101,7 +101,7 @@ Array [
   <div
     className="lumx-skeleton-typography lumx-skeleton-typography--theme-light lumx-skeleton-typography--typography-body1 lumx-skeleton-typography--color-dark"
     style={
-      Object {
+      {
         "width": undefined,
       }
     }
@@ -113,7 +113,7 @@ Array [
   <div
     className="lumx-skeleton-typography lumx-skeleton-typography--theme-light lumx-skeleton-typography--typography-body1 lumx-skeleton-typography--color-green"
     style={
-      Object {
+      {
         "width": undefined,
       }
     }
@@ -125,7 +125,7 @@ Array [
   <div
     className="lumx-skeleton-typography lumx-skeleton-typography--theme-light lumx-skeleton-typography--typography-body1 lumx-skeleton-typography--color-yellow"
     style={
-      Object {
+      {
         "width": undefined,
       }
     }
@@ -137,7 +137,7 @@ Array [
   <div
     className="lumx-skeleton-typography lumx-skeleton-typography--theme-light lumx-skeleton-typography--typography-body1 lumx-skeleton-typography--color-red"
     style={
-      Object {
+      {
         "width": undefined,
       }
     }
@@ -149,7 +149,7 @@ Array [
   <div
     className="lumx-skeleton-typography lumx-skeleton-typography--theme-light lumx-skeleton-typography--typography-body1 lumx-skeleton-typography--color-light"
     style={
-      Object {
+      {
         "width": undefined,
       }
     }
@@ -161,7 +161,7 @@ Array [
   <div
     className="lumx-skeleton-typography lumx-skeleton-typography--theme-light lumx-skeleton-typography--typography-body1 lumx-skeleton-typography--color-grey"
     style={
-      Object {
+      {
         "width": undefined,
       }
     }

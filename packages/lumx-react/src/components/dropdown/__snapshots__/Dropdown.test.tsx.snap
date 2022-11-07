@@ -3,7 +3,7 @@
 exports[`<Dropdown> Snapshots and structure should render correctly 1`] = `
 <Popover
   anchorRef={
-    Object {
+    {
       "current": null,
     }
   }
@@ -15,7 +15,7 @@ exports[`<Dropdown> Snapshots and structure should render correctly 1`] = `
   fitWithinViewportHeight={true}
   focusAnchorOnClose={true}
   focusElement={
-    Object {
+    {
       "current": null,
     }
   }

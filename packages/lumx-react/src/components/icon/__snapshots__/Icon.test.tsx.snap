@@ -9,7 +9,7 @@ exports[`<Icon> Snapshots and structure should render color & color variant 1`] 
     height="1em"
     preserveAspectRatio="xMidYMid meet"
     style={
-      Object {
+      {
         "verticalAlign": "-0.125em",
       }
     }
@@ -33,7 +33,7 @@ exports[`<Icon> Snapshots and structure should render correctly 1`] = `
     height="1em"
     preserveAspectRatio="xMidYMid meet"
     style={
-      Object {
+      {
         "verticalAlign": "-0.125em",
       }
     }

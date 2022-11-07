@@ -8,7 +8,7 @@ exports[`<Autocomplete> Props should render correctly when the dropdown is close
     inputRef={[Function]}
     onChange={[MockFunction]}
     textFieldRef={
-      Object {
+      {
         "current": null,
       }
     }
@@ -18,7 +18,7 @@ exports[`<Autocomplete> Props should render correctly when the dropdown is close
   />
   <Dropdown
     anchorRef={
-      Object {
+      {
         "current": null,
       }
     }
@@ -115,7 +115,7 @@ exports[`<Autocomplete> Snapshots and structure should render correctly 1`] = `
     label="Field label"
     onChange={[MockFunction]}
     textFieldRef={
-      Object {
+      {
         "current": null,
       }
     }
@@ -125,7 +125,7 @@ exports[`<Autocomplete> Snapshots and structure should render correctly 1`] = `
   />
   <Dropdown
     anchorRef={
-      Object {
+      {
         "current": null,
       }
     }

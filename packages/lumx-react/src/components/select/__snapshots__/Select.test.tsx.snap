@@ -6,7 +6,7 @@ exports[`<Select> Snapshots and structure should render correctly 1`] = `
 >
   <SelectField
     anchorRef={
-      Object {
+      {
         "current": null,
       }
     }
@@ -20,7 +20,7 @@ exports[`<Select> Snapshots and structure should render correctly 1`] = `
   />
   <Dropdown
     anchorRef={
-      Object {
+      {
         "current": null,
       }
     }

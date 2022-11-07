@@ -150,7 +150,7 @@ exports[`<ButtonRoot> Snapshots and structure should render custom link 1`] = `
       className="lumx-button lumx-button--color-dark"
       href="foo"
       style={
-        Object {
+        {
           "color": "red",
         }
       }

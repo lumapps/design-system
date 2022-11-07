@@ -19,7 +19,7 @@ exports[`<Tooltip> Snapshots and structure should not wrap Button 1`] = `
       id="tooltip-uid"
       role="tooltip"
       style={
-        Object {
+        {
           "left": "0",
           "position": "absolute",
           "top": "0",
@@ -54,7 +54,7 @@ exports[`<Tooltip> Snapshots and structure should not wrap Icon 1`] = `
       id="tooltip-uid"
       role="tooltip"
       style={
-        Object {
+        {
           "left": "0",
           "position": "absolute",
           "top": "0",
@@ -91,7 +91,7 @@ exports[`<Tooltip> Snapshots and structure should render correctly 1`] = `
       id="tooltip-uid"
       role="tooltip"
       style={
-        Object {
+        {
           "left": "0",
           "position": "absolute",
           "top": "0",
@@ -143,7 +143,7 @@ exports[`<Tooltip> Snapshots and structure should work on disabled elements 1`] 
       id="tooltip-uid"
       role="tooltip"
       style={
-        Object {
+        {
           "left": "0",
           "position": "absolute",
           "top": "0",
@@ -180,7 +180,7 @@ exports[`<Tooltip> Snapshots and structure should wrap children 1`] = `
       id="tooltip-uid"
       role="tooltip"
       style={
-        Object {
+        {
           "left": "0",
           "position": "absolute",
           "top": "0",
@@ -212,7 +212,7 @@ exports[`<Tooltip> Snapshots and structure should wrap children 2`] = `
       id="tooltip-uid"
       role="tooltip"
       style={
-        Object {
+        {
           "left": "0",
           "position": "absolute",
           "top": "0",

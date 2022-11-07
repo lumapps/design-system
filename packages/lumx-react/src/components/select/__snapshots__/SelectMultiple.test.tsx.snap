@@ -6,7 +6,7 @@ exports[`<SelectMultiple> Snapshots and structure should render chips 1`] = `
 >
   <SelectMultipleField
     anchorRef={
-      Object {
+      {
         "current": null,
       }
     }
@@ -16,12 +16,12 @@ exports[`<SelectMultiple> Snapshots and structure should render chips 1`] = `
     selectedChipRender={[Function]}
     selectedValueRender={[Function]}
     theme="light"
-    value={Array []}
+    value={[]}
     variant="chip"
   />
   <Dropdown
     anchorRef={
-      Object {
+      {
         "current": null,
       }
     }
@@ -49,7 +49,7 @@ exports[`<SelectMultiple> Snapshots and structure should render defaults 1`] = `
 >
   <SelectMultipleField
     anchorRef={
-      Object {
+      {
         "current": null,
       }
     }
@@ -59,12 +59,12 @@ exports[`<SelectMultiple> Snapshots and structure should render defaults 1`] = `
     selectedChipRender={[Function]}
     selectedValueRender={[Function]}
     theme="light"
-    value={Array []}
+    value={[]}
     variant="input"
   />
   <Dropdown
     anchorRef={
-      Object {
+      {
         "current": null,
       }
     }

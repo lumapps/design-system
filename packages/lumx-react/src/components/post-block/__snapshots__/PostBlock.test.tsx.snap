@@ -24,7 +24,7 @@ exports[`<PostBlock> Snapshots and structure should render story 'Default' 1`] =
     >
       <UserBlock
         avatarProps={
-          Object {
+          {
             "alt": "Avatar",
             "image": "/demo-assets/avatar2.jpg",
           }
@@ -49,7 +49,7 @@ exports[`<PostBlock> Snapshots and structure should render story 'Default' 1`] =
     <p
       className="lumx-post-block__text"
       dangerouslySetInnerHTML={
-        Object {
+        {
           "__html": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rhoncus libero aliquet pharetra luctus. Fusce nisl turpis, posuere ac tellus at, euismod vulputate libero...",
         }
       }
@@ -59,13 +59,13 @@ exports[`<PostBlock> Snapshots and structure should render story 'Default' 1`] =
     >
       <UserBlock
         avatarProps={
-          Object {
+          {
             "alt": "Avatar",
             "image": "/demo-assets/persona.png",
           }
         }
         fields={
-          Array [
+          [
             "Head of Design",
             "Lyon",
           ]

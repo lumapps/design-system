@@ -30,7 +30,7 @@ exports[`<Slider> Snapshots and structure should render story 'DefaultSlider' 1`
       <div
         className="lumx-slider__track lumx-slider__track--active"
         style={
-          Object {
+          {
             "width": "50%",
           }
         }
@@ -41,7 +41,7 @@ exports[`<Slider> Snapshots and structure should render story 'DefaultSlider' 1`
         id="slider-uid"
         onKeyDown={[Function]}
         style={
-          Object {
+          {
             "left": "50%",
           }
         }
@@ -94,7 +94,7 @@ exports[`<Slider> Snapshots and structure should render story 'WithHelperSlider'
       <div
         className="lumx-slider__track lumx-slider__track--active"
         style={
-          Object {
+          {
             "width": "50%",
           }
         }
@@ -105,7 +105,7 @@ exports[`<Slider> Snapshots and structure should render story 'WithHelperSlider'
         id="slider-uid"
         onKeyDown={[Function]}
         style={
-          Object {
+          {
             "left": "50%",
           }
         }

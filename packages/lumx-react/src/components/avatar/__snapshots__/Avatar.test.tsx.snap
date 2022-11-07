@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Avatar> Snapshots and structure should render story 'Clickable' 1`] = `
-Array [
+[
   <div
     className="lumx-avatar lumx-avatar--size-l lumx-avatar--theme-light"
   >
@@ -27,7 +27,7 @@ Array [
       fallback="M19,3A2,2 0 0,1 21,5V11H19V13H19L17,13V15H15V17H13V19H11V21H5C3.89,21 3,20.1 3,19V5A2,2 0 0,1 5,3H19M21,15V19A2,2 0 0,1 19,21H19L15,21V19H17V17H19V15H21M19,8.5A0.5,0.5 0 0,0 18.5,8H5.5A0.5,0.5 0 0,0 5,8.5V15.5A0.5,0.5 0 0,0 5.5,16H11V15H13V13H15V11H17V9H19V8.5Z"
       image="/demo-assets/avatar2.jpg"
       linkProps={
-        Object {
+        {
           "href": "https://example.com",
         }
       }
@@ -55,7 +55,7 @@ Array [
 `;
 
 exports[`<Avatar> Snapshots and structure should render story 'Sizes' 1`] = `
-Array [
+[
   <div
     className="lumx-spacing-margin-bottom lumx-avatar lumx-avatar--size-xs lumx-avatar--theme-light"
   >
@@ -144,7 +144,7 @@ Array [
 `;
 
 exports[`<Avatar> Snapshots and structure should render story 'WithActions' 1`] = `
-Array [
+[
   <div
     className="lumx-avatar lumx-avatar--size-xs lumx-avatar--theme-light"
   >
@@ -437,7 +437,7 @@ Array [
 `;
 
 exports[`<Avatar> Snapshots and structure should render story 'WithBadge' 1`] = `
-Array [
+[
   <div
     className="lumx-spacing-margin-bottom lumx-avatar lumx-avatar--size-xs lumx-avatar--theme-light"
   >
@@ -592,7 +592,7 @@ Array [
 `;
 
 exports[`<Avatar> Snapshots and structure should render story 'WithRectangularImage' 1`] = `
-Array [
+[
   <div
     className="lumx-spacing-margin-bottom lumx-avatar lumx-avatar--size-xs lumx-avatar--theme-light"
   >
