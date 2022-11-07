@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 -   `@lumx/core` a11y: Introducing a more visible outline on elements with keyboard focus.
+-   `@lumx/react`: rework how TS types are exposed. Fixed types for `List.useKeyboardListNavigation` hook.
 
 ## [3.0.3][] - 2022-10-14
 
