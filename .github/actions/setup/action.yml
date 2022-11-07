@@ -1,0 +1,37 @@
+name: 'Setup'
+description: 'Full CI env setup (setup node & restore/install dependencies)'
+
+inputs:
+    node_version:
+        description: 'Node version to use'
+        default: '16.10.0'
+
+runs:
+    using: composite
+    steps:
+        -   name: "Setup node env"
+            uses: actions/setup-node@v3
+            with:
+                node-version: ${{ inputs.node_version }}
+
+        -   name: "Get cache key"
+            id: cache-prep
+            run: echo "cacheKey=${{ runner.os }}-dependency-hash-${{ hashFiles('yarn.lock') }}" >> $GITHUB_OUTPUT
+            shell: bash
+
+        -   name: "Cache dependencies"
+            id: cache
+            uses: actions/cache@v3
+            with:
+                path: "**/node_modules"
+                key: ${{ steps.cache-prep.outputs.cacheKey }}
+                restore-keys: |
+                    ${{ runner.os }}-dependency-hash-
+
+        -   name: "Install dependencies"
+            # Skip install here because the cache already has an entry, we won't be able to update it, so it's unnecessary to try and rebuild it
+            if: steps.cache.outputs.cache-hit != 'true'
+            run: yarn install
+            shell: bash
+
+

@@ -1,46 +1,40 @@
 name: Chromatic
 
 on:
-  pull_request:
-    types: [ opened, synchronize, reopened, labeled ]
-  push:
-    tags:
-        - v*
-        - '!v*-alpha.*' # ignore alpha versions
+    pull_request:
+        types: [ opened, synchronize, reopened, labeled ]
+    push:
+        tags:
+            - v*
+            - '!v*-alpha.*' # ignore alpha versions
 
-env:
-    node_version: '13.7.0'
+concurrency:
+    group: chromatic-${{ github.head_ref || github.run_id }}
+    cancel-in-progress: true
 
 jobs:
-  deploy:
-    # Run on push version tag OR on PR with the "need: deploy-chromatic" label
-    if: "github.event_name == 'push' || contains(github.event.pull_request.labels.*.name, 'need: deploy-chromatic')"
-    runs-on: ubuntu-latest
-    steps:
-      - name: "Checkout repository"
-        uses: actions/checkout@v3
-        with:
-            fetch-depth: 0 # retrieve all the repo history (required by chromatic)
+    deploy:
+        # Run on push version tag OR on PR with the "need: deploy-chromatic" label
+        if: "github.event_name == 'push' || contains(github.event.pull_request.labels.*.name, 'need: deploy-chromatic')"
+        runs-on: ubuntu-latest
+        steps:
+            -   name: "Checkout repository"
+                uses: actions/checkout@v3
+                with:
+                    fetch-depth: 0 # retrieve all the repo history (required by chromatic)
 
-      - name: "Setup node env"
-        uses: actions/setup-node@c6fd00ceb9747fb23ffdf72987450a2664414867 #v2.1.2
-        with:
-            node-version: ${{ env.node_version }}
+            -   name: "Setup"
+                uses: ./.github/actions/setup
 
-      - name: "Install dependencies"
-        run: yarn install --immutable
+            -   name: "Deploy chromatic"
+                uses: chromaui/action@3f82bf5d065290658af8add6dce946809ee0f923 #v6.1.0
+                with:
+                    token: ${{ secrets.GITHUB_TOKEN }}
+                    projectToken: ${{ secrets.CHROMATIC_TOKEN }}
+                    buildScriptName: build:storybook
 
-      - name: "Deploy chromatic"
-        uses: chromaui/action@3f82bf5d065290658af8add6dce946809ee0f923 #v6.1.0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          projectToken: ${{ secrets.CHROMATIC_TOKEN }}
-          buildScriptName: build:storybook
-
-      - if: "contains(github.event.pull_request.labels.*.name, 'need: deploy-chromatic')"
-        name: "Remove label"
-        uses: ./dev-packages/ga-remove-label
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          LABEL: "need: deploy-chromatic"
-
+            -   if: "contains(github.event.pull_request.labels.*.name, 'need: deploy-chromatic')"
+                name: "Remove label"
+                uses: ./.github/actions/remove-label
+                with:
+                    label: "need: deploy-chromatic"
