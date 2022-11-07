@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Autocomplete: add `textFieldProps` props to the autocomplete component.
+
 ### Fixed
 
 -   InlineList: Set `listitem` role to items since `display: contents` attribute removes the semantics.
@@ -24,7 +28,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   GenericBlock: add `as` prop to customize the root, the figure, the content and actions elements component render.
 -   New `ClickAwayProvider` utility component (exported in the new `@lumx/react/utils` module).
 -   New `InlineList` component.
--   Autocomplete: add `textFieldProps` props to the autocomplete component.
 
 ### Changed
 
