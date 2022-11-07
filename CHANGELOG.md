@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.4][] - 2022-11-07
+
 ### Added
 
 -   Autocomplete: add `textFieldProps` props to the autocomplete component.
@@ -1619,3 +1621,5 @@ _Failed released_
 [3.0.2]: https://github.com/lumapps/design-system/tree/v3.0.2
 [unreleased]: https://github.com/lumapps/design-system/compare/v3.0.3...HEAD
 [3.0.3]: https://github.com/lumapps/design-system/tree/v3.0.3
+[unreleased]: https://github.com/lumapps/design-system/compare/v3.0.4...HEAD
+[3.0.4]: https://github.com/lumapps/design-system/tree/v3.0.4
