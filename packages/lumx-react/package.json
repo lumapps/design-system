@@ -7,8 +7,8 @@
     },
     "dependencies": {
         "@juggle/resize-observer": "^3.2.0",
-        "@lumx/core": "^3.0.3",
-        "@lumx/icons": "^3.0.3",
+        "@lumx/core": "^3.0.4",
+        "@lumx/icons": "^3.0.4",
         "@popperjs/core": "^2.5.4",
         "body-scroll-lock": "^3.1.5",
         "classnames": "^2.2.6",
@@ -17,17 +17,17 @@
         "uid": "^2.0.0"
     },
     "devDependencies": {
-        "@babel/core": "^7.8.3",
-        "@babel/plugin-proposal-class-properties": "^7.8.3",
-        "@babel/plugin-proposal-export-default-from": "^7.8.3",
-        "@babel/plugin-proposal-nullish-coalescing-operator": "^7.8.3",
-        "@babel/plugin-proposal-object-rest-spread": "^7.8.3",
-        "@babel/plugin-proposal-optional-chaining": "^7.8.3",
-        "@babel/plugin-proposal-private-methods": "^7.16.0",
-        "@babel/plugin-proposal-private-property-in-object": "^7.16.0",
-        "@babel/preset-env": "^7.8.3",
-        "@babel/preset-react": "^7.8.3",
-        "@babel/preset-typescript": "^7.12.7",
+        "@babel/core": "^7.20.2",
+        "@babel/plugin-proposal-class-properties": "^7.18.6",
+        "@babel/plugin-proposal-export-default-from": "^7.18.10",
+        "@babel/plugin-proposal-nullish-coalescing-operator": "^7.18.6",
+        "@babel/plugin-proposal-object-rest-spread": "^7.20.2",
+        "@babel/plugin-proposal-optional-chaining": "^7.18.9",
+        "@babel/plugin-proposal-private-methods": "^7.18.6",
+        "@babel/plugin-proposal-private-property-in-object": "^7.18.6",
+        "@babel/preset-env": "^7.20.2",
+        "@babel/preset-react": "^7.18.6",
+        "@babel/preset-typescript": "^7.18.6",
         "@rollup/plugin-commonjs": "^15.0.0",
         "@rollup/plugin-node-resolve": "9.0.0",
         "@testing-library/jest-dom": "^5.16.4",
@@ -46,7 +46,6 @@
         "babel-loader": "^8.0.6",
         "chromatic": "^6.0.6",
         "core-js": "^3.6.4",
-        "dts-bundle-generator": "^5.5.0",
         "enzyme": "^3.11.0",
         "enzyme-adapter-react-16": "^1.15.4",
         "enzyme-to-json": "^3.5.0",
@@ -96,7 +95,7 @@
     "license": "MIT",
     "module": "index.js",
     "main": "index.js",
-    "types": "types.d.ts",
+    "types": "index.d.ts",
     "name": "@lumx/react",
     "publishConfig": {
         "directory": "dist"
@@ -106,8 +105,7 @@
         "url": "git+https://github.com/lumapps/design-system.git"
     },
     "scripts": {
-        "build": "rollup -c && yarn generate:types",
-        "generate:types": "dts-bundle-generator --no-check --external-imports=react -o dist/types.d.ts src/index.ts",
+        "build": "rollup -c",
         "prepare": "install-peers || exit 0",
         "prepublishOnly": "yarn build",
         "test": "jest --config jest/index.js --coverage --notify --passWithNoTests --detectOpenHandles --runInBand",
@@ -116,5 +114,5 @@
         "build:storybook": "cd storybook && ./build"
     },
     "sideEffects": false,
-    "version": "3.0.3"
+    "version": "3.0.4"
 }

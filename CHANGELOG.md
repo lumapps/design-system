@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.4][] - 2022-11-07
+
+### Added
+
+-   Autocomplete: add `textFieldProps` props to the autocomplete component.
+
 ### Fixed
 
 -   InlineList: Set `listitem` role to items since `display: contents` attribute removes the semantics.
@@ -15,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 -   `@lumx/core` a11y: Introducing a more visible outline on elements with keyboard focus.
+-   `@lumx/react`: rework how TS types are exposed. Fixed types for `List.useKeyboardListNavigation` hook.
 
 ## [3.0.3][] - 2022-10-14
 
@@ -24,7 +31,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   GenericBlock: add `as` prop to customize the root, the figure, the content and actions elements component render.
 -   New `ClickAwayProvider` utility component (exported in the new `@lumx/react/utils` module).
 -   New `InlineList` component.
--   Autocomplete: add `textFieldProps` props to the autocomplete component.
 
 ### Changed
 
@@ -1615,3 +1621,5 @@ _Failed released_
 [3.0.2]: https://github.com/lumapps/design-system/tree/v3.0.2
 [unreleased]: https://github.com/lumapps/design-system/compare/v3.0.3...HEAD
 [3.0.3]: https://github.com/lumapps/design-system/tree/v3.0.3
+[unreleased]: https://github.com/lumapps/design-system/compare/v3.0.4...HEAD
+[3.0.4]: https://github.com/lumapps/design-system/tree/v3.0.4

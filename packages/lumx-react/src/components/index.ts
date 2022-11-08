@@ -169,3 +169,8 @@ export const Kind = {
     error: 'error',
 } as const;
 export type Kind = ValueOf<typeof Kind>;
+
+/**
+ * Re-exporting some utils types.
+ */
+export type { HeadingElement, TextElement, GenericProps, Callback } from '../utils/type';
