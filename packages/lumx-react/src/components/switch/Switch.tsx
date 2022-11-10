@@ -75,7 +75,7 @@ export const Switch: Comp<SwitchProps, HTMLDivElement> = forwardRef((props, ref)
         inputProps = {},
         ...forwardedProps
     } = props;
-    const switchId = useMemo(() => id || `switch-${uid()}`, [id]);
+    const inputId = useMemo(() => id || `switch-${uid()}`, [id]);
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (onChange) {
             onChange(!isChecked, value, name, event);
@@ -103,7 +103,7 @@ export const Switch: Comp<SwitchProps, HTMLDivElement> = forwardRef((props, ref)
                 <input
                     type="checkbox"
                     role="switch"
-                    id={switchId}
+                    id={inputId}
                     className={`${CLASSNAME}__input-native`}
                     name={name}
                     value={value}
@@ -111,6 +111,7 @@ export const Switch: Comp<SwitchProps, HTMLDivElement> = forwardRef((props, ref)
                     checked={isChecked}
                     aria-checked={Boolean(isChecked)}
                     onChange={handleChange}
+                    aria-describedby={helper ? `${inputId}-helper` : undefined}
                     {...inputProps}
                 />
 
@@ -122,11 +123,11 @@ export const Switch: Comp<SwitchProps, HTMLDivElement> = forwardRef((props, ref)
 
             {Children.count(children) > 0 && (
                 <div className={`${CLASSNAME}__content`}>
-                    <InputLabel htmlFor={switchId} theme={theme} className={`${CLASSNAME}__label`}>
+                    <InputLabel htmlFor={inputId} theme={theme} className={`${CLASSNAME}__label`}>
                         {children}
                     </InputLabel>
                     {!isEmpty(helper) && (
-                        <InputHelper theme={theme} className={`${CLASSNAME}__helper`}>
+                        <InputHelper id={`${inputId}-helper`} theme={theme} className={`${CLASSNAME}__helper`}>
                             {helper}
                         </InputHelper>
                     )}

@@ -9,6 +9,7 @@ exports[`<Switch> Conditions should not display the \`helper\` if no \`label\` i
   >
     <input
       aria-checked={false}
+      aria-describedby="switch-uid-helper"
       className="lumx-switch__input-native"
       id="switch-uid"
       onChange={[Function]}
@@ -68,6 +69,7 @@ exports[`<Switch> Snapshots and structure should render correctly with a \`label
   >
     <input
       aria-checked={false}
+      aria-describedby="switch-uid-helper"
       className="lumx-switch__input-native"
       id="switch-uid"
       onChange={[Function]}
@@ -97,6 +99,7 @@ exports[`<Switch> Snapshots and structure should render correctly with a \`label
     </InputLabel>
     <InputHelper
       className="lumx-switch__helper"
+      id="switch-uid-helper"
       kind="info"
       theme="light"
     >
