@@ -4,6 +4,12 @@
 
 <DemoBlock demo="default" withThemeSwitcher />
 
+### Accessibility concerns
+
+Switches are based on standard checkbox, implement the [WAI-ARIA `switch` pattern](https://www.w3.org/WAI/ARIA/apg/patterns/switch/) and are fully accessible if provided with a label. If a helper is provided, it will be used as an additional [description for screen readers](https://w3c.github.io/aria/#aria-describedby).
+
+In contexts where there is no direct label attached to the checkbox, alternative label should be provided with either [`aria-labelledby`](https://w3c.github.io/aria/#aria-labelledby) (preferred) or [`aria-label`](https://w3c.github.io/aria/#aria-label) (only in last resort) attributes forwarded inside the `inputProps` property.
+
 ### Properties
 
 <PropTable component="Switch" />
