@@ -30,6 +30,8 @@ export interface RadioButtonProps extends GenericProps, HasTheme {
     value?: string;
     /** On change callback. */
     onChange?(value?: string, name?: string, event?: SyntheticEvent): void;
+    /** optional props for input */
+    inputProps?: InputHTMLAttributes<HTMLInputElement>;
 }
 
 /**
@@ -71,6 +73,7 @@ export const RadioButton: Comp<RadioButtonProps, HTMLDivElement> = forwardRef((p
         onChange,
         theme,
         value,
+        inputProps,
         ...forwardedProps
     } = props;
     const inputId = useMemo(() => id || `${CLASSNAME.toLowerCase()}-${uid()}`, [id]);
@@ -109,6 +112,7 @@ export const RadioButton: Comp<RadioButtonProps, HTMLDivElement> = forwardRef((p
                     checked={isChecked}
                     onChange={handleChange}
                     aria-describedby={helper ? `${inputId}-helper` : undefined}
+                    {...inputProps}
                 />
 
                 <div className={`${CLASSNAME}__input-placeholder`}>
