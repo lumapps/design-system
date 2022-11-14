@@ -17,6 +17,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Switch: fix helper text accessibility
 -   ExpansionPanel: fix toggle button a11y using the disclosure pattern.
 
+### Changed
+
+-   Dialog, LightBox, Notification: rework DOM unmount to be based on CSS opacity transition instead of a timeout. **This change can break unit test if you previously relied on the timeout**.
+
 ## [3.0.4][] - 2022-11-07
 
 ### Added

@@ -10,13 +10,11 @@ import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
-import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
 import { useDisableBodyScroll } from '@lumx/react/hooks/useDisableBodyScroll';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
-
-const LIGHTBOX_TRANSITION_DURATION = 400;
+import { useTransitionVisibility } from '@lumx/react/hooks/useTransitionVisibility';
 
 /**
  * Defines the props of the component.
@@ -82,7 +80,7 @@ export const Lightbox: Comp<LightboxProps, HTMLDivElement> = forwardRef((props, 
     useDisableBodyScroll(isOpen && wrapperRef.current);
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const isVisible = useDelayedVisibility(!!isOpen, LIGHTBOX_TRANSITION_DURATION);
+    const isVisible = useTransitionVisibility(wrapperRef, !!isOpen);
 
     // Handle focus trap.
     // eslint-disable-next-line react-hooks/rules-of-hooks
