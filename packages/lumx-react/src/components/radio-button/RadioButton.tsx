@@ -1,4 +1,4 @@
-import React, { useMemo, forwardRef, ReactNode, SyntheticEvent } from 'react';
+import React, { useMemo, forwardRef, ReactNode, SyntheticEvent, InputHTMLAttributes } from 'react';
 
 import classNames from 'classnames';
 import { uid } from 'uid';
@@ -30,6 +30,8 @@ export interface RadioButtonProps extends GenericProps, HasTheme {
     value?: string;
     /** On change callback. */
     onChange?(value?: string, name?: string, event?: SyntheticEvent): void;
+    /** optional props for input */
+    inputProps?: InputHTMLAttributes<HTMLInputElement>;
 }
 
 /**
@@ -71,9 +73,10 @@ export const RadioButton: Comp<RadioButtonProps, HTMLDivElement> = forwardRef((p
         onChange,
         theme,
         value,
+        inputProps,
         ...forwardedProps
     } = props;
-    const radioButtonId = useMemo(() => id || `${CLASSNAME.toLowerCase()}-${uid()}`, [id]);
+    const inputId = useMemo(() => id || `${CLASSNAME.toLowerCase()}-${uid()}`, [id]);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (onChange) {
@@ -101,13 +104,15 @@ export const RadioButton: Comp<RadioButtonProps, HTMLDivElement> = forwardRef((p
                     ref={inputRef}
                     className={`${CLASSNAME}__input-native`}
                     disabled={isDisabled}
-                    id={radioButtonId}
+                    id={inputId}
                     tabIndex={isDisabled ? -1 : 0}
                     type="radio"
                     name={name}
                     value={value}
                     checked={isChecked}
                     onChange={handleChange}
+                    aria-describedby={helper ? `${inputId}-helper` : undefined}
+                    {...inputProps}
                 />
 
                 <div className={`${CLASSNAME}__input-placeholder`}>
@@ -118,12 +123,12 @@ export const RadioButton: Comp<RadioButtonProps, HTMLDivElement> = forwardRef((p
 
             <div className={`${CLASSNAME}__content`}>
                 {label && (
-                    <InputLabel htmlFor={radioButtonId} theme={theme} className={`${CLASSNAME}__label`}>
+                    <InputLabel htmlFor={inputId} theme={theme} className={`${CLASSNAME}__label`}>
                         {label}
                     </InputLabel>
                 )}
                 {helper && (
-                    <InputHelper theme={theme} className={`${CLASSNAME}__helper`}>
+                    <InputHelper id={`${inputId}-helper`} theme={theme} className={`${CLASSNAME}__helper`}>
                         {helper}
                     </InputHelper>
                 )}

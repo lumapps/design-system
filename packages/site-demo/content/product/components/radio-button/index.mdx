@@ -4,6 +4,12 @@
 
 <DemoBlock demo="default" withThemeSwitcher />
 
+### Accessibility concerns
+
+Radio buttons with label are fully accessible by default. If a helper is provided, it will be used as an additional [description for screen readers](https://w3c.github.io/aria/#aria-describedby).
+
+In contexts where there is no direct label attached to the radio button, alternative label should be provided with either [`aria-labelledby`](https://w3c.github.io/aria/#aria-labelledby) (preferred) or [`aria-label`](https://w3c.github.io/aria/#aria-label) (only in last resort) attributes forwarded inside the `inputProps` property.
+
 ### Properties
 
 <PropTable component="RadioButton" />
