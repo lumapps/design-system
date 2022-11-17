@@ -37,6 +37,38 @@ Popovers width can be forced to match anchors.
 
 <DemoBlock demo="matching-width" />
 
+### Accessibility concerns
+
+Popovers do not come with turnkey accessibility behavior as they can be used in multiple use cases.
+
+#### Disclosure
+
+Popovers can be used to disclose information by activating a button.
+
+To apply this pattern, the following concerns should be handled:
+
+- The activating element should have the `aria-expanded` ([see W3C documentation](https://w3c.github.io/aria/#aria-expanded) for detail usage)
+- The popover should not take focus on open (`focusElement` property should be left blank)
+- The popover should appear after the activating element in the tab order (`usePortal` property should be set to `false`)
+- The popover should be closable using the escape key (`closeOnEscape` property, activated by default)
+- The activating element should take focus on popover close (`focusAnchorOnClose` property, activated by default)
+
+Examples of this pattern can be found on the WAI-ARIA [disclosure pattern documentation](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/).
+
+#### Popup
+
+Popovers can be used as "popup" containing other accessibility pattern inside (menu, listbox, etc. See [W3C documentation](https://w3c.github.io/aria/#aria-haspopup) for the full list).
+
+In all of those cases, the following concerns should be handled:
+
+- The activating element should have the `aria-haspopup` ([see W3C documentation](https://w3c.github.io/aria/#aria-haspopup) for detail usage)
+- The popover should take focus on open (`focusElement` property should be filled)
+- The popover should be closable using the escape key (`closeOnEscape` property, activated by default)
+- The activating element should take focus on popover close (`focusAnchorOnClose` property, activated by default)
+
+Examples of this pattern can be found on the WAI-ARIA [combobox pattern documentation](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/), [menu pattern documentation](https://www.w3.org/WAI/ARIA/apg/patterns/menu/) or [dialog pattern documentation](https://www.w3.org/WAI/ARIA/apg/patterns/dialogmodal/).
+
+
 ### Properties
 
 <PropTable component="Popover" />

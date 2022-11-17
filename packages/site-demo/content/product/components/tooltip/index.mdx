@@ -19,6 +19,14 @@ Tooltips display can be delayed.
 
 <DemoBlock orientation="horizontal" demo="delay" />
 
+### Accessibility concerns
+
+Tooltips implement the [WAI-ARIA tooltip role](https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/) and are **only accessible via mouse hover or keyboard focus**. As such it should generally be used **only on focusable element**.
+
+Tooltip messages should be concise, directly describing the element that triggered it and should not contain essential information.
+
+Consider using the [Popover](/product/components/popover/#accessibility-concerns) as a disclosure element to show longer or richer messages.
+
 ### Properties
 
 <PropTable component="Tooltip" />

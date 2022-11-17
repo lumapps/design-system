@@ -17,6 +17,14 @@ Presented actions have various states, they behave like [`clickable list`](/prod
 
 <DemoBlock demo="selects" backgroundColor={{ color: 'dark', variant: 'L6' }} vAlign="center" />
 
+### Accessibility concerns
+
+Dropdowns are essentially a wrapper around Popover intended to be used either as a disclosure or a popup (containing a menu or a listbox).
+See the [Popover accessibility concerns](/product/components/popover#accessibility-concerns) documentation for more info on those two use case.
+
+We do not yet provide a simple way to create a full accessible menu or listbox to pair with dropdowns.
+
+On top of the popover, dropdowns provide an "infinite scroll" callback to load more data into the dropdown while the user scrolls. Consider adding [`aria-setsize`](https://w3c.github.io/aria/#aria-setsize) and [`aria-posinset`](https://w3c.github.io/aria/#aria-posinset) to your dropdown list items so that screen readers can know the size of the list and the position of items in the list.
 
 ### Properties
 
