@@ -1,15 +1,11 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
-import { mount, shallow } from 'enzyme';
-import 'jest-enzyme';
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { queryByRole, render } from '@testing-library/react';
+import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
+import userEvent from '@testing-library/user-event';
+import { ExpansionPanel, ExpansionPanelProps } from '.';
 
-import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
-import { getBasicClass } from '@lumx/react/utils/className';
-
-import { Theme } from '@lumx/react';
-import { ExpansionPanel, ExpansionPanelProps } from './ExpansionPanel';
-
-const DEFAULT_PROPS = ExpansionPanel.defaultProps as any;
 const CLASSNAME = ExpansionPanel.className as string;
 
 type SetupProps = Partial<ExpansionPanelProps>;
@@ -17,63 +13,68 @@ type SetupProps = Partial<ExpansionPanelProps>;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true) => {
+const setup = (propsOverride: SetupProps = {}) => {
     const props: ExpansionPanelProps = {
         toggleButtonProps: { label: 'Toggle' },
         ...propsOverride,
     };
-    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    const wrapper: Wrapper = renderer(<ExpansionPanel {...props} />);
+    const { container } = render(<ExpansionPanel {...props} />);
 
     return {
-        content: wrapper.find(`.${CLASSNAME}__wrapper`),
-        header: wrapper.find(`.${CLASSNAME}__header`),
-        label: wrapper.find(`.${CLASSNAME}__label`),
+        container,
+        element: getByClassName(container, CLASSNAME),
+        query: {
+            toggleButton: () => queryByRole(container, 'button', { name: /Toggle/i }),
+            header: () => queryByClassName(container, `${CLASSNAME}__header`),
+            content: () => queryByClassName(container, `${CLASSNAME}__wrapper`),
+        },
         props,
-        root: wrapper.find('section'),
-        wrapper,
     };
 };
 
 describe(`<${ExpansionPanel.displayName}>`, () => {
-    // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', () => {
-        // Here is an example of a basic rendering check, with snapshot.
+    describe('Render', () => {
+        it('should render default', () => {
+            const { element, query } = setup();
+            expect(element).toBeInTheDocument();
+            expect(element).toHaveClass(CLASSNAME);
+            expect(element).toHaveClass(`${CLASSNAME}--is-close`);
+            expect(element).toHaveClass(`${CLASSNAME}--theme-light`);
 
-        it('should render correctly', () => {
-            const { root, wrapper } = setup();
-            expect(wrapper).toMatchSnapshot();
+            // Header is visible
+            expect(query.header()).toBeInTheDocument();
 
-            expect(root).toExist();
-            expect(root).toHaveClassName(CLASSNAME);
+            // Content is not visible
+            expect(query.content()).not.toBeInTheDocument();
+
+            expect(query.toggleButton()).toHaveAttribute('aria-expanded', 'false');
+        });
+
+        it('should render open', () => {
+            const { query } = setup({ isOpen: true });
+
+            // Content is visible
+            expect(query.content()).toBeInTheDocument();
+
+            expect(query.toggleButton()).toHaveAttribute('aria-expanded', 'true');
+        });
+
+        it('should show label', () => {
+            const labelText = 'Label text';
+            const { query } = setup({ label: labelText });
+
+            expect(query.header()).toHaveTextContent(labelText);
+        });
+
+        it('should show header instead of label', () => {
+            const labelText = 'Label text';
+            const headerText = 'Header text';
+            const { query } = setup({ label: labelText, children: <header>{headerText}</header> });
+
+            expect(query.header()).toHaveTextContent(headerText);
         });
     });
 
-    // 2. Test defaultProps value and important props custom values.
-    describe('Props', () => {
-        // Here are some examples of basic props check.
-
-        it('should use default props', () => {
-            const { root } = setup();
-
-            for (const prop of Object.keys(DEFAULT_PROPS)) {
-                expect(root).toHaveClassName(
-                    getBasicClass({ prefix: CLASSNAME, type: prop, value: DEFAULT_PROPS[prop] }),
-                );
-            }
-        });
-
-        it('should ignore incorrect theme', () => {
-            const { root } = setup({ theme: 'not_a_valid_theme' as Theme });
-
-            // Correct classes are applied
-            root.hasClass('lumx-color-background-dark-L6');
-            root.hasClass('lumx-expansion-panel--theme-light');
-            root.hasClass('lumx-color-font-dark-N');
-        });
-    });
-
-    // 3. Test events.
     describe('Events', () => {
         const onOpen: jest.Mock = jest.fn();
         const onClose: jest.Mock = jest.fn();
@@ -83,63 +84,33 @@ describe(`<${ExpansionPanel.displayName}>`, () => {
         beforeEach(onClose.mockClear);
         beforeEach(onToggleOpen.mockClear);
 
-        it('should trigger `onOpen`', () => {
-            const { header } = setup({ onOpen }, false);
-            header.simulate('click');
+        it('should open on click', async () => {
+            const { query } = setup({ isOpen: false, onOpen, onClose, onToggleOpen });
+
+            // Content is not visible
+            expect(query.content()).not.toBeInTheDocument();
+
+            // Click on toggle button
+            await userEvent.click(query.toggleButton() as any);
             expect(onOpen).toHaveBeenCalled();
+            expect(onClose).not.toHaveBeenCalled();
+            expect(onToggleOpen).toHaveBeenCalledWith(true);
         });
 
-        it('should trigger `onClose`', () => {
-            const { header } = setup({ isOpen: true, onClose }, false);
-            header.simulate('click');
+        it('should close on click', async () => {
+            const { query } = setup({ isOpen: true, onOpen, onClose, onToggleOpen });
+
+            // Content is visible
+            expect(query.content()).toBeInTheDocument();
+
+            // Click on header
+            await userEvent.click(query.header() as any);
+            expect(onOpen).not.toHaveBeenCalled();
             expect(onClose).toHaveBeenCalled();
+            expect(onToggleOpen).toHaveBeenCalledWith(false);
         });
-
-        it('should trigger `onToggleOpen`', () => {
-            const { header } = setup({ onToggleOpen }, false);
-            header.simulate('click');
-            header.simulate('click');
-            expect(onToggleOpen).toHaveBeenCalledTimes(2);
-        });
-    });
-
-    // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', () => {
-        // Here is an example of children types check.
-
-        it('should hide content when `isOpen` == false', () => {
-            const { content } = setup({ isOpen: false });
-
-            expect(content.exists()).toBe(false);
-        });
-
-        it('should show content when `isOpen` == true', () => {
-            const { content } = setup({ isOpen: true });
-
-            expect(content.exists()).toBe(true);
-        });
-
-        it('should show label', () => {
-            const labelText = 'Label text';
-            const { header } = setup({ label: labelText });
-
-            expect(header.text()).toContain(labelText);
-        });
-
-        it('should show header instead of label', () => {
-            const labelText = 'Label text';
-            const headerText = 'Header text';
-            const { header } = setup({ label: labelText, children: <header>{headerText}</header> });
-
-            expect(header.text()).toContain(headerText);
-        });
-    });
-
-    // 5. Test state.
-    describe('State', () => {
-        // Nothing to do here.
     });
 
     // Common tests suite.
-    commonTestsSuite(setup, { className: 'root', prop: 'root' }, { className: CLASSNAME });
+    commonTestsSuiteRTL(setup, { baseClassName: CLASSNAME, forwardClassName: 'element', forwardAttributes: 'element' });
 });

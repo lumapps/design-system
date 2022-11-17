@@ -1,17 +1,6 @@
 import { mdiDotsVertical } from '@lumx/icons';
 
-import {
-    Alignment,
-    Divider,
-    Emphasis,
-    ExpansionPanel,
-    FlexBox,
-    IconButton,
-    Orientation,
-    Size,
-    Thumbnail,
-    ThumbnailVariant,
-} from '@lumx/react';
+import { Divider, ExpansionPanel, FlexBox, GenericBlock, Heading, IconButton, Text, Thumbnail } from '@lumx/react';
 import React, { useState } from 'react';
 
 export const App = () => {
@@ -20,7 +9,6 @@ export const App = () => {
     const [isOpen3, setOpen3] = useState(false);
     const [isOpen4, setOpen4] = useState(false);
     const [isOpen5, setOpen5] = useState(false);
-    const [isOpen6, setOpen6] = useState(false);
     const stopPropagation = (evt: Event) => evt.stopPropagation();
 
     return (
@@ -33,25 +21,22 @@ export const App = () => {
                 toggleButtonProps={{ label: 'Toggle' }}
             >
                 <header>
-                    <FlexBox
+                    <GenericBlock
                         className="lumx-spacing-margin-left-regular"
-                        orientation={Orientation.horizontal}
-                        hAlign={Alignment.center}
+                        hAlign="center"
+                        figure={<Thumbnail alt="" image="/demo-assets/square1.jpg" size="m" variant="rounded" />}
                     >
-                        <Thumbnail
-                            alt="Image alt text"
-                            image="/demo-assets/square1.jpg"
-                            size={Size.m}
-                            variant={ThumbnailVariant.rounded}
-                        />
-
-                        <span className="lumx-spacing-margin-left-big lumx-typography-body1">With thumbnail</span>
-                    </FlexBox>
+                        <Heading typography="body1">With thumbnail</Heading>
+                    </GenericBlock>
                 </header>
 
                 <div className="lumx-spacing-padding-big">
-                    <p className="lumx-typography-subtitle1">Curabitur est gravida et libero vitae dictum.</p>
-                    <p className="lumx-typography-body1">Etiam habebis sem dicantur magna mollis euismod.</p>
+                    <Text as="p" typography="subtitle1">
+                        Curabitur est gravida et libero vitae dictum.
+                    </Text>
+                    <Text as="p" typography="body1">
+                        Etiam habebis sem dicantur magna mollis euismod.
+                    </Text>
                 </div>
             </ExpansionPanel>
 
@@ -63,30 +48,25 @@ export const App = () => {
                 toggleButtonProps={{ label: 'Toggle' }}
             >
                 <header>
-                    <FlexBox
+                    <GenericBlock
                         className="lumx-spacing-margin-left-regular"
-                        orientation={Orientation.horizontal}
-                        hAlign={Alignment.center}
+                        hAlign="center"
+                        figure={<Thumbnail alt="" image="/demo-assets/square1.jpg" size="m" variant="rounded" />}
                     >
-                        <Thumbnail
-                            alt="Image alt text"
-                            image="/demo-assets/square1.jpg"
-                            size={Size.m}
-                            variant={ThumbnailVariant.rounded}
-                        />
-
-                        <div className="lumx-spacing-margin-left-big">
-                            <span className="lumx-base-display-block lumx-typography-body1">With thumbnail</span>
-                            <span className="lumx-base-display-block lumx-typography-caption lumx-color-font-dark-L2">
-                                And secondary text
-                            </span>
-                        </div>
-                    </FlexBox>
+                        <Heading typography="body1">With thumbnail</Heading>
+                        <Text as="p" typography="caption" color="dark" colorVariant="L2">
+                            And secondary text
+                        </Text>
+                    </GenericBlock>
                 </header>
 
                 <div className="lumx-spacing-padding-big">
-                    <p className="lumx-typography-subtitle1">Curabitur est gravida et libero vitae dictum.</p>
-                    <p className="lumx-typography-body1">Etiam habebis sem dicantur magna mollis euismod.</p>
+                    <Text as="p" typography="subtitle1">
+                        Curabitur est gravida et libero vitae dictum.
+                    </Text>
+                    <Text as="p" typography="body1">
+                        Etiam habebis sem dicantur magna mollis euismod.
+                    </Text>
                 </div>
             </ExpansionPanel>
 
@@ -97,19 +77,17 @@ export const App = () => {
                 toggleButtonProps={{ label: 'Toggle' }}
             >
                 <header>
-                    <FlexBox
-                        className="lumx-spacing-margin-left-big"
-                        orientation={Orientation.horizontal}
-                        hAlign={Alignment.center}
-                    >
-                        <span className="lumx-typography-body1">With secondary action</span>
+                    <FlexBox className="lumx-spacing-margin-left-big" orientation="horizontal" hAlign="center">
+                        <Text as="p" typography="body1">
+                            With secondary action
+                        </Text>
 
-                        <FlexBox marginAuto={Alignment.left}>
+                        <FlexBox marginAuto="left">
                             <IconButton
                                 label="Secondary actions"
                                 icon={mdiDotsVertical}
-                                emphasis={Emphasis.low}
-                                size={Size.m}
+                                emphasis="low"
+                                size="m"
                                 onClick={stopPropagation}
                             />
                         </FlexBox>
@@ -117,28 +95,32 @@ export const App = () => {
                 </header>
 
                 <div className="lumx-spacing-padding-big lumx-spacing-padding-top-none">
-                    <p className="lumx-typography-subtitle1">Curabitur est gravida et libero vitae dictum.</p>
-                    <p className="lumx-typography-body1">Etiam habebis sem dicantur magna mollis euismod.</p>
+                    <Text as="p" typography="subtitle1">
+                        Curabitur est gravida et libero vitae dictum.
+                    </Text>
+                    <Text as="p" typography="body1">
+                        Etiam habebis sem dicantur magna mollis euismod.
+                    </Text>
                 </div>
             </ExpansionPanel>
 
             <ExpansionPanel isOpen={isOpen4} onToggleOpen={setOpen4} toggleButtonProps={{ label: 'Toggle' }}>
                 <header>
-                    <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
-                        <Thumbnail
-                            alt="Image alt text"
-                            image="/demo-assets/square1.jpg"
-                            size={Size.m}
-                            variant={ThumbnailVariant.rounded}
-                        />
-
-                        <span className="lumx-spacing-margin-left-big lumx-typography-body1">With Dividers</span>
-                    </FlexBox>
+                    <GenericBlock
+                        hAlign="center"
+                        figure={<Thumbnail alt="" image="/demo-assets/square1.jpg" size="m" variant="rounded" />}
+                    >
+                        <Heading typography="body1">With Dividers</Heading>
+                    </GenericBlock>
                 </header>
 
                 <div className="lumx-spacing-padding-top">
-                    <p className="lumx-typography-subtitle1">Curabitur est gravida et libero vitae dictum.</p>
-                    <p className="lumx-typography-body1">Etiam habebis sem dicantur magna mollis euismod.</p>
+                    <Text as="p" typography="subtitle1">
+                        Curabitur est gravida et libero vitae dictum.
+                    </Text>
+                    <Text as="p" typography="body1">
+                        Etiam habebis sem dicantur magna mollis euismod.
+                    </Text>
                 </div>
             </ExpansionPanel>
 
@@ -146,43 +128,21 @@ export const App = () => {
 
             <ExpansionPanel isOpen={isOpen5} onToggleOpen={setOpen5} toggleButtonProps={{ label: 'Toggle' }}>
                 <header>
-                    <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
-                        <Thumbnail
-                            alt="Image alt text"
-                            image="/demo-assets/square1.jpg"
-                            size={Size.m}
-                            variant={ThumbnailVariant.rounded}
-                        />
-
-                        <span className="lumx-spacing-margin-left-big lumx-typography-body1">With Dividers</span>
-                    </FlexBox>
+                    <GenericBlock
+                        hAlign="center"
+                        figure={<Thumbnail alt="" image="/demo-assets/square1.jpg" size="m" variant="rounded" />}
+                    >
+                        <Heading typography="body1">With Dividers</Heading>
+                    </GenericBlock>
                 </header>
 
                 <div className="lumx-spacing-padding-top">
-                    <p className="lumx-typography-subtitle1">Curabitur est gravida et libero vitae dictum.</p>
-                    <p className="lumx-typography-body1">Etiam habebis sem dicantur magna mollis euismod.</p>
-                </div>
-            </ExpansionPanel>
-
-            <Divider />
-
-            <ExpansionPanel isOpen={isOpen6} onToggleOpen={setOpen6} toggleButtonProps={{ label: 'Toggle' }}>
-                <header>
-                    <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
-                        <Thumbnail
-                            alt="Image alt text"
-                            image="/demo-assets/square1.jpg"
-                            size={Size.m}
-                            variant={ThumbnailVariant.rounded}
-                        />
-
-                        <span className="lumx-spacing-margin-left-big lumx-typography-body1">With Dividers</span>
-                    </FlexBox>
-                </header>
-
-                <div className="lumx-spacing-padding-top">
-                    <p className="lumx-typography-subtitle1">Curabitur est gravida et libero vitae dictum.</p>
-                    <p className="lumx-typography-body1">Etiam habebis sem dicantur magna mollis euismod.</p>
+                    <Text as="p" typography="subtitle1">
+                        Curabitur est gravida et libero vitae dictum.
+                    </Text>
+                    <Text as="p" typography="body1">
+                        Etiam habebis sem dicantur magna mollis euismod.
+                    </Text>
                 </div>
             </ExpansionPanel>
         </>
