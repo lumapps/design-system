@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 import { Progress, ProgressVariant, Size } from '@lumx/react';
 
-import { DIALOG_TRANSITION_DURATION, DOCUMENT } from '@lumx/react/constants';
+import { DOCUMENT } from '@lumx/react/constants';
 import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { useIntersectionObserver } from '@lumx/react/hooks/useIntersectionObserver';
@@ -16,8 +16,8 @@ import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/classNam
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
-import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
 import { useDisableBodyScroll } from '@lumx/react/hooks/useDisableBodyScroll';
+import { useTransitionVisibility } from '@lumx/react/hooks/useTransitionVisibility';
 
 /**
  * Defines the props of the component.
@@ -167,13 +167,13 @@ export const Dialog: Comp<DialogProps, HTMLDivElement> = forwardRef((props, ref)
     const footerChildContent = footerChildProps?.children;
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const isVisible = useDelayedVisibility(Boolean(isOpen), DIALOG_TRANSITION_DURATION, onVisibilityChange);
-
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const clickAwayRefs = useRef([wrapperRef]);
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const rootRef = useRef<HTMLDivElement>(null);
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const isVisible = useTransitionVisibility(rootRef, Boolean(isOpen), onVisibilityChange);
 
     return isOpen || isVisible
         ? createPortal(

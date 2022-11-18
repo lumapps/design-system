@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
 import classNames from 'classnames';
@@ -7,12 +7,13 @@ import isFunction from 'lodash/isFunction';
 
 import { Button, Emphasis, Icon, Kind, Size, Theme } from '@lumx/react';
 
-import { DOCUMENT, NOTIFICATION_TRANSITION_DURATION } from '@lumx/react/constants';
+import { DOCUMENT } from '@lumx/react/constants';
 import { NOTIFICATION_CONFIGURATION } from '@lumx/react/components/notification/constants';
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 
-import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
+import { useTransitionVisibility } from '@lumx/react/hooks/useTransitionVisibility';
+import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
 /**
  * Defines the props of the component.
@@ -78,7 +79,8 @@ export const Notification: Comp<NotificationProps, HTMLDivElement> = forwardRef(
         return null;
     }
     const { color, icon } = NOTIFICATION_CONFIGURATION[type as Kind] || {};
-    const isVisible = useDelayedVisibility(!!isOpen, NOTIFICATION_TRANSITION_DURATION);
+    const rootRef = useRef<HTMLDivElement>(null);
+    const isVisible = useTransitionVisibility(rootRef, !!isOpen);
     const hasAction: boolean = Boolean(onActionClick) && Boolean(actionLabel);
 
     const handleCallback = (evt: React.MouseEvent) => {
@@ -92,7 +94,7 @@ export const Notification: Comp<NotificationProps, HTMLDivElement> = forwardRef(
         ? createPortal(
               // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
               <div
-                  ref={ref}
+                  ref={mergeRefs(ref, rootRef)}
                   role="alert"
                   {...forwardedProps}
                   className={classNames(
