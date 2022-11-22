@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.5][] - 2022-11-21
+
 ### Added
 
 -   RadioButton: add `inputProps` prop to forward to the native input element.
@@ -1637,3 +1639,5 @@ _Failed released_
 [3.0.3]: https://github.com/lumapps/design-system/tree/v3.0.3
 [unreleased]: https://github.com/lumapps/design-system/compare/v3.0.4...HEAD
 [3.0.4]: https://github.com/lumapps/design-system/tree/v3.0.4
+[unreleased]: https://github.com/lumapps/design-system/compare/v3.0.5...HEAD
+[3.0.5]: https://github.com/lumapps/design-system/tree/v3.0.5
