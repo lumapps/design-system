@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Autocomplete: fix type of textFieldProps prop.
+
 ## [3.0.5][] - 2022-11-21
 
 ### Added

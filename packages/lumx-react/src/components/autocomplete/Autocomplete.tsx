@@ -160,7 +160,7 @@ export interface AutocompleteProps extends GenericProps, HasTheme {
      * Only the props not managed by the Autocomplete can be set.
      * @see {@link TextFieldProps}
      */
-    textFieldProps?: TextFieldProps;
+    textFieldProps?: Partial<TextFieldProps>;
 }
 
 /**
