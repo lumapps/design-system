@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Autocomplete: fix type of textFieldProps prop.
 
+### Changed
+
+-   Popover, Dropdown, Autocomplete: add `minWidth`, `maxWidth` and `width` options to the `fitToAnchorWidth` property.
+
 ## [3.0.5][] - 2022-11-21
 
 ### Added

@@ -2,7 +2,7 @@ import React, { forwardRef, ReactNode, SyntheticEvent, useRef } from 'react';
 
 import classNames from 'classnames';
 
-import { Dropdown, IconButtonProps, Offset, Placement, TextField, TextFieldProps } from '@lumx/react';
+import { Dropdown, DropdownProps, IconButtonProps, Offset, Placement, TextField, TextFieldProps } from '@lumx/react';
 
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
@@ -41,10 +41,13 @@ export interface AutocompleteProps extends GenericProps, HasTheme {
      */
     placement?: Placement;
     /**
-     * Whether the dropdown should fit to the anchor width or not.
+     * Manage dropdown width:
+     *   - `maxWidth`: dropdown not bigger than anchor
+     *   - `minWidth` or `true`: dropdown not smaller than anchor
+     *   - `width`: dropdown equal to the anchor.
      * @see {@link DropdownProps#fitToAnchorWidth}
      */
-    fitToAnchorWidth?: boolean;
+    fitToAnchorWidth?: DropdownProps['fitToAnchorWidth'];
     /**
      * The error related to the component.
      * @see {@link TextFieldProps#error}

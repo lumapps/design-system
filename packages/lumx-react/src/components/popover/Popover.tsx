@@ -4,6 +4,7 @@ import { createPortal } from 'react-dom';
 import { usePopper } from 'react-popper';
 
 import classNames from 'classnames';
+import memoize from 'lodash/memoize';
 
 import { DOCUMENT, WINDOW } from '@lumx/react/constants';
 import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
@@ -62,6 +63,13 @@ export type Elevation = 1 | 2 | 3 | 4 | 5;
  */
 const ARROW_SIZE = 8;
 
+const AnchorWidthOptions = {
+    MAX_WIDTH: 'maxWidth',
+    MIN_WIDTH: 'minWidth',
+    WIDTH: 'width',
+} as const;
+type AnchorWidthOption = ValueOf<typeof AnchorWidthOptions>;
+
 /**
  * Defines the props of the component.
  */
@@ -78,8 +86,13 @@ export interface PopoverProps extends GenericProps {
     closeOnEscape?: boolean;
     /** Shadow elevation. */
     elevation?: Elevation;
-    /** Whether the dropdown should fit to the anchor width (if dropdown is smaller). */
-    fitToAnchorWidth?: boolean;
+    /**
+     * Manage popover width:
+     *   - `maxWidth`: popover not bigger than anchor
+     *   - `minWidth` or `true`: popover not smaller than anchor
+     *   - `width`: popover equal to the anchor.
+     */
+    fitToAnchorWidth?: AnchorWidthOption | boolean;
     /** Shrink popover if even after flipping there is not enough space. */
     fitWithinViewportHeight?: boolean;
     /** Element to focus when opening the popover. */
@@ -127,20 +140,20 @@ const DEFAULT_PROPS: Partial<PopoverProps> = {
 /**
  * Popper js modifier to fit popover min width to the anchor width.
  */
-const sameWidth = {
+const sameWidth = memoize((anchorWidthOption: AnchorWidthOption) => ({
     name: 'sameWidth',
     enabled: true,
     phase: 'beforeWrite',
     requires: ['computeStyles'],
     fn({ state }: any) {
         // eslint-disable-next-line no-param-reassign
-        state.styles.popper.minWidth = `${state.rects.reference.width}px`;
+        state.styles.popper[anchorWidthOption] = `${state.rects.reference.width}px`;
     },
     effect({ state }: any) {
         // eslint-disable-next-line no-param-reassign
-        state.elements.popper.style.minWidth = `${state.elements.reference.offsetWidth}px`;
+        state.elements.popper.style[anchorWidthOption] = `${state.elements.reference.offsetWidth}px`;
     },
-};
+}));
 
 /**
  * Popper js modifier to compute max size of the popover.
@@ -290,7 +303,9 @@ export const Popover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, re
     }
 
     if (fitToAnchorWidth) {
-        modifiers.push(sameWidth);
+        const anchorWidthOption =
+            typeof fitToAnchorWidth === 'string' ? fitToAnchorWidth : AnchorWidthOptions.MIN_WIDTH;
+        modifiers.push(sameWidth(anchorWidthOption));
     }
     if (fitWithinViewportHeight) {
         modifiers.push({ ...maxSize, options: { boundary: boundaryRef?.current } }, applyMaxHeight);

@@ -34,10 +34,13 @@ export interface DropdownProps extends GenericProps {
      */
     closeOnEscape?: boolean;
     /**
-     * Whether the dropdown should fit to the anchor width (if dropdown is smaller) or not.
+     * Manage dropdown width:
+     *   - `maxWidth`: dropdown not bigger than anchor
+     *   - `minWidth` or `true`: dropdown not smaller than anchor
+     *   - `width`: dropdown equal to the anchor.
      * @see {@link PopoverProps#fitToAnchorWidth}
      */
-    fitToAnchorWidth?: boolean;
+    fitToAnchorWidth?: PopoverProps['fitToAnchorWidth'];
     /**
      * Whether the dropdown should shrink to fit within the viewport height or not.
      * @see {@link PopoverProps#fitWithinViewportHeight}
