@@ -12,5 +12,5 @@ runs:
       - uses: actions/github-script@v6
         with:
             script: |
-                const main = require('./index.js');
-                await main({ inputs, context github });
+                const main = require('.github/actions/release-note/index.js');
+                await main({ versionTag: '${{ inputs.versionTag}}', context, github });
