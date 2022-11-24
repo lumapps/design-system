@@ -11,6 +11,18 @@ concurrency:
 
 jobs:
 
+    gh_release:
+        name: "Create release on github"
+        runs-on: ubuntu-latest
+        steps:
+            -   name: "Checkout code"
+                uses: actions/checkout@v3
+
+            -   name: "Create release"
+                uses: ./.github/actions/release-note
+                with:
+                    versionTag: ${{ github.ref }}
+
     push_image:
         timeout-minutes: 30
         name: Push the image on release
