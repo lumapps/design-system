@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 -   Popover, Dropdown, Autocomplete: add `minWidth`, `maxWidth` and `width` options to the `fitToAnchorWidth` property.
+-   Button: make Text component's truncate work with Button
 
 ## [3.0.5][] - 2022-11-21
 

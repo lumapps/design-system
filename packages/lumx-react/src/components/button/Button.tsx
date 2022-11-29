@@ -3,8 +3,8 @@ import React, { forwardRef, ReactNode } from 'react';
 import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
 
-import { Emphasis, Icon, Size, Theme } from '@lumx/react';
-import { Comp } from '@lumx/react/utils/type';
+import { Emphasis, Icon, Size, Theme, Text } from '@lumx/react';
+import { Comp, isComponent } from '@lumx/react/utils/type';
 import { getBasicClass, getRootClassName } from '@lumx/react/utils/className';
 import { BaseButtonProps, ButtonRoot } from './ButtonRoot';
 
@@ -71,7 +71,7 @@ export const Button: Comp<ButtonProps, HTMLButtonElement | HTMLAnchorElement> = 
             variant="button"
         >
             {leftIcon && !isEmpty(leftIcon) && <Icon icon={leftIcon} />}
-            {children && <span>{children}</span>}
+            {children && (isComponent(Text)(children) ? children : <span>{children}</span>)}
             {rightIcon && !isEmpty(rightIcon) && <Icon icon={rightIcon} />}
         </ButtonRoot>
     );
