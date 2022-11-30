@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   New component in React: `PopoverDialog`.
+-   New type : `HasAriaLabelOrLabelledBy`
+-   Popover: add `withFocusTrap` prop to set a focus trap within the popover.
+
 ### Fixed
 
 -   Autocomplete: fix type of textFieldProps prop.

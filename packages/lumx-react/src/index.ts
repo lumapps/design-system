@@ -35,6 +35,7 @@ export * from './components/message';
 export * from './components/mosaic';
 export * from './components/notification';
 export * from './components/popover';
+export * from './components/popover-dialog';
 export * from './components/post-block';
 export * from './components/progress';
 export * from './components/progress-tracker';

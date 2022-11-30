@@ -16,6 +16,7 @@ import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/classNam
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 import { useFocusWithin } from '@lumx/react/hooks/useFocusWithin';
 import { getFirstAndLastFocusable } from '@lumx/react/utils/focus/getFirstAndLastFocusable';
+import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 
 /**
  * Different possible placements for the popover.
@@ -115,6 +116,8 @@ export interface PopoverProps extends GenericProps {
     zIndex?: number;
     /** On close callback (on click away or Escape pressed). */
     onClose?(): void;
+    /** Whether the popover should trap the focus within itself. Default to false. */
+    withFocusTrap?: boolean;
 }
 
 /**
@@ -235,6 +238,7 @@ export const Popover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, re
         usePortal,
         zIndex,
         focusAnchorOnClose = true,
+        withFocusTrap,
         ...forwardedProps
     } = props;
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -243,6 +247,8 @@ export const Popover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, re
     const [arrowElement, setArrowElement] = useState<null | HTMLElement>(null);
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const clickAwayRef = useRef<HTMLDivElement>(null);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const contentRef = useRef<HTMLDivElement>(null);
 
     /**
      * Track whether the focus is currently set in the
@@ -340,8 +346,12 @@ export const Popover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, re
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useCallbackOnEscape(handleClose, isOpen && closeOnEscape);
+
+    /** Only set focus within if the focus trap is disabled as they interfere with one another. */
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    useFocus(focusElement?.current, isOpen && (state?.rects?.popper?.y ?? -1) >= 0);
+    useFocus(focusElement?.current, !withFocusTrap && isOpen && (state?.rects?.popper?.y ?? -1) >= 0);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useFocusTrap(withFocusTrap && isOpen && contentRef?.current, focusElement?.current);
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const clickAwayRefs = useRef([clickAwayRef, anchorRef]);
@@ -350,7 +360,7 @@ export const Popover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, re
         ? renderPopover(
               <div
                   {...forwardedProps}
-                  ref={mergeRefs<HTMLDivElement>(setPopperElement, ref, clickAwayRef)}
+                  ref={mergeRefs<HTMLDivElement>(setPopperElement, ref, clickAwayRef, contentRef)}
                   className={classNames(
                       className,
                       handleBasicClasses({ prefix: CLASSNAME, elevation: Math.min(elevation || 0, 5), position }),
