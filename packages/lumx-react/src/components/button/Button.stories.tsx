@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { mdiSend } from '@lumx/icons';
-import { Button, ColorPalette, IconButton } from '@lumx/react';
+import { Button, ColorPalette, IconButton, Text } from '@lumx/react';
 import { squareImageKnob } from '@lumx/react/stories/knobs/image';
 import { buttonSize } from '@lumx/react/stories/knobs/buttonKnob';
 import { emphasis } from '@lumx/react/stories/knobs/emphasisKnob';
@@ -26,6 +26,32 @@ export const SimpleButton = ({ theme }: any) => {
             hasBackground={boolean('hasBackground', Boolean(DEFAULT_PROPS.hasBackground))}
         >
             {text('Button content', 'Simple button')}
+        </Button>
+    );
+};
+
+export const SimpleButtonWithTruncatedText = ({ theme }: any) => {
+    const buttonText =
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Potenti nullam ac tortor vitae. Lorem ipsum dolor sit amet. Diam sollicitudin tempor id eu nisl nunc mi ipsum. Elementum facilisis leo vel fringilla est ullamcorper eget nulla. Mollis aliquam ut porttitor leo a diam sollicitudin tempor. Ultrices tincidunt arcu non sodales neque sodales.';
+    return (
+        <Button
+            aria-pressed={boolean('isSelected', Boolean(DEFAULT_PROPS.isSelected))}
+            emphasis={emphasis('Emphasis', DEFAULT_PROPS.emphasis)}
+            theme={theme}
+            rightIcon={select('Right icon', { none: undefined, mdiSend }, undefined)}
+            leftIcon={select('Left icon', { none: undefined, mdiSend }, undefined)}
+            size={buttonSize()}
+            isSelected={boolean('isSelected', Boolean(DEFAULT_PROPS.isSelected))}
+            isDisabled={boolean('isDisabled', Boolean(DEFAULT_PROPS.isDisabled))}
+            color={select('color', ColorPalette, DEFAULT_PROPS.color)}
+            href={text('Button link', '')}
+            hasBackground={boolean('hasBackground', Boolean(DEFAULT_PROPS.hasBackground))}
+            fullWidth
+            title={buttonText}
+        >
+            <Text as="span" truncate>
+                {text('Button content', buttonText)}
+            </Text>
         </Button>
     );
 };
