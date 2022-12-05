@@ -106,6 +106,7 @@ export const Checkbox: Comp<CheckboxProps, HTMLDivElement> = forwardRef((props, 
                     type="checkbox"
                     id={inputId}
                     className={`${CLASSNAME}__input-native`}
+                    disabled={isDisabled}
                     tabIndex={isDisabled ? -1 : 0}
                     name={name}
                     value={value}

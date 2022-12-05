@@ -39,6 +39,7 @@ describe(`<${Checkbox.displayName}>`, () => {
             expect(wrapper).toHaveClassName(CLASSNAME);
             expect(wrapper).not.toHaveClassName('lumx-checkbox--is-disabled');
             expect(wrapper).toHaveClassName('lumx-checkbox--is-unchecked');
+            expect(wrapper.find('input')).toHaveProp('disabled', undefined);
         });
     });
 
@@ -51,6 +52,7 @@ describe(`<${Checkbox.displayName}>`, () => {
             });
 
             expect(wrapper).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'disabled', value: true }));
+            expect(wrapper.find('input')).toHaveProp('disabled', true);
             expect(wrapper).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'checked', value: true }));
         });
 

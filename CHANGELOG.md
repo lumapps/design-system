@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Checkbox: add `disabled` attribute to the `input` element
+
 ## [3.0.6][] - 2022-12-01
 
 ### Added
