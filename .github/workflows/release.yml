@@ -1,75 +1,238 @@
 name: "Release Workflow"
 
 on:
-    push:
-        tags:
-            - 'v[0-9].[0-9]+.[0-9]+*'
+    workflow_dispatch:
+        inputs:
+            releaseType:
+                description: 'Release type'
+                required: true
+                default: 'prerelease'
+                type: choice
+                options:
+                    - prerelease
+                    - patch
+                    - minor
+                    - major
+            prereleaseName:
+                description: 'Prerelease name (ignore if release type is not `prerelease`)'
+                default: 'alpha'
+                type: string
 
 concurrency:
     group: "${{ github.workflow }}-${{ github.ref_name }}"
     cancel-in-progress: true
 
 jobs:
-
-    gh_release:
-        name: "Create release on github"
+    publish_version:
+        name: "Publish version"
         runs-on: ubuntu-latest
         steps:
-            -   name: "Checkout code"
+            -   name: "Checkout repository"
                 uses: actions/checkout@v3
+                with:
+                    fetch-depth: 0
 
-            -   name: "Create release"
+            -   name: "Setup"
+                uses: ./.github/actions/setup
+
+            -   name: "Create version"
+                id: version
+                uses: actions/github-script@v6
+                with:
+                    script: |
+                        const refType = '${{ github.ref_type }}';
+                        const refName = '${{ github.ref_name }}';
+
+                        if (refType !== 'branch') {
+                            console.log(`Release workflow can only be run from a branch.\n`);
+                            process.exit(1);
+                        }
+
+                        const run = require('util').promisify(require('child_process').exec);
+                        const lodash = require('lodash');
+                        const releaseType = '${{ inputs.releaseType }}' || 'prerelease';
+                        console.log(`Release type: ${releaseType}`);
+                        const prereleaseName = lodash.kebabCase('${{ inputs.prereleaseName }}' || 'alpha');
+
+                        if (releaseType !== 'prerelease') {
+                            // Exit if not on master
+                            if (refName !== 'master') {
+                                console.log(`New ${releaseType} release can only be created from master.\n`);
+                                process.exit(1);
+                            }
+
+                            // Check that the changelog has unreleased changes.
+                            try {
+                                await run('yarn changelog-verify --unreleased');
+                            } catch(err) {
+                                console.log(err);
+                                process.exit(1);
+                            }
+                        } else {
+                            console.log(`Prerelease name: ${prereleaseName}`);
+                        }
+
+                        // Get NPM dist tag
+                        const distTag = releaseType === 'prerelease' ? prereleaseName : 'latest';
+                        console.log(`NPM dist tag: ${distTag}`);
+
+                        const getVersion = (tag) => run(`npm view @lumx/core@${tag} version`).then(({ stdout }) => stdout.trim());
+
+                        // Get latest version
+                        const latestVersion = await getVersion(distTag)
+                            // Fallback on 'latest' dist tag as it always exists
+                            || await getVersion('latest');
+                        console.log(`Latest ${releaseType} version: ${latestVersion}`);
+
+                        // Increment version
+                        const nextVersion = require('semver').inc(latestVersion, releaseType, prereleaseName);
+                        console.log(`New ${releaseType} version: ${nextVersion}`);
+
+                        // Checkout new branch (lerna version requires this)
+                        const branch = `release/${nextVersion}`;
+                        await run(`git checkout -b ${branch}`);
+
+                        // Update version in all packages
+                        await run(`yarn lerna version --no-git-tag-version --yes ${nextVersion}`);
+
+                        // Update yarn.lock with new package versions
+                        await run(`YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn install`);
+
+                        // Update version in changelog (need to run in a package which has a version, so not the root package)
+                        await run(`yarn workspace @lumx/core update-version-changelog`);
+
+                        return { nextVersion, distTag, branch, releaseType, refName };
+
+            -   name: "Build libs"
+                run: yarn build:libs
+
+            -   name: "Publish version to NPM"
+                env:
+                    NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+                    DIST_TAG: ${{ fromJSON(steps.version.outputs.result).distTag }}
+                run: |
+                    for package in $(echo packages/lumx-*);
+                    do
+                        (echo "Publishing $package"; cd $package; npm publish --tag $DIST_TAG)
+                    done
+
+            -   name: "Git commit, tag & push"
+                if: ${{ fromJSON(steps.version.outputs.result).releaseType != 'prerelease' }}
+                id: git
+                run: |
+                    git config --global user.name "github-actions"
+                    git config --global user.email "github-actions@users.noreply.github.com"
+
+                    branch="${{ fromJSON(steps.version.outputs.result).branch }}"
+                    echo "branch=$branch" >> $GITHUB_OUTPUT
+
+                    tag="v${{ fromJSON(steps.version.outputs.result).nextVersion }}"
+                    echo "tag=$tag" >> $GITHUB_OUTPUT
+
+                    # Commit and push branch
+                    commit="chore(release): release $tag"
+                    echo "commit=$commit" >> $GITHUB_OUTPUT
+                    git commit -am "$commit"
+                    git push origin "$branch"
+
+                    # Tag and push tag
+                    git tag "$tag"
+                    git push origin "$tag"
+
+        outputs:
+            releaseType: ${{ fromJSON(steps.version.outputs.result).releaseType }}
+            baseRef: ${{ fromJSON(steps.version.outputs.result).refName }}
+            commit: ${{ steps.git.outputs.commit }}
+            branch: ${{ steps.git.outputs.branch }}
+            versionTag: ${{ steps.git.outputs.tag }}
+
+    create_gh_pull_request:
+        if: ${{ needs.publish_version.outputs.releaseType != 'prerelease' }}
+        name: "Create pull request"
+        runs-on: ubuntu-latest
+        needs: [ publish_version ]
+        steps:
+            -   name: "Create pull request"
+                uses: actions/github-script@v6
+                with:
+                    script: |
+                        github.rest.pulls.create({
+                            owner: context.repo.owner,
+                            repo: context.repo.repo,
+                            title: '${{ needs.publish_version.outputs.commit }}',
+                            head: '${{ needs.publish_version.outputs.branch }}',
+                            base: '${{ needs.publish_version.outputs.baseRef }}',
+                            body: 'https://github.com/lumapps/design-system/releases/tag/${{ needs.publish_version.outputs.versionTag }}',
+                            draft: false,
+                        });
+
+    create_gh_release:
+        if: ${{ needs.publish_version.outputs.releaseType != 'prerelease' }}
+        name: "Create release note"
+        runs-on: ubuntu-latest
+        needs: [ publish_version ]
+        steps:
+            -   name: "Checkout repository"
+                uses: actions/checkout@v3
+                with:
+                    ref: ${{ needs.publish_version.outputs.versionTag }}
+
+            -   name: "Create release note"
                 uses: ./.github/actions/release-note
                 with:
-                    versionTag: ${{ github.ref }}
+                    versionTag: ${{ needs.publish_version.outputs.versionTag }}
 
-    push_image:
+    build_demo_site:
+        if: ${{ needs.publish_version.outputs.releaseType != 'prerelease' }}
+        name: "Build & push demo site"
         timeout-minutes: 30
-        name: Push the image on release
         runs-on: ubuntu-latest
+        needs: [ publish_version ]
         env:
             GCP_PROD_REGISTRY: gcr.io/lumapps-registry
         steps:
-            -   name: Checkout code
+            -   name: "Checkout repository"
                 uses: actions/checkout@v3
+                with:
+                    ref: ${{ needs.publish_version.outputs.versionTag }}
 
-            -   name: Login to GCR
+            -   name: "Login to GCR"
                 uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
                 with:
                     registry: gcr.io
                     username: _json_key
                     password: ${{ secrets.GCR_PROD_RW_CREDS }}
 
-            -   name: Setup buildx
+            -   name: "Setup buildx"
                 id: buildx_setup
                 uses: docker/setup-buildx-action@94ab11c41e45d028884a99163086648e898eed25
                 with:
                     install: true
 
             -   run: |
-                    echo "git_commit=$(rev-parse  HEAD)" >> $GITHUB_ENV
+                    echo "git_commit=$(git rev-parse HEAD)" >> $GITHUB_ENV
                     echo "build_date=$(date --rfc-3339=seconds)" >> $GITHUB_ENV
 
-            -   name: Docker metadata
+            -   name: "Docker metadata"
                 id: meta
                 uses: docker/metadata-action@f206c36955d3cc6213c38fb3747d9ba4113e686a
                 with:
                     tags: |
                         type=match,pattern=/^v?(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/
-                        type=raw,enable=true,priority=200,value=${{ github.sha }},event=tag
+                        type=raw,enable=true,priority=200,value=${{ env.git_commit }},event=tag
                     images: |
                         ${{ env.GCP_PROD_REGISTRY }}/design-system
                     labels: |
                         com.lumapps.image.created=${{ env.build_date }}
-                        com.lumapps.image.sha1=${{ env.GITHUB_SHA }}
+                        com.lumapps.image.sha1=${{ env.git_commit }}
                         com.lumapps.image.authors=frontend@lumapps.com
                         com.lumapps.image.version={{tag}}
 
-            -   name: Build image
+            -   name: "Build image"
                 uses: docker/build-push-action@a66e35b9cbcf4ad0ea91ffcaf7bbad63ad9e0229
                 with:
                     context: ./
-                    file: ${{ matrix.dockerfile}}
+                    file: ${{ matrix.dockerfile }}
                     builder: ${{ steps.buildx_setup.outputs.name }}
                     build-args: version=${{ env.version }}
                     push: true

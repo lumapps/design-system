@@ -7,6 +7,7 @@
     "devDependencies": {
         "@typescript-eslint/eslint-plugin": "^5.13.0",
         "@typescript-eslint/parser": "^5.13.0",
+        "changelog-verify": "^1.1.2",
         "es-abstract": "1.17.6",
         "eslint": "^7.32.0",
         "eslint-config-airbnb": "^18.2.1",
@@ -23,6 +24,7 @@
         "postcss-hover-media-feature": "^0.3.1",
         "prettier": "^2.2.1",
         "prettier-eslint": "^12.0.0",
+        "semver": "^7.3.5",
         "stylelint": "^14.9.1",
         "stylelint-config-recess-order": "^3.0.0",
         "stylelint-config-standard-scss": "^5.0.0",
@@ -61,6 +63,7 @@
     },
     "scripts": {
         "build": "lerna run --stream build",
+        "build:libs": "lerna run --no-private --stream build",
         "build:site": "yarn workspace lumx-site-demo clean && yarn workspace lumx-site-demo build",
         "build:react": "yarn workspace @lumx/react build",
         "build:core": "yarn workspace @lumx/core build",
@@ -83,8 +86,6 @@
         "test": "yarn workspace @lumx/react test",
         "storybook:react": "yarn workspace @lumx/react storybook",
         "storybook": "yarn storybook:react",
-        "check:not-master": "git symbolic-ref --short -q HEAD | egrep -q '^master$' && echo 'ERROR: You can not release from the master branch.' && exit 1 || true",
-        "version": "yarn check:not-master && yarn && git add yarn.lock",
         "generate:design-tokens": "yarn workspace @lumx/core generate:design-tokens"
     },
     "workspaces": [

@@ -107,7 +107,6 @@
     "scripts": {
         "build": "rollup -c",
         "prepare": "install-peers || exit 0",
-        "prepublishOnly": "yarn build",
         "test": "jest --config jest/index.js --coverage --notify --passWithNoTests --detectOpenHandles --runInBand",
         "storybook": "yarn start:storybook",
         "start:storybook": "cd storybook && ./start",
