@@ -1,22 +1,22 @@
 name: "Release Workflow"
 
-on:
-    workflow_dispatch:
-        inputs:
-            releaseType:
-                description: 'Release type'
-                required: true
-                default: 'prerelease'
-                type: choice
-                options:
-                    - prerelease
-                    - patch
-                    - minor
-                    - major
-            prereleaseName:
-                description: 'Prerelease name (ignore if release type is not `prerelease`)'
-                default: 'alpha'
-                type: string
+on: pull_request
+#    workflow_dispatch:
+#        inputs:
+#            releaseType:
+#                description: 'Release type'
+#                required: true
+#                default: 'prerelease'
+#                type: choice
+#                options:
+#                    - prerelease
+#                    - patch
+#                    - minor
+#                    - major
+#            prereleaseName:
+#                description: 'Prerelease name (ignore if release type is not `prerelease`)'
+#                default: 'alpha'
+#                type: string
 
 concurrency:
     group: "${{ github.workflow }}-${{ github.ref_name }}"
@@ -46,7 +46,11 @@ jobs:
                 with:
                     script: |
                         const refType = '${{ github.ref_type }}';
-                        const refName = '${{ github.ref_name }}';
+                        let refName = '${{ github.ref_name }}';
+                        if ('${{ github.ref }}'.startsWith('refs/pull')) {
+                            // Special case when running from a PR
+                            refName = '${{ github.head_ref }}';
+                        }
 
                         if (refType !== 'branch') {
                             console.log(`Release workflow can only be run from a branch.\n`);
