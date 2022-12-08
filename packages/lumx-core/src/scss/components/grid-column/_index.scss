@@ -1,0 +1,18 @@
+/* ==========================================================================
+   Grid Column
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-grid-column {
+    --lumx-grid-column-gap: var(--lumx-spacing-unit-regular);
+    --lumx-grid-column-columns: 1;
+    --lumx-grid-column-item-min-width: 100%;
+
+    $min-width: var(--lumx-grid-column-item-min-width);
+    $gap: var(--lumx-grid-column-gap);
+    $columns: var(--lumx-grid-column-columns);
+    $column-max-width: max(min(#{$min-width}, 100%), calc((100% - (#{$columns} - 1) * #{$gap}) / #{$columns}));
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(#{$column-max-width}, 1fr));
+    gap: var(--lumx-grid-column-gap);
+}

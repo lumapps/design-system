@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   New component in React `GridColumn`.
+
 ## [3.0.7][] - 2022-12-06
 
 ### Added

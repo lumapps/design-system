@@ -1,0 +1,27 @@
+import { GridColumn } from '@lumx/react';
+import { Placeholder } from '@lumx/demo/components/content/Placeholder';
+
+# Grid column
+
+**Display children in a customised grid, with a responsive number of column based on children minimum width constraint.**
+
+## Example
+
+<DemoBlock demo="example" marginAuto={["left", "right"]} style={{ overflow: "hidden", resize: "horizontal", maxWidth: "100%" }}>
+    <GridColumn itemMinWidth={64} maxColumns={4} gap="huge">
+        <Placeholder name="1" height="auto" width="auto"/>
+        <Placeholder name="2" height="auto" width="auto"/>
+        <Placeholder name="3" height="auto" width="auto"/>
+        <Placeholder name="4" height="auto" width="auto"/>
+        <Placeholder name="5" height="auto" width="auto"/>
+        <Placeholder name="6" height="auto" width="auto"/>
+    </GridColumn>
+</DemoBlock>
+
+### Accessibility concerns
+
+GridColumn is a simple layout blocks without any particular semantic or ARIA role. It use `<div>` by default, but it can be customized with the `as` property.
+
+### Properties
+
+<PropTable component="GridColumn" />
