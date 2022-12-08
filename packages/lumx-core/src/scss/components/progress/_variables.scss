@@ -1,2 +1,12 @@
-$lumx-progress-circular-size: 40px;
+@use "sass:map";
+
+/** @deprecated: replaced with $lumx-progress-circular-size-map */
+$lumx-progress-circular-size: map.get($lumx-sizes, "m");
+$lumx-progress-circular-size-map: (
+    "xxs": map.get($lumx-sizes, "xxs"),
+    "xs": map.get($lumx-sizes, "xs"),
+    "s": map.get($lumx-sizes, "s"),
+    "m": map.get($lumx-sizes, "m"),
+);
+
 $lumx-progress-linear-size: 4px;
