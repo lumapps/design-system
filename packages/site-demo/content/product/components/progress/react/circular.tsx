@@ -1,8 +1,4 @@
-import { Progress } from '@lumx/react';
 import React from 'react';
+import { ProgressCircular } from '@lumx/react';
 
-export const App = ({ theme }: any) => (
-    <>
-        <Progress theme={theme} />
-    </>
-);
+export const App = ({ theme }: any) => <ProgressCircular theme={theme} />;

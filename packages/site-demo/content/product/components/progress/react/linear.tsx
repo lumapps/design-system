@@ -1,8 +1,4 @@
-import { Progress, ProgressVariant } from '@lumx/react';
 import React from 'react';
+import { ProgressLinear } from '@lumx/react';
 
-export const App = ({ theme }: any) => (
-    <>
-        <Progress theme={theme} variant={ProgressVariant.linear} />
-    </>
-);
+export const App = ({ theme }: any) => <ProgressLinear theme={theme} />;

@@ -1,3 +1,5 @@
+@use "sass:map";
+
 /* ==========================================================================
    Progress
    ========================================================================== */
@@ -29,11 +31,15 @@
         animation: lumx-progress-bounce 2s infinite ease-in-out;
     }
 
+    &--theme-light &__double-bounce1,
+    &--theme-light &__double-bounce2,
     .#{$lumx-base-prefix}-progress--theme-light &__double-bounce1,
     .#{$lumx-base-prefix}-progress--theme-light &__double-bounce2 {
         background-color: lumx-color-variant("primary", "L3");
     }
 
+    &--theme-dark &__double-bounce1,
+    &--theme-dark &__double-bounce2,
     .#{$lumx-base-prefix}-progress--theme-dark &__double-bounce1,
     .#{$lumx-base-prefix}-progress--theme-dark &__double-bounce2 {
         background-color: lumx-color-variant("light", "L3");
@@ -64,12 +70,22 @@
         animation: lumx-progress-dash 1.5s ease-in-out infinite;
     }
 
+    &--theme-light &__path,
     .#{$lumx-base-prefix}-progress--theme-light &__path {
         stroke: lumx-color-variant("primary", "N");
     }
 
+    &--theme-dark &__path,
     .#{$lumx-base-prefix}-progress--theme-dark &__path {
         stroke: lumx-color-variant("light", "N");
+    }
+
+    /* Circular sizes */
+    @each $key, $size in $lumx-progress-circular-size-map {
+        &--size-#{$key}, &--size-#{$key} .#{$lumx-base-prefix}-progress-circular__svg {
+            width: $size;
+            height: $size;
+        }
     }
 }
 
@@ -125,11 +141,15 @@
         left: 0;
     }
 
+    &--theme-light &__line1,
+    &--theme-light &__line2,
     .#{$lumx-base-prefix}-progress--theme-light &__line1,
     .#{$lumx-base-prefix}-progress--theme-light &__line2 {
         background-color: lumx-color-variant("primary", "L3");
     }
 
+    &--theme-dark &__line1,
+    &--theme-dark &__line2,
     .#{$lumx-base-prefix}-progress--theme-dark &__line1,
     .#{$lumx-base-prefix}-progress--theme-dark &__line2 {
         background-color: lumx-color-variant("light", "L3");

@@ -6,6 +6,8 @@ import { Theme } from '@lumx/react';
 
 import { Comp, GenericProps, HasTheme, ValueOf } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { ProgressLinear } from './ProgressLinear';
+import { ProgressCircular } from './ProgressCircular';
 
 /**
  * Progress variants.
@@ -38,9 +40,11 @@ const DEFAULT_PROPS: Partial<ProgressProps> = {
     theme: Theme.light,
     variant: ProgressVariant.circular,
 };
+
 /**
  * Progress component.
  *
+ * @deprecated use `ProgressLinear` and `ProgressCircular` instead.
  * @param  props Component props.
  * @param  ref   Component ref.
  * @return React element.
@@ -54,31 +58,8 @@ export const Progress: Comp<ProgressProps, HTMLDivElement> = forwardRef((props, 
             {...forwardedProps}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, variant }))}
         >
-            <div className={classNames(`${CLASSNAME}-${variant}`)}>
-                {variant === ProgressVariant.circular && (
-                    <>
-                        <div className="lumx-progress-circular__double-bounce1" />
-                        <div className="lumx-progress-circular__double-bounce2" />
-
-                        <svg className="lumx-progress-circular__svg" viewBox="25 25 50 50">
-                            <circle
-                                className="lumx-progress-circular__path"
-                                cx="50"
-                                cy="50"
-                                r="20"
-                                fill="none"
-                                strokeWidth="5"
-                            />
-                        </svg>
-                    </>
-                )}
-                {variant === ProgressVariant.linear && (
-                    <>
-                        <div className="lumx-progress-linear__line1" />
-                        <div className="lumx-progress-linear__line2" />
-                    </>
-                )}
-            </div>
+            {variant === ProgressVariant.circular && <ProgressCircular theme={theme} />}
+            {variant === ProgressVariant.linear && <ProgressLinear theme={theme} />}
         </div>
     );
 });
