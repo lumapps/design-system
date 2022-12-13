@@ -181,6 +181,28 @@ jobs:
                 with:
                     versionTag: ${{ needs.push_version.outputs.versionTag }}
 
+    deploy_chromatic:
+        if: ${{ needs.push_version.outputs.releaseType != 'prerelease' }}
+        name: "Deploy chromatic"
+        runs-on: ubuntu-latest
+        needs: [push_version]
+        steps:
+            -   name: "Checkout repository"
+                uses: actions/checkout@v3
+                with:
+                    fetch-depth: 0 # retrieve all the repo history (required by chromatic)
+                    ref: ${{ needs.push_version.outputs.versionTag }}
+
+            -   name: "Setup"
+                uses: ./.github/actions/setup
+
+            -   name: "Deploy chromatic"
+                uses: chromaui/action@3f82bf5d065290658af8add6dce946809ee0f923 #v6.1.0
+                with:
+                    token: ${{ secrets.GITHUB_TOKEN }}
+                    projectToken: ${{ secrets.CHROMATIC_TOKEN }}
+                    buildScriptName: build:storybook
+
     build_demo_site:
         if: ${{ needs.push_version.outputs.releaseType != 'prerelease' }}
         name: "Build & push demo site on gcr.io registry"
