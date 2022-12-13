@@ -56,7 +56,7 @@ jobs:
                         const lodash = require('lodash');
                         const releaseType = '${{ inputs.releaseType }}' || 'prerelease';
                         console.log(`Release type: ${releaseType}`);
-                        const prereleaseName = lodash.kebabCase('${{ inputs.prereleaseName }}' || 'alpha');
+                        const prereleaseName = lodash.kebabCase('${{ inputs.prereleaseName }}' || 'alpha-auto-release');
 
                         if (releaseType !== 'prerelease') {
                             // Exit if not on master
@@ -121,7 +121,6 @@ jobs:
                     done
 
             -   name: "Git commit, tag & push"
-                if: ${{ fromJSON(steps.version.outputs.result).releaseType != 'prerelease' }}
                 id: git
                 run: |
                     git config --global user.name "github-actions"
@@ -150,7 +149,6 @@ jobs:
             versionTag: ${{ steps.git.outputs.tag }}
 
     create_gh_pull_request:
-        if: ${{ needs.push_version.outputs.releaseType != 'prerelease' }}
         name: "Create pull request on github"
         runs-on: ubuntu-latest
         needs: [push_version]
@@ -170,7 +168,6 @@ jobs:
                         });
 
     create_gh_release:
-        if: ${{ needs.push_version.outputs.releaseType != 'prerelease' }}
         name: "Create release on github"
         runs-on: ubuntu-latest
         needs: [push_version]
@@ -186,7 +183,6 @@ jobs:
                     versionTag: ${{ needs.push_version.outputs.versionTag }}
 
     deploy_chromatic:
-        if: ${{ needs.push_version.outputs.releaseType != 'prerelease' }}
         name: "Deploy chromatic"
         runs-on: ubuntu-latest
         needs: [push_version]
@@ -208,7 +204,6 @@ jobs:
                     buildScriptName: build:storybook
 
     build_demo_site:
-        if: ${{ needs.push_version.outputs.releaseType != 'prerelease' }}
         name: "Build & push demo site on gcr.io registry"
         timeout-minutes: 30
         runs-on: ubuntu-latest
