@@ -32,8 +32,7 @@
         "directory": "dist"
     },
     "scripts": {
-        "build": "rollup -c",
-        "prepublishOnly": "yarn build"
+        "build": "rollup -c"
     },
     "sideEffects": false,
     "version": "3.0.7"
