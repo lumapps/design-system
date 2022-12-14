@@ -80,18 +80,24 @@ This will produce the target build for `@lumx/core`, `@lumx/angularjs`, `@lumx/r
 
 ## How to publish packages
 
-1. Create a release branch (ex: `release/vX.Y.Z`) based on `master`
-2. Push it to remote (`git push origin release/vX.Y.Z`)
-3. Login to NPM with an authorized account: `npm login`
-4. Make sure your packages are up to date: `yarn`
-5. (Optional) Make sure the build doesn't crash: `yarn build`
-6. Publish the packages to NPM
-   * to release an alpha version:
-     `yarn release --dist-tag <npm-tag> vX.Y.Z-alpha.N`
-     * the `--dist-tag <npm-tag>` option is used to avoid replacing the `latest` tag on NPM
-   * to release a version: `yarn release`
-     (you will be asked what version bump to apply)
-7. Create a PR for the release branch to merge into master
+**The full release process is automated in a GitHub workflow** which can be triggered on the [release.yml](https://github.com/lumapps/design-system/actions/workflows/release.yml) page with the "Run workflow" button.
+
+Three parameters are available:
+
+1. The base branch used for the release. Tags cannot be used and only the `master` branch is authorised when releasing a "patch", "minor" or "major" version.
+2. The release type
+    - "patch", "minor" & "major" will release a version increment `vX.Y.Z`
+    - "prerelease" will release increment the last prerelease version if it exists (ex: `3.0.1-alpha.0` => `3.0.1-alpha.1`) or will increment the last patch version and append the release name (ex: `3.0.2` => `3.0.3-alpha.0`)
+3. (Optional) The prerelease name (if applicable).
+
+Releasing a new version of the lumx packages consists in:
+
+1. Incrementing the version number (patch, minor, major or prerelease)
+2. Building all lumx packages (`yarn build` for all packages)
+3. Pushing on NPM (`npm publish` for all packages)
+4. (if not a prerelease) Pushing updated version on GitHub (new tag & new pull request)
+
+**Prereleases** are used to test the lumx libs before committing to a release. They are never merged in master and never mentioned in the CHANGELOG.md file. By default, prereleases use the tag `alpha` (ex: `3.0.1-alpha.0` aliased to `alpha` on NPM) but this can be changed to test multiple and unrelated versions (ex: `alpha-fix-thumbnail`, `alpha-refactor-types`, etc.).
 
 ## Copyright and license
 
