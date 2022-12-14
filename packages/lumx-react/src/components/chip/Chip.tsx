@@ -1,4 +1,4 @@
-import { Color, ColorPalette, Size, Theme } from '@lumx/react';
+import { ColorPalette, Size, Theme } from '@lumx/react';
 import { useStopPropagation } from '@lumx/react/hooks/useStopPropagation';
 
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
@@ -24,7 +24,7 @@ export interface ChipProps extends GenericProps, HasTheme {
     /** A component to be rendered before the content. */
     before?: ReactNode;
     /** Color variant. */
-    color?: Color;
+    color?: ColorPalette;
     /** Whether the component is clickable or not. */
     isClickable?: boolean;
     /** Whether the component is disabled or not. */

@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 
 import classNames from 'classnames';
 
-import { Color, ColorPalette, ColorVariant, Size, Theme } from '@lumx/react';
+import { ColorPalette, ColorVariant, Size, Theme } from '@lumx/react';
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { mdiAlertCircle } from '@lumx/icons';
@@ -14,7 +14,7 @@ export type IconSizes = Extract<Size, 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'x
  */
 export interface IconProps extends GenericProps, HasTheme {
     /** Color variant. */
-    color?: Color;
+    color?: ColorPalette;
     /** Lightened or darkened variant of the selected icon color. */
     colorVariant?: ColorVariant;
     /** Whether the icon has a shape. */

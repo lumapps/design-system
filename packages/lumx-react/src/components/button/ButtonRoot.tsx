@@ -4,7 +4,7 @@ import isEmpty from 'lodash/isEmpty';
 
 import classNames from 'classnames';
 
-import { Color, ColorPalette, Emphasis, Size, Theme } from '@lumx/react';
+import { ColorPalette, Emphasis, Size, Theme } from '@lumx/react';
 import { CSS_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/react/utils/className';
@@ -22,7 +22,7 @@ export interface BaseButtonProps
         Pick<AriaAttributes, 'aria-expanded' | 'aria-haspopup' | 'aria-pressed' | 'aria-label'>,
         HasTheme {
     /** Color variant. */
-    color?: Color;
+    color?: ColorPalette;
     /** Emphasis variant. */
     emphasis?: Emphasis;
     /** Whether or not the button has a background color in low emphasis. */
