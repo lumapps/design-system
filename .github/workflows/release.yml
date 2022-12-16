@@ -186,7 +186,7 @@ jobs:
         if: ${{ needs.publish_version.outputs.releaseType != 'prerelease' }}
         name: "Deploy chromatic"
         runs-on: ubuntu-latest
-        needs: [publish_version]
+        needs: [ publish_version ]
         steps:
             -   name: "Checkout repository"
                 uses: actions/checkout@v3
@@ -203,6 +203,7 @@ jobs:
                     token: ${{ secrets.GITHUB_TOKEN }}
                     projectToken: ${{ secrets.CHROMATIC_TOKEN }}
                     buildScriptName: build:storybook
+                    ref: ${{ needs.publish_version.outputs.versionTag }}
 
     build_demo_site:
         if: ${{ needs.publish_version.outputs.releaseType != 'prerelease' }}
