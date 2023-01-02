@@ -34,6 +34,7 @@ export * from './components/link-preview';
 export * from './components/list';
 export * from './components/message';
 export * from './components/mosaic';
+export * from './components/navigation';
 export * from './components/notification';
 export * from './components/popover';
 export * from './components/popover-dialog';
