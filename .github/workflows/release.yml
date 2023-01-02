@@ -54,10 +54,19 @@ jobs:
                         console.log(`Release type: ${releaseType}`);
                         const prereleaseName = lodash.kebabCase('${{ inputs.prereleaseName }}' || 'alpha');
 
+                        const getVersion = (tag) => run(`npm view @lumx/core@${tag} version`).then(({ stdout }) => stdout.trim());
+                        const npmLatestVersion = await getVersion('latest');
+
                         if (releaseType !== 'prerelease') {
                             // Exit if not on master
                             if (refName !== 'master') {
                                 console.log(`New ${releaseType} release can only be created from master.\n`);
+                                process.exit(1);
+                            }
+
+                            const localVersion = require('./lerna.json').version;
+                            if (localVersion !== npmLatestVersion) {
+                                console.log(`NPM latest version (${npmLatestVersion}) does not match the local latest version (${localVersion}).\n`);
                                 process.exit(1);
                             }
 
@@ -76,12 +85,10 @@ jobs:
                         const distTag = releaseType === 'prerelease' ? prereleaseName : 'latest';
                         console.log(`NPM dist tag: ${distTag}`);
 
-                        const getVersion = (tag) => run(`npm view @lumx/core@${tag} version`).then(({ stdout }) => stdout.trim());
-
                         // Get latest version
                         const latestVersion = await getVersion(distTag)
                             // Fallback on 'latest' dist tag as it always exists
-                            || await getVersion('latest');
+                            || npmLatestVersion;
                         console.log(`Latest ${releaseType} version: ${latestVersion}`);
 
                         // Increment version
