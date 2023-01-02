@@ -1,0 +1,36 @@
+name: "Deploy chromatic pull request"
+
+on:
+    pull_request:
+        types: [ labeled ]
+
+concurrency:
+    group: chromatic-${{ github.head_ref }}
+    cancel-in-progress: true
+
+jobs:
+    deploy_chromatic:
+        if: "github.event.label.name == 'need: deploy-chromatic'"
+        name: "Deploy chromatic"
+        runs-on: ubuntu-latest
+        steps:
+            -   name: "Checkout repository"
+                uses: actions/checkout@v3
+                with:
+                    fetch-depth: 0 # retrieve all the repo history (required by chromatic)
+
+            -   name: "Setup"
+                uses: ./.github/actions/setup
+
+            -   name: "Deploy chromatic"
+                uses: chromaui/action@3f82bf5d065290658af8add6dce946809ee0f923 #v6.1.0
+                with:
+                    token: ${{ secrets.GITHUB_TOKEN }}
+                    projectToken: ${{ secrets.CHROMATIC_TOKEN }}
+                    buildScriptName: build:storybook
+
+            -   if: "contains(github.event.pull_request.labels.*.name, 'need: deploy-chromatic')"
+                name: "Remove label"
+                uses: ./.github/actions/remove-label
+                with:
+                    label: "need: deploy-chromatic"

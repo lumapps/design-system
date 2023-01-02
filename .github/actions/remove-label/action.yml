@@ -7,14 +7,23 @@ inputs:
         required: true
 
 runs:
-  using: composite
-  steps:
-      - uses: actions/github-script@v6
-        with:
-            script: |
-                github.rest.issues.removeLabel({
-                    issue_number: context.issue.number,
-                    owner: context.repo.owner,
-                    repo: context.repo.repo,
-                    name: '${{ inputs.label }}'
-                })
+    using: composite
+    steps:
+        - uses: actions/github-script@v6
+          with:
+              script: |
+                  try {
+                      await github.rest.issues.removeLabel({
+                          issue_number: context.issue.number,
+                          owner: context.repo.owner,
+                          repo: context.repo.repo,
+                          name: '${{ inputs.label }}'
+                      });
+                  } catch(error) {
+                      if (error.toString().includes('Label does not exist')) {
+                          console.debug('\nIgnoring error "Label does not exist"\n');
+                          console.error(error);
+                          return;
+                      }
+                      throw error;
+                  }
