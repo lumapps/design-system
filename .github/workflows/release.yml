@@ -54,10 +54,19 @@ jobs:
                         console.log(`Release type: ${releaseType}`);
                         const prereleaseName = lodash.kebabCase('${{ inputs.prereleaseName }}' || 'alpha');
 
+                        const getVersion = (tag) => run(`npm view @lumx/core@${tag} version`).then(({ stdout }) => stdout.trim());
+                        const npmLatestVersion = await getVersion('latest');
+
                         if (releaseType !== 'prerelease') {
                             // Exit if not on master
                             if (refName !== 'master') {
                                 console.log(`New ${releaseType} release can only be created from master.\n`);
+                                process.exit(1);
+                            }
+
+                            const localVersion = require('./lerna.json').version;
+                            if (localVersion !== npmLatestVersion) {
+                                console.log(`NPM latest version (${npmLatestVersion}) does not match the local latest version (${localVersion}).\n`);
                                 process.exit(1);
                             }
 
@@ -76,12 +85,10 @@ jobs:
                         const distTag = releaseType === 'prerelease' ? prereleaseName : 'latest';
                         console.log(`NPM dist tag: ${distTag}`);
 
-                        const getVersion = (tag) => run(`npm view @lumx/core@${tag} version`).then(({ stdout }) => stdout.trim());
-
                         // Get latest version
                         const latestVersion = await getVersion(distTag)
                             // Fallback on 'latest' dist tag as it always exists
-                            || await getVersion('latest');
+                            || npmLatestVersion;
                         console.log(`Latest ${releaseType} version: ${latestVersion}`);
 
                         // Increment version
@@ -113,7 +120,7 @@ jobs:
                 run: |
                     for package in $(echo packages/lumx-*);
                     do
-                        (echo "Publishing $package"; cd $package; npm publish --tag $DIST_TAG)
+                        (echo "Publishing $package"; cd $package/dist; npm publish --tag $DIST_TAG)
                     done
 
             -   name: "Git commit, tag & push"
@@ -181,29 +188,6 @@ jobs:
                 uses: ./.github/actions/release-note
                 with:
                     versionTag: ${{ needs.publish_version.outputs.versionTag }}
-
-    deploy_chromatic:
-        if: ${{ needs.publish_version.outputs.releaseType != 'prerelease' }}
-        name: "Deploy chromatic"
-        runs-on: ubuntu-latest
-        needs: [ publish_version ]
-        steps:
-            -   name: "Checkout repository"
-                uses: actions/checkout@v3
-                with:
-                    fetch-depth: 0 # retrieve all the repo history (required by chromatic)
-                    ref: ${{ needs.publish_version.outputs.versionTag }}
-
-            -   name: "Setup"
-                uses: ./.github/actions/setup
-
-            -   name: "Deploy chromatic"
-                uses: chromaui/action@3f82bf5d065290658af8add6dce946809ee0f923 #v6.1.0
-                with:
-                    token: ${{ secrets.GITHUB_TOKEN }}
-                    projectToken: ${{ secrets.CHROMATIC_TOKEN }}
-                    buildScriptName: build:storybook
-                    ref: ${{ needs.publish_version.outputs.versionTag }}
 
     build_demo_site:
         if: ${{ needs.publish_version.outputs.releaseType != 'prerelease' }}
