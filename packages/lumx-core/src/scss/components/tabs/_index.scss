@@ -16,7 +16,7 @@
     }
 
     &__link {
-        &:not(&--is-active) {
+        &:not(&--is-active):not(&--is-disabled) {
             @include lumx-tabs-link(lumx-base-const("emphasis", "LOW"));
 
             #{$self}--theme-light & {
@@ -83,11 +83,15 @@
 
 // Disabled state
 .#{$lumx-base-prefix}-tabs__link--is-disabled {
+    @include lumx-tabs-link(lumx-base-const("emphasis", "LOW"));
+
     .#{$lumx-base-prefix}-tabs--theme-light & {
+        @include lumx-tabs-link-color(lumx-base-const("emphasis", "LOW"), lumx-base-const("theme", "LIGHT"));
         @include lumx-state-disabled-text(lumx-base-const("theme", "LIGHT"));
     }
 
     .#{$lumx-base-prefix}-tabs--theme-dark & {
+        @include lumx-tabs-link-color(lumx-base-const("emphasis", "LOW"), lumx-base-const("theme", "DARK"));
         @include lumx-state-disabled-text(lumx-base-const("theme", "DARK"));
     }
 }

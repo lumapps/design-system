@@ -17,6 +17,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Badge, Button, Chip, Icon, Link: only `ColorPalette` values are allowed on the `color` prop (instead of `string`). **This has no impact on functionality**, if you used unsupported color before, you can ignore TS errors with `as any`.
 
+### Fixed
+
+-   Tab: fix disabled state.
+
 ## [3.0.7][] - 2022-12-06
 
 ### Added
