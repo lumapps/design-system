@@ -9,8 +9,8 @@
     border: none;
     outline: none;
 
-    &:hover,
-    &[data-focus-visible-added] {
+    &:hover:not(:disabled),
+    &[data-focus-visible-added]:not(:disabled) {
         text-decoration: underline;
     }
 }

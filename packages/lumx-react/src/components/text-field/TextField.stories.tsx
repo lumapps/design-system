@@ -20,6 +20,20 @@ export const TextField_ = ({ theme }: any) => {
     );
 };
 
+export const Disabled = ({ theme }: any) => {
+    const [value, onChange] = React.useState('Value');
+    return (
+        <TextField
+            value={value}
+            onChange={onChange}
+            label={text('Label', 'Label')}
+            placeholder={text('Placeholder', 'Placeholder')}
+            theme={theme}
+            isDisabled
+        />
+    );
+};
+
 export const Clearable = ({ theme }: any) => {
     const [value, onChange] = React.useState('Value');
     return (

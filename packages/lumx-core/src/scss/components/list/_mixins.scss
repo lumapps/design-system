@@ -29,13 +29,15 @@
 
     cursor: pointer;
 
+    &:active {
+        @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "LOW"), "dark");
+    }
+}
+
+@mixin lumx-list-item-hoverable() {
     &:hover,
     &[data-focus-visible-added] {
         @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "LOW"), "dark");
-    }
-
-    &:active {
-        @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "LOW"), "dark");
     }
 }
 

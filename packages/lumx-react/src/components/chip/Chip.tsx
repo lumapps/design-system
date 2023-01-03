@@ -103,7 +103,7 @@ export const Chip: Comp<ChipProps, HTMLAnchorElement> = forwardRef((props, ref) 
             className={classNames(
                 className,
                 handleBasicClasses({
-                    clickable: Boolean(hasOnClick) || isClickable,
+                    clickable: (Boolean(hasOnClick) || isClickable) && !isDisabled,
                     color: chipColor,
                     isDisabled,
                     hasAfter: Boolean(after),
@@ -118,8 +118,8 @@ export const Chip: Comp<ChipProps, HTMLAnchorElement> = forwardRef((props, ref) 
             role={hasOnClick ? 'button' : undefined}
             tabIndex={isDisabled || !hasOnClick ? -1 : 0}
             aria-disabled={(hasOnClick && isDisabled) || undefined}
-            onClick={hasOnClick ? onClick : undefined}
-            onKeyDown={hasOnClick ? onEnterPressed(onClick) : undefined}
+            onClick={hasOnClick && !isDisabled ? onClick : undefined}
+            onKeyDown={hasOnClick && !isDisabled ? onEnterPressed(onClick) : undefined}
         >
             {before && (
                 // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
@@ -141,7 +141,7 @@ export const Chip: Comp<ChipProps, HTMLAnchorElement> = forwardRef((props, ref) 
                     className={classNames(`${CLASSNAME}__after`, {
                         [`${CLASSNAME}__after--is-clickable`]: hasAfterClick,
                     })}
-                    onClick={handleOnAfterClick}
+                    onClick={!isDisabled ? handleOnAfterClick : undefined}
                 >
                     {after}
                 </div>

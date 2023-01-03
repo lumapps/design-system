@@ -173,8 +173,13 @@
 
 // Hover state
 .#{$lumx-base-prefix}-select--theme-light {
-    .#{$lumx-base-prefix}-select__wrapper:hover {
-        @include lumx-text-field-wrapper-state(lumx-base-const("state", "HOVER"), lumx-base-const("theme", "LIGHT"));
+    &:not(.#{$lumx-base-prefix}-select--is-disabled) {
+        .#{$lumx-base-prefix}-select__wrapper:hover {
+            @include lumx-text-field-wrapper-state(
+                lumx-base-const("state", "HOVER"),
+                lumx-base-const("theme", "LIGHT")
+            );
+        }
     }
 
     .#{$lumx-base-prefix}-text-field__input-native {

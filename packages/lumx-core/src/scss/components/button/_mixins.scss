@@ -130,7 +130,7 @@
         }
     }
 
-    &:hover,
+    &:hover:enabled,
     &[class*="--is-hovered"] {
         @if $color == "primary" and $emphasis == lumx-base-const("emphasis", "HIGH") {
             color: var(--lumx-button-#{$emphasis}-state-hover-#{$theme}-color);
@@ -156,7 +156,7 @@
         }
     }
 
-    &:active,
+    &:active:enabled,
     &[class*="--is-active"] {
         @if $color == "primary" and $emphasis == lumx-base-const("emphasis", "HIGH") {
             color: var(--lumx-button-#{$emphasis}-state-active-#{$theme}-color);
