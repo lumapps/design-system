@@ -88,9 +88,11 @@ jobs:
                         console.log(`NPM dist tag: ${distTag}`);
 
                         // Get latest version
-                        const latestVersion = await getVersion(distTag)
+                        let latestVersion = await getVersion(distTag)
+                        if (!latestVersion || !latestVersion.startsWith(npmLatestVersion)) {
                             // Fallback on 'latest' dist tag as it always exists
-                            || npmLatestVersion;
+                            latestVersion = npmLatestVersion;
+                        }
                         console.log(`Latest ${releaseType} version: ${latestVersion}`);
 
                         // Increment version
