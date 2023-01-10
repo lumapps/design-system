@@ -1,7 +1,6 @@
-name: "Deploy chromatic release"
+name: "Deploy Chromatic Release"
 
-# Chromatic deploy on release cannot run in `release.yml` until this is merged: https://github.com/chromaui/chromatic-cli/pull/695
-# Triggering on tag push might not work since GitHub workflows cascade are disabled by default.
+# Deploy chromatic when a new release tag is pushed on GitHub
 
 on:
     push:
