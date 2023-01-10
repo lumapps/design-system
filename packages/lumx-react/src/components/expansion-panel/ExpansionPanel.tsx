@@ -9,7 +9,7 @@ import isEmpty from 'lodash/isEmpty';
 import isFunction from 'lodash/isFunction';
 
 import { ColorPalette, DragHandle, Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
-import { Callback, Comp, GenericProps, HasTheme, isComponent } from '@lumx/react/utils/type';
+import { Comp, GenericProps, HasTheme, isComponent } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { partitionMulti } from '@lumx/react/utils/partitionMulti';
 
@@ -26,14 +26,14 @@ export interface ExpansionPanelProps extends GenericProps, HasTheme {
     /** Label text (overwritten if a `<header>` is provided in the children). */
     label?: string;
     /** On open callback. */
-    onOpen?: Callback;
+    onOpen?: (event: React.MouseEvent) => void;
     /** On close callback. */
-    onClose?: Callback;
+    onClose?: (event: React.MouseEvent) => void;
     /** Props to pass to the toggle button (minus those already set by the ExpansionPanel props). */
     toggleButtonProps: Pick<IconButtonProps, 'label'> &
         Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis' | 'color'>;
     /** On toggle open or close callback. */
-    onToggleOpen?(shouldOpen: boolean): void;
+    onToggleOpen?(shouldOpen: boolean, event: React.MouseEvent): void;
 }
 
 /**
@@ -93,16 +93,16 @@ export const ExpansionPanel: Comp<ExpansionPanelProps, HTMLDivElement> = forward
         <span className={`${CLASSNAME}__label`}>{label}</span>
     );
 
-    const toggleOpen = () => {
+    const toggleOpen = (event: React.MouseEvent) => {
         const shouldOpen = !isOpen;
         if (isFunction(onOpen) && shouldOpen) {
-            onOpen();
+            onOpen(event);
         }
         if (isFunction(onClose) && !shouldOpen) {
-            onClose();
+            onClose(event);
         }
         if (isFunction(onToggleOpen)) {
-            onToggleOpen(shouldOpen);
+            onToggleOpen(shouldOpen, event);
         }
     };
 

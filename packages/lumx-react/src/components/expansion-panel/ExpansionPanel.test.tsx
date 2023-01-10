@@ -94,7 +94,7 @@ describe(`<${ExpansionPanel.displayName}>`, () => {
             await userEvent.click(query.toggleButton() as any);
             expect(onOpen).toHaveBeenCalled();
             expect(onClose).not.toHaveBeenCalled();
-            expect(onToggleOpen).toHaveBeenCalledWith(true);
+            expect(onToggleOpen).toHaveBeenCalledWith(true, expect.anything());
         });
 
         it('should close on click', async () => {
@@ -107,7 +107,7 @@ describe(`<${ExpansionPanel.displayName}>`, () => {
             await userEvent.click(query.header() as any);
             expect(onOpen).not.toHaveBeenCalled();
             expect(onClose).toHaveBeenCalled();
-            expect(onToggleOpen).toHaveBeenCalledWith(false);
+            expect(onToggleOpen).toHaveBeenCalledWith(false, expect.anything());
         });
     });
 
