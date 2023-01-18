@@ -74,7 +74,7 @@
     },
     "peerDependencies": {
         "lodash": "4.17.21",
-        "moment": "^2.24.0",
+        "moment": ">= 2",
         "moment-range": "^4.0.2",
         "react": "^16.13.0",
         "react-dom": "^16.13.0"

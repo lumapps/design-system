@@ -44,7 +44,7 @@
         "intersection-observer": "^0.7.0",
         "lodash": "4.17.21",
         "lunr": "^2.3.9",
-        "moment": "^2.24.0",
+        "moment": "^2.29.4",
         "moment-range": "^4.0.2",
         "prism-react-renderer": "^0.1.5",
         "prismjs": "^1.25.0",

@@ -75,7 +75,7 @@
         "webpackbar": "^4.0.0"
     },
     "peerDependencies": {
-        "moment": "^2.24.0",
+        "moment": ">= 2",
         "moment-range": "^4.0.2"
     }
 }
