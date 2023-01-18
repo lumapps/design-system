@@ -7,8 +7,8 @@ import { Button, IconButton } from '../button';
 import { FlexBox } from '../flex-box';
 import { Heading } from '../heading';
 import { List, ListItem } from '../list';
-import { Placement } from '../popover/Popover';
 import { Toolbar } from '../toolbar';
+import { Placement } from '@lumx/react';
 
 const WithButton = (Story: any, context: any) => {
     const anchorRef = useRef(null);

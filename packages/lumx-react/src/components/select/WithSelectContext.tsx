@@ -6,12 +6,12 @@ import { uid } from 'uid';
 import { Kind, Theme } from '@lumx/react/components';
 import { Dropdown } from '@lumx/react/components/dropdown/Dropdown';
 import { InputHelper } from '@lumx/react/components/input-helper/InputHelper';
-import { Placement } from '@lumx/react/components/popover/Popover';
 
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 import { useListenFocus } from '@lumx/react/hooks/useListenFocus';
 import { CoreSelectProps, SelectVariant } from './constants';
+import { Placement } from '@lumx/react';
 
 /** The display name of the component. */
 const COMPONENT_NAME = 'Select';

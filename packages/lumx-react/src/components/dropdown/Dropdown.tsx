@@ -3,10 +3,11 @@ import React, { cloneElement, forwardRef, useMemo, useRef } from 'react';
 import classNames from 'classnames';
 
 import { List, ListProps } from '@lumx/react/components/list/List';
-import { Offset, Placement, Popover, PopoverProps } from '@lumx/react/components/popover/Popover';
+import { Popover, PopoverProps } from '@lumx/react/components/popover/Popover';
 import { useInfiniteScroll } from '@lumx/react/hooks/useInfiniteScroll';
 import { Comp, GenericProps, isComponent } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { Offset, Placement } from '@lumx/react/components/popover/constants';
 
 /**
  * Defines the props of the component.

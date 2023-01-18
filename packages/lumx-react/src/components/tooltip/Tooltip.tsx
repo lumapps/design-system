@@ -6,8 +6,6 @@ import { uid } from 'uid';
 
 import classNames from 'classnames';
 
-import { Placement } from '@lumx/react/components/popover/Popover';
-
 import { DOCUMENT } from '@lumx/react/constants';
 
 import { Comp, GenericProps } from '@lumx/react/utils/type';
@@ -16,6 +14,7 @@ import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
 import { useInjectTooltipRef } from './useInjectTooltipRef';
 import { useTooltipOpen } from './useTooltipOpen';
+import { Placement } from '@lumx/react/components/popover';
 
 /** Position of the tooltip relative to the anchor element. */
 export type TooltipPlacement = Extract<Placement, 'top' | 'right' | 'bottom' | 'left'>;
