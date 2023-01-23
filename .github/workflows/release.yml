@@ -52,6 +52,7 @@ jobs:
 
                         const run = require('util').promisify(require('child_process').exec);
                         const lodash = require('lodash');
+                        const semver = require('semver');
                         const releaseType = '${{ inputs.releaseType }}' || 'prerelease';
                         console.log(`Release type: ${releaseType}`);
                         const prereleaseName = lodash.kebabCase('${{ inputs.prereleaseName }}' || 'alpha');
@@ -87,16 +88,16 @@ jobs:
                         const distTag = releaseType === 'prerelease' ? prereleaseName : 'latest';
                         console.log(`NPM dist tag: ${distTag}`);
 
-                        // Get latest version
-                        let latestVersion = await getVersion(distTag)
-                        if (!latestVersion || !latestVersion.startsWith(npmLatestVersion)) {
-                            // Fallback on 'latest' dist tag as it always exists
-                            latestVersion = npmLatestVersion;
+                        // Get base version (version from which to increment)
+                        let baseVersion = await getVersion(distTag)
+                        // Prerelease should start with latest NPM version + patch (ex: 'v1.0.0' => 'v1.0.1-alpha.0')
+                        if (releaseType === 'prerelease' && (!baseVersion || !baseVersion.startsWith(semver.inc(npmLatestVersion, 'patch')))) {
+                            baseVersion = npmLatestVersion;
                         }
-                        console.log(`Latest ${releaseType} version: ${latestVersion}`);
+                        console.log(`${releaseType} base version: ${baseVersion}`);
 
                         // Increment version
-                        const nextVersion = require('semver').inc(latestVersion, releaseType, prereleaseName);
+                        const nextVersion = semver.inc(baseVersion, releaseType, prereleaseName);
                         console.log(`New ${releaseType} version: ${nextVersion}`);
 
                         // Checkout new branch (lerna version requires this)
