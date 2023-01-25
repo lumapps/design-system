@@ -92,6 +92,132 @@ const renderPopover = (children: ReactNode, usePortal?: boolean): any => {
     return usePortal ? createPortal(children, document.body) : children;
 };
 
+// Inner component (must be wrapped before export)
+const _InnerPopover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const {
+        anchorRef,
+        children,
+        className,
+        closeOnClickAway,
+        closeOnEscape,
+        elevation,
+        focusElement,
+        hasArrow,
+        isOpen,
+        onClose,
+        parentElement,
+        usePortal,
+        focusAnchorOnClose = true,
+        withFocusTrap,
+        boundaryRef,
+        fitToAnchorWidth,
+        fitWithinViewportHeight,
+        offset,
+        placement,
+        style,
+        zIndex,
+        ...forwardedProps
+    } = props;
+    const clickAwayRef = useRef<HTMLDivElement>(null);
+    const contentRef = useRef<HTMLDivElement>(null);
+
+    const {
+        styles,
+        attributes,
+        isPositioned,
+        position,
+        setArrowElement,
+        setPopperElement,
+        popperElement,
+    } = usePopoverStyle({
+        offset,
+        hasArrow,
+        fitToAnchorWidth,
+        fitWithinViewportHeight,
+        boundaryRef,
+        anchorRef,
+        children,
+        placement,
+        style,
+        zIndex,
+    });
+
+    /**
+     * Track whether the focus is currently set in the
+     * popover.
+     * */
+    const isFocusedWithin = useRef(false);
+
+    useFocusWithin({
+        element: popperElement || null,
+        onFocusIn: () => {
+            isFocusedWithin.current = true;
+        },
+        onFocusOut: () => {
+            isFocusedWithin.current = false;
+        },
+    });
+
+    /** Action on close */
+    const handleClose = useCallback(() => {
+        if (!onClose) {
+            return;
+        }
+
+        /**
+         * If the focus is currently within the popover
+         * when the popover closes, reset the focus back to the anchor element
+         * unless specifically requested not to.
+         */
+        if (isFocusedWithin.current && focusAnchorOnClose) {
+            if (parentElement?.current) {
+                parentElement?.current.focus();
+            }
+
+            const firstFocusable = anchorRef?.current && getFirstAndLastFocusable(anchorRef?.current).first;
+            if (firstFocusable) {
+                // Focus the first focusable element in anchor.
+                firstFocusable.focus();
+            } else {
+                // Fallback on the anchor element.
+                anchorRef?.current?.focus();
+            }
+        }
+
+        onClose();
+    }, [anchorRef, focusAnchorOnClose, onClose, parentElement]);
+
+    useCallbackOnEscape(handleClose, isOpen && closeOnEscape);
+
+    /** Only set focus within if the focus trap is disabled as they interfere with one another. */
+    useFocus(focusElement?.current, !withFocusTrap && isOpen && isPositioned);
+    useFocusTrap(withFocusTrap && isOpen && contentRef?.current, focusElement?.current);
+
+    const clickAwayRefs = useRef([clickAwayRef, anchorRef]);
+
+    return isOpen
+        ? renderPopover(
+              <div
+                  {...forwardedProps}
+                  ref={mergeRefs<HTMLDivElement>(setPopperElement, ref, clickAwayRef, contentRef)}
+                  className={classNames(
+                      className,
+                      handleBasicClasses({ prefix: CLASSNAME, elevation: Math.min(elevation || 0, 5), position }),
+                  )}
+                  style={styles.popover}
+                  {...attributes.popper}
+              >
+                  <ClickAwayProvider callback={closeOnClickAway && handleClose} childrenRefs={clickAwayRefs}>
+                      {hasArrow && <div ref={setArrowElement} className={`${CLASSNAME}__arrow`} style={styles.arrow} />}
+                      {children}
+                  </ClickAwayProvider>
+              </div>,
+              usePortal,
+          )
+        : null;
+});
+_InnerPopover.displayName = COMPONENT_NAME;
+
 /**
  * Popover component.
  *
@@ -102,131 +228,7 @@ const renderPopover = (children: ReactNode, usePortal?: boolean): any => {
 export const Popover: Comp<PopoverProps, HTMLDivElement> = skipRender(
     // Skip render in SSR
     () => Boolean(DOCUMENT),
-    forwardRef((props, ref) => {
-        const {
-            anchorRef,
-            children,
-            className,
-            closeOnClickAway,
-            closeOnEscape,
-            elevation,
-            focusElement,
-            hasArrow,
-            isOpen,
-            onClose,
-            parentElement,
-            usePortal,
-            focusAnchorOnClose = true,
-            withFocusTrap,
-            boundaryRef,
-            fitToAnchorWidth,
-            fitWithinViewportHeight,
-            offset,
-            placement,
-            style,
-            zIndex,
-            ...forwardedProps
-        } = props;
-        const clickAwayRef = useRef<HTMLDivElement>(null);
-        const contentRef = useRef<HTMLDivElement>(null);
-
-        const {
-            styles,
-            attributes,
-            isPositioned,
-            position,
-            setArrowElement,
-            setPopperElement,
-            popperElement,
-        } = usePopoverStyle({
-            offset,
-            hasArrow,
-            fitToAnchorWidth,
-            fitWithinViewportHeight,
-            boundaryRef,
-            anchorRef,
-            children,
-            placement,
-            style,
-            zIndex,
-        });
-
-        /**
-         * Track whether the focus is currently set in the
-         * popover.
-         * */
-        const isFocusedWithin = useRef(false);
-
-        useFocusWithin({
-            element: popperElement || null,
-            onFocusIn: () => {
-                isFocusedWithin.current = true;
-            },
-            onFocusOut: () => {
-                isFocusedWithin.current = false;
-            },
-        });
-
-        /** Action on close */
-        const handleClose = useCallback(() => {
-            if (!onClose) {
-                return;
-            }
-
-            /**
-             * If the focus is currently within the popover
-             * when the popover closes, reset the focus back to the anchor element
-             * unless specifically requested not to.
-             */
-            if (isFocusedWithin.current && focusAnchorOnClose) {
-                if (parentElement?.current) {
-                    parentElement?.current.focus();
-                }
-
-                const firstFocusable = anchorRef?.current && getFirstAndLastFocusable(anchorRef?.current).first;
-                if (firstFocusable) {
-                    // Focus the first focusable element in anchor.
-                    firstFocusable.focus();
-                } else {
-                    // Fallback on the anchor element.
-                    anchorRef?.current?.focus();
-                }
-            }
-
-            onClose();
-        }, [anchorRef, focusAnchorOnClose, onClose, parentElement]);
-
-        useCallbackOnEscape(handleClose, isOpen && closeOnEscape);
-
-        /** Only set focus within if the focus trap is disabled as they interfere with one another. */
-        useFocus(focusElement?.current, !withFocusTrap && isOpen && isPositioned);
-        useFocusTrap(withFocusTrap && isOpen && contentRef?.current, focusElement?.current);
-
-        const clickAwayRefs = useRef([clickAwayRef, anchorRef]);
-
-        return isOpen
-            ? renderPopover(
-                  <div
-                      {...forwardedProps}
-                      ref={mergeRefs<HTMLDivElement>(setPopperElement, ref, clickAwayRef, contentRef)}
-                      className={classNames(
-                          className,
-                          handleBasicClasses({ prefix: CLASSNAME, elevation: Math.min(elevation || 0, 5), position }),
-                      )}
-                      style={styles.popover}
-                      {...attributes.popper}
-                  >
-                      <ClickAwayProvider callback={closeOnClickAway && handleClose} childrenRefs={clickAwayRefs}>
-                          {hasArrow && (
-                              <div ref={setArrowElement} className={`${CLASSNAME}__arrow`} style={styles.arrow} />
-                          )}
-                          {children}
-                      </ClickAwayProvider>
-                  </div>,
-                  usePortal,
-              )
-            : null;
-    }),
+    _InnerPopover,
 );
 Popover.displayName = COMPONENT_NAME;
 Popover.className = CLASSNAME;

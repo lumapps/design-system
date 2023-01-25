@@ -1,6 +1,7 @@
-import { mdiMenu } from '@lumx/icons/index';
-import { mdiSettings } from '@lumx/icons/v4-to-v5-aliases';
 import React, { useRef, useState } from 'react';
+import { mdiMenu, mdiSettings } from '@lumx/icons';
+import { Placement } from '@lumx/react';
+
 import { PopoverDialog, PopoverDialogProps } from '.';
 import { Emphasis, Orientation, Size, Typography } from '..';
 import { Button, IconButton } from '../button';
@@ -8,7 +9,6 @@ import { FlexBox } from '../flex-box';
 import { Heading } from '../heading';
 import { List, ListItem } from '../list';
 import { Toolbar } from '../toolbar';
-import { Placement } from '@lumx/react';
 
 const WithButton = (Story: any, context: any) => {
     const anchorRef = useRef(null);

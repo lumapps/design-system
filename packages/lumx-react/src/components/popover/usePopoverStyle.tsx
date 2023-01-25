@@ -102,13 +102,13 @@ export function usePopoverStyle({
     style,
     zIndex,
 }: Options): Output {
+    const [popperElement, setPopperElement] = useState<null | HTMLElement>(null);
+
     if (navigator.userAgent.includes('jsdom')) {
         // Skip all logic; we don't need popover positioning in jsdom.
-        return { styles: {}, attributes: {}, isPositioned: true, popperElement: null };
+        return { styles: {}, attributes: {}, isPositioned: true, popperElement, setPopperElement };
     }
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [popperElement, setPopperElement] = useState<null | HTMLElement>(null);
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [arrowElement, setArrowElement] = useState<null | HTMLElement>(null);
 
