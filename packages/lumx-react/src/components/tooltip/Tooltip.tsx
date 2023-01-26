@@ -6,13 +6,11 @@ import { uid } from 'uid';
 
 import classNames from 'classnames';
 
-import { Placement } from '@lumx/react/components/popover/Popover';
-
 import { DOCUMENT } from '@lumx/react/constants';
-
 import { Comp, GenericProps } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
+import { Placement } from '@lumx/react/components/popover';
 
 import { useInjectTooltipRef } from './useInjectTooltipRef';
 import { useTooltipOpen } from './useTooltipOpen';

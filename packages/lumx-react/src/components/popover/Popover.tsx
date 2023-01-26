@@ -1,75 +1,22 @@
-import { detectOverflow } from '@popperjs/core';
-import React, { forwardRef, ReactNode, RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { forwardRef, ReactNode, RefObject, useCallback, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { usePopper } from 'react-popper';
 
 import classNames from 'classnames';
-import memoize from 'lodash/memoize';
 
-import { DOCUMENT, WINDOW } from '@lumx/react/constants';
 import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
-
-import { Comp, GenericProps, ValueOf } from '@lumx/react/utils/type';
+import { DOCUMENT } from '@lumx/react/constants';
+import { Comp, GenericProps } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 import { useFocusWithin } from '@lumx/react/hooks/useFocusWithin';
 import { getFirstAndLastFocusable } from '@lumx/react/utils/focus/getFirstAndLastFocusable';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
+import { skipRender } from '@lumx/react/utils/skipRender';
 
-/**
- * Different possible placements for the popover.
- */
-export const Placement = {
-    AUTO: 'auto',
-    AUTO_END: 'auto-end',
-    AUTO_START: 'auto-start',
-
-    TOP: 'top',
-    TOP_END: 'top-end',
-    TOP_START: 'top-start',
-
-    RIGHT: 'right',
-    RIGHT_END: 'right-end',
-    RIGHT_START: 'right-start',
-
-    BOTTOM: 'bottom',
-    BOTTOM_END: 'bottom-end',
-    BOTTOM_START: 'bottom-start',
-
-    LEFT: 'left',
-    LEFT_END: 'left-end',
-    LEFT_START: 'left-start',
-} as const;
-export type Placement = ValueOf<typeof Placement>;
-
-/**
- * Offset of the popover.
- */
-export interface Offset {
-    /** Offset size along the reference. */
-    along?: number;
-    /** Offset size away from the reference. */
-    away?: number;
-}
-
-/**
- * Popover elevation index.
- */
-export type Elevation = 1 | 2 | 3 | 4 | 5;
-
-/**
- * Arrow size (in pixel).
- */
-const ARROW_SIZE = 8;
-
-const AnchorWidthOptions = {
-    MAX_WIDTH: 'maxWidth',
-    MIN_WIDTH: 'minWidth',
-    WIDTH: 'width',
-} as const;
-type AnchorWidthOption = ValueOf<typeof AnchorWidthOptions>;
+import { usePopoverStyle } from './usePopoverStyle';
+import { FitAnchorWidth, Elevation, Offset, Placement } from './constants';
 
 /**
  * Defines the props of the component.
@@ -77,6 +24,8 @@ type AnchorWidthOption = ValueOf<typeof AnchorWidthOptions>;
 export interface PopoverProps extends GenericProps {
     /** Reference to the DOM element used to set the position of the popover. */
     anchorRef: React.RefObject<HTMLElement>;
+    /** Customize the root element. (Must accept ref forwarding and props forwarding!). */
+    as?: React.ElementType;
     /** Element which will act as boundary when opening the popover. */
     boundaryRef?: RefObject<HTMLElement>;
     /** Content. */
@@ -93,7 +42,7 @@ export interface PopoverProps extends GenericProps {
      *   - `minWidth` or `true`: popover not smaller than anchor
      *   - `width`: popover equal to the anchor.
      */
-    fitToAnchorWidth?: AnchorWidthOption | boolean;
+    fitToAnchorWidth?: FitAnchorWidth | boolean;
     /** Shrink popover if even after flipping there is not enough space. */
     fitWithinViewportHeight?: boolean;
     /** Element to focus when opening the popover. */
@@ -140,124 +89,68 @@ const DEFAULT_PROPS: Partial<PopoverProps> = {
     zIndex: 9999,
 };
 
-/**
- * Popper js modifier to fit popover min width to the anchor width.
- */
-const sameWidth = memoize((anchorWidthOption: AnchorWidthOption) => ({
-    name: 'sameWidth',
-    enabled: true,
-    phase: 'beforeWrite',
-    requires: ['computeStyles'],
-    fn({ state }: any) {
-        // eslint-disable-next-line no-param-reassign
-        state.styles.popper[anchorWidthOption] = `${state.rects.reference.width}px`;
-    },
-    effect({ state }: any) {
-        // eslint-disable-next-line no-param-reassign
-        state.elements.popper.style[anchorWidthOption] = `${state.elements.reference.offsetWidth}px`;
-    },
-}));
-
-/**
- * Popper js modifier to compute max size of the popover.
- */
-const maxSize = {
-    name: 'maxSize',
-    enabled: true,
-    phase: 'main',
-    requiresIfExists: ['offset', 'preventOverflow', 'flip'],
-    fn({ state, name, options }: any) {
-        const overflow = detectOverflow(state, options);
-
-        const { y = 0, x = 0 } = state.modifiersData.preventOverflow;
-        const { width, height } = state.rects.popper;
-
-        const [basePlacement] = state.placement.split('-');
-
-        const widthProp = basePlacement === 'left' ? 'left' : 'right';
-        const heightProp = basePlacement === 'top' ? 'top' : 'bottom';
-        // eslint-disable-next-line no-param-reassign
-        state.modifiersData[name] = {
-            width: width - overflow[widthProp] - x,
-            height: height - overflow[heightProp] - y,
-        };
-    },
-};
-
-/**
- * Popper js modifier to apply the max height.
- */
-const applyMaxHeight = {
-    name: 'applyMaxHeight',
-    enabled: true,
-    phase: 'beforeWrite',
-    requires: ['maxSize'],
-    fn({ state }: any) {
-        const { height } = state.modifiersData.maxSize;
-        // eslint-disable-next-line no-param-reassign
-        state.elements.popper.style.maxHeight = `${height - ARROW_SIZE}px`;
-    },
-};
-
 /** Method to render the popover inside a portal if usePortal is true */
 const renderPopover = (children: ReactNode, usePortal?: boolean): any => {
     return usePortal ? createPortal(children, document.body) : children;
 };
 
-/**
- * Popover component.
- *
- * @param  props Component props.
- * @param  ref   Component ref.
- * @return React element.
- */
-export const Popover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, ref) => {
-    if (!DOCUMENT) {
-        // Can't render in SSR.
-        return null;
-    }
-
+// Inner component (must be wrapped before export)
+const _InnerPopover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, ref) => {
     const {
         anchorRef,
-        boundaryRef,
+        as: Component = 'div',
         children,
         className,
         closeOnClickAway,
         closeOnEscape,
         elevation,
-        fitToAnchorWidth,
-        fitWithinViewportHeight,
         focusElement,
         hasArrow,
         isOpen,
-        offset,
         onClose,
         parentElement,
-        placement,
-        style,
         usePortal,
-        zIndex,
         focusAnchorOnClose = true,
         withFocusTrap,
+        boundaryRef,
+        fitToAnchorWidth,
+        fitWithinViewportHeight,
+        offset,
+        placement,
+        style,
+        zIndex,
         ...forwardedProps
     } = props;
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [popperElement, setPopperElement] = useState<HTMLDivElement>();
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [arrowElement, setArrowElement] = useState<null | HTMLElement>(null);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const clickAwayRef = useRef<HTMLDivElement>(null);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const contentRef = useRef<HTMLDivElement>(null);
+
+    const {
+        styles,
+        attributes,
+        isPositioned,
+        position,
+        setArrowElement,
+        setPopperElement,
+        popperElement,
+    } = usePopoverStyle({
+        offset,
+        hasArrow,
+        fitToAnchorWidth,
+        fitWithinViewportHeight,
+        boundaryRef,
+        anchorRef,
+        children,
+        placement,
+        style,
+        zIndex,
+    });
 
     /**
      * Track whether the focus is currently set in the
      * popover.
      * */
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const isFocusedWithin = useRef(false);
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     useFocusWithin({
         element: popperElement || null,
         onFocusIn: () => {
@@ -269,7 +162,6 @@ export const Popover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, re
     });
 
     /** Action on close */
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const handleClose = useCallback(() => {
         if (!onClose) {
             return;
@@ -298,85 +190,49 @@ export const Popover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, re
         onClose();
     }, [anchorRef, focusAnchorOnClose, onClose, parentElement]);
 
-    const modifiers: any = [];
-    const actualOffset: [number, number] = [offset?.along ?? 0, (offset?.away ?? 0) + (hasArrow ? ARROW_SIZE : 0)];
-    modifiers.push({
-        name: 'offset',
-        options: { offset: actualOffset },
-    });
-    if (hasArrow && arrowElement) {
-        modifiers.push({ name: 'arrow', options: { element: arrowElement, padding: ARROW_SIZE } });
-    }
-
-    if (fitToAnchorWidth) {
-        const anchorWidthOption =
-            typeof fitToAnchorWidth === 'string' ? fitToAnchorWidth : AnchorWidthOptions.MIN_WIDTH;
-        modifiers.push(sameWidth(anchorWidthOption));
-    }
-    if (fitWithinViewportHeight) {
-        modifiers.push({ ...maxSize, options: { boundary: boundaryRef?.current } }, applyMaxHeight);
-    }
-    if (boundaryRef) {
-        modifiers.push({ name: 'flip', options: { boundary: boundaryRef.current } });
-        modifiers.push({ name: 'preventOverflow', options: { boundary: boundaryRef.current } });
-    }
-
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const { styles, attributes, state, update } = usePopper(anchorRef.current, popperElement, {
-        placement,
-        modifiers,
-    });
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useEffect(() => {
-        update?.();
-    }, [children, update]);
-
-    const position = state?.placement ?? placement;
-
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const popoverStyle = useMemo(() => {
-        const newStyles = { ...style, ...styles.popper, zIndex };
-
-        if (fitWithinViewportHeight && !newStyles.maxHeight) {
-            newStyles.maxHeight = WINDOW?.innerHeight || DOCUMENT?.documentElement.clientHeight;
-        }
-
-        return newStyles;
-    }, [style, styles.popper, zIndex, fitWithinViewportHeight]);
-
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     useCallbackOnEscape(handleClose, isOpen && closeOnEscape);
 
     /** Only set focus within if the focus trap is disabled as they interfere with one another. */
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useFocus(focusElement?.current, !withFocusTrap && isOpen && (state?.rects?.popper?.y ?? -1) >= 0);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useFocus(focusElement?.current, !withFocusTrap && isOpen && isPositioned);
     useFocusTrap(withFocusTrap && isOpen && contentRef?.current, focusElement?.current);
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const clickAwayRefs = useRef([clickAwayRef, anchorRef]);
 
     return isOpen
         ? renderPopover(
-              <div
+              <Component
                   {...forwardedProps}
                   ref={mergeRefs<HTMLDivElement>(setPopperElement, ref, clickAwayRef, contentRef)}
                   className={classNames(
                       className,
                       handleBasicClasses({ prefix: CLASSNAME, elevation: Math.min(elevation || 0, 5), position }),
                   )}
-                  style={popoverStyle}
+                  style={styles.popover}
                   {...attributes.popper}
               >
                   <ClickAwayProvider callback={closeOnClickAway && handleClose} childrenRefs={clickAwayRefs}>
                       {hasArrow && <div ref={setArrowElement} className={`${CLASSNAME}__arrow`} style={styles.arrow} />}
                       {children}
                   </ClickAwayProvider>
-              </div>,
+              </Component>,
               usePortal,
           )
         : null;
 });
+_InnerPopover.displayName = COMPONENT_NAME;
+
+/**
+ * Popover component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const Popover: Comp<PopoverProps, HTMLDivElement> = skipRender(
+    // Skip render in SSR
+    () => Boolean(DOCUMENT),
+    _InnerPopover,
+);
 Popover.displayName = COMPONENT_NAME;
 Popover.className = CLASSNAME;
 Popover.defaultProps = DEFAULT_PROPS;

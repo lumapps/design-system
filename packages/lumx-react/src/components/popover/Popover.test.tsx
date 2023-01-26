@@ -1,30 +1,45 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
-import 'jest-enzyme';
-import { commonTestsSuite, itShouldRenderStories } from '@lumx/react/testing/utils';
 
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { render, screen } from '@testing-library/react';
 import { Popover, PopoverProps } from './Popover';
-import * as stories from '../../stories/generated/Popover/Demos.stories';
 
 const CLASSNAME = Popover.className as string;
 
-/**
- * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
- */
-const setup = (props: Partial<PopoverProps> = {}, shallowRendering = true) => {
-    const propsOverride = { anchorRef: { current: null }, children: null, isOpen: true, ...props } as any;
-    const renderer: any = shallowRendering ? shallow : mount;
-    const wrapper: any = renderer(<Popover {...propsOverride} />);
-    const popover = wrapper.find(`.${CLASSNAME}`);
-    return { props, wrapper, popover };
+const setup = (props: Partial<PopoverProps> = {}) => {
+    const { container } = render(
+        <Popover isOpen anchorRef={{ current: null }} usePortal={false} {...props} data-testid="popover">
+            {props.children || 'Popover content'}
+        </Popover>,
+    );
+    return { props, container, element: screen.getByTestId('popover') };
 };
 
 describe(`<${Popover.displayName}>`, () => {
-    // 1. Test render via snapshot.
-    describe('Snapshots and structure', () => {
-        itShouldRenderStories(stories, Popover);
+    it('should render in portal', () => {
+        const { element } = setup({ usePortal: true });
+        expect(element).toBeInTheDocument();
+        expect(element).toHaveTextContent(/Popover content/);
+        expect(element.parentElement).toBe(document.body);
+    });
+
+    it('should render inline', () => {
+        const { element, container } = setup({ usePortal: false });
+        expect(element).toBeInTheDocument();
+        expect(element).toHaveTextContent(/Popover content/);
+        expect(element.parentElement).toBe(container);
+    });
+
+    it('should render with custom component', () => {
+        const { element } = setup({ as: 'span' });
+        expect(element).toBeInTheDocument();
+        expect(element.tagName).toBe('SPAN');
     });
 
     // Common tests suite.
-    commonTestsSuite(setup, { className: 'popover', prop: 'popover' }, { className: CLASSNAME });
+    commonTestsSuiteRTL(setup, {
+        baseClassName: CLASSNAME,
+        forwardClassName: 'element',
+        forwardAttributes: 'element',
+    });
 });
