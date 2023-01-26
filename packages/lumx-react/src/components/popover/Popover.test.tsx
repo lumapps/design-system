@@ -30,6 +30,12 @@ describe(`<${Popover.displayName}>`, () => {
         expect(element.parentElement).toBe(container);
     });
 
+    it('should render with custom component', () => {
+        const { element } = setup({ as: 'span' });
+        expect(element).toBeInTheDocument();
+        expect(element.tagName).toBe('SPAN');
+    });
+
     // Common tests suite.
     commonTestsSuiteRTL(setup, {
         baseClassName: CLASSNAME,

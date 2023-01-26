@@ -24,6 +24,8 @@ import { FitAnchorWidth, Elevation, Offset, Placement } from './constants';
 export interface PopoverProps extends GenericProps {
     /** Reference to the DOM element used to set the position of the popover. */
     anchorRef: React.RefObject<HTMLElement>;
+    /** Customize the root element. (Must accept ref forwarding and props forwarding!). */
+    as?: React.ElementType;
     /** Element which will act as boundary when opening the popover. */
     boundaryRef?: RefObject<HTMLElement>;
     /** Content. */
@@ -96,6 +98,7 @@ const renderPopover = (children: ReactNode, usePortal?: boolean): any => {
 const _InnerPopover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, ref) => {
     const {
         anchorRef,
+        as: Component = 'div',
         children,
         className,
         closeOnClickAway,
@@ -197,7 +200,7 @@ const _InnerPopover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, ref
 
     return isOpen
         ? renderPopover(
-              <div
+              <Component
                   {...forwardedProps}
                   ref={mergeRefs<HTMLDivElement>(setPopperElement, ref, clickAwayRef, contentRef)}
                   className={classNames(
@@ -211,7 +214,7 @@ const _InnerPopover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, ref
                       {hasArrow && <div ref={setArrowElement} className={`${CLASSNAME}__arrow`} style={styles.arrow} />}
                       {children}
                   </ClickAwayProvider>
-              </div>,
+              </Component>,
               usePortal,
           )
         : null;

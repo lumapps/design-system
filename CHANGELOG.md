@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 -   Popover: skip positioning logic in jsdom environment (can only be tested in integration tests).
+-   Popover: add `as` prop to customize the root element component render.
 
 ## [3.1.3][] - 2023-01-12
 
