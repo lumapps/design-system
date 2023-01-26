@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.1.4][] - 2023-01-26
+
 ### Changed
 
 -   Popover: skip positioning logic in jsdom environment (can only be tested in integration tests).
@@ -1703,3 +1705,7 @@ _Failed released_
 [3.1.2]: https://github.com/lumapps/design-system/tree/v3.1.2
 [unreleased]: https://github.com/lumapps/design-system/compare/v3.1.3...HEAD
 [3.1.3]: https://github.com/lumapps/design-system/tree/v3.1.3
+
+
+[Unreleased]: https://github.com/lumapps/design-system/compare/v3.1.4...HEAD
+[3.1.4]: https://github.com/lumapps/design-system/tree/v3.1.4
