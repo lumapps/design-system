@@ -76,6 +76,14 @@ describe(`<${Dialog.displayName}>`, () => {
             document.body.dispatchEvent(keyDown('Escape'));
             expect(onClose).not.toHaveBeenCalled();
         });
+
+        it('should not trigger `onClose` when pressing `escape` key with `preventCloseOnEscape` set to `true`', () => {
+            const onClose = jest.fn();
+            setup({ isOpen: true, onClose, preventCloseOnEscape: true }, false);
+
+            document.body.dispatchEvent(keyDown('Escape'));
+            expect(onClose).not.toHaveBeenCalled();
+        });
     });
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).

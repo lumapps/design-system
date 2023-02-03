@@ -72,12 +72,66 @@ export const SimpleDialog = ({ theme }: any) => {
     );
 };
 
+export const WithBodyScroll = ({ theme }: any) => {
+    const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
+    return (
+        <>
+            {button}
+            <Dialog isOpen={isOpen} onClose={closeDialog} parentElement={buttonRef} disableBodyScroll={false}>
+                {content}
+            </Dialog>
+        </>
+    );
+};
+
 export const PreventDialogAutoClose = ({ theme }: any) => {
     const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
     return (
         <>
             {button}
             <Dialog preventAutoClose isOpen={isOpen} onClose={closeDialog} parentElement={buttonRef}>
+                {content}
+                <footer>
+                    <Toolbar
+                        after={
+                            <Button onClick={closeDialog} emphasis={Emphasis.low}>
+                                Close
+                            </Button>
+                        }
+                    />
+                </footer>
+            </Dialog>
+        </>
+    );
+};
+
+export const PreventDialogCloseOnEscape = ({ theme }: any) => {
+    const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
+    return (
+        <>
+            {button}
+            <Dialog preventCloseOnEscape isOpen={isOpen} onClose={closeDialog} parentElement={buttonRef}>
+                {content}
+                <footer>
+                    <Toolbar
+                        after={
+                            <Button onClick={closeDialog} emphasis={Emphasis.low}>
+                                Close
+                            </Button>
+                        }
+                    />
+                </footer>
+            </Dialog>
+        </>
+    );
+};
+
+export const PreventDialogCloseOnClick = ({ theme }: any) => {
+    const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
+    return (
+        <>
+            {button}
+            <Dialog preventCloseOnClick isOpen={isOpen} onClose={closeDialog} parentElement={buttonRef}>
                 {content}
                 <footer>
                     <Toolbar

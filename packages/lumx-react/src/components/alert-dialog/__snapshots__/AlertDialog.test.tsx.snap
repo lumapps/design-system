@@ -11,6 +11,7 @@ exports[`<AlertDialog> Snapshots and structure should render story 'Default' 1`]
       "role": "alertdialog",
     }
   }
+  disableBodyScroll={true}
   focusElement={
     {
       "current": null,
@@ -84,6 +85,7 @@ exports[`<AlertDialog> Snapshots and structure should render story 'Error' 1`] =
       "role": "alertdialog",
     }
   }
+  disableBodyScroll={true}
   focusElement={
     {
       "current": null,
@@ -157,6 +159,7 @@ exports[`<AlertDialog> Snapshots and structure should render story 'RichDescript
       "role": "alertdialog",
     }
   }
+  disableBodyScroll={true}
   focusElement={
     {
       "current": null,
@@ -243,6 +246,7 @@ exports[`<AlertDialog> Snapshots and structure should render story 'Success' 1`]
       "role": "alertdialog",
     }
   }
+  disableBodyScroll={true}
   focusElement={
     {
       "current": null,
@@ -316,6 +320,7 @@ exports[`<AlertDialog> Snapshots and structure should render story 'Warning' 1`]
       "role": "alertdialog",
     }
   }
+  disableBodyScroll={true}
   focusElement={
     {
       "current": null,
@@ -389,6 +394,7 @@ exports[`<AlertDialog> Snapshots and structure should render story 'WithCancel' 
       "role": "alertdialog",
     }
   }
+  disableBodyScroll={true}
   focusElement={
     {
       "current": null,
@@ -470,6 +476,7 @@ exports[`<AlertDialog> Snapshots and structure should render story 'WithForwarde
       "role": "alertdialog",
     }
   }
+  disableBodyScroll={true}
   focusElement={
     {
       "current": null,
