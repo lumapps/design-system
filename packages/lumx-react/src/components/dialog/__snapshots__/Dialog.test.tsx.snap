@@ -11,6 +11,7 @@ exports[`<Dialog> Snapshots and structure should render story DialogFocusTrap 1`
     Open dialog
   </Button>
   <Dialog
+    disableBodyScroll={true}
     focusElement={
       {
         "current": null,
@@ -96,6 +97,7 @@ exports[`<Dialog> Snapshots and structure should render story DialogFocusTrap 1`
           Open date picker
         </Button>
         <Dialog
+          disableBodyScroll={true}
           isOpen={false}
           onClose={[Function]}
           parentElement={
@@ -242,6 +244,7 @@ exports[`<Dialog> Snapshots and structure should render story DialogWithAlertDia
     Open dialog
   </Button>
   <Dialog
+    disableBodyScroll={true}
     isOpen={true}
     onClose={[Function]}
     parentElement={
@@ -318,6 +321,7 @@ exports[`<Dialog> Snapshots and structure should render story DialogWithHeaderFo
     Open dialog
   </Button>
   <Dialog
+    disableBodyScroll={true}
     forceFooterDivider={true}
     forceHeaderDivider={true}
     isOpen={true}
@@ -372,6 +376,7 @@ exports[`<Dialog> Snapshots and structure should render story DialogWithHeaderFo
     Open dialog
   </Button>
   <Dialog
+    disableBodyScroll={true}
     isOpen={true}
     onClose={[Function]}
     parentElement={
@@ -424,6 +429,7 @@ exports[`<Dialog> Snapshots and structure should render story DialogWithHeaderFo
     Open dialog
   </Button>
   <Dialog
+    disableBodyScroll={true}
     footer="Footer prop"
     header="Header prop"
     isOpen={true}
@@ -468,6 +474,7 @@ exports[`<Dialog> Snapshots and structure should render story DialogWithHeaderFo
     Open dialog
   </Button>
   <Dialog
+    disableBodyScroll={true}
     footer=" Footer prop"
     header=" Header prop"
     isOpen={true}
@@ -522,6 +529,7 @@ exports[`<Dialog> Snapshots and structure should render story LoadingDialog 1`] 
     Open dialog
   </Button>
   <Dialog
+    disableBodyScroll={true}
     isLoading={true}
     isOpen={true}
     onClose={[Function]}
@@ -565,6 +573,7 @@ exports[`<Dialog> Snapshots and structure should render story PreventDialogAutoC
     Open dialog
   </Button>
   <Dialog
+    disableBodyScroll={true}
     isOpen={true}
     onClose={[Function]}
     parentElement={
@@ -573,6 +582,122 @@ exports[`<Dialog> Snapshots and structure should render story PreventDialogAutoC
       }
     }
     preventAutoClose={true}
+    size="big"
+  >
+    <div
+      className="lumx-spacing-padding"
+    >
+      
+Nihil hic munitissimus habendi senatus locus, nihil horum? At nos hinc posthac, sitientis piros
+Afros. Magna pars studiorum, prodita quaerimus. Integer legentibus erat a ante historiarum
+dapibus. Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea
+commodi consequat. Inmensae subtilitatis, obscuris et malesuada fames. Me non paenitet nullum
+festiviorem excogitasse ad hoc. Cum ceteris in veneratione tui montes, nascetur mus. Etiam
+habebis sem dicantur magna mollis euismod. Quis aute iure reprehenderit in voluptate velit esse.
+Phasellus laoreet lorem vel dolor tempus vehicula. Ambitioni dedisse scripsisse iudicaretur.
+Paullum deliquit, ponderibus modulisque suis ratio utitur. Ab illo tempore, ab est sed
+immemorabili. Nec dubitamus multa iter quae et nos invenerat. Tu quoque, Brute, fili mi, nihil
+timor populi, nihil! Morbi fringilla convallis sapien, id pulvinar odio volutpat. Cras mattis
+iudicium purus sit amet fermentum. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.
+Quisque ut dolor gravida, placerat libero vel, euismod. Unam incolunt Belgae, aliam Aquitani,
+tertiam. Cras mattis iudicium purus sit amet fermentum
+    </div>
+    <footer>
+      <Toolbar
+        after={
+          <Button
+            emphasis="low"
+            onClick={[Function]}
+            size="m"
+            theme="light"
+          >
+            Close
+          </Button>
+        }
+      />
+    </footer>
+  </Dialog>
+</Fragment>
+`;
+
+exports[`<Dialog> Snapshots and structure should render story PreventDialogCloseOnClick 1`] = `
+<Fragment>
+  <Button
+    emphasis="high"
+    onClick={[Function]}
+    size="m"
+    theme="light"
+  >
+    Open dialog
+  </Button>
+  <Dialog
+    disableBodyScroll={true}
+    isOpen={true}
+    onClose={[Function]}
+    parentElement={
+      {
+        "current": undefined,
+      }
+    }
+    preventCloseOnClick={true}
+    size="big"
+  >
+    <div
+      className="lumx-spacing-padding"
+    >
+      
+Nihil hic munitissimus habendi senatus locus, nihil horum? At nos hinc posthac, sitientis piros
+Afros. Magna pars studiorum, prodita quaerimus. Integer legentibus erat a ante historiarum
+dapibus. Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea
+commodi consequat. Inmensae subtilitatis, obscuris et malesuada fames. Me non paenitet nullum
+festiviorem excogitasse ad hoc. Cum ceteris in veneratione tui montes, nascetur mus. Etiam
+habebis sem dicantur magna mollis euismod. Quis aute iure reprehenderit in voluptate velit esse.
+Phasellus laoreet lorem vel dolor tempus vehicula. Ambitioni dedisse scripsisse iudicaretur.
+Paullum deliquit, ponderibus modulisque suis ratio utitur. Ab illo tempore, ab est sed
+immemorabili. Nec dubitamus multa iter quae et nos invenerat. Tu quoque, Brute, fili mi, nihil
+timor populi, nihil! Morbi fringilla convallis sapien, id pulvinar odio volutpat. Cras mattis
+iudicium purus sit amet fermentum. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.
+Quisque ut dolor gravida, placerat libero vel, euismod. Unam incolunt Belgae, aliam Aquitani,
+tertiam. Cras mattis iudicium purus sit amet fermentum
+    </div>
+    <footer>
+      <Toolbar
+        after={
+          <Button
+            emphasis="low"
+            onClick={[Function]}
+            size="m"
+            theme="light"
+          >
+            Close
+          </Button>
+        }
+      />
+    </footer>
+  </Dialog>
+</Fragment>
+`;
+
+exports[`<Dialog> Snapshots and structure should render story PreventDialogCloseOnEscape 1`] = `
+<Fragment>
+  <Button
+    emphasis="high"
+    onClick={[Function]}
+    size="m"
+    theme="light"
+  >
+    Open dialog
+  </Button>
+  <Dialog
+    disableBodyScroll={true}
+    isOpen={true}
+    onClose={[Function]}
+    parentElement={
+      {
+        "current": undefined,
+      }
+    }
+    preventCloseOnEscape={true}
     size="big"
   >
     <div
@@ -622,6 +747,7 @@ exports[`<Dialog> Snapshots and structure should render story ScrollableDialog 1
     Open dialog
   </Button>
   <Dialog
+    disableBodyScroll={true}
     isOpen={true}
     onClose={[Function]}
     parentElement={
@@ -706,6 +832,7 @@ exports[`<Dialog> Snapshots and structure should render story ScrollableDialogWi
     Open dialog
   </Button>
   <Dialog
+    disableBodyScroll={true}
     isOpen={true}
     onClose={[Function]}
     parentElement={
@@ -800,6 +927,7 @@ exports[`<Dialog> Snapshots and structure should render story SimpleDialog 1`] =
     Open dialog
   </Button>
   <Dialog
+    disableBodyScroll={true}
     isOpen={true}
     onClose={[Function]}
     parentElement={
@@ -843,6 +971,7 @@ exports[`<Dialog> Snapshots and structure should render story Sizes 1`] = `
   </Button>
   Use the knobs to change the dialog size!
   <Dialog
+    disableBodyScroll={true}
     isOpen={true}
     onClose={[Function]}
     parentElement={
@@ -927,6 +1056,7 @@ exports[`<Dialog> Snapshots and structure should render story WithAnimationCallb
     Open dialog
   </Button>
   <Dialog
+    disableBodyScroll={true}
     isOpen={true}
     onClose={[Function]}
     onVisibilityChange={[Function]}
@@ -936,6 +1066,49 @@ exports[`<Dialog> Snapshots and structure should render story WithAnimationCallb
       }
     }
     size="regular"
+  >
+    <div
+      className="lumx-spacing-padding"
+    >
+      
+Nihil hic munitissimus habendi senatus locus, nihil horum? At nos hinc posthac, sitientis piros
+Afros. Magna pars studiorum, prodita quaerimus. Integer legentibus erat a ante historiarum
+dapibus. Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea
+commodi consequat. Inmensae subtilitatis, obscuris et malesuada fames. Me non paenitet nullum
+festiviorem excogitasse ad hoc. Cum ceteris in veneratione tui montes, nascetur mus. Etiam
+habebis sem dicantur magna mollis euismod. Quis aute iure reprehenderit in voluptate velit esse.
+Phasellus laoreet lorem vel dolor tempus vehicula. Ambitioni dedisse scripsisse iudicaretur.
+Paullum deliquit, ponderibus modulisque suis ratio utitur. Ab illo tempore, ab est sed
+immemorabili. Nec dubitamus multa iter quae et nos invenerat. Tu quoque, Brute, fili mi, nihil
+timor populi, nihil! Morbi fringilla convallis sapien, id pulvinar odio volutpat. Cras mattis
+iudicium purus sit amet fermentum. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.
+Quisque ut dolor gravida, placerat libero vel, euismod. Unam incolunt Belgae, aliam Aquitani,
+tertiam. Cras mattis iudicium purus sit amet fermentum
+    </div>
+  </Dialog>
+</Fragment>
+`;
+
+exports[`<Dialog> Snapshots and structure should render story WithBodyScroll 1`] = `
+<Fragment>
+  <Button
+    emphasis="high"
+    onClick={[Function]}
+    size="m"
+    theme="light"
+  >
+    Open dialog
+  </Button>
+  <Dialog
+    disableBodyScroll={false}
+    isOpen={true}
+    onClose={[Function]}
+    parentElement={
+      {
+        "current": undefined,
+      }
+    }
+    size="big"
   >
     <div
       className="lumx-spacing-padding"

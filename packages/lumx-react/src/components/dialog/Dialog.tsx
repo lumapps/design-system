@@ -43,6 +43,10 @@ export interface DialogProps extends GenericProps {
     focusElement?: RefObject<HTMLElement>;
     /** Whether to keep the dialog open on clickaway or escape press. */
     preventAutoClose?: boolean;
+    /** Whether to keep the dialog open on escape press. */
+    preventCloseOnEscape?: boolean;
+    /** Whether to keep the dialog open on clickaway. */
+    preventCloseOnClick?: boolean;
     /** Size variant. */
     size?: DialogSizes;
     /** Z-axis position. */
@@ -53,6 +57,8 @@ export interface DialogProps extends GenericProps {
     onClose?(): void;
     /** Callback called when the open animation starts and the close animation finishes. */
     onVisibilityChange?(isVisible: boolean): void;
+    /** whether to disable the scroll on the body or not */
+    disableBodyScroll?: boolean;
 }
 
 export type DialogSizes = Extract<Size, 'tiny' | 'regular' | 'big' | 'huge'>;
@@ -75,6 +81,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: Partial<DialogProps> = {
     size: Size.big,
+    disableBodyScroll: true,
 };
 
 /**
@@ -108,6 +115,9 @@ export const Dialog: Comp<DialogProps, HTMLDivElement> = forwardRef((props, ref)
         zIndex,
         dialogProps,
         onVisibilityChange,
+        disableBodyScroll,
+        preventCloseOnClick,
+        preventCloseOnEscape,
         ...forwardedProps
     } = props;
 
@@ -125,8 +135,10 @@ export const Dialog: Comp<DialogProps, HTMLDivElement> = forwardRef((props, ref)
         }
     }, [isOpen, parentElement]);
 
+    const shouldPreventCloseOnEscape = preventAutoClose || preventCloseOnEscape;
+
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    useCallbackOnEscape(onClose, isOpen && !preventAutoClose);
+    useCallbackOnEscape(onClose, isOpen && !shouldPreventCloseOnEscape);
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const wrapperRef = useRef<HTMLDivElement>(null);
@@ -141,7 +153,7 @@ export const Dialog: Comp<DialogProps, HTMLDivElement> = forwardRef((props, ref)
     useFocusTrap(isOpen && wrapperRef.current, focusElement?.current);
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    useDisableBodyScroll(isOpen && localContentRef.current);
+    useDisableBodyScroll(disableBodyScroll && isOpen && localContentRef.current);
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [sentinelTop, setSentinelTop] = useState<Element | null>(null);
@@ -175,6 +187,8 @@ export const Dialog: Comp<DialogProps, HTMLDivElement> = forwardRef((props, ref)
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const isVisible = useTransitionVisibility(rootRef, Boolean(isOpen), onVisibilityChange);
 
+    const shouldPreventCloseOnClickAway = preventAutoClose || preventCloseOnClick;
+
     return isOpen || isVisible
         ? createPortal(
               <div
@@ -196,7 +210,7 @@ export const Dialog: Comp<DialogProps, HTMLDivElement> = forwardRef((props, ref)
 
                   <section className={`${CLASSNAME}__container`} role="dialog" aria-modal="true" {...dialogProps}>
                       <ClickAwayProvider
-                          callback={!preventAutoClose && onClose}
+                          callback={!shouldPreventCloseOnClickAway && onClose}
                           childrenRefs={clickAwayRefs}
                           parentRef={rootRef}
                       >
