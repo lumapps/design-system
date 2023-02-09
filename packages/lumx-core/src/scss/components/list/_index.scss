@@ -30,11 +30,9 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-list-item {
-    &__link {
+    &__link:not([aria-disabled="true"]) {
         @include lumx-list-item-clickable;
-        &:not(.#{$lumx-base-prefix}-list-item__link--is-disabled) {
-            @include lumx-list-item-hoverable;
-        }
+        @include lumx-list-item-hoverable;
     }
 
     &__link--is-highlighted {

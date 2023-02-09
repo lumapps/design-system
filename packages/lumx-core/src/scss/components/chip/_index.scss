@@ -111,7 +111,7 @@
     &.#{$lumx-base-prefix}-chip--color-light {
         @include lumx-state-as-selected(lumx-base-const("state", "DEFAULT"), lumx-base-const("theme", "DARK"));
 
-        &.#{$lumx-base-prefix}-chip--is-clickable:hover:enabled {
+        &.#{$lumx-base-prefix}-chip--is-clickable:hover:not(:disabled) {
             @include lumx-state-as-selected(lumx-base-const("state", "HOVER"), lumx-base-const("theme", "DARK"));
         }
 

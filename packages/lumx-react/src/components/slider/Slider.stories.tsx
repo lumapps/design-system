@@ -27,3 +27,19 @@ export const WithHelperSlider = ({ theme }: any) => (
         onChange={noop}
     />
 );
+
+export const DisabledSlider = ({ theme }: any) => {
+    const [val, setValue] = React.useState(5);
+    return (
+        <Slider
+            label={text('label', 'Default')}
+            helper={text('helper', 'This is an helper text')}
+            max={number('max', 10)}
+            min={number('min', 0)}
+            theme={theme}
+            value={val}
+            onChange={setValue}
+            isDisabled
+        />
+    );
+};

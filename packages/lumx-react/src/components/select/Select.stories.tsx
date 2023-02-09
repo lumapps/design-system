@@ -108,21 +108,47 @@ export const SimpleSelectWithInfiniteScroll = ({ theme }: any) => {
 };
 
 export const DisabledSelect = ({ theme }: any) => {
+    const PLACEHOLDER = 'Select a value';
+    const LABEL = 'Select label';
+
+    const [value, setValue] = useState<string>('');
+    const [isOpen, closeSelect, , toggleSelect] = useBooleanState(false);
+
+    const selectItem = (item: string) => () => {
+        closeSelect();
+        setValue(item);
+    };
+
     return (
         <Select
-            isOpen={false}
-            value=""
-            label={text('label', 'My select')}
-            placeholder={text('placeholder', 'Placeholder')}
+            style={{ width: '100%' }}
+            isOpen={isOpen}
+            value={value}
+            label={LABEL}
+            placeholder={PLACEHOLDER}
             theme={theme}
-            onInputClick={noop}
-            onDropdownClose={noop}
+            onInputClick={toggleSelect}
+            onDropdownClose={closeSelect}
+            icon={mdiBullhornOutline}
             isDisabled
         >
-            <List theme={theme} isClickable>
-                <ListItem key={0} size={Size.tiny}>
-                    No data
-                </ListItem>
+            <List>
+                {CHOICES.length > 0
+                    ? CHOICES.map((choice) => (
+                          <ListItem
+                              isSelected={value === choice}
+                              key={choice}
+                              onItemSelected={selectItem(choice)}
+                              size={Size.tiny}
+                          >
+                              {choice}
+                          </ListItem>
+                      ))
+                    : [
+                          <ListItem key={0} size={Size.tiny}>
+                              No data
+                          </ListItem>,
+                      ]}
             </List>
         </Select>
     );

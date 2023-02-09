@@ -21,6 +21,24 @@ export const Simple = ({ theme }: any) => {
     );
 };
 
+export const Disbaled = ({ theme }: any) => {
+    const [value, setValue] = useState<Date | undefined>();
+
+    return (
+        <DatePickerField
+            locale="fr"
+            label="Start date"
+            placeholder="Pick a date"
+            isDisabled
+            theme={theme}
+            onChange={setValue}
+            value={value}
+            nextButtonProps={{ label: 'Next month' }}
+            previousButtonProps={{ label: 'Previous month' }}
+        />
+    );
+};
+
 export const WithDefaultValue = ({ theme }: any) => {
     const [value, setValue] = useState<Date | undefined>(new Date('2020-05-18'));
 

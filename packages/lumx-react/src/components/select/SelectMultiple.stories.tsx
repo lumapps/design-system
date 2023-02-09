@@ -90,7 +90,6 @@ export const SelectMultipleWithNoData = ({ theme }: any) => {
 export const DisabledSelectMultiple = ({ theme }: any) => {
     return (
         <SelectMultiple
-            isOpen
             value={[]}
             onClear={noop}
             clearButtonProps={{ label: 'Clear' }}

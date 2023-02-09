@@ -26,3 +26,27 @@ export const SimpleCheckedRadioButton = ({ theme }: any) => (
         onChange={noop}
     />
 );
+
+export const SimpleDisabledRadioButton = ({ theme }: any) => (
+    <RadioButton
+        isChecked={false}
+        label={text('Label', 'Radio button')}
+        name="test1"
+        theme={theme}
+        value="lorem"
+        onChange={noop}
+        isDisabled
+    />
+);
+
+export const SimpleDisabledCheckedRadioButton = ({ theme }: any) => (
+    <RadioButton
+        isChecked
+        label={text('Label', 'Radio button')}
+        name="test1"
+        theme={theme}
+        value="lorem"
+        onChange={noop}
+        isDisabled
+    />
+);

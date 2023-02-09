@@ -17,17 +17,23 @@ export const CheckedSwitch = ({ theme }: any) => (
     </Switch>
 );
 
-export const DisabledCheckedSwitch = ({ theme }: any) => (
-    <Switch isChecked isDisabled onChange={noop} theme={theme}>
-        {text('text', 'The switch')}
-    </Switch>
-);
+export const DisabledCheckedSwitch = ({ theme }: any) => {
+    const [isChecked, setIsChecked] = React.useState(true);
+    return (
+        <Switch isChecked={isChecked} isDisabled onChange={() => setIsChecked(isChecked)} theme={theme}>
+            {text('text', 'The switch')}
+        </Switch>
+    );
+};
 
-export const DisabledSwitch = ({ theme }: any) => (
-    <Switch isDisabled onChange={noop} theme={theme}>
-        {text('text', 'The switch')}
-    </Switch>
-);
+export const DisabledSwitch = ({ theme }: any) => {
+    const [isChecked, setIsChecked] = React.useState(false);
+    return (
+        <Switch isChecked={isChecked} isDisabled onChange={() => setIsChecked(isChecked)} theme={theme}>
+            {text('text', 'The switch')}
+        </Switch>
+    );
+};
 
 export const RightPositionSwitch = ({ theme }: any) => (
     <Switch position={Alignment.right} onChange={noop} theme={theme}>

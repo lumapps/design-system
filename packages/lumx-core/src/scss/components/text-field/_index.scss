@@ -188,8 +188,10 @@
 
 // Hover state
 .#{$lumx-base-prefix}-text-field--theme-light {
-    .#{$lumx-base-prefix}-text-field__wrapper:hover:enabled {
-        @include lumx-text-field-wrapper-state(lumx-base-const("state", "HOVER"), lumx-base-const("theme", "LIGHT"));
+    &:not(.#{$lumx-base-prefix}-text-field--is-disabled) {
+        .#{$lumx-base-prefix}-text-field__wrapper:hover {
+            @include lumx-text-field-wrapper-state(lumx-base-const("state", "HOVER"), lumx-base-const("theme", "LIGHT"));
+        }
     }
 
     .#{$lumx-base-prefix}-text-field__input-icon,
@@ -209,8 +211,10 @@
 }
 
 .#{$lumx-base-prefix}-text-field--theme-dark {
-    .#{$lumx-base-prefix}-text-field__wrapper:hover:enabled {
-        @include lumx-text-field-wrapper-state(lumx-base-const("state", "HOVER"), lumx-base-const("theme", "DARK"));
+    &:not(.#{$lumx-base-prefix}-text-field--is-disabled) {
+        .#{$lumx-base-prefix}-text-field__wrapper:hover {
+            @include lumx-text-field-wrapper-state(lumx-base-const("state", "HOVER"), lumx-base-const("theme", "DARK"));
+        }
     }
 
     .#{$lumx-base-prefix}-text-field__input-icon,
@@ -235,7 +239,7 @@
         @include lumx-text-field-label-color(lumx-base-const("state", "FOCUS"), lumx-base-const("theme", "LIGHT"));
     }
 
-    .#{$lumx-base-prefix}-text-field__wrapper {
+    .#{$lumx-base-prefix}-text-field__wrapper:not(:disabled) {
         @include lumx-text-field-wrapper-state(lumx-base-const("state", "FOCUS"), lumx-base-const("theme", "LIGHT"));
     }
 
@@ -260,7 +264,7 @@
         @include lumx-text-field-label-color(lumx-base-const("state", "FOCUS"), lumx-base-const("theme", "DARK"));
     }
 
-    .#{$lumx-base-prefix}-text-field__wrapper {
+    .#{$lumx-base-prefix}-text-field__wrapper:not(:disabled) {
         @include lumx-text-field-wrapper-state(lumx-base-const("state", "FOCUS"), lumx-base-const("theme", "DARK"));
     }
 
@@ -284,7 +288,7 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-text-field--theme-light.#{$lumx-base-prefix}-text-field--is-valid {
-    .#{$lumx-base-prefix}-text-field__wrapper {
+    .#{$lumx-base-prefix}-text-field__wrapper:not(:disabled) {
         @include lumx-text-field-wrapper-validity("valid", lumx-base-const("theme", "LIGHT"));
     }
 
@@ -294,7 +298,7 @@
 }
 
 .#{$lumx-base-prefix}-text-field--theme-light.#{$lumx-base-prefix}-text-field--has-error {
-    .#{$lumx-base-prefix}-text-field__wrapper {
+    .#{$lumx-base-prefix}-text-field__wrapper:not(:disabled) {
         @include lumx-text-field-wrapper-validity("error", lumx-base-const("theme", "LIGHT"));
     }
 
@@ -304,7 +308,7 @@
 }
 
 .#{$lumx-base-prefix}-text-field--theme-dark.#{$lumx-base-prefix}-text-field--is-valid {
-    .#{$lumx-base-prefix}-text-field__wrapper {
+    .#{$lumx-base-prefix}-text-field__wrapper:not(:disabled) {
         @include lumx-text-field-wrapper-validity("valid", lumx-base-const("theme", "DARK"));
     }
 
@@ -314,7 +318,7 @@
 }
 
 .#{$lumx-base-prefix}-text-field--theme-dark.#{$lumx-base-prefix}-text-field--has-error {
-    .#{$lumx-base-prefix}-text-field__wrapper {
+    .#{$lumx-base-prefix}-text-field__wrapper:not(:disabled) {
         @include lumx-text-field-wrapper-validity("error", lumx-base-const("theme", "DARK"));
     }
 
