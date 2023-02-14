@@ -1,5 +1,5 @@
-import React, { Children, ElementType, forwardRef, ReactNode, useState } from 'react';
-import { Icon, Placement, Size, Theme, Tooltip, Text } from '@lumx/react';
+import React, { forwardRef, ReactNode } from 'react';
+import { Theme } from '@lumx/react';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { Comp } from '@lumx/react/utils/type';
 import classNames from 'classnames';

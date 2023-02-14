@@ -159,6 +159,75 @@
         margin-right: 0;
         margin-left: auto;
     }
+
+    &__drawer--popover {
+        flex-direction: column;
+        max-width: 216px;
+        padding: $lumx-spacing-unit-regular;
+
+        .#{$lumx-base-prefix}-navigation-item {
+            .#{$lumx-base-prefix}-navigation--theme-dark & {
+                &__link {
+                    @include lumx-navigation-link-colors(
+                        lumx-base-const("emphasis", "LOW"),
+                        lumx-base-const("state", "DEFAULT"),
+                        lumx-base-const("theme", "LIGHT"));
+
+                    &:hover,
+                    &.focus-visible {
+                        @include lumx-navigation-link-borders(
+                            lumx-base-const("emphasis", "LOW"),
+                            lumx-base-const("state", "HOVER"));
+                        @include lumx-navigation-link-colors(
+                            lumx-base-const("emphasis", "LOW"),
+                            lumx-base-const("state", "HOVER"),
+                            lumx-base-const("theme", "LIGHT"));
+                    }
+
+                    &:active {
+                        @include lumx-navigation-link-borders(
+                            lumx-base-const("emphasis", "LOW"),
+                            lumx-base-const("state", "ACTIVE"));
+                        @include lumx-navigation-link-colors(
+                            lumx-base-const("emphasis", "LOW"),
+                            lumx-base-const("state", "ACTIVE"),
+                            lumx-base-const("theme", "LIGHT"));
+                    }
+
+                    &--is-selected {
+                        @include lumx-navigation-link-borders(
+                            lumx-base-const("emphasis", "SELECTED"),
+                            lumx-base-const("state", "DEFAULT"));
+                        @include lumx-navigation-link-colors(
+                            lumx-base-const("emphasis", "SELECTED"),
+                            lumx-base-const("state", "DEFAULT"),
+                            lumx-base-const("theme", "LIGHT"));
+
+                        &:hover,
+                        &:focus {
+                            @include lumx-navigation-link-borders(
+                                lumx-base-const("emphasis", "SELECTED"),
+                                lumx-base-const("state", "HOVER"));
+                            @include lumx-navigation-link-colors(
+                                lumx-base-const("emphasis", "SELECTED"),
+                                lumx-base-const("state", "HOVER"),
+                                lumx-base-const("theme", "LIGHT"));
+                        }
+
+                        &:active {
+                            @include lumx-navigation-link-borders(
+                                lumx-base-const("emphasis", "SELECTED"),
+                                lumx-base-const("state", "ACTIVE"));
+                            @include lumx-navigation-link-colors(
+                                lumx-base-const("emphasis", "SELECTED"),
+                                lumx-base-const("state", "ACTIVE"),
+                                lumx-base-const("theme", "LIGHT"));
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 /*
@@ -168,4 +237,17 @@
     margin: 0;
     list-style: none;
     outline: none;
+
+    &--orientation-horizontal {
+        .#{$lumx-base-prefix}-navigation__list {
+            display: flex;
+            flex-direction: row;
+            gap: $lumx-spacing-unit;
+            overflow: hidden;
+        }
+
+        .navigation-item {
+            max-width: 216px;
+        }
+    }
 }

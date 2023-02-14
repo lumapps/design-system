@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
-import {render} from '@testing-library/react';
-import { getByClassName} from '@lumx/react/testing/utils/queries';
+import { render } from '@testing-library/react';
+import { getByClassName } from '@lumx/react/testing/utils/queries';
 import { NavigationLink, NavigationLinkProps } from './NavigationLink';
 
 const CLASSNAME = NavigationLink.className as string;
@@ -15,9 +15,7 @@ type SetupProps = Partial<NavigationLinkProps>;
 
 const setup = (propsOverride: SetupProps = {}) => {
     const props = { ...propsOverride };
-    const { container } = render(
-            <NavigationLink label="A link" {...props} />,
-    );
+    const { container } = render(<NavigationLink label="A link" {...props} />);
 
     return {
         container,

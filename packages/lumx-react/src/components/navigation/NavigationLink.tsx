@@ -1,5 +1,5 @@
 import React, { ElementType, forwardRef, ReactNode, useState } from 'react';
-import { Icon, Placement, Size, Theme, Tooltip, Text, Link } from '@lumx/react';
+import { Icon, Placement, Size, Theme, Tooltip, Text } from '@lumx/react';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { NavigationItem } from '@lumx/react/components/navigation/NavigationItem';
 import { Comp } from '@lumx/react/utils/type';
@@ -9,8 +9,6 @@ import { CLASSNAME as ITEM_CLASSNAME } from './NavigationItem';
 export interface NavigationLinkProps {
     /** Classname that will be used for the nav wrapping element */
     className?: string;
-    /** the element used to create data attributes */
-    element?: Element;
     /* Icon (SVG path). */
     icon?: string;
     /** Label content. */
@@ -39,7 +37,7 @@ const COMPONENT_NAME = 'NavigationLink';
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 const NavigationLink: Comp<NavigationLinkProps, HTMLLIElement> = forwardRef((props, ref) => {
-    const { className, element, icon, label, linkAs, linkProps, theme, isSelected, ...forwardedProps } = props;
+    const { className, icon, label, linkAs, linkProps, theme, isSelected, ...forwardedProps } = props;
 
     const [labelElement, setLabelElement] = useState<HTMLSpanElement | null>(null);
     const tooltipLabel =
@@ -52,7 +50,8 @@ const NavigationLink: Comp<NavigationLinkProps, HTMLLIElement> = forwardRef((pro
             <Tooltip label={tooltipLabel} placement={Placement.TOP}>
                 <Element
                     className={classNames(
-                        CLASSNAME, className,
+                        CLASSNAME,
+                        className,
                         handleBasicClasses({
                             prefix: `${ITEM_CLASSNAME}__link`,
                             isSelected,
@@ -60,7 +59,8 @@ const NavigationLink: Comp<NavigationLinkProps, HTMLLIElement> = forwardRef((pro
                     )}
                     {...linkProps}
                     tabIndex={0}
-                    ref={ref} {...forwardedProps}
+                    ref={ref}
+                    {...forwardedProps}
                 >
                     {icon ? (
                         <Icon className={`${ITEM_CLASSNAME}__icon`} icon={icon} size={Size.xs} theme={theme} />
