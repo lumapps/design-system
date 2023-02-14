@@ -5,13 +5,10 @@ import { NavigationItem } from '@lumx/react/components/navigation/NavigationItem
 import { Comp } from '@lumx/react/utils/type';
 import classNames from 'classnames';
 import { CLASSNAME as ITEM_CLASSNAME } from './NavigationItem';
-import { ClassificationType } from 'typescript';
 
 export interface NavigationButtonProps {
     /** Classname that will be used for the nav wrapping element */
     className?: string;
-    /** the element used to create data attributes */
-    element?: string;
     /** Icon (SVG path). */
     icon?: string;
     /** Whether the component is active or not. */
@@ -35,7 +32,7 @@ const COMPONENT_NAME = 'NavigationButton';
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 // ref ?
 const NavigationButton: Comp<NavigationButtonProps, HTMLLIElement> = forwardRef((props, ref) => {
-    const { className, element, icon, isSelected, label, onClick, theme, ...forwardedProps } = props;
+    const { className, icon, isSelected, label, onClick, theme, ...forwardedProps } = props;
 
     const [labelElement, setLabelElement] = useState<HTMLSpanElement | null>(null);
 
