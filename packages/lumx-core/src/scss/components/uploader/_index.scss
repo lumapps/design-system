@@ -108,8 +108,8 @@
 /* Uploader aspect ratio
    ========================================================================== */
 
-@each $key, $aspect-ratio in $lumx-thumbnail-aspect-ratio {
+@each $key, $padding-top in $lumx-thumbnail-padding-top {
     .#{$lumx-base-prefix}-uploader--aspect-ratio-#{$key} .#{$lumx-base-prefix}-uploader__background {
-        padding-top: $aspect-ratio;
+        padding-top: $padding-top;
     }
 }

@@ -8,7 +8,7 @@
     $self: &;
 
     position: relative;
-    padding-top: map.get($lumx-thumbnail-aspect-ratio, "horizontal");
+    padding-top: map.get($lumx-thumbnail-padding-top, "horizontal");
     overflow: hidden;
 
     &__wrapper {

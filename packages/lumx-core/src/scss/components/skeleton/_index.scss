@@ -78,9 +78,9 @@
     }
 }
 
-@each $key, $aspect-ratio in $lumx-thumbnail-aspect-ratio {
+@each $key, $padding-top in $lumx-thumbnail-padding-top {
     .#{$lumx-base-prefix}-skeleton-rectangle--aspect-ratio-#{$key} .#{$lumx-base-prefix}-skeleton-rectangle__inner {
-        padding-top: $aspect-ratio;
+        padding-top: $padding-top;
     }
 }
 
