@@ -146,6 +146,8 @@ export type Typography = TypographyInterface | TypographyCustom;
 export const AspectRatio = {
     /** Intrinsic content ratio. */
     original: 'original',
+    /** Ratio 3:1 */
+    panoramic: 'panoramic',
     /** Ratio 16:9 */
     wide: 'wide',
     /** Ratio 3:2 */
