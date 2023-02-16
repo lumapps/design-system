@@ -1,5 +1,6 @@
 @use "sass:map";
 @use "sass:math";
+@use "sass:string";
 
 /* ==========================================================================
    Thumbnail
@@ -90,22 +91,40 @@
 
 .#{$lumx-base-prefix}-thumbnail:not(.#{$lumx-base-prefix}-thumbnail--aspect-ratio-original) {
     .#{$lumx-base-prefix}-thumbnail__image {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
         object-fit: cover;
         object-position: center;
+
+        @supports (aspect-ratio: 1 / 1) {
+            width: 100%;
+        }
+
+        @supports not (aspect-ratio: 1 / 1) {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
     }
 }
 
 @each $key, $aspect-ratio in $lumx-thumbnail-aspect-ratio {
     .#{$lumx-base-prefix}-thumbnail--aspect-ratio-#{$key}:not(.#{$lumx-base-prefix}-thumbnail--fill-height)
+    .#{$lumx-base-prefix}-thumbnail__image {
+        @supports (aspect-ratio: 1 / 1) {
+            aspect-ratio: var(--lumx-thumbnail-aspect-ratio, string.unquote($aspect-ratio));
+        }
+    }
+}
+
+@each $key, $padding-top in $lumx-thumbnail-padding-top {
+    .#{$lumx-base-prefix}-thumbnail--aspect-ratio-#{$key}:not(.#{$lumx-base-prefix}-thumbnail--fill-height)
     .#{$lumx-base-prefix}-thumbnail__background {
-        padding-top: $aspect-ratio;
+        @supports not (aspect-ratio: 1 / 1) {
+            padding-top: $padding-top;
+        }
     }
 }
 
