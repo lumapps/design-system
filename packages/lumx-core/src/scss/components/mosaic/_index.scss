@@ -20,24 +20,24 @@
         display: grid;
 
         #{$self}--has-1-thumbnail & {
-            grid: 1fr / 1fr;
+            grid: minmax(0, 1fr) / 1fr;
             grid-template-areas: "b";
         }
 
         #{$self}--has-2-thumbnails & {
-            grid: 1fr / 1fr 1fr;
+            grid: minmax(0, 1fr) / 1fr 1fr;
             grid-template-areas: "b21 b22";
         }
 
         #{$self}--has-3-thumbnails & {
-            grid: 1fr 1fr / 3fr 1fr;
+            grid: minmax(0, 1fr) minmax(0, 1fr) / 3fr 1fr;
             grid-template-areas:
                 "b3 s31"
                 "b3 s32";
         }
 
         #{$self}--has-4-thumbnails & {
-            grid: 2fr 1fr / 1fr 1fr 1fr;
+            grid: minmax(0, 2fr) minmax(0, 1fr) / 1fr 1fr 1fr;
             grid-template-areas:
                 "b4 b4 b4"
                 "s41 s42 s43";
