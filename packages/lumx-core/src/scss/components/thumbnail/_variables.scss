@@ -1,12 +1,14 @@
 $lumx-thumbnail-aspect-ratio-fraction: (
     "horizontal": "3 / 2",
     "wide": "16 / 9",
+    "panoramic": "3 / 1",
     "square": "1 / 1",
-    "vertical": "2 / 3"
+    "vertical": "2 / 3",
 );
 $lumx-thumbnail-aspect-ratio: (
     "horizontal": 66.66%,
     "wide": 56.25%,
+    "panoramic": 33.33%,
     "square": 100%,
     "vertical": 150%
 );

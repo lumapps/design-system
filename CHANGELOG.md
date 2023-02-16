@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   CommentBlock: `onClick`, `onMouseEnter` & `onMouseLeave` are now deprecated
 -   Thumbnail: reworked image sizing with native CSS aspect ratio if supported
 
+### Added
+
+-   Thumbnail: added `panoramic` aspect ratio
+
 ### Fixed
 
 -   TableCell: fix clickable & sortable header cell accessibility
