@@ -1,4 +1,4 @@
-FROM node:13.7.0-buster AS builder
+FROM node:16.19.1-buster AS builder
 
 WORKDIR /tmp
 
@@ -10,7 +10,7 @@ RUN yarn install --ignore-engines \
     && yarn build:site
 
 
-FROM nginx:1.17
+FROM nginx:1.23
 
 ARG WEBROOT=/var/www
 
