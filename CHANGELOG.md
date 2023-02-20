@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   @lumx/core: improved color contrast on dark L6 & L2
+
 ## [3.1.5][] - 2023-02-03
 
 ### Added
