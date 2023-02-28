@@ -12,8 +12,8 @@ interface DesignTokenProps {
     prefix?: ReactNode;
     /** The design token description. */
     description?: string;
-    /** From which version the design token is available. */
-    version?: string;
+    /** Value of the token */
+    value?: string;
     /** Theme adapting the component to light or dark background. */
     theme?: Theme;
     /** The design token demo. */
@@ -30,7 +30,7 @@ export const DesignToken: React.FC<DesignTokenProps> = ({
     name,
     prefix,
     description,
-    version,
+    value,
     theme = Theme.light,
     children,
 }) => {
@@ -50,7 +50,7 @@ export const DesignToken: React.FC<DesignTokenProps> = ({
                 <div className="design-token__header">
                     {prefix && <div className="design-token__prefix">{prefix}</div>}
                     <span className="design-token__name">{name}</span>
-                    <span className="design-token__version">{version}</span>
+                    <span className="design-token__value">{value}</span>
                 </div>
             </header>
 

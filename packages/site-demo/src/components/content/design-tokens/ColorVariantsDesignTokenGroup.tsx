@@ -27,10 +27,11 @@ export const ColorVariantsDesignTokenGroup: React.FC<Props> = ({ color, theme = 
                 key={index}
                 prefix={<div className={`lumx-color-background-${color}-${key}`} style={{ width: 20, height: 20 }} />}
                 name={`$lumx-color-${color}-${key}`}
-                description={hue.comment}
-                version={hue.version}
+                description={`Version: ${hue.version}`}
+                value={`#${hue.hex}`}
                 theme={theme}
             >
+                <p>{hue.comment}</p>
                 <FlexBox orientation={Orientation.horizontal}>
                     <div className={`lumx-color-background-${color}-${key}`} style={{ width: 60, height: 60 }} />
                     <div

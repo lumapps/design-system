@@ -36,7 +36,7 @@
     }
 
     &__name,
-    &__version {
+    &__value {
         @include lumx-typography('subtitle1');
     }
 
@@ -46,7 +46,7 @@
         }
     }
 
-    &__version {
+    &__value {
         margin-left: auto;
 
         #{$self}--theme-light & {

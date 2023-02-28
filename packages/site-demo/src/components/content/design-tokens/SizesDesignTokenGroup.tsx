@@ -21,7 +21,7 @@ const SIZES = {
 export const SizesDesignTokenGroup: React.FC = () => (
     <DesignTokenGroup>
         {Object.entries(SIZES).map(([key, size], index) => (
-            <DesignToken key={index} name={`$lumx-size-${key}`} description={`Size: ${size}px`} version="0.25">
+            <DesignToken key={index} name={`$lumx-size-${key}`} description="Version: 0.25" value={`${size}px`}>
                 <div className="lumx-color-background-primary-N" style={{ width: size, height: size }} />
             </DesignToken>
         ))}
