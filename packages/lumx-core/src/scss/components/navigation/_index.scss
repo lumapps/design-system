@@ -1,0 +1,171 @@
+/* ==========================================================================
+   Navigation
+   ========================================================================== */
+
+/* Navigation Item
+   ========================================================================== */
+.#{$lumx-base-prefix}-navigation-item {
+    $self: &;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    order: 0;
+
+    &__link {
+        display: flex;
+        flex: 1 1 auto;
+        flex-direction: row;
+        align-items: center;
+        max-width: 100%;
+        min-height: var(--lumx-navigation-item-min-height);
+        padding: 0 var(--lumx-navigation-item-padding-horizontal);
+        overflow: hidden;
+        text-decoration: none;
+        cursor: pointer;
+        border-radius: var(--lumx-navigation-item-border-radius);
+        outline: none;
+
+        @include lumx-typography("subtitle1");
+        @include lumx-navigation-link-borders(
+            lumx-base-const("emphasis", "LOW"),
+            lumx-base-const("state", "DEFAULT"));
+        @include lumx-navigation-link-colors(
+            lumx-base-const("emphasis", "LOW"),
+            lumx-base-const("state", "DEFAULT"),
+            lumx-base-const("theme", "LIGHT"));
+
+        .#{$lumx-base-prefix}-navigation-item__label {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .#{$lumx-base-prefix}-navigation-item__icon {
+            margin-right: $lumx-spacing-unit;
+        }
+
+        &:hover,
+        &.focus-visible {
+            @include lumx-navigation-link-borders(
+                lumx-base-const("emphasis", "LOW"),
+                lumx-base-const("state", "HOVER"));
+            @include lumx-navigation-link-colors(
+                lumx-base-const("emphasis", "LOW"),
+                lumx-base-const("state", "HOVER"),
+                lumx-base-const("theme", "LIGHT"));
+        }
+
+        &:active {
+            @include lumx-navigation-link-borders(
+                lumx-base-const("emphasis", "LOW"),
+                lumx-base-const("state", "ACTIVE"));
+            @include lumx-navigation-link-colors(
+                lumx-base-const("emphasis", "LOW"),
+                lumx-base-const("state", "ACTIVE"),
+                lumx-base-const("theme", "LIGHT"));
+        }
+
+        &--is-selected {
+            @include lumx-navigation-link-borders(
+                lumx-base-const("emphasis", "SELECTED"),
+                lumx-base-const("state", "DEFAULT"));
+            @include lumx-navigation-link-colors(
+                lumx-base-const("emphasis", "SELECTED"),
+                lumx-base-const("state", "DEFAULT"),
+                lumx-base-const("theme", "LIGHT"));
+
+            &:hover,
+            &:focus {
+                @include lumx-navigation-link-borders(
+                    lumx-base-const("emphasis", "SELECTED"),
+                    lumx-base-const("state", "HOVER"));
+                @include lumx-navigation-link-colors(
+                    lumx-base-const("emphasis", "SELECTED"),
+                    lumx-base-const("state", "HOVER"),
+                    lumx-base-const("theme", "LIGHT"));
+            }
+
+            &:active {
+                @include lumx-navigation-link-borders(
+                    lumx-base-const("emphasis", "SELECTED"),
+                    lumx-base-const("state", "ACTIVE"));
+                @include lumx-navigation-link-colors(
+                    lumx-base-const("emphasis", "SELECTED"),
+                    lumx-base-const("state", "ACTIVE"),
+                    lumx-base-const("theme", "LIGHT"));
+            }
+        }
+
+        .#{$lumx-base-prefix}-navigation--theme-dark & {
+            @include lumx-navigation-link-colors(
+                lumx-base-const("emphasis", "LOW"),
+                lumx-base-const("state", "DEFAULT"),
+                lumx-base-const("theme", "DARK"));
+
+            &:hover,
+            &:focus {
+                @include lumx-navigation-link-colors(
+                    lumx-base-const("emphasis", "LOW"),
+                    lumx-base-const("state", "HOVER"),
+                    lumx-base-const("theme", "DARK"));
+            }
+
+            &:active {
+                @include lumx-navigation-link-colors(
+                    lumx-base-const("emphasis", "LOW"),
+                    lumx-base-const("state", "ACTIVE"),
+                    lumx-base-const("theme", "DARK"));
+            }
+
+            &--is-selected {
+                @include lumx-navigation-link-colors(
+                    lumx-base-const("emphasis", "SELECTED"),
+                    lumx-base-const("state", "DEFAULT"),
+                    lumx-base-const("theme", "DARK"));
+
+                &:hover,
+                &:focus {
+                    @include lumx-navigation-link-colors(
+                        lumx-base-const("emphasis", "SELECTED"),
+                        lumx-base-const("state", "HOVER"),
+                        lumx-base-const("theme", "DARK"));
+                }
+
+                &:active {
+                    @include lumx-navigation-link-colors(
+                        lumx-base-const("emphasis", "ACTIVE"),
+                        lumx-base-const("state", "DEFAULT"),
+                        umx-base-const("theme", "DARK"));
+                }
+            }
+        }
+    }
+}
+
+/* Navigation Section
+  ========================================================================== */
+
+.#{$lumx-base-prefix}-navigation-section {
+    flex-direction: column;
+    align-items: normal;
+
+    &__drawer {
+        padding-left: $lumx-spacing-unit-huge;
+    }
+
+    & &__chevron {
+        padding-left: $lumx-spacing-unit;
+        margin-right: 0;
+        margin-left: auto;
+    }
+}
+
+/*
+   ========================================================================== */
+.#{$lumx-base-prefix}-navigation {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    outline: none;
+}
