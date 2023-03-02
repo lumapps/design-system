@@ -18,12 +18,7 @@ const SPACINGS = {
 export const SpacingsDesignTokenGroup: React.FC = () => (
     <DesignTokenGroup>
         {Object.entries(SPACINGS).map(([key, size], index) => (
-            <DesignToken
-                key={index}
-                name={`$lumx-spacing-unit-${key}`}
-                description={`Spacing: ${size}px`}
-                version="0.1"
-            >
+            <DesignToken key={index} name={`$lumx-spacing-unit-${key}`} description="Version: 0.1" value={`${size}px`}>
                 <div style={{ border: '1px dashed rgba(40, 51, 109, 0.2)' }}>
                     <div
                         className={`lumx-color-background-primary-N lumx-spacing-margin-${key}`}
