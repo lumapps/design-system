@@ -7,7 +7,7 @@ import { NavigationLink, NavigationLinkProps } from './NavigationLink';
 
 const CLASSNAME = NavigationLink.className as string;
 
-type SetupProps = Partial<NavigationLinkProps>;
+type SetupProps = Partial<NavigationLinkProps<any>>;
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.

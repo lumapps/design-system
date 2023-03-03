@@ -1,17 +1,18 @@
-import React, { forwardRef, ReactNode, useRef, useState, useMemo, useContext } from 'react';
+import React, { forwardRef, ReactNode, useRef, useMemo, useContext } from 'react';
 
-import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
-import { Icon, Size, Theme, Text, Orientation, Popover, Placement } from '@lumx/react';
 import uniqueId from 'lodash/uniqueId';
 import classNames from 'classnames';
+
+import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
+import { Icon, Size, Text, Orientation, Popover, Placement } from '@lumx/react';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
-import { Comp } from '@lumx/react/utils/type';
+import { Comp, HasClassName } from '@lumx/react/utils/type';
+import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
+
 import { CLASSNAME as ITEM_CLASSNAME } from './NavigationItem';
 import { NavigationContext } from './context';
 
-export interface NavigationSectionProps {
-    /** Classname that will be used for the nav wrapping element */
-    className?: string;
+export interface NavigationSectionProps extends React.ComponentProps<'li'>, HasClassName {
     /** Items inside the section */
     children: ReactNode;
     /** Icon (SVG path). */
@@ -30,9 +31,12 @@ const COMPONENT_NAME = 'NavigationSection';
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
-const NavigationSection: Comp<NavigationSectionProps, HTMLLIElement> = forwardRef((props, ref) => {
+/**
+ * Navigation section component.
+ */
+export const NavigationSection: Comp<NavigationSectionProps, HTMLLIElement> = forwardRef((props, ref) => {
     const { children, className, label, icon, ...forwardedProps } = props;
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, close, , toggleOpen] = useBooleanState(false);
     const buttonRef = useRef<HTMLButtonElement>(null);
     const sectionId = useMemo(() => uniqueId('section'), []);
     const { orientation } = useContext(NavigationContext) || {};
@@ -54,15 +58,7 @@ const NavigationSection: Comp<NavigationSectionProps, HTMLLIElement> = forwardRe
                 aria-expanded={isOpen}
                 className={classNames(`${ITEM_CLASSNAME}__link`)}
                 ref={buttonRef}
-                onClick={(event) => {
-                    setIsOpen(!isOpen);
-                    event.stopPropagation();
-                }}
-                onKeyUp={(event: React.KeyboardEvent) => {
-                    if (event.key === 'Enter') {
-                        event.stopPropagation();
-                    }
-                }}
+                onClick={toggleOpen}
                 type="button"
             >
                 {icon ? <Icon className={`${ITEM_CLASSNAME}__icon`} icon={icon} size={Size.xs} /> : null}
@@ -70,6 +66,7 @@ const NavigationSection: Comp<NavigationSectionProps, HTMLLIElement> = forwardRe
                 <Text as="span" truncate className={`${ITEM_CLASSNAME}__label`} ref={ref}>
                     {label}
                 </Text>
+
                 <Icon
                     className={classNames(`${ITEM_CLASSNAME}__icon`, `${CLASSNAME}__chevron`)}
                     icon={isOpen ? mdiChevronUp : mdiChevronDown}
@@ -84,15 +81,8 @@ const NavigationSection: Comp<NavigationSectionProps, HTMLLIElement> = forwardRe
                         usePortal={false}
                         closeOnClickAway
                         closeOnEscape
-                        onClick={() => setIsOpen(false)}
-                        onClose={() => setIsOpen(false)}
-                        onKeyUp={(event: React.KeyboardEvent) => {
-                            if (event.key === 'Enter') {
-                                setIsOpen(false);
-                            }
-                        }}
+                        onClose={close}
                         zIndex={996}
-                        theme={Theme.light}
                     >
                         <ul className={`${CLASSNAME}__drawer--popover`} id={sectionId}>
                             <NavigationContext.Provider value={{ orientation: Orientation.vertical }}>
@@ -108,8 +98,5 @@ const NavigationSection: Comp<NavigationSectionProps, HTMLLIElement> = forwardRe
         </li>
     );
 });
-
 NavigationSection.displayName = COMPONENT_NAME;
 NavigationSection.className = CLASSNAME;
-
-export { NavigationSection };
