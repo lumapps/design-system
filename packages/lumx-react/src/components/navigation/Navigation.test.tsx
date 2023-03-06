@@ -3,8 +3,6 @@ import React from 'react';
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import { render } from '@testing-library/react';
 import { getByClassName } from '@lumx/react/testing/utils/queries';
-import { NavigationButton } from './NavigationButton';
-import { NavigationLink } from './NavigationLink';
 import { Navigation, NavigationProps } from '.';
 import { Orientation } from '..';
 
@@ -20,9 +18,9 @@ const setup = (propsOverride: SetupProps = {}) => {
     const props = { 'aria-label': 'navigation', ...propsOverride } as any;
     const { container } = render(
         <Navigation {...props}>
-            <NavigationButton label="A button" />
-            <NavigationLink label="A link" />
-            <NavigationButton label="A button" />
+            <Navigation.Item label="A link" href="" />
+            <Navigation.Item label="A link" as="button" />
+            <Navigation.Item label="A link" href="" />
         </Navigation>,
     );
 

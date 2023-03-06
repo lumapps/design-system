@@ -38,6 +38,13 @@ export type HeadingElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 /** Union type of all text elements */
 export type TextElement = 'span' | 'p' | HeadingElement;
 
+export type HasPolymorphicAs<E extends React.ElementType> = React.ComponentPropsWithoutRef<E> & {
+    /**
+     * Customize the rendered component.
+     */
+    as?: E;
+};
+
 export interface HasTheme {
     /**
      * Theme adapting the component to light or dark background.
@@ -45,14 +52,17 @@ export interface HasTheme {
     theme?: Theme;
 }
 
-/**
- * Define a generic props types.
- */
-export interface GenericProps {
+export interface HasClassName {
     /**
      * Class name forwarded to the root element of the component.
      */
     className?: string;
+}
+
+/**
+ * Define a generic props types.
+ */
+export interface GenericProps extends HasClassName {
     /**
      * Any prop (particularly any supported prop for a HTML element).
      */
@@ -111,3 +121,17 @@ export type HasAriaLabelOrLabelledBy<T = string | undefined> = T extends string
           'aria-label': string;
           'aria-labelledby'?: undefined;
       };
+
+/**
+ * Extract ref type for a component or JSX intrinsic element
+ *
+ * @example ComponentRef<'div'> => React.Ref<HTMLDivElement>
+ * @example ComponentRef<Button> => React.Ref<HTMLButtonElement
+ */
+export type ComponentRef<C> = C extends keyof JSX.IntrinsicElements
+    ? JSX.IntrinsicElements[C]['ref']
+    : C extends Comp<any, infer T>
+    ? React.Ref<T>
+    : C extends React.JSXElementConstructor<{ ref?: infer R }>
+    ? R
+    : never;

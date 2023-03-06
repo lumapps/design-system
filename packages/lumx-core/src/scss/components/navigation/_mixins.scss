@@ -1,6 +1,7 @@
 @use "sass:map";
 
 @mixin lumx-navigation-link-borders($emphasis, $state) {
+    border-style: solid;
     border-width:
         var(--lumx-navigation-item-#{$emphasis}-#{$state}-border-top-width)
         var(--lumx-navigation-item-#{$emphasis}-#{$state}-border-right-width)

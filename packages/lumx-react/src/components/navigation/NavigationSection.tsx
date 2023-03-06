@@ -1,17 +1,16 @@
 import React, { forwardRef, ReactNode, useRef, useState, useMemo, useContext } from 'react';
 
 import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
-import { Icon, Size, Theme, Text, Orientation, Popover, Placement } from '@lumx/react';
+import { Icon, Size, Text, Orientation, Popover, Placement, Theme } from '@lumx/react';
 import uniqueId from 'lodash/uniqueId';
 import classNames from 'classnames';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
-import { Comp } from '@lumx/react/utils/type';
+import { HasClassName } from '@lumx/react/utils/type';
 import { CLASSNAME as ITEM_CLASSNAME } from './NavigationItem';
-import { NavigationContext } from './context';
+import { NavigationContext} from './context';
+import { ThemeContext } from '@lumx/react/utils/ThemeContext';
 
-export interface NavigationSectionProps {
-    /** Classname that will be used for the nav wrapping element */
-    className?: string;
+export interface NavigationSectionProps extends React.ComponentPropsWithoutRef<'li'>, HasClassName {
     /** Items inside the section */
     children: ReactNode;
     /** Icon (SVG path). */
@@ -30,20 +29,24 @@ const COMPONENT_NAME = 'NavigationSection';
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
-const NavigationSection: Comp<NavigationSectionProps, HTMLLIElement> = forwardRef((props, ref) => {
+export const NavigationSection = Object.assign(
+ forwardRef<HTMLLIElement, NavigationSectionProps> ((props, ref) => {
     const { children, className, label, icon, ...forwardedProps } = props;
     const [isOpen, setIsOpen] = useState(false);
     const buttonRef = useRef<HTMLButtonElement>(null);
     const sectionId = useMemo(() => uniqueId('section'), []);
     const { orientation } = useContext(NavigationContext) || {};
+    const theme = useContext(ThemeContext);
     const isDropdown = orientation === Orientation.horizontal;
     return (
         <li
             className={classNames(
                 className,
+                CLASSNAME,
                 ITEM_CLASSNAME,
                 handleBasicClasses({
-                    prefix: CLASSNAME,
+                    prefix: ITEM_CLASSNAME,
+                    theme
                 }),
             )}
             ref={ref}
@@ -92,13 +95,14 @@ const NavigationSection: Comp<NavigationSectionProps, HTMLLIElement> = forwardRe
                             }
                         }}
                         zIndex={996}
-                        theme={Theme.light}
                     >
-                        <ul className={`${CLASSNAME}__drawer--popover`} id={sectionId}>
-                            <NavigationContext.Provider value={{ orientation: Orientation.vertical }}>
-                                {children}
-                            </NavigationContext.Provider>
-                        </ul>
+                        <ThemeContext.Provider value={Theme.light}>
+                            <ul className={`${CLASSNAME}__drawer--popover`} id={sectionId}>
+                                <NavigationContext.Provider value={{ orientation: Orientation.vertical }}>
+                                    {children}
+                                </NavigationContext.Provider>
+                            </ul>
+                        </ThemeContext.Provider>
                     </Popover>
                 ) : (
                     <ul className={`${CLASSNAME}__drawer`} id={sectionId}>
@@ -107,9 +111,12 @@ const NavigationSection: Comp<NavigationSectionProps, HTMLLIElement> = forwardRe
                 ))}
         </li>
     );
-});
+}),
+{
+displayName : COMPONENT_NAME,
+className : CLASSNAME,
+}
+)
 
-NavigationSection.displayName = COMPONENT_NAME;
-NavigationSection.className = CLASSNAME;
 
-export { NavigationSection };
+

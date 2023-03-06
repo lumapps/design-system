@@ -4,10 +4,11 @@ import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import { render, screen } from '@testing-library/react';
 import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import userEvent from '@testing-library/user-event';
-import { NavigationButton } from './NavigationButton';
+import { NavigationItem } from './NavigationItem';
 import { NavigationSection, NavigationSectionProps } from './NavigationSection';
 import { NavigationContext } from './context';
 import { Orientation } from '..';
+import { Navigation } from './Navigation';
 
 const CLASSNAME = NavigationSection.className as string;
 
@@ -22,9 +23,9 @@ const setup = (propsOverride: SetupProps = {}, orientation: Orientation = Orient
     const { container } = render(
         <NavigationContext.Provider value={{ orientation }}>
             <NavigationSection label="Section 1" {...props}>
-                <NavigationButton label="A content" />
-                <NavigationButton label="A link" />
-                <NavigationButton label="A community" />
+                <Navigation.Item label="A content" href="" />
+                <Navigation.Item label="A link" href="" />
+                <Navigation.Item label="A community" href="" />
             </NavigationSection>
         </NavigationContext.Provider>,
     );

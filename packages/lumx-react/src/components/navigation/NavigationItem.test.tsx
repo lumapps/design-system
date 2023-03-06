@@ -3,11 +3,11 @@ import React from 'react';
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import { render } from '@testing-library/react';
 import { getByClassName } from '@lumx/react/testing/utils/queries';
-import { NavigationLink, NavigationLinkProps } from './NavigationLink';
+import { NavigationItem, NavigationItemProps } from './NavigationItem';
 
-const CLASSNAME = NavigationLink.className as string;
+const CLASSNAME = NavigationItem.className as string;
 
-type SetupProps = Partial<NavigationLinkProps>;
+type SetupProps = Partial<NavigationItemProps>;
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -15,16 +15,17 @@ type SetupProps = Partial<NavigationLinkProps>;
 
 const setup = (propsOverride: SetupProps = {}) => {
     const props = { ...propsOverride };
-    const { container } = render(<NavigationLink label="A link" {...props} />);
+    const { container } = render(<NavigationItem label="A link" href="" {...props} />);
 
     return {
         container,
         element: getByClassName(container, CLASSNAME),
+        link: getByClassName(container, `${CLASSNAME}__link`),
         props,
     };
 };
 
-describe(`<${NavigationLink.displayName}>`, () => {
+describe(`<${NavigationItem.displayName}>`, () => {
     it('should render default', () => {
         const { element } = setup();
         expect(element).toBeInTheDocument();
@@ -32,5 +33,5 @@ describe(`<${NavigationLink.displayName}>`, () => {
     });
 
     // Common tests suite.
-    commonTestsSuiteRTL(setup, { baseClassName: CLASSNAME, forwardClassName: 'element', forwardAttributes: 'element' });
+    commonTestsSuiteRTL(setup, { baseClassName: CLASSNAME, forwardClassName: 'element', forwardAttributes: 'link' });
 });
