@@ -13,7 +13,7 @@ type BaseNavigationItemProps = {
     label: ReactNode;
     /** Whether the component is active or not. */
     isCurrentPage?: boolean;
-}
+};
 
 /** Make `href` required when `as` is `a` */
 type RequiredLinkHref<E> = E extends 'a' ? { href: string } : Record<string, unknown>;
@@ -55,18 +55,17 @@ export const NavigationItem = Object.assign(
                     className,
                     handleBasicClasses({
                         prefix: CLASSNAME,
-                        theme
+                        theme,
                     }),
                 )}
             >
                 <Tooltip label={tooltipLabel} placement={Placement.TOP}>
                     <Element
                         theme={theme}
-                        className={
-                            handleBasicClasses({
-                                prefix: `${CLASSNAME}__link`,
-                                isSelected: isCurrentPage,
-                            })}
+                        className={handleBasicClasses({
+                            prefix: `${CLASSNAME}__link`,
+                            isSelected: isCurrentPage,
+                        })}
                         ref={ref}
                         aria-current={isCurrentPage ? 'page' : undefined}
                         {...buttonProps}

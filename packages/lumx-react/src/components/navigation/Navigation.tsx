@@ -2,7 +2,7 @@ import React, { forwardRef, ReactNode } from 'react';
 import classNames from 'classnames';
 import { HasAriaLabelOrLabelledBy, HasClassName, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
-import { Orientation} from '@lumx/react';
+import { Orientation } from '@lumx/react';
 import { ThemeContext } from '@lumx/react/utils/ThemeContext';
 import { NavigationSection } from './NavigationSection';
 import { NavigationItem } from './NavigationItem';
@@ -29,27 +29,27 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
 export const Navigation = Object.assign(
     forwardRef<HTMLElement, NavigationProps>((props, ref) => {
         const { children, className, theme, orientation = Orientation.vertical, ...forwardedProps } = props;
-            return (
-                <ThemeContext.Provider value={theme}>
-                    <nav
-                        className={classNames(
-                            className,
-                            handleBasicClasses({
-                                prefix: CLASSNAME,
-                                theme,
-                                orientation,
-                            }),
-                        )}
-                        ref={ref}
-                        {...forwardedProps}
-                    >
-                        <NavigationContext.Provider value={{ orientation }}>
-                            <ul className={`${CLASSNAME}__list`}>{children}</ul>
-                        </NavigationContext.Provider>
-                    </nav>
-                </ThemeContext.Provider>
-            );
-        }),
+        return (
+            <ThemeContext.Provider value={theme}>
+                <nav
+                    className={classNames(
+                        className,
+                        handleBasicClasses({
+                            prefix: CLASSNAME,
+                            theme,
+                            orientation,
+                        }),
+                    )}
+                    ref={ref}
+                    {...forwardedProps}
+                >
+                    <NavigationContext.Provider value={{ orientation }}>
+                        <ul className={`${CLASSNAME}__list`}>{children}</ul>
+                    </NavigationContext.Provider>
+                </nav>
+            </ThemeContext.Provider>
+        );
+    }),
     {
         displayName: COMPONENT_NAME,
         className: CLASSNAME,

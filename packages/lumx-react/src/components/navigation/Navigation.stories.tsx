@@ -33,11 +33,19 @@ export const Default = ({ theme, onClick, orientation }: any) => {
             <Navigation.Section label="Section 1" icon={mdiFolder}>
                 <Navigation.Item label="A content" href="#content" />
                 <Navigation.Item label="A button" icon={mdiLink} href="https://www.google.com" />
-                <Navigation.Item label="Some very very very very very very very very very very very very very very very very very very very very very very very very very very very long text" icon={mdiTextBox} href="#content" />
+                <Navigation.Item
+                    label="Some very very very very very very very very very very very very very very very very very very very very very very very very very very very long text"
+                    icon={mdiTextBox}
+                    href="#content"
+                />
                 <Navigation.Item label="A community" icon={mdiGoogleCirclesExtended} href="#community" />
                 <Navigation.Section label="Section 1.1" icon={mdiFolder}>
                     <Navigation.Item label="A content" icon={mdiTextBox} href="#content" />
-                    <Navigation.Item label="Some very very very very very very very very very very very very very very very very very very very very very very very very very very very long text" icon={mdiTextBox} href="#content" />
+                    <Navigation.Item
+                        label="Some very very very very very very very very very very very very very very very very very very very very very very very very very very very long text"
+                        icon={mdiTextBox}
+                        href="#content"
+                    />
                     <Navigation.Item label="A link" icon={mdiLink} href="https://www.google.com" />
                     <Navigation.Item label="A community" icon={mdiGoogleCirclesExtended} href="#community" />
                 </Navigation.Section>
@@ -53,7 +61,7 @@ export const Default = ({ theme, onClick, orientation }: any) => {
 Default.argTypes = { onClick: { action: true } };
 
 export const VerticalWithSection: any = Default.bind({});
-VerticalWithSection.args = { orientation: Orientation.vertical};
+VerticalWithSection.args = { orientation: Orientation.vertical };
 
 export const HorizontalWithSection: any = Default.bind({});
-HorizontalWithSection.args = { orientation: Orientation.horizontal};
+HorizontalWithSection.args = { orientation: Orientation.horizontal };

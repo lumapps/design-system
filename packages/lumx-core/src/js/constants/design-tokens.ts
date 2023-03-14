@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 21 Mar 2023 11:54:36 GMT
+ * Generated on Wed, 22 Mar 2023 12:12:53 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -2151,6 +2151,11 @@ export const DESIGN_TOKENS = {
                     'font-size': { value: '12px' },
                     'font-weight': { value: 'var(--lumx-typography-font-weight-bold)' },
                 },
+            },
+            'navigation-item': {
+                'font-size': { value: '14px' },
+                'font-weight': { value: 'var(--lumx-typography-font-weight-bold)' },
+                'line-height': { value: '20px' },
             },
         },
     },

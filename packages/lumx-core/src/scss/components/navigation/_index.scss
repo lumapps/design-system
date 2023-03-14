@@ -26,10 +26,8 @@
         border-radius: var(--lumx-navigation-item-border-radius);
         outline: none;
 
-        @include lumx-typography("subtitle1");
-        @include lumx-navigation-link-borders(
-            lumx-base-const("emphasis", "LOW"),
-            lumx-base-const("state", "DEFAULT"));
+        @include lumx-typography("navigation-item", "custom");
+        @include lumx-navigation-link-borders(lumx-base-const("emphasis", "LOW"), lumx-base-const("state", "DEFAULT"));
 
         .#{$lumx-base-prefix}-navigation-item__label {
             overflow: hidden;
@@ -45,31 +43,36 @@
         &.focus-visible {
             @include lumx-navigation-link-borders(
                 lumx-base-const("emphasis", "LOW"),
-                lumx-base-const("state", "HOVER"));
+                lumx-base-const("state", "HOVER")
+            );
         }
 
         &:active {
             @include lumx-navigation-link-borders(
                 lumx-base-const("emphasis", "LOW"),
-                lumx-base-const("state", "ACTIVE"));
+                lumx-base-const("state", "ACTIVE")
+            );
         }
 
         &--is-selected {
             @include lumx-navigation-link-borders(
                 lumx-base-const("emphasis", "SELECTED"),
-                lumx-base-const("state", "DEFAULT"));
+                lumx-base-const("state", "DEFAULT")
+            );
 
             &:hover,
             &:focus {
                 @include lumx-navigation-link-borders(
                     lumx-base-const("emphasis", "SELECTED"),
-                    lumx-base-const("state", "HOVER"));
+                    lumx-base-const("state", "HOVER")
+                );
             }
 
             &:active {
                 @include lumx-navigation-link-borders(
                     lumx-base-const("emphasis", "SELECTED"),
-                    lumx-base-const("state", "ACTIVE"));
+                    lumx-base-const("state", "ACTIVE")
+                );
             }
         }
     }
@@ -79,42 +82,48 @@
             @include lumx-navigation-link-colors(
                 lumx-base-const("emphasis", "LOW"),
                 lumx-base-const("state", "DEFAULT"),
-                lumx-base-const("theme", "DARK"));
+                lumx-base-const("theme", "DARK")
+            );
 
             &:hover,
             &.focus-visible {
                 @include lumx-navigation-link-colors(
                     lumx-base-const("emphasis", "LOW"),
                     lumx-base-const("state", "HOVER"),
-                    lumx-base-const("theme", "DARK"));
+                    lumx-base-const("theme", "DARK")
+                );
             }
 
             &:active {
                 @include lumx-navigation-link-colors(
                     lumx-base-const("emphasis", "LOW"),
                     lumx-base-const("state", "ACTIVE"),
-                    lumx-base-const("theme", "DARK"));
+                    lumx-base-const("theme", "DARK")
+                );
             }
 
             &--is-selected {
                 @include lumx-navigation-link-colors(
                     lumx-base-const("emphasis", "SELECTED"),
                     lumx-base-const("state", "DEFAULT"),
-                    lumx-base-const("theme", "DARK"));
+                    lumx-base-const("theme", "DARK")
+                );
 
                 &:hover,
                 &:focus {
                     @include lumx-navigation-link-colors(
                         lumx-base-const("emphasis", "SELECTED"),
                         lumx-base-const("state", "HOVER"),
-                        lumx-base-const("theme", "DARK"));
+                        lumx-base-const("theme", "DARK")
+                    );
                 }
 
                 &:active {
                     @include lumx-navigation-link-colors(
                         lumx-base-const("emphasis", "SELECTED"),
                         lumx-base-const("state", "ACTIVE"),
-                        lumx-base-const("theme", "DARK"));
+                        lumx-base-const("theme", "DARK")
+                    );
                 }
             }
         }
@@ -125,42 +134,48 @@
             @include lumx-navigation-link-colors(
                 lumx-base-const("emphasis", "LOW"),
                 lumx-base-const("state", "DEFAULT"),
-                lumx-base-const("theme", "LIGHT"));
+                lumx-base-const("theme", "LIGHT")
+            );
 
             &:hover,
             &.focus-visible {
                 @include lumx-navigation-link-colors(
                     lumx-base-const("emphasis", "LOW"),
                     lumx-base-const("state", "HOVER"),
-                    lumx-base-const("theme", "LIGHT"));
+                    lumx-base-const("theme", "LIGHT")
+                );
             }
 
             &:active {
                 @include lumx-navigation-link-colors(
                     lumx-base-const("emphasis", "LOW"),
                     lumx-base-const("state", "ACTIVE"),
-                    lumx-base-const("theme", "LIGHT"));
+                    lumx-base-const("theme", "LIGHT")
+                );
             }
 
             &--is-selected {
                 @include lumx-navigation-link-colors(
                     lumx-base-const("emphasis", "SELECTED"),
                     lumx-base-const("state", "DEFAULT"),
-                    lumx-base-const("theme", "LIGHT"));
+                    lumx-base-const("theme", "LIGHT")
+                );
 
                 &:hover,
                 &:focus {
                     @include lumx-navigation-link-colors(
                         lumx-base-const("emphasis", "SELECTED"),
                         lumx-base-const("state", "HOVER"),
-                        lumx-base-const("theme", "LIGHT"));
+                        lumx-base-const("theme", "LIGHT")
+                    );
                 }
 
                 &:active {
                     @include lumx-navigation-link-colors(
                         lumx-base-const("emphasis", "SELECTED"),
                         lumx-base-const("state", "ACTIVE"),
-                        lumx-base-const("theme", "LIGHT"));
+                        lumx-base-const("theme", "LIGHT")
+                    );
                 }
             }
         }

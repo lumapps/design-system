@@ -121,6 +121,11 @@
                     "font-size": { "value": "12px" },
                     "font-weight": { "value": "var(--lumx-typography-font-weight-bold)" }
                 }
+            },
+            "navigation-item": {
+                "font-size": { "value": "14px" },
+                "font-weight": { "value": "var(--lumx-typography-font-weight-bold)" },
+                "line-height": { "value": "20px" }
             }
         }
     }
