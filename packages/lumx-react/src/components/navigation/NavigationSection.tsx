@@ -61,11 +61,6 @@ export const NavigationSection = Object.assign(
                         setIsOpen(!isOpen);
                         event.stopPropagation();
                     }}
-                    onKeyUp={(event: React.KeyboardEvent) => {
-                        if (event.key === 'Enter') {
-                            event.stopPropagation();
-                        }
-                    }}
                     type="button"
                 >
                     {icon ? <Icon className={`${ITEM_CLASSNAME}__icon`} icon={icon} size={Size.xs} /> : null}
@@ -89,11 +84,6 @@ export const NavigationSection = Object.assign(
                             closeOnEscape
                             onClick={() => setIsOpen(false)}
                             onClose={() => setIsOpen(false)}
-                            onKeyUp={(event: React.KeyboardEvent) => {
-                                if (event.key === 'Enter') {
-                                    setIsOpen(false);
-                                }
-                            }}
                             zIndex={996}
                         >
                             <ThemeContext.Provider value={Theme.light}>

@@ -27,6 +27,7 @@ const COMPONENT_NAME = 'Navigation';
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 export const Navigation = Object.assign(
+    // eslint-disable-next-line react/display-name
     forwardRef<HTMLElement, NavigationProps>((props, ref) => {
         const { children, className, theme, orientation = Orientation.vertical, ...forwardedProps } = props;
         return (

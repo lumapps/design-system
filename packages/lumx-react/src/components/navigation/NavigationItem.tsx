@@ -11,7 +11,7 @@ type BaseNavigationItemProps = {
     icon?: string;
     /** Label content. */
     label: ReactNode;
-    /** Whether the component is active or not. */
+    /** Mark as the current page link */
     isCurrentPage?: boolean;
 };
 
@@ -61,7 +61,6 @@ export const NavigationItem = Object.assign(
             >
                 <Tooltip label={tooltipLabel} placement={Placement.TOP}>
                     <Element
-                        theme={theme}
                         className={handleBasicClasses({
                             prefix: `${CLASSNAME}__link`,
                             isSelected: isCurrentPage,
