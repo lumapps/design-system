@@ -17,9 +17,9 @@
             },
             "L2": {
                 "value": "{color.dark.N.value}",
-                "opacity": "0.54",
+                "opacity": "0.6",
                 "version": "0.22",
-                "comment": "Base dark color with 54% opacity",
+                "comment": "Base dark color with 60% opacity",
                 "preferCSSVariable": true
             },
             "L3": {
@@ -45,9 +45,9 @@
             },
             "L6": {
                 "value": "{color.dark.N.value}",
-                "opacity": "0.05",
+                "opacity": "0.03",
                 "version": "0.22",
-                "comment": "Base dark color with 5% opacity",
+                "comment": "Base dark color with 3% opacity",
                 "preferCSSVariable": true
             }
         },

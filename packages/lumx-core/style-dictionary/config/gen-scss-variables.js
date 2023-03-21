@@ -58,7 +58,7 @@ module.exports = () => {
                         mapName: 'lumx-design-tokens',
                     },
                 ],
-                actions: [require('./utils/_prettier-scss')({ buildPath })],
+                actions: [require('./utils/_prettier-scss')()],
             },
         },
     };

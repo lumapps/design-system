@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Wed, 26 Oct 2022 13:20:02 GMT
+ * Generated on Tue, 21 Mar 2023 11:54:36 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -1116,7 +1116,7 @@ export const DESIGN_TOKENS = {
                 input: {
                     'background-color': {
                         value: 'var(--lumx-color-dark-L6)',
-                        attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.05 } },
+                        attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.03 } },
                         $aliasedFrom: 'color.dark.L6',
                     },
                     'border-color': {
@@ -1134,7 +1134,7 @@ export const DESIGN_TOKENS = {
                     placeholder: {
                         color: {
                             value: 'var(--lumx-color-dark-L2)',
-                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.54 } },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.6 } },
                             $aliasedFrom: 'color.dark.L2',
                         },
                     },
@@ -1218,7 +1218,7 @@ export const DESIGN_TOKENS = {
                     placeholder: {
                         color: {
                             value: 'var(--lumx-color-dark-L2)',
-                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.54 } },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.6 } },
                             $aliasedFrom: 'color.dark.L2',
                         },
                     },
@@ -1302,7 +1302,7 @@ export const DESIGN_TOKENS = {
                     placeholder: {
                         color: {
                             value: 'var(--lumx-color-dark-L2)',
-                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.54 } },
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.6 } },
                             $aliasedFrom: 'color.dark.L2',
                         },
                     },
@@ -1360,9 +1360,9 @@ export const DESIGN_TOKENS = {
             },
             L2: {
                 version: '0.22',
-                comment: 'Base dark color with 54% opacity',
-                value: 'rgba(0, 0, 0, 0.54)',
-                attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.54 } },
+                comment: 'Base dark color with 60% opacity',
+                value: 'rgba(0, 0, 0, 0.6)',
+                attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.6 } },
             },
             L3: {
                 version: '0.22',
@@ -1384,9 +1384,9 @@ export const DESIGN_TOKENS = {
             },
             L6: {
                 version: '0.22',
-                comment: 'Base dark color with 5% opacity',
-                value: 'rgba(0, 0, 0, 0.05)',
-                attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.05 } },
+                comment: 'Base dark color with 3% opacity',
+                value: 'rgba(0, 0, 0, 0.03)',
+                attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.03 } },
             },
         },
         light: {
@@ -1884,9 +1884,9 @@ export const DESIGN_TOKENS = {
             },
             L2: {
                 version: '0.22',
-                comment: 'Base dark color with 54% opacity',
-                value: 'rgba(0, 0, 0, 0.54)',
-                attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.54 } },
+                comment: 'Base dark color with 60% opacity',
+                value: 'rgba(0, 0, 0, 0.6)',
+                attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.6 } },
             },
             L3: {
                 version: '0.22',
@@ -1908,9 +1908,9 @@ export const DESIGN_TOKENS = {
             },
             L6: {
                 version: '0.22',
-                comment: 'Base dark color with 5% opacity',
-                value: 'rgba(0, 0, 0, 0.05)',
-                attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.05 } },
+                comment: 'Base dark color with 3% opacity',
+                value: 'rgba(0, 0, 0, 0.03)',
+                attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.03 } },
             },
         },
         white: {
