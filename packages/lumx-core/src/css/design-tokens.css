@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 21 Mar 2023 11:55:27 GMT
+ * Generated on Wed, 22 Mar 2023 12:13:22 GMT
  */
 
 :root {
@@ -532,4 +532,7 @@
   --lumx-typography-custom-button-size-m-font-weight: var(--lumx-typography-font-weight-bold);
   --lumx-typography-custom-button-size-s-font-size: 12px;
   --lumx-typography-custom-button-size-s-font-weight: var(--lumx-typography-font-weight-bold);
+  --lumx-typography-custom-navigation-item-font-size: 14px;
+  --lumx-typography-custom-navigation-item-font-weight: var(--lumx-typography-font-weight-bold);
+  --lumx-typography-custom-navigation-item-line-height: 20px;
 }
