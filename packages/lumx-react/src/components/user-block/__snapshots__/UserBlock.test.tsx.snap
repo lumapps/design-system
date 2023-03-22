@@ -103,7 +103,13 @@ exports[`<UserBlock> Snapshots and structure should render story 'Clickable' 1`]
       alt=""
       className="lumx-user-block__avatar"
       image="/demo-assets/avatar1.jpg"
-      linkAs={[Function]}
+      linkAs={
+        {
+          "$$typeof": Symbol(react.forward_ref),
+          "displayName": "CustomLink",
+          "render": [Function],
+        }
+      }
       size="m"
       theme="light"
       thumbnailProps={
@@ -119,7 +125,13 @@ exports[`<UserBlock> Snapshots and structure should render story 'Clickable' 1`]
         aria-label="Emmitt O. Lum - open user profile"
         className="lumx-user-block__name"
         color="dark"
-        linkAs={[Function]}
+        linkAs={
+          {
+            "$$typeof": Symbol(react.forward_ref),
+            "displayName": "CustomLink",
+            "render": [Function],
+          }
+        }
       >
         Emmitt O. Lum
       </Link>
