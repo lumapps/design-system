@@ -3,7 +3,7 @@ import { ColorPalette, Link, Theme } from '@lumx/react';
 import React from 'react';
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
-export const App = ({ theme }: any) => {
+export const App = ({ theme = Theme.light }: any) => {
     const color = theme === Theme.light ? ColorPalette.primary : ColorPalette.light;
     return (
         <>

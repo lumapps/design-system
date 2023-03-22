@@ -1,11 +1,22 @@
 import { mdiChevronLeft, mdiMagnify, mdiOpenInNew, mdiSort } from '@lumx/icons';
 
-import { Alignment, Button, Emphasis, FlexBox, IconButton, Orientation, TextField, Toolbar, Size } from '@lumx/react';
+import {
+    Alignment,
+    Button,
+    Emphasis,
+    FlexBox,
+    IconButton,
+    Orientation,
+    TextField,
+    Toolbar,
+    Size,
+    Theme,
+} from '@lumx/react';
 
 import classNames from 'classnames';
 import React, { useState } from 'react';
 
-export const App = ({ theme }: any) => {
+export const App = ({ theme = Theme.light }: any) => {
     const [value, setValue] = useState('');
 
     return (

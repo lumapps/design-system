@@ -9,7 +9,7 @@ const globalState = {
 };
 
 /** Toggle apply the material CSS override. */
-async function toggleMaterialTheme(wasEnabled: boolean) {
+export async function toggleMaterialTheme(wasEnabled: boolean) {
     globalState.isEnabled = !wasEnabled;
 
     // Inject the material theme CSS file.

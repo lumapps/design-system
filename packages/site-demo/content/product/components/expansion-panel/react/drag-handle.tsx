@@ -1,8 +1,8 @@
-import { DragHandle, ExpansionPanel, Text } from '@lumx/react';
+import { DragHandle, ExpansionPanel, Text, Theme } from '@lumx/react';
 
 import React, { useState } from 'react';
 
-export const App = ({ theme }: any) => {
+export const App = ({ theme = Theme.light }: any) => {
     const [isOpen, setOpen] = useState(false);
 
     return (

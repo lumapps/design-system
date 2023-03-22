@@ -15,6 +15,7 @@ import {
     TableHeader,
     TableHeaderProps,
     TableRow,
+    Theme,
     ThOrder,
     Thumbnail,
     ThumbnailVariant,
@@ -78,7 +79,7 @@ const initialHeaders: Array<Partial<TableHeaderProps>> = [
     },
 ];
 
-export const App = ({ theme }: any) => {
+export const App = ({ theme = Theme.light }: any) => {
     const [tableHeader, setTableHeader] = useState(initialHeaders);
     const [tableBody, setTableBody] = useState(initialTable);
     const toggleSort = useCallback(
