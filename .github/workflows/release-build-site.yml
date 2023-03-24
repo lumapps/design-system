@@ -23,18 +23,10 @@ jobs:
             -   name: "Checkout repository"
                 uses: actions/checkout@v3
 
-            -   name: "Login to GCR"
-                uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
+            -   name: Login to GCR
+                uses: lumapps/shared-github-actions/actions/lumapps_registries@v1
                 with:
-                    registry: gcr.io
-                    username: _json_key
-                    password: ${{ secrets.GCR_PROD_RW_CREDS }}
-
-            -   name: "Setup buildx"
-                id: buildx_setup
-                uses: docker/setup-buildx-action@8c0edbc76e98fa90f69d9a2c020dcb50019dc325
-                with:
-                    install: true
+                    gcp_credentials: ${{ secrets.GCR_PROD_RW_CREDS }}
 
             -   run: |
                     echo "git_commit=$(git rev-parse HEAD)" >> $GITHUB_ENV
@@ -56,7 +48,7 @@ jobs:
                         com.lumapps.image.version={{tag}}
 
             -   name: "Build image"
-                uses: docker/build-push-action@a66e35b9cbcf4ad0ea91ffcaf7bbad63ad9e0229
+                uses: docker/build-push-action@c56af957549030174b10d6867f20e78cfd7debc5
                 with:
                     context: ./
                     file: ${{ matrix.dockerfile }}
