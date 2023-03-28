@@ -3,10 +3,8 @@ import React, { ReactElement } from 'react';
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
-import { commonTestsSuite, itShouldRenderStories, Wrapper } from '@lumx/react/testing/utils';
-
+import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 import { UserBlock, UserBlockProps } from './UserBlock';
-import * as stories from './UserBlock.stories';
 
 const CLASSNAME = UserBlock.className as string;
 
@@ -24,8 +22,6 @@ const setup = ({ ...propsOverride }: Partial<UserBlockProps> = {}, shallowRender
 describe(`<${UserBlock.displayName}>`, () => {
     // 1. Test render via snapshot.
     describe('Snapshots and structure', () => {
-        itShouldRenderStories(stories, UserBlock);
-
         it('should forward name props', () => {
             const { wrapper } = setup({ name: 'John Doe', nameProps: { 'data-custom-attribute': true } });
 

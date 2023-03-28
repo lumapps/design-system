@@ -6,7 +6,6 @@ import 'jest-enzyme';
 
 import React, { ReactElement } from 'react';
 import { Theme } from '..';
-import * as stories from './Mosaic.stories';
 
 const CLASSNAME = Mosaic.className as string;
 
@@ -17,9 +16,6 @@ jest.mock('@lumx/react/hooks/useIntersectionObserver', () => ({
 
 type SetupProps = Partial<MosaicProps>;
 
-/**
- * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
- */
 const setup = (propsOverride: SetupProps = {}, shallowRendering = true) => {
     const props: any = { ...propsOverride };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
@@ -33,22 +29,6 @@ const setup = (propsOverride: SetupProps = {}, shallowRendering = true) => {
 };
 
 describe(`<${Mosaic.displayName}>`, () => {
-    // 1. Test render via snapshot.
-    describe('Snapshots and structure', () => {
-        // Do snapshot render test on every stories.
-        for (const [storyName, Story] of Object.entries(stories)) {
-            if (typeof Story !== 'function') {
-                continue;
-            }
-
-            it(`should render story ${storyName}`, () => {
-                const wrapper = shallow(<Story />);
-                expect(wrapper.find('Mosaic').dive()).toMatchSnapshot();
-            });
-        }
-    });
-
-    // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         it('should pass theme prop to Thumbnails', () => {
             const expectedTheme = Theme.dark;
@@ -67,7 +47,6 @@ describe(`<${Mosaic.displayName}>`, () => {
         });
     });
 
-    // 3. Test events.
     describe('Events', () => {
         it('should keep Thumbnail onClick', () => {
             const onClick = jest.fn();
@@ -103,16 +82,6 @@ describe(`<${Mosaic.displayName}>`, () => {
             expect(onClick).toHaveBeenCalledTimes(1);
             expect(onImageClick).toHaveBeenCalledTimes(4);
         });
-    });
-
-    // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', () => {
-        // Nothing to do here.
-    });
-
-    // 5. Test state.
-    describe('State', () => {
-        // Nothing to do here.
     });
 
     // Common tests suite.

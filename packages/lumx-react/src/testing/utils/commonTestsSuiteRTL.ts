@@ -5,7 +5,6 @@ import { queryByClassName } from '@lumx/react/testing/utils/queries';
 
 interface CommonSetup {
     props: GenericProps;
-    container: HTMLElement;
 }
 
 interface Options<S extends CommonSetup> {
@@ -28,8 +27,8 @@ export function commonTestsSuiteRTL<S extends CommonSetup>(setup: SetupFunction<
     const { baseClassName, forwardClassName, forwardAttributes } = options;
     describe('Common tests suite', () => {
         it('should render with base class name', () => {
-            const { container } = setup();
-            expect(queryByClassName(container, baseClassName)).toBeInTheDocument();
+            setup();
+            expect(queryByClassName(document.body, baseClassName)).toBeInTheDocument();
         });
 
         if (forwardClassName) {

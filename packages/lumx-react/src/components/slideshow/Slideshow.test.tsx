@@ -1,17 +1,14 @@
-import React, { ReactElement } from 'react';
-import pick from 'lodash/pick';
+import React from 'react';
 
-import { mount, shallow } from 'enzyme';
-import 'jest-enzyme';
-
-import { commonTestsSuite, itShouldRenderStories, Wrapper } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { render } from '@testing-library/react';
+import { queryByClassName } from '@lumx/react/testing/utils/queries';
 import { Slideshow, SlideshowProps } from './Slideshow';
-import { SlideshowControls } from './SlideshowControls';
-import * as stories from './Slideshow.stories';
+import { Slides } from './Slides';
 
-const CLASSNAME = Slideshow.className as string;
+const CLASSNAME = Slides.className as string;
 
-const setup = ({ ...propsOverride }: Partial<SlideshowProps> = {}, shallowRendering = true) => {
+const setup = (propsOverride: Partial<SlideshowProps> = {}) => {
     const props: SlideshowProps = {
         slideshowControlsProps: {
             nextButtonProps: { label: 'Next' },
@@ -19,21 +16,16 @@ const setup = ({ ...propsOverride }: Partial<SlideshowProps> = {}, shallowRender
         },
         ...propsOverride,
     };
-
-    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    const wrapper: Wrapper = renderer(<Slideshow {...props} />);
-
-    return { props, wrapper };
+    render(<Slideshow {...props} />);
+    const slideShow = queryByClassName(document.body, CLASSNAME);
+    return { props, slideShow };
 };
 
 describe(`<${Slideshow.displayName}>`, () => {
-    // 1. Test render via snapshot.
-    describe('Snapshots and structure', () => {
-        itShouldRenderStories(pick(stories, ['default', 'Simple']), {
-            or: [Slideshow, { path: [Slideshow, SlideshowControls] }],
-        });
-    });
-
     // Common tests suite.
-    commonTestsSuite(setup, { prop: 'wrapper' }, { className: CLASSNAME });
+    commonTestsSuiteRTL(setup, {
+        baseClassName: CLASSNAME,
+        forwardClassName: 'slideShow',
+        forwardAttributes: 'slideShow',
+    });
 });

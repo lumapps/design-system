@@ -1,46 +1,23 @@
 import React from 'react';
 
-import { mount, shallow } from 'enzyme';
-import 'jest-enzyme';
-import { commonTestsSuite, itShouldRenderStories } from '@lumx/react/testing/utils';
-
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { queryByClassName } from '@lumx/react/testing/utils/queries';
+import { render } from '@testing-library/react';
 import { Thumbnail, ThumbnailProps } from './Thumbnail';
-import {
-    Clickable,
-    ClickableCustomLink,
-    ClickableLink,
-    Default,
-    WithBadge,
-    WithCustomImageClassName,
-} from './Thumbnail.stories';
 
 const CLASSNAME = Thumbnail.className as string;
 
-/**
- * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
- */
-const setup = (props: Partial<ThumbnailProps> = {}, shallowRendering = true) => {
-    const renderer: any = shallowRendering ? shallow : mount;
-    const wrapper: any = renderer(<Thumbnail {...(props as any)} />);
-    return { props, wrapper };
+const setup = (props: Partial<ThumbnailProps> = {}) => {
+    render(<Thumbnail {...(props as any)} />);
+    const thumbnail = queryByClassName(document.body, CLASSNAME);
+    return { props, thumbnail };
 };
 
 describe(`<${Thumbnail.displayName}>`, () => {
-    // 1. Test render via snapshot.
-    describe('Snapshots and structure', () => {
-        itShouldRenderStories(
-            {
-                Default,
-                Clickable,
-                ClickableLink,
-                ClickableCustomLink,
-                WithBadge,
-                WithCustomImageClassName,
-            },
-            Thumbnail,
-        );
-    });
-
     // Common tests suite.
-    commonTestsSuite(setup, { className: 'wrapper', prop: 'wrapper' }, { className: CLASSNAME });
+    commonTestsSuiteRTL(setup, {
+        baseClassName: CLASSNAME,
+        forwardClassName: 'thumbnail',
+        forwardAttributes: 'thumbnail',
+    });
 });

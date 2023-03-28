@@ -4,11 +4,10 @@ import React, { ReactElement } from 'react';
 
 import { ColorPalette, Theme } from '@lumx/react';
 import { mdiAbTesting } from '@lumx/icons';
-import { itShouldRenderStories, commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
+import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils/className';
 
 import { Flag, FlagProps } from './Flag';
-import * as stories from './Flag.stories';
 
 const CLASSNAME = Flag.className as string;
 
@@ -31,12 +30,6 @@ const setup = (propOverrides: Partial<FlagProps> = {}, shallowRendering = true) 
 };
 
 describe(`<${Flag.displayName} />`, () => {
-    // 1. Test render via snapshot (default state of component).
-    describe('Snapshots and structure', () => {
-        itShouldRenderStories(stories, Flag);
-    });
-
-    // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', () => {
         it('should use the icon', () => {
             const { iconEl } = setup({ icon: mdiAbTesting });

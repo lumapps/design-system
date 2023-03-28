@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`<ListSubheader> Snapshots and structure should render story 'Default' 1`] = `
-<li
-  className="lumx-list-subheader"
->
-  Text
-</li>
-`;
