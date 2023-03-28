@@ -1,11 +1,27 @@
-import React, { RefObject, useRef, useState } from 'react';
-import { Button, Theme, Link } from '@lumx/react';
+/* eslint-disable react-hooks/rules-of-hooks */
+import React, { RefObject, useRef } from 'react';
+import { Button, Link, Kind } from '@lumx/react';
 import { DIALOG_TRANSITION_DURATION } from '@lumx/core/js/constants';
-import { chromaticForceScreenSize } from '../../stories/chromaticForceScreenSize';
+import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
+import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
+import { loremIpsum } from '@lumx/react/stories/utils/lorem';
+import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { withChromaticForceScreenSize } from '../../stories/decorators/withChromaticForceScreenSize';
 import { AlertDialog } from './AlertDialog';
+import DialogStories from '../dialog/Dialog.stories';
 
 export default {
     title: 'LumX components/alert-dialog/AlertDialog',
+    component: AlertDialog,
+    args: {
+        ...AlertDialog.defaultProps,
+        'confirmProps.label': 'Ok',
+    },
+    argTypes: {
+        size: DialogStories.argTypes.size,
+        kind: getSelectArgType(Kind),
+        'confirmProps.onClick': { action: true },
+    },
     parameters: {
         // Delay Chromatic snapshot to wait for dialog to open.
         chromatic: {
@@ -13,184 +29,99 @@ export default {
             delay: DIALOG_TRANSITION_DURATION,
         },
     },
-    // Force minimum chromatic screen size to make sure the dialog appears in view.
-    decorators: [chromaticForceScreenSize],
+    decorators: [
+        // Force minimum chromatic screen size to make sure the dialog appears in view.
+        withChromaticForceScreenSize(),
+        withNestedProps(),
+    ],
+    render(props: any) {
+        const buttonRef = useRef() as RefObject<HTMLButtonElement>;
+        const [isOpen, close, open] = useBooleanState(true);
+        return (
+            <>
+                <Button ref={buttonRef} onClick={open}>
+                    Open dialog
+                </Button>
+                <AlertDialog {...props} isOpen={isOpen} onClose={close} parentElement={buttonRef} />
+            </>
+        );
+    },
 };
 
-const defaultProps = {
-    id: 'alert-dialog',
-    confirmProps: { onClick: () => alert('confirm'), label: 'OK' },
+/**
+ * Alert dialog with default kind
+ */
+export const DefaultKind = {
+    args: {
+        title: 'Default (info)',
+        children: loremIpsum('tiny'),
+    },
 };
 
-function useOpenButton(theme: Theme) {
-    const buttonRef = useRef() as RefObject<HTMLButtonElement>;
-    const [isOpen, setOpen] = useState(true);
-    const openDialog = () => setOpen(true);
-    const closeDialog = () => setOpen(false);
-
-    return {
-        button: (
-            <Button ref={buttonRef} onClick={openDialog} theme={theme}>
-                Open dialog
-            </Button>
-        ),
-        buttonRef,
-        closeDialog,
-        isOpen,
-    };
-}
-
-export const Default = ({ theme }: any) => {
-    const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
-
-    return (
-        <>
-            {button}
-            <AlertDialog
-                isOpen={isOpen}
-                onClose={closeDialog}
-                parentElement={buttonRef}
-                title="Default (info)"
-                confirmProps={{ onClick: () => console.log('confirm'), label: 'Confirm' }}
-            >
-                Consequat deserunt officia aute laborum tempor anim sint est.
-            </AlertDialog>
-        </>
-    );
+/**
+ * Alert dialog as warning
+ */
+export const Warning = {
+    args: {
+        ...DefaultKind.args,
+        kind: Kind.warning,
+        title: 'Warning',
+    },
 };
 
-export const Warning = ({ theme }: any) => {
-    const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
-
-    return (
-        <>
-            {button}
-            <AlertDialog
-                isOpen={isOpen}
-                title="Warning"
-                onClose={closeDialog}
-                parentElement={buttonRef}
-                kind="warning"
-                {...defaultProps}
-            >
-                Consequat deserunt officia aute laborum tempor anim sint est.
-            </AlertDialog>
-        </>
-    );
+/**
+ * Alert dialog as success
+ */
+export const Success = {
+    args: {
+        ...DefaultKind.args,
+        kind: Kind.success,
+        title: 'Success',
+    },
 };
 
-export const Success = ({ theme }: any) => {
-    const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
-
-    return (
-        <>
-            {button}
-            <AlertDialog
-                isOpen={isOpen}
-                title="Success"
-                onClose={closeDialog}
-                parentElement={buttonRef}
-                kind="success"
-                {...defaultProps}
-            >
-                Consequat deserunt officia aute laborum tempor anim sint est.
-            </AlertDialog>
-        </>
-    );
+/**
+ * Alert dialog as error
+ */
+export const Error = {
+    args: {
+        ...DefaultKind.args,
+        kind: Kind.error,
+        title: 'Error',
+    },
 };
 
-export const Error = ({ theme }: any) => {
-    const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
-
-    return (
-        <>
-            {button}
-            <AlertDialog
-                isOpen={isOpen}
-                title="Error"
-                onClose={closeDialog}
-                parentElement={buttonRef}
-                kind="error"
-                {...defaultProps}
-            >
-                Consequat deserunt officia aute laborum tempor anim sint est.
-            </AlertDialog>
-        </>
-    );
+/**
+ * Alert dialog with cancel button
+ */
+export const WithCancel = {
+    argTypes: {
+        'cancelProps.onClick': { action: true },
+    },
+    args: {
+        ...DefaultKind.args,
+        title: 'With Cancel',
+        'cancelProps.label': 'Cancel',
+    },
 };
 
-export const WithCancel = ({ theme }: any) => {
-    const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
-
-    return (
-        <>
-            {button}
-            <AlertDialog
-                {...defaultProps}
-                title="With Cancel"
-                isOpen={isOpen}
-                onClose={closeDialog}
-                parentElement={buttonRef}
-                cancelProps={{
-                    label: 'Cancel',
-                    onClick: closeDialog,
-                }}
-            >
-                Consequat deserunt officia aute laborum tempor anim sint est.
-            </AlertDialog>
-        </>
-    );
-};
-
-export const RichDescription = ({ theme }: any) => {
-    const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
-
-    return (
-        <>
-            {button}
-            <AlertDialog
-                {...defaultProps}
-                title="With Rich Description"
-                isOpen={isOpen}
-                onClose={closeDialog}
-                parentElement={buttonRef}
-            >
+/**
+ * Alert dialog with rich description
+ */
+export const RichDescription = {
+    argTypes: { children: { control: false } },
+    args: {
+        ...DefaultKind.args,
+        title: 'With Rich Description',
+        children: (
+            <>
                 Amet ut elit dolore irure mollit <strong>sunt culpa esse</strong>.<br />
                 Ea ut Lorem.
                 <br />
                 <Link href="https://example.com" target="_blank">
                     Link
                 </Link>
-            </AlertDialog>
-        </>
-    );
-};
-
-export const WithForwardedProps = ({ theme }: any) => {
-    const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
-
-    return (
-        <>
-            {button}
-            <AlertDialog
-                {...defaultProps}
-                title="With Forwarded Props"
-                isOpen={isOpen}
-                onClose={closeDialog}
-                parentElement={buttonRef}
-                cancelProps={{
-                    label: 'Cancel',
-                    onClick: closeDialog,
-                    style: { color: 'blue' },
-                }}
-                confirmProps={{
-                    onClick: () => alert('confirm'),
-                    label: 'OK',
-                    style: { color: 'red' },
-                }}
-            >
-                Consequat deserunt officia aute laborum tempor anim sint est.
-            </AlertDialog>
-        </>
-    );
+            </>
+        ),
+    },
 };

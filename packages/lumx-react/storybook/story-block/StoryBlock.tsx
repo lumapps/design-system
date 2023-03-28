@@ -20,10 +20,11 @@ export const StoryBlock: React.FC<StoryBlockProps> = (props) => {
     const { theme, materialTheme } = context.globals;
     const args = {...context.args, theme};
 
+
     // Hard code today date for stable chromatic stories snapshots.
     context.parameters.today = isChromatic() ? new Date('May 25 2021 01:00') : new Date();
 
-    if (isChromatic()) return <Story />;
+    if (isChromatic()) return <Story args={args} />;
 
     React.useEffect(() => {
         toggleMaterialTheme(materialTheme !== 'true')
@@ -31,7 +32,7 @@ export const StoryBlock: React.FC<StoryBlockProps> = (props) => {
 
     return (
         <div className={classNames(CLASSNAME, context.parameters.hasGreyBackground && `${CLASSNAME}--has-grey-background`, `${CLASSNAME}--theme-${theme}`)}>
-            <Story />
+            <Story args={args} />
         </div>
     );
 };

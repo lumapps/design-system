@@ -1,93 +1,62 @@
-import React, { useState } from 'react';
-
 import { DatePickerField } from '@lumx/react';
+import { withValueOnChange } from '@lumx/react/stories/decorators/withValueOnChange';
+import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
+import { loremIpsum } from '@lumx/react/stories/utils/lorem';
 
-export default { title: 'LumX components/date-picker/DatePickerField' };
-
-export const Simple = ({ theme }: any) => {
-    const [value, setValue] = useState<Date | undefined>();
-
-    return (
-        <DatePickerField
-            locale="fr"
-            label="Start date"
-            placeholder="Pick a date"
-            theme={theme}
-            onChange={setValue}
-            value={value}
-            nextButtonProps={{ label: 'Next month' }}
-            previousButtonProps={{ label: 'Previous month' }}
-        />
-    );
+export default {
+    title: 'LumX components/date-picker/DatePickerField',
+    component: DatePickerField,
+    args: {
+        ...DatePickerField.defaultProps,
+        locale: 'fr',
+        'nextButtonProps.label': 'Next month',
+        'previousButtonProps.label': 'Previous month',
+    },
+    decorators: [withValueOnChange(), withNestedProps()],
 };
 
-export const WithDefaultValue = ({ theme }: any) => {
-    const [value, setValue] = useState<Date | undefined>(new Date('2020-05-18'));
+/**
+ * Default date picker fields with only the required fields
+ */
+export const Default = {};
 
-    return (
-        <DatePickerField
-            locale="fr"
-            label="Start date"
-            placeholder="Pick a date"
-            theme={theme}
-            onChange={setValue}
-            value={value}
-            nextButtonProps={{ label: 'Next month' }}
-            previousButtonProps={{ label: 'Previous month' }}
-        />
-    );
+/**
+ * With label, placeholder and helper
+ */
+export const LabelPlaceholderAndHelper = {
+    args: {
+        label: 'Date picker label',
+        placeholder: 'Pick a date',
+        helper: loremIpsum('tiny'),
+    },
 };
 
-export const WithErrorAndHelper = ({ theme }: any) => {
-    const [value, setValue] = useState<Date | undefined>(new Date('2020-05-18'));
-
-    return (
-        <DatePickerField
-            locale="fr"
-            label="Start date"
-            placeholder="Pick a date"
-            theme={theme}
-            onChange={setValue}
-            value={value}
-            hasError
-            helper="Helper"
-            nextButtonProps={{ label: 'Next month' }}
-            previousButtonProps={{ label: 'Previous month' }}
-        />
-    );
+/**
+ * Error state
+ */
+export const Error = {
+    args: {
+        ...LabelPlaceholderAndHelper.args,
+        hasError: true,
+    },
 };
 
-export const CustomMonth = ({ theme }: any) => {
-    const [value, setValue] = useState<Date | undefined>();
-
-    return (
-        <DatePickerField
-            locale="fr"
-            label="Initialized to 2019 July"
-            placeholder="Pick a date"
-            theme={theme}
-            onChange={setValue}
-            value={value}
-            defaultMonth={new Date('2019-07-14')}
-            nextButtonProps={{ label: 'Next month' }}
-            previousButtonProps={{ label: 'Previous month' }}
-        />
-    );
+/**
+ * With default value selected
+ */
+export const DefaultValue = {
+    args: {
+        ...LabelPlaceholderAndHelper.args,
+        value: new Date('2019-02-28'),
+    },
 };
 
-export const With28FebruarySelected = ({ theme }: any) => {
-    const [value, setValue] = useState<Date | undefined>(new Date('2019-02-28'));
-
-    return (
-        <DatePickerField
-            locale="fr"
-            label="Start date"
-            placeholder="Pick a date"
-            theme={theme}
-            onChange={setValue}
-            value={value}
-            nextButtonProps={{ label: 'Next month' }}
-            previousButtonProps={{ label: 'Previous month' }}
-        />
-    );
+/**
+ * With default month
+ */
+export const DefaultMonth = {
+    args: {
+        ...LabelPlaceholderAndHelper.args,
+        defaultMonth: new Date('2019-07-14'),
+    },
 };

@@ -1,27 +1,56 @@
 import { Kind, Message } from '@lumx/react';
-import { boolean, text } from '@storybook/addon-knobs';
-import React from 'react';
-import { enumKnob } from '@lumx/react/stories/knobs/enumKnob';
 import { mdiDelete } from '@lumx/icons/';
+import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { loremIpsum } from '@lumx/react/stories/utils/lorem';
+import { iconArgType } from '@lumx/react/stories/controls/icons';
+import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
+import { withUndefined } from '@lumx/react/stories/controls/withUndefined';
 
-export default { title: 'LumX components/message/Message' };
+export default {
+    title: 'LumX components/message/Message',
+    component: Message,
+    argTypes: {
+        kind: getSelectArgType(Kind),
+        hasBackground: { control: 'boolean' },
+        icon: iconArgType,
+    },
+    args: { ...Message.defaultProps, children: loremIpsum('tiny') },
+};
 
-export const Default = () => (
-    <Message
-        kind={enumKnob('Kind of message', [undefined, ...Object.values(Kind)], undefined)}
-        hasBackground={boolean('Has background', false)}
-    >
-        {text(
-            'Message',
-            `Message text quisque tincidunt lobortis dui non auctor.Donec porta,
-                ligula volutpat vehicula aliquet, dui sapien tempus felis, sed.`,
-        )}
-    </Message>
-);
+/**
+ * Default message
+ */
+export const Default = {};
 
-export const CustomIcon = () => (
-    <Message icon={mdiDelete} kind="info" hasBackground>
-        Lorem ipsum quisque tincidunt lobortis dui non auctor.Donec porta, ligula volutpat vehicula aliquet, dui sapien
-        tempus felis, sed.
-    </Message>
-);
+/**
+ * All `kind` variants
+ */
+export const AllKinds = {
+    ...Default,
+    decorators: [
+        withCombinations({
+            combinations: {
+                rows: { key: 'kind', options: withUndefined(Kind) },
+            },
+        }),
+    ],
+};
+
+/**
+ * All `kind` variants with `hasBackground`
+ */
+export const AllKindsWithBackground = {
+    ...AllKinds,
+    args: {
+        hasBackground: true,
+    },
+};
+
+/**
+ * With custom icon
+ */
+export const CustomIcon = {
+    args: {
+        icon: mdiDelete,
+    },
+};

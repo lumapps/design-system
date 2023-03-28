@@ -1,36 +1,39 @@
-import { Switch, Alignment } from '@lumx/react';
-import { text } from '@storybook/addon-knobs';
-import noop from 'lodash/noop';
-import React from 'react';
+import { Alignment, Switch, SwitchProps } from '@lumx/react';
+import { withValueOnChange } from '@lumx/react/stories/decorators/withValueOnChange';
+import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
 
-export default { title: 'LumX components/switch/Switch' };
+export default {
+    title: 'LumX components/switch/Switch',
+    component: Switch,
+    args: {
+        ...Switch.defaultProps,
+        children: 'Switch label',
+        name: 'switch-html-name',
+        value: 'switch-html-value',
+        isChecked: false,
+    },
+    argTypes: {
+        position: getSelectArgType<SwitchProps['position']>([Alignment.left, Alignment.right]),
+        onChange: { action: true },
+    },
+    decorators: [withValueOnChange({ valueProp: 'isChecked' })],
+};
 
-export const NotCheckedSwitch = ({ theme }: any) => (
-    <Switch isChecked={false} onChange={noop} theme={theme}>
-        {text('text', 'The switch')}
-    </Switch>
-);
+/**
+ * Default switch
+ */
+export const Default = {};
 
-export const CheckedSwitch = ({ theme }: any) => (
-    <Switch isChecked onChange={noop} theme={theme}>
-        {text('text', 'The switch')}
-    </Switch>
-);
+/**
+ * Switch disabled
+ */
+export const Disabled = {
+    args: { isDisabled: true },
+};
 
-export const DisabledCheckedSwitch = ({ theme }: any) => (
-    <Switch isChecked isDisabled onChange={noop} theme={theme}>
-        {text('text', 'The switch')}
-    </Switch>
-);
-
-export const DisabledSwitch = ({ theme }: any) => (
-    <Switch isDisabled onChange={noop} theme={theme}>
-        {text('text', 'The switch')}
-    </Switch>
-);
-
-export const RightPositionSwitch = ({ theme }: any) => (
-    <Switch position={Alignment.right} onChange={noop} theme={theme}>
-        {text('text', 'The switch')}
-    </Switch>
-);
+/**
+ * Switch positioned to the right
+ */
+export const PositionRight = {
+    args: { position: Alignment.right },
+};

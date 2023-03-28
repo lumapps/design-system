@@ -1,30 +1,95 @@
+/* eslint-disable react/jsx-key,react/display-name */
 import React from 'react';
 import { mdiDotsHorizontal, mdiHeart, mdiReply } from '@lumx/icons';
-import { Button, CommentBlock, Emphasis, Size } from '@lumx/react';
+import { Button, CommentBlock } from '@lumx/react';
 import { IconButton } from '@lumx/react/components/button/IconButton';
-import { avatarImageKnob } from '@lumx/react/stories/knobs/image';
+import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
+import { avatarImageArgType, AVATAR_IMAGES } from '@lumx/react/stories/controls/image';
+import { loremIpsum } from '@lumx/react/stories/utils/lorem';
 
-export default { title: 'LumX components/comment-block/CommentBlock' };
+export default {
+    title: 'LumX components/comment-block/CommentBlock',
+    component: CommentBlock,
+    decorators: [withNestedProps()],
+    args: {
+        'avatarProps.image': AVATAR_IMAGES.avatar1,
+    },
+    argTypes: {
+        'avatarProps.image': avatarImageArgType,
+        actions: { control: false },
+        headerActions: { control: false },
+        children: { control: false },
+    },
+};
 
-export const WithHeaderActions = ({ theme }: any) => (
-    <CommentBlock
-        hasActions
-        actions={[
-            <Button key="button0" theme={theme} emphasis={Emphasis.low} size={Size.s} leftIcon={mdiHeart}>
-                24 likes
-            </Button>,
-            <Button key="button1" theme={theme} emphasis={Emphasis.low} size={Size.s} leftIcon={mdiReply}>
-                Reply
-            </Button>,
-        ]}
-        theme={theme}
-        avatarProps={{ image: avatarImageKnob(), alt: 'Avatar' }}
-        date="5 days"
-        fullDate="Monday, March 30, 2021 at 4:06 PM"
-        name="Emmitt O. Lum"
-        text="All the rumors have finally died down and many skeptics have tightened their lips, the iPod does support video format now on its fifth generation."
-        headerActions={
-            <IconButton label="Actions" icon={mdiDotsHorizontal} theme={theme} emphasis={Emphasis.low} size={Size.s} />
-        }
-    />
-);
+/**
+ * Minimal comment block
+ */
+export const Minimal = {
+    args: {
+        text: loremIpsum('short'),
+    },
+};
+
+/**
+ * Full-featured comment block
+ */
+export const FullFeatured = {
+    args: {
+        name: 'Emmitt O. Lum',
+        text: loremIpsum('short'),
+        date: '5 days ago',
+        fullDate: 'Monday, March 30, 2021 at 4:06 PM',
+        hasActions: true,
+    },
+    render: ({ theme, ...props }: any) => (
+        <CommentBlock
+            theme={theme}
+            {...props}
+            actions={[
+                <Button theme={theme} emphasis="low" size="s" leftIcon={mdiHeart}>
+                    24 likes
+                </Button>,
+                <Button theme={theme} emphasis="low" size="s" leftIcon={mdiReply}>
+                    Reply
+                </Button>,
+            ]}
+            headerActions={
+                <IconButton label="Actions" icon={mdiDotsHorizontal} theme={theme} emphasis="low" size="s" />
+            }
+        />
+    ),
+};
+
+/**
+ * Marked as relevant
+ */
+export const Relevant = {
+    ...FullFeatured,
+    args: { ...FullFeatured.args, isRelevant: true },
+};
+
+/**
+ * Comment thread
+ */
+export const Thread = {
+    ...FullFeatured,
+    args: {
+        ...FullFeatured.args,
+        isOpen: true,
+        children: [
+            <CommentBlock
+                avatarProps={{ image: AVATAR_IMAGES.avatar2, alt: '' }}
+                name="John Doe"
+                date="5 days ago"
+                text={loremIpsum('tiny')}
+            />,
+            <CommentBlock
+                avatarProps={{ image: AVATAR_IMAGES.avatar4, alt: '' }}
+                name="Jane Doe"
+                date="5 days ago"
+                text={loremIpsum('tiny')}
+            />,
+        ],
+    },
+};

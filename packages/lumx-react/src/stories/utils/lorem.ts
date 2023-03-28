@@ -1,19 +1,17 @@
-const shortText = `
-Nihil hic munitissimus habendi senatus locus, nihil horum? At nos hinc posthac, sitientis piros
-Afros. Magna pars studiorum, prodita quaerimus. Integer legentibus erat a ante historiarum
-dapibus. Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea
+const tiny = `Lorem ipsum quisque tincidunt lobortis dui non auctor. Donec porta, ligula volutpat
+vehicula aliquet, dui sapien tempus felis, sed.`;
+const short = `${tiny} Ullamco laboris nisi ut aliquid ex ea
 commodi consequat. Inmensae subtilitatis, obscuris et malesuada fames. Me non paenitet nullum
 festiviorem excogitasse ad hoc. Cum ceteris in veneratione tui montes, nascetur mus. Etiam
 habebis sem dicantur magna mollis euismod. Quis aute iure reprehenderit in voluptate velit esse.
 Phasellus laoreet lorem vel dolor tempus vehicula. Ambitioni dedisse scripsisse iudicaretur.
 Paullum deliquit, ponderibus modulisque suis ratio utitur. Ab illo tempore, ab est sed
-immemorabili. Nec dubitamus multa iter quae et nos invenerat. Tu quoque, Brute, fili mi, nihil
+immemorabili. Nec dubitamus multa iter quae et nos invenerat.`;
+const long = `${short} Tu quoque, Brute, fili mi, nihil
 timor populi, nihil! Morbi fringilla convallis sapien, id pulvinar odio volutpat. Cras mattis
 iudicium purus sit amet fermentum. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.
 Quisque ut dolor gravida, placerat libero vel, euismod. Unam incolunt Belgae, aliam Aquitani,
-tertiam. Cras mattis iudicium purus sit amet fermentum`;
-const longText = `
-${shortText}. Prima luce, cum quibus mons aliud
+tertiam. Cras mattis iudicium purus sit amet fermentum. Prima luce, cum quibus mons aliud
 consensu ab eo. Vivamus sagittis lacus vel augue laoreet rutrum faucibus. Petierunt uti sibi
 concilium totius Galliae in diem certam indicere. Etiam habebis sem dicantur magna mollis
 euismod. A communi observantia non est recedendum. Ut enim ad minim veniam, quis nostrud
@@ -56,4 +54,6 @@ Plura mihi bona sunt, inclinet, amari petere vellent. Quae vero auctorem tractat
 dicuntur. Me non paenitet nullum festiviorem excogitasse ad hoc. Unam incolunt Belgae, aliam
 Aquitani, tertiam.`;
 
-export const loremIpsum = (type: 'short' | 'long'): string => (type === 'short' ? shortText : longText);
+const types = { tiny, short, long } as const;
+
+export const loremIpsum = (type: keyof typeof types): string => types[type];

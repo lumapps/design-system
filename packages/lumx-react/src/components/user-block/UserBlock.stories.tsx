@@ -1,76 +1,87 @@
 import React from 'react';
 
 import { mdiStar } from '@lumx/icons';
-import { Badge, ColorPalette, Icon, Size } from '@lumx/react';
-import { avatarImageKnob } from '@lumx/react/stories/knobs/image';
+import { Badge, ColorPalette, Icon, Orientation, Size } from '@lumx/react';
 import { CustomLink } from '@lumx/react/stories/utils/CustomLink';
 
+import { AVATAR_IMAGES } from '@lumx/react/stories/controls/image';
+import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
+import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
 import { UserBlock } from './UserBlock';
 
-export default { title: 'LumX components/user-block/UserBlock' };
-
-const logAction = (action: string) => () => console.log(action);
 const sizes = [Size.s, Size.m, Size.l];
 
-export const Default = ({ theme }: any) => (
-    <UserBlock
-        theme={theme}
-        name="Emmitt O. Lum"
-        fields={['Creative developer', 'Denpasar']}
-        avatarProps={{ image: avatarImageKnob() }}
-        onMouseEnter={logAction('Mouse entered')}
-        onMouseLeave={logAction('Mouse left')}
-    />
-);
-
-export const Sizes = ({ theme }: any) =>
-    sizes.map((size) => (
-        <UserBlock
-            key={size}
-            theme={theme}
-            name="Emmitt O. Lum"
-            fields={['Creative developer', 'Denpasar']}
-            avatarProps={{ image: avatarImageKnob() }}
-            size={size}
-            onMouseEnter={logAction('Mouse entered')}
-            onMouseLeave={logAction('Mouse left')}
-        />
-    ));
-
-export const Clickable = ({ theme }: any) => {
-    const baseProps = {
-        theme,
-        name: 'Emmitt O. Lum',
-        nameProps: { 'aria-label': 'Emmitt O. Lum - open user profile' },
-        fields: ['Creative developer', 'Denpasar'],
-        avatarProps: { image: avatarImageKnob() },
-    } as any;
-    return (
-        <>
-            <p>As a button</p>
-            <UserBlock {...baseProps} onClick={logAction('UserBlock clicked')} />
-
-            <p>As a link</p>
-            <UserBlock {...baseProps} linkProps={{ href: 'https://example.com' }} />
-
-            <p>As a custom link component</p>
-            <UserBlock {...baseProps} linkAs={CustomLink} />
-        </>
-    );
+export default {
+    title: 'LumX components/user-block/UserBlock',
+    component: UserBlock,
+    args: UserBlock.defaultProps,
+    argTypes: {
+        size: getSelectArgType(sizes),
+        orientation: getSelectArgType(Orientation),
+    },
 };
 
-export const WithBadge = ({ theme }: any) => (
-    <UserBlock
-        theme={theme}
-        name="Emmitt O. Lum"
-        fields={['Creative developer', 'Denpasar']}
-        avatarProps={{
-            image: avatarImageKnob(),
+/** Only an avatar */
+export const AvatarOnly = {
+    args: { avatarProps: { image: AVATAR_IMAGES.avatar1 } },
+};
+
+/** Avatar and name */
+export const AvatarAndName = {
+    args: { ...AvatarOnly.args, name: 'Emmitt O. Lum' },
+};
+
+/** Avatar, name and secondary fields */
+export const AvatarAndNameAndSecondaryFields = {
+    args: { ...AvatarAndName.args, fields: ['Creative developer', 'Denpasar'] },
+};
+
+/** Size variants */
+export const SizesAndOrientations = {
+    ...AvatarAndNameAndSecondaryFields,
+    decorators: [
+        withCombinations({
+            combinations: {
+                rows: { key: 'size', options: sizes },
+                cols: { key: 'orientation', options: Object.values(Orientation) },
+            },
+        }),
+    ],
+};
+
+/** Setting `onClick` to use it as a button */
+export const AsButton = {
+    ...AvatarAndNameAndSecondaryFields,
+    argTypes: { onClick: { action: true } },
+};
+
+/** Setting the `linkProps` prop to use it as a link */
+export const AsLink = {
+    args: {
+        ...AvatarAndNameAndSecondaryFields.args,
+        linkProps: { href: 'https://example.com' },
+    },
+};
+
+/** Setting the `linkAs` prop to inject a custom link component */
+export const AsCustomLink = {
+    args: {
+        ...AvatarAndNameAndSecondaryFields.args,
+        linkAs: CustomLink,
+    },
+};
+
+/** Setting the `avatarProps.badge` prop to inject a badge */
+export const WithBadge = {
+    args: {
+        ...AvatarAndNameAndSecondaryFields.args,
+        avatarProps: {
+            ...AvatarAndNameAndSecondaryFields.args.avatarProps,
             badge: (
                 <Badge color={ColorPalette.blue}>
                     <Icon icon={mdiStar} />
                 </Badge>
             ),
-        }}
-    />
-);
+        },
+    },
+};

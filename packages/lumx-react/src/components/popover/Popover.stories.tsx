@@ -1,132 +1,91 @@
-import React, { RefObject, useEffect, useRef, useState } from 'react';
+/* eslint-disable react-hooks/rules-of-hooks */
+import React, { useEffect, useRef, useState } from 'react';
 
 import { mdiAccount, mdiBell } from '@lumx/icons';
 import {
-    Alignment,
     Chip,
-    Button,
     Emphasis,
-    FlexBox,
+    Text,
     Icon,
     IconButton,
     List,
     ListItem,
-    Orientation,
     Placement,
     Popover,
     Size,
+    Elevation,
 } from '@lumx/react';
-import { boolean, select } from '@storybook/addon-knobs';
 import range from 'lodash/range';
-import startCase from 'lodash/startCase';
+import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
+import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { withChromaticForceScreenSize } from '@lumx/react/stories/decorators/withChromaticForceScreenSize';
 
-export default { title: 'LumX components/popover/Popover' };
-
-const DEFAULT_PROPS = Popover.defaultProps as any;
-
-export const Positions = ({ theme }: any) => {
-    const popovers: Array<[Placement, RefObject<any>]> = [
-        [Placement.LEFT, useRef(null)],
-        [Placement.TOP, useRef(null)],
-        [Placement.BOTTOM, useRef(null)],
-        [Placement.RIGHT, useRef(null)],
-    ];
-    const hasArrow = boolean('Has arrow', DEFAULT_PROPS.hasArrow as any);
-    const elevation: any = select('Elevation', [5, 4, 3, 2, 1], DEFAULT_PROPS.elevation);
-    const alignOptions = { middle: '', start: '-start', end: '-end' };
-    const align = select('Placement variant', alignOptions, alignOptions.middle);
-
-    return (
-        <FlexBox style={{ padding: 80 }} orientation={Orientation.horizontal}>
-            {popovers.map(([placement, ref]) => {
-                const placementVariant = (placement + align) as any;
-                return (
-                    <FlexBox key={placement} fillSpace vAlign={Alignment.center} hAlign={Alignment.center}>
-                        <Chip ref={ref} theme={theme} size={Size.s}>
-                            {startCase(placementVariant).toUpperCase()}
-                        </Chip>
-
-                        <Popover
-                            isOpen
-                            theme={theme}
-                            anchorRef={ref}
-                            placement={placementVariant}
-                            elevation={elevation}
-                            hasArrow={hasArrow}
-                        >
-                            <div className="lumx-spacing-margin-huge">Popover</div>
-                        </Popover>
-                    </FlexBox>
-                );
-            })}
-        </FlexBox>
-    );
+export default {
+    title: 'LumX components/popover/Popover',
+    component: Popover,
+    args: Popover.defaultProps,
+    argTypes: {
+        isOpen: { control: 'boolean' },
+        hasArrow: { control: 'boolean' },
+        placement: getSelectArgType(Placement),
+        elevation: getSelectArgType<Elevation>([1, 2, 3, 4, 5]),
+    },
+    decorators: [
+        // Force minimum chromatic screen size to make sure the dialog appears in view.
+        withChromaticForceScreenSize(),
+    ],
 };
 
-export const Auto = ({ theme }: any) => {
-    const demoPopperStyle = {
-        alignItems: 'center',
-        display: 'flex',
-        height: 100,
-        justifyContent: 'center',
-        width: 200,
-    };
-
-    const container = {
-        width: '200%',
-        height: '2000px',
-        alignItems: 'center',
-        display: 'flex',
-        justifyContent: 'center',
-    };
-
-    const anchorRef = useRef(null);
-
-    return (
-        <div style={container}>
-            <div>
-                <Chip ref={anchorRef} theme={theme} size={Size.s}>
+/**
+ * Simple
+ */
+export const Simple = {
+    args: {
+        children: (
+            <Text as="p" className="lumx-spacing-padding-big">
+                Popover
+            </Text>
+        ),
+    },
+    render(props: any) {
+        const anchorRef = React.useRef(null);
+        return (
+            <>
+                <Chip ref={anchorRef} size="s" className="lumx-spacing-margin-big">
                     Anchor
                 </Chip>
-            </div>
-            <Popover theme={theme} anchorRef={anchorRef} placement={Placement.AUTO} isOpen>
-                <div style={demoPopperStyle}>Popover</div>
-            </Popover>
-        </div>
-    );
+                <Popover anchorRef={anchorRef} isOpen {...props} />
+            </>
+        );
+    },
 };
 
-export const Top = ({ theme }: any) => {
-    const demoPopperStyle = {
-        alignItems: 'center',
-        display: 'flex',
-        height: 100,
-        justifyContent: 'center',
-        width: 200,
-    };
+/**
+ * Popover not using React.createPortal
+ */
+export const WithoutPortal = { ...Simple, args: { ...Simple.args, usePortal: false } };
 
-    const container = {
-        width: '200%',
-        height: '2000px',
-        alignItems: 'center',
-        display: 'flex',
-        justifyContent: 'center',
-    };
-
-    const anchorRef = useRef(null);
-
-    return (
-        <div style={container}>
-            <div>
-                <Chip ref={anchorRef} theme={theme} size={Size.s}>
-                    Anchor
-                </Chip>
-            </div>
-            <Popover theme={theme} anchorRef={anchorRef} placement={Placement.TOP} isOpen>
-                <div style={demoPopperStyle}>Popover</div>
-            </Popover>
-        </div>
-    );
+/**
+ * All base placements
+ */
+export const Placements = {
+    ...Simple,
+    argTypes: {
+        placement: { control: false },
+    },
+    decorators: [
+        withCombinations({
+            cellStyle: {
+                padding: 80,
+            },
+            combinations: {
+                cols: {
+                    key: 'placement',
+                    options: [Placement.TOP, Placement.RIGHT, Placement.BOTTOM, Placement.LEFT],
+                },
+            },
+        }),
+    ],
 };
 
 export const WithUpdatingChildren = ({ theme }: any) => {
@@ -219,98 +178,6 @@ export const WithScrollingPopover = ({ theme }: any) => {
                     })}
                 </List>
             </Popover>
-        </div>
-    );
-};
-
-export const WithoutPortal = ({ theme }: any) => {
-    const popovers: Array<[Placement, RefObject<any>]> = [
-        [Placement.LEFT, useRef(null)],
-        [Placement.TOP, useRef(null)],
-        [Placement.BOTTOM, useRef(null)],
-        [Placement.RIGHT, useRef(null)],
-    ];
-    const hasArrow = boolean('Has arrow', DEFAULT_PROPS.hasArrow as any);
-    const elevation: any = select('Elevation', [5, 4, 3, 2, 1], DEFAULT_PROPS.elevation);
-    const alignOptions = { middle: '', start: '-start', end: '-end' };
-    const align = select('Placement variant', alignOptions, alignOptions.middle);
-
-    return (
-        <FlexBox style={{ padding: 80 }} orientation={Orientation.horizontal}>
-            {popovers.map(([placement, ref]) => {
-                const placementVariant = (placement + align) as any;
-                return (
-                    <FlexBox key={placement} fillSpace vAlign={Alignment.center} hAlign={Alignment.center}>
-                        <Chip ref={ref} theme={theme} size={Size.s}>
-                            {startCase(placementVariant).toUpperCase()}
-                        </Chip>
-
-                        <Popover
-                            isOpen
-                            theme={theme}
-                            anchorRef={ref}
-                            placement={placementVariant}
-                            elevation={elevation}
-                            hasArrow={hasArrow}
-                            usePortal={false}
-                        >
-                            <div className="lumx-spacing-margin-huge">Popover</div>
-                        </Popover>
-                    </FlexBox>
-                );
-            })}
-        </FlexBox>
-    );
-};
-
-export const NestedWithoutPortal = () => {
-    const boundaryRef = React.useRef(document.querySelector('body'));
-
-    const Entry = ({ children, placement = Placement.RIGHT_START }: any) => {
-        const rootButtonRef = React.useRef(null);
-        const [rootOpen, setRootOpen] = React.useState(false);
-
-        return (
-            <>
-                <li ref={rootButtonRef}>
-                    <Button onClick={() => setRootOpen(!rootOpen)}>Click</Button>
-                </li>
-                {children && (
-                    <Popover
-                        boundaryRef={boundaryRef}
-                        fitWithinViewportHeight
-                        //offset={{ along: -16 }}
-                        placement={placement}
-                        isOpen={rootOpen}
-                        anchorRef={rootButtonRef}
-                        usePortal={false}
-                    >
-                        <div className="lumx-spacing-margin-huge" style={{ overflowY: 'auto' }}>
-                            <List style={{ minWidth: '150px' }}>{children}</List>
-                        </div>
-                    </Popover>
-                )}
-            </>
-        );
-    };
-
-    return (
-        <div style={{ height: '100vh', width: '50px' }}>
-            <List>
-                <Entry placement={Placement.BOTTOM_START}>
-                    <Entry />
-                    <Entry />
-                    <Entry>
-                        <Entry />
-                        <Entry />
-                        <Entry>
-                            <Entry>
-                                <Entry />
-                            </Entry>
-                        </Entry>
-                    </Entry>
-                </Entry>
-            </List>
         </div>
     );
 };

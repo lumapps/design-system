@@ -1,14 +1,13 @@
-import { withKnobs } from '@storybook/addon-knobs';
-import { Theme } from '@lumx/react';
 import { withStoryBlockDecorator } from './story-block/decorator';
+import { Theme } from '@lumx/react';
 
 export const parameters = {
     actions: { argTypesRegex: '^on[A-Z].*' },
+    controls: { sort: 'requiredFirst' },
 };
 
 export const decorators = [
-    withKnobs(),
-    withStoryBlockDecorator
+    withStoryBlockDecorator,
 ];
 
 export const globalTypes = {

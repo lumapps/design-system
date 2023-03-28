@@ -1,25 +1,41 @@
-import React from 'react';
+import { Size, SkeletonCircle, SkeletonCircleProps } from '@lumx/react';
+import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { ALL_COLORS, colorArgType } from '@lumx/react/stories/controls/color';
+import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 
-import { FlexBox, Orientation, Size, SkeletonCircle, ColorPalette } from '@lumx/react';
+const sizes: SkeletonCircleProps['size'][] = [Size.xxs, Size.xs, Size.s, Size.m, Size.l, Size.xl, Size.xxl];
 
-export default { title: 'LumX components/skeleton/Skeleton Circle' };
+export default {
+    title: 'LumX components/skeleton/Skeleton Circle',
+    component: SkeletonCircle,
+    args: SkeletonCircle.defaultProps,
+    argTypes: {
+        size: getSelectArgType(sizes),
+        color: colorArgType,
+    },
+};
 
-const sizes = [Size.xxs, Size.xs, Size.s, Size.m, Size.l, Size.xl, Size.xxl] as const;
-const colors = Object.values(ColorPalette);
+/**
+ * All sizes
+ */
+export const AllSize = {
+    argTypes: { size: { control: false } },
+    decorators: [
+        withCombinations({
+            combinations: { cols: { key: 'size', options: sizes } },
+        }),
+    ],
+};
 
-export const Circle = ({ theme }: any) => (
-    <>
-        Sizes:
-        <FlexBox orientation={Orientation.horizontal}>
-            {sizes.map((size) => (
-                <SkeletonCircle theme={theme} key={size} size={size} className="lumx-spacing-margin" />
-            ))}
-        </FlexBox>
-        Colors:
-        <FlexBox orientation={Orientation.horizontal}>
-            {colors.map((color) => (
-                <SkeletonCircle theme={theme} size={Size.m} key={color} color={color} className="lumx-spacing-margin" />
-            ))}
-        </FlexBox>
-    </>
-);
+/**
+ * All colors
+ */
+export const AllColor = {
+    args: { size: Size.m },
+    argTypes: { color: { control: false } },
+    decorators: [
+        withCombinations({
+            combinations: { cols: { key: 'color', options: ALL_COLORS } },
+        }),
+    ],
+};

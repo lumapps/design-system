@@ -1,83 +1,45 @@
+/* eslint-disable react-hooks/rules-of-hooks,react/display-name */
 import React from 'react';
-import {
-    ImageBlock,
-    Slideshow,
-    SlideshowItem,
-    Toolbar,
-    Divider,
-    Alignment,
-    TextField,
-    Typography,
-    Link,
-    Lightbox,
-    ThumbnailProps,
-} from '@lumx/react';
-import { thumbnailsKnob } from '@lumx/react/stories/knobs/thumbnailsKnob';
+import { ImageBlock, Alignment, Lightbox, Button } from '@lumx/react';
+import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
+import { LANDSCAPE_IMAGES } from '@lumx/react/stories/controls/image';
 
-export default { title: 'LumX components/lightbox/Lightbox' };
-
-interface RowItemProps {
-    image: ThumbnailProps;
-}
-
-const RowItem: React.FC<RowItemProps> = ({ image }) => {
-    const [isOpen, setOpen] = React.useState(false);
-    const { image: url, alt: name } = image;
-    const linkRef = React.useRef(null);
-
-    return (
-        <>
-            <Toolbar
-                label={
-                    // eslint-disable-next-line jsx-a11y/anchor-is-valid
-                    <Link ref={linkRef} typography={Typography.subtitle1} onClick={() => setOpen(true)}>
-                        {name}
-                    </Link>
-                }
-            />
-            <Lightbox
-                closeButtonProps={{ label: 'Close' }}
-                isOpen={isOpen}
-                onClose={() => setOpen(false)}
-                parentElement={linkRef}
-            >
-                <Slideshow
-                    activeIndex={0}
-                    fillHeight
-                    slideshowControlsProps={{
-                        nextButtonProps: { label: 'Next' },
-                        previousButtonProps: { label: 'Previous' },
-                    }}
-                >
-                    <SlideshowItem key={name}>
-                        <ImageBlock align={Alignment.center} alt={name} fillHeight image={url} />
-                    </SlideshowItem>
-                </Slideshow>
-            </Lightbox>
-        </>
-    );
+export default {
+    title: 'LumX components/lightbox/Lightbox',
+    component: Lightbox,
+    args: Lightbox.defaultProps,
+    argTypes: {
+        children: { control: false },
+    },
+    render: (props: any) => {
+        const buttonRef = React.useRef<HTMLButtonElement>(null);
+        const [isOpen, close, open] = useBooleanState(true);
+        return (
+            <>
+                <Button ref={buttonRef} onClick={open}>
+                    Open lightbox
+                </Button>
+                <Lightbox {...props} parentElement={buttonRef} isOpen={isOpen} onClose={close} />
+            </>
+        );
+    },
 };
 
-export const Focus = () => {
-    const [textFieldValue, setTextFieldValue] = React.useState('');
-    const images: ThumbnailProps[] = thumbnailsKnob(12);
+/**
+ * Base LightBox with image block
+ */
+export const ImageBlock_ = {
+    args: {
+        children: <ImageBlock align={Alignment.center} alt="" fillHeight image={LANDSCAPE_IMAGES.landscape1} />,
+    },
+};
 
-    return (
-        <>
-            <TextField
-                value={textFieldValue}
-                onChange={setTextFieldValue}
-                className="lumx-spacing-margin-vertical-big"
-            />
-            {images.map((image, index) => {
-                const itemPosition = index + 1;
-                return (
-                    <div key={itemPosition}>
-                        <RowItem image={image} />
-                        <Divider />
-                    </div>
-                );
-            })}
-        </>
-    );
+/**
+ * LightBox with image block and close button
+ */
+export const WithCloseButton = {
+    args: {
+        ...ImageBlock_.args,
+        closeButtonProps: { label: 'Close' },
+    },
 };

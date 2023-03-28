@@ -1,4 +1,4 @@
-import { select } from '@storybook/addon-knobs';
+import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
 
 const avatar1 = '/demo-assets/avatar1.jpg';
 const avatar2 = '/demo-assets/avatar2.jpg';
@@ -19,23 +19,13 @@ export const AVATAR_IMAGES = { avatar1, avatar2, avatar3, avatar4 };
 export const SQUARE_IMAGES = { square1, square2 };
 export const LANDSCAPE_IMAGES = { landscape1, landscape1s200, landscape2, landscape3 };
 export const PORTRAIT_IMAGES = { portrait1, portrait1s200, portrait2, portrait3 };
-
 export const IMAGES = { ...LANDSCAPE_IMAGES, ...PORTRAIT_IMAGES, ...SQUARE_IMAGES, ...AVATAR_IMAGES };
 
-export const avatarImageKnob = (name = 'Avatar', value = Object.values(AVATAR_IMAGES)[0], groupId?: string) =>
-    select(name, AVATAR_IMAGES, value, groupId);
-
-export const landscapeImageKnob = (name = 'Image', value = Object.values(LANDSCAPE_IMAGES)[0], groupId?: string) =>
-    select(name, LANDSCAPE_IMAGES, value, groupId);
-
-export const portraitImageKnob = (name = 'Image', value = Object.values(PORTRAIT_IMAGES)[0], groupId?: string) =>
-    select(name, PORTRAIT_IMAGES, value, groupId);
-
-export const squareImageKnob = (name = 'Image', value = Object.values(SQUARE_IMAGES)[0], groupId?: string) =>
-    select(name, SQUARE_IMAGES, value, groupId);
-
-export const imageKnob = (name = 'Image', value = Object.values(IMAGES)[0], groupId?: string) =>
-    select(name, IMAGES, value, groupId);
+export const avatarImageArgType = getSelectArgType(AVATAR_IMAGES);
+export const squareImageArgType = getSelectArgType(SQUARE_IMAGES);
+export const landscapeImageArgType = getSelectArgType(LANDSCAPE_IMAGES);
+export const portraitImageArgType = getSelectArgType(PORTRAIT_IMAGES);
+export const imageArgType = getSelectArgType(IMAGES);
 
 type Size = { width: number; height: number };
 

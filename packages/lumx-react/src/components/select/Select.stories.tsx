@@ -1,13 +1,15 @@
 import { mdiBullhornOutline } from '@lumx/icons/';
 import { List, ListItem, Select, Size, TextField } from '@lumx/react';
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
-import { text } from '@storybook/addon-knobs';
 import noop from 'lodash/noop';
 import range from 'lodash/range';
 import React, { SyntheticEvent, useState } from 'react';
 import { SelectVariant } from './constants';
 
-export default { title: 'LumX components/select/Select' };
+export default {
+    title: 'LumX components/select/Select',
+    component: Select,
+};
 
 const CHOICES = ['First item', 'Second item', 'Third item'];
 
@@ -112,8 +114,8 @@ export const DisabledSelect = ({ theme }: any) => {
         <Select
             isOpen={false}
             value=""
-            label={text('label', 'My select')}
-            placeholder={text('placeholder', 'Placeholder')}
+            label="My select"
+            placeholder="Placeholder"
             theme={theme}
             onInputClick={noop}
             onDropdownClose={noop}
@@ -204,13 +206,7 @@ export const SelectWithAnotherField = ({ theme }: any) => {
 
     return (
         <>
-            <TextField
-                value={text('Value', 'myvalue')}
-                label={text('Label', 'I am the label')}
-                placeholder={text('Placeholder', 'ex: A value')}
-                theme={theme}
-                onChange={noop}
-            />
+            <TextField value="myvalue" label="I am the label" placeholder="ex: A value" theme={theme} onChange={noop} />
             <Select
                 style={{ width: '100%' }}
                 isOpen={isOpen}
@@ -255,8 +251,8 @@ export const SelectWithNoData = ({ theme }: any) => {
         <Select
             isOpen={isOpen}
             value=""
-            label={text('label', 'My select')}
-            placeholder={text('placeholder', 'Placeholder')}
+            label="My select"
+            placeholder="Placeholder"
             theme={theme}
             onInputClick={toggleSelect}
             onDropdownClose={closeSelect}
@@ -277,10 +273,10 @@ export const SelectWithHelper = ({ theme }: any) => {
         <Select
             isOpen={isOpen}
             value=""
-            label={text('label', 'Country')}
-            placeholder={text('placeholder', 'Your country')}
+            label="Country"
+            placeholder="Your country"
             theme={theme}
-            helper={text('helper', 'This is used in analytics')}
+            helper="This is used in analytics"
             onInputClick={toggleSelect}
             onDropdownClose={closeSelect}
         >
@@ -302,14 +298,14 @@ export const SelectWithError = ({ theme }: any) => {
         <Select
             isOpen={isOpen}
             value=""
-            label={text('label', 'Country')}
-            placeholder={text('placeholder', 'Your country')}
+            label="Country"
+            placeholder="Your country"
             theme={theme}
-            helper={text('helper', 'This is used in analytics')}
+            helper="This is used in analytics"
             onInputClick={toggleSelect}
             onDropdownClose={closeSelect}
             hasError
-            error={text('Error', 'Please select something :)')}
+            error="Please select something :)"
         >
             <List theme={theme} isClickable>
                 {CHOICES.map((choice) => (
@@ -329,10 +325,10 @@ export const SelectSuccess = ({ theme }: any) => {
         <Select
             isOpen={isOpen}
             value=""
-            label={text('label', 'Country')}
-            placeholder={text('placeholder', 'Your country')}
+            label="Country"
+            placeholder="Your country"
             theme={theme}
-            helper={text('helper', 'This is used in analytics')}
+            helper="This is used in analytics"
             onInputClick={toggleSelect}
             onDropdownClose={closeSelect}
             isValid

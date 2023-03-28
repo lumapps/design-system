@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { AspectRatio, ImageBlock, Slides, SlideshowControls, SlideshowItem } from '@lumx/react';
-import { thumbnailsKnob } from '@lumx/react/stories/knobs/thumbnailsKnob';
 import { useFocusWithin } from '@lumx/react/hooks/useFocusWithin';
+import { LANDSCAPE_IMAGES } from '@lumx/react/stories/controls/image';
 
 export default { title: 'LumX components/slideshow/Slideshow controls' };
 
@@ -31,9 +31,7 @@ export const Simple = () => {
     );
 };
 
-export const ControllingSlideshow = ({ theme }: any) => {
-    const images = thumbnailsKnob(6);
-
+export const ControllingSlideshow = ({ images = Object.values(LANDSCAPE_IMAGES), theme }: any) => {
     const {
         activeIndex: currentIndex,
         slideshowId,
@@ -97,12 +95,12 @@ export const ControllingSlideshow = ({ theme }: any) => {
                 </div>
             }
         >
-            {images.map(({ image, alt }, index) => (
+            {images.map((image: string, index: number) => (
                 <SlideshowItem key={`${image}-${index}`}>
                     <ImageBlock
                         thumbnailProps={{ aspectRatio: AspectRatio.horizontal, loading: 'eager' }}
                         image={image}
-                        alt={alt}
+                        alt=""
                         theme={theme}
                     />
                 </SlideshowItem>

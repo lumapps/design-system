@@ -1,16 +1,32 @@
 import React, { useRef } from 'react';
 
 import { mdiAccount, mdiOpenInNew } from '@lumx/icons';
-import { Icon, ListDivider, ListSubheader, Size } from '@lumx/react';
-import { action } from '@storybook/addon-actions';
-import { select, text } from '@storybook/addon-knobs';
+import { Icon, ListDivider, ListProps, ListSubheader, Size } from '@lumx/react';
+import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
 
 import { List } from './List';
 import { ListItem } from './ListItem';
+import ListItemStories from './ListItem.stories';
 
-export default { title: 'LumX components/list/List' };
+export default {
+    title: 'LumX components/list/List',
+    component: List,
+    args: List.defaultProps,
+    argTypes: {
+        itemPadding: getSelectArgType<ListProps['itemPadding']>([Size.big, Size.huge]),
+        onListItemSelected: { action: true },
+        'children.onItemSelected': { action: true },
+        'children.size': ListItemStories.argTypes.size,
+    },
+};
 
-export const KeyboardNavigation = () => {
+const CustomListItem = (props: any) => <ListItem {...props}>Custom list item</ListItem>;
+
+export const KeyboardNavigation = ({
+    'children.onItemSelected': childrenOnItemSelected,
+    'children.size': childrenSize,
+    ...props
+}: any) => {
     const listRef = useRef<any>();
     const firstItemRef = useRef<any>();
 
@@ -22,10 +38,6 @@ export const KeyboardNavigation = () => {
         return firstItemRef.current?.focus();
     };
 
-    const CustomListItem = () => {
-        return <ListItem onItemSelected={action('onItemSelected custom list item')}>Custom list item</ListItem>;
-    };
-
     return (
         <>
             <button type="button" onClick={focusList}>
@@ -34,27 +46,31 @@ export const KeyboardNavigation = () => {
             <button type="button" onClick={focusFirsItem}>
                 focus first item
             </button>
-            <List onListItemSelected={action('List onListItemSelected')} ref={listRef}>
-                <ListItem linkRef={firstItemRef} onItemSelected={action('onItemSelected: Clickable item 1')}>
+            <List ref={listRef} {...props}>
+                <ListItem size={childrenSize} linkRef={firstItemRef} onItemSelected={childrenOnItemSelected}>
                     Clickable item 1
                 </ListItem>
                 <ListDivider />
-                <ListItem linkProps={{ href: '#' }}>Link item 1</ListItem>
+                <ListItem size={childrenSize} linkProps={{ href: '#' }}>
+                    Link item 1
+                </ListItem>
                 <>
-                    <ListItem>Non clickable (=non navigable) item</ListItem>
+                    <ListItem size={childrenSize}>Non clickable (=non navigable) item</ListItem>
                     <ListSubheader>Header</ListSubheader>
-                    <ListItem linkProps={{ href: '#' }}>Link item 2</ListItem>
+                    <ListItem size={childrenSize} linkProps={{ href: '#' }}>
+                        Link item 2
+                    </ListItem>
                     <ListSubheader>Header</ListSubheader>
                 </>
-                <ListItem linkProps={{ href: '#' }} isDisabled>
+                <ListItem size={childrenSize} linkProps={{ href: '#' }} isDisabled>
                     Disabled link item
                 </ListItem>
-                <ListItem onItemSelected={action('onItemSelected')} isDisabled>
+                <ListItem size={childrenSize} onItemSelected={childrenOnItemSelected} isDisabled>
                     Disabled button item
                 </ListItem>
-                <CustomListItem />
+                <CustomListItem size={childrenSize} onItemSelected={childrenOnItemSelected} />
                 {[
-                    <ListItem key="1" linkProps={{ href: '#' }}>
+                    <ListItem size={childrenSize} key="1" linkProps={{ href: '#' }}>
                         Link item 4
                     </ListItem>,
                 ]}
@@ -68,74 +84,33 @@ export const KeyboardNavigation = () => {
     );
 };
 
-export const WithItemPadding = () => {
-    const listItemSize = select('list item size', [Size.tiny, Size.regular, Size.big, Size.huge], Size.big);
-    const listItem = (
+export const AsLink = () => (
+    <List>
+        <ListItem
+            before={<Icon icon={mdiAccount} />}
+            className="lumx-color-background-dark-L6"
+            linkProps={{ href: '#' }}
+        >
+            <span>My first link</span>
+        </ListItem>
         <ListItem
             className="lumx-color-background-dark-L6"
-            size={listItemSize}
-            linkProps={{ href: text('link href', '#') }}
+            after={<Icon icon={mdiOpenInNew} />}
+            linkProps={{ href: 'https://example.com', target: '_blank' }}
         >
-            <div>Two-line item</div>
-            <div className="lumx-color-font-dark-L2">Secondary text</div>
+            <span>Google</span>
         </ListItem>
-    );
-    return (
-        <>
-            Default item padding:
-            <List>
-                {listItem}
-                {listItem}
-            </List>
-            Big item padding:
-            <List itemPadding={Size.big}>
-                {listItem}
-                {listItem}
-            </List>
-            Huge item padding:
-            <List itemPadding={Size.huge}>
-                {listItem}
-                {listItem}
-            </List>
-        </>
-    );
-};
+    </List>
+);
 
-export const AsLink = () => {
-    return (
-        <div className="demo-grid">
-            <List>
-                <ListItem
-                    before={<Icon icon={mdiAccount} />}
-                    className="lumx-color-background-dark-L6"
-                    linkProps={{ href: '#' }}
-                >
-                    <span>My first link</span>
-                </ListItem>
-                <ListItem
-                    className="lumx-color-background-dark-L6"
-                    after={<Icon icon={mdiOpenInNew} />}
-                    linkProps={{ href: 'http://www.google.com', target: '_blank' }}
-                >
-                    <span>Google</span>
-                </ListItem>
-            </List>
-        </div>
-    );
-};
-
-export const WithCustomChildren = () => {
-    const CustomListItem = () => {
-        return <ListItem onItemSelected={action('onItemSelected custom list item')}>Custom list item</ListItem>;
-    };
-
-    return (
-        <div className="demo-grid">
-            <List>
-                <CustomListItem />
-                <CustomListItem />
-                <CustomListItem />
-            </List>
-        </div>
-    );
-};
+export const WithCustomChildren = ({
+    'children.onItemSelected': childrenOnItemSelected,
+    'children.size': childrenSize,
+    ...props
+}: any) => (
+    <List {...props}>
+        <CustomListItem size={childrenSize} onItemSelected={childrenOnItemSelected} />
+        <CustomListItem size={childrenSize} onItemSelected={childrenOnItemSelected} />
+        <CustomListItem size={childrenSize} onItemSelected={childrenOnItemSelected} />
+    </List>
+);

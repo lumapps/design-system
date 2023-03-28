@@ -1,62 +1,100 @@
-import React from 'react';
+import { List, ListItemSize, Size } from '@lumx/react';
 
-import { Size } from '@lumx/react';
-import { select, text } from '@storybook/addon-knobs';
-import { action } from '@storybook/addon-actions';
-
+import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
+import { CustomLink } from '@lumx/react/stories/utils/CustomLink';
+import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
+import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
 import { ListItem } from './ListItem';
 
-export default { title: 'LumX components/list/ListItem' };
+const sizes: ListItemSize[] = [Size.tiny, Size.regular, Size.big];
 
-export const NonClickable = ({ theme }: any) => <ListItem theme={theme}>{text('text', 'Text')}</ListItem>;
+export default {
+    title: 'LumX components/list/ListItem',
+    component: ListItem,
+    args: ListItem.defaultProps,
+    argTypes: {
+        size: getSelectArgType(sizes),
+    },
+    decorators: [withWrapper({}, List)],
+};
 
-export const Link = ({ theme }: any) => (
-    <ListItem theme={theme} linkProps={{ href: '#' }}>
-        {text('text', 'Text')}
-    </ListItem>
-);
+/**
+ * Default list item with text
+ */
+export const NonClickable = {
+    args: { children: 'List item' },
+};
 
-export const Button = ({ theme }: any) => (
-    <ListItem theme={theme} onItemSelected={action('onItemSelected')}>
-        {text('text', 'Text')}
-    </ListItem>
-);
+/**
+ * Button list item (onClick)
+ */
+export const Button = {
+    args: {
+        children: 'List item button',
+    },
+    argTypes: {
+        onItemSelected: { action: true },
+    },
+};
 
-export const LinkDisabled = ({ theme }: any) => (
-    <ListItem theme={theme} linkProps={{ href: '#' }} isDisabled>
-        {text('text', 'Text')}
-    </ListItem>
-);
+/**
+ * Disabled button
+ */
+export const ButtonDisabled = {
+    ...Button,
+    args: {
+        ...Button.args,
+        isDisabled: true,
+    },
+};
 
-export const ButtonDisabled = ({ theme }: any) => (
-    <ListItem theme={theme} onItemSelected={action('onItemSelected')} isDisabled>
-        {text('text', 'Text')}
-    </ListItem>
-);
+/**
+ * Link list item (href)
+ */
+export const Link = {
+    args: {
+        linkProps: { href: '#' },
+        children: 'List item link',
+    },
+};
 
-export const Selected = ({ theme }: any) => (
-    <ListItem theme={theme} linkProps={{ href: '#' }} isSelected>
-        {text('text', 'Text')}
-    </ListItem>
-);
+/**
+ * Disabled link
+ */
+export const LinkDisabled = {
+    args: {
+        ...Link.args,
+        isDisabled: true,
+    },
+};
 
-export const Highlighted = ({ theme }: any) => (
-    <ListItem theme={theme} linkProps={{ href: '#' }} isHighlighted>
-        {text('text', 'Text')}
-    </ListItem>
-);
+/**
+ * Inject a custom link component
+ */
+export const CustomLink_ = {
+    args: {
+        linkAs: CustomLink,
+        children: 'List item custom link',
+    },
+};
 
-export const Sizes = ({ theme }: any) => (
-    <ListItem theme={theme} size={select('size', [Size.tiny, Size.regular, Size.big, Size.huge], Size.tiny)}>
-        {text('text', 'Text')}
-    </ListItem>
-);
-
-const CustomLink: React.FC = ({ children, ...props }) =>
-    React.createElement('a', { ...props, style: { color: 'red' }, href: 'http://google.com' }, children);
-
-export const WithCustomLink = ({ theme }: any) => (
-    <ListItem theme={theme} linkAs={CustomLink}>
-        My custom link
-    </ListItem>
-);
+/**
+ * Combination of size and states
+ */
+export const SizeAndStates = {
+    ...Button,
+    decorators: [
+        withWrapper({}, List),
+        withCombinations({
+            combinations: {
+                rows: { key: 'size', options: sizes },
+                cols: {
+                    Default: {},
+                    Disabled: { isDisabled: true },
+                    Selected: { isSelected: true },
+                    Highlighted: { isHighlighted: true },
+                },
+            },
+        }),
+    ],
+};
