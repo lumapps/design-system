@@ -1,156 +1,164 @@
-import React, { Fragment } from 'react';
-import { mdiSend } from '@lumx/icons';
-import { Button, ColorPalette, IconButton, Text } from '@lumx/react';
-import { squareImageKnob } from '@lumx/react/stories/knobs/image';
-import { buttonSize } from '@lumx/react/stories/knobs/buttonKnob';
-import { emphasis } from '@lumx/react/stories/knobs/emphasisKnob';
-import { boolean, select, text } from '@storybook/addon-knobs';
+import React from 'react';
+import { Button, ButtonSize, Emphasis, Size, Text } from '@lumx/react';
+import { iconArgType } from '@lumx/react/stories/controls/icons';
+import { colorArgType } from '@lumx/react/stories/controls/color';
+import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
+import { mdiAccountBox } from '@lumx/icons';
 
-export default { title: 'LumX components/button/Button' };
+const buttonSizes = [Size.m, Size.s];
+const buttonEmphasis = [Emphasis.low, Emphasis.medium, Emphasis.high];
 
-const DEFAULT_PROPS = Button.defaultProps as any;
-
-export const SimpleButton = ({ theme }: any) => {
-    return (
-        <Button
-            aria-pressed={boolean('isSelected', Boolean(DEFAULT_PROPS.isSelected))}
-            emphasis={emphasis('Emphasis', DEFAULT_PROPS.emphasis)}
-            theme={theme}
-            rightIcon={select('Right icon', { none: undefined, mdiSend }, undefined)}
-            leftIcon={select('Left icon', { none: undefined, mdiSend }, undefined)}
-            size={buttonSize()}
-            isSelected={boolean('isSelected', Boolean(DEFAULT_PROPS.isSelected))}
-            isDisabled={boolean('isDisabled', Boolean(DEFAULT_PROPS.isDisabled))}
-            color={select('color', ColorPalette, DEFAULT_PROPS.color)}
-            href={text('Button link', '')}
-            hasBackground={boolean('hasBackground', Boolean(DEFAULT_PROPS.hasBackground))}
-        >
-            {text('Button content', 'Simple button')}
-        </Button>
-    );
+export default {
+    title: 'LumX components/button/Button',
+    component: Button,
+    argTypes: {
+        isSelected: { control: 'boolean' },
+        isDisabled: { control: 'boolean' },
+        hasBackground: { control: 'boolean' },
+        emphasis: getSelectArgType(buttonEmphasis),
+        size: getSelectArgType<ButtonSize>(buttonSizes),
+        rightIcon: iconArgType,
+        leftIcon: iconArgType,
+        color: colorArgType,
+        onClick: { action: true },
+    },
+    args: Button.defaultProps,
 };
-
-export const SimpleButtonWithTruncatedText = ({ theme }: any) => {
-    const buttonText =
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Potenti nullam ac tortor vitae. Lorem ipsum dolor sit amet. Diam sollicitudin tempor id eu nisl nunc mi ipsum. Elementum facilisis leo vel fringilla est ullamcorper eget nulla. Mollis aliquam ut porttitor leo a diam sollicitudin tempor. Ultrices tincidunt arcu non sodales neque sodales.';
-    return (
-        <Button
-            aria-pressed={boolean('isSelected', Boolean(DEFAULT_PROPS.isSelected))}
-            emphasis={emphasis('Emphasis', DEFAULT_PROPS.emphasis)}
-            theme={theme}
-            rightIcon={select('Right icon', { none: undefined, mdiSend }, undefined)}
-            leftIcon={select('Left icon', { none: undefined, mdiSend }, undefined)}
-            size={buttonSize()}
-            isSelected={boolean('isSelected', Boolean(DEFAULT_PROPS.isSelected))}
-            isDisabled={boolean('isDisabled', Boolean(DEFAULT_PROPS.isDisabled))}
-            color={select('color', ColorPalette, DEFAULT_PROPS.color)}
-            href={text('Button link', '')}
-            hasBackground={boolean('hasBackground', Boolean(DEFAULT_PROPS.hasBackground))}
-            fullWidth
-            title={buttonText}
-        >
-            <Text as="span" truncate>
-                {text('Button content', buttonText)}
-            </Text>
-        </Button>
-    );
-};
-
-export const WithHref = () => <Button href="https://google.com">Button with redirection</Button>;
-
-export const Disabled = () => <Button isDisabled>Disabled button</Button>;
-
-export const DisabledWithHref = () => (
-    <Button href="https://google.com" isDisabled>
-        Disabled button with redirection
-    </Button>
-);
-
-export const IconButtonWithImage = ({ theme }: any) => (
-    <div>
-        <IconButton
-            theme={theme}
-            label="Image label"
-            image={squareImageKnob()}
-            size={buttonSize()}
-            hasBackground={boolean('Has background', false)}
-            emphasis={emphasis('Emphasis', DEFAULT_PROPS.emphasis)}
-            color={select('color', ColorPalette, DEFAULT_PROPS.color)}
-        />
-    </div>
-);
-
-export const FullWidthButton = () => <Button fullWidth>Full width button</Button>;
 
 /**
- * Template story to generate all variants for button and icon button.
+ * Default button
  */
-const AllVariantTemplate = (Component: any, props: any) => () => {
-    // Major variants.
-    const variants = {
-        'Default (emphasis high)': {},
-        'Full width': { fullWidth: true },
-        'Emphasis medium': { emphasis: 'medium' },
-        'Emphasis low': { emphasis: 'low' },
-        'Has background (emphasis low)': { emphasis: 'low', hasBackground: true },
-        'Has background + Full width': { emphasis: 'low', hasBackground: true, fullWidth: true },
-    } as const;
+export const Default = {
+    args: {
+        children: 'Default button',
+    },
+};
 
-    // Color modifiers.
-    const colorModifiers = {
-        Default: {},
-        'Color: light': { color: 'light' },
-        'Color: dark': { color: 'dark' },
-        'Color: red': { color: 'red' },
-        'Theme: dark': { theme: 'dark' },
-    } as const;
+/**
+ * Disabled button
+ */
+export const Disabled = {
+    args: {
+        isDisabled: true,
+        children: 'Default button (disabled)',
+    },
+};
 
-    // State modifiers.
-    const stateModifiers = {
-        'Default state': {},
-        Selected: { isSelected: true },
-        Hovered: { isHovered: true },
-        Focused: { isFocused: true },
-        Active: { isActive: true },
-        Disabled: { isDisabled: true },
-    };
+/**
+ * All combinations of size, emphasis and hasBackground
+ */
+export const SizeEmphasisAndBackground = {
+    args: {
+        children: 'Button',
+    },
+    decorators: [
+        withCombinations({
+            tableStyle: { background: 'lightgray' },
+            cellStyle: { padding: '10px' },
+            combinations: {
+                rows: { medium: { size: Size.m }, small: { size: Size.s } },
+                cols: { key: 'emphasis', options: buttonEmphasis },
+                sections: {
+                    'hasBackground: false': { hasBackground: false },
+                    'hasBackground: true': { hasBackground: true },
+                },
+            },
+        }),
+    ],
+};
 
-    return (
-        <div style={{ background: 'lightgray' }}>
-            {Object.entries(stateModifiers).map(([stateKey, state]) => (
-                <Fragment key={stateKey}>
-                    <h2>{stateKey}</h2>
-                    <table style={{ width: '100%' }}>
-                        <tr>
-                            <td style={{ whiteSpace: 'nowrap', width: 200 }} />
-                            {Object.keys(colorModifiers).map((colorKey) => (
-                                <td key={colorKey}>{colorKey}</td>
-                            ))}
-                        </tr>
+/**
+ * Setting a href to transform the button into a link.
+ */
+export const LinkButton = {
+    args: {
+        href: 'https://example.com',
+        children: 'Link button',
+    },
+};
 
-                        {Object.entries(variants).map(([variantKey, variant]: any) => (
-                            <tr key={variantKey}>
-                                <td>{variantKey}</td>
-                                {Object.entries(colorModifiers).map(([colorKey, color]) => (
-                                    <td key={colorKey}>
-                                        <Component {...props} {...variant} {...color} {...state} />
-                                    </td>
-                                ))}
-                            </tr>
-                        ))}
-                    </table>
-                </Fragment>
-            ))}
-        </div>
-    );
+/**
+ * Setting a href to transform the button into a link.
+ */
+export const LinkButtonDisabled = {
+    args: {
+        href: 'https://example.com',
+        children: 'Link button (disabled)',
+        isDisabled: true,
+    },
+};
+
+/**
+ * Full width button
+ */
+export const FullWidth = {
+    args: {
+        fullWidth: true,
+        children: 'Full width button',
+    },
+};
+
+/**
+ * Full width button with long text truncated
+ */
+export const FullWidthTruncated = {
+    argTypes: {
+        children: { control: false },
+    },
+    args: {
+        fullWidth: true,
+        children: (
+            <Text as="span" truncate>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Potenti nullam ac tortor vitae. Lorem ipsum dolor sit amet. Diam sollicitudin
+                tempor id eu nisl nunc mi ipsum. Elementum facilisis leo vel fringilla est ullamcorper eget nulla.
+                Mollis aliquam ut porttitor leo a diam sollicitudin tempor. Ultrices tincidunt arcu non sodales neque
+                sodales.
+            </Text>
+        ),
+    },
 };
 
 /**
  * Check button style variations (color, states, emphasis, etc.)
  */
-export const ButtonVariations = AllVariantTemplate(Button, { children: 'Button' });
-
-/**
- * Check icon button style variations (color, states, emphasis, etc.)
- */
-export const IconButtonVariations = AllVariantTemplate(IconButton, { label: 'Send', icon: mdiSend });
+export const ButtonVariations = {
+    args: {
+        children: 'Button',
+        rightIcon: mdiAccountBox,
+    },
+    decorators: [
+        withCombinations({
+            tableStyle: { background: 'lightgray', width: '100%' },
+            firstColStyle: { whiteSpace: 'nowrap', width: '1%' },
+            combinations: {
+                // Colors
+                rows: {
+                    Default: {},
+                    'Color: red': { color: 'red' },
+                    'Theme: dark': { theme: 'dark' },
+                    'Theme: dark & color: green': { theme: 'dark', color: 'green' },
+                },
+                // States
+                cols: {
+                    'Default state': {},
+                    Selected: { isSelected: true },
+                    Hovered: { isHovered: true },
+                    Focused: { isFocused: true },
+                    Active: { isActive: true },
+                    Disabled: { isDisabled: true },
+                },
+                // Emphasis/Background
+                sections: {
+                    'Default (emphasis high)': {},
+                    'Emphasis medium': { emphasis: 'medium' },
+                    'Emphasis low': { emphasis: 'low' },
+                    'Full width': { fullWidth: true },
+                    'Has background (emphasis low)': { emphasis: 'low', hasBackground: true },
+                    'Has background + Full width': { emphasis: 'low', hasBackground: true, fullWidth: true },
+                },
+            },
+        }),
+    ],
+};

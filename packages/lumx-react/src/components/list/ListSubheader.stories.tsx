@@ -1,8 +1,11 @@
-import React from 'react';
-
 import { ListSubheader } from '@lumx/react';
-import { text } from '@storybook/addon-knobs';
 
-export default { title: 'LumX components/list/ListSubheader' };
+export default {
+    title: 'LumX components/list/ListSubheader',
+    component: ListSubheader,
+    args: ListSubheader.defaultProps,
+};
 
-export const Default = () => <ListSubheader>{text('text', 'Text')}</ListSubheader>;
+export const Default = {
+    args: { children: 'List subheader text' },
+};

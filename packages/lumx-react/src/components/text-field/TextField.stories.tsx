@@ -1,169 +1,135 @@
 import React from 'react';
 import { mdiTranslate } from '@lumx/icons/';
-import { Emphasis, IconButton, Size, TextField } from '@lumx/react';
-import { boolean, number, text } from '@storybook/addon-knobs';
-import { buttonSize } from '@lumx/react/stories/knobs/buttonKnob';
-import { emphasis } from '@lumx/react/stories/knobs/emphasisKnob';
+import { Chip, IconButton, TextField } from '@lumx/react';
+import { withValueOnChange } from '@lumx/react/stories/decorators/withValueOnChange';
+import { loremIpsum } from '@lumx/react/stories/utils/lorem';
 
-export default { title: 'LumX components/text-field/TextField' };
-
-export const TextField_ = ({ theme }: any) => {
-    const [value, onChange] = React.useState('Value');
-    return (
-        <TextField
-            value={value}
-            onChange={onChange}
-            label={text('Label', 'Label')}
-            placeholder={text('Placeholder', 'Placeholder')}
-            theme={theme}
-        />
-    );
+export default {
+    title: 'LumX components/text-field/TextField',
+    component: TextField,
+    args: TextField.defaultProps,
+    argTypes: {
+        clearButtonProps: { control: false },
+        chips: { control: false },
+        afterElement: { control: false },
+    },
+    decorators: [withValueOnChange({})],
 };
 
-export const Clearable = ({ theme }: any) => {
-    const [value, onChange] = React.useState('Value');
-    return (
-        <TextField
-            value={value}
-            onChange={onChange}
-            label={text('Label', 'Label')}
-            clearButtonProps={{ label: 'Clear' }}
-            theme={theme}
-        />
-    );
+/**
+ * Default text field
+ */
+export const Default = {
+    args: {
+        value: '',
+    },
 };
 
-export const States = ({ theme }: any) => {
-    const [value1, onChange1] = React.useState('Value');
-    const [value2, onChange2] = React.useState('Value');
-    return (
-        <>
-            <TextField
-                label="Has error"
-                hasError
-                error="Error message"
-                theme={theme}
-                value={value1}
-                onChange={onChange1}
-            />
-            <TextField label="Is valid" isValid theme={theme} value={value2} onChange={onChange2} />
-        </>
-    );
+/**
+ * With placeholder
+ */
+export const Placeholder = {
+    args: {
+        value: '',
+        placeholder: 'Texfield placeholder',
+    },
 };
 
-export const NumberField = ({ theme }: any) => {
-    const [value, onChange] = React.useState('0');
-    return <TextField value={value} onChange={onChange} label={text('Label', 'Label')} theme={theme} type="number" />;
+/**
+ * With label and helper
+ */
+export const LabelAndHelper = {
+    args: {
+        ...Default.args,
+        label: 'Textfield label',
+        helper: loremIpsum('tiny'),
+    },
 };
 
-export const WithHelper = ({ theme }: any) => {
-    const [value, onChange] = React.useState('Value');
-    return (
-        <TextField
-            value={value}
-            onChange={onChange}
-            label={text('Label', 'Label')}
-            placeholder={text('Placeholder', 'Placeholder')}
-            theme={theme}
-            helper={<span>{text('Helper', 'Helper')}</span>}
-        />
-    );
+/**
+ * With clear button
+ */
+export const Clearable = {
+    args: {
+        value: 'Some value',
+        clearButtonProps: { label: 'Clear' },
+    },
 };
 
-export const TextArea = ({ theme }: any) => {
-    const [value, setValue] = React.useState('Value');
-    return (
-        <TextField
-            value={value}
-            label={text('Label', 'Label')}
-            placeholder={text('Placeholder', 'Placeholder')}
-            multiline
-            minimumRows={number('Minimum number of rows', 1, { min: 0, max: 100 })}
-            theme={theme}
-            onChange={setValue}
-            helper={<span>{text('Helper', 'Helper')}</span>}
-        />
-    );
+/**
+ * As number field
+ */
+export const NumberField = {
+    args: {
+        value: '0',
+        type: 'number',
+    },
 };
 
-export const TextAreaWithManyLines = ({ theme }: any) => {
-    const myvalue = `I
-am
-a
-multiline
-text`;
-    const [value, setValue] = React.useState(myvalue);
-    return (
-        <TextField
-            value={value}
-            label={text('Label', 'Label')}
-            placeholder={text('Placeholder', 'Placeholder')}
-            multiline
-            minimumRows={number('Minimum number of rows', 2, { min: 0, max: 100 })}
-            theme={theme}
-            onChange={setValue}
-            helper={<span>{text('Helper', 'Helper')}</span>}
-        />
-    );
+/**
+ * Multiline textarea
+ */
+export const TextareaField = {
+    args: {
+        value: loremIpsum('tiny'),
+        multiline: true,
+        minimumRows: 2,
+    },
 };
 
-export const WithAfterElement = ({ theme }: any) => {
-    const [value, onChange] = React.useState('Value');
-    const multiline = boolean('Multiline', true);
-    const minimumRows = number('Minimum number of rows', 2, { min: 0, max: 100 });
-    const isClearable = boolean('Clearable', true);
-    const hasError = boolean('Has error', true);
-    return (
-        <TextField
-            value={value}
-            label={text('Label', 'Label')}
-            placeholder={text('Placeholder', 'Placeholder')}
-            theme={theme}
-            onChange={onChange}
-            multiline={multiline}
-            minimumRows={minimumRows}
-            hasError={hasError}
-            maxLength={200}
-            clearButtonProps={isClearable ? { label: 'Clear' } : undefined}
-            helper={<span>{text('Helper', 'Helper')}</span>}
-            afterElement={
-                <IconButton
-                    label="foo"
-                    emphasis={emphasis('Button emphasis', Emphasis.medium, 'After element')}
-                    size={buttonSize('Button size', Size.s, 'After element')}
-                    icon={mdiTranslate}
-                />
-            }
-        />
-    );
+/**
+ * Error state
+ */
+export const Error = {
+    args: {
+        ...LabelAndHelper.args,
+        hasError: true,
+        error: 'Error message',
+    },
 };
 
-export const WithMaxLengthNoLabel = ({ theme }: any) => {
-    const [value, onChange] = React.useState('Value');
-    const multiline = boolean('Multiline', true);
-    const minimumRows = number('Minimum number of rows', 2, { min: 0, max: 100 });
-    const isClearable = boolean('Clearable', true);
-    const hasError = boolean('Has error', true);
-    return (
-        <TextField
-            value={value}
-            placeholder={text('Placeholder', 'Placeholder')}
-            theme={theme}
-            onChange={onChange}
-            multiline={multiline}
-            minimumRows={minimumRows}
-            hasError={hasError}
-            maxLength={200}
-            clearButtonProps={isClearable ? { label: 'Clear' } : undefined}
-            helper={<span>{text('Helper', 'Helper')}</span>}
-            afterElement={
-                <IconButton
-                    label="foo"
-                    emphasis={emphasis('Button emphasis', Emphasis.medium, 'After element')}
-                    size={buttonSize('Button size', Size.s, 'After element')}
-                    icon={mdiTranslate}
-                />
-            }
-        />
-    );
+/**
+ * Valid state
+ */
+export const Valid = {
+    args: {
+        ...LabelAndHelper.args,
+        isValid: true,
+    },
+};
+
+/**
+ * Max length with character counter
+ */
+export const MaxLength = {
+    args: {
+        ...LabelAndHelper.args,
+        value: 'Textfield value',
+        maxLength: 195,
+    },
+};
+
+/**
+ * Custom element at the end
+ */
+export const WithAfterElement = {
+    args: {
+        value: '',
+        afterElement: <IconButton label="translate" emphasis="medium" size="s" icon={mdiTranslate} />,
+    },
+};
+
+/**
+ * Chips at the start
+ */
+export const WithChips = {
+    args: {
+        value: '',
+        chips: (
+            <>
+                <Chip size="s">Chip 1</Chip>
+                <Chip size="s">Chip 2</Chip>
+            </>
+        ),
+    },
 };

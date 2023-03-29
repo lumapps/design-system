@@ -1,37 +1,44 @@
 import { Checkbox } from '@lumx/react';
-import { text } from '@storybook/addon-knobs';
-import noop from 'lodash/noop';
-import React, { useState } from 'react';
+import { withValueOnChange } from '@lumx/react/stories/decorators/withValueOnChange';
+import { loremIpsum } from '@lumx/react/stories/utils/lorem';
 
-export default { title: 'LumX components/checkbox/Checkbox' };
-
-export const SimpleSelect = ({ theme }: any) => {
-    const [value, setValue] = useState(false);
-    return <Checkbox isChecked={value} label={text('Label', 'My label')} theme={theme} onChange={setValue} />;
+export default {
+    title: 'LumX components/checkbox/Checkbox',
+    component: Checkbox,
+    decorators: [withValueOnChange({ valueProp: 'isChecked' })],
+    args: {
+        isChecked: false,
+        name: 'checkbox-html-name',
+        value: 'checkbox-html-value',
+    },
+    argTypes: {
+        onChange: { action: true },
+        name: { control: false },
+        value: { control: false },
+    },
 };
 
-export const DisabledSelect = ({ theme }: any) => {
-    return (
-        <Checkbox
-            isChecked={false}
-            label={text('Label', 'My label')}
-            helper={text('Helper', 'You will receive our newsletter each month')}
-            theme={theme}
-            onChange={noop}
-            isDisabled
-        />
-    );
+/**
+ * Default checkbox
+ */
+export const Default = {};
+
+/**
+ * With label and helper
+ */
+export const LabelAndHelper = {
+    args: {
+        label: 'Checkbox label',
+        helper: loremIpsum('tiny'),
+    },
 };
 
-export const WithHelperSelect = ({ theme }: any) => {
-    const [value, setValue] = useState(false);
-    return (
-        <Checkbox
-            isChecked={value}
-            label={text('Label', 'My label')}
-            helper={text('Helper', 'You will receive our newsletter each month')}
-            theme={theme}
-            onChange={setValue}
-        />
-    );
+/**
+ * Disabled
+ */
+export const Disabled = {
+    args: {
+        ...LabelAndHelper.args,
+        isDisabled: true,
+    },
 };

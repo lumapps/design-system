@@ -1,8 +1,8 @@
 import { mdiAlert, mdiAlertCircle, mdiArrowRight, mdiBullhorn, mdiCheck, mdiMessageText } from '@lumx/icons';
-import { ColorPalette, Icon, Size } from '@lumx/react';
+import { ColorPalette, Icon, Size, Theme } from '@lumx/react';
 import React from 'react';
 
-export const App = ({ theme }: any) => (
+export const App = ({ theme = Theme.light }: any) => (
     <>
         <Icon icon={mdiArrowRight} size={Size.s} color={ColorPalette.blue} />
         <Icon icon={mdiCheck} size={Size.s} color={ColorPalette.green} />

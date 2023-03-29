@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
-
-import { Button, Notification, Kind } from '@lumx/react';
+import { Notification, Kind } from '@lumx/react';
 import { NOTIFICATION_TRANSITION_DURATION } from '@lumx/core/js/constants';
-import { action } from '@storybook/addon-actions';
-import { chromaticForceScreenSize } from '../../stories/chromaticForceScreenSize';
+import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { withChromaticForceScreenSize } from '../../stories/decorators/withChromaticForceScreenSize';
 
 export default {
     title: 'LumX components/notification/Notification',
+    component: Notification,
+    args: Notification.defaultProps,
+    argTypes: {
+        type: getSelectArgType(Kind),
+        onClick: { action: true },
+    },
     parameters: {
         // Delay Chromatic snapshot to wait for notification to open.
         chromatic: {
@@ -15,63 +19,64 @@ export default {
         },
     },
     // Force minimum chromatic screen size to make sure the dialog appears in view.
-    decorators: [chromaticForceScreenSize],
+    decorators: [withChromaticForceScreenSize()],
 };
 
-const properties = {
-    error: {
-        content: 'Error',
-        onClick: action('onClick'),
-        isOpen: true,
+/**
+ * Error notification
+ */
+export const Error = {
+    args: {
         type: Kind.error,
-    },
-    info: {
-        content: 'Info',
-        onClick: action('onClick'),
+        content: 'Error',
         isOpen: true,
-        type: Kind.info,
-    },
-    infoWithCallback: {
-        onActionClick: action('onClick'),
-        actionLabel: 'Undo',
-        content: 'Info with callback',
-        onClick: action('onClick'),
-        isOpen: true,
-        type: Kind.info,
-    },
-    success: {
-        content: 'Success',
-        onClick: action('onClick'),
-        isOpen: true,
-        type: Kind.success,
-    },
-
-    warning: {
-        content: 'Warning',
-        onClick: action('onClick'),
-        isOpen: true,
-        type: Kind.warning,
     },
 };
 
-export const Error = () => <Notification {...properties.error} />;
+/**
+ * Info notification
+ */
+export const Info = {
+    args: {
+        type: Kind.info,
+        content: 'Info',
+        isOpen: true,
+    },
+};
 
-export const Info = () => <Notification {...properties.info} />;
+/**
+ * Success notification
+ */
+export const Success = {
+    args: {
+        type: Kind.success,
+        content: 'Success',
+        isOpen: true,
+    },
+};
 
-export const InfoWithCallback = () => <Notification {...properties.infoWithCallback} />;
+/**
+ * Warning notification
+ */
+export const Warning = {
+    args: {
+        type: Kind.warning,
+        content: 'Warning',
+        isOpen: true,
+    },
+};
 
-export const Success = () => <Notification {...properties.success} />;
-
-export const Warning = () => <Notification {...properties.warning} />;
-
-export const OnTrigger = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const onClick = () => setIsOpen(!isOpen);
-
-    return (
-        <>
-            <Button onClick={onClick}>{!isOpen ? 'Show Notification' : 'Close Notification'}</Button>,
-            <Notification {...properties.error} isOpen={isOpen} />,
-        </>
-    );
+/**
+ * Info notification with action button
+ */
+export const InfoWithAction = {
+    argTypes: {
+        onActionClick: { action: true },
+    },
+    args: {
+        type: Kind.info,
+        content: 'InfoWithAction',
+        actionLabel: 'Undo',
+        isOpen: true,
+    },
 };

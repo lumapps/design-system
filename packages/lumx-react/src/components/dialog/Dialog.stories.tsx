@@ -1,3 +1,7 @@
+/* eslint-disable react-hooks/rules-of-hooks,react/jsx-key */
+import React, { useRef, useState } from 'react';
+
+import over from 'lodash/over';
 import { mdiClose } from '@lumx/icons';
 import {
     AlertDialog,
@@ -6,25 +10,28 @@ import {
     DatePickerField,
     Emphasis,
     FlexBox,
+    Heading,
     IconButton,
     List,
     ListItem,
     Select,
     Size,
     TextField,
-    Theme,
     Toolbar,
 } from '@lumx/react';
 import { DIALOG_TRANSITION_DURATION } from '@lumx/core/js/constants';
-import { select } from '@storybook/addon-knobs';
-import React, { RefObject, useCallback, useRef, useState } from 'react';
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
-import { Dialog, DialogSizes } from './Dialog';
-import { loremIpsum } from '../../stories/knobs/lorem';
-import { chromaticForceScreenSize } from '../../stories/chromaticForceScreenSize';
+import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { withChromaticForceScreenSize } from '@lumx/react/stories/decorators/withChromaticForceScreenSize';
+
+import { Dialog } from './Dialog';
+import { loremIpsum } from '../../stories/utils/lorem';
+
+const dialogSizes = [Size.tiny, Size.regular, Size.big, Size.huge];
 
 export default {
     title: 'LumX components/dialog/Dialog',
+    component: Dialog,
     parameters: {
         // Delay Chromatic snapshot to wait for dialog to open.
         chromatic: {
@@ -32,315 +39,148 @@ export default {
             delay: DIALOG_TRANSITION_DURATION,
         },
     },
-    // Force minimum chromatic screen size to make sure the dialog appears in view.
-    decorators: [chromaticForceScreenSize],
+    decorators: [
+        // Force minimum chromatic screen size to make sure the dialog appears in view.
+        withChromaticForceScreenSize(),
+    ],
+    args: Dialog.defaultProps,
+    argTypes: {
+        size: getSelectArgType(dialogSizes),
+        onVisibilityChange: { action: true },
+        children: { control: false },
+    },
+    render(props: any) {
+        const buttonRef = useRef<HTMLButtonElement>(null);
+        const [isOpen, close, open] = useBooleanState(true);
+        return (
+            <>
+                <Button ref={buttonRef} onClick={open}>
+                    Open dialog
+                </Button>
+                <Dialog {...props} isOpen={isOpen} onClose={close} parentElement={buttonRef} />
+            </>
+        );
+    },
 };
 
-const header = <header className="lumx-spacing-padding lumx-typography-title">Dialog header</header>;
-const content = <div className="lumx-spacing-padding">{loremIpsum('short')}</div>;
-const longContent = <div className="lumx-spacing-padding">{loremIpsum('long')}</div>;
-const footer = <footer className="lumx-spacing-padding">Dialog footer</footer>;
+/**
+ * Default dialog
+ */
+export const Default = {
+    args: { children: loremIpsum('short') },
+};
 
-function useOpenButton(theme: Theme, defaultState = true) {
-    const buttonRef = useRef() as RefObject<HTMLButtonElement>;
-    const [isOpen, setOpen] = useState(defaultState);
-    const openDialog = useCallback(() => setOpen(true), []);
-    const closeDialog = useCallback(() => setOpen(false), []);
+/**
+ * Loading state
+ */
+export const Loading = {
+    args: { ...Default.args, isLoading: true },
+};
 
-    return {
-        button: (
-            <Button ref={buttonRef} onClick={openDialog} theme={theme}>
+/**
+ * Basic header/footer props
+ */
+export const WithHeaderFooter = {
+    args: { ...Default.args, header: 'Dialog header', footer: 'Dialog footer' },
+};
+
+/**
+ * More complex header/footer in children
+ */
+export const WithHeaderFooterChildren = {
+    args: {
+        children: [
+            <header>
+                <Toolbar
+                    label={<Heading typography="title">Dialog heading</Heading>}
+                    after={<IconButton label="Close" emphasis="low" icon={mdiClose} />}
+                />
+            </header>,
+            <div className="lumx-spacing-padding-huge">{loremIpsum('short')}</div>,
+            <footer>
+                <Toolbar after={<Button>Close</Button>} />
+            </footer>,
+        ],
+    },
+};
+
+/**
+ * Forcing header/footer dividers
+ */
+export const ForceDivider = {
+    args: { ...WithHeaderFooter.args, forceFooterDivider: true, forceHeaderDivider: true },
+};
+
+/**
+ * Long scrollable content
+ */
+export const LongContent = {
+    args: { ...WithHeaderFooter.args, children: loremIpsum('long') },
+};
+
+/**
+ * Prevent auto close (click outside & close on escape)
+ */
+export const PreventAutoClose = {
+    args: { ...Default.args, preventAutoClose: true },
+};
+
+/**
+ * Prevent close on escape
+ */
+export const PreventCloseOnEscape = {
+    args: { ...Default.args, preventCloseOnEscape: true },
+};
+
+/**
+ * Prevent close on click outside
+ */
+export const PreventCloseOnClick = {
+    args: { ...Default.args, preventCloseOnClick: true },
+};
+
+/**
+ * Dialog needing a confirmation before close using an AlertDialog
+ */
+export const WithConfirmClose = () => {
+    const buttonRef = useRef<HTMLButtonElement>(null);
+    const closeButtonRef = useRef<HTMLButtonElement>(null);
+    const [isOpen, close, open] = useBooleanState(true);
+    const [isAlertDialogOpen, closeAlertDialog, openAlertDialog] = useBooleanState(false);
+
+    return (
+        <>
+            <Button ref={buttonRef} onClick={open}>
                 Open dialog
             </Button>
-        ),
-        buttonRef,
-        openDialog,
-        closeDialog,
-        isOpen,
-    };
-}
-
-export const SimpleDialog = ({ theme }: any) => {
-    const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
-    return (
-        <>
-            {button}
-            <Dialog isOpen={isOpen} onClose={closeDialog} parentElement={buttonRef}>
-                {content}
-            </Dialog>
-        </>
-    );
-};
-
-export const WithBodyScroll = ({ theme }: any) => {
-    const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
-    return (
-        <>
-            {button}
-            <Dialog isOpen={isOpen} onClose={closeDialog} parentElement={buttonRef} disableBodyScroll={false}>
-                {content}
-            </Dialog>
-        </>
-    );
-};
-
-export const PreventDialogAutoClose = ({ theme }: any) => {
-    const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
-    return (
-        <>
-            {button}
-            <Dialog preventAutoClose isOpen={isOpen} onClose={closeDialog} parentElement={buttonRef}>
-                {content}
-                <footer>
-                    <Toolbar
-                        after={
-                            <Button onClick={closeDialog} emphasis={Emphasis.low}>
-                                Close
-                            </Button>
-                        }
-                    />
-                </footer>
-            </Dialog>
-        </>
-    );
-};
-
-export const PreventDialogCloseOnEscape = ({ theme }: any) => {
-    const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
-    return (
-        <>
-            {button}
-            <Dialog preventCloseOnEscape isOpen={isOpen} onClose={closeDialog} parentElement={buttonRef}>
-                {content}
-                <footer>
-                    <Toolbar
-                        after={
-                            <Button onClick={closeDialog} emphasis={Emphasis.low}>
-                                Close
-                            </Button>
-                        }
-                    />
-                </footer>
-            </Dialog>
-        </>
-    );
-};
-
-export const PreventDialogCloseOnClick = ({ theme }: any) => {
-    const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
-    return (
-        <>
-            {button}
-            <Dialog preventCloseOnClick isOpen={isOpen} onClose={closeDialog} parentElement={buttonRef}>
-                {content}
-                <footer>
-                    <Toolbar
-                        after={
-                            <Button onClick={closeDialog} emphasis={Emphasis.low}>
-                                Close
-                            </Button>
-                        }
-                    />
-                </footer>
-            </Dialog>
-        </>
-    );
-};
-
-export const DialogWithAlertDialog = ({ theme }: any) => {
-    const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
-    const { openDialog: openAlertDialog, closeDialog: closeAlertDialog, isOpen: isAlertDialogOpen } = useOpenButton(
-        theme,
-        false,
-    );
-
-    const handleSubmitDialog = () => {
-        closeDialog();
-        openAlertDialog();
-    };
-
-    return (
-        <>
-            {button}
-            <Dialog isOpen={isOpen} onClose={closeDialog} parentElement={buttonRef}>
-                {content}
-                <footer>
-                    <Toolbar
-                        after={
-                            <Button onClick={handleSubmitDialog} emphasis={Emphasis.low}>
-                                Close
-                            </Button>
-                        }
-                    />
-                </footer>
+            <Dialog isOpen={isOpen} onClose={openAlertDialog} parentElement={buttonRef}>
+                <FlexBox orientation="vertical" vAlign="center" className="lumx-spacing-padding-huge">
+                    {loremIpsum('tiny')}
+                    <Button ref={closeButtonRef} onClick={openAlertDialog}>
+                        Close
+                    </Button>
+                </FlexBox>
             </Dialog>
             <AlertDialog
                 isOpen={isAlertDialogOpen}
-                onClose={closeDialog}
-                parentElement={buttonRef}
-                title="Default (info)"
-                confirmProps={{ onClick: closeAlertDialog, label: 'Confirm' }}
+                onClose={closeAlertDialog}
+                parentElement={closeButtonRef}
+                title="Confirm close"
+                confirmProps={{ onClick: over([close, closeAlertDialog]), label: 'Confirm' }}
+                cancelProps={{ onClick: closeAlertDialog, label: 'Cancel' }}
             >
-                Consequat deserunt officia aute laborum tempor anim sint est.
+                {loremIpsum('tiny')}
             </AlertDialog>
         </>
     );
 };
 
-export const Sizes = ({ theme }: any) => {
-    const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
-    const sizes: DialogSizes[] = [Size.tiny, Size.regular, Size.big, Size.huge];
-    return (
-        <>
-            {button}
-            Use the knobs to change the dialog size!
-            <Dialog
-                isOpen={isOpen}
-                onClose={closeDialog}
-                size={select('Dialog size', sizes, Size.tiny)}
-                parentElement={buttonRef}
-            >
-                {longContent}
-            </Dialog>
-        </>
-    );
-};
-
-export const LoadingDialog = ({ theme }: any) => {
-    const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
-    return (
-        <>
-            {button}
-            <Dialog isOpen={isOpen} onClose={closeDialog} isLoading parentElement={buttonRef}>
-                {content}
-            </Dialog>
-        </>
-    );
-};
-
-export const DialogWithHeaderFooterProps = ({ theme }: any) => {
-    const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
-    return (
-        <>
-            {button}
-            <Dialog
-                isOpen={isOpen}
-                onClose={closeDialog}
-                header="Header prop"
-                footer="Footer prop"
-                parentElement={buttonRef}
-            >
-                {content}
-            </Dialog>
-        </>
-    );
-};
-
-export const DialogWithHeaderFooterChildren = ({ theme }: any) => {
-    const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
-    return (
-        <>
-            {button}
-            <Dialog isOpen={isOpen} onClose={closeDialog} parentElement={buttonRef}>
-                {header}
-                {content}
-                {footer}
-            </Dialog>
-        </>
-    );
-};
-
-export const DialogWithHeaderFooterPropsAndChildren = ({ theme }: any) => {
-    const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
-    return (
-        <>
-            {button}
-            <Dialog
-                isOpen={isOpen}
-                onClose={closeDialog}
-                header=" Header prop"
-                footer=" Footer prop"
-                parentElement={buttonRef}
-            >
-                {header}
-                {content}
-                {footer}
-            </Dialog>
-        </>
-    );
-};
-
-export const DialogWithHeaderFooterAndDivider = ({ theme }: any) => {
-    const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
-    return (
-        <>
-            {button}
-            <Dialog
-                isOpen={isOpen}
-                onClose={closeDialog}
-                forceFooterDivider
-                forceHeaderDivider
-                parentElement={buttonRef}
-            >
-                {header}
-                {content}
-                {footer}
-            </Dialog>
-        </>
-    );
-};
-
-export const ScrollableDialog = ({ theme }: any) => {
-    const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
-    return (
-        <>
-            {button}
-            <Dialog isOpen={isOpen} onClose={closeDialog} size={Size.regular} parentElement={buttonRef}>
-                {longContent}
-            </Dialog>
-        </>
-    );
-};
-
-export const WithAnimationCallbacks = ({ theme }: any) => {
-    const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
-    const handleVisibiltyCallback = (isVisible: boolean) => {
-        alert(isVisible ? 'OPEN' : 'CLOSE');
-    };
-
-    return (
-        <>
-            {button}
-            <Dialog
-                isOpen={isOpen}
-                onClose={closeDialog}
-                size={Size.regular}
-                parentElement={buttonRef}
-                onVisibilityChange={handleVisibiltyCallback}
-            >
-                {content}
-            </Dialog>
-        </>
-    );
-};
-
-export const ScrollableDialogWithHeaderAndFooter = ({ theme }: any) => {
-    const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
-    return (
-        <>
-            {button}
-            <Dialog isOpen={isOpen} onClose={closeDialog} parentElement={buttonRef}>
-                {header}
-                {longContent}
-                {footer}
-            </Dialog>
-        </>
-    );
-};
-
-/** Test dialog focus trap (focus is contained inside the dialog) with all kinds of focusable and non-focusable items */
-export const DialogFocusTrap = ({ theme }: any) => {
-    const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
+/**
+ * Test dialog focus trap (focus is contained inside the dialog) with all kinds of focusable and non-focusable items
+ */
+export const FocusTrap = () => {
+    const buttonRef = useRef<HTMLButtonElement>(null);
+    const [isOpen, close, open] = useBooleanState(true);
     const [textValue, setTextValue] = useState('value');
     const [checkboxValue, setCheckboxValue] = useState(false);
     const inputRef = useRef(null);
@@ -362,14 +202,14 @@ export const DialogFocusTrap = ({ theme }: any) => {
 
     return (
         <>
-            {button}
-            <Dialog isOpen={isOpen} onClose={closeDialog} parentElement={buttonRef} focusElement={inputRef}>
+            <Button ref={buttonRef} onClick={open}>
+                Open dialog
+            </Button>
+            <Dialog isOpen={isOpen} onClose={close} parentElement={buttonRef} focusElement={inputRef}>
                 <header>
                     <Toolbar
                         label={<span className="lumx-typography-title">Dialog header</span>}
-                        after={
-                            <IconButton label="Close" icon={mdiClose} onClick={closeDialog} emphasis={Emphasis.low} />
-                        }
+                        after={<IconButton label="Close" icon={mdiClose} onClick={close} emphasis={Emphasis.low} />}
                     />
                 </header>
                 <div className="lumx-spacing-padding-horizontal-huge lumx-spacing-padding-bottom-huge">
@@ -424,7 +264,6 @@ export const DialogFocusTrap = ({ theme }: any) => {
                                     locale="fr"
                                     label="Start date"
                                     placeholder="Pick a date"
-                                    theme={theme}
                                     onChange={setDate}
                                     value={date}
                                     nextButtonProps={{ label: 'Next month' }}
@@ -434,7 +273,6 @@ export const DialogFocusTrap = ({ theme }: any) => {
                                     locale="fr"
                                     label="Start date"
                                     placeholder="Pick a date"
-                                    theme={theme}
                                     onChange={setDate2}
                                     value={date2}
                                     nextButtonProps={{ label: 'Next month' }}

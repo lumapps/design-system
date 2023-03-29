@@ -1,5 +1,4 @@
 import { Button, Dialog, Tab, TabList, TabPanel, TabProvider } from '@lumx/react';
-import { number } from '@storybook/addon-knobs';
 import get from 'lodash/get';
 import times from 'lodash/times';
 import React, { useState } from 'react';
@@ -114,8 +113,7 @@ export const SplitTabListAndTabPanels = ({ theme }: any) => {
 };
 
 /* Dynamically generate tabs. */
-export const DynamicTabs = ({ theme }: any) => {
-    const tabCount = number('Tab count', 3);
+export const DynamicTabs = ({ theme, tabCount }: any) => {
     return (
         <TabProvider>
             <TabList theme={theme} aria-label="Tab list">
@@ -131,4 +129,7 @@ export const DynamicTabs = ({ theme }: any) => {
             ))}
         </TabProvider>
     );
+};
+DynamicTabs.args = {
+    tabCount: 3,
 };

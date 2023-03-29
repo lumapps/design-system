@@ -1,198 +1,129 @@
 import React from 'react';
 
 import { mdiAbTesting } from '@lumx/icons';
-import {
-    Alignment,
-    AspectRatio,
-    Badge,
-    ColorPalette,
-    FlexBox,
-    Icon,
-    Size,
-    Thumbnail,
-    ThumbnailVariant,
-} from '@lumx/react';
-import { IMAGE_SIZES, imageKnob, IMAGES } from '@lumx/react/stories/knobs/image';
-import { boolean, select, text } from '@storybook/addon-knobs';
-import { enumKnob } from '@lumx/react/stories/knobs/enumKnob';
-import { focusKnob } from '@lumx/react/stories/knobs/focusKnob';
-import { sizeKnob } from '@lumx/react/stories/knobs/sizeKnob';
-import { action } from '@storybook/addon-actions';
+import { Alignment, AspectRatio, Badge, FlexBox, Icon, Size, Thumbnail, ThumbnailVariant } from '@lumx/react';
 import { CustomLink } from '@lumx/react/stories/utils/CustomLink';
+import { IMAGE_SIZES, imageArgType, IMAGES } from '@lumx/react/stories/controls/image';
+import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
+import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
+import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
+import { withUndefined } from '@lumx/react/stories/controls/withUndefined';
 
-export default { title: 'LumX components/thumbnail/Thumbnail' };
+const aligns = [Alignment.center, Alignment.left, Alignment.right];
+const variants = [ThumbnailVariant.squared, ThumbnailVariant.rounded];
 
-const Resizable = ({ initialSize: { width, height }, children }: any) => (
-    <div style={{ border: '1px solid red', overflow: 'hidden', resize: 'both', width, height }}>{children}</div>
-);
-
-/** Default thumbnail props (editable via knobs) */
-export const Default = ({ theme }: any) => {
-    const alt = text('Alternative text', 'Image alt text');
-    const align = enumKnob(
-        'Alignment',
-        [undefined, Alignment.center, Alignment.left, Alignment.right] as const,
-        undefined,
-    );
-    const aspectRatio = enumKnob('Aspect ratio', [undefined, ...Object.values(AspectRatio)], undefined);
-    const fillHeight = boolean('Fill Height', false);
-    const focusPoint = { x: focusKnob('Focus X'), y: focusKnob('Focus Y') };
-    const image = imageKnob('Image', IMAGES.landscape1);
-    const variant = select('Variant', ThumbnailVariant, ThumbnailVariant.squared);
-    const size = sizeKnob('Size', undefined);
-    const onClick = boolean('clickable?', false) ? action('onClick') : undefined;
-    const isLoading = boolean('Force loading', false);
-    const forceError = boolean('Force error', false);
-
-    return (
-        <Thumbnail
-            alt={alt}
-            align={align}
-            aspectRatio={aspectRatio}
-            fillHeight={fillHeight}
-            focusPoint={focusPoint}
-            image={forceError ? 'foo' : image}
-            size={size}
-            theme={theme}
-            variant={variant}
-            onClick={onClick}
-            isLoading={isLoading}
-        />
-    );
+export default {
+    title: 'LumX components/thumbnail/Thumbnail',
+    component: Thumbnail,
+    args: Thumbnail.defaultProps,
+    argTypes: {
+        image: imageArgType,
+        align: getSelectArgType(aligns),
+        variant: getSelectArgType(variants),
+        aspectRatio: getSelectArgType(AspectRatio),
+        fallback: { control: false },
+        'focusPoint.x': { control: { type: 'range', max: 1, min: -1, step: 0.05 } },
+        'focusPoint.y': { control: { type: 'range', max: 1, min: -1, step: 0.05 } },
+    },
+    decorators: [withNestedProps()],
 };
 
-export const WithBadge = () => {
-    const thumbnailSize = sizeKnob('Size', Size.l);
-    const variant = select('Variant', ThumbnailVariant, ThumbnailVariant.rounded);
-    const badgeColor = select('Badge color', ColorPalette, ColorPalette.primary);
-    const activateFallback = boolean('Activate fallback', false);
-    const image = imageKnob();
-    return (
-        <Thumbnail
-            alt="Image alt text"
-            image={activateFallback ? '' : image}
-            variant={variant}
-            aspectRatio={AspectRatio.square}
-            size={thumbnailSize}
-            badge={
-                <Badge color={badgeColor}>
-                    <Icon icon={mdiAbTesting} />
-                </Badge>
-            }
-        />
-    );
+/** Simple thumbnail taking the size of the original image */
+export const Simple = {
+    args: { image: IMAGES.landscape1s200 },
+    decorators: [
+        withWrapper({
+            style: { border: '1px dashed red', height: 500, width: 500, resize: 'both', overflow: 'hidden' },
+        }),
+    ],
 };
 
-export const WithCustomImageClassName = () => {
-    const thumbnailSize = sizeKnob('Size', Size.l);
-    const variant = select('Variant', ThumbnailVariant, ThumbnailVariant.rounded);
-    const badgeColor = select('Badge color', ColorPalette, ColorPalette.primary);
-    const activateFallback = boolean('Activate fallback', false);
-    const image = imageKnob();
-    return (
-        <Thumbnail
-            alt="Image alt text"
-            image={activateFallback ? '' : image}
-            variant={variant}
-            aspectRatio={AspectRatio.square}
-            size={thumbnailSize}
-            badge={
-                <Badge color={badgeColor}>
-                    <Icon icon={mdiAbTesting} />
-                </Badge>
-            }
-            imgProps={{
-                className: 'custom-image-class-name',
-            }}
-        />
-    );
+/** Loading state*/
+export const IsLoading = {
+    args: { ...Simple.args, isLoading: true },
 };
 
-export const FocusPoint = () => {
-    const focusPoint = { x: focusKnob('Focus X ', -0.2), y: focusKnob('Focus Y', -0.3) };
-    const aspectRatio = enumKnob('Aspect ratio', [undefined, ...Object.values(AspectRatio)], AspectRatio.wide);
-    const fillHeight = aspectRatio === AspectRatio.free;
-    return (
-        <>
-            <small>Focus point will delay the display of the image if the original image size is not accessible.</small>
-            <Resizable initialSize={{ height: 200, width: 300 }}>
-                <Thumbnail
-                    alt="Image"
-                    image={IMAGES.portrait1s200}
-                    aspectRatio={aspectRatio}
-                    fillHeight={fillHeight}
-                    focusPoint={focusPoint}
-                    style={{ width: '100%' }}
-                />
-            </Resizable>
-
-            <small>Providing the width & height in imgProps should avoid the delay shown above</small>
-            <Resizable initialSize={{ height: 200, width: 300 }}>
-                <Thumbnail
-                    alt="Image"
-                    image={IMAGES.portrait2}
-                    imgProps={IMAGE_SIZES.portrait2}
-                    fillHeight={fillHeight}
-                    aspectRatio={aspectRatio}
-                    focusPoint={focusPoint}
-                    style={{ width: '100%' }}
-                />
-            </Resizable>
-        </>
-    );
+/** Thumbnail error fallback and size variants */
+export const ErrorFallback = {
+    args: { image: 'foo' },
+    decorators: [
+        withCombinations({
+            combinations: {
+                cols: {
+                    Default: {},
+                    'Icon fallback': { fallback: mdiAbTesting },
+                    'Image fallback': { fallback: <img src="/logo.svg" alt="logo" /> },
+                },
+                rows: {
+                    Default: {},
+                    'Size xl & ratio wide': { size: Size.xl, aspectRatio: AspectRatio.wide },
+                    'Size l & ratio vertical': { size: Size.l, aspectRatio: AspectRatio.vertical },
+                },
+            },
+        }),
+    ],
 };
 
-export const Clickable = () => (
-    <Thumbnail alt="Click me" image={imageKnob()} size={sizeKnob('Size', Size.xxl)} onClick={action('onClick')} />
-);
+/** Simple thumbnail with badge */
+export const WithBadge = {
+    ...Simple,
+    args: {
+        ...Simple.args,
+        size: Size.xl,
+        badge: (
+            <Badge color="green">
+                <Icon icon={mdiAbTesting} />
+            </Badge>
+        ),
+    },
+};
 
-export const ClickableLink = () => (
-    <Thumbnail
-        alt="Click me"
-        image={imageKnob()}
-        size={sizeKnob('Size', Size.xxl)}
-        linkProps={{ href: 'https://google.fr' }}
-    />
-);
+/** Demonstrate the focus point X on a vertical thumbnail containing an horizontal image */
+export const FocusPointVertical = {
+    args: {
+        aspectRatio: AspectRatio.vertical,
+        size: Size.xxl,
+        image: IMAGES.landscape1,
+        'focusPoint.x': 1,
+    },
+};
 
-export const ClickableCustomLink = () => (
-    <Thumbnail
-        alt="Click me"
-        image={imageKnob()}
-        size={sizeKnob('Size', Size.xxl)}
-        linkAs={CustomLink}
-        linkProps={{ href: 'https://google.fr', className: 'custom-class-name' }}
-    />
-);
+/** Demonstrate the focus point Y on a horizontal thumbnail containing an vertical image */
+export const FocusPointHorizontal = {
+    args: {
+        aspectRatio: AspectRatio.horizontal,
+        size: Size.xxl,
+        image: IMAGES.portrait1,
+        'focusPoint.y': 1,
+    },
+};
 
-export const FillHeight = () => {
-    const parentStyle = {
-        width: 600,
-        height: 240,
-        border: '1px solid red',
-        overflow: 'hidden',
-        resize: 'both',
-    } as const;
-    return (
-        <>
-            <h2>Default</h2>
-            <div style={parentStyle}>
-                <Thumbnail alt="" image={IMAGES.landscape1s200} fillHeight />
-            </div>
-            <h2>Ratio wide</h2>
-            <div style={parentStyle}>
-                <Thumbnail alt="" image={IMAGES.landscape1s200} fillHeight aspectRatio="wide" />
-            </div>
-            <h2>Ratio vertical</h2>
-            <div style={parentStyle}>
-                <Thumbnail alt="" image={IMAGES.landscape1s200} fillHeight aspectRatio="vertical" />
-            </div>
-            <h2>Ratio free</h2>
-            <div style={parentStyle}>
-                <Thumbnail alt="" image={IMAGES.landscape1s200} fillHeight aspectRatio="free" />
-            </div>
-        </>
-    );
+/** Setting `onClick` to turn the thumbnail into a button */
+export const AsButton = {
+    args: Simple.args,
+    argTypes: { onClick: { action: true } },
+};
+
+/** Setting `linkProps.href` to turn the thumbnail into a link */
+export const AsLink = {
+    args: { ...Simple.args, linkProps: { href: 'https://example.com' } },
+};
+
+/** Setting `href` to turn the thumbnail into a link */
+export const AsCustomLink = {
+    args: { ...Simple.args, linkAs: CustomLink, linkProps: { href: 'https://example.com' } },
+};
+
+/** Combinations of fillHeight and ratios */
+export const FillHeightAndRatio = {
+    ...Simple,
+    args: { ...Simple.args, fillHeight: true },
+
+    decorators: [
+        ...Simple.decorators,
+        withCombinations({ combinations: { rows: { key: 'aspectRatio', options: withUndefined(AspectRatio) } } }),
+    ],
 };
 
 export const Original = () => (
@@ -428,83 +359,3 @@ export const Square = () => (
         </FlexBox>
     </>
 );
-
-export const IsLoading = ({ theme }: any) => (
-    <FlexBox
-        orientation="horizontal"
-        vAlign="center"
-        marginAuto={['left', 'right']}
-        style={{ border: '1px solid red', width: 900, height: 700, resize: 'both', overflow: 'auto' }}
-    >
-        <Thumbnail
-            theme={theme}
-            alt="Image alt text"
-            image={IMAGES.landscape2}
-            isLoading={boolean('Force loading', true)}
-            fillHeight={boolean('Fill Height', false)}
-            size={sizeKnob('Size', undefined)}
-        />
-    </FlexBox>
-);
-
-export const ErrorFallbackVariants = ({ theme }: any) => {
-    const isLoading = boolean('Force loading', false);
-    const variant = select('Variant', ThumbnailVariant, undefined);
-    const base = { alt: 'foo', image: 'foo', isLoading, variant, theme } as const;
-    const imageFallback = <img src="/logo.svg" alt="logo" />;
-    const imgProps = { width: 50, height: 50 };
-
-    return (
-        <>
-            <h2>Default</h2>
-            <FlexBox orientation="horizontal" gap="big">
-                <Thumbnail {...base} />
-                <Thumbnail {...base} fallback={mdiAbTesting} />
-                <Thumbnail {...base} fallback={imageFallback} />
-            </FlexBox>
-            <h2>
-                With original image size <small>(50x50)</small>
-            </h2>
-            <FlexBox orientation="horizontal" gap="big">
-                <Thumbnail {...base} imgProps={imgProps} />
-                <Thumbnail {...base} fallback={mdiAbTesting} imgProps={imgProps} />
-                <Thumbnail {...base} fallback={imageFallback} imgProps={imgProps} />
-            </FlexBox>
-            <h2>With size</h2>
-            <FlexBox orientation="horizontal" gap="big">
-                <Thumbnail {...base} size="xl" />
-                <Thumbnail {...base} size="xl" fallback={mdiAbTesting} />
-                <Thumbnail {...base} size="xl" fallback={imageFallback} />
-            </FlexBox>
-            <h2>With size & ratio</h2>
-            <FlexBox orientation="horizontal" gap="big">
-                <Thumbnail {...base} size="xl" aspectRatio="wide" />
-                <Thumbnail {...base} size="xl" aspectRatio="wide" fallback={mdiAbTesting} />
-                <Thumbnail {...base} size="xl" aspectRatio="wide" fallback={imageFallback} />
-            </FlexBox>
-            <h2>
-                With original size <small>(50x50)</small> & ratio
-            </h2>
-            <small>Unsupported use case (thumbnail size is undefined)</small>
-            <FlexBox orientation="horizontal" gap="big">
-                <Thumbnail {...base} imgProps={imgProps} aspectRatio="wide" />
-                <Thumbnail {...base} imgProps={imgProps} aspectRatio="wide" fallback={mdiAbTesting} />
-                <Thumbnail {...base} imgProps={imgProps} aspectRatio="wide" fallback={imageFallback} />
-            </FlexBox>
-            <h2>
-                With original size <small>(50x50)</small> & ratio & constrained parent size
-            </h2>
-            <FlexBox orientation="horizontal" gap="big">
-                <div className="parent" style={{ width: 220 }}>
-                    <Thumbnail {...base} imgProps={imgProps} aspectRatio="wide" />
-                </div>
-                <div className="parent" style={{ width: 220 }}>
-                    <Thumbnail {...base} imgProps={imgProps} aspectRatio="wide" fallback={mdiAbTesting} />
-                </div>
-                <div className="parent" style={{ width: 220 }}>
-                    <Thumbnail {...base} imgProps={imgProps} aspectRatio="wide" fallback={imageFallback} />
-                </div>
-            </FlexBox>
-        </>
-    );
-};

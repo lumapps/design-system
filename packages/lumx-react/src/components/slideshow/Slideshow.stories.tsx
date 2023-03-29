@@ -1,39 +1,39 @@
 import React from 'react';
 import range from 'lodash/range';
 import { AspectRatio, Button, FlexBox, ImageBlock, Slideshow, SlideshowItem, Orientation } from '@lumx/react';
-import { boolean, number } from '@storybook/addon-knobs';
-import { thumbnailsKnob } from '@lumx/react/stories/knobs/thumbnailsKnob';
+import { IMAGES, LANDSCAPE_IMAGES } from '@lumx/react/stories/controls/image';
 
-export default { title: 'LumX components/slideshow/Slideshow' };
+export default {
+    title: 'LumX components/slideshow/Slideshow',
+    component: Slideshow,
+    args: Slideshow.defaultProps,
+    argTypes: {
+        activeIndex: { control: 'number' },
+        groupBy: { control: 'number' },
+        autoPlay: { control: 'boolean' },
+        interval: { control: 'number' },
+    },
+};
 
-export const Simple = ({ theme }: any) => {
-    const images = thumbnailsKnob(6);
-    const activeIndex = number('Active index', 0);
-    const groupBy = number('Group by', 1);
-    const autoPlay = boolean('Autoplay', false);
-    const interval = number('Autoplay interval (in milliseconds)', 1000);
-
+export const Simple = ({ theme, images = Object.values(LANDSCAPE_IMAGES), ...props }: any) => {
     return (
         <Slideshow
             aria-label="Simple carousel example"
-            activeIndex={activeIndex}
-            autoPlay={autoPlay}
-            interval={interval}
             slideshowControlsProps={{
                 nextButtonProps: { label: 'Next' },
                 previousButtonProps: { label: 'Previous' },
             }}
             theme={theme}
-            groupBy={groupBy}
+            {...props}
             style={{ width: '50%' }}
             slideGroupLabel={(currentGroup, totalGroup) => `${currentGroup} of ${totalGroup}`}
         >
-            {images.map(({ image, alt }, index) => (
+            {images.map((image: string, index: number) => (
                 <SlideshowItem key={`${image}-${index}`}>
                     <ImageBlock
                         thumbnailProps={{ aspectRatio: AspectRatio.horizontal, loading: 'eager' }}
                         image={image}
-                        alt={alt}
+                        alt=""
                         theme={theme}
                     />
                 </SlideshowItem>
@@ -42,41 +42,8 @@ export const Simple = ({ theme }: any) => {
     );
 };
 
-export const SimpleWithAutoPlay = ({ theme }: any) => {
-    const images = thumbnailsKnob(6);
-    const activeIndex = number('Active index', 0);
-    const groupBy = number('Group by', 1);
-    const interval = number('Autoplay interval (in milliseconds)', 1000);
-
-    return (
-        <Slideshow
-            aria-label="Simple with autoplay example"
-            activeIndex={activeIndex}
-            autoPlay
-            interval={interval}
-            slideshowControlsProps={{
-                nextButtonProps: { label: 'Next' },
-                previousButtonProps: { label: 'Previous' },
-                playButtonProps: { label: 'Play/Pause' },
-            }}
-            theme={theme}
-            groupBy={groupBy}
-            style={{ width: '50%' }}
-            slideGroupLabel={(currentGroup, totalGroup) => `${currentGroup} of ${totalGroup}`}
-        >
-            {images.map(({ image, alt }, index) => (
-                <SlideshowItem key={`${image}-${index}`}>
-                    <ImageBlock
-                        thumbnailProps={{ aspectRatio: AspectRatio.horizontal, loading: 'eager' }}
-                        image={image}
-                        alt={alt}
-                        theme={theme}
-                    />
-                </SlideshowItem>
-            ))}
-        </Slideshow>
-    );
-};
+export const SimpleWithAutoPlay: any = Simple.bind({});
+SimpleWithAutoPlay.args = { autoPlay: true };
 
 export const ResponsiveSlideShowSwipe = () => {
     const slides = range(5);
@@ -124,7 +91,7 @@ export const ResponsiveSlideShowSwipe = () => {
 const slides = [
     {
         id: 0,
-        src: 'https://www.w3.org/WAI/ARIA/apg/example-index/carousel/images/foyleswarslide__800x600.jpg',
+        src: IMAGES.landscape1,
         alt: 'A man in a suit and fedora and a woman with coiffed hair look sternly into the camera.',
         title: 'Foyle’s War Revisited',
         subtitle: '8 pm Sunday, March 8, on TV: Sneak peek at the final season',
@@ -132,14 +99,14 @@ const slides = [
     },
     {
         id: 1,
-        src: 'https://www.w3.org/WAI/ARIA/apg/example-index/carousel/images/britcomdavidslide__800x600.jpg',
+        src: IMAGES.landscape2,
         alt: 'British flag with WILL-TV host David Thiel.',
         title: 'Great Britain Vote: 7 pm Sat.',
         link: '#',
     },
     {
         id: 2,
-        src: 'https://www.w3.org/WAI/ARIA/apg/example-index/carousel/images/mag800-2__800x600.jpg',
+        src: IMAGES.landscape3,
         alt: 'Mid-American Gardener panelists on the set.',
         title: 'Mid-American Gardener: Thursdays at 7 pm',
         subtitle: 'Watch the latest episode',
@@ -147,7 +114,7 @@ const slides = [
     },
     {
         id: 3,
-        src: 'https://www.w3.org/WAI/ARIA/apg/example-index/carousel/images/foyleswarslide__800x600.jpg',
+        src: IMAGES.portrait1,
         alt: 'A man in a suit and fedora and a woman with coiffed hair look sternly into the camera.',
         title: 'Foyle’s War Revisited',
         subtitle: '8 pm Sunday, March 8, on TV: Sneak peek at the final season',
@@ -155,25 +122,23 @@ const slides = [
     },
     {
         id: 4,
-        src: 'https://www.w3.org/WAI/ARIA/apg/example-index/carousel/images/britcomdavidslide__800x600.jpg',
+        src: IMAGES.portrait2,
         alt: 'British flag with WILL-TV host David Thiel.',
         title: 'Great Britain Vote: 7 pm Sat.',
         link: '#',
     },
     {
         id: 5,
-        src: 'https://www.w3.org/WAI/ARIA/apg/example-index/carousel/images/mag800-2__800x600.jpg',
+        src: IMAGES.portrait3,
         alt: 'Mid-American Gardener panelists on the set.',
         title: 'Mid-American Gardener: Thursdays at 7 pm',
         subtitle: 'Watch the latest episode',
         link: '#',
     },
 ];
-export const WithComplexContent = () => (
+export const WithComplexContent = ({ slideCount, ...props }: any) => (
     <Slideshow
         aria-label="Carousel with complex content"
-        activeIndex={0}
-        groupBy={2}
         slideshowControlsProps={{
             nextButtonProps: { label: 'Next' },
             previousButtonProps: { label: 'Previous' },
@@ -181,8 +146,9 @@ export const WithComplexContent = () => (
             paginationItemProps: (index) => ({ label: `Slide ${index + 1}` }),
         }}
         slideGroupLabel={(currentGroup, totalGroup) => `${currentGroup} of ${totalGroup}`}
+        {...props}
     >
-        {range(number('Slides', 6)).map((nb) => {
+        {range(slideCount).map((nb) => {
             const slide = slides[nb % slides.length];
 
             return (
@@ -210,3 +176,7 @@ export const WithComplexContent = () => (
         })}
     </Slideshow>
 );
+WithComplexContent.args = {
+    groupBy: 2,
+    slideCount: 6,
+};

@@ -1,40 +1,56 @@
 import React from 'react';
 import { mdiEarth } from '@lumx/icons';
-import { ColorPalette, ColorVariant, Icon, Text, TypographyCustom, TypographyInterface } from '@lumx/react';
-import { withResizableBox } from '@lumx/react/stories/withResizableBox';
+import { Icon, Text } from '@lumx/react';
+import { withResizableBox } from '@lumx/react/stories/decorators/withResizableBox';
+import { allTypographyArgType } from '@lumx/react/stories/controls/typography';
+import { colorArgType, colorVariantArgType } from '@lumx/react/stories/controls/color';
 import { InlineList } from '.';
-
-const ALL_TYPOGRAPHY = [undefined, ...Object.values(TypographyInterface), ...Object.values(TypographyCustom)];
 
 export default {
     title: 'LumX components/inline-list/InlineList',
+    component: InlineList,
     argTypes: {
-        typography: { control: 'select', options: ALL_TYPOGRAPHY },
-        color: { control: 'select', options: ColorPalette },
-        colorVariant: { control: 'select', options: ColorVariant },
+        typography: allTypographyArgType,
+        color: colorArgType,
+        colorVariant: colorVariantArgType,
+        children: { control: false },
     },
 };
 
-export const Default = (args: any) => (
-    <InlineList as="p" {...args}>
-        <span>Some text</span>
-        <span>Some other text</span>
-        <span>Some other other text</span>
-    </InlineList>
-);
+/**
+ * Inline list with three simple text elements
+ */
+export const WithElements = {
+    args: {
+        children: [
+            <span key="1">Some text</span>,
+            <span key="2">Some other text</span>,
+            <span key="3">Some other other text</span>,
+        ],
+    },
+};
 
-export const MixedNoWrapAndTruncate = (args: any) => (
-    <InlineList typography="body1" color="dark" colorVariant="L2" {...args} style={{ width: '100%' }}>
-        <Text as="span" truncate>
-            Very very very very very long text
-        </Text>
-        <Text as="span" noWrap>
-            <Icon icon={mdiEarth} />
-            Some text
-        </Text>
-        <Text as="span" truncate>
-            Very very very very very long text
-        </Text>
-    </InlineList>
-);
-MixedNoWrapAndTruncate.decorators = [withResizableBox({ width: 400 })];
+/**
+ * Using color, typography and more complex elements
+ */
+export const MixedNoWrapAndTruncate = {
+    args: {
+        typography: 'body1',
+        color: 'dark',
+        colorVariant: 'L2',
+        style: { width: '100%' },
+        children: [
+            <Text key="1" as="span" truncate>
+                Very very very very very long text
+            </Text>,
+            <Text key="2" as="span" noWrap>
+                <Icon icon={mdiEarth} />
+                Some text
+            </Text>,
+            <Text key="3" as="span" truncate>
+                Very very very very very long text
+            </Text>,
+        ],
+    },
+    decorators: [withResizableBox({ width: 400 })],
+};

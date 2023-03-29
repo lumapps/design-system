@@ -1,107 +1,82 @@
-import React, { useEffect, useState } from 'react';
+import { AspectRatio, Size, SkeletonRectangle, SkeletonRectangleVariant, SkeletonRectangleProps } from '@lumx/react';
+import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { ALL_COLORS, colorArgType } from '@lumx/react/stories/controls/color';
+import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 
-import {
-    Alignment,
-    AspectRatio,
-    Button,
-    FlexBox,
-    Orientation,
-    Size,
-    SkeletonRectangle,
-    SkeletonRectangleVariant,
-    Thumbnail,
-    ColorPalette,
-} from '@lumx/react';
-import { imageKnob } from '@lumx/react/stories/knobs/image';
-
-export default { title: 'LumX components/skeleton/Skeleton Rectangle' };
-
-const variants = [
+const variants: SkeletonRectangleProps['variant'][] = [
     SkeletonRectangleVariant.squared,
     SkeletonRectangleVariant.rounded,
     SkeletonRectangleVariant.pill,
-] as const;
-const sizes = [Size.xxs, Size.xs, Size.s, Size.m, Size.l, Size.xl, Size.xxl] as const;
-const aspectRatios = [AspectRatio.vertical, AspectRatio.square, AspectRatio.horizontal, AspectRatio.wide] as const;
-const colors = Object.values(ColorPalette);
+];
+const sizes: SkeletonRectangleProps['size'][] = [Size.xxs, Size.xs, Size.s, Size.m, Size.l, Size.xl, Size.xxl];
+const aspectRatios: SkeletonRectangleProps['aspectRatio'][] = [
+    AspectRatio.wide,
+    AspectRatio.horizontal,
+    AspectRatio.square,
+    AspectRatio.vertical,
+];
 
-export const Rectangle = ({ theme }: any) => (
-    <>
-        Sizes:
-        <FlexBox orientation={Orientation.horizontal}>
-            {sizes.map((size) => (
-                <SkeletonRectangle
-                    key={size}
-                    className="lumx-spacing-margin"
-                    theme={theme}
-                    height={size}
-                    width={size}
-                />
-            ))}
-        </FlexBox>
-        Variants:
-        <FlexBox orientation={Orientation.horizontal}>
-            {variants.map((variant) => (
-                <SkeletonRectangle
-                    key={variant}
-                    className="lumx-spacing-margin"
-                    theme={theme}
-                    width={Size.xl}
-                    height={Size.m}
-                    variant={variant}
-                />
-            ))}
-        </FlexBox>
-        Ratios:
-        <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.top}>
-            {aspectRatios.map((aspectRatio) => (
-                <SkeletonRectangle
-                    key={aspectRatio}
-                    className="lumx-spacing-margin"
-                    theme={theme}
-                    width={Size.xl}
-                    aspectRatio={aspectRatio}
-                />
-            ))}
-        </FlexBox>
-        Colors:
-        <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.top}>
-            {colors.map((color) => (
-                <SkeletonRectangle
-                    key={color}
-                    className="lumx-spacing-margin"
-                    theme={theme}
-                    width={Size.xl}
-                    height={Size.m}
-                    color={color}
-                />
-            ))}
-        </FlexBox>
-    </>
-);
+export default {
+    title: 'LumX components/skeleton/Skeleton Rectangle',
+    component: SkeletonRectangle,
+    args: SkeletonRectangle.defaultProps,
+    argTypes: {
+        width: getSelectArgType(sizes),
+        height: getSelectArgType(sizes),
+        aspectRatio: getSelectArgType(aspectRatios),
+        color: colorArgType,
+        variant: getSelectArgType(variants),
+    },
+};
 
-export const LoadingThumbnail = ({ theme }: any) => {
-    const [loading, setLoading] = useState(true);
-    const fakeLoad = () => {
-        setLoading(true);
-        setTimeout(() => {
-            setLoading(false);
-        }, 2000);
-    };
-    useEffect(fakeLoad, []);
-    const size = Size.xl;
+/**
+ * All sizes
+ */
+export const AllSize = {
+    argTypes: { width: { control: false }, height: { control: false } },
+    decorators: [
+        withCombinations({
+            // Using same width than height
+            combinations: { cols: Object.fromEntries(sizes.map((s) => [s, { height: s, width: s }])) },
+        }),
+    ],
+};
 
-    return (
-        <>
-            <Button onClick={fakeLoad}>Reload</Button> (fake 2sec loading)
-            <Thumbnail
-                image={imageKnob()}
-                alt="Image"
-                style={{ display: loading ? 'none' : undefined }}
-                aspectRatio={AspectRatio.square}
-                size={size}
-            />
-            {loading && <SkeletonRectangle theme={theme} width={size} aspectRatio={AspectRatio.square} />}
-        </>
-    );
+/**
+ * All ratios (for a fixed width)
+ */
+export const AllRatios = {
+    args: { width: Size.xl },
+    argTypes: { aspectRatio: { control: false } },
+    decorators: [
+        withCombinations({
+            combinations: { cols: { key: 'aspectRatio', options: aspectRatios } },
+        }),
+    ],
+};
+
+/**
+ * All variants
+ */
+export const AllVariants = {
+    args: { width: Size.l, height: Size.m },
+    argTypes: { variant: { control: false } },
+    decorators: [
+        withCombinations({
+            combinations: { cols: { key: 'variant', options: variants } },
+        }),
+    ],
+};
+
+/**
+ * All colors
+ */
+export const AllColors = {
+    args: { width: Size.l, height: Size.m },
+    argTypes: { color: { control: false } },
+    decorators: [
+        withCombinations({
+            combinations: { cols: { key: 'color', options: ALL_COLORS } },
+        }),
+    ],
 };

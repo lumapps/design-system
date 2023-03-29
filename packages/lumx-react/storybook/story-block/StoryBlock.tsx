@@ -1,8 +1,7 @@
-import React, { ElementType, useState } from 'react';
+import React, { ElementType } from 'react';
 import classNames from 'classnames';
 import isChromatic from 'chromatic/isChromatic';
-import { Alignment, Switch, Theme } from '@lumx/react';
-import { MaterialThemeSwitcher } from '@lumx/react/utils/MaterialThemeSwitcher';
+import { toggleMaterialTheme } from '@lumx/react/utils/MaterialThemeSwitcher';
 
 import '@lumx/core/scss/lumx.scss';
 import './index.scss';
@@ -18,32 +17,22 @@ const CLASSNAME = 'story-block';
 
 export const StoryBlock: React.FC<StoryBlockProps> = (props) => {
     const { Story, context } = props;
+    const { theme, materialTheme } = context.globals;
+    const args = {...context.args, theme};
 
-    const [theme, setTheme] = useState<Theme>(Theme.light);
-    context.args.theme = theme;
-    const toggleTheme = () => setTheme(theme === Theme.light ? Theme.dark : Theme.light);
 
     // Hard code today date for stable chromatic stories snapshots.
     context.parameters.today = isChromatic() ? new Date('May 25 2021 01:00') : new Date();
 
-    if (isChromatic()) return <Story />;
+    if (isChromatic()) return <Story args={args} />;
+
+    React.useEffect(() => {
+        toggleMaterialTheme(materialTheme !== 'true')
+    }, [materialTheme])
 
     return (
         <div className={classNames(CLASSNAME, context.parameters.hasGreyBackground && `${CLASSNAME}--has-grey-background`, `${CLASSNAME}--theme-${theme}`)}>
-            <div className={`${CLASSNAME}__toolbar`}>
-                <Switch
-                    className="dark-theme-switcher"
-                    isChecked={theme === Theme.dark}
-                    onChange={toggleTheme}
-                    position={Alignment.right}
-                    theme={theme}
-                >
-                    Dark Background
-                </Switch>
-                <MaterialThemeSwitcher theme={theme} />
-            </div>
-
-            <Story />
+            <Story args={args} />
         </div>
     );
 };

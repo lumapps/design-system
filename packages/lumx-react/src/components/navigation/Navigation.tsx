@@ -2,7 +2,7 @@ import React, { forwardRef, ReactNode } from 'react';
 import classNames from 'classnames';
 import { HasAriaLabelOrLabelledBy, HasClassName, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
-import { Orientation } from '@lumx/react';
+import { Orientation, Theme } from '@lumx/react';
 import { ThemeContext } from '@lumx/react/utils/ThemeContext';
 import { NavigationSection } from './NavigationSection';
 import { NavigationItem } from './NavigationItem';
@@ -29,7 +29,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
 export const Navigation = Object.assign(
     // eslint-disable-next-line react/display-name
     forwardRef<HTMLElement, NavigationProps>((props, ref) => {
-        const { children, className, theme, orientation = Orientation.vertical, ...forwardedProps } = props;
+        const { children, className, theme, orientation, ...forwardedProps } = props;
         return (
             <ThemeContext.Provider value={theme}>
                 <nav
@@ -54,6 +54,7 @@ export const Navigation = Object.assign(
     {
         displayName: COMPONENT_NAME,
         className: CLASSNAME,
+        defaultProps: { theme: Theme.light, orientation: Orientation.vertical },
         // Sub components
         Section: NavigationSection,
         Item: NavigationItem,

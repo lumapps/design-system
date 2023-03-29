@@ -1,29 +1,35 @@
 import { InputHelper, Kind } from '@lumx/react';
-import { text } from '@storybook/addon-knobs';
-import React from 'react';
+import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
+import { withUndefined } from '@lumx/react/stories/controls/withUndefined';
 
-export default { title: 'LumX components/input-helper/Input Helper' };
+export default {
+    title: 'LumX components/input-helper/Input Helper',
+    component: InputHelper,
+    argTypes: {
+        kind: getSelectArgType(Kind),
+    },
+    args: {
+        ...InputHelper.defaultProps,
+        children: 'Some helper text',
+    },
+};
 
-export const InformationHelper = ({ theme }: any) => (
-    <InputHelper kind={Kind.info} theme={theme}>
-        {text('Text', 'ex: toto@acme.com')}
-    </InputHelper>
-);
+/**
+ * Default input helper
+ */
+export const Default = {};
 
-export const ErrorHelper = ({ theme }: any) => (
-    <InputHelper kind={Kind.error} theme={theme}>
-        {text('Text', 'You should be bold!')}
-    </InputHelper>
-);
-
-export const ValidHelper = ({ theme }: any) => (
-    <InputHelper kind={Kind.success} theme={theme}>
-        {text('Text', 'Great, you are bold')}
-    </InputHelper>
-);
-
-export const warningHelper = ({ theme }: any) => (
-    <InputHelper kind={Kind.warning} theme={theme}>
-        {text('Text', 'This should be used carefuly')}
-    </InputHelper>
-);
+/**
+ * All `kind` variants
+ */
+export const AllKinds = {
+    argTypes: { kind: { control: false } },
+    decorators: [
+        withCombinations({
+            combinations: {
+                rows: { key: 'kind', options: withUndefined(Kind) },
+            },
+        }),
+    ],
+};

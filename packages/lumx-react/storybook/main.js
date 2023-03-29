@@ -12,7 +12,6 @@ module.exports = {
     stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
     staticDirs: ['../../site-demo/static/'],
     addons: [
-        '@storybook/addon-knobs',
         '@storybook/addon-a11y',
         '@storybook/addon-essentials',
     ],

@@ -2,7 +2,7 @@ import { mdiCellphone, mdiEmail, mdiGoogleHangouts, mdiPhone, mdiSlack } from '@
 import { Button, Emphasis, IconButton, Orientation, Size, Theme, UserBlock } from '@lumx/react';
 import React from 'react';
 
-export const App = ({ theme }: any) => {
+export const App = ({ theme = Theme.light }: any) => {
     const demoActions = [
         { label: 'Copy phone number', icon: mdiPhone },
         { label: 'Copy cell phone number', icon: mdiCellphone },

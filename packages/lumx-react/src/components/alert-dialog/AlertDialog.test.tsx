@@ -1,11 +1,9 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
-import { mount, shallow } from 'enzyme';
-import 'jest-enzyme';
-
-import { commonTestsSuite, itShouldRenderStories, Wrapper } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { queryByClassName } from '@lumx/react/testing/utils/queries';
+import { render } from '@testing-library/react';
 import { AlertDialog, AlertDialogProps } from './AlertDialog';
-import * as stories from './AlertDialog.stories';
 
 jest.mock('uid', () => ({ uid: () => 'uid' }));
 
@@ -14,30 +12,24 @@ const CLASSNAME = AlertDialog.className as string;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = ({ ...propsOverride }: Partial<AlertDialogProps> = {}, shallowRendering = true) => {
+const setup = (propsOverride: Partial<AlertDialogProps> = {}) => {
     const props: AlertDialogProps = {
         title: 'Alert',
+        isOpen: true,
         description: 'Deserunt et sunt qui consequat sint sit.',
-        // eslint-disable-next-line no-alert
-        confirmProps: { onClick: () => alert('confirm'), label: 'OK' },
+        confirmProps: { onClick: jest.fn(), label: 'OK' },
         ...propsOverride,
     };
-    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    const wrapper: Wrapper = renderer(<AlertDialog {...props} />);
-
-    return {
-        AlertDialog: wrapper.find(`Dialog`),
-        props,
-        wrapper,
-    };
+    render(<AlertDialog {...props} />);
+    const alertDialog = queryByClassName(document.body, CLASSNAME);
+    return { alertDialog, props };
 };
 
 describe(`<${AlertDialog.displayName}>`, () => {
-    // 1. Test render via snapshot.
-    describe('Snapshots and structure', () => {
-        itShouldRenderStories(stories, AlertDialog);
-    });
-
     // Common tests suite.
-    commonTestsSuite(setup, { className: 'AlertDialog', prop: 'AlertDialog' }, { className: CLASSNAME });
+    commonTestsSuiteRTL(setup, {
+        baseClassName: CLASSNAME,
+        forwardClassName: 'alertDialog',
+        forwardAttributes: 'alertDialog',
+    });
 });

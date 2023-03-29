@@ -1,75 +1,36 @@
-import React, { useRef, useState } from 'react';
-import { mdiMenu, mdiSettings } from '@lumx/icons';
-import { Placement } from '@lumx/react';
-
-import { PopoverDialog, PopoverDialogProps } from '.';
-import { Emphasis, Orientation, Size, Typography } from '..';
-import { Button, IconButton } from '../button';
-import { FlexBox } from '../flex-box';
-import { Heading } from '../heading';
-import { List, ListItem } from '../list';
-import { Toolbar } from '../toolbar';
-
-const WithButton = (Story: any, context: any) => {
-    const anchorRef = useRef(null);
-    const [isOpen, setIsOpen] = useState<boolean>(context?.args?.isOpen || false);
-
-    return (
-        <>
-            <Button ref={anchorRef} onClick={() => setIsOpen((current) => !current)}>
-                Open popover
-            </Button>
-            <Story anchorRef={anchorRef} isOpen={isOpen} onClose={() => setIsOpen(false)} />
-        </>
-    );
-};
-
-const dialogHeaderId = 'dialog-header';
-
-const DemoPopoverContent = () => (
-    <FlexBox orientation={Orientation.vertical}>
-        <Toolbar
-            label={
-                <Heading id="dialogHeaderId" typography={Typography.headline}>
-                    Title
-                </Heading>
-            }
-            after={<IconButton label="Settings" icon={mdiSettings} emphasis={Emphasis.low} />}
-        />
-        <List>
-            <ListItem size={Size.huge} after={<IconButton label="Menu" icon={mdiMenu} size={Size.s} />}>
-                List Item With Actions
-            </ListItem>
-            <ListItem
-                size={Size.huge}
-                linkProps={{
-                    href: 'http://google.com',
-                }}
-            >
-                Clickable list item
-            </ListItem>
-        </List>
-    </FlexBox>
-);
+import React from 'react';
+import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
+import { PopoverDialog } from '.';
+import { Button } from '../button';
 
 export default {
     title: 'LumX components/popover-dialog/PopoverDialog',
     component: PopoverDialog,
-    decorators: [WithButton],
-    args: {
-        children: <DemoPopoverContent />,
-        'aria-labelledby': dialogHeaderId,
-        placement: Placement.BOTTOM,
-    },
 };
 
-const Template = (args: PopoverDialogProps, context: any) => {
-    const { anchorRef, isOpen, onClose } = context;
+/**
+ * Example PopoverDialog using a button as a trigger
+ */
+export const WithButtonTrigger = () => {
+    const anchorRef = React.useRef(null);
+    const [isOpen, close, open] = useBooleanState(true);
+
     return (
-        <PopoverDialog {...args} anchorRef={anchorRef} isOpen={isOpen} onClose={onClose}>
-            {args.children}
-        </PopoverDialog>
+        <>
+            <Button id="trigger-button-1" ref={anchorRef} onClick={open}>
+                Open popover
+            </Button>
+            <PopoverDialog
+                aria-labelledby="trigger-button-1"
+                anchorRef={anchorRef}
+                isOpen={isOpen}
+                onClose={close}
+                placement="bottom"
+            >
+                <Button className="lumx-spacing-margin-huge" onClick={close}>
+                    Close
+                </Button>
+            </PopoverDialog>
+        </>
     );
 };
-
-export const Default = Template.bind({});

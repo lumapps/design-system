@@ -1,29 +1,45 @@
 import { Slider } from '@lumx/react';
-import { number, text } from '@storybook/addon-knobs';
-import noop from 'lodash/noop';
-import React from 'react';
+import { loremIpsum } from '@lumx/react/stories/utils/lorem';
+import { withValueOnChange } from '@lumx/react/stories/decorators/withValueOnChange';
 
-export default { title: 'LumX components/slider/Slider' };
+export default {
+    title: 'LumX components/slider/Slider',
+    component: Slider,
+    args: {
+        ...Slider.defaultProps,
+        min: 0,
+        max: 30,
+        value: 15,
+        name: 'slider-html-name',
+    },
+    argTypes: {
+        onChange: { action: true },
+    },
+    decorators: [withValueOnChange({})],
+};
 
-export const DefaultSlider = ({ theme }: any) => (
-    <Slider
-        label={text('label', 'Default')}
-        max={number('max', 10)}
-        min={number('min', 0)}
-        theme={theme}
-        value={5}
-        onChange={noop}
-    />
-);
+/**
+ * Default slider with required props
+ */
+export const Default = {};
 
-export const WithHelperSlider = ({ theme }: any) => (
-    <Slider
-        label={text('label', 'Default')}
-        helper={text('helper', 'This is an helper text')}
-        max={number('max', 10)}
-        min={number('min', 0)}
-        theme={theme}
-        value={5}
-        onChange={noop}
-    />
-);
+/**
+ * With label and helper
+ */
+export const WithLabelAndHelper = {
+    args: { label: 'Slider label', helper: loremIpsum('tiny') },
+};
+
+/**
+ * With steps
+ */
+export const WithSteps = {
+    args: { steps: 5 },
+};
+
+/**
+ * With precision (three digits after the decimal point)
+ */
+export const WithPrecision = {
+    args: { steps: 0, precision: 3 },
+};

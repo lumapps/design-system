@@ -5,8 +5,6 @@ import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 import React, { ReactElement } from 'react';
 
-import * as stories from './Dialog.stories';
-
 const CLASSNAME = Dialog.className as string;
 
 // Mock out the useIntersectionObserver hook since it can't work with Jest/Enzyme.
@@ -29,26 +27,6 @@ const setup = (propsOverride: SetupProps = {}, shallowRendering = true) => {
 };
 
 describe(`<${Dialog.displayName}>`, () => {
-    // 1. Test render via snapshot.
-    describe('Snapshots and structure', () => {
-        // Do snapshot render test on every stories.
-        for (const [storyName, Story] of Object.entries(stories)) {
-            if (typeof Story !== 'function') {
-                continue;
-            }
-
-            it(`should render story ${storyName}`, () => {
-                const wrapper = shallow(<Story />);
-                expect(wrapper).toMatchSnapshot();
-            });
-        }
-    });
-
-    // 2. Test defaultProps value and important props custom values.
-    describe('Props', () => {
-        // Nothing to do here.
-    });
-
     // 3. Test events.
     describe('Events', () => {
         const keyDown = (key: string) => new KeyboardEvent('keydown', { key } as any);
@@ -84,16 +62,6 @@ describe(`<${Dialog.displayName}>`, () => {
             document.body.dispatchEvent(keyDown('Escape'));
             expect(onClose).not.toHaveBeenCalled();
         });
-    });
-
-    // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', () => {
-        // Nothing to do here.
-    });
-
-    // 5. Test state.
-    describe('State', () => {
-        // Nothing to do here.
     });
 
     // Common tests suite.

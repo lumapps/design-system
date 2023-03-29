@@ -1,11 +1,11 @@
 import { mdiMagnify, mdiViewGrid } from '@lumx/icons';
 
-import { Alignment, Button, Emphasis, FlexBox, IconButton, Orientation, TextField, Toolbar } from '@lumx/react';
+import { Alignment, Button, Emphasis, FlexBox, IconButton, Orientation, TextField, Theme, Toolbar } from '@lumx/react';
 
 import classNames from 'classnames';
 import React, { useState } from 'react';
 
-export const App = ({ theme }: any) => {
+export const App = ({ theme = Theme.light }: any) => {
     const [value, setValue] = useState('');
 
     return (

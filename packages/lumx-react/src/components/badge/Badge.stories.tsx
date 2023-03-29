@@ -1,45 +1,70 @@
 import { mdiHeart } from '@lumx/icons';
 import { AspectRatio, Badge, ColorPalette, Icon, Size, Thumbnail, ThumbnailVariant } from '@lumx/react';
-import { select, text } from '@storybook/addon-knobs';
-import React, { Fragment } from 'react';
+import React from 'react';
+import { colorArgType } from '@lumx/react/stories/controls/color';
+import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
+import { withUndefined } from '@lumx/react/stories/controls/withUndefined';
 
-export default { title: 'LumX components/badge/Badge' };
+export default {
+    title: 'LumX components/badge/Badge',
+    component: Badge,
+    argTypes: {
+        color: colorArgType,
+        children: { control: false },
+    },
+};
 
-export const WithText = () => (
-    <Badge color={select('Colors', ColorPalette, ColorPalette.blue)}>
-        <span>{text('Value', '30')}</span>
-    </Badge>
-);
+/**
+ * Using badge with text children
+ */
+export const WithText = {
+    args: { children: <span>30</span> },
+};
 
-export const WithIcon = () => (
-    <Badge color={select('Colors', ColorPalette, ColorPalette.red)}>
-        <Icon icon={mdiHeart} />
-    </Badge>
-);
+/**
+ * Using badge with icon children
+ */
+export const WithIcon = {
+    args: { children: <Icon icon={mdiHeart} /> },
+};
 
-export const WithThumbnail = () => (
-    <Badge color={select('Colors', ColorPalette, ColorPalette.light)}>
-        <Thumbnail
-            alt="Logo"
-            aspectRatio={AspectRatio.square}
-            image="/logo.svg"
-            size={Size.xxs}
-            variant={ThumbnailVariant.rounded}
-        />
-    </Badge>
-);
+/**
+ * Using badge with thumbnail children
+ */
+export const WithThumbnail = {
+    args: {
+        children: (
+            <Thumbnail
+                alt="Logo"
+                aspectRatio={AspectRatio.square}
+                image="/logo.svg"
+                size={Size.xxs}
+                variant={ThumbnailVariant.rounded}
+            />
+        ),
+    },
+};
 
-export const AllColors = () => (
-    <dl>
-        {Object.values(ColorPalette).map((color) => (
-            <Fragment key={color}>
-                <dt>{color}</dt>
-                <dd>
-                    <Badge color={color}>
-                        <Icon icon={mdiHeart} />
-                    </Badge>
-                </dd>
-            </Fragment>
-        ))}
-    </dl>
-);
+/**
+ * All combinations of colors and children types
+ */
+export const AllColors = {
+    argTypes: {
+        color: { control: false },
+    },
+    decorators: [
+        withCombinations({
+            combinations: {
+                cols: {
+                    key: 'color',
+                    options: withUndefined(ColorPalette),
+                },
+                rows: {
+                    'With text': WithText.args,
+                    'With icon': WithIcon.args,
+                    'With thumbnail': WithThumbnail.args,
+                },
+            },
+        }),
+    ],
+};

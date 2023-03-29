@@ -1,141 +1,111 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import { mdiChevronDown, mdiLink } from '@lumx/icons';
-import {
-    ColorPalette,
-    ColorVariant,
-    Link,
-    Typography,
-    TypographyCustom,
-    TypographyInterface,
-    TypographyTitleCustom,
-} from '@lumx/react';
-import { boolean, select, text } from '@storybook/addon-knobs';
-import React, { Fragment } from 'react';
-
-export default { title: 'LumX components/link/Link' };
-
-const onClick = () => console.log('clicked link');
+import { ColorPalette, ColorVariant, Link, Typography, TypographyInterface, TypographyTitleCustom } from '@lumx/react';
+import React from 'react';
+import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { colorArgType, colorVariantArgType } from '@lumx/react/stories/controls/color';
+import { iconArgType } from '@lumx/react/stories/controls/icons';
+import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
+import { withUndefined } from '@lumx/react/stories/controls/withUndefined';
+import { CustomLink } from '@lumx/react/stories/utils/CustomLink';
 
 const linkTypographies = { ...TypographyInterface, ...TypographyTitleCustom };
 
-export const SimpleLink = () => (
-    <>
-        <Link
-            href={text('href', 'https://example.com', 'Link 1')}
-            target={boolean('target: _blank', false, 'Link 1') ? '_blank' : ''}
-            color={select('Color', ColorPalette, ColorPalette.blue, 'Link 1')}
-            colorVariant={select('Color Variant', ColorVariant, ColorVariant.N, 'Link 1')}
-            typography={select('Typography', linkTypographies, Typography.body2, 'Link 1')}
-        >
-            {text('Value', 'Here is a first link', 'Link 1')}
-        </Link>
-        <br />
-        <Link
-            href={text('href', 'https://google.fr', 'Link 2')}
-            target={boolean('target: _blank', false, 'Link 2') ? '_blank' : ''}
-            color={select('Color', ColorPalette, ColorPalette.blue, 'Link 2')}
-            colorVariant={select('Color Variant', ColorVariant, ColorVariant.N, 'Link 2')}
-            typography={select('Typography', linkTypographies, Typography.body1, 'Link 2')}
-        >
-            {text('Value', 'Here is a second link', 'Link 2')}
-        </Link>
-        <br />
-        <Link
-            href={text('href', 'https://google.co.jp', 'Link 3')}
-            target={boolean('target: _blank', false, 'Link 3') ? '_blank' : ''}
-            color={select('Color', ColorPalette, ColorPalette.blue, 'Link 3')}
-            colorVariant={select('Color Variant', ColorVariant, ColorVariant.N, 'Link 3')}
-            typography={select('Typography', linkTypographies, Typography.caption, 'Link 3')}
-        >
-            {text('Value', 'Here is a third link', 'Link 3')}
-        </Link>
-    </>
-);
-
-export const WithoutHref = () => (
-    // The constrained width should show that the button does not have centered text align.
-    <div style={{ border: '1px solid red', width: 100, height: 100, resize: 'both', overflow: 'auto' }}>
-        <Link onClick={onClick}>Link without href (renders as a button for a11y)</Link>
-    </div>
-);
-
-export const WithCustomLink = () => {
-    const CustomLink: React.FC = ({ children, ...props }) =>
-        React.createElement('a', { ...props, style: { color: 'red' } }, children);
-
-    return (
-        <Link linkAs={CustomLink} href="https://example.com">
-            Custom link
-        </Link>
-    );
+export default {
+    title: 'LumX components/link/Link',
+    component: Link,
+    argTypes: {
+        typography: getSelectArgType(linkTypographies),
+        color: colorArgType,
+        colorVariant: colorVariantArgType,
+        rightIcon: iconArgType,
+        leftIcon: iconArgType,
+    },
+    args: { ...Link.defaultProps, children: 'Link' },
 };
 
-export const DisabledLink = () => (
-    // eslint-disable-next-line jsx-a11y/anchor-is-valid
-    <Link onClick={onClick} disabled>
-        Disabled link
-    </Link>
-);
-
-export const WithCustomizableTypography = () => (
-    <>
-        <style>{`
-        :root {
-            --lumx-typography-custom-title1-font-size: 5px;
-        }
-        `}</style>
-        <Link typography={Typography.custom.title1} href="https://example.com">
-            Link with customizable `body` typography
-        </Link>
-    </>
-);
-
-export const AllTypography = () => {
-    const typographies = [undefined, ...Object.values(TypographyInterface), ...Object.values(TypographyCustom)];
-    return (
-        <table>
-            {typographies.map((typography) => (
-                <tr key={typography}>
-                    <td>{typography}</td>
-                    <td>
-                        <Link
-                            leftIcon={mdiChevronDown}
-                            rightIcon={mdiLink}
-                            typography={typography}
-                            href="https://example.com"
-                        >
-                            Link text
-                        </Link>
-                    </td>
-                </tr>
-            ))}
-        </table>
-    );
+/**
+ * Default link
+ */
+export const Default = {
+    args: { href: 'https://example.com', target: '_blank' },
 };
 
-export const AllColor = () => {
-    const colorVariants = [undefined, ...Object.values(ColorVariant)];
-    const colors = [undefined, ...Object.values(ColorPalette)];
-    return (
-        <table style={{ borderCollapse: 'separate', borderSpacing: 5 }}>
-            <tr>
-                <td />
-                {colorVariants.map((colorVariant) => (
-                    <td key={colorVariant}>{colorVariant}</td>
-                ))}
-            </tr>
-            {colors.map((color) => (
-                <tr key={color}>
-                    <td>{color}</td>
-                    {colorVariants.map((colorVariant) => (
-                        <td key={colorVariant}>
-                            <Link href="https://example.com" color={color} colorVariant={colorVariant}>
-                                Some text
-                            </Link>
-                        </td>
-                    ))}
-                </tr>
-            ))}
-        </table>
-    );
+/**
+ * Disabled
+ */
+export const Disabled = {
+    args: { ...Default.args, children: 'Link (disabled)', isDisabled: true },
+};
+
+/**
+ * Using onClick transforms the link into a <button> in DOM
+ */
+export const ButtonLink = {
+    argTypes: { onClick: { action: true } },
+    args: { children: 'Button link' },
+};
+
+/**
+ * Button link disabled
+ */
+export const ButtonLinkDisabled = {
+    args: { ...ButtonLink.args, children: 'Button link (disabled)', isDisabled: true },
+};
+
+/**
+ * Use custom component instead of <a> or <button>
+ */
+export const LinkAs = {
+    args: { linkAs: CustomLink },
+};
+
+/**
+ * Use a custom typography and customize it via CSS variable
+ */
+export const WithCustomizableTypography = {
+    typography: Typography.custom.title1,
+    // eslint-disable-next-line react/display-name
+    render: (props: any) => (
+        // Injecting CSS variable to customize the font size
+        <>
+            <style>{`
+            :root {
+                --lumx-typography-custom-title1-font-size: 5px;
+            }
+            `}</style>
+            <Link {...props} />
+        </>
+    ),
+};
+/**
+ * Show all typographies
+ */
+export const AllTypography = {
+    argTypes: {
+        typography: { control: false },
+    },
+    decorators: [
+        withCombinations({
+            combinations: {
+                rows: { key: 'typography', options: withUndefined(linkTypographies) },
+            },
+        }),
+    ],
+};
+
+/**
+ * Show all color combinations
+ */
+export const AllColors = {
+    argTypes: {
+        color: { control: false },
+        colorVariant: { control: false },
+    },
+    decorators: [
+        withCombinations({
+            combinations: {
+                rows: { key: 'color', options: withUndefined(ColorPalette) },
+                cols: { key: 'colorVariant', options: withUndefined(ColorVariant) },
+            },
+        }),
+    ],
 };

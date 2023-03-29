@@ -1,28 +1,23 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
-import 'jest-enzyme';
-import { commonTestsSuite, itShouldRenderStories } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 
+import { render } from '@testing-library/react';
+import { queryByClassName } from '@lumx/react/testing/utils/queries';
 import { CommentBlock, CommentBlockProps } from './CommentBlock';
-import * as stories from './CommentBlock.stories';
 
 const CLASSNAME = CommentBlock.className as string;
 
-/**
- * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
- */
-const setup = (props: Partial<CommentBlockProps> = {}, shallowRendering = true) => {
-    const renderer: any = shallowRendering ? shallow : mount;
-    const wrapper: any = renderer(<CommentBlock {...(props as any)} />);
-    return { props, wrapper };
+const setup = (props: Partial<CommentBlockProps> = {}) => {
+    render(<CommentBlock {...(props as any)} />);
+    const commentBlock = queryByClassName(document.body, CLASSNAME);
+    return { props, commentBlock };
 };
 
 describe(`<${CommentBlock.displayName}>`, () => {
-    // 1. Test render via snapshot.
-    describe('Snapshots and structure', () => {
-        itShouldRenderStories(stories, CommentBlock);
-    });
-
     // Common tests suite.
-    commonTestsSuite(setup, { className: 'wrapper', prop: 'wrapper' }, { className: CLASSNAME });
+    commonTestsSuiteRTL(setup, {
+        baseClassName: CLASSNAME,
+        forwardClassName: 'commentBlock',
+        forwardAttributes: 'commentBlock',
+    });
 });

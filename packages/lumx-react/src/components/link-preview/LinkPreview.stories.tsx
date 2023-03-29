@@ -1,88 +1,61 @@
-/* istanbul ignore file */
-import { landscapeImageKnob, portraitImageKnob } from '@lumx/react/stories/knobs/image';
-import { text } from '@storybook/addon-knobs';
-import React from 'react';
+import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { headingElementArgType } from '@lumx/react/stories/controls/element';
+import { loremIpsum } from '@lumx/react/stories/utils/lorem';
+import { LANDSCAPE_IMAGES } from '@lumx/react/stories/controls/image';
+import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
+import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
+
 import { Size } from '..';
-import { LinkPreview } from './LinkPreview';
+import { LinkPreview, LinkPreviewProps } from './LinkPreview';
 
-export default { title: 'LumX components/link-preview/Link preview' };
-
-const LONG_LOREM_IPSUM = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut quam sollicitudin, viverra quam eget, pretium tellus. Praesent sit amet augue in odio varius accumsan vitae quis nunc. Aliquam iaculis neque at augue laoreet, eu sagittis dolor tempus. Nullam sit amet bibendum velit, in pharetra lorem. Aliquam semper accumsan placerat. Sed felis risus, efficitur non eros non, rhoncus viverra lectus. Aliquam eget interdum tellus. Praesent non ex ut urna tempus facilisis. Sed tellus tortor, pharetra vel velit sit amet, aliquet condimentum quam. Sed dictum nibh eget nibh ullamcorper dignissim. Vestibulum elementum at mauris sit amet iaculis. Maecenas pretium luctus enim vel commodo. Cras accumsan sagittis eros, vel maximus sem molestie id. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-Mauris ultrices pellentesque vestibulum. Etiam vel turpis at eros condimentum feugiat nec sit amet diam. Fusce pellentesque vulputate est sed ultrices. Etiam arcu tellus, dignissim non dui mattis, suscipit pellentesque erat. Aliquam congue magna nec varius suscipit. Sed mattis fringilla viverra. Donec pulvinar ex ac augue feugiat, a vulputate mauris suscipit. Morbi eget lorem purus. In pretium ligula non ex auctor, ornare dignissim orci dictum. Nulla ornare, risus non tincidunt blandit, massa massa mollis velit, id vulputate mi ligula ut metus. Vestibulum mattis tincidunt lorem, ac commodo felis ultricies interdum. Proin fermentum eu nibh a suscipit. Morbi eu pretium sapien. Pellentesque pretium purus eros, eget feugiat nisl dapibus at.`;
-
-/**
- * LinkPreview story
- * @return regular LinkPreview.
- */
-export const RegularLinkPreview = ({ theme }: any) => (
-    <LinkPreview
-        title={text('Title', 'Link title')}
-        description={text('Description', LONG_LOREM_IPSUM)}
-        link={text('URL', 'https://google.com')}
-        theme={theme}
-        thumbnailProps={{ image: portraitImageKnob(), alt: 'Portrait' }}
-    />
-);
+export default {
+    title: 'LumX components/link-preview/Link preview',
+    component: LinkPreview,
+    decorators: [withNestedProps()],
+    args: {
+        ...LinkPreview.defaultProps,
+        title: '',
+        description: '',
+        link: 'https://example.com',
+    },
+    argTypes: {
+        size: getSelectArgType<LinkPreviewProps['size']>([Size.regular, Size.big]),
+        titleHeading: { if: { arg: 'title' }, ...headingElementArgType },
+    },
+};
 
 /**
- * LinkPreview story
- * @return regular LinkPreview without thumbnail.
+ * Default link preview with only the required props (link)
  */
-export const NoThumbnail = ({ theme }: any) => (
-    <LinkPreview
-        title={text('Title', 'Link title')}
-        description={text('Description', LONG_LOREM_IPSUM)}
-        link={text('URL', 'https://google.com')}
-        theme={theme}
-    />
-);
+export const Default = {};
 
 /**
- * LinkPreview story
- * @return regular LinkPreview without thumbnail, title and description.
+ * Link preview with title and description
  */
-export const OnlyUrl = ({ theme }: any) => <LinkPreview link={text('URL', 'https://google.com')} theme={theme} />;
+export const TitleAndDescription = {
+    args: {
+        title: 'Link title',
+        description: loremIpsum('short'),
+    },
+};
 
 /**
- * LinkPreview story
- * @return big LinkPreview.
+ * Link preview with title, description and thumbnail
  */
-export const BigLinkPreview = ({ theme }: any) => (
-    <div style={{ width: 400 }}>
-        <LinkPreview
-            title={text('Title', 'Link title')}
-            description={text('Description', LONG_LOREM_IPSUM)}
-            link={text('URL', 'https://google.com')}
-            theme={theme}
-            thumbnailProps={{ image: landscapeImageKnob(), alt: 'Landscape' }}
-            size={Size.big}
-        />
-    </div>
-);
+export const AllFields = {
+    args: {
+        ...TitleAndDescription.args,
+        'thumbnailProps.image': LANDSCAPE_IMAGES.landscape1,
+    },
+};
 
 /**
- * LinkPreview story
- * @return big LinkPreview without thumbnail.
+ * Big link preview with title, description and thumbnail
  */
-export const BigWithoutThumbnail = ({ theme }: any) => (
-    <div style={{ width: 400 }}>
-        <LinkPreview
-            title={text('Title', 'Link title')}
-            description={text('Description', LONG_LOREM_IPSUM)}
-            link={text('URL', 'https://google.com')}
-            theme={theme}
-            size={Size.big}
-        />
-    </div>
-);
-
-/**
- * LinkPreview story
- * @return big LinkPreview without thumbnail, title and description.
- */
-export const BigWithOnlyUrl = ({ theme }: any) => (
-    <div style={{ width: 400 }}>
-        <LinkPreview link={text('URL', 'https://google.com')} theme={theme} size={Size.big} />
-    </div>
-);
+export const Big = {
+    decorators: [withWrapper({ style: { width: '400px' } })],
+    args: {
+        ...AllFields.args,
+        size: Size.big,
+    },
+};

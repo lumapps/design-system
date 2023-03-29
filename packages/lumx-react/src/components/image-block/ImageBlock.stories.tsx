@@ -1,52 +1,108 @@
-import { LANDSCAPE_IMAGES, landscapeImageKnob } from '@lumx/react/stories/knobs/image';
 import React from 'react';
 
-import { Alignment, AspectRatio, Chip, ChipGroup, ImageBlock, Size } from '@lumx/react';
-import { boolean, select, text } from '@storybook/addon-knobs';
-import { enumKnob } from '@lumx/react/stories/knobs/enumKnob';
-import { focusKnob } from '@lumx/react/stories/knobs/focusKnob';
+import {
+    Alignment,
+    AspectRatio,
+    Chip,
+    ChipGroup,
+    HorizontalAlignment,
+    IconButton,
+    ImageBlock,
+    ImageBlockCaptionPosition,
+    ImageBlockSize,
+    Size,
+} from '@lumx/react';
+import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { imageArgType, PORTRAIT_IMAGES, LANDSCAPE_IMAGES } from '@lumx/react/stories/controls/image';
+import { mdiFileEdit } from '@lumx/icons';
+import { toNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
+import { focusPoint } from '@lumx/react/stories/controls/focusPoint';
 
-export default { title: 'LumX components/image-block/Image Block' };
+export default {
+    title: 'LumX components/image-block/Image Block',
+    argTypes: {
+        size: getSelectArgType<ImageBlockSize>([Size.xl, Size.xxl]),
+        image: imageArgType,
+        captionPosition: getSelectArgType(ImageBlockCaptionPosition),
+        'thumbnailProps.aspectRatio': getSelectArgType(AspectRatio),
+        align: getSelectArgType<HorizontalAlignment>([Alignment.left, Alignment.center, Alignment.right]),
+    },
+    args: { ...ImageBlock.defaultProps, image: LANDSCAPE_IMAGES.landscape1 },
+};
 
-export const DefaultImageBlock = ({ theme }: any) => {
-    const alt = text('Alternative text', 'Image alt text');
-    const align = select('Alignment', Alignment, Alignment.center) as any;
-    const aspectRatio = select('Aspect ratio', AspectRatio, AspectRatio.square);
-    const title = text('Title', 'Hello world');
-    const description = text('Description', 'My awesome description');
-    const crossOrigin = enumKnob('CORS', [undefined, 'anonymous', 'use-credentials'], undefined);
-    const tags = boolean('Display tags', true) && (
+export const Default = (props: any) => {
+    const nestedProps = toNestedProps(props) as any;
+    return <ImageBlock {...nestedProps} />;
+};
+
+export const WithCaptionBelow: any = Default.bind({});
+WithCaptionBelow.args = {
+    captionPosition: ImageBlockCaptionPosition.below,
+    size: Size.xxl,
+    title: 'Image block title',
+    description: 'Image block description',
+};
+
+export const WithCaptionOver: any = Default.bind({});
+WithCaptionOver.args = {
+    captionPosition: ImageBlockCaptionPosition.over,
+    size: Size.xxl,
+    title: 'Image block title',
+    description: 'Image block description',
+};
+
+export const WithAlign: any = Default.bind({});
+WithAlign.args = {
+    ...WithCaptionBelow.args,
+    image: LANDSCAPE_IMAGES.landscape1s200,
+    size: undefined,
+    align: Alignment.center,
+};
+
+export const WithTags: any = Default.bind({});
+WithTags.argTypes = {
+    tags: { control: false },
+};
+WithTags.args = {
+    size: Size.xxl,
+    tags: (
         <ChipGroup align={Alignment.left}>
-            <Chip size={Size.s} theme={theme}>
-                Tag 1
-            </Chip>
-
-            <Chip size={Size.s} theme={theme}>
-                Tag 2
-            </Chip>
+            <Chip size={Size.s}>Tag 1</Chip>
+            <Chip size={Size.s}>Tag 2</Chip>
         </ChipGroup>
-    );
-    const imageUrl = landscapeImageKnob('Url image', LANDSCAPE_IMAGES.landscape1);
-    const focusPoint = { x: focusKnob('Focus X'), y: focusKnob('Focus Y') };
-    const size = enumKnob('Size', [undefined, Size.xl, Size.xxl] as const, undefined);
-    const onClick = boolean('clickable?', false) && (() => console.log('ok'));
+    ),
+};
 
-    return (
-        <ImageBlock
-            alt={alt}
-            description={description}
-            image={imageUrl}
-            size={size}
-            tags={tags}
-            title={title}
-            theme={theme}
-            align={align}
-            thumbnailProps={{
-                aspectRatio,
-                crossOrigin,
-                focusPoint,
-                onClick,
-            }}
-        />
-    );
+export const WithActions: any = Default.bind({});
+WithActions.argTypes = {
+    actions: { control: false },
+};
+WithActions.args = {
+    size: Size.xxl,
+    actions: <IconButton label="Edit" icon={mdiFileEdit} />,
+};
+
+export const WithFocusPointHorizontal: any = Default.bind({});
+WithFocusPointHorizontal.args = {
+    size: Size.xxl,
+    'thumbnailProps.aspectRatio': AspectRatio.vertical,
+    'thumbnailProps.focusPoint.x': 1,
+    'thumbnailProps.focusPoint.y': 0,
+};
+WithFocusPointHorizontal.argTypes = {
+    'thumbnailProps.focusPoint.x': focusPoint,
+    'thumbnailProps.focusPoint.y': focusPoint,
+};
+
+export const WithFocusPointVertical: any = Default.bind({});
+WithFocusPointVertical.args = {
+    size: Size.xxl,
+    image: PORTRAIT_IMAGES.portrait1,
+    'thumbnailProps.aspectRatio': AspectRatio.horizontal,
+    'thumbnailProps.focusPoint.x': 0,
+    'thumbnailProps.focusPoint.y': 1,
+};
+WithFocusPointVertical.argTypes = {
+    'thumbnailProps.focusPoint.x': focusPoint,
+    'thumbnailProps.focusPoint.y': focusPoint,
 };

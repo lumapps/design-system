@@ -1,15 +1,38 @@
 import React from 'react';
 
-import { text } from '@storybook/addon-knobs';
-
 import { InputLabel } from './InputLabel';
 
-export default { title: 'LumX components/input-label/Input Label' };
+export default {
+    title: 'LumX components/input-label/Input Label',
+    component: InputLabel,
+    args: {
+        ...InputLabel.defaultProps,
+        children: 'Label text',
+    },
+    argTypes: {
+        isRequired: { control: 'boolean' },
+    },
+    decorators: [
+        /**
+         * Associate label with an input
+         */
+        (Story: any, ctx: any) => (
+            <>
+                <input type="hidden" id="123" />
+                <Story args={{ ...ctx.args, htmlFor: '123' }} />
+            </>
+        ),
+    ],
+};
 
-export const SimpleLabel = ({ theme }: any) => (
-    <div id="123">
-        <InputLabel htmlFor="123" theme={theme}>
-            {text('Label', 'The label')}
-        </InputLabel>
-    </div>
-);
+/**
+ * Default input label
+ */
+export const Default = {};
+
+/**
+ * Required input label
+ */
+export const IsRequired = {
+    args: { isRequired: true },
+};

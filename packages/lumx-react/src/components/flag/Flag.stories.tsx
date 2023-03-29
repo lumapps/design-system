@@ -1,23 +1,38 @@
-import React from 'react';
-import { text } from '@storybook/addon-knobs';
-
 import { mdiHeart } from '@lumx/icons';
 import { ColorPalette, Flag } from '@lumx/react';
+import { colorArgType } from '@lumx/react/stories/controls/color';
+import { iconArgType } from '@lumx/react/stories/controls/icons';
+import { withUndefined } from '@lumx/react/stories/controls/withUndefined';
+import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 
-export default { title: 'LumX components/flag/Flag' };
+export default {
+    title: 'LumX components/flag/Flag',
+    component: Flag,
+    argTypes: { color: colorArgType, icon: iconArgType },
+    args: { ...Flag.defaultProps, label: 'Label' },
+};
 
-export const defaultProps = ({ theme }: any) => <Flag label={text('Label', 'hearing')} theme={theme} />;
-export const withIcon = ({ theme }: any) => <Flag icon={mdiHeart} label={text('Label', 'hearing')} theme={theme} />;
-export const withColor = ({ theme }: any) => {
-    return (
-        <>
-            <Flag color={ColorPalette.blue} icon={mdiHeart} label="blue" theme={theme} />
-            <Flag color={ColorPalette.dark} icon={mdiHeart} label="dark" theme={theme} />
-            <Flag color={ColorPalette.green} icon={mdiHeart} label="green" theme={theme} />
-            <Flag color={ColorPalette.primary} icon={mdiHeart} label="primary" theme={theme} />
-            <Flag color={ColorPalette.red} icon={mdiHeart} label="red" theme={theme} />
-            <Flag color={ColorPalette.secondary} icon={mdiHeart} label="secondary" theme={theme} />
-            <Flag color={ColorPalette.yellow} icon={mdiHeart} label="yellow" theme={theme} />
-        </>
-    );
+/**
+ * Default flag with label
+ */
+export const Default = {};
+
+/**
+ * With icon
+ */
+export const WithIcon = { args: { icon: mdiHeart } };
+
+/**
+ * All `color` variants
+ */
+export const AllColors = {
+    ...WithIcon,
+    argTypes: { color: { control: false } },
+    decorators: [
+        withCombinations({
+            combinations: {
+                cols: { key: 'color', options: withUndefined(ColorPalette) },
+            },
+        }),
+    ],
 };

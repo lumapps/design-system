@@ -1,39 +1,24 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
-import { mount, shallow } from 'enzyme';
-import 'jest-enzyme';
-
-import { commonTestsSuite, itShouldRenderStories, Wrapper } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { render } from '@testing-library/react';
+import { queryByClassName } from '@lumx/react/testing/utils/queries';
 import { Avatar, AvatarProps } from './Avatar';
-import * as stories from './Avatar.stories';
 
 const CLASSNAME = Avatar.className as string;
 
-/**
- * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
- */
-const setup = ({ ...propsOverride }: Partial<AvatarProps> = {}, shallowRendering = true) => {
+const setup = (propsOverride: Partial<AvatarProps> = {}) => {
     const props: AvatarProps = {
         image: 'path/to/avatar/image.png',
         alt: 'Image',
         ...propsOverride,
     };
-    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    const wrapper: Wrapper = renderer(<Avatar {...props} />);
-
-    return {
-        avatar: wrapper.find(`div`),
-        props,
-        wrapper,
-    };
+    render(<Avatar {...props} />);
+    const avatar = queryByClassName(document.body, CLASSNAME);
+    return { avatar, props };
 };
 
 describe(`<${Avatar.displayName}>`, () => {
-    // 1. Test render via snapshot.
-    describe('Snapshots and structure', () => {
-        itShouldRenderStories(stories, Avatar);
-    });
-
     // Common tests suite.
-    commonTestsSuite(setup, { className: 'avatar', prop: 'avatar' }, { className: CLASSNAME });
+    commonTestsSuiteRTL(setup, { baseClassName: CLASSNAME, forwardClassName: 'avatar', forwardAttributes: 'avatar' });
 });

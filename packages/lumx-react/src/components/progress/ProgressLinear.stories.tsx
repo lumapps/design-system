@@ -1,8 +1,12 @@
 import { ProgressLinear } from '@lumx/react';
-import React from 'react';
 
 export default {
     title: 'LumX components/progress/ProgressLinear',
+    component: ProgressLinear,
+    args: ProgressLinear.defaultProps,
 };
 
-export const Default = ({ theme }: any) => <ProgressLinear theme={theme} />;
+/**
+ * Default progress linear
+ */
+export const Default = {};

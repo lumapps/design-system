@@ -15,7 +15,7 @@ import {
     UserBlock,
 } from '@lumx/react';
 
-export const App = ({ theme }: any) => (
+export const App = ({ theme = Theme.light }: any) => (
     <>
         <PostBlock
             actions={
