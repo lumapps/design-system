@@ -24,7 +24,7 @@ function generateDemoStories() {
     const basePath = path.join(__dirname, '..', 'src', 'stories', 'generated');
     // Reset directory.
     try {
-        fs.rmdirSync(basePath, { recursive: true });
+        fs.rmSync(basePath, { recursive: true });
         fs.mkdirSync(basePath, { recursive: true });
     } catch (e) {}
 
