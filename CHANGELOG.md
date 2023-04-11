@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.2.0][] - 2023-04-11
+
 ### Changed
 
 -   @lumx/core: improved color contrast on dark L6 & L2
@@ -1722,3 +1724,7 @@ _Failed released_
 [unreleased]: https://github.com/lumapps/design-system/compare/v3.1.5...HEAD
 [3.1.5]: https://github.com/lumapps/design-system/compare/v3.1.4...v3.1.5
 [3.1.4]: https://github.com/lumapps/design-system/tree/v3.1.4
+
+
+[Unreleased]: https://github.com/lumapps/design-system/compare/v3.2.0...HEAD
+[3.2.0]: https://github.com/lumapps/design-system/tree/v3.2.0
