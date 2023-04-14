@@ -37,7 +37,7 @@
         }
 
         #{$self}--has-4-thumbnails & {
-            grid: 2fr 1fr / 1fr 1fr 1fr;
+            grid: calc(100% / 3 * 2) calc(100% / 3) / 1fr 1fr 1fr;
             grid-template-areas:
                 "b4 b4 b4"
                 "s41 s42 s43";
