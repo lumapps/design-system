@@ -1,15 +1,15 @@
-import React, { Ref, useCallback, useMemo, useRef } from 'react';
-
 import classNames from 'classnames';
+import React, { Ref, useCallback, useMemo, useRef } from 'react';
 import { uid } from 'uid';
 
+import { Placement } from '@lumx/react';
 import { Kind, Theme } from '@lumx/react/components';
 import { Dropdown } from '@lumx/react/components/dropdown/Dropdown';
 import { InputHelper } from '@lumx/react/components/input-helper/InputHelper';
+import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
+import { useListenFocus } from '@lumx/react/hooks/useListenFocus';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
-import { useListenFocus } from '@lumx/react/hooks/useListenFocus';
-import { Placement } from '@lumx/react';
 
 import { CoreSelectProps, SelectVariant } from './constants';
 
@@ -30,6 +30,7 @@ export const WithSelectContext = (
     {
         children,
         className,
+        focusElement,
         isMultiple,
         closeOnClick = !isMultiple,
         disabled,
@@ -58,6 +59,7 @@ export const WithSelectContext = (
     const selectId = useMemo(() => id || `select-${uid()}`, [id]);
     const anchorRef = useRef<HTMLElement>(null);
     const selectRef = useRef<HTMLDivElement>(null);
+    const dropdownRef = useRef<HTMLDivElement>(null);
     const isFocus = useListenFocus(anchorRef);
 
     const handleKeyboardNav = useCallback(
@@ -76,6 +78,9 @@ export const WithSelectContext = (
         }
         anchorRef?.current?.blur();
     };
+
+    // Handle focus trap.
+    useFocusTrap(isOpen && dropdownRef.current, focusElement?.current);
 
     return (
         <div
@@ -125,6 +130,7 @@ export const WithSelectContext = (
                 placement={Placement.BOTTOM_START}
                 onClose={onClose}
                 onInfiniteScroll={onInfiniteScroll}
+                ref={dropdownRef}
             >
                 {children}
             </Dropdown>
