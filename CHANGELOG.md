@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Select: fix the select dropdown focus not being trapped in it.
 -   Popover, DatePickerField, Dialog & Lightbox: remove unnecessary scroll on open (on focus trap activation)
+-   Popover & Dropdown: remove unnecessary scroll on close (on focus restore)
 
 ## [3.2.0][] - 2023-04-11
 
