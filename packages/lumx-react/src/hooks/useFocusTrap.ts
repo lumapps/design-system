@@ -72,10 +72,10 @@ export function useFocusTrap(focusZoneElement: HTMLElement | Falsy, focusElement
         // SETUP:
         if (focusElement && focusZoneElement.contains(focusElement)) {
             // Focus the given element.
-            focusElement.focus();
+            focusElement.focus({ preventScroll: true });
         } else {
             // Focus the first focusable element in the zone.
-            getFirstAndLastFocusable(focusZoneElement).first?.focus();
+            getFirstAndLastFocusable(focusZoneElement).first?.focus({ preventScroll: true });
         }
         FOCUS_TRAPS.register(focusTrap);
 
