@@ -173,18 +173,16 @@ const _InnerPopover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, ref
          * unless specifically requested not to.
          */
         if (isFocusedWithin.current && focusAnchorOnClose) {
-            if (parentElement?.current) {
-                parentElement?.current.focus();
-            }
-
-            const firstFocusable = anchorRef?.current && getFirstAndLastFocusable(anchorRef?.current).first;
-            if (firstFocusable) {
+            let elementToFocus = parentElement?.current;
+            if (!elementToFocus && anchorRef?.current) {
                 // Focus the first focusable element in anchor.
-                firstFocusable.focus();
-            } else {
-                // Fallback on the anchor element.
-                anchorRef?.current?.focus();
+                elementToFocus = getFirstAndLastFocusable(anchorRef.current).first;
             }
+            if (!elementToFocus) {
+                // Fallback on the anchor element.
+                elementToFocus = anchorRef?.current;
+            }
+            elementToFocus?.focus({ preventScroll: true });
         }
 
         onClose();
