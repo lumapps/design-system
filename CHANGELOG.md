@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.2.1][] - 2023-04-26
+
 ### Fixed
 
 -   Select: fix the select dropdown focus not being trapped in it.
@@ -1732,5 +1734,6 @@ _Failed released_
 [3.1.4]: https://github.com/lumapps/design-system/tree/v3.1.4
 
 
-[Unreleased]: https://github.com/lumapps/design-system/compare/v3.2.0...HEAD
+[Unreleased]: https://github.com/lumapps/design-system/compare/v3.2.1...HEAD
+[3.2.1]: https://github.com/lumapps/design-system/compare/v3.2.0...v3.2.1
 [3.2.0]: https://github.com/lumapps/design-system/tree/v3.2.0
