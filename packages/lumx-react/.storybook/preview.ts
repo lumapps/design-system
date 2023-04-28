@@ -3,9 +3,6 @@ import { withStoryBlockDecorator } from './story-block/decorator';
 import { Theme } from '@lumx/react';
 
 const preview: Preview = {
-    parameters: {
-        actions: { argTypesRegex: '^on[A-Z].*' },
-    },
     globalTypes: {
         /** Add Theme switcher in the toolbar */
         theme: {

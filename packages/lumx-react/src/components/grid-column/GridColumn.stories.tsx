@@ -14,7 +14,7 @@ const gapSizes: Array<GridColumnProps['gap']> = [Size.tiny, Size.regular, Size.b
 const getItems = (nb: number) =>
     range(nb).map((key) => (
         // eslint-disable-next-line react/jsx-key
-        <div style={genericBlockStyle}>
+        <div key={key} style={genericBlockStyle}>
             <h2>Column {key}</h2>
             <p>{loremIpsum('tiny')}</p>
         </div>
@@ -26,7 +26,7 @@ export default {
     argTypes: {
         nbItems: { control: 'number', min: 0 },
         gap: getSelectArgType(gapSizes),
-        itemMinWidth: { control: 'number', defaultValue: 200 },
+        itemMinWidth: { control: 'number' },
         maxColumns: { control: 'number' },
     },
     args: GridColumn.defaultProps,
@@ -42,5 +42,5 @@ export const Default = {};
  * Grid column with max 4 columns (responsive)
  */
 export const Columns = {
-    args: { maxColumns: 4 },
+    args: { maxColumns: 4, itemMinWidth: 200 },
 };
