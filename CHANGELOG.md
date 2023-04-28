@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   `TextField` component now shows `aria-describedby` and `aria-invalid` attributes.
+
 ## [3.2.1][] - 2023-04-26
 
 ### Fixed
@@ -29,7 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Dialog: added new props `disableBodyScroll`, `preventCloseOnClick` and `preventCloseOnEscape`
+-   Dialog: added new props `disableBodyScroll`, `preventCloseOnClick` and `preventCloseOnEscape`
 
 ## [3.1.4][] - 2023-01-26
 
@@ -1732,8 +1736,6 @@ _Failed released_
 [unreleased]: https://github.com/lumapps/design-system/compare/v3.1.5...HEAD
 [3.1.5]: https://github.com/lumapps/design-system/compare/v3.1.4...v3.1.5
 [3.1.4]: https://github.com/lumapps/design-system/tree/v3.1.4
-
-
-[Unreleased]: https://github.com/lumapps/design-system/compare/v3.2.1...HEAD
+[unreleased]: https://github.com/lumapps/design-system/compare/v3.2.1...HEAD
 [3.2.1]: https://github.com/lumapps/design-system/compare/v3.2.0...v3.2.1
 [3.2.0]: https://github.com/lumapps/design-system/tree/v3.2.0
