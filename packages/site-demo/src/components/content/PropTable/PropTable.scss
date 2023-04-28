@@ -1,5 +1,5 @@
-@import '~@lumx/core/src/scss/design-tokens';
-@import '~@lumx/core/src/scss/core';
+@import "@lumx/core/src/scss/design-tokens";
+@import "@lumx/core/src/scss/core";
 
 /* ==========================================================================
    Prop table
@@ -7,7 +7,7 @@
 
 .prop-table {
     padding: $lumx-spacing-unit * 2 $lumx-spacing-unit * 3;
-    background-color: lumx-color-variant('dark', 'L6');
+    background-color: lumx-color-variant("dark", "L6");
     border-radius: var(--lumx-border-radius);
 
     &__type {

@@ -1,7 +1,7 @@
-@import '~@lumx/core/src/scss/design-tokens';
-@import '~@lumx/core/src/scss/core';
-@import '~@lumx/core/src/scss/components/divider/variables';
-@import '~@lumx/core/src/scss/components/divider/mixins';
+@import "@lumx/core/src/scss/design-tokens";
+@import "@lumx/core/src/scss/core";
+@import "@lumx/core/src/scss/components/divider/variables";
+@import "@lumx/core/src/scss/components/divider/mixins";
 
 /* ==========================================================================
    Design token
@@ -13,11 +13,11 @@
     background-color: transparent !important;
 
     &--theme-light {
-        @include lumx-has-divider(lumx-base-const('theme', 'LIGHT'));
+        @include lumx-has-divider(lumx-base-const("theme", "LIGHT"));
     }
 
     &--theme-dark {
-        @include lumx-has-divider(lumx-base-const('theme', 'DARK'));
+        @include lumx-has-divider(lumx-base-const("theme", "DARK"));
     }
 
     &:last-child {
@@ -37,12 +37,12 @@
 
     &__name,
     &__value {
-        @include lumx-typography('subtitle1');
+        @include lumx-typography("subtitle1");
     }
 
     &__name {
         #{$self}--theme-dark & {
-            color: lumx-color-variant('light', 'N');
+            color: lumx-color-variant("light", "N");
         }
     }
 
@@ -50,11 +50,11 @@
         margin-left: auto;
 
         #{$self}--theme-light & {
-            color: lumx-color-variant('dark', 'L3');
+            color: lumx-color-variant("dark", "L3");
         }
 
         #{$self}--theme-dark & {
-            color: lumx-color-variant('light', 'L3');
+            color: lumx-color-variant("light", "L3");
         }
     }
 
@@ -63,12 +63,12 @@
     }
 
     &__description {
-        @include lumx-typography('body1');
+        @include lumx-typography("body1");
 
         margin-bottom: $lumx-spacing-unit * 2;
 
         #{$self}--theme-dark & {
-            color: lumx-color-variant('light', 'N');
+            color: lumx-color-variant("light", "N");
         }
     }
 }

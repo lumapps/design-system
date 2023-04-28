@@ -1,18 +1,18 @@
-@import '~@lumx/core/src/scss/design-tokens';
-@import '~@lumx/core/src/scss/core';
+@import "@lumx/core/src/scss/design-tokens";
+@import "@lumx/core/src/scss/core";
 
 /* ==========================================================================
    Asset block
    ========================================================================== */
 
 .asset-block {
-    border: 1px solid lumx-color-variant('dark', 'L4');
+    border: 1px solid lumx-color-variant("dark", "L4");
     border-radius: var(--lumx-border-radius);
 
     &__content {
         padding: $lumx-spacing-unit * 3;
-        background-color: lumx-color-variant('dark', 'L6');
         text-align: center;
+        background-color: lumx-color-variant("dark", "L6");
     }
 
     &__thumbnail {
@@ -24,7 +24,7 @@
         display: flex;
         align-items: center;
         padding: $lumx-spacing-unit $lumx-spacing-unit * 2 $lumx-spacing-unit $lumx-spacing-unit;
-        border-top: 1px solid lumx-color-variant('dark', 'L4');
+        border-top: 1px solid lumx-color-variant("dark", "L4");
     }
 
     &__filename {

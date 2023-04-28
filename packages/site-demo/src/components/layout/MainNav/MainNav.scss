@@ -1,8 +1,8 @@
-@import '~sass-mq';
-@import '~@lumx/core/src/scss/design-tokens';
-@import '~@lumx/core/src/scss/core';
-@import '~@lumx/core/src/scss/components/link/mixins';
-@import '../variables';
+@import "sass-mq";
+@import "@lumx/core/src/scss/design-tokens";
+@import "@lumx/core/src/scss/core";
+@import "@lumx/core/src/scss/components/link/mixins";
+@import "../variables";
 
 /* ==========================================================================
    Main nav
@@ -16,8 +16,8 @@ $transition-duration: 300ms;
     bottom: 0;
     left: 0;
     width: $main-nav-width;
-    background-color: white;
     overflow-y: auto;
+    background-color: white;
 
     // Non responsive: hide side nav close button
     @include mq($from: desktop) {
@@ -29,21 +29,24 @@ $transition-duration: 300ms;
     // Responsive: side nav overlay
     @include mq($until: desktop) {
         @include lumx-elevation(4);
+
         z-index: 1000;
-        opacity: 0;
-        transform: translateX(-24px);
-        transition: visibility $transition-duration, transform $transition-duration,
-            opacity $transition-duration linear 100ms;
         visibility: hidden;
+        opacity: 0;
+        transition:
+            visibility $transition-duration,
+            transform $transition-duration,
+            opacity $transition-duration linear 100ms;
+        transform: translateX(-24px);
 
         @media (prefers-reduced-motion: reduce) {
             transition: none;
         }
 
         &--is-open {
-            opacity: 1;
-            transform: translateX(0px);
             visibility: visible;
+            opacity: 1;
+            transform: translateX(0);
         }
 
         &__close-button {
@@ -57,20 +60,20 @@ $transition-duration: 300ms;
         position: relative;
         min-height: 100%;
         padding: $lumx-spacing-unit * 6 $lumx-spacing-unit * 4;
-        background-color: lumx-color-variant(dark, L6);
+        background-color: lumx-color-variant("dark", "L6");
     }
 
     &__overlay {
         position: fixed;
+        inset: 0;
         z-index: 999;
         width: 100vw;
+        visibility: hidden;
+        background-color: lumx-color-variant("dark", "L1");
         border: none;
-        appearance: none !important;
-        background-color: lumx-color-variant(dark, L1);
-        inset: 0;
         opacity: 0;
         transition: opacity $transition-duration, visibility $transition-duration;
-        visibility: hidden;
+        appearance: none !important;
 
         @media (prefers-reduced-motion: reduce) {
             transition: none;
@@ -79,8 +82,8 @@ $transition-duration: 300ms;
         // Backdrop when responsive nav is open
         @include mq($until: desktop) {
             &--is-open {
-                opacity: 1;
                 visibility: visible;
+                opacity: 1;
             }
         }
     }
