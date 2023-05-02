@@ -61,6 +61,8 @@ export interface TextFieldProps extends GenericProps, HasTheme {
     onBlur?(event: React.FocusEvent): void;
     /** On change callback. */
     onChange(value: string, name?: string, event?: SyntheticEvent): void;
+    /** On clear callback. */
+    onClear?(event?: SyntheticEvent): void;
     /** On focus callback. */
     onFocus?(event: React.FocusEvent): void;
 }
@@ -260,6 +262,7 @@ export const TextField: Comp<TextFieldProps, HTMLDivElement> = forwardRef((props
         name,
         onBlur,
         onChange,
+        onClear,
         onFocus,
         placeholder,
         textFieldRef,
@@ -292,12 +295,16 @@ export const TextField: Comp<TextFieldProps, HTMLDivElement> = forwardRef((props
      * and remove focus from the clear button.
      * @param evt On clear event.
      */
-    const onClear = (evt: React.ChangeEvent) => {
+    const handleClear = (evt: React.ChangeEvent) => {
         evt.nativeEvent.preventDefault();
         evt.nativeEvent.stopPropagation();
         (evt.currentTarget as HTMLElement).blur();
 
         onChange('');
+
+        if (onClear) {
+            onClear(evt);
+        }
     };
 
     return (
@@ -426,7 +433,7 @@ export const TextField: Comp<TextFieldProps, HTMLDivElement> = forwardRef((props
                         emphasis={Emphasis.low}
                         size={Size.s}
                         theme={theme}
-                        onClick={onClear}
+                        onClick={handleClear}
                         type="button"
                     />
                 )}
