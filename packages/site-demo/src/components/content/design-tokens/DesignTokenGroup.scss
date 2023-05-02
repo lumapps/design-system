@@ -1,6 +1,6 @@
-@import '~@lumx/core/src/scss/design-tokens';
-@import '~@lumx/core/src/scss/core';
-@import '~@lumx/core/src/scss/components/divider/variables';
+@import "@lumx/core/src/scss/design-tokens";
+@import "@lumx/core/src/scss/core";
+@import "@lumx/core/src/scss/components/divider/variables";
 
 /* ==========================================================================
    Design token group
@@ -10,10 +10,10 @@
     border-radius: var(--lumx-border-radius);
 
     &--theme-light {
-        border: 1px solid lumx-color-variant('dark', $lumx-divider-color-variant);
+        border: 1px solid lumx-color-variant("dark", $lumx-divider-color-variant);
     }
 
     &--theme-dark {
-        background-color: lumx-color-variant('dark', 'N');
+        background-color: lumx-color-variant("dark", "N");
     }
 }

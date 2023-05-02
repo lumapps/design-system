@@ -1,14 +1,14 @@
-@import 'sass-mq';
-@import '~@lumx/core/src/scss/design-tokens';
-@import '~@lumx/core/src/scss/core';
+@import "sass-mq";
+@import "@lumx/core/src/scss/design-tokens";
+@import "@lumx/core/src/scss/core";
 
 .search-dialog {
     header {
         display: flex;
+        gap: $lumx-spacing-unit;
         align-items: center;
         justify-content: space-between;
         padding: $lumx-spacing-unit;
-        gap: $lumx-spacing-unit;
 
         form {
             flex-grow: 1;
@@ -33,8 +33,8 @@
         --lumx-text-field-input-padding-horizontal: 16px;
         --lumx-text-field-input-min-height: 52px;
 
-        input[type='search']::-webkit-search-cancel-button {
-            -webkit-appearance: none;
+        input[type="search"]::-webkit-search-cancel-button {
+            appearance: none;
         }
     }
 
@@ -45,7 +45,7 @@
 
     /* Search result list item */
     .search-result {
-        border-top: 1px solid lumx-color-variant('dark', 'L5');
+        border-top: 1px solid lumx-color-variant("dark", "L5");
 
         .lumx-list-item__link {
             padding-top: $lumx-spacing-unit-big;
@@ -54,28 +54,31 @@
 
         .lumx-list-item__link,
         .lumx-list-item__content {
-            overflow: hidden;
             width: 100%;
+            overflow: hidden;
         }
 
         &__path {
             // Parent paths
             span:not(:last-child),
             span:not(:first-child)::before {
-                @include lumx-typography('caption');
-                color: lumx-color-variant('dark', 'L2');
-                content: ' > ';
+                @include lumx-typography("caption");
+
+                color: lumx-color-variant("dark", "L2");
+                content: " > ";
             }
+
             // Title
             span:last-child {
-                @include lumx-typography('subtitle2');
+                @include lumx-typography("subtitle2");
             }
         }
 
         &__content {
-            @include lumx-typography('caption');
+            @include lumx-typography("caption");
+
             overflow: hidden;
-            color: lumx-color-variant('dark', 'L2');
+            color: lumx-color-variant("dark", "L2");
             text-overflow: ellipsis;
             white-space: nowrap;
         }

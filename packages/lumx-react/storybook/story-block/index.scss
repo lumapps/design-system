@@ -1,5 +1,5 @@
-@import '~@lumx/core/src/scss/design-tokens';
-@import '~@lumx/core/src/scss/core';
+@import "@lumx/core/src/scss/design-tokens";
+@import "@lumx/core/src/scss/core";
 
 .story-block {
     position: absolute;
@@ -7,21 +7,21 @@
     right: 0;
     bottom: 0;
     left: 0;
-    overflow: auto;
     padding: 1rem;
+    overflow: auto;
 
     &--has-grey-background:not(&--theme-dark) {
         background: lightgray;
     }
 
     &--theme-dark {
-        background: lumx-color-variant('dark', 'N');
-        color: lumx-color-variant('light', 'N');
+        color: lumx-color-variant("light", "N");
+        background: lumx-color-variant("dark", "N");
     }
 
     &__toolbar {
         display: flex;
-        margin-bottom: $lumx-spacing-unit-big;
         gap: $lumx-spacing-unit-big;
+        margin-bottom: $lumx-spacing-unit-big;
     }
 }

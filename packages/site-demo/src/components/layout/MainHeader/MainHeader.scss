@@ -1,6 +1,6 @@
-@import 'sass-mq';
-@import '~@lumx/core/src/scss/design-tokens';
-@import '~@lumx/core/src/scss/core';
+@import "sass-mq";
+@import "@lumx/core/src/scss/design-tokens";
+@import "@lumx/core/src/scss/core";
 
 /* Main header
    ========================================================================== */
@@ -10,9 +10,9 @@
     &__extras {
         display: flex;
         flex-wrap: wrap;
+        gap: $lumx-spacing-unit-big;
         align-items: center;
         justify-content: flex-end;
-        gap: $lumx-spacing-unit-big;
     }
 
     &__home-logo-link {
@@ -36,8 +36,8 @@
 
         // Move material theme switcher and lumx version link to the end (wrapped on new line)
         &__extras {
-            width: 100%;
             order: 5;
+            width: 100%;
         }
     }
 }
