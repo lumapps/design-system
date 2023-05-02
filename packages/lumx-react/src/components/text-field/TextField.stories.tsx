@@ -12,6 +12,7 @@ export default {
         clearButtonProps: { control: false },
         chips: { control: false },
         afterElement: { control: false },
+        onClear: { action: true },
     },
     decorators: [withValueOnChange({})],
 };

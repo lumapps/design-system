@@ -5,8 +5,14 @@ import camelCase from 'lodash/camelCase';
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils/className';
 
-import { render } from '@testing-library/react';
-import { getByClassName, getByTagName, queryAllByClassName, queryByTagName } from '@lumx/react/testing/utils/queries';
+import { render, screen } from '@testing-library/react';
+import {
+    getByClassName,
+    getByTagName,
+    queryAllByClassName,
+    queryByClassName,
+    queryByTagName,
+} from '@lumx/react/testing/utils/queries';
 import partition from 'lodash/partition';
 import userEvent from '@testing-library/user-event';
 
@@ -27,9 +33,11 @@ const setup = (propsOverride: Partial<TextFieldProps> = {}) => {
         | HTMLInputElement;
     const helpers = queryAllByClassName(container, 'lumx-text-field__helper');
     const [[helper], [error]] = partition(helpers, (h) => !h.className.includes('lumx-input-helper--color-red'));
+    const clearButton = queryByClassName(container, 'lumx-text-field__input-clear');
 
     return {
         props,
+        clearButton,
         container,
         element,
         inputNative,
@@ -164,6 +172,41 @@ describe(`<${TextField.displayName}>`, () => {
             await userEvent.keyboard('a');
 
             expect(onChange).toHaveBeenCalledWith('a', 'name', expect.objectContaining({}));
+        });
+
+        it('should trigger `onChange` with empty value when text field is cleared', async () => {
+            const onChange = jest.fn();
+            const { clearButton } = setup({
+                value: 'initial value',
+                name: 'name',
+                clearButtonProps: { label: 'Clear' },
+                onChange,
+            });
+
+            expect(clearButton).toBeInTheDocument();
+
+            await userEvent.click(clearButton as HTMLElement);
+
+            expect(onChange).toHaveBeenCalledWith('');
+        });
+
+        it('should trigger `onChange` with empty value and `onClear` when text field is cleared', async () => {
+            const onChange = jest.fn();
+            const onClear = jest.fn();
+            const { clearButton } = setup({
+                value: 'initial value',
+                name: 'name',
+                clearButtonProps: { label: 'Clear' },
+                onChange,
+                onClear,
+            });
+
+            expect(clearButton).toBeInTheDocument();
+
+            await userEvent.click(clearButton as HTMLElement);
+
+            expect(onChange).toHaveBeenCalledWith('');
+            expect(onClear).toHaveBeenCalled();
         });
     });
 

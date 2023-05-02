@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   `TextField` component now shows `aria-describedby` and `aria-invalid` attributes.
+-   `TextField` component now has a new prop `onClear` to allow a callback to be passed.
 
 ## [3.2.1][] - 2023-04-26
 
