@@ -106,22 +106,27 @@ describe(`<${TextField.displayName}>`, () => {
         });
 
         it('should have helper text', () => {
-            const { helper } = setup({
+            const { helper, inputNative } = setup({
                 helper: 'helper',
                 label: 'test',
                 placeholder: 'test',
             });
+
             expect(helper).toHaveTextContent('helper');
+            expect(inputNative).toHaveAttribute('aria-describedby');
         });
 
         it('should have error text', () => {
-            const { error } = setup({
+            const { error, inputNative } = setup({
                 error: 'error',
                 hasError: true,
                 label: 'test',
                 placeholder: 'test',
             });
+
             expect(error).toHaveTextContent('error');
+            expect(inputNative).toHaveAttribute('aria-invalid', 'true');
+            expect(inputNative).toHaveAttribute('aria-describedby');
         });
 
         it('should not have error text', () => {

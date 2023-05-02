@@ -153,6 +153,8 @@ interface InputNativeProps {
     onChange(value: string, name?: string, event?: SyntheticEvent): void;
     onFocus?(value: React.FocusEvent): void;
     onBlur?(value: React.FocusEvent): void;
+    hasError?: boolean;
+    describedById?: string;
 }
 
 const renderInputNative: React.FC<InputNativeProps> = (props) => {
@@ -172,6 +174,8 @@ const renderInputNative: React.FC<InputNativeProps> = (props) => {
         recomputeNumberOfRows,
         type,
         name,
+        hasError,
+        describedById,
         ...forwardedProps
     } = props;
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -214,6 +218,8 @@ const renderInputNative: React.FC<InputNativeProps> = (props) => {
         onFocus: onTextFieldFocus,
         onBlur: onTextFieldBlur,
         onChange: handleChange,
+        'aria-invalid': hasError ? 'true' : undefined,
+        'aria-describedby': describedById,
         ref: mergeRefs(inputRef as any, ref) as any,
     };
     if (multiline) {
@@ -264,6 +270,17 @@ export const TextField: Comp<TextFieldProps, HTMLDivElement> = forwardRef((props
         ...forwardedProps
     } = props;
     const textFieldId = useMemo(() => id || `text-field-${uid()}`, [id]);
+    /**
+     * Generate unique ids for both the helper and error texts, in order to
+     * later on add them to the input native as aria-describedby. If both the error and the helper are present,
+     * we want to first use the most important one, which is the errorId. That way, screen readers will read first
+     * the error and then the helper
+     */
+    const helperId = helper ? `text-field-helper-${uid()}` : undefined;
+    const errorId = error ? `text-field-error-${uid()}` : undefined;
+    const describedByIds = [errorId, helperId].filter(Boolean);
+    const describedById = describedByIds.length === 0 ? undefined : describedByIds.join(' ');
+
     const [isFocus, setFocus] = useState(false);
     const { rows, recomputeNumberOfRows } = useComputeNumberOfRows(multiline ? minimumRows || DEFAULT_MIN_ROWS : 0);
     const valueLength = (value || '').length;
@@ -359,6 +376,8 @@ export const TextField: Comp<TextFieldProps, HTMLDivElement> = forwardRef((props
                             type,
                             value,
                             name,
+                            hasError,
+                            describedById,
                             ...forwardedProps,
                         })}
                     </div>
@@ -383,6 +402,8 @@ export const TextField: Comp<TextFieldProps, HTMLDivElement> = forwardRef((props
                             type,
                             value,
                             name,
+                            hasError,
+                            describedById,
                             ...forwardedProps,
                         })}
                     </div>
@@ -414,13 +435,13 @@ export const TextField: Comp<TextFieldProps, HTMLDivElement> = forwardRef((props
             </div>
 
             {hasError && error && (
-                <InputHelper className={`${CLASSNAME}__helper`} kind={Kind.error} theme={theme}>
+                <InputHelper className={`${CLASSNAME}__helper`} kind={Kind.error} theme={theme} id={errorId}>
                     {error}
                 </InputHelper>
             )}
 
             {helper && (
-                <InputHelper className={`${CLASSNAME}__helper`} theme={theme}>
+                <InputHelper className={`${CLASSNAME}__helper`} theme={theme} id={helperId}>
                     {helper}
                 </InputHelper>
             )}
