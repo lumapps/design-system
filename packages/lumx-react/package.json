@@ -7,8 +7,8 @@
     },
     "dependencies": {
         "@juggle/resize-observer": "^3.2.0",
-        "@lumx/core": "^3.2.1",
-        "@lumx/icons": "^3.2.1",
+        "@lumx/core": "^3.3.0",
+        "@lumx/icons": "^3.3.0",
         "@popperjs/core": "^2.5.4",
         "body-scroll-lock": "^3.1.5",
         "classnames": "^2.2.6",
@@ -113,5 +113,5 @@
         "build:storybook": "cd storybook && ./build"
     },
     "sideEffects": false,
-    "version": "3.2.1"
+    "version": "3.3.0"
 }
