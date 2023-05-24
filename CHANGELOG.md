@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   IconButton: remove the `aria-describedby` attribute when the `aria-label` and the `aria-describedby` have the same value.
+
 ## [3.3.0][] - 2023-05-03
 
 ### Added
