@@ -66,7 +66,8 @@ export const IconButton: Comp<IconButtonProps, HTMLButtonElement> = forwardRef((
                 {...{ emphasis, size, theme, ...forwardedProps }}
                 aria-label={label}
                 variant="icon"
-                aria-describedby={tooltipProps?.label && tooltipProps?.label !== label ? null : undefined}
+                // Remove the aria-describedby added by the tooltip when it is the same text as the aria-label
+                aria-describedby={tooltipProps?.label && tooltipProps?.label === label && undefined}
             >
                 {image ? (
                     <img
