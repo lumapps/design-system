@@ -37,6 +37,13 @@ export const WithImage = {
 };
 
 /**
+ * IconButton using a tooltip
+ */
+export const WithTooltip = {
+    args: { icon: mdiSend, label: 'Send a message' },
+};
+
+/**
  * Check icon button style variations (color, states, emphasis, etc.)
  */
 export const IconButtonVariations = {

@@ -61,7 +61,14 @@ export const IconButton: Comp<IconButtonProps, HTMLButtonElement> = forwardRef((
 
     return (
         <Tooltip label={hideTooltip ? '' : label} {...tooltipProps}>
-            <ButtonRoot ref={ref} {...{ emphasis, size, theme, ...forwardedProps }} aria-label={label} variant="icon">
+            <ButtonRoot
+                ref={ref}
+                {...{ emphasis, size, theme, ...forwardedProps }}
+                aria-label={label}
+                variant="icon"
+                // Remove the aria-describedby added by the tooltip when it is the same text as the aria-label
+                aria-describedby={tooltipProps?.label && tooltipProps?.label === label && undefined}
+            >
                 {image ? (
                     <img
                         // no need to set alt as an aria-label is already set on the button

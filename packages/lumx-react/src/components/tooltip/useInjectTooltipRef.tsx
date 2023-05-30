@@ -1,6 +1,8 @@
-import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 import get from 'lodash/get';
+import isUndefined from 'lodash/isUndefined';
 import React, { cloneElement, ReactNode, useMemo } from 'react';
+
+import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
 /**
  * Add ref and ARIA attribute(s) in tooltip children or wrapped children.
@@ -20,7 +22,12 @@ export const useInjectTooltipRef = (
     id: string,
 ): ReactNode => {
     return useMemo(() => {
-        const ariaProps = { 'aria-describedby': isOpen ? id : undefined };
+        // Let the children remove the aria-describedby attribute by setting it to undefined
+        const childrenHasAriaProp = get(children, 'props')
+            ? 'aria-describedby' in get(children, 'props') && isUndefined(get(children, 'props.aria-describedby'))
+            : false;
+        const ariaProps = { 'aria-describedby': isOpen && !childrenHasAriaProp ? id : undefined };
+
         if (
             children &&
             get(children, '$$typeof') &&
