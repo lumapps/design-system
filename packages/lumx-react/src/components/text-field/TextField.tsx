@@ -1,4 +1,14 @@
-import React, { forwardRef, ReactNode, Ref, SyntheticEvent, useEffect, useMemo, useRef, useState } from 'react';
+import React, {
+    forwardRef,
+    ReactNode,
+    Ref,
+    RefObject,
+    SyntheticEvent,
+    useEffect,
+    useMemo,
+    useRef,
+    useState,
+} from 'react';
 
 import classNames from 'classnames';
 import get from 'lodash/get';
@@ -304,6 +314,12 @@ export const TextField: Comp<TextFieldProps, HTMLDivElement> = forwardRef((props
 
         if (onClear) {
             onClear(evt);
+        }
+
+        const inputElement = inputRef as RefObject<HTMLInputElement | HTMLTextAreaElement>;
+
+        if (inputElement && inputElement.current) {
+            inputElement.current.focus();
         }
     };
 

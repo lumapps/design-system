@@ -50,11 +50,19 @@ export const LabelAndHelper = {
 /**
  * With clear button
  */
-export const Clearable = {
-    args: {
-        value: 'Some value',
-        clearButtonProps: { label: 'Clear' },
-    },
+export const Clearable = () => {
+    const inputRef = React.useRef(null);
+    const [value, setValue] = React.useState('Some value');
+
+    return (
+        <TextField
+            value={value}
+            clearButtonProps={{ label: 'Clear' }}
+            onChange={setValue}
+            inputRef={inputRef}
+            {...TextField.defaultProps}
+        />
+    );
 };
 
 /**
