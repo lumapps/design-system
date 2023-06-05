@@ -1,10 +1,9 @@
-import React, { ReactElement } from 'react';
-
-import { mount, shallow } from 'enzyme';
-import 'jest-enzyme';
+import React from 'react';
 
 import { Theme } from '@lumx/react';
-import { Wrapper } from '@lumx/react/testing/utils';
+import { getByClassName } from '@lumx/react/testing/utils/queries';
+import { render } from '@testing-library/react';
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import { InputLabel, InputLabelProps } from './InputLabel';
 
 const CLASSNAME = InputLabel.className as string;
@@ -14,73 +13,32 @@ type SetupProps = Partial<InputLabelProps>;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}, shallowRendering = true) => {
+const setup = (propsOverride: SetupProps = {}) => {
     const props: any = { htmlFor: 'id', ...propsOverride };
-    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    const wrapper: Wrapper = renderer(<InputLabel {...props} />);
-    const label: Wrapper = wrapper.find('.lumx-input-label');
+    render(<InputLabel {...props} />);
+    const label = getByClassName(document.body, CLASSNAME);
 
-    return { label, props, wrapper };
+    return { label, props };
 };
 
 describe(`<${InputLabel.displayName}>`, () => {
-    // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', () => {
-        it('should render defaults', () => {
-            const children = 'The Label text';
-            const { wrapper, label } = setup({ children });
-
-            expect(wrapper).toMatchSnapshot();
-            expect(label).toExist();
-            expect(label).toHaveClassName(CLASSNAME);
-            expect(label).toHaveClassName(`${CLASSNAME}--theme-light`);
-            expect(label).toHaveText(children);
-        });
-    });
-
-    // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
-        it('should render children', () => {
-            const children = (
-                <span>
-                    The label<strong>*</strong>
-                </span>
-            );
-
-            const { label } = setup({
-                children,
+        it('should render text', () => {
+            const { label, props } = setup({
+                children: 'Some label text',
                 htmlFor: '123',
             });
-            expect(label).toContainReact(children);
-            expect(label).toHaveProp('htmlFor', '123');
+            expect(label).toHaveTextContent(props.children);
+            expect(label).toHaveAttribute('for', props.htmlFor);
         });
 
-        it('should render dark theme', () => {
-            const { label } = setup({ children: 'The label', theme: Theme.dark });
-            expect(label).toHaveClassName(CLASSNAME);
-            expect(label).toHaveClassName(`${CLASSNAME}--theme-dark`);
-        });
-
-        it('should render custom className', () => {
-            const className = 'my-class__test';
-            const { label } = setup({ children: 'The label', className });
-            expect(label).toHaveClassName(CLASSNAME);
-            expect(label).toHaveClassName(className);
+        it('should render dark theme & required', () => {
+            const { label } = setup({ children: 'The label', theme: Theme.dark, isRequired: true });
+            expect(label).toHaveClass(CLASSNAME);
+            expect(label).toHaveClass(`${CLASSNAME}--theme-dark`);
+            expect(label).toHaveClass(`${CLASSNAME}--is-required`);
         });
     });
 
-    // 3. Test events.
-    describe('Events', () => {
-        // Nothing to do here.
-    });
-
-    // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', () => {
-        // Nothing to do here.
-    });
-
-    // 5. Test state.
-    describe('State', () => {
-        // Nothing to do here.
-    });
+    commonTestsSuiteRTL(setup, { baseClassName: CLASSNAME, forwardClassName: 'label', forwardAttributes: 'label' });
 });
