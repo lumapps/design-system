@@ -1,14 +1,11 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
-import { mount, shallow } from 'enzyme';
-import 'jest-enzyme';
-import { build, fake, oneOf } from 'test-data-bot';
+import { mdiAlertCircle } from '@lumx/icons';
+import { ColorPalette, ColorVariant, Size, Theme } from '@lumx/react';
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 
-import { mdiCheck, mdiPlus } from '@lumx/icons';
-import { ColorPalette, ColorVariant, Size } from '@lumx/react';
-import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
-import { getBasicClass } from '@lumx/react/utils/className';
-
+import { getByClassName, getByTagName } from '@lumx/react/testing/utils/queries';
+import { render } from '@testing-library/react';
 import { Icon, IconProps } from './Icon';
 
 const CLASSNAME = Icon.className as string;
@@ -18,85 +15,104 @@ type SetupProps = Partial<IconProps>;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true) => {
+const setup = (propsOverride: SetupProps = {}) => {
     const props: IconProps = {
         icon: 'mdiPlus',
         ...propsOverride,
     };
-    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    const wrapper: Wrapper = renderer(<Icon {...props} />);
+    render(<Icon {...props} />);
+    const i = getByClassName(document.body, CLASSNAME);
+    const svg = getByTagName(i, 'svg');
+    const path = getByTagName(svg, 'path');
 
-    return {
-        i: wrapper.find('i'),
-        path: wrapper.find('path'),
-        svg: wrapper.find('svg'),
-        props,
-        wrapper,
-    };
+    return { i, svg, path, props };
 };
 
 describe(`<${Icon.displayName}>`, () => {
-    // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', () => {
-        it('should render correctly', () => {
-            const { i, path, svg, wrapper } = setup();
-            expect(wrapper).toMatchSnapshot();
-
-            expect(i).toExist();
-            expect(i).toHaveClassName(CLASSNAME);
-
-            expect(svg).toExist();
-            expect(path).toExist();
-        });
-
-        it('should render color & color variant', () => {
-            const { wrapper } = setup({ color: ColorPalette.primary, colorVariant: ColorVariant.D1 });
-            expect(wrapper).toMatchSnapshot();
-        });
-    });
-
-    // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
-        it("shouldn't use any default props", () => {
-            const { i } = setup();
+        it('should render default', () => {
+            const { i, svg, path, props } = setup();
 
-            ['color', 'size'].forEach((prop: string) => {
-                expect(i).not.toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: prop, value: '' }));
+            expect(i).toBeInTheDocument();
+            expect(i).toHaveClass(CLASSNAME);
+            expect(i?.className).toMatchInlineSnapshot(`"lumx-icon lumx-icon--no-shape lumx-icon--path"`);
+
+            expect(svg).toBeInTheDocument();
+            expect(svg).toHaveAttribute('aria-hidden', 'true');
+            expect(svg).not.toHaveAttribute('role');
+
+            expect(path).toBeInTheDocument();
+            expect(path).toHaveAttribute('d', props.icon);
+        });
+
+        it('should adapt svg with alternate text', () => {
+            const { svg, props } = setup({ alt: 'Alternate text' });
+            expect(svg).toHaveAttribute('aria-label', props.alt);
+            expect(svg).not.toHaveAttribute('aria-hidden');
+            expect(svg).toHaveAttribute('role');
+        });
+
+        describe('size', () => {
+            it('should render size', () => {
+                const { i } = setup({ size: Size.s });
+                expect(i).toHaveClass('lumx-icon--size-s');
+            });
+
+            it('should adapt xxs size with hasShape', () => {
+                const { i } = setup({ hasShape: true, size: Size.xxs });
+                expect(i).toHaveClass('lumx-icon--size-s');
+            });
+
+            it('should adapt xs size with hasShape', () => {
+                const { i } = setup({ hasShape: true, size: Size.xs });
+                expect(i).toHaveClass('lumx-icon--size-s');
+            });
+
+            it('should adapt xxl size with hasShape', () => {
+                const { i } = setup({ hasShape: true, size: Size.xxl });
+                expect(i).toHaveClass('lumx-icon--size-xl');
+            });
+
+            it('should add default size with hasShape', () => {
+                const { i } = setup({ hasShape: true });
+                expect(i).toHaveClass('lumx-icon--size-m');
             });
         });
 
-        it('should use the given props', () => {
-            const modifiedPropsBuilder: () => SetupProps = build('props').fields({
-                color: fake((fakeData: any) => fakeData.commerce.color()),
-                icon: oneOf(mdiPlus, mdiCheck),
-                size: oneOf(...Object.values(Size)),
+        describe('color', () => {
+            it('should render color and color variant', () => {
+                const { i } = setup({
+                    color: ColorPalette.primary,
+                    colorVariant: ColorVariant.D1,
+                });
+                expect(i).toHaveClass('lumx-icon--color-primary lumx-icon--color-variant-D1');
             });
 
-            const modifiedProps: SetupProps = modifiedPropsBuilder();
+            it('should improve yellow icon color contrast with alert circle icon', () => {
+                const { i } = setup({
+                    color: ColorPalette.yellow,
+                    icon: mdiAlertCircle,
+                });
+                expect(i).toHaveClass('lumx-icon--color-yellow lumx-icon--has-dark-layer');
+            });
 
-            const { i, path } = setup({ ...modifiedProps });
+            it('should set a default color on dark theme', () => {
+                const { i } = setup({ theme: Theme.dark });
+                expect(i).toHaveClass('lumx-icon--color-light lumx-icon--theme-dark');
+            });
 
-            Object.keys(modifiedProps).forEach((prop: string) => {
-                if (prop === 'icon') {
-                    expect(path).toHaveProp('d', modifiedProps[prop]);
-                } else {
-                    expect(i).toHaveClassName(
-                        getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop] }),
-                    );
-                }
+            it('should set a default color on has shape', () => {
+                const { i } = setup({ hasShape: true });
+                expect(i).toHaveClass('lumx-icon--color-dark lumx-icon--has-shape');
+            });
+
+            it('should set a default color variant on has shape & dark color', () => {
+                const { i } = setup({ color: ColorPalette.dark, hasShape: true });
+                expect(i).toHaveClass('lumx-icon--color-variant-L2 lumx-icon--color-dark lumx-icon--has-shape');
             });
         });
     });
-
-    // 3. Test events.
-    // N/A
-
-    // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    // N/A
-
-    // 5. Test state.
-    // N/A
 
     // Common tests suite.
-    commonTestsSuite(setup, { className: 'i', prop: 'i' }, { className: CLASSNAME });
+    commonTestsSuiteRTL(setup, { baseClassName: CLASSNAME, forwardClassName: 'i', forwardAttributes: 'i' });
 });
