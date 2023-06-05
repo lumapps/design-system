@@ -1,18 +1,12 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
-import { mount, shallow } from 'enzyme';
-import 'jest-enzyme';
-import { build, oneOf } from 'test-data-bot';
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { render } from '@testing-library/react';
+import { getByClassName, getByTagName, queryByClassName } from '@lumx/react/testing/utils/queries';
+import userEvent from '@testing-library/user-event/';
 
-import without from 'lodash/without';
-
-import { Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
-import { getBasicClass } from '@lumx/react/utils/className';
-
-import { Theme, Alignment } from '@lumx/react';
 import { Switch, SwitchProps } from './Switch';
 
-const DEFAULT_PROPS = Switch.defaultProps as any;
 const CLASSNAME = Switch.className as string;
 
 type SetupProps = Partial<SwitchProps>;
@@ -20,170 +14,97 @@ type SetupProps = Partial<SwitchProps>;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true) => {
-    const props: SwitchProps = {
-        ...propsOverride,
-    };
-
-    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-
-    const wrapper: Wrapper = renderer(<Switch {...props} />);
-
-    return {
-        root: wrapper.find('div').first(),
-
-        input: wrapper.find('input'),
-        inputWrapper: wrapper.find(`.${CLASSNAME}__input-wrapper`),
-
-        content: wrapper.find(`.${CLASSNAME}__content`),
-        helper: wrapper.find(`.${CLASSNAME}__helper`),
-        label: wrapper.find(`.${CLASSNAME}__label`),
-
-        props,
-        wrapper,
-    };
+const setup = (propsOverride: SetupProps = {}) => {
+    const props = { ...propsOverride };
+    render(<Switch {...props} />);
+    const switchWrapper = getByClassName(document.body, CLASSNAME);
+    const input = getByTagName(switchWrapper, 'input');
+    const helper = queryByClassName(switchWrapper, `${CLASSNAME}__helper`);
+    const label = queryByClassName(switchWrapper, `${CLASSNAME}__label`);
+    return { switchWrapper, input, helper, label, props };
 };
 
 jest.mock('uid', () => ({ uid: () => 'uid' }));
 
 describe(`<${Switch.displayName}>`, () => {
-    // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', () => {
-        it('should render correctly without any label', () => {
-            const { root, inputWrapper, input, content, wrapper } = setup();
-            expect(wrapper).toMatchSnapshot();
-
-            expect(root).toExist();
-            expect(root).toHaveClassName(CLASSNAME);
-
-            expect(inputWrapper).toExist();
-            expect(input).toExist();
-
-            expect(content).not.toExist();
-        });
-
-        it('should render correctly with only a `label`', () => {
-            const props: SetupProps = { children: 'Label' };
-            const { root, inputWrapper, input, content, helper, label, wrapper } = setup(props);
-            expect(wrapper).toMatchSnapshot();
-
-            expect(root).toExist();
-            expect(root).toHaveClassName(CLASSNAME);
-
-            expect(inputWrapper).toExist();
-            expect(input).toExist();
-
-            expect(content).toExist();
-            expect(label).toExist();
-            expect(helper).not.toExist();
-        });
-
-        it('should render correctly with a `label` and a `helper`', () => {
-            const props: SetupProps = { children: 'Label', helper: 'Helper' };
-            const { root, inputWrapper, input, content, helper, label, wrapper } = setup(props);
-            expect(wrapper).toMatchSnapshot();
-
-            expect(root).toExist();
-            expect(root).toHaveClassName(CLASSNAME);
-
-            expect(inputWrapper).toExist();
-            expect(input).toExist();
-
-            expect(content).toExist();
-            expect(label).toExist();
-            expect(helper).toExist();
-        });
-    });
-
-    // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
-        it('should use default props', () => {
-            const { root } = setup();
+        it('should render correctly', () => {
+            const { switchWrapper, input, label, helper } = setup();
+            expect(switchWrapper).toBeInTheDocument();
+            expect(switchWrapper).toHaveClass(CLASSNAME);
+            expect(switchWrapper).not.toHaveClass('lumx-switch--is-disabled');
+            expect(switchWrapper).toHaveClass('lumx-switch--is-unchecked');
 
-            Object.keys(DEFAULT_PROPS).forEach((prop: string) => {
-                let defaultProp: any = DEFAULT_PROPS[prop];
+            expect(label).not.toBeInTheDocument();
+            expect(helper).not.toBeInTheDocument();
 
-                if (prop === 'checked') {
-                    // eslint-disable-next-line no-param-reassign
-                    prop = 'unchecked';
-                    defaultProp = true;
-                }
-
-                expect(root).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: prop, value: defaultProp }));
-            });
+            expect(input).toBeInTheDocument();
+            expect(input).toHaveAttribute('role', 'switch');
+            expect(input).not.toBeChecked();
+            expect(input).not.toBeDisabled();
         });
 
-        it('should use the given props', () => {
-            const modifiedPropsBuilder: () => SetupProps = build('props').fields({
+        it('should render disabled and checked', () => {
+            const { switchWrapper, input } = setup({
+                isDisabled: true,
                 isChecked: true,
-                position: oneOf(...without(Object.values(Alignment), DEFAULT_PROPS.position)),
-                theme: oneOf(...without(Object.values(Theme), DEFAULT_PROPS.theme)),
             });
+            expect(switchWrapper).toHaveClass('lumx-switch--is-disabled');
+            expect(switchWrapper).toHaveClass('lumx-switch--is-checked');
 
-            const modifiedProps: SetupProps = modifiedPropsBuilder();
-
-            const { root } = setup({ ...modifiedProps });
-
-            Object.keys(modifiedProps).forEach((prop: string) => {
-                if (prop === 'checked') {
-                    if (modifiedProps[prop]) {
-                        expect(root).toHaveClassName(
-                            getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop] }),
-                        );
-                    } else {
-                        expect(root).toHaveClassName(
-                            getBasicClass({ prefix: CLASSNAME, type: 'unchecked', value: true }),
-                        );
-                    }
-                } else {
-                    expect(root).toHaveClassName(
-                        getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop] }),
-                    );
-                }
-            });
+            expect(input).toBeChecked();
+            expect(input).toBeDisabled();
         });
 
-        it('should use the given props while passing custom props to input', () => {
-            const { wrapper } = setup({
-                inputProps: {
-                    'aria-labelledby': 'labelledby-id',
-                },
+        it('should render helper and label', () => {
+            const id = 'switchWrapper1';
+            const { props, helper, label, input } = setup({
+                id,
+                helper: 'Test helper',
+                children: 'Test label',
             });
 
-            expect(wrapper).toMatchSnapshot();
+            expect(helper).toBeInTheDocument();
+            expect(helper).toHaveTextContent(props.helper as string);
+            expect(helper).toHaveAttribute('id');
+
+            expect(label).toBeInTheDocument();
+            expect(label).toHaveTextContent(props.children);
+            expect(label).toHaveAttribute('for', id);
+
+            expect(input).toHaveAttribute('id', id);
+            expect(input).toHaveAttribute('aria-describedby', helper?.id);
+        });
+
+        it('should forward input props', () => {
+            const { props, input } = setup({
+                inputProps: { 'aria-labelledby': 'labelledby-id' },
+            });
+
+            expect(input).toHaveAttribute('aria-labelledby', props.inputProps?.['aria-labelledby']);
         });
     });
 
-    // 3. Test events.
     describe('Events', () => {
-        const onChange: jest.Mock = jest.fn();
+        const onChange = jest.fn();
 
-        beforeEach(() => {
-            onChange.mockClear();
-        });
+        it('should trigger `onChange` when switchWrapper is clicked', async () => {
+            const value = 'value';
+            const name = 'name';
+            const { input } = setup({ checked: false, onChange, value, name });
+            expect(input).not.toBeChecked();
 
-        it('should trigger `onChange` when toggled', () => {
-            const { input } = setup({ onChange }, false);
+            await userEvent.click(input);
 
-            input.simulate('change');
-            expect(onChange).toHaveBeenCalled();
-        });
-    });
-
-    // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', () => {
-        it('should not display the `helper` if no `label` is given', () => {
-            const props: SetupProps = { helper: 'Helper' };
-            const { content, wrapper } = setup(props);
-            expect(wrapper).toMatchSnapshot();
-
-            expect(content).not.toExist();
+            expect(onChange).toHaveBeenCalledWith(true, value, name, expect.any(Object));
         });
     });
-
-    // 5. Test state.
-    // N/A
 
     // Common tests suite.
-    commonTestsSuite(setup, { className: 'root', prop: 'root' }, { className: CLASSNAME });
+    commonTestsSuiteRTL(setup, {
+        baseClassName: CLASSNAME,
+        forwardClassName: 'switchWrapper',
+        forwardAttributes: 'switchWrapper',
+        forwardRef: 'switchWrapper',
+    });
 });
