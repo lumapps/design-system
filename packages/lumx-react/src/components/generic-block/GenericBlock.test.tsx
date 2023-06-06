@@ -1,8 +1,9 @@
 import React, { createRef } from 'react';
-import { mount, shallow } from 'enzyme';
-import 'jest-enzyme';
-import { commonTestsSuite } from '@lumx/react/testing/utils';
 
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { render } from '@testing-library/react';
+
+import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import { GenericBlock, GenericBlockProps } from '.';
 
 const CLASSNAME = GenericBlock.className as string;
@@ -10,122 +11,121 @@ const CLASSNAME = GenericBlock.className as string;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (props: Partial<GenericBlockProps> = {}, shallowRendering = true) => {
-    const renderer: any = shallowRendering ? shallow : mount;
-    const wrapper: any = renderer(<GenericBlock {...(props as any)} />);
-    return { props, wrapper };
+const setup = (props: Partial<GenericBlockProps> = {}) => {
+    render(<GenericBlock {...(props as any)} />);
+    const genericBlock = getByClassName(document.body, CLASSNAME);
+    const figure = queryByClassName(genericBlock, 'lumx-generic-block__figure');
+    const content = queryByClassName(genericBlock, 'lumx-generic-block__content');
+    const actions = queryByClassName(genericBlock, 'lumx-generic-block__actions');
+    return { props, genericBlock, figure, content, actions };
 };
 
 describe(`<${GenericBlock.displayName}>`, () => {
-    // 1. Test render via snapshot.
-    describe('Snapshots and structure', () => {
-        it('should render default', () => {
-            const wrapper = shallow(
-                <GenericBlock figure="figure" actions="actions">
-                    Content
-                </GenericBlock>,
+    describe('Props', () => {
+        it('should render content', () => {
+            const { genericBlock, content, figure, actions } = setup({ children: 'Content' });
+            expect(genericBlock).toBeInTheDocument();
+            expect(genericBlock.className).toMatchInlineSnapshot(
+                `"lumx-generic-block lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--gap-big"`,
             );
 
-            expect(wrapper.prop('gap')).toBe('big');
-            expect(wrapper.prop('orientation')).toBe('horizontal');
+            expect(content).toBeInTheDocument();
+            expect(content).toHaveTextContent('Content');
+            expect(content?.className).toMatchInlineSnapshot(
+                `"lumx-generic-block__content lumx-flex-box lumx-flex-box--orientation-vertical lumx-flex-box--fill-space"`,
+            );
 
-            const figure = wrapper.find('.lumx-generic-block__figure');
-            expect(figure).toHaveLength(1);
-
-            const content = wrapper.find('.lumx-generic-block__content');
-            expect(content).toHaveLength(1);
-            expect(content.prop('fillSpace')).toBe(true);
-            expect(content.prop('orientation')).toBe('vertical');
-
-            const actions = wrapper.find('.lumx-generic-block__actions');
-            expect(actions).toHaveLength(1);
+            expect(figure).not.toBeInTheDocument();
+            expect(actions).not.toBeInTheDocument();
         });
 
         it('should forward vAlign & hAlign', () => {
-            const wrapper = shallow(
-                <GenericBlock figure="figure" actions="actions" vAlign="left" hAlign="bottom">
-                    Content
-                </GenericBlock>,
+            const { genericBlock, figure, content, actions } = setup({
+                children: 'Content',
+                figure: 'Figure',
+                actions: 'Actions',
+                vAlign: 'left',
+                hAlign: 'bottom',
+            });
+
+            expect(genericBlock?.className).toMatchInlineSnapshot(
+                `"lumx-generic-block lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--v-align-left lumx-flex-box--h-align-bottom lumx-flex-box--gap-big"`,
             );
-
-            expect(wrapper.prop('vAlign')).toBe('left');
-            expect(wrapper.prop('hAlign')).toBe('bottom');
-
-            const figure = wrapper.find('.lumx-generic-block__figure');
-            expect(figure).toHaveLength(1);
-            expect(figure.prop('vAlign')).toBe('left');
-            expect(figure.prop('hAlign')).toBe('bottom');
-
-            const content = wrapper.find('.lumx-generic-block__content');
-            expect(content).toHaveLength(1);
-            expect(content.prop('vAlign')).toBe('left');
-            expect(content.prop('hAlign')).toBe('bottom');
-
-            const actions = wrapper.find('.lumx-generic-block__actions');
-            expect(actions).toHaveLength(1);
-            expect(actions.prop('vAlign')).toBe('left');
-            expect(actions.prop('hAlign')).toBe('bottom');
+            expect(figure?.className).toMatchInlineSnapshot(
+                `"lumx-generic-block__figure lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--v-align-left lumx-flex-box--h-align-bottom"`,
+            );
+            expect(content?.className).toMatchInlineSnapshot(
+                `"lumx-generic-block__content lumx-flex-box lumx-flex-box--orientation-vertical lumx-flex-box--v-align-left lumx-flex-box--h-align-bottom lumx-flex-box--fill-space"`,
+            );
+            expect(actions?.className).toMatchInlineSnapshot(
+                `"lumx-generic-block__actions lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--v-align-left lumx-flex-box--h-align-bottom"`,
+            );
         });
 
         it('should combine figure props', () => {
-            const wrapper = shallow(
-                <GenericBlock figure="Figure 1" figureProps={{ className: 'figure1', vAlign: 'left' }}>
+            const { figure, content, actions } = setup({
+                figure: 'Figure 1',
+                figureProps: { className: 'figure1', vAlign: 'left' },
+                children: (
                     <GenericBlock.Figure className="figure2" fillSpace>
                         Figure 2
                     </GenericBlock.Figure>
-                </GenericBlock>,
+                ),
+            });
+
+            // Merged class names
+            expect(figure?.className).toMatchInlineSnapshot(
+                `"figure1 figure2 lumx-generic-block__figure lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--v-align-left lumx-flex-box--fill-space"`,
             );
+            // Merged content
+            expect(figure).toHaveTextContent('Figure 1Figure 2');
 
-            const figure = wrapper.find('.lumx-generic-block__figure');
-            expect(figure).toHaveClassName('figure1');
-            expect(figure).toHaveClassName('figure2');
-            expect(figure.prop('fillSpace')).toBe(true);
-            expect(figure.prop('vAlign')).toBe('left');
-            expect(figure).toHaveText('Figure 1Figure 2');
-
-            expect(wrapper.find('.lumx-generic-block__content')).toHaveLength(0);
-            expect(wrapper.find('.lumx-generic-block__actions')).toHaveLength(0);
+            expect(content).not.toBeInTheDocument();
+            expect(actions).not.toBeInTheDocument();
         });
 
         it('should combine content props', () => {
-            const wrapper = shallow(
-                <GenericBlock contentProps={{ className: 'content1', vAlign: 'left' }}>
-                    Content 1
-                    <GenericBlock.Content className="content2" fillSpace>
+            const { figure, content, actions } = setup({
+                children: [
+                    'Content 1',
+                    <GenericBlock.Content key="content" className="content2" fillSpace>
                         Content 2
-                    </GenericBlock.Content>
-                </GenericBlock>,
+                    </GenericBlock.Content>,
+                ],
+                contentProps: { className: 'content1', vAlign: 'left' },
+            });
+
+            // Merged class names
+            expect(content?.className).toMatchInlineSnapshot(
+                `"content1 content2 lumx-generic-block__content lumx-flex-box lumx-flex-box--orientation-vertical lumx-flex-box--v-align-left lumx-flex-box--fill-space"`,
             );
+            // Merged content
+            expect(content).toHaveTextContent('Content 2Content 1');
 
-            const content = wrapper.find('.lumx-generic-block__content');
-            expect(content).toHaveClassName('content1');
-            expect(content).toHaveClassName('content2');
-            expect(content.prop('fillSpace')).toBe(true);
-            expect(content.prop('vAlign')).toBe('left');
-            expect(content).toHaveText('Content 2Content 1');
-
-            expect(wrapper.find('.lumx-generic-block__figure')).toHaveLength(0);
-            expect(wrapper.find('.lumx-generic-block__actions')).toHaveLength(0);
+            expect(figure).not.toBeInTheDocument();
+            expect(actions).not.toBeInTheDocument();
         });
 
         it('should combine actions props', () => {
-            const wrapper = shallow(
-                <GenericBlock actions="Actions 1" actionsProps={{ className: 'actions1', vAlign: 'left' }}>
+            const { figure, content, actions } = setup({
+                actions: 'Actions 1',
+                actionsProps: { className: 'actions1', vAlign: 'left' },
+                children: (
                     <GenericBlock.Actions className="actions2" fillSpace>
                         Actions 2
                     </GenericBlock.Actions>
-                </GenericBlock>,
+                ),
+            });
+
+            // Merged class names
+            expect(actions?.className).toMatchInlineSnapshot(
+                `"actions1 actions2 lumx-generic-block__actions lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--v-align-left lumx-flex-box--fill-space"`,
             );
+            // Merged content
+            expect(actions).toHaveTextContent('Actions 1Actions 2');
 
-            const actions = wrapper.find('.lumx-generic-block__actions');
-            expect(actions).toHaveClassName('actions1');
-            expect(actions).toHaveClassName('actions2');
-            expect(actions.prop('fillSpace')).toBe(true);
-            expect(actions.prop('vAlign')).toBe('left');
-            expect(actions).toHaveText('Actions 1Actions 2');
-
-            expect(wrapper.find('.lumx-generic-block__figure')).toHaveLength(0);
-            expect(wrapper.find('.lumx-generic-block__content')).toHaveLength(0);
+            expect(content).not.toBeInTheDocument();
+            expect(figure).not.toBeInTheDocument();
         });
 
         it('should forward refs', () => {
@@ -133,7 +133,7 @@ describe(`<${GenericBlock.displayName}>`, () => {
             const figureRef = createRef<HTMLDivElement>();
             const contentRef = createRef<HTMLDivElement>();
             const actionsRef = createRef<HTMLDivElement>();
-            shallow(
+            render(
                 <GenericBlock ref={rootRef}>
                     <GenericBlock.Figure ref={figureRef} />
                     <GenericBlock.Content ref={contentRef} />
@@ -148,5 +148,9 @@ describe(`<${GenericBlock.displayName}>`, () => {
     });
 
     // Common tests suite.
-    commonTestsSuite(setup, { className: 'wrapper', prop: 'wrapper' }, { className: CLASSNAME });
+    commonTestsSuiteRTL(setup, {
+        baseClassName: CLASSNAME,
+        forwardClassName: 'genericBlock',
+        forwardAttributes: 'genericBlock',
+    });
 });
