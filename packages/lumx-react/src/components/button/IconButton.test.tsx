@@ -1,103 +1,62 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
-import { mount, shallow } from 'enzyme';
-import 'jest-enzyme';
-
-import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
-import { mdiClose } from '@lumx/icons';
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { Button } from '@lumx/react';
+import { render, screen } from '@testing-library/react';
+import { getByClassName, queryByClassName, queryByTagName } from '@lumx/react/testing/utils/queries';
 
 import { IconButton, IconButtonProps } from './IconButton';
 
-const DEFAULT_PROPS = IconButton.defaultProps as any;
-const CLASSNAME = IconButton.className as string;
+const CLASSNAME = Button.className as string;
 
 type SetupProps = Partial<IconButtonProps>;
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}, shallowRendering = true) => {
+const setup = (propsOverride: SetupProps = {}) => {
     const props: any = { ...propsOverride };
-    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
+    render(<IconButton {...props} />);
+    const iconButton = getByClassName(document.body, CLASSNAME);
+    const icon = queryByClassName(iconButton, 'lumx-icon');
+    const img = queryByTagName(iconButton, 'IMG');
 
-    const wrapper: Wrapper = renderer(<IconButton {...props} />);
-
-    return {
-        buttonRoot: wrapper.find('ButtonRoot'),
-        icon: wrapper.find('Icon'),
-        img: wrapper.find('img'),
-        props,
-        wrapper,
-    };
+    return { props, iconButton, icon, img };
 };
 
 describe(`<${IconButton.displayName}>`, () => {
-    // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', () => {
-        it('should render icon button', () => {
-            const { buttonRoot, icon, img, wrapper } = setup({});
-            expect(wrapper).toMatchSnapshot();
-            expect(buttonRoot).toExist();
-            expect(icon).toExist();
-            expect(img).not.toExist();
+    describe('Props', () => {
+        it('should render default', () => {
+            const { iconButton, icon, img } = setup();
+            expect(iconButton).toBeInTheDocument();
+            expect(iconButton.className).toMatchInlineSnapshot(
+                `"lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-icon"`,
+            );
+
+            expect(icon).toBeInTheDocument();
+            expect(img).not.toBeInTheDocument();
+        });
+
+        it('should render label', () => {
+            const label = 'Label';
+            const { iconButton } = setup({ label });
+            expect(iconButton).toBe(screen.queryByRole('button', { name: label }));
         });
 
         it('should render icon button with an image', () => {
-            const { buttonRoot, icon, img, wrapper } = setup({ image: 'http://foo.com' });
-            expect(wrapper).toMatchSnapshot();
-            expect(buttonRoot).toExist();
-            expect(icon).not.toExist();
-            expect(img).toExist();
+            const { iconButton, icon, img } = setup({ image: 'http://foo.com' });
+
+            expect(iconButton).toBeInTheDocument();
+            expect(icon).not.toBeInTheDocument();
+            expect(img).toBeInTheDocument();
         });
-
-        it('should render icon button with an image if both props are set', () => {
-            const { buttonRoot, icon, img, wrapper } = setup({ image: 'http://foo.com', icon: mdiClose });
-            expect(wrapper).toMatchSnapshot();
-            expect(buttonRoot).toExist();
-            expect(icon).not.toExist();
-            expect(img).toExist();
-        });
-    });
-
-    // 2. Test defaultProps value and important props custom values.
-    describe('Props', () => {
-        it('should use default props', () => {
-            const { wrapper, buttonRoot } = setup();
-            expect(wrapper).toMatchSnapshot();
-
-            const actualProps = buttonRoot.props() as IconButtonProps;
-            expect(actualProps.variant).toEqual('icon');
-            for (const [propName, propValue] of Object.entries(DEFAULT_PROPS)) {
-                expect(actualProps[propName]).toEqual(propValue);
-            }
-        });
-
-        it('should forward any CSS class', () => {
-            const props = {
-                className: 'component component--is-tested',
-            };
-            const { wrapper, buttonRoot } = setup(props);
-            expect(wrapper).toMatchSnapshot();
-
-            expect(buttonRoot).toHaveClassName(props.className);
-        });
-    });
-
-    // 3. Test events.
-    describe('Events', () => {
-        // Nothing to do here.
-    });
-
-    // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', () => {
-        // Nothing to do here.
-    });
-
-    // 5. Test state.
-    describe('State', () => {
-        // Nothing to do here.
     });
 
     // Common tests suite.
-    commonTestsSuite(setup, { prop: 'buttonRoot' }, { className: CLASSNAME });
+    commonTestsSuiteRTL(setup, {
+        baseClassName: CLASSNAME,
+        forwardClassName: 'iconButton',
+        forwardAttributes: 'iconButton',
+        forwardRef: 'iconButton',
+    });
 });
