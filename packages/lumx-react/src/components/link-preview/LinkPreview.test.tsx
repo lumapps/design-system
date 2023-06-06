@@ -1,16 +1,14 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
-import { mount, shallow } from 'enzyme';
-import 'jest-enzyme';
-
-import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils/className';
 import { Link, Thumbnail } from '@lumx/react';
+import { render, screen, within } from '@testing-library/react';
+import { getByClassName, queryByClassName, queryAllByClassName } from '@lumx/react/testing/utils/queries';
 
 import { Size, Theme } from '..';
 import { LinkPreview, LinkPreviewProps } from './LinkPreview';
 
-const DEFAULT_PROPS = LinkPreview.defaultProps as any;
 const CLASSNAME = LinkPreview.className as string;
 
 type SetupProps = Partial<LinkPreviewProps>;
@@ -18,46 +16,47 @@ type SetupProps = Partial<LinkPreviewProps>;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}, shallowRendering = true) => {
+const setup = (propsOverride: SetupProps = {}) => {
     const props: any = { ...propsOverride };
-    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    const wrapper: Wrapper = renderer(<LinkPreview {...props} />);
 
-    return {
-        thumbnail: wrapper.find(Thumbnail),
-        title: wrapper.find(`.${CLASSNAME}__title`),
-        description: wrapper.find(`.${CLASSNAME}__description`),
-        link: wrapper.find(`.${CLASSNAME}__link`).find(Link),
-        props,
-        wrapper,
-    };
+    render(<LinkPreview {...props} />);
+    const linkPreview = getByClassName(document.body, CLASSNAME);
+    const thumbnail = queryByClassName(linkPreview, Thumbnail.className as string);
+    const title = queryByClassName(linkPreview, `${CLASSNAME}__title`);
+    const description = queryByClassName(linkPreview, `${CLASSNAME}__description`);
+    const link = queryAllByClassName(linkPreview, `${CLASSNAME}__link`)?.[1];
+
+    return { props, linkPreview, thumbnail, title, description, link };
 };
 
 describe(`<${LinkPreview.displayName}>`, () => {
     it('should render with default props', () => {
-        const { wrapper, thumbnail, title, link, description } = setup();
-        expect(wrapper).toHaveClassName(CLASSNAME);
+        const { linkPreview, thumbnail, title, link, description } = setup();
+        expect(linkPreview).toHaveClass(CLASSNAME);
+        expect(linkPreview).toHaveClass(`${CLASSNAME}--size-regular`);
+        expect(linkPreview).toHaveClass(`${CLASSNAME}--theme-light`);
 
-        ['size', 'theme'].forEach((type) => {
-            expect(wrapper).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type, value: DEFAULT_PROPS[type] }));
-        });
-        expect(thumbnail).not.toExist();
-        expect(title).not.toExist();
-        expect(link).toExist();
-        expect(link).toHaveProp('tabIndex', undefined);
-        expect(description).not.toExist();
+        expect(thumbnail).not.toBeInTheDocument();
+        expect(title).not.toBeInTheDocument();
+        expect(link).toBeInTheDocument();
+        expect(link).not.toHaveAttribute('tabindex');
+        expect(description).not.toBeInTheDocument();
     });
 
     it('should render with only the title', () => {
-        const { title, link } = setup({ title: 'Title' });
+        const { props, title, link } = setup({ title: 'Title', link: 'https://example.com' });
 
-        expect(title).toExist();
-        expect(link).toExist();
-        expect(link).toHaveProp('tabIndex', '-1');
+        expect(title).toBe(screen.queryByRole('heading', { name: props.title }));
+        const titleLink = within(title as any).queryByRole('link');
+        expect(titleLink).toBeInTheDocument();
+        expect(titleLink).toHaveAttribute('href', props.link);
+
+        expect(link).toBeInTheDocument();
+        expect(link).toHaveAttribute('tabindex', '-1');
     });
 
     it('should render with complete props', () => {
-        const { wrapper, thumbnail, title, link, description, props } = setup({
+        const { linkPreview, thumbnail, title, link, description, props } = setup({
             size: Size.big,
             theme: Theme.dark,
             thumbnailProps: { image: 'https://example.com/thumbnail.jpg', alt: '' },
@@ -68,35 +67,36 @@ describe(`<${LinkPreview.displayName}>`, () => {
         });
 
         const validateLink = (linkElement: any) => {
-            expect(linkElement).toHaveProp('href', props.link);
+            expect(linkElement).toHaveAttribute('href', props.link);
             // Props forwarding
-            expect(linkElement).toHaveProp('data-custom-attr', 'true');
+            expect(linkElement).toHaveAttribute('data-custom-attr', 'true');
         };
 
-        expect(wrapper).toExist();
+        expect(linkPreview).toBeInTheDocument();
+        expect(linkPreview).toHaveClass(`${CLASSNAME}--size-big`);
+        expect(linkPreview).toHaveClass(`${CLASSNAME}--theme-dark`);
 
         // Thumbnail
-        expect(thumbnail).toExist();
-        validateLink((thumbnail as any).dive());
+        expect(thumbnail).toBeInTheDocument();
+        validateLink(thumbnail);
 
         // Title
-        expect(title).toHaveText(props.title);
-        validateLink(title.find(Link));
+        expect(title).toHaveTextContent(props.title);
+        validateLink(within(title as any).queryByRole('link'));
 
         // Link
-        expect(link).toHaveText(props.link);
-        validateLink(link.find(Link));
+        expect(link).toHaveTextContent(props.link);
+        validateLink(link);
 
         // Description
-        expect(description).toHaveText(props.description);
-
-        // Size prop applied
-        expect(wrapper).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'size', value: props.size }));
-
-        // Dark theme applied
-        expect(wrapper).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'theme', value: Theme.dark }));
+        expect(description).toHaveTextContent(props.description);
     });
 
     // Common tests suite.
-    commonTestsSuite(setup, { className: 'wrapper', prop: 'wrapper' }, { className: CLASSNAME });
+    commonTestsSuiteRTL(setup, {
+        baseClassName: CLASSNAME,
+        forwardClassName: 'linkPreview',
+        forwardAttributes: 'linkPreview',
+        forwardRef: 'linkPreview',
+    });
 });
