@@ -1,14 +1,13 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
-import { mount, shallow } from 'enzyme';
-import 'jest-enzyme';
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 
-import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
-import { getBasicClass } from '@lumx/react/utils/className';
-
+import { render } from '@testing-library/react';
+import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
+import userEvent from '@testing-library/user-event';
+import { mdiPlus } from '@lumx/icons';
 import { Uploader, UploaderProps } from './Uploader';
 
-const DEFAULT_PROPS = Uploader.defaultProps as any;
 const CLASSNAME = Uploader.className as string;
 
 type SetupProps = Partial<UploaderProps>;
@@ -16,72 +15,85 @@ type SetupProps = Partial<UploaderProps>;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}, shallowRendering = true) => {
+const setup = (propsOverride: SetupProps = {}) => {
     const props: any = { ...propsOverride };
-    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    const wrapper: Wrapper = renderer(<Uploader {...props} />);
 
-    return { props, wrapper };
+    render(<Uploader {...props} />);
+    const uploader = getByClassName(document.body, CLASSNAME);
+    const label = queryByClassName(uploader, `${CLASSNAME}__label`);
+    const icon = queryByClassName(uploader, `${CLASSNAME}__icon`);
+
+    return { props, uploader, label, icon };
 };
 
 describe(`<${Uploader.displayName}>`, () => {
-    // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', () => {
-        // Here is an example of a basic rendering check, with snapshot.
-
-        it('should render correctly', () => {
-            const { wrapper } = setup();
-            expect(wrapper).toMatchSnapshot();
-
-            expect(wrapper).toExist();
-            expect(wrapper).toHaveClassName(CLASSNAME);
-        });
-    });
-
-    // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
-        // Here are some examples of basic props check.
+        it('should render default', () => {
+            const { uploader } = setup();
 
-        it('should use default props', () => {
-            const { wrapper } = setup();
+            expect(uploader).toHaveClass(CLASSNAME);
+            expect(uploader).toHaveClass('lumx-uploader--aspect-ratio-horizontal');
+            expect(uploader).toHaveClass('lumx-uploader--size-xl');
+            expect(uploader).toHaveClass('lumx-uploader--theme-light');
+            expect(uploader).toHaveClass('lumx-uploader--variant-square');
+        });
 
-            Object.keys(DEFAULT_PROPS).forEach((prop: string) => {
-                expect(wrapper).toHaveClassName(
-                    getBasicClass({ prefix: CLASSNAME, type: prop, value: DEFAULT_PROPS[prop] }),
-                );
+        it('should render icon', () => {
+            const { icon } = setup({ icon: mdiPlus });
+            expect(icon).toBeInTheDocument();
+        });
+
+        it('should render label', () => {
+            const { label } = setup({ label: 'Label' });
+            expect(label).toBeInTheDocument();
+            expect(label).toHaveTextContent('Label');
+        });
+
+        it('should render variant circle', () => {
+            const { uploader } = setup({
+                variant: 'circle',
+                // Ratio should be ignored
+                aspectRatio: 'vertical',
             });
+
+            expect(uploader).toHaveClass(CLASSNAME);
+            expect(uploader).toHaveClass('lumx-uploader--aspect-ratio-square');
+            expect(uploader).toHaveClass('lumx-uploader--size-xl');
+            expect(uploader).toHaveClass('lumx-uploader--theme-light');
+            expect(uploader).toHaveClass('lumx-uploader--variant-circle');
+        });
+
+        it('should render variant rounded', () => {
+            const { uploader } = setup({ variant: 'rounded' });
+
+            expect(uploader).toHaveClass(CLASSNAME);
+            expect(uploader).toHaveClass('lumx-uploader--aspect-ratio-horizontal');
+            expect(uploader).toHaveClass('lumx-uploader--size-xl');
+            expect(uploader).toHaveClass('lumx-uploader--theme-light');
+            expect(uploader).toHaveClass('lumx-uploader--variant-rounded');
         });
     });
 
-    // 3. Test events.
     describe('Events', () => {
-        // Here is an example how to check a `onClick` event.
-
-        const onClick: jest.Mock = jest.fn();
+        const onClick = jest.fn();
 
         beforeEach(() => {
             onClick.mockClear();
         });
 
-        it('should trigger `onClick` when clicked', () => {
-            const { wrapper } = setup({ onClick }, false);
+        it('should trigger `onClick` when clicked', async () => {
+            const { uploader } = setup({ onClick });
 
-            wrapper.simulate('click');
+            await userEvent.click(uploader);
 
             expect(onClick).toHaveBeenCalled();
         });
     });
 
-    // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', () => {
-        // Nothing to do here.
-    });
-
-    // 5. Test state.
-    describe('State', () => {
-        // Nothing to do here.
-    });
-
     // Common tests suite.
-    commonTestsSuite(setup, { className: 'wrapper', prop: 'wrapper' }, { className: CLASSNAME });
+    commonTestsSuiteRTL(setup, {
+        baseClassName: CLASSNAME,
+        forwardClassName: 'uploader',
+        forwardAttributes: 'uploader',
+    });
 });
