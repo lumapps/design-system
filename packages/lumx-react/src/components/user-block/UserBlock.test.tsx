@@ -1,9 +1,11 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
-import { mount, shallow } from 'enzyme';
-import 'jest-enzyme';
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { render, within } from '@testing-library/react';
+import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
+import { Thumbnail } from '@lumx/react';
+import userEvent from '@testing-library/user-event';
 
-import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 import { UserBlock, UserBlockProps } from './UserBlock';
 
 const CLASSNAME = UserBlock.className as string;
@@ -11,24 +13,78 @@ const CLASSNAME = UserBlock.className as string;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = ({ ...propsOverride }: Partial<UserBlockProps> = {}, shallowRendering = true) => {
+const setup = (propsOverride: Partial<UserBlockProps> = {}) => {
     const props: UserBlockProps = { ...propsOverride };
-    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    const wrapper: Wrapper = renderer(<UserBlock {...props} />);
 
-    return { props, wrapper };
+    render(<UserBlock {...props} />);
+    const userBlock = getByClassName(document.body, CLASSNAME);
+    const name = queryByClassName(userBlock, `${CLASSNAME}__name`);
+    const avatar = queryByClassName(userBlock, `${CLASSNAME}__avatar`);
+    const thumbnail = avatar && queryByClassName(avatar, Thumbnail.className as string);
+    const fields = queryByClassName(userBlock, `${CLASSNAME}__fields`);
+
+    return { props, userBlock, name, avatar, thumbnail, fields };
 };
 
 describe(`<${UserBlock.displayName}>`, () => {
-    // 1. Test render via snapshot.
-    describe('Snapshots and structure', () => {
+    describe('Props', () => {
         it('should forward name props', () => {
-            const { wrapper } = setup({ name: 'John Doe', nameProps: { 'data-custom-attribute': true } });
+            const { name } = setup({ name: 'John Doe', nameProps: { 'data-custom-attribute': true } });
 
-            expect(wrapper.find('.lumx-user-block__name[data-custom-attribute]')).toHaveLength(1);
+            expect(name).toHaveAttribute('data-custom-attribute');
+        });
+
+        it('should render button', async () => {
+            const onClick = jest.fn();
+            const { name, thumbnail } = setup({
+                onClick,
+                name: 'John Doe',
+                avatarProps: { image: 'profile-picture.jpg' },
+            });
+
+            // Button name
+            expect(name?.tagName).toBe('BUTTON');
+            await userEvent.click(name as any);
+            expect(onClick).toHaveBeenCalled();
+
+            // Button thumbnail (but excluded from tab stops)
+            expect(thumbnail?.tagName).toBe('BUTTON');
+            expect(thumbnail?.tabIndex).toBe(-1);
+            onClick.mockClear();
+            await userEvent.click(thumbnail as any);
+            expect(onClick).toHaveBeenCalled();
+        });
+
+        it('should render link', async () => {
+            const { props, name, thumbnail } = setup({
+                linkProps: { href: 'https://example.com' },
+                name: 'John Doe',
+                avatarProps: { image: 'profile-picture.jpg' },
+            });
+
+            // Link name
+            expect(name?.tagName).toBe('A');
+            expect(name).toHaveAttribute('href', props.linkProps?.href);
+
+            // Link thumbnail (but excluded from tab stops)
+            expect(thumbnail?.tagName).toBe('A');
+            expect(thumbnail?.tabIndex).toBe(-1);
+            expect(thumbnail).toHaveAttribute('href', props.linkProps?.href);
+        });
+
+        it('should render fields', () => {
+            const { fields } = setup({ fields: ['Field 1', 'Field 2'] });
+            expect(fields).toBeInTheDocument();
+            expect(within(fields as any).getByText('Field 1')).toBeInTheDocument();
+            expect(within(fields as any).getByText('Field 2')).toBeInTheDocument();
         });
     });
 
     // Common tests suite.
-    commonTestsSuite(setup, { className: 'wrapper', prop: 'wrapper' }, { className: CLASSNAME });
+    commonTestsSuiteRTL(setup, {
+        baseClassName: CLASSNAME,
+        forwardClassName: 'userBlock',
+        forwardAttributes: 'userBlock',
+        forwardRef: 'userBlock',
+    });
 });
