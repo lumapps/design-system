@@ -1,10 +1,11 @@
-import { mount, shallow } from 'enzyme';
-import 'jest-enzyme';
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import { ColorPalette, Theme } from '@lumx/react';
-import { Wrapper } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils/className';
+import { render } from '@testing-library/react';
+import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
+import userEvent from '@testing-library/user-event';
 import { Chip, ChipProps } from './Chip';
 
 const CLASSNAME = Chip.className as string;
@@ -12,188 +13,137 @@ const CLASSNAME = Chip.className as string;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propOverrides: Partial<ChipProps> = {}, shallowRendering = true) => {
+const setup = (propOverrides: Partial<ChipProps> = {}) => {
     const props = {
         ...propOverrides,
     };
-    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    const wrapper = renderer(<Chip {...props} />);
 
-    return {
-        after: wrapper.find('.lumx-chip__after') as any,
-        before: wrapper.find('.lumx-chip__before') as any,
-        props,
-        wrapper,
-    };
+    render(<Chip {...props} />);
+    const chip = getByClassName(document.body, CLASSNAME);
+    const before = queryByClassName(chip, `${CLASSNAME}__before`);
+    const after = queryByClassName(chip, `${CLASSNAME}__after`);
+
+    return { props, chip, before, after };
 };
 
 describe('<Chip />', () => {
-    // 1. Test render via snapshot (default state of component).
-    describe('Snapshot', () => {
-        it('should render correctly Chip component', () => {
-            const { wrapper } = setup();
-            expect(wrapper).toMatchSnapshot();
+    describe('Props', () => {
+        it('should render default', () => {
+            const { chip } = setup({ children: 'Chip text' });
+            expect(chip).toBeInTheDocument();
+            expect(chip).toHaveTextContent('Chip text');
+            expect(chip.className).toMatchInlineSnapshot(
+                `"lumx-chip lumx-chip--color-dark lumx-chip--size-m lumx-chip--is-unselected"`,
+            );
+        });
+
+        it('should render dark theme', () => {
+            const { chip } = setup({ theme: Theme.dark });
+            expect(chip).toHaveClass('lumx-chip--color-light');
+        });
+
+        it('should render clickable', () => {
+            const onClick = jest.fn();
+            const { chip } = setup({ children: 'Chip text', onClick });
+            expect(chip).toHaveAttribute('role', 'button');
+            expect(chip.className).toMatchInlineSnapshot(
+                `"lumx-chip lumx-chip--is-clickable lumx-chip--color-dark lumx-chip--size-m lumx-chip--is-unselected"`,
+            );
         });
     });
 
-    // 2. Test defaultProps value and important props custom values.
-    // N/A.
-
-    // 3. Test events.
     describe('Events', () => {
-        const mockOnClick = jest.fn();
-        const mockOnAfterClick = jest.fn();
-        const mockOnBeforeClick = jest.fn();
-        const mockClickEvent = {
-            stopPropagation: (): boolean => true,
-        };
-        const clearClickMocks = () => {
-            [mockOnClick, mockOnAfterClick, mockOnBeforeClick].forEach((func) => func.mockClear());
-        };
+        const onClick = jest.fn();
+        const onAfterClick = jest.fn();
+        const onBeforeClick = jest.fn();
 
-        beforeEach(() => clearClickMocks);
+        beforeEach(jest.clearAllMocks);
 
-        it('should trigger onBeforeClick only when clicking on the "before" element', () => {
-            const { after, before, wrapper } = setup({
+        it('should trigger onBeforeClick only when clicking on the "before" element', async () => {
+            const { after, before, chip } = setup({
                 after: 'after',
                 before: 'before',
-                onAfterClick: mockOnAfterClick,
-                onBeforeClick: mockOnBeforeClick,
-                onClick: mockOnClick,
+                onAfterClick,
+                onBeforeClick,
+                onClick,
             });
 
-            wrapper.simulate('click', mockClickEvent);
-            expect(mockOnBeforeClick).not.toHaveBeenCalled();
+            await userEvent.click(chip);
+            expect(onBeforeClick).not.toHaveBeenCalled();
 
-            clearClickMocks();
+            jest.clearAllMocks();
 
-            after.simulate('click', mockClickEvent);
-            expect(mockOnBeforeClick).not.toHaveBeenCalled();
+            await userEvent.click(after as any);
+            expect(onBeforeClick).not.toHaveBeenCalled();
 
-            clearClickMocks();
+            jest.clearAllMocks();
 
-            before.simulate('click', mockClickEvent);
-            expect(mockOnBeforeClick).toHaveBeenCalled();
+            await userEvent.click(before as any);
+            expect(onBeforeClick).toHaveBeenCalled();
         });
 
-        it('should trigger onClick when clicking on the label area', () => {
-            const { after, before, wrapper } = setup({
+        it('should trigger onClick when clicking on the label area', async () => {
+            const { after, before, chip } = setup({
                 after: 'after',
                 before: 'before',
-                onAfterClick: mockOnAfterClick,
-                onBeforeClick: mockOnBeforeClick,
-                onClick: mockOnClick,
+                onAfterClick,
+                onBeforeClick,
+                onClick,
             });
 
-            wrapper.simulate('click');
-            expect(mockOnClick).toHaveBeenCalled();
+            await userEvent.click(chip);
+            expect(onClick).toHaveBeenCalled();
 
-            clearClickMocks();
+            jest.clearAllMocks();
 
-            after.simulate('click');
-            expect(mockOnClick).not.toHaveBeenCalled();
+            await userEvent.click(after as any);
+            expect(onClick).not.toHaveBeenCalled();
 
-            clearClickMocks();
+            jest.clearAllMocks();
 
-            before.simulate('click');
-            expect(mockOnClick).not.toHaveBeenCalled();
+            await userEvent.click(before as any);
+            expect(onClick).not.toHaveBeenCalled();
         });
 
-        it('should trigger onAfterClick only when clicking on the "after" element', () => {
-            const { after, before, wrapper } = setup({
+        it('should trigger onAfterClick only when clicking on the "after" element', async () => {
+            const { after, before, chip } = setup({
                 after: 'after',
                 before: 'before',
-                onAfterClick: mockOnAfterClick,
-                onBeforeClick: mockOnBeforeClick,
-                onClick: mockOnClick,
+                onAfterClick,
+                onBeforeClick,
+                onClick,
             });
 
-            wrapper.simulate('click', mockClickEvent);
-            expect(mockOnAfterClick).not.toHaveBeenCalled();
+            await userEvent.click(chip);
+            expect(onAfterClick).not.toHaveBeenCalled();
 
-            clearClickMocks();
+            jest.clearAllMocks();
 
-            after.simulate('click', mockClickEvent);
-            expect(mockOnAfterClick).toHaveBeenCalled();
+            await userEvent.click(after as any);
+            expect(onAfterClick).toHaveBeenCalled();
 
-            clearClickMocks();
+            jest.clearAllMocks();
 
-            before.simulate('click', mockClickEvent);
-            expect(mockOnAfterClick).not.toHaveBeenCalled();
+            await userEvent.click(before as any);
+            expect(onAfterClick).not.toHaveBeenCalled();
         });
 
-        it('should not stop propagation when clicking on a "before"or "after" element without an event handler', () => {
-            const onClick = jest.fn();
-            const { after, before } = setup(
-                {
-                    after: 'after',
-                    before: 'before',
-                    onClick,
-                },
-                false,
-            );
+        it('should not stop propagation when clicking on a "before" or "after" element without an event handler', async () => {
+            const { after, before } = setup({
+                after: 'after',
+                before: 'before',
+                onClick,
+            });
 
-            before.simulate('click', mockClickEvent);
+            await userEvent.click(before as any);
             expect(onClick).toHaveBeenCalled();
 
             onClick.mockClear();
 
-            after.simulate('click', mockClickEvent);
+            await userEvent.click(after as any);
             expect(onClick).toHaveBeenCalled();
         });
     });
 
-    // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', () => {
-        it('should have an extra class on the "before" element if it is clickable', () => {
-            let { before } = setup({ before: 'before 1' });
-            expect(before).toHaveLength(1);
-            expect(before.hasClass('lumx-chip__before--is-clickable')).toEqual(false);
-
-            ({ before } = setup({ before: 'before 2', onBeforeClick: (): boolean => true }));
-            expect(before).toHaveLength(1);
-            expect(before.hasClass('lumx-chip__before--is-clickable')).toEqual(true);
-        });
-
-        it('should have an extra class on the "after" element if it is clickable', () => {
-            let { after } = setup({ after: 'after 1' });
-            expect(after).toHaveLength(1);
-            expect(after.hasClass('lumx-chip__after--is-clickable')).toEqual(false);
-
-            ({ after } = setup({ after: 'after 2', onAfterClick: (): boolean => true }));
-            expect(after).toHaveLength(1);
-            expect(after.hasClass('lumx-chip__after--is-clickable')).toEqual(true);
-        });
-
-        it('should have correct default color', () => {
-            const { wrapper } = setup({});
-            expect(wrapper).toHaveClassName(
-                getBasicClass({
-                    prefix: CLASSNAME,
-                    type: 'color',
-                    value: ColorPalette.dark,
-                }),
-            );
-        });
-
-        it('should switch color with theme', () => {
-            const { wrapper } = setup({ theme: Theme.dark });
-            expect(wrapper).toHaveClassName(
-                getBasicClass({
-                    prefix: CLASSNAME,
-                    type: 'color',
-                    value: ColorPalette.light,
-                }),
-            );
-        });
-
-        it('should use color over the theme', () => {
-            const color = ColorPalette.red;
-            const { wrapper } = setup({ theme: Theme.dark, color });
-            expect(wrapper).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'color', value: color }));
-        });
-    });
-
-    // 5. Test state.
-    // N/A.
+    commonTestsSuiteRTL(setup, { baseClassName: CLASSNAME, forwardClassName: 'chip', forwardAttributes: 'chip' });
 });
