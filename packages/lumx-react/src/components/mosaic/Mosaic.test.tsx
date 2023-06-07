@@ -1,89 +1,73 @@
+import React from 'react';
+
 import { Mosaic, MosaicProps } from '@lumx/react/components/mosaic/Mosaic';
-import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
-
-import { mount, shallow } from 'enzyme';
-import 'jest-enzyme';
-
-import React, { ReactElement } from 'react';
-import { Theme } from '..';
+import { render, screen, within } from '@testing-library/react';
+import { getByClassName, queryAllByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
+import { Thumbnail } from '@lumx/react';
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import range from 'lodash/range';
+import userEvent from '@testing-library/user-event';
 
 const CLASSNAME = Mosaic.className as string;
 
-// Mock out the useIntersectionObserver hook since it can't work with Jest/Enzyme.
-jest.mock('@lumx/react/hooks/useIntersectionObserver', () => ({
-    useIntersectionObserver: () => new Map(),
-}));
-
-type SetupProps = Partial<MosaicProps>;
-
-const setup = (propsOverride: SetupProps = {}, shallowRendering = true) => {
-    const props: any = { ...propsOverride };
-    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    const wrapper = renderer(<Mosaic {...props} />);
-
-    return {
-        thumbnails: wrapper.find('Thumbnail'),
-        props,
-        wrapper,
-    };
+const setup = (props: Partial<MosaicProps> = {}) => {
+    render(<Mosaic thumbnails={[]} {...props} />);
+    const mosaic = getByClassName(document.body, CLASSNAME);
+    const thumbnails = queryAllByClassName(mosaic, Thumbnail.className as string);
+    const overlay = queryByClassName(mosaic, `${CLASSNAME}__overlay`);
+    return { props, mosaic, thumbnails, overlay };
 };
 
+const generateThumbnails = (count: number) =>
+    range(1, count + 1).map((i) => ({
+        image: `https://example.com/image${i}.png`,
+        alt: '',
+    }));
+
 describe(`<${Mosaic.displayName}>`, () => {
-    describe('Props', () => {
-        it('should pass theme prop to Thumbnails', () => {
-            const expectedTheme = Theme.dark;
-            const { thumbnails } = setup({
-                theme: expectedTheme,
-                thumbnails: [
-                    { alt: 'image0', image: 'image/file/path/0' },
-                    { alt: 'image1', image: 'image/file/path/1' },
-                    { alt: 'image2', image: 'image/file/path/2' },
-                    { alt: 'image3', image: 'image/file/path/3' },
-                ],
-            });
-            thumbnails.forEach((thumbnail: Wrapper) => {
-                expect(thumbnail.prop('theme')).toBe(expectedTheme);
-            });
+    it.each([1, 2, 3, 4])('should render %s thumbnail', async (count) => {
+        const { mosaic, thumbnails } = setup({
+            thumbnails: generateThumbnails(count),
         });
+        expect(mosaic).toHaveClass(`${CLASSNAME}--has-${count}-thumbnail${count > 1 ? 's' : ''}`);
+        expect(thumbnails.length).toBe(count);
+        for (const thumbnail of thumbnails) {
+            expect(within(thumbnail).queryByRole('img')).toBeInTheDocument();
+        }
     });
 
-    describe('Events', () => {
-        it('should keep Thumbnail onClick', () => {
-            const onClick = jest.fn();
-            const { thumbnails } = setup({
-                thumbnails: [
-                    { alt: 'image0', image: 'image/file/path/0', onClick },
-                    { alt: 'image1', image: 'image/file/path/1' },
-                    { alt: 'image2', image: 'image/file/path/2' },
-                    { alt: 'image3', image: 'image/file/path/3' },
-                ],
-            });
-            thumbnails.forEach((thumbnail: Wrapper) => {
-                thumbnail.simulate('click');
-            });
-            expect(onClick).toHaveBeenCalledTimes(1);
+    it('should render more than 4 thumbnails', () => {
+        const { mosaic, thumbnails, overlay } = setup({
+            thumbnails: generateThumbnails(6),
+        });
+        expect(mosaic).toHaveClass(`${CLASSNAME}--has-4-thumbnails`);
+        expect(thumbnails.length).toBe(4);
+        expect(overlay).toBeInTheDocument();
+        expect(overlay).toHaveTextContent('+2');
+    });
+
+    it('should render clickable', async () => {
+        const onClick = jest.fn();
+        const onImageClick = jest.fn();
+        const { thumbnails } = setup({
+            thumbnails: generateThumbnails(6),
+            onImageClick,
+            onClick,
         });
 
-        it('should handle both Thumbnail onClick and Mosaic onImageClick', () => {
-            const onImageClick = jest.fn();
-            const onClick = jest.fn();
-            const { thumbnails } = setup({
-                onImageClick,
-                thumbnails: [
-                    { alt: 'image0', image: 'image/file/path/0', onClick },
-                    { alt: 'image1', image: 'image/file/path/1' },
-                    { alt: 'image2', image: 'image/file/path/2' },
-                    { alt: 'image3', image: 'image/file/path/3' },
-                ],
-            });
-            thumbnails.forEach((thumbnail: Wrapper) => {
-                thumbnail.simulate('click');
-            });
-            expect(onClick).toHaveBeenCalledTimes(1);
-            expect(onImageClick).toHaveBeenCalledTimes(4);
-        });
+        expect(screen.queryAllByRole('button').length).toBe(thumbnails.length);
+
+        // Click the third image
+        await userEvent.click(thumbnails[2]);
+        expect(onImageClick).toHaveBeenCalledWith(2);
+        expect(onClick).toHaveBeenCalled();
     });
 
     // Common tests suite.
-    commonTestsSuite(setup, { className: 'wrapper' }, { className: CLASSNAME });
+    commonTestsSuiteRTL(setup, {
+        baseClassName: CLASSNAME,
+        forwardClassName: 'mosaic',
+        forwardAttributes: 'mosaic',
+        forwardRef: 'mosaic',
+    });
 });
