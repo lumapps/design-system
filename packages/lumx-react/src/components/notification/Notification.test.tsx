@@ -1,108 +1,77 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
-import { mount, shallow } from 'enzyme';
-import 'jest-enzyme';
-
-import noop from 'lodash/noop';
 import { Kind } from '@lumx/react';
-import { Wrapper } from '@lumx/react/testing/utils';
+import { render, within } from '@testing-library/react';
+import { queryByClassName } from '@lumx/react/testing/utils/queries';
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import userEvent from '@testing-library/user-event';
 
 import { Notification, NotificationProps } from './Notification';
 
 const CLASSNAME = Notification.className as string;
 
-type SetupProps = Partial<NotificationProps>;
-
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}, shallowRendering = true) => {
-    const props: any = { ...propsOverride };
-    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    const wrapper: Wrapper = renderer(<Notification {...props} />);
+const setup = (props: Partial<NotificationProps> = {}) => {
+    render(<Notification isOpen type={Kind.info} {...props} />);
+    const notification = queryByClassName(document.body, CLASSNAME);
 
-    const notification: Wrapper = wrapper.find('.lumx-notification');
-    const icon: Wrapper = wrapper.find('.lumx-notification__icon');
-    const content: Wrapper = wrapper.find('.lumx-notification__content');
-    const action: Wrapper = wrapper.find('.lumx-notification__action');
+    const icon = notification && queryByClassName(notification, `${CLASSNAME}__icon`);
+    const action = notification && queryByClassName(notification, `${CLASSNAME}__action`);
+    const actionButton = action && within(action).queryByRole('button');
 
-    return { action, content, icon, notification, props, wrapper };
-};
-
-const properties = {
-    error: {
-        content: 'Error',
-        onClick: noop,
-        isOpen: true,
-        type: Kind.error,
-    },
-    info: {
-        content: 'Info',
-        onClick: noop,
-        isOpen: true,
-        type: Kind.info,
-    },
-    infoWithCallback: {
-        onActionClick: noop,
-        actionLabel: 'Undo',
-        content: 'Info with callback',
-        onClick: noop,
-        isOpen: true,
-        type: Kind.info,
-    },
-    success: {
-        content: 'Success',
-        onClick: noop,
-        isOpen: true,
-        type: Kind.success,
-    },
-
-    warning: {
-        content: 'Warning',
-        onClick: noop,
-        isOpen: true,
-        type: Kind.warning,
-    },
+    return { action, actionButton, icon, notification, props };
 };
 
 describe(`<${Notification.displayName}>`, () => {
-    // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', () => {
-        it('should render defaults', () => {
-            const { wrapper, notification } = setup(properties.info);
-            expect(wrapper).toMatchSnapshot();
-
-            expect(notification).toExist();
-
-            expect(notification).toHaveClassName(CLASSNAME);
-            expect(notification).toHaveClassName(`${CLASSNAME}--color-dark`);
-        });
-
-        it('should render nothing since the notification is closed', () => {
-            const { wrapper, notification } = setup({ ...properties.info, isOpen: false });
-            expect(wrapper).toMatchSnapshot();
-
-            expect(notification).not.toExist();
-        });
+    it('should not render without type', () => {
+        const { notification } = setup({ type: undefined });
+        expect(notification).not.toBeInTheDocument();
     });
 
-    // 2. Test defaultProps value and important props custom values.
-    describe('Props', () => {
-        // Nothing to do here.
+    it('should not render when closed', () => {
+        const { notification } = setup({ isOpen: false });
+        expect(notification).not.toBeInTheDocument();
     });
 
-    // 3. Test events.
-    describe('Events', () => {
-        // Nothing to do here.
+    it('should render content', () => {
+        const content = 'Content';
+        const { notification, icon } = setup({ content });
+        expect(notification).toBeInTheDocument();
+        expect(notification).toHaveTextContent(content);
+        expect(icon).toBeInTheDocument();
     });
 
-    // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', () => {
-        // Nothing to do here.
+    it('should render content & action', async () => {
+        const onClick = jest.fn();
+        const onActionClick = jest.fn();
+        const content = 'Content';
+        const actionLabel = 'actionLabel';
+        const { notification, action, actionButton } = setup({ content, actionLabel, onClick, onActionClick });
+
+        expect(notification).toBeInTheDocument();
+        expect(notification).toHaveTextContent(content);
+
+        expect(action).toBeInTheDocument();
+        expect(actionButton).toBeInTheDocument();
+        expect(actionButton).toHaveTextContent(actionLabel);
+
+        // Click action button
+        await userEvent.click(actionButton as any);
+        expect(onActionClick).toHaveBeenCalled();
+        expect(onClick).not.toHaveBeenCalled();
+
+        // Click notification
+        await userEvent.click(notification as any);
+        expect(onClick).toHaveBeenCalled();
     });
 
-    // 5. Test state.
-    describe('State', () => {
-        // Nothing to do here.
+    // Common tests suite.
+    commonTestsSuiteRTL(setup, {
+        baseClassName: CLASSNAME,
+        forwardClassName: 'notification',
+        forwardAttributes: 'notification',
+        forwardRef: 'notification',
     });
 });
