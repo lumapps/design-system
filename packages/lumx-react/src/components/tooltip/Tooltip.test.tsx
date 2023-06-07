@@ -1,105 +1,164 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
-import { mount, shallow } from 'enzyme';
-import 'jest-enzyme';
+import { Button } from '@lumx/react';
+import { act, render, waitFor } from '@testing-library/react';
+import {
+    findByClassName,
+    getByClassName,
+    queryAllByTagName,
+    queryByClassName,
+} from '@lumx/react/testing/utils/queries';
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import userEvent from '@testing-library/user-event';
 
-import { Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
-
-import { Button, Icon } from '@lumx/react';
 import { Tooltip, TooltipProps } from './Tooltip';
 
 const CLASSNAME = Tooltip.className as string;
 
 jest.mock('uid', () => ({ uid: () => 'uid' }));
 
-type SetupProps = Partial<TooltipProps>;
-
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}, shallowRendering = true) => {
-    const props: any = { ...propsOverride };
-    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    const wrapper = renderer(
-        <Tooltip label="Tooltip" {...props}>
-            Anchor
-        </Tooltip>,
+const setup = async (propsOverride: Partial<TooltipProps> = {}) => {
+    const props: any = { forceOpen: true, ...propsOverride };
+    // Hack to remove act() warning in console
+    await (act as any)(() =>
+        Promise.resolve(
+            render(
+                <Tooltip label="Tooltip" {...props}>
+                    {props.children || 'Anchor'}
+                </Tooltip>,
+            ),
+        ),
     );
-    const tooltip = wrapper.find(`.${CLASSNAME}`);
-
-    return {
-        props,
-        tooltip,
-        wrapper,
-    };
+    const tooltip = queryByClassName(document.body, CLASSNAME);
+    const anchorWrapper = queryByClassName(document.body, 'lumx-tooltip-anchor-wrapper');
+    return { props, tooltip, anchorWrapper };
 };
 
-jest.mock('./useTooltipOpen', () => ({ useTooltipOpen: () => true }));
-
 describe(`<${Tooltip.displayName}>`, () => {
-    // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', () => {
-        // Here is an example of a basic rendering check, with snapshot.
-
-        it('should render correctly', () => {
-            const { tooltip, wrapper } = setup();
-            expect(wrapper).toMatchSnapshot();
-
-            expect(tooltip).toExist();
-            expect(tooltip).toHaveClassName(CLASSNAME);
+    describe('render', () => {
+        it('should not render with empty label', async () => {
+            const { tooltip, anchorWrapper } = await setup({
+                label: undefined,
+                forceOpen: true,
+            });
+            expect(tooltip).not.toBeInTheDocument();
+            expect(anchorWrapper).not.toBeInTheDocument();
         });
 
-        it('should return children when empty label', () => {
-            const wrapper = shallow(
-                <Tooltip label="">
-                    <Icon icon="icon" />
-                </Tooltip>,
-            );
-            expect(wrapper).toMatchSnapshot();
+        it('should wrap unknown children', async () => {
+            const { tooltip, anchorWrapper } = await setup({
+                label: 'Tooltip label',
+                children: 'Anchor',
+                forceOpen: true,
+            });
+            expect(tooltip).toBeInTheDocument();
+            expect(anchorWrapper).toBeInTheDocument();
+            expect(anchorWrapper).toHaveAttribute('aria-describedby', tooltip?.id);
         });
 
-        it('should wrap children', () => {
-            // Wrap string children
-            const wrapper1 = shallow(<Tooltip label="tooltip1">children</Tooltip>);
-            expect(wrapper1).toMatchSnapshot();
-
-            // Wrap fragment children
-            const wrapper2 = shallow(
-                <Tooltip label="tooltip1">
-                    <>children</>
-                </Tooltip>,
-            );
-            expect(wrapper2).toMatchSnapshot();
+        it('should not wrap Button', async () => {
+            const { tooltip, anchorWrapper } = await setup({
+                label: 'Tooltip label',
+                children: <Button>Anchor</Button>,
+                forceOpen: true,
+            });
+            expect(tooltip).toBeInTheDocument();
+            expect(anchorWrapper).not.toBeInTheDocument();
+            const button = queryByClassName(document.body, Button.className as string);
+            expect(button).toHaveAttribute('aria-describedby', tooltip?.id);
         });
 
-        it('should not wrap Icon', () => {
-            const wrapper = shallow(
-                <Tooltip label="tooltip1">
-                    <Icon icon="icon" />
-                </Tooltip>,
-            );
-            expect(wrapper).toMatchSnapshot();
+        it('should wrap disabled Button', async () => {
+            const { tooltip, anchorWrapper } = await setup({
+                label: 'Tooltip label',
+                children: <Button isDisabled>Anchor</Button>,
+                forceOpen: true,
+            });
+            expect(tooltip).toBeInTheDocument();
+            expect(anchorWrapper).toBeInTheDocument();
+            expect(anchorWrapper).toHaveAttribute('aria-describedby', tooltip?.id);
+            const button = queryByClassName(document.body, Button.className as string);
+            expect(button?.parentElement).toBe(anchorWrapper);
         });
 
-        it('should not wrap Button', () => {
-            const wrapper = shallow(
-                <Tooltip label="tooltip1">
-                    <Button>button</Button>
-                </Tooltip>,
-            );
-            expect(wrapper).toMatchSnapshot();
+        it('should render multiline', async () => {
+            const { tooltip } = await setup({
+                label: 'First line\nSecond line',
+                forceOpen: true,
+            });
+            expect(tooltip).toBeInTheDocument();
+            const lines = queryAllByTagName(tooltip as any, 'p');
+            expect(lines.length).toBe(2);
+            expect(lines[0]).toHaveTextContent('First line');
+            expect(lines[1]).toHaveTextContent('Second line');
+        });
+    });
+
+    describe('activation', () => {
+        it('should activate on anchor hover', async () => {
+            let { tooltip } = await setup({
+                label: 'Tooltip label',
+                children: <Button>Anchor</Button>,
+                forceOpen: false,
+            });
+
+            expect(tooltip).not.toBeInTheDocument();
+
+            // Hover anchor button
+            const button = getByClassName(document.body, Button.className as string);
+            await userEvent.hover(button);
+
+            // Tooltip opened
+            tooltip = await findByClassName(document.body, CLASSNAME);
+            expect(tooltip).toBeInTheDocument();
+            expect(button).toHaveAttribute('aria-describedby', tooltip?.id);
+
+            // Un-hover anchor button
+            userEvent.unhover(button);
+            await waitFor(() => {
+                expect(button).not.toHaveFocus();
+                // Tooltip closed
+                expect(tooltip).not.toBeInTheDocument();
+            });
         });
 
-        it('should work on disabled elements', () => {
-            const wrapper = shallow(
-                <Tooltip label="Tooltip on disabled button" forceOpen>
-                    <Button isDisabled>Empty</Button>
-                </Tooltip>,
-            );
-            expect(wrapper).toMatchSnapshot();
+        it('should activate on anchor focus', async () => {
+            let { tooltip } = await setup({
+                label: 'Tooltip label',
+                children: <Button>Anchor</Button>,
+                forceOpen: false,
+            });
+
+            expect(tooltip).not.toBeInTheDocument();
+
+            // Focus anchor button
+            await userEvent.tab();
+            const button = getByClassName(document.body, Button.className as string);
+            expect(button).toHaveFocus();
+
+            // Tooltip opened
+            tooltip = await findByClassName(document.body, CLASSNAME);
+            expect(tooltip).toBeInTheDocument();
+            expect(button).toHaveAttribute('aria-describedby', tooltip?.id);
+
+            // Focus next element
+            userEvent.tab();
+            await waitFor(() => {
+                expect(button).not.toHaveFocus();
+                // Tooltip closed
+                expect(tooltip).not.toBeInTheDocument();
+            });
         });
     });
 
     // Common tests suite.
-    commonTestsSuite(setup, { className: 'tooltip', prop: 'tooltip' }, { className: CLASSNAME });
+    commonTestsSuiteRTL(setup, {
+        baseClassName: CLASSNAME,
+        forwardClassName: 'tooltip',
+        forwardAttributes: 'tooltip',
+        forwardRef: 'tooltip',
+    });
 });
