@@ -1,116 +1,47 @@
-import { mdiCheck } from '@lumx/icons';
-import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
-import { getBasicClass } from '@lumx/react/utils/className';
+import React from 'react';
 
-import { mount, shallow } from 'enzyme';
-import 'jest-enzyme';
-import React, { ReactElement } from 'react';
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { render, screen } from '@testing-library/react';
+import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 
+import { Icon } from '@lumx/react';
+import { mdiPlay } from '@lumx/icons';
 import { Tab, TabProps } from './Tab';
-import { setupTabProviderMocks } from './test.mocks';
 
 const CLASSNAME = Tab.className as string;
-
-// Mock useTabProviderContext.
-jest.mock('./state', () => {
-    const state = jest.requireActual('./state');
-    return { ...state, useTabProviderContext: jest.fn(), useTabProviderContextState: jest.fn() };
-});
 
 type SetupProps = Partial<TabProps>;
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true) => {
-    const props: TabProps = { label: 'Test Tab Label', ...propsOverride };
-    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    const wrapper: Wrapper = renderer(<Tab {...props} />);
-
-    return { props, wrapper };
+const setup = (propsOverride: SetupProps = {}) => {
+    const props = { label: 'Label', ...propsOverride };
+    render(<Tab {...props} />);
+    const tab = getByClassName(document.body, CLASSNAME);
+    const icon = queryByClassName(tab, Icon.className as string);
+    return { props, tab, icon };
 };
 
 describe(`<${Tab.displayName}>`, () => {
-    // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', () => {
-        it('should render', () => {
-            setupTabProviderMocks({ index: 1 });
-            const { wrapper } = setup({});
-            expect(wrapper).toMatchSnapshot();
-            expect(wrapper).toHaveClassName(CLASSNAME);
-        });
-
-        it('should render icon', () => {
-            setupTabProviderMocks({ index: 2 });
-            const { wrapper } = setup({ icon: mdiCheck });
-            expect(wrapper).toMatchSnapshot();
-        });
-
-        it('should render active state', () => {
-            setupTabProviderMocks({ index: 3, isActive: true });
-            const { wrapper } = setup({});
-            expect(wrapper).toMatchSnapshot();
-        });
+    it('should render default', () => {
+        const label = 'Label';
+        const { tab, icon } = setup({ label });
+        expect(tab).toBe(screen.queryByRole('tab', { name: label }));
+        expect(tab.tagName).toBe('BUTTON');
+        expect(tab).toHaveAttribute('type', 'button');
+        expect(icon).not.toBeInTheDocument();
     });
 
-    // 2. Test defaultProps value and important props custom values.
-    describe('Props', () => {
-        it('should use the given props to add classes', () => {
-            setupTabProviderMocks();
-            const props: any = {
-                isActive: true,
-                isDisabled: true,
-            };
-            const { wrapper } = setup(props);
-
-            Object.keys(props).forEach((prop) => {
-                expect(wrapper).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: prop, value: props[prop] }));
-            });
-        });
+    it('should render icon', () => {
+        const { icon } = setup({ icon: mdiPlay });
+        expect(icon).toBeInTheDocument();
     });
 
-    // 3. Test events.
-    describe('Events', () => {
-        it('should trigger `onChange` when focused if the provider is configured to do so', () => {
-            const { changeToTab } = setupTabProviderMocks({ shouldActivateOnFocus: true });
-            const { wrapper } = setup({}, false);
-
-            wrapper.simulate('focus');
-            expect(changeToTab).toHaveBeenCalledTimes(1);
-        });
-
-        it('should trigger `onChange` when clicked', () => {
-            const { changeToTab } = setupTabProviderMocks();
-            const { wrapper } = setup({}, false);
-
-            wrapper.simulate('click');
-            expect(changeToTab).toHaveBeenCalledTimes(1);
-        });
-
-        it('should trigger `onChange` when pressing `enter`', () => {
-            const { changeToTab } = setupTabProviderMocks();
-            const { wrapper } = setup({}, false);
-
-            wrapper.simulate('keypress', { key: 'Enter' });
-            expect(changeToTab).toHaveBeenCalledTimes(1);
-        });
-
-        it('should not trigger `onChange` when pressing any other key', () => {
-            const { changeToTab } = setupTabProviderMocks();
-            const { wrapper } = setup({}, false);
-
-            wrapper.simulate('keypress', { key: 'a' });
-            expect(changeToTab).not.toHaveBeenCalled();
-        });
+    commonTestsSuiteRTL(setup, {
+        baseClassName: CLASSNAME,
+        forwardClassName: 'tab',
+        forwardAttributes: 'tab',
+        forwardRef: 'tab',
     });
-
-    // Common tests suite.
-    commonTestsSuite(
-        (...args: any[]) => {
-            setupTabProviderMocks();
-            return setup(...args);
-        },
-        { className: 'wrapper', prop: 'wrapper' },
-        { className: CLASSNAME },
-    );
 });
