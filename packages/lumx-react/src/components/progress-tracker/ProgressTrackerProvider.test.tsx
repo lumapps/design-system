@@ -1,42 +1,67 @@
-import { ProgressTracker, ProgressTrackerProvider, ProgressTrackerStep, ProgressTrackerStepPanel } from '@lumx/react';
-import { mount } from 'enzyme';
-import 'jest-enzyme';
 import React from 'react';
 
+import {
+    ProgressTracker,
+    ProgressTrackerProvider,
+    ProgressTrackerProviderProps,
+    ProgressTrackerStep,
+    ProgressTrackerStepPanel,
+} from '@lumx/react';
+
+import { render } from '@testing-library/react';
+import { checkTabActive, query } from '../tabs/test-utils';
+
+const setup = (props: Partial<ProgressTrackerProviderProps> = {}) =>
+    render(
+        <ProgressTrackerProvider {...props}>
+            <ProgressTracker aria-label="Progress tracker steps">
+                <ProgressTrackerStep label="Step 1" />
+                <ProgressTrackerStep label="Step 2" />
+            </ProgressTracker>
+
+            <ProgressTrackerStepPanel>Progress tracker step 1 content</ProgressTrackerStepPanel>
+            <ProgressTrackerStepPanel>Progress tracker step 2 content</ProgressTrackerStepPanel>
+        </ProgressTrackerProvider>,
+    );
+
 describe(`<${ProgressTrackerProvider.displayName}>`, () => {
-    // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', () => {
-        it('should render', () => {
-            const wrapper = mount(
-                <ProgressTrackerProvider>
-                    <ProgressTracker aria-label="Progress tracker steps">
-                        <ProgressTrackerStep label="step 1" />
-                        <ProgressTrackerStep label="step 1" />
-                    </ProgressTracker>
+    describe('default config', () => {
+        it('should render aria tab pattern', () => {
+            setup();
 
-                    <ProgressTrackerStepPanel>Progress tracker step 1 content</ProgressTrackerStepPanel>
-                    <ProgressTrackerStepPanel>Progress tracker step 2 content</ProgressTrackerStepPanel>
-                </ProgressTrackerProvider>,
-            );
-            const steps = wrapper.find(ProgressTrackerStep).find('button');
-            const firstProgressTrackerStep = steps.get(0);
-            const secondProgressTrackerStep = steps.get(1);
+            // Step list
+            const tabList = query.tabList('Progress tracker steps');
+            expect(tabList).toBeInTheDocument();
+            expect(query.tabs(tabList).length).toBe(2);
 
-            const stepPanels = wrapper.find(ProgressTrackerStepPanel).find('div');
-            const firstProgressTrackerStepPanel = stepPanels.get(0);
-            const secondProgressTrackerStepPanel = stepPanels.get(1);
+            // Step 1
+            const tab1 = query.tab('Step 1', tabList);
+            expect(tab1).toBeInTheDocument();
 
-            // First step is selected.
-            expect(firstProgressTrackerStep.props['aria-selected']).toBe(true);
-            expect(secondProgressTrackerStep.props['aria-selected']).toBe(false);
+            // Step 2
+            const tab2 = query.tab('Step 2', tabList);
+            expect(tab2).toBeInTheDocument();
 
-            // ProgressTrackerStep id and step panel aria-labelledby by should match
-            expect(firstProgressTrackerStep.props.id).toBe(firstProgressTrackerStepPanel.props['aria-labelledby']);
-            expect(secondProgressTrackerStep.props.id).toBe(secondProgressTrackerStepPanel.props['aria-labelledby']);
+            // Step panel 1
+            const tabPanel1 = query.tabPanel('Step 1');
+            expect(tabPanel1).toBeInTheDocument();
+            expect(tab1).toHaveAttribute('aria-controls', tabPanel1?.id);
 
-            // ProgressTrackerStep panel id and step aria-controls by should match
-            expect(firstProgressTrackerStepPanel.props.id).toBe(firstProgressTrackerStep.props['aria-controls']);
-            expect(secondProgressTrackerStepPanel.props.id).toBe(secondProgressTrackerStep.props['aria-controls']);
+            // Step panel 2
+            const tabPanel2 = query.tabPanel('Step 2');
+            expect(tabPanel2).toBeInTheDocument();
+            expect(tab2).toHaveAttribute('aria-controls', tabPanel2?.id);
+
+            // First step is active
+            checkTabActive('Step 1');
+        });
+    });
+
+    describe('not lazy', () => {
+        it('should render panel content', () => {
+            setup({ isLazy: false });
+
+            checkTabActive('Step 1', { isLazy: false });
         });
     });
 });
