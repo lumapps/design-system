@@ -1,69 +1,70 @@
-import { Dialog, DialogProps } from '@lumx/react/components/dialog/Dialog';
-import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
+import React from 'react';
 
-import { mount, shallow } from 'enzyme';
-import 'jest-enzyme';
-import React, { ReactElement } from 'react';
+import { Dialog, DialogProps } from '@lumx/react/components/dialog/Dialog';
+import { queryByClassName } from '@lumx/react/testing/utils/queries';
+import { render, screen } from '@testing-library/react';
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import userEvent from '@testing-library/user-event';
 
 const CLASSNAME = Dialog.className as string;
-
-// Mock out the useIntersectionObserver hook since it can't work with Jest/Enzyme.
-jest.mock('@lumx/react/hooks/useIntersectionObserver', () => ({
-    useIntersectionObserver: () => new Map(),
-}));
-
-type SetupProps = Partial<DialogProps>;
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}, shallowRendering = true) => {
-    const props: any = { ...propsOverride };
-    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    const wrapper = renderer(<Dialog isOpen {...props} />);
-    const dialog = wrapper.find(`.${CLASSNAME}`);
-
-    return { props, wrapper, dialog };
+const setup = (props: Partial<DialogProps> = {}) => {
+    render(<Dialog isOpen {...props} />);
+    const dialog = queryByClassName(document.body, CLASSNAME);
+    const container = dialog && queryByClassName(dialog, `${CLASSNAME}__container`);
+    return { props, dialog, container };
 };
 
 describe(`<${Dialog.displayName}>`, () => {
-    // 3. Test events.
+    it('should render default', () => {
+        const { dialog, container } = setup();
+        expect(dialog).toBeInTheDocument();
+        expect(container).toBe(screen.queryByRole('dialog'));
+        expect(container).toHaveAttribute('aria-modal', 'true');
+    });
+
     describe('Events', () => {
-        const keyDown = (key: string) => new KeyboardEvent('keydown', { key } as any);
-
-        it('should trigger `onClose` when pressing `escape` key', () => {
+        it('should trigger `onClose` when pressing `escape` key', async () => {
             const onClose = jest.fn();
-            setup({ isOpen: true, onClose }, false);
+            setup({ isOpen: true, onClose });
 
-            document.body.dispatchEvent(keyDown('Escape'));
+            await userEvent.keyboard('[Escape]');
             expect(onClose).toHaveBeenCalled();
         });
 
-        it('should not trigger `onClose` when pressing any other key', () => {
+        it('should not trigger `onClose` when pressing any other key', async () => {
             const onClose = jest.fn();
-            setup({ isOpen: true, onClose }, false);
+            setup({ isOpen: true, onClose });
 
-            document.body.dispatchEvent(keyDown('a'));
+            await userEvent.keyboard('a');
             expect(onClose).not.toHaveBeenCalled();
         });
 
-        it('should not trigger `onClose` when pressing `escape` key with `preventAutoClose` set to `true`', () => {
+        it('should not trigger `onClose` when pressing `escape` key with `preventAutoClose` set to `true`', async () => {
             const onClose = jest.fn();
-            setup({ isOpen: true, onClose, preventAutoClose: true }, false);
+            setup({ isOpen: true, onClose, preventAutoClose: true });
 
-            document.body.dispatchEvent(keyDown('Escape'));
+            await userEvent.keyboard('[Escape]');
             expect(onClose).not.toHaveBeenCalled();
         });
 
-        it('should not trigger `onClose` when pressing `escape` key with `preventCloseOnEscape` set to `true`', () => {
+        it('should not trigger `onClose` when pressing `escape` key with `preventCloseOnEscape` set to `true`', async () => {
             const onClose = jest.fn();
-            setup({ isOpen: true, onClose, preventCloseOnEscape: true }, false);
+            setup({ isOpen: true, onClose, preventCloseOnEscape: true });
 
-            document.body.dispatchEvent(keyDown('Escape'));
+            await userEvent.keyboard('[Escape]');
             expect(onClose).not.toHaveBeenCalled();
         });
     });
 
     // Common tests suite.
-    commonTestsSuite(setup, { className: 'dialog', prop: 'dialog' }, { className: CLASSNAME });
+    commonTestsSuiteRTL(setup, {
+        baseClassName: CLASSNAME,
+        forwardAttributes: 'dialog',
+        forwardRef: 'dialog',
+        forwardClassName: 'dialog',
+    });
 });
