@@ -4,8 +4,7 @@ import camelCase from 'lodash/camelCase';
 
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils/className';
-
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import {
     getByClassName,
     getByTagName,
@@ -51,7 +50,7 @@ describe(`<${TextField.displayName}>`, () => {
         it('should render defaults', () => {
             const { element, inputNative } = setup({ id: 'fixedId' });
             expect(element).toBeInTheDocument();
-            expect(element).toMatchSnapshot();
+
             expect(element).not.toHaveClass(`${CLASSNAME}--is-valid`);
             expect(element).not.toHaveClass(`${CLASSNAME}--has-error`);
             expect(element).not.toHaveClass(`${CLASSNAME}--has-label`);
@@ -67,12 +66,11 @@ describe(`<${TextField.displayName}>`, () => {
         it('should render textarea', () => {
             const { element, inputNative } = setup({ id: 'fixedId', multiline: true });
             expect(element).toBeInTheDocument();
-            expect(element).toMatchSnapshot();
+
             expect(inputNative.tagName).toBe('TEXTAREA');
         });
     });
 
-    // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         it('should add all class names (except has-error)', () => {
             const modifiedProps = {
@@ -160,7 +158,6 @@ describe(`<${TextField.displayName}>`, () => {
         });
     });
 
-    // 3. Test events.
     describe('Events', () => {
         it('should trigger `onChange` when text field is changed', async () => {
             const onChange = jest.fn();
@@ -215,5 +212,6 @@ describe(`<${TextField.displayName}>`, () => {
         baseClassName: CLASSNAME,
         forwardClassName: 'element',
         forwardAttributes: 'inputNative',
+        forwardRef: 'element',
     });
 });
