@@ -5,7 +5,7 @@ import generateDemoStories from './generate-demo-stories';
 import postcss from './postcss.config';
 
 // Generate storybook stories from demo site demos.
-generateDemoStories();
+//generateDemoStories();
 
 const config: StorybookConfig = {
     stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],

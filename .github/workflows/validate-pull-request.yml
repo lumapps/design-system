@@ -39,6 +39,27 @@ jobs:
                     sudo timedatectl set-timezone Europe/Paris
                     yarn test
 
+    integration-test:
+        runs-on: ubuntu-latest
+        steps:
+            -   name: "Checkout repository"
+                uses: actions/checkout@v3
+
+            -   name: "Setup"
+                uses: ./.github/actions/setup
+
+            -   name: "Install playwright"
+                run: npx playwright install --with-deps
+
+            -   name: "Build Storybook"
+                run: yarn build:storybook --quiet
+
+            -   name: "Serve Storybook and run tests"
+                run: |
+                    npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
+                      "npx http-server packages/lumx-react/storybook-static --port 6006 --silent" \
+                      "npx wait-on tcp:6006 && yarn test:storybook"
+
     Github-actions-validator:
         if: github.event.pull_request.draft == false
         runs-on: ubuntu-latest

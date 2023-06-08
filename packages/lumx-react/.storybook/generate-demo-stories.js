@@ -20,6 +20,11 @@ ${storyFiles
 
 // Generate site demo component demo as stories.
 function generateDemoStories() {
+    if (require.main.filename.match(/test-storybook|jest-worker/)) {
+        // Skip generating demo stories in test runner
+        return;
+    }
+
     // Base path for generated stories.
     const basePath = path.join(__dirname, '..', 'src', 'stories', 'generated');
     // Reset directory.
