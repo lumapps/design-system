@@ -23,6 +23,13 @@ export type UploaderVariant = ValueOf<typeof UploaderVariant>;
 export type UploaderSize = Extract<Size, 'xl' | 'xxl'>;
 
 /**
+ * Extend native HTML input props with specialized `onChange` providing the a `File` array.
+ */
+interface FileInputProps extends Omit<React.ComponentProps<'input'>, 'onChange'> {
+    onChange(files: File[], evt: React.ChangeEvent<HTMLInputElement>): void;
+}
+
+/**
  * Defines the props of the component.
  */
 export interface UploaderProps extends GenericProps, HasTheme {
@@ -39,7 +46,7 @@ export interface UploaderProps extends GenericProps, HasTheme {
     /** On click callback. */
     onClick?: MouseEventHandler;
     /** Handle file selection with a native input file. */
-    fileInputProps?: React.ComponentProps<'input'>;
+    fileInputProps?: FileInputProps;
 }
 
 /**
@@ -80,6 +87,15 @@ export const Uploader: Comp<UploaderProps> = forwardRef((props, ref) => {
         ? { Component: 'label' as const, props: { htmlFor: inputId } as const }
         : { Component: 'button' as const, props: { type: 'button' } as const };
 
+    const onChange = React.useMemo(() => {
+        if (!fileInputProps?.onChange) return undefined;
+        return (evt: React.ChangeEvent<HTMLInputElement>) => {
+            const fileList = evt.target.files;
+            const files = fileList ? Array.from(fileList) : [];
+            fileInputProps.onChange(files, evt);
+        };
+    }, [fileInputProps]);
+
     return (
         <wrapper.Component
             ref={ref as any}
@@ -111,6 +127,7 @@ export const Uploader: Comp<UploaderProps> = forwardRef((props, ref) => {
                     id={inputId}
                     className={`${CLASSNAME}__input`}
                     {...fileInputProps}
+                    onChange={onChange}
                     onDragEnter={setDragHovering}
                     onDragLeave={unsetDragHovering}
                     onDrop={unsetDragHovering}

@@ -11,6 +11,7 @@
     cursor: pointer;
     border: none;
     outline: none;
+    padding: 0;
 
     &--theme-light {
         @include lumx-state(lumx-base-const("state", "DEFAULT"), lumx-base-const("emphasis", "MEDIUM"), "dark");
@@ -75,13 +76,12 @@
         align-items: center;
         justify-content: center;
         height: 100%;
-        padding: 0 $lumx-spacing-unit * 2;
         user-select: none;
     }
 
     &--is-drag-hovering &__wrapper {
         outline: 2px dashed $lumx-color-dark-L2;
-        outline-offset: -2px;
+        outline-offset: -$lumx-spacing-unit;
     }
 
     &__icon {
