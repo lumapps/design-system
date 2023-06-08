@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   TableCell: fix clickable & sortable header cell accessibility
+-   Uploader: use true button element for better accessibility
 
 ## [3.3.1][] - 2023-06-12
 

@@ -36,7 +36,7 @@ export interface UploaderProps extends GenericProps, HasTheme {
     /** Variant. */
     variant?: UploaderVariant;
     /** On click callback. */
-    onClick?: MouseEventHandler<HTMLDivElement>;
+    onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
 /**
@@ -66,14 +66,15 @@ const DEFAULT_PROPS: Partial<UploaderProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Uploader: Comp<UploaderProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const Uploader: Comp<UploaderProps, HTMLButtonElement> = forwardRef((props, ref) => {
     const { aspectRatio, className, label, icon, size, theme, variant, ...forwardedProps } = props;
     // Adjust to square aspect ratio when using circle variants.
     const adjustedAspectRatio = variant === UploaderVariant.circle ? AspectRatio.square : aspectRatio;
 
     return (
-        <div
+        <button
             ref={ref}
+            type="button"
             {...forwardedProps}
             className={classNames(
                 className,
@@ -97,7 +98,7 @@ export const Uploader: Comp<UploaderProps, HTMLDivElement> = forwardRef((props, 
 
                 {label && <span className={`${CLASSNAME}__label`}>{label}</span>}
             </div>
-        </div>
+        </button>
     );
 });
 Uploader.displayName = COMPONENT_NAME;
