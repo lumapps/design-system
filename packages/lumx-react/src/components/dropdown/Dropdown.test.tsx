@@ -1,10 +1,10 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
-import { mount, shallow } from 'enzyme';
-import 'jest-enzyme';
+import { render } from '@testing-library/react';
+import { queryByClassName } from '@lumx/react/testing/utils/queries';
 
-import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
-
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import userEvent from '@testing-library/user-event';
 import { Dropdown, DropdownProps } from './Dropdown';
 
 const CLASSNAME = Dropdown.className as string;
@@ -12,7 +12,7 @@ const CLASSNAME = Dropdown.className as string;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = ({ ...propsOverride }: Partial<DropdownProps> = {}, shallowRendering = true) => {
+const setup = (propsOverride: Partial<DropdownProps> = {}) => {
     const anchorRef = React.createRef<HTMLButtonElement>();
     const props: DropdownProps = {
         anchorRef,
@@ -20,78 +20,47 @@ const setup = ({ ...propsOverride }: Partial<DropdownProps> = {}, shallowRenderi
         isOpen: true,
         ...propsOverride,
     };
-    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    const wrapper: Wrapper = renderer(<Dropdown {...props} />);
-    return {
-        props,
-        wrapper,
-    };
+    render(<Dropdown {...props} />);
+    const dropDown = queryByClassName(document.body, CLASSNAME);
+    return { props, dropDown };
 };
 
 describe(`<${Dropdown.displayName}>`, () => {
-    // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', () => {
-        it('should render correctly', () => {
-            const { wrapper } = setup();
-            expect(wrapper).toMatchSnapshot();
-            expect(wrapper).toHaveClassName(CLASSNAME);
-        });
-    });
-
-    // 3. Test events.
     describe('Events', () => {
-        const onClose: jest.Mock = jest.fn();
-        let eventListeners: {
-            keydown?(evt: any): void;
-        };
-
-        beforeEach(() => {
-            document.body.addEventListener = jest.fn((type, cb) => {
-                (eventListeners as any)[type] = cb;
+        it('should trigger `onClose` when pressing `escape` key', async () => {
+            const onClose = jest.fn();
+            setup({
+                closeOnEscape: true,
+                onClose,
+                isOpen: true,
             });
-            eventListeners = {};
-            onClose.mockClear();
-        });
 
-        it('should trigger `onClose` when pressing `escape` key', () => {
-            setup(
-                {
-                    closeOnEscape: true,
-                    onClose,
-                    isOpen: true,
-                },
-                false,
-            );
-
-            eventListeners.keydown?.({ key: 'Escape' });
+            await userEvent.keyboard('[Escape]');
             expect(onClose).toHaveBeenCalled();
         });
 
-        it('should not trigger `onClose` when pressing any other key', () => {
-            setup({ isOpen: true, onClose, closeOnEscape: true }, false);
+        it('should not trigger `onClose` when pressing any other key', async () => {
+            const onClose = jest.fn();
+            setup({ isOpen: true, onClose, closeOnEscape: true });
 
-            eventListeners.keydown?.({ key: 'a' });
+            await userEvent.keyboard('a');
             expect(onClose).not.toHaveBeenCalled();
         });
 
-        it('should not trigger `onClose` when pressing `escape` key with `closeOnEscape` set to `false`', () => {
-            setup({ isOpen: true, onClose, closeOnEscape: false }, false);
+        it('should not trigger `onClose` when pressing `escape` key with `closeOnEscape` set to `false`', async () => {
+            const onClose = jest.fn();
+            setup({ isOpen: true, onClose, closeOnEscape: false });
 
-            eventListeners.keydown?.({ key: 'Escape' });
+            await userEvent.keyboard('[Escape]');
             expect(onClose).not.toHaveBeenCalled();
         });
-    });
-
-    // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', () => {
-        // Nothing to do here.
-    });
-
-    // 5. Test state.
-    describe('State', () => {
-        // Nothing to do here.
     });
 
     // Common tests suite.
-    commonTestsSuite(setup, { className: 'wrapper', prop: 'wrapper' }, { className: CLASSNAME });
+    commonTestsSuiteRTL(setup, {
+        baseClassName: CLASSNAME,
+        forwardClassName: 'dropDown',
+        forwardAttributes: 'dropDown',
+        forwardRef: 'dropDown',
+    });
 });
