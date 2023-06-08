@@ -1,7 +1,8 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
-import 'jest-enzyme';
-import { commonTestsSuite } from '@lumx/react/testing/utils';
+
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { render } from '@testing-library/react';
+import { queryByClassName } from '@lumx/react/testing/utils/queries';
 
 import { TableBody, TableBodyProps } from './TableBody';
 
@@ -10,13 +11,22 @@ const CLASSNAME = TableBody.className as string;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (props: Partial<TableBodyProps> = {}, shallowRendering = true) => {
-    const renderer: any = shallowRendering ? shallow : mount;
-    const wrapper: any = renderer(<TableBody {...(props as any)} />);
-    return { props, wrapper };
+const setup = (props: Partial<TableBodyProps> = {}) => {
+    render(
+        <table>
+            <TableBody {...(props as any)} />
+        </table>,
+    );
+    const tableBody = queryByClassName(document.body, CLASSNAME);
+    return { props, tableBody };
 };
 
 describe(`<${TableBody.displayName}>`, () => {
     // Common tests suite.
-    commonTestsSuite(setup, { className: 'wrapper', prop: 'wrapper' }, { className: CLASSNAME });
+    commonTestsSuiteRTL(setup, {
+        baseClassName: CLASSNAME,
+        forwardClassName: 'tableBody',
+        forwardAttributes: 'tableBody',
+        forwardRef: 'tableBody',
+    });
 });

@@ -1,175 +1,108 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
-import { mount, shallow } from 'enzyme';
-import 'jest-enzyme';
-import without from 'lodash/without';
-
-import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
-import { getBasicClass } from '@lumx/react/utils/className';
-
-import { mdiAccount } from '@lumx/icons';
+import { getAllByClassName, queryAllByClassName } from '@lumx/react/testing/utils/queries';
+import { render, screen } from '@testing-library/react';
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 
 import { SideNavigationItem, SideNavigationItemProps } from './SideNavigationItem';
 
-const DEFAULT_PROPS = SideNavigationItem.defaultProps as any;
 const CLASSNAME = SideNavigationItem.className as string;
 
-type SetupProps = Partial<SideNavigationItemProps>;
+const toggleButtonProps = { label: 'Toggle' };
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true) => {
-    const props: any = {
-        toggleButtonProps: { label: 'Toggle' },
-        ...propsOverride,
-    };
-    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    const wrapper: Wrapper = renderer(<SideNavigationItem {...props} />);
-
+const setup = (propsOverride: Partial<SideNavigationItemProps> = {}) => {
+    const props = { label: 'Label', toggleButtonProps, ...propsOverride };
+    render(<SideNavigationItem {...props} />);
+    const sideNavigation = getAllByClassName(document.body, CLASSNAME)[0];
     return {
-        chevron: wrapper.find(`.${CLASSNAME}__chevron`),
-        children: wrapper.find(`.${CLASSNAME}__children`),
-        icon: wrapper.find(`.${CLASSNAME}__icon`),
-        label: wrapper.find(`.${CLASSNAME}__link span`),
-        link: wrapper.find(`.${CLASSNAME}__link`),
+        chevron: queryAllByClassName(sideNavigation, `${CLASSNAME}__chevron`)[0] || null,
+        toggle: queryAllByClassName(sideNavigation, `${CLASSNAME}__toggle`)[0] || null,
+        children: queryAllByClassName(sideNavigation, `${CLASSNAME}__children`)[0] || null,
+        icon: queryAllByClassName(sideNavigation, `${CLASSNAME}__icon`)[0],
+        label: queryAllByClassName(sideNavigation, `${CLASSNAME}__link span`)[0],
+        link: queryAllByClassName(sideNavigation, `${CLASSNAME}__link`)[0],
         props,
-        root: wrapper.find(`.${CLASSNAME}`),
-        wrapper,
+        sideNavigation,
     };
 };
 
 describe(`<${SideNavigationItem.displayName}>`, () => {
-    // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', () => {
-        // Here is an example of a basic rendering check, with snapshot.
+    it('should render default', () => {
+        const label = 'Side navigation item';
+        const { sideNavigation, link } = setup({ label });
+        expect(sideNavigation).toBeInTheDocument();
+        expect(sideNavigation).toBe(screen.queryByRole('listitem'));
 
-        it('should render correctly', () => {
-            const { root, wrapper } = setup();
-            expect(wrapper).toMatchSnapshot();
-
-            expect(root).toExist();
-            expect(root).toHaveClassName(CLASSNAME);
-        });
-
-        it('should render correctly with split actions', () => {
-            const { root, wrapper } = setup({ linkProps: { href: 'http://toto.com' }, onClick: () => null });
-            expect(wrapper).toMatchSnapshot();
-
-            expect(root).toExist();
-            expect(root).toHaveClassName(CLASSNAME);
-        });
-
-        it('should unmount children by default when closed', () => {
-            const { children } = setup({
-                children: <SideNavigationItem label="Child 1" toggleButtonProps={{ label: 'Toggle' }} />,
-            });
-            expect(children).not.toExist();
-        });
-
-        it('should keep children in DOM when closed and with closeMode="hide"', () => {
-            const { children } = setup({
-                closeMode: 'hide',
-                children: <SideNavigationItem key="1" label="Child 1" toggleButtonProps={{ label: 'Toggle' }} />,
-            });
-            expect(children).toExist();
-        });
+        expect(link).toBeInTheDocument();
     });
 
-    // 2. Test defaultProps value and important props custom values.
-    describe('Props', () => {
-        // Here are some examples of basic props check.
-
-        it('should use default props', () => {
-            const { root } = setup();
-
-            const propNames = without(Object.keys(DEFAULT_PROPS), 'closeMode');
-            for (const prop of propNames) {
-                const className = getBasicClass({ prefix: CLASSNAME, type: prop, value: DEFAULT_PROPS[prop] });
-                if (className) {
-                    expect(root).toHaveClassName(className);
-                }
-            }
-        });
+    it('should render a link', () => {
+        const label = 'Side navigation item';
+        const { props, link } = setup({ linkProps: { href: 'https://example.com' }, label });
+        expect(link).toBe(screen.queryByRole('link', { name: label }));
+        expect(link).toHaveAttribute('href', props.linkProps?.href);
     });
 
-    // 3. Test events.
-    describe('Events', () => {
-        const onClick: jest.Mock = jest.fn();
-
-        beforeEach(onClick.mockClear);
-
-        it('should trigger `onClick`', () => {
-            const { link } = setup({ onClick }, false);
-            link.simulate('click');
-            expect(onClick).toHaveBeenCalled();
-        });
-    });
-
-    // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', () => {
-        // Here is an example of children types check.
-
-        const items = [
-            <SideNavigationItem key="a" label="a" toggleButtonProps={{ label: 'Toggle' }} />,
-            <SideNavigationItem key="b" label="b" toggleButtonProps={{ label: 'Toggle' }} />,
-        ];
-
-        it('should hide chevron when no children are passed', () => {
-            const { chevron } = setup({
-                children: [],
+    describe('children', () => {
+        it('should render with children closed', () => {
+            const label = 'Side navigation item';
+            const { chevron, link, children } = setup({
+                label,
+                children: [
+                    <SideNavigationItem key="1" label="Child 1" toggleButtonProps={toggleButtonProps} />,
+                    <SideNavigationItem key="3" label="Child 2" toggleButtonProps={toggleButtonProps} />,
+                ],
             });
-
-            expect(chevron).not.toExist();
+            expect(link).toHaveTextContent(label);
+            expect(chevron).toBeInTheDocument();
+            expect(children).not.toBeInTheDocument();
         });
 
-        it('should show chevron when children are passed', () => {
-            const { chevron } = setup({
-                children: items,
-            });
-
-            expect(chevron).toExist();
-        });
-
-        it('should hide children when children are passed and isOpen is false', () => {
-            const { children } = setup({
-                children: items,
-                isOpen: false,
-            });
-
-            expect(children).not.toExist();
-        });
-
-        it('should show children when children are passed and isOpen is true', () => {
-            const { children } = setup({
-                children: items,
+        it('should render with children opened', () => {
+            const label = 'Side navigation item';
+            const { chevron, link, children } = setup({
+                label,
                 isOpen: true,
+                children: [
+                    <SideNavigationItem key="1" label="Child 1" toggleButtonProps={toggleButtonProps} />,
+                    <SideNavigationItem key="3" label="Child 2" toggleButtonProps={toggleButtonProps} />,
+                ],
             });
-
-            expect(children).toExist();
-        });
-
-        it('should show icon when provided', () => {
-            const { icon } = setup({
-                icon: mdiAccount,
-            });
-
-            expect(icon).toExist();
-        });
-
-        it('should add props to link when provided', () => {
-            const { link } = setup({
-                linkProps: {
-                    href: '/',
-                },
-            });
-
-            expect(link.prop('href')).toEqual('/');
+            expect(link).toHaveTextContent(label);
+            expect(chevron).toBeInTheDocument();
+            expect(children).toBeInTheDocument();
         });
     });
 
-    // 5. Test state => no state
+    describe('children and link', () => {
+        it('should render with children and link', () => {
+            const label = 'Side navigation item';
+            const { props, toggle, link } = setup({
+                label,
+                linkProps: { href: 'https://example.com' },
+                children: [
+                    <SideNavigationItem key="1" label="Child 1" toggleButtonProps={toggleButtonProps} />,
+                    <SideNavigationItem key="3" label="Child 2" toggleButtonProps={toggleButtonProps} />,
+                ],
+            });
+
+            // Link
+            expect(link).toBe(screen.queryByRole('link', { name: label }));
+            expect(link).toHaveAttribute('href', props.linkProps?.href);
+
+            // Toggle button
+            expect(toggle).toBe(screen.queryByRole('button', { name: toggleButtonProps.label }));
+        });
+    });
 
     // Common tests suite.
-    commonTestsSuite(setup, { className: 'root', prop: 'root' }, { className: CLASSNAME });
+    commonTestsSuiteRTL(setup, {
+        baseClassName: CLASSNAME,
+        forwardClassName: 'sideNavigation',
+        forwardAttributes: 'sideNavigation',
+        forwardRef: 'sideNavigation',
+    });
 });

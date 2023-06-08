@@ -1,13 +1,11 @@
-import React, { InputHTMLAttributes, LabelHTMLAttributes, ReactElement } from 'react';
+import React from 'react';
 
-import { mount, shallow } from 'enzyme';
-import 'jest-enzyme';
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { getByClassName, getByTagName, queryByClassName } from '@lumx/react/testing/utils/queries';
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
-import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
-import { getBasicClass } from '@lumx/react/utils/className';
-
-import { Theme } from '@lumx/react';
-import { RadioButton, RadioButtonProps } from './RadioButton';
+import { RadioButton, RadioButtonProps } from '.';
 
 const CLASSNAME = RadioButton.className as string;
 
@@ -16,108 +14,96 @@ type SetupProps = Partial<RadioButtonProps>;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}, shallowRendering = true) => {
+const setup = (propsOverride: SetupProps = {}) => {
     const props: any = { id: 'fixedId', ...propsOverride };
-    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    const wrapper: Wrapper = renderer(<RadioButton {...props} />);
+    render(<RadioButton {...props} />);
 
-    return {
-        helper: wrapper.find(`.${CLASSNAME}__helper`),
-        input: wrapper.find(`input`),
-        label: wrapper.find(`.${CLASSNAME}__label`),
-        props,
-        wrapper,
-    };
+    const radioButton = getByClassName(document.body, CLASSNAME);
+    const helper = queryByClassName(radioButton, `${CLASSNAME}__helper`);
+    const label = queryByClassName(radioButton, `${CLASSNAME}__label`);
+    const input = getByTagName(radioButton, 'input');
+    return { radioButton, helper, label, input, props };
 };
 
 describe(`<${RadioButton.displayName}>`, () => {
-    // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', () => {
-        it('should render defaults', () => {
-            const { wrapper, input, helper } = setup({});
-            expect(wrapper).toMatchSnapshot();
-
-            expect(wrapper).toExist();
-
-            expect(input).toExist();
-            const inputProps: InputHTMLAttributes<HTMLInputElement> = input.props();
-            expect(inputProps.checked).toBeFalsy();
-            expect(inputProps.disabled).toBeFalsy();
-
-            expect(helper).not.toExist();
-        });
-
-        it('should render checked, disabled & id', () => {
-            const props = {
-                isChecked: true,
-                isDisabled: true,
-                id: 'inputID',
-            };
-            const { wrapper, input } = setup(props);
-            expect(wrapper).toMatchSnapshot();
-
-            const inputProps: InputHTMLAttributes<HTMLInputElement> = input.props();
-            expect(inputProps.checked).toBe(true);
-            expect(inputProps.disabled).toBe(true);
-            expect(inputProps.id).toEqual(props.id);
-        });
-
-        it('should render label & helper', () => {
-            const props = {
-                helper: 'Helper',
-                label: 'Label',
-            };
-            const { wrapper, label, helper, input } = setup(props as Partial<RadioButtonProps>);
-            expect(wrapper).toMatchSnapshot();
-
-            expect(input).toExist();
-            const inputProps: InputHTMLAttributes<HTMLInputElement> = input.props();
-            expect(inputProps.checked).toBeFalsy();
-            expect(inputProps.disabled).toBeFalsy();
-
-            expect(label).toExist();
-            expect(label.contains(props.label)).toBe(true);
-            const labelProps: LabelHTMLAttributes<HTMLLabelElement> = label.props();
-            expect(labelProps.htmlFor).toEqual(inputProps.id);
-
-            expect(helper).toExist();
-            expect(helper.contains(props.helper)).toBe(true);
-        });
-    });
-
-    // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
-        it('should use props for classes', () => {
-            const props = {
-                isChecked: true,
-                isDisabled: true,
-                theme: Theme.dark,
-            };
-            const { wrapper } = setup(props as RadioButtonProps);
+        it('should render correctly', () => {
+            const { radioButton, input, label, helper } = setup();
+            expect(radioButton).toBeInTheDocument();
+            expect(radioButton).toHaveClass(CLASSNAME);
+            expect(radioButton).not.toHaveClass('lumx-radio-button--is-disabled');
+            expect(radioButton).toHaveClass('lumx-radio-button--is-unchecked');
 
-            expect(wrapper).toHaveClassName(CLASSNAME);
-            expect(wrapper).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'isDisabled', value: true }));
-            expect(wrapper).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'isChecked', value: true }));
-            expect(wrapper).not.toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'isUnchecked', value: true }));
-            expect(wrapper).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'theme', value: props.theme }));
+            expect(label).not.toBeInTheDocument();
+            expect(helper).not.toBeInTheDocument();
+
+            expect(input).toBeInTheDocument();
+            expect(input).not.toBeChecked();
+            expect(input).not.toBeDisabled();
+        });
+
+        it('should render disabled and checked', () => {
+            const { radioButton, input } = setup({
+                isDisabled: true,
+                isChecked: true,
+            });
+            expect(radioButton).toHaveClass('lumx-radio-button--is-disabled');
+            expect(radioButton).toHaveClass('lumx-radio-button--is-checked');
+
+            expect(input).toBeChecked();
+            expect(input).toBeDisabled();
+        });
+
+        it('should render helper and label', () => {
+            const id = 'radioButton1';
+            const { props, helper, label, input } = setup({
+                id,
+                helper: 'Test helper',
+                label: 'Test label',
+            });
+
+            expect(helper).toBeInTheDocument();
+            expect(helper).toHaveTextContent(props.helper);
+            expect(helper).toHaveAttribute('id');
+
+            expect(label).toBeInTheDocument();
+            expect(label).toHaveTextContent(props.label);
+            expect(label).toHaveAttribute('for', id);
+
+            expect(input).toHaveAttribute('id', id);
+            expect(input).toHaveAttribute('aria-describedby', helper?.id);
+        });
+
+        it('should forward input props', () => {
+            const { props, input } = setup({
+                inputProps: {
+                    'aria-labelledby': 'labelledby-id',
+                },
+            });
+
+            expect(input).toHaveAttribute('aria-labelledby', props.inputProps['aria-labelledby']);
         });
     });
 
-    // 3. Test events.
     describe('Events', () => {
-        // Nothing to do here.
-    });
+        const onChange = jest.fn();
 
-    // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', () => {
-        // Nothing to do here.
-    });
+        it('should trigger `onChange` when radioButton is clicked', async () => {
+            const value = 'value';
+            const name = 'name';
+            const { input } = setup({ checked: false, onChange, value, name });
+            expect(input).not.toBeChecked();
 
-    // 5. Test state.
-    describe('State', () => {
-        // Nothing to do here.
+            await userEvent.click(input);
+
+            expect(onChange).toHaveBeenCalledWith(value, name, expect.any(Object));
+        });
     });
 
     // Common tests suite.
-    commonTestsSuite(setup, { prop: 'wrapper', className: 'wrapper' }, { className: CLASSNAME });
+    commonTestsSuiteRTL(setup, {
+        baseClassName: CLASSNAME,
+        forwardClassName: 'radioButton',
+        forwardAttributes: 'radioButton',
+    });
 });

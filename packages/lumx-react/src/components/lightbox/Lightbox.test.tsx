@@ -1,9 +1,9 @@
 import React from 'react';
-import 'jest-enzyme';
-import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import { queryByClassName } from '@lumx/react/testing/utils/queries';
 import { render } from '@testing-library/react';
+
 import { Lightbox, LightboxProps } from './Lightbox';
 
 const CLASSNAME = Lightbox.className as string;
@@ -21,5 +21,6 @@ describe(`<${Lightbox.displayName}>`, () => {
         baseClassName: CLASSNAME,
         forwardClassName: 'lightbox',
         forwardAttributes: 'lightbox',
+        forwardRef: 'lightbox',
     });
 });

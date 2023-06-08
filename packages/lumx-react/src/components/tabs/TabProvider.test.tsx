@@ -1,42 +1,163 @@
-import { Tab, TabList, TabPanel, TabProvider } from '@lumx/react';
-import { mount } from 'enzyme';
-import 'jest-enzyme';
 import React from 'react';
 
-describe(`<${TabProvider.displayName}>`, () => {
-    // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', () => {
-        it('should render', () => {
-            const wrapper = mount(
-                <TabProvider>
-                    <TabList aria-label="Tab list">
-                        <Tab label="tab 1" />
-                        <Tab label="tab 1" />
-                    </TabList>
+import { Tab, TabList, TabPanel, TabProvider, TabProviderProps } from '@lumx/react';
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { checkTabActive, query } from '@lumx/react/components/tabs/test-utils';
 
-                    <TabPanel>Tab 1 content</TabPanel>
-                    <TabPanel>Tab 2 content</TabPanel>
-                </TabProvider>,
-            );
-            const tabs = wrapper.find(Tab).find('button');
-            const firstTab = tabs.get(0);
-            const secondTab = tabs.get(1);
+const setup = (props: Partial<TabProviderProps> = {}) => {
+    render(
+        <TabProvider {...props}>
+            <TabList aria-label="Tab list">
+                <Tab label="Tab 1" />
+                <Tab label="Tab 2" isDisabled />
+                <Tab label="Tab 3" />
+            </TabList>
 
-            const tabPanels = wrapper.find(TabPanel).find('div');
-            const firstTabPanel = tabPanels.get(0);
-            const secondTabPanel = tabPanels.get(1);
+            <TabPanel>Tab 1 content</TabPanel>
+            <TabPanel>Tab 2 content</TabPanel>
+            <TabPanel>Tab 3 content</TabPanel>
+        </TabProvider>,
+    );
+};
 
-            // First tab is selected.
-            expect(firstTab.props['aria-selected']).toBe(true);
-            expect(secondTab.props['aria-selected']).toBe(false);
+describe(`TabProvider`, () => {
+    describe('default config', () => {
+        it('should render with accessible DOM', () => {
+            setup();
 
-            // Tab id and tab panel aria-labelledby by should match
-            expect(firstTab.props.id).toBe(firstTabPanel.props['aria-labelledby']);
-            expect(secondTab.props.id).toBe(secondTabPanel.props['aria-labelledby']);
+            // Tab list
+            const tabList = query.tabList('Tab list');
+            expect(tabList).toBeInTheDocument();
+            expect(query.tabs(tabList).length).toBe(3);
 
-            // Tab panel id and tab aria-controls by should match
-            expect(firstTabPanel.props.id).toBe(firstTab.props['aria-controls']);
-            expect(secondTabPanel.props.id).toBe(secondTab.props['aria-controls']);
+            // Tab 1
+            const tab1 = query.tab('Tab 1', tabList);
+            expect(tab1).toBeInTheDocument();
+
+            // Tab 2
+            const tab2 = query.tab('Tab 2', tabList);
+            expect(tab2).toBeInTheDocument();
+
+            // Tab 3
+            const tab3 = query.tab('Tab 3', tabList);
+            expect(tab3).toBeInTheDocument();
+
+            // Tab panel 1
+            const tabPanel1 = query.tabPanel('Tab 1');
+            expect(tabPanel1).toBeInTheDocument();
+            expect(tab1).toHaveAttribute('aria-controls', tabPanel1?.id);
+
+            // Tab panel 2
+            const tabPanel2 = query.tabPanel('Tab 2');
+            expect(tabPanel2).toBeInTheDocument();
+            expect(tab2).toHaveAttribute('aria-controls', tabPanel2?.id);
+
+            // Tab panel 3
+            const tabPanel3 = query.tabPanel('Tab 3');
+            expect(tabPanel3).toBeInTheDocument();
+            expect(tab3).toHaveAttribute('aria-controls', tabPanel3?.id);
+
+            // First tab is active
+            checkTabActive('Tab 1');
+        });
+
+        it('should switch tab on click', async () => {
+            setup();
+
+            checkTabActive('Tab 1');
+
+            // Click on second tab (that is disabled) should do nothing
+            await userEvent.click(query.tab('Tab 2'));
+            checkTabActive('Tab 1');
+
+            // Click on third tab should work
+            await userEvent.click(query.tab('Tab 3'));
+            checkTabActive('Tab 3');
+        });
+
+        it('should be navigable with keyboard', async () => {
+            setup();
+
+            checkTabActive('Tab 1');
+
+            // First tab stop on active tab (tab1)
+            await userEvent.tab();
+            expect(query.tab('Tab 1')).toHaveFocus();
+
+            // Second tab stop on active tab panel (tabPanel1)
+            await userEvent.tab();
+            expect(query.tabPanel('Tab 1')).toHaveFocus();
+
+            // Go back to tab1
+            await userEvent.tab({ shift: true });
+            expect(query.tab('Tab 1')).toHaveFocus();
+
+            // Navigate with ArrowRight to go to the next tab (tab2)
+            await userEvent.keyboard('[ArrowRight]');
+            expect(query.tab('Tab 2')).toHaveFocus();
+
+            // Activate tab with Enter should not work on disabled tab
+            await userEvent.keyboard('{Enter}');
+            expect(query.tab('Tab 2')).toHaveFocus();
+            checkTabActive('Tab 1');
+
+            // Navigate with ArrowRight to go to the next tab (tab3)
+            await userEvent.keyboard('[ArrowRight]');
+            expect(query.tab('Tab 3')).toHaveFocus();
+
+            // Activate tab with Enter
+            await userEvent.keyboard('{Enter}');
+            expect(query.tab('Tab 3')).toHaveFocus();
+            checkTabActive('Tab 3');
+
+            // Focus next should go to active tab panel (tabPanel3)
+            await userEvent.tab();
+            expect(query.tabPanel('Tab 3')).toHaveFocus();
+
+            // Go back to tab3
+            await userEvent.tab({ shift: true });
+            expect(query.tab('Tab 3')).toHaveFocus();
+
+            // Navigate with ArrowRight to loop back to the first tab (tab1)
+            await userEvent.keyboard('[ArrowRight]');
+            expect(query.tab('Tab 1')).toHaveFocus();
+
+            // Navigate with ArrowLeft to loop back to the last tab (tab3)
+            await userEvent.keyboard('[ArrowLeft]');
+            expect(query.tab('Tab 3')).toHaveFocus();
+
+            checkTabActive('Tab 3');
+        });
+    });
+
+    describe('not lazy', () => {
+        it('should render tab panel everytime', () => {
+            setup({ isLazy: false });
+            // Check the first tab is active and all panel are loaded
+            checkTabActive('Tab 1', { isLazy: false });
+        });
+    });
+
+    describe('activate on focus', () => {
+        it('should activate tab on focus', async () => {
+            setup({ shouldActivateOnFocus: true });
+
+            checkTabActive('Tab 1');
+
+            await userEvent.tab();
+            expect(query.tab('Tab 1')).toHaveFocus();
+            checkTabActive('Tab 1');
+
+            await userEvent.keyboard('[ArrowRight]');
+            expect(query.tab('Tab 2')).toHaveFocus();
+            // Active tab not changed since tab 2 is disabled
+            checkTabActive('Tab 1');
+
+            await userEvent.keyboard('[ArrowRight]');
+            expect(query.tab('Tab 3')).toHaveFocus();
+            // Active tab changed to tab 3
+            checkTabActive('Tab 3');
         });
     });
 });

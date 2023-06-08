@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`<Divider> Snapshots and structure should render correctly 1`] = `
-<hr
-  className="lumx-divider lumx-divider--theme-light"
->
-  Label
-</hr>
-`;

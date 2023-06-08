@@ -1,181 +1,94 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
-import { mount, shallow } from 'enzyme';
-import 'jest-enzyme';
-
-import { List, ListItem, Size } from '@lumx/react';
-import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
-import { Autocomplete, AutocompleteProps } from './Autocomplete';
+import { Dropdown, List, ListItem, Size, TextField } from '@lumx/react';
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { getByClassName, getByTagName, queryByClassName } from '@lumx/react/testing/utils/queries';
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { CITIES as suggestions } from './__mockData__';
+import { Autocomplete, AutocompleteProps } from './Autocomplete';
 
 const CLASSNAME = Autocomplete.className as string;
-
-type SetupProps = Partial<AutocompleteProps>;
-
-interface Suggestion {
-    id: string;
-    text: string;
-}
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}, shallowRendering = true) => {
-    const props: any = { ...propsOverride };
-    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-
-    const wrapper: Wrapper = renderer(<Autocomplete {...props} />);
-
-    const textField: Wrapper = wrapper.find('TextField');
-    const dropdown: Wrapper = wrapper.find('Dropdown');
-
-    return { dropdown, props, textField, wrapper };
+const setup = (props: Partial<AutocompleteProps> = {}) => {
+    render(
+        <Autocomplete {...(props as any)}>
+            <List>
+                {suggestions.map((suggestion) => (
+                    <ListItem size={Size.tiny} key={suggestion.id}>
+                        <div>{suggestion.text}</div>
+                    </ListItem>
+                ))}
+            </List>
+        </Autocomplete>,
+    );
+    const autocomplete = getByClassName(document.body, CLASSNAME);
+    const textField = getByClassName(autocomplete, TextField.className as string);
+    const getDropdown = () => queryByClassName(document.body, Dropdown.className as string);
+    const inputNative = getByTagName(autocomplete, 'input');
+    return { props, textField, getDropdown, autocomplete, inputNative };
 };
 
 describe(`<${Autocomplete.displayName}>`, () => {
-    // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', () => {
-        // Here is an example of a basic rendering check, with snapshot.
-
-        it('should render correctly', () => {
-            const { wrapper, textField, dropdown } = setup({
-                children: (
-                    <List isClickable>
-                        {suggestions.map((suggestion: Suggestion) => (
-                            <ListItem size={Size.tiny} key={suggestion.id}>
-                                <div>{suggestion.text}</div>
-                            </ListItem>
-                        ))}
-                    </List>
-                ),
-                label: 'Field label',
-                isOpen: true,
-                isRequired: true,
-                onChange: jest.fn(),
-                value: '',
-            });
-            expect(wrapper).toMatchSnapshot();
-
-            expect(wrapper).toExist();
-
-            expect(wrapper).toHaveClassName(CLASSNAME);
-
-            expect(textField).toHaveLength(1);
-            expect(dropdown).toHaveLength(1);
-        });
-    });
-
-    // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
-        it('should use default props', () => {
-            const { wrapper } = setup();
+        it('should render default', () => {
+            const { autocomplete, textField, getDropdown } = setup();
 
-            expect(wrapper).toHaveClassName(CLASSNAME);
+            expect(autocomplete.className).toMatchInlineSnapshot(`"lumx-autocomplete"`);
+            expect(textField).toBeInTheDocument();
+            expect(getDropdown()).not.toBeInTheDocument();
         });
 
-        it('should render correctly when the dropdown is closed', () => {
-            const { wrapper } = setup({
-                children: (
-                    <List isClickable>
-                        {suggestions.map((suggestion: Suggestion) => (
-                            <ListItem size={Size.tiny} key={suggestion.id}>
-                                <div>{suggestion.text}</div>
-                            </ListItem>
-                        ))}
-                    </List>
-                ),
-                isOpen: false,
-                onChange: jest.fn(),
-                value: '',
-            });
-            expect(wrapper).toMatchSnapshot();
-
-            expect(wrapper).toExist();
-
-            expect(wrapper).toHaveClassName(CLASSNAME);
+        it('should render open', () => {
+            const { getDropdown } = setup({ isOpen: true });
+            expect(getDropdown()).toBeInTheDocument();
         });
     });
 
-    // 3. Test events.
     describe('Events', () => {
-        it('should trigger the onChange callback when there is a change on the Text Field', () => {
+        it('should trigger the onChange callback when there is a change on the Text Field', async () => {
+            const name = 'autocomplete-name';
             const onChange = jest.fn();
-            const { textField } = setup({
-                children: (
-                    <List isClickable>
-                        {suggestions.map((suggestion: Suggestion) => (
-                            <ListItem size={Size.tiny} key={suggestion.id}>
-                                <div>{suggestion.text}</div>
-                            </ListItem>
-                        ))}
-                    </List>
-                ),
-                isOpen: false,
+            const { inputNative } = setup({
+                name,
                 onChange,
-                value: '',
             });
 
-            textField.simulate('change');
+            await userEvent.tab();
+            expect(inputNative).toHaveFocus();
+            await userEvent.keyboard('a');
 
-            expect(onChange).toHaveBeenCalled();
+            // (text, name, event)
+            expect(onChange).toHaveBeenCalledWith('a', name, expect.any(Object));
         });
 
-        it('should trigger the onFocus callback when the text field is focused on', () => {
+        it('should trigger the onFocus/onBlur callback when the text field is focused and blurred', async () => {
             const onFocus = jest.fn();
-            const { textField } = setup({
-                children: (
-                    <List isClickable>
-                        {suggestions.map((suggestion: Suggestion) => (
-                            <ListItem size={Size.tiny} key={suggestion.id}>
-                                <div>{suggestion.text}</div>
-                            </ListItem>
-                        ))}
-                    </List>
-                ),
-                isOpen: false,
-                onFocus,
-                value: '',
-            });
-
-            textField.simulate('focus');
-
-            expect(onFocus).toHaveBeenCalled();
-        });
-
-        it('should trigger the onBlur callback when the Text Field loses focus', () => {
             const onBlur = jest.fn();
-            const { textField } = setup({
-                children: (
-                    <List isClickable>
-                        {suggestions.map((suggestion: Suggestion) => (
-                            <ListItem size={Size.tiny} key={suggestion.id}>
-                                <div>{suggestion.text}</div>
-                            </ListItem>
-                        ))}
-                    </List>
-                ),
-                isOpen: false,
+            const { inputNative } = setup({
+                onFocus,
                 onBlur,
-                value: '',
             });
 
-            textField.simulate('blur');
+            await userEvent.tab();
+            expect(inputNative).toHaveFocus();
+            expect(onFocus).toHaveBeenCalled();
 
+            await userEvent.tab();
+            expect(inputNative).not.toHaveFocus();
             expect(onBlur).toHaveBeenCalled();
         });
     });
 
-    // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', () => {
-        // Nothing to do here.
-    });
-
-    // 5. Test state.
-    describe('State', () => {
-        // Nothing to do here.
-    });
-
     // Common tests suite.
-    commonTestsSuite(setup, { className: 'wrapper', prop: 'wrapper' }, { className: CLASSNAME });
+    commonTestsSuiteRTL(setup, {
+        baseClassName: CLASSNAME,
+        forwardClassName: 'autocomplete',
+        forwardAttributes: 'autocomplete',
+        forwardRef: 'autocomplete',
+    });
 });

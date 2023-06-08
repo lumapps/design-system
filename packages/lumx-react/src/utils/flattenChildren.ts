@@ -8,6 +8,11 @@ import { isFragment } from 'react-is';
  *
  * @param  children React nodes to flatten.
  * @return Flattened react nodes.
+ * @deprecated This function was used to develop keyboard navigation in the List component,
+ *    but we will replace this with a better method that does not require to hack the children inspection
+ *
+ * TODO: remove List keyboard navigation once we have provided alternative component (Menu, Combobox, etc.),
+ *       remove this function and then remove react-is from the dependencies
  */
 export function flattenChildren(children: ReactNode) {
     function recur(nodes: ReactNode, keys: Key[] = []) {

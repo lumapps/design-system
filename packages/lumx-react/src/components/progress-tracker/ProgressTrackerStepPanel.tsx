@@ -54,7 +54,7 @@ export const ProgressTrackerStepPanel: Comp<ProgressTrackerStepPanelProps, HTMLD
                 id={state?.tabPanelId}
                 className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, isActive }))}
                 role="tabpanel"
-                tabIndex={0}
+                tabIndex={isActive ? 0 : -1}
                 aria-labelledby={state?.tabId}
             >
                 {(!state?.isLazy || isActive) && children}

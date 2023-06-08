@@ -1,9 +1,10 @@
-import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import { Kind } from '@lumx/react';
-import { getBasicClass } from '@lumx/react/utils/className';
-import { mount, shallow } from 'enzyme';
-import 'jest-enzyme';
-import React, { ReactElement } from 'react';
+
+import React from 'react';
+import { render } from '@testing-library/react';
+import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
+import { mdiAbTesting } from '@lumx/icons';
 import { Message, MessageProps } from './Message';
 
 const CLASSNAME = Message.className as string;
@@ -13,64 +14,42 @@ type SetupProps = Partial<MessageProps>;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}, shallowRendering = true) => {
+const setup = (propsOverride: SetupProps = {}) => {
     const props: any = { ...propsOverride };
-    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    const wrapper: Wrapper = renderer(
-        <Message {...props}>
-            <span>Lorem Ipsum</span>
-        </Message>,
-    );
-    const message: Wrapper = wrapper.find('div').first();
-
-    return { message, props, wrapper };
+    render(<Message {...props} />);
+    const message = getByClassName(document.body, CLASSNAME);
+    const icon = queryByClassName(message, `${CLASSNAME}__icon`);
+    return { message, icon, props };
 };
 
 describe(`<${Message.displayName}>`, () => {
-    // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', () => {
-        // Here is an example of a basic rendering check, with snapshot.
-
-        it('should render correctly', () => {
-            const { wrapper } = setup();
-            expect(wrapper).toMatchSnapshot();
-
-            expect(wrapper).toExist();
-            expect(wrapper).toHaveClassName(CLASSNAME);
-        });
-    });
-
-    // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
-        // Here are some examples of basic props check.
+        it('should render default', () => {
+            const { message, icon } = setup({ children: 'Message text' });
+            expect(message).toBeInTheDocument();
+            expect(message.className).toMatchInlineSnapshot(`"lumx-message"`);
+            expect(message).toHaveTextContent('Message text');
 
-        it('should use the given `kind`', () => {
-            const testedProp = 'kind';
-            const modifiedProps: Partial<MessageProps> = {
-                [testedProp]: Kind.success,
-            };
-
-            const { message } = setup(modifiedProps);
-
-            expect(message).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'color', value: `green` }));
+            expect(icon).not.toBeInTheDocument();
         });
-    });
 
-    // 3. Test events.
-    describe('Events', () => {
-        // Nothing to do here.
-    });
+        it('should render hasBackground', () => {
+            const { message } = setup({ hasBackground: true });
+            expect(message).toHaveClass(`${CLASSNAME}--has-background`);
+        });
 
-    // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', () => {
-        // Nothing to do here.
-    });
+        it('should render icon', () => {
+            const { icon } = setup({ icon: mdiAbTesting });
+            expect(icon).toBeInTheDocument();
+        });
 
-    // 5. Test state.
-    describe('State', () => {
-        // Nothing to do here.
+        it.each(Object.values(Kind))('should render kind %s', (kind) => {
+            const { message, icon } = setup({ kind });
+            expect(message.className).toEqual(expect.stringMatching(/\blumx-message--color-\w+\b/));
+            expect(icon).toBeInTheDocument();
+        });
     });
 
     // Common tests suite.
-    commonTestsSuite(setup, { className: 'wrapper', prop: 'wrapper' }, { className: CLASSNAME });
+    commonTestsSuiteRTL(setup, { baseClassName: CLASSNAME, forwardClassName: 'message', forwardAttributes: 'message' });
 });

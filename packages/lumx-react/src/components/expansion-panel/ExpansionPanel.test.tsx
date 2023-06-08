@@ -4,17 +4,16 @@ import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import { queryByRole, render } from '@testing-library/react';
 import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import userEvent from '@testing-library/user-event';
+
 import { ExpansionPanel, ExpansionPanelProps } from '.';
 
 const CLASSNAME = ExpansionPanel.className as string;
 
-type SetupProps = Partial<ExpansionPanelProps>;
-
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}) => {
-    const props: ExpansionPanelProps = {
+const setup = (propsOverride: Partial<ExpansionPanelProps> = {}) => {
+    const props = {
         toggleButtonProps: { label: 'Toggle' },
         ...propsOverride,
     };
@@ -76,9 +75,9 @@ describe(`<${ExpansionPanel.displayName}>`, () => {
     });
 
     describe('Events', () => {
-        const onOpen: jest.Mock = jest.fn();
-        const onClose: jest.Mock = jest.fn();
-        const onToggleOpen: jest.Mock = jest.fn();
+        const onOpen = jest.fn();
+        const onClose = jest.fn();
+        const onToggleOpen = jest.fn();
 
         beforeEach(onOpen.mockClear);
         beforeEach(onClose.mockClear);
@@ -112,5 +111,10 @@ describe(`<${ExpansionPanel.displayName}>`, () => {
     });
 
     // Common tests suite.
-    commonTestsSuiteRTL(setup, { baseClassName: CLASSNAME, forwardClassName: 'element', forwardAttributes: 'element' });
+    commonTestsSuiteRTL(setup, {
+        baseClassName: CLASSNAME,
+        forwardClassName: 'element',
+        forwardAttributes: 'element',
+        forwardRef: 'element',
+    });
 });

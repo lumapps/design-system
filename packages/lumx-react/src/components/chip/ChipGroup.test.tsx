@@ -1,9 +1,13 @@
-import { shallow } from 'enzyme';
-import 'jest-enzyme';
 import React from 'react';
 
-import { Chip } from './Chip';
+import { render } from '@testing-library/react';
+import { getByClassName } from '@lumx/react/testing/utils/queries';
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { Alignment } from '@lumx/react';
 import { ChipGroup, ChipGroupProps } from './ChipGroup';
+import { Chip } from './Chip';
+
+const CLASSNAME = ChipGroup.className as string;
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -13,17 +17,30 @@ const setup = (propOverrides: Partial<ChipGroupProps> = {}) => {
         children: [<Chip key="1">Chip 1</Chip>, <Chip key="2">Chip 2</Chip>, <Chip key="3">Chip 3</Chip>],
         ...propOverrides,
     };
-    const wrapper = shallow(<ChipGroup {...props} />);
+    render(<ChipGroup {...props} />);
+    const chipGroup = getByClassName(document.body, CLASSNAME);
 
-    return { props, wrapper };
+    return { props, chipGroup };
 };
 
 describe('<ChipGroup />', () => {
-    // 1. Test render via snapshot (default state of component).
-    describe('Snapshot', () => {
-        it('should render correctly Chip Group component', () => {
-            const { wrapper } = setup();
-            expect(wrapper).toMatchSnapshot();
+    describe('Props', () => {
+        it('should render default', () => {
+            const { chipGroup } = setup();
+            expect(chipGroup).toBeInTheDocument();
+            expect(chipGroup).toHaveClass(CLASSNAME);
+            expect(chipGroup).toHaveClass(`${CLASSNAME}--align-left`);
         });
+
+        it('should render with align', () => {
+            const { chipGroup } = setup({ align: Alignment.right });
+            expect(chipGroup).toHaveClass(`${CLASSNAME}--align-right`);
+        });
+    });
+
+    commonTestsSuiteRTL(setup, {
+        baseClassName: CLASSNAME,
+        forwardClassName: 'chipGroup',
+        forwardAttributes: 'chipGroup',
     });
 });

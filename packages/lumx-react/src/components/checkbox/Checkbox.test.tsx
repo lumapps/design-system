@@ -1,11 +1,10 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
-import { mount, shallow } from 'enzyme';
-import 'jest-enzyme';
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 
-import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
-import { getBasicClass } from '@lumx/react/utils/className';
-
+import { getByClassName, getByTagName, queryByClassName } from '@lumx/react/testing/utils/queries';
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { Checkbox, CheckboxProps } from './Checkbox';
 
 const CLASSNAME = Checkbox.className as string;
@@ -15,100 +14,96 @@ type SetupProps = Partial<CheckboxProps>;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}, shallowRendering = true) => {
+const setup = (propsOverride: SetupProps = {}) => {
     const props: any = { id: 'fixedId', ...propsOverride };
-    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    const wrapper: Wrapper = renderer(<Checkbox {...props} />);
+    render(<Checkbox {...props} />);
 
-    return {
-        helper: wrapper.find(`.${CLASSNAME}__helper`),
-        label: wrapper.find(`.${CLASSNAME}__label`),
-        props,
-        wrapper,
-    };
+    const checkbox = getByClassName(document.body, CLASSNAME);
+    const helper = queryByClassName(checkbox, `${CLASSNAME}__helper`);
+    const label = queryByClassName(checkbox, `${CLASSNAME}__label`);
+    const input = getByTagName(checkbox, 'input');
+    return { checkbox, helper, label, input, props };
 };
 
 describe(`<${Checkbox.displayName}>`, () => {
-    // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', () => {
-        it('should render correctly', () => {
-            const { wrapper } = setup();
-            expect(wrapper).toMatchSnapshot();
-
-            expect(wrapper).toExist();
-            expect(wrapper).toHaveClassName(CLASSNAME);
-            expect(wrapper).not.toHaveClassName('lumx-checkbox--is-disabled');
-            expect(wrapper).toHaveClassName('lumx-checkbox--is-unchecked');
-            expect(wrapper.find('input')).toHaveProp('disabled', undefined);
-        });
-    });
-
-    // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
-        it('should add a "disabled" and "checked" class names', () => {
-            const { wrapper } = setup({
+        it('should render correctly', () => {
+            const { checkbox, input, label, helper } = setup();
+            expect(checkbox).toBeInTheDocument();
+            expect(checkbox).toHaveClass(CLASSNAME);
+            expect(checkbox).not.toHaveClass('lumx-checkbox--is-disabled');
+            expect(checkbox).toHaveClass('lumx-checkbox--is-unchecked');
+
+            expect(label).not.toBeInTheDocument();
+            expect(helper).not.toBeInTheDocument();
+
+            expect(input).toBeInTheDocument();
+            expect(input).not.toBeChecked();
+            expect(input).not.toBeDisabled();
+        });
+
+        it('should render disabled and checked', () => {
+            const { checkbox, input } = setup({
                 isDisabled: true,
                 isChecked: true,
             });
+            expect(checkbox).toHaveClass('lumx-checkbox--is-disabled');
+            expect(checkbox).toHaveClass('lumx-checkbox--is-checked');
 
-            expect(wrapper).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'disabled', value: true }));
-            expect(wrapper.find('input')).toHaveProp('disabled', true);
-            expect(wrapper).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'checked', value: true }));
+            expect(input).toBeChecked();
+            expect(input).toBeDisabled();
         });
 
-        it('should use the given props', () => {
-            const { helper, label, wrapper } = setup({
+        it('should render helper and label', () => {
+            const id = 'checkbox1';
+            const { props, helper, label, input } = setup({
+                id,
                 helper: 'Test helper',
                 label: 'Test label',
             });
 
-            expect(helper).toExist();
-            expect(label).toExist();
-            expect(wrapper).toMatchSnapshot();
+            expect(helper).toBeInTheDocument();
+            expect(helper).toHaveTextContent(props.helper);
+            expect(helper).toHaveAttribute('id');
+
+            expect(label).toBeInTheDocument();
+            expect(label).toHaveTextContent(props.label);
+            expect(label).toHaveAttribute('for', id);
+
+            expect(input).toHaveAttribute('id', id);
+            expect(input).toHaveAttribute('aria-describedby', helper?.id);
         });
 
-        it('should use the given props while passing custom props to input', () => {
-            const { helper, label, wrapper } = setup({
-                helper: 'Test helper',
-                label: 'Test label',
+        it('should forward input props', () => {
+            const { props, input } = setup({
                 inputProps: {
                     'aria-labelledby': 'labelledby-id',
                 },
             });
 
-            expect(helper).toExist();
-            expect(label).toExist();
-            expect(wrapper).toMatchSnapshot();
+            expect(input).toHaveAttribute('aria-labelledby', props.inputProps['aria-labelledby']);
         });
     });
 
-    // 3. Test events.
     describe('Events', () => {
-        const onChange: jest.Mock = jest.fn();
+        const onChange = jest.fn();
 
-        beforeEach(() => {
-            onChange.mockClear();
+        it('should trigger `onChange` when checkbox is clicked', async () => {
+            const value = 'value';
+            const name = 'name';
+            const { input } = setup({ checked: false, onChange, value, name });
+            expect(input).not.toBeChecked();
+
+            await userEvent.click(input);
+
+            expect(onChange).toHaveBeenCalledWith(true, value, name, expect.any(Object));
         });
-
-        it('should trigger `onChange` when checkbox is clicked', () => {
-            const { wrapper } = setup({ checked: false, onChange }, false);
-            const checkbox = wrapper.find('input');
-
-            checkbox.simulate('change');
-            expect(onChange).toHaveBeenCalled();
-        });
-    });
-
-    // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', () => {
-        // Nothing to do here.
-    });
-
-    // 5. Test state.
-    describe('State', () => {
-        // Nothing to do here.
     });
 
     // Common tests suite.
-    commonTestsSuite(setup, { className: 'wrapper', prop: 'wrapper' }, { className: CLASSNAME });
+    commonTestsSuiteRTL(setup, {
+        baseClassName: CLASSNAME,
+        forwardClassName: 'checkbox',
+        forwardAttributes: 'checkbox',
+    });
 });

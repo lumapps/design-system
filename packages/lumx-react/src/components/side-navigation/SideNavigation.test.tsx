@@ -1,52 +1,39 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
-import { mount, shallow } from 'enzyme';
-import 'jest-enzyme';
-
-import { Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { render } from '@testing-library/react';
+import { getByClassName } from '@lumx/react/testing/utils/queries';
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { Theme } from '@lumx/react';
 
 import { SideNavigation, SideNavigationProps } from './SideNavigation';
 
 const CLASSNAME = SideNavigation.className as string;
 
-type SetupProps = Partial<SideNavigationProps>;
-
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true) => {
-    const props: any = { ...propsOverride };
-    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    const wrapper: Wrapper = renderer(<SideNavigation {...props} />);
-
-    return {
-        props,
-        root: wrapper.find(`.${CLASSNAME}`),
-        wrapper,
-    };
+const setup = (props: Partial<SideNavigationProps> = {}) => {
+    render(<SideNavigation {...(props as any)} />);
+    const sideNavigation = getByClassName(document.body, CLASSNAME);
+    return { props, sideNavigation };
 };
 
 describe(`<${SideNavigation.displayName}>`, () => {
-    // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', () => {
-        // Here is an example of a basic rendering check, with snapshot.
-
-        it('should render correctly', () => {
-            const { root, wrapper } = setup();
-            expect(wrapper).toMatchSnapshot();
-
-            expect(root).toExist();
-            expect(root).toHaveClassName(CLASSNAME);
-        });
+    it('should render default', () => {
+        const { sideNavigation } = setup();
+        expect(sideNavigation.className).toMatchInlineSnapshot(`"lumx-side-navigation"`);
     });
 
-    // 2. Test defaultProps value and important props custom values. => no default props
+    it('should render dark theme', () => {
+        const { sideNavigation } = setup({ theme: Theme.dark });
+        expect(sideNavigation.className).toMatchInlineSnapshot(`"lumx-color-font-light-N lumx-side-navigation"`);
+    });
 
-    // 3. Test events. => no events
-
-    // 4. Test conditions => no conditions
-
-    // 5. Test state => no state
     // Common tests suite.
-    commonTestsSuite(setup, { className: 'root', prop: 'root' }, { className: CLASSNAME });
+    commonTestsSuiteRTL(setup, {
+        baseClassName: CLASSNAME,
+        forwardClassName: 'sideNavigation',
+        forwardAttributes: 'sideNavigation',
+        forwardRef: 'sideNavigation',
+    });
 });

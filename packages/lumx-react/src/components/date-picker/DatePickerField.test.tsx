@@ -1,22 +1,18 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
-import { mount, shallow } from 'enzyme';
-import 'jest-enzyme';
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { render, screen } from '@testing-library/react';
+import { getByClassName, getByTagName, queryByClassName } from '@lumx/react/testing/utils/queries';
+import { TextField } from '@lumx/react';
 
-import { Wrapper } from '@lumx/react/testing/utils';
-
+import userEvent from '@testing-library/user-event';
 import { DatePickerField, DatePickerFieldProps } from './DatePickerField';
+import { CLASSNAME } from './constants';
 
-const mockedDate = new Date(
-    new Date(1487721600).toLocaleString('en-US', {
-        timeZone: 'America/Toronto',
-    }),
-);
+const mockedDate = new Date(1487721600000);
 Date.now = jest.fn(() => mockedDate.valueOf());
 
-type SetupProps = Partial<DatePickerFieldProps>;
-
-const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true) => {
+const setup = (propsOverride: Partial<DatePickerFieldProps> = {}) => {
     const props: DatePickerFieldProps = {
         label: 'DatePickerField',
         locale: 'fr',
@@ -26,22 +22,42 @@ const setup = ({ ...propsOverride }: SetupProps = {}, shallowRendering = true) =
         previousButtonProps: { label: 'Previous month' },
         ...propsOverride,
     };
-    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    const wrapper: Wrapper = renderer(<DatePickerField {...props} />);
-
-    return { props, wrapper };
+    render(<DatePickerField {...props} />);
+    const textField = getByClassName(document.body, TextField.className as string);
+    const inputNative = getByTagName(textField, 'input');
+    const getDatePicker = () => queryByClassName(document.body, CLASSNAME);
+    return { props, textField, inputNative, getDatePicker };
 };
 
 describe(`<${DatePickerField.displayName}>`, () => {
-    describe('Snapshots and structure', () => {
-        it('should render correctly', () => {
-            const { wrapper } = setup();
-            expect(wrapper).toMatchSnapshot();
-        });
+    it('should render', () => {
+        const { inputNative, props } = setup();
+        expect(inputNative).toBe(screen.queryByRole('textbox', { name: props.label }));
+        expect(inputNative).toHaveValue('22 février 2017');
+    });
 
-        it('should render correctly when passed a date object', () => {
-            const { wrapper } = setup({ value: new Date('January 18, 1970') });
-            expect(wrapper).toMatchSnapshot();
-        });
+    it('should open on click', async () => {
+        const { getDatePicker, inputNative } = setup();
+        expect(getDatePicker()).not.toBeInTheDocument();
+
+        await userEvent.click(inputNative);
+        expect(getDatePicker()).toBeInTheDocument();
+    });
+
+    it('should open on Enter pressed', async () => {
+        const { getDatePicker, inputNative } = setup();
+        expect(getDatePicker()).not.toBeInTheDocument();
+
+        await userEvent.tab();
+        expect(inputNative).toHaveFocus();
+        await userEvent.keyboard('[Enter]');
+        expect(getDatePicker()).toBeInTheDocument();
+    });
+
+    commonTestsSuiteRTL(setup, {
+        baseClassName: TextField.className as string,
+        forwardRef: 'textField',
+        forwardAttributes: 'inputNative',
+        forwardClassName: 'textField',
     });
 });
