@@ -1,94 +1,56 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
-import { mount, shallow } from 'enzyme';
-import 'jest-enzyme';
-
-import { List, ListItem, Size } from '@lumx/react';
-import { commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
-import { AutocompleteMultiple, AutocompleteMultipleProps } from './AutocompleteMultiple';
+import { Dropdown, List, ListItem, Size, TextField } from '@lumx/react';
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
+import { render } from '@testing-library/react';
 
 import { CITIES as suggestions } from './__mockData__';
+import { AutocompleteMultiple, AutocompleteMultipleProps } from './AutocompleteMultiple';
 
 const CLASSNAME = AutocompleteMultiple.className as string;
-
-type SetupProps = Partial<AutocompleteMultipleProps>;
-
-interface Suggestion {
-    id: string;
-    text: string;
-}
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}, shallowRendering = true) => {
-    const props: any = { ...propsOverride };
-    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    const wrapper: Wrapper = renderer(<AutocompleteMultiple {...props} />);
-
-    return { props, wrapper };
+const setup = (props: Partial<AutocompleteMultipleProps> = {}) => {
+    render(
+        <AutocompleteMultiple {...(props as any)}>
+            <List>
+                {suggestions.map((suggestion) => (
+                    <ListItem size={Size.tiny} key={suggestion.id}>
+                        <div>{suggestion.text}</div>
+                    </ListItem>
+                ))}
+            </List>
+        </AutocompleteMultiple>,
+    );
+    const autocompleteMultiple = getByClassName(document.body, CLASSNAME);
+    const textField = getByClassName(autocompleteMultiple, TextField.className as string);
+    const getDropdown = () => queryByClassName(document.body, Dropdown.className as string);
+    return { props, autocompleteMultiple, textField, getDropdown };
 };
 
 describe(`<${AutocompleteMultiple.displayName}>`, () => {
-    // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', () => {
-        // Here is an example of a basic rendering check, with snapshot.
+    it('should render default', () => {
+        const { autocompleteMultiple, textField, getDropdown } = setup({});
 
-        it('should render correctly', () => {
-            const { wrapper } = setup({
-                children: (
-                    <List isClickable>
-                        {suggestions.map((suggestion: Suggestion) => (
-                            <ListItem size={Size.tiny} key={suggestion.id}>
-                                <div>{suggestion.text}</div>
-                            </ListItem>
-                        ))}
-                    </List>
-                ),
-                chips: [
-                    {
-                        id: 'lyon',
-                        text: 'Lyon',
-                    },
-                    {
-                        id: 'montevideo',
-                        text: 'Montevideo',
-                    },
-                ],
-                label: 'Field label',
-                isOpen: true,
-                isRequired: true,
-                onChange: jest.fn(),
-                value: '',
-            });
-            expect(wrapper).toMatchSnapshot();
-
-            expect(wrapper).toExist();
-
-            expect(wrapper).toHaveClassName(CLASSNAME);
-        });
+        expect(autocompleteMultiple).toBeInTheDocument();
+        expect(autocompleteMultiple.className).toMatchInlineSnapshot(`"lumx-autocomplete-multiple lumx-autocomplete"`);
+        expect(textField).toBeInTheDocument();
+        expect(getDropdown()).not.toBeInTheDocument();
     });
 
-    // 2. Test defaultProps value and important props custom values.
-    describe('Props', () => {
-        // Nothing to do here.
-    });
-
-    // 3. Test events.
-    describe('Events', () => {
-        // Nothing to do here.
-    });
-
-    // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', () => {
-        // Nothing to do here.
-    });
-
-    // 5. Test state.
-    describe('State', () => {
-        // Nothing to do here.
+    it('should render open', () => {
+        const { getDropdown } = setup({ isOpen: true });
+        expect(getDropdown()).toBeInTheDocument();
     });
 
     // Common tests suite.
-    commonTestsSuite(setup, { className: 'wrapper', prop: 'wrapper' }, { className: CLASSNAME });
+    commonTestsSuiteRTL(setup, {
+        baseClassName: CLASSNAME,
+        forwardClassName: 'autocompleteMultiple',
+        forwardRef: 'autocompleteMultiple',
+        forwardAttributes: 'autocompleteMultiple',
+    });
 });

@@ -1,4 +1,9 @@
-export const CITIES = [
+export interface Suggestion {
+    id: string;
+    text: string;
+}
+
+export const CITIES: Suggestion[] = [
     {
         text: 'Los Angeles',
         id: 'losangeles',
