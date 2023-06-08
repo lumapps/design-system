@@ -29,16 +29,6 @@ module.exports = class extends MainGenerator {
             this.destinationPath(`${path}/react/default.tsx`),
             { componentName, kbComponentName },
         );
-        this.fs.copyTpl(
-            this.templatePath('angularjs/controller.js.ejs'),
-            this.destinationPath(`${path}/angularjs/controller.js`),
-            { componentName, kbComponentName },
-        );
-        this.fs.copyTpl(
-            this.templatePath('angularjs/default.html.ejs'),
-            this.destinationPath(`${path}/angularjs/default.html`),
-            { componentName, kbComponentName },
-        );
 
         console.warn(`\nWarning: Add the following line to the 'lumx-react/src/index.js' file for the demo to work:
 

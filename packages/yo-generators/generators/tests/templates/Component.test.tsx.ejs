@@ -1,87 +1,50 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
-import { mount, shallow } from 'enzyme';
-import 'jest-enzyme';
-
-import { Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
-import { getBasicClass } from '@lumx/react/utils/className';
+import { render } from '@testing-library/react';
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { getByClassName } from '@lumx/react/testing/utils/queries';
+import userEvent from '@testing-library/user-event';
 
 import { <%= componentName %>, <%= componentName %>Props } from './<%= componentName %>';
 
-const DEFAULT_PROPS = <%= componentName %>.defaultProps as any;
 const CLASSNAME = <%= componentName %>.className as any;
-
-type SetupProps = Partial<<%= componentName %>Props>;
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}, shallowRendering = true) => {
-    const props: any = { ...propsOverride };
-    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    const wrapper: Wrapper = renderer(<<%= componentName %> {...props} />);
-
-    return { props, wrapper };
+const setup = (props: Partial<<%= componentName %>Props> = {}) => {
+    render(<<%= componentName %> {...props} />);
+    const component = getByClassName(document.body, CLASSNAME);
+    return { props, component };
 };
 
 describe(`<${<%= componentName %>.displayName}>`, () => {
-    // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', () => {
-        // Here is an example of a basic rendering check, with snapshot.
-
-        it('should render correctly', () => {
-            const { wrapper } = setup();
-            expect(wrapper).toMatchSnapshot();
-
-            expect(wrapper).toExist();
-            expect(wrapper).toHaveClassName(CLASSNAME);
-        });
-    });
-
-    // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
-        // Here are some examples of basic props check.
+        it('should render default', () => {
+            const { component } = setup();
 
-        it('should use default props', () => {
-            const { wrapper } = setup();
-
-            Object.keys(DEFAULT_PROPS).forEach((prop: string) => {
-                expect(wrapper).toHaveClassName(
-                    getBasicClass({ prefix: CLASSNAME, type: prop, value: DEFAULT_PROPS[prop] }),
-                );
-            });
+            expect(component).toBeInTheDocument();
+            // TODO: add assertions
         });
     });
 
-    // 3. Test events.
     describe('Events', () => {
-        // Here is an example how to check a `onClick` event.
+        // Example of click event test
+        it('should trigger `onClick` when clicked', async () => {
+            const onClick = jest.fn();
+            const { component } = setup({ onClick });
 
-        const onClick: jest.Mock = jest.fn();
-
-        beforeEach(() => {
-            onClick.mockClear();
-        });
-
-        it('should trigger `onClick` when clicked', () => {
-            const { wrapper } = setup({ onClick }, false);
-
-            wrapper.simulate('click');
+            await userEvent.click(component);
 
             expect(onClick).toHaveBeenCalled();
         });
     });
 
-    // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', () => {
-        // Nothing to do here.
-    });
-
-    // 5. Test state.
-    describe('State', () => {
-        // Nothing to do here.
-    });
-
     // Common tests suite.
-    commonTestsSuite(setup, { className: 'wrapper', prop: 'wrapper' }, { className: CLASSNAME });
+    commonTestsSuiteRTL(setup, {
+        baseClassName: CLASSNAME,
+        forwardClassName: 'component',
+        forwardAttributes: 'component',
+        forwardRef: 'component',
+    });
 });
