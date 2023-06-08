@@ -25,7 +25,6 @@ module.exports = {
     setupFilesAfterEnv: [
         '<rootDir>jest/configure.js',
     ],
-    snapshotSerializers: ['enzyme-to-json/serializer'],
     testEnvironment: 'jsdom',
     testMatch: ['<rootDir>src/**/?(*.)+(spec|test).[jt]s?(x)'],
     transform: {
