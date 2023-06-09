@@ -1,7 +1,7 @@
 import React, { ElementType } from 'react';
 import classNames from 'classnames';
 import isChromatic from 'chromatic/isChromatic';
-import { toggleMaterialTheme } from '@lumx/react/utils/MaterialThemeSwitcher';
+import { toggleMaterialTheme } from './toggleMaterialTheme';
 
 import '@lumx/core/scss/lumx.scss';
 import './index.scss';
