@@ -46,18 +46,44 @@ export const ChipLink = {
 };
 
 /**
+ * With custom elements at the start of the chip
+ */
+export const WithBefore = {
+    argTypes: {
+        ...ChipButton.argTypes,
+        onBeforeClick: { action: true },
+    },
+    args: {
+        ...ChipButton.args,
+        before: <Icon icon={mdiViewList} />,
+    },
+};
+
+/**
+ * With custom elements at the start of the chip
+ */
+export const WithAfter = {
+    argTypes: {
+        ...ChipButton.argTypes,
+       // onAfterClick: { action: true },
+    },
+    args: {
+        ...ChipButton.args,
+        after: <Icon aria-label="Delete" icon={mdiClose} />,
+    },
+};
+
+/**
  * With custom elements at the start and end of the chip
  */
 export const WithAfterAndBefore = {
     argTypes: {
-        onBeforeClick: { action: true },
-        onClick: { action: true },
-        onAfterClick: { action: true },
+        ...WithAfter.argTypes,
+        ...WithBefore.argTypes,
     },
     args: {
-        before: <Icon icon={mdiViewList} />,
-        children: 'Chip label',
-        after: <Icon icon={mdiClose} />,
+        ...WithAfter.args,
+        ...WithBefore.args,
     },
 };
 
@@ -75,6 +101,7 @@ export const Variants = {
                     Default: {},
                     Disabled: { isDisabled: true },
                     Highlighted: { isHighlighted: true },
+                    Selected: { isSelected: true },
                 },
             },
         }),

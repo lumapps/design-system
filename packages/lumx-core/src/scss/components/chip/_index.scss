@@ -1,3 +1,5 @@
+@use "sass:map";
+
 /* ==========================================================================
    Chip
    ========================================================================== */
@@ -6,6 +8,7 @@
     $self: &;
 
     @include lumx-chip-base;
+    @include lumx-state-transition;
 
     &__before {
         @include lumx-chip-before;
@@ -24,61 +27,103 @@
     &__after {
         @include lumx-chip-after;
     }
+
+    button {
+        color: inherit;
+        appearance: none;
+        outline: none;
+        border: none;
+        background: none;
+    }
+
+    a {
+        text-decoration: none;
+    }
 }
 
 /* Chip size
    ========================================================================== */
 
-.#{$lumx-base-prefix}-chip--size-m {
-    @include lumx-chip-size(lumx-base-const("size", "M"));
+@each $size in ("s", "m") {
+    .#{$lumx-base-prefix}-chip--size-#{$size} {
+        @include lumx-chip-size($size);
 
-    padding: 0 var(--lumx-material-chip-size-m-padding-vertical);
+        .#{$lumx-base-prefix}-chip__label {
+            @include lumx-chip-size($size);
+        }
 
-    &.#{$lumx-base-prefix}-chip--has-before {
-        padding-left: $lumx-spacing-unit * 1.5;
-    }
+        .#{$lumx-base-prefix}-chip__after {
+            padding-right: map.get($lumx-chip-before-after-padding, $size);
+        }
+        .#{$lumx-base-prefix}-chip__after--is-clickable {
+            padding-right: map.get($lumx-chip-before-after-padding, $size);
+            border-top-right-radius: var(--lumx-material-chip-size-#{$size}-border-radius);
+            border-bottom-right-radius: var(--lumx-material-chip-size-#{$size}-border-radius);
+        }
 
-    &.#{$lumx-base-prefix}-chip--has-after {
-        padding-right: $lumx-spacing-unit * 1.5;
+        .#{$lumx-base-prefix}-chip__before {
+            padding-left: map.get($lumx-chip-before-after-padding, $size);
+        }
+        .#{$lumx-base-prefix}-chip__before--is-clickable {
+            border-top-left-radius: var(--lumx-material-chip-size-#{$size}-border-radius);
+            border-bottom-left-radius: var(--lumx-material-chip-size-#{$size}-border-radius);
+        }
+
+        &:not(.#{$lumx-base-prefix}-chip--has-after) .#{$lumx-base-prefix}-chip__label {
+            padding-right: var(--lumx-material-chip-size-#{$size}-padding-vertical);
+        }
+
+        &:not(.#{$lumx-base-prefix}-chip--has-before) .#{$lumx-base-prefix}-chip__label {
+            padding-left: var(--lumx-material-chip-size-#{$size}-padding-vertical);
+        }
     }
 }
 
-.#{$lumx-base-prefix}-chip--size-s {
-    @include lumx-chip-size(lumx-base-const("size", "S"));
 
-    padding: 0 var(--lumx-material-chip-size-s-padding-vertical);
-
-    &.#{$lumx-base-prefix}-chip--has-before {
-        padding-left: $lumx-spacing-unit;
+.#{$lumx-base-prefix}-chip {
+    &--has-after &__label {
+        padding-right: $lumx-spacing-unit/2;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
     }
 
-    &.#{$lumx-base-prefix}-chip--has-after {
-        padding-right: $lumx-spacing-unit;
+    &--has-before &__label {
+        padding-left: $lumx-spacing-unit/2;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
     }
 }
 
 /* Chip states
    ========================================================================== */
 
-.#{$lumx-base-prefix}-chip--is-clickable {
-    @include lumx-state-transition;
-
-    cursor: pointer;
-}
-
 @each $key, $color in $lumx-color-palette {
     .#{$lumx-base-prefix}-chip--is-unselected.#{$lumx-base-prefix}-chip--color-#{$key} {
-        @include lumx-state(lumx-base-const("state", "DEFAULT"), lumx-base-const("emphasis", "MEDIUM"), $key);
+        .#{$lumx-base-prefix}-chip__label,
+        .#{$lumx-base-prefix}-chip__before--is-clickable,
+        .#{$lumx-base-prefix}-chip__after--is-clickable {
+            @include lumx-state(lumx-base-const("state", "DEFAULT"), lumx-base-const("emphasis", "MEDIUM"), $key);
+        }
 
-        &.#{$lumx-base-prefix}-chip--is-clickable:hover {
+        &.#{$lumx-base-prefix}-chip--is-clickable .#{$lumx-base-prefix}-chip__label:hover,
+        .#{$lumx-base-prefix}-chip__before--is-clickable:hover,
+        .#{$lumx-base-prefix}-chip__after--is-clickable:hover {
             @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "MEDIUM"), $key);
         }
 
-        &.#{$lumx-base-prefix}-chip--is-clickable:active {
+
+        &.#{$lumx-base-prefix}-chip--is-clickable .#{$lumx-base-prefix}-chip__label:active,
+        .#{$lumx-base-prefix}-chip__before--is-clickable:active,
+        .#{$lumx-base-prefix}-chip__after--is-clickable:active,
+        &.#{$lumx-base-prefix}-chip--is-clickable {
             @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "MEDIUM"), $key);
         }
 
+
         &.#{$lumx-base-prefix}-chip--is-clickable[data-focus-visible-added],
+        .#{$lumx-base-prefix}-chip__label[data-focus-visible-added],
+        .#{$lumx-base-prefix}-chip__after[data-focus-visible-added],
+        .#{$lumx-base-prefix}-chip__before[data-focus-visible-added],
         &.#{$lumx-base-prefix}-chip--is-highlighted {
             @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "MEDIUM"), $key);
         }
@@ -90,6 +135,8 @@
         }
     }
 }
+
+// TODO split into label, after & before
 
 .#{$lumx-base-prefix}-chip--is-selected {
     &.#{$lumx-base-prefix}-chip--color-dark {

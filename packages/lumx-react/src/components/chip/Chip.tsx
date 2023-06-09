@@ -1,14 +1,10 @@
-import { ColorPalette, Size, Theme } from '@lumx/react';
-import { useStopPropagation } from '@lumx/react/hooks/useStopPropagation';
+import React, { forwardRef, MouseEventHandler, ReactNode } from 'react';
+import classNames from 'classnames';
+import isFunction from 'lodash/isFunction';
 
+import { ColorPalette, Size, Theme } from '@lumx/react';
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
-import { onEnterPressed } from '@lumx/react/utils/event';
-
-import classNames from 'classnames';
-
-import isFunction from 'lodash/isFunction';
-import React, { forwardRef, MouseEventHandler, ReactNode } from 'react';
 
 /**
  * Chip sizes.
@@ -25,7 +21,10 @@ export interface ChipProps extends GenericProps, HasTheme {
     before?: ReactNode;
     /** Color variant. */
     color?: ColorPalette;
-    /** Whether the component is clickable or not. */
+    /**
+     * Whether the component is clickable or not.
+     * @deprecated using `onClick` or `href` automatically make the chip clickable.
+     */
     isClickable?: boolean;
     /** Whether the component is disabled or not. */
     isDisabled?: boolean;
@@ -59,6 +58,31 @@ const DEFAULT_PROPS: Partial<ChipProps> = {
     theme: Theme.light,
 };
 
+const switchComponent = (baseComponent: React.ElementType | null, { isDisabled, onClick, href, target, rel }: any) => {
+    if (!baseComponent) return [];
+
+    const componentProps: any = {};
+    let Component = baseComponent;
+    if (onClick) {
+        Component = 'button';
+        componentProps.type = 'button';
+        if (!isDisabled) {
+            componentProps.onClick = onClick;
+        }
+    }
+    if (href) {
+        Component = 'a';
+        if (!isDisabled) {
+            componentProps.href = href;
+        }
+        componentProps.target = target;
+        componentProps.rel = rel;
+    }
+    if (isDisabled) componentProps['aria-disabled'] = isDisabled;
+
+    return [Component, componentProps];
+};
+
 /**
  * Chip component.
  *
@@ -74,7 +98,7 @@ export const Chip: Comp<ChipProps, HTMLAnchorElement> = forwardRef((props, ref) 
         className,
         color,
         disabled,
-        isClickable,
+        isClickable: propIsClickable,
         isDisabled = disabled,
         isHighlighted,
         isSelected,
@@ -83,27 +107,33 @@ export const Chip: Comp<ChipProps, HTMLAnchorElement> = forwardRef((props, ref) 
         onClick,
         size,
         theme,
+        href,
+        target,
+        rel,
         ...forwardedProps
     } = props;
-    const hasAfterClick = isFunction(onAfterClick);
-    const hasBeforeClick = isFunction(onBeforeClick);
-    const hasOnClick = isFunction(onClick);
 
     // Adapt color to the theme.
     const chipColor = color || (theme === Theme.light ? ColorPalette.dark : ColorPalette.light);
 
-    const handleOnBeforeClick = useStopPropagation(onBeforeClick);
-    const handleOnAfterClick = useStopPropagation(onAfterClick);
+    const [Label, labelProps] = switchComponent('span', { isDisabled, onClick, href, target, rel });
+    const [Before, beforeProps] = switchComponent(before ? 'span' : null, { isDisabled, onClick: onBeforeClick });
+    const [After, afterProps] = switchComponent(after ? 'span' : null, { isDisabled, onClick: onAfterClick });
+
+    const isClickable = Label === 'button' || Label === 'a' || propIsClickable;
+    const isAfterClickable = after && !!onAfterClick;
+    const isBeforeClickable = before && !!onBeforeClick;
 
     return (
-        // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-        <a
+        <span
             {...forwardedProps}
             ref={ref}
             className={classNames(
                 className,
                 handleBasicClasses({
-                    clickable: Boolean(hasOnClick) || isClickable,
+                    clickable: isClickable,
+                    isAfterClickable,
+                    isBeforeClickable,
                     color: chipColor,
                     isDisabled,
                     hasAfter: Boolean(after),
@@ -115,38 +145,30 @@ export const Chip: Comp<ChipProps, HTMLAnchorElement> = forwardRef((props, ref) 
                     unselected: Boolean(!isSelected),
                 }),
             )}
-            role={hasOnClick ? 'button' : undefined}
-            tabIndex={isDisabled || !hasOnClick ? -1 : 0}
-            aria-disabled={(hasOnClick && isDisabled) || undefined}
-            onClick={hasOnClick ? onClick : undefined}
-            onKeyDown={hasOnClick ? onEnterPressed(onClick) : undefined}
         >
-            {before && (
-                // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
-                <div
-                    className={classNames(`${CLASSNAME}__before`, {
-                        [`${CLASSNAME}__before--is-clickable`]: hasBeforeClick,
-                    })}
-                    onClick={handleOnBeforeClick}
-                >
+            {isBeforeClickable && Before && (
+                <Before {...beforeProps} className={`${CLASSNAME}__before ${CLASSNAME}__before--is-clickable`}>
                     {before}
-                </div>
+                </Before>
             )}
 
-            <div className={`${CLASSNAME}__label`}>{children}</div>
+            <Label
+                {...labelProps}
+                className={classNames(`${CLASSNAME}__label`, {
+                    [`${CLASSNAME}__label--is-clickable`]: isClickable,
+                })}
+            >
+                {before && !isBeforeClickable && <span className={`${CLASSNAME}__before`}>{before}</span>}
+                {children}
+                {after && !isAfterClickable && <span className={`${CLASSNAME}__after`}>{after}</span>}
+            </Label>
 
-            {after && (
-                // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
-                <div
-                    className={classNames(`${CLASSNAME}__after`, {
-                        [`${CLASSNAME}__after--is-clickable`]: hasAfterClick,
-                    })}
-                    onClick={handleOnAfterClick}
-                >
+            {!!onAfterClick && After && (
+                <After {...afterProps} className={`${CLASSNAME}__after ${CLASSNAME}__after--is-clickable`}>
                     {after}
-                </div>
+                </After>
             )}
-        </a>
+        </span>
     );
 });
 Chip.displayName = COMPONENT_NAME;

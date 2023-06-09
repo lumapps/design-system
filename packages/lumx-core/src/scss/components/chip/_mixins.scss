@@ -16,11 +16,17 @@
 }
 
 @mixin lumx-chip-before() {
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
     flex-shrink: 0;
-    margin-right: $lumx-spacing-unit;
+    padding-right: $lumx-spacing-unit/2;
 }
 
 @mixin lumx-chip-label($size) {
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
     flex: 1 1 auto;
     white-space: nowrap;
 
@@ -32,6 +38,9 @@
 }
 
 @mixin lumx-chip-after() {
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
     flex-shrink: 0;
-    margin-left: $lumx-spacing-unit;
+    padding-left: $lumx-spacing-unit/2;
 }

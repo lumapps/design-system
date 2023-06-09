@@ -1,1 +1,5 @@
 $lumx-chip-group-spacing: 3px;
+$lumx-chip-before-after-padding: (
+    s: $lumx-spacing-unit,
+    m: $lumx-spacing-unit * 1.5,
+)
