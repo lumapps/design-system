@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.3.1][] - 2023-06-12
+
 ### Fixed
 
 -   IconButton: remove the `aria-describedby` attribute when the `aria-label` and the `aria-describedby` have the same value.
@@ -1749,5 +1751,6 @@ _Failed released_
 [3.2.0]: https://github.com/lumapps/design-system/tree/v3.2.0
 
 
-[Unreleased]: https://github.com/lumapps/design-system/compare/v3.3.0...HEAD
+[Unreleased]: https://github.com/lumapps/design-system/compare/v3.3.1...HEAD
+[3.3.1]: https://github.com/lumapps/design-system/compare/v3.3.0...v3.3.1
 [3.3.0]: https://github.com/lumapps/design-system/tree/v3.3.0
