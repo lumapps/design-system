@@ -29,7 +29,7 @@
         "@reach/router": "^1.2.1",
         "classnames": "^2.2.6",
         "focus-visible": "^5.2.0",
-        "gatsby": "^2.24.87",
+        "gatsby": "^4.25.7",
         "gatsby-image": "^2.4.21",
         "gatsby-plugin-copy-files-enhanced": "^1.1.1",
         "gatsby-plugin-mdx": "^1.2.51",
