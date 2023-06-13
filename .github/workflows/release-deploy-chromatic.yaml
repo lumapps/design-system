@@ -5,8 +5,7 @@ name: "Deploy Chromatic Release"
 on:
     push:
         tags:
-            - v*
-            - '!v*-alpha.*' # ignore alpha versions
+            - 'v[0-9]+.[0-9]+.[0-9]+'
 
 concurrency:
     group: chromatic-release-${{ github.head_ref }}
