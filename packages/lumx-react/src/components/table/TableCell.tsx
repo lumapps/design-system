@@ -1,15 +1,12 @@
-import React, { forwardRef, useCallback } from 'react';
+import React, { forwardRef } from 'react';
 
 import classNames from 'classnames';
 
 import { Icon, Size } from '@lumx/react';
 import { Comp, GenericProps, ValueOf } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
-import { onEnterPressed } from '@lumx/react/utils/event';
 
 import { mdiArrowDown, mdiArrowUp } from '@lumx/icons';
-
-import isFunction from 'lodash/isFunction';
 
 /**
  * Table head cell sort order.
@@ -66,14 +63,17 @@ const DEFAULT_PROPS: Partial<TableCellProps> = {
 export const TableCell: Comp<TableCellProps, HTMLTableCellElement> = forwardRef((props, ref) => {
     const { children, className, icon, isSortable, onHeaderClick, sortOrder, variant, ...forwardedProps } = props;
 
-    /**
-     * Handle click on the ordered thead.
-     */
-    const handleOnHeaderClick = useCallback(() => {
-        if (isFunction(onHeaderClick)) {
-            onHeaderClick();
-        }
-    }, [onHeaderClick]);
+    // Use button if clickable
+    const Wrapper = onHeaderClick ? 'button' : 'div';
+    const wrapperProps = Wrapper === 'button' ? ({ type: 'button', onClick: onHeaderClick } as const) : undefined;
+
+    // ARIA sort
+    let ariaSort: 'ascending' | 'descending' | 'none' | undefined;
+    if (isSortable) {
+        ariaSort = 'none';
+        if (sortOrder === ThOrder.asc) ariaSort = 'ascending';
+        if (sortOrder === ThOrder.desc) ariaSort = 'descending';
+    }
 
     return (
         <>
@@ -82,18 +82,17 @@ export const TableCell: Comp<TableCellProps, HTMLTableCellElement> = forwardRef(
                     ref={ref}
                     {...forwardedProps}
                     className={classNames(
-                        handleBasicClasses({ prefix: CLASSNAME, isSortable }),
+                        handleBasicClasses({
+                            prefix: CLASSNAME,
+                            isSortable,
+                            isSorted: isSortable && !!sortOrder,
+                        }),
                         className,
                         `${CLASSNAME}--head`,
-                        {
-                            [`${CLASSNAME}--is-sorted`]: isSortable && sortOrder,
-                        },
                     )}
-                    tabIndex={isSortable && isFunction(onHeaderClick) ? 0 : -1}
-                    onClick={handleOnHeaderClick}
-                    onKeyDown={onEnterPressed(handleOnHeaderClick)}
+                    aria-sort={ariaSort}
                 >
-                    <div className={`${CLASSNAME}-wrapper`}>
+                    <Wrapper className={`${CLASSNAME}-wrapper`} {...wrapperProps}>
                         {icon && !isSortable && <Icon className={`${CLASSNAME}-icon`} icon={icon} size={Size.xxs} />}
 
                         {isSortable && sortOrder === ThOrder.asc && (
@@ -105,7 +104,7 @@ export const TableCell: Comp<TableCellProps, HTMLTableCellElement> = forwardRef(
                         )}
 
                         <div className={`${CLASSNAME}-content`}>{children}</div>
-                    </div>
+                    </Wrapper>
                 </th>
             )}
 

@@ -62,11 +62,11 @@
             @include lumx-table-cell-before;
         }
 
-        &--is-sortable {
+        &--is-sortable #{$self}__cell-wrapper {
             cursor: pointer;
         }
 
-        &--is-sorted {
+        &--is-sorted #{$self}__cell-wrapper {
             #{$self}--theme-light & {
                 @include lumx-table-cell-is-sorted(lumx-base-const("theme", "LIGHT"));
             }
@@ -107,8 +107,8 @@
             @include lumx-table-cell-content-before;
         }
 
-        #{$self}__cell--is-sortable:hover &,
-        #{$self}__cell--is-sortable[data-focus-visible-added] & {
+        #{$self}__cell--is-sortable #{$self}__cell-wrapper:hover &,
+        #{$self}__cell--is-sortable #{$self}__cell-wrapper[data-focus-visible-added] & {
             text-decoration: underline;
         }
     }

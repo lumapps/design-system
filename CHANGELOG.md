@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   CommentBlock: `name` & `date` are now optional
 -   CommentBlock: `onClick`, `onMouseEnter` & `onMouseLeave` are now deprecated
 
+### Fixed
+
+-   TableCell: fix clickable & sortable header cell accessibility
+
 ## [3.3.1][] - 2023-06-12
 
 ### Fixed

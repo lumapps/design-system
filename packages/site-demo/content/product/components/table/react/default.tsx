@@ -109,7 +109,7 @@ export const App = ({ theme = Theme.light }: any) => {
                                 isSortable={header.isSortable}
                                 sortOrder={header.sortOrder}
                                 variant={TableCellVariant.head}
-                                onHeaderClick={onHeaderClick}
+                                onHeaderClick={header.isSortable && onHeaderClick}
                                 width={header.width}
                             >
                                 {header.label}

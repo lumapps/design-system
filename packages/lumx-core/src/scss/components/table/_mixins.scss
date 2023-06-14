@@ -91,6 +91,11 @@
 @mixin lumx-table-cell-wrapper() {
     display: flex;
     align-items: flex-start;
+    padding: 0;
+    color: inherit;
+    background: none;
+    border: none;
+    appearance: none;
 }
 
 @mixin lumx-table-cell-icon() {
