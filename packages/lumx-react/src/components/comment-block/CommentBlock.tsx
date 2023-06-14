@@ -28,9 +28,9 @@ export interface CommentBlockProps extends GenericProps, HasTheme {
     avatarProps: AvatarProps;
     /** Comment block replies. */
     children?: ReactNode;
-    /** Comment date with the minimal timestamp informations (xx minutes, x hours, yesterday, 6 days, Month Day, Month Day Year)*/
-    date: string;
-    /** Comment date with the full timestamp informations (day, month, year, time) */
+    /** Comment date with the minimal timestamp information (xx minutes, x hours, yesterday, 6 days, Month Day, Month Day Year)*/
+    date?: string;
+    /** Comment date with the full timestamp information (day, month, year, time) */
     fullDate?: string;
     /** Whether the component has actions to display or not. */
     hasActions?: boolean;
@@ -41,7 +41,7 @@ export interface CommentBlockProps extends GenericProps, HasTheme {
     /** Whether the comment is relevant or not. */
     isRelevant?: boolean;
     /** Comment author name. */
-    name: string;
+    name?: React.ReactNode;
     /** On click callback. */
     onClick?(): void;
     /** On mouse enter callback. */
@@ -137,17 +137,19 @@ export const CommentBlock: Comp<CommentBlockProps, HTMLDivElement> = forwardRef(
                 <div className={`${CLASSNAME}__container`}>
                     <div className={`${CLASSNAME}__content`}>
                         <div className={`${CLASSNAME}__meta`}>
-                            <span
-                                className={`${CLASSNAME}__name`}
-                                onClick={onClick}
-                                onKeyPress={enterKeyPress}
-                                onMouseEnter={onMouseEnter}
-                                onMouseLeave={onMouseLeave}
-                                role="button"
-                                tabIndex={onClick ? 0 : -1}
-                            >
-                                {name}
-                            </span>
+                            {name && (
+                                <span
+                                    className={`${CLASSNAME}__name`}
+                                    onClick={onClick}
+                                    onKeyPress={enterKeyPress}
+                                    onMouseEnter={onMouseEnter}
+                                    onMouseLeave={onMouseLeave}
+                                    role="button"
+                                    tabIndex={onClick ? 0 : -1}
+                                >
+                                    {name}
+                                </span>
+                            )}
                             {headerActions && <span className={`${CLASSNAME}__header-actions`}>{headerActions}</span>}
                         </div>
 
