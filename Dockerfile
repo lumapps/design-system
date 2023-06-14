@@ -2,12 +2,9 @@ FROM node:16.19.1-buster AS builder
 
 WORKDIR /tmp
 
-COPY package.json lerna.json .yarn yarn.lock tsconfig.json ./
-COPY configs ./configs
-COPY packages ./packages/
+COPY . ./
 
-RUN yarn install --ignore-engines \
-    && yarn build:site
+RUN yarn install && yarn build:site
 
 
 FROM nginx:1.23
