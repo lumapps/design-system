@@ -3,7 +3,7 @@ import React from 'react';
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 
 import { render, screen } from '@testing-library/react';
-import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
+import { getByClassName, getByTagName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import userEvent from '@testing-library/user-event';
 import { mdiPlus } from '@lumx/icons';
 import { Uploader, UploaderProps } from './Uploader';
@@ -67,6 +67,19 @@ describe(`<${Uploader.displayName}>`, () => {
             expect(uploader).toHaveClass('lumx-uploader--size-xl');
             expect(uploader).toHaveClass('lumx-uploader--theme-light');
             expect(uploader).toHaveClass('lumx-uploader--variant-rounded');
+        });
+
+        it('should render file input', () => {
+            const label = 'Label';
+            const accept = '*';
+            const { uploader } = setup({ label, fileInputProps: { accept } });
+
+            expect(uploader.tagName).toBe('LABEL');
+            expect(uploader).toHaveTextContent(label);
+            const inputNative = getByTagName(uploader, 'input');
+            expect(inputNative).toHaveAttribute('type', 'file');
+            expect(inputNative).toHaveAttribute('accept', accept);
+            expect(uploader).toHaveAttribute('for', inputNative.id);
         });
     });
 

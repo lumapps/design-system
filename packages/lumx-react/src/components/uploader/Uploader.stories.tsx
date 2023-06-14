@@ -2,6 +2,7 @@ import { AspectRatio, Size, Uploader, UploaderVariant } from '@lumx/react';
 import { mdiTextBoxPlus } from '@lumx/icons';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 import { iconArgType } from '@lumx/react/stories/controls/icons';
+import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
 
 export default {
     title: 'LumX components/uploader/Uploader',
@@ -15,14 +16,27 @@ export default {
 const UPLOADER_VARIANTS = [UploaderVariant.square, UploaderVariant.rounded, UploaderVariant.circle];
 const UPLOADER_SIZES = [Size.xl, Size.xxl];
 
-export const Empty = {};
-
 export const WithLabel = {
     args: { label: 'Pick a file' },
 };
 
 export const WithLabelAndIcon = {
     args: { label: 'Pick a file', icon: mdiTextBoxPlus },
+};
+
+/**
+ * Use the embedded native input file which also make it possible to drop files onto it.
+ */
+export const WithFileInput = {
+    args: {
+        ...WithLabelAndIcon.args,
+        'fileInputProps.accept': '*',
+        'fileInputProps.multiple': false,
+    },
+    argTypes: {
+        'fileInputProps.onChange': { action: true },
+    },
+    decorators: [withNestedProps()],
 };
 
 /** All variants */
