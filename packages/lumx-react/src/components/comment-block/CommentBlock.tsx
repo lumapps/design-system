@@ -1,4 +1,4 @@
-import React, { Children, forwardRef, KeyboardEvent, KeyboardEventHandler, ReactNode } from 'react';
+import React, { Children, forwardRef, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -6,7 +6,6 @@ import { Avatar, Size, Theme, Tooltip } from '@lumx/react';
 import { Comp, GenericProps, HasTheme, ValueOf } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 
-import isFunction from 'lodash/isFunction';
 import { AvatarProps } from '../avatar/Avatar';
 
 /**
@@ -42,11 +41,20 @@ export interface CommentBlockProps extends GenericProps, HasTheme {
     isRelevant?: boolean;
     /** Comment author name. */
     name?: React.ReactNode;
-    /** On click callback. */
+    /**
+     * On click callback.
+     * @deprecated Use avatarProps instead and/or inject a clickable component in `name`
+     */
     onClick?(): void;
-    /** On mouse enter callback. */
+    /**
+     * On mouse enter callback.
+     * @deprecated Use avatarProps instead and/or inject a clickable component in `name`
+     */
     onMouseEnter?(): void;
-    /** On mouse leave callback. */
+    /**
+     * On mouse leave callback.
+     * @deprecated Use avatarProps instead and/or inject a clickable component in `name`
+     */
     onMouseLeave?(): void;
     /** Comment content. */
     text: ReactNode | string;
@@ -100,11 +108,6 @@ export const CommentBlock: Comp<CommentBlockProps, HTMLDivElement> = forwardRef(
         variant,
         ...forwardedProps
     } = props;
-    const enterKeyPress: KeyboardEventHandler<HTMLElement> = (evt: KeyboardEvent<HTMLElement>) => {
-        if (evt.key === 'Enter' && isFunction(onClick)) {
-            onClick();
-        }
-    };
     const hasChildren = Children.count(children) > 0;
 
     return (
@@ -125,27 +128,19 @@ export const CommentBlock: Comp<CommentBlockProps, HTMLDivElement> = forwardRef(
         >
             <div className={`${CLASSNAME}__wrapper`}>
                 <div className={`${CLASSNAME}__avatar`}>
-                    <Avatar
-                        {...avatarProps}
-                        size={Size.m}
-                        tabIndex={onClick ? 0 : -1}
-                        onClick={onClick}
-                        onKeyPress={enterKeyPress}
-                    />
+                    <Avatar {...avatarProps} size={Size.m} onClick={onClick} />
                 </div>
 
                 <div className={`${CLASSNAME}__container`}>
                     <div className={`${CLASSNAME}__content`}>
                         <div className={`${CLASSNAME}__meta`}>
                             {name && (
+                                // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
                                 <span
                                     className={`${CLASSNAME}__name`}
                                     onClick={onClick}
-                                    onKeyPress={enterKeyPress}
                                     onMouseEnter={onMouseEnter}
                                     onMouseLeave={onMouseLeave}
-                                    role="button"
-                                    tabIndex={onClick ? 0 : -1}
                                 >
                                     {name}
                                 </span>

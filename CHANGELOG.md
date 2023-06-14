@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 -   CommentBlock: `name` & `date` are now optional
+-   CommentBlock: `onClick`, `onMouseEnter` & `onMouseLeave` are now deprecated
 
 ## [3.3.1][] - 2023-06-12
 
