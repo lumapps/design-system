@@ -30,4 +30,6 @@ runs:
             run: yarn install
             shell: bash
 
+        # TODO: cache playwright binaries ?
+
 
