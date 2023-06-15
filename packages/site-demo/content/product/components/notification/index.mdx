@@ -4,6 +4,12 @@
 
 <DemoBlock orientation="horizontal" demo="default" hasPlayButton />
 
+### Accessibility concerns
+
+Notifications use the ARIA `alert` role which will announce itself when it appears.
+
+Clickable notifications (or containing clickable action button) are not easily accessible with the keyboard. Consider moving the focus to the clickable elements and restore the focus to the previous place when the notification is closed.
+
 ### Properties
 
 <PropTable component="Notification" />
