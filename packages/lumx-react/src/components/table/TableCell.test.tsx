@@ -1,10 +1,11 @@
 import React from 'react';
 
-import { queryByClassName } from '@lumx/react/testing/utils/queries';
-import { render, screen } from '@testing-library/react';
+import { getByClassName } from '@lumx/react/testing/utils/queries';
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { render, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
-import { TableCell, TableCellProps } from './TableCell';
+import { TableCell, TableCellProps, ThOrder } from './TableCell';
 
 const CLASSNAME = TableCell.className as string;
 
@@ -22,7 +23,7 @@ const setup = (props: Partial<TableCellProps> = {}) => {
             </Parent>
         </table>,
     );
-    const tableCell = queryByClassName(document.body, CLASSNAME);
+    const tableCell = getByClassName(document.body, CLASSNAME);
     return { props, tableCell };
 };
 
@@ -37,6 +38,31 @@ describe(`<${TableCell.displayName}>`, () => {
         const content = 'Content';
         const { tableCell } = setup({ children: content, variant: 'head' });
         expect(tableCell).toBe(screen.queryByRole('columnheader', { name: content }));
+    });
+
+    it('should render header variant clickable', async () => {
+        const content = 'Content';
+        const onHeaderClick = jest.fn();
+        const { tableCell } = setup({ children: content, variant: 'head', onHeaderClick });
+
+        const headerButton = within(tableCell).getByRole('button', { name: content });
+        await userEvent.click(headerButton);
+        expect(onHeaderClick).toHaveBeenCalled();
+    });
+
+    it('should render header sortable', () => {
+        const { tableCell } = setup({ variant: 'head', isSortable: true });
+        expect(tableCell).toHaveAttribute('aria-sort', 'none');
+    });
+
+    it('should render header sortable ascending', () => {
+        const { tableCell } = setup({ variant: 'head', sortOrder: ThOrder.asc, isSortable: true });
+        expect(tableCell).toHaveAttribute('aria-sort', 'ascending');
+    });
+
+    it('should render header sortable descending', () => {
+        const { tableCell } = setup({ variant: 'head', sortOrder: ThOrder.desc, isSortable: true });
+        expect(tableCell).toHaveAttribute('aria-sort', 'descending');
     });
 
     // Common tests suite.
