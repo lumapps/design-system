@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   CommentBlock: `name` & `date` are now optional
+-   CommentBlock: `onClick`, `onMouseEnter` & `onMouseLeave` are now deprecated
+
 ## [3.3.1][] - 2023-06-12
 
 ### Fixed
@@ -1749,8 +1754,6 @@ _Failed released_
 [unreleased]: https://github.com/lumapps/design-system/compare/v3.2.1...HEAD
 [3.2.1]: https://github.com/lumapps/design-system/compare/v3.2.0...v3.2.1
 [3.2.0]: https://github.com/lumapps/design-system/tree/v3.2.0
-
-
-[Unreleased]: https://github.com/lumapps/design-system/compare/v3.3.1...HEAD
+[unreleased]: https://github.com/lumapps/design-system/compare/v3.3.1...HEAD
 [3.3.1]: https://github.com/lumapps/design-system/compare/v3.3.0...v3.3.1
 [3.3.0]: https://github.com/lumapps/design-system/tree/v3.3.0
