@@ -1,16 +1,10 @@
 /* eslint-disable */
 
 const fs = require('fs');
-const util = require('util');
-const exec = util.promisify(require('child_process').exec);
 
+const { getStoryBookURL } = require('../utils');
 const { CHANGELOG_PATH } = require('../../../configs/path');
 const VERSION_HEADER_REGEXP = /^## \[(.*?)\]\[\]/mg;
-const CHROMATIC_PROJECT_ID = '5fbfb1d508c0520021560f10';
-
-// Get short SHA from version tag (vX.Y.Z)
-const getVersionSHA = (versionTag) => exec(`git rev-parse --short ${versionTag}`)
-    .then(({ stdout }) => stdout.trim());
 
 // Extract changelog from latest version in CHANGELOG.md
 async function getLatestVersionChangelog() {
@@ -29,13 +23,12 @@ async function getLatestVersionChangelog() {
  * Generate release note and create a release on GH.
  */
 async function main({ versionTag, github, context }) {
-    const [{ version, versionChangelog }, versionSHA] = await Promise.all([
+    const [{ version, versionChangelog }, storybookURL] = await Promise.all([
         getLatestVersionChangelog(),
-        getVersionSHA(versionTag),
+        getStoryBookURL(versionTag),
     ]);
 
     const changelogURL = `https://github.com/lumapps/design-system/blob/${versionTag}/CHANGELOG.md`;
-    const storybookURL = `https://${versionSHA}--${CHROMATIC_PROJECT_ID}.chromatic.com/`;
 
     // Release notes
     const body = `### [🎨 StoryBook](${storybookURL})\n\n### [📄 Changelog](${changelogURL})\n\n${versionChangelog}`;

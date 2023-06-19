@@ -1,0 +1,47 @@
+name: 'Update PR body'
+description: 'Update PR body with pattern replace'
+
+inputs:
+    pattern:
+        description: |
+            RexExp pattern to match.
+            This can only match on the beginning of a line in the PR body
+        required: true
+    replace:
+        description: |
+            String to replace the pattern.
+            Can contain capture groups (`$1` to insert the first capture from the regexp pattern)
+        required: true
+    keepLastMatch:
+        description: |
+            Set to true to keep only the last match of the pattern and remove the others.
+    whenNotFound:
+        description: |
+            Change behavior when the pattern is not found.
+            Set to "append" to append the replace string to the end.
+            Set to "ignore" to skip.
+            Else an error is thrown.
+    skipReplaceIf:
+        description: |
+            Skip replace if this expression returns true.
+            This can be used to check a match before replacing it.
+            Example: `skipReplaceIf: "groups[1] === 'foo'"`
+            => Will skip replacing the match if the first capture group is 'foo'.
+
+# Example:
+#   - name: Update PR Body
+#     uses: ./.github/actions/update-pr-body-action
+#     with:
+#         pattern: 'Storybook: .*'
+#         replace: 'StoryBook: https://example.com'
+
+runs:
+    using: composite
+    steps:
+        -   name: Update PR body
+            uses: actions/github-script@v6
+            with:
+                script: |
+                    require("${{ github.action_path }}")({
+                        github, context, inputs: ${{ toJSON(inputs) }}
+                    })
