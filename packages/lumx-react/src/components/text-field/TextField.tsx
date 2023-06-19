@@ -261,7 +261,7 @@ export const TextField: Comp<TextFieldProps, HTMLDivElement> = forwardRef((props
         helper,
         icon,
         id,
-        inputRef,
+        inputRef: inputRefProps,
         isDisabled = disabled,
         isRequired,
         isValid,
@@ -283,6 +283,10 @@ export const TextField: Comp<TextFieldProps, HTMLDivElement> = forwardRef((props
         ...forwardedProps
     } = props;
     const textFieldId = useMemo(() => id || `text-field-${uid()}`, [id]);
+    /** Keep a clean local input ref to manage focus */
+    const localInputRef = useRef<HTMLInputElement | HTMLTextAreaElement | null>(null);
+    /** Merge prop input ref and local input ref */
+    const inputRef = mergeRefs(localInputRef, inputRefProps);
     /**
      * Generate unique ids for both the helper and error texts, in order to
      * later on add them to the input native as aria-describedby. If both the error and the helper are present,
@@ -316,7 +320,8 @@ export const TextField: Comp<TextFieldProps, HTMLDivElement> = forwardRef((props
             onClear(evt);
         }
 
-        const inputElement = inputRef as RefObject<HTMLInputElement | HTMLTextAreaElement>;
+        /** Use local inputRef in case the prop input ref is a `mergeRefs` function. */
+        const inputElement = localInputRef as RefObject<HTMLInputElement | HTMLTextAreaElement>;
 
         if (inputElement && inputElement.current) {
             inputElement.current.focus();
