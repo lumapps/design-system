@@ -8,7 +8,7 @@ export default { title: 'LumX components/autocomplete/Autocomplete' };
 
 const cityNames = CITIES.map((city) => city.text);
 
-export const Simple = ({ theme }: any) => {
+export const Simple = ({ theme, ...args }: any) => {
     const [showSuggestions, setShowSuggestions] = useState(false);
     const [value, setValue] = useState('');
     const inputRef = useRef(null);
@@ -50,6 +50,7 @@ export const Simple = ({ theme }: any) => {
             onChange={onChange}
             onFocus={onFocus}
             inputRef={inputRef}
+            {...args}
         >
             {hasSuggestions && (
                 <List isClickable>
@@ -67,4 +68,9 @@ export const Simple = ({ theme }: any) => {
             )}
         </Autocomplete>
     );
+};
+
+export const WithClearButton = Simple.bind({}) as any;
+WithClearButton.args = {
+    clearButtonProps: { label: 'Clear' },
 };
