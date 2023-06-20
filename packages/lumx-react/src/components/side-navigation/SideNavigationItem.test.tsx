@@ -10,6 +10,8 @@ const CLASSNAME = SideNavigationItem.className as string;
 
 const toggleButtonProps = { label: 'Toggle' };
 
+jest.mock('uid', () => ({ uid: () => 'id' }));
+
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
@@ -37,6 +39,7 @@ describe(`<${SideNavigationItem.displayName}>`, () => {
         expect(sideNavigation).toBe(screen.queryByRole('listitem'));
 
         expect(link).toBeInTheDocument();
+        expect(link).not.toHaveAttribute('aria-expanded');
     });
 
     it('should render a link', () => {
@@ -44,10 +47,11 @@ describe(`<${SideNavigationItem.displayName}>`, () => {
         const { props, link } = setup({ linkProps: { href: 'https://example.com' }, label });
         expect(link).toBe(screen.queryByRole('link', { name: label }));
         expect(link).toHaveAttribute('href', props.linkProps?.href);
+        expect(link).not.toHaveAttribute('aria-expanded');
     });
 
     describe('children', () => {
-        it('should render with children closed', () => {
+        it('should render with children closed unmount', () => {
             const label = 'Side navigation item';
             const { chevron, link, children } = setup({
                 label,
@@ -57,8 +61,28 @@ describe(`<${SideNavigationItem.displayName}>`, () => {
                 ],
             });
             expect(link).toHaveTextContent(label);
+            expect(link).toHaveAttribute('aria-expanded', 'false');
+            expect(link).not.toHaveAttribute('aria-controls');
             expect(chevron).toBeInTheDocument();
             expect(children).not.toBeInTheDocument();
+        });
+
+        it('should render with children closed hidden', () => {
+            const label = 'Side navigation item';
+            const { chevron, link, children } = setup({
+                label,
+                closeMode: 'hide',
+                children: [
+                    <SideNavigationItem key="1" label="Child 1" toggleButtonProps={toggleButtonProps} />,
+                    <SideNavigationItem key="3" label="Child 2" toggleButtonProps={toggleButtonProps} />,
+                ],
+            });
+            expect(link).toHaveTextContent(label);
+            expect(link).toHaveAttribute('aria-expanded', 'false');
+            expect(link).toHaveAttribute('aria-controls', children?.id);
+            expect(chevron).toBeInTheDocument();
+            // Children are in DOM but hidden in CSS (can't test that here)
+            expect(children).toBeInTheDocument();
         });
 
         it('should render with children opened', () => {
@@ -72,6 +96,8 @@ describe(`<${SideNavigationItem.displayName}>`, () => {
                 ],
             });
             expect(link).toHaveTextContent(label);
+            expect(link).toHaveAttribute('aria-expanded', 'true');
+            expect(link).toHaveAttribute('aria-controls', children?.id);
             expect(chevron).toBeInTheDocument();
             expect(children).toBeInTheDocument();
         });
@@ -79,22 +105,25 @@ describe(`<${SideNavigationItem.displayName}>`, () => {
 
     describe('children and link', () => {
         it('should render with children and link', () => {
+            const onActionClick = jest.fn();
             const label = 'Side navigation item';
             const { props, toggle, link } = setup({
                 label,
                 linkProps: { href: 'https://example.com' },
+                onActionClick,
                 children: [
                     <SideNavigationItem key="1" label="Child 1" toggleButtonProps={toggleButtonProps} />,
                     <SideNavigationItem key="3" label="Child 2" toggleButtonProps={toggleButtonProps} />,
                 ],
             });
-
             // Link
             expect(link).toBe(screen.queryByRole('link', { name: label }));
             expect(link).toHaveAttribute('href', props.linkProps?.href);
 
             // Toggle button
             expect(toggle).toBe(screen.queryByRole('button', { name: toggleButtonProps.label }));
+            expect(toggle).toHaveAttribute('aria-expanded', 'false');
+            expect(toggle).not.toHaveAttribute('aria-controls');
         });
     });
 
