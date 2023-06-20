@@ -22,9 +22,12 @@
     align-items: center;
     min-height: map.get($lumx-sizes, lumx-base-const("size", "M"));
     padding: 0 $lumx-spacing-unit;
+    text-align: start;
     text-decoration: none;
+    border: none;
     border-radius: var(--lumx-border-radius);
     outline: none;
+    appearance: none;
 }
 
 @mixin lumx-side-navigation-link-icon($position) {

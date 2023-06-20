@@ -39,6 +39,7 @@ describe(`<${SideNavigationItem.displayName}>`, () => {
         expect(sideNavigation).toBe(screen.queryByRole('listitem'));
 
         expect(link).toBeInTheDocument();
+        expect(link).toBe(screen.queryByRole('button', { name: label }));
         expect(link).not.toHaveAttribute('aria-expanded');
     });
 

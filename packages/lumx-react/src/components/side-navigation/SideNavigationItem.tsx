@@ -8,10 +8,10 @@ import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
 
 import { Emphasis, Icon, Size, IconButton, IconButtonProps } from '@lumx/react';
 
-import { Callback, Comp, GenericProps, isComponent } from '@lumx/react/utils/type';
+import { Comp, GenericProps, isComponent } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
-import { onEnterPressed } from '@lumx/react/utils/event';
 import { renderLink } from '@lumx/react/utils/renderLink';
+import { renderButtonOrLink } from '@lumx/react/utils/renderButtonOrLink';
 
 /**
  * Defines the props of the component.
@@ -142,14 +142,13 @@ export const SideNavigationItem: Comp<SideNavigationItemProps, HTMLLIElement> = 
                     />
                 </div>
             ) : (
-                renderLink(
+                renderButtonOrLink(
                     {
                         linkAs,
                         ...linkProps,
                         className: `${CLASSNAME}__link`,
                         tabIndex: 0,
                         onClick,
-                        onKeyDown: onClick ? onEnterPressed(onClick as Callback) : undefined,
                         ...ariaProps,
                     },
                     icon && <Icon className={`${CLASSNAME}__icon`} icon={icon} size={Size.xs} />,

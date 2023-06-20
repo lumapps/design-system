@@ -1,7 +1,7 @@
 import React, { ReactElement, ReactNode } from 'react';
 
 interface Props {
-    linkAs: any;
+    linkAs?: any;
 }
 
 /**

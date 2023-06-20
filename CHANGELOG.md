@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Uploader: use label and input file elements when providing `fileInputProps`
 -   Autocomplete: fix focus field when clear button is triggered
 -   SideNavigationItem: fix closed/opened state accessibility
+-   SideNavigationItem: use button element by default for better accessibility
 
 ## [3.3.1][] - 2023-06-12
 
