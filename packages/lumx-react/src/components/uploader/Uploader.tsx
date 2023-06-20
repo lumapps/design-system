@@ -1,10 +1,11 @@
 import React, { forwardRef, MouseEventHandler } from 'react';
-
 import classNames from 'classnames';
+import uniqueId from 'lodash/uniqueId';
 
 import { AspectRatio, Icon, Size, Theme } from '@lumx/react';
 import { Comp, GenericProps, HasTheme, ValueOf } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
 
 /**
  * Uploader variants.
@@ -22,6 +23,13 @@ export type UploaderVariant = ValueOf<typeof UploaderVariant>;
 export type UploaderSize = Extract<Size, 'xl' | 'xxl'>;
 
 /**
+ * Extend native HTML input props with specialized `onChange` providing the a `File` array.
+ */
+interface FileInputProps extends Omit<React.ComponentProps<'input'>, 'onChange'> {
+    onChange(files: File[], evt: React.ChangeEvent<HTMLInputElement>): void;
+}
+
+/**
  * Defines the props of the component.
  */
 export interface UploaderProps extends GenericProps, HasTheme {
@@ -36,7 +44,9 @@ export interface UploaderProps extends GenericProps, HasTheme {
     /** Variant. */
     variant?: UploaderVariant;
     /** On click callback. */
-    onClick?: MouseEventHandler<HTMLDivElement>;
+    onClick?: MouseEventHandler;
+    /** Handle file selection with a native input file. */
+    fileInputProps?: FileInputProps;
 }
 
 /**
@@ -66,14 +76,30 @@ const DEFAULT_PROPS: Partial<UploaderProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Uploader: Comp<UploaderProps, HTMLDivElement> = forwardRef((props, ref) => {
-    const { aspectRatio, className, label, icon, size, theme, variant, ...forwardedProps } = props;
+export const Uploader: Comp<UploaderProps> = forwardRef((props, ref) => {
+    const { aspectRatio, className, label, icon, size, theme, variant, fileInputProps, ...forwardedProps } = props;
     // Adjust to square aspect ratio when using circle variants.
     const adjustedAspectRatio = variant === UploaderVariant.circle ? AspectRatio.square : aspectRatio;
 
+    const inputId = React.useMemo(() => fileInputProps?.id || uniqueId('uploader-input-'), [fileInputProps?.id]);
+    const [isDragHovering, unsetDragHovering, setDragHovering] = useBooleanState(false);
+    const wrapper = fileInputProps
+        ? { Component: 'label' as const, props: { htmlFor: inputId } as const }
+        : { Component: 'button' as const, props: { type: 'button' } as const };
+
+    const onChange = React.useMemo(() => {
+        if (!fileInputProps?.onChange) return undefined;
+        return (evt: React.ChangeEvent<HTMLInputElement>) => {
+            const fileList = evt.target.files;
+            const files = fileList ? Array.from(fileList) : [];
+            fileInputProps.onChange(files, evt);
+        };
+    }, [fileInputProps]);
+
     return (
-        <div
-            ref={ref}
+        <wrapper.Component
+            ref={ref as any}
+            {...wrapper.props}
             {...forwardedProps}
             className={classNames(
                 className,
@@ -83,21 +109,31 @@ export const Uploader: Comp<UploaderProps, HTMLDivElement> = forwardRef((props, 
                     size,
                     theme,
                     variant,
+                    isDragHovering,
                 }),
             )}
         >
-            <div className={`${CLASSNAME}__background`} />
+            <span className={`${CLASSNAME}__background`} />
 
-            <div className={`${CLASSNAME}__wrapper`}>
-                {icon && (
-                    <div className={`${CLASSNAME}__icon`}>
-                        <Icon icon={icon} size={Size.s} />
-                    </div>
-                )}
+            <span className={`${CLASSNAME}__wrapper`}>
+                {icon && <Icon className={`${CLASSNAME}__icon`} icon={icon} size={Size.s} />}
 
                 {label && <span className={`${CLASSNAME}__label`}>{label}</span>}
-            </div>
-        </div>
+            </span>
+
+            {fileInputProps && (
+                <input
+                    type="file"
+                    id={inputId}
+                    className={`${CLASSNAME}__input`}
+                    {...fileInputProps}
+                    onChange={onChange}
+                    onDragEnter={setDragHovering}
+                    onDragLeave={unsetDragHovering}
+                    onDrop={unsetDragHovering}
+                />
+            )}
+        </wrapper.Component>
     );
 });
 Uploader.displayName = COMPONENT_NAME;

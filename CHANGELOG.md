@@ -20,6 +20,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   TableCell: fix clickable & sortable header cell accessibility
+-   Uploader: use button element by default
+-   Uploader: use label and input file elements when providing `fileInputProps`
 
 ## [3.3.1][] - 2023-06-12
 

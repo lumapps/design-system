@@ -7,9 +7,11 @@
 
     @include lumx-state-transition;
 
-    position: relative;
+    display: grid;
     cursor: pointer;
+    border: none;
     outline: none;
+    padding: 0;
 
     &--theme-light {
         @include lumx-state(lumx-base-const("state", "DEFAULT"), lumx-base-const("emphasis", "MEDIUM"), "dark");
@@ -22,7 +24,8 @@
             @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "MEDIUM"), "dark");
         }
 
-        &[data-focus-visible-added] {
+        &[data-focus-visible-added],
+        &:focus-within {
             @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "MEDIUM"), "dark");
         }
     }
@@ -38,35 +41,47 @@
             @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "MEDIUM"), "light");
         }
 
-        &[data-focus-visible-added] {
+        &[data-focus-visible-added],
+        &:focus-within {
             @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "MEDIUM"), "light");
         }
     }
 
-    &--variant-square {
-        border-radius: 0;
-    }
-
     &--variant-rounded {
-        border-radius: var(--lumx-border-radius);
+        &, #{$self}__wrapper {
+            border-radius: var(--lumx-border-radius);
+        }
     }
 
     &--variant-circle {
-        border-radius: 50%;
+        &, #{$self}__wrapper {
+            border-radius: 50%;
+        }
+    }
+
+    &__background,
+    &__wrapper,
+    &__input {
+        // Stack all onto the same cell
+        grid-area: 1 / 1 / 1 / 1;
+    }
+
+    &__input {
+        opacity: 0;
     }
 
     &__wrapper {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        padding: 0 $lumx-spacing-unit * 2;
+        height: 100%;
         user-select: none;
+    }
+
+    &--is-drag-hovering &__wrapper {
+        outline: 2px dashed $lumx-color-dark-L2;
+        outline-offset: -$lumx-spacing-unit;
     }
 
     &__icon {
