@@ -89,14 +89,14 @@ jobs:
                 id: short_sha
                 run: echo "short_sha=$(git rev-parse --short ${{github.event.pull_request.head.sha}})" >> $GITHUB_OUTPUT
 
-            -   name: "Mark storybook as outdated"
+            -   name: "Mark storybook URL as outdated"
                 uses: ./.github/actions/update-pr-body
                 with:
                     pattern: 'StoryBook: ((https:\/\/([a-z0-9]+)--[^ ]*).*)'
-                    # Ignore if the short SHA in the storybook URL is up-to-date
+                    # Ignore if the short SHA in the storybook URL is up-to-date or if it was already marked as outdated
                     skipReplaceIf: |
                         groups[3] === "${{steps.short_sha.outputs.short_sha}}"
-                        && !groups[0].includes("Outdated commit")
+                        || groups[0].includes("Outdated commit")
                     replace: 'StoryBook: $1 **⚠️ Outdated commit**'
                     whenNotFound: 'ignore'
                     keepLastMatch: true
