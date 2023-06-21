@@ -2,15 +2,16 @@ import React, { Children, forwardRef, ReactNode } from 'react';
 
 import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
+import { uid } from 'uid';
 
 import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
 
 import { Emphasis, Icon, Size, IconButton, IconButtonProps } from '@lumx/react';
 
-import { Callback, Comp, GenericProps, isComponent } from '@lumx/react/utils/type';
+import { Comp, GenericProps, isComponent } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
-import { onEnterPressed } from '@lumx/react/utils/event';
 import { renderLink } from '@lumx/react/utils/renderLink';
+import { renderButtonOrLink } from '@lumx/react/utils/renderButtonOrLink';
 
 /**
  * Defines the props of the component.
@@ -94,6 +95,14 @@ export const SideNavigationItem: Comp<SideNavigationItemProps, HTMLLIElement> = 
     const shouldSplitActions = Boolean(onActionClick);
     const showChildren = hasContent && isOpen;
 
+    const contentId = React.useMemo(uid, []);
+    const ariaProps: any = {};
+    if (hasContent) {
+        ariaProps['aria-expanded'] = !!showChildren;
+        // Associate with content ID only if in DOM (shown or hidden and not unmounted)
+        ariaProps['aria-controls'] = showChildren || closeMode === 'hide' ? contentId : undefined;
+    }
+
     return (
         <li
             ref={ref}
@@ -129,17 +138,18 @@ export const SideNavigationItem: Comp<SideNavigationItemProps, HTMLLIElement> = 
                         size={Size.m}
                         emphasis={Emphasis.low}
                         onClick={onActionClick}
+                        {...ariaProps}
                     />
                 </div>
             ) : (
-                renderLink(
+                renderButtonOrLink(
                     {
                         linkAs,
                         ...linkProps,
                         className: `${CLASSNAME}__link`,
                         tabIndex: 0,
                         onClick,
-                        onKeyDown: onClick ? onEnterPressed(onClick as Callback) : undefined,
+                        ...ariaProps,
                     },
                     icon && <Icon className={`${CLASSNAME}__icon`} icon={icon} size={Size.xs} />,
                     <span>{label}</span>,
@@ -153,7 +163,11 @@ export const SideNavigationItem: Comp<SideNavigationItemProps, HTMLLIElement> = 
                 )
             )}
 
-            {(closeMode === 'hide' || showChildren) && <ul className={`${CLASSNAME}__children`}>{content}</ul>}
+            {(closeMode === 'hide' || showChildren) && (
+                <ul className={`${CLASSNAME}__children`} id={contentId}>
+                    {content}
+                </ul>
+            )}
         </li>
     );
 });

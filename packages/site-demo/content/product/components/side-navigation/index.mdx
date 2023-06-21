@@ -28,6 +28,14 @@ Side navigation items have three emphasises: `low`, `medium`, and `high`. Defaul
 
 <DemoBlock demo="emphasis" />
 
+### Accessibility concerns
+
+Side navigations use standard HTML nested unordered list. Consider wrapping the `SideNavigation` in a `<nav>` to mark the navigation region.
+
+Side navigation items default to a list item with a button inside. Adding a `linkProps.href` or `linkAs` prop will transform it into a link (or use the custom link component you provided).
+
+Side navigation items with children use the [ARIA disclosure pattern](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/) using the `isOpen` prop to control the expand/close state that should be toggled when the `onClick` is called. Combining `linkProps.href` and `onActionClick` will split the toggle button and the link.
+
 ### SideNavigation properties
 
 <PropTable component="SideNavigation" />
