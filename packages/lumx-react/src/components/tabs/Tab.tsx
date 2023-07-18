@@ -15,6 +15,8 @@ export interface TabProps extends GenericProps {
     children?: never;
     /** Icon (SVG path). */
     icon?: IconProps['icon'];
+    /** Icon component properties. */
+    iconProps?: Omit<IconProps, 'icon'>;
     /** Native id property. */
     id?: string;
     /** Whether the tab is active or not. */
@@ -54,6 +56,7 @@ export const Tab: Comp<TabProps, HTMLButtonElement> = forwardRef((props, ref) =>
         className,
         disabled,
         icon,
+        iconProps = {},
         id,
         isActive: propIsActive,
         isDisabled = disabled,
@@ -110,7 +113,7 @@ export const Tab: Comp<TabProps, HTMLButtonElement> = forwardRef((props, ref) =>
             aria-selected={isActive}
             aria-controls={state?.tabPanelId}
         >
-            {icon && <Icon icon={icon} size={Size.xs} />}
+            {icon && <Icon icon={icon} size={Size.xs} {...iconProps} />}
             {label && <span>{label}</span>}
         </button>
     );

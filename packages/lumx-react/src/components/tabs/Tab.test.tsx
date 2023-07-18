@@ -38,6 +38,11 @@ describe(`<${Tab.displayName}>`, () => {
         expect(icon).toBeInTheDocument();
     });
 
+    it('should render icon with props', () => {
+        const { icon } = setup({ icon: mdiPlay, iconProps: { color: 'green', colorVariant: 'L2', hasShape: true } });
+        expect(icon).toHaveClass('lumx-icon--color-green', 'lumx-icon--color-variant-L2');
+    });
+
     commonTestsSuiteRTL(setup, {
         baseClassName: CLASSNAME,
         forwardClassName: 'tab',
