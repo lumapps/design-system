@@ -14,12 +14,14 @@ const portrait2 = '/demo-assets/portrait2.jpg';
 const portrait3 = '/demo-assets/portrait3.jpg';
 const square1 = '/demo-assets/square1.jpg';
 const square2 = '/demo-assets/square2.jpg';
+const defaultSvg = '/demo-assets/defaultSvg.svg';
 
 export const AVATAR_IMAGES = { avatar1, avatar2, avatar3, avatar4 };
 export const SQUARE_IMAGES = { square1, square2 };
+export const SVG_IMAGES = { defaultSvg };
 export const LANDSCAPE_IMAGES = { landscape1, landscape1s200, landscape2, landscape3 };
 export const PORTRAIT_IMAGES = { portrait1, portrait1s200, portrait2, portrait3 };
-export const IMAGES = { ...LANDSCAPE_IMAGES, ...PORTRAIT_IMAGES, ...SQUARE_IMAGES, ...AVATAR_IMAGES };
+export const IMAGES = { ...LANDSCAPE_IMAGES, ...PORTRAIT_IMAGES, ...SQUARE_IMAGES, ...AVATAR_IMAGES, ...SVG_IMAGES };
 
 export const avatarImageArgType = getSelectArgType(AVATAR_IMAGES);
 export const squareImageArgType = getSelectArgType(SQUARE_IMAGES);
@@ -51,9 +53,13 @@ export const PORTRAIT_IMAGE_SIZES: Record<keyof typeof PORTRAIT_IMAGES, Size> = 
     portrait2: { width: 350, height: 500 },
     portrait3: { width: 300, height: 500 },
 };
+export const SVG_IMAGE_SIZES: Record<keyof typeof SVG_IMAGES, Size> = {
+    defaultSvg: { width: 0, height: 0 },
+};
 export const IMAGE_SIZES: Record<keyof typeof IMAGES, Size> = {
     ...LANDSCAPE_IMAGE_SIZES,
     ...PORTRAIT_IMAGE_SIZES,
     ...SQUARE_IMAGE_SIZES,
     ...AVATAR_IMAGE_SIZES,
+    ...SVG_IMAGE_SIZES,
 };
