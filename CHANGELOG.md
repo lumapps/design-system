@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Tab: add icon customisation with `iconProps`
+
 ## [3.4.0][] - 2023-07-06
 
 ### Changed
@@ -1773,7 +1777,5 @@ _Failed released_
 [unreleased]: https://github.com/lumapps/design-system/compare/v3.3.1...HEAD
 [3.3.1]: https://github.com/lumapps/design-system/compare/v3.3.0...v3.3.1
 [3.3.0]: https://github.com/lumapps/design-system/tree/v3.3.0
-
-
-[Unreleased]: https://github.com/lumapps/design-system/compare/v3.4.0...HEAD
+[unreleased]: https://github.com/lumapps/design-system/compare/v3.4.0...HEAD
 [3.4.0]: https://github.com/lumapps/design-system/tree/v3.4.0
