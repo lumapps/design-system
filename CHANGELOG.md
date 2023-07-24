@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Tab: add icon customisation with `iconProps`
 
+### Fixed
+
+-   Thumbnail: fix an issue with SVG images not loading on firefox when no width/height is specified.
+
 ## [3.4.0][] - 2023-07-06
 
 ### Changed

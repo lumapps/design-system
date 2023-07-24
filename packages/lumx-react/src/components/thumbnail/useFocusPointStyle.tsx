@@ -74,8 +74,8 @@ export const useFocusPointStyle = (
             setStyle({ visibility: 'hidden' });
             return;
         }
-        if (!containerSize) {
-            // Missing container size abort focus point compute.
+        if (!containerSize || !imageSize.height || !imageSize.width) {
+            // Missing container or image size abort focus point compute.
             setStyle({});
             return;
         }

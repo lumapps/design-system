@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 export type LoadingState = 'isLoading' | 'isLoaded' | 'hasError';
 
 function getState(img: HTMLImageElement | null | undefined, event?: Event) {
-    // Error event occurred or image loaded empty.
-    if (event?.type === 'error' || (img?.complete && (img?.naturalWidth === 0 || img?.naturalHeight === 0))) {
+    // Error event occurred.
+    if (event?.type === 'error') {
         return 'hasError';
     }
     // Image is undefined or incomplete.

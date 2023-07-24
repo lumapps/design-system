@@ -126,6 +126,18 @@ export const FillHeightAndRatio = {
     ],
 };
 
+/**
+ * Simple thumbnail with svg image
+ * */
+export const WithSvgImages = {
+    args: {
+        image: IMAGES.defaultSvg,
+        size: Size.xxl,
+        fillHeight: true,
+        'focusPoint.x': 1,
+    },
+};
+
 export const Original = () => (
     <>
         <h1>Ratio: Original</h1>
