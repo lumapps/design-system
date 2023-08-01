@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { mdiAbTesting } from '@lumx/icons';
+import { mdiAbTesting, mdiImageBroken } from '@lumx/icons';
 import { Alignment, AspectRatio, Badge, FlexBox, Icon, Size, Thumbnail, ThumbnailVariant } from '@lumx/react';
 import { CustomLink } from '@lumx/react/stories/utils/CustomLink';
 import { IMAGE_SIZES, imageArgType, IMAGES } from '@lumx/react/stories/controls/image';
@@ -42,6 +42,10 @@ export const Simple = {
 /** Loading state*/
 export const IsLoading = {
     args: { ...Simple.args, isLoading: true },
+};
+
+export const WithoutSource = {
+    args: { image: IMAGES.emptyImage, size: Size.xxl, aspectRatio: AspectRatio.square },
 };
 
 /** Thumbnail error fallback and size variants */

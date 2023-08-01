@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   Thumbnail: synchronously set error for image with empty source.
+
 ## [3.5.0][] - 2023-07-27
 
 ### Added
@@ -1785,7 +1789,5 @@ _Failed released_
 [3.3.0]: https://github.com/lumapps/design-system/tree/v3.3.0
 [unreleased]: https://github.com/lumapps/design-system/compare/v3.4.0...HEAD
 [3.4.0]: https://github.com/lumapps/design-system/tree/v3.4.0
-
-
-[Unreleased]: https://github.com/lumapps/design-system/compare/v3.5.0...HEAD
+[unreleased]: https://github.com/lumapps/design-system/compare/v3.5.0...HEAD
 [3.5.0]: https://github.com/lumapps/design-system/tree/v3.5.0
