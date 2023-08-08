@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Thumbnail: remove undesired console log.
+
 ## [3.5.1][] - 2023-08-02
 
 ### Changed
@@ -1793,7 +1797,5 @@ _Failed released_
 [3.4.0]: https://github.com/lumapps/design-system/tree/v3.4.0
 [unreleased]: https://github.com/lumapps/design-system/compare/v3.5.0...HEAD
 [3.5.0]: https://github.com/lumapps/design-system/tree/v3.5.0
-
-
-[Unreleased]: https://github.com/lumapps/design-system/compare/v3.5.1...HEAD
+[unreleased]: https://github.com/lumapps/design-system/compare/v3.5.1...HEAD
 [3.5.1]: https://github.com/lumapps/design-system/tree/v3.5.1

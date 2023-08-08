@@ -5,7 +5,6 @@ export type LoadingState = 'isLoading' | 'isLoaded' | 'hasError';
 function getState(img: HTMLImageElement | null | undefined, event?: Event) {
     // Error event occurred or image has no source.
     if (event?.type === 'error' || (img?.complete && !img.getAttribute('src'))) {
-        console.log('HAS ERROR');
         return 'hasError';
     }
     // Image is undefined or incomplete.
