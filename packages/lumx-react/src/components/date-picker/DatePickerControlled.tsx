@@ -1,10 +1,12 @@
 import React, { forwardRef } from 'react';
-import moment from 'moment';
 import classNames from 'classnames';
 import { DatePickerProps, Emphasis, IconButton, Toolbar } from '@lumx/react';
 import { mdiChevronLeft, mdiChevronRight } from '@lumx/icons';
-import { getAnnotatedMonthCalendar, getWeekDays } from '@lumx/core/js/date-picker';
 import { Comp } from '@lumx/react/utils/type';
+import { getMonthCalendar } from '@lumx/react/utils/date/getMonthCalendar';
+import { isSameDay } from '@lumx/react/utils/date/isSameDay';
+import { parseLocale } from '@lumx/react/utils/locale/parseLocale';
+import { Locale } from '@lumx/react/utils/locale/types';
 import { CLASSNAME } from './constants';
 
 /**
@@ -45,13 +47,10 @@ export const DatePickerControlled: Comp<DatePickerControlledProps, HTMLDivElemen
         todayOrSelectedDateRef,
         value,
     } = props;
-    const days = React.useMemo(() => {
-        return getAnnotatedMonthCalendar(locale, minDate, maxDate, moment(selectedMonth));
+    const { weeks, weekDays } = React.useMemo(() => {
+        const localeObj = parseLocale(locale) as Locale;
+        return getMonthCalendar(localeObj, selectedMonth, minDate, maxDate);
     }, [locale, minDate, maxDate, selectedMonth]);
-
-    const weekDays = React.useMemo(() => {
-        return getWeekDays(locale);
-    }, [locale]);
 
     return (
         <div ref={ref} className={`${CLASSNAME}`}>
@@ -75,49 +74,46 @@ export const DatePickerControlled: Comp<DatePickerControlledProps, HTMLDivElemen
                 }
                 label={
                     <span className={`${CLASSNAME}__month`}>
-                        {moment(selectedMonth).locale(locale).format('MMMM YYYY')}
+                        {selectedMonth.toLocaleDateString(locale, { year: 'numeric', month: 'long' })}
                     </span>
                 }
             />
             <div className={`${CLASSNAME}__calendar`}>
                 <div className={`${CLASSNAME}__week-days ${CLASSNAME}__days-wrapper`}>
-                    {weekDays.map((weekDay) => (
-                        <div key={weekDay.unix()} className={`${CLASSNAME}__day-wrapper`}>
-                            <span className={`${CLASSNAME}__week-day`}>
-                                {weekDay.format('dddd').slice(0, 1).toLocaleUpperCase()}
-                            </span>
+                    {weekDays.map(({ letter, number }) => (
+                        <div key={number} className={`${CLASSNAME}__day-wrapper`}>
+                            <span className={`${CLASSNAME}__week-day`}>{letter.toLocaleUpperCase()}</span>
                         </div>
                     ))}
                 </div>
 
                 <div className={`${CLASSNAME}__month-days ${CLASSNAME}__days-wrapper`}>
-                    {days.map((annotatedDate) => {
-                        if (annotatedDate.isDisplayed) {
+                    {weeks.flatMap((week, weekIndex) => {
+                        return weekDays.map((weekDay, dayIndex) => {
+                            const { date, isOutOfRange } = week[weekDay.number] || {};
+                            const key = `${weekIndex}-${dayIndex}`;
+                            const isToday = !isOutOfRange && date && isSameDay(date, new Date());
+                            const isSelected = date && value && isSameDay(value, date);
+
                             return (
-                                <div key={annotatedDate.date.unix()} className={`${CLASSNAME}__day-wrapper`}>
-                                    <button
-                                        ref={
-                                            (value && annotatedDate.date.isSame(value, 'day')) ||
-                                            (!value && annotatedDate.isToday)
-                                                ? todayOrSelectedDateRef
-                                                : null
-                                        }
-                                        className={classNames(`${CLASSNAME}__month-day`, {
-                                            [`${CLASSNAME}__month-day--is-selected`]:
-                                                value && annotatedDate.date.isSame(value, 'day'),
-                                            [`${CLASSNAME}__month-day--is-today`]:
-                                                annotatedDate.isClickable && annotatedDate.isToday,
-                                        })}
-                                        disabled={!annotatedDate.isClickable}
-                                        type="button"
-                                        onClick={() => onChange(moment(annotatedDate.date).toDate())}
-                                    >
-                                        <span>{annotatedDate.date.format('DD')}</span>
-                                    </button>
+                                <div key={key} className={`${CLASSNAME}__day-wrapper`}>
+                                    {date && (
+                                        <button
+                                            ref={isSelected || (!value && isToday) ? todayOrSelectedDateRef : null}
+                                            className={classNames(`${CLASSNAME}__month-day`, {
+                                                [`${CLASSNAME}__month-day--is-selected`]: isSelected,
+                                                [`${CLASSNAME}__month-day--is-today`]: isToday,
+                                            })}
+                                            disabled={isOutOfRange}
+                                            type="button"
+                                            onClick={() => onChange(date)}
+                                        >
+                                            <span>{date.toLocaleDateString(locale, { day: 'numeric' })}</span>
+                                        </button>
+                                    )}
                                 </div>
                             );
-                        }
-                        return <div key={annotatedDate.date.unix()} className={`${CLASSNAME}__day-wrapper`} />;
+                        });
                     })}
                 </div>
             </div>

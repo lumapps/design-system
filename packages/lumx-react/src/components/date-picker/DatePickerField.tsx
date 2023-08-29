@@ -1,10 +1,7 @@
-import { DatePicker, Placement, Popover, TextField, IconButtonProps } from '@lumx/react';
-import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
-
-import moment from 'moment';
-
 import React, { forwardRef, SyntheticEvent, useCallback, useRef, useState } from 'react';
 
+import { DatePicker, IconButtonProps, Placement, Popover, TextField } from '@lumx/react';
+import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { Comp, GenericProps } from '@lumx/react/utils/type';
 
@@ -97,6 +94,9 @@ export const DatePickerField: Comp<DatePickerFieldProps, HTMLDivElement> = forwa
         onClose();
     };
 
+    // Format date for text field
+    const textFieldValue = value?.toLocaleDateString(locale, { year: 'numeric', month: 'long', day: 'numeric' }) || '';
+
     return (
         <>
             <TextField
@@ -105,7 +105,7 @@ export const DatePickerField: Comp<DatePickerFieldProps, HTMLDivElement> = forwa
                 name={name}
                 forceFocusStyle={isOpen}
                 textFieldRef={anchorRef}
-                value={value ? moment(value).locale(locale).format('LL') : ''}
+                value={textFieldValue}
                 onClick={toggleSimpleMenu}
                 onChange={onTextFieldChange}
                 onKeyPress={handleKeyboardNav}
