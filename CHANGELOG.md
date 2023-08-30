@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.5.3][] - 2023-08-30
+
 ### Changed
 
 -   Upgrade dependency `classnames` to v2.3.2
@@ -1807,5 +1809,6 @@ _Failed released_
 [3.5.1]: https://github.com/lumapps/design-system/tree/v3.5.1
 
 
-[Unreleased]: https://github.com/lumapps/design-system/compare/v3.5.2...HEAD
+[Unreleased]: https://github.com/lumapps/design-system/compare/v3.5.3...HEAD
+[3.5.3]: https://github.com/lumapps/design-system/compare/v3.5.2...v3.5.3
 [3.5.2]: https://github.com/lumapps/design-system/tree/v3.5.2
