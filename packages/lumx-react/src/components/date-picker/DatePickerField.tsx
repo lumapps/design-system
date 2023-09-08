@@ -4,6 +4,7 @@ import { DatePicker, IconButtonProps, Placement, Popover, TextField } from '@lum
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { Comp, GenericProps } from '@lumx/react/utils/type';
+import { getCurrentLocale } from '@lumx/react/utils/locale/getCurrentLocale';
 
 /**
  * Defines the props of the component.
@@ -14,7 +15,7 @@ export interface DatePickerFieldProps extends GenericProps {
     /** Whether the component is disabled or not. */
     isDisabled?: boolean;
     /** Locale (language or region) to use. */
-    locale: string;
+    locale?: string;
     /** Date after which dates can't be selected. */
     maxDate?: Date;
     /** Date before which dates can't be selected. */
@@ -49,7 +50,7 @@ export const DatePickerField: Comp<DatePickerFieldProps, HTMLDivElement> = forwa
         defaultMonth,
         disabled,
         isDisabled = disabled,
-        locale,
+        locale = getCurrentLocale(),
         maxDate,
         minDate,
         name,

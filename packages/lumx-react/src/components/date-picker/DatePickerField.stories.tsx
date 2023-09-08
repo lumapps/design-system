@@ -8,7 +8,6 @@ export default {
     component: DatePickerField,
     args: {
         ...DatePickerField.defaultProps,
-        locale: 'fr',
         'nextButtonProps.label': 'Next month',
         'previousButtonProps.label': 'Previous month',
     },
