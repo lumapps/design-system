@@ -73,9 +73,5 @@
         "webpack": "^4.44.1",
         "webpack-notifier": "^1.8.0",
         "webpackbar": "^4.0.0"
-    },
-    "peerDependencies": {
-        "moment": ">= 2",
-        "moment-range": "^4.0.2"
     }
 }
