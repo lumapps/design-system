@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 -   `@lumx/react` no long depend on `moment` or `moment-range` to generate the date picker.
+-   Deprecated `@lumx/core/js/date-picker` functions that **will be removed in the next major version** along with `moment` and `moment-range`.
 
 ## [3.5.3][] - 2023-08-30
 

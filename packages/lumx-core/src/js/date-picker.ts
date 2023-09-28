@@ -16,6 +16,8 @@ interface AnnotatedDate {
 /**
  * Get the list of days in a week based on locale.
  *
+ * @deprecated will be removed in next major version along with the removal of moment (no replacement planned)
+ *
  * @param  locale The locale using to generate the order of days in a week.
  * @return The list of days in a week based on locale.
  */
@@ -25,6 +27,8 @@ export function getWeekDays(locale: string): Moment[] {
 
 /**
  * Get month calendar based on locale and start date.
+ *
+ * @deprecated will be removed in next major version along with the removal of moment (no replacement planned)
  *
  * @param  locale        The locale using to generate the order of days in a week.
  * @param  selectedMonth The selected month.
@@ -43,6 +47,8 @@ export function getMonthCalendar(locale: string, selectedMonth?: Moment): Moment
 /**
  * Get month calendar based on locale and start date.
  * Each day is annotated to know if they are displayed and/or clickable.
+ *
+ * @deprecated will be removed in next major version along with the removal of moment (no replacement planned)
  *
  * @param  locale        The locale using to generate the order of days in a week.
  * @param  minDate       The first selectable date.
