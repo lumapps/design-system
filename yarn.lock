@@ -3571,9 +3571,6 @@ __metadata:
     style-dictionary: ^3.9.0
     tinycolor2: ^1.4.1
     version-changelog: ^3.1.1
-  peerDependencies:
-    moment: ">= 2"
-    moment-range: ^4.0.2
   languageName: unknown
   linkType: soft
 
@@ -11822,7 +11819,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"es6-symbol@npm:^3.1.0, es6-symbol@npm:^3.1.1, es6-symbol@npm:^3.1.3":
+"es6-symbol@npm:^3.1.1, es6-symbol@npm:^3.1.3":
   version: 3.1.3
   resolution: "es6-symbol@npm:3.1.3"
   dependencies:
@@ -18547,8 +18544,6 @@ __metadata:
     intersection-observer: ^0.7.0
     lodash: 4.17.21
     lunr: ^2.3.9
-    moment: ^2.29.4
-    moment-range: ^4.0.2
     postcss: ^8.5.6
     prism-react-renderer: ^0.1.5
     prismjs: ^1.25.0
@@ -19947,18 +19942,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"moment-range@npm:^4.0.2":
-  version: 4.0.2
-  resolution: "moment-range@npm:4.0.2"
-  dependencies:
-    es6-symbol: ^3.1.0
-  peerDependencies:
-    moment: ">= 2"
-  checksum: ff7425eed2600b1450ae25a7d074fb1edbc7956199f9eca974d5b2bc7885912dd08205e55675eb1b8cbbdcb3647622748861822580bd7327e680ca2202f8ee31
-  languageName: node
-  linkType: hard
-
-"moment@npm:^2.27.0, moment@npm:^2.29.4":
+"moment@npm:^2.27.0":
   version: 2.29.4
   resolution: "moment@npm:2.29.4"
   checksum: 0ec3f9c2bcba38dc2451b1daed5daded747f17610b92427bebe1d08d48d8b7bdd8d9197500b072d14e326dd0ccf3e326b9e3d07c5895d3d49e39b6803b76e80e
