@@ -102,7 +102,7 @@
     display: flex;
     align-items: center;
     height: map.get($lumx-list-item-sizes, "tiny");
-    color: lumx-color-variant("dark", "L3");
+    color: lumx-color-variant("dark", "L2");
 }
 
 @mixin lumx-list-subheader-icon {
