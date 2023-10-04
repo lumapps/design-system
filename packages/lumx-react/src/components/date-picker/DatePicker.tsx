@@ -1,6 +1,7 @@
-import moment from 'moment';
 import React, { forwardRef, useState } from 'react';
 import { Comp } from '@lumx/react/utils/type';
+import { addMonthResetDay } from '@lumx/react/utils/date/addMonthResetDay';
+import { isDateValid } from '@lumx/react/utils/date/isDateValid';
 import { CLASSNAME, COMPONENT_NAME } from './constants';
 import { DatePickerControlled } from './DatePickerControlled';
 import { DatePickerProps } from './types';
@@ -14,17 +15,13 @@ import { DatePickerProps } from './types';
  */
 export const DatePicker: Comp<DatePickerProps, HTMLDivElement> = forwardRef((props, ref) => {
     const { defaultMonth, locale, value, onChange, ...forwardedProps } = props;
-    let castedValue;
-    if (value) {
-        castedValue = moment(value);
-    } else if (defaultMonth) {
-        castedValue = moment(defaultMonth);
-    }
-    if (castedValue && !castedValue.isValid()) {
+
+    let referenceDate = value || defaultMonth || new Date();
+    if (!isDateValid(referenceDate)) {
         // eslint-disable-next-line no-console
-        console.warn(`[@lumx/react/DatePicker] Invalid date provided ${castedValue}`);
+        console.warn(`[@lumx/react/DatePicker] Invalid date provided ${referenceDate}`);
+        referenceDate = new Date();
     }
-    const selectedDay = castedValue && castedValue.isValid() ? castedValue : moment();
 
     const [monthOffset, setMonthOffset] = useState(0);
 
@@ -36,7 +33,7 @@ export const DatePicker: Comp<DatePickerProps, HTMLDivElement> = forwardRef((pro
         setMonthOffset(0);
     };
 
-    const selectedMonth = moment(selectedDay).locale(locale).add(monthOffset, 'months').toDate();
+    const selectedMonth = addMonthResetDay(referenceDate, monthOffset);
 
     return (
         <DatePickerControlled

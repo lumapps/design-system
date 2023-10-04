@@ -1,12 +1,10 @@
-import { DatePicker, Placement, Popover, TextField, IconButtonProps } from '@lumx/react';
-import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
-
-import moment from 'moment';
-
 import React, { forwardRef, SyntheticEvent, useCallback, useRef, useState } from 'react';
 
+import { DatePicker, IconButtonProps, Placement, Popover, TextField } from '@lumx/react';
+import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { Comp, GenericProps } from '@lumx/react/utils/type';
+import { getCurrentLocale } from '@lumx/react/utils/locale/getCurrentLocale';
 
 /**
  * Defines the props of the component.
@@ -17,7 +15,7 @@ export interface DatePickerFieldProps extends GenericProps {
     /** Whether the component is disabled or not. */
     isDisabled?: boolean;
     /** Locale (language or region) to use. */
-    locale: string;
+    locale?: string;
     /** Date after which dates can't be selected. */
     maxDate?: Date;
     /** Date before which dates can't be selected. */
@@ -52,7 +50,7 @@ export const DatePickerField: Comp<DatePickerFieldProps, HTMLDivElement> = forwa
         defaultMonth,
         disabled,
         isDisabled = disabled,
-        locale,
+        locale = getCurrentLocale(),
         maxDate,
         minDate,
         name,
@@ -97,6 +95,9 @@ export const DatePickerField: Comp<DatePickerFieldProps, HTMLDivElement> = forwa
         onClose();
     };
 
+    // Format date for text field
+    const textFieldValue = value?.toLocaleDateString(locale, { year: 'numeric', month: 'long', day: 'numeric' }) || '';
+
     return (
         <>
             <TextField
@@ -105,7 +106,7 @@ export const DatePickerField: Comp<DatePickerFieldProps, HTMLDivElement> = forwa
                 name={name}
                 forceFocusStyle={isOpen}
                 textFieldRef={anchorRef}
-                value={value ? moment(value).locale(locale).format('LL') : ''}
+                value={textFieldValue}
                 onClick={toggleSimpleMenu}
                 onChange={onTextFieldChange}
                 onKeyPress={handleKeyboardNav}

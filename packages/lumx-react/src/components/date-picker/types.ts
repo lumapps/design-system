@@ -9,7 +9,7 @@ export interface DatePickerProps extends GenericProps {
     /** Default month. */
     defaultMonth?: Date;
     /** Locale (language or region) to use. */
-    locale: string;
+    locale?: string;
     /** Date after which dates can't be selected. */
     maxDate?: Date;
     /** Date before which dates can't be selected. */

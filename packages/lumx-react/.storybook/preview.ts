@@ -2,11 +2,6 @@ import type { Preview } from '@storybook/react';
 import { withStoryBlockDecorator } from './story-block/decorator';
 import { Theme } from '@lumx/react';
 
-/**
- * Import non default language to test moment local change.
- */
-import 'moment/dist/locale/fr';
-
 const preview: Preview = {
     globalTypes: {
         /** Add Theme switcher in the toolbar */
