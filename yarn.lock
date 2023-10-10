@@ -10800,6 +10800,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"bindings@npm:^1.5.0":
+  version: 1.5.0
+  resolution: "bindings@npm:1.5.0"
+  dependencies:
+    file-uri-to-path: 1.0.0
+  checksum: 65b6b48095717c2e6105a021a7da4ea435aa8d3d3cd085cb9e85bcb6e5773cf318c4745c3f7c504412855940b585bdf9b918236612a1c7a7942491de176f1ae7
+  languageName: node
+  linkType: hard
+
 "bitbucket-url-from-git@npm:^1.0.0":
   version: 1.0.2
   resolution: "bitbucket-url-from-git@npm:1.0.2"
@@ -14288,15 +14297,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"detect-libc@npm:^1.0.2":
-  version: 1.0.3
-  resolution: "detect-libc@npm:1.0.3"
-  bin:
-    detect-libc: ./bin/detect-libc.js
-  checksum: daaaed925ffa7889bd91d56e9624e6c8033911bb60f3a50a74a87500680652969dbaab9526d1e200a4c94acf80fc862a22131841145a0a8482d60a99c24f4a3e
-  languageName: node
-  linkType: hard
-
 "detect-newline@npm:^1.0.3":
   version: 1.0.3
   resolution: "detect-newline@npm:1.0.3"
@@ -16945,6 +16945,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"file-uri-to-path@npm:1.0.0":
+  version: 1.0.0
+  resolution: "file-uri-to-path@npm:1.0.0"
+  checksum: b648580bdd893a008c92c7ecc96c3ee57a5e7b6c4c18a9a09b44fb5d36d79146f8e442578bc0e173dc027adf3987e254ba1dfd6e3ec998b7c282873010502144
+  languageName: node
+  linkType: hard
+
 "filelist@npm:^1.0.4":
   version: 1.0.4
   resolution: "filelist@npm:1.0.4"
@@ -17470,12 +17477,12 @@ __metadata:
   linkType: hard
 
 fsevents@^1.2.7:
-  version: 1.2.9
-  resolution: "fsevents@npm:1.2.9"
+  version: 1.2.13
+  resolution: "fsevents@npm:1.2.13"
   dependencies:
+    bindings: ^1.5.0
     nan: ^2.12.1
-    node-pre-gyp: ^0.12.0
-  checksum: a00be937d11f59936eaa7bc296a2635d4f14d79fa9015acdb0b4ae439da37dbe7e8cc857616655f860c747d3fb988e2ecd913f6cafcd5488fa241f42e237b5ba
+  checksum: ae855aa737aaa2f9167e9f70417cf6e45a5cd11918e1fee9923709a0149be52416d765433b4aeff56c789b1152e718cd1b13ddec6043b78cdda68260d86383c1
   conditions: os=darwin
   languageName: node
   linkType: hard
@@ -17491,11 +17498,12 @@ fsevents@^1.2.7:
   linkType: hard
 
 "fsevents@patch:fsevents@^1.2.7#~builtin<compat/fsevents>":
-  version: 1.2.9
-  resolution: "fsevents@patch:fsevents@npm%3A1.2.9#~builtin<compat/fsevents>::version=1.2.9&hash=18f3a7"
+  version: 1.2.13
+  resolution: "fsevents@patch:fsevents@npm%3A1.2.13#~builtin<compat/fsevents>::version=1.2.13&hash=18f3a7"
   dependencies:
+    bindings: ^1.5.0
     nan: ^2.12.1
-    node-pre-gyp: ^0.12.0
+  checksum: 2587e64097c1251ae549440b6347954ef3c5ce390061f9e0f0810e83d5d604bb7222c382e7e3c39fc2ba4da53f115b118ea5359ca3bb0bcb96576596bc685d5a
   conditions: os=darwin
   languageName: node
   linkType: hard
@@ -20271,7 +20279,7 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"iconv-lite@npm:0.4.24, iconv-lite@npm:^0.4.17, iconv-lite@npm:^0.4.24, iconv-lite@npm:^0.4.4, iconv-lite@npm:~0.4.13":
+"iconv-lite@npm:0.4.24, iconv-lite@npm:^0.4.17, iconv-lite@npm:^0.4.24, iconv-lite@npm:~0.4.13":
   version: 0.4.24
   resolution: "iconv-lite@npm:0.4.24"
   dependencies:
@@ -25228,19 +25236,6 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"needle@npm:^2.2.1":
-  version: 2.4.0
-  resolution: "needle@npm:2.4.0"
-  dependencies:
-    debug: ^3.2.6
-    iconv-lite: ^0.4.4
-    sax: ^1.2.4
-  bin:
-    needle: ./bin/needle
-  checksum: 140de239917090e659d2dd5eb51811a0929330063f8317d804ac67f99d4bfdf077987b4f4358a12cbcd98059899cec4fca530e017427b2d735d5f50fb203e118
-  languageName: node
-  linkType: hard
-
 "negotiator@npm:0.6.2, negotiator@npm:^0.6.2, negotiator@npm:~0.6.2":
   version: 0.6.2
   resolution: "negotiator@npm:0.6.2"
@@ -25504,26 +25499,6 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"node-pre-gyp@npm:^0.12.0":
-  version: 0.12.0
-  resolution: "node-pre-gyp@npm:0.12.0"
-  dependencies:
-    detect-libc: ^1.0.2
-    mkdirp: ^0.5.1
-    needle: ^2.2.1
-    nopt: ^4.0.1
-    npm-packlist: ^1.1.6
-    npmlog: ^4.0.2
-    rc: ^1.2.7
-    rimraf: ^2.6.1
-    semver: ^5.3.0
-    tar: ^4
-  bin:
-    node-pre-gyp: ./bin/node-pre-gyp
-  checksum: f5507d9956e7d24179b95052104d6da13b218dd75ad3717ea659beb78300bd63979ff5e7621c03eab92433e77da8b301be52ca3bef9afbea49e2c322e35f92d4
-  languageName: node
-  linkType: hard
-
 "node-releases@npm:^1.1.40":
   version: 1.1.40
   resolution: "node-releases@npm:1.1.40"
@@ -25590,18 +25565,6 @@ fsevents@~2.1.2:
   bin:
     nopt: ./bin/nopt.js
   checksum: 7f8579029a0d7cb3341c6b1610b31e363f708b7aaaaf3580e3ec5ae8528d1f3a79d350d8bfa331776e6c6703a5a148b72edd9b9b4c1dd55874d8e70e963d1e20
-  languageName: node
-  linkType: hard
-
-"nopt@npm:^4.0.1":
-  version: 4.0.1
-  resolution: "nopt@npm:4.0.1"
-  dependencies:
-    abbrev: 1
-    osenv: ^0.1.4
-  bin:
-    nopt: ./bin/nopt.js
-  checksum: 9698ffcb752bab2229e03f4a264215dbe34ce6d3465b58c5f2d7b4c2e21072f9003c0fe6b6c0ff8992cc6e2737b6bfd85b1fe92e81c78c6051b64df159c33b77
   languageName: node
   linkType: hard
 
@@ -25762,7 +25725,7 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"npm-packlist@npm:^1.1.6, npm-packlist@npm:^1.4.4":
+"npm-packlist@npm:^1.4.4":
   version: 1.4.6
   resolution: "npm-packlist@npm:1.4.6"
   dependencies:
@@ -25810,7 +25773,7 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"npmlog@npm:0 || 1 || 2 || 3 || 4, npmlog@npm:^4.0.2, npmlog@npm:^4.1.2":
+"npmlog@npm:0 || 1 || 2 || 3 || 4, npmlog@npm:^4.1.2":
   version: 4.1.2
   resolution: "npmlog@npm:4.1.2"
   dependencies:
@@ -26393,7 +26356,7 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"osenv@npm:^0.1.4, osenv@npm:^0.1.5":
+"osenv@npm:^0.1.5":
   version: 0.1.5
   resolution: "osenv@npm:0.1.5"
   dependencies:
@@ -28723,7 +28686,7 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"rc@npm:^1.0.1, rc@npm:^1.1.6, rc@npm:^1.2.7, rc@npm:^1.2.8":
+"rc@npm:^1.0.1, rc@npm:^1.1.6, rc@npm:^1.2.8":
   version: 1.2.8
   resolution: "rc@npm:1.2.8"
   dependencies:
@@ -30668,7 +30631,7 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"sax@npm:^1.2.4, sax@npm:~1.2.4":
+"sax@npm:~1.2.4":
   version: 1.2.4
   resolution: "sax@npm:1.2.4"
   checksum: d3df7d32b897a2c2f28e941f732c71ba90e27c24f62ee918bd4d9a8cfb3553f2f81e5493c7f0be94a11c1911b643a9108f231dd6f60df3fa9586b5d2e3e9e1fe
@@ -32921,7 +32884,7 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"tar@npm:^4, tar@npm:^4.4.10, tar@npm:^4.4.12, tar@npm:^4.4.8":
+"tar@npm:^4.4.10, tar@npm:^4.4.12, tar@npm:^4.4.8":
   version: 4.4.13
   resolution: "tar@npm:4.4.13"
   dependencies:
