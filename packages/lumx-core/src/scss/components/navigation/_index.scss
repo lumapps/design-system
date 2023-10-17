@@ -45,6 +45,10 @@
                 lumx-base-const("emphasis", "LOW"),
                 lumx-base-const("state", "HOVER")
             );
+
+            &[data-focus-visible-added] {
+                @include lumx-state-as-selected(lumx-base-const("state", "FOCUS"), lumx-base-const("theme", "LIGHT"));
+            }
         }
 
         &:active {

@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+-   List & Navigation: add outline on focus-visible for better accessibility
 -   `@lumx/react` no long depend on `moment` or `moment-range` to generate the date picker.
 -   Deprecated `@lumx/core/js/date-picker` functions that **will be removed in the next major version** along with `moment` and `moment-range`.
 -   DatePicker & DatePickerField: `locale` prop is now optional (uses browser locale by default)
