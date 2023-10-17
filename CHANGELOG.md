@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.5.4][] - 2023-10-17
+
 ### Changed
 
 -   List & Navigation: add outline on focus-visible for better accessibility
@@ -1818,3 +1820,7 @@ _Failed released_
 [unreleased]: https://github.com/lumapps/design-system/compare/v3.5.3...HEAD
 [3.5.3]: https://github.com/lumapps/design-system/compare/v3.5.2...v3.5.3
 [3.5.2]: https://github.com/lumapps/design-system/tree/v3.5.2
+
+
+[Unreleased]: https://github.com/lumapps/design-system/compare/v3.5.4...HEAD
+[3.5.4]: https://github.com/lumapps/design-system/tree/v3.5.4
