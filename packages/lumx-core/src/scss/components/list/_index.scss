@@ -38,6 +38,11 @@
         @include lumx-list-item-highlighted;
     }
 
+    &__link--focus-visible,
+    &__link[data-focus-visible-added] {
+        @include lumx-list-item-focus-visible;
+    }
+
     &__link--is-selected {
         @include lumx-list-item-selected;
     }

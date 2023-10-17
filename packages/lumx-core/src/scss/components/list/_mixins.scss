@@ -44,14 +44,14 @@
 
     @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "LOW"), "dark");
 
-    &[data-focus-visible-added] {
-        outline: 2px solid lumx-color-variant("dark", "N");
-        outline-offset: -2px;
-    }
-    
     &:active {
         @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "LOW"), "dark");
     }
+}
+
+@mixin lumx-list-item-focus-visible() {
+    outline: 2px solid lumx-color-variant("dark", "N");
+    outline-offset: -2px;
 }
 
 @mixin lumx-list-item-selected() {
