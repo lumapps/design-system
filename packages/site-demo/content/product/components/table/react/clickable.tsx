@@ -1,16 +1,6 @@
-import { mdiCommentOutline, mdiDotsVertical, mdiInformationOutline } from '@lumx/icons';
-import {
-    Alignment,
-    FlexBox,
-    Orientation,
-    Table,
-    TableBody,
-    TableCell,
-    TableRow,
-    Theme,
-} from '@lumx/react';
+import { Alignment, FlexBox, Orientation, Table, TableBody, TableCell, TableRow, Theme } from '@lumx/react';
 
-import React, {useState } from 'react';
+import React, { useState } from 'react';
 
 const initialTable = [
     {
@@ -50,7 +40,6 @@ export const App = ({ theme = Theme.light }: any) => {
 
     return (
         <Table hasDividers theme={theme} style={{ minWidth: 620 }}>
-
             <TableBody>
                 {tableBody.map((core) => (
                     <TableRow key={core.id} isClickable isSelected={core.isSelected} isDisabled={core.isDisabled}>
@@ -59,9 +48,9 @@ export const App = ({ theme = Theme.light }: any) => {
                                 {core.title}
                             </FlexBox>
                         </TableCell>
-                        <TableCell width={'100'}>{String(core.calories)}</TableCell>
-                        <TableCell width={'150'}>{String(core.fat)}</TableCell>
-                        <TableCell width={'150'}>{core.comments}</TableCell>
+                        <TableCell width='100'>{String(core.calories)}</TableCell>
+                        <TableCell width='150'>{String(core.fat)}</TableCell>
+                        <TableCell width='150'>{core.comments}</TableCell>
                     </TableRow>
                 ))}
             </TableBody>
