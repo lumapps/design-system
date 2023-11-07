@@ -32,7 +32,6 @@ const initialTable = [
         fat: 6.0,
         id: 1,
         image: '/demo-assets/landscape1.jpg',
-        isSelected: false,
     },
     {
         calories: 237,
@@ -41,7 +40,6 @@ const initialTable = [
         fat: 9.0,
         id: 2,
         image: '/demo-assets/landscape2.jpg',
-        isSelected: true,
     },
     {
         calories: 262,
@@ -50,7 +48,6 @@ const initialTable = [
         fat: 16.0,
         id: 3,
         image: '/demo-assets/landscape3.jpg',
-        isSelected: false,
     },
 ];
 
@@ -124,7 +121,7 @@ export const App = ({ theme = Theme.light }: any) => {
 
             <TableBody>
                 {tableBody.map((body) => (
-                    <TableRow key={body.id} isClickable isSelected={body.isSelected}>
+                    <TableRow key={body.id}>
                         <TableCell>
                             <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
                                 <Thumbnail
