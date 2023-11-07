@@ -7,7 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- Table row: selected states color update + documentation update
+### Changed
+
+-    Table row: selected states color update + documentation update
+-   `@lumx/core`: remove default line-height on custom title typography.
 
 ## [3.5.4][] - 2023-10-17
 

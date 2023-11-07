@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Wed, 22 Mar 2023 12:12:53 GMT
+ * Generated on Fri, 10 Nov 2023 13:38:03 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -2089,32 +2089,26 @@ export const DESIGN_TOKENS = {
             title1: {
                 'font-size': { value: '40px' },
                 'font-weight': { value: 'var(--lumx-typography-font-weight-bold)' },
-                'line-height': { value: '50px' },
             },
             title2: {
                 'font-size': { value: '30px' },
                 'font-weight': { value: 'var(--lumx-typography-font-weight-bold)' },
-                'line-height': { value: '40px' },
             },
             title3: {
                 'font-size': { value: '24px' },
                 'font-weight': { value: 'var(--lumx-typography-font-weight-bold)' },
-                'line-height': { value: '32px' },
             },
             title4: {
                 'font-size': { value: '20px' },
                 'font-weight': { value: 'var(--lumx-typography-font-weight-bold)' },
-                'line-height': { value: '30px' },
             },
             title5: {
                 'font-size': { value: '16px' },
                 'font-weight': { value: 'var(--lumx-typography-font-weight-bold)' },
-                'line-height': { value: '24px' },
             },
             title6: {
                 'font-size': { value: '14px' },
                 'font-weight': { value: 'var(--lumx-typography-font-weight-bold)' },
-                'line-height': { value: '20px' },
             },
             intro: {
                 'font-size': { value: '18px' },
