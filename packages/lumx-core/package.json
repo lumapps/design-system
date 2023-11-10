@@ -66,7 +66,7 @@
         "postcss-loader": "^3.0.0",
         "sass": "^1.54.0",
         "sass-loader": "^10.3.1",
-        "style-dictionary": "^2.10.0",
+        "style-dictionary": "^3.9.0",
         "tinycolor2": "^1.4.1",
         "unminified-webpack-plugin": "^2.0.0",
         "version-changelog": "^3.1.1",
