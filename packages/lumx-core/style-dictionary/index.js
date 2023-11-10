@@ -6,9 +6,12 @@ const CONFIGS = ['gen-scss-variables', 'gen-ts-variables', 'gen-css-variables'];
 async function main() {
     // For each config
     for (const config of CONFIGS) {
-        // Run generation
-        const { stdout } = await exec(`yarn node '${__dirname}/config/_run' '${config}'`).catch(e => e);
-        console.log(stdout);
+      console.log('Running', config, '...');
+      // Run generation
+      exec(`yarn node '${__dirname}/config/_run' '${config}'`)
+          .then(({ stdout, stderr }) => {
+              console.log(stdout.toString(), stderr.toString());
+          });
     }
 }
 main();

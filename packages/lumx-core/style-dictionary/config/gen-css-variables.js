@@ -1,5 +1,6 @@
 const path = require('path');
 const transformGroup = require('./_transform-group');
+const prependStylelintDisable = require('./utils/_format-stylelint-disable');
 
 module.exports = () => {
     const baseDir = `${__dirname}/../`;
@@ -13,12 +14,13 @@ module.exports = () => {
                 buildPath,
                 files: [
                     {
-                        format: 'css/variables',
+                        format: prependStylelintDisable('css/variables'),
                         destination: 'design-tokens.css',
-                        mapName: 'lumx-design-tokens',
+                        // Filter out null values
+                        filter: (token) => token.value !== null,
                     },
                 ],
-                actions: [require('./utils/_prettier-scss')()],
+                actions: [require('./utils/_action-prettier-style')()],
             },
         },
     };

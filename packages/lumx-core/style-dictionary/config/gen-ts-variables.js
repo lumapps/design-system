@@ -6,20 +6,19 @@ const transformGroup = require('./_transform-group');
 /**
  * Typescript generator:
  */
-const format = 'typescript/map-deep';
-StyleDictionary.registerFormat({
-    name: format,
-    formatter(dictionary) {
-        const properties = this.pickFields
-            ? pickFieldsInTree(dictionary.properties, this.pickFields)
-            : dictionary.properties;
-        return `
-            ${require('./utils/_genHeader')()}
-
-            export const DESIGN_TOKENS = ${JSON.stringify(properties)}
-        `;
-    },
-});
+function customFormat({ pickFields }) {
+    const name = 'typescript/map-deep';
+    StyleDictionary.registerFormat({
+        name,
+        formatter({ file, dictionary }) {
+            const properties = pickFieldsInTree(dictionary.properties, pickFields);
+            const header = StyleDictionary.formatHelpers.fileHeader({ file });
+            const code = `export const DESIGN_TOKENS = ${JSON.stringify(properties)}`;
+            return `${header}\n\n${code}`;
+        },
+    });
+    return name;
+}
 
 module.exports = () => {
     const baseDir = `${__dirname}/../`;
@@ -33,19 +32,20 @@ module.exports = () => {
                 buildPath,
                 files: [
                     {
-                        format,
+                        format: customFormat({
+                            pickFields: [
+                                'version',
+                                'comment',
+                                'value',
+                                'attributes.hex',
+                                'attributes.rgb',
+                                '$aliasedFrom'
+                            ],
+                        }),
                         destination: 'design-tokens.ts',
-                        pickFields: [
-                            'version',
-                            'comment',
-                            'value',
-                            'attributes.hex',
-                            'attributes.rgb',
-                            '$aliasedFrom'
-                        ],
                     },
                 ],
-                actions: [require('./utils/_prettier-ts')({ buildPath })],
+                actions: [require('./utils/_action-prettier-ts')({ buildPath })],
             },
         },
     };

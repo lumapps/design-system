@@ -1,6 +1,6 @@
 const StyleDictionary = require('style-dictionary');
-const execSync = require('child_process').execSync;
 const path = require('path');
+const exec = require('./_exec');
 
 module.exports = function () {
     const name = 'prettier/style';
@@ -8,8 +8,9 @@ module.exports = function () {
         name,
         do: (properties, config) => {
             const files = config.files.map(f => `'${path.resolve(config.buildPath, f.destination)}'`);
-            return execSync(`yarn stylelint --fix ${files.join(' ')}`);
+            exec(`yarn stylelint --fix ${files.join(' ')}`);
         },
+        undo: () => null,
     });
     return name;
 };
