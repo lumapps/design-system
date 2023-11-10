@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 10 Nov 2023 13:38:03 GMT
+ * Generated on Fri, 10 Nov 2023 16:19:23 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -2035,7 +2035,7 @@ export const DESIGN_TOKENS = {
     typography: {
         'font-family': {
             value:
-                "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif",
+                "'-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'sans-serif'",
         },
         'font-weight': { regular: { value: '400' }, bold: { value: '700' }, light: { value: '300' } },
         interface: {
