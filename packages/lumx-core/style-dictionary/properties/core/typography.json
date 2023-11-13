@@ -1,7 +1,7 @@
 {
     "typography": {
         "font-family": {
-            "value": "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif"
+            "value": "'-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'sans-serif'"
         },
         "font-weight": {
             "regular": { "value": "400" },
@@ -59,32 +59,32 @@
             "title1": {
                 "font-size": { "value": "40px" },
                 "font-weight": { "value": "var(--lumx-typography-font-weight-bold)" },
-                "line-height": { "value": "50px" }
+                "line-height": { "value": null }
             },
             "title2": {
                 "font-size": { "value": "30px" },
                 "font-weight": { "value": "var(--lumx-typography-font-weight-bold)" },
-                "line-height": { "value": "40px" }
+                "line-height": { "value": null }
             },
             "title3": {
                 "font-size": { "value": "24px" },
                 "font-weight": { "value": "var(--lumx-typography-font-weight-bold)" },
-                "line-height": { "value": "32px" }
+                "line-height": { "value": null }
             },
             "title4": {
                 "font-size": { "value": "20px" },
                 "font-weight": { "value": "var(--lumx-typography-font-weight-bold)" },
-                "line-height": { "value": "30px" }
+                "line-height": { "value": null }
             },
             "title5": {
                 "font-size": { "value": "16px" },
                 "font-weight": { "value": "var(--lumx-typography-font-weight-bold)" },
-                "line-height": { "value": "24px" }
+                "line-height": { "value": null }
             },
             "title6": {
                 "font-size": { "value": "14px" },
                 "font-weight": { "value": "var(--lumx-typography-font-weight-bold)" },
-                "line-height": { "value": "20px" }
+                "line-height": { "value": null }
             },
             "intro": {
                 "font-size": { "value": "18px" },
