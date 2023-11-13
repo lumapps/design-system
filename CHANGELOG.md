@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.5.5][] - 2023-11-13
+
 ### Changed
 
 -    Table row: selected states color update + documentation update
@@ -1827,5 +1829,6 @@ _Failed released_
 [3.5.2]: https://github.com/lumapps/design-system/tree/v3.5.2
 
 
-[Unreleased]: https://github.com/lumapps/design-system/compare/v3.5.4...HEAD
+[Unreleased]: https://github.com/lumapps/design-system/compare/v3.5.5...HEAD
+[3.5.5]: https://github.com/lumapps/design-system/compare/v3.5.4...v3.5.5
 [3.5.4]: https://github.com/lumapps/design-system/tree/v3.5.4
