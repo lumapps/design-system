@@ -2,13 +2,14 @@ import filter from 'lodash/filter';
 import first from 'lodash/first';
 import last from 'lodash/last';
 import partition from 'lodash/partition';
-import React, { ReactElement, useMemo, useState } from 'react';
+import React, { ReactElement } from 'react';
 import { renderLines } from '@lumx/demo/components/content/CodeBlock/renderLines';
 import { RenderLineParams, Token, TokenLines } from './types';
 
 const isToken = (token: Token | undefined, type: string, content: string) =>
     token?.types?.includes(type) && token?.content === content;
 
+/** Split import lines from other lines */
 export function partitionImports(tokenLines: TokenLines): { imports: TokenLines; others: TokenLines } {
     const state = {
         finished: false,
@@ -44,39 +45,24 @@ export function partitionImports(tokenLines: TokenLines): { imports: TokenLines;
     return { imports, others };
 }
 
-export const CollapsedImports: React.FC<RenderLineParams> = (props) => {
-    const [collapsed, setCollapsed] = useState(true);
-    const toggleCollapsed = () => setCollapsed(!collapsed);
-    const renderedImports = useMemo(() => renderLines(props) as any, [props]);
-
-    return !collapsed ? (
-        renderedImports
-    ) : (
-        <>
-            <button
-                {...props.getLineProps({ key: 'collapsed-imports' })}
-                style={{ border: 'none', background: 'none', padding: 0 }}
-                onClick={toggleCollapsed}
-                aria-label="Expand imports"
-                title="Expand imports"
-                type="button"
-            >
-                <span {...props.getTokenProps({ token: { types: ['keyword'], content: 'import' } })} />
-                <span className="lumx-spacing-margin-left-tiny lumx-spacing-padding-horizontal  lumx-color-background-dark-L5">
-                    …
-                </span>
-            </button>
-            {renderLines({ ...props, tokens: [[{ types: ['plain'], content: '', empty: true }]] })}
-        </>
-    );
-};
-
+/** Render code lines with collapsed imports */
 export const renderJSXLinesWithCollapsedImports = (renderParams: RenderLineParams): ReactElement => {
     const { imports, others } = partitionImports(renderParams.tokens);
 
     return (
         <>
-            {imports.length ? <CollapsedImports {...renderParams} tokens={imports} /> : null}
+            {imports.length ? (
+                <details>
+                    <summary
+                        className="lumx-button lumx-button--emphasis-medium lumx-button--color-dark"
+                        aria-label="Expand imports"
+                        title="Expand imports"
+                    >
+                        import …
+                    </summary>
+                    {renderLines({ ...renderParams, tokens: imports })}
+                </details>
+            ) : null}
             {renderLines({ ...renderParams, tokens: others })}
         </>
     );

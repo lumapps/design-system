@@ -5,7 +5,7 @@ export const renderLines = ({ tokens, getLineProps, getTokenProps }: RenderLineP
     tokens.map((line, i) => (
         <div key={line} {...getLineProps({ line, key: i })}>
             {line.map((token, key) => (
-                <span key={token} {...getTokenProps({ token, key })} />
+                <code key={token} {...getTokenProps({ token, key })} />
             ))}
         </div>
     ));

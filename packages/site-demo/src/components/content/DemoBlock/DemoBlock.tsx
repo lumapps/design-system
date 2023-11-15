@@ -100,9 +100,11 @@ export const DemoBlock: React.FC<DemoBlockProps> = ({
                 )}
             </div>
 
-            {showCode && codeString && (
-                <CodeBlock className="demo-block__code" codeString={codeString} language="tsx" />
-            )}
+            <CodeBlock
+                className={classNames('demo-block__code', showCode && codeString && 'demo-block__code--shown')}
+                codeString={codeString}
+                language="tsx"
+            />
         </div>
     );
 };

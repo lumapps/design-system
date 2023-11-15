@@ -38,9 +38,14 @@
     }
 
     &__code {
+        display: none;
         border: none;
         border-top: 1px solid $lumx-color-dark-L4;
         border-radius: 0;
+
+        &--shown {
+            display: block;
+        }
     }
 
     &__filename {
