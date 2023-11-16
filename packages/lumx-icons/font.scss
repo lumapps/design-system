@@ -1,4 +1,5 @@
-$mdi-font-path: "~@mdi/font/fonts";
-
+$mdi-font-path: "~@lumx/icons/override/generated/fonts";
 @import "@mdi/font/scss/materialdesignicons";
-@import "./v4-to-v5-aliases";
+
+@import "./override/generated/override";
+@import "./override/generated/aliases";

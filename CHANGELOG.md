@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   `@lumx/icons`: override & alias system in place. now custom icon fonts are now generated from MDI fonts we extend.
+
 ## [3.5.5][] - 2023-11-13
 
 ### Changed

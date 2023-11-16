@@ -154,10 +154,6 @@
     @extend .mdi-file-cog-outline;
 }
 
-.mdi-library-books {
-    @extend .mdi-text-box-multiple;
-}
-
 .mdi-library-movie {
     @extend .mdi-filmstrip-box-multiple;
 }
@@ -416,6 +412,7 @@
     @extend .mdi-text-box-minus-outline;
 }
 
+.mdi-library-books,
 .mdi-file-document-box-multiple {
     @extend .mdi-text-box-multiple;
 }
