@@ -1,5 +1,4 @@
-import { mdiMenu } from '@lumx/icons/index';
-import { mdiSettings } from '@lumx/icons/v4-to-v5-aliases';
+import { mdiMenu, mdiSettings } from '@lumx/icons';
 import {
     Button,
     Emphasis,
