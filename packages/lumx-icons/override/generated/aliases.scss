@@ -355,9 +355,10 @@
     @extend .mdi-npm;
 }
 
+.mdi-twitter,
 .mdi-twitter-box,
 .mdi-twitter-circle {
-    @extend .mdi-twitter;
+    @extend .mdi-x-twitter;
 }
 
 .mdi-library-video {

@@ -113,10 +113,10 @@ import {
     mdiTextBoxSearch,
     mdiTextBoxSearchOutline,
     mdiTowTruck,
-    mdiTwitter,
     mdiVideoBox,
     mdiVideoBoxOff,
     mdiWallSconceRoundVariant,
+    mdiXTwitter,
     mdiYCombinator,
     mdiYoutubeStudio,
 } from './override';
@@ -303,9 +303,11 @@ export const mdiNpmVariant = mdiNpm;
 
 export const mdiNpmVariantOutline = mdiNpm;
 
-export const mdiTwitterBox = mdiTwitter;
+export const mdiTwitter = mdiXTwitter;
 
-export const mdiTwitterCircle = mdiTwitter;
+export const mdiTwitterBox = mdiXTwitter;
+
+export const mdiTwitterCircle = mdiXTwitter;
 
 export const mdiLibraryVideo = mdiPlayBoxMultiple;
 

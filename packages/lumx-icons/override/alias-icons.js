@@ -356,7 +356,8 @@ module.exports = {
         'npm-variant',
         'npm-variant-outline',
     ],
-    twitter: [
+    'x-twitter': [
+        'twitter',
         // retro-compat v4 aliases:
         'twitter-box',
         'twitter-circle',

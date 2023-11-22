@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 -   `@lumx/icons`: override & alias system in place. now custom icon fonts are now generated from MDI fonts we extend.
+-   `@lumx/icons`: override Twitter logo to use the new X logo.
 
 ## [3.5.5][] - 2023-11-13
 
