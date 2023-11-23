@@ -9,10 +9,14 @@
     },
     "devDependencies": {
         "@rollup/plugin-node-resolve": "9.0.0",
+        "fonteditor-core": "^2.3.2",
+        "lodash": "4.17.21",
         "rollup": "2.26.10",
         "rollup-plugin-babel": "^4.4.0",
         "rollup-plugin-cleaner": "^1.0.0",
-        "rollup-plugin-copy": "^3.3.0"
+        "rollup-plugin-copy": "^3.3.0",
+        "rollup-plugin-dts": "^6.1.0",
+        "svgtofont": "^4.0.0"
     },
     "description": "LumX icons",
     "engines": {
@@ -23,6 +27,7 @@
     "license": "MIT",
     "main": "cjs/index.js",
     "module": "index.js",
+    "types": "index.d.ts",
     "name": "@lumx/icons",
     "repository": {
         "type": "git",
@@ -32,6 +37,7 @@
         "directory": "dist"
     },
     "scripts": {
+        "generate-icons": "./override/generate/run-all.cjs",
         "build": "rollup -c"
     },
     "sideEffects": false,

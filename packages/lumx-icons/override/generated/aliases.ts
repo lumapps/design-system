@@ -37,23 +37,26 @@ import {
     mdiCogTransfer,
     mdiCogTransferOutline,
     mdiCurrencyUsdCircleOutline,
+    mdiFacebook,
     mdiFileCog,
     mdiFileCogOutline,
     mdiFilmstripBoxMultiple,
     mdiFolderCog,
     mdiFolderCogOutline,
     mdiFolderRefreshOutline,
-    mdiFormatTitle,
     mdiFormTextarea,
     mdiFormTextbox,
     mdiFormTextboxPassword,
+    mdiFormatTitle,
     mdiGithub,
+    mdiGooglePlus,
     mdiIceCreamOff,
     mdiImageMultipleOutline,
     mdiLanguageMarkdown,
     mdiLanguageMarkdownOutline,
     mdiLanguageRuby,
     mdiLanguageXaml,
+    mdiLinkedin,
     mdiMessageCog,
     mdiMicrosoftAzure,
     mdiMicrosoftAzureDevops,
@@ -87,10 +90,7 @@ import {
     mdiMusicBoxMultipleOutline,
     mdiNintendoWii,
     mdiNintendoWiiu,
-    mdiFacebook,
-    mdiGooglePlus,
     mdiNpm,
-    mdiTwitter,
     mdiPlayBoxMultiple,
     mdiRollerSkateOff,
     mdiRouterNetwork,
@@ -98,7 +98,6 @@ import {
     mdiSonyPlaystation,
     mdiSortAlphabeticalVariant,
     mdiSortNumericVariant,
-    mdiLinkedin,
     mdiTextBox,
     mdiTextBoxCheck,
     mdiTextBoxCheckOutline,
@@ -117,9 +116,12 @@ import {
     mdiVideoBox,
     mdiVideoBoxOff,
     mdiWallSconceRoundVariant,
+    mdiXTwitter,
     mdiYCombinator,
     mdiYoutubeStudio,
-} from '@mdi/js';
+} from './override';
+
+export * from './override';
 
 export const mdiCowboy = mdiAccountCowboyHat;
 
@@ -198,8 +200,6 @@ export const mdiCoinOutline = mdiCurrencyUsdCircleOutline;
 export const mdiFileSettingsVariant = mdiFileCog;
 
 export const mdiFileSettingsVariantOutline = mdiFileCogOutline;
-
-export const mdiLibraryBooks = mdiTextBoxOutline;
 
 export const mdiLibraryMovie = mdiFilmstripBoxMultiple;
 
@@ -303,9 +303,11 @@ export const mdiNpmVariant = mdiNpm;
 
 export const mdiNpmVariantOutline = mdiNpm;
 
-export const mdiTwitterBox = mdiTwitter;
+export const mdiTwitter = mdiXTwitter;
 
-export const mdiTwitterCircle = mdiTwitter;
+export const mdiTwitterBox = mdiXTwitter;
+
+export const mdiTwitterCircle = mdiXTwitter;
 
 export const mdiLibraryVideo = mdiPlayBoxMultiple;
 
@@ -332,6 +334,8 @@ export const mdiFileDocumentBoxCheckOutline = mdiTextBoxCheckOutline;
 export const mdiFileDocumentBoxMinus = mdiTextBoxMinus;
 
 export const mdiFileDocumentBoxMinusOutline = mdiTextBoxMinusOutline;
+
+export const mdiLibraryBooks = mdiTextBoxMultiple;
 
 export const mdiFileDocumentBoxMultiple = mdiTextBoxMultiple;
 
@@ -366,6 +370,3 @@ export const mdiYoutubeCreatorStudio = mdiYoutubeStudio;
 export const mdiInstapaper = mdiFormatTitle;
 
 export const mdiMailRu = mdiAt;
-
-export const mdiGooglePages =
-    'M19,3H13V8L17,7L16,11H21V5C21,3.89 20.1,3 19,3M17,17L13,16V21H19A2,2 0 0,0 21,19V13H16M8,13H3V19A2,2 0 0,0 5,21H11V16L7,17M3,5V11H8L7,7L11,8V3H5C3.89,3 3,3.89 3,5Z';
