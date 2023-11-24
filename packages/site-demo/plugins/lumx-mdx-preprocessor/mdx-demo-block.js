@@ -5,6 +5,7 @@ const fs = require('fs');
 const CONTENT_DIR = path.resolve('./content');
 const rewriteJSXComponents = require('../utils/rewriteJSXComponents');
 const debug = require('../utils/debug');
+const generateCodesandboxURL = require('./generate-codesandbox')
 
 /** Read source code to string (or return null if source code not found). */
 async function readSourceCode(sourcePath) {
@@ -25,11 +26,13 @@ const removeIndent = (code) => {
 }
 
 /** Update <DemoBlock/> props to import source code. */
-async function updateDemoBlock(resourceFolder, addImport, props) {
+async function updateDemoBlock(resourceFolder, addImport, mdxString, props) {
     if (props.children) {
         // <DemoBlock> with children already have a demo inside them.
         // We copy the demo as string into the `codeString` prop.
-        props.codeString = JSON.stringify(removeIndent(props.children));
+        let code = removeIndent(props.children);
+        props.codeString = JSON.stringify(code);
+        props.codesandboxURL = JSON.stringify(generateCodesandboxURL(mdxString, code))
         return props;
     }
 
@@ -48,6 +51,7 @@ async function updateDemoBlock(resourceFolder, addImport, props) {
         return props;
     }
     props.codeString = JSON.stringify(code.trim());
+    props.codesandboxURL = JSON.stringify(generateCodesandboxURL(mdxString, code.trim()))
 
     // Import demo (will be added at the top).
     let relativePath = path.relative(CONTENT_DIR, sourcePath);
@@ -73,7 +77,7 @@ module.exports = async (filePath, mdxString) => {
         mdxString = await rewriteJSXComponents(
             'DemoBlock',
             mdxString,
-            partial(updateDemoBlock, resourceFolder, addImport)
+            partial(updateDemoBlock, resourceFolder, addImport, mdxString)
         );
 
         if (imports.length) {

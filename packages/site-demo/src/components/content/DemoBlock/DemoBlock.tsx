@@ -23,6 +23,7 @@ import './DemoBlock.scss';
 interface DemoBlockProps extends FlexBoxProps {
     demo?: string;
     codeString?: string;
+    codesandboxURL?: string;
     withThemeSwitcher?: boolean;
     hasPlayButton?: boolean;
     backgroundColor?: { color: ColorPalette; variant: ColorVariant };
@@ -37,6 +38,7 @@ export const DemoBlock: React.FC<DemoBlockProps> = ({
     children,
     demo,
     codeString,
+    codesandboxURL,
     withThemeSwitcher = false,
     hasPlayButton = false,
     backgroundColor: propBackgroundColor,
@@ -103,6 +105,7 @@ export const DemoBlock: React.FC<DemoBlockProps> = ({
             <CodeBlock
                 className={classNames('demo-block__code', showCode && codeString && 'demo-block__code--shown')}
                 codeString={codeString}
+                codesandboxURL={codesandboxURL}
                 language="tsx"
             />
         </div>
