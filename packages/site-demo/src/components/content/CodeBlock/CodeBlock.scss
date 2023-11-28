@@ -14,4 +14,24 @@
     background-color: transparent;
     border: 1px solid $lumx-color-dark-L4;
     border-radius: var(--lumx-border-radius);
+
+    details summary {
+        padding: $lumx-spacing-unit-tiny;
+        margin: -$lumx-spacing-unit-tiny;
+    }
+
+    details:not([open]) {
+        margin-bottom: 1rem;
+    }
+
+    details[open] summary {
+        display: none;
+    }
+
+    code.token {
+        padding: 0;
+        font-size: inherit;
+        font-weight: inherit;
+        background: none;
+    }
 }

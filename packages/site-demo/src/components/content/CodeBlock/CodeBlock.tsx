@@ -17,6 +17,7 @@ interface Props {
     language?: Language | 'tsx';
 }
 
+/** Display syntax highlighted code */
 export const CodeBlock: React.FC<Props> = ({ className, codeString, language: propLanguage, children }) => {
     const language = propLanguage || className?.match(/language-(\w+)/)?.[1];
     if (!language) {
