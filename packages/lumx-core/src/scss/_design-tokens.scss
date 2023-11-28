@@ -2,12 +2,12 @@
 
 /**
  * Do not edit directly
- * Generated on Fri, 10 Nov 2023 16:19:23 GMT
+ * Generated on Fri, 01 Dec 2023 08:49:40 GMT
  */
 
 $lumx-button-height: 36px !default;
 $lumx-button-border-radius: 4px !default;
-$lumx-button-emphasis-high-state-default-padding-horizontal: 16px !default;
+$lumx-button-emphasis-high-state-default-padding-horizontal: var(--lumx-spacing-unit-big) !default;
 $lumx-button-emphasis-high-state-default-border-width: 0 !default;
 $lumx-button-emphasis-high-state-default-theme-light-background-color: var(--lumx-color-primary-N) !default;
 $lumx-button-emphasis-high-state-default-theme-light-color: var(--lumx-color-light-N) !default;
@@ -15,7 +15,7 @@ $lumx-button-emphasis-high-state-default-theme-light-border-color: transparent !
 $lumx-button-emphasis-high-state-default-theme-dark-background-color: var(--lumx-color-light-N) !default;
 $lumx-button-emphasis-high-state-default-theme-dark-color: var(--lumx-color-primary-N) !default;
 $lumx-button-emphasis-high-state-default-theme-dark-border-color: transparent !default;
-$lumx-button-emphasis-high-state-hover-padding-horizontal: 16px !default;
+$lumx-button-emphasis-high-state-hover-padding-horizontal: var(--lumx-spacing-unit-big) !default;
 $lumx-button-emphasis-high-state-hover-border-width: 0 !default;
 $lumx-button-emphasis-high-state-hover-theme-light-background-color: var(--lumx-color-primary-D1) !default;
 $lumx-button-emphasis-high-state-hover-theme-light-color: var(--lumx-color-light-N) !default;
@@ -23,7 +23,7 @@ $lumx-button-emphasis-high-state-hover-theme-light-border-color: transparent !de
 $lumx-button-emphasis-high-state-hover-theme-dark-background-color: var(--lumx-color-light-L1) !default;
 $lumx-button-emphasis-high-state-hover-theme-dark-color: var(--lumx-color-primary-N) !default;
 $lumx-button-emphasis-high-state-hover-theme-dark-border-color: transparent !default;
-$lumx-button-emphasis-high-state-active-padding-horizontal: 16px !default;
+$lumx-button-emphasis-high-state-active-padding-horizontal: var(--lumx-spacing-unit-big) !default;
 $lumx-button-emphasis-high-state-active-border-width: 0 !default;
 $lumx-button-emphasis-high-state-active-theme-light-background-color: var(--lumx-color-primary-D2) !default;
 $lumx-button-emphasis-high-state-active-theme-light-color: var(--lumx-color-light-N) !default;
@@ -31,7 +31,7 @@ $lumx-button-emphasis-high-state-active-theme-light-border-color: transparent !d
 $lumx-button-emphasis-high-state-active-theme-dark-background-color: var(--lumx-color-light-L2) !default;
 $lumx-button-emphasis-high-state-active-theme-dark-color: var(--lumx-color-primary-N) !default;
 $lumx-button-emphasis-high-state-active-theme-dark-border-color: transparent !default;
-$lumx-button-emphasis-medium-state-default-padding-horizontal: 16px !default;
+$lumx-button-emphasis-medium-state-default-padding-horizontal: var(--lumx-spacing-unit-big) !default;
 $lumx-button-emphasis-medium-state-default-border-width: 0 !default;
 $lumx-button-emphasis-medium-state-default-theme-light-background-color: var(--lumx-color-dark-L5) !default;
 $lumx-button-emphasis-medium-state-default-theme-light-color: var(--lumx-color-dark-L1) !default;
@@ -39,7 +39,7 @@ $lumx-button-emphasis-medium-state-default-theme-light-border-color: transparent
 $lumx-button-emphasis-medium-state-default-theme-dark-background-color: var(--lumx-color-light-L5) !default;
 $lumx-button-emphasis-medium-state-default-theme-dark-color: var(--lumx-color-light-N) !default;
 $lumx-button-emphasis-medium-state-default-theme-dark-border-color: transparent !default;
-$lumx-button-emphasis-medium-state-hover-padding-horizontal: 16px !default;
+$lumx-button-emphasis-medium-state-hover-padding-horizontal: var(--lumx-spacing-unit-big) !default;
 $lumx-button-emphasis-medium-state-hover-border-width: 0 !default;
 $lumx-button-emphasis-medium-state-hover-theme-light-background-color: var(--lumx-color-dark-L4) !default;
 $lumx-button-emphasis-medium-state-hover-theme-light-color: var(--lumx-color-dark-L1) !default;
@@ -47,7 +47,7 @@ $lumx-button-emphasis-medium-state-hover-theme-light-border-color: transparent !
 $lumx-button-emphasis-medium-state-hover-theme-dark-background-color: var(--lumx-color-light-L4) !default;
 $lumx-button-emphasis-medium-state-hover-theme-dark-color: var(--lumx-color-light-N) !default;
 $lumx-button-emphasis-medium-state-hover-theme-dark-border-color: transparent !default;
-$lumx-button-emphasis-medium-state-active-padding-horizontal: 16px !default;
+$lumx-button-emphasis-medium-state-active-padding-horizontal: var(--lumx-spacing-unit-big) !default;
 $lumx-button-emphasis-medium-state-active-border-width: 0 !default;
 $lumx-button-emphasis-medium-state-active-theme-light-background-color: var(--lumx-color-dark-L3) !default;
 $lumx-button-emphasis-medium-state-active-theme-light-color: var(--lumx-color-dark-L1) !default;
@@ -55,7 +55,7 @@ $lumx-button-emphasis-medium-state-active-theme-light-border-color: transparent 
 $lumx-button-emphasis-medium-state-active-theme-dark-background-color: var(--lumx-color-light-L3) !default;
 $lumx-button-emphasis-medium-state-active-theme-dark-color: var(--lumx-color-light-N) !default;
 $lumx-button-emphasis-medium-state-active-theme-dark-border-color: transparent !default;
-$lumx-button-emphasis-low-state-default-padding-horizontal: 8px !default;
+$lumx-button-emphasis-low-state-default-padding-horizontal: var(--lumx-spacing-unit-regular) !default;
 $lumx-button-emphasis-low-state-default-border-width: 0 !default;
 $lumx-button-emphasis-low-state-default-theme-light-background-color: transparent !default;
 $lumx-button-emphasis-low-state-default-theme-light-color: var(--lumx-color-dark-L1) !default;
@@ -63,7 +63,7 @@ $lumx-button-emphasis-low-state-default-theme-light-border-color: transparent !d
 $lumx-button-emphasis-low-state-default-theme-dark-background-color: transparent !default;
 $lumx-button-emphasis-low-state-default-theme-dark-color: var(--lumx-color-light-N) !default;
 $lumx-button-emphasis-low-state-default-theme-dark-border-color: transparent !default;
-$lumx-button-emphasis-low-state-hover-padding-horizontal: 8px !default;
+$lumx-button-emphasis-low-state-hover-padding-horizontal: var(--lumx-spacing-unit-regular) !default;
 $lumx-button-emphasis-low-state-hover-border-width: 0 !default;
 $lumx-button-emphasis-low-state-hover-theme-light-background-color: var(--lumx-color-dark-L5) !default;
 $lumx-button-emphasis-low-state-hover-theme-light-color: var(--lumx-color-dark-L1) !default;
@@ -71,7 +71,7 @@ $lumx-button-emphasis-low-state-hover-theme-light-border-color: transparent !def
 $lumx-button-emphasis-low-state-hover-theme-dark-background-color: var(--lumx-color-light-L5) !default;
 $lumx-button-emphasis-low-state-hover-theme-dark-color: var(--lumx-color-light-N) !default;
 $lumx-button-emphasis-low-state-hover-theme-dark-border-color: transparent !default;
-$lumx-button-emphasis-low-state-active-padding-horizontal: 8px !default;
+$lumx-button-emphasis-low-state-active-padding-horizontal: var(--lumx-spacing-unit-regular) !default;
 $lumx-button-emphasis-low-state-active-border-width: 0 !default;
 $lumx-button-emphasis-low-state-active-theme-light-background-color: var(--lumx-color-dark-L4) !default;
 $lumx-button-emphasis-low-state-active-theme-light-color: var(--lumx-color-dark-L1) !default;
@@ -79,7 +79,7 @@ $lumx-button-emphasis-low-state-active-theme-light-border-color: transparent !de
 $lumx-button-emphasis-low-state-active-theme-dark-background-color: var(--lumx-color-light-L4) !default;
 $lumx-button-emphasis-low-state-active-theme-dark-color: var(--lumx-color-light-N) !default;
 $lumx-button-emphasis-low-state-active-theme-dark-border-color: transparent !default;
-$lumx-button-emphasis-selected-state-default-padding-horizontal: 16px !default;
+$lumx-button-emphasis-selected-state-default-padding-horizontal: var(--lumx-spacing-unit-big) !default;
 $lumx-button-emphasis-selected-state-default-border-width: 0 !default;
 $lumx-button-emphasis-selected-state-default-theme-light-background-color: var(--lumx-color-primary-L5) !default;
 $lumx-button-emphasis-selected-state-default-theme-light-color: var(--lumx-color-primary-D2) !default;
@@ -87,7 +87,7 @@ $lumx-button-emphasis-selected-state-default-theme-light-border-color: transpare
 $lumx-button-emphasis-selected-state-default-theme-dark-background-color: var(--lumx-color-light-L3) !default;
 $lumx-button-emphasis-selected-state-default-theme-dark-color: var(--lumx-color-light-N) !default;
 $lumx-button-emphasis-selected-state-default-theme-dark-border-color: transparent !default;
-$lumx-button-emphasis-selected-state-hover-padding-horizontal: 16px !default;
+$lumx-button-emphasis-selected-state-hover-padding-horizontal: var(--lumx-spacing-unit-big) !default;
 $lumx-button-emphasis-selected-state-hover-border-width: 0 !default;
 $lumx-button-emphasis-selected-state-hover-theme-light-background-color: var(--lumx-color-primary-L4) !default;
 $lumx-button-emphasis-selected-state-hover-theme-light-color: var(--lumx-color-primary-D2) !default;
@@ -95,7 +95,7 @@ $lumx-button-emphasis-selected-state-hover-theme-light-border-color: transparent
 $lumx-button-emphasis-selected-state-hover-theme-dark-background-color: var(--lumx-color-light-L4) !default;
 $lumx-button-emphasis-selected-state-hover-theme-dark-color: var(--lumx-color-light-N) !default;
 $lumx-button-emphasis-selected-state-hover-theme-dark-border-color: transparent !default;
-$lumx-button-emphasis-selected-state-active-padding-horizontal: 16px !default;
+$lumx-button-emphasis-selected-state-active-padding-horizontal: var(--lumx-spacing-unit-big) !default;
 $lumx-button-emphasis-selected-state-active-border-width: 0 !default;
 $lumx-button-emphasis-selected-state-active-theme-light-background-color: var(--lumx-color-primary-L3) !default;
 $lumx-button-emphasis-selected-state-active-theme-light-color: var(--lumx-color-primary-D2) !default;
@@ -138,7 +138,7 @@ $lumx-material-text-field-header-label-line-height: 20px !default;
 $lumx-material-text-field-input-content-font-size: 14px !default;
 $lumx-material-text-field-input-content-font-weight: var(--lumx-typography-font-weight-regular) !default;
 $lumx-material-text-field-input-content-line-height: 20px !default;
-$lumx-navigation-item-padding-horizontal: 8px !default;
+$lumx-navigation-item-padding-horizontal: var(--lumx-spacing-unit-regular) !default;
 $lumx-navigation-item-min-height: 36px !default;
 $lumx-navigation-item-border-radius: 4px !default;
 $lumx-navigation-item-emphasis-low-state-default-border-top-width: 0 !default;
@@ -300,7 +300,7 @@ $lumx-tabs-link-emphasis-selected-state-active-theme-dark-background-color: var(
 $lumx-tabs-link-emphasis-selected-state-active-theme-dark-color: var(--lumx-color-light-N) !default;
 $lumx-tabs-link-emphasis-selected-state-active-theme-dark-border-color: var(--lumx-color-light-N) !default;
 $lumx-text-field-input-min-height: 36px !default;
-$lumx-text-field-input-padding-horizontal: 12px !default;
+$lumx-text-field-input-padding-horizontal: var(--lumx-spacing-unit-medium) !default;
 $lumx-text-field-input-border-radius: 4px !default;
 $lumx-text-field-state-default-input-border-top-width: 1px !default;
 $lumx-text-field-state-default-input-border-right-width: 1px !default;

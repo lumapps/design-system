@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/icons`: override & alias system in place. now custom icon fonts are now generated from MDI fonts we extend.
 -   `@lumx/icons`: override Twitter logo to use the new X logo.
+-   `@lumx/core`: make component spacing styles default to CSS variables.
 
 ## [3.5.5][] - 2023-11-13
 

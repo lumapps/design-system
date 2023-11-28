@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 10 Nov 2023 16:19:23 GMT
+ * Generated on Fri, 01 Dec 2023 08:49:40 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -9,7 +9,7 @@ export const DESIGN_TOKENS = {
         'border-radius': { value: '4px', $aliasedFrom: 'border-radius' },
         'emphasis-high': {
             'state-default': {
-                padding: { horizontal: { value: '16px', $aliasedFrom: 'spacing.unit.big' } },
+                padding: { horizontal: { value: 'var(--lumx-spacing-unit-big)', $aliasedFrom: 'spacing.unit.big' } },
                 'border-width': { value: '0' },
                 'theme-light': {
                     'background-color': {
@@ -39,7 +39,7 @@ export const DESIGN_TOKENS = {
                 },
             },
             'state-hover': {
-                padding: { horizontal: { value: '16px', $aliasedFrom: 'spacing.unit.big' } },
+                padding: { horizontal: { value: 'var(--lumx-spacing-unit-big)', $aliasedFrom: 'spacing.unit.big' } },
                 'border-width': { value: '0' },
                 'theme-light': {
                     'background-color': {
@@ -69,7 +69,7 @@ export const DESIGN_TOKENS = {
                 },
             },
             'state-active': {
-                padding: { horizontal: { value: '16px', $aliasedFrom: 'spacing.unit.big' } },
+                padding: { horizontal: { value: 'var(--lumx-spacing-unit-big)', $aliasedFrom: 'spacing.unit.big' } },
                 'border-width': { value: '0' },
                 'theme-light': {
                     'background-color': {
@@ -101,7 +101,7 @@ export const DESIGN_TOKENS = {
         },
         'emphasis-medium': {
             'state-default': {
-                padding: { horizontal: { value: '16px', $aliasedFrom: 'spacing.unit.big' } },
+                padding: { horizontal: { value: 'var(--lumx-spacing-unit-big)', $aliasedFrom: 'spacing.unit.big' } },
                 'border-width': { value: '0' },
                 'theme-light': {
                     'background-color': {
@@ -131,7 +131,7 @@ export const DESIGN_TOKENS = {
                 },
             },
             'state-hover': {
-                padding: { horizontal: { value: '16px', $aliasedFrom: 'spacing.unit.big' } },
+                padding: { horizontal: { value: 'var(--lumx-spacing-unit-big)', $aliasedFrom: 'spacing.unit.big' } },
                 'border-width': { value: '0' },
                 'theme-light': {
                     'background-color': {
@@ -161,7 +161,7 @@ export const DESIGN_TOKENS = {
                 },
             },
             'state-active': {
-                padding: { horizontal: { value: '16px', $aliasedFrom: 'spacing.unit.big' } },
+                padding: { horizontal: { value: 'var(--lumx-spacing-unit-big)', $aliasedFrom: 'spacing.unit.big' } },
                 'border-width': { value: '0' },
                 'theme-light': {
                     'background-color': {
@@ -193,7 +193,9 @@ export const DESIGN_TOKENS = {
         },
         'emphasis-low': {
             'state-default': {
-                padding: { horizontal: { value: '8px', $aliasedFrom: 'spacing.unit.regular' } },
+                padding: {
+                    horizontal: { value: 'var(--lumx-spacing-unit-regular)', $aliasedFrom: 'spacing.unit.regular' },
+                },
                 'border-width': { value: '0' },
                 'theme-light': {
                     'background-color': { value: 'transparent' },
@@ -215,7 +217,9 @@ export const DESIGN_TOKENS = {
                 },
             },
             'state-hover': {
-                padding: { horizontal: { value: '8px', $aliasedFrom: 'spacing.unit.regular' } },
+                padding: {
+                    horizontal: { value: 'var(--lumx-spacing-unit-regular)', $aliasedFrom: 'spacing.unit.regular' },
+                },
                 'border-width': { value: '0' },
                 'theme-light': {
                     'background-color': {
@@ -245,7 +249,9 @@ export const DESIGN_TOKENS = {
                 },
             },
             'state-active': {
-                padding: { horizontal: { value: '8px', $aliasedFrom: 'spacing.unit.regular' } },
+                padding: {
+                    horizontal: { value: 'var(--lumx-spacing-unit-regular)', $aliasedFrom: 'spacing.unit.regular' },
+                },
                 'border-width': { value: '0' },
                 'theme-light': {
                     'background-color': {
@@ -277,7 +283,7 @@ export const DESIGN_TOKENS = {
         },
         'emphasis-selected': {
             'state-default': {
-                padding: { horizontal: { value: '16px', $aliasedFrom: 'spacing.unit.big' } },
+                padding: { horizontal: { value: 'var(--lumx-spacing-unit-big)', $aliasedFrom: 'spacing.unit.big' } },
                 'border-width': { value: '0' },
                 'theme-light': {
                     'background-color': {
@@ -307,7 +313,7 @@ export const DESIGN_TOKENS = {
                 },
             },
             'state-hover': {
-                padding: { horizontal: { value: '16px', $aliasedFrom: 'spacing.unit.big' } },
+                padding: { horizontal: { value: 'var(--lumx-spacing-unit-big)', $aliasedFrom: 'spacing.unit.big' } },
                 'border-width': { value: '0' },
                 'theme-light': {
                     'background-color': {
@@ -337,7 +343,7 @@ export const DESIGN_TOKENS = {
                 },
             },
             'state-active': {
-                padding: { horizontal: { value: '16px', $aliasedFrom: 'spacing.unit.big' } },
+                padding: { horizontal: { value: 'var(--lumx-spacing-unit-big)', $aliasedFrom: 'spacing.unit.big' } },
                 'border-width': { value: '0' },
                 'theme-light': {
                     'background-color': {
@@ -425,7 +431,9 @@ export const DESIGN_TOKENS = {
     },
     navigation: {
         item: {
-            padding: { horizontal: { value: '8px', $aliasedFrom: 'spacing.unit.regular' } },
+            padding: {
+                horizontal: { value: 'var(--lumx-spacing-unit-regular)', $aliasedFrom: 'spacing.unit.regular' },
+            },
             'min-height': { value: '36px', $aliasedFrom: 'size.m' },
             'border-radius': { value: '4px', $aliasedFrom: 'border-radius' },
             'emphasis-low': {
@@ -1091,7 +1099,7 @@ export const DESIGN_TOKENS = {
     'text-field': {
         input: {
             'min-height': { value: '36px', $aliasedFrom: 'size.m' },
-            padding: { horizontal: { value: '12px', $aliasedFrom: 'spacing.unit.medium' } },
+            padding: { horizontal: { value: 'var(--lumx-spacing-unit-medium)', $aliasedFrom: 'spacing.unit.medium' } },
             'border-radius': { value: '4px', $aliasedFrom: 'border-radius' },
         },
         'state-default': {
