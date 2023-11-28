@@ -1,11 +1,11 @@
 {
     "spacing": {
         "unit": {
-            "tiny": { "value": "4px" },
-            "regular": { "value": "8px" },
-            "medium": { "value": "12px" },
-            "big": { "value": "16px" },
-            "huge": { "value": "24px" }
+            "tiny": { "value": "4px", "preferCSSVariable": true },
+            "regular": { "value": "8px", "preferCSSVariable": true },
+            "medium": { "value": "12px", "preferCSSVariable": true },
+            "big": { "value": "16px", "preferCSSVariable": true },
+            "huge": { "value": "24px", "preferCSSVariable": true }
         }
     }
 }

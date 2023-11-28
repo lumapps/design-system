@@ -22,12 +22,12 @@
                     "theme-light": {
                         "background-color": { "value": "transparent" },
                         "color": "{color.dark.L1}",
-                        "border-color": "{color.dark.L5}"
+                        "border-color": "{color.dark.L4}"
                     },
                     "theme-dark": {
                         "background-color": { "value": "transparent" },
-                        "color": "{color.light.N}",
-                        "border-color": "{color.light.L5}"
+                        "color": "{color.light.L1}",
+                        "border-color": "{color.light.L4}"
                     }
                 },
                 "state-hover": {
@@ -48,12 +48,12 @@
                     "theme-light": {
                         "background-color": "{color.dark.L5}",
                         "color": "{color.dark.L1}",
-                        "border-color": "{color.dark.L5}"
+                        "border-color": "{color.dark.L4}"
                     },
                     "theme-dark": {
                         "background-color": "{color.light.L5}",
-                        "color": "{color.light.N}",
-                        "border-color": "{color.light.L5}"
+                        "color": "{color.light.L1}",
+                        "border-color": "{color.light.L4}"
                     }
                 },
                 "state-active": {
@@ -74,12 +74,12 @@
                     "theme-light": {
                         "background-color": "{color.dark.L4}",
                         "color": "{color.dark.L1}",
-                        "border-color": "{color.dark.L5}"
+                        "border-color": "{color.dark.L4}"
                     },
                     "theme-dark": {
                         "background-color": "{color.light.L4}",
-                        "color": "{color.light.N}",
-                        "border-color": "{color.light.L5}"
+                        "color": "{color.light.L1}",
+                        "border-color": "{color.light.L4}"
                     }
                 }
             },
@@ -106,7 +106,7 @@
                     },
                     "theme-dark": {
                         "background-color": { "value": "transparent" },
-                        "color": "{color.light.N}",
+                        "color": "{color.light.L1}",
                         "border-color": "{color.light.N}"
                     }
                 },
@@ -132,7 +132,7 @@
                     },
                     "theme-dark": {
                         "background-color": "{color.light.L5}",
-                        "color": "{color.light.N}",
+                        "color": "{color.light.L1}",
                         "border-color": "{color.light.N}"
                     }
                 },
@@ -158,7 +158,7 @@
                     },
                     "theme-dark": {
                         "background-color": "{color.light.L4}",
-                        "color": "{color.light.N}",
+                        "color": "{color.light.L1}",
                         "border-color": "{color.light.N}"
                     }
                 }

@@ -65,7 +65,7 @@
                 },
                 "theme-dark": {
                     "background-color": "{color.light.L5}",
-                    "color": "{color.light.N}",
+                    "color": "{color.light.L1}",
                     "border-color": { "value": "transparent" }
                 }
             },
@@ -81,7 +81,7 @@
                 },
                 "theme-dark": {
                     "background-color": "{color.light.L4}",
-                    "color": "{color.light.N}",
+                    "color": "{color.light.L1}",
                     "border-color": { "value": "transparent" }
                 }
             },
@@ -97,7 +97,7 @@
                 },
                 "theme-dark": {
                     "background-color": "{color.light.L3}",
-                    "color": "{color.light.N}",
+                    "color": "{color.light.L1}",
                     "border-color": { "value": "transparent" }
                 }
             }
@@ -115,7 +115,7 @@
                 },
                 "theme-dark": {
                     "background-color": { "value": "transparent" },
-                    "color": "{color.light.N}",
+                    "color": "{color.light.L1}",
                     "border-color": { "value": "transparent" }
                 }
             },
@@ -131,7 +131,7 @@
                 },
                 "theme-dark": {
                     "background-color": "{color.light.L5}",
-                    "color": "{color.light.N}",
+                    "color": "{color.light.L1}",
                     "border-color": { "value": "transparent" }
                 }
             },
@@ -147,7 +147,7 @@
                 },
                 "theme-dark": {
                     "background-color": "{color.light.L4}",
-                    "color": "{color.light.N}",
+                    "color": "{color.light.L1}",
                     "border-color": { "value": "transparent" }
                 }
             }
