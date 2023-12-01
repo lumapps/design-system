@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 01 Dec 2023 08:54:27 GMT
+ * Generated on Fri, 01 Dec 2023 08:57:05 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -1290,11 +1290,7 @@ export const DESIGN_TOKENS = {
                     },
                 },
                 input: {
-                    'background-color': {
-                        value: 'var(--lumx-color-light-N)',
-                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
-                        $aliasedFrom: 'color.light.N',
-                    },
+                    'background-color': { value: 'transparent' },
                     'border-color': {
                         value: 'var(--lumx-color-primary-N)',
                         attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 1 } },
