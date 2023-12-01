@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 01 Dec 2023 09:06:10 GMT
+ * Generated on Fri, 01 Dec 2023 09:07:37 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -123,9 +123,9 @@ export const DESIGN_TOKENS = {
                         $aliasedFrom: 'color.light.L5',
                     },
                     color: {
-                        value: 'var(--lumx-color-light-N)',
-                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
-                        $aliasedFrom: 'color.light.N',
+                        value: 'var(--lumx-color-light-L1)',
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.9 } },
+                        $aliasedFrom: 'color.light.L1',
                     },
                     'border-color': { value: 'transparent' },
                 },
@@ -153,9 +153,9 @@ export const DESIGN_TOKENS = {
                         $aliasedFrom: 'color.light.L4',
                     },
                     color: {
-                        value: 'var(--lumx-color-light-N)',
-                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
-                        $aliasedFrom: 'color.light.N',
+                        value: 'var(--lumx-color-light-L1)',
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.9 } },
+                        $aliasedFrom: 'color.light.L1',
                     },
                     'border-color': { value: 'transparent' },
                 },
@@ -183,9 +183,9 @@ export const DESIGN_TOKENS = {
                         $aliasedFrom: 'color.light.L3',
                     },
                     color: {
-                        value: 'var(--lumx-color-light-N)',
-                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
-                        $aliasedFrom: 'color.light.N',
+                        value: 'var(--lumx-color-light-L1)',
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.9 } },
+                        $aliasedFrom: 'color.light.L1',
                     },
                     'border-color': { value: 'transparent' },
                 },
@@ -209,9 +209,9 @@ export const DESIGN_TOKENS = {
                 'theme-dark': {
                     'background-color': { value: 'transparent' },
                     color: {
-                        value: 'var(--lumx-color-light-N)',
-                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
-                        $aliasedFrom: 'color.light.N',
+                        value: 'var(--lumx-color-light-L1)',
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.9 } },
+                        $aliasedFrom: 'color.light.L1',
                     },
                     'border-color': { value: 'transparent' },
                 },
@@ -241,9 +241,9 @@ export const DESIGN_TOKENS = {
                         $aliasedFrom: 'color.light.L5',
                     },
                     color: {
-                        value: 'var(--lumx-color-light-N)',
-                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
-                        $aliasedFrom: 'color.light.N',
+                        value: 'var(--lumx-color-light-L1)',
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.9 } },
+                        $aliasedFrom: 'color.light.L1',
                     },
                     'border-color': { value: 'transparent' },
                 },
@@ -273,9 +273,9 @@ export const DESIGN_TOKENS = {
                         $aliasedFrom: 'color.light.L4',
                     },
                     color: {
-                        value: 'var(--lumx-color-light-N)',
-                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
-                        $aliasedFrom: 'color.light.N',
+                        value: 'var(--lumx-color-light-L1)',
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.9 } },
+                        $aliasedFrom: 'color.light.L1',
                     },
                     'border-color': { value: 'transparent' },
                 },
