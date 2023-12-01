@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/core`: make component spacing styles default to CSS variables.
 -   `@lumx/core`: make component border styles default to CSS variables.
 -   `@lumx/core`: change text-field background to transparent.
+-   `@lumx/core`: minor change on tabs color.
 
 ## [3.5.5][] - 2023-11-13
 

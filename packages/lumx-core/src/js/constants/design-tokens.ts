@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 01 Dec 2023 08:57:05 GMT
+ * Generated on Fri, 01 Dec 2023 08:58:31 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -870,22 +870,22 @@ export const DESIGN_TOKENS = {
                             $aliasedFrom: 'color.dark.L1',
                         },
                         'border-color': {
-                            value: 'var(--lumx-color-dark-L5)',
-                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.12 } },
-                            $aliasedFrom: 'color.dark.L5',
+                            value: 'var(--lumx-color-dark-L4)',
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.2 } },
+                            $aliasedFrom: 'color.dark.L4',
                         },
                     },
                     'theme-dark': {
                         'background-color': { value: 'transparent' },
                         color: {
-                            value: 'var(--lumx-color-light-N)',
-                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
-                            $aliasedFrom: 'color.light.N',
+                            value: 'var(--lumx-color-light-L1)',
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.9 } },
+                            $aliasedFrom: 'color.light.L1',
                         },
                         'border-color': {
-                            value: 'var(--lumx-color-light-L5)',
-                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.2 } },
-                            $aliasedFrom: 'color.light.L5',
+                            value: 'var(--lumx-color-light-L4)',
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.4 } },
+                            $aliasedFrom: 'color.light.L4',
                         },
                     },
                 },
@@ -908,9 +908,9 @@ export const DESIGN_TOKENS = {
                             $aliasedFrom: 'color.dark.L1',
                         },
                         'border-color': {
-                            value: 'var(--lumx-color-dark-L5)',
-                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.12 } },
-                            $aliasedFrom: 'color.dark.L5',
+                            value: 'var(--lumx-color-dark-L4)',
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.2 } },
+                            $aliasedFrom: 'color.dark.L4',
                         },
                     },
                     'theme-dark': {
@@ -920,14 +920,14 @@ export const DESIGN_TOKENS = {
                             $aliasedFrom: 'color.light.L5',
                         },
                         color: {
-                            value: 'var(--lumx-color-light-N)',
-                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
-                            $aliasedFrom: 'color.light.N',
+                            value: 'var(--lumx-color-light-L1)',
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.9 } },
+                            $aliasedFrom: 'color.light.L1',
                         },
                         'border-color': {
-                            value: 'var(--lumx-color-light-L5)',
-                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.2 } },
-                            $aliasedFrom: 'color.light.L5',
+                            value: 'var(--lumx-color-light-L4)',
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.4 } },
+                            $aliasedFrom: 'color.light.L4',
                         },
                     },
                 },
@@ -950,9 +950,9 @@ export const DESIGN_TOKENS = {
                             $aliasedFrom: 'color.dark.L1',
                         },
                         'border-color': {
-                            value: 'var(--lumx-color-dark-L5)',
-                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.12 } },
-                            $aliasedFrom: 'color.dark.L5',
+                            value: 'var(--lumx-color-dark-L4)',
+                            attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.2 } },
+                            $aliasedFrom: 'color.dark.L4',
                         },
                     },
                     'theme-dark': {
@@ -962,14 +962,14 @@ export const DESIGN_TOKENS = {
                             $aliasedFrom: 'color.light.L4',
                         },
                         color: {
-                            value: 'var(--lumx-color-light-N)',
-                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
-                            $aliasedFrom: 'color.light.N',
+                            value: 'var(--lumx-color-light-L1)',
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.9 } },
+                            $aliasedFrom: 'color.light.L1',
                         },
                         'border-color': {
-                            value: 'var(--lumx-color-light-L5)',
-                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.2 } },
-                            $aliasedFrom: 'color.light.L5',
+                            value: 'var(--lumx-color-light-L4)',
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.4 } },
+                            $aliasedFrom: 'color.light.L4',
                         },
                     },
                 },
@@ -998,9 +998,9 @@ export const DESIGN_TOKENS = {
                     'theme-dark': {
                         'background-color': { value: 'transparent' },
                         color: {
-                            value: 'var(--lumx-color-light-N)',
-                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
-                            $aliasedFrom: 'color.light.N',
+                            value: 'var(--lumx-color-light-L1)',
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.9 } },
+                            $aliasedFrom: 'color.light.L1',
                         },
                         'border-color': {
                             value: 'var(--lumx-color-light-N)',
@@ -1040,9 +1040,9 @@ export const DESIGN_TOKENS = {
                             $aliasedFrom: 'color.light.L5',
                         },
                         color: {
-                            value: 'var(--lumx-color-light-N)',
-                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
-                            $aliasedFrom: 'color.light.N',
+                            value: 'var(--lumx-color-light-L1)',
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.9 } },
+                            $aliasedFrom: 'color.light.L1',
                         },
                         'border-color': {
                             value: 'var(--lumx-color-light-N)',
@@ -1082,9 +1082,9 @@ export const DESIGN_TOKENS = {
                             $aliasedFrom: 'color.light.L4',
                         },
                         color: {
-                            value: 'var(--lumx-color-light-N)',
-                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
-                            $aliasedFrom: 'color.light.N',
+                            value: 'var(--lumx-color-light-L1)',
+                            attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.9 } },
+                            $aliasedFrom: 'color.light.L1',
                         },
                         'border-color': {
                             value: 'var(--lumx-color-light-N)',
