@@ -1,12 +1,12 @@
 /**
  * Do not edit directly
- * Generated on Fri, 01 Dec 2023 08:49:40 GMT
+ * Generated on Fri, 01 Dec 2023 08:54:27 GMT
  */
 
 export const DESIGN_TOKENS = {
     button: {
         height: { value: '36px', $aliasedFrom: 'size.m' },
-        'border-radius': { value: '4px', $aliasedFrom: 'border-radius' },
+        'border-radius': { value: 'var(--lumx-border-radius)', $aliasedFrom: 'border-radius' },
         'emphasis-high': {
             'state-default': {
                 padding: { horizontal: { value: 'var(--lumx-spacing-unit-big)', $aliasedFrom: 'spacing.unit.big' } },
@@ -435,7 +435,7 @@ export const DESIGN_TOKENS = {
                 horizontal: { value: 'var(--lumx-spacing-unit-regular)', $aliasedFrom: 'spacing.unit.regular' },
             },
             'min-height': { value: '36px', $aliasedFrom: 'size.m' },
-            'border-radius': { value: '4px', $aliasedFrom: 'border-radius' },
+            'border-radius': { value: 'var(--lumx-border-radius)', $aliasedFrom: 'border-radius' },
             'emphasis-low': {
                 'state-default': {
                     border: {
@@ -1100,7 +1100,7 @@ export const DESIGN_TOKENS = {
         input: {
             'min-height': { value: '36px', $aliasedFrom: 'size.m' },
             padding: { horizontal: { value: 'var(--lumx-spacing-unit-medium)', $aliasedFrom: 'spacing.unit.medium' } },
-            'border-radius': { value: '4px', $aliasedFrom: 'border-radius' },
+            'border-radius': { value: 'var(--lumx-border-radius)', $aliasedFrom: 'border-radius' },
         },
         'state-default': {
             input: {

@@ -2,11 +2,11 @@
 
 /**
  * Do not edit directly
- * Generated on Fri, 01 Dec 2023 08:49:40 GMT
+ * Generated on Fri, 01 Dec 2023 08:54:27 GMT
  */
 
 $lumx-button-height: 36px !default;
-$lumx-button-border-radius: 4px !default;
+$lumx-button-border-radius: var(--lumx-border-radius) !default;
 $lumx-button-emphasis-high-state-default-padding-horizontal: var(--lumx-spacing-unit-big) !default;
 $lumx-button-emphasis-high-state-default-border-width: 0 !default;
 $lumx-button-emphasis-high-state-default-theme-light-background-color: var(--lumx-color-primary-N) !default;
@@ -140,7 +140,7 @@ $lumx-material-text-field-input-content-font-weight: var(--lumx-typography-font-
 $lumx-material-text-field-input-content-line-height: 20px !default;
 $lumx-navigation-item-padding-horizontal: var(--lumx-spacing-unit-regular) !default;
 $lumx-navigation-item-min-height: 36px !default;
-$lumx-navigation-item-border-radius: 4px !default;
+$lumx-navigation-item-border-radius: var(--lumx-border-radius) !default;
 $lumx-navigation-item-emphasis-low-state-default-border-top-width: 0 !default;
 $lumx-navigation-item-emphasis-low-state-default-border-right-width: 0 !default;
 $lumx-navigation-item-emphasis-low-state-default-border-bottom-width: 0 !default;
@@ -301,7 +301,7 @@ $lumx-tabs-link-emphasis-selected-state-active-theme-dark-color: var(--lumx-colo
 $lumx-tabs-link-emphasis-selected-state-active-theme-dark-border-color: var(--lumx-color-light-N) !default;
 $lumx-text-field-input-min-height: 36px !default;
 $lumx-text-field-input-padding-horizontal: var(--lumx-spacing-unit-medium) !default;
-$lumx-text-field-input-border-radius: 4px !default;
+$lumx-text-field-input-border-radius: var(--lumx-border-radius) !default;
 $lumx-text-field-state-default-input-border-top-width: 1px !default;
 $lumx-text-field-state-default-input-border-right-width: 1px !default;
 $lumx-text-field-state-default-input-border-bottom-width: 1px !default;

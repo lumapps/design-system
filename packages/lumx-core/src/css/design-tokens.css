@@ -2,12 +2,12 @@
 
 /**
  * Do not edit directly
- * Generated on Fri, 01 Dec 2023 08:49:40 GMT
+ * Generated on Fri, 01 Dec 2023 08:54:27 GMT
  */
 
 :root {
     --lumx-button-height: 36px;
-    --lumx-button-border-radius: 4px;
+    --lumx-button-border-radius: var(--lumx-border-radius);
     --lumx-button-emphasis-high-state-default-padding-horizontal: var(--lumx-spacing-unit-big);
     --lumx-button-emphasis-high-state-default-border-width: 0;
     --lumx-button-emphasis-high-state-default-theme-light-background-color: var(--lumx-color-primary-N);
@@ -141,7 +141,7 @@
     --lumx-material-text-field-input-content-line-height: 20px;
     --lumx-navigation-item-padding-horizontal: var(--lumx-spacing-unit-regular);
     --lumx-navigation-item-min-height: 36px;
-    --lumx-navigation-item-border-radius: 4px;
+    --lumx-navigation-item-border-radius: var(--lumx-border-radius);
     --lumx-navigation-item-emphasis-low-state-default-border-top-width: 0;
     --lumx-navigation-item-emphasis-low-state-default-border-right-width: 0;
     --lumx-navigation-item-emphasis-low-state-default-border-bottom-width: 0;
@@ -302,7 +302,7 @@
     --lumx-tabs-link-emphasis-selected-state-active-theme-dark-border-color: var(--lumx-color-light-N);
     --lumx-text-field-input-min-height: 36px;
     --lumx-text-field-input-padding-horizontal: var(--lumx-spacing-unit-medium);
-    --lumx-text-field-input-border-radius: 4px;
+    --lumx-text-field-input-border-radius: var(--lumx-border-radius);
     --lumx-text-field-state-default-input-border-top-width: 1px;
     --lumx-text-field-state-default-input-border-right-width: 1px;
     --lumx-text-field-state-default-input-border-bottom-width: 1px;
