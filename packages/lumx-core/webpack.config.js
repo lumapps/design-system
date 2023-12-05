@@ -143,7 +143,7 @@ module.exports = {
         ),
     },
 
-    externals: ['moment', 'moment-range'],
+    externals: [],
 
     bail: true,
     devtool: 'source-map',

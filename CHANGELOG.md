@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Removed
+
+-   _[BREAKING]_ `@lumx/core/js/utils/date-picker` date util functions have been removed, replaced with internal utils (not using moment anymore)
+
 ### Changed
 
 -   `@lumx/icons`: override & alias system in place. now custom icon fonts are now generated from MDI fonts we extend.
