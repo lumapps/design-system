@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Tooltip: fixed tooltip closing when mouse is hovering the tooltip text.
+
 ## [3.6.0][] - 2023-12-05
 
 ### Changed

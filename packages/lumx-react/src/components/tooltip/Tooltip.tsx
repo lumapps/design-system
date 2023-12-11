@@ -85,8 +85,9 @@ export const Tooltip: Comp<TooltipProps, HTMLDivElement> = forwardRef((props, re
     });
 
     const position = attributes?.popper?.['data-popper-placement'] ?? placement;
-    const isOpen = useTooltipOpen(delay, anchorElement) || forceOpen;
-    const wrappedChildren = useInjectTooltipRef(children, setAnchorElement, isOpen as boolean, id);
+    const { isOpen: isActivated, onPopperMount } = useTooltipOpen(delay, anchorElement);
+    const isOpen = isActivated || forceOpen;
+    const wrappedChildren = useInjectTooltipRef(children, setAnchorElement, isOpen, id);
 
     return (
         <>
@@ -94,7 +95,7 @@ export const Tooltip: Comp<TooltipProps, HTMLDivElement> = forwardRef((props, re
             {isOpen &&
                 createPortal(
                     <div
-                        ref={mergeRefs(ref, setPopperElement)}
+                        ref={mergeRefs(ref, setPopperElement, onPopperMount)}
                         {...forwardedProps}
                         id={id}
                         role="tooltip"

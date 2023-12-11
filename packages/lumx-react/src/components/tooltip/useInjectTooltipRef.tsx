@@ -18,7 +18,7 @@ import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 export const useInjectTooltipRef = (
     children: ReactNode,
     setAnchorElement: (e: HTMLDivElement) => void,
-    isOpen: boolean,
+    isOpen: boolean | undefined,
     id: string,
 ): ReactNode => {
     return useMemo(() => {
