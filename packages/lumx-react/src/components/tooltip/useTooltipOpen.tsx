@@ -1,7 +1,7 @@
-import { onEscapePressed } from '@lumx/react/utils/event';
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { browserDoesNotSupportHover } from '@lumx/react/utils/browserDoesNotSupportHover';
 import { TOOLTIP_HOVER_DELAY, TOOLTIP_LONG_PRESS_DELAY } from '@lumx/react/constants';
+import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 
 /**
  * Hook controlling tooltip visibility using mouse hover the anchor and delay.
@@ -14,6 +14,10 @@ export function useTooltipOpen(delay: number | undefined, anchorElement: HTMLEle
     const [isOpen, setIsOpen] = useState(false);
 
     const onPopperMount = useRef<any>(null) as MutableRefObject<(elem: HTMLElement | null) => void>;
+
+    // Global close on escape
+    const [closeCallback, setCloseCallback] = useState<undefined | (() => void)>(undefined);
+    useCallbackOnEscape(closeCallback);
 
     useEffect(() => {
         if (!anchorElement) {
@@ -54,6 +58,7 @@ export function useTooltipOpen(delay: number | undefined, anchorElement: HTMLEle
         };
         const close = () => getClose(closeDelay);
         const closeImmediately = () => getClose(0);
+        setCloseCallback(() => closeImmediately);
 
         // Adapt event to browsers with or without `hover` support.
         const events: Array<[Node, Event['type'], any]> = [];
@@ -105,8 +110,6 @@ export function useTooltipOpen(delay: number | undefined, anchorElement: HTMLEle
             [anchorElement, 'focusin', open],
             // Close on lost focus.
             [anchorElement, 'focusout', closeImmediately],
-            // Close on ESC keydown
-            [anchorElement, 'keydown', onEscapePressed(closeImmediately)],
         );
 
         // Attach events

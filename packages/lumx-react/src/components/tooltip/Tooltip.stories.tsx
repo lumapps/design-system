@@ -56,12 +56,13 @@ export const TooltipWithDropdown = (props: any) => {
     const [isOpen, setOpen] = useState(false);
     return (
         <>
-            <Tooltip label={!isOpen && 'Tooltip'} {...props}>
+            <br />
+            <Tooltip label={!isOpen && 'Tooltip'} {...props} placement="top">
                 <Button ref={setButton} onClick={() => setOpen((o) => !o)}>
                     Anchor
                 </Button>
             </Tooltip>
-            <Dropdown anchorRef={{ current: button }} isOpen={isOpen}>
+            <Dropdown anchorRef={{ current: button }} isOpen={isOpen} onClose={() => setOpen(false)}>
                 Dropdown
             </Dropdown>
         </>
