@@ -125,6 +125,38 @@ describe(`<${Tooltip.displayName}>`, () => {
             });
         });
 
+        it('should activate on hover anchor and then tooltip', async () => {
+            let { tooltip } = await setup({
+                label: 'Tooltip label',
+                children: <Button>Anchor</Button>,
+                forceOpen: false,
+            });
+
+            expect(tooltip).not.toBeInTheDocument();
+
+            // Hover anchor button
+            const button = getByClassName(document.body, Button.className as string);
+            await userEvent.hover(button);
+
+            // Tooltip opened
+            tooltip = await findByClassName(document.body, CLASSNAME);
+            expect(tooltip).toBeInTheDocument();
+            expect(button).toHaveAttribute('aria-describedby', tooltip?.id);
+
+            // Hover tooltip
+            await userEvent.hover(tooltip);
+            expect(tooltip).toBeInTheDocument();
+            expect(button).toHaveAttribute('aria-describedby', tooltip?.id);
+
+            // Un-hover tooltip
+            userEvent.unhover(tooltip);
+            await waitFor(() => {
+                expect(button).not.toHaveFocus();
+                // Tooltip closed
+                expect(tooltip).not.toBeInTheDocument();
+            });
+        });
+
         it('should activate on anchor focus', async () => {
             let { tooltip } = await setup({
                 label: 'Tooltip label',

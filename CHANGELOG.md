@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Tooltip: fixed tooltip closing when mouse is hovering the tooltip text.
+-   Tooltip: fixed close on Escape key pressed (not only when anchor is focused).
+
 ## [3.6.0][] - 2023-12-05
 
 ### Changed
@@ -24,7 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
--    Table row: selected states color update + documentation update
+-   Table row: selected states color update + documentation update
 -   `@lumx/core`: remove default line-height on custom title typography.
 
 ## [3.5.4][] - 2023-10-17
@@ -1840,9 +1845,7 @@ _Failed released_
 [unreleased]: https://github.com/lumapps/design-system/compare/v3.5.3...HEAD
 [3.5.3]: https://github.com/lumapps/design-system/compare/v3.5.2...v3.5.3
 [3.5.2]: https://github.com/lumapps/design-system/tree/v3.5.2
-
-
-[Unreleased]: https://github.com/lumapps/design-system/compare/v3.6.0...HEAD
+[unreleased]: https://github.com/lumapps/design-system/compare/v3.6.0...HEAD
 [3.6.0]: https://github.com/lumapps/design-system/compare/v3.5.5...v3.6.0
 [3.5.5]: https://github.com/lumapps/design-system/compare/v3.5.4...v3.5.5
 [3.5.4]: https://github.com/lumapps/design-system/tree/v3.5.4

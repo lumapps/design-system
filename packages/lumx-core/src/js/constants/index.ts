@@ -22,7 +22,7 @@ export const SLIDESHOW_TRANSITION_DURATION = 5000;
  */
 export const TOOLTIP_HOVER_DELAY = {
     open: 500,
-    close: 0,
+    close: 500,
 };
 
 /**
