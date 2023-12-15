@@ -22,6 +22,12 @@ export const SQUARE_IMAGES = { square1, square2 };
 export const SVG_IMAGES = { defaultSvg };
 export const EMPTY_IMAGES = { emptyImage };
 export const LANDSCAPE_IMAGES = { landscape1, landscape1s200, landscape2, landscape3 };
+export const LANDSCAPE_IMAGES_ALT: { [key in keyof typeof LANDSCAPE_IMAGES]: string } = {
+    landscape1: 'A majestic snowy mountain range with a peak covered in glistening snow',
+    landscape1s200: 'A majestic snowy mountain range with a peak covered in glistening snow',
+    landscape2: 'A colorful rack of shirts displaying various hues and styles',
+    landscape3: 'An open book resting on a table, ready to be explored and read',
+};
 export const PORTRAIT_IMAGES = { portrait1, portrait1s200, portrait2, portrait3 };
 export const IMAGES = {
     ...LANDSCAPE_IMAGES,
