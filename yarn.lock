@@ -10089,38 +10089,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"caniuse-lite@npm:^1.0.0, caniuse-lite@npm:^1.0.30001010":
-  version: 1.0.30001011
-  resolution: "caniuse-lite@npm:1.0.30001011"
-  checksum: a7eebfef057ff74a589304b06e9d6d3d570c570538486f9e5f8ed1788e73cfe81e4d7668dea31332e277cf65ac75cead17867d660c05c612b73cd0959325c3d5
-  languageName: node
-  linkType: hard
-
-"caniuse-lite@npm:^1.0.30001017, caniuse-lite@npm:^1.0.30001020":
-  version: 1.0.30001021
-  resolution: "caniuse-lite@npm:1.0.30001021"
-  checksum: 1e0d7faad3ca3750599123741c0b9d96fbd569cc1e02b746e9bafb83917d386b033026652abf89f109f6723b4ed7a90be3853b585b5e19443db407c9f1a501a2
-  languageName: node
-  linkType: hard
-
-"caniuse-lite@npm:^1.0.30001023":
-  version: 1.0.30001025
-  resolution: "caniuse-lite@npm:1.0.30001025"
-  checksum: 3b2c93a78931178b0b7b236514a8fb71d747e09c03b6d2e67fff9f5e7e2f08516b063477b1fed14f7b58e8292512db5b75e23fc7f0f7f83cb93136c55e85f33c
-  languageName: node
-  linkType: hard
-
-"caniuse-lite@npm:^1.0.30001109, caniuse-lite@npm:^1.0.30001135":
-  version: 1.0.30001146
-  resolution: "caniuse-lite@npm:1.0.30001146"
-  checksum: f2507eedbda9e8f6f614f7daefca5b56eb3e6413bb3c14c9848c58b7f007c21b3b1054cd943152118891c9005c260c323110b82de1f8a1ee83f0fe62131fe104
-  languageName: node
-  linkType: hard
-
-"caniuse-lite@npm:^1.0.30001565":
-  version: 1.0.30001566
-  resolution: "caniuse-lite@npm:1.0.30001566"
-  checksum: 0f9084bf9f7d5c0a9ddb200c2baddb25dd2ad5a2f205f01e7b971f3e98e9a7bb23c2d86bae48237e9bc9782b682cffaaf3406d936937ab9844987dbe2a6401f2
+"caniuse-lite@npm:^1.0.0, caniuse-lite@npm:^1.0.30001010, caniuse-lite@npm:^1.0.30001017, caniuse-lite@npm:^1.0.30001020, caniuse-lite@npm:^1.0.30001023, caniuse-lite@npm:^1.0.30001109, caniuse-lite@npm:^1.0.30001135, caniuse-lite@npm:^1.0.30001565":
+  version: 1.0.30001570
+  resolution: "caniuse-lite@npm:1.0.30001570"
+  checksum: 460be2c7a9b1c8a83b6aae4226661c276d9dada6c84209dee547699cf4b28030b9d1fc29ddd7626acee77412b6401993878ea0ef3eadbf3a63ded9034896ae20
   languageName: node
   linkType: hard
 
