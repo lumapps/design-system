@@ -4,6 +4,18 @@
 
 <DemoBlock demo="default" />
 
+### Accessibility concerns
+
+This component uses the `dialog` accessible pattern, a few specific behaviors are applied:
+
+- When opening, focus will be set either on the provided `focusElement` prop or on the close button (if defined) or on the dialog itself.
+Once the focus is set within, it will be trapped and stay within the lightbox until it is closed.
+
+- A label must be defined using either `aria-label` or `aria-labelledby` props.
+Setting `aria-labelledby` is recommended as it target a visible label rather than adding an invisible `aria-label` on the dialog.
+
+- When closing, the activating element should take focus. Make sure to fill the `parentElement` prop to make this work properly.
+
 ### Properties
 
 <PropTable component="Lightbox" />

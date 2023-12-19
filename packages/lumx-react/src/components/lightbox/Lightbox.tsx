@@ -1,4 +1,4 @@
-import React, { forwardRef, RefObject, useRef, useEffect } from 'react';
+import React, { forwardRef, RefObject, useRef, useEffect, AriaAttributes } from 'react';
 
 import classNames from 'classnames';
 import { createPortal } from 'react-dom';
@@ -19,7 +19,7 @@ import { useTransitionVisibility } from '@lumx/react/hooks/useTransitionVisibili
 /**
  * Defines the props of the component.
  */
-export interface LightboxProps extends GenericProps, HasTheme {
+export interface LightboxProps extends GenericProps, HasTheme, Pick<AriaAttributes, 'aria-label' | 'aria-labelledby'> {
     /** Props to pass to the close button (minus those already set by the Lightbox props). */
     closeButtonProps?: Pick<IconButtonProps, 'label'> &
         Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis' | 'color'>;
@@ -27,6 +27,8 @@ export interface LightboxProps extends GenericProps, HasTheme {
     isOpen?: boolean;
     /** Reference to the element that triggered modal opening to set focus on. */
     parentElement: RefObject<any>;
+    /** Reference to the element that should get the focus when the lightbox opens. By default, the close button or the lightbox itself will take focus. */
+    focusElement?: RefObject<HTMLElement>;
     /** Whether to keep the dialog open on clickaway or escape press. */
     preventAutoClose?: boolean;
     /** Z-axis position. */
@@ -54,13 +56,17 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  */
 export const Lightbox: Comp<LightboxProps, HTMLDivElement> = forwardRef((props, ref) => {
     const {
-        ariaLabel,
+        'aria-labelledby': propAriaLabelledBy,
+        ariaLabelledBy = propAriaLabelledBy,
+        'aria-label': propAriaLabel,
+        ariaLabel = propAriaLabel,
         children,
         className,
         closeButtonProps,
         isOpen,
         onClose,
         parentElement,
+        focusElement,
         preventAutoClose,
         theme,
         zIndex,
@@ -75,6 +81,8 @@ export const Lightbox: Comp<LightboxProps, HTMLDivElement> = forwardRef((props, 
     const childrenRef = useRef<any>(null);
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const wrapperRef = useRef<HTMLDivElement>(null);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const closeButtonRef = useRef<HTMLButtonElement>(null);
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useDisableBodyScroll(isOpen && wrapperRef.current);
@@ -84,7 +92,12 @@ export const Lightbox: Comp<LightboxProps, HTMLDivElement> = forwardRef((props, 
 
     // Handle focus trap.
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    useFocusTrap(isOpen && wrapperRef.current, childrenRef.current?.firstChild);
+    useFocusTrap(
+        // Focus trap zone
+        isOpen && wrapperRef.current,
+        // Focus element (fallback on close button and then on the dialog)
+        focusElement?.current || closeButtonRef.current || wrapperRef.current,
+    );
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const previousOpen = useRef(isOpen);
@@ -116,7 +129,10 @@ export const Lightbox: Comp<LightboxProps, HTMLDivElement> = forwardRef((props, 
             ref={mergeRefs(ref, wrapperRef)}
             {...forwardedProps}
             aria-label={ariaLabel}
+            aria-labelledby={ariaLabelledBy}
             aria-modal="true"
+            role="dialog"
+            tabIndex={-1}
             className={classNames(
                 className,
                 handleBasicClasses({
@@ -131,6 +147,7 @@ export const Lightbox: Comp<LightboxProps, HTMLDivElement> = forwardRef((props, 
             {closeButtonProps && (
                 <IconButton
                     {...closeButtonProps}
+                    ref={closeButtonRef}
                     className={`${CLASSNAME}__close`}
                     color={ColorPalette.light}
                     emphasis={Emphasis.low}

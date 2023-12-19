@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Tooltip: fixed tooltip closing when mouse is hovering the tooltip text.
 -   Tooltip: fixed close on Escape key pressed (not only when anchor is focused).
+-   Lightbox: fixed aria dialog accessibility (reworked role, labelling and default focus element).
+-   Lightbox: document accessibility concerns.
 
 ## [3.6.0][] - 2023-12-05
 
