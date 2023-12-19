@@ -7,7 +7,7 @@ import { forwardRefPolymorphic } from '@lumx/react/utils/forwardRefPolymorphic';
 import { ThemeContext } from '@lumx/react/utils/ThemeContext';
 
 type BaseNavigationItemProps = {
-    /* Icon (SVG path). */
+    /** Icon (SVG path). */
     icon?: string;
     /** Label content. */
     label: ReactNode;
@@ -65,7 +65,7 @@ export const NavigationItem = Object.assign(
                             prefix: `${CLASSNAME}__link`,
                             isSelected: isCurrentPage,
                         })}
-                        ref={ref}
+                        ref={ref as React.Ref<any>}
                         aria-current={isCurrentPage ? 'page' : undefined}
                         {...buttonProps}
                         {...forwardedProps}
