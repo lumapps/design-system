@@ -6,8 +6,9 @@
    ========================================================================== */
 
 .code-block {
+    position: relative;
     display: block;
-    padding: $lumx-spacing-unit * 2;
+    padding: $lumx-spacing-unit-big;
     overflow-x: auto;
     font-size: 14px;
     color: #333;
@@ -33,5 +34,11 @@
         font-size: inherit;
         font-weight: inherit;
         background: none;
+    }
+
+    & &__edit-on-codesandbox {
+        position: absolute;
+        top: $lumx-spacing-unit-big;
+        right: $lumx-spacing-unit-big;
     }
 }

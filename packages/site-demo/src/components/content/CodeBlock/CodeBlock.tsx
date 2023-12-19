@@ -2,6 +2,8 @@ import classNames from 'classnames';
 import isString from 'lodash/isString';
 import Highlight, { defaultProps, Language } from 'prism-react-renderer';
 import React from 'react';
+import { IconButton } from '@lumx/react';
+import { mdiSquareEditOutline } from '@lumx/icons';
 import { theme } from './init-prism';
 import { renderJSXLinesWithCollapsedImports } from './renderJSXLinesWithCollapsedImports';
 import { renderLines } from './renderLines';
@@ -15,10 +17,18 @@ interface Props {
     codeString?: string;
     /** Code language (tsx, jsx, etc.) */
     language?: Language | 'tsx';
+    /** URL to the CodeSandbox. */
+    codesandboxURL?: string;
 }
 
 /** Display syntax highlighted code */
-export const CodeBlock: React.FC<Props> = ({ className, codeString, language: propLanguage, children }) => {
+export const CodeBlock: React.FC<Props> = ({
+    className,
+    codeString,
+    language: propLanguage,
+    children,
+    codesandboxURL,
+}) => {
     const language = propLanguage || className?.match(/language-(\w+)/)?.[1];
     if (!language) {
         return <pre className={classNames('code-block', className)}>{children || codeString}</pre>;
@@ -29,6 +39,16 @@ export const CodeBlock: React.FC<Props> = ({ className, codeString, language: pr
         <Highlight {...defaultProps} theme={theme} code={code} language={language as Language}>
             {({ className: prismClassName, ...renderParams }) => (
                 <pre className={classNames('code-block', prismClassName, className)}>
+                    {codesandboxURL && (
+                        <IconButton
+                            className="code-block__edit-on-codesandbox"
+                            icon={mdiSquareEditOutline}
+                            emphasis="low"
+                            label="Edit on CodeSandbox"
+                            target="_blank"
+                            href={codesandboxURL}
+                        />
+                    )}
                     {language === 'jsx' || language === 'tsx'
                         ? renderJSXLinesWithCollapsedImports(renderParams)
                         : renderLines(renderParams)}
