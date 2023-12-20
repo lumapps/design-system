@@ -173,6 +173,19 @@ export const Kind = {
 export type Kind = ValueOf<typeof Kind>;
 
 /**
+ * All available white-space values
+ * */
+export const WhiteSpace = {
+    normal: 'normal',
+    nowrap: 'nowrap',
+    pre: 'pre',
+    'pre-wrap': 'pre-wrap',
+    'pre-line': 'pre-line',
+    'break-spaces': 'break-spaces',
+};
+export type WhiteSpace = ValueOf<typeof WhiteSpace>;
+
+/**
  * Re-exporting some utils types.
  */
 export type { HeadingElement, TextElement, GenericProps, Callback } from '../utils/type';

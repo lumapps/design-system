@@ -61,6 +61,12 @@ describe(`<${Text.displayName}>`, () => {
             expect(element).toHaveClass('lumx-text--no-wrap');
         });
 
+        it('should render with custom whiteSpace', () => {
+            const { element } = setup({ whiteSpace: 'pre-wrap' });
+            expect(element.tagName).toBe('SPAN');
+            expect(element).toHaveStyle({ '--lumx-text-white-space': 'pre-wrap' });
+        });
+
         it('should wrap icons with spaces', () => {
             const { element } = setup({ children: ['Some text', <Icon key="icon" icon={mdiEarth} />, 'with icon'] });
             // Spaces have been inserted around the icon.
