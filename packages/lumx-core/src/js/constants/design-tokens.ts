@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 01 Dec 2023 09:07:37 GMT
+ * Generated on Thu, 04 Jan 2024 13:59:14 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -2041,7 +2041,12 @@ export const DESIGN_TOKENS = {
             value:
                 "'-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'sans-serif'",
         },
-        'font-weight': { regular: { value: '400' }, bold: { value: '700' }, light: { value: '300' } },
+        'font-weight': {
+            regular: { value: '400' },
+            medium: { value: '500' },
+            bold: { value: '700' },
+            light: { value: '300' },
+        },
         interface: {
             display1: {
                 'font-size': { value: '34px' },
