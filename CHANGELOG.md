@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Add new design token `medium` for `font-weight`.
+
 ### Fixed
 
 -   Tooltip: fixed tooltip closing when mouse is hovering the tooltip text.
