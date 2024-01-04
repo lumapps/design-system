@@ -72,7 +72,7 @@ describe(`<${Uploader.displayName}>`, () => {
         it('should render file input', () => {
             const label = 'Label';
             const accept = '*';
-            const { uploader } = setup({ label, fileInputProps: { accept } });
+            const { uploader } = setup({ label, fileInputProps: { accept } as any });
 
             expect(uploader.tagName).toBe('LABEL');
             expect(uploader).toHaveTextContent(label);

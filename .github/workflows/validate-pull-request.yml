@@ -39,6 +39,21 @@ jobs:
                     sudo timedatectl set-timezone Europe/Paris
                     yarn test
 
+    type-check:
+        if: github.event.pull_request.draft == false
+        timeout-minutes: 30
+        runs-on: ubuntu-latest
+        steps:
+            -   name: "Checkout repository"
+                uses: actions/checkout@v3
+
+            -   name: "Setup"
+                uses: ./.github/actions/setup
+
+            -   name: "Run code type check"
+                run: yarn type-check
+
+
     Github-actions-validator:
         if: github.event.pull_request.draft == false
         runs-on: ubuntu-latest

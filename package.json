@@ -84,6 +84,7 @@
         "setup:git-hooks": "yarn husky uninstall && yarn husky install || exit 0",
         "start": "yarn workspace lumx-site-demo start",
         "test": "yarn workspace @lumx/react test",
+        "type-check": "yarn tsc -p tsconfig.json",
         "storybook:react": "yarn workspace @lumx/react start:storybook",
         "storybook": "yarn storybook:react",
         "generate:design-tokens": "yarn workspace @lumx/core generate:design-tokens"
