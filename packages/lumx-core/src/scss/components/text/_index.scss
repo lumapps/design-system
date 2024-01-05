@@ -3,11 +3,14 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-text {
+    white-space: var(--lumx-text-white-space);
+
     &--is-truncated {
+        --lumx-text-white-space: nowrap;
+
         display: block;
         overflow: hidden;
         text-overflow: ellipsis;
-        white-space: nowrap;
     }
 
     &--is-truncated-multiline {
@@ -19,7 +22,7 @@
     }
 
     &--no-wrap {
-        white-space: nowrap;
+        --lumx-text-white-space: nowrap;
     }
 
     // Fix icon alignment

@@ -1,6 +1,6 @@
 import React, { Children, Fragment, forwardRef } from 'react';
 
-import { Icon, ColorPalette, ColorVariant, Typography } from '@lumx/react';
+import { Icon, ColorPalette, ColorVariant, Typography, WhiteSpace } from '@lumx/react';
 import { Comp, GenericProps, TextElement, isComponent } from '@lumx/react/utils/type';
 import {
     getFontColorClassName,
@@ -41,6 +41,12 @@ export interface TextProps extends GenericProps {
      * (automatically activated when single line text truncate is activated).
      */
     noWrap?: boolean;
+    /**
+     * WhiteSpace variant
+     * Ignored when `noWrap` is set to true
+     * Ignored when `truncate` is set to true or lines: 1
+     * */
+    whiteSpace?: WhiteSpace;
 }
 
 /**
@@ -75,6 +81,7 @@ export const Text: Comp<TextProps> = forwardRef((props, ref) => {
         noWrap,
         typography,
         truncate,
+        whiteSpace,
         style,
         ...forwardedProps
     } = props;
@@ -87,6 +94,15 @@ export const Text: Comp<TextProps> = forwardRef((props, ref) => {
         truncate.lines > 1 && { '--lumx-text-truncate-lines': truncate.lines };
     const isTruncatedMultiline = !!truncateLinesStyle;
     const isTruncated = !!truncate;
+
+    /**
+     * Add custom white-space style if specified
+     * Disabled if noWrap is specified
+     * Disabled if truncated on one-line
+     * */
+    const whiteSpaceStyle = !noWrap &&
+        !(isTruncated && !isTruncatedMultiline) &&
+        whiteSpace && { '--lumx-text-white-space': whiteSpace };
 
     return (
         <Component
@@ -102,7 +118,7 @@ export const Text: Comp<TextProps> = forwardRef((props, ref) => {
                 colorClass,
                 noWrap && `${CLASSNAME}--no-wrap`,
             )}
-            style={{ ...truncateLinesStyle, ...style }}
+            style={{ ...truncateLinesStyle, ...whiteSpaceStyle, ...style }}
             {...forwardedProps}
         >
             {children &&
