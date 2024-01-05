@@ -1,13 +1,8 @@
 import React from 'react';
 
 import { Button } from '@lumx/react';
-import { act, render, waitFor } from '@testing-library/react';
-import {
-    findByClassName,
-    getByClassName,
-    queryAllByTagName,
-    queryByClassName,
-} from '@lumx/react/testing/utils/queries';
+import { screen, render, waitFor } from '@testing-library/react';
+import { queryAllByTagName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import userEvent from '@testing-library/user-event';
 
@@ -16,23 +11,19 @@ import { Tooltip, TooltipProps } from './Tooltip';
 const CLASSNAME = Tooltip.className as string;
 
 jest.mock('uid', () => ({ uid: () => 'uid' }));
+// Skip delays
+jest.mock('@lumx/react/constants', () => ({
+    ...jest.requireActual('@lumx/react/constants'),
+    TOOLTIP_HOVER_DELAY: { open: 0, close: 0 },
+}));
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
 const setup = async (propsOverride: Partial<TooltipProps> = {}) => {
-    const props: any = { forceOpen: true, ...propsOverride };
-    // Hack to remove act() warning in console
-    await (act as any)(() =>
-        Promise.resolve(
-            render(
-                <Tooltip label="Tooltip" {...props}>
-                    {props.children || 'Anchor'}
-                </Tooltip>,
-            ),
-        ),
-    );
-    const tooltip = queryByClassName(document.body, CLASSNAME);
+    const props: any = { forceOpen: true, label: 'Tooltip label', children: 'Anchor', ...propsOverride };
+    render(<Tooltip {...props} />);
+    const tooltip = screen.queryByRole('tooltip', { name: props.label });
     const anchorWrapper = queryByClassName(document.body, 'lumx-tooltip-anchor-wrapper');
     return { props, tooltip, anchorWrapper };
 };
@@ -67,7 +58,7 @@ describe(`<${Tooltip.displayName}>`, () => {
             });
             expect(tooltip).toBeInTheDocument();
             expect(anchorWrapper).not.toBeInTheDocument();
-            const button = queryByClassName(document.body, Button.className as string);
+            const button = screen.queryByRole('button', { name: 'Anchor' });
             expect(button).toHaveAttribute('aria-describedby', tooltip?.id);
         });
 
@@ -80,7 +71,7 @@ describe(`<${Tooltip.displayName}>`, () => {
             expect(tooltip).toBeInTheDocument();
             expect(anchorWrapper).toBeInTheDocument();
             expect(anchorWrapper).toHaveAttribute('aria-describedby', tooltip?.id);
-            const button = queryByClassName(document.body, Button.className as string);
+            const button = screen.queryByRole('button', { name: 'Anchor' });
             expect(button?.parentElement).toBe(anchorWrapper);
         });
 
@@ -108,11 +99,11 @@ describe(`<${Tooltip.displayName}>`, () => {
             expect(tooltip).not.toBeInTheDocument();
 
             // Hover anchor button
-            const button = getByClassName(document.body, Button.className as string);
+            const button = screen.getByRole('button', { name: 'Anchor' });
             await userEvent.hover(button);
 
             // Tooltip opened
-            tooltip = await findByClassName(document.body, CLASSNAME);
+            tooltip = await screen.findByRole('tooltip', { name: 'Tooltip label' });
             expect(tooltip).toBeInTheDocument();
             expect(button).toHaveAttribute('aria-describedby', tooltip?.id);
 
@@ -135,11 +126,11 @@ describe(`<${Tooltip.displayName}>`, () => {
             expect(tooltip).not.toBeInTheDocument();
 
             // Hover anchor button
-            const button = getByClassName(document.body, Button.className as string);
+            const button = screen.getByRole('button', { name: 'Anchor' });
             await userEvent.hover(button);
 
             // Tooltip opened
-            tooltip = await findByClassName(document.body, CLASSNAME);
+            tooltip = await screen.findByRole('tooltip', { name: 'Tooltip label' });
             expect(tooltip).toBeInTheDocument();
             expect(button).toHaveAttribute('aria-describedby', tooltip?.id);
 
@@ -157,7 +148,7 @@ describe(`<${Tooltip.displayName}>`, () => {
             });
         });
 
-        it('should activate on anchor focus', async () => {
+        it('should activate on anchor focus and close on escape', async () => {
             let { tooltip } = await setup({
                 label: 'Tooltip label',
                 children: <Button>Anchor</Button>,
@@ -168,21 +159,27 @@ describe(`<${Tooltip.displayName}>`, () => {
 
             // Focus anchor button
             await userEvent.tab();
-            const button = getByClassName(document.body, Button.className as string);
+            const button = screen.getByRole('button', { name: 'Anchor' });
             expect(button).toHaveFocus();
 
             // Tooltip opened
-            tooltip = await findByClassName(document.body, CLASSNAME);
+            tooltip = await screen.findByRole('tooltip', { name: 'Tooltip label' });
             expect(tooltip).toBeInTheDocument();
             expect(button).toHaveAttribute('aria-describedby', tooltip?.id);
 
-            // Focus next element
-            userEvent.tab();
-            await waitFor(() => {
-                expect(button).not.toHaveFocus();
-                // Tooltip closed
-                expect(tooltip).not.toBeInTheDocument();
-            });
+            // Focus next element => close tooltip
+            await userEvent.tab();
+            expect(button).not.toHaveFocus();
+            expect(tooltip).not.toBeInTheDocument();
+
+            // Focus again
+            await userEvent.tab({ shift: true });
+            tooltip = await screen.findByRole('tooltip', { name: 'Tooltip label' });
+            expect(tooltip).toBeInTheDocument();
+
+            // Escape pressed => close tooltip
+            await userEvent.keyboard('{Escape}');
+            expect(tooltip).not.toBeInTheDocument();
         });
     });
 
