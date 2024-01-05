@@ -17,7 +17,7 @@ export function useTooltipOpen(delay: number | undefined, anchorElement: HTMLEle
 
     // Global close on escape
     const [closeCallback, setCloseCallback] = useState<undefined | (() => void)>(undefined);
-    useCallbackOnEscape(closeCallback);
+    useCallbackOnEscape(isOpen ? closeCallback : undefined);
 
     useEffect(() => {
         if (!anchorElement) {
