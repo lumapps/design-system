@@ -9,16 +9,15 @@ interface Props {
 
 // Format internal link to have the gatsby prefix and trailing slash
 const formatInternalLink = (path: string) => {
-    // origin is not important here as it's removed at the end.
-    const origin = 'http://localhost';
-    const url = new URL(path, origin);
+    // url relative to current page
+    const url = new URL(path, window.location.href);
     if (!url.pathname.endsWith('/')) {
         url.pathname += '/';
     }
     if (path.startsWith('/')) {
         url.pathname = withPrefix(url.pathname);
     }
-    return url.toString().replace(origin, '');
+    return url.pathname;
 };
 
 /**
