@@ -76,3 +76,23 @@
         }
     }
 }
+
+/* ==========================================================================
+   Notification stack
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-notification-stack {
+    position: fixed;
+    right: $lumx-spacing-unit-huge;
+    bottom: $lumx-spacing-unit-huge;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: $lumx-spacing-unit;
+
+    .#{$lumx-base-prefix}-notification {
+        position: relative;
+      inset: 0;
+    }
+}

@@ -1,6 +1,9 @@
 import { Notification, Kind } from '@lumx/react';
 import { NOTIFICATION_TRANSITION_DURATION } from '@lumx/core/js/constants';
 import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import React from 'react';
+import { createPortal } from 'react-dom';
+import { NotificationStack } from '@lumx/react/components/notification/NotificationStack';
 import { withChromaticForceScreenSize } from '../../stories/decorators/withChromaticForceScreenSize';
 
 export default {
@@ -80,3 +83,23 @@ export const InfoWithAction = {
         isOpen: true,
     },
 };
+
+const useOpenTemporarily = (delay: number, duration: number) => {
+    const [isOpen, setOpen] = React.useState(delay === 0);
+    React.useEffect(() => {
+        setTimeout(() => {
+            setOpen(true);
+            setTimeout(() => setOpen(false), duration);
+        }, delay);
+    }, [delay, duration]);
+    return isOpen;
+};
+
+export const WithStack = () => (
+    <NotificationStack>
+        <Notification type="info" content="Info qsd 1" isOpen={useOpenTemporarily(0, 4000)} />
+        <Notification type="info" content="Info qs 2" isOpen={useOpenTemporarily(1500, 3000000)} />
+        <Notification type="info" content="Info slkdfjlj 1.1" isOpen={useOpenTemporarily(500, 3000)} />
+        <Notification type="info" content="Info dffsddsfff 3" isOpen={useOpenTemporarily(1800, 2000_000)} />
+    </NotificationStack>
+);

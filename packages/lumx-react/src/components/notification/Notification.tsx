@@ -14,6 +14,7 @@ import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/classNam
 
 import { useTransitionVisibility } from '@lumx/react/hooks/useTransitionVisibility';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
+import { useNotificationStackContext } from '@lumx/react/components/notification/NotificationStackContext';
 
 /**
  * Defines the props of the component.
@@ -62,18 +63,7 @@ const DEFAULT_PROPS: Partial<NotificationProps> = {
  * @return React element.
  */
 export const Notification: Comp<NotificationProps, HTMLDivElement> = forwardRef((props, ref) => {
-    const {
-        actionLabel,
-        className,
-        content,
-        isOpen,
-        onActionClick,
-        onClick,
-        theme,
-        type,
-        zIndex,
-        ...forwardedProps
-    } = props;
+    const { actionLabel, className, content, isOpen, onActionClick, theme, type, zIndex, ...forwardedProps } = props;
     if (!DOCUMENT) {
         // Can't render in SSR.
         return null;
@@ -90,40 +80,53 @@ export const Notification: Comp<NotificationProps, HTMLDivElement> = forwardRef(
         evt.stopPropagation();
     };
 
-    return type && isVisible
-        ? createPortal(
-              // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-              <div
-                  ref={mergeRefs(ref, rootRef)}
-                  role="alert"
-                  {...forwardedProps}
-                  className={classNames(
-                      className,
-                      handleBasicClasses({
-                          color,
-                          hasAction,
-                          isHidden: !isOpen,
-                          prefix: CLASSNAME,
-                      }),
-                  )}
-                  onClick={onClick}
-                  style={{ zIndex }}
-              >
-                  <div className={`${CLASSNAME}__icon`}>
-                      <Icon icon={icon} size={Size.s} />
-                  </div>
-                  <div className={`${CLASSNAME}__content`}>{content}</div>
-                  {hasAction && (
-                      <div className={`${CLASSNAME}__action`}>
-                          <Button emphasis={Emphasis.medium} theme={theme} onClick={handleCallback}>
-                              <span>{actionLabel}</span>
-                          </Button>
-                      </div>
-                  )}
-              </div>,
-              document.body,
-          )
-        : null;
+    const context = useNotificationStackContext();
+    React.useEffect(() => {
+        const { current } = rootRef;
+        if (isVisible && current && context) {
+            context.register(current);
+            return () => context.unregister(current);
+        }
+        return undefined;
+    }, [context, isVisible]);
+
+    if (!isVisible || !type) return null;
+
+    const notification = (
+        <div
+            ref={mergeRefs(ref, rootRef)}
+            role="status"
+            {...forwardedProps}
+            className={classNames(
+                className,
+                handleBasicClasses({
+                    color,
+                    hasAction,
+                    isHidden: !isOpen,
+                    prefix: CLASSNAME,
+                }),
+            )}
+            style={{ zIndex }}
+        >
+            <div className={`${CLASSNAME}__icon`}>
+                <Icon icon={icon} size={Size.s} />
+            </div>
+            <div className={`${CLASSNAME}__content`}>{content}</div>
+            {hasAction && (
+                <div className={`${CLASSNAME}__action`}>
+                    <Button emphasis={Emphasis.medium} theme={theme} onClick={handleCallback}>
+                        <span>{actionLabel}</span>
+                    </Button>
+                </div>
+            )}
+        </div>
+    );
+
+    // Rendered in a notification stack
+    if (context) return notification;
+
+    // Not in a notification stack => render in portal
+    return createPortal(notification, document.body);
 });
 Notification.displayName = COMPONENT_NAME;
 Notification.className = CLASSNAME;
