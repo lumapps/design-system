@@ -7,7 +7,7 @@ import isFunction from 'lodash/isFunction';
 
 import { Button, Emphasis, Icon, Kind, Size, Theme } from '@lumx/react';
 
-import { DOCUMENT } from '@lumx/react/constants';
+import { DOCUMENT, NOTIFICATION_TRANSITION_DURATION } from '@lumx/react/constants';
 import { NOTIFICATION_CONFIGURATION } from '@lumx/react/components/notification/constants';
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
@@ -80,7 +80,7 @@ export const Notification: Comp<NotificationProps, HTMLDivElement> = forwardRef(
     }
     const { color, icon } = NOTIFICATION_CONFIGURATION[type as Kind] || {};
     const rootRef = useRef<HTMLDivElement>(null);
-    const isVisible = useTransitionVisibility(rootRef, !!isOpen);
+    const isVisible = useTransitionVisibility(rootRef, !!isOpen, NOTIFICATION_TRANSITION_DURATION);
     const hasAction: boolean = Boolean(onActionClick) && Boolean(actionLabel);
 
     const handleCallback = (evt: React.MouseEvent) => {

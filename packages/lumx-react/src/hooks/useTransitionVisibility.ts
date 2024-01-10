@@ -12,6 +12,7 @@ import { userHasReducedMotion } from '@lumx/react/utils/userHasReducedMotion';
 export const useTransitionVisibility = (
     ref: RefObject<HTMLElement>,
     isComponentVisible: boolean,
+    timeout: number,
     onVisibilityChange?: (isVisible: boolean) => void,
 ) => {
     const [isVisible, setVisible] = useState(isComponentVisible);
@@ -26,22 +27,15 @@ export const useTransitionVisibility = (
         const { current: element } = ref;
 
         // Transition event is not supported or the user prefers reduced motion.
-        // => Skip `transitionend` event listening and set visibility to false directly.
+        // => Skip and set visibility to false directly.
         if (!element || !window.TransitionEvent || userHasReducedMotion()) {
             setVisible(false);
             return undefined;
         }
 
-        // Update visibility on opacity transition end.
-        const onTransitionEnd = (e: TransitionEvent) => {
-            if (e.target !== ref.current || e.propertyName !== 'opacity') return;
-            setVisible((wasVisible) => !wasVisible);
-        };
-        element.addEventListener('transitionend', onTransitionEnd);
-        return () => {
-            element.removeEventListener('transitionend', onTransitionEnd);
-        };
-    }, [isComponentVisible, ref]);
+        const timer = setTimeout(() => setVisible(false), timeout);
+        return () => clearTimeout(timer);
+    }, [isComponentVisible, ref, timeout]);
 
     useEffect(() => {
         if (onVisibilityChange && previousVisibility.current !== isVisible) {

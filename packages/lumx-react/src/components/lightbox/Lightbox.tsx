@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom';
 
 import { mdiClose } from '@lumx/icons';
 import { ColorPalette, Emphasis, IconButton, IconButtonProps } from '@lumx/react';
-import { DOCUMENT } from '@lumx/react/constants';
+import { DIALOG_TRANSITION_DURATION, DOCUMENT } from '@lumx/react/constants';
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 
@@ -88,7 +88,7 @@ export const Lightbox: Comp<LightboxProps, HTMLDivElement> = forwardRef((props, 
     useDisableBodyScroll(isOpen && wrapperRef.current);
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const isVisible = useTransitionVisibility(wrapperRef, !!isOpen);
+    const isVisible = useTransitionVisibility(wrapperRef, !!isOpen, DIALOG_TRANSITION_DURATION);
 
     // Handle focus trap.
     // eslint-disable-next-line react-hooks/rules-of-hooks
