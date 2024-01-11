@@ -60,6 +60,14 @@
             }
         }
     }
+
+    &--theme-dark {
+        background: lumx-color-variant("dark", "N");
+
+        #{$self}__arrow {
+            fill: lumx-color-variant("dark", "N");
+        }
+    }
 }
 
 /* Elevations

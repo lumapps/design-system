@@ -7,7 +7,7 @@ import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 import { DOCUMENT } from '@lumx/react/constants';
-import { Comp, GenericProps } from '@lumx/react/utils/type';
+import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 import { useFocusWithin } from '@lumx/react/hooks/useFocusWithin';
@@ -21,7 +21,7 @@ import { FitAnchorWidth, Elevation, Offset, Placement } from './constants';
 /**
  * Defines the props of the component.
  */
-export interface PopoverProps extends GenericProps {
+export interface PopoverProps extends GenericProps, HasTheme {
     /** Reference to the DOM element used to set the position of the popover. */
     anchorRef: React.RefObject<HTMLElement>;
     /** Customize the root element. (Must accept ref forwarding and props forwarding!). */
@@ -118,6 +118,7 @@ const _InnerPopover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, ref
         offset,
         placement,
         style,
+        theme,
         zIndex,
         ...forwardedProps
     } = props;
@@ -203,7 +204,12 @@ const _InnerPopover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, ref
                   ref={mergeRefs<HTMLDivElement>(setPopperElement, ref, clickAwayRef, contentRef)}
                   className={classNames(
                       className,
-                      handleBasicClasses({ prefix: CLASSNAME, elevation: Math.min(elevation || 0, 5), position }),
+                      handleBasicClasses({
+                          prefix: CLASSNAME,
+                          theme,
+                          elevation: Math.min(elevation || 0, 5),
+                          position,
+                      }),
                   )}
                   style={styles.popover}
                   {...attributes.popper}

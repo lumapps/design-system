@@ -67,6 +67,22 @@ export const Simple = {
 };
 
 /**
+ * Dark theme
+ */
+export const DarkTheme = {
+    ...Simple,
+    args: {
+        theme: 'dark',
+        children: (
+            <Text as="p" color="light" className="lumx-spacing-padding-big">
+                Popover
+            </Text>
+        ),
+        hasArrow: true,
+    },
+};
+
+/**
  * Popover not using React.createPortal
  */
 export const WithoutPortal = { ...Simple, args: { ...Simple.args, usePortal: false } };
