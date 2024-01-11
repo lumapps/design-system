@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Lightbox, Dialog, Notification: fix remove from DOM when closing while the opening transition isn't finished.
+
 ## [3.6.1][] - 2024-01-05
 
 ### Added
@@ -1858,7 +1862,5 @@ _Failed released_
 [3.6.0]: https://github.com/lumapps/design-system/compare/v3.5.5...v3.6.0
 [3.5.5]: https://github.com/lumapps/design-system/compare/v3.5.4...v3.5.5
 [3.5.4]: https://github.com/lumapps/design-system/tree/v3.5.4
-
-
-[Unreleased]: https://github.com/lumapps/design-system/compare/v3.6.1...HEAD
+[unreleased]: https://github.com/lumapps/design-system/compare/v3.6.1...HEAD
 [3.6.1]: https://github.com/lumapps/design-system/tree/v3.6.1

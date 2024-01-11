@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 import { Progress, ProgressVariant, Size } from '@lumx/react';
 
-import { DOCUMENT } from '@lumx/react/constants';
+import { DIALOG_TRANSITION_DURATION, DOCUMENT } from '@lumx/react/constants';
 import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { useIntersectionObserver } from '@lumx/react/hooks/useIntersectionObserver';
@@ -185,7 +185,7 @@ export const Dialog: Comp<DialogProps, HTMLDivElement> = forwardRef((props, ref)
     const rootRef = useRef<HTMLDivElement>(null);
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const isVisible = useTransitionVisibility(rootRef, Boolean(isOpen), onVisibilityChange);
+    const isVisible = useTransitionVisibility(rootRef, Boolean(isOpen), DIALOG_TRANSITION_DURATION, onVisibilityChange);
 
     const shouldPreventCloseOnClickAway = preventAutoClose || preventCloseOnClick;
 
