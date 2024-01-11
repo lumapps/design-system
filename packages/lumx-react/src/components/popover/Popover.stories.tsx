@@ -29,6 +29,12 @@ export default {
         hasArrow: { control: 'boolean' },
         placement: getSelectArgType(Placement),
         elevation: getSelectArgType<Elevation>([1, 2, 3, 4, 5]),
+        ref: { control: false },
+        parentElement: { control: false },
+        focusElement: { control: false },
+        anchorRef: { control: false },
+        boundaryRef: { control: false },
+        children: { control: false },
     },
     decorators: [
         // Force minimum chromatic screen size to make sure the dialog appears in view.

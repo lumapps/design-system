@@ -209,7 +209,13 @@ const _InnerPopover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, ref
                   {...attributes.popper}
               >
                   <ClickAwayProvider callback={closeOnClickAway && handleClose} childrenRefs={clickAwayRefs}>
-                      {hasArrow && <div ref={setArrowElement} className={`${CLASSNAME}__arrow`} style={styles.arrow} />}
+                      {hasArrow && (
+                          <div ref={setArrowElement} className={`${CLASSNAME}__arrow`} style={styles.arrow}>
+                              <svg viewBox="0 0 14 14" aria-hidden>
+                                  <path d="M8 3.49C7.62 2.82 6.66 2.82 6.27 3.48L.04 14 14.04 14 8 3.49Z" />
+                              </svg>
+                          </div>
+                      )}
                       {children}
                   </ClickAwayProvider>
               </Component>,

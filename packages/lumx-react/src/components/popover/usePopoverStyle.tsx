@@ -120,7 +120,13 @@ export function usePopoverStyle({
         },
     ];
     if (hasArrow && arrowElement) {
-        modifiers.push({ name: 'arrow', options: { element: arrowElement, padding: ARROW_SIZE } });
+        modifiers.push({
+            name: 'arrow',
+            options: {
+                element: arrowElement,
+                padding: ARROW_SIZE / 2,
+            },
+        });
     }
     if (fitToAnchorWidth) {
         const fitWidth = typeof fitToAnchorWidth === 'string' ? fitToAnchorWidth : FitAnchorWidth.MIN_WIDTH;

@@ -54,4 +54,4 @@ export type FitAnchorWidth = ValueOf<typeof FitAnchorWidth>;
 /**
  * Arrow size (in pixel).
  */
-export const ARROW_SIZE = 8;
+export const ARROW_SIZE = 14;
