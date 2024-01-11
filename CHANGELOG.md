@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   Lightbox, Dialog, Notification: fix remove from DOM when closing while the opening transition isn't finished.
+-   Avatar: fixed Chrome behavior when down-scaling avatar so it is not pixelated anymore
 
 ## [3.6.1][] - 2024-01-05
 
