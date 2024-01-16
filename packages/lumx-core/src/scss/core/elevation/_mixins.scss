@@ -1,4 +1,5 @@
 @use "sass:map";
+@use "sass:math";
 @use "sass:string";
 
 // Elevation using box-shadow
@@ -15,7 +16,8 @@
     @if $elevation > 0 {
         $offset-x: 0;
         $offset-y: map.get($lumx-elevation-shadow-offset-y, $elevation);
-        $blur: map.get($lumx-elevation-shadow-blur, $elevation);
+        // Adjust the blur value so it matches visually to the box-shadow blur
+        $blur: math.div(map.get($lumx-elevation-shadow-blur, $elevation), 2);
 
         filter:
             drop-shadow(
