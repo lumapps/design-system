@@ -1,21 +1,22 @@
-import { Link as LumxLink } from '@lumx/react';
-import { Link as RouterLink, withPrefix } from 'gatsby';
 import React from 'react';
+import { Link as LumxLink } from '@lumx/react';
+import { Link as RouterLink } from 'gatsby';
+import { useLocation } from '@reach/router';
 
 interface Props {
     href: string;
     [key: string]: any;
 }
 
-// Format internal link to have the gatsby prefix and trailing slash
-const formatInternalLink = (path: string) => {
-    // url relative to current page
-    const url = new URL(path, window.location.href);
+const useResolveInternalPath = (href: string) => {
+    const { pathname: locationPathname } = useLocation();
+    // Current page (origin does not matter here, only the path)
+    const location = `http://localhost${locationPathname}`;
+    // Resolve href relative to the location
+    const url = new URL(href, location);
+    // Force trailing slash
     if (!url.pathname.endsWith('/')) {
         url.pathname += '/';
-    }
-    if (path.startsWith('/')) {
-        url.pathname = withPrefix(url.pathname);
     }
     return url.pathname;
 };
@@ -29,6 +30,7 @@ const EXTERNAL_LINK = /^\w*:\/\//;
  * A Link component that uses a normal HTML anchor link for external links (with protocol) or a router Link otherwise.
  */
 export const Link: React.FC<Props> = ({ href, ...forwardedProps }) => {
+    const internalPath = useResolveInternalPath(href);
     const props: any = { ...forwardedProps };
     if (EXTERNAL_LINK.exec(href)) {
         // External link.
@@ -37,7 +39,7 @@ export const Link: React.FC<Props> = ({ href, ...forwardedProps }) => {
         // User router link.
         props.linkAs = RouterLink;
         // Format internal link.
-        props.to = formatInternalLink(href);
+        props.to = internalPath;
     }
 
     return <LumxLink {...props} />;
