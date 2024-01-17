@@ -56,8 +56,8 @@
         & > ul,
         & > ol {
             margin-left: $lumx-spacing-unit-huge * 2;
+            li p {margin-block-end: 1em;}
         }
-
         & > h2,
         & > h3,
         & > h4 {
