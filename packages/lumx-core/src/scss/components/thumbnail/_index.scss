@@ -45,6 +45,7 @@
     &__background {
         position: relative;
         width: 100%;
+        overflow: hidden;
 
         #{$self}--variant-rounded & {
             border-radius: var(--lumx-border-radius);
@@ -65,8 +66,6 @@
 
     &__background,
     &__image {
-        overflow: hidden;
-
         #{$self}--align-left & {
             margin-right: auto;
         }
@@ -105,10 +104,11 @@
         object-position: center;
         width: 100%;
         height: 100%;
-        // When using object-fit:cover + ratio 1/1, Chrome switches to pixelated downsizing algo https://stackoverflow.com/a/77059936
-        // The following prevent this so the image is correctly downsized using blurrying effect
+
+        // When using object-fit:cover + ratio 1/1, Chrome switches to pixelated downsizing algo
+        // https://stackoverflow.com/a/77059936
+        // The following prevent this so the image is correctly downsized using blurring effect
         overflow-clip-margin: unset;
-        overflow: visible;
 
         @supports not (aspect-ratio: 1 / 1) {
             position: absolute;
@@ -123,7 +123,7 @@
 @supports (aspect-ratio: 1 / 1) {
     @each $key, $aspect-ratio-fraction in $lumx-thumbnail-aspect-ratio-fraction {
         .#{$lumx-base-prefix}-thumbnail--aspect-ratio-#{$key}:not(.#{$lumx-base-prefix}-thumbnail--fill-height)
-            .#{$lumx-base-prefix}-thumbnail__image {
+        .#{$lumx-base-prefix}-thumbnail__image {
             aspect-ratio: var(--lumx-thumbnail-aspect-ratio, string.unquote($aspect-ratio-fraction));
         }
     }
@@ -132,7 +132,7 @@
 @supports not (aspect-ratio: 1 / 1) {
     @each $key, $aspect-ratio in $lumx-thumbnail-aspect-ratio {
         .#{$lumx-base-prefix}-thumbnail--aspect-ratio-#{$key}:not(.#{$lumx-base-prefix}-thumbnail--fill-height)
-            .#{$lumx-base-prefix}-thumbnail__background {
+        .#{$lumx-base-prefix}-thumbnail__background {
             padding-top: $aspect-ratio;
         }
     }
@@ -158,18 +158,18 @@
         bottom: 0;
         left: 0;
         pointer-events: none;
-        content: '';
+        content: "";
     }
 
     /* Hover */
     &:hover::after,
     &:focus::after {
-        @include lumx-state(lumx-base-const('state', 'HOVER'), lumx-base-const('emphasis', 'LOW'), 'dark');
+        @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "LOW"), "dark");
     }
 
     /* Active */
     &:active::after {
-        @include lumx-state(lumx-base-const('state', 'ACTIVE'), lumx-base-const('emphasis', 'LOW'), 'dark');
+        @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "LOW"), "dark");
     }
 }
 
@@ -183,25 +183,25 @@
 /* Focused (light theme) */
 .#{$lumx-base-prefix}-thumbnail--theme-light.#{$lumx-base-prefix}-thumbnail--is-clickable {
     &[data-focus-visible-added]::after {
-        @include lumx-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('emphasis', 'LOW'), 'dark');
+        @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "LOW"), "dark");
     }
 }
 
 /* Focused (dark theme) */
 .#{$lumx-base-prefix}-thumbnail--theme-dark.#{$lumx-base-prefix}-thumbnail--is-clickable {
     &[data-focus-visible-added]::after {
-        @include lumx-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('emphasis', 'LOW'), 'light');
+        @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "LOW"), "light");
     }
 }
 
 /* Loading state */
 .#{$lumx-base-prefix}-thumbnail--is-loading {
     &.#{$lumx-base-prefix}-thumbnail--theme-light .#{$lumx-base-prefix}-thumbnail__background {
-        @include lumx-skeleton('light');
+        @include lumx-skeleton("light");
     }
 
     &.#{$lumx-base-prefix}-thumbnail--theme-dark .#{$lumx-base-prefix}-thumbnail__background {
-        @include lumx-skeleton('dark');
+        @include lumx-skeleton("dark");
     }
 }
 
@@ -221,11 +221,11 @@
         }
 
         &.#{$lumx-base-prefix}-thumbnail--theme-light .#{$lumx-base-prefix}-thumbnail__fallback {
-            background-color: lumx-color-variant('dark', 'L6');
+            background-color: lumx-color-variant("dark", "L6");
         }
 
         &.#{$lumx-base-prefix}-thumbnail--theme-dark .#{$lumx-base-prefix}-thumbnail__fallback {
-            background-color: lumx-color-variant('light', 'L6');
+            background-color: lumx-color-variant("light", "L6");
         }
     }
 
@@ -241,15 +241,16 @@
 /* Thumbnail badge mask
    ========================================================================== */
 
-$badge-radius-size: math.div(map.get($lumx-sizes, lumx-base-const('size', 'XS')), 2) + 2;
+$badge-radius-size: math.div(map.get($lumx-sizes, lumx-base-const("size", "XS")), 2) + 2;
 
 .#{$lumx-base-prefix}-thumbnail--has-badge {
     .#{$lumx-base-prefix}-thumbnail__background,
     .#{$lumx-base-prefix}-thumbnail__fallback {
-        mask-image: radial-gradient(
-            circle at calc(100% - #{$badge-radius-size - 6}) calc(100% - #{$badge-radius-size - 6}),
-            transparent $badge-radius-size,
-            black $badge-radius-size + 1
-        );
+        mask-image:
+            radial-gradient(
+                circle at calc(100% - #{$badge-radius-size - 6}) calc(100% - #{$badge-radius-size - 6}),
+                transparent $badge-radius-size,
+                black $badge-radius-size + 1
+            );
     }
 }
