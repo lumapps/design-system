@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Thumbnail: fix warnings on image overflow style
+
 ## [3.6.2][] - 2024-01-16
 
 ### Fixed
@@ -1867,7 +1871,5 @@ _Failed released_
 [3.5.4]: https://github.com/lumapps/design-system/tree/v3.5.4
 [unreleased]: https://github.com/lumapps/design-system/compare/v3.6.1...HEAD
 [3.6.1]: https://github.com/lumapps/design-system/tree/v3.6.1
-
-
-[Unreleased]: https://github.com/lumapps/design-system/compare/v3.6.2...HEAD
+[unreleased]: https://github.com/lumapps/design-system/compare/v3.6.2...HEAD
 [3.6.2]: https://github.com/lumapps/design-system/tree/v3.6.2
