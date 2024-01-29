@@ -2039,7 +2039,7 @@ export const DESIGN_TOKENS = {
     typography: {
         'font-family': {
             value:
-                "'-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'sans-serif'",
+                "'Sf Pro', system-ui, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'sans-serif'",
         },
         'font-weight': { regular: { value: '400' }, bold: { value: '700' }, light: { value: '300' } },
         interface: {
