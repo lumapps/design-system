@@ -2,8 +2,8 @@
 
 @mixin lumx-typography-base() {
     font-family: var(--lumx-typography-font-family);
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: auto;
+    -webkit-font-smoothing: auto;
 }
 
 @mixin lumx-typography($key, $type: "interface") {

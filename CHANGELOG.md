@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   Thumbnail: fix warnings on image overflow style
+-   `@lumx/core`: remove font smoothing that seems to produce incorrect font weight with macOS system font on Chrome v121
 
 ## [3.6.2][] - 2024-01-16
 
