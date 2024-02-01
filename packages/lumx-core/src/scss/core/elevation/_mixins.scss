@@ -1,10 +1,30 @@
 @use "sass:map";
+@use "sass:math";
 @use "sass:string";
 
+// Elevation using box-shadow
 @mixin lumx-elevation($elevation, $variant: "L4") {
     @if $elevation == 0 {
         box-shadow: none;
     } @else {
         box-shadow: string.unquote(map.get($lumx-elevation-shadows, $elevation)) lumx-color-variant("dark", $variant);
+    }
+}
+
+// Elevation using filter drop-shadow
+@mixin lumx-elevation-drop-shadow($elevation, $variant: "L4") {
+    @if $elevation > 0 {
+        $offset-x: 0;
+        $offset-y: map.get($lumx-elevation-shadow-offset-y, $elevation);
+        // Adjust the blur value so it matches visually to the box-shadow blur
+        $blur: math.div(map.get($lumx-elevation-shadow-blur, $elevation), 2);
+
+        filter:
+            drop-shadow(
+                $offset-x
+                $offset-y
+                $blur
+                lumx-color-variant("dark", $variant)
+            );
     }
 }

@@ -11,6 +11,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Thumbnail: fix warnings on image overflow style
 
+### Added
+
+-   Popover: add dark theme
+
+### Changed
+
+-   Popover: reworked arrow style to be bigger and with a correct drop shadow
+
 ## [3.6.2][] - 2024-01-16
 
 ### Fixed
