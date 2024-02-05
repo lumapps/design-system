@@ -3833,6 +3833,7 @@ __metadata:
     typescript: ^4.1.2
     webpack: ^4.44.1
     webpack-cli: ^4.2.0
+    yarn: ^1.22.21
     yeoman-generator: ^4.1.0
     yo: ^3.1.0
   languageName: unknown
@@ -3907,7 +3908,6 @@ __metadata:
     vite: ^4.2.1
     vite-tsconfig-paths: ^4.0.7
     yargs: ^15.4.1
-    yarn: ^1.19.1
   peerDependencies:
     lodash: 4.17.21
     react: ">= 16.13.0"
@@ -35352,13 +35352,13 @@ typescript@^3.9.3:
   languageName: node
   linkType: hard
 
-"yarn@npm:^1.19.1":
-  version: 1.19.1
-  resolution: "yarn@npm:1.19.1"
+"yarn@npm:^1.22.21":
+  version: 1.22.21
+  resolution: "yarn@npm:1.22.21"
   bin:
-    yarn: ./bin/yarn.js
-    yarnpkg: ./bin/yarn.js
-  checksum: dc95fa81135850be763306096370876bd394108208ea0161d3ac8567db38bafb6f23d393cd59f40c9876355a985c3cc274b8d28b39a5593a9b44bb4be6421f70
+    yarn: bin/yarn.js
+    yarnpkg: bin/yarn.js
+  checksum: 791fab07ad55351049361686bcdd25c64a46e2afe2f2fc7587e666aa4f758d7eef80235b921aa09415557ac580ab23305c0181c1b43fed45f357a0c7a77322a1
   languageName: node
   linkType: hard
 
