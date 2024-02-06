@@ -79,6 +79,12 @@ describe(`<${Notification.displayName}>`, () => {
         expect(notification).toBeInTheDocument();
     });
 
+    it('should forward styles', () => {
+        const { notification } = setup({ style: { color: 'red' } });
+        expect(notification).toBeInTheDocument();
+        expect(notification).toHaveStyle('color: red');
+    });
+
     // Common tests suite.
     commonTestsSuiteRTL(setup, {
         baseClassName: CLASSNAME,

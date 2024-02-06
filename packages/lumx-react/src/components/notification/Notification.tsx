@@ -76,6 +76,7 @@ export const Notification: Comp<NotificationProps, HTMLDivElement> = forwardRef(
         type,
         zIndex,
         usePortal,
+        style,
         ...forwardedProps
     } = props;
     if (!DOCUMENT) {
@@ -114,7 +115,7 @@ export const Notification: Comp<NotificationProps, HTMLDivElement> = forwardRef(
                 }),
             )}
             onClick={onClick}
-            style={{ zIndex }}
+            style={{ ...style, zIndex }}
         >
             <div className={`${CLASSNAME}__icon`}>
                 <Icon icon={icon} size={Size.s} />

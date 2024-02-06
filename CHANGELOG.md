@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   Thumbnail: fix warnings on image overflow style
+-   Notification: fix forwarding style
 
 ### Added
 
