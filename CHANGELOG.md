@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 -   Popover: reworked arrow style to be bigger and with a correct drop shadow
+-   Notification: add `usePortal` (default value is `true`) to be able to not use a portal in some cases.
 
 ## [3.6.2][] - 2024-01-16
 
