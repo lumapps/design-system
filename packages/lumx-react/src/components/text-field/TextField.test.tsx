@@ -15,9 +15,12 @@ import {
 import partition from 'lodash/partition';
 import userEvent from '@testing-library/user-event';
 
+import { isFocusVisible } from '@lumx/react/utils/isFocusVisible';
 import { TextField, TextFieldProps } from './TextField';
 
 const CLASSNAME = TextField.className as string;
+
+jest.mock('@lumx/react/utils/isFocusVisible');
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -46,6 +49,8 @@ const setup = (propsOverride: Partial<TextFieldProps> = {}) => {
 };
 
 describe(`<${TextField.displayName}>`, () => {
+    (isFocusVisible as jest.Mock).mockReturnValue(false);
+
     describe('Render', () => {
         it('should render defaults', () => {
             const { element, inputNative } = setup({ id: 'fixedId' });

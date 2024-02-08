@@ -86,3 +86,19 @@ export const HideTooltipOnHiddenAnchor = () => {
         </>
     );
 };
+HideTooltipOnHiddenAnchor.parameters = { chromatic: { disableSnapshot: true } };
+
+/** Test focusing a tooltip anchor programmatically */
+export const TestProgrammaticFocus = () => {
+    const anchorRef = React.useRef<HTMLButtonElement>(null);
+    return (
+        <>
+            <p>The tooltip should open on keyboard focus but not on programmatic focus (ex: after a click)</p>
+            <Tooltip label="label">
+                <Button ref={anchorRef}>button with label</Button>
+            </Tooltip>
+            <Button onClick={() => anchorRef.current?.focus()}>focus the button</Button>
+        </>
+    );
+};
+TestProgrammaticFocus.parameters = { chromatic: { disableSnapshot: true } };

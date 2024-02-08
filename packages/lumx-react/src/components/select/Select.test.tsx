@@ -7,11 +7,13 @@ import { getByClassName, queryAllByClassName, queryByClassName } from '@lumx/rea
 import { render, within } from '@testing-library/react';
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import userEvent from '@testing-library/user-event';
+import { isFocusVisible } from '@lumx/react/utils/isFocusVisible';
 
 import { Select, SelectProps, SelectVariant } from './Select';
 
 const CLASSNAME = Select.className as string;
 
+jest.mock('@lumx/react/utils/isFocusVisible');
 jest.mock('uid', () => ({ uid: () => 'uid' }));
 
 /**
@@ -33,6 +35,8 @@ const setup = (propsOverride: Partial<SelectProps> = {}) => {
 };
 
 describe(`<${Select.displayName}>`, () => {
+    (isFocusVisible as jest.Mock).mockReturnValue(false);
+
     describe('Props', () => {
         it('should have default classNames', () => {
             const { select, getDropdown } = setup();

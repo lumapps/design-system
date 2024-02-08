@@ -6,10 +6,12 @@ import { queryAllByTagName, queryByClassName } from '@lumx/react/testing/utils/q
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import userEvent from '@testing-library/user-event';
 
+import { isFocusVisible } from '@lumx/react/utils/isFocusVisible';
 import { Tooltip, TooltipProps } from './Tooltip';
 
 const CLASSNAME = Tooltip.className as string;
 
+jest.mock('@lumx/react/utils/isFocusVisible');
 jest.mock('uid', () => ({ uid: () => 'uid' }));
 // Skip delays
 jest.mock('@lumx/react/constants', () => ({
@@ -148,7 +150,8 @@ describe(`<${Tooltip.displayName}>`, () => {
             });
         });
 
-        it('should activate on anchor focus and close on escape', async () => {
+        it('should activate on anchor focus visible and close on escape', async () => {
+            (isFocusVisible as jest.Mock).mockReturnValue(true);
             let { tooltip } = await setup({
                 label: 'Tooltip label',
                 children: <Button>Anchor</Button>,
@@ -179,6 +182,26 @@ describe(`<${Tooltip.displayName}>`, () => {
 
             // Escape pressed => close tooltip
             await userEvent.keyboard('{Escape}');
+            expect(tooltip).not.toBeInTheDocument();
+        });
+
+        it('should not activate on anchor focus if not visible', async () => {
+            (isFocusVisible as jest.Mock).mockReturnValue(false);
+            let { tooltip } = await setup({
+                label: 'Tooltip label',
+                children: <Button>Anchor</Button>,
+                forceOpen: false,
+            });
+
+            expect(tooltip).not.toBeInTheDocument();
+
+            // Focus anchor button
+            await userEvent.tab();
+            const button = screen.getByRole('button', { name: 'Anchor' });
+            expect(button).toHaveFocus();
+
+            // Tooltip not opening
+            tooltip = screen.queryByRole('tooltip', { name: 'Tooltip label' });
             expect(tooltip).not.toBeInTheDocument();
         });
     });
