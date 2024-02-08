@@ -9,7 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- InputHelper: change of html tag to improve semantic
+-   InputHelper: change of html tag to improve semantic
+
+### Changed
+
+-   Tooltip: do not show on anchor focus if the focus is not visible (keyboard driven)
 
 ## [3.6.3][] - 2024-02-08
 
@@ -1889,7 +1893,5 @@ _Failed released_
 [3.6.1]: https://github.com/lumapps/design-system/tree/v3.6.1
 [unreleased]: https://github.com/lumapps/design-system/compare/v3.6.2...HEAD
 [3.6.2]: https://github.com/lumapps/design-system/tree/v3.6.2
-
-
-[Unreleased]: https://github.com/lumapps/design-system/compare/v3.6.3...HEAD
+[unreleased]: https://github.com/lumapps/design-system/compare/v3.6.3...HEAD
 [3.6.3]: https://github.com/lumapps/design-system/tree/v3.6.3

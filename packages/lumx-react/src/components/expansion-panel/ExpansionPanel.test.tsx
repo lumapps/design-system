@@ -4,10 +4,13 @@ import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import { queryByRole, render } from '@testing-library/react';
 import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import userEvent from '@testing-library/user-event';
+import { isFocusVisible } from '@lumx/react/utils/isFocusVisible';
 
 import { ExpansionPanel, ExpansionPanelProps } from '.';
 
 const CLASSNAME = ExpansionPanel.className as string;
+
+jest.mock('@lumx/react/utils/isFocusVisible');
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -32,6 +35,8 @@ const setup = (propsOverride: Partial<ExpansionPanelProps> = {}) => {
 };
 
 describe(`<${ExpansionPanel.displayName}>`, () => {
+    (isFocusVisible as jest.Mock).mockReturnValue(false);
+
     describe('Render', () => {
         it('should render default', () => {
             const { element, query } = setup();
