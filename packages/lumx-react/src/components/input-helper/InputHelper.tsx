@@ -41,18 +41,18 @@ const DEFAULT_PROPS: Partial<InputHelperProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const InputHelper: Comp<InputHelperProps, HTMLSpanElement> = forwardRef((props, ref) => {
+export const InputHelper: Comp<InputHelperProps, HTMLParagraphElement> = forwardRef((props, ref) => {
     const { children, className, kind, theme, ...forwardedProps } = props;
     const { color } = INPUT_HELPER_CONFIGURATION[kind as any] || {};
 
     return (
-        <span
+        <p
             ref={ref}
             {...forwardedProps}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color, theme }))}
         >
             {children}
-        </span>
+        </p>
     );
 });
 
