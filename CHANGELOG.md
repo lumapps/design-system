@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- InputHelper: change of html tag to improve semantic
+
 ## [3.6.3][] - 2024-02-08
 
 ### Fixed
