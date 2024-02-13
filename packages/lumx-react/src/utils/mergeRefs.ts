@@ -1,5 +1,5 @@
 import { Falsy } from '@lumx/react/utils/type';
-import { MutableRefObject } from 'react';
+import { MutableRefObject, useMemo } from 'react';
 
 type FnRef<T> = (value: T) => void;
 
@@ -20,3 +20,14 @@ export function mergeRefs<T>(...refs: Array<MutableRefObject<T | null> | FnRef<T
             }
         });
 }
+
+/**
+ * Same as `mergeRefs` but memoized
+ */
+export const useMergeRefs = <T>(...refs: Array<MutableRefObject<T | null> | FnRef<T> | Falsy>) => {
+    return useMemo(
+        () => mergeRefs(...refs),
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        refs,
+    );
+};
