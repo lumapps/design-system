@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   InputHelper: change of html tag to improve semantic
+-   Popover: restore focus on trigger on closed externally
 
 ### Changed
 
