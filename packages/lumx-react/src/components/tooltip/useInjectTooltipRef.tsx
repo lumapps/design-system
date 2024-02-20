@@ -32,7 +32,8 @@ export const useInjectTooltipRef = (
             children &&
             get(children, '$$typeof') &&
             get(children, 'props.disabled') !== true &&
-            get(children, 'props.isDisabled') !== true
+            get(children, 'props.isDisabled') !== true &&
+            get(children, 'props.aria-disabled') !== true
         ) {
             const element = children as any;
 

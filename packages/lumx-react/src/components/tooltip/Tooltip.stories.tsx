@@ -26,11 +26,23 @@ export const OnAButton = {
     },
 };
 
-/** Simple tooltip on a button*/
+/** Simple tooltip on a disabled button*/
 export const OnADisabledButton = {
     args: {
         ...OnAButton.args,
         children: <Button isDisabled>Button</Button>,
+    },
+};
+
+/** Simple tooltip on an aria-disabled button*/
+export const OnAnAriaDisabledButton = {
+    args: {
+        ...OnAButton.args,
+        children: (
+            <button type="button" aria-disabled style={{ pointerEvents: 'none', opacity: '.5' }}>
+                Button
+            </button>
+        ),
     },
 };
 

@@ -77,6 +77,23 @@ describe(`<${Tooltip.displayName}>`, () => {
             expect(button?.parentElement).toBe(anchorWrapper);
         });
 
+        it('should wrap aria-disabled button', async () => {
+            const { tooltip, anchorWrapper } = await setup({
+                label: 'Tooltip label',
+                children: (
+                    <button type="button" aria-disabled>
+                        Anchor
+                    </button>
+                ),
+                forceOpen: true,
+            });
+            expect(tooltip).toBeInTheDocument();
+            expect(anchorWrapper).toBeInTheDocument();
+            expect(anchorWrapper).toHaveAttribute('aria-describedby', tooltip?.id);
+            const button = screen.queryByRole('button', { name: 'Anchor' });
+            expect(button?.parentElement).toBe(anchorWrapper);
+        });
+
         it('should render multiline', async () => {
             const { tooltip } = await setup({
                 label: 'First line\nSecond line',
