@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button } from '@lumx/react';
+import { Button, IconButton } from '@lumx/react';
 import { screen, render, waitFor } from '@testing-library/react';
 import { queryAllByTagName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
@@ -62,6 +62,35 @@ describe(`<${Tooltip.displayName}>`, () => {
             expect(anchorWrapper).not.toBeInTheDocument();
             const button = screen.queryByRole('button', { name: 'Anchor' });
             expect(button).toHaveAttribute('aria-describedby', tooltip?.id);
+        });
+
+        it('should not add aria-describedby if button label is the same as tooltip label', async () => {
+            const label = 'Tooltip label';
+            render(<IconButton label={label} tooltipProps={{ forceOpen: true }} />);
+            const tooltip = screen.queryByRole('tooltip', { name: label });
+            expect(tooltip).toBeInTheDocument();
+            const button = screen.queryByRole('button', { name: label });
+            expect(button).not.toHaveAttribute('aria-describedby');
+        });
+
+        it('should keep anchor aria-describedby if button label is the same as tooltip label', async () => {
+            const label = 'Tooltip label';
+            render(<IconButton label={label} aria-describedby=":header-1:" tooltipProps={{ forceOpen: true }} />);
+            const tooltip = screen.queryByRole('tooltip', { name: label });
+            expect(tooltip).toBeInTheDocument();
+            const button = screen.queryByRole('button', { name: label });
+            expect(button).toHaveAttribute('aria-describedby', ':header-1:');
+        });
+
+        it('should concat aria-describedby if already exists', async () => {
+            const { tooltip } = await setup({
+                label: 'Tooltip label',
+                children: <Button aria-describedby=":header-1:">Anchor</Button>,
+                forceOpen: true,
+            });
+            expect(tooltip).toBeInTheDocument();
+            const button = screen.queryByRole('button', { name: 'Anchor' });
+            expect(button).toHaveAttribute('aria-describedby', `:header-1: ${tooltip?.id}`);
         });
 
         it('should wrap disabled Button', async () => {

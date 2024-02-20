@@ -1,5 +1,4 @@
 import get from 'lodash/get';
-import isUndefined from 'lodash/isUndefined';
 import React, { cloneElement, ReactNode, useMemo } from 'react';
 
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
@@ -13,6 +12,7 @@ import { mergeRefs } from '@lumx/react/utils/mergeRefs';
  * @param  setAnchorElement Set tooltip anchor element.
  * @param  isOpen           Whether the tooltip is open or not.
  * @param  id               Tooltip id.
+ * @param  label            Tooltip label.
  * @return tooltip anchor.
  */
 export const useInjectTooltipRef = (
@@ -20,14 +20,9 @@ export const useInjectTooltipRef = (
     setAnchorElement: (e: HTMLDivElement) => void,
     isOpen: boolean | undefined,
     id: string,
+    label: string,
 ): ReactNode => {
     return useMemo(() => {
-        // Let the children remove the aria-describedby attribute by setting it to undefined
-        const childrenHasAriaProp = get(children, 'props')
-            ? 'aria-describedby' in get(children, 'props') && isUndefined(get(children, 'props.aria-describedby'))
-            : false;
-        const ariaProps = { 'aria-describedby': isOpen && !childrenHasAriaProp ? id : undefined };
-
         if (
             children &&
             get(children, '$$typeof') &&
@@ -35,17 +30,27 @@ export const useInjectTooltipRef = (
             get(children, 'props.isDisabled') !== true
         ) {
             const element = children as any;
-
-            return cloneElement(element, {
+            const props = {
                 ...element.props,
-                ...ariaProps,
                 ref: mergeRefs(element.ref, setAnchorElement),
-            });
+            };
+
+            // Add current tooltip to the aria-describedby if the label is not already present
+            if (label !== props['aria-label']) {
+                props['aria-describedby'] = [props['aria-describedby'], id].filter(Boolean).join(' ');
+            }
+
+            return cloneElement(element, props);
         }
+
         return (
-            <div className="lumx-tooltip-anchor-wrapper" ref={setAnchorElement} {...ariaProps}>
+            <div
+                className="lumx-tooltip-anchor-wrapper"
+                ref={setAnchorElement}
+                aria-describedby={isOpen ? id : undefined}
+            >
                 {children}
             </div>
         );
-    }, [isOpen, id, children, setAnchorElement]);
+    }, [children, setAnchorElement, isOpen, id, label]);
 };

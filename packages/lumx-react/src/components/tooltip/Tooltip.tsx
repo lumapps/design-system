@@ -87,7 +87,7 @@ export const Tooltip: Comp<TooltipProps, HTMLDivElement> = forwardRef((props, re
     const position = attributes?.popper?.['data-popper-placement'] ?? placement;
     const { isOpen: isActivated, onPopperMount } = useTooltipOpen(delay, anchorElement);
     const isOpen = isActivated || forceOpen;
-    const wrappedChildren = useInjectTooltipRef(children, setAnchorElement, isOpen, id);
+    const wrappedChildren = useInjectTooltipRef(children, setAnchorElement, isOpen, id, label);
 
     return (
         <>
