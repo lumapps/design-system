@@ -52,6 +52,25 @@ describe(`<${Tooltip.displayName}>`, () => {
             expect(anchorWrapper).toHaveAttribute('aria-describedby', tooltip?.id);
         });
 
+        it('should wrap unknown children and not add aria-describedby when closed', async () => {
+            const { anchorWrapper } = await setup({
+                label: 'Tooltip label',
+                children: 'Anchor',
+                forceOpen: false,
+            });
+            expect(anchorWrapper).not.toHaveAttribute('aria-describedby');
+        });
+
+        it('should not wrap Button and not add aria-describedby when closed', async () => {
+            await setup({
+                label: 'Tooltip label',
+                children: <Button>Anchor</Button>,
+                forceOpen: false,
+            });
+            const button = screen.queryByRole('button', { name: 'Anchor' });
+            expect(button).not.toHaveAttribute('aria-describedby');
+        });
+
         it('should not wrap Button', async () => {
             const { tooltip, anchorWrapper } = await setup({
                 label: 'Tooltip label',
