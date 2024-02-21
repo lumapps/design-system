@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   Tooltip: avoid removing the anchor `aria-describedby`
+-   Popover: unstable restore focus and changing anchor refs (triggered by anchor wrapped in tooltip)
 
 ## [3.6.4][] - 2024-02-20
 

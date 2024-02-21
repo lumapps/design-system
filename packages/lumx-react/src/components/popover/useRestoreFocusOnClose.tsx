@@ -1,6 +1,6 @@
 import React from 'react';
 import { getFirstAndLastFocusable } from '@lumx/react/utils/focus/getFirstAndLastFocusable';
-import { useBeforeUnmountSentinel } from '@lumx/react/utils/useBeforeUnmountSentinel';
+import { OnBeforeUnmount } from '@lumx/react/utils/OnBeforeUnmount';
 import type { PopoverProps } from './Popover';
 
 /**
@@ -8,26 +8,40 @@ import type { PopoverProps } from './Popover';
  * anchor if needed.
  */
 export function useRestoreFocusOnClose(
-    props: Pick<PopoverProps, 'focusAnchorOnClose' | 'anchorRef' | 'parentElement'>,
+    {
+        focusAnchorOnClose,
+        anchorRef,
+        parentElement,
+    }: Pick<PopoverProps, 'focusAnchorOnClose' | 'anchorRef' | 'parentElement'>,
     popoverElement?: HTMLElement | null,
 ) {
-    const onBeforeUnmount = React.useMemo(() => {
-        if (!popoverElement || !props.focusAnchorOnClose) return undefined;
-        return () => {
+    const onBeforeUnmountRef = React.useRef<(() => void) | undefined>();
+
+    React.useEffect(() => {
+        if (!popoverElement || !focusAnchorOnClose) {
+            onBeforeUnmountRef.current = undefined;
+            return;
+        }
+
+        onBeforeUnmountRef.current = () => {
             const isFocusWithin = popoverElement?.contains(document.activeElement);
             if (!isFocusWithin) return;
 
-            const anchor = props.anchorRef.current;
-            const elementToFocus =
-                // Provided parent element
-                props.parentElement?.current ||
-                // Or first focusable element in anchor
-                (anchor ? getFirstAndLastFocusable(anchor).first : undefined) ||
-                // Fallback to anchor
-                anchor;
+            // On next render
+            setTimeout(() => {
+                const anchor = anchorRef.current;
+                const elementToFocus =
+                    // Provided parent element
+                    parentElement?.current ||
+                    // Or first focusable element in anchor
+                    (anchor ? getFirstAndLastFocusable(anchor).first : undefined) ||
+                    // Fallback to anchor
+                    anchor;
 
-            elementToFocus?.focus({ preventScroll: true });
+                elementToFocus?.focus({ preventScroll: true });
+            }, 0);
         };
-    }, [popoverElement, props.anchorRef, props.focusAnchorOnClose, props.parentElement]);
-    return useBeforeUnmountSentinel(onBeforeUnmount);
+    }, [anchorRef, focusAnchorOnClose, parentElement, popoverElement]);
+
+    return <OnBeforeUnmount callbackRef={onBeforeUnmountRef} />;
 }
