@@ -22,6 +22,9 @@ export const useInjectTooltipRef = (
     id: string,
     label: string,
 ): ReactNode => {
+    // Only add description when open
+    const describedBy = isOpen ? id : undefined;
+
     return useMemo(() => {
         if (
             children &&
@@ -36,21 +39,17 @@ export const useInjectTooltipRef = (
             };
 
             // Add current tooltip to the aria-describedby if the label is not already present
-            if (label !== props['aria-label']) {
-                props['aria-describedby'] = [props['aria-describedby'], id].filter(Boolean).join(' ');
+            if (label !== props['aria-label'] && describedBy) {
+                props['aria-describedby'] = [props['aria-describedby'], describedBy].filter(Boolean).join(' ');
             }
 
             return cloneElement(element, props);
         }
 
         return (
-            <div
-                className="lumx-tooltip-anchor-wrapper"
-                ref={setAnchorElement}
-                aria-describedby={isOpen ? id : undefined}
-            >
+            <div className="lumx-tooltip-anchor-wrapper" ref={setAnchorElement} aria-describedby={describedBy}>
                 {children}
             </div>
         );
-    }, [children, setAnchorElement, isOpen, id, label]);
+    }, [children, setAnchorElement, describedBy, label]);
 };
