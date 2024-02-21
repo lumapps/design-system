@@ -1,4 +1,3 @@
-import get from 'lodash/get';
 import React, { cloneElement, ReactNode, useMemo } from 'react';
 
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
@@ -26,24 +25,17 @@ export const useInjectTooltipRef = (
     const describedBy = isOpen ? id : undefined;
 
     return useMemo(() => {
-        if (
-            children &&
-            get(children, '$$typeof') &&
-            get(children, 'props.disabled') !== true &&
-            get(children, 'props.isDisabled') !== true
-        ) {
-            const element = children as any;
-            const props = {
-                ...element.props,
-                ref: mergeRefs(element.ref, setAnchorElement),
-            };
+        // Non-disabled element
+        if (React.isValidElement(children) && children.props.disabled !== true && children.props.isDisabled !== true) {
+            const ref = mergeRefs((children as any).ref, setAnchorElement);
+            const props = { ...children.props, ref };
 
             // Add current tooltip to the aria-describedby if the label is not already present
             if (label !== props['aria-label'] && describedBy) {
                 props['aria-describedby'] = [props['aria-describedby'], describedBy].filter(Boolean).join(' ');
             }
 
-            return cloneElement(element, props);
+            return cloneElement(children, props);
         }
 
         return (
