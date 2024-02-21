@@ -4,6 +4,6 @@ export const isFocusVisible = (element?: HTMLElement) => {
         return element?.matches?.(':focus-visible, [data-focus-visible-added]');
     } catch (_ignored) {
         // Can fail on non browser env
-        return false;
+        return true;
     }
 };
