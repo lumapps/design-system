@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { WithIconButtonTrigger } from './PopoverDialog.stories';
 import { PopoverDialog } from './PopoverDialog';
 
 const DialogWithButton = (forwardedProps: any) => {
@@ -54,31 +53,6 @@ describe(`<${PopoverDialog.displayName}>`, () => {
         await userEvent.tab();
 
         // As there is no more button, focus should loop back to first button.
-        expect(dialogButtons[0]).toHaveFocus();
-
-        // Close the popover
-        await userEvent.keyboard('{escape}');
-
-        expect(screen.queryByRole('dialog', { name: label })).not.toBeInTheDocument();
-        /** Anchor should retrieve the focus */
-        expect(triggerElement).toHaveFocus();
-    });
-
-    it('should work on icon button', async () => {
-        const label = 'Open popover';
-        render(<WithIconButtonTrigger />);
-
-        /** Open the popover */
-        const triggerElement = screen.getByRole('button', { name: label });
-        await userEvent.click(triggerElement);
-
-        const dialog = await screen.findByRole('dialog', { name: label });
-        const withinDialog = within(dialog);
-
-        /** Get buttons within dialog */
-        const dialogButtons = withinDialog.getAllByRole('button');
-
-        // First button should have focus by default on opening
         expect(dialogButtons[0]).toHaveFocus();
 
         // Close the popover

@@ -1,11 +1,12 @@
+import get from 'lodash/get';
 import React, { cloneElement, ReactNode, useMemo } from 'react';
 
-import { useMergeRefs } from '@lumx/react/utils/mergeRefs';
+import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
 /**
  * Add ref and ARIA attribute(s) in tooltip children or wrapped children.
  * Button, IconButton, Icon and React HTML elements don't need to be wrapped but any other kind of children (array, fragment, custom components)
- * will be wrapped.
+ * will be wrapped in a <span>.
  *
  * @param  children         Original tooltip anchor.
  * @param  setAnchorElement Set tooltip anchor element.
@@ -21,13 +22,18 @@ export const useInjectTooltipRef = (
     id: string,
     label: string,
 ): ReactNode => {
-    const element = React.isValidElement(children) ? (children as any) : null;
-    const ref = useMergeRefs(element?.ref, setAnchorElement);
-
     return useMemo(() => {
-        // Non-disabled element
-        if (element && element.props?.disabled !== true && element.props?.isDisabled !== true) {
-            const props = { ...element.props, ref };
+        if (
+            children &&
+            get(children, '$$typeof') &&
+            get(children, 'props.disabled') !== true &&
+            get(children, 'props.isDisabled') !== true
+        ) {
+            const element = children as any;
+            const props = {
+                ...element.props,
+                ref: mergeRefs(element.ref, setAnchorElement),
+            };
 
             // Add current tooltip to the aria-describedby if the label is not already present
             if (label !== props['aria-label']) {
@@ -37,11 +43,14 @@ export const useInjectTooltipRef = (
             return cloneElement(element, props);
         }
 
-        // Else add a wrapper around the children
         return (
-            <div className="lumx-tooltip-anchor-wrapper" ref={ref} aria-describedby={isOpen ? id : undefined}>
+            <div
+                className="lumx-tooltip-anchor-wrapper"
+                ref={setAnchorElement}
+                aria-describedby={isOpen ? id : undefined}
+            >
                 {children}
             </div>
         );
-    }, [element, children, isOpen, id, ref, label]);
+    }, [children, setAnchorElement, isOpen, id, label]);
 };
