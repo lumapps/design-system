@@ -15,7 +15,18 @@ import get from 'lodash/get';
 import { uid } from 'uid';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiCloseCircle } from '@lumx/icons';
-import { Emphasis, Icon, IconButton, IconButtonProps, InputHelper, InputLabel, Kind, Size, Theme } from '@lumx/react';
+import {
+    Emphasis,
+    Icon,
+    IconButton,
+    IconButtonProps,
+    InputHelper,
+    InputLabel,
+    InputLabelProps,
+    Kind,
+    Size,
+    Theme,
+} from '@lumx/react';
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
@@ -53,6 +64,8 @@ export interface TextFieldProps extends GenericProps, HasTheme {
     isValid?: boolean;
     /** Label text. */
     label?: string;
+    /** Additional label props. */
+    labelProps?: InputLabelProps;
     /** Max string length the input accepts (constrains the input and displays a character counter). */
     maxLength?: number;
     /** Minimum number of rows displayed in multiline mode (requires `multiline` to be enabled). */
@@ -266,6 +279,7 @@ export const TextField: Comp<TextFieldProps, HTMLDivElement> = forwardRef((props
         isRequired,
         isValid,
         label,
+        labelProps,
         maxLength,
         minimumRows,
         multiline,
@@ -355,6 +369,7 @@ export const TextField: Comp<TextFieldProps, HTMLDivElement> = forwardRef((props
                 <div className={`${CLASSNAME}__header`}>
                     {label && (
                         <InputLabel
+                            {...labelProps}
                             htmlFor={textFieldId}
                             className={`${CLASSNAME}__label`}
                             isRequired={isRequired}
