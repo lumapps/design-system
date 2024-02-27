@@ -8,6 +8,7 @@ import { isSameDay } from '@lumx/react/utils/date/isSameDay';
 import { getCurrentLocale } from '@lumx/react/utils/locale/getCurrentLocale';
 import { parseLocale } from '@lumx/react/utils/locale/parseLocale';
 import { Locale } from '@lumx/react/utils/locale/types';
+import { usePreviousValue } from '@lumx/react/hooks/usePreviousValue';
 import { CLASSNAME } from './constants';
 
 /**
@@ -53,6 +54,15 @@ export const DatePickerControlled: Comp<DatePickerControlledProps, HTMLDivElemen
         return getMonthCalendar(localeObj, selectedMonth, minDate, maxDate);
     }, [locale, minDate, maxDate, selectedMonth]);
 
+    const prevSelectedMonth = usePreviousValue(selectedMonth);
+    const monthHasChanged = prevSelectedMonth && !isSameDay(selectedMonth, prevSelectedMonth);
+
+    // Only set the aria-live after the month has changed otherwise it can get announced on mount when used in the popover dialog
+    const [labelAriaLive, setLabelAriaLive] = React.useState<'polite'>();
+    React.useEffect(() => {
+        if (monthHasChanged) setLabelAriaLive('polite');
+    }, [monthHasChanged]);
+
     return (
         <div ref={ref} className={`${CLASSNAME}`}>
             <Toolbar
@@ -74,16 +84,19 @@ export const DatePickerControlled: Comp<DatePickerControlledProps, HTMLDivElemen
                     />
                 }
                 label={
-                    <span className={`${CLASSNAME}__month`}>
+                    <span className={`${CLASSNAME}__month`} aria-live={labelAriaLive}>
                         {selectedMonth.toLocaleDateString(locale, { year: 'numeric', month: 'long' })}
                     </span>
                 }
             />
             <div className={`${CLASSNAME}__calendar`}>
                 <div className={`${CLASSNAME}__week-days ${CLASSNAME}__days-wrapper`}>
-                    {weekDays.map(({ letter, number }) => (
+                    {weekDays.map(({ letter, number, long }) => (
                         <div key={number} className={`${CLASSNAME}__day-wrapper`}>
-                            <span className={`${CLASSNAME}__week-day`}>{letter.toLocaleUpperCase()}</span>
+                            <span className={`${CLASSNAME}__week-day`} aria-hidden>
+                                {letter.toLocaleUpperCase()}
+                            </span>
+                            <span className="visually-hidden">{long}</span>
                         </div>
                     ))}
                 </div>
@@ -109,7 +122,16 @@ export const DatePickerControlled: Comp<DatePickerControlledProps, HTMLDivElemen
                                             type="button"
                                             onClick={() => onChange(date)}
                                         >
-                                            <span>{date.toLocaleDateString(locale, { day: 'numeric' })}</span>
+                                            <span aria-hidden>
+                                                {date.toLocaleDateString(locale, { day: 'numeric' })}
+                                            </span>
+                                            <span className="visually-hidden">
+                                                {date.toLocaleDateString(locale, {
+                                                    day: 'numeric',
+                                                    month: 'long',
+                                                    year: 'numeric',
+                                                })}
+                                            </span>
                                         </button>
                                     )}
                                 </div>
