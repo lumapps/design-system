@@ -10,13 +10,13 @@ describe(getMonthCalendar.name, () => {
 
         expect(month).toEqual({
             weekDays: [
-                { letter: 'L', number: 1 },
-                { letter: 'M', number: 2 },
-                { letter: 'M', number: 3 },
-                { letter: 'J', number: 4 },
-                { letter: 'V', number: 5 },
-                { letter: 'S', number: 6 },
-                { letter: 'D', number: 0 },
+                { long: 'lundi', letter: 'L', number: 1 },
+                { long: 'mardi', letter: 'M', number: 2 },
+                { long: 'mercredi', letter: 'M', number: 3 },
+                { long: 'jeudi', letter: 'J', number: 4 },
+                { long: 'vendredi', letter: 'V', number: 5 },
+                { long: 'samedi', letter: 'S', number: 6 },
+                { long: 'dimanche', letter: 'D', number: 0 },
             ],
             weeks: [
                 {
@@ -70,13 +70,13 @@ describe(getMonthCalendar.name, () => {
 
         expect(month).toEqual({
             weekDays: [
-                { letter: 'S', number: 0 },
-                { letter: 'M', number: 1 },
-                { letter: 'T', number: 2 },
-                { letter: 'W', number: 3 },
-                { letter: 'T', number: 4 },
-                { letter: 'F', number: 5 },
-                { letter: 'S', number: 6 },
+                { long: 'Sunday', letter: 'S', number: 0 },
+                { long: 'Monday', letter: 'M', number: 1 },
+                { long: 'Tuesday', letter: 'T', number: 2 },
+                { long: 'Wednesday', letter: 'W', number: 3 },
+                { long: 'Thursday', letter: 'T', number: 4 },
+                { long: 'Friday', letter: 'F', number: 5 },
+                { long: 'Saturday', letter: 'S', number: 6 },
             ],
             weeks: [
                 {

@@ -38,7 +38,7 @@ describe(`<${DatePickerControlled.displayName}>`, () => {
         expect(month).toHaveTextContent('février 2017');
 
         const selected = queryByClassName(datePickerControlled, `${CLASSNAME}__month-day--is-selected`);
-        expect(selected).toBe(screen.queryByRole('button', { name: '22' }));
+        expect(selected).toBe(screen.queryByRole('button', { name: /22 février 2017/i }));
     });
 
     commonTestsSuiteRTL(setup, {

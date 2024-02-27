@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   `@lumx/core`: add `.visually-hidden` a11y helper class to use on elements that should be read by screen readers but not shown.
+-   DatePicker: improve screen reader text
 
 ## [3.6.5][] - 2024-02-21
 
