@@ -1,27 +1,22 @@
-import React, { forwardRef, SyntheticEvent, useCallback, useRef, useState } from 'react';
+import React, { forwardRef, SyntheticEvent, useCallback, useRef } from 'react';
 
-import { DatePicker, IconButtonProps, Placement, Popover, TextField } from '@lumx/react';
-import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
-import { useFocus } from '@lumx/react/hooks/useFocus';
+import { DatePicker, IconButtonProps, Placement, PopoverDialog, TextField, TextFieldProps } from '@lumx/react';
 import { Comp, GenericProps } from '@lumx/react/utils/type';
 import { getCurrentLocale } from '@lumx/react/utils/locale/getCurrentLocale';
+import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
 
 /**
  * Defines the props of the component.
  */
-export interface DatePickerFieldProps extends GenericProps {
+export interface DatePickerFieldProps extends Omit<TextFieldProps, 'value' | 'onChange'>, GenericProps {
     /** Default month. */
     defaultMonth?: Date;
-    /** Whether the component is disabled or not. */
-    isDisabled?: boolean;
     /** Locale (language or region) to use. */
     locale?: string;
     /** Date after which dates can't be selected. */
     maxDate?: Date;
     /** Date before which dates can't be selected. */
     minDate?: Date;
-    /** Native input name property. */
-    name?: string;
     /** Props to pass to the next month button (minus those already set by the DatePickerControlled props). */
     nextButtonProps: Pick<IconButtonProps, 'label'> & Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis'>;
     /** Props to pass to the previous month button (minus those already set by the DatePickerControlled props). */
@@ -60,43 +55,38 @@ export const DatePickerField: Comp<DatePickerFieldProps, HTMLDivElement> = forwa
         value,
         ...forwardedProps
     } = props;
-    const [wrapperElement, setWrapperElement] = useState<HTMLDivElement | null>(null);
     const anchorRef = useRef(null);
 
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, close, , toggleOpen] = useBooleanState(false);
 
-    const toggleSimpleMenu = () => {
-        setIsOpen(!isOpen);
-    };
-
-    const onClose = useCallback(() => {
-        setIsOpen(false);
-    }, []);
-
-    useFocus(anchorRef.current, isOpen);
-    const handleKeyboardNav = (evt: React.KeyboardEvent) => {
-        if ((evt.key === 'Enter' || evt.key === ' ') && toggleSimpleMenu) {
-            toggleSimpleMenu();
-        }
-    };
-
-    // Handle focus trap.
-    const [todayOrSelectedDate, setTodayOrSelectedDate] = useState<HTMLButtonElement | null>(null);
-    useFocusTrap(isOpen && wrapperElement, todayOrSelectedDate);
-
-    const onTextFieldChange = (textFieldValue: string, textFieldName?: string, event?: SyntheticEvent) => {
-        if (!textFieldValue) {
-            onChange(undefined, textFieldName, event);
-        }
-    };
-
-    const onDatePickerChange = (newDate?: Date) => {
-        onChange(newDate, name);
-        onClose();
-    };
+    const handleKeyboardNav = useCallback(
+        (evt: React.KeyboardEvent) => {
+            if (evt.key === 'Enter' || evt.key === ' ') {
+                toggleOpen();
+            }
+        },
+        [toggleOpen],
+    );
+    const onTextFieldChange = useCallback(
+        (textFieldValue: string, textFieldName?: string, event?: SyntheticEvent) => {
+            if (!textFieldValue) {
+                onChange(undefined, textFieldName, event);
+            }
+        },
+        [onChange],
+    );
+    const onDatePickerChange = useCallback(
+        (newDate?: Date) => {
+            onChange(newDate, name);
+            close();
+        },
+        [name, onChange, close],
+    );
 
     // Format date for text field
     const textFieldValue = value?.toLocaleDateString(locale, { year: 'numeric', month: 'long', day: 'numeric' }) || '';
+
+    const todayOrSelectedDateRef = React.useRef(null);
 
     return (
         <>
@@ -107,34 +97,36 @@ export const DatePickerField: Comp<DatePickerFieldProps, HTMLDivElement> = forwa
                 forceFocusStyle={isOpen}
                 textFieldRef={anchorRef}
                 value={textFieldValue}
-                onClick={toggleSimpleMenu}
+                onClick={toggleOpen}
                 onChange={onTextFieldChange}
                 onKeyPress={handleKeyboardNav}
                 isDisabled={isDisabled}
                 readOnly
+                aria-haspopup="dialog"
             />
             {isOpen ? (
-                <Popover
+                <PopoverDialog
+                    // Can't use `aria-labelledby` targeting the text field label element (not correctly read on some screen readers)
+                    aria-label={forwardedProps.label}
                     anchorRef={anchorRef}
                     placement={Placement.BOTTOM_START}
                     isOpen={isOpen}
-                    onClose={onClose}
-                    closeOnClickAway
-                    closeOnEscape
+                    onClose={close}
+                    // On open, focus the selected day or today
+                    focusElement={todayOrSelectedDateRef}
                 >
                     <DatePicker
-                        ref={setWrapperElement}
                         locale={locale}
                         maxDate={maxDate}
                         minDate={minDate}
                         value={value}
+                        todayOrSelectedDateRef={todayOrSelectedDateRef}
                         onChange={onDatePickerChange}
-                        todayOrSelectedDateRef={setTodayOrSelectedDate}
                         defaultMonth={defaultMonth}
                         nextButtonProps={nextButtonProps}
                         previousButtonProps={previousButtonProps}
                     />
-                </Popover>
+                </PopoverDialog>
             ) : null}
         </>
     );
