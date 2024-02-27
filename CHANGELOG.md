@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Thumbnail: use `span` instead of `div` in children elements to avoid semantic error on clickable thumbnails (button).
+
 ## [3.6.5][] - 2024-02-21
 
 ### Fixed
@@ -1911,7 +1915,5 @@ _Failed released_
 [3.6.3]: https://github.com/lumapps/design-system/tree/v3.6.3
 [unreleased]: https://github.com/lumapps/design-system/compare/v3.6.4...HEAD
 [3.6.4]: https://github.com/lumapps/design-system/tree/v3.6.4
-
-
-[Unreleased]: https://github.com/lumapps/design-system/compare/v3.6.5...HEAD
+[unreleased]: https://github.com/lumapps/design-system/compare/v3.6.5...HEAD
 [3.6.5]: https://github.com/lumapps/design-system/tree/v3.6.5

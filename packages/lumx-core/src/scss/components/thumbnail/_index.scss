@@ -44,6 +44,7 @@
 
     &__background {
         position: relative;
+        display: block;
         width: 100%;
         overflow: hidden;
 
@@ -83,6 +84,10 @@
         position: absolute;
         right: math.div(-$lumx-spacing-unit, 2);
         bottom: math.div(-$lumx-spacing-unit, 2);
+    }
+
+    &__fallback {
+        display: block;
     }
 }
 

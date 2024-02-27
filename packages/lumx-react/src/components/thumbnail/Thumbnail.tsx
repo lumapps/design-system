@@ -180,7 +180,7 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
                 fillHeight && `${CLASSNAME}--fill-height`,
             )}
         >
-            <div className={`${CLASSNAME}__background`}>
+            <span className={`${CLASSNAME}__background`}>
                 <img
                     {...imgProps}
                     style={{
@@ -203,15 +203,15 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
                     loading={loading}
                 />
                 {!isLoading && hasError && (
-                    <div className={`${CLASSNAME}__fallback`}>
+                    <span className={`${CLASSNAME}__fallback`}>
                         {hasIconErrorFallback ? (
                             <Icon icon={fallback as string} size={Size.xxs} theme={theme} />
                         ) : (
                             fallback
                         )}
-                    </div>
+                    </span>
                 )}
-            </div>
+            </span>
             {badge &&
                 React.cloneElement(badge, { className: classNames(`${CLASSNAME}__badge`, badge.props.className) })}
         </Wrapper>
