@@ -22,6 +22,17 @@ describe(`<${PopoverDialog.displayName}>`, () => {
         expect(within(dialog).getAllByRole('button')[0]).toHaveFocus();
     });
 
+    it('should work with aria-label', async () => {
+        const label = 'Test Label';
+        render(<WithButtonTrigger aria-label={label} />);
+
+        // Open popover
+        const triggerElement = screen.getByRole('button', { name: 'Open popover' });
+        await userEvent.click(triggerElement);
+
+        expect(await screen.findByRole('dialog', { name: label })).toBeInTheDocument();
+    });
+
     it('should trap focus', async () => {
         const label = 'Test Label';
         render(<WithButtonTrigger label={label} />);
