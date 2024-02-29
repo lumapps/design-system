@@ -35,7 +35,15 @@ const DEFAULT_PROPS: Partial<PopoverDialogProps> = {};
  * * Closes on click away and escape.
  */
 export const PopoverDialog: Comp<PopoverDialogProps, HTMLDivElement> = forwardRef((props, ref) => {
-    const { children, isOpen, focusElement, label, className, ...forwardedProps } = props;
+    const {
+        children,
+        isOpen,
+        focusElement,
+        'aria-label': ariaLabel,
+        label = ariaLabel,
+        className,
+        ...forwardedProps
+    } = props;
 
     return (
         <Popover
