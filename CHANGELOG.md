@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Chip: fix chip not receives focus when used as link
 - Chip: Make it possible to override the following props: `role`, `tabIndex`
 
+### Changed
+
+-   DatePicker: force a constant number of rows in the month calendar to avoid layout shift
+
 ## [3.6.7][] - 2024-04-02
 
 ### Fixed

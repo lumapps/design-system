@@ -11,6 +11,9 @@ interface MonthCalendar {
     weeks: Array<AnnotatedWeek>;
 }
 
+/** Up to 6 rows can appear in a month calendar => 4 weeks + 1 start of month partial week + 1 send of month partial week */
+const MONTH_ROW_COUNT = 6;
+
 /**
  * Get month calendar.
  * A list of weeks with days indexed by week day number
@@ -30,7 +33,8 @@ export const getMonthCalendar = (
 
     const weeks: Array<AnnotatedWeek> = [];
     let week: AnnotatedWeek = {};
-    while (iterDate.getMonth() === month) {
+    let rowCount = 0;
+    while (rowCount < MONTH_ROW_COUNT) {
         const weekDayNumber = iterDate.getDay();
         const day: AnnotatedDay = { date: new Date(iterDate.getTime()) };
 
@@ -39,9 +43,13 @@ export const getMonthCalendar = (
             day.isOutOfRange = true;
         }
 
-        week[weekDayNumber] = day;
+        if (iterDate.getMonth() === month) {
+            week[weekDayNumber] = day;
+        }
+
         if (weekDayNumber === lastDayOfWeek.number) {
             weeks.push(week);
+            rowCount += 1;
             week = {};
         }
         iterDate.setDate(iterDate.getDate() + 1);
