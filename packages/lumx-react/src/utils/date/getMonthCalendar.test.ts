@@ -57,6 +57,8 @@ describe(getMonthCalendar.name, () => {
                     '1': { date: new Date('2017-02-27') },
                     '2': { date: new Date('2017-02-28') },
                 },
+                // Empty row (used for padding to avoid layout shift)
+                {},
             ],
         });
     });
@@ -117,6 +119,8 @@ describe(getMonthCalendar.name, () => {
                     '1': { date: new Date('2017-02-27'), isOutOfRange: true },
                     '2': { date: new Date('2017-02-28'), isOutOfRange: true },
                 },
+                // Empty row (used for padding to avoid layout shift)
+                {},
             ],
         });
     });
