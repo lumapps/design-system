@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Thumbnail: use `span` instead of `div` in children elements to avoid semantic error on clickable thumbnails (button).
 -   PopoverDialog: fix the `aria-label` prop not properly forwarded to the dialog.
+-   ChipGroup: fix unwanted extra negative margin around chips (deprecating the `align` prop)
 
 ### Added
 

@@ -3,7 +3,6 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import { getByClassName } from '@lumx/react/testing/utils/queries';
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
-import { Alignment } from '@lumx/react';
 import { ChipGroup, ChipGroupProps } from './ChipGroup';
 import { Chip } from './Chip';
 
@@ -29,12 +28,6 @@ describe('<ChipGroup />', () => {
             const { chipGroup } = setup();
             expect(chipGroup).toBeInTheDocument();
             expect(chipGroup).toHaveClass(CLASSNAME);
-            expect(chipGroup).toHaveClass(`${CLASSNAME}--align-left`);
-        });
-
-        it('should render with align', () => {
-            const { chipGroup } = setup({ align: Alignment.right });
-            expect(chipGroup).toHaveClass(`${CLASSNAME}--align-right`);
         });
     });
 
