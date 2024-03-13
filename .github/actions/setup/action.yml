@@ -4,7 +4,7 @@ description: 'Full CI env setup (setup node & restore/install dependencies)'
 inputs:
     node_version:
         description: 'Node version to use'
-        default: '16.10.0'
+        default: '20.11.1'
 
 runs:
     using: composite

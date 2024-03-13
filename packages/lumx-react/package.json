@@ -107,7 +107,7 @@
     "scripts": {
         "build": "rollup -c",
         "prepare": "install-peers || exit 0",
-        "test": "jest --config jest/index.js --coverage --notify --passWithNoTests --detectOpenHandles --runInBand",
+        "test": "jest --config jest/index.js --coverage",
         "start:storybook": "storybook dev -p 9000",
         "build:storybook": "storybook build"
     },
