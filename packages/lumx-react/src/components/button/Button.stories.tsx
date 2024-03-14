@@ -23,7 +23,6 @@ export default {
         color: colorArgType,
         onClick: { action: true },
     },
-    args: Button.defaultProps,
 };
 
 /**
@@ -130,20 +129,18 @@ export const ButtonVariations = {
     },
     decorators: [
         withCombinations({
-            tableStyle: { background: 'lightgray', width: '100%' },
+            tableStyle: { width: '100%' },
             firstColStyle: { whiteSpace: 'nowrap', width: '1%' },
             combinations: {
                 // Colors
                 rows: {
                     Default: {},
                     'Color: red': { color: 'red' },
-                    'Theme: dark': { theme: 'dark' },
-                    'Theme: dark & color: green': { theme: 'dark', color: 'green' },
+                    'Color: green': {color: 'green' },
                 },
                 // States
                 cols: {
                     'Default state': {},
-                    Selected: { isSelected: true },
                     Hovered: { isHovered: true },
                     Focused: { isFocused: true },
                     Active: { isActive: true },
@@ -154,6 +151,7 @@ export const ButtonVariations = {
                     'Default (emphasis high)': {},
                     'Emphasis medium': { emphasis: 'medium' },
                     'Emphasis low': { emphasis: 'low' },
+                    'Emphasis selected': { emphasis: 'medium', isSelected: true },
                     'Full width': { fullWidth: true },
                     'Has background (emphasis low)': { emphasis: 'low', hasBackground: true },
                     'Has background + Full width': { emphasis: 'low', hasBackground: true, fullWidth: true },

@@ -49,10 +49,11 @@ export const withCombinations = ({
     return (
         <>
             {Object.entries(sections).map(([level2Key, level2Value]) => (
-                <div key={level2Key}>
+                <div key={level2Key} className='lumx-spacing-margin-bottom-huge'>
+
                     {level2Key && <h2>{level2Key}</h2>}
 
-                    <table style={{ ...tableStyle, borderCollapse: 'separate', borderSpacing: 8 }}>
+                    <table style={{ ...tableStyle, borderCollapse: 'separate', borderSpacing: 16 }}>
                         {combinations.cols && (
                             <thead>
                                 <tr>

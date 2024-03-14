@@ -1622,7 +1622,7 @@ export const DESIGN_TOKENS = {
                 version: '0.22',
                 comment: 'Neutral red color',
                 value: 'rgb(223, 48, 80)',
-                attributes: { hex: 'df3050', rgb: { r: 223, g: 48, b: 80, a: 1 } },
+                attributes: { hex: 'd42148', rgb: { r: 223, g: 48, b: 80, a: 1 } },
             },
             L1: {
                 version: '0.22',
