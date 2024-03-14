@@ -1,15 +1,16 @@
 import path from 'path';
 import glob from 'glob';
-import resolve from '@rollup/plugin-node-resolve';
-import babel from 'rollup-plugin-babel';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
+import { babel } from '@rollup/plugin-babel';
 import copy from 'rollup-plugin-copy';
 import cleaner from 'rollup-plugin-cleaner';
-import dts from 'rollup-plugin-dts';
+import { dts } from 'rollup-plugin-dts';
+import { fileURLToPath } from 'url';
 
-import pkg from './package.json';
+import pkg from './package.json' assert { type: 'json' };
 
-const CONFIGS = require('../../configs');
-
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const DIST_PATH = path.resolve(__dirname, pkg.publishConfig.directory);
 export const extensions = ['.js', '.ts'];
 
@@ -34,12 +35,11 @@ const bundleJS = {
         /** Clean dist dir */
         cleaner({ targets: [DIST_PATH] }),
         /** Resolve source files. */
-        resolve({ browser: true, extensions }),
+        nodeResolve({ browser: true, extensions }),
         /** Transpile JS. */
         babel({
             extensions,
             exclude: /node_modules/,
-            plugins: CONFIGS.babel.plugins,
             presets: [
                 ['@babel/preset-env', { targets: 'defaults' }],
             ],

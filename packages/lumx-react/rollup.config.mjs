@@ -1,17 +1,19 @@
 import path from 'path';
 import commonjs from '@rollup/plugin-commonjs';
-import resolve from '@rollup/plugin-node-resolve';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
+import { babel } from '@rollup/plugin-babel';
 import analyze from 'rollup-plugin-analyzer';
-import babel from 'rollup-plugin-babel';
 import cleaner from 'rollup-plugin-cleaner';
 import copy from 'rollup-plugin-copy';
-import dts from 'rollup-plugin-dts';
+import { dts } from 'rollup-plugin-dts';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-import tsPathsResolve from 'rollup-plugin-ts-paths-resolve';
+import { resolveTypescriptPaths } from 'rollup-plugin-typescript-paths';
+import { fileURLToPath } from 'url';
 
-import pkg from './package.json';
-const CONFIGS = require('../../configs');
+import pkg from './package.json' assert { type: 'json' };
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const ROOT_PATH = path.resolve(__dirname, '..', '..');
 const DIST_PATH = path.resolve(__dirname, pkg.publishConfig.directory);
 export const extensions = ['.js', '.jsx', '.ts', '.tsx'];
@@ -44,16 +46,15 @@ const bundleJS = {
         /** Analyze created bundle. */
         analyze(),
         /** Resolve tsconfig paths. */
-        tsPathsResolve(),
+        resolveTypescriptPaths(),
         /** Resolve source files. */
-        resolve({ browser: true, extensions }),
+        nodeResolve({ browser: true, extensions }),
         /** Resolve commonjs dependencies. */
         commonjs({ include: /node_modules/ }),
         /** Transpile JS/TS. */
         babel({
             extensions,
             exclude: /node_modules/,
-            plugins: CONFIGS.babel.plugins,
             presets: [
                 ['@babel/preset-env', { targets: 'defaults' }],
                 '@babel/preset-react',
@@ -89,7 +90,7 @@ const bundleType = {
         /** Externalize peer dependencies. */
         peerDepsExternal(),
         /** Resolve tsconfig paths. */
-        tsPathsResolve(),
+        resolveTypescriptPaths(),
         /** Transform TS to D.TS file. */
         dts({ respectExternal: true }),
     ],
