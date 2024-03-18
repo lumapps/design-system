@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   `@lumx/core`: fix customization of selected button CSS variables
+
 ## [3.6.6][] - 2024-03-15
 
 ### Fixed
