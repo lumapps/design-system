@@ -1,6 +1,6 @@
-import React, { forwardRef } from 'react';
+import React, { KeyboardEventHandler, forwardRef } from 'react';
 import classNames from 'classnames';
-import { DatePickerProps, Emphasis, IconButton, Toolbar } from '@lumx/react';
+import { DatePickerProps, Emphasis, FlexBox, IconButton, Text, TextField, Toolbar } from '@lumx/react';
 import { mdiChevronLeft, mdiChevronRight } from '@lumx/icons';
 import { Comp } from '@lumx/react/utils/type';
 import { getMonthCalendar } from '@lumx/react/utils/date/getMonthCalendar';
@@ -9,6 +9,9 @@ import { getCurrentLocale } from '@lumx/react/utils/locale/getCurrentLocale';
 import { parseLocale } from '@lumx/react/utils/locale/parseLocale';
 import { Locale } from '@lumx/react/utils/locale/types';
 import { usePreviousValue } from '@lumx/react/hooks/usePreviousValue';
+import { getYearDisplayName } from '@lumx/react/utils/date/getYearDisplayName';
+import { onEnterPressed } from '@lumx/react/utils/event';
+import { addMonthResetDay } from '@lumx/react/utils/date/addMonthResetDay';
 import { CLASSNAME } from './constants';
 
 /**
@@ -21,6 +24,8 @@ export interface DatePickerControlledProps extends DatePickerProps {
     onPrevMonthChange(): void;
     /** On next month change callback. */
     onNextMonthChange(): void;
+    /** On month/year change callback. */
+    onMonthChange?: (newMonth: Date) => void;
 }
 
 /**
@@ -48,11 +53,42 @@ export const DatePickerControlled: Comp<DatePickerControlledProps, HTMLDivElemen
         selectedMonth,
         todayOrSelectedDateRef,
         value,
+        onMonthChange,
     } = props;
     const { weeks, weekDays } = React.useMemo(() => {
         const localeObj = parseLocale(locale) as Locale;
         return getMonthCalendar(localeObj, selectedMonth, minDate, maxDate);
     }, [locale, minDate, maxDate, selectedMonth]);
+
+    const selectedYear = selectedMonth.toLocaleDateString(locale, { year: 'numeric' }).slice(0, 4);
+    const [textFieldYearValue, setTextFieldYearValue] = React.useState(selectedYear);
+    const isYearValid = Number(textFieldYearValue) > 0 && Number(textFieldYearValue) <= 9999;
+
+    // Updates month offset when validating year. Adds or removes 12 months per year when updating year value.
+    const updateMonthOffset = React.useCallback(() => {
+        if (isYearValid) {
+            const yearNumber = selectedMonth.getFullYear();
+            const offset = (Number(textFieldYearValue) - yearNumber) * 12;
+            if (onMonthChange) {
+                onMonthChange(addMonthResetDay(selectedMonth, offset));
+            }
+        }
+    }, [isYearValid, selectedMonth, textFieldYearValue, onMonthChange]);
+
+    const monthYear = selectedMonth.toLocaleDateString(locale, { year: 'numeric', month: 'long' });
+
+    // Year can only be validatd by pressing Enter key or on Blur. The below handles the press Enter key case
+    const handleKeyPress: KeyboardEventHandler = React.useMemo(() => onEnterPressed(updateMonthOffset), [
+        updateMonthOffset,
+    ]);
+
+    // Required to update year in the TextField when the user changes year by using prev next month arrows
+    React.useEffect(() => {
+        if (Number(textFieldYearValue) !== selectedMonth.getFullYear()) {
+            setTextFieldYearValue(selectedMonth.getFullYear().toString());
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [selectedMonth]);
 
     const prevSelectedMonth = usePreviousValue(selectedMonth);
     const monthHasChanged = prevSelectedMonth && !isSameDay(selectedMonth, prevSelectedMonth);
@@ -62,6 +98,8 @@ export const DatePickerControlled: Comp<DatePickerControlledProps, HTMLDivElemen
     React.useEffect(() => {
         if (monthHasChanged) setLabelAriaLive('polite');
     }, [monthHasChanged]);
+
+    const label = getYearDisplayName(locale);
 
     return (
         <div ref={ref} className={`${CLASSNAME}`}>
@@ -84,9 +122,46 @@ export const DatePickerControlled: Comp<DatePickerControlledProps, HTMLDivElemen
                     />
                 }
                 label={
-                    <span className={`${CLASSNAME}__month`} aria-live={labelAriaLive}>
-                        {selectedMonth.toLocaleDateString(locale, { year: 'numeric', month: 'long' })}
-                    </span>
+                    <>
+                        <span aria-live={labelAriaLive} className={onMonthChange ? 'visually-hidden' : ''} dir="auto">
+                            {monthYear}
+                        </span>
+                        {onMonthChange && (
+                            <FlexBox
+                                className={`${CLASSNAME}__month`}
+                                orientation="horizontal"
+                                hAlign="center"
+                                gap="regular"
+                                vAlign="center"
+                                dir="auto"
+                            >
+                                {RegExp(`(.*)(${selectedYear})(.*)`)
+                                    .exec(monthYear)
+                                    ?.slice(1)
+                                    .filter((part) => part !== '')
+                                    .map((part) =>
+                                        part === selectedYear ? (
+                                            <TextField
+                                                value={textFieldYearValue}
+                                                aria-label={label}
+                                                onChange={setTextFieldYearValue}
+                                                type="number"
+                                                max={9999}
+                                                min={0}
+                                                onBlur={updateMonthOffset}
+                                                onKeyPress={handleKeyPress}
+                                                key="year"
+                                                className={`${CLASSNAME}__year`}
+                                            />
+                                        ) : (
+                                            <Text as="p" key={part}>
+                                                {part}
+                                            </Text>
+                                        ),
+                                    )}
+                            </FlexBox>
+                        )}
+                    </>
                 }
             />
             <div className={`${CLASSNAME}__calendar`}>
