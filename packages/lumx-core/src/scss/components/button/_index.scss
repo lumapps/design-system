@@ -30,13 +30,23 @@
                 }
             }
 
-            &.#{$lumx-base-prefix}-button--emphasis-medium {
+            &.#{$lumx-base-prefix}-button--emphasis-medium:not(.#{$lumx-base-prefix}-button--is-selected) {
                 &.#{$lumx-base-prefix}-button--variant-button {
                     @include lumx-button-size(lumx-base-const("emphasis", "MEDIUM"), "button", $key);
                 }
 
                 &.#{$lumx-base-prefix}-button--variant-icon {
                     @include lumx-button-size(lumx-base-const("emphasis", "MEDIUM"), "icon", $key);
+                }
+            }
+
+            &.#{$lumx-base-prefix}-button--emphasis-medium.#{$lumx-base-prefix}-button--is-selected {
+                &.#{$lumx-base-prefix}-button--variant-button {
+                    @include lumx-button-size(lumx-base-const("emphasis", "SELECTED"), "button", $key);
+                }
+
+                &.#{$lumx-base-prefix}-button--variant-icon {
+                    @include lumx-button-size(lumx-base-const("emphasis", "SELECTED"), "icon", $key);
                 }
             }
 
