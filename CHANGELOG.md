@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   `@lumx/core`: fix customization of selected button CSS variables
+-   `@lumx/core`: red/D2, red/N and green/N colors to fix color contrast a11y
 
 ## [3.6.6][] - 2024-03-15
 
