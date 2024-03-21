@@ -16,6 +16,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const UnminifiedWebpackPlugin = require('unminified-webpack-plugin');
 const WebpackBar = require('webpackbar');
 const WebpackNotifierPlugin = require('webpack-notifier');
+const babelConfig = require('@lumx/babel-config');
 
 const CONFIGS = require('../../configs');
 
@@ -175,7 +176,7 @@ module.exports = {
                 test: /\.[j|t]sx?$/u,
                 use: {
                     loader: 'babel-loader',
-                    options: CONFIGS.babel,
+                    options: babelConfig.get(),
                 },
             },
         ],

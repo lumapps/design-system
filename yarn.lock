@@ -3726,18 +3726,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@lumx/angularjs@workspace:packages/lumx-angularjs"
   dependencies:
-    "@babel/core": ^7.18.13
-    "@babel/plugin-proposal-class-properties": ^7.18.6
-    "@babel/plugin-proposal-export-default-from": ^7.18.10
-    "@babel/plugin-proposal-nullish-coalescing-operator": ^7.18.6
-    "@babel/plugin-proposal-object-rest-spread": ^7.18.9
-    "@babel/plugin-proposal-optional-chaining": ^7.18.9
-    "@babel/plugin-proposal-private-property-in-object": ^7.18.6
-    "@babel/preset-env": ^7.18.10
-    "@babel/preset-typescript": ^7.18.6
     "@lumx/core": ^3.6.7
     "@lumx/icons": ^3.6.7
-    babel-plugin-angularjs-annotate: ^0.10.0
+    babel-loader: ^8.0.6
     clean-webpack-plugin: ^3.0.0
     copy-webpack-plugin: ^5.1.1
     core-js: ^3.6.4
@@ -3761,9 +3752,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@lumx/core@^3.6.7, @lumx/core@workspace:packages/lumx-core":
+"@lumx/babel-config@workspace:dev-packages/babel-config":
   version: 0.0.0-use.local
-  resolution: "@lumx/core@workspace:packages/lumx-core"
+  resolution: "@lumx/babel-config@workspace:dev-packages/babel-config"
   dependencies:
     "@babel/core": ^7.18.13
     "@babel/plugin-proposal-class-properties": ^7.18.6
@@ -3771,10 +3762,21 @@ __metadata:
     "@babel/plugin-proposal-nullish-coalescing-operator": ^7.18.6
     "@babel/plugin-proposal-object-rest-spread": ^7.18.9
     "@babel/plugin-proposal-optional-chaining": ^7.18.9
+    "@babel/plugin-proposal-private-methods": ^7.18.6
     "@babel/plugin-proposal-private-property-in-object": ^7.18.6
     "@babel/preset-env": ^7.18.10
+    "@babel/preset-react": ^7.18.6
     "@babel/preset-typescript": ^7.18.6
+    babel-plugin-angularjs-annotate: ^0.10.0
+  languageName: unknown
+  linkType: soft
+
+"@lumx/core@^3.6.7, @lumx/core@workspace:packages/lumx-core":
+  version: 0.0.0-use.local
+  resolution: "@lumx/core@workspace:packages/lumx-core"
+  dependencies:
     autoprefixer: ^9.7.4
+    babel-loader: ^8.0.6
     classnames: ^2.3.2
     clean-webpack-plugin: ^3.0.0
     copy-webpack-plugin: ^5.1.1
@@ -3855,16 +3857,6 @@ __metadata:
   resolution: "@lumx/react@workspace:packages/lumx-react"
   dependencies:
     "@babel/core": ^7.18.13
-    "@babel/plugin-proposal-class-properties": ^7.18.6
-    "@babel/plugin-proposal-export-default-from": ^7.18.10
-    "@babel/plugin-proposal-nullish-coalescing-operator": ^7.18.6
-    "@babel/plugin-proposal-object-rest-spread": ^7.18.9
-    "@babel/plugin-proposal-optional-chaining": ^7.18.9
-    "@babel/plugin-proposal-private-methods": ^7.18.6
-    "@babel/plugin-proposal-private-property-in-object": ^7.18.6
-    "@babel/preset-env": ^7.18.10
-    "@babel/preset-react": ^7.18.6
-    "@babel/preset-typescript": ^7.18.6
     "@juggle/resize-observer": ^3.2.0
     "@lumx/core": ^3.6.7
     "@lumx/icons": ^3.6.7
@@ -3889,7 +3881,6 @@ __metadata:
     "@types/react-is": ^17.0.2
     autoprefixer: ^9.7.4
     babel-jest: 29.1.2
-    babel-loader: ^8.0.6
     body-scroll-lock: ^3.1.5
     chromatic: ^6.0.6
     classnames: ^2.3.2

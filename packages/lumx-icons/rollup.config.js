@@ -5,10 +5,9 @@ import babel from 'rollup-plugin-babel';
 import copy from 'rollup-plugin-copy';
 import cleaner from 'rollup-plugin-cleaner';
 import dts from 'rollup-plugin-dts';
+import babelConfig from '@lumx/babel-config';
 
 import pkg from './package.json';
-
-const CONFIGS = require('../../configs');
 
 const DIST_PATH = path.resolve(__dirname, pkg.publishConfig.directory);
 export const extensions = ['.js', '.ts'];
@@ -39,7 +38,7 @@ const bundleJS = {
         babel({
             extensions,
             exclude: /node_modules/,
-            plugins: CONFIGS.babel.plugins,
+            ...babelConfig.get(),
             presets: [
                 ['@babel/preset-env', { targets: 'defaults' }],
             ],
