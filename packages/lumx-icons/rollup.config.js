@@ -38,10 +38,7 @@ const bundleJS = {
         babel({
             extensions,
             exclude: /node_modules/,
-            ...babelConfig.get(),
-            presets: [
-                ['@babel/preset-env', { targets: 'defaults' }],
-            ],
+            ...babelConfig.get({ platform: 'lib' }),
         }),
         /** Copy additional files to dist. */
         copy({
