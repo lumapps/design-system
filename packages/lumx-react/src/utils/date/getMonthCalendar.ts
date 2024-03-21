@@ -11,6 +11,9 @@ interface MonthCalendar {
     weeks: Array<AnnotatedWeek>;
 }
 
+/** Up to 6 rows can appear in a month calendar => 4 weeks + 1 start of month partial week + 1 send of month partial week */
+const MONTH_ROW_COUNT = 6;
+
 /**
  * Get month calendar.
  * A list of weeks with days indexed by week day number
@@ -23,25 +26,39 @@ export const getMonthCalendar = (
 ): MonthCalendar => {
     const month = referenceDate.getMonth();
     const iterDate = new Date(referenceDate.getTime());
-    iterDate.setDate(1);
 
     const weekDays = getWeekDays(locale);
+
+    // Go to start of the week
+    while (iterDate.getDay() !== weekDays[0].number) {
+        iterDate.setDate(iterDate.getDate() - 1);
+    }
+
     const lastDayOfWeek = last(weekDays) as WeekDayInfo;
 
     const weeks: Array<AnnotatedWeek> = [];
     let week: AnnotatedWeek = {};
-    while (iterDate.getMonth() === month) {
+    let rowCount = 0;
+    while (rowCount < MONTH_ROW_COUNT) {
         const weekDayNumber = iterDate.getDay();
         const day: AnnotatedDay = { date: new Date(iterDate.getTime()) };
 
         // If a range is specified, check if the day is out of range.
-        if ((rangeMinDate && iterDate <= rangeMinDate) || (rangeMaxDate && iterDate >= rangeMaxDate)) {
+        if (
+            // Solution 2
+            iterDate.getMonth() !== month ||
+            (rangeMinDate && iterDate <= rangeMinDate) ||
+            (rangeMaxDate && iterDate >= rangeMaxDate)
+        ) {
             day.isOutOfRange = true;
         }
 
+        // Solution 1:
+        //week[weekDayNumber] = iterDate.getMonth() === month ? day : undefined;
         week[weekDayNumber] = day;
         if (weekDayNumber === lastDayOfWeek.number) {
             weeks.push(week);
+            rowCount += 1;
             week = {};
         }
         iterDate.setDate(iterDate.getDate() + 1);
