@@ -178,7 +178,7 @@ module.exports = {
                 test: /\.[j|t]sx?$/u,
                 use: {
                     loader: 'babel-loader',
-                    options: babelConfig.get(),
+                    options: babelConfig.get({ platform: 'web' }),
                 },
             },
         ],
