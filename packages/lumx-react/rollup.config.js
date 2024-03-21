@@ -53,12 +53,7 @@ const bundleJS = {
         babel({
             extensions,
             exclude: /node_modules/,
-            ...babelConfig.get(),
-            presets: [
-                ['@babel/preset-env', { targets: 'defaults' }],
-                '@babel/preset-react',
-                '@babel/preset-typescript',
-            ],
+            ...babelConfig.get({ platform: 'lib', framework: 'react' }),
         }),
         /** Copy additional files to dist. */
         copy({
