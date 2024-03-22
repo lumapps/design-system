@@ -1,5 +1,5 @@
-import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiInformation } from '@lumx/icons';
-import { ColorPalette, Icon, Kind, Size } from '@lumx/react';
+import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiClose, mdiInformation } from '@lumx/icons';
+import { ColorPalette, Emphasis, Icon, IconButton, Kind, Size } from '@lumx/react';
 import { Comp, GenericProps } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import classNames from 'classnames';
@@ -17,6 +17,17 @@ export interface MessageProps extends GenericProps {
     kind?: Kind;
     /** Message custom icon SVG path. */
     icon?: string;
+    /**
+     * Displays a close button.
+     *
+     * NB: only available if `kind === 'info' && hasBackground === true`
+     */
+    closeButtonProps?: {
+        /** The callback called when the button is clicked */
+        onClick: () => void;
+        /** The label of the close button. */
+        label: string;
+    };
 }
 
 /**
@@ -47,8 +58,10 @@ const CONFIG = {
  * @return React element.
  */
 export const Message: Comp<MessageProps, HTMLDivElement> = forwardRef((props, ref) => {
-    const { children, className, hasBackground, kind, icon: customIcon, ...forwardedProps } = props;
+    const { children, className, hasBackground, kind, icon: customIcon, closeButtonProps, ...forwardedProps } = props;
     const { color, icon } = CONFIG[kind as Kind] || {};
+    const { onClick, label: closeButtonLabel } = closeButtonProps || {};
+    const isCloseButtonDisplayed = hasBackground && kind === 'info' && onClick && closeButtonLabel;
 
     return (
         <div
@@ -67,8 +80,18 @@ export const Message: Comp<MessageProps, HTMLDivElement> = forwardRef((props, re
                 <Icon className={`${CLASSNAME}__icon`} icon={customIcon || icon} size={Size.xs} color={color} />
             )}
             <div className={`${CLASSNAME}__text`}>{children}</div>
+            {isCloseButtonDisplayed && (
+                <IconButton
+                    className={`${CLASSNAME}__close-button`}
+                    icon={mdiClose}
+                    onClick={onClick}
+                    label={closeButtonLabel}
+                    emphasis={Emphasis.low}
+                />
+            )}
         </div>
     );
 });
+
 Message.displayName = COMPONENT_NAME;
 Message.className = CLASSNAME;

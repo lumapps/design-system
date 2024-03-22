@@ -22,6 +22,10 @@
         flex: 1 1 auto;
         color: lumx-color-variant("dark", "N");
     }
+
+    &__close-button {
+        flex-shrink: 0;
+    }
 }
 
 /* Message kind

@@ -15,7 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   DatePicker: add an input to change the displayed year
-
+-   Message: add a `closeButtonProps` prop to add a close button in the message. Only available for `info` kind messages with a background.
+ 
 ## [3.6.6][] - 2024-03-15
 
 ### Fixed
