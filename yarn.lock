@@ -3761,7 +3761,6 @@ __metadata:
     css-loader: ^3.4.2
     extract-css-chunks-webpack-plugin: ^4.7.4
     focus-visible: ^5.0.2
-    fork-ts-checker-webpack-plugin: ^4.0.3
     friendly-errors-webpack-plugin: ^1.7.0
     glob: ^7.1.6
     install-peers-cli: ^2.2.0
@@ -8507,7 +8506,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-code-frame@npm:6.26.0, babel-code-frame@npm:^6.22.0, babel-code-frame@npm:^6.26.0":
+"babel-code-frame@npm:6.26.0, babel-code-frame@npm:^6.26.0":
   version: 6.26.0
   resolution: "babel-code-frame@npm:6.26.0"
   dependencies:
@@ -15690,21 +15689,6 @@ __metadata:
   version: 0.6.1
   resolution: "forever-agent@npm:0.6.1"
   checksum: 766ae6e220f5fe23676bb4c6a99387cec5b7b62ceb99e10923376e27bfea72f3c3aeec2ba5f45f3f7ba65d6616965aa7c20b15002b6860833bb6e394dea546a8
-  languageName: node
-  linkType: hard
-
-"fork-ts-checker-webpack-plugin@npm:^4.0.3":
-  version: 4.0.3
-  resolution: "fork-ts-checker-webpack-plugin@npm:4.0.3"
-  dependencies:
-    babel-code-frame: ^6.22.0
-    chalk: ^2.4.1
-    micromatch: ^3.1.10
-    minimatch: ^3.0.4
-    semver: ^5.6.0
-    tapable: ^1.0.0
-    worker-rpc: ^0.1.0
-  checksum: 52cb82bb6504cc5c442f826ebcf6779635835c8a349a6304e91db213200bb42eaab10ba6a70304f5e8d34b583d6d6513c0db094fff3193065a7201666a887a5e
   languageName: node
   linkType: hard
 
@@ -23160,13 +23144,6 @@ fsevents@~2.1.2:
   version: 1.0.0
   resolution: "microbuffer@npm:1.0.0"
   checksum: 1e4e16f48f057581c1e50b1c52c7bdc25cc85532b7de493b749ecdc1464975103d0c0b42d3a4b61ecd6d332773857fbf46c8aa70c6f6d254a05376245f095f9a
-  languageName: node
-  linkType: hard
-
-"microevent.ts@npm:~0.1.1":
-  version: 0.1.1
-  resolution: "microevent.ts@npm:0.1.1"
-  checksum: 7874fcdb3f0dfa4e996d3ea63b3b9882874ae7d22be28d51ae20da24c712e9e28e5011d988095c27dd2b32e37c0ad7425342a71b89adb8e808ec7194fadf4a7a
   languageName: node
   linkType: hard
 
@@ -34668,15 +34645,6 @@ typescript@^3.9.3:
   dependencies:
     errno: ~0.1.7
   checksum: eab917530e1feddf157ec749e9c91b73a886142daa7fdf3490bccbf7b548b2576c43ab8d0a98e72ac755cbc101ca8647a7b1ff2485fddb9e8f53c40c77f5a719
-  languageName: node
-  linkType: hard
-
-"worker-rpc@npm:^0.1.0":
-  version: 0.1.1
-  resolution: "worker-rpc@npm:0.1.1"
-  dependencies:
-    microevent.ts: ~0.1.1
-  checksum: 8f8607506172f44c05490f3ccf13e5c1f430eeb9b6116a405919c186b8b17add13bbb22467a0dbcd18ec7fcb080709a15738182e0003c5fbe2144721ea00f357
   languageName: node
   linkType: hard
 
