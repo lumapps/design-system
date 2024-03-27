@@ -3761,7 +3761,6 @@ __metadata:
     css-loader: ^3.4.2
     extract-css-chunks-webpack-plugin: ^4.7.4
     focus-visible: ^5.0.2
-    fork-ts-checker-webpack-plugin: ^4.0.3
     friendly-errors-webpack-plugin: ^1.7.0
     glob: ^7.1.6
     install-peers-cli: ^2.2.0
@@ -3830,7 +3829,7 @@ __metadata:
     stylelint: ^14.9.1
     stylelint-config-recess-order: ^3.0.0
     stylelint-config-standard-scss: ^5.0.0
-    typescript: ^4.1.2
+    typescript: ^5.4.3
     webpack: ^4.44.1
     webpack-cli: ^4.2.0
     yarn: ^1.22.21
@@ -3903,7 +3902,7 @@ __metadata:
     rollup-plugin-ts-paths-resolve: ^1.3.0
     rollup-plugin-typescript-paths: ^1.2.2
     storybook: ^7.6.3
-    typescript: ^4.1.2
+    typescript: ^5.4.3
     uid: ^2.0.0
     vite: ^4.2.1
     vite-tsconfig-paths: ^4.0.7
@@ -8507,7 +8506,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-code-frame@npm:6.26.0, babel-code-frame@npm:^6.22.0, babel-code-frame@npm:^6.26.0":
+"babel-code-frame@npm:6.26.0, babel-code-frame@npm:^6.26.0":
   version: 6.26.0
   resolution: "babel-code-frame@npm:6.26.0"
   dependencies:
@@ -15762,21 +15761,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fork-ts-checker-webpack-plugin@npm:^4.0.3":
-  version: 4.0.3
-  resolution: "fork-ts-checker-webpack-plugin@npm:4.0.3"
-  dependencies:
-    babel-code-frame: ^6.22.0
-    chalk: ^2.4.1
-    micromatch: ^3.1.10
-    minimatch: ^3.0.4
-    semver: ^5.6.0
-    tapable: ^1.0.0
-    worker-rpc: ^0.1.0
-  checksum: 52cb82bb6504cc5c442f826ebcf6779635835c8a349a6304e91db213200bb42eaab10ba6a70304f5e8d34b583d6d6513c0db094fff3193065a7201666a887a5e
-  languageName: node
-  linkType: hard
-
 "form-data@npm:^3.0.0":
   version: 3.0.0
   resolution: "form-data@npm:3.0.0"
@@ -22578,7 +22562,7 @@ fsevents@~2.1.2:
     react-dom: ^17.0.2
     react-helmet: ^6.1.0
     tsconfig-paths-webpack-plugin: ^3.3.0
-    typescript: ^4.1.2
+    typescript: ^5.4.3
     workerize-loader: ^1.3.0
     yaml: ^1.10.0
   languageName: unknown
@@ -23243,13 +23227,6 @@ fsevents@~2.1.2:
   version: 1.0.0
   resolution: "microbuffer@npm:1.0.0"
   checksum: 1e4e16f48f057581c1e50b1c52c7bdc25cc85532b7de493b749ecdc1464975103d0c0b42d3a4b61ecd6d332773857fbf46c8aa70c6f6d254a05376245f095f9a
-  languageName: node
-  linkType: hard
-
-"microevent.ts@npm:~0.1.1":
-  version: 0.1.1
-  resolution: "microevent.ts@npm:0.1.1"
-  checksum: 7874fcdb3f0dfa4e996d3ea63b3b9882874ae7d22be28d51ae20da24c712e9e28e5011d988095c27dd2b32e37c0ad7425342a71b89adb8e808ec7194fadf4a7a
   languageName: node
   linkType: hard
 
@@ -32948,13 +32925,13 @@ typescript@^3.9.3:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.1.2":
-  version: 4.5.5
-  resolution: "typescript@npm:4.5.5"
+"typescript@npm:^5.4.3":
+  version: 5.4.3
+  resolution: "typescript@npm:5.4.3"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 506f4c919dc8aeaafa92068c997f1d213b9df4d9756d0fae1a1e7ab66b585ab3498050e236113a1c9e57ee08c21ec6814ca7a7f61378c058d79af50a4b1f5a5e
+  checksum: d74d731527e35e64d8d2dcf2f897cf8cfbc3428be0ad7c48434218ba4ae41239f53be7c90714089db1068c05cae22436af2ecba71fd36ecc5e7a9118af060198
   languageName: node
   linkType: hard
 
@@ -32968,13 +32945,13 @@ typescript@^3.9.3:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.1.2#~builtin<compat/typescript>":
-  version: 4.5.5
-  resolution: "typescript@patch:typescript@npm%3A4.5.5#~builtin<compat/typescript>::version=4.5.5&hash=ddd1e8"
+"typescript@patch:typescript@^5.4.3#~builtin<compat/typescript>":
+  version: 5.4.3
+  resolution: "typescript@patch:typescript@npm%3A5.4.3#~builtin<compat/typescript>::version=5.4.3&hash=ddd1e8"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 9cdde4aae20b2904431f3f2ca8acaf3b0cc52faddf68aa88b288c9d0520221817da43783a756fce7ab9360033ada0371c3ff93dfc4bdb4b13f6e9bac64e1658d
+  checksum: 3a62fe90aa79d68c9ce38ea5edb2957e62801c733b99f0e5a2b8b50922761f68f7d9a40d28c544b449866e81185cddb93cba2496d0ff3fa52ef5b1f8bcace38c
   languageName: node
   linkType: hard
 
@@ -34843,15 +34820,6 @@ typescript@^3.9.3:
   dependencies:
     errno: ~0.1.7
   checksum: eab917530e1feddf157ec749e9c91b73a886142daa7fdf3490bccbf7b548b2576c43ab8d0a98e72ac755cbc101ca8647a7b1ff2485fddb9e8f53c40c77f5a719
-  languageName: node
-  linkType: hard
-
-"worker-rpc@npm:^0.1.0":
-  version: 0.1.1
-  resolution: "worker-rpc@npm:0.1.1"
-  dependencies:
-    microevent.ts: ~0.1.1
-  checksum: 8f8607506172f44c05490f3ccf13e5c1f430eeb9b6116a405919c186b8b17add13bbb22467a0dbcd18ec7fcb080709a15738182e0003c5fbe2144721ea00f357
   languageName: node
   linkType: hard
 
