@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   DatePicker: add an input to change the displayed year
 -   Message: add a `closeButtonProps` prop to add a close button in the message. Only available for `info` kind messages with a background.
+-   Popover: add a `focusTrapZoneElement` prop to specify the element in which the focus trap should be applied.
 
 ### Changed
 
