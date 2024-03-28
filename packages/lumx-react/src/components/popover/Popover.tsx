@@ -60,6 +60,8 @@ export interface PopoverProps extends GenericProps, HasTheme {
     placement?: Placement;
     /** Whether the popover should be rendered into a DOM node that exists outside the DOM hierarchy of the parent component. */
     usePortal?: boolean;
+    /** The element in which the focus trap should be set. Default to popover. */
+    focusTrapZoneElement?: RefObject<HTMLElement>;
     /** Z-axis position. */
     zIndex?: number;
     /** On close callback (on click away or Escape pressed). */
@@ -115,6 +117,7 @@ const _InnerPopover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, ref
         boundaryRef,
         fitToAnchorWidth,
         fitWithinViewportHeight,
+        focusTrapZoneElement,
         offset,
         placement,
         style,
@@ -146,12 +149,13 @@ const _InnerPopover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, ref
     });
 
     const unmountSentinel = useRestoreFocusOnClose({ focusAnchorOnClose, anchorRef, parentElement }, popperElement);
+    const focusZoneElement = focusTrapZoneElement?.current || popoverRef?.current;
 
     useCallbackOnEscape(onClose, isOpen && closeOnEscape);
 
     /** Only set focus within if the focus trap is disabled as they interfere with one another. */
     useFocus(focusElement?.current, !withFocusTrap && isOpen && isPositioned);
-    useFocusTrap(withFocusTrap && isOpen && popoverRef?.current, focusElement?.current);
+    useFocusTrap(withFocusTrap && isOpen && focusZoneElement, focusElement?.current);
 
     const clickAwayRefs = useRef([popoverRef, anchorRef]);
     const mergedRefs = useMergeRefs<HTMLDivElement>(setPopperElement, ref, popoverRef);
