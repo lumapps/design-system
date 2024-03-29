@@ -9,9 +9,9 @@ export {
 /**
  * Optional global `window` instance (not defined when running SSR).
  */
-export const WINDOW = typeof window !== `undefined` ? window : undefined;
+export const WINDOW = typeof window !== 'undefined' ? window : undefined;
 
 /**
  * Optional global `document` instance (not defined when running SSR).
  */
-export const DOCUMENT = typeof document !== `undefined` ? document : undefined;
+export const DOCUMENT = typeof document !== 'undefined' ? document : undefined;

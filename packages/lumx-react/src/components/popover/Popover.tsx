@@ -127,26 +127,19 @@ const _InnerPopover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, ref
     } = props;
     const popoverRef = useRef<HTMLDivElement>(null);
 
-    const {
-        styles,
-        attributes,
-        isPositioned,
-        position,
-        setArrowElement,
-        setPopperElement,
-        popperElement,
-    } = usePopoverStyle({
-        offset,
-        hasArrow,
-        fitToAnchorWidth,
-        fitWithinViewportHeight,
-        boundaryRef,
-        anchorRef,
-        children,
-        placement,
-        style,
-        zIndex,
-    });
+    const { styles, attributes, isPositioned, position, setArrowElement, setPopperElement, popperElement } =
+        usePopoverStyle({
+            offset,
+            hasArrow,
+            fitToAnchorWidth,
+            fitWithinViewportHeight,
+            boundaryRef,
+            anchorRef,
+            children,
+            placement,
+            style,
+            zIndex,
+        });
 
     const unmountSentinel = useRestoreFocusOnClose({ focusAnchorOnClose, anchorRef, parentElement }, popperElement);
     const focusZoneElement = focusTrapZoneElement?.current || popoverRef?.current;

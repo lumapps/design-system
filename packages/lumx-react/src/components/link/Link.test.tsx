@@ -30,7 +30,7 @@ describe(`<${Link.displayName}>`, () => {
 
             expect(link).toBe(screen.queryByRole('link', { name }));
             expect(link).toHaveAttribute('href', props.href);
-            expect(link.className).toMatchInlineSnapshot(`"lumx-link"`);
+            expect(link.className).toMatchInlineSnapshot('"lumx-link"');
 
             expect(rightIcon).not.toBeInTheDocument();
             expect(leftIcon).not.toBeInTheDocument();
@@ -43,13 +43,13 @@ describe(`<${Link.displayName}>`, () => {
                 colorVariant: ColorVariant.D1,
             });
             expect(link.className).toMatchInlineSnapshot(
-                `"lumx-link lumx-link--color-primary lumx-link--color-variant-D1"`,
+                '"lumx-link lumx-link--color-primary lumx-link--color-variant-D1"',
             );
         });
 
         it('should render typography', () => {
             const { content } = setup({ href: 'https://google.com', typography: Typography.title });
-            expect(content?.className).toMatchInlineSnapshot(`undefined`);
+            expect(content?.className).toMatchInlineSnapshot('undefined');
         });
 
         it('should render a button', () => {

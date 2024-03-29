@@ -26,7 +26,7 @@ describe(`<${Badge.displayName}>`, () => {
         it('should use default props', () => {
             const { badge } = setup();
 
-            expect(badge.className).toMatchInlineSnapshot(`"lumx-badge lumx-badge--color-primary"`);
+            expect(badge.className).toMatchInlineSnapshot('"lumx-badge lumx-badge--color-primary"');
             expect(badge).toHaveTextContent(/30/);
         });
 

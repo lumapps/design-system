@@ -42,7 +42,7 @@ describe(`<${Select.displayName}>`, () => {
             const { select, getDropdown } = setup();
             expect(getDropdown()).not.toBeInTheDocument();
             expect(select.className).toMatchInlineSnapshot(
-                `"lumx-select lumx-select--has-unique lumx-select lumx-select--is-empty lumx-select--theme-light"`,
+                '"lumx-select lumx-select--has-unique lumx-select lumx-select--is-empty lumx-select--theme-light"',
             );
         });
 
@@ -120,7 +120,7 @@ describe(`<${Select.displayName}>`, () => {
                 expect(inputWrapper).not.toBeInTheDocument();
                 expect(chip).toBeInTheDocument();
                 expect(select.className).toMatchInlineSnapshot(
-                    `"lumx-select lumx-select--has-unique lumx-select lumx-select--is-empty lumx-select--theme-light"`,
+                    '"lumx-select lumx-select--has-unique lumx-select lumx-select--is-empty lumx-select--theme-light"',
                 );
             });
 
@@ -128,7 +128,7 @@ describe(`<${Select.displayName}>`, () => {
                 const { select, chip, props } = setup({ variant: SelectVariant.chip, value: 'val1' });
                 expect(chip).toHaveTextContent(props.value);
                 expect(select.className).toMatchInlineSnapshot(
-                    `"lumx-select lumx-select--has-unique lumx-select lumx-select--has-value lumx-select--theme-light"`,
+                    '"lumx-select lumx-select--has-unique lumx-select lumx-select--has-value lumx-select--theme-light"',
                 );
             });
 

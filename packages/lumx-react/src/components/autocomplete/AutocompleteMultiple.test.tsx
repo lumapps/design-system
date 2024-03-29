@@ -36,7 +36,7 @@ describe(`<${AutocompleteMultiple.displayName}>`, () => {
         const { autocompleteMultiple, textField, getDropdown } = setup({});
 
         expect(autocompleteMultiple).toBeInTheDocument();
-        expect(autocompleteMultiple.className).toMatchInlineSnapshot(`"lumx-autocomplete-multiple lumx-autocomplete"`);
+        expect(autocompleteMultiple.className).toMatchInlineSnapshot('"lumx-autocomplete-multiple lumx-autocomplete"');
         expect(textField).toBeInTheDocument();
         expect(getDropdown()).not.toBeInTheDocument();
     });

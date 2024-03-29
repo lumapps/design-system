@@ -35,7 +35,7 @@ describe(`<${Icon.displayName}>`, () => {
 
             expect(i).toBeInTheDocument();
             expect(i).toHaveClass(CLASSNAME);
-            expect(i?.className).toMatchInlineSnapshot(`"lumx-icon lumx-icon--no-shape lumx-icon--path"`);
+            expect(i?.className).toMatchInlineSnapshot('"lumx-icon lumx-icon--no-shape lumx-icon--path"');
 
             expect(svg).toBeInTheDocument();
             expect(svg).toHaveAttribute('aria-hidden', 'true');

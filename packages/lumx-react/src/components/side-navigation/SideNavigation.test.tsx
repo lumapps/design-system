@@ -21,12 +21,12 @@ const setup = (props: Partial<SideNavigationProps> = {}) => {
 describe(`<${SideNavigation.displayName}>`, () => {
     it('should render default', () => {
         const { sideNavigation } = setup();
-        expect(sideNavigation.className).toMatchInlineSnapshot(`"lumx-side-navigation"`);
+        expect(sideNavigation.className).toMatchInlineSnapshot('"lumx-side-navigation"');
     });
 
     it('should render dark theme', () => {
         const { sideNavigation } = setup({ theme: Theme.dark });
-        expect(sideNavigation.className).toMatchInlineSnapshot(`"lumx-color-font-light-N lumx-side-navigation"`);
+        expect(sideNavigation.className).toMatchInlineSnapshot('"lumx-color-font-light-N lumx-side-navigation"');
     });
 
     // Common tests suite.
