@@ -28,7 +28,7 @@ describe(`<${InputHelper.displayName}>`, () => {
             const { props, helper } = setup({ children: 'helper text' });
 
             expect(helper).toHaveTextContent(props.children);
-            expect(helper.className).toMatchInlineSnapshot(`"lumx-input-helper lumx-input-helper--theme-light"`);
+            expect(helper.className).toMatchInlineSnapshot('"lumx-input-helper lumx-input-helper--theme-light"');
         });
 
         it('should render dark theme', () => {

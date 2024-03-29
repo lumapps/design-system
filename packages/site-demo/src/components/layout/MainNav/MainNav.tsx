@@ -88,13 +88,13 @@ export const MainNav: React.FC<MainNavProps> = (props) => {
     return (
         <>
             <button
-                className={classNames('main-nav__overlay', isMenuOpen && `main-nav__overlay--is-open`)}
+                className={classNames('main-nav__overlay', isMenuOpen && 'main-nav__overlay--is-open')}
                 type="button"
                 aria-label="Close the navigation menu"
                 onKeyDown={onEscapePressed(closeMenu)}
                 onClick={closeMenu}
             />
-            <nav className={classNames('main-nav', isMenuOpen && `main-nav--is-open`)}>
+            <nav className={classNames('main-nav', isMenuOpen && 'main-nav--is-open')}>
                 <div className="main-nav__wrapper">
                     <IconButton
                         ref={closeNavButtonRef as any}

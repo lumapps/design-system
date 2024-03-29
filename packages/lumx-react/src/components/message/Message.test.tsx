@@ -30,7 +30,7 @@ describe(`<${Message.displayName}>`, () => {
         it('should render default', () => {
             const { message, icon } = setup({ children: 'Message text' });
             expect(message).toBeInTheDocument();
-            expect(message.className).toMatchInlineSnapshot(`"lumx-message"`);
+            expect(message.className).toMatchInlineSnapshot('"lumx-message"');
             expect(message).toHaveTextContent('Message text');
 
             expect(icon).not.toBeInTheDocument();

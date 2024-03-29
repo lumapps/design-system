@@ -11,7 +11,7 @@ export interface UseSlideFocusManagementProps {
  * This is to easily find elements that have been tempered with,
  * and not elements whose focus was already initially blocked.
  * */
-const BLOCKED_FOCUS_CLASSNAME = `focus-blocked`;
+const BLOCKED_FOCUS_CLASSNAME = 'focus-blocked';
 
 /**
  * Manage how slides must behave when visible or not.
