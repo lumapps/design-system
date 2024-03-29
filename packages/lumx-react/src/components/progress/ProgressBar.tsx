@@ -7,18 +7,14 @@ import {
     FlexBox,
     GenericProps,
     Orientation,
-    Size,
     Text,
-    Theme,
     Typography,
 } from '@lumx/react';
 
 import classNames from 'classnames';
 
-import './index.scss';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { Comp, HasTheme } from '@lumx/react/utils/type';
-import { reduce } from 'lodash';
 
 export interface ProgressBarProps extends GenericProps, HasTheme {
     /* Width of progress bar. Default: 200px */
@@ -50,19 +46,10 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * Component default props.
  */
 const DEFAULT_PROPS = {
-    colorDone: { colorPalette: 'blue', colorVariant: 'D2' } as {
-        colorPalette: ColorPalette;
-        colorVariant: ColorVariant;
-    },
-    backgroundColor: { colorPalette: 'blue', colorVariant: 'L5' } as {
-        colorPalette: ColorPalette;
-        colorVariant: ColorVariant;
-    },
     percents: 50,
     maxWidth: '200px',
     label: false,
-    theme: Theme.light,
-    size: Size.m,
+    coverImage: true,
 };
 
 /**
@@ -75,12 +62,10 @@ const DEFAULT_PROPS = {
 export const ProgressBar: Comp<ProgressBarProps, HTMLDivElement> = forwardRef((props, ref) => {
     const {
         className,
-        theme,
-        size,
         maxWidth,
         percents,
-        colorDone,
-        backgroundColor,
+        // colorDone,
+        // backgroundColor,
         label,
         labelValue,
         coverImage,
@@ -104,27 +89,29 @@ export const ProgressBar: Comp<ProgressBarProps, HTMLDivElement> = forwardRef((p
         <FlexBox
             ref={ref}
             {...forwardedProps}
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, size }))}
+            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))}
             style={{ maxWidth }}
         >
             {label ? completionLabel() : null}
             <FlexBox as="p" orientation={Orientation.horizontal} hAlign={Alignment.center} vAlign={Alignment.center}>
                 <FlexBox
                     as="span"
-                    className={coverImage ? 'progress-bar-cover' : 'progress-bar'}
+                    className={coverImage ? 'lumx-progress-bar-cover' : 'lumx-progress-bar'}
                     style={{
                         width: maxWidth,
-                        backgroundColor: 'red',
                     }}
                 >
                     <FlexBox
                         key="done"
                         /* As this will be inside the final paragraph, set as span */
                         as="span"
-                        className={coverImage ? 'progress-bar-cover__percentage-done' : 'progess-bar__percentage-done'}
+                        className={
+                            coverImage
+                                ? 'lumx-progress-bar-cover__percentage-done'
+                                : 'lumx-progress-bar__percentage-done'
+                        }
                         style={{
                             width: `${percents}%`,
-                            backgroundColor: 'red',
                         }}
                     />
                 </FlexBox>

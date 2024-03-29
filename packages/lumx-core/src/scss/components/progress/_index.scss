@@ -188,3 +188,46 @@
         transform-origin: center left;
     }
 }
+
+/* Bar
+   ========================================================================== */
+
+.lumx-progress-bar {
+    display: flex;
+    height: 6px;
+    border-radius: 4px;
+    background-color: lumx-color-variant("primary", "L4");
+   
+    &__percentage-done {
+        background-color: lumx-color-variant("primary", "N");
+        border-radius: 4px;
+    }
+}
+
+.lumx-progress-bar-cover {
+    display: flex;
+    height: 6px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    background-color: lumx-color-variant("primary", "L4");
+
+    &__percentage-done {
+        border-bottom-left-radius: 4px;
+        background-color: lumx-color-variant("primary", "N");
+    }
+   
+    &__label {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+.label {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
