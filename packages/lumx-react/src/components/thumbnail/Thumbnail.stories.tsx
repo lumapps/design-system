@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { mdiAbTesting, mdiImageBroken } from '@lumx/icons';
+import { mdiAbTesting } from '@lumx/icons';
 import { Alignment, AspectRatio, Badge, FlexBox, Icon, Size, Thumbnail, ThumbnailVariant } from '@lumx/react';
 import { CustomLink } from '@lumx/react/stories/utils/CustomLink';
 import { IMAGE_SIZES, imageArgType, IMAGES } from '@lumx/react/stories/controls/image';
@@ -159,16 +159,16 @@ export const Original = () => (
             </tr>
             <tr>
                 <td>
-                    <Thumbnail alt="" image={IMAGES.landscape1} />
+                    <Thumbnail alt="landscape image" image={IMAGES.landscape1} />
                 </td>
                 <td>
-                    <Thumbnail alt="" image={IMAGES.landscape1} imgProps={IMAGE_SIZES.landscape1} />
+                    <Thumbnail alt="landscape image" image={IMAGES.landscape1} imgProps={IMAGE_SIZES.landscape1} />
                 </td>
                 <td>
-                    <Thumbnail alt="" image={IMAGES.portrait1} />
+                    <Thumbnail alt="portrait image" image={IMAGES.portrait1} />
                 </td>
                 <td>
-                    <Thumbnail alt="" image={IMAGES.portrait1} imgProps={IMAGE_SIZES.portrait1} />
+                    <Thumbnail alt="portrait image" image={IMAGES.portrait1} imgProps={IMAGE_SIZES.portrait1} />
                 </td>
             </tr>
         </table>

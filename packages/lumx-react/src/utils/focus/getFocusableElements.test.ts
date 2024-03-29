@@ -8,13 +8,13 @@ function htmlToElement(html: string): any {
 
 describe(getFocusableElements.name, () => {
     it('should get empty', () => {
-        const element = htmlToElement(`<div></div>`);
+        const element = htmlToElement('<div></div>');
         const focusable = getFocusableElements(element);
         expect(focusable).toEqual([]);
     });
 
     it('should get single item', () => {
-        const element = htmlToElement(`<div><button /></div>`);
+        const element = htmlToElement('<div><button /></div>');
         const focusable = getFocusableElements(element);
         expect(focusable).toMatchInlineSnapshot(`
             [
@@ -25,7 +25,7 @@ describe(getFocusableElements.name, () => {
 
     describe('match focusable elements', () => {
         it('should match input element', () => {
-            const element = htmlToElement(`<div><input /></div>`);
+            const element = htmlToElement('<div><input /></div>');
             const focusable = getFocusableElements(element);
             expect(focusable).toMatchInlineSnapshot(`
                 [
@@ -35,7 +35,7 @@ describe(getFocusableElements.name, () => {
         });
 
         it('should match link element', () => {
-            const element = htmlToElement(`<div><a href="#" /></div>`);
+            const element = htmlToElement('<div><a href="#" /></div>');
             const focusable = getFocusableElements(element);
             expect(focusable).toMatchInlineSnapshot(`
                 [
@@ -47,7 +47,7 @@ describe(getFocusableElements.name, () => {
         });
 
         it('should match textarea element', () => {
-            const element = htmlToElement(`<div><textarea /></div>`);
+            const element = htmlToElement('<div><textarea /></div>');
             const focusable = getFocusableElements(element);
             expect(focusable).toMatchInlineSnapshot(`
                 [
@@ -59,7 +59,7 @@ describe(getFocusableElements.name, () => {
         });
 
         it('should match element with tabindex', () => {
-            const element = htmlToElement(`<div><span tabindex="0" /></div>`);
+            const element = htmlToElement('<div><span tabindex="0" /></div>');
             const focusable = getFocusableElements(element);
             expect(focusable).toMatchInlineSnapshot(`
                 [
@@ -71,7 +71,7 @@ describe(getFocusableElements.name, () => {
         });
 
         it('should keep disabled=false', () => {
-            const element = htmlToElement(`<div><button disabled="false" /><button /></div>`);
+            const element = htmlToElement('<div><button disabled="false" /><button /></div>');
             const focusable = getFocusableElements(element);
             expect(focusable).toMatchInlineSnapshot(`
                 [
@@ -84,7 +84,7 @@ describe(getFocusableElements.name, () => {
         });
 
         it('should keep aria-disabled=false', () => {
-            const element = htmlToElement(`<div><button aria-disabled="false" /><button /></div>`);
+            const element = htmlToElement('<div><button aria-disabled="false" /><button /></div>');
             const focusable = getFocusableElements(element);
             expect(focusable).toMatchInlineSnapshot(`
                 [
@@ -99,7 +99,7 @@ describe(getFocusableElements.name, () => {
 
     describe('skip disabled elements', () => {
         it('should skip disabled', () => {
-            const element = htmlToElement(`<div><button disabled /><button /></div>`);
+            const element = htmlToElement('<div><button disabled /><button /></div>');
             const focusable = getFocusableElements(element);
             expect(focusable).toMatchInlineSnapshot(`
                 [
@@ -109,7 +109,7 @@ describe(getFocusableElements.name, () => {
         });
 
         it('should skip aria-disabled', () => {
-            const element = htmlToElement(`<div><button aria-disabled /><button /></div>`);
+            const element = htmlToElement('<div><button aria-disabled /><button /></div>');
             const focusable = getFocusableElements(element);
             expect(focusable).toMatchInlineSnapshot(`
                 [
@@ -119,7 +119,7 @@ describe(getFocusableElements.name, () => {
         });
 
         it('should skip tabindex=-1', () => {
-            const element = htmlToElement(`<div><button tabindex="-1" /><button /></div>`);
+            const element = htmlToElement('<div><button tabindex="-1" /><button /></div>');
             const focusable = getFocusableElements(element);
             expect(focusable).toMatchInlineSnapshot(`
                 [
@@ -129,7 +129,7 @@ describe(getFocusableElements.name, () => {
         });
 
         it('should skip input type hidden', () => {
-            const element = htmlToElement(`<div><input type="hidden" /><button /></div>`);
+            const element = htmlToElement('<div><input type="hidden" /><button /></div>');
             const focusable = getFocusableElements(element);
             expect(focusable).toMatchInlineSnapshot(`
                 [
@@ -139,7 +139,7 @@ describe(getFocusableElements.name, () => {
         });
 
         it('should skip hidden input', () => {
-            const element = htmlToElement(`<div><input hidden /><button /></div>`);
+            const element = htmlToElement('<div><input hidden /><button /></div>');
             const focusable = getFocusableElements(element);
             expect(focusable).toMatchInlineSnapshot(`
                 [

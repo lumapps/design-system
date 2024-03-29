@@ -5,7 +5,7 @@ import React from 'react';
 import { PageHead } from '../components/base/PageHead';
 
 export const pageQuery = graphql`
-    query($slug: String!) {
+    query ($slug: String!) {
         mdx(fields: { slug: { eq: $slug } }) {
             body
         }

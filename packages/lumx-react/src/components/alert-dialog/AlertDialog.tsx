@@ -78,18 +78,8 @@ const DEFAULT_PROPS: Partial<DialogProps> = {
  * Children of this component should only be strings, paragraphs or links.
  */
 export const AlertDialog: Comp<AlertDialogProps, HTMLDivElement> = forwardRef((props, ref) => {
-    const {
-        id,
-        title,
-        className,
-        cancelProps,
-        confirmProps,
-        kind,
-        size,
-        dialogProps,
-        children,
-        ...forwardedProps
-    } = props;
+    const { id, title, className, cancelProps, confirmProps, kind, size, dialogProps, children, ...forwardedProps } =
+        props;
 
     const cancelButtonRef = React.useRef(null);
     const confirmationButtonRef = React.useRef(null);

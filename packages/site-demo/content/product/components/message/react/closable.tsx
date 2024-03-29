@@ -16,8 +16,6 @@ export const App = () => {
             </p>
         </Message>
     ) : (
-        <>
-            <Button onClick={() => setMessageDisplay(true)}>Reset message display</Button>
-        </>
+        <Button onClick={() => setMessageDisplay(true)}>Reset message display</Button>
     );
 };

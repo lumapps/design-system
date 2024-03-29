@@ -38,7 +38,7 @@ describe(`<${Autocomplete.displayName}>`, () => {
         it('should render default', () => {
             const { autocomplete, textField, getDropdown } = setup();
 
-            expect(autocomplete.className).toMatchInlineSnapshot(`"lumx-autocomplete"`);
+            expect(autocomplete.className).toMatchInlineSnapshot('"lumx-autocomplete"');
             expect(textField).toBeInTheDocument();
             expect(getDropdown()).not.toBeInTheDocument();
         });

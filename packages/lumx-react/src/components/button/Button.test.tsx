@@ -32,7 +32,7 @@ describe(`<${Button.displayName}>`, () => {
             expect(button).toBe(screen.queryByRole('button', { name: label }));
             expect(button).toHaveAttribute('type', 'button');
             expect(button.className).toMatchInlineSnapshot(
-                `"lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"`,
+                '"lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"',
             );
             expect(icons.length).toBe(0);
         });
@@ -53,7 +53,7 @@ describe(`<${Button.displayName}>`, () => {
         it('should render emphasis low', () => {
             const { button } = setup({ emphasis: Emphasis.low });
             expect(button.className).toMatchInlineSnapshot(
-                `"lumx-button lumx-button--color-dark lumx-button--emphasis-low lumx-button--size-m lumx-button--variant-button"`,
+                '"lumx-button lumx-button--color-dark lumx-button--emphasis-low lumx-button--size-m lumx-button--variant-button"',
             );
         });
 

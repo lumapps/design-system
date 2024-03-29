@@ -28,11 +28,9 @@ export const App = ({ theme }: any) => {
                 <footer>
                     <Toolbar
                         after={
-                            <>
-                                <Button className="lumx-spacing-margin-left-regular" onClick={close}>
-                                    Ok
-                                </Button>
-                            </>
+                            <Button className="lumx-spacing-margin-left-regular" onClick={close}>
+                                Ok
+                            </Button>
                         }
                     />
                 </footer>

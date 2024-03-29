@@ -77,10 +77,11 @@ export const DatePickerControlled: Comp<DatePickerControlledProps, HTMLDivElemen
 
     const monthYear = selectedMonth.toLocaleDateString(locale, { year: 'numeric', month: 'long' });
 
-    // Year can only be validatd by pressing Enter key or on Blur. The below handles the press Enter key case
-    const handleKeyPress: KeyboardEventHandler = React.useMemo(() => onEnterPressed(updateMonthOffset), [
-        updateMonthOffset,
-    ]);
+    // Year can only be validated by pressing Enter key or on Blur. The below handles the press Enter key case
+    const handleKeyPress: KeyboardEventHandler = React.useMemo(
+        () => onEnterPressed(updateMonthOffset),
+        [updateMonthOffset],
+    );
 
     // Required to update year in the TextField when the user changes year by using prev next month arrows
     React.useEffect(() => {

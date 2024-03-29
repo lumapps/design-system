@@ -45,10 +45,11 @@ export const Mosaic: Comp<MosaicProps, HTMLDivElement> = forwardRef((props, ref)
     const handleImageClick = useMemo(() => {
         if (!onImageClick) return undefined;
 
-        return (index: number, onClick?: MouseEventHandler): MouseEventHandler => (event) => {
-            onClick?.(event);
-            onImageClick?.(index);
-        };
+        return (index: number, onClick?: MouseEventHandler): MouseEventHandler =>
+            (event) => {
+                onClick?.(event);
+                onImageClick?.(index);
+            };
     }, [onImageClick]);
 
     return (
