@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.6.7][] - 2024-04-02
+
 ### Fixed
 
 -   `@lumx/core`: fix customization of selected button CSS variables
@@ -1945,3 +1947,7 @@ _Failed released_
 [3.6.5]: https://github.com/lumapps/design-system/tree/v3.6.5
 [unreleased]: https://github.com/lumapps/design-system/compare/v3.6.6...HEAD
 [3.6.6]: https://github.com/lumapps/design-system/tree/v3.6.6
+
+
+[Unreleased]: https://github.com/lumapps/design-system/compare/v3.6.7...HEAD
+[3.6.7]: https://github.com/lumapps/design-system/tree/v3.6.7
