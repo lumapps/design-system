@@ -30,9 +30,7 @@ Please refer to our [contributing guidelines](CONTRIBUTING.md).
 
 Code and documentation copyright 2019 LumApps. Code released under the [MIT license](LICENSE.md).
 
-[angularjs]: https://angularjs.org/
 [react]: https://react.org/
 [material]: http://www.google.com/design/spec/material-design/introduction.html
-[angularjs-release]: https://www.npmjs.com/package/@lumx/angularjs
 [react-release]: https://www.npmjs.com/package/@lumx/react
 [webpack]: https://webpack.js.org/

@@ -1,22 +1,15 @@
 # LumApps Design System (LumX)
 
-The first official LumApps Design System for [AngularJS][angularjs] or [React][react] applications.
+The first official LumApps Design System for [React][react] applications.
 _LumX_ will help you design your applications faster and more easily. You will be able to use LumX with either the LumApps design styleguides or the [Google Material Design specifications][material].
 
 ## Quick start
 
-To start to use LumX, you can either:
-
--   Install with Yarn/NPM:
-
 ```bash
-yarn add @lumx/<angularjs|react>
+yarn add @lumx/<icons|react>
 # Or
-npm install @lumx/<angularjs|react>
+npm install @lumx/<icons|react>
 ```
-
--   Download the latest release for [AngularJS][angularjs-release] or [React][react-release]
--   Clone the repository: `git clone https://github.com/lumapps/design-system.git`
 
 ## Documentation
 
@@ -76,7 +69,7 @@ you can build LumX by using:
 yarn build
 ```
 
-This will produce the target build for `@lumx/core`, `@lumx/angularjs`, `@lumx/react` and the demo site.
+This will produce the target build for `@lumx/core`, `@lumx/icons`, `@lumx/react` and the demo site.
 
 ## How to publish packages
 
@@ -103,9 +96,7 @@ Releasing a new version of the lumx packages consists in:
 
 Code and documentation copyright 2019 LumApps. Code released under the [MIT license](LICENSE.md).
 
-[angularjs]: https://angularjs.org/
 [react]: https://react.org/
 [material]: http://www.google.com/design/spec/material-design/introduction.html
-[angularjs-release]: https://www.npmjs.com/package/@lumx/angularjs
 [react-release]: https://www.npmjs.com/package/@lumx/react
 [webpack]: https://webpack.js.org/

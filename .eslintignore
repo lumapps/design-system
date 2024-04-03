@@ -7,7 +7,6 @@ storybook
 **/style-dictionary
 **/*.config.js
 packages/site-demo/plugins
-packages/lumx-angularjs
 packages/lumx-react/jest
 packages/lumx-react/src/stories/generated
 packages/yo-generators
