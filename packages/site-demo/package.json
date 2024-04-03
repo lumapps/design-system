@@ -20,7 +20,6 @@
         "start": "NODE_OPTIONS=--no-warnings gatsby develop"
     },
     "dependencies": {
-        "@lumx/angularjs": "^3.20.0",
         "@lumx/core": "^3.20.0",
         "@lumx/icons": "^3.20.0",
         "@lumx/react": "^3.20.0",

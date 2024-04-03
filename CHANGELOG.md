@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Removed
+
+-   `@lumx/angularjs`: package is deprecated, removed from project and won't receive new updates
+
 ## [3.20.0][] - 2025-11-20
 
 ### Changed
