@@ -1,6 +1,3 @@
-const CONFIGS = require('../../../configs');
+const babelConfig = require('@lumx/babel-config');
 
-module.exports = require('babel-jest').default.createTransformer({
-    plugins: CONFIGS.babel.plugins,
-    presets: [['@babel/preset-env', { targets: { node: 'current' } }], '@babel/react', '@babel/preset-typescript'],
-});
+module.exports = require('babel-jest').default.createTransformer(babelConfig.get({ platform: 'node', framework: 'react' }));

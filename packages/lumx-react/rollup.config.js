@@ -8,9 +8,9 @@ import copy from 'rollup-plugin-copy';
 import dts from 'rollup-plugin-dts';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import tsPathsResolve from 'rollup-plugin-ts-paths-resolve';
+import babelConfig from '@lumx/babel-config';
 
 import pkg from './package.json';
-const CONFIGS = require('../../configs');
 
 const ROOT_PATH = path.resolve(__dirname, '..', '..');
 const DIST_PATH = path.resolve(__dirname, pkg.publishConfig.directory);
@@ -53,12 +53,7 @@ const bundleJS = {
         babel({
             extensions,
             exclude: /node_modules/,
-            plugins: CONFIGS.babel.plugins,
-            presets: [
-                ['@babel/preset-env', { targets: 'defaults' }],
-                '@babel/preset-react',
-                '@babel/preset-typescript',
-            ],
+            ...babelConfig.get({ platform: 'lib', framework: 'react' }),
         }),
         /** Copy additional files to dist. */
         copy({
