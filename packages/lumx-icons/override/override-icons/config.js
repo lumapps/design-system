@@ -1,6 +1,7 @@
 module.exports = {
     'x-twitter': {
-        replace: true,
+        // Replace "twitter" icon in MDI v5
+        replace: 'twitter',
         cssCode: '\\F0544',
     },
     // Icon restored from MDI v4 to avoid breaking change

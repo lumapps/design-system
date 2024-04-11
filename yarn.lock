@@ -3810,8 +3810,10 @@ __metadata:
   resolution: "@lumx/icons@workspace:packages/lumx-icons"
   dependencies:
     "@mdi/font": 5.8.55
-    "@mdi/js": 5.8.55
+    "@mdi/svg": 5.8.55
+    "@mdi/util": ^0.3.2
     "@rollup/plugin-node-resolve": 9.0.0
+    "@xmldom/xmldom": ^0.8.3
     fonteditor-core: ^2.3.2
     lodash: 4.17.21
     rollup: 2.26.10
@@ -3819,6 +3821,7 @@ __metadata:
     rollup-plugin-cleaner: ^1.0.0
     rollup-plugin-copy: ^3.3.0
     rollup-plugin-dts: ^6.1.0
+    svgo: ^3.2.0
     svgtofont: ^4.0.0
   languageName: unknown
   linkType: soft
@@ -3932,10 +3935,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mdi/js@npm:5.8.55":
+"@mdi/svg@npm:5.8.55":
   version: 5.8.55
-  resolution: "@mdi/js@npm:5.8.55"
-  checksum: b4f55ab93f152fc727fee35545e59b031a256b0b7f888092a3e818f2777617b8d15dfb296d113f6e4318fb2a5281643f8c4a8d57d6452f403e3dc05321053bc1
+  resolution: "@mdi/svg@npm:5.8.55"
+  checksum: e1980332873750da899f6c6fd399b0bdd924c6d2fcf57bae42b68cea1245dd97705d534c3e86110aedd164bf4a4e42aacb9a0f585bdc4ce22447e23696cc6f91
+  languageName: node
+  linkType: hard
+
+"@mdi/util@npm:^0.3.2":
+  version: 0.3.2
+  resolution: "@mdi/util@npm:0.3.2"
+  checksum: 6dab18d3aca0c4dcd2b2eb80c55509494d1eb9b2a8783a6208a33e9363dc73ba0222ab4d1cec618ca54ecf680c65b1b50359ac6a0ff67617aabdcf83dca87b3c
   languageName: node
   linkType: hard
 
@@ -12054,7 +12064,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"css-tree@npm:^2.2.1":
+"css-tree@npm:^2.2.1, css-tree@npm:^2.3.1":
   version: 2.3.1
   resolution: "css-tree@npm:2.3.1"
   dependencies:
@@ -12214,7 +12224,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"csso@npm:5.0.5":
+"csso@npm:5.0.5, csso@npm:^5.0.5":
   version: 5.0.5
   resolution: "csso@npm:5.0.5"
   dependencies:
@@ -32556,6 +32566,23 @@ resolve@^1.9.0:
   bin:
     svgo: ./bin/svgo
   checksum: 28a5680a61245eb4a1603bc03459095bb01ad5ebd23e95882d886c3c81752313c0a9a9fe48dd0bcbb9a27c52e11c603640df952971573b2b550d9e15a9ee6116
+  languageName: node
+  linkType: hard
+
+"svgo@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "svgo@npm:3.2.0"
+  dependencies:
+    "@trysound/sax": 0.2.0
+    commander: ^7.2.0
+    css-select: ^5.1.0
+    css-tree: ^2.3.1
+    css-what: ^6.1.0
+    csso: ^5.0.5
+    picocolors: ^1.0.0
+  bin:
+    svgo: ./bin/svgo
+  checksum: 42168748a5586d85d447bec2867bc19814a4897f973ff023e6aad4ff19ba7408be37cf3736e982bb78e3f1e52df8785da5dca77a8ebc64c0ebd6fcf9915d2895
   languageName: node
   linkType: hard
 

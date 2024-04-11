@@ -1,5 +1,5 @@
 import { Kind, Message } from '@lumx/react';
-import { mdiDelete } from '@lumx/icons/';
+import { mdiDelete } from '@lumx/icons';
 import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
 import { loremIpsum } from '@lumx/react/stories/utils/lorem';
 import { iconArgType } from '@lumx/react/stories/controls/icons';

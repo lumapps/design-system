@@ -15,7 +15,7 @@ import {
     ButtonProps,
 } from '@lumx/react';
 
-import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiInformation } from '@lumx/icons/';
+import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiInformation } from '@lumx/icons';
 import { uid } from 'uid';
 import { Comp } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
