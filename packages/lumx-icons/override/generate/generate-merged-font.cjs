@@ -22,6 +22,8 @@ const { cssCodeToUnicode } = require('./utils.cjs');
  * 5. Export all font file formats
  */
 async function generateMergedFont() {
+    console.debug('Generate merged font files...');
+
     const woff2InitPromise = woff2.init();
     const mdiFontPromise = fs.readFile(MDI_FONT_PATH);
 

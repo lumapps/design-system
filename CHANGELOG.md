@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   `@lumx/icons`: optimized all JS SVG path icons (23% reduction in size)
+-   `@lumx/icons`: removed `@mdi/js` dependency, icons are copied in the library (necessary for the optimization)
+
 ## [3.6.8][] - 2024-04-18
 
 ### Fixed

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
-import { mdiMenuDown } from '@lumx/icons/';
+import { mdiMenuDown } from '@lumx/icons';
 import { PopoverDialog } from '.';
 import { Button, IconButton } from '../button';
 

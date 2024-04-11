@@ -14,8 +14,10 @@ const { cssCodeToUnicode } = require('./utils.cjs');
  * 1. Loads individual SVG icons in INPUT_ICON_OVERRIDE_DIR
  * 2. Map them to a position in the font `getIconUnicode` based on the CSS character code
  * 3. Output font in all major formats (ttf, woff, etc.)
+ * 4. Output override icon paths in JSON (used to export TS)
  */
 async function generateOverrideFont() {
+    console.debug('Override font icons...');
     return svgtofont({
         // Input dir containing SVG icons to integrate into a font
         src: INPUT_ICON_OVERRIDE_DIR,

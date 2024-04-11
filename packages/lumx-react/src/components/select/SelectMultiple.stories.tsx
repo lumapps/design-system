@@ -1,5 +1,5 @@
 /* istanbul ignore file */
-import { mdiTram } from '@lumx/icons/';
+import { mdiTram } from '@lumx/icons';
 import {
     Chip,
     Dialog,

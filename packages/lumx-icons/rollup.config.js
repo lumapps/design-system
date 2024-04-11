@@ -42,6 +42,7 @@ const bundleJS = {
             plugins: CONFIGS.babel.plugins,
             presets: [
                 ['@babel/preset-env', { targets: 'defaults' }],
+                '@babel/preset-typescript',
             ],
         }),
         /** Copy additional files to dist. */

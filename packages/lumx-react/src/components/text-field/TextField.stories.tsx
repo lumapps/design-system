@@ -1,5 +1,5 @@
 import React from 'react';
-import { mdiTranslate } from '@lumx/icons/';
+import { mdiTranslate } from '@lumx/icons';
 import { Chip, IconButton, TextField } from '@lumx/react';
 import { withValueOnChange } from '@lumx/react/stories/decorators/withValueOnChange';
 import { loremIpsum } from '@lumx/react/stories/utils/lorem';

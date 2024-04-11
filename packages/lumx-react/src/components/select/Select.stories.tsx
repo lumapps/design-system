@@ -1,4 +1,4 @@
-import { mdiBullhornOutline } from '@lumx/icons/';
+import { mdiBullhornOutline } from '@lumx/icons';
 import { List, ListItem, Select, Size, TextField } from '@lumx/react';
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
 import noop from 'lodash/noop';

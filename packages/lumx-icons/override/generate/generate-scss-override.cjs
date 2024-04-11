@@ -8,6 +8,8 @@ const { GENERATED_DIR, OUT_OVERRIDE_NAME } = require('./constants.cjs');
  * Generate SCSS exporting the override icons.
  */
 async function generateSCSSOverride() {
+    console.debug('Generate SCSS class overrides...');
+
     const classDefinitions = [];
     for (const [name, { cssCode }] of Object.entries(overrideConfig)) {
         // Override mdi class with the given css code character point
