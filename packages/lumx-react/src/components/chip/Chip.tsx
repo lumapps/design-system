@@ -74,7 +74,7 @@ export const Chip: Comp<ChipProps, HTMLAnchorElement> = forwardRef((props, ref) 
         className,
         color,
         disabled,
-        isClickable,
+        isClickable: propIsClickable,
         isDisabled = disabled,
         isHighlighted,
         isSelected,
@@ -83,11 +83,14 @@ export const Chip: Comp<ChipProps, HTMLAnchorElement> = forwardRef((props, ref) 
         onClick,
         size,
         theme,
+        href,
         ...forwardedProps
     } = props;
     const hasAfterClick = isFunction(onAfterClick);
     const hasBeforeClick = isFunction(onBeforeClick);
     const hasOnClick = isFunction(onClick);
+    const isButton = hasOnClick && !href;
+    const isClickable = Boolean(hasOnClick) || Boolean(href) || propIsClickable;
 
     // Adapt color to the theme.
     const chipColor = color || (theme === Theme.light ? ColorPalette.dark : ColorPalette.light);
@@ -98,12 +101,15 @@ export const Chip: Comp<ChipProps, HTMLAnchorElement> = forwardRef((props, ref) 
     return (
         // eslint-disable-next-line jsx-a11y/no-static-element-interactions
         <a
+            role={isButton ? 'button' : undefined}
+            tabIndex={isClickable ? 0 : undefined}
             {...forwardedProps}
+            href={href}
             ref={ref}
             className={classNames(
                 className,
                 handleBasicClasses({
-                    clickable: Boolean(hasOnClick) || isClickable,
+                    clickable: isClickable,
                     color: chipColor,
                     isDisabled,
                     hasAfter: Boolean(after),
@@ -115,9 +121,7 @@ export const Chip: Comp<ChipProps, HTMLAnchorElement> = forwardRef((props, ref) 
                     unselected: Boolean(!isSelected),
                 }),
             )}
-            role={hasOnClick ? 'button' : undefined}
-            tabIndex={isDisabled || !hasOnClick ? -1 : 0}
-            aria-disabled={(hasOnClick && isDisabled) || undefined}
+            aria-disabled={(isClickable && isDisabled) || undefined}
             onClick={hasOnClick ? onClick : undefined}
             onKeyDown={hasOnClick ? onEnterPressed(onClick) : undefined}
         >

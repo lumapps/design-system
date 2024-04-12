@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Theme } from '@lumx/react';
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import userEvent from '@testing-library/user-event';
 import { Chip, ChipProps } from './Chip';
@@ -48,6 +48,24 @@ describe('<Chip />', () => {
             expect(chip.className).toMatchInlineSnapshot(
                 '"lumx-chip lumx-chip--is-clickable lumx-chip--color-dark lumx-chip--size-m lumx-chip--is-unselected"',
             );
+        });
+
+        it('should render a link', () => {
+            setup({ children: 'Chip text', href: 'https://google.com', target: '_blank' });
+            const chip = screen.getByRole('link', { name: 'Chip text' });
+            expect(chip).toHaveAttribute('href', 'https://google.com');
+            expect(chip).toHaveAttribute('target', '_blank');
+            expect(chip).toHaveAttribute('tabIndex', '0');
+        });
+
+        it('should override the role', () => {
+            setup({ children: 'Chip text', role: 'radio' });
+            expect(screen.getByRole('radio', { name: 'Chip text' })).toBeInTheDocument();
+        });
+
+        it('should override the tabIndex', () => {
+            const { chip } = setup({ children: 'Chip text', tabIndex: -1 });
+            expect(chip).toHaveAttribute('tabIndex', '-1');
         });
     });
 
