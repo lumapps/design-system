@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Chip: fix chip not receives focus when used as link
+- Chip: Make it possible to override the following props: `role`, `tabIndex`
+
 ## [3.6.7][] - 2024-04-02
 
 ### Fixed
