@@ -47,3 +47,6 @@ To add an alias for an icon:
 
 To display all the CSS font icons, you can run `yarn test:css-font` which will generate a demo of all the icons on an
 HTTP server on `localhost:8080`.
+
+To display all JS SVG path icons, you can run the demo site with `yarn start` or go to https://design.lumapps.com/. Then,
+go to the "Iconography" page on which the full icon library is displayed.
