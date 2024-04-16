@@ -29,7 +29,7 @@ To add or replace an icons in MDI:
 
 1. Add the SVG icon in `override/override-icons` and make sure they are defined with a single svg path in a view box at
    24/24dp and follows the MDI icons guidelines (3dp margin around the edge)
-2. Add the configuration of the icon in `override/override-icons/config.json`. Set the `cssCode` to know where to place
+2. Add the configuration of the icon in `override/override-icons/config.json`. Set the `unicode` to know where to place
    the icon in the font (at which code point) and set `replace: '<name>'` if you want the icon to replace an existing MDI
    icon. (If you don't set it to true on existing icon, you'll get the error: `Error: Repeat unicode...`)
 3. Run the `yarn generate:icons` script to re-generate
