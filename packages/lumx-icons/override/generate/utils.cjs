@@ -12,6 +12,9 @@ const { ROOT_PATH } = require('../../../../configs/path');
 /** Convert CSS character code (ex: /F0544) to integer unicode code point (ex: 984388) */
 const cssCodeToUnicode = (cssCode) => parseInt(cssCode.replace(/^\\/, ''), 16);
 
+/** Reverse of `cssCodeToUnicode` */
+const unicodeToCssCode = (unicode) => `\\${unicode.toString(16).toUpperCase()}`;
+
 /** Clean up the tmp dir */
 const cleanUpTmpDir = () => fs.rm(GENERATED_TMP_DIR, { recursive: true, force: true });
 
@@ -75,6 +78,7 @@ function optimizeSVGPath(path) {
 const formatMdiName = name => `mdi${name.split('-').map(upperFirst).join('')}`;
 
 module.exports = {
+    unicodeToCssCode,
     cssCodeToUnicode,
     cleanUpTmpDir,
     exec,
