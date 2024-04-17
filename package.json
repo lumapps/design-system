@@ -8,7 +8,6 @@
         "changelog-verify": "^1.1.2",
         "es-abstract": "1.17.6",
         "eslint": "^8.57.0",
-        "eslint-config-lumapps": "3.6.7",
         "husky": "^5.0.4",
         "jsx-ast-utils": "^3.1.0",
         "lerna": "^3.18.4",
