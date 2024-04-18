@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.6.8][] - 2024-04-18
+
 ### Fixed
 
 - Chip: fix chip not receives focus when used as link
@@ -1958,5 +1960,6 @@ _Failed released_
 [3.6.6]: https://github.com/lumapps/design-system/tree/v3.6.6
 
 
-[Unreleased]: https://github.com/lumapps/design-system/compare/v3.6.7...HEAD
+[Unreleased]: https://github.com/lumapps/design-system/compare/v3.6.8...HEAD
+[3.6.8]: https://github.com/lumapps/design-system/compare/v3.6.7...v3.6.8
 [3.6.7]: https://github.com/lumapps/design-system/tree/v3.6.7
