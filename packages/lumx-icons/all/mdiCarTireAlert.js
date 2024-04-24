@@ -1,0 +1,1 @@
+export const mdiCarTireAlert = 'M11 13h2v2h-2zm0-8h2v6h-2zm6-.24A8 8 0 0 1 15.86 18H8.14A8 8 0 0 1 7 4.76V2H5v1.86a10 10 0 0 0 0 14.28V22h2v-2h2v2h2v-2h2v2h2v-2h2v2h2v-3.86a10 10 0 0 0 0-14.28V2h-2z';

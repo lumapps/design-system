@@ -1,0 +1,1 @@
+export const mdiImageFilterCenterFocusStrongOutline = 'M17 12a5 5 0 1 0-10 0 5 5 0 0 0 10 0m-5 3a3 3 0 1 1 .01-6 3 3 0 0 1-.01 6m-7 0H3v4c0 1.1.9 2 2 2h4v-2H5M5 5h4V3H5a2 2 0 0 0-2 2v4h2m14-6h-4v2h4v4h2V5a2 2 0 0 0-2-2m0 16h-4v2h4a2 2 0 0 0 2-2v-4h-2';

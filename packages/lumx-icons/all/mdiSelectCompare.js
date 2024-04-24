@@ -1,0 +1,1 @@
+export const mdiSelectCompare = 'M13 23h-2V1h2zm-4-4H5V5h4V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h4zM19 7v2h2V7zm0-2h2a2 2 0 0 0-2-2zm2 10h-2v2h2zm-2-4v2h2v-2zm-2-8h-2v2h2zm2 18a2 2 0 0 0 2-2h-2zm-2-2h-2v2h2z';

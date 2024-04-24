@@ -1,0 +1,1 @@
+export const mdiRouterNetwork = 'M5 9a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h6v2h-1a1 1 0 0 0-1 1H2v2h7a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1h7v-2h-7a1 1 0 0 0-1-1h-1v-2h6a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2zm1 3h2v2H6zm3.5 0h2v2h-2zm3.5 0h2v2h-2z';

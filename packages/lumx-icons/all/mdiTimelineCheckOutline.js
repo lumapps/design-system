@@ -1,0 +1,1 @@
+export const mdiTimelineCheckOutline = 'M22 4H10a2 2 0 0 0-2 2v4l-2 2 2 2v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2m0 14H10V6h12zM4 8H2V2h2zm-2 8h2v6H2zm3-4a2 2 0 1 1-4 0 2 2 0 0 1 4 0m10 3.08-2.75-3 1.16-1.16L15 12.5l3.59-3.58 1.16 1.41z';

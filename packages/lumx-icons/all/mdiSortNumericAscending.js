@@ -1,0 +1,1 @@
+export const mdiSortNumericAscending = 'M19 17h3l-4 4-4-4h3V3h2zM9 13H7a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h2v1H5v2h4a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2m0 3H7v-1h2zM9 3H7a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2m0 6H7V5h2z';

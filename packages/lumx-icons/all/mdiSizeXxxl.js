@@ -1,0 +1,1 @@
+export const mdiSizeXxxl = 'M9 7h2l1 2.5L13 7h2l-2 5 2 5h-2l-1-2.5-1 2.5H9l2-5zm7 0h2v8h4v2h-6zm-8 8a2 2 0 0 1-2 2H2v-2h4v-2H4v-2h2V9H2V7h4a2 2 0 0 1 2 2v1.5c0 .83-.67 1.5-1.5 1.5.83 0 1.5.67 1.5 1.5z';

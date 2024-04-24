@@ -1,0 +1,1 @@
+export const mdiVectorLink = 'M3 1a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-3h-2v3H3V3h11v2h2V3a2 2 0 0 0-2-2M9 7a2 2 0 0 0-2 2v3h2V9h11v11H9v-2H7v2a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z';

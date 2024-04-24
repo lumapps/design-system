@@ -1,0 +1,1 @@
+export const mdiFolderKeyNetworkOutline = 'M9 8a3 3 0 1 0 2.83 4H14v2h2v-2h1v-2h-5.17A3 3 0 0 0 9 8m0 4c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1m6 8a1 1 0 0 0-1-1h-1v-2h6a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-6l-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h6v2h-1a1 1 0 0 0-1 1H2v2h7a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1h7v-2zM5 15V7h14v8z';

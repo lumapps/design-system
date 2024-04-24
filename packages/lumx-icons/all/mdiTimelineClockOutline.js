@@ -1,0 +1,1 @@
+export const mdiTimelineClockOutline = 'M4 2v6H2V2zM2 22v-6h2v6zm3-10a2 2 0 1 1-4 0 2 2 0 0 1 4 0m11-8a8 8 0 1 1-7.65 10.35L6 12l2.35-2.35A8 8 0 0 1 16 4m0 2a6 6 0 1 0 .01 12.01A6 6 0 0 0 16 6m-1 7V8h1.5v4.2l3 1.8-.82 1.26z';

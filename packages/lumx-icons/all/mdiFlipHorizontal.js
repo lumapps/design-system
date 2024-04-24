@@ -1,0 +1,1 @@
+export const mdiFlipHorizontal = 'M15 21h2v-2h-2m4-10h2V7h-2M3 5v14c0 1.1.9 2 2 2h4v-2H5V5h4V3H5a2 2 0 0 0-2 2m16-2v2h2a2 2 0 0 0-2-2m-8 20h2V1h-2m8 16h2v-2h-2M15 5h2V3h-2m4 10h2v-2h-2m0 10a2 2 0 0 0 2-2h-2Z';

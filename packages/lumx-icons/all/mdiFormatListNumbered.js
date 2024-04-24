@@ -1,0 +1,1 @@
+export const mdiFormatListNumbered = 'M7 13v-2h14v2zm0 6v-2h14v2zM7 7V5h14v2zM3 8V5H2V4h2v4zm-1 9v-1h3v4H2v-1h2v-.5H3v-1h1V17zm2.25-7a.75.75 0 0 1 .75.75q0 .31-.21.52L3.12 13H5v1H2v-.92L4 11H2v-1z';

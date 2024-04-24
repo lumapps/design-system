@@ -1,6 +1,6 @@
 const svgtofont = require('svgtofont');
 const path = require('path');
-const overrideConfig = require('../override-icons/config');
+const overrideConfig = require('../override-icons/config.cjs');
 const {
     INPUT_ICON_OVERRIDE_DIR,
     GENERATED_TMP_DIR,

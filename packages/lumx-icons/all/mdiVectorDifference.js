@@ -1,0 +1,1 @@
+export const mdiVectorDifference = 'M3 1a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h2v-2H3V3h11v2h2V3a2 2 0 0 0-2-2zm6 6a2 2 0 0 0-2 2v2h2V9h2V7zm4 0v2h1v1h2V7zm5 0v2h2v11H9v-2H7v2a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zm-4 5v2h-2v2h2a2 2 0 0 0 2-2v-2zm-7 1v3h3v-2H9v-1z';

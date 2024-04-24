@@ -1,0 +1,1 @@
+export const mdiFileTableBoxMultiple = 'M3 5v16h16v2H3a2 2 0 0 1-2-2V5zm18-4H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2M11 16H8v-2h3zm0-3H8v-2h3zm0-3H8V8h3zm4 6h-3v-2h3zm0-3h-3v-2h3zm0-3h-3V8h3z';

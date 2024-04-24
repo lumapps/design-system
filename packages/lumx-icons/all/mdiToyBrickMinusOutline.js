@@ -1,0 +1,1 @@
+export const mdiToyBrickMinusOutline = 'M13.09 20H3V6h2V5c0-1.1.9-2 2-2h2a2 2 0 0 1 2 2v1h2V5c0-1.1.9-2 2-2h2a2 2 0 0 1 2 2v1h2v7.35a6 6 0 0 0-2-.35V8H5v10h8.09q-.08.5-.09 1c-.01.5.04.67.09 1M23 18h-8v2h8z';

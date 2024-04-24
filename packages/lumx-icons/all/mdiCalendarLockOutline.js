@@ -1,0 +1,1 @@
+export const mdiCalendarLockOutline = 'M13 20H5V10h14v1.05q1.12.13 2 .73V6a2 2 0 0 0-2-2h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8.18a3 3 0 0 1-.18-1zM5 6h14v2H5zm16 10v-.5a2.5 2.5 0 0 0-5 0v.5a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1m-1 0h-3v-.5a1.5 1.5 0 1 1 3 0z';

@@ -1,0 +1,1 @@
+export const mdiCalendarCursor = 'm21.7 20.26-1.41 1.41-3.23-3.17L16 20.97 14 14l7 2-2.53 1.03zM19 8H5v11h8.41l.56 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h1V1h2v2h8V1h2v2h1a2 2 0 0 1 2 2v8.95l-2-.6zm-7 2v5H7v-5z';

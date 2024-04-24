@@ -1,0 +1,1 @@
+export const mdiFitToPageOutline = 'M20 2H4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2m0 18H4V4h16m-7 4v2h-2V8H9l3-3 3 3m1 7v-2h-2v-2h2V9l3 3m-9 1H8v2l-3-3 3-3v2h2m5 5-3 3-3-3h2v-2h2v2';

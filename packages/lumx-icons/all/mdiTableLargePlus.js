@@ -1,0 +1,1 @@
+export const mdiTableLargePlus = 'M12.35 20H10v-3h2.09q.19-1.08.72-2H10v-3h4v1.54a6 6 0 0 1 2-1.19V12h4v.35q1.13.38 2 1.19V5a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v15c0 1.1.9 2 2 2h9.54a6 6 0 0 1-1.19-2M16 7h4v3h-4zm-6 0h4v3h-4zM8 20H4v-3h4zm0-5H4v-3h4zm0-5H4V7h4zm9 4h2v3h3v2h-3v3h-2v-3h-3v-2h3z';

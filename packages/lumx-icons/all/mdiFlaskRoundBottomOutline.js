@@ -1,0 +1,1 @@
+export const mdiFlaskRoundBottomOutline = 'M15 15a3 3 0 1 1-6 0v-1h2v1a1 1 0 0 0 1 1 1 1 0 0 0 1-1v-1h2zm4 0A7 7 0 1 1 9 8.67V5a1 1 0 0 1 1-1h.5l-1-2h5l-1 2h.5a1 1 0 0 1 1 1v3.67A7 7 0 0 1 19 15m-8-9v4.1a5 5 0 1 0 2 0V6z';

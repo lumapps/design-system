@@ -1,0 +1,1 @@
+export const mdiAlarmPanelOutline = 'M9 12H6v-2h3zm4.5-2h-3v2h3zm4.5 0h-3v2h3zm0-4H6v3h12zm2-1H4v14h16zm0-2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2zM9 13H6v2h3zm4.5 0h-3v2h3zm4.5 0h-3v2h3zm-9 3H6v2h3zm4.5 0h-3v2h3zm4.5 0h-3v2h3z';

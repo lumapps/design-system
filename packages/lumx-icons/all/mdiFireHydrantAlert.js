@@ -1,0 +1,1 @@
+export const mdiFireHydrantAlert = 'M22 7h-2v6h2zm0 8h-2v2h2zM3 15v-1H2v-2h1v-1h2v4zm14-3v-1h-2v4h2v-1h1v-2zm-1-6h-2.14A4 4 0 0 0 11 3.14V2H9v1.14A4 4 0 0 0 6.14 6H4v2h12zm0 16H4a2 2 0 0 1 2-2V9h8v11a2 2 0 0 1 2 2m-8-9a2 2 0 1 0 4 0 2 2 0 0 0-4 0';

@@ -1,0 +1,1 @@
+export const mdiTimelineText = 'M4 2v6H2V2zM2 22h2v-6H2zm3-10a2 2 0 1 0-4 0 2 2 0 0 0 4 0m19-6v12a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2v-4l-2-2 2-2V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2m-5 7h-8v2h8zm2-4H11v2h10z';

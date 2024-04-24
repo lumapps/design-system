@@ -1,0 +1,1 @@
+export const mdiSwapHorizontalCircleOutline = 'M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2m0 18a8.01 8.01 0 0 1 0-16 8.01 8.01 0 0 1 0 16m3-13.5V9h-4v2h4v2.5l3.5-3.5zm-6 4L5.5 14 9 17.5V15h4v-2H9z';

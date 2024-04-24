@@ -1,0 +1,1 @@
+export const mdiWalletPlus = 'M3 0v3H0v2h3v3h2V5h3V3H5V0zm6 3v3H6v3H3v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-1h-9a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h9V5a2 2 0 0 0-2-2zm3 5v8h10V8zm4 2.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3';

@@ -1,0 +1,1 @@
+export const mdiContentSaveAllOutline = 'M1 7h2v14h14v2H3a2 2 0 0 1-2-2zm18-6H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5zm2 16H7V3h11.17L21 5.83zm-7-7a3 3 0 1 0 0 6 3 3 0 0 0 0-6M8 4h9v4H8z';

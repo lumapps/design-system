@@ -1,0 +1,1 @@
+export const mdiContentSaveAlertOutline = 'M15 3H3a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V7zm2 16H3V5h11.2L17 7.8zm-7-7c-1.7 0-3 1.3-3 3s1.3 3 3 3 3-1.3 3-3-1.3-3-3-3M4 6h9v4H4zm19 8h-2V7h2zm0 4h-2v-2h2z';

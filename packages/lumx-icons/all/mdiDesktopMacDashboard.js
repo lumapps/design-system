@@ -1,0 +1,1 @@
+export const mdiDesktopMacDashboard = 'M21 14V4H3v10zm0-12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-7l2 3v1H8v-1l2-3H3a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM4 5h11v5H4zm12 0h4v2h-4zm4 3v5h-4V8zM4 11h5v2H4zm6 0h5v2h-5z';

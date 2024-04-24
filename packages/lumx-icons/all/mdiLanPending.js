@@ -1,0 +1,1 @@
+export const mdiLanPending = 'M4 1a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2H1v2h12V9h-3a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm0 2h6v4H4zm-1 9v2h2v-2zm11 1a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h-3v2h12v-2h-3a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2zM3 15v2h2v-2zm11 0h6v4h-6zM3 18v2h2v-2zm3 0v2h2v-2zm3 0v2h2v-2z';

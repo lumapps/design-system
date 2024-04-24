@@ -1,0 +1,1 @@
+export const mdiNumeric10CircleOutline = 'M12 2c5.5 0 10 4.5 10 10s-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2m0 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16m-2 3H6v2h2v8h2zm6 0h-2a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2m0 8h-2V9h2z';

@@ -1,0 +1,1 @@
+export const mdiLanConnect = 'M4 1a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2H1v2h12V9h-3a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm0 2h6v4H4zM3 13v7h7v-2H5v-5zm11 0a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h-3v2h12v-2h-3a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2zm0 2h6v4h-6z';

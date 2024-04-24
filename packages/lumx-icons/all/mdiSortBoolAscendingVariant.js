@@ -1,0 +1,1 @@
+export const mdiSortBoolAscendingVariant = 'M19 17h3l-4 4-4-4h3V3h2zM9 13H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2m-2.73 6.5-2.53-2.55 1.07-1.05 1.47 1.49L9.2 14.5l1.06 1.05zM9 3H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2m0 6H5V5h4z';

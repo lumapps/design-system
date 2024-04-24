@@ -1,0 +1,1 @@
+export const mdiLockOpenPlus = 'M19 13q.5 0 1 .09V10a2 2 0 0 0-2-2h-1V6A5 5 0 0 0 7 6h2a3 3 0 1 1 6 0v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7.81A6 6 0 0 1 19 13m-7 4a2 2 0 1 1 0-4 2 2 0 0 1 0 4m11 1v2h-3v3h-2v-3h-3v-2h3v-3h2v3z';

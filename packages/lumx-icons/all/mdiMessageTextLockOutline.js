@@ -1,0 +1,1 @@
+export const mdiMessageTextLockOutline = 'M23 3v-.5a2.5 2.5 0 0 0-5 0V3a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1m-1 0h-3v-.5a1.5 1.5 0 1 1 3 0zM6 11h9v2H6zm0-4h9v2H6zm16 4v5a2 2 0 0 1-2 2H6l-4 4V4a2 2 0 0 1 2-2h11v2H4v13.17L5.17 16H20v-5z';

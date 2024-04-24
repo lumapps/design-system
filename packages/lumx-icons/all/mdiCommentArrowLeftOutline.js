@@ -1,0 +1,1 @@
+export const mdiCommentArrowLeftOutline = 'M20 2H4a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h4v3c0 .6.4 1 1 1h.5c.2 0 .5-.1.7-.3l3.7-3.7H20a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2m0 14h-6.9L10 19.1V16H4V4h16zm-4-5V9h-4.5l1.8-1.8L12 6l-4 4 4 4 1.2-1.2-1.7-1.8z';

@@ -1,0 +1,1 @@
+export const mdiFireHydrant = 'M5 15v-1H4v-2h1v-1h2v4zm14-3v-1h-2v4h2v-1h1v-2zm-1-6h-2.14A4 4 0 0 0 13 3.14V2h-2v1.14A4 4 0 0 0 8.14 6H6v2h12zm0 16H6c0-1.1.9-2 2-2V9h8v11a2 2 0 0 1 2 2m-8-9a2 2 0 1 0 4 0 2 2 0 0 0-4 0';

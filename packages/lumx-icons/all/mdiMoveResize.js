@@ -1,0 +1,1 @@
+export const mdiMoveResize = 'M9 1v1h1v3H9v1h3V5h-1V2h1V1M9 7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2M1 9v3h1v-1h3v1h1V9H5v1H2V9m7 0h12v12H9m5-11v1h1v5h-4v-1h-1v3h1v-1h4v2h-1v1h3v-1h-1v-2h3v1h1v-3h-1v1h-3v-5h1v-1';

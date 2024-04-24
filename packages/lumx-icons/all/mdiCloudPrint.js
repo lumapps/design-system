@@ -1,0 +1,1 @@
+export const mdiCloudPrint = 'M12 2a7.5 7.5 0 0 0-6.65 4.04A6 6 0 0 0 0 12a6 6 0 0 0 6 6v4h12v-4h1a5 5 0 0 0 5-5 5 5 0 0 0-4.65-4.96A7.5 7.5 0 0 0 12 2M8 13h8v7H8zm1 1v1h6v-1zm0 2v1h6v-1zm0 2v1h6v-1z';

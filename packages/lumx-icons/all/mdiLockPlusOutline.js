@@ -1,0 +1,1 @@
+export const mdiLockPlusOutline = 'M6 20V10h12v3.09q.5-.08 1-.09t1 .09V10a2 2 0 0 0-2-2h-1V6A5 5 0 0 0 7 6v2H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7.81a6 6 0 0 1-.72-2zM9 6a3 3 0 1 1 6 0v2H9zm5 9a2 2 0 1 1-4 0 2 2 0 0 1 4 0m9 3v2h-3v3h-2v-3h-3v-2h3v-3h2v3z';

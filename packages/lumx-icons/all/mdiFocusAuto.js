@@ -1,0 +1,1 @@
+export const mdiFocusAuto = 'M19 19h-4v2h4a2 2 0 0 0 2-2v-4h-2m0-12h-4v2h4v4h2V5a2 2 0 0 0-2-2M5 5h4V3H5a2 2 0 0 0-2 2v4h2m0 6H3v4c0 1.1.9 2 2 2h4v-2H5zm3-8a2 2 0 0 0-2 2v8h2v-4h2v4h2V9a2 2 0 0 0-2-2zm0 2h2v2H8zm5-2v10h2v-4h2v-2h-2V9h3V7z';

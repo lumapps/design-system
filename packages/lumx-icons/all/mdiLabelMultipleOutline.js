@@ -1,0 +1,1 @@
+export const mdiLabelMultipleOutline = 'M4 18h9l-2 2H4c-.5 0-1.03-.21-1.41-.59A2 2 0 0 1 2 18V8h2zM17.63 4.84A2 2 0 0 0 16 4H8a2 2 0 0 0-2 2v8c0 1.1.9 2 2 2h8a2 2 0 0 0 1.63-.85L22 10zM16 14H8V6h8l3.55 4Z';

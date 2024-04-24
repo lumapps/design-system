@@ -1,0 +1,1 @@
+export const mdiWaterBoilerAlert = 'M6 2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h1v2H4v2h3a2 2 0 0 0 2-2v-2h2v2a2 2 0 0 0 2 2h3v-2h-3v-2h1a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm4 2.97a2 2 0 1 1 0 4 2 2 0 0 1 0-4M8 14.5h4V16H8zm10 .5h2v2h-2zm0-8h2v6h-2z';

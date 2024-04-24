@@ -1,0 +1,1 @@
+export const mdiFileTableBoxMultipleOutline = 'M3 5v16h16v2H3a2 2 0 0 1-2-2V5zm18-4H7a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2m0 16H7V3h14zm-10-3H8v2h3zm4 0h-3v2h3zm-4-3H8v2h3zm4 0h-3v2h3zm-4-3H8v2h3zm4 0h-3v2h3z';

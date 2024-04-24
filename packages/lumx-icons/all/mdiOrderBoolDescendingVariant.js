@@ -1,0 +1,1 @@
+export const mdiOrderBoolDescendingVariant = 'M4 3a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2m.2 1.5 1.06 1.05L5.27 9.5 2.74 6.95 3.81 5.9l1.47 1.49M4 13a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2m-4 2h4v4H4m8-14h10v2H12m0 12v-2h10v2m-10-8h10v2H12Z';

@@ -1,0 +1,1 @@
+export const mdiTextBoxMinusOutline = 'M22 17v2h-8v-2zM5 3h14a2 2 0 0 1 2 2v7.8a6 6 0 0 0-2-.72V5H5v14h7.08q.19 1.08.72 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2m2 4h10v2H7zm0 4h10v1.08a6 6 0 0 0-2.32.92H7zm0 4h5v2H7z';

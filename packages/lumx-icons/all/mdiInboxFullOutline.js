@@ -1,0 +1,1 @@
+export const mdiInboxFullOutline = 'M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2zM5 19h4.4a4 4 0 0 1-1.27-2H5zm14 0v-2h-3.13a4 4 0 0 1-1.27 2zm0-4V5H5v10h5v1c0 2.67 4 2.67 4 0v-1zM7 7h10v2H7zm10 4v2H7v-2z';

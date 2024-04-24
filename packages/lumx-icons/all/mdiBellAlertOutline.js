@@ -1,0 +1,1 @@
+export const mdiBellAlertOutline = 'M12 2a2 2 0 0 0-2 2v.29A7 7 0 0 0 5 11v6l-2 2v1h18v-1l-2-2v-6a7 7 0 0 0-5-6.71V4a2 2 0 0 0-2-2m0 4a5 5 0 0 1 5 5v7H7v-7a5 5 0 0 1 5-5m9 1v6h2V7zm0 8v2h2v-2zm-11 6a2 2 0 0 0 2 2 2 2 0 0 0 2-2z';

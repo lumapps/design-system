@@ -1,0 +1,1 @@
+export const mdiHumanMaleHeightVariant = 'M7 2a2 2 0 0 1 1.42 3.42A2 2 0 0 1 5 4a2 2 0 0 1 2-2M5.5 7h3a2 2 0 0 1 2 2v5.5H9V22H5v-7.5H3.5V9a2 2 0 0 1 2-2M19 8h2l-3-4-3 4h2v8h-2l3 4 3-4h-2m3-14h-8v2h8m0 16h-8v2h8';

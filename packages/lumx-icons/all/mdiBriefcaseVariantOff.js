@@ -1,0 +1,1 @@
+export const mdiBriefcaseVariantOff = 'M10 6.8 8.1 4.9 10 3h4l2 2v2h4a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-2.8l-7-7H14V5h-4zM2.39 1.73 1.11 3l4 4H4a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h6v-2h.11L14 15.89V16h-4v-1H3v4a2 2 0 0 0 2 2h14.1l1.74 1.73 1.27-1.27zM21 17.8V15h-2.8z';

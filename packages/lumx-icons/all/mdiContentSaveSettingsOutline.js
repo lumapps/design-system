@@ -1,0 +1,1 @@
+export const mdiContentSaveSettingsOutline = 'M7 22h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2zm2-20H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6zm2 16H5V4h11.17L19 6.83zm-7-7a3 3 0 1 0 0 6 3 3 0 0 0 0-6M6 5h9v4H6z';

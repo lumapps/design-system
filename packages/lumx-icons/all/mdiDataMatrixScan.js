@@ -1,0 +1,1 @@
+export const mdiDataMatrixScan = 'M2 2h4V0H2a2 2 0 0 0-2 2v4h2zm20-2h-4v2h4v4h2V2a2 2 0 0 0-2-2M2 18H0v4c0 1.1.9 2 2 2h4v-2H2zm20 4h-4v2h4a2 2 0 0 0 2-2v-4h-2zM8 6V4h2v2zm2 8v-2h2v2zm6-10h2v2h-2zm2 2h2v2h-2zm0 8h2v2h-2zm2-2h-4v6h4v2H4V4h2v2h2v4H6v2h2v2h2v2h2v2h2v-2h-2v-2h2v-4h-4V6h2V4h2v4h2v2h4zM8 18v-2H6v2z';

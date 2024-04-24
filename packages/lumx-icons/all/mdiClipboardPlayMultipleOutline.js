@@ -1,0 +1,1 @@
+export const mdiClipboardPlayMultipleOutline = 'M4 7v14h14v2H4a2 2 0 0 1-2-2V7zm16-4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2h3.2c.4-1.2 1.5-2 2.8-2s2.4.8 2.8 2zm-6 0a1 1 0 0 0 0 2c.6 0 1-.4 1-1s-.4-1-1-1m-4 4V5H8v12h12V5h-2v2m-6 8V9l5 3';

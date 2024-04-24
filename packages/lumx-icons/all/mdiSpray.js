@@ -1,0 +1,1 @@
+export const mdiSpray = 'M10 4h2v2h-2zM7 3h2v2H7zm0 3h2v2H7zM6 8v2H4V8zm0-3v2H4V5zm0-3v2H4V2zm7 20a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2V7h1V4h3v3h1v1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2zm0-12v10h5V10z';

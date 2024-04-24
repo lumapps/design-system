@@ -1,0 +1,1 @@
+export const mdiBeakerCheckOutline = 'm17.75 21.16-2.75-3L16.16 17l1.59 1.59L21.34 15l1.16 1.41zM3 3h18v2a2 2 0 0 0-2 2v5q-1.05 0-2 .34V5H7v2h5v1H7v1h3v1H7v1h3v1H7v1h5v1H7v1h3v1H7v3h6.08q.19 1.08.72 2H7a2 2 0 0 1-2-2V7a2 2 0 0 0-2-2z';

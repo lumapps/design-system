@@ -1,0 +1,1 @@
+export const mdiClipboardTextPlay = 'M19 3a2 2 0 0 1 2 2v8.34A6 6 0 0 0 13.34 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4.18a3 3 0 0 1 5.64 0zm-7 0a1 1 0 0 0-1 1 1 1 0 0 0 1 1 1 1 0 0 0 1-1 1 1 0 0 0-1-1m-1 14v-2H7v2zm2-4v-2H7v2zm4-4V7H7v2zm0 7 5 3-5 3z';

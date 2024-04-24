@@ -1,0 +1,1 @@
+export const mdiSquareOff = 'M20.84 22.73 19.11 21H3V4.89L1.11 3l1.28-1.27 19.72 19.73zM21 3H6.2L21 17.8z';

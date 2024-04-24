@@ -1,0 +1,1 @@
+export const mdiSymbol = 'M2 7v7h2V7zm4 0v2h4v2H8v3h2v-1a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zm9.8 0-.2 2H14v2h1.4l-.2 2H14v2h1l-.2 2h2l.2-2h1.4l-.2 2h2l.2-2H22v-2h-1.4l.2-2H22V9h-1l.2-2h-2L19 9h-1.4l.2-2zm1.6 4h1.4l-.2 2h-1.4zM2 15v2h2v-2zm6 0v2h2v-2z';
