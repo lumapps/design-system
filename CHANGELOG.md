@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.7.0][] - 2024-04-29
+
 ### Changed
 
 -   `@lumx/icons`: optimized all JS SVG path icons (23% reduction in size)
@@ -1966,6 +1968,7 @@ _Failed released_
 [3.6.6]: https://github.com/lumapps/design-system/tree/v3.6.6
 
 
-[Unreleased]: https://github.com/lumapps/design-system/compare/v3.6.8...HEAD
+[Unreleased]: https://github.com/lumapps/design-system/compare/v3.7.0...HEAD
+[3.7.0]: https://github.com/lumapps/design-system/compare/v3.6.8...v3.7.0
 [3.6.8]: https://github.com/lumapps/design-system/compare/v3.6.7...v3.6.8
 [3.6.7]: https://github.com/lumapps/design-system/tree/v3.6.7
