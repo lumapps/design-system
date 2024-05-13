@@ -4,6 +4,8 @@ import { colorArgType } from '@lumx/react/stories/controls/color';
 import { iconArgType } from '@lumx/react/stories/controls/icons';
 import { withUndefined } from '@lumx/react/stories/controls/withUndefined';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
+import { withResizableBox } from '@lumx/react/stories/decorators/withResizableBox';
+import { loremIpsum } from '@lumx/react/stories/utils/lorem';
 
 export default {
     title: 'LumX components/flag/Flag',
@@ -35,4 +37,12 @@ export const AllColors = {
             },
         }),
     ],
+};
+
+/**
+ * Truncate text option
+ */
+export const Truncate = {
+    args: { label: loremIpsum('tiny'), truncate: true },
+    decorators: [withResizableBox()],
 };

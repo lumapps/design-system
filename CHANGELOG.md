@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Thumbnail: add `objectFit` prop to control how the image fit in a constrained aspect ratio.
     Defaults to `cover` to scale & crop the image (like before).
     Can be changed to `contain` to avoid cropping the image (aka letterboxing).
+-   Flag: add `truncate` prop to activate text ellipsis on overflow.
 
 ### Changed
 
