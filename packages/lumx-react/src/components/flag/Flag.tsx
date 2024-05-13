@@ -11,7 +11,7 @@ export interface FlagProps extends GenericProps, HasTheme {
     /** Icon to use before the label. */
     icon?: string;
     /** Text label of the flag. */
-    label: string;
+    label: React.ReactNode;
 }
 
 const COMPONENT_NAME = 'Flag';
