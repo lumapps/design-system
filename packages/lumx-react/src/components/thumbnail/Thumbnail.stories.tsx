@@ -1,7 +1,18 @@
 import React from 'react';
 
 import { mdiAbTesting } from '@lumx/icons';
-import { Alignment, AspectRatio, Badge, FlexBox, Icon, Size, Thumbnail, ThumbnailVariant } from '@lumx/react';
+import {
+    Alignment,
+    AspectRatio,
+    Badge,
+    FlexBox,
+    GridColumn,
+    Icon,
+    Size,
+    Thumbnail,
+    ThumbnailObjectFit,
+    ThumbnailVariant,
+} from '@lumx/react';
 import { CustomLink } from '@lumx/react/stories/utils/CustomLink';
 import { IMAGE_SIZES, imageArgType, IMAGES } from '@lumx/react/stories/controls/image';
 import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
@@ -375,3 +386,28 @@ export const Square = () => (
         </FlexBox>
     </>
 );
+
+export const ObjectFit = {
+    args: { size: Size.xl },
+    decorators: [
+        withCombinations({
+            cellStyle: { border: '1px solid lightgray' },
+            combinations: {
+                cols: {
+                    'Default (cover)': {},
+                    contain: { objectFit: ThumbnailObjectFit.contain },
+                },
+                rows: {
+                    'Ratio square': { aspectRatio: AspectRatio.square },
+                    'Ratio wide': { aspectRatio: AspectRatio.wide },
+                    'Ratio vertical': { aspectRatio: AspectRatio.vertical },
+                },
+                sections: {
+                    'Portrait image': { image: IMAGES.portrait1 },
+                    'Landscape image': { image: IMAGES.landscape1 },
+                },
+            },
+        }),
+        withWrapper({ maxColumns: 3, itemMinWidth: 350 }, GridColumn),
+    ],
+};

@@ -37,3 +37,12 @@ export const ThumbnailVariant = {
     rounded: 'rounded',
 } as const;
 export type ThumbnailVariant = ValueOf<typeof ThumbnailVariant>;
+
+/**
+ * Thumbnail object fit.
+ */
+export const ThumbnailObjectFit = {
+    cover: 'cover',
+    contain: 'contain',
+} as const;
+export type ThumbnailObjectFit = ValueOf<typeof ThumbnailObjectFit>;

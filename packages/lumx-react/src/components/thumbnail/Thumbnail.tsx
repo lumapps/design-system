@@ -11,7 +11,7 @@ import React, {
 } from 'react';
 import classNames from 'classnames';
 
-import { AspectRatio, HorizontalAlignment, Icon, Size, Theme } from '@lumx/react';
+import { AspectRatio, HorizontalAlignment, Icon, Size, Theme, ThumbnailObjectFit } from '@lumx/react';
 
 import { Comp, Falsy, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
@@ -52,6 +52,8 @@ export interface ThumbnailProps extends GenericProps, HasTheme {
     imgRef?: Ref<HTMLImageElement>;
     /** Set to true to force the display of the loading skeleton. */
     isLoading?: boolean;
+    /** Set how the image should fit when its aspect ratio is constrained */
+    objectFit?: ThumbnailObjectFit;
     /** Size variant of the component. */
     size?: ThumbnailSize;
     /** Image loading mode. */
@@ -111,6 +113,7 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
         imgProps,
         imgRef: propImgRef,
         isLoading: isLoadingProp,
+        objectFit,
         loading,
         size,
         theme,
@@ -175,6 +178,7 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
                     hasIconErrorFallback,
                     hasCustomErrorFallback,
                     isLoading,
+                    objectFit,
                     hasBadge: !!badge,
                 }),
                 fillHeight && `${CLASSNAME}--fill-height`,
