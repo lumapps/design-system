@@ -1,6 +1,12 @@
+@use "sass:map";
+
 @function lumx-color-variant($color, $variant) {
     @if map-has-key($lumx-color-palette, $color) {
-        @return var(--lumx-color-#{$color}-#{$variant});
+        @if map.has-key(map.get($lumx-color-palette, $color), $variant) {
+            @return var(--lumx-color-#{$color}-#{$variant});
+        } @else {
+            @return var(--lumx-color-#{$color}-N);
+        }
     } @else {
         @return var(--lumx-color-dark-N);
     }
