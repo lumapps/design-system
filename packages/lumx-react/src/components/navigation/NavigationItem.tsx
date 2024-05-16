@@ -1,10 +1,11 @@
-import React, { ElementType, ReactNode, useState, useContext } from 'react';
+import React, { ElementType, ReactNode, useContext } from 'react';
 import { Icon, Placement, Size, Tooltip, Text } from '@lumx/react';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { ComponentRef, HasClassName, HasPolymorphicAs, HasTheme } from '@lumx/react/utils/type';
 import classNames from 'classnames';
 import { forwardRefPolymorphic } from '@lumx/react/utils/forwardRefPolymorphic';
 import { ThemeContext } from '@lumx/react/utils/ThemeContext';
+import { useOverflowTooltipLabel } from '@lumx/react/hooks/useOverflowTooltipLabel';
 
 type BaseNavigationItemProps = {
     /** Icon (SVG path). */
@@ -41,11 +42,7 @@ export const NavigationItem = Object.assign(
     forwardRefPolymorphic(<E extends ElementType = 'a'>(props: NavigationItemProps<E>, ref: ComponentRef<E>) => {
         const { className, icon, label, isCurrentPage, as: Element = 'a', ...forwardedProps } = props;
         const theme = useContext(ThemeContext);
-        const [labelElement, setLabelElement] = useState<HTMLSpanElement | null>(null);
-        const tooltipLabel =
-            typeof label === 'string' && labelElement && labelElement.offsetWidth < labelElement.scrollWidth
-                ? label
-                : null;
+        const { tooltipLabel, labelRef } = useOverflowTooltipLabel();
 
         const buttonProps = Element === 'button' ? { type: 'button' } : {};
 
@@ -74,7 +71,7 @@ export const NavigationItem = Object.assign(
                             <Icon className={`${CLASSNAME}__icon`} icon={icon} size={Size.xs} theme={theme} />
                         ) : null}
 
-                        <Text as="span" truncate className={`${CLASSNAME}__label`} ref={setLabelElement}>
+                        <Text as="span" truncate className={`${CLASSNAME}__label`} ref={labelRef}>
                             {label}
                         </Text>
                     </Element>

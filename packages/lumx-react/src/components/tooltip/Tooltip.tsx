@@ -12,6 +12,7 @@ import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/classNam
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 import { Placement } from '@lumx/react/components/popover';
 
+import { TooltipContextProvider } from '@lumx/react/components/tooltip/context';
 import { useInjectTooltipRef } from './useInjectTooltipRef';
 import { useTooltipOpen } from './useTooltipOpen';
 
@@ -91,7 +92,7 @@ export const Tooltip: Comp<TooltipProps, HTMLDivElement> = forwardRef((props, re
 
     return (
         <>
-            {wrappedChildren}
+            <TooltipContextProvider>{wrappedChildren}</TooltipContextProvider>
             {isOpen &&
                 createPortal(
                     <div
