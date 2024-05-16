@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   `@lumx/core`: lumx-color-variant, add fallback to default variant
+
 ## [3.7.0][] - 2024-04-29
 
 ### Added
@@ -22,8 +26,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Chip: fix chip not receives focus when used as link
-- Chip: Make it possible to override the following props: `role`, `tabIndex`
+-   Chip: fix chip not receives focus when used as link
+-   Chip: Make it possible to override the following props: `role`, `tabIndex`
 
 ### Changed
 
@@ -1969,9 +1973,7 @@ _Failed released_
 [3.6.5]: https://github.com/lumapps/design-system/tree/v3.6.5
 [unreleased]: https://github.com/lumapps/design-system/compare/v3.6.6...HEAD
 [3.6.6]: https://github.com/lumapps/design-system/tree/v3.6.6
-
-
-[Unreleased]: https://github.com/lumapps/design-system/compare/v3.7.0...HEAD
+[unreleased]: https://github.com/lumapps/design-system/compare/v3.7.0...HEAD
 [3.7.0]: https://github.com/lumapps/design-system/compare/v3.6.8...v3.7.0
 [3.6.8]: https://github.com/lumapps/design-system/compare/v3.6.7...v3.6.8
 [3.6.7]: https://github.com/lumapps/design-system/tree/v3.6.7
