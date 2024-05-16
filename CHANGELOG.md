@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     Defaults to `cover` to scale & crop the image (like before).
     Can be changed to `contain` to avoid cropping the image (aka letterboxing).
 -   Flag: add `truncate` prop to activate text ellipsis on overflow.
+-   Text: add `title` attribute when text is overflowing to display the full text on mouse over.
 
 ### Changed
 
