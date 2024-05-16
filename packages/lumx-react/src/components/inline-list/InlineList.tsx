@@ -22,6 +22,10 @@ export interface InlineListProps extends GenericProps {
      * Typography variant.
      */
     typography?: Typography;
+    /**
+     * Activate line wrap on overflow.
+     */
+    wrap?: boolean;
 }
 
 /**
@@ -47,7 +51,7 @@ const DEFAULT_PROPS = {} as const;
  * @return React element.
  */
 export const InlineList: Comp<InlineListProps> = forwardRef((props, ref) => {
-    const { className, color, colorVariant, typography, children, ...forwardedProps } = props;
+    const { className, color, colorVariant, typography, children, wrap, ...forwardedProps } = props;
     const fontColorClassName = color && getFontColorClassName(color, colorVariant);
     const typographyClassName = typography && getTypographyClassName(typography);
     return (
@@ -55,7 +59,13 @@ export const InlineList: Comp<InlineListProps> = forwardRef((props, ref) => {
         <ul
             {...forwardedProps}
             ref={ref as any}
-            className={classNames(className, CLASSNAME, fontColorClassName, typographyClassName)}
+            className={classNames(
+                className,
+                CLASSNAME,
+                wrap && `${CLASSNAME}--wrap`,
+                fontColorClassName,
+                typographyClassName,
+            )}
             // Lists with removed bullet style can lose their a11y list role on some browsers
             role="list"
         >

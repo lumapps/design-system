@@ -41,6 +41,20 @@ Inline lists pair well with [text](/product/components/text/) `noWrap` property 
     </InlineList>
 </DemoBlock>
 
+Inversely, the use of the `wrap` property will activate line wrap on overflow.
+
+<DemoBlock orientation="horizontal" vAlign="space-around">
+    <InlineList typography="body1" color="dark" colorVariant="L2" wrap style={{ maxWidth: 275 }}>
+        <Text as="span">
+            <Icon icon={mdiEarth} />
+            Some text
+        </Text>
+        <Text as="span">
+            Very very very very very long text
+        </Text>
+    </InlineList>
+</DemoBlock>
+
 ### Accessibility concerns
 
 Inline lists use standard `ul` list element and are read as such by screen readers.

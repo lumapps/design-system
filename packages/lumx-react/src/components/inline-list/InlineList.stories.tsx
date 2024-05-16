@@ -54,3 +54,25 @@ export const MixedNoWrapAndTruncate = {
     },
     decorators: [withResizableBox({ width: 400 })],
 };
+
+/**
+ * Line wrap on overflow
+ */
+export const Wrap = {
+    args: {
+        wrap: true,
+        children: [
+            <Text key="1" as="span">
+                Very very very very very long text
+            </Text>,
+            <Text key="2" as="span">
+                <Icon icon={mdiEarth} />
+                Some text
+            </Text>,
+            <Text key="3" as="span">
+                Very very very very very long text
+            </Text>,
+        ],
+    },
+    decorators: [withResizableBox({ width: 400 })],
+};

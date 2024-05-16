@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/core`: lumx-color-variant, add fallback to default variant
 
+### Added
+
+-   InlineList: add `wrap` prop to activate line wrap on overflow
+
 ## [3.7.0][] - 2024-04-29
 
 ### Added
