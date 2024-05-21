@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.7.1][] - 2024-05-21
+
 ### Fixed
 
 -   `@lumx/core`: lumx-color-variant, add fallback to default variant
@@ -1990,3 +1992,7 @@ _Failed released_
 [3.7.0]: https://github.com/lumapps/design-system/compare/v3.6.8...v3.7.0
 [3.6.8]: https://github.com/lumapps/design-system/compare/v3.6.7...v3.6.8
 [3.6.7]: https://github.com/lumapps/design-system/tree/v3.6.7
+
+
+[Unreleased]: https://github.com/lumapps/design-system/compare/v3.7.1...HEAD
+[3.7.1]: https://github.com/lumapps/design-system/tree/v3.7.1
