@@ -68,7 +68,7 @@ export const Tooltip: Comp<TooltipProps, HTMLDivElement> = forwardRef((props, re
     const { label, children, className, delay, placement, forceOpen, ...forwardedProps } = props;
     // Disable in SSR or without a label.
     if (!DOCUMENT || !label) {
-        return <>{children}</>;
+        return <TooltipContextProvider>{children}</TooltipContextProvider>;
     }
 
     const id = useMemo(() => `tooltip-${uid()}`, []);

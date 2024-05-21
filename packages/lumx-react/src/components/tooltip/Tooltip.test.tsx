@@ -24,10 +24,10 @@ jest.mock('@lumx/react/constants', () => ({
  */
 const setup = async (propsOverride: Partial<TooltipProps> = {}) => {
     const props: any = { forceOpen: true, label: 'Tooltip label', children: 'Anchor', ...propsOverride };
-    render(<Tooltip {...props} />);
+    const result = render(<Tooltip {...props} />);
     const tooltip = screen.queryByRole('tooltip', { name: props.label });
     const anchorWrapper = queryByClassName(document.body, 'lumx-tooltip-anchor-wrapper');
-    return { props, tooltip, anchorWrapper };
+    return { props, tooltip, anchorWrapper, result };
 };
 
 describe(`<${Tooltip.displayName}>`, () => {
@@ -135,6 +135,28 @@ describe(`<${Tooltip.displayName}>`, () => {
             expect(lines.length).toBe(2);
             expect(lines[0]).toHaveTextContent('First line');
             expect(lines[1]).toHaveTextContent('Second line');
+        });
+
+        it('should have a stable ref', async () => {
+            const ref = React.createRef() as any;
+
+            // Render without a label
+            const result = render(
+                <Tooltip label="">
+                    <span ref={ref}>some text</span>
+                </Tooltip>,
+            );
+            const element = ref.current;
+            expect(element).not.toBeFalsy();
+
+            // Re-render with a label
+            result.rerender(
+                <Tooltip label="Some tooltip">
+                    <span ref={ref}>some updated text</span>
+                </Tooltip>,
+            );
+            // Children ref is stable
+            expect(ref.current === element).toBe(true);
         });
     });
 
