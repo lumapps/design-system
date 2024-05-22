@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.7.2][] - 2024-05-22
+
 ### Fixed
 
 -   Tooltip: fix children not having consistent ref on re-render (like when updating the tooltip label)
@@ -1998,5 +2000,6 @@ _Failed released_
 [3.6.7]: https://github.com/lumapps/design-system/tree/v3.6.7
 
 
-[Unreleased]: https://github.com/lumapps/design-system/compare/v3.7.1...HEAD
+[Unreleased]: https://github.com/lumapps/design-system/compare/v3.7.2...HEAD
+[3.7.2]: https://github.com/lumapps/design-system/compare/v3.7.1...v3.7.2
 [3.7.1]: https://github.com/lumapps/design-system/tree/v3.7.1
