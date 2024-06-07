@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Theme } from '@lumx/react';
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import userEvent from '@testing-library/user-event';
 import { Chip, ChipProps } from './Chip';
@@ -159,6 +159,14 @@ describe('<Chip />', () => {
 
             await userEvent.click(after as any);
             expect(onClick).toHaveBeenCalled();
+        });
+
+        it('should forward key down event', async () => {
+            const onKeyDown = jest.fn();
+            const { chip } = setup({ onClick, onKeyDown });
+
+            fireEvent.keyDown(chip, { key: 'A', code: 'KeyA' });
+            expect(onKeyDown).toHaveBeenCalled();
         });
     });
 

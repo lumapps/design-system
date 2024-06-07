@@ -84,6 +84,7 @@ export const Chip: Comp<ChipProps, HTMLAnchorElement> = forwardRef((props, ref) 
         size,
         theme,
         href,
+        onKeyDown,
         ...forwardedProps
     } = props;
     const hasAfterClick = isFunction(onAfterClick);
@@ -97,6 +98,12 @@ export const Chip: Comp<ChipProps, HTMLAnchorElement> = forwardRef((props, ref) 
 
     const handleOnBeforeClick = useStopPropagation(onBeforeClick);
     const handleOnAfterClick = useStopPropagation(onAfterClick);
+    const handleKeyDown = (evt: React.KeyboardEvent) => {
+        onKeyDown?.(evt);
+        if (hasOnClick) {
+            onEnterPressed(onClick);
+        }
+    };
 
     return (
         // eslint-disable-next-line jsx-a11y/no-static-element-interactions
@@ -123,7 +130,7 @@ export const Chip: Comp<ChipProps, HTMLAnchorElement> = forwardRef((props, ref) 
             )}
             aria-disabled={(isClickable && isDisabled) || undefined}
             onClick={hasOnClick ? onClick : undefined}
-            onKeyDown={hasOnClick ? onEnterPressed(onClick) : undefined}
+            onKeyDown={handleKeyDown}
         >
             {before && (
                 // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
