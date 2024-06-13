@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   `Chip`: fix forward key down event on clickable chip
+-   `TextField`: fix forward aria-describedby prop to input
 
 ## [3.7.2][] - 2024-05-22
 
