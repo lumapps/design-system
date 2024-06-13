@@ -309,7 +309,7 @@ export const TextField: Comp<TextFieldProps, HTMLDivElement> = forwardRef((props
      */
     const helperId = helper ? `text-field-helper-${uid()}` : undefined;
     const errorId = error ? `text-field-error-${uid()}` : undefined;
-    const describedByIds = [errorId, helperId].filter(Boolean);
+    const describedByIds = [errorId, helperId, forwardedProps['aria-describedby']].filter(Boolean);
     const describedById = describedByIds.length === 0 ? undefined : describedByIds.join(' ');
 
     const [isFocus, setFocus] = useState(false);

@@ -124,7 +124,7 @@ describe(`<${TextField.displayName}>`, () => {
             });
 
             expect(helper).toHaveTextContent('helper');
-            expect(inputNative).toHaveAttribute('aria-describedby');
+            expect(inputNative).toHaveAccessibleDescription('helper');
         });
 
         it('should have error text', () => {
@@ -137,7 +137,7 @@ describe(`<${TextField.displayName}>`, () => {
 
             expect(error).toHaveTextContent('error');
             expect(inputNative).toHaveAttribute('aria-invalid', 'true');
-            expect(inputNative).toHaveAttribute('aria-describedby');
+            expect(inputNative).toHaveAccessibleDescription('error');
         });
 
         it('should not have error text', () => {
@@ -151,7 +151,7 @@ describe(`<${TextField.displayName}>`, () => {
         });
 
         it('should have error and helper text', () => {
-            const { error, helper } = setup({
+            const { error, helper, inputNative } = setup({
                 error: 'error',
                 hasError: true,
                 helper: 'helper',
@@ -160,6 +160,21 @@ describe(`<${TextField.displayName}>`, () => {
             });
             expect(error).toHaveTextContent('error');
             expect(helper).toHaveTextContent('helper');
+            expect(inputNative).toHaveAccessibleDescription('error helper');
+        });
+
+        it('should have error and helper text and custom aria describedby', () => {
+            const { error, helper, inputNative } = setup({
+                error: 'error',
+                hasError: true,
+                helper: 'helper',
+                label: 'test',
+                placeholder: 'test',
+                'aria-describedby': 'aria-description',
+            });
+            expect(error).toHaveTextContent('error');
+            expect(helper).toHaveTextContent('helper');
+            expect(inputNative).toHaveAttribute('aria-describedby', expect.stringContaining('aria-description'));
         });
     });
 
