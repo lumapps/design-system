@@ -1,4 +1,4 @@
-import React, { AriaAttributes, ButtonHTMLAttributes, DetailedHTMLProps, forwardRef, RefObject } from 'react';
+import React, { AriaAttributes, forwardRef, RefObject } from 'react';
 
 import isEmpty from 'lodash/isEmpty';
 
@@ -10,7 +10,7 @@ import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/react/utils/className';
 import { renderLink } from '@lumx/react/utils/renderLink';
 
-type HTMLButtonProps = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
+type HTMLButtonProps = React.ComponentProps<'button'>;
 
 /**
  * Button size definition.
@@ -35,6 +35,8 @@ export interface BaseButtonProps
     isSelected?: boolean;
     /** Native button name property. */
     name?: string;
+    /** On click event callback */
+    onClick: HTMLButtonProps['onClick'];
     /** Size variant. */
     size?: ButtonSize;
     /** Native anchor target property. */
