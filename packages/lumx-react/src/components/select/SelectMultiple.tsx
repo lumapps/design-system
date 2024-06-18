@@ -11,6 +11,7 @@ import { InputLabel } from '@lumx/react/components/input-label/InputLabel';
 
 import { Comp } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
 import { WithSelectContext } from './WithSelectContext';
 import { CoreSelectProps, SelectVariant } from './constants';
@@ -75,6 +76,7 @@ export const SelectMultipleField: React.FC<SelectMultipleProps> = ({
     theme,
     value,
     variant,
+    selectElementRef,
     ...forwardedProps
 }) => (
     <>
@@ -95,7 +97,7 @@ export const SelectMultipleField: React.FC<SelectMultipleProps> = ({
 
                 {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
                 <div
-                    ref={anchorRef as RefObject<HTMLDivElement>}
+                    ref={mergeRefs(anchorRef as RefObject<HTMLDivElement>, selectElementRef)}
                     id={id}
                     className={`${CLASSNAME}__wrapper`}
                     onClick={onInputClick}
@@ -150,7 +152,7 @@ export const SelectMultipleField: React.FC<SelectMultipleProps> = ({
                 after={<Icon icon={isEmpty ? mdiMenuDown : mdiCloseCircle} />}
                 onAfterClick={isEmpty ? onInputClick : onClear}
                 onClick={onInputClick}
-                ref={anchorRef as RefObject<HTMLAnchorElement>}
+                ref={mergeRefs(anchorRef as RefObject<HTMLAnchorElement>, selectElementRef)}
                 theme={theme}
                 {...forwardedProps}
             >
