@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `Chip`: fix forward key down event on clickable chip
 -   `TextField`: fix forward aria-describedby prop to input
 
+### Changed
+
+- `Select`, `SelectMultiple`: add `selectElementRef` prop to reference the actual input field of these components.
+
 ## [3.7.2][] - 2024-05-22
 
 ### Fixed
