@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.7.3][] - 2024-06-19
+
 ### Fixed
 
 -   `Chip`: fix forward key down event on clickable chip
@@ -2009,6 +2011,7 @@ _Failed released_
 [3.6.7]: https://github.com/lumapps/design-system/tree/v3.6.7
 
 
-[Unreleased]: https://github.com/lumapps/design-system/compare/v3.7.2...HEAD
+[Unreleased]: https://github.com/lumapps/design-system/compare/v3.7.3...HEAD
+[3.7.3]: https://github.com/lumapps/design-system/compare/v3.7.2...v3.7.3
 [3.7.2]: https://github.com/lumapps/design-system/compare/v3.7.1...v3.7.2
 [3.7.1]: https://github.com/lumapps/design-system/tree/v3.7.1
