@@ -7,5 +7,6 @@
         // Prevent blocks in content from overflowing
         overflow: clip;
         max-width: 100%;
+        min-width: 0;
     }
 }
