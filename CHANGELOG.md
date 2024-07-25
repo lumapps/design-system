@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- `ListItem`: display keyboard focus ring even when not highlighted
 - `Message`: changed spacing between icon and text from 16 to 8
 
 ## [3.7.4][] - 2024-06-20
