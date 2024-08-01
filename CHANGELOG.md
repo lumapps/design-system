@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- `Message`: changed type "info" color to blue
+- `Notification`: changed type "info" color to blue
+
 ## [3.7.5][] - 2024-07-25
 
 ### Changed

@@ -14,7 +14,7 @@ export const NOTIFICATION_CONFIGURATION = {
         icon: mdiAlert,
     },
     info: {
-        color: 'dark',
+        color: 'blue',
         icon: mdiInformation,
     },
     success: {
