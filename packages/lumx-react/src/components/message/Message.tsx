@@ -45,7 +45,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  */
 const CONFIG = {
     [Kind.error]: { color: ColorPalette.red, icon: mdiAlert },
-    [Kind.info]: { color: ColorPalette.dark, icon: mdiInformation },
+    [Kind.info]: { color: ColorPalette.blue, icon: mdiInformation },
     [Kind.success]: { color: ColorPalette.green, icon: mdiCheckCircle },
     [Kind.warning]: { color: ColorPalette.yellow, icon: mdiAlertCircle },
 };
