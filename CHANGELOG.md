@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `Lightbox`: fix a11y color contrast on the close button.
 -   `Mosaic`: fix thumbnail focus outline cropped by parent overflow.
+-   `SlideShow`: fix pagination item focus outline cropped by parent overflow.
 
 ## [3.7.5][] - 2024-07-25
 
