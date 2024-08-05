@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   `ImageLightbox`: new component providing an image slideshow lightbox with extra features (zoom & a11y).
+
 ## [3.8.1][] - 2024-08-14
 
 ### Fixed
