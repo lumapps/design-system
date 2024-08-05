@@ -139,3 +139,18 @@ export type ComponentRef<C> = C extends keyof JSX.IntrinsicElements
       : C extends React.JSXElementConstructor<{ ref?: infer R }>
         ? R
         : never;
+
+/**
+ * Rectangle size
+ */
+export type RectSize = { width: number; height: number };
+
+/**
+ * Maybe a HTMLElement or a React ref of a HTMLElement
+ */
+export type MaybeElementOrRef<E extends HTMLElement> = E | React.RefObject<E | null> | null | undefined;
+
+/**
+ * A point coordinate in 2D space
+ */
+export type Point = { x: number; y: number };
