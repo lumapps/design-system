@@ -35,6 +35,7 @@
         position: fixed;
         top: $lumx-spacing-unit * 3;
         right: $lumx-spacing-unit * 3;
+        z-index: 1;
     }
 
     &__wrapper {

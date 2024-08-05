@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { createPortal } from 'react-dom';
 
 import { mdiClose } from '@lumx/icons';
-import { ColorPalette, Emphasis, IconButton, IconButtonProps } from '@lumx/react';
+import { IconButton, IconButtonProps } from '@lumx/react';
 import { DIALOG_TRANSITION_DURATION, DOCUMENT } from '@lumx/react/constants';
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
@@ -145,17 +145,18 @@ export const Lightbox: Comp<LightboxProps, HTMLDivElement> = forwardRef((props, 
             style={{ zIndex }}
         >
             {closeButtonProps && (
-                <IconButton
-                    {...closeButtonProps}
-                    ref={closeButtonRef}
-                    className={`${CLASSNAME}__close`}
-                    color={ColorPalette.light}
-                    emphasis={Emphasis.low}
-                    icon={mdiClose}
-                    theme={theme}
-                    type="button"
-                    onClick={onClose}
-                />
+                <div className={`${CLASSNAME}__close`}>
+                    <IconButton
+                        {...closeButtonProps}
+                        ref={closeButtonRef}
+                        emphasis="low"
+                        hasBackground
+                        icon={mdiClose}
+                        theme="dark"
+                        type="button"
+                        onClick={onClose}
+                    />
+                </div>
             )}
             <ClickAwayProvider callback={!preventAutoClose && onClose} childrenRefs={clickAwayRefs}>
                 <div ref={childrenRef} className={`${CLASSNAME}__wrapper`} role="presentation">
