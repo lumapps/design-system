@@ -1,6 +1,7 @@
 import { CSSProperties, useEffect, useMemo, useState } from 'react';
 import { AspectRatio } from '@lumx/react/components';
 import { ThumbnailProps } from '@lumx/react/components/thumbnail/Thumbnail';
+import { RectSize } from '@lumx/react/utils/type';
 
 // Calculate shift to center the focus point in the container.
 export function shiftPosition({
@@ -24,8 +25,6 @@ export function shiftPosition({
     return Math.floor(Math.max(Math.min(shift, 1), 0) * 100);
 }
 
-type Size = { width: number; height: number };
-
 // Compute CSS properties to apply the focus point.
 export const useFocusPointStyle = (
     { image, aspectRatio, focusPoint, imgProps: { width, height } = {} }: ThumbnailProps,
@@ -33,7 +32,7 @@ export const useFocusPointStyle = (
     isLoaded: boolean,
 ): CSSProperties => {
     // Get natural image size from imgProps or img element.
-    const imageSize: Size | undefined = useMemo(() => {
+    const imageSize: RectSize | undefined = useMemo(() => {
         // Focus point is not applicable => exit early
         if (!image || aspectRatio === AspectRatio.original || (!focusPoint?.x && !focusPoint?.y)) return undefined;
         if (typeof width === 'number' && typeof height === 'number') return { width, height };
@@ -42,7 +41,7 @@ export const useFocusPointStyle = (
     }, [aspectRatio, element, focusPoint?.x, focusPoint?.y, height, image, isLoaded, width]);
 
     // Get container size (dependant on imageSize).
-    const [containerSize, setContainerSize] = useState<Size | undefined>(undefined);
+    const [containerSize, setContainerSize] = useState<RectSize | undefined>(undefined);
     useEffect(
         function updateContainerSize() {
             const cWidth = element?.offsetWidth;
