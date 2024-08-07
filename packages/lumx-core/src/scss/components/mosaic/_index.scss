@@ -9,7 +9,6 @@
 
     position: relative;
     padding-top: map.get($lumx-thumbnail-aspect-ratio, "horizontal");
-    overflow: hidden;
 
     &__wrapper {
         position: absolute;
@@ -49,6 +48,10 @@
         display: flex;
         flex-direction: column;
         margin: 1px;
+
+        &:has([data-focus-visible-added]) {
+            z-index: 1;
+        }
 
         #{$self}--has-1-thumbnail & {
             &:nth-child(1) {
