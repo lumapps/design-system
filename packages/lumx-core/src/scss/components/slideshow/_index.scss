@@ -80,6 +80,10 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-slideshow-controls {
+    $item-max-count: 6;
+    $item-size: $lumx-spacing-unit;
+    $item-margin-inline: 2px;
+    $item-focus-outline: 4px;
     $self: &;
 
     display: flex;
@@ -88,15 +92,15 @@
 
     &__pagination {
         align-items: center;
-        max-width: 60px;
-        margin: 0 math.div($lumx-spacing-unit, 2);
+        // Compute max width for N items based on their size, margin and focus outline
+        max-width: ($item-max-count * ($item-size + $item-margin-inline)) + $item-focus-outline;
         overflow: hidden;
     }
 
     &__pagination-items {
         display: flex;
         align-items: center;
-        padding: 4px 0;
+        padding: $item-focus-outline;
         transition: transform $lumx-slideshow-transition-duration;
 
         @media (prefers-reduced-motion: reduce) {
@@ -108,11 +112,10 @@
         $item: &;
 
         flex-shrink: 0;
-        width: 8px;
-        height: 8px;
+        width: $item-size;
+        height: $item-size;
         padding: 0;
-        margin: 0;
-        margin: 0 2px;
+        margin: 0 $item-margin-inline;
         text-decoration: none;
         cursor: pointer;
         user-select: none;
