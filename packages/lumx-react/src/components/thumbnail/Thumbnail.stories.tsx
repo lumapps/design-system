@@ -5,6 +5,7 @@ import {
     Alignment,
     AspectRatio,
     Badge,
+    Button,
     FlexBox,
     GridColumn,
     Icon,
@@ -411,3 +412,31 @@ export const ObjectFit = {
         withWrapper({ maxColumns: 3, itemMinWidth: 350 }, GridColumn),
     ],
 };
+
+/**
+ * Demonstrate loading a small image and then use it as the loading placeholder image when loading a bigger image
+ */
+export const LoadingPlaceholderImage = () => {
+    const [isShown, setShown] = React.useState(false);
+    const imgRef = React.useRef() as React.RefObject<HTMLImageElement>;
+    return (
+        <>
+            <Button onClick={() => setShown((shown) => !shown)}>
+                Display bigger image using the small image as a placeholder
+            </Button>
+            <FlexBox orientation="horizontal">
+                <Thumbnail alt="Small image" imgRef={imgRef} image="https://picsum.photos/id/15/128/85" />
+                {isShown && (
+                    <Thumbnail
+                        loadingPlaceholderImageRef={imgRef}
+                        style={{ maxWidth: 300 }}
+                        alt="Large image"
+                        image="https://picsum.photos/id/15/2500/1667"
+                    />
+                )}
+            </FlexBox>
+        </>
+    );
+};
+// Disables Chromatic snapshot (not relevant for this story).
+LoadingPlaceholderImage.parameters = { chromatic: { disable: true } };

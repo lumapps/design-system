@@ -58,6 +58,8 @@ export interface ThumbnailProps extends GenericProps, HasTheme {
     size?: ThumbnailSize;
     /** Image loading mode. */
     loading?: ImgHTMLProps['loading'];
+    /** Ref of an existing placeholder image to display while loading. */
+    loadingPlaceholderImageRef?: React.RefObject<HTMLImageElement>;
     /** On click callback. */
     onClick?: MouseEventHandler<HTMLDivElement>;
     /** On key press callback. */
@@ -115,6 +117,7 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
         isLoading: isLoadingProp,
         objectFit,
         loading,
+        loadingPlaceholderImageRef,
         size,
         theme,
         variant,
@@ -159,6 +162,18 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
         wrapperProps['aria-label'] = forwardedProps['aria-label'] || alt;
     }
 
+    // If we have a loading placeholder image that is really loaded (complete)
+    const loadingPlaceholderImage =
+        (isLoading && loadingPlaceholderImageRef?.current?.complete && loadingPlaceholderImageRef?.current) ||
+        undefined;
+    const loadingStyle = loadingPlaceholderImage
+        ? {
+              backgroundImage: `url(${loadingPlaceholderImage.src})`,
+              minWidth: loadingPlaceholderImage.naturalWidth,
+              minHeight: loadingPlaceholderImage.naturalHeight,
+          }
+        : undefined;
+
     return (
         <Wrapper
             {...wrapperProps}
@@ -191,6 +206,7 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
                         ...imgProps?.style,
                         ...imageErrorStyle,
                         ...focusPointStyle,
+                        ...loadingStyle,
                     }}
                     ref={mergeRefs(setImgElement, propImgRef)}
                     className={classNames(
