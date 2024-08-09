@@ -1,0 +1,27 @@
+# ImageLightbox
+
+**Reveals an image or image slideshow after clicking on a trigger.**
+
+The image lightbox component is a composition of the [Lightbox](/product/components/lightbox/) and a [Slideshow](/product/components/slideshow/) with extra features (zoom & better a11y defaults).
+
+<DemoBlock demo="default" vAlign="center" />
+
+### Accessibility concerns
+
+All accessibility concern around focus management are handled by the `ImageLightbox.useImageLightbox()` hook as long as you properly attach the trigger props (see demo code).
+
+As this component is composed of a dialog and many action button, you must provide:
+
+- A label via either `aria-label` or `aria-labelledby` props to name the dialog (ex: "Fullscreen image").
+Setting `aria-labelledby` is recommended as it target a visible label rather than adding an invisible `aria-label` on the dialog.
+
+- A label for the close button via `closeButtonProps` (see demo code).
+
+- Labels for the slideshow controls via `slideshowControlsProps` (see demo code).
+
+- Labels for the zoom buttons via `zoomInButtonProps`and `zoomOutButtonProps` (see demo code).
+
+
+### Properties
+
+<PropTable component="ImageLightbox" />
