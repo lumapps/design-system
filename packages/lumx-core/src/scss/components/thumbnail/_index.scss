@@ -58,6 +58,9 @@
         max-width: 100%;
         max-height: 100%;
         font-size: 0;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: var(--lumx-thumbnail-image-object-fit, cover);
 
         &--has-defined-size {
             width: fit-content;

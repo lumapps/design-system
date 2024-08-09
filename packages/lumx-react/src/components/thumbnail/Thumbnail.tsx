@@ -17,7 +17,7 @@ import { Comp, Falsy, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 
 import { mdiImageBroken } from '@lumx/icons';
-import { mergeRefs } from '@lumx/react/utils/mergeRefs';
+import { useMergeRefs } from '@lumx/react/utils/mergeRefs';
 import { useImageLoad } from '@lumx/react/components/thumbnail/useImageLoad';
 import { useFocusPointStyle } from '@lumx/react/components/thumbnail/useFocusPointStyle';
 import { FocusPoint, ThumbnailSize, ThumbnailVariant } from './types';
@@ -58,6 +58,8 @@ export interface ThumbnailProps extends GenericProps, HasTheme {
     size?: ThumbnailSize;
     /** Image loading mode. */
     loading?: ImgHTMLProps['loading'];
+    /** Ref of an existing placeholder image to display while loading. */
+    loadingPlaceholderImageRef?: React.RefObject<HTMLImageElement>;
     /** On click callback. */
     onClick?: MouseEventHandler<HTMLDivElement>;
     /** On key press callback. */
@@ -115,6 +117,7 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
         isLoading: isLoadingProp,
         objectFit,
         loading,
+        loadingPlaceholderImageRef,
         size,
         theme,
         variant,
@@ -159,6 +162,16 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
         wrapperProps['aria-label'] = forwardedProps['aria-label'] || alt;
     }
 
+    // If we have a loading placeholder image that is really loaded (complete)
+    const loadingPlaceholderImage =
+        (isLoading && loadingPlaceholderImageRef?.current?.complete && loadingPlaceholderImageRef?.current) ||
+        undefined;
+
+    // Set loading placeholder image as background
+    const loadingStyle = loadingPlaceholderImage
+        ? { backgroundImage: `url(${loadingPlaceholderImage.src})` }
+        : undefined;
+
     return (
         <Wrapper
             {...wrapperProps}
@@ -186,13 +199,19 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
         >
             <span className={`${CLASSNAME}__background`}>
                 <img
+                    // Use placeholder image size
+                    width={loadingPlaceholderImage?.naturalWidth}
+                    height={loadingPlaceholderImage?.naturalHeight}
                     {...imgProps}
                     style={{
+                        // Reserve space while loading (when possible)
+                        width: isLoading ? imgProps?.width || loadingPlaceholderImage?.naturalWidth : undefined,
                         ...imgProps?.style,
                         ...imageErrorStyle,
                         ...focusPointStyle,
+                        ...loadingStyle,
                     }}
-                    ref={mergeRefs(setImgElement, propImgRef)}
+                    ref={useMergeRefs(setImgElement, propImgRef)}
                     className={classNames(
                         handleBasicClasses({
                             prefix: `${CLASSNAME}__image`,
