@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `Mosaic`: fix thumbnail focus outline cropped by parent overflow.
 -   `SlideShow`: fix pagination item focus outline cropped by parent overflow.
 
+### Changed
+
+-  `ImageBlock`: internal changes on caption styles (simply and make reusable).
+
 ## [3.7.5][] - 2024-07-25
 
 ### Changed
