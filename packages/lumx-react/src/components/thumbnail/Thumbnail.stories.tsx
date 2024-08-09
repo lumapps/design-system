@@ -1,10 +1,13 @@
 import React from 'react';
 
+import uniqueId from 'lodash/uniqueId';
+
 import { mdiAbTesting } from '@lumx/icons';
 import {
     Alignment,
     AspectRatio,
     Badge,
+    Button,
     FlexBox,
     GridColumn,
     Icon,
@@ -411,3 +414,35 @@ export const ObjectFit = {
         withWrapper({ maxColumns: 3, itemMinWidth: 350 }, GridColumn),
     ],
 };
+
+/**
+ * Demonstrate loading a small image and then use it as the loading placeholder image when loading a bigger image
+ */
+export const LoadingPlaceholderImage = () => {
+    const [isShown, setShown] = React.useState(false);
+    const imgRef = React.useRef() as React.RefObject<HTMLImageElement>;
+    return (
+        <>
+            <Button onClick={() => setShown((shown) => !shown)}>
+                Display bigger image using the small image as a placeholder
+            </Button>
+            <FlexBox orientation="horizontal">
+                <Thumbnail alt="Small image" imgRef={imgRef} image="https://picsum.photos/id/15/128/85" />
+                {isShown && (
+                    <div style={{ maxHeight: 400 }}>
+                        <Thumbnail
+                            image={`https://picsum.photos/id/15/2500/1667?cacheBust${uniqueId()}`}
+                            alt="Large image"
+                            // Loading placeholder image
+                            loadingPlaceholderImageRef={imgRef}
+                            // Reserve space
+                            imgProps={{ width: 2500, height: 1667 }}
+                        />
+                    </div>
+                )}
+            </FlexBox>
+        </>
+    );
+};
+// Disables Chromatic snapshot (not relevant for this story).
+LoadingPlaceholderImage.parameters = { chromatic: { disable: true } };

@@ -61,6 +61,10 @@ Three type of size constraints can be used:
 - using `fillHeight` to fit the parent height.
 - using a fixed ratio (any ratio except `free` and `original`) and a width constraint (using `size` prop or manual CSS).
 
+When loading a larger version of an image already loaded in the current page, the `loadingPlaceholderImageRef` can be
+used to provide the reference to the smaller image that will be used as a placeholder image displayed while the larger
+image loads.
+
 ## Error state
 
 Thumbnails will display an error state by default when the image fails to load correctly.
