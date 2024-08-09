@@ -72,7 +72,7 @@ export const DemoBlock: React.FC<DemoBlockProps> = ({
                         Could not load demo <code>{demo}</code>.
                     </span>
                 )}
-                {isFunction(children) ? children({ theme }) : children}
+                {isFunction(children) ? children({ theme }) : children}{' '}
             </FlexBox>
             <div className="demo-block__toolbar">
                 <div className="demo-block__code-toggle">
