@@ -1,4 +1,5 @@
-import { Alignment, Divider, ExpansionPanel, Grid, GridItem } from '@lumx/react';
+import { Alignment, Divider, ExpansionPanel, Grid, GridItem, Heading } from '@lumx/react';
+import partition from 'lodash/partition';
 import castArray from 'lodash/castArray';
 import orderBy from 'lodash/orderBy';
 import React, { Fragment, ReactNode, useState } from 'react';
@@ -16,6 +17,8 @@ export interface Property {
     type: string | string[];
     /** Default value. */
     defaultValue: string;
+    /** Where the property comes from */
+    declarations?: Array<{ name: string; fileName: string }>;
 }
 
 const renderTypeTableRow = ({ type, defaultValue }: Property) => (
@@ -43,7 +46,7 @@ const renderTypeTableRow = ({ type, defaultValue }: Property) => (
     </span>
 );
 
-const PropTableRow: React.FC<{ property: Property }> = ({ property }) => {
+const Row: React.FC<{ property: Property }> = ({ property }) => {
     const [isOpen, setIsOpen] = useState(false);
     const toggleOpen = () => {
         setIsOpen(!isOpen);
@@ -55,6 +58,7 @@ const PropTableRow: React.FC<{ property: Property }> = ({ property }) => {
             isOpen={isOpen}
             onToggleOpen={toggleOpen}
             toggleButtonProps={{ label: 'Toggle' }}
+            id={`properties-${property.name}`}
         >
             <header>
                 <Grid hAlign={Alignment.center}>
@@ -77,6 +81,18 @@ const PropTableRow: React.FC<{ property: Property }> = ({ property }) => {
     );
 };
 
+const Table = ({ properties }: { properties: Property[] }) => (
+    <div className="prop-table">
+        {orderBy(properties, ['required', 'name'], ['desc', 'asc']).map((property, idx) => (
+            <Fragment key={property.name}>
+                <Row property={property} />
+
+                {idx < properties.length - 1 && <Divider className="lumx-spacing-margin-vertical-regular" />}
+            </Fragment>
+        ))}
+    </div>
+);
+
 export interface PropTableProps {
     /** Component name. */
     component: string;
@@ -89,15 +105,23 @@ export const PropTable: React.FC<PropTableProps> = ({ component, props }) => {
         return <span>Could not load properties of the {component} component.</span>;
     }
 
-    return (
-        <div className="prop-table">
-            {orderBy(props, ['required', 'name'], ['desc', 'asc']).map((property, idx) => (
-                <Fragment key={property.name}>
-                    <PropTableRow property={property} />
+    const [forwardedProps, others] = partition(props, (prop) =>
+        prop.declarations?.some(({ fileName }) => fileName.match(/@types\/react/)),
+    );
 
-                    {idx < props.length - 1 && <Divider className="lumx-spacing-margin-vertical-regular" />}
-                </Fragment>
-            ))}
-        </div>
+    return (
+        <>
+            <Table properties={others} />
+            {forwardedProps.length ? (
+                <details>
+                    <summary>
+                        <Heading as="h4" typography="subtitle2" style={{ display: 'inline-block' }}>
+                            Forwarded props
+                        </Heading>
+                    </summary>
+                    <Table properties={forwardedProps} />
+                </details>
+            ) : null}
+        </>
     );
 };
