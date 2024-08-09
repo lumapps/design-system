@@ -15,7 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- `Heading`: fix the default typography when the `as` prop is set.
+-  `Heading`: fix the default typography when the `as` prop is set.
+-  `ImageBlock`: internal changes on caption styles (simply and make reusable).
 
 ## [3.7.5][] - 2024-07-25
 
