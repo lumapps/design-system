@@ -17,6 +17,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -  `ImageBlock`: internal changes on caption styles (simply and make reusable).
 
+### Added
+
+-  `Thumbnail`: add `loadingPlaceholderImageRef` to re-use a loaded image as the loading placeholder.
+
 ## [3.7.5][] - 2024-07-25
 
 ### Changed
