@@ -1,7 +1,7 @@
-import range from 'lodash/range';
 import { useRef, useState } from 'react';
 
 import { Button, Dropdown, List, ListItem } from '@lumx/react';
+import { range } from '@lumx/core/js/utils/collection/range';
 
 export default { title: 'LumX components/dropdown/Dropdown' };
 
