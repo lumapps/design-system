@@ -1,8 +1,8 @@
 import { mdiBullhornOutline } from '@lumx/icons';
 import { List, ListItem, Select, Size, TextField } from '@lumx/react';
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
-import range from 'lodash/range';
 import { SyntheticEvent, useState } from 'react';
+import { range } from '@lumx/core/js/utils/collection/range';
 import { SelectVariant } from './constants';
 
 export default {
@@ -205,13 +205,7 @@ export const SelectWithAnotherField = () => {
 
     return (
         <>
-            <TextField
-                value="myvalue"
-                label="I am the label"
-                placeholder="ex: A value"
-
-                onChange={() => {}}
-            />
+            <TextField value="myvalue" label="I am the label" placeholder="ex: A value" onChange={() => {}} />
             <Select
                 style={{ width: '100%' }}
                 isOpen={isOpen}
