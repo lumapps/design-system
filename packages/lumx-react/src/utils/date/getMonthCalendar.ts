@@ -1,7 +1,6 @@
-import last from 'lodash/last';
-
 import { getWeekDays, WeekDayInfo } from '@lumx/react/utils/date/getWeekDays';
 import { Locale } from '@lumx/react/utils/locale/types';
+import { last } from '@lumx/react/utils/collection/last';
 
 type AnnotatedDay = { date: Date; isOutOfRange?: boolean };
 type AnnotatedWeek = Partial<Record<number, AnnotatedDay>>;
@@ -29,7 +28,7 @@ export const getMonthCalendar = (
     iterDate.setDate(1);
 
     const weekDays = getWeekDays(locale);
-    const lastDayOfWeek = last(weekDays) as WeekDayInfo;
+    const lastDayOfWeek = last(weekDays);
 
     const weeks: Array<AnnotatedWeek> = [];
     let week: AnnotatedWeek = {};
@@ -47,7 +46,7 @@ export const getMonthCalendar = (
             week[weekDayNumber] = day;
         }
 
-        if (weekDayNumber === lastDayOfWeek.number) {
+        if (weekDayNumber === lastDayOfWeek?.number) {
             weeks.push(week);
             rowCount += 1;
             week = {};
