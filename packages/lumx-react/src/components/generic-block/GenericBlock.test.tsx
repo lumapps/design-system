@@ -145,6 +145,27 @@ describe(`<${GenericBlock.displayName}>`, () => {
             expect(contentRef.current).toBeDefined();
             expect(actionsRef.current).toBeDefined();
         });
+
+        it('should filter out empty children (null, undefined, false) from otherChildren', () => {
+            const { content, figure, actions } = setup({
+                children: [
+                    null,
+                    undefined,
+                    false,
+                    'Valid Content',
+                    null,
+                    'Another Valid Content',
+                    undefined,
+                ],
+            });
+
+            // Content should be rendered
+            expect(content).toBeInTheDocument();
+            expect(content).toHaveTextContent('Valid ContentAnother Valid Content');
+            // Should not render figure or actions
+            expect(figure).not.toBeInTheDocument();
+            expect(actions).not.toBeInTheDocument();
+        });
     });
 
     // Common tests suite.

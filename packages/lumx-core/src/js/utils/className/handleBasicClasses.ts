@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 
 import isBoolean from 'lodash/isBoolean';
-import isEmpty from 'lodash/isEmpty';
+import { isEmpty } from '@lumx/core/js/utils/collection/isEmpty';
 
 import { getBasicClass } from './getBasicClass';
 

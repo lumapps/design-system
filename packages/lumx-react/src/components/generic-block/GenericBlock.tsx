@@ -1,7 +1,6 @@
 import React, { Children, ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
-import isEmpty from 'lodash/isEmpty';
 import noop from 'lodash/noop';
 
 import { Comp, isComponentType } from '@lumx/react/utils/type';
@@ -148,7 +147,7 @@ const BaseGenericBlock: BaseGenericBlock = forwardRef((props, ref) => {
             contentChildProps: (contentChild as ReactElement)?.props,
             actionsChild,
             actionsChildProps: (actionsChild as ReactElement)?.props,
-            otherChildren: otherChildren.filter((child) => !isEmpty(child)),
+            otherChildren: otherChildren.filter((child) => React.Children.count(child) > 0),
         };
     }, [children]);
 

@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import isEmpty from 'lodash/isEmpty';
 
 import { Emphasis, Icon, Size, Theme, Text, ThemeProvider } from '@lumx/react';
 import { isComponent } from '@lumx/react/utils/type';
@@ -69,8 +68,8 @@ export const Button = forwardRef<ButtonProps, HTMLButtonElement | HTMLAnchorElem
 
     const buttonClassName = classNames(
         className,
-        getBasicClass({ prefix: CLASSNAME, type: 'hasLeftIcon', value: !isEmpty(leftIcon) }),
-        getBasicClass({ prefix: CLASSNAME, type: 'hasRightIcon', value: !isEmpty(rightIcon) }),
+        getBasicClass({ prefix: CLASSNAME, type: 'hasLeftIcon', value: !!leftIcon }),
+        getBasicClass({ prefix: CLASSNAME, type: 'hasRightIcon', value: !!rightIcon }),
     );
 
     return (
@@ -80,14 +79,14 @@ export const Button = forwardRef<ButtonProps, HTMLButtonElement | HTMLAnchorElem
             className={buttonClassName}
             variant="button"
         >
-            {leftIcon && !isEmpty(leftIcon) && (
+            {leftIcon && (
                 // Theme is handled in the button scss
                 <ThemeProvider value={undefined}>
                     <Icon icon={leftIcon} />
                 </ThemeProvider>
             )}
             {children && (isComponent(Text)(children) ? children : <span>{children}</span>)}
-            {rightIcon && !isEmpty(rightIcon) && (
+            {rightIcon && (
                 // Theme is handled in the button scss
                 <ThemeProvider value={undefined}>
                     <Icon icon={rightIcon} />
