@@ -2,8 +2,6 @@ import React, { useRef } from 'react';
 import { createPortal } from 'react-dom';
 
 import classNames from 'classnames';
-import isFunction from 'lodash/isFunction';
-
 import { Button, Emphasis, Icon, Kind, Size, Theme } from '@lumx/react';
 import { DOCUMENT, NOTIFICATION_TRANSITION_DURATION } from '@lumx/react/constants';
 import { NOTIFICATION_CONFIGURATION } from '@lumx/react/components/notification/constants';
@@ -88,9 +86,7 @@ export const Notification = forwardRef<NotificationProps, HTMLDivElement>((props
     const hasAction: boolean = Boolean(onActionClick) && Boolean(actionLabel);
 
     const handleCallback = (evt: React.MouseEvent) => {
-        if (isFunction(onActionClick)) {
-            onActionClick();
-        }
+        onActionClick?.();
         evt.stopPropagation();
     };
 

@@ -5,7 +5,6 @@ import classNames from 'classnames';
 import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
 
 import get from 'lodash/get';
-import isFunction from 'lodash/isFunction';
 
 import { ColorPalette, DragHandle, Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
 import { type GenericProps, type HasTheme, type ComponentClassName, isComponent } from '@lumx/react/utils/type';
@@ -100,15 +99,13 @@ export const ExpansionPanel = forwardRef<ExpansionPanelProps, HTMLDivElement>((p
     const toggleOpen = (event: React.MouseEvent) => {
         const shouldOpen = !isOpen;
 
-        if (isFunction(onOpen) && shouldOpen) {
-            onOpen(event);
+        if (shouldOpen) {
+            onOpen?.(event);
         }
-        if (isFunction(onClose) && !shouldOpen) {
-            onClose(event);
+        if (!shouldOpen) {
+            onClose?.(event);
         }
-        if (isFunction(onToggleOpen)) {
-            onToggleOpen(shouldOpen, event);
-        }
+        onToggleOpen?.(shouldOpen, event);
     };
 
     const color = theme === Theme.dark ? ColorPalette.light : ColorPalette.dark;
