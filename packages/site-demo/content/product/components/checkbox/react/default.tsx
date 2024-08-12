@@ -1,31 +1,31 @@
-import { Checkbox } from '@lumx/react';
+import { Checkbox, CheckboxProps } from '@lumx/react';
 import React, { useState } from 'react';
 
 export const App = ({ theme }: any) => {
-    const [value, setValue] = useState(true);
-    const [value2, setValue2] = useState(false);
-    const [value3, setValue3] = useState(false);
+    const useCheckBoxState = (initial: CheckboxProps['isChecked']) => {
+        const [isChecked, onChange] = useState(initial);
+        return { isChecked, onChange };
+    };
 
     return (
         <>
-            <Checkbox isChecked={value} label="Checkbox" theme={theme} onChange={setValue} />
+            <Checkbox label="Checkbox" {...useCheckBoxState(true)} theme={theme} />
 
             <Checkbox
-                isChecked={value2}
-                helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
                 label="Checkbox with help"
+                helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+                {...useCheckBoxState(false)}
                 theme={theme}
-                onChange={setValue2}
             />
 
             <Checkbox
-                isChecked={value3}
-                helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
                 label="Disabled checkbox with help"
-                theme={theme}
+                helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
                 isDisabled
-                onChange={setValue3}
+                theme={theme}
             />
+
+            <Checkbox label="Checkbox intermediate state" {...useCheckBoxState('intermediate')} theme={theme} />
         </>
     );
 };

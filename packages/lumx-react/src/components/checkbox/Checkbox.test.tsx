@@ -39,6 +39,7 @@ describe(`<${Checkbox.displayName}>`, () => {
 
             expect(input).toBeInTheDocument();
             expect(input).not.toBeChecked();
+            expect(input).toHaveAttribute('aria-checked', 'false');
             expect(input).not.toBeDisabled();
         });
 
@@ -51,7 +52,18 @@ describe(`<${Checkbox.displayName}>`, () => {
             expect(checkbox).toHaveClass('lumx-checkbox--is-checked');
 
             expect(input).toBeChecked();
+            expect(input).toHaveAttribute('aria-checked', 'true');
             expect(input).toBeDisabled();
+        });
+
+        it('should render intermediate state', () => {
+            const { checkbox, input } = setup({
+                isChecked: 'intermediate',
+            });
+            expect(checkbox).toHaveClass('lumx-checkbox--is-checked');
+
+            expect(input).toBeChecked();
+            expect(input).toHaveAttribute('aria-checked', 'mixed');
         });
 
         it('should render helper and label', () => {
