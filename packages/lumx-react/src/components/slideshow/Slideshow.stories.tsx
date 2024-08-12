@@ -1,6 +1,6 @@
-import range from 'lodash/range';
 import { AspectRatio, Button, FlexBox, ImageBlock, Slideshow, SlideshowItem, Orientation } from '@lumx/react';
 import { IMAGES, LANDSCAPE_IMAGES } from '@lumx/react/stories/controls/image';
+import { range } from '@lumx/core/js/utils/collection/range';
 
 export default {
     title: 'LumX components/slideshow/Slideshow',
