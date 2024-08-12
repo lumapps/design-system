@@ -1,7 +1,6 @@
 import React, { Children, ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
-import noop from 'lodash/noop';
 
 import { Comp, isComponentType } from '@lumx/react/utils/type';
 import { getRootClassName } from '@lumx/core/js/utils/className';
@@ -100,13 +99,13 @@ interface GenericBlock extends BaseGenericBlock {
     Actions: Comp<GenericBlockSectionProps>;
 }
 
-const Figure = noop.bind({}) as Comp<FlexBoxProps>;
+const Figure = (() => {}) as unknown as Comp<FlexBoxProps>;
 const isFigure = isComponentType(Figure);
 
-const Content = noop.bind({}) as Comp<FlexBoxProps>;
+const Content = (() => {}) as unknown as Comp<FlexBoxProps>;
 const isContent = isComponentType(Content);
 
-const Actions = noop.bind({}) as Comp<FlexBoxProps>;
+const Actions = (() => {}) as unknown as Comp<FlexBoxProps>;
 const isActions = isComponentType(Actions);
 
 /**
