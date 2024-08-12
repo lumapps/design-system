@@ -8,8 +8,6 @@ import {
     ProgressTrackerStep,
     ProgressTrackerStepPanel,
 } from '@lumx/react';
-import cloneDeep from 'lodash/cloneDeep';
-import set from 'lodash/set';
 import React, { useState } from 'react';
 
 export default { title: 'LumX components/progress-tracker/Progress Tracker' };
@@ -52,24 +50,26 @@ export const Controlled = () => {
     ]);
 
     const toggleError = (index: number) => () => {
-        const clonedSteps = cloneDeep(steps);
-        set(clonedSteps, [index, 'hasError'], !steps[index].hasError);
-        set(clonedSteps, [index, 'isComplete'], false);
-        setSteps(clonedSteps);
+        const newSteps = [...steps];
+        const step = steps[index];
+        const newStep = { ...step, hasError: !step?.hasError, isComplete: false };
+        newSteps[index] = newStep;
+        setSteps(newSteps);
     };
 
     const previous = (index: number) => () => setActiveStep(index - 1);
 
     const next = (index: number) => () => {
         const isLast = index === steps.length - 1;
-        const clonedSteps = cloneDeep(steps);
-        set(clonedSteps, [index, 'isComplete'], true);
-        set(clonedSteps, [index, 'hasError'], false);
+        const step = steps[index];
+        const newSteps = [...steps];
+        const newStep = { ...step, hasError: false, isComplete: true };
         if (!isLast) {
-            set(clonedSteps, [index + 1, 'isDisabled'], false);
+            newSteps[index + 1].isDisabled = false;
             setActiveStep(index + 1);
         }
-        setSteps(clonedSteps);
+        newSteps[index] = newStep;
+        setSteps(newSteps);
     };
 
     return (

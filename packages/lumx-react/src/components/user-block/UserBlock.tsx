@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react';
 import classNames from 'classnames';
-import set from 'lodash/set';
 
 import { Avatar, ColorPalette, Link, Orientation, Size, Theme } from '@lumx/react';
 import type { GenericProps, HasTheme, ComponentClassName } from '@lumx/react/utils/type';
@@ -122,12 +121,8 @@ export const UserBlock = forwardRef<UserBlockProps, HTMLDivElement>((props, ref)
                 color: ColorPalette.dark,
             });
         }
-        // Disable avatar focus since the name block is the same link / same button.
-        if (avatarProps) {
-            set(avatarProps, ['thumbnailProps', 'tabIndex'], -1);
-        }
         return <NameComponent {...nProps}>{name}</NameComponent>;
-    }, [avatarProps, isClickable, linkAs, linkProps, name, nameProps, onClick]);
+    }, [isClickable, linkAs, linkProps, name, nameProps, onClick]);
 
     const fieldsBlock: ReactNode = fields && componentSize !== Size.s && componentSize !== Size.xs && (
         <div className={`${CLASSNAME}__fields`}>
@@ -160,6 +155,11 @@ export const UserBlock = forwardRef<UserBlockProps, HTMLDivElement>((props, ref)
                     size={componentSize}
                     onClick={onClick}
                     theme={theme}
+                    thumbnailProps={{
+                        ...avatarProps?.thumbnailProps,
+                        // Disable avatar focus since the name block is the same link / same button.
+                        tabIndex: avatarProps ? -1 : undefined,
+                    }}
                 />
             )}
             {(fields || name) && (
