@@ -1,8 +1,6 @@
 import { ReactNode } from 'react';
 
 import classNames from 'classnames';
-import isObject from 'lodash/isObject';
-
 import { Orientation, Theme, Thumbnail, ThumbnailProps, ThumbnailVariant } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';
@@ -77,6 +75,9 @@ export const PostBlock = forwardRef<PostBlockProps, HTMLDivElement>((props, ref)
         ...forwardedProps
     } = props;
 
+    // Display text as string or HTML
+    const textContent = typeof text === 'string' ? { children: text } : { dangerouslySetInnerHTML: text };
+
     return (
         <div
             ref={ref}
@@ -99,12 +100,7 @@ export const PostBlock = forwardRef<PostBlockProps, HTMLDivElement>((props, ref)
 
                 {meta && <span className={`${CLASSNAME}__meta`}>{meta}</span>}
 
-                {isObject(text) && text.__html ? (
-                    // eslint-disable-next-line react/no-danger
-                    <p dangerouslySetInnerHTML={text} className={`${CLASSNAME}__text`} />
-                ) : (
-                    <p className={`${CLASSNAME}__text`}>{text}</p>
-                )}
+                <p className={`${CLASSNAME}__text`} {...textContent} />
 
                 {attachments && <div className={`${CLASSNAME}__attachments`}>{attachments}</div>}
                 {(tags || actions) && (
