@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name,jsx-a11y/control-has-associated-label,prefer-object-spread */
 import React from 'react';
-import isEmpty from 'lodash/isEmpty';
+import { isEmpty } from '@lumx/react/utils/collection/isEmpty';
 import { Heading, HeadingLevelProvider } from '@lumx/react';
 
 type PropEntry = [key: string, value: unknown];

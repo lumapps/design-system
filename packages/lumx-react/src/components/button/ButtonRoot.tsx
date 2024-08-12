@@ -1,7 +1,5 @@
 import React, { AriaAttributes, ButtonHTMLAttributes, DetailedHTMLProps, RefObject } from 'react';
 
-import isEmpty from 'lodash/isEmpty';
-
 import classNames from 'classnames';
 
 import { ColorPalette, Emphasis, Size, Theme } from '@lumx/react';
@@ -155,7 +153,7 @@ export const ButtonRoot = forwardRef<ButtonRootProps, HTMLButtonElement | HTMLAn
      *
      * However, in any case, if the component is disabled, we returned a <button> since disabled is not compatible with <a>.
      */
-    if ((linkAs || !isEmpty(props.href)) && !isDisabled) {
+    if ((linkAs || props.href) && !isDisabled) {
         return renderLink(
             {
                 linkAs,

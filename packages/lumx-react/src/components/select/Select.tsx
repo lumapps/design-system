@@ -1,7 +1,6 @@
 import React, { RefObject } from 'react';
 
 import classNames from 'classnames';
-import lodashIsEmpty from 'lodash/isEmpty';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiCloseCircle, mdiMenuDown } from '@lumx/icons';
 import { Emphasis, Size, Theme } from '@lumx/react/components';
@@ -171,7 +170,7 @@ const SelectField: React.FC<SelectProps> = (props) => {
  * @return React element.
  */
 export const Select = forwardRef<SelectProps, HTMLDivElement>((props, ref) => {
-    const isEmpty = lodashIsEmpty(props.value);
+    const isEmpty = !props.value;
     const hasInputClear = props.onClear && props.clearButtonProps && !isEmpty;
 
     return WithSelectContext(

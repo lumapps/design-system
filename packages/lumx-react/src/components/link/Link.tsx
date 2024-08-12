@@ -1,7 +1,5 @@
 import React, { RefObject, useMemo } from 'react';
 
-import isEmpty from 'lodash/isEmpty';
-
 import classNames from 'classnames';
 
 import { ColorPalette, ColorVariant, Icon, Size, Typography } from '@lumx/react';
@@ -102,7 +100,7 @@ export const Link = forwardRef<LinkProps, HTMLAnchorElement | HTMLButtonElement>
     const renderedChildren = useMemo(
         () => (
             <>
-                {leftIcon && !isEmpty(leftIcon) && (
+                {leftIcon && (
                     <Icon icon={leftIcon} className={`${CLASSNAME}__left-icon`} size={getIconSize(typography)} />
                 )}
 
@@ -116,7 +114,7 @@ export const Link = forwardRef<LinkProps, HTMLAnchorElement | HTMLButtonElement>
                     </span>
                 )}
 
-                {rightIcon && !isEmpty(rightIcon) && (
+                {rightIcon && (
                     <Icon icon={rightIcon} className={`${CLASSNAME}__right-icon`} size={getIconSize(typography)} />
                 )}
             </>
@@ -128,7 +126,7 @@ export const Link = forwardRef<LinkProps, HTMLAnchorElement | HTMLButtonElement>
      * If there is no linkAs prop and no href, we returned a <button> instead of a <a>.
      * If the component is disabled, we also returned a <button> since disabled is not compatible with <a>.
      */
-    if ((!linkAs && isEmpty(href)) || isDisabled) {
+    if ((!linkAs && href) || isDisabled) {
         return (
             <button
                 type="button"

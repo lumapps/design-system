@@ -1,13 +1,13 @@
-import isEmpty from 'lodash/isEmpty';
+import React from 'react';
 
 import { GenericProps } from '@lumx/react/utils/type';
 import { queryByClassName } from '@lumx/react/testing/utils/queries';
-import React from 'react';
 import { Theme } from '@lumx/react';
 import { RenderOptions } from '@testing-library/react';
 import { ThemeProvider } from '@lumx/react/utils/theme/ThemeContext';
 import castArray from 'lodash/castArray';
 import { invertTheme } from '@lumx/react/utils/theme/invertTheme';
+import { isEmpty } from '@lumx/react/utils/collection/isEmpty';
 
 interface CommonSetup {
     props: GenericProps;

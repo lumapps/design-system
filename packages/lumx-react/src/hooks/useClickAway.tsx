@@ -1,8 +1,7 @@
 import { RefObject, useEffect } from 'react';
 
 import { Falsy } from '@lumx/react/utils/type';
-
-import isEmpty from 'lodash/isEmpty';
+import { isEmpty } from '@lumx/react/utils/collection/isEmpty';
 
 const EVENT_TYPES = ['mousedown', 'touchstart'];
 

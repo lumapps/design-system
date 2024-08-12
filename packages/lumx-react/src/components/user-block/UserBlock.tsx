@@ -1,7 +1,5 @@
 import React, { ReactNode } from 'react';
-
 import classNames from 'classnames';
-import isEmpty from 'lodash/isEmpty';
 import set from 'lodash/set';
 
 import { Avatar, ColorPalette, Link, Orientation, Size, Theme } from '@lumx/react';
@@ -107,7 +105,7 @@ export const UserBlock = forwardRef<UserBlockProps, HTMLDivElement>((props, ref)
     const isClickable = !!onClick || isLink;
 
     const nameBlock: ReactNode = React.useMemo(() => {
-        if (isEmpty(name)) {
+        if (!name) {
             return null;
         }
         let NameComponent: any = 'span';

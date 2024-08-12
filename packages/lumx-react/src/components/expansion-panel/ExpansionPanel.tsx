@@ -5,7 +5,6 @@ import classNames from 'classnames';
 import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
 
 import get from 'lodash/get';
-import isEmpty from 'lodash/isEmpty';
 import isFunction from 'lodash/isFunction';
 
 import { ColorPalette, DragHandle, Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
@@ -16,6 +15,7 @@ import { useTransitionVisibility } from '@lumx/react/hooks/useTransitionVisibili
 import { EXPANSION_PANEL_TRANSITION_DURATION } from '@lumx/core/js/constants';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { isEmpty } from '@lumx/react/utils/collection/isEmpty';
 
 /**
  * Defines the props of the component.
@@ -90,11 +90,12 @@ export const ExpansionPanel = forwardRef<ExpansionPanelProps, HTMLDivElement>((p
 
     // Either take the header in children or create one with the label.
     const headerProps: PropsWithChildren<any> = React.isValidElement(header) ? header.props : {};
-    const headerContent = !isEmpty(headerProps.children) ? (
-        headerProps.children
-    ) : (
-        <span className={`${CLASSNAME}__label`}>{label}</span>
-    );
+    const headerContent =
+        React.Children.count(headerProps.children) > 0 ? (
+            headerProps.children
+        ) : (
+            <span className={`${CLASSNAME}__label`}>{label}</span>
+        );
 
     const toggleOpen = (event: React.MouseEvent) => {
         const shouldOpen = !isOpen;

@@ -1,7 +1,6 @@
 import React, { ReactNode, Ref, SyntheticEvent, useMemo } from 'react';
 
 import classNames from 'classnames';
-import isEmpty from 'lodash/isEmpty';
 
 import { ListProps, Size } from '@lumx/react';
 import type { GenericProps, ComponentClassName } from '@lumx/react/utils/type';
@@ -65,7 +64,7 @@ const DEFAULT_PROPS: Partial<ListProps> = {
  * @return `true` if the list item is clickable; `false` otherwise.
  */
 export function isClickable({ linkProps, onItemSelected }: Partial<ListItemProps>): boolean {
-    return !isEmpty(linkProps?.href) || !!onItemSelected;
+    return !!linkProps?.href || !!onItemSelected;
 }
 
 /**
