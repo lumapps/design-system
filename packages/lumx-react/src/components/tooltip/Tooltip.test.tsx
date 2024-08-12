@@ -12,7 +12,7 @@ import { Tooltip, TooltipProps } from './Tooltip';
 const CLASSNAME = Tooltip.className as string;
 
 jest.mock('@lumx/react/utils/isFocusVisible');
-jest.mock('uid', () => ({ uid: () => 'uid' }));
+jest.mock('@lumx/react/hooks/useId', () => ({ useId: () => ':r1:' }));
 // Skip delays
 jest.mock('@lumx/react/constants', () => ({
     ...jest.requireActual('@lumx/react/constants'),

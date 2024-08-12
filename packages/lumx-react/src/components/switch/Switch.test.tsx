@@ -24,7 +24,7 @@ const setup = (propsOverride: SetupProps = {}) => {
     return { switchWrapper, input, helper, label, props };
 };
 
-jest.mock('uid', () => ({ uid: () => 'uid' }));
+jest.mock('@lumx/react/hooks/useId', () => ({ useId: () => ':r1:' }));
 
 describe(`<${Switch.displayName}>`, () => {
     describe('Props', () => {

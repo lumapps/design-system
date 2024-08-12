@@ -16,9 +16,9 @@ import {
 } from '@lumx/react';
 
 import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiInformation } from '@lumx/icons';
-import { uid } from 'uid';
 import { Comp } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { useId } from '@lumx/react/hooks/useId';
 
 export interface AlertDialogProps extends Omit<DialogProps, 'header' | 'footer'> {
     /** Message variant. */
@@ -86,7 +86,8 @@ export const AlertDialog: Comp<AlertDialogProps, HTMLDivElement> = forwardRef((p
     const { color, icon } = CONFIG[kind as Kind] || {};
 
     // Define a unique ID to target title and description for aria attributes.
-    const uniqueId = React.useMemo(() => id || uid(), [id]);
+    const generatedId = useId();
+    const uniqueId = id || generatedId;
     const titleId = `${uniqueId}-title`;
     const descriptionId = `${uniqueId}-description`;
 

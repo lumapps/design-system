@@ -18,7 +18,7 @@ import { SelectVariant } from './constants';
 
 const CLASSNAME = SelectMultiple.className as string;
 
-jest.mock('uid', () => ({ uid: () => 'uid' }));
+jest.mock('@lumx/react/hooks/useId', () => ({ useId: () => ':r1:' }));
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.

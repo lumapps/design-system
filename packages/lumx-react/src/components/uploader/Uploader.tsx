@@ -1,11 +1,11 @@
 import React, { forwardRef, MouseEventHandler } from 'react';
 import classNames from 'classnames';
-import uniqueId from 'lodash/uniqueId';
 
 import { AspectRatio, Icon, Size, Theme } from '@lumx/react';
 import { Comp, GenericProps, HasTheme, ValueOf } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
+import { useId } from '@lumx/react/hooks/useId';
 
 /**
  * Uploader variants.
@@ -81,7 +81,8 @@ export const Uploader: Comp<UploaderProps> = forwardRef((props, ref) => {
     // Adjust to square aspect ratio when using circle variants.
     const adjustedAspectRatio = variant === UploaderVariant.circle ? AspectRatio.square : aspectRatio;
 
-    const inputId = React.useMemo(() => fileInputProps?.id || uniqueId('uploader-input-'), [fileInputProps?.id]);
+    const generatedInputId = useId();
+    const inputId = fileInputProps?.id || generatedInputId;
     const [isDragHovering, unsetDragHovering, setDragHovering] = useBooleanState(false);
     const wrapper = fileInputProps
         ? { Component: 'label' as const, props: { htmlFor: inputId } as const }

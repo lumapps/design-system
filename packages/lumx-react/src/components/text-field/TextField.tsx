@@ -1,18 +1,7 @@
-import React, {
-    forwardRef,
-    ReactNode,
-    Ref,
-    RefObject,
-    SyntheticEvent,
-    useEffect,
-    useMemo,
-    useRef,
-    useState,
-} from 'react';
+import React, { forwardRef, ReactNode, Ref, RefObject, SyntheticEvent, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 import get from 'lodash/get';
-import { uid } from 'uid';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiCloseCircle } from '@lumx/icons';
 import {
@@ -30,6 +19,7 @@ import {
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
+import { useId } from '@lumx/react/hooks/useId';
 
 /**
  * Defines the props of the component.
@@ -296,7 +286,8 @@ export const TextField: Comp<TextFieldProps, HTMLDivElement> = forwardRef((props
         afterElement,
         ...forwardedProps
     } = props;
-    const textFieldId = useMemo(() => id || `text-field-${uid()}`, [id]);
+    const generatedTextFieldId = useId();
+    const textFieldId = id || generatedTextFieldId;
     /** Keep a clean local input ref to manage focus */
     const localInputRef = useRef<HTMLInputElement | HTMLTextAreaElement | null>(null);
     /** Merge prop input ref and local input ref */
@@ -307,8 +298,8 @@ export const TextField: Comp<TextFieldProps, HTMLDivElement> = forwardRef((props
      * we want to first use the most important one, which is the errorId. That way, screen readers will read first
      * the error and then the helper
      */
-    const helperId = helper ? `text-field-helper-${uid()}` : undefined;
-    const errorId = error ? `text-field-error-${uid()}` : undefined;
+    const helperId = helper ? `text-field-helper-${generatedTextFieldId}` : undefined;
+    const errorId = error ? `text-field-error-${generatedTextFieldId}` : undefined;
     const describedByIds = [errorId, helperId, forwardedProps['aria-describedby']].filter(Boolean);
     const describedById = describedByIds.length === 0 ? undefined : describedByIds.join(' ');
 
