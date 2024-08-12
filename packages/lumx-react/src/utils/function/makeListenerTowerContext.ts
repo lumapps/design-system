@@ -1,4 +1,4 @@
-import last from 'lodash/last';
+import { last } from '@lumx/core/js/utils/collection/last';
 
 export type Listener = { enable(): void; disable(): void };
 

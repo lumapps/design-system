@@ -1,10 +1,10 @@
 import concat from 'lodash/concat';
 import dropRight from 'lodash/dropRight';
-import last from 'lodash/last';
 import partition from 'lodash/partition';
 import reduce from 'lodash/reduce';
 
 import { Predicate } from '@lumx/core/js/types';
+import { last } from '@lumx/core/js/utils/collection/last';
 
 /**
  * Similar to lodash `partition` function but working with multiple predicates.

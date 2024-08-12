@@ -1,6 +1,5 @@
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import omit from 'lodash/omit';
-import last from 'lodash/last';
 
 import { mdiAccount, mdiHeart } from '@lumx/icons';
 import { Badge, BadgeWrapper, BadgeWrapperProps, ColorPalette, Icon } from '@lumx/react';
@@ -34,7 +33,7 @@ describe(`<${BadgeWrapper.displayName}>`, () => {
 
             expect(badgeWrapper).toHaveClass('lumx-badge-wrapper');
             expect(badgeWrapper.children).toHaveLength(2);
-            expect(last(badgeWrapper.children)).toHaveClass('lumx-badge-wrapper__badge');
+            expect(badgeWrapper.lastChild).toHaveClass('lumx-badge-wrapper__badge');
         });
     });
 
