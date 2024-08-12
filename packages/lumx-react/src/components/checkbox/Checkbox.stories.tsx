@@ -34,6 +34,15 @@ export const LabelAndHelper = {
 };
 
 /**
+ * With intermediate state
+ */
+export const IntermediateState = {
+    args: {
+        isChecked: 'intermediate',
+    },
+};
+
+/**
  * Disabled
  */
 export const Disabled = {

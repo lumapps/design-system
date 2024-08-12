@@ -15,12 +15,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
--  `Heading`: fix the default typography when the `as` prop is set.
--  `ImageBlock`: internal changes on caption styles (simply and make reusable).
+-   `Heading`: fix the default typography when the `as` prop is set.
+-   `ImageBlock`: internal changes on caption styles (simply and make reusable).
 
 ### Added
 
--  `Thumbnail`: add `loadingPlaceholderImageRef` to re-use a loaded image as the loading placeholder.
+-   `Thumbnail`: add `loadingPlaceholderImageRef` to re-use a loaded image as the loading placeholder.
+-   `Checkbox`: add intermediate state via `isChecked="intermediate"`
 
 ## [3.7.5][] - 2024-07-25
 

@@ -1,13 +1,19 @@
-import React, { useMemo, forwardRef, ReactNode, SyntheticEvent, InputHTMLAttributes } from 'react';
+import React, { forwardRef, InputHTMLAttributes, ReactNode, SyntheticEvent, useMemo } from 'react';
 
 import classNames from 'classnames';
 import { uid } from 'uid';
 
-import { mdiCheck } from '@lumx/icons';
+import { mdiCheck, mdiMinus } from '@lumx/icons';
 
 import { Icon, InputHelper, InputLabel, Theme } from '@lumx/react';
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { useMergeRefs } from '@lumx/react/utils/mergeRefs';
+
+/**
+ * Intermediate state of checkbox.
+ */
+const INTERMEDIATE_STATE = 'intermediate';
 
 /**
  * Defines the props of the component.
@@ -19,8 +25,8 @@ export interface CheckboxProps extends GenericProps, HasTheme {
     id?: string;
     /** Native input ref. */
     inputRef?: React.Ref<HTMLInputElement>;
-    /** Whether it is checked or not. */
-    isChecked?: boolean;
+    /** Whether it is checked or not or intermediate. */
+    isChecked?: boolean | 'intermediate';
     /** Whether the component is disabled or not. */
     isDisabled?: boolean;
     /** Label text. */
@@ -29,10 +35,10 @@ export interface CheckboxProps extends GenericProps, HasTheme {
     name?: string;
     /** Native input value property. */
     value?: string;
-    /** On change callback. */
-    onChange?(isChecked: boolean, value?: string, name?: string, event?: SyntheticEvent): void;
     /** optional props for input */
     inputProps?: InputHTMLAttributes<HTMLInputElement>;
+    /** On change callback. */
+    onChange?(isChecked: boolean, value?: string, name?: string, event?: SyntheticEvent): void;
 }
 
 /**
@@ -77,6 +83,7 @@ export const Checkbox: Comp<CheckboxProps, HTMLDivElement> = forwardRef((props, 
         inputProps = {},
         ...forwardedProps
     } = props;
+    const localInputRef = React.useRef<HTMLInputElement>(null);
     const inputId = useMemo(() => id || `${CLASSNAME.toLowerCase()}-${uid()}`, [id]);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,6 +92,13 @@ export const Checkbox: Comp<CheckboxProps, HTMLDivElement> = forwardRef((props, 
         }
     };
 
+    const intermediateState = isChecked === INTERMEDIATE_STATE;
+
+    React.useEffect(() => {
+        const input = localInputRef.current;
+        if (input) input.indeterminate = intermediateState;
+    }, [intermediateState]);
+
     return (
         <div
             ref={ref}
@@ -92,7 +106,8 @@ export const Checkbox: Comp<CheckboxProps, HTMLDivElement> = forwardRef((props, 
             className={classNames(
                 className,
                 handleBasicClasses({
-                    isChecked,
+                    // Whether state is intermediate class name will "-checked"
+                    isChecked: intermediateState ? true : isChecked,
                     isDisabled,
                     isUnchecked: !isChecked,
                     prefix: CLASSNAME,
@@ -102,7 +117,7 @@ export const Checkbox: Comp<CheckboxProps, HTMLDivElement> = forwardRef((props, 
         >
             <div className={`${CLASSNAME}__input-wrapper`}>
                 <input
-                    ref={inputRef}
+                    ref={useMergeRefs(inputRef, localInputRef)}
                     type="checkbox"
                     id={inputId}
                     className={`${CLASSNAME}__input-native`}
@@ -113,6 +128,7 @@ export const Checkbox: Comp<CheckboxProps, HTMLDivElement> = forwardRef((props, 
                     checked={isChecked}
                     onChange={handleChange}
                     aria-describedby={helper ? `${inputId}-helper` : undefined}
+                    aria-checked={intermediateState ? 'mixed' : Boolean(isChecked)}
                     {...inputProps}
                 />
 
@@ -120,7 +136,7 @@ export const Checkbox: Comp<CheckboxProps, HTMLDivElement> = forwardRef((props, 
                     <div className={`${CLASSNAME}__input-background`} />
 
                     <div className={`${CLASSNAME}__input-indicator`}>
-                        <Icon icon={mdiCheck} />
+                        <Icon icon={intermediateState ? mdiMinus : mdiCheck} />
                     </div>
                 </div>
             </div>
