@@ -1,7 +1,5 @@
 import type { KeyboardEvent as ReactKeyboardEvent } from 'react';
 
-import noop from 'lodash/noop';
-
 export * from './className';
 
 type KeyboardEventHandler<E extends KeyboardEvent | ReactKeyboardEvent> = (event: E) => void;
@@ -68,7 +66,7 @@ declare type SwipeDirection = 'none' | 'up' | 'down' | 'left' | 'right';
  * @param  handleSwipe Callback function.
  * @return Function to remove listeners.
  */
-export function detectSwipe(touchSurface: Element, handleSwipe: (direction: SwipeDirection) => void = noop) {
+export function detectSwipe(touchSurface: Element, handleSwipe?: (direction: SwipeDirection) => void) {
     let distX: number;
     let distY: number;
     let startX: number;
@@ -119,7 +117,7 @@ export function detectSwipe(touchSurface: Element, handleSwipe: (direction: Swip
                 direction = distY < 0 ? 'up' : 'down';
             }
         }
-        handleSwipe(direction);
+        handleSwipe?.(direction);
         evt.preventDefault();
     };
 
@@ -146,8 +144,8 @@ function isPassiveEventAvailable() {
                 supportsPassiveOption = true;
             },
         });
-        window.addEventListener('testPassiveEventSupport', noop, opts);
-        window.removeEventListener('testPassiveEventSupport', noop, opts);
+        window.addEventListener('testPassiveEventSupport', () => {}, opts);
+        window.removeEventListener('testPassiveEventSupport', () => {}, opts);
     } catch (e) {
         // ignored
     }
