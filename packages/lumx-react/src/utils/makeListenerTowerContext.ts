@@ -1,5 +1,5 @@
 import last from 'lodash/last';
-import pull from 'lodash/pull';
+import { pull } from '@lumx/react/utils/collection/pull';
 
 export type Listener = { enable(): void; disable(): void };
 
