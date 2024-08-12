@@ -1,6 +1,5 @@
 import React, { Children, CSSProperties } from 'react';
 
-import chunk from 'lodash/chunk';
 import classNames from 'classnames';
 
 import { FULL_WIDTH_PERCENT } from '@lumx/react/components/slideshow/constants';
@@ -8,6 +7,7 @@ import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { chunk } from '@lumx/core/js/utils/collection/chunk';
 
 import { buildSlideShowGroupId, SlideshowItemGroup } from './SlideshowItemGroup';
 
