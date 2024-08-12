@@ -1,4 +1,4 @@
-import castArray from 'lodash/castArray';
+import { castArray } from '@lumx/core/js/utils/collection/castArray';
 import { concatPath } from './concatPath';
 
 type Props = Record<string, any>;
