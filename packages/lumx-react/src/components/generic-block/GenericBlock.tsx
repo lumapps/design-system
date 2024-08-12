@@ -3,7 +3,7 @@ import React, { Children, ReactElement, ReactNode } from 'react';
 import classNames from 'classnames';
 
 import { type ComponentClassName, type Comp, isComponentType } from '@lumx/react/utils/type';
-import { partitionMulti } from '@lumx/react/utils/partitionMulti';
+import { partitionMulti } from '@lumx/react/utils/collection/partitionMulti';
 import { Orientation, Size, FlexBox, FlexBoxProps } from '@lumx/react';
 import { GenericBlockGapSize } from '@lumx/react/components/generic-block/constants';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';

@@ -7,7 +7,7 @@ import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
 import { ColorPalette, DragHandle, Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
 import { type GenericProps, type HasTheme, type ComponentClassName, isComponent } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/react/utils/className';
-import { partitionMulti } from '@lumx/react/utils/partitionMulti';
+import { partitionMulti } from '@lumx/react/utils/collection/partitionMulti';
 import { useTransitionVisibility } from '@lumx/react/hooks/useTransitionVisibility';
 import { EXPANSION_PANEL_TRANSITION_DURATION } from '@lumx/core/js/constants';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
@@ -130,7 +130,7 @@ export const ExpansionPanel = forwardRef<ExpansionPanelProps, HTMLDivElement>((p
     // Switch max height on/off to activate the CSS transition (updates when children changes).
     const [maxHeight, setMaxHeight] = useState('0');
     useEffect(() => {
-        const height = isOpen ? get(wrapperRef.current, 'offsetHeight', 0) : 0;
+        const height = isOpen ? wrapperRef.current?.offsetHeight ?? 0 : 0;
         setMaxHeight(`${height}px`);
     }, [children, isOpen]);
 

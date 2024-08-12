@@ -12,10 +12,10 @@ import {
     queryByClassName,
     queryByTagName,
 } from '@lumx/react/testing/utils/queries';
-import partition from 'lodash/partition';
 import userEvent from '@testing-library/user-event';
 
 import { isFocusVisible } from '@lumx/react/utils/browser/isFocusVisible';
+import { partitionMulti } from '@lumx/react/utils/collection/partitionMulti';
 import { TextField, TextFieldProps } from './TextField';
 
 const CLASSNAME = TextField.className as string;
@@ -34,7 +34,7 @@ const setup = (propsOverride: Partial<TextFieldProps> = {}, { wrapper }: SetupRe
         | HTMLTextAreaElement
         | HTMLInputElement;
     const helpers = queryAllByClassName(container, 'lumx-text-field__helper');
-    const [[helper], [error]] = partition(helpers, (h) => !h.className.includes('lumx-input-helper--color-red'));
+    const [[helper], [error]] = partitionMulti(helpers, [(h) => !h.className.includes('lumx-input-helper--color-red')]);
     const clearButton = queryByClassName(container, 'lumx-text-field__input-clear');
 
     return {

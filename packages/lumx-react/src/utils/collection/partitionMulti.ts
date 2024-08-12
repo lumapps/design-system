@@ -1,9 +1,4 @@
-import concat from 'lodash/concat';
-import dropRight from 'lodash/dropRight';
-import last from 'lodash/last';
-import partition from 'lodash/partition';
-import reduce from 'lodash/reduce';
-import { Predicate } from './type';
+import type { Predicate } from '../type';
 
 /**
  * Similar to lodash `partition` function but working with multiple predicates.
@@ -19,10 +14,16 @@ import { Predicate } from './type';
  * @return partitioned elements by the given predicates
  */
 export function partitionMulti<T>(elements: T[], predicates: Array<Predicate<T>>): T[][] {
-    return reduce(
-        predicates,
-        (partitioned: T[][], predicate: Predicate<T>) =>
-            concat(dropRight(partitioned), partition(last(partitioned), predicate)),
-        [elements],
-    );
+    const others = [] as T[];
+    const groups = predicates.map(() => []) as T[][];
+
+    for (const element of elements) {
+        const index = predicates.findIndex((predicate) => predicate(element));
+        if (index !== -1) {
+            groups[index].push(element);
+        } else {
+            others.push(element);
+        }
+    }
+    return [...groups, others];
 }
