@@ -1,9 +1,14 @@
-import pick from 'lodash/pick';
 import { Size } from '@lumx/react';
-import { ValueOf } from '@lumx/react/utils/type';
+
+export type GenericBlockGapSize = Extract<Size, 'tiny' | 'regular' | 'medium' | 'big' | 'huge'>;
 
 /**
  * Accepted gap sizes for the generic block.
  */
-export const GenericBlockGapSize = pick(Size, ['tiny', 'regular', 'medium', 'big', 'huge']);
-export type GenericBlockGapSize = ValueOf<typeof GenericBlockGapSize>;
+export const GenericBlockGapSize: { [S in GenericBlockGapSize]: S } = {
+    tiny: Size.tiny,
+    regular: Size.regular,
+    medium: Size.medium,
+    big: Size.big,
+    huge: Size.huge,
+};
