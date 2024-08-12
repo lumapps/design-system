@@ -5,8 +5,8 @@ import { render, screen, within } from '@testing-library/react';
 import { getByClassName, queryAllByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import { Thumbnail } from '@lumx/react';
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
-import range from 'lodash/range';
 import userEvent from '@testing-library/user-event';
+import { range } from '@lumx/react/utils/collection/range';
 
 const CLASSNAME = Mosaic.className as string;
 
@@ -19,8 +19,8 @@ const setup = (props: Partial<MosaicProps> = {}, { wrapper }: SetupRenderOptions
 };
 
 const generateThumbnails = (count: number) =>
-    range(1, count + 1).map((i) => ({
-        image: `https://example.com/image${i}.png`,
+    range(count).map((i) => ({
+        image: `https://example.com/image${i + 1}.png`,
         alt: '',
     }));
 

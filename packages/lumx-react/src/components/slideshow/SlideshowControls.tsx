@@ -1,7 +1,6 @@
 import React, { RefObject, useCallback, useMemo } from 'react';
 
 import classNames from 'classnames';
-import range from 'lodash/range';
 
 import { mdiChevronLeft, mdiChevronRight, mdiPlayCircleOutline, mdiPauseCircleOutline } from '@lumx/icons';
 import { Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
@@ -16,6 +15,7 @@ import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { useSwipeNavigate } from './useSwipeNavigate';
 import { PAGINATION_ITEM_SIZE, PAGINATION_ITEMS_MAX } from './constants';
 import { usePaginationVisibleRange } from './usePaginationVisibleRange';
+import { range } from '@lumx/react/utils/collection/range';
 
 /**
  * Defines the props of the component.

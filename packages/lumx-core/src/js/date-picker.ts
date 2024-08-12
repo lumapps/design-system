@@ -1,4 +1,3 @@
-import range from 'lodash/range';
 import mMoment, { Moment } from 'moment';
 import { extendMoment } from 'moment-range';
 
@@ -22,7 +21,7 @@ interface AnnotatedDate {
  * @return The list of days in a week based on locale.
  */
 export function getWeekDays(locale: string): Moment[] {
-    return range(DAYS_PER_WEEK).map((_, i) => moment().locale(locale).weekday(i));
+    return Array.from({ length: DAYS_PER_WEEK }).map((_, i) => moment().locale(locale).weekday(i));
 }
 
 /**
