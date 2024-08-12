@@ -21,13 +21,15 @@ describe(`<${Heading.displayName}>`, () => {
             const heading = screen.getByRole('heading', { level: 1, name: 'Some text' });
             expect(heading).toBeInTheDocument();
             expect(heading).toHaveClass(CLASSNAME);
+            expect(heading).toHaveClass('lumx-typography-display1');
         });
 
-        it('should render with as', () => {
+        it('should render with as with the correct default typography', () => {
             setup({ children: 'Some text', as: 'h2' });
             const heading = screen.getByRole('heading', { level: 2, name: 'Some text' });
             expect(heading).toBeInTheDocument();
             expect(heading).toHaveClass(CLASSNAME);
+            expect(heading).toHaveClass('lumx-typography-headline');
         });
 
         it('should correctly render levels nested in HeadingLevel', () => {

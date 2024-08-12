@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `Mosaic`: fix thumbnail focus outline cropped by parent overflow.
 -   `SlideShow`: fix pagination item focus outline cropped by parent overflow.
 
+### Changed
+
+- `Heading`: fix the default typography when the `as` prop is set.
+
 ## [3.7.5][] - 2024-07-25
 
 ### Changed
