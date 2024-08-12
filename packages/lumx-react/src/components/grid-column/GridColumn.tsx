@@ -1,6 +1,5 @@
 import React, { ReactElement, ReactNode } from 'react';
 
-import isInteger from 'lodash/isInteger';
 import classNames from 'classnames';
 
 import { Size } from '@lumx/react';
@@ -68,7 +67,7 @@ export const GridColumn = forwardRef<GridColumnProps>((props, ref): ReactElement
             className={classNames(className, CLASSNAME)}
             style={{
                 ...style,
-                ['--lumx-grid-column-item-min-width' as any]: isInteger(itemMinWidth) && `${itemMinWidth}px`,
+                ['--lumx-grid-column-item-min-width' as any]: Number.isInteger(itemMinWidth) && `${itemMinWidth}px`,
                 ['--lumx-grid-column-columns' as any]: maxColumns,
                 ['--lumx-grid-column-gap' as any]: gap && `var(--lumx-spacing-unit-${gap})`,
             }}
