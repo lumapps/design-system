@@ -3,7 +3,7 @@ import React, { Children, ReactNode } from 'react';
 import classNames from 'classnames';
 
 import { SideNavigationItem, Theme } from '@lumx/react';
-import { type GenericProps, type HasTheme, isComponent, type ComponentClassName } from '@lumx/react/utils/type';
+import { type GenericProps, type HasTheme, isComponentType, type ComponentClassName } from '@lumx/react/utils/type';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
@@ -35,7 +35,7 @@ const CLASSNAME: ComponentClassName<typeof COMPONENT_NAME> = 'lumx-side-navigati
 export const SideNavigation = forwardRef<SideNavigationProps, HTMLUListElement>((props, ref) => {
     const defaultTheme = useTheme();
     const { children, className, theme = defaultTheme, ...forwardedProps } = props;
-    const content = Children.toArray(children).filter(isComponent(SideNavigationItem));
+    const content = Children.toArray(children).filter(isComponentType(SideNavigationItem));
 
     return (
         <ul

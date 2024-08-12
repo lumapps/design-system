@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
 
 import { ColorPalette, DragHandle, Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
-import { type GenericProps, type HasTheme, type ComponentClassName, isComponent } from '@lumx/react/utils/type';
+import { type GenericProps, type HasTheme, type ComponentClassName, isComponentType } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/react/utils/className';
 import { partitionMulti } from '@lumx/react/utils/collection/partitionMulti';
 import { useTransitionVisibility } from '@lumx/react/hooks/useTransitionVisibility';
@@ -52,9 +52,9 @@ const CLASSNAME: ComponentClassName<typeof COMPONENT_NAME> = 'lumx-expansion-pan
  */
 const DEFAULT_PROPS: Partial<ExpansionPanelProps> = {};
 
-const isDragHandle = isComponent(DragHandle);
-const isHeader = isComponent('header');
-const isFooter = isComponent('footer');
+const isDragHandle = isComponentType(DragHandle);
+const isHeader = isComponentType('header');
+const isFooter = isComponentType('footer');
 
 /**
  * ExpansionPanel component.

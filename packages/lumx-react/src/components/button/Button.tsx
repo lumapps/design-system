@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react';
 import classNames from 'classnames';
 
 import { Emphasis, Icon, Size, Theme, Text } from '@lumx/react';
-import { isComponent, type ComponentClassName } from '@lumx/react/utils/type';
+import { isComponentType, type ComponentClassName } from '@lumx/react/utils/type';
 import { getBasicClass } from '@lumx/react/utils/className';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
@@ -73,7 +73,7 @@ export const Button = forwardRef<ButtonProps, HTMLButtonElement | HTMLAnchorElem
             variant="button"
         >
             {leftIcon && <Icon icon={leftIcon} />}
-            {children && (isComponent(Text)(children) ? children : <span>{children}</span>)}
+            {children && (isComponentType(Text)(children) ? children : <span>{children}</span>)}
             {rightIcon && <Icon icon={rightIcon} />}
         </ButtonRoot>
     );

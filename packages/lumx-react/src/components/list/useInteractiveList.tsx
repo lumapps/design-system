@@ -1,7 +1,7 @@
-import { ListItemProps } from '@lumx/react';
+import { ListItem, ListItemProps } from '@lumx/react';
 import { isClickable } from '@lumx/react/components/list/ListItem';
 
-import { isComponent } from '@lumx/react/utils/type';
+import { isComponentType } from '@lumx/react/utils/type';
 import { flattenChildren } from '@lumx/react/utils/flattenChildren';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 import {
@@ -74,7 +74,7 @@ function onKeyboardFocus(props: any, handler: (evt: FocusEvent) => void) {
 }
 
 const isNavigableItem = (node: ReactNode): node is ReactElement => {
-    return isComponent('ListItem')(node) && isClickable(node.props) && !node.props.isDisabled;
+    return isComponentType(ListItem)(node) && isClickable(node.props) && !node.props.isDisabled;
 };
 
 /**

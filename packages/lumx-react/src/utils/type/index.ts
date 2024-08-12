@@ -9,7 +9,6 @@ export { HasCloseMode } from './HasCloseMode';
 export { HasPolymorphicAs } from './HasPolymorphicAs';
 export { HasTheme } from './HasTheme';
 export { HeadingElement } from './HeadingElement';
-export { isComponent } from './isComponent';
 export { isComponentType } from './isComponentType';
 export { MaybeElementOrRef } from './MaybeElementOrRef';
 export { Point } from './Point';

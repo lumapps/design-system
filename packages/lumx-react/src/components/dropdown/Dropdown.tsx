@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { List, ListProps } from '@lumx/react/components/list/List';
 import { Popover, PopoverProps } from '@lumx/react/components/popover/Popover';
 import { useInfiniteScroll } from '@lumx/react/hooks/useInfiniteScroll';
-import { type GenericProps, isComponent, type ComponentClassName } from '@lumx/react/utils/type';
+import { type GenericProps, isComponentType, type ComponentClassName } from '@lumx/react/utils/type';
 import { Offset, Placement } from '@lumx/react/components/popover/constants';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
@@ -139,7 +139,7 @@ export const Dropdown = forwardRef<DropdownProps, HTMLDivElement>((props, ref) =
     useInfiniteScroll(innerRef, onInfiniteScroll);
 
     const popperElement = useMemo(() => {
-        return !Array.isArray(children) && isComponent(List)(children)
+        return !Array.isArray(children) && isComponentType(List)(children)
             ? cloneElement<ListProps>(children, {
                   ...children.props,
                   ref: listElement,

@@ -10,7 +10,7 @@ import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { useIntersectionObserver } from '@lumx/react/hooks/useIntersectionObserver';
 
-import { type GenericProps, isComponent, type ComponentClassName } from '@lumx/react/utils/type';
+import { type GenericProps, isComponentType, type ComponentClassName } from '@lumx/react/utils/type';
 import { partitionMulti } from '@lumx/react/utils/collection/partitionMulti';
 import { handleBasicClasses } from '@lumx/react/utils/className';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
@@ -65,8 +65,8 @@ export interface DialogProps extends GenericProps {
 
 export type DialogSizes = Extract<Size, 'tiny' | 'regular' | 'big' | 'huge'>;
 
-const isHeader = isComponent('header');
-const isFooter = isComponent('footer');
+const isHeader = isComponentType('header');
+const isFooter = isComponentType('footer');
 
 /**
  * Component display name.

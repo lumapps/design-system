@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
 import { Emphasis, Icon, Size, IconButton, IconButtonProps } from '@lumx/react';
-import { type GenericProps, type HasCloseMode, isComponent, type ComponentClassName } from '@lumx/react/utils/type';
+import { type GenericProps, type HasCloseMode, isComponentType, type ComponentClassName } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/react/utils/className';
 import { renderLink } from '@lumx/react/utils/renderLink';
 import { renderButtonOrLink } from '@lumx/react/utils/renderButtonOrLink';
@@ -84,7 +84,7 @@ export const SideNavigationItem = forwardRef<SideNavigationItemProps, HTMLLIElem
         ...forwardedProps
     } = props;
 
-    const content = children && Children.toArray(children).filter(isComponent(SideNavigationItem));
+    const content = children && Children.toArray(children).filter(isComponentType(SideNavigationItem));
     const hasContent = !isEmpty(content);
     const shouldSplitActions = Boolean(onActionClick);
     const showChildren = hasContent && isOpen;

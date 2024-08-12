@@ -3,7 +3,7 @@ import React, { Children, Fragment } from 'react';
 import classNames from 'classnames';
 
 import { Icon, ColorPalette, ColorVariant, Typography, WhiteSpace } from '@lumx/react';
-import { type GenericProps, type TextElement, isComponent, type ComponentClassName } from '@lumx/react/utils/type';
+import { type GenericProps, type TextElement, isComponentType, type ComponentClassName } from '@lumx/react/utils/type';
 import { getFontColorClassName, handleBasicClasses, getTypographyClassName } from '@lumx/react/utils/className';
 import { useOverflowTooltipLabel } from '@lumx/react/hooks/useOverflowTooltipLabel';
 import { useMergeRefs } from '@lumx/react/utils/mergeRefs';
@@ -126,7 +126,7 @@ export const Text = forwardRef<TextProps>((props, ref) => {
             {children &&
                 Children.toArray(children).map((child, index) => {
                     // Force wrap spaces around icons to make sure they are never stuck against text.
-                    if (isComponent(Icon)(child)) {
+                    if (isComponentType(Icon)(child)) {
                         return <Fragment key={child.key || index}> {child} </Fragment>;
                     }
                     return child;
