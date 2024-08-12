@@ -1,9 +1,8 @@
 import type { ReactElement, ReactNode } from 'react';
-import get from 'lodash/get';
 import type { Comp } from './Comp';
 
 /**
- * Properties of a component to use to determine it's name.
+ * Properties of a component to use to determine its name.
  * In the order of preference.
  */
 const NAME_PROPERTIES: string[] = [
@@ -27,7 +26,7 @@ export const isComponent =
         const componentName = typeof component === 'string' ? component : component.displayName;
 
         return (
-            !!get(instance, '$$typeof') &&
-            NAME_PROPERTIES.some((nameProperty: string): boolean => get(instance, nameProperty) === componentName)
+            !!(instance as any).$$typeof &&
+            NAME_PROPERTIES.some((nameProperty: string): boolean => (instance as any)[nameProperty] === componentName)
         );
     };

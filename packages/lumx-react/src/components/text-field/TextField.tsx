@@ -1,7 +1,6 @@
 import { ReactNode, Ref, RefObject, SyntheticEvent, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
-import get from 'lodash/get';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiCloseCircle } from '@lumx/icons';
 import {
@@ -220,8 +219,8 @@ const renderInputNative: React.FC<InputNativeProps> = (props) => {
         setFocus(false);
     };
 
-    const handleChange = (event: React.ChangeEvent) => {
-        onChange(get(event, 'target.value'), name, event);
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        onChange(event.target.value, name, event);
     };
 
     const Component = multiline ? 'textarea' : 'input';
