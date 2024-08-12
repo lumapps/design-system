@@ -3708,13 +3708,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lukeed/csprng@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "@lukeed/csprng@npm:1.0.0"
-  checksum: 331cdeb48f716c5d905d1ff7c0df36ff2cc294bce7e266196d75d130609685d6d37f6f8ac683b4c9bfa6a98cd4884f4e974e810a11c291d98b4af4eefa15c3b5
-  languageName: node
-  linkType: hard
-
 "@lumx/angularjs@^3.8.1, @lumx/angularjs@workspace:packages/lumx-angularjs":
   version: 0.0.0-use.local
   resolution: "@lumx/angularjs@workspace:packages/lumx-angularjs"
@@ -3909,7 +3902,6 @@ __metadata:
     rollup-plugin-typescript-paths: ^1.2.2
     storybook: ^7.6.3
     typescript: ^5.4.3
-    uid: ^2.0.0
     vite: ^4.2.1
     vite-tsconfig-paths: ^4.0.7
     yargs: ^15.4.1
@@ -33791,15 +33783,6 @@ resolve@^1.9.0:
   version: 0.0.6
   resolution: "uid-number@npm:0.0.6"
   checksum: ff17525bb9b17313b839222efa1fe69baf136992cf675e8d1d50e9b1ef4563742968e390a96a57645d99cf8b283866c36ef9747bbf186bbbf2ef601b60ed4443
-  languageName: node
-  linkType: hard
-
-"uid@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "uid@npm:2.0.0"
-  dependencies:
-    "@lukeed/csprng": ^1.0.0
-  checksum: c9333014d9ecc33d6c92ca8e9af8c52f172704b07af3a142879af368b7636f6ffff48cf87bc6021d4c85c7a0b255665ff0fe733f4b4a842f7bfd75638d31dd48
   languageName: node
   linkType: hard
 

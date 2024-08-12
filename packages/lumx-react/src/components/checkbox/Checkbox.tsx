@@ -1,13 +1,13 @@
-import React, { forwardRef, InputHTMLAttributes, ReactNode, SyntheticEvent, useMemo } from 'react';
+import React, { forwardRef, InputHTMLAttributes, ReactNode, SyntheticEvent } from 'react';
 
 import classNames from 'classnames';
-import { uid } from 'uid';
 
 import { mdiCheck, mdiMinus } from '@lumx/icons';
 
 import { Icon, InputHelper, InputLabel, Theme } from '@lumx/react';
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { useId } from '@lumx/react/hooks/useId';
 import { useMergeRefs } from '@lumx/react/utils/mergeRefs';
 
 /**
@@ -84,7 +84,8 @@ export const Checkbox: Comp<CheckboxProps, HTMLDivElement> = forwardRef((props, 
         ...forwardedProps
     } = props;
     const localInputRef = React.useRef<HTMLInputElement>(null);
-    const inputId = useMemo(() => id || `${CLASSNAME.toLowerCase()}-${uid()}`, [id]);
+    const generatedInputId = useId();
+    const inputId = id || generatedInputId;
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (onChange) {

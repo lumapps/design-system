@@ -1,7 +1,6 @@
-import React, { Children, forwardRef, InputHTMLAttributes, SyntheticEvent, useMemo } from 'react';
+import React, { Children, forwardRef, InputHTMLAttributes, SyntheticEvent } from 'react';
 
 import classNames from 'classnames';
-import { uid } from 'uid';
 
 import isEmpty from 'lodash/isEmpty';
 
@@ -9,6 +8,7 @@ import { Alignment, InputHelper, InputLabel, Theme } from '@lumx/react';
 
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { useId } from '@lumx/react/hooks/useId';
 
 /**
  * Defines the props of the component.
@@ -75,7 +75,8 @@ export const Switch: Comp<SwitchProps, HTMLDivElement> = forwardRef((props, ref)
         inputProps = {},
         ...forwardedProps
     } = props;
-    const inputId = useMemo(() => id || `switch-${uid()}`, [id]);
+    const generatedInputId = useId();
+    const inputId = id || generatedInputId;
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (onChange) {
             onChange(!isChecked, value, name, event);

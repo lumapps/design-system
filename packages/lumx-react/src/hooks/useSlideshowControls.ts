@@ -1,8 +1,8 @@
-import { useState, useCallback, useEffect, useMemo } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
 import { useInterval } from '@lumx/react/hooks/useInterval';
-import uniqueId from 'lodash/uniqueId';
 import { AUTOPLAY_DEFAULT_INTERVAL } from '@lumx/react/components/slideshow/constants';
+import { useId } from '@lumx/react/hooks/useId';
 
 export interface UseSlideshowControlsOptions {
     /** default active index to be displayed */
@@ -193,8 +193,11 @@ export const useSlideshowControls = ({
         onChange(currentIndex);
     }, [currentIndex, onChange]);
 
-    const slideshowId = useMemo(() => id || uniqueId('slideshow'), [id]);
-    const slideshowSlidesId = useMemo(() => slidesId || uniqueId('slideshow-slides'), [slidesId]);
+    const generatedSlideshowId = useId();
+    const slideshowId = id || generatedSlideshowId;
+
+    const generatedSlidesId = useId();
+    const slideshowSlidesId = slidesId || generatedSlidesId;
 
     const toggleAutoPlay = () => {
         if (isSlideshowAutoPlaying) {

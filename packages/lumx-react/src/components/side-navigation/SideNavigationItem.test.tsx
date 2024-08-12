@@ -10,7 +10,7 @@ const CLASSNAME = SideNavigationItem.className as string;
 
 const toggleButtonProps = { label: 'Toggle' };
 
-jest.mock('uid', () => ({ uid: () => 'id' }));
+jest.mock('@lumx/react/hooks/useId', () => ({ useId: () => ':r1:' }));
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.

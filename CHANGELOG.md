@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 -   `DatePicker`: improve display of localized day number.
+-   Reworked internal id generation (linking fields with labels, a11y attributes). Removed the `uid` dependency.
 
 ## [3.8.1][] - 2024-08-14
 

@@ -1,12 +1,13 @@
-import React, { forwardRef, ReactNode, useRef, useState, useMemo, useContext } from 'react';
+import React, { forwardRef, ReactNode, useRef, useState, useContext } from 'react';
 
 import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
 import { Icon, Size, Text, Orientation, Popover, Placement, Theme } from '@lumx/react';
-import uniqueId from 'lodash/uniqueId';
 import classNames from 'classnames';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { HasClassName } from '@lumx/react/utils/type';
 import { ThemeContext } from '@lumx/react/utils/ThemeContext';
+import { useId } from '@lumx/react/hooks/useId';
+
 import { CLASSNAME as ITEM_CLASSNAME } from './NavigationItem';
 import { NavigationContext } from './context';
 
@@ -34,7 +35,7 @@ export const NavigationSection = Object.assign(
         const { children, className, label, icon, ...forwardedProps } = props;
         const [isOpen, setIsOpen] = useState(false);
         const buttonRef = useRef<HTMLButtonElement>(null);
-        const sectionId = useMemo(() => uniqueId('section'), []);
+        const sectionId = useId();
         const { orientation } = useContext(NavigationContext) || {};
         const theme = useContext(ThemeContext);
         const isDropdown = orientation === Orientation.horizontal;

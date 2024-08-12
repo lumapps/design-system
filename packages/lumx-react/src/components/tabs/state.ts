@@ -1,5 +1,5 @@
 import { Dispatch, createContext, useCallback, useContext, useEffect, useMemo } from 'react';
-import { uid } from 'uid';
+import { useId } from '@lumx/react/hooks/useId';
 
 type TabType = 'tab' | 'tabPanel';
 
@@ -76,11 +76,9 @@ export const useTabProviderContext = (type: TabType, originalId?: string): undef
     const [state, dispatch] = context;
 
     // Current tab or tab panel id.
-    const id = useMemo(
-        () => originalId || `${type}-${uid()}`,
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        [],
-    );
+    const generatedId = useId();
+    const id = originalId || generatedId;
+
     useEffect(
         () => {
             // On mount: register tab or tab panel id.

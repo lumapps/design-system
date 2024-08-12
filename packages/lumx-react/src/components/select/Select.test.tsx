@@ -14,7 +14,7 @@ import { Select, SelectProps, SelectVariant } from './Select';
 const CLASSNAME = Select.className as string;
 
 jest.mock('@lumx/react/utils/isFocusVisible');
-jest.mock('uid', () => ({ uid: () => 'uid' }));
+jest.mock('@lumx/react/hooks/useId', () => ({ useId: () => ':r1:' }));
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.

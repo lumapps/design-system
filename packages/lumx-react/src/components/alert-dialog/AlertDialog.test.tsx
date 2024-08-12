@@ -5,7 +5,7 @@ import { queryByClassName } from '@lumx/react/testing/utils/queries';
 import { render } from '@testing-library/react';
 import { AlertDialog, AlertDialogProps } from './AlertDialog';
 
-jest.mock('uid', () => ({ uid: () => 'uid' }));
+jest.mock('@lumx/react/hooks/useId', () => ({ useId: () => ':r1:' }));
 
 const CLASSNAME = AlertDialog.className as string;
 

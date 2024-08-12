@@ -2,7 +2,6 @@ import React, { Children, forwardRef, ReactNode } from 'react';
 
 import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
-import { uid } from 'uid';
 
 import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
 
@@ -12,6 +11,7 @@ import { Comp, GenericProps, isComponent } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { renderLink } from '@lumx/react/utils/renderLink';
 import { renderButtonOrLink } from '@lumx/react/utils/renderButtonOrLink';
+import { useId } from '@lumx/react/hooks/useId';
 
 /**
  * Defines the props of the component.
@@ -95,7 +95,7 @@ export const SideNavigationItem: Comp<SideNavigationItemProps, HTMLLIElement> = 
     const shouldSplitActions = Boolean(onActionClick);
     const showChildren = hasContent && isOpen;
 
-    const contentId = React.useMemo(uid, []);
+    const contentId = useId();
     const ariaProps: any = {};
     if (hasContent) {
         ariaProps['aria-expanded'] = !!showChildren;
