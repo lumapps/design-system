@@ -1,7 +1,5 @@
 import { RefObject, SetStateAction, useEffect, useState } from 'react';
 
-import get from 'lodash/get';
-
 type Listener = (evt: KeyboardEvent) => void;
 
 interface UseKeyboardListNavigationType {
@@ -135,7 +133,7 @@ export const useKeyboardListNavigation: useKeyboardListNavigationType = (
             onListItemSelected(selectedItem);
             resetActiveIndex();
         } else if (activeItemIndex === initialIndex && onEnterPressed) {
-            const value = get(evt, 'target.value');
+            const value = (evt.target as any)?.value;
             onEnterPressed(value);
             resetActiveIndex();
         }
@@ -146,7 +144,7 @@ export const useKeyboardListNavigation: useKeyboardListNavigationType = (
      * @param evt - key pressed event
      */
     const onTabKeyPressed: Listener = (evt) => {
-        const value = get(evt, 'target.value');
+        const value = (evt.target as any)?.value;
 
         if (preventTabOnEnteredValue && value && value.length > 0) {
             preventDefaultAndStopPropagation(evt);

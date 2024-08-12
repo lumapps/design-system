@@ -4,8 +4,6 @@ import classNames from 'classnames';
 
 import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
 
-import get from 'lodash/get';
-
 import { ColorPalette, DragHandle, Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
 import { type GenericProps, type HasTheme, type ComponentClassName, isComponent } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/react/utils/className';
