@@ -1,4 +1,3 @@
-import isFunction from 'lodash/isFunction';
 import { MouseEventHandler, useCallback } from 'react';
 
 /**
@@ -10,7 +9,7 @@ import { MouseEventHandler, useCallback } from 'react';
 export function useStopPropagation(handler?: MouseEventHandler): MouseEventHandler {
     return useCallback(
         (evt) => {
-            if (!evt || !isFunction(handler)) {
+            if (!evt || !handler) {
                 return;
             }
             handler(evt);
