@@ -1,7 +1,6 @@
 import { MouseEventHandler, ReactNode } from 'react';
 
 import classNames from 'classnames';
-import isFunction from 'lodash/isFunction';
 
 import { ColorPalette, Size, Theme } from '@lumx/react';
 import { useStopPropagation } from '@lumx/react/hooks/useStopPropagation';
@@ -92,9 +91,7 @@ export const Chip = forwardRef<ChipProps, HTMLAnchorElement>((props, ref) => {
         onKeyDown,
         ...forwardedProps
     } = otherProps;
-    const hasAfterClick = isFunction(onAfterClick);
-    const hasBeforeClick = isFunction(onBeforeClick);
-    const hasOnClick = isFunction(props.onClick);
+    const hasOnClick = Boolean(props.onClick);
     const isButton = hasOnClick && !href;
     const isClickable = Boolean(hasOnClick) || Boolean(href) || propIsClickable;
 
@@ -105,7 +102,7 @@ export const Chip = forwardRef<ChipProps, HTMLAnchorElement>((props, ref) => {
     const handleOnAfterClick = useStopPropagation(onAfterClick);
     const handleKeyDown = (evt: React.KeyboardEvent) => {
         onKeyDown?.(evt);
-        if (hasOnClick) {
+        if (onClick) {
             onEnterPressed(onClick)(evt);
         }
     };
@@ -134,14 +131,14 @@ export const Chip = forwardRef<ChipProps, HTMLAnchorElement>((props, ref) => {
                 }),
             )}
             aria-disabled={(isClickable && isAnyDisabled) || undefined}
-            onClick={hasOnClick ? onClick : undefined}
+            onClick={onClick || undefined}
             onKeyDown={handleKeyDown}
         >
             {before && (
                 // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
                 <div
                     className={classNames(`${CLASSNAME}__before`, {
-                        [`${CLASSNAME}__before--is-clickable`]: hasBeforeClick,
+                        [`${CLASSNAME}__before--is-clickable`]: !!onBeforeClick,
                     })}
                     onClick={handleOnBeforeClick}
                 >
@@ -153,7 +150,7 @@ export const Chip = forwardRef<ChipProps, HTMLAnchorElement>((props, ref) => {
                 // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
                 <div
                     className={classNames(`${CLASSNAME}__after`, {
-                        [`${CLASSNAME}__after--is-clickable`]: hasAfterClick,
+                        [`${CLASSNAME}__after--is-clickable`]: !!onAfterClick,
                     })}
                     onClick={handleOnAfterClick}
                 >

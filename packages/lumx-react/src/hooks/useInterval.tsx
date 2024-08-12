@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 
-import isFunction from 'lodash/isFunction';
 import { Callback } from '@lumx/react/utils/type';
 
 /**
@@ -21,9 +20,7 @@ export function useInterval(callback: Callback, delay: number | null): void {
         if (delay === null) return undefined;
 
         function tick() {
-            if (isFunction(savedCallback.current)) {
-                savedCallback.current();
-            }
+            savedCallback.current?.();
         }
         const id = setInterval(tick, delay);
         return () => clearInterval(id);
