@@ -1,27 +1,11 @@
 import classNames from 'classnames';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import React from 'react';
 
-import isEmpty from 'lodash/isEmpty';
+import type React from 'react';
 
 /** Transform camelCase to kebab-case */
 function camelToKebabCase(str: string): string {
     return str.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
 }
-
-/**
- * Enhance isEmpty method to also works with numbers.
- *
- * @param  value The value to check.
- * @return Whether the input value is empty or != 0.
- */
-const _isEmpty = (value: any) => {
-    if (typeof value === 'number') {
-        return value === 0;
-    }
-
-    return isEmpty(value);
-};
 
 /**
  * Get the basic CSS class for the given type.
@@ -38,7 +22,7 @@ export function getBasicClass({
 }: {
     prefix: string;
     type: string;
-    value: string | number | boolean | undefined;
+    value: string | number | boolean | undefined | null;
 }): string {
     if (typeof value === 'boolean') {
         if (!value) {
@@ -68,13 +52,22 @@ export function getBasicClass({
  *                be used in the classname to represent the value of the given prop.
  * @return All LumX basic CSS classes.
  */
-export function handleBasicClasses({ prefix, ...props }: { prefix: string; [prop: string]: any }): string {
+export function handleBasicClasses({
+    prefix,
+    ...props
+}: {
+    prefix: string;
+    [prop: string]: string | number | boolean | null | undefined;
+}): string {
     const otherClasses: any = {};
-    if (!isEmpty(props)) {
-        Object.keys(props).forEach((prop) => {
-            otherClasses[getBasicClass({ prefix, type: prop, value: props[prop] })] =
-                typeof props[prop] === 'boolean' ? props[prop] : !_isEmpty(props[prop]);
-        });
+    const propKeys = Object.keys(props);
+    if (propKeys.length > 1) {
+        for (const prop of propKeys) {
+            if (props[prop]) {
+                const className = getBasicClass({ prefix, type: prop, value: props[prop] });
+                otherClasses[className] = true;
+            }
+        }
     }
 
     return classNames(prefix, otherClasses);
