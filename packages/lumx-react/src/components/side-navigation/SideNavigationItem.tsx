@@ -1,7 +1,6 @@
 import { Children, ReactNode } from 'react';
 
 import classNames from 'classnames';
-import isEmpty from 'lodash/isEmpty';
 
 import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
 import { Emphasis, Icon, Size, IconButton, IconButtonProps } from '@lumx/react';
@@ -84,7 +83,7 @@ export const SideNavigationItem = forwardRef<SideNavigationItemProps, HTMLLIElem
     } = props;
 
     const content = children && Children.toArray(children).filter(isComponent(SideNavigationItem));
-    const hasContent = !isEmpty(content);
+    const hasContent = Boolean(content);
     const shouldSplitActions = Boolean(onActionClick);
     const showChildren = hasContent && isOpen;
 
