@@ -5,9 +5,9 @@ import { queryByClassName } from '@lumx/react/testing/utils/queries';
 import { Theme } from '@lumx/react';
 import { RenderOptions } from '@testing-library/react';
 import { ThemeProvider } from '@lumx/react/utils/theme/ThemeContext';
-import castArray from 'lodash/castArray';
 import { invertTheme } from '@lumx/react/utils/theme/invertTheme';
 import { isEmpty } from '@lumx/core/js/utils/collection/isEmpty';
+import { castArray } from '@lumx/core/js/utils/collection/castArray';
 
 interface CommonSetup {
     props: GenericProps;

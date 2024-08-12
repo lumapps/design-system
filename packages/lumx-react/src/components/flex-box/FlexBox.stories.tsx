@@ -4,9 +4,9 @@ import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 import { withUndefined } from '@lumx/react/stories/controls/withUndefined';
 import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
+import { castArray } from '@lumx/core/js/utils/collection/castArray';
 import { mdiAtom } from '@lumx/icons';
 import mergeWith from 'lodash/fp/mergeWith';
-import castArray from 'lodash/castArray';
 import { FlexBox } from './FlexBox';
 
 const gapSizes = [Size.tiny, Size.regular, Size.medium, Size.big, Size.huge];
