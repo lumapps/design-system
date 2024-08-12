@@ -13,11 +13,13 @@ import {
     Toolbar,
 } from '@lumx/react';
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
-import noop from 'lodash/noop';
 import React, { MouseEventHandler, SyntheticEvent, useRef, useState } from 'react';
 import { SelectVariant } from './constants';
 
-export default { title: 'LumX components/select/Select Multiple' };
+export default {
+    title: 'LumX components/select/Select Multiple',
+    argTypes: { onClear: { action: true }, onInputClick: { action: true }, onDropdownClose: { action: true } },
+};
 
 const PLACEHOLDER = 'Select values';
 const LABEL = 'Select label';
@@ -76,18 +78,18 @@ export const DefaultSelectMultiple = ({ theme }: any) => {
     );
 };
 
-export const SelectMultipleWithNoData = ({ theme }: any) => {
+export const SelectMultipleWithNoData = ({ theme, onClear, onInputClick, onDropdownClose }: any) => {
     return (
         <SelectMultiple
             isOpen
             value={[]}
-            onClear={noop}
+            onClear={onClear}
             clearButtonProps={{ label: 'Clear' }}
             label="Select label"
             placeholder="Select values"
             theme={theme}
-            onInputClick={noop}
-            onDropdownClose={noop}
+            onInputClick={onInputClick}
+            onDropdownClose={onDropdownClose}
         >
             <List isClickable>
                 <ListItem key={0} size={Size.tiny}>
@@ -98,18 +100,18 @@ export const SelectMultipleWithNoData = ({ theme }: any) => {
     );
 };
 
-export const DisabledSelectMultiple = ({ theme }: any) => {
+export const DisabledSelectMultiple = ({ theme, onClear, onInputClick, onDropdownClose }: any) => {
     return (
         <SelectMultiple
             isOpen
             value={[]}
-            onClear={noop}
+            onClear={onClear}
             clearButtonProps={{ label: 'Clear' }}
             label="Select label"
             placeholder="Select values"
             theme={theme}
-            onInputClick={noop}
-            onDropdownClose={noop}
+            onInputClick={onInputClick}
+            onDropdownClose={onDropdownClose}
             isDisabled
         />
     );

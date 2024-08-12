@@ -1,7 +1,6 @@
 import { mdiBullhornOutline } from '@lumx/icons';
 import { List, ListItem, Select, Size, TextField } from '@lumx/react';
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
-import noop from 'lodash/noop';
 import range from 'lodash/range';
 import React, { SyntheticEvent, useState } from 'react';
 import { SelectVariant } from './constants';
@@ -9,6 +8,10 @@ import { SelectVariant } from './constants';
 export default {
     title: 'LumX components/select/Select',
     component: Select,
+    argTypes: {
+        onInputClick: { action: true },
+        onDropdownClose: { action: true },
+    },
 };
 
 const CHOICES = ['First item', 'Second item', 'Third item'];
@@ -109,7 +112,7 @@ export const SimpleSelectWithInfiniteScroll = ({ theme }: any) => {
     );
 };
 
-export const DisabledSelect = ({ theme }: any) => {
+export const DisabledSelect = ({ theme, onInputClick, onDropdownClose }: any) => {
     return (
         <Select
             isOpen={false}
@@ -117,8 +120,8 @@ export const DisabledSelect = ({ theme }: any) => {
             label="My select"
             placeholder="Placeholder"
             theme={theme}
-            onInputClick={noop}
-            onDropdownClose={noop}
+            onInputClick={onInputClick}
+            onDropdownClose={onDropdownClose}
             isDisabled
         >
             <List theme={theme} isClickable>
@@ -206,7 +209,13 @@ export const SelectWithAnotherField = ({ theme }: any) => {
 
     return (
         <>
-            <TextField value="myvalue" label="I am the label" placeholder="ex: A value" theme={theme} onChange={noop} />
+            <TextField
+                value="myvalue"
+                label="I am the label"
+                placeholder="ex: A value"
+                theme={theme}
+                onChange={() => {}}
+            />
             <Select
                 style={{ width: '100%' }}
                 isOpen={isOpen}
