@@ -1,9 +1,8 @@
 import { MouseEventHandler, useMemo } from 'react';
 
 import classNames from 'classnames';
-import take from 'lodash/take';
-import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
+import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { Alignment, AspectRatio, Theme, Thumbnail, ThumbnailProps } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';
@@ -66,7 +65,7 @@ export const Mosaic = forwardRef<MosaicProps, HTMLDivElement>((props, ref) => {
             })}
         >
             <div className={`${CLASSNAME}__wrapper`}>
-                {take(thumbnails, 4).map((thumbnail: any, index: number) => {
+                {thumbnails.slice(0, 4).map((thumbnail: any, index: number) => {
                     const { image, onClick, align, ...thumbnailProps } = thumbnail;
 
                     return (
