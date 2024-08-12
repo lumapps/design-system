@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { Comp, isComponentType } from '@lumx/react/utils/type';
 import { getRootClassName } from '@lumx/core/js/utils/className';
-import { partitionMulti } from '@lumx/react/utils/partitionMulti';
+import { partitionMulti } from '@lumx/core/js/utils/collection/partitionMulti';
 import { Orientation, Size, FlexBox, FlexBoxProps } from '@lumx/react';
 import { GenericBlockGapSize } from '@lumx/react/components/generic-block/constants';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
