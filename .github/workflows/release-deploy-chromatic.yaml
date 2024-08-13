@@ -1,11 +1,14 @@
 name: "Deploy Chromatic Release"
 
-# Deploy chromatic when a new release tag is pushed on GitHub
+# Deploy chromatic when a new release commit is pushed on master
 
 on:
     push:
-        tags:
-            - 'v[0-9]+.[0-9]+.[0-9]+'
+        branches:
+            - master
+
+permissions:
+    actions: 'write'
 
 concurrency:
     group: chromatic-release-${{ github.head_ref }}
@@ -16,6 +19,20 @@ jobs:
         name: "Deploy chromatic"
         runs-on: ubuntu-latest
         steps:
+            -   name: "Check is release commit"
+                env:
+                    GH_TOKEN: ${{ github.token }}
+                run: |
+                    set -x # verbose
+                    message=$(gh api /repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA} --jq .commit.message)
+
+                    # Commit is not a release commit
+                    if [[ "$message" != 'chore(release): release'* ]]; then
+                        # Cancel current job
+                        gh run cancel -R ${GITHUB_REPOSITORY} ${{ github.run_id }}
+                        gh run watch -R ${GITHUB_REPOSITORY} ${{ github.run_id }}
+                    fi
+
             -   name: "Checkout repository"
                 uses: actions/checkout@v3
                 with:
