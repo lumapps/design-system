@@ -7,9 +7,6 @@ on:
         branches:
             - master
 
-permissions:
-    actions: 'write'
-
 concurrency:
     group: chromatic-release-${{ github.head_ref }}
     cancel-in-progress: true
@@ -19,29 +16,30 @@ jobs:
         name: "Deploy chromatic"
         runs-on: ubuntu-latest
         steps:
-            -   name: "Check is release commit"
-                env:
-                    GH_TOKEN: ${{ github.token }}
-                run: |
-                    set -x # verbose
-                    message=$(gh api /repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA} --jq .commit.message)
-
-                    # Commit is not a release commit
-                    if [[ "$message" != 'chore(release): release'* ]]; then
-                        # Cancel current job
-                        gh run cancel -R ${GITHUB_REPOSITORY} ${{ github.run_id }}
-                        gh run watch -R ${GITHUB_REPOSITORY} ${{ github.run_id }}
-                    fi
-
             -   name: "Checkout repository"
                 uses: actions/checkout@v3
                 with:
                     fetch-depth: 0 # retrieve all the repo history (required by chromatic)
 
+            -   name: "Check is release commit"
+                id: check
+                env:
+                    GH_TOKEN: ${{ github.token }}
+                run: |
+                    set -x # verbose
+                    message=$(git show -s --format=%s)
+
+                    # Check is release commit
+                    if [[ "$message" == 'chore(release): release'* ]]; then
+                        echo "is_release_commit=true" >> "$GITHUB_OUTPUT"
+                    fi
+
             -   name: "Setup"
+                if:  ${{ steps.check.outputs.is_release_commit == 'true' }}
                 uses: ./.github/actions/setup
 
             -   name: "Deploy chromatic"
+                if:  ${{ steps.check.outputs.is_release_commit == 'true' }}
                 uses: chromaui/action@3f82bf5d065290658af8add6dce946809ee0f923 #v6.1.0
                 with:
                     token: ${{ secrets.GITHUB_TOKEN }}
