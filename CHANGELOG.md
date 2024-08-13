@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.8.0][] - 2024-08-13
+
 ### Fixed
 
 -   `Lightbox`: fix a11y color contrast on the close button.
@@ -2040,7 +2042,8 @@ _Failed released_
 [3.6.7]: https://github.com/lumapps/design-system/tree/v3.6.7
 
 
-[Unreleased]: https://github.com/lumapps/design-system/compare/v3.7.5...HEAD
+[Unreleased]: https://github.com/lumapps/design-system/compare/v3.8.0...HEAD
+[3.8.0]: https://github.com/lumapps/design-system/compare/v3.7.5...v3.8.0
 [3.7.5]: https://github.com/lumapps/design-system/compare/v3.7.4...v3.7.5
 [3.7.4]: https://github.com/lumapps/design-system/compare/v3.7.3...v3.7.4
 [3.7.3]: https://github.com/lumapps/design-system/compare/v3.7.2...v3.7.3
