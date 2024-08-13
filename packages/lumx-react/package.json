@@ -6,7 +6,6 @@
         "url": "https://github.com/lumapps/design-system/issues"
     },
     "dependencies": {
-        "@juggle/resize-observer": "^3.2.0",
         "@lumx/core": "^3.7.5",
         "@lumx/icons": "^3.7.5",
         "@popperjs/core": "^2.5.4",
