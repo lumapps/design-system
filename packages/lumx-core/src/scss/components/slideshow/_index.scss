@@ -93,7 +93,7 @@
     &__pagination {
         align-items: center;
         // Compute max width for N items based on their size, margin and focus outline
-        max-width: ($item-max-count * ($item-size + $item-margin-inline)) + $item-focus-outline;
+        max-width: ($item-max-count * ($item-size + $item-margin-inline)) + $item-focus-outline * 2;
         overflow: hidden;
     }
 
