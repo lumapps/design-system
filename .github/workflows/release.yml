@@ -89,7 +89,8 @@ jobs:
                         console.log(`NPM dist tag: ${distTag}`);
 
                         // Get base version (version from which to increment)
-                        let baseVersion = await getVersion(distTag)
+                        const distTagBaseVersion = await getVersion(distTag);
+                        let baseVersion = distTagBaseVersion;
                         // Prerelease should start with latest NPM version + patch (ex: 'v1.0.0' => 'v1.0.1-alpha.0')
                         if (releaseType === 'prerelease' && (!baseVersion || !baseVersion.startsWith(semver.inc(npmLatestVersion, 'patch')))) {
                             baseVersion = npmLatestVersion;
@@ -113,7 +114,7 @@ jobs:
                         // Update version in changelog (need to run in a package which has a version, so not the root package)
                         await run(`yarn workspace @lumx/core update-version-changelog`);
 
-                        return { nextVersion, distTag, branch, releaseType, refName };
+                        return { nextVersion, distTag, branch, releaseType, refName, distTagBaseVersion };
 
             -   name: "Build libs"
                 run: yarn build:libs
@@ -151,6 +152,19 @@ jobs:
                     # Tag and push tag
                     #git tag "$tag"
                     #git push origin "$tag"
+
+            -   name: "Deprecate older prerelease version"
+                env:
+                    NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+                    DIST_TAG_BASE_VERSION: ${{ fromJSON(steps.version.outputs.result).distTagBaseVersion }}
+                if: ${{ fromJSON(steps.version.outputs.result).releaseType == 'prerelease' && env.DIST_TAG_BASE_VERSION }}
+                run: |
+                    packages=$(npm pkg get name -ws | egrep -o '@lumx/\w+' | uniq)
+                    for package in $packages;
+                    do
+                        echo "Deprecate ${package}@${DIST_TAG_BASE_VERSION}";
+                        npm deprecate ${package}@${DIST_TAG_BASE_VERSION} deprecated;
+                    done
 
         outputs:
             releaseType: ${{ fromJSON(steps.version.outputs.result).releaseType }}
