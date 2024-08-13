@@ -2923,13 +2923,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@juggle/resize-observer@npm:^3.2.0":
-  version: 3.2.0
-  resolution: "@juggle/resize-observer@npm:3.2.0"
-  checksum: de047921d680b5c81c4e64aa752358fe108a3a89450a527f3187ea2bbac2d3d78b7249d0865363acf696c5eaa160924fff3074a2f7af8dbdca56d4d234085869
-  languageName: node
-  linkType: hard
-
 "@juggle/resize-observer@npm:^3.3.1":
   version: 3.4.0
   resolution: "@juggle/resize-observer@npm:3.4.0"
@@ -3867,7 +3860,6 @@ __metadata:
     "@babel/preset-env": ^7.18.10
     "@babel/preset-react": ^7.18.6
     "@babel/preset-typescript": ^7.18.6
-    "@juggle/resize-observer": ^3.2.0
     "@lumx/core": ^3.7.5
     "@lumx/icons": ^3.7.5
     "@popperjs/core": ^2.5.4
