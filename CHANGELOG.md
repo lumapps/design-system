@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   `ImageBlock`: restore old caption class names.
+
+### Changed
+
+-   `ImageBlock`: add `titleProps` and `descriptionProps` to forward to the title and description.
+
 ## [3.8.0][] - 2024-08-13
 
 ### Fixed

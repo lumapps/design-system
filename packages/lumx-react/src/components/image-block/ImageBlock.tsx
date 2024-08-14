@@ -81,6 +81,7 @@ export const ImageBlock: Comp<ImageBlockProps, HTMLDivElement> = forwardRef((pro
         captionStyle,
         className,
         description,
+        descriptionProps,
         fillHeight,
         image,
         size,
@@ -88,6 +89,7 @@ export const ImageBlock: Comp<ImageBlockProps, HTMLDivElement> = forwardRef((pro
         theme,
         thumbnailProps,
         title,
+        titleProps,
         ...forwardedProps
     } = props;
     return (
@@ -118,10 +120,12 @@ export const ImageBlock: Comp<ImageBlockProps, HTMLDivElement> = forwardRef((pro
             />
             <ImageCaption
                 as="figcaption"
-                className={`${CLASSNAME}__wrapper`}
+                baseClassName={CLASSNAME}
                 theme={theme}
                 title={title}
+                titleProps={titleProps}
                 description={description}
+                descriptionProps={descriptionProps}
                 tags={tags}
                 captionStyle={captionStyle}
                 align={align}
