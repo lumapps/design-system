@@ -1,10 +1,10 @@
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
+
 /**
  * Get short SHA for git ref.
  */
 async function getShortSHA(gitRef) {
-    const util = require('util');
-    const exec = util.promisify(require('child_process').exec);
-
     return exec(`git rev-parse --short ${gitRef}`)
         .then(({ stdout }) => stdout.trim());
 }
