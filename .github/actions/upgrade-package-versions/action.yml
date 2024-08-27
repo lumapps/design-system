@@ -1,0 +1,43 @@
+name: 'Upgrade package versions'
+description: 'Upgrade all package.json versions and update CHANGELOG'
+
+inputs:
+    releaseType:
+        description: 'Release type'
+        required: true
+        default: 'prerelease'
+        type: choice
+        options:
+            - prerelease
+            - patch
+            - minor
+            - major
+    prereleaseName:
+        description: 'Prerelease name (ignore if release type is not `prerelease`)'
+        default: 'alpha'
+        type: string
+
+# Example release:
+#   - name: Upgrade package versions
+#     uses: ./.github/actions/upgrade-package-versions
+#     with:
+#         releaseType: 'patch'
+
+
+# Example prerelease:
+#   - name: Upgrade package versions
+#     uses: ./.github/actions/upgrade-package-versions
+#     with:
+#         releaseType: 'prerelease'
+#         prereleaseName: 'beta'
+
+runs:
+    using: composite
+    steps:
+        -   name: Upgrade package versions
+            uses: actions/github-script@v6
+            with:
+                script: |
+                    return require("${{ github.action_path }}")({
+                        github, context, inputs: ${{ toJSON(inputs) }}
+                    })

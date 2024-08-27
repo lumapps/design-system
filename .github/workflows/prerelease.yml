@@ -1,0 +1,69 @@
+name: "Prerelease Workflow"
+
+# Manual trigger workflow to automatically setup, build and push a new prerelease on NPM
+
+on:
+    workflow_dispatch:
+        inputs:
+            prereleaseName:
+                description: 'Prerelease name'
+                required: true
+                default: 'alpha'
+                type: string
+
+concurrency:
+    group: "${{ github.workflow }}-${{ github.ref_name }}"
+    cancel-in-progress: true
+
+jobs:
+    publish_version:
+        name: "Publish version"
+        runs-on: ubuntu-latest
+        steps:
+            -   name: "Checkout repository"
+                uses: actions/checkout@v3
+                with:
+                    fetch-depth: 0
+
+            -   name: "Setup"
+                uses: ./.github/actions/setup
+
+            -   name: "Upgrade package versions"
+                id: version
+                uses: ./.github/actions/upgrade-package-versions
+                with:
+                    releaseType: 'prerelease'
+                    prereleaseName: '${{ inputs.prereleaseName }}'
+
+            -   name: "Build libs"
+                run: yarn build:libs
+
+            -   name: "Publish version to NPM"
+                env:
+                    NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+                    DIST_TAG: ${{ fromJSON(steps.version.outputs.result).distTag }}
+                run: |
+                    for package in $(echo packages/lumx-*);
+                    do
+                        (echo "Publishing $package"; cd $package/dist; npm publish --tag $DIST_TAG)
+                    done
+
+            -   name: "Deprecate older prerelease version"
+                env:
+                    NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+                    DIST_TAG_BASE_VERSION: ${{ fromJSON(steps.version.outputs.result).distTagBaseVersion }}
+                if: ${{ env.DIST_TAG_BASE_VERSION }}
+                run: |
+                    packages=$(npm pkg get name -ws | egrep -o '@lumx/\w+' | uniq)
+                    for package in $packages;
+                    do
+                        echo "Deprecate ${package}@${DIST_TAG_BASE_VERSION}";
+                        npm deprecate ${package}@${DIST_TAG_BASE_VERSION} deprecated;
+                    done
+
+        outputs:
+            releaseType: ${{ fromJSON(steps.version.outputs.result).releaseType }}
+            baseRef: ${{ fromJSON(steps.version.outputs.result).refName }}
+            commit: ${{ steps.git.outputs.commit }}
+            branch: ${{ steps.git.outputs.branch }}
+            versionTag: ${{ steps.git.outputs.tag }}
