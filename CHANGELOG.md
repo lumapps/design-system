@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.9.0][] - 2024-08-28
+
 ### Added
 
 -   `ImageLightbox`: new component providing an image slideshow lightbox with extra features (zoom & a11y).
@@ -2056,7 +2058,8 @@ _Failed released_
 [3.6.7]: https://github.com/lumapps/design-system/tree/v3.6.7
 
 
-[Unreleased]: https://github.com/lumapps/design-system/compare/v3.8.1...HEAD
+[Unreleased]: https://github.com/lumapps/design-system/compare/v3.9.0...HEAD
+[3.9.0]: https://github.com/lumapps/design-system/compare/v3.8.1...v3.9.0
 [3.8.1]: https://github.com/lumapps/design-system/compare/v3.8.0...v3.8.1
 [3.8.0]: https://github.com/lumapps/design-system/compare/v3.7.5...v3.8.0
 [3.7.5]: https://github.com/lumapps/design-system/compare/v3.7.4...v3.7.5
