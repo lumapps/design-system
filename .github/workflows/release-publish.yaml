@@ -114,8 +114,8 @@ jobs:
                     projectToken: ${{ secrets.CHROMATIC_TOKEN }}
                     buildScriptName: build:storybook
 
-    build_demo_site:
-        name: "Build & push demo site"
+    deploy_demo_site:
+        name: "Deploy demo site"
         needs: [git_tag, build_publish_NPM]
         timeout-minutes: 30
         runs-on: ubuntu-latest
@@ -171,6 +171,11 @@ jobs:
                     labels: ${{ steps.meta.outputs.labels }}
                     cache-from: type=gha, scope=${{ github.workflow }}
                     cache-to: type=gha, scope=${{ github.workflow }}, mode=max
+
+            -   name: "Deploy site"
+                env:
+                    GH_TOKEN: ${{ secrets.GITBOT_TOKEN }}
+                run: gh workflow run -R lumapps/design-system-deployment update-lumx-version.yml
 
     create_gh_release:
         name: "Create release note"
