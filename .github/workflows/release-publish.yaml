@@ -8,9 +8,7 @@ name: "Publish Release Workflow"
 # - Create GH release notes
 
 on:
-    push:
-        branches:
-            - master
+    pull_request
 
 concurrency:
     group: "${{ github.workflow }}-${{ github.ref_name }}"
@@ -61,10 +59,11 @@ jobs:
                     set -x
 
                     # Create tag
-                    tag="v${{ needs.is_release_commit.outputs.version }}"
+                    tag="test-v${{ needs.is_release_commit.outputs.version }}"
                     git tag "$tag"
 
                     # Push tag
+                    git push --delete origin "test-v${{ needs.is_release_commit.outputs.version }}"
                     git push origin "$tag"
 
                     echo "tag=$tag" >> $GITHUB_OUTPUT
@@ -91,11 +90,12 @@ jobs:
                 run: |
                     for package in $(echo packages/lumx-*);
                     do
-                        (echo "Publishing $package"; cd $package/dist; npm publish --tag latest)
+                        (echo "Publishing $package" cd $package/dist npm publish --tag latest)
                     done
 
     deploy_chromatic:
         name: "Deploy chromatic"
+        if: false
         needs: [build_publish_NPM]
         runs-on: ubuntu-latest
         steps:
