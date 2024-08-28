@@ -3,17 +3,7 @@ name: "Prepare Release Workflow"
 # Manual trigger workflow to automatically setup a new release PR (built & publish on merge)
 
 on:
-    workflow_dispatch:
-        inputs:
-            releaseType:
-                description: 'Release type'
-                required: true
-                default: 'patch'
-                type: choice
-                options:
-                    - patch
-                    - minor
-                    - major
+    pull_request
 
 concurrency:
     group: "${{ github.workflow }}-${{ github.ref_name }}"
@@ -36,7 +26,7 @@ jobs:
                 id: version
                 uses: ./.github/actions/increment-package-versions
                 with:
-                    releaseType: '${{ inputs.releaseType }}'
+                    releaseType: 'minor'
 
             -   name: "Check build libs"
                 run: yarn build:libs
@@ -70,5 +60,5 @@ jobs:
                             head: '${{ steps.git.outputs.branch }}',
                             title: '${{ steps.git.outputs.commit }}',
                             body: 'Release ${{ steps.git.outputs.versionName }}\n',
-                            draft: false,
+                            draft: true,
                         });
