@@ -1,0 +1,47 @@
+name: "Deploy Chromatic Release"
+
+# Deploy chromatic when a new release commit is pushed on master
+
+on:
+    push:
+        branches:
+            - master
+
+concurrency:
+    group: chromatic-release-${{ github.head_ref }}
+    cancel-in-progress: true
+
+jobs:
+    deploy_chromatic:
+        name: "Deploy chromatic"
+        runs-on: ubuntu-latest
+        steps:
+            -   name: "Checkout repository"
+                uses: actions/checkout@v3
+                with:
+                    fetch-depth: 0 # retrieve all the repo history (required by chromatic)
+
+            -   name: "Check is release commit"
+                id: check
+                env:
+                    GH_TOKEN: ${{ github.token }}
+                run: |
+                    set -x # verbose
+                    message=$(git show -s --format=%s)
+
+                    # Check is release commit
+                    if [[ "$message" == 'chore(release): release'* ]]; then
+                        echo "is_release_commit=true" >> "$GITHUB_OUTPUT"
+                    fi
+
+            -   name: "Setup"
+                if:  ${{ steps.check.outputs.is_release_commit == 'true' }}
+                uses: ./.github/actions/setup
+
+            -   name: "Deploy chromatic"
+                if:  ${{ steps.check.outputs.is_release_commit == 'true' }}
+                uses: chromaui/action@3f82bf5d065290658af8add6dce946809ee0f923 #v6.1.0
+                with:
+                    token: ${{ secrets.GITHUB_TOKEN }}
+                    projectToken: ${{ secrets.CHROMATIC_TOKEN }}
+                    buildScriptName: build:storybook

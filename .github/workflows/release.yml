@@ -1,6 +1,6 @@
-name: "Prepare Release Workflow"
+name: "Release Workflow"
 
-# Manual trigger workflow to automatically setup a new release PR (built & publish on merge)
+# Manual trigger workflow to automatically setup, build and push a new release on NPM
 
 on:
     workflow_dispatch:
@@ -20,8 +20,8 @@ concurrency:
     cancel-in-progress: true
 
 jobs:
-    prepare_release:
-        name: "Prepare Release"
+    publish_version:
+        name: "Publish version"
         runs-on: ubuntu-latest
         steps:
             -   name: "Checkout repository"
@@ -38,10 +38,20 @@ jobs:
                 with:
                     releaseType: '${{ inputs.releaseType }}'
 
-            -   name: "Check build libs"
+            -   name: "Build libs"
                 run: yarn build:libs
 
-            -   name: "Git commit & push"
+            -   name: "Publish version to NPM"
+                env:
+                    NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+                    DIST_TAG: ${{ steps.version.outputs.distTag }}
+                run: |
+                    for package in $(echo packages/lumx-*);
+                    do
+                        (echo "Publishing $package"; cd $package/dist; npm publish --tag $DIST_TAG)
+                    done
+
+            -   name: "Git commit, tag & push"
                 id: git
                 run: |
                     git config --global user.name "github-actions"
@@ -50,15 +60,31 @@ jobs:
                     branch="${{ steps.version.outputs.releaseBranch }}"
                     echo "branch=$branch" >> $GITHUB_OUTPUT
 
-                    versionName="v${{ steps.version.outputs.nextVersion }}"
-                    echo "versionName=$versionName" >> $GITHUB_OUTPUT
+                    tag="v${{ steps.version.outputs.nextVersion }}"
+                    echo "tag=$tag" >> $GITHUB_OUTPUT
 
                     # Commit and push branch
-                    commit="chore(release): release $versionName"
+                    commit="chore(release): release $tag"
                     echo "commit=$commit" >> $GITHUB_OUTPUT
                     git commit -am "$commit"
                     git push origin "$branch"
 
+                    # TODO: need to a new git user to push tags
+                    # Tag and push tag
+                    #git tag "$tag"
+                    #git push origin "$tag"
+
+        outputs:
+            releaseType: ${{ inputs.releaseType }}
+            commit: ${{ steps.git.outputs.commit }}
+            branch: ${{ steps.git.outputs.branch }}
+            versionTag: ${{ steps.git.outputs.tag }}
+
+    create_gh_pull_request:
+        name: "Create pull request"
+        runs-on: ubuntu-latest
+        needs: [ publish_version ]
+        steps:
             -   name: "Create pull request"
                 uses: actions/github-script@v6
                 with:
@@ -66,9 +92,9 @@ jobs:
                         github.rest.pulls.create({
                             owner: context.repo.owner,
                             repo: context.repo.repo,
+                            title: '${{ needs.publish_version.outputs.commit }}',
+                            head: '${{ needs.publish_version.outputs.branch }}',
                             base: 'master',
-                            head: '${{ steps.git.outputs.branch }}',
-                            title: '${{ steps.git.outputs.commit }}',
-                            body: 'Release ${{ steps.git.outputs.versionName }}\n',
+                            body: 'https://github.com/lumapps/design-system/releases/tag/${{ needs.publish_version.outputs.versionTag }}\nTODO: `git tag ${{ needs.publish_version.outputs.versionTag }}` & `git push origin ${{ needs.publish_version.outputs.versionTag }}`',
                             draft: false,
                         });
