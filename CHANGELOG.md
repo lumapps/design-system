@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `ImageLightbox`: new component providing an image slideshow lightbox with extra features (zoom & a11y).
 
+### Changed
+
+-   `DatePicker`: improve display of localized day number.
+
 ## [3.8.1][] - 2024-08-14
 
 ### Fixed
