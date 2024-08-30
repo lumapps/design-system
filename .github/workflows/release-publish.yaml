@@ -8,7 +8,9 @@ name: "Publish Release Workflow"
 # - Create GH release notes
 
 on:
-    pull_request
+    push:
+        branches:
+            - master
 
 concurrency:
     group: "${{ github.workflow }}-${{ github.ref_name }}"
@@ -47,28 +49,21 @@ jobs:
         if: ${{ needs.is_release_commit.outputs.version }}
         runs-on: ubuntu-latest
         steps:
-            -   name: "Checkout repository"
-                uses: actions/checkout@v3
-                with:
-                    persist-credentials: false
-                    fetch-depth: 0
-                    ref: ${{ github.event.pull_request.head.sha || env.GITHUB_SHA }}
-
             -   name: "Git tag"
-                id: git
-                run: |
-                    set -x
-                    tag="test-v${{ needs.is_release_commit.outputs.version }}"
-                    echo "tag=$tag" >> $GITHUB_OUTPUT
-                    git tag "$tag"
-
-            -   name: "Push tag"
-                uses: ad-m/github-push-action@v0.6.0
+                uses: actions/github-script@v6
                 with:
-                    github_token: ${{ secrets.GITBOT_TOKEN }}
-                    tags: true
+                    result-encoding: string
+                    script: |
+                        const tag = 'v${{ needs.is_release_commit.outputs.version }}';
+                        await github.rest.git.createRef({
+                            owner: context.repo.owner,
+                            repo: context.repo.repo,
+                            sha: context.sha,
+                            ref: `refs/tags/${tag}`,
+                        });
+                        return tag;
         outputs:
-            tag: ${{ steps.git.outputs.tag }}
+            tag: ${{ steps.git.outputs.result }}
 
     build_publish_NPM:
         name: "Build & publish NPM libs"
@@ -90,7 +85,7 @@ jobs:
                 run: |
                     for package in $(echo packages/lumx-*);
                     do
-                        (echo "Publishing $package" cd $package/dist npm publish --tag latest)
+                        (echo "Publishing $package"; cd $package/dist; npm publish --tag latest)
                     done
 
     deploy_chromatic:
