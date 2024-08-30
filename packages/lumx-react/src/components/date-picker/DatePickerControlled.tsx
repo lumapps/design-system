@@ -12,6 +12,7 @@ import { usePreviousValue } from '@lumx/react/hooks/usePreviousValue';
 import { getYearDisplayName } from '@lumx/react/utils/date/getYearDisplayName';
 import { onEnterPressed } from '@lumx/react/utils/event';
 import { addMonthResetDay } from '@lumx/react/utils/date/addMonthResetDay';
+import { formatDayNumber } from '@lumx/react/utils/date/formatDayNumber';
 import { CLASSNAME } from './constants';
 
 /**
@@ -198,9 +199,7 @@ export const DatePickerControlled: Comp<DatePickerControlledProps, HTMLDivElemen
                                             type="button"
                                             onClick={() => onChange(date)}
                                         >
-                                            <span aria-hidden>
-                                                {date.toLocaleDateString(locale, { day: 'numeric' })}
-                                            </span>
+                                            <span aria-hidden>{formatDayNumber(locale, date)}</span>
                                             <span className="visually-hidden">
                                                 {date.toLocaleDateString(locale, {
                                                     day: 'numeric',
