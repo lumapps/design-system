@@ -9,7 +9,7 @@ import { withCombinations } from '@lumx/react/stories/decorators/withCombination
 import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
 import { UserBlock } from './UserBlock';
 
-const sizes = [Size.s, Size.m, Size.l];
+const sizes = [Size.xs, Size.s, Size.m, Size.l];
 
 export default {
     title: 'LumX components/user-block/UserBlock',

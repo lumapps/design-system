@@ -12,7 +12,7 @@ import { AvatarProps } from '../avatar/Avatar';
 /**
  * User block sizes.
  */
-export type UserBlockSize = Extract<Size, 's' | 'm' | 'l'>;
+export type UserBlockSize = Extract<Size, 'xs' | 's' | 'm' | 'l'>;
 
 /**
  * Defines the props of the component.
@@ -128,7 +128,7 @@ export const UserBlock: Comp<UserBlockProps, HTMLDivElement> = forwardRef((props
         return <NameComponent {...nProps}>{name}</NameComponent>;
     }, [avatarProps, isClickable, linkAs, linkProps, name, nameProps, onClick]);
 
-    const fieldsBlock: ReactNode = fields && componentSize !== Size.s && (
+    const fieldsBlock: ReactNode = fields && componentSize !== Size.s && componentSize !== Size.xs && (
         <div className={`${CLASSNAME}__fields`}>
             {fields.map((field: string, idx: number) => (
                 <span key={idx} className={`${CLASSNAME}__field`}>

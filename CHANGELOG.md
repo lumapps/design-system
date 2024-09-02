@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   `ImageLightbox`: new component providing an image slideshow lightbox with extra features (zoom & a11y).
+-   `UserBlock`: added an XS size.
 
 ### Changed
 

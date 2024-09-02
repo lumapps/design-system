@@ -15,6 +15,10 @@
     }
 
     &__avatar {
+        #{$self}--orientation-horizontal#{$self}--size-xs & {
+            margin-right: $lumx-spacing-unit;
+        }
+
         #{$self}--orientation-horizontal#{$self}--size-s & {
             margin-right: $lumx-spacing-unit;
         }
@@ -41,6 +45,11 @@
     &__name {
         width: fit-content;
         outline: none;
+
+        #{$self}--size-xs & {
+            @include lumx-typography("body1");
+        }
+
 
         @include lumx-typography("subtitle1");
 
