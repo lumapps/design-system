@@ -36,9 +36,9 @@ async function main({ github, context }) {
     const body = `${versionChangelog}\n\n${links}`;
 
     await github.rest.repos.createRelease({
-        draft: false,
+        draft: true,
         generate_release_notes: false,
-        prerelease: false,
+        prerelease: true,
         owner: context.repo.owner,
         repo: context.repo.repo,
         tag_name: versionTag,

@@ -8,9 +8,7 @@ name: "Publish Release Workflow"
 # - Create GH release notes
 
 on:
-    push:
-        branches:
-            - master
+    pull_request
 
 concurrency:
     group: "${{ github.workflow }}-${{ github.ref_name }}"
@@ -48,6 +46,9 @@ jobs:
         steps:
             -   name: "Checkout repository"
                 uses: actions/checkout@v3
+                with:
+                    token: '${{ secrets.GITBOT_TOKEN }}'
+                    fetch-depth: 0
 
             -   name: "Setup"
                 uses: ./.github/actions/setup
@@ -61,7 +62,7 @@ jobs:
                 run: |
                     for package in $(echo packages/lumx-*);
                     do
-                        (echo "Publishing $package"; cd $package/dist; npm publish --tag latest)
+                        (echo "Publishing $package" cd $package/dist npm publish --tag latest)
                     done
 
             -   name: "Git tag"
@@ -70,15 +71,17 @@ jobs:
                     set -x
 
                     # Create tag
-                    tag="v${{ needs.is_release_commit.outputs.version }}"
+                    tag="test-v${{ needs.is_release_commit.outputs.version }}"
                     git tag "$tag"
 
                     # Push tag
+                    git push --delete origin "test-v3.8.1" || true
                     git push origin "$tag"
 
     deploy_chromatic:
         name: "Deploy chromatic"
         needs: [build_publish_NPM]
+        if: false
         runs-on: ubuntu-latest
         steps:
             -   name: "Checkout repository"
