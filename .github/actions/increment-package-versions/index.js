@@ -25,6 +25,11 @@ async function main({ inputs, context }) {
     const npmLatestVersion = await getVersion('latest');
 
     if (releaseType !== 'prerelease') {
+        // Exit if not on master
+        if (baseBranch !== 'master') {
+            console.log(`New ${releaseType} release can only be created from master branch.\n`);
+            process.exit(1);
+        }
 
         const localVersion = require(`${process.env.GITHUB_WORKSPACE}/lerna.json`).version;
         if (localVersion !== npmLatestVersion) {
