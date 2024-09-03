@@ -74,10 +74,13 @@ jobs:
 
                     # Create tag
                     tag="v${{ needs.is_release_commit.outputs.version }}"
+                    echo "tag=$tag" >> $GITHUB_OUTPUT
                     git tag "$tag"
 
                     # Push tag
                     git push origin "$tag"
+        outputs:
+            tag: ${{ steps.git.outputs.tag }}
 
     deploy_chromatic:
         name: "Deploy chromatic"
@@ -128,21 +131,22 @@ jobs:
             -   run: |
                     echo "git_commit=$(git rev-parse HEAD)" >> $GITHUB_ENV
                     echo "build_date=$(date --rfc-3339=seconds)" >> $GITHUB_ENV
+                    echo "version=${{ needs.build_publish_NPM.outputs.tag }}" >> $GITHUB_ENV
 
             -   name: "Docker metadata"
                 id: meta
                 uses: docker/metadata-action@f206c36955d3cc6213c38fb3747d9ba4113e686a
                 with:
                     tags: |
-                        type=match,pattern=/^v?(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/
-                        type=raw,enable=true,priority=200,value=${{ env.git_commit }},event=tag
+                        type=raw,value=${{ env.version }}
+                        type=raw,value=${{ env.git_commit }}
                     images: |
                         ${{ env.GCP_PROD_REGISTRY }}/design-system
                     labels: |
                         com.lumapps.image.created=${{ env.build_date }}
                         com.lumapps.image.sha1=${{ env.git_commit }}
                         com.lumapps.image.authors=frontend@lumapps.com
-                        com.lumapps.image.version={{tag}}
+                        com.lumapps.image.version=${{ env.version }}
 
             -   name: "Build image"
                 uses: docker/build-push-action@c56af957549030174b10d6867f20e78cfd7debc5
