@@ -22,16 +22,18 @@ async function getLatestVersionChangelog() {
 /**
  * Generate release note and create a release on GH.
  */
-async function main({ versionTag, github, context }) {
-    const [{ version, versionChangelog }, storybookURL] = await Promise.all([
-        getLatestVersionChangelog(),
-        getStoryBookURL(versionTag),
-    ]);
+async function main({ github, context }) {
+    const storybookURLPromise = getStoryBookURL(context.sha);
+    const { version, versionChangelog } = await getLatestVersionChangelog();
+    const versionTag = `v${version}`;
 
+    // Related links
     const changelogURL = `https://github.com/lumapps/design-system/blob/${versionTag}/CHANGELOG.md`;
+    const storyBookURL = await storybookURLPromise;
+    const links = `[🎨 StoryBook](${storyBookURL}) - [📄 See changelog history](${changelogURL})`;
 
     // Release notes
-    const body = `### [🎨 StoryBook](${storybookURL})\n\n### [📄 Changelog](${changelogURL})\n\n${versionChangelog}`;
+    const body = `${versionChangelog}\n\n${links}`;
 
     await github.rest.repos.createRelease({
         draft: false,
@@ -40,7 +42,7 @@ async function main({ versionTag, github, context }) {
         owner: context.repo.owner,
         repo: context.repo.repo,
         tag_name: versionTag,
-        name: `v${version}`,
+        name: versionTag,
         body,
     });
 }
@@ -49,8 +51,7 @@ module.exports = main;
 
 // Example use (run with `node .github/actions/release-note/index.js`)
 if (require.main === module) main({
-    versionTag: 'v3.0.5',
-    context: { repo: { repo: 'design-system', owner: 'lumapps' } },
+    context: { repo: { repo: 'design-system', owner: 'lumapps' }, sha: 'cdde1f3d1' },
     // Mocked GH API
     github: { rest: { repos: { createRelease: console.log } } },
 });

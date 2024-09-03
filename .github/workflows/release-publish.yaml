@@ -1,19 +1,45 @@
-name: "Build & Push Demo Site"
+name: "Publish Release Workflow"
 
-# Build and push the demo site on the docker registry when a new release tag is pushed on GitHub
+# When merging release commit on master
+# - Build & publish NPM libs
+# - Create & push git tag
+# - Build & publish demo site docker image
+# - Deploy chromatic
+# - Create GH release notes
 
 on:
-    push:
-        tags:
-            - v*
+    pull_request
 
 concurrency:
     group: "${{ github.workflow }}-${{ github.ref_name }}"
     cancel-in-progress: true
 
 jobs:
-    build_demo_site:
-        name: "Build & push demo site"
+    build_publish_NPM:
+        name: "Build & publish NPM libs"
+        runs-on: ubuntu-latest
+        steps:
+            -   name: "Checkout repository"
+                uses: actions/checkout@v3
+                with:
+                    token: '${{ secrets.GITBOT_TOKEN }}'
+                    fetch-depth: 0
+
+            -   name: "Git tag"
+                id: git
+                run: |
+                    set -x
+
+                    # Create tag
+                    tag="test-v${{ needs.is_release_commit.outputs.version }}"
+                    git tag "$tag"
+
+                    # Push tag
+                    git push origin "$tag"
+
+    deploy_demo_site:
+        name: "Deploy demo site"
+        needs: [build_publish_NPM]
         timeout-minutes: 30
         runs-on: ubuntu-latest
         env:
@@ -21,6 +47,8 @@ jobs:
         steps:
             -   name: "Checkout repository"
                 uses: actions/checkout@v3
+                with:
+                    fetch-depth: 0
 
             -   name: "Login to GCR"
                 uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
@@ -66,3 +94,8 @@ jobs:
                     labels: ${{ steps.meta.outputs.labels }}
                     cache-from: type=gha, scope=${{ github.workflow }}
                     cache-to: type=gha, scope=${{ github.workflow }}, mode=max
+
+            -   name: "Deploy site"
+                env:
+                    GH_TOKEN: ${{ secrets.GITBOT_TOKEN }}
+                run: gh workflow run -R lumapps/design-system-deployment update-lumx-version.yml
