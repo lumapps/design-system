@@ -8,42 +8,15 @@ name: "Publish Release Workflow"
 # - Create GH release notes
 
 on:
-    push:
-        branches:
-            - master
+    pull_request
 
 concurrency:
     group: "${{ github.workflow }}-${{ github.ref_name }}"
     cancel-in-progress: true
 
 jobs:
-    is_release_commit:
-        name: "Check is release commit"
-        runs-on: ubuntu-latest
-        steps:
-            -   name: "Checkout repository"
-                uses: actions/checkout@v3
-                with:
-                    ref: ${{ github.event.pull_request.head.sha || env.GITHUB_SHA }}
-
-            -   name: "Check is release commit"
-                id: check
-                run: |
-                    set -x # verbose
-                    message=$(git show -s --format=%s)
-                    version=$(echo $message | egrep -o '[0-9]+\.[0-9]+\.[0-9]+' || true)
-
-                    # Check is release commit has version
-                    if [[ "$message" == 'chore(release): release v'* ]] && [ -n "$version" ]; then
-                        echo "version=$version" >> "$GITHUB_OUTPUT"
-                    fi
-        outputs:
-            version: ${{ steps.check.outputs.version }}
-
     build_publish_NPM:
         name: "Build & publish NPM libs"
-        needs: [is_release_commit]
-        if: ${{ needs.is_release_commit.outputs.version }}
         runs-on: ubuntu-latest
         steps:
             -   name: "Checkout repository"
@@ -52,52 +25,17 @@ jobs:
                     token: '${{ secrets.GITBOT_TOKEN }}'
                     fetch-depth: 0
 
-            -   name: "Setup"
-                uses: ./.github/actions/setup
-
-            -   name: "Build libs"
-                run: yarn build:libs
-
-            -   name: "Publish version to NPM"
-                env:
-                    NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-                run: |
-                    for package in $(echo packages/lumx-*);
-                    do
-                        (echo "Publishing $package"; cd $package/dist; npm publish --tag latest)
-                    done
-
             -   name: "Git tag"
                 id: git
                 run: |
                     set -x
 
                     # Create tag
-                    tag="v${{ needs.is_release_commit.outputs.version }}"
+                    tag="test-v${{ needs.is_release_commit.outputs.version }}"
                     git tag "$tag"
 
                     # Push tag
                     git push origin "$tag"
-
-    deploy_chromatic:
-        name: "Deploy chromatic"
-        needs: [build_publish_NPM]
-        runs-on: ubuntu-latest
-        steps:
-            -   name: "Checkout repository"
-                uses: actions/checkout@v3
-                with:
-                    fetch-depth: 0 # retrieve all the repo history (required by chromatic)
-
-            -   name: "Setup"
-                uses: ./.github/actions/setup
-
-            -   name: "Deploy chromatic"
-                uses: chromaui/action@3f82bf5d065290658af8add6dce946809ee0f923 #v6.1.0
-                with:
-                    token: ${{ secrets.GITHUB_TOKEN }}
-                    projectToken: ${{ secrets.CHROMATIC_TOKEN }}
-                    buildScriptName: build:storybook
 
     deploy_demo_site:
         name: "Deploy demo site"
@@ -161,16 +99,3 @@ jobs:
                 env:
                     GH_TOKEN: ${{ secrets.GITBOT_TOKEN }}
                 run: gh workflow run -R lumapps/design-system-deployment update-lumx-version.yml
-
-    create_gh_release:
-        name: "Create release note"
-        needs: [build_publish_NPM]
-        runs-on: ubuntu-latest
-        steps:
-            -   name: "Checkout repository"
-                uses: actions/checkout@v3
-
-            -   name: "Create release note"
-                uses: ./.github/actions/release-note
-
-
