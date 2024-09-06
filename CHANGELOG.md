@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `Tooltip`: fix re-render errors when removing the label.
 -   `useImageLightbox`: update props each time the lightbox opens.
+-   `ImageLightbox`: fix reset zoom scale when switching to the first item.
 
 ## [3.9.0][] - 2024-09-03
 
