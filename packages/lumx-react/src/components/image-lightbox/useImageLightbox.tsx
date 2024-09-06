@@ -25,10 +25,10 @@ type TriggerOptions = Pick<ImageLightboxProps, 'activeImageIndex'>;
  * - Associate a trigger with an image to display on open
  * - Automatically provide a view transition between an image trigger and the displayed image on open & close
  *
- * @param initialProps Images to display in the image lightbox
+ * @param props Images to display in the image lightbox
  */
 export function useImageLightbox<P extends Partial<ImageLightboxProps>>(
-    initialProps: P,
+    props: P,
 ): {
     /**
      * Generates trigger props
@@ -38,16 +38,19 @@ export function useImageLightbox<P extends Partial<ImageLightboxProps>>(
     /** Props to forward to the ImageLightbox */
     imageLightboxProps: ManagedProps & P;
 } {
-    const { images = [], ...otherProps } = initialProps;
+    const propsRef = React.useRef(props);
 
-    const imagesPropsRef = React.useRef(images);
     React.useEffect(() => {
-        imagesPropsRef.current = images.map((props) => ({ imgRef: React.createRef(), ...props }));
-    }, [images]);
+        const newProps = { ...props };
+        if (newProps?.images) {
+            newProps.images = newProps.images.map((image) => ({ imgRef: React.createRef(), ...image }));
+        }
+        propsRef.current = newProps;
+    }, [props]);
 
     const currentImageRef = React.useRef<HTMLImageElement>(null);
     const [imageLightboxProps, setImageLightboxProps] = React.useState(
-        () => ({ ...EMPTY_PROPS, ...otherProps }) as ManagedProps & P,
+        () => ({ ...EMPTY_PROPS, ...props }) as ManagedProps & P,
     );
 
     const getTriggerProps = React.useMemo(() => {
@@ -58,9 +61,9 @@ export function useImageLightbox<P extends Partial<ImageLightboxProps>>(
             if (!currentImage) {
                 return;
             }
-            const currentIndex = imagesPropsRef.current.findIndex(
+            const currentIndex = propsRef.current?.images?.findIndex(
                 ({ imgRef }) => (imgRef as any)?.current === currentImage,
-            );
+            ) as number;
 
             await startViewTransition({
                 changes() {
@@ -81,7 +84,7 @@ export function useImageLightbox<P extends Partial<ImageLightboxProps>>(
             const triggerImage = triggerImageRefs[activeImageIndex as any]?.current || findImage(triggerElement);
 
             // Inject the trigger image as loading placeholder for better loading state
-            const imagesWithFallbackSize = imagesPropsRef.current.map((image, idx) => {
+            const imagesWithFallbackSize = propsRef.current?.images?.map((image, idx) => {
                 if (triggerImage && idx === activeImageIndex && !image.loadingPlaceholderImageRef) {
                     return { ...image, loadingPlaceholderImageRef: { current: triggerImage } };
                 }
@@ -93,6 +96,7 @@ export function useImageLightbox<P extends Partial<ImageLightboxProps>>(
                     // Open lightbox with setup props
                     setImageLightboxProps((prevProps) => ({
                         ...prevProps,
+                        ...propsRef.current,
                         activeImageRef: currentImageRef,
                         parentElement: { current: triggerElement },
                         isOpen: true,
