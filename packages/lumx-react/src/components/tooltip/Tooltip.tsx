@@ -66,9 +66,9 @@ const ARROW_SIZE = 8;
  */
 export const Tooltip: Comp<TooltipProps, HTMLDivElement> = forwardRef((props, ref) => {
     const { label, children, className, delay, placement, forceOpen, ...forwardedProps } = props;
-    // Disable in SSR or without a label.
-    if (!DOCUMENT || !label) {
-        return <TooltipContextProvider>{children}</TooltipContextProvider>;
+    // Disable in SSR.
+    if (!DOCUMENT) {
+        return <>{children}</>;
     }
 
     const id = useId();
@@ -87,7 +87,7 @@ export const Tooltip: Comp<TooltipProps, HTMLDivElement> = forwardRef((props, re
 
     const position = attributes?.popper?.['data-popper-placement'] ?? placement;
     const { isOpen: isActivated, onPopperMount } = useTooltipOpen(delay, anchorElement);
-    const isOpen = isActivated || forceOpen;
+    const isOpen = (isActivated || forceOpen) && !!label;
     const wrappedChildren = useInjectTooltipRef(children, setAnchorElement, isOpen, id, label);
 
     return (

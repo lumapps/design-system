@@ -19,12 +19,14 @@ export const useInjectTooltipRef = (
     setAnchorElement: (e: HTMLDivElement) => void,
     isOpen: boolean | undefined,
     id: string,
-    label: string,
+    label?: string | null | false,
 ): ReactNode => {
     // Only add description when open
     const describedBy = isOpen ? id : undefined;
 
     return useMemo(() => {
+        if (!label) return children;
+
         // Non-disabled element
         if (React.isValidElement(children) && children.props.disabled !== true && children.props.isDisabled !== true) {
             const ref = mergeRefs((children as any).ref, setAnchorElement);
