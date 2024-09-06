@@ -89,7 +89,7 @@ export const ImageSlideshow: React.FC<ImageSlideshowProps> = ({
     const zoomOut = React.useCallback(() => onScaleChange?.(0.5), [onScaleChange]);
     React.useEffect(() => {
         // Reset scale on slide change
-        if (activeIndex) setScale(undefined);
+        if (typeof activeIndex === 'number') setScale(undefined);
     }, [activeIndex]);
     const zoomControls = zoomEnabled && (
         <>
