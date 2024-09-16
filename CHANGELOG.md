@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `useImageLightbox`: update props each time the lightbox opens.
 -   `ImageLightbox`: fix reset zoom scale when switching to the first item.
 -   `ButtonGroup`: fixed border radius style with single button or `.visually-hidden` children.
+-   `ImageLightbox`: fix zoom center based on mouse position on mouse wheel zoom.
 
 ## [3.9.0][] - 2024-09-03
 

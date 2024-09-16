@@ -53,8 +53,8 @@ export function usePointerZoom(
 
             // Update scale on next frame (focused on the mouse position)
             updateScaleOnNextFrame(newScale, {
-                x: event.pageX,
-                y: event.pageY,
+                x: event.clientX,
+                y: event.clientY,
             });
         }
 
