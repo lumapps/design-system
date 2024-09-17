@@ -12,5 +12,5 @@
     "main": "generators/index.js",
     "name": "generator-lumx-component",
     "private": true,
-    "version": "3.9.0"
+    "version": "3.9.1"
 }
