@@ -93,7 +93,7 @@
     &__pagination {
         align-items: center;
         // Compute max width for N items based on their size, margin and focus outline
-        max-width: ($item-max-count * ($item-size + $item-margin-inline)) + $item-focus-outline * 2;
+        max-width: ($item-max-count * ($item-size + $item-margin-inline)) + $item-focus-outline * 2 + $item-size;
         overflow: hidden;
     }
 
@@ -130,16 +130,20 @@
         }
 
         #{$self}--theme-light & {
-            background-color: lumx-color-variant("dark", "L4");
+            background-color:lumx-color-variant("dark", "L5");
 
             &[data-focus-visible-added] {
                 @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "LOW"), "dark");
             }
 
-            &:hover,
+            &:hover {
+                background-color: lumx-color-variant("primary", "N");
+            }
             &--is-active {
                 background-color: lumx-color-variant("primary", "N");
-
+                width: $item-size*2;
+                border-radius: $lumx-border-radius;
+                
                 &[data-focus-visible-added] {
                     @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "LOW"), "primary");
                 }
@@ -147,15 +151,19 @@
         }
 
         #{$self}--theme-dark & {
-            background-color: lumx-color-variant("light", "L4");
+            background-color: lumx-color-variant("light", "L5");
 
             &[data-focus-visible-added] {
                 @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "LOW"), "light");
             }
 
-            &:hover,
+            &:hover {
+                background-color: lumx-color-variant("light", "N");
+            }
             &--is-active {
                 background-color: lumx-color-variant("light", "N");
+                width: $item-size*2;
+                border-radius: $lumx-border-radius;
 
                 &[data-focus-visible-added] {
                     @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "LOW"), "light");
