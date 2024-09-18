@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- `Slideshow`: Changed active pagination item width for better a11y.
+
 ## [3.9.1][] - 2024-09-17
 
 ### Fixed
