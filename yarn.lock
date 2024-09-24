@@ -3802,7 +3802,7 @@ __metadata:
     "@xmldom/xmldom": ^0.8.3
     fonteditor-core: ^2.3.2
     lodash: 4.17.21
-    rollup: 2.26.10
+    rollup: 3.29.5
     rollup-plugin-babel: ^4.4.0
     rollup-plugin-cleaner: ^1.0.0
     rollup-plugin-copy: ^3.3.0
@@ -3891,7 +3891,7 @@ __metadata:
     react-dom: ^17.0.2
     react-is: ">=16.13.0"
     react-popper: ^2.2.4
-    rollup: 2.26.10
+    rollup: 3.29.5
     rollup-plugin-analyzer: ^3.3.0
     rollup-plugin-babel: ^4.4.0
     rollup-plugin-cleaner: ^1.0.0
@@ -29935,17 +29935,17 @@ resolve@^1.9.0:
   languageName: node
   linkType: hard
 
-"rollup@npm:2.26.10":
-  version: 2.26.10
-  resolution: "rollup@npm:2.26.10"
+"rollup@npm:3.29.5":
+  version: 3.29.5
+  resolution: "rollup@npm:3.29.5"
   dependencies:
-    fsevents: ~2.1.2
+    fsevents: ~2.3.2
   dependenciesMeta:
     fsevents:
       optional: true
   bin:
     rollup: dist/bin/rollup
-  checksum: c6411836382629bbd4a1030e5879855ed84e1c0a9406fa0f16166ad7b7e620573813c14c4b7e5fdb8d61b83d0cd1c20993738237c533b6aeea54816600b9e356
+  checksum: 6f8304e58ac8170a715e61e46c4aa674b2ae2587ed2a712dab58f72e5e54803ae40b485fbe6b3e6a694f4c8f7a59ab936ccf9f6b686c7cfd1f1970fa9ecadf1a
   languageName: node
   linkType: hard
 
