@@ -7,7 +7,7 @@ import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
 
 import { Emphasis, Icon, Size, IconButton, IconButtonProps } from '@lumx/react';
 
-import { Comp, GenericProps, isComponent } from '@lumx/react/utils/type';
+import { Comp, GenericProps, HasCloseMode, isComponent } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { renderLink } from '@lumx/react/utils/renderLink';
 import { renderButtonOrLink } from '@lumx/react/utils/renderButtonOrLink';
@@ -16,7 +16,7 @@ import { useId } from '@lumx/react/hooks/useId';
 /**
  * Defines the props of the component.
  */
-export interface SideNavigationItemProps extends GenericProps {
+export interface SideNavigationItemProps extends GenericProps, HasCloseMode {
     /** SideNavigationItem elements. */
     children?: ReactNode;
     /** Emphasis variant. */
@@ -36,11 +36,6 @@ export interface SideNavigationItemProps extends GenericProps {
     /** Props to pass to the toggle button (minus those already set by the SideNavigationItem props). */
     toggleButtonProps: Pick<IconButtonProps, 'label'> &
         Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis' | 'color' | 'size'>;
-    /**
-     * Choose how the children are hidden when closed
-     * ('hide' keeps the children in DOM but hide them, 'unmount' remove the children from the DOM).
-     */
-    closeMode?: 'hide' | 'unmount';
     /** On action button click callback. */
     onActionClick?(evt: React.MouseEvent): void;
     /** On click callback. */

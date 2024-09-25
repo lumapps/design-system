@@ -158,6 +158,19 @@ describe(`<${Tooltip.displayName}>`, () => {
             // Children ref is stable
             expect(ref.current === element).toBe(true);
         });
+
+        it.only('should render in closeMode=hide', async () => {
+            const { tooltip, anchorWrapper } = await setup({
+                label: 'Tooltip label',
+                children: <Button>Anchor</Button>,
+                closeMode: 'hide',
+            });
+            expect(tooltip).toBeInTheDocument();
+            expect(anchorWrapper).toBeInTheDocument();
+            expect(anchorWrapper).toHaveAttribute('aria-describedby', tooltip?.id);
+            const button = screen.queryByRole('button', { name: 'Anchor' });
+            expect(button?.parentElement).toBe(anchorWrapper);
+        });
     });
 
     describe('activation', () => {

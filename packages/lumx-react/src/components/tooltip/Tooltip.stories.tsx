@@ -42,6 +42,14 @@ export const ForceOpen = {
     },
 };
 
+/** Hide on close instead of unmounting */
+export const CloseModeHide = {
+    args: {
+        ...OnAButton.args,
+        closeMode: 'hide',
+    },
+};
+
 /** Display a multiline tooltip */
 export const MultilineTooltip = {
     args: {
