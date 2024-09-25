@@ -1,6 +1,6 @@
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { browserDoesNotSupportHover } from '@lumx/react/utils/browserDoesNotSupportHover';
-import { TOOLTIP_HOVER_DELAY, TOOLTIP_LONG_PRESS_DELAY } from '@lumx/react/constants';
+import { IS_BROWSER, TOOLTIP_HOVER_DELAY, TOOLTIP_LONG_PRESS_DELAY } from '@lumx/react/constants';
 import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { isFocusVisible } from '@lumx/react/utils/isFocusVisible';
 
@@ -31,9 +31,12 @@ export function useTooltipOpen(delay: number | undefined, anchorElement: HTMLEle
         // Run timer to defer updating the isOpen state.
         const deferUpdate = (duration: number) => {
             if (timer) clearTimeout(timer);
-            timer = setTimeout(() => {
+            const update = () => {
                 setIsOpen(!!shouldOpen);
-            }, duration) as any;
+            };
+            // Skip timeout in fake browsers
+            if (!IS_BROWSER) update();
+            else timer = setTimeout(update, duration) as any;
         };
 
         const hoverNotSupported = browserDoesNotSupportHover();

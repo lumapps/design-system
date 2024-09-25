@@ -15,3 +15,8 @@ export const WINDOW = typeof window !== 'undefined' ? window : undefined;
  * Optional global `document` instance (not defined when running SSR).
  */
 export const DOCUMENT = typeof document !== 'undefined' ? document : undefined;
+
+/**
+ * Check if we are running in a true browser
+ */
+export const IS_BROWSER = typeof navigator !== 'undefined' && !navigator.userAgent.includes('jsdom');
