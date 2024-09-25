@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Button, IconButton } from '@lumx/react';
-import { screen, render, waitFor } from '@testing-library/react';
+import { screen, render } from '@testing-library/react';
 import { queryAllByTagName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import userEvent from '@testing-library/user-event';
@@ -48,8 +48,21 @@ describe(`<${Tooltip.displayName}>`, () => {
                 forceOpen: true,
             });
             expect(tooltip).toBeInTheDocument();
+            // Default placement
+            expect(tooltip).toHaveAttribute('data-popper-placement', 'bottom');
             expect(anchorWrapper).toBeInTheDocument();
             expect(anchorWrapper).toHaveAttribute('aria-describedby', tooltip?.id);
+        });
+
+        it('should render with custom placement', async () => {
+            const { tooltip } = await setup({
+                label: 'Tooltip label',
+                children: 'Anchor',
+                forceOpen: true,
+                placement: 'top',
+            });
+            // Custom placement
+            expect(tooltip).toHaveAttribute('data-popper-placement', 'top');
         });
 
         it('should wrap unknown children and not add aria-describedby when closed', async () => {
@@ -159,17 +172,17 @@ describe(`<${Tooltip.displayName}>`, () => {
             expect(ref.current === element).toBe(true);
         });
 
-        it.only('should render in closeMode=hide', async () => {
-            const { tooltip, anchorWrapper } = await setup({
+        it('should render in closeMode=hide', async () => {
+            const { tooltip } = await setup({
                 label: 'Tooltip label',
                 children: <Button>Anchor</Button>,
                 closeMode: 'hide',
+                forceOpen: false,
             });
             expect(tooltip).toBeInTheDocument();
-            expect(anchorWrapper).toBeInTheDocument();
-            expect(anchorWrapper).toHaveAttribute('aria-describedby', tooltip?.id);
+            expect(tooltip).toHaveClass('lumx-tooltip--is-hidden');
             const button = screen.queryByRole('button', { name: 'Anchor' });
-            expect(button?.parentElement).toBe(anchorWrapper);
+            expect(button).toHaveAttribute('aria-describedby', tooltip?.id);
         });
     });
 
@@ -193,12 +206,11 @@ describe(`<${Tooltip.displayName}>`, () => {
             expect(button).toHaveAttribute('aria-describedby', tooltip?.id);
 
             // Un-hover anchor button
-            userEvent.unhover(button);
-            await waitFor(() => {
-                expect(button).not.toHaveFocus();
-                // Tooltip closed
-                expect(tooltip).not.toBeInTheDocument();
-            });
+            await userEvent.unhover(button);
+
+            expect(button).not.toHaveFocus();
+            // Tooltip closed
+            expect(tooltip).not.toBeInTheDocument();
         });
 
         it('should activate on hover anchor and then tooltip', async () => {
@@ -225,12 +237,10 @@ describe(`<${Tooltip.displayName}>`, () => {
             expect(button).toHaveAttribute('aria-describedby', tooltip?.id);
 
             // Un-hover tooltip
-            userEvent.unhover(tooltip);
-            await waitFor(() => {
-                expect(button).not.toHaveFocus();
-                // Tooltip closed
-                expect(tooltip).not.toBeInTheDocument();
-            });
+            await userEvent.unhover(tooltip);
+            expect(button).not.toHaveFocus();
+            // Tooltip closed
+            expect(tooltip).not.toBeInTheDocument();
         });
 
         it('should activate on anchor focus visible and close on escape', async () => {

@@ -1,20 +1,20 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { forwardRef, ReactNode, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { usePopper } from 'react-popper';
 
 import classNames from 'classnames';
 
 import { DOCUMENT } from '@lumx/react/constants';
 import { Comp, GenericProps, HasCloseMode } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
-import { mergeRefs } from '@lumx/react/utils/mergeRefs';
+import { useMergeRefs } from '@lumx/react/utils/mergeRefs';
 import { Placement } from '@lumx/react/components/popover';
 import { TooltipContextProvider } from '@lumx/react/components/tooltip/context';
 import { useId } from '@lumx/react/hooks/useId';
 
 import { useInjectTooltipRef } from './useInjectTooltipRef';
 import { useTooltipOpen } from './useTooltipOpen';
+import { usePopper } from '@lumx/react/hooks/usePopper';
 
 /** Position of the tooltip relative to the anchor element. */
 export type TooltipPlacement = Extract<Placement, 'top' | 'right' | 'bottom' | 'left'>;
@@ -94,13 +94,14 @@ export const Tooltip: Comp<TooltipProps, HTMLDivElement> = forwardRef((props, re
 
     const labelLines = label ? label.split('\n') : [];
 
+    const tooltipRef = useMergeRefs(ref, setPopperElement, onPopperMount);
     return (
         <>
             <TooltipContextProvider>{wrappedChildren}</TooltipContextProvider>
             {isMounted &&
                 createPortal(
                     <div
-                        ref={mergeRefs(ref, setPopperElement, onPopperMount)}
+                        ref={tooltipRef}
                         {...forwardedProps}
                         id={id}
                         role="tooltip"
