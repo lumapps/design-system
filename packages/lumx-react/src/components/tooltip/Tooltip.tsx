@@ -6,7 +6,7 @@ import { usePopper } from 'react-popper';
 import classNames from 'classnames';
 
 import { DOCUMENT } from '@lumx/react/constants';
-import { Comp, GenericProps } from '@lumx/react/utils/type';
+import { Comp, GenericProps, HasCloseMode } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 import { Placement } from '@lumx/react/components/popover';
@@ -22,7 +22,7 @@ export type TooltipPlacement = Extract<Placement, 'top' | 'right' | 'bottom' | '
 /**
  * Defines the props of the component.
  */
-export interface TooltipProps extends GenericProps {
+export interface TooltipProps extends GenericProps, HasCloseMode {
     /** Anchor (element on which we activate the tooltip). */
     children: ReactNode;
     /** Delay (in ms) before closing the tooltip. */
@@ -50,6 +50,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: Partial<TooltipProps> = {
     placement: Placement.BOTTOM,
+    closeMode: 'unmount',
 };
 
 /**
@@ -65,7 +66,7 @@ const ARROW_SIZE = 8;
  * @return React element.
  */
 export const Tooltip: Comp<TooltipProps, HTMLDivElement> = forwardRef((props, ref) => {
-    const { label, children, className, delay, placement, forceOpen, ...forwardedProps } = props;
+    const { label, children, className, delay, placement, forceOpen, closeMode, ...forwardedProps } = props;
     // Disable in SSR.
     if (!DOCUMENT) {
         return <>{children}</>;
@@ -88,28 +89,38 @@ export const Tooltip: Comp<TooltipProps, HTMLDivElement> = forwardRef((props, re
     const position = attributes?.popper?.['data-popper-placement'] ?? placement;
     const { isOpen: isActivated, onPopperMount } = useTooltipOpen(delay, anchorElement);
     const isOpen = (isActivated || forceOpen) && !!label;
-    const wrappedChildren = useInjectTooltipRef(children, setAnchorElement, isOpen, id, label);
+    const isMounted = isOpen || closeMode === 'hide';
+    const wrappedChildren = useInjectTooltipRef(children, setAnchorElement, isMounted, id, label);
+
+    const labelLines = label ? label.split('\n') : [];
 
     return (
         <>
             <TooltipContextProvider>{wrappedChildren}</TooltipContextProvider>
-            {isOpen &&
+            {isMounted &&
                 createPortal(
                     <div
                         ref={mergeRefs(ref, setPopperElement, onPopperMount)}
                         {...forwardedProps}
                         id={id}
                         role="tooltip"
-                        aria-label={label}
-                        className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, position }))}
+                        aria-label={label || ''}
+                        className={classNames(
+                            className,
+                            handleBasicClasses({
+                                prefix: CLASSNAME,
+                                position,
+                                hidden: !isOpen && closeMode === 'hide',
+                            }),
+                        )}
                         style={styles.popper}
                         {...attributes.popper}
                     >
                         <div className={`${CLASSNAME}__arrow`} />
                         <div className={`${CLASSNAME}__inner`}>
-                            {label.indexOf('\n') !== -1
-                                ? label.split('\n').map((sentence: string) => <p key={sentence}>{sentence}</p>)
-                                : label}
+                            {labelLines.map((line) => (
+                                <p key={line}>{line}</p>
+                            ))}
                         </div>
                     </div>,
                     document.body,
