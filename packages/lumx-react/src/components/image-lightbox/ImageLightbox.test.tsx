@@ -145,10 +145,17 @@ describe(`<${ImageLightbox.displayName}>`, () => {
 
             // Focus moved to the close button
             const imageLightbox = queries.getImageLightbox();
-            expect(queries.queryCloseButton(imageLightbox)).toHaveFocus();
+            const closeButton = queries.queryCloseButton(imageLightbox);
+            expect(closeButton).toHaveFocus();
+            const tooltip = screen.getByRole('tooltip', { name: 'Close' });
+            expect(tooltip).toBeInTheDocument();
 
             // Image lightbox opened on the correct image
             expect(queries.queryImage(imageLightbox, 'Image 2')).toBeInTheDocument();
+
+            // Close tooltip
+            await userEvent.keyboard('{escape}');
+            expect(tooltip).not.toBeInTheDocument();
 
             // Close on escape
             await userEvent.keyboard('{escape}');

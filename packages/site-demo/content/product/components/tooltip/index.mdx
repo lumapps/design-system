@@ -25,6 +25,10 @@ Tooltips implement the [WAI-ARIA tooltip role](https://www.w3.org/WAI/ARIA/apg/p
 
 Tooltip messages should be concise, directly describing the element that triggered it and should not contain essential information.
 
+By default, the tooltip is linked to the anchor via `aria-describedby`, meaning as a description of the anchor element. Use `ariaLinkMode="aria-labelledby"` to link to the anchor via `aria-labelledby` and thus using the tooltip as the label for the anchor.
+
+Use `closeMode="hide"` to render the tooltip hidden when not activated and keep to more accessible to screen readers. By default `closeMode="unmount"` is used and the tooltip only render when activated.
+
 Consider using the [Popover](/product/components/popover/#accessibility-concerns) as a disclosure element to show longer or richer messages.
 
 ### Properties

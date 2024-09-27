@@ -11,10 +11,11 @@ import { useMergeRefs } from '@lumx/react/utils/mergeRefs';
 import { Placement } from '@lumx/react/components/popover';
 import { TooltipContextProvider } from '@lumx/react/components/tooltip/context';
 import { useId } from '@lumx/react/hooks/useId';
+import { usePopper } from '@lumx/react/hooks/usePopper';
 
+import { ARIA_LINK_MODES } from '@lumx/react/components/tooltip/constants';
 import { useInjectTooltipRef } from './useInjectTooltipRef';
 import { useTooltipOpen } from './useTooltipOpen';
-import { usePopper } from '@lumx/react/hooks/usePopper';
 
 /** Position of the tooltip relative to the anchor element. */
 export type TooltipPlacement = Extract<Placement, 'top' | 'right' | 'bottom' | 'left'>;
@@ -33,6 +34,8 @@ export interface TooltipProps extends GenericProps, HasCloseMode {
     label?: string | null | false;
     /** Placement of the tooltip relative to the anchor. */
     placement?: TooltipPlacement;
+    /** Choose how the tooltip text should link to the anchor */
+    ariaLinkMode?: (typeof ARIA_LINK_MODES)[number];
 }
 
 /**
@@ -51,6 +54,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
 const DEFAULT_PROPS: Partial<TooltipProps> = {
     placement: Placement.BOTTOM,
     closeMode: 'unmount',
+    ariaLinkMode: 'aria-describedby',
 };
 
 /**
@@ -66,7 +70,8 @@ const ARROW_SIZE = 8;
  * @return React element.
  */
 export const Tooltip: Comp<TooltipProps, HTMLDivElement> = forwardRef((props, ref) => {
-    const { label, children, className, delay, placement, forceOpen, closeMode, ...forwardedProps } = props;
+    const { label, children, className, delay, placement, forceOpen, closeMode, ariaLinkMode, ...forwardedProps } =
+        props;
     // Disable in SSR.
     if (!DOCUMENT) {
         return <>{children}</>;
@@ -89,8 +94,15 @@ export const Tooltip: Comp<TooltipProps, HTMLDivElement> = forwardRef((props, re
     const position = attributes?.popper?.['data-popper-placement'] ?? placement;
     const { isOpen: isActivated, onPopperMount } = useTooltipOpen(delay, anchorElement);
     const isOpen = (isActivated || forceOpen) && !!label;
-    const isMounted = isOpen || closeMode === 'hide';
-    const wrappedChildren = useInjectTooltipRef(children, setAnchorElement, isMounted, id, label);
+    const isMounted = !!label && (isOpen || closeMode === 'hide');
+    const wrappedChildren = useInjectTooltipRef({
+        children,
+        setAnchorElement,
+        isMounted,
+        id,
+        label,
+        ariaLinkMode: ariaLinkMode as any,
+    });
 
     const labelLines = label ? label.split('\n') : [];
 
