@@ -59,7 +59,6 @@ export interface HasClassName {
     className?: string;
 }
 
-
 export interface HasCloseMode {
     /**
      * Choose how the children are hidden when closed
