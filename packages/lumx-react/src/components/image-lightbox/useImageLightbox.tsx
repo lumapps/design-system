@@ -41,12 +41,11 @@ export function useImageLightbox<P extends Partial<ImageLightboxProps>>(
     const propsRef = React.useRef(props);
 
     React.useEffect(() => {
-        const newProps = { ...props };
-        if (newProps?.images) {
-            newProps.images = newProps.images.map((image) => ({ imgRef: React.createRef(), ...image }));
-        }
-        propsRef.current = newProps;
+        propsRef.current = props;
     }, [props]);
+
+    // Keep reference for each image elements
+    const imageRefsRef = React.useRef<Array<React.RefObject<HTMLImageElement>>>([]);
 
     const currentImageRef = React.useRef<HTMLImageElement>(null);
     const [imageLightboxProps, setImageLightboxProps] = React.useState(
@@ -61,8 +60,8 @@ export function useImageLightbox<P extends Partial<ImageLightboxProps>>(
             if (!currentImage) {
                 return;
             }
-            const currentIndex = propsRef.current?.images?.findIndex(
-                ({ imgRef }) => (imgRef as any)?.current === currentImage,
+            const currentIndex = imageRefsRef.current.findIndex(
+                (imageRef) => imageRef.current === currentImage,
             ) as number;
 
             await startViewTransition({
@@ -83,12 +82,20 @@ export function useImageLightbox<P extends Partial<ImageLightboxProps>>(
             // If we find an image inside the trigger, animate it in transition with the opening image
             const triggerImage = triggerImageRefs[activeImageIndex as any]?.current || findImage(triggerElement);
 
-            // Inject the trigger image as loading placeholder for better loading state
-            const imagesWithFallbackSize = propsRef.current?.images?.map((image, idx) => {
-                if (triggerImage && idx === activeImageIndex && !image.loadingPlaceholderImageRef) {
-                    return { ...image, loadingPlaceholderImageRef: { current: triggerImage } };
+            // Inject refs to improve transition and loading style
+            const images = propsRef.current?.images?.map((image, idx) => {
+                // Get or create image reference
+                let imgRef = imageRefsRef.current[idx];
+                if (!imgRef) {
+                    imgRef = React.createRef();
+                    imageRefsRef.current[idx] = imgRef;
                 }
-                return image;
+
+                // Try to use the trigger image as the loading placeholder
+                const loadingPlaceholderImageRef =
+                    triggerImage && idx === activeImageIndex ? { current: triggerImage } : undefined;
+
+                return { loadingPlaceholderImageRef, ...image, imgRef };
             });
 
             await startViewTransition({
@@ -104,7 +111,7 @@ export function useImageLightbox<P extends Partial<ImageLightboxProps>>(
                             close();
                             prevProps?.onClose?.();
                         },
-                        images: imagesWithFallbackSize,
+                        images,
                         activeImageIndex: activeImageIndex || 0,
                     }));
                 },

@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- `Slideshow`: Changed active pagination item width for better a11y.
+-   `Slideshow`: changed active pagination item width for better a11y.
+-   `ImageLightbox`: fix closing animation cut short because of unstable image reference.
 
 ## [3.9.1][] - 2024-09-17
 
