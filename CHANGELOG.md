@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 -   `Tooltip`: increment z-index making them appear above popovers.
+-   `TextField`: display browser native buttons when used with type="number", add "number" use case documentation.
 
 ## [3.9.1][] - 2024-09-17
 

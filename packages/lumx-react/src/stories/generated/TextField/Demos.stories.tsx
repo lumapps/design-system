@@ -10,6 +10,7 @@ export { App as Disabled } from './disabled';
 export { App as Helper } from './helper';
 export { App as Icon } from './icon';
 export { App as Invalid } from './invalid';
+export { App as Number } from './number';
 export { App as Placeholder } from './placeholder';
 export { App as Required } from './required';
 export { App as TextAreaInvalid } from './text-area-invalid';
