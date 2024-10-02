@@ -81,7 +81,7 @@ export const Tooltip: Comp<TooltipProps, HTMLDivElement> = forwardRef((props, re
 
     const [popperElement, setPopperElement] = useState<null | HTMLElement>(null);
     const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
-    const { styles, attributes } = usePopper(anchorElement, popperElement, {
+    const { styles, attributes, update } = usePopper(anchorElement, popperElement, {
         placement,
         modifiers: [
             {
@@ -103,6 +103,11 @@ export const Tooltip: Comp<TooltipProps, HTMLDivElement> = forwardRef((props, re
         label,
         ariaLinkMode: ariaLinkMode as any,
     });
+
+    // Update on open
+    React.useEffect(() => {
+        if (isOpen) update?.();
+    }, [isOpen, update]);
 
     const labelLines = label ? label.split('\n') : [];
 
