@@ -61,8 +61,9 @@ export const DatePickerControlled: Comp<DatePickerControlledProps, HTMLDivElemen
         return getMonthCalendar(localeObj, selectedMonth, minDate, maxDate);
     }, [locale, minDate, maxDate, selectedMonth]);
 
-    const selectedYear = selectedMonth.toLocaleDateString(locale, { year: 'numeric' }).slice(0, 4);
-    const [currentYear, setCurrentYear] = React.useState(selectedYear);
+    const selectedYear = selectedMonth.getFullYear();
+    const formattedYear = selectedMonth.toLocaleDateString(locale, { year: 'numeric' }).slice(0, 4);
+    const [currentYear, setCurrentYear] = React.useState(String(selectedYear));
 
     // Updates month offset when validating year. Adds or removes 12 months per year when updating year value.
     const updateMonthOffset = React.useCallback(
@@ -110,7 +111,7 @@ export const DatePickerControlled: Comp<DatePickerControlledProps, HTMLDivElemen
 
     // Update current year when selected year changes
     React.useEffect(() => {
-        setCurrentYear(selectedYear);
+        setCurrentYear(String(selectedYear));
     }, [selectedYear]);
 
     const prevSelectedMonth = usePreviousValue(selectedMonth);
@@ -158,12 +159,12 @@ export const DatePickerControlled: Comp<DatePickerControlledProps, HTMLDivElemen
                                 vAlign="center"
                                 dir="auto"
                             >
-                                {RegExp(`(.*)(${selectedYear})(.*)`)
+                                {RegExp(`(.*)(${formattedYear})(.*)`)
                                     .exec(monthYear)
                                     ?.slice(1)
                                     .filter((part) => part !== '')
                                     .map((part) =>
-                                        part === selectedYear ? (
+                                        part === formattedYear ? (
                                             <TextField
                                                 value={currentYear}
                                                 aria-label={yearLabel}
