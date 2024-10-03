@@ -15,7 +15,7 @@ import { skipRender } from '@lumx/react/utils/skipRender';
 
 import { useRestoreFocusOnClose } from './useRestoreFocusOnClose';
 import { usePopoverStyle } from './usePopoverStyle';
-import { Elevation, FitAnchorWidth, Offset, Placement } from './constants';
+import { Elevation, FitAnchorWidth, Offset, Placement, POPOVER_ZINDEX } from './constants';
 
 /**
  * Defines the props of the component.
@@ -88,7 +88,7 @@ const DEFAULT_PROPS: Partial<PopoverProps> = {
     placement: Placement.AUTO,
     focusAnchorOnClose: true,
     usePortal: true,
-    zIndex: 9999,
+    zIndex: POPOVER_ZINDEX,
 };
 
 /** Method to render the popover inside a portal if usePortal is true */
