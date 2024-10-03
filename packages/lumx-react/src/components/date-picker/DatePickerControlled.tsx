@@ -1,6 +1,6 @@
 import React, { KeyboardEventHandler, forwardRef } from 'react';
 import classNames from 'classnames';
-import { DatePickerProps, Emphasis, FlexBox, IconButton, Text, TextField, Toolbar } from '@lumx/react';
+import { DatePickerProps, Emphasis, FlexBox, IconButton, Text, TextField, TextFieldProps, Toolbar } from '@lumx/react';
 import { mdiChevronLeft, mdiChevronRight } from '@lumx/icons';
 import { Comp } from '@lumx/react/utils/type';
 import { getMonthCalendar } from '@lumx/react/utils/date/getMonthCalendar';
@@ -62,35 +62,56 @@ export const DatePickerControlled: Comp<DatePickerControlledProps, HTMLDivElemen
     }, [locale, minDate, maxDate, selectedMonth]);
 
     const selectedYear = selectedMonth.toLocaleDateString(locale, { year: 'numeric' }).slice(0, 4);
-    const [textFieldYearValue, setTextFieldYearValue] = React.useState(selectedYear);
-    const isYearValid = Number(textFieldYearValue) > 0 && Number(textFieldYearValue) <= 9999;
+    const [currentYear, setCurrentYear] = React.useState(selectedYear);
 
     // Updates month offset when validating year. Adds or removes 12 months per year when updating year value.
-    const updateMonthOffset = React.useCallback(() => {
-        if (isYearValid) {
-            const yearNumber = selectedMonth.getFullYear();
-            const offset = (Number(textFieldYearValue) - yearNumber) * 12;
-            if (onMonthChange) {
-                onMonthChange(addMonthResetDay(selectedMonth, offset));
+    const updateMonthOffset = React.useCallback(
+        (newYearValue: string) => {
+            const yearNumber = Number(newYearValue);
+            if (yearNumber < 0 && yearNumber >= 9999) {
+                return;
             }
-        }
-    }, [isYearValid, selectedMonth, textFieldYearValue, onMonthChange]);
 
-    const monthYear = selectedMonth.toLocaleDateString(locale, { year: 'numeric', month: 'long' });
+            const previousYearNumber = selectedMonth.getFullYear();
+            const offset = (yearNumber - previousYearNumber) * 12;
+            onMonthChange?.(addMonthResetDay(selectedMonth, offset));
+        },
+        [selectedMonth, onMonthChange],
+    );
 
-    // Year can only be validated by pressing Enter key or on Blur. The below handles the press Enter key case
-    const handleKeyPress: KeyboardEventHandler = React.useMemo(
-        () => onEnterPressed(updateMonthOffset),
+    const onYearChange = React.useCallback<TextFieldProps['onChange']>(
+        (newYearValue, _, event) => {
+            setCurrentYear(newYearValue);
+
+            // Detect if change is coming from the spin up/down arrows
+            const inputType = (event?.nativeEvent as any)?.inputType;
+            if (
+                // Chrome/Safari
+                !inputType ||
+                // Firefox
+                inputType === 'insertReplacementText'
+            ) {
+                updateMonthOffset(newYearValue);
+            }
+        },
         [updateMonthOffset],
     );
 
-    // Required to update year in the TextField when the user changes year by using prev next month arrows
+    const updateYear = React.useCallback(() => {
+        updateMonthOffset(currentYear);
+    }, [updateMonthOffset, currentYear]);
+
+    const updateYearOnEnterPressed: KeyboardEventHandler = React.useMemo(
+        () => onEnterPressed(updateYear),
+        [updateYear],
+    );
+
+    const monthYear = selectedMonth.toLocaleDateString(locale, { year: 'numeric', month: 'long' });
+
+    // Update current year when selected year changes
     React.useEffect(() => {
-        if (Number(textFieldYearValue) !== selectedMonth.getFullYear()) {
-            setTextFieldYearValue(selectedMonth.getFullYear().toString());
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [selectedMonth]);
+        setCurrentYear(selectedYear);
+    }, [selectedYear]);
 
     const prevSelectedMonth = usePreviousValue(selectedMonth);
     const monthHasChanged = prevSelectedMonth && !isSameDay(selectedMonth, prevSelectedMonth);
@@ -101,7 +122,7 @@ export const DatePickerControlled: Comp<DatePickerControlledProps, HTMLDivElemen
         if (monthHasChanged) setLabelAriaLive('polite');
     }, [monthHasChanged]);
 
-    const label = getYearDisplayName(locale);
+    const yearLabel = getYearDisplayName(locale);
 
     return (
         <div ref={ref} className={`${CLASSNAME}`}>
@@ -144,14 +165,14 @@ export const DatePickerControlled: Comp<DatePickerControlledProps, HTMLDivElemen
                                     .map((part) =>
                                         part === selectedYear ? (
                                             <TextField
-                                                value={textFieldYearValue}
-                                                aria-label={label}
-                                                onChange={setTextFieldYearValue}
+                                                value={currentYear}
+                                                aria-label={yearLabel}
+                                                onChange={onYearChange}
                                                 type="number"
                                                 max={9999}
                                                 min={0}
-                                                onBlur={updateMonthOffset}
-                                                onKeyPress={handleKeyPress}
+                                                onBlur={updateYear}
+                                                onKeyPress={updateYearOnEnterPressed}
                                                 key="year"
                                                 className={`${CLASSNAME}__year`}
                                             />
