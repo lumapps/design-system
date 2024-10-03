@@ -13,7 +13,7 @@ import { TooltipContextProvider } from '@lumx/react/components/tooltip/context';
 import { useId } from '@lumx/react/hooks/useId';
 import { usePopper } from '@lumx/react/hooks/usePopper';
 
-import { ARIA_LINK_MODES } from '@lumx/react/components/tooltip/constants';
+import { ARIA_LINK_MODES, TOOLTIP_ZINDEX } from '@lumx/react/components/tooltip/constants';
 import { useInjectTooltipRef } from './useInjectTooltipRef';
 import { useTooltipOpen } from './useTooltipOpen';
 
@@ -55,6 +55,7 @@ const DEFAULT_PROPS: Partial<TooltipProps> = {
     placement: Placement.BOTTOM,
     closeMode: 'unmount',
     ariaLinkMode: 'aria-describedby',
+    zIndex: TOOLTIP_ZINDEX,
 };
 
 /**
@@ -70,8 +71,18 @@ const ARROW_SIZE = 8;
  * @return React element.
  */
 export const Tooltip: Comp<TooltipProps, HTMLDivElement> = forwardRef((props, ref) => {
-    const { label, children, className, delay, placement, forceOpen, closeMode, ariaLinkMode, ...forwardedProps } =
-        props;
+    const {
+        label,
+        children,
+        className,
+        delay,
+        placement,
+        forceOpen,
+        closeMode,
+        ariaLinkMode,
+        zIndex,
+        ...forwardedProps
+    } = props;
     // Disable in SSR.
     if (!DOCUMENT) {
         return <>{children}</>;
@@ -131,7 +142,7 @@ export const Tooltip: Comp<TooltipProps, HTMLDivElement> = forwardRef((props, re
                                 hidden: !isOpen && closeMode === 'hide',
                             }),
                         )}
-                        style={styles.popper}
+                        style={{ ...styles.popper, zIndex }}
                         {...attributes.popper}
                     >
                         <div className={`${CLASSNAME}__arrow`} />

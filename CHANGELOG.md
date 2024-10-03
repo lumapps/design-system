@@ -14,8 +14,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
--   `Tooltip`: Add `closeMode` to hide the tooltip instead of unmounting it
--   `Tooltip`: Add `ariaLinkMode` to use tooltip as label instead of description
+-   `Tooltip`: add `closeMode` to hide the tooltip instead of unmounting it.
+-   `Tooltip`: add `ariaLinkMode` to use tooltip as label instead of description.
+
+### Changed
+
+-   `Tooltip`: increment z-index making them appear above popovers.
 
 ## [3.9.1][] - 2024-09-17
 
