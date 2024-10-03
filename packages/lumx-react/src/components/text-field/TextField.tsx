@@ -68,6 +68,8 @@ export interface TextFieldProps extends GenericProps, HasTheme {
     placeholder?: string;
     /** Reference to the wrapper. */
     textFieldRef?: Ref<HTMLDivElement>;
+    /** Native input type (only when `multiline` is disabled). */
+    type?: React.ComponentProps<'input'>['type'];
     /** Value. */
     value?: string;
     /** On blur callback. */
@@ -160,7 +162,7 @@ interface InputNativeProps {
     maxLength?: number;
     placeholder?: string;
     rows: number;
-    type: string;
+    type: TextFieldProps['type'];
     name?: string;
     value?: string;
     setFocus(focus: boolean): void;
