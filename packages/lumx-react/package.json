@@ -39,6 +39,7 @@
         "@testing-library/user-event": "^14.4.3",
         "@types/body-scroll-lock": "^2.6.1",
         "@types/classnames": "^2.2.9",
+        "@types/dom-view-transitions": "^1.0.5",
         "@types/jest": "^29.2.1",
         "@types/lodash": "^4.14.149",
         "@types/react": "^17.0.2",

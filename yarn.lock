@@ -3869,6 +3869,7 @@ __metadata:
     "@testing-library/user-event": ^14.4.3
     "@types/body-scroll-lock": ^2.6.1
     "@types/classnames": ^2.2.9
+    "@types/dom-view-transitions": ^1.0.5
     "@types/jest": ^29.2.1
     "@types/lodash": ^4.14.149
     "@types/react": ^17.0.2
@@ -6064,6 +6065,13 @@ __metadata:
   version: 0.0.9
   resolution: "@types/doctrine@npm:0.0.9"
   checksum: 3909eaca42e7386b2ab866f082b78da3e00718d2fa323597e254feb0556c678b41f2c490729067433630083ac9c806ec6ae1e146754f7f8ba7d3e43ed68d6500
+  languageName: node
+  linkType: hard
+
+"@types/dom-view-transitions@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "@types/dom-view-transitions@npm:1.0.5"
+  checksum: 4190915a3d4c63d4c590d5e64d14ca1d1140496a75adb5af64b0ef13e075cc7676bff926f5c5c60305c4f6d46965a196c119a7960cbe0ff40e95e17e82334c22
   languageName: node
   linkType: hard
 
