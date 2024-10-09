@@ -5,8 +5,9 @@ import { screen, render } from '@testing-library/react';
 import { queryAllByTagName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import userEvent from '@testing-library/user-event';
-
 import { isFocusVisible } from '@lumx/react/utils/isFocusVisible';
+import { VISUALLY_HIDDEN } from '@lumx/react/constants';
+
 import { Tooltip, TooltipProps } from './Tooltip';
 
 const CLASSNAME = Tooltip.className as string;
@@ -142,11 +143,11 @@ describe(`<${Tooltip.displayName}>`, () => {
                     forceOpen: false,
                 });
                 expect(tooltip).toBeInTheDocument();
-                expect(tooltip).toHaveClass('lumx-tooltip--is-hidden');
+                expect(tooltip).toHaveClass(VISUALLY_HIDDEN);
 
                 const anchor = screen.getByRole('button', { name: 'Anchor' });
                 await userEvent.hover(anchor);
-                expect(tooltip).not.toHaveClass('lumx-tooltip--is-hidden');
+                expect(tooltip).not.toHaveClass(VISUALLY_HIDDEN);
             });
         });
 
