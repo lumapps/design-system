@@ -55,6 +55,8 @@ const Inner: Comp<ImageLightboxProps, HTMLDivElement> = forwardRef((props, ref) 
             closeButtonProps={closeButtonProps}
             focusElement={currentPaginationItemRef}
             {...forwardedProps}
+            // Disable the close on click away as we want a custom one here
+            preventAutoClose
         >
             <ClickAwayProvider childrenRefs={clickAwayChildrenRefs} callback={onClickAway}>
                 <ImageSlideshow

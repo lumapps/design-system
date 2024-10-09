@@ -5,9 +5,21 @@ import { MaybeElementOrRef } from '@lumx/react/utils/type';
 import { unref } from '../react/unref';
 import { getPrefersReducedMotion } from '../browser/getPrefersReducedMotion';
 
-function setTransitionViewName(elementRef: MaybeElementOrRef<HTMLElement>, name: string | null | undefined) {
-    const element = unref(elementRef) as any;
-    if (element) element.style.viewTransitionName = name;
+function setupViewTransitionName(elementRef: MaybeElementOrRef<HTMLElement>, name: string) {
+    let originalName: string | null = null;
+    return {
+        set() {
+            const element = unref(elementRef);
+            if (!element) return;
+            originalName = element.style.viewTransitionName;
+            element.style.viewTransitionName = name;
+        },
+        unset() {
+            const element = unref(elementRef);
+            if (!element || originalName === null) return;
+            element.style.viewTransitionName = originalName;
+        },
+    };
 }
 
 /**
@@ -37,20 +49,20 @@ export async function startViewTransition({
         return;
     }
 
-    // Set transition name on source element
-    setTransitionViewName(viewTransitionName.source, viewTransitionName.name);
+    // Setup set/unset transition name on source & target
+    const sourceTransitionName = setupViewTransitionName(viewTransitionName.source, viewTransitionName.name);
+    const targetTransitionName = setupViewTransitionName(viewTransitionName.target, viewTransitionName.name);
+
+    sourceTransitionName.set();
 
     // Start view transition, apply changes & flush to DOM
     await start(() => {
-        // Un-set transition name on source element
-        setTransitionViewName(viewTransitionName.source, null);
+        sourceTransitionName.unset();
 
         flushSync(changes);
 
-        // Set transition name on target element
-        setTransitionViewName(viewTransitionName.target, viewTransitionName.name);
+        targetTransitionName.set();
     }).updateCallbackDone;
 
-    // Un-set transition name on target element
-    setTransitionViewName(viewTransitionName.target, null);
+    targetTransitionName.unset();
 }

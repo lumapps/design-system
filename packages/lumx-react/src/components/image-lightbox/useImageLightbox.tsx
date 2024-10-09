@@ -109,7 +109,7 @@ export function useImageLightbox<P extends Partial<ImageLightboxProps>>(
                         isOpen: true,
                         onClose: () => {
                             close();
-                            prevProps?.onClose?.();
+                            propsRef.current?.onClose?.();
                         },
                         images,
                         activeImageIndex: activeImageIndex || 0,
