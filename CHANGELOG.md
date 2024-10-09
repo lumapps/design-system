@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.9.3][] - 2024-10-09
+
 ### Fixed
 
 -   `ImageLightbox`: fix closing transition triggering multiple times.
@@ -2102,7 +2104,8 @@ _Failed released_
 [3.6.7]: https://github.com/lumapps/design-system/tree/v3.6.7
 
 
-[Unreleased]: https://github.com/lumapps/design-system/compare/v3.9.2...HEAD
+[Unreleased]: https://github.com/lumapps/design-system/compare/v3.9.3...HEAD
+[3.9.3]: https://github.com/lumapps/design-system/compare/v3.9.2...v3.9.3
 [3.9.2]: https://github.com/lumapps/design-system/compare/v3.9.1...v3.9.2
 [3.9.1]: https://github.com/lumapps/design-system/compare/v3.9.0...v3.9.1
 [3.9.0]: https://github.com/lumapps/design-system/compare/v3.8.1...v3.9.0
