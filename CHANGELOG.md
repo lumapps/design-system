@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `ImageLightbox`: fix closing transition triggering multiple times.
 
+### Changed
+
+-   `Tooltip`: use the standard class `visually-hidden` when closed and with `closeMode="hide"`.
+
 ## [3.9.2][] - 2024-10-04
 
 ### Fixed

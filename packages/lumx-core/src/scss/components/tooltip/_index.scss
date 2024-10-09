@@ -17,10 +17,6 @@
     border-radius: var(--lumx-border-radius);
     will-change: transform;
 
-    &--is-hidden {
-        visibility: hidden;
-    }
-
     &__arrow {
         position: absolute;
         width: 0;

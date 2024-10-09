@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom';
 
 import classNames from 'classnames';
 
-import { DOCUMENT } from '@lumx/react/constants';
+import { DOCUMENT, VISUALLY_HIDDEN } from '@lumx/react/constants';
 import { Comp, GenericProps, HasCloseMode } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { useMergeRefs } from '@lumx/react/utils/mergeRefs';
@@ -106,6 +106,7 @@ export const Tooltip: Comp<TooltipProps, HTMLDivElement> = forwardRef((props, re
     const { isOpen: isActivated, onPopperMount } = useTooltipOpen(delay, anchorElement);
     const isOpen = (isActivated || forceOpen) && !!label;
     const isMounted = !!label && (isOpen || closeMode === 'hide');
+    const isHidden = !isOpen && closeMode === 'hide';
     const wrappedChildren = useInjectTooltipRef({
         children,
         setAnchorElement,
@@ -139,8 +140,8 @@ export const Tooltip: Comp<TooltipProps, HTMLDivElement> = forwardRef((props, re
                             handleBasicClasses({
                                 prefix: CLASSNAME,
                                 position,
-                                hidden: !isOpen && closeMode === 'hide',
                             }),
+                            isHidden && VISUALLY_HIDDEN,
                         )}
                         style={{ ...styles.popper, zIndex }}
                         {...attributes.popper}

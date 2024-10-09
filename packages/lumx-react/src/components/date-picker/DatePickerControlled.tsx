@@ -13,6 +13,7 @@ import { getYearDisplayName } from '@lumx/react/utils/date/getYearDisplayName';
 import { onEnterPressed } from '@lumx/react/utils/event';
 import { addMonthResetDay } from '@lumx/react/utils/date/addMonthResetDay';
 import { formatDayNumber } from '@lumx/react/utils/date/formatDayNumber';
+import { VISUALLY_HIDDEN } from '@lumx/react/constants';
 import { CLASSNAME } from './constants';
 
 /**
@@ -147,7 +148,7 @@ export const DatePickerControlled: Comp<DatePickerControlledProps, HTMLDivElemen
                 }
                 label={
                     <>
-                        <span aria-live={labelAriaLive} className={onMonthChange ? 'visually-hidden' : ''} dir="auto">
+                        <span aria-live={labelAriaLive} className={onMonthChange ? VISUALLY_HIDDEN : ''} dir="auto">
                             {monthYear}
                         </span>
                         {onMonthChange && (
@@ -222,7 +223,7 @@ export const DatePickerControlled: Comp<DatePickerControlledProps, HTMLDivElemen
                                             onClick={() => onChange(date)}
                                         >
                                             <span aria-hidden>{formatDayNumber(locale, date)}</span>
-                                            <span className="visually-hidden">
+                                            <span className={VISUALLY_HIDDEN}>
                                                 {date.toLocaleDateString(locale, {
                                                     day: 'numeric',
                                                     month: 'long',
