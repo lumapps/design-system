@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   `SlideShow`: use `inert` on hidden slides (on top of `aria-hidden` and `tabindex="-1"`) for greater semantic.
+
 ## [3.9.3][] - 2024-10-09
 
 ### Fixed

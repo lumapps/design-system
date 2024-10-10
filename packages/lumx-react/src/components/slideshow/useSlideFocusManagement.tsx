@@ -29,9 +29,10 @@ export const useSlideFocusManagement = ({ isSlideDisplayed, slideRef }: UseSlide
          * Display given slide to screen readers and, if focus was blocked, restore focus on elements.
          */
         const enableSlide = () => {
-            // Hide from screen readers
+            element.removeAttribute('inert');
             element.setAttribute('aria-hidden', 'false');
             // Find elements we have blocked focus on
+            // (won't be necessary once "inert" gets sufficient browser support)
             element.querySelectorAll(`.${BLOCKED_FOCUS_CLASSNAME}`).forEach((focusableElement) => {
                 focusableElement.removeAttribute('tabindex');
                 focusableElement.classList.remove(BLOCKED_FOCUS_CLASSNAME);
@@ -42,6 +43,7 @@ export const useSlideFocusManagement = ({ isSlideDisplayed, slideRef }: UseSlide
          * Hide given slide from screen readers and block focus on all focusable elements within.
          */
         const blockSlide = () => {
+            element.setAttribute('inert', '');
             element.setAttribute('aria-hidden', 'true');
             getFocusableElements(element).forEach((focusableElement) => {
                 focusableElement.setAttribute('tabindex', '-1');
@@ -72,6 +74,7 @@ export const useSlideFocusManagement = ({ isSlideDisplayed, slideRef }: UseSlide
         };
 
         // Create an observer instance linked to the callback function
+        // (won't be necessary once "inert" gets sufficient browser support)
         const observer = new MutationObserver(callback);
 
         if (element) {
