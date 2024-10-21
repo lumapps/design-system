@@ -78,11 +78,10 @@ export const ControllingSlideshow = ({ images = Object.values(LANDSCAPE_IMAGES),
                         parentRef={slideshow}
                         theme={theme}
                         isAutoPlaying={isAutoPlaying}
-                        nextButtonProps={{ label: 'Next', 'aria-controls': slideshowSlidesId }}
-                        previousButtonProps={{ label: 'Previous', 'aria-controls': slideshowSlidesId }}
+                        nextButtonProps={{ label: 'Next' }}
+                        previousButtonProps={{ label: 'Previous' }}
                         playButtonProps={{
                             label: 'Play/Pause',
-                            'aria-controls': slideshowSlidesId,
                             onClick: toggleForcePause,
                         }}
                         paginationItemLabel={(index) => `Slide ${index}`}

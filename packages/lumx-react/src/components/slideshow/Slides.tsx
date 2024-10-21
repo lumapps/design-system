@@ -3,9 +3,11 @@ import chunk from 'lodash/chunk';
 
 import classNames from 'classnames';
 
-import { FULL_WIDTH_PERCENT } from '@lumx/react/components/slideshow/constants';
+import { FULL_WIDTH_PERCENT, NEXT_SLIDE_EVENT, PREV_SLIDE_EVENT } from '@lumx/react/components/slideshow/constants';
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { useMergeRefs } from '@lumx/react/utils/mergeRefs';
+import { useKeyNavigate } from '@lumx/react/components/slideshow/useKeyNavigate';
 import { buildSlideShowGroupId, SlideshowItemGroup } from './SlideshowItemGroup';
 
 export interface SlidesProps extends GenericProps, HasTheme {
@@ -32,7 +34,7 @@ export interface SlidesProps extends GenericProps, HasTheme {
     /**
      * Accessible label to set on a slide group.
      * Receives the group position starting from 1 and the total number of groups.
-     * */
+     */
     slideGroupLabel?: (groupPosition: number, groupTotal: number) => string;
 }
 
@@ -70,7 +72,6 @@ export const Slides: Comp<SlidesProps, HTMLDivElement> = forwardRef((props, ref)
         slideGroupLabel,
         ...forwardedProps
     } = props;
-    const wrapperRef = React.useRef<HTMLDivElement>(null);
     const startIndexVisible = activeIndex;
     const endIndexVisible = startIndexVisible + 1;
 
@@ -82,10 +83,17 @@ export const Slides: Comp<SlidesProps, HTMLDivElement> = forwardRef((props, ref)
         return groupBy && groupBy > 1 ? chunk(childrenArray, groupBy) : childrenArray;
     }, [children, groupBy]);
 
+    const slidesRef = React.useRef<HTMLDivElement>(null);
+
+    const slide = slidesRef.current;
+    const onNextSlide = React.useCallback(() => slide?.dispatchEvent(new CustomEvent(NEXT_SLIDE_EVENT)), [slide]);
+    const onPrevSlide = React.useCallback(() => slide?.dispatchEvent(new CustomEvent(PREV_SLIDE_EVENT)), [slide]);
+    useKeyNavigate(slide, onNextSlide, onPrevSlide);
+
     return (
         <section
             id={id}
-            ref={ref}
+            ref={useMergeRefs(slidesRef, ref)}
             {...forwardedProps}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }), {
                 [`${CLASSNAME}--fill-height`]: fillHeight,
@@ -100,14 +108,14 @@ export const Slides: Comp<SlidesProps, HTMLDivElement> = forwardRef((props, ref)
                 onMouseLeave={toggleAutoPlay}
                 aria-live={isAutoPlaying ? 'off' : 'polite'}
             >
-                <div ref={wrapperRef} className={`${CLASSNAME}__wrapper`} style={wrapperStyle}>
+                <div className={`${CLASSNAME}__wrapper`} style={wrapperStyle}>
                     {groups.map((group, index) => (
                         <SlideshowItemGroup
                             key={index}
                             id={slidesId && buildSlideShowGroupId(slidesId, index)}
-                            role={hasControls ? 'tabpanel' : 'group'}
-                            label={slideGroupLabel ? slideGroupLabel(index + 1, groups.length) : undefined}
+                            label={slideGroupLabel?.(index + 1, groups.length)}
                             isDisplayed={index >= startIndexVisible && index < endIndexVisible}
+                            slidesRef={slidesRef}
                         >
                             {group}
                         </SlideshowItemGroup>

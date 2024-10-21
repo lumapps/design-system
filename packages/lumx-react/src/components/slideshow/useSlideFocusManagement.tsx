@@ -3,93 +3,102 @@ import { getFocusableElements } from '@lumx/react/utils/focus/getFocusableElemen
 
 export interface UseSlideFocusManagementProps {
     isSlideDisplayed?: boolean;
-    slideRef: React.RefObject<HTMLDivElement>;
+    slidesRef?: React.RefObject<HTMLDivElement>;
 }
 
 /**
- * Classname set on elements whose focus was blocked.
+ * Data attribute set on elements whose focus was blocked.
  * This is to easily find elements that have been tempered with,
  * and not elements whose focus was already initially blocked.
- * */
-const BLOCKED_FOCUS_CLASSNAME = 'focus-blocked';
+ */
+const BLOCKED_FOCUS = 'data-focus-blocked';
 
 /**
  * Manage how slides must behave when visible or not.
  * When not visible, they should be hidden from screen readers and not focusable.
  */
-export const useSlideFocusManagement = ({ isSlideDisplayed, slideRef }: UseSlideFocusManagementProps) => {
-    useEffect(() => {
-        const element = slideRef?.current;
+export const useSlideFocusManagement = ({ isSlideDisplayed, slidesRef }: UseSlideFocusManagementProps) => {
+    const [slide, setSlide] = React.useState<HTMLDivElement | null>(null);
 
-        if (!element) {
+    const [focusableElementSet, setFocusableElementSet] = React.useState<Set<HTMLElement>>();
+    React.useEffect(() => {
+        if (!slide) {
             return undefined;
         }
-
-        /**
-         * Display given slide to screen readers and, if focus was blocked, restore focus on elements.
-         */
-        const enableSlide = () => {
-            element.removeAttribute('inert');
-            element.setAttribute('aria-hidden', 'false');
-            // Find elements we have blocked focus on
-            // (won't be necessary once "inert" gets sufficient browser support)
-            element.querySelectorAll(`.${BLOCKED_FOCUS_CLASSNAME}`).forEach((focusableElement) => {
-                focusableElement.removeAttribute('tabindex');
-                focusableElement.classList.remove(BLOCKED_FOCUS_CLASSNAME);
-            });
-        };
-
-        /**
-         * Hide given slide from screen readers and block focus on all focusable elements within.
-         */
-        const blockSlide = () => {
-            element.setAttribute('inert', '');
-            element.setAttribute('aria-hidden', 'true');
-            getFocusableElements(element).forEach((focusableElement) => {
-                focusableElement.setAttribute('tabindex', '-1');
-                focusableElement.classList.add(BLOCKED_FOCUS_CLASSNAME);
-            });
-        };
-
-        const handleDisplay = () => {
-            if (!element) {
-                return;
-            }
-            if (isSlideDisplayed) {
-                enableSlide();
-            } else {
-                blockSlide();
-            }
-        };
-
-        // Callback function to execute when mutations are observed
-        const callback: MutationCallback = (mutationsList) => {
-            if (element) {
-                for (const mutation of mutationsList) {
-                    if (mutation.type === 'childList') {
-                        handleDisplay();
-                    }
+        // Update the slide's focusable element list (including the blocked elements)
+        const updateFocusableElements = () =>
+            setFocusableElementSet((set = new Set()) => {
+                // TODO: remove when `inert` gets sufficient browser support
+                const focusedBlocked = Array.from(slide.querySelectorAll(`[${BLOCKED_FOCUS}]`)) as HTMLElement[];
+                for (const element of focusedBlocked) {
+                    set.add(element);
                 }
+                for (const element of getFocusableElements(slide)) {
+                    set.add(element);
+                }
+                return set;
+            });
+
+        // Observe changes in the content of the slide
+        const observer = new MutationObserver((mutationsList) => {
+            if (mutationsList.some((mutation) => mutation.type === 'childList')) {
+                updateFocusableElements();
             }
-        };
+        });
 
-        // Create an observer instance linked to the callback function
-        // (won't be necessary once "inert" gets sufficient browser support)
-        const observer = new MutationObserver(callback);
+        updateFocusableElements();
 
-        if (element) {
-            handleDisplay();
+        observer.observe(slide, { attributes: true, childList: true, subtree: true });
+        return observer.disconnect();
+    }, [slide]);
 
-            /** If slide is hidden, start observing for elements to block focus  */
-            if (!isSlideDisplayed) {
-                observer.observe(element, { attributes: true, childList: true, subtree: true });
+    useEffect(() => {
+        if (!slide || !focusableElementSet) {
+            return;
+        }
+        const focusableElements = Array.from(focusableElementSet);
+
+        if (!isSlideDisplayed) {
+            /* Block slide */
+            slide.setAttribute('inert', '');
+            slide.setAttribute('aria-hidden', 'true');
+
+            // TODO: remove when `inert` gets sufficient browser support
+            for (const focusableElement of focusableElements) {
+                focusableElement.setAttribute('tabindex', '-1');
+                focusableElement.setAttribute(BLOCKED_FOCUS, '');
+            }
+        } else {
+            /* Un-block slide */
+            slide.removeAttribute('inert');
+            slide.removeAttribute('aria-hidden');
+
+            // TODO: remove when `inert` gets sufficient browser support
+            for (const focusableElement of focusableElements) {
+                focusableElement.removeAttribute('tabindex');
+                focusableElement.removeAttribute(BLOCKED_FOCUS);
+            }
+
+            // Change focus on slide displayed
+            const isUserActivated = slidesRef?.current?.dataset.lumxUserActivated === 'true';
+            if (isUserActivated) {
+                let elementToFocus: HTMLElement | undefined = slide;
+
+                // We have exactly one focusable element => focus it
+                if (focusableElementSet.size === 1) {
+                    // eslint-disable-next-line prefer-destructuring
+                    elementToFocus = focusableElements[0];
+                }
+
+                // We have not focusable element => focus the pagination item
+                if (focusableElementSet.size === 0) {
+                    elementToFocus = document.querySelector(`[aria-controls="${slide?.id}"]`) as HTMLElement;
+                }
+
+                elementToFocus?.focus({ preventScroll: true });
             }
         }
+    }, [focusableElementSet, isSlideDisplayed, slide, slidesRef]);
 
-        return () => {
-            if (!isSlideDisplayed) {
-                observer.disconnect();
-            }
-        };
-    }, [isSlideDisplayed, slideRef]);
+    return setSlide;
 };

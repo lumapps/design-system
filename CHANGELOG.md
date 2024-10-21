@@ -10,6 +10,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 -   `SlideShow`: use `inert` on hidden slides (on top of `aria-hidden` and `tabindex="-1"`) for greater semantic.
+-   `SlideShow`: reworked keyboard & focus management
+    - Pagination items do not use roving tabindex anymore
+    - Roles `tab` & `tabpanel` are not used anymore
+    - Switching slides moves the focus
+      - On the slide if it contains multiple focusable element
+      - On the focusable element if the slide contains exactly one focusable element
+      - On the pagination item otherwise
 
 ## [3.9.3][] - 2024-10-09
 

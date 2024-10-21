@@ -33,16 +33,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
 export const SlideshowItem: Comp<SlideshowItemProps, HTMLDivElement> = forwardRef((props, ref) => {
     const { className, children, ...forwardedProps } = props;
     return (
-        <div
-            ref={ref}
-            className={classNames(
-                className,
-                handleBasicClasses({
-                    prefix: CLASSNAME,
-                }),
-            )}
-            {...forwardedProps}
-        >
+        <div ref={ref} className={classNames(className, CLASSNAME)} {...forwardedProps}>
             {children}
         </div>
     );
