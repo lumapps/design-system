@@ -19,7 +19,7 @@ export const App = () => {
                         <Thumbnail
                             key={image}
                             image={image}
-                            alt={alt}
+                            alt={`${alt}; Open in a fullscreen image slideshow`}
                             size="xl"
                             aspectRatio="square"
                             {...getTriggerProps({ activeImageIndex: index })}

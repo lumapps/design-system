@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `ExpansionPanel`: fix children remaining in the DOM when closed
 
+### Changed
+
+-   `Mosaic`: removed broken lightboxes on mosaic demos.
+
 ## [3.9.3][] - 2024-10-09
 
 ### Fixed
