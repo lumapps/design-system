@@ -1,6 +1,7 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import range from 'lodash/range';
-import { AspectRatio, Button, FlexBox, ImageBlock, Slideshow, SlideshowItem, Orientation } from '@lumx/react';
+import { AspectRatio, Button, FlexBox, ImageBlock, Slideshow, SlideshowItem, Orientation, Link } from '@lumx/react';
 import { IMAGES, LANDSCAPE_IMAGES } from '@lumx/react/stories/controls/image';
 
 export default {
@@ -65,6 +66,16 @@ export const ResponsiveSlideShowSwipe = () => {
                     }}
                     slideGroupLabel={(currentGroup, totalGroup) => `${currentGroup} of ${totalGroup}`}
                 >
+                    <SlideshowItem>
+                        <FlexBox
+                            style={{ border: '1px solid grey', maxWidth: 300, height: 300 }}
+                            hAlign="center"
+                            vAlign="center"
+                        >
+                            <Link href="#">A link</Link>
+                            <Button>A button</Button>
+                        </FlexBox>
+                    </SlideshowItem>
                     {slides.map((slide) => (
                         <SlideshowItem key={`${slide}`}>
                             <FlexBox

@@ -1,8 +1,9 @@
-import { useState, useCallback, useEffect } from 'react';
-
+import { SetStateAction, useCallback, useEffect, useState } from 'react';
+import { clamp } from '@lumx/react';
 import { useInterval } from '@lumx/react/hooks/useInterval';
-import { AUTOPLAY_DEFAULT_INTERVAL } from '@lumx/react/components/slideshow/constants';
 import { useId } from '@lumx/react/hooks/useId';
+
+import { AUTOPLAY_DEFAULT_INTERVAL, NEXT_SLIDE_EVENT, PREV_SLIDE_EVENT } from './constants';
 
 export interface UseSlideshowControlsOptions {
     /** default active index to be displayed */
@@ -43,9 +44,9 @@ export interface UseSlideshowControls {
     /** id to be used for the wrapper that contains the slides */
     slideshowSlidesId: string;
     /** callback that triggers the previous slide while using the slideshow controls  */
-    onPreviousClick: (loopback: boolean) => void;
+    onPreviousClick: (loopBack: boolean) => void;
     /** callback that triggers the next slide while using the slideshow controls */
-    onNextClick: (loopback: boolean) => void;
+    onNextClick: (loopBack: boolean) => void;
     /** callback that triggers a specific page while using the slideshow controls */
     onPaginationClick: (index: number) => void;
     /** whether the slideshow is autoplaying or not */
@@ -54,16 +55,18 @@ export interface UseSlideshowControls {
     isForcePaused: boolean;
     /** callback to change whether the slideshow is autoplaying or not */
     toggleAutoPlay: () => void;
-    /** calback to change whether the slideshow should be force paused or not */
+    /** callback to change whether the slideshow should be force paused or not */
     toggleForcePause: () => void;
     /** current active slide index  */
     activeIndex: number;
     /** set the current index as the active one */
     setActiveIndex: (index: number) => void;
-    /** callback that stops the auto play */
+    /** callback that stops the autoplay */
     stopAutoPlay: () => void;
-    /** callback that starts the auto play */
+    /** callback that starts the autoplay */
     startAutoPlay: () => void;
+    /** True if the last slide change is user activated */
+    isUserActivated?: boolean;
 }
 
 export const DEFAULT_OPTIONS: Partial<UseSlideshowControlsOptions> = {
@@ -90,40 +93,34 @@ export const useSlideshowControls = ({
     // Number of slides when using groupBy prop.
     const slidesCount = Math.ceil(itemsCount / Math.min(groupBy as number, itemsCount));
 
-    // Change current index to display next slide.
-    const goToNextSlide = useCallback(
-        (loopback = true) => {
-            setCurrentIndex((index) => {
-                if (loopback && index === slidesCount - 1) {
-                    // Loopback to the start.
-                    return 0;
-                }
-                if (index < slidesCount - 1) {
-                    // Next slide.
-                    return index + 1;
-                }
-                return index;
-            });
+    // Set current active index (& if is user activated)
+    const setActiveIndex = useCallback(
+        (setStateAction: SetStateAction<number>, isUser?: boolean) => {
+            // Store on element a boolean value when the slide change was not from a user action.
+            const elementDataset = element?.dataset as any;
+            if (elementDataset) {
+                if (isUser) elementDataset.lumxUserActivated = true;
+                else delete elementDataset.lumxUserActivated;
+            }
+
+            setCurrentIndex(setStateAction);
         },
-        [slidesCount, setCurrentIndex],
+        [element],
     );
 
-    // Change current index to display previous slide.
-    const goToPreviousSlide = useCallback(
-        (loopback = true) => {
-            setCurrentIndex((index) => {
-                if (loopback && index === 0) {
-                    // Loopback to the end.
-                    return slidesCount - 1;
+    // Change slide given delta (-1/+1) with or without loop back.
+    const goTo = useCallback(
+        (delta: -1 | 1 = 1, loopBack = true, isUser?: boolean) => {
+            setActiveIndex((index) => {
+                if (loopBack) {
+                    const newIndex = (index + delta) % slidesCount;
+                    if (newIndex < 0) return slidesCount + newIndex;
+                    return newIndex;
                 }
-                if (index > 0) {
-                    // Previous slide.
-                    return index - 1;
-                }
-                return index;
-            });
+                return clamp(index + delta, 0, slidesCount - 1);
+            }, isUser);
         },
-        [slidesCount, setCurrentIndex],
+        [slidesCount, setActiveIndex],
     );
 
     // Auto play
@@ -132,22 +129,22 @@ export const useSlideshowControls = ({
 
     const isSlideshowAutoPlaying = isForcePaused ? false : isAutoPlaying;
     // Start
-    useInterval(goToNextSlide, isSlideshowAutoPlaying && slidesCount > 1 ? (interval as number) : null);
+    useInterval(goTo, isSlideshowAutoPlaying && slidesCount > 1 ? (interval as number) : null);
 
-    // Reset current index if it become invalid.
+    // Reset current index if it becomes invalid.
     useEffect(() => {
         if (currentIndex > slidesCount - 1) {
-            setCurrentIndex(defaultActiveIndex as number);
+            setActiveIndex(defaultActiveIndex as number);
         }
-    }, [currentIndex, slidesCount, defaultActiveIndex]);
+    }, [currentIndex, slidesCount, defaultActiveIndex, setActiveIndex]);
 
-    const startAutoPlay = () => {
+    const startAutoPlay = useCallback(() => {
         setIsAutoPlaying(Boolean(autoPlay));
-    };
+    }, [autoPlay]);
 
-    const stopAutoPlay = () => {
+    const stopAutoPlay = useCallback(() => {
         setIsAutoPlaying(false);
-    };
+    }, []);
 
     // Handle click on a bullet to go to a specific slide.
     const onPaginationClick = useCallback(
@@ -156,36 +153,48 @@ export const useSlideshowControls = ({
             setIsForcePaused(true);
 
             if (index >= 0 && index < slidesCount) {
-                setCurrentIndex(index);
+                setActiveIndex(index, true);
             }
         },
-        [slidesCount, setCurrentIndex],
+        [stopAutoPlay, slidesCount, setActiveIndex],
     );
 
     // Handle click or keyboard event to go to next slide.
     const onNextClick = useCallback(
-        (loopback = true) => {
+        (loopBack = true) => {
             stopAutoPlay();
             setIsForcePaused(true);
-            goToNextSlide(loopback);
+            goTo(1, loopBack, true);
         },
-        [goToNextSlide],
+        [goTo, stopAutoPlay],
     );
 
     // Handle click or keyboard event to go to previous slide.
     const onPreviousClick = useCallback(
-        (loopback = true) => {
+        (loopBack = true) => {
             stopAutoPlay();
             setIsForcePaused(true);
-            goToPreviousSlide(loopback);
+            goTo(-1, loopBack, true);
         },
-        [goToPreviousSlide],
+        [goTo, stopAutoPlay],
     );
+
+    // Listen to custom next/prev slide events
+    useEffect(() => {
+        if (!element) return undefined;
+
+        element.addEventListener(NEXT_SLIDE_EVENT, onNextClick);
+        element.addEventListener(PREV_SLIDE_EVENT, onPreviousClick);
+        return () => {
+            element.removeEventListener(NEXT_SLIDE_EVENT, onNextClick);
+            element.removeEventListener(PREV_SLIDE_EVENT, onPreviousClick);
+        };
+    }, [element, onNextClick, onPreviousClick]);
 
     // If the activeIndex props changes, update the current slide
     useEffect(() => {
-        setCurrentIndex(activeIndex as number);
-    }, [activeIndex]);
+        setActiveIndex(activeIndex as number);
+    }, [activeIndex, setActiveIndex]);
 
     // If the slide changes, with autoplay for example, trigger "onChange"
     useEffect(() => {
@@ -199,15 +208,15 @@ export const useSlideshowControls = ({
     const generatedSlidesId = useId();
     const slideshowSlidesId = slidesId || generatedSlidesId;
 
-    const toggleAutoPlay = () => {
+    const toggleAutoPlay = useCallback(() => {
         if (isSlideshowAutoPlaying) {
             stopAutoPlay();
         } else {
             startAutoPlay();
         }
-    };
+    }, [isSlideshowAutoPlaying, startAutoPlay, stopAutoPlay]);
 
-    const toggleForcePause = () => {
+    const toggleForcePause = useCallback(() => {
         const shouldBePaused = !isForcePaused;
 
         setIsForcePaused(shouldBePaused);
@@ -217,7 +226,7 @@ export const useSlideshowControls = ({
         } else {
             stopAutoPlay();
         }
-    };
+    }, [isForcePaused, startAutoPlay, stopAutoPlay]);
 
     // Start index and end index of visible slides.
     const startIndexVisible = currentIndex * (groupBy as number);
@@ -237,7 +246,7 @@ export const useSlideshowControls = ({
         toggleAutoPlay,
         activeIndex: currentIndex,
         slidesCount,
-        setActiveIndex: setCurrentIndex,
+        setActiveIndex,
         startAutoPlay,
         stopAutoPlay,
         isForcePaused,

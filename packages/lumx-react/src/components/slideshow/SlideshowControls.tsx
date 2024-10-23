@@ -1,16 +1,18 @@
-import React, { forwardRef, RefObject, useCallback, useMemo } from 'react';
+import React, { forwardRef, RefObject, useCallback, useState } from 'react';
 
 import classNames from 'classnames';
 import range from 'lodash/range';
 
 import { mdiChevronLeft, mdiChevronRight, mdiPlayCircleOutline, mdiPauseCircleOutline } from '@lumx/icons';
-import { Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
+import { Emphasis, IconButton, IconButtonProps, Slides, Theme } from '@lumx/react';
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { WINDOW } from '@lumx/react/constants';
-import { useSlideshowControls, DEFAULT_OPTIONS } from '@lumx/react/hooks/useSlideshowControls';
-import { useRovingTabIndex } from '@lumx/react/hooks/useRovingTabIndex';
+import { useKeyNavigate } from '@lumx/react/components/slideshow/useKeyNavigate';
+import { useMergeRefs } from '@lumx/react/utils/mergeRefs';
 
+import { buildSlideShowGroupId } from '@lumx/react/components/slideshow/SlideshowItemGroup';
+import { DEFAULT_OPTIONS, useSlideshowControls } from './useSlideshowControls';
 import { useSwipeNavigate } from './useSwipeNavigate';
 import { PAGINATION_ITEM_SIZE, PAGINATION_ITEMS_MAX } from './constants';
 import { usePaginationVisibleRange } from './usePaginationVisibleRange';
@@ -34,11 +36,11 @@ export interface SlideshowControlsProps extends GenericProps, HasTheme {
     /** Number of slides. */
     slidesCount: number;
     /** On next button click callback. */
-    onNextClick?(loopback?: boolean): void;
+    onNextClick?(loopBack?: boolean): void;
     /** On pagination change callback. */
     onPaginationClick?(index: number): void;
     /** On previous button click callback. */
-    onPreviousClick?(loopback?: boolean): void;
+    onPreviousClick?(loopBack?: boolean): void;
     /** whether the slideshow is currently playing */
     isAutoPlaying?: boolean;
     /**
@@ -100,7 +102,7 @@ const InternalSlideshowControls: Comp<SlideshowControlsProps, HTMLDivElement> = 
         ...forwardedProps
     } = props;
 
-    let parent;
+    let parent: HTMLElement | null | undefined;
     if (WINDOW) {
         // Checking window object to avoid errors in SSR.
         parent = parentRef instanceof HTMLElement ? parentRef : parentRef?.current;
@@ -109,33 +111,30 @@ const InternalSlideshowControls: Comp<SlideshowControlsProps, HTMLDivElement> = 
     // Listen to touch swipe navigate left & right.
     useSwipeNavigate(
         parent,
-        // Go next without loopback.
+        // Go next without loop back.
         useCallback(() => onNextClick?.(false), [onNextClick]),
-        // Go previous without loopback.
+        // Go previous without loop back.
         useCallback(() => onPreviousClick?.(false), [onPreviousClick]),
     );
 
-    /**
-     * Add roving tab index pattern to pagination items and activate slide on focus.
-     */
-    useRovingTabIndex({
-        parentRef: paginationRef,
-        elementSelector: 'button',
-        keepTabIndex: true,
-        onElementFocus: (element) => {
-            element.click();
-        },
-    });
+    const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
+    const onButtonFocus = useCallback((index: number) => () => setFocusedIndex(index), [setFocusedIndex]);
+    const onFocusOut = useCallback(() => setFocusedIndex(null), [setFocusedIndex]);
 
     // Pagination "bullet" range.
-    const visibleRange = usePaginationVisibleRange(activeIndex as number, slidesCount);
+    const visibleRange = usePaginationVisibleRange(focusedIndex ?? (activeIndex as number), slidesCount);
 
     // Inline style of wrapper element.
     const wrapperStyle = { transform: `translateX(-${PAGINATION_ITEM_SIZE * visibleRange.min}px)` };
 
+    const controlsRef = React.useRef<HTMLDivElement>(null);
+    useKeyNavigate(controlsRef.current, onNextClick, onPreviousClick);
+
+    const slideshowSlidesId = React.useMemo(() => parent?.querySelector(`.${Slides.className}__slides`)?.id, [parent]);
+
     return (
         <div
-            ref={ref}
+            ref={useMergeRefs(ref, controlsRef)}
             {...forwardedProps}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }), {
                 [`${CLASSNAME}--has-infinite-pagination`]: slidesCount > PAGINATION_ITEMS_MAX,
@@ -148,64 +147,53 @@ const InternalSlideshowControls: Comp<SlideshowControlsProps, HTMLDivElement> = 
                 color={theme === Theme.dark ? 'light' : 'dark'}
                 emphasis={Emphasis.low}
                 onClick={onPreviousClick}
+                aria-controls={slideshowSlidesId}
             />
+
             <div ref={paginationRef} className={`${CLASSNAME}__pagination`}>
                 <div
                     className={`${CLASSNAME}__pagination-items`}
                     style={wrapperStyle}
-                    role="tablist"
                     {...paginationProps}
+                    onBlur={onFocusOut}
                 >
-                    {useMemo(
-                        () =>
-                            range(slidesCount).map((index) => {
-                                const isOnEdge =
-                                    index !== 0 &&
-                                    index !== slidesCount - 1 &&
-                                    (index === visibleRange.min || index === visibleRange.max);
-                                const isActive = activeIndex === index;
-                                const isOutRange = index < visibleRange.min || index > visibleRange.max;
-                                const {
-                                    className: itemClassName = undefined,
-                                    label = undefined,
-                                    ...itemProps
-                                } = paginationItemProps ? paginationItemProps(index) : {};
+                    {range(slidesCount).map((index) => {
+                        const isOnEdge =
+                            index !== 0 &&
+                            index !== slidesCount - 1 &&
+                            (index === visibleRange.min || index === visibleRange.max);
+                        const isActive = activeIndex === index;
+                        const isOutRange = index < visibleRange.min || index > visibleRange.max;
+                        const {
+                            className: itemClassName = undefined,
+                            label = undefined,
+                            ...itemProps
+                        } = paginationItemProps ? paginationItemProps(index) : {};
 
-                                const ariaLabel =
-                                    label || paginationItemLabel?.(index) || `${index + 1} / ${slidesCount}`;
+                        const ariaLabel = label || paginationItemLabel?.(index) || `${index + 1} / ${slidesCount}`;
 
-                                return (
-                                    <button
-                                        className={classNames(
-                                            handleBasicClasses({
-                                                prefix: `${CLASSNAME}__pagination-item`,
-                                                isActive,
-                                                isOnEdge,
-                                                isOutRange,
-                                            }),
-                                            itemClassName,
-                                        )}
-                                        key={index}
-                                        type="button"
-                                        tabIndex={isActive ? undefined : -1}
-                                        role="tab"
-                                        aria-selected={isActive}
-                                        onClick={() => onPaginationClick?.(index)}
-                                        aria-label={ariaLabel}
-                                        {...itemProps}
-                                    />
-                                );
-                            }),
-                        [
-                            slidesCount,
-                            visibleRange.min,
-                            visibleRange.max,
-                            activeIndex,
-                            paginationItemProps,
-                            paginationItemLabel,
-                            onPaginationClick,
-                        ],
-                    )}
+                        return (
+                            <button
+                                className={classNames(
+                                    handleBasicClasses({
+                                        prefix: `${CLASSNAME}__pagination-item`,
+                                        isActive,
+                                        isOnEdge,
+                                        isOutRange,
+                                    }),
+                                    itemClassName,
+                                )}
+                                key={index}
+                                type="button"
+                                aria-current={isActive || undefined}
+                                aria-controls={buildSlideShowGroupId(slideshowSlidesId, index)}
+                                onClick={() => onPaginationClick?.(index)}
+                                onFocus={onButtonFocus(index)}
+                                aria-label={ariaLabel}
+                                {...itemProps}
+                            />
+                        );
+                    })}
                 </div>
             </div>
 
@@ -216,6 +204,7 @@ const InternalSlideshowControls: Comp<SlideshowControlsProps, HTMLDivElement> = 
                     className={`${CLASSNAME}__play`}
                     color={theme === Theme.dark ? 'light' : 'dark'}
                     emphasis={Emphasis.low}
+                    aria-controls={slideshowSlidesId}
                 />
             ) : null}
 
@@ -226,6 +215,7 @@ const InternalSlideshowControls: Comp<SlideshowControlsProps, HTMLDivElement> = 
                 color={theme === Theme.dark ? 'light' : 'dark'}
                 emphasis={Emphasis.low}
                 onClick={onNextClick}
+                aria-controls={slideshowSlidesId}
             />
         </div>
     );

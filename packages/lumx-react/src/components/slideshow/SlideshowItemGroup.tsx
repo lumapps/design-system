@@ -1,19 +1,17 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 
-import classNames from 'classnames';
-import { mergeRefs } from '@lumx/react/utils/mergeRefs';
+import { getRootClassName } from '@lumx/react/utils/className';
 
-import { Comp, GenericProps } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { useSlideFocusManagement } from './useSlideFocusManagement';
 
 /**
  * Defines the props of the component.
  */
-export interface SlideshowItemGroupProps extends GenericProps {
-    role?: 'tabpanel' | 'group';
+export interface SlideshowItemGroupProps {
+    id?: string;
     label?: string;
     isDisplayed?: boolean;
+    slidesRef?: React.RefObject<HTMLDivElement>;
 }
 
 /**
@@ -26,39 +24,24 @@ const COMPONENT_NAME = 'SlideshowItemGroup';
  */
 export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
-export const buildSlideShowGroupId = (slidesId: string, index: number) => `${slidesId}-slide-${index}`;
+export const buildSlideShowGroupId = (slidesId: string | undefined, index: number) =>
+    slidesId && `${slidesId}-slide-${index}`;
 
 /**
- * SlideshowItemGroup component.
- *
- * @param  props Component props.
- * @param  ref   Component ref.
- * @return React element.
+ * Internal slideshow item group component.
  */
-export const SlideshowItemGroup: Comp<SlideshowItemGroupProps, HTMLDivElement> = forwardRef((props, ref) => {
-    const { className, children, role = 'group', label, isDisplayed, ...forwardedProps } = props;
-    const groupRef = React.useRef<HTMLDivElement>(null);
+export const SlideshowItemGroup: React.FC<SlideshowItemGroupProps> = (props) => {
+    const { id, children, label, isDisplayed, slidesRef } = props;
 
-    useSlideFocusManagement({ isSlideDisplayed: isDisplayed, slideRef: groupRef });
+    const groupRef = useSlideFocusManagement({
+        isSlideDisplayed: isDisplayed,
+        slidesRef,
+    });
 
     return (
-        <div
-            ref={mergeRefs(groupRef, ref)}
-            role={role}
-            className={classNames(
-                className,
-                handleBasicClasses({
-                    prefix: CLASSNAME,
-                }),
-            )}
-            aria-roledescription="slide"
-            aria-label={label}
-            {...forwardedProps}
-        >
+        <div id={id} ref={groupRef} role="group" className={CLASSNAME} aria-label={label} tabIndex={-1}>
             {children}
         </div>
     );
-});
-
+};
 SlideshowItemGroup.displayName = COMPONENT_NAME;
-SlideshowItemGroup.className = CLASSNAME;

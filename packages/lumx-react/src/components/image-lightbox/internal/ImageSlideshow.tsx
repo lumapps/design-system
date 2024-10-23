@@ -31,6 +31,7 @@ export const ImageSlideshow: React.FC<ImageSlideshowProps> = ({
         activeIndex,
         slideshowId,
         setSlideshow,
+        slideshow,
         slideshowSlidesId,
         slidesCount,
         onNextClick,
@@ -61,6 +62,7 @@ export const ImageSlideshow: React.FC<ImageSlideshowProps> = ({
                 onNextClick={onNextClick}
                 onPreviousClick={onPreviousClick}
                 onPaginationClick={onPaginationClick}
+                parentRef={slideshow}
                 {...slideshowControlsProps}
                 paginationItemProps={(index: number) => {
                     const props = slideshowControlsProps?.paginationItemProps?.(index) || {};

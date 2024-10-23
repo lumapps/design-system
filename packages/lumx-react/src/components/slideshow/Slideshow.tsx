@@ -1,11 +1,10 @@
 import React, { forwardRef } from 'react';
 
 import { SlideshowControls, SlideshowControlsProps, Theme, Slides, SlidesProps } from '@lumx/react';
-import { DEFAULT_OPTIONS } from '@lumx/react/hooks/useSlideshowControls';
 import { Comp, GenericProps } from '@lumx/react/utils/type';
 import { useFocusWithin } from '@lumx/react/hooks/useFocusWithin';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
-import { buildSlideShowGroupId } from './SlideshowItemGroup';
+import { DEFAULT_OPTIONS } from './useSlideshowControls';
 
 /**
  * Defines the props of the component.
@@ -14,7 +13,7 @@ export interface SlideshowProps
     extends GenericProps,
         Pick<SlidesProps, 'autoPlay' | 'slidesId' | 'id' | 'theme' | 'fillHeight' | 'groupBy' | 'slideGroupLabel'> {
     /** current slide active */
-    activeIndex?: SlidesProps['activeIndex'];
+    activeIndex?: number;
     /** Interval between each slide when automatic rotation is enabled. */
     interval?: number;
     /** Props to pass to the slideshow controls (minus those already set by the Slideshow props). */
@@ -134,27 +133,14 @@ export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props
                             parentRef={slideshow}
                             theme={theme}
                             isAutoPlaying={isAutoPlaying}
-                            nextButtonProps={{
-                                'aria-controls': slideshowSlidesId,
-                                ...slideshowControlsProps.nextButtonProps,
-                            }}
-                            previousButtonProps={{
-                                'aria-controls': slideshowSlidesId,
-                                ...slideshowControlsProps.previousButtonProps,
-                            }}
                             playButtonProps={
                                 autoPlay
                                     ? {
-                                          'aria-controls': slideshowSlidesId,
                                           onClick: toggleForcePause,
                                           ...slideshowControlsProps.playButtonProps,
                                       }
                                     : undefined
                             }
-                            paginationItemProps={(index) => ({
-                                'aria-controls': buildSlideShowGroupId(slideshowSlidesId, index),
-                                ...slideshowControlsProps.paginationItemProps?.(index),
-                            })}
                         />
                     </div>
                 ) : undefined

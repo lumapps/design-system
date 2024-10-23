@@ -22,3 +22,7 @@ export const PAGINATION_ITEMS_MAX = 5;
  * Size of a pagination item. Used to translate wrapper.
  */
 export const PAGINATION_ITEM_SIZE = 12;
+
+
+export const NEXT_SLIDE_EVENT = 'lumx-next-slide-event';
+export const PREV_SLIDE_EVENT = 'lumx-prev-slide-event';
