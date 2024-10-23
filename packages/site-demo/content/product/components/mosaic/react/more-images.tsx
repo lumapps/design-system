@@ -11,25 +11,12 @@ const IMAGES: ThumbnailProps[] = [
 ];
 
 export const App = () => {
-    const [activeIndex, setActiveIndex] = useState<number>();
-    const triggerElement = useRef(null);
-    const close = () => setActiveIndex(undefined);
 
     return (
         <>
             <div style={{ width: 250 }}>
-                <Mosaic thumbnails={IMAGES} onImageClick={setActiveIndex} />
+                <Mosaic thumbnails={IMAGES}/>
             </div>
-
-            <Lightbox isOpen={activeIndex !== undefined} parentElement={triggerElement} onClose={close}>
-                <Slideshow activeIndex={activeIndex} hasControls autoPlay fillHeight theme={Theme.dark}>
-                    {IMAGES.map(({ image, alt }) => (
-                        <SlideshowItem key={image}>
-                            <ImageBlock image={image} alt={alt} fillHeight align={Alignment.center} />
-                        </SlideshowItem>
-                    ))}
-                </Slideshow>
-            </Lightbox>
         </>
     );
 };
