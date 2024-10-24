@@ -22,7 +22,8 @@ const FIRST_DAY_FOR_LOCALES = [
     },
     {
         // Locales with Monday as the first day of the week
-        localeRX: /^(ar-(ma|tn)|az|be|bg|bs|ca|cs|da|de|el|en-(au|gb|ie|in|nz)|eo|es|et|eu|fi|fr|fy|gl|gu|hr|ht|hu|hy|id|is|it|ka|kk|kn|lb|lt|lv|mk|mn|ms|mt|nb|nl|nn|oc|pl|pt|ro|ru|sk|sl|sq|sr|sv|ta|tr|uk|uz|vi|zh-(cn|tw))$/i,
+        localeRX:
+            /^(ar-(ma|tn)|az|be|bg|bs|ca|cs|da|de|el|en-(au|gb|ie|in|nz)|eo|es|et|eu|fi|fr|fy|gl|gu|hr|ht|hu|hy|id|is|it|ka|kk|kn|lb|lt|lv|mk|mn|ms|mt|nb|nl|nn|oc|pl|pt|ro|ru|sk|sl|sq|sr|sv|ta|tr|uk|uz|vi|zh-(cn|tw))$/i,
         firstDay: 1,
     },
     {

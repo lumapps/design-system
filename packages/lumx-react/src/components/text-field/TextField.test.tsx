@@ -15,9 +15,12 @@ import {
 import partition from 'lodash/partition';
 import userEvent from '@testing-library/user-event';
 
+import { isFocusVisible } from '@lumx/react/utils/isFocusVisible';
 import { TextField, TextFieldProps } from './TextField';
 
 const CLASSNAME = TextField.className as string;
+
+jest.mock('@lumx/react/utils/isFocusVisible');
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -46,6 +49,8 @@ const setup = (propsOverride: Partial<TextFieldProps> = {}) => {
 };
 
 describe(`<${TextField.displayName}>`, () => {
+    (isFocusVisible as jest.Mock).mockReturnValue(false);
+
     describe('Render', () => {
         it('should render defaults', () => {
             const { element, inputNative } = setup({ id: 'fixedId' });
@@ -119,7 +124,7 @@ describe(`<${TextField.displayName}>`, () => {
             });
 
             expect(helper).toHaveTextContent('helper');
-            expect(inputNative).toHaveAttribute('aria-describedby');
+            expect(inputNative).toHaveAccessibleDescription('helper');
         });
 
         it('should have error text', () => {
@@ -132,7 +137,7 @@ describe(`<${TextField.displayName}>`, () => {
 
             expect(error).toHaveTextContent('error');
             expect(inputNative).toHaveAttribute('aria-invalid', 'true');
-            expect(inputNative).toHaveAttribute('aria-describedby');
+            expect(inputNative).toHaveAccessibleDescription('error');
         });
 
         it('should not have error text', () => {
@@ -146,7 +151,7 @@ describe(`<${TextField.displayName}>`, () => {
         });
 
         it('should have error and helper text', () => {
-            const { error, helper } = setup({
+            const { error, helper, inputNative } = setup({
                 error: 'error',
                 hasError: true,
                 helper: 'helper',
@@ -155,6 +160,21 @@ describe(`<${TextField.displayName}>`, () => {
             });
             expect(error).toHaveTextContent('error');
             expect(helper).toHaveTextContent('helper');
+            expect(inputNative).toHaveAccessibleDescription('error helper');
+        });
+
+        it('should have error and helper text and custom aria describedby', () => {
+            const { error, helper, inputNative } = setup({
+                error: 'error',
+                hasError: true,
+                helper: 'helper',
+                label: 'test',
+                placeholder: 'test',
+                'aria-describedby': 'aria-description',
+            });
+            expect(error).toHaveTextContent('error');
+            expect(helper).toHaveTextContent('helper');
+            expect(inputNative).toHaveAttribute('aria-describedby', expect.stringContaining('aria-description'));
         });
     });
 

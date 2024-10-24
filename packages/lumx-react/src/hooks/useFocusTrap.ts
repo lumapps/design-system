@@ -26,13 +26,17 @@ export function useFocusTrap(focusZoneElement: HTMLElement | Falsy, focusElement
             return undefined;
         }
 
+        // Use the shadow root as focusZoneElement when available
+        const focusZoneElementOrShadowRoot = focusZoneElement.shadowRoot || focusZoneElement;
+
         // Trap 'Tab' key down focus switch into the focus zone.
         const trapTabFocusInFocusZone = (evt: KeyboardEvent) => {
             const { key } = evt;
             if (key !== 'Tab') {
                 return;
             }
-            const focusable = getFirstAndLastFocusable(focusZoneElement);
+
+            const focusable = getFirstAndLastFocusable(focusZoneElementOrShadowRoot);
 
             // Prevent focus switch if no focusable available.
             if (!focusable.first) {
@@ -40,13 +44,17 @@ export function useFocusTrap(focusZoneElement: HTMLElement | Falsy, focusElement
                 return;
             }
 
+            const activeElement = focusZoneElement.shadowRoot
+                ? focusZoneElement.shadowRoot.activeElement
+                : document.activeElement;
+
             if (
                 // No previous focus
-                !document.activeElement ||
+                !activeElement ||
                 // Previous focus is at the end of the focus zone.
-                (!evt.shiftKey && document.activeElement === focusable.last) ||
+                (!evt.shiftKey && activeElement === focusable.last) ||
                 // Previous focus is outside the focus zone
-                !focusZoneElement.contains(document.activeElement)
+                !focusZoneElementOrShadowRoot.contains(activeElement)
             ) {
                 focusable.first.focus();
                 evt.preventDefault();
@@ -57,7 +65,7 @@ export function useFocusTrap(focusZoneElement: HTMLElement | Falsy, focusElement
                 // Focus order reversed
                 evt.shiftKey &&
                 // Previous focus is at the start of the focus zone.
-                document.activeElement === focusable.first
+                activeElement === focusable.first
             ) {
                 focusable.last.focus();
                 evt.preventDefault();
@@ -70,12 +78,12 @@ export function useFocusTrap(focusZoneElement: HTMLElement | Falsy, focusElement
         };
 
         // SETUP:
-        if (focusElement && focusZoneElement.contains(focusElement)) {
+        if (focusElement && focusZoneElementOrShadowRoot.contains(focusElement)) {
             // Focus the given element.
             focusElement.focus({ preventScroll: true });
         } else {
             // Focus the first focusable element in the zone.
-            getFirstAndLastFocusable(focusZoneElement).first?.focus({ preventScroll: true });
+            getFirstAndLastFocusable(focusZoneElementOrShadowRoot).first?.focus({ preventScroll: true });
         }
         FOCUS_TRAPS.register(focusTrap);
 

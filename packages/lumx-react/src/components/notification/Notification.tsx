@@ -7,7 +7,7 @@ import isFunction from 'lodash/isFunction';
 
 import { Button, Emphasis, Icon, Kind, Size, Theme } from '@lumx/react';
 
-import { DOCUMENT } from '@lumx/react/constants';
+import { DOCUMENT, NOTIFICATION_TRANSITION_DURATION } from '@lumx/react/constants';
 import { NOTIFICATION_CONFIGURATION } from '@lumx/react/components/notification/constants';
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
@@ -33,6 +33,8 @@ export interface NotificationProps extends GenericProps, HasTheme {
     onActionClick?(): void;
     /** On click callback. */
     onClick?(): void;
+    /** Whether the notification should be rendered into a DOM node that exists outside the DOM hierarchy of the parent component. */
+    usePortal?: boolean;
 }
 
 /**
@@ -51,6 +53,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
 const DEFAULT_PROPS: Partial<NotificationProps> = {
     theme: Theme.light,
     zIndex: 9999,
+    usePortal: true,
 };
 
 /* eslint-disable react-hooks/rules-of-hooks, jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */
@@ -72,6 +75,8 @@ export const Notification: Comp<NotificationProps, HTMLDivElement> = forwardRef(
         theme,
         type,
         zIndex,
+        usePortal,
+        style,
         ...forwardedProps
     } = props;
     if (!DOCUMENT) {
@@ -80,7 +85,7 @@ export const Notification: Comp<NotificationProps, HTMLDivElement> = forwardRef(
     }
     const { color, icon } = NOTIFICATION_CONFIGURATION[type as Kind] || {};
     const rootRef = useRef<HTMLDivElement>(null);
-    const isVisible = useTransitionVisibility(rootRef, !!isOpen);
+    const isVisible = useTransitionVisibility(rootRef, !!isOpen, NOTIFICATION_TRANSITION_DURATION);
     const hasAction: boolean = Boolean(onActionClick) && Boolean(actionLabel);
 
     const handleCallback = (evt: React.MouseEvent) => {
@@ -90,40 +95,43 @@ export const Notification: Comp<NotificationProps, HTMLDivElement> = forwardRef(
         evt.stopPropagation();
     };
 
-    return type && isVisible
-        ? createPortal(
-              // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-              <div
-                  ref={mergeRefs(ref, rootRef)}
-                  role="alert"
-                  {...forwardedProps}
-                  className={classNames(
-                      className,
-                      handleBasicClasses({
-                          color,
-                          hasAction,
-                          isHidden: !isOpen,
-                          prefix: CLASSNAME,
-                      }),
-                  )}
-                  onClick={onClick}
-                  style={{ zIndex }}
-              >
-                  <div className={`${CLASSNAME}__icon`}>
-                      <Icon icon={icon} size={Size.s} />
-                  </div>
-                  <div className={`${CLASSNAME}__content`}>{content}</div>
-                  {hasAction && (
-                      <div className={`${CLASSNAME}__action`}>
-                          <Button emphasis={Emphasis.medium} theme={theme} onClick={handleCallback}>
-                              <span>{actionLabel}</span>
-                          </Button>
-                      </div>
-                  )}
-              </div>,
-              document.body,
-          )
-        : null;
+    if (!type || !isVisible) {
+        return null;
+    }
+
+    const notification = (
+        // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+        <div
+            ref={mergeRefs(ref, rootRef)}
+            role="alert"
+            {...forwardedProps}
+            className={classNames(
+                className,
+                handleBasicClasses({
+                    color,
+                    hasAction,
+                    isHidden: !isOpen,
+                    prefix: CLASSNAME,
+                }),
+            )}
+            onClick={onClick}
+            style={{ ...style, zIndex }}
+        >
+            <div className={`${CLASSNAME}__icon`}>
+                <Icon icon={icon} size={Size.s} />
+            </div>
+            <div className={`${CLASSNAME}__content`}>{content}</div>
+            {hasAction && (
+                <div className={`${CLASSNAME}__action`}>
+                    <Button emphasis={Emphasis.medium} theme={theme} onClick={handleCallback}>
+                        <span>{actionLabel}</span>
+                    </Button>
+                </div>
+            )}
+        </div>
+    );
+
+    return usePortal ? createPortal(notification, document.body) : notification;
 });
 Notification.displayName = COMPONENT_NAME;
 Notification.className = CLASSNAME;

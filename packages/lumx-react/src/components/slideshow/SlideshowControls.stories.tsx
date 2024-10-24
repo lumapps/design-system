@@ -7,15 +7,10 @@ import { LANDSCAPE_IMAGES } from '@lumx/react/stories/controls/image';
 export default { title: 'LumX components/slideshow/Slideshow controls' };
 
 export const Simple = () => {
-    const {
-        activeIndex,
-        slidesCount,
-        onNextClick,
-        onPreviousClick,
-        onPaginationClick,
-    } = SlideshowControls.useSlideshowControls({
-        itemsCount: 9,
-    });
+    const { activeIndex, slidesCount, onNextClick, onPreviousClick, onPaginationClick } =
+        SlideshowControls.useSlideshowControls({
+            itemsCount: 9,
+        });
 
     return (
         <SlideshowControls

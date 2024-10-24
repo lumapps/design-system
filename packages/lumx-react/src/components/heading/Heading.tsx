@@ -40,6 +40,7 @@ export const Heading: Comp<HeadingProps> = forwardRef((props, ref) => {
     const { children, as, className, ...forwardedProps } = props;
     const { headingElement } = useHeadingLevel();
 
+    const computedHeadingElement = as || headingElement;
     return (
         <Text
             ref={ref}
@@ -49,8 +50,8 @@ export const Heading: Comp<HeadingProps> = forwardRef((props, ref) => {
                     prefix: CLASSNAME,
                 }),
             )}
-            as={as || headingElement}
-            typography={DEFAULT_TYPOGRAPHY_BY_LEVEL[headingElement]}
+            as={computedHeadingElement}
+            typography={DEFAULT_TYPOGRAPHY_BY_LEVEL[computedHeadingElement]}
             {...forwardedProps}
         >
             {children}

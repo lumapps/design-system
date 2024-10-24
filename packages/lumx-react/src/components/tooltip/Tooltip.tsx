@@ -1,17 +1,19 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { forwardRef, ReactNode, useMemo, useState } from 'react';
+import React, { forwardRef, ReactNode, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { usePopper } from 'react-popper';
-import { uid } from 'uid';
 
 import classNames from 'classnames';
 
-import { DOCUMENT } from '@lumx/react/constants';
-import { Comp, GenericProps } from '@lumx/react/utils/type';
+import { DOCUMENT, VISUALLY_HIDDEN } from '@lumx/react/constants';
+import { Comp, GenericProps, HasCloseMode } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
-import { mergeRefs } from '@lumx/react/utils/mergeRefs';
+import { useMergeRefs } from '@lumx/react/utils/mergeRefs';
 import { Placement } from '@lumx/react/components/popover';
+import { TooltipContextProvider } from '@lumx/react/components/tooltip/context';
+import { useId } from '@lumx/react/hooks/useId';
+import { usePopper } from '@lumx/react/hooks/usePopper';
 
+import { ARIA_LINK_MODES, TOOLTIP_ZINDEX } from '@lumx/react/components/tooltip/constants';
 import { useInjectTooltipRef } from './useInjectTooltipRef';
 import { useTooltipOpen } from './useTooltipOpen';
 
@@ -21,7 +23,7 @@ export type TooltipPlacement = Extract<Placement, 'top' | 'right' | 'bottom' | '
 /**
  * Defines the props of the component.
  */
-export interface TooltipProps extends GenericProps {
+export interface TooltipProps extends GenericProps, HasCloseMode {
     /** Anchor (element on which we activate the tooltip). */
     children: ReactNode;
     /** Delay (in ms) before closing the tooltip. */
@@ -32,6 +34,8 @@ export interface TooltipProps extends GenericProps {
     label?: string | null | false;
     /** Placement of the tooltip relative to the anchor. */
     placement?: TooltipPlacement;
+    /** Choose how the tooltip text should link to the anchor */
+    ariaLinkMode?: (typeof ARIA_LINK_MODES)[number];
 }
 
 /**
@@ -49,6 +53,9 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: Partial<TooltipProps> = {
     placement: Placement.BOTTOM,
+    closeMode: 'unmount',
+    ariaLinkMode: 'aria-describedby',
+    zIndex: TOOLTIP_ZINDEX,
 };
 
 /**
@@ -64,17 +71,28 @@ const ARROW_SIZE = 8;
  * @return React element.
  */
 export const Tooltip: Comp<TooltipProps, HTMLDivElement> = forwardRef((props, ref) => {
-    const { label, children, className, delay, placement, forceOpen, ...forwardedProps } = props;
-    // Disable in SSR or without a label.
-    if (!DOCUMENT || !label) {
+    const {
+        label,
+        children,
+        className,
+        delay,
+        placement,
+        forceOpen,
+        closeMode,
+        ariaLinkMode,
+        zIndex,
+        ...forwardedProps
+    } = props;
+    // Disable in SSR.
+    if (!DOCUMENT) {
         return <>{children}</>;
     }
 
-    const id = useMemo(() => `tooltip-${uid()}`, []);
+    const id = useId();
 
     const [popperElement, setPopperElement] = useState<null | HTMLElement>(null);
     const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
-    const { styles, attributes } = usePopper(anchorElement, popperElement, {
+    const { styles, attributes, update } = usePopper(anchorElement, popperElement, {
         placement,
         modifiers: [
             {
@@ -86,29 +104,53 @@ export const Tooltip: Comp<TooltipProps, HTMLDivElement> = forwardRef((props, re
 
     const position = attributes?.popper?.['data-popper-placement'] ?? placement;
     const { isOpen: isActivated, onPopperMount } = useTooltipOpen(delay, anchorElement);
-    const isOpen = isActivated || forceOpen;
-    const wrappedChildren = useInjectTooltipRef(children, setAnchorElement, isOpen, id);
+    const isOpen = (isActivated || forceOpen) && !!label;
+    const isMounted = !!label && (isOpen || closeMode === 'hide');
+    const isHidden = !isOpen && closeMode === 'hide';
+    const wrappedChildren = useInjectTooltipRef({
+        children,
+        setAnchorElement,
+        isMounted,
+        id,
+        label,
+        ariaLinkMode: ariaLinkMode as any,
+    });
 
+    // Update on open
+    React.useEffect(() => {
+        if (isOpen) update?.();
+    }, [isOpen, update]);
+
+    const labelLines = label ? label.split('\n') : [];
+
+    const tooltipRef = useMergeRefs(ref, setPopperElement, onPopperMount);
     return (
         <>
-            {wrappedChildren}
-            {isOpen &&
+            <TooltipContextProvider>{wrappedChildren}</TooltipContextProvider>
+            {isMounted &&
                 createPortal(
                     <div
-                        ref={mergeRefs(ref, setPopperElement, onPopperMount)}
+                        ref={tooltipRef}
                         {...forwardedProps}
                         id={id}
                         role="tooltip"
-                        aria-label={label}
-                        className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, position }))}
-                        style={styles.popper}
+                        aria-label={label || ''}
+                        className={classNames(
+                            className,
+                            handleBasicClasses({
+                                prefix: CLASSNAME,
+                                position,
+                            }),
+                            isHidden && VISUALLY_HIDDEN,
+                        )}
+                        style={{ ...styles.popper, zIndex }}
                         {...attributes.popper}
                     >
                         <div className={`${CLASSNAME}__arrow`} />
                         <div className={`${CLASSNAME}__inner`}>
-                            {label.indexOf('\n') !== -1
-                                ? label.split('\n').map((sentence: string) => <p key={sentence}>{sentence}</p>)
-                                : label}
+                            {labelLines.map((line) => (
+                                <p key={line}>{line}</p>
+                            ))}
                         </div>
                     </div>,
                     document.body,

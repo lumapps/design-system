@@ -11,13 +11,13 @@ import React, {
 } from 'react';
 import classNames from 'classnames';
 
-import { AspectRatio, HorizontalAlignment, Icon, Size, Theme } from '@lumx/react';
+import { AspectRatio, HorizontalAlignment, Icon, Size, Theme, ThumbnailObjectFit } from '@lumx/react';
 
 import { Comp, Falsy, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 
 import { mdiImageBroken } from '@lumx/icons';
-import { mergeRefs } from '@lumx/react/utils/mergeRefs';
+import { useMergeRefs } from '@lumx/react/utils/mergeRefs';
 import { useImageLoad } from '@lumx/react/components/thumbnail/useImageLoad';
 import { useFocusPointStyle } from '@lumx/react/components/thumbnail/useFocusPointStyle';
 import { FocusPoint, ThumbnailSize, ThumbnailVariant } from './types';
@@ -52,10 +52,14 @@ export interface ThumbnailProps extends GenericProps, HasTheme {
     imgRef?: Ref<HTMLImageElement>;
     /** Set to true to force the display of the loading skeleton. */
     isLoading?: boolean;
+    /** Set how the image should fit when its aspect ratio is constrained */
+    objectFit?: ThumbnailObjectFit;
     /** Size variant of the component. */
     size?: ThumbnailSize;
     /** Image loading mode. */
     loading?: ImgHTMLProps['loading'];
+    /** Ref of an existing placeholder image to display while loading. */
+    loadingPlaceholderImageRef?: React.RefObject<HTMLImageElement>;
     /** On click callback. */
     onClick?: MouseEventHandler<HTMLDivElement>;
     /** On key press callback. */
@@ -111,7 +115,9 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
         imgProps,
         imgRef: propImgRef,
         isLoading: isLoadingProp,
+        objectFit,
         loading,
+        loadingPlaceholderImageRef,
         size,
         theme,
         variant,
@@ -156,6 +162,16 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
         wrapperProps['aria-label'] = forwardedProps['aria-label'] || alt;
     }
 
+    // If we have a loading placeholder image that is really loaded (complete)
+    const loadingPlaceholderImage =
+        (isLoading && loadingPlaceholderImageRef?.current?.complete && loadingPlaceholderImageRef?.current) ||
+        undefined;
+
+    // Set loading placeholder image as background
+    const loadingStyle = loadingPlaceholderImage
+        ? { backgroundImage: `url(${loadingPlaceholderImage.src})` }
+        : undefined;
+
     return (
         <Wrapper
             {...wrapperProps}
@@ -175,20 +191,27 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
                     hasIconErrorFallback,
                     hasCustomErrorFallback,
                     isLoading,
+                    objectFit,
                     hasBadge: !!badge,
                 }),
                 fillHeight && `${CLASSNAME}--fill-height`,
             )}
         >
-            <div className={`${CLASSNAME}__background`}>
+            <span className={`${CLASSNAME}__background`}>
                 <img
+                    // Use placeholder image size
+                    width={loadingPlaceholderImage?.naturalWidth}
+                    height={loadingPlaceholderImage?.naturalHeight}
                     {...imgProps}
                     style={{
+                        // Reserve space while loading (when possible)
+                        width: isLoading ? imgProps?.width || loadingPlaceholderImage?.naturalWidth : undefined,
                         ...imgProps?.style,
                         ...imageErrorStyle,
                         ...focusPointStyle,
+                        ...loadingStyle,
                     }}
-                    ref={mergeRefs(setImgElement, propImgRef)}
+                    ref={useMergeRefs(setImgElement, propImgRef)}
                     className={classNames(
                         handleBasicClasses({
                             prefix: `${CLASSNAME}__image`,
@@ -203,15 +226,15 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
                     loading={loading}
                 />
                 {!isLoading && hasError && (
-                    <div className={`${CLASSNAME}__fallback`}>
+                    <span className={`${CLASSNAME}__fallback`}>
                         {hasIconErrorFallback ? (
                             <Icon icon={fallback as string} size={Size.xxs} theme={theme} />
                         ) : (
                             fallback
                         )}
-                    </div>
+                    </span>
                 )}
-            </div>
+            </span>
             {badge &&
                 React.cloneElement(badge, { className: classNames(`${CLASSNAME}__badge`, badge.props.className) })}
         </Wrapper>

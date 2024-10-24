@@ -11,6 +11,8 @@ const { GENERATED_DIR, OUT_ALIASES_NAME } = require('./constants.cjs');
  * 3. Write to SCSS file
  */
 async function generateSCSSAliases() {
+    console.debug('Generate SCSS class aliases...');
+
     const classDefinitions = [];
 
     // For each icon alias in the configuration

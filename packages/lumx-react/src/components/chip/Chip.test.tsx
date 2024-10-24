@@ -1,9 +1,8 @@
 import React from 'react';
 
-import { ColorPalette, Theme } from '@lumx/react';
+import { Theme } from '@lumx/react';
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
-import { getBasicClass } from '@lumx/react/utils/className';
-import { render } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import userEvent from '@testing-library/user-event';
 import { Chip, ChipProps } from './Chip';
@@ -33,7 +32,7 @@ describe('<Chip />', () => {
             expect(chip).toBeInTheDocument();
             expect(chip).toHaveTextContent('Chip text');
             expect(chip.className).toMatchInlineSnapshot(
-                `"lumx-chip lumx-chip--color-dark lumx-chip--size-m lumx-chip--is-unselected"`,
+                '"lumx-chip lumx-chip--color-dark lumx-chip--size-m lumx-chip--is-unselected"',
             );
         });
 
@@ -47,8 +46,26 @@ describe('<Chip />', () => {
             const { chip } = setup({ children: 'Chip text', onClick });
             expect(chip).toHaveAttribute('role', 'button');
             expect(chip.className).toMatchInlineSnapshot(
-                `"lumx-chip lumx-chip--is-clickable lumx-chip--color-dark lumx-chip--size-m lumx-chip--is-unselected"`,
+                '"lumx-chip lumx-chip--is-clickable lumx-chip--color-dark lumx-chip--size-m lumx-chip--is-unselected"',
             );
+        });
+
+        it('should render a link', () => {
+            setup({ children: 'Chip text', href: 'https://google.com', target: '_blank' });
+            const chip = screen.getByRole('link', { name: 'Chip text' });
+            expect(chip).toHaveAttribute('href', 'https://google.com');
+            expect(chip).toHaveAttribute('target', '_blank');
+            expect(chip).toHaveAttribute('tabIndex', '0');
+        });
+
+        it('should override the role', () => {
+            setup({ children: 'Chip text', role: 'radio' });
+            expect(screen.getByRole('radio', { name: 'Chip text' })).toBeInTheDocument();
+        });
+
+        it('should override the tabIndex', () => {
+            const { chip } = setup({ children: 'Chip text', tabIndex: -1 });
+            expect(chip).toHaveAttribute('tabIndex', '-1');
         });
     });
 
@@ -142,6 +159,14 @@ describe('<Chip />', () => {
 
             await userEvent.click(after as any);
             expect(onClick).toHaveBeenCalled();
+        });
+
+        it('should forward key down event', async () => {
+            const onKeyDown = jest.fn();
+            const { chip } = setup({ onClick, onKeyDown });
+
+            fireEvent.keyDown(chip, { key: 'A', code: 'KeyA' });
+            expect(onKeyDown).toHaveBeenCalled();
         });
     });
 

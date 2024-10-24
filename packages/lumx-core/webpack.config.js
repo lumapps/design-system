@@ -8,7 +8,6 @@ const path = require('path');
 const glob = require('glob');
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
@@ -92,7 +91,6 @@ const plugins = [
             ],
         },
     }),
-    new ForkTsCheckerWebpackPlugin(),
 ];
 
 if (!IS_CI) {

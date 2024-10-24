@@ -134,6 +134,11 @@ export interface AutocompleteProps extends GenericProps, HasTheme {
      */
     closeOnEscape?: boolean;
     /**
+     * Whether the focus should go back on the anchor when dropdown closes and focus is within.
+     * @see {@link DropdownProps#focusAnchorOnClose}
+     */
+    focusAnchorOnClose?: DropdownProps['focusAnchorOnClose'];
+    /**
      * The function called on blur.
      * @see {@link TextFieldProps#onBlur}
      */
@@ -229,6 +234,7 @@ export const Autocomplete: Comp<AutocompleteProps, HTMLDivElement> = forwardRef(
         theme,
         value,
         textFieldProps = {},
+        focusAnchorOnClose,
         ...forwardedProps
     } = props;
     const inputAnchorRef = useRef<HTMLElement>(null);
@@ -273,6 +279,7 @@ export const Autocomplete: Comp<AutocompleteProps, HTMLDivElement> = forwardRef(
                 closeOnClick={closeOnClick}
                 closeOnClickAway={closeOnClickAway}
                 closeOnEscape={closeOnEscape}
+                focusAnchorOnClose={focusAnchorOnClose}
                 fitToAnchorWidth={fitToAnchorWidth}
                 isOpen={isOpen}
                 offset={offset}

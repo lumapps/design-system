@@ -30,7 +30,7 @@ describe(`<${IconButton.displayName}>`, () => {
             const { iconButton, icon, img } = setup();
             expect(iconButton).toBeInTheDocument();
             expect(iconButton.className).toMatchInlineSnapshot(
-                `"lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-icon"`,
+                '"lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-icon"',
             );
 
             expect(icon).toBeInTheDocument();

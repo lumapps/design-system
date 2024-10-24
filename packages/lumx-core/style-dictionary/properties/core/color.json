@@ -165,7 +165,7 @@
         },
         "green": {
             "D2": {
-                "value": "#1a6e59",
+                "value": "#196D58",
                 "version": "0.22",
                 "comment": "Darkest green color",
                 "preferCSSVariable": true
@@ -289,7 +289,7 @@
         },
         "red": {
             "D2": {
-                "value": "#be1E46",
+                "value": "#BC0930",
                 "version": "0.22",
                 "comment": "Darkest red color",
                 "preferCSSVariable": true
@@ -301,7 +301,7 @@
                 "preferCSSVariable": true
             },
             "N": {
-                "value": "#df3050",
+                "value": "#DF2A4B",
                 "version": "0.22",
                 "comment": "Neutral red color",
                 "preferCSSVariable": true

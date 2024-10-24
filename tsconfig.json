@@ -12,6 +12,7 @@
         "noEmit": true,
         "noErrorTruncation": true,
         "noFallthroughCasesInSwitch": false,
+        "resolveJsonModule": true,
         "paths": {
             "@lumx/core/*": ["lumx-core/src/*"],
             "@lumx/angularjs": ["lumx-angularjs/src"],

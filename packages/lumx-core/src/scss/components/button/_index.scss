@@ -30,13 +30,23 @@
                 }
             }
 
-            &.#{$lumx-base-prefix}-button--emphasis-medium {
+            &.#{$lumx-base-prefix}-button--emphasis-medium:not(.#{$lumx-base-prefix}-button--is-selected) {
                 &.#{$lumx-base-prefix}-button--variant-button {
                     @include lumx-button-size(lumx-base-const("emphasis", "MEDIUM"), "button", $key);
                 }
 
                 &.#{$lumx-base-prefix}-button--variant-icon {
                     @include lumx-button-size(lumx-base-const("emphasis", "MEDIUM"), "icon", $key);
+                }
+            }
+
+            &.#{$lumx-base-prefix}-button--emphasis-medium.#{$lumx-base-prefix}-button--is-selected {
+                &.#{$lumx-base-prefix}-button--variant-button {
+                    @include lumx-button-size(lumx-base-const("emphasis", "SELECTED"), "button", $key);
+                }
+
+                &.#{$lumx-base-prefix}-button--variant-icon {
+                    @include lumx-button-size(lumx-base-const("emphasis", "SELECTED"), "icon", $key);
                 }
             }
 
@@ -82,9 +92,9 @@
         .#{$lumx-base-prefix}-button--color-#{$key} {
             &.#{$lumx-base-prefix}-button--emphasis-high.#{$lumx-base-prefix}-button--theme-light {
                 @include lumx-button-color(
-                    lumx-base-const("emphasis", "HIGH"),
-                    $key,
-                    lumx-base-const("theme", "LIGHT")
+                        lumx-base-const("emphasis", "HIGH"),
+                        $key,
+                        lumx-base-const("theme", "LIGHT")
                 );
             }
 
@@ -140,18 +150,19 @@
 .#{$lumx-base-prefix}-button-group {
     display: inline-flex;
     vertical-align: top;
+    gap: 1px;
 
     .#{$lumx-base-prefix}-button {
-        margin-right: 1px;
-        border-radius: 0 !important;
-
-        &:first-child {
-            border-radius: var(--lumx-border-radius) 0 0 var(--lumx-border-radius) !important;
+        // Remove border radius on the right on the first button (if not hidden and not also the last button)
+        &:not(:last-of-type:not(.visually-hidden)) {
+            border-top-right-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
         }
 
-        &:last-child {
-            margin-right: 0;
-            border-radius: 0 var(--lumx-border-radius) var(--lumx-border-radius) 0 !important;
+        // Remove border radius on the left on the last button (if not hidden and not also the first button)
+        &:not(:first-of-type:not(.visually-hidden)) {
+            border-top-left-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
         }
     }
 }

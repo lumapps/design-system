@@ -40,6 +40,10 @@
         background-color: lumx-color-variant("dark", "L1");
         animation: lumx-dialog-overlay-show $lumx-dialog-transition-duration;
 
+        @include mq($until: desktop) {
+            display: none;
+        }
+
         @media (prefers-reduced-motion: reduce) {
             animation: none;
         }
@@ -51,7 +55,21 @@
         display: flex;
         flex-direction: column;
         transform: translateY(0);
-        animation: lumx-dialog-show $lumx-dialog-transition-duration;
+
+        #{$self}--is-hidden & {
+            @include mq($until: desktop) {
+                transform: translateY(100%);
+            }
+        }
+
+        @include mq($until: desktop) {
+            transition: transform $lumx-dialog-transition-duration cubic-bezier(0.23, 1, 0.32, 1);
+            animation: lumx-dialog-show-mobile $lumx-dialog-transition-duration cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        @include mq($from: desktop) {
+            animation: lumx-dialog-show-desktop $lumx-dialog-transition-duration;
+        }
 
         @media (prefers-reduced-motion: reduce) {
             animation: none;
@@ -59,17 +77,26 @@
     }
 
     &__wrapper {
-        @include lumx-elevation(5);
-
         position: relative;
         display: flex;
         flex-direction: column;
-        max-height: 100%;
         background-color: lumx-color-variant("light", "N");
-        border-radius: var(--lumx-border-radius);
+
+        @include mq($until: desktop) {
+            min-height: 100%;
+        }
+
+        @include mq($from: desktop) {
+            @include lumx-elevation(5);
+
+            max-height: 100%;
+            border-radius: var(--lumx-border-radius);
+        }
 
         #{$self}--size-huge & {
-            height: 100%;
+            @include mq($from: desktop) {
+                min-height: 100%;
+            }
         }
     }
 
@@ -118,7 +145,17 @@
     }
 }
 
-@keyframes lumx-dialog-show {
+@keyframes lumx-dialog-show-mobile {
+    0% {
+        transform: translateY(100%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes lumx-dialog-show-desktop {
     0% {
         opacity: 0;
         transform: translateY(-24px);
@@ -136,10 +173,10 @@
 @each $key, $size in $lumx-dialog-sizes {
     .#{$lumx-base-prefix}-dialog--size-#{$key} .#{$lumx-base-prefix}-dialog__container {
         @include mq($until: desktop) {
-            top: $lumx-dialog-offset-portable;
-            right: $lumx-dialog-offset-portable;
-            left: $lumx-dialog-offset-portable;
-            height: calc(100% - 48px);
+            top: 0;
+            right: 0;
+            left: 0;
+            height: 100%;
         }
 
         @include mq($from: desktop) {
@@ -154,10 +191,10 @@
 
 .#{$lumx-base-prefix}-dialog--size-huge .#{$lumx-base-prefix}-dialog__container {
     @include mq($until: desktop) {
-        top: $lumx-dialog-offset-portable;
-        right: $lumx-dialog-offset-portable;
-        bottom: $lumx-dialog-offset-portable;
-        left: $lumx-dialog-offset-portable;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
     }
 
     @include mq($from: desktop) {

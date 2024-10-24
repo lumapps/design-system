@@ -37,7 +37,7 @@ export const ColorVariantsDesignTokenGroup: React.FC<Props> = ({ color, theme = 
                     <div
                         className={classNames(
                             'lumx-typography-body1',
-                            `lumx-spacing-margin-left-big  `,
+                            'lumx-spacing-margin-left-big  ',
                             `lumx-color-font-${theme === 'light' ? 'dark' : 'light'}-L2`,
                         )}
                     >

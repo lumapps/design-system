@@ -18,7 +18,7 @@ import { SelectVariant } from './constants';
 
 const CLASSNAME = SelectMultiple.className as string;
 
-jest.mock('uid', () => ({ uid: () => 'uid' }));
+jest.mock('@lumx/react/hooks/useId', () => ({ useId: () => ':r1:' }));
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -39,7 +39,7 @@ const setup = (props: Partial<SelectMultipleProps> = {}) => {
     return { props, select, getDropdown, helpers, inputWrapper, chip, valueChips };
 };
 
-describe(`<SelectMultiple>`, () => {
+describe('<SelectMultiple>', () => {
     describe('Props', () => {
         it('should have default classNames', () => {
             const { select, inputWrapper, valueChips, chip } = setup();
@@ -48,7 +48,7 @@ describe(`<SelectMultiple>`, () => {
             expect(valueChips).toBeEmptyDOMElement();
             expect(chip).not.toBeInTheDocument();
             expect(select.className).toMatchInlineSnapshot(
-                `"lumx-select lumx-select--has-multiple lumx-select lumx-select--is-empty lumx-select--theme-light"`,
+                '"lumx-select lumx-select--has-multiple lumx-select lumx-select--is-empty lumx-select--theme-light"',
             );
         });
 
@@ -119,7 +119,7 @@ describe(`<SelectMultiple>`, () => {
                 expect(inputWrapper).not.toBeInTheDocument();
                 expect(chip).toBeInTheDocument();
                 expect(select.className).toMatchInlineSnapshot(
-                    `"lumx-select lumx-select--has-multiple lumx-select lumx-select--is-empty lumx-select--theme-light"`,
+                    '"lumx-select lumx-select--has-multiple lumx-select lumx-select--is-empty lumx-select--theme-light"',
                 );
             });
 
@@ -127,7 +127,7 @@ describe(`<SelectMultiple>`, () => {
                 const { select, chip } = setup({ variant: SelectVariant.chip, value: ['val1', 'val2'] });
                 expect(chip).toHaveTextContent('val1 +1');
                 expect(select.className).toMatchInlineSnapshot(
-                    `"lumx-select lumx-select--has-multiple lumx-select lumx-select--has-value lumx-select--theme-light"`,
+                    '"lumx-select lumx-select--has-multiple lumx-select lumx-select--has-value lumx-select--theme-light"',
                 );
             });
 

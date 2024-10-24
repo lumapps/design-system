@@ -59,6 +59,14 @@ export interface HasClassName {
     className?: string;
 }
 
+export interface HasCloseMode {
+    /**
+     * Choose how the children are hidden when closed
+     * ('hide' keeps the children in DOM but hide them, 'unmount' remove the children from the DOM).
+     */
+    closeMode?: 'hide' | 'unmount';
+}
+
 /**
  * Define a generic props types.
  */
@@ -81,20 +89,24 @@ export type Predicate<T> = (t: T) => boolean;
  * @param  component React function component or the component name
  * @return predicate returning true if value is instance of the component
  */
-export const isComponent = <C>(component: Comp<C, any> | string) => (instance: ReactNode): instance is ReactElement => {
-    const componentName = typeof component === 'string' ? component : component.displayName;
+export const isComponent =
+    <C>(component: Comp<C, any> | string) =>
+    (instance: ReactNode): instance is ReactElement => {
+        const componentName = typeof component === 'string' ? component : component.displayName;
 
-    return (
-        !!get(instance, '$$typeof') &&
-        NAME_PROPERTIES.some((nameProperty: string): boolean => get(instance, nameProperty) === componentName)
-    );
-};
+        return (
+            !!get(instance, '$$typeof') &&
+            NAME_PROPERTIES.some((nameProperty: string): boolean => get(instance, nameProperty) === componentName)
+        );
+    };
 
 /**
  * Similar to `isComponent` but more precise as it's not based on the component `displayName` but on the component function reference.
  */
-export const isComponentType = (type: ReactElement['type']) => (node: ReactNode): node is ReactElement =>
-    React.isValidElement(node) && node.type === type;
+export const isComponentType =
+    (type: ReactElement['type']) =>
+    (node: ReactNode): node is ReactElement =>
+        React.isValidElement(node) && node.type === type;
 
 /**
  * JS falsy values.
@@ -131,7 +143,22 @@ export type HasAriaLabelOrLabelledBy<T = string | undefined> = T extends string
 export type ComponentRef<C> = C extends keyof JSX.IntrinsicElements
     ? JSX.IntrinsicElements[C]['ref']
     : C extends Comp<any, infer T>
-    ? React.Ref<T>
-    : C extends React.JSXElementConstructor<{ ref?: infer R }>
-    ? R
-    : never;
+      ? React.Ref<T>
+      : C extends React.JSXElementConstructor<{ ref?: infer R }>
+        ? R
+        : never;
+
+/**
+ * Rectangle size
+ */
+export type RectSize = { width: number; height: number };
+
+/**
+ * Maybe a HTMLElement or a React ref of a HTMLElement
+ */
+export type MaybeElementOrRef<E extends HTMLElement> = E | React.RefObject<E | null> | null | undefined;
+
+/**
+ * A point coordinate in 2D space
+ */
+export type Point = { x: number; y: number };

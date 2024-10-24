@@ -44,7 +44,9 @@
 
     &__background {
         position: relative;
+        display: block;
         width: 100%;
+        overflow: hidden;
 
         #{$self}--variant-rounded & {
             border-radius: var(--lumx-border-radius);
@@ -56,6 +58,9 @@
         max-width: 100%;
         max-height: 100%;
         font-size: 0;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: var(--lumx-thumbnail-image-object-fit, cover);
 
         &--has-defined-size {
             width: fit-content;
@@ -65,8 +70,6 @@
 
     &__background,
     &__image {
-        overflow: hidden;
-
         #{$self}--align-left & {
             margin-right: auto;
         }
@@ -85,6 +88,10 @@
         right: math.div(-$lumx-spacing-unit, 2);
         bottom: math.div(-$lumx-spacing-unit, 2);
     }
+
+    &__fallback {
+        display: block;
+    }
 }
 
 /* Thumbnail sizes
@@ -101,10 +108,15 @@
 
 .#{$lumx-base-prefix}-thumbnail:not(.#{$lumx-base-prefix}-thumbnail--aspect-ratio-original) {
     .#{$lumx-base-prefix}-thumbnail__image {
-        object-fit: cover;
+        object-fit: var(--lumx-thumbnail-image-object-fit, cover);
         object-position: center;
         width: 100%;
         height: 100%;
+
+        // When using object-fit:cover + ratio 1/1, Chrome switches to pixelated downsizing algo
+        // https://stackoverflow.com/a/77059936
+        // The following prevent this so the image is correctly downsized using blurring effect
+        overflow-clip-margin: unset;
 
         @supports not (aspect-ratio: 1 / 1) {
             position: absolute;
@@ -132,6 +144,17 @@
             padding-top: $aspect-ratio;
         }
     }
+}
+
+/* Thumbnail object fit
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-thumbnail--object-fit-cover {
+    --lumx-thumbnail-image-object-fit: cover;
+}
+
+.#{$lumx-base-prefix}-thumbnail--object-fit-contain {
+    --lumx-thumbnail-image-object-fit: contain;
 }
 
 /* Thumbnail states

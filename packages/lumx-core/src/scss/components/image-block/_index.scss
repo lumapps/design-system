@@ -14,23 +14,12 @@
     }
 
     &__wrapper {
-        display: flex;
-        flex-direction: column;
+        > * {
+            max-width: 100%;
+        }
 
         #{$self}--fill-height & {
             flex-shrink: 0;
-        }
-
-        #{$self}--align-left & {
-            align-items: flex-start;
-        }
-
-        #{$self}--align-center & {
-            align-items: center;
-        }
-
-        #{$self}--align-right & {
-            align-items: flex-end;
         }
 
         #{$self}--caption-position-below & {
@@ -52,43 +41,6 @@
         #{$self}--theme-dark#{$self}--caption-position-over & {
             background-color: lumx-color-variant("dark", "L1");
         }
-    }
-
-    &__caption {
-        #{$self}--caption-position-over & {
-            max-width: 100%;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-    }
-
-    &__title {
-        @include lumx-typography("subtitle1");
-
-        #{$self}--theme-light & {
-            color: lumx-color-variant("dark", "N");
-        }
-
-        #{$self}--theme-dark & {
-            color: lumx-color-variant("light", "N");
-        }
-    }
-
-    &__description {
-        @include lumx-typography("body1");
-
-        #{$self}--theme-light & {
-            color: lumx-color-variant("dark", "L2");
-        }
-
-        #{$self}--theme-dark & {
-            color: lumx-color-variant("light", "L2");
-        }
-    }
-
-    &__tags {
-        margin-top: $lumx-spacing-unit;
     }
 
     &__actions {

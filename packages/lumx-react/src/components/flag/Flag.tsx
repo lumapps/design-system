@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import classNames from 'classnames';
 
-import { ColorPalette, Icon, Size, Theme } from '@lumx/react';
+import { ColorPalette, Icon, Size, Theme, Text } from '@lumx/react';
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 
@@ -11,7 +11,9 @@ export interface FlagProps extends GenericProps, HasTheme {
     /** Icon to use before the label. */
     icon?: string;
     /** Text label of the flag. */
-    label: string;
+    label: React.ReactNode;
+    /** Enable text truncate on overflow */
+    truncate?: boolean;
 }
 
 const COMPONENT_NAME = 'Flag';
@@ -28,17 +30,20 @@ const DEFAULT_PROPS: Partial<FlagProps> = {
  * @return React element.
  */
 export const Flag: Comp<FlagProps, HTMLDivElement> = forwardRef((props, ref) => {
-    const { label, icon, color, className, theme, ...forwardedProps } = props;
+    const { label, icon, color, className, theme, truncate, ...forwardedProps } = props;
     const flagColor = color || (theme === Theme.light ? ColorPalette.dark : ColorPalette.light);
+    const isTruncated = !!truncate;
 
     return (
         <div
             {...forwardedProps}
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color: flagColor }))}
+            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color: flagColor, isTruncated }))}
             ref={ref}
         >
             {icon && <Icon icon={icon} size={Size.xxs} className={`${CLASSNAME}__icon`} />}
-            <span className={`${CLASSNAME}__label`}>{label}</span>
+            <Text as="span" truncate={isTruncated} typography="overline" className={`${CLASSNAME}__label`}>
+                {label}
+            </Text>
         </div>
     );
 });

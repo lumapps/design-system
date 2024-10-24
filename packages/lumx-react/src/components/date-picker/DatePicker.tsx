@@ -23,17 +23,13 @@ export const DatePicker: Comp<DatePickerProps, HTMLDivElement> = forwardRef((pro
         referenceDate = new Date();
     }
 
-    const [monthOffset, setMonthOffset] = useState(0);
-
-    const setPrevMonth = () => setMonthOffset(monthOffset - 1);
-    const setNextMonth = () => setMonthOffset(monthOffset + 1);
+    const [selectedMonth, setSelectedMonth] = useState(referenceDate);
+    const setPrevMonth = () => setSelectedMonth((current) => addMonthResetDay(current, -1));
+    const setNextMonth = () => setSelectedMonth((current) => addMonthResetDay(current, +1));
 
     const onDatePickerChange = (newDate?: Date) => {
         onChange(newDate);
-        setMonthOffset(0);
     };
-
-    const selectedMonth = addMonthResetDay(referenceDate, monthOffset);
 
     return (
         <DatePickerControlled
@@ -46,6 +42,7 @@ export const DatePicker: Comp<DatePickerProps, HTMLDivElement> = forwardRef((pro
             onNextMonthChange={setNextMonth}
             selectedMonth={selectedMonth}
             onChange={onDatePickerChange}
+            onMonthChange={setSelectedMonth}
         />
     );
 });

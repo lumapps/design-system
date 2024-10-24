@@ -4,6 +4,7 @@ const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin');
 const path = require('path');
 const lodash = require('lodash');
 const { createFilePath } = require('gatsby-source-filesystem');
+const generateJSONIconLibrary = require('@lumx/icons/override/generate/generate-icon-library.cjs');
 const cleanExcerpt = require('./plugins/utils/cleanExcerpt');
 const mdxUtils = require('./plugins/utils/mdxUtils');
 const CONFIGS = require('../../configs');
@@ -62,7 +63,10 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     }
 };
 
-exports.onCreateWebpackConfig = ({ actions, getConfig }) => {
+exports.onCreateWebpackConfig = async ({ actions, getConfig }) => {
+    // Generate the JSON icon library
+    await generateJSONIconLibrary();
+
     actions.setWebpackConfig({
         plugins: [CONFIGS.ignoreNotFoundExport],
 

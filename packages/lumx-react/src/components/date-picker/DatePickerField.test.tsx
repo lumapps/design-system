@@ -11,6 +11,9 @@ import { CLASSNAME } from './constants';
 
 const mockedDate = new Date(1487721600000);
 Date.now = jest.fn(() => mockedDate.valueOf());
+jest.mock('@lumx/react/utils/date/getYearDisplayName', () => ({
+    getYearDisplayName: () => 'année',
+}));
 
 const setup = (propsOverride: Partial<DatePickerFieldProps> = {}) => {
     const props: DatePickerFieldProps = {

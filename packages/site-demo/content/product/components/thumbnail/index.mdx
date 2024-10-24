@@ -1,3 +1,5 @@
+import { Thumbnail } from '@lumx/react';
+
 # Thumbnail
 
 **Thumbnails display formatted images.**
@@ -24,6 +26,19 @@ Thumbnails come in 6 aspect ratios: `free`, `horizontal`, `original`, `square`, 
 
 <DemoBlock orientation="horizontal" demo="ratios" />
 
+*Setting the `objectFit` property to `contain` avoids cropping the image (letterboxing).*
+
+<DemoBlock orientation="horizontal">
+    <Thumbnail
+        image="/demo-assets/landscape3.jpg"
+        alt="Square"
+        size="xl"
+        aspectRatio="wide"
+        objectFit="contain"
+        style={{ background: 'black' }}
+    />
+</DemoBlock>
+
 ## Variants
 
 Thumbnails come in two variants: `squared` and `rounded`
@@ -45,6 +60,10 @@ Three type of size constraints can be used:
   Thumbnails will scale down if the given `width` and `height` are bigger than allowed space.
 - using `fillHeight` to fit the parent height.
 - using a fixed ratio (any ratio except `free` and `original`) and a width constraint (using `size` prop or manual CSS).
+
+When loading a larger version of an image already loaded in the current page, the `loadingPlaceholderImageRef` can be
+used to provide the reference to the smaller image that will be used as a placeholder image displayed while the larger
+image loads.
 
 ## Error state
 

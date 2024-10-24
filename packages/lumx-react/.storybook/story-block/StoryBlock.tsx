@@ -18,7 +18,7 @@ const CLASSNAME = 'story-block';
 export const StoryBlock: React.FC<StoryBlockProps> = (props) => {
     const { Story, context } = props;
     const { theme, materialTheme } = context.globals;
-    const args = {...context.args, theme};
+    const args = { theme, ...context.args };
 
 
     // Hard code today date for stable chromatic stories snapshots.

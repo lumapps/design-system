@@ -50,41 +50,39 @@ const DEFAULT_PROPS: Partial<GridColumnProps> = {};
  * @param ref Component ref.
  * @return React element.
  */
-export const GridColumn: Comp<GridColumnProps> = forwardRef(
-    (props, ref): ReactElement => {
-        const {
-            as: Component = 'div',
-            gap,
-            maxColumns,
-            itemMinWidth,
-            children,
-            className,
-            style = {},
-            ...forwardedProps
-        } = props;
+export const GridColumn: Comp<GridColumnProps> = forwardRef((props, ref): ReactElement => {
+    const {
+        as: Component = 'div',
+        gap,
+        maxColumns,
+        itemMinWidth,
+        children,
+        className,
+        style = {},
+        ...forwardedProps
+    } = props;
 
-        return (
-            <Component
-                {...forwardedProps}
-                ref={ref as React.Ref<any>}
-                className={classNames(
-                    className,
-                    handleBasicClasses({
-                        prefix: CLASSNAME,
-                    }),
-                )}
-                style={{
-                    ...style,
-                    ['--lumx-grid-column-item-min-width' as any]: isInteger(itemMinWidth) && `${itemMinWidth}px`,
-                    ['--lumx-grid-column-columns' as any]: maxColumns,
-                    ['--lumx-grid-column-gap' as any]: gap && `var(--lumx-spacing-unit-${gap})`,
-                }}
-            >
-                {children}
-            </Component>
-        );
-    },
-);
+    return (
+        <Component
+            {...forwardedProps}
+            ref={ref as React.Ref<any>}
+            className={classNames(
+                className,
+                handleBasicClasses({
+                    prefix: CLASSNAME,
+                }),
+            )}
+            style={{
+                ...style,
+                ['--lumx-grid-column-item-min-width' as any]: isInteger(itemMinWidth) && `${itemMinWidth}px`,
+                ['--lumx-grid-column-columns' as any]: maxColumns,
+                ['--lumx-grid-column-gap' as any]: gap && `var(--lumx-spacing-unit-${gap})`,
+            }}
+        >
+            {children}
+        </Component>
+    );
+});
 GridColumn.displayName = COMPONENT_NAME;
 GridColumn.className = CLASSNAME;
 GridColumn.defaultProps = DEFAULT_PROPS;

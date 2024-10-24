@@ -22,34 +22,50 @@
     }
 
     &__arrow {
-        &,
-        &::before {
-            position: absolute;
-            z-index: -1;
-            width: $lumx-popover-arrow-size;
-            height: $lumx-popover-arrow-size;
-        }
+        position: absolute;
+        z-index: -1;
+        width: $lumx-popover-arrow-size;
+        height: $lumx-popover-arrow-size;
+        fill: lumx-color-variant("light", "N");
 
-        &::before {
-            content: "";
-            background: lumx-color-variant("light", "N");
-            transform: rotate(45deg);
+        svg {
+            display: block;
         }
 
         #{$self}[data-popper-placement^='top'] & {
-            bottom: math.div(-$lumx-popover-arrow-size, 2);
+            bottom: -$lumx-popover-arrow-size;
+
+            svg {
+                transform: rotate(180deg);
+            }
         }
 
         #{$self}[data-popper-placement^='bottom'] & {
-            top: math.div(-$lumx-popover-arrow-size, 2);
+            top: -$lumx-popover-arrow-size;
         }
 
         #{$self}[data-popper-placement^='left'] & {
-            right: math.div(-$lumx-popover-arrow-size, 2);
+            right: -$lumx-popover-arrow-size;
+
+            svg {
+                transform: rotate(90deg);
+            }
         }
 
-        #{$self}[data-popper-placement^='righ'] & {
-            left: math.div(-$lumx-popover-arrow-size, 2);
+        #{$self}[data-popper-placement^='right'] & {
+            left: -$lumx-popover-arrow-size;
+
+            svg {
+                transform: rotate(-90deg);
+            }
+        }
+    }
+
+    &--theme-dark {
+        background: lumx-color-variant("dark", "N");
+
+        #{$self}__arrow {
+            fill: lumx-color-variant("dark", "N");
         }
     }
 }
@@ -59,6 +75,6 @@
 
 @each $depth, $shadow in $lumx-elevation-shadows {
     .#{$lumx-base-prefix}-popover--elevation-#{$depth} {
-        @include lumx-elevation($depth);
+        @include lumx-elevation-drop-shadow($depth);
     }
 }

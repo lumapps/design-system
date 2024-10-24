@@ -9,6 +9,10 @@
     align-items: center;
     list-style: none;
 
+    &--wrap {
+        flex-wrap: wrap;
+    }
+
     &__item {
         display: contents;
     }

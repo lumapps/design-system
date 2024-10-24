@@ -2,8 +2,10 @@ import { Button, Dialog, Dropdown, Placement, Tooltip } from '@lumx/react';
 import React, { useState } from 'react';
 import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
 import { withChromaticForceScreenSize } from '@lumx/react/stories/decorators/withChromaticForceScreenSize';
+import { ARIA_LINK_MODES } from '@lumx/react/components/tooltip/constants';
 
 const placements = [Placement.TOP, Placement.BOTTOM, Placement.RIGHT, Placement.LEFT];
+const CLOSE_MODES = ['hide', 'unmount'];
 
 export default {
     title: 'LumX components/tooltip/Tooltip',
@@ -11,6 +13,9 @@ export default {
     args: Tooltip.defaultProps,
     argTypes: {
         placement: getSelectArgType(placements),
+        children: { control: false },
+        closeMode: { control: { type: 'inline-radio' }, options: CLOSE_MODES },
+        ariaLinkMode: { control: { type: 'inline-radio' }, options: ARIA_LINK_MODES },
     },
     decorators: [
         // Force minimum chromatic screen size to make sure the dialog appears in view.
@@ -39,6 +44,14 @@ export const ForceOpen = {
     args: {
         ...OnAButton.args,
         forceOpen: true,
+    },
+};
+
+/** Hide on close instead of unmounting */
+export const CloseModeHide = {
+    args: {
+        ...OnAButton.args,
+        closeMode: 'hide',
     },
 };
 
@@ -86,3 +99,19 @@ export const HideTooltipOnHiddenAnchor = () => {
         </>
     );
 };
+HideTooltipOnHiddenAnchor.parameters = { chromatic: { disableSnapshot: true } };
+
+/** Test focusing a tooltip anchor programmatically */
+export const TestProgrammaticFocus = () => {
+    const anchorRef = React.useRef<HTMLButtonElement>(null);
+    return (
+        <>
+            <p>The tooltip should open on keyboard focus but not on programmatic focus (ex: after a click)</p>
+            <Tooltip label="label">
+                <Button ref={anchorRef}>button with label</Button>
+            </Tooltip>
+            <Button onClick={() => anchorRef.current?.focus()}>focus the button</Button>
+        </>
+    );
+};
+TestProgrammaticFocus.parameters = { chromatic: { disableSnapshot: true } };

@@ -42,7 +42,7 @@
         @if $color == "yellow" {
             color: lumx-color-variant("dark", "L1");
         } @else {
-            color: lumx-color-variant($color, "N");
+            color: lumx-color-variant($color, "D2");
         }
     } @else if $state == lumx-base-const("state", "HOVER") {
         background-color: lumx-color-variant($color, "L4");
@@ -84,7 +84,7 @@
 
 @mixin lumx-state-low($state, $color) {
     @if $state == lumx-base-const("state", "DEFAULT") {
-        color: lumx-color-variant($color, "N");
+        color: lumx-color-variant($color, "D2");
         background-color: transparent;
     } @else if $state == lumx-base-const("state", "HOVER") {
         background-color: lumx-color-variant($color, "L5");

@@ -10,7 +10,6 @@ const {
     GENERATED_FONT_DIR,
     MDI_FONT_NAME
 } = require('./constants.cjs');
-const { cssCodeToUnicode } = require('./utils.cjs');
 
 /**
  * Merge the MDI font with our override font.
@@ -22,6 +21,8 @@ const { cssCodeToUnicode } = require('./utils.cjs');
  * 5. Export all font file formats
  */
 async function generateMergedFont() {
+    console.debug('Generate merged font files...');
+
     const woff2InitPromise = woff2.init();
     const mdiFontPromise = fs.readFile(MDI_FONT_PATH);
 
@@ -31,12 +32,14 @@ async function generateMergedFont() {
 
     // List code point that should be replaced in MDI
     const overrideCodePoints = Object.values(overrideConfig)
-        .map(({ cssCode, replace }) => replace && cssCodeToUnicode(cssCode))
+        .map(({ unicode, replace }) => replace && unicode)
         .filter(Boolean);
+
     // List all MDI code points
     const allMDICodePoints = Font.create(await mdiFontPromise, { type: 'ttf' })
         .find({ filter: () => true })
         .flatMap(({ unicode }) => unicode);
+
     // List all MDI code points without the overridden code point
     const subset = without(allMDICodePoints, ...overrideCodePoints);
 

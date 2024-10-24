@@ -80,3 +80,13 @@ export const InfoWithAction = {
         isOpen: true,
     },
 };
+
+/**
+ * Info notification rendered outside a React portal
+ */
+export const InfoWithoutPortal = {
+    args: {
+        ...Info.args,
+        usePortal: false,
+    },
+};

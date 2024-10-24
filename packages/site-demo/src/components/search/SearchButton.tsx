@@ -11,7 +11,7 @@ import { useIsServerSide } from '@lumx/demo/utils/hooks/useIsServerSide';
 import { SearchDialog } from './dialog/SearchDialog';
 import './SearchButton.scss';
 
-const NAVIGATOR: any = typeof navigator !== `undefined` ? navigator : undefined;
+const NAVIGATOR: any = typeof navigator !== 'undefined' ? navigator : undefined;
 const IS_MAC = (NAVIGATOR?.userAgentData?.platform || NAVIGATOR?.platform)?.toLowerCase().startsWith('mac');
 
 interface SearchButtonProps {
@@ -55,7 +55,7 @@ export const SearchButton: React.FC<SearchButtonProps> = ({ className }) => {
                 onMouseEnter={partial(setMountDialog, true)}
             >
                 Search
-                <kbd className={classNames(`search-shortcut`, isServerSide && 'search-shortcut--hidden')}>
+                <kbd className={classNames('search-shortcut', isServerSide && 'search-shortcut--hidden')}>
                     <kbd>{IS_MAC ? '⌘' : 'Ctrl'}</kbd>
                     <kbd>K</kbd>
                 </kbd>

@@ -1,7 +1,7 @@
 {
     "name": "eslint-plugin-lumapps",
     "private": true,
-    "version": "3.6.1",
+    "version": "3.9.3",
     "license": "MIT",
     "main": "index.js"
 }

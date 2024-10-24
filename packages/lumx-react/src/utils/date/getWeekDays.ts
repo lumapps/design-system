@@ -1,7 +1,7 @@
 import { Locale } from '@lumx/react/utils/locale/types';
 import { getFirstDayOfWeek } from './getFirstDayOfWeek';
 
-export type WeekDayInfo = { letter: string; number: number };
+export type WeekDayInfo = { letter: string; number: number; long: string };
 
 export const DAYS_PER_WEEK = 7;
 
@@ -22,10 +22,12 @@ export const getWeekDays = (locale: Locale): Array<WeekDayInfo> => {
     for (let i = 0; i < DAYS_PER_WEEK; i++) {
         // Single letter week day (ex: "M" for "Monday", "L" for "Lundi", etc.)
         const letter = iterDate.toLocaleDateString(locale.code, { weekday: 'narrow' });
+        // Weed day long notation
+        const long = iterDate.toLocaleDateString(locale.code, { weekday: 'long' });
         // Day number (1-based index starting on Monday)
         const number = iterDate.getDay();
 
-        weekDays.push({ letter, number });
+        weekDays.push({ letter, number, long });
         iterDate.setDate(iterDate.getDate() + 1);
     }
     return weekDays;

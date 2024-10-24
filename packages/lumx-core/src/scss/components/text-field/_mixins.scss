@@ -89,13 +89,11 @@
     border: none;
     outline: none;
 
-    &[type="number"] {
-        appearance: textfield;
-    }
+    // Always show the up/down arrow, not just on hover or focus
+    &[type=number]::-webkit-inner-spin-button,
+    &[type=number]::-webkit-outer-spin-button {
+        opacity: 1;
 
-    &[type="number"]::-webkit-inner-spin-button,
-    &[type="number"]::-webkit-outer-spin-button {
-        appearance: none;
     }
 
     @if $theme == lumx-base-const("theme", "LIGHT") {
@@ -140,10 +138,6 @@
     flex: 1 1 auto;
     flex-wrap: wrap;
     align-items: center;
-    margin: calc((var(--lumx-text-field-input-min-height) - var(--lumx-size-s) - 6px) / 2) 0;
-
-    .#{$lumx-base-prefix}-chip {
-        margin: $lumx-chip-group-spacing 0;
-        margin-right: $lumx-chip-group-spacing * 2;
-    }
+    margin: calc((var(--lumx-text-field-input-min-height) - var(--lumx-size-s) - 6px) / 2 + $lumx-chip-group-spacing) 0;
+    gap: $lumx-chip-group-spacing * 2;
 }

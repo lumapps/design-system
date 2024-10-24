@@ -1,44 +1,49 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { PopoverDialog } from './PopoverDialog';
+import { WithButtonTrigger, WithIconButtonTrigger } from './PopoverDialog.stories';
 
-const DialogWithButton = (forwardedProps: any) => {
-    const anchorRef = useRef(null);
-    const [isOpen, setIsOpen] = useState<boolean>(false);
-
-    return (
-        <>
-            <button type="button" ref={anchorRef} onClick={() => setIsOpen((current) => !current)}>
-                Open popover
-            </button>
-
-            <PopoverDialog {...forwardedProps} anchorRef={anchorRef} isOpen={isOpen} onClose={() => setIsOpen(false)}>
-                <button type="button">Button 1</button>
-                <button type="button">Button 2</button>
-            </PopoverDialog>
-            {/* This should never have focus while popover is opened */}
-            <button type="button">External button</button>
-        </>
-    );
-};
+jest.mock('@lumx/react/utils/isFocusVisible');
 
 describe(`<${PopoverDialog.displayName}>`, () => {
-    it('should behave like a dialog', async () => {
+    it('should open and init focus', async () => {
         const label = 'Test Label';
+        render(<WithButtonTrigger label={label} />);
 
-        render(<DialogWithButton label={label} />);
-
-        /** Open the popover */
+        // Open popover
         const triggerElement = screen.getByRole('button', { name: 'Open popover' });
         await userEvent.click(triggerElement);
 
         const dialog = await screen.findByRole('dialog', { name: label });
-        const withinDialog = within(dialog);
 
-        /** Get buttons within dialog */
-        const dialogButtons = withinDialog.getAllByRole('button');
+        // Focused the first button
+        expect(within(dialog).getAllByRole('button')[0]).toHaveFocus();
+    });
+
+    it('should work with aria-label', async () => {
+        const label = 'Test Label';
+        render(<WithButtonTrigger aria-label={label} />);
+
+        // Open popover
+        const triggerElement = screen.getByRole('button', { name: 'Open popover' });
+        await userEvent.click(triggerElement);
+
+        expect(await screen.findByRole('dialog', { name: label })).toBeInTheDocument();
+    });
+
+    it('should trap focus', async () => {
+        const label = 'Test Label';
+        render(<WithButtonTrigger label={label} />);
+
+        // Open popover
+        const triggerElement = screen.getByRole('button', { name: 'Open popover' });
+        await userEvent.click(triggerElement);
+
+        const dialog = await screen.findByRole('dialog', { name: label });
+
+        const dialogButtons = within(dialog).getAllByRole('button');
 
         // First button should have focus by default on opening
         expect(dialogButtons[0]).toHaveFocus();
@@ -54,12 +59,62 @@ describe(`<${PopoverDialog.displayName}>`, () => {
 
         // As there is no more button, focus should loop back to first button.
         expect(dialogButtons[0]).toHaveFocus();
+    });
+
+    it('should close on escape and restore focus to trigger', async () => {
+        const label = 'Test Label';
+        render(<WithButtonTrigger label={label} />);
+
+        // Open popover
+        const triggerElement = screen.getByRole('button', { name: 'Open popover' });
+        await userEvent.click(triggerElement);
+
+        const dialog = await screen.findByRole('dialog', { name: label });
 
         // Close the popover
         await userEvent.keyboard('{escape}');
 
-        expect(screen.queryByRole('dialog', { name: label })).not.toBeInTheDocument();
-        /** Anchor should retrieve the focus */
+        expect(dialog).not.toBeInTheDocument();
+
+        // Focus restored to the trigger element
+        expect(triggerElement).toHaveFocus();
+    });
+
+    it('should close externally and restore focus to trigger', async () => {
+        const label = 'Test Label';
+        render(<WithButtonTrigger label={label} />);
+
+        // Open popover
+        const triggerElement = screen.getByRole('button', { name: 'Open popover' });
+        await userEvent.click(triggerElement);
+
+        const dialog = await screen.findByRole('dialog', { name: label });
+
+        // Close the popover
+        await userEvent.click(screen.getByRole('button', { name: 'Close' }));
+
+        expect(dialog).not.toBeInTheDocument();
+
+        // Focus restored to the trigger element
+        expect(triggerElement).toHaveFocus();
+    });
+
+    it('should close on escape and restore focus to trigger having a tooltip', async () => {
+        const label = 'Test Label';
+        render(<WithIconButtonTrigger label={label} />);
+
+        // Open popover
+        const triggerElement = screen.getByRole('button', { name: 'Open popover' });
+        await userEvent.click(triggerElement);
+
+        const dialog = await screen.findByRole('dialog', { name: label });
+
+        // Close the popover
+        await userEvent.keyboard('{escape}');
+
+        expect(dialog).not.toBeInTheDocument();
+
+        // Focus restored to the trigger element
         expect(triggerElement).toHaveFocus();
     });
 });

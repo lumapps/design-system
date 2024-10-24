@@ -1,0 +1,68 @@
+@use "sass:map";
+
+/* ==========================================================================
+   Image Lightbox
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-image-lightbox {
+    // Remove lightbox animation & transition (use view transition instead)
+    @supports (view-transition-name: name) {
+        &.#{$lumx-base-prefix}-lightbox {
+            transition: none;
+            animation: none;
+        }
+    }
+
+    .#{$lumx-base-prefix}-lightbox__wrapper {
+        inset: 0;
+    }
+
+    .lumx-slideshow-item-group,
+    .lumx-slideshow-item {
+        display: flex;
+        width: 100%;
+        height: 100%;
+    }
+
+    &__image-slide {
+        overflow: auto;
+
+        // Do not scroll parents when reaching the end of the current scroll area
+        overscroll-behavior: contain;
+
+        // Need to disable native touch actions to implement pinch to zoom
+        touch-action: none;
+
+        // Apply OS dark scheme (for the scrollbar)
+        color-scheme: dark;
+
+        // Transparent scrollbar (fallback to OS dark scheme)
+        scrollbar-color: $lumx-color-light-L4 transparent;
+    }
+
+    &__thumbnail {
+        margin: auto;
+    }
+
+    &__footer {
+        flex-shrink: 0;
+        padding: $lumx-spacing-unit-huge $lumx-spacing-unit;
+        background: $lumx-color-dark-L1;
+    }
+}
+
+// Crop & scale transitioning pair of trigger image + opening image
+::view-transition-image-pair(#{$lumx-base-prefix}-image-lightbox) {
+    overflow: hidden;
+}
+::view-transition-old(#{$lumx-base-prefix}-image-lightbox),
+::view-transition-new(#{$lumx-base-prefix}-image-lightbox) {
+    height: 100%;
+}
+::view-transition-group(#{$lumx-base-prefix}-image-lightbox) {
+    animation-duration: $lumx-lightbox-transition-duration;
+
+    @media (prefers-reduced-motion: reduce) {
+        animation: none;
+    }
+}

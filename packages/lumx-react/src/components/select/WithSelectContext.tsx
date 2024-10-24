@@ -1,6 +1,5 @@
 import classNames from 'classnames';
-import React, { Ref, useCallback, useMemo, useRef } from 'react';
-import { uid } from 'uid';
+import React, { Ref, useCallback, useRef } from 'react';
 
 import { Placement } from '@lumx/react';
 import { Kind, Theme } from '@lumx/react/components';
@@ -11,6 +10,7 @@ import { useListenFocus } from '@lumx/react/hooks/useListenFocus';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
+import { useId } from '@lumx/react/hooks/useId';
 import { CoreSelectProps, SelectVariant } from './constants';
 
 /** The display name of the component. */
@@ -56,7 +56,8 @@ export const WithSelectContext = (
     }: CoreSelectProps,
     ref: Ref<HTMLDivElement>,
 ): React.ReactElement => {
-    const selectId = useMemo(() => id || `select-${uid()}`, [id]);
+    const generatedSelectId = useId();
+    const selectId = id || generatedSelectId;
     const anchorRef = useRef<HTMLElement>(null);
     const selectRef = useRef<HTMLDivElement>(null);
     const dropdownRef = useRef<HTMLDivElement>(null);

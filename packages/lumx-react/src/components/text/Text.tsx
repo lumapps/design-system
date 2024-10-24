@@ -9,6 +9,8 @@ import {
     getTypographyClassName,
 } from '@lumx/react/utils/className';
 import classNames from 'classnames';
+import { useOverflowTooltipLabel } from '@lumx/react/hooks/useOverflowTooltipLabel';
+import { useMergeRefs } from '@lumx/react/utils/mergeRefs';
 
 /**
  * Defines the props of the component.
@@ -104,9 +106,11 @@ export const Text: Comp<TextProps> = forwardRef((props, ref) => {
         !(isTruncated && !isTruncatedMultiline) &&
         whiteSpace && { '--lumx-text-white-space': whiteSpace };
 
+    const { tooltipLabel, labelRef } = useOverflowTooltipLabel();
+
     return (
         <Component
-            ref={ref as React.Ref<any>}
+            ref={useMergeRefs(ref as React.Ref<any>, labelRef)}
             className={classNames(
                 className,
                 handleBasicClasses({
@@ -118,6 +122,7 @@ export const Text: Comp<TextProps> = forwardRef((props, ref) => {
                 colorClass,
                 noWrap && `${CLASSNAME}--no-wrap`,
             )}
+            title={tooltipLabel}
             style={{ ...truncateLinesStyle, ...whiteSpaceStyle, ...style }}
             {...forwardedProps}
         >

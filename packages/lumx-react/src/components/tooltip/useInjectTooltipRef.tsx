@@ -1,51 +1,55 @@
-import get from 'lodash/get';
-import isUndefined from 'lodash/isUndefined';
 import React, { cloneElement, ReactNode, useMemo } from 'react';
 
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
+
+interface Options {
+    /** Original tooltip anchor */
+    children: ReactNode;
+    /** Set tooltip anchor element */
+    setAnchorElement: (e: HTMLDivElement) => void;
+    /** Whether the tooltip is open or not */
+    isMounted: boolean | undefined;
+    /** Tooltip id */
+    id: string;
+    /** Tooltip label*/
+    label?: string | null | false;
+    /** Choose how the tooltip text should link to the anchor */
+    ariaLinkMode: 'aria-describedby' | 'aria-labelledby';
+}
 
 /**
  * Add ref and ARIA attribute(s) in tooltip children or wrapped children.
  * Button, IconButton, Icon and React HTML elements don't need to be wrapped but any other kind of children (array, fragment, custom components)
  * will be wrapped in a <span>.
- *
- * @param  children         Original tooltip anchor.
- * @param  setAnchorElement Set tooltip anchor element.
- * @param  isOpen           Whether the tooltip is open or not.
- * @param  id               Tooltip id.
- * @return tooltip anchor.
  */
-export const useInjectTooltipRef = (
-    children: ReactNode,
-    setAnchorElement: (e: HTMLDivElement) => void,
-    isOpen: boolean | undefined,
-    id: string,
-): ReactNode => {
+export const useInjectTooltipRef = (options: Options): ReactNode => {
+    const { children, setAnchorElement, isMounted, id, label, ariaLinkMode } = options;
+    // Only add link when mounted
+    const linkId = isMounted ? id : undefined;
+
     return useMemo(() => {
-        // Let the children remove the aria-describedby attribute by setting it to undefined
-        const childrenHasAriaProp = get(children, 'props')
-            ? 'aria-describedby' in get(children, 'props') && isUndefined(get(children, 'props.aria-describedby'))
-            : false;
-        const ariaProps = { 'aria-describedby': isOpen && !childrenHasAriaProp ? id : undefined };
+        if (!label) return children;
 
-        if (
-            children &&
-            get(children, '$$typeof') &&
-            get(children, 'props.disabled') !== true &&
-            get(children, 'props.isDisabled') !== true
-        ) {
-            const element = children as any;
+        // Non-disabled element
+        if (React.isValidElement(children) && children.props.disabled !== true && children.props.isDisabled !== true) {
+            const ref = mergeRefs((children as any).ref, setAnchorElement);
+            const props = { ...children.props, ref };
 
-            return cloneElement(element, {
-                ...element.props,
-                ...ariaProps,
-                ref: mergeRefs(element.ref, setAnchorElement),
-            });
+            // Do not add label/description if the tooltip label is already in aria-label
+            if (linkId && label !== props['aria-label']) {
+                if (props[ariaLinkMode]) props[ariaLinkMode] += ' ';
+                else props[ariaLinkMode] = '';
+                props[ariaLinkMode] += linkId;
+            }
+
+            return cloneElement(children, props);
         }
+
+        const aria = linkId ? { [ariaLinkMode]: linkId } : undefined;
         return (
-            <div className="lumx-tooltip-anchor-wrapper" ref={setAnchorElement} {...ariaProps}>
+            <div className="lumx-tooltip-anchor-wrapper" ref={setAnchorElement} {...aria}>
                 {children}
             </div>
         );
-    }, [isOpen, id, children, setAnchorElement]);
+    }, [label, children, setAnchorElement, linkId, ariaLinkMode]);
 };

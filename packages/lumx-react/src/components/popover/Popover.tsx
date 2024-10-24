@@ -1,4 +1,4 @@
-import React, { forwardRef, ReactNode, RefObject, useCallback, useRef } from 'react';
+import React, { forwardRef, ReactNode, RefObject, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
 import classNames from 'classnames';
@@ -7,21 +7,20 @@ import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 import { DOCUMENT } from '@lumx/react/constants';
-import { Comp, GenericProps } from '@lumx/react/utils/type';
+import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
-import { mergeRefs } from '@lumx/react/utils/mergeRefs';
-import { useFocusWithin } from '@lumx/react/hooks/useFocusWithin';
-import { getFirstAndLastFocusable } from '@lumx/react/utils/focus/getFirstAndLastFocusable';
+import { useMergeRefs } from '@lumx/react/utils/mergeRefs';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { skipRender } from '@lumx/react/utils/skipRender';
 
+import { useRestoreFocusOnClose } from './useRestoreFocusOnClose';
 import { usePopoverStyle } from './usePopoverStyle';
-import { FitAnchorWidth, Elevation, Offset, Placement } from './constants';
+import { Elevation, FitAnchorWidth, Offset, Placement, POPOVER_ZINDEX } from './constants';
 
 /**
  * Defines the props of the component.
  */
-export interface PopoverProps extends GenericProps {
+export interface PopoverProps extends GenericProps, HasTheme {
     /** Reference to the DOM element used to set the position of the popover. */
     anchorRef: React.RefObject<HTMLElement>;
     /** Customize the root element. (Must accept ref forwarding and props forwarding!). */
@@ -61,6 +60,8 @@ export interface PopoverProps extends GenericProps {
     placement?: Placement;
     /** Whether the popover should be rendered into a DOM node that exists outside the DOM hierarchy of the parent component. */
     usePortal?: boolean;
+    /** The element in which the focus trap should be set. Default to popover. */
+    focusTrapZoneElement?: RefObject<HTMLElement>;
     /** Z-axis position. */
     zIndex?: number;
     /** On close callback (on click away or Escape pressed). */
@@ -85,8 +86,9 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
 const DEFAULT_PROPS: Partial<PopoverProps> = {
     elevation: 3,
     placement: Placement.AUTO,
+    focusAnchorOnClose: true,
     usePortal: true,
-    zIndex: 9999,
+    zIndex: POPOVER_ZINDEX,
 };
 
 /** Method to render the popover inside a portal if usePortal is true */
@@ -110,106 +112,73 @@ const _InnerPopover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, ref
         onClose,
         parentElement,
         usePortal,
-        focusAnchorOnClose = true,
+        focusAnchorOnClose,
         withFocusTrap,
         boundaryRef,
         fitToAnchorWidth,
         fitWithinViewportHeight,
+        focusTrapZoneElement,
         offset,
         placement,
         style,
+        theme,
         zIndex,
         ...forwardedProps
     } = props;
-    const clickAwayRef = useRef<HTMLDivElement>(null);
-    const contentRef = useRef<HTMLDivElement>(null);
+    const popoverRef = useRef<HTMLDivElement>(null);
 
-    const {
-        styles,
-        attributes,
-        isPositioned,
-        position,
-        setArrowElement,
-        setPopperElement,
-        popperElement,
-    } = usePopoverStyle({
-        offset,
-        hasArrow,
-        fitToAnchorWidth,
-        fitWithinViewportHeight,
-        boundaryRef,
-        anchorRef,
-        children,
-        placement,
-        style,
-        zIndex,
-    });
+    const { styles, attributes, isPositioned, position, setArrowElement, setPopperElement, popperElement } =
+        usePopoverStyle({
+            offset,
+            hasArrow,
+            fitToAnchorWidth,
+            fitWithinViewportHeight,
+            boundaryRef,
+            anchorRef,
+            children,
+            placement,
+            style,
+            zIndex,
+        });
 
-    /**
-     * Track whether the focus is currently set in the
-     * popover.
-     * */
-    const isFocusedWithin = useRef(false);
+    const unmountSentinel = useRestoreFocusOnClose({ focusAnchorOnClose, anchorRef, parentElement }, popperElement);
+    const focusZoneElement = focusTrapZoneElement?.current || popoverRef?.current;
 
-    useFocusWithin({
-        element: popperElement || null,
-        onFocusIn: () => {
-            isFocusedWithin.current = true;
-        },
-        onFocusOut: () => {
-            isFocusedWithin.current = false;
-        },
-    });
-
-    /** Action on close */
-    const handleClose = useCallback(() => {
-        if (!onClose) {
-            return;
-        }
-
-        /**
-         * If the focus is currently within the popover
-         * when the popover closes, reset the focus back to the anchor element
-         * unless specifically requested not to.
-         */
-        if (isFocusedWithin.current && focusAnchorOnClose) {
-            let elementToFocus = parentElement?.current;
-            if (!elementToFocus && anchorRef?.current) {
-                // Focus the first focusable element in anchor.
-                elementToFocus = getFirstAndLastFocusable(anchorRef.current).first;
-            }
-            if (!elementToFocus) {
-                // Fallback on the anchor element.
-                elementToFocus = anchorRef?.current;
-            }
-            elementToFocus?.focus({ preventScroll: true });
-        }
-
-        onClose();
-    }, [anchorRef, focusAnchorOnClose, onClose, parentElement]);
-
-    useCallbackOnEscape(handleClose, isOpen && closeOnEscape);
+    useCallbackOnEscape(onClose, isOpen && closeOnEscape);
 
     /** Only set focus within if the focus trap is disabled as they interfere with one another. */
     useFocus(focusElement?.current, !withFocusTrap && isOpen && isPositioned);
-    useFocusTrap(withFocusTrap && isOpen && contentRef?.current, focusElement?.current);
+    useFocusTrap(withFocusTrap && isOpen && focusZoneElement, focusElement?.current);
 
-    const clickAwayRefs = useRef([clickAwayRef, anchorRef]);
+    const clickAwayRefs = useRef([popoverRef, anchorRef]);
+    const mergedRefs = useMergeRefs<HTMLDivElement>(setPopperElement, ref, popoverRef);
 
     return isOpen
         ? renderPopover(
               <Component
                   {...forwardedProps}
-                  ref={mergeRefs<HTMLDivElement>(setPopperElement, ref, clickAwayRef, contentRef)}
+                  ref={mergedRefs}
                   className={classNames(
                       className,
-                      handleBasicClasses({ prefix: CLASSNAME, elevation: Math.min(elevation || 0, 5), position }),
+                      handleBasicClasses({
+                          prefix: CLASSNAME,
+                          theme,
+                          elevation: Math.min(elevation || 0, 5),
+                          position,
+                      }),
                   )}
                   style={styles.popover}
                   {...attributes.popper}
               >
-                  <ClickAwayProvider callback={closeOnClickAway && handleClose} childrenRefs={clickAwayRefs}>
-                      {hasArrow && <div ref={setArrowElement} className={`${CLASSNAME}__arrow`} style={styles.arrow} />}
+                  {unmountSentinel}
+                  <ClickAwayProvider callback={closeOnClickAway && onClose} childrenRefs={clickAwayRefs}>
+                      {hasArrow && (
+                          <div ref={setArrowElement} className={`${CLASSNAME}__arrow`} style={styles.arrow}>
+                              <svg viewBox="0 0 14 14" aria-hidden>
+                                  <path d="M8 3.49C7.62 2.82 6.66 2.82 6.27 3.48L.04 14 14.04 14 8 3.49Z" />
+                              </svg>
+                          </div>
+                      )}
                       {children}
                   </ClickAwayProvider>
               </Component>,

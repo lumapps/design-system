@@ -7,12 +7,14 @@ import { getByClassName, queryAllByClassName, queryByClassName } from '@lumx/rea
 import { render, within } from '@testing-library/react';
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import userEvent from '@testing-library/user-event';
+import { isFocusVisible } from '@lumx/react/utils/isFocusVisible';
 
 import { Select, SelectProps, SelectVariant } from './Select';
 
 const CLASSNAME = Select.className as string;
 
-jest.mock('uid', () => ({ uid: () => 'uid' }));
+jest.mock('@lumx/react/utils/isFocusVisible');
+jest.mock('@lumx/react/hooks/useId', () => ({ useId: () => ':r1:' }));
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -33,12 +35,14 @@ const setup = (propsOverride: Partial<SelectProps> = {}) => {
 };
 
 describe(`<${Select.displayName}>`, () => {
+    (isFocusVisible as jest.Mock).mockReturnValue(false);
+
     describe('Props', () => {
         it('should have default classNames', () => {
             const { select, getDropdown } = setup();
             expect(getDropdown()).not.toBeInTheDocument();
             expect(select.className).toMatchInlineSnapshot(
-                `"lumx-select lumx-select--has-unique lumx-select lumx-select--is-empty lumx-select--theme-light"`,
+                '"lumx-select lumx-select--has-unique lumx-select lumx-select--is-empty lumx-select--theme-light"',
             );
         });
 
@@ -116,7 +120,7 @@ describe(`<${Select.displayName}>`, () => {
                 expect(inputWrapper).not.toBeInTheDocument();
                 expect(chip).toBeInTheDocument();
                 expect(select.className).toMatchInlineSnapshot(
-                    `"lumx-select lumx-select--has-unique lumx-select lumx-select--is-empty lumx-select--theme-light"`,
+                    '"lumx-select lumx-select--has-unique lumx-select lumx-select--is-empty lumx-select--theme-light"',
                 );
             });
 
@@ -124,7 +128,7 @@ describe(`<${Select.displayName}>`, () => {
                 const { select, chip, props } = setup({ variant: SelectVariant.chip, value: 'val1' });
                 expect(chip).toHaveTextContent(props.value);
                 expect(select.className).toMatchInlineSnapshot(
-                    `"lumx-select lumx-select--has-unique lumx-select lumx-select--has-value lumx-select--theme-light"`,
+                    '"lumx-select lumx-select--has-unique lumx-select lumx-select--has-value lumx-select--theme-light"',
                 );
             });
 

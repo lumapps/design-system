@@ -15,10 +15,10 @@ import {
     ButtonProps,
 } from '@lumx/react';
 
-import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiInformation } from '@lumx/icons/';
-import { uid } from 'uid';
+import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiInformation } from '@lumx/icons';
 import { Comp } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { useId } from '@lumx/react/hooks/useId';
 
 export interface AlertDialogProps extends Omit<DialogProps, 'header' | 'footer'> {
     /** Message variant. */
@@ -78,25 +78,16 @@ const DEFAULT_PROPS: Partial<DialogProps> = {
  * Children of this component should only be strings, paragraphs or links.
  */
 export const AlertDialog: Comp<AlertDialogProps, HTMLDivElement> = forwardRef((props, ref) => {
-    const {
-        id,
-        title,
-        className,
-        cancelProps,
-        confirmProps,
-        kind,
-        size,
-        dialogProps,
-        children,
-        ...forwardedProps
-    } = props;
+    const { id, title, className, cancelProps, confirmProps, kind, size, dialogProps, children, ...forwardedProps } =
+        props;
 
     const cancelButtonRef = React.useRef(null);
     const confirmationButtonRef = React.useRef(null);
     const { color, icon } = CONFIG[kind as Kind] || {};
 
     // Define a unique ID to target title and description for aria attributes.
-    const uniqueId = React.useMemo(() => id || uid(), [id]);
+    const generatedId = useId();
+    const uniqueId = id || generatedId;
     const titleId = `${uniqueId}-title`;
     const descriptionId = `${uniqueId}-description`;
 

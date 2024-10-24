@@ -75,9 +75,7 @@ export const SearchDialog: React.FC<SearchDialogProps> = (props) => {
                             isSelected={index === activeItemIndex}
                         >
                             <p className="search-result__path">
-                                {result.parentTitlePath?.map((parent) => (
-                                    <span key={parent}>{parent}</span>
-                                ))}
+                                {result.parentTitlePath?.map((parent) => <span key={parent}>{parent}</span>)}
                                 <span dangerouslySetInnerHTML={{ __html: result.title }} />
                             </p>
                             {result.content && (

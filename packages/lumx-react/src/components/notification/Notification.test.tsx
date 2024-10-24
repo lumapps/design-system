@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Kind } from '@lumx/react';
-import { render, within } from '@testing-library/react';
+import { render, within, screen } from '@testing-library/react';
 import { queryByClassName } from '@lumx/react/testing/utils/queries';
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import userEvent from '@testing-library/user-event';
@@ -65,6 +65,24 @@ describe(`<${Notification.displayName}>`, () => {
         // Click notification
         await userEvent.click(notification as any);
         expect(onClick).toHaveBeenCalled();
+    });
+
+    it('should render outside a portal', () => {
+        const parentId = '123';
+        render(
+            <div data-testid={parentId}>
+                <Notification isOpen type="info" usePortal={false} />
+            </div>,
+        );
+        const parent = screen.getByTestId(parentId);
+        const notification = queryByClassName(parent, CLASSNAME);
+        expect(notification).toBeInTheDocument();
+    });
+
+    it('should forward styles', () => {
+        const { notification } = setup({ style: { color: 'red' } });
+        expect(notification).toBeInTheDocument();
+        expect(notification).toHaveStyle('color: red');
     });
 
     // Common tests suite.

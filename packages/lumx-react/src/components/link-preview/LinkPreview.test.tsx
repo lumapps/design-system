@@ -1,8 +1,7 @@
 import React from 'react';
 
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
-import { getBasicClass } from '@lumx/react/utils/className';
-import { Link, Thumbnail } from '@lumx/react';
+import { Thumbnail } from '@lumx/react';
 import { render, screen, within } from '@testing-library/react';
 import { getByClassName, queryByClassName, queryAllByClassName } from '@lumx/react/testing/utils/queries';
 

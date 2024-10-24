@@ -1,7 +1,28 @@
-$lumx-elevation-shadows: (
-    1: "0 0 2px 0",
-    2: "0 1px 4px 0",
-    3: "0 2px 8px 0",
-    4: "0 4px 16px 0",
-    5: "0 8px 32px 0",
+@use "sass:map";
+
+$lumx-elevation-shadow-offset-y: (
+    1: 0,
+    2: 1px,
+    3: 2px,
+    4: 4px,
+    5: 8px,
 );
+$lumx-elevation-shadow-blur: (
+    1: 2px,
+    2: 4px,
+    3: 8px,
+    4: 16px,
+    5: 32px,
+);
+$lumx-elevation-shadows: ();
+
+@each $depth in (1, 2, 3, 4, 5) {
+    $offset-y: map.get($lumx-elevation-shadow-offset-y, $depth);
+    $blur: map.get($lumx-elevation-shadow-blur, $depth);
+    $lumx-elevation-shadows: map.set(
+        $lumx-elevation-shadows,
+        $depth,
+        // box-shadow <offset-x> <offset-y> <blur-radius> <spread-radius>
+        "0 " + $offset-y + " " + $blur + " 0"
+    );
+}

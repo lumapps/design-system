@@ -35,24 +35,21 @@ function getFontColor(colorName: string, colorVariant: string): 'dark' | 'light'
 function formatColorDescription(colorName: string): ColorVariants {
     const colorWithVariants = get(DESIGN_TOKENS, ['color', colorName]);
 
-    return mapValues(
-        colorWithVariants,
-        (variant, name): ColorDocumentation => {
-            // Last segment of the name
-            const colorVariant = name.replace(/.*-([^-]+)$/, '$1');
-            const { attributes } = variant;
-            const { hex, rgb } = attributes;
-            return {
-                colorName,
-                colorVariant,
-                hex,
-                rgb,
-                fontColor: getFontColor(colorName, colorVariant),
-                comment: variant.comment,
-                version: variant.version,
-            };
-        },
-    );
+    return mapValues(colorWithVariants, (variant, name): ColorDocumentation => {
+        // Last segment of the name
+        const colorVariant = name.replace(/.*-([^-]+)$/, '$1');
+        const { attributes } = variant;
+        const { hex, rgb } = attributes;
+        return {
+            colorName,
+            colorVariant,
+            hex,
+            rgb,
+            fontColor: getFontColor(colorName, colorVariant),
+            comment: variant.comment,
+            version: variant.version,
+        };
+    });
 }
 
 export const useThemeColorVariants = (colorName: string) => {

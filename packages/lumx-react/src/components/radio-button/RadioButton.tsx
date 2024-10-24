@@ -1,12 +1,12 @@
-import React, { useMemo, forwardRef, ReactNode, SyntheticEvent, InputHTMLAttributes } from 'react';
+import React, { forwardRef, ReactNode, SyntheticEvent, InputHTMLAttributes } from 'react';
 
 import classNames from 'classnames';
-import { uid } from 'uid';
 
 import { InputHelper, InputLabel, Theme } from '@lumx/react';
 
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { useId } from '@lumx/react/hooks/useId';
 
 /**
  * Defines the props of the component.
@@ -76,7 +76,8 @@ export const RadioButton: Comp<RadioButtonProps, HTMLDivElement> = forwardRef((p
         inputProps,
         ...forwardedProps
     } = props;
-    const inputId = useMemo(() => id || `${CLASSNAME.toLowerCase()}-${uid()}`, [id]);
+    const generatedInputId = useId();
+    const inputId = id || generatedInputId;
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (onChange) {

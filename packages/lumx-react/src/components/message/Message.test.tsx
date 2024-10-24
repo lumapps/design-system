@@ -2,9 +2,11 @@ import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import { Kind } from '@lumx/react';
 
 import React from 'react';
-import { render } from '@testing-library/react';
+import { queryByRole, render } from '@testing-library/react';
 import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import { mdiAbTesting } from '@lumx/icons';
+
+import userEvent from '@testing-library/user-event';
 import { Message, MessageProps } from './Message';
 
 const CLASSNAME = Message.className as string;
@@ -19,7 +21,8 @@ const setup = (propsOverride: SetupProps = {}) => {
     render(<Message {...props} />);
     const message = getByClassName(document.body, CLASSNAME);
     const icon = queryByClassName(message, `${CLASSNAME}__icon`);
-    return { message, icon, props };
+    const closeButton = queryByRole(message, 'button', { name: props.closeButtonProps?.label });
+    return { message, icon, closeButton, props };
 };
 
 describe(`<${Message.displayName}>`, () => {
@@ -27,7 +30,7 @@ describe(`<${Message.displayName}>`, () => {
         it('should render default', () => {
             const { message, icon } = setup({ children: 'Message text' });
             expect(message).toBeInTheDocument();
-            expect(message.className).toMatchInlineSnapshot(`"lumx-message"`);
+            expect(message.className).toMatchInlineSnapshot('"lumx-message"');
             expect(message).toHaveTextContent('Message text');
 
             expect(icon).not.toBeInTheDocument();
@@ -44,9 +47,28 @@ describe(`<${Message.displayName}>`, () => {
         });
 
         it.each(Object.values(Kind))('should render kind %s', (kind) => {
-            const { message, icon } = setup({ kind });
+            const { message, icon, closeButton } = setup({ kind });
             expect(message.className).toEqual(expect.stringMatching(/\blumx-message--color-\w+\b/));
             expect(icon).toBeInTheDocument();
+            expect(closeButton).not.toBeInTheDocument();
+        });
+
+        it('should render close button', async () => {
+            const onClick = jest.fn();
+            const { closeButton } = setup({
+                hasBackground: true,
+                kind: 'info',
+                closeButtonProps: {
+                    label: 'Close',
+                    onClick,
+                },
+            });
+
+            expect(closeButton).toBeInTheDocument();
+
+            await userEvent.click(closeButton as HTMLElement);
+
+            expect(onClick).toHaveBeenCalled();
         });
     });
 

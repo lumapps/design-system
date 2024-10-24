@@ -1,24 +1,25 @@
-import React, {
-    forwardRef,
-    ReactNode,
-    Ref,
-    RefObject,
-    SyntheticEvent,
-    useEffect,
-    useMemo,
-    useRef,
-    useState,
-} from 'react';
+import React, { forwardRef, ReactNode, Ref, RefObject, SyntheticEvent, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 import get from 'lodash/get';
-import { uid } from 'uid';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiCloseCircle } from '@lumx/icons';
-import { Emphasis, Icon, IconButton, IconButtonProps, InputHelper, InputLabel, Kind, Size, Theme } from '@lumx/react';
+import {
+    Emphasis,
+    Icon,
+    IconButton,
+    IconButtonProps,
+    InputHelper,
+    InputLabel,
+    InputLabelProps,
+    Kind,
+    Size,
+    Theme,
+} from '@lumx/react';
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
+import { useId } from '@lumx/react/hooks/useId';
 
 /**
  * Defines the props of the component.
@@ -53,6 +54,8 @@ export interface TextFieldProps extends GenericProps, HasTheme {
     isValid?: boolean;
     /** Label text. */
     label?: string;
+    /** Additional label props. */
+    labelProps?: InputLabelProps;
     /** Max string length the input accepts (constrains the input and displays a character counter). */
     maxLength?: number;
     /** Minimum number of rows displayed in multiline mode (requires `multiline` to be enabled). */
@@ -65,6 +68,8 @@ export interface TextFieldProps extends GenericProps, HasTheme {
     placeholder?: string;
     /** Reference to the wrapper. */
     textFieldRef?: Ref<HTMLDivElement>;
+    /** Native input type (only when `multiline` is disabled). */
+    type?: React.ComponentProps<'input'>['type'];
     /** Value. */
     value?: string;
     /** On blur callback. */
@@ -157,7 +162,7 @@ interface InputNativeProps {
     maxLength?: number;
     placeholder?: string;
     rows: number;
-    type: string;
+    type: TextFieldProps['type'];
     name?: string;
     value?: string;
     setFocus(focus: boolean): void;
@@ -266,6 +271,7 @@ export const TextField: Comp<TextFieldProps, HTMLDivElement> = forwardRef((props
         isRequired,
         isValid,
         label,
+        labelProps,
         maxLength,
         minimumRows,
         multiline,
@@ -282,7 +288,8 @@ export const TextField: Comp<TextFieldProps, HTMLDivElement> = forwardRef((props
         afterElement,
         ...forwardedProps
     } = props;
-    const textFieldId = useMemo(() => id || `text-field-${uid()}`, [id]);
+    const generatedTextFieldId = useId();
+    const textFieldId = id || generatedTextFieldId;
     /** Keep a clean local input ref to manage focus */
     const localInputRef = useRef<HTMLInputElement | HTMLTextAreaElement | null>(null);
     /** Merge prop input ref and local input ref */
@@ -293,9 +300,9 @@ export const TextField: Comp<TextFieldProps, HTMLDivElement> = forwardRef((props
      * we want to first use the most important one, which is the errorId. That way, screen readers will read first
      * the error and then the helper
      */
-    const helperId = helper ? `text-field-helper-${uid()}` : undefined;
-    const errorId = error ? `text-field-error-${uid()}` : undefined;
-    const describedByIds = [errorId, helperId].filter(Boolean);
+    const helperId = helper ? `text-field-helper-${generatedTextFieldId}` : undefined;
+    const errorId = error ? `text-field-error-${generatedTextFieldId}` : undefined;
+    const describedByIds = [errorId, helperId, forwardedProps['aria-describedby']].filter(Boolean);
     const describedById = describedByIds.length === 0 ? undefined : describedByIds.join(' ');
 
     const [isFocus, setFocus] = useState(false);
@@ -355,6 +362,7 @@ export const TextField: Comp<TextFieldProps, HTMLDivElement> = forwardRef((props
                 <div className={`${CLASSNAME}__header`}>
                     {label && (
                         <InputLabel
+                            {...labelProps}
                             htmlFor={textFieldId}
                             className={`${CLASSNAME}__label`}
                             isRequired={isRequired}

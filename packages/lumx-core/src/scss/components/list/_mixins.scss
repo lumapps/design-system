@@ -29,6 +29,11 @@
 
     cursor: pointer;
 
+    &[data-focus-visible-added] {
+        outline: 2px solid lumx-color-variant("dark", "N");
+        outline-offset: -2px;
+    }
+
     &:hover,
     &[data-focus-visible-added] {
         @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "LOW"), "dark");
@@ -44,11 +49,6 @@
 
     @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "LOW"), "dark");
 
-    &[data-focus-visible-added] {
-        outline: 2px solid lumx-color-variant("dark", "N");
-        outline-offset: -2px;
-    }
-    
     &:active {
         @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "LOW"), "dark");
     }

@@ -6,7 +6,7 @@ import { getFocusableElements } from './getFocusableElements';
  * @param parentElement The element in which to search focusable elements.
  * @return first and last focusable elements
  */
-export function getFirstAndLastFocusable(parentElement: HTMLElement) {
+export function getFirstAndLastFocusable(parentElement: HTMLElement | ShadowRoot) {
     const focusableElements = getFocusableElements(parentElement);
 
     // First non disabled element.

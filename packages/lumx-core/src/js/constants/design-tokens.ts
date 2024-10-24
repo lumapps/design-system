@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Thu, 04 Jan 2024 13:59:14 GMT
+ * Generated on Tue, 19 Mar 2024 13:36:08 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -1497,8 +1497,8 @@ export const DESIGN_TOKENS = {
             D2: {
                 version: '0.22',
                 comment: 'Darkest green color',
-                value: 'rgb(26, 110, 89)',
-                attributes: { hex: '1a6e59', rgb: { r: 26, g: 110, b: 89, a: 1 } },
+                value: 'rgb(25, 109, 88)',
+                attributes: { hex: '196d58', rgb: { r: 25, g: 109, b: 88, a: 1 } },
             },
             D1: {
                 version: '0.22',
@@ -1609,8 +1609,8 @@ export const DESIGN_TOKENS = {
             D2: {
                 version: '0.22',
                 comment: 'Darkest red color',
-                value: 'rgb(190, 30, 70)',
-                attributes: { hex: 'be1e46', rgb: { r: 190, g: 30, b: 70, a: 1 } },
+                value: 'rgb(188, 9, 48)',
+                attributes: { hex: 'bc0930', rgb: { r: 188, g: 9, b: 48, a: 1 } },
             },
             D1: {
                 version: '0.22',
@@ -1621,44 +1621,44 @@ export const DESIGN_TOKENS = {
             N: {
                 version: '0.22',
                 comment: 'Neutral red color',
-                value: 'rgb(223, 48, 80)',
-                attributes: { hex: 'df3050', rgb: { r: 223, g: 48, b: 80, a: 1 } },
+                value: 'rgb(223, 42, 75)',
+                attributes: { hex: 'df2a4b', rgb: { r: 223, g: 42, b: 75, a: 1 } },
             },
             L1: {
                 version: '0.22',
                 comment: 'Base red color with 80% opacity',
-                value: 'rgba(223, 48, 80, 0.8)',
-                attributes: { hex: 'df3050', rgb: { r: 223, g: 48, b: 80, a: 0.8 } },
+                value: 'rgba(223, 42, 75, 0.8)',
+                attributes: { hex: 'df2a4b', rgb: { r: 223, g: 42, b: 75, a: 0.8 } },
             },
             L2: {
                 version: '0.22',
                 comment: 'Base red color with 60% opacity',
-                value: 'rgba(223, 48, 80, 0.6)',
-                attributes: { hex: 'df3050', rgb: { r: 223, g: 48, b: 80, a: 0.6 } },
+                value: 'rgba(223, 42, 75, 0.6)',
+                attributes: { hex: 'df2a4b', rgb: { r: 223, g: 42, b: 75, a: 0.6 } },
             },
             L3: {
                 version: '0.22',
                 comment: 'Base red color with 40% opacity',
-                value: 'rgba(223, 48, 80, 0.4)',
-                attributes: { hex: 'df3050', rgb: { r: 223, g: 48, b: 80, a: 0.4 } },
+                value: 'rgba(223, 42, 75, 0.4)',
+                attributes: { hex: 'df2a4b', rgb: { r: 223, g: 42, b: 75, a: 0.4 } },
             },
             L4: {
                 version: '0.22',
                 comment: 'Base red color with 20% opacity',
-                value: 'rgba(223, 48, 80, 0.2)',
-                attributes: { hex: 'df3050', rgb: { r: 223, g: 48, b: 80, a: 0.2 } },
+                value: 'rgba(223, 42, 75, 0.2)',
+                attributes: { hex: 'df2a4b', rgb: { r: 223, g: 42, b: 75, a: 0.2 } },
             },
             L5: {
                 version: '0.22',
                 comment: 'Base red color with 10% opacity',
-                value: 'rgba(223, 48, 80, 0.1)',
-                attributes: { hex: 'df3050', rgb: { r: 223, g: 48, b: 80, a: 0.1 } },
+                value: 'rgba(223, 42, 75, 0.1)',
+                attributes: { hex: 'df2a4b', rgb: { r: 223, g: 42, b: 75, a: 0.1 } },
             },
             L6: {
                 version: '0.22',
                 comment: 'Base red color with 5% opacity',
-                value: 'rgba(223, 48, 80, 0.05)',
-                attributes: { hex: 'df3050', rgb: { r: 223, g: 48, b: 80, a: 0.05 } },
+                value: 'rgba(223, 42, 75, 0.05)',
+                attributes: { hex: 'df2a4b', rgb: { r: 223, g: 42, b: 75, a: 0.05 } },
             },
         },
         grey: {
@@ -1765,8 +1765,8 @@ export const DESIGN_TOKENS = {
             D2: {
                 version: '0.22',
                 comment: 'Darkest green color',
-                value: 'rgb(26, 110, 89)',
-                attributes: { hex: '1a6e59', rgb: { r: 26, g: 110, b: 89, a: 1 } },
+                value: 'rgb(25, 109, 88)',
+                attributes: { hex: '196d58', rgb: { r: 25, g: 109, b: 88, a: 1 } },
             },
             D1: {
                 version: '0.22',
@@ -1821,8 +1821,8 @@ export const DESIGN_TOKENS = {
             D2: {
                 version: '0.22',
                 comment: 'Darkest green color',
-                value: 'rgb(26, 110, 89)',
-                attributes: { hex: '1a6e59', rgb: { r: 26, g: 110, b: 89, a: 1 } },
+                value: 'rgb(25, 109, 88)',
+                attributes: { hex: '196d58', rgb: { r: 25, g: 109, b: 88, a: 1 } },
             },
             D1: {
                 version: '0.22',
@@ -2038,8 +2038,7 @@ export const DESIGN_TOKENS = {
     },
     typography: {
         'font-family': {
-            value:
-                "'-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'sans-serif'",
+            value: "'-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'sans-serif'",
         },
         'font-weight': {
             regular: { value: '400' },

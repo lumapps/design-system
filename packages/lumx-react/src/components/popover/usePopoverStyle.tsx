@@ -1,10 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { usePopper } from 'react-popper';
 import memoize from 'lodash/memoize';
 import { detectOverflow } from '@popperjs/core';
 
 import { DOCUMENT, WINDOW } from '@lumx/react/constants';
 import { PopoverProps } from '@lumx/react/components/popover/Popover';
+import { usePopper } from '@lumx/react/hooks/usePopper';
 import { ARROW_SIZE, FitAnchorWidth, Placement } from './constants';
 
 /**
@@ -104,12 +104,6 @@ export function usePopoverStyle({
 }: Options): Output {
     const [popperElement, setPopperElement] = useState<null | HTMLElement>(null);
 
-    if (navigator.userAgent.includes('jsdom')) {
-        // Skip all logic; we don't need popover positioning in jsdom.
-        return { styles: {}, attributes: {}, isPositioned: true, popperElement, setPopperElement };
-    }
-
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [arrowElement, setArrowElement] = useState<null | HTMLElement>(null);
 
     const actualOffset: [number, number] = [offset?.along ?? 0, (offset?.away ?? 0) + (hasArrow ? ARROW_SIZE : 0)];
@@ -120,7 +114,13 @@ export function usePopoverStyle({
         },
     ];
     if (hasArrow && arrowElement) {
-        modifiers.push({ name: 'arrow', options: { element: arrowElement, padding: ARROW_SIZE } });
+        modifiers.push({
+            name: 'arrow',
+            options: {
+                element: arrowElement,
+                padding: ARROW_SIZE / 2,
+            },
+        });
     }
     if (fitToAnchorWidth) {
         const fitWidth = typeof fitToAnchorWidth === 'string' ? fitToAnchorWidth : FitAnchorWidth.MIN_WIDTH;
@@ -136,16 +136,13 @@ export function usePopoverStyle({
         );
     }
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const { styles, attributes, state, update } = usePopper(anchorRef.current, popperElement, { placement, modifiers });
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
         update?.();
     }, [children, update]);
 
     const position = state?.placement ?? placement;
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const popoverStyle = useMemo(() => {
         const newStyles = { ...style, ...styles.popper, zIndex };
 

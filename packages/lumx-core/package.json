@@ -40,7 +40,7 @@
         "update-version-changelog": "yarn version-changelog ../../CHANGELOG.md"
     },
     "sideEffects": false,
-    "version": "3.6.1",
+    "version": "3.9.3",
     "devDependencies": {
         "@babel/core": "^7.18.13",
         "@babel/plugin-proposal-class-properties": "^7.18.6",
@@ -57,7 +57,6 @@
         "core-js": "^3.6.4",
         "css-loader": "^3.4.2",
         "extract-css-chunks-webpack-plugin": "^4.7.4",
-        "fork-ts-checker-webpack-plugin": "^4.0.3",
         "friendly-errors-webpack-plugin": "^1.7.0",
         "glob": "^7.1.6",
         "install-peers-cli": "^2.2.0",

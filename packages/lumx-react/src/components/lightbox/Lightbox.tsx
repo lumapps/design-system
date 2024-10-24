@@ -4,8 +4,8 @@ import classNames from 'classnames';
 import { createPortal } from 'react-dom';
 
 import { mdiClose } from '@lumx/icons';
-import { ColorPalette, Emphasis, IconButton, IconButtonProps } from '@lumx/react';
-import { DOCUMENT } from '@lumx/react/constants';
+import { IconButton, IconButtonProps } from '@lumx/react';
+import { DIALOG_TRANSITION_DURATION, DOCUMENT } from '@lumx/react/constants';
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 
@@ -88,7 +88,7 @@ export const Lightbox: Comp<LightboxProps, HTMLDivElement> = forwardRef((props, 
     useDisableBodyScroll(isOpen && wrapperRef.current);
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const isVisible = useTransitionVisibility(wrapperRef, !!isOpen);
+    const isVisible = useTransitionVisibility(wrapperRef, !!isOpen, DIALOG_TRANSITION_DURATION);
 
     // Handle focus trap.
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -145,17 +145,18 @@ export const Lightbox: Comp<LightboxProps, HTMLDivElement> = forwardRef((props, 
             style={{ zIndex }}
         >
             {closeButtonProps && (
-                <IconButton
-                    {...closeButtonProps}
-                    ref={closeButtonRef}
-                    className={`${CLASSNAME}__close`}
-                    color={ColorPalette.light}
-                    emphasis={Emphasis.low}
-                    icon={mdiClose}
-                    theme={theme}
-                    type="button"
-                    onClick={onClose}
-                />
+                <div className={`${CLASSNAME}__close`}>
+                    <IconButton
+                        {...closeButtonProps}
+                        ref={closeButtonRef}
+                        emphasis="low"
+                        hasBackground
+                        icon={mdiClose}
+                        theme="dark"
+                        type="button"
+                        onClick={onClose}
+                    />
+                </div>
             )}
             <ClickAwayProvider callback={!preventAutoClose && onClose} childrenRefs={clickAwayRefs}>
                 <div ref={childrenRef} className={`${CLASSNAME}__wrapper`} role="presentation">

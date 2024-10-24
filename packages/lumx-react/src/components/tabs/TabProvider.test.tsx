@@ -21,7 +21,7 @@ const setup = (props: Partial<TabProviderProps> = {}) => {
     );
 };
 
-describe(`TabProvider`, () => {
+describe('TabProvider', () => {
     describe('default config', () => {
         it('should render with accessible DOM', () => {
             setup();

@@ -7,6 +7,238 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   `ExpansionPanel`: fix children remaining in the DOM when closed
+
+## [3.9.3][] - 2024-10-09
+
+### Fixed
+
+-   `ImageLightbox`: fix closing transition triggering multiple times.
+
+### Changed
+
+-   `Tooltip`: use the standard class `visually-hidden` when closed and with `closeMode="hide"`.
+
+## [3.9.2][] - 2024-10-04
+
+### Fixed
+
+-   `Slideshow`: changed active pagination item width for better a11y.
+-   `ImageLightbox`: fix closing animation cut short because of unstable image reference.
+
+### Added
+
+-   `Tooltip`: add `closeMode` to hide the tooltip instead of unmounting it.
+-   `Tooltip`: add `ariaLinkMode` to use tooltip as label instead of description.
+
+### Changed
+
+-   `Tooltip`: increment z-index making them appear above popovers.
+-   `TextField`: display browser native buttons when used with type="number", add "number" use case documentation.
+-   `TextField`: add jsdoc and typing for `type` prop.
+
+## [3.9.1][] - 2024-09-17
+
+### Fixed
+
+-   `Tooltip`: fix re-render errors when removing the label.
+-   `useImageLightbox`: update props each time the lightbox opens.
+-   `ImageLightbox`: fix reset zoom scale when switching to the first item.
+-   `ButtonGroup`: fixed border radius style with single button or `.visually-hidden` children.
+-   `ImageLightbox`: fix zoom center based on mouse position on mouse wheel zoom.
+
+## [3.9.0][] - 2024-09-03
+
+### Added
+
+-   `ImageLightbox`: new component providing an image slideshow lightbox with extra features (zoom & a11y).
+-   `UserBlock`: added an XS size.
+
+### Changed
+
+-   `DatePicker`: improve display of localized day number.
+-   Reworked internal id generation (linking fields with labels, a11y attributes). Removed the `uid` dependency.
+-   `Message`: changed type "info" color to blue
+-   `Notification`: changed type "info" color to blue
+
+## [3.8.1][] - 2024-08-14
+
+### Fixed
+
+-   `ImageBlock`: restore old caption class names.
+
+### Changed
+
+-   `ImageBlock`: add `titleProps` and `descriptionProps` to forward to the title and description.
+
+## [3.8.0][] - 2024-08-13
+
+### Fixed
+
+-   `Lightbox`: fix a11y color contrast on the close button.
+-   `Mosaic`: fix thumbnail focus outline cropped by parent overflow.
+-   `SlideShow`: fix pagination item focus outline cropped by parent overflow.
+
+### Changed
+
+-   `Heading`: fix the default typography when the `as` prop is set.
+-   `ImageBlock`: internal changes on caption styles (simply and make reusable).
+
+### Added
+
+-   `Thumbnail`: add `loadingPlaceholderImageRef` to re-use a loaded image as the loading placeholder.
+-   `Checkbox`: add intermediate state via `isChecked="intermediate"`
+
+## [3.7.5][] - 2024-07-25
+
+### Changed
+
+- `ListItem`: display keyboard focus ring even when not highlighted
+- `Message`: changed spacing between icon and text from 16 to 8
+
+## [3.7.4][] - 2024-06-20
+
+### Fixed
+
+-   `GenericBlock`: fix shrinking content with `min-width: 0`.
+
+## [3.7.3][] - 2024-06-19
+
+### Fixed
+
+-   `Chip`: fix forward key down event on clickable chip
+-   `TextField`: fix forward aria-describedby prop to input
+
+### Changed
+
+- `Select`, `SelectMultiple`: add `selectElementRef` prop to reference the actual input field of these components.
+
+## [3.7.2][] - 2024-05-22
+
+### Fixed
+
+-   Tooltip: fix children not having consistent ref on re-render (like when updating the tooltip label)
+
+## [3.7.1][] - 2024-05-21
+
+### Fixed
+
+-   `@lumx/core`: lumx-color-variant, add fallback to default variant
+
+### Added
+
+-   InlineList: add `wrap` prop to activate line wrap on overflow
+-   Thumbnail: add `objectFit` prop to control how the image fit in a constrained aspect ratio.
+    Defaults to `cover` to scale & crop the image (like before).
+    Can be changed to `contain` to avoid cropping the image (aka letterboxing).
+-   Flag: add `truncate` prop to activate text ellipsis on overflow.
+-   Text: add `title` attribute when text is overflowing to display the full text on mouse over.
+
+### Changed
+
+-   Flag: allow any react node in label.
+
+## [3.7.0][] - 2024-04-29
+
+### Added
+
+-   `@lumx/icons`: added icons TikTok, TencentQQ, TencentVideo and Baidu
+
+### Changed
+
+-   `@lumx/icons`: optimized all JS SVG path icons (23% reduction in size)
+-   `@lumx/icons`: removed `@mdi/js` dependency, icons are copied in the library (necessary for the optimization)
+
+## [3.6.8][] - 2024-04-18
+
+### Fixed
+
+-   Chip: fix chip not receives focus when used as link
+-   Chip: Make it possible to override the following props: `role`, `tabIndex`
+
+### Changed
+
+-   DatePicker: force a constant number of rows in the month calendar to avoid layout shift
+
+## [3.6.7][] - 2024-04-02
+
+### Fixed
+
+-   `@lumx/core`: fix customization of selected button CSS variables
+-   `@lumx/core`: red/D2, red/N and green/N colors to fix color contrast a11y
+
+### Added
+
+-   DatePicker: add an input to change the displayed year
+-   Message: add a `closeButtonProps` prop to add a close button in the message. Only available for `info` kind messages with a background.
+-   Popover: add a `focusTrapZoneElement` prop to specify the element in which the focus trap should be applied.
+
+### Changed
+
+-   Dialog: fullscreen display on smaller viewport
+
+## [3.6.6][] - 2024-03-15
+
+### Fixed
+
+-   Thumbnail: use `span` instead of `div` in children elements to avoid semantic error on clickable thumbnails (button).
+-   PopoverDialog: fix the `aria-label` prop not properly forwarded to the dialog.
+-   ChipGroup: fix unwanted extra negative margin around chips (deprecating the `align` prop)
+
+### Added
+
+-   `@lumx/core`: add `.visually-hidden` a11y helper class to use on elements that should be read by screen readers but not shown.
+-   DatePicker: improve screen reader text
+-   TextField: add `labelProps` prop to forward to the label element
+-   DatePickerField: improve date picker dialog a11y
+
+## [3.6.5][] - 2024-02-21
+
+### Fixed
+
+-   Tooltip: avoid removing the anchor `aria-describedby`
+-   Popover: unstable restore focus and changing anchor refs (triggered by anchor wrapped in tooltip)
+
+### Changed
+
+-   Autocomplete: forward `focusAnchorOnClose` prop
+
+## [3.6.4][] - 2024-02-20
+
+### Fixed
+
+-   InputHelper: change of html tag to improve semantic
+-   Popover: restore focus on trigger on closed externally
+
+### Changed
+
+-   Tooltip: do not show on anchor focus if the focus is not visible (keyboard driven)
+
+## [3.6.3][] - 2024-02-08
+
+### Fixed
+
+-   Thumbnail: fix warnings on image overflow style
+-   Notification: fix forwarding style
+
+### Added
+
+-   Popover: add dark theme
+
+### Changed
+
+-   Popover: reworked arrow style to be bigger and with a correct drop shadow
+-   Notification: add `usePortal` (default value is `true`) to be able to not use a portal in some cases.
+
+## [3.6.2][] - 2024-01-16
+
+### Fixed
+
+-   Lightbox, Dialog, Notification: fix remove from DOM when closing while the opening transition isn't finished.
+-   Avatar: fixed Chrome behavior when down-scaling avatar so it is not pixelated anymore
+
 ## [3.6.1][] - 2024-01-05
 
 ### Added
@@ -1858,7 +2090,33 @@ _Failed released_
 [3.6.0]: https://github.com/lumapps/design-system/compare/v3.5.5...v3.6.0
 [3.5.5]: https://github.com/lumapps/design-system/compare/v3.5.4...v3.5.5
 [3.5.4]: https://github.com/lumapps/design-system/tree/v3.5.4
-
-
-[Unreleased]: https://github.com/lumapps/design-system/compare/v3.6.1...HEAD
+[unreleased]: https://github.com/lumapps/design-system/compare/v3.6.1...HEAD
 [3.6.1]: https://github.com/lumapps/design-system/tree/v3.6.1
+[unreleased]: https://github.com/lumapps/design-system/compare/v3.6.2...HEAD
+[3.6.2]: https://github.com/lumapps/design-system/tree/v3.6.2
+[unreleased]: https://github.com/lumapps/design-system/compare/v3.6.3...HEAD
+[3.6.3]: https://github.com/lumapps/design-system/tree/v3.6.3
+[unreleased]: https://github.com/lumapps/design-system/compare/v3.6.4...HEAD
+[3.6.4]: https://github.com/lumapps/design-system/tree/v3.6.4
+[unreleased]: https://github.com/lumapps/design-system/compare/v3.6.5...HEAD
+[3.6.5]: https://github.com/lumapps/design-system/tree/v3.6.5
+[unreleased]: https://github.com/lumapps/design-system/compare/v3.6.6...HEAD
+[3.6.6]: https://github.com/lumapps/design-system/tree/v3.6.6
+[unreleased]: https://github.com/lumapps/design-system/compare/v3.7.0...HEAD
+[3.7.0]: https://github.com/lumapps/design-system/compare/v3.6.8...v3.7.0
+[3.6.8]: https://github.com/lumapps/design-system/compare/v3.6.7...v3.6.8
+[3.6.7]: https://github.com/lumapps/design-system/tree/v3.6.7
+
+
+[Unreleased]: https://github.com/lumapps/design-system/compare/v3.9.3...HEAD
+[3.9.3]: https://github.com/lumapps/design-system/compare/v3.9.2...v3.9.3
+[3.9.2]: https://github.com/lumapps/design-system/compare/v3.9.1...v3.9.2
+[3.9.1]: https://github.com/lumapps/design-system/compare/v3.9.0...v3.9.1
+[3.9.0]: https://github.com/lumapps/design-system/compare/v3.8.1...v3.9.0
+[3.8.1]: https://github.com/lumapps/design-system/compare/v3.8.0...v3.8.1
+[3.8.0]: https://github.com/lumapps/design-system/compare/v3.7.5...v3.8.0
+[3.7.5]: https://github.com/lumapps/design-system/compare/v3.7.4...v3.7.5
+[3.7.4]: https://github.com/lumapps/design-system/compare/v3.7.3...v3.7.4
+[3.7.3]: https://github.com/lumapps/design-system/compare/v3.7.2...v3.7.3
+[3.7.2]: https://github.com/lumapps/design-system/compare/v3.7.1...v3.7.2
+[3.7.1]: https://github.com/lumapps/design-system/tree/v3.7.1

@@ -1,7 +1,21 @@
 import React from 'react';
 
-import { mdiAbTesting, mdiImageBroken } from '@lumx/icons';
-import { Alignment, AspectRatio, Badge, FlexBox, Icon, Size, Thumbnail, ThumbnailVariant } from '@lumx/react';
+import uniqueId from 'lodash/uniqueId';
+
+import { mdiAbTesting } from '@lumx/icons';
+import {
+    Alignment,
+    AspectRatio,
+    Badge,
+    Button,
+    FlexBox,
+    GridColumn,
+    Icon,
+    Size,
+    Thumbnail,
+    ThumbnailObjectFit,
+    ThumbnailVariant,
+} from '@lumx/react';
 import { CustomLink } from '@lumx/react/stories/utils/CustomLink';
 import { IMAGE_SIZES, imageArgType, IMAGES } from '@lumx/react/stories/controls/image';
 import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
@@ -159,16 +173,16 @@ export const Original = () => (
             </tr>
             <tr>
                 <td>
-                    <Thumbnail alt="" image={IMAGES.landscape1} />
+                    <Thumbnail alt="landscape image" image={IMAGES.landscape1} />
                 </td>
                 <td>
-                    <Thumbnail alt="" image={IMAGES.landscape1} imgProps={IMAGE_SIZES.landscape1} />
+                    <Thumbnail alt="landscape image" image={IMAGES.landscape1} imgProps={IMAGE_SIZES.landscape1} />
                 </td>
                 <td>
-                    <Thumbnail alt="" image={IMAGES.portrait1} />
+                    <Thumbnail alt="portrait image" image={IMAGES.portrait1} />
                 </td>
                 <td>
-                    <Thumbnail alt="" image={IMAGES.portrait1} imgProps={IMAGE_SIZES.portrait1} />
+                    <Thumbnail alt="portrait image" image={IMAGES.portrait1} imgProps={IMAGE_SIZES.portrait1} />
                 </td>
             </tr>
         </table>
@@ -375,3 +389,60 @@ export const Square = () => (
         </FlexBox>
     </>
 );
+
+export const ObjectFit = {
+    args: { size: Size.xl },
+    decorators: [
+        withCombinations({
+            cellStyle: { border: '1px solid lightgray' },
+            combinations: {
+                cols: {
+                    'Default (cover)': {},
+                    contain: { objectFit: ThumbnailObjectFit.contain },
+                },
+                rows: {
+                    'Ratio square': { aspectRatio: AspectRatio.square },
+                    'Ratio wide': { aspectRatio: AspectRatio.wide },
+                    'Ratio vertical': { aspectRatio: AspectRatio.vertical },
+                },
+                sections: {
+                    'Portrait image': { image: IMAGES.portrait1 },
+                    'Landscape image': { image: IMAGES.landscape1 },
+                },
+            },
+        }),
+        withWrapper({ maxColumns: 3, itemMinWidth: 350 }, GridColumn),
+    ],
+};
+
+/**
+ * Demonstrate loading a small image and then use it as the loading placeholder image when loading a bigger image
+ */
+export const LoadingPlaceholderImage = () => {
+    const [isShown, setShown] = React.useState(false);
+    const imgRef = React.useRef() as React.RefObject<HTMLImageElement>;
+    return (
+        <>
+            <Button onClick={() => setShown((shown) => !shown)}>
+                Display bigger image using the small image as a placeholder
+            </Button>
+            <FlexBox orientation="horizontal">
+                <Thumbnail alt="Small image" imgRef={imgRef} image="https://picsum.photos/id/15/128/85" />
+                {isShown && (
+                    <div style={{ maxHeight: 400 }}>
+                        <Thumbnail
+                            image={`https://picsum.photos/id/15/2500/1667?cacheBust${uniqueId()}`}
+                            alt="Large image"
+                            // Loading placeholder image
+                            loadingPlaceholderImageRef={imgRef}
+                            // Reserve space
+                            imgProps={{ width: 2500, height: 1667 }}
+                        />
+                    </div>
+                )}
+            </FlexBox>
+        </>
+    );
+};
+// Disables Chromatic snapshot (not relevant for this story).
+LoadingPlaceholderImage.parameters = { chromatic: { disable: true } };

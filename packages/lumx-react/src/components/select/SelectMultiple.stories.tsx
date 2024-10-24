@@ -1,5 +1,5 @@
 /* istanbul ignore file */
-import { mdiTram } from '@lumx/icons/';
+import { mdiTram } from '@lumx/icons';
 import {
     Chip,
     Dialog,
@@ -265,66 +265,64 @@ export const SelectWithinADialog = ({ theme }: any) => {
         searchText && searchText.length > 0 ? CHOICES.filter((choice) => choice.includes(searchText)) : CHOICES;
 
     return (
-        <>
-            <Dialog isOpen>
-                <header>
-                    <Toolbar label={<span className="lumx-typography-title">Dialog header</span>} />
-                </header>
-                <div className="lumx-spacing-padding-horizontal-huge lumx-spacing-padding-bottom-huge">
-                    {/* Testing hidden input do not count in th focus trap*/}
-                    <input hidden type="file" />
-                    <input type="hidden" />
+        <Dialog isOpen>
+            <header>
+                <Toolbar label={<span className="lumx-typography-title">Dialog header</span>} />
+            </header>
+            <div className="lumx-spacing-padding-horizontal-huge lumx-spacing-padding-bottom-huge">
+                {/* Testing hidden input do not count in th focus trap*/}
+                <input hidden type="file" />
+                <input type="hidden" />
 
-                    <div className="lumx-spacing-margin-bottom-huge">The select should capture the focus on open.</div>
+                <div className="lumx-spacing-margin-bottom-huge">The select should capture the focus on open.</div>
 
-                    <SelectMultiple
-                        isOpen={isOpen}
-                        value={values}
-                        onClear={clearSelected}
-                        clearButtonProps={{ label: 'Clear' }}
-                        label={LABEL}
-                        placeholder={PLACEHOLDER}
-                        theme={theme}
-                        onInputClick={toggleSelect}
-                        onDropdownClose={closeSelect}
-                        icon={mdiTram}
-                        focusElement={searchFieldRef}
-                    >
-                        <List isClickable>
-                            <>
-                                <ListSubheader>
-                                    <TextField
-                                        clearButtonProps={{ label: 'Clear' }}
-                                        placeholder="Search"
-                                        role="searchbox"
-                                        inputRef={searchFieldRef}
-                                        onChange={setSearchText}
-                                        value={searchText}
-                                    />
-                                </ListSubheader>
-                                <ListDivider role="presentation" />
-                            </>
+                <SelectMultiple
+                    isOpen={isOpen}
+                    value={values}
+                    onClear={clearSelected}
+                    clearButtonProps={{ label: 'Clear' }}
+                    label={LABEL}
+                    placeholder={PLACEHOLDER}
+                    theme={theme}
+                    onInputClick={toggleSelect}
+                    onDropdownClose={closeSelect}
+                    icon={mdiTram}
+                    focusElement={searchFieldRef}
+                >
+                    <List isClickable>
+                        <>
+                            <ListSubheader>
+                                <TextField
+                                    clearButtonProps={{ label: 'Clear' }}
+                                    placeholder="Search"
+                                    role="searchbox"
+                                    inputRef={searchFieldRef}
+                                    onChange={setSearchText}
+                                    value={searchText}
+                                />
+                            </ListSubheader>
+                            <ListDivider role="presentation" />
+                        </>
 
-                            {filteredChoices.length > 0
-                                ? filteredChoices.map((choice) => (
-                                      <ListItem
-                                          isSelected={values.includes(choice)}
-                                          key={choice}
-                                          onItemSelected={selectItem(choice)}
-                                          size={Size.tiny}
-                                      >
-                                          {choice}
-                                      </ListItem>
-                                  ))
-                                : [
-                                      <ListItem key={0} size={Size.tiny}>
-                                          No data
-                                      </ListItem>,
-                                  ]}
-                        </List>
-                    </SelectMultiple>
-                </div>
-            </Dialog>
-        </>
+                        {filteredChoices.length > 0
+                            ? filteredChoices.map((choice) => (
+                                  <ListItem
+                                      isSelected={values.includes(choice)}
+                                      key={choice}
+                                      onItemSelected={selectItem(choice)}
+                                      size={Size.tiny}
+                                  >
+                                      {choice}
+                                  </ListItem>
+                              ))
+                            : [
+                                  <ListItem key={0} size={Size.tiny}>
+                                      No data
+                                  </ListItem>,
+                              ]}
+                    </List>
+                </SelectMultiple>
+            </div>
+        </Dialog>
     );
 };

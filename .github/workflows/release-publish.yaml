@@ -1,0 +1,180 @@
+name: "Publish Release Workflow"
+
+# When merging release commit on master
+# - Build & publish NPM libs
+# - Create & push git tag
+# - Build & publish demo site docker image
+# - Deploy chromatic
+# - Create GH release notes
+
+on:
+    push:
+        branches:
+            - master
+
+concurrency:
+    group: "${{ github.workflow }}-${{ github.ref_name }}"
+    cancel-in-progress: true
+
+jobs:
+    is_release_commit:
+        name: "Check is release commit"
+        runs-on: ubuntu-latest
+        steps:
+            -   name: "Checkout repository"
+                uses: actions/checkout@v3
+                with:
+                    ref: ${{ github.event.pull_request.head.sha || env.GITHUB_SHA }}
+
+            -   name: "Check is release commit"
+                id: check
+                run: |
+                    set -x # verbose
+                    message=$(git show -s --format=%s)
+                    version=$(echo $message | egrep -o '[0-9]+\.[0-9]+\.[0-9]+' || true)
+
+                    # Check is release commit has version
+                    if [[ "$message" == 'chore(release): release v'* ]] && [ -n "$version" ]; then
+                        echo "version=$version" >> "$GITHUB_OUTPUT"
+                    fi
+        outputs:
+            version: ${{ steps.check.outputs.version }}
+
+    build_publish_NPM:
+        name: "Build & publish NPM libs"
+        needs: [is_release_commit]
+        if: ${{ needs.is_release_commit.outputs.version }}
+        runs-on: ubuntu-latest
+        steps:
+            -   name: "Checkout repository"
+                uses: actions/checkout@v3
+                with:
+                    token: '${{ secrets.GITBOT_TOKEN }}'
+                    fetch-depth: 0
+
+            -   name: "Setup"
+                uses: ./.github/actions/setup
+
+            -   name: "Build libs"
+                run: yarn build:libs
+
+            -   name: "Publish version to NPM"
+                env:
+                    NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+                run: |
+                    for package in $(echo packages/lumx-*);
+                    do
+                        (echo "Publishing $package"; cd $package/dist; npm publish --tag latest)
+                    done
+
+            -   name: "Git tag"
+                id: git
+                run: |
+                    set -x
+
+                    # Create tag
+                    tag="v${{ needs.is_release_commit.outputs.version }}"
+                    echo "tag=$tag" >> $GITHUB_OUTPUT
+                    git tag "$tag"
+
+                    # Push tag
+                    git push origin "$tag"
+        outputs:
+            tag: ${{ steps.git.outputs.tag }}
+
+    deploy_chromatic:
+        name: "Deploy chromatic"
+        needs: [build_publish_NPM]
+        runs-on: ubuntu-latest
+        steps:
+            -   name: "Checkout repository"
+                uses: actions/checkout@v3
+                with:
+                    fetch-depth: 0 # retrieve all the repo history (required by chromatic)
+
+            -   name: "Setup"
+                uses: ./.github/actions/setup
+
+            -   name: "Deploy chromatic"
+                uses: chromaui/action@3f82bf5d065290658af8add6dce946809ee0f923 #v6.1.0
+                with:
+                    token: ${{ secrets.GITHUB_TOKEN }}
+                    projectToken: ${{ secrets.CHROMATIC_TOKEN }}
+                    buildScriptName: build:storybook
+
+    deploy_demo_site:
+        name: "Deploy demo site"
+        needs: [build_publish_NPM]
+        timeout-minutes: 30
+        runs-on: ubuntu-latest
+        env:
+            GCP_PROD_REGISTRY: gcr.io/lumapps-registry
+        steps:
+            -   name: "Checkout repository"
+                uses: actions/checkout@v3
+                with:
+                    fetch-depth: 0
+
+            -   name: "Login to GCR"
+                uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
+                with:
+                    registry: gcr.io
+                    username: _json_key
+                    password: ${{ secrets.GCR_PROD_RW_CREDS }}
+
+            -   name: "Setup buildx"
+                id: buildx_setup
+                uses: docker/setup-buildx-action@8c0edbc76e98fa90f69d9a2c020dcb50019dc325
+                with:
+                    install: true
+
+            -   run: |
+                    echo "git_commit=$(git rev-parse HEAD)" >> $GITHUB_ENV
+                    echo "build_date=$(date --rfc-3339=seconds)" >> $GITHUB_ENV
+                    echo "version=${{ needs.build_publish_NPM.outputs.tag }}" >> $GITHUB_ENV
+
+            -   name: "Docker metadata"
+                id: meta
+                uses: docker/metadata-action@f206c36955d3cc6213c38fb3747d9ba4113e686a
+                with:
+                    tags: |
+                        type=raw,value=${{ env.version }}
+                        type=raw,value=${{ env.git_commit }}
+                    images: |
+                        ${{ env.GCP_PROD_REGISTRY }}/design-system
+                    labels: |
+                        com.lumapps.image.created=${{ env.build_date }}
+                        com.lumapps.image.sha1=${{ env.git_commit }}
+                        com.lumapps.image.authors=frontend@lumapps.com
+                        com.lumapps.image.version=${{ env.version }}
+
+            -   name: "Build image"
+                uses: docker/build-push-action@c56af957549030174b10d6867f20e78cfd7debc5
+                with:
+                    context: ./
+                    file: ${{ matrix.dockerfile }}
+                    builder: ${{ steps.buildx_setup.outputs.name }}
+                    build-args: version=${{ env.version }}
+                    push: true
+                    tags: ${{ steps.meta.outputs.tags }}
+                    labels: ${{ steps.meta.outputs.labels }}
+                    cache-from: type=gha, scope=${{ github.workflow }}
+                    cache-to: type=gha, scope=${{ github.workflow }}, mode=max
+
+            -   name: "Deploy site"
+                env:
+                    GH_TOKEN: ${{ secrets.GITBOT_TOKEN }}
+                run: gh workflow run -R lumapps/design-system-deployment update-lumx-version.yml
+
+    create_gh_release:
+        name: "Create release note"
+        needs: [build_publish_NPM]
+        runs-on: ubuntu-latest
+        steps:
+            -   name: "Checkout repository"
+                uses: actions/checkout@v3
+
+            -   name: "Create release note"
+                uses: ./.github/actions/release-note
+
+

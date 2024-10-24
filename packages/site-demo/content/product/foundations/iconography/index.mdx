@@ -1,4 +1,5 @@
 import { FlexBox, Orientation } from '@lumx/react';
+import { IconLibrary } from '@lumx/demo/components/content/design-tokens';
 
 # Iconography
 
@@ -8,17 +9,19 @@ import { FlexBox, Orientation } from '@lumx/react';
 
 Icons come in 6 sizes: xxs, xs, s, m, l, xl.
 
-<DemoBlock demo="default" />
+<DemoBlock demo="default" orientation="horizontal" />
 
 ## Layout
 
 We use [Material Design](https://material.io/archive/guidelines/style/icons.html) grid and proportions.
 
 <FlexBox orientation={Orientation.horizontal}>
-    <img src="assets/iconography-layout.png" width="128" />
-    <img src="assets/iconography-keylines.png" width="128" />
+    <img src="assets/iconography-layout.png" width="128" height="128" />
+    <img src="assets/iconography-keylines.png" width="128" height="128" />
 </FlexBox>
 
 ## Library
 
-Find library on [materialdesignicons.com](https://materialdesignicons.com/).
+Our `@lumx/icons` icon library is based of the MDI v5 with some re-compatibility with MDI v4 and some of our own icons.
+
+<IconLibrary />
