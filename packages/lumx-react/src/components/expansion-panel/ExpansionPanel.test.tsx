@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
-import { queryByRole, render } from '@testing-library/react';
+import { queryByRole, render, screen } from '@testing-library/react';
 import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import userEvent from '@testing-library/user-event';
 import { isFocusVisible } from '@lumx/react/utils/isFocusVisible';
@@ -12,12 +12,15 @@ const CLASSNAME = ExpansionPanel.className as string;
 
 jest.mock('@lumx/react/utils/isFocusVisible');
 
+const mockChildrenContent = 'children content';
+
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
 const setup = (propsOverride: Partial<ExpansionPanelProps> = {}) => {
     const props = {
         toggleButtonProps: { label: 'Toggle' },
+        children: mockChildrenContent,
         ...propsOverride,
     };
     const { container } = render(<ExpansionPanel {...props} />);
@@ -28,7 +31,7 @@ const setup = (propsOverride: Partial<ExpansionPanelProps> = {}) => {
         query: {
             toggleButton: () => queryByRole(container, 'button', { name: /Toggle/i }),
             header: () => queryByClassName(container, `${CLASSNAME}__header`),
-            content: () => queryByClassName(container, `${CLASSNAME}__wrapper`),
+            content: () => screen.queryByText(mockChildrenContent),
         },
         props,
     };
