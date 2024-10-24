@@ -12,6 +12,7 @@ import { ColorPalette, DragHandle, Emphasis, IconButton, IconButtonProps, Theme 
 import { Comp, GenericProps, HasTheme, isComponent } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { partitionMulti } from '@lumx/react/utils/partitionMulti';
+import { WINDOW } from '@lumx/react/constants';
 
 /**
  * Defines the props of the component.
@@ -80,6 +81,7 @@ export const ExpansionPanel: Comp<ExpansionPanelProps, HTMLDivElement> = forward
         ...forwardedProps
     } = props;
 
+    const [isChildrenVisible, setIsChildrenVisible] = useState(isOpen);
     const children: ReactNode[] = Children.toArray(anyChildren);
 
     // Partition children by types.
@@ -94,15 +96,34 @@ export const ExpansionPanel: Comp<ExpansionPanelProps, HTMLDivElement> = forward
     );
 
     const toggleOpen = (event: React.MouseEvent) => {
+        const hasReducedMotionEnabled = WINDOW?.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
         const shouldOpen = !isOpen;
+
         if (isFunction(onOpen) && shouldOpen) {
             onOpen(event);
+            // On open, we immediately show children
+            setIsChildrenVisible(true);
         }
         if (isFunction(onClose) && !shouldOpen) {
             onClose(event);
+            /**
+             * On close, we only show children immediately if reduced motion is enabled
+             * When disabled, the children will be hidden via the `onTransitionEnd` prop.
+             */
+            if (hasReducedMotionEnabled) {
+                setIsChildrenVisible(false);
+            }
         }
         if (isFunction(onToggleOpen)) {
             onToggleOpen(shouldOpen, event);
+            /**
+             * On toggle, we forward the show state if
+             * * the toggle will open the expansion panel
+             * * reduced motion is enabled. When disabled, the children will be hidden via the `onTransitionEnd` prop.
+             * */
+            if (shouldOpen || hasReducedMotionEnabled) {
+                setIsChildrenVisible(shouldOpen);
+            }
         }
     };
 
@@ -123,7 +144,6 @@ export const ExpansionPanel: Comp<ExpansionPanelProps, HTMLDivElement> = forward
     );
 
     const wrapperRef = useRef<HTMLDivElement>(null);
-    const isContentVisible = (): boolean => get(wrapperRef.current, 'clientHeight', 0) > 0;
 
     // Switch max height on/off to activate the CSS transition (updates when children changes).
     const [maxHeight, setMaxHeight] = useState('0');
@@ -153,8 +173,17 @@ export const ExpansionPanel: Comp<ExpansionPanelProps, HTMLDivElement> = forward
                 </div>
             </header>
 
-            {(isOpen || isContentVisible()) && (
-                <div className={`${CLASSNAME}__wrapper`} style={{ maxHeight }}>
+            {(isOpen || isChildrenVisible) && (
+                <div
+                    className={`${CLASSNAME}__wrapper`}
+                    style={{ maxHeight }}
+                    // At the end of the closing transition, remove the children from the DOM
+                    onTransitionEnd={() => {
+                        if (!isOpen) {
+                            setIsChildrenVisible(false);
+                        }
+                    }}
+                >
                     <div className={`${CLASSNAME}__container`} ref={wrapperRef}>
                         <div className={`${CLASSNAME}__content`}>{content}</div>
 
