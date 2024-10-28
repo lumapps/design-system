@@ -1,4 +1,5 @@
 @use "sass:map";
+@use "sass:math";
 
 /* ==========================================================================
    Badge
@@ -43,5 +44,20 @@
                 color: lumx-color-variant("light", "N");
             }
         }
+    }
+}
+
+/* Badge wrapper
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-badge-wrapper {
+    position: relative;
+    display: inline-block;
+    outline: none;
+
+    &__badge {
+        position: absolute;
+        right: math.div(-$lumx-spacing-unit, 2);
+        bottom: math.div(-$lumx-spacing-unit, 2);
     }
 }
