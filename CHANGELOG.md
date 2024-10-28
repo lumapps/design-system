@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `ExpansionPanel`: fix children remaining in the DOM when closed
 
+### Added
+
+-   `BadgeWrapper`: add this new component to allow adding a badge to any component.
+
 ### Changed
 
 -   `Mosaic`: removed broken lightboxes on mosaic demos.
@@ -99,8 +103,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- `ListItem`: display keyboard focus ring even when not highlighted
-- `Message`: changed spacing between icon and text from 16 to 8
+-   `ListItem`: display keyboard focus ring even when not highlighted
+-   `Message`: changed spacing between icon and text from 16 to 8
 
 ## [3.7.4][] - 2024-06-20
 
@@ -117,7 +121,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- `Select`, `SelectMultiple`: add `selectElementRef` prop to reference the actual input field of these components.
+-   `Select`, `SelectMultiple`: add `selectElementRef` prop to reference the actual input field of these components.
 
 ## [3.7.2][] - 2024-05-22
 
@@ -2110,8 +2114,6 @@ _Failed released_
 [3.7.0]: https://github.com/lumapps/design-system/compare/v3.6.8...v3.7.0
 [3.6.8]: https://github.com/lumapps/design-system/compare/v3.6.7...v3.6.8
 [3.6.7]: https://github.com/lumapps/design-system/tree/v3.6.7
-
-
 [Unreleased]: https://github.com/lumapps/design-system/compare/v3.9.3...HEAD
 [3.9.3]: https://github.com/lumapps/design-system/compare/v3.9.2...v3.9.3
 [3.9.2]: https://github.com/lumapps/design-system/compare/v3.9.1...v3.9.2
