@@ -74,7 +74,7 @@ export function usePointerZoom(
             const pointers = Object.values(activePointers);
 
             // Make sure we run computation on one of the pointer in the group
-            if (pointers[0].pointerId !== event.pointerId) {
+            if (pointers[0]?.pointerId !== event.pointerId) {
                 return;
             }
 

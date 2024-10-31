@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   `ExpansionPanel`: fix children remaining in the DOM when closed
+-   `ImageLightbox`: fix unexpected error on windows 10 reporting incorrect touch device
 
 ### Added
 
