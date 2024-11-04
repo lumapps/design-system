@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.9.4][] - 2024-11-04
+
 ### Fixed
 
 -   `ExpansionPanel`: fix children remaining in the DOM when closed
@@ -2115,7 +2117,8 @@ _Failed released_
 [3.7.0]: https://github.com/lumapps/design-system/compare/v3.6.8...v3.7.0
 [3.6.8]: https://github.com/lumapps/design-system/compare/v3.6.7...v3.6.8
 [3.6.7]: https://github.com/lumapps/design-system/tree/v3.6.7
-[Unreleased]: https://github.com/lumapps/design-system/compare/v3.9.3...HEAD
+[Unreleased]: https://github.com/lumapps/design-system/compare/v3.9.4...HEAD
+[3.9.4]: https://github.com/lumapps/design-system/compare/v3.9.3...v3.9.4
 [3.9.3]: https://github.com/lumapps/design-system/compare/v3.9.2...v3.9.3
 [3.9.2]: https://github.com/lumapps/design-system/compare/v3.9.1...v3.9.2
 [3.9.1]: https://github.com/lumapps/design-system/compare/v3.9.0...v3.9.1
