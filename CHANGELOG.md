@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   `Chip`: trigger onClick when `Enter` key is pressed  
+
 ## [3.9.4][] - 2024-11-04
 
 ### Fixed

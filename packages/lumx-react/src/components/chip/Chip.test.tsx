@@ -168,6 +168,21 @@ describe('<Chip />', () => {
             fireEvent.keyDown(chip, { key: 'A', code: 'KeyA' });
             expect(onKeyDown).toHaveBeenCalled();
         });
+
+        it('should forward key down event and trigger `onClick` when pressing Enter', async () => {
+            const user = userEvent.setup();
+            const onKeyDown = jest.fn();
+            const { chip } = setup({ onClick, onKeyDown });
+
+            await user.tab();
+            expect(chip).toHaveFocus();
+
+            await userEvent.keyboard('{Enter}');
+
+            expect(onKeyDown).toHaveBeenCalled();
+            expect(onClick).toHaveBeenCalled();
+            onClick.mockClear();
+        });
     });
 
     commonTestsSuiteRTL(setup, { baseClassName: CLASSNAME, forwardClassName: 'chip', forwardAttributes: 'chip' });
