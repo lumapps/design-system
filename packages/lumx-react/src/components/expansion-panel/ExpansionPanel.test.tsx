@@ -6,6 +6,7 @@ import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/quer
 import userEvent from '@testing-library/user-event';
 import { isFocusVisible } from '@lumx/react/utils/isFocusVisible';
 
+import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
 import { ExpansionPanel, ExpansionPanelProps } from '.';
 
 const CLASSNAME = ExpansionPanel.className as string;
@@ -14,16 +15,29 @@ jest.mock('@lumx/react/utils/isFocusVisible');
 
 const mockChildrenContent = 'children content';
 
+/** Controlled component that uses a local state to toggle the component */
+const ControlledComponent = (props: ExpansionPanelProps) => {
+    const [isOpen, handleClose, handleOpen] = useBooleanState(false);
+
+    return (
+        <ExpansionPanel isOpen={isOpen} onClose={handleClose} onOpen={handleOpen} {...props}>
+            {mockChildrenContent}
+        </ExpansionPanel>
+    );
+};
+
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: Partial<ExpansionPanelProps> = {}) => {
+const setup = (propsOverride: Partial<ExpansionPanelProps> = {}, options: { controlled?: boolean } = {}) => {
     const props = {
         toggleButtonProps: { label: 'Toggle' },
         children: mockChildrenContent,
         ...propsOverride,
     };
-    const { container } = render(<ExpansionPanel {...props} />);
+
+    const Component = options.controlled ? ControlledComponent : ExpansionPanel;
+    const { container } = render(<Component {...props} />);
 
     return {
         container,
@@ -115,6 +129,22 @@ describe(`<${ExpansionPanel.displayName}>`, () => {
             expect(onOpen).not.toHaveBeenCalled();
             expect(onClose).toHaveBeenCalled();
             expect(onToggleOpen).toHaveBeenCalledWith(false, expect.anything());
+        });
+
+        it('should hide children after toggling the expansion panel', async () => {
+            const user = userEvent.setup();
+            const { query } = setup({}, { controlled: true });
+
+            // Content is not visible by default
+            expect(query.content()).not.toBeInTheDocument();
+
+            await user.click(query.header() as any);
+
+            expect(query.content()).toBeInTheDocument();
+
+            await user.click(query.header() as any);
+
+            expect(query.content()).not.toBeInTheDocument();
         });
     });
 

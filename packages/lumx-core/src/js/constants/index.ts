@@ -13,6 +13,7 @@ export * from './keycodes';
  * you need to update their scss counterpart as well
  */
 export const DIALOG_TRANSITION_DURATION = 400;
+export const EXPANSION_PANEL_TRANSITION_DURATION = 400;
 export const NOTIFICATION_TRANSITION_DURATION = 200;
 export const SLIDESHOW_TRANSITION_DURATION = 5000;
 
