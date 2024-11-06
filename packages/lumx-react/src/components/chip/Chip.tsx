@@ -101,7 +101,7 @@ export const Chip: Comp<ChipProps, HTMLAnchorElement> = forwardRef((props, ref) 
     const handleKeyDown = (evt: React.KeyboardEvent) => {
         onKeyDown?.(evt);
         if (hasOnClick) {
-            onEnterPressed(onClick);
+            onEnterPressed(onClick)(evt);
         }
     };
 
