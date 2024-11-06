@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   `Chip`: trigger onClick when `Enter` key is pressed  
+-   `ExpansionPanel`: fix children remaining in the DOM when `isOpen` prop changes
 
 ## [3.9.4][] - 2024-11-04
 

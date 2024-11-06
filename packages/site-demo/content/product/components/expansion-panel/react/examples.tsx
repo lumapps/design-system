@@ -1,6 +1,16 @@
 import { mdiDotsVertical } from '@lumx/icons';
 
-import { Divider, ExpansionPanel, FlexBox, GenericBlock, Heading, IconButton, Text, Thumbnail } from '@lumx/react';
+import {
+    Button,
+    Divider,
+    ExpansionPanel,
+    FlexBox,
+    GenericBlock,
+    Heading,
+    IconButton,
+    Text,
+    Thumbnail,
+} from '@lumx/react';
 import React, { useState } from 'react';
 
 export const App = () => {
@@ -11,8 +21,19 @@ export const App = () => {
     const [isOpen5, setOpen5] = useState(false);
     const stopPropagation = (evt: Event) => evt.stopPropagation();
 
+    const handleCloseAll = () => {
+        setOpen1(false);
+        setOpen2(false);
+        setOpen3(false);
+        setOpen4(false);
+        setOpen5(false);
+    };
+
     return (
         <>
+            <Button type="button" onClick={handleCloseAll}>
+                Close all
+            </Button>
             <ExpansionPanel
                 hasBackground
                 hasHeaderDivider
