@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 -   `DatePicker`: update day buttons to use standard button styles.
+-   `Chip`: add border CSS variable theming on selected state (will be used to enhance a11y to differentiate from the unselected state)
 
 ### Documentation
 
@@ -21,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -    Rework stories content with more combinations
     -    Add theming story
 -   Storybook `DatePicker`: add theming story
+-   Storybook `Chip`: add theming story
 
 ## [3.9.5][] - 2024-11-06
 

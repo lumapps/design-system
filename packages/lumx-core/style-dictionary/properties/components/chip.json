@@ -1,0 +1,33 @@
+{
+    "chip": {
+        "emphasis-selected": {
+            "state-default": {
+                "border-width": { "value": "0" },
+                "theme-light": {
+                    "border-color": { "value": "transparent" }
+                },
+                "theme-dark": {
+                    "border-color": { "value": "transparent" }
+                }
+            },
+            "state-hover": {
+                "border-width": { "value": "0" },
+                "theme-light": {
+                    "border-color": { "value": "transparent" }
+                },
+                "theme-dark": {
+                    "border-color": { "value": "transparent" }
+                }
+            },
+            "state-active": {
+                "border-width": { "value": "0" },
+                "theme-light": {
+                    "border-color": { "value": "transparent" }
+                },
+                "theme-dark": {
+                    "border-color": { "value": "transparent" }
+                }
+            }
+        }
+    }
+}

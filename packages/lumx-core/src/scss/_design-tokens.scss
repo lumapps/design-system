@@ -2,7 +2,7 @@
 
 /**
  * Do not edit directly
- * Generated on Tue, 19 Mar 2024 13:36:08 GMT
+ * Generated on Thu, 14 Nov 2024 10:23:01 GMT
  */
 
 $lumx-button-height: 36px !default;
@@ -103,6 +103,15 @@ $lumx-button-emphasis-selected-state-active-theme-light-border-color: transparen
 $lumx-button-emphasis-selected-state-active-theme-dark-background-color: var(--lumx-color-light-L5) !default;
 $lumx-button-emphasis-selected-state-active-theme-dark-color: var(--lumx-color-light-N) !default;
 $lumx-button-emphasis-selected-state-active-theme-dark-border-color: transparent !default;
+$lumx-chip-emphasis-selected-state-default-border-width: 0 !default;
+$lumx-chip-emphasis-selected-state-default-theme-light-border-color: transparent !default;
+$lumx-chip-emphasis-selected-state-default-theme-dark-border-color: transparent !default;
+$lumx-chip-emphasis-selected-state-hover-border-width: 0 !default;
+$lumx-chip-emphasis-selected-state-hover-theme-light-border-color: transparent !default;
+$lumx-chip-emphasis-selected-state-hover-theme-dark-border-color: transparent !default;
+$lumx-chip-emphasis-selected-state-active-border-width: 0 !default;
+$lumx-chip-emphasis-selected-state-active-theme-light-border-color: transparent !default;
+$lumx-chip-emphasis-selected-state-active-theme-dark-border-color: transparent !default;
 $lumx-material-button-text-transform: none !default;
 $lumx-material-checkbox-wrapper-size: 20px !default;
 $lumx-material-checkbox-control-size: 16px !default;
@@ -738,6 +747,37 @@ $lumx-design-tokens: (
                     "background-color": $lumx-button-emphasis-selected-state-active-theme-dark-background-color,
                     "color": $lumx-button-emphasis-selected-state-active-theme-dark-color,
                     "border-color": $lumx-button-emphasis-selected-state-active-theme-dark-border-color
+                )
+            )
+        )
+    ),
+    "chip": (
+        "emphasis-selected": (
+            "state-default": (
+                "border-width": $lumx-chip-emphasis-selected-state-default-border-width,
+                "theme-light": (
+                    "border-color": $lumx-chip-emphasis-selected-state-default-theme-light-border-color
+                ),
+                "theme-dark": (
+                    "border-color": $lumx-chip-emphasis-selected-state-default-theme-dark-border-color
+                )
+            ),
+            "state-hover": (
+                "border-width": $lumx-chip-emphasis-selected-state-hover-border-width,
+                "theme-light": (
+                    "border-color": $lumx-chip-emphasis-selected-state-hover-theme-light-border-color
+                ),
+                "theme-dark": (
+                    "border-color": $lumx-chip-emphasis-selected-state-hover-theme-dark-border-color
+                )
+            ),
+            "state-active": (
+                "border-width": $lumx-chip-emphasis-selected-state-active-border-width,
+                "theme-light": (
+                    "border-color": $lumx-chip-emphasis-selected-state-active-theme-light-border-color
+                ),
+                "theme-dark": (
+                    "border-color": $lumx-chip-emphasis-selected-state-active-theme-dark-border-color
                 )
             )
         )
