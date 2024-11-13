@@ -59,7 +59,7 @@ describe(`<${DatePickerControlled.displayName}>`, () => {
         expect(queries.getAccessibleMonthYear(toolbar)).toBeInTheDocument();
         expect(queries.getAccessibleMonthYear(toolbar)).toHaveTextContent('février 2017');
 
-        const selected = queryByClassName(datePickerControlled, `${CLASSNAME}__month-day--is-selected`);
+        const selected = queryByClassName(datePickerControlled, `lumx-button--is-selected`);
         expect(selected).toBe(screen.queryByRole('button', { name: /22 février 2017/i }));
     });
 

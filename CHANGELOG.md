@@ -7,15 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   `DatePicker`: update day buttons to use standard button styles.
+
 ### Documentation
 
 -   Storybook dark theme switcher: improve label of dark/light modes
 -   Storybook `withCombinations()`: better section heading, exclude combinations
 -   Storybook `withTheming()`: new decorator to demonstrate CSS variables on stories
--   Storybook Button:
+-   Storybook `Button`:
     -    Cleaned up stories argTypes and controls
     -    Rework stories content with more combinations
     -    Add theming story
+-   Storybook `DatePicker`: add theming story
 
 ## [3.9.5][] - 2024-11-06
 

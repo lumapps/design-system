@@ -1,6 +1,16 @@
 import React, { KeyboardEventHandler, forwardRef } from 'react';
 import classNames from 'classnames';
-import { DatePickerProps, Emphasis, FlexBox, IconButton, Text, TextField, TextFieldProps, Toolbar } from '@lumx/react';
+import {
+    Button,
+    DatePickerProps,
+    Emphasis,
+    FlexBox,
+    IconButton,
+    Text,
+    TextField,
+    TextFieldProps,
+    Toolbar,
+} from '@lumx/react';
 import { mdiChevronLeft, mdiChevronRight } from '@lumx/icons';
 import { Comp } from '@lumx/react/utils/type';
 import { getMonthCalendar } from '@lumx/react/utils/date/getMonthCalendar';
@@ -56,6 +66,7 @@ export const DatePickerControlled: Comp<DatePickerControlledProps, HTMLDivElemen
         todayOrSelectedDateRef,
         value,
         onMonthChange,
+        style,
     } = props;
     const { weeks, weekDays } = React.useMemo(() => {
         const localeObj = parseLocale(locale) as Locale;
@@ -127,7 +138,7 @@ export const DatePickerControlled: Comp<DatePickerControlledProps, HTMLDivElemen
     const yearLabel = getYearDisplayName(locale);
 
     return (
-        <div ref={ref} className={`${CLASSNAME}`}>
+        <div ref={ref} className={`${CLASSNAME}`} style={style}>
             <Toolbar
                 className={`${CLASSNAME}__toolbar`}
                 after={
@@ -212,14 +223,14 @@ export const DatePickerControlled: Comp<DatePickerControlledProps, HTMLDivElemen
                             return (
                                 <div key={key} className={`${CLASSNAME}__day-wrapper`}>
                                     {date && (
-                                        <button
+                                        <Button
                                             ref={isSelected || (!value && isToday) ? todayOrSelectedDateRef : null}
                                             className={classNames(`${CLASSNAME}__month-day`, {
-                                                [`${CLASSNAME}__month-day--is-selected`]: isSelected,
                                                 [`${CLASSNAME}__month-day--is-today`]: isToday,
                                             })}
                                             disabled={isOutOfRange}
-                                            type="button"
+                                            isSelected={isSelected}
+                                            emphasis="low"
                                             onClick={() => onChange(date)}
                                         >
                                             <span aria-hidden>{formatDayNumber(locale, date)}</span>
@@ -230,7 +241,7 @@ export const DatePickerControlled: Comp<DatePickerControlledProps, HTMLDivElemen
                                                     year: 'numeric',
                                                 })}
                                             </span>
-                                        </button>
+                                        </Button>
                                     )}
                                 </div>
                             );
