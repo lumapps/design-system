@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 19 Mar 2024 13:36:08 GMT
+ * Generated on Thu, 14 Nov 2024 10:23:01 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -371,6 +371,25 @@ export const DESIGN_TOKENS = {
                     },
                     'border-color': { value: 'transparent' },
                 },
+            },
+        },
+    },
+    chip: {
+        'emphasis-selected': {
+            'state-default': {
+                'border-width': { value: '0' },
+                'theme-light': { 'border-color': { value: 'transparent' } },
+                'theme-dark': { 'border-color': { value: 'transparent' } },
+            },
+            'state-hover': {
+                'border-width': { value: '0' },
+                'theme-light': { 'border-color': { value: 'transparent' } },
+                'theme-dark': { 'border-color': { value: 'transparent' } },
+            },
+            'state-active': {
+                'border-width': { value: '0' },
+                'theme-light': { 'border-color': { value: 'transparent' } },
+                'theme-dark': { 'border-color': { value: 'transparent' } },
             },
         },
     },

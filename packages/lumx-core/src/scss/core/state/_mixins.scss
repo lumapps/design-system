@@ -54,7 +54,7 @@
     }
 }
 
-@mixin lumx-state-as-selected($state, $theme) {
+@mixin lumx-state-as-selected($state, $theme, $component: null) {
     @if $theme == lumx-base-const("theme", "LIGHT") {
         @if $state == lumx-base-const("state", "DEFAULT") {
             color: lumx-color-variant("primary", "D2");
@@ -79,6 +79,12 @@
             outline: 2px solid lumx-color-variant("light", "N");
             outline-offset: 2px;
         }
+    }
+
+    @if $component and $state != lumx-base-const("state", "FOCUS") {
+        box-shadow: inset 0 0 0
+                var(--lumx-#{$component}-emphasis-selected-#{$state}-border-width)
+                var(--lumx-#{$component}-emphasis-selected-#{$state}-#{$theme}-border-color);
     }
 }
 
@@ -114,7 +120,10 @@
 @mixin lumx-state($state, $emphasis, $color, $theme: null) {
     @if $emphasis == lumx-base-const("emphasis", "HIGH") {
         @include lumx-state-high($state, $color, $theme);
-    } @else if $emphasis == lumx-base-const("emphasis", "MEDIUM") or $emphasis == lumx-base-const("emphasis", "SELECTED") {
+    } @else if (
+        $emphasis == lumx-base-const("emphasis", "MEDIUM")
+        or $emphasis == lumx-base-const("emphasis", "SELECTED")
+    ) {
         @include lumx-state-medium($state, $color);
     } @else if $emphasis == lumx-base-const("emphasis", "LOW") {
         @include lumx-state-low($state, $color);
