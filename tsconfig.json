@@ -24,7 +24,8 @@
         },
         "strict": true,
         "skipLibCheck": true,
-        "target": "es5"
+        "target": "es5",
+        "downlevelIteration": true
     },
     "exclude": ["**/dist/", "**/public/", "node_modules"]
 }
