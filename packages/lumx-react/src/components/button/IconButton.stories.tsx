@@ -17,6 +17,12 @@ export default {
         size: getSelectArgType<ButtonSize>([Size.s, Size.m]),
         icon: iconArgType,
         color: colorArgType,
+        ref: { table: { disable: true } },
+        onClick: { action: true, table: { disable: true } },
+        linkAs: { table: { disable: true } },
+        className: { table: { disable: true } },
+        target: { if: { arg: 'href', exists: true }, control: { type: 'inline-radio' } },
+        type: { if: { arg: 'href', exists: false }, control: { type: 'inline-radio' } },
     },
     args: IconButton.defaultProps,
 };
@@ -25,7 +31,7 @@ export default {
  * Default IconButton
  */
 export const Default = {
-    args: { icon: mdiSend },
+    args: { icon: mdiSend, label: 'Button label' },
 };
 
 /**
@@ -37,16 +43,10 @@ export const WithImage = {
 };
 
 /**
- * IconButton using a tooltip
- */
-export const WithTooltip = {
-    args: { icon: mdiSend, label: 'Send a message' },
-};
-
-/**
  * Check icon button style variations (color, states, emphasis, etc.)
  */
 export const IconStateVariations = {
     ...Default,
+    argTypes: { ...Default.args, ...StateVariations.argTypes },
     decorators: StateVariations.decorators,
 };
