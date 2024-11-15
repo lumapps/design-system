@@ -4,7 +4,7 @@ import { iconArgType } from '@lumx/react/stories/controls/icons';
 import { colorArgType } from '@lumx/react/stories/controls/color';
 import { SQUARE_IMAGES, squareImageArgType } from '@lumx/react/stories/controls/image';
 import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
-import { ButtonVariations } from './Button.stories';
+import { StateVariations } from './Button.stories';
 
 export default {
     title: 'LumX components/button/IconButton',
@@ -46,7 +46,7 @@ export const WithTooltip = {
 /**
  * Check icon button style variations (color, states, emphasis, etc.)
  */
-export const IconButtonVariations = {
+export const IconStateVariations = {
     ...Default,
-    decorators: ButtonVariations.decorators,
+    decorators: StateVariations.decorators,
 };

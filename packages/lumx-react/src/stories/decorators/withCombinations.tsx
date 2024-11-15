@@ -1,21 +1,44 @@
-/* eslint-disable react/display-name,jsx-a11y/control-has-associated-label */
+/* eslint-disable react/display-name,jsx-a11y/control-has-associated-label,prefer-object-spread */
 import React from 'react';
 import isEmpty from 'lodash/isEmpty';
+import { Heading, HeadingLevelProvider } from '@lumx/react';
 
+type PropEntry = [key: string, value: unknown];
 type PropCombination = Record<string, Record<string, unknown>>;
 type PropArrayCombination = { key: string; options: Array<any> };
 type Combination = PropArrayCombination | PropCombination;
 
-const toProps = <E,>(arr: Array<E>, prop: string) =>
-    Object.fromEntries(arr.map((value) => [value || '', { [prop]: value }]));
+const toProps = <E,>(arr: Array<E>, prop: string): PropEntry[] =>
+    arr.map((value) => [String(value), { [prop]: value }]);
 
 const isArrayConfig = (c?: Combination): c is PropArrayCombination => !!c?.key;
 
-function formatProps(config?: Combination): PropCombination {
-    if (isEmpty(config)) return { '': {} };
+function toPropEntries(config?: Combination): PropEntry[] {
+    if (isEmpty(config)) return [['', {}]];
     if (isArrayConfig(config)) return toProps(config.options, config.key);
-    return config as PropCombination;
+    return Object.entries(config as PropCombination);
 }
+
+type Options = {
+    /** Props combinations */
+    combinations: {
+        rows?: Combination;
+        cols?: Combination;
+        sections?: Combination;
+    };
+    /** Inject style on table */
+    tableStyle?: React.CSSProperties;
+    /** Inject style on first col */
+    firstColStyle?: React.CSSProperties;
+    /** Inject style on cols */
+    colStyle?: React.CSSProperties;
+    /** Inject style on cells */
+    cellStyle?: React.CSSProperties;
+    /** Combinator function */
+    combinator?: (a: any, b: any) => any;
+    /** Exclude a combination */
+    excludeCombination?: (args: any) => boolean;
+};
 
 /**
  * SB decorator generating a tables of combination of props (max 3 levels of props)
@@ -26,76 +49,81 @@ export const withCombinations =
         tableStyle,
         firstColStyle,
         cellStyle,
+        colStyle,
         combinator = Object.assign,
-    }: {
-        /** Props combinations */
-        combinations: {
-            rows?: Combination;
-            cols?: Combination;
-            sections?: Combination;
-        };
-        /** Inject style on table */
-        tableStyle?: React.CSSProperties;
-        /** Inject style on first col */
-        firstColStyle?: React.CSSProperties;
-        /** Inject style on cells */
-        cellStyle?: React.CSSProperties;
-        /** Combinator function */
-        combinator?: (a: any, b: any) => any;
-    }) =>
+        excludeCombination,
+    }: Options) =>
     (Story: any, ctx: any) => {
-        const rows = formatProps(combinations.rows);
-        const cols = formatProps(combinations.cols);
-        const sections = formatProps(combinations.sections);
+        const rows = toPropEntries(combinations.rows);
+        const cols = toPropEntries(combinations.cols);
+        const sections = toPropEntries(combinations.sections);
+        const hasRows = rows.length > 1;
+        const hasCols = cols.length > 1;
 
         return (
             <>
-                {Object.entries(sections).map(([level2Key, level2Value]) => (
-                    <div key={level2Key}>
-                        {level2Key && <h2>{level2Key}</h2>}
+                {sections.map(([level2Key, level2Value]) => {
+                    const sectionArgs = combinator({ ...ctx.args }, level2Value);
+                    const sectionCols = cols
+                        .map(([level1Key, level1Value]) => {
+                            const args = combinator({ ...sectionArgs }, level1Value);
+                            if (excludeCombination?.(args)) return null;
+                            return [level1Key, args];
+                        })
+                        .filter(Boolean) as Array<[string, any]>;
+                    return (
+                        <section key={level2Key}>
+                            <HeadingLevelProvider>
+                                {level2Key && <Heading style={{ textTransform: 'capitalize' }}>{level2Key}</Heading>}
 
-                        <table style={{ ...tableStyle, borderCollapse: 'separate', borderSpacing: 8 }}>
-                            {combinations.cols && (
-                                <thead>
-                                    <tr>
-                                        <th />
-                                        {Object.keys(cols).map((key) => (
-                                            <th key={key}>
-                                                <small>{key}</small>
-                                            </th>
-                                        ))}
-                                    </tr>
-                                </thead>
-                            )}
-                            <tbody>
-                                {Object.entries(rows).map(([level0Key, level0Value], i1) => (
-                                    <tr key={i1}>
-                                        <th style={{ ...firstColStyle, textAlign: 'left' }}>
-                                            <small>{level0Key}</small>
-                                        </th>
-                                        {Object.entries(cols).map(([level1Key, level1Value]) => {
-                                            const args = [level0Value, level1Value, level2Value].reduce(
-                                                (acc, value) => combinator(acc, value),
-                                                { ...ctx.args },
-                                            );
-                                            return (
-                                                <td
-                                                    key={level1Key}
-                                                    style={{
-                                                        textAlign: combinations.cols ? 'center' : undefined,
-                                                        ...cellStyle,
-                                                    }}
-                                                >
-                                                    <Story args={args} />
-                                                </td>
-                                            );
-                                        })}
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                ))}
+                                {hasRows || hasCols ? (
+                                    <table style={{ ...tableStyle, borderCollapse: 'separate', borderSpacing: 8 }}>
+                                        {combinations.cols && (
+                                            <thead>
+                                                <tr>
+                                                    {hasRows && <th aria-hidden />}
+                                                    {sectionCols.map(([key]) => (
+                                                        <th key={key} style={colStyle}>
+                                                            <small>{key}</small>
+                                                        </th>
+                                                    ))}
+                                                </tr>
+                                            </thead>
+                                        )}
+                                        <tbody>
+                                            {rows.map(([level0Key, level0Value], i1) => {
+                                                const rowArgs = combinator({ ...sectionArgs }, level0Value);
+                                                if (excludeCombination?.(rowArgs)) return null;
+                                                return (
+                                                    <tr key={i1}>
+                                                        {hasRows && (
+                                                            <th style={{ ...firstColStyle, textAlign: 'left' }}>
+                                                                <small>{level0Key}</small>
+                                                            </th>
+                                                        )}
+                                                        {cols.map(([level1Key, level1Value]) => {
+                                                            const args = combinator({ ...rowArgs }, level1Value);
+                                                            let render: React.ReactNode = <Story args={args} />;
+                                                            if (excludeCombination?.(args)) render = null;
+                                                            const textAlign = combinations.cols ? 'center' : undefined;
+                                                            return (
+                                                                <td key={level1Key} style={{ textAlign, ...cellStyle }}>
+                                                                    {render}
+                                                                </td>
+                                                            );
+                                                        })}
+                                                    </tr>
+                                                );
+                                            })}
+                                        </tbody>
+                                    </table>
+                                ) : (
+                                    <Story args={sectionArgs} />
+                                )}
+                            </HeadingLevelProvider>
+                        </section>
+                    );
+                })}
             </>
         );
     };

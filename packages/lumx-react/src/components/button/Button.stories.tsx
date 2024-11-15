@@ -1,29 +1,50 @@
 import React from 'react';
-import { Button, ButtonSize, Emphasis, Size, Text } from '@lumx/react';
+import omit from 'lodash/omit';
+
+import { Button, ButtonSize, Emphasis, GridColumn, Size, Text, Theme } from '@lumx/react';
+import { mdiAccountBox } from '@lumx/icons';
+
 import { iconArgType } from '@lumx/react/stories/controls/icons';
 import { colorArgType } from '@lumx/react/stories/controls/color';
 import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
-import { mdiAccountBox } from '@lumx/icons';
+import { disableArgTypes } from '@lumx/react/stories/utils/disableArgTypes';
+import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
+import { loremIpsum } from '@lumx/react/stories/utils/lorem';
+import { withThemedBackground } from '@lumx/react/stories/decorators/withThemedBackground';
 
 const buttonSizes = [Size.m, Size.s];
-const buttonEmphasis = [Emphasis.low, Emphasis.medium, Emphasis.high];
+const buttonEmphasis = [Emphasis.high, Emphasis.medium, Emphasis.low];
+
+// Combination of props that should be avoided
+const excludeCombination = ({ isSelected, emphasis, hasBackground }: any) => {
+    // isSelected is only supported in medium emphasis
+    if (isSelected && emphasis && emphasis !== 'medium') return true;
+    // hasBackground is only supported in low emphasis
+    if (hasBackground && emphasis && emphasis !== 'low') return true;
+    return false;
+};
 
 export default {
     title: 'LumX components/button/Button',
     component: Button,
     argTypes: {
-        isSelected: { control: 'boolean' },
+        isSelected: { control: 'boolean', if: { arg: 'emphasis', eq: 'medium' } },
         isDisabled: { control: 'boolean' },
-        hasBackground: { control: 'boolean' },
+        hasBackground: { control: 'boolean', if: { arg: 'emphasis', eq: 'low' } },
         emphasis: getSelectArgType(buttonEmphasis),
         size: getSelectArgType<ButtonSize>(buttonSizes),
         rightIcon: iconArgType,
         leftIcon: iconArgType,
         color: colorArgType,
-        onClick: { action: true },
+        ref: { table: { disable: true } },
+        onClick: { action: true, table: { disable: true } },
+        linkAs: { table: { disable: true } },
+        className: { table: { disable: true } },
+        target: { if: { arg: 'href', exists: true }, control: { type: 'inline-radio' } },
+        type: { if: { arg: 'href', exists: false }, control: { type: 'inline-radio' } },
     },
-    args: Button.defaultProps,
+    args: omit(Button.defaultProps, ['theme']),
 };
 
 /**
@@ -36,35 +57,27 @@ export const Default = {
 };
 
 /**
- * Disabled button
+ * All combinations of size and emphasis
  */
-export const Disabled = {
-    args: {
-        isDisabled: true,
-        children: 'Default button (disabled)',
-    },
-};
-
-/**
- * All combinations of size, emphasis and hasBackground
- */
-export const SizeEmphasisAndBackground = {
+export const SizeAndEmphasis = {
     args: {
         children: 'Button',
     },
+    argTypes: {
+        // Disable props that are used in the combinations
+        ...disableArgTypes(['emphasis', 'size']),
+    },
     decorators: [
+        withThemedBackground(),
         withCombinations({
-            tableStyle: { background: 'lightgray' },
             cellStyle: { padding: '10px' },
             combinations: {
+                sections: { key: 'theme', options: Object.values(Theme) },
                 rows: { medium: { size: Size.m }, small: { size: Size.s } },
                 cols: { key: 'emphasis', options: buttonEmphasis },
-                sections: {
-                    'hasBackground: false': { hasBackground: false },
-                    'hasBackground: true': { hasBackground: true },
-                },
             },
         }),
+        withWrapper({ maxColumns: 3, itemMinWidth: 350 }, GridColumn),
     ],
 };
 
@@ -76,62 +89,75 @@ export const LinkButton = {
         href: 'https://example.com',
         children: 'Link button',
     },
+    decorators: [
+        withCombinations({
+            combinations: {
+                cols: {
+                    Default: {},
+                    Disabled: { isDisabled: true },
+                },
+            },
+        }),
+    ],
 };
 
 /**
- * Setting a href to transform the button into a link.
+ * Demo content sizing
  */
-export const LinkButtonDisabled = {
-    args: {
-        href: 'https://example.com',
-        children: 'Link button (disabled)',
-        isDisabled: true,
-    },
-};
-
-/**
- * Full width button
- */
-export const FullWidth = {
-    args: {
-        fullWidth: true,
-        children: 'Full width button',
-    },
-};
-
-/**
- * Full width button with long text truncated
- */
-export const FullWidthTruncated = {
-    argTypes: {
-        children: { control: false },
-    },
-    args: {
-        fullWidth: true,
-        children: (
-            <Text as="span" truncate>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Potenti nullam ac tortor vitae. Lorem ipsum dolor sit amet. Diam sollicitudin
-                tempor id eu nisl nunc mi ipsum. Elementum facilisis leo vel fringilla est ullamcorper eget nulla.
-                Mollis aliquam ut porttitor leo a diam sollicitudin tempor. Ultrices tincidunt arcu non sodales neque
-                sodales.
-            </Text>
-        ),
-    },
+export const ContentSizing = {
+    decorators: [
+        withCombinations({
+            colStyle: { width: '50%' },
+            cellStyle: { maxWidth: '400px', overflow: 'hidden' },
+            combinations: {
+                rows: {
+                    Default: {},
+                    FullWidth: { fullWidth: true },
+                },
+                cols: {
+                    'Short text': {
+                        children: 'Short text',
+                    },
+                    'Long text': {
+                        children: (
+                            <Text as="span" truncate>
+                                {loremIpsum('long')}
+                            </Text>
+                        ),
+                    },
+                },
+            },
+        }),
+    ],
 };
 
 /**
  * Check button style variations (color, states, emphasis, etc.)
  */
-export const ButtonVariations = {
+export const StateVariations = {
     args: {
         children: 'Button',
         rightIcon: mdiAccountBox,
     },
+    argTypes: {
+        ...disableArgTypes([
+            'emphasis',
+            'hasBackground',
+            'isSelected',
+            'isDisabled',
+            'color',
+            'fullWidth',
+            'type',
+            'name',
+            'href',
+        ]),
+    },
     decorators: [
+        withThemedBackground(),
         withCombinations({
-            tableStyle: { background: 'lightgray', width: '100%' },
+            tableStyle: { width: '100%' },
             firstColStyle: { whiteSpace: 'nowrap', width: '1%' },
+            excludeCombination,
             combinations: {
                 // Colors
                 rows: {
@@ -143,10 +169,9 @@ export const ButtonVariations = {
                 // States
                 cols: {
                     'Default state': {},
-                    Selected: { isSelected: true },
                     Hovered: { isHovered: true },
-                    Focused: { isFocused: true },
                     Active: { isActive: true },
+                    Focused: { isFocused: true },
                     Disabled: { isDisabled: true },
                 },
                 // Emphasis/Background
@@ -155,8 +180,7 @@ export const ButtonVariations = {
                     'Emphasis medium': { emphasis: 'medium' },
                     'Emphasis low': { emphasis: 'low' },
                     'Full width': { fullWidth: true },
-                    'Has background (emphasis low)': { emphasis: 'low', hasBackground: true },
-                    'Has background + Full width': { emphasis: 'low', hasBackground: true, fullWidth: true },
+                    'Emphasis low + has background': { emphasis: 'low', hasBackground: true },
                 },
             },
         }),

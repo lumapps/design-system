@@ -7,11 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Documentation
+
+-   Storybook dark theme switcher: improve label of dark/light modes
+-   Storybook `withCombinations()`: better section heading, exclude combinations
+-   Reworked Button storybook stories
+    -    Cleaned up stories argTypes and controls
+    -    Rework stories content with more combinations
+
 ## [3.9.5][] - 2024-11-06
 
 ### Fixed
 
--   `Chip`: trigger onClick when `Enter` key is pressed  
+-   `Chip`: trigger onClick when `Enter` key is pressed
 -   `ExpansionPanel`: fix children remaining in the DOM when `isOpen` prop changes
 
 ## [3.9.4][] - 2024-11-04
