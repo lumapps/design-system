@@ -19,7 +19,7 @@ export const StoryBlock: React.FC<StoryBlockProps> = (props) => {
     const { Story, context } = props;
     const { theme, materialTheme } = context.globals;
     const args = { theme, ...context.args };
-
+    if (args['theme'] === undefined || args['theme'] === '') delete args['theme'];
 
     // Hard code today date for stable chromatic stories snapshots.
     context.parameters.today = isChromatic() ? new Date('May 25 2021 01:00') : new Date();

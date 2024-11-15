@@ -8,12 +8,15 @@ const preview: Preview = {
         theme: {
             name: 'Theme',
             description: 'Dark theme switch',
-            defaultValue: undefined,
+            defaultValue: '',
             toolbar: {
                 icon: 'mirror',
-                items: Object.values(Theme),
-                showName: true,
+                items: [
+                    { value: '', title: 'Light theme' },
+                    { value: Theme.dark, title: 'Dark theme' },
+                ],
                 dynamicTitle: true,
+                showName: true,
             },
         },
         /** Add legacy material theme switcher in the toolbar */
@@ -23,7 +26,7 @@ const preview: Preview = {
             defaultValue: undefined,
             toolbar: {
                 icon: 'paintbrush',
-                items: ['false', 'true'],
+                items: [{ value: 'false', title: 'Default' }, { value: 'true', title: 'Legacy material theme' }],
                 showName: true,
             },
         },
