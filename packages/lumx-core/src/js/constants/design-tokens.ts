@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 16 Dec 2024 14:38:14 GMT
+ * Generated on Mon, 16 Dec 2024 14:39:29 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -935,9 +935,28 @@ export const DESIGN_TOKENS = {
         item: {
             'emphasis-selected': {
                 'state-default': {
-                    'border-width': { value: '0' },
+                    'border-width': { value: '1px' },
                     'theme-light': {
-                        'border-color': { value: 'transparent' },
+                        'border-color': {
+                            value: 'var(--lumx-color-primary-N)',
+                            attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 1 } },
+                            $aliasedFrom: 'color.primary.N',
+                        },
+                        'background-color': {
+                            value: 'var(--lumx-color-primary-L6)',
+                            attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 0.05 } },
+                            $aliasedFrom: 'color.primary.L6',
+                        },
+                    },
+                },
+                'state-hover': {
+                    'border-width': { value: '1px' },
+                    'theme-light': {
+                        'border-color': {
+                            value: 'var(--lumx-color-primary-N)',
+                            attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 1 } },
+                            $aliasedFrom: 'color.primary.N',
+                        },
                         'background-color': {
                             value: 'var(--lumx-color-primary-L5)',
                             attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 0.1 } },
@@ -945,25 +964,18 @@ export const DESIGN_TOKENS = {
                         },
                     },
                 },
-                'state-hover': {
-                    'border-width': { value: '0' },
+                'state-active': {
+                    'border-width': { value: '1px' },
                     'theme-light': {
-                        'border-color': { value: 'transparent' },
+                        'border-color': {
+                            value: 'var(--lumx-color-primary-N)',
+                            attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 1 } },
+                            $aliasedFrom: 'color.primary.N',
+                        },
                         'background-color': {
                             value: 'var(--lumx-color-primary-L4)',
                             attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 0.2 } },
                             $aliasedFrom: 'color.primary.L4',
-                        },
-                    },
-                },
-                'state-active': {
-                    'border-width': { value: '0' },
-                    'theme-light': {
-                        'border-color': { value: 'transparent' },
-                        'background-color': {
-                            value: 'var(--lumx-color-primary-L3)',
-                            attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 0.4 } },
-                            $aliasedFrom: 'color.primary.L3',
                         },
                     },
                 },
