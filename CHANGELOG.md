@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -    Add theming story
 -   Storybook `DatePicker`: add theming story
 -   Storybook `Chip`: add theming story
+-   Storybook `Navigation`: add variants & theming stories
 
 ## [3.9.5][] - 2024-11-06
 
