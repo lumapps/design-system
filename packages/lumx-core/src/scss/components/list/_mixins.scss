@@ -35,11 +35,13 @@
     }
 
     &:hover,
+    &[data-lumx-hover],
     &[data-focus-visible-added] {
         @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "LOW"), "dark");
     }
 
-    &:active {
+    &:active,
+    &[data-lumx-active], {
         @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "LOW"), "dark");
     }
 }
@@ -54,16 +56,18 @@
     }
 }
 
-@mixin lumx-list-item-selected() {
-    @include lumx-state-as-selected(lumx-base-const("state", "DEFAULT"), lumx-base-const("theme", "LIGHT"));
+@mixin lumx-list-item-selected($component: null) {
+    @include lumx-state-as-selected(lumx-base-const("state", "DEFAULT"), lumx-base-const("theme", "LIGHT"), $component);
 
     &:hover,
+    &[data-lumx-hover],
     &[data-focus-visible-added] {
-        @include lumx-state-as-selected(lumx-base-const("state", "HOVER"), lumx-base-const("theme", "LIGHT"));
+        @include lumx-state-as-selected(lumx-base-const("state", "HOVER"), lumx-base-const("theme", "LIGHT"), $component);
     }
 
-    &:active {
-        @include lumx-state-as-selected(lumx-base-const("state", "ACTIVE"), lumx-base-const("theme", "LIGHT"));
+    &:active,
+    &[data-lumx-active], {
+        @include lumx-state-as-selected(lumx-base-const("state", "ACTIVE"), lumx-base-const("theme", "LIGHT"), $component);
     }
 }
 

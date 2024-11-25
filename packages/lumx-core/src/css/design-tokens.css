@@ -2,7 +2,7 @@
 
 /**
  * Do not edit directly
- * Generated on Fri, 29 Nov 2024 08:57:50 GMT
+ * Generated on Fri, 29 Nov 2024 10:16:26 GMT
  */
 
 :root {
@@ -253,6 +253,15 @@
     --lumx-navigation-item-emphasis-selected-state-active-theme-dark-label-color: var(--lumx-color-light-N);
     --lumx-navigation-item-emphasis-selected-state-active-theme-dark-chevron-background-color: var(--lumx-color-light-L5);
     --lumx-navigation-item-emphasis-selected-state-active-theme-dark-chevron-color: var(--lumx-color-light-N);
+    --lumx-side-navigation-item-emphasis-selected-state-default-border-width: 0;
+    --lumx-side-navigation-item-emphasis-selected-state-default-theme-light-border-color: transparent;
+    --lumx-side-navigation-item-emphasis-selected-state-default-theme-light-background-color: var(--lumx-color-primary-L5);
+    --lumx-side-navigation-item-emphasis-selected-state-hover-border-width: 0;
+    --lumx-side-navigation-item-emphasis-selected-state-hover-theme-light-border-color: transparent;
+    --lumx-side-navigation-item-emphasis-selected-state-hover-theme-light-background-color: var(--lumx-color-primary-L4);
+    --lumx-side-navigation-item-emphasis-selected-state-active-border-width: 0;
+    --lumx-side-navigation-item-emphasis-selected-state-active-theme-light-border-color: transparent;
+    --lumx-side-navigation-item-emphasis-selected-state-active-theme-light-background-color: var(--lumx-color-primary-L3);
     --lumx-tabs-link-height: 48px;
     --lumx-tabs-link-border-radius: 0;
     --lumx-tabs-link-emphasis-low-state-default-border-top-width: 0;
