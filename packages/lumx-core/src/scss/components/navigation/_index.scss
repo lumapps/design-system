@@ -5,8 +5,6 @@
 /* Navigation Item
    ========================================================================== */
 .#{$lumx-base-prefix}-navigation-item {
-    $self: &;
-
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -27,160 +25,71 @@
         outline: none;
 
         @include lumx-typography("navigation-item", "custom");
-        @include lumx-navigation-link-borders(lumx-base-const("emphasis", "LOW"), lumx-base-const("state", "DEFAULT"));
+    }
 
-        .#{$lumx-base-prefix}-navigation-item__label {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
+    &__label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
 
-        .#{$lumx-base-prefix}-navigation-item__icon {
-            margin-right: $lumx-spacing-unit;
-        }
+    &__icon {
+        margin-right: $lumx-spacing-unit;
+    }
+}
 
-        &:hover,
-        &.focus-visible {
-            @include lumx-navigation-link-borders(
-                lumx-base-const("emphasis", "LOW"),
-                lumx-base-const("state", "HOVER")
+// Variants on emphasis, theme and states
+@each $emphasis, $selector in (
+    "emphasis-low": ".#{$lumx-base-prefix}-navigation-item__link",
+    "emphasis-selected": ".#{$lumx-base-prefix}-navigation-item__link--is-selected",
+) {
+    @each $theme in ("theme-light", "theme-dark") {
+        .#{$lumx-base-prefix}-navigation-item--#{$theme} > #{$selector} {
+            // Default state
+            @include lumx-navigation-link-colors(
+                $emphasis,
+                lumx-base-const("state", "DEFAULT"),
+                $theme
             );
-
-            &[data-focus-visible-added] {
-                @include lumx-state-as-selected(lumx-base-const("state", "FOCUS"), lumx-base-const("theme", "LIGHT"));
-            }
-        }
-
-        &:active {
             @include lumx-navigation-link-borders(
-                lumx-base-const("emphasis", "LOW"),
-                lumx-base-const("state", "ACTIVE")
-            );
-        }
-
-        &--is-selected {
-            @include lumx-navigation-link-borders(
-                lumx-base-const("emphasis", "SELECTED"),
+                $emphasis,
                 lumx-base-const("state", "DEFAULT")
             );
 
+            // Focus state
+            &[data-focus-visible-added] {
+                @include lumx-state-as-selected(
+                    lumx-base-const("state", "FOCUS"),
+                    $theme
+                );
+            }
+
+            // Hover state
             &:hover,
-            &:focus {
+            &[data-lumx-hover], {
+                @include lumx-navigation-link-colors(
+                    $emphasis,
+                    lumx-base-const("state", "HOVER"),
+                    $theme
+                );
                 @include lumx-navigation-link-borders(
-                    lumx-base-const("emphasis", "SELECTED"),
+                    $emphasis,
                     lumx-base-const("state", "HOVER")
                 );
             }
 
-            &:active {
+            // Active state
+            &:active,
+            &[data-lumx-active] {
+                @include lumx-navigation-link-colors(
+                    $emphasis,
+                    lumx-base-const("state", "ACTIVE"),
+                    $theme
+                );
                 @include lumx-navigation-link-borders(
-                    lumx-base-const("emphasis", "SELECTED"),
+                    $emphasis,
                     lumx-base-const("state", "ACTIVE")
                 );
-            }
-        }
-    }
-
-    &--theme-dark {
-        .#{$lumx-base-prefix}-navigation-item__link {
-            @include lumx-navigation-link-colors(
-                lumx-base-const("emphasis", "LOW"),
-                lumx-base-const("state", "DEFAULT"),
-                lumx-base-const("theme", "DARK")
-            );
-
-            &:hover,
-            &.focus-visible {
-                @include lumx-navigation-link-colors(
-                    lumx-base-const("emphasis", "LOW"),
-                    lumx-base-const("state", "HOVER"),
-                    lumx-base-const("theme", "DARK")
-                );
-            }
-
-            &:active {
-                @include lumx-navigation-link-colors(
-                    lumx-base-const("emphasis", "LOW"),
-                    lumx-base-const("state", "ACTIVE"),
-                    lumx-base-const("theme", "DARK")
-                );
-            }
-
-            &--is-selected {
-                @include lumx-navigation-link-colors(
-                    lumx-base-const("emphasis", "SELECTED"),
-                    lumx-base-const("state", "DEFAULT"),
-                    lumx-base-const("theme", "DARK")
-                );
-
-                &:hover,
-                &:focus {
-                    @include lumx-navigation-link-colors(
-                        lumx-base-const("emphasis", "SELECTED"),
-                        lumx-base-const("state", "HOVER"),
-                        lumx-base-const("theme", "DARK")
-                    );
-                }
-
-                &:active {
-                    @include lumx-navigation-link-colors(
-                        lumx-base-const("emphasis", "SELECTED"),
-                        lumx-base-const("state", "ACTIVE"),
-                        lumx-base-const("theme", "DARK")
-                    );
-                }
-            }
-        }
-    }
-
-    &--theme-light {
-        .#{$lumx-base-prefix}-navigation-item__link {
-            @include lumx-navigation-link-colors(
-                lumx-base-const("emphasis", "LOW"),
-                lumx-base-const("state", "DEFAULT"),
-                lumx-base-const("theme", "LIGHT")
-            );
-
-            &:hover,
-            &.focus-visible {
-                @include lumx-navigation-link-colors(
-                    lumx-base-const("emphasis", "LOW"),
-                    lumx-base-const("state", "HOVER"),
-                    lumx-base-const("theme", "LIGHT")
-                );
-            }
-
-            &:active {
-                @include lumx-navigation-link-colors(
-                    lumx-base-const("emphasis", "LOW"),
-                    lumx-base-const("state", "ACTIVE"),
-                    lumx-base-const("theme", "LIGHT")
-                );
-            }
-
-            &--is-selected {
-                @include lumx-navigation-link-colors(
-                    lumx-base-const("emphasis", "SELECTED"),
-                    lumx-base-const("state", "DEFAULT"),
-                    lumx-base-const("theme", "LIGHT")
-                );
-
-                &:hover,
-                &:focus {
-                    @include lumx-navigation-link-colors(
-                        lumx-base-const("emphasis", "SELECTED"),
-                        lumx-base-const("state", "HOVER"),
-                        lumx-base-const("theme", "LIGHT")
-                    );
-                }
-
-                &:active {
-                    @include lumx-navigation-link-colors(
-                        lumx-base-const("emphasis", "SELECTED"),
-                        lumx-base-const("state", "ACTIVE"),
-                        lumx-base-const("theme", "LIGHT")
-                    );
-                }
             }
         }
     }
