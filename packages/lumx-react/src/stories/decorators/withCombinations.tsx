@@ -30,6 +30,8 @@ type Options = {
     tableStyle?: React.CSSProperties;
     /** Inject style on first col */
     firstColStyle?: React.CSSProperties;
+    /** Inject style on sections */
+    sectionStyle?: React.CSSProperties;
     /** Inject style on cols */
     colStyle?: React.CSSProperties;
     /** Inject style on cells */
@@ -50,6 +52,7 @@ export const withCombinations =
         firstColStyle,
         cellStyle,
         colStyle,
+        sectionStyle,
         combinator = Object.assign,
         excludeCombination,
     }: Options) =>
@@ -72,7 +75,7 @@ export const withCombinations =
                         })
                         .filter(Boolean) as Array<[string, any]>;
                     return (
-                        <section key={level2Key}>
+                        <section key={level2Key} style={sectionStyle}>
                             <HeadingLevelProvider>
                                 {level2Key && <Heading style={{ textTransform: 'capitalize' }}>{level2Key}</Heading>}
 
