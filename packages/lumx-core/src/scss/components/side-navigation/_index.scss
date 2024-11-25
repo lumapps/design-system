@@ -65,5 +65,5 @@
 }
 
 .#{$lumx-base-prefix}-side-navigation-item--is-selected .#{$lumx-base-prefix}-side-navigation-item__link {
-    @include lumx-list-item-selected;
+    @include lumx-list-item-selected('side-navigation-item');
 }

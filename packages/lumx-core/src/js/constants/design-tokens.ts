@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 29 Nov 2024 08:57:51 GMT
+ * Generated on Fri, 29 Nov 2024 10:16:26 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -905,6 +905,45 @@ export const DESIGN_TOKENS = {
                             value: 'var(--lumx-color-light-N)',
                             attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
                             $aliasedFrom: 'color.light.N',
+                        },
+                    },
+                },
+            },
+        },
+    },
+    'side-navigation': {
+        item: {
+            'emphasis-selected': {
+                'state-default': {
+                    'border-width': { value: '0' },
+                    'theme-light': {
+                        'border-color': { value: 'transparent' },
+                        'background-color': {
+                            value: 'var(--lumx-color-primary-L5)',
+                            attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 0.1 } },
+                            $aliasedFrom: 'color.primary.L5',
+                        },
+                    },
+                },
+                'state-hover': {
+                    'border-width': { value: '0' },
+                    'theme-light': {
+                        'border-color': { value: 'transparent' },
+                        'background-color': {
+                            value: 'var(--lumx-color-primary-L4)',
+                            attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 0.2 } },
+                            $aliasedFrom: 'color.primary.L4',
+                        },
+                    },
+                },
+                'state-active': {
+                    'border-width': { value: '0' },
+                    'theme-light': {
+                        'border-color': { value: 'transparent' },
+                        'background-color': {
+                            value: 'var(--lumx-color-primary-L3)',
+                            attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 0.4 } },
+                            $aliasedFrom: 'color.primary.L3',
                         },
                     },
                 },
