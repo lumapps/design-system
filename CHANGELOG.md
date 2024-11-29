@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   `Chip`: rework selected state style for better a11y
+
+## [3.9.6][] - 2024-12-04
+
 ### Added
 
 -   `Button`: add support of `isSelected` in `low` emphasis (in addition to `medium`).
