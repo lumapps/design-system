@@ -14,12 +14,10 @@ export default {
 export const Variants = {
     render: ({ size, emphasis, theme }: any) => (
         <ButtonGroup>
-            <span className="visually-hidden">Ignore me</span>
             <Button size={size} emphasis={emphasis} theme={theme}>
                 Button
             </Button>
             <IconButton size={size} emphasis={emphasis} theme={theme} label="IconButton" icon={mdiMenuDown} />
-            <span className="visually-hidden">Ignore me</span>
         </ButtonGroup>
     ),
     decorators: [
@@ -42,13 +40,13 @@ export const ManyButtons = {
         children: (
             <>
                 <span className="visually-hidden">Ignore me</span>
-                <Button>Button 1</Button>
+                <Button emphasis="medium">Button 1</Button>
                 <span className="visually-hidden">Ignore me</span>
-                <IconButton label="IconButton" icon={mdiFoodApple} />
+                <IconButton emphasis="medium" label="IconButton" icon={mdiFoodApple} />
                 <span className="visually-hidden">Ignore me</span>
-                <IconButton label="IconButton" icon={mdiAbjadArabic} />
+                <IconButton emphasis="medium" isSelected label="IconButton" icon={mdiAbjadArabic} />
                 <span className="visually-hidden">Ignore me</span>
-                <Button>Button 2</Button>
+                <Button emphasis="medium">Button 2</Button>
                 <span className="visually-hidden">Ignore me</span>
             </>
         ),

@@ -2,7 +2,7 @@
 
 /**
  * Do not edit directly
- * Generated on Mon, 13 Jan 2025 09:23:47 GMT
+ * Generated on Mon, 13 Jan 2025 09:24:38 GMT
  */
 
 $lumx-button-height: 36px !default;
@@ -80,29 +80,29 @@ $lumx-button-emphasis-low-state-active-theme-dark-background-color: var(--lumx-c
 $lumx-button-emphasis-low-state-active-theme-dark-color: var(--lumx-color-light-L1) !default;
 $lumx-button-emphasis-low-state-active-theme-dark-border-color: transparent !default;
 $lumx-button-emphasis-selected-state-default-padding-horizontal: 16px !default; // deprecated (use base emphasis padding)
-$lumx-button-emphasis-selected-state-default-border-width: 0 !default;
-$lumx-button-emphasis-selected-state-default-theme-light-background-color: var(--lumx-color-primary-L5) !default;
+$lumx-button-emphasis-selected-state-default-border-width: 1px !default;
+$lumx-button-emphasis-selected-state-default-theme-light-background-color: var(--lumx-color-primary-L6) !default;
 $lumx-button-emphasis-selected-state-default-theme-light-color: var(--lumx-color-primary-D2) !default;
-$lumx-button-emphasis-selected-state-default-theme-light-border-color: transparent !default;
-$lumx-button-emphasis-selected-state-default-theme-dark-background-color: var(--lumx-color-light-L3) !default;
+$lumx-button-emphasis-selected-state-default-theme-light-border-color: var(--lumx-color-primary-N) !default;
+$lumx-button-emphasis-selected-state-default-theme-dark-background-color: var(--lumx-color-light-L6) !default;
 $lumx-button-emphasis-selected-state-default-theme-dark-color: var(--lumx-color-light-N) !default;
-$lumx-button-emphasis-selected-state-default-theme-dark-border-color: transparent !default;
+$lumx-button-emphasis-selected-state-default-theme-dark-border-color: var(--lumx-color-light-N) !default;
 $lumx-button-emphasis-selected-state-hover-padding-horizontal: 16px !default; // deprecated (use base emphasis padding)
-$lumx-button-emphasis-selected-state-hover-border-width: 0 !default;
-$lumx-button-emphasis-selected-state-hover-theme-light-background-color: var(--lumx-color-primary-L4) !default;
+$lumx-button-emphasis-selected-state-hover-border-width: 1px !default;
+$lumx-button-emphasis-selected-state-hover-theme-light-background-color: var(--lumx-color-primary-L5) !default;
 $lumx-button-emphasis-selected-state-hover-theme-light-color: var(--lumx-color-primary-D2) !default;
-$lumx-button-emphasis-selected-state-hover-theme-light-border-color: transparent !default;
-$lumx-button-emphasis-selected-state-hover-theme-dark-background-color: var(--lumx-color-light-L4) !default;
+$lumx-button-emphasis-selected-state-hover-theme-light-border-color: var(--lumx-color-primary-N) !default;
+$lumx-button-emphasis-selected-state-hover-theme-dark-background-color: var(--lumx-color-light-L5) !default;
 $lumx-button-emphasis-selected-state-hover-theme-dark-color: var(--lumx-color-light-N) !default;
-$lumx-button-emphasis-selected-state-hover-theme-dark-border-color: transparent !default;
+$lumx-button-emphasis-selected-state-hover-theme-dark-border-color: var(--lumx-color-light-N) !default;
 $lumx-button-emphasis-selected-state-active-padding-horizontal: 16px !default; // deprecated (use base emphasis padding)
-$lumx-button-emphasis-selected-state-active-border-width: 0 !default;
-$lumx-button-emphasis-selected-state-active-theme-light-background-color: var(--lumx-color-primary-L3) !default;
+$lumx-button-emphasis-selected-state-active-border-width: 1px !default;
+$lumx-button-emphasis-selected-state-active-theme-light-background-color: var(--lumx-color-primary-L4) !default;
 $lumx-button-emphasis-selected-state-active-theme-light-color: var(--lumx-color-primary-D2) !default;
-$lumx-button-emphasis-selected-state-active-theme-light-border-color: transparent !default;
-$lumx-button-emphasis-selected-state-active-theme-dark-background-color: var(--lumx-color-light-L5) !default;
+$lumx-button-emphasis-selected-state-active-theme-light-border-color: var(--lumx-color-primary-N) !default;
+$lumx-button-emphasis-selected-state-active-theme-dark-background-color: var(--lumx-color-light-L4) !default;
 $lumx-button-emphasis-selected-state-active-theme-dark-color: var(--lumx-color-light-N) !default;
-$lumx-button-emphasis-selected-state-active-theme-dark-border-color: transparent !default;
+$lumx-button-emphasis-selected-state-active-theme-dark-border-color: var(--lumx-color-light-N) !default;
 $lumx-chip-emphasis-selected-state-default-border-width: 1px !default;
 $lumx-chip-emphasis-selected-state-default-theme-light-border-color: var(--lumx-color-primary-N) !default;
 $lumx-chip-emphasis-selected-state-default-theme-light-background-color: var(--lumx-color-primary-L6) !default;

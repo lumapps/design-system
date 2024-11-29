@@ -158,14 +158,18 @@
     .#{$lumx-base-prefix}-button {
         // Remove border radius on the right on the first button (if not hidden and not also the last button)
         &:not(:last-of-type:not(.visually-hidden)) {
-            border-top-right-radius: 0 !important;
-            border-bottom-right-radius: 0 !important;
+            &, &::before {
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+            }
         }
 
         // Remove border radius on the left on the last button (if not hidden and not also the first button)
         &:not(:first-of-type:not(.visually-hidden)) {
-            border-top-left-radius: 0 !important;
-            border-bottom-left-radius: 0 !important;
+            &, &::before {
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+            }
         }
     }
 }
