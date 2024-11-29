@@ -69,34 +69,6 @@ export const WithAfterAndBefore = {
 /**
  * All combinations of color, size and states.
  */
-export const SelectedVariants = {
-    ...WithAfterAndBefore,
-    decorators: [
-        withThemedBackground(),
-        withCombinations({
-            combinations: {
-                sections: { key: 'size', options: chipSizes },
-                rows: {
-                    'theme=light': { theme: Theme.light },
-                    'Selected & theme=light': { isSelected: true, theme: Theme.light },
-                    'theme=dark': { theme: Theme.dark },
-                    'Selected & theme=dark': { isSelected: true, theme: Theme.dark },
-                },
-                cols: {
-                    Default: {},
-                    Hover: { 'data-lumx-hover': true },
-                    Active: { 'data-lumx-active': true },
-                    Disabled: { isDisabled: true },
-                    Focused: { 'data-focus-visible-added': true },
-                },
-            },
-        }),
-    ],
-};
-
-/**
- * All combinations of color, size and states.
- */
 export const ColorVariants = {
     ...WithAfterAndBefore,
     decorators: [
@@ -117,45 +89,60 @@ export const ColorVariants = {
 };
 
 /**
- * Test chip CSS variable theming
+ * All combinations of color, size and states.
  */
-export const Theming = {
-    ...ChipButton,
+export const SelectedVariants = {
+    ...WithAfterAndBefore,
     decorators: [
         withThemedBackground(),
         withCombinations({
             combinations: {
-                sections: { 'Size s': { size: 's' }, 'Size m': { size: 'm' } },
+                sections: { 'Size m': {}, 'Size s': { size: 's' } },
                 rows: {
-                    Default: {},
+                    'theme=light': { theme: Theme.light },
+                    'Selected & theme=light': { isSelected: true, theme: Theme.light },
                     'theme=dark': { theme: Theme.dark },
-                    Selected: { isSelected: true },
                     'Selected & theme=dark': { isSelected: true, theme: Theme.dark },
                 },
-                // States
                 cols: {
                     Default: {},
+                    Hover: { 'data-lumx-hover': true },
+                    Active: { 'data-lumx-active': true },
                     Disabled: { isDisabled: true },
                     Focused: { 'data-focus-visible-added': true },
-                    Active: { 'data-lumx-active': true },
-                    Hover: { 'data-lumx-hover': true },
                 },
             },
         }),
+    ],
+};
+
+/**
+ * Test chip CSS variable theming
+ */
+export const Theming = {
+    ...SelectedVariants,
+    decorators: [
+        ...SelectedVariants.decorators,
         withTheming({
             properties: pick(DESIGN_TOKENS, ['chip']),
             values: `
             --lumx-chip-emphasis-selected-state-default-border-width: 2px;
             --lumx-chip-emphasis-selected-state-default-theme-light-border-color: red;
+            --lumx-chip-emphasis-selected-state-default-theme-light-background-color: blue;
             --lumx-chip-emphasis-selected-state-default-theme-dark-border-color: blue;
+            --lumx-chip-emphasis-selected-state-default-theme-dark-background-color: red;
 
             --lumx-chip-emphasis-selected-state-hover-border-width: 3px;
             --lumx-chip-emphasis-selected-state-hover-theme-light-border-color: green;
+            --lumx-chip-emphasis-selected-state-hover-theme-light-background-color: violet;
             --lumx-chip-emphasis-selected-state-hover-theme-dark-border-color: violet;
+            --lumx-chip-emphasis-selected-state-hover-theme-dark-background-color: green;
 
             --lumx-chip-emphasis-selected-state-active-border-width: 4px;
             --lumx-chip-emphasis-selected-state-active-theme-light-border-color: orange;
+            --lumx-chip-emphasis-selected-state-active-theme-light-background-color: pink;
             --lumx-chip-emphasis-selected-state-active-theme-dark-border-color: pink;
+            --lumx-chip-emphasis-selected-state-active-theme-dark-background-color: orange;
             `,
         }),
     ],

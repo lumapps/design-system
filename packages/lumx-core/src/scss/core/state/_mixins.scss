@@ -58,11 +58,20 @@
     @if $theme == lumx-base-const("theme", "LIGHT") {
         @if $state == lumx-base-const("state", "DEFAULT") {
             color: lumx-color-variant("primary", "D2");
-            background-color: lumx-color-variant("primary", "L5");
+            background-color: if($component,
+                var(--lumx-#{$component}-emphasis-selected-#{$state}-#{$theme}-background-color),
+                lumx-color-variant("primary", "L5"),
+            );
         } @else if $state == lumx-base-const("state", "HOVER") {
-            background-color: lumx-color-variant("primary", "L4");
+            background-color: if($component,
+                var(--lumx-#{$component}-emphasis-selected-#{$state}-#{$theme}-background-color),
+                lumx-color-variant("primary", "L4"),
+            );
         } @else if $state == lumx-base-const("state", "ACTIVE") {
-            background-color: lumx-color-variant("primary", "L3");
+            background-color: if($component,
+                var(--lumx-#{$component}-emphasis-selected-#{$state}-#{$theme}-background-color),
+                lumx-color-variant("primary", "L3"),
+            );
         } @else if $state == lumx-base-const("state", "FOCUS") {
             outline: 2px solid lumx-color-variant("dark", "N");
             outline-offset: 2px;
@@ -70,11 +79,20 @@
     } @else if $theme == lumx-base-const("theme", "DARK") {
         @if $state == lumx-base-const("state", "DEFAULT") {
             color: lumx-color-variant("light", "N");
-            background-color: lumx-color-variant("light", "L3");
+            background-color: if($component,
+                var(--lumx-#{$component}-emphasis-selected-#{$state}-#{$theme}-background-color),
+                lumx-color-variant("light", "L3"),
+            );
         } @else if $state == lumx-base-const("state", "HOVER") {
-            background-color: lumx-color-variant("light", "L4");
+            background-color: if($component,
+                var(--lumx-#{$component}-emphasis-selected-#{$state}-#{$theme}-background-color),
+                lumx-color-variant("light", "L4"),
+            );
         } @else if $state == lumx-base-const("state", "ACTIVE") {
-            background-color: lumx-color-variant("light", "L5");
+            background-color: if($component,
+                var(--lumx-#{$component}-emphasis-selected-#{$state}-#{$theme}-background-color),
+                lumx-color-variant("light", "L5"),
+            );
         } @else if $state == lumx-base-const("state", "FOCUS") {
             outline: 2px solid lumx-color-variant("light", "N");
             outline-offset: 2px;
