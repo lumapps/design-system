@@ -2,7 +2,7 @@
 
 /**
  * Do not edit directly
- * Generated on Thu, 14 Nov 2024 10:23:01 GMT
+ * Generated on Fri, 29 Nov 2024 08:57:50 GMT
  */
 
 $lumx-button-height: 36px !default;
@@ -105,13 +105,19 @@ $lumx-button-emphasis-selected-state-active-theme-dark-color: var(--lumx-color-l
 $lumx-button-emphasis-selected-state-active-theme-dark-border-color: transparent !default;
 $lumx-chip-emphasis-selected-state-default-border-width: 0 !default;
 $lumx-chip-emphasis-selected-state-default-theme-light-border-color: transparent !default;
+$lumx-chip-emphasis-selected-state-default-theme-light-background-color: var(--lumx-color-primary-L5) !default;
 $lumx-chip-emphasis-selected-state-default-theme-dark-border-color: transparent !default;
+$lumx-chip-emphasis-selected-state-default-theme-dark-background-color: var(--lumx-color-light-L3) !default;
 $lumx-chip-emphasis-selected-state-hover-border-width: 0 !default;
 $lumx-chip-emphasis-selected-state-hover-theme-light-border-color: transparent !default;
+$lumx-chip-emphasis-selected-state-hover-theme-light-background-color: var(--lumx-color-primary-L4) !default;
 $lumx-chip-emphasis-selected-state-hover-theme-dark-border-color: transparent !default;
+$lumx-chip-emphasis-selected-state-hover-theme-dark-background-color: var(--lumx-color-light-L4) !default;
 $lumx-chip-emphasis-selected-state-active-border-width: 0 !default;
 $lumx-chip-emphasis-selected-state-active-theme-light-border-color: transparent !default;
+$lumx-chip-emphasis-selected-state-active-theme-light-background-color: var(--lumx-color-primary-L3) !default;
 $lumx-chip-emphasis-selected-state-active-theme-dark-border-color: transparent !default;
+$lumx-chip-emphasis-selected-state-active-theme-dark-background-color: var(--lumx-color-light-L5) !default;
 $lumx-material-button-text-transform: none !default;
 $lumx-material-checkbox-wrapper-size: 20px !default;
 $lumx-material-checkbox-control-size: 16px !default;
@@ -756,28 +762,34 @@ $lumx-design-tokens: (
             "state-default": (
                 "border-width": $lumx-chip-emphasis-selected-state-default-border-width,
                 "theme-light": (
-                    "border-color": $lumx-chip-emphasis-selected-state-default-theme-light-border-color
+                    "border-color": $lumx-chip-emphasis-selected-state-default-theme-light-border-color,
+                    "background-color": $lumx-chip-emphasis-selected-state-default-theme-light-background-color
                 ),
                 "theme-dark": (
-                    "border-color": $lumx-chip-emphasis-selected-state-default-theme-dark-border-color
+                    "border-color": $lumx-chip-emphasis-selected-state-default-theme-dark-border-color,
+                    "background-color": $lumx-chip-emphasis-selected-state-default-theme-dark-background-color
                 )
             ),
             "state-hover": (
                 "border-width": $lumx-chip-emphasis-selected-state-hover-border-width,
                 "theme-light": (
-                    "border-color": $lumx-chip-emphasis-selected-state-hover-theme-light-border-color
+                    "border-color": $lumx-chip-emphasis-selected-state-hover-theme-light-border-color,
+                    "background-color": $lumx-chip-emphasis-selected-state-hover-theme-light-background-color
                 ),
                 "theme-dark": (
-                    "border-color": $lumx-chip-emphasis-selected-state-hover-theme-dark-border-color
+                    "border-color": $lumx-chip-emphasis-selected-state-hover-theme-dark-border-color,
+                    "background-color": $lumx-chip-emphasis-selected-state-hover-theme-dark-background-color
                 )
             ),
             "state-active": (
                 "border-width": $lumx-chip-emphasis-selected-state-active-border-width,
                 "theme-light": (
-                    "border-color": $lumx-chip-emphasis-selected-state-active-theme-light-border-color
+                    "border-color": $lumx-chip-emphasis-selected-state-active-theme-light-border-color,
+                    "background-color": $lumx-chip-emphasis-selected-state-active-theme-light-background-color
                 ),
                 "theme-dark": (
-                    "border-color": $lumx-chip-emphasis-selected-state-active-theme-dark-border-color
+                    "border-color": $lumx-chip-emphasis-selected-state-active-theme-dark-border-color,
+                    "background-color": $lumx-chip-emphasis-selected-state-active-theme-dark-background-color
                 )
             )
         )

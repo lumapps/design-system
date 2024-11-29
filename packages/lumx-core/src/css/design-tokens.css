@@ -2,7 +2,7 @@
 
 /**
  * Do not edit directly
- * Generated on Thu, 14 Nov 2024 10:23:01 GMT
+ * Generated on Fri, 29 Nov 2024 08:57:50 GMT
  */
 
 :root {
@@ -106,13 +106,19 @@
     --lumx-button-emphasis-selected-state-active-theme-dark-border-color: transparent;
     --lumx-chip-emphasis-selected-state-default-border-width: 0;
     --lumx-chip-emphasis-selected-state-default-theme-light-border-color: transparent;
+    --lumx-chip-emphasis-selected-state-default-theme-light-background-color: var(--lumx-color-primary-L5);
     --lumx-chip-emphasis-selected-state-default-theme-dark-border-color: transparent;
+    --lumx-chip-emphasis-selected-state-default-theme-dark-background-color: var(--lumx-color-light-L3);
     --lumx-chip-emphasis-selected-state-hover-border-width: 0;
     --lumx-chip-emphasis-selected-state-hover-theme-light-border-color: transparent;
+    --lumx-chip-emphasis-selected-state-hover-theme-light-background-color: var(--lumx-color-primary-L4);
     --lumx-chip-emphasis-selected-state-hover-theme-dark-border-color: transparent;
+    --lumx-chip-emphasis-selected-state-hover-theme-dark-background-color: var(--lumx-color-light-L4);
     --lumx-chip-emphasis-selected-state-active-border-width: 0;
     --lumx-chip-emphasis-selected-state-active-theme-light-border-color: transparent;
+    --lumx-chip-emphasis-selected-state-active-theme-light-background-color: var(--lumx-color-primary-L3);
     --lumx-chip-emphasis-selected-state-active-theme-dark-border-color: transparent;
+    --lumx-chip-emphasis-selected-state-active-theme-dark-background-color: var(--lumx-color-light-L5);
     --lumx-material-button-text-transform: none;
     --lumx-material-checkbox-wrapper-size: 20px;
     --lumx-material-checkbox-control-size: 16px;
