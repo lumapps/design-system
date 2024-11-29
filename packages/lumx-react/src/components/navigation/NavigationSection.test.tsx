@@ -18,10 +18,10 @@ type SetupProps = Partial<NavigationSectionProps>;
  */
 
 const setup = (propsOverride: SetupProps = {}, orientation: Orientation = Orientation.vertical) => {
-    const props = { ...propsOverride };
+    const props = { label: 'Section 1', ...propsOverride };
     const { container } = render(
         <NavigationContext.Provider value={{ orientation }}>
-            <NavigationSection label="Section 1" {...props}>
+            <NavigationSection {...props}>
                 <NavigationItem label="A content" href="" />
                 <NavigationItem label="A link" href="" />
                 <NavigationItem label="A community" href="" />
@@ -29,17 +29,16 @@ const setup = (propsOverride: SetupProps = {}, orientation: Orientation = Orient
         </NavigationContext.Provider>,
     );
 
+    const query = {
+        button: () => screen.getByRole('button', { name: props.label as string }),
+        content: () => queryByClassName(container, `${CLASSNAME}__drawer`),
+        popover: () => queryByClassName(container, `${CLASSNAME}__drawer--popover`),
+    };
     return {
         container,
         element: getByClassName(container, CLASSNAME),
-        query: {
-            button: () =>
-                screen.getByRole('button', {
-                    name: /section 1/i,
-                }),
-            content: () => queryByClassName(container, `${CLASSNAME}__drawer`),
-            popover: () => queryByClassName(container, `${CLASSNAME}__drawer--popover`),
-        },
+        button: query.button(),
+        query,
         props,
     };
 };
@@ -122,5 +121,5 @@ describe(`<${NavigationSection.displayName}>`, () => {
     });
 
     // Common tests suite.
-    commonTestsSuiteRTL(setup, { baseClassName: CLASSNAME, forwardClassName: 'element', forwardAttributes: 'element' });
+    commonTestsSuiteRTL(setup, { baseClassName: CLASSNAME, forwardClassName: 'element', forwardAttributes: 'button' });
 });
