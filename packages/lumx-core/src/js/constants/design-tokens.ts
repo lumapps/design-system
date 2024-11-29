@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Mon, 13 Jan 2025 09:23:47 GMT
+ * Generated on Mon, 13 Jan 2025 09:24:38 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -284,7 +284,45 @@ export const DESIGN_TOKENS = {
         'emphasis-selected': {
             'state-default': {
                 padding: { horizontal: { comment: 'deprecated (use base emphasis padding)', value: '16px' } },
-                'border-width': { value: '0' },
+                'border-width': { value: '1px' },
+                'theme-light': {
+                    'background-color': {
+                        value: 'var(--lumx-color-primary-L6)',
+                        attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 0.05 } },
+                        $aliasedFrom: 'color.primary.L6',
+                    },
+                    color: {
+                        value: 'var(--lumx-color-primary-D2)',
+                        attributes: { hex: '1546c1', rgb: { r: 21, g: 70, b: 193, a: 1 } },
+                        $aliasedFrom: 'color.primary.D2',
+                    },
+                    'border-color': {
+                        value: 'var(--lumx-color-primary-N)',
+                        attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 1 } },
+                        $aliasedFrom: 'color.primary.N',
+                    },
+                },
+                'theme-dark': {
+                    'background-color': {
+                        value: 'var(--lumx-color-light-L6)',
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.1 } },
+                        $aliasedFrom: 'color.light.L6',
+                    },
+                    color: {
+                        value: 'var(--lumx-color-light-N)',
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                        $aliasedFrom: 'color.light.N',
+                    },
+                    'border-color': {
+                        value: 'var(--lumx-color-light-N)',
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                        $aliasedFrom: 'color.light.N',
+                    },
+                },
+            },
+            'state-hover': {
+                padding: { horizontal: { comment: 'deprecated (use base emphasis padding)', value: '16px' } },
+                'border-width': { value: '1px' },
                 'theme-light': {
                     'background-color': {
                         value: 'var(--lumx-color-primary-L5)',
@@ -296,67 +334,11 @@ export const DESIGN_TOKENS = {
                         attributes: { hex: '1546c1', rgb: { r: 21, g: 70, b: 193, a: 1 } },
                         $aliasedFrom: 'color.primary.D2',
                     },
-                    'border-color': { value: 'transparent' },
-                },
-                'theme-dark': {
-                    'background-color': {
-                        value: 'var(--lumx-color-light-L3)',
-                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.6 } },
-                        $aliasedFrom: 'color.light.L3',
+                    'border-color': {
+                        value: 'var(--lumx-color-primary-N)',
+                        attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 1 } },
+                        $aliasedFrom: 'color.primary.N',
                     },
-                    color: {
-                        value: 'var(--lumx-color-light-N)',
-                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
-                        $aliasedFrom: 'color.light.N',
-                    },
-                    'border-color': { value: 'transparent' },
-                },
-            },
-            'state-hover': {
-                padding: { horizontal: { comment: 'deprecated (use base emphasis padding)', value: '16px' } },
-                'border-width': { value: '0' },
-                'theme-light': {
-                    'background-color': {
-                        value: 'var(--lumx-color-primary-L4)',
-                        attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 0.2 } },
-                        $aliasedFrom: 'color.primary.L4',
-                    },
-                    color: {
-                        value: 'var(--lumx-color-primary-D2)',
-                        attributes: { hex: '1546c1', rgb: { r: 21, g: 70, b: 193, a: 1 } },
-                        $aliasedFrom: 'color.primary.D2',
-                    },
-                    'border-color': { value: 'transparent' },
-                },
-                'theme-dark': {
-                    'background-color': {
-                        value: 'var(--lumx-color-light-L4)',
-                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.4 } },
-                        $aliasedFrom: 'color.light.L4',
-                    },
-                    color: {
-                        value: 'var(--lumx-color-light-N)',
-                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
-                        $aliasedFrom: 'color.light.N',
-                    },
-                    'border-color': { value: 'transparent' },
-                },
-            },
-            'state-active': {
-                padding: { horizontal: { comment: 'deprecated (use base emphasis padding)', value: '16px' } },
-                'border-width': { value: '0' },
-                'theme-light': {
-                    'background-color': {
-                        value: 'var(--lumx-color-primary-L3)',
-                        attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 0.4 } },
-                        $aliasedFrom: 'color.primary.L3',
-                    },
-                    color: {
-                        value: 'var(--lumx-color-primary-D2)',
-                        attributes: { hex: '1546c1', rgb: { r: 21, g: 70, b: 193, a: 1 } },
-                        $aliasedFrom: 'color.primary.D2',
-                    },
-                    'border-color': { value: 'transparent' },
                 },
                 'theme-dark': {
                     'background-color': {
@@ -369,7 +351,49 @@ export const DESIGN_TOKENS = {
                         attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
                         $aliasedFrom: 'color.light.N',
                     },
-                    'border-color': { value: 'transparent' },
+                    'border-color': {
+                        value: 'var(--lumx-color-light-N)',
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                        $aliasedFrom: 'color.light.N',
+                    },
+                },
+            },
+            'state-active': {
+                padding: { horizontal: { comment: 'deprecated (use base emphasis padding)', value: '16px' } },
+                'border-width': { value: '1px' },
+                'theme-light': {
+                    'background-color': {
+                        value: 'var(--lumx-color-primary-L4)',
+                        attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 0.2 } },
+                        $aliasedFrom: 'color.primary.L4',
+                    },
+                    color: {
+                        value: 'var(--lumx-color-primary-D2)',
+                        attributes: { hex: '1546c1', rgb: { r: 21, g: 70, b: 193, a: 1 } },
+                        $aliasedFrom: 'color.primary.D2',
+                    },
+                    'border-color': {
+                        value: 'var(--lumx-color-primary-N)',
+                        attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 1 } },
+                        $aliasedFrom: 'color.primary.N',
+                    },
+                },
+                'theme-dark': {
+                    'background-color': {
+                        value: 'var(--lumx-color-light-L4)',
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.4 } },
+                        $aliasedFrom: 'color.light.L4',
+                    },
+                    color: {
+                        value: 'var(--lumx-color-light-N)',
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                        $aliasedFrom: 'color.light.N',
+                    },
+                    'border-color': {
+                        value: 'var(--lumx-color-light-N)',
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                        $aliasedFrom: 'color.light.N',
+                    },
                 },
             },
         },

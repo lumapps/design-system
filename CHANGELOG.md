@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `Chip`: rework selected state style for better a11y
 -   `Navigation`: rework selected state style for better a11y
 -   `SideNavigationItem`: rework selected state style for better a11y
+-   `Button`: rework selected state style for better a11y
 
 ## [3.9.8][] - 2025-01-10
 
