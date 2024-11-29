@@ -2,7 +2,7 @@
 
 /**
  * Do not edit directly
- * Generated on Thu, 09 Jan 2025 16:42:11 GMT
+ * Generated on Mon, 13 Jan 2025 09:22:35 GMT
  */
 
 :root {
@@ -205,77 +205,63 @@
     --lumx-navigation-item-emphasis-low-state-active-theme-dark-label-color: var(--lumx-color-light-N);
     --lumx-navigation-item-emphasis-low-state-active-theme-dark-chevron-background-color: var(--lumx-color-light-L4);
     --lumx-navigation-item-emphasis-low-state-active-theme-dark-chevron-color: var(--lumx-color-light-L1);
-    --lumx-navigation-item-emphasis-selected-state-default-border-top-width: 0px;
-    --lumx-navigation-item-emphasis-selected-state-default-border-right-width: 0px;
-    --lumx-navigation-item-emphasis-selected-state-default-border-bottom-width: 0px;
-    --lumx-navigation-item-emphasis-selected-state-default-border-left-width: 0px;
-    --lumx-navigation-item-emphasis-selected-state-default-theme-light-background-color: var(--lumx-color-primary-L5);
+    --lumx-navigation-item-emphasis-selected-state-default-border-top-width: 1px;
+    --lumx-navigation-item-emphasis-selected-state-default-border-right-width: 1px;
+    --lumx-navigation-item-emphasis-selected-state-default-border-bottom-width: 1px;
+    --lumx-navigation-item-emphasis-selected-state-default-border-left-width: 1px;
+    --lumx-navigation-item-emphasis-selected-state-default-theme-light-background-color: var(--lumx-color-primary-L6);
     --lumx-navigation-item-emphasis-selected-state-default-theme-light-border-color: var(--lumx-color-primary-N);
     --lumx-navigation-item-emphasis-selected-state-default-theme-light-icon-color: var(--lumx-color-primary-D2);
     --lumx-navigation-item-emphasis-selected-state-default-theme-light-label-color: var(--lumx-color-primary-D2);
     --lumx-navigation-item-emphasis-selected-state-default-theme-light-chevron-background-color: transparent;
     --lumx-navigation-item-emphasis-selected-state-default-theme-light-chevron-color: var(--lumx-color-primary-D2);
-    --lumx-navigation-item-emphasis-selected-state-default-theme-dark-background-color: var(--lumx-color-light-L3);
+    --lumx-navigation-item-emphasis-selected-state-default-theme-dark-background-color: var(--lumx-color-light-L6);
     --lumx-navigation-item-emphasis-selected-state-default-theme-dark-border-color: var(--lumx-color-light-N);
     --lumx-navigation-item-emphasis-selected-state-default-theme-dark-icon-color: var(--lumx-color-light-N);
     --lumx-navigation-item-emphasis-selected-state-default-theme-dark-label-color: var(--lumx-color-light-N);
     --lumx-navigation-item-emphasis-selected-state-default-theme-dark-chevron-background-color: transparent;
     --lumx-navigation-item-emphasis-selected-state-default-theme-dark-chevron-color: var(--lumx-color-light-N);
-    --lumx-navigation-item-emphasis-selected-state-hover-border-top-width: 0px;
-    --lumx-navigation-item-emphasis-selected-state-hover-border-right-width: 0px;
-    --lumx-navigation-item-emphasis-selected-state-hover-border-bottom-width: 0px;
-    --lumx-navigation-item-emphasis-selected-state-hover-border-left-width: 0px;
-    --lumx-navigation-item-emphasis-selected-state-hover-theme-light-background-color: var(--lumx-color-primary-L4);
+    --lumx-navigation-item-emphasis-selected-state-hover-border-top-width: 1px;
+    --lumx-navigation-item-emphasis-selected-state-hover-border-right-width: 1px;
+    --lumx-navigation-item-emphasis-selected-state-hover-border-bottom-width: 1px;
+    --lumx-navigation-item-emphasis-selected-state-hover-border-left-width: 1px;
+    --lumx-navigation-item-emphasis-selected-state-hover-theme-light-background-color: var(--lumx-color-primary-L5);
     --lumx-navigation-item-emphasis-selected-state-hover-theme-light-border-color: var(--lumx-color-primary-N);
     --lumx-navigation-item-emphasis-selected-state-hover-theme-light-icon-color: var(--lumx-color-primary-D2);
     --lumx-navigation-item-emphasis-selected-state-hover-theme-light-label-color: var(--lumx-color-primary-D2);
-    --lumx-navigation-item-emphasis-selected-state-hover-theme-light-chevron-background-color: var(
-        --lumx-color-primary-L4
-    );
+    --lumx-navigation-item-emphasis-selected-state-hover-theme-light-chevron-background-color: var(--lumx-color-primary-L5);
     --lumx-navigation-item-emphasis-selected-state-hover-theme-light-chevron-color: var(--lumx-color-primary-D2);
-    --lumx-navigation-item-emphasis-selected-state-hover-theme-dark-background-color: var(--lumx-color-light-L4);
+    --lumx-navigation-item-emphasis-selected-state-hover-theme-dark-background-color: var(--lumx-color-light-L5);
     --lumx-navigation-item-emphasis-selected-state-hover-theme-dark-border-color: var(--lumx-color-light-N);
     --lumx-navigation-item-emphasis-selected-state-hover-theme-dark-icon-color: var(--lumx-color-light-N);
     --lumx-navigation-item-emphasis-selected-state-hover-theme-dark-label-color: var(--lumx-color-light-N);
-    --lumx-navigation-item-emphasis-selected-state-hover-theme-dark-chevron-background-color: var(
-        --lumx-color-light-L4
-    );
+    --lumx-navigation-item-emphasis-selected-state-hover-theme-dark-chevron-background-color: var(--lumx-color-light-L5);
     --lumx-navigation-item-emphasis-selected-state-hover-theme-dark-chevron-color: var(--lumx-color-light-N);
-    --lumx-navigation-item-emphasis-selected-state-active-border-top-width: 0px;
-    --lumx-navigation-item-emphasis-selected-state-active-border-right-width: 0px;
-    --lumx-navigation-item-emphasis-selected-state-active-border-bottom-width: 0px;
-    --lumx-navigation-item-emphasis-selected-state-active-border-left-width: 0px;
-    --lumx-navigation-item-emphasis-selected-state-active-theme-light-background-color: var(--lumx-color-primary-L3);
+    --lumx-navigation-item-emphasis-selected-state-active-border-top-width: 1px;
+    --lumx-navigation-item-emphasis-selected-state-active-border-right-width: 1px;
+    --lumx-navigation-item-emphasis-selected-state-active-border-bottom-width: 1px;
+    --lumx-navigation-item-emphasis-selected-state-active-border-left-width: 1px;
+    --lumx-navigation-item-emphasis-selected-state-active-theme-light-background-color: var(--lumx-color-primary-L4);
     --lumx-navigation-item-emphasis-selected-state-active-theme-light-border-color: var(--lumx-color-primary-N);
     --lumx-navigation-item-emphasis-selected-state-active-theme-light-icon-color: var(--lumx-color-primary-D2);
     --lumx-navigation-item-emphasis-selected-state-active-theme-light-label-color: var(--lumx-color-primary-D2);
-    --lumx-navigation-item-emphasis-selected-state-active-theme-light-chevron-background-color: var(
-        --lumx-color-primary-L3
-    );
+    --lumx-navigation-item-emphasis-selected-state-active-theme-light-chevron-background-color: var(--lumx-color-primary-L4);
     --lumx-navigation-item-emphasis-selected-state-active-theme-light-chevron-color: var(--lumx-color-primary-D2);
-    --lumx-navigation-item-emphasis-selected-state-active-theme-dark-background-color: var(--lumx-color-light-L5);
+    --lumx-navigation-item-emphasis-selected-state-active-theme-dark-background-color: var(--lumx-color-light-L4);
     --lumx-navigation-item-emphasis-selected-state-active-theme-dark-border-color: var(--lumx-color-light-N);
     --lumx-navigation-item-emphasis-selected-state-active-theme-dark-icon-color: var(--lumx-color-light-N);
     --lumx-navigation-item-emphasis-selected-state-active-theme-dark-label-color: var(--lumx-color-light-N);
-    --lumx-navigation-item-emphasis-selected-state-active-theme-dark-chevron-background-color: var(
-        --lumx-color-light-L5
-    );
+    --lumx-navigation-item-emphasis-selected-state-active-theme-dark-chevron-background-color: var(--lumx-color-light-L4);
     --lumx-navigation-item-emphasis-selected-state-active-theme-dark-chevron-color: var(--lumx-color-light-N);
     --lumx-side-navigation-item-emphasis-selected-state-default-border-width: 0;
     --lumx-side-navigation-item-emphasis-selected-state-default-theme-light-border-color: transparent;
-    --lumx-side-navigation-item-emphasis-selected-state-default-theme-light-background-color: var(
-        --lumx-color-primary-L5
-    );
+    --lumx-side-navigation-item-emphasis-selected-state-default-theme-light-background-color: var(--lumx-color-primary-L5);
     --lumx-side-navigation-item-emphasis-selected-state-hover-border-width: 0;
     --lumx-side-navigation-item-emphasis-selected-state-hover-theme-light-border-color: transparent;
-    --lumx-side-navigation-item-emphasis-selected-state-hover-theme-light-background-color: var(
-        --lumx-color-primary-L4
-    );
+    --lumx-side-navigation-item-emphasis-selected-state-hover-theme-light-background-color: var(--lumx-color-primary-L4);
     --lumx-side-navigation-item-emphasis-selected-state-active-border-width: 0;
     --lumx-side-navigation-item-emphasis-selected-state-active-theme-light-border-color: transparent;
-    --lumx-side-navigation-item-emphasis-selected-state-active-theme-light-background-color: var(
-        --lumx-color-primary-L3
-    );
+    --lumx-side-navigation-item-emphasis-selected-state-active-theme-light-background-color: var(--lumx-color-primary-L3);
     --lumx-tabs-link-height: 48px;
     --lumx-tabs-link-border-radius: 0;
     --lumx-tabs-link-emphasis-low-state-default-border-top-width: 0;
@@ -503,8 +489,7 @@
     --lumx-spacing-unit-medium: 12px;
     --lumx-spacing-unit-big: 16px;
     --lumx-spacing-unit-huge: 24px;
-    --lumx-typography-font-family: '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-        'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'sans-serif';
+    --lumx-typography-font-family: "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Fira Sans", "Droid Sans", "Helvetica Neue", "sans-serif";
     --lumx-typography-font-weight-regular: 400;
     --lumx-typography-font-weight-medium: 500;
     --lumx-typography-font-weight-bold: 700;
