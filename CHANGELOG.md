@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 -   `Chip`: rework selected state style for better a11y
+-   `Navigation`: rework selected state style for better a11y
 
 ## [3.9.6][] - 2024-12-04
 
