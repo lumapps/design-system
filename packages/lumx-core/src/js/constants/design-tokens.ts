@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 29 Nov 2024 08:57:51 GMT
+ * Generated on Fri, 29 Nov 2024 13:59:46 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -377,17 +377,25 @@ export const DESIGN_TOKENS = {
     chip: {
         'emphasis-selected': {
             'state-default': {
-                'border-width': { value: '0' },
+                'border-width': { value: '1px' },
                 'theme-light': {
-                    'border-color': { value: 'transparent' },
+                    'border-color': {
+                        value: 'var(--lumx-color-primary-N)',
+                        attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 1 } },
+                        $aliasedFrom: 'color.primary.N',
+                    },
                     'background-color': {
-                        value: 'var(--lumx-color-primary-L5)',
-                        attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 0.1 } },
-                        $aliasedFrom: 'color.primary.L5',
+                        value: 'var(--lumx-color-primary-L6)',
+                        attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 0.05 } },
+                        $aliasedFrom: 'color.primary.L6',
                     },
                 },
                 'theme-dark': {
-                    'border-color': { value: 'transparent' },
+                    'border-color': {
+                        value: 'var(--lumx-color-light-N)',
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                        $aliasedFrom: 'color.light.N',
+                    },
                     'background-color': {
                         value: 'var(--lumx-color-light-L3)',
                         attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.6 } },
@@ -396,17 +404,25 @@ export const DESIGN_TOKENS = {
                 },
             },
             'state-hover': {
-                'border-width': { value: '0' },
+                'border-width': { value: '1px' },
                 'theme-light': {
-                    'border-color': { value: 'transparent' },
+                    'border-color': {
+                        value: 'var(--lumx-color-primary-N)',
+                        attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 1 } },
+                        $aliasedFrom: 'color.primary.N',
+                    },
                     'background-color': {
-                        value: 'var(--lumx-color-primary-L4)',
-                        attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 0.2 } },
-                        $aliasedFrom: 'color.primary.L4',
+                        value: 'var(--lumx-color-primary-L5)',
+                        attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 0.1 } },
+                        $aliasedFrom: 'color.primary.L5',
                     },
                 },
                 'theme-dark': {
-                    'border-color': { value: 'transparent' },
+                    'border-color': {
+                        value: 'var(--lumx-color-light-N)',
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                        $aliasedFrom: 'color.light.N',
+                    },
                     'background-color': {
                         value: 'var(--lumx-color-light-L4)',
                         attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.4 } },
@@ -415,17 +431,25 @@ export const DESIGN_TOKENS = {
                 },
             },
             'state-active': {
-                'border-width': { value: '0' },
+                'border-width': { value: '1px' },
                 'theme-light': {
-                    'border-color': { value: 'transparent' },
+                    'border-color': {
+                        value: 'var(--lumx-color-primary-N)',
+                        attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 1 } },
+                        $aliasedFrom: 'color.primary.N',
+                    },
                     'background-color': {
-                        value: 'var(--lumx-color-primary-L3)',
-                        attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 0.4 } },
-                        $aliasedFrom: 'color.primary.L3',
+                        value: 'var(--lumx-color-primary-L4)',
+                        attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 0.2 } },
+                        $aliasedFrom: 'color.primary.L4',
                     },
                 },
                 'theme-dark': {
-                    'border-color': { value: 'transparent' },
+                    'border-color': {
+                        value: 'var(--lumx-color-light-N)',
+                        attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 1 } },
+                        $aliasedFrom: 'color.light.N',
+                    },
                     'background-color': {
                         value: 'var(--lumx-color-light-L5)',
                         attributes: { hex: 'ffffff', rgb: { r: 255, g: 255, b: 255, a: 0.2 } },

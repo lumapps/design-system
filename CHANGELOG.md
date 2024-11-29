@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `DatePicker`: update day buttons to use standard button styles.
 -   `Chip`: add border and background color CSS variable theming on selected state.
+-   `Chip`: rework selected state style for better a11y
 
 ### Documentation
 

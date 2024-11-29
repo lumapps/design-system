@@ -2,35 +2,35 @@
     "chip": {
         "emphasis-selected": {
             "state-default": {
-                "border-width": { "value": "0" },
+                "border-width": { "value": "1px" },
                 "theme-light": {
-                    "border-color": { "value": "transparent" },
-                    "background-color": "{color.primary.L5}"
+                    "border-color": "{color.primary.N}",
+                    "background-color": "{color.primary.L6}"
                 },
                 "theme-dark": {
-                    "border-color": { "value": "transparent" },
+                    "border-color": "{color.light.N}",
                     "background-color": "{color.light.L3}"
                 }
             },
             "state-hover": {
-                "border-width": { "value": "0" },
+                "border-width": { "value": "1px" },
                 "theme-light": {
-                    "border-color": { "value": "transparent" },
-                    "background-color": "{color.primary.L4}"
+                    "border-color": "{color.primary.N}",
+                    "background-color": "{color.primary.L5}"
                 },
                 "theme-dark": {
-                    "border-color": { "value": "transparent" },
+                    "border-color": "{color.light.N}",
                     "background-color": "{color.light.L4}"
                 }
             },
             "state-active": {
-                "border-width": { "value": "0" },
+                "border-width": { "value": "1px" },
                 "theme-light": {
-                    "border-color": { "value": "transparent" },
-                    "background-color": "{color.primary.L3}"
+                    "border-color": "{color.primary.N}",
+                    "background-color": "{color.primary.L4}"
                 },
                 "theme-dark": {
-                    "border-color": { "value": "transparent" },
+                    "border-color": "{color.light.N}",
                     "background-color": "{color.light.L5}"
                 }
             }
