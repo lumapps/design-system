@@ -11,7 +11,7 @@ import { useId } from '@lumx/react/hooks/useId';
 import { CLASSNAME as ITEM_CLASSNAME } from './NavigationItem';
 import { NavigationContext } from './context';
 
-export interface NavigationSectionProps extends React.ComponentPropsWithoutRef<'li'>, HasClassName {
+export interface NavigationSectionProps extends React.ComponentPropsWithoutRef<'button'>, HasClassName {
     /** Items inside the section */
     children: ReactNode;
     /** Icon (SVG path). */
@@ -51,9 +51,9 @@ export const NavigationSection = Object.assign(
                     }),
                 )}
                 ref={ref}
-                {...forwardedProps}
             >
                 <button
+                    {...forwardedProps}
                     aria-controls={sectionId}
                     aria-expanded={isOpen}
                     className={classNames(`${ITEM_CLASSNAME}__link`)}
