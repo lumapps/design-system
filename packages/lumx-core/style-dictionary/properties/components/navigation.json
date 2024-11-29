@@ -108,20 +108,20 @@
                 "state-default": {
                     "border": {
                         "top": {
-                            "width": { "value": "0" }
+                            "width": { "value": "1px" }
                         },
                         "right": {
-                            "width": { "value": "0" }
+                            "width": { "value": "1px" }
                         },
                         "bottom": {
-                            "width": { "value": "0" }
+                            "width": { "value": "1px" }
                         },
                         "left": {
-                            "width": { "value": "0" }
+                            "width": { "value": "1px" }
                         }
                     },
                     "theme-light": {
-                        "background-color": "{color.primary.L5}",
+                        "background-color": "{color.primary.L6}",
                         "border-color": "{color.primary.N}",
                         "icon-color": "{color.primary.D2}",
                         "label-color": "{color.primary.D2}",
@@ -140,20 +140,20 @@
                 "state-hover": {
                     "border": {
                         "top": {
-                            "width": { "value": "0" }
+                            "width": { "value": "1px" }
                         },
                         "right": {
-                            "width": { "value": "0" }
+                            "width": { "value": "1px" }
                         },
                         "bottom": {
-                            "width": { "value": "0" }
+                            "width": { "value": "1px" }
                         },
                         "left": {
-                            "width": { "value": "0" }
+                            "width": { "value": "1px" }
                         }
                     },
                     "theme-light": {
-                        "background-color": "{color.primary.L4}",
+                        "background-color": "{color.primary.L5}",
                         "border-color": "{color.primary.N}",
                         "icon-color": "{color.primary.D2}",
                         "label-color": "{color.primary.D2}",
@@ -172,20 +172,20 @@
                 "state-active": {
                     "border": {
                         "top": {
-                            "width": { "value": "0" }
+                            "width": { "value": "1px" }
                         },
                         "right": {
-                            "width": { "value": "0" }
+                            "width": { "value": "1px" }
                         },
                         "bottom": {
-                            "width": { "value": "0" }
+                            "width": { "value": "1px" }
                         },
                         "left": {
-                            "width": { "value": "0" }
+                            "width": { "value": "1px" }
                         }
                     },
                     "theme-light": {
-                        "background-color": "{color.primary.L3}",
+                        "background-color": "{color.primary.L4}",
                         "border-color": "{color.primary.N}",
                         "icon-color": "{color.primary.D2}",
                         "label-color": "{color.primary.D2}",

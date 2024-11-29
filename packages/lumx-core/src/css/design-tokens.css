@@ -2,7 +2,7 @@
 
 /**
  * Do not edit directly
- * Generated on Thu, 14 Nov 2024 10:23:01 GMT
+ * Generated on Fri, 29 Nov 2024 14:03:52 GMT
  */
 
 :root {
@@ -199,11 +199,11 @@
     --lumx-navigation-item-emphasis-low-state-active-theme-dark-label-color: var(--lumx-color-light-N);
     --lumx-navigation-item-emphasis-low-state-active-theme-dark-chevron-background-color: var(--lumx-color-light-L4);
     --lumx-navigation-item-emphasis-low-state-active-theme-dark-chevron-color: var(--lumx-color-light-L1);
-    --lumx-navigation-item-emphasis-selected-state-default-border-top-width: 0;
-    --lumx-navigation-item-emphasis-selected-state-default-border-right-width: 0;
-    --lumx-navigation-item-emphasis-selected-state-default-border-bottom-width: 0;
-    --lumx-navigation-item-emphasis-selected-state-default-border-left-width: 0;
-    --lumx-navigation-item-emphasis-selected-state-default-theme-light-background-color: var(--lumx-color-primary-L5);
+    --lumx-navigation-item-emphasis-selected-state-default-border-top-width: 1px;
+    --lumx-navigation-item-emphasis-selected-state-default-border-right-width: 1px;
+    --lumx-navigation-item-emphasis-selected-state-default-border-bottom-width: 1px;
+    --lumx-navigation-item-emphasis-selected-state-default-border-left-width: 1px;
+    --lumx-navigation-item-emphasis-selected-state-default-theme-light-background-color: var(--lumx-color-primary-L6);
     --lumx-navigation-item-emphasis-selected-state-default-theme-light-border-color: var(--lumx-color-primary-N);
     --lumx-navigation-item-emphasis-selected-state-default-theme-light-icon-color: var(--lumx-color-primary-D2);
     --lumx-navigation-item-emphasis-selected-state-default-theme-light-label-color: var(--lumx-color-primary-D2);
@@ -215,11 +215,11 @@
     --lumx-navigation-item-emphasis-selected-state-default-theme-dark-label-color: var(--lumx-color-light-N);
     --lumx-navigation-item-emphasis-selected-state-default-theme-dark-chevron-background-color: transparent;
     --lumx-navigation-item-emphasis-selected-state-default-theme-dark-chevron-color: var(--lumx-color-light-N);
-    --lumx-navigation-item-emphasis-selected-state-hover-border-top-width: 0;
-    --lumx-navigation-item-emphasis-selected-state-hover-border-right-width: 0;
-    --lumx-navigation-item-emphasis-selected-state-hover-border-bottom-width: 0;
-    --lumx-navigation-item-emphasis-selected-state-hover-border-left-width: 0;
-    --lumx-navigation-item-emphasis-selected-state-hover-theme-light-background-color: var(--lumx-color-primary-L4);
+    --lumx-navigation-item-emphasis-selected-state-hover-border-top-width: 1px;
+    --lumx-navigation-item-emphasis-selected-state-hover-border-right-width: 1px;
+    --lumx-navigation-item-emphasis-selected-state-hover-border-bottom-width: 1px;
+    --lumx-navigation-item-emphasis-selected-state-hover-border-left-width: 1px;
+    --lumx-navigation-item-emphasis-selected-state-hover-theme-light-background-color: var(--lumx-color-primary-L5);
     --lumx-navigation-item-emphasis-selected-state-hover-theme-light-border-color: var(--lumx-color-primary-N);
     --lumx-navigation-item-emphasis-selected-state-hover-theme-light-icon-color: var(--lumx-color-primary-D2);
     --lumx-navigation-item-emphasis-selected-state-hover-theme-light-label-color: var(--lumx-color-primary-D2);
@@ -231,11 +231,11 @@
     --lumx-navigation-item-emphasis-selected-state-hover-theme-dark-label-color: var(--lumx-color-light-N);
     --lumx-navigation-item-emphasis-selected-state-hover-theme-dark-chevron-background-color: var(--lumx-color-light-L4);
     --lumx-navigation-item-emphasis-selected-state-hover-theme-dark-chevron-color: var(--lumx-color-light-N);
-    --lumx-navigation-item-emphasis-selected-state-active-border-top-width: 0;
-    --lumx-navigation-item-emphasis-selected-state-active-border-right-width: 0;
-    --lumx-navigation-item-emphasis-selected-state-active-border-bottom-width: 0;
-    --lumx-navigation-item-emphasis-selected-state-active-border-left-width: 0;
-    --lumx-navigation-item-emphasis-selected-state-active-theme-light-background-color: var(--lumx-color-primary-L3);
+    --lumx-navigation-item-emphasis-selected-state-active-border-top-width: 1px;
+    --lumx-navigation-item-emphasis-selected-state-active-border-right-width: 1px;
+    --lumx-navigation-item-emphasis-selected-state-active-border-bottom-width: 1px;
+    --lumx-navigation-item-emphasis-selected-state-active-border-left-width: 1px;
+    --lumx-navigation-item-emphasis-selected-state-active-theme-light-background-color: var(--lumx-color-primary-L4);
     --lumx-navigation-item-emphasis-selected-state-active-theme-light-border-color: var(--lumx-color-primary-N);
     --lumx-navigation-item-emphasis-selected-state-active-theme-light-icon-color: var(--lumx-color-primary-D2);
     --lumx-navigation-item-emphasis-selected-state-active-theme-light-label-color: var(--lumx-color-primary-D2);

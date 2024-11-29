@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Thu, 14 Nov 2024 10:23:01 GMT
+ * Generated on Fri, 29 Nov 2024 14:03:52 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -660,16 +660,16 @@ export const DESIGN_TOKENS = {
             'emphasis-selected': {
                 'state-default': {
                     border: {
-                        top: { width: { value: '0' } },
-                        right: { width: { value: '0' } },
-                        bottom: { width: { value: '0' } },
-                        left: { width: { value: '0' } },
+                        top: { width: { value: '1px' } },
+                        right: { width: { value: '1px' } },
+                        bottom: { width: { value: '1px' } },
+                        left: { width: { value: '1px' } },
                     },
                     'theme-light': {
                         'background-color': {
-                            value: 'var(--lumx-color-primary-L5)',
-                            attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 0.1 } },
-                            $aliasedFrom: 'color.primary.L5',
+                            value: 'var(--lumx-color-primary-L6)',
+                            attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 0.05 } },
+                            $aliasedFrom: 'color.primary.L6',
                         },
                         'border-color': {
                             value: 'var(--lumx-color-primary-N)',
@@ -724,16 +724,16 @@ export const DESIGN_TOKENS = {
                 },
                 'state-hover': {
                     border: {
-                        top: { width: { value: '0' } },
-                        right: { width: { value: '0' } },
-                        bottom: { width: { value: '0' } },
-                        left: { width: { value: '0' } },
+                        top: { width: { value: '1px' } },
+                        right: { width: { value: '1px' } },
+                        bottom: { width: { value: '1px' } },
+                        left: { width: { value: '1px' } },
                     },
                     'theme-light': {
                         'background-color': {
-                            value: 'var(--lumx-color-primary-L4)',
-                            attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 0.2 } },
-                            $aliasedFrom: 'color.primary.L4',
+                            value: 'var(--lumx-color-primary-L5)',
+                            attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 0.1 } },
+                            $aliasedFrom: 'color.primary.L5',
                         },
                         'border-color': {
                             value: 'var(--lumx-color-primary-N)',
@@ -796,16 +796,16 @@ export const DESIGN_TOKENS = {
                 },
                 'state-active': {
                     border: {
-                        top: { width: { value: '0' } },
-                        right: { width: { value: '0' } },
-                        bottom: { width: { value: '0' } },
-                        left: { width: { value: '0' } },
+                        top: { width: { value: '1px' } },
+                        right: { width: { value: '1px' } },
+                        bottom: { width: { value: '1px' } },
+                        left: { width: { value: '1px' } },
                     },
                     'theme-light': {
                         'background-color': {
-                            value: 'var(--lumx-color-primary-L3)',
-                            attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 0.4 } },
-                            $aliasedFrom: 'color.primary.L3',
+                            value: 'var(--lumx-color-primary-L4)',
+                            attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 0.2 } },
+                            $aliasedFrom: 'color.primary.L4',
                         },
                         'border-color': {
                             value: 'var(--lumx-color-primary-N)',
