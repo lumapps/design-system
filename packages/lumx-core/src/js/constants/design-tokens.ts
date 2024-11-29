@@ -722,16 +722,16 @@ export const DESIGN_TOKENS = {
             'emphasis-selected': {
                 'state-default': {
                     border: {
-                        top: { width: { value: '0px' } },
-                        right: { width: { value: '0px' } },
-                        bottom: { width: { value: '0px' } },
-                        left: { width: { value: '0px' } },
+                        top: { width: { value: '1px' } },
+                        right: { width: { value: '1px' } },
+                        bottom: { width: { value: '1px' } },
+                        left: { width: { value: '1px' } },
                     },
                     'theme-light': {
                         'background-color': {
-                            value: 'var(--lumx-color-primary-L5)',
-                            attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 0.1 } },
-                            $aliasedFrom: 'color.primary.L5',
+                            value: 'var(--lumx-color-primary-L6)',
+                            attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 0.05 } },
+                            $aliasedFrom: 'color.primary.L6',
                         },
                         'border-color': {
                             value: 'var(--lumx-color-primary-N)',
@@ -786,16 +786,16 @@ export const DESIGN_TOKENS = {
                 },
                 'state-hover': {
                     border: {
-                        top: { width: { value: '0px' } },
-                        right: { width: { value: '0px' } },
-                        bottom: { width: { value: '0px' } },
-                        left: { width: { value: '0px' } },
+                        top: { width: { value: '1px' } },
+                        right: { width: { value: '1px' } },
+                        bottom: { width: { value: '1px' } },
+                        left: { width: { value: '1px' } },
                     },
                     'theme-light': {
                         'background-color': {
-                            value: 'var(--lumx-color-primary-L4)',
-                            attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 0.2 } },
-                            $aliasedFrom: 'color.primary.L4',
+                            value: 'var(--lumx-color-primary-L5)',
+                            attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 0.1 } },
+                            $aliasedFrom: 'color.primary.L5',
                         },
                         'border-color': {
                             value: 'var(--lumx-color-primary-N)',
@@ -858,16 +858,16 @@ export const DESIGN_TOKENS = {
                 },
                 'state-active': {
                     border: {
-                        top: { width: { value: '0px' } },
-                        right: { width: { value: '0px' } },
-                        bottom: { width: { value: '0px' } },
-                        left: { width: { value: '0px' } },
+                        top: { width: { value: '1px' } },
+                        right: { width: { value: '1px' } },
+                        bottom: { width: { value: '1px' } },
+                        left: { width: { value: '1px' } },
                     },
                     'theme-light': {
                         'background-color': {
-                            value: 'var(--lumx-color-primary-L3)',
-                            attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 0.4 } },
-                            $aliasedFrom: 'color.primary.L3',
+                            value: 'var(--lumx-color-primary-L4)',
+                            attributes: { hex: '245be7', rgb: { r: 36, g: 91, b: 231, a: 0.2 } },
+                            $aliasedFrom: 'color.primary.L4',
                         },
                         'border-color': {
                             value: 'var(--lumx-color-primary-N)',
