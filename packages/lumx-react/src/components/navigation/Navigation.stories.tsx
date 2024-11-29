@@ -136,6 +136,17 @@ export const ItemVariants = {
                     />
                 )),
             )}
+
+            {Object.entries({
+                Section: {},
+                'Section (hover)': { 'data-lumx-hover': true },
+                'Section (active)': { 'data-lumx-active': true },
+            }).map(([key2, stateProps]) => (
+                <Navigation.Section key={key2} label={key2} {...stateProps} {...itemProps}>
+                    <Navigation.Item as="button" label="SubItem 1" />
+                    <Navigation.Item as="button" label="SubItem 2" />
+                </Navigation.Section>
+            ))}
         </Navigation>
     ),
     decorators: [
