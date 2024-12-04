@@ -30,23 +30,13 @@
                 }
             }
 
-            &.#{$lumx-base-prefix}-button--emphasis-medium:not(.#{$lumx-base-prefix}-button--is-selected) {
+            &.#{$lumx-base-prefix}-button--emphasis-medium {
                 &.#{$lumx-base-prefix}-button--variant-button {
                     @include lumx-button-size(lumx-base-const("emphasis", "MEDIUM"), "button", $key);
                 }
 
                 &.#{$lumx-base-prefix}-button--variant-icon {
                     @include lumx-button-size(lumx-base-const("emphasis", "MEDIUM"), "icon", $key);
-                }
-            }
-
-            &.#{$lumx-base-prefix}-button--emphasis-medium.#{$lumx-base-prefix}-button--is-selected {
-                &.#{$lumx-base-prefix}-button--variant-button {
-                    @include lumx-button-size(lumx-base-const("emphasis", "SELECTED"), "button", $key);
-                }
-
-                &.#{$lumx-base-prefix}-button--variant-icon {
-                    @include lumx-button-size(lumx-base-const("emphasis", "SELECTED"), "icon", $key);
                 }
             }
 
@@ -107,16 +97,29 @@
 
 @each $key, $color in $lumx-color-palette {
     .#{$lumx-base-prefix}-button--color-#{$key} {
-        &:not(.#{$lumx-base-prefix}-button--is-selected).#{$lumx-base-prefix}-button--emphasis-medium {
+        &.#{$lumx-base-prefix}-button--emphasis-medium {
             @include lumx-button-color(lumx-base-const("emphasis", "MEDIUM"), $key);
         }
 
-        &:not(.#{$lumx-base-prefix}-button--is-selected).#{$lumx-base-prefix}-button--emphasis-low {
+        &.#{$lumx-base-prefix}-button--emphasis-low {
             @include lumx-button-color(lumx-base-const("emphasis", "LOW"), $key);
         }
+    }
+}
 
-        &.#{$lumx-base-prefix}-button--is-selected {
-            @include lumx-button-color(lumx-base-const("emphasis", "SELECTED"), $key);
+
+/* Button selected
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-button.#{$lumx-base-prefix}-button--is-selected.#{$lumx-base-prefix}-button--emphasis-medium,
+.#{$lumx-base-prefix}-button.#{$lumx-base-prefix}-button--is-selected.#{$lumx-base-prefix}-button--emphasis-low, {
+    @include lumx-button-size(lumx-base-const("emphasis", "SELECTED"));
+
+    @each $key, $color in $lumx-color-palette {
+        &.#{$lumx-base-prefix}-button--color-#{$key} {
+            &.#{$lumx-base-prefix}-button--is-selected {
+                @include lumx-button-color(lumx-base-const("emphasis", "SELECTED"), $key);
+            }
         }
     }
 }
