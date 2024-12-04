@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 29 Nov 2024 10:16:26 GMT
+ * Generated on Wed, 04 Dec 2024 10:53:03 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -500,10 +500,10 @@ export const DESIGN_TOKENS = {
             'emphasis-low': {
                 'state-default': {
                     border: {
-                        top: { width: { value: '0' } },
-                        right: { width: { value: '0' } },
-                        bottom: { width: { value: '0' } },
-                        left: { width: { value: '0' } },
+                        top: { width: { value: '0px' } },
+                        right: { width: { value: '0px' } },
+                        bottom: { width: { value: '0px' } },
+                        left: { width: { value: '0px' } },
                     },
                     'theme-light': {
                         'background-color': { value: 'transparent' },
@@ -556,10 +556,10 @@ export const DESIGN_TOKENS = {
                 },
                 'state-hover': {
                     border: {
-                        top: { width: { value: '0' } },
-                        right: { width: { value: '0' } },
-                        bottom: { width: { value: '0' } },
-                        left: { width: { value: '0' } },
+                        top: { width: { value: '0px' } },
+                        right: { width: { value: '0px' } },
+                        bottom: { width: { value: '0px' } },
+                        left: { width: { value: '0px' } },
                     },
                     'theme-light': {
                         'background-color': {
@@ -628,10 +628,10 @@ export const DESIGN_TOKENS = {
                 },
                 'state-active': {
                     border: {
-                        top: { width: { value: '0' } },
-                        right: { width: { value: '0' } },
-                        bottom: { width: { value: '0' } },
-                        left: { width: { value: '0' } },
+                        top: { width: { value: '0px' } },
+                        right: { width: { value: '0px' } },
+                        bottom: { width: { value: '0px' } },
+                        left: { width: { value: '0px' } },
                     },
                     'theme-light': {
                         'background-color': {
@@ -702,10 +702,10 @@ export const DESIGN_TOKENS = {
             'emphasis-selected': {
                 'state-default': {
                     border: {
-                        top: { width: { value: '0' } },
-                        right: { width: { value: '0' } },
-                        bottom: { width: { value: '0' } },
-                        left: { width: { value: '0' } },
+                        top: { width: { value: '0px' } },
+                        right: { width: { value: '0px' } },
+                        bottom: { width: { value: '0px' } },
+                        left: { width: { value: '0px' } },
                     },
                     'theme-light': {
                         'background-color': {
@@ -766,10 +766,10 @@ export const DESIGN_TOKENS = {
                 },
                 'state-hover': {
                     border: {
-                        top: { width: { value: '0' } },
-                        right: { width: { value: '0' } },
-                        bottom: { width: { value: '0' } },
-                        left: { width: { value: '0' } },
+                        top: { width: { value: '0px' } },
+                        right: { width: { value: '0px' } },
+                        bottom: { width: { value: '0px' } },
+                        left: { width: { value: '0px' } },
                     },
                     'theme-light': {
                         'background-color': {
@@ -838,10 +838,10 @@ export const DESIGN_TOKENS = {
                 },
                 'state-active': {
                     border: {
-                        top: { width: { value: '0' } },
-                        right: { width: { value: '0' } },
-                        bottom: { width: { value: '0' } },
-                        left: { width: { value: '0' } },
+                        top: { width: { value: '0px' } },
+                        right: { width: { value: '0px' } },
+                        bottom: { width: { value: '0px' } },
+                        left: { width: { value: '0px' } },
                     },
                     'theme-light': {
                         'background-color': {
