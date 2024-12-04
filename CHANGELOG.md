@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   `Button`: add support of `isSelected` in `low` emphasis (in addition to `medium`).
+
 ### Changed
 
 -   `DatePicker`: update day buttons to use standard button styles
