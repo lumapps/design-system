@@ -15,8 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
--   `Navigation`: fix focus outline in dark theme
+-   `NavigationItem`: fix focus outline in dark theme
 -   `NavigationSection`: fix props forwarding
+-   `NavigationItem`: fix border left & right impacting the width
 
 ### Documentation
 

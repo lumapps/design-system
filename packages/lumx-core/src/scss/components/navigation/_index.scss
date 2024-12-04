@@ -1,3 +1,5 @@
+/* stylelint-disable custom-property-pattern */
+
 /* ==========================================================================
    Navigation
    ========================================================================== */
@@ -18,23 +20,35 @@
         max-width: 100%;
         min-height: var(--lumx-navigation-item-min-height);
         padding: 0 var(--lumx-navigation-item-padding-horizontal);
+        padding-right: calc(var(--lumx-navigation-item-padding-horizontal) - var(--_border-right-width));
+        padding-left: calc(var(--lumx-navigation-item-padding-horizontal) - var(--_border-left-width));
         overflow: hidden;
         text-decoration: none;
         cursor: pointer;
+        background-color: var(--_background-color);
+        border-color: var(--_border-color);
+        border-style: solid;
+        border-width:
+            var(--_border-top-width)
+            var(--_border-right-width)
+            var(--_border-bottom-width)
+            var(--_border-left-width);
         border-radius: var(--lumx-navigation-item-border-radius);
         outline: none;
 
         @include lumx-typography("navigation-item", "custom");
     }
 
-    &__label {
+    #{&} &__label {
         overflow: hidden;
+        color: var(--_label-color);
         text-overflow: ellipsis;
         white-space: nowrap;
     }
 
-    &__icon {
+    #{&} &__icon {
         margin-right: $lumx-spacing-unit;
+        color: var(--_icon-color);
     }
 }
 

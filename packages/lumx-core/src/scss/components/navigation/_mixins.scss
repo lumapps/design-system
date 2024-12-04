@@ -1,23 +1,17 @@
+/* stylelint-disable custom-property-pattern */
+
 @use "sass:map";
 
 @mixin lumx-navigation-link-borders($emphasis, $state) {
-    border-style: solid;
-    border-width:
-        var(--lumx-navigation-item-#{$emphasis}-#{$state}-border-top-width)
-        var(--lumx-navigation-item-#{$emphasis}-#{$state}-border-right-width)
-        var(--lumx-navigation-item-#{$emphasis}-#{$state}-border-bottom-width)
-        var(--lumx-navigation-item-#{$emphasis}-#{$state}-border-left-width);
+    --_border-top-width: var(--lumx-navigation-item-#{$emphasis}-#{$state}-border-top-width);
+    --_border-right-width: var(--lumx-navigation-item-#{$emphasis}-#{$state}-border-right-width);
+    --_border-bottom-width: var(--lumx-navigation-item-#{$emphasis}-#{$state}-border-bottom-width);
+    --_border-left-width: var(--lumx-navigation-item-#{$emphasis}-#{$state}-border-left-width);
 }
 
 @mixin lumx-navigation-link-colors($emphasis, $state, $theme) {
-    background-color: var(--lumx-navigation-item-#{$emphasis}-#{$state}-#{$theme}-background-color);
-    border-color: var(--lumx-navigation-item-#{$emphasis}-#{$state}-#{$theme}-border-color);
-
-    .#{$lumx-base-prefix}-navigation-item__label {
-        color: var(--lumx-navigation-item-#{$emphasis}-#{$state}-#{$theme}-label-color);
-    }
-
-    .#{$lumx-base-prefix}-navigation-item__icon {
-        color: var(--lumx-navigation-item-#{$emphasis}-#{$state}-#{$theme}-icon-color);
-    }
+    --_background-color: var(--lumx-navigation-item-#{$emphasis}-#{$state}-#{$theme}-background-color);
+    --_border-color: var(--lumx-navigation-item-#{$emphasis}-#{$state}-#{$theme}-border-color);
+    --_label-color: var(--lumx-navigation-item-#{$emphasis}-#{$state}-#{$theme}-label-color);
+    --_icon-color: var(--lumx-navigation-item-#{$emphasis}-#{$state}-#{$theme}-icon-color);
 }

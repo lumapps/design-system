@@ -10,16 +10,16 @@
                 "state-default": {
                     "border": {
                         "top": {
-                            "width": { "value": "0" }
+                            "width": { "value": "0px" }
                         },
                         "right": {
-                            "width": { "value": "0" }
+                            "width": { "value": "0px" }
                         },
                         "bottom": {
-                            "width": { "value": "0" }
+                            "width": { "value": "0px" }
                         },
                         "left": {
-                            "width": { "value": "0" }
+                            "width": { "value": "0px" }
                         }
                     },
                     "theme-light": {
@@ -42,16 +42,16 @@
                 "state-hover": {
                     "border": {
                         "top": {
-                            "width": { "value": "0" }
+                            "width": { "value": "0px" }
                         },
                         "right": {
-                            "width": { "value": "0" }
+                            "width": { "value": "0px" }
                         },
                         "bottom": {
-                            "width": { "value": "0" }
+                            "width": { "value": "0px" }
                         },
                         "left": {
-                            "width": { "value": "0" }
+                            "width": { "value": "0px" }
                         }
                     },
                     "theme-light": {
@@ -74,16 +74,16 @@
                 "state-active": {
                     "border": {
                         "top": {
-                            "width": { "value": "0" }
+                            "width": { "value": "0px" }
                         },
                         "right": {
-                            "width": { "value": "0" }
+                            "width": { "value": "0px" }
                         },
                         "bottom": {
-                            "width": { "value": "0" }
+                            "width": { "value": "0px" }
                         },
                         "left": {
-                            "width": { "value": "0" }
+                            "width": { "value": "0px" }
                         }
                     },
                     "theme-light": {
@@ -108,16 +108,16 @@
                 "state-default": {
                     "border": {
                         "top": {
-                            "width": { "value": "0" }
+                            "width": { "value": "0px" }
                         },
                         "right": {
-                            "width": { "value": "0" }
+                            "width": { "value": "0px" }
                         },
                         "bottom": {
-                            "width": { "value": "0" }
+                            "width": { "value": "0px" }
                         },
                         "left": {
-                            "width": { "value": "0" }
+                            "width": { "value": "0px" }
                         }
                     },
                     "theme-light": {
@@ -140,16 +140,16 @@
                 "state-hover": {
                     "border": {
                         "top": {
-                            "width": { "value": "0" }
+                            "width": { "value": "0px" }
                         },
                         "right": {
-                            "width": { "value": "0" }
+                            "width": { "value": "0px" }
                         },
                         "bottom": {
-                            "width": { "value": "0" }
+                            "width": { "value": "0px" }
                         },
                         "left": {
-                            "width": { "value": "0" }
+                            "width": { "value": "0px" }
                         }
                     },
                     "theme-light": {
@@ -172,16 +172,16 @@
                 "state-active": {
                     "border": {
                         "top": {
-                            "width": { "value": "0" }
+                            "width": { "value": "0px" }
                         },
                         "right": {
-                            "width": { "value": "0" }
+                            "width": { "value": "0px" }
                         },
                         "bottom": {
-                            "width": { "value": "0" }
+                            "width": { "value": "0px" }
                         },
                         "left": {
-                            "width": { "value": "0" }
+                            "width": { "value": "0px" }
                         }
                     },
                     "theme-light": {
