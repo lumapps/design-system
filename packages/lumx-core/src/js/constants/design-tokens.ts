@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Wed, 04 Dec 2024 10:53:03 GMT
+ * Generated on Fri, 06 Dec 2024 13:46:59 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -283,7 +283,7 @@ export const DESIGN_TOKENS = {
         },
         'emphasis-selected': {
             'state-default': {
-                padding: { horizontal: { value: 'var(--lumx-spacing-unit-big)', $aliasedFrom: 'spacing.unit.big' } },
+                padding: { horizontal: { comment: 'deprecated (use base emphasis padding)', value: '16px' } },
                 'border-width': { value: '0' },
                 'theme-light': {
                     'background-color': {
@@ -313,7 +313,7 @@ export const DESIGN_TOKENS = {
                 },
             },
             'state-hover': {
-                padding: { horizontal: { value: 'var(--lumx-spacing-unit-big)', $aliasedFrom: 'spacing.unit.big' } },
+                padding: { horizontal: { comment: 'deprecated (use base emphasis padding)', value: '16px' } },
                 'border-width': { value: '0' },
                 'theme-light': {
                     'background-color': {
@@ -343,7 +343,7 @@ export const DESIGN_TOKENS = {
                 },
             },
             'state-active': {
-                padding: { horizontal: { value: 'var(--lumx-spacing-unit-big)', $aliasedFrom: 'spacing.unit.big' } },
+                padding: { horizontal: { comment: 'deprecated (use base emphasis padding)', value: '16px' } },
                 'border-width': { value: '0' },
                 'theme-light': {
                     'background-color': {
