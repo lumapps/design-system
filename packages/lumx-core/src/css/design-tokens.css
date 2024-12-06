@@ -2,7 +2,7 @@
 
 /**
  * Do not edit directly
- * Generated on Wed, 04 Dec 2024 10:53:03 GMT
+ * Generated on Fri, 06 Dec 2024 13:46:59 GMT
  */
 
 :root {
@@ -80,7 +80,7 @@
     --lumx-button-emphasis-low-state-active-theme-dark-background-color: var(--lumx-color-light-L4);
     --lumx-button-emphasis-low-state-active-theme-dark-color: var(--lumx-color-light-L1);
     --lumx-button-emphasis-low-state-active-theme-dark-border-color: transparent;
-    --lumx-button-emphasis-selected-state-default-padding-horizontal: var(--lumx-spacing-unit-big);
+    --lumx-button-emphasis-selected-state-default-padding-horizontal: 16px; /* deprecated (use base emphasis padding) */
     --lumx-button-emphasis-selected-state-default-border-width: 0;
     --lumx-button-emphasis-selected-state-default-theme-light-background-color: var(--lumx-color-primary-L5);
     --lumx-button-emphasis-selected-state-default-theme-light-color: var(--lumx-color-primary-D2);
@@ -88,7 +88,7 @@
     --lumx-button-emphasis-selected-state-default-theme-dark-background-color: var(--lumx-color-light-L3);
     --lumx-button-emphasis-selected-state-default-theme-dark-color: var(--lumx-color-light-N);
     --lumx-button-emphasis-selected-state-default-theme-dark-border-color: transparent;
-    --lumx-button-emphasis-selected-state-hover-padding-horizontal: var(--lumx-spacing-unit-big);
+    --lumx-button-emphasis-selected-state-hover-padding-horizontal: 16px; /* deprecated (use base emphasis padding) */
     --lumx-button-emphasis-selected-state-hover-border-width: 0;
     --lumx-button-emphasis-selected-state-hover-theme-light-background-color: var(--lumx-color-primary-L4);
     --lumx-button-emphasis-selected-state-hover-theme-light-color: var(--lumx-color-primary-D2);
@@ -96,7 +96,7 @@
     --lumx-button-emphasis-selected-state-hover-theme-dark-background-color: var(--lumx-color-light-L4);
     --lumx-button-emphasis-selected-state-hover-theme-dark-color: var(--lumx-color-light-N);
     --lumx-button-emphasis-selected-state-hover-theme-dark-border-color: transparent;
-    --lumx-button-emphasis-selected-state-active-padding-horizontal: var(--lumx-spacing-unit-big);
+    --lumx-button-emphasis-selected-state-active-padding-horizontal: 16px; /* deprecated (use base emphasis padding) */
     --lumx-button-emphasis-selected-state-active-border-width: 0;
     --lumx-button-emphasis-selected-state-active-theme-light-background-color: var(--lumx-color-primary-L3);
     --lumx-button-emphasis-selected-state-active-theme-light-color: var(--lumx-color-primary-D2);

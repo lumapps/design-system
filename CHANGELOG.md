@@ -16,6 +16,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `DatePicker`: update day buttons to use standard button styles
 -   `Chip`: add border and background color CSS variable theming on selected state.
 -   `SideNavigationItem`: add border CSS variable theming on selected state.
+-   `Button`: deprecated variables `--lumx-button-emphasis-selected-state-default-padding-horizontal`,
+     `--lumx-button-emphasis-selected-hover-hover-padding-horizontal` and
+     `--lumx-button-emphasis-selected-hover-active-padding-horizontal` (use the base `low` or `medium` emphasis padding)
 
 ### Fixed
 
