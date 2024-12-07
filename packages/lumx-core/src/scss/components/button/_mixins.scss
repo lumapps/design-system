@@ -28,11 +28,13 @@
     }
 }
 
-@mixin lumx-button-size($emphasis, $variant, $size) {
-    @if $size == lumx-base-const("size", "M") {
-        height: var(--lumx-button-height);
-    } @else if $size == lumx-base-const("size", "S") {
-        height: calc(var(--lumx-button-height) / 1.5);
+@mixin lumx-button-size($emphasis, $variant: null, $size: null) {
+    @if $variant {
+        @if $size == lumx-base-const("size", "M") {
+            height: var(--lumx-button-height);
+        } @else if $size == lumx-base-const("size", "S") {
+            height: calc(var(--lumx-button-height) / 1.5);
+        }
     }
 
     @if $variant == "button" {

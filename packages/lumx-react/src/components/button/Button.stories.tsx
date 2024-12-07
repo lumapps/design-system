@@ -22,9 +22,9 @@ const buttonEmphasis = [Emphasis.high, Emphasis.medium, Emphasis.low];
 // Combination of props that should be avoided
 const excludeCombination = ({ isSelected, emphasis, hasBackground }: any) => {
     // isSelected is only supported in medium emphasis
-    if (isSelected && emphasis && emphasis !== 'medium') return true;
+    if (isSelected && emphasis && emphasis !== Emphasis.medium && emphasis !== Emphasis.low) return true;
     // hasBackground is only supported in low emphasis
-    if (hasBackground && emphasis && emphasis !== 'low') return true;
+    if (hasBackground && emphasis && emphasis !== Emphasis.low) return true;
     return false;
 };
 
