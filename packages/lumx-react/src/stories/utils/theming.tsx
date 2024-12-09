@@ -133,7 +133,9 @@ export function withTheming<P extends PropertyTree>({
                     return (varName: string) =>
                         // Has the given arg with value
                         varName.match(new RegExp(`${argName}-${argValue}`)) ||
-                        (argName === 'emphasis' && argValue === 'medium' && varName.match(/emphasis-selected/)) ||
+                        (argName === 'emphasis' &&
+                            (argValue === 'medium' || argValue === 'low') &&
+                            varName.match(/emphasis-selected/)) ||
                         // Or does not have the arg at all
                         !varName.match(new RegExp(`${argName}-\\w+`));
                 }

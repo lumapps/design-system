@@ -65,9 +65,5 @@
         &--is-today span {
             font-weight: var(--lumx-button-font-weight);
         }
-
-        &--is-selected {
-            @include lumx-button-is-selected(lumx-base-const("theme", "LIGHT"));
-        }
     }
 }
