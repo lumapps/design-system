@@ -7,6 +7,7 @@ import { InputHelper, InputLabel, Theme } from '@lumx/react';
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { useId } from '@lumx/react/hooks/useId';
+import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
 /**
  * Defines the props of the component.
@@ -47,9 +48,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
 /**
  * Component default props.
  */
-const DEFAULT_PROPS: Partial<RadioButtonProps> = {
-    theme: Theme.light,
-};
+const DEFAULT_PROPS: Partial<RadioButtonProps> = {};
 
 /**
  * RadioButton component.
@@ -59,6 +58,7 @@ const DEFAULT_PROPS: Partial<RadioButtonProps> = {
  * @return React element.
  */
 export const RadioButton: Comp<RadioButtonProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const defaultTheme = useTheme() || Theme.light;
     const {
         checked,
         className,
@@ -71,7 +71,7 @@ export const RadioButton: Comp<RadioButtonProps, HTMLDivElement> = forwardRef((p
         label,
         name,
         onChange,
-        theme,
+        theme = defaultTheme,
         value,
         inputProps,
         ...forwardedProps

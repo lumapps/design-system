@@ -8,6 +8,7 @@ import { Orientation, Theme, Thumbnail, ThumbnailProps, ThumbnailVariant } from 
 
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
 /**
  * Defines the props of the component.
@@ -50,7 +51,6 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: Partial<PostBlockProps> = {
     orientation: Orientation.horizontal,
-    theme: Theme.light,
 };
 
 /**
@@ -61,6 +61,7 @@ const DEFAULT_PROPS: Partial<PostBlockProps> = {
  * @return React element.
  */
 export const PostBlock: Comp<PostBlockProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const defaultTheme = useTheme() || Theme.light;
     const {
         actions,
         attachments,
@@ -71,7 +72,7 @@ export const PostBlock: Comp<PostBlockProps, HTMLDivElement> = forwardRef((props
         orientation,
         tags,
         text,
-        theme,
+        theme = defaultTheme,
         thumbnailProps,
         title,
         ...forwardedProps

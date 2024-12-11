@@ -9,6 +9,7 @@ import classNames from 'classnames';
 
 import isFunction from 'lodash/isFunction';
 import React, { forwardRef, MouseEventHandler, ReactNode } from 'react';
+import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
 /**
  * Chip sizes.
@@ -56,7 +57,6 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: Partial<ChipProps> = {
     size: Size.m,
-    theme: Theme.light,
 };
 
 /**
@@ -67,6 +67,7 @@ const DEFAULT_PROPS: Partial<ChipProps> = {
  * @return React element.
  */
 export const Chip: Comp<ChipProps, HTMLAnchorElement> = forwardRef((props, ref) => {
+    const defaultTheme = useTheme() || Theme.light;
     const {
         after,
         before,
@@ -82,7 +83,7 @@ export const Chip: Comp<ChipProps, HTMLAnchorElement> = forwardRef((props, ref) 
         onBeforeClick,
         onClick,
         size,
-        theme,
+        theme = defaultTheme,
         href,
         onKeyDown,
         ...forwardedProps

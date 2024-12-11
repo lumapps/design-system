@@ -8,6 +8,7 @@ import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
+import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
 /**
  * Defines the props of the component.
@@ -200,6 +201,7 @@ const DEFAULT_PROPS: Partial<AutocompleteProps> = {
  * @return React element.
  */
 export const Autocomplete: Comp<AutocompleteProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const defaultTheme = useTheme();
     const {
         anchorToInput,
         children,
@@ -231,7 +233,7 @@ export const Autocomplete: Comp<AutocompleteProps, HTMLDivElement> = forwardRef(
         placeholder,
         placement,
         shouldFocusOnClose,
-        theme,
+        theme = defaultTheme,
         value,
         textFieldProps = {},
         focusAnchorOnClose,

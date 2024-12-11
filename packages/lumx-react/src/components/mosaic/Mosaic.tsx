@@ -5,6 +5,7 @@ import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import classNames from 'classnames';
 import take from 'lodash/take';
+import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
 /**
  * Defines the props of the component.
@@ -29,9 +30,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
 /**
  * Component default props.
  */
-const DEFAULT_PROPS: Partial<MosaicProps> = {
-    theme: Theme.light,
-};
+const DEFAULT_PROPS: Partial<MosaicProps> = {};
 
 /**
  * Mosaic component.
@@ -41,7 +40,8 @@ const DEFAULT_PROPS: Partial<MosaicProps> = {
  * @return React element.
  */
 export const Mosaic: Comp<MosaicProps, HTMLDivElement> = forwardRef((props, ref) => {
-    const { className, theme, thumbnails, onImageClick, ...forwardedProps } = props;
+    const defaultTheme = useTheme() || Theme.light;
+    const { className, theme = defaultTheme, thumbnails, onImageClick, ...forwardedProps } = props;
     const handleImageClick = useMemo(() => {
         if (!onImageClick) return undefined;
 

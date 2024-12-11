@@ -11,6 +11,7 @@ import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/classNam
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
 import { useId } from '@lumx/react/hooks/useId';
+import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { CoreSelectProps, SelectVariant } from './constants';
 
 /** The display name of the component. */
@@ -21,13 +22,16 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /** The default value of props. */
 export const DEFAULT_PROPS: Partial<CoreSelectProps> = {
-    theme: Theme.light,
     variant: SelectVariant.input,
 };
 
 export const WithSelectContext = (
     SelectElement: React.FC<any>,
-    {
+    props: CoreSelectProps,
+    ref: Ref<HTMLDivElement>,
+): React.ReactElement => {
+    const defaultTheme = useTheme() || Theme.light;
+    const {
         children,
         className,
         focusElement,
@@ -49,13 +53,11 @@ export const WithSelectContext = (
         onInfiniteScroll,
         onInputClick,
         placeholder,
-        theme = DEFAULT_PROPS.theme,
+        theme = defaultTheme,
         value,
         variant = DEFAULT_PROPS.variant,
         ...forwardedProps
-    }: CoreSelectProps,
-    ref: Ref<HTMLDivElement>,
-): React.ReactElement => {
+    } = props;
     const generatedSelectId = useId();
     const selectId = id || generatedSelectId;
     const anchorRef = useRef<HTMLElement>(null);

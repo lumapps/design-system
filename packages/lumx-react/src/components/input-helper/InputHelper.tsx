@@ -4,6 +4,7 @@ import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/classNam
 import classNames from 'classnames';
 import React, { forwardRef, ReactNode } from 'react';
 
+import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { INPUT_HELPER_CONFIGURATION } from './constants';
 
 /**
@@ -31,7 +32,6 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: Partial<InputHelperProps> = {
     kind: Kind.info,
-    theme: Theme.light,
 };
 
 /**
@@ -42,7 +42,8 @@ const DEFAULT_PROPS: Partial<InputHelperProps> = {
  * @return React element.
  */
 export const InputHelper: Comp<InputHelperProps, HTMLParagraphElement> = forwardRef((props, ref) => {
-    const { children, className, kind, theme, ...forwardedProps } = props;
+    const defaultTheme = useTheme() || Theme.light;
+    const { children, className, kind, theme = defaultTheme, ...forwardedProps } = props;
     const { color } = INPUT_HELPER_CONFIGURATION[kind as any] || {};
 
     return (

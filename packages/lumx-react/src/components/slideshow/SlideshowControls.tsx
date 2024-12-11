@@ -11,6 +11,7 @@ import { WINDOW } from '@lumx/react/constants';
 import { useSlideshowControls, DEFAULT_OPTIONS } from '@lumx/react/hooks/useSlideshowControls';
 import { useRovingTabIndex } from '@lumx/react/hooks/useRovingTabIndex';
 
+import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { useSwipeNavigate } from './useSwipeNavigate';
 import { PAGINATION_ITEM_SIZE, PAGINATION_ITEMS_MAX } from './constants';
 import { usePaginationVisibleRange } from './usePaginationVisibleRange';
@@ -70,7 +71,6 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: Partial<SlideshowControlsProps> = {
     activeIndex: 0,
-    theme: Theme.light,
 };
 
 /**
@@ -81,6 +81,7 @@ const DEFAULT_PROPS: Partial<SlideshowControlsProps> = {
  * @return React element.
  */
 const InternalSlideshowControls: Comp<SlideshowControlsProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const defaultTheme = useTheme() || Theme.light;
     const {
         activeIndex,
         className,
@@ -92,7 +93,7 @@ const InternalSlideshowControls: Comp<SlideshowControlsProps, HTMLDivElement> = 
         previousButtonProps,
         paginationProps,
         slidesCount,
-        theme,
+        theme = defaultTheme,
         isAutoPlaying = false,
         playButtonProps,
         paginationItemLabel,

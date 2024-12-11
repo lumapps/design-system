@@ -6,6 +6,7 @@ import { Theme } from '@lumx/react';
 
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
 export interface ProgressLinearProps extends GenericProps, HasTheme {}
 
@@ -22,9 +23,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
 /**
  * Component default props.
  */
-const DEFAULT_PROPS: Partial<ProgressLinearProps> = {
-    theme: Theme.light,
-};
+const DEFAULT_PROPS: Partial<ProgressLinearProps> = {};
 
 /**
  * ProgressLinear component.
@@ -34,7 +33,8 @@ const DEFAULT_PROPS: Partial<ProgressLinearProps> = {
  * @return React element.
  */
 export const ProgressLinear: Comp<ProgressLinearProps, HTMLDivElement> = forwardRef((props, ref) => {
-    const { className, theme, ...forwardedProps } = props;
+    const defaultTheme = useTheme() || Theme.light;
+    const { className, theme = defaultTheme, ...forwardedProps } = props;
 
     return (
         <div

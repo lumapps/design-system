@@ -6,6 +6,7 @@ import { Theme, Size } from '@lumx/react';
 
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
 /**
  * Progress sizes.
@@ -34,7 +35,6 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * Component default props.
  */
 const DEFAULT_PROPS: Partial<ProgressCircularProps> = {
-    theme: Theme.light,
     size: Size.m,
 };
 
@@ -46,7 +46,8 @@ const DEFAULT_PROPS: Partial<ProgressCircularProps> = {
  * @return React element.
  */
 export const ProgressCircular: Comp<ProgressCircularProps, HTMLDivElement> = forwardRef((props, ref) => {
-    const { className, theme, size, ...forwardedProps } = props;
+    const defaultTheme = useTheme() || Theme.light;
+    const { className, theme = defaultTheme, size, ...forwardedProps } = props;
 
     return (
         <div

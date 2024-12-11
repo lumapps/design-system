@@ -20,6 +20,7 @@ import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 import { useId } from '@lumx/react/hooks/useId';
+import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
 /**
  * Defines the props of the component.
@@ -101,7 +102,6 @@ const DEFAULT_MIN_ROWS = 2;
  * Component default props.
  */
 const DEFAULT_PROPS: Partial<TextFieldProps> = {
-    theme: Theme.light,
     type: 'text',
 };
 
@@ -255,6 +255,7 @@ const renderInputNative: React.FC<InputNativeProps> = (props) => {
  * @return React element.
  */
 export const TextField: Comp<TextFieldProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const defaultTheme = useTheme() || Theme.light;
     const {
         chips,
         className,
@@ -282,7 +283,7 @@ export const TextField: Comp<TextFieldProps, HTMLDivElement> = forwardRef((props
         onFocus,
         placeholder,
         textFieldRef,
-        theme,
+        theme = defaultTheme,
         type,
         value,
         afterElement,

@@ -20,6 +20,7 @@ import { mdiImageBroken } from '@lumx/icons';
 import { useMergeRefs } from '@lumx/react/utils/mergeRefs';
 import { useImageLoad } from '@lumx/react/components/thumbnail/useImageLoad';
 import { useFocusPointStyle } from '@lumx/react/components/thumbnail/useFocusPointStyle';
+import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { FocusPoint, ThumbnailSize, ThumbnailVariant } from './types';
 
 type ImgHTMLProps = ImgHTMLAttributes<HTMLImageElement>;
@@ -88,7 +89,6 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
 const DEFAULT_PROPS: Partial<ThumbnailProps> = {
     fallback: mdiImageBroken,
     loading: 'lazy',
-    theme: Theme.light,
 };
 
 /**
@@ -99,6 +99,7 @@ const DEFAULT_PROPS: Partial<ThumbnailProps> = {
  * @return React element.
  */
 export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
+    const defaultTheme = useTheme() || Theme.light;
     const {
         align,
         alt,
@@ -119,7 +120,7 @@ export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
         loading,
         loadingPlaceholderImageRef,
         size,
-        theme,
+        theme = defaultTheme,
         variant,
         linkProps,
         linkAs,

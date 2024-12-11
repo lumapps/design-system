@@ -9,6 +9,7 @@ import { Alignment, InputHelper, InputLabel, Theme } from '@lumx/react';
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { useId } from '@lumx/react/hooks/useId';
+import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
 /**
  * Defines the props of the component.
@@ -47,7 +48,6 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: Partial<SwitchProps> = {
     position: Alignment.left,
-    theme: Theme.light,
 };
 
 /**
@@ -58,6 +58,7 @@ const DEFAULT_PROPS: Partial<SwitchProps> = {
  * @return React element.
  */
 export const Switch: Comp<SwitchProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const defaultTheme = useTheme() || Theme.light;
     const {
         checked,
         children,
@@ -70,7 +71,7 @@ export const Switch: Comp<SwitchProps, HTMLDivElement> = forwardRef((props, ref)
         name,
         onChange,
         position,
-        theme,
+        theme = defaultTheme,
         value,
         inputProps = {},
         ...forwardedProps

@@ -9,6 +9,7 @@ import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { useId } from '@lumx/react/hooks/useId';
 import { useMergeRefs } from '@lumx/react/utils/mergeRefs';
+import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
 /**
  * Intermediate state of checkbox.
@@ -54,9 +55,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
 /**
  * Component default props.
  */
-const DEFAULT_PROPS: Partial<CheckboxProps> = {
-    theme: Theme.light,
-};
+const DEFAULT_PROPS: Partial<CheckboxProps> = {};
 
 /**
  * Checkbox component.
@@ -66,6 +65,7 @@ const DEFAULT_PROPS: Partial<CheckboxProps> = {
  * @return React element.
  */
 export const Checkbox: Comp<CheckboxProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const defaultTheme = useTheme() || Theme.light;
     const {
         checked,
         className,
@@ -78,7 +78,7 @@ export const Checkbox: Comp<CheckboxProps, HTMLDivElement> = forwardRef((props, 
         label,
         name,
         onChange,
-        theme,
+        theme = defaultTheme,
         value,
         inputProps = {},
         ...forwardedProps

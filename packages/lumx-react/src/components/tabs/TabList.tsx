@@ -6,6 +6,7 @@ import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
 import classNames from 'classnames';
 import React, { forwardRef, ReactNode } from 'react';
+import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { useRovingTabIndex } from '../../hooks/useRovingTabIndex';
 
 export enum TabListLayout {
@@ -43,7 +44,6 @@ const CLASSNAME = `${CSS_PREFIX}-tabs`;
 const DEFAULT_PROPS: Partial<TabListProps> = {
     layout: TabListLayout.fixed,
     position: Alignment.left,
-    theme: Theme.light,
 };
 
 /**
@@ -56,7 +56,16 @@ const DEFAULT_PROPS: Partial<TabListProps> = {
  * @return React element.
  */
 export const TabList: Comp<TabListProps, HTMLDivElement> = forwardRef((props, ref) => {
-    const { 'aria-label': ariaLabel, children, className, layout, position, theme, ...forwardedProps } = props;
+    const defaultTheme = useTheme() || Theme.light;
+    const {
+        'aria-label': ariaLabel,
+        children,
+        className,
+        layout,
+        position,
+        theme = defaultTheme,
+        ...forwardedProps
+    } = props;
     const tabListRef = React.useRef(null);
     useRovingTabIndex({
         parentRef: tabListRef,

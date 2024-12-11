@@ -11,6 +11,7 @@ import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/classNam
 
 import { clamp } from '@lumx/react/utils/clamp';
 import { useId } from '@lumx/react/hooks/useId';
+import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
 /**
  * Defines the props of the component.
@@ -58,7 +59,6 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
 const DEFAULT_PROPS: Partial<SliderProps> = {
     precision: 0,
     steps: 0,
-    theme: Theme.light,
 };
 
 /**
@@ -92,6 +92,7 @@ const computePercentFromValue = (value: number, min: number, max: number): numbe
  * @return React element.
  */
 export const Slider: Comp<SliderProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const defaultTheme = useTheme() || Theme.light;
     const {
         className,
         disabled,
@@ -107,7 +108,7 @@ export const Slider: Comp<SliderProps, HTMLDivElement> = forwardRef((props, ref)
         onMouseDown,
         precision,
         steps,
-        theme,
+        theme = defaultTheme,
         value,
         ...forwardedProps
     } = props;

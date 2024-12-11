@@ -13,6 +13,7 @@ import { useMergeRefs } from '@lumx/react/utils/mergeRefs';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { skipRender } from '@lumx/react/utils/skipRender';
 
+import { ThemeProvider } from '@lumx/react/utils/theme/ThemeContext';
 import { useRestoreFocusOnClose } from './useRestoreFocusOnClose';
 import { usePopoverStyle } from './usePopoverStyle';
 import { Elevation, FitAnchorWidth, Offset, Placement, POPOVER_ZINDEX } from './constants';
@@ -179,7 +180,7 @@ const _InnerPopover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, ref
                               </svg>
                           </div>
                       )}
-                      {children}
+                      <ThemeProvider value={undefined}>{children}</ThemeProvider>
                   </ClickAwayProvider>
               </Component>,
               usePortal,

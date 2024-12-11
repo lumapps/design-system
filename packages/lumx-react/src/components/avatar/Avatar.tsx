@@ -6,6 +6,7 @@ import { AspectRatio, Size, Theme, Thumbnail, ThumbnailProps } from '@lumx/react
 
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
 /**
  * Avatar sizes.
@@ -56,7 +57,6 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: Partial<AvatarProps> = {
     size: Size.m,
-    theme: Theme.light,
 };
 
 /**
@@ -67,6 +67,7 @@ const DEFAULT_PROPS: Partial<AvatarProps> = {
  * @return React element.
  */
 export const Avatar: Comp<AvatarProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const defaultTheme = useTheme() || Theme.light;
     const {
         actions,
         alt,
@@ -78,7 +79,7 @@ export const Avatar: Comp<AvatarProps, HTMLDivElement> = forwardRef((props, ref)
         onClick,
         onKeyPress,
         size,
-        theme,
+        theme = defaultTheme,
         thumbnailProps,
         ...forwardedProps
     } = props;

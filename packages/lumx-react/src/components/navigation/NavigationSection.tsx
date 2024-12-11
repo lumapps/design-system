@@ -5,7 +5,7 @@ import { Icon, Size, Text, Orientation, Popover, Placement, Theme } from '@lumx/
 import classNames from 'classnames';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { HasClassName } from '@lumx/react/utils/type';
-import { ThemeContext } from '@lumx/react/utils/ThemeContext';
+import { ThemeProvider, useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { useId } from '@lumx/react/hooks/useId';
 
 import { CLASSNAME as ITEM_CLASSNAME } from './NavigationItem';
@@ -37,7 +37,7 @@ export const NavigationSection = Object.assign(
         const buttonRef = useRef<HTMLButtonElement>(null);
         const sectionId = useId();
         const { orientation } = useContext(NavigationContext) || {};
-        const theme = useContext(ThemeContext);
+        const theme = useTheme();
         const isDropdown = orientation === Orientation.horizontal;
         return (
             <li
@@ -87,13 +87,13 @@ export const NavigationSection = Object.assign(
                             onClose={() => setIsOpen(false)}
                             zIndex={996}
                         >
-                            <ThemeContext.Provider value={Theme.light}>
+                            <ThemeProvider value={Theme.light}>
                                 <ul className={`${CLASSNAME}__drawer--popover`} id={sectionId}>
                                     <NavigationContext.Provider value={{ orientation: Orientation.vertical }}>
                                         {children}
                                     </NavigationContext.Provider>
                                 </ul>
-                            </ThemeContext.Provider>
+                            </ThemeProvider>
                         </Popover>
                     ) : (
                         <ul className={`${CLASSNAME}__drawer`} id={sectionId}>

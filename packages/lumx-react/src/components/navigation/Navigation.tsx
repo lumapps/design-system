@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { HasAriaLabelOrLabelledBy, HasClassName, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { Orientation, Theme } from '@lumx/react';
-import { ThemeContext } from '@lumx/react/utils/ThemeContext';
+import { ThemeProvider, useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { NavigationSection } from './NavigationSection';
 import { NavigationItem } from './NavigationItem';
 import { NavigationContext } from './context';
@@ -26,12 +26,20 @@ const COMPONENT_NAME = 'Navigation';
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
+/**
+ * Component default props
+ */
+const DEFAULT_PROPS = {
+    orientation: Orientation.vertical,
+};
+
 export const Navigation = Object.assign(
     // eslint-disable-next-line react/display-name
     forwardRef<HTMLElement, NavigationProps>((props, ref) => {
-        const { children, className, theme, orientation, ...forwardedProps } = props;
+        const defaultTheme = useTheme() || Theme.light;
+        const { children, className, theme = defaultTheme, orientation, ...forwardedProps } = props;
         return (
-            <ThemeContext.Provider value={theme}>
+            <ThemeProvider value={theme}>
                 <nav
                     className={classNames(
                         className,
@@ -48,13 +56,13 @@ export const Navigation = Object.assign(
                         <ul className={`${CLASSNAME}__list`}>{children}</ul>
                     </NavigationContext.Provider>
                 </nav>
-            </ThemeContext.Provider>
+            </ThemeProvider>
         );
     }),
     {
         displayName: COMPONENT_NAME,
         className: CLASSNAME,
-        defaultProps: { theme: Theme.light, orientation: Orientation.vertical },
+        defaultProps: DEFAULT_PROPS,
         // Sub components
         Section: NavigationSection,
         Item: NavigationItem,
