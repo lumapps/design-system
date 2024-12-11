@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { ColorPalette, Icon, Size, Theme, Text } from '@lumx/react';
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
 export interface FlagProps extends GenericProps, HasTheme {
     /** Color of the component. */
@@ -18,9 +19,7 @@ export interface FlagProps extends GenericProps, HasTheme {
 
 const COMPONENT_NAME = 'Flag';
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
-const DEFAULT_PROPS: Partial<FlagProps> = {
-    theme: Theme.light,
-};
+const DEFAULT_PROPS: Partial<FlagProps> = {};
 
 /**
  * Flag component.
@@ -30,7 +29,8 @@ const DEFAULT_PROPS: Partial<FlagProps> = {
  * @return React element.
  */
 export const Flag: Comp<FlagProps, HTMLDivElement> = forwardRef((props, ref) => {
-    const { label, icon, color, className, theme, truncate, ...forwardedProps } = props;
+    const defaultTheme = useTheme() || Theme.light;
+    const { label, icon, color, className, theme = defaultTheme, truncate, ...forwardedProps } = props;
     const flagColor = color || (theme === Theme.light ? ColorPalette.dark : ColorPalette.light);
     const isTruncated = !!truncate;
 

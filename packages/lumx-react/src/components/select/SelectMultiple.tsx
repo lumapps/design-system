@@ -12,6 +12,7 @@ import { InputLabel } from '@lumx/react/components/input-label/InputLabel';
 import { Comp } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
+import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
 import { WithSelectContext } from './WithSelectContext';
 import { CoreSelectProps, SelectVariant } from './constants';
@@ -57,118 +58,123 @@ const DEFAULT_PROPS: Partial<SelectMultipleProps> = {
     selectedValueRender: (choice) => choice,
 };
 
-export const SelectMultipleField: React.FC<SelectMultipleProps> = ({
-    anchorRef,
-    handleKeyboardNav,
-    hasError,
-    icon,
-    id,
-    isDisabled,
-    isEmpty,
-    isRequired,
-    isValid,
-    label,
-    onClear,
-    onInputClick,
-    placeholder,
-    selectedChipRender,
-    selectedValueRender,
-    theme,
-    value,
-    variant,
-    selectElementRef,
-    ...forwardedProps
-}) => (
-    <>
-        {variant === SelectVariant.input && (
-            <>
-                {label && (
-                    <div className={`${CLASSNAME}__header`}>
-                        <InputLabel
-                            htmlFor={id}
-                            className={`${CLASSNAME}__label`}
-                            isRequired={isRequired}
-                            theme={theme}
-                        >
-                            {label}
-                        </InputLabel>
-                    </div>
-                )}
+export const SelectMultipleField: React.FC<SelectMultipleProps> = (props) => {
+    const defaultTheme = useTheme();
+    const {
+        anchorRef,
+        handleKeyboardNav,
+        hasError,
+        icon,
+        id,
+        isDisabled,
+        isEmpty,
+        isRequired,
+        isValid,
+        label,
+        onClear,
+        onInputClick,
+        placeholder,
+        selectedChipRender,
+        selectedValueRender,
+        theme = defaultTheme,
+        value,
+        variant,
+        selectElementRef,
+        ...forwardedProps
+    } = props;
 
-                {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
-                <div
-                    ref={mergeRefs(anchorRef as RefObject<HTMLDivElement>, selectElementRef)}
+    return (
+        <>
+            {variant === SelectVariant.input && (
+                <>
+                    {label && (
+                        <div className={`${CLASSNAME}__header`}>
+                            <InputLabel
+                                htmlFor={id}
+                                className={`${CLASSNAME}__label`}
+                                isRequired={isRequired}
+                                theme={theme}
+                            >
+                                {label}
+                            </InputLabel>
+                        </div>
+                    )}
+
+                    {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+                    <div
+                        ref={mergeRefs(anchorRef as RefObject<HTMLDivElement>, selectElementRef)}
+                        id={id}
+                        className={`${CLASSNAME}__wrapper`}
+                        onClick={onInputClick}
+                        onKeyDown={handleKeyboardNav}
+                        tabIndex={isDisabled ? undefined : 0}
+                        aria-disabled={isDisabled || undefined}
+                        {...forwardedProps}
+                    >
+                        {icon && (
+                            <Icon
+                                className={`${CLASSNAME}__input-icon`}
+                                color={theme === Theme.dark ? 'light' : undefined}
+                                icon={icon}
+                                size={Size.xs}
+                            />
+                        )}
+
+                        <div className={`${CLASSNAME}__chips`}>
+                            {!isEmpty &&
+                                value.map((val, index) => selectedChipRender?.(val, index, onClear, isDisabled, theme))}
+                        </div>
+
+                        {isEmpty && placeholder && (
+                            <div
+                                className={classNames([
+                                    `${CLASSNAME}__input-native`,
+                                    `${CLASSNAME}__input-native--placeholder`,
+                                ])}
+                            >
+                                <span>{placeholder}</span>
+                            </div>
+                        )}
+
+                        {(isValid || hasError) && (
+                            <div className={`${CLASSNAME}__input-validity`}>
+                                <Icon icon={isValid ? mdiCheckCircle : mdiAlertCircle} size={Size.xxs} />
+                            </div>
+                        )}
+
+                        <div className={`${CLASSNAME}__input-indicator`}>
+                            <Icon icon={mdiMenuDown} size={Size.s} />
+                        </div>
+                    </div>
+                </>
+            )}
+
+            {variant === SelectVariant.chip && (
+                <Chip
                     id={id}
-                    className={`${CLASSNAME}__wrapper`}
+                    isSelected={!isEmpty}
+                    isDisabled={isDisabled}
+                    after={<Icon icon={isEmpty ? mdiMenuDown : mdiCloseCircle} />}
+                    onAfterClick={isEmpty ? onInputClick : onClear}
                     onClick={onInputClick}
-                    onKeyDown={handleKeyboardNav}
-                    tabIndex={isDisabled ? undefined : 0}
-                    aria-disabled={isDisabled || undefined}
+                    ref={mergeRefs(anchorRef as RefObject<HTMLAnchorElement>, selectElementRef)}
+                    theme={theme}
                     {...forwardedProps}
                 >
-                    {icon && (
-                        <Icon
-                            className={`${CLASSNAME}__input-icon`}
-                            color={theme === Theme.dark ? 'light' : undefined}
-                            icon={icon}
-                            size={Size.xs}
-                        />
+                    {isEmpty && <span>{label}</span>}
+
+                    {!isEmpty && (
+                        <span>
+                            <span>{selectedValueRender?.(value[0])}</span>
+
+                            {value.length > 1 && <span>&nbsp;+{value.length - 1}</span>}
+                        </span>
                     )}
-
-                    <div className={`${CLASSNAME}__chips`}>
-                        {!isEmpty &&
-                            value.map((val, index) => selectedChipRender?.(val, index, onClear, isDisabled, theme))}
-                    </div>
-
-                    {isEmpty && placeholder && (
-                        <div
-                            className={classNames([
-                                `${CLASSNAME}__input-native`,
-                                `${CLASSNAME}__input-native--placeholder`,
-                            ])}
-                        >
-                            <span>{placeholder}</span>
-                        </div>
-                    )}
-
-                    {(isValid || hasError) && (
-                        <div className={`${CLASSNAME}__input-validity`}>
-                            <Icon icon={isValid ? mdiCheckCircle : mdiAlertCircle} size={Size.xxs} />
-                        </div>
-                    )}
-
-                    <div className={`${CLASSNAME}__input-indicator`}>
-                        <Icon icon={mdiMenuDown} size={Size.s} />
-                    </div>
-                </div>
-            </>
-        )}
-
-        {variant === SelectVariant.chip && (
-            <Chip
-                id={id}
-                isSelected={!isEmpty}
-                isDisabled={isDisabled}
-                after={<Icon icon={isEmpty ? mdiMenuDown : mdiCloseCircle} />}
-                onAfterClick={isEmpty ? onInputClick : onClear}
-                onClick={onInputClick}
-                ref={mergeRefs(anchorRef as RefObject<HTMLAnchorElement>, selectElementRef)}
-                theme={theme}
-                {...forwardedProps}
-            >
-                {isEmpty && <span>{label}</span>}
-
-                {!isEmpty && (
-                    <span>
-                        <span>{selectedValueRender?.(value[0])}</span>
-
-                        {value.length > 1 && <span>&nbsp;+{value.length - 1}</span>}
-                    </span>
-                )}
-            </Chip>
-        )}
-    </>
-);
+                </Chip>
+            )}
+        </>
+    );
+};
 
 /**
  * SelectMultiple component.

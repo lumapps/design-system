@@ -6,6 +6,7 @@ import { Avatar, Size, Theme, Tooltip } from '@lumx/react';
 import { Comp, GenericProps, HasTheme, ValueOf } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 
+import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { AvatarProps } from '../avatar/Avatar';
 
 /**
@@ -76,7 +77,6 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * Component default props.
  */
 const DEFAULT_PROPS: Partial<CommentBlockProps> = {
-    theme: Theme.light,
     variant: CommentBlockVariant.indented,
 };
 
@@ -88,6 +88,7 @@ const DEFAULT_PROPS: Partial<CommentBlockProps> = {
  * @return React element.
  */
 export const CommentBlock: Comp<CommentBlockProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const defaultTheme = useTheme() || Theme.light;
     const {
         actions,
         avatarProps,
@@ -104,7 +105,7 @@ export const CommentBlock: Comp<CommentBlockProps, HTMLDivElement> = forwardRef(
         onMouseEnter,
         onMouseLeave,
         text,
-        theme,
+        theme = defaultTheme,
         variant,
         ...forwardedProps
     } = props;

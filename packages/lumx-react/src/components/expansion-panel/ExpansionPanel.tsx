@@ -14,6 +14,7 @@ import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/classNam
 import { partitionMulti } from '@lumx/react/utils/partitionMulti';
 import { useTransitionVisibility } from '@lumx/react/hooks/useTransitionVisibility';
 import { EXPANSION_PANEL_TRANSITION_DURATION } from '@lumx/core/js/constants';
+import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
 /**
  * Defines the props of the component.
@@ -51,9 +52,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
 /**
  * Component default props.
  */
-const DEFAULT_PROPS: Partial<ExpansionPanelProps> = {
-    theme: Theme.light,
-};
+const DEFAULT_PROPS: Partial<ExpansionPanelProps> = {};
 
 const isDragHandle = isComponent(DragHandle);
 const isHeader = isComponent('header');
@@ -67,6 +66,7 @@ const isFooter = isComponent('footer');
  * @return React element.
  */
 export const ExpansionPanel: Comp<ExpansionPanelProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const defaultTheme = useTheme() || Theme.light;
     const {
         className,
         children: anyChildren,
@@ -77,7 +77,7 @@ export const ExpansionPanel: Comp<ExpansionPanelProps, HTMLDivElement> = forward
         onClose,
         onOpen,
         onToggleOpen,
-        theme,
+        theme = defaultTheme,
         toggleButtonProps,
         ...forwardedProps
     } = props;

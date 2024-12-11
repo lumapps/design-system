@@ -14,6 +14,7 @@ import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/classNam
 
 import { useTransitionVisibility } from '@lumx/react/hooks/useTransitionVisibility';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
+import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
 /**
  * Defines the props of the component.
@@ -51,7 +52,6 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * Component default props.
  */
 const DEFAULT_PROPS: Partial<NotificationProps> = {
-    theme: Theme.light,
     zIndex: 9999,
     usePortal: true,
 };
@@ -65,6 +65,7 @@ const DEFAULT_PROPS: Partial<NotificationProps> = {
  * @return React element.
  */
 export const Notification: Comp<NotificationProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const defaultTheme = useTheme() || Theme.light;
     const {
         actionLabel,
         className,
@@ -72,7 +73,7 @@ export const Notification: Comp<NotificationProps, HTMLDivElement> = forwardRef(
         isOpen,
         onActionClick,
         onClick,
-        theme,
+        theme = defaultTheme,
         type,
         zIndex,
         usePortal,

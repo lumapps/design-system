@@ -6,6 +6,7 @@ import { mdiDragVertical } from '@lumx/icons';
 import { ColorPalette, Icon, Size, Theme } from '@lumx/react';
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
 /**
  * Defines the props of the component.
@@ -30,7 +31,8 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * @return React element.
  */
 export const DragHandle: Comp<DragHandleProps, HTMLDivElement> = forwardRef((props, ref) => {
-    const { className, theme, ...forwardedProps } = props;
+    const defaultTheme = useTheme();
+    const { className, theme = defaultTheme, ...forwardedProps } = props;
 
     return (
         <div

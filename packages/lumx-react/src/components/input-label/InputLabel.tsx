@@ -3,6 +3,7 @@ import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import classNames from 'classnames';
 import React, { forwardRef, ReactNode } from 'react';
+import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
 /**
  * Defines the props of the component.
@@ -29,9 +30,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
 /**
  * Component default props.
  */
-const DEFAULT_PROPS: Partial<InputLabelProps> = {
-    theme: Theme.light,
-};
+const DEFAULT_PROPS: Partial<InputLabelProps> = {};
 
 /**
  * InputLabel component.
@@ -41,7 +40,8 @@ const DEFAULT_PROPS: Partial<InputLabelProps> = {
  * @return React element.
  */
 export const InputLabel: Comp<InputLabelProps, HTMLLabelElement> = forwardRef((props, ref) => {
-    const { children, className, htmlFor, isRequired, theme, ...forwardedProps } = props;
+    const defaultTheme = useTheme() || Theme.light;
+    const { children, className, htmlFor, isRequired, theme = defaultTheme, ...forwardedProps } = props;
 
     return (
         <label

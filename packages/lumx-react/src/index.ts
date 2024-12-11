@@ -58,3 +58,4 @@ export * from './components/toolbar';
 export * from './components/tooltip';
 export * from './components/uploader';
 export * from './components/user-block';
+export { ThemeProvider, useTheme } from './utils/theme/ThemeContext';

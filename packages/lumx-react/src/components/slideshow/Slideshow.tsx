@@ -5,6 +5,7 @@ import { DEFAULT_OPTIONS } from '@lumx/react/hooks/useSlideshowControls';
 import { Comp, GenericProps } from '@lumx/react/utils/type';
 import { useFocusWithin } from '@lumx/react/hooks/useFocusWithin';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
+import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { buildSlideShowGroupId } from './SlideshowItemGroup';
 
 /**
@@ -41,7 +42,6 @@ export interface SlideshowProps
  */
 const DEFAULT_PROPS: Partial<SlideshowProps> = {
     ...DEFAULT_OPTIONS,
-    theme: Theme.light,
 };
 
 /**
@@ -52,6 +52,7 @@ const DEFAULT_PROPS: Partial<SlideshowProps> = {
  * @return React element.
  */
 export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const defaultTheme = useTheme() || Theme.light;
     const {
         activeIndex,
         autoPlay,
@@ -62,7 +63,7 @@ export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props
         interval,
         onChange,
         slideshowControlsProps,
-        theme,
+        theme = defaultTheme,
         id,
         slidesId,
         slideGroupLabel,

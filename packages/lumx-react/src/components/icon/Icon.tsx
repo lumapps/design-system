@@ -6,6 +6,7 @@ import { ColorPalette, ColorVariant, Size, Theme } from '@lumx/react';
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { mdiAlertCircle } from '@lumx/icons';
+import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
 export type IconSizes = Extract<Size, 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl'>;
 
@@ -53,7 +54,18 @@ const DEFAULT_PROPS: Partial<IconProps> = {};
  * @return React element.
  */
 export const Icon: Comp<IconProps, HTMLElement> = forwardRef((props, ref) => {
-    const { className, color, colorVariant, hasShape, icon, size, theme, alt, ...forwardedProps } = props;
+    const defaultTheme = useTheme();
+    const {
+        className,
+        color,
+        colorVariant,
+        hasShape,
+        icon,
+        size,
+        theme = defaultTheme,
+        alt,
+        ...forwardedProps
+    } = props;
 
     // Color
     let iconColor = color;

@@ -7,6 +7,7 @@ import { Alignment, HorizontalAlignment, Size, Theme, Thumbnail } from '@lumx/re
 import { Comp, GenericProps, HasTheme, ValueOf } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 
+import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { ThumbnailProps } from '../thumbnail/Thumbnail';
 import { ImageCaption, ImageCaptionMetadata } from './ImageCaption';
 
@@ -61,7 +62,6 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: Partial<ImageBlockProps> = {
     captionPosition: ImageBlockCaptionPosition.below,
-    theme: Theme.light,
     align: Alignment.left,
 };
 
@@ -73,6 +73,7 @@ const DEFAULT_PROPS: Partial<ImageBlockProps> = {
  * @return React element.
  */
 export const ImageBlock: Comp<ImageBlockProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const defaultTheme = useTheme() || Theme.light;
     const {
         actions,
         align,
@@ -86,7 +87,7 @@ export const ImageBlock: Comp<ImageBlockProps, HTMLDivElement> = forwardRef((pro
         image,
         size,
         tags,
-        theme,
+        theme = defaultTheme,
         thumbnailProps,
         title,
         titleProps,

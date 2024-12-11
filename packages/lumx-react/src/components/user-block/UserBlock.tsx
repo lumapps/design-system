@@ -7,6 +7,7 @@ import { Avatar, ColorPalette, Link, Orientation, Size, Theme } from '@lumx/reac
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 
+import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { AvatarProps } from '../avatar/Avatar';
 
 /**
@@ -62,7 +63,6 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
 const DEFAULT_PROPS: Partial<UserBlockProps> = {
     orientation: Orientation.horizontal,
     size: Size.m,
-    theme: Theme.light,
 };
 
 /**
@@ -73,6 +73,7 @@ const DEFAULT_PROPS: Partial<UserBlockProps> = {
  * @return React element.
  */
 export const UserBlock: Comp<UserBlockProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const defaultTheme = useTheme() || Theme.light;
     const {
         avatarProps,
         className,
@@ -88,7 +89,7 @@ export const UserBlock: Comp<UserBlockProps, HTMLDivElement> = forwardRef((props
         orientation,
         simpleAction,
         size,
-        theme,
+        theme = defaultTheme,
         ...forwardedProps
     } = props;
     let componentSize = size;

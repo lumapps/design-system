@@ -6,6 +6,7 @@ import isEmpty from 'lodash/isEmpty';
 import { Emphasis, Icon, Size, Theme, Text } from '@lumx/react';
 import { Comp, isComponent } from '@lumx/react/utils/type';
 import { getBasicClass, getRootClassName } from '@lumx/react/utils/className';
+import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { BaseButtonProps, ButtonRoot } from './ButtonRoot';
 
 /**
@@ -44,7 +45,6 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
 const DEFAULT_PROPS: Partial<ButtonProps> = {
     emphasis: Emphasis.high,
     size: Size.m,
-    theme: Theme.light,
 };
 
 /**
@@ -55,7 +55,8 @@ const DEFAULT_PROPS: Partial<ButtonProps> = {
  * @return React element.
  */
 export const Button: Comp<ButtonProps, HTMLButtonElement | HTMLAnchorElement> = forwardRef((props, ref) => {
-    const { children, className, emphasis, leftIcon, rightIcon, size, theme, ...forwardedProps } = props;
+    const defaultTheme = useTheme() || Theme.light;
+    const { children, className, emphasis, leftIcon, rightIcon, size, theme = defaultTheme, ...forwardedProps } = props;
 
     const buttonClassName = classNames(
         className,

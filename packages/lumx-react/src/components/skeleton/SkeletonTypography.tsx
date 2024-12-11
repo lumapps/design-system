@@ -4,6 +4,7 @@ import React, { CSSProperties, forwardRef } from 'react';
 import { Theme, TypographyInterface, ColorPalette } from '@lumx/react';
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
 /**
  * Defines the props of the component.
@@ -17,9 +18,7 @@ export interface SkeletonTypographyProps extends GenericProps, HasTheme {
     color?: ColorPalette;
 }
 
-const DEFAULT_PROPS: Partial<SkeletonTypographyProps> = {
-    theme: Theme.light,
-};
+const DEFAULT_PROPS: Partial<SkeletonTypographyProps> = {};
 
 /**
  * Component display name.
@@ -39,7 +38,8 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * @return React element.
  */
 export const SkeletonTypography: Comp<SkeletonTypographyProps, HTMLDivElement> = forwardRef((props, ref) => {
-    const { className, theme, typography, width, color, ...forwardedProps } = props;
+    const defaultTheme = useTheme() || Theme.light;
+    const { className, theme = defaultTheme, typography, width, color, ...forwardedProps } = props;
 
     return (
         <div

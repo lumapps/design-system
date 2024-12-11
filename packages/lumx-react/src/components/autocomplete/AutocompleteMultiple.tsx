@@ -6,6 +6,7 @@ import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/classNam
 
 import classNames from 'classnames';
 import React, { forwardRef, ReactNode } from 'react';
+import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
 /**
  * Defines the props of the component.
@@ -66,6 +67,7 @@ const DEFAULT_PROPS: Partial<AutocompleteMultipleProps> = {
  * @return React element.
  */
 export const AutocompleteMultiple: Comp<AutocompleteMultipleProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const defaultTheme = useTheme();
     const {
         anchorToInput,
         children,
@@ -99,7 +101,7 @@ export const AutocompleteMultiple: Comp<AutocompleteMultipleProps, HTMLDivElemen
         placement,
         selectedChipRender,
         shouldFocusOnClose,
-        theme,
+        theme = defaultTheme,
         type,
         value,
         values,

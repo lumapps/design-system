@@ -6,6 +6,7 @@ import { Comp, GenericProps, HasTheme, ValueOf } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
 import { useId } from '@lumx/react/hooks/useId';
+import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
 /**
  * Uploader variants.
@@ -65,7 +66,6 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
 const DEFAULT_PROPS: Partial<UploaderProps> = {
     aspectRatio: AspectRatio.horizontal,
     size: Size.xl,
-    theme: Theme.light,
     variant: UploaderVariant.square,
 };
 
@@ -77,7 +77,18 @@ const DEFAULT_PROPS: Partial<UploaderProps> = {
  * @return React element.
  */
 export const Uploader: Comp<UploaderProps> = forwardRef((props, ref) => {
-    const { aspectRatio, className, label, icon, size, theme, variant, fileInputProps, ...forwardedProps } = props;
+    const defaultTheme = useTheme() || Theme.light;
+    const {
+        aspectRatio,
+        className,
+        label,
+        icon,
+        size,
+        theme = defaultTheme,
+        variant,
+        fileInputProps,
+        ...forwardedProps
+    } = props;
     // Adjust to square aspect ratio when using circle variants.
     const adjustedAspectRatio = variant === UploaderVariant.circle ? AspectRatio.square : aspectRatio;
 

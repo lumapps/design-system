@@ -15,6 +15,7 @@ import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { useTransitionVisibility } from '@lumx/react/hooks/useTransitionVisibility';
+import { ThemeProvider } from '@lumx/react/utils/theme/ThemeContext';
 
 /**
  * Defines the props of the component.
@@ -158,11 +159,13 @@ export const Lightbox: Comp<LightboxProps, HTMLDivElement> = forwardRef((props, 
                     />
                 </div>
             )}
-            <ClickAwayProvider callback={!preventAutoClose && onClose} childrenRefs={clickAwayRefs}>
-                <div ref={childrenRef} className={`${CLASSNAME}__wrapper`} role="presentation">
-                    {children}
-                </div>
-            </ClickAwayProvider>
+            <ThemeProvider value={undefined}>
+                <ClickAwayProvider callback={!preventAutoClose && onClose} childrenRefs={clickAwayRefs}>
+                    <div ref={childrenRef} className={`${CLASSNAME}__wrapper`} role="presentation">
+                        {children}
+                    </div>
+                </ClickAwayProvider>
+            </ThemeProvider>
         </div>,
         document.body,
     );

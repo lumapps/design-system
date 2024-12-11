@@ -15,6 +15,7 @@ import { Comp } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
+import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { WithSelectContext } from './WithSelectContext';
 import { CoreSelectProps, SelectVariant } from './constants';
 
@@ -42,29 +43,32 @@ const stopPropagation = (evt: Event) => evt.stopPropagation();
 /**
  * Select component.
  */
-const SelectField: React.FC<SelectProps> = ({
-    anchorRef,
-    clearButtonProps,
-    handleKeyboardNav,
-    hasError,
-    hasInputClear,
-    icon,
-    id,
-    isDisabled,
-    isEmpty,
-    isRequired,
-    isValid,
-    label,
-    onClear,
-    onInputClick,
-    placeholder,
-    selectedValueRender,
-    theme,
-    value,
-    variant,
-    selectElementRef,
-    ...forwardedProps
-}) => {
+const SelectField: React.FC<SelectProps> = (props) => {
+    const defaultTheme = useTheme();
+    const {
+        anchorRef,
+        clearButtonProps,
+        handleKeyboardNav,
+        hasError,
+        hasInputClear,
+        icon,
+        id,
+        isDisabled,
+        isEmpty,
+        isRequired,
+        isValid,
+        label,
+        onClear,
+        onInputClick,
+        placeholder,
+        selectedValueRender,
+        theme = defaultTheme,
+        value,
+        variant,
+        selectElementRef,
+        ...forwardedProps
+    } = props;
+
     return (
         <>
             {variant === SelectVariant.input && (

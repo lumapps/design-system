@@ -16,6 +16,7 @@ import {
 
 import { Comp, GenericProps, HeadingElement, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
 /**
  * Defines the props of the component.
@@ -54,7 +55,6 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS = {
     size: Size.regular,
-    theme: Theme.light,
     titleHeading: 'h2',
 } as const;
 
@@ -66,6 +66,7 @@ const DEFAULT_PROPS = {
  * @return React element.
  */
 export const LinkPreview: Comp<LinkPreviewProps, HTMLDivElement> = forwardRef((props, ref) => {
+    const defaultTheme = useTheme() || Theme.light;
     const {
         className,
         description,
@@ -73,7 +74,7 @@ export const LinkPreview: Comp<LinkPreviewProps, HTMLDivElement> = forwardRef((p
         linkAs,
         linkProps,
         size,
-        theme,
+        theme = defaultTheme,
         thumbnailProps,
         title,
         titleHeading,
