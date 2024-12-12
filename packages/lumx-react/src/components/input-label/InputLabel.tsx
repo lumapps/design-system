@@ -1,9 +1,11 @@
+import { type ReactNode } from 'react';
+
 import { Theme } from '@lumx/react';
-import { InputLabel as UI, InputLabelProps } from '@lumx/core/js/components/InputLabel';
+import { InputLabel as UI, GenericInputLabelProps } from '@lumx/core/js/components/InputLabel';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
-export type { InputLabelProps };
+export type InputLabelProps = GenericInputLabelProps<ReactNode>;
 
 /**
  * InputLabel component.

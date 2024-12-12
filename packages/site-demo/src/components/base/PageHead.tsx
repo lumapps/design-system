@@ -1,6 +1,9 @@
 import { graphql, useStaticQuery } from 'gatsby';
 import React from 'react';
-import Helmet, { HelmetProps } from 'react-helmet';
+import Helmet_, { HelmetProps } from 'react-helmet';
+
+// TODO: replace with gatsby page head API
+const Helmet = Helmet_ as any;
 
 const query = graphql`
     query Query {

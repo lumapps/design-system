@@ -13,20 +13,19 @@ This file will contain the primary logic, props, styling constants, and the actu
 
 Example (`packages/lumx-core/src/js/components/InputHelper/index.tsx`):
 ```tsx
-import type { ReactNode } from 'react';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
-import type { LumxClassName, GenericProps, HasTheme } from '../../types';
+import type { LumxClassName, GenericProps, HasTheme, JSX } from '../../types';
 import { classNames } from '../../utils';
 import { Kind } from '../../constants';
 
-export interface InputHelperProps extends GenericProps, HasTheme {
-    children: ReactNode | string;
+export interface GenericInputHelperProps<C extends JSX.Node> extends GenericProps, HasTheme {
+    children: C;
     kind?: Kind;
 }
 
 const COMPONENT_NAME = 'InputHelper';
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-input-helper';
-const DEFAULT_PROPS: Partial<InputHelperProps> = {
+const DEFAULT_PROPS: Partial<GenericInputHelperProps<any>> = {
     kind: Kind.info,
 };
 
@@ -36,7 +35,7 @@ const INPUT_HELPER_CONFIGURATION: Record<string, { color: string }> = {
     [Kind.warning]: { color: 'yellow' },
 };
 
-export const InputHelper = (props: InputHelperProps) => {
+export function InputHelper<C extends JSX.Node>(props: GenericInputHelperProps<C>) {
     const {
         children,
         className,
@@ -59,7 +58,7 @@ export const InputHelper = (props: InputHelperProps) => {
             {children}
         </p>
     );
-};
+}
 
 InputHelper.displayName = COMPONENT_NAME;
 InputHelper.className = CLASSNAME;
@@ -80,7 +79,7 @@ Example (`packages/lumx-core/src/js/components/InputHelper/Tests.ts`):
 import { Kind, Theme } from '../../constants';
 import { SetupRenderOptions } from '../../../testing';
 import { getByClassName } from '../../../testing/queries';
-import { InputHelper, InputHelperProps } from '.';
+import { InputHelper, GenericInputHelperProps } from '.';
 
 const CLASSNAME = InputHelper.className as string;
 
@@ -90,6 +89,7 @@ const INPUT_HELPER_CONFIGURATION: Record<string, { color: string }> = {
     [Kind.warning]: { color: 'yellow' },
 };
 
+type InputHelperProps = GenericInputHelperProps<string>;
 type SetupProps = Partial<InputHelperProps>;
 
 export const setup = <T>(
@@ -109,7 +109,7 @@ export default <T>(renderOptions: SetupRenderOptions<T, InputHelperProps>) => {
     describe('Props', () => {
         it('should render text', () => {
             const { props, helper } = setup({ children: 'helper text' }, renderOptions);
-            expect(helper).toHaveTextContent(props.children as string);
+            expect(helper).toHaveTextContent(props.children);
             expect(helper).toHaveClass(CLASSNAME);
         });
 
@@ -156,12 +156,13 @@ export const AllKinds = {
 
 Example (`packages/lumx-react/src/components/input-helper/InputHelper.tsx`):
 ```tsx
-import { InputHelper as UI, InputHelperProps } from '@lumx/core/js/components/InputHelper';
+import { InputHelper as UI, GenericInputHelperProps } from '@lumx/core/js/components/InputHelper';
 import { Theme } from '@lumx/react';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
+import type { ReactNode } from 'react';
 
-export type { InputHelperProps };
+export type InputHelperProps = GenericInputHelperProps<ReactNode>;
 
 export const InputHelper = forwardRef<InputHelperProps, HTMLParagraphElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;

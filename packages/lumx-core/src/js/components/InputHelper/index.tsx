@@ -1,5 +1,5 @@
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
-import type { LumxClassName, GenericProps, HasTheme, JSXElement } from '../../types';
+import type { LumxClassName, GenericProps, HasTheme, JSX } from '../../types';
 import { classNames } from '../../utils';
 import { Kind } from '../../constants';
 import { INPUT_HELPER_CONFIGURATION } from './constants';
@@ -7,9 +7,9 @@ import { INPUT_HELPER_CONFIGURATION } from './constants';
 /**
  * Defines the props of the component.
  */
-export interface InputHelperProps extends GenericProps, HasTheme {
+export interface GenericInputHelperProps<C extends JSX.Node> extends GenericProps, HasTheme {
     /** Helper content. */
-    children: JSXElement;
+    children: C;
     /** Helper variant. */
     kind?: Kind;
 }
@@ -27,18 +27,14 @@ const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-input-helper';
 /**
  * Component default props.
  */
-const DEFAULT_PROPS: Partial<InputHelperProps> = {
+const DEFAULT_PROPS: Partial<GenericInputHelperProps<any>> = {
     kind: Kind.info,
 };
 
 /**
  * InputHelper component.
- *
- * @param  props Component props.
- * @param  ref   Component ref.
- * @return React element.
  */
-export const InputHelper = (props: InputHelperProps) => {
+export function InputHelper<C extends JSX.Node>(props: GenericInputHelperProps<C>) {
     const { children, className, kind = DEFAULT_PROPS.kind, theme, ref, ...forwardedProps } = props;
     const { color } = INPUT_HELPER_CONFIGURATION[kind as string] || {};
 
@@ -51,7 +47,7 @@ export const InputHelper = (props: InputHelperProps) => {
             {children}
         </p>
     );
-};
+}
 
 InputHelper.displayName = COMPONENT_NAME;
 InputHelper.className = CLASSNAME;
