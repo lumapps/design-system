@@ -21,7 +21,7 @@ const NAME_PROPERTIES: string[] = [
 
 /** LumX Component Type. */
 export type Comp<P, T = HTMLElement> = {
-    (props: P & { ref?: Ref<T> }): ReactElement | null;
+    (props: P & { ref?: Ref<T> }): ReactNode | null;
     /** React component type. */
     readonly $$typeof: symbol;
     /** Component default props. */
