@@ -1,13 +1,13 @@
 import { handleBasicClasses } from '../../utils/_internal/className';
 import { classNames } from '../../utils';
-import { LumxClassName, GenericProps, HasTheme, JSXElement } from '../../types';
+import { LumxClassName, GenericProps, HasTheme, JSXNode } from '../../types';
 import { Typography } from '../../constants';
 
-export interface InputLabelProps extends GenericProps, HasTheme {
+export interface InputLabelProps<C extends JSXNode> extends GenericProps, HasTheme {
     /** Typography variant. */
     typography?: Typography;
     /** Label content. */
-    children: JSXElement;
+    children: C;
     /** Native htmlFor property. */
     htmlFor: string;
     /** Whether the component is required or not. */
@@ -16,9 +16,12 @@ export interface InputLabelProps extends GenericProps, HasTheme {
 
 const COMPONENT_NAME = 'InputLabel';
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-input-label';
-const DEFAULT_PROPS: Partial<InputLabelProps> = {};
+const DEFAULT_PROPS: Partial<InputLabelProps<any>> = {};
 
-export const InputLabel = (props: InputLabelProps) => {
+/**
+ * InputLabel component.
+ */
+export function InputLabel<C extends JSXNode>(props: InputLabelProps<C>) {
     const { children, className, htmlFor, isRequired, theme, typography, ref, ...forwardedProps } = props;
 
     return (
@@ -40,7 +43,7 @@ export const InputLabel = (props: InputLabelProps) => {
             {children}
         </label>
     );
-};
+}
 
 InputLabel.displayName = COMPONENT_NAME;
 InputLabel.className = CLASSNAME;

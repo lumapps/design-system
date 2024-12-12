@@ -13,20 +13,19 @@ This file will contain the primary logic, props, styling constants, and the actu
 
 Example (`packages/lumx-core/src/js/components/InputHelper/index.tsx`):
 ```tsx
-import type { ReactNode } from 'react';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
-import type { LumxClassName, GenericProps, HasTheme } from '../../types';
+import type { LumxClassName, GenericProps, HasTheme, JSXNode } from '../../types';
 import { classNames } from '../../utils';
 import { Kind } from '../../constants';
 
-export interface InputHelperProps extends GenericProps, HasTheme {
-    children: ReactNode | string;
+export interface InputHelperProps<C extends JSXNode> extends GenericProps, HasTheme {
+    children: C;
     kind?: Kind;
 }
 
 const COMPONENT_NAME = 'InputHelper';
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-input-helper';
-const DEFAULT_PROPS: Partial<InputHelperProps> = {
+const DEFAULT_PROPS: Partial<InputHelperProps<any>> = {
     kind: Kind.info,
 };
 
@@ -36,7 +35,7 @@ const INPUT_HELPER_CONFIGURATION: Record<string, { color: string }> = {
     [Kind.warning]: { color: 'yellow' },
 };
 
-export const InputHelper = (props: InputHelperProps) => {
+export function InputHelper<C extends JSXNode>(props: InputHelperProps<C>) {
     const {
         children,
         className,
@@ -59,7 +58,7 @@ export const InputHelper = (props: InputHelperProps) => {
             {children}
         </p>
     );
-};
+}
 
 InputHelper.displayName = COMPONENT_NAME;
 InputHelper.className = CLASSNAME;
@@ -90,13 +89,13 @@ const INPUT_HELPER_CONFIGURATION: Record<string, { color: string }> = {
     [Kind.warning]: { color: 'yellow' },
 };
 
-type SetupProps = Partial<InputHelperProps>;
+type SetupProps = Partial<InputHelperProps<any>>;
 
 export const setup = <T>(
     propsOverride: SetupProps = {},
-    { wrapper, render }: SetupRenderOptions<T, InputHelperProps> = {},
+    { wrapper, render }: SetupRenderOptions<T, InputHelperProps<any>> = {},
 ) => {
-    const props: InputHelperProps = {
+    const props: InputHelperProps<any> = {
         children: 'Helper text',
         ...propsOverride,
     };
@@ -105,11 +104,11 @@ export const setup = <T>(
     return { helper, props };
 };
 
-export default <T>(renderOptions: SetupRenderOptions<T, InputHelperProps>) => {
+export default <T>(renderOptions: SetupRenderOptions<T, InputHelperProps<any>>) => {
     describe('Props', () => {
         it('should render text', () => {
             const { props, helper } = setup({ children: 'helper text' }, renderOptions);
-            expect(helper).toHaveTextContent(props.children as string);
+            expect(helper).toHaveTextContent(props.children);
             expect(helper).toHaveClass(CLASSNAME);
         });
 
@@ -121,6 +120,7 @@ export default <T>(renderOptions: SetupRenderOptions<T, InputHelperProps>) => {
     });
 };
 ```
+
 
 **Step 3: Migrate Stories to `packages/lumx-core/src/js/components/[ComponentName]/Stories.ts`**
 
@@ -156,21 +156,22 @@ export const AllKinds = {
 
 Example (`packages/lumx-react/src/components/input-helper/InputHelper.tsx`):
 ```tsx
-import { InputHelper as UI, InputHelperProps } from '@lumx/core/js/components/InputHelper';
+import * as Core from '@lumx/core/js/components/InputHelper';
 import { Theme } from '@lumx/react';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
+import type { ReactNode } from 'react';
 
-export type { InputHelperProps };
+export type InputHelperProps = Core.InputHelperProps<ReactNode>;
 
 export const InputHelper = forwardRef<InputHelperProps, HTMLParagraphElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
-    return UI({ ...props, ref, theme: props.theme || defaultTheme });
+    return Core.InputHelper({ ...props, ref, theme: props.theme || defaultTheme });
 });
 
-InputHelper.displayName = UI.displayName;
-InputHelper.className = UI.className;
-InputHelper.defaultProps = UI.defaultProps;
+InputHelper.displayName = Core.InputHelper.displayName;
+InputHelper.className = Core.InputHelper.className;
+InputHelper.defaultProps = Core.InputHelper.defaultProps;
 ```
 
 **Step 5: Update React Tests in `packages/lumx-react/src/components/[componentName]/[ComponentName].test.tsx`**

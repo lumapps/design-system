@@ -191,11 +191,11 @@ _InnerPopover.displayName = COMPONENT_NAME;
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Popover: Comp<PopoverProps, HTMLDivElement> = skipRender(
+export const Popover = skipRender(
     // Skip render in SSR
     () => Boolean(DOCUMENT),
     _InnerPopover,
-);
+) as Comp<PopoverProps, HTMLDivElement>;
 Popover.displayName = COMPONENT_NAME;
 Popover.className = CLASSNAME;
 Popover.defaultProps = DEFAULT_PROPS;

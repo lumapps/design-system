@@ -15,7 +15,11 @@ export function wrapChildrenIconWithSpaces(children: React.ReactNode): React.Rea
             typeof child.props === 'object' &&
             'children' in child.props
         ) {
-            return React.cloneElement(child, undefined, wrapChildrenIconWithSpaces(child.props.children));
+            return React.cloneElement(
+                child,
+                undefined,
+                wrapChildrenIconWithSpaces(child.props.children as React.ReactNode),
+            );
         }
         return child;
     });

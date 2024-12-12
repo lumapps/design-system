@@ -18,7 +18,7 @@
             "@lumx/core/*": ["lumx-core/src/*"],
             "@lumx/react": ["lumx-react/src"],
             "@lumx/react/*": ["lumx-react/src/*"],
-            "@lumx/icons": ["lumx-icons"],
+            "@lumx/icons": ["lumx-icons/dist"],
             "@lumx/icons/*": ["lumx-icons/dist/*"],
             "@lumx/demo/*": ["site-demo/src/*"]
         },

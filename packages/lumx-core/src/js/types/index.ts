@@ -5,7 +5,7 @@ export type { HasClassName } from './HasClassName';
 export type { HasCloseMode } from './HasCloseMode';
 export type { HasTheme } from './HasTheme';
 export type { GenericProps } from './GenericProps';
-export type { JSXElement } from './JSXElement';
+export type { JSXNode } from './JSXNode';
 export type { HeadingElement } from './HeadingElement';
 export type { Point } from './Point';
 export type { Predicate } from './Predicate';

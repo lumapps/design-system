@@ -6,16 +6,16 @@ import { InputHelper, InputHelperProps } from '.';
 
 const CLASSNAME = InputHelper.className as string;
 
-type SetupProps = Partial<InputHelperProps>;
+type SetupProps = Partial<InputHelperProps<any>>;
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
 export const setup = <T>(
     propsOverride: SetupProps = {},
-    { wrapper, render }: SetupRenderOptions<T, InputHelperProps> = {},
+    { wrapper, render }: SetupRenderOptions<T, InputHelperProps<any>> = {},
 ) => {
-    const props: InputHelperProps = {
+    const props: InputHelperProps<any> = {
         children: 'Helper text',
         ...propsOverride,
     };
@@ -27,7 +27,7 @@ export const setup = <T>(
     return { helper, props };
 };
 
-export default <T>(renderOptions: SetupRenderOptions<T, InputHelperProps>) => {
+export default <T>(renderOptions: SetupRenderOptions<T, InputHelperProps<any>>) => {
     describe('Props', () => {
         it('should render text', () => {
             const { props, helper } = setup({ children: 'helper text' }, renderOptions);
