@@ -18,7 +18,10 @@ const COMPONENT_NAME = 'InputLabel';
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-input-label';
 const DEFAULT_PROPS: Partial<InputLabelProps> = {};
 
-export const InputLabel = (props: InputLabelProps) => {
+/**
+ * InputLabel component.
+ */
+export function InputLabel(props: InputLabelProps) {
     const { children, className, htmlFor, isRequired, theme, typography, ref, ...forwardedProps } = props;
 
     return (
@@ -40,7 +43,7 @@ export const InputLabel = (props: InputLabelProps) => {
             {children}
         </label>
     );
-};
+}
 
 InputLabel.displayName = COMPONENT_NAME;
 InputLabel.className = CLASSNAME;

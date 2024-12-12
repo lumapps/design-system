@@ -24,14 +24,14 @@ const extensions = ['.js', '.jsx', '.ts', '.tsx'];
  * All other modules are considered as internal and won't be exposed.
  */
 const input = {
-    index: 'src/index.ts',               // => @lumx/react
+    index: 'src/index.ts', // => @lumx/react
     'utils/index': 'src/utils/index.ts', // => @lumx/react/utils
 };
 
 const external = [
-    // Externalize "public" lumx-core exports (internalize `_internal/*` exports)
-    /^@lumx\/core(?!.*\/_internal).*$/,
-    /^@lumx\/icons/
+    // Externalize "public" lumx-core exports (internalize `_internal/*` and `components/*` exports)
+    /^@lumx\/core(?!.*\/(_internal|components)).*$/,
+    /^@lumx\/icons/,
 ];
 
 // Bundle JS code
@@ -65,10 +65,7 @@ const bundleJS = {
         babel({
             extensions,
             exclude: /node_modules/,
-            presets: [
-                ['@babel/react', { runtime: 'automatic'}],
-                '@babel/preset-typescript',
-            ],
+            presets: [['@babel/react', { runtime: 'automatic' }], '@babel/preset-typescript'],
         }),
         /** Copy additional files to dist. */
         copy({
