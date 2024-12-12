@@ -33,12 +33,8 @@ const DEFAULT_PROPS: Partial<InputHelperProps> = {
 
 /**
  * InputHelper component.
- *
- * @param  props Component props.
- * @param  ref   Component ref.
- * @return React element.
  */
-export const InputHelper = (props: InputHelperProps) => {
+export function InputHelper(props: InputHelperProps) {
     const { children, className, kind = DEFAULT_PROPS.kind, theme, ref, ...forwardedProps } = props;
     const { color } = INPUT_HELPER_CONFIGURATION[kind as string] || {};
 
@@ -51,7 +47,7 @@ export const InputHelper = (props: InputHelperProps) => {
             {children}
         </p>
     );
-};
+}
 
 InputHelper.displayName = COMPONENT_NAME;
 InputHelper.className = CLASSNAME;

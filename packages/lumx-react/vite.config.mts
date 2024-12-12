@@ -9,6 +9,10 @@ import optimizeImportsLumxIcons from 'rollup-plugin-optimize-imports-lumx-icons'
  * Shared with Vitest and Storybook (with some override in the `viteFinal` of `.storybook/main.ts`)
  */
 export default defineConfig({
+    esbuild: {
+        jsx: 'automatic',
+        jsxImportSource: 'react',
+    },
     test: {
         environment: 'jsdom',
         globals: true,
