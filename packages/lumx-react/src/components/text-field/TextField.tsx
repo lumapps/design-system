@@ -26,7 +26,7 @@ import { useId } from '@lumx/react/hooks/useId';
  */
 export interface TextFieldProps extends GenericProps, HasTheme {
     /** Chip Group to be rendered before the main text input. */
-    chips?: HTMLElement | ReactNode;
+    chips?: ReactNode;
     /** Props to pass to the clear button (minus those already set by the TextField props). If not specified, the button won't be displayed. */
     clearButtonProps?: Pick<IconButtonProps, 'label'> &
         Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis'>;

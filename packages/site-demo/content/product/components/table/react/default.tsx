@@ -83,7 +83,7 @@ export const App = ({ theme = Theme.light }: any) => {
     const [tableHeader, setTableHeader] = useState(initialHeaders);
     const [tableBody, setTableBody] = useState(initialTable);
     const toggleSort = useCallback(
-        (header) => {
+        (header: Partial<TableHeaderProps>) => {
             const sortOrder = header.sortOrder === ThOrder.asc ? ThOrder.desc : ThOrder.asc;
             setTableHeader(
                 tableHeader.map((h) => ({

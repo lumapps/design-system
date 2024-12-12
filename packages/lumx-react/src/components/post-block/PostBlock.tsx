@@ -2,8 +2,6 @@ import React, { forwardRef, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
-import isObject from 'lodash/isObject';
-
 import { Orientation, Theme, Thumbnail, ThumbnailProps, ThumbnailVariant } from '@lumx/react';
 
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
@@ -100,11 +98,11 @@ export const PostBlock: Comp<PostBlockProps, HTMLDivElement> = forwardRef((props
 
                 {meta && <span className={`${CLASSNAME}__meta`}>{meta}</span>}
 
-                {isObject(text) && text.__html ? (
+                {typeof text === 'string' ? (
+                    <p className={`${CLASSNAME}__text`}>{text}</p>
+                ) : (
                     // eslint-disable-next-line react/no-danger
                     <p dangerouslySetInnerHTML={text} className={`${CLASSNAME}__text`} />
-                ) : (
-                    <p className={`${CLASSNAME}__text`}>{text}</p>
                 )}
 
                 {attachments && <div className={`${CLASSNAME}__attachments`}>{attachments}</div>}
