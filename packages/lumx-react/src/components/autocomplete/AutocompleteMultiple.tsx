@@ -1,11 +1,11 @@
+import { forwardRef } from '@lumx/react/utils/forwardRef';
 import { mdiClose } from '@lumx/icons';
-import { Autocomplete, AutocompleteProps, Chip, HorizontalAlignment, Icon, Size } from '@lumx/react';
 
-import { Comp } from '@lumx/react/utils/type';
+import { Autocomplete, AutocompleteProps, Chip, HorizontalAlignment, Icon, Size } from '@lumx/react';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 
 import classNames from 'classnames';
-import React, { forwardRef, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 /**
  * Defines the props of the component.
@@ -65,7 +65,7 @@ const DEFAULT_PROPS: Partial<AutocompleteMultipleProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const AutocompleteMultiple: Comp<AutocompleteMultipleProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const AutocompleteMultiple = forwardRef<AutocompleteMultipleProps, HTMLDivElement>((props, ref) => {
     const {
         anchorToInput,
         children,

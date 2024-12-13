@@ -1,11 +1,12 @@
-import React, { forwardRef, InputHTMLAttributes, ReactNode, SyntheticEvent } from 'react';
+import { forwardRef } from '@lumx/react/utils/forwardRef';
+import React, { InputHTMLAttributes, ReactNode, SyntheticEvent } from 'react';
 
 import classNames from 'classnames';
 
 import { mdiCheck, mdiMinus } from '@lumx/icons';
 
 import { Icon, InputHelper, InputLabel, Theme } from '@lumx/react';
-import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { useId } from '@lumx/react/hooks/useId';
 import { useMergeRefs } from '@lumx/react/utils/mergeRefs';
@@ -65,7 +66,7 @@ const DEFAULT_PROPS: Partial<CheckboxProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Checkbox: Comp<CheckboxProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const Checkbox = forwardRef<CheckboxProps, HTMLDivElement>((props, ref) => {
     const {
         checked,
         className,

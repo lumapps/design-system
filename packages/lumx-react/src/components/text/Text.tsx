@@ -1,7 +1,8 @@
-import React, { Children, Fragment, forwardRef } from 'react';
+import { forwardRef } from '@lumx/react/utils/forwardRef';
+import React, { Children, Fragment } from 'react';
 
 import { Icon, ColorPalette, ColorVariant, Typography, WhiteSpace } from '@lumx/react';
-import { Comp, GenericProps, TextElement, isComponent } from '@lumx/react/utils/type';
+import { GenericProps, TextElement, isComponent } from '@lumx/react/utils/type';
 import {
     getFontColorClassName,
     getRootClassName,
@@ -73,7 +74,7 @@ const DEFAULT_PROPS = {} as const;
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Text: Comp<TextProps> = forwardRef((props, ref) => {
+export const Text = forwardRef<TextProps>((props, ref) => {
     const {
         as: Component,
         children,

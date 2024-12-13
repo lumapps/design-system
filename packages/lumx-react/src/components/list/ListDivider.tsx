@@ -1,8 +1,9 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from '@lumx/react/utils/forwardRef';
+import React from 'react';
 
 import classNames from 'classnames';
 
-import { Comp, GenericProps } from '@lumx/react/utils/type';
+import { GenericProps } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 
 /**
@@ -27,7 +28,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * @param  ref   Component ref.
  * @return React element.
  */
-export const ListDivider: Comp<ListDividerProps, HTMLLIElement> = forwardRef((props, ref) => {
+export const ListDivider = forwardRef<ListDividerProps, HTMLLIElement>((props, ref) => {
     const { className, ...forwardedProps } = props;
 
     return (

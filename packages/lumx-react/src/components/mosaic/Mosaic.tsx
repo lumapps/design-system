@@ -1,7 +1,8 @@
-import React, { forwardRef, MouseEventHandler, useMemo } from 'react';
+import { forwardRef } from '@lumx/react/utils/forwardRef';
+import React, { MouseEventHandler, useMemo } from 'react';
 
 import { Alignment, AspectRatio, Theme, Thumbnail, ThumbnailProps } from '@lumx/react';
-import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import classNames from 'classnames';
 import take from 'lodash/take';
@@ -40,7 +41,7 @@ const DEFAULT_PROPS: Partial<MosaicProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Mosaic: Comp<MosaicProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const Mosaic = forwardRef<MosaicProps, HTMLDivElement>((props, ref) => {
     const { className, theme, thumbnails, onImageClick, ...forwardedProps } = props;
     const handleImageClick = useMemo(() => {
         if (!onImageClick) return undefined;

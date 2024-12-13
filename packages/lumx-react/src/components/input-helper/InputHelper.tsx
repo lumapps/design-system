@@ -1,8 +1,9 @@
+import { forwardRef } from '@lumx/react/utils/forwardRef';
 import { Kind, Theme } from '@lumx/react';
-import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import classNames from 'classnames';
-import React, { forwardRef, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 import { INPUT_HELPER_CONFIGURATION } from './constants';
 
@@ -41,7 +42,7 @@ const DEFAULT_PROPS: Partial<InputHelperProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const InputHelper: Comp<InputHelperProps, HTMLParagraphElement> = forwardRef((props, ref) => {
+export const InputHelper = forwardRef<InputHelperProps, HTMLParagraphElement>((props, ref) => {
     const { children, className, kind, theme, ...forwardedProps } = props;
     const { color } = INPUT_HELPER_CONFIGURATION[kind as any] || {};
 

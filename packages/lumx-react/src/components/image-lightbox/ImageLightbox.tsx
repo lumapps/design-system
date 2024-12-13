@@ -1,9 +1,9 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from '@lumx/react/utils/forwardRef';
 
+import React from 'react';
 import classNames from 'classnames';
 import { Lightbox } from '@lumx/react';
 import { ClickAwayProvider } from '@lumx/react/utils';
-import type { Comp } from '@lumx/react/utils/type';
 import { useMergeRefs } from '@lumx/react/utils/mergeRefs';
 
 import { ImageSlideshow } from './internal/ImageSlideshow';
@@ -11,7 +11,7 @@ import { useImageLightbox } from './useImageLightbox';
 import type { ImageLightboxProps } from './types';
 import { CLASSNAME, COMPONENT_NAME } from './constants';
 
-const Inner: Comp<ImageLightboxProps, HTMLDivElement> = forwardRef((props, ref) => {
+const Inner = forwardRef<ImageLightboxProps, HTMLDivElement>((props, ref) => {
     const {
         className,
         isOpen,

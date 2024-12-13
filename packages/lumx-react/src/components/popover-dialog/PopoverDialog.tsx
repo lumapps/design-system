@@ -1,7 +1,8 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from '@lumx/react/utils/forwardRef';
+import React from 'react';
 import classNames from 'classnames';
 
-import { Comp, HasAriaLabelOrLabelledBy } from '@lumx/react/utils/type';
+import { HasAriaLabelOrLabelledBy } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 
 import { Popover, PopoverProps } from '../popover/Popover';
@@ -34,7 +35,7 @@ const DEFAULT_PROPS: Partial<PopoverDialogProps> = {};
  * * Sets a focus trap within the popover
  * * Closes on click away and escape.
  */
-export const PopoverDialog: Comp<PopoverDialogProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const PopoverDialog = forwardRef<PopoverDialogProps, HTMLDivElement>((props, ref) => {
     const {
         children,
         isOpen,

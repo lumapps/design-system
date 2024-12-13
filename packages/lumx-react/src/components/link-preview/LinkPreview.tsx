@@ -1,4 +1,5 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from '@lumx/react/utils/forwardRef';
+import React from 'react';
 
 import classNames from 'classnames';
 
@@ -14,7 +15,7 @@ import {
     ThumbnailProps,
 } from '@lumx/react';
 
-import { Comp, GenericProps, HeadingElement, HasTheme } from '@lumx/react/utils/type';
+import { GenericProps, HeadingElement, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 
 /**
@@ -65,7 +66,7 @@ const DEFAULT_PROPS = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const LinkPreview: Comp<LinkPreviewProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const LinkPreview = forwardRef<LinkPreviewProps, HTMLDivElement>((props, ref) => {
     const {
         className,
         description,

@@ -1,10 +1,11 @@
-import React, { forwardRef, ReactNode, Ref, SyntheticEvent, useMemo } from 'react';
+import { forwardRef } from '@lumx/react/utils/forwardRef';
+import React, { ReactNode, Ref, SyntheticEvent, useMemo } from 'react';
 
 import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
 
 import { ListProps, Size } from '@lumx/react';
-import { Comp, GenericProps } from '@lumx/react/utils/type';
+import { GenericProps } from '@lumx/react/utils/type';
 import { onEnterPressed, onButtonPressed } from '@lumx/react/utils/event';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { renderLink } from '@lumx/react/utils/renderLink';
@@ -74,7 +75,7 @@ export function isClickable({ linkProps, onItemSelected }: Partial<ListItemProps
  * @param  ref   Component ref.
  * @return React element.
  */
-export const ListItem: Comp<ListItemProps, HTMLLIElement> = forwardRef((props, ref) => {
+export const ListItem = forwardRef<ListItemProps, HTMLLIElement>((props, ref) => {
     const {
         after,
         before,

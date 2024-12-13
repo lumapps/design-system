@@ -1,9 +1,10 @@
-import React, { Children, forwardRef, ReactNode } from 'react';
+import { forwardRef } from '@lumx/react/utils/forwardRef';
+import React, { Children, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
 import { Avatar, Size, Theme, Tooltip } from '@lumx/react';
-import { Comp, GenericProps, HasTheme, ValueOf } from '@lumx/react/utils/type';
+import { GenericProps, HasTheme, ValueOf } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 
 import { AvatarProps } from '../avatar/Avatar';
@@ -87,7 +88,7 @@ const DEFAULT_PROPS: Partial<CommentBlockProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const CommentBlock: Comp<CommentBlockProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const CommentBlock = forwardRef<CommentBlockProps, HTMLDivElement>((props, ref) => {
     const {
         actions,
         avatarProps,
@@ -161,7 +162,6 @@ export const CommentBlock: Comp<CommentBlockProps, HTMLDivElement> = forwardRef(
                     {hasActions && <div className={`${CLASSNAME}__actions`}>{actions}</div>}
                 </div>
             </div>
-
             {hasChildren && isOpen && <div className={`${CLASSNAME}__children`}>{children}</div>}
         </div>
     );

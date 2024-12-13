@@ -1,8 +1,9 @@
-import React, { forwardRef, ReactNode } from 'react';
+import { forwardRef } from '@lumx/react/utils/forwardRef';
+import React, { ReactNode } from 'react';
 
 import classNames from 'classnames';
 
-import { Comp, GenericProps } from '@lumx/react/utils/type';
+import { GenericProps } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 
 /**
@@ -30,7 +31,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * @param  ref   Component ref.
  * @return React element.
  */
-export const ListSubheader: Comp<ListSubheaderProps, HTMLLIElement> = forwardRef((props, ref) => {
+export const ListSubheader = forwardRef<ListSubheaderProps, HTMLLIElement>((props, ref) => {
     const { children, className, ...forwardedProps } = props;
 
     return (
