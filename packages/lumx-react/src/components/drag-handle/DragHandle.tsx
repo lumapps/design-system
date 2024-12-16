@@ -1,10 +1,11 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from '@lumx/react/utils/forwardRef';
+import React from 'react';
 
 import classNames from 'classnames';
 
 import { mdiDragVertical } from '@lumx/icons';
 import { ColorPalette, Icon, Size, Theme } from '@lumx/react';
-import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 
 /**
@@ -29,7 +30,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * @param  ref   Component ref.
  * @return React element.
  */
-export const DragHandle: Comp<DragHandleProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const DragHandle = forwardRef<DragHandleProps, HTMLDivElement>((props, ref) => {
     const { className, theme, ...forwardedProps } = props;
 
     return (

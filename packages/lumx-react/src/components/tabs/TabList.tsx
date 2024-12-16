@@ -1,11 +1,12 @@
+import { forwardRef } from '@lumx/react/utils/forwardRef';
 import { Alignment, Theme } from '@lumx/react';
 import { CSS_PREFIX } from '@lumx/react/constants';
-import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/react/utils/className';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
 import classNames from 'classnames';
-import React, { forwardRef, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { useRovingTabIndex } from '../../hooks/useRovingTabIndex';
 
 export enum TabListLayout {
@@ -55,7 +56,7 @@ const DEFAULT_PROPS: Partial<TabListProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const TabList: Comp<TabListProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const TabList = forwardRef<TabListProps, HTMLDivElement>((props, ref) => {
     const { 'aria-label': ariaLabel, children, className, layout, position, theme, ...forwardedProps } = props;
     const tabListRef = React.useRef(null);
     useRovingTabIndex({

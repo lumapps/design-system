@@ -1,12 +1,11 @@
-import React, { forwardRef, ReactNode } from 'react';
+import { forwardRef } from '@lumx/react/utils/forwardRef';
+import React, { ReactNode } from 'react';
 
 import classNames from 'classnames';
 
-import isObject from 'lodash/isObject';
-
 import { Orientation, Theme, Thumbnail, ThumbnailProps, ThumbnailVariant } from '@lumx/react';
 
-import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 
 /**
@@ -60,7 +59,7 @@ const DEFAULT_PROPS: Partial<PostBlockProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const PostBlock: Comp<PostBlockProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const PostBlock = forwardRef<PostBlockProps, HTMLDivElement>((props, ref) => {
     const {
         actions,
         attachments,
@@ -88,7 +87,6 @@ export const PostBlock: Comp<PostBlockProps, HTMLDivElement> = forwardRef((props
                     <Thumbnail {...thumbnailProps} theme={theme} variant={ThumbnailVariant.rounded} />
                 </div>
             )}
-
             <div className={`${CLASSNAME}__wrapper`}>
                 {author && <div className={`${CLASSNAME}__author`}>{author}</div>}
 
@@ -100,11 +98,11 @@ export const PostBlock: Comp<PostBlockProps, HTMLDivElement> = forwardRef((props
 
                 {meta && <span className={`${CLASSNAME}__meta`}>{meta}</span>}
 
-                {isObject(text) && text.__html ? (
+                {typeof text === 'string' ? (
+                    <p className={`${CLASSNAME}__text`}>{text}</p>
+                ) : (
                     // eslint-disable-next-line react/no-danger
                     <p dangerouslySetInnerHTML={text} className={`${CLASSNAME}__text`} />
-                ) : (
-                    <p className={`${CLASSNAME}__text`}>{text}</p>
                 )}
 
                 {attachments && <div className={`${CLASSNAME}__attachments`}>{attachments}</div>}

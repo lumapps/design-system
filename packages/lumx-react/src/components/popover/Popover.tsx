@@ -1,4 +1,5 @@
-import React, { forwardRef, ReactNode, RefObject, useRef } from 'react';
+import { forwardRef } from '@lumx/react/utils/forwardRef';
+import React, { ReactNode, RefObject, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
 import classNames from 'classnames';
@@ -97,7 +98,7 @@ const renderPopover = (children: ReactNode, usePortal?: boolean): any => {
 };
 
 // Inner component (must be wrapped before export)
-const _InnerPopover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, ref) => {
+const _InnerPopover = forwardRef<PopoverProps, HTMLDivElement>((props, ref) => {
     const {
         anchorRef,
         as: Component = 'div',

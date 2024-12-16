@@ -1,10 +1,11 @@
-import React, { forwardRef, ReactNode } from 'react';
+import { forwardRef } from '@lumx/react/utils/forwardRef';
+import React, { ReactNode } from 'react';
 import isEmpty from 'lodash/isEmpty';
 import classNames from 'classnames';
 import set from 'lodash/set';
 
 import { Avatar, ColorPalette, Link, Orientation, Size, Theme } from '@lumx/react';
-import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 
 import { AvatarProps } from '../avatar/Avatar';
@@ -72,7 +73,7 @@ const DEFAULT_PROPS: Partial<UserBlockProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const UserBlock: Comp<UserBlockProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const UserBlock = forwardRef<UserBlockProps, HTMLDivElement>((props, ref) => {
     const {
         avatarProps,
         className,

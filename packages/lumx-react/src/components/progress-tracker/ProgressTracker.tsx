@@ -1,8 +1,9 @@
-import React, { forwardRef, ReactNode } from 'react';
+import { forwardRef } from '@lumx/react/utils/forwardRef';
+import React, { ReactNode } from 'react';
 
 import classNames from 'classnames';
 
-import { Comp, GenericProps } from '@lumx/react/utils/type';
+import { GenericProps } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 import { useRovingTabIndex } from '../../hooks/useRovingTabIndex';
@@ -42,7 +43,7 @@ const DEFAULT_PROPS: Partial<ProgressTrackerProps> = {};
  * @param  ref   Component ref.
  * @return React element.
  */
-export const ProgressTracker: Comp<ProgressTrackerProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const ProgressTracker = forwardRef<ProgressTrackerProps, HTMLDivElement>((props, ref) => {
     const { 'aria-label': ariaLabel, children, className, ...forwardedProps } = props;
     const stepListRef = React.useRef(null);
     useRovingTabIndex({

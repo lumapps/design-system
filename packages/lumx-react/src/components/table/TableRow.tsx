@@ -1,8 +1,9 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from '@lumx/react/utils/forwardRef';
+import React from 'react';
 
 import classNames from 'classnames';
 
-import { Comp, GenericProps } from '@lumx/react/utils/type';
+import { GenericProps } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 
 /**
@@ -39,7 +40,7 @@ const DEFAULT_PROPS: Partial<TableRowProps> = {};
  * @param  ref   Component ref.
  * @return React element.
  */
-export const TableRow: Comp<TableRowProps, HTMLTableRowElement> = forwardRef((props, ref) => {
+export const TableRow = forwardRef<TableRowProps, HTMLTableRowElement>((props, ref) => {
     const { children, className, disabled, isClickable, isDisabled = disabled, isSelected, ...forwardedProps } = props;
 
     return (

@@ -1,8 +1,9 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from '@lumx/react/utils/forwardRef';
+import React from 'react';
 
 import classNames from 'classnames';
 
-import { Comp, GenericProps } from '@lumx/react/utils/type';
+import { GenericProps } from '@lumx/react/utils/type';
 import { getRootClassName } from '@lumx/react/utils/className';
 
 /**
@@ -32,7 +33,7 @@ const DEFAULT_PROPS: Partial<ButtonGroupProps> = {};
  * @param  ref   Component ref.
  * @return React element.
  */
-export const ButtonGroup: Comp<ButtonGroupProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const ButtonGroup = forwardRef<ButtonGroupProps, HTMLDivElement>((props, ref) => {
     const { children, className, ...forwardedProps } = props;
 
     return (

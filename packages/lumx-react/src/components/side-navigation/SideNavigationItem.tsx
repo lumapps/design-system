@@ -1,4 +1,5 @@
-import React, { Children, forwardRef, ReactNode } from 'react';
+import { forwardRef } from '@lumx/react/utils/forwardRef';
+import React, { Children, ReactNode } from 'react';
 
 import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
@@ -7,7 +8,7 @@ import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
 
 import { Emphasis, Icon, Size, IconButton, IconButtonProps } from '@lumx/react';
 
-import { Comp, GenericProps, HasCloseMode, isComponent } from '@lumx/react/utils/type';
+import { GenericProps, HasCloseMode, isComponent } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { renderLink } from '@lumx/react/utils/renderLink';
 import { renderButtonOrLink } from '@lumx/react/utils/renderButtonOrLink';
@@ -67,7 +68,7 @@ const DEFAULT_PROPS: Partial<SideNavigationItemProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const SideNavigationItem: Comp<SideNavigationItemProps, HTMLLIElement> = forwardRef((props, ref) => {
+export const SideNavigationItem = forwardRef<SideNavigationItemProps, HTMLLIElement>((props, ref) => {
     const {
         children,
         className,

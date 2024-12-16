@@ -1,4 +1,5 @@
-import React, { KeyboardEventHandler, forwardRef } from 'react';
+import { forwardRef } from '@lumx/react/utils/forwardRef';
+import React, { KeyboardEventHandler } from 'react';
 import classNames from 'classnames';
 import {
     Button,
@@ -12,7 +13,6 @@ import {
     Toolbar,
 } from '@lumx/react';
 import { mdiChevronLeft, mdiChevronRight } from '@lumx/icons';
-import { Comp } from '@lumx/react/utils/type';
 import { getMonthCalendar } from '@lumx/react/utils/date/getMonthCalendar';
 import { isSameDay } from '@lumx/react/utils/date/isSameDay';
 import { getCurrentLocale } from '@lumx/react/utils/locale/getCurrentLocale';
@@ -52,7 +52,7 @@ const COMPONENT_NAME = 'DatePickerControlled';
  * @param  ref   Component ref.
  * @return React element.
  */
-export const DatePickerControlled: Comp<DatePickerControlledProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const DatePickerControlled = forwardRef<DatePickerControlledProps, HTMLDivElement>((props, ref) => {
     const {
         locale = getCurrentLocale(),
         maxDate,

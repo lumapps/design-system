@@ -1,9 +1,10 @@
+import { forwardRef } from '@lumx/react/utils/forwardRef';
 import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiClose, mdiInformation } from '@lumx/icons';
 import { ColorPalette, Emphasis, Icon, IconButton, Kind, Size } from '@lumx/react';
-import { Comp, GenericProps } from '@lumx/react/utils/type';
+import { GenericProps } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import classNames from 'classnames';
-import React, { forwardRef, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 /**
  * Defines the props of the component.
@@ -57,7 +58,7 @@ const CONFIG = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Message: Comp<MessageProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const Message = forwardRef<MessageProps, HTMLDivElement>((props, ref) => {
     const { children, className, hasBackground, kind, icon: customIcon, closeButtonProps, ...forwardedProps } = props;
     const { color, icon } = CONFIG[kind as Kind] || {};
     const { onClick, label: closeButtonLabel } = closeButtonProps || {};

@@ -1,9 +1,10 @@
-import React, { Children, forwardRef, isValidElement } from 'react';
+import { forwardRef } from '@lumx/react/utils/forwardRef';
+import React, { Children, isValidElement } from 'react';
 
 import classNames from 'classnames';
 
 import { ColorPalette, ColorVariant, Typography } from '@lumx/react';
-import { Comp, GenericProps } from '@lumx/react/utils/type';
+import { GenericProps } from '@lumx/react/utils/type';
 import { getFontColorClassName, getRootClassName, getTypographyClassName } from '@lumx/react/utils/className';
 
 /**
@@ -50,7 +51,7 @@ const DEFAULT_PROPS = {} as const;
  * @param  ref   Component ref.
  * @return React element.
  */
-export const InlineList: Comp<InlineListProps> = forwardRef((props, ref) => {
+export const InlineList = forwardRef<InlineListProps>((props, ref) => {
     const { className, color, colorVariant, typography, children, wrap, ...forwardedProps } = props;
     const fontColorClassName = color && getFontColorClassName(color, colorVariant);
     const typographyClassName = typography && getTypographyClassName(typography);

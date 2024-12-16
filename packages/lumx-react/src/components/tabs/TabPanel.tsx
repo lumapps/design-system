@@ -1,10 +1,11 @@
+import { forwardRef } from '@lumx/react/utils/forwardRef';
 import { useTabProviderContext } from '@lumx/react/components/tabs/state';
 import { CSS_PREFIX } from '@lumx/react/constants';
-import { Comp, GenericProps } from '@lumx/react/utils/type';
+import { GenericProps } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/react/utils/className';
 
 import classNames from 'classnames';
-import React, { forwardRef } from 'react';
+import React from 'react';
 
 /**
  * Defines the props of the component.
@@ -40,7 +41,7 @@ const DEFAULT_PROPS: Partial<TabPanelProps> = {};
  * @param  ref   Component ref.
  * @return React element.
  */
-export const TabPanel: Comp<TabPanelProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const TabPanel = forwardRef<TabPanelProps, HTMLDivElement>((props, ref) => {
     const { children, id, className, isActive: propIsActive, ...forwardedProps } = props;
 
     const state = useTabProviderContext('tabPanel', id);

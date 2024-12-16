@@ -1,8 +1,8 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from '@lumx/react/utils/forwardRef';
 
+import React from 'react';
 import { Emphasis, Icon, Size, Theme, Tooltip, TooltipProps } from '@lumx/react';
 import { BaseButtonProps, ButtonRoot } from '@lumx/react/components/button/ButtonRoot';
-import { Comp } from '@lumx/react/utils/type';
 import { getRootClassName } from '@lumx/react/utils/className';
 
 export interface IconButtonProps extends BaseButtonProps {
@@ -56,7 +56,7 @@ const DEFAULT_PROPS: Partial<IconButtonProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const IconButton: Comp<IconButtonProps, HTMLButtonElement> = forwardRef((props, ref) => {
+export const IconButton = forwardRef<IconButtonProps, HTMLButtonElement>((props, ref) => {
     const { emphasis, image, icon, label, size, theme, tooltipProps, hideTooltip, ...forwardedProps } = props;
 
     return (

@@ -1,10 +1,11 @@
+import { forwardRef } from '@lumx/react/utils/forwardRef';
 import { Icon, IconProps, Size } from '@lumx/react';
 import { CSS_PREFIX } from '@lumx/react/constants';
-import { Comp, GenericProps } from '@lumx/react/utils/type';
+import { GenericProps } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/react/utils/className';
 
 import classNames from 'classnames';
-import React, { FocusEventHandler, forwardRef, KeyboardEventHandler, ReactNode, useCallback } from 'react';
+import React, { FocusEventHandler, KeyboardEventHandler, ReactNode, useCallback } from 'react';
 import { useTabProviderContext } from './state';
 
 /**
@@ -51,7 +52,7 @@ const DEFAULT_PROPS: Partial<TabProps> = {};
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Tab: Comp<TabProps, HTMLButtonElement> = forwardRef((props, ref) => {
+export const Tab = forwardRef<TabProps, HTMLButtonElement>((props, ref) => {
     const {
         className,
         disabled,

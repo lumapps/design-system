@@ -1,9 +1,10 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from '@lumx/react/utils/forwardRef';
+import React from 'react';
 
 import classNames from 'classnames';
 
 import { Theme } from '@lumx/react';
-import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 
 /**
@@ -35,7 +36,7 @@ const DEFAULT_PROPS: Partial<DividerProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Divider: Comp<DividerProps, HTMLHRElement> = forwardRef((props, ref) => {
+export const Divider = forwardRef<DividerProps, HTMLHRElement>((props, ref) => {
     const { className, theme, ...forwardedProps } = props;
 
     return (

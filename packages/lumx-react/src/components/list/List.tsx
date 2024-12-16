@@ -1,12 +1,13 @@
+import { forwardRef } from '@lumx/react/utils/forwardRef';
 import { Size } from '@lumx/react';
 
 import { useKeyboardListNavigation } from '@lumx/react/hooks/useKeyboardListNavigation';
-import { Comp, GenericProps } from '@lumx/react/utils/type';
+import { GenericProps } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
 import classNames from 'classnames';
-import React, { forwardRef, Key, ReactNode, SyntheticEvent, useRef } from 'react';
+import React, { Key, ReactNode, SyntheticEvent, useRef } from 'react';
 import { useInteractiveList } from './useInteractiveList';
 
 /**
@@ -59,7 +60,7 @@ const DEFAULT_PROPS: Partial<ListProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-const InternalList: Comp<ListProps, HTMLUListElement> = forwardRef((props, ref) => {
+const InternalList = forwardRef<ListProps, HTMLUListElement>((props, ref) => {
     const { children, className, isClickable, itemPadding, onListItemSelected, tabIndex, ...forwardedProps } = props;
     const listElementRef = useRef<HTMLUListElement>(null);
 

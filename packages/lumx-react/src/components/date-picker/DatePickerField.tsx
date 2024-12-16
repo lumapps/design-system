@@ -1,7 +1,8 @@
-import React, { forwardRef, SyntheticEvent, useCallback, useRef } from 'react';
+import { forwardRef } from '@lumx/react/utils/forwardRef';
+import React, { SyntheticEvent, useCallback, useRef } from 'react';
 
 import { DatePicker, IconButtonProps, Placement, PopoverDialog, TextField, TextFieldProps } from '@lumx/react';
-import { Comp, GenericProps } from '@lumx/react/utils/type';
+import { GenericProps } from '@lumx/react/utils/type';
 import { getCurrentLocale } from '@lumx/react/utils/locale/getCurrentLocale';
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
 
@@ -40,7 +41,7 @@ const COMPONENT_NAME = 'DatePickerField';
  * @param  ref   Component ref.
  * @return React element.
  */
-export const DatePickerField: Comp<DatePickerFieldProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const DatePickerField = forwardRef<DatePickerFieldProps, HTMLDivElement>((props, ref) => {
     const {
         defaultMonth,
         disabled,

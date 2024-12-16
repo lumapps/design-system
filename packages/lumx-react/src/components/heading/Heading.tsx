@@ -1,7 +1,8 @@
-import { Comp, HeadingElement } from '@lumx/react/utils/type';
+import { forwardRef } from '@lumx/react/utils/forwardRef';
+import { HeadingElement } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import classNames from 'classnames';
-import React, { forwardRef } from 'react';
+import React from 'react';
 import { Text, TextProps } from '../text';
 import { DEFAULT_TYPOGRAPHY_BY_LEVEL } from './constants';
 import { useHeadingLevel } from './useHeadingLevel';
@@ -36,7 +37,7 @@ const DEFAULT_PROPS = {} as const;
  * Extends the `Text` Component with the heading level automatically computed based on
  * the current level provided by the context.
  */
-export const Heading: Comp<HeadingProps> = forwardRef((props, ref) => {
+export const Heading = forwardRef<HeadingProps>((props, ref) => {
     const { children, as, className, ...forwardedProps } = props;
     const { headingElement } = useHeadingLevel();
 
