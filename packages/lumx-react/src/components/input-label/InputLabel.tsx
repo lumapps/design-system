@@ -1,8 +1,11 @@
-import { Theme } from '@lumx/react';
-import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import React, { ReactNode } from 'react';
+
 import classNames from 'classnames';
-import React, { forwardRef, ReactNode } from 'react';
+
+import { Theme } from '@lumx/react';
+import { GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { forwardRef } from '@lumx/react/utils/forwardRef';
 
 /**
  * Defines the props of the component.
@@ -40,7 +43,7 @@ const DEFAULT_PROPS: Partial<InputLabelProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const InputLabel: Comp<InputLabelProps, HTMLLabelElement> = forwardRef((props, ref) => {
+export const InputLabel = forwardRef<InputLabelProps, HTMLLabelElement>((props, ref) => {
     const { children, className, htmlFor, isRequired, theme, ...forwardedProps } = props;
 
     return (

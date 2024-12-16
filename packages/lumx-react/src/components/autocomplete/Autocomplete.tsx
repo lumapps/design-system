@@ -1,13 +1,14 @@
-import React, { forwardRef, ReactNode, SyntheticEvent, useRef } from 'react';
+import React, { ReactNode, SyntheticEvent, useRef } from 'react';
 
 import classNames from 'classnames';
 
 import { Dropdown, DropdownProps, IconButtonProps, Offset, Placement, TextField, TextFieldProps } from '@lumx/react';
 
-import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
+import { forwardRef } from '@lumx/react/utils/forwardRef';
 
 /**
  * Defines the props of the component.
@@ -199,7 +200,7 @@ const DEFAULT_PROPS: Partial<AutocompleteProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Autocomplete: Comp<AutocompleteProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const Autocomplete = forwardRef<AutocompleteProps, HTMLDivElement>((props, ref) => {
     const {
         anchorToInput,
         children,
