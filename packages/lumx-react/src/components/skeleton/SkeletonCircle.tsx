@@ -1,10 +1,12 @@
+import React from 'react';
+
 import classNames from 'classnames';
-import React, { forwardRef } from 'react';
 
 import { GlobalSize, Theme, ColorPalette } from '@lumx/react';
-import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
  * Defines the props of the component.
@@ -35,7 +37,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * @param  ref   Component ref.
  * @return React element.
  */
-export const SkeletonCircle: Comp<SkeletonCircleProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const SkeletonCircle = forwardRef<SkeletonCircleProps, HTMLDivElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
     const { className, size, color, theme = defaultTheme, ...forwardedProps } = props;
 

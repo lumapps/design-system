@@ -1,4 +1,4 @@
-import React, { forwardRef, ReactNode, RefObject, useRef } from 'react';
+import React, { ReactNode, RefObject, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
 import classNames from 'classnames';
@@ -12,6 +12,7 @@ import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/classNam
 import { useMergeRefs } from '@lumx/react/utils/mergeRefs';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { skipRender } from '@lumx/react/utils/skipRender';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { ThemeProvider } from '@lumx/react/utils/theme/ThemeContext';
 import { useRestoreFocusOnClose } from './useRestoreFocusOnClose';
@@ -98,7 +99,7 @@ const renderPopover = (children: ReactNode, usePortal?: boolean): any => {
 };
 
 // Inner component (must be wrapped before export)
-const _InnerPopover: Comp<PopoverProps, HTMLDivElement> = forwardRef((props, ref) => {
+const _InnerPopover = forwardRef<PopoverProps, HTMLDivElement>((props, ref) => {
     const {
         anchorRef,
         as: Component = 'div',

@@ -1,7 +1,9 @@
-import React, { forwardRef, useState } from 'react';
-import { Comp } from '@lumx/react/utils/type';
+import React, { useState } from 'react';
+
 import { addMonthResetDay } from '@lumx/react/utils/date/addMonthResetDay';
 import { isDateValid } from '@lumx/react/utils/date/isDateValid';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+
 import { CLASSNAME, COMPONENT_NAME } from './constants';
 import { DatePickerControlled } from './DatePickerControlled';
 import { DatePickerProps } from './types';
@@ -13,7 +15,7 @@ import { DatePickerProps } from './types';
  * @param  ref   Component ref.
  * @return React element.
  */
-export const DatePicker: Comp<DatePickerProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const DatePicker = forwardRef<DatePickerProps, HTMLDivElement>((props, ref) => {
     const { defaultMonth, locale, value, onChange, ...forwardedProps } = props;
 
     let referenceDate = value || defaultMonth || new Date();

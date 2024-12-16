@@ -1,14 +1,13 @@
-import React, { forwardRef, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 import classNames from 'classnames';
-
 import isObject from 'lodash/isObject';
 
 import { Orientation, Theme, Thumbnail, ThumbnailProps, ThumbnailVariant } from '@lumx/react';
-
-import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
  * Defines the props of the component.
@@ -60,7 +59,7 @@ const DEFAULT_PROPS: Partial<PostBlockProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const PostBlock: Comp<PostBlockProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const PostBlock = forwardRef<PostBlockProps, HTMLDivElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
     const {
         actions,
@@ -89,7 +88,6 @@ export const PostBlock: Comp<PostBlockProps, HTMLDivElement> = forwardRef((props
                     <Thumbnail {...thumbnailProps} theme={theme} variant={ThumbnailVariant.rounded} />
                 </div>
             )}
-
             <div className={`${CLASSNAME}__wrapper`}>
                 {author && <div className={`${CLASSNAME}__author`}>{author}</div>}
 

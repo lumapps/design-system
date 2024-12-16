@@ -3,7 +3,7 @@ import { Icon, Placement, Size, Tooltip, Text } from '@lumx/react';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { ComponentRef, HasClassName, HasPolymorphicAs, HasTheme } from '@lumx/react/utils/type';
 import classNames from 'classnames';
-import { forwardRefPolymorphic } from '@lumx/react/utils/forwardRefPolymorphic';
+import { forwardRefPolymorphic } from '@lumx/react/utils/react/forwardRefPolymorphic';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { useOverflowTooltipLabel } from '@lumx/react/hooks/useOverflowTooltipLabel';
 

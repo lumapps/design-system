@@ -1,9 +1,10 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
-import { Comp, GenericProps } from '@lumx/react/utils/type';
+import { GenericProps } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
  * Defines the props of the component.
@@ -30,7 +31,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * @param  ref   Component ref.
  * @return React element.
  */
-export const SlideshowItem: Comp<SlideshowItemProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const SlideshowItem = forwardRef<SlideshowItemProps, HTMLDivElement>((props, ref) => {
     const { className, children, ...forwardedProps } = props;
     return (
         <div

@@ -1,6 +1,5 @@
 import React, {
     CSSProperties,
-    forwardRef,
     ImgHTMLAttributes,
     KeyboardEventHandler,
     MouseEventHandler,
@@ -9,18 +8,19 @@ import React, {
     Ref,
     useState,
 } from 'react';
+
 import classNames from 'classnames';
 
 import { AspectRatio, HorizontalAlignment, Icon, Size, Theme, ThumbnailObjectFit } from '@lumx/react';
-
-import { Comp, Falsy, GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { Falsy, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
-
 import { mdiImageBroken } from '@lumx/icons';
 import { useMergeRefs } from '@lumx/react/utils/mergeRefs';
 import { useImageLoad } from '@lumx/react/components/thumbnail/useImageLoad';
 import { useFocusPointStyle } from '@lumx/react/components/thumbnail/useFocusPointStyle';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+
 import { FocusPoint, ThumbnailSize, ThumbnailVariant } from './types';
 
 type ImgHTMLProps = ImgHTMLAttributes<HTMLImageElement>;
@@ -98,7 +98,7 @@ const DEFAULT_PROPS: Partial<ThumbnailProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Thumbnail: Comp<ThumbnailProps> = forwardRef((props, ref) => {
+export const Thumbnail = forwardRef<ThumbnailProps>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
     const {
         align,

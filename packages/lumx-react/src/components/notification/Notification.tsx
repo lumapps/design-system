@@ -1,20 +1,18 @@
-import React, { forwardRef, useRef } from 'react';
+import React, { useRef } from 'react';
 import { createPortal } from 'react-dom';
 
 import classNames from 'classnames';
-
 import isFunction from 'lodash/isFunction';
 
 import { Button, Emphasis, Icon, Kind, Size, Theme } from '@lumx/react';
-
 import { DOCUMENT, NOTIFICATION_TRANSITION_DURATION } from '@lumx/react/constants';
 import { NOTIFICATION_CONFIGURATION } from '@lumx/react/components/notification/constants';
-import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
-
 import { useTransitionVisibility } from '@lumx/react/hooks/useTransitionVisibility';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
  * Defines the props of the component.
@@ -64,7 +62,7 @@ const DEFAULT_PROPS: Partial<NotificationProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Notification: Comp<NotificationProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const Notification = forwardRef<NotificationProps, HTMLDivElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
     const {
         actionLabel,

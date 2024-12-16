@@ -1,12 +1,14 @@
-import React, { forwardRef, MouseEventHandler } from 'react';
+import React, { MouseEventHandler } from 'react';
+
 import classNames from 'classnames';
 
 import { AspectRatio, Icon, Size, Theme } from '@lumx/react';
-import { Comp, GenericProps, HasTheme, ValueOf } from '@lumx/react/utils/type';
+import { GenericProps, HasTheme, ValueOf } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
 import { useId } from '@lumx/react/hooks/useId';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
  * Uploader variants.
@@ -76,7 +78,7 @@ const DEFAULT_PROPS: Partial<UploaderProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Uploader: Comp<UploaderProps> = forwardRef((props, ref) => {
+export const Uploader = forwardRef<UploaderProps>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
     const {
         aspectRatio,

@@ -1,4 +1,4 @@
-import React, { Children, forwardRef, ReactElement, ReactNode, Ref, RefObject, useMemo, useRef, useState } from 'react';
+import React, { Children, ReactElement, ReactNode, Ref, RefObject, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import classNames from 'classnames';
@@ -10,11 +10,12 @@ import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { useIntersectionObserver } from '@lumx/react/hooks/useIntersectionObserver';
 
-import { Comp, GenericProps, isComponent } from '@lumx/react/utils/type';
+import { GenericProps, isComponent } from '@lumx/react/utils/type';
 import { partitionMulti } from '@lumx/react/utils/partitionMulti';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { useDisableBodyScroll } from '@lumx/react/hooks/useDisableBodyScroll';
 import { useTransitionVisibility } from '@lumx/react/hooks/useTransitionVisibility';
@@ -92,7 +93,7 @@ const DEFAULT_PROPS: Partial<DialogProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Dialog: Comp<DialogProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const Dialog = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
     if (!DOCUMENT) {
         // Can't render in SSR.
         return null;

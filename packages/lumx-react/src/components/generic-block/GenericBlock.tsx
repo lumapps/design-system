@@ -1,12 +1,15 @@
-import React, { Children, forwardRef, ReactElement, ReactNode } from 'react';
+import React, { Children, ReactElement, ReactNode } from 'react';
+
 import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
 import noop from 'lodash/noop';
+
 import { Comp, isComponentType } from '@lumx/react/utils/type';
 import { getRootClassName } from '@lumx/react/utils/className';
 import { partitionMulti } from '@lumx/react/utils/partitionMulti';
 import { Orientation, Size, FlexBox, FlexBoxProps } from '@lumx/react';
 import { GenericBlockGapSize } from '@lumx/react/components/generic-block/constants';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 export interface GenericBlockProps extends FlexBoxProps {
     /**

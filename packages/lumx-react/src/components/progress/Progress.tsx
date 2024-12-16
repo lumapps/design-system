@@ -1,12 +1,13 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
 import { Theme } from '@lumx/react';
-
-import { Comp, GenericProps, HasTheme, ValueOf } from '@lumx/react/utils/type';
+import { GenericProps, HasTheme, ValueOf } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+
 import { ProgressLinear } from './ProgressLinear';
 import { ProgressCircular } from './ProgressCircular';
 
@@ -49,7 +50,7 @@ const DEFAULT_PROPS: Partial<ProgressProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Progress: Comp<ProgressProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const Progress = forwardRef<ProgressProps, HTMLDivElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
     const { className, theme = defaultTheme, variant, ...forwardedProps } = props;
 

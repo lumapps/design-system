@@ -1,9 +1,12 @@
-import { Alignment, Orientation } from '@lumx/react';
-import { Comp, GenericProps } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import React, { ReactNode } from 'react';
+
 import classNames from 'classnames';
 import castArray from 'lodash/castArray';
-import React, { forwardRef, ReactNode } from 'react';
+
+import { Alignment, Orientation } from '@lumx/react';
+import { GenericProps } from '@lumx/react/utils/type';
+import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { HorizontalAlignment, Size, VerticalAlignment } from '..';
 
 export type MarginAutoAlignment = Extract<Alignment, 'top' | 'bottom' | 'right' | 'left'>;
@@ -55,7 +58,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * @param  ref   Component ref.
  * @return React element.
  */
-export const FlexBox: Comp<FlexBoxProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const FlexBox = forwardRef<FlexBoxProps, HTMLDivElement>((props, ref) => {
     const {
         as: Component = 'div',
         children,

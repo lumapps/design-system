@@ -1,19 +1,17 @@
-import React, { forwardRef, RefObject } from 'react';
+import React, { RefObject } from 'react';
 
 import classNames from 'classnames';
 import lodashIsEmpty from 'lodash/isEmpty';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiCloseCircle, mdiMenuDown } from '@lumx/icons';
-
 import { Emphasis, Size, Theme } from '@lumx/react/components';
 import { IconButton } from '@lumx/react/components/button/IconButton';
 import { Chip } from '@lumx/react/components/chip/Chip';
 import { Icon } from '@lumx/react/components/icon/Icon';
 import { InputLabel } from '@lumx/react/components/input-label/InputLabel';
-
-import { Comp } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { WithSelectContext } from './WithSelectContext';
@@ -171,7 +169,7 @@ const SelectField: React.FC<SelectProps> = (props) => {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Select: Comp<SelectProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const Select = forwardRef<SelectProps, HTMLDivElement>((props, ref) => {
     const isEmpty = lodashIsEmpty(props.value);
     const hasInputClear = props.onClear && props.clearButtonProps && !isEmpty;
 

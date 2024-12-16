@@ -1,11 +1,13 @@
-import React, { forwardRef, MouseEventHandler, useMemo } from 'react';
+import React, { MouseEventHandler, useMemo } from 'react';
 
-import { Alignment, AspectRatio, Theme, Thumbnail, ThumbnailProps } from '@lumx/react';
-import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import classNames from 'classnames';
 import take from 'lodash/take';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
+
+import { Alignment, AspectRatio, Theme, Thumbnail, ThumbnailProps } from '@lumx/react';
+import { GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
  * Defines the props of the component.
@@ -39,7 +41,7 @@ const DEFAULT_PROPS: Partial<MosaicProps> = {};
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Mosaic: Comp<MosaicProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const Mosaic = forwardRef<MosaicProps, HTMLDivElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
     const { className, theme = defaultTheme, thumbnails, onImageClick, ...forwardedProps } = props;
     const handleImageClick = useMemo(() => {

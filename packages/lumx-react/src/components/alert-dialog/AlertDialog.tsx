@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
@@ -14,11 +14,10 @@ import {
     Toolbar,
     ButtonProps,
 } from '@lumx/react';
-
 import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiInformation } from '@lumx/icons';
-import { Comp } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { useId } from '@lumx/react/hooks/useId';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 export interface AlertDialogProps extends Omit<DialogProps, 'header' | 'footer'> {
     /** Message variant. */
@@ -77,7 +76,7 @@ const DEFAULT_PROPS: Partial<DialogProps> = {
  * It should not have a complex content.
  * Children of this component should only be strings, paragraphs or links.
  */
-export const AlertDialog: Comp<AlertDialogProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const AlertDialog = forwardRef<AlertDialogProps, HTMLDivElement>((props, ref) => {
     const { id, title, className, cancelProps, confirmProps, kind, size, dialogProps, children, ...forwardedProps } =
         props;
 

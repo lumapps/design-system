@@ -1,13 +1,14 @@
-import React, { cloneElement, forwardRef, useMemo, useRef } from 'react';
+import React, { cloneElement, useMemo, useRef } from 'react';
 
 import classNames from 'classnames';
 
 import { List, ListProps } from '@lumx/react/components/list/List';
 import { Popover, PopoverProps } from '@lumx/react/components/popover/Popover';
 import { useInfiniteScroll } from '@lumx/react/hooks/useInfiniteScroll';
-import { Comp, GenericProps, isComponent } from '@lumx/react/utils/type';
+import { GenericProps, isComponent } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { Offset, Placement } from '@lumx/react/components/popover/constants';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
  * Defines the props of the component.
@@ -113,7 +114,7 @@ const DEFAULT_PROPS: Partial<DropdownProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Dropdown: Comp<DropdownProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const Dropdown = forwardRef<DropdownProps, HTMLDivElement>((props, ref) => {
     const {
         anchorRef,
         children,

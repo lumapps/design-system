@@ -1,4 +1,4 @@
-import React, { Children, forwardRef, PropsWithChildren, ReactNode, useEffect, useRef, useState } from 'react';
+import React, { Children, PropsWithChildren, ReactNode, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -9,12 +9,13 @@ import isEmpty from 'lodash/isEmpty';
 import isFunction from 'lodash/isFunction';
 
 import { ColorPalette, DragHandle, Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
-import { Comp, GenericProps, HasTheme, isComponent } from '@lumx/react/utils/type';
+import { GenericProps, HasTheme, isComponent } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { partitionMulti } from '@lumx/react/utils/partitionMulti';
 import { useTransitionVisibility } from '@lumx/react/hooks/useTransitionVisibility';
 import { EXPANSION_PANEL_TRANSITION_DURATION } from '@lumx/core/js/constants';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
  * Defines the props of the component.
@@ -65,7 +66,7 @@ const isFooter = isComponent('footer');
  * @param  ref   Component ref.
  * @return React element.
  */
-export const ExpansionPanel: Comp<ExpansionPanelProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const ExpansionPanel = forwardRef<ExpansionPanelProps, HTMLDivElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
     const {
         className,

@@ -1,10 +1,12 @@
-import { useTabProviderContext } from '@lumx/react/components/tabs/state';
-import { CSS_PREFIX } from '@lumx/react/constants';
-import { Comp, GenericProps } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/react/utils/className';
+import React from 'react';
 
 import classNames from 'classnames';
-import React, { forwardRef } from 'react';
+
+import { useTabProviderContext } from '@lumx/react/components/tabs/state';
+import { CSS_PREFIX } from '@lumx/react/constants';
+import { GenericProps } from '@lumx/react/utils/type';
+import { handleBasicClasses } from '@lumx/react/utils/className';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
  * Defines the props of the component.
@@ -40,28 +42,26 @@ const DEFAULT_PROPS: Partial<ProgressTrackerStepPanelProps> = {};
  * @param  ref   Component ref.
  * @return React element.
  */
-export const ProgressTrackerStepPanel: Comp<ProgressTrackerStepPanelProps, HTMLDivElement> = forwardRef(
-    (props, ref) => {
-        const { children, id, className, isActive: propIsActive, ...forwardedProps } = props;
+export const ProgressTrackerStepPanel = forwardRef<ProgressTrackerStepPanelProps, HTMLDivElement>((props, ref) => {
+    const { children, id, className, isActive: propIsActive, ...forwardedProps } = props;
 
-        const state = useTabProviderContext('tabPanel', id);
-        const isActive = propIsActive || state?.isActive;
+    const state = useTabProviderContext('tabPanel', id);
+    const isActive = propIsActive || state?.isActive;
 
-        return (
-            <div
-                ref={ref}
-                {...forwardedProps}
-                id={state?.tabPanelId}
-                className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, isActive }))}
-                role="tabpanel"
-                tabIndex={isActive ? 0 : -1}
-                aria-labelledby={state?.tabId}
-            >
-                {(!state?.isLazy || isActive) && children}
-            </div>
-        );
-    },
-);
+    return (
+        <div
+            ref={ref}
+            {...forwardedProps}
+            id={state?.tabPanelId}
+            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, isActive }))}
+            role="tabpanel"
+            tabIndex={isActive ? 0 : -1}
+            aria-labelledby={state?.tabId}
+        >
+            {(!state?.isLazy || isActive) && children}
+        </div>
+    );
+});
 ProgressTrackerStepPanel.displayName = COMPONENT_NAME;
 ProgressTrackerStepPanel.className = CLASSNAME;
 ProgressTrackerStepPanel.defaultProps = DEFAULT_PROPS;

@@ -1,5 +1,7 @@
-import React, { KeyboardEventHandler, forwardRef } from 'react';
+import React, { KeyboardEventHandler } from 'react';
+
 import classNames from 'classnames';
+
 import {
     Button,
     DatePickerProps,
@@ -12,7 +14,6 @@ import {
     Toolbar,
 } from '@lumx/react';
 import { mdiChevronLeft, mdiChevronRight } from '@lumx/icons';
-import { Comp } from '@lumx/react/utils/type';
 import { getMonthCalendar } from '@lumx/react/utils/date/getMonthCalendar';
 import { isSameDay } from '@lumx/react/utils/date/isSameDay';
 import { getCurrentLocale } from '@lumx/react/utils/locale/getCurrentLocale';
@@ -24,6 +25,8 @@ import { onEnterPressed } from '@lumx/react/utils/event';
 import { addMonthResetDay } from '@lumx/react/utils/date/addMonthResetDay';
 import { formatDayNumber } from '@lumx/react/utils/date/formatDayNumber';
 import { VISUALLY_HIDDEN } from '@lumx/react/constants';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+
 import { CLASSNAME } from './constants';
 
 /**
@@ -52,7 +55,7 @@ const COMPONENT_NAME = 'DatePickerControlled';
  * @param  ref   Component ref.
  * @return React element.
  */
-export const DatePickerControlled: Comp<DatePickerControlledProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const DatePickerControlled = forwardRef<DatePickerControlledProps, HTMLDivElement>((props, ref) => {
     const {
         locale = getCurrentLocale(),
         maxDate,

@@ -1,4 +1,4 @@
-import React, { forwardRef, ReactNode, useRef, useState, useContext } from 'react';
+import React, { useRef, useState, useContext } from 'react';
 
 import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
 import { Icon, Size, Text, Orientation, Popover, Placement, Theme } from '@lumx/react';
@@ -7,17 +7,18 @@ import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/classNam
 import { HasClassName } from '@lumx/react/utils/type';
 import { ThemeProvider, useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { useId } from '@lumx/react/hooks/useId';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { CLASSNAME as ITEM_CLASSNAME } from './NavigationItem';
 import { NavigationContext } from './context';
 
 export interface NavigationSectionProps extends React.ComponentPropsWithoutRef<'button'>, HasClassName {
     /** Items inside the section */
-    children: ReactNode;
+    children: React.ReactNode;
     /** Icon (SVG path). */
     icon?: string;
     /** Label content. */
-    label: string | ReactNode;
+    label: string | React.ReactNode;
 }
 
 /**
@@ -30,81 +31,77 @@ const COMPONENT_NAME = 'NavigationSection';
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
-export const NavigationSection = Object.assign(
-    forwardRef<HTMLLIElement, NavigationSectionProps>((props, ref) => {
-        const { children, className, label, icon, ...forwardedProps } = props;
-        const [isOpen, setIsOpen] = useState(false);
-        const buttonRef = useRef<HTMLButtonElement>(null);
-        const sectionId = useId();
-        const { orientation } = useContext(NavigationContext) || {};
-        const theme = useTheme();
-        const isDropdown = orientation === Orientation.horizontal;
-        return (
-            <li
-                className={classNames(
-                    className,
-                    CLASSNAME,
-                    ITEM_CLASSNAME,
-                    handleBasicClasses({
-                        prefix: ITEM_CLASSNAME,
-                        theme,
-                    }),
-                )}
-                ref={ref}
+export const NavigationSection = forwardRef<NavigationSectionProps, HTMLLIElement>((props, ref) => {
+    const { children, className, label, icon, ...forwardedProps } = props;
+    const [isOpen, setIsOpen] = useState(false);
+    const buttonRef = useRef<HTMLButtonElement>(null);
+    const sectionId = useId();
+    const { orientation } = useContext(NavigationContext) || {};
+    const theme = useTheme();
+    const isDropdown = orientation === Orientation.horizontal;
+    return (
+        <li
+            className={classNames(
+                className,
+                CLASSNAME,
+                ITEM_CLASSNAME,
+                handleBasicClasses({
+                    prefix: ITEM_CLASSNAME,
+                    theme,
+                }),
+            )}
+            ref={ref}
+        >
+            <button
+                {...forwardedProps}
+                aria-controls={sectionId}
+                aria-expanded={isOpen}
+                className={classNames(`${ITEM_CLASSNAME}__link`)}
+                ref={buttonRef}
+                onClick={(event) => {
+                    setIsOpen(!isOpen);
+                    event.stopPropagation();
+                }}
+                type="button"
             >
-                <button
-                    {...forwardedProps}
-                    aria-controls={sectionId}
-                    aria-expanded={isOpen}
-                    className={classNames(`${ITEM_CLASSNAME}__link`)}
-                    ref={buttonRef}
-                    onClick={(event) => {
-                        setIsOpen(!isOpen);
-                        event.stopPropagation();
-                    }}
-                    type="button"
-                >
-                    {icon ? <Icon className={`${ITEM_CLASSNAME}__icon`} icon={icon} size={Size.xs} /> : null}
+                {icon ? <Icon className={`${ITEM_CLASSNAME}__icon`} icon={icon} size={Size.xs} /> : null}
 
-                    <Text as="span" truncate className={`${ITEM_CLASSNAME}__label`} ref={ref}>
-                        {label}
-                    </Text>
-                    <Icon
-                        className={classNames(`${ITEM_CLASSNAME}__icon`, `${CLASSNAME}__chevron`)}
-                        icon={isOpen ? mdiChevronUp : mdiChevronDown}
-                    />
-                </button>
-                {isOpen &&
-                    (isDropdown ? (
-                        <Popover
-                            anchorRef={buttonRef}
-                            isOpen={isOpen}
-                            placement={Placement.BOTTOM_START}
-                            usePortal={false}
-                            closeOnClickAway
-                            closeOnEscape
-                            onClick={() => setIsOpen(false)}
-                            onClose={() => setIsOpen(false)}
-                            zIndex={996}
-                        >
-                            <ThemeProvider value={Theme.light}>
-                                <ul className={`${CLASSNAME}__drawer--popover`} id={sectionId}>
-                                    <NavigationContext.Provider value={{ orientation: Orientation.vertical }}>
-                                        {children}
-                                    </NavigationContext.Provider>
-                                </ul>
-                            </ThemeProvider>
-                        </Popover>
-                    ) : (
-                        <ul className={`${CLASSNAME}__drawer`} id={sectionId}>
-                            {children}
-                        </ul>
-                    ))}
-            </li>
-        );
-    }),
-    {
-        displayName: COMPONENT_NAME,
-        className: CLASSNAME,
-    },
-);
+                <Text as="span" truncate className={`${ITEM_CLASSNAME}__label`} ref={ref}>
+                    {label}
+                </Text>
+                <Icon
+                    className={classNames(`${ITEM_CLASSNAME}__icon`, `${CLASSNAME}__chevron`)}
+                    icon={isOpen ? mdiChevronUp : mdiChevronDown}
+                />
+            </button>
+            {isOpen &&
+                (isDropdown ? (
+                    <Popover
+                        anchorRef={buttonRef}
+                        isOpen={isOpen}
+                        placement={Placement.BOTTOM_START}
+                        usePortal={false}
+                        closeOnClickAway
+                        closeOnEscape
+                        onClick={() => setIsOpen(false)}
+                        onClose={() => setIsOpen(false)}
+                        zIndex={996}
+                    >
+                        <ThemeProvider value={Theme.light}>
+                            <ul className={`${CLASSNAME}__drawer--popover`} id={sectionId}>
+                                <NavigationContext.Provider value={{ orientation: Orientation.vertical }}>
+                                    {children}
+                                </NavigationContext.Provider>
+                            </ul>
+                        </ThemeProvider>
+                    </Popover>
+                ) : (
+                    <ul className={`${CLASSNAME}__drawer`} id={sectionId}>
+                        {children}
+                    </ul>
+                ))}
+        </li>
+    );
+});
+NavigationSection.displayName = COMPONENT_NAME;
+NavigationSection.className = CLASSNAME;
