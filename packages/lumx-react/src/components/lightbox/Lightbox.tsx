@@ -1,4 +1,4 @@
-import React, { forwardRef, RefObject, useRef, useEffect, AriaAttributes } from 'react';
+import React, { RefObject, useRef, useEffect, AriaAttributes } from 'react';
 
 import classNames from 'classnames';
 import { createPortal } from 'react-dom';
@@ -6,7 +6,7 @@ import { createPortal } from 'react-dom';
 import { mdiClose } from '@lumx/icons';
 import { IconButton, IconButtonProps } from '@lumx/react';
 import { DIALOG_TRANSITION_DURATION, DOCUMENT } from '@lumx/react/constants';
-import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
@@ -16,6 +16,7 @@ import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { useTransitionVisibility } from '@lumx/react/hooks/useTransitionVisibility';
 import { ThemeProvider } from '@lumx/react/utils/theme/ThemeContext';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
  * Defines the props of the component.
@@ -55,7 +56,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Lightbox: Comp<LightboxProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const Lightbox = forwardRef<LightboxProps, HTMLDivElement>((props, ref) => {
     const {
         'aria-labelledby': propAriaLabelledBy,
         ariaLabelledBy = propAriaLabelledBy,

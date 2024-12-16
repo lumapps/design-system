@@ -1,11 +1,12 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
-import { ColorPalette, ColorVariant, Size, Theme } from '@lumx/react';
-import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { mdiAlertCircle } from '@lumx/icons';
+import { ColorPalette, ColorVariant, Size, Theme } from '@lumx/react';
+import { GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
 export type IconSizes = Extract<Size, 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl'>;
@@ -53,7 +54,7 @@ const DEFAULT_PROPS: Partial<IconProps> = {};
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Icon: Comp<IconProps, HTMLElement> = forwardRef((props, ref) => {
+export const Icon = forwardRef<IconProps, HTMLElement>((props, ref) => {
     const defaultTheme = useTheme();
     const {
         className,

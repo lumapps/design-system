@@ -1,12 +1,14 @@
-import React, { forwardRef, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
 
 import { Emphasis, Icon, Size, Theme, Text } from '@lumx/react';
-import { Comp, isComponent } from '@lumx/react/utils/type';
+import { isComponent } from '@lumx/react/utils/type';
 import { getBasicClass, getRootClassName } from '@lumx/react/utils/className';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+
 import { BaseButtonProps, ButtonRoot } from './ButtonRoot';
 
 /**
@@ -54,7 +56,7 @@ const DEFAULT_PROPS: Partial<ButtonProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Button: Comp<ButtonProps, HTMLButtonElement | HTMLAnchorElement> = forwardRef((props, ref) => {
+export const Button = forwardRef<ButtonProps, HTMLButtonElement | HTMLAnchorElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
     const { children, className, emphasis, leftIcon, rightIcon, size, theme = defaultTheme, ...forwardedProps } = props;
 

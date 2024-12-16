@@ -1,13 +1,14 @@
-import React, { forwardRef, RefObject, useMemo } from 'react';
+import React, { RefObject, useMemo } from 'react';
 
 import isEmpty from 'lodash/isEmpty';
 
 import classNames from 'classnames';
 
 import { ColorPalette, ColorVariant, Icon, Size, Typography } from '@lumx/react';
-import { Comp, GenericProps } from '@lumx/react/utils/type';
+import { GenericProps } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { renderLink } from '@lumx/react/utils/renderLink';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 type HTMLAnchorProps = React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
 
@@ -82,7 +83,7 @@ const getIconSize = (typography?: Typography) => {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Link: Comp<LinkProps, HTMLAnchorElement | HTMLButtonElement> = forwardRef((props, ref) => {
+export const Link = forwardRef<LinkProps, HTMLAnchorElement | HTMLButtonElement>((props, ref) => {
     const {
         children,
         className,

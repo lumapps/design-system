@@ -1,15 +1,16 @@
-import React, { forwardRef, InputHTMLAttributes, ReactNode, SyntheticEvent } from 'react';
+import React, { InputHTMLAttributes, ReactNode, SyntheticEvent } from 'react';
 
 import classNames from 'classnames';
 
 import { mdiCheck, mdiMinus } from '@lumx/icons';
 
 import { Icon, InputHelper, InputLabel, Theme } from '@lumx/react';
-import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { useId } from '@lumx/react/hooks/useId';
 import { useMergeRefs } from '@lumx/react/utils/mergeRefs';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
  * Intermediate state of checkbox.
@@ -64,7 +65,7 @@ const DEFAULT_PROPS: Partial<CheckboxProps> = {};
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Checkbox: Comp<CheckboxProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const Checkbox = forwardRef<CheckboxProps, HTMLDivElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
     const {
         checked,

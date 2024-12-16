@@ -1,10 +1,11 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
 import { Alignment } from '@lumx/react';
-import { Comp, GenericProps } from '@lumx/react/utils/type';
+import { GenericProps } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 type Columns = '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | '11' | '12';
 
@@ -37,7 +38,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * @param  ref   Component ref.
  * @return React element.
  */
-export const GridItem: Comp<GridItemProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const GridItem = forwardRef<GridItemProps, HTMLDivElement>((props, ref) => {
     const { children, className, width, align, order, ...forwardedProps } = props;
 
     return (

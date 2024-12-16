@@ -1,13 +1,13 @@
-import React, { FocusEventHandler, forwardRef, KeyboardEventHandler, useCallback } from 'react';
+import React, { FocusEventHandler, KeyboardEventHandler, useCallback } from 'react';
 
 import classNames from 'classnames';
 
-import { Icon, InputHelper, InputLabel, Kind, Size } from '@lumx/react';
-
-import { Comp, GenericProps } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
-
 import { mdiAlertCircle, mdiCheckCircle, mdiRadioboxBlank, mdiRadioboxMarked } from '@lumx/icons';
+import { Icon, InputHelper, InputLabel, Kind, Size } from '@lumx/react';
+import { GenericProps } from '@lumx/react/utils/type';
+import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+
 import { useTabProviderContext } from '../tabs/state';
 
 /**
@@ -56,7 +56,7 @@ const DEFAULT_PROPS: Partial<ProgressTrackerStepProps> = {};
  * @param  ref   Component ref.
  * @return React element.
  */
-export const ProgressTrackerStep: Comp<ProgressTrackerStepProps, HTMLButtonElement> = forwardRef((props, ref) => {
+export const ProgressTrackerStep = forwardRef<ProgressTrackerStepProps, HTMLButtonElement>((props, ref) => {
     const {
         className,
         disabled,

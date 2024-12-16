@@ -1,4 +1,4 @@
-import React, { AriaAttributes, ButtonHTMLAttributes, DetailedHTMLProps, forwardRef, RefObject } from 'react';
+import React, { AriaAttributes, ButtonHTMLAttributes, DetailedHTMLProps, RefObject } from 'react';
 
 import isEmpty from 'lodash/isEmpty';
 
@@ -6,9 +6,10 @@ import classNames from 'classnames';
 
 import { ColorPalette, Emphasis, Size, Theme } from '@lumx/react';
 import { CSS_PREFIX } from '@lumx/react/constants';
-import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/react/utils/className';
 import { renderLink } from '@lumx/react/utils/renderLink';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 type HTMLButtonProps = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
 
@@ -94,7 +95,7 @@ const renderButtonWrapper: React.FC<ButtonRootProps> = (props) => {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const ButtonRoot: Comp<ButtonRootProps, HTMLButtonElement | HTMLAnchorElement> = forwardRef((props, ref) => {
+export const ButtonRoot = forwardRef<ButtonRootProps, HTMLButtonElement | HTMLAnchorElement>((props, ref) => {
     const {
         'aria-label': ariaLabel,
         children,

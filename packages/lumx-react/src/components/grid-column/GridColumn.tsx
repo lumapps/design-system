@@ -1,12 +1,12 @@
-import React, { forwardRef, ReactElement, ReactNode } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 
 import isInteger from 'lodash/isInteger';
-
 import classNames from 'classnames';
 
-import { Comp, GenericProps } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { Size } from '@lumx/react';
+import { GenericProps } from '@lumx/react/utils/type';
+import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 export type GridColumnGapSize = Extract<Size, 'tiny' | 'regular' | 'big' | 'huge'>;
 
@@ -50,7 +50,7 @@ const DEFAULT_PROPS: Partial<GridColumnProps> = {};
  * @param ref Component ref.
  * @return React element.
  */
-export const GridColumn: Comp<GridColumnProps> = forwardRef((props, ref): ReactElement => {
+export const GridColumn = forwardRef<GridColumnProps>((props, ref): ReactElement => {
     const {
         as: Component = 'div',
         gap,

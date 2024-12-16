@@ -1,10 +1,11 @@
-import { HorizontalAlignment } from '@lumx/react/components';
-import React, { forwardRef, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 import classNames from 'classnames';
 
-import { Comp, GenericProps } from '@lumx/react/utils/type';
+import { HorizontalAlignment } from '@lumx/react/components';
+import { GenericProps } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { useChipGroupNavigation } from '@lumx/react/hooks/useChipGroupNavigation';
 
@@ -43,7 +44,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * @param  ref   Component ref.
  * @return React element.
  */
-const InternalChipGroup: Comp<ChipGroupProps, HTMLDivElement> = forwardRef((props, ref) => {
+const InternalChipGroup = forwardRef<ChipGroupProps, HTMLDivElement>((props, ref) => {
     const { align, children, className, ...forwardedProps } = props;
     const chipGroupClassName = handleBasicClasses({
         prefix: CLASSNAME,

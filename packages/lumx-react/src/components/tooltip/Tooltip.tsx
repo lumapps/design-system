@@ -1,17 +1,18 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { forwardRef, ReactNode, useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import classNames from 'classnames';
 
 import { DOCUMENT, VISUALLY_HIDDEN } from '@lumx/react/constants';
-import { Comp, GenericProps, HasCloseMode } from '@lumx/react/utils/type';
+import { GenericProps, HasCloseMode } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { useMergeRefs } from '@lumx/react/utils/mergeRefs';
 import { Placement } from '@lumx/react/components/popover';
 import { TooltipContextProvider } from '@lumx/react/components/tooltip/context';
 import { useId } from '@lumx/react/hooks/useId';
 import { usePopper } from '@lumx/react/hooks/usePopper';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { ARIA_LINK_MODES, TOOLTIP_ZINDEX } from '@lumx/react/components/tooltip/constants';
 import { useInjectTooltipRef } from './useInjectTooltipRef';
@@ -70,7 +71,7 @@ const ARROW_SIZE = 8;
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Tooltip: Comp<TooltipProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const Tooltip = forwardRef<TooltipProps, HTMLDivElement>((props, ref) => {
     const {
         label,
         children,

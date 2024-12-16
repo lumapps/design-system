@@ -1,15 +1,14 @@
-import React, { Children, forwardRef, InputHTMLAttributes, SyntheticEvent } from 'react';
+import React, { Children, InputHTMLAttributes, SyntheticEvent } from 'react';
 
 import classNames from 'classnames';
-
 import isEmpty from 'lodash/isEmpty';
 
 import { Alignment, InputHelper, InputLabel, Theme } from '@lumx/react';
-
-import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { useId } from '@lumx/react/hooks/useId';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
  * Defines the props of the component.
@@ -57,7 +56,7 @@ const DEFAULT_PROPS: Partial<SwitchProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Switch: Comp<SwitchProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const Switch = forwardRef<SwitchProps, HTMLDivElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
     const {
         checked,

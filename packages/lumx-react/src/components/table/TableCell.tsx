@@ -1,12 +1,12 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
-import { Icon, Size } from '@lumx/react';
-import { Comp, GenericProps, ValueOf } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
-
 import { mdiArrowDown, mdiArrowUp } from '@lumx/icons';
+import { Icon, Size } from '@lumx/react';
+import { GenericProps, ValueOf } from '@lumx/react/utils/type';
+import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
  * Table head cell sort order.
@@ -60,7 +60,7 @@ const DEFAULT_PROPS: Partial<TableCellProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const TableCell: Comp<TableCellProps, HTMLTableCellElement> = forwardRef((props, ref) => {
+export const TableCell = forwardRef<TableCellProps, HTMLTableCellElement>((props, ref) => {
     const { children, className, icon, isSortable, onHeaderClick, sortOrder, variant, ...forwardedProps } = props;
 
     // Use button if clickable

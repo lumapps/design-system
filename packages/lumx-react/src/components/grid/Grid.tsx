@@ -1,10 +1,11 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
 import { Alignment, Orientation, Size } from '@lumx/react';
-import { Comp, GenericProps } from '@lumx/react/utils/type';
+import { GenericProps } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 type GridGutterSize = Extract<Size, 'regular' | 'big' | 'huge'>;
 
@@ -49,7 +50,7 @@ const DEFAULT_PROPS: Partial<GridProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Grid: Comp<GridProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const Grid = forwardRef<GridProps, HTMLDivElement>((props, ref) => {
     const { children, className, gutter, hAlign, orientation, vAlign, wrap, ...forwardedProps } = props;
 
     return (

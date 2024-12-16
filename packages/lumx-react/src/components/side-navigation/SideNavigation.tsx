@@ -1,12 +1,12 @@
-import React, { Children, forwardRef, ReactNode } from 'react';
+import React, { Children, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
 import { SideNavigationItem, Theme } from '@lumx/react';
-
-import { Comp, GenericProps, HasTheme, isComponent } from '@lumx/react/utils/type';
+import { GenericProps, HasTheme, isComponent } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
  * Defines the props of the component.
@@ -33,7 +33,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * @param  ref   Component ref.
  * @return React element.
  */
-export const SideNavigation: Comp<SideNavigationProps, HTMLUListElement> = forwardRef((props, ref) => {
+export const SideNavigation = forwardRef<SideNavigationProps, HTMLUListElement>((props, ref) => {
     const defaultTheme = useTheme();
     const { children, className, theme = defaultTheme, ...forwardedProps } = props;
     const content = Children.toArray(children).filter(isComponent(SideNavigationItem));

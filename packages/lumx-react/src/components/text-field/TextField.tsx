@@ -1,4 +1,4 @@
-import React, { forwardRef, ReactNode, Ref, RefObject, SyntheticEvent, useEffect, useRef, useState } from 'react';
+import React, { ReactNode, Ref, RefObject, SyntheticEvent, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 import get from 'lodash/get';
@@ -16,11 +16,12 @@ import {
     Size,
     Theme,
 } from '@lumx/react';
-import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 import { useId } from '@lumx/react/hooks/useId';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
  * Defines the props of the component.
@@ -254,7 +255,7 @@ const renderInputNative: React.FC<InputNativeProps> = (props) => {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const TextField: Comp<TextFieldProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const TextField = forwardRef<TextFieldProps, HTMLDivElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
     const {
         chips,

@@ -1,8 +1,11 @@
-import { ColorPalette } from '@lumx/react';
-import { Comp, GenericProps } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import React, { ReactNode } from 'react';
+
 import classNames from 'classnames';
-import React, { forwardRef, ReactNode } from 'react';
+
+import { ColorPalette } from '@lumx/react';
+import { GenericProps } from '@lumx/react/utils/type';
+import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
  * Defines the props of the component.
@@ -38,7 +41,7 @@ const DEFAULT_PROPS: Partial<BadgeProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Badge: Comp<BadgeProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const Badge = forwardRef<BadgeProps, HTMLDivElement>((props, ref) => {
     const { children, className, color, ...forwardedProps } = props;
     return (
         <div

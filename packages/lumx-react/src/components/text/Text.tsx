@@ -1,16 +1,18 @@
-import React, { Children, Fragment, forwardRef } from 'react';
+import React, { Children, Fragment } from 'react';
+
+import classNames from 'classnames';
 
 import { Icon, ColorPalette, ColorVariant, Typography, WhiteSpace } from '@lumx/react';
-import { Comp, GenericProps, TextElement, isComponent } from '@lumx/react/utils/type';
+import { GenericProps, TextElement, isComponent } from '@lumx/react/utils/type';
 import {
     getFontColorClassName,
     getRootClassName,
     handleBasicClasses,
     getTypographyClassName,
 } from '@lumx/react/utils/className';
-import classNames from 'classnames';
 import { useOverflowTooltipLabel } from '@lumx/react/hooks/useOverflowTooltipLabel';
 import { useMergeRefs } from '@lumx/react/utils/mergeRefs';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
  * Defines the props of the component.
@@ -73,7 +75,7 @@ const DEFAULT_PROPS = {} as const;
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Text: Comp<TextProps> = forwardRef((props, ref) => {
+export const Text = forwardRef<TextProps>((props, ref) => {
     const {
         as: Component,
         children,

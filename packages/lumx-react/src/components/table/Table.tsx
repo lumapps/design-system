@@ -1,12 +1,12 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
 import { Theme } from '@lumx/react';
-
-import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
  * Defines the props of the component.
@@ -40,7 +40,7 @@ const DEFAULT_PROPS: Partial<TableProps> = {};
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Table: Comp<TableProps, HTMLTableElement> = forwardRef((props, ref) => {
+export const Table = forwardRef<TableProps, HTMLTableElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
     const { children, className, hasBefore, hasDividers, theme = defaultTheme, ...forwardedProps } = props;
 

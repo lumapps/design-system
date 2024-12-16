@@ -1,10 +1,11 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
-
-import { Comp, GenericProps } from '@lumx/react/utils/type';
+import { GenericProps } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+
 import { useSlideFocusManagement } from './useSlideFocusManagement';
 
 /**
@@ -35,7 +36,7 @@ export const buildSlideShowGroupId = (slidesId: string, index: number) => `${sli
  * @param  ref   Component ref.
  * @return React element.
  */
-export const SlideshowItemGroup: Comp<SlideshowItemGroupProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const SlideshowItemGroup = forwardRef<SlideshowItemGroupProps, HTMLDivElement>((props, ref) => {
     const { className, children, role = 'group', label, isDisplayed, ...forwardedProps } = props;
     const groupRef = React.useRef<HTMLDivElement>(null);
 

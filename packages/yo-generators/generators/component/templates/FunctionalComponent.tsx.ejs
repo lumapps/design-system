@@ -1,14 +1,14 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
-import { Comp, GenericProps } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { forwardRef } from "@lumx/react/utils/react/forwardRef";
 
 /**
  * Defines the props of the component.
  */
-export interface <%= componentName %>Props extends GenericProps {}
+export interface <%= componentName %>Props {}
 
 /**
  * Component display name.
@@ -28,7 +28,7 @@ const DEFAULT_PROPS: Partial<<%= componentName %>Props> = {};
 /**
  * [Enter the description of the component here].
  */
-export const <%= componentName %>: Comp<<%= componentName %>Props, HTMLDivElement> = forwardRef((props, ref) => {
+export const <%= componentName %> = forwardRef<<%= componentName %>Props, HTMLDivElement>((props, ref) => {
     const { children, className, ...forwardedProps } = props;
 
     return (

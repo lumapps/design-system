@@ -1,8 +1,11 @@
+import React, { ReactElement, ReactNode } from 'react';
+
+import classNames from 'classnames';
+
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { DEFAULT_PROPS } from '@lumx/react/components/select/WithSelectContext';
-import { Comp, GenericProps } from '@lumx/react/utils/type';
-import classNames from 'classnames';
-import React, { forwardRef, ReactElement, ReactNode } from 'react';
+import { GenericProps } from '@lumx/react/utils/type';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 export interface BadgeWrapperProps extends GenericProps {
     /** Badge. */
@@ -21,7 +24,7 @@ const COMPONENT_NAME = 'BadgeWrapper';
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
-export const BadgeWrapper: Comp<BadgeWrapperProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const BadgeWrapper = forwardRef<BadgeWrapperProps, HTMLDivElement>((props, ref) => {
     const { badge, children, className, ...forwardedProps } = props;
 
     return (

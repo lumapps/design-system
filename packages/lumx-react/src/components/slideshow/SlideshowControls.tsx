@@ -1,15 +1,16 @@
-import React, { forwardRef, RefObject, useCallback, useMemo } from 'react';
+import React, { RefObject, useCallback, useMemo } from 'react';
 
 import classNames from 'classnames';
 import range from 'lodash/range';
 
 import { mdiChevronLeft, mdiChevronRight, mdiPlayCircleOutline, mdiPauseCircleOutline } from '@lumx/icons';
 import { Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
-import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { WINDOW } from '@lumx/react/constants';
 import { useSlideshowControls, DEFAULT_OPTIONS } from '@lumx/react/hooks/useSlideshowControls';
 import { useRovingTabIndex } from '@lumx/react/hooks/useRovingTabIndex';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { useSwipeNavigate } from './useSwipeNavigate';
@@ -80,7 +81,7 @@ const DEFAULT_PROPS: Partial<SlideshowControlsProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-const InternalSlideshowControls: Comp<SlideshowControlsProps, HTMLDivElement> = forwardRef((props, ref) => {
+const InternalSlideshowControls = forwardRef<SlideshowControlsProps, HTMLDivElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
     const {
         activeIndex,

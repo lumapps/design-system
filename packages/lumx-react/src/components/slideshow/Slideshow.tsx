@@ -1,11 +1,13 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 
 import { SlideshowControls, SlideshowControlsProps, Theme, Slides, SlidesProps } from '@lumx/react';
 import { DEFAULT_OPTIONS } from '@lumx/react/hooks/useSlideshowControls';
-import { Comp, GenericProps } from '@lumx/react/utils/type';
+import { GenericProps } from '@lumx/react/utils/type';
 import { useFocusWithin } from '@lumx/react/hooks/useFocusWithin';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+
 import { buildSlideShowGroupId } from './SlideshowItemGroup';
 
 /**
@@ -51,7 +53,7 @@ const DEFAULT_PROPS: Partial<SlideshowProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Slideshow: Comp<SlideshowProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const Slideshow = forwardRef<SlideshowProps, HTMLDivElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
     const {
         activeIndex,

@@ -1,12 +1,15 @@
-import { Alignment, Theme } from '@lumx/react';
-import { CSS_PREFIX } from '@lumx/react/constants';
-import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/react/utils/className';
-import { mergeRefs } from '@lumx/react/utils/mergeRefs';
+import React, { ReactNode } from 'react';
 
 import classNames from 'classnames';
-import React, { forwardRef, ReactNode } from 'react';
+
+import { Alignment, Theme } from '@lumx/react';
+import { CSS_PREFIX } from '@lumx/react/constants';
+import { GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { handleBasicClasses } from '@lumx/react/utils/className';
+import { mergeRefs } from '@lumx/react/utils/mergeRefs';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
+
 import { useRovingTabIndex } from '../../hooks/useRovingTabIndex';
 
 export enum TabListLayout {
@@ -55,7 +58,7 @@ const DEFAULT_PROPS: Partial<TabListProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const TabList: Comp<TabListProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const TabList = forwardRef<TabListProps, HTMLDivElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
     const {
         'aria-label': ariaLabel,

@@ -1,9 +1,10 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
-import { Comp, GenericProps } from '@lumx/react/utils/type';
+import { GenericProps } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
  * Defines the props of the component.
@@ -27,7 +28,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME, true);
  * @param  ref   Component ref.
  * @return React element.
  */
-export const TableBody: Comp<TableBodyProps, HTMLTableSectionElement> = forwardRef((props, ref) => {
+export const TableBody = forwardRef<TableBodyProps, HTMLTableSectionElement>((props, ref) => {
     const { children, className, ...forwardedProps } = props;
 
     return (
