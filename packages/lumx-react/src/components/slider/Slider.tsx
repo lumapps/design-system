@@ -1,16 +1,15 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { forwardRef, SyntheticEvent, useMemo, useRef } from 'react';
+import React, { SyntheticEvent, useMemo, useRef } from 'react';
 
 import classNames from 'classnames';
 
 import { InputHelper, InputLabel, Theme } from '@lumx/react';
-
 import useEventCallback from '@lumx/react/hooks/useEventCallback';
-import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
-
 import { clamp } from '@lumx/react/utils/clamp';
 import { useId } from '@lumx/react/hooks/useId';
+import { forwardRef } from '@lumx/react/utils/forwardRef';
 
 /**
  * Defines the props of the component.
@@ -91,7 +90,7 @@ const computePercentFromValue = (value: number, min: number, max: number): numbe
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Slider: Comp<SliderProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const Slider = forwardRef<SliderProps, HTMLDivElement>((props, ref) => {
     const {
         className,
         disabled,

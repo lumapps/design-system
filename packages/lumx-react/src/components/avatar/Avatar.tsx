@@ -1,11 +1,12 @@
-import React, { forwardRef, KeyboardEventHandler, MouseEventHandler, ReactElement, ReactNode } from 'react';
+import React, { KeyboardEventHandler, MouseEventHandler, ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
 import { AspectRatio, Size, Theme, Thumbnail, ThumbnailProps } from '@lumx/react';
 
-import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { forwardRef } from '@lumx/react/utils/forwardRef';
 
 /**
  * Avatar sizes.
@@ -66,7 +67,7 @@ const DEFAULT_PROPS: Partial<AvatarProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Avatar: Comp<AvatarProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const Avatar = forwardRef<AvatarProps, HTMLDivElement>((props, ref) => {
     const {
         actions,
         alt,
