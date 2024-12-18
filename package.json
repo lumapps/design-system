@@ -58,6 +58,7 @@
         "build:site": "yarn workspace lumx-site-demo clean && yarn workspace lumx-site-demo build",
         "build:react": "yarn workspace @lumx/react build",
         "build:core": "yarn workspace @lumx/core build",
+        "build:icons": "yarn workspace @lumx/icons build",
         "build:angularjs": "yarn workspace @lumx/angularjs build",
         "build:storybook": "yarn workspace @lumx/react build:storybook",
         "chromatic": "npx chromatic -b build:storybook",

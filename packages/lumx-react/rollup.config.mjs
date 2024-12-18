@@ -1,16 +1,19 @@
 import path from 'path';
 import commonjs from '@rollup/plugin-commonjs';
-import resolve from '@rollup/plugin-node-resolve';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
 import analyze from 'rollup-plugin-analyzer';
-import babel from 'rollup-plugin-babel';
+import { babel } from '@rollup/plugin-babel';
 import cleaner from 'rollup-plugin-cleaner';
 import copy from 'rollup-plugin-copy';
 import dts from 'rollup-plugin-dts';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-import tsPathsResolve from 'rollup-plugin-ts-paths-resolve';
+import { tsPathsResolve } from 'rollup-plugin-ts-paths-resolve';
 
-import pkg from './package.json';
-const CONFIGS = require('../../configs');
+import pkg from './package.json' assert { type: 'json' };
+import CONFIGS from '../../configs/index.js';
+
+const importUrl = new URL(import.meta.url);
+const __dirname = path.dirname(importUrl.pathname);
 
 const ROOT_PATH = path.resolve(__dirname, '..', '..');
 const DIST_PATH = path.resolve(__dirname, pkg.publishConfig.directory);
@@ -46,7 +49,7 @@ const bundleJS = {
         /** Resolve tsconfig paths. */
         tsPathsResolve(),
         /** Resolve source files. */
-        resolve({ browser: true, extensions }),
+        nodeResolve({ browser: true, extensions }),
         /** Resolve commonjs dependencies. */
         commonjs({ include: /node_modules/ }),
         /** Transpile JS/TS. */
