@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   `Tabs`: make sure the tabs cannot get bigger than the tab list.
+
 ## [3.9.6][] - 2024-12-04
 
 ### Added
