@@ -52,6 +52,8 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-tabs--layout-fixed {
+    flex-grow: 1;
+
     .#{$lumx-base-prefix}-tabs__link {
         @include lumx-tabs-link-layout("fixed");
     }

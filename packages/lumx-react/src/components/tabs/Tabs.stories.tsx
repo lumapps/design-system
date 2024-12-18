@@ -52,34 +52,6 @@ export const Controlled = ({ theme }: any) => {
     );
 };
 
-/* Control active tab internally (with activate tab on focus). */
-export const NotControlled = ({ theme }: any) => {
-    return (
-        <TabProvider shouldActivateOnFocus onChange={console.log}>
-            <TabList theme={theme} aria-label="Tab list">
-                <Tab label="Tab a" />
-                <Tab label="Tab b" />
-            </TabList>
-            <TabPanel className="lumx-spacing-padding-huge">Tab a content</TabPanel>
-            <TabPanel className="lumx-spacing-padding-huge">Tab b content</TabPanel>
-        </TabProvider>
-    );
-};
-
-/* Display tabs far from their tab panels. */
-export const DisabledTab = ({ theme }: any) => (
-    <TabProvider shouldActivateOnFocus>
-        <TabList theme={theme} aria-label="Tab list">
-            <Tab label="Tab 1" />
-            <Tab label="Tab 2" isDisabled />
-            <Tab label="Tab 3" />
-        </TabList>
-        <TabPanel className="lumx-spacing-padding-huge">Tab 1 content</TabPanel>
-        <TabPanel className="lumx-spacing-padding-huge">Tab 2 content</TabPanel>
-        <TabPanel className="lumx-spacing-padding-huge">Tab 3 content</TabPanel>
-    </TabProvider>
-);
-
 /* Display tabs far from their tab panels. */
 export const SplitTabListAndTabPanels = ({ theme }: any) => {
     const [isOpen, setOpen] = useState(true);
