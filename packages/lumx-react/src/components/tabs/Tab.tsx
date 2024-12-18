@@ -1,10 +1,12 @@
-import { Icon, IconProps, Size } from '@lumx/react';
+import React, { FocusEventHandler, forwardRef, KeyboardEventHandler, ReactNode, useCallback } from 'react';
+
+import classNames from 'classnames';
+
+import { Icon, IconProps, Size, Text } from '@lumx/react';
 import { CSS_PREFIX } from '@lumx/react/constants';
 import { Comp, GenericProps } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/react/utils/className';
 
-import classNames from 'classnames';
-import React, { FocusEventHandler, forwardRef, KeyboardEventHandler, ReactNode, useCallback } from 'react';
 import { useTabProviderContext } from './state';
 
 /**
@@ -114,7 +116,11 @@ export const Tab: Comp<TabProps, HTMLButtonElement> = forwardRef((props, ref) =>
             aria-controls={state?.tabPanelId}
         >
             {icon && <Icon icon={icon} size={Size.xs} {...iconProps} />}
-            {label && <span>{label}</span>}
+            {label && (
+                <Text as="span" truncate>
+                    {label}
+                </Text>
+            )}
         </button>
     );
 });

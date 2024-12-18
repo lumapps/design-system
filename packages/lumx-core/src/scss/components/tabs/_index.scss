@@ -16,6 +16,9 @@
     }
 
     &__link {
+        // Tabs cannot be wider than their tab list
+        max-width: 80%;
+
         &:not(&--is-active):not(&--is-disabled) {
             @include lumx-tabs-link(lumx-base-const("emphasis", "LOW"));
 
