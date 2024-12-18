@@ -1,17 +1,15 @@
-import React, { forwardRef, ReactNode, RefObject, SyntheticEvent } from 'react';
+import React, { ReactNode, RefObject, SyntheticEvent } from 'react';
 
 import classNames from 'classnames';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiClose, mdiCloseCircle, mdiMenuDown } from '@lumx/icons';
-
 import { Size, Theme } from '@lumx/react/components';
 import { Chip } from '@lumx/react/components/chip/Chip';
 import { Icon } from '@lumx/react/components/icon/Icon';
 import { InputLabel } from '@lumx/react/components/input-label/InputLabel';
-
-import { Comp } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
+import { forwardRef } from '@lumx/react/utils/forwardRef';
 
 import { WithSelectContext } from './WithSelectContext';
 import { CoreSelectProps, SelectVariant } from './constants';
@@ -177,7 +175,7 @@ export const SelectMultipleField: React.FC<SelectMultipleProps> = ({
  * @param  ref   Component ref.
  * @return React element.
  */
-export const SelectMultiple: Comp<SelectMultipleProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const SelectMultiple = forwardRef<SelectMultipleProps, HTMLDivElement>((props, ref) => {
     return WithSelectContext(
         SelectMultipleField,
         {

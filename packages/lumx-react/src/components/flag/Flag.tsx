@@ -1,9 +1,11 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
+
 import classNames from 'classnames';
 
 import { ColorPalette, Icon, Size, Theme, Text } from '@lumx/react';
-import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { forwardRef } from '@lumx/react/utils/forwardRef';
 
 export interface FlagProps extends GenericProps, HasTheme {
     /** Color of the component. */
@@ -29,7 +31,7 @@ const DEFAULT_PROPS: Partial<FlagProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Flag: Comp<FlagProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const Flag = forwardRef<FlagProps, HTMLDivElement>((props, ref) => {
     const { label, icon, color, className, theme, truncate, ...forwardedProps } = props;
     const flagColor = color || (theme === Theme.light ? ColorPalette.dark : ColorPalette.light);
     const isTruncated = !!truncate;
