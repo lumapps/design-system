@@ -4,7 +4,7 @@ description: 'Full CI env setup (setup node & restore/install dependencies)'
 inputs:
     node_version:
         description: 'Node version to use'
-        default: '16.10.0'
+        default: '16.20.2'
 
 runs:
     using: composite
@@ -20,9 +20,9 @@ runs:
             uses: actions/cache@v3
             with:
                 path: "**/node_modules"
-                key: ${{ runner.os }}-dependency-hash-${{ hashFiles('yarn.lock') }}
+                key: ${{ runner.os }}-node-v${{ inputs.node_version }}-dependency-hash-${{ hashFiles('yarn.lock') }}
                 restore-keys: |
-                    ${{ runner.os }}-dependency-hash-
+                    ${{ runner.os }}-node-v${{ inputs.node_version }}-dependency-hash-
 
         -   name: "Install dependencies"
             # Skip install here because the cache already has an entry, we won't be able to update it, so it's unnecessary to try and rebuild it
