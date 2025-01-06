@@ -1,11 +1,13 @@
-import React, { Children, CSSProperties, forwardRef } from 'react';
-import chunk from 'lodash/chunk';
+import React, { Children, CSSProperties } from 'react';
 
+import chunk from 'lodash/chunk';
 import classNames from 'classnames';
 
 import { FULL_WIDTH_PERCENT } from '@lumx/react/components/slideshow/constants';
-import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { forwardRef } from '@lumx/react/utils/forwardRef';
+
 import { buildSlideShowGroupId, SlideshowItemGroup } from './SlideshowItemGroup';
 
 export interface SlidesProps extends GenericProps, HasTheme {
@@ -53,7 +55,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Slides: Comp<SlidesProps, HTMLDivElement> = forwardRef((props, ref) => {
+export const Slides = forwardRef<SlidesProps, HTMLDivElement>((props, ref) => {
     const {
         activeIndex,
         id,

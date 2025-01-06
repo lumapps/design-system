@@ -1,14 +1,15 @@
+import React, { MouseEventHandler, ReactNode } from 'react';
+
+import classNames from 'classnames';
+import isFunction from 'lodash/isFunction';
+
 import { ColorPalette, Size, Theme } from '@lumx/react';
 import { useStopPropagation } from '@lumx/react/hooks/useStopPropagation';
 
-import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { onEnterPressed } from '@lumx/react/utils/event';
-
-import classNames from 'classnames';
-
-import isFunction from 'lodash/isFunction';
-import React, { forwardRef, MouseEventHandler, ReactNode } from 'react';
+import { forwardRef } from '@lumx/react/utils/forwardRef';
 
 /**
  * Chip sizes.
@@ -66,7 +67,7 @@ const DEFAULT_PROPS: Partial<ChipProps> = {
  * @param  ref   Component ref.
  * @return React element.
  */
-export const Chip: Comp<ChipProps, HTMLAnchorElement> = forwardRef((props, ref) => {
+export const Chip = forwardRef<ChipProps, HTMLAnchorElement>((props, ref) => {
     const {
         after,
         before,
@@ -143,9 +144,7 @@ export const Chip: Comp<ChipProps, HTMLAnchorElement> = forwardRef((props, ref) 
                     {before}
                 </div>
             )}
-
             <div className={`${CLASSNAME}__label`}>{children}</div>
-
             {after && (
                 // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
                 <div
