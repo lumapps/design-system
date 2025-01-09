@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   `TextField`: change theme light border color for better contrast
+
 ## [3.9.8][] - 2025-01-10
 
 ### Fixed
