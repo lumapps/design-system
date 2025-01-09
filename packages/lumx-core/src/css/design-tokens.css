@@ -2,7 +2,7 @@
 
 /**
  * Do not edit directly
- * Generated on Fri, 06 Dec 2024 13:46:59 GMT
+ * Generated on Thu, 09 Jan 2025 14:20:03 GMT
  */
 
 :root {
@@ -333,7 +333,7 @@
     --lumx-text-field-state-default-input-border-left-width: 1px;
     --lumx-text-field-state-default-theme-light-header-label-color: var(--lumx-color-dark-N);
     --lumx-text-field-state-default-theme-light-input-background-color: var(--lumx-color-dark-L6);
-    --lumx-text-field-state-default-theme-light-input-border-color: var(--lumx-color-dark-L4);
+    --lumx-text-field-state-default-theme-light-input-border-color: var(--lumx-color-dark-L3);
     --lumx-text-field-state-default-theme-light-input-content-color: var(--lumx-color-dark-N);
     --lumx-text-field-state-default-theme-light-input-placeholder-color: var(--lumx-color-dark-L2);
     --lumx-text-field-state-default-theme-dark-header-label-color: var(--lumx-color-light-N);
@@ -347,7 +347,7 @@
     --lumx-text-field-state-hover-input-border-left-width: 1px;
     --lumx-text-field-state-hover-theme-light-header-label-color: var(--lumx-color-dark-N);
     --lumx-text-field-state-hover-theme-light-input-background-color: var(--lumx-color-dark-L5);
-    --lumx-text-field-state-hover-theme-light-input-border-color: var(--lumx-color-dark-L4);
+    --lumx-text-field-state-hover-theme-light-input-border-color: var(--lumx-color-dark-L3);
     --lumx-text-field-state-hover-theme-light-input-content-color: var(--lumx-color-dark-N);
     --lumx-text-field-state-hover-theme-light-input-placeholder-color: var(--lumx-color-dark-L2);
     --lumx-text-field-state-hover-theme-dark-header-label-color: var(--lumx-color-light-N);

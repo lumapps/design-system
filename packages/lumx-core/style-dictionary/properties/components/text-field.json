@@ -32,7 +32,7 @@
                 },
                 "input": {
                     "background-color": "{color.dark.L6}",
-                    "border-color": "{color.dark.L4}",
+                    "border-color": "{color.dark.L3}",
                     "content": {
                         "color": "{color.dark.N}"
                     },
@@ -84,7 +84,7 @@
                 },
                 "input": {
                     "background-color": "{color.dark.L5}",
-                    "border-color": "{color.dark.L4}",
+                    "border-color": "{color.dark.L3}",
                     "content": {
                         "color": "{color.dark.N}"
                     },
