@@ -7,11 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   `Tabs`: add tab label truncate on constrained width.
+
 ## [3.9.7][] - 2025-01-07
 
 ### Changed
 
--   `Tabs`: add tab label truncate on constrained width.
+-   `TextField`: change theme light border color for better contrast
 
 ## [3.9.6][] - 2024-12-04
 
