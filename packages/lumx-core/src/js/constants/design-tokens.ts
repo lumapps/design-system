@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 06 Dec 2024 13:46:59 GMT
+ * Generated on Thu, 09 Jan 2025 14:20:03 GMT
  */
 
 export const DESIGN_TOKENS = {
@@ -1228,9 +1228,9 @@ export const DESIGN_TOKENS = {
                         $aliasedFrom: 'color.dark.L6',
                     },
                     'border-color': {
-                        value: 'var(--lumx-color-dark-L4)',
-                        attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.2 } },
-                        $aliasedFrom: 'color.dark.L4',
+                        value: 'var(--lumx-color-dark-L3)',
+                        attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.38 } },
+                        $aliasedFrom: 'color.dark.L3',
                     },
                     content: {
                         color: {
@@ -1312,9 +1312,9 @@ export const DESIGN_TOKENS = {
                         $aliasedFrom: 'color.dark.L5',
                     },
                     'border-color': {
-                        value: 'var(--lumx-color-dark-L4)',
-                        attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.2 } },
-                        $aliasedFrom: 'color.dark.L4',
+                        value: 'var(--lumx-color-dark-L3)',
+                        attributes: { hex: '000000', rgb: { r: 0, g: 0, b: 0, a: 0.38 } },
+                        $aliasedFrom: 'color.dark.L3',
                     },
                     content: {
                         color: {
