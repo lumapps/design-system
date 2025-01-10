@@ -119,7 +119,8 @@
         text-decoration: none;
         cursor: pointer;
         user-select: none;
-        border: none;
+        background: none;
+        border-style: solid;
         border-radius: 50%;
         outline: none;
         transition: transform $lumx-slideshow-transition-duration;
@@ -130,7 +131,8 @@
         }
 
         #{$self}--theme-light & {
-            background-color:lumx-color-variant("dark", "L5");
+            border-color:lumx-color-variant("dark", "L2");
+            border-width: 2px;
 
             &[data-focus-visible-added] {
                 @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "LOW"), "dark");
@@ -138,11 +140,13 @@
 
             &:hover {
                 background-color: lumx-color-variant("primary", "N");
+                border-width: 0;
             }
             &--is-active {
                 background-color: lumx-color-variant("primary", "N");
                 width: $item-size*2;
                 border-radius: $lumx-border-radius;
+                border-width: 0;
                 
                 &[data-focus-visible-added] {
                     @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "LOW"), "primary");
@@ -151,7 +155,7 @@
         }
 
         #{$self}--theme-dark & {
-            background-color: lumx-color-variant("light", "L5");
+            border-color: lumx-color-variant("light", "L2");
 
             &[data-focus-visible-added] {
                 @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "LOW"), "light");
