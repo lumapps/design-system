@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   `Tabs`: removed (revert) a problematic flex-grow style on the tablist.
+
 ## [3.9.7][] - 2025-01-07
 
 ### Changed
