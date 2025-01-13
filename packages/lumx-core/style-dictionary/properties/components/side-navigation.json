@@ -3,24 +3,24 @@
         "item": {
             "emphasis-selected": {
                 "state-default": {
-                    "border-width": { "value": "0" },
+                    "border-width": { "value": "1px" },
                     "theme-light": {
-                        "border-color": { "value": "transparent" },
-                        "background-color": "{color.primary.L5}"
+                        "border-color": "{color.primary.N}",
+                        "background-color": "{color.primary.L6}"
                     }
                 },
                 "state-hover": {
-                    "border-width": { "value": "0" },
+                    "border-width": { "value": "1px" },
                     "theme-light": {
-                        "border-color": { "value": "transparent" },
-                        "background-color": "{color.primary.L4}"
+                        "border-color": "{color.primary.N}",
+                        "background-color": "{color.primary.L5}"
                     }
                 },
                 "state-active": {
-                    "border-width": { "value": "0" },
+                    "border-width": { "value": "1px" },
                     "theme-light": {
-                        "border-color": { "value": "transparent" },
-                        "background-color": "{color.primary.L3}"
+                        "border-color": "{color.primary.N}",
+                        "background-color": "{color.primary.L4}"
                     }
                 }
             }

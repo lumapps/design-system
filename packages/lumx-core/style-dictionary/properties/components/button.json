@@ -157,48 +157,48 @@
                 "padding": {
                     "horizontal": { "value": "{spacing.unit.big.value}", "comment": "deprecated (use base emphasis padding)" }
                 },
-                "border-width": { "value": "0" },
+                "border-width": { "value": "1px" },
                 "theme-light": {
-                    "background-color": "{color.primary.L5}",
+                    "background-color": "{color.primary.L6}",
                     "color": "{color.primary.D2}",
-                    "border-color": { "value": "transparent" }
+                    "border-color": "{color.primary.N}"
                 },
                 "theme-dark": {
-                    "background-color": "{color.light.L3}",
+                    "background-color": "{color.light.L6}",
                     "color": "{color.light.N}",
-                    "border-color": { "value": "transparent" }
+                    "border-color": "{color.light.N}"
                 }
             },
             "state-hover": {
                 "padding": {
                     "horizontal": { "value": "{spacing.unit.big.value}", "comment":  "deprecated (use base emphasis padding)" }
                 },
-                "border-width": { "value": "0" },
+                "border-width": { "value": "1px" },
                 "theme-light": {
-                    "background-color": "{color.primary.L4}",
+                    "background-color": "{color.primary.L5}",
                     "color": "{color.primary.D2}",
-                    "border-color": { "value": "transparent" }
+                    "border-color": "{color.primary.N}"
                 },
                 "theme-dark": {
-                    "background-color": "{color.light.L4}",
+                    "background-color": "{color.light.L5}",
                     "color": "{color.light.N}",
-                    "border-color": { "value": "transparent" }
+                    "border-color": "{color.light.N}"
                 }
             },
             "state-active": {
                 "padding": {
                     "horizontal": { "value": "{spacing.unit.big.value}", "comment":  "deprecated (use base emphasis padding)" }
                 },
-                "border-width": { "value": "0" },
+                "border-width": { "value": "1px" },
                 "theme-light": {
-                    "background-color": "{color.primary.L3}",
+                    "background-color": "{color.primary.L4}",
                     "color": "{color.primary.D2}",
-                    "border-color": { "value": "transparent" }
+                    "border-color": "{color.primary.N}"
                 },
                 "theme-dark": {
-                    "background-color": "{color.light.L5}",
+                    "background-color": "{color.light.L4}",
                     "color": "{color.light.N}",
-                    "border-color": { "value": "transparent" }
+                    "border-color": "{color.light.N}"
                 }
             }
         }
