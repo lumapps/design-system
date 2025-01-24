@@ -23,9 +23,11 @@ import './DemoBlock.scss';
 interface DemoBlockProps extends FlexBoxProps {
     demo?: string;
     codeString?: string;
+    theme?: Theme;
     withThemeSwitcher?: boolean;
     hasPlayButton?: boolean;
     backgroundColor?: { color: ColorPalette; variant: ColorVariant };
+    alwaysShowCode?: boolean;
 }
 
 const DEFAULT_PROPS: Partial<DemoBlockProps> = {
@@ -37,17 +39,19 @@ export const DemoBlock: React.FC<DemoBlockProps> = ({
     children,
     demo,
     codeString,
+    theme: defaultTheme = Theme.light,
     withThemeSwitcher = false,
     hasPlayButton = false,
     backgroundColor: propBackgroundColor,
+    alwaysShowCode,
     ...flexBoxProps
 }) => {
-    const [theme, setTheme] = useState<Theme>(Theme.light);
+    const [theme, setTheme] = useState<Theme>(defaultTheme);
     const toggleTheme = (isChecked: boolean) => {
         setTheme(isChecked ? Theme.dark : Theme.light);
     };
 
-    const [showCode, setShowCode] = useState(false);
+    const [showCode, setShowCode] = useState(!!alwaysShowCode);
     const toggleShowCode = () => setShowCode(!showCode);
 
     if (flexBoxProps.orientation === Orientation.horizontal) {
@@ -74,31 +78,35 @@ export const DemoBlock: React.FC<DemoBlockProps> = ({
                 )}
                 {isFunction(children) ? children({ theme }) : children}
             </FlexBox>
-            <div className="demo-block__toolbar">
-                <div className="demo-block__code-toggle">
-                    <Button
-                        disabled={!codeString}
-                        emphasis={Emphasis.low}
-                        leftIcon={mdiCodeTags}
-                        onClick={toggleShowCode}
-                    >
-                        {showCode ? 'Hide code' : 'Show code'}
-                    </Button>
-                </div>
+            {(!alwaysShowCode || withThemeSwitcher) && (
+                <div className="demo-block__toolbar">
+                    {!alwaysShowCode && (
+                        <div className="demo-block__code-toggle">
+                            <Button
+                                disabled={!codeString}
+                                emphasis={Emphasis.low}
+                                leftIcon={mdiCodeTags}
+                                onClick={toggleShowCode}
+                            >
+                                {showCode ? 'Hide code' : 'Show code'}
+                            </Button>
+                        </div>
+                    )}
 
-                {withThemeSwitcher && (
-                    <div className="demo-block__theme-toggle">
-                        <Switch
-                            disabled={!children}
-                            position={Alignment.right}
-                            isChecked={theme === Theme.dark}
-                            onChange={toggleTheme}
-                        >
-                            Dark theme
-                        </Switch>
-                    </div>
-                )}
-            </div>
+                    {withThemeSwitcher && (
+                        <div className="demo-block__theme-toggle">
+                            <Switch
+                                disabled={!children}
+                                position={Alignment.right}
+                                isChecked={theme === Theme.dark}
+                                onChange={toggleTheme}
+                            >
+                                Dark theme
+                            </Switch>
+                        </div>
+                    )}
+                </div>
+            )}
 
             <CodeBlock
                 className={classNames('demo-block__code', showCode && codeString && 'demo-block__code--shown')}

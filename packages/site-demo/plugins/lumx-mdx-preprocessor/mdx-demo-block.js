@@ -24,12 +24,17 @@ const removeIndent = (code) => {
     return code.trim().replace(new RegExp(`\n${indentMatch[1]}`, 'g'), '\n')
 }
 
+// Use a regular expression to remove curly braces at the start and end
+function removeCurlyBracesFromJSX(code) {
+    return code.replace(/^\{|\}$/g, '');
+}
+
 /** Update <DemoBlock/> props to import source code. */
 async function updateDemoBlock(resourceFolder, addImport, props) {
     if (props.children) {
         // <DemoBlock> with children already have a demo inside them.
         // We copy the demo as string into the `codeString` prop.
-        props.codeString = JSON.stringify(removeIndent(props.children));
+        props.codeString = JSON.stringify(removeCurlyBracesFromJSX(removeIndent(props.children)));
         return props;
     }
 
