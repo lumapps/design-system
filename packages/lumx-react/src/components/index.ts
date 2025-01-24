@@ -52,6 +52,15 @@ export const ColorVariant = {
 } as const;
 export type ColorVariant = ValueOf<typeof ColorVariant>;
 
+/** ColorPalette with all possible color variant combination */
+export type ColorWithVariants =
+    | ColorPalette
+    | Exclude<
+          `${ColorPalette}-${ColorVariant}`,
+          // No dark variant for light and dark
+          `light-D${number}` | `dark-D${number}`
+      >;
+
 export const Theme = {
     light: 'light',
     dark: 'dark',

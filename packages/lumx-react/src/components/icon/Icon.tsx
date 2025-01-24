@@ -2,9 +2,9 @@ import React, { forwardRef } from 'react';
 
 import classNames from 'classnames';
 
-import { ColorPalette, ColorVariant, Size, Theme } from '@lumx/react';
+import { ColorPalette, ColorVariant, ColorWithVariants, Size, Theme } from '@lumx/react';
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { getRootClassName, handleBasicClasses, parseColorWithVariants } from '@lumx/react/utils/className';
 import { mdiAlertCircle } from '@lumx/icons';
 
 export type IconSizes = Extract<Size, 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl'>;
@@ -14,7 +14,7 @@ export type IconSizes = Extract<Size, 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'x
  */
 export interface IconProps extends GenericProps, HasTheme {
     /** Color variant. */
-    color?: ColorPalette;
+    color?: ColorWithVariants;
     /** Lightened or darkened variant of the selected icon color. */
     colorVariant?: ColorVariant;
     /** Whether the icon has a shape. */
@@ -53,7 +53,18 @@ const DEFAULT_PROPS: Partial<IconProps> = {};
  * @return React element.
  */
 export const Icon: Comp<IconProps, HTMLElement> = forwardRef((props, ref) => {
-    const { className, color, colorVariant, hasShape, icon, size, theme, alt, ...forwardedProps } = props;
+    const {
+        className,
+        color: propColor,
+        colorVariant: propColorVariant,
+        hasShape,
+        icon,
+        size,
+        theme,
+        alt,
+        ...forwardedProps
+    } = props;
+    const [color, colorVariant] = parseColorWithVariants(propColor, propColorVariant);
 
     // Color
     let iconColor = color;

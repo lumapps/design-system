@@ -13,7 +13,7 @@ export const App = ({ theme }: any) => {
                     <Tab
                         label="Tab 2"
                         icon={mdiBreadSliceOutline}
-                        iconProps={{ color: 'red', colorVariant: 'L1', hasShape: false }}
+                        iconProps={{ color: 'red-L1', hasShape: false }}
                     />
                     <Tab label="Tab 3" icon={mdiSilverwareForkKnife} />
                 </TabList>

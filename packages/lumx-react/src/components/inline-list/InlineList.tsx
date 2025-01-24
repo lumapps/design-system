@@ -2,7 +2,7 @@ import React, { Children, forwardRef, isValidElement } from 'react';
 
 import classNames from 'classnames';
 
-import { ColorPalette, ColorVariant, Typography } from '@lumx/react';
+import { ColorVariant, ColorWithVariants, Typography } from '@lumx/react';
 import { Comp, GenericProps } from '@lumx/react/utils/type';
 import { getFontColorClassName, getRootClassName, getTypographyClassName } from '@lumx/react/utils/className';
 
@@ -13,7 +13,7 @@ export interface InlineListProps extends GenericProps {
     /**
      * Text color.
      */
-    color?: ColorPalette;
+    color?: ColorWithVariants;
     /**
      * Lightened or darkened variant of the selected color.
      */
@@ -52,7 +52,7 @@ const DEFAULT_PROPS = {} as const;
  */
 export const InlineList: Comp<InlineListProps> = forwardRef((props, ref) => {
     const { className, color, colorVariant, typography, children, wrap, ...forwardedProps } = props;
-    const fontColorClassName = color && getFontColorClassName(color, colorVariant);
+    const fontColorClassName = getFontColorClassName(color, colorVariant);
     const typographyClassName = typography && getTypographyClassName(typography);
     return (
         // eslint-disable-next-line jsx-a11y/no-redundant-roles
