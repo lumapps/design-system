@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { getByClassName, getByTagName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -14,9 +14,9 @@ type SetupProps = Partial<RadioButtonProps>;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}) => {
+const setup = (propsOverride: SetupProps = {}, { wrapper }: SetupRenderOptions = {}) => {
     const props: any = { id: 'fixedId', ...propsOverride };
-    render(<RadioButton {...props} />);
+    render(<RadioButton {...props} />, { wrapper });
 
     const radioButton = getByClassName(document.body, CLASSNAME);
     const helper = queryByClassName(radioButton, `${CLASSNAME}__helper`);
@@ -105,5 +105,11 @@ describe(`<${RadioButton.displayName}>`, () => {
         baseClassName: CLASSNAME,
         forwardClassName: 'radioButton',
         forwardAttributes: 'radioButton',
+        applyTheme: {
+            affects: [{ element: 'radioButton' }],
+            viaProp: true,
+            viaContext: true,
+            defaultTheme: 'light',
+        },
     });
 });

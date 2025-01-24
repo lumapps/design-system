@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { render, within } from '@testing-library/react';
 import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import { Thumbnail } from '@lumx/react';
@@ -13,10 +13,10 @@ const CLASSNAME = UserBlock.className as string;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: Partial<UserBlockProps> = {}) => {
+const setup = (propsOverride: Partial<UserBlockProps> = {}, { wrapper }: SetupRenderOptions = {}) => {
     const props: UserBlockProps = { ...propsOverride };
 
-    render(<UserBlock {...props} />);
+    render(<UserBlock {...props} />, { wrapper });
     const userBlock = getByClassName(document.body, CLASSNAME);
     const name = queryByClassName(userBlock, `${CLASSNAME}__name`);
     const avatar = queryByClassName(userBlock, `${CLASSNAME}__avatar`);
@@ -86,5 +86,11 @@ describe(`<${UserBlock.displayName}>`, () => {
         forwardClassName: 'userBlock',
         forwardAttributes: 'userBlock',
         forwardRef: 'userBlock',
+        applyTheme: {
+            affects: [{ element: 'userBlock' }],
+            viaProp: true,
+            viaContext: true,
+            defaultTheme: 'light',
+        },
     });
 });

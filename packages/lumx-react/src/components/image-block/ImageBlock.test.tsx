@@ -1,19 +1,21 @@
 import React from 'react';
-import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 
 import { render } from '@testing-library/react';
 import { queryByClassName } from '@lumx/react/testing/utils/queries';
 import { toNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
 
+import { Thumbnail } from '@lumx/react';
 import { ImageBlock, ImageBlockProps } from './ImageBlock';
 import { FullFeatured } from './ImageBlock.stories';
 
 const CLASSNAME = ImageBlock.className as string;
 
-const setup = (props: Partial<ImageBlockProps> = {}) => {
-    render(<ImageBlock {...(props as any)} />);
+const setup = (props: Partial<ImageBlockProps> = {}, { wrapper }: SetupRenderOptions = {}) => {
+    render(<ImageBlock {...(props as any)} />, { wrapper });
     const imageBlock = queryByClassName(document.body, CLASSNAME);
-    return { props, imageBlock };
+    const thumbnail = queryByClassName(imageBlock as any, Thumbnail.className as string);
+    return { props, imageBlock, thumbnail };
 };
 
 describe(`<${ImageBlock.displayName}>`, () => {
@@ -47,5 +49,11 @@ describe(`<${ImageBlock.displayName}>`, () => {
         baseClassName: CLASSNAME,
         forwardClassName: 'imageBlock',
         forwardAttributes: 'imageBlock',
+        applyTheme: {
+            affects: [{ element: 'imageBlock' }, { element: 'thumbnail' }],
+            viaProp: true,
+            viaContext: true,
+            defaultTheme: 'light',
+        },
     });
 });

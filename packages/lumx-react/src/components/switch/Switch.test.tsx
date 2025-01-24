@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { render } from '@testing-library/react';
 import { getByClassName, getByTagName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import userEvent from '@testing-library/user-event/';
@@ -14,9 +14,9 @@ type SetupProps = Partial<SwitchProps>;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}) => {
+const setup = (propsOverride: SetupProps = {}, { wrapper }: SetupRenderOptions = {}) => {
     const props = { ...propsOverride };
-    render(<Switch {...props} />);
+    render(<Switch {...props} />, { wrapper });
     const switchWrapper = getByClassName(document.body, CLASSNAME);
     const input = getByTagName(switchWrapper, 'input');
     const helper = queryByClassName(switchWrapper, `${CLASSNAME}__helper`);
@@ -106,5 +106,11 @@ describe(`<${Switch.displayName}>`, () => {
         forwardClassName: 'switchWrapper',
         forwardAttributes: 'switchWrapper',
         forwardRef: 'switchWrapper',
+        applyTheme: {
+            affects: [{ element: 'switchWrapper' }],
+            viaProp: true,
+            viaContext: true,
+            defaultTheme: 'light',
+        },
     });
 });

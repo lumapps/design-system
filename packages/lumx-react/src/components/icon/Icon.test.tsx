@@ -2,7 +2,7 @@ import React from 'react';
 
 import { mdiAlertCircle } from '@lumx/icons';
 import { ColorPalette, ColorVariant, Size, Theme } from '@lumx/react';
-import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 
 import { getByClassName, getByTagName } from '@lumx/react/testing/utils/queries';
 import { render } from '@testing-library/react';
@@ -15,12 +15,12 @@ type SetupProps = Partial<IconProps>;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}) => {
+const setup = (propsOverride: SetupProps = {}, { wrapper }: SetupRenderOptions = {}) => {
     const props: IconProps = {
         icon: 'mdiPlus',
         ...propsOverride,
     };
-    render(<Icon {...props} />);
+    render(<Icon {...props} />, { wrapper });
     const i = getByClassName(document.body, CLASSNAME);
     const svg = getByTagName(i, 'svg');
     const path = getByTagName(svg, 'path');
@@ -114,5 +114,14 @@ describe(`<${Icon.displayName}>`, () => {
     });
 
     // Common tests suite.
-    commonTestsSuiteRTL(setup, { baseClassName: CLASSNAME, forwardClassName: 'i', forwardAttributes: 'i' });
+    commonTestsSuiteRTL(setup, {
+        baseClassName: CLASSNAME,
+        forwardClassName: 'i',
+        forwardAttributes: 'i',
+        applyTheme: {
+            affects: [{ element: 'i', classModifier: 'color', inverted: true }],
+            viaProp: true,
+            viaContext: true,
+        },
+    });
 });

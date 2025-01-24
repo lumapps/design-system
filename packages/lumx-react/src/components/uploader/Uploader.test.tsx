@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 
 import { render, screen } from '@testing-library/react';
 import { getByClassName, getByTagName, queryByClassName } from '@lumx/react/testing/utils/queries';
@@ -15,10 +15,10 @@ type SetupProps = Partial<UploaderProps>;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}) => {
+const setup = (propsOverride: SetupProps = {}, { wrapper }: SetupRenderOptions = {}) => {
     const props: any = { ...propsOverride };
 
-    render(<Uploader {...props} />);
+    render(<Uploader {...props} />, { wrapper });
     const uploader = getByClassName(document.body, CLASSNAME);
     const label = queryByClassName(uploader, `${CLASSNAME}__label`);
     const icon = queryByClassName(uploader, `${CLASSNAME}__icon`);
@@ -117,5 +117,11 @@ describe(`<${Uploader.displayName}>`, () => {
         forwardClassName: 'uploader',
         forwardAttributes: 'uploader',
         forwardRef: 'uploader',
+        applyTheme: {
+            affects: [{ element: 'uploader' }],
+            viaProp: true,
+            viaContext: true,
+            defaultTheme: 'light',
+        },
     });
 });

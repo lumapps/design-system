@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Kind, Theme } from '@lumx/react';
-import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { getByClassName } from '@lumx/react/testing/utils/queries';
 import { render } from '@testing-library/react';
 import { INPUT_HELPER_CONFIGURATION } from '@lumx/react/components/input-helper/constants';
@@ -14,9 +14,9 @@ type SetupProps = Partial<InputHelperProps>;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}) => {
+const setup = (propsOverride: SetupProps = {}, { wrapper }: SetupRenderOptions = {}) => {
     const props: any = { ...propsOverride };
-    render(<InputHelper {...props} />);
+    render(<InputHelper {...props} />, { wrapper });
     const helper = getByClassName(document.body, CLASSNAME);
 
     return { helper, props };
@@ -43,5 +43,15 @@ describe(`<${InputHelper.displayName}>`, () => {
         });
     });
 
-    commonTestsSuiteRTL(setup, { baseClassName: CLASSNAME, forwardClassName: 'helper', forwardAttributes: 'helper' });
+    commonTestsSuiteRTL(setup, {
+        baseClassName: CLASSNAME,
+        forwardClassName: 'helper',
+        forwardAttributes: 'helper',
+        applyTheme: {
+            affects: [{ element: 'helper' }],
+            viaProp: true,
+            viaContext: true,
+            defaultTheme: 'light',
+        },
+    });
 });

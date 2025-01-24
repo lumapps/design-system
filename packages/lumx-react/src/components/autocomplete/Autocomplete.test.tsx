@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Dropdown, List, ListItem, Size, TextField } from '@lumx/react';
-import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { getByClassName, getByTagName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -14,7 +14,7 @@ const CLASSNAME = Autocomplete.className as string;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (props: Partial<AutocompleteProps> = {}) => {
+const setup = (props: Partial<AutocompleteProps> = {}, { wrapper }: SetupRenderOptions = {}) => {
     render(
         <Autocomplete {...(props as any)}>
             <List>
@@ -25,6 +25,7 @@ const setup = (props: Partial<AutocompleteProps> = {}) => {
                 ))}
             </List>
         </Autocomplete>,
+        { wrapper },
     );
     const autocomplete = getByClassName(document.body, CLASSNAME);
     const textField = getByClassName(autocomplete, TextField.className as string);
@@ -90,5 +91,11 @@ describe(`<${Autocomplete.displayName}>`, () => {
         forwardClassName: 'autocomplete',
         forwardAttributes: 'autocomplete',
         forwardRef: 'autocomplete',
+        applyTheme: {
+            affects: [{ element: 'textField' }],
+            viaProp: true,
+            viaContext: true,
+            defaultTheme: 'light',
+        },
     });
 });

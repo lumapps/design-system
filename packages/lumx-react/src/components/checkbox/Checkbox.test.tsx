@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 
 import { getByClassName, getByTagName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import { render } from '@testing-library/react';
@@ -14,9 +14,9 @@ type SetupProps = Partial<CheckboxProps>;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}) => {
+const setup = (propsOverride: SetupProps = {}, { wrapper }: SetupRenderOptions = {}) => {
     const props: any = { id: 'fixedId', ...propsOverride };
-    render(<Checkbox {...props} />);
+    render(<Checkbox {...props} />, { wrapper });
 
     const checkbox = getByClassName(document.body, CLASSNAME);
     const helper = queryByClassName(checkbox, `${CLASSNAME}__helper`);
@@ -117,5 +117,11 @@ describe(`<${Checkbox.displayName}>`, () => {
         baseClassName: CLASSNAME,
         forwardClassName: 'checkbox',
         forwardAttributes: 'checkbox',
+        applyTheme: {
+            affects: [{ element: 'checkbox' }],
+            viaProp: true,
+            viaContext: true,
+            defaultTheme: 'light',
+        },
     });
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { Thumbnail } from '@lumx/react';
 import { render, screen, within } from '@testing-library/react';
 import { getByClassName, queryByClassName, queryAllByClassName } from '@lumx/react/testing/utils/queries';
@@ -15,10 +15,10 @@ type SetupProps = Partial<LinkPreviewProps>;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}) => {
+const setup = (propsOverride: SetupProps = {}, { wrapper }: SetupRenderOptions = {}) => {
     const props: any = { ...propsOverride };
 
-    render(<LinkPreview {...props} />);
+    render(<LinkPreview {...props} />, { wrapper });
     const linkPreview = getByClassName(document.body, CLASSNAME);
     const thumbnail = queryByClassName(linkPreview, Thumbnail.className as string);
     const title = queryByClassName(linkPreview, `${CLASSNAME}__title`);
@@ -97,5 +97,11 @@ describe(`<${LinkPreview.displayName}>`, () => {
         forwardClassName: 'linkPreview',
         forwardAttributes: 'linkPreview',
         forwardRef: 'linkPreview',
+        applyTheme: {
+            affects: [{ element: 'linkPreview' }],
+            viaProp: true,
+            viaContext: true,
+            defaultTheme: 'light',
+        },
     });
 });

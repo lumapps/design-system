@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { render, screen } from '@testing-library/react';
 import { getByClassName, getByTagName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import { TextField } from '@lumx/react';
@@ -15,7 +15,7 @@ jest.mock('@lumx/react/utils/date/getYearDisplayName', () => ({
     getYearDisplayName: () => 'année',
 }));
 
-const setup = (propsOverride: Partial<DatePickerFieldProps> = {}) => {
+const setup = (propsOverride: Partial<DatePickerFieldProps> = {}, { wrapper }: SetupRenderOptions = {}) => {
     const props: DatePickerFieldProps = {
         label: 'DatePickerField',
         locale: 'fr',
@@ -25,7 +25,7 @@ const setup = (propsOverride: Partial<DatePickerFieldProps> = {}) => {
         previousButtonProps: { label: 'Previous month' },
         ...propsOverride,
     };
-    render(<DatePickerField {...props} />);
+    render(<DatePickerField {...props} />, { wrapper });
     const textField = getByClassName(document.body, TextField.className as string);
     const inputNative = getByTagName(textField, 'input');
     const getDatePicker = () => queryByClassName(document.body, CLASSNAME);
@@ -62,5 +62,11 @@ describe(`<${DatePickerField.displayName}>`, () => {
         forwardRef: 'textField',
         forwardAttributes: 'inputNative',
         forwardClassName: 'textField',
+        applyTheme: {
+            affects: [{ element: 'textField' }],
+            viaProp: true,
+            viaContext: true,
+            defaultTheme: 'light',
+        },
     });
 });
