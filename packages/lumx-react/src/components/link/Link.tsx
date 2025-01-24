@@ -2,9 +2,14 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-import { ColorPalette, ColorVariant, Icon, Typography } from '@lumx/react';
+import { ColorVariant, ColorWithVariants, Icon, Typography } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
-import { getRootClassName, getTypographyClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import {
+    getRootClassName,
+    getTypographyClassName,
+    handleBasicClasses,
+    resolveColorWithVariants,
+} from '@lumx/react/utils/className';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { wrapChildrenIconWithSpaces } from '@lumx/react/utils/react/wrapChildrenIconWithSpaces';
 
@@ -15,7 +20,7 @@ type HTMLAnchorProps = React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAn
  */
 export interface LinkProps extends GenericProps {
     /** Color variant. */
-    color?: ColorPalette;
+    color?: ColorWithVariants;
     /** Lightened or darkened variant of the selected icon color. */
     colorVariant?: ColorVariant;
     /** Link href. */
@@ -63,8 +68,8 @@ export const Link = forwardRef<LinkProps, HTMLAnchorElement | HTMLButtonElement>
     const {
         children,
         className,
-        color,
-        colorVariant,
+        color: propColor,
+        colorVariant: propColorVariant,
         disabled,
         isDisabled = disabled,
         href,
@@ -75,6 +80,7 @@ export const Link = forwardRef<LinkProps, HTMLAnchorElement | HTMLButtonElement>
         typography,
         ...forwardedProps
     } = props;
+    const [color, colorVariant] = resolveColorWithVariants(propColor, propColorVariant);
 
     const isLink = linkAs || href;
     const Component = isLink && !isDisabled ? linkAs || 'a' : 'button';

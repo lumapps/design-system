@@ -2,9 +2,9 @@ import React, { Children, isValidElement } from 'react';
 
 import classNames from 'classnames';
 
-import { ColorPalette, ColorVariant, Typography } from '@lumx/react';
+import { ColorVariant, ColorWithVariants, Typography } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
-import { getFontColorClassName, getRootClassName, getTypographyClassName } from '@lumx/react/utils/className';
+import { fontColorClass, getRootClassName, getTypographyClassName } from '@lumx/react/utils/className';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
@@ -14,7 +14,7 @@ export interface InlineListProps extends GenericProps {
     /**
      * Text color.
      */
-    color?: ColorPalette;
+    color?: ColorWithVariants;
     /**
      * Lightened or darkened variant of the selected color.
      */
@@ -57,7 +57,6 @@ const DEFAULT_PROPS = {} as const;
  */
 export const InlineList = forwardRef<InlineListProps>((props, ref) => {
     const { className, color, colorVariant, typography, children, wrap, ...forwardedProps } = props;
-    const fontColorClassName = color && getFontColorClassName(color, colorVariant);
     const typographyClassName = typography && getTypographyClassName(typography);
     return (
         // eslint-disable-next-line jsx-a11y/no-redundant-roles
@@ -68,7 +67,7 @@ export const InlineList = forwardRef<InlineListProps>((props, ref) => {
                 className,
                 CLASSNAME,
                 wrap && `${CLASSNAME}--wrap`,
-                fontColorClassName,
+                fontColorClass(color, colorVariant),
                 typographyClassName,
             )}
             // Lists with removed bullet style can lose their a11y list role on some browsers

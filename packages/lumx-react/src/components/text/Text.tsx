@@ -2,10 +2,10 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-import { ColorPalette, ColorVariant, Typography, WhiteSpace } from '@lumx/react';
+import { ColorWithVariants, ColorVariant, Typography, WhiteSpace } from '@lumx/react';
 import { GenericProps, TextElement } from '@lumx/react/utils/type';
 import {
-    getFontColorClassName,
+    fontColorClass,
     getRootClassName,
     handleBasicClasses,
     getTypographyClassName,
@@ -22,7 +22,7 @@ export interface TextProps extends GenericProps {
     /**
      * Color variant.
      */
-    color?: ColorPalette;
+    color?: ColorWithVariants;
     /**
      * Lightened or darkened variant of the selected color.
      */
@@ -95,7 +95,6 @@ export const Text = forwardRef<TextProps>((props, ref) => {
         ...forwardedProps
     } = props;
 
-    const colorClass = color && getFontColorClassName(color, colorVariant);
     const typographyClass = typography && getTypographyClassName(typography);
 
     // Truncate mode
@@ -126,7 +125,7 @@ export const Text = forwardRef<TextProps>((props, ref) => {
                     isTruncatedMultiline,
                 }),
                 typographyClass,
-                colorClass,
+                fontColorClass(color, colorVariant),
                 noWrap && `${CLASSNAME}--no-wrap`,
             )}
             title={tooltipLabel}
