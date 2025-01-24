@@ -3,7 +3,7 @@ import React from 'react';
 import { Theme } from '@lumx/react/components';
 import { Chip } from '@lumx/react/components/chip/Chip';
 import { Dropdown } from '@lumx/react/components/dropdown/Dropdown';
-import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { render, within } from '@testing-library/react';
 import {
     getAllByClassName,
@@ -23,13 +23,13 @@ jest.mock('@lumx/react/hooks/useId', () => ({ useId: () => ':r1:' }));
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (props: Partial<SelectMultipleProps> = {}) => {
+const setup = (props: Partial<SelectMultipleProps> = {}, { wrapper }: SetupRenderOptions = {}) => {
     const setupProps: SelectMultipleProps = {
         children: <span>Select Component</span>,
         value: [],
         ...props,
     };
-    render(<SelectMultiple {...setupProps} />);
+    render(<SelectMultiple {...setupProps} />, { wrapper });
     const select = getByClassName(document.body, CLASSNAME);
     const getDropdown = () => queryByClassName(document.body, Dropdown.className as string);
     const helpers = queryAllByClassName(select, `${CLASSNAME}__helper`);
@@ -205,5 +205,11 @@ describe('<SelectMultiple>', () => {
         forwardClassName: 'select',
         forwardAttributes: 'inputWrapper',
         forwardRef: 'select',
+        applyTheme: {
+            affects: [{ element: 'select' }],
+            viaProp: true,
+            viaContext: true,
+            defaultTheme: 'light',
+        },
     });
 });

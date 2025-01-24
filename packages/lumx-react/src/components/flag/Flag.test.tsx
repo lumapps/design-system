@@ -2,7 +2,7 @@ import React from 'react';
 
 import { ColorPalette, Theme } from '@lumx/react';
 import { mdiAbTesting } from '@lumx/icons';
-import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import { render } from '@testing-library/react';
 
@@ -13,10 +13,10 @@ const CLASSNAME = Flag.className as string;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propOverrides: Partial<FlagProps> = {}) => {
+const setup = (propOverrides: Partial<FlagProps> = {}, { wrapper }: SetupRenderOptions = {}) => {
     const props = { label: 'default', ...propOverrides };
 
-    render(<Flag {...props} />);
+    render(<Flag {...props} />, { wrapper });
     const flag = getByClassName(document.body, CLASSNAME);
     const icon = queryByClassName(flag, `${CLASSNAME}__icon`);
 
@@ -50,5 +50,15 @@ describe(`<${Flag.displayName} />`, () => {
     });
 
     // Common tests suite.
-    commonTestsSuiteRTL(setup, { baseClassName: CLASSNAME, forwardClassName: 'flag', forwardAttributes: 'flag' });
+    commonTestsSuiteRTL(setup, {
+        baseClassName: CLASSNAME,
+        forwardClassName: 'flag',
+        forwardAttributes: 'flag',
+        applyTheme: {
+            affects: [{ element: 'flag', classModifier: 'color', inverted: true }],
+            viaProp: true,
+            viaContext: true,
+            defaultTheme: 'light',
+        },
+    });
 });

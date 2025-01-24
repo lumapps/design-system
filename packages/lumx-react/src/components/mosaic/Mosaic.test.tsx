@@ -4,14 +4,14 @@ import { Mosaic, MosaicProps } from '@lumx/react/components/mosaic/Mosaic';
 import { render, screen, within } from '@testing-library/react';
 import { getByClassName, queryAllByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import { Thumbnail } from '@lumx/react';
-import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import range from 'lodash/range';
 import userEvent from '@testing-library/user-event';
 
 const CLASSNAME = Mosaic.className as string;
 
-const setup = (props: Partial<MosaicProps> = {}) => {
-    render(<Mosaic thumbnails={[]} {...props} />);
+const setup = (props: Partial<MosaicProps> = {}, { wrapper }: SetupRenderOptions = {}) => {
+    render(<Mosaic thumbnails={[]} {...props} />, { wrapper });
     const mosaic = getByClassName(document.body, CLASSNAME);
     const thumbnails = queryAllByClassName(mosaic, Thumbnail.className as string);
     const overlay = queryByClassName(mosaic, `${CLASSNAME}__overlay`);
@@ -69,5 +69,11 @@ describe(`<${Mosaic.displayName}>`, () => {
         forwardClassName: 'mosaic',
         forwardAttributes: 'mosaic',
         forwardRef: 'mosaic',
+        applyTheme: {
+            affects: [{ element: 'mosaic' }, { element: 'thumbnails' }],
+            viaProp: true,
+            viaContext: true,
+            defaultTheme: 'light',
+        },
     });
 });

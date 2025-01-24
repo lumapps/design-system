@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { queryByRole, render, screen } from '@testing-library/react';
 import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import userEvent from '@testing-library/user-event';
@@ -29,7 +29,10 @@ const ControlledComponent = (props: ExpansionPanelProps) => {
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: Partial<ExpansionPanelProps> = {}, options: { controlled?: boolean } = {}) => {
+const setup = (
+    propsOverride: Partial<ExpansionPanelProps> = {},
+    options: { controlled?: boolean; wrapper?: SetupRenderOptions['wrapper'] } = {},
+) => {
     const props = {
         toggleButtonProps: { label: 'Toggle' },
         children: mockChildrenContent,
@@ -37,7 +40,7 @@ const setup = (propsOverride: Partial<ExpansionPanelProps> = {}, options: { cont
     };
 
     const Component = options.controlled ? ControlledComponent : ExpansionPanel;
-    const { container } = render(<Component {...props} />);
+    const { container } = render(<Component {...props} />, { wrapper: options.wrapper });
 
     return {
         container,
@@ -154,5 +157,11 @@ describe(`<${ExpansionPanel.displayName}>`, () => {
         forwardClassName: 'element',
         forwardAttributes: 'element',
         forwardRef: 'element',
+        applyTheme: {
+            affects: [{ element: 'element' }],
+            viaProp: true,
+            viaContext: true,
+            defaultTheme: 'light',
+        },
     });
 });

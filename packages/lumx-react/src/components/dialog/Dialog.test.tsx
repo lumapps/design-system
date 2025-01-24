@@ -3,19 +3,26 @@ import React from 'react';
 import { Dialog, DialogProps } from '@lumx/react/components/dialog/Dialog';
 import { queryByClassName } from '@lumx/react/testing/utils/queries';
 import { render, screen } from '@testing-library/react';
-import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import userEvent from '@testing-library/user-event';
+import { ThemeSentinel } from '@lumx/react/testing/utils/ThemeSentinel';
 
 const CLASSNAME = Dialog.className as string;
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (props: Partial<DialogProps> = {}) => {
-    render(<Dialog isOpen {...props} />);
+const setup = (props: Partial<DialogProps> = {}, { wrapper }: SetupRenderOptions = {}) => {
+    render(
+        <Dialog isOpen {...props}>
+            {props.children || <ThemeSentinel />}
+        </Dialog>,
+        { wrapper },
+    );
     const dialog = queryByClassName(document.body, CLASSNAME);
     const container = dialog && queryByClassName(dialog, `${CLASSNAME}__container`);
-    return { props, dialog, container };
+    const themeSentinel = screen.queryByTestId(ThemeSentinel.testId);
+    return { props, dialog, container, themeSentinel };
 };
 
 describe(`<${Dialog.displayName}>`, () => {
@@ -66,5 +73,11 @@ describe(`<${Dialog.displayName}>`, () => {
         forwardAttributes: 'dialog',
         forwardRef: 'dialog',
         forwardClassName: 'dialog',
+        applyTheme: {
+            // Theme should not affect the children components
+            affects: [{ not: { element: 'themeSentinel' } }],
+            viaProp: true,
+            viaContext: true,
+        },
     });
 });

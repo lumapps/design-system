@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Dropdown, List, ListItem, Size, TextField } from '@lumx/react';
-import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import { render } from '@testing-library/react';
 
@@ -13,7 +13,7 @@ const CLASSNAME = AutocompleteMultiple.className as string;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (props: Partial<AutocompleteMultipleProps> = {}) => {
+const setup = (props: Partial<AutocompleteMultipleProps> = {}, { wrapper }: SetupRenderOptions = {}) => {
     render(
         <AutocompleteMultiple {...(props as any)}>
             <List>
@@ -24,6 +24,7 @@ const setup = (props: Partial<AutocompleteMultipleProps> = {}) => {
                 ))}
             </List>
         </AutocompleteMultiple>,
+        { wrapper },
     );
     const autocompleteMultiple = getByClassName(document.body, CLASSNAME);
     const textField = getByClassName(autocompleteMultiple, TextField.className as string);
@@ -52,5 +53,11 @@ describe(`<${AutocompleteMultiple.displayName}>`, () => {
         forwardClassName: 'autocompleteMultiple',
         forwardRef: 'autocompleteMultiple',
         forwardAttributes: 'autocompleteMultiple',
+        applyTheme: {
+            affects: [{ element: 'textField' }],
+            viaProp: true,
+            viaContext: true,
+            defaultTheme: 'light',
+        },
     });
 });

@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { render } from '@testing-library/react';
-import { getByClassName } from '@lumx/react/testing/utils/queries';
+import { getAllByClassName, getByClassName } from '@lumx/react/testing/utils/queries';
 import { Navigation, NavigationProps } from '.';
 import { Orientation } from '..';
 
@@ -14,7 +14,7 @@ type SetupProps = Partial<NavigationProps>;
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
 
-const setup = (propsOverride: SetupProps = {}) => {
+const setup = (propsOverride: SetupProps = {}, { wrapper }: SetupRenderOptions = {}) => {
     const props = { 'aria-label': 'navigation', ...propsOverride } as any;
     const { container } = render(
         <Navigation {...props}>
@@ -22,13 +22,12 @@ const setup = (propsOverride: SetupProps = {}) => {
             <Navigation.Item label="A link" as="button" />
             <Navigation.Item label="A link" href="" />
         </Navigation>,
+        { wrapper },
     );
 
-    return {
-        container,
-        element: getByClassName(container, CLASSNAME),
-        props,
-    };
+    const element = getByClassName(container, CLASSNAME);
+    const items = getAllByClassName(element, Navigation.Item.className as string);
+    return { container, element, items, props };
 };
 
 describe(`<${Navigation.displayName}>`, () => {
@@ -54,5 +53,15 @@ describe(`<${Navigation.displayName}>`, () => {
     });
 
     // Common tests suite.
-    commonTestsSuiteRTL(setup, { baseClassName: CLASSNAME, forwardClassName: 'element', forwardAttributes: 'element' });
+    commonTestsSuiteRTL(setup, {
+        baseClassName: CLASSNAME,
+        forwardClassName: 'element',
+        forwardAttributes: 'element',
+        applyTheme: {
+            affects: [{ element: 'element' }, { element: 'items' }],
+            viaProp: true,
+            viaContext: true,
+            defaultTheme: 'light',
+        },
+    });
 });

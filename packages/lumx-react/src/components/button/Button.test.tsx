@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { mdiCheck, mdiPlus } from '@lumx/icons';
-import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { render, screen, within } from '@testing-library/react';
 import { getByClassName, queryAllByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import { Emphasis, Icon } from '@lumx/react';
@@ -15,9 +15,9 @@ type SetupProps = Partial<ButtonProps>;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}) => {
+const setup = (propsOverride: SetupProps = {}, { wrapper }: SetupRenderOptions = {}) => {
     const props: any = { ...propsOverride };
-    render(<Button {...props} />);
+    render(<Button {...props} />, { wrapper });
     const button = getByClassName(document.body, CLASSNAME);
     const buttonWrapper = queryByClassName(document.body, 'lumx-button-wrapper');
     const icons = queryAllByClassName(button, Icon.className as string);
@@ -71,5 +71,11 @@ describe(`<${Button.displayName}>`, () => {
         forwardClassName: 'button',
         forwardAttributes: 'button',
         forwardRef: 'button',
+        applyTheme: {
+            affects: [{ element: 'button' }],
+            viaProp: true,
+            viaContext: true,
+            defaultTheme: 'light',
+        },
     });
 });

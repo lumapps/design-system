@@ -5,7 +5,7 @@ import { Chip } from '@lumx/react/components/chip/Chip';
 import { Dropdown } from '@lumx/react/components/dropdown/Dropdown';
 import { getByClassName, queryAllByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import { render, within } from '@testing-library/react';
-import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import userEvent from '@testing-library/user-event';
 import { isFocusVisible } from '@lumx/react/utils/isFocusVisible';
 
@@ -19,13 +19,13 @@ jest.mock('@lumx/react/hooks/useId', () => ({ useId: () => ':r1:' }));
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: Partial<SelectProps> = {}) => {
+const setup = (propsOverride: Partial<SelectProps> = {}, { wrapper }: SetupRenderOptions = {}) => {
     const props: SelectProps = {
         children: <span>Select Component</span>,
         value: '',
         ...propsOverride,
     };
-    render(<Select {...props} />);
+    render(<Select {...props} />, { wrapper });
     const select = getByClassName(document.body, CLASSNAME);
     const getDropdown = () => queryByClassName(document.body, Dropdown.className as string);
     const helpers = queryAllByClassName(select, `${CLASSNAME}__helper`);
@@ -190,5 +190,11 @@ describe(`<${Select.displayName}>`, () => {
         forwardClassName: 'select',
         forwardAttributes: 'inputWrapper',
         forwardRef: 'select',
+        applyTheme: {
+            affects: [{ element: 'select' }],
+            viaProp: true,
+            viaContext: true,
+            defaultTheme: 'light',
+        },
     });
 });

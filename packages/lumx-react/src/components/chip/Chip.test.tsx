@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Theme } from '@lumx/react';
-import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import userEvent from '@testing-library/user-event';
@@ -12,12 +12,12 @@ const CLASSNAME = Chip.className as string;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propOverrides: Partial<ChipProps> = {}) => {
+const setup = (propOverrides: Partial<ChipProps> = {}, { wrapper }: SetupRenderOptions = {}) => {
     const props = {
         ...propOverrides,
     };
 
-    render(<Chip {...props} />);
+    render(<Chip {...props} />, { wrapper });
     const chip = getByClassName(document.body, CLASSNAME);
     const before = queryByClassName(chip, `${CLASSNAME}__before`);
     const after = queryByClassName(chip, `${CLASSNAME}__after`);
@@ -185,5 +185,15 @@ describe('<Chip />', () => {
         });
     });
 
-    commonTestsSuiteRTL(setup, { baseClassName: CLASSNAME, forwardClassName: 'chip', forwardAttributes: 'chip' });
+    commonTestsSuiteRTL(setup, {
+        baseClassName: CLASSNAME,
+        forwardClassName: 'chip',
+        forwardAttributes: 'chip',
+        applyTheme: {
+            affects: [{ element: 'chip', classModifier: 'color', inverted: true }],
+            viaProp: true,
+            viaContext: true,
+            defaultTheme: 'light',
+        },
+    });
 });

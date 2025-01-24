@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { Button } from '@lumx/react';
 import { render, screen } from '@testing-library/react';
 import { getByClassName, queryByClassName, queryByTagName } from '@lumx/react/testing/utils/queries';
@@ -14,9 +14,9 @@ type SetupProps = Partial<IconButtonProps>;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}) => {
+const setup = (propsOverride: SetupProps = {}, { wrapper }: SetupRenderOptions = {}) => {
     const props: any = { ...propsOverride };
-    render(<IconButton {...props} />);
+    render(<IconButton {...props} />, { wrapper });
     const iconButton = getByClassName(document.body, CLASSNAME);
     const icon = queryByClassName(iconButton, 'lumx-icon');
     const img = queryByTagName(iconButton, 'IMG');
@@ -58,5 +58,11 @@ describe(`<${IconButton.displayName}>`, () => {
         forwardClassName: 'iconButton',
         forwardAttributes: 'iconButton',
         forwardRef: 'iconButton',
+        applyTheme: {
+            affects: [{ element: 'iconButton' }],
+            viaProp: true,
+            viaContext: true,
+            defaultTheme: 'light',
+        },
     });
 });

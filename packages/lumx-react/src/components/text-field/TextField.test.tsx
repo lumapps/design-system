@@ -2,7 +2,7 @@ import React from 'react';
 
 import camelCase from 'lodash/camelCase';
 
-import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils/className';
 import { render } from '@testing-library/react';
 import {
@@ -25,9 +25,9 @@ jest.mock('@lumx/react/utils/isFocusVisible');
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: Partial<TextFieldProps> = {}) => {
+const setup = (propsOverride: Partial<TextFieldProps> = {}, { wrapper }: SetupRenderOptions = {}) => {
     const props: any = { ...propsOverride };
-    const { container } = render(<TextField {...props} />);
+    const { container } = render(<TextField {...props} />, { wrapper });
 
     const element = getByClassName(container, CLASSNAME);
     const inputNative = (queryByTagName(container, 'textarea') || getByTagName(container, 'input')) as
@@ -233,5 +233,11 @@ describe(`<${TextField.displayName}>`, () => {
         forwardClassName: 'element',
         forwardAttributes: 'inputNative',
         forwardRef: 'element',
+        applyTheme: {
+            affects: [{ element: 'element' }],
+            viaProp: true,
+            viaContext: true,
+            defaultTheme: 'light',
+        },
     });
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 
 import { Theme } from '@lumx/react';
 import { render, screen } from '@testing-library/react';
@@ -13,10 +13,10 @@ type SetupProps = Partial<DividerProps>;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}) => {
+const setup = (propsOverride: SetupProps = {}, { wrapper }: SetupRenderOptions = {}) => {
     const props: DividerProps = { ...propsOverride };
 
-    render(<Divider {...props} />);
+    render(<Divider {...props} />, { wrapper });
     const divider = screen.queryByRole('separator');
 
     return { props, divider };
@@ -43,5 +43,11 @@ describe(`<${Divider.displayName}>`, () => {
         forwardClassName: 'divider',
         forwardAttributes: 'divider',
         forwardRef: 'divider',
+        applyTheme: {
+            affects: [{ element: 'divider' }],
+            viaProp: true,
+            viaContext: true,
+            defaultTheme: 'light',
+        },
     });
 });

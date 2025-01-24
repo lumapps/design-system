@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Tab } from '@lumx/react';
-import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { render, screen } from '@testing-library/react';
 import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 
@@ -14,7 +14,7 @@ type SetupProps = Partial<TabListProps>;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-const setup = (propsOverride: SetupProps = {}) => {
+const setup = (propsOverride: SetupProps = {}, { wrapper }: SetupRenderOptions = {}) => {
     const tabs = [<Tab key={0} label="Tab 0" />, <Tab key={1} label="Tab 1" />];
     const props: TabListProps = {
         children: tabs,
@@ -22,7 +22,7 @@ const setup = (propsOverride: SetupProps = {}) => {
         ...propsOverride,
     };
 
-    render(<TabList {...props} />);
+    render(<TabList {...props} />, { wrapper });
     const tabList = getByClassName(document.body, CLASSNAME);
     const links = queryByClassName(tabList, `${CLASSNAME}__links`);
     return { props, tabList, links };
@@ -41,5 +41,11 @@ describe(`<${TabList.displayName}>`, () => {
         forwardClassName: 'tabList',
         forwardAttributes: 'tabList',
         forwardRef: 'tabList',
+        applyTheme: {
+            affects: [{ element: 'tabList' }],
+            viaProp: true,
+            viaContext: true,
+            defaultTheme: 'light',
+        },
     });
 });
