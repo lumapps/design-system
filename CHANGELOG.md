@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `DatePickerField`: fix minDate and endDate behavior to be always included
 
+### Added
+
+-   `Text`, `Heading`, `Icon`, `InlineList` and `Link`: can now set color and color variant directly in the `color` props (ex: `color="dark-L2"`)
+
 ### Changed
 
 -   Docs: update `Filter and sort` pattern doc page

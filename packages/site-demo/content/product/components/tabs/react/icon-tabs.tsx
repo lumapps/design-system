@@ -10,11 +10,7 @@ export const App = ({ theme }: any) => {
             <TabProvider activeTabIndex={activeTab} onChange={setActiveTab}>
                 <TabList theme={theme} aria-label="Tab list">
                     <Tab label="Tab 1" icon={mdiBowl} />
-                    <Tab
-                        label="Tab 2"
-                        icon={mdiBreadSliceOutline}
-                        iconProps={{ color: 'red', colorVariant: 'L1', hasShape: false }}
-                    />
+                    <Tab label="Tab 2" icon={mdiBreadSliceOutline} iconProps={{ color: 'red-L1', hasShape: false }} />
                     <Tab label="Tab 3" icon={mdiSilverwareForkKnife} />
                 </TabList>
 
