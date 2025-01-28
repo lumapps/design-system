@@ -1,5 +1,5 @@
 import React from 'react';
-import { getFirstAndLastFocusable } from '@lumx/react/utils/focus/getFirstAndLastFocusable';
+import { getFirstAndLastFocusable } from '@lumx/react/utils/browser/focus/getFirstAndLastFocusable';
 import { OnBeforeUnmount } from '@lumx/react/utils/OnBeforeUnmount';
 import type { PopoverProps } from './Popover';
 

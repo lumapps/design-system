@@ -7,13 +7,13 @@ import { getByClassName, queryAllByClassName, queryByClassName } from '@lumx/rea
 import { render, within } from '@testing-library/react';
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import userEvent from '@testing-library/user-event';
-import { isFocusVisible } from '@lumx/react/utils/isFocusVisible';
+import { isFocusVisible } from '@lumx/react/utils/browser/isFocusVisible';
 
 import { Select, SelectProps, SelectVariant } from './Select';
 
 const CLASSNAME = Select.className as string;
 
-jest.mock('@lumx/react/utils/isFocusVisible');
+jest.mock('@lumx/react/utils/browser/isFocusVisible');
 jest.mock('@lumx/react/hooks/useId', () => ({ useId: () => ':r1:' }));
 
 /**

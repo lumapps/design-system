@@ -2,8 +2,8 @@ import React from 'react';
 
 import memoize from 'lodash/memoize';
 
-import { startViewTransition } from '@lumx/react/utils/DOM/startViewTransition';
-import { findImage } from '@lumx/react/utils/DOM/findImage';
+import { startViewTransition } from '@lumx/react/utils/browser/DOM/startViewTransition';
+import { findImage } from '@lumx/react/utils/browser/DOM/findImage';
 
 import type { ImageLightboxProps } from './types';
 import { CLASSNAME } from './constants';

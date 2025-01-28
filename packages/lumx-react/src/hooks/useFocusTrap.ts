@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import { DOCUMENT } from '@lumx/react/constants';
-import { getFirstAndLastFocusable } from '@lumx/react/utils/focus/getFirstAndLastFocusable';
+import { getFirstAndLastFocusable } from '@lumx/react/utils/browser/focus/getFirstAndLastFocusable';
 import { Falsy } from '@lumx/react/utils/type';
 import { Listener, makeListenerTowerContext } from '@lumx/react/utils/makeListenerTowerContext';
 

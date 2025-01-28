@@ -1,4 +1,4 @@
-import { getFirstAndLastFocusable } from '@lumx/react/utils/focus/getFirstAndLastFocusable';
+import { getFirstAndLastFocusable } from './getFirstAndLastFocusable';
 
 function htmlToElement(html: string): any {
     const template = document.createElement('template');

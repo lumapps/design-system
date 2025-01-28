@@ -1,4 +1,4 @@
-import { getFocusableElements } from '@lumx/react/utils/focus/getFocusableElements';
+import { getFocusableElements } from './getFocusableElements';
 
 function htmlToElement(html: string): any {
     const template = document.createElement('template');
