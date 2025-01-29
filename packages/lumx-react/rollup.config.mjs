@@ -1,4 +1,6 @@
 import path from 'path';
+import glob from 'glob';
+
 import commonjs from '@rollup/plugin-commonjs';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import analyze from 'rollup-plugin-analyzer';
@@ -15,17 +17,37 @@ const importUrl = new URL(import.meta.url);
 const __dirname = path.dirname(importUrl.pathname);
 
 const ROOT_PATH = path.resolve(__dirname, '..', '..');
+const SRC_PATH = path.resolve(__dirname, 'src');
 const DIST_PATH = path.resolve(__dirname, pkg.publishConfig.directory);
 export const extensions = ['.js', '.jsx', '.ts', '.tsx'];
+
+const INTERNAL = '_internal';
+
+const entries = [
+    ['index', 'src/index.ts'],             // => @lumx/react
+    ['utils/index', 'src/utils/index.ts'], // => @lumx/react/utils
+]
 
 /**
  * List of entry modules that will get compiled and exported to NPM.
  * All other modules are considered as internal and won't be exposed.
  */
 const input = Object.fromEntries([
-    ['index', 'src/index.ts'],             // => @lumx/react
-    ['utils/index', 'src/utils/index.ts'], // => @lumx/react/utils
+    // Externals
+    ...entries,
+    // Internals (split to help bundler tree-shake)
+    ...glob.sync('src/components/*/index.ts').map((componentPath) => {
+        const relativePath = path.relative(SRC_PATH, componentPath);
+        return [`${INTERNAL}/${path.dirname(relativePath)}`, componentPath];
+    }),
 ]);
+
+const formatFileNames = (ext) => (info) => {
+    if (info.name.startsWith(INTERNAL)) {
+        return `[name]-[hash].${ext}`;
+    }
+    return `[name].${ext}`;
+};
 
 // Bundle JS code
 const bundleJS = {
@@ -36,7 +58,8 @@ const bundleJS = {
         hoistTransitiveImports: false,
         dir: DIST_PATH,
         // Unnamed chunk moved to `_internal` folder
-        chunkFileNames: '_internal/[name].js',
+        chunkFileNames: `_internal/[name]-[hash].js`,
+        entryFileNames: formatFileNames('js'),
     },
     plugins: [
         /** Clean dist dir */
@@ -74,12 +97,13 @@ const bundleJS = {
 
 // Bundle TS types in D.TS files
 const bundleType = {
-    input,
+    input: Object.fromEntries(entries),
     output: {
         format: 'esm',
         dir: DIST_PATH,
         // Unnamed chunk moved to `_internal` folder
-        chunkFileNames: '_internal/[name].d.ts',
+        chunkFileNames: `_internal/[name]-[hash].d.ts`,
+        entryFileNames: formatFileNames('d.ts'),
     },
     plugins: [
         /** Externalize peer dependencies. */
