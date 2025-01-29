@@ -1,6 +1,6 @@
 import React, { Children, Fragment, forwardRef } from 'react';
 
-import { Icon, ColorPalette, ColorVariant, Typography, WhiteSpace } from '@lumx/react';
+import { Icon, ColorVariant, Typography, WhiteSpace, ColorWithVariants } from '@lumx/react';
 import { Comp, GenericProps, TextElement, isComponent } from '@lumx/react/utils/type';
 import {
     getFontColorClassName,
@@ -19,7 +19,7 @@ export interface TextProps extends GenericProps {
     /**
      * Color variant.
      */
-    color?: ColorPalette;
+    color?: ColorWithVariants;
     /**
      * Lightened or darkened variant of the selected color.
      */
@@ -88,7 +88,7 @@ export const Text: Comp<TextProps> = forwardRef((props, ref) => {
         ...forwardedProps
     } = props;
 
-    const colorClass = color && getFontColorClassName(color, colorVariant);
+    const colorClass = getFontColorClassName(color, colorVariant);
     const typographyClass = typography && getTypographyClassName(typography);
 
     // Truncate mode

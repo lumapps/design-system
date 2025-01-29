@@ -75,7 +75,7 @@ export const App = () => {
                         figure={<Thumbnail alt="" image="/demo-assets/square1.jpg" size="m" variant="rounded" />}
                     >
                         <Heading typography="body1">With thumbnail</Heading>
-                        <Text as="p" typography="caption" color="dark" colorVariant="L2">
+                        <Text as="p" typography="caption" color="dark-L2">
                             And secondary text
                         </Text>
                     </GenericBlock>

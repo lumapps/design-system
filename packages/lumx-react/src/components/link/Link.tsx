@@ -4,9 +4,9 @@ import isEmpty from 'lodash/isEmpty';
 
 import classNames from 'classnames';
 
-import { ColorPalette, ColorVariant, Icon, Size, Typography } from '@lumx/react';
+import { ColorVariant, ColorWithVariants, Icon, Size, Typography } from '@lumx/react';
 import { Comp, GenericProps } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { getRootClassName, handleBasicClasses, parseColorWithVariants } from '@lumx/react/utils/className';
 import { renderLink } from '@lumx/react/utils/renderLink';
 
 type HTMLAnchorProps = React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
@@ -16,7 +16,7 @@ type HTMLAnchorProps = React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAn
  */
 export interface LinkProps extends GenericProps {
     /** Color variant. */
-    color?: ColorPalette;
+    color?: ColorWithVariants;
     /** Lightened or darkened variant of the selected icon color. */
     colorVariant?: ColorVariant;
     /** Link href. */
@@ -86,8 +86,8 @@ export const Link: Comp<LinkProps, HTMLAnchorElement | HTMLButtonElement> = forw
     const {
         children,
         className,
-        color,
-        colorVariant,
+        color: propColor,
+        colorVariant: propColorVariant,
         disabled,
         isDisabled = disabled,
         href,
@@ -98,6 +98,7 @@ export const Link: Comp<LinkProps, HTMLAnchorElement | HTMLButtonElement> = forw
         typography,
         ...forwardedProps
     } = props;
+    const [color, colorVariant] = parseColorWithVariants(propColor, propColorVariant);
     const renderedChildren = useMemo(
         () => (
             <>

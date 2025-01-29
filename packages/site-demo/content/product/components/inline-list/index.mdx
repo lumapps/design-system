@@ -18,7 +18,7 @@ import { mdiEarth } from '@lumx/icons';
 Like [text](/product/components/text/) elements, inline lists can have customized **color** and **typography** (see list of [typography](/product/foundations/typography/) and [color](/product/foundations/color/) styles).
 
 <DemoBlock>
-    <InlineList typography="body1" color="dark" colorVariant="L2">
+    <InlineList typography="body1" color="dark-L2">
         <Text as="span">Some text</Text>
         <Link href="#">Some link</Link>
         <Icon icon={mdiEarth} />
@@ -30,7 +30,7 @@ Like [text](/product/components/text/) elements, inline lists can have customize
 Inline lists pair well with [text](/product/components/text/) `noWrap` property to disable line wrap and `truncate` property to cut text with ellipsis.
 
 <DemoBlock orientation="horizontal" vAlign="space-around">
-    <InlineList typography="body1" color="dark" colorVariant="L2" style={{ maxWidth: 275 }}>
+    <InlineList typography="body1" color="dark-L2" style={{ maxWidth: 275 }}>
         <Text as="span" noWrap>
             <Icon icon={mdiEarth} />
             Some text
@@ -44,7 +44,7 @@ Inline lists pair well with [text](/product/components/text/) `noWrap` property 
 Inversely, the use of the `wrap` property will activate line wrap on overflow.
 
 <DemoBlock orientation="horizontal" vAlign="space-around">
-    <InlineList typography="body1" color="dark" colorVariant="L2" wrap style={{ maxWidth: 275 }}>
+    <InlineList typography="body1" color="dark-L2" wrap style={{ maxWidth: 275 }}>
         <Text as="span">
             <Icon icon={mdiEarth} />
             Some text
