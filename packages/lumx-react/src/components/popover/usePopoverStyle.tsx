@@ -1,10 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import memoize from 'lodash/memoize';
+
 import { detectOverflow } from '@popperjs/core';
 
 import { DOCUMENT, WINDOW } from '@lumx/react/constants';
 import { PopoverProps } from '@lumx/react/components/popover/Popover';
 import { usePopper } from '@lumx/react/hooks/usePopper';
+import { memoize } from '@lumx/react/utils/function/memoize';
+
 import { ARROW_SIZE, FitAnchorWidth, Placement } from './constants';
 
 /**

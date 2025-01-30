@@ -3,8 +3,8 @@ import React from 'react';
 import { mdiMagnifyMinusOutline, mdiMagnifyPlusOutline } from '@lumx/icons';
 import { FlexBox, IconButton, Slides, SlideshowControls } from '@lumx/react';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
+import { memoize } from '@lumx/react/utils/function/memoize';
 
-import memoize from 'lodash/memoize';
 import { ImageCaption } from '../../image-block/ImageCaption';
 import { CLASSNAME } from '../constants';
 import type { ImagesProps, InheritedSlideShowProps, ZoomButtonProps } from '../types';
@@ -113,13 +113,9 @@ export const ImageSlideshow: React.FC<ImageSlideshowProps> = ({
 
     const getImgRef = React.useMemo(
         () =>
-            memoize(
-                (index: number, isActive: boolean) => {
-                    return mergeRefs(images?.[index].imgRef, isActive ? activeImageRef : undefined);
-                },
-                // memoize based on both arguments
-                (...args) => args.join(),
-            ),
+            memoize((index: number, isActive: boolean) => {
+                return mergeRefs(images?.[index].imgRef, isActive ? activeImageRef : undefined);
+            }),
         [images, activeImageRef],
     );
 
