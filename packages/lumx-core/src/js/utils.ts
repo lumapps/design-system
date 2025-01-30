@@ -2,7 +2,6 @@ import classNames from 'classnames';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import React from 'react';
 
-import isBoolean from 'lodash/isBoolean';
 import isEmpty from 'lodash/isEmpty';
 
 /** Transform camelCase to kebab-case */
@@ -41,7 +40,7 @@ export function getBasicClass({
     type: string;
     value: string | number | boolean | undefined;
 }): string {
-    if (isBoolean(value)) {
+    if (typeof value === 'boolean') {
         if (!value) {
             // False value should not return a class.
             return '';
@@ -73,9 +72,8 @@ export function handleBasicClasses({ prefix, ...props }: { prefix: string; [prop
     const otherClasses: any = {};
     if (!isEmpty(props)) {
         Object.keys(props).forEach((prop) => {
-            otherClasses[getBasicClass({ prefix, type: prop, value: props[prop] })] = isBoolean(props[prop])
-                ? props[prop]
-                : !_isEmpty(props[prop]);
+            otherClasses[getBasicClass({ prefix, type: prop, value: props[prop] })] =
+                typeof props[prop] === 'boolean' ? props[prop] : !_isEmpty(props[prop]);
         });
     }
 
