@@ -3,7 +3,7 @@ import React from 'react';
 import classNames from 'classnames';
 
 import { GenericProps } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { getRootClassName } from '@lumx/react/utils/className';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
@@ -34,16 +34,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
 export const SlideshowItem = forwardRef<SlideshowItemProps, HTMLDivElement>((props, ref) => {
     const { className, children, ...forwardedProps } = props;
     return (
-        <div
-            ref={ref}
-            className={classNames(
-                className,
-                handleBasicClasses({
-                    prefix: CLASSNAME,
-                }),
-            )}
-            {...forwardedProps}
-        >
+        <div ref={ref} className={classNames(className, CLASSNAME)} {...forwardedProps}>
             {children}
         </div>
     );

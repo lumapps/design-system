@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { HorizontalAlignment } from '@lumx/react/components';
 import { GenericProps } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { getRootClassName } from '@lumx/react/utils/className';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { useChipGroupNavigation } from '@lumx/react/hooks/useChipGroupNavigation';
@@ -46,12 +46,9 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  */
 const InternalChipGroup = forwardRef<ChipGroupProps, HTMLDivElement>((props, ref) => {
     const { align, children, className, ...forwardedProps } = props;
-    const chipGroupClassName = handleBasicClasses({
-        prefix: CLASSNAME,
-    });
 
     return (
-        <div ref={ref} {...forwardedProps} className={classNames(className, chipGroupClassName)}>
+        <div ref={ref} {...forwardedProps} className={classNames(className, CLASSNAME)}>
             {children}
         </div>
     );

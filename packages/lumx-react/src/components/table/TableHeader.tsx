@@ -3,7 +3,7 @@ import React from 'react';
 import classNames from 'classnames';
 
 import { GenericProps } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { getRootClassName } from '@lumx/react/utils/className';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
@@ -37,11 +37,7 @@ export const TableHeader = forwardRef<TableHeaderProps, HTMLTableSectionElement>
     const { children, className, ...forwardedProps } = props;
 
     return (
-        <thead
-            ref={ref}
-            {...forwardedProps}
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))}
-        >
+        <thead ref={ref} {...forwardedProps} className={classNames(className, CLASSNAME)}>
             {children}
         </thead>
     );

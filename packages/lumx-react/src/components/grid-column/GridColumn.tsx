@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 import { Size } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { getRootClassName } from '@lumx/react/utils/className';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 export type GridColumnGapSize = Extract<Size, 'tiny' | 'regular' | 'big' | 'huge'>;
@@ -66,12 +66,7 @@ export const GridColumn = forwardRef<GridColumnProps>((props, ref): ReactElement
         <Component
             {...forwardedProps}
             ref={ref as React.Ref<any>}
-            className={classNames(
-                className,
-                handleBasicClasses({
-                    prefix: CLASSNAME,
-                }),
-            )}
+            className={classNames(className, CLASSNAME)}
             style={{
                 ...style,
                 ['--lumx-grid-column-item-min-width' as any]: isInteger(itemMinWidth) && `${itemMinWidth}px`,

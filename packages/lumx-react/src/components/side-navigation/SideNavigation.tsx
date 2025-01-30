@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { SideNavigationItem, Theme } from '@lumx/react';
 import { GenericProps, HasTheme, isComponent } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { getRootClassName } from '@lumx/react/utils/className';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
@@ -42,11 +42,7 @@ export const SideNavigation = forwardRef<SideNavigationProps, HTMLUListElement>(
         <ul
             ref={ref}
             {...forwardedProps}
-            className={classNames(
-                className,
-                theme === Theme.dark && 'lumx-color-font-light-N',
-                handleBasicClasses({ prefix: CLASSNAME }),
-            )}
+            className={classNames(className, theme === Theme.dark && 'lumx-color-font-light-N', CLASSNAME)}
         >
             {content}
         </ul>

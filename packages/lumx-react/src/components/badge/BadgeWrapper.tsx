@@ -2,7 +2,7 @@ import React, { ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { getRootClassName } from '@lumx/react/utils/className';
 import { DEFAULT_PROPS } from '@lumx/react/components/select/WithSelectContext';
 import { GenericProps } from '@lumx/react/utils/type';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
@@ -28,7 +28,7 @@ export const BadgeWrapper = forwardRef<BadgeWrapperProps, HTMLDivElement>((props
     const { badge, children, className, ...forwardedProps } = props;
 
     return (
-        <div ref={ref} {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))}>
+        <div ref={ref} {...forwardedProps} className={classNames(className, CLASSNAME)}>
             {children}
             {badge && <div className={`${CLASSNAME}__badge`}>{badge}</div>}
         </div>
