@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { mdiClose } from '@lumx/icons';
 
 import { Autocomplete, AutocompleteProps, Chip, HorizontalAlignment, Icon, Size } from '@lumx/react';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { getRootClassName } from '@lumx/react/utils/className';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
@@ -114,12 +114,7 @@ export const AutocompleteMultiple = forwardRef<AutocompleteMultipleProps, HTMLDi
             ref={ref}
             {...forwardedProps}
             anchorToInput={anchorToInput}
-            className={classNames(
-                className,
-                handleBasicClasses({
-                    prefix: CLASSNAME,
-                }),
-            )}
+            className={classNames(className, CLASSNAME)}
             name={name}
             value={value}
             onChange={onChange}

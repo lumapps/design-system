@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { Dropdown, DropdownProps, IconButtonProps, Offset, Placement, TextField, TextFieldProps } from '@lumx/react';
 
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { getRootClassName } from '@lumx/react/utils/className';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
@@ -245,16 +245,7 @@ export const Autocomplete = forwardRef<AutocompleteProps, HTMLDivElement>((props
     useFocus(inputAnchorRef.current, !isOpen && shouldFocusOnClose);
 
     return (
-        <div
-            ref={ref}
-            {...forwardedProps}
-            className={classNames(
-                className,
-                handleBasicClasses({
-                    prefix: CLASSNAME,
-                }),
-            )}
-        >
+        <div ref={ref} {...forwardedProps} className={classNames(className, CLASSNAME)}>
             <TextField
                 {...textFieldProps}
                 chips={chips}

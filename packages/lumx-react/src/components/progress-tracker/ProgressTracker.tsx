@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react';
 import classNames from 'classnames';
 
 import { GenericProps } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { getRootClassName } from '@lumx/react/utils/className';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
@@ -61,11 +61,7 @@ export const ProgressTracker = forwardRef<ProgressTrackerProps, HTMLDivElement>(
         numberOfSteps > 0 ? ((100 / (numberOfSteps - 1)) * (state?.activeTabIndex || 0)) / 100 : 0;
 
     return (
-        <div
-            ref={mergeRefs(ref, stepListRef)}
-            {...forwardedProps}
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))}
-        >
+        <div ref={mergeRefs(ref, stepListRef)} {...forwardedProps} className={classNames(className, CLASSNAME)}>
             <div className={`${CLASSNAME}__steps`} role="tablist" aria-label={ariaLabel}>
                 {children}
             </div>

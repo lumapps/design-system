@@ -3,7 +3,7 @@ import React from 'react';
 import classNames from 'classnames';
 
 import { HeadingElement } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { getRootClassName } from '@lumx/react/utils/className';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { Text, TextProps } from '../text';
@@ -48,12 +48,7 @@ export const Heading = forwardRef<HeadingProps>((props, ref) => {
     return (
         <Text
             ref={ref}
-            className={classNames(
-                className,
-                handleBasicClasses({
-                    prefix: CLASSNAME,
-                }),
-            )}
+            className={classNames(className, CLASSNAME)}
             as={computedHeadingElement}
             typography={DEFAULT_TYPOGRAPHY_BY_LEVEL[computedHeadingElement]}
             {...forwardedProps}

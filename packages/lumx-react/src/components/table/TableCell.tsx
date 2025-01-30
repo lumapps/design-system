@@ -109,10 +109,7 @@ export const TableCell = forwardRef<TableCellProps, HTMLTableCellElement>((props
             )}
 
             {variant === TableCellVariant.body && (
-                <td
-                    {...forwardedProps}
-                    className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }), `${CLASSNAME}--body`)}
-                >
+                <td {...forwardedProps} className={classNames(className, CLASSNAME, `${CLASSNAME}--body`)}>
                     <div className={`${CLASSNAME}-content`}>{children}</div>
                 </td>
             )}

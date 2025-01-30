@@ -3,7 +3,7 @@ import React from 'react';
 import classNames from 'classnames';
 
 import { GenericProps } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { getRootClassName } from '@lumx/react/utils/className';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
@@ -31,13 +31,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
 export const ListDivider = forwardRef<ListDividerProps, HTMLLIElement>((props, ref) => {
     const { className, ...forwardedProps } = props;
 
-    return (
-        <li
-            ref={ref}
-            {...forwardedProps}
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))}
-        />
-    );
+    return <li ref={ref} {...forwardedProps} className={classNames(className, CLASSNAME)} />;
 });
 ListDivider.displayName = COMPONENT_NAME;
 ListDivider.className = CLASSNAME;
