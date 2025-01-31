@@ -2,7 +2,7 @@ import { ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
-import { getRootClassName } from '@lumx/core/js/utils/className';
+import type { LumxClassName } from '@lumx/core/js/types';
 import { GenericProps } from '@lumx/react/utils/type';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
@@ -21,7 +21,7 @@ const COMPONENT_NAME = 'BadgeWrapper';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-badge-wrapper';
 
 export const BadgeWrapper = forwardRef<BadgeWrapperProps, HTMLDivElement>((props, ref) => {
     const { badge, children, className, ...forwardedProps } = props;

@@ -11,3 +11,4 @@ export type { Predicate } from './Predicate';
 export type { RectSize } from './RectSize';
 export type { TextElement } from './TextElement';
 export type { ValueOf } from './ValueOf';
+export type { LumxClassName } from './LumxClassName';

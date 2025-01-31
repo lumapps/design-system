@@ -2,8 +2,7 @@ import classNames from 'classnames';
 
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTabProviderContext } from '@lumx/react/components/tabs/state';
-import { CSS_PREFIX } from '@lumx/react/constants';
-import { GenericProps } from '@lumx/react/utils/type';
+import { GenericProps, LumxClassName } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/className';
 
 /**
@@ -26,7 +25,7 @@ const COMPONENT_NAME = 'TabPanel';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = `${CSS_PREFIX}-tab-panel`;
+const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = `lumx-tab-panel`;
 
 /**
  * Component default props.

@@ -7,7 +7,8 @@ import { Button, Emphasis, Icon, Kind, Size, Theme } from '@lumx/react';
 import { DOCUMENT, NOTIFICATION_TRANSITION_DURATION } from '@lumx/react/constants';
 import { NOTIFICATION_CONFIGURATION } from '@lumx/react/components/notification/constants';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';
+import { handleBasicClasses } from '@lumx/core/js/utils/className';
+import type { LumxClassName } from '@lumx/core/js/types';
 import { useTransitionVisibility } from '@lumx/react/hooks/useTransitionVisibility';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
@@ -45,7 +46,7 @@ const COMPONENT_NAME = 'Notification';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-notification';
 
 /**
  * Component default props.

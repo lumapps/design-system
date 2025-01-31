@@ -1,8 +1,4 @@
 import { ValueOf } from '../types/ValueOf';
-/**
- * The prefix to use for the CSS classes.
- */
-export const CSS_PREFIX = 'lumx';
 
 /**
  * Key codes.

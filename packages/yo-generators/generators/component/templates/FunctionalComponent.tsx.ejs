@@ -1,7 +1,8 @@
 import classNames from 'classnames';
 
-import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';
+import {  handleBasicClasses } from '@lumx/core/js/utils/className';
 import { forwardRef } from "@lumx/react/utils/react/forwardRef";
+import { LumxClassName } from '@lumx/core/js/types';
 
 /**
  * Defines the props of the component.
@@ -19,7 +20,7 @@ const COMPONENT_NAME = '<%= componentName %>';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = '<%= className %>';
 
 /**
  * Component default props.

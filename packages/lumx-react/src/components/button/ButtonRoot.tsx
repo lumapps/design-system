@@ -3,7 +3,6 @@ import { AriaAttributes, ButtonHTMLAttributes, DetailedHTMLProps, RefObject } fr
 import classNames from 'classnames';
 
 import { ColorPalette, Emphasis, Size, Theme } from '@lumx/react';
-import { CSS_PREFIX } from '@lumx/react/constants';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/className';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
@@ -56,8 +55,8 @@ export interface ButtonRootProps extends BaseButtonProps {
  */
 const COMPONENT_NAME = 'ButtonRoot';
 
-export const BUTTON_WRAPPER_CLASSNAME = `${CSS_PREFIX}-button-wrapper`;
-export const BUTTON_CLASSNAME = `${CSS_PREFIX}-button`;
+export const BUTTON_WRAPPER_CLASSNAME = `lumx-button-wrapper`;
+export const BUTTON_CLASSNAME = `lumx-button`;
 
 /**
  * Render a button wrapper with the ButtonRoot inside.

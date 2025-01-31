@@ -15,12 +15,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   _[BREAKING]_ Reduced ecmascript transpilation to the minimum (make sure to transpile this lib if your project needs it)
     -   _[BREAKING]_ Externalise `@lumx/core`, `@lumx/icons` and `classnames` (now imported instead of bundled inside `@lumx/react`)
     -   _[BREAKING]_ `List`: remove keyboard arrow navigation as it does not comply with any specific a11y pattern
+    -   _[BREAKING]_ Removed `CSS_PREFIX` constant
 -   `@lumx/core`:
     -   _[BREAKING]_ Removed deprecated `@lumx/core/js/utils/date-picker` utils
     -   _[BREAKING]_ Migrate to ESM module format (instead of CJS)
     -   _[BREAKING]_ Removed minified JS (use the non minified JS instead)
     -   _[BREAKING]_ Removed minified CSS (use the non minified CSS instead)
     -   _[BREAKING]_ Removed deprecated and unused `detectSwipe` function from `@lumx/core/js/utils`
+    -   _[BREAKING]_ Replace `getRootClassName` utility function with type `LumxClassName`
+    -   _[BREAKING]_ Removed `CSS_PREFIX` constant
 -   `@lumx/icons`
     -   _[BREAKING]_ Migrate to ESM module format
 -   `@lumx/angularjs`: removed from the project. Future updates to `@lumx/core` will continue to avoid breaking change to the deprecated angularjs directives but without any guarantee.

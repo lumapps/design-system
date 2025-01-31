@@ -3,13 +3,13 @@ import { FocusEventHandler, KeyboardEventHandler, ReactNode, useCallback } from 
 import classNames from 'classnames';
 
 import { Icon, IconProps, Size, Text } from '@lumx/react';
-import { CSS_PREFIX } from '@lumx/react/constants';
 import { GenericProps } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/className';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
-
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
+
 import { useTabProviderContext } from './state';
+import { TABS_CLASSNAME } from './constants';
 
 /**
  * Defines the props of the component.
@@ -39,7 +39,7 @@ const COMPONENT_NAME = 'Tab';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = `${CSS_PREFIX}-tabs__link`;
+const CLASSNAME = `${TABS_CLASSNAME}__link`;
 
 /**
  * Component default props.

@@ -4,7 +4,8 @@ import classNames from 'classnames';
 
 import { ColorVariant, ColorWithVariants, Typography } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
-import { fontColorClass, getRootClassName, getTypographyClassName } from '@lumx/core/js/utils/className';
+import { fontColorClass, getTypographyClassName } from '@lumx/core/js/utils/className';
+import type { LumxClassName } from '@lumx/core/js/types';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
@@ -41,7 +42,7 @@ const COMPONENT_NAME = 'InlineList';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-inline-list';
 
 /**
  * Component default props.

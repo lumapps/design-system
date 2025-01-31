@@ -3,7 +3,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { GenericProps } from '@lumx/react/utils/type';
-import { getRootClassName } from '@lumx/core/js/utils/className';
+import type { LumxClassName } from '@lumx/core/js/types';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useSlideFocusManagement } from './useSlideFocusManagement';
 
@@ -25,7 +25,7 @@ const COMPONENT_NAME = 'SlideshowItemGroup';
 /**
  * Component default class name and class prefix.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-slideshow-item-group';
 
 export const buildSlideShowGroupId = (slidesId: string, index: number) => `${slidesId}-slide-${index}`;
 
