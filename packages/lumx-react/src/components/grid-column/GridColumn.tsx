@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 import { Size } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
-import { getRootClassName } from '@lumx/core/js/utils/className';
+import type { LumxClassName } from '@lumx/core/js/types';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 export type GridColumnGapSize = Extract<Size, 'tiny' | 'regular' | 'big' | 'huge'>;
@@ -34,7 +34,7 @@ const COMPONENT_NAME = 'GridColumn';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-grid-column';
 
 /**
  * Component default props.

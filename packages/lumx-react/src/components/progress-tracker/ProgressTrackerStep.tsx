@@ -5,7 +5,8 @@ import classNames from 'classnames';
 import { mdiAlertCircle, mdiCheckCircle, mdiRadioboxBlank, mdiRadioboxMarked } from '@lumx/icons';
 import { Icon, InputHelper, InputLabel, Kind, Size } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';
+import { handleBasicClasses } from '@lumx/core/js/utils/className';
+import type { LumxClassName } from '@lumx/core/js/types';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
@@ -41,7 +42,7 @@ const COMPONENT_NAME = 'ProgressTrackerStep';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-progress-tracker-step';
 
 /**
  * Component default props.

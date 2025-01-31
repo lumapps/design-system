@@ -6,7 +6,7 @@ import { List, ListProps } from '@lumx/react/components/list/List';
 import { Popover, PopoverProps } from '@lumx/react/components/popover/Popover';
 import { useInfiniteScroll } from '@lumx/react/hooks/useInfiniteScroll';
 import { GenericProps, isComponent } from '@lumx/react/utils/type';
-import { getRootClassName } from '@lumx/core/js/utils/className';
+import type { LumxClassName } from '@lumx/core/js/types';
 import { Offset, Placement } from '@lumx/react/components/popover/constants';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
@@ -91,7 +91,7 @@ const COMPONENT_NAME = 'Dropdown';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-dropdown';
 
 /**
  * Component default props.

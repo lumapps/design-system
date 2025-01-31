@@ -16,13 +16,12 @@ const CLASSNAME = Tooltip.className as string;
 vi.mock('@lumx/react/utils/browser/isFocusVisible');
 vi.mock('@lumx/react/hooks/useId', () => ({ useId: () => ':r1:' }));
 // Skip delays
-vi.mock('@lumx/react/constants', async (importActual) => {
+vi.mock('@lumx/react/constants', async (importActual: any) => {
     const actual = (await importActual()) as Record<string, any>;
     return {
         ...actual,
         TOOLTIP_HOVER_DELAY: { open: 0, close: 0 },
         VISUALLY_HIDDEN: actual.VISUALLY_HIDDEN,
-        CSS_PREFIX: actual.CSS_PREFIX,
     };
 });
 

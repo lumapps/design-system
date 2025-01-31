@@ -16,11 +16,12 @@ module.exports = class extends MainGenerator {
     writing() {
         const componentName = this.options.name || this.answers.name;
         const path = `packages/lumx-react/src/components/${kebabCase(componentName)}`;
+        const className = `lumx-${kebabCase(componentName)}`;
 
         this.fs.copyTpl(
             this.templatePath('FunctionalComponent.tsx.ejs'),
             this.destinationPath(`${path}/${componentName}.tsx`),
-            { componentName },
+            { componentName, className },
         );
     }
 };

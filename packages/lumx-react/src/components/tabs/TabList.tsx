@@ -3,7 +3,6 @@ import React, { ReactNode } from 'react';
 import classNames from 'classnames';
 
 import { Alignment, Theme } from '@lumx/react';
-import { CSS_PREFIX } from '@lumx/react/constants';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/className';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
@@ -11,6 +10,7 @@ import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
 import { useRovingTabIndex } from '../../hooks/useRovingTabIndex';
+import { TABS_CLASSNAME as CLASSNAME } from './constants';
 
 export enum TabListLayout {
     clustered = 'clustered',
@@ -35,11 +35,6 @@ export interface TabListProps extends GenericProps, HasTheme {
  * Component display name.
  */
 const COMPONENT_NAME = 'TabList';
-
-/**
- * Component default class name and class prefix.
- */
-const CLASSNAME = `${CSS_PREFIX}-tabs`;
 
 /**
  * Component default props.

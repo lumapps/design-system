@@ -3,8 +3,10 @@ import classNames from 'classnames';
 import { mdiArrowDown, mdiArrowUp } from '@lumx/icons';
 import { Icon, Size } from '@lumx/react';
 import { GenericProps, ValueOf } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';
+import { handleBasicClasses } from '@lumx/core/js/utils/className';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+
+import { CLASSNAME as TABLE_CLASSNAME } from './constants';
 
 /**
  * Table head cell sort order.
@@ -44,7 +46,7 @@ const COMPONENT_NAME = 'TableCell';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME, true);
+const CLASSNAME = `${TABLE_CLASSNAME}__cell`;
 
 /**
  * Component default props.
