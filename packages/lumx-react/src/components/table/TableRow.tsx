@@ -16,6 +16,8 @@ export interface TableRowProps extends GenericProps {
     isDisabled?: boolean;
     /** Whether the component is selected or not. */
     isSelected?: boolean;
+    /** Children */
+    children?: React.ReactNode;
 }
 
 /**

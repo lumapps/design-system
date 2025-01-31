@@ -69,7 +69,7 @@ describe(`<${Switch.displayName}>`, () => {
             expect(helper).toHaveAttribute('id');
 
             expect(label).toBeInTheDocument();
-            expect(label).toHaveTextContent(props.children);
+            expect(label).toHaveTextContent(props.children as string);
             expect(label).toHaveAttribute('for', id);
 
             expect(input).toHaveAttribute('id', id);

@@ -9,7 +9,10 @@ import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 /**
  * Defines the props of the component.
  */
-export type TableBodyProps = GenericProps;
+export interface TableBodyProps extends GenericProps {
+    /** Children */
+    children?: React.ReactNode;
+}
 
 /**
  * Component display name.

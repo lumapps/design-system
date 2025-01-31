@@ -12,6 +12,8 @@ import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 export interface SlideshowItemProps extends GenericProps {
     /** interval in which slides are automatically shown */
     interval?: number;
+    /** Children */
+    children?: React.ReactNode;
 }
 
 /**

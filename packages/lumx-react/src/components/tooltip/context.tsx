@@ -10,7 +10,7 @@ const DEFAULT_VALUE = {};
  */
 const TooltipContext = React.createContext<TooltipContextValue | undefined>(undefined);
 
-export const TooltipContextProvider: React.FC = ({ children }) => (
+export const TooltipContextProvider: React.FC<{ children?: React.ReactNode }> = ({ children }) => (
     <TooltipContext.Provider value={DEFAULT_VALUE}>{children}</TooltipContext.Provider>
 );
 

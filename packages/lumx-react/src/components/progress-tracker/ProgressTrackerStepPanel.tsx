@@ -16,6 +16,8 @@ export interface ProgressTrackerStepPanelProps extends GenericProps {
     id?: string;
     /** Whether the step is active or not. */
     isActive?: boolean;
+    /** Children */
+    children?: React.ReactNode;
 }
 
 /**

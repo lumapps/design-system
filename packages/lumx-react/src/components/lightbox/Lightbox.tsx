@@ -37,6 +37,8 @@ export interface LightboxProps extends GenericProps, HasTheme, Pick<AriaAttribut
     zIndex?: number;
     /** On close callback. */
     onClose?(): void;
+    /** Children */
+    children?: React.ReactNode;
 }
 
 /**

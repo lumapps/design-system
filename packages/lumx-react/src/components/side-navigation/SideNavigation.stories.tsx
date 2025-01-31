@@ -6,7 +6,7 @@ import { Emphasis, SideNavigation, SideNavigationItem } from '@lumx/react';
 
 export default { title: 'LumX components/side-navigation/Side Navigation' };
 
-const CustomLink: React.FC = ({ children, ...props }) =>
+const CustomLink: React.FC<{ children?: React.ReactNode }> = ({ children, ...props }) =>
     React.createElement('a', { ...props, style: { color: 'red' } }, children);
 
 export const Simple = () => (

@@ -9,6 +9,7 @@ import './Layout.scss';
 
 interface Props {
     location?: Location;
+    children?: React.ReactNode;
 }
 
 export const Layout: React.FC<Props> = ({ children, location }) => {

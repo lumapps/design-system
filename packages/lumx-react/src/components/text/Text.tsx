@@ -51,6 +51,10 @@ export interface TextProps extends GenericProps {
      * Ignored when `truncate` is set to true or lines: 1
      * */
     whiteSpace?: WhiteSpace;
+    /**
+     * Children
+     */
+    children?: React.ReactNode;
 }
 
 /**

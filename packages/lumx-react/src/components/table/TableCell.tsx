@@ -34,6 +34,8 @@ export interface TableCellProps extends GenericProps {
     variant?: TableCellVariant;
     /** On header cell click callback. */
     onHeaderClick?(): void;
+    /** Children */
+    children?: React.ReactNode;
 }
 
 /**

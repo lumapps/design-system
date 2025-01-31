@@ -37,6 +37,10 @@ export interface AlertDialogProps extends Omit<DialogProps, 'header' | 'footer'>
         onClick(): void;
         label: string;
     };
+    /**
+     * Children
+     */
+    children?: React.ReactNode;
 }
 
 /**
