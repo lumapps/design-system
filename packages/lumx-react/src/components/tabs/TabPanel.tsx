@@ -16,6 +16,8 @@ export interface TabPanelProps extends GenericProps {
     id?: string;
     /** Whether the tab is active or not. */
     isActive?: boolean;
+    /** Children */
+    children?: React.ReactNode;
 }
 
 /**

@@ -18,6 +18,10 @@ export interface HeadingProps extends Partial<TextProps> {
      * Display a specific heading level instead of the one provided by parent context provider.
      */
     as?: HeadingElement;
+    /**
+     * Children
+     */
+    children?: React.ReactNode;
 }
 
 /**

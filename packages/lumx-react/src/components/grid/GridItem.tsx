@@ -19,6 +19,8 @@ export interface GridItemProps extends GenericProps {
     order?: Columns;
     /** Width. */
     width?: Columns;
+    /** Children */
+    children?: React.ReactNode;
 }
 
 /**

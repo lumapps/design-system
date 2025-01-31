@@ -41,6 +41,8 @@ export interface ChipProps extends GenericProps, HasTheme {
     onAfterClick?: MouseEventHandler;
     /** On "before" element clicked callback. */
     onBeforeClick?: MouseEventHandler;
+    /** Children */
+    children?: React.ReactNode;
 }
 
 /**

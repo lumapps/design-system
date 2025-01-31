@@ -23,6 +23,8 @@ export interface GridProps extends GenericProps {
     hAlign?: Alignment;
     /** Gutter size. */
     gutter?: GridGutterSize;
+    /** Children */
+    children?: React.ReactNode;
 }
 
 /**

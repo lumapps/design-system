@@ -14,6 +14,7 @@ export interface SlideshowItemGroupProps extends GenericProps {
     role?: 'tabpanel' | 'group';
     label?: string;
     isDisplayed?: boolean;
+    children?: React.ReactNode;
 }
 
 /**

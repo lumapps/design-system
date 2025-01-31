@@ -9,7 +9,12 @@ import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 /**
  * Defines the props of the component
  */
-export type ButtonGroupProps = GenericProps;
+export interface ButtonGroupProps extends GenericProps {
+    /**
+     * Children
+     */
+    children?: React.ReactNode;
+}
 
 /**
  * Component display name.

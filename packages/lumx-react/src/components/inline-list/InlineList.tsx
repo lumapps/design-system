@@ -27,6 +27,10 @@ export interface InlineListProps extends GenericProps {
      * Activate line wrap on overflow.
      */
     wrap?: boolean;
+    /**
+     * Children
+     */
+    children?: React.ReactNode;
 }
 
 /**

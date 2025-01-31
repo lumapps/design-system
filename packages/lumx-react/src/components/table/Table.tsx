@@ -16,6 +16,8 @@ export interface TableProps extends GenericProps, HasTheme {
     hasBefore?: boolean;
     /** Whether the table has dividers or not. */
     hasDividers?: boolean;
+    /** Children */
+    children?: React.ReactNode;
 }
 
 /**

@@ -15,6 +15,8 @@ interface Props {
     codeString?: string;
     /** Code language (tsx, jsx, etc.) */
     language?: Language | 'tsx';
+    /** Code */
+    children?: React.ReactNode;
 }
 
 /** Display syntax highlighted code */

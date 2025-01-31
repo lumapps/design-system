@@ -1,6 +1,6 @@
 import { IconButtonProps } from '@lumx/react';
 import { GenericProps, HasTheme, ValueOf } from '@lumx/react/utils/type';
-import { ReactNode, SyntheticEvent } from 'react';
+import React, { ReactNode, SyntheticEvent } from 'react';
 
 /**
  * Select variants.
@@ -50,4 +50,6 @@ export interface CoreSelectProps extends GenericProps, HasTheme {
     onInfiniteScroll?(): void;
     /** Render value function. Default: Renders the value as a string. */
     selectedValueRender?(choice: string): ReactNode | string;
+    /** Children */
+    children?: React.ReactNode;
 }

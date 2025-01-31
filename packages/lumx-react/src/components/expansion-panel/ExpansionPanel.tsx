@@ -38,6 +38,8 @@ export interface ExpansionPanelProps extends GenericProps, HasTheme {
         Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis' | 'color'>;
     /** On toggle open or close callback. */
     onToggleOpen?(shouldOpen: boolean, event: React.MouseEvent): void;
+    /** Children */
+    children?: React.ReactNode;
 }
 
 /**

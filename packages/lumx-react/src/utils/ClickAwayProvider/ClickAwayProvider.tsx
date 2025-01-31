@@ -13,6 +13,10 @@ interface ClickAwayProviderProps extends ClickAwayParameters {
      * (Optional) Element that should be considered as part of the parent
      */
     parentRef?: RefObject<HTMLElement>;
+    /**
+     * Children
+     */
+    children?: React.ReactNode;
 }
 
 /**

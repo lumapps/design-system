@@ -61,6 +61,8 @@ export interface DialogProps extends GenericProps {
     onVisibilityChange?(isVisible: boolean): void;
     /** whether to disable the scroll on the body or not */
     disableBodyScroll?: boolean;
+    /** Children */
+    children?: React.ReactNode;
 }
 
 export type DialogSizes = Extract<Size, 'tiny' | 'regular' | 'big' | 'huge'>;

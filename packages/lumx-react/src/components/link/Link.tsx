@@ -34,6 +34,8 @@ export interface LinkProps extends GenericProps {
     target?: HTMLAnchorProps['target'];
     /** Typography variant. */
     typography?: Typography;
+    /** Children */
+    children?: React.ReactNode;
 }
 
 /**

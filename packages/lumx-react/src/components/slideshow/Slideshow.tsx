@@ -37,6 +37,8 @@ export interface SlideshowProps
         >;
     /** Callback when slide changes */
     onChange?(index: number): void;
+    /** Children */
+    children?: React.ReactNode;
 }
 
 /**

@@ -30,6 +30,8 @@ export interface SwitchProps extends GenericProps, HasTheme {
     onChange?(isChecked: boolean, value?: string, name?: string, event?: SyntheticEvent): void;
     /** optional props for input */
     inputProps?: InputHTMLAttributes<HTMLInputElement>;
+    /** Children */
+    children?: React.ReactNode;
 }
 
 /**

@@ -37,6 +37,8 @@ export interface SlidesProps extends GenericProps, HasTheme {
      * Receives the group position starting from 1 and the total number of groups.
      * */
     slideGroupLabel?: (groupPosition: number, groupTotal: number) => string;
+    /** Children */
+    children?: React.ReactNode;
 }
 
 /**
