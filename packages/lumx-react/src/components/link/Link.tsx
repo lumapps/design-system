@@ -5,8 +5,8 @@ import isEmpty from 'lodash/isEmpty';
 import classNames from 'classnames';
 
 import { ColorPalette, ColorVariant, Icon, Size, Typography } from '@lumx/react';
-import { GenericProps } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import type { GenericProps, ComponentClassName } from '@lumx/react/utils/type';
+import { handleBasicClasses } from '@lumx/react/utils/className';
 import { renderLink } from '@lumx/react/utils/renderLink';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
@@ -46,7 +46,7 @@ const COMPONENT_NAME = 'Link';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: ComponentClassName<typeof COMPONENT_NAME> = 'lumx-link';
 
 const getIconSize = (typography?: Typography) => {
     switch (typography) {

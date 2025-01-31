@@ -2,8 +2,7 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-import { GenericProps } from '@lumx/react/utils/type';
-import { getRootClassName } from '@lumx/react/utils/className';
+import type { ComponentClassName, GenericProps } from '@lumx/react/utils/type';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
@@ -22,7 +21,7 @@ const COMPONENT_NAME = 'TableHeader';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME, true);
+const CLASSNAME: ComponentClassName<'Table', typeof COMPONENT_NAME> = 'lumx-table__header';
 
 /**
  * Component default props.

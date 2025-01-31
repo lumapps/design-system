@@ -3,8 +3,8 @@ import React from 'react';
 import classNames from 'classnames';
 
 import { ColorPalette, Icon, Size, Theme, Text } from '@lumx/react';
-import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import type { GenericProps, HasTheme, ComponentClassName } from '@lumx/react/utils/type';
+import { handleBasicClasses } from '@lumx/react/utils/className';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
@@ -20,7 +20,7 @@ export interface FlagProps extends GenericProps, HasTheme {
 }
 
 const COMPONENT_NAME = 'Flag';
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: ComponentClassName<typeof COMPONENT_NAME> = 'lumx-flag';
 const DEFAULT_PROPS: Partial<FlagProps> = {};
 
 /**

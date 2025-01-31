@@ -3,13 +3,8 @@ import React, { Children, Fragment } from 'react';
 import classNames from 'classnames';
 
 import { Icon, ColorPalette, ColorVariant, Typography, WhiteSpace } from '@lumx/react';
-import { GenericProps, TextElement, isComponent } from '@lumx/react/utils/type';
-import {
-    getFontColorClassName,
-    getRootClassName,
-    handleBasicClasses,
-    getTypographyClassName,
-} from '@lumx/react/utils/className';
+import { type GenericProps, type TextElement, isComponent, type ComponentClassName } from '@lumx/react/utils/type';
+import { getFontColorClassName, handleBasicClasses, getTypographyClassName } from '@lumx/react/utils/className';
 import { useOverflowTooltipLabel } from '@lumx/react/hooks/useOverflowTooltipLabel';
 import { useMergeRefs } from '@lumx/react/utils/mergeRefs';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
@@ -65,7 +60,7 @@ const COMPONENT_NAME = 'Text';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: ComponentClassName<typeof COMPONENT_NAME> = 'lumx-text';
 
 /**
  * Component default props.

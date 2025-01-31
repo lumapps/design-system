@@ -17,3 +17,4 @@ export { Predicate } from './Predicate';
 export { RectSize } from './RectSize';
 export { TextElement } from './TextElement';
 export { ValueOf } from './ValueOf';
+export { ComponentClassName } from './ComponentClassName';

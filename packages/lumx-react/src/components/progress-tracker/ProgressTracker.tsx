@@ -2,8 +2,7 @@ import React, { ReactNode } from 'react';
 
 import classNames from 'classnames';
 
-import { GenericProps } from '@lumx/react/utils/type';
-import { getRootClassName } from '@lumx/react/utils/className';
+import type { GenericProps, ComponentClassName } from '@lumx/react/utils/type';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
@@ -28,7 +27,7 @@ const COMPONENT_NAME = 'ProgressTracker';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: ComponentClassName<typeof COMPONENT_NAME> = 'lumx-progress-tracker';
 
 /**
  * Component default props.

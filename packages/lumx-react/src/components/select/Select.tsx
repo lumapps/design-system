@@ -9,9 +9,10 @@ import { IconButton } from '@lumx/react/components/button/IconButton';
 import { Chip } from '@lumx/react/components/chip/Chip';
 import { Icon } from '@lumx/react/components/icon/Icon';
 import { InputLabel } from '@lumx/react/components/input-label/InputLabel';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { handleBasicClasses } from '@lumx/react/utils/className';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import type { ComponentClassName } from '@lumx/react/utils/type';
 
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { WithSelectContext } from './WithSelectContext';
@@ -29,7 +30,7 @@ export { SelectVariant };
 const COMPONENT_NAME = 'Select';
 
 /** The default class name and classes prefix for this component. */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: ComponentClassName<typeof COMPONENT_NAME> = 'lumx-select';
 
 /** The default value of props. */
 const DEFAULT_PROPS: Partial<SelectProps> = {

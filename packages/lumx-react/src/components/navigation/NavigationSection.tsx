@@ -3,8 +3,8 @@ import React, { useRef, useState, useContext } from 'react';
 import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
 import { Icon, Size, Text, Orientation, Popover, Placement, Theme } from '@lumx/react';
 import classNames from 'classnames';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
-import { HasClassName } from '@lumx/react/utils/type';
+import { handleBasicClasses } from '@lumx/react/utils/className';
+import type { HasClassName, ComponentClassName } from '@lumx/react/utils/type';
 import { ThemeProvider, useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { useId } from '@lumx/react/hooks/useId';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
@@ -29,7 +29,7 @@ const COMPONENT_NAME = 'NavigationSection';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: ComponentClassName<typeof COMPONENT_NAME> = 'lumx-navigation-section';
 
 export const NavigationSection = forwardRef<NavigationSectionProps, HTMLLIElement>((props, ref) => {
     const { children, className, label, icon, ...forwardedProps } = props;

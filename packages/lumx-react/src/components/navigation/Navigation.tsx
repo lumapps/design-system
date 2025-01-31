@@ -2,8 +2,8 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-import { HasAriaLabelOrLabelledBy, HasClassName, HasTheme } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import type { HasAriaLabelOrLabelledBy, HasClassName, HasTheme, ComponentClassName } from '@lumx/react/utils/type';
+import { handleBasicClasses } from '@lumx/react/utils/className';
 import { Orientation, Theme } from '@lumx/react';
 import { ThemeProvider, useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
@@ -28,7 +28,7 @@ const COMPONENT_NAME = 'Navigation';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: ComponentClassName<typeof COMPONENT_NAME> = 'lumx-navigation';
 
 /**
  * Component default props

@@ -4,8 +4,8 @@ import classNames from 'classnames';
 
 import { mdiArrowDown, mdiArrowUp } from '@lumx/icons';
 import { Icon, Size } from '@lumx/react';
-import { GenericProps, ValueOf } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import type { ComponentClassName, GenericProps, ValueOf } from '@lumx/react/utils/type';
+import { handleBasicClasses } from '@lumx/react/utils/className';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
@@ -46,7 +46,7 @@ const COMPONENT_NAME = 'TableCell';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME, true);
+const CLASSNAME: ComponentClassName<'Table', typeof COMPONENT_NAME> = 'lumx-table__cell';
 
 /**
  * Component default props.
