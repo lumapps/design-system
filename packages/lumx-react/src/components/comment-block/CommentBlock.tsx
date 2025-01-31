@@ -3,8 +3,8 @@ import React, { Children, ReactNode } from 'react';
 import classNames from 'classnames';
 
 import { Avatar, Size, Theme, Tooltip } from '@lumx/react';
-import { GenericProps, HasTheme, ValueOf } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import type { GenericProps, HasTheme, ValueOf, ComponentClassName } from '@lumx/react/utils/type';
+import { handleBasicClasses } from '@lumx/react/utils/className';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
@@ -72,7 +72,7 @@ const COMPONENT_NAME = 'CommentBlock';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: ComponentClassName<typeof COMPONENT_NAME> = 'lumx-comment-block';
 
 /**
  * Component default props.

@@ -4,9 +4,9 @@ import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
 
 import { ListProps, Size } from '@lumx/react';
-import { GenericProps } from '@lumx/react/utils/type';
+import type { GenericProps, ComponentClassName } from '@lumx/react/utils/type';
 import { onEnterPressed, onButtonPressed } from '@lumx/react/utils/event';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { handleBasicClasses } from '@lumx/react/utils/className';
 import { renderLink } from '@lumx/react/utils/renderLink';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
@@ -51,7 +51,7 @@ const COMPONENT_NAME = 'ListItem';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: ComponentClassName<typeof COMPONENT_NAME> = 'lumx-list-item';
 
 /**
  * Component default props.

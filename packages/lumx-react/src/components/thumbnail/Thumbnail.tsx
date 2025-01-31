@@ -12,8 +12,8 @@ import React, {
 import classNames from 'classnames';
 
 import { AspectRatio, HorizontalAlignment, Icon, Size, Theme, ThumbnailObjectFit } from '@lumx/react';
-import { Falsy, GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import type { Falsy, GenericProps, HasTheme, ComponentClassName } from '@lumx/react/utils/type';
+import { handleBasicClasses } from '@lumx/react/utils/className';
 import { mdiImageBroken } from '@lumx/icons';
 import { useMergeRefs } from '@lumx/react/utils/mergeRefs';
 import { useImageLoad } from '@lumx/react/components/thumbnail/useImageLoad';
@@ -81,7 +81,7 @@ const COMPONENT_NAME = 'Thumbnail';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: ComponentClassName<typeof COMPONENT_NAME> = 'lumx-thumbnail';
 
 /**
  * Component default props.

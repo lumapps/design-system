@@ -4,8 +4,8 @@ import chunk from 'lodash/chunk';
 import classNames from 'classnames';
 
 import { FULL_WIDTH_PERCENT } from '@lumx/react/components/slideshow/constants';
-import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import type { GenericProps, HasTheme, ComponentClassName } from '@lumx/react/utils/type';
+import { handleBasicClasses } from '@lumx/react/utils/className';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
@@ -47,7 +47,7 @@ const COMPONENT_NAME = 'Slideshow';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: ComponentClassName<typeof COMPONENT_NAME> = 'lumx-slideshow';
 
 /**
  * Slides component.

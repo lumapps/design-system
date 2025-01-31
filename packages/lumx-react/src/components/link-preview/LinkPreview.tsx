@@ -14,8 +14,8 @@ import {
     ThumbnailProps,
 } from '@lumx/react';
 
-import { GenericProps, HeadingElement, HasTheme } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import type { GenericProps, HeadingElement, HasTheme, ComponentClassName } from '@lumx/react/utils/type';
+import { handleBasicClasses } from '@lumx/react/utils/className';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
@@ -49,7 +49,7 @@ const COMPONENT_NAME = 'LinkPreview';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: ComponentClassName<typeof COMPONENT_NAME> = 'lumx-link-preview';
 
 /**
  * Component default props.

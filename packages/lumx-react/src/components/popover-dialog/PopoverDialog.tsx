@@ -2,8 +2,7 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-import { HasAriaLabelOrLabelledBy } from '@lumx/react/utils/type';
-import { getRootClassName } from '@lumx/react/utils/className';
+import { HasAriaLabelOrLabelledBy, ComponentClassName } from '@lumx/react/utils/type';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { Popover, PopoverProps } from '../popover/Popover';
@@ -22,7 +21,7 @@ const COMPONENT_NAME = 'PopoverDialog';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: ComponentClassName<typeof COMPONENT_NAME> = 'lumx-popover-dialog';
 
 /**
  * Component default props.

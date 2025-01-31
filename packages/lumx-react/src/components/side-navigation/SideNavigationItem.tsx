@@ -5,8 +5,8 @@ import isEmpty from 'lodash/isEmpty';
 
 import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
 import { Emphasis, Icon, Size, IconButton, IconButtonProps } from '@lumx/react';
-import { GenericProps, HasCloseMode, isComponent } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { type GenericProps, type HasCloseMode, isComponent, type ComponentClassName } from '@lumx/react/utils/type';
+import { handleBasicClasses } from '@lumx/react/utils/className';
 import { renderLink } from '@lumx/react/utils/renderLink';
 import { renderButtonOrLink } from '@lumx/react/utils/renderButtonOrLink';
 import { useId } from '@lumx/react/hooks/useId';
@@ -49,7 +49,7 @@ const COMPONENT_NAME = 'SideNavigationItem';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: ComponentClassName<typeof COMPONENT_NAME> = 'lumx-side-navigation-item';
 
 /**
  * Component default props.

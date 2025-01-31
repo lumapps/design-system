@@ -3,8 +3,8 @@ import React from 'react';
 import classNames from 'classnames';
 
 import { Alignment, Orientation, Size } from '@lumx/react';
-import { GenericProps } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import type { GenericProps, ComponentClassName } from '@lumx/react/utils/type';
+import { handleBasicClasses } from '@lumx/react/utils/className';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 type GridGutterSize = Extract<Size, 'regular' | 'big' | 'huge'>;
@@ -33,7 +33,7 @@ const COMPONENT_NAME = 'Grid';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: ComponentClassName<typeof COMPONENT_NAME> = 'lumx-grid';
 
 /**
  * Component default props.

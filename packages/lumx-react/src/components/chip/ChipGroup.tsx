@@ -3,8 +3,7 @@ import React, { ReactNode } from 'react';
 import classNames from 'classnames';
 
 import { HorizontalAlignment } from '@lumx/react/components';
-import { GenericProps } from '@lumx/react/utils/type';
-import { getRootClassName } from '@lumx/react/utils/className';
+import type { GenericProps, ComponentClassName } from '@lumx/react/utils/type';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { useChipGroupNavigation } from '@lumx/react/hooks/useChipGroupNavigation';
@@ -35,7 +34,7 @@ const COMPONENT_NAME = 'ChipGroup';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: ComponentClassName<typeof COMPONENT_NAME> = 'lumx-chip-group';
 
 /**
  * ChipGroup component.

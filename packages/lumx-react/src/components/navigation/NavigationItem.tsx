@@ -1,7 +1,13 @@
 import React, { ElementType, ReactNode } from 'react';
 import { Icon, Placement, Size, Tooltip, Text } from '@lumx/react';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
-import { ComponentRef, HasClassName, HasPolymorphicAs, HasTheme } from '@lumx/react/utils/type';
+import { handleBasicClasses } from '@lumx/react/utils/className';
+import type {
+    ComponentRef,
+    HasClassName,
+    HasPolymorphicAs,
+    HasTheme,
+    ComponentClassName,
+} from '@lumx/react/utils/type';
 import classNames from 'classnames';
 import { forwardRefPolymorphic } from '@lumx/react/utils/react/forwardRefPolymorphic';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
@@ -36,7 +42,7 @@ const COMPONENT_NAME = 'NavigationItem';
 /**
  * Component default class name and class prefix.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME: ComponentClassName<typeof COMPONENT_NAME> = 'lumx-navigation-item';
 
 export const NavigationItem = Object.assign(
     forwardRefPolymorphic(<E extends ElementType = 'a'>(props: NavigationItemProps<E>, ref: ComponentRef<E>) => {

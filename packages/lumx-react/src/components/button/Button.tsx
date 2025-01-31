@@ -4,8 +4,8 @@ import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
 
 import { Emphasis, Icon, Size, Theme, Text } from '@lumx/react';
-import { isComponent } from '@lumx/react/utils/type';
-import { getBasicClass, getRootClassName } from '@lumx/react/utils/className';
+import { isComponent, type ComponentClassName } from '@lumx/react/utils/type';
+import { getBasicClass } from '@lumx/react/utils/className';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
@@ -39,7 +39,7 @@ const COMPONENT_NAME = 'Button';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: ComponentClassName<typeof COMPONENT_NAME> = 'lumx-button';
 
 /**
  * Component default props.

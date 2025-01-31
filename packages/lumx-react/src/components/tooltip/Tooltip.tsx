@@ -5,8 +5,8 @@ import { createPortal } from 'react-dom';
 import classNames from 'classnames';
 
 import { DOCUMENT, VISUALLY_HIDDEN } from '@lumx/react/constants';
-import { GenericProps, HasCloseMode } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import type { GenericProps, HasCloseMode, ComponentClassName } from '@lumx/react/utils/type';
+import { handleBasicClasses } from '@lumx/react/utils/className';
 import { useMergeRefs } from '@lumx/react/utils/mergeRefs';
 import { Placement } from '@lumx/react/components/popover';
 import { TooltipContextProvider } from '@lumx/react/components/tooltip/context';
@@ -47,7 +47,7 @@ const COMPONENT_NAME = 'Tooltip';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: ComponentClassName<typeof COMPONENT_NAME> = 'lumx-tooltip';
 
 /**
  * Component default props.

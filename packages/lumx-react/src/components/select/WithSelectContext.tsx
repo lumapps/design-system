@@ -7,8 +7,9 @@ import { Dropdown } from '@lumx/react/components/dropdown/Dropdown';
 import { InputHelper } from '@lumx/react/components/input-helper/InputHelper';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { useListenFocus } from '@lumx/react/hooks/useListenFocus';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { handleBasicClasses } from '@lumx/react/utils/className';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
+import type { ComponentClassName } from '@lumx/react/utils/type';
 
 import { useId } from '@lumx/react/hooks/useId';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
@@ -18,7 +19,7 @@ import { CoreSelectProps, SelectVariant } from './constants';
 const COMPONENT_NAME = 'Select';
 
 /** The default class name and classes prefix for this component. */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: ComponentClassName<typeof COMPONENT_NAME> = 'lumx-select';
 
 /** The default value of props. */
 export const DEFAULT_PROPS: Partial<CoreSelectProps> = {

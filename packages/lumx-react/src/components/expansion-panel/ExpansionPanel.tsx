@@ -9,8 +9,8 @@ import isEmpty from 'lodash/isEmpty';
 import isFunction from 'lodash/isFunction';
 
 import { ColorPalette, DragHandle, Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
-import { GenericProps, HasTheme, isComponent } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { type GenericProps, type HasTheme, type ComponentClassName, isComponent } from '@lumx/react/utils/type';
+import { handleBasicClasses } from '@lumx/react/utils/className';
 import { partitionMulti } from '@lumx/react/utils/partitionMulti';
 import { useTransitionVisibility } from '@lumx/react/hooks/useTransitionVisibility';
 import { EXPANSION_PANEL_TRANSITION_DURATION } from '@lumx/core/js/constants';
@@ -48,7 +48,7 @@ const COMPONENT_NAME = 'ExpansionPanel';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: ComponentClassName<typeof COMPONENT_NAME> = 'lumx-expansion-panel';
 
 /**
  * Component default props.

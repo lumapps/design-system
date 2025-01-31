@@ -5,11 +5,11 @@ import classNames from 'classnames';
 import { Dropdown, DropdownProps, IconButtonProps, Offset, Placement, TextField, TextFieldProps } from '@lumx/react';
 
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { getRootClassName } from '@lumx/react/utils/className';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import type { ComponentClassName } from '@lumx/react/utils/type';
 
 /**
  * Defines the props of the component.
@@ -181,7 +181,7 @@ const COMPONENT_NAME = 'Autocomplete';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: ComponentClassName<typeof COMPONENT_NAME> = 'lumx-autocomplete';
 
 /**
  * Component default props.

@@ -2,9 +2,9 @@ import React from 'react';
 
 import { Emphasis, Icon, Size, Theme, Tooltip, TooltipProps } from '@lumx/react';
 import { BaseButtonProps, ButtonRoot } from '@lumx/react/components/button/ButtonRoot';
-import { getRootClassName } from '@lumx/react/utils/className';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import type { ComponentClassName } from '@lumx/react/utils/type';
 
 export interface IconButtonProps extends BaseButtonProps {
     /**
@@ -39,7 +39,7 @@ const COMPONENT_NAME = 'IconButton';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: ComponentClassName<typeof COMPONENT_NAME> = 'lumx-icon-button';
 
 /**
  * Component default props.

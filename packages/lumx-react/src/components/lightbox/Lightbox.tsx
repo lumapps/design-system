@@ -6,8 +6,8 @@ import { createPortal } from 'react-dom';
 import { mdiClose } from '@lumx/icons';
 import { IconButton, IconButtonProps } from '@lumx/react';
 import { DIALOG_TRANSITION_DURATION, DOCUMENT } from '@lumx/react/constants';
-import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import type { GenericProps, HasTheme, ComponentClassName } from '@lumx/react/utils/type';
+import { handleBasicClasses } from '@lumx/react/utils/className';
 
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { useDisableBodyScroll } from '@lumx/react/hooks/useDisableBodyScroll';
@@ -47,7 +47,7 @@ const COMPONENT_NAME = 'Lightbox';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: ComponentClassName<typeof COMPONENT_NAME> = 'lumx-lightbox';
 
 /**
  * Lightbox component.

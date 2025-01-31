@@ -2,8 +2,7 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-import { HeadingElement } from '@lumx/react/utils/type';
-import { getRootClassName } from '@lumx/react/utils/className';
+import type { HeadingElement, ComponentClassName } from '@lumx/react/utils/type';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { Text, TextProps } from '../text';
@@ -28,7 +27,7 @@ const COMPONENT_NAME = 'Heading';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: ComponentClassName<typeof COMPONENT_NAME> = 'lumx-heading';
 
 /**
  * Component default props.
