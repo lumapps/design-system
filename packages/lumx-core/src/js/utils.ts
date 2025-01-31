@@ -4,8 +4,12 @@ import React from 'react';
 
 import isBoolean from 'lodash/isBoolean';
 import isEmpty from 'lodash/isEmpty';
-import kebabCase from 'lodash/kebabCase';
 import noop from 'lodash/noop';
+
+/** Transform camelCase to kebab-case */
+function camelToKebabCase(str: string): string {
+    return str.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+}
 
 /**
  * Enhance isEmpty method to also works with numbers.
@@ -46,13 +50,13 @@ export function getBasicClass({
         const booleanPrefixes = ['has', 'is'];
 
         if (booleanPrefixes.some((booleanPrefix) => type.toString().startsWith(booleanPrefix))) {
-            return `${prefix}--${kebabCase(type)}`;
+            return `${prefix}--${camelToKebabCase(type)}`;
         }
 
-        return `${prefix}--is-${kebabCase(type)}`;
+        return `${prefix}--is-${camelToKebabCase(type)}`;
     }
 
-    return `${prefix}--${kebabCase(type)}-${value}`;
+    return `${prefix}--${camelToKebabCase(type)}-${value}`;
 }
 
 /**
