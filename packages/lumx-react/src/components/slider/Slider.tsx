@@ -7,7 +7,7 @@ import { InputHelper, InputLabel, Theme } from '@lumx/react';
 import useEventCallback from '@lumx/react/hooks/useEventCallback';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
-import { clamp } from '@lumx/react/utils/clamp';
+import { clamp } from '@lumx/react/utils/number/clamp';
 import { useId } from '@lumx/react/hooks/useId';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
