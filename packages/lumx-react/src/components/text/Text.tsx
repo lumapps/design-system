@@ -11,7 +11,7 @@ import {
     getTypographyClassName,
 } from '@lumx/react/utils/className';
 import { useOverflowTooltipLabel } from '@lumx/react/hooks/useOverflowTooltipLabel';
-import { useMergeRefs } from '@lumx/react/utils/mergeRefs';
+import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**

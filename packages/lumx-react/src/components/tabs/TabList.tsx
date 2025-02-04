@@ -6,7 +6,7 @@ import { Alignment, Theme } from '@lumx/react';
 import { CSS_PREFIX } from '@lumx/react/constants';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/react/utils/className';
-import { mergeRefs } from '@lumx/react/utils/mergeRefs';
+import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 

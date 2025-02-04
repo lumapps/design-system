@@ -15,7 +15,7 @@ import { AspectRatio, HorizontalAlignment, Icon, Size, Theme, ThumbnailObjectFit
 import { Falsy, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { mdiImageBroken } from '@lumx/icons';
-import { useMergeRefs } from '@lumx/react/utils/mergeRefs';
+import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useImageLoad } from '@lumx/react/components/thumbnail/useImageLoad';
 import { useFocusPointStyle } from '@lumx/react/components/thumbnail/useFocusPointStyle';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';

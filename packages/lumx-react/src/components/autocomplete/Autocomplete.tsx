@@ -7,7 +7,7 @@ import { Dropdown, DropdownProps, IconButtonProps, Offset, Placement, TextField,
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName } from '@lumx/react/utils/className';
 import { useFocus } from '@lumx/react/hooks/useFocus';
-import { mergeRefs } from '@lumx/react/utils/mergeRefs';
+import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 

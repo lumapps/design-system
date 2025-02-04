@@ -1,5 +1,5 @@
 import React, { ReactElement, ReactNode } from 'react';
-import { renderLink } from '@lumx/react/utils/renderLink';
+import { renderLink } from './renderLink';
 
 interface Props {
     linkAs?: any;

@@ -8,7 +8,7 @@ import { Icon, InputHelper, InputLabel, Theme } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { useId } from '@lumx/react/hooks/useId';
-import { useMergeRefs } from '@lumx/react/utils/mergeRefs';
+import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
