@@ -1,8 +1,8 @@
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
-import { browserDoesNotSupportHover } from '@lumx/react/utils/browserDoesNotSupportHover';
+import { isHoverNotSupported } from '@lumx/react/utils/browser/isHoverNotSupported';
 import { IS_BROWSER, TOOLTIP_HOVER_DELAY, TOOLTIP_LONG_PRESS_DELAY } from '@lumx/react/constants';
 import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
-import { isFocusVisible } from '@lumx/react/utils/isFocusVisible';
+import { isFocusVisible } from '@lumx/react/utils/browser/isFocusVisible';
 
 /**
  * Hook controlling tooltip visibility using mouse hover the anchor and delay.
@@ -39,7 +39,7 @@ export function useTooltipOpen(delay: number | undefined, anchorElement: HTMLEle
             else timer = setTimeout(update, duration) as any;
         };
 
-        const hoverNotSupported = browserDoesNotSupportHover();
+        const hoverNotSupported = isHoverNotSupported();
         const hasTouch = 'ontouchstart' in window;
 
         // Adapt open/close delay

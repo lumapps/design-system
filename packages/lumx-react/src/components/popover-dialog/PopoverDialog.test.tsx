@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 import { PopoverDialog } from './PopoverDialog';
 import { WithButtonTrigger, WithIconButtonTrigger } from './PopoverDialog.stories';
 
-jest.mock('@lumx/react/utils/isFocusVisible');
+jest.mock('@lumx/react/utils/browser/isFocusVisible');
 
 describe(`<${PopoverDialog.displayName}>`, () => {
     it('should open and init focus', async () => {

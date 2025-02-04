@@ -1,5 +1,5 @@
 import { RefObject, useEffect, useRef, useState } from 'react';
-import { userHasReducedMotion } from '@lumx/react/utils/userHasReducedMotion';
+import { isReducedMotion } from '@lumx/react/utils/browser/isReducedMotion';
 
 /**
  * Returns true if the component is visible tracking the opacity transition.
@@ -28,7 +28,7 @@ export const useTransitionVisibility = (
 
         // Transition event is not supported or the user prefers reduced motion.
         // => Skip and set visibility to false directly.
-        if (!element || !window.TransitionEvent || userHasReducedMotion()) {
+        if (!element || !window.TransitionEvent || isReducedMotion()) {
             setVisible(false);
             return undefined;
         }

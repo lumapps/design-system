@@ -4,7 +4,7 @@ import { SlideshowItem, Thumbnail } from '@lumx/react';
 import { useMergeRefs } from '@lumx/react/utils/mergeRefs';
 import { useSizeOnWindowResize } from '@lumx/react/hooks/useSizeOnWindowResize';
 import { useImageSize } from '@lumx/react/hooks/useImageSize';
-import { getPrefersReducedMotion } from '@lumx/react/utils/browser/getPrefersReducedMotion';
+import { isReducedMotion } from '@lumx/react/utils/browser/isReducedMotion';
 import { isEqual } from '@lumx/react/utils/object/isEqual';
 
 import { CLASSNAME } from '../constants';
@@ -97,7 +97,7 @@ export const ImageSlide = React.memo((props: ImageSlideProps) => {
                             maxWidth: scrollAreaSize?.width,
                         }),
                         // Only animate when scale is set, and we are not pointer zooming and the user does not prefer reduced motion
-                        transition: scale && !isPointerZooming && !getPrefersReducedMotion() ? 'all 250ms' : undefined,
+                        transition: scale && !isPointerZooming && !isReducedMotion() ? 'all 250ms' : undefined,
                     },
                 }}
                 loadingPlaceholderImageRef={loadingPlaceholderImageRef}
