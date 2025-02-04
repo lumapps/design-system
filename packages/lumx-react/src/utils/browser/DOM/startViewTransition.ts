@@ -2,8 +2,8 @@ import ReactDOM from 'react-dom';
 
 import { MaybeElementOrRef } from '@lumx/react/utils/type';
 
-import { unref } from '../react/unref';
-import { getPrefersReducedMotion } from '../browser/getPrefersReducedMotion';
+import { unref } from '../../react/unref';
+import { isReducedMotion } from '../isReducedMotion';
 
 function setupViewTransitionName(elementRef: MaybeElementOrRef<HTMLElement>, name: string) {
     let originalName: string | null = null;
@@ -41,7 +41,7 @@ export async function startViewTransition({
     };
 }) {
     const start = (document as any)?.startViewTransition?.bind(document);
-    const prefersReducedMotion = getPrefersReducedMotion();
+    const prefersReducedMotion = isReducedMotion();
     const { flushSync } = ReactDOM as any;
     if (prefersReducedMotion || !start || !flushSync || !viewTransitionName?.source || !viewTransitionName?.target) {
         // Skip, apply changes without a transition

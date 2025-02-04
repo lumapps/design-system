@@ -5,14 +5,14 @@ import { screen, render } from '@testing-library/react';
 import { queryAllByTagName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import userEvent from '@testing-library/user-event';
-import { isFocusVisible } from '@lumx/react/utils/isFocusVisible';
+import { isFocusVisible } from '@lumx/react/utils/browser/isFocusVisible';
 import { VISUALLY_HIDDEN } from '@lumx/react/constants';
 
 import { Tooltip, TooltipProps } from './Tooltip';
 
 const CLASSNAME = Tooltip.className as string;
 
-jest.mock('@lumx/react/utils/isFocusVisible');
+jest.mock('@lumx/react/utils/browser/isFocusVisible');
 jest.mock('@lumx/react/hooks/useId', () => ({ useId: () => ':r1:' }));
 // Skip delays
 jest.mock('@lumx/react/constants', () => ({

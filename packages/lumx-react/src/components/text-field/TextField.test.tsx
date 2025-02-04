@@ -15,12 +15,12 @@ import {
 import partition from 'lodash/partition';
 import userEvent from '@testing-library/user-event';
 
-import { isFocusVisible } from '@lumx/react/utils/isFocusVisible';
+import { isFocusVisible } from '@lumx/react/utils/browser/isFocusVisible';
 import { TextField, TextFieldProps } from './TextField';
 
 const CLASSNAME = TextField.className as string;
 
-jest.mock('@lumx/react/utils/isFocusVisible');
+jest.mock('@lumx/react/utils/browser/isFocusVisible');
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
