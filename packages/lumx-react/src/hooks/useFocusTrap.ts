@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { DOCUMENT } from '@lumx/react/constants';
 import { getFirstAndLastFocusable } from '@lumx/react/utils/focus/getFirstAndLastFocusable';
 import { Falsy } from '@lumx/react/utils/type';
-import { Listener, makeListenerTowerContext } from '@lumx/react/utils/makeListenerTowerContext';
+import { Listener, makeListenerTowerContext } from '@lumx/react/utils/function/makeListenerTowerContext';
 
 const FOCUS_TRAPS = makeListenerTowerContext();
 
