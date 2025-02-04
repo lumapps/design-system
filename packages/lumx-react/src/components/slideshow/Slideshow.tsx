@@ -4,7 +4,7 @@ import { SlideshowControls, SlideshowControlsProps, Theme, Slides, SlidesProps }
 import { DEFAULT_OPTIONS } from '@lumx/react/hooks/useSlideshowControls';
 import { GenericProps } from '@lumx/react/utils/type';
 import { useFocusWithin } from '@lumx/react/hooks/useFocusWithin';
-import { mergeRefs } from '@lumx/react/utils/mergeRefs';
+import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 

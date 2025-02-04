@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import { ColorPalette, ColorVariant, Icon, Size, Typography } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
-import { renderLink } from '@lumx/react/utils/renderLink';
+import { renderLink } from '@lumx/react/utils/react/renderLink';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 type HTMLAnchorProps = React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;

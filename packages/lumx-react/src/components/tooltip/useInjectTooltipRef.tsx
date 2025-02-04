@@ -1,6 +1,6 @@
 import React, { cloneElement, ReactNode, useMemo } from 'react';
 
-import { mergeRefs } from '@lumx/react/utils/mergeRefs';
+import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 
 interface Options {
     /** Original tooltip anchor */

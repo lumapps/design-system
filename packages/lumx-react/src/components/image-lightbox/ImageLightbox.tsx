@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { Lightbox } from '@lumx/react';
 import { ClickAwayProvider } from '@lumx/react/utils';
-import { useMergeRefs } from '@lumx/react/utils/mergeRefs';
+import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { ImageSlideshow } from './internal/ImageSlideshow';

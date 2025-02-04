@@ -12,7 +12,7 @@ import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/classNam
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { useDisableBodyScroll } from '@lumx/react/hooks/useDisableBodyScroll';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
-import { mergeRefs } from '@lumx/react/utils/mergeRefs';
+import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { useTransitionVisibility } from '@lumx/react/hooks/useTransitionVisibility';
 import { ThemeProvider } from '@lumx/react/utils/theme/ThemeContext';

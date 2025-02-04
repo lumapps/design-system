@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@lumx/react/constants';
-import { Comp } from '@lumx/react/utils/type';
+import type { Comp } from '@lumx/react/utils/type';
 import React from 'react';
 
 /**

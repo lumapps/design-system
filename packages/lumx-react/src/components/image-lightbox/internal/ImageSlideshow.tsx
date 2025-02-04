@@ -2,7 +2,7 @@ import React from 'react';
 
 import { mdiMagnifyMinusOutline, mdiMagnifyPlusOutline } from '@lumx/icons';
 import { FlexBox, IconButton, Slides, SlideshowControls } from '@lumx/react';
-import { mergeRefs } from '@lumx/react/utils/mergeRefs';
+import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 
 import memoize from 'lodash/memoize';
 import { ImageCaption } from '../../image-block/ImageCaption';

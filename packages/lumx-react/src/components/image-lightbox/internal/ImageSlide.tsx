@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { SlideshowItem, Thumbnail } from '@lumx/react';
-import { useMergeRefs } from '@lumx/react/utils/mergeRefs';
+import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useSizeOnWindowResize } from '@lumx/react/hooks/useSizeOnWindowResize';
 import { useImageSize } from '@lumx/react/hooks/useImageSize';
 import { isReducedMotion } from '@lumx/react/utils/browser/isReducedMotion';
