@@ -13,7 +13,7 @@ interface City {
     text: string;
 }
 
-export const Simple = ({ theme }: any) => {
+export const Simple = () => {
     const INITIAL_STATE_SHOW_SUGGESTIONS = false;
     const INITIAL_STATE_NAVIGATION_SUGGESTION = '';
 
@@ -119,7 +119,6 @@ export const Simple = ({ theme }: any) => {
 
     const renderChip = (city: City, index: number) => (
         <Chip
-            theme={theme}
             isClickable
             key={index}
             after={<Icon icon={mdiClose} size={Size.xxs} />}
@@ -134,7 +133,6 @@ export const Simple = ({ theme }: any) => {
 
     return (
         <AutocompleteMultiple
-            theme={theme}
             isOpen={showSuggestions && hasSuggestions}
             onClose={closeAutocomplete}
             value={navigationSuggestionValue || filterValue}
@@ -149,13 +147,12 @@ export const Simple = ({ theme }: any) => {
             icon={mdiFlag}
             label="Label"
         >
-            <List isClickable theme={theme}>
+            <List isClickable>
                 {filteredCities.map((city, index) => {
                     const onItemSelected = () => setSelectedCity(city);
                     return (
                         <ListItem
                             size={Size.tiny}
-                            theme={theme}
                             key={city.id}
                             isHighlighted={index === activeItemIndex}
                             onItemSelected={onItemSelected}

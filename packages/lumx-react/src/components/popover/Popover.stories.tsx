@@ -110,7 +110,7 @@ export const Placements = {
     ],
 };
 
-export const WithUpdatingChildren = ({ theme }: any) => {
+export const WithUpdatingChildren = () => {
     const anchorRef = useRef(null);
     const [isOpen, setIsOpen] = useState(false);
 
@@ -142,7 +142,6 @@ export const WithUpdatingChildren = ({ theme }: any) => {
             <Popover
                 closeOnClickAway
                 closeOnEscape
-                theme={theme}
                 isOpen={isOpen}
                 anchorRef={anchorRef}
                 placement={Placement.BOTTOM_END}
@@ -159,7 +158,7 @@ export const WithUpdatingChildren = ({ theme }: any) => {
     );
 };
 
-export const WithScrollingPopover = ({ theme }: any) => {
+export const WithScrollingPopover = () => {
     const anchorRef = useRef(null);
     const [isOpen, setIsOpen] = useState(false);
 
@@ -179,7 +178,6 @@ export const WithScrollingPopover = ({ theme }: any) => {
             <Popover
                 closeOnClickAway
                 closeOnEscape
-                theme={theme}
                 isOpen={isOpen}
                 anchorRef={anchorRef}
                 placement={Placement.BOTTOM}
@@ -204,7 +202,7 @@ export const WithScrollingPopover = ({ theme }: any) => {
     );
 };
 
-export const FitToAnchorWidth = ({ theme }: any) => {
+export const FitToAnchorWidth = () => {
     const demoPopperStyle = {
         alignItems: 'center',
         display: 'flex',
@@ -231,43 +229,43 @@ export const FitToAnchorWidth = ({ theme }: any) => {
     return (
         <div style={container}>
             <div>
-                <Chip ref={maxWidthAnchorRef} theme={theme} size={Size.s}>
+                <Chip ref={maxWidthAnchorRef} size={Size.s}>
                     Anchor
                 </Chip>
             </div>
-            <Popover theme={theme} anchorRef={maxWidthAnchorRef} fitToAnchorWidth="maxWidth" isOpen placement="top">
+            <Popover anchorRef={maxWidthAnchorRef} fitToAnchorWidth="maxWidth" isOpen placement="top">
                 <div style={demoPopperStyle}>Popover maxWidth</div>
             </Popover>
             <div>
-                <Chip ref={widthSmallAnchorRef} theme={theme} size={Size.s}>
+                <Chip ref={widthSmallAnchorRef} size={Size.s}>
                     Anchor
                 </Chip>
             </div>
-            <Popover theme={theme} anchorRef={widthSmallAnchorRef} fitToAnchorWidth="width" isOpen placement="top">
+            <Popover anchorRef={widthSmallAnchorRef} fitToAnchorWidth="width" isOpen placement="top">
                 <div style={demoPopperStyle}>Popover width small anchor</div>
             </Popover>
             <div>
-                <Chip ref={widthLargeAnchorRef} theme={theme} size={Size.s}>
+                <Chip ref={widthLargeAnchorRef} size={Size.s}>
                     VeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLargeAnchor
                 </Chip>
             </div>
-            <Popover theme={theme} anchorRef={widthLargeAnchorRef} fitToAnchorWidth="width" isOpen placement="top">
+            <Popover anchorRef={widthLargeAnchorRef} fitToAnchorWidth="width" isOpen placement="top">
                 <div style={demoPopperStyle}>Popover width large anchor</div>
             </Popover>
             <div>
-                <Chip ref={minWidthAnchorRef} theme={theme} size={Size.s}>
+                <Chip ref={minWidthAnchorRef} size={Size.s}>
                     VeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLargeAnchor
                 </Chip>
             </div>
-            <Popover theme={theme} anchorRef={minWidthAnchorRef} fitToAnchorWidth="minWidth" isOpen placement="top">
+            <Popover anchorRef={minWidthAnchorRef} fitToAnchorWidth="minWidth" isOpen placement="top">
                 <div style={demoPopperStyle}>Popover minWidth</div>
             </Popover>
             <div>
-                <Chip ref={defaultWidthAnchorRef} theme={theme} size={Size.s}>
+                <Chip ref={defaultWidthAnchorRef} size={Size.s}>
                     VeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLargeAnchor
                 </Chip>
             </div>
-            <Popover theme={theme} anchorRef={defaultWidthAnchorRef} isOpen placement="top">
+            <Popover anchorRef={defaultWidthAnchorRef} isOpen placement="top">
                 <div style={demoPopperStyle}>Popover default</div>
             </Popover>
         </div>

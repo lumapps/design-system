@@ -42,21 +42,18 @@ export const FullFeatured = {
         fullDate: 'Monday, March 30, 2021 at 4:06 PM',
         hasActions: true,
     },
-    render: ({ theme, ...props }: any) => (
+    render: (props: any) => (
         <CommentBlock
-            theme={theme}
             {...props}
             actions={[
-                <Button theme={theme} emphasis="low" size="s" leftIcon={mdiHeart}>
+                <Button emphasis="low" size="s" leftIcon={mdiHeart}>
                     24 likes
                 </Button>,
-                <Button theme={theme} emphasis="low" size="s" leftIcon={mdiReply}>
+                <Button emphasis="low" size="s" leftIcon={mdiReply}>
                     Reply
                 </Button>,
             ]}
-            headerActions={
-                <IconButton label="Actions" icon={mdiDotsHorizontal} theme={theme} emphasis="low" size="s" />
-            }
+            headerActions={<IconButton label="Actions" icon={mdiDotsHorizontal} emphasis="low" size="s" />}
         />
     ),
 };

@@ -23,7 +23,7 @@ const PLACEHOLDER = 'Select values';
 const LABEL = 'Select label';
 const CHOICES = ['First item', 'Second item', 'Third item'];
 
-export const DefaultSelectMultiple = ({ theme }: any) => {
+export const DefaultSelectMultiple = () => {
     const [values, setValues] = useState<string[]>([]);
     const [isOpen, closeSelect, , toggleSelect] = useBooleanState(false);
 
@@ -49,7 +49,6 @@ export const DefaultSelectMultiple = ({ theme }: any) => {
             clearButtonProps={{ label: 'Clear' }}
             label={LABEL}
             placeholder={PLACEHOLDER}
-            theme={theme}
             onInputClick={toggleSelect}
             onDropdownClose={closeSelect}
             icon={mdiTram}
@@ -76,7 +75,7 @@ export const DefaultSelectMultiple = ({ theme }: any) => {
     );
 };
 
-export const SelectMultipleWithNoData = ({ theme }: any) => {
+export const SelectMultipleWithNoData = () => {
     return (
         <SelectMultiple
             isOpen
@@ -85,7 +84,6 @@ export const SelectMultipleWithNoData = ({ theme }: any) => {
             clearButtonProps={{ label: 'Clear' }}
             label="Select label"
             placeholder="Select values"
-            theme={theme}
             onInputClick={noop}
             onDropdownClose={noop}
         >
@@ -98,7 +96,7 @@ export const SelectMultipleWithNoData = ({ theme }: any) => {
     );
 };
 
-export const DisabledSelectMultiple = ({ theme }: any) => {
+export const DisabledSelectMultiple = () => {
     return (
         <SelectMultiple
             isOpen
@@ -107,7 +105,6 @@ export const DisabledSelectMultiple = ({ theme }: any) => {
             clearButtonProps={{ label: 'Clear' }}
             label="Select label"
             placeholder="Select values"
-            theme={theme}
             onInputClick={noop}
             onDropdownClose={noop}
             isDisabled
@@ -115,7 +112,7 @@ export const DisabledSelectMultiple = ({ theme }: any) => {
     );
 };
 
-export const ChipsSelectMultiple = ({ theme }: any) => {
+export const ChipsSelectMultiple = () => {
     const [values, setValues] = useState<string[]>([]);
     const [isOpen, closeSelect, , toggleSelect] = useBooleanState(false);
 
@@ -142,7 +139,6 @@ export const ChipsSelectMultiple = ({ theme }: any) => {
             clearButtonProps={{ label: 'Clear' }}
             label={LABEL}
             placeholder={PLACEHOLDER}
-            theme={theme}
             onInputClick={toggleSelect}
             onDropdownClose={closeSelect}
         >
@@ -168,7 +164,7 @@ export const ChipsSelectMultiple = ({ theme }: any) => {
     );
 };
 
-export const ChipsCustomSelectMultiple = ({ theme }: any) => {
+export const ChipsCustomSelectMultiple = () => {
     const [values, setValues] = useState<string[]>([]);
     const [isOpen, closeSelect, , toggleSelect] = useBooleanState(false);
 
@@ -189,14 +185,7 @@ export const ChipsCustomSelectMultiple = ({ theme }: any) => {
     const customSelectChipRenderer = (choice: string, index: number, onClear: any, isDisabled: any) => {
         const onClick: MouseEventHandler = (event) => onClear && onClear(event, choice);
         return (
-            <Chip
-                key={choice}
-                isDisabled={isDisabled}
-                size={Size.s}
-                onAfterClick={onClick}
-                onClick={onClick}
-                theme={theme}
-            >
+            <Chip key={choice} isDisabled={isDisabled} size={Size.s} onAfterClick={onClick} onClick={onClick}>
                 {choice}
             </Chip>
         );
@@ -210,7 +199,6 @@ export const ChipsCustomSelectMultiple = ({ theme }: any) => {
             clearButtonProps={{ label: 'Clear' }}
             label={LABEL}
             placeholder={PLACEHOLDER}
-            theme={theme}
             onInputClick={toggleSelect}
             onDropdownClose={closeSelect}
             selectedChipRender={customSelectChipRenderer}
@@ -240,7 +228,7 @@ export const ChipsCustomSelectMultiple = ({ theme }: any) => {
 /**
  * Test select focus trap (focus is contained inside the dialog then inside the select dropdown)
  */
-export const SelectWithinADialog = ({ theme }: any) => {
+export const SelectWithinADialog = () => {
     const searchFieldRef = useRef(null);
 
     const [searchText, setSearchText] = useState<string>();
@@ -283,7 +271,6 @@ export const SelectWithinADialog = ({ theme }: any) => {
                     clearButtonProps={{ label: 'Clear' }}
                     label={LABEL}
                     placeholder={PLACEHOLDER}
-                    theme={theme}
                     onInputClick={toggleSelect}
                     onDropdownClose={closeSelect}
                     icon={mdiTram}
