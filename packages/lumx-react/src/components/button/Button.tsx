@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
@@ -21,14 +21,14 @@ export const ButtonEmphasis = Emphasis;
  * Defines the props of the component.
  */
 export interface ButtonProps extends BaseButtonProps {
-    /** Button content. */
-    children?: ReactNode;
     /** Left icon (SVG path). */
     leftIcon?: string;
     /** Right icon (SVG path). */
     rightIcon?: string;
     /** When `true`, the button gets as large as possible. */
     fullWidth?: boolean;
+    /** Children */
+    children?: React.ReactNode;
 }
 
 /**
