@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.11.0][] - 2025-02-05
+
 ### Added
 
 -   `ThemeProvider` & `useTheme`: add context util to facilitate propagation of theme
@@ -2187,7 +2189,8 @@ _Failed released_
 [3.7.0]: https://github.com/lumapps/design-system/compare/v3.6.8...v3.7.0
 [3.6.8]: https://github.com/lumapps/design-system/compare/v3.6.7...v3.6.8
 [3.6.7]: https://github.com/lumapps/design-system/tree/v3.6.7
-[Unreleased]: https://github.com/lumapps/design-system/compare/v3.10.0...HEAD
+[Unreleased]: https://github.com/lumapps/design-system/compare/v3.11.0...HEAD
+[3.11.0]: https://github.com/lumapps/design-system/compare/v3.10.0...v3.11.0
 [3.10.0]: https://github.com/lumapps/design-system/compare/v3.9.8...v3.10.0
 [3.9.8]: https://github.com/lumapps/design-system/compare/v3.9.7...v3.9.8
 [3.9.7]: https://github.com/lumapps/design-system/compare/v3.9.6...v3.9.7
