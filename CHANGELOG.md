@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
--   `ThemeProvider` & `useTheme`: add context util to facilitate propagation of theme.
+-   `ThemeProvider` & `useTheme`: add context util to facilitate propagation of theme
+-   `Popover`: dark theme prop applies to all children via the theme context
 
 ## [3.10.0][] - 2025-01-16
 
