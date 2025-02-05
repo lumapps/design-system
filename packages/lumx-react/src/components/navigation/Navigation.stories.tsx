@@ -32,9 +32,9 @@ export default {
  * Demonstrate a full-featured navigation
  */
 export const FullFeatured = {
-    render({ theme, itemProps, orientation }: any) {
+    render({ itemProps, orientation }: any) {
         return (
-            <Navigation theme={theme} aria-label="navigation" orientation={orientation}>
+            <Navigation aria-label="navigation" orientation={orientation}>
                 <Navigation.Item isCurrentPage label="Homepage" icon={mdiHome} href="#" {...itemProps} />
                 <Navigation.Item
                     label="Some very very very very very very very very very very very very very very very very very very very very very very very very very very very long text"

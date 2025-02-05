@@ -8,7 +8,7 @@ export default { title: 'LumX components/autocomplete/Autocomplete' };
 
 const cityNames = CITIES.map((city) => city.text);
 
-export const Simple = ({ theme, ...args }: any) => {
+export const Simple = (args: any) => {
     const [showSuggestions, setShowSuggestions] = useState(false);
     const [value, setValue] = useState('');
     const inputRef = useRef(null);
@@ -43,7 +43,6 @@ export const Simple = ({ theme, ...args }: any) => {
 
     return (
         <Autocomplete
-            theme={theme}
             isOpen={showSuggestions && hasSuggestions}
             onClose={close}
             value={value}

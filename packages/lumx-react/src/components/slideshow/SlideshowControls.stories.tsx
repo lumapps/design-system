@@ -26,7 +26,7 @@ export const Simple = () => {
     );
 };
 
-export const ControllingSlideshow = ({ images = Object.values(LANDSCAPE_IMAGES), theme }: any) => {
+export const ControllingSlideshow = ({ images = Object.values(LANDSCAPE_IMAGES) }: any) => {
     const {
         activeIndex: currentIndex,
         slideshowId,
@@ -61,7 +61,6 @@ export const ControllingSlideshow = ({ images = Object.values(LANDSCAPE_IMAGES),
             activeIndex={currentIndex}
             id={slideshowId}
             ref={setSlideshow}
-            theme={theme}
             isAutoPlaying={isAutoPlaying}
             slidesId={slideshowSlidesId}
             toggleAutoPlay={toggleAutoPlay}
@@ -76,7 +75,6 @@ export const ControllingSlideshow = ({ images = Object.values(LANDSCAPE_IMAGES),
                         onPreviousClick={onPreviousClick}
                         slidesCount={slidesCount}
                         parentRef={slideshow}
-                        theme={theme}
                         isAutoPlaying={isAutoPlaying}
                         nextButtonProps={{ label: 'Next', 'aria-controls': slideshowSlidesId }}
                         previousButtonProps={{ label: 'Previous', 'aria-controls': slideshowSlidesId }}
@@ -96,7 +94,6 @@ export const ControllingSlideshow = ({ images = Object.values(LANDSCAPE_IMAGES),
                         thumbnailProps={{ aspectRatio: AspectRatio.horizontal, loading: 'eager' }}
                         image={image}
                         alt=""
-                        theme={theme}
                     />
                 </SlideshowItem>
             ))}
