@@ -44,8 +44,6 @@ export interface BaseButtonProps
     type?: HTMLButtonProps['type'];
     /** Custom react component for the link (can be used to inject react router Link). */
     linkAs?: 'a' | any;
-    /** Children */
-    children?: React.ReactNode;
 }
 
 export interface ButtonRootProps extends BaseButtonProps {
