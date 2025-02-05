@@ -63,6 +63,7 @@
 
     &--theme-dark {
         background: lumx-color-variant("dark", "N");
+        color: lumx-color-variant("light", "N");
 
         #{$self}__arrow {
             fill: lumx-color-variant("dark", "N");

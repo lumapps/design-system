@@ -181,7 +181,7 @@ const _InnerPopover = forwardRef<PopoverProps, HTMLDivElement>((props, ref) => {
                               </svg>
                           </div>
                       )}
-                      <ThemeProvider value={undefined}>{children}</ThemeProvider>
+                      <ThemeProvider value={theme}>{children}</ThemeProvider>
                   </ClickAwayProvider>
               </Component>,
               usePortal,

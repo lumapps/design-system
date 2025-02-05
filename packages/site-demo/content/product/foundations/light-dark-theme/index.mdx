@@ -38,8 +38,8 @@ Use the `ThemeProvider` component to apply the desired theme to all descendants 
 </DemoBlock>
 
 Please note **some exceptions** to the theme context propagation:
-- The `Popover` ignores the theme context for now because most children that we put inside do not support the `dark` theme (List & ListItem)
-- The components `Popover`, `Lightbox` and `Dialog` all stop the propagation of the theme context and reset the theme because their children won't appear on the same background from where they are called
+- The components `Popover`, `Lightbox` and `Dialog` all ignore the parent theme context and reset the theme because their children won't appear on the same background from where they are called
+- However, the `Popover` takes the given `theme` props and propagates to its items via the context
 
 Use the `useTheme()` hook to get the theme from the current theme context when you need to adapt within your custom component.
 

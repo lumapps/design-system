@@ -51,8 +51,13 @@ describe(`<${Popover.displayName}>`, () => {
         forwardClassName: 'element',
         forwardAttributes: 'element',
         applyTheme: {
-            affects: [{ element: 'element' }, { not: { element: 'themeSentinel' } }],
+            affects: [
+                { element: 'element' },
+                // Theme automatically transferred to the children
+                { element: 'themeSentinel' },
+            ],
             viaProp: true,
+            // Parent context does not affect the popover
             viaContext: false,
         },
     });
