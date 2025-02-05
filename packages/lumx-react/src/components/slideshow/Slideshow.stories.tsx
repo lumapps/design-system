@@ -15,7 +15,7 @@ export default {
     },
 };
 
-export const Simple = ({ theme, images = Object.values(LANDSCAPE_IMAGES), ...props }: any) => {
+export const Simple = ({ images = Object.values(LANDSCAPE_IMAGES), ...props }: any) => {
     return (
         <Slideshow
             aria-label="Simple carousel example"
@@ -23,7 +23,6 @@ export const Simple = ({ theme, images = Object.values(LANDSCAPE_IMAGES), ...pro
                 nextButtonProps: { label: 'Next' },
                 previousButtonProps: { label: 'Previous' },
             }}
-            theme={theme}
             {...props}
             style={{ width: '50%' }}
             slideGroupLabel={(currentGroup, totalGroup) => `${currentGroup} of ${totalGroup}`}
@@ -34,7 +33,6 @@ export const Simple = ({ theme, images = Object.values(LANDSCAPE_IMAGES), ...pro
                         thumbnailProps={{ aspectRatio: AspectRatio.horizontal, loading: 'eager' }}
                         image={image}
                         alt=""
-                        theme={theme}
                     />
                 </SlideshowItem>
             ))}

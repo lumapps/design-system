@@ -18,9 +18,9 @@ export default {
 
 /** Default tab behavior with some controllable args */
 export const Default = {
-    render: ({ theme, tabProviderProps, tabListProps, tabProps }: any) => (
+    render: ({ tabProviderProps, tabListProps, tabProps }: any) => (
         <TabProvider {...tabProviderProps}>
-            <TabList theme={theme} aria-label="Tab list" {...tabListProps}>
+            <TabList aria-label="Tab list" {...tabListProps}>
                 <Tab {...tabProps[0]} />
                 <Tab {...tabProps[1]} />
                 <Tab {...tabProps[2]} />
@@ -61,7 +61,7 @@ export const Default = {
 
 /* Control active tab externally (with activate tab on focus). */
 export const Controlled = {
-    render({ theme }: any) {
+    render() {
         const [activeTab, setActiveTab] = useState(1);
         const changeActiveTabIndex = (evt: any) => setActiveTab(parseInt(get(evt, 'target.value', '0'), 10));
 
@@ -93,7 +93,7 @@ export const Controlled = {
                     isLazy={isLazy}
                     shouldActivateOnFocus={shouldActivateOnFocus}
                 >
-                    <TabList theme={theme} aria-label="Tab list">
+                    <TabList aria-label="Tab list">
                         <Tab label="Tab a" />
                         <Tab label="Tab b" />
                         <Tab label="Tab c" />
@@ -111,7 +111,7 @@ export const Controlled = {
 
 /* Display tabs far from their tab panels. */
 export const SplitTabListAndTabPanels = {
-    render({ theme }: any) {
+    render() {
         const [isOpen, setOpen] = useState(true);
         const [activeTabIndex, onChange] = useState(1);
 
@@ -131,7 +131,7 @@ export const SplitTabListAndTabPanels = {
                     <TabPanel className="lumx-spacing-padding-huge">Tab 3 content</TabPanel>
 
                     <footer>
-                        <TabList theme={theme} aria-label="Tab list">
+                        <TabList aria-label="Tab list">
                             <Tab label="Tab 1" />
                             <Tab label="Tab 2" />
                             <Tab label="Tab 3" />
@@ -146,10 +146,10 @@ export const SplitTabListAndTabPanels = {
 
 /* Dynamically generate tabs. */
 export const DynamicTabs = {
-    render({ theme, tabCount }: any) {
+    render({ tabCount }: any) {
         return (
             <TabProvider>
-                <TabList theme={theme} aria-label="Tab list">
+                <TabList aria-label="Tab list">
                     {times(tabCount, (tabNumber) => (
                         <Tab key={tabNumber} label={`Tab ${tabNumber}`} />
                     ))}

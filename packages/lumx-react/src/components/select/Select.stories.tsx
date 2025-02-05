@@ -13,7 +13,7 @@ export default {
 
 const CHOICES = ['First item', 'Second item', 'Third item'];
 
-export const SimpleSelect = ({ theme }: any) => {
+export const SimpleSelect = () => {
     const PLACEHOLDER = 'Select a value';
     const LABEL = 'Select label';
 
@@ -32,7 +32,6 @@ export const SimpleSelect = ({ theme }: any) => {
             value={value}
             label={LABEL}
             placeholder={PLACEHOLDER}
-            theme={theme}
             onInputClick={toggleSelect}
             onDropdownClose={closeSelect}
             icon={mdiBullhornOutline}
@@ -59,7 +58,7 @@ export const SimpleSelect = ({ theme }: any) => {
     );
 };
 
-export const SimpleSelectWithInfiniteScroll = ({ theme }: any) => {
+export const SimpleSelectWithInfiniteScroll = () => {
     const PLACEHOLDER = 'Select a value';
     const LABEL = 'Select label';
     const [items, setItems] = useState(CHOICES);
@@ -82,7 +81,6 @@ export const SimpleSelectWithInfiniteScroll = ({ theme }: any) => {
             value={value}
             label={LABEL}
             placeholder={PLACEHOLDER}
-            theme={theme}
             onInputClick={toggleSelect}
             onDropdownClose={closeSelect}
             onInfiniteScroll={onInfinite}
@@ -109,19 +107,18 @@ export const SimpleSelectWithInfiniteScroll = ({ theme }: any) => {
     );
 };
 
-export const DisabledSelect = ({ theme }: any) => {
+export const DisabledSelect = () => {
     return (
         <Select
             isOpen={false}
             value=""
             label="My select"
             placeholder="Placeholder"
-            theme={theme}
             onInputClick={noop}
             onDropdownClose={noop}
             isDisabled
         >
-            <List theme={theme} isClickable>
+            <List isClickable>
                 <ListItem key={0} size={Size.tiny}>
                     No data
                 </ListItem>
@@ -130,7 +127,7 @@ export const DisabledSelect = ({ theme }: any) => {
     );
 };
 
-export const SelectWithClearButton = ({ theme }: any) => {
+export const SelectWithClearButton = () => {
     const PLACEHOLDER = 'Select a value';
     const LABEL = 'Select label';
 
@@ -156,7 +153,6 @@ export const SelectWithClearButton = ({ theme }: any) => {
             clearButtonProps={{ label: 'Clear' }}
             label={LABEL}
             placeholder={PLACEHOLDER}
-            theme={theme}
             onInputClick={toggleSelect}
             onDropdownClose={closeSelect}
         >
@@ -182,7 +178,7 @@ export const SelectWithClearButton = ({ theme }: any) => {
     );
 };
 
-export const SelectWithAnotherField = ({ theme }: any) => {
+export const SelectWithAnotherField = () => {
     const PLACEHOLDER = 'Select a value';
     const LABEL = 'Select label';
 
@@ -206,7 +202,7 @@ export const SelectWithAnotherField = ({ theme }: any) => {
 
     return (
         <>
-            <TextField value="myvalue" label="I am the label" placeholder="ex: A value" theme={theme} onChange={noop} />
+            <TextField value="myvalue" label="I am the label" placeholder="ex: A value" onChange={noop} />
             <Select
                 style={{ width: '100%' }}
                 isOpen={isOpen}
@@ -215,7 +211,6 @@ export const SelectWithAnotherField = ({ theme }: any) => {
                 clearButtonProps={{ label: 'Clear' }}
                 label={LABEL}
                 placeholder={PLACEHOLDER}
-                theme={theme}
                 onInputClick={toggleSelect}
                 onDropdownClose={closeSelect}
                 onBlur={onBlur}
@@ -244,7 +239,7 @@ export const SelectWithAnotherField = ({ theme }: any) => {
     );
 };
 
-export const SelectWithNoData = ({ theme }: any) => {
+export const SelectWithNoData = () => {
     const [isOpen, closeSelect, , toggleSelect] = useBooleanState(true);
 
     return (
@@ -253,11 +248,10 @@ export const SelectWithNoData = ({ theme }: any) => {
             value=""
             label="My select"
             placeholder="Placeholder"
-            theme={theme}
             onInputClick={toggleSelect}
             onDropdownClose={closeSelect}
         >
-            <List theme={theme} isClickable>
+            <List isClickable>
                 <ListItem key={0} size={Size.tiny}>
                     No data
                 </ListItem>
@@ -266,7 +260,7 @@ export const SelectWithNoData = ({ theme }: any) => {
     );
 };
 
-export const SelectWithHelper = ({ theme }: any) => {
+export const SelectWithHelper = () => {
     const [isOpen, closeSelect, , toggleSelect] = useBooleanState(false);
 
     return (
@@ -275,12 +269,11 @@ export const SelectWithHelper = ({ theme }: any) => {
             value=""
             label="Country"
             placeholder="Your country"
-            theme={theme}
             helper="This is used in analytics"
             onInputClick={toggleSelect}
             onDropdownClose={closeSelect}
         >
-            <List theme={theme} isClickable>
+            <List isClickable>
                 {CHOICES.map((choice) => (
                     <ListItem key={choice} size={Size.tiny}>
                         {choice}
@@ -291,7 +284,7 @@ export const SelectWithHelper = ({ theme }: any) => {
     );
 };
 
-export const SelectWithError = ({ theme }: any) => {
+export const SelectWithError = () => {
     const [isOpen, closeSelect, , toggleSelect] = useBooleanState(false);
 
     return (
@@ -300,14 +293,13 @@ export const SelectWithError = ({ theme }: any) => {
             value=""
             label="Country"
             placeholder="Your country"
-            theme={theme}
             helper="This is used in analytics"
             onInputClick={toggleSelect}
             onDropdownClose={closeSelect}
             hasError
             error="Please select something :)"
         >
-            <List theme={theme} isClickable>
+            <List isClickable>
                 {CHOICES.map((choice) => (
                     <ListItem key={choice} size={Size.tiny}>
                         {choice}
@@ -318,7 +310,7 @@ export const SelectWithError = ({ theme }: any) => {
     );
 };
 
-export const SelectSuccess = ({ theme }: any) => {
+export const SelectSuccess = () => {
     const [isOpen, closeSelect, , toggleSelect] = useBooleanState(false);
 
     return (
@@ -327,13 +319,12 @@ export const SelectSuccess = ({ theme }: any) => {
             value=""
             label="Country"
             placeholder="Your country"
-            theme={theme}
             helper="This is used in analytics"
             onInputClick={toggleSelect}
             onDropdownClose={closeSelect}
             isValid
         >
-            <List theme={theme} isClickable>
+            <List isClickable>
                 {CHOICES.map((choice) => (
                     <ListItem key={choice} size={Size.tiny}>
                         {choice}
@@ -344,7 +335,7 @@ export const SelectSuccess = ({ theme }: any) => {
     );
 };
 
-export const SelectWithChipVariant = ({ theme }: any) => {
+export const SelectWithChipVariant = () => {
     const PLACEHOLDER = 'Select a value';
     const LABEL = 'Select label';
 
@@ -365,7 +356,6 @@ export const SelectWithChipVariant = ({ theme }: any) => {
             value={value}
             label={LABEL}
             placeholder={PLACEHOLDER}
-            theme={theme}
             onInputClick={toggleSelect}
             onDropdownClose={closeSelect}
             variant={SelectVariant.chip}

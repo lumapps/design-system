@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 export default { title: 'LumX components/radio-button/Radio Group' };
 
-export const Simple = ({ theme }: any) => {
+export const Simple = () => {
     const [value, onChange] = useState('lorem');
 
     return (
@@ -13,7 +13,6 @@ export const Simple = ({ theme }: any) => {
                 helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
                 label="Radio button with help 1"
                 name="test2"
-                theme={theme}
                 value="lorem"
                 onChange={onChange as any}
             />
@@ -23,7 +22,6 @@ export const Simple = ({ theme }: any) => {
                 helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
                 label="Radio button with help 2"
                 name="test2"
-                theme={theme}
                 value="ipsum"
                 onChange={onChange as any}
             />
@@ -33,7 +31,6 @@ export const Simple = ({ theme }: any) => {
                 helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
                 label="Radio button with help 3"
                 name="test2"
-                theme={theme}
                 value="dolor"
                 onChange={onChange as any}
             />
