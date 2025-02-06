@@ -103,7 +103,6 @@ export function usePopoverStyle({
     zIndex,
 }: Options): Output {
     const [popperElement, setPopperElement] = useState<null | HTMLElement>(null);
-
     const [arrowElement, setArrowElement] = useState<null | HTMLElement>(null);
 
     const actualOffset: [number, number] = [offset?.along ?? 0, (offset?.away ?? 0) + (hasArrow ? ARROW_SIZE : 0)];
@@ -152,6 +151,7 @@ export function usePopoverStyle({
 
         return newStyles;
     }, [style, styles.popper, zIndex, fitWithinViewportHeight]);
+
     return {
         styles: { arrow: styles.arrow, popover: popoverStyle },
         attributes,
