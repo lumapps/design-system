@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
-import { DOCUMENT } from '@lumx/react/constants';
+import { DOCUMENT, VISUALLY_HIDDEN } from '@lumx/react/constants';
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
@@ -168,6 +168,8 @@ const _InnerPopover = forwardRef<PopoverProps, HTMLDivElement>((props, ref) => {
                           elevation: Math.min(elevation || 0, 5),
                           position,
                       }),
+                      // Do not show the popover while it's not properly placed
+                      !styles.popover?.transform ? VISUALLY_HIDDEN : undefined,
                   )}
                   style={styles.popover}
                   {...attributes.popper}

@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   `Popover`: fix improper first placement on React 18
+
 ## [3.11.0][] - 2025-02-05
 
 ### Added
