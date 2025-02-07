@@ -5,6 +5,7 @@ import { detectOverflow } from '@popperjs/core';
 import { DOCUMENT, WINDOW } from '@lumx/react/constants';
 import { PopoverProps } from '@lumx/react/components/popover/Popover';
 import { usePopper } from '@lumx/react/hooks/usePopper';
+import { PositionObserver } from '@lumx/react/utils/browser/PositionObserver';
 import { ARROW_SIZE, FitAnchorWidth, Placement } from './constants';
 
 /**
@@ -74,7 +75,6 @@ type Options = Pick<
     | 'fitWithinViewportHeight'
     | 'boundaryRef'
     | 'anchorRef'
-    | 'children'
     | 'placement'
     | 'style'
     | 'zIndex'
@@ -97,7 +97,6 @@ export function usePopoverStyle({
     fitWithinViewportHeight,
     boundaryRef,
     anchorRef,
-    children,
     placement,
     style,
     zIndex,
@@ -136,9 +135,37 @@ export function usePopoverStyle({
     }
 
     const { styles, attributes, state, update } = usePopper(anchorRef.current, popperElement, { placement, modifiers });
+
+    // Auto update popover
     useEffect(() => {
-        update?.();
-    }, [children, update]);
+        const { current: anchorElement } = anchorRef;
+        if (!update || !popperElement || !anchorElement || !WINDOW?.ResizeObserver) {
+            return undefined;
+        }
+
+        // Only update once per frame
+        let frame: number | undefined;
+        function limitedUpdate() {
+            if (frame) return;
+            frame = requestAnimationFrame(() => {
+                update?.();
+                frame = undefined;
+            });
+        }
+
+        // On anchor move
+        const positionObserver = new PositionObserver(limitedUpdate);
+        positionObserver.observe(anchorElement);
+
+        // On anchor or popover resize
+        const resizeObserver = new ResizeObserver(limitedUpdate);
+        resizeObserver.observe(anchorElement);
+        resizeObserver.observe(popperElement);
+        return () => {
+            resizeObserver.disconnect();
+            positionObserver.disconnect();
+        };
+    }, [anchorRef, popperElement, update]);
 
     const position = state?.placement ?? placement;
 
