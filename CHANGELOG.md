@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   `Popover`: fix improper first placement on React 18
--   `Popover`: update placement on both anchor and popover resize & move
+-   `Popover`: update placement on both anchor and popover resize
 
 ## [3.11.0][] - 2025-02-05
 

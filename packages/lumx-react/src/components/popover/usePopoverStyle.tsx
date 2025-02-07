@@ -5,7 +5,6 @@ import { detectOverflow } from '@popperjs/core';
 import { DOCUMENT, WINDOW } from '@lumx/react/constants';
 import { PopoverProps } from '@lumx/react/components/popover/Popover';
 import { usePopper } from '@lumx/react/hooks/usePopper';
-import { PositionObserver } from '@lumx/react/utils/browser/PositionObserver';
 import { ARROW_SIZE, FitAnchorWidth, Placement } from './constants';
 
 /**
@@ -153,17 +152,12 @@ export function usePopoverStyle({
             });
         }
 
-        // On anchor move
-        const positionObserver = new PositionObserver(limitedUpdate);
-        positionObserver.observe(anchorElement);
-
         // On anchor or popover resize
         const resizeObserver = new ResizeObserver(limitedUpdate);
         resizeObserver.observe(anchorElement);
         resizeObserver.observe(popperElement);
         return () => {
             resizeObserver.disconnect();
-            positionObserver.disconnect();
         };
     }, [anchorRef, popperElement, update]);
 
