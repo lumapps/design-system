@@ -14,11 +14,16 @@ import {
     Popover,
     Size,
     Elevation,
+    Message,
+    FlexBox,
+    IconButtonProps,
 } from '@lumx/react';
 import range from 'lodash/range';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
 import { withChromaticForceScreenSize } from '@lumx/react/stories/decorators/withChromaticForceScreenSize';
+import { FitAnchorWidth } from '@lumx/react/components/popover/constants';
+import { withUndefined } from '@lumx/react/stories/controls/withUndefined';
 
 export default {
     title: 'LumX components/popover/Popover',
@@ -110,164 +115,150 @@ export const Placements = {
     ],
 };
 
-export const WithUpdatingChildren = () => {
-    const anchorRef = useRef(null);
-    const [isOpen, setIsOpen] = useState(false);
-
-    const toggleOpen = () => setIsOpen(!isOpen);
-
-    const [text, setText] = useState('Long loading text with useless words');
-    useEffect(() => {
-        if (isOpen) {
-            const timer = setTimeout(() => {
-                setText('Text');
-            }, 1000);
-            return () => clearTimeout(timer);
-        }
-        setText('Long loading text with useless words');
-        return undefined;
-    }, [isOpen]);
-
-    return (
-        <div style={{ float: 'right' }} className="lumx-spacing-margin-right-huge">
-            <IconButton
-                label="Notifications"
-                className="lumx-spacing-margin-right-huge"
-                ref={anchorRef}
-                emphasis={Emphasis.low}
-                icon={mdiBell}
-                size={Size.m}
-                onClick={toggleOpen}
-            />
-            <Popover
-                closeOnClickAway
-                closeOnEscape
-                isOpen={isOpen}
-                anchorRef={anchorRef}
-                placement={Placement.BOTTOM_END}
-                onClose={toggleOpen}
-                fitWithinViewportHeight
-            >
-                <List>
-                    <ListItem before={<Icon icon={mdiAccount} />} className="lumx-spacing-margin-right-huge">
-                        <span>{text}</span>
-                    </ListItem>
-                </List>
-            </Popover>
-        </div>
-    );
+/**
+ * Demo all fitAnchorWidth configurations
+ */
+export const FitToAnchorWidth = {
+    render({ anchorText, fitAnchorWidth }: any) {
+        const anchorRef = useRef(null);
+        return (
+            <>
+                <Chip className="lumx-spacing-margin-huge" ref={anchorRef} size="s">
+                    {anchorText}
+                </Chip>
+                <Popover
+                    isOpen
+                    className="lumx-spacing-padding"
+                    placement="top"
+                    anchorRef={anchorRef}
+                    fitToAnchorWidth={fitAnchorWidth}
+                >
+                    Popover {fitAnchorWidth}
+                </Popover>
+            </>
+        );
+    },
+    decorators: [
+        withCombinations({
+            combinations: {
+                cols: {
+                    'Small Anchor': { anchorText: 'Small' },
+                    'Large Anchor': { anchorText: 'Very very very very large anchor' },
+                },
+                rows: { key: 'fitAnchorWidth', options: withUndefined(Object.values(FitAnchorWidth)) },
+            },
+            cellStyle: { padding: 16 },
+        }),
+    ],
 };
 
-export const WithScrollingPopover = () => {
-    const anchorRef = useRef(null);
-    const [isOpen, setIsOpen] = useState(false);
+/**
+ * Testing update of the popover on anchor and popover resize and move
+ */
+export const TestUpdatingChildrenAndMovingAnchor = {
+    render() {
+        const anchorRef = useRef(null);
+        const [isOpen, setIsOpen] = useState(false);
 
-    const toggleOpen = () => setIsOpen(!isOpen);
+        const toggleOpen = () => setIsOpen(!isOpen);
 
-    return (
-        <div style={{ float: 'right' }} className="lumx-spacing-margin-right-huge">
-            <IconButton
-                label="Notifications"
-                className="lumx-spacing-margin-right-huge"
-                ref={anchorRef}
-                emphasis={Emphasis.low}
-                icon={mdiBell}
-                size={Size.m}
-                onClick={toggleOpen}
-            />
-            <Popover
-                closeOnClickAway
-                closeOnEscape
-                isOpen={isOpen}
-                anchorRef={anchorRef}
-                placement={Placement.BOTTOM}
-                onClose={toggleOpen}
-                fitWithinViewportHeight
-            >
-                <List style={{ overflowY: 'auto' }}>
-                    {range(100).map((n: number) => {
-                        return (
-                            <ListItem
-                                key={`key-${n}`}
-                                before={<Icon icon={mdiAccount} />}
-                                className="lumx-spacing-margin-right-huge"
-                            >
-                                <span>{`List item ${n} and some text`}</span>
-                            </ListItem>
-                        );
-                    })}
-                </List>
-            </Popover>
-        </div>
-    );
+        const [text, setText] = useState('Initial large span of text');
+        const [anchorSize, setAnchorSize] = useState<IconButtonProps['size']>('m');
+        useEffect(() => {
+            if (isOpen) {
+                const timers = [
+                    // Update popover size
+                    setTimeout(() => setText('Text'), 1000),
+                    // Update anchor size
+                    setTimeout(() => setAnchorSize('s'), 1000),
+                ];
+                return () => timers.forEach(clearTimeout);
+            }
+            setText('Initial large span of text');
+            setAnchorSize('m');
+            return undefined;
+        }, [isOpen]);
+
+        return (
+            <FlexBox orientation="vertical" gap="huge">
+                <Message kind="info">Test popover text resize (after 1sec) and anchor resize (after 1.5sec)</Message>
+                <FlexBox orientation="horizontal" vAlign="center">
+                    <IconButton
+                        label="Notifications"
+                        className="lumx-spacing-margin-right-huge"
+                        ref={anchorRef}
+                        emphasis={Emphasis.low}
+                        icon={mdiBell}
+                        size={anchorSize}
+                        onClick={toggleOpen}
+                    />
+                    <Popover
+                        closeOnClickAway
+                        closeOnEscape
+                        isOpen={isOpen}
+                        anchorRef={anchorRef}
+                        placement={Placement.BOTTOM_END}
+                        onClose={toggleOpen}
+                        fitWithinViewportHeight
+                        hasArrow
+                    >
+                        <Text as="p" className="lumx-spacing-padding-huge">
+                            {text}
+                        </Text>
+                    </Popover>
+                </FlexBox>
+            </FlexBox>
+        );
+    },
+    parameters: { chromatic: { disable: true } },
 };
 
-export const FitToAnchorWidth = () => {
-    const demoPopperStyle = {
-        alignItems: 'center',
-        display: 'flex',
-        height: 100,
-        justifyContent: 'center',
-        width: 200,
-    };
+/**
+ * Testing popover with scroll inside
+ */
+export const TestScrollingPopover = {
+    render() {
+        const anchorRef = useRef(null);
+        const [isOpen, setIsOpen] = useState(false);
 
-    const container = {
-        alignItems: 'center',
-        display: 'flex',
-        justifyContent: 'center',
-        flexDirection: 'column',
-        gap: 150,
-        marginTop: 150,
-    } as const;
+        const toggleOpen = () => setIsOpen(!isOpen);
 
-    const maxWidthAnchorRef = useRef(null);
-    const widthSmallAnchorRef = useRef(null);
-    const widthLargeAnchorRef = useRef(null);
-    const minWidthAnchorRef = useRef(null);
-    const defaultWidthAnchorRef = useRef(null);
-
-    return (
-        <div style={container}>
-            <div>
-                <Chip ref={maxWidthAnchorRef} size={Size.s}>
-                    Anchor
-                </Chip>
+        return (
+            <div style={{ float: 'right' }} className="lumx-spacing-margin-right-huge">
+                <IconButton
+                    label="Notifications"
+                    className="lumx-spacing-margin-right-huge"
+                    ref={anchorRef}
+                    emphasis={Emphasis.low}
+                    icon={mdiBell}
+                    size={Size.m}
+                    onClick={toggleOpen}
+                />
+                <Popover
+                    closeOnClickAway
+                    closeOnEscape
+                    isOpen={isOpen}
+                    anchorRef={anchorRef}
+                    placement={Placement.BOTTOM_END}
+                    onClose={toggleOpen}
+                    fitWithinViewportHeight
+                >
+                    <List style={{ overflowY: 'auto' }}>
+                        {range(100).map((n: number) => {
+                            return (
+                                <ListItem
+                                    key={`key-${n}`}
+                                    before={<Icon icon={mdiAccount} />}
+                                    className="lumx-spacing-margin-right-huge"
+                                >
+                                    <span>{`List item ${n} and some text`}</span>
+                                </ListItem>
+                            );
+                        })}
+                    </List>
+                </Popover>
             </div>
-            <Popover anchorRef={maxWidthAnchorRef} fitToAnchorWidth="maxWidth" isOpen placement="top">
-                <div style={demoPopperStyle}>Popover maxWidth</div>
-            </Popover>
-            <div>
-                <Chip ref={widthSmallAnchorRef} size={Size.s}>
-                    Anchor
-                </Chip>
-            </div>
-            <Popover anchorRef={widthSmallAnchorRef} fitToAnchorWidth="width" isOpen placement="top">
-                <div style={demoPopperStyle}>Popover width small anchor</div>
-            </Popover>
-            <div>
-                <Chip ref={widthLargeAnchorRef} size={Size.s}>
-                    VeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLargeAnchor
-                </Chip>
-            </div>
-            <Popover anchorRef={widthLargeAnchorRef} fitToAnchorWidth="width" isOpen placement="top">
-                <div style={demoPopperStyle}>Popover width large anchor</div>
-            </Popover>
-            <div>
-                <Chip ref={minWidthAnchorRef} size={Size.s}>
-                    VeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLargeAnchor
-                </Chip>
-            </div>
-            <Popover anchorRef={minWidthAnchorRef} fitToAnchorWidth="minWidth" isOpen placement="top">
-                <div style={demoPopperStyle}>Popover minWidth</div>
-            </Popover>
-            <div>
-                <Chip ref={defaultWidthAnchorRef} size={Size.s}>
-                    VeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryVeryLargeAnchor
-                </Chip>
-            </div>
-            <Popover anchorRef={defaultWidthAnchorRef} isOpen placement="top">
-                <div style={demoPopperStyle}>Popover default</div>
-            </Popover>
-        </div>
-    );
+        );
+    },
+    parameters: { chromatic: { disable: true } },
 };

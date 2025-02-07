@@ -137,7 +137,6 @@ const _InnerPopover = forwardRef<PopoverProps, HTMLDivElement>((props, ref) => {
             fitWithinViewportHeight,
             boundaryRef,
             anchorRef,
-            children,
             placement,
             style,
             zIndex,
