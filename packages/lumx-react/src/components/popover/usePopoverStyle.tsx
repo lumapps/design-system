@@ -74,7 +74,6 @@ type Options = Pick<
     | 'fitWithinViewportHeight'
     | 'boundaryRef'
     | 'anchorRef'
-    | 'children'
     | 'placement'
     | 'style'
     | 'zIndex'
@@ -97,7 +96,6 @@ export function usePopoverStyle({
     fitWithinViewportHeight,
     boundaryRef,
     anchorRef,
-    children,
     placement,
     style,
     zIndex,
@@ -136,9 +134,23 @@ export function usePopoverStyle({
     }
 
     const { styles, attributes, state, update } = usePopper(anchorRef.current, popperElement, { placement, modifiers });
+
+    // Auto update popover
     useEffect(() => {
-        update?.();
-    }, [children, update]);
+        const { current: anchorElement } = anchorRef;
+        if (!update || !popperElement || !anchorElement || !WINDOW?.ResizeObserver) {
+            return undefined;
+        }
+        update();
+
+        // On anchor or popover resize
+        const resizeObserver = new ResizeObserver(update);
+        resizeObserver.observe(anchorElement);
+        resizeObserver.observe(popperElement);
+        return () => {
+            resizeObserver.disconnect();
+        };
+    }, [anchorRef, popperElement, update]);
 
     const position = state?.placement ?? placement;
 
