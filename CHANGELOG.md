@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `IconButton`: remove the children prop as it's not actually supported by the component
 -   `Popover`: fix improper first placement on React 18
 -   `Popover`: update placement on both anchor and popover resize
+-   `Tooltip`: remove un-necessary tooltip `aria-label` that would break `aria-labelledby` link to anchor
 
 ## [3.11.0][] - 2025-02-05
 

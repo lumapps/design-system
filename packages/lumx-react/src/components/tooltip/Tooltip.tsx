@@ -135,7 +135,6 @@ export const Tooltip = forwardRef<TooltipProps, HTMLDivElement>((props, ref) => 
                         {...forwardedProps}
                         id={id}
                         role="tooltip"
-                        aria-label={label || ''}
                         className={classNames(
                             className,
                             handleBasicClasses({

@@ -26,7 +26,7 @@ jest.mock('@lumx/react/constants', () => ({
 const setup = async (propsOverride: Partial<TooltipProps> = {}) => {
     const props: any = { forceOpen: true, label: 'Tooltip label', children: 'Anchor', ...propsOverride };
     const result = render(<Tooltip {...props} />);
-    const tooltip = screen.queryByRole('tooltip', { name: props.label });
+    const tooltip = screen.queryByRole('tooltip');
     const anchorWrapper = queryByClassName(document.body, 'lumx-tooltip-anchor-wrapper');
     return { props, tooltip, anchorWrapper, result };
 };
