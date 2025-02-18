@@ -13,6 +13,10 @@
     background-color: lumx-color-variant("light", "N");
     border-radius: var(--lumx-border-radius);
 
+    &--is-initializing {
+        opacity: 0;
+    }
+
     > * {
         flex: 1 auto;
     }
