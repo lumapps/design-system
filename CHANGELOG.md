@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   `Popover`: fix rendering on initializing that could break placement on constrained space
+
 ## [3.11.1][] - 2025-02-13
 
 ### Fixed

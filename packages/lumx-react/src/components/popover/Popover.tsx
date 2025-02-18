@@ -166,9 +166,8 @@ const _InnerPopover = forwardRef<PopoverProps, HTMLDivElement>((props, ref) => {
                           theme,
                           elevation: Math.min(elevation || 0, 5),
                           position,
+                          isInitializing: !styles.popover?.transform
                       }),
-                      // Do not show the popover while it's not properly placed
-                      !styles.popover?.transform ? VISUALLY_HIDDEN : undefined,
                   )}
                   style={styles.popover}
                   {...attributes.popper}
