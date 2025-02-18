@@ -119,12 +119,13 @@ export const Tooltip = forwardRef<TooltipProps, HTMLDivElement>((props, ref) => 
 
     // Update on open
     React.useEffect(() => {
-        if (isOpen) update?.();
-    }, [isOpen, update]);
+        if (isOpen || popperElement) update?.();
+    }, [isOpen, update, popperElement]);
 
     const labelLines = label ? label.split('\n') : [];
 
     const tooltipRef = useMergeRefs(ref, setPopperElement, onPopperMount);
+
     return (
         <>
             <TooltipContextProvider>{wrappedChildren}</TooltipContextProvider>
@@ -140,6 +141,7 @@ export const Tooltip = forwardRef<TooltipProps, HTMLDivElement>((props, ref) => 
                             handleBasicClasses({
                                 prefix: CLASSNAME,
                                 position,
+                                isInitializing: !styles.popper?.transform,
                             }),
                             isHidden && VISUALLY_HIDDEN,
                         )}
