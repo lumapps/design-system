@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   `Popover`: fix rendering on initializing that could break placement on constrained space
+-   `Tooltip`: fix improper first placement on React 18
 
 ## [3.11.1][] - 2025-02-13
 
