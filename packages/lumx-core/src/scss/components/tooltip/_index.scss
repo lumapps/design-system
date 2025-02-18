@@ -17,6 +17,10 @@
     border-radius: var(--lumx-border-radius);
     will-change: transform;
 
+    &--is-initializing {
+        opacity: 0;
+    }
+
     &__arrow {
         position: absolute;
         width: 0;
