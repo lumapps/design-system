@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Moved testing utilities from `@lumx/react`
     -   Moved storybook utilities from `@lumx/react`
 
+### Added
+
+-   `@lumx/react`:
+    -   Add a new `startViewTransition` utility function to animate DOM state transitions
+
 ## [4.0.0][] - 2025-12-09
 
 ### Changed

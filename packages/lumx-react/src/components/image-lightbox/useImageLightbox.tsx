@@ -64,18 +64,22 @@ export function useImageLightbox<P extends Partial<ImageLightboxProps>>(
                 (imageRef) => imageRef.current === currentImage,
             ) as number;
 
-            await startViewTransition({
-                changes() {
+            await startViewTransition(
+                () => {
                     // Close lightbox
                     setImageLightboxProps((prevProps) => ({ ...prevProps, isOpen: false }));
                 },
-                // Morph from the image in lightbox to the image in trigger
-                viewTransitionName: {
-                    source: currentImageRef,
-                    target: triggerImageRefs[currentIndex],
-                    name: CLASSNAME,
+                {
+                    // Morph from the image in lightbox to the image in trigger
+                    groups: [
+                        {
+                            old: currentImageRef,
+                            new: triggerImageRefs[currentIndex],
+                            name: CLASSNAME,
+                        },
+                    ],
                 },
-            });
+            );
         }
 
         async function open(triggerElement: HTMLElement, { activeImageIndex }: TriggerOptions = {}) {
@@ -98,8 +102,8 @@ export function useImageLightbox<P extends Partial<ImageLightboxProps>>(
                 return { loadingPlaceholderImageRef, ...image, imgRef };
             });
 
-            await startViewTransition({
-                changes: () => {
+            await startViewTransition(
+                () => {
                     // Open lightbox with setup props
                     setImageLightboxProps((prevProps) => ({
                         ...prevProps,
@@ -115,13 +119,17 @@ export function useImageLightbox<P extends Partial<ImageLightboxProps>>(
                         activeImageIndex: activeImageIndex || 0,
                     }));
                 },
-                // Morph from the image in trigger to the image in lightbox
-                viewTransitionName: {
-                    source: triggerImage,
-                    target: currentImageRef,
-                    name: CLASSNAME,
+                {
+                    // Morph from the image in trigger to the image in lightbox
+                    groups: [
+                        {
+                            old: triggerImage,
+                            new: currentImageRef,
+                            name: CLASSNAME,
+                        },
+                    ],
                 },
-            });
+            );
         }
 
         return memoize((options?: TriggerOptions) => ({

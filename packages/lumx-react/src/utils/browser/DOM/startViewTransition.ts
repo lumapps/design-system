@@ -5,20 +5,31 @@ import { MaybeElementOrRef } from '@lumx/react/utils/type';
 import { unref } from '../../react/unref';
 import { isReducedMotion } from '../isReducedMotion';
 
-function setupViewTransitionName(elementRef: MaybeElementOrRef<HTMLElement>, name: string) {
-    let originalName: string | null = null;
-    return {
-        set() {
-            const element = unref(elementRef);
-            if (!element) return;
-            originalName = element.style.viewTransitionName;
-            element.style.viewTransitionName = name;
-        },
-        unset() {
-            const element = unref(elementRef);
-            if (!element || originalName === null) return;
-            element.style.viewTransitionName = originalName;
-        },
+interface TransitionGroup {
+    /** Element that should be transitioned from */
+    old: MaybeElementOrRef<Element>;
+    /** Element that should be transitioned to */
+    new: MaybeElementOrRef<Element>;
+    /** viewTransitionName */
+    name: string;
+}
+
+function setupViewTransitionName(groups: TransitionGroup[], type: 'old' | 'new') {
+    const resets: Array<() => void> = [];
+    for (const group of groups) {
+        const element = unref(group[type]);
+        if (element instanceof HTMLElement) {
+            const originalName = element.style.viewTransitionName;
+            resets.push(() => {
+                element.style.viewTransitionName = originalName;
+            });
+            element.style.viewTransitionName = group.name;
+        }
+    }
+    return () => {
+        for (const reset of resets) {
+            reset();
+        }
     };
 }
 
@@ -26,43 +37,40 @@ function setupViewTransitionName(elementRef: MaybeElementOrRef<HTMLElement>, nam
  * Wrapper around the `document.startViewTransition` handling browser incompatibilities, react DOM flush and
  * user preference.
  *
- * @param changes                callback containing the changes to apply within the view transition.
- * @param setViewTransitionName  set the `viewTransitionName` style on a `source` & `target` to morph these elements.
+ * @param updateCallback      callback containing the changes to apply within the view transition.
+ * @param groups              setup groups of old and new element pair to transition between.
  */
-export async function startViewTransition({
-    changes,
-    viewTransitionName,
-}: {
-    changes: () => void;
-    viewTransitionName: {
-        source: MaybeElementOrRef<HTMLElement>;
-        target: MaybeElementOrRef<HTMLElement>;
-        name: string;
-    };
-}) {
+export async function startViewTransition(
+    updateCallback: () => void,
+    {
+        groups = [],
+    }: {
+        groups?: TransitionGroup[];
+    } = {},
+) {
     const start = (document as any)?.startViewTransition?.bind(document);
     const prefersReducedMotion = isReducedMotion();
     const { flushSync } = ReactDOM as any;
-    if (prefersReducedMotion || !start || !flushSync || !viewTransitionName?.source || !viewTransitionName?.target) {
+    if (prefersReducedMotion || !start || !flushSync) {
         // Skip, apply changes without a transition
-        changes();
+        updateCallback();
         return;
     }
 
-    // Setup set/unset transition name on source & target
-    const sourceTransitionName = setupViewTransitionName(viewTransitionName.source, viewTransitionName.name);
-    const targetTransitionName = setupViewTransitionName(viewTransitionName.target, viewTransitionName.name);
+    // Setup view transition name on old elements
+    const resetOldElement = setupViewTransitionName(groups, 'old');
 
-    sourceTransitionName.set();
+    let resetNewElements: (() => void) | undefined;
 
     // Start view transition, apply changes & flush to DOM
     await start(() => {
-        sourceTransitionName.unset();
+        resetOldElement();
 
-        flushSync(changes);
+        flushSync(updateCallback);
 
-        targetTransitionName.set();
+        // Setup view transition name on new elements
+        resetNewElements = setupViewTransitionName(groups, 'new');
     }).updateCallbackDone;
 
-    targetTransitionName.unset();
+    resetNewElements?.();
 }

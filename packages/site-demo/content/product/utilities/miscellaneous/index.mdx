@@ -1,4 +1,7 @@
-import { Message } from '@lumx/react';
+import uniqueId from 'lodash/uniqueId';
+import { mdiEarth } from '@lumx/icons';
+import { Message, Chip, Icon } from '@lumx/react';
+import { startViewTransition } from '@lumx/react/utils';
 
 # Miscellaneous utilities
 
@@ -85,3 +88,80 @@ const MyComponent = () => (
 
 To get your custom component to handle this disable state context, you can use the `useDisabledStateContext()` hook
 (from the same `@lumx/react/utils` module).
+
+
+## startViewTransition
+
+A wrapper around <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/startViewTransition">`document.startViewTransition()`</a> that transitions changes between two UI states.
+
+<Message kind="warning">
+    If this API is not supported by the browser (check <a href="https://caniuse.com/mdn-api_document_startviewtransition">for compatibility</a>) or if the user has <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion">reduced motion</a> enabled, the changes will occur without triggering a view transition.
+</Message>
+
+
+### Simple cross-fade transition
+
+A view transition can be triggered by calling `startViewTransition` with a React UI update callback. Automatically, the browser will animate a cross-fade of the state before and after the UI change.
+
+**Example of a simple cross-fade between two UI states:**
+
+<DemoBlock alwaysShowCode orientation="horizontal">
+    {function App() {
+        const [show, setShow] = React.useState(false);
+        const toggle = () => {
+            startViewTransition(() => setShow((wasShown) => !wasShown));
+        };
+        return (
+            <Chip onClick={toggle}>
+                {!show ? 'Click me to change my label' : 'Click again to go back to the previous label'}
+            </Chip>
+        );
+    }}
+</DemoBlock>
+
+### Grouped elements transition
+
+To transition individual elements between the before and after state, groups of elements should be provided.
+
+A group is identified with a name and references an old element (existing at the start) and a new element (existing at the end of the transition).
+
+The animation for each group can be customized with CSS `::view-transition-*` pseudo-elements ([see MDN documentation](https://developer.mozilla.org/en-US/docs/Web/CSS/::view-transition-old))
+
+**Example of transition between element groups:**
+
+<DemoBlock alwaysShowCode orientation="horizontal">
+    {function App() {
+        const [isBefore, setIsBefore] = React.useState(true);
+        const beforeRef = React.useRef(null);
+        const afterRef = React.useRef(null);
+        const chipRef = React.useRef(null);
+        const toggle = () => {
+            // Transition between the before and after icons
+            const iconBeforeAfterGroup = {
+                name: uniqueId('icon-transition'),
+                old: isBefore ? beforeRef : afterRef,
+                new: isBefore ? afterRef : beforeRef,
+            };
+            // Transition the label with itself
+            const chipLabel = chipRef.current?.querySelector('.lumx-chip__label');
+            const labelGroup = {
+                name: uniqueId('label'),
+                old: chipLabel,
+                new: chipLabel,
+            };
+            startViewTransition(() => setIsBefore(!isBefore), {
+                groups: [iconBeforeAfterGroup, labelGroup],
+            });
+        };
+        return (
+            <Chip
+                ref={chipRef}
+                before={isBefore && <Icon ref={beforeRef} icon={mdiEarth} />}
+                onClick={toggle}
+                after={!isBefore && <Icon ref={afterRef} icon={mdiEarth} />}
+            >
+                Click to move the icon before/after
+            </Chip>
+        );
+    }}
+</DemoBlock>
