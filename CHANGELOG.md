@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   `Tooltip`: remove placement style when hidden (closeMode=hide) to fix overflow issue
+
 ## [3.11.2][] - 2025-02-18
 
 ### Fixed

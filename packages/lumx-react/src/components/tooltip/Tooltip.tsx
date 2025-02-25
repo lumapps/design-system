@@ -145,7 +145,7 @@ export const Tooltip = forwardRef<TooltipProps, HTMLDivElement>((props, ref) => 
                             }),
                             isHidden && VISUALLY_HIDDEN,
                         )}
-                        style={{ ...styles.popper, zIndex }}
+                        style={{ ...(isHidden ? undefined : styles.popper), zIndex }}
                         {...attributes.popper}
                     >
                         <div className={`${CLASSNAME}__arrow`} />

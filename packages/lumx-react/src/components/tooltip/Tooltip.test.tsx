@@ -144,6 +144,8 @@ describe(`<${Tooltip.displayName}>`, () => {
                 });
                 expect(tooltip).toBeInTheDocument();
                 expect(tooltip).toHaveClass(VISUALLY_HIDDEN);
+                // Popper styles should not be applied when closed.
+                expect(tooltip?.style?.transform).toBe('');
 
                 const anchor = screen.getByRole('button', { name: 'Anchor' });
                 await userEvent.hover(anchor);
