@@ -12,11 +12,12 @@
 
     &__wrapper {
         position: absolute;
-        top: -1px;
-        right: -1px;
-        bottom: -1px;
-        left: -1px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
         display: grid;
+        gap: 2px;
 
         #{$self}--has-1-thumbnail & {
             grid: minmax(0, 1fr) / 1fr;
@@ -47,7 +48,6 @@
         position: relative;
         display: flex;
         flex-direction: column;
-        margin: 1px;
 
         &:has([data-focus-visible-added]) {
             z-index: 1;
