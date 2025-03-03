@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `Tooltip`: remove placement style when hidden (closeMode=hide) to fix overflow issue
 -   `Mosaic`: remove negative inset that could break overflow of parent element
+-   `Popover`: limit popover placement update on element resize
 
 ## [3.11.2][] - 2025-02-18
 

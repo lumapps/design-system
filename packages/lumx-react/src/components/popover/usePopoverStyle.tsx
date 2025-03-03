@@ -141,10 +141,18 @@ export function usePopoverStyle({
         if (!update || !popperElement || !anchorElement || !WINDOW?.ResizeObserver) {
             return undefined;
         }
-        update();
+        let running: ReturnType<typeof setTimeout> | undefined;
+        function updateRateLimited() {
+            if (running) return;
+            update?.();
+            running = setTimeout(() => {
+                running = undefined;
+            }, 100);
+        }
+        updateRateLimited();
 
         // On anchor or popover resize
-        const resizeObserver = new ResizeObserver(update);
+        const resizeObserver = new ResizeObserver(updateRateLimited);
         resizeObserver.observe(anchorElement);
         resizeObserver.observe(popperElement);
         return () => {
