@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.11.3][] - 2025-03-04
+
 ### Fixed
 
 -   `Tooltip`: remove placement style when hidden (closeMode=hide) to fix overflow issue
@@ -2211,7 +2213,8 @@ _Failed released_
 [3.7.0]: https://github.com/lumapps/design-system/compare/v3.6.8...v3.7.0
 [3.6.8]: https://github.com/lumapps/design-system/compare/v3.6.7...v3.6.8
 [3.6.7]: https://github.com/lumapps/design-system/tree/v3.6.7
-[Unreleased]: https://github.com/lumapps/design-system/compare/v3.11.2...HEAD
+[Unreleased]: https://github.com/lumapps/design-system/compare/v3.11.3...HEAD
+[3.11.3]: https://github.com/lumapps/design-system/compare/v3.11.2...v3.11.3
 [3.11.2]: https://github.com/lumapps/design-system/compare/v3.11.1...v3.11.2
 [3.11.1]: https://github.com/lumapps/design-system/compare/v3.11.0...v3.11.1
 [3.11.0]: https://github.com/lumapps/design-system/compare/v3.10.0...v3.11.0
