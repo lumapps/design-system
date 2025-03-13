@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 
 import classNames from 'classnames';
 
-import { Progress, ProgressVariant, Size } from '@lumx/react';
+import { HeadingLevelProvider, Progress, ProgressVariant, Size } from '@lumx/react';
 
 import { DIALOG_TRANSITION_DURATION, DOCUMENT } from '@lumx/react/constants';
 import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
@@ -212,67 +212,77 @@ export const Dialog = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
               >
                   <div className={`${CLASSNAME}__overlay`} />
 
-                  <ThemeProvider value={undefined}>
-                      <section className={`${CLASSNAME}__container`} role="dialog" aria-modal="true" {...dialogProps}>
-                          <ClickAwayProvider
-                              callback={!shouldPreventCloseOnClickAway && onClose}
-                              childrenRefs={clickAwayRefs}
-                              parentRef={rootRef}
+                  <HeadingLevelProvider level={2}>
+                      <ThemeProvider value={undefined}>
+                          <section
+                              className={`${CLASSNAME}__container`}
+                              role="dialog"
+                              aria-modal="true"
+                              {...dialogProps}
                           >
-                              <div className={`${CLASSNAME}__wrapper`} ref={wrapperRef}>
-                                  {(header || headerChildContent) && (
-                                      <header
-                                          {...headerChildProps}
-                                          className={classNames(
-                                              `${CLASSNAME}__header`,
-                                              (forceHeaderDivider || hasTopIntersection) &&
-                                                  `${CLASSNAME}__header--has-divider`,
-                                              headerChildProps?.className,
-                                          )}
-                                      >
-                                          {header}
-                                          {headerChildContent}
-                                      </header>
-                                  )}
-
-                                  <div ref={mergeRefs(contentRef, localContentRef)} className={`${CLASSNAME}__content`}>
-                                      <div
-                                          className={`${CLASSNAME}__sentinel ${CLASSNAME}__sentinel--top`}
-                                          ref={setSentinelTop}
-                                      />
-
-                                      {content}
+                              <ClickAwayProvider
+                                  callback={!shouldPreventCloseOnClickAway && onClose}
+                                  childrenRefs={clickAwayRefs}
+                                  parentRef={rootRef}
+                              >
+                                  <div className={`${CLASSNAME}__wrapper`} ref={wrapperRef}>
+                                      {(header || headerChildContent) && (
+                                          <header
+                                              {...headerChildProps}
+                                              className={classNames(
+                                                  `${CLASSNAME}__header`,
+                                                  (forceHeaderDivider || hasTopIntersection) &&
+                                                      `${CLASSNAME}__header--has-divider`,
+                                                  headerChildProps?.className,
+                                              )}
+                                          >
+                                              {header}
+                                              {headerChildContent}
+                                          </header>
+                                      )}
 
                                       <div
-                                          className={`${CLASSNAME}__sentinel ${CLASSNAME}__sentinel--bottom`}
-                                          ref={setSentinelBottom}
-                                      />
-                                  </div>
-
-                                  {(footer || footerChildContent) && (
-                                      <footer
-                                          {...footerChildProps}
-                                          className={classNames(
-                                              `${CLASSNAME}__footer`,
-                                              (forceFooterDivider || hasBottomIntersection) &&
-                                                  `${CLASSNAME}__footer--has-divider`,
-                                              footerChildProps?.className,
-                                          )}
+                                          ref={mergeRefs(contentRef, localContentRef)}
+                                          className={`${CLASSNAME}__content`}
                                       >
-                                          {footer}
-                                          {footerChildContent}
-                                      </footer>
-                                  )}
+                                          <div
+                                              className={`${CLASSNAME}__sentinel ${CLASSNAME}__sentinel--top`}
+                                              ref={setSentinelTop}
+                                          />
 
-                                  {isLoading && (
-                                      <div className={`${CLASSNAME}__progress-overlay`}>
-                                          <Progress variant={ProgressVariant.circular} />
+                                          {content}
+
+                                          <div
+                                              className={`${CLASSNAME}__sentinel ${CLASSNAME}__sentinel--bottom`}
+                                              ref={setSentinelBottom}
+                                          />
                                       </div>
-                                  )}
-                              </div>
-                          </ClickAwayProvider>
-                      </section>
-                  </ThemeProvider>
+
+                                      {(footer || footerChildContent) && (
+                                          <footer
+                                              {...footerChildProps}
+                                              className={classNames(
+                                                  `${CLASSNAME}__footer`,
+                                                  (forceFooterDivider || hasBottomIntersection) &&
+                                                      `${CLASSNAME}__footer--has-divider`,
+                                                  footerChildProps?.className,
+                                              )}
+                                          >
+                                              {footer}
+                                              {footerChildContent}
+                                          </footer>
+                                      )}
+
+                                      {isLoading && (
+                                          <div className={`${CLASSNAME}__progress-overlay`}>
+                                              <Progress variant={ProgressVariant.circular} />
+                                          </div>
+                                      )}
+                                  </div>
+                              </ClickAwayProvider>
+                          </section>
+                      </ThemeProvider>
+                  </HeadingLevelProvider>
               </div>,
               document.body,
           )
