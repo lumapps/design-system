@@ -6,6 +6,7 @@ import { render, screen } from '@testing-library/react';
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import userEvent from '@testing-library/user-event';
 import { ThemeSentinel } from '@lumx/react/testing/utils/ThemeSentinel';
+import { Heading, HeadingLevelProvider } from '@lumx/react';
 
 const CLASSNAME = Dialog.className as string;
 
@@ -31,6 +32,21 @@ describe(`<${Dialog.displayName}>`, () => {
         expect(dialog).toBeInTheDocument();
         expect(container).toBe(screen.queryByRole('dialog'));
         expect(container).toHaveAttribute('aria-modal', 'true');
+    });
+
+    it('should have reset the heading level context', () => {
+        setup(
+            // Heading inside the dialog
+            { children: <Heading>Title</Heading> },
+            {
+                // This level context should not affect headings inside the dialog
+                wrapper({ children }) {
+                    return <HeadingLevelProvider level={3}>{children}</HeadingLevelProvider>;
+                },
+            },
+        );
+        // Heading inside should use the dialog heading level 2
+        expect(screen.queryByRole('heading', { name: 'Title', level: 2 })).toBeInTheDocument();
     });
 
     describe('Events', () => {
