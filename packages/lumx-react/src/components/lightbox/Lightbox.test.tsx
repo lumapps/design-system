@@ -5,6 +5,7 @@ import { queryByClassName } from '@lumx/react/testing/utils/queries';
 import { render, screen } from '@testing-library/react';
 import { ThemeSentinel } from '@lumx/react/testing/utils/ThemeSentinel';
 
+import { Heading, HeadingLevelProvider } from '@lumx/react';
 import { Lightbox, LightboxProps } from './Lightbox';
 
 const CLASSNAME = Lightbox.className as string;
@@ -22,6 +23,23 @@ const setup = (props: Partial<LightboxProps> = {}, { wrapper }: SetupRenderOptio
 };
 
 describe(`<${Lightbox.displayName}>`, () => {
+    it('should have reset the heading level context', () => {
+        setup(
+            {
+                // Heading inside the lightbox
+                children: <Heading>Title</Heading>,
+            },
+            {
+                // This level context should not affect headings inside the lightbox
+                wrapper({ children }) {
+                    return <HeadingLevelProvider level={3}>{children}</HeadingLevelProvider>;
+                },
+            },
+        );
+        // Heading inside should use the lightbox heading level 2
+        expect(screen.queryByRole('heading', { name: 'Title', level: 2 })).toBeInTheDocument();
+    });
+
     // Common tests suite.
     commonTestsSuiteRTL(setup, {
         baseClassName: CLASSNAME,
