@@ -6,6 +6,7 @@ import { HasAriaLabelOrLabelledBy } from '@lumx/react/utils/type';
 import { getRootClassName } from '@lumx/react/utils/className';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
+import { HeadingLevelProvider } from '@lumx/react/components/heading';
 import { Popover, PopoverProps } from '../popover/Popover';
 
 /**
@@ -65,7 +66,7 @@ export const PopoverDialog = forwardRef<PopoverDialogProps, HTMLDivElement>((pro
             closeOnEscape
             withFocusTrap
         >
-            {children}
+            <HeadingLevelProvider level={2}>{children}</HeadingLevelProvider>
         </Popover>
     );
 });

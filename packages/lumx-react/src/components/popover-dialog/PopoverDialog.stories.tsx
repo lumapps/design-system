@@ -40,7 +40,7 @@ export const WithButtonTrigger = (props: any) => {
 /**
  * Example PopoverDialog using an icon button as a trigger
  */
-export const WithIconButtonTrigger = (props: any) => {
+export const WithIconButtonTrigger = ({ children, ...props }: any) => {
     const anchorRef = React.useRef(null);
     const [isOpen, close, open] = useBooleanState(false);
 
@@ -57,6 +57,7 @@ export const WithIconButtonTrigger = (props: any) => {
                 {...props}
             >
                 <Button onClick={close}>Close</Button>
+                {children}
             </PopoverDialog>
         </>
     );
