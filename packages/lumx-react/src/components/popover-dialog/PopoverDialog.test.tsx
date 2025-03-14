@@ -2,8 +2,9 @@ import React from 'react';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { PopoverDialog } from './PopoverDialog';
+import { Heading, HeadingLevelProvider } from '@lumx/react';
 import { WithButtonTrigger, WithIconButtonTrigger } from './PopoverDialog.stories';
+import { PopoverDialog } from './PopoverDialog';
 
 jest.mock('@lumx/react/utils/browser/isFocusVisible');
 
@@ -116,5 +117,24 @@ describe(`<${PopoverDialog.displayName}>`, () => {
 
         // Focus restored to the trigger element
         expect(triggerElement).toHaveFocus();
+    });
+
+    it('should have reset the heading level context', async () => {
+        render(
+            // This level context should not affect headings inside the popover dialog
+
+            <HeadingLevelProvider level={3}>
+                <WithIconButtonTrigger>
+                    {/* Heading inside the popover dialog */}
+                    <Heading>Title</Heading>
+                </WithIconButtonTrigger>
+            </HeadingLevelProvider>,
+        );
+
+        // Open popover
+        await userEvent.click(screen.getByRole('button', { name: 'Open popover' }));
+
+        // Heading inside should use the popover dialog heading level 2
+        expect(screen.getByRole('heading', { name: 'Title', level: 2 })).toBeInTheDocument();
     });
 });

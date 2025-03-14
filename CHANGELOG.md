@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
--   `Dialog` & `Lightbox`: reset heading level context in children
+-   `Dialog`, `Lightbox` & `PopoverDialog`: set default heading level context to `h2`
 
 ## [3.11.3][] - 2025-03-04
 
