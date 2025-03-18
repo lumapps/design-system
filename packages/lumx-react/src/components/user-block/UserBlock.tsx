@@ -32,7 +32,7 @@ export interface UserBlockProps extends GenericProps, HasTheme {
     /** Multiple action toolbar content. */
     multipleActions?: ReactNode;
     /** User name. */
-    name?: string;
+    name?: React.ReactNode;
     /** Props to pass to the name block. */
     nameProps?: GenericProps;
     /** Orientation. */
@@ -47,6 +47,10 @@ export interface UserBlockProps extends GenericProps, HasTheme {
     onMouseEnter?(): void;
     /** On mouse leave callback. */
     onMouseLeave?(): void;
+    /** Display additional fields below the original name and fields */
+    additionalFields?: React.ReactNode;
+    /** Display an additional element after the entire component. (to the right if orientation is horizontal, at the bottom if orientation is vertical) */
+    after?: React.ReactNode;
 }
 
 /**
@@ -92,6 +96,9 @@ export const UserBlock = forwardRef<UserBlockProps, HTMLDivElement>((props, ref)
         simpleAction,
         size,
         theme = defaultTheme,
+        children,
+        additionalFields,
+        after,
         ...forwardedProps
     } = props;
     let componentSize = size;
@@ -131,7 +138,9 @@ export const UserBlock = forwardRef<UserBlockProps, HTMLDivElement>((props, ref)
         return <NameComponent {...nProps}>{name}</NameComponent>;
     }, [avatarProps, isClickable, linkAs, linkProps, name, nameProps, onClick]);
 
-    const fieldsBlock: ReactNode = fields && componentSize !== Size.s && componentSize !== Size.xs && (
+    const shouldDisplayFields = componentSize !== Size.s && componentSize !== Size.xs;
+
+    const fieldsBlock: ReactNode = fields && shouldDisplayFields && (
         <div className={`${CLASSNAME}__fields`}>
             {fields.map((field: string, idx: number) => (
                 <span key={idx} className={`${CLASSNAME}__field`}>
@@ -164,16 +173,18 @@ export const UserBlock = forwardRef<UserBlockProps, HTMLDivElement>((props, ref)
                     theme={theme}
                 />
             )}
-            {(fields || name) && (
+            {(fields || name || children || additionalFields) && (
                 <div className={`${CLASSNAME}__wrapper`}>
-                    {nameBlock}
+                    {children || nameBlock}
                     {fieldsBlock}
+                    {shouldDisplayFields ? additionalFields : null}
                 </div>
             )}
             {shouldDisplayActions && simpleAction && <div className={`${CLASSNAME}__action`}>{simpleAction}</div>}
             {shouldDisplayActions && multipleActions && (
                 <div className={`${CLASSNAME}__actions`}>{multipleActions}</div>
             )}
+            {after ? <div className={`${CLASSNAME}__after`}>{after}</div> : null}
         </div>
     );
 });

@@ -1,9 +1,9 @@
 import React from 'react';
 
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
-import { render, within } from '@testing-library/react';
+import { render, within, screen } from '@testing-library/react';
 import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
-import { Thumbnail } from '@lumx/react';
+import { Text, Thumbnail } from '@lumx/react';
 import userEvent from '@testing-library/user-event';
 
 import { UserBlock, UserBlockProps } from './UserBlock';
@@ -22,8 +22,9 @@ const setup = (propsOverride: Partial<UserBlockProps> = {}, { wrapper }: SetupRe
     const avatar = queryByClassName(userBlock, `${CLASSNAME}__avatar`);
     const thumbnail = avatar && queryByClassName(avatar, Thumbnail.className as string);
     const fields = queryByClassName(userBlock, `${CLASSNAME}__fields`);
+    const after = queryByClassName(userBlock, `${CLASSNAME}__after`);
 
-    return { props, userBlock, name, avatar, thumbnail, fields };
+    return { props, userBlock, name, avatar, thumbnail, fields, after };
 };
 
 describe(`<${UserBlock.displayName}>`, () => {
@@ -77,6 +78,17 @@ describe(`<${UserBlock.displayName}>`, () => {
             expect(fields).toBeInTheDocument();
             expect(within(fields as any).getByText('Field 1')).toBeInTheDocument();
             expect(within(fields as any).getByText('Field 2')).toBeInTheDocument();
+        });
+
+        it('should render additional fields', () => {
+            setup({ additionalFields: <Text as="span">Works in Toronto</Text> });
+            expect(screen.queryByText(/works in toronto/i)).toBeInTheDocument();
+        });
+
+        it('should render after', () => {
+            const { after } = setup({ after: <Text as="span">After</Text> });
+            expect(after).toBeInTheDocument();
+            expect(screen.queryByText(/after/i)).toBeInTheDocument();
         });
     });
 

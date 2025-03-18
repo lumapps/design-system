@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { mdiStar } from '@lumx/icons';
-import { Badge, ColorPalette, Icon, Orientation, Size } from '@lumx/react';
+import { mdiMenuDown, mdiStar } from '@lumx/icons';
+import { Badge, ColorPalette, Icon, IconButton, Orientation, Size, Text } from '@lumx/react';
 import { CustomLink } from '@lumx/react/stories/utils/CustomLink';
 
 import { AVATAR_IMAGES } from '@lumx/react/stories/controls/image';
@@ -31,9 +31,36 @@ export const AvatarAndName = {
     args: { ...AvatarOnly.args, name: 'Emmitt O. Lum' },
 };
 
+/** Avatar and children */
+export const AvatarAndCustomName = {
+    args: { ...AvatarOnly.args, name: <Text as="span">Emmitt O. Lum</Text> },
+};
+
 /** Avatar, name and secondary fields */
 export const AvatarAndNameAndSecondaryFields = {
     args: { ...AvatarAndName.args, fields: ['Creative developer', 'Denpasar'] },
+};
+
+/** With Right component */
+export const WithAfter = {
+    args: {
+        ...AvatarAndName.args,
+        fields: ['Creative developer', 'Denpasar'],
+        after: <IconButton label="View" icon={mdiMenuDown} emphasis="low" />,
+    },
+};
+
+/** With after component */
+export const WithAdditionalFields = {
+    args: {
+        ...AvatarAndName.args,
+        fields: ['Creative developer', 'Denpasar'],
+        additionalFields: (
+            <Text as="span" typography="body1">
+                Works at the Toronto office
+            </Text>
+        ),
+    },
 };
 
 /** Size variants */
