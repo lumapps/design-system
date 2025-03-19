@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.12.0][] - 2025-03-19
+
 ### Added
 
 -   `Dialog`, `Lightbox` & `PopoverDialog`: set default heading level context to `h2`
@@ -2218,7 +2220,8 @@ _Failed released_
 [3.7.0]: https://github.com/lumapps/design-system/compare/v3.6.8...v3.7.0
 [3.6.8]: https://github.com/lumapps/design-system/compare/v3.6.7...v3.6.8
 [3.6.7]: https://github.com/lumapps/design-system/tree/v3.6.7
-[Unreleased]: https://github.com/lumapps/design-system/compare/v3.11.3...HEAD
+[Unreleased]: https://github.com/lumapps/design-system/compare/v3.12.0...HEAD
+[3.12.0]: https://github.com/lumapps/design-system/compare/v3.11.3...v3.12.0
 [3.11.3]: https://github.com/lumapps/design-system/compare/v3.11.2...v3.11.3
 [3.11.2]: https://github.com/lumapps/design-system/compare/v3.11.1...v3.11.2
 [3.11.1]: https://github.com/lumapps/design-system/compare/v3.11.0...v3.11.1
