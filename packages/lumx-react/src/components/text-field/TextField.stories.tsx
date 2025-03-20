@@ -1,6 +1,6 @@
 import React from 'react';
 import { mdiTranslate } from '@lumx/icons';
-import { Chip, IconButton, TextField } from '@lumx/react';
+import { Chip, IconButton, TextField, Typography } from '@lumx/react';
 import { withValueOnChange } from '@lumx/react/stories/decorators/withValueOnChange';
 import { loremIpsum } from '@lumx/react/stories/utils/lorem';
 
@@ -43,6 +43,20 @@ export const LabelAndHelper = {
     args: {
         ...Default.args,
         label: 'Textfield label',
+        helper: loremIpsum('tiny'),
+    },
+};
+
+/**
+ * With custom label and helper
+ */
+export const CustomLabelAndHelper = {
+    args: {
+        ...Default.args,
+        label: 'Textfield label',
+        labelProps: {
+            typography: Typography.subtitle1,
+        },
         helper: loremIpsum('tiny'),
     },
 };
