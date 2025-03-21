@@ -30,6 +30,8 @@ interface Options<S extends CommonSetup> {
         viaContext: boolean;
         /** Apply a default theme if no prop or context was provided */
         defaultTheme?: Theme;
+        /** Default props to apply when testing theme */
+        defaultProps?: S['props'];
     };
 }
 
@@ -128,7 +130,7 @@ export function commonTestsSuiteRTL<S extends CommonSetup>(setup: SetupFunction<
                     it.each(testElements)(
                         `should $apply default theme (${defaultTheme}) to \`$element\``,
                         async (affectedElement) => {
-                            const wrappers = await setup();
+                            const wrappers = await setup(applyTheme.defaultProps);
                             expectTheme(wrappers, affectedElement, defaultTheme);
                         },
                     );
@@ -140,7 +142,7 @@ export function commonTestsSuiteRTL<S extends CommonSetup>(setup: SetupFunction<
                     it.each(affectedElements)(
                         `should not apply default theme (${defaultTheme}) to \`$element\``,
                         async (affectedElement) => {
-                            const wrappers = await setup();
+                            const wrappers = await setup(applyTheme.defaultProps);
                             expectTheme(wrappers, affectedElement, Theme.light, { shouldHaveModifier: false });
                             expectTheme(wrappers, affectedElement, Theme.dark, { shouldHaveModifier: false });
                         },
@@ -152,7 +154,7 @@ export function commonTestsSuiteRTL<S extends CommonSetup>(setup: SetupFunction<
                     it.each(testElements)(
                         `should $apply prop theme=${theme} to \`$element\``,
                         async (affectedElement) => {
-                            const wrappers = await setup({ theme });
+                            const wrappers = await setup({ ...applyTheme.defaultProps, theme });
                             expectTheme(wrappers, affectedElement, theme);
                         },
                     );

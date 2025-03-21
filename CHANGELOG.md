@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `InputLabel`: add `typography` prop
 
+### Fixed
+
+-   `Button`: fix icon color inside a theme context.
+
 ## [3.12.0][] - 2025-03-19
 
 ### Added

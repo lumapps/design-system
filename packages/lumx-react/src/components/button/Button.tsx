@@ -3,7 +3,7 @@ import React from 'react';
 import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
 
-import { Emphasis, Icon, Size, Theme, Text } from '@lumx/react';
+import { Emphasis, Icon, Size, Theme, Text, ThemeProvider } from '@lumx/react';
 import { isComponent } from '@lumx/react/utils/type';
 import { getBasicClass, getRootClassName } from '@lumx/react/utils/className';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
@@ -73,9 +73,19 @@ export const Button = forwardRef<ButtonProps, HTMLButtonElement | HTMLAnchorElem
             className={buttonClassName}
             variant="button"
         >
-            {leftIcon && !isEmpty(leftIcon) && <Icon icon={leftIcon} />}
+            {leftIcon && !isEmpty(leftIcon) && (
+                // Theme is handled in the button scss
+                <ThemeProvider value={undefined}>
+                    <Icon icon={leftIcon} />
+                </ThemeProvider>
+            )}
             {children && (isComponent(Text)(children) ? children : <span>{children}</span>)}
-            {rightIcon && !isEmpty(rightIcon) && <Icon icon={rightIcon} />}
+            {rightIcon && !isEmpty(rightIcon) && (
+                // Theme is handled in the button scss
+                <ThemeProvider value={undefined}>
+                    <Icon icon={rightIcon} />
+                </ThemeProvider>
+            )}
         </ButtonRoot>
     );
 });
