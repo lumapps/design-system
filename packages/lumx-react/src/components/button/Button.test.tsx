@@ -72,10 +72,11 @@ describe(`<${Button.displayName}>`, () => {
         forwardAttributes: 'button',
         forwardRef: 'button',
         applyTheme: {
-            affects: [{ element: 'button' }],
+            affects: [{ element: 'button' }, { not: { element: 'icons' } }],
             viaProp: true,
             viaContext: true,
             defaultTheme: 'light',
+            defaultProps: { rightIcon: mdiPlus, leftIcon: mdiCheck },
         },
     });
 });
