@@ -1,7 +1,8 @@
 import React from 'react';
 
-import { Theme } from '@lumx/react';
+import { Theme, Typography } from '@lumx/react';
 import { getByClassName } from '@lumx/react/testing/utils/queries';
+import { getTypographyClassName } from '@lumx/react/utils/className';
 import { render } from '@testing-library/react';
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { InputLabel, InputLabelProps } from './InputLabel';
@@ -37,6 +38,12 @@ describe(`<${InputLabel.displayName}>`, () => {
             expect(label).toHaveClass(CLASSNAME);
             expect(label).toHaveClass(`${CLASSNAME}--theme-dark`);
             expect(label).toHaveClass(`${CLASSNAME}--is-required`);
+        });
+
+        it('should render typography', () => {
+            const { label } = setup({ children: 'The label', typography: Typography.body1 });
+            expect(label).toHaveClass(CLASSNAME);
+            expect(label).toHaveClass(getTypographyClassName(Typography.body1));
         });
     });
 

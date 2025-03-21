@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Typography } from '@lumx/react';
+
 import { InputLabel } from './InputLabel';
 
 export default {
@@ -35,4 +37,11 @@ export const Default = {};
  */
 export const IsRequired = {
     args: { isRequired: true },
+};
+
+/**
+ * Default input label
+ */
+export const WithCustomTypography = {
+    args: { typography: Typography.subtitle1 },
 };
