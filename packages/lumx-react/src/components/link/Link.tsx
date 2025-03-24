@@ -1,14 +1,12 @@
-import React, { RefObject, useMemo } from 'react';
-
-import isEmpty from 'lodash/isEmpty';
+import React from 'react';
 
 import classNames from 'classnames';
 
-import { ColorPalette, ColorVariant, Icon, Size, Typography } from '@lumx/react';
+import { ColorPalette, ColorVariant, Icon, Typography } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
-import { renderLink } from '@lumx/react/utils/react/renderLink';
+import { getRootClassName, getTypographyClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { wrapChildrenIconWithSpaces } from '@lumx/react/utils/react/wrapChildrenIconWithSpaces';
 
 type HTMLAnchorProps = React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
 
@@ -24,11 +22,17 @@ export interface LinkProps extends GenericProps {
     href?: HTMLAnchorProps['href'];
     /** Whether the component is disabled or not. */
     isDisabled?: boolean;
-    /** Left icon (SVG path). */
+    /**
+     * Left icon (SVG path).
+     * @deprecated Instead, simply nest `<Icon />` in the children
+     */
     leftIcon?: string;
     /** Custom react component for the link (can be used to inject react router Link). */
     linkAs?: 'a' | any;
-    /** Right icon (SVG path). */
+    /**
+     * Right icon (SVG path).
+     * @deprecated Instead, simply nest `<Icon />` in the children
+     */
     rightIcon?: string;
     /** Link target. */
     target?: HTMLAnchorProps['target'];
@@ -47,36 +51,6 @@ const COMPONENT_NAME = 'Link';
  * Component default class name and class prefix.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
-
-const getIconSize = (typography?: Typography) => {
-    switch (typography) {
-        case Typography.display1:
-            return Size.m;
-
-        case Typography.headline:
-        case Typography.title:
-        case Typography.custom.title1:
-        case Typography.custom.title2:
-        case Typography.custom.title3:
-        case Typography.custom.title4:
-        case Typography.custom.title5:
-        case Typography.custom.title6:
-        case Typography.body2:
-        case Typography.subtitle2:
-            return Size.s;
-
-        case Typography.body1:
-        case Typography.subtitle1:
-            return Size.xs;
-
-        case Typography.caption:
-        case Typography.overline:
-            return Size.xxs;
-
-        default:
-            return Size.s;
-    }
-};
 
 /**
  * Link component.
@@ -101,58 +75,37 @@ export const Link = forwardRef<LinkProps, HTMLAnchorElement | HTMLButtonElement>
         typography,
         ...forwardedProps
     } = props;
-    const renderedChildren = useMemo(
-        () => (
-            <>
-                {leftIcon && !isEmpty(leftIcon) && (
-                    <Icon icon={leftIcon} className={`${CLASSNAME}__left-icon`} size={getIconSize(typography)} />
-                )}
 
-                {children && (
-                    <span
-                        className={classNames(`${CLASSNAME}__content`, {
-                            [`lumx-typography-${typography}`]: typography,
-                        })}
-                    >
-                        {children}
-                    </span>
-                )}
-
-                {rightIcon && !isEmpty(rightIcon) && (
-                    <Icon icon={rightIcon} className={`${CLASSNAME}__right-icon`} size={getIconSize(typography)} />
-                )}
-            </>
-        ),
-        [leftIcon, typography, children, rightIcon],
-    );
-
-    /**
-     * If there is no linkAs prop and no href, we returned a <button> instead of a <a>.
-     * If the component is disabled, we also returned a <button> since disabled is not compatible with <a>.
-     */
-    if ((!linkAs && isEmpty(href)) || isDisabled) {
-        return (
-            <button
-                type="button"
-                {...forwardedProps}
-                ref={ref as RefObject<HTMLButtonElement>}
-                disabled={isDisabled}
-                className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color, colorVariant }))}
-            >
-                {renderedChildren}
-            </button>
-        );
+    const isLink = linkAs || href;
+    const Component = isLink && !isDisabled ? linkAs || 'a' : 'button';
+    const baseProps: React.ComponentProps<typeof Component> = {};
+    if (Component === 'button') {
+        baseProps.type = 'button';
+        baseProps.disabled = isDisabled;
+    } else if (isLink) {
+        baseProps.href = href;
+        baseProps.target = target;
     }
-    return renderLink(
-        {
-            linkAs,
-            ...forwardedProps,
-            href,
-            target,
-            className: classNames(className, handleBasicClasses({ prefix: CLASSNAME, color, colorVariant })),
-            ref: ref as RefObject<HTMLAnchorElement>,
-        },
-        renderedChildren,
+
+    return (
+        <Component
+            ref={ref}
+            {...forwardedProps}
+            {...baseProps}
+            className={classNames(
+                className,
+                handleBasicClasses({ prefix: CLASSNAME, color, colorVariant }),
+                typography && getTypographyClassName(typography),
+            )}
+        >
+            {wrapChildrenIconWithSpaces(
+                <>
+                    {leftIcon && <Icon icon={leftIcon} className={`${CLASSNAME}__left-icon`} />}
+                    {children && <span className={`${CLASSNAME}__content`}>{children}</span>}
+                    {rightIcon && <Icon icon={rightIcon} className={`${CLASSNAME}__right-icon`} />}
+                </>,
+            )}
+        </Component>
     );
 });
 Link.displayName = COMPONENT_NAME;

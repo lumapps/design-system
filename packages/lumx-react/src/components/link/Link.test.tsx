@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { ColorPalette, ColorVariant, Typography } from '@lumx/react';
+import { ColorPalette, ColorVariant, Icon, Typography } from '@lumx/react';
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
-import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
+import { getByClassName, queryAllByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import { render, screen } from '@testing-library/react';
 import { mdiCheck, mdiPlus } from '@lumx/icons';
 import { Link, LinkProps } from './Link';
@@ -15,11 +15,9 @@ const CLASSNAME = Link.className as string;
 const setup = (props: LinkProps = {}) => {
     render(<Link {...props} />);
     const link = getByClassName(document.body, CLASSNAME);
-    const content = queryByClassName(link, `${CLASSNAME}__content`);
     const rightIcon = queryByClassName(link, `${CLASSNAME}__right-icon`);
     const leftIcon = queryByClassName(link, `${CLASSNAME}__left-icon`);
-
-    return { props, link, content, rightIcon, leftIcon };
+    return { props, link, rightIcon, leftIcon };
 };
 
 describe(`<${Link.displayName}>`, () => {
@@ -42,14 +40,12 @@ describe(`<${Link.displayName}>`, () => {
                 color: ColorPalette.primary,
                 colorVariant: ColorVariant.D1,
             });
-            expect(link.className).toMatchInlineSnapshot(
-                '"lumx-link lumx-link--color-primary lumx-link--color-variant-D1"',
-            );
+            expect(link.className).toBe('lumx-link lumx-link--color-primary lumx-link--color-variant-D1');
         });
 
         it('should render typography', () => {
-            const { content } = setup({ href: 'https://google.com', typography: Typography.title });
-            expect(content?.className).toMatchInlineSnapshot('undefined');
+            const { link } = setup({ href: 'https://google.com', typography: Typography.title });
+            expect(link.className).toBe('lumx-link lumx-typography-title');
         });
 
         it('should render a button', () => {
@@ -59,10 +55,26 @@ describe(`<${Link.displayName}>`, () => {
             expect(link).toBe(screen.queryByRole('button', { name }));
         });
 
+        it('should render disabled link as button', () => {
+            const name = 'Link';
+            const { link } = setup({ href: 'https://google.com', isDisabled: true, children: name });
+            expect(link).toBe(screen.queryByRole('button', { name }));
+        });
+
         it('should render with icons', () => {
-            const { rightIcon, leftIcon } = setup({ rightIcon: mdiPlus, leftIcon: mdiCheck });
-            expect(rightIcon).toBeInTheDocument();
-            expect(leftIcon).toBeInTheDocument();
+            const { link } = setup({
+                leftIcon: mdiCheck,
+                children: ['Link', <Icon key="icon" icon={mdiCheck} />, 'with icons'],
+                rightIcon: mdiPlus,
+            });
+            const icons = queryAllByClassName(link, Icon.className as string);
+            expect(icons).toHaveLength(3);
+
+            // Icons are all wrapped with spaces
+            for (const icon of icons) {
+                expect((icon.previousSibling as any).textContent).toEqual(' ');
+                expect((icon.nextSibling as any).textContent).toEqual(' ');
+            }
         });
     });
 

@@ -63,6 +63,7 @@ import {
 export const iconArgType = {
     control: { type: 'select' },
     options: {
+        undefined,
         mdiAbTesting,
         mdiAbjadArabic,
         mdiAccount,
