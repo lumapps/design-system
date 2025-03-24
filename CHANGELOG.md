@@ -10,10 +10,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   `InputLabel`: add `typography` prop
+-   `Link`: add focus outline for better a11y
 
 ### Fixed
 
--   `Button`: fix icon color inside a theme context.
+-   `Button`: fix icon color inside a theme context
 
 ## [3.12.0][] - 2025-03-19
 

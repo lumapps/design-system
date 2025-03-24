@@ -1,4 +1,12 @@
-import { ColorPalette, ColorVariant, Link, Typography, TypographyInterface, TypographyTitleCustom } from '@lumx/react';
+import {
+    ColorPalette,
+    ColorVariant,
+    FlexBox,
+    Link,
+    Typography,
+    TypographyInterface,
+    TypographyTitleCustom,
+} from '@lumx/react';
 import React from 'react';
 import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
 import { colorArgType, colorVariantArgType } from '@lumx/react/stories/controls/color';
@@ -6,6 +14,9 @@ import { iconArgType } from '@lumx/react/stories/controls/icons';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 import { withUndefined } from '@lumx/react/stories/controls/withUndefined';
 import { CustomLink } from '@lumx/react/stories/utils/CustomLink';
+import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
+import { withThemedBackground } from '@lumx/react/stories/decorators/withThemedBackground';
+import { mdiFoodApple, mdiPencil } from '@lumx/icons/override/generated';
 
 const linkTypographies = { ...TypographyInterface, ...TypographyTitleCustom };
 
@@ -27,28 +38,6 @@ export default {
  */
 export const Default = {
     args: { href: 'https://example.com', target: '_blank' },
-};
-
-/**
- * Disabled
- */
-export const Disabled = {
-    args: { ...Default.args, children: 'Link (disabled)', isDisabled: true },
-};
-
-/**
- * Using onClick transforms the link into a <button> in DOM
- */
-export const ButtonLink = {
-    argTypes: { onClick: { action: true } },
-    args: { children: 'Button link' },
-};
-
-/**
- * Button link disabled
- */
-export const ButtonLinkDisabled = {
-    args: { ...ButtonLink.args, children: 'Button link (disabled)', isDisabled: true },
 };
 
 /**
@@ -76,6 +65,40 @@ export const WithCustomizableTypography = {
         </>
     ),
 };
+
+/**
+ * Show state combinations
+ */
+export const AllStates = {
+    argTypes: {
+        isDisabled: { control: false },
+    },
+    decorators: [
+        withThemedBackground(),
+        withCombinations({
+            combinations: {
+                sections: {
+                    Default: {},
+                    'with icons': { rightIcon: mdiPencil, leftIcon: mdiFoodApple },
+                },
+                cols: {
+                    Default: {},
+                    Disabled: { isDisabled: true },
+                    Focused: { 'data-focus-visible-added': true },
+                    Hovered: { 'data-lumx-hover': true },
+                },
+                rows: {
+                    Default: {},
+                    'color=red': { color: 'red' },
+                    'theme=dark': { theme: 'dark' },
+                    'theme=dark & color=red': { theme: 'dark', color: 'red' },
+                },
+            },
+        }),
+        withWrapper({ orientation: 'horizontal', vAlign: 'space-evenly', wrap: true, gap: 'huge' }, FlexBox),
+    ],
+};
+
 /**
  * Show all typographies
  */
