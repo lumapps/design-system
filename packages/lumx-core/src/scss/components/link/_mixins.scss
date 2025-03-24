@@ -10,8 +10,15 @@
     outline: none;
 
     &:hover,
+    &[data-lumx-hover],
     &[data-focus-visible-added] {
         text-decoration: underline;
+    }
+
+    &[data-focus-visible-added],
+    &:focus-visible {
+        outline: 1px auto currentColor;
+        outline-offset: 2px;
     }
 }
 
