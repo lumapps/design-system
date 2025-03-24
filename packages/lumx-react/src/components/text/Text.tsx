@@ -1,9 +1,9 @@
-import React, { Children, Fragment } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
-import { Icon, ColorPalette, ColorVariant, Typography, WhiteSpace } from '@lumx/react';
-import { GenericProps, TextElement, isComponent } from '@lumx/react/utils/type';
+import { ColorPalette, ColorVariant, Typography, WhiteSpace } from '@lumx/react';
+import { GenericProps, TextElement } from '@lumx/react/utils/type';
 import {
     getFontColorClassName,
     getRootClassName,
@@ -13,6 +13,7 @@ import {
 import { useOverflowTooltipLabel } from '@lumx/react/hooks/useOverflowTooltipLabel';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { wrapChildrenIconWithSpaces } from '@lumx/react/utils/react/wrapChildrenIconWithSpaces';
 
 /**
  * Defines the props of the component.
@@ -132,14 +133,7 @@ export const Text = forwardRef<TextProps>((props, ref) => {
             style={{ ...truncateLinesStyle, ...whiteSpaceStyle, ...style }}
             {...forwardedProps}
         >
-            {children &&
-                Children.toArray(children).map((child, index) => {
-                    // Force wrap spaces around icons to make sure they are never stuck against text.
-                    if (isComponent(Icon)(child)) {
-                        return <Fragment key={child.key || index}> {child} </Fragment>;
-                    }
-                    return child;
-                })}
+            {wrapChildrenIconWithSpaces(children)}
         </Component>
     );
 });

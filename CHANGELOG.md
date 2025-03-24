@@ -11,10 +11,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `InputLabel`: add `typography` prop
 -   `Link`: add focus outline for better a11y
+-   `Link`: make any nested icon adapt to the link typography
 
 ### Fixed
 
 -   `Button`: fix icon color inside a theme context
+
+### Changed
+
+-   `Link`: deprecated `rightIcon`/`leftIcon` props (use nested icons instead)
 
 ## [3.12.0][] - 2025-03-19
 

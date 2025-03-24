@@ -2,6 +2,7 @@ import {
     ColorPalette,
     ColorVariant,
     FlexBox,
+    Icon,
     Link,
     Typography,
     TypographyInterface,
@@ -16,7 +17,7 @@ import { withUndefined } from '@lumx/react/stories/controls/withUndefined';
 import { CustomLink } from '@lumx/react/stories/utils/CustomLink';
 import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
 import { withThemedBackground } from '@lumx/react/stories/decorators/withThemedBackground';
-import { mdiFoodApple, mdiPencil } from '@lumx/icons/override/generated';
+import { mdiEarth, mdiFoodApple, mdiPencil } from '@lumx/icons/override/generated';
 
 const linkTypographies = { ...TypographyInterface, ...TypographyTitleCustom };
 
@@ -79,7 +80,9 @@ export const AllStates = {
             combinations: {
                 sections: {
                     Default: {},
-                    'with icons': { rightIcon: mdiPencil, leftIcon: mdiFoodApple },
+                    'with icon': {
+                        children: ['Link', <Icon key="icon" icon={mdiEarth} />, 'with icon'],
+                    },
                 },
                 cols: {
                     Default: {},
@@ -103,6 +106,11 @@ export const AllStates = {
  * Show all typographies
  */
 export const AllTypography = {
+    args: {
+        children: ['Link', <Icon key="icon" icon={mdiEarth} />, 'with icon'],
+        rightIcon: mdiPencil,
+        leftIcon: mdiFoodApple,
+    },
     argTypes: {
         typography: { control: false },
     },
