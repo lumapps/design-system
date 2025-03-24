@@ -4,7 +4,7 @@ import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import { mdiEarth } from '@lumx/icons';
 import { Icon } from '@lumx/react';
 import { render } from '@testing-library/react';
-import { getByClassName } from '@lumx/react/testing/utils/queries';
+import { getByClassName, queryAllByClassName } from '@lumx/react/testing/utils/queries';
 import { Text, TextProps } from '.';
 
 const setup = (props: Partial<TextProps> = {}) => {
@@ -69,34 +69,14 @@ describe(`<${Text.displayName}>`, () => {
 
         it('should wrap icons with spaces', () => {
             const { element } = setup({ children: ['Some text', <Icon key="icon" icon={mdiEarth} />, 'with icon'] });
-            // Spaces have been inserted around the icon.
-            expect(element).toMatchInlineSnapshot(`
-                <span
-                  class="lumx-text"
-                >
-                  Some text
-                   
-                  <i
-                    class="lumx-icon lumx-icon--no-shape lumx-icon--path"
-                  >
-                    <svg
-                      aria-hidden="true"
-                      height="1em"
-                      preserveAspectRatio="xMidYMid meet"
-                      style="vertical-align: -0.125em;"
-                      viewBox="0 0 24 24"
-                      width="1em"
-                    >
-                      <path
-                        d="M17.9 17.39A2 2 0 0 0 16 16h-1v-3a1 1 0 0 0-1-1H8v-2h2a1 1 0 0 0 1-1V7h2a2 2 0 0 0 2-2v-.41a7.98 7.98 0 0 1 2.9 12.8M11 19.93a8 8 0 0 1-6.79-9.72L9 15v1a2 2 0 0 0 2 2m1-16A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2"
-                        fill="currentColor"
-                      />
-                    </svg>
-                  </i>
-                   
-                  with icon
-                </span>
-            `);
+            const icons = queryAllByClassName(element, Icon.className as string);
+            expect(icons).toHaveLength(1);
+
+            // Icons are all wrapped with spaces
+            for (const icon of icons) {
+                expect((icon.previousSibling as any).textContent).toEqual(' ');
+                expect((icon.nextSibling as any).textContent).toEqual(' ');
+            }
         });
 
         it('should render dangerouslySetInnerHTML', () => {
