@@ -94,7 +94,7 @@ export const Link = forwardRef<LinkProps, HTMLAnchorElement | HTMLButtonElement>
             {...baseProps}
             className={classNames(
                 className,
-                handleBasicClasses({ prefix: CLASSNAME, color, colorVariant }),
+                handleBasicClasses({ prefix: CLASSNAME, color, colorVariant, hasTypography: !!typography }),
                 typography && getTypographyClassName(typography),
             )}
         >

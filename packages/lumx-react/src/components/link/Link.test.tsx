@@ -45,7 +45,7 @@ describe(`<${Link.displayName}>`, () => {
 
         it('should render typography', () => {
             const { link } = setup({ href: 'https://google.com', typography: Typography.title });
-            expect(link.className).toBe('lumx-link lumx-typography-title');
+            expect(link.className).toBe('lumx-link lumx-link--has-typography lumx-typography-title');
         });
 
         it('should render a button', () => {
