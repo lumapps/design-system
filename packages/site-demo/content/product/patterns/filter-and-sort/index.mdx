@@ -4,53 +4,36 @@
 
 ## Anatomy
 
-Filter and sort patterns have three sections: A text filter, trigger filters, and a sorting selector. Sections are optional and combine.
+Filter and sort patterns have three sections: A search field, facets or filter button, and a sorter. Sections are optional and combine.
 
-<img src="assets/filter-and-sort-anatomy.png" width="100%" />
+<img src="assets/filter-and-sort - anatomy.png" style="max-width:600px"/>
 
-## Text filter
+Two configuration are possible for filters: 
+- Exposed facets
+- Filters button
 
-Filter by checking if the entered text matches one of the text values of list elements. Define elements' values checked according to needs. Clearing the text filter input remove the filter. Checks are delayed for 500ms to prevent filtering on each keystroke.
+## Exposed facets
 
-<DemoBlock demo="text" />
+Use exposed facets when the list of items can be filtered on a very few criteria.
 
-## Trigger filters
+### Selection
 
-### Exposed choices
+<img src="assets/filter-and-sort - exposed facets.png" style="max-width:600px"/>
 
-By default and when there is space, expose choices directly to users.
+### Responsive behavior
 
-<DemoBlock demo="choices" />
+<img src="assets/filter-and-sort - responsive.png" style="max-width:600px"/>
 
-### Exposed facets
+## Filter button
 
-When space is a constraint or there are too many choices to display, only expose facets.
+Use the filter button when there are a lot of filtering criteria for a list of items.
 
-<DemoBlock demo="facets" />
+### Selection
 
-### Grouped
+<img src="assets/filter-and-sort - filter button.png" style="max-width:600px"/>
 
-When space is really a constraint or trigger filters are only secondary in users scenario, they can be grouped in one single filter chip.
+## Sorting
 
-<DemoBlock demo="collapsed" />
+Each sorting option is an option, even for handling ascending and descending orders. Use words like “most recent”, “most relevant”, “least recent” to help users rapidly find the sorting they want.
 
-## Sorting selector
-
-Each sorting option is an option, even for handling ascending and descending orders. Use words like "most recent", "most relevant", "least recent" to help users rapidly find the sorting they want.
-
-<DemoBlock demo="sorting" />
-
-
-## Layout behavior
-
-### Responsive
-
-As space reduces (when users resize their browser window for example) each section that doesn't fit go to new line. Inside each section elements behave the same way.
-
-<DemoBlock demo="responsive" />
-
-### Vertical variant
-
-When pages layout make it difficult to use the original horizontal layout use vertical variant.
-
-<DemoBlock demo="vertical" />
+<img src="assets/filter-and-sort - sorting.png" style="max-width:600px"/>
