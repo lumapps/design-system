@@ -8,6 +8,15 @@
     border: none;
     outline: none;
 
+    // Inherit parent typography (using :where to have selector specificity of 0)
+    :where(&:not(#{&}--has-typography)) {
+        font-family: inherit;
+        font-size: inherit;
+        font-style: inherit;
+        font-weight: inherit;
+        line-height: inherit;
+    }
+
     &:hover,
     &[data-lumx-hover],
     &[data-focus-visible-added] {
