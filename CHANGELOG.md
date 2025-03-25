@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   `Button`: fix icon color inside a theme context
+-   `Link`: fix parent typography not correctly inherited on button-like links
 
 ### Changed
 

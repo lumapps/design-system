@@ -2,7 +2,9 @@ import {
     ColorPalette,
     ColorVariant,
     FlexBox,
+    Heading,
     Icon,
+    Text,
     Link,
     Typography,
     TypographyInterface,
@@ -18,6 +20,7 @@ import { CustomLink } from '@lumx/react/stories/utils/CustomLink';
 import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
 import { withThemedBackground } from '@lumx/react/stories/decorators/withThemedBackground';
 import { mdiEarth, mdiFoodApple, mdiPencil } from '@lumx/icons/override/generated';
+import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
 
 const linkTypographies = { ...TypographyInterface, ...TypographyTitleCustom };
 
@@ -138,5 +141,35 @@ export const AllColors = {
                 cols: { key: 'colorVariant', options: withUndefined(ColorVariant) },
             },
         }),
+    ],
+};
+
+/**
+ * Check how link inherit the parent typography & color
+ */
+export const ParentTypographyAndColor = {
+    args: {
+        children: ['Link', <Icon key="icon" icon={mdiEarth} />, 'with icon'],
+        'parent.typography': undefined,
+        'parent.color': undefined,
+    },
+    render: ({ parent: { typography, color }, ...args }: any) => (
+        <Text as="p" color={color} typography={typography}>
+            <Link {...args} />
+        </Text>
+    ),
+    decorators: [
+        withNestedProps(),
+        withCombinations({
+            combinations: {
+                sections: { Button: {}, Link: { href: '#' } },
+                rows: {
+                    Default: {},
+                    'Parent typography=title': { 'parent.typography': 'title' },
+                    'Parent color=red': { 'parent.color': 'red' },
+                },
+            },
+        }),
+        withWrapper({ orientation: 'horizontal', vAlign: 'space-evenly', wrap: true, gap: 'huge' }, FlexBox),
     ],
 };
