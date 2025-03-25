@@ -1,47 +1,20 @@
-import filter from 'lodash/filter';
-import first from 'lodash/first';
-import last from 'lodash/last';
-import partition from 'lodash/partition';
 import React, { ReactElement } from 'react';
 import { renderLines } from '@lumx/demo/components/content/CodeBlock/renderLines';
-import { RenderLineParams, Token, TokenLines } from './types';
-
-const isToken = (token: Token | undefined, type: string, content: string) =>
-    token?.types?.includes(type) && token?.content === content;
+import { RenderLineParams, TokenLines } from './types';
 
 /** Split import lines from other lines */
 export function partitionImports(tokenLines: TokenLines): { imports: TokenLines; others: TokenLines } {
-    const state = {
-        finished: false,
-        inImport: false,
-        inImportList: false,
-    };
-
-    const [imports, others] = partition(tokenLines, (tokens) => {
-        if (state.finished) {
-            return false;
+    let lastImportLineIndex = 0;
+    for (let i = tokenLines.length - 1; i >= 0; i--) {
+        const line = tokenLines[i];
+        const token = line[1];
+        if (token && token.types.includes('keyword') && token.content === 'import') {
+            lastImportLineIndex = i + 1;
+            break;
         }
-        const nonBlankTokens = filter(tokens, 'content');
-        if (nonBlankTokens.length === 0) {
-            return state.inImportList;
-        }
-
-        const firstToken = first(nonBlankTokens);
-        const lastToken = last(nonBlankTokens);
-        if (!state.inImport) {
-            if (!isToken(firstToken, 'keyword', 'import')) {
-                state.inImportList = false;
-                state.finished = true;
-                return false;
-            }
-            state.inImport = true;
-            state.inImportList = true;
-        }
-        if (isToken(lastToken, 'punctuation', ';')) {
-            state.inImport = false;
-        }
-        return true;
-    });
+    }
+    const others = [...tokenLines];
+    const imports = others.splice(0, lastImportLineIndex);
     return { imports, others };
 }
 
