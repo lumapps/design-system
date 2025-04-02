@@ -1,3 +1,4 @@
+import ReactDOM from 'react-dom';
 import React, { ReactNode, useEffect, useReducer } from 'react';
 import { INIT_STATE, TabProviderContext, reducer } from './state';
 
@@ -48,7 +49,14 @@ export const TabProvider: React.FC<TabProviderProps> = (props) => {
             if (state === INIT_STATE || !onChange || propState.activeTabIndex === state.activeTabIndex) {
                 return;
             }
-            onChange(state.activeTabIndex);
+
+            // Escape rendering/useEffect context
+            queueMicrotask(() => {
+                // Wait for React to commit last state changes (avoid looping state update)
+                ReactDOM.flushSync(() => {
+                    onChange(state.activeTabIndex);
+                });
+            });
         },
         // eslint-disable-next-line react-hooks/exhaustive-deps
         [onChange, state.activeTabIndex],
