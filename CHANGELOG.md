@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   `Tab`: fix state update infinite loop on React 18
+
 ## [3.13.0][] - 2025-03-27
 
 ### Added
