@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   `Link`: fix focus outline warping around nested icons
+
 ## [3.13.1][] - 2025-04-02
 
 ### Fixed
