@@ -8,6 +8,7 @@ import {
     Typography,
     TypographyInterface,
     TypographyTitleCustom,
+    GenericBlock,
 } from '@lumx/react';
 import React from 'react';
 import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
@@ -173,4 +174,20 @@ export const ParentTypographyAndColor = {
         }),
         withWrapper({ orientation: 'horizontal', vAlign: 'space-evenly', wrap: true, gap: 'huge' }, FlexBox),
     ],
+};
+
+/** Check wrapping a block with a Link */
+export const WrappingBlock = {
+    render() {
+        return (
+            // eslint-disable-next-line jsx-a11y/anchor-is-valid
+            <Link href="#" color="dark">
+                <GenericBlock figure={<Icon icon={mdiEarth} hasShape color="red" />} hAlign="center">
+                    <Text as="p" typography="subtitle1">
+                        Hello Earth
+                    </Text>
+                </GenericBlock>
+            </Link>
+        );
+    },
 };
