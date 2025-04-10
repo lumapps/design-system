@@ -45,5 +45,5 @@
         "build": "rollup -c"
     },
     "sideEffects": false,
-    "version": "3.13.1"
+    "version": "3.13.2"
 }
