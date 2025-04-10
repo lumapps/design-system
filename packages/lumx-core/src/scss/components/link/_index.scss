@@ -11,7 +11,9 @@
     }
 
     // Fix icon alignment
-    & .#{$lumx-base-prefix}-icon {
+    & > .#{$lumx-base-prefix}-icon,
+    &__content > .#{$lumx-base-prefix}-icon
+    {
         &, & svg {
             display: inline;
             line-height: initial;
