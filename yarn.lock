@@ -34824,8 +34824,8 @@ resolve@^1.9.0:
   linkType: hard
 
 "vite@npm:^4.2.1":
-  version: 4.5.11
-  resolution: "vite@npm:4.5.11"
+  version: 4.5.13
+  resolution: "vite@npm:4.5.13"
   dependencies:
     esbuild: ^0.18.10
     fsevents: ~2.3.2
@@ -34859,7 +34859,7 @@ resolve@^1.9.0:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: f4f02707343902e68d4b5bfc880aa9672fbd1128e4ec7f4f604d7c46295729cba9507d8af3a18ba3b7d08eb6af5f6747152d5eb87ff209757277e6294bc03b63
+  checksum: 9ce4b5dd8767acc598a402565a21525a9d23d3dad48463bcc4aedf91b3c69ad907213113b356eb9663f7d71cd8950ecc5228ba0ac9974223eaccca2314368428
   languageName: node
   linkType: hard
 
