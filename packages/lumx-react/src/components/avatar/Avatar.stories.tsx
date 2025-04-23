@@ -13,7 +13,7 @@ import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps'
 import { iconArgType } from '@lumx/react/stories/controls/icons';
 import { Avatar } from './Avatar';
 
-const AVATAR_SIZES = [Size.xs, Size.s, Size.m, Size.l, Size.xl, Size.xxl];
+const AVATAR_SIZES = [Size.xxs, Size.xs, Size.s, Size.m, Size.l, Size.xl, Size.xxl];
 
 export default {
     title: 'LumX components/avatar/Avatar',
