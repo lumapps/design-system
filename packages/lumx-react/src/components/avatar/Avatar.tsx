@@ -12,7 +12,7 @@ import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 /**
  * Avatar sizes.
  */
-export type AvatarSize = Extract<Size, 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl'>;
+export type AvatarSize = Extract<Size, 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl'>;
 
 /**
  * Defines the props of the component.
