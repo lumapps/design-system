@@ -1,6 +1,6 @@
 import React, { CSSProperties, ReactNode } from 'react';
 
-import { FlexBox, HorizontalAlignment, Text, TextProps } from '@lumx/react';
+import { FlexBox, HorizontalAlignment, Text, TextProps, useTheme } from '@lumx/react';
 import { HasPolymorphicAs, HasTheme } from '@lumx/react/utils/type';
 import classNames from 'classnames';
 
@@ -36,9 +36,10 @@ export type ImageCaptionProps<AS extends As = 'figcaption'> = HasTheme &
 
 /** Internal component used to render image captions */
 export const ImageCaption = <AS extends As>(props: ImageCaptionProps<AS>) => {
+    const defaultTheme = useTheme();
     const {
         baseClassName,
-        theme,
+        theme = defaultTheme,
         as = 'figcaption',
         title,
         titleProps,
