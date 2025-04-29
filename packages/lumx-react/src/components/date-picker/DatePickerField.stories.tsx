@@ -49,7 +49,28 @@ export const DefaultValue = {
         value: new Date('2019-02-28'),
     },
 };
+/**
+ * With default value selected and restricted range
+ */
+export const Restricted = {
+    args: {
+        ...LabelPlaceholderAndHelper.args,
+        value: new Date(new Date().setDate(10)),
+        minDate: new Date(new Date().setDate(4)),
+        maxDate: new Date(new Date().setDate(24)),
+    },
+};
 
+/**
+ * With default value selected and restricted range
+ */
+export const RestrictedEmpty = {
+    args: {
+        ...LabelPlaceholderAndHelper.args,
+        minDate: new Date(new Date().setDate(4)),
+        maxDate: new Date(new Date().setDate(24)),
+    },
+};
 /**
  * With default month
  */

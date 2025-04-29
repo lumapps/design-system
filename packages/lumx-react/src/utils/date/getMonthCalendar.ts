@@ -25,8 +25,15 @@ export const getMonthCalendar = (
     rangeMaxDate?: Date,
 ): MonthCalendar => {
     const month = referenceDate.getMonth();
-    const iterDate = new Date(referenceDate.getTime());
+    const iterDate = new Date(referenceDate);
     iterDate.setDate(1);
+
+    const minDate = rangeMinDate && new Date(rangeMinDate);
+    const maxDate = rangeMaxDate && new Date(rangeMaxDate);
+    // Reset time to compare dates only.
+    iterDate.setUTCHours(0, 0, 0, 0);
+    minDate?.setUTCHours(0, 0, 0, 0);
+    maxDate?.setUTCHours(0, 0, 0, 0);
 
     const weekDays = getWeekDays(locale);
     const lastDayOfWeek = last(weekDays) as WeekDayInfo;
@@ -34,12 +41,14 @@ export const getMonthCalendar = (
     const weeks: Array<AnnotatedWeek> = [];
     let week: AnnotatedWeek = {};
     let rowCount = 0;
+
     while (rowCount < MONTH_ROW_COUNT) {
         const weekDayNumber = iterDate.getDay();
         const day: AnnotatedDay = { date: new Date(iterDate.getTime()) };
 
         // If a range is specified, check if the day is out of range.
-        if ((rangeMinDate && iterDate <= rangeMinDate) || (rangeMaxDate && iterDate >= rangeMaxDate)) {
+        // min and max date are included within the valid range.
+        if ((minDate && iterDate < minDate) || (maxDate && iterDate > maxDate)) {
             day.isOutOfRange = true;
         }
 
