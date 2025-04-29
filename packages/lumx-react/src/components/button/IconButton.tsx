@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Emphasis, Icon, Size, Theme, Tooltip, TooltipProps } from '@lumx/react';
+import { Emphasis, Icon, Size, Theme, ThemeProvider, Tooltip, TooltipProps } from '@lumx/react';
 import { BaseButtonProps, ButtonRoot } from '@lumx/react/components/button/ButtonRoot';
 import { getRootClassName } from '@lumx/react/utils/className';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
@@ -80,7 +80,9 @@ export const IconButton = forwardRef<IconButtonProps, HTMLButtonElement>((props,
                         src={image}
                     />
                 ) : (
-                    <Icon icon={icon as string} />
+                    <ThemeProvider value={undefined}>
+                        <Icon icon={icon as string} />
+                    </ThemeProvider>
                 )}
             </ButtonRoot>
         </Tooltip>

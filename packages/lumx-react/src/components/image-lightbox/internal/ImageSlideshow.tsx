@@ -48,14 +48,13 @@ export const ImageSlideshow: React.FC<ImageSlideshowProps> = ({
     const tags = images[activeIndex]?.tags;
     const metadata =
         title || description || tags ? (
-            <ImageCaption theme="dark" as="div" title={title} description={description} tags={tags} align="center" />
+            <ImageCaption as="div" title={title} description={description} tags={tags} align="center" />
         ) : null;
 
     // Slideshow controls
     const slideShowControls =
         slidesCount > 1 && slideshowControlsProps ? (
             <SlideshowControls
-                theme="dark"
                 activeIndex={activeIndex}
                 slidesCount={slidesCount}
                 onNextClick={onNextClick}
@@ -93,16 +92,9 @@ export const ImageSlideshow: React.FC<ImageSlideshowProps> = ({
     }, [activeIndex]);
     const zoomControls = zoomEnabled && (
         <>
-            <IconButton
-                {...zoomInButtonProps}
-                theme="dark"
-                emphasis="low"
-                icon={mdiMagnifyPlusOutline}
-                onClick={zoomIn}
-            />
+            <IconButton {...zoomInButtonProps} emphasis="low" icon={mdiMagnifyPlusOutline} onClick={zoomIn} />
             <IconButton
                 {...zoomOutButtonProps}
-                theme="dark"
                 emphasis="low"
                 isDisabled={!scale || scale <= 1}
                 icon={mdiMagnifyMinusOutline}
@@ -127,7 +119,6 @@ export const ImageSlideshow: React.FC<ImageSlideshowProps> = ({
         <>
             <Slides
                 activeIndex={activeIndex}
-                theme="dark"
                 slideGroupLabel={slideGroupLabel}
                 fillHeight
                 id={slideshowId}

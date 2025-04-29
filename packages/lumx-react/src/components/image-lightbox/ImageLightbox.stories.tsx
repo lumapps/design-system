@@ -24,12 +24,8 @@ const MULTIPLE_IMAGES: ImageLightboxProps['images'] = [
         description: 'A black labrador puppy with big brown eyes, looking up with a curious and innocent expression.',
         tags: (
             <ChipGroup>
-                <Chip theme="dark" size="s">
-                    Tag 1
-                </Chip>
-                <Chip theme="dark" size="s">
-                    Tag 2
-                </Chip>
+                <Chip size="s">Tag 1</Chip>
+                <Chip size="s">Tag 2</Chip>
             </ChipGroup>
         ),
     },

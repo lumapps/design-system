@@ -2,7 +2,7 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-import { Lightbox } from '@lumx/react';
+import { Lightbox, ThemeProvider } from '@lumx/react';
 import { ClickAwayProvider } from '@lumx/react/utils';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
@@ -60,17 +60,19 @@ const Inner = forwardRef<ImageLightboxProps, HTMLDivElement>((props, ref) => {
             preventAutoClose
         >
             <ClickAwayProvider childrenRefs={clickAwayChildrenRefs} callback={onClickAway}>
-                <ImageSlideshow
-                    activeImageIndex={activeImageIndex}
-                    slideGroupLabel={slideGroupLabel}
-                    slideshowControlsProps={slideshowControlsProps}
-                    images={images}
-                    zoomInButtonProps={zoomInButtonProps}
-                    zoomOutButtonProps={zoomOutButtonProps}
-                    footerRef={footerRef}
-                    activeImageRef={useMergeRefs(propImageRef, imageRef)}
-                    currentPaginationItemRef={currentPaginationItemRef}
-                />
+                <ThemeProvider value="dark">
+                    <ImageSlideshow
+                        activeImageIndex={activeImageIndex}
+                        slideGroupLabel={slideGroupLabel}
+                        slideshowControlsProps={slideshowControlsProps}
+                        images={images}
+                        zoomInButtonProps={zoomInButtonProps}
+                        zoomOutButtonProps={zoomOutButtonProps}
+                        footerRef={footerRef}
+                        activeImageRef={useMergeRefs(propImageRef, imageRef)}
+                        currentPaginationItemRef={currentPaginationItemRef}
+                    />
+                </ThemeProvider>
             </ClickAwayProvider>
         </Lightbox>
     );

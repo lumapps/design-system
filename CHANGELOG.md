@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   `DatePickerField`: fix minDate and endDate behavior to be always included
+-   `IconButton`: fix incorrect color when prop theme is dark and context theme is light
 
 ### Added
 
