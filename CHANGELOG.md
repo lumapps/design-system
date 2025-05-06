@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   `DatePickerField`: fix minDate and endDate behavior to be always included
+
 ### Changed
 
 - Docs: update `Filter and sort` pattern doc page

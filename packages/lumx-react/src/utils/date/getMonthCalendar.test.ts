@@ -89,11 +89,11 @@ describe(getMonthCalendar.name, () => {
                 },
                 {
                     '0': { date: new Date('2017-02-05'), isOutOfRange: true },
-                    '1': { date: new Date('2017-02-06'), isOutOfRange: true },
+                    '1': { date: new Date('2017-02-06') },
                     '2': { date: new Date('2017-02-07') },
                     '3': { date: new Date('2017-02-08') },
                     '4': { date: new Date('2017-02-09') },
-                    '5': { date: new Date('2017-02-10'), isOutOfRange: true },
+                    '5': { date: new Date('2017-02-10') },
                     '6': { date: new Date('2017-02-11'), isOutOfRange: true },
                 },
                 {
