@@ -66,15 +66,22 @@
     }
 
     &__wrapper {
+        display: grid;
         overflow: hidden;
-        transition: max-height $lumx-expansion-panel-transition-duration;
+        transition: grid-template-rows $lumx-expansion-panel-transition-duration;
+        grid-template-rows: 0fr;
 
         @media (prefers-reduced-motion: reduce) {
             transition: none;
         }
+    }
 
-        #{$self}--is-close & {
-            max-height: 0 !important;
-        }
+    &--is-open > &__wrapper {
+        grid-template-rows: 1fr;
+    }
+
+    &__container {
+        min-height: 0;
+        overflow: hidden;
     }
 }

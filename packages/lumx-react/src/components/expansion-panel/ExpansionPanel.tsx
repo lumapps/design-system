@@ -1,21 +1,18 @@
-import React, { Children, PropsWithChildren, ReactNode, useEffect, useRef, useState } from 'react';
+import React, { Children, PropsWithChildren, ReactNode, useRef } from 'react';
 
 import classNames from 'classnames';
 
 import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
 
-import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
-import isFunction from 'lodash/isFunction';
 
 import { ColorPalette, DragHandle, Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
 import { GenericProps, HasTheme, isComponent } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { partitionMulti } from '@lumx/react/utils/partitionMulti';
-import { useTransitionVisibility } from '@lumx/react/hooks/useTransitionVisibility';
-import { EXPANSION_PANEL_TRANSITION_DURATION } from '@lumx/core/js/constants';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { IS_BROWSER } from '@lumx/react/constants';
 
 /**
  * Defines the props of the component.
@@ -101,13 +98,13 @@ export const ExpansionPanel = forwardRef<ExpansionPanelProps, HTMLDivElement>((p
     const toggleOpen = (event: React.MouseEvent) => {
         const shouldOpen = !isOpen;
 
-        if (isFunction(onOpen) && shouldOpen) {
+        if (onOpen && shouldOpen) {
             onOpen(event);
         }
-        if (isFunction(onClose) && !shouldOpen) {
+        if (onClose && !shouldOpen) {
             onClose(event);
         }
-        if (isFunction(onToggleOpen)) {
+        if (onToggleOpen) {
             onToggleOpen(shouldOpen, event);
         }
     };
@@ -130,15 +127,32 @@ export const ExpansionPanel = forwardRef<ExpansionPanelProps, HTMLDivElement>((p
 
     const wrapperRef = useRef<HTMLDivElement>(null);
 
-    /** Hide the children at the end of the transition */
-    const isChildrenVisible = useTransitionVisibility(wrapperRef, !!isOpen, EXPANSION_PANEL_TRANSITION_DURATION);
+    // Children visible while the open/close transition is running
+    const [isChildrenVisible, setChildrenVisible] = React.useState(isOpen);
 
-    // Switch max height on/off to activate the CSS transition (updates when children changes).
-    const [maxHeight, setMaxHeight] = useState('0');
-    useEffect(() => {
-        const height = isOpen ? get(wrapperRef.current, 'offsetHeight', 0) : 0;
-        setMaxHeight(`${height}px`);
-    }, [children, isOpen]);
+    const isOpenRef = React.useRef(isOpen);
+    React.useEffect(() => {
+        if (isOpen) {
+            setChildrenVisible(true);
+        } else if (!IS_BROWSER) {
+            // Outside a browser we can't wait for the transition
+            setChildrenVisible(false);
+        }
+        isOpenRef.current = isOpen;
+    }, [isOpen]);
+
+    // Change children visibility on transition end
+    React.useEffect(() => {
+        const { current: wrapper } = wrapperRef;
+        if (!IS_BROWSER || !wrapper) {
+            return undefined;
+        }
+        const onTransitionEnd = () => {
+            setChildrenVisible(isOpenRef.current);
+        };
+        wrapper.addEventListener('transitionend', onTransitionEnd);
+        return () => wrapper.removeEventListener('transitionend', onTransitionEnd);
+    }, []);
 
     return (
         <section ref={ref} {...forwardedProps} className={rootClassName}>
@@ -161,15 +175,15 @@ export const ExpansionPanel = forwardRef<ExpansionPanelProps, HTMLDivElement>((p
                 </div>
             </header>
 
-            {(isOpen || isChildrenVisible) && (
-                <div className={`${CLASSNAME}__wrapper`} style={{ maxHeight }}>
-                    <div className={`${CLASSNAME}__container`} ref={wrapperRef}>
+            <div className={`${CLASSNAME}__wrapper`} ref={wrapperRef}>
+                {(isOpen || isChildrenVisible) && (
+                    <div className={`${CLASSNAME}__container`}>
                         <div className={`${CLASSNAME}__content`}>{content}</div>
 
                         {footer && <div className={`${CLASSNAME}__footer`}>{footer}</div>}
                     </div>
-                </div>
-            )}
+                )}
+            </div>
         </section>
     );
 });
