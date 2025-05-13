@@ -40,7 +40,7 @@
         "update-version-changelog": "yarn version-changelog ../../CHANGELOG.md"
     },
     "sideEffects": false,
-    "version": "3.13.2",
+    "version": "3.14.0",
     "devDependencies": {
         "@babel/core": "^7.26.10",
         "@babel/plugin-proposal-class-properties": "^7.18.6",
