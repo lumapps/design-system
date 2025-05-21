@@ -132,7 +132,7 @@
         }
     }
 
-    &:hover,
+    &:hover:not([aria-disabled="true"]),
     &[class*="--is-hovered"] {
         @if $color == "primary" and $emphasis == lumx-base-const("emphasis", "HIGH") {
             color: var(--lumx-button-#{$emphasis}-state-hover-#{$theme}-color);
@@ -158,7 +158,7 @@
         }
     }
 
-    &:active,
+    &:active:not([aria-disabled="true"]),
     &[class*="--is-active"] {
         @if $color == "primary" and $emphasis == lumx-base-const("emphasis", "HIGH") {
             color: var(--lumx-button-#{$emphasis}-state-active-#{$theme}-color);
@@ -192,6 +192,9 @@
     &:disabled,
     &[aria-disabled="true"] {
         @include lumx-state-disabled-input;
+        // Enabling pointer-events to display label tooltips on hover
+        // @TODO: should be moved in the mixin when all disabled states will be aligned
+        pointer-events: all;
     }
 }
 

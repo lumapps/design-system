@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   `Button`: add disabled behavior with `aria-disabled` only
+
 ## [3.14.0][] - 2025-05-13
 
 ### Fixed

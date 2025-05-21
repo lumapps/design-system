@@ -63,6 +63,12 @@ describe(`<${Button.displayName}>`, () => {
             expect(buttonWrapper).toBeInTheDocument();
             expect(button).toBe(within(buttonWrapper as any).queryByRole('button', { name: label }));
         });
+
+        it('should prevent click when aria-disabled', () => {
+            const onClick = jest.fn();
+            const { button } = setup({ children: 'Label', 'aria-disabled': true, onClick });
+            expect(button.onclick).toBeFalsy();
+        });
     });
 
     // Common tests suite.

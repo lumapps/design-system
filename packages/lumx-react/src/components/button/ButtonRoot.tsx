@@ -20,7 +20,7 @@ export type ButtonSize = Extract<Size, 's' | 'm'>;
 
 export interface BaseButtonProps
     extends GenericProps,
-        Pick<AriaAttributes, 'aria-expanded' | 'aria-haspopup' | 'aria-pressed' | 'aria-label'>,
+        Pick<AriaAttributes, 'aria-expanded' | 'aria-haspopup' | 'aria-pressed' | 'aria-label' | 'aria-disabled'>,
         HasTheme {
     /** Color variant. */
     color?: ColorPalette;
@@ -106,6 +106,7 @@ export const ButtonRoot = forwardRef<ButtonRootProps, HTMLButtonElement | HTMLAn
         hasBackground,
         href,
         isDisabled = disabled,
+        'aria-disabled': ariaDisabled = isDisabled,
         isSelected,
         isActive,
         isFocused,
@@ -172,8 +173,9 @@ export const ButtonRoot = forwardRef<ButtonRootProps, HTMLButtonElement | HTMLAn
     return (
         <button
             {...forwardedProps}
+            {...(ariaDisabled ? { onClick: undefined } : undefined)}
             disabled={isDisabled}
-            aria-disabled={isDisabled}
+            aria-disabled={ariaDisabled}
             aria-label={ariaLabel}
             ref={ref as RefObject<HTMLButtonElement>}
             className={buttonClassName}
