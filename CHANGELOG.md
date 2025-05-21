@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   `Thumbnail`: fix focal points equal to 0
+
 ### Changed
 
 -   `Button`: add disabled behavior with `aria-disabled` only
@@ -58,7 +62,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `Link`: deprecated `rightIcon`/`leftIcon` props (use nested icons instead)
 -   `Link` docs: rework documentation page
-
 
 ## [3.12.0][] - 2025-03-19
 
@@ -133,8 +136,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `Chip`: add border and background color CSS variable theming on selected state.
 -   `SideNavigationItem`: add border CSS variable theming on selected state.
 -   `Button`: deprecated variables `--lumx-button-emphasis-selected-state-default-padding-horizontal`,
-     `--lumx-button-emphasis-selected-hover-hover-padding-horizontal` and
-     `--lumx-button-emphasis-selected-hover-active-padding-horizontal` (use the base `low` or `medium` emphasis padding)
+    `--lumx-button-emphasis-selected-hover-hover-padding-horizontal` and
+    `--lumx-button-emphasis-selected-hover-active-padding-horizontal` (use the base `low` or `medium` emphasis padding)
 
 ### Fixed
 
@@ -148,9 +151,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Storybook `withCombinations()`: better section heading, exclude combinations
 -   Storybook `withTheming()`: new decorator to demonstrate CSS variables on stories
 -   Storybook `Button`:
-    -    Cleaned up stories argTypes and controls
-    -    Rework stories content with more combinations
-    -    Add theming story
+    -   Cleaned up stories argTypes and controls
+    -   Rework stories content with more combinations
+    -   Add theming story
 -   Storybook `DatePicker`: add theming story
 -   Storybook `Chip`: add theming story
 -   Storybook `Navigation`: add variants & theming stories
