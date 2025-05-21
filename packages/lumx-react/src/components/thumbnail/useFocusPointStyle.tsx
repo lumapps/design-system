@@ -62,21 +62,18 @@ export const useFocusPointStyle = (
     );
 
     // Compute style.
-    const [style, setStyle] = useState<CSSProperties>({});
-    useEffect(() => {
+    const style: CSSProperties = useMemo(() => {
         // Focus point is not applicable => exit early
         if (!image || aspectRatio === AspectRatio.original || (!focusPoint?.x && !focusPoint?.y)) {
-            return;
+            return {};
         }
         if (!element || !imageSize) {
             // Focus point can be computed but now right now (image size unknown).
-            setStyle({ visibility: 'hidden' });
-            return;
+            return { visibility: 'hidden' };
         }
         if (!containerSize || !imageSize.height || !imageSize.width) {
             // Missing container or image size abort focus point compute.
-            setStyle({});
-            return;
+            return {};
         }
 
         const heightScale = imageSize.height / containerSize.height;
@@ -102,8 +99,8 @@ export const useFocusPointStyle = (
         });
 
         const objectPosition = `${x}% ${y}%`;
-        // Update only if needed.
-        setStyle((oldStyle) => (oldStyle.objectPosition === objectPosition ? oldStyle : { objectPosition }));
+
+        return { objectPosition };
     }, [aspectRatio, containerSize, element, focusPoint?.x, focusPoint?.y, image, imageSize]);
 
     return style;
