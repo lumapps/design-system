@@ -178,6 +178,7 @@ export const StateVariations = {
                     Active: { isActive: true },
                     Focused: { isFocused: true },
                     Disabled: { isDisabled: true },
+                    AriaDisabled: { 'aria-disabled': true },
                 },
                 // Emphasis/Background
                 sections: {
@@ -212,6 +213,7 @@ export const Theming = {
                     Active: { isActive: true },
                     Focused: { isFocused: true },
                     Disabled: { isDisabled: true },
+                    AriaDisabled: { 'aria-disabled': true },
                 },
                 rows: {
                     Default: {},

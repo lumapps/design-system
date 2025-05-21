@@ -133,6 +133,7 @@
 @mixin lumx-state-disabled-input() {
     pointer-events: none;
     opacity: 0.5;
+    cursor: default;
 }
 
 @mixin lumx-state($state, $emphasis, $color, $theme: null) {
