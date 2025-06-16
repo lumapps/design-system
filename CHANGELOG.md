@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   `UserBlock`: fix fields wrapping in horizontal mode.
+-   `Dialog`: fixed dialog `section` layout to avoid the `role=dialog` overriding the section role and breaking the link with the `header` and `footer`.
 
 ### Added
 

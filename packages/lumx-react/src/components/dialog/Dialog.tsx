@@ -214,18 +214,13 @@ export const Dialog = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
 
                   <HeadingLevelProvider level={2}>
                       <ThemeProvider value={undefined}>
-                          <section
-                              className={`${CLASSNAME}__container`}
-                              role="dialog"
-                              aria-modal="true"
-                              {...dialogProps}
-                          >
+                          <div className={`${CLASSNAME}__container`} role="dialog" aria-modal="true" {...dialogProps}>
                               <ClickAwayProvider
                                   callback={!shouldPreventCloseOnClickAway && onClose}
                                   childrenRefs={clickAwayRefs}
                                   parentRef={rootRef}
                               >
-                                  <div className={`${CLASSNAME}__wrapper`} ref={wrapperRef}>
+                                  <section className={`${CLASSNAME}__wrapper`} ref={wrapperRef}>
                                       {(header || headerChildContent) && (
                                           <header
                                               {...headerChildProps}
@@ -278,9 +273,9 @@ export const Dialog = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
                                               <Progress variant={ProgressVariant.circular} />
                                           </div>
                                       )}
-                                  </div>
+                                  </section>
                               </ClickAwayProvider>
-                          </section>
+                          </div>
                       </ThemeProvider>
                   </HeadingLevelProvider>
               </div>,
