@@ -121,7 +121,7 @@ export const AlertDialog = forwardRef<AlertDialogProps, HTMLDivElement>((props, 
             )}
             {...forwardedProps}
         >
-            <header>
+            <header role="none">
                 <Toolbar
                     className="lumx-spacing-margin-horizontal"
                     before={<Icon icon={icon} size={Size.s} color={color} />}
@@ -142,7 +142,7 @@ export const AlertDialog = forwardRef<AlertDialogProps, HTMLDivElement>((props, 
                 </DescriptionElement>
             )}
 
-            <footer>
+            <footer role="none">
                 <Toolbar
                     className="lumx-spacing-margin-horizontal"
                     after={
