@@ -73,16 +73,10 @@
             display: none;
         }
 
-        #{$self}--size-m & {
-            display: flex;
-        }
-
-        #{$self}--size-l & {
+        #{$self}--size-l &,
+        #{$self}--orientation-vertical & {
             display: flex;
             flex-direction: column;
-        }
-
-        #{$self}--orientation-vertical & {
             align-items: center;
         }
     }
