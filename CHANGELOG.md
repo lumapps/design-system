@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   `UserBlock`: fix fields wrapping in horizontal mode.
+
 ## [3.14.1][] - 2025-06-02
 
 ### Fixed
