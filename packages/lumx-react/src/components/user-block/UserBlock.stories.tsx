@@ -1,12 +1,14 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 
 import { mdiMenuDown, mdiStar } from '@lumx/icons';
-import { Badge, ColorPalette, Icon, IconButton, Orientation, Size, Text } from '@lumx/react';
+import { Badge, ColorPalette, Icon, IconButton, Link, Orientation, Size, Text } from '@lumx/react';
 import { CustomLink } from '@lumx/react/stories/utils/CustomLink';
 
 import { AVATAR_IMAGES } from '@lumx/react/stories/controls/image';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { withResizableBox } from '@lumx/react/stories/decorators/withResizableBox';
 import { UserBlock } from './UserBlock';
 
 const sizes = [Size.xs, Size.s, Size.m, Size.l];
@@ -19,6 +21,7 @@ export default {
         size: getSelectArgType(sizes),
         orientation: getSelectArgType(Orientation),
     },
+    decorators: [withResizableBox({ width: 'auto', minWidth: 'min-content', height: 'auto' })],
 };
 
 /** Only an avatar */
@@ -33,19 +36,28 @@ export const AvatarAndName = {
 
 /** Avatar and children */
 export const AvatarAndCustomName = {
-    args: { ...AvatarOnly.args, name: <Text as="span">Emmitt O. Lum</Text> },
+    args: {
+        ...AvatarOnly.args,
+        name: (
+            <Text as="span" color="green">
+                Emmitt O. Lum
+            </Text>
+        ),
+    },
 };
 
 /** Avatar, name and secondary fields */
 export const AvatarAndNameAndSecondaryFields = {
-    args: { ...AvatarAndName.args, fields: ['Creative developer', 'Denpasar'] },
+    args: {
+        ...AvatarAndName.args,
+        fields: ['Creative developer', 'Denpasar'],
+    },
 };
 
 /** With Right component */
 export const WithAfter = {
     args: {
-        ...AvatarAndName.args,
-        fields: ['Creative developer', 'Denpasar'],
+        ...AvatarAndNameAndSecondaryFields.args,
         after: <IconButton label="View" icon={mdiMenuDown} emphasis="low" />,
     },
 };
@@ -54,18 +66,27 @@ export const WithAfter = {
 export const WithAdditionalFields = {
     args: {
         ...AvatarAndName.args,
-        fields: ['Creative developer', 'Denpasar'],
+        fields: [
+            <Text key={0} as="span" color="dark">
+                Published a post in <Link href="#">Space</Link>
+            </Text>,
+            <time key={1}>May 13, 2025</time>,
+        ],
         additionalFields: (
             <Text as="span" typography="body1">
                 Works at the Toronto office
             </Text>
         ),
     },
+    parameters: {
+        // Testing constrained space
+        wrapperProps: { style: { width: 245 } },
+    },
 };
 
 /** Size variants */
 export const SizesAndOrientations = {
-    ...AvatarAndNameAndSecondaryFields,
+    args: AvatarAndNameAndSecondaryFields.args,
     decorators: [
         withCombinations({
             combinations: {
@@ -78,7 +99,7 @@ export const SizesAndOrientations = {
 
 /** Setting `onClick` to use it as a button */
 export const AsButton = {
-    ...AvatarAndNameAndSecondaryFields,
+    args: AvatarAndNameAndSecondaryFields.args,
     argTypes: { onClick: { action: true } },
 };
 
