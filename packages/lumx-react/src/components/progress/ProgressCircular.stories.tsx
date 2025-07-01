@@ -1,4 +1,5 @@
-import { ProgressCircular, ProgressCircularSize, Size } from '@lumx/react';
+import React from 'react';
+import { ProgressCircular, ProgressCircularSize, Size, Text } from '@lumx/react';
 import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 
@@ -27,4 +28,17 @@ export const AllSizes = {
             combinations: { cols: { key: 'size', options: sizes } },
         }),
     ],
+};
+
+/**
+ * Inline display variant to use inside text
+ */
+export const Inline = {
+    render() {
+        return (
+            <Text as="p">
+                Some text with <ProgressCircular display="inline" size="xxs" /> inline progress
+            </Text>
+        );
+    },
 };

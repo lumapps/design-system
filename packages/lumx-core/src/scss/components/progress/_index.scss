@@ -19,6 +19,10 @@
     width: $lumx-progress-circular-size;
     height: $lumx-progress-circular-size;
 
+    &--display-inline {
+        display: inline-block;
+    }
+
     &__double-bounce1,
     &__double-bounce2 {
         position: absolute;
