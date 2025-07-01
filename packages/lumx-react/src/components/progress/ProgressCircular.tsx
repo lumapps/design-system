@@ -17,8 +17,15 @@ export type ProgressCircularSize = Extract<Size, 'xxs' | 'xs' | 's' | 'm'>;
  * Defines the props of the component.
  */
 export interface ProgressCircularProps extends GenericProps, HasTheme {
-    /** Progress circular size. */
+    /**
+     * Progress circular size.
+     */
     size?: ProgressCircularSize;
+    /**
+     * Progress display type (inline or block).
+     * @default 'block'
+     */
+    display?: 'inline' | 'block';
 }
 
 /**
@@ -36,6 +43,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: Partial<ProgressCircularProps> = {
     size: Size.m,
+    display: 'block',
 };
 
 /**
@@ -47,21 +55,28 @@ const DEFAULT_PROPS: Partial<ProgressCircularProps> = {
  */
 export const ProgressCircular = forwardRef<ProgressCircularProps, HTMLDivElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
-    const { className, theme = defaultTheme, size, ...forwardedProps } = props;
+    const {
+        className,
+        theme = defaultTheme,
+        size = DEFAULT_PROPS.size,
+        display = DEFAULT_PROPS.display,
+        ...forwardedProps
+    } = props;
+    const Element = display === 'block' ? 'div' : 'span';
 
     return (
-        <div
+        <Element
             ref={ref}
             {...forwardedProps}
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, size }))}
+            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, size, display }))}
         >
-            <div className="lumx-progress-circular__double-bounce1" />
-            <div className="lumx-progress-circular__double-bounce2" />
+            <Element className="lumx-progress-circular__double-bounce1" />
+            <Element className="lumx-progress-circular__double-bounce2" />
 
             <svg className="lumx-progress-circular__svg" viewBox="25 25 50 50">
                 <circle className="lumx-progress-circular__path" cx="50" cy="50" r="20" fill="none" strokeWidth="5" />
             </svg>
-        </div>
+        </Element>
     );
 });
 ProgressCircular.displayName = COMPONENT_NAME;

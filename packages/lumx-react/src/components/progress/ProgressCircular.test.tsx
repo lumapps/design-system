@@ -21,11 +21,17 @@ describe(`<${ProgressCircular.displayName}>`, () => {
     it('should render default', () => {
         const { element } = setup();
         expect(element).toHaveClass(`${CLASSNAME}--size-m`);
+        expect(element.tagName).toBe('DIV');
     });
 
     it('should render size xs', () => {
         const { element } = setup({ size: 'xs' });
         expect(element).toHaveClass(`${CLASSNAME}--size-xs`);
+    });
+
+    it('should render display inline', () => {
+        const { element } = setup({ display: 'inline' });
+        expect(element.tagName).toBe('SPAN');
     });
 
     commonTestsSuiteRTL(setup, {

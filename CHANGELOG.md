@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `UserBlock`: fix fields wrapping in horizontal mode.
 
+### Added
+
+-   `ProgressCircular`: add inline display variant
+
 ## [3.14.1][] - 2025-06-02
 
 ### Fixed
