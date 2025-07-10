@@ -116,7 +116,7 @@
         // When using object-fit:cover + ratio 1/1, Chrome switches to pixelated downsizing algo
         // https://stackoverflow.com/a/77059936
         // The following prevent this so the image is correctly downsized using blurring effect
-        overflow-clip-margin: unset;
+        translate: 0 0 0.01px;
 
         @supports not (aspect-ratio: 1 / 1) {
             position: absolute;
