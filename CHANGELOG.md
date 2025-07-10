@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   `Popover` & `Tooltip`: fix popper warning on margin style applied by class `.visually-hidden`.
+
 ## [3.15.0][] - 2025-07-02
 
 ### Fixed
