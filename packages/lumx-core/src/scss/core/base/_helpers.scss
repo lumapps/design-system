@@ -33,3 +33,8 @@
     clip: rect(0 0 0 0) !important;
     border: 0 !important;
 }
+
+/** Need to remove the margin style on popper elements or else we get warnings in the console */
+.lumx-popover.visually-hidden, .lumx-tooltip.visually-hidden {
+    margin: revert !important;
+}
