@@ -1,4 +1,4 @@
-import { buildQueries } from '@testing-library/react';
+import { buildQueries } from '@testing-library/dom';
 
 export const queryAllByClassName = (container: HTMLElement, className: string) =>
     Array.from(container.getElementsByClassName(className) as HTMLCollectionOf<HTMLElement>);

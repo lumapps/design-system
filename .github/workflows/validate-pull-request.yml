@@ -27,12 +27,21 @@ jobs:
         if: github.event.pull_request.draft == false
         timeout-minutes: 30
         runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                packageVersions: [default, 'react@18.3.1 react-dom@18.3.1 @testing-library/react@16.3.0']
+        # Making sure we have a clean job name on 'default' package so that it matches the required "test" check
+        name: "test${{ matrix.packageVersions != 'default' && format(' ({0})', matrix.packageVersions) || '' }}"
         steps:
             -   name: "Checkout repository"
                 uses: actions/checkout@v3
 
             -   name: "Setup"
                 uses: ./.github/actions/setup
+
+            -   name: "Switch react version"
+                if: ${{ matrix.packageVersions != 'default' }}
+                run: yarn up ${{ matrix.packageVersions }}
 
             -   name: "Run unit tests"
                 run: |
