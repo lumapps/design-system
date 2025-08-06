@@ -77,9 +77,9 @@ export const ImageBlock = forwardRef<ImageBlockProps, HTMLDivElement>((props, re
     const defaultTheme = useTheme() || Theme.light;
     const {
         actions,
-        align,
+        align = DEFAULT_PROPS.align,
         alt,
-        captionPosition,
+        captionPosition = DEFAULT_PROPS.captionPosition,
         captionStyle,
         className,
         description,

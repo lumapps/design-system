@@ -26,13 +26,15 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
 /**
  * Component default props.
  */
-const DEFAULT_PROPS: Partial<<%= componentName %>Props> = {};
+const DEFAULT_PROPS: Partial<<%= componentName %>Props> = {
+    someProp: 'value',
+};
 
 /**
  * [Enter the description of the component here].
  */
 export const <%= componentName %> = forwardRef<<%= componentName %>Props, HTMLDivElement>((props, ref) => {
-    const { children, className, ...forwardedProps } = props;
+    const { children, className, someProp = DEFAULT_PROPS.someProp, ...forwardedProps } = props;
 
     return (
         <div

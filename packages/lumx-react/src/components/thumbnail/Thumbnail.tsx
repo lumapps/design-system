@@ -107,7 +107,7 @@ export const Thumbnail = forwardRef<ThumbnailProps>((props, ref) => {
         badge,
         className,
         crossOrigin,
-        fallback,
+        fallback = DEFAULT_PROPS.fallback,
         fillHeight,
         // `focusPoint` needs to be here to remove it from `forwardedProps`.
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -117,7 +117,7 @@ export const Thumbnail = forwardRef<ThumbnailProps>((props, ref) => {
         imgRef: propImgRef,
         isLoading: isLoadingProp,
         objectFit,
-        loading,
+        loading = DEFAULT_PROPS.loading,
         loadingPlaceholderImageRef,
         size,
         theme = defaultTheme,

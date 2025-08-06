@@ -46,7 +46,7 @@ const DEFAULT_PROPS: Partial<InputHelperProps> = {
  */
 export const InputHelper = forwardRef<InputHelperProps, HTMLParagraphElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
-    const { children, className, kind, theme = defaultTheme, ...forwardedProps } = props;
+    const { children, className, kind = DEFAULT_PROPS.kind, theme = defaultTheme, ...forwardedProps } = props;
     const { color } = INPUT_HELPER_CONFIGURATION[kind as any] || {};
 
     return (

@@ -71,7 +71,7 @@ export const Switch = forwardRef<SwitchProps, HTMLDivElement>((props, ref) => {
         isDisabled = disabled,
         name,
         onChange,
-        position,
+        position = DEFAULT_PROPS.position,
         theme = defaultTheme,
         value,
         inputProps = {},

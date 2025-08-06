@@ -70,7 +70,7 @@ export const SideNavigationItem = forwardRef<SideNavigationItemProps, HTMLLIElem
     const {
         children,
         className,
-        emphasis,
+        emphasis = DEFAULT_PROPS.emphasis,
         icon,
         isOpen,
         isSelected,
@@ -80,7 +80,7 @@ export const SideNavigationItem = forwardRef<SideNavigationItemProps, HTMLLIElem
         onActionClick,
         onClick,
         toggleButtonProps,
-        closeMode = 'unmount',
+        closeMode = DEFAULT_PROPS.closeMode,
         ...forwardedProps
     } = props;
 

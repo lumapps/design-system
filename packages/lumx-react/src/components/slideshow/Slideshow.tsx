@@ -44,9 +44,7 @@ export interface SlideshowProps
 /**
  * Component default props.
  */
-const DEFAULT_PROPS: Partial<SlideshowProps> = {
-    ...DEFAULT_OPTIONS,
-};
+const DEFAULT_PROPS: Partial<SlideshowProps> = DEFAULT_OPTIONS;
 
 /**
  * Slideshow component.
@@ -59,12 +57,12 @@ export const Slideshow = forwardRef<SlideshowProps, HTMLDivElement>((props, ref)
     const defaultTheme = useTheme() || Theme.light;
     const {
         activeIndex,
-        autoPlay,
+        autoPlay = DEFAULT_PROPS.autoPlay,
         children,
         className,
         fillHeight,
-        groupBy,
-        interval,
+        groupBy = DEFAULT_OPTIONS.groupBy,
+        interval = DEFAULT_PROPS.interval,
         onChange,
         slideshowControlsProps,
         theme = defaultTheme,

@@ -66,11 +66,11 @@ export interface UseSlideshowControls {
     startAutoPlay: () => void;
 }
 
-export const DEFAULT_OPTIONS: Partial<UseSlideshowControlsOptions> = {
+export const DEFAULT_OPTIONS = {
     activeIndex: 0,
     groupBy: 1,
     interval: AUTOPLAY_DEFAULT_INTERVAL,
-};
+} as const;
 
 export const useSlideshowControls = ({
     activeIndex = DEFAULT_OPTIONS.activeIndex,

@@ -85,7 +85,7 @@ export const Chip = forwardRef<ChipProps, HTMLAnchorElement>((props, ref) => {
         onAfterClick,
         onBeforeClick,
         onClick,
-        size,
+        size = DEFAULT_PROPS.size,
         theme = defaultTheme,
         href,
         onKeyDown,

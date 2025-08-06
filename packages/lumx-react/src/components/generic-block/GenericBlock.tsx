@@ -129,8 +129,8 @@ const BaseGenericBlock: BaseGenericBlock = forwardRef((props, ref) => {
         children,
         actions,
         actionsProps,
-        gap,
-        orientation,
+        gap = DEFAULT_PROPS.gap,
+        orientation = DEFAULT_PROPS.orientation,
         contentProps,
         ...forwardedProps
     } = props;

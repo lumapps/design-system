@@ -64,8 +64,8 @@ export const TabList = forwardRef<TabListProps, HTMLDivElement>((props, ref) => 
         'aria-label': ariaLabel,
         children,
         className,
-        layout,
-        position,
+        layout = DEFAULT_PROPS.layout,
+        position = DEFAULT_PROPS.position,
         theme = defaultTheme,
         ...forwardedProps
     } = props;

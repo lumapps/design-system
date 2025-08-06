@@ -63,7 +63,16 @@ const DEFAULT_PROPS: Partial<TableCellProps> = {
  * @return React element.
  */
 export const TableCell = forwardRef<TableCellProps, HTMLTableCellElement>((props, ref) => {
-    const { children, className, icon, isSortable, onHeaderClick, sortOrder, variant, ...forwardedProps } = props;
+    const {
+        children,
+        className,
+        icon,
+        isSortable,
+        onHeaderClick,
+        sortOrder,
+        variant = DEFAULT_PROPS.variant,
+        ...forwardedProps
+    } = props;
 
     // Use button if clickable
     const Wrapper = onHeaderClick ? 'button' : 'div';

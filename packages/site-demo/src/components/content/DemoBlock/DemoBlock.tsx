@@ -30,11 +30,6 @@ interface DemoBlockProps extends FlexBoxProps {
     alwaysShowCode?: boolean;
 }
 
-const DEFAULT_PROPS: Partial<DemoBlockProps> = {
-    gap: Size.big,
-    orientation: Orientation.vertical,
-};
-
 export const DemoBlock: React.FC<DemoBlockProps> = ({
     children,
     demo,
@@ -44,6 +39,8 @@ export const DemoBlock: React.FC<DemoBlockProps> = ({
     hasPlayButton = false,
     backgroundColor: propBackgroundColor,
     alwaysShowCode,
+    gap = Size.big,
+    orientation = Orientation.vertical,
     ...flexBoxProps
 }) => {
     const [theme, setTheme] = useState<Theme>(defaultTheme);
@@ -69,6 +66,8 @@ export const DemoBlock: React.FC<DemoBlockProps> = ({
                     backgroundColor && `lumx-color-background-${backgroundColor.color}-${backgroundColor.variant}`,
                 )}
                 wrap
+                orientation={orientation}
+                gap={gap}
                 {...flexBoxProps}
             >
                 {!children && (
@@ -116,4 +115,3 @@ export const DemoBlock: React.FC<DemoBlockProps> = ({
         </div>
     );
 };
-DemoBlock.defaultProps = DEFAULT_PROPS;

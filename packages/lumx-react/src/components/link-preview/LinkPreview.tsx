@@ -74,11 +74,11 @@ export const LinkPreview = forwardRef<LinkPreviewProps, HTMLDivElement>((props, 
         link,
         linkAs,
         linkProps,
-        size,
+        size = DEFAULT_PROPS.size,
         theme = defaultTheme,
         thumbnailProps,
         title,
-        titleHeading,
+        titleHeading = DEFAULT_PROPS.titleHeading,
         ...forwardedProps
     } = props;
     // Use title heading as title wrapper (see DEFAULT_PROPS for the default value).

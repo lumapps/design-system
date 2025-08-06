@@ -40,6 +40,7 @@ export const ProgressTrackerProvider: React.FC<ProgressTrackerProviderProps> = (
             dispatch({
                 type: 'update',
                 payload: {
+                    ...DEFAULT_PROPS,
                     ...propState,
                     activeTabIndex: propState.activeStepIndex || INIT_STATE.activeTabIndex,
                 },

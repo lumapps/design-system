@@ -42,7 +42,7 @@ const DEFAULT_PROPS: Partial<BadgeProps> = {
  * @return React element.
  */
 export const Badge = forwardRef<BadgeProps, HTMLDivElement>((props, ref) => {
-    const { children, className, color, ...forwardedProps } = props;
+    const { children, className, color = DEFAULT_PROPS.color, ...forwardedProps } = props;
     return (
         <div
             ref={ref}

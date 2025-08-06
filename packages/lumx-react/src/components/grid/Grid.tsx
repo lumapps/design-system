@@ -53,7 +53,16 @@ const DEFAULT_PROPS: Partial<GridProps> = {
  * @return React element.
  */
 export const Grid = forwardRef<GridProps, HTMLDivElement>((props, ref) => {
-    const { children, className, gutter, hAlign, orientation, vAlign, wrap, ...forwardedProps } = props;
+    const {
+        children,
+        className,
+        gutter,
+        hAlign,
+        orientation = DEFAULT_PROPS.orientation,
+        vAlign,
+        wrap = DEFAULT_PROPS.wrap,
+        ...forwardedProps
+    } = props;
 
     return (
         <div
