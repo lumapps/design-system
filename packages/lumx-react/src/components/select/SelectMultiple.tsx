@@ -54,6 +54,7 @@ const DEFAULT_PROPS: Partial<SelectMultipleProps> = {
         );
     },
     selectedValueRender: (choice) => choice,
+    variant: SelectVariant.input,
 };
 
 export const SelectMultipleField: React.FC<SelectMultipleProps> = (props) => {
@@ -185,6 +186,7 @@ export const SelectMultiple = forwardRef<SelectMultipleProps, HTMLDivElement>((p
     return WithSelectContext(
         SelectMultipleField,
         {
+            ...DEFAULT_PROPS,
             ...props,
             className: classNames(
                 props.className,

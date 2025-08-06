@@ -84,7 +84,7 @@ const DEFAULT_PROPS: Partial<SlideshowControlsProps> = {
 const InternalSlideshowControls = forwardRef<SlideshowControlsProps, HTMLDivElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
     const {
-        activeIndex,
+        activeIndex = DEFAULT_PROPS.activeIndex,
         className,
         nextButtonProps,
         onNextClick,

@@ -59,11 +59,11 @@ const DEFAULT_PROPS: Partial<IconButtonProps> = {
 export const IconButton = forwardRef<IconButtonProps, HTMLButtonElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
     const {
-        emphasis,
+        emphasis = DEFAULT_PROPS.emphasis,
         image,
         icon,
         label,
-        size,
+        size = DEFAULT_PROPS.size,
         theme = defaultTheme,
         tooltipProps,
         hideTooltip,

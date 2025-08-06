@@ -204,13 +204,13 @@ const DEFAULT_PROPS: Partial<AutocompleteProps> = {
 export const Autocomplete = forwardRef<AutocompleteProps, HTMLDivElement>((props, ref) => {
     const defaultTheme = useTheme();
     const {
-        anchorToInput,
+        anchorToInput = DEFAULT_PROPS.anchorToInput,
         children,
         chips,
         className,
-        closeOnClick,
-        closeOnClickAway,
-        closeOnEscape,
+        closeOnClick = DEFAULT_PROPS.closeOnClick,
+        closeOnClickAway = DEFAULT_PROPS.closeOnClickAway,
+        closeOnEscape = DEFAULT_PROPS.closeOnEscape,
         disabled,
         error,
         fitToAnchorWidth,
@@ -233,7 +233,7 @@ export const Autocomplete = forwardRef<AutocompleteProps, HTMLDivElement>((props
         onInfiniteScroll,
         placeholder,
         placement,
-        shouldFocusOnClose,
+        shouldFocusOnClose = DEFAULT_PROPS.shouldFocusOnClose,
         theme = defaultTheme,
         value,
         textFieldProps = {},

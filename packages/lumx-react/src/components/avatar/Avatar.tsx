@@ -79,7 +79,7 @@ export const Avatar = forwardRef<AvatarProps, HTMLDivElement>((props, ref) => {
         linkAs,
         onClick,
         onKeyPress,
-        size,
+        size = DEFAULT_PROPS.size,
         theme = defaultTheme,
         thumbnailProps,
         ...forwardedProps

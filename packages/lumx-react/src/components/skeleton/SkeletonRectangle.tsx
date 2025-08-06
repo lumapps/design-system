@@ -53,7 +53,16 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  */
 export const SkeletonRectangle = forwardRef<SkeletonRectangleProps, HTMLDivElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
-    const { aspectRatio, className, height, theme = defaultTheme, variant, width, color, ...forwardedProps } = props;
+    const {
+        aspectRatio,
+        className,
+        height,
+        theme = defaultTheme,
+        variant = DEFAULT_PROPS.variant,
+        width,
+        color,
+        ...forwardedProps
+    } = props;
 
     return (
         <div

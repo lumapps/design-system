@@ -285,7 +285,7 @@ export const TextField = forwardRef<TextFieldProps, HTMLDivElement>((props, ref)
         placeholder,
         textFieldRef,
         theme = defaultTheme,
-        type,
+        type = DEFAULT_PROPS.type,
         value,
         afterElement,
         ...forwardedProps

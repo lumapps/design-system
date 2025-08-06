@@ -77,11 +77,11 @@ export const Tooltip = forwardRef<TooltipProps, HTMLDivElement>((props, ref) => 
         children,
         className,
         delay,
-        placement,
+        placement = DEFAULT_PROPS.placement,
         forceOpen,
-        closeMode,
-        ariaLinkMode,
-        zIndex,
+        closeMode = DEFAULT_PROPS.closeMode,
+        ariaLinkMode = DEFAULT_PROPS.ariaLinkMode,
+        zIndex = DEFAULT_PROPS.zIndex,
         ...forwardedProps
     } = props;
     // Disable in SSR.

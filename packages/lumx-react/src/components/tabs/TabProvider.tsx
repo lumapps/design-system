@@ -37,7 +37,7 @@ export const TabProvider: React.FC<TabProviderProps> = (props) => {
     // On prop state change => dispatch update.
     useEffect(
         () => {
-            dispatch({ type: 'update', payload: propState });
+            dispatch({ type: 'update', payload: { ...DEFAULT_PROPS, ...propState } });
         },
         // eslint-disable-next-line react-hooks/exhaustive-deps
         [dispatch, ...Object.values(propState)],

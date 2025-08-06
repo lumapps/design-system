@@ -115,11 +115,11 @@ export const Dialog = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
         parentElement,
         contentRef,
         preventAutoClose,
-        size,
+        size = DEFAULT_PROPS.size,
         zIndex,
         dialogProps,
         onVisibilityChange,
-        disableBodyScroll,
+        disableBodyScroll = DEFAULT_PROPS.disableBodyScroll,
         preventCloseOnClick,
         preventCloseOnEscape,
         ...forwardedProps

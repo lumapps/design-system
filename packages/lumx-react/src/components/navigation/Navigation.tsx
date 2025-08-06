@@ -44,7 +44,13 @@ type SubComponents = {
 
 export const Navigation = forwardRef<NavigationProps, HTMLElement, SubComponents>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
-    const { children, className, theme = defaultTheme, orientation, ...forwardedProps } = props;
+    const {
+        children,
+        className,
+        theme = defaultTheme,
+        orientation = DEFAULT_PROPS.orientation,
+        ...forwardedProps
+    } = props;
     return (
         <ThemeProvider value={theme}>
             <nav

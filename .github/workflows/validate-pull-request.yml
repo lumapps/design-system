@@ -29,7 +29,11 @@ jobs:
         runs-on: ubuntu-latest
         strategy:
             matrix:
-                packageVersions: [default, 'react@18.3.1 react-dom@18.3.1 @testing-library/react@16.3.0']
+                packageVersions: [
+                    default,
+                    'react@18.3.1 react-dom@18.3.1 @testing-library/react@16.3.0',
+                    'react@19.1.1 react-dom@19.1.1 @testing-library/react@16.3.0'
+                ]
         # Making sure we have a clean job name on 'default' package so that it matches the required "test" check
         name: "test${{ matrix.packageVersions != 'default' && format(' ({0})', matrix.packageVersions) || '' }}"
         steps:

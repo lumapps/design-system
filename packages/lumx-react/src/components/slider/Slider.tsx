@@ -105,8 +105,8 @@ export const Slider = forwardRef<SliderProps, HTMLDivElement>((props, ref) => {
         name,
         onChange,
         onMouseDown,
-        precision,
-        steps,
+        precision = DEFAULT_PROPS.precision,
+        steps = DEFAULT_PROPS.steps,
         theme = defaultTheme,
         value,
         ...forwardedProps

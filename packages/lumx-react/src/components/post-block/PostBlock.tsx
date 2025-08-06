@@ -68,7 +68,7 @@ export const PostBlock = forwardRef<PostBlockProps, HTMLDivElement>((props, ref)
         className,
         meta,
         onClick,
-        orientation,
+        orientation = DEFAULT_PROPS.orientation,
         tags,
         text,
         theme = defaultTheme,

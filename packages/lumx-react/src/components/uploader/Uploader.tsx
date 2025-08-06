@@ -81,13 +81,13 @@ const DEFAULT_PROPS: Partial<UploaderProps> = {
 export const Uploader = forwardRef<UploaderProps>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
     const {
-        aspectRatio,
+        aspectRatio = DEFAULT_PROPS.aspectRatio,
         className,
         label,
         icon,
-        size,
+        size = DEFAULT_PROPS.size,
         theme = defaultTheme,
-        variant,
+        variant = DEFAULT_PROPS.variant,
         fileInputProps,
         ...forwardedProps
     } = props;

@@ -76,8 +76,8 @@ export const AutocompleteMultiple = forwardRef<AutocompleteMultipleProps, HTMLDi
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         chipsAlignment,
         className,
-        closeOnClickAway,
-        closeOnEscape,
+        closeOnClickAway = DEFAULT_PROPS.closeOnClickAway,
+        closeOnEscape = DEFAULT_PROPS.closeOnEscape,
         fitToAnchorWidth,
         hasError,
         helper,
@@ -100,12 +100,12 @@ export const AutocompleteMultiple = forwardRef<AutocompleteMultipleProps, HTMLDi
         onKeyDown,
         placeholder,
         placement,
-        selectedChipRender,
+        selectedChipRender = DEFAULT_PROPS.selectedChipRender,
         shouldFocusOnClose,
         theme = defaultTheme,
         type,
         value,
-        values,
+        values = DEFAULT_PROPS.values,
         ...forwardedProps
     } = props;
 
@@ -126,7 +126,7 @@ export const AutocompleteMultiple = forwardRef<AutocompleteMultipleProps, HTMLDi
             helper={helper}
             icon={icon}
             inputRef={inputRef}
-            chips={values && values.map((chip: any, index: number) => selectedChipRender(chip, index, onClear))}
+            chips={values && values.map((chip: any, index: number) => selectedChipRender?.(chip, index, onClear))}
             isDisabled={isDisabled}
             isRequired={isRequired}
             clearButtonProps={clearButtonProps}

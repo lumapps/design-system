@@ -107,7 +107,7 @@ export const CommentBlock = forwardRef<CommentBlockProps, HTMLDivElement>((props
         onMouseLeave,
         text,
         theme = defaultTheme,
-        variant,
+        variant = DEFAULT_PROPS.variant,
         ...forwardedProps
     } = props;
     const hasChildren = Children.count(children) > 0;

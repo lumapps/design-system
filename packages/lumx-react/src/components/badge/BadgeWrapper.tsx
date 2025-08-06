@@ -3,7 +3,6 @@ import React, { ReactElement, ReactNode } from 'react';
 import classNames from 'classnames';
 
 import { getRootClassName } from '@lumx/react/utils/className';
-import { DEFAULT_PROPS } from '@lumx/react/components/select/WithSelectContext';
 import { GenericProps } from '@lumx/react/utils/type';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
@@ -36,4 +35,3 @@ export const BadgeWrapper = forwardRef<BadgeWrapperProps, HTMLDivElement>((props
 });
 BadgeWrapper.displayName = 'BadgeWrapper';
 BadgeWrapper.className = CLASSNAME;
-BadgeWrapper.defaultProps = DEFAULT_PROPS;

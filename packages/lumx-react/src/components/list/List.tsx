@@ -62,7 +62,15 @@ const DEFAULT_PROPS: Partial<ListProps> = {
  * @return React element.
  */
 const InternalList = forwardRef<ListProps, HTMLUListElement>((props, ref) => {
-    const { children, className, isClickable, itemPadding, onListItemSelected, tabIndex, ...forwardedProps } = props;
+    const {
+        children,
+        className,
+        isClickable,
+        itemPadding,
+        onListItemSelected,
+        tabIndex = DEFAULT_PROPS.tabIndex,
+        ...forwardedProps
+    } = props;
     const listElementRef = useRef<HTMLUListElement>(null);
 
     const { items, hasClickableItem } = useInteractiveList({

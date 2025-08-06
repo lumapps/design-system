@@ -88,7 +88,7 @@ export const ListItem = forwardRef<ListItemProps, HTMLLIElement>((props, ref) =>
         linkProps = {},
         linkRef,
         onItemSelected,
-        size,
+        size = DEFAULT_PROPS.size,
         ...forwardedProps
     } = props;
 

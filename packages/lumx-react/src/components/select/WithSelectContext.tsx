@@ -12,18 +12,13 @@ import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 
 import { useId } from '@lumx/react/hooks/useId';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
-import { CoreSelectProps, SelectVariant } from './constants';
+import { CoreSelectProps } from './constants';
 
 /** The display name of the component. */
 const COMPONENT_NAME = 'Select';
 
 /** The default class name and classes prefix for this component. */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
-
-/** The default value of props. */
-export const DEFAULT_PROPS: Partial<CoreSelectProps> = {
-    variant: SelectVariant.input,
-};
 
 export const WithSelectContext = (
     SelectElement: React.FC<any>,
@@ -55,7 +50,7 @@ export const WithSelectContext = (
         placeholder,
         theme = defaultTheme,
         value,
-        variant = DEFAULT_PROPS.variant,
+        variant,
         ...forwardedProps
     } = props;
     const generatedSelectId = useId();

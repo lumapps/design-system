@@ -34,6 +34,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
 /** The default value of props. */
 const DEFAULT_PROPS: Partial<SelectProps> = {
     selectedValueRender: (choice) => choice,
+    variant: SelectVariant.input,
 };
 
 const stopPropagation = (evt: Event) => evt.stopPropagation();
@@ -176,6 +177,7 @@ export const Select = forwardRef<SelectProps, HTMLDivElement>((props, ref) => {
     return WithSelectContext(
         SelectField,
         {
+            ...DEFAULT_PROPS,
             ...props,
             className: classNames(
                 props.className,

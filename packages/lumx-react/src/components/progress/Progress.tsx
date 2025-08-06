@@ -52,7 +52,7 @@ const DEFAULT_PROPS: Partial<ProgressProps> = {
  */
 export const Progress = forwardRef<ProgressProps, HTMLDivElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
-    const { className, theme = defaultTheme, variant, ...forwardedProps } = props;
+    const { className, theme = defaultTheme, variant = DEFAULT_PROPS.variant, ...forwardedProps } = props;
 
     return (
         <div

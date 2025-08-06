@@ -58,7 +58,16 @@ const DEFAULT_PROPS: Partial<ButtonProps> = {
  */
 export const Button = forwardRef<ButtonProps, HTMLButtonElement | HTMLAnchorElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
-    const { children, className, emphasis, leftIcon, rightIcon, size, theme = defaultTheme, ...forwardedProps } = props;
+    const {
+        children,
+        className,
+        emphasis = DEFAULT_PROPS.emphasis,
+        leftIcon,
+        rightIcon,
+        size = DEFAULT_PROPS.size,
+        theme = defaultTheme,
+        ...forwardedProps
+    } = props;
 
     const buttonClassName = classNames(
         className,

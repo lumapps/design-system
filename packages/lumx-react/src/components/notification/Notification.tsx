@@ -73,8 +73,8 @@ export const Notification = forwardRef<NotificationProps, HTMLDivElement>((props
         onClick,
         theme = defaultTheme,
         type,
-        zIndex,
-        usePortal,
+        zIndex = DEFAULT_PROPS.zIndex,
+        usePortal = DEFAULT_PROPS.usePortal,
         style,
         ...forwardedProps
     } = props;
