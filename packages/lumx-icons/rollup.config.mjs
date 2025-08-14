@@ -6,7 +6,7 @@ import copy from 'rollup-plugin-copy';
 import cleaner from 'rollup-plugin-cleaner';
 import dts from 'rollup-plugin-dts';
 
-import pkg from './package.json' assert { type: 'json' };
+import pkg from './package.json' with { type: 'json' };
 import CONFIGS from '../../configs/index.js';
 
 const importUrl = new URL(import.meta.url);

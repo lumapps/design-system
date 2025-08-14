@@ -23,7 +23,7 @@
         "yo": "^3.1.0"
     },
     "engines": {
-        "node": ">= 16.0.0"
+        "node": ">= 20.0.0"
     },
     "homepage": "https://github.com/lumapps/design-system",
     "lint-staged": {

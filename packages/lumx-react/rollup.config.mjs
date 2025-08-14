@@ -9,7 +9,7 @@ import dts from 'rollup-plugin-dts';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import { tsPathsResolve } from 'rollup-plugin-ts-paths-resolve';
 
-import pkg from './package.json' assert { type: 'json' };
+import pkg from './package.json' with { type: 'json' };
 import CONFIGS from '../../configs/index.js';
 
 const importUrl = new URL(import.meta.url);
