@@ -84,6 +84,5 @@ exports.onCreateWebpackConfig = async ({ actions, getConfig }) => {
         test: /\.worker\.js$/,
         use: { loader: 'workerize-loader', options: { inline: true } },
     });
-    config.output.globalObject = 'this'
     actions.replaceWebpackConfig(config);
 };
