@@ -19,9 +19,6 @@
         "stylelint-config-recess-order": "^3.0.0",
         "stylelint-config-standard-scss": "^5.0.0",
         "typescript": "^5.4.3",
-        "webpack": "^4.44.1",
-        "webpack-cli": "^4.2.0",
-        "yarn": "^1.22.21",
         "yeoman-generator": "^4.1.0",
         "yo": "^3.1.0"
     },

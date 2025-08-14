@@ -63,7 +63,7 @@ module.exports = {
             resolve: 'gatsby-plugin-sass',
             options: {
                 implementation: require('sass'),
-                postCssPlugins: [require('./postcss.config')],
+                postCssPlugins: require('./postcss.config').plugins,
             },
         },
         // Prevent styles from being squashed into a single CSS file.
