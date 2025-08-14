@@ -31,8 +31,7 @@
         "url": "git+https://github.com/lumapps/design-system.git"
     },
     "scripts": {
-        "build": "webpack",
-        "prepare": "install-peers || exit 0"
+        "build": "webpack"
     },
     "version": "3.15.1",
     "devDependencies": {
@@ -46,20 +45,14 @@
         "@babel/preset-env": "^7.26.9",
         "@babel/preset-typescript": "^7.26.0",
         "babel-plugin-angularjs-annotate": "^0.10.0",
-        "clean-webpack-plugin": "^3.0.0",
-        "copy-webpack-plugin": "^5.1.1",
+        "clean-webpack-plugin": "^4.0.0",
+        "copy-webpack-plugin": "^11.0.0",
         "core-js": "^3.6.4",
-        "friendly-errors-webpack-plugin": "^1.7.0",
-        "html-loader": "^0.5.5",
-        "html-minifier-webpack-plugin": "^2.2.3",
-        "install-peers-cli": "^2.2.0",
-        "is-ci": "^2.0.0",
-        "sass-mq": "^6.0.0",
-        "tsconfig-paths-webpack-plugin": "^3.3.0",
-        "unminified-webpack-plugin": "^2.0.0",
-        "webpack": "^4.44.1",
-        "webpack-notifier": "^1.8.0",
-        "webpackbar": "^4.0.0"
+        "html-loader": "^4.2.0",
+        "tsconfig-paths-webpack-plugin": "^4.0.1",
+        "unminified-webpack-plugin": "^3.0.0",
+        "webpack": "^5.76.0",
+        "webpack-cli": "^5.0.1"
     },
     "peerDependencies": {
         "angular": "^1.7.8",

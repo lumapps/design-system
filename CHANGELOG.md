@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 -   `@lumx/core`: rework internal build
+-   `@lumx/angularjs`: rework internal build
 
 ## [3.15.1][] - 2025-08-13
 
