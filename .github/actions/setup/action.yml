@@ -1,19 +1,14 @@
 name: 'Setup'
 description: 'Full CI env setup (setup node & restore/install dependencies)'
 
-inputs:
-    node_version:
-        description: 'Node version to use'
-        default: '16.20.2'
-
 runs:
     using: composite
     steps:
         -   name: "Setup node env"
             uses: actions/setup-node@v3
             with:
-                node-version: ${{ inputs.node_version }}
                 registry-url: 'https://registry.npmjs.org'
+                node-version-file: '.nvmrc'
 
         -   name: "Cache dependencies"
             id: cache
