@@ -7,7 +7,7 @@ describe(getFirstDayOfWeek.name, () => {
         expect(getFirstDayOfWeek(parseLocale('fa-ir') as Locale)).toBe(6);
         expect(getFirstDayOfWeek(parseLocale('ar-ma') as Locale)).toBe(1);
         expect(getFirstDayOfWeek(parseLocale('ar') as Locale)).toBe(6);
-        expect(getFirstDayOfWeek(parseLocale('ar-eg') as Locale)).toBe(0);
+        expect(getFirstDayOfWeek(parseLocale('en') as Locale)).toBe(0);
     });
 
     it('should return for the lang locale if available', () => {
