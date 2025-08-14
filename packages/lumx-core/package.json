@@ -12,11 +12,6 @@
         "sass-mq": "^6.0.0"
     },
     "description": "LumX core",
-    "engines": {
-        "node": ">= 12.0.0",
-        "npm": ">= 4.0.0",
-        "yarn": ">= 1.3.0"
-    },
     "homepage": "https://github.com/lumapps/design-system",
     "keywords": [
         "Design System",
