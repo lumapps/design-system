@@ -1,6 +1,6 @@
 # @lumx/icons
 
-LumApps Design System icon library based on Material Design Icons (`@mdi/js` and `@mdi/font`) version 5 with backward
+LumApps Design System icon library based on Material Design Icons (`@mdi/svg` and `@mdi/font`) version 5 with backward
 compatibility with version 4 and with some icon overrides and added icons.
 
 There is two ways to use the icons:
@@ -12,13 +12,18 @@ There is two ways to use the icons:
 **Warning**: The SCSS/Font icons will get deprecated in the future as they force you to import all icons even if you
 only use a few.
 
+## Build
+
+`build.cjs` script copies the generated icons (with overrides and aliases) and produces JS versions to the `dist` folder
+that is to be published on NPM.
+
 ## Overrides & aliases
 
 While we are based on MDI, we have overrides of both the JS and font icons handles in `override` dir:
 
 - `override/override-icons`: contains SVG icons and config to override MDI
 - `override/alias-icons.js`: config contains mapping from icon name to aliases
-- `override/generate/run-all.js`: script that generate the TS & Font/SCSS overrides and then TS & Font/SCSS aliases
+- `override/generate/run-all.cjs`: script that optimizes and generates SVG/Font/SCSS overrides and aliases
 
 Aliases have been used to keep retro-compatibility when [migrating from MDI v4 to v5](./README-v4-to-v5-migration.md)
 and for brand renaming (ex: twitter). Overrides helped us update or restore brand logo because MDI is deprecating them.

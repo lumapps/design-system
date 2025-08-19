@@ -75,7 +75,8 @@
         "storybook:react": "yarn workspace @lumx/react start:storybook",
         "storybook": "yarn storybook:react",
         "generate:design-tokens": "yarn workspace @lumx/core generate:design-tokens",
-        "generate:icons": "yarn workspace @lumx/icons generate:icons"
+        "generate:icons": "yarn workspace @lumx/icons generate:icons",
+        "postinstall": "yarn workspace @lumx/icons build"
     },
     "workspaces": [
         "packages/*",
