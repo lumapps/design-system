@@ -14,14 +14,14 @@ runs:
             id: cache
             uses: actions/cache@v3
             with:
-                path: "**/node_modules"
+                path: |
+                  **/node_modules
+                  .yarn/cache
                 key: ${{ runner.os }}-node-v${{ inputs.node_version }}-dependency-hash-${{ hashFiles('yarn.lock') }}
                 restore-keys: |
                     ${{ runner.os }}-node-v${{ inputs.node_version }}-dependency-hash-
 
         -   name: "Install dependencies"
-            # Skip install here because the cache already has an entry, we won't be able to update it, so it's unnecessary to try and rebuild it
-            if: steps.cache.outputs.cache-hit != 'true'
             run: yarn install
             shell: bash
 

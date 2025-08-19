@@ -19,7 +19,7 @@ import { withUndefined } from '@lumx/react/stories/controls/withUndefined';
 import { CustomLink } from '@lumx/react/stories/utils/CustomLink';
 import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
 import { withThemedBackground } from '@lumx/react/stories/decorators/withThemedBackground';
-import { mdiEarth, mdiFoodApple, mdiPencil } from '@lumx/icons/override/generated';
+import { mdiEarth, mdiFoodApple, mdiPencil } from '@lumx/icons';
 import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
 
 const linkTypographies = { ...TypographyInterface, ...TypographyTitleCustom };
