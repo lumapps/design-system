@@ -1,6 +1,8 @@
 const path = require('path');
 const { ROOT_PATH } = require('../../../../configs/path');
 
+const PKG_PATH = path.resolve(ROOT_PATH, 'packages/lumx-icons');
+const DIST_PATH = path.resolve(PKG_PATH, 'dist');
 const INPUT_ICON_OVERRIDE_DIR = path.resolve(__dirname, '..', 'override-icons');
 const GENERATED_DIR = path.resolve(__dirname, '..', 'generated');
 const GENERATED_TMP_DIR = path.resolve(GENERATED_DIR, 'tmp');
@@ -15,6 +17,8 @@ const OVERRIDE_FONT_PATH = path.resolve(GENERATED_TMP_DIR, `${OVERRIDE_FONT_NAME
 const JSON_ICON_LIBRARY_FILE = 'icon-library.json';
 
 module.exports = {
+    PKG_PATH,
+    DIST_PATH,
     INPUT_ICON_OVERRIDE_DIR,
     GENERATED_DIR,
     GENERATED_TMP_DIR,

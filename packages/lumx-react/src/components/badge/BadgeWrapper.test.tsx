@@ -4,7 +4,7 @@ import React from 'react';
 import omit from 'lodash/omit';
 import last from 'lodash/last';
 
-import { mdiAccount, mdiHeart } from '@lumx/icons/override/generated';
+import { mdiAccount, mdiHeart } from '@lumx/icons';
 import { Badge, BadgeWrapper, BadgeWrapperProps, ColorPalette, Icon } from '@lumx/react';
 import { getByClassName } from '@lumx/react/testing/utils/queries';
 import { render } from '@testing-library/react';

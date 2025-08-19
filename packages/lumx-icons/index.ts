@@ -1,1 +1,1 @@
-export * from './override/generated';
+export * from './dist';

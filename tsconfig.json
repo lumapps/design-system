@@ -19,8 +19,7 @@
             "@lumx/angularjs/*": ["lumx-angularjs/src/*"],
             "@lumx/react": ["lumx-react/src"],
             "@lumx/react/*": ["lumx-react/src/*"],
-            "@lumx/demo/*": ["site-demo/src/*"],
-            "@lumx/icons/*": ["lumx-icons/*"]
+            "@lumx/demo/*": ["site-demo/src/*"]
         },
         "strict": true,
         "skipLibCheck": true,
