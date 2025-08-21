@@ -1,4 +1,5 @@
-FROM node:16.19.1-buster AS builder
+ARG  NODE_VERSION
+FROM node:${NODE_VERSION}-alpine AS builder
 
 WORKDIR /tmp
 
