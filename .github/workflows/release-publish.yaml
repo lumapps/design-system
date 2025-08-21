@@ -132,6 +132,7 @@ jobs:
                     echo "git_commit=$(git rev-parse HEAD)" >> $GITHUB_ENV
                     echo "build_date=$(date --rfc-3339=seconds)" >> $GITHUB_ENV
                     echo "version=${{ needs.build_publish_NPM.outputs.tag }}" >> $GITHUB_ENV
+                    echo "node_version=$(cat .nvmrc)" >> $GITHUB_ENV
 
             -   name: "Docker metadata"
                 id: meta
@@ -154,7 +155,9 @@ jobs:
                     context: ./
                     file: ${{ matrix.dockerfile }}
                     builder: ${{ steps.buildx_setup.outputs.name }}
-                    build-args: version=${{ env.version }}
+                    build-args: |
+                        version=${{ env.version }}
+                        NODE_VERSION=${{ env.node_version }}
                     push: true
                     tags: ${{ steps.meta.outputs.tags }}
                     labels: ${{ steps.meta.outputs.labels }}
