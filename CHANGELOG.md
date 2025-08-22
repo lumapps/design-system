@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/core`: rework internal build
 -   `@lumx/angularjs`: rework internal build
+-   `@lumx/icons`: rework internal build; internally split ESM files for each icon to improve tree-shaking
 
 ## [3.15.1][] - 2025-08-13
 

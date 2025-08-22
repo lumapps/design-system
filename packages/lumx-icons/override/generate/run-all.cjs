@@ -5,7 +5,6 @@ const generateMergedFont = require('./generate-merged-font.cjs');
 const generateSCSSAliases = require('./generate-scss-aliases.cjs');
 const generateSCSSOverride = require('./generate-scss-override.cjs');
 const generateJSONIconLibrary = require('./generate-icon-library.cjs');
-const generateTSExports = require('./generate-ts-exports.cjs');
 const generateOverrideFont = require('./generate-override-font.cjs');
 const { cleanUpTmpDir } = require('./utils.cjs');
 
@@ -14,19 +13,21 @@ const { cleanUpTmpDir } = require('./utils.cjs');
     await optimizeSVGs();
 
     // Generate override font from our override SVG icons
-    const scssFontPromise = generateOverrideFont().then(() => Promise.all([
-        // Merge MDI with the override font
-        generateMergedFont(),
-        // Generate SCSS MDI class override
-        generateSCSSOverride(),
-        // Generate SCSS MDI class aliases
-        generateSCSSAliases(),
-    ]));
+    const scssFontPromise = generateOverrideFont().then(() =>
+        Promise.all([
+            // Merge MDI with the override font
+            generateMergedFont(),
+            // Generate SCSS MDI class override
+            generateSCSSOverride(),
+            // Generate SCSS MDI class aliases
+            generateSCSSAliases(),
+        ]),
+    );
 
-    // Generate Icon library and then the TS icons
-    const typescriptPromise = generateJSONIconLibrary().then(generateTSExports);
+    // Generate Icon library
+    await generateJSONIconLibrary();
 
-    await Promise.all([scssFontPromise, typescriptPromise]);
+    await scssFontPromise;
 
     // Clean the tmp dir
     await cleanUpTmpDir();
