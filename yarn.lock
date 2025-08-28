@@ -14947,7 +14947,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"es6-promise@npm:^4.0.3, es6-promise@npm:^4.2.5":
+"es6-promise@npm:^4.0.3":
   version: 4.2.8
   resolution: "es6-promise@npm:4.2.8"
   checksum: 95614a88873611cb9165a85d36afa7268af5c03a378b35ca7bda9508e1d4f1f6f19a788d4bc755b3fd37c8ebba40782018e02034564ff24c9d6fa37e959ad57d
@@ -22219,11 +22219,9 @@ __metadata:
   linkType: hard
 
 "locutus@npm:^2.0.5":
-  version: 2.0.11
-  resolution: "locutus@npm:2.0.11"
-  dependencies:
-    es6-promise: ^4.2.5
-  checksum: a37628a65b2e448a8b237ebf7f62a3544e1e26f4d4f68b3281792e67e3294c457c9dc7015693a593fede39cff9f870c0a5c03237c94fdb1d9130e409a4158768
+  version: 2.0.32
+  resolution: "locutus@npm:2.0.32"
+  checksum: 5b71cc2372a8a38da0a90e23b7d1984373d2bc06e1a570a997f9c91eaff46ca91cf9fcc00b77b488c2ab4260a46befbb69ebc1471b8cf006fd6d225832961dbe
   languageName: node
   linkType: hard
 
