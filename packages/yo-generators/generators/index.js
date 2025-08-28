@@ -1,7 +1,6 @@
 const Generator = require('yeoman-generator');
 
 const chalk = require('chalk');
-const yosay = require('yosay');
 
 module.exports = class extends Generator {
     constructor(args, opts) {
@@ -56,7 +55,7 @@ module.exports = class extends Generator {
 
     prompting(sayHi = true) {
         if (sayHi) {
-            this.log(yosay(`Welcome to the ${chalk.red('LumX React component')} generator!`));
+            this.log(`Welcome to the ${chalk.red('LumX React component')} generator!`);
         }
 
         return this.prompt(this.prompts).then((answers) => {

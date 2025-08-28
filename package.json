@@ -19,8 +19,7 @@
         "stylelint-config-recess-order": "^3.0.0",
         "stylelint-config-standard-scss": "^5.0.0",
         "typescript": "^5.4.3",
-        "yeoman-generator": "^4.1.0",
-        "yo": "^3.1.0"
+        "yo": "^5.1.0"
     },
     "engines": {
         "node": ">= 20.0.0"
@@ -67,7 +66,7 @@
         "lint:code": "eslint packages/",
         "prepare": "lerna run --stream prepare",
         "release": "yarn lerna publish --force-publish",
-        "scaffold": "yo ./packages/yo-generators --with-tests --with-demo",
+        "scaffold": "yo lumx-component --with-tests --with-demo",
         "setup:git-hooks": "yarn husky uninstall && yarn husky install || exit 0",
         "start": "yarn workspace lumx-site-demo start",
         "test": "yarn workspace @lumx/react test",
