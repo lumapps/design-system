@@ -1,6 +1,5 @@
 {
     "$schema": "https://www.chromatic.com/config-file.schema.json",
-    "onlyChanged": true,
     "projectId": "Project:5fbfb1d508c0520021560f10",
     "storybookBaseDir": "packages/lumx-react",
     "buildScriptName": "build:storybook",

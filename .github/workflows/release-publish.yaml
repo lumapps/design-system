@@ -96,7 +96,7 @@ jobs:
                 uses: ./.github/actions/setup
 
             -   name: "Deploy chromatic"
-                uses: chromaui/action@3f82bf5d065290658af8add6dce946809ee0f923 #v6.1.0
+                uses: chromaui/action@d0795df816d05c4a89c80295303970fddd247cce #v13.1.4
                 with:
                     token: ${{ secrets.GITHUB_TOKEN }}
                     projectToken: ${{ secrets.CHROMATIC_TOKEN }}
