@@ -9,7 +9,11 @@ generateDemoStories();
 
 const config: StorybookConfig = {
     framework: '@storybook/react-vite',
-    addons: ['@storybook/addon-a11y', '@storybook/addon-docs'],
+    addons: [
+        '@storybook/addon-a11y',
+        '@storybook/addon-docs',
+        '@chromatic-com/storybook'
+    ],
     stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
     staticDirs: ['../../site-demo/static/'],
 
