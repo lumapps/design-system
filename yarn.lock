@@ -1685,6 +1685,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@chromatic-com/storybook@npm:^4.1.1":
+  version: 4.1.1
+  resolution: "@chromatic-com/storybook@npm:4.1.1"
+  dependencies:
+    "@neoconfetti/react": ^1.0.0
+    chromatic: ^12.0.0
+    filesize: ^10.0.12
+    jsonfile: ^6.1.0
+    strip-ansi: ^7.1.0
+  peerDependencies:
+    storybook: ^0.0.0-0 || ^9.0.0 || ^9.1.0-0 || ^9.2.0-0 || ^10.0.0-0
+  checksum: 6fe6f513b28ba75d47108f5c611b15428ff5959bbf2a54e3d80429741f0d8658400dabe2fc123711b64b2fff3ae98eeee055f00d9c34e6b448c452af2bd63c54
+  languageName: node
+  linkType: hard
+
 "@csstools/selector-specificity@npm:^2.0.1":
   version: 2.0.2
   resolution: "@csstools/selector-specificity@npm:2.0.2"
@@ -3595,6 +3610,7 @@ __metadata:
     "@babel/preset-env": ^7.26.9
     "@babel/preset-react": ^7.26.3
     "@babel/preset-typescript": ^7.26.0
+    "@chromatic-com/storybook": ^4.1.1
     "@lumx/core": ^3.15.1
     "@lumx/icons": ^3.15.1
     "@popperjs/core": ^2.5.4
@@ -3620,7 +3636,7 @@ __metadata:
     babel-jest: 29.1.2
     babel-loader: ^8.0.6
     body-scroll-lock: ^3.1.5
-    chromatic: ^6.0.6
+    chromatic: ^13.1.4
     classnames: ^2.3.2
     core-js: ^3.6.4
     focus-visible: ^5.0.2
@@ -3760,6 +3776,13 @@ __metadata:
     call-me-maybe: ^1.0.1
     glob-to-regexp: ^0.3.0
   checksum: d3b82b29368821154ce8e10bef5ccdbfd070d3e9601643c99ea4607e56f3daeaa4e755dd6d2355da20762c695c1b0570543d9f84b48f70c211ec09c4aaada2e1
+  languageName: node
+  linkType: hard
+
+"@neoconfetti/react@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@neoconfetti/react@npm:1.0.0"
+  checksum: 32f1be33bb489b4d529e2a55d8e8f909a3d70c3442677c2057c75e1b63c0eceecdf008edcfddb58c7511f198a4e28a05ad452e03fdba27de76c81be46c1c98a7
   languageName: node
   linkType: hard
 
@@ -8941,14 +8964,41 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromatic@npm:^6.0.6":
-  version: 6.1.0
-  resolution: "chromatic@npm:6.1.0"
+"chromatic@npm:^12.0.0":
+  version: 12.2.0
+  resolution: "chromatic@npm:12.2.0"
+  peerDependencies:
+    "@chromatic-com/cypress": ^0.*.* || ^1.0.0
+    "@chromatic-com/playwright": ^0.*.* || ^1.0.0
+  peerDependenciesMeta:
+    "@chromatic-com/cypress":
+      optional: true
+    "@chromatic-com/playwright":
+      optional: true
   bin:
-    chroma: bin/main.cjs
-    chromatic: bin/main.cjs
-    chromatic-cli: bin/main.cjs
-  checksum: 2de5227f5d5f9da973f47dfba2a4092eac83cef74ea78101eb81c80c8f50f6f43904c3b499838e60a178de02c3518c0bb80241f8df4266894919c87f7a2ed318
+    chroma: dist/bin.js
+    chromatic: dist/bin.js
+    chromatic-cli: dist/bin.js
+  checksum: d060c80af1d5d2fb0b9be4500be82abed6a03ee90ecca9159e863e5db33f67cadae93ae4de2c8cc6914ddb7f5c28ddd367375b181ea4616515e9938260173379
+  languageName: node
+  linkType: hard
+
+"chromatic@npm:^13.1.4":
+  version: 13.1.4
+  resolution: "chromatic@npm:13.1.4"
+  peerDependencies:
+    "@chromatic-com/cypress": ^0.*.* || ^1.0.0
+    "@chromatic-com/playwright": ^0.*.* || ^1.0.0
+  peerDependenciesMeta:
+    "@chromatic-com/cypress":
+      optional: true
+    "@chromatic-com/playwright":
+      optional: true
+  bin:
+    chroma: dist/bin.js
+    chromatic: dist/bin.js
+    chromatic-cli: dist/bin.js
+  checksum: 71f501791a626d150cd4a6b06da414c3cad936ed5e16b361ccaf852359605a28a0f3f66c2229bb0165fcc0cafb1518ebec00da737714bdadefb8fbc68ee22953
   languageName: node
   linkType: hard
 
@@ -13116,6 +13166,13 @@ __metadata:
   version: 6.1.0
   resolution: "filesize@npm:6.1.0"
   checksum: c46d644cb562fba7b7e837d5cd339394492abaa06722018b91a97d2a63b6c753ef30653de5c03bf178c631185bf55c3561c28fa9ccc4e9755f42d853c6ed4d09
+  languageName: node
+  linkType: hard
+
+"filesize@npm:^10.0.12":
+  version: 10.1.6
+  resolution: "filesize@npm:10.1.6"
+  checksum: a797a9d41c8f27a9ae334d23f99fc5d903eac5d03c82190dc163901205435b56626fe1260c779ba3e87a2a34d426f19ff264c3f7d956e00f2d3ac69760b52e33
   languageName: node
   linkType: hard
 
@@ -18109,6 +18166,19 @@ __metadata:
     graceful-fs:
       optional: true
   checksum: d37b3732c6a44d2839338d4580f6092d569a1dc6b1895b8f0b02ece5c39420b4b8b89cf3540caa4a7da9986c5844d2f6d39753651ddd785959e628b9d87ba216
+  languageName: node
+  linkType: hard
+
+"jsonfile@npm:^6.1.0":
+  version: 6.2.0
+  resolution: "jsonfile@npm:6.2.0"
+  dependencies:
+    graceful-fs: ^4.1.6
+    universalify: ^2.0.0
+  dependenciesMeta:
+    graceful-fs:
+      optional: true
+  checksum: c3028ec5c770bb41290c9bb9ca04bdd0a1b698ddbdf6517c9453d3f90fc9e000c9675959fb46891d317690a93c62de03ff1735d8dbe02be83e51168ce85815d3
   languageName: node
   linkType: hard
 
