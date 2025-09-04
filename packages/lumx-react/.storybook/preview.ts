@@ -1,4 +1,4 @@
-import type { Preview } from '@storybook/react';
+import type { Preview } from '@storybook/react-vite';
 import { withStoryBlockDecorator } from './story-block/decorator';
 import { Theme } from '@lumx/react';
 
