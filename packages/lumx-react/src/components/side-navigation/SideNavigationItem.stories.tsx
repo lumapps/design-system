@@ -11,7 +11,7 @@ import { DESIGN_TOKENS } from '@lumx/core/js/constants/design-tokens';
 import { disableArgTypes } from '@lumx/react/stories/utils/disableArgTypes';
 import { iconArgType } from '@lumx/react/stories/controls/icons';
 import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 const EMPHASIS = [Emphasis.high, Emphasis.medium, Emphasis.low];
 
