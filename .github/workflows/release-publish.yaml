@@ -22,7 +22,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             -   name: "Checkout repository"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v5
                 with:
                     ref: ${{ github.event.pull_request.head.sha || env.GITHUB_SHA }}
 
@@ -47,7 +47,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             -   name: "Checkout repository"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v5
                 with:
                     token: '${{ secrets.GITBOT_TOKEN }}'
                     fetch-depth: 0
@@ -88,7 +88,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             -   name: "Checkout repository"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v5
                 with:
                     fetch-depth: 0 # retrieve all the repo history (required by chromatic)
 
@@ -111,7 +111,7 @@ jobs:
             GCP_PROD_REGISTRY: gcr.io/lumapps-registry
         steps:
             -   name: "Checkout repository"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v5
                 with:
                     fetch-depth: 0
 
@@ -175,7 +175,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             -   name: "Checkout repository"
-                uses: actions/checkout@v3
+                uses: actions/checkout@v5
 
             -   name: "Create release note"
                 uses: ./.github/actions/release-note
