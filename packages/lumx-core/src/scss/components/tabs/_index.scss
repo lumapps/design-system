@@ -6,13 +6,7 @@
     $self: &;
 
     &__links {
-        #{$self}--theme-light & {
-            @include lumx-tabs-links;
-        }
-
-        #{$self}--theme-dark & {
-            @include lumx-tabs-links;
-        }
+        @include lumx-tabs-links;
     }
 
     &__link {
