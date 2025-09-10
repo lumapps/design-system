@@ -1,5 +1,4 @@
 import React, { ReactNode, RefObject, useRef } from 'react';
-import { createPortal } from 'react-dom';
 
 import classNames from 'classnames';
 
@@ -15,6 +14,7 @@ import { skipRender } from '@lumx/react/utils/react/skipRender';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { ThemeProvider } from '@lumx/react/utils/theme/ThemeContext';
+import { Portal } from '@lumx/react/utils';
 import { useRestoreFocusOnClose } from './useRestoreFocusOnClose';
 import { usePopoverStyle } from './usePopoverStyle';
 import { Elevation, FitAnchorWidth, Offset, Placement, POPOVER_ZINDEX } from './constants';
@@ -93,11 +93,6 @@ const DEFAULT_PROPS: Partial<PopoverProps> = {
     zIndex: POPOVER_ZINDEX,
 };
 
-/** Method to render the popover inside a portal if usePortal is true */
-const renderPopover = (children: ReactNode, usePortal?: boolean): any => {
-    return usePortal ? createPortal(children, document.body) : children;
-};
-
 // Inner component (must be wrapped before export)
 const _InnerPopover = forwardRef<PopoverProps, HTMLDivElement>((props, ref) => {
     const {
@@ -154,39 +149,38 @@ const _InnerPopover = forwardRef<PopoverProps, HTMLDivElement>((props, ref) => {
     const clickAwayRefs = useRef([popoverRef, anchorRef]);
     const mergedRefs = useMergeRefs<HTMLDivElement>(setPopperElement, ref, popoverRef);
 
-    return isOpen
-        ? renderPopover(
-              <Component
-                  {...forwardedProps}
-                  ref={mergedRefs}
-                  className={classNames(
-                      className,
-                      handleBasicClasses({
-                          prefix: CLASSNAME,
-                          theme,
-                          elevation: Math.min(elevation || 0, 5),
-                          position,
-                          isInitializing: !styles.popover?.transform,
-                      }),
-                  )}
-                  style={styles.popover}
-                  {...attributes.popper}
-              >
-                  {unmountSentinel}
-                  <ClickAwayProvider callback={closeOnClickAway && onClose} childrenRefs={clickAwayRefs}>
-                      {hasArrow && (
-                          <div ref={setArrowElement} className={`${CLASSNAME}__arrow`} style={styles.arrow}>
-                              <svg viewBox="0 0 14 14" aria-hidden>
-                                  <path d="M8 3.49C7.62 2.82 6.66 2.82 6.27 3.48L.04 14 14.04 14 8 3.49Z" />
-                              </svg>
-                          </div>
-                      )}
-                      <ThemeProvider value={theme}>{children}</ThemeProvider>
-                  </ClickAwayProvider>
-              </Component>,
-              usePortal,
-          )
-        : null;
+    return isOpen ? (
+        <Portal enabled={usePortal}>
+            <Component
+                {...forwardedProps}
+                ref={mergedRefs}
+                className={classNames(
+                    className,
+                    handleBasicClasses({
+                        prefix: CLASSNAME,
+                        theme,
+                        elevation: Math.min(elevation || 0, 5),
+                        position,
+                        isInitializing: !styles.popover?.transform,
+                    }),
+                )}
+                style={styles.popover}
+                {...attributes.popper}
+            >
+                {unmountSentinel}
+                <ClickAwayProvider callback={closeOnClickAway && onClose} childrenRefs={clickAwayRefs}>
+                    {hasArrow && (
+                        <div ref={setArrowElement} className={`${CLASSNAME}__arrow`} style={styles.arrow}>
+                            <svg viewBox="0 0 14 14" aria-hidden>
+                                <path d="M8 3.49C7.62 2.82 6.66 2.82 6.27 3.48L.04 14 14.04 14 8 3.49Z" />
+                            </svg>
+                        </div>
+                    )}
+                    <ThemeProvider value={theme}>{children}</ThemeProvider>
+                </ClickAwayProvider>
+            </Component>
+        </Portal>
+    ) : null;
 });
 _InnerPopover.displayName = COMPONENT_NAME;
 

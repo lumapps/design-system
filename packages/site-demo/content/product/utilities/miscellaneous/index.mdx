@@ -22,3 +22,42 @@ A React context provider that build a tree (both DOM and React) of elements that
 </Message>
 
 This is used to provide correct "click away" behavior on nested `Dialog` or `Dropdown` even though they are not nested in the DOM tree.
+
+## Portal
+
+The `Portal` component renders its children into a new subtree outside of the current DOM hierarchy. By default, it renders to `document.body`. This is useful for components that need to appear above everything else, like `Dialog` or `Tooltip`.
+
+You can use the `enabled` prop to conditionally render the portal.
+
+## PortalProvider
+
+The `PortalProvider` component allows you to specify a different container for all `Portal` components within its subtree.
+
+The `PortalProvider` takes a `value` prop, which is a function that returns an object with a `container` (a DOM element or fragment). The `Portal` component, when used within a `PortalProvider`, will render its children into that container.
+
+This is useful for scenarios where you need to render components in a specific part of your application's layout instead of `document.body`.
+
+```tsx
+import { Button } from '@lumx/react';
+import { Portal, PortalProvider } from '@lumx/react/utils';
+import React, { useEffect } from 'react';
+
+function initPortal() {
+    const container = document.createElement('div');
+    document.body.appendChild(div);
+    return { container, teardown: () => div.remove() };
+}
+
+const MyComponent = () => (
+    <PortalProvider value={initPortal}>
+        <p>The button below will be rendered inside a custom div appended to the document body.</p>
+        <Portal>
+            <Button>My button is in the portal</Button>
+        </Portal>
+    </PortalProvider>
+);
+```
+
+<Message kind="info">
+    In this example, `initPortal` initializes a container div for all portals defined inside the children content
+</Message>
