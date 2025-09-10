@@ -5,15 +5,15 @@
     margin-top: calc(var(--lumx-text-field-wrapper-padding-vertical) + ((var(--lumx-material-text-field-input-content-line-height) - var(--lumx-size-s)) / 2));
     margin-left: math.div($lumx-spacing-unit, 2);
 
-    @if $theme == lumx-base-const("theme", "LIGHT") {
+    @if $theme == "theme-light" {
         color: lumx-color-variant("dark", "N");
-    } @else if $theme == lumx-base-const("theme", "DARK") {
+    } @else if $theme == "theme-dark" {
         color: lumx-color-variant("light", "N");
     }
 }
 
 @mixin lumx-select-choices-filter() {
-    @include lumx-has-divider(lumx-base-const("theme", "LIGHT"));
+    @include lumx-has-divider("theme-light");
 
     display: flex;
     align-items: center;

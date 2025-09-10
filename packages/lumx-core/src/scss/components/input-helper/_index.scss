@@ -8,7 +8,7 @@
     $self: &;
 
     &--theme-light {
-        @include lumx-input-helper(lumx-base-const("theme", "LIGHT"));
+        @include lumx-input-helper("theme-light");
 
         @each $color in $lumx-input-helper-color-palette {
             &#{$self}--color-#{$color} {
@@ -18,7 +18,7 @@
     }
 
     &--theme-dark {
-        @include lumx-input-helper(lumx-base-const("theme", "DARK"));
+        @include lumx-input-helper("theme-dark");
     }
 
     &__icon {

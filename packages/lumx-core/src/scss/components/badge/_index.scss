@@ -9,15 +9,15 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: map.get($lumx-sizes, lumx-base-const("size", "XS"));
-    height: map.get($lumx-sizes, lumx-base-const("size", "XS"));
+    width: map.get($lumx-sizes, "xs");
+    height: map.get($lumx-sizes, "xs");
     pointer-events: none;
     border-radius: 50%;
 
     span {
         @include lumx-typography("overline");
 
-        line-height: map.get($lumx-sizes, lumx-base-const("size", "XS"));
+        line-height: map.get($lumx-sizes, "xs");
     }
 
     i {

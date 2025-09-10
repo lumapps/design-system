@@ -52,26 +52,26 @@
     @if $status == "checked" {
         right: var(--lumx-material-switch-indicator-offset);
 
-        @if $theme == lumx-base-const("theme", "LIGHT") {
+        @if $theme == "theme-light" {
             background-color: lumx-color-variant("light", "N");
-        } @else if $theme == lumx-base-const("theme", "DARK") {
+        } @else if $theme == "theme-dark" {
             background-color: lumx-color-variant("primary", "N");
         }
     } @else if $status == "unchecked" {
         left: var(--lumx-material-switch-indicator-offset);
 
-        @if $theme == lumx-base-const("theme", "LIGHT") {
+        @if $theme == "theme-light" {
             background-color: lumx-color-variant("dark", "N");
-        } @else if $theme == lumx-base-const("theme", "DARK") {
+        } @else if $theme == "theme-dark" {
             background-color: lumx-color-variant("light", "N");
         }
     }
 }
 
 @mixin lumx-switch-input-indicator-disabled($theme) {
-    @if $theme == lumx-base-const("theme", "LIGHT") {
+    @if $theme == "theme-light" {
         background-color: lumx-color-variant("dark", "L3");
-    } @else if $theme == lumx-base-const("theme", "DARK") {
+    } @else if $theme == "theme-dark" {
         background-color: lumx-color-variant("light", "L3");
     }
 }

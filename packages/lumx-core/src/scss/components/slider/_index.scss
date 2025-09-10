@@ -46,7 +46,7 @@
     &__wrapper {
         position: relative;
         flex: 1 1 auto;
-        height: map.get($lumx-sizes, lumx-base-const("size", "S"));
+        height: map.get($lumx-sizes, "s");
         cursor: pointer;
     }
 
@@ -96,19 +96,19 @@
 
         #{$self}--theme-light & {
             @include lumx-state(
-                lumx-base-const("state", "DEFAULT"),
-                lumx-base-const("emphasis", "HIGH"),
+                "state-default",
+                "emphasis-high",
                 "primary",
-                lumx-base-const("theme", "LIGHT")
+                "theme-light"
             );
         }
 
         #{$self}--theme-dark & {
             @include lumx-state(
-                lumx-base-const("state", "DEFAULT"),
-                lumx-base-const("emphasis", "HIGH"),
+                "state-default",
+                "emphasis-high",
                 "primary",
-                lumx-base-const("theme", "DARK")
+                "theme-dark"
             );
         }
     }
@@ -149,19 +149,19 @@
 .lumx-slider__handle:hover {
     .lumx-slider--theme-light & {
         @include lumx-state(
-            lumx-base-const("state", "HOVER"),
-            lumx-base-const("emphasis", "HIGH"),
+            "state-hover",
+            "emphasis-high",
             "primary",
-            lumx-base-const("theme", "LIGHT")
+            "theme-light"
         );
     }
 
     .lumx-slider--theme-dark & {
         @include lumx-state(
-            lumx-base-const("state", "HOVER"),
-            lumx-base-const("emphasis", "HIGH"),
+            "state-hover",
+            "emphasis-high",
             "primary",
-            lumx-base-const("theme", "DARK")
+            "theme-dark"
         );
     }
 }
@@ -170,19 +170,19 @@
 .lumx-slider__handle:active {
     .lumx-slider--theme-light & {
         @include lumx-state(
-            lumx-base-const("state", "ACTIVE"),
-            lumx-base-const("emphasis", "HIGH"),
+            "state-active",
+            "emphasis-high",
             "primary",
-            lumx-base-const("theme", "LIGHT")
+            "theme-light"
         );
     }
 
     .lumx-slider--theme-dark & {
         @include lumx-state(
-            lumx-base-const("state", "ACTIVE"),
-            lumx-base-const("emphasis", "HIGH"),
+            "state-active",
+            "emphasis-high",
             "primary",
-            lumx-base-const("theme", "DARK")
+            "theme-dark"
         );
     }
 }
@@ -191,19 +191,19 @@
 .lumx-slider__handle[data-focus-visible-added] {
     .lumx-slider--theme-light & {
         @include lumx-state(
-            lumx-base-const("state", "FOCUS"),
-            lumx-base-const("emphasis", "HIGH"),
+            "state-focus",
+            "emphasis-high",
             "primary",
-            lumx-base-const("theme", "LIGHT")
+            "theme-light"
         );
     }
 
     .lumx-slider--theme-dark & {
         @include lumx-state(
-            lumx-base-const("state", "FOCUS"),
-            lumx-base-const("emphasis", "HIGH"),
+            "state-focus",
+            "emphasis-high",
             "primary",
-            lumx-base-const("theme", "DARK")
+            "theme-dark"
         );
     }
 }

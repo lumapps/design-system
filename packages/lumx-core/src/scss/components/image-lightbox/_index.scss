@@ -55,10 +55,12 @@
 ::view-transition-image-pair(lumx-image-lightbox) {
     overflow: hidden;
 }
+
 ::view-transition-old(lumx-image-lightbox),
 ::view-transition-new(lumx-image-lightbox) {
     height: 100%;
 }
+
 ::view-transition-group(lumx-image-lightbox) {
     animation-duration: $lumx-lightbox-transition-duration;
 

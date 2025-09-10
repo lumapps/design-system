@@ -13,11 +13,11 @@
     background-color: transparent !important;
 
     &--theme-light {
-        @include lumx-has-divider(lumx-base-const("theme", "LIGHT"));
+        @include lumx-has-divider("theme-light");
     }
 
     &--theme-dark {
-        @include lumx-has-divider(lumx-base-const("theme", "DARK"));
+        @include lumx-has-divider("theme-dark");
     }
 
     &:last-child {

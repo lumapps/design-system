@@ -17,59 +17,57 @@
 /* Button sizes
    ========================================================================== */
 
-@each $key, $size in $lumx-sizes {
-    @if $key == lumx-base-const("size", "S") or $key == lumx-base-const("size", "M") {
-        .lumx-button--size-#{$key} {
-            &.lumx-button--emphasis-high {
-                &.lumx-button--variant-button {
-                    @include lumx-button-size(lumx-base-const("emphasis", "HIGH"), "button", $key);
-                }
-
-                &.lumx-button--variant-icon {
-                    @include lumx-button-size(lumx-base-const("emphasis", "HIGH"), "icon", $key);
-                }
-            }
-
-            &.lumx-button--emphasis-medium {
-                &.lumx-button--variant-button {
-                    @include lumx-button-size(lumx-base-const("emphasis", "MEDIUM"), "button", $key);
-                }
-
-                &.lumx-button--variant-icon {
-                    @include lumx-button-size(lumx-base-const("emphasis", "MEDIUM"), "icon", $key);
-                }
-            }
-
-            &.lumx-button--emphasis-low {
-                &.lumx-button--variant-button {
-                    @include lumx-button-size(lumx-base-const("emphasis", "LOW"), "button", $key);
-                }
-
-                &.lumx-button--variant-icon {
-                    @include lumx-button-size(lumx-base-const("emphasis", "LOW"), "icon", $key);
-                }
-            }
-
+@each $size in ("s", "m") {
+    .lumx-button--size-#{$size} {
+        &.lumx-button--emphasis-high {
             &.lumx-button--variant-button {
-                i:first-child {
-                    @include lumx-button-icon("button", $key, lumx-base-const("position", "LEFT"));
-                }
-
-                i:last-child {
-                    @include lumx-button-icon("button", $key, lumx-base-const("position", "RIGHT"));
-                }
+                @include lumx-button-size("emphasis-high", "button", $size);
             }
 
             &.lumx-button--variant-icon {
-                & > i,
-                & > img {
-                    @include lumx-button-icon("icon", $key);
-                }
+                @include lumx-button-size("emphasis-high", "icon", $size);
+            }
+        }
+
+        &.lumx-button--emphasis-medium {
+            &.lumx-button--variant-button {
+                @include lumx-button-size("emphasis-medium", "button", $size);
             }
 
-            & > span {
-                @include lumx-button-text($key);
+            &.lumx-button--variant-icon {
+                @include lumx-button-size("emphasis-medium", "icon", $size);
             }
+        }
+
+        &.lumx-button--emphasis-low {
+            &.lumx-button--variant-button {
+                @include lumx-button-size("emphasis-low", "button", $size);
+            }
+
+            &.lumx-button--variant-icon {
+                @include lumx-button-size("emphasis-low", "icon", $size);
+            }
+        }
+
+        &.lumx-button--variant-button {
+            i:first-child {
+                @include lumx-button-icon("button", $size, "position-left");
+            }
+
+            i:last-child {
+                @include lumx-button-icon("button", $size, "position-right");
+            }
+        }
+
+        &.lumx-button--variant-icon {
+            & > i,
+            & > img {
+                @include lumx-button-icon("icon", $size);
+            }
+        }
+
+        & > span {
+            @include lumx-button-text($size);
         }
     }
 }
@@ -82,14 +80,14 @@
         .lumx-button--color-#{$key} {
             &.lumx-button--emphasis-high.lumx-button--theme-light {
                 @include lumx-button-color(
-                        lumx-base-const("emphasis", "HIGH"),
+                    "emphasis-high",
                         $key,
-                        lumx-base-const("theme", "LIGHT")
+                        "theme-light"
                 );
             }
 
             &.lumx-button--emphasis-high.lumx-button--theme-dark {
-                @include lumx-button-color(lumx-base-const("emphasis", "HIGH"), $key, lumx-base-const("theme", "DARK"));
+                @include lumx-button-color("emphasis-high", $key, "theme-dark");
             }
         }
     }
@@ -98,27 +96,26 @@
 @each $key, $color in $lumx-color-palette {
     .lumx-button--color-#{$key} {
         &.lumx-button--emphasis-medium {
-            @include lumx-button-color(lumx-base-const("emphasis", "MEDIUM"), $key);
+            @include lumx-button-color("emphasis-medium", $key);
         }
 
         &.lumx-button--emphasis-low {
-            @include lumx-button-color(lumx-base-const("emphasis", "LOW"), $key);
+            @include lumx-button-color("emphasis-low", $key);
         }
     }
 }
-
 
 /* Button selected
    ========================================================================== */
 
 .lumx-button.lumx-button--is-selected.lumx-button--emphasis-medium,
 .lumx-button.lumx-button--is-selected.lumx-button--emphasis-low, {
-    @include lumx-button-size(lumx-base-const("emphasis", "SELECTED"));
+    @include lumx-button-size("emphasis-selected");
 
     @each $key, $color in $lumx-color-palette {
         &.lumx-button--color-#{$key} {
             &.lumx-button--is-selected {
-                @include lumx-button-color(lumx-base-const("emphasis", "SELECTED"), $key);
+                @include lumx-button-color("emphasis-selected", $key);
             }
         }
     }
@@ -158,7 +155,8 @@
     .lumx-button {
         // Remove border radius on the right on the first button (if not hidden and not also the last button)
         &:not(:last-of-type:not(.visually-hidden)) {
-            &, &::before {
+            &,
+            &::before {
                 border-top-right-radius: 0;
                 border-bottom-right-radius: 0;
             }
@@ -166,7 +164,8 @@
 
         // Remove border radius on the left on the last button (if not hidden and not also the first button)
         &:not(:first-of-type:not(.visually-hidden)) {
-            &, &::before {
+            &,
+            &::before {
                 border-top-left-radius: 0;
                 border-bottom-left-radius: 0;
             }

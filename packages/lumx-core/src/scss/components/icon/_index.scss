@@ -84,10 +84,10 @@
         }
 
         &.lumx-icon--has-shape {
-            @include lumx-icon-color($color-key, true, lumx-base-const("theme", "LIGHT"));
+            @include lumx-icon-color($color-key, true, "theme-light");
 
             &.lumx-icon--theme-dark {
-                @include lumx-icon-color($color-key, true, lumx-base-const("theme", "DARK"));
+                @include lumx-icon-color($color-key, true, "theme-dark");
             }
         }
     }

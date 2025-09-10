@@ -49,13 +49,13 @@
     &::before {
         border-width: var(--lumx-text-field-state-focus-input-border-top-width) var(--lumx-text-field-state-focus-input-border-right-width) var(--lumx-text-field-state-focus-input-border-bottom-width) var(--lumx-text-field-state-focus-input-border-left-width);
 
-        @if $theme == lumx-base-const("theme", "LIGHT") {
+        @if $theme == "theme-light" {
             @if $validity == "valid" {
                 border-color: lumx-color-variant("green", "N");
             } @else if $validity == "error" {
                 border-color: lumx-color-variant("red", "N");
             }
-        } @else if $theme == lumx-base-const("theme", "DARK") {
+        } @else if $theme == "theme-dark" {
             border-color: lumx-color-variant("light", "N");
         }
     }
@@ -66,9 +66,9 @@
     margin-top: calc(var(--lumx-text-field-wrapper-padding-vertical) + ((var(--lumx-material-text-field-input-content-line-height) - var(--lumx-size-xs)) / 2));
     margin-right: $lumx-spacing-unit;
 
-    @if $theme == lumx-base-const("theme", "LIGHT") {
+    @if $theme == "theme-light" {
         color: lumx-color-variant("dark", "N");
-    } @else if $theme == lumx-base-const("theme", "DARK") {
+    } @else if $theme == "theme-dark" {
         color: lumx-color-variant("light", "N");
     }
 }
@@ -90,15 +90,14 @@
     outline: none;
 
     // Always show the up/down arrow, not just on hover or focus
-    &[type=number]::-webkit-inner-spin-button,
-    &[type=number]::-webkit-outer-spin-button {
+    &[type="number"]::-webkit-inner-spin-button,
+    &[type="number"]::-webkit-outer-spin-button {
         opacity: 1;
-
     }
 
-    @if $theme == lumx-base-const("theme", "LIGHT") {
+    @if $theme == "theme-light" {
         color: lumx-color-variant("dark", "N");
-    } @else if $theme == lumx-base-const("theme", "DARK") {
+    } @else if $theme == "theme-dark" {
         color: lumx-color-variant("light", "N");
     }
 }
@@ -116,13 +115,13 @@
     margin-top: calc(var(--lumx-text-field-wrapper-padding-vertical) + ((var(--lumx-material-text-field-input-content-line-height) - var(--lumx-size-xxs)) / 2));
     margin-left: $lumx-spacing-unit;
 
-    @if $theme == lumx-base-const("theme", "LIGHT") {
+    @if $theme == "theme-light" {
         @if $validity == "valid" {
             color: lumx-color-variant("green", "N");
         } @else if $validity == "error" {
             color: lumx-color-variant("red", "N");
         }
-    } @else if $theme == lumx-base-const("theme", "DARK") {
+    } @else if $theme == "theme-dark" {
         color: lumx-color-variant("light", "N");
     }
 }

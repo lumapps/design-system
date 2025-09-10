@@ -183,12 +183,12 @@
     /* Hover */
     &:hover::after,
     &:focus::after {
-        @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "LOW"), "dark");
+        @include lumx-state("state-hover", "emphasis-low", "dark");
     }
 
     /* Active */
     &:active::after {
-        @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "LOW"), "dark");
+        @include lumx-state("state-active", "emphasis-low", "dark");
     }
 }
 
@@ -202,14 +202,14 @@
 /* Focused (light theme) */
 .lumx-thumbnail--theme-light.lumx-thumbnail--is-clickable {
     &[data-focus-visible-added]::after {
-        @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "LOW"), "dark");
+        @include lumx-state("state-focus", "emphasis-low", "dark");
     }
 }
 
 /* Focused (dark theme) */
 .lumx-thumbnail--theme-dark.lumx-thumbnail--is-clickable {
     &[data-focus-visible-added]::after {
-        @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "LOW"), "light");
+        @include lumx-state("state-focus", "emphasis-low", "light");
     }
 }
 
@@ -260,7 +260,7 @@
 /* Thumbnail badge mask
    ========================================================================== */
 
-$badge-radius-size: math.div(map.get($lumx-sizes, lumx-base-const("size", "XS")), 2) + 2;
+$badge-radius-size: math.div(map.get($lumx-sizes, "xs"), 2) + 2;
 
 .lumx-thumbnail--has-badge {
     .lumx-thumbnail__background,

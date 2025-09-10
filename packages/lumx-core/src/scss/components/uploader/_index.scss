@@ -14,36 +14,36 @@
     padding: 0;
 
     &--theme-light {
-        @include lumx-state(lumx-base-const("state", "DEFAULT"), lumx-base-const("emphasis", "MEDIUM"), "dark");
+        @include lumx-state("state-default", "emphasis-medium", "dark");
 
         &:hover {
-            @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "MEDIUM"), "dark");
+            @include lumx-state("state-hover", "emphasis-medium", "dark");
         }
 
         &:active {
-            @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "MEDIUM"), "dark");
+            @include lumx-state("state-active", "emphasis-medium", "dark");
         }
 
         &[data-focus-visible-added],
         &:focus-within {
-            @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "MEDIUM"), "dark");
+            @include lumx-state("state-focus", "emphasis-medium", "dark");
         }
     }
 
     &--theme-dark {
-        @include lumx-state(lumx-base-const("state", "DEFAULT"), lumx-base-const("emphasis", "MEDIUM"), "light");
+        @include lumx-state("state-default", "emphasis-medium", "light");
 
         &:hover {
-            @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "MEDIUM"), "light");
+            @include lumx-state("state-hover", "emphasis-medium", "light");
         }
 
         &:active {
-            @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "MEDIUM"), "light");
+            @include lumx-state("state-active", "emphasis-medium", "light");
         }
 
         &[data-focus-visible-added],
         &:focus-within {
-            @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "MEDIUM"), "light");
+            @include lumx-state("state-focus", "emphasis-medium", "light");
         }
     }
 

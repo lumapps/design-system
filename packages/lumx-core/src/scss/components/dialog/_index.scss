@@ -106,11 +106,11 @@
     }
 
     &__header--has-divider {
-        @include lumx-has-divider(lumx-base-const("theme", "LIGHT"), lumx-base-const("position", "BOTTOM"));
+        @include lumx-has-divider("theme-light", "position-bottom");
     }
 
     &__footer--has-divider {
-        @include lumx-has-divider(lumx-base-const("theme", "LIGHT"), lumx-base-const("position", "TOP"));
+        @include lumx-has-divider("theme-light", "position-top");
     }
 
     &__content {

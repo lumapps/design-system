@@ -8,10 +8,10 @@
 .lumx-flag {
     display: inline-flex;
     align-items: center;
-    height: map.get($lumx-sizes, lumx-base-const("size", "XS"));
+    height: map.get($lumx-sizes, "xs");
     padding: 0 $lumx-spacing-unit;
     margin: 0;
-    border-radius: math.div(map.get($lumx-sizes, lumx-base-const("size", "XS")), 2);
+    border-radius: math.div(map.get($lumx-sizes, "xs"), 2);
 
     &--is-truncated {
         max-width: 100%;

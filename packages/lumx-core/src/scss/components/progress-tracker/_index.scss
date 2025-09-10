@@ -99,17 +99,17 @@
 
 // Hover state
 .lumx-progress-tracker-step--is-clickable:hover {
-    @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "LOW"), "dark");
+    @include lumx-state("state-hover", "emphasis-low", "dark");
 }
 
 // Active state
 .lumx-progress-tracker-step--is-clickable:active {
-    @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "LOW"), "dark");
+    @include lumx-state("state-active", "emphasis-low", "dark");
 }
 
 // Focus state
 .lumx-progress-tracker-step[data-focus-visible-added] {
-    @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "LOW"), "dark");
+    @include lumx-state("state-focus", "emphasis-low", "dark");
 }
 
 /* Step panel
@@ -121,7 +121,7 @@
 
     // Focus state
     &[data-focus-visible-added] {
-        @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "LOW"), "dark");
+        @include lumx-state("state-focus", "emphasis-low", "dark");
     }
 
     // Active state

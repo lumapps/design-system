@@ -4,11 +4,11 @@
 
 .lumx-divider {
     &--theme-light {
-        @include lumx-divider(lumx-base-const("theme", "LIGHT"));
+        @include lumx-divider("theme-light");
     }
 
     &--theme-dark {
-        @include lumx-divider(lumx-base-const("theme", "DARK"));
+        @include lumx-divider("theme-dark");
     }
 }
 
@@ -16,11 +16,11 @@
     @include lumx-has-divider;
 
     &--theme-light {
-        @include lumx-divider-color(lumx-base-const("theme", "LIGHT"));
+        @include lumx-divider-color("theme-light");
     }
 
     &--theme-dark {
-        @include lumx-divider-color(lumx-base-const("theme", "DARK"));
+        @include lumx-divider-color("theme-dark");
     }
 }
 
@@ -29,11 +29,11 @@
         @include lumx-divider-position($positon);
 
         &--theme-light {
-            @include lumx-divider-color(lumx-base-const("theme", "LIGHT"), $positon);
+            @include lumx-divider-color("theme-light", $positon);
         }
 
         &--theme-dark {
-            @include lumx-divider-color(lumx-base-const("theme", "DARK"), $positon);
+            @include lumx-divider-color("theme-dark", $positon);
         }
     }
 }

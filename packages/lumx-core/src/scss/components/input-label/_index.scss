@@ -10,7 +10,7 @@
     }
 
     &--theme-light {
-        @include lumx-input-label(lumx-base-const("theme", "LIGHT"));
+        @include lumx-input-label("theme-light");
 
         &::before {
             color: lumx-color-variant("red", "N");
@@ -18,7 +18,7 @@
     }
 
     &--theme-dark {
-        @include lumx-input-label(lumx-base-const("theme", "DARK"));
+        @include lumx-input-label("theme-dark");
     }
 
     /** When there is a custom typography, we create a more specific selector so that it overrides the typo added by the mixin `lumx-input-label` */

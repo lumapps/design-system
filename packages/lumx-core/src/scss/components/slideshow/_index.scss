@@ -68,7 +68,6 @@
     }
 }
 
-
 @for $i from 1 through 12 {
     .lumx-slideshow--group-by-#{$i} .lumx-slideshow-item {
         flex: 0 0 #{math.div(100, $i) + "%"};
@@ -76,6 +75,7 @@
         overflow: hidden;
     }
 }
+
 /* Slideshow controls
    ========================================================================== */
 
@@ -92,6 +92,7 @@
 
     &__pagination {
         align-items: center;
+
         // Compute max width for N items based on their size, margin and focus outline
         max-width: ($item-max-count * ($item-size + $item-margin-inline)) + $item-focus-outline * 2 + $item-size;
         overflow: hidden;
@@ -131,17 +132,18 @@
         }
 
         #{$self}--theme-light & {
-            border-color:lumx-color-variant("dark", "L2");
+            border-color: lumx-color-variant("dark", "L2");
             border-width: 2px;
 
             &[data-focus-visible-added] {
-                @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "LOW"), "dark");
+                @include lumx-state("state-focus", "emphasis-low", "dark");
             }
 
             &:hover {
                 background-color: lumx-color-variant("primary", "N");
                 border-width: 0;
             }
+
             &--is-active {
                 background-color: lumx-color-variant("primary", "N");
                 width: $item-size*2;
@@ -149,7 +151,7 @@
                 border-width: 0;
 
                 &[data-focus-visible-added] {
-                    @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "LOW"), "primary");
+                    @include lumx-state("state-focus", "emphasis-low", "primary");
                 }
             }
         }
@@ -158,19 +160,20 @@
             border-color: lumx-color-variant("light", "L2");
 
             &[data-focus-visible-added] {
-                @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "LOW"), "light");
+                @include lumx-state("state-focus", "emphasis-low", "light");
             }
 
             &:hover {
                 background-color: lumx-color-variant("light", "N");
             }
+
             &--is-active {
                 background-color: lumx-color-variant("light", "N");
                 width: $item-size*2;
                 border-radius: $lumx-border-radius;
 
                 &[data-focus-visible-added] {
-                    @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "LOW"), "light");
+                    @include lumx-state("state-focus", "emphasis-low", "light");
                 }
             }
         }

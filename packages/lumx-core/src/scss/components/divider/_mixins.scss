@@ -3,58 +3,58 @@
     margin: 0;
     border: none;
 
-    @if $theme == lumx-base-const("theme", "LIGHT") {
+    @if $theme == "theme-light" {
         background-color: lumx-color-variant("dark", $lumx-divider-color-variant);
-    } @else if $theme == lumx-base-const("theme", "DARK") {
+    } @else if $theme == "theme-dark" {
         background-color: lumx-color-variant("light", $lumx-divider-color-variant);
     }
 }
 
-@mixin lumx-divider-color($theme, $position: lumx-base-const("position", "BOTTOM")) {
-    @if $position == lumx-base-const("position", "TOP") {
-        @if $theme == lumx-base-const("theme", "LIGHT") {
+@mixin lumx-divider-color($theme, $position: "position-bottom") {
+    @if $position == "position-top" {
+        @if $theme == "theme-light" {
             border-top-color: lumx-color-variant("dark", $lumx-divider-color-variant);
-        } @else if $theme == lumx-base-const("theme", "DARK") {
+        } @else if $theme == "theme-dark" {
             border-top-color: lumx-color-variant("light", $lumx-divider-color-variant);
         }
-    } @else if $position == lumx-base-const("position", "RIGHT") {
-        @if $theme == lumx-base-const("theme", "LIGHT") {
+    } @else if $position == "position-right" {
+        @if $theme == "theme-light" {
             border-right-color: lumx-color-variant("dark", $lumx-divider-color-variant);
-        } @else if $theme == lumx-base-const("theme", "DARK") {
+        } @else if $theme == "theme-dark" {
             border-right-color: lumx-color-variant("light", $lumx-divider-color-variant);
         }
-    } @else if $position == lumx-base-const("position", "BOTTOM") {
-        @if $theme == lumx-base-const("theme", "LIGHT") {
+    } @else if $position == "position-bottom" {
+        @if $theme == "theme-light" {
             border-bottom-color: lumx-color-variant("dark", $lumx-divider-color-variant);
-        } @else if $theme == lumx-base-const("theme", "DARK") {
+        } @else if $theme == "theme-dark" {
             border-bottom-color: lumx-color-variant("light", $lumx-divider-color-variant);
         }
-    } @else if $position == lumx-base-const("position", "LEFT") {
-        @if $theme == lumx-base-const("theme", "LIGHT") {
+    } @else if $position == "position-left" {
+        @if $theme == "theme-light" {
             border-left-color: lumx-color-variant("dark", $lumx-divider-color-variant);
-        } @else if $theme == lumx-base-const("theme", "DARK") {
+        } @else if $theme == "theme-dark" {
             border-left-color: lumx-color-variant("light", $lumx-divider-color-variant);
         }
     }
 }
 
 @mixin lumx-divider-position($position) {
-    @if $position == lumx-base-const("position", "TOP") {
+    @if $position == "position-top" {
         border-top-style: solid;
         border-top-width: 1px;
-    } @else if $position == lumx-base-const("position", "RIGHT") {
+    } @else if $position == "position-right" {
         border-right-style: solid;
         border-right-width: 1px;
-    } @else if $position == lumx-base-const("position", "BOTTOM") {
+    } @else if $position == "position-bottom" {
         border-bottom-style: solid;
         border-bottom-width: 1px;
-    } @else if $position == lumx-base-const("position", "LEFT") {
+    } @else if $position == "position-left" {
         border-left-style: solid;
         border-left-width: 1px;
     }
 }
 
-@mixin lumx-has-divider($theme: lumx-base-const("theme", "LIGHT"), $position: lumx-base-const("position", "BOTTOM")) {
+@mixin lumx-has-divider($theme: "theme-light", $position: "position-bottom") {
     @include lumx-divider-color($theme, $position);
     @include lumx-divider-position($position);
 }

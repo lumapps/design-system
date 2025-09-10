@@ -1,7 +1,7 @@
 $lumx-divider-color-variant: "L5";
 $lumx-divider-positions: (
-    "top": lumx-base-const("position", "TOP"),
-    "right": lumx-base-const("position", "RIGHT"),
-    "bottom": lumx-base-const("position", "BOTTOM"),
-    "left": lumx-base-const("position", "LEFT"),
+    "top": "position-top",
+    "right": "position-right",
+    "bottom": "position-bottom",
+    "left": "position-left",
 );

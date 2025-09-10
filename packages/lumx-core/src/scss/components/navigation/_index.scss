@@ -62,18 +62,18 @@
             // Default state
             @include lumx-navigation-link-colors(
                 $emphasis,
-                lumx-base-const("state", "DEFAULT"),
+                "state-default",
                 $theme
             );
             @include lumx-navigation-link-borders(
                 $emphasis,
-                lumx-base-const("state", "DEFAULT")
+                "state-default"
             );
 
             // Focus state
             &[data-focus-visible-added] {
                 @include lumx-state-as-selected(
-                    lumx-base-const("state", "FOCUS"),
+                    "state-focus",
                     $theme
                 );
             }
@@ -83,12 +83,12 @@
             &[data-lumx-hover], {
                 @include lumx-navigation-link-colors(
                     $emphasis,
-                    lumx-base-const("state", "HOVER"),
+                    "state-hover",
                     $theme
                 );
                 @include lumx-navigation-link-borders(
                     $emphasis,
-                    lumx-base-const("state", "HOVER")
+                    "state-hover"
                 );
             }
 
@@ -97,12 +97,12 @@
             &[data-lumx-active] {
                 @include lumx-navigation-link-colors(
                     $emphasis,
-                    lumx-base-const("state", "ACTIVE"),
+                    "state-active",
                     $theme
                 );
                 @include lumx-navigation-link-borders(
                     $emphasis,
-                    lumx-base-const("state", "ACTIVE")
+                    "state-active"
                 );
             }
         }
@@ -152,6 +152,7 @@
             min-width: $lumx-size-xxl;
             max-width: 400px;
             padding: $lumx-spacing-unit-regular;
+
             .lumx-navigation-item {
                 width: 100%;
                 max-width: 100%;

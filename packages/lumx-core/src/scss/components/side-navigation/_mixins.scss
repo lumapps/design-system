@@ -20,7 +20,7 @@
     flex: 1 1 auto;
     flex-direction: row;
     align-items: center;
-    min-height: map.get($lumx-sizes, lumx-base-const("size", "M"));
+    min-height: map.get($lumx-sizes, "m");
     padding: 0 $lumx-spacing-unit;
     text-align: start;
     text-decoration: none;
@@ -33,9 +33,9 @@
 @mixin lumx-side-navigation-link-icon($position) {
     flex-shrink: 0;
 
-    @if $position == lumx-base-const("position", "LEFT") {
+    @if $position == "position-left" {
         margin-right: $lumx-spacing-unit * 2;
-    } @else if $position == lumx-base-const("position", "RIGHT") {
+    } @else if $position == "position-right" {
         margin-left: $lumx-spacing-unit * 2;
     }
 }
@@ -43,11 +43,11 @@
 @mixin lumx-side-navigation-link-label($emphasis) {
     flex: 1 1 auto;
 
-    @if $emphasis == lumx-base-const("emphasis", "HIGH") {
+    @if $emphasis == "emphasis-high" {
         @include lumx-typography("title");
-    } @else if $emphasis == lumx-base-const("emphasis", "MEDIUM") {
+    } @else if $emphasis == "emphasis-medium" {
         @include lumx-typography("subtitle1");
-    } @else if $emphasis == lumx-base-const("emphasis", "LOW") {
+    } @else if $emphasis == "emphasis-low" {
         @include lumx-typography("body1");
     }
 }

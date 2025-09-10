@@ -56,7 +56,6 @@
             @include lumx-typography("body1");
         }
 
-
         @include lumx-typography("subtitle1");
 
         #{$self}--orientation-vertical & {
@@ -110,7 +109,7 @@
 
     &__action,
     &__actions,
-    &__after  {
+    &__after {
         margin-top: $lumx-spacing-unit * 2;
     }
 }

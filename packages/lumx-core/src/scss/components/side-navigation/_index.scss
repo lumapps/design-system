@@ -22,24 +22,24 @@
         @include lumx-side-navigation-link;
 
         & > i:first-child {
-            @include lumx-side-navigation-link-icon(lumx-base-const("position", "LEFT"));
+            @include lumx-side-navigation-link-icon("position-left");
         }
 
         & > i:last-child {
-            @include lumx-side-navigation-link-icon(lumx-base-const("position", "RIGHT"));
+            @include lumx-side-navigation-link-icon("position-right");
         }
 
         & > span {
             #{$self}--emphasis-high & {
-                @include lumx-side-navigation-link-label(lumx-base-const("emphasis", "HIGH"));
+                @include lumx-side-navigation-link-label("emphasis-high");
             }
 
             #{$self}--emphasis-medium & {
-                @include lumx-side-navigation-link-label(lumx-base-const("emphasis", "MEDIUM"));
+                @include lumx-side-navigation-link-label("emphasis-medium");
             }
 
             #{$self}--emphasis-low & {
-                @include lumx-side-navigation-link-label(lumx-base-const("emphasis", "LOW"));
+                @include lumx-side-navigation-link-label("emphasis-low");
             }
         }
     }
@@ -66,5 +66,5 @@
 
 .lumx-side-navigation-item--is-selected > .lumx-side-navigation-item__link,
 .lumx-side-navigation-item--is-selected > .lumx-side-navigation-item__wrapper > .lumx-side-navigation-item__link {
-    @include lumx-list-item-selected('side-navigation-item');
+    @include lumx-list-item-selected("side-navigation-item");
 }
