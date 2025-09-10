@@ -12,16 +12,17 @@ const config: StorybookConfig = {
     addons: [
         '@storybook/addon-a11y',
         '@storybook/addon-docs',
-        '@chromatic-com/storybook'
+        '@chromatic-com/storybook',
     ],
     stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
     staticDirs: ['../../site-demo/static/'],
 
     async viteFinal(config) {
         return mergeConfig(config, {
+            optimizeDeps: { include: ['@lumx/icons'] },
             plugins: [tsconfigPaths()],
             css: { postcss },
         });
-    }
+    },
 };
 export default config;
