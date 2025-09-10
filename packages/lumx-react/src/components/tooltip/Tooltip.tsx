@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { ReactNode, useState } from 'react';
-import { createPortal } from 'react-dom';
 
 import classNames from 'classnames';
 
@@ -15,6 +14,7 @@ import { usePopper } from '@lumx/react/hooks/usePopper';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { ARIA_LINK_MODES, TOOLTIP_ZINDEX } from '@lumx/react/components/tooltip/constants';
+import { Portal } from '@lumx/react/utils';
 import { useInjectTooltipRef } from './useInjectTooltipRef';
 import { useTooltipOpen } from './useTooltipOpen';
 
@@ -129,8 +129,8 @@ export const Tooltip = forwardRef<TooltipProps, HTMLDivElement>((props, ref) => 
     return (
         <>
             <TooltipContextProvider>{wrappedChildren}</TooltipContextProvider>
-            {isMounted &&
-                createPortal(
+            {isMounted && (
+                <Portal>
                     <div
                         ref={tooltipRef}
                         {...forwardedProps}
@@ -154,9 +154,9 @@ export const Tooltip = forwardRef<TooltipProps, HTMLDivElement>((props, ref) => 
                                 <p key={line}>{line}</p>
                             ))}
                         </div>
-                    </div>,
-                    document.body,
-                )}
+                    </div>
+                </Portal>
+            )}
         </>
     );
 });

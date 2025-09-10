@@ -1,5 +1,4 @@
 import React, { useRef } from 'react';
-import { createPortal } from 'react-dom';
 
 import classNames from 'classnames';
 import isFunction from 'lodash/isFunction';
@@ -13,6 +12,8 @@ import { useTransitionVisibility } from '@lumx/react/hooks/useTransitionVisibili
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+
+import { Portal } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
@@ -98,39 +99,40 @@ export const Notification = forwardRef<NotificationProps, HTMLDivElement>((props
         return null;
     }
 
-    const notification = (
-        // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-        <div
-            ref={mergeRefs(ref, rootRef)}
-            role="alert"
-            {...forwardedProps}
-            className={classNames(
-                className,
-                handleBasicClasses({
-                    color,
-                    hasAction,
-                    isHidden: !isOpen,
-                    prefix: CLASSNAME,
-                }),
-            )}
-            onClick={onClick}
-            style={{ ...style, zIndex }}
-        >
-            <div className={`${CLASSNAME}__icon`}>
-                <Icon icon={icon} size={Size.s} />
-            </div>
-            <div className={`${CLASSNAME}__content`}>{content}</div>
-            {hasAction && (
-                <div className={`${CLASSNAME}__action`}>
-                    <Button emphasis={Emphasis.medium} theme={theme} onClick={handleCallback}>
-                        <span>{actionLabel}</span>
-                    </Button>
+    return (
+        <Portal enabled={usePortal}>
+            {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
+            <div
+                ref={mergeRefs(ref, rootRef)}
+                role="alert"
+                {...forwardedProps}
+                className={classNames(
+                    className,
+                    handleBasicClasses({
+                        color,
+                        hasAction,
+                        isHidden: !isOpen,
+                        prefix: CLASSNAME,
+                    }),
+                )}
+                onClick={onClick}
+                style={{ ...style, zIndex }}
+            >
+                <div className={`${CLASSNAME}__icon`}>
+                    <Icon icon={icon} size={Size.s} />
                 </div>
-            )}
-        </div>
+                <div className={`${CLASSNAME}__content`}>{content}</div>
+                {hasAction && (
+                    <div className={`${CLASSNAME}__action`}>
+                        <Button emphasis={Emphasis.medium} theme={theme} onClick={handleCallback}>
+                            <span>{actionLabel}</span>
+                        </Button>
+                    </div>
+                )}
+            </div>
+            );
+        </Portal>
     );
-
-    return usePortal ? createPortal(notification, document.body) : notification;
 });
 Notification.displayName = COMPONENT_NAME;
 Notification.className = CLASSNAME;

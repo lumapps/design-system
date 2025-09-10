@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   `@lumx/react/utils`: add `PortalProvider` to customize portal render of tooltip, popover, dialog and lightbox
+-   `@lumx/react/utils`: add `Portal` to re-use the same portal render
+
 ## [3.16.0][] - 2025-09-04
 
 ### Changed

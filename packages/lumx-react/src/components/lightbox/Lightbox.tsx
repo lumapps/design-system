@@ -1,7 +1,6 @@
 import React, { RefObject, useRef, useEffect, AriaAttributes } from 'react';
 
 import classNames from 'classnames';
-import { createPortal } from 'react-dom';
 
 import { mdiClose } from '@lumx/icons';
 import { HeadingLevelProvider, IconButton, IconButtonProps } from '@lumx/react';
@@ -17,6 +16,8 @@ import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { useTransitionVisibility } from '@lumx/react/hooks/useTransitionVisibility';
 import { ThemeProvider } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+
+import { Portal } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
@@ -127,52 +128,52 @@ export const Lightbox = forwardRef<LightboxProps, HTMLDivElement>((props, ref) =
 
     if (!isOpen && !isVisible) return null;
 
-    return createPortal(
-        /* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */
-        <div
-            ref={mergeRefs(ref, wrapperRef)}
-            {...forwardedProps}
-            aria-label={ariaLabel}
-            aria-labelledby={ariaLabelledBy}
-            aria-modal="true"
-            role="dialog"
-            tabIndex={-1}
-            className={classNames(
-                className,
-                handleBasicClasses({
-                    prefix: CLASSNAME,
-                    isHidden: !isOpen,
-                    isShown: isOpen || isVisible,
-                    theme,
-                }),
-            )}
-            style={{ zIndex }}
-        >
-            {closeButtonProps && (
-                <div className={`${CLASSNAME}__close`}>
-                    <IconButton
-                        {...closeButtonProps}
-                        ref={closeButtonRef}
-                        emphasis="low"
-                        hasBackground
-                        icon={mdiClose}
-                        theme="dark"
-                        type="button"
-                        onClick={onClose}
-                    />
-                </div>
-            )}
-            <HeadingLevelProvider level={2}>
-                <ThemeProvider value={undefined}>
-                    <ClickAwayProvider callback={!preventAutoClose && onClose} childrenRefs={clickAwayRefs}>
-                        <div ref={childrenRef} className={`${CLASSNAME}__wrapper`} role="presentation">
-                            {children}
-                        </div>
-                    </ClickAwayProvider>
-                </ThemeProvider>
-            </HeadingLevelProvider>
-        </div>,
-        document.body,
+    return (
+        <Portal>
+            <div
+                ref={mergeRefs(ref, wrapperRef)}
+                {...forwardedProps}
+                aria-label={ariaLabel}
+                aria-labelledby={ariaLabelledBy}
+                aria-modal="true"
+                role="dialog"
+                tabIndex={-1}
+                className={classNames(
+                    className,
+                    handleBasicClasses({
+                        prefix: CLASSNAME,
+                        isHidden: !isOpen,
+                        isShown: isOpen || isVisible,
+                        theme,
+                    }),
+                )}
+                style={{ zIndex }}
+            >
+                {closeButtonProps && (
+                    <div className={`${CLASSNAME}__close`}>
+                        <IconButton
+                            {...closeButtonProps}
+                            ref={closeButtonRef}
+                            emphasis="low"
+                            hasBackground
+                            icon={mdiClose}
+                            theme="dark"
+                            type="button"
+                            onClick={onClose}
+                        />
+                    </div>
+                )}
+                <HeadingLevelProvider level={2}>
+                    <ThemeProvider value={undefined}>
+                        <ClickAwayProvider callback={!preventAutoClose && onClose} childrenRefs={clickAwayRefs}>
+                            <div ref={childrenRef} className={`${CLASSNAME}__wrapper`} role="presentation">
+                                {children}
+                            </div>
+                        </ClickAwayProvider>
+                    </ThemeProvider>
+                </HeadingLevelProvider>
+            </div>
+        </Portal>
     );
 });
 Lightbox.displayName = COMPONENT_NAME;
