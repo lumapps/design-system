@@ -2,7 +2,7 @@
    Input label
    ========================================================================== */
 
-.#{$lumx-base-prefix}-input-label {
+.lumx-input-label {
     &--is-required::before {
         margin-right: $lumx-spacing-unit-tiny;
         font-weight: 700;
@@ -24,7 +24,7 @@
     /** When there is a custom typography, we create a more specific selector so that it overrides the typo added by the mixin `lumx-input-label` */
     &--has-custom-typography {
         @each $key, $style in $lumx-typography-interface {
-            &.#{$lumx-base-prefix}-typography-#{$key} {
+            &.lumx-typography-#{$key} {
                 @include lumx-typography($key);
             }
         }

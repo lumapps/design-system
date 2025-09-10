@@ -5,7 +5,7 @@
    Flag
    ========================================================================== */
 
-.#{$lumx-base-prefix}-flag {
+.lumx-flag {
     display: inline-flex;
     align-items: center;
     height: map.get($lumx-sizes, lumx-base-const("size", "XS"));
@@ -26,11 +26,11 @@
    ========================================================================== */
 
 @each $key, $color in $lumx-color-palette {
-    .#{$lumx-base-prefix}-flag--color-#{$key} {
+    .lumx-flag--color-#{$key} {
         border: 2px solid lumx-color-variant($key, "L4");
 
-        .#{$lumx-base-prefix}-flag__label,
-        .#{$lumx-base-prefix}-flag__icon {
+        .lumx-flag__label,
+        .lumx-flag__icon {
             @if $key == "dark" or $key == "yellow" {
                 color: lumx-color-variant("dark", "L1");
             } @else {

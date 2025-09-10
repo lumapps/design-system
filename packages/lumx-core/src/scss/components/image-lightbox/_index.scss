@@ -4,16 +4,16 @@
    Image Lightbox
    ========================================================================== */
 
-.#{$lumx-base-prefix}-image-lightbox {
+.lumx-image-lightbox {
     // Remove lightbox animation & transition (use view transition instead)
     @supports (view-transition-name: name) {
-        &.#{$lumx-base-prefix}-lightbox {
+        &.lumx-lightbox {
             transition: none;
             animation: none;
         }
     }
 
-    .#{$lumx-base-prefix}-lightbox__wrapper {
+    .lumx-lightbox__wrapper {
         inset: 0;
     }
 
@@ -52,14 +52,14 @@
 }
 
 // Crop & scale transitioning pair of trigger image + opening image
-::view-transition-image-pair(#{$lumx-base-prefix}-image-lightbox) {
+::view-transition-image-pair(lumx-image-lightbox) {
     overflow: hidden;
 }
-::view-transition-old(#{$lumx-base-prefix}-image-lightbox),
-::view-transition-new(#{$lumx-base-prefix}-image-lightbox) {
+::view-transition-old(lumx-image-lightbox),
+::view-transition-new(lumx-image-lightbox) {
     height: 100%;
 }
-::view-transition-group(#{$lumx-base-prefix}-image-lightbox) {
+::view-transition-group(lumx-image-lightbox) {
     animation-duration: $lumx-lightbox-transition-duration;
 
     @media (prefers-reduced-motion: reduce) {

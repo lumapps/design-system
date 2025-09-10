@@ -2,7 +2,7 @@
    Uploader
    ========================================================================== */
 
-.#{$lumx-base-prefix}-uploader {
+.lumx-uploader {
     $self: &;
 
     @include lumx-state-transition;
@@ -115,7 +115,7 @@
    ========================================================================== */
 
 @each $key, $size in $lumx-sizes {
-    .#{$lumx-base-prefix}-uploader--size-#{$key} {
+    .lumx-uploader--size-#{$key} {
         width: $size;
     }
 }
@@ -124,7 +124,7 @@
    ========================================================================== */
 
 @each $key, $aspect-ratio in $lumx-thumbnail-aspect-ratio {
-    .#{$lumx-base-prefix}-uploader--aspect-ratio-#{$key} .#{$lumx-base-prefix}-uploader__background {
+    .lumx-uploader--aspect-ratio-#{$key} .lumx-uploader__background {
         padding-top: $aspect-ratio;
     }
 }

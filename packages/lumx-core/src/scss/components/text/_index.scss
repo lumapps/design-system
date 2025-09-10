@@ -2,7 +2,7 @@
    Text
    ========================================================================== */
 
-.#{$lumx-base-prefix}-text {
+.lumx-text {
     white-space: var(--lumx-text-white-space);
 
     &--is-truncated {
@@ -26,7 +26,7 @@
     }
 
     // Fix icon alignment
-    .#{$lumx-base-prefix}-icon, .#{$lumx-base-prefix}-icon > svg {
+    .lumx-icon, .lumx-icon > svg {
         display: inline;
     }
 }

@@ -5,7 +5,7 @@
    Tooltip
    ========================================================================== */
 
-.#{$lumx-base-prefix}-tooltip {
+.lumx-tooltip {
     $self: &;
 
     position: absolute;
@@ -86,7 +86,7 @@
     }
 }
 
-.#{$lumx-base-prefix}-tooltip-anchor-wrapper {
+.lumx-tooltip-anchor-wrapper {
     width: fit-content;
 
     // Prevent text selection on mobile device that would hinder long press.

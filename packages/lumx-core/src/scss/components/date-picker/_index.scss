@@ -6,7 +6,7 @@
    Date picker
    ========================================================================== */
 
-.#{$lumx-base-prefix}-date-picker {
+.lumx-date-picker {
     &__month {
         @include lumx-typography("subtitle1");
 

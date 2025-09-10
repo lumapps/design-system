@@ -2,7 +2,7 @@
    Index
    ========================================================================== */
 
-.#{$lumx-base-prefix}-link {
+.lumx-link {
     @include lumx-link;
 
     &:disabled,
@@ -11,8 +11,8 @@
     }
 
     // Fix icon alignment
-    & > .#{$lumx-base-prefix}-icon,
-    &__content > .#{$lumx-base-prefix}-icon
+    & > .lumx-icon,
+    &__content > .lumx-icon
     {
         &, & svg {
             display: inline;
@@ -25,12 +25,12 @@
    ========================================================================== */
 
 @each $color-key, $color in $lumx-color-palette {
-    .#{$lumx-base-prefix}-link.#{$lumx-base-prefix}-link--color-#{$color-key} {
+    .lumx-link.lumx-link--color-#{$color-key} {
         @include lumx-link-color($color-key, "N");
     }
 
     @each $color-variant in $lumx-color-variants {
-        .#{$lumx-base-prefix}-link.#{$lumx-base-prefix}-link--color-#{$color-key}.#{$lumx-base-prefix}-link--color-variant-#{$color-variant} {
+        .lumx-link.lumx-link--color-#{$color-key}.lumx-link--color-variant-#{$color-variant} {
             @include lumx-link-color($color-key, $color-variant);
         }
     }

@@ -4,7 +4,7 @@
    Slideshow
    ========================================================================== */
 
-.#{$lumx-base-prefix}-slideshow {
+.lumx-slideshow {
     $self: &;
 
     outline: none;
@@ -52,7 +52,7 @@
 /* Slideshow item group
    ========================================================================== */
 
-.#{$lumx-base-prefix}-slideshow-item-group {
+.lumx-slideshow-item-group {
     display: flex;
     overflow: hidden;
     max-width: 100%;
@@ -62,15 +62,15 @@
 /* Slideshow item
    ========================================================================== */
 
-.#{$lumx-base-prefix}-slideshow-item {
-    .#{$lumx-base-prefix}-slideshow--fill-height & {
+.lumx-slideshow-item {
+    .lumx-slideshow--fill-height & {
         display: flex;
     }
 }
 
 
 @for $i from 1 through 12 {
-    .#{$lumx-base-prefix}-slideshow--group-by-#{$i} .#{$lumx-base-prefix}-slideshow-item {
+    .lumx-slideshow--group-by-#{$i} .lumx-slideshow-item {
         flex: 0 0 #{math.div(100, $i) + "%"};
         max-width: #{math.div(100, $i) + "%"};
         overflow: hidden;
@@ -79,7 +79,7 @@
 /* Slideshow controls
    ========================================================================== */
 
-.#{$lumx-base-prefix}-slideshow-controls {
+.lumx-slideshow-controls {
     $item-max-count: 6;
     $item-size: $lumx-spacing-unit;
     $item-margin-inline: 2px;
@@ -147,7 +147,7 @@
                 width: $item-size*2;
                 border-radius: $lumx-border-radius;
                 border-width: 0;
-                
+
                 &[data-focus-visible-added] {
                     @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "LOW"), "primary");
                 }

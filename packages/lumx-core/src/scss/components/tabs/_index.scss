@@ -2,7 +2,7 @@
    Tabs
    ========================================================================== */
 
-.#{$lumx-base-prefix}-tabs {
+.lumx-tabs {
     $self: &;
 
     &__links {
@@ -51,8 +51,8 @@
 /* Tabs layout
    ========================================================================== */
 
-.#{$lumx-base-prefix}-tabs--layout-fixed {
-    .#{$lumx-base-prefix}-tabs__link {
+.lumx-tabs--layout-fixed {
+    .lumx-tabs__link {
         @include lumx-tabs-link-layout("fixed");
     }
 }
@@ -60,20 +60,20 @@
 /* Tabs position
    ========================================================================== */
 
-.#{$lumx-base-prefix}-tabs--layout-clustered.#{$lumx-base-prefix}-tabs--position-left {
-    .#{$lumx-base-prefix}-tabs__links {
+.lumx-tabs--layout-clustered.lumx-tabs--position-left {
+    .lumx-tabs__links {
         @include lumx-tabs-links-position(lumx-base-const("position", "LEFT"));
     }
 }
 
-.#{$lumx-base-prefix}-tabs--layout-clustered.#{$lumx-base-prefix}-tabs--position-center {
-    .#{$lumx-base-prefix}-tabs__links {
+.lumx-tabs--layout-clustered.lumx-tabs--position-center {
+    .lumx-tabs__links {
         @include lumx-tabs-links-position(lumx-base-const("position", "CENTER"));
     }
 }
 
-.#{$lumx-base-prefix}-tabs--layout-clustered.#{$lumx-base-prefix}-tabs--position-right {
-    .#{$lumx-base-prefix}-tabs__links {
+.lumx-tabs--layout-clustered.lumx-tabs--position-right {
+    .lumx-tabs__links {
         @include lumx-tabs-links-position(lumx-base-const("position", "RIGHT"));
     }
 }
@@ -82,15 +82,15 @@
    ========================================================================== */
 
 // Disabled state
-.#{$lumx-base-prefix}-tabs__link--is-disabled {
+.lumx-tabs__link--is-disabled {
     @include lumx-tabs-link(lumx-base-const("emphasis", "LOW"));
 
-    .#{$lumx-base-prefix}-tabs--theme-light & {
+    .lumx-tabs--theme-light & {
         @include lumx-tabs-link-color(lumx-base-const("emphasis", "LOW"), lumx-base-const("theme", "LIGHT"));
         @include lumx-state-disabled-text(lumx-base-const("theme", "LIGHT"));
     }
 
-    .#{$lumx-base-prefix}-tabs--theme-dark & {
+    .lumx-tabs--theme-dark & {
         @include lumx-tabs-link-color(lumx-base-const("emphasis", "LOW"), lumx-base-const("theme", "DARK"));
         @include lumx-state-disabled-text(lumx-base-const("theme", "DARK"));
     }
@@ -99,7 +99,7 @@
 /* Tab panel
    ========================================================================== */
 
-.#{$lumx-base-prefix}-tab-panel {
+.lumx-tab-panel {
     display: none;
     outline: none;
 

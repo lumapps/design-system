@@ -2,7 +2,7 @@
    Generic Block
    ========================================================================== */
 
-.#{$lumx-base-prefix}-generic-block {
+.lumx-generic-block {
     &__content {
         // Prevent blocks in content from overflowing
         overflow: clip;

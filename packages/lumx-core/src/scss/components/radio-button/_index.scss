@@ -4,7 +4,7 @@
    Radio button
    ========================================================================== */
 
-.#{$lumx-base-prefix}-radio-button {
+.lumx-radio-button {
     $self: &;
 
     display: flex;
@@ -75,80 +75,80 @@
    ========================================================================== */
 
 // Disabled state
-.#{$lumx-base-prefix}-radio-button--is-disabled {
-    .#{$lumx-base-prefix}-radio-button__input-native {
+.lumx-radio-button--is-disabled {
+    .lumx-radio-button__input-native {
         pointer-events: none;
     }
 
-    .#{$lumx-base-prefix}-radio-button__input-placeholder {
+    .lumx-radio-button__input-placeholder {
         @include lumx-state-disabled-input;
     }
 
-    &.#{$lumx-base-prefix}-radio-button--theme-light {
-        .#{$lumx-base-prefix}-radio-button__label,
-        .#{$lumx-base-prefix}-radio-button__helper {
+    &.lumx-radio-button--theme-light {
+        .lumx-radio-button__label,
+        .lumx-radio-button__helper {
             @include lumx-state-disabled-text(lumx-base-const("theme", "LIGHT"));
         }
     }
 
-    &.#{$lumx-base-prefix}-radio-button--theme-dark {
-        .#{$lumx-base-prefix}-radio-button__label,
-        .#{$lumx-base-prefix}-radio-button__helper {
+    &.lumx-radio-button--theme-dark {
+        .lumx-radio-button__label,
+        .lumx-radio-button__helper {
             @include lumx-state-disabled-text(lumx-base-const("theme", "DARK"));
         }
     }
 }
 
 // Hover state
-.#{$lumx-base-prefix}-radio-button--theme-light.#{$lumx-base-prefix}-radio-button--is-unchecked
-.#{$lumx-base-prefix}-radio-button__input-native:hover
-+ .#{$lumx-base-prefix}-radio-button__input-placeholder {
-    .#{$lumx-base-prefix}-radio-button__input-background {
+.lumx-radio-button--theme-light.lumx-radio-button--is-unchecked
+.lumx-radio-button__input-native:hover
++ .lumx-radio-button__input-placeholder {
+    .lumx-radio-button__input-background {
         @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "LOW"), "dark");
     }
 }
 
-.#{$lumx-base-prefix}-radio-button--theme-dark.#{$lumx-base-prefix}-radio-button--is-unchecked
-.#{$lumx-base-prefix}-radio-button__input-native:hover
-+ .#{$lumx-base-prefix}-radio-button__input-placeholder {
-    .#{$lumx-base-prefix}-radio-button__input-background {
+.lumx-radio-button--theme-dark.lumx-radio-button--is-unchecked
+.lumx-radio-button__input-native:hover
++ .lumx-radio-button__input-placeholder {
+    .lumx-radio-button__input-background {
         @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "LOW"), "light");
     }
 }
 
 // Active state
-.#{$lumx-base-prefix}-radio-button--theme-light.#{$lumx-base-prefix}-radio-button--is-unchecked
-.#{$lumx-base-prefix}-radio-button__input-native:active
-+ .#{$lumx-base-prefix}-radio-button__input-placeholder {
-    .#{$lumx-base-prefix}-radio-button__input-background {
+.lumx-radio-button--theme-light.lumx-radio-button--is-unchecked
+.lumx-radio-button__input-native:active
++ .lumx-radio-button__input-placeholder {
+    .lumx-radio-button__input-background {
         @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "LOW"), "dark");
     }
 }
 
-.#{$lumx-base-prefix}-radio-button--theme-dark.#{$lumx-base-prefix}-radio-button--is-unchecked
-.#{$lumx-base-prefix}-radio-button__input-native:active
-+ .#{$lumx-base-prefix}-radio-button__input-placeholder {
-    .#{$lumx-base-prefix}-radio-button__input-background {
+.lumx-radio-button--theme-dark.lumx-radio-button--is-unchecked
+.lumx-radio-button__input-native:active
++ .lumx-radio-button__input-placeholder {
+    .lumx-radio-button__input-background {
         @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "LOW"), "light");
     }
 }
 
 // Focus state
-.#{$lumx-base-prefix}-radio-button--theme-light.#{$lumx-base-prefix}-radio-button--is-unchecked
-.#{$lumx-base-prefix}-radio-button__input-native[data-focus-visible-added]
-+ .#{$lumx-base-prefix}-radio-button__input-placeholder {
+.lumx-radio-button--theme-light.lumx-radio-button--is-unchecked
+.lumx-radio-button__input-native[data-focus-visible-added]
++ .lumx-radio-button__input-placeholder {
     @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "LOW"), "dark");
 }
 
-.#{$lumx-base-prefix}-radio-button--theme-dark.#{$lumx-base-prefix}-radio-button--is-unchecked
-.#{$lumx-base-prefix}-radio-button__input-native[data-focus-visible-added]
-+ .#{$lumx-base-prefix}-radio-button__input-placeholder {
+.lumx-radio-button--theme-dark.lumx-radio-button--is-unchecked
+.lumx-radio-button__input-native[data-focus-visible-added]
++ .lumx-radio-button__input-placeholder {
     @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "LOW"), "light");
 }
 
-.#{$lumx-base-prefix}-radio-button--theme-light.#{$lumx-base-prefix}-radio-button--is-checked
-.#{$lumx-base-prefix}-radio-button__input-native[data-focus-visible-added]
-+ .#{$lumx-base-prefix}-radio-button__input-placeholder {
+.lumx-radio-button--theme-light.lumx-radio-button--is-checked
+.lumx-radio-button__input-native[data-focus-visible-added]
++ .lumx-radio-button__input-placeholder {
     @include lumx-state(
         lumx-base-const("state", "FOCUS"),
         lumx-base-const("emphasis", "HIGH"),
@@ -157,9 +157,9 @@
     );
 }
 
-.#{$lumx-base-prefix}-radio-button--theme-dark.#{$lumx-base-prefix}-radio-button--is-checked
-.#{$lumx-base-prefix}-radio-button__input-native[data-focus-visible-added]
-+ .#{$lumx-base-prefix}-radio-button__input-placeholder {
+.lumx-radio-button--theme-dark.lumx-radio-button--is-checked
+.lumx-radio-button__input-native[data-focus-visible-added]
++ .lumx-radio-button__input-placeholder {
     @include lumx-state(
         lumx-base-const("state", "FOCUS"),
         lumx-base-const("emphasis", "HIGH"),
@@ -171,7 +171,7 @@
 /* Radio group
    ========================================================================== */
 
-.#{$lumx-base-prefix}-radio-group > .#{$lumx-base-prefix}-radio-button {
+.lumx-radio-group > .lumx-radio-button {
     margin-bottom: $lumx-spacing-unit * 1.5;
 
     &:last-child {
