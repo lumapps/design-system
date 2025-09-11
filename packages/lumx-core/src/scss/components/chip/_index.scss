@@ -2,7 +2,7 @@
    Chip
    ========================================================================== */
 
-.#{$lumx-base-prefix}-chip {
+.lumx-chip {
     $self: &;
 
     @include lumx-chip-base;
@@ -13,11 +13,11 @@
 
     &__label {
         #{$self}--size-m & {
-            @include lumx-chip-label(lumx-base-const("size", "M"));
+            @include lumx-chip-label("m");
         }
 
         #{$self}--size-s & {
-            @include lumx-chip-label(lumx-base-const("size", "S"));
+            @include lumx-chip-label("s");
         }
     }
 
@@ -29,30 +29,30 @@
 /* Chip size
    ========================================================================== */
 
-.#{$lumx-base-prefix}-chip--size-m {
-    @include lumx-chip-size(lumx-base-const("size", "M"));
+.lumx-chip--size-m {
+    @include lumx-chip-size("m");
 
     padding: 0 var(--lumx-material-chip-size-m-padding-vertical);
 
-    &.#{$lumx-base-prefix}-chip--has-before {
+    &.lumx-chip--has-before {
         padding-left: $lumx-spacing-unit * 1.5;
     }
 
-    &.#{$lumx-base-prefix}-chip--has-after {
+    &.lumx-chip--has-after {
         padding-right: $lumx-spacing-unit * 1.5;
     }
 }
 
-.#{$lumx-base-prefix}-chip--size-s {
-    @include lumx-chip-size(lumx-base-const("size", "S"));
+.lumx-chip--size-s {
+    @include lumx-chip-size("s");
 
     padding: 0 var(--lumx-material-chip-size-s-padding-vertical);
 
-    &.#{$lumx-base-prefix}-chip--has-before {
+    &.lumx-chip--has-before {
         padding-left: $lumx-spacing-unit;
     }
 
-    &.#{$lumx-base-prefix}-chip--has-after {
+    &.lumx-chip--has-after {
         padding-right: $lumx-spacing-unit;
     }
 }
@@ -60,56 +60,57 @@
 /* Chip states
    ========================================================================== */
 
-.#{$lumx-base-prefix}-chip--is-clickable {
+.lumx-chip--is-clickable {
     @include lumx-state-transition;
 
     cursor: pointer;
 }
 
 @each $key, $color in $lumx-color-palette {
-    .#{$lumx-base-prefix}-chip--is-unselected.#{$lumx-base-prefix}-chip--color-#{$key} {
-        @include lumx-state(lumx-base-const("state", "DEFAULT"), lumx-base-const("emphasis", "MEDIUM"), $key);
+    .lumx-chip--is-unselected.lumx-chip--color-#{$key} {
+        @include lumx-state("state-default", "emphasis-medium", $key);
 
-        &.#{$lumx-base-prefix}-chip--is-clickable {
+        &.lumx-chip--is-clickable {
             &:hover,
             &[data-lumx-hover] {
-                @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "MEDIUM"), $key);
+                @include lumx-state("state-hover", "emphasis-medium", $key);
             }
 
             &:active,
             &[data-lumx-active] {
-                @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "MEDIUM"), $key);
+                @include lumx-state("state-active", "emphasis-medium", $key);
             }
         }
 
         @if $key == "dark" {
-            .#{$lumx-base-prefix}-chip__label {
+            .lumx-chip__label {
                 color: lumx-color-variant("dark", "L1");
             }
         }
     }
 
-    .#{$lumx-base-prefix}-chip--color-#{$key} {
-        &[data-focus-visible-added], &.#{$lumx-base-prefix}-chip--is-highlighted {
-            @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "MEDIUM"), $key);
+    .lumx-chip--color-#{$key} {
+        &[data-focus-visible-added],
+        &.lumx-chip--is-highlighted {
+            @include lumx-state("state-focus", "emphasis-medium", $key);
         }
     }
 }
 
-.#{$lumx-base-prefix}-chip--is-selected {
-    &.#{$lumx-base-prefix}-chip--color-dark {
+.lumx-chip--is-selected {
+    &.lumx-chip--color-dark {
         @include lumx-state-as-selected(
-            lumx-base-const("state", "DEFAULT"),
-            lumx-base-const("theme", "LIGHT"),
+            "state-default",
+            "theme-light",
             "chip"
         );
 
-        &.#{$lumx-base-prefix}-chip--is-clickable {
+        &.lumx-chip--is-clickable {
             &:hover,
             &[data-lumx-hover] {
                 @include lumx-state-as-selected(
-                    lumx-base-const("state", "HOVER"),
-                    lumx-base-const("theme", "LIGHT"),
+                    "state-hover",
+                    "theme-light",
                     "chip"
                 );
             }
@@ -117,35 +118,35 @@
             &:active,
             &[data-lumx-active] {
                 @include lumx-state-as-selected(
-                    lumx-base-const("state", "ACTIVE"),
-                    lumx-base-const("theme", "LIGHT"),
+                    "state-active",
+                    "theme-light",
                     "chip"
                 );
             }
 
             &[data-focus-visible-added] {
                 @include lumx-state-as-selected(
-                    lumx-base-const("state", "FOCUS"),
-                    lumx-base-const("theme", "LIGHT"),
+                    "state-focus",
+                    "theme-light",
                     "chip"
                 );
             }
         }
     }
 
-    &.#{$lumx-base-prefix}-chip--color-light {
+    &.lumx-chip--color-light {
         @include lumx-state-as-selected(
-            lumx-base-const("state", "DEFAULT"),
-            lumx-base-const("theme", "DARK"),
+            "state-default",
+            "theme-dark",
             "chip"
         );
 
-        &.#{$lumx-base-prefix}-chip--is-clickable {
+        &.lumx-chip--is-clickable {
             &:hover,
             &[data-lumx-hover] {
                 @include lumx-state-as-selected(
-                    lumx-base-const("state", "HOVER"),
-                    lumx-base-const("theme", "DARK"),
+                    "state-hover",
+                    "theme-dark",
                     "chip"
                 );
             }
@@ -153,16 +154,16 @@
             &:active,
             &[data-lumx-active] {
                 @include lumx-state-as-selected(
-                    lumx-base-const("state", "ACTIVE"),
-                    lumx-base-const("theme", "DARK"),
+                    "state-active",
+                    "theme-dark",
                     "chip"
                 );
             }
 
             &[data-focus-visible-added] {
                 @include lumx-state-as-selected(
-                    lumx-base-const("state", "FOCUS"),
-                    lumx-base-const("theme", "DARK"),
+                    "state-focus",
+                    "theme-dark",
                     "chip"
                 );
             }
@@ -170,14 +171,14 @@
     }
 }
 
-.#{$lumx-base-prefix}-chip--is-disabled {
+.lumx-chip--is-disabled {
     @include lumx-state-disabled-input;
 }
 
 /* Chip group
    ========================================================================== */
 
-.#{$lumx-base-prefix}-chip-group {
+.lumx-chip-group {
     display: flex;
     flex-wrap: wrap;
     gap: $lumx-chip-group-spacing * 2;

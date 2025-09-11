@@ -4,7 +4,7 @@
    Text field
    ========================================================================== */
 
-.#{$lumx-base-prefix}-text-field {
+.lumx-text-field {
     $self: &;
 
     --lumx-text-field-wrapper-padding-vertical:
@@ -28,13 +28,13 @@
 
         #{$self}--theme-light & {
             @include lumx-text-field-label-color(
-                lumx-base-const("state", "DEFAULT"),
-                lumx-base-const("theme", "LIGHT")
+                "state-default",
+                "theme-light"
             );
         }
 
         #{$self}--theme-dark & {
-            @include lumx-text-field-label-color(lumx-base-const("state", "DEFAULT"), lumx-base-const("theme", "DARK"));
+            @include lumx-text-field-label-color("state-default", "theme-dark");
         }
     }
 
@@ -73,28 +73,28 @@
 
     &__wrapper {
         #{$self}--theme-light & {
-            @include lumx-text-field-wrapper(lumx-base-const("theme", "LIGHT"));
+            @include lumx-text-field-wrapper("theme-light");
         }
 
         #{$self}--theme-dark & {
-            @include lumx-text-field-wrapper(lumx-base-const("theme", "DARK"));
+            @include lumx-text-field-wrapper("theme-dark");
         }
     }
 
     &__input-icon {
         #{$self}--theme-light & {
-            @include lumx-text-field-input-icon(lumx-base-const("theme", "LIGHT"));
+            @include lumx-text-field-input-icon("theme-light");
             @include lumx-text-field-input-content-color(
-                lumx-base-const("state", "DEFAULT"),
-                lumx-base-const("theme", "LIGHT")
+                "state-default",
+                "theme-light"
             );
         }
 
         #{$self}--theme-dark & {
-            @include lumx-text-field-input-icon(lumx-base-const("theme", "DARK"));
+            @include lumx-text-field-input-icon("theme-dark");
             @include lumx-text-field-input-content-color(
-                lumx-base-const("state", "DEFAULT"),
-                lumx-base-const("theme", "DARK")
+                "state-default",
+                "theme-dark"
             );
         }
     }
@@ -105,31 +105,31 @@
 
     &__input-native {
         #{$self}--theme-light & {
-            @include lumx-text-field-input-native(lumx-base-const("theme", "LIGHT"));
+            @include lumx-text-field-input-native("theme-light");
             @include lumx-text-field-input-content-color(
-                lumx-base-const("state", "DEFAULT"),
-                lumx-base-const("theme", "LIGHT")
+                "state-default",
+                "theme-light"
             );
 
             &::placeholder {
                 @include lumx-text-field-input-placeholder-color(
-                    lumx-base-const("state", "DEFAULT"),
-                    lumx-base-const("theme", "LIGHT")
+                    "state-default",
+                    "theme-light"
                 );
             }
         }
 
         #{$self}--theme-dark & {
-            @include lumx-text-field-input-native(lumx-base-const("theme", "DARK"));
+            @include lumx-text-field-input-native("theme-dark");
             @include lumx-text-field-input-content-color(
-                lumx-base-const("state", "DEFAULT"),
-                lumx-base-const("theme", "DARK")
+                "state-default",
+                "theme-dark"
             );
 
             &::placeholder {
                 @include lumx-text-field-input-placeholder-color(
-                    lumx-base-const("state", "DEFAULT"),
-                    lumx-base-const("theme", "DARK")
+                    "state-default",
+                    "theme-dark"
                 );
             }
         }
@@ -164,116 +164,116 @@
    ========================================================================== */
 
 // Disabled state
-.#{$lumx-base-prefix}-text-field--is-disabled {
-    .#{$lumx-base-prefix}-text-field__wrapper {
+.lumx-text-field--is-disabled {
+    .lumx-text-field__wrapper {
         @include lumx-state-disabled-input;
     }
 
-    &.#{$lumx-base-prefix}-text-field--theme-light {
-        .#{$lumx-base-prefix}-text-field__label,
-        .#{$lumx-base-prefix}-text-field__helper {
-            @include lumx-state-disabled-text(lumx-base-const("theme", "LIGHT"));
+    &.lumx-text-field--theme-light {
+        .lumx-text-field__label,
+        .lumx-text-field__helper {
+            @include lumx-state-disabled-text("theme-light");
         }
     }
 
-    &.#{$lumx-base-prefix}-text-field--theme-dark {
-        .#{$lumx-base-prefix}-text-field__label,
-        .#{$lumx-base-prefix}-text-field__helper {
-            @include lumx-state-disabled-text(lumx-base-const("theme", "DARK"));
+    &.lumx-text-field--theme-dark {
+        .lumx-text-field__label,
+        .lumx-text-field__helper {
+            @include lumx-state-disabled-text("theme-dark");
         }
     }
 }
 
 // Hover state
-.#{$lumx-base-prefix}-text-field--theme-light {
-    .#{$lumx-base-prefix}-text-field__wrapper:hover {
-        @include lumx-text-field-wrapper-state(lumx-base-const("state", "HOVER"), lumx-base-const("theme", "LIGHT"));
+.lumx-text-field--theme-light {
+    .lumx-text-field__wrapper:hover {
+        @include lumx-text-field-wrapper-state("state-hover", "theme-light");
     }
 
-    .#{$lumx-base-prefix}-text-field__input-icon,
-    .#{$lumx-base-prefix}-text-field__input-native {
+    .lumx-text-field__input-icon,
+    .lumx-text-field__input-native {
         @include lumx-text-field-input-content-color(
-            lumx-base-const("state", "HOVER"),
-            lumx-base-const("theme", "LIGHT")
+            "state-hover",
+            "theme-light"
         );
     }
 
-    .#{$lumx-base-prefix}-text-field__input-native::placeholder {
+    .lumx-text-field__input-native::placeholder {
         @include lumx-text-field-input-placeholder-color(
-            lumx-base-const("state", "HOVER"),
-            lumx-base-const("theme", "LIGHT")
+            "state-hover",
+            "theme-light"
         );
     }
 }
 
-.#{$lumx-base-prefix}-text-field--theme-dark {
-    .#{$lumx-base-prefix}-text-field__wrapper:hover {
-        @include lumx-text-field-wrapper-state(lumx-base-const("state", "HOVER"), lumx-base-const("theme", "DARK"));
+.lumx-text-field--theme-dark {
+    .lumx-text-field__wrapper:hover {
+        @include lumx-text-field-wrapper-state("state-hover", "theme-dark");
     }
 
-    .#{$lumx-base-prefix}-text-field__input-icon,
-    .#{$lumx-base-prefix}-text-field__input-native {
+    .lumx-text-field__input-icon,
+    .lumx-text-field__input-native {
         @include lumx-text-field-input-content-color(
-            lumx-base-const("state", "HOVER"),
-            lumx-base-const("theme", "DARK")
+            "state-hover",
+            "theme-dark"
         );
     }
 
-    .#{$lumx-base-prefix}-text-field__input-native::placeholder {
+    .lumx-text-field__input-native::placeholder {
         @include lumx-text-field-input-placeholder-color(
-            lumx-base-const("state", "HOVER"),
-            lumx-base-const("theme", "DARK")
+            "state-hover",
+            "theme-dark"
         );
     }
 }
 
 // Focus state
-.#{$lumx-base-prefix}-text-field--theme-light.#{$lumx-base-prefix}-text-field--is-focus {
-    .#{$lumx-base-prefix}-text-field__label {
-        @include lumx-text-field-label-color(lumx-base-const("state", "FOCUS"), lumx-base-const("theme", "LIGHT"));
+.lumx-text-field--theme-light.lumx-text-field--is-focus {
+    .lumx-text-field__label {
+        @include lumx-text-field-label-color("state-focus", "theme-light");
     }
 
-    .#{$lumx-base-prefix}-text-field__wrapper {
-        @include lumx-text-field-wrapper-state(lumx-base-const("state", "FOCUS"), lumx-base-const("theme", "LIGHT"));
+    .lumx-text-field__wrapper {
+        @include lumx-text-field-wrapper-state("state-focus", "theme-light");
     }
 
-    .#{$lumx-base-prefix}-text-field__input-icon,
-    .#{$lumx-base-prefix}-text-field__input-native {
+    .lumx-text-field__input-icon,
+    .lumx-text-field__input-native {
         @include lumx-text-field-input-content-color(
-            lumx-base-const("state", "FOCUS"),
-            lumx-base-const("theme", "LIGHT")
+            "state-focus",
+            "theme-light"
         );
     }
 
-    .#{$lumx-base-prefix}-text-field__input-native::placeholder {
+    .lumx-text-field__input-native::placeholder {
         @include lumx-text-field-input-placeholder-color(
-            lumx-base-const("state", "FOCUS"),
-            lumx-base-const("theme", "LIGHT")
+            "state-focus",
+            "theme-light"
         );
     }
 }
 
-.#{$lumx-base-prefix}-text-field--theme-dark.#{$lumx-base-prefix}-text-field--is-focus {
-    .#{$lumx-base-prefix}-text-field__label {
-        @include lumx-text-field-label-color(lumx-base-const("state", "FOCUS"), lumx-base-const("theme", "DARK"));
+.lumx-text-field--theme-dark.lumx-text-field--is-focus {
+    .lumx-text-field__label {
+        @include lumx-text-field-label-color("state-focus", "theme-dark");
     }
 
-    .#{$lumx-base-prefix}-text-field__wrapper {
-        @include lumx-text-field-wrapper-state(lumx-base-const("state", "FOCUS"), lumx-base-const("theme", "DARK"));
+    .lumx-text-field__wrapper {
+        @include lumx-text-field-wrapper-state("state-focus", "theme-dark");
     }
 
-    .#{$lumx-base-prefix}-text-field__input-icon,
-    .#{$lumx-base-prefix}-text-field__input-native {
+    .lumx-text-field__input-icon,
+    .lumx-text-field__input-native {
         @include lumx-text-field-input-content-color(
-            lumx-base-const("state", "FOCUS"),
-            lumx-base-const("theme", "DARK")
+            "state-focus",
+            "theme-dark"
         );
     }
 
-    .#{$lumx-base-prefix}-text-field__input-native::placeholder {
+    .lumx-text-field__input-native::placeholder {
         @include lumx-text-field-input-placeholder-color(
-            lumx-base-const("state", "FOCUS"),
-            lumx-base-const("theme", "DARK")
+            "state-focus",
+            "theme-dark"
         );
     }
 }
@@ -281,42 +281,42 @@
 /* Text field validity
    ========================================================================== */
 
-.#{$lumx-base-prefix}-text-field--theme-light.#{$lumx-base-prefix}-text-field--is-valid {
-    .#{$lumx-base-prefix}-text-field__wrapper {
-        @include lumx-text-field-wrapper-validity("valid", lumx-base-const("theme", "LIGHT"));
+.lumx-text-field--theme-light.lumx-text-field--is-valid {
+    .lumx-text-field__wrapper {
+        @include lumx-text-field-wrapper-validity("valid", "theme-light");
     }
 
-    .#{$lumx-base-prefix}-text-field__input-validity {
-        @include lumx-text-field-input-validity("valid", lumx-base-const("theme", "LIGHT"));
-    }
-}
-
-.#{$lumx-base-prefix}-text-field--theme-light.#{$lumx-base-prefix}-text-field--has-error {
-    .#{$lumx-base-prefix}-text-field__wrapper {
-        @include lumx-text-field-wrapper-validity("error", lumx-base-const("theme", "LIGHT"));
-    }
-
-    .#{$lumx-base-prefix}-text-field__input-validity {
-        @include lumx-text-field-input-validity("error", lumx-base-const("theme", "LIGHT"));
+    .lumx-text-field__input-validity {
+        @include lumx-text-field-input-validity("valid", "theme-light");
     }
 }
 
-.#{$lumx-base-prefix}-text-field--theme-dark.#{$lumx-base-prefix}-text-field--is-valid {
-    .#{$lumx-base-prefix}-text-field__wrapper {
-        @include lumx-text-field-wrapper-validity("valid", lumx-base-const("theme", "DARK"));
+.lumx-text-field--theme-light.lumx-text-field--has-error {
+    .lumx-text-field__wrapper {
+        @include lumx-text-field-wrapper-validity("error", "theme-light");
     }
 
-    .#{$lumx-base-prefix}-text-field__input-validity {
-        @include lumx-text-field-input-validity("valid", lumx-base-const("theme", "DARK"));
+    .lumx-text-field__input-validity {
+        @include lumx-text-field-input-validity("error", "theme-light");
     }
 }
 
-.#{$lumx-base-prefix}-text-field--theme-dark.#{$lumx-base-prefix}-text-field--has-error {
-    .#{$lumx-base-prefix}-text-field__wrapper {
-        @include lumx-text-field-wrapper-validity("error", lumx-base-const("theme", "DARK"));
+.lumx-text-field--theme-dark.lumx-text-field--is-valid {
+    .lumx-text-field__wrapper {
+        @include lumx-text-field-wrapper-validity("valid", "theme-dark");
     }
 
-    .#{$lumx-base-prefix}-text-field__input-validity {
-        @include lumx-text-field-input-validity("error", lumx-base-const("theme", "DARK"));
+    .lumx-text-field__input-validity {
+        @include lumx-text-field-input-validity("valid", "theme-dark");
+    }
+}
+
+.lumx-text-field--theme-dark.lumx-text-field--has-error {
+    .lumx-text-field__wrapper {
+        @include lumx-text-field-wrapper-validity("error", "theme-dark");
+    }
+
+    .lumx-text-field__input-validity {
+        @include lumx-text-field-input-validity("error", "theme-dark");
     }
 }

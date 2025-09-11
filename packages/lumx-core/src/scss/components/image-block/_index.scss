@@ -2,7 +2,7 @@
    Image block
    ========================================================================== */
 
-.#{$lumx-base-prefix}-image-block {
+.lumx-image-block {
     $self: &;
 
     position: relative;
@@ -54,7 +54,7 @@
    ========================================================================== */
 
 @each $key, $size in $lumx-sizes {
-    .#{$lumx-base-prefix}-image-block--size-#{$key} {
+    .lumx-image-block--size-#{$key} {
         width: $size;
     }
 }

@@ -17,7 +17,7 @@
     @if $has-shape == true {
         $base-color: lumx-color-variant($color, "L6");
 
-        @if $theme == lumx-base-const("theme", "DARK") and $color != "light" {
+        @if $theme == "theme-dark" and $color != "light" {
             // adds a white background for dark theme
             background-color: lumx-color-variant("light", "N");
 

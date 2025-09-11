@@ -1,6 +1,6 @@
 @use "sass:map";
 
 $lumx-button-icon-sizes: (
-    "m": map.get($lumx-sizes, lumx-base-const("size", "XS")),
-    "s": map.get($lumx-sizes, lumx-base-const("size", "XXS")),
+    "s": map.get($lumx-sizes, "xxs"),
+    "m": map.get($lumx-sizes, "xs"),
 );

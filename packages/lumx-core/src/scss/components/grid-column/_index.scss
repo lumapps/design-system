@@ -4,7 +4,7 @@
    Grid Column
    ========================================================================== */
 
-.#{$lumx-base-prefix}-grid-column {
+.lumx-grid-column {
     --lumx-grid-column-gap: var(--lumx-spacing-unit-regular);
     --lumx-grid-column-columns: 1;
     --lumx-grid-column-item-min-width: 100%;

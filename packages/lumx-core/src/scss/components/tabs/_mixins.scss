@@ -4,11 +4,11 @@
 }
 
 @mixin lumx-tabs-links-position($position) {
-    @if $position == lumx-base-const("position", "LEFT") {
+    @if $position == "position-left" {
         justify-content: flex-start;
-    } @else if $position == lumx-base-const("position", "CENTER") {
+    } @else if $position == "position-center" {
         justify-content: center;
-    } @else if $position == lumx-base-const("position", "RIGHT") {
+    } @else if $position == "position-right" {
         justify-content: flex-end;
     }
 }
@@ -89,10 +89,10 @@
     }
 
     &[data-focus-visible-added] {
-        @if $theme == lumx-base-const("theme", "LIGHT") {
-            @include lumx-state-low(lumx-base-const("state", "FOCUS"), "dark");
-        } @else if $theme == lumx-base-const("theme", "DARK") {
-            @include lumx-state-low(lumx-base-const("state", "FOCUS"), "light");
+        @if $theme == "theme-light" {
+            @include lumx-state-low("state-focus", "dark");
+        } @else if $theme == "theme-dark" {
+            @include lumx-state-low("state-focus", "light");
         }
     }
 }

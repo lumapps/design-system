@@ -3,14 +3,14 @@
    ========================================================================== */
 
 @each $key, $style in $lumx-typography-interface {
-    .#{$lumx-base-prefix}-typography-#{$key},
-    .#{$lumx-base-prefix}-typography-interface-#{$key} {
+    .lumx-typography-#{$key},
+    .lumx-typography-interface-#{$key} {
         @include lumx-typography($key);
     }
 }
 
 @each $key, $style in $lumx-typography-custom {
-    .#{$lumx-base-prefix}-typography-custom-#{$key} {
+    .lumx-typography-custom-#{$key} {
         @include lumx-typography($key, "custom");
     }
 }

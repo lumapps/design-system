@@ -22,7 +22,7 @@
 /* Circle
    ========================================================================== */
 
-.#{$lumx-base-prefix}-skeleton-circle {
+.lumx-skeleton-circle {
     border-radius: 50%;
 
     &--theme-light {
@@ -35,14 +35,14 @@
 }
 
 @each $key, $size in $lumx-sizes {
-    .#{$lumx-base-prefix}-skeleton-circle--size-#{$key} {
+    .lumx-skeleton-circle--size-#{$key} {
         width: map.get($lumx-sizes, $key);
         height: map.get($lumx-sizes, $key);
     }
 }
 
 @each $key, $color in $lumx-color-palette {
-    .#{$lumx-base-prefix}-skeleton-circle--color-#{$key} {
+    .lumx-skeleton-circle--color-#{$key} {
         background-color: lumx-color-variant($key, "L5");
     }
 }
@@ -50,7 +50,7 @@
 /* Rectangle
    ========================================================================== */
 
-.#{$lumx-base-prefix}-skeleton-rectangle {
+.lumx-skeleton-rectangle {
     &--variant-rounded {
         border-radius: var(--lumx-border-radius);
     }
@@ -65,27 +65,27 @@
 }
 
 @each $key, $size in $lumx-sizes {
-    .#{$lumx-base-prefix}-skeleton-rectangle--width-#{$key} {
+    .lumx-skeleton-rectangle--width-#{$key} {
         width: map.get($lumx-sizes, $key);
     }
 
-    .#{$lumx-base-prefix}-skeleton-rectangle--height-#{$key} {
+    .lumx-skeleton-rectangle--height-#{$key} {
         height: map.get($lumx-sizes, $key);
     }
 
-    .#{$lumx-base-prefix}-skeleton-rectangle--variant-pill.#{$lumx-base-prefix}-skeleton-rectangle--height-#{$key} {
+    .lumx-skeleton-rectangle--variant-pill.lumx-skeleton-rectangle--height-#{$key} {
         border-radius: math.div(map.get($lumx-sizes, $key), 2);
     }
 }
 
 @each $key, $aspect-ratio in $lumx-thumbnail-aspect-ratio {
-    .#{$lumx-base-prefix}-skeleton-rectangle--aspect-ratio-#{$key} .#{$lumx-base-prefix}-skeleton-rectangle__inner {
+    .lumx-skeleton-rectangle--aspect-ratio-#{$key} .lumx-skeleton-rectangle__inner {
         padding-top: $aspect-ratio;
     }
 }
 
 @each $key, $color in $lumx-color-palette {
-    .#{$lumx-base-prefix}-skeleton-rectangle--color-#{$key} {
+    .lumx-skeleton-rectangle--color-#{$key} {
         background-color: lumx-color-variant($key, "L5");
     }
 }
@@ -105,7 +105,7 @@ $typography-skeleton-size: (
     "overline": 8px,
 );
 
-.#{$lumx-base-prefix}-skeleton-typography {
+.lumx-skeleton-typography {
     $self: &;
 
     display: flex;
@@ -127,17 +127,17 @@ $typography-skeleton-size: (
 }
 
 @each $key, $style in $lumx-typography-interface {
-    .#{$lumx-base-prefix}-skeleton-typography--typography-#{$key} {
+    .lumx-skeleton-typography--typography-#{$key} {
         height: map.get(map.get($lumx-typography-interface, $key), "line-height");
     }
 
-    .#{$lumx-base-prefix}-skeleton-typography--typography-#{$key} .#{$lumx-base-prefix}-skeleton-typography__inner {
+    .lumx-skeleton-typography--typography-#{$key} .lumx-skeleton-typography__inner {
         height: map.get($typography-skeleton-size, $key);
     }
 }
 
 @each $key, $color in $lumx-color-palette {
-    .#{$lumx-base-prefix}-skeleton-typography--color-#{$key} .#{$lumx-base-prefix}-skeleton-typography__inner {
+    .lumx-skeleton-typography--color-#{$key} .lumx-skeleton-typography__inner {
         background-color: lumx-color-variant($key, "L5");
     }
 }

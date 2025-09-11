@@ -25,7 +25,7 @@
 }
 
 @mixin lumx-list-item-clickable() {
-    @include lumx-state(lumx-base-const("state", "DEFAULT"), lumx-base-const("emphasis", "LOW"), "dark");
+    @include lumx-state("state-default", "emphasis-low", "dark");
 
     cursor: pointer;
 
@@ -37,37 +37,37 @@
     &:hover,
     &[data-lumx-hover],
     &[data-focus-visible-added] {
-        @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "LOW"), "dark");
+        @include lumx-state("state-hover", "emphasis-low", "dark");
     }
 
     &:active,
     &[data-lumx-active], {
-        @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "LOW"), "dark");
+        @include lumx-state("state-active", "emphasis-low", "dark");
     }
 }
 
 @mixin lumx-list-item-highlighted() {
     cursor: pointer;
 
-    @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "LOW"), "dark");
+    @include lumx-state("state-hover", "emphasis-low", "dark");
 
     &:active {
-        @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "LOW"), "dark");
+        @include lumx-state("state-active", "emphasis-low", "dark");
     }
 }
 
 @mixin lumx-list-item-selected($component: null) {
-    @include lumx-state-as-selected(lumx-base-const("state", "DEFAULT"), lumx-base-const("theme", "LIGHT"), $component);
+    @include lumx-state-as-selected("state-default", "theme-light", $component);
 
     &:hover,
     &[data-lumx-hover],
     &[data-focus-visible-added] {
-        @include lumx-state-as-selected(lumx-base-const("state", "HOVER"), lumx-base-const("theme", "LIGHT"), $component);
+        @include lumx-state-as-selected("state-hover", "theme-light", $component);
     }
 
     &:active,
     &[data-lumx-active], {
-        @include lumx-state-as-selected(lumx-base-const("state", "ACTIVE"), lumx-base-const("theme", "LIGHT"), $component);
+        @include lumx-state-as-selected("state-active", "theme-light", $component);
     }
 }
 
@@ -81,10 +81,10 @@
     @include lumx-list-item-edge($size);
 
     @if $size == "tiny" {
-        width: map.get($lumx-sizes, lumx-base-const("size", "S"));
+        width: map.get($lumx-sizes, "s");
         margin-right: $lumx-spacing-unit;
     } @else {
-        width: map.get($lumx-sizes, lumx-base-const("size", "M"));
+        width: map.get($lumx-sizes, "m");
         margin-right: $lumx-spacing-unit * 2;
     }
 }
@@ -115,7 +115,7 @@
 }
 
 @mixin lumx-list-subheader-icon {
-    @include lumx-icon-size(lumx-base-const("size", "XXS"));
+    @include lumx-icon-size("xxs");
 
     margin-right: $lumx-spacing-unit;
 }

@@ -5,7 +5,7 @@
 @each $property-namespace, $property in $lumx-spacing-properties {
     @each $direction-namespace, $direction-rules in $lumx-spacing-directions {
         @each $size-namespace, $size in $lumx-spacing-sizes {
-            .#{$lumx-base-prefix}-spacing-#{$property-namespace}#{$direction-namespace}#{$size-namespace} {
+            .lumx-spacing-#{$property-namespace}#{$direction-namespace}#{$size-namespace} {
                 @each $direction in $direction-rules {
                     #{$property}#{$direction}: $size !important;
                 }

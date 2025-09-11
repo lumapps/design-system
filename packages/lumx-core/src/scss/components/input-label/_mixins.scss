@@ -4,9 +4,9 @@
     font-weight: var(--lumx-material-input-label-font-weight);
     line-height: var(--lumx-material-input-label-line-height);
 
-    @if $theme == lumx-base-const("theme", "LIGHT") {
+    @if $theme == "theme-light" {
         color: lumx-color-variant("dark", "N");
-    } @else if $theme == lumx-base-const("theme", "DARK") {
+    } @else if $theme == "theme-dark" {
         color: lumx-color-variant("light", "N");
     }
 }
