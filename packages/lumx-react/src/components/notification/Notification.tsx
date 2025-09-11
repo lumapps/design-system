@@ -130,7 +130,6 @@ export const Notification = forwardRef<NotificationProps, HTMLDivElement>((props
                     </div>
                 )}
             </div>
-            );
         </Portal>
     );
 });
