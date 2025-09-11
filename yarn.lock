@@ -3498,7 +3498,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lumx/angularjs@^3.17.0, @lumx/angularjs@workspace:packages/lumx-angularjs":
+"@lumx/angularjs@^3.17.1, @lumx/angularjs@workspace:packages/lumx-angularjs":
   version: 0.0.0-use.local
   resolution: "@lumx/angularjs@workspace:packages/lumx-angularjs"
   dependencies:
@@ -3511,8 +3511,8 @@ __metadata:
     "@babel/plugin-proposal-private-property-in-object": ^7.21.11
     "@babel/preset-env": ^7.26.9
     "@babel/preset-typescript": ^7.26.0
-    "@lumx/core": ^3.17.0
-    "@lumx/icons": ^3.17.0
+    "@lumx/core": ^3.17.1
+    "@lumx/icons": ^3.17.1
     babel-plugin-angularjs-annotate: ^0.10.0
     clean-webpack-plugin: ^4.0.0
     copy-webpack-plugin: ^11.0.0
@@ -3531,7 +3531,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@lumx/core@^3.17.0, @lumx/core@workspace:packages/lumx-core":
+"@lumx/core@^3.17.1, @lumx/core@workspace:packages/lumx-core":
   version: 0.0.0-use.local
   resolution: "@lumx/core@workspace:packages/lumx-core"
   dependencies:
@@ -3558,7 +3558,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@lumx/icons@^3.17.0, @lumx/icons@workspace:packages/lumx-icons":
+"@lumx/icons@^3.17.1, @lumx/icons@workspace:packages/lumx-icons":
   version: 0.0.0-use.local
   resolution: "@lumx/icons@workspace:packages/lumx-icons"
   dependencies:
@@ -3595,7 +3595,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@lumx/react@^3.17.0, @lumx/react@workspace:packages/lumx-react":
+"@lumx/react@^3.17.1, @lumx/react@workspace:packages/lumx-react":
   version: 0.0.0-use.local
   resolution: "@lumx/react@workspace:packages/lumx-react"
   dependencies:
@@ -3611,8 +3611,8 @@ __metadata:
     "@babel/preset-react": ^7.26.3
     "@babel/preset-typescript": ^7.26.0
     "@chromatic-com/storybook": ^4.1.1
-    "@lumx/core": ^3.17.0
-    "@lumx/icons": ^3.17.0
+    "@lumx/core": ^3.17.1
+    "@lumx/icons": ^3.17.1
     "@popperjs/core": ^2.5.4
     "@rollup/plugin-babel": ^6.0.4
     "@rollup/plugin-commonjs": ^19.0.2
@@ -12035,7 +12035,7 @@ __metadata:
     eslint-config-prettier: ^9.1.0
     eslint-plugin-import: 2.26.0
     eslint-plugin-jsx-a11y: ^6.8.0
-    eslint-plugin-lumapps: ^3.17.0
+    eslint-plugin-lumapps: ^3.17.1
     eslint-plugin-prettier: 5.1.3
     eslint-plugin-react: ^7.29.4
     eslint-plugin-react-hooks: 4.6.0
@@ -12209,7 +12209,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-lumapps@^3.17.0, eslint-plugin-lumapps@workspace:dev-packages/eslint-plugin-lumapps":
+"eslint-plugin-lumapps@^3.17.1, eslint-plugin-lumapps@workspace:dev-packages/eslint-plugin-lumapps":
   version: 0.0.0-use.local
   resolution: "eslint-plugin-lumapps@workspace:dev-packages/eslint-plugin-lumapps"
   languageName: unknown
@@ -18962,10 +18962,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "lumx-site-demo@workspace:packages/site-demo"
   dependencies:
-    "@lumx/angularjs": ^3.17.0
-    "@lumx/core": ^3.17.0
-    "@lumx/icons": ^3.17.0
-    "@lumx/react": ^3.17.0
+    "@lumx/angularjs": ^3.17.1
+    "@lumx/core": ^3.17.1
+    "@lumx/icons": ^3.17.1
+    "@lumx/react": ^3.17.1
     "@mdx-js/mdx": ^1.6.22
     "@mdx-js/react": ^1.6.22
     "@reach/router": ^1.2.1

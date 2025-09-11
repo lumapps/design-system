@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.17.1][] - 2025-09-11
+
 ### Fixed
 
 -   `Notification`: remove unwanted `);` string in render
@@ -2316,7 +2318,8 @@ _Failed released_
 [3.7.0]: https://github.com/lumapps/design-system/compare/v3.6.8...v3.7.0
 [3.6.8]: https://github.com/lumapps/design-system/compare/v3.6.7...v3.6.8
 [3.6.7]: https://github.com/lumapps/design-system/tree/v3.6.7
-[Unreleased]: https://github.com/lumapps/design-system/compare/3.17.0...HEAD
+[Unreleased]: https://github.com/lumapps/design-system/compare/3.17.1...HEAD
+[3.17.1]: https://github.com/lumapps/design-system/compare/3.17.0...3.17.1
 [3.17.0]: https://github.com/lumapps/design-system/compare/3.16.0...3.17.0
 [3.16.0]: https://github.com/lumapps/design-system/compare/v3.15.1...3.16.0
 [3.15.1]: https://github.com/lumapps/design-system/compare/v3.15.0...v3.15.1
