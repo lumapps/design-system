@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   `ExpansionPanel`: added `closeMode` to `"unmount"` or `"hide"` children when the item is closed.
+
 ## [3.17.2][] - 2025-10-01
 
 ### Fixed

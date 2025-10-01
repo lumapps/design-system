@@ -7,7 +7,7 @@ import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
 import isEmpty from 'lodash/isEmpty';
 
 import { ColorPalette, DragHandle, Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
-import { GenericProps, HasTheme, isComponent } from '@lumx/react/utils/type';
+import { GenericProps, HasCloseMode, HasTheme, isComponent } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { partitionMulti } from '@lumx/react/utils/partitionMulti';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
@@ -17,7 +17,7 @@ import { IS_BROWSER } from '@lumx/react/constants';
 /**
  * Defines the props of the component.
  */
-export interface ExpansionPanelProps extends GenericProps, HasTheme {
+export interface ExpansionPanelProps extends GenericProps, HasCloseMode, HasTheme {
     /** Whether the expansion panel has a background. */
     hasBackground?: boolean;
     /** Whether the header has a divider. */
@@ -52,7 +52,9 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
 /**
  * Component default props.
  */
-const DEFAULT_PROPS: Partial<ExpansionPanelProps> = {};
+const DEFAULT_PROPS: Partial<ExpansionPanelProps> = {
+    closeMode: 'unmount',
+};
 
 const isDragHandle = isComponent(DragHandle);
 const isHeader = isComponent('header');
@@ -69,6 +71,7 @@ export const ExpansionPanel = forwardRef<ExpansionPanelProps, HTMLDivElement>((p
     const defaultTheme = useTheme() || Theme.light;
     const {
         className,
+        closeMode = DEFAULT_PROPS.closeMode,
         children: anyChildren,
         hasBackground,
         hasHeaderDivider,
@@ -127,32 +130,32 @@ export const ExpansionPanel = forwardRef<ExpansionPanelProps, HTMLDivElement>((p
 
     const wrapperRef = useRef<HTMLDivElement>(null);
 
-    // Children visible while the open/close transition is running
+    // Children stay visible while the open/close transition is running
     const [isChildrenVisible, setChildrenVisible] = React.useState(isOpen);
 
     const isOpenRef = React.useRef(isOpen);
     React.useEffect(() => {
-        if (isOpen) {
+        if (isOpen || closeMode === 'hide') {
             setChildrenVisible(true);
         } else if (!IS_BROWSER) {
             // Outside a browser we can't wait for the transition
             setChildrenVisible(false);
         }
         isOpenRef.current = isOpen;
-    }, [isOpen]);
+    }, [closeMode, isOpen]);
 
-    // Change children visibility on transition end
+    // Change children's visibility on the transition end
     React.useEffect(() => {
         const { current: wrapper } = wrapperRef;
         if (!IS_BROWSER || !wrapper) {
             return undefined;
         }
         const onTransitionEnd = () => {
-            setChildrenVisible(isOpenRef.current);
+            setChildrenVisible(isOpenRef.current || closeMode === 'hide');
         };
         wrapper.addEventListener('transitionend', onTransitionEnd);
         return () => wrapper.removeEventListener('transitionend', onTransitionEnd);
-    }, []);
+    }, [closeMode]);
 
     return (
         <section ref={ref} {...forwardedProps} className={rootClassName}>

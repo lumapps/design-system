@@ -134,11 +134,11 @@ describe(`<${ExpansionPanel.displayName}>`, () => {
             expect(onToggleOpen).toHaveBeenCalledWith(false, expect.anything());
         });
 
-        it('should hide children after toggling the expansion panel', async () => {
+        it('should unmount children after toggling the expansion panel', async () => {
             const user = userEvent.setup();
             const { query } = setup({}, { controlled: true });
 
-            // Content is not visible by default
+            // Content is not mounted by default
             expect(query.content()).not.toBeInTheDocument();
 
             await user.click(query.header() as any);
@@ -148,6 +148,25 @@ describe(`<${ExpansionPanel.displayName}>`, () => {
             await user.click(query.header() as any);
 
             expect(query.content()).not.toBeInTheDocument();
+        });
+
+        it('should hide children after toggling the expansion panel', async () => {
+            const user = userEvent.setup();
+            const { element, query } = setup({ closeMode: 'hide' }, { controlled: true });
+
+            // Content is hidden (but mounted) by default
+            expect(query.content()).toBeInTheDocument();
+            expect(element).toHaveClass(`${CLASSNAME}--is-close`);
+
+            await user.click(query.header() as any);
+
+            expect(query.content()).toBeInTheDocument();
+            expect(element).toHaveClass(`${CLASSNAME}--is-open`);
+
+            await user.click(query.header() as any);
+
+            expect(query.content()).toBeInTheDocument();
+            expect(element).toHaveClass(`${CLASSNAME}--is-close`);
         });
     });
 

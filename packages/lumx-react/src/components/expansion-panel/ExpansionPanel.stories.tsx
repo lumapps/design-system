@@ -18,7 +18,11 @@ export default {
     component: ExpansionPanel,
     args: {
         'toggleButtonProps.label': 'Toggle',
-        children: 'Content',
+        children: (
+            <Text as="p" typography="body1" color="dark-L2" className="lumx-spacing-padding-big">
+                content
+            </Text>
+        ),
         label: 'Label',
     },
     decorators: [withNestedProps()],
@@ -75,5 +79,13 @@ export const Nested = {
                 </ExpansionPanel>
             </ExpansionPanel>
         );
+    },
+};
+
+/** Hide component instead of unmounting it */
+export const HideChildren = {
+    args: {
+        hasBackground: true,
+        closeMode: 'hide',
     },
 };
