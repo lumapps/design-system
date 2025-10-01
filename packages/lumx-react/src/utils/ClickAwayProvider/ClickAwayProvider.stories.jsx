@@ -1,8 +1,11 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import { Button } from '@lumx/react';
-import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 import React, { useCallback, useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
+import { Button, Popover } from '@lumx/react';
+import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
+import { initDemoShadowDOMPortal } from '@lumx/react/stories/utils/initDemoShadowDOMPortal';
+import { PortalProvider, Portal } from '@lumx/react/utils/Portal';
+import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
 
 export default {
     title: 'LumX components/ClickAwayProvider',
@@ -15,16 +18,15 @@ export default {
 // eslint-disable-next-line react/display-name
 const Card = React.forwardRef(({ top, children, close }, ref) => (
     <ClickAwayProvider callback={close} childrenRefs={useRef([ref])}>
-        {createPortal(
+        <Portal>
             <div
                 className="lumx-spacing-padding"
                 ref={ref}
                 style={{ position: 'absolute', top, border: '1px solid red' }}
             >
                 {children}
-            </div>,
-            document.body,
-        )}
+            </div>
+        </Portal>
     </ClickAwayProvider>
 ));
 
@@ -56,3 +58,21 @@ export const NestedClickAway = () => (
         <ButtonWithCard level={0} />
     </>
 );
+
+/**
+ * Testing close on click away for a popover rendered in a shadow DOM
+ */
+export const InShadowDOM = () => {
+    const [isOpen, close, , toggle] = useBooleanState(false);
+    const anchorRef = React.useRef();
+    return (
+        <PortalProvider value={initDemoShadowDOMPortal}>
+            <Button ref={anchorRef} onClick={toggle}>
+                Toggle popover
+            </Button>
+            <Popover isOpen={isOpen} anchorRef={anchorRef} onClose={close} closeOnClickAway>
+                <p style={{ padding: 16, border: '1px solid gray' }}>Popover in shadow DOM</p>
+            </Popover>
+        </PortalProvider>
+    );
+};
