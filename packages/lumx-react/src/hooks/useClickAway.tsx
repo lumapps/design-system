@@ -34,7 +34,8 @@ export function useClickAway({ callback, childrenRefs }: ClickAwayParameters): v
             return undefined;
         }
         const listener: EventListener = (evt) => {
-            if (isClickAway(evt.target as HTMLElement, currentRefs)) {
+            const target = evt.composedPath?.()[0] || evt.target;
+            if (isClickAway(target as HTMLElement, currentRefs)) {
                 callback(evt);
             }
         };

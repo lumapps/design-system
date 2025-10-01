@@ -1,34 +1,23 @@
-import { Button } from '@lumx/react';
 import React from 'react';
+import { Button } from '@lumx/react';
+import { initDemoShadowDOMPortal } from '@lumx/react/stories/utils/initDemoShadowDOMPortal';
 import { PortalProvider } from './PortalProvider';
 import { Portal } from './Portal';
 
 export default {
     title: 'LumX components/PortalProvider',
     component: PortalProvider,
-};
-
-const initShadowDOMPortal = () => {
-    const div = document.createElement('div');
-    document.body.appendChild(div);
-    const container = div.attachShadow({ mode: 'closed' });
-    const style = document.createElement('style');
-    style.innerText = `button { color: red; }`;
-    container.appendChild(style);
-    return { container, teardown: () => div.remove() };
+    args: { enabled: true },
+    parameters: { chromatic: { disable: true } },
 };
 
 /**
  * Demonstrate how to customize portals to render into a custom shadow root
  */
-export const RenderInShadowDOM = {
-    args: { enabled: true },
-    render: ({ enabled }) => (
-        <PortalProvider value={initShadowDOMPortal}>
-            <Portal enabled={enabled}>
-                <Button>My button {!enabled && 'not'} in a shadow DOM portal</Button>
-            </Portal>
-        </PortalProvider>
-    ),
-    parameters: { chromatic: { disable: true } },
-};
+export const RenderInShadowDOM = ({ enabled }) => (
+    <PortalProvider value={initDemoShadowDOMPortal}>
+        <Portal enabled={enabled}>
+            <Button>My button {!enabled && 'not'} in a shadow DOM portal</Button>
+        </Portal>
+    </PortalProvider>
+);
