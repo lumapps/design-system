@@ -33,7 +33,7 @@
         "update-version-changelog": "yarn version-changelog ../../CHANGELOG.md"
     },
     "sideEffects": false,
-    "version": "3.17.2",
+    "version": "3.18.0",
     "devDependencies": {
         "@rollup/plugin-commonjs": "^19.0.2",
         "@rollup/plugin-terser": "^0.4.4",
