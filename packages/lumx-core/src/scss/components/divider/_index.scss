@@ -2,38 +2,38 @@
    Divider
    ========================================================================== */
 
-.#{$lumx-base-prefix}-divider {
+.lumx-divider {
     &--theme-light {
-        @include lumx-divider(lumx-base-const("theme", "LIGHT"));
+        @include lumx-divider("theme-light");
     }
 
     &--theme-dark {
-        @include lumx-divider(lumx-base-const("theme", "DARK"));
+        @include lumx-divider("theme-dark");
     }
 }
 
-.#{$lumx-base-prefix}-has-divider {
+.lumx-has-divider {
     @include lumx-has-divider;
 
     &--theme-light {
-        @include lumx-divider-color(lumx-base-const("theme", "LIGHT"));
+        @include lumx-divider-color("theme-light");
     }
 
     &--theme-dark {
-        @include lumx-divider-color(lumx-base-const("theme", "DARK"));
+        @include lumx-divider-color("theme-dark");
     }
 }
 
 @each $key, $positon in $lumx-divider-positions {
-    .#{$lumx-base-prefix}-has-divider.#{$lumx-base-prefix}-has-divider--position-#{$key} {
+    .lumx-has-divider.lumx-has-divider--position-#{$key} {
         @include lumx-divider-position($positon);
 
         &--theme-light {
-            @include lumx-divider-color(lumx-base-const("theme", "LIGHT"), $positon);
+            @include lumx-divider-color("theme-light", $positon);
         }
 
         &--theme-dark {
-            @include lumx-divider-color(lumx-base-const("theme", "DARK"), $positon);
+            @include lumx-divider-color("theme-dark", $positon);
         }
     }
 }

@@ -2,7 +2,7 @@
    Expansion panel
    ========================================================================== */
 
-.#{$lumx-base-prefix}-expansion-panel {
+.lumx-expansion-panel {
     $self: &;
 
     border-radius: $lumx-expansion-panel-radius;
@@ -22,11 +22,11 @@
         align-items: center;
 
         #{$self}--theme-light#{$self}--is-open#{$self}--has-header-divider & {
-            @include lumx-has-divider(lumx-base-const("theme", "LIGHT"));
+            @include lumx-has-divider("theme-light");
         }
 
         #{$self}--theme-dark#{$self}--is-open#{$self}--has-header-divider & {
-            @include lumx-has-divider(lumx-base-const("theme", "DARK"));
+            @include lumx-has-divider("theme-dark");
         }
     }
 

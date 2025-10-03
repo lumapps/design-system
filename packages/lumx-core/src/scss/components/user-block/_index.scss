@@ -4,7 +4,7 @@
    User block
    ========================================================================== */
 
-.#{$lumx-base-prefix}-user-block {
+.lumx-user-block {
     $self: &;
 
     display: flex;
@@ -55,7 +55,6 @@
         #{$self}--size-xs & {
             @include lumx-typography("body1");
         }
-
 
         @include lumx-typography("subtitle1");
 
@@ -110,7 +109,7 @@
 
     &__action,
     &__actions,
-    &__after  {
+    &__after {
         margin-top: $lumx-spacing-unit * 2;
     }
 }

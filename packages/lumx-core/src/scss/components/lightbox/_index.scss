@@ -4,7 +4,7 @@
    Lightbox
    ========================================================================== */
 
-.#{$lumx-base-prefix}-lightbox {
+.lumx-lightbox {
     position: fixed;
     top: 0;
     right: 0;
@@ -40,10 +40,10 @@
 
     &__wrapper {
         position: absolute;
-        top: map.get($lumx-sizes, lumx-base-const("size", "L"));
-        right: map.get($lumx-sizes, lumx-base-const("size", "L"));
-        bottom: map.get($lumx-sizes, lumx-base-const("size", "L"));
-        left: map.get($lumx-sizes, lumx-base-const("size", "L"));
+        top: map.get($lumx-sizes, "l");
+        right: map.get($lumx-sizes, "l");
+        bottom: map.get($lumx-sizes, "l");
+        left: map.get($lumx-sizes, "l");
         display: flex;
         flex-direction: column;
     }

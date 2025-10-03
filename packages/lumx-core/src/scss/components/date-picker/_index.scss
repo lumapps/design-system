@@ -6,7 +6,7 @@
    Date picker
    ========================================================================== */
 
-.#{$lumx-base-prefix}-date-picker {
+.lumx-date-picker {
     &__month {
         @include lumx-typography("subtitle1");
 
@@ -28,7 +28,7 @@
     &__days-wrapper {
         display: flex;
         flex-wrap: wrap;
-        width: map.get($lumx-sizes, lumx-base-const("size", "M")) * 7;
+        width: map.get($lumx-sizes, "m") * 7;
     }
 
     &__day-wrapper {
@@ -37,7 +37,7 @@
         align-items: center;
         justify-content: center;
         max-width: #{math.div(100, 7) + "%"};
-        height: map.get($lumx-sizes, lumx-base-const("size", "M"));
+        height: map.get($lumx-sizes, "m");
     }
 
     &__week-day {
@@ -50,11 +50,11 @@
     &__month-day {
         @include lumx-state-transition;
         @include lumx-button-base;
-        @include lumx-button-color(lumx-base-const("emphasis", "LOW"), "dark");
+        @include lumx-button-color("emphasis-low", "dark");
 
-        width: map.get($lumx-sizes, lumx-base-const("size", "M"));
-        height: map.get($lumx-sizes, lumx-base-const("size", "M"));
-        line-height: map.get($lumx-sizes, lumx-base-const("size", "M"));
+        width: map.get($lumx-sizes, "m");
+        height: map.get($lumx-sizes, "m");
+        line-height: map.get($lumx-sizes, "m");
         text-align: center;
         border-radius: 50%;
 

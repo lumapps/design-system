@@ -2,7 +2,7 @@
    List
    ========================================================================== */
 
-.#{$lumx-base-prefix}-list {
+.lumx-list {
     @include lumx-list;
 }
 
@@ -10,17 +10,17 @@
    ========================================================================== */
 
 @each $key, $size in $lumx-list-item-sizes {
-    .#{$lumx-base-prefix}-list-item--size-#{$key} {
-        .#{$lumx-base-prefix}-list-item__wrapper,
-        .#{$lumx-base-prefix}-list-item__link {
+    .lumx-list-item--size-#{$key} {
+        .lumx-list-item__wrapper,
+        .lumx-list-item__link {
             @include lumx-list-item($key);
         }
 
-        .#{$lumx-base-prefix}-list-item__before {
+        .lumx-list-item__before {
             @include lumx-list-item-before($key);
         }
 
-        .#{$lumx-base-prefix}-list-item__after {
+        .lumx-list-item__after {
             @include lumx-list-item-after($key);
         }
     }
@@ -29,7 +29,7 @@
 /* Item link
    ========================================================================== */
 
-.#{$lumx-base-prefix}-list-item {
+.lumx-list-item {
     &__link {
         @include lumx-list-item-clickable;
     }
@@ -51,13 +51,13 @@
 /* Item spacing
    ========================================================================== */
 
-.#{$lumx-base-prefix}-list-item__link,
-.#{$lumx-base-prefix}-list-item__wrapper {
-    .#{$lumx-base-prefix}-list--item-padding-big & {
+.lumx-list-item__link,
+.lumx-list-item__wrapper {
+    .lumx-list--item-padding-big & {
         @include lumx-list-item-padding("big");
     }
 
-    .#{$lumx-base-prefix}-list--item-padding-huge & {
+    .lumx-list--item-padding-huge & {
         @include lumx-list-item-padding("huge");
     }
 }
@@ -65,25 +65,25 @@
 /* Item content
    ========================================================================== */
 
-.#{$lumx-base-prefix}-list-item__content {
+.lumx-list-item__content {
     @include lumx-list-item-content;
 }
 
 /* Subheader
    ========================================================================== */
 
-.#{$lumx-base-prefix}-list-subheader {
+.lumx-list-subheader {
     @include lumx-list-subheader;
 
     i {
         @include lumx-list-subheader-icon;
     }
 
-    .#{$lumx-base-prefix}-list--item-padding-big & {
+    .lumx-list--item-padding-big & {
         @include lumx-list-item-padding("big");
     }
 
-    .#{$lumx-base-prefix}-list--item-padding-huge & {
+    .lumx-list--item-padding-huge & {
         @include lumx-list-item-padding("huge");
     }
 }
@@ -91,6 +91,6 @@
 /* Divider
    ========================================================================== */
 
-.#{$lumx-base-prefix}-list-divider {
+.lumx-list-divider {
     @include lumx-list-divider;
 }

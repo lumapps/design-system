@@ -1,22 +1,22 @@
 /* Align
    ========================================================================== */
 
-.#{$lumx-base-prefix}-base-text-left {
+.lumx-base-text-left {
     text-align: left;
 }
 
-.#{$lumx-base-prefix}-base-text-right {
+.lumx-base-text-right {
     text-align: right;
 }
 
-.#{$lumx-base-prefix}-base-text-center {
+.lumx-base-text-center {
     text-align: center;
 }
 
 /* Display
    ========================================================================== */
 
-.#{$lumx-base-prefix}-base-display-block {
+.lumx-base-display-block {
     display: block;
 }
 
@@ -35,6 +35,7 @@
 }
 
 /** Need to remove the margin style on popper elements or else we get warnings in the console */
-.lumx-popover.visually-hidden, .lumx-tooltip.visually-hidden {
+.lumx-popover.visually-hidden,
+.lumx-tooltip.visually-hidden {
     margin: revert !important;
 }

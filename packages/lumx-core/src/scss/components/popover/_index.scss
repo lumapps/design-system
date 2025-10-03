@@ -5,7 +5,7 @@
    Popover
    ========================================================================== */
 
-.#{$lumx-base-prefix}-popover {
+.lumx-popover {
     $self: &;
 
     z-index: map.get($lumx-base-layers, "high");
@@ -79,7 +79,7 @@
    ========================================================================== */
 
 @each $depth, $shadow in $lumx-elevation-shadows {
-    .#{$lumx-base-prefix}-popover--elevation-#{$depth} {
+    .lumx-popover--elevation-#{$depth} {
         @include lumx-elevation-drop-shadow($depth);
     }
 }

@@ -4,7 +4,7 @@
    Avatar
    ========================================================================== */
 
-.#{$lumx-base-prefix}-avatar {
+.lumx-avatar {
     position: relative;
     background-repeat: no-repeat;
     background-position: center;
@@ -35,7 +35,7 @@
    ========================================================================== */
 
 @each $key, $size in $lumx-sizes {
-    .#{$lumx-base-prefix}-avatar--size-#{$key} {
+    .lumx-avatar--size-#{$key} {
         width: $size;
         height: $size;
     }

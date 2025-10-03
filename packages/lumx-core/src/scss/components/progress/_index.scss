@@ -4,7 +4,7 @@
    Progress
    ========================================================================== */
 
-.#{$lumx-base-prefix}-progress {
+.lumx-progress {
     &--variant-circular {
         width: $lumx-progress-circular-size;
         height: $lumx-progress-circular-size;
@@ -14,7 +14,7 @@
 /* Circular
    ========================================================================== */
 
-.#{$lumx-base-prefix}-progress-circular {
+.lumx-progress-circular {
     position: relative;
     width: $lumx-progress-circular-size;
     height: $lumx-progress-circular-size;
@@ -37,15 +37,15 @@
 
     &--theme-light &__double-bounce1,
     &--theme-light &__double-bounce2,
-    .#{$lumx-base-prefix}-progress--theme-light &__double-bounce1,
-    .#{$lumx-base-prefix}-progress--theme-light &__double-bounce2 {
+    .lumx-progress--theme-light &__double-bounce1,
+    .lumx-progress--theme-light &__double-bounce2 {
         background-color: lumx-color-variant("primary", "L3");
     }
 
     &--theme-dark &__double-bounce1,
     &--theme-dark &__double-bounce2,
-    .#{$lumx-base-prefix}-progress--theme-dark &__double-bounce1,
-    .#{$lumx-base-prefix}-progress--theme-dark &__double-bounce2 {
+    .lumx-progress--theme-dark &__double-bounce1,
+    .lumx-progress--theme-dark &__double-bounce2 {
         background-color: lumx-color-variant("light", "L3");
     }
 
@@ -75,18 +75,18 @@
     }
 
     &--theme-light &__path,
-    .#{$lumx-base-prefix}-progress--theme-light &__path {
+    .lumx-progress--theme-light &__path {
         stroke: lumx-color-variant("primary", "N");
     }
 
     &--theme-dark &__path,
-    .#{$lumx-base-prefix}-progress--theme-dark &__path {
+    .lumx-progress--theme-dark &__path {
         stroke: lumx-color-variant("light", "N");
     }
 
     /* Circular sizes */
     @each $key, $size in $lumx-progress-circular-size-map {
-        &--size-#{$key}, &--size-#{$key} .#{$lumx-base-prefix}-progress-circular__svg {
+        &--size-#{$key}, &--size-#{$key} .lumx-progress-circular__svg {
             width: $size;
             height: $size;
         }
@@ -130,7 +130,7 @@
 /* Linear
    ========================================================================== */
 
-.#{$lumx-base-prefix}-progress-linear {
+.lumx-progress-linear {
     position: relative;
     height: $lumx-progress-linear-size;
     overflow: hidden;
@@ -147,15 +147,15 @@
 
     &--theme-light &__line1,
     &--theme-light &__line2,
-    .#{$lumx-base-prefix}-progress--theme-light &__line1,
-    .#{$lumx-base-prefix}-progress--theme-light &__line2 {
+    .lumx-progress--theme-light &__line1,
+    .lumx-progress--theme-light &__line2 {
         background-color: lumx-color-variant("primary", "L3");
     }
 
     &--theme-dark &__line1,
     &--theme-dark &__line2,
-    .#{$lumx-base-prefix}-progress--theme-dark &__line1,
-    .#{$lumx-base-prefix}-progress--theme-dark &__line2 {
+    .lumx-progress--theme-dark &__line1,
+    .lumx-progress--theme-dark &__line2 {
         background-color: lumx-color-variant("light", "L3");
     }
 

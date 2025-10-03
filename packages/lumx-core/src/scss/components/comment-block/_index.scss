@@ -4,7 +4,7 @@
    Comment block
    ========================================================================== */
 
-.#{$lumx-base-prefix}-comment-block {
+.lumx-comment-block {
     $self: &;
 
     position: relative;
@@ -164,7 +164,7 @@
         margin-top: $lumx-spacing-unit * 2;
 
         #{$self}--has-indented-children & {
-            margin-left: map.get($lumx-sizes, lumx-base-const("size", "M")) + $lumx-spacing-unit * 2;
+            margin-left: map.get($lumx-sizes, "m") + $lumx-spacing-unit * 2;
         }
     }
 }

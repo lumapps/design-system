@@ -6,7 +6,7 @@
 
 /* Navigation Item
    ========================================================================== */
-.#{$lumx-base-prefix}-navigation-item {
+.lumx-navigation-item {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -54,26 +54,26 @@
 
 // Variants on emphasis, theme and states
 @each $emphasis, $selector in (
-    "emphasis-low": ".#{$lumx-base-prefix}-navigation-item__link",
-    "emphasis-selected": ".#{$lumx-base-prefix}-navigation-item__link--is-selected",
+    "emphasis-low": ".lumx-navigation-item__link",
+    "emphasis-selected": ".lumx-navigation-item__link--is-selected",
 ) {
     @each $theme in ("theme-light", "theme-dark") {
-        .#{$lumx-base-prefix}-navigation-item--#{$theme} > #{$selector} {
+        .lumx-navigation-item--#{$theme} > #{$selector} {
             // Default state
             @include lumx-navigation-link-colors(
                 $emphasis,
-                lumx-base-const("state", "DEFAULT"),
+                "state-default",
                 $theme
             );
             @include lumx-navigation-link-borders(
                 $emphasis,
-                lumx-base-const("state", "DEFAULT")
+                "state-default"
             );
 
             // Focus state
             &[data-focus-visible-added] {
                 @include lumx-state-as-selected(
-                    lumx-base-const("state", "FOCUS"),
+                    "state-focus",
                     $theme
                 );
             }
@@ -83,12 +83,12 @@
             &[data-lumx-hover], {
                 @include lumx-navigation-link-colors(
                     $emphasis,
-                    lumx-base-const("state", "HOVER"),
+                    "state-hover",
                     $theme
                 );
                 @include lumx-navigation-link-borders(
                     $emphasis,
-                    lumx-base-const("state", "HOVER")
+                    "state-hover"
                 );
             }
 
@@ -97,12 +97,12 @@
             &[data-lumx-active] {
                 @include lumx-navigation-link-colors(
                     $emphasis,
-                    lumx-base-const("state", "ACTIVE"),
+                    "state-active",
                     $theme
                 );
                 @include lumx-navigation-link-borders(
                     $emphasis,
-                    lumx-base-const("state", "ACTIVE")
+                    "state-active"
                 );
             }
         }
@@ -112,7 +112,7 @@
 /* Navigation Section
   ========================================================================== */
 
-.#{$lumx-base-prefix}-navigation-section {
+.lumx-navigation-section {
     flex-direction: column;
     align-items: normal;
 
@@ -129,30 +129,31 @@
 
 /* Navigation
    ========================================================================== */
-.#{$lumx-base-prefix}-navigation {
+.lumx-navigation {
     padding: 0;
     margin: 0;
     list-style: none;
     outline: none;
 
     &--orientation-horizontal {
-        .#{$lumx-base-prefix}-navigation__list {
+        .lumx-navigation__list {
             display: flex;
             flex-direction: row;
             gap: $lumx-spacing-unit;
             overflow: hidden;
         }
 
-        .#{$lumx-base-prefix}-navigation-item {
+        .lumx-navigation-item {
             max-width: 216px;
         }
 
-        .#{$lumx-base-prefix}-navigation-section__drawer--popover {
+        .lumx-navigation-section__drawer--popover {
             flex-direction: column;
             min-width: $lumx-size-xxl;
             max-width: 400px;
             padding: $lumx-spacing-unit-regular;
-            .#{$lumx-base-prefix}-navigation-item {
+
+            .lumx-navigation-item {
                 width: 100%;
                 max-width: 100%;
             }

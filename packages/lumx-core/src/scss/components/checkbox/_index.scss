@@ -4,7 +4,7 @@
    Checkbox
    ========================================================================== */
 
-.#{$lumx-base-prefix}-checkbox {
+.lumx-checkbox {
     $self: &;
 
     display: flex;
@@ -25,11 +25,11 @@
         @include lumx-checkbox-input-background;
 
         #{$self}--theme-light & {
-            @include lumx-state(lumx-base-const("state", "DEFAULT"), lumx-base-const("emphasis", "LOW"), "dark");
+            @include lumx-state("state-default", "emphasis-low", "dark");
         }
 
         #{$self}--theme-dark & {
-            @include lumx-state(lumx-base-const("state", "DEFAULT"), lumx-base-const("emphasis", "LOW"), "light");
+            @include lumx-state("state-default", "emphasis-low", "light");
         }
 
         #{$self}--is-unchecked & {
@@ -46,19 +46,19 @@
 
         #{$self}--theme-light & {
             @include lumx-state(
-                lumx-base-const("state", "DEFAULT"),
-                lumx-base-const("emphasis", "HIGH"),
+                "state-default",
+                "emphasis-high",
                 "primary",
-                lumx-base-const("theme", "LIGHT")
+                "theme-light"
             );
         }
 
         #{$self}--theme-dark & {
             @include lumx-state(
-                lumx-base-const("state", "DEFAULT"),
-                lumx-base-const("emphasis", "HIGH"),
+                "state-default",
+                "emphasis-high",
                 "primary",
-                lumx-base-const("theme", "DARK")
+                "theme-dark"
             );
         }
 
@@ -85,147 +85,123 @@
    ========================================================================== */
 
 // Disabled state
-.#{$lumx-base-prefix}-checkbox--is-disabled {
-    .#{$lumx-base-prefix}-checkbox__input-native {
+.lumx-checkbox--is-disabled {
+    .lumx-checkbox__input-native {
         pointer-events: none;
     }
 
-    .#{$lumx-base-prefix}-checkbox__input-placeholder {
+    .lumx-checkbox__input-placeholder {
         @include lumx-state-disabled-input;
     }
 
-    &.#{$lumx-base-prefix}-checkbox--theme-light {
-        .#{$lumx-base-prefix}-checkbox__label,
-        .#{$lumx-base-prefix}-checkbox__helper {
-            @include lumx-state-disabled-text(lumx-base-const("theme", "LIGHT"));
+    &.lumx-checkbox--theme-light {
+        .lumx-checkbox__label,
+        .lumx-checkbox__helper {
+            @include lumx-state-disabled-text("theme-light");
         }
     }
 
-    &.#{$lumx-base-prefix}-checkbox--theme-dark {
-        .#{$lumx-base-prefix}-checkbox__label,
-        .#{$lumx-base-prefix}-checkbox__helper {
-            @include lumx-state-disabled-text(lumx-base-const("theme", "DARK"));
+    &.lumx-checkbox--theme-dark {
+        .lumx-checkbox__label,
+        .lumx-checkbox__helper {
+            @include lumx-state-disabled-text("theme-dark");
         }
     }
 }
 
 // Hover state
-.#{$lumx-base-prefix}-checkbox--theme-light.#{$lumx-base-prefix}-checkbox--is-unchecked
-.#{$lumx-base-prefix}-checkbox__input-native:hover
-+ .#{$lumx-base-prefix}-checkbox__input-placeholder {
-    .#{$lumx-base-prefix}-checkbox__input-background {
-        @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "LOW"), "dark");
+.lumx-checkbox--theme-light.lumx-checkbox--is-unchecked .lumx-checkbox__input-native:hover + .lumx-checkbox__input-placeholder {
+    .lumx-checkbox__input-background {
+        @include lumx-state("state-hover", "emphasis-low", "dark");
     }
 }
 
-.#{$lumx-base-prefix}-checkbox--theme-dark.#{$lumx-base-prefix}-checkbox--is-unchecked
-.#{$lumx-base-prefix}-checkbox__input-native:hover
-+ .#{$lumx-base-prefix}-checkbox__input-placeholder {
-    .#{$lumx-base-prefix}-checkbox__input-background {
-        @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "LOW"), "light");
+.lumx-checkbox--theme-dark.lumx-checkbox--is-unchecked .lumx-checkbox__input-native:hover + .lumx-checkbox__input-placeholder {
+    .lumx-checkbox__input-background {
+        @include lumx-state("state-hover", "emphasis-low", "light");
     }
 }
 
-.#{$lumx-base-prefix}-checkbox--theme-light.#{$lumx-base-prefix}-checkbox--is-checked
-.#{$lumx-base-prefix}-checkbox__input-native:hover
-+ .#{$lumx-base-prefix}-checkbox__input-placeholder {
-    .#{$lumx-base-prefix}-checkbox__input-indicator {
+.lumx-checkbox--theme-light.lumx-checkbox--is-checked .lumx-checkbox__input-native:hover + .lumx-checkbox__input-placeholder {
+    .lumx-checkbox__input-indicator {
         @include lumx-state(
-            lumx-base-const("state", "HOVER"),
-            lumx-base-const("emphasis", "HIGH"),
+            "state-hover",
+            "emphasis-high",
             "primary",
-            lumx-base-const("theme", "LIGHT")
+            "theme-light"
         );
     }
 }
 
-.#{$lumx-base-prefix}-checkbox--theme-dark.#{$lumx-base-prefix}-checkbox--is-checked
-.#{$lumx-base-prefix}-checkbox__input-native:hover
-+ .#{$lumx-base-prefix}-checkbox__input-placeholder {
-    .#{$lumx-base-prefix}-checkbox__input-indicator {
+.lumx-checkbox--theme-dark.lumx-checkbox--is-checked .lumx-checkbox__input-native:hover + .lumx-checkbox__input-placeholder {
+    .lumx-checkbox__input-indicator {
         @include lumx-state(
-            lumx-base-const("state", "HOVER"),
-            lumx-base-const("emphasis", "HIGH"),
+            "state-hover",
+            "emphasis-high",
             "primary",
-            lumx-base-const("theme", "DARK")
+            "theme-dark"
         );
     }
 }
 
 // Active state
-.#{$lumx-base-prefix}-checkbox--theme-light.#{$lumx-base-prefix}-checkbox--is-unchecked
-.#{$lumx-base-prefix}-checkbox__input-native:active
-+ .#{$lumx-base-prefix}-checkbox__input-placeholder {
-    .#{$lumx-base-prefix}-checkbox__input-background {
-        @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "LOW"), "dark");
+.lumx-checkbox--theme-light.lumx-checkbox--is-unchecked .lumx-checkbox__input-native:active + .lumx-checkbox__input-placeholder {
+    .lumx-checkbox__input-background {
+        @include lumx-state("state-active", "emphasis-low", "dark");
     }
 }
 
-.#{$lumx-base-prefix}-checkbox--theme-dark.#{$lumx-base-prefix}-checkbox--is-unchecked
-.#{$lumx-base-prefix}-checkbox__input-native:active
-+ .#{$lumx-base-prefix}-checkbox__input-placeholder {
-    .#{$lumx-base-prefix}-checkbox__input-background {
-        @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "LOW"), "light");
+.lumx-checkbox--theme-dark.lumx-checkbox--is-unchecked .lumx-checkbox__input-native:active + .lumx-checkbox__input-placeholder {
+    .lumx-checkbox__input-background {
+        @include lumx-state("state-active", "emphasis-low", "light");
     }
 }
 
-.#{$lumx-base-prefix}-checkbox--theme-light.#{$lumx-base-prefix}-checkbox--is-checked
-.#{$lumx-base-prefix}-checkbox__input-native:active
-+ .#{$lumx-base-prefix}-checkbox__input-placeholder {
-    .#{$lumx-base-prefix}-checkbox__input-indicator {
+.lumx-checkbox--theme-light.lumx-checkbox--is-checked .lumx-checkbox__input-native:active + .lumx-checkbox__input-placeholder {
+    .lumx-checkbox__input-indicator {
         @include lumx-state(
-            lumx-base-const("state", "ACTIVE"),
-            lumx-base-const("emphasis", "HIGH"),
+            "state-active",
+            "emphasis-high",
             "primary",
-            lumx-base-const("theme", "LIGHT")
+            "theme-light"
         );
     }
 }
 
-.#{$lumx-base-prefix}-checkbox--theme-dark.#{$lumx-base-prefix}-checkbox--is-checked
-.#{$lumx-base-prefix}-checkbox__input-native:active
-+ .#{$lumx-base-prefix}-checkbox__input-placeholder {
-    .#{$lumx-base-prefix}-checkbox__input-indicator {
+.lumx-checkbox--theme-dark.lumx-checkbox--is-checked .lumx-checkbox__input-native:active + .lumx-checkbox__input-placeholder {
+    .lumx-checkbox__input-indicator {
         @include lumx-state(
-            lumx-base-const("state", "ACTIVE"),
-            lumx-base-const("emphasis", "HIGH"),
+            "state-active",
+            "emphasis-high",
             "primary",
-            lumx-base-const("theme", "DARK")
+            "theme-dark"
         );
     }
 }
 
 // Focus state
-.#{$lumx-base-prefix}-checkbox--theme-light.#{$lumx-base-prefix}-checkbox--is-unchecked
-.#{$lumx-base-prefix}-checkbox__input-native[data-focus-visible-added]
-+ .#{$lumx-base-prefix}-checkbox__input-placeholder {
-    @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "LOW"), "dark");
+.lumx-checkbox--theme-light.lumx-checkbox--is-unchecked .lumx-checkbox__input-native[data-focus-visible-added] + .lumx-checkbox__input-placeholder {
+    @include lumx-state("state-focus", "emphasis-low", "dark");
 }
 
-.#{$lumx-base-prefix}-checkbox--theme-dark.#{$lumx-base-prefix}-checkbox--is-unchecked
-.#{$lumx-base-prefix}-checkbox__input-native[data-focus-visible-added]
-+ .#{$lumx-base-prefix}-checkbox__input-placeholder {
-    @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "LOW"), "light");
+.lumx-checkbox--theme-dark.lumx-checkbox--is-unchecked .lumx-checkbox__input-native[data-focus-visible-added] + .lumx-checkbox__input-placeholder {
+    @include lumx-state("state-focus", "emphasis-low", "light");
 }
 
-.#{$lumx-base-prefix}-checkbox--theme-light.#{$lumx-base-prefix}-checkbox--is-checked
-.#{$lumx-base-prefix}-checkbox__input-native[data-focus-visible-added]
-+ .#{$lumx-base-prefix}-checkbox__input-placeholder {
+.lumx-checkbox--theme-light.lumx-checkbox--is-checked .lumx-checkbox__input-native[data-focus-visible-added] + .lumx-checkbox__input-placeholder {
     @include lumx-state(
-        lumx-base-const("state", "FOCUS"),
-        lumx-base-const("emphasis", "HIGH"),
+        "state-focus",
+        "emphasis-high",
         "primary",
-        lumx-base-const("theme", "LIGHT")
+        "theme-light"
     );
 }
 
-.#{$lumx-base-prefix}-checkbox--theme-dark.#{$lumx-base-prefix}-checkbox--is-checked
-.#{$lumx-base-prefix}-checkbox__input-native[data-focus-visible-added]
-+ .#{$lumx-base-prefix}-checkbox__input-placeholder {
+.lumx-checkbox--theme-dark.lumx-checkbox--is-checked .lumx-checkbox__input-native[data-focus-visible-added] + .lumx-checkbox__input-placeholder {
     @include lumx-state(
-        lumx-base-const("state", "FOCUS"),
-        lumx-base-const("emphasis", "HIGH"),
+        "state-focus",
+        "emphasis-high",
         "primary",
-        lumx-base-const("theme", "DARK")
+        "theme-dark"
     );
 }

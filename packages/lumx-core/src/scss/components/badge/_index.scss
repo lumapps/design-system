@@ -5,19 +5,19 @@
    Badge
    ========================================================================== */
 
-.#{$lumx-base-prefix}-badge {
+.lumx-badge {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: map.get($lumx-sizes, lumx-base-const("size", "XS"));
-    height: map.get($lumx-sizes, lumx-base-const("size", "XS"));
+    width: map.get($lumx-sizes, "xs");
+    height: map.get($lumx-sizes, "xs");
     pointer-events: none;
     border-radius: 50%;
 
     span {
         @include lumx-typography("overline");
 
-        line-height: map.get($lumx-sizes, lumx-base-const("size", "XS"));
+        line-height: map.get($lumx-sizes, "xs");
     }
 
     i {
@@ -32,7 +32,7 @@
    ========================================================================== */
 
 @each $key, $color in $lumx-color-palette {
-    .#{$lumx-base-prefix}-badge--color-#{$key} {
+    .lumx-badge--color-#{$key} {
         background-color: lumx-color-variant($key, "N");
 
         @if $key == "light" {
@@ -50,7 +50,7 @@
 /* Badge wrapper
    ========================================================================== */
 
-.#{$lumx-base-prefix}-badge-wrapper {
+.lumx-badge-wrapper {
     position: relative;
     display: inline-block;
     outline: none;

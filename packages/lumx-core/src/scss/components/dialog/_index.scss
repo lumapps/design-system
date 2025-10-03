@@ -5,7 +5,7 @@
    Dialog
    ========================================================================== */
 
-.#{$lumx-base-prefix}-dialog {
+.lumx-dialog {
     $self: &;
 
     position: fixed;
@@ -106,11 +106,11 @@
     }
 
     &__header--has-divider {
-        @include lumx-has-divider(lumx-base-const("theme", "LIGHT"), lumx-base-const("position", "BOTTOM"));
+        @include lumx-has-divider("theme-light", "position-bottom");
     }
 
     &__footer--has-divider {
-        @include lumx-has-divider(lumx-base-const("theme", "LIGHT"), lumx-base-const("position", "TOP"));
+        @include lumx-has-divider("theme-light", "position-top");
     }
 
     &__content {
@@ -171,7 +171,7 @@
    ========================================================================== */
 
 @each $key, $size in $lumx-dialog-sizes {
-    .#{$lumx-base-prefix}-dialog--size-#{$key} .#{$lumx-base-prefix}-dialog__container {
+    .lumx-dialog--size-#{$key} .lumx-dialog__container {
         @include mq($until: desktop) {
             top: 0;
             right: 0;
@@ -189,7 +189,7 @@
     }
 }
 
-.#{$lumx-base-prefix}-dialog--size-huge .#{$lumx-base-prefix}-dialog__container {
+.lumx-dialog--size-huge .lumx-dialog__container {
     @include mq($until: desktop) {
         top: 0;
         right: 0;

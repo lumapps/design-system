@@ -4,7 +4,7 @@
    Icon
    ========================================================================== */
 
-.#{$lumx-base-prefix}-icon {
+.lumx-icon {
     &--no-shape {
         display: block;
     }
@@ -63,13 +63,13 @@
    ========================================================================== */
 
 @each $size-key, $size in $lumx-sizes {
-    .#{$lumx-base-prefix}-icon--no-shape.#{$lumx-base-prefix}-icon--size-#{$size-key} {
+    .lumx-icon--no-shape.lumx-icon--size-#{$size-key} {
         @include lumx-icon-size($size-key, false);
     }
 }
 
 @each $size-key, $size in $lumx-icon-has-shape-size-map {
-    .#{$lumx-base-prefix}-icon--has-shape.#{$lumx-base-prefix}-icon--size-#{$size-key} {
+    .lumx-icon--has-shape.lumx-icon--size-#{$size-key} {
         @include lumx-icon-size($size-key, true);
     }
 }
@@ -78,24 +78,24 @@
    ========================================================================== */
 
 @each $color-key, $color in $lumx-color-palette {
-    .#{$lumx-base-prefix}-icon--color-#{$color-key} {
-        &.#{$lumx-base-prefix}-icon--no-shape {
+    .lumx-icon--color-#{$color-key} {
+        &.lumx-icon--no-shape {
             @include lumx-icon-color($color-key, false);
         }
 
-        &.#{$lumx-base-prefix}-icon--has-shape {
-            @include lumx-icon-color($color-key, true, lumx-base-const("theme", "LIGHT"));
+        &.lumx-icon--has-shape {
+            @include lumx-icon-color($color-key, true, "theme-light");
 
-            &.#{$lumx-base-prefix}-icon--theme-dark {
-                @include lumx-icon-color($color-key, true, lumx-base-const("theme", "DARK"));
+            &.lumx-icon--theme-dark {
+                @include lumx-icon-color($color-key, true, "theme-dark");
             }
         }
     }
 
     @each $color-variant in $lumx-color-variants {
-        .#{$lumx-base-prefix}-icon--color-#{$color-key}.#{$lumx-base-prefix}-icon--color-variant-#{$color-variant} {
+        .lumx-icon--color-#{$color-key}.lumx-icon--color-variant-#{$color-variant} {
             @if $color-key == "yellow" {
-                &.#{$lumx-base-prefix}-icon--has-shape {
+                &.lumx-icon--has-shape {
                     color: lumx-color-variant("dark", "L1");
                 }
             }

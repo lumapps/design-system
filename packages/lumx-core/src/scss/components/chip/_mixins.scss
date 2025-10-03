@@ -24,9 +24,9 @@
     flex: 1 1 auto;
     white-space: nowrap;
 
-    @if $size == lumx-base-const("size", "M") {
+    @if $size == "m" {
         @include lumx-typography("body1");
-    } @else if $size == lumx-base-const("size", "S") {
+    } @else if $size == "s" {
         @include lumx-typography("caption");
     }
 }
