@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.18.0][] - 2025-10-03
+
 ### Fixed
 
 -   `Popover`, `Dialog` & `Lightbox`: fix close on click away across shadow DOM boundary
@@ -2332,7 +2334,8 @@ _Failed released_
 [3.7.0]: https://github.com/lumapps/design-system/compare/v3.6.8...v3.7.0
 [3.6.8]: https://github.com/lumapps/design-system/compare/v3.6.7...v3.6.8
 [3.6.7]: https://github.com/lumapps/design-system/tree/v3.6.7
-[Unreleased]: https://github.com/lumapps/design-system/compare/3.17.2...HEAD
+[Unreleased]: https://github.com/lumapps/design-system/compare/3.18.0...HEAD
+[3.18.0]: https://github.com/lumapps/design-system/compare/3.17.2...3.18.0
 [3.17.2]: https://github.com/lumapps/design-system/compare/3.17.1...3.17.2
 [3.17.1]: https://github.com/lumapps/design-system/compare/3.17.0...3.17.1
 [3.17.0]: https://github.com/lumapps/design-system/compare/3.16.0...3.17.0
