@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   `Popover`, `Dialog` & `Lightbox`: fix close on click away across shadow DOM boundary
+
 ### Added
 
 -   `ExpansionPanel`: added `closeMode` to `"unmount"` or `"hide"` children when the item is closed.

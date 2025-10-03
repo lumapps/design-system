@@ -6,9 +6,9 @@ import isEmpty from 'lodash/isEmpty';
 
 const EVENT_TYPES = ['mousedown', 'touchstart'];
 
-function isClickAway(target: HTMLElement, refs: Array<RefObject<HTMLElement>>): boolean {
-    // The target element is not contained in any of the listed element references.
-    return !refs.some((e) => e?.current?.contains(target));
+function isClickAway(targets: HTMLElement[], refs: Array<RefObject<HTMLElement>>): boolean {
+    // The targets elements are not contained in any of the listed element references.
+    return !refs.some((ref) => targets.some((target) => ref?.current?.contains(target)));
 }
 
 export interface ClickAwayParameters {
@@ -34,8 +34,8 @@ export function useClickAway({ callback, childrenRefs }: ClickAwayParameters): v
             return undefined;
         }
         const listener: EventListener = (evt) => {
-            const target = evt.composedPath?.()[0] || evt.target;
-            if (isClickAway(target as HTMLElement, currentRefs)) {
+            const targets = [evt.composedPath?.()[0], evt.target] as HTMLElement[];
+            if (isClickAway(targets, currentRefs)) {
                 callback(evt);
             }
         };
