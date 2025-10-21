@@ -1,0 +1,37 @@
+/* ==========================================================================
+   Input
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-raw-input-text, .#{$lumx-base-prefix}-raw-input-textarea {
+    resize: none;
+
+    &--theme-light {
+        @include lumx-text-field-input-native(lumx-base-const("theme", "LIGHT"));
+        @include lumx-text-field-input-content-color(
+                lumx-base-const("state", "DEFAULT"),
+                lumx-base-const("theme", "LIGHT")
+        );
+
+        &::placeholder {
+            @include lumx-text-field-input-placeholder-color(
+                    lumx-base-const("state", "DEFAULT"),
+                    lumx-base-const("theme", "LIGHT")
+            );
+        }
+    }
+
+    &--theme-dark {
+        @include lumx-text-field-input-native(lumx-base-const("theme", "DARK"));
+        @include lumx-text-field-input-content-color(
+                lumx-base-const("state", "DEFAULT"),
+                lumx-base-const("theme", "DARK")
+        );
+
+        &::placeholder {
+            @include lumx-text-field-input-placeholder-color(
+                    lumx-base-const("state", "DEFAULT"),
+                    lumx-base-const("theme", "DARK")
+            );
+        }
+    }
+}
