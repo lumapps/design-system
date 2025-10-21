@@ -1,7 +1,6 @@
-import { ReactNode, Ref, RefObject, SyntheticEvent, useEffect, useRef, useState } from 'react';
+import { ReactNode, Ref, RefObject, SyntheticEvent, useRef, useState } from 'react';
 
 import classNames from 'classnames';
-import get from 'lodash/get';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiCloseCircle } from '@lumx/icons';
 import {
@@ -18,13 +17,16 @@ import {
 } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/className';
-import type { LumxClassName } from '@lumx/core/js/types';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useId } from '@lumx/react/hooks/useId';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
 import { HasAriaDisabled } from '@lumx/react/utils/type/HasAriaDisabled';
+
+import { CLASSNAME, COMPONENT_NAME } from './constants';
+import { RawInputText } from './RawInputText';
+import { RawInputTextarea } from './RawInputTextarea';
 
 /**
  * Defines the props of the component.
@@ -88,168 +90,10 @@ export interface TextFieldProps extends GenericProps, HasTheme, HasAriaDisabled 
 }
 
 /**
- * Component display name.
- */
-const COMPONENT_NAME = 'TextField';
-
-/**
- * Component default class name and class prefix.
- */
-const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-text-field';
-
-/**
- * Default minimum number of rows in the multiline mode.
- */
-const DEFAULT_MIN_ROWS = 2;
-
-/**
  * Component default props.
  */
 const DEFAULT_PROPS: Partial<TextFieldProps> = {
     type: 'text',
-};
-
-/**
- * Hook that allows to calculate the number of rows needed for a text area.
- * @param minimumRows Minimum number of rows that we want to display.
- * @return rows to be used and a callback to recalculate
- */
-const useComputeNumberOfRows = (
-    minimumRows: number,
-): {
-    /** number of rows to be used on the text area */
-    rows: number;
-    /**
-     * Callback in order to recalculate the number of rows due to a change on the text area
-     */
-    recomputeNumberOfRows(target: Element): void;
-} => {
-    const [rows, setRows] = useState(minimumRows);
-
-    const recompute = (target: Element) => {
-        /**
-         * HEAD's UP! This part is a little bit tricky. The idea here is to only
-         * display the necessary rows on the textarea. In order to dynamically adjust
-         * the height on that field, we need to:
-         * 1. Set the current amount of rows to the minimum. That will make the scroll appear.
-         * 2. With that, we will have the `scrollHeight`, meaning the height of the container adjusted to the current content
-         * 3. With the scroll height, we can figure out how many rows we need to use by dividing the scroll height
-         * by the line height.
-         * 4. With that number, we can readjust the number of rows on the text area. We need to do that here, if we leave that to
-         * the state change through React, there are some scenarios (resize, hitting ENTER or BACKSPACE which add or remove lines)
-         * when we will not see the update and the rows will be resized to the minimum.
-         * 5. In case there is any other update on the component that changes the UI, we need to keep the number of rows
-         * on the state in order to allow React to re-render. Therefore, we save them using `useState`
-         */
-        // eslint-disable-next-line no-param-reassign
-        (target as HTMLTextAreaElement).rows = minimumRows;
-        let currentRows = target.scrollHeight / (target.clientHeight / minimumRows);
-        currentRows = currentRows >= minimumRows ? currentRows : minimumRows;
-        // eslint-disable-next-line no-param-reassign
-        (target as HTMLTextAreaElement).rows = currentRows;
-
-        setRows(currentRows);
-    };
-
-    return {
-        recomputeNumberOfRows: recompute,
-        rows,
-    };
-};
-
-interface InputNativeProps {
-    id?: string;
-    inputRef?: TextFieldProps['inputRef'];
-    isDisabled?: boolean;
-    'aria-disabled'?: boolean;
-    isRequired?: boolean;
-    readOnly?: boolean;
-    multiline?: boolean;
-    maxLength?: number;
-    placeholder?: string;
-    rows: number;
-    type: TextFieldProps['type'];
-    name?: string;
-    value?: string;
-    setFocus(focus: boolean): void;
-    recomputeNumberOfRows(target: Element): void;
-    onChange(value: string, name?: string, event?: SyntheticEvent): void;
-    onFocus?(value: React.FocusEvent): void;
-    onBlur?(value: React.FocusEvent): void;
-    hasError?: boolean;
-    describedById?: string;
-}
-
-const renderInputNative: React.FC<InputNativeProps> = (props) => {
-    const {
-        id,
-        isRequired,
-        placeholder,
-        multiline,
-        value,
-        setFocus,
-        onChange,
-        onFocus,
-        onBlur,
-        inputRef,
-        rows,
-        recomputeNumberOfRows,
-        type,
-        name,
-        hasError,
-        describedById,
-        ...forwardedProps
-    } = props;
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const ref = useRef<HTMLElement>(null);
-
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useEffect(() => {
-        // Recompute the number of rows for the first rendering
-        if (multiline && ref && ref.current) {
-            recomputeNumberOfRows(ref.current);
-        }
-    }, [ref, multiline, recomputeNumberOfRows, value]);
-
-    const onTextFieldFocus = (event: React.FocusEvent) => {
-        onFocus?.(event);
-        setFocus(true);
-    };
-
-    const onTextFieldBlur = (event: React.FocusEvent) => {
-        onBlur?.(event);
-        setFocus(false);
-    };
-
-    const handleChange = (event: React.ChangeEvent) => {
-        onChange(get(event, 'target.value'), name, event);
-    };
-
-    const Component = multiline ? 'textarea' : 'input';
-    const inputProps: any = {
-        ...forwardedProps,
-        id,
-        className: multiline
-            ? `${CLASSNAME}__input-native ${CLASSNAME}__input-native--textarea`
-            : `${CLASSNAME}__input-native ${CLASSNAME}__input-native--text`,
-        placeholder,
-        value,
-        name,
-        required: isRequired,
-        onFocus: onTextFieldFocus,
-        onBlur: onTextFieldBlur,
-        onChange: handleChange,
-        'aria-invalid': hasError ? 'true' : undefined,
-        'aria-describedby': describedById,
-        readOnly: forwardedProps.readOnly || forwardedProps['aria-disabled'],
-        ref: mergeRefs(inputRef as any, ref) as any,
-    };
-    if (multiline) {
-        inputProps.rows = rows;
-    } else {
-        inputProps.type = type;
-    }
-    return <Component {...inputProps} />;
 };
 
 /**
@@ -311,7 +155,6 @@ export const TextField = forwardRef<TextFieldProps, HTMLDivElement>((props, ref)
     const describedById = describedByIds.length === 0 ? undefined : describedByIds.join(' ');
 
     const [isFocus, setFocus] = useState(false);
-    const { rows, recomputeNumberOfRows } = useComputeNumberOfRows(multiline ? minimumRows || DEFAULT_MIN_ROWS : 0);
     const valueLength = (value || '').length;
     const isNotEmpty = valueLength > 0;
 
@@ -339,6 +182,36 @@ export const TextField = forwardRef<TextFieldProps, HTMLDivElement>((props, ref)
             inputElement.current.focus();
         }
     };
+
+    const inputProps = {
+        id: textFieldId,
+        ref: inputRef as any,
+        ...disabledStateProps,
+        ...forwardedProps,
+        required: isRequired,
+        maxLength,
+        onBlur(evt: React.FocusEvent) {
+            setFocus(false);
+            onBlur?.(evt);
+        },
+        onFocus(evt: React.FocusEvent) {
+            setFocus(true);
+            onFocus?.(evt);
+        },
+        placeholder,
+        value,
+        onChange,
+        name,
+        'aria-invalid': hasError || undefined,
+        'aria-describedby': describedById,
+        readOnly: forwardedProps.readOnly || disabledStateProps['aria-disabled'],
+        theme,
+    };
+    const input = multiline ? (
+        <RawInputTextarea {...inputProps} minimumRows={minimumRows} />
+    ) : (
+        <RawInputText type={type} {...inputProps} />
+    );
 
     return (
         <div
@@ -396,58 +269,14 @@ export const TextField = forwardRef<TextFieldProps, HTMLDivElement>((props, ref)
                     />
                 )}
 
-                {chips && (
+                {chips ? (
                     <div className={`${CLASSNAME}__chips`}>
                         {chips}
 
-                        {renderInputNative({
-                            id: textFieldId,
-                            inputRef,
-                            ...disabledStateProps,
-                            isRequired,
-                            maxLength,
-                            multiline,
-                            onBlur,
-                            onChange,
-                            onFocus,
-                            placeholder,
-                            recomputeNumberOfRows,
-                            rows,
-                            setFocus,
-                            type,
-                            value,
-                            name,
-                            hasError,
-                            describedById,
-                            ...forwardedProps,
-                        })}
+                        {input}
                     </div>
-                )}
-
-                {!chips && (
-                    <div className={`${CLASSNAME}__input-wrapper`}>
-                        {renderInputNative({
-                            id: textFieldId,
-                            inputRef,
-                            ...disabledStateProps,
-                            isRequired,
-                            maxLength,
-                            multiline,
-                            onBlur,
-                            onChange,
-                            onFocus,
-                            placeholder,
-                            recomputeNumberOfRows,
-                            rows,
-                            setFocus,
-                            type,
-                            value,
-                            name,
-                            hasError,
-                            describedById,
-                            ...forwardedProps,
-                        })}
-                    </div>
+                ) : (
+                    <div className={`${CLASSNAME}__input-wrapper`}>{input}</div>
                 )}
 
                 {(isValid || hasError) && (

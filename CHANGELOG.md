@@ -28,6 +28,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   _[BREAKING]_ Migrate to ESM module format
 -   `@lumx/angularjs`: removed from the project. Future updates to `@lumx/core` will continue to avoid breaking change to the deprecated angularjs directives but without any guarantee.
 
+### Added
+
+-   `@lumx/react`:
+    -   Added `RawInputText` and `RawInputTextarea` components. Decoration-less version of input and textarea used in
+        `TextField` component
+
 ## [3.20.0][] - 2025-11-20
 
 ### Changed
