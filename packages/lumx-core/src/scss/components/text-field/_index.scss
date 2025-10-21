@@ -104,7 +104,9 @@
     }
 
     &__input-native {
-        #{$self}--theme-light & {
+        resize: none;
+
+        #{$self}--theme-light &, &--theme-light {
             @include lumx-text-field-input-native(lumx-base-const("theme", "LIGHT"));
             @include lumx-text-field-input-content-color(
                 lumx-base-const("state", "DEFAULT"),
@@ -119,7 +121,7 @@
             }
         }
 
-        #{$self}--theme-dark & {
+        #{$self}--theme-dark &, &--theme-dark {
             @include lumx-text-field-input-native(lumx-base-const("theme", "DARK"));
             @include lumx-text-field-input-content-color(
                 lumx-base-const("state", "DEFAULT"),
@@ -139,10 +141,6 @@
             width: auto;
             min-width: $lumx-text-field-min-width;
             line-height: var(--lumx-material-chip-size-s-height);
-        }
-
-        &--textarea {
-            resize: none;
         }
     }
 

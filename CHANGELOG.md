@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   `@lumx/react`:
+    -   Added `RawInputText` and `RawInputTextarea` components. Decoration-less version of input and textarea used in
+        `TextField` component
+
+### Fixed
+
+-   `@lumx/react`:
+    -   Fix unwanted scroll when focusing a very big multiline text field
+
 ## [3.20.0][] - 2025-11-20
 
 ### Changed
