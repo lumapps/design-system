@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   `Button` and `IconButton`: fix handling `aria-disabled=true` with link button (using `href` or `linkAs`)
+
 ## [3.18.1][] - 2025-10-27
 
 ### Fixed
