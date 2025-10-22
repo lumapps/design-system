@@ -98,6 +98,7 @@ export const LinkButton = {
                 cols: {
                     Default: {},
                     Disabled: { isDisabled: true },
+                    AriaDisabled: { 'aria-disabled': true },
                 },
             },
         }),

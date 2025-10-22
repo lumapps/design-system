@@ -156,7 +156,7 @@ export const ButtonRoot = forwardRef<ButtonRootProps, HTMLButtonElement | HTMLAn
      *
      * However, in any case, if the component is disabled, we returned a <button> since disabled is not compatible with <a>.
      */
-    if ((linkAs || !isEmpty(props.href)) && !isDisabled) {
+    if ((linkAs || !isEmpty(props.href)) && !isDisabled && ariaDisabled !== 'true' && ariaDisabled !== true) {
         return renderLink(
             {
                 linkAs,

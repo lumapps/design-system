@@ -3,6 +3,7 @@ import React from 'react';
 import { mdiCheck, mdiPlus } from '@lumx/icons';
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { render, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { getByClassName, queryAllByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import { Emphasis, Icon } from '@lumx/react';
 
@@ -63,11 +64,49 @@ describe(`<${Button.displayName}>`, () => {
             expect(buttonWrapper).toBeInTheDocument();
             expect(button).toBe(within(buttonWrapper as any).queryByRole('button', { name: label }));
         });
+    });
 
-        it('should prevent click when aria-disabled', () => {
+    describe('Disabled state', () => {
+        it('should render disabled button', async () => {
+            const onClick = jest.fn();
+            const { button } = setup({ children: 'Label', disabled: true, onClick });
+            expect(button).toHaveAttribute('disabled');
+            await userEvent.click(button);
+            expect(onClick).not.toHaveBeenCalled();
+        });
+
+        it('should render disabled link', async () => {
+            const onClick = jest.fn();
+            const { button } = setup({ children: 'Label', disabled: true, href: 'https://example.com', onClick });
+            // Disabled link do not exist so we fallback to a button
+            expect(screen.queryByRole('link')).not.toBeInTheDocument();
+            expect(button).toHaveAttribute('disabled');
+            await userEvent.click(button);
+            expect(onClick).not.toHaveBeenCalled();
+        });
+
+        it('should render aria-disabled button', async () => {
             const onClick = jest.fn();
             const { button } = setup({ children: 'Label', 'aria-disabled': true, onClick });
-            expect(button.onclick).toBeFalsy();
+            expect(button).toHaveAttribute('aria-disabled');
+            await userEvent.click(button);
+            expect(onClick).not.toHaveBeenCalled();
+        });
+
+        it('should render aria-disabled link', async () => {
+            const onClick = jest.fn();
+            const { button } = setup({
+                children: 'Label',
+                'aria-disabled': true,
+                href: 'https://example.com',
+                onClick,
+            });
+            expect(button).toHaveAccessibleName('Label');
+            // Disabled link do not exist so we fallback to a button
+            expect(screen.queryByRole('link')).not.toBeInTheDocument();
+            expect(button).toHaveAttribute('aria-disabled', 'true');
+            await userEvent.click(button);
+            expect(onClick).not.toHaveBeenCalled();
         });
     });
 
