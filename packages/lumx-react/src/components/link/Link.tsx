@@ -12,6 +12,7 @@ import {
 } from '@lumx/react/utils/className';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { wrapChildrenIconWithSpaces } from '@lumx/react/utils/react/wrapChildrenIconWithSpaces';
+import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
 
 type HTMLAnchorProps = React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
 
@@ -65,13 +66,12 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * @return React element.
  */
 export const Link = forwardRef<LinkProps, HTMLAnchorElement | HTMLButtonElement>((props, ref) => {
+    const { isAnyDisabled, disabledStateProps, otherProps } = useDisableStateProps(props);
     const {
         children,
         className,
         color: propColor,
         colorVariant: propColorVariant,
-        disabled,
-        isDisabled = disabled,
         href,
         leftIcon,
         linkAs,
@@ -79,15 +79,15 @@ export const Link = forwardRef<LinkProps, HTMLAnchorElement | HTMLButtonElement>
         target,
         typography,
         ...forwardedProps
-    } = props;
+    } = otherProps;
     const [color, colorVariant] = resolveColorWithVariants(propColor, propColorVariant);
 
     const isLink = linkAs || href;
-    const Component = isLink && !isDisabled ? linkAs || 'a' : 'button';
+    const Component = isLink && !isAnyDisabled ? linkAs || 'a' : 'button';
     const baseProps: React.ComponentProps<typeof Component> = {};
     if (Component === 'button') {
         baseProps.type = 'button';
-        baseProps.disabled = isDisabled;
+        Object.assign(baseProps, disabledStateProps);
     } else if (isLink) {
         baseProps.href = href;
         baseProps.target = target;

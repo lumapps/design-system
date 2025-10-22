@@ -9,6 +9,8 @@ import { getRootClassName } from '@lumx/react/utils/className';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
+import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
+
 /**
  * Defines the props of the component.
  */
@@ -69,6 +71,7 @@ const DEFAULT_PROPS: Partial<AutocompleteMultipleProps> = {
  */
 export const AutocompleteMultiple = forwardRef<AutocompleteMultipleProps, HTMLDivElement>((props, ref) => {
     const defaultTheme = useTheme();
+    const { disabledStateProps, otherProps } = useDisableStateProps(props);
     const {
         anchorToInput,
         children,
@@ -84,7 +87,6 @@ export const AutocompleteMultiple = forwardRef<AutocompleteMultipleProps, HTMLDi
         icon,
         inputRef,
         clearButtonProps,
-        isDisabled,
         isRequired,
         isOpen,
         isValid,
@@ -107,7 +109,7 @@ export const AutocompleteMultiple = forwardRef<AutocompleteMultipleProps, HTMLDi
         value,
         values = DEFAULT_PROPS.values,
         ...forwardedProps
-    } = props;
+    } = otherProps;
 
     return (
         <Autocomplete
@@ -127,7 +129,7 @@ export const AutocompleteMultiple = forwardRef<AutocompleteMultipleProps, HTMLDi
             icon={icon}
             inputRef={inputRef}
             chips={values && values.map((chip: any, index: number) => selectedChipRender?.(chip, index, onClear))}
-            isDisabled={isDisabled}
+            {...disabledStateProps}
             isRequired={isRequired}
             clearButtonProps={clearButtonProps}
             isValid={isValid}

@@ -8,6 +8,7 @@ import { GenericProps } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
+import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
 import { useTabProviderContext } from '../tabs/state';
 
 /**
@@ -57,30 +58,29 @@ const DEFAULT_PROPS: Partial<ProgressTrackerStepProps> = {};
  * @return React element.
  */
 export const ProgressTrackerStep = forwardRef<ProgressTrackerStepProps, HTMLButtonElement>((props, ref) => {
+    const { isAnyDisabled, otherProps } = useDisableStateProps(props);
     const {
         className,
-        disabled,
         hasError,
         helper,
         id,
         isActive: propIsActive,
         isComplete,
-        isDisabled = disabled,
         label,
         onFocus,
         onKeyPress,
         tabIndex = -1,
         ...forwardedProps
-    } = props;
+    } = otherProps;
     const state = useTabProviderContext('tab', id);
     const isActive = propIsActive || state?.isActive;
 
     const changeToCurrentTab = useCallback(() => {
-        if (isDisabled) {
+        if (isAnyDisabled) {
             return;
         }
         state?.changeToTab();
-    }, [isDisabled, state]);
+    }, [isAnyDisabled, state]);
 
     const handleFocus: FocusEventHandler = useCallback(
         (event) => {
@@ -127,7 +127,7 @@ export const ProgressTrackerStep = forwardRef<ProgressTrackerStepProps, HTMLButt
                     prefix: CLASSNAME,
                     hasError,
                     isActive,
-                    isClickable: state && !isDisabled,
+                    isClickable: state && !isAnyDisabled,
                     isComplete,
                 }),
             )}
@@ -136,7 +136,7 @@ export const ProgressTrackerStep = forwardRef<ProgressTrackerStepProps, HTMLButt
             onFocus={handleFocus}
             role="tab"
             tabIndex={isActive ? 0 : tabIndex}
-            aria-disabled={isDisabled}
+            aria-disabled={isAnyDisabled}
             aria-selected={isActive}
             aria-controls={state?.tabPanelId}
         >

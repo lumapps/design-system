@@ -22,6 +22,7 @@ import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useId } from '@lumx/react/hooks/useId';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
 
 /**
  * Defines the props of the component.
@@ -178,7 +179,6 @@ interface InputNativeProps {
 const renderInputNative: React.FC<InputNativeProps> = (props) => {
     const {
         id,
-        isDisabled,
         isRequired,
         placeholder,
         multiline,
@@ -231,7 +231,6 @@ const renderInputNative: React.FC<InputNativeProps> = (props) => {
         placeholder,
         value,
         name,
-        disabled: isDisabled,
         required: isRequired,
         onFocus: onTextFieldFocus,
         onBlur: onTextFieldBlur,
@@ -256,12 +255,12 @@ const renderInputNative: React.FC<InputNativeProps> = (props) => {
  * @return React element.
  */
 export const TextField = forwardRef<TextFieldProps, HTMLDivElement>((props, ref) => {
+    const { isAnyDisabled, disabledStateProps, otherProps } = useDisableStateProps(props);
     const defaultTheme = useTheme() || Theme.light;
     const {
         chips,
         className,
         clearButtonProps,
-        disabled,
         error,
         forceFocusStyle,
         hasError,
@@ -269,7 +268,6 @@ export const TextField = forwardRef<TextFieldProps, HTMLDivElement>((props, ref)
         icon,
         id,
         inputRef: inputRefProps,
-        isDisabled = disabled,
         isRequired,
         isValid,
         label,
@@ -289,7 +287,7 @@ export const TextField = forwardRef<TextFieldProps, HTMLDivElement>((props, ref)
         value,
         afterElement,
         ...forwardedProps
-    } = props;
+    } = otherProps;
     const generatedTextFieldId = useId();
     const textFieldId = id || generatedTextFieldId;
     /** Keep a clean local input ref to manage focus */
@@ -352,7 +350,7 @@ export const TextField = forwardRef<TextFieldProps, HTMLDivElement>((props, ref)
                     hasPlaceholder: Boolean(placeholder),
                     hasTextarea: multiline,
                     hasValue: Boolean(value),
-                    isDisabled,
+                    isDisabled: isAnyDisabled,
                     isFocus: isFocus || forceFocusStyle,
                     isValid,
                     prefix: CLASSNAME,
@@ -400,7 +398,7 @@ export const TextField = forwardRef<TextFieldProps, HTMLDivElement>((props, ref)
                         {renderInputNative({
                             id: textFieldId,
                             inputRef,
-                            isDisabled,
+                            ...disabledStateProps,
                             isRequired,
                             maxLength,
                             multiline,
@@ -426,7 +424,7 @@ export const TextField = forwardRef<TextFieldProps, HTMLDivElement>((props, ref)
                         {renderInputNative({
                             id: textFieldId,
                             inputRef,
-                            isDisabled,
+                            ...disabledStateProps,
                             isRequired,
                             maxLength,
                             multiline,

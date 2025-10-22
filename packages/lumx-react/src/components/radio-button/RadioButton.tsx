@@ -8,6 +8,7 @@ import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/classNam
 import { useId } from '@lumx/react/hooks/useId';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
 
 /**
  * Defines the props of the component.
@@ -58,16 +59,15 @@ const DEFAULT_PROPS: Partial<RadioButtonProps> = {};
  * @return React element.
  */
 export const RadioButton = forwardRef<RadioButtonProps, HTMLDivElement>((props, ref) => {
+    const { isAnyDisabled, disabledStateProps, otherProps } = useDisableStateProps(props);
     const defaultTheme = useTheme() || Theme.light;
     const {
         checked,
         className,
-        disabled,
         helper,
         id,
         inputRef,
         isChecked = checked,
-        isDisabled = disabled,
         label,
         name,
         onChange,
@@ -75,7 +75,7 @@ export const RadioButton = forwardRef<RadioButtonProps, HTMLDivElement>((props, 
         value,
         inputProps,
         ...forwardedProps
-    } = props;
+    } = otherProps;
     const generatedInputId = useId();
     const inputId = id || generatedInputId;
 
@@ -93,7 +93,7 @@ export const RadioButton = forwardRef<RadioButtonProps, HTMLDivElement>((props, 
                 className,
                 handleBasicClasses({
                     isChecked,
-                    isDisabled,
+                    isDisabled: isAnyDisabled,
                     isUnchecked: !isChecked,
                     prefix: CLASSNAME,
                     theme,
@@ -104,9 +104,8 @@ export const RadioButton = forwardRef<RadioButtonProps, HTMLDivElement>((props, 
                 <input
                     ref={inputRef}
                     className={`${CLASSNAME}__input-native`}
-                    disabled={isDisabled}
+                    {...disabledStateProps}
                     id={inputId}
-                    tabIndex={isDisabled ? -1 : 0}
                     type="radio"
                     name={name}
                     value={value}

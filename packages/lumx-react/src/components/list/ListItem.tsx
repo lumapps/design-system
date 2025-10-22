@@ -9,6 +9,7 @@ import { onEnterPressed, onButtonPressed } from '@lumx/react/utils/browser/event
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { renderLink } from '@lumx/react/utils/react/renderLink';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
 
 export type ListItemSize = Extract<Size, 'tiny' | 'regular' | 'big' | 'huge'>;
 
@@ -76,6 +77,7 @@ export function isClickable({ linkProps, onItemSelected }: Partial<ListItemProps
  * @return React element.
  */
 export const ListItem = forwardRef<ListItemProps, HTMLLIElement>((props, ref) => {
+    const { isAnyDisabled, otherProps } = useDisableStateProps(props);
     const {
         after,
         before,
@@ -83,14 +85,13 @@ export const ListItem = forwardRef<ListItemProps, HTMLLIElement>((props, ref) =>
         className,
         isHighlighted,
         isSelected,
-        isDisabled,
         linkAs,
         linkProps = {},
         linkRef,
         onItemSelected,
         size = DEFAULT_PROPS.size,
         ...forwardedProps
-    } = props;
+    } = otherProps;
 
     const role = linkAs || linkProps.href ? 'link' : 'button';
     const onKeyDown = useMemo(() => {
@@ -124,20 +125,20 @@ export const ListItem = forwardRef<ListItemProps, HTMLLIElement>((props, ref) =>
                 renderLink(
                     {
                         linkAs,
-                        tabIndex: !isDisabled && role === 'button' ? 0 : undefined,
+                        tabIndex: !isAnyDisabled && role === 'button' ? 0 : undefined,
                         role,
-                        'aria-disabled': isDisabled,
+                        'aria-disabled': isAnyDisabled,
                         ...linkProps,
-                        href: isDisabled ? undefined : linkProps.href,
+                        href: isAnyDisabled ? undefined : linkProps.href,
                         className: classNames(
                             handleBasicClasses({
                                 prefix: `${CLASSNAME}__link`,
                                 isHighlighted,
                                 isSelected,
-                                isDisabled,
+                                isDisabled: isAnyDisabled,
                             }),
                         ),
-                        onClick: isDisabled ? undefined : onItemSelected,
+                        onClick: isAnyDisabled ? undefined : onItemSelected,
                         onKeyDown,
                         ref: linkRef,
                     },

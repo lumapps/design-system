@@ -5,6 +5,7 @@ import { GenericProps } from '@lumx/react/utils/type';
 import { getCurrentLocale } from '@lumx/react/utils/locale/getCurrentLocale';
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
 
 /**
  * Defines the props of the component.
@@ -42,10 +43,9 @@ const COMPONENT_NAME = 'DatePickerField';
  * @return React element.
  */
 export const DatePickerField = forwardRef<DatePickerFieldProps, HTMLDivElement>((props, ref) => {
+    const { disabledStateProps, otherProps } = useDisableStateProps(props);
     const {
         defaultMonth,
-        disabled,
-        isDisabled = disabled,
         locale = getCurrentLocale(),
         maxDate,
         minDate,
@@ -55,7 +55,7 @@ export const DatePickerField = forwardRef<DatePickerFieldProps, HTMLDivElement>(
         previousButtonProps,
         value,
         ...forwardedProps
-    } = props;
+    } = otherProps;
     const anchorRef = useRef(null);
 
     const [isOpen, close, , toggleOpen] = useBooleanState(false);
@@ -101,7 +101,7 @@ export const DatePickerField = forwardRef<DatePickerFieldProps, HTMLDivElement>(
                 onClick={toggleOpen}
                 onChange={onTextFieldChange}
                 onKeyPress={handleKeyboardNav}
-                isDisabled={isDisabled}
+                {...disabledStateProps}
                 readOnly
                 aria-haspopup="dialog"
             />

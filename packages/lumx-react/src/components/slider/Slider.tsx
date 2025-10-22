@@ -11,6 +11,7 @@ import { clamp } from '@lumx/react/utils/number/clamp';
 import { useId } from '@lumx/react/hooks/useId';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
 
 /**
  * Defines the props of the component.
@@ -91,14 +92,13 @@ const computePercentFromValue = (value: number, min: number, max: number): numbe
  * @return React element.
  */
 export const Slider = forwardRef<SliderProps, HTMLDivElement>((props, ref) => {
+    const { isAnyDisabled, disabledStateProps, otherProps } = useDisableStateProps(props);
     const defaultTheme = useTheme() || Theme.light;
     const {
         className,
-        disabled,
         helper,
         hideMinMaxLabel,
         id,
-        isDisabled = disabled,
         label,
         max,
         min,
@@ -110,7 +110,7 @@ export const Slider = forwardRef<SliderProps, HTMLDivElement>((props, ref) => {
         theme = defaultTheme,
         value,
         ...forwardedProps
-    } = props;
+    } = otherProps;
     const generatedId = useId();
     const sliderId = id || generatedId;
     const sliderLabelId = useMemo(() => `label-${sliderId}`, [sliderId]);
@@ -222,7 +222,7 @@ export const Slider = forwardRef<SliderProps, HTMLDivElement>((props, ref) => {
         onMouseDown?.(event);
 
         const { current: slider } = sliderRef;
-        if (isDisabled || !slider) return;
+        if (isAnyDisabled || !slider) return;
         const newValue = getPercentValue(event, slider);
         if (onChange) {
             onChange(computeValueFromPercent(newValue, min, max, precision), name, event);
@@ -242,7 +242,6 @@ export const Slider = forwardRef<SliderProps, HTMLDivElement>((props, ref) => {
                 handleBasicClasses({ prefix: CLASSNAME, theme, hasLabel: Boolean(label) }),
             )}
             onMouseDown={handleMouseDown}
-            aria-disabled={isDisabled}
         >
             {label && (
                 <InputLabel id={sliderLabelId} htmlFor={sliderId} className={`${CLASSNAME}__label`} theme={theme}>
@@ -284,8 +283,8 @@ export const Slider = forwardRef<SliderProps, HTMLDivElement>((props, ref) => {
                         id={sliderId}
                         className={`${CLASSNAME}__handle`}
                         style={{ left: percentString }}
-                        onKeyDown={handleKeyDown}
-                        disabled={isDisabled}
+                        onKeyDown={isAnyDisabled ? undefined : handleKeyDown}
+                        {...disabledStateProps}
                     />
                 </div>
                 {!hideMinMaxLabel && (

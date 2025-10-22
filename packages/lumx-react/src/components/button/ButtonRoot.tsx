@@ -10,6 +10,7 @@ import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/react/utils/className';
 import { renderLink } from '@lumx/react/utils/react/renderLink';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
 
 type HTMLButtonProps = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
 
@@ -96,17 +97,15 @@ const renderButtonWrapper: React.FC<ButtonRootProps> = (props) => {
  * @return React element.
  */
 export const ButtonRoot = forwardRef<ButtonRootProps, HTMLButtonElement | HTMLAnchorElement>((props, ref) => {
+    const { isAnyDisabled, disabledStateProps, otherProps } = useDisableStateProps(props);
     const {
         'aria-label': ariaLabel,
         children,
         className,
         color,
-        disabled,
         emphasis,
         hasBackground,
         href,
-        isDisabled = disabled,
-        'aria-disabled': ariaDisabled = isDisabled,
         isSelected,
         isActive,
         isFocused,
@@ -120,7 +119,7 @@ export const ButtonRoot = forwardRef<ButtonRootProps, HTMLButtonElement | HTMLAn
         type = 'button',
         fullWidth,
         ...forwardedProps
-    } = props;
+    } = otherProps;
 
     const adaptedColor =
         color ||
@@ -138,7 +137,7 @@ export const ButtonRoot = forwardRef<ButtonRootProps, HTMLButtonElement | HTMLAn
             color: adaptedColor,
             emphasis,
             isSelected,
-            isDisabled,
+            isDisabled: isAnyDisabled,
             isActive,
             isFocused,
             isHovered,
@@ -156,7 +155,7 @@ export const ButtonRoot = forwardRef<ButtonRootProps, HTMLButtonElement | HTMLAn
      *
      * However, in any case, if the component is disabled, we returned a <button> since disabled is not compatible with <a>.
      */
-    if ((linkAs || !isEmpty(props.href)) && !isDisabled && ariaDisabled !== 'true' && ariaDisabled !== true) {
+    if ((linkAs || !isEmpty(props.href)) && !isAnyDisabled) {
         return renderLink(
             {
                 linkAs,
@@ -173,9 +172,7 @@ export const ButtonRoot = forwardRef<ButtonRootProps, HTMLButtonElement | HTMLAn
     return (
         <button
             {...forwardedProps}
-            {...(ariaDisabled ? { onClick: undefined } : undefined)}
-            disabled={isDisabled}
-            aria-disabled={ariaDisabled}
+            {...disabledStateProps}
             aria-label={ariaLabel}
             ref={ref as RefObject<HTMLButtonElement>}
             className={buttonClassName}
