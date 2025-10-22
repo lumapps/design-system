@@ -11,6 +11,7 @@ import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/classNam
 import { onEnterPressed } from '@lumx/react/utils/browser/event';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
+import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
 
 /**
  * Chip sizes.
@@ -71,15 +72,14 @@ const DEFAULT_PROPS: Partial<ChipProps> = {
  */
 export const Chip = forwardRef<ChipProps, HTMLAnchorElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
+    const { isAnyDisabled, disabledStateProps, otherProps } = useDisableStateProps(props);
     const {
         after,
         before,
         children,
         className,
         color,
-        disabled,
         isClickable: propIsClickable,
-        isDisabled = disabled,
         isHighlighted,
         isSelected,
         onAfterClick,
@@ -90,10 +90,10 @@ export const Chip = forwardRef<ChipProps, HTMLAnchorElement>((props, ref) => {
         href,
         onKeyDown,
         ...forwardedProps
-    } = props;
+    } = otherProps;
     const hasAfterClick = isFunction(onAfterClick);
     const hasBeforeClick = isFunction(onBeforeClick);
-    const hasOnClick = isFunction(onClick);
+    const hasOnClick = isFunction(props.onClick);
     const isButton = hasOnClick && !href;
     const isClickable = Boolean(hasOnClick) || Boolean(href) || propIsClickable;
 
@@ -113,16 +113,16 @@ export const Chip = forwardRef<ChipProps, HTMLAnchorElement>((props, ref) => {
         // eslint-disable-next-line jsx-a11y/no-static-element-interactions
         <a
             role={isButton ? 'button' : undefined}
-            tabIndex={isClickable ? 0 : undefined}
+            tabIndex={isClickable && !disabledStateProps.disabled ? 0 : undefined}
             {...forwardedProps}
-            href={href}
+            href={!disabledStateProps.disabled ? href : undefined}
             ref={ref}
             className={classNames(
                 className,
                 handleBasicClasses({
                     clickable: isClickable,
                     color: chipColor,
-                    isDisabled,
+                    isDisabled: isAnyDisabled,
                     hasAfter: Boolean(after),
                     hasBefore: Boolean(before),
                     highlighted: Boolean(isHighlighted),
@@ -132,7 +132,7 @@ export const Chip = forwardRef<ChipProps, HTMLAnchorElement>((props, ref) => {
                     unselected: Boolean(!isSelected),
                 }),
             )}
-            aria-disabled={(isClickable && isDisabled) || undefined}
+            aria-disabled={(isClickable && isAnyDisabled) || undefined}
             onClick={hasOnClick ? onClick : undefined}
             onKeyDown={handleKeyDown}
         >

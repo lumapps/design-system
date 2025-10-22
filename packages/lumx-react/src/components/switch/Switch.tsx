@@ -9,6 +9,7 @@ import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/classNam
 import { useId } from '@lumx/react/hooks/useId';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
 
 /**
  * Defines the props of the component.
@@ -59,16 +60,15 @@ const DEFAULT_PROPS: Partial<SwitchProps> = {
  * @return React element.
  */
 export const Switch = forwardRef<SwitchProps, HTMLDivElement>((props, ref) => {
+    const { isAnyDisabled, disabledStateProps, otherProps } = useDisableStateProps(props);
     const defaultTheme = useTheme() || Theme.light;
     const {
         checked,
         children,
         className,
-        disabled,
         helper,
         id,
         isChecked = checked,
-        isDisabled = disabled,
         name,
         onChange,
         position = DEFAULT_PROPS.position,
@@ -76,7 +76,7 @@ export const Switch = forwardRef<SwitchProps, HTMLDivElement>((props, ref) => {
         value,
         inputProps = {},
         ...forwardedProps
-    } = props;
+    } = otherProps;
     const generatedInputId = useId();
     const inputId = id || generatedInputId;
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -94,13 +94,12 @@ export const Switch = forwardRef<SwitchProps, HTMLDivElement>((props, ref) => {
                 handleBasicClasses({
                     prefix: CLASSNAME,
                     isChecked,
-                    isDisabled,
+                    isDisabled: isAnyDisabled,
                     position,
                     theme,
                     isUnchecked: !isChecked,
                 }),
             )}
-            aria-disabled={isDisabled}
         >
             <div className={`${CLASSNAME}__input-wrapper`}>
                 <input
@@ -110,7 +109,7 @@ export const Switch = forwardRef<SwitchProps, HTMLDivElement>((props, ref) => {
                     className={`${CLASSNAME}__input-native`}
                     name={name}
                     value={value}
-                    disabled={isDisabled}
+                    {...disabledStateProps}
                     checked={isChecked}
                     aria-checked={Boolean(isChecked)}
                     onChange={handleChange}

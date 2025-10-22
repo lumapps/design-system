@@ -121,8 +121,6 @@
 }
 
 @mixin lumx-state-disabled-text($theme) {
-    pointer-events: none;
-
     @if $theme == lumx-base-const("theme", "LIGHT") {
         color: lumx-color-variant("dark", "L3");
     } @else if $theme == lumx-base-const("theme", "DARK") {
@@ -131,7 +129,6 @@
 }
 
 @mixin lumx-state-disabled-input() {
-    pointer-events: none;
     opacity: 0.5;
     cursor: default;
 }

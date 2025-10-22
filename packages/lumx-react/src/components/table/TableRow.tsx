@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import { GenericProps } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
 
 /**
  * Defines the props of the component.
@@ -43,23 +44,24 @@ const DEFAULT_PROPS: Partial<TableRowProps> = {};
  * @return React element.
  */
 export const TableRow = forwardRef<TableRowProps, HTMLTableRowElement>((props, ref) => {
-    const { children, className, disabled, isClickable, isDisabled = disabled, isSelected, ...forwardedProps } = props;
+    const { isAnyDisabled, disabledStateProps, otherProps } = useDisableStateProps(props);
+    const { children, className, isClickable, isSelected, ...forwardedProps } = otherProps;
 
     return (
         <tr
             ref={ref}
-            tabIndex={isClickable && !isDisabled ? 0 : -1}
+            tabIndex={isClickable && !disabledStateProps.disabled ? 0 : -1}
             {...forwardedProps}
             className={classNames(
                 className,
                 handleBasicClasses({
-                    isClickable: isClickable && !isDisabled,
-                    isDisabled,
-                    isSelected: isSelected && !isDisabled,
+                    isClickable: isClickable && !isAnyDisabled,
+                    isDisabled: isAnyDisabled,
+                    isSelected: isSelected && !isAnyDisabled,
                     prefix: CLASSNAME,
                 }),
             )}
-            aria-disabled={isDisabled}
+            aria-disabled={isAnyDisabled}
         >
             {children}
         </tr>

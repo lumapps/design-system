@@ -11,6 +11,8 @@ import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
+import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
+
 /**
  * Defines the props of the component.
  */
@@ -203,6 +205,7 @@ const DEFAULT_PROPS: Partial<AutocompleteProps> = {
  */
 export const Autocomplete = forwardRef<AutocompleteProps, HTMLDivElement>((props, ref) => {
     const defaultTheme = useTheme();
+    const { disabledStateProps, otherProps } = useDisableStateProps(props);
     const {
         anchorToInput = DEFAULT_PROPS.anchorToInput,
         children,
@@ -211,7 +214,6 @@ export const Autocomplete = forwardRef<AutocompleteProps, HTMLDivElement>((props
         closeOnClick = DEFAULT_PROPS.closeOnClick,
         closeOnClickAway = DEFAULT_PROPS.closeOnClickAway,
         closeOnEscape = DEFAULT_PROPS.closeOnEscape,
-        disabled,
         error,
         fitToAnchorWidth,
         hasError,
@@ -219,7 +221,6 @@ export const Autocomplete = forwardRef<AutocompleteProps, HTMLDivElement>((props
         icon,
         inputRef,
         clearButtonProps,
-        isDisabled = disabled,
         isRequired,
         isOpen,
         isValid,
@@ -239,7 +240,7 @@ export const Autocomplete = forwardRef<AutocompleteProps, HTMLDivElement>((props
         textFieldProps = {},
         focusAnchorOnClose,
         ...forwardedProps
-    } = props;
+    } = otherProps;
     const inputAnchorRef = useRef<HTMLElement>(null);
     const textFieldRef = useRef(null);
     useFocus(inputAnchorRef.current, !isOpen && shouldFocusOnClose);
@@ -255,7 +256,7 @@ export const Autocomplete = forwardRef<AutocompleteProps, HTMLDivElement>((props
                 icon={icon}
                 inputRef={mergeRefs(inputAnchorRef as React.RefObject<HTMLInputElement>, inputRef)}
                 clearButtonProps={clearButtonProps}
-                isDisabled={isDisabled}
+                {...disabledStateProps}
                 isRequired={isRequired}
                 isValid={isValid}
                 label={label}

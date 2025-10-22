@@ -11,6 +11,7 @@ import { useId } from '@lumx/react/hooks/useId';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
 
 /**
  * Intermediate state of checkbox.
@@ -66,16 +67,15 @@ const DEFAULT_PROPS: Partial<CheckboxProps> = {};
  * @return React element.
  */
 export const Checkbox = forwardRef<CheckboxProps, HTMLDivElement>((props, ref) => {
+    const { isAnyDisabled, disabledStateProps, otherProps } = useDisableStateProps(props);
     const defaultTheme = useTheme() || Theme.light;
     const {
         checked,
         className,
-        disabled,
         helper,
         id,
         inputRef,
         isChecked = checked,
-        isDisabled = disabled,
         label,
         name,
         onChange,
@@ -83,7 +83,7 @@ export const Checkbox = forwardRef<CheckboxProps, HTMLDivElement>((props, ref) =
         value,
         inputProps = {},
         ...forwardedProps
-    } = props;
+    } = otherProps;
     const localInputRef = React.useRef<HTMLInputElement>(null);
     const generatedInputId = useId();
     const inputId = id || generatedInputId;
@@ -110,7 +110,7 @@ export const Checkbox = forwardRef<CheckboxProps, HTMLDivElement>((props, ref) =
                 handleBasicClasses({
                     // Whether state is intermediate class name will "-checked"
                     isChecked: intermediateState ? true : isChecked,
-                    isDisabled,
+                    isDisabled: isAnyDisabled,
                     isUnchecked: !isChecked,
                     prefix: CLASSNAME,
                     theme,
@@ -123,8 +123,7 @@ export const Checkbox = forwardRef<CheckboxProps, HTMLDivElement>((props, ref) =
                     type="checkbox"
                     id={inputId}
                     className={`${CLASSNAME}__input-native`}
-                    disabled={isDisabled}
-                    tabIndex={isDisabled ? -1 : 0}
+                    {...disabledStateProps}
                     name={name}
                     value={value}
                     checked={isChecked}

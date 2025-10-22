@@ -8,6 +8,7 @@ import { GenericProps } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/react/utils/className';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
+import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
 import { useTabProviderContext } from './state';
 
 /**
@@ -55,29 +56,28 @@ const DEFAULT_PROPS: Partial<TabProps> = {};
  * @return React element.
  */
 export const Tab = forwardRef<TabProps, HTMLButtonElement>((props, ref) => {
+    const { isAnyDisabled, otherProps } = useDisableStateProps(props);
     const {
         className,
-        disabled,
         icon,
         iconProps = {},
         id,
         isActive: propIsActive,
-        isDisabled = disabled,
         label,
         onFocus,
         onKeyPress,
         tabIndex = -1,
         ...forwardedProps
-    } = props;
+    } = otherProps;
     const state = useTabProviderContext('tab', id);
     const isActive = propIsActive || state?.isActive;
 
     const changeToCurrentTab = useCallback(() => {
-        if (isDisabled) {
+        if (isAnyDisabled) {
             return;
         }
         state?.changeToTab();
-    }, [isDisabled, state]);
+    }, [isAnyDisabled, state]);
 
     const handleFocus: FocusEventHandler = useCallback(
         (event) => {
@@ -92,12 +92,12 @@ export const Tab = forwardRef<TabProps, HTMLButtonElement>((props, ref) => {
     const handleKeyPress: KeyboardEventHandler = useCallback(
         (event) => {
             onKeyPress?.(event);
-            if (event.key !== 'Enter') {
+            if (event.key !== 'Enter' || isAnyDisabled) {
                 return;
             }
             changeToCurrentTab();
         },
-        [changeToCurrentTab, onKeyPress],
+        [changeToCurrentTab, isAnyDisabled, onKeyPress],
     );
 
     return (
@@ -106,13 +106,16 @@ export const Tab = forwardRef<TabProps, HTMLButtonElement>((props, ref) => {
             {...forwardedProps}
             type="button"
             id={state?.tabId}
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, isActive, isDisabled }))}
+            className={classNames(
+                className,
+                handleBasicClasses({ prefix: CLASSNAME, isActive, isDisabled: isAnyDisabled }),
+            )}
             onClick={changeToCurrentTab}
             onKeyPress={handleKeyPress}
             onFocus={handleFocus}
             role="tab"
             tabIndex={isActive ? 0 : tabIndex}
-            aria-disabled={isDisabled}
+            aria-disabled={isAnyDisabled}
             aria-selected={isActive}
             aria-controls={state?.tabPanelId}
         >
