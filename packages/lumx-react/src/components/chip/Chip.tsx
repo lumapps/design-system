@@ -12,6 +12,7 @@ import { onEnterPressed } from '@lumx/react/utils/browser/event';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
+import { HasAriaDisabled } from '@lumx/react/utils/type/HasAriaDisabled';
 
 /**
  * Chip sizes.
@@ -21,7 +22,7 @@ type ChipSize = Extract<Size, 's' | 'm'>;
 /**
  * Defines the props of the component.
  */
-export interface ChipProps extends GenericProps, HasTheme {
+export interface ChipProps extends GenericProps, HasTheme, HasAriaDisabled {
     /** A component to be rendered after the content. */
     after?: ReactNode;
     /** A component to be rendered before the content. */

@@ -38,6 +38,15 @@ Use chip groups to group chips together. Groups give chips responsive behavior.
 
 <DemoBlock orientation="horizontal" demo="group" withThemeSwitcher />
 
+### Accessibility concerns
+
+Chips can be disabled in two ways:
+- `disabled`/`isDisabled` which completely disables the chip. It's not focusable and pointer events (hover, click,
+  etc.) are all disabled too. You'll have to find another way to indicate to users that the chip is here and why it
+  is disabled.
+- `aria-disabled` only disable changes on the chip (read only) so it's still focusable and accessible. You'll have
+  to setup either a tooltip or an aria description (must be visible too) to explain to the user why it is disabled.
+
 ### Chip properties
 
 <PropTable component="Chip" />

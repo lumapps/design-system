@@ -185,6 +185,50 @@ describe('<Chip />', () => {
         });
     });
 
+    describe('Disabled state', () => {
+        it('should render disabled chip button', async () => {
+            const onClick = jest.fn();
+            const { chip } = setup({ children: 'Label', isDisabled: true, onClick });
+            expect(chip).toHaveAttribute('aria-disabled', 'true');
+            await userEvent.click(chip);
+            expect(onClick).not.toHaveBeenCalled();
+        });
+
+        it('should render disabled chip link', async () => {
+            const onClick = jest.fn();
+            const { chip } = setup({ children: 'Label', isDisabled: true, href: 'https://example.com', onClick });
+            // Disabled link should not have an href.
+            expect(chip).not.toHaveAttribute('href');
+            expect(chip).toHaveAttribute('aria-disabled', 'true');
+            await userEvent.click(chip);
+            expect(onClick).not.toHaveBeenCalled();
+        });
+
+        it('should render aria-disabled chip button', async () => {
+            const onClick = jest.fn();
+            const { chip } = setup({ children: 'Label', 'aria-disabled': true, onClick });
+            expect(chip).toHaveAttribute('aria-disabled', 'true');
+            await userEvent.click(chip);
+            // userEvent doesn't dispatch click on aria-disabled elements, but we check just in case.
+            expect(onClick).not.toHaveBeenCalled();
+        });
+
+        it('should render aria-disabled chip link', async () => {
+            const onClick = jest.fn();
+            const { chip } = setup({
+                children: 'Label',
+                'aria-disabled': true,
+                href: 'https://example.com',
+                onClick,
+            });
+            expect(chip).toHaveAttribute('href', 'https://example.com');
+            expect(chip).toHaveAttribute('aria-disabled', 'true');
+            await userEvent.click(chip);
+            // userEvent doesn't dispatch click on aria-disabled elements, but we check just in case.
+            expect(onClick).not.toHaveBeenCalled();
+        });
+    });
+
     commonTestsSuiteRTL(setup, {
         baseClassName: CLASSNAME,
         forwardClassName: 'chip',
