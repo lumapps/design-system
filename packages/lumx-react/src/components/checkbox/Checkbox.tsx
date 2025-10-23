@@ -12,6 +12,7 @@ import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
+import { HasAriaDisabled } from '@lumx/react/utils/type/HasAriaDisabled';
 
 /**
  * Intermediate state of checkbox.
@@ -21,7 +22,7 @@ const INTERMEDIATE_STATE = 'intermediate';
 /**
  * Defines the props of the component.
  */
-export interface CheckboxProps extends GenericProps, HasTheme {
+export interface CheckboxProps extends GenericProps, HasTheme, HasAriaDisabled {
     /** Helper text. */
     helper?: string;
     /** Native input id property. */
@@ -130,6 +131,7 @@ export const Checkbox = forwardRef<CheckboxProps, HTMLDivElement>((props, ref) =
                     onChange={handleChange}
                     aria-describedby={helper ? `${inputId}-helper` : undefined}
                     aria-checked={intermediateState ? 'mixed' : Boolean(isChecked)}
+                    readOnly={inputProps.readOnly || disabledStateProps['aria-disabled']}
                     {...inputProps}
                 />
 
