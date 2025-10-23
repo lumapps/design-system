@@ -147,3 +147,20 @@ export const Theming = {
         }),
     ],
 };
+
+/**
+ * Test Chip disabled states
+ */
+export const Disabled = {
+    args: {
+        children: 'Chip label',
+    },
+    decorators: [
+        withCombinations({
+            combinations: {
+                rows: { disabled: { disabled: true }, 'aria-disabled': { 'aria-disabled': true } },
+                cols: { button: { onClick: () => {} }, link: { href: 'https://example.com' } },
+            },
+        }),
+    ],
+};

@@ -70,7 +70,7 @@
     .#{$lumx-base-prefix}-chip--is-unselected.#{$lumx-base-prefix}-chip--color-#{$key} {
         @include lumx-state(lumx-base-const("state", "DEFAULT"), lumx-base-const("emphasis", "MEDIUM"), $key);
 
-        &.#{$lumx-base-prefix}-chip--is-clickable {
+        &.#{$lumx-base-prefix}-chip--is-clickable:not([aria-disabled=true]) {
             &:hover,
             &[data-lumx-hover] {
                 @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "MEDIUM"), $key);
@@ -105,22 +105,24 @@
         );
 
         &.#{$lumx-base-prefix}-chip--is-clickable {
-            &:hover,
-            &[data-lumx-hover] {
-                @include lumx-state-as-selected(
-                    lumx-base-const("state", "HOVER"),
-                    lumx-base-const("theme", "LIGHT"),
-                    "chip"
-                );
-            }
+            &:not([aria-disabled="true"]) {
+                &:hover,
+                &[data-lumx-hover] {
+                    @include lumx-state-as-selected(
+                        lumx-base-const("state", "HOVER"),
+                            lumx-base-const("theme", "LIGHT"),
+                            "chip"
+                    );
+                }
 
-            &:active,
-            &[data-lumx-active] {
-                @include lumx-state-as-selected(
-                    lumx-base-const("state", "ACTIVE"),
-                    lumx-base-const("theme", "LIGHT"),
-                    "chip"
-                );
+                &:active,
+                &[data-lumx-active] {
+                    @include lumx-state-as-selected(
+                        lumx-base-const("state", "ACTIVE"),
+                            lumx-base-const("theme", "LIGHT"),
+                            "chip"
+                    );
+                }
             }
 
             &[data-focus-visible-added] {
@@ -141,22 +143,24 @@
         );
 
         &.#{$lumx-base-prefix}-chip--is-clickable {
-            &:hover,
-            &[data-lumx-hover] {
-                @include lumx-state-as-selected(
-                    lumx-base-const("state", "HOVER"),
-                    lumx-base-const("theme", "DARK"),
-                    "chip"
-                );
-            }
+            &:not([aria-disabled="true"]) {
+                &:hover,
+                &[data-lumx-hover] {
+                    @include lumx-state-as-selected(
+                        lumx-base-const("state", "HOVER"),
+                            lumx-base-const("theme", "DARK"),
+                            "chip"
+                    );
+                }
 
-            &:active,
-            &[data-lumx-active] {
-                @include lumx-state-as-selected(
-                    lumx-base-const("state", "ACTIVE"),
-                    lumx-base-const("theme", "DARK"),
-                    "chip"
-                );
+                &:active,
+                &[data-lumx-active] {
+                    @include lumx-state-as-selected(
+                        lumx-base-const("state", "ACTIVE"),
+                            lumx-base-const("theme", "DARK"),
+                            "chip"
+                    );
+                }
             }
 
             &[data-focus-visible-added] {
