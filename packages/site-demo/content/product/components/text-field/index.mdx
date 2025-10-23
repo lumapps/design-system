@@ -92,6 +92,21 @@ Use number input when users are expected to enter numeric values.
 
 <DemoBlock demo="number" withThemeSwitcher />
 
+### Accessibility concerns
+
+TextFields use standard HTML input or textarea (when using multiline).
+
+Make sure to always properly label them with the builtin `label` or attaching external labels (via `aria-labelledby`, or
+ external HTML `label` with `for`).
+
+Showing a text field with only a placeholder is not sufficient, visual and accessible labels must also be in place.
+
+Text fields can be disabled in two ways:
+- `disabled`/`isDisabled` which completely disables the text field. It's not focusable and pointer events (hover, click, etc.) are
+  all disabled too. You'll have to find another way to indicate to users that the field is here and why it is disabled.
+- `aria-disabled` only disable editing the text field (read only) so it's still focusable and accessible. You'll have
+  to setup either a `helper`, a tooltip or an aria description to explain to the user why this field is disabled.
+
 ### Properties
 
 <PropTable component="TextField" />

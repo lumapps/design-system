@@ -11,6 +11,7 @@ import { handleBasicClasses } from '@lumx/react/utils/className';
 import { renderLink } from '@lumx/react/utils/react/renderLink';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
+import { HasAriaDisabled } from '@lumx/react/utils/type/HasAriaDisabled';
 
 type HTMLButtonProps = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
 
@@ -21,8 +22,9 @@ export type ButtonSize = Extract<Size, 's' | 'm'>;
 
 export interface BaseButtonProps
     extends GenericProps,
-        Pick<AriaAttributes, 'aria-expanded' | 'aria-haspopup' | 'aria-pressed' | 'aria-label' | 'aria-disabled'>,
-        HasTheme {
+        Pick<AriaAttributes, 'aria-expanded' | 'aria-haspopup' | 'aria-pressed' | 'aria-label'>,
+        HasTheme,
+        HasAriaDisabled {
     /** Color variant. */
     color?: ColorPalette;
     /** Emphasis variant. */

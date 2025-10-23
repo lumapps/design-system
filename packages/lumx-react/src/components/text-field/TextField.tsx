@@ -23,11 +23,12 @@ import { useId } from '@lumx/react/hooks/useId';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
+import { HasAriaDisabled } from '@lumx/react/utils/type/HasAriaDisabled';
 
 /**
  * Defines the props of the component.
  */
-export interface TextFieldProps extends GenericProps, HasTheme {
+export interface TextFieldProps extends GenericProps, HasTheme, HasAriaDisabled {
     /** Chip Group to be rendered before the main text input. */
     chips?: ReactNode;
     /** Props to pass to the clear button (minus those already set by the TextField props). If not specified, the button won't be displayed. */
@@ -159,7 +160,9 @@ interface InputNativeProps {
     id?: string;
     inputRef?: TextFieldProps['inputRef'];
     isDisabled?: boolean;
+    'aria-disabled'?: boolean;
     isRequired?: boolean;
+    readOnly?: boolean;
     multiline?: boolean;
     maxLength?: number;
     placeholder?: string;
@@ -237,6 +240,7 @@ const renderInputNative: React.FC<InputNativeProps> = (props) => {
         onChange: handleChange,
         'aria-invalid': hasError ? 'true' : undefined,
         'aria-describedby': describedById,
+        readOnly: forwardedProps.readOnly || forwardedProps['aria-disabled'],
         ref: mergeRefs(inputRef as any, ref) as any,
     };
     if (multiline) {
@@ -454,7 +458,7 @@ export const TextField = forwardRef<TextFieldProps, HTMLDivElement>((props, ref)
                     />
                 )}
 
-                {clearButtonProps && isNotEmpty && (
+                {clearButtonProps && isNotEmpty && !isAnyDisabled && (
                     <IconButton
                         {...clearButtonProps}
                         className={`${CLASSNAME}__input-clear`}

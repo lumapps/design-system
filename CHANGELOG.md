@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   `TextField`: handle `aria-disabled=true` for an accessible disabled state
+
 ### Fixed
 
 -   `Button` and `IconButton`: fix handling `aria-disabled=true` with link button (using `href` or `linkAs`)
