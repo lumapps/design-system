@@ -186,7 +186,7 @@
 
 // Hover state
 .#{$lumx-base-prefix}-text-field--theme-light {
-    .#{$lumx-base-prefix}-text-field__wrapper:hover {
+    &:not(.#{$lumx-base-prefix}-text-field--is-disabled) .#{$lumx-base-prefix}-text-field__wrapper:hover {
         @include lumx-text-field-wrapper-state(lumx-base-const("state", "HOVER"), lumx-base-const("theme", "LIGHT"));
     }
 
@@ -207,7 +207,7 @@
 }
 
 .#{$lumx-base-prefix}-text-field--theme-dark {
-    .#{$lumx-base-prefix}-text-field__wrapper:hover {
+    &:not(.#{$lumx-base-prefix}-text-field--is-disabled) .#{$lumx-base-prefix}-text-field__wrapper:hover {
         @include lumx-text-field-wrapper-state(lumx-base-const("state", "HOVER"), lumx-base-const("theme", "DARK"));
     }
 
@@ -229,7 +229,7 @@
 
 // Focus state
 .#{$lumx-base-prefix}-text-field--theme-light.#{$lumx-base-prefix}-text-field--is-focus {
-    .#{$lumx-base-prefix}-text-field__label {
+    &:not(.#{$lumx-base-prefix}-text-field--is-disabled) .#{$lumx-base-prefix}-text-field__label {
         @include lumx-text-field-label-color(lumx-base-const("state", "FOCUS"), lumx-base-const("theme", "LIGHT"));
     }
 
@@ -254,7 +254,7 @@
 }
 
 .#{$lumx-base-prefix}-text-field--theme-dark.#{$lumx-base-prefix}-text-field--is-focus {
-    .#{$lumx-base-prefix}-text-field__label {
+    &:not(.#{$lumx-base-prefix}-text-field--is-disabled) .#{$lumx-base-prefix}-text-field__label {
         @include lumx-text-field-label-color(lumx-base-const("state", "FOCUS"), lumx-base-const("theme", "DARK"));
     }
 

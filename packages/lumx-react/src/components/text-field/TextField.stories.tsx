@@ -3,6 +3,7 @@ import { mdiTranslate } from '@lumx/icons';
 import { Chip, IconButton, TextField, Typography } from '@lumx/react';
 import { withValueOnChange } from '@lumx/react/stories/decorators/withValueOnChange';
 import { loremIpsum } from '@lumx/react/stories/utils/lorem';
+import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 
 export default {
     title: 'LumX components/text-field/TextField',
@@ -155,4 +156,25 @@ export const WithChips = {
             </>
         ),
     },
+};
+
+/**
+ * Disabled state
+ */
+export const Disabled = {
+    args: {
+        value: 'Some value',
+        label: 'Label',
+        helper: 'Helper',
+    },
+    decorators: [
+        withCombinations({
+            combinations: {
+                rows: {
+                    disabled: { disabled: true },
+                    'aria-disabled': { 'aria-disabled': true },
+                },
+            },
+        }),
+    ],
 };

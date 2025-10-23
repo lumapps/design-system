@@ -227,6 +227,62 @@ describe(`<${TextField.displayName}>`, () => {
         });
     });
 
+    describe('Disabled state', () => {
+        it('should render with "isDisabled"', async () => {
+            const onChange = jest.fn();
+            const { element, inputNative } = setup({
+                label: 'Label',
+                isDisabled: true,
+                value: 'test',
+                onChange,
+            });
+
+            expect(element).toHaveClass('lumx-text-field--is-disabled');
+            expect(inputNative).toBeDisabled();
+
+            // Cannot type in disabled input.
+            await userEvent.type(inputNative, 'new value');
+            expect(onChange).not.toHaveBeenCalled();
+        });
+
+        it('should not render clear button when disabled', () => {
+            const { clearButton } = setup({
+                value: 'initial value',
+                clearButtonProps: { label: 'Clear' },
+                isDisabled: true,
+            });
+            expect(clearButton).not.toBeInTheDocument();
+        });
+
+        it('should render with "aria-disabled"', async () => {
+            const onChange = jest.fn();
+            const { element, inputNative } = setup({
+                label: 'Label',
+                'aria-disabled': true,
+                value: 'test',
+                onChange,
+            });
+
+            expect(element).toHaveClass('lumx-text-field--is-disabled');
+            expect(inputNative).not.toBeDisabled();
+            expect(inputNative).toHaveAttribute('aria-disabled', 'true');
+            expect(inputNative).toHaveAttribute('readonly');
+
+            // Cannot type in readonly input.
+            await userEvent.type(inputNative, 'new value');
+            expect(onChange).not.toHaveBeenCalled();
+        });
+
+        it('should not render clear button when aria-disabled', () => {
+            const { clearButton } = setup({
+                value: 'initial value',
+                clearButtonProps: { label: 'Clear' },
+                'aria-disabled': true,
+            });
+            expect(clearButton).not.toBeInTheDocument();
+        });
+    });
+
     // Common tests suite.
     commonTestsSuiteRTL(setup, {
         baseClassName: CLASSNAME,

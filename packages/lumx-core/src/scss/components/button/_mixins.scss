@@ -192,9 +192,6 @@
     &:disabled,
     &[aria-disabled="true"] {
         @include lumx-state-disabled-input;
-        // Enabling pointer-events to display label tooltips on hover
-        // @TODO: should be moved in the mixin when all disabled states will be aligned
-        pointer-events: all;
     }
 }
 
