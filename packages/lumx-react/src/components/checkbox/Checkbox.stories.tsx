@@ -1,6 +1,7 @@
 import { Checkbox } from '@lumx/react';
 import { withValueOnChange } from '@lumx/react/stories/decorators/withValueOnChange';
 import { loremIpsum } from '@lumx/react/stories/utils/lorem';
+import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 
 export default {
     title: 'LumX components/checkbox/Checkbox',
@@ -47,7 +48,17 @@ export const IntermediateState = {
  */
 export const Disabled = {
     args: {
-        ...LabelAndHelper.args,
-        isDisabled: true,
+        label: 'Checkbox label',
+        helper: 'Checkbox is disabled because...',
     },
+    decorators: [
+        withCombinations({
+            combinations: {
+                rows: {
+                    disabled: { disabled: true },
+                    'aria-disabled': { 'aria-disabled': true },
+                },
+            },
+        }),
+    ],
 };

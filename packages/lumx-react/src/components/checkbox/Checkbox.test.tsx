@@ -112,6 +112,35 @@ describe(`<${Checkbox.displayName}>`, () => {
         });
     });
 
+    describe('Disabled state', () => {
+        it('should be disabled with isDisabled', async () => {
+            const onChange = jest.fn();
+            const { checkbox, input } = setup({ isDisabled: true, onChange });
+
+            expect(checkbox).toHaveClass('lumx-checkbox--is-disabled');
+            expect(input).toBeDisabled();
+
+            // Should not trigger onChange.
+            await userEvent.click(input);
+            expect(onChange).not.toHaveBeenCalled();
+        });
+
+        it('should be disabled with aria-disabled', async () => {
+            const onChange = jest.fn();
+            const { checkbox, input } = setup({ 'aria-disabled': true, onChange });
+
+            expect(checkbox).toHaveClass('lumx-checkbox--is-disabled');
+            // Note: input is not disabled (so it can be focused) but it's readOnly.
+            expect(input).not.toBeDisabled();
+            expect(input).toHaveAttribute('aria-disabled', 'true');
+            expect(input).toHaveAttribute('readOnly');
+
+            // Should not trigger onChange.
+            await userEvent.click(input);
+            expect(onChange).not.toHaveBeenCalled();
+        });
+    });
+
     // Common tests suite.
     commonTestsSuiteRTL(setup, {
         baseClassName: CLASSNAME,
