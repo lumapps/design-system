@@ -10,6 +10,13 @@ Radio buttons with label are fully accessible by default. If a helper is provide
 
 In contexts where there is no direct label attached to the radio button, alternative label should be provided with either [`aria-labelledby`](https://w3c.github.io/aria/#aria-labelledby) (preferred) or [`aria-label`](https://w3c.github.io/aria/#aria-label) (only in last resort) attributes forwarded inside the `inputProps` property.
 
+Radio button can disabled in two ways:
+- `disabled`/`isDisabled` which completely disables the radio button. It's not focusable and pointer events (hover, click,
+  etc.) are all disabled too. You'll have to find another way to indicate to users that the radio button is here and
+  why it is disabled.
+- `aria-disabled` only disable changes on the radio button (read only) so it's still focusable and accessible. You'll
+  have to setup either a `helper`, a tooltip or an aria description to explain to the user why it is disabled.
+
 ### Properties
 
 <PropTable component="RadioButton" />

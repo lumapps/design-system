@@ -76,10 +76,6 @@
 
 // Disabled state
 .#{$lumx-base-prefix}-radio-button--is-disabled {
-    .#{$lumx-base-prefix}-radio-button__input-native {
-        pointer-events: none;
-    }
-
     .#{$lumx-base-prefix}-radio-button__input-placeholder {
         @include lumx-state-disabled-input;
     }
@@ -100,36 +96,38 @@
 }
 
 // Hover state
-.#{$lumx-base-prefix}-radio-button--theme-light.#{$lumx-base-prefix}-radio-button--is-unchecked
-.#{$lumx-base-prefix}-radio-button__input-native:hover
-+ .#{$lumx-base-prefix}-radio-button__input-placeholder {
-    .#{$lumx-base-prefix}-radio-button__input-background {
-        @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "LOW"), "dark");
+:not(.#{$lumx-base-prefix}-radio-button--is-disabled) {
+    &.#{$lumx-base-prefix}-radio-button--theme-light.#{$lumx-base-prefix}-radio-button--is-unchecked
+    .#{$lumx-base-prefix}-radio-button__input-native:hover
+    + .#{$lumx-base-prefix}-radio-button__input-placeholder {
+        .#{$lumx-base-prefix}-radio-button__input-background {
+            @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "LOW"), "dark");
+        }
     }
-}
 
-.#{$lumx-base-prefix}-radio-button--theme-dark.#{$lumx-base-prefix}-radio-button--is-unchecked
-.#{$lumx-base-prefix}-radio-button__input-native:hover
-+ .#{$lumx-base-prefix}-radio-button__input-placeholder {
-    .#{$lumx-base-prefix}-radio-button__input-background {
-        @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "LOW"), "light");
+    &.#{$lumx-base-prefix}-radio-button--theme-dark.#{$lumx-base-prefix}-radio-button--is-unchecked
+    .#{$lumx-base-prefix}-radio-button__input-native:hover
+    + .#{$lumx-base-prefix}-radio-button__input-placeholder {
+        .#{$lumx-base-prefix}-radio-button__input-background {
+            @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "LOW"), "light");
+        }
     }
-}
 
-// Active state
-.#{$lumx-base-prefix}-radio-button--theme-light.#{$lumx-base-prefix}-radio-button--is-unchecked
-.#{$lumx-base-prefix}-radio-button__input-native:active
-+ .#{$lumx-base-prefix}-radio-button__input-placeholder {
-    .#{$lumx-base-prefix}-radio-button__input-background {
-        @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "LOW"), "dark");
+    // Active state
+    &.#{$lumx-base-prefix}-radio-button--theme-light.#{$lumx-base-prefix}-radio-button--is-unchecked
+    .#{$lumx-base-prefix}-radio-button__input-native:active
+    + .#{$lumx-base-prefix}-radio-button__input-placeholder {
+        .#{$lumx-base-prefix}-radio-button__input-background {
+            @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "LOW"), "dark");
+        }
     }
-}
 
-.#{$lumx-base-prefix}-radio-button--theme-dark.#{$lumx-base-prefix}-radio-button--is-unchecked
-.#{$lumx-base-prefix}-radio-button__input-native:active
-+ .#{$lumx-base-prefix}-radio-button__input-placeholder {
-    .#{$lumx-base-prefix}-radio-button__input-background {
-        @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "LOW"), "light");
+    &.#{$lumx-base-prefix}-radio-button--theme-dark.#{$lumx-base-prefix}-radio-button--is-unchecked
+    .#{$lumx-base-prefix}-radio-button__input-native:active
+    + .#{$lumx-base-prefix}-radio-button__input-placeholder {
+        .#{$lumx-base-prefix}-radio-button__input-background {
+            @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "LOW"), "light");
+        }
     }
 }
 
