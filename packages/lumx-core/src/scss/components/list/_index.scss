@@ -42,8 +42,7 @@
         @include lumx-list-item-selected;
     }
 
-    &__link--is-disabled,
-    &__link[aria-disabled="true"] {
+    &__link--is-disabled {
         @include lumx-state-disabled-input;
     }
 }
