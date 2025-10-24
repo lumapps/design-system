@@ -76,13 +76,15 @@ export const WithCustomizableTypography = {
 export const AllStates = {
     argTypes: {
         isDisabled: { control: false },
+        onClick: { action: true },
     },
     decorators: [
         withThemedBackground(),
         withCombinations({
             combinations: {
                 sections: {
-                    Default: {},
+                    Default: { href: '#' },
+                    'As button': {},
                     'with icon': {
                         children: ['Link', <Icon key="icon" icon={mdiEarth} />, 'with icon'],
                     },
@@ -91,6 +93,7 @@ export const AllStates = {
                     Default: {},
                     Disabled: { isDisabled: true },
                     Focused: { 'data-focus-visible-added': true },
+                    'ARIA Disabled': { 'aria-disabled': true },
                     Hovered: { 'data-lumx-hover': true },
                 },
                 rows: {

@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `DatePickerField`: handle `aria-disabled=true` for an accessible disabled state
 -   `Checkbox`: handle `aria-disabled=true` for an accessible disabled state
 -   `Chip`: handle `aria-disabled=true` for an accessible disabled state
+-   `Link`: handle `aria-disabled=true` for an accessible disabled state
 
 ### Fixed
 

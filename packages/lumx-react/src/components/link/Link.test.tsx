@@ -4,6 +4,7 @@ import { ColorPalette, ColorVariant, Icon, Typography } from '@lumx/react';
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import { getByClassName, queryAllByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { mdiCheck, mdiPlus } from '@lumx/icons';
 import { Link, LinkProps } from './Link';
 
@@ -55,12 +56,6 @@ describe(`<${Link.displayName}>`, () => {
             expect(link).toBe(screen.queryByRole('button', { name }));
         });
 
-        it('should render disabled link as button', () => {
-            const name = 'Link';
-            const { link } = setup({ href: 'https://google.com', isDisabled: true, children: name });
-            expect(link).toBe(screen.queryByRole('button', { name }));
-        });
-
         it('should render with icons', () => {
             const { link } = setup({
                 leftIcon: mdiCheck,
@@ -75,6 +70,50 @@ describe(`<${Link.displayName}>`, () => {
                 expect((icon.previousSibling as any).textContent).toEqual(' ');
                 expect((icon.nextSibling as any).textContent).toEqual(' ');
             }
+        });
+    });
+
+    describe('Disabled state', () => {
+        it('should render disabled button', async () => {
+            const onClick = jest.fn();
+            const { link } = setup({ children: 'Label', isDisabled: true, onClick });
+            expect(link).toHaveAttribute('disabled');
+            await userEvent.click(link);
+            expect(onClick).not.toHaveBeenCalled();
+        });
+
+        it('should render disabled link', async () => {
+            const onClick = jest.fn();
+            const { link } = setup({ children: 'Label', isDisabled: true, href: 'https://example.com', onClick });
+            // Disabled link do not exist so we fallback to a button
+            expect(screen.queryByRole('link')).not.toBeInTheDocument();
+            expect(link).toHaveAttribute('disabled');
+            await userEvent.click(link);
+            expect(onClick).not.toHaveBeenCalled();
+        });
+
+        it('should render aria-disabled button', async () => {
+            const onClick = jest.fn();
+            const { link } = setup({ children: 'Label', 'aria-disabled': true, onClick });
+            expect(link).toHaveAttribute('aria-disabled');
+            await userEvent.click(link);
+            expect(onClick).not.toHaveBeenCalled();
+        });
+
+        it('should render aria-disabled link', async () => {
+            const onClick = jest.fn();
+            const { link } = setup({
+                children: 'Label',
+                'aria-disabled': true,
+                href: 'https://example.com',
+                onClick,
+            });
+            expect(link).toHaveAccessibleName('Label');
+            // Disabled link do not exist so we fallback to a button
+            expect(screen.queryByRole('link')).not.toBeInTheDocument();
+            expect(link).toHaveAttribute('aria-disabled', 'true');
+            await userEvent.click(link);
+            expect(onClick).not.toHaveBeenCalled();
         });
     });
 

@@ -13,13 +13,14 @@ import {
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { wrapChildrenIconWithSpaces } from '@lumx/react/utils/react/wrapChildrenIconWithSpaces';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
+import { HasAriaDisabled } from '@lumx/react/utils/type/HasAriaDisabled';
 
 type HTMLAnchorProps = React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
 
 /**
  * Defines the props of the component.
  */
-export interface LinkProps extends GenericProps {
+export interface LinkProps extends GenericProps, HasAriaDisabled {
     /** Color variant. */
     color?: ColorWithVariants;
     /** Lightened or darkened variant of the selected icon color. */

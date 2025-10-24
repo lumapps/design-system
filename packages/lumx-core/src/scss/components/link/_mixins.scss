@@ -17,10 +17,12 @@
         line-height: inherit;
     }
 
-    &:hover,
-    &[data-lumx-hover],
-    &[data-focus-visible-added] {
-        text-decoration: underline;
+    &:not(:disabled):not([aria-disabled="true"]) {
+        &:hover,
+        &[data-lumx-hover],
+        &[data-focus-visible-added] {
+            text-decoration: underline;
+        }
     }
 
     &[data-focus-visible-added],
