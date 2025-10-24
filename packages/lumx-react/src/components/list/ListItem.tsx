@@ -10,13 +10,14 @@ import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/classNam
 import { renderLink } from '@lumx/react/utils/react/renderLink';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
+import { HasAriaDisabled } from '@lumx/react/utils/type/HasAriaDisabled';
 
 export type ListItemSize = Extract<Size, 'tiny' | 'regular' | 'big' | 'huge'>;
 
 /**
  * Defines the props of the component.
  */
-export interface ListItemProps extends GenericProps {
+export interface ListItemProps extends GenericProps, HasAriaDisabled {
     /** A component to be rendered after the content. */
     after?: ReactNode;
     /** A component to be rendered before the content. */
@@ -77,7 +78,7 @@ export function isClickable({ linkProps, onItemSelected }: Partial<ListItemProps
  * @return React element.
  */
 export const ListItem = forwardRef<ListItemProps, HTMLLIElement>((props, ref) => {
-    const { isAnyDisabled, otherProps } = useDisableStateProps(props);
+    const { isAnyDisabled, disabledStateProps, otherProps } = useDisableStateProps(props);
     const {
         after,
         before,
@@ -125,7 +126,7 @@ export const ListItem = forwardRef<ListItemProps, HTMLLIElement>((props, ref) =>
                 renderLink(
                     {
                         linkAs,
-                        tabIndex: !isAnyDisabled && role === 'button' ? 0 : undefined,
+                        tabIndex: !disabledStateProps.disabled ? 0 : undefined,
                         role,
                         'aria-disabled': isAnyDisabled,
                         ...linkProps,
@@ -139,7 +140,7 @@ export const ListItem = forwardRef<ListItemProps, HTMLLIElement>((props, ref) =>
                             }),
                         ),
                         onClick: isAnyDisabled ? undefined : onItemSelected,
-                        onKeyDown,
+                        onKeyDown: isAnyDisabled ? undefined : onKeyDown,
                         ref: linkRef,
                     },
                     content,

@@ -34,15 +34,17 @@
         outline-offset: -2px;
     }
 
-    &:hover,
-    &[data-lumx-hover],
-    &[data-focus-visible-added] {
-        @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "LOW"), "dark");
-    }
+    &:not([aria-disabled="true"]) {
+        &:hover,
+        &[data-lumx-hover],
+        &[data-focus-visible-added] {
+            @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "LOW"), "dark");
+        }
 
-    &:active,
-    &[data-lumx-active], {
-        @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "LOW"), "dark");
+        &:active,
+        &[data-lumx-active], {
+            @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "LOW"), "dark");
+        }
     }
 }
 
