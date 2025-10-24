@@ -2,6 +2,7 @@ import { DatePickerField } from '@lumx/react';
 import { withValueOnChange } from '@lumx/react/stories/decorators/withValueOnChange';
 import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
 import { loremIpsum } from '@lumx/react/stories/utils/lorem';
+import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 
 export default {
     title: 'LumX components/date-picker/DatePickerField',
@@ -79,4 +80,21 @@ export const DefaultMonth = {
         ...LabelPlaceholderAndHelper.args,
         defaultMonth: new Date('2019-07-14'),
     },
+};
+
+/**
+ * Disabled states
+ */
+export const Disabled = {
+    args: DefaultValue.args,
+    decorators: [
+        withCombinations({
+            combinations: {
+                rows: {
+                    disabled: { disabled: true },
+                    'aria-disabled': { 'aria-disabled': true },
+                },
+            },
+        }),
+    ],
 };
