@@ -9,11 +9,12 @@ import { useId } from '@lumx/react/hooks/useId';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
+import { HasAriaDisabled } from '@lumx/react/utils/type/HasAriaDisabled';
 
 /**
  * Defines the props of the component.
  */
-export interface RadioButtonProps extends GenericProps, HasTheme {
+export interface RadioButtonProps extends GenericProps, HasTheme, HasAriaDisabled {
     /** Helper text. */
     helper?: string;
     /** Native input id property. */
@@ -111,6 +112,7 @@ export const RadioButton = forwardRef<RadioButtonProps, HTMLDivElement>((props, 
                     value={value}
                     checked={isChecked}
                     onChange={handleChange}
+                    readOnly={inputProps?.readOnly || isAnyDisabled}
                     aria-describedby={helper ? `${inputId}-helper` : undefined}
                     {...inputProps}
                 />
