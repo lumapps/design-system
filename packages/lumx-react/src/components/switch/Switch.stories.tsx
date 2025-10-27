@@ -1,6 +1,7 @@
 import { Alignment, Switch, SwitchProps } from '@lumx/react';
 import { withValueOnChange } from '@lumx/react/stories/decorators/withValueOnChange';
 import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 
 export default {
     title: 'LumX components/switch/Switch',
@@ -28,7 +29,16 @@ export const Default = {};
  * Switch disabled
  */
 export const Disabled = {
-    args: { isDisabled: true },
+    decorators: [
+        withCombinations({
+            combinations: {
+                rows: {
+                    disabled: { isDisabled: true },
+                    'aria-disabled': { 'aria-disabled': true },
+                },
+            },
+        }),
+    ],
 };
 
 /**

@@ -10,6 +10,13 @@ Switches are based on standard checkbox, implement the [WAI-ARIA `switch` patter
 
 In contexts where there is no direct label attached to the checkbox, alternative label should be provided with either [`aria-labelledby`](https://w3c.github.io/aria/#aria-labelledby) (preferred) or [`aria-label`](https://w3c.github.io/aria/#aria-label) (only in last resort) attributes forwarded inside the `inputProps` property.
 
+Switches can be disabled in two ways:
+- `disabled`/`isDisabled` which completely disables the switch. It's not focusable and pointer events (hover, click,
+  etc.) are all disabled too. You'll have to find another way to indicate to users that the switch is here and why it
+  is disabled.
+- `aria-disabled` only disable changes on the switch (read only) so it's still focusable and accessible. You'll have
+  to setup either a `helper`, a tooltip or an aria description to explain to the user why it is disabled.
+
 ### Properties
 
 <PropTable component="Switch" />
