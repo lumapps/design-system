@@ -10,11 +10,12 @@ import { useId } from '@lumx/react/hooks/useId';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
+import { HasAriaDisabled } from '@lumx/react/utils/type/HasAriaDisabled';
 
 /**
  * Defines the props of the component.
  */
-export interface SwitchProps extends GenericProps, HasTheme {
+export interface SwitchProps extends GenericProps, HasTheme, HasAriaDisabled {
     /** Helper text. */
     helper?: string;
     /** Whether it is checked or not. */
@@ -110,6 +111,7 @@ export const Switch = forwardRef<SwitchProps, HTMLDivElement>((props, ref) => {
                     name={name}
                     value={value}
                     {...disabledStateProps}
+                    readOnly={inputProps.readOnly || isAnyDisabled}
                     checked={isChecked}
                     aria-checked={Boolean(isChecked)}
                     onChange={handleChange}

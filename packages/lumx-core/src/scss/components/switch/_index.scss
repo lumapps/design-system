@@ -112,10 +112,6 @@
 
 // Disabled state
 .#{$lumx-base-prefix}-switch--is-disabled {
-    .#{$lumx-base-prefix}-switch__input-native {
-        pointer-events: none;
-    }
-
     .#{$lumx-base-prefix}-switch__input-placeholder {
         @include lumx-state-disabled-input;
     }
@@ -135,89 +131,91 @@
     }
 }
 
-// Hover state
-.#{$lumx-base-prefix}-switch--theme-light.#{$lumx-base-prefix}-switch--is-unchecked
-.#{$lumx-base-prefix}-switch__input-native:hover
-+ .#{$lumx-base-prefix}-switch__input-placeholder {
-    .#{$lumx-base-prefix}-switch__input-background {
-        @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "LOW"), "dark");
+:not(.#{$lumx-base-prefix}-switch--is-disabled) {
+    // Hover state
+    &.#{$lumx-base-prefix}-switch--theme-light.#{$lumx-base-prefix}-switch--is-unchecked
+    .#{$lumx-base-prefix}-switch__input-native:hover
+    + .#{$lumx-base-prefix}-switch__input-placeholder {
+        .#{$lumx-base-prefix}-switch__input-background {
+            @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "LOW"), "dark");
+        }
     }
-}
 
-.#{$lumx-base-prefix}-switch--theme-dark.#{$lumx-base-prefix}-switch--is-unchecked
-.#{$lumx-base-prefix}-switch__input-native:hover
-+ .#{$lumx-base-prefix}-switch__input-placeholder {
-    .#{$lumx-base-prefix}-switch__input-background {
-        @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "LOW"), "light");
+    &.#{$lumx-base-prefix}-switch--theme-dark.#{$lumx-base-prefix}-switch--is-unchecked
+    .#{$lumx-base-prefix}-switch__input-native:hover
+    + .#{$lumx-base-prefix}-switch__input-placeholder {
+        .#{$lumx-base-prefix}-switch__input-background {
+            @include lumx-state(lumx-base-const("state", "HOVER"), lumx-base-const("emphasis", "LOW"), "light");
+        }
     }
-}
 
-.#{$lumx-base-prefix}-switch--theme-light.#{$lumx-base-prefix}-switch--is-checked
-.#{$lumx-base-prefix}-switch__input-native:hover
-+ .#{$lumx-base-prefix}-switch__input-placeholder {
-    .#{$lumx-base-prefix}-switch__input-background {
-        @include lumx-state(
-            lumx-base-const("state", "HOVER"),
-            lumx-base-const("emphasis", "HIGH"),
-            "primary",
-            lumx-base-const("theme", "LIGHT")
-        );
+    &.#{$lumx-base-prefix}-switch--theme-light.#{$lumx-base-prefix}-switch--is-checked
+    .#{$lumx-base-prefix}-switch__input-native:hover
+    + .#{$lumx-base-prefix}-switch__input-placeholder {
+        .#{$lumx-base-prefix}-switch__input-background {
+            @include lumx-state(
+                lumx-base-const("state", "HOVER"),
+                lumx-base-const("emphasis", "HIGH"),
+              "primary",
+              lumx-base-const("theme", "LIGHT")
+          );
+        }
     }
-}
 
-.#{$lumx-base-prefix}-switch--theme-dark.#{$lumx-base-prefix}-switch--is-checked
-.#{$lumx-base-prefix}-switch__input-native:hover
-+ .#{$lumx-base-prefix}-switch__input-placeholder {
-    .#{$lumx-base-prefix}-switch__input-background {
-        @include lumx-state(
-            lumx-base-const("state", "HOVER"),
-            lumx-base-const("emphasis", "HIGH"),
-            "primary",
-            lumx-base-const("theme", "DARK")
-        );
+    &.#{$lumx-base-prefix}-switch--theme-dark.#{$lumx-base-prefix}-switch--is-checked
+    .#{$lumx-base-prefix}-switch__input-native:hover
+    + .#{$lumx-base-prefix}-switch__input-placeholder {
+        .#{$lumx-base-prefix}-switch__input-background {
+            @include lumx-state(
+                lumx-base-const("state", "HOVER"),
+                lumx-base-const("emphasis", "HIGH"),
+              "primary",
+              lumx-base-const("theme", "DARK")
+          );
+        }
     }
-}
 
-// Active state
-.#{$lumx-base-prefix}-switch--theme-light.#{$lumx-base-prefix}-switch--is-unchecked
-.#{$lumx-base-prefix}-switch__input-native:active
-+ .#{$lumx-base-prefix}-switch__input-placeholder {
-    .#{$lumx-base-prefix}-switch__input-background {
-        @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "LOW"), "dark");
+    // Active state
+    &.#{$lumx-base-prefix}-switch--theme-light.#{$lumx-base-prefix}-switch--is-unchecked
+    .#{$lumx-base-prefix}-switch__input-native:active
+    + .#{$lumx-base-prefix}-switch__input-placeholder {
+        .#{$lumx-base-prefix}-switch__input-background {
+            @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "LOW"), "dark");
+        }
     }
-}
 
-.#{$lumx-base-prefix}-switch--theme-dark.#{$lumx-base-prefix}-switch--is-unchecked
-.#{$lumx-base-prefix}-switch__input-native:active
-+ .#{$lumx-base-prefix}-switch__input-placeholder {
-    .#{$lumx-base-prefix}-switch__input-background {
-        @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "LOW"), "light");
+    &.#{$lumx-base-prefix}-switch--theme-dark.#{$lumx-base-prefix}-switch--is-unchecked
+    .#{$lumx-base-prefix}-switch__input-native:active
+    + .#{$lumx-base-prefix}-switch__input-placeholder {
+        .#{$lumx-base-prefix}-switch__input-background {
+            @include lumx-state(lumx-base-const("state", "ACTIVE"), lumx-base-const("emphasis", "LOW"), "light");
+        }
     }
-}
 
-.#{$lumx-base-prefix}-switch--theme-light.#{$lumx-base-prefix}-switch--is-checked
-.#{$lumx-base-prefix}-switch__input-native:active
-+ .#{$lumx-base-prefix}-switch__input-placeholder {
-    .#{$lumx-base-prefix}-switch__input-background {
-        @include lumx-state(
-            lumx-base-const("state", "ACTIVE"),
-            lumx-base-const("emphasis", "HIGH"),
-            "primary",
-            lumx-base-const("theme", "LIGHT")
-        );
+    &.#{$lumx-base-prefix}-switch--theme-light.#{$lumx-base-prefix}-switch--is-checked
+    .#{$lumx-base-prefix}-switch__input-native:active
+    + .#{$lumx-base-prefix}-switch__input-placeholder {
+        .#{$lumx-base-prefix}-switch__input-background {
+            @include lumx-state(
+                lumx-base-const("state", "ACTIVE"),
+                lumx-base-const("emphasis", "HIGH"),
+              "primary",
+              lumx-base-const("theme", "LIGHT")
+          );
+        }
     }
-}
 
-.#{$lumx-base-prefix}-switch--theme-dark.#{$lumx-base-prefix}-switch--is-checked
-.#{$lumx-base-prefix}-switch__input-native:active
-+ .#{$lumx-base-prefix}-switch__input-placeholder {
-    .#{$lumx-base-prefix}-switch__input-background {
-        @include lumx-state(
-            lumx-base-const("state", "ACTIVE"),
-            lumx-base-const("emphasis", "HIGH"),
-            "primary",
-            lumx-base-const("theme", "DARK")
-        );
+    &.#{$lumx-base-prefix}-switch--theme-dark.#{$lumx-base-prefix}-switch--is-checked
+    .#{$lumx-base-prefix}-switch__input-native:active
+    + .#{$lumx-base-prefix}-switch__input-placeholder {
+        .#{$lumx-base-prefix}-switch__input-background {
+            @include lumx-state(
+                lumx-base-const("state", "ACTIVE"),
+                lumx-base-const("emphasis", "HIGH"),
+              "primary",
+              lumx-base-const("theme", "DARK")
+          );
+        }
     }
 }
 
