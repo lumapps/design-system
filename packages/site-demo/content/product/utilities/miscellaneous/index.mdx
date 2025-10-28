@@ -44,8 +44,8 @@ import React, { useEffect } from 'react';
 
 function initPortal() {
     const container = document.createElement('div');
-    document.body.appendChild(div);
-    return { container, teardown: () => div.remove() };
+    document.body.appendChild(container);
+    return { container, teardown: () => container.remove() };
 }
 
 const MyComponent = () => (
@@ -61,3 +61,27 @@ const MyComponent = () => (
 <Message kind="info">
     In this example, `initPortal` initializes a container div for all portals defined inside the children content
 </Message>
+
+## Disabled state context
+
+The `DisabledStateProvider` component allows you to set the disabled state of all components nested.
+
+```tsx
+import { Button, TextField, Checkbox } from '@lumx/react';
+import { DisabledStateProvider } from '@lumx/react/utils';
+
+const MyComponent = () => (
+  <DisabledStateProvider state="disabled">
+    <Button>Button</Button>
+    <TextField />
+    <Checkbox />
+  </DisabledStateProvider>
+)
+```
+
+<Message kind="info">
+    In this example, the button, text field and checkbox in the context will all get disabled.
+</Message>
+
+To get your custom component to handle this disable state context, you can use the `useDisabledStateContext()` hook
+(from the same `@lumx/react/utils` module).

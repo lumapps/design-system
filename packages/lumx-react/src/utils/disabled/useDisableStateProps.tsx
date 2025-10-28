@@ -1,3 +1,5 @@
+import { useDisabledStateContext } from './DisabledStateContext';
+
 type GenericProps = {
     disabled?: boolean;
     isDisabled?: boolean;
@@ -21,8 +23,9 @@ interface Output<TProps extends GenericProps> {
  */
 export function useDisableStateProps<TProps extends GenericProps>(props: TProps): Output<TProps> {
     const { disabled, isDisabled = disabled, 'aria-disabled': ariaDisabled, onClick, onChange, ...otherProps } = props;
+    const disabledStateContext = useDisabledStateContext();
     const disabledStateProps = {
-        disabled: isDisabled,
+        disabled: disabledStateContext?.state === 'disabled' || isDisabled,
         'aria-disabled': ariaDisabled === true || ariaDisabled === 'true',
     };
     const isAnyDisabled = disabledStateProps['aria-disabled'] || disabledStateProps.disabled;
