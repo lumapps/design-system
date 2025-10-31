@@ -3724,6 +3724,7 @@ __metadata:
     "@types/dom-view-transitions": ^1.0.5
     "@types/jest": ^29.2.1
     "@types/lodash": ^4.14.149
+    "@vitejs/plugin-vue": ^6.0.1
     autoprefixer: ^9.7.4
     babel-jest: 29.1.2
     babel-loader: ^8.0.6
@@ -4477,6 +4478,13 @@ __metadata:
     react: 15.x || 16.x || 16.4.0-alpha.0911da3
     react-dom: 15.x || 16.x || 16.4.0-alpha.0911da3
   checksum: f64372497e0464a9fdfd79283fec3f4fd01ee093f1599d8a8035e0a41fbce22113bfa46dcea63aa8b7b4e0796e916f134aa8e3fccd3974be397e7c19468de3c4
+  languageName: node
+  linkType: hard
+
+"@rolldown/pluginutils@npm:1.0.0-beta.29":
+  version: 1.0.0-beta.29
+  resolution: "@rolldown/pluginutils@npm:1.0.0-beta.29"
+  checksum: 038d5ae6249c3d87adc2a44968f0777dd2a7f44d24adc1637ea9c96fda86ea5ea529ee6f6bdb486be86440f11b11e17fcae954a80ef1ed649423ceb18fcbb7d5
   languageName: node
   linkType: hard
 
@@ -6370,6 +6378,18 @@ __metadata:
     rollup-pluginutils: ^2.8.2
     sourcemap-codec: ^1.4.4
   checksum: ac2b610fffea502b00510f31a33c15a41c3e56f0ace780737c72e64a7c89ca6c421c960b42e250c82750127c9ae9c95a885e545c42169629a6dd684ceacd8235
+  languageName: node
+  linkType: hard
+
+"@vitejs/plugin-vue@npm:^6.0.1":
+  version: 6.0.1
+  resolution: "@vitejs/plugin-vue@npm:6.0.1"
+  dependencies:
+    "@rolldown/pluginutils": 1.0.0-beta.29
+  peerDependencies:
+    vite: ^5.0.0 || ^6.0.0 || ^7.0.0
+    vue: ^3.2.25
+  checksum: 551b4927f6a9840f1e6576402da723756e9e7e383ff7bff0b0d410153409432389ce54873a78289c76454195213f7e02a43f64f99ff08fa71e32f47a2eeb8e85
   languageName: node
   linkType: hard
 

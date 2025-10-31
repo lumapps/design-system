@@ -9,7 +9,9 @@
         "@lumx/core": "^3.18.0",
         "@lumx/icons": "^3.18.0",
         "@lumx/react": "^3.18.0",
-        "@r2wc/react-to-web-component": "2.1.0"
+        "@r2wc/react-to-web-component": "2.1.0",
+                "react": "18.3.1",
+        "react-dom": "18.3.1",
     },
     "devDependencies": {
         "@babel/core": "^7.26.10",
@@ -38,6 +40,7 @@
         "@types/dom-view-transitions": "^1.0.5",
         "@types/jest": "^29.2.1",
         "@types/lodash": "^4.14.149",
+        "@vitejs/plugin-vue": "^6.0.1",
         "autoprefixer": "^9.7.4",
         "babel-jest": "29.1.2",
         "babel-loader": "^8.0.6",

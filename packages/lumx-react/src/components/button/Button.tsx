@@ -66,6 +66,7 @@ export const Button = forwardRef<ButtonProps, HTMLButtonElement | HTMLAnchorElem
         rightIcon,
         size = DEFAULT_PROPS.size,
         theme = defaultTheme,
+        label,
         ...forwardedProps
     } = props;
 
@@ -74,6 +75,8 @@ export const Button = forwardRef<ButtonProps, HTMLButtonElement | HTMLAnchorElem
         getBasicClass({ prefix: CLASSNAME, type: 'hasLeftIcon', value: !isEmpty(leftIcon) }),
         getBasicClass({ prefix: CLASSNAME, type: 'hasRightIcon', value: !isEmpty(rightIcon) }),
     );
+
+    const childrenToRender = children || label;
 
     return (
         <ButtonRoot
@@ -88,7 +91,8 @@ export const Button = forwardRef<ButtonProps, HTMLButtonElement | HTMLAnchorElem
                     <Icon icon={leftIcon} />
                 </ThemeProvider>
             )}
-            {children && (isComponent(Text)(children) ? children : <span>{children}</span>)}
+            {childrenToRender &&
+                (isComponent(Text)(childrenToRender) ? childrenToRender : <span>{childrenToRender}</span>)}
             {rightIcon && !isEmpty(rightIcon) && (
                 // Theme is handled in the button scss
                 <ThemeProvider value={undefined}>
