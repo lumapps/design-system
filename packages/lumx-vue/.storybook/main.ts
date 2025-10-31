@@ -3,6 +3,7 @@ import { mergeConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import vue from '@vitejs/plugin-vue';
 import postcss from './postcss.config';
+import { server } from 'typescript';
 
 const config: StorybookConfig = {
     framework: '@storybook/vue3-vite',

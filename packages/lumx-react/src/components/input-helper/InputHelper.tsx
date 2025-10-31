@@ -1,41 +1,24 @@
 import React, { ReactNode } from 'react';
 
-import classNames from 'classnames';
-
-import { Kind, Theme } from '@lumx/react';
-import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { Theme } from '@lumx/react';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import {
+    getProps,
+    InputHelperProps as BaseInputHelperProps,
+    CLASSNAME,
+    COMPONENT_NAME,
+    DEFAULT_PROPS,
+} from '@lumx/core/components/input-helper';
 
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
-import { INPUT_HELPER_CONFIGURATION } from './constants';
 
 /**
  * Defines the props of the component.
  */
-export interface InputHelperProps extends GenericProps, HasTheme {
+export interface InputHelperProps extends BaseInputHelperProps {
     /** Helper content. */
     children: string | ReactNode;
-    /** Helper variant. */
-    kind?: Kind;
 }
-
-/**
- * Component display name.
- */
-const COMPONENT_NAME = 'InputHelper';
-
-/**
- * Component default class name and class prefix.
- */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
-
-/**
- * Component default props.
- */
-const DEFAULT_PROPS: Partial<InputHelperProps> = {
-    kind: Kind.info,
-};
 
 /**
  * InputHelper component.
@@ -46,15 +29,11 @@ const DEFAULT_PROPS: Partial<InputHelperProps> = {
  */
 export const InputHelper = forwardRef<InputHelperProps, HTMLParagraphElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
-    const { children, className, kind = DEFAULT_PROPS.kind, theme = defaultTheme, ...forwardedProps } = props;
-    const { color } = INPUT_HELPER_CONFIGURATION[kind as any] || {};
+    const { children, theme = defaultTheme, ...forwardedProps } = props;
+    const { className: rootClassName } = getProps({ ...props, theme });
 
     return (
-        <p
-            ref={ref}
-            {...forwardedProps}
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color, theme }))}
-        >
+        <p ref={ref} {...forwardedProps} className={rootClassName}>
             {children}
         </p>
     );

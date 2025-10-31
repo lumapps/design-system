@@ -8,10 +8,7 @@
     "dependencies": {
         "@lumx/core": "^3.18.0",
         "@lumx/icons": "^3.18.0",
-        "@lumx/react": "^3.18.0",
-        "@r2wc/react-to-web-component": "2.1.0",
-                "react": "18.3.1",
-        "react-dom": "18.3.1",
+        "@lumx/react": "^3.18.0"
     },
     "devDependencies": {
         "@babel/core": "^7.26.10",
@@ -97,7 +94,7 @@
         "build": "rollup -c",
         "prepare": "install-peers || exit 0",
         "test": "jest --config jest/index.js --coverage --notify --passWithNoTests --detectOpenHandles --runInBand",
-        "start:storybook": "storybook dev -p 9000",
+        "start:storybook": "storybook dev -p 6007",
         "build:storybook": "storybook build"
     },
     "sideEffects": false,

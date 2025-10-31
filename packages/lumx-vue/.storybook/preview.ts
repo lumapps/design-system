@@ -1,5 +1,6 @@
 import type { Preview } from '@storybook/vue3-vite';
 import { Theme } from '@lumx/react';
+import { withLumxStyles } from './decorator';
 
 const preview: Preview = {
     globalTypes: {
@@ -33,6 +34,6 @@ const preview: Preview = {
     argTypes: {
         theme: { table: { disable: true } },
     },
-    decorators: [],
+    decorators: [withLumxStyles],
 };
 export default preview;
