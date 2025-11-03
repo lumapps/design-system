@@ -60,8 +60,10 @@
 /* Item link states
    ========================================================================== */
 
-.#{$lumx-base-prefix}-side-navigation-item .#{$lumx-base-prefix}-side-navigation-item__link {
-    @include lumx-list-item-clickable;
+.#{$lumx-base-prefix}-side-navigation-item {
+    &__link {
+        @include lumx-list-item-clickable;
+    }
 }
 
 .#{$lumx-base-prefix}-side-navigation-item--is-selected > .#{$lumx-base-prefix}-side-navigation-item__link,
