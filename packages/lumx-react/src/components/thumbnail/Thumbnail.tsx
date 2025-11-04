@@ -21,6 +21,7 @@ import { useFocusPointStyle } from '@lumx/react/components/thumbnail/useFocusPoi
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
+import { useDisableStateProps } from '@lumx/react/utils/disabled';
 import { FocusPoint, ThumbnailSize, ThumbnailVariant } from './types';
 
 type ImgHTMLProps = ImgHTMLAttributes<HTMLImageElement>;
@@ -99,6 +100,7 @@ const DEFAULT_PROPS: Partial<ThumbnailProps> = {
  * @return React element.
  */
 export const Thumbnail = forwardRef<ThumbnailProps>((props, ref) => {
+    const { isAnyDisabled, otherProps } = useDisableStateProps(props);
     const defaultTheme = useTheme() || Theme.light;
     const {
         align,
@@ -125,7 +127,7 @@ export const Thumbnail = forwardRef<ThumbnailProps>((props, ref) => {
         linkProps,
         linkAs,
         ...forwardedProps
-    } = props;
+    } = otherProps;
     const [imgElement, setImgElement] = useState<HTMLImageElement>();
 
     // Image loading state.
@@ -150,14 +152,14 @@ export const Thumbnail = forwardRef<ThumbnailProps>((props, ref) => {
 
     const isLink = Boolean(linkProps?.href || linkAs);
     const isButton = !!forwardedProps.onClick;
-    const isClickable = isButton || isLink;
+    const isClickable = !isAnyDisabled && (isButton || isLink);
 
     let Wrapper: any = 'div';
     const wrapperProps = { ...forwardedProps };
-    if (isLink) {
+    if (!isAnyDisabled && isLink) {
         Wrapper = linkAs || 'a';
         Object.assign(wrapperProps, linkProps);
-    } else if (isButton) {
+    } else if (!isAnyDisabled && isButton) {
         Wrapper = 'button';
         wrapperProps.type = forwardedProps.type || 'button';
         wrapperProps['aria-label'] = forwardedProps['aria-label'] || alt;

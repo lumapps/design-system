@@ -12,11 +12,13 @@ import {
     RadioButton,
     Switch,
     TextField,
+    Thumbnail,
 } from '@lumx/react';
 import { DisabledStateProvider } from '@lumx/react/utils';
 import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
 import { disableArgTypes } from '@lumx/react/stories/utils/disableArgTypes';
 import { mdiFoodApple } from '@lumx/icons';
+import { LANDSCAPE_IMAGES } from '@lumx/react/stories/controls/image';
 
 export default {
     title: 'LumX components/DisabledStateProvider',
@@ -71,6 +73,7 @@ export const AllComponents = {
             <Checkbox label="Checkbox" />
             <Chip onClick={() => {}}>Chip</Chip>
             <DatePickerField
+                label="Date picker field"
                 nextButtonProps={{ label: 'Next' }}
                 previousButtonProps={{ label: 'Previous' }}
                 value={new Date()}
@@ -82,7 +85,8 @@ export const AllComponents = {
             </List>
             <RadioButton label="Radio button" />
             <Switch>Switch</Switch>
-            <TextField onChange={() => {}} value="" />
+            <TextField label="texfield" onChange={() => {}} value="" />
+            <Thumbnail alt="Thumbnail" image={LANDSCAPE_IMAGES.landscape1s200} onClick={() => {}} />
         </DisabledStateProvider>
     ),
 };

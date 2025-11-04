@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `RadioButton`: handle `aria-disabled=true` for an accessible disabled state
 -   `Switch`: handle `aria-disabled=true` for an accessible disabled state
 -   `DisabledStateProvider` and `useDisabledStateContext` utilities to set disabled state in nested children
+-   `Thumbnail`: handle disabled state context
 
 ### Fixed
 
