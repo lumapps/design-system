@@ -175,6 +175,7 @@ export const ButtonRoot = forwardRef<ButtonRootProps, HTMLButtonElement | HTMLAn
         <button
             {...forwardedProps}
             {...disabledStateProps}
+            aria-disabled={isAnyDisabled}
             aria-label={ariaLabel}
             ref={ref as RefObject<HTMLButtonElement>}
             className={buttonClassName}
