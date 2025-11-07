@@ -60,14 +60,9 @@
     }
 
     &__background,
-    &__wrapper,
-    &__input {
+    &__wrapper {
         // Stack all onto the same cell
-        grid-area: 1 / 1 / 1 / 1;
-    }
-
-    &__input {
-        opacity: 0;
+        grid-area: 1 / 1;
     }
 
     &__wrapper {
