@@ -9,6 +9,7 @@ import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
 import { useId } from '@lumx/react/hooks/useId';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { VISUALLY_HIDDEN } from '@lumx/react/constants';
 
 /**
  * Uploader variants.
@@ -139,7 +140,7 @@ export const Uploader = forwardRef<UploaderProps>((props, ref) => {
                 <input
                     type="file"
                     id={inputId}
-                    className={`${CLASSNAME}__input`}
+                    className={`${CLASSNAME}__input ${VISUALLY_HIDDEN}`}
                     {...fileInputProps}
                     onChange={onChange}
                     onDragEnter={setDragHovering}

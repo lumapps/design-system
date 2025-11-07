@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   `Button` and `IconButton`: fix handling `aria-disabled=true` with link button (using `href` or `linkAs`)
+-   `Uploader`: fix layout issue when using the file input variant
 
 ## [3.18.1][] - 2025-10-27
 
