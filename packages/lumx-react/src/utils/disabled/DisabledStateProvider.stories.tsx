@@ -13,6 +13,7 @@ import {
     Switch,
     TextField,
     Thumbnail,
+    Uploader,
 } from '@lumx/react';
 import { DisabledStateProvider } from '@lumx/react/utils';
 import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
@@ -87,6 +88,7 @@ export const AllComponents = {
             <Switch>Switch</Switch>
             <TextField label="texfield" onChange={() => {}} value="" />
             <Thumbnail alt="Thumbnail" image={LANDSCAPE_IMAGES.landscape1s200} onClick={() => {}} />
+            <Uploader label="Upload a file" fileInputProps={{ onChange: () => {} }} />
         </DisabledStateProvider>
     ),
 };

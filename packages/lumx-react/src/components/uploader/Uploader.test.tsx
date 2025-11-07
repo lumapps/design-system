@@ -22,8 +22,9 @@ const setup = (propsOverride: SetupProps = {}, { wrapper }: SetupRenderOptions =
     const uploader = getByClassName(document.body, CLASSNAME);
     const label = queryByClassName(uploader, `${CLASSNAME}__label`);
     const icon = queryByClassName(uploader, `${CLASSNAME}__icon`);
+    const input = queryByClassName(uploader, `${CLASSNAME}__input`);
 
-    return { props, uploader, label, icon };
+    return { props, uploader, label, icon, input };
 };
 
 describe(`<${Uploader.displayName}>`, () => {
@@ -83,31 +84,51 @@ describe(`<${Uploader.displayName}>`, () => {
         });
     });
 
-    describe('Events', () => {
+    describe.each`
+        name                      | props
+        ${'button'}               | ${{}}
+        ${'button isDisabled   '} | ${{ isDisabled: true }}
+        ${'button aria-disabled'} | ${{ 'aria-disabled': true }}
+        ${'file input          '} | ${{ fileInputProps: { onChange: jest.fn() } }}
+    `('Events $name', ({ props }) => {
+        const onClick = jest.fn();
+        beforeEach(() => onClick.mockClear());
+        const assertClick = () => {
+            if (props.isDisabled || props['aria-disabled']) {
+                expect(onClick).not.toHaveBeenCalled();
+            } else {
+                expect(onClick).toHaveBeenCalled();
+            }
+        };
+
         it('should trigger `onClick` when clicked', async () => {
-            const onClick = jest.fn();
-            const { uploader } = setup({ onClick });
+            const { uploader } = setup({ ...props, onClick });
 
             await userEvent.click(uploader);
-            expect(onClick).toHaveBeenCalled();
+            assertClick();
         });
 
         it('should trigger `onClick` when pressing Enter or Escape', async () => {
-            const onClick = jest.fn();
-            const { uploader } = setup({ onClick });
+            const { uploader, input } = setup({ ...props, onClick });
+
+            if (props.isDisabled) {
+                expect(props.fileInputProps ? input : uploader).toBeDisabled();
+                //Cannot test focus or activation
+                return;
+            }
 
             await userEvent.tab();
-            expect(uploader).toHaveFocus();
+            expect(props.fileInputProps ? input : uploader).toHaveFocus();
 
             // Activate with Enter
             await userEvent.keyboard('[Enter]');
-            expect(onClick).toHaveBeenCalled();
+            assertClick();
 
             onClick.mockClear();
 
             // Activate with Space
             await userEvent.keyboard('[Space]');
-            expect(onClick).toHaveBeenCalled();
+            assertClick();
         });
     });
 

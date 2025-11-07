@@ -9,6 +9,8 @@ import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
 import { useId } from '@lumx/react/hooks/useId';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { HasAriaDisabled } from '@lumx/react/utils/type/HasAriaDisabled';
+import { useDisableStateProps } from '@lumx/react/utils/disabled';
 import { VISUALLY_HIDDEN } from '@lumx/react/constants';
 
 /**
@@ -36,11 +38,13 @@ interface FileInputProps extends Omit<React.ComponentProps<'input'>, 'onChange'>
 /**
  * Defines the props of the component.
  */
-export interface UploaderProps extends GenericProps, HasTheme {
+export interface UploaderProps extends GenericProps, HasTheme, HasAriaDisabled {
     /** Image aspect ratio. */
     aspectRatio?: AspectRatio;
     /** Icon (SVG path). */
     icon?: string;
+    /** Disabled state */
+    isDisabled?: boolean;
     /** Label text. */
     label?: string;
     /** Size variant. */
@@ -80,6 +84,7 @@ const DEFAULT_PROPS: Partial<UploaderProps> = {
  * @return React element.
  */
 export const Uploader = forwardRef<UploaderProps>((props, ref) => {
+    const { disabledStateProps, otherProps, isAnyDisabled } = useDisableStateProps(props);
     const defaultTheme = useTheme() || Theme.light;
     const {
         aspectRatio = DEFAULT_PROPS.aspectRatio,
@@ -90,32 +95,45 @@ export const Uploader = forwardRef<UploaderProps>((props, ref) => {
         theme = defaultTheme,
         variant = DEFAULT_PROPS.variant,
         fileInputProps,
+        onClick,
         ...forwardedProps
-    } = props;
+    } = otherProps;
     // Adjust to square aspect ratio when using circle variants.
     const adjustedAspectRatio = variant === UploaderVariant.circle ? AspectRatio.square : aspectRatio;
+
+    const handleClick: React.MouseEventHandler = React.useCallback(
+        (evt) => {
+            if (isAnyDisabled) {
+                evt.preventDefault();
+            } else {
+                onClick?.(evt);
+            }
+        },
+        [isAnyDisabled, onClick],
+    );
 
     const generatedInputId = useId();
     const inputId = fileInputProps?.id || generatedInputId;
     const [isDragHovering, unsetDragHovering, setDragHovering] = useBooleanState(false);
     const wrapper = fileInputProps
-        ? { Component: 'label' as const, props: { htmlFor: inputId } as const }
-        : { Component: 'button' as const, props: { type: 'button' } as const };
+        ? ({ Component: 'label', props: { htmlFor: inputId } } as const)
+        : ({ Component: 'button', props: { type: 'button', ...disabledStateProps } } as const);
 
     const onChange = React.useMemo(() => {
-        if (!fileInputProps?.onChange) return undefined;
+        if (isAnyDisabled || !fileInputProps?.onChange) return undefined;
         return (evt: React.ChangeEvent<HTMLInputElement>) => {
             const fileList = evt.target.files;
             const files = fileList ? Array.from(fileList) : [];
             fileInputProps.onChange(files, evt);
         };
-    }, [fileInputProps]);
+    }, [isAnyDisabled, fileInputProps]);
 
     return (
         <wrapper.Component
             ref={ref as any}
             {...wrapper.props}
             {...forwardedProps}
+            onClick={handleClick}
             className={classNames(
                 className,
                 handleBasicClasses({
@@ -125,6 +143,7 @@ export const Uploader = forwardRef<UploaderProps>((props, ref) => {
                     theme,
                     variant,
                     isDragHovering,
+                    isDisabled: isAnyDisabled,
                 }),
             )}
         >
@@ -141,7 +160,9 @@ export const Uploader = forwardRef<UploaderProps>((props, ref) => {
                     type="file"
                     id={inputId}
                     className={`${CLASSNAME}__input ${VISUALLY_HIDDEN}`}
+                    {...disabledStateProps}
                     {...fileInputProps}
+                    readOnly={isAnyDisabled}
                     onChange={onChange}
                     onDragEnter={setDragHovering}
                     onDragLeave={unsetDragHovering}
