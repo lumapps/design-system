@@ -22,6 +22,12 @@ Uploaders have 2 accessibility use cases:
 1. **native file input**: using the `fileInputProps` prop transforms uploaders into a native HTML file input capable of handling file drop.
 2. **button** : using the `onClick` prop transforms uploaders into standard button for when you need to use a non-native file picker.
 
+Uploaders can be disabled in two ways:
+- `isDisabled` which completely disables it. It's not focusable and pointer events (hover, click, etc.) are
+all disabled too. You'll have to find another way to indicate to users that the field is here and why it is disabled.
+- `aria-disabled` only disable click and on change (read only) so it's still focusable and accessible. You'll have
+to set up either a tooltip or an aria description to explain to the user why this field is disabled.
+
 ### Properties
 
 <PropTable component="Uploader" />

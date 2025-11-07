@@ -8,6 +8,8 @@ import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
 
 import { AspectRatio, GridColumn, Size, Uploader, UploaderVariant } from '@lumx/react';
 import { mdiTextBoxPlus } from '@lumx/icons';
+import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { withUndefined } from '@lumx/react/stories/controls/withUndefined';
 
 export default {
     title: 'LumX components/uploader/Uploader',
@@ -15,11 +17,13 @@ export default {
     argTypes: {
         onClick: { action: true },
         icon: iconArgType,
+        aspectRatio: getSelectArgType(AspectRatio),
     },
 };
 
 const UPLOADER_VARIANTS = [UploaderVariant.square, UploaderVariant.rounded, UploaderVariant.circle];
 const UPLOADER_SIZES = [Size.xl, Size.xxl];
+const ASPECT_RATIOS = [AspectRatio.wide, AspectRatio.horizontal, AspectRatio.vertical, AspectRatio.square];
 
 export const WithLabel = {
     args: { label: 'Pick a file' },
@@ -71,13 +75,18 @@ export const Variants = {
         withCombinations({
             combinations: {
                 rows: { key: 'variant', options: UPLOADER_VARIANTS },
+                cols: {
+                    Default: {},
+                    Disabled: { isDisabled: true },
+                    'Aria Disabled': { 'aria-disabled': true },
+                },
                 sections: {
                     Button: {},
                     'File input': { fileInputProps: {} },
                 },
             },
         }),
-        withWrapper({ maxColumns: 2, itemMinWidth: 300 }, GridColumn),
+        withWrapper({ maxColumns: 2, itemMinWidth: 470 }, GridColumn),
     ],
 };
 
@@ -88,13 +97,13 @@ export const RatioAndSize = {
         withCombinations({
             combinations: {
                 cols: { key: 'size', options: UPLOADER_SIZES },
-                rows: { key: 'aspectRatio', options: Object.values(AspectRatio) },
+                rows: { key: 'aspectRatio', options: withUndefined(ASPECT_RATIOS) },
                 sections: {
                     Button: {},
                     'File input': { fileInputProps: {} },
                 },
             },
         }),
-        withWrapper({ maxColumns: 2, itemMinWidth: 200 }, GridColumn),
+        withWrapper({ maxColumns: 2, itemMinWidth: 470 }, GridColumn),
     ],
 };
