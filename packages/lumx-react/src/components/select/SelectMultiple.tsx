@@ -3,7 +3,7 @@ import React, { ReactNode, RefObject, SyntheticEvent } from 'react';
 import classNames from 'classnames';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiClose, mdiCloseCircle, mdiMenuDown } from '@lumx/icons';
-import { Size, Theme } from '@lumx/react/components';
+import { Size, Theme } from '@lumx/core/js/constants';
 import { Chip } from '@lumx/react/components/chip/Chip';
 import { Icon } from '@lumx/react/components/icon/Icon';
 import { InputLabel } from '@lumx/react/components/input-label/InputLabel';

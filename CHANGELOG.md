@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   `@lumx/core`
+    -   Moved all non React related types and enums into the package
+-   `@lumx/react`:
+    -   Import types and constants from `@lumx/core` and re-export
+
 ## [3.19.0][] - 2025-11-07
 
 ### Added

@@ -4,10 +4,11 @@ import { commonTestsSuiteRTL, RenderWrapper } from '@lumx/react/testing/utils';
 import { render, screen } from '@testing-library/react';
 import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import userEvent from '@testing-library/user-event';
+import { Orientation } from '@lumx/core/js/constants';
+
 import { NavigationItem } from './NavigationItem';
 import { NavigationSection, NavigationSectionProps } from './NavigationSection';
 import { NavigationContext } from './context';
-import { Orientation } from '..';
 
 const CLASSNAME = NavigationSection.className as string;
 

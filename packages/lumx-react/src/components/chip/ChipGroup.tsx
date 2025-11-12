@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 
 import classNames from 'classnames';
 
-import { HorizontalAlignment } from '@lumx/react/components';
+import { HorizontalAlignment } from '@lumx/core/js/constants';
 import { GenericProps } from '@lumx/react/utils/type';
 import { getRootClassName } from '@lumx/react/utils/className';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';

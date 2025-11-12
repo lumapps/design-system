@@ -3,7 +3,8 @@ import dropRight from 'lodash/dropRight';
 import last from 'lodash/last';
 import partition from 'lodash/partition';
 import reduce from 'lodash/reduce';
-import { Predicate } from './type';
+
+import { Predicate } from '@lumx/core/js/types';
 
 /**
  * Similar to lodash `partition` function but working with multiple predicates.
