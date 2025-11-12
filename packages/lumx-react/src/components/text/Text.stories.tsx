@@ -6,7 +6,7 @@ import { textElementArgType } from '@lumx/react/stories/controls/element';
 import { withUndefined } from '@lumx/react/stories/controls/withUndefined';
 import { loremIpsum } from '@lumx/react/stories/utils/lorem';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
-import { ColorPalette, ColorVariant, Icon, WhiteSpace } from '@lumx/react';
+import { Button, ColorPalette, ColorVariant, Icon, WhiteSpace } from '@lumx/react';
 import { mdiEarth, mdiHeart } from '@lumx/icons';
 import { withResizableBox } from '@lumx/react/stories/decorators/withResizableBox';
 import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
@@ -105,6 +105,28 @@ export const Truncate = {
         ...LongText.args,
         truncate: true,
     },
+};
+
+/**
+ * Test the update of the `title` attribute when text overflows
+ */
+export const TestUpdateTruncateTitleLabel = {
+    render(args: any) {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        const [content, setContent] = React.useState<string>('Some text');
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        const lengthen = React.useCallback(() => setContent((prevContent) => `${prevContent} ${prevContent}`), []);
+        return (
+            <>
+                <Button onClick={lengthen}>Lengthen text</Button>
+                <Text as="p" truncate style={{ maxWidth: 300 }} {...args}>
+                    {content}
+                </Text>
+            </>
+        );
+    },
+    // Disables Chromatic snapshot (not relevant for this story).
+    parameters: { chromatic: { disable: true } },
 };
 
 /**

@@ -42,7 +42,7 @@ export const NavigationItem = Object.assign(
     forwardRefPolymorphic(<E extends ElementType = 'a'>(props: NavigationItemProps<E>, ref: ComponentRef<E>) => {
         const { className, icon, label, isCurrentPage, as: Element = 'a', ...forwardedProps } = props;
         const theme = useTheme();
-        const { tooltipLabel, labelRef } = useOverflowTooltipLabel();
+        const { tooltipLabel, labelRef } = useOverflowTooltipLabel(label);
 
         const buttonProps = Element === 'button' ? { type: 'button' } : {};
 
