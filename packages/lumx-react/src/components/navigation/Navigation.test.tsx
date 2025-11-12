@@ -3,8 +3,8 @@ import React from 'react';
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { render } from '@testing-library/react';
 import { getAllByClassName, getByClassName } from '@lumx/react/testing/utils/queries';
+import { Orientation } from '@lumx/core/js/constants';
 import { Navigation, NavigationProps } from '.';
-import { Orientation } from '..';
 
 const CLASSNAME = Navigation.className as string;
 

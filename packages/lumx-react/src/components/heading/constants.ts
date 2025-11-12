@@ -1,4 +1,4 @@
-import { Typography } from '..';
+import { Typography } from '@lumx/core/js/constants';
 
 /** The maximum authorized heading level. */
 export const MAX_HEADING_LEVEL = 6;

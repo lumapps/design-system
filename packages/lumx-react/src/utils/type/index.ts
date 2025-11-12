@@ -1,19 +1,8 @@
-export type { Callback } from './Callback';
+export type * from '@lumx/core/js/types';
+
 export type { Comp } from './Comp';
 export type { ComponentRef } from './ComponentRef';
-export type { Falsy } from './Falsy';
-export type { GenericProps } from './GenericProps';
-export type { HasAriaLabelOrLabelledBy } from './HasAriaLabelOrLabelledBy';
-export type { HasClassName } from './HasClassName';
-export type { HasCloseMode } from './HasCloseMode';
 export type { HasPolymorphicAs } from './HasPolymorphicAs';
-export type { HasTheme } from './HasTheme';
-export type { HeadingElement } from './HeadingElement';
 export { isComponent } from './isComponent';
 export { isComponentType } from './isComponentType';
 export type { MaybeElementOrRef } from './MaybeElementOrRef';
-export type { Point } from './Point';
-export type { Predicate } from './Predicate';
-export type { RectSize } from './RectSize';
-export type { TextElement } from './TextElement';
-export type { ValueOf } from './ValueOf';
