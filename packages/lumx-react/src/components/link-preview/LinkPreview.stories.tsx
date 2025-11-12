@@ -5,7 +5,7 @@ import { LANDSCAPE_IMAGES } from '@lumx/react/stories/controls/image';
 import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
 import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
 
-import { Size } from '..';
+import { Size } from '@lumx/core/js/constants';
 import { LinkPreview, LinkPreviewProps } from './LinkPreview';
 
 export default {

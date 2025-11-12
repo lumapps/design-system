@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React, { Ref, useCallback, useRef } from 'react';
 
 import { Placement } from '@lumx/react';
-import { Kind, Theme } from '@lumx/react/components';
+import { Kind, Theme } from '@lumx/core/js/constants';
 import { Dropdown } from '@lumx/react/components/dropdown/Dropdown';
 import { InputHelper } from '@lumx/react/components/input-helper/InputHelper';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';

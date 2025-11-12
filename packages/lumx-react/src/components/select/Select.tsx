@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import lodashIsEmpty from 'lodash/isEmpty';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiCloseCircle, mdiMenuDown } from '@lumx/icons';
-import { Emphasis, Size, Theme } from '@lumx/react/components';
+import { Emphasis, Size, Theme } from '@lumx/core/js/constants';
 import { IconButton } from '@lumx/react/components/button/IconButton';
 import { Chip } from '@lumx/react/components/chip/Chip';
 import { Icon } from '@lumx/react/components/icon/Icon';

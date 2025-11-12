@@ -1,5 +1,5 @@
 import { CSSProperties, useEffect, useMemo, useState } from 'react';
-import { AspectRatio } from '@lumx/react/components';
+import { AspectRatio } from '@lumx/core/js/constants';
 import { ThumbnailProps } from '@lumx/react/components/thumbnail/Thumbnail';
 import { RectSize } from '@lumx/react/utils/type';
 

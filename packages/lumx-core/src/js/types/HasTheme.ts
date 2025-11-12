@@ -1,4 +1,4 @@
-import type { Theme } from '@lumx/react';
+import type { Theme } from '../constants';
 
 export interface HasTheme {
     /**

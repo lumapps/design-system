@@ -1,11 +1,11 @@
 import React from 'react';
 
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
+import { Size, Theme } from '@lumx/core/js/constants';
 import { Thumbnail } from '@lumx/react';
 import { render, screen, within } from '@testing-library/react';
 import { getByClassName, queryByClassName, queryAllByClassName } from '@lumx/react/testing/utils/queries';
 
-import { Size, Theme } from '..';
 import { LinkPreview, LinkPreviewProps } from './LinkPreview';
 
 const CLASSNAME = LinkPreview.className as string;
