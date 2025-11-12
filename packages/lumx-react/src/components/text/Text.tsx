@@ -112,7 +112,7 @@ export const Text = forwardRef<TextProps>((props, ref) => {
         !(isTruncated && !isTruncatedMultiline) &&
         whiteSpace && { '--lumx-text-white-space': whiteSpace };
 
-    const { tooltipLabel, labelRef } = useOverflowTooltipLabel();
+    const { tooltipLabel, labelRef } = useOverflowTooltipLabel(children);
 
     return (
         <Component
