@@ -25,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `Button` and `IconButton`: fix handling `aria-disabled=true` with link button (using `href` or `linkAs`)
 -   `Uploader`: fix layout issue when using the file input variant
+-   `Text` and `NavigationItem`: do not add `title` or `Tooltip` when inside a `.visually-hidden`
 
 ## [3.18.1][] - 2025-10-27
 
