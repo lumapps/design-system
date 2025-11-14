@@ -12,8 +12,9 @@ import {
 } from '@lumx/core/js/utils/className';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { wrapChildrenIconWithSpaces } from '@lumx/react/utils/react/wrapChildrenIconWithSpaces';
-import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
 import { HasAriaDisabled } from '@lumx/react/utils/type/HasAriaDisabled';
+import { RawClickable } from '@lumx/react/utils/react/RawClickable';
+import { useDisableStateProps } from '@lumx/react/utils/disabled';
 
 type HTMLAnchorProps = React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
 
@@ -67,38 +68,26 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * @return React element.
  */
 export const Link = forwardRef<LinkProps, HTMLAnchorElement | HTMLButtonElement>((props, ref) => {
-    const { isAnyDisabled, disabledStateProps, otherProps } = useDisableStateProps(props);
+    const { disabledStateProps, otherProps } = useDisableStateProps(props);
     const {
         children,
         className,
         color: propColor,
         colorVariant: propColorVariant,
-        href,
         leftIcon,
-        linkAs,
         rightIcon,
-        target,
         typography,
+        linkAs,
         ...forwardedProps
     } = otherProps;
     const [color, colorVariant] = resolveColorWithVariants(propColor, propColorVariant);
 
-    const isLink = linkAs || href;
-    const Component = isLink && !isAnyDisabled ? linkAs || 'a' : 'button';
-    const baseProps: React.ComponentProps<typeof Component> = {};
-    if (Component === 'button') {
-        baseProps.type = 'button';
-        Object.assign(baseProps, disabledStateProps);
-    } else if (isLink) {
-        baseProps.href = href;
-        baseProps.target = target;
-    }
-
     return (
-        <Component
-            ref={ref}
+        <RawClickable
+            ref={ref as any}
+            as={linkAs || (forwardedProps.href ? 'a' : 'button')}
             {...forwardedProps}
-            {...baseProps}
+            {...disabledStateProps}
             className={classNames(
                 className,
                 handleBasicClasses({ prefix: CLASSNAME, color, colorVariant, hasTypography: !!typography }),
@@ -112,7 +101,7 @@ export const Link = forwardRef<LinkProps, HTMLAnchorElement | HTMLButtonElement>
                     {rightIcon && <Icon icon={rightIcon} className={`${CLASSNAME}__right-icon`} />}
                 </>,
             )}
-        </Component>
+        </RawClickable>
     );
 });
 Link.displayName = COMPONENT_NAME;

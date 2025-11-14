@@ -1,11 +1,12 @@
 import React, { ElementType, ReactNode } from 'react';
 import { Icon, Placement, Size, Tooltip, Text } from '@lumx/react';
 import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';
-import { ComponentRef, HasClassName, HasPolymorphicAs, HasTheme } from '@lumx/react/utils/type';
+import { ComponentRef, HasClassName, HasPolymorphicAs, HasRequiredLinkHref, HasTheme } from '@lumx/react/utils/type';
 import classNames from 'classnames';
 import { forwardRefPolymorphic } from '@lumx/react/utils/react/forwardRefPolymorphic';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { useOverflowTooltipLabel } from '@lumx/react/hooks/useOverflowTooltipLabel';
+import { RawClickable } from '@lumx/react/utils/react/RawClickable';
 
 type BaseNavigationItemProps = {
     /** Icon (SVG path). */
@@ -16,9 +17,6 @@ type BaseNavigationItemProps = {
     isCurrentPage?: boolean;
 };
 
-/** Make `href` required when `as` is `a` */
-type RequiredLinkHref<E> = E extends 'a' ? { href: string } : Record<string, unknown>;
-
 /**
  * Navigation item props
  */
@@ -26,7 +24,7 @@ export type NavigationItemProps<E extends ElementType = 'a'> = HasPolymorphicAs<
     HasTheme &
     HasClassName &
     BaseNavigationItemProps &
-    RequiredLinkHref<E>;
+    HasRequiredLinkHref<E>;
 
 /**
  * Component display name.
@@ -44,8 +42,6 @@ export const NavigationItem = Object.assign(
         const theme = useTheme();
         const { tooltipLabel, labelRef } = useOverflowTooltipLabel(label);
 
-        const buttonProps = Element === 'button' ? { type: 'button' } : {};
-
         return (
             <li
                 className={classNames(
@@ -57,14 +53,14 @@ export const NavigationItem = Object.assign(
                 )}
             >
                 <Tooltip label={tooltipLabel} placement={Placement.TOP}>
-                    <Element
+                    <RawClickable
+                        as={Element}
                         className={handleBasicClasses({
                             prefix: `${CLASSNAME}__link`,
                             isSelected: isCurrentPage,
                         })}
                         ref={ref as React.Ref<any>}
                         aria-current={isCurrentPage ? 'page' : undefined}
-                        {...buttonProps}
                         {...forwardedProps}
                     >
                         {icon ? (
@@ -74,7 +70,7 @@ export const NavigationItem = Object.assign(
                         <Text as="span" truncate className={`${CLASSNAME}__label`} ref={labelRef}>
                             {label}
                         </Text>
-                    </Element>
+                    </RawClickable>
                 </Tooltip>
             </li>
         );

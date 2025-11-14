@@ -78,9 +78,10 @@ describe(`<${Button.displayName}>`, () => {
         it('should render disabled link', async () => {
             const onClick = vi.fn();
             const { button } = setup({ children: 'Label', disabled: true, href: 'https://example.com', onClick });
-            // Disabled link do not exist so we fallback to a button
-            expect(screen.queryByRole('link')).not.toBeInTheDocument();
-            expect(button).toHaveAttribute('disabled');
+            expect(screen.queryByRole('link')).toBeInTheDocument();
+            expect(button).toHaveAttribute('aria-disabled', 'true');
+            // Simulate standard disabled state (not focusable)
+            expect(button).toHaveAttribute('tabindex', '-1');
             await userEvent.click(button);
             expect(onClick).not.toHaveBeenCalled();
         });
@@ -102,8 +103,7 @@ describe(`<${Button.displayName}>`, () => {
                 onClick,
             });
             expect(button).toHaveAccessibleName('Label');
-            // Disabled link do not exist so we fallback to a button
-            expect(screen.queryByRole('link')).not.toBeInTheDocument();
+            expect(screen.queryByRole('link')).toBeInTheDocument();
             expect(button).toHaveAttribute('aria-disabled', 'true');
             await userEvent.click(button);
             expect(onClick).not.toHaveBeenCalled();
