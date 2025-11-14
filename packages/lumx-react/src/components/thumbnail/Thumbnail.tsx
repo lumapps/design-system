@@ -22,6 +22,7 @@ import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { useDisableStateProps } from '@lumx/react/utils/disabled';
+import { RawClickable } from '@lumx/react/utils/react/RawClickable';
 import { FocusPoint, ThumbnailSize, ThumbnailVariant } from './types';
 
 type ImgHTMLProps = ImgHTMLAttributes<HTMLImageElement>;
@@ -100,7 +101,7 @@ const DEFAULT_PROPS: Partial<ThumbnailProps> = {
  * @return React element.
  */
 export const Thumbnail = forwardRef<ThumbnailProps>((props, ref) => {
-    const { isAnyDisabled, otherProps } = useDisableStateProps(props);
+    const { isAnyDisabled, otherProps, disabledStateProps } = useDisableStateProps(props);
     const defaultTheme = useTheme() || Theme.light;
     const {
         align,
@@ -151,18 +152,17 @@ export const Thumbnail = forwardRef<ThumbnailProps>((props, ref) => {
     }
 
     const isLink = Boolean(linkProps?.href || linkAs);
-    const isButton = !!forwardedProps.onClick;
-    const isClickable = !isAnyDisabled && (isButton || isLink);
+    const isClickable = !isAnyDisabled && Boolean(isLink || !!forwardedProps.onClick);
 
-    let Wrapper: any = 'div';
+    const Wrapper: any = isClickable ? RawClickable : 'div';
     const wrapperProps = { ...forwardedProps };
-    if (!isAnyDisabled && isLink) {
-        Wrapper = linkAs || 'a';
-        Object.assign(wrapperProps, linkProps);
-    } else if (!isAnyDisabled && isButton) {
-        Wrapper = 'button';
-        wrapperProps.type = forwardedProps.type || 'button';
-        wrapperProps['aria-label'] = forwardedProps['aria-label'] || alt;
+    if (isClickable) {
+        Object.assign(wrapperProps, { as: linkAs || (linkProps?.href ? 'a' : 'button') }, disabledStateProps);
+        if (isLink) {
+            Object.assign(wrapperProps, linkProps);
+        } else {
+            wrapperProps['aria-label'] = forwardedProps['aria-label'] || alt;
+        }
     }
 
     // If we have a loading placeholder image that is really loaded (complete)

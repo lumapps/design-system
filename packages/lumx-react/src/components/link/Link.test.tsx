@@ -85,9 +85,10 @@ describe(`<${Link.displayName}>`, () => {
         it('should render disabled link', async () => {
             const onClick = vi.fn();
             const { link } = setup({ children: 'Label', isDisabled: true, href: 'https://example.com', onClick });
-            // Disabled link do not exist so we fallback to a button
-            expect(screen.queryByRole('link')).not.toBeInTheDocument();
-            expect(link).toHaveAttribute('disabled');
+            expect(screen.queryByRole('link')).toBeInTheDocument();
+            expect(link).toHaveAttribute('aria-disabled');
+            // Simulate standard disabled state (not focusable)
+            expect(link).toHaveAttribute('tabindex', '-1');
             await userEvent.click(link);
             expect(onClick).not.toHaveBeenCalled();
         });
@@ -95,7 +96,9 @@ describe(`<${Link.displayName}>`, () => {
         it('should render aria-disabled button', async () => {
             const onClick = vi.fn();
             const { link } = setup({ children: 'Label', 'aria-disabled': true, onClick });
-            expect(link).toHaveAttribute('aria-disabled');
+            expect(screen.queryByRole('button')).toBeInTheDocument();
+            expect(link).toHaveAttribute('aria-disabled', 'true');
+            expect(link).not.toHaveAttribute('tabindex');
             await userEvent.click(link);
             expect(onClick).not.toHaveBeenCalled();
         });
@@ -109,8 +112,7 @@ describe(`<${Link.displayName}>`, () => {
                 onClick,
             });
             expect(link).toHaveAccessibleName('Label');
-            // Disabled link do not exist so we fallback to a button
-            expect(screen.queryByRole('link')).not.toBeInTheDocument();
+            expect(screen.queryByRole('link')).toBeInTheDocument();
             expect(link).toHaveAttribute('aria-disabled', 'true');
             await userEvent.click(link);
             expect(onClick).not.toHaveBeenCalled();

@@ -1,17 +1,15 @@
 import React, { AriaAttributes, ButtonHTMLAttributes, DetailedHTMLProps, RefObject } from 'react';
 
-import isEmpty from 'lodash/isEmpty';
-
 import classNames from 'classnames';
 
 import { ColorPalette, Emphasis, Size, Theme } from '@lumx/react';
 import { CSS_PREFIX } from '@lumx/react/constants';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/className';
-import { renderLink } from '@lumx/react/utils/react/renderLink';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
-import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
 import { HasAriaDisabled } from '@lumx/react/utils/type/HasAriaDisabled';
+import { RawClickable } from '@lumx/react/utils/react/RawClickable';
+import { useDisableStateProps } from '@lumx/react/utils/disabled';
 
 type HTMLButtonProps = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
 
@@ -107,18 +105,14 @@ export const ButtonRoot = forwardRef<ButtonRootProps, HTMLButtonElement | HTMLAn
         color,
         emphasis,
         hasBackground,
-        href,
         isSelected,
         isActive,
         isFocused,
         isHovered,
         linkAs,
-        name,
         size,
-        target,
         theme,
         variant,
-        type = 'button',
         fullWidth,
         ...forwardedProps
     } = otherProps;
@@ -139,7 +133,7 @@ export const ButtonRoot = forwardRef<ButtonRootProps, HTMLButtonElement | HTMLAn
             color: adaptedColor,
             emphasis,
             isSelected,
-            isDisabled: isAnyDisabled,
+            isDisabled: props.isDisabled || props['aria-disabled'],
             isActive,
             isFocused,
             isHovered,
@@ -151,42 +145,18 @@ export const ButtonRoot = forwardRef<ButtonRootProps, HTMLButtonElement | HTMLAn
         }),
     );
 
-    /**
-     * If the linkAs prop is used, we use the linkAs component instead of a <button>.
-     * If there is an href attribute, we display an <a> instead of a <button>.
-     *
-     * However, in any case, if the component is disabled, we returned a <button> since disabled is not compatible with <a>.
-     */
-    if ((linkAs || !isEmpty(props.href)) && !isAnyDisabled) {
-        return renderLink(
-            {
-                linkAs,
-                ...forwardedProps,
-                'aria-label': ariaLabel,
-                href,
-                target,
-                className: buttonClassName,
-                ref: ref as RefObject<HTMLAnchorElement>,
-            },
-            children,
-        );
-    }
     return (
-        <button
+        <RawClickable
+            as={linkAs || (forwardedProps.href ? 'a' : 'button')}
             {...forwardedProps}
             {...disabledStateProps}
             aria-disabled={isAnyDisabled}
             aria-label={ariaLabel}
             ref={ref as RefObject<HTMLButtonElement>}
             className={buttonClassName}
-            name={name}
-            type={
-                // eslint-disable-next-line react/button-has-type
-                type
-            }
         >
             {children}
-        </button>
+        </RawClickable>
     );
 });
 ButtonRoot.displayName = COMPONENT_NAME;

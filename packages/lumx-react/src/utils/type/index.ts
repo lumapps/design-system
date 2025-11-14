@@ -6,3 +6,4 @@ export type { HasPolymorphicAs } from './HasPolymorphicAs';
 export { isComponent } from './isComponent';
 export { isComponentType } from './isComponentType';
 export type { MaybeElementOrRef } from './MaybeElementOrRef';
+export type { HasRequiredLinkHref } from './HasRequiredLinkHref';

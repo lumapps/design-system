@@ -9,6 +9,7 @@ import { ThemeProvider, useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { useId } from '@lumx/react/hooks/useId';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
+import { RawClickable } from '@lumx/react/utils/react/RawClickable';
 import { CLASSNAME as ITEM_CLASSNAME } from './NavigationItem';
 import { NavigationContext } from './context';
 
@@ -52,7 +53,8 @@ export const NavigationSection = forwardRef<NavigationSectionProps, HTMLLIElemen
             )}
             ref={ref}
         >
-            <button
+            <RawClickable<'button'>
+                as="button"
                 {...forwardedProps}
                 aria-controls={sectionId}
                 aria-expanded={isOpen}
@@ -62,7 +64,6 @@ export const NavigationSection = forwardRef<NavigationSectionProps, HTMLLIElemen
                     setIsOpen(!isOpen);
                     event.stopPropagation();
                 }}
-                type="button"
             >
                 {icon ? <Icon className={`${ITEM_CLASSNAME}__icon`} icon={icon} size={Size.xs} /> : null}
 
@@ -73,7 +74,7 @@ export const NavigationSection = forwardRef<NavigationSectionProps, HTMLLIElemen
                     className={classNames(`${ITEM_CLASSNAME}__icon`, `${CLASSNAME}__chevron`)}
                     icon={isOpen ? mdiChevronUp : mdiChevronDown}
                 />
-            </button>
+            </RawClickable>
             {isOpen &&
                 (isDropdown ? (
                     <Popover

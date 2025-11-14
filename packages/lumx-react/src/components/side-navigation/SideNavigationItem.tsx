@@ -7,10 +7,9 @@ import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
 import { Emphasis, Icon, Size, IconButton, IconButtonProps } from '@lumx/react';
 import { GenericProps, HasCloseMode, isComponent } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';
-import { renderLink } from '@lumx/react/utils/react/renderLink';
-import { renderButtonOrLink } from '@lumx/react/utils/react/renderButtonOrLink';
 import { useId } from '@lumx/react/hooks/useId';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { RawClickable } from '@lumx/react/utils/react/RawClickable';
 
 /**
  * Defines the props of the component.
@@ -113,17 +112,15 @@ export const SideNavigationItem = forwardRef<SideNavigationItemProps, HTMLLIElem
         >
             {shouldSplitActions ? (
                 <div className={`${CLASSNAME}__wrapper`}>
-                    {renderLink(
-                        {
-                            linkAs,
-                            ...linkProps,
-                            className: `${CLASSNAME}__link`,
-                            onClick,
-                            tabIndex: 0,
-                        },
-                        icon && <Icon className={`${CLASSNAME}__icon`} icon={icon} size={Size.xs} />,
-                        <span>{label}</span>,
-                    )}
+                    <RawClickable
+                        as={linkAs || (linkProps?.href ? 'a' : 'button')}
+                        {...(linkProps as any)}
+                        className={`${CLASSNAME}__link`}
+                        onClick={onClick}
+                    >
+                        {icon && <Icon className={`${CLASSNAME}__icon`} icon={icon} size={Size.xs} />}
+                        <span>{label}</span>
+                    </RawClickable>
 
                     <IconButton
                         {...toggleButtonProps}
@@ -136,25 +133,23 @@ export const SideNavigationItem = forwardRef<SideNavigationItemProps, HTMLLIElem
                     />
                 </div>
             ) : (
-                renderButtonOrLink(
-                    {
-                        linkAs,
-                        ...linkProps,
-                        className: `${CLASSNAME}__link`,
-                        tabIndex: 0,
-                        onClick,
-                        ...ariaProps,
-                    },
-                    icon && <Icon className={`${CLASSNAME}__icon`} icon={icon} size={Size.xs} />,
-                    <span>{label}</span>,
-                    hasContent && (
+                <RawClickable
+                    as={linkAs || (linkProps?.href ? 'a' : 'button')}
+                    {...linkProps}
+                    className={`${CLASSNAME}__link`}
+                    onClick={onClick}
+                    {...ariaProps}
+                >
+                    {icon && <Icon className={`${CLASSNAME}__icon`} icon={icon} size={Size.xs} />}
+                    <span>{label}</span>
+                    {hasContent && (
                         <Icon
                             className={`${CLASSNAME}__chevron`}
                             icon={isOpen ? mdiChevronUp : mdiChevronDown}
                             size={Size.xs}
                         />
-                    ),
-                )
+                    )}
+                </RawClickable>
             )}
 
             {(closeMode === 'hide' || showChildren) && (

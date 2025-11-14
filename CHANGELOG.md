@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Import types and constants from `@lumx/core` and re-export
     -   Import `className` utilities from `@lumx/core`
     -   Migrate tests to `vitest`
+    -   Uniformize link and button handling in `Link`, `Button`, `SideNavigationItem`, `Thumbnail` and `NavigationItem`.
+    -   Render disabled links as link instead of disabled buttons.
 
 ## [3.19.0][] - 2025-11-07
 
