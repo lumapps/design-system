@@ -3545,6 +3545,7 @@ __metadata:
     glob: ^7.1.6
     lodash: 4.17.21
     postcss: ^8.5.6
+    react: ^17.0.2
     rollup: ^2.79.1
     rollup-plugin-cleaner: ^1.0.0
     rollup-plugin-copy: ^3.5.0
