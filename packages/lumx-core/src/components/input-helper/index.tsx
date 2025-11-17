@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 
 import { Kind } from '@lumx/react';
-import { GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { HasTheme, HasClassName } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
 
 import { INPUT_HELPER_CONFIGURATION } from './constants';
@@ -9,7 +9,7 @@ import { INPUT_HELPER_CONFIGURATION } from './constants';
 /**
  * Defines the props of the component.
  */
-export interface InputHelperProps extends GenericProps, HasTheme {
+export interface InputHelperProps extends HasTheme, HasClassName {
     /** Helper variant. */
     kind?: Kind;
 }
@@ -48,4 +48,9 @@ export const getProps = (props: InputHelperProps) => {
         kind,
         theme,
     };
+};
+
+export const UI = (props) => {
+    // eslint-disable-next-line react/react-in-jsx-scope
+    return <p {...props}>{props.children}</p>;
 };

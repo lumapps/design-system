@@ -8,6 +8,7 @@ import {
     CLASSNAME,
     COMPONENT_NAME,
     DEFAULT_PROPS,
+    UI,
 } from '@lumx/core/components/input-helper';
 
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
@@ -33,9 +34,9 @@ export const InputHelper = forwardRef<InputHelperProps, HTMLParagraphElement>((p
     const { className: rootClassName } = getProps({ ...props, theme });
 
     return (
-        <p ref={ref} {...forwardedProps} className={rootClassName}>
+        <UI ref={ref} {...forwardedProps} className={rootClassName}>
             {children}
-        </p>
+        </UI>
     );
 });
 

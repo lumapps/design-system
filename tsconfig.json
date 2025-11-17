@@ -5,7 +5,7 @@
         "esModuleInterop": true,
         "declaration": true,
         "forceConsistentCasingInFileNames": true,
-        "jsx": "react",
+        "jsx": "react-jsx",
         "lib": ["es2020", "dom"],
         "module": "ESNext",
         "moduleResolution": "node",

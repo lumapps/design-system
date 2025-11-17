@@ -2,6 +2,7 @@ import type { StorybookConfig } from '@storybook/vue3-vite';
 import { mergeConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import vue from '@vitejs/plugin-vue';
+import vueJsx from '@vitejs/plugin-vue-jsx';
 import postcss from './postcss.config';
 import { server } from 'typescript';
 
@@ -19,12 +20,15 @@ const config: StorybookConfig = {
         return mergeConfig(config, {
             optimizeDeps: { include: ['@lumx/icons'] },
             plugins: [
-                vue({
-                    template: {
-                        compilerOptions: {
-                            isCustomElement: (tag) => tag.startsWith('lumx-'),
-                        },
-                    },
+                vue(),
+                vueJsx({
+                    // 1. Tell the Vue JSX compiler what function to use (h)
+                    // 2. Tell it to import 'h' from the 'vue' module
+                    // The default setup in modern Vue JSX handles this, but explicitly
+                    // ensuring the right runtime is used is key.
+                    babelPlugins: [
+                        ['@babel/plugin-transform-react-jsx', { runtime: 'automatic', importSource: 'vue' }]
+                    ]
                 }),
                 tsconfigPaths(),
             ],
