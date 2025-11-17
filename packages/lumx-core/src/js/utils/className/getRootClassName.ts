@@ -1,5 +1,6 @@
-import { CSS_PREFIX } from '@lumx/core/js/constants';
 import kebabCase from 'lodash/kebabCase';
+
+import { CSS_PREFIX } from '../../constants';
 
 // See https://regex101.com/r/YjS1uI/3
 const LAST_PART_CLASSNAME = /^(.*)-(.+)$/gi;

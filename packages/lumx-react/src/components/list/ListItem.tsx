@@ -5,8 +5,8 @@ import isEmpty from 'lodash/isEmpty';
 
 import { ListProps, Size } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
-import { onEnterPressed, onButtonPressed } from '@lumx/react/utils/browser/event';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { onEnterPressed, onButtonPressed } from '@lumx/core/js/utils';
+import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';
 import { renderLink } from '@lumx/react/utils/react/renderLink';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';

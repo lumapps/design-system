@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 import { FULL_WIDTH_PERCENT } from '@lumx/react/components/slideshow/constants';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 

@@ -3,7 +3,7 @@ import React from 'react';
 import camelCase from 'lodash/camelCase';
 
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
-import { getBasicClass } from '@lumx/react/utils/className';
+import { getBasicClass } from '@lumx/core/js/utils/className';
 import { render } from '@testing-library/react';
 import {
     getByClassName,

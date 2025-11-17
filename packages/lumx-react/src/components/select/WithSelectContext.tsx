@@ -7,7 +7,7 @@ import { Dropdown } from '@lumx/react/components/dropdown/Dropdown';
 import { InputHelper } from '@lumx/react/components/input-helper/InputHelper';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { useListenFocus } from '@lumx/react/hooks/useListenFocus';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 
 import { useId } from '@lumx/react/hooks/useId';

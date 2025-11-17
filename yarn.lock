@@ -3538,6 +3538,7 @@ __metadata:
     "@rollup/plugin-commonjs": ^19.0.2
     "@rollup/plugin-terser": ^0.4.4
     "@rollup/plugin-typescript": ^12.1.4
+    "@types/react": ^17.0.2
     autoprefixer: ^9.7.4
     classnames: ^2.3.2
     focus-visible: ^5.0.2

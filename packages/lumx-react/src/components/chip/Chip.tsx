@@ -7,8 +7,8 @@ import { ColorPalette, Size, Theme } from '@lumx/react';
 import { useStopPropagation } from '@lumx/react/hooks/useStopPropagation';
 
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
-import { onEnterPressed } from '@lumx/react/utils/browser/event';
+import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';
+import { onEnterPressed } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';

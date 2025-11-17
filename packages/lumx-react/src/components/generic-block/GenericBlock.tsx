@@ -5,7 +5,7 @@ import isEmpty from 'lodash/isEmpty';
 import noop from 'lodash/noop';
 
 import { Comp, isComponentType } from '@lumx/react/utils/type';
-import { getRootClassName } from '@lumx/react/utils/className';
+import { getRootClassName } from '@lumx/core/js/utils/className';
 import { partitionMulti } from '@lumx/react/utils/partitionMulti';
 import { Orientation, Size, FlexBox, FlexBoxProps } from '@lumx/react';
 import { GenericBlockGapSize } from '@lumx/react/components/generic-block/constants';

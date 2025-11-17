@@ -1,4 +1,5 @@
-export { getBasicClass, handleBasicClasses } from '@lumx/core/js/utils';
+export { handleBasicClasses } from './handleBasicClasses';
+export { getBasicClass } from './getBasicClass';
 export { getRootClassName } from './getRootClassName';
 export { getTypographyClassName } from './getTypographyClassName';
 export { fontColorClass } from './fontColorClass';

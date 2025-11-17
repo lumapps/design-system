@@ -2,7 +2,7 @@ import React, { ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
-import { getRootClassName } from '@lumx/react/utils/className';
+import { getRootClassName } from '@lumx/core/js/utils/className';
 import { GenericProps } from '@lumx/react/utils/type';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 

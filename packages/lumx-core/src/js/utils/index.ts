@@ -1,82 +1,60 @@
-import classNames from 'classnames';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import React from 'react';
+import type { KeyboardEvent as ReactKeyboardEvent } from 'react';
 
-import isBoolean from 'lodash/isBoolean';
-import isEmpty from 'lodash/isEmpty';
-import kebabCase from 'lodash/kebabCase';
 import noop from 'lodash/noop';
 
-/**
- * Enhance isEmpty method to also works with numbers.
- *
- * @param  value The value to check.
- * @return Whether the input value is empty or != 0.
- */
-const _isEmpty = (value: any) => {
-    if (typeof value === 'number') {
-        return value === 0;
-    }
+export * from './className';
 
-    return isEmpty(value);
-};
+type KeyboardEventHandler<E extends KeyboardEvent | ReactKeyboardEvent> = (event: E) => void;
 
 /**
- * Get the basic CSS class for the given type.
+ * Make sure the pressed key is the enter key before calling the callback.
  *
- * @param  prefix The class name prefix for the generated CSS class.
- * @param  type   The type of CSS class we want to generate (e.g.: 'color', 'variant', ...).
- * @param  value  The value of the type of the CSS class (e.g.: 'primary', 'button', ...).
- * @return The basic CSS class.
+ * @param  handler The handler to call on enter/return press.
+ * @return The decorated function.
  */
-export function getBasicClass({
-    prefix,
-    type,
-    value,
-}: {
-    prefix: string;
-    type: string;
-    value: string | number | boolean | undefined;
-}): string {
-    if (isBoolean(value)) {
-        if (!value) {
-            // False value should not return a class.
-            return '';
+export function onEnterPressed<E extends KeyboardEvent | ReactKeyboardEvent>(
+    handler: KeyboardEventHandler<E>,
+): KeyboardEventHandler<E> {
+    return (evt) => {
+        if (evt.key !== 'Enter') {
+            return;
         }
-        const booleanPrefixes = ['has', 'is'];
-
-        if (booleanPrefixes.some((booleanPrefix) => type.toString().startsWith(booleanPrefix))) {
-            return `${prefix}--${kebabCase(type)}`;
-        }
-
-        return `${prefix}--is-${kebabCase(type)}`;
-    }
-
-    return `${prefix}--${kebabCase(type)}-${value}`;
+        handler(evt);
+    };
 }
 
 /**
- * Return all basic LumX CSS classes which are available for every components.
+ * Make sure the pressed key is the escape key before calling the callback.
  *
- * @see {@link /src/components/index.d.ts} for the possible values of each parameter.
- *
- * @param  prefix The class name prefix for the generated CSS class.
- * @param  props  All the other props you want to generate a class.
- *                The rule of thumb: the key is the name of the prop in the class, the value a string that will
- *                be used in the classname to represent the value of the given prop.
- * @return All LumX basic CSS classes.
+ * @param  handler The handler to call on enter/return press.
+ * @return The decorated function.
  */
-export function handleBasicClasses({ prefix, ...props }: { prefix: string; [prop: string]: any }): string {
-    const otherClasses: any = {};
-    if (!isEmpty(props)) {
-        Object.keys(props).forEach((prop) => {
-            otherClasses[getBasicClass({ prefix, type: prop, value: props[prop] })] = isBoolean(props[prop])
-                ? props[prop]
-                : !_isEmpty(props[prop]);
-        });
-    }
+export function onEscapePressed<E extends KeyboardEvent | ReactKeyboardEvent>(
+    handler: KeyboardEventHandler<E>,
+): KeyboardEventHandler<E> {
+    return (evt) => {
+        if (evt.key !== 'Escape') {
+            return;
+        }
+        handler(evt);
+    };
+}
 
-    return classNames(prefix, otherClasses);
+/**
+ * Handle button key pressed (Enter + Space).
+ *
+ * @param  handler The handler to call.
+ * @return The decorated function.
+ */
+export function onButtonPressed<E extends KeyboardEvent | ReactKeyboardEvent>(
+    handler: KeyboardEventHandler<E>,
+): KeyboardEventHandler<E> {
+    return (evt) => {
+        if (evt.key !== 'Enter' && evt.key !== ' ') {
+            return;
+        }
+        handler(evt);
+    };
 }
 
 declare type SwipeDirection = 'none' | 'up' | 'down' | 'left' | 'right';
@@ -239,58 +217,5 @@ export function detectHorizontalSwipe(touchSurface: Element, handleSwipe: (direc
     return () => {
         touchSurface.removeEventListener('touchstart', onTouchStart, eventOptions);
         touchSurface.removeEventListener('touchmove', onTouchMove, eventOptions);
-    };
-}
-
-type KeyboardEventHandler<E extends KeyboardEvent | React.KeyboardEvent> = (event: E) => void;
-
-/**
- * Make sure the pressed key is the enter key before calling the callback.
- *
- * @param  handler The handler to call on enter/return press.
- * @return The decorated function.
- */
-export function onEnterPressed<E extends KeyboardEvent | React.KeyboardEvent>(
-    handler: KeyboardEventHandler<E>,
-): KeyboardEventHandler<E> {
-    return (evt) => {
-        if (evt.key !== 'Enter') {
-            return;
-        }
-        handler(evt);
-    };
-}
-
-/**
- * Make sure the pressed key is the escape key before calling the callback.
- *
- * @param  handler The handler to call on enter/return press.
- * @return The decorated function.
- */
-export function onEscapePressed<E extends KeyboardEvent | React.KeyboardEvent>(
-    handler: KeyboardEventHandler<E>,
-): KeyboardEventHandler<E> {
-    return (evt) => {
-        if (evt.key !== 'Escape') {
-            return;
-        }
-        handler(evt);
-    };
-}
-
-/**
- * Handle button key pressed (Enter + Space).
- *
- * @param  handler The handler to call.
- * @return The decorated function.
- */
-export function onButtonPressed<E extends KeyboardEvent | React.KeyboardEvent>(
-    handler: KeyboardEventHandler<E>,
-): KeyboardEventHandler<E> {
-    return (evt) => {
-        if (evt.key !== 'Enter' && evt.key !== ' ') {
-            return;
-        }
-        handler(evt);
     };
 }

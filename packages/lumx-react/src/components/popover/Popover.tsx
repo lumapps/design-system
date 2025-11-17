@@ -7,7 +7,7 @@ import { useFocus } from '@lumx/react/hooks/useFocus';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 import { DOCUMENT } from '@lumx/react/constants';
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { skipRender } from '@lumx/react/utils/react/skipRender';

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { SideNavigationItem, Theme } from '@lumx/react';
 import { GenericProps, HasTheme, isComponent } from '@lumx/react/utils/type';
-import { getRootClassName } from '@lumx/react/utils/className';
+import { getRootClassName } from '@lumx/core/js/utils/className';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 

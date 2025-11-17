@@ -1,4 +1,4 @@
-import { getRootClassName } from '@lumx/react/utils/className/getRootClassName';
+import { getRootClassName } from './getRootClassName';
 
 describe(getRootClassName, () => {
     it('should transform the component name into a lumx class', () => {

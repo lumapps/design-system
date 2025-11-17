@@ -1,4 +1,4 @@
-import { fontColorClass } from '@lumx/react/utils/className/fontColorClass';
+import { fontColorClass } from './fontColorClass';
 
 describe(fontColorClass, () => {
     it('should get lumx class for font color', () => {

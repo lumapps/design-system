@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { Alignment } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 type Columns = '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | '11' | '12';

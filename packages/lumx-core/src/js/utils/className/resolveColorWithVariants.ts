@@ -1,4 +1,4 @@
-import { ColorPalette, ColorVariant, ColorWithVariants } from '@lumx/react';
+import { ColorPalette, ColorVariant, ColorWithVariants } from '../../constants';
 
 /** Resolve color & color variant from a `ColorWithVariants` and optionally a `ColorVariant`. */
 export function resolveColorWithVariants(

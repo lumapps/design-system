@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Theme, Typography } from '@lumx/react';
 import { getByClassName } from '@lumx/react/testing/utils/queries';
-import { getTypographyClassName } from '@lumx/react/utils/className';
+import { getTypographyClassName } from '@lumx/core/js/utils/className';
 import { render } from '@testing-library/react';
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { InputLabel, InputLabelProps } from './InputLabel';

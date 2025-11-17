@@ -6,7 +6,7 @@ import isEmpty from 'lodash/isEmpty';
 import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
 import { Emphasis, Icon, Size, IconButton, IconButtonProps } from '@lumx/react';
 import { GenericProps, HasCloseMode, isComponent } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';
 import { renderLink } from '@lumx/react/utils/react/renderLink';
 import { renderButtonOrLink } from '@lumx/react/utils/react/renderButtonOrLink';
 import { useId } from '@lumx/react/hooks/useId';

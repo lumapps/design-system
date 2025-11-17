@@ -7,7 +7,7 @@ import { Button, Emphasis, Icon, Kind, Size, Theme } from '@lumx/react';
 import { DOCUMENT, NOTIFICATION_TRANSITION_DURATION } from '@lumx/react/constants';
 import { NOTIFICATION_CONFIGURATION } from '@lumx/react/components/notification/constants';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils/className';
+import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';
 import { useTransitionVisibility } from '@lumx/react/hooks/useTransitionVisibility';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';

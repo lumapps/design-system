@@ -9,7 +9,7 @@ import {
     getRootClassName,
     handleBasicClasses,
     getTypographyClassName,
-} from '@lumx/react/utils/className';
+} from '@lumx/core/js/utils/className';
 import { useOverflowTooltipLabel } from '@lumx/react/hooks/useOverflowTooltipLabel';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
