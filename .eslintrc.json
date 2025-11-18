@@ -1,3 +1,6 @@
 {
-    "extends": "lumapps"
+    "extends": [
+        "lumapps",
+        "plugin:storybook/recommended"
+    ]
 }
