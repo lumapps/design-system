@@ -72,7 +72,7 @@
         "test": "yarn workspace @lumx/react test",
         "type-check": "yarn tsc -p tsconfig.json",
         "storybook:react": "yarn workspace @lumx/react start:storybook",
-        "storybook:vue": "yarn workspace @lumx/vue start:storybook",
+        "storybook:vue": "yarn workspace @lumx/vue storybook:vue3",
         "storybook": "yarn storybook:react",
         "generate:design-tokens": "yarn workspace @lumx/core generate:design-tokens",
         "generate:icons": "yarn workspace @lumx/icons generate:icons",
