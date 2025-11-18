@@ -5,7 +5,7 @@ import isEmpty from 'lodash/isEmpty';
 
 import { Emphasis, Icon, Size, Theme, Text, ThemeProvider } from '@lumx/react';
 import { isComponent } from '@lumx/react/utils/type';
-import { getBasicClass, getRootClassName } from '@lumx/react/utils/className';
+import { getBasicClass, getRootClassName } from '@lumx/core/js/utils/className';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 

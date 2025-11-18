@@ -21,7 +21,7 @@ import { parseLocale } from '@lumx/react/utils/locale/parseLocale';
 import { Locale } from '@lumx/react/utils/locale/types';
 import { usePreviousValue } from '@lumx/react/hooks/usePreviousValue';
 import { getYearDisplayName } from '@lumx/react/utils/date/getYearDisplayName';
-import { onEnterPressed } from '@lumx/react/utils/browser/event';
+import { onEnterPressed } from '@lumx/core/js/utils';
 import { addMonthResetDay } from '@lumx/react/utils/date/addMonthResetDay';
 import { formatDayNumber } from '@lumx/react/utils/date/formatDayNumber';
 import { VISUALLY_HIDDEN } from '@lumx/react/constants';

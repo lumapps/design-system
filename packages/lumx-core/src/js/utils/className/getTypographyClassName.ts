@@ -1,4 +1,4 @@
-import { Typography } from '@lumx/react';
+import { Typography } from '../../constants';
 
 /**
  * Returns the classname associated to the given typography.

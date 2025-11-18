@@ -9,7 +9,7 @@ import {
     getTypographyClassName,
     handleBasicClasses,
     resolveColorWithVariants,
-} from '@lumx/react/utils/className';
+} from '@lumx/core/js/utils/className';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { wrapChildrenIconWithSpaces } from '@lumx/react/utils/react/wrapChildrenIconWithSpaces';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';

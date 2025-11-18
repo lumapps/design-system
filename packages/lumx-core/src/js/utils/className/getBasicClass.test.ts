@@ -1,4 +1,4 @@
-import { getBasicClass } from '@lumx/core/js/utils';
+import { getBasicClass } from './getBasicClass';
 
 describe(getBasicClass, () => {
     it('should return correct basic CSS class for different types and values', () => {

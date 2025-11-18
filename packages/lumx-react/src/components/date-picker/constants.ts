@@ -1,4 +1,4 @@
-import { getRootClassName } from '@lumx/react/utils/className';
+import { getRootClassName } from '@lumx/core/js/utils/className';
 
 /**
  * Component display name.

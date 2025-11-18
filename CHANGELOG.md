@@ -11,8 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/core`
     -   Moved all non React related types and enums into the package
+    -   Moved `className` utilities into the package
 -   `@lumx/react`:
     -   Import types and constants from `@lumx/core` and re-export
+    -   Import `className` utilities from `@lumx/core`
 
 ## [3.19.0][] - 2025-11-07
 

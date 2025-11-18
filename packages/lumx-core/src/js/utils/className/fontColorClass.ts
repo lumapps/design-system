@@ -1,5 +1,5 @@
-import { ColorVariant, ColorWithVariants } from '@lumx/react';
-import { resolveColorWithVariants } from '@lumx/react/utils/className';
+import { ColorVariant, ColorWithVariants } from '../../constants';
+import { resolveColorWithVariants } from './resolveColorWithVariants';
 
 /**
  * Returns the classname associated to the given color and variant.

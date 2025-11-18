@@ -1,4 +1,4 @@
-import { getTypographyClassName } from '@lumx/react/utils/className/getTypographyClassName';
+import { getTypographyClassName } from './getTypographyClassName';
 
 describe(getTypographyClassName, () => {
     it('should generate lumx typography class', () => {

@@ -1,4 +1,4 @@
-import { handleBasicClasses } from '@lumx/core/js/utils';
+import { handleBasicClasses } from './handleBasicClasses';
 
 describe(handleBasicClasses, () => {
     it('should return correct combined CSS classes based on props', () => {
