@@ -15,6 +15,7 @@
         "resolveJsonModule": true,
         "paths": {
             "@lumx/core/*": ["lumx-core/src/*"],
+            "@lumx/vue/*": ["lumx-vue/src/*"],
             "@lumx/angularjs": ["lumx-angularjs/src"],
             "@lumx/angularjs/*": ["lumx-angularjs/src/*"],
             "@lumx/react": ["lumx-react/src"],

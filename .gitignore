@@ -19,3 +19,4 @@ design_system.ditamap
 build-storybook.log
 packages/lumx-react/storybook-static
 .eslintcache
+*storybook.log
