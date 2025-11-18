@@ -92,6 +92,7 @@
     "start:storybook": "storybook dev -p 6007",
     "build:storybook": "storybook build",
     "test": "vue-demi-switch 3 && vitest",
+    "test:vue2": "vue-demi-switch 2 vue2 && vitest",
     "storybook:vue3": "vue-demi-switch 3 && yarn start:storybook",
     "storybook:vue2": "vue-demi-switch 2 vue2 && yarn start:storybook"
   },
