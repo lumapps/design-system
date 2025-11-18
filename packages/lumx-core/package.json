@@ -9,7 +9,8 @@
         "classnames": "^2.3.2",
         "focus-visible": "^5.0.2",
         "lodash": "4.17.21",
-        "sass-mq": "^6.0.0"
+        "sass-mq": "^6.0.0",
+        "@lumx/icons": "3.19.0"
     },
     "description": "LumX core",
     "homepage": "https://github.com/lumapps/design-system",

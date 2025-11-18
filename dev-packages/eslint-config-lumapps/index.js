@@ -96,5 +96,11 @@ module.exports = {
                 'import/extensions': 'off',
             },
         },
+        {
+            files: ['packages/lumx-core/**/*.{js,jsx,ts,tsx}'],
+            rules: {
+                'react/react-in-jsx-scope': 'off',
+            },
+        },
     ],
 };
