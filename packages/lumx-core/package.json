@@ -6,6 +6,7 @@
         "url": "https://github.com/lumapps/design-system/issues"
     },
     "dependencies": {
+        "@lumx/icons": "3.19.0",
         "classnames": "^2.3.2",
         "focus-visible": "^5.0.2",
         "lodash": "4.17.21",
