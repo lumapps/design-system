@@ -1,47 +1,21 @@
+import DefaultStory, { SizeAndShape as DefaultSizeAndShape } from '@lumx/core/js/components/Icon/Stories';
 import { mdiEmail } from '@lumx/icons';
-import { ColorPalette, ColorVariant, GridColumn, Icon, IconSizes, Size } from '@lumx/react';
+import { ColorPalette, ColorVariant, GridColumn, Icon, Size } from '@lumx/react';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 import { withUndefined } from '@lumx/react/stories/controls/withUndefined';
-import { iconArgType } from '@lumx/react/stories/controls/icons';
-import { colorArgType, colorVariantArgType } from '@lumx/react/stories/controls/color';
 import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
-
-const iconSizes: Array<IconSizes> = [Size.xxs, Size.xs, Size.s, Size.m, Size.l, Size.xl, Size.xxl];
 
 export default {
     title: 'LumX components/icon/Icon',
     component: Icon,
-    args: Icon.defaultProps,
-    argTypes: {
-        icon: iconArgType,
-        hasShape: { control: 'boolean' },
-        color: colorArgType,
-        colorVariant: colorVariantArgType,
-    },
+    ...DefaultStory,
 };
 
 /**
  * All combinations of size and shape
  */
 export const SizeAndShape = {
-    args: {
-        icon: mdiEmail,
-    },
-    argTypes: {
-        hasShape: { control: false },
-        size: { control: false },
-    },
-    decorators: [
-        withCombinations({
-            combinations: {
-                cols: { key: 'size', options: withUndefined(iconSizes) },
-                rows: {
-                    Default: {},
-                    'Has shape': { hasShape: true },
-                },
-            },
-        }),
-    ],
+    ...DefaultSizeAndShape,
 };
 
 /**

@@ -1,21 +1,26 @@
 <script lang="ts">
-import { defineComponent, inject, ref, defineProps } from 'vue-demi';
+import { defineComponent, ref } from 'vue-demi';
 import { Theme } from '@lumx/core/js/constants';
 import { IconProps, Icon as UI } from '@lumx/core/js/components/Icon';
 
 export default defineComponent({
   name: 'Icon',
-  props: defineProps<IconProps>(),
+  props: {
+    icon: {
+      type: String,
+      required: true,
+    },
+    color: {
+      type: String,
+    },
+  },
   components: {
     UI,
   },
-  setup(props: IconProps, { expose }) {
-    const injectedTheme = inject('theme', undefined);
-
+  setup(props: IconProps) {
     const iconRef = ref();
-    expose({ iconRef });
 
-    return { props, theme: injectedTheme || props.theme, iconRef };
+    return { props, iconRef };
   },
 });
 </script>
@@ -23,7 +28,6 @@ export default defineComponent({
 <template>
   <UI
     v-bind="props"
-    :theme="props.theme || injectedTheme"
     ref="iconRef"
   />
 </template>

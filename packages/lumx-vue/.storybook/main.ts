@@ -4,15 +4,10 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import postcss from './postcss.config';
-import { server } from 'typescript';
 
 const config: StorybookConfig = {
     framework: '@storybook/vue3-vite',
-    addons: [
-        '@storybook/addon-a11y',
-        '@storybook/addon-docs',
-        '@chromatic-com/storybook',
-    ],
+    addons: ['@storybook/addon-a11y', '@storybook/addon-docs'],
     stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
     staticDirs: ['../../site-demo/static/'],
 

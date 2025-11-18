@@ -1741,6 +1741,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:^7.23.2":
+  version: 7.28.4
+  resolution: "@babel/runtime@npm:7.28.4"
+  checksum: 934b0a0460f7d06637d93fcd1a44ac49adc33518d17253b5a0b55ff4cb90a45d8fe78bf034b448911dbec7aff2a90b918697559f78d21c99ff8dbadae9565b55
+  languageName: node
+  linkType: hard
+
 "@babel/standalone@npm:^7.15.5":
   version: 7.28.3
   resolution: "@babel/standalone@npm:7.28.3"
@@ -3691,6 +3698,8 @@ __metadata:
     "@rollup/plugin-commonjs": ^19.0.2
     "@rollup/plugin-terser": ^0.4.4
     "@rollup/plugin-typescript": ^12.1.4
+    "@testing-library/dom": ^9.3.4
+    "@testing-library/jest-dom": ^5.16.4
     "@types/react": ^17.0.2
     autoprefixer: ^9.7.4
     classnames: ^2.3.2
@@ -3837,6 +3846,7 @@ __metadata:
     "@babel/plugin-proposal-optional-chaining": ^7.21.0
     "@babel/plugin-proposal-private-methods": ^7.18.6
     "@babel/plugin-proposal-private-property-in-object": ^7.21.11
+    "@babel/plugin-transform-react-jsx": ^7.27.1
     "@babel/preset-env": ^7.26.9
     "@babel/preset-typescript": ^7.26.0
     "@lumx/core": ^3.19.0
@@ -3846,8 +3856,8 @@ __metadata:
     "@storybook/vue3-vite": 9.1.16
     "@testing-library/dom": ^9.3.4
     "@testing-library/jest-dom": ^5.16.4
-    "@testing-library/react": ^12.1.2
     "@testing-library/user-event": ^14.4.3
+    "@testing-library/vue": ^8.1.0
     "@types/body-scroll-lock": ^2.6.1
     "@types/classnames": ^2.2.9
     "@types/dom-view-transitions": ^1.0.5
@@ -4488,6 +4498,13 @@ __metadata:
   dependencies:
     "@octokit/openapi-types": ^12.11.0
   checksum: fd6f75e0b19b90d1a3d244d2b0c323ed8f2f05e474a281f60a321986683548ef2e0ec2b3a946aa9405d6092e055344455f69f58957c60f58368c8bdda5b7d2ab
+  languageName: node
+  linkType: hard
+
+"@one-ini/wasm@npm:0.1.1":
+  version: 0.1.1
+  resolution: "@one-ini/wasm@npm:0.1.1"
+  checksum: 11de17108eae57c797e552e36b259398aede999b4a689d78be6459652edc37f3428472410590a9d328011a8751b771063a5648dd5c4205631c55d1d58e313156
   languageName: node
   linkType: hard
 
@@ -5287,7 +5304,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/dom@npm:^9.3.4":
+"@testing-library/dom@npm:^9.3.3, @testing-library/dom@npm:^9.3.4":
   version: 9.3.4
   resolution: "@testing-library/dom@npm:9.3.4"
   dependencies:
@@ -5354,6 +5371,23 @@ __metadata:
   peerDependencies:
     "@testing-library/dom": ">=7.21.4"
   checksum: 4cb8a81fea1fea83a42619e9545137b51636bb7a3182c596bb468e5664f1e4699a275c2d0fb8b6dcc3fe2684f9d87b0637ab7cb4f566051539146872c9141fcb
+  languageName: node
+  linkType: hard
+
+"@testing-library/vue@npm:^8.1.0":
+  version: 8.1.0
+  resolution: "@testing-library/vue@npm:8.1.0"
+  dependencies:
+    "@babel/runtime": ^7.23.2
+    "@testing-library/dom": ^9.3.3
+    "@vue/test-utils": ^2.4.1
+  peerDependencies:
+    "@vue/compiler-sfc": ">= 3"
+    vue: ">= 3"
+  peerDependenciesMeta:
+    "@vue/compiler-sfc":
+      optional: true
+  checksum: 903a0b141f740bc1774aace154b2b0bec6f67a64c034570ab5da070aadc7e82f836b39f37b4573f0aa57aec1919591566ec2e722892530c38e243c729a8537f2
   languageName: node
   linkType: hard
 
@@ -6878,6 +6912,16 @@ __metadata:
   version: 3.5.24
   resolution: "@vue/shared@npm:3.5.24"
   checksum: 580238dd137be9d8252f975fbc18b56f19e23e912401873997dea566c940f32a8a999bbc1915abf53201279e60aba3f07f4fb4c964da2dd00ee66e04bfe81191
+  languageName: node
+  linkType: hard
+
+"@vue/test-utils@npm:^2.4.1":
+  version: 2.4.6
+  resolution: "@vue/test-utils@npm:2.4.6"
+  dependencies:
+    js-beautify: ^1.14.9
+    vue-component-type-helpers: ^2.0.0
+  checksum: ae6f3c10f6ffb45b7be73e1c550c18b1d54ebec0a7d34f2600f974d1407ace8de48836600d60c872bbfb007d109a2ececb2307659a4c861e62ced913d32c7a25
   languageName: node
   linkType: hard
 
@@ -10245,6 +10289,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"config-chain@npm:^1.1.13":
+  version: 1.1.13
+  resolution: "config-chain@npm:1.1.13"
+  dependencies:
+    ini: ^1.3.4
+    proto-list: ~1.2.1
+  checksum: 828137a28e7c2fc4b7fb229bd0cd6c1397bcf83434de54347e608154008f411749041ee392cbe42fab6307e02de4c12480260bf769b7d44b778fdea3839eafab
+  languageName: node
+  linkType: hard
+
 "configstore@npm:^5.0.1":
   version: 5.0.1
   resolution: "configstore@npm:5.0.1"
@@ -11983,6 +12037,20 @@ __metadata:
   dependencies:
     version-range: ^4.15.0
   checksum: 994284f5bedaa34831c6a2f321488ecd0de70bd792c1f9376874a53c18d9b78001dec448da1f2f3c175a2e135caf538a7fc86bb0b139acc96088d4e47c5b9d11
+  languageName: node
+  linkType: hard
+
+"editorconfig@npm:^1.0.4":
+  version: 1.0.4
+  resolution: "editorconfig@npm:1.0.4"
+  dependencies:
+    "@one-ini/wasm": 0.1.1
+    commander: ^10.0.0
+    minimatch: 9.0.1
+    semver: ^7.5.3
+  bin:
+    editorconfig: bin/editorconfig
+  checksum: 09904f19381b3ddf132cea0762971aba887236f387be3540909e96b8eb9337e1793834e10f06890cd8e8e7bb1ba80cb13e7d50a863f227806c9ca74def4165fb
   languageName: node
   linkType: hard
 
@@ -15446,6 +15514,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"glob@npm:^10.4.2":
+  version: 10.5.0
+  resolution: "glob@npm:10.5.0"
+  dependencies:
+    foreground-child: ^3.1.0
+    jackspeak: ^3.1.2
+    minimatch: ^9.0.4
+    minipass: ^7.1.2
+    package-json-from-dist: ^1.0.0
+    path-scurry: ^1.11.1
+  bin:
+    glob: dist/esm/bin.mjs
+  checksum: cda96c074878abca9657bd984d2396945cf0d64283f6feeb40d738fe2da642be0010ad5210a1646244a5fc3511b0cab5a374569b3de5a12b8a63d392f18c6043
+  languageName: node
+  linkType: hard
+
 "glob@npm:^7.0.0, glob@npm:^7.0.3, glob@npm:^7.1.1, glob@npm:^7.1.2, glob@npm:^7.1.3, glob@npm:^7.1.4, glob@npm:^7.1.6, glob@npm:^7.1.7, glob@npm:^7.2.0":
   version: 7.2.3
   resolution: "glob@npm:7.2.3"
@@ -18683,6 +18767,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"js-beautify@npm:^1.14.9":
+  version: 1.15.4
+  resolution: "js-beautify@npm:1.15.4"
+  dependencies:
+    config-chain: ^1.1.13
+    editorconfig: ^1.0.4
+    glob: ^10.4.2
+    js-cookie: ^3.0.5
+    nopt: ^7.2.1
+  bin:
+    css-beautify: js/bin/css-beautify.js
+    html-beautify: js/bin/html-beautify.js
+    js-beautify: js/bin/js-beautify.js
+  checksum: cf12df7d9d5269f1174ae1347f49d49245794f8e2286768ff39f40b40c8dfe8152368759e0d33bea46dc7303fc95ea947c53978b5fa2ef081fe850445ecfc0fe
+  languageName: node
+  linkType: hard
+
+"js-cookie@npm:^3.0.5":
+  version: 3.0.5
+  resolution: "js-cookie@npm:3.0.5"
+  checksum: 2dbd2809c6180fbcf060c6957cb82dbb47edae0ead6bd71cbeedf448aa6b6923115003b995f7d3e3077bfe2cb76295ea6b584eb7196cca8ba0a09f389f64967a
+  languageName: node
+  linkType: hard
+
 "js-stringify@npm:^1.0.2":
   version: 1.0.2
   resolution: "js-stringify@npm:1.0.2"
@@ -20823,6 +20931,15 @@ __metadata:
   dependencies:
     brace-expansion: ^1.1.7
   checksum: 66ac295f8a7b59788000ea3749938b0970344c841750abd96694f80269b926ebcafad3deeb3f1da2522978b119e6ae3a5869b63b13a7859a456b3408bd18a078
+  languageName: node
+  linkType: hard
+
+"minimatch@npm:9.0.1":
+  version: 9.0.1
+  resolution: "minimatch@npm:9.0.1"
+  dependencies:
+    brace-expansion: ^2.0.1
+  checksum: 97f5f5284bb57dc65b9415dec7f17a0f6531a33572193991c60ff18450dcfad5c2dad24ffeaf60b5261dccd63aae58cc3306e2209d57e7f88c51295a532d8ec3
   languageName: node
   linkType: hard
 
@@ -30518,7 +30635,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-component-type-helpers@npm:2.2.12":
+"vue-component-type-helpers@npm:2.2.12, vue-component-type-helpers@npm:^2.0.0":
   version: 2.2.12
   resolution: "vue-component-type-helpers@npm:2.2.12"
   checksum: 985ca9564966919f5a009514a46fd0b90c7a167795d9f2f58072f5f4a4eaffb8f94bcf70376504f171441827c624b723224acac41ce6a2cd39d2fff13df08d7a
