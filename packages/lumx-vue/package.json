@@ -1,0 +1,32 @@
+{
+  "license": "MIT",
+  "name": "@lumx/vue",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lumapps/design-system.git"
+  },
+  "scripts": {
+    "start:storybook": "storybook dev -p 9000",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "build": "vite build"
+  },
+  "module": "index.js",
+  "main": "index.js",
+  "installConfig": {
+    "hoistingLimits": "workspaces"
+  },
+  "sideEffects": false,
+  "version": "3.20.0",
+  "devDependencies": {
+    "@babel/plugin-transform-react-jsx": "^7.27.1",
+    "@storybook/vue3-vite": "^9.1.4",
+    "@vitejs/plugin-vue": "^6.0.2",
+    "@vitejs/plugin-vue-jsx": "^5.1.1",
+    "storybook": "^9.1.4",
+    "typescript": "^5.4.3",
+    "vite": "^6.3.5",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vue": "^3.5.25"
+  }
+}

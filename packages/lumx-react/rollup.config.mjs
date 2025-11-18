@@ -59,7 +59,7 @@ const bundleJS = {
             plugins: CONFIGS.babel.plugins,
             presets: [
                 ['@babel/preset-env', { targets: 'defaults' }],
-                '@babel/preset-react',
+                ['@babel/preset-react', { runtime: 'automatic' }],
                 '@babel/preset-typescript',
             ],
         }),

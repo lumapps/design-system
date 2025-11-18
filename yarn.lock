@@ -3513,6 +3513,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@lumx/core@workspace:packages/lumx-core"
   dependencies:
+    "@lumx/icons": 3.19.0
     "@rollup/plugin-commonjs": ^19.0.2
     "@rollup/plugin-terser": ^0.4.4
     "@rollup/plugin-typescript": ^12.1.4
@@ -3551,6 +3552,15 @@ __metadata:
     svgtofont: ^4.0.0
   languageName: unknown
   linkType: soft
+
+"@lumx/icons@npm:3.19.0":
+  version: 3.19.0
+  resolution: "@lumx/icons@npm:3.19.0"
+  dependencies:
+    "@mdi/font": 5.8.55
+  checksum: 716d3c405dc682248303db860dea871f5de4e6e759e33ad9f36d9042c2cc5e347da9ec1e4747e90540b25db86bad1d8372ee59a41209f2220465f513fdd62b71
+  languageName: node
+  linkType: hard
 
 "@lumx/lumx@workspace:.":
   version: 0.0.0-use.local
@@ -3596,6 +3606,7 @@ __metadata:
     "@rollup/plugin-babel": ^6.0.4
     "@rollup/plugin-commonjs": ^19.0.2
     "@rollup/plugin-node-resolve": 16.0.0
+    "@rollup/pluginutils": 5.2.0
     "@storybook/addon-a11y": ^9.1.4
     "@storybook/addon-docs": ^9.1.4
     "@storybook/react-vite": ^9.1.4
@@ -4462,20 +4473,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/pluginutils@npm:^3.1.0":
-  version: 3.1.0
-  resolution: "@rollup/pluginutils@npm:3.1.0"
-  dependencies:
-    "@types/estree": 0.0.39
-    estree-walker: ^1.0.1
-    picomatch: ^2.2.2
-  peerDependencies:
-    rollup: ^1.20.0||^2.0.0
-  checksum: 8be16e27863c219edbb25a4e6ec2fe0e1e451d9e917b6a43cf2ae5bc025a6b8faaa40f82a6e53b66d0de37b58ff472c6c3d57a83037ae635041f8df959d6d9aa
-  languageName: node
-  linkType: hard
-
-"@rollup/pluginutils@npm:^5.0.1, @rollup/pluginutils@npm:^5.1.0":
+"@rollup/pluginutils@npm:5.2.0, @rollup/pluginutils@npm:^5.0.1, @rollup/pluginutils@npm:^5.1.0":
   version: 5.2.0
   resolution: "@rollup/pluginutils@npm:5.2.0"
   dependencies:
@@ -4488,6 +4486,19 @@ __metadata:
     rollup:
       optional: true
   checksum: d34a7215cddbc11fff7663f8ca05e8e04b48af4c4b19f5545902bef07e508c029cd254d6c5ae66d2e3309d459d44f326f1adaa6b6a4dae3c27bd26a3baef70a4
+  languageName: node
+  linkType: hard
+
+"@rollup/pluginutils@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "@rollup/pluginutils@npm:3.1.0"
+  dependencies:
+    "@types/estree": 0.0.39
+    estree-walker: ^1.0.1
+    picomatch: ^2.2.2
+  peerDependencies:
+    rollup: ^1.20.0||^2.0.0
+  checksum: 8be16e27863c219edbb25a4e6ec2fe0e1e451d9e917b6a43cf2ae5bc025a6b8faaa40f82a6e53b66d0de37b58ff472c6c3d57a83037ae635041f8df959d6d9aa
   languageName: node
   linkType: hard
 

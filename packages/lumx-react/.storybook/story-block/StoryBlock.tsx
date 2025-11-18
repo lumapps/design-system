@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { ElementType } from 'react';
 import classNames from 'classnames';
 import isChromatic from 'chromatic/isChromatic';
