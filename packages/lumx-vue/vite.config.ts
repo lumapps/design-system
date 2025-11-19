@@ -4,6 +4,8 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import path from 'path';
 import pkg from './package.json';
 
+import copy from 'rollup-plugin-copy';
+
 export default defineConfig({
     plugins: [vue(), tsconfigPaths()],
     build: {
@@ -23,6 +25,15 @@ export default defineConfig({
                     vue: 'Vue',
                 },
             },
+            plugins: [
+                copy({
+                    targets: [
+                        { src: 'package.json', dest: 'dist' },
+                        { src: 'src/**/*', dest: 'dist/src' },
+                    ],
+                    hook: 'writeBundle',
+                }),
+            ],
         },
     },
 });
