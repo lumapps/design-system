@@ -96,9 +96,6 @@
   "main": "index.js",
   "types": "index.d.ts",
   "name": "@lumx/vue",
-  "publishConfig": {
-    "directory": "dist"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lumapps/design-system.git"
