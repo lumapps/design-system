@@ -65,8 +65,6 @@ export const Icon = (props: IconProps) => {
         ...forwardedProps
     } = props;
 
-    console.log(props, forwardedProps);
-
     const [color, colorVariant] = resolveColorWithVariants(propColor, propColorVariant);
 
     // Color

@@ -2,7 +2,6 @@ import { mdiAlertCircle } from '@lumx/icons';
 import { ColorPalette, ColorVariant, Size, Theme } from '@lumx/core/js/constants';
 
 import { getByClassName, getByTagName } from '@lumx/react/testing/utils/queries';
-import { screen } from '@testing-library/dom';
 import { IconProps, Icon } from '.';
 
 const CLASSNAME = Icon.className as string;
@@ -19,7 +18,7 @@ const setup = (propsOverride: SetupProps = {}, { wrapper, render }: any = {}) =>
     };
 
     render(props, { wrapper });
-    screen.logTestingPlaygroundURL();
+
     const i = getByClassName(document.body, CLASSNAME);
     const svg = getByTagName(i, 'svg');
     const path = getByTagName(svg, 'path');
