@@ -1,4 +1,6 @@
 /* eslint-disable */
+
+const webpack = require('webpack');
 const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin');
 
 const path = require('path');
@@ -67,9 +69,14 @@ exports.onCreateWebpackConfig = async ({ actions, getConfig }) => {
     // Generate the JSON icon library
     await generateJSONIconLibrary();
 
-    actions.setWebpackConfig({
-        plugins: [CONFIGS.ignoreNotFoundExport],
 
+    actions.setWebpackConfig({
+        plugins: [
+            CONFIGS.ignoreNotFoundExport,
+            new webpack.ProvidePlugin({
+                React: 'react',
+            }),
+        ],
         resolve: {
             alias: {
                 '@content': path.resolve('./content'),
