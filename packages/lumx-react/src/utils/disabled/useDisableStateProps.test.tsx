@@ -59,14 +59,14 @@ describe(useDisableStateProps.name, () => {
     });
 
     it('should forward onClick when not disabled', () => {
-        const onClick = jest.fn();
+        const onClick = vi.fn();
         const { element } = setup({ onClick });
         fireEvent.click(element);
         expect(onClick).toHaveBeenCalled();
     });
 
     it('should not forward onClick when disabled', () => {
-        const onClick = jest.fn();
+        const onClick = vi.fn();
         const { element } = setup({ disabled: true, onClick });
         fireEvent.click(element);
         expect(onClick).not.toHaveBeenCalled();

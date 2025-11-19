@@ -36,7 +36,7 @@ describe(`<${UserBlock.displayName}>`, () => {
         });
 
         it('should render button', async () => {
-            const onClick = jest.fn();
+            const onClick = vi.fn();
             const { name, thumbnail } = setup({
                 onClick,
                 name: 'John Doe',

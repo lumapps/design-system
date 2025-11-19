@@ -86,7 +86,7 @@ describe(`<${RadioButton.displayName}>`, () => {
     });
 
     describe('Events', () => {
-        const onChange = jest.fn();
+        const onChange = vi.fn();
 
         it('should trigger `onChange` when radioButton is clicked', async () => {
             const value = 'value';
@@ -102,7 +102,7 @@ describe(`<${RadioButton.displayName}>`, () => {
 
     describe('Disabled state', () => {
         it('should be disabled with isDisabled', async () => {
-            const onChange = jest.fn();
+            const onChange = vi.fn();
             const { radioButton, input } = setup({ isDisabled: true, onChange });
 
             expect(radioButton).toHaveClass('lumx-radio-button--is-disabled');
@@ -115,7 +115,7 @@ describe(`<${RadioButton.displayName}>`, () => {
         });
 
         it('should be disabled with aria-disabled', async () => {
-            const onChange = jest.fn();
+            const onChange = vi.fn();
             const { radioButton, input } = setup({ 'aria-disabled': true, onChange });
 
             expect(radioButton).toHaveClass('lumx-radio-button--is-disabled');

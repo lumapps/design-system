@@ -28,7 +28,7 @@ const setup = (propsOverride: Partial<DropdownProps> = {}) => {
 describe(`<${Dropdown.displayName}>`, () => {
     describe('Events', () => {
         it('should trigger `onClose` when pressing `escape` key', async () => {
-            const onClose = jest.fn();
+            const onClose = vi.fn();
             setup({
                 closeOnEscape: true,
                 onClose,
@@ -40,7 +40,7 @@ describe(`<${Dropdown.displayName}>`, () => {
         });
 
         it('should not trigger `onClose` when pressing any other key', async () => {
-            const onClose = jest.fn();
+            const onClose = vi.fn();
             setup({ isOpen: true, onClose, closeOnEscape: true });
 
             await userEvent.keyboard('a');
@@ -48,7 +48,7 @@ describe(`<${Dropdown.displayName}>`, () => {
         });
 
         it('should not trigger `onClose` when pressing `escape` key with `closeOnEscape` set to `false`', async () => {
-            const onClose = jest.fn();
+            const onClose = vi.fn();
             setup({ isOpen: true, onClose, closeOnEscape: false });
 
             await userEvent.keyboard('[Escape]');

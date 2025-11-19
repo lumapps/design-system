@@ -1,3 +1,4 @@
+import { Mock } from 'vitest';
 import React from 'react';
 
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
@@ -11,7 +12,7 @@ import { ExpansionPanel, ExpansionPanelProps } from '.';
 
 const CLASSNAME = ExpansionPanel.className as string;
 
-jest.mock('@lumx/react/utils/browser/isFocusVisible');
+vi.mock('@lumx/react/utils/browser/isFocusVisible');
 
 const mockChildrenContent = 'children content';
 
@@ -55,7 +56,7 @@ const setup = (
 };
 
 describe(`<${ExpansionPanel.displayName}>`, () => {
-    (isFocusVisible as jest.Mock).mockReturnValue(false);
+    (isFocusVisible as Mock).mockReturnValue(false);
 
     describe('Render', () => {
         it('should render default', () => {
@@ -100,9 +101,9 @@ describe(`<${ExpansionPanel.displayName}>`, () => {
     });
 
     describe('Events', () => {
-        const onOpen = jest.fn();
-        const onClose = jest.fn();
-        const onToggleOpen = jest.fn();
+        const onOpen = vi.fn();
+        const onClose = vi.fn();
+        const onToggleOpen = vi.fn();
 
         beforeEach(onOpen.mockClear);
         beforeEach(onClose.mockClear);

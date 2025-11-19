@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
-import { render, within, screen } from '@testing-library/react';
+import { render, within, screen, waitFor } from '@testing-library/react';
 import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import userEvent from '@testing-library/user-event';
 import { useImageSize } from '@lumx/react/hooks/useImageSize';
@@ -18,8 +18,8 @@ import Meta, {
     WithMosaicTrigger,
 } from './ImageLightbox.stories';
 
-jest.mock('@lumx/react/hooks/useImageSize');
-jest.mock('@lumx/react/hooks/useSizeOnWindowResize');
+vi.mock('@lumx/react/hooks/useImageSize');
+vi.mock('@lumx/react/hooks/useSizeOnWindowResize');
 
 const CLASSNAME = ImageLightbox.className as string;
 const baseProps = Meta.args;
@@ -56,7 +56,7 @@ const queries = {
 describe(`<${ImageLightbox.displayName}>`, () => {
     beforeEach(() => {
         (useImageSize as any).mockReturnValue(null);
-        (useSizeOnWindowResize as any).mockReturnValue([null, jest.fn()]);
+        (useSizeOnWindowResize as any).mockReturnValue([null, vi.fn()]);
     });
 
     describe('render', () => {
@@ -159,7 +159,9 @@ describe(`<${ImageLightbox.displayName}>`, () => {
 
             // Close on escape
             await userEvent.keyboard('{escape}');
-            expect(imageLightbox).not.toBeInTheDocument();
+            await waitFor(() => {
+                expect(imageLightbox).not.toBeInTheDocument();
+            });
 
             // Focus moved back to the trigger button
             expect(buttonTrigger).toHaveFocus();
@@ -185,7 +187,9 @@ describe(`<${ImageLightbox.displayName}>`, () => {
 
             // Close on escape
             await userEvent.keyboard('{escape}');
-            expect(imageLightbox).not.toBeInTheDocument();
+            await waitFor(() => {
+                expect(imageLightbox).not.toBeInTheDocument();
+            });
 
             // Focus moved back to the trigger button
             expect(buttonTrigger).toHaveFocus();
@@ -196,7 +200,7 @@ describe(`<${ImageLightbox.displayName}>`, () => {
         const scrollAreaSize = { width: 600, height: 600 };
         beforeEach(() => {
             (useImageSize as any).mockImplementation((_: any, getInitialSize: any) => getInitialSize?.() || null);
-            (useSizeOnWindowResize as any).mockReturnValue([scrollAreaSize, jest.fn()]);
+            (useSizeOnWindowResize as any).mockReturnValue([scrollAreaSize, vi.fn()]);
         });
 
         it('should use the image initial size', () => {

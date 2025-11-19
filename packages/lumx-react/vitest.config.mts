@@ -1,0 +1,19 @@
+/* eslint-disable import/no-extraneous-dependencies */
+import { defineConfig } from 'vitest/config';
+import tsconfigPaths from 'vite-tsconfig-paths';
+
+export default defineConfig({
+    test: {
+        environment: 'jsdom',
+        globals: true,
+        setupFiles: ['./vitest.setup.ts'],
+        coverage: {
+            reporter: ['json', 'lcov', 'html', 'text'],
+            reportsDirectory: './reports/coverage',
+        },
+        include: ['src/**/*.{test,spec}.{ts,tsx}'],
+        exclude: ['src/**/*.stories.tsx'],
+    },
+    // @ts-expect-error seems that the error is not relevant
+    plugins: [tsconfigPaths()],
+});

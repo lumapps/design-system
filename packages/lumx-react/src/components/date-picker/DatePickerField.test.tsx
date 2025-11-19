@@ -10,8 +10,8 @@ import { DatePickerField, DatePickerFieldProps } from './DatePickerField';
 import { CLASSNAME } from './constants';
 
 const mockedDate = new Date(1487721600000);
-Date.now = jest.fn(() => mockedDate.valueOf());
-jest.mock('@lumx/react/utils/date/getYearDisplayName', () => ({
+Date.now = vi.fn(() => mockedDate.valueOf());
+vi.mock('@lumx/react/utils/date/getYearDisplayName', () => ({
     getYearDisplayName: () => 'année',
 }));
 
@@ -19,7 +19,7 @@ const setup = (propsOverride: Partial<DatePickerFieldProps> = {}, { wrapper }: S
     const props: DatePickerFieldProps = {
         label: 'DatePickerField',
         locale: 'fr',
-        onChange: jest.fn(),
+        onChange: vi.fn(),
         value: mockedDate,
         nextButtonProps: { label: 'Next month' },
         previousButtonProps: { label: 'Previous month' },

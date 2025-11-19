@@ -32,7 +32,7 @@ describe(`<${Mosaic.displayName}>`, () => {
         expect(mosaic).toHaveClass(`${CLASSNAME}--has-${count}-thumbnail${count > 1 ? 's' : ''}`);
         expect(thumbnails.length).toBe(count);
         for (const thumbnail of thumbnails) {
-            expect(within(thumbnail).queryByRole('img')).toBeInTheDocument();
+            expect(within(thumbnail).queryByAltText('')).toBeInTheDocument();
         }
     });
 
@@ -47,8 +47,8 @@ describe(`<${Mosaic.displayName}>`, () => {
     });
 
     it('should render clickable', async () => {
-        const onClick = jest.fn();
-        const onImageClick = jest.fn();
+        const onClick = vi.fn();
+        const onImageClick = vi.fn();
         const { thumbnails } = setup({
             thumbnails: generateThumbnails(6),
             onImageClick,

@@ -1,3 +1,4 @@
+import { MockInstance } from 'vitest';
 import React from 'react';
 
 import { Button } from '@lumx/react';
@@ -12,13 +13,18 @@ import { Tooltip, TooltipProps } from './Tooltip';
 
 const CLASSNAME = Tooltip.className as string;
 
-jest.mock('@lumx/react/utils/browser/isFocusVisible');
-jest.mock('@lumx/react/hooks/useId', () => ({ useId: () => ':r1:' }));
+vi.mock('@lumx/react/utils/browser/isFocusVisible');
+vi.mock('@lumx/react/hooks/useId', () => ({ useId: () => ':r1:' }));
 // Skip delays
-jest.mock('@lumx/react/constants', () => ({
-    ...jest.requireActual('@lumx/react/constants'),
-    TOOLTIP_HOVER_DELAY: { open: 0, close: 0 },
-}));
+vi.mock('@lumx/react/constants', async (importActual) => {
+    const actual = (await importActual()) as Record<string, any>;
+    return {
+        ...actual,
+        TOOLTIP_HOVER_DELAY: { open: 0, close: 0 },
+        VISUALLY_HIDDEN: actual.VISUALLY_HIDDEN,
+        CSS_PREFIX: actual.CSS_PREFIX,
+    };
+});
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -346,7 +352,7 @@ describe(`<${Tooltip.displayName}>`, () => {
         });
 
         it('should activate on anchor focus visible and close on escape', async () => {
-            (isFocusVisible as jest.Mock).mockReturnValue(true);
+            (isFocusVisible as unknown as MockInstance).mockReturnValue(true);
             let { tooltip } = await setup({
                 label: 'Tooltip label',
                 children: <Button>Anchor</Button>,
@@ -381,7 +387,7 @@ describe(`<${Tooltip.displayName}>`, () => {
         });
 
         it('should not activate on anchor focus if not visible', async () => {
-            (isFocusVisible as jest.Mock).mockReturnValue(false);
+            (isFocusVisible as unknown as MockInstance).mockReturnValue(false);
             let { tooltip } = await setup({
                 label: 'Tooltip label',
                 children: <Button>Anchor</Button>,

@@ -89,9 +89,9 @@ describe(`<${Uploader.displayName}>`, () => {
         ${'button'}               | ${{}}
         ${'button isDisabled   '} | ${{ isDisabled: true }}
         ${'button aria-disabled'} | ${{ 'aria-disabled': true }}
-        ${'file input          '} | ${{ fileInputProps: { onChange: jest.fn() } }}
+        ${'file input          '} | ${{ fileInputProps: { onChange: vi.fn() } }}
     `('Events $name', ({ props }) => {
-        const onClick = jest.fn();
+        const onClick = vi.fn();
         beforeEach(() => onClick.mockClear());
         const assertClick = () => {
             if (props.isDisabled || props['aria-disabled']) {

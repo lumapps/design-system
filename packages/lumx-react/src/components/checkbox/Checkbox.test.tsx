@@ -98,7 +98,7 @@ describe(`<${Checkbox.displayName}>`, () => {
     });
 
     describe('Events', () => {
-        const onChange = jest.fn();
+        const onChange = vi.fn();
 
         it('should trigger `onChange` when checkbox is clicked', async () => {
             const value = 'value';
@@ -114,7 +114,7 @@ describe(`<${Checkbox.displayName}>`, () => {
 
     describe('Disabled state', () => {
         it('should be disabled with isDisabled', async () => {
-            const onChange = jest.fn();
+            const onChange = vi.fn();
             const { checkbox, input } = setup({ isDisabled: true, onChange });
 
             expect(checkbox).toHaveClass('lumx-checkbox--is-disabled');
@@ -126,7 +126,7 @@ describe(`<${Checkbox.displayName}>`, () => {
         });
 
         it('should be disabled with aria-disabled', async () => {
-            const onChange = jest.fn();
+            const onChange = vi.fn();
             const { checkbox, input } = setup({ 'aria-disabled': true, onChange });
 
             expect(checkbox).toHaveClass('lumx-checkbox--is-disabled');

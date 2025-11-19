@@ -44,8 +44,8 @@ describe(`<${Notification.displayName}>`, () => {
     });
 
     it('should render content & action', async () => {
-        const onClick = jest.fn();
-        const onActionClick = jest.fn();
+        const onClick = vi.fn();
+        const onActionClick = vi.fn();
         const content = 'Content';
         const actionLabel = 'actionLabel';
         const { notification, action, actionButton } = setup({ content, actionLabel, onClick, onActionClick });
@@ -81,8 +81,9 @@ describe(`<${Notification.displayName}>`, () => {
 
     it('should forward styles', () => {
         const { notification } = setup({ style: { color: 'red' } });
+
         expect(notification).toBeInTheDocument();
-        expect(notification).toHaveStyle('color: red');
+        expect(notification).toHaveStyle('color: rgb(255, 0, 0)');
     });
 
     // Common tests suite.

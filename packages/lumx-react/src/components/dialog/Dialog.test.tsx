@@ -51,7 +51,7 @@ describe(`<${Dialog.displayName}>`, () => {
 
     describe('Events', () => {
         it('should trigger `onClose` when pressing `escape` key', async () => {
-            const onClose = jest.fn();
+            const onClose = vi.fn();
             setup({ isOpen: true, onClose });
 
             await userEvent.keyboard('[Escape]');
@@ -59,7 +59,7 @@ describe(`<${Dialog.displayName}>`, () => {
         });
 
         it('should not trigger `onClose` when pressing any other key', async () => {
-            const onClose = jest.fn();
+            const onClose = vi.fn();
             setup({ isOpen: true, onClose });
 
             await userEvent.keyboard('a');
@@ -67,7 +67,7 @@ describe(`<${Dialog.displayName}>`, () => {
         });
 
         it('should not trigger `onClose` when pressing `escape` key with `preventAutoClose` set to `true`', async () => {
-            const onClose = jest.fn();
+            const onClose = vi.fn();
             setup({ isOpen: true, onClose, preventAutoClose: true });
 
             await userEvent.keyboard('[Escape]');
@@ -75,7 +75,7 @@ describe(`<${Dialog.displayName}>`, () => {
         });
 
         it('should not trigger `onClose` when pressing `escape` key with `preventCloseOnEscape` set to `true`', async () => {
-            const onClose = jest.fn();
+            const onClose = vi.fn();
             setup({ isOpen: true, onClose, preventCloseOnEscape: true });
 
             await userEvent.keyboard('[Escape]');

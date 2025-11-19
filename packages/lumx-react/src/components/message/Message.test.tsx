@@ -54,7 +54,7 @@ describe(`<${Message.displayName}>`, () => {
         });
 
         it('should render close button', async () => {
-            const onClick = jest.fn();
+            const onClick = vi.fn();
             const { closeButton } = setup({
                 hasBackground: true,
                 kind: 'info',

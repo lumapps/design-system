@@ -10,8 +10,8 @@ import { DatePickerControlled, DatePickerControlledProps } from './DatePickerCon
 import { CLASSNAME } from './constants';
 
 const mockedDate = new Date(1487721600000);
-Date.now = jest.fn(() => mockedDate.valueOf());
-jest.mock('@lumx/react/utils/date/getYearDisplayName', () => ({
+Date.now = vi.fn(() => mockedDate.valueOf());
+vi.mock('@lumx/react/utils/date/getYearDisplayName', () => ({
     getYearDisplayName: () => 'année',
 }));
 
@@ -20,14 +20,14 @@ type SetupProps = Partial<DatePickerControlledProps>;
 const setup = (propsOverride: SetupProps = {}) => {
     const props: DatePickerControlledProps = {
         locale: 'fr',
-        onChange: jest.fn(),
-        onNextMonthChange: jest.fn(),
-        onPrevMonthChange: jest.fn(),
+        onChange: vi.fn(),
+        onNextMonthChange: vi.fn(),
+        onPrevMonthChange: vi.fn(),
         selectedMonth: mockedDate,
         value: mockedDate,
         nextButtonProps: { label: 'Next month' },
         previousButtonProps: { label: 'Previous month' },
-        onMonthChange: jest.fn(),
+        onMonthChange: vi.fn(),
         ...propsOverride,
     };
     render(<DatePickerControlled {...props} />);

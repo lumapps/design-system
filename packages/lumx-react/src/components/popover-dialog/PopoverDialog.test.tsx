@@ -6,7 +6,7 @@ import { Heading, HeadingLevelProvider } from '@lumx/react';
 import { WithButtonTrigger, WithIconButtonTrigger } from './PopoverDialog.stories';
 import { PopoverDialog } from './PopoverDialog';
 
-jest.mock('@lumx/react/utils/browser/isFocusVisible');
+vi.mock('@lumx/react/utils/browser/isFocusVisible');
 
 describe(`<${PopoverDialog.displayName}>`, () => {
     it('should open and init focus', async () => {
