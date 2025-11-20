@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { AspectRatio, ImageBlock, Slides, SlideshowControls, SlideshowItem } from '@lumx/react';
 import { useFocusWithin } from '@lumx/react/hooks/useFocusWithin';
 import { LANDSCAPE_IMAGES } from '@lumx/react/stories/controls/image';

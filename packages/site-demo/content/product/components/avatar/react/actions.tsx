@@ -1,6 +1,5 @@
 import { mdiDelete, mdiEye, mdiPencil } from '@lumx/icons';
 import { Alignment, Avatar, Emphasis, FlexBox, IconButton, Orientation, Size } from '@lumx/react';
-import React from 'react';
 
 export const App = ({ theme }: any) => (
     <Avatar

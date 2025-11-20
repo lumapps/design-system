@@ -1,5 +1,4 @@
 import { Message, Kind } from '@lumx/react';
-import React from 'react';
 
 export const App = () => (
     <Message kind={Kind.success} hasBackground>

@@ -1,7 +1,6 @@
 import { mdiMenuDown, mdiPencil, mdiPlus } from '@lumx/icons';
 
 import { Button, ButtonGroup, Emphasis, FlexBox, IconButton, Orientation, Size } from '@lumx/react';
-import React from 'react';
 
 export const App = ({ theme }: any) => (
     <>

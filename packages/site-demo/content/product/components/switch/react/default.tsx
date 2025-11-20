@@ -1,5 +1,5 @@
 import { Switch } from '@lumx/react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export const App = ({ theme }: any) => {
     const [state, setState] = useState(false);

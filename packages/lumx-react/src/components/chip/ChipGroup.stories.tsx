@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Chip, ChipGroup, Size } from '@lumx/react';
 
 export default {

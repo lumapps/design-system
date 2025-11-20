@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Typography } from '@lumx/react';
 
 import { InputLabel } from './InputLabel';

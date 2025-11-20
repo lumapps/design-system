@@ -1,5 +1,4 @@
 import { Alignment, AspectRatio, Chip, ChipGroup, ImageBlock, Size } from '@lumx/react';
-import React from 'react';
 
 export const App = ({ theme }: any) => (
     <ImageBlock

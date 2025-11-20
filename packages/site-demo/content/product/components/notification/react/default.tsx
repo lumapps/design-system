@@ -1,7 +1,7 @@
 import { mdiPlay } from '@lumx/icons';
 import { Button, Notification, Kind } from '@lumx/react';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export const App = () => {
     const properties = {

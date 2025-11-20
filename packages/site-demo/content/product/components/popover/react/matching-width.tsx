@@ -1,6 +1,7 @@
+import React, { useRef } from 'react';
+
 import { mdiMagnify } from '@lumx/icons';
 import { Placement, Popover, TextField } from '@lumx/react';
-import React, { useRef } from 'react';
 
 export const App = ({ theme }: any) => {
     const [searchValue, setSearchValue] = React.useState('');

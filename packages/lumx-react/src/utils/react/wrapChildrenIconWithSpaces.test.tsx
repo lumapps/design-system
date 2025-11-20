@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 
 import { Icon } from '@lumx/react';
 import { mdiEarth, mdiFoodApple, mdiPencil } from '@lumx/icons';

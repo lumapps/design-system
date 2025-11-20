@@ -1,7 +1,7 @@
-import { DOCUMENT } from '@lumx/react/constants';
-import type { Comp } from '@lumx/react/utils/type';
 import React from 'react';
 
+import { DOCUMENT } from '@lumx/react/constants';
+import type { Comp } from '@lumx/react/utils/type';
 /**
  * HOC component wrapping a component to skip render if predicate return falsy
  */

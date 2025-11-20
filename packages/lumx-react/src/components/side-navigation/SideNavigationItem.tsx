@@ -1,4 +1,4 @@
-import React, { Children, ReactNode } from 'react';
+import { Children, ReactNode } from 'react';
 
 import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';

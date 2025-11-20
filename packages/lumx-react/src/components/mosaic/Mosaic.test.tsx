@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Mosaic, MosaicProps } from '@lumx/react/components/mosaic/Mosaic';
 import { render, screen, within } from '@testing-library/react';
 import { getByClassName, queryAllByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';

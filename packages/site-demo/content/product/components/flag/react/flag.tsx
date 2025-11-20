@@ -1,6 +1,5 @@
 import { mdiHeart } from '@lumx/icons';
 import { Flag, ColorPalette } from '@lumx/react';
-import React from 'react';
 
 export const App = ({ theme }: any) => (
     <>

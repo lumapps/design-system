@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {
     ProgressTracker,
     ProgressTrackerProvider,

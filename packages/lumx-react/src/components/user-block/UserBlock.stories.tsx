@@ -1,6 +1,4 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
-
 import { mdiMenuDown, mdiStar } from '@lumx/icons';
 import { Badge, ColorPalette, Icon, IconButton, Link, Orientation, Size, Text } from '@lumx/react';
 import { CustomLink } from '@lumx/react/stories/utils/CustomLink';

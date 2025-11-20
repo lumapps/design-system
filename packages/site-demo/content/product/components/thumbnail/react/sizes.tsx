@@ -1,5 +1,4 @@
 import { Size, Thumbnail } from '@lumx/react';
-import React from 'react';
 
 export const App = () => (
     <>

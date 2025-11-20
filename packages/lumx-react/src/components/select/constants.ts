@@ -1,6 +1,6 @@
 import { IconButtonProps } from '@lumx/react';
 import { GenericProps, HasTheme, ValueOf } from '@lumx/react/utils/type';
-import React, { ReactNode, SyntheticEvent } from 'react';
+import { ReactNode, SyntheticEvent } from 'react';
 
 /**
  * Select variants.

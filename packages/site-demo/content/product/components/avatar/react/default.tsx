@@ -1,5 +1,4 @@
 import { Avatar, Size } from '@lumx/react';
-import React from 'react';
 
 export const App = ({ theme }: any) => (
     <>

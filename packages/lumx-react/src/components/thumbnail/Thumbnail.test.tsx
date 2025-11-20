@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { DisabledStateProvider } from '@lumx/react/utils';
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { queryByClassName } from '@lumx/react/testing/utils/queries';

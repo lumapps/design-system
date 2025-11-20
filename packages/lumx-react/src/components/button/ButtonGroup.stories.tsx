@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Button, ButtonGroup, Emphasis, IconButton, Size } from '@lumx/react';
 import { mdiAbjadArabic, mdiFoodApple, mdiMenuDown } from '@lumx/icons';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';

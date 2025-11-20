@@ -1,5 +1,3 @@
-import React from 'react';
-
 import classNames from 'classnames';
 
 import { ColorPalette, Icon, Size, Theme, Text } from '@lumx/react';

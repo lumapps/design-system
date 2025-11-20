@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Emphasis, Icon, Size, Theme, ThemeProvider, Tooltip, TooltipProps } from '@lumx/react';
 import { BaseButtonProps, ButtonRoot } from '@lumx/react/components/button/ButtonRoot';
 import { getRootClassName } from '@lumx/core/js/utils/className';

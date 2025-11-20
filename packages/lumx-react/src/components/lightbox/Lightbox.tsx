@@ -1,4 +1,4 @@
-import React, { RefObject, useRef, useEffect, AriaAttributes } from 'react';
+import { RefObject, useRef, useEffect, AriaAttributes } from 'react';
 
 import classNames from 'classnames';
 

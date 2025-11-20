@@ -1,5 +1,4 @@
 import { Mosaic, ThumbnailProps } from '@lumx/react';
-import React from 'react';
 
 const IMAGES: ThumbnailProps[] = [
     { image: '/demo-assets/portrait1.jpg', alt: 'Portrait 1' },

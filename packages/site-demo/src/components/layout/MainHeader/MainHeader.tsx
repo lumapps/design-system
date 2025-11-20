@@ -1,4 +1,4 @@
-import React, { Ref } from 'react';
+import { Ref } from 'react';
 import { Match } from '@reach/router';
 
 import { mdiMenu } from '@lumx/icons';

@@ -1,5 +1,6 @@
-import { Message, Kind, Button } from '@lumx/react';
 import React from 'react';
+
+import { Message, Kind, Button } from '@lumx/react';
 
 export const App = () => {
     const [isMessageDispayed, setMessageDisplay] = React.useState(true);

@@ -1,6 +1,6 @@
 import { mdiCalendar } from '@lumx/icons';
 import { DatePickerField } from '@lumx/react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export const App = (_: any, context: any) => {
     const today = context?.parameters?.today || new Date();

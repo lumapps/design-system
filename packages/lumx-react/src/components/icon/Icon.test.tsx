@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { mdiAlertCircle } from '@lumx/icons';
 import { ColorPalette, ColorVariant, Size, Theme } from '@lumx/react';
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';

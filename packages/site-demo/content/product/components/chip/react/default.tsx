@@ -1,6 +1,5 @@
 import { mdiEmail } from '@lumx/icons';
 import { Chip, Icon, Size } from '@lumx/react';
-import React from 'react';
 
 export const App = ({ theme }: any) => (
     <>

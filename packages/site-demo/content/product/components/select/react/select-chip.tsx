@@ -1,5 +1,6 @@
-import { List, ListItem, Select, SelectVariant, Size } from '@lumx/react';
 import React, { useState } from 'react';
+
+import { List, ListItem, Select, SelectVariant, Size } from '@lumx/react';
 
 export const App = ({ theme }: any) => {
     const CHOICES = ['First item', 'Second item', 'Third item'];

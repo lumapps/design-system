@@ -1,6 +1,4 @@
 import { Mock } from 'vitest';
-import React from 'react';
-
 import camelCase from 'lodash/camelCase';
 
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';

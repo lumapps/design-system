@@ -1,5 +1,5 @@
 import { Chip, FlexBox, Orientation, Placement, Popover, Size } from '@lumx/react';
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 
 export const App = ({ theme }: any) => {
     const topStartAnchorRef = useRef(null);

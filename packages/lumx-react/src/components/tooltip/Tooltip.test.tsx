@@ -1,6 +1,6 @@
-import { MockInstance } from 'vitest';
 import React from 'react';
 
+import { MockInstance } from 'vitest';
 import { Button } from '@lumx/react';
 import { screen, render } from '@testing-library/react';
 import { queryAllByTagName, queryByClassName } from '@lumx/react/testing/utils/queries';

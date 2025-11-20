@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { mdiComment, mdiHeart } from '@lumx/icons';
 import {
     Button,

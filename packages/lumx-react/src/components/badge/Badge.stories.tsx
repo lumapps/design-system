@@ -1,6 +1,5 @@
 import { mdiHeart } from '@lumx/icons';
 import { AspectRatio, Badge, ColorPalette, Icon, Size, Thumbnail, ThumbnailVariant } from '@lumx/react';
-import React from 'react';
 import { colorArgType } from '@lumx/react/stories/controls/color';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 import { withUndefined } from '@lumx/react/stories/controls/withUndefined';

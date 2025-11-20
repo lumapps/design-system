@@ -8,7 +8,7 @@ import { toFlattenProps } from '@lumx/react/stories/utils/toFlattenProps';
 import { withCategory } from '@lumx/react/stories/utils/withCategory';
 import get from 'lodash/get';
 import times from 'lodash/times';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export default {
     title: 'LumX components/tabs',

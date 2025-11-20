@@ -1,6 +1,5 @@
 import { mdiMessageTextOutline } from '@lumx/icons';
 import { Icon, Size } from '@lumx/react';
-import React from 'react';
 
 export const App = ({ theme }: any) => (
     <>

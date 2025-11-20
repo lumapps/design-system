@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { DesignToken } from './DesignToken';
 import { DesignTokenGroup } from './DesignTokenGroup';
 

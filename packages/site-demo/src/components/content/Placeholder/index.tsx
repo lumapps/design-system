@@ -1,5 +1,3 @@
-import React from 'react';
-
 type Props = React.FC<{
     name: string;
     height?: number;

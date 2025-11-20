@@ -10,7 +10,6 @@ import {
     TypographyTitleCustom,
     GenericBlock,
 } from '@lumx/react';
-import React from 'react';
 import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
 import { colorArgType, colorVariantArgType } from '@lumx/react/stories/controls/color';
 import { iconArgType } from '@lumx/react/stories/controls/icons';

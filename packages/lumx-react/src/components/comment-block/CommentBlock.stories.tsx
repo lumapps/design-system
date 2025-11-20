@@ -1,5 +1,4 @@
 /* eslint-disable react/jsx-key,react/display-name */
-import React from 'react';
 import { mdiDotsHorizontal, mdiHeart, mdiReply } from '@lumx/icons';
 import { Button, CommentBlock } from '@lumx/react';
 import { IconButton } from '@lumx/react/components/button/IconButton';

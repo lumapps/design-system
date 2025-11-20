@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { addMonthResetDay } from '@lumx/react/utils/date/addMonthResetDay';
 import { isDateValid } from '@lumx/react/utils/date/isDateValid';

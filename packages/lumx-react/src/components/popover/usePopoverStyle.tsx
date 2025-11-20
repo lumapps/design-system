@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import memoize from 'lodash/memoize';
 import { detectOverflow } from '@popperjs/core';
 

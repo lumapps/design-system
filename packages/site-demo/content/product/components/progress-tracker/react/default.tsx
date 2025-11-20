@@ -1,5 +1,5 @@
 import { ProgressTracker, ProgressTrackerProvider, ProgressTrackerStep } from '@lumx/react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export const App = () => {
     const [activeStep, setActiveStep] = useState(2);

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 
 import { mdiAccount, mdiOpenInNew } from '@lumx/icons';
 import { Icon, ListDivider, ListProps, ListSubheader, Size } from '@lumx/react';

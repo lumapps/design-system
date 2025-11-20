@@ -3,7 +3,7 @@ import { Link as RouterLink } from 'gatsby';
 import includes from 'lodash/includes';
 import partial from 'lodash/partial';
 import without from 'lodash/without';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { mdiClose } from '@lumx/icons';
 import { MenuEntry } from '@lumx/demo/components/layout/MainNav/types';

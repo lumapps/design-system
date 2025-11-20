@@ -1,6 +1,5 @@
 import { mdiPrinter } from '@lumx/icons';
 import { Icon, Placement, Tooltip } from '@lumx/react';
-import React from 'react';
 
 export const App = () => (
     <>

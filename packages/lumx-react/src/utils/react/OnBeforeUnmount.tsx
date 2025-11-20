@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react';
+import { useLayoutEffect } from 'react';
 
 /**
  * Helper component using useLayoutEffect to trigger a callback on before unmount.

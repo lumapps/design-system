@@ -10,7 +10,7 @@ import {
 } from '@lumx/react';
 import cloneDeep from 'lodash/cloneDeep';
 import set from 'lodash/set';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export default { title: 'LumX components/progress-tracker/Progress Tracker' };
 
