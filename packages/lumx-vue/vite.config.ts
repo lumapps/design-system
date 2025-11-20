@@ -8,7 +8,13 @@ import copy from 'rollup-plugin-copy';
 import pkg from './package.json';
 
 export default defineConfig({
-    plugins: [vue(), vueJsx(), tsconfigPaths()],
+    plugins: [
+        vue(),
+        vueJsx({
+            compositionAPI: 'vue-demi',
+        }),
+        tsconfigPaths(),
+    ],
     build: {
         lib: {
             entry: path.resolve(__dirname, 'src/index.ts'),
