@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Migrate tests to `vitest`
     -   Uniformize link and button handling in `Link`, `Button`, `SideNavigationItem`, `Thumbnail` and `NavigationItem`.
     -   Render disabled links as link instead of disabled buttons.
+    -   _[BREAKING]_ Drop support for React 16
 
 ## [3.19.0][] - 2025-11-07
 
