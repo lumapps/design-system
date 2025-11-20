@@ -138,7 +138,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:^7.28.5":
+"@babel/core@npm:^7.20.5, @babel/core@npm:^7.28.5":
   version: 7.28.5
   resolution: "@babel/core@npm:7.28.5"
   dependencies:
@@ -312,7 +312,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/helper-module-imports@npm:^7.0.0-beta.49, @babel/helper-module-imports@npm:^7.18.6, @babel/helper-module-imports@npm:^7.27.1":
+"@babel/helper-module-imports@npm:^7.0.0, @babel/helper-module-imports@npm:^7.0.0-beta.49, @babel/helper-module-imports@npm:^7.18.6, @babel/helper-module-imports@npm:^7.27.1":
   version: 7.27.1
   resolution: "@babel/helper-module-imports@npm:7.27.1"
   dependencies:
@@ -748,7 +748,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-syntax-import-meta@npm:^7.8.3":
+"@babel/plugin-syntax-import-meta@npm:^7.10.4, @babel/plugin-syntax-import-meta@npm:^7.8.3":
   version: 7.10.4
   resolution: "@babel/plugin-syntax-import-meta@npm:7.10.4"
   dependencies:
@@ -792,7 +792,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-syntax-jsx@npm:^7.27.1, @babel/plugin-syntax-jsx@npm:^7.7.2":
+"@babel/plugin-syntax-jsx@npm:^7.2.0, @babel/plugin-syntax-jsx@npm:^7.27.1, @babel/plugin-syntax-jsx@npm:^7.7.2":
   version: 7.27.1
   resolution: "@babel/plugin-syntax-jsx@npm:7.27.1"
   dependencies:
@@ -1533,6 +1533,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/plugin-transform-typescript@npm:^7.20.2, @babel/plugin-transform-typescript@npm:^7.28.5":
+  version: 7.28.5
+  resolution: "@babel/plugin-transform-typescript@npm:7.28.5"
+  dependencies:
+    "@babel/helper-annotate-as-pure": ^7.27.3
+    "@babel/helper-create-class-features-plugin": ^7.28.5
+    "@babel/helper-plugin-utils": ^7.27.1
+    "@babel/helper-skip-transparent-expression-wrappers": ^7.27.1
+    "@babel/plugin-syntax-typescript": ^7.27.1
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 202785e9cc6fb04efba091b3d5560cc8089cdc54df12fafa3d32ed7089e8d7a95b92b2fb1b53ec3e4db3bbafe56e8b32a3530cac004b3e493e902def8666001d
+  languageName: node
+  linkType: hard
+
 "@babel/plugin-transform-typescript@npm:^7.27.1":
   version: 7.28.0
   resolution: "@babel/plugin-transform-typescript@npm:7.28.0"
@@ -1545,21 +1560,6 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.0.0-0
   checksum: 14c1024bcd57fcd469d90cf0c15c3cd4e771e2eb2cd9afee3aa79b59c8ed103654f7c5c71cdb3bfe31c1d0cb08bfad8c80f5aa1d24b4b454bd21301d5925533d
-  languageName: node
-  linkType: hard
-
-"@babel/plugin-transform-typescript@npm:^7.28.5":
-  version: 7.28.5
-  resolution: "@babel/plugin-transform-typescript@npm:7.28.5"
-  dependencies:
-    "@babel/helper-annotate-as-pure": ^7.27.3
-    "@babel/helper-create-class-features-plugin": ^7.28.5
-    "@babel/helper-plugin-utils": ^7.27.1
-    "@babel/helper-skip-transparent-expression-wrappers": ^7.27.1
-    "@babel/plugin-syntax-typescript": ^7.27.1
-  peerDependencies:
-    "@babel/core": ^7.0.0-0
-  checksum: 202785e9cc6fb04efba091b3d5560cc8089cdc54df12fafa3d32ed7089e8d7a95b92b2fb1b53ec3e4db3bbafe56e8b32a3530cac004b3e493e902def8666001d
   languageName: node
   linkType: hard
 
@@ -3887,6 +3887,10 @@ __metadata:
     "@types/lodash": ^4.14.149
     "@vitejs/plugin-vue": ^6.0.2
     "@vitejs/plugin-vue-jsx": ^5.1.2
+    "@vitejs/plugin-vue2-jsx": ^1.1.1
+    "@vue/babel-helper-vue-jsx-merge-props": ^1.4.0
+    "@vue/babel-plugin-jsx": ^2.0.1
+    "@vue/babel-preset-jsx": ^1.4.0
     "@vue/composition-api": 1.7.2
     autoprefixer: ^9.7.4
     babel-jest: 29.1.2
@@ -6991,6 +6995,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vitejs/plugin-vue2-jsx@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "@vitejs/plugin-vue2-jsx@npm:1.1.1"
+  dependencies:
+    "@babel/core": ^7.20.5
+    "@babel/plugin-syntax-import-meta": ^7.10.4
+    "@babel/plugin-transform-typescript": ^7.20.2
+    "@rollup/pluginutils": ^5.0.2
+    "@vue/babel-preset-jsx": ^1.4.0
+  peerDependencies:
+    vite: ^2.9.13 || ^3.0.0 || ^4.0.0 || ^5.0.0
+    vue: ^2.7.0
+  checksum: 09fe5351eebde59350eb24236ce1ec822193db283f4c1031c3b9d6ea72747083f9bc5d021db74b840ed20822e6b06c4c0c7bad63e5da16a2690a17ec04914a1c
+  languageName: node
+  linkType: hard
+
 "@vitejs/plugin-vue@npm:^6.0.2":
   version: 6.0.2
   resolution: "@vitejs/plugin-vue@npm:6.0.2"
@@ -7198,6 +7218,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vue/babel-helper-vue-jsx-merge-props@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "@vue/babel-helper-vue-jsx-merge-props@npm:1.4.0"
+  checksum: 2383ff7719b324da2330f7444472e6a2f0c8710d1ad0a1b5cccdda1c5a4160129d0e9db97e6404cc4a4ecb64a7e8510fde0bec381b3eb03103f814534f02b18d
+  languageName: node
+  linkType: hard
+
 "@vue/babel-helper-vue-transform-on@npm:2.0.1":
   version: 2.0.1
   resolution: "@vue/babel-helper-vue-transform-on@npm:2.0.1"
@@ -7239,6 +7266,117 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.0.0-0
   checksum: 1d5244d70d8bf0bbc906f7d9afb91ba96e84f34a87fb597e14d24c46cb2f726e60e94609bcc7729d5407d5e628537306f43cd350515365272da13fe727d3e658
+  languageName: node
+  linkType: hard
+
+"@vue/babel-plugin-transform-vue-jsx@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "@vue/babel-plugin-transform-vue-jsx@npm:1.4.0"
+  dependencies:
+    "@babel/helper-module-imports": ^7.0.0
+    "@babel/plugin-syntax-jsx": ^7.2.0
+    "@vue/babel-helper-vue-jsx-merge-props": ^1.4.0
+    html-tags: ^2.0.0
+    lodash.kebabcase: ^4.1.1
+    svg-tags: ^1.0.0
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: c737ad3d277efeacc091686a0159d3c41d330feb4a74203daa488d4a56a51178d14839fb28e4ce6f0ba5e69b628dc4f8dd556e95ad7cb18b6d91d1be8e5c31d0
+  languageName: node
+  linkType: hard
+
+"@vue/babel-preset-jsx@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "@vue/babel-preset-jsx@npm:1.4.0"
+  dependencies:
+    "@vue/babel-helper-vue-jsx-merge-props": ^1.4.0
+    "@vue/babel-plugin-transform-vue-jsx": ^1.4.0
+    "@vue/babel-sugar-composition-api-inject-h": ^1.4.0
+    "@vue/babel-sugar-composition-api-render-instance": ^1.4.0
+    "@vue/babel-sugar-functional-vue": ^1.4.0
+    "@vue/babel-sugar-inject-h": ^1.4.0
+    "@vue/babel-sugar-v-model": ^1.4.0
+    "@vue/babel-sugar-v-on": ^1.4.0
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+    vue: "*"
+  peerDependenciesMeta:
+    vue:
+      optional: true
+  checksum: 19fc3d8606f115c9e74013c3e17df42e51538056aad732b66b33d63febfba0a5ccc12cca9dc352c56ebf0605f3dd58abdd05c2055363fdd2424ad10818acfbb1
+  languageName: node
+  linkType: hard
+
+"@vue/babel-sugar-composition-api-inject-h@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "@vue/babel-sugar-composition-api-inject-h@npm:1.4.0"
+  dependencies:
+    "@babel/plugin-syntax-jsx": ^7.2.0
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 52a106dd7bd6614cb9bda90a39d6ac175ce849d797096bde5bacc4053bdc25b2ed6483d5b18b4a46fa7d7b51a4ac5987dda8ec88a8e712c4ee51709e9cfb8e1e
+  languageName: node
+  linkType: hard
+
+"@vue/babel-sugar-composition-api-render-instance@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "@vue/babel-sugar-composition-api-render-instance@npm:1.4.0"
+  dependencies:
+    "@babel/plugin-syntax-jsx": ^7.2.0
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: b7281b11353df729f66da37df5a32936060cf3dc219234add164c524ab6164e4905610b4080ef9ee3dfc94b046d4eba456eb7b5ea21caf011b7ad00835c962a2
+  languageName: node
+  linkType: hard
+
+"@vue/babel-sugar-functional-vue@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "@vue/babel-sugar-functional-vue@npm:1.4.0"
+  dependencies:
+    "@babel/plugin-syntax-jsx": ^7.2.0
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 93a0338bc390fd6a869dab009c1d6739fbfc305f49c6135cea1499437a7574a4868cf07d83a939e3fba38fc1f0243af53d899dbd696d1882f2e486abb3d49d4b
+  languageName: node
+  linkType: hard
+
+"@vue/babel-sugar-inject-h@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "@vue/babel-sugar-inject-h@npm:1.4.0"
+  dependencies:
+    "@babel/plugin-syntax-jsx": ^7.2.0
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: d8dadf55d7135838316372867d390a4d2208f44604bdbe578349a49ca52e27b10c685cc48ddd662678413670cb6a8a8307426838758a62d1d3d88cb90cfd2b63
+  languageName: node
+  linkType: hard
+
+"@vue/babel-sugar-v-model@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "@vue/babel-sugar-v-model@npm:1.4.0"
+  dependencies:
+    "@babel/plugin-syntax-jsx": ^7.2.0
+    "@vue/babel-helper-vue-jsx-merge-props": ^1.4.0
+    "@vue/babel-plugin-transform-vue-jsx": ^1.4.0
+    camelcase: ^5.0.0
+    html-tags: ^2.0.0
+    svg-tags: ^1.0.0
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: fa2ad5a05f25a4a42de0e5f477c1897dff916185aea993a5a3af3a3aa38f46bb44d7d4ee083dcf6baa63e8a7930e3f5f67dcd01ec37a498257a38d2c35723664
+  languageName: node
+  linkType: hard
+
+"@vue/babel-sugar-v-on@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "@vue/babel-sugar-v-on@npm:1.4.0"
+  dependencies:
+    "@babel/plugin-syntax-jsx": ^7.2.0
+    "@vue/babel-plugin-transform-vue-jsx": ^1.4.0
+    camelcase: ^5.0.0
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 77c9e7a6bc93e66d0949f51b06d51bff17a08b5eb3072674413f90dcf6736ea13f38bc931566efe63444fffa137098d0397e20e66f8648949f6b860c9bbd8cd1
   languageName: node
   linkType: hard
 
@@ -17093,6 +17231,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"html-tags@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "html-tags@npm:2.0.0"
+  checksum: a02b47dd71de5572f16c9a1d88e2876fcc4d60bb36b7effce48cd3cd0bdd8fdcbf2602d968d2268d134767620d876edc08d8a6fc0abd9dc59a05e89d56251fbb
+  languageName: node
+  linkType: hard
+
 "html-tags@npm:^3.2.0":
   version: 3.2.0
   resolution: "html-tags@npm:3.2.0"
@@ -20182,6 +20327,13 @@ __metadata:
   version: 4.0.1
   resolution: "lodash.isstring@npm:4.0.1"
   checksum: eaac87ae9636848af08021083d796e2eea3d02e80082ab8a9955309569cb3a463ce97fd281d7dc119e402b2e7d8c54a23914b15d2fc7fff56461511dc8937ba0
+  languageName: node
+  linkType: hard
+
+"lodash.kebabcase@npm:^4.1.1":
+  version: 4.1.1
+  resolution: "lodash.kebabcase@npm:4.1.1"
+  checksum: 5a6c59161914e1bae23438a298c7433e83d935e0f59853fa862e691164696bc07f6dfa4c313d499fbf41ba8d53314e9850416502376705a357d24ee6ca33af78
   languageName: node
   linkType: hard
 

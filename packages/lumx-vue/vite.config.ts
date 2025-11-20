@@ -1,14 +1,14 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
+import vueJsx from '@vitejs/plugin-vue2-jsx';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import path from 'path';
+import copy from 'rollup-plugin-copy';
 import pkg from './package.json';
 
-import copy from 'rollup-plugin-copy';
-
 export default defineConfig({
-    plugins: [vue(), tsconfigPaths()],
+    plugins: [vue(), vueJsx(), tsconfigPaths()],
     build: {
         lib: {
             entry: path.resolve(__dirname, 'src/index.ts'),
