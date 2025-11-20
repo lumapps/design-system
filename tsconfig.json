@@ -16,8 +16,6 @@
         "types": ["vitest/globals"],
         "paths": {
             "@lumx/core/*": ["lumx-core/src/*"],
-            "@lumx/angularjs": ["lumx-angularjs/src"],
-            "@lumx/angularjs/*": ["lumx-angularjs/src/*"],
             "@lumx/react": ["lumx-react/src"],
             "@lumx/react/*": ["lumx-react/src/*"],
             "@lumx/icons": ["lumx-icons"],

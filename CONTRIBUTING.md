@@ -4,7 +4,7 @@ We'd love for you to contribute to our source code and to make it even better th
 
 ## Getting the source code
 
-To be able to contribute, you will have to use the global LumX package from our [GitHub repository](https://github.com/lumapps/design-system). You won't be able to contribute from the distributed packages `@lumx/<angularjs|react>`, so be sure to clone the repository before starting contributing:
+To be able to contribute, you will have to use the global LumX package from our [GitHub repository](https://github.com/lumapps/design-system). You won't be able to contribute from the distributed packages, so be sure to clone the repository before starting contributing:
 
 ```bash
 git clone git@github.com:lumapps/design-system.git
@@ -24,10 +24,6 @@ Here are the guidelines we'd like you to follow.
 -   [Submission guidelines](#submission-guidelines)
 -   [Coding rules](#coding-rules)
 -   [Git commit guidelines](#git-commit-guidelines)
-
-## <a name="code-of-conduct"></a> Code of Conduct
-
-As heavy users of [AngularJS](https://github.com/angular/angular.js) and [React](https://github.com/facebook/react/), we encourage you to read and follow the [AngularJS Code of Conduct](https://github.com/angular/code-of-conduct/blob/master/CODE_OF_CONDUCT.md) and the [React Code of Conduct](https://github.com/facebook/react/blob/master/CODE_OF_CONDUCT.md).
 
 ## <a name="got-a-question-or-a-problem-"></a> Got a question or a problem?
 

@@ -13,9 +13,6 @@ module.exports = {
         'plugin:react/recommended',
         'plugin:prettier/recommended',
     ],
-    globals: {
-        angular: 'readonly',
-    },
     parser: '@typescript-eslint/parser',
     parserOptions: {
         sourceType: 'module',
