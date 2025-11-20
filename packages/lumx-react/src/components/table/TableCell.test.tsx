@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { getByClassName } from '@lumx/react/testing/utils/queries';
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import { render, screen, within } from '@testing-library/react';

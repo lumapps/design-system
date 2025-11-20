@@ -1,6 +1,4 @@
 import { Layout } from '@lumx/demo/components/layout/Layout';
-import React from 'react';
-
 import './style/index.scss';
 
 /**

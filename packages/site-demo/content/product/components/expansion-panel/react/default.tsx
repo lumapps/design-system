@@ -1,6 +1,6 @@
 import { ExpansionPanel, Text, Theme } from '@lumx/react';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export const App = ({ theme = Theme.light }: any) => {
     const [isOpen, setOpen] = useState(false);

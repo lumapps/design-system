@@ -1,6 +1,6 @@
 import { mdiCloseCircle, mdiFilterVariant, mdiMenuDown } from '@lumx/icons';
 import { Chip, Icon, Size } from '@lumx/react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export const App = ({ theme }: any) => {
     const [isSelected, setSelected] = useState(false);

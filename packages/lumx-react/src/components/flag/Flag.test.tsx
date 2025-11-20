@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { ColorPalette, Theme } from '@lumx/react';
 import { mdiAbTesting } from '@lumx/icons';
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';

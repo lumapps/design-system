@@ -6,8 +6,6 @@ import { Link } from '@lumx/demo/components/base/Link';
 import { MDXProvider } from '@mdx-js/react';
 import 'focus-visible';
 import 'intersection-observer';
-import React from 'react';
-
 /**
  * Customize MDX components.
  */

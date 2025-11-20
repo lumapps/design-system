@@ -12,7 +12,6 @@ import {
     Thumbnail,
     ThumbnailVariant,
 } from '@lumx/react';
-import React from 'react';
 
 export const App = () => (
     <List>

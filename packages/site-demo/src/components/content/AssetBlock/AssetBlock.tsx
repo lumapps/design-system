@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from 'react';
+import { ReactElement, ReactNode } from 'react';
 
 import { mdiDownload, mdiFile } from '@lumx/icons';
 import { Button, Emphasis, Icon, Size } from '@lumx/react';

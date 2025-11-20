@@ -1,7 +1,5 @@
 import { Table, TableBody, TableCell, TableRow, Theme } from '@lumx/react';
 
-import React from 'react';
-
 export const App = ({ theme = Theme.light }: any) => {
     return (
         <Table hasDividers theme={theme} style={{ minWidth: 620 }}>

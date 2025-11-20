@@ -1,5 +1,3 @@
-import React from 'react';
-
 import omit from 'lodash/omit';
 import { mdiClose, mdiViewList } from '@lumx/icons';
 import { Chip, ChipProps, ColorPalette, Icon, Size, Theme } from '@lumx/react';

@@ -1,4 +1,3 @@
-import React from 'react';
 import isChromatic from 'chromatic/isChromatic';
 
 /** Story decorator used to force a minimum screen size when running in chromatic */

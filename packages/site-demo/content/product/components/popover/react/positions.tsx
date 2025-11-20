@@ -1,5 +1,5 @@
 import { Alignment, Chip, FlexBox, Orientation, Placement, Popover, Size } from '@lumx/react';
-import React, { RefObject, useRef } from 'react';
+import { RefObject, useRef } from 'react';
 
 export const App = ({ theme }: any) => {
     const popovers: Array<[Placement, RefObject<any>]> = [

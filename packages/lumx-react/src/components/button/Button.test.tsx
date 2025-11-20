@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { mdiCheck, mdiPlus } from '@lumx/icons';
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { render, screen, within } from '@testing-library/react';

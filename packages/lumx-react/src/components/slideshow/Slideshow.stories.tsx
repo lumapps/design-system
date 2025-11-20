@@ -1,4 +1,3 @@
-import React from 'react';
 import range from 'lodash/range';
 import { AspectRatio, Button, FlexBox, ImageBlock, Slideshow, SlideshowItem, Orientation } from '@lumx/react';
 import { IMAGES, LANDSCAPE_IMAGES } from '@lumx/react/stories/controls/image';

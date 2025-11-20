@@ -1,5 +1,5 @@
 import { RadioButton, RadioGroup } from '@lumx/react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export default { title: 'LumX components/radio-button/Radio Group' };
 

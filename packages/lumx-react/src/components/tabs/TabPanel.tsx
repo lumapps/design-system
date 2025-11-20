@@ -1,5 +1,3 @@
-import React from 'react';
-
 import classNames from 'classnames';
 
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';

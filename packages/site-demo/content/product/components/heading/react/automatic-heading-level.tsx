@@ -1,4 +1,3 @@
-import React from 'react';
 import { Heading, HeadingLevelProvider, Text } from '@lumx/react';
 
 const Article = ({ title, children }: any) => (

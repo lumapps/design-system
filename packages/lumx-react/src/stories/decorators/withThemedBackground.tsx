@@ -1,5 +1,3 @@
-import React from 'react';
-
 const LIGHT_BACKGROUND_COLOR = '#EEE';
 const DARK_BACKGROUND_COLOR = '#333';
 

@@ -16,7 +16,7 @@ import {
 
 import classNames from 'classnames';
 import isFunction from 'lodash/isFunction';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import './DemoBlock.scss';
 

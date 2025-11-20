@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 
 import { Theme } from '@lumx/react';

@@ -1,5 +1,4 @@
 import { LinkPreview, Size } from '@lumx/react';
-import React from 'react';
 
 export const App = ({ theme }: any) => (
     <div style={{ width: 350 }}>

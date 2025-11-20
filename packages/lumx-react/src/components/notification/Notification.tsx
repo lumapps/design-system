@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 
 import classNames from 'classnames';
 import isFunction from 'lodash/isFunction';

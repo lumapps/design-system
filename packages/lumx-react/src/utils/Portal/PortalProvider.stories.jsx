@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button } from '@lumx/react';
 import { initDemoShadowDOMPortal } from '@lumx/react/stories/utils/initDemoShadowDOMPortal';
 import { PortalProvider } from './PortalProvider';

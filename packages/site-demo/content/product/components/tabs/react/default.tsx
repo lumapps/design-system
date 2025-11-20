@@ -1,5 +1,4 @@
 import { Tab, TabList, TabPanel, TabProvider } from '@lumx/react';
-import React from 'react';
 
 export const App = ({ theme }: any) => (
     <div style={{ minWidth: 260 }}>

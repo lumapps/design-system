@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { RefObject, useRef } from 'react';
+import { RefObject, useRef } from 'react';
 import { Button, Link, Kind } from '@lumx/react';
 import { DIALOG_TRANSITION_DURATION } from '@lumx/core/js/constants';
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';

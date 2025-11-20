@@ -1,5 +1,3 @@
-import React from 'react';
-
 import type { IconButtonProps, LightboxProps, SlideshowProps, ThumbnailProps } from '@lumx/react';
 import type { HasClassName } from '@lumx/react/utils/type';
 import type { ImageCaptionMetadata } from '@lumx/react/components/image-block/ImageCaption';

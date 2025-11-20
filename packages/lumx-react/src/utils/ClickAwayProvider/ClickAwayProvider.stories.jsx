@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import React, { useCallback, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { Button } from '@lumx/react';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 import { initDemoShadowDOMPortal } from '@lumx/react/stories/utils/initDemoShadowDOMPortal';

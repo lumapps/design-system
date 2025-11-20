@@ -1,5 +1,4 @@
 import { Button, Emphasis, FlexBox, Orientation, Size } from '@lumx/react';
-import React from 'react';
 
 export const App = ({ theme }: any) => (
     <div style={{ display: 'flex', width: '100%', flexDirection: 'column', gap: 16 }}>

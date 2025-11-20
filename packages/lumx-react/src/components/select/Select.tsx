@@ -1,4 +1,4 @@
-import React, { RefObject } from 'react';
+import { RefObject } from 'react';
 
 import classNames from 'classnames';
 import lodashIsEmpty from 'lodash/isEmpty';

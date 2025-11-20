@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useMemo } from 'react';
+import { MouseEventHandler, useMemo } from 'react';
 
 import classNames from 'classnames';
 import take from 'lodash/take';

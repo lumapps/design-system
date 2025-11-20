@@ -1,4 +1,4 @@
-import React, { ReactNode, Ref, SyntheticEvent, useMemo } from 'react';
+import { ReactNode, Ref, SyntheticEvent, useMemo } from 'react';
 
 import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';

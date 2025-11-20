@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactNode } from 'react';
+import { CSSProperties, ReactNode } from 'react';
 
 import { FlexBox, HorizontalAlignment, Text, TextProps, useTheme } from '@lumx/react';
 import { HasPolymorphicAs, HasTheme } from '@lumx/react/utils/type';

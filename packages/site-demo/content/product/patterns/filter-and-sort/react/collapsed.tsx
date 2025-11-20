@@ -13,7 +13,7 @@ import {
     Size,
     TextField,
 } from '@lumx/react';
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 const TYPES = ['Fruit', 'Vegetable', 'Meat', 'Cereal', 'Fish'];
 const COLORS = ['Red', 'Green', 'Blue'];

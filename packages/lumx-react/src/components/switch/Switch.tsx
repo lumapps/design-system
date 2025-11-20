@@ -1,4 +1,4 @@
-import React, { Children, InputHTMLAttributes, SyntheticEvent } from 'react';
+import { Children, InputHTMLAttributes, SyntheticEvent } from 'react';
 
 import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';

@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   `@lumx/react`:
+    -   _[BREAKING]_ Drop support for React 16
+
 ## [3.20.0][] - 2025-11-20
 
 ### Changed

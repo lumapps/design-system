@@ -2,7 +2,7 @@ import { Alignment, Divider, ExpansionPanel, Grid, GridItem, Heading } from '@lu
 import partition from 'lodash/partition';
 import castArray from 'lodash/castArray';
 import orderBy from 'lodash/orderBy';
-import React, { Fragment, ReactNode, useState } from 'react';
+import { Fragment, ReactNode, useState } from 'react';
 
 import './PropTable.scss';
 

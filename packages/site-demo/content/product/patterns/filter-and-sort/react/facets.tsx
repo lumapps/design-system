@@ -14,7 +14,7 @@ import {
     Size,
     TextField,
 } from '@lumx/react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const COLORS = ['Red', 'Green', 'Blue'];
 
