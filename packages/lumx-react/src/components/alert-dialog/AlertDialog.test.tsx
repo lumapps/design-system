@@ -3,9 +3,10 @@ import React from 'react';
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import { queryByClassName } from '@lumx/react/testing/utils/queries';
 import { render } from '@testing-library/react';
+import { vi } from 'vitest';
 import { AlertDialog, AlertDialogProps } from './AlertDialog';
 
-jest.mock('@lumx/react/hooks/useId', () => ({ useId: () => ':r1:' }));
+vi.mock('@lumx/react/hooks/useId', () => ({ useId: () => ':r1:' }));
 
 const CLASSNAME = AlertDialog.className as string;
 
@@ -17,7 +18,7 @@ const setup = (propsOverride: Partial<AlertDialogProps> = {}) => {
         title: 'Alert',
         isOpen: true,
         description: 'Deserunt et sunt qui consequat sint sit.',
-        confirmProps: { onClick: jest.fn(), label: 'OK' },
+        confirmProps: { onClick: vi.fn(), label: 'OK' },
         ...propsOverride,
     };
     render(<AlertDialog {...props} />);

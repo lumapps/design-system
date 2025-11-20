@@ -3,7 +3,7 @@ import React from 'react';
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { render } from '@testing-library/react';
 import { getByClassName, getByTagName, queryByClassName } from '@lumx/react/testing/utils/queries';
-import userEvent from '@testing-library/user-event/';
+import userEvent from '@testing-library/user-event';
 
 import { Switch, SwitchProps } from './Switch';
 
@@ -24,7 +24,7 @@ const setup = (propsOverride: SetupProps = {}, { wrapper }: SetupRenderOptions =
     return { switchWrapper, input, helper, label, props };
 };
 
-jest.mock('@lumx/react/hooks/useId', () => ({ useId: () => ':r1:' }));
+vi.mock('@lumx/react/hooks/useId', () => ({ useId: () => ':r1:' }));
 
 describe(`<${Switch.displayName}>`, () => {
     describe('Props', () => {
@@ -86,7 +86,7 @@ describe(`<${Switch.displayName}>`, () => {
     });
 
     describe('Events', () => {
-        const onChange = jest.fn();
+        const onChange = vi.fn();
 
         it('should trigger `onChange` when switchWrapper is clicked', async () => {
             const value = 'value';
@@ -102,7 +102,7 @@ describe(`<${Switch.displayName}>`, () => {
 
     describe('Disabled state', () => {
         it('should be disabled with isDisabled', async () => {
-            const onChange = jest.fn();
+            const onChange = vi.fn();
             const { switchWrapper, input } = setup({ isDisabled: true, onChange });
 
             expect(switchWrapper).toHaveClass('lumx-switch--is-disabled');
@@ -115,7 +115,7 @@ describe(`<${Switch.displayName}>`, () => {
         });
 
         it('should be disabled with aria-disabled', async () => {
-            const onChange = jest.fn();
+            const onChange = vi.fn();
             const { switchWrapper, input } = setup({ 'aria-disabled': true, onChange });
 
             expect(switchWrapper).toHaveClass('lumx-switch--is-disabled');

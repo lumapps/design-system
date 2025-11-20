@@ -30,7 +30,7 @@ describe(`<${Thumbnail.displayName}>`, () => {
 
     describe('disabled state', () => {
         it('should not be clickable when disabled from context', () => {
-            const onClick = jest.fn();
+            const onClick = vi.fn();
             const { thumbnail, container } = setup(
                 { onClick, 'aria-label': 'thumbnail' },
                 {

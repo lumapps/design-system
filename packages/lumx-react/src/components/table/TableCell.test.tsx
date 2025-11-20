@@ -42,7 +42,7 @@ describe(`<${TableCell.displayName}>`, () => {
 
     it('should render header variant clickable', async () => {
         const content = 'Content';
-        const onHeaderClick = jest.fn();
+        const onHeaderClick = vi.fn();
         const { tableCell } = setup({ children: content, variant: 'head', onHeaderClick });
 
         const headerButton = within(tableCell).getByRole('button', { name: content });

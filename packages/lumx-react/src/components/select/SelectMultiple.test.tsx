@@ -18,7 +18,7 @@ import { SelectVariant } from './constants';
 
 const CLASSNAME = SelectMultiple.className as string;
 
-jest.mock('@lumx/react/hooks/useId', () => ({ useId: () => ':r1:' }));
+vi.mock('@lumx/react/hooks/useId', () => ({ useId: () => ':r1:' }));
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -144,7 +144,7 @@ describe('<SelectMultiple>', () => {
     describe('Events', () => {
         describe('should trigger `onInputClick` when the select button is clicked', () => {
             it('with input variant', async () => {
-                const onClick = jest.fn();
+                const onClick = vi.fn();
                 const { inputWrapper } = setup({ onInputClick: onClick, variant: SelectVariant.input });
 
                 await userEvent.click(inputWrapper as any);
@@ -152,7 +152,7 @@ describe('<SelectMultiple>', () => {
             });
 
             it('with chip variant', async () => {
-                const onClick = jest.fn();
+                const onClick = vi.fn();
                 const { chip } = setup({ onInputClick: onClick, variant: SelectVariant.chip });
 
                 await userEvent.click(chip as any);
@@ -161,7 +161,7 @@ describe('<SelectMultiple>', () => {
         });
 
         it('should call onClear when an item is clicked with the correct value', async () => {
-            const onClear = jest.fn();
+            const onClear = vi.fn();
             const { valueChips } = setup({
                 onClear,
                 value: ['val 1', 'val 2'],
@@ -184,7 +184,7 @@ describe('<SelectMultiple>', () => {
             const value1 = 'Value 1';
             const value2 = 'Value 2';
 
-            const onClear = jest.fn();
+            const onClear = vi.fn();
             const { chip } = setup({
                 onClear,
                 value: [value1, value2],

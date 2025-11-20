@@ -30,7 +30,7 @@ describe('PortalProvider', () => {
     });
 
     it('should call teardown on unmount', () => {
-        const teardownMock = jest.fn();
+        const teardownMock = vi.fn();
         const portalContainer = document.createElement('div');
         portalContainer.id = PORTAL_CONTAINER_ID;
         document.body.appendChild(portalContainer);

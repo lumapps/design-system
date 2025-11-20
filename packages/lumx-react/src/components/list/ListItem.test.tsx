@@ -29,7 +29,7 @@ describe(`<${ListItem.displayName}>`, () => {
         });
 
         it('should render as a button', () => {
-            setup({ children: 'Label', onItemSelected: jest.fn() });
+            setup({ children: 'Label', onItemSelected: vi.fn() });
             expect(screen.getByRole('button', { name: 'Label' })).toBeInTheDocument();
         });
 
@@ -41,7 +41,7 @@ describe(`<${ListItem.displayName}>`, () => {
 
     describe('Disabled state', () => {
         it('should render disabled list item button', async () => {
-            const onItemSelected = jest.fn();
+            const onItemSelected = vi.fn();
             const { link } = setup({ children: 'Label', isDisabled: true, onItemSelected });
             expect(link).toHaveAttribute('aria-disabled', 'true');
             // The `renderLink` util removes the onClick handler but `user-event` will also not fire events on disabled elements.
@@ -50,7 +50,7 @@ describe(`<${ListItem.displayName}>`, () => {
         });
 
         it('should render disabled list item link', async () => {
-            const onItemSelected = jest.fn();
+            const onItemSelected = vi.fn();
             const { link } = setup({
                 children: 'Label',
                 isDisabled: true,
@@ -64,7 +64,7 @@ describe(`<${ListItem.displayName}>`, () => {
         });
 
         it('should render aria-disabled list item button', async () => {
-            const onItemSelected = jest.fn();
+            const onItemSelected = vi.fn();
             const { link } = setup({ children: 'Label', 'aria-disabled': true, onItemSelected });
             expect(link).toHaveAttribute('aria-disabled', 'true');
             if (link) await userEvent.click(link);
@@ -72,7 +72,7 @@ describe(`<${ListItem.displayName}>`, () => {
         });
 
         it('should render aria-disabled list item link', async () => {
-            const onItemSelected = jest.fn();
+            const onItemSelected = vi.fn();
             const { link } = setup({
                 children: 'Label',
                 'aria-disabled': true,

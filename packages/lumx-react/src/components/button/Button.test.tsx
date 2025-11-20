@@ -68,7 +68,7 @@ describe(`<${Button.displayName}>`, () => {
 
     describe('Disabled state', () => {
         it('should render disabled button', async () => {
-            const onClick = jest.fn();
+            const onClick = vi.fn();
             const { button } = setup({ children: 'Label', disabled: true, onClick });
             expect(button).toHaveAttribute('disabled');
             await userEvent.click(button);
@@ -76,7 +76,7 @@ describe(`<${Button.displayName}>`, () => {
         });
 
         it('should render disabled link', async () => {
-            const onClick = jest.fn();
+            const onClick = vi.fn();
             const { button } = setup({ children: 'Label', disabled: true, href: 'https://example.com', onClick });
             // Disabled link do not exist so we fallback to a button
             expect(screen.queryByRole('link')).not.toBeInTheDocument();
@@ -86,7 +86,7 @@ describe(`<${Button.displayName}>`, () => {
         });
 
         it('should render aria-disabled button', async () => {
-            const onClick = jest.fn();
+            const onClick = vi.fn();
             const { button } = setup({ children: 'Label', 'aria-disabled': true, onClick });
             expect(button).toHaveAttribute('aria-disabled');
             await userEvent.click(button);
@@ -94,7 +94,7 @@ describe(`<${Button.displayName}>`, () => {
         });
 
         it('should render aria-disabled link', async () => {
-            const onClick = jest.fn();
+            const onClick = vi.fn();
             const { button } = setup({
                 children: 'Label',
                 'aria-disabled': true,

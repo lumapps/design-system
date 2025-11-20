@@ -53,7 +53,7 @@ describe(`<${Autocomplete.displayName}>`, () => {
     describe('Events', () => {
         it('should trigger the onChange callback when there is a change on the Text Field', async () => {
             const name = 'autocomplete-name';
-            const onChange = jest.fn();
+            const onChange = vi.fn();
             const { inputNative } = setup({
                 name,
                 onChange,
@@ -68,8 +68,8 @@ describe(`<${Autocomplete.displayName}>`, () => {
         });
 
         it('should trigger the onFocus/onBlur callback when the text field is focused and blurred', async () => {
-            const onFocus = jest.fn();
-            const onBlur = jest.fn();
+            const onFocus = vi.fn();
+            const onBlur = vi.fn();
             const { inputNative } = setup({
                 onFocus,
                 onBlur,

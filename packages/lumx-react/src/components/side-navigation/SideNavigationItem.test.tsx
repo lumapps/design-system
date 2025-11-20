@@ -10,7 +10,7 @@ const CLASSNAME = SideNavigationItem.className as string;
 
 const toggleButtonProps = { label: 'Toggle' };
 
-jest.mock('@lumx/react/hooks/useId', () => ({ useId: () => ':r1:' }));
+vi.mock('@lumx/react/hooks/useId', () => ({ useId: () => ':r1:' }));
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -106,7 +106,7 @@ describe(`<${SideNavigationItem.displayName}>`, () => {
 
     describe('children and link', () => {
         it('should render with children and link', () => {
-            const onActionClick = jest.fn();
+            const onActionClick = vi.fn();
             const label = 'Side navigation item';
             const { props, toggle, link } = setup({
                 label,

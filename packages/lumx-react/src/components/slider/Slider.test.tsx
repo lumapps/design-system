@@ -7,7 +7,7 @@ import { Slider, SliderProps } from './Slider';
 
 const CLASSNAME = Slider.className as string;
 
-jest.mock('@lumx/react/hooks/useId', () => ({ useId: () => ':r1:' }));
+vi.mock('@lumx/react/hooks/useId', () => ({ useId: () => ':r1:' }));
 
 const setup = (props: Partial<SliderProps> = {}, { wrapper }: SetupRenderOptions = {}) => {
     render(<Slider {...(props as any)} />, { wrapper });

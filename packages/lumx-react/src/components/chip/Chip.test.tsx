@@ -42,7 +42,7 @@ describe('<Chip />', () => {
         });
 
         it('should render clickable', () => {
-            const onClick = jest.fn();
+            const onClick = vi.fn();
             const { chip } = setup({ children: 'Chip text', onClick });
             expect(chip).toHaveAttribute('role', 'button');
             expect(chip.className).toMatchInlineSnapshot(
@@ -70,11 +70,13 @@ describe('<Chip />', () => {
     });
 
     describe('Events', () => {
-        const onClick = jest.fn();
-        const onAfterClick = jest.fn();
-        const onBeforeClick = jest.fn();
+        const onClick = vi.fn();
+        const onAfterClick = vi.fn();
+        const onBeforeClick = vi.fn();
 
-        beforeEach(jest.clearAllMocks);
+        beforeEach(() => {
+            vi.clearAllMocks();
+        });
 
         it('should trigger onBeforeClick only when clicking on the "before" element', async () => {
             const { after, before, chip } = setup({
@@ -88,12 +90,12 @@ describe('<Chip />', () => {
             await userEvent.click(chip);
             expect(onBeforeClick).not.toHaveBeenCalled();
 
-            jest.clearAllMocks();
+            vi.clearAllMocks();
 
             await userEvent.click(after as any);
             expect(onBeforeClick).not.toHaveBeenCalled();
 
-            jest.clearAllMocks();
+            vi.clearAllMocks();
 
             await userEvent.click(before as any);
             expect(onBeforeClick).toHaveBeenCalled();
@@ -111,12 +113,12 @@ describe('<Chip />', () => {
             await userEvent.click(chip);
             expect(onClick).toHaveBeenCalled();
 
-            jest.clearAllMocks();
+            vi.clearAllMocks();
 
             await userEvent.click(after as any);
             expect(onClick).not.toHaveBeenCalled();
 
-            jest.clearAllMocks();
+            vi.clearAllMocks();
 
             await userEvent.click(before as any);
             expect(onClick).not.toHaveBeenCalled();
@@ -134,12 +136,12 @@ describe('<Chip />', () => {
             await userEvent.click(chip);
             expect(onAfterClick).not.toHaveBeenCalled();
 
-            jest.clearAllMocks();
+            vi.clearAllMocks();
 
             await userEvent.click(after as any);
             expect(onAfterClick).toHaveBeenCalled();
 
-            jest.clearAllMocks();
+            vi.clearAllMocks();
 
             await userEvent.click(before as any);
             expect(onAfterClick).not.toHaveBeenCalled();
@@ -162,7 +164,7 @@ describe('<Chip />', () => {
         });
 
         it('should forward key down event', async () => {
-            const onKeyDown = jest.fn();
+            const onKeyDown = vi.fn();
             const { chip } = setup({ onClick, onKeyDown });
 
             fireEvent.keyDown(chip, { key: 'A', code: 'KeyA' });
@@ -171,7 +173,7 @@ describe('<Chip />', () => {
 
         it('should forward key down event and trigger `onClick` when pressing Enter', async () => {
             const user = userEvent.setup();
-            const onKeyDown = jest.fn();
+            const onKeyDown = vi.fn();
             const { chip } = setup({ onClick, onKeyDown });
 
             await user.tab();
@@ -187,7 +189,7 @@ describe('<Chip />', () => {
 
     describe('Disabled state', () => {
         it('should render disabled chip button', async () => {
-            const onClick = jest.fn();
+            const onClick = vi.fn();
             const { chip } = setup({ children: 'Label', isDisabled: true, onClick });
             expect(chip).toHaveAttribute('aria-disabled', 'true');
             await userEvent.click(chip);
@@ -195,7 +197,7 @@ describe('<Chip />', () => {
         });
 
         it('should render disabled chip link', async () => {
-            const onClick = jest.fn();
+            const onClick = vi.fn();
             const { chip } = setup({ children: 'Label', isDisabled: true, href: 'https://example.com', onClick });
             // Disabled link should not have an href.
             expect(chip).not.toHaveAttribute('href');
@@ -205,7 +207,7 @@ describe('<Chip />', () => {
         });
 
         it('should render aria-disabled chip button', async () => {
-            const onClick = jest.fn();
+            const onClick = vi.fn();
             const { chip } = setup({ children: 'Label', 'aria-disabled': true, onClick });
             expect(chip).toHaveAttribute('aria-disabled', 'true');
             await userEvent.click(chip);
@@ -214,7 +216,7 @@ describe('<Chip />', () => {
         });
 
         it('should render aria-disabled chip link', async () => {
-            const onClick = jest.fn();
+            const onClick = vi.fn();
             const { chip } = setup({
                 children: 'Label',
                 'aria-disabled': true,

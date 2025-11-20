@@ -1,3 +1,4 @@
+import { Mock } from 'vitest';
 import React from 'react';
 
 import { Theme } from '@lumx/core/js/constants';
@@ -13,8 +14,8 @@ import { Select, SelectProps, SelectVariant } from './Select';
 
 const CLASSNAME = Select.className as string;
 
-jest.mock('@lumx/react/utils/browser/isFocusVisible');
-jest.mock('@lumx/react/hooks/useId', () => ({ useId: () => ':r1:' }));
+vi.mock('@lumx/react/utils/browser/isFocusVisible');
+vi.mock('@lumx/react/hooks/useId', () => ({ useId: () => ':r1:' }));
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -35,7 +36,7 @@ const setup = (propsOverride: Partial<SelectProps> = {}, { wrapper }: SetupRende
 };
 
 describe(`<${Select.displayName}>`, () => {
-    (isFocusVisible as jest.Mock).mockReturnValue(false);
+    (isFocusVisible as Mock).mockReturnValue(false);
 
     describe('Props', () => {
         it('should have default classNames', () => {
@@ -144,7 +145,7 @@ describe(`<${Select.displayName}>`, () => {
 
     describe('Events', () => {
         it('should trigger `onDropdownClose` on escape', async () => {
-            const onDropdownClose = jest.fn();
+            const onDropdownClose = vi.fn();
             const { getDropdown } = setup({ isOpen: true, onDropdownClose });
 
             const dropdown = getDropdown();
@@ -156,7 +157,7 @@ describe(`<${Select.displayName}>`, () => {
 
         describe('should trigger `onInputClick` when the select button is clicked', () => {
             it('with input variant', async () => {
-                const onClick = jest.fn();
+                const onClick = vi.fn();
                 const { inputWrapper } = setup({ onInputClick: onClick, variant: SelectVariant.input });
 
                 await userEvent.click(inputWrapper as any);
@@ -164,7 +165,7 @@ describe(`<${Select.displayName}>`, () => {
             });
 
             it('with chip variant', async () => {
-                const onClick = jest.fn();
+                const onClick = vi.fn();
                 const { chip } = setup({ onInputClick: onClick, variant: SelectVariant.chip });
 
                 await userEvent.click(chip as any);
@@ -174,7 +175,7 @@ describe(`<${Select.displayName}>`, () => {
 
         it('should call onClear when clear icon is clicked in select input', async () => {
             const value = 'Value';
-            const onClear = jest.fn();
+            const onClear = vi.fn();
             const { select, props } = setup({ value, onClear, clearButtonProps: { label: 'Clear' } });
 
             const clearButton = within(select).getByRole('button', { name: props.clearButtonProps?.label });

@@ -1,3 +1,4 @@
+import { Mock } from 'vitest';
 import React from 'react';
 
 import camelCase from 'lodash/camelCase';
@@ -20,7 +21,7 @@ import { TextField, TextFieldProps } from './TextField';
 
 const CLASSNAME = TextField.className as string;
 
-jest.mock('@lumx/react/utils/browser/isFocusVisible');
+vi.mock('@lumx/react/utils/browser/isFocusVisible');
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -49,7 +50,7 @@ const setup = (propsOverride: Partial<TextFieldProps> = {}, { wrapper }: SetupRe
 };
 
 describe(`<${TextField.displayName}>`, () => {
-    (isFocusVisible as jest.Mock).mockReturnValue(false);
+    (isFocusVisible as Mock).mockReturnValue(false);
 
     describe('Render', () => {
         it('should render defaults', () => {
@@ -180,7 +181,7 @@ describe(`<${TextField.displayName}>`, () => {
 
     describe('Events', () => {
         it('should trigger `onChange` when text field is changed', async () => {
-            const onChange = jest.fn();
+            const onChange = vi.fn();
             const { inputNative } = setup({ value: '', name: 'name', onChange });
 
             await userEvent.tab();
@@ -192,7 +193,7 @@ describe(`<${TextField.displayName}>`, () => {
         });
 
         it('should trigger `onChange` with empty value when text field is cleared', async () => {
-            const onChange = jest.fn();
+            const onChange = vi.fn();
             const { clearButton } = setup({
                 value: 'initial value',
                 name: 'name',
@@ -208,8 +209,8 @@ describe(`<${TextField.displayName}>`, () => {
         });
 
         it('should trigger `onChange` with empty value and `onClear` when text field is cleared', async () => {
-            const onChange = jest.fn();
-            const onClear = jest.fn();
+            const onChange = vi.fn();
+            const onClear = vi.fn();
             const { clearButton } = setup({
                 value: 'initial value',
                 name: 'name',
@@ -229,7 +230,7 @@ describe(`<${TextField.displayName}>`, () => {
 
     describe('Disabled state', () => {
         it('should render with "isDisabled"', async () => {
-            const onChange = jest.fn();
+            const onChange = vi.fn();
             const { element, inputNative } = setup({
                 label: 'Label',
                 isDisabled: true,
@@ -255,7 +256,7 @@ describe(`<${TextField.displayName}>`, () => {
         });
 
         it('should render with "aria-disabled"', async () => {
-            const onChange = jest.fn();
+            const onChange = vi.fn();
             const { element, inputNative } = setup({
                 label: 'Label',
                 'aria-disabled': true,
