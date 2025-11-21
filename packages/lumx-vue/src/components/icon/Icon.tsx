@@ -41,9 +41,7 @@ export default defineComponent({
         },
         // GenericProps may include other props, but these are the main ones from IconProps
     },
-    setup(props: IconProps) {
-        return { props };
-    },
+    // setup function removed; props are accessible via this.props in render
     render() {
         return <UI {...this.props} />;
     },
