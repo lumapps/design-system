@@ -72,8 +72,8 @@
     },
     "peerDependencies": {
         "lodash": "4.17.21",
-        "react": ">= 16.13.0",
-        "react-dom": ">= 16.13.0"
+        "react": ">= 17.0.2",
+        "react-dom": ">= 17.0.2"
     },
     "description": "The official LumApps Design System (LumX) for React applications",
     "homepage": "https://github.com/lumapps/design-system",

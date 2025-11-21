@@ -1,5 +1,4 @@
 import { Chip, ChipGroup, Size } from '@lumx/react';
-import React from 'react';
 
 export const App = ({ theme }: any) => (
     <ChipGroup>

@@ -1,6 +1,5 @@
 import { mdiArrowTopRightThick } from '@lumx/icons';
 import { Emphasis, SideNavigation, SideNavigationItem } from '@lumx/react';
-import React from 'react';
 
 export const App = () => (
     <SideNavigation>

@@ -1,4 +1,4 @@
-import React, { ReactNode, SyntheticEvent, InputHTMLAttributes } from 'react';
+import { ReactNode, SyntheticEvent, InputHTMLAttributes } from 'react';
 
 import classNames from 'classnames';
 

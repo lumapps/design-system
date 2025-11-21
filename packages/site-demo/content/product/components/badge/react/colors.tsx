@@ -1,7 +1,6 @@
 import { mdiAccount, mdiAlertCircle, mdiCheck, mdiClose, mdiStar } from '@lumx/icons';
 
 import { Badge, ColorPalette, Icon } from '@lumx/react';
-import React from 'react';
 
 export const App = () => (
     <>

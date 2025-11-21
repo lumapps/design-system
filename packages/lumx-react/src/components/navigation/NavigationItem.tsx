@@ -1,4 +1,4 @@
-import React, { ElementType, ReactNode } from 'react';
+import { ElementType, ReactNode } from 'react';
 import { Icon, Placement, Size, Tooltip, Text } from '@lumx/react';
 import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';
 import { ComponentRef, HasClassName, HasPolymorphicAs, HasRequiredLinkHref, HasTheme } from '@lumx/react/utils/type';

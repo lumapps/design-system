@@ -1,4 +1,3 @@
-import React from 'react';
 import { GenericBlock } from '@lumx/react';
 import { Placeholder } from '@lumx/demo/components/content/Placeholder';
 

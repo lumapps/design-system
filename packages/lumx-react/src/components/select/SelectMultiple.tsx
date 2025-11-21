@@ -1,4 +1,4 @@
-import React, { ReactNode, RefObject, SyntheticEvent } from 'react';
+import { ReactNode, RefObject, SyntheticEvent } from 'react';
 
 import classNames from 'classnames';
 

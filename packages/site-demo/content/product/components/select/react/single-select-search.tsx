@@ -1,6 +1,7 @@
+import React, { SyntheticEvent, useState } from 'react';
+
 import { mdiMagnify } from '@lumx/icons';
 import { List, ListDivider, ListItem, ListSubheader, Select, Size, TextField } from '@lumx/react';
-import React, { SyntheticEvent, useState } from 'react';
 
 export const App = ({ theme }: any) => {
     const CHOICES = ['First item', 'Second item', 'Third item'];

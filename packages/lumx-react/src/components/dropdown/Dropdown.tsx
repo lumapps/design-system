@@ -1,4 +1,4 @@
-import React, { cloneElement, useMemo, useRef } from 'react';
+import { cloneElement, useMemo, useRef } from 'react';
 
 import classNames from 'classnames';
 

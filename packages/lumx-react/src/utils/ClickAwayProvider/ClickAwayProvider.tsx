@@ -1,4 +1,4 @@
-import React, { createContext, RefObject, useContext, useEffect, useMemo, useRef } from 'react';
+import { createContext, RefObject, useContext, useEffect, useMemo, useRef } from 'react';
 import { ClickAwayParameters, useClickAway } from '@lumx/react/hooks/useClickAway';
 
 interface ContextValue {

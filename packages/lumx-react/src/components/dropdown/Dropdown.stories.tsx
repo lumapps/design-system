@@ -1,5 +1,5 @@
 import range from 'lodash/range';
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { Button, Dropdown, List, ListItem } from '@lumx/react';
 

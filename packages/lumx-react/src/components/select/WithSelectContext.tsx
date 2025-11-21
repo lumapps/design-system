@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { Ref, useCallback, useRef } from 'react';
+import { Ref, useCallback, useRef } from 'react';
 
 import { Placement } from '@lumx/react';
 import { Kind, Theme } from '@lumx/core/js/constants';

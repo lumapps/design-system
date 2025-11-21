@@ -14,7 +14,7 @@ import {
     Toolbar,
     Typography,
 } from '@lumx/react';
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 export const App = ({ theme }: any) => {
     const anchorRef = useRef(null);

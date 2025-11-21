@@ -1,5 +1,3 @@
-import React from 'react';
-
 import classNames from 'classnames';
 
 import { useTabProviderContext } from '@lumx/react/components/tabs/state';

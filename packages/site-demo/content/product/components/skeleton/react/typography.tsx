@@ -1,5 +1,4 @@
 import { Alignment, Grid, GridItem, Size, SkeletonTypography, Typography } from '@lumx/react';
-import React from 'react';
 
 export const App = ({ theme }: any) => {
     return (

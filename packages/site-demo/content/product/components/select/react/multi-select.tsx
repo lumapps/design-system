@@ -1,5 +1,6 @@
-import { List, ListItem, SelectMultiple, Size } from '@lumx/react';
 import React, { SyntheticEvent, useState } from 'react';
+
+import { List, ListItem, SelectMultiple, Size } from '@lumx/react';
 
 export const App = ({ theme }: any) => {
     const CHOICES = ['First item', 'Second item', 'Third item'];

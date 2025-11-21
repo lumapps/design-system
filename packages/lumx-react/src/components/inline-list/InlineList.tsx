@@ -1,4 +1,4 @@
-import React, { Children, isValidElement } from 'react';
+import { Children, isValidElement } from 'react';
 
 import classNames from 'classnames';
 

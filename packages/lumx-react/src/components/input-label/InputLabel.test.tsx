@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Theme, Typography } from '@lumx/react';
 import { getByClassName } from '@lumx/react/testing/utils/queries';
 import { getTypographyClassName } from '@lumx/core/js/utils/className';

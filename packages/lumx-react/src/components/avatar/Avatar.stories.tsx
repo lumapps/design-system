@@ -1,6 +1,4 @@
 /* eslint-disable react/display-name */
-import React from 'react';
-
 import { mdiDelete, mdiEye, mdiPencil, mdiStar } from '@lumx/icons';
 import { AvatarSize, Badge, ColorPalette, FlexBox, Icon, IconButton, Size } from '@lumx/react';
 import { avatarImageArgType, AVATAR_IMAGES } from '@lumx/react/stories/controls/image';

@@ -1,5 +1,4 @@
 import { Alignment, FlexBox, Size, UserBlock } from '@lumx/react';
-import React from 'react';
 
 export const App = () => (
     <>

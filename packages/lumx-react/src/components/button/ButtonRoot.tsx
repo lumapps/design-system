@@ -1,4 +1,4 @@
-import React, { AriaAttributes, ButtonHTMLAttributes, DetailedHTMLProps, RefObject } from 'react';
+import { AriaAttributes, ButtonHTMLAttributes, DetailedHTMLProps, RefObject } from 'react';
 
 import classNames from 'classnames';
 

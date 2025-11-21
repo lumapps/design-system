@@ -1,4 +1,3 @@
-import React from 'react';
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 
 import { queryByClassName } from '@lumx/react/testing/utils/queries';

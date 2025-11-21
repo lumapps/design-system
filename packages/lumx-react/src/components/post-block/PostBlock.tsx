@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 import classNames from 'classnames';
 import isObject from 'lodash/isObject';

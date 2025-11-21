@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 type useInfiniteScrollType = (
     ref: React.RefObject<HTMLElement>,

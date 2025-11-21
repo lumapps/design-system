@@ -14,7 +14,7 @@ import {
 } from '@lumx/react';
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
 import noop from 'lodash/noop';
-import React, { MouseEventHandler, SyntheticEvent, useRef, useState } from 'react';
+import { MouseEventHandler, SyntheticEvent, useRef, useState } from 'react';
 import { SelectVariant } from './constants';
 
 export default { title: 'LumX components/select/Select Multiple' };

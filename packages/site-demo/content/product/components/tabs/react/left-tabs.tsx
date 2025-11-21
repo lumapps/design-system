@@ -1,5 +1,5 @@
 import { Tab, TabList, TabListLayout, TabPanel, TabProvider } from '@lumx/react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export const App = ({ theme }: any) => {
     const [activeTab, setActiveTab] = useState(0);

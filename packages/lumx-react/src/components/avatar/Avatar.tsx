@@ -1,4 +1,4 @@
-import React, { KeyboardEventHandler, MouseEventHandler, ReactElement, ReactNode } from 'react';
+import { KeyboardEventHandler, MouseEventHandler, ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
 

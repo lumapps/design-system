@@ -1,4 +1,4 @@
-import React, { FocusEventHandler, KeyboardEventHandler, useCallback } from 'react';
+import { FocusEventHandler, KeyboardEventHandler, useCallback } from 'react';
 
 import classNames from 'classnames';
 

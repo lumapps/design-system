@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Switch } from '@lumx/react/components/switch';
 import { Alignment } from '@lumx/react';
 

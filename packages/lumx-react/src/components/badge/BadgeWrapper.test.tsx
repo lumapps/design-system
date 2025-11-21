@@ -1,6 +1,4 @@
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
-import React from 'react';
-
 import omit from 'lodash/omit';
 import last from 'lodash/last';
 

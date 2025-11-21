@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { SyntheticEvent, useMemo, useRef } from 'react';
+import { SyntheticEvent, useMemo, useRef } from 'react';
 
 import classNames from 'classnames';
 

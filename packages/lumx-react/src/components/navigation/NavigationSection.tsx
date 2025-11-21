@@ -1,4 +1,4 @@
-import React, { useRef, useState, useContext } from 'react';
+import { useRef, useState, useContext } from 'react';
 
 import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
 import { Icon, Size, Text, Orientation, Popover, Placement, Theme } from '@lumx/react';

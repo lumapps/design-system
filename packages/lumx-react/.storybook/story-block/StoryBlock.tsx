@@ -1,4 +1,4 @@
-import React, { ElementType } from 'react';
+import { ElementType } from 'react';
 import classNames from 'classnames';
 import isChromatic from 'chromatic/isChromatic';
 import { toggleMaterialTheme } from './toggleMaterialTheme';

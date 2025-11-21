@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { ColorPalette, ColorVariant, Icon, Typography } from '@lumx/react';
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import { getByClassName, queryAllByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';

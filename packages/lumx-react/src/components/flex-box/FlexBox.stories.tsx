@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Alignment, Button, IconButton, Orientation, Size, Text } from '@lumx/react';
 
 import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
