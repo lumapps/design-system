@@ -43,6 +43,6 @@ export default defineComponent({
     },
     // setup function removed; props are accessible via this.props in render
     render() {
-        return <UI {...this.props} />;
+        return <UI {...this.$props} />;
     },
 });
