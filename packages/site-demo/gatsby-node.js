@@ -63,6 +63,15 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     }
 };
 
+exports.onCreateBabelConfig = ({ actions }) => {
+    actions.setBabelPreset({
+        name: `@babel/preset-react`,
+        options: {
+            runtime: 'automatic',
+        },
+    })
+}
+
 exports.onCreateWebpackConfig = async ({ actions, getConfig }) => {
     // Generate the JSON icon library
     await generateJSONIconLibrary();
