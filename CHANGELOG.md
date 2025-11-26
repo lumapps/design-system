@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   _[BREAKING]_ Externalise `@lumx/core` (now imported instead of bundled inside `@lumx/react`)
 -   `@lumx/core`:
     -   _[BREAKING]_ removed deprecated `@lumx/core/js/utils/date-picker` utils
+    -   _[BREAKING]_ Migrate to ESM module format (instead of CJS)
+    -   _[BREAKING]_ Removed minified JS
 -   `@lumx/angularjs`: removed from the project. Future updates to `@lumx/core` will continue to avoid breaking change to the deprecated angularjs directives but without any guarantee.
 
 ## [3.20.0][] - 2025-11-20
