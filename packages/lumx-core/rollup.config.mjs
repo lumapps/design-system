@@ -25,23 +25,18 @@ const sassPlugin = (input) => ({
             findFileUrl: (url) => new URL(import.meta.resolve(url)),
         };
 
-        const compileSass = async (style) => {
-            const { css } = await sass.compileAsync(input, {
-                style,
-                importers: [customImporter],
-            });
+        const { css } = await sass.compileAsync(input, {
+            style: 'expanded',
+            importers: [customImporter],
+        });
 
-            const { name } = path.parse(input);
-            const extension = style === 'compressed' ? '.min.css' : '.css';
-            const outputPath = path.resolve(DIST_PATH, `${name}${extension}`);
+        const { name } = path.parse(input);
+        const outputPath = path.resolve(DIST_PATH, `${name}.css`);
 
-            await fs.mkdir(path.dirname(outputPath), { recursive: true });
+        await fs.mkdir(path.dirname(outputPath), { recursive: true });
 
-            const { css: postProcess } = await postcss(CONFIGS.postcss.plugins).process(css, { from: undefined });
-            await fs.writeFile(outputPath, postProcess);
-        };
-
-        await Promise.all([compileSass('expanded'), compileSass('compressed')]);
+        const { css: postProcess } = await postcss(CONFIGS.postcss.plugins).process(css, { from: undefined });
+        await fs.writeFile(outputPath, postProcess);
         console.log(`${path.relative(__dirname, input)} → ${path.relative(__dirname, DIST_PATH)}`);
     },
 });
