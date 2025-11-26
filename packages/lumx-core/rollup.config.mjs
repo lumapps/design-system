@@ -74,7 +74,7 @@ export default {
     // Externalize all dependencies
     external: [
         ...Object.keys(pkg.dependencies),
-        ...Object.keys(pkg.peerDependencies),
+        ...Object.keys(pkg.peerDependencies || []),
     ].map((dependency) => new RegExp(`^${dependency}(/.*)?`)),
     plugins: [
         cleaner({ targets: [DIST_PATH] }),
