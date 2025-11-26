@@ -10,23 +10,22 @@ import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import { tsPathsResolve } from 'rollup-plugin-ts-paths-resolve';
 
 import pkg from './package.json' with { type: 'json' };
-import CONFIGS from '../../configs/index.js';
 
 const importUrl = new URL(import.meta.url);
 const __dirname = path.dirname(importUrl.pathname);
 
 const ROOT_PATH = path.resolve(__dirname, '..', '..');
 const DIST_PATH = path.resolve(__dirname, pkg.publishConfig.directory);
-export const extensions = ['.js', '.jsx', '.ts', '.tsx'];
+const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 
 /**
  * List of entry modules that will get compiled and exported to NPM.
  * All other modules are considered as internal and won't be exposed.
  */
-const input = Object.fromEntries([
-    ['index', 'src/index.ts'],             // => @lumx/react
-    ['utils/index', 'src/utils/index.ts'], // => @lumx/react/utils
-]);
+const input = {
+    index: 'src/index.ts',               // => @lumx/react
+    'utils/index': 'src/utils/index.ts', // => @lumx/react/utils
+};
 
 // Bundle JS code
 const bundleJS = {
@@ -56,10 +55,8 @@ const bundleJS = {
         babel({
             extensions,
             exclude: /node_modules/,
-            plugins: CONFIGS.babel.plugins,
             presets: [
-                ['@babel/preset-env', { targets: 'defaults' }],
-                '@babel/preset-react',
+                ['@babel/react', { runtime: 'automatic'}],
                 '@babel/preset-typescript',
             ],
         }),
@@ -81,8 +78,6 @@ const bundleType = {
     output: {
         format: 'esm',
         dir: DIST_PATH,
-        // Unnamed chunk moved to `_internal` folder
-        chunkFileNames: '_internal/[name].d.ts',
     },
     plugins: [
         /** Externalize peer dependencies. */

@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/react`:
     -   _[BREAKING]_ Drop support for React 16
     -   _[BREAKING]_ Removed `src` folder from the npm package (use compiled code instead)
+    -   _[BREAKING]_ Reduced ecmascript transpilation to the minimum (make sure to transpile this lib if your project needs it)
 -   `@lumx/core`:
     -   _[BREAKING]_ removed deprecated `@lumx/core/js/utils/date-picker` utils
 -   `@lumx/angularjs`: removed from the project. Future updates to `@lumx/core` will continue to avoid breaking change to the deprecated angularjs directives but without any guarantee.
