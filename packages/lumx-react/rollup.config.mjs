@@ -10,7 +10,6 @@ import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import { tsPathsResolve } from 'rollup-plugin-ts-paths-resolve';
 
 import pkg from './package.json' with { type: 'json' };
-import CONFIGS from '../../configs/index.js';
 
 const importUrl = new URL(import.meta.url);
 const __dirname = path.dirname(importUrl.pathname);
@@ -56,10 +55,8 @@ const bundleJS = {
         babel({
             extensions,
             exclude: /node_modules/,
-            plugins: CONFIGS.babel.plugins,
             presets: [
-                ['@babel/preset-env', { targets: 'defaults' }],
-                '@babel/preset-react',
+                ['@babel/react', { runtime: 'automatic'}],
                 '@babel/preset-typescript',
             ],
         }),
