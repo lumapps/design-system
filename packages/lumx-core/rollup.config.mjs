@@ -1,8 +1,9 @@
+import { babel } from "@rollup/plugin-babel";
+import { nodeResolve } from "@rollup/plugin-node-resolve";
 import path from 'path';
 import sass from 'sass';
 import fs from 'fs/promises';
 import commonjs from '@rollup/plugin-commonjs';
-import typescript from '@rollup/plugin-typescript';
 import cleaner from 'rollup-plugin-cleaner';
 import copy from 'rollup-plugin-copy';
 import glob from 'glob';
@@ -16,6 +17,7 @@ const __dirname = path.dirname(importUrl.pathname);
 
 const ROOT_PATH = path.resolve(__dirname, '..', '..');
 const DIST_PATH = path.resolve(__dirname, pkg.publishConfig.directory);
+const extensions = ['.js', '.ts'];
 
 // Custom SASS build to handle import of "sass-mq"
 const sassPlugin = (input) => ({
@@ -44,15 +46,14 @@ const sassPlugin = (input) => ({
 
 export default {
     // Bundle all TS files
-    input: Object.fromEntries(
-        glob.sync('src/js/**/*.ts').map((file) => {
-            const { dir, name } = path.parse(path.relative('src', file));
-            return [path.join(dir, name), file];
-        }),
-    ),
+    input: glob.sync('src/js/**/*.ts', {
+        ignore: ['**/*.test.*'],
+    }),
     output: {
         format: 'esm',
         dir: DIST_PATH,
+        preserveModules: true,
+        preserveModulesRoot: 'src',
     },
     // Externalize all dependencies
     external: [
@@ -62,8 +63,13 @@ export default {
     plugins: [
         cleaner({ targets: [DIST_PATH] }),
         sassPlugin('src/scss/lumx.scss'),
+        nodeResolve({ browser: true, extensions }),
         commonjs({ include: /node_modules/ }),
-        typescript({ target: 'ESNext', declaration: false }),
+        babel({
+            extensions,
+            exclude: /node_modules/,
+            presets: ['@babel/preset-typescript'],
+        }),
         copy({
             targets: [
                 { src: path.join(ROOT_PATH, 'CONTRIBUTING.md'), dest: DIST_PATH },
