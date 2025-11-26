@@ -49,9 +49,12 @@ const formatFileNames = (ext) => (info) => {
     return `[name].${ext}`;
 };
 
+const external = [/@lumx\/core(\/*)/, '@lumx/icons'];
+
 // Bundle JS code
 const bundleJS = {
     input,
+    external,
     output: {
         format: 'esm',
         sourcemap: true,
@@ -98,6 +101,7 @@ const bundleJS = {
 // Bundle TS types in D.TS files
 const bundleType = {
     input: Object.fromEntries(entries),
+    external,
     output: {
         format: 'esm',
         dir: DIST_PATH,
