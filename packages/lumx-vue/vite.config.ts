@@ -2,7 +2,7 @@ import { defineConfig, mergeConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import tsconfigPaths from 'vite-tsconfig-paths';
-import { viteStaticCopy } from 'vite-plugin-static-copy';
+import copy from 'rollup-plugin-copy';
 
 export default defineConfig((config) =>
   mergeConfig(config, {
@@ -14,11 +14,12 @@ export default defineConfig((config) =>
         ],
       }),
       tsconfigPaths(),
-      viteStaticCopy({
+      copy({
         targets: [
-          { src: 'package.json', dest: '' },
-          // { src: 'README.md', dest: '' },
+          { src: 'package.json', dest: 'dist' },
+          { src: 'src/**/*', dest: 'dist/src' },
         ],
+        hook: 'writeBundle',
       }),
     ],
     optimizeDeps: { include: ['@lumx/icons'] },
