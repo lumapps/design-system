@@ -1,6 +1,5 @@
 {
   "license": "MIT",
-  "name": "@lumx/vue",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lumapps/design-system.git"
@@ -11,13 +10,16 @@
     "build-storybook": "storybook build",
     "build": "vite build"
   },
-  "module": "index.js",
-  "main": "index.js",
   "installConfig": {
     "hoistingLimits": "workspaces"
   },
+  "module": "index.js",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "name": "@lumx/vue",
   "publishConfig": {
-    "directory": "dist"
+    "directory": "dist",
+    "access": "public"
   },
   "sideEffects": false,
   "version": "3.20.0",

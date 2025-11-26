@@ -1,6 +1,5 @@
 {
   "license": "MIT",
-  "name": "@lumx/vue2",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lumapps/design-system.git"
@@ -14,12 +13,15 @@
   "installConfig": {
     "hoistingLimits": "workspaces"
   },
-  "module": "index.js",
-  "main": "index.js",
   "sideEffects": false,
   "version": "3.20.0",
+  "module": "index.js",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "name": "@lumx/vue2",
   "publishConfig": {
-    "directory": "dist"
+    "directory": "dist",
+    "access": "public"
   },
   "devDependencies": {
     "@babel/plugin-transform-react-jsx": "^7.27.1",
