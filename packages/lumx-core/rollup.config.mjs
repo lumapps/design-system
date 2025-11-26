@@ -7,7 +7,6 @@ import cleaner from 'rollup-plugin-cleaner';
 import copy from 'rollup-plugin-copy';
 import glob from 'glob';
 import postcss from 'postcss';
-import terser from '@rollup/plugin-terser';
 
 import pkg from './package.json' with { type: 'json' };
 import CONFIGS from '../../configs/index.js';
@@ -58,19 +57,11 @@ export default {
             return [path.join(dir, name), file];
         }),
     ),
-    output: [
-        {
-            format: 'cjs',
-            dir: DIST_PATH,
-            entryFileNames: '[name].js',
-        },
-        {
-            format: 'cjs',
-            dir: DIST_PATH,
-            entryFileNames: '[name].min.js',
-            plugins: [terser()],
-        },
-    ],
+    output: {
+        format: 'esm',
+        dir: DIST_PATH,
+        entryFileNames: '[name].js',
+    },
     // Externalize all dependencies
     external: [
         ...Object.keys(pkg.dependencies),
