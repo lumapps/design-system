@@ -9,12 +9,15 @@
     "start:storybook": "storybook dev -p 9000",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "build": "vite build"
+    "build": "vite build && cp package.json dist/"
   },
   "module": "index.js",
   "main": "index.js",
   "installConfig": {
     "hoistingLimits": "workspaces"
+  },
+  "publishConfig": {
+    "directory": "dist"
   },
   "sideEffects": false,
   "version": "3.20.0",

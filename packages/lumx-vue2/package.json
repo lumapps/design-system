@@ -9,7 +9,7 @@
     "start:storybook": "storybook dev -p 9000",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "build": "vite build"
+    "build": "vite build && cp package.json dist/"
   },
   "installConfig": {
     "hoistingLimits": "workspaces"
@@ -18,6 +18,9 @@
   "main": "index.js",
   "sideEffects": false,
   "version": "3.20.0",
+  "publishConfig": {
+    "directory": "dist"
+  },
   "devDependencies": {
     "@babel/plugin-transform-react-jsx": "^7.27.1",
     "@storybook/vue-vite": "^7.6.17",
