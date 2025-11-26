@@ -70,10 +70,6 @@ const bundleJS = {
                 { src: path.join(ROOT_PATH, 'LICENSE.md'), dest: DIST_PATH },
                 { src: path.join(__dirname, 'README.md'), dest: DIST_PATH },
                 { src: path.join(__dirname, 'package.json'), dest: DIST_PATH },
-                {
-                    src: [path.join(__dirname, 'src'), '!**/*.snap', '!**/*.test.tsx', '!**/*.test.ts'],
-                    dest: DIST_PATH,
-                },
             ],
         }),
     ],
