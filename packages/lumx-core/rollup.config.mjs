@@ -1,8 +1,9 @@
+import { babel } from "@rollup/plugin-babel";
+import { nodeResolve } from "@rollup/plugin-node-resolve";
 import path from 'path';
 import sass from 'sass';
 import fs from 'fs/promises';
 import commonjs from '@rollup/plugin-commonjs';
-import typescript from '@rollup/plugin-typescript';
 import cleaner from 'rollup-plugin-cleaner';
 import copy from 'rollup-plugin-copy';
 import glob from 'glob';
@@ -65,8 +66,13 @@ export default {
     plugins: [
         cleaner({ targets: [DIST_PATH] }),
         sassPlugin('src/scss/lumx.scss'),
+        nodeResolve({ browser: true, extensions }),
         commonjs({ include: /node_modules/ }),
-        typescript({ target: 'ESNext', declaration: false }),
+        babel({
+            extensions,
+            exclude: /node_modules/,
+            presets: ['@babel/preset-typescript'],
+        }),
         copy({
             targets: [
                 { src: path.join(ROOT_PATH, 'CONTRIBUTING.md'), dest: DIST_PATH },
