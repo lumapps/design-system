@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue2';
 import vueJsx from '@vitejs/plugin-vue2-jsx';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import path from 'path';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 const classNameToClass = function ({ types: t }: any) {
   return {
@@ -23,6 +24,12 @@ export default defineConfig((config) =>
       tsconfigPaths(),
       vueJsx({
         babelPlugins: [classNameToClass],
+      }),
+      viteStaticCopy({
+        targets: [
+          { src: 'package.json', dest: '' },
+          { src: 'README.md', dest: '' },
+        ],
       }),
     ],
     optimizeDeps: { include: ['@lumx/icons'] },

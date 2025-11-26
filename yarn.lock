@@ -4223,6 +4223,7 @@ __metadata:
     storybook: ^7.6.0
     typescript: ^5.4.3
     vite: ^6.3.5
+    vite-plugin-static-copy: ^3.1.4
     vite-tsconfig-paths: ^5.1.4
     vue: 2
   languageName: unknown
@@ -4239,6 +4240,7 @@ __metadata:
     storybook: ^9.1.4
     typescript: ^5.4.3
     vite: ^6.3.5
+    vite-plugin-static-copy: ^3.1.4
     vite-tsconfig-paths: ^5.1.4
     vue: ^3.5.25
   languageName: unknown
@@ -10749,7 +10751,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chokidar@npm:>=3.0.0 <4.0.0, chokidar@npm:^3.5.2":
+"chokidar@npm:>=3.0.0 <4.0.0, chokidar@npm:^3.5.2, chokidar@npm:^3.6.0":
   version: 3.6.0
   resolution: "chokidar@npm:3.6.0"
   dependencies:
@@ -15130,7 +15132,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fdir@npm:^6.4.4":
+"fdir@npm:^6.4.4, fdir@npm:^6.5.0":
   version: 6.5.0
   resolution: "fdir@npm:6.5.0"
   peerDependencies:
@@ -23778,6 +23780,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"p-map@npm:^7.0.3":
+  version: 7.0.4
+  resolution: "p-map@npm:7.0.4"
+  checksum: 4be2097e942f2fd3a4f4b0c6585c721f23851de8ad6484d20c472b3ea4937d5cd9a59914c832b1bceac7bf9d149001938036b82a52de0bc381f61ff2d35d26a5
+  languageName: node
+  linkType: hard
+
 "p-pipe@npm:^1.2.0":
   version: 1.2.0
   resolution: "p-pipe@npm:1.2.0"
@@ -24556,7 +24565,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"picomatch@npm:^4.0.2":
+"picomatch@npm:^4.0.2, picomatch@npm:^4.0.3":
   version: 4.0.3
   resolution: "picomatch@npm:4.0.3"
   checksum: 6817fb74eb745a71445debe1029768de55fd59a42b75606f478ee1d0dc1aa6e78b711d041a7c9d5550e042642029b7f373dc1a43b224c4b7f12d23436735dba0
@@ -30222,6 +30231,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tinyglobby@npm:^0.2.15":
+  version: 0.2.15
+  resolution: "tinyglobby@npm:0.2.15"
+  dependencies:
+    fdir: ^6.5.0
+    picomatch: ^4.0.3
+  checksum: 0e33b8babff966c6ab86e9b825a350a6a98a63700fa0bb7ae6cf36a7770a508892383adc272f7f9d17aaf46a9d622b455e775b9949a3f951eaaf5dfb26331d44
+  languageName: node
+  linkType: hard
+
 "tinypool@npm:^0.8.3":
   version: 0.8.4
   resolution: "tinypool@npm:0.8.4"
@@ -31907,6 +31926,20 @@ __metadata:
   bin:
     vite-node: vite-node.mjs
   checksum: a42d2ee0110133c4c7cf19fafca74b3115d3b85b6234ed6057ad8de12ca9ece67655a0b5ba50942f253fb6c428b902f738aabdd62835b9142e8219725bbb895d
+  languageName: node
+  linkType: hard
+
+"vite-plugin-static-copy@npm:^3.1.4":
+  version: 3.1.4
+  resolution: "vite-plugin-static-copy@npm:3.1.4"
+  dependencies:
+    chokidar: ^3.6.0
+    p-map: ^7.0.3
+    picocolors: ^1.1.1
+    tinyglobby: ^0.2.15
+  peerDependencies:
+    vite: ^5.0.0 || ^6.0.0 || ^7.0.0
+  checksum: c6f5a2dba4da2a52c6a84310721d98af9e3bd0b1a5ff5e463724334c056e64c1c1735a2ca9f3bc30c1c51e49de512c42e1d2bf23c1e13f05293eaf44dc2b9e87
   languageName: node
   linkType: hard
 

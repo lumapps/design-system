@@ -9,7 +9,7 @@
     "start:storybook": "storybook dev -p 9000",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "build": "vite build && cp package.json dist/"
+    "build": "vite build"
   },
   "installConfig": {
     "hoistingLimits": "workspaces"
@@ -33,6 +33,7 @@
     "storybook": "^7.6.0",
     "typescript": "^5.4.3",
     "vite": "^6.3.5",
+    "vite-plugin-static-copy": "^3.1.4",
     "vite-tsconfig-paths": "^5.1.4",
     "vue": "2"
   }
