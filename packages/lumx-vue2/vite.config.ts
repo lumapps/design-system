@@ -28,7 +28,7 @@ export default defineConfig((config) =>
       viteStaticCopy({
         targets: [
           { src: 'package.json', dest: '' },
-          { src: 'README.md', dest: '' },
+          // { src: 'README.md', dest: '' },
         ],
       }),
     ],
