@@ -7,7 +7,6 @@ import cleaner from 'rollup-plugin-cleaner';
 import copy from 'rollup-plugin-copy';
 import glob from 'glob';
 import postcss from 'postcss';
-import terser from '@rollup/plugin-terser';
 
 import pkg from './package.json' with { type: 'json' };
 import CONFIGS from '../../configs/index.js';
@@ -17,8 +16,6 @@ const __dirname = path.dirname(importUrl.pathname);
 
 const ROOT_PATH = path.resolve(__dirname, '..', '..');
 const DIST_PATH = path.resolve(__dirname, pkg.publishConfig.directory);
-const SRC_PATH = path.resolve(__dirname, 'src');
-export const extensions = ['.js', '.ts'];
 
 // Custom SASS build to handle import of "sass-mq"
 const sassPlugin = (input) => ({
@@ -58,19 +55,10 @@ export default {
             return [path.join(dir, name), file];
         }),
     ),
-    output: [
-        {
-            format: 'cjs',
-            dir: DIST_PATH,
-            entryFileNames: '[name].js',
-        },
-        {
-            format: 'cjs',
-            dir: DIST_PATH,
-            entryFileNames: '[name].min.js',
-            plugins: [terser()],
-        },
-    ],
+    output: {
+        format: 'esm',
+        dir: DIST_PATH,
+    },
     // Externalize all dependencies
     external: [
         ...Object.keys(pkg.dependencies),
