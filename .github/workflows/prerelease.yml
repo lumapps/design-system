@@ -1,4 +1,4 @@
-name: "Prerelease Workflow"
+name: "CD / Prerelease Workflow"
 
 # Manual trigger workflow to automatically setup, build and push a new prerelease on NPM
 
@@ -16,47 +16,10 @@ concurrency:
     cancel-in-progress: true
 
 jobs:
-    publish_version:
+    publish_prerelease:
         name: "Publish Prerelease Version"
-        runs-on: ubuntu-latest
-        steps:
-            -   name: "Checkout repository"
-                uses: actions/checkout@v5
-                with:
-                    fetch-depth: 0
-
-            -   name: "Setup"
-                uses: ./.github/actions/setup
-
-            -   name: "Increment package versions"
-                id: version
-                uses: ./.github/actions/increment-package-versions
-                with:
-                    releaseType: 'prerelease'
-                    prereleaseName: '${{ inputs.prereleaseName }}'
-
-            -   name: "Build libs"
-                run: yarn build:libs
-
-            -   name: "Publish version to NPM"
-                env:
-                    NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-                    DIST_TAG: ${{ steps.version.outputs.distTag }}
-                run: |
-                    for package in $(echo packages/lumx-*);
-                    do
-                        (echo "Publishing $package"; cd $package/dist; npm publish --tag $DIST_TAG)
-                    done
-
-            -   name: "Deprecate older prerelease version"
-                env:
-                    NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-                    PREV_VERSION: ${{ steps.version.outputs.prevDistTagVersion }}
-                if: ${{ env.PREV_VERSION }}
-                run: |
-                    packages=$(npm pkg get name -ws | egrep -o '@lumx/\w+' | uniq)
-                    for package in $packages;
-                    do
-                        echo "Deprecate ${package}@${PREV_VERSION}";
-                        npm deprecate ${package}@${PREV_VERSION} deprecated;
-                    done
+        uses: ./.github/workflows/workflow-publish-npm.yml
+        with:
+            release-type: 'prerelease'
+            prerelease-name: ${{ inputs.prereleaseName }}
+        secrets: inherit

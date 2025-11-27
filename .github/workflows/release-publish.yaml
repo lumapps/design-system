@@ -1,4 +1,4 @@
-name: "Publish Release Workflow"
+name: "CD / Publish Release Workflow"
 
 # When merging release commit on master
 # - Build & publish NPM libs
@@ -6,6 +6,8 @@ name: "Publish Release Workflow"
 # - Build & publish demo site docker image
 # - Deploy chromatic
 # - Create GH release notes
+
+# Release version increment is handled in `release-prepare.yml`
 
 on:
     push:
@@ -44,6 +46,15 @@ jobs:
         name: "Build & publish NPM libs"
         needs: [is_release_commit]
         if: ${{ needs.is_release_commit.outputs.version }}
+        uses: ./.github/workflows/workflow-publish-npm.yml
+        with:
+            release-type: 'release'
+        secrets: inherit
+
+    git_tag:
+        name: "Git tag release"
+        needs: [is_release_commit, build_publish_NPM]
+        if: ${{ needs.is_release_commit.outputs.version }}
         runs-on: ubuntu-latest
         steps:
             -   name: "Checkout repository"
@@ -51,21 +62,6 @@ jobs:
                 with:
                     token: '${{ secrets.GITBOT_TOKEN }}'
                     fetch-depth: 0
-
-            -   name: "Setup"
-                uses: ./.github/actions/setup
-
-            -   name: "Build libs"
-                run: yarn build:libs
-
-            -   name: "Publish version to NPM"
-                env:
-                    NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-                run: |
-                    for package in $(echo packages/lumx-*);
-                    do
-                        (echo "Publishing $package"; cd $package/dist; npm publish --tag latest)
-                    done
 
             -   name: "Git tag"
                 id: git
@@ -84,7 +80,7 @@ jobs:
 
     deploy_chromatic:
         name: "Deploy chromatic"
-        needs: [build_publish_NPM]
+        needs: [git_tag]
         runs-on: ubuntu-latest
         steps:
             -   name: "Checkout repository"
@@ -104,7 +100,7 @@ jobs:
 
     deploy_demo_site:
         name: "Deploy demo site"
-        needs: [build_publish_NPM]
+        needs: [git_tag]
         timeout-minutes: 30
         runs-on: ubuntu-latest
         env:
@@ -131,7 +127,7 @@ jobs:
             -   run: |
                     echo "git_commit=$(git rev-parse HEAD)" >> $GITHUB_ENV
                     echo "build_date=$(date --rfc-3339=seconds)" >> $GITHUB_ENV
-                    echo "version=${{ needs.build_publish_NPM.outputs.tag }}" >> $GITHUB_ENV
+                    echo "version=${{ needs.git_tag.outputs.tag }}" >> $GITHUB_ENV
                     echo "node_version=$(cat .nvmrc)" >> $GITHUB_ENV
 
             -   name: "Docker metadata"
@@ -171,7 +167,7 @@ jobs:
 
     create_gh_release:
         name: "Create release note"
-        needs: [build_publish_NPM]
+        needs: [git_tag]
         runs-on: ubuntu-latest
         steps:
             -   name: "Checkout repository"
