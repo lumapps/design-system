@@ -1,0 +1,63 @@
+name: 'CD / Publish NPM'
+
+# Build & publish to NPM
+
+on:
+    workflow_call:
+        inputs:
+            release-type:
+                description: 'Type of release (prerelease or release)'
+                required: true
+                type: string
+            prerelease-name:
+                description: 'Name of the prerelease (e.g., alpha, beta)'
+                required: false
+                type: string
+        secrets:
+            NPM_TOKEN:
+                required: true
+
+jobs:
+    publish:
+        name: 'Build and publish'
+        runs-on: ubuntu-latest
+        steps:
+            - name: 'Checkout repository'
+              uses: actions/checkout@v5
+
+            - name: 'Setup'
+              uses: ./.github/actions/setup
+
+            - name: '[prerelease only] Increment package versions'
+              id: version
+              if: ${{ inputs.release-type == 'prerelease' }}
+              uses: ./.github/actions/increment-package-versions
+              with:
+                  releaseType: 'prerelease'
+                  prereleaseName: '${{ inputs.prerelease-name }}'
+
+            - name: 'Build libs'
+              run: yarn build:libs
+
+            - name: 'Publish version to NPM'
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+                  DIST_TAG: ${{ steps.version.outputs.distTag || 'latest' }}
+              run: |
+                  for package in $(echo packages/lumx-*);
+                  do
+                      (echo "Publishing $package"; cd $package/dist; npm publish --tag $DIST_TAG)
+                  done
+
+            - name: "[prerelease only] Deprecate older prerelease version"
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+                  PREV_VERSION: ${{ steps.version.outputs.prevDistTagVersion }}
+              if: ${{ inputs.release-type == 'prerelease' && env.PREV_VERSION }}
+              run: |
+                  packages=$(npm pkg get name -ws | egrep -o '@lumx/\w+' | uniq)
+                  for package in $packages;
+                  do
+                      echo "Deprecate ${package}@${PREV_VERSION}";
+                      npm deprecate ${package}@${PREV_VERSION} deprecated;
+                  done

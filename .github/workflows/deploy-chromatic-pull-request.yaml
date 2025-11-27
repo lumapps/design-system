@@ -1,4 +1,4 @@
-name: "Deploy chromatic pull request"
+name: "CD / Deploy chromatic pull request"
 
 on:
     pull_request:
