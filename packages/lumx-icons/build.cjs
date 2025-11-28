@@ -34,14 +34,17 @@ async function buildJSFiles() {
 
         // ESM: Create individual icon files
         promises.push(
-            fs.writeFile(path.join(distEsmPath, `${kebabName}.js`), `export const ${formattedName} = '${iconPath}';`),
+            fs.writeFile(
+                path.join(distEsmPath, `${kebabName}.js`),
+                `export const ${formattedName} = /*#__PURE__*/ '${iconPath}';`,
+            ),
         );
 
         // CJS: Add export to the list
         cjsExports.push(`exports.${formattedName} = '${iconPath}';`);
 
-        // Add to ESM index exports
-        esmIndexExports.push(`export * from './${kebabName}.js';`);
+        // Add to ESM index exports (just the main icon)
+        esmIndexExports.push(`export { ${formattedName} } from './${kebabName}.js';`);
 
         // Add type declaration to the list
         dtsDeclarations.push(`export declare const ${formattedName}: string;`);
@@ -50,11 +53,19 @@ async function buildJSFiles() {
         for (const alias of aliases) {
             const formattedAlias = formatMdiName(alias);
 
+            // ESM: Create individual alias files
+            promises.push(
+                fs.writeFile(
+                    path.join(distEsmPath, `${alias}.js`),
+                    `export { ${formattedName} as ${formattedAlias} } from './${kebabName}.js';`,
+                ),
+            );
+
+            // ESM: Add alias export to index
+            esmIndexExports.push(`export { ${formattedAlias} } from './${alias}.js';`);
+
             // CJS alias
             cjsExports.push(`exports.${formattedAlias} = exports.${formattedName};`);
-
-            // ESM alias
-            esmIndexExports.push(`export { ${formattedName} as ${formattedAlias} } from './${kebabName}.js';`);
 
             // Add alias type declaration to the list
             dtsDeclarations.push(`export { ${formattedName} as ${formattedAlias} };`);
