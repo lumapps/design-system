@@ -1,26 +1,74 @@
-name: 'CD / Publish NPM'
+name: "CD / Publish"
 
-# Build & publish to NPM
+# This workflow orchestrates the continuous delivery process for the design system.
+# It supports both official releases triggered by merges to 'master' (with a specific commit message)
+# and manual prereleases initiated via workflow_dispatch.
+#
+# For releases: it builds and publishes NPM packages, creates Git tags,
+# deploys the demo site, updates Chromatic, and generates GitHub release notes.
+#
+# For prereleases: it increments package versions, publishes them to NPM with a prerelease tag,
+# and deprecates previous prerelease versions.
+#
+# Note: Release version increments are managed by `release-prepare.yml`.
 
 on:
-    workflow_call:
+    push:
+        branches:
+            - master
+    workflow_dispatch:
         inputs:
-            release-type:
-                description: 'Type of release (prerelease or release)'
+            prereleaseName:
+                description: 'Prerelease name'
                 required: true
+                default: 'alpha'
                 type: string
-            prerelease-name:
-                description: 'Name of the prerelease (e.g., alpha, beta)'
-                required: false
-                type: string
-        secrets:
-            NPM_TOKEN:
-                required: true
+
+permissions:
+    id-token: write # Required for OIDC
+    contents: read
+
+concurrency:
+    group: "${{ github.workflow }}-${{ github.ref_name }}"
+    cancel-in-progress: true
 
 jobs:
-    publish:
-        name: 'Build and publish'
+    is_release_commit:
+        name: 'Check is release commit'
         runs-on: ubuntu-latest
+        outputs:
+            version: ${{ steps.check.outputs.version }}
+        steps:
+            - if: github.event_name == 'push'
+              name: 'Checkout repository'
+              uses: actions/checkout@v5
+              with:
+                  ref: ${{ github.event.pull_request.head.sha || env.GITHUB_SHA }}
+
+            - if: github.event_name == 'push'
+              name: 'Check is release commit'
+              id: check
+              run: |
+                  set -x # verbose
+                  message=$(git show -s --format=%s)
+                  version=$(echo $message | egrep -o '[0-9]+\.[0-9]+\.[0-9]+' || true)
+
+                  # Check is release commit has version
+                  if [[ "$message" == 'chore(release): release v'* ]] && [ -n "$version" ]; then
+                      echo "version=$version" >> "$GITHUB_OUTPUT"
+                  fi
+
+    build_publish_NPM:
+        name: 'Build & publish NPM libs'
+        needs: [is_release_commit]
+        if: github.event_name == 'workflow_dispatch' || needs.is_release_commit.outputs.version
+        permissions:
+            id-token: write # Required for OIDC
+            contents: read
+        runs-on: ubuntu-latest
+        outputs:
+            distTag: ${{ steps.version.outputs.distTag || 'latest' }}
+            prevDistTagVersion: ${{ steps.version.outputs.prevDistTagVersion }}
         steps:
             - name: 'Checkout repository'
               uses: actions/checkout@v5
@@ -28,20 +76,22 @@ jobs:
             - name: 'Setup'
               uses: ./.github/actions/setup
 
+            - name: 'Update npm' # Need npm >= v11.5 for trusted publishing
+              run: npm install -g npm@latest
+
             - name: '[prerelease only] Increment package versions'
               id: version
-              if: ${{ inputs.release-type == 'prerelease' }}
+              if: github.event_name == 'workflow_dispatch'
               uses: ./.github/actions/increment-package-versions
               with:
                   releaseType: 'prerelease'
-                  prereleaseName: '${{ inputs.prerelease-name }}'
+                  prereleaseName: '${{ inputs.prereleaseName }}'
 
             - name: 'Build libs'
               run: yarn build:libs
 
             - name: 'Publish version to NPM'
               env:
-                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
                   DIST_TAG: ${{ steps.version.outputs.distTag || 'latest' }}
               run: |
                   for package in $(echo packages/lumx-*);
@@ -49,15 +99,132 @@ jobs:
                       (echo "Publishing $package"; cd $package/dist; npm publish --tag $DIST_TAG)
                   done
 
-            - name: "[prerelease only] Deprecate older prerelease version"
-              env:
-                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-                  PREV_VERSION: ${{ steps.version.outputs.prevDistTagVersion }}
-              if: ${{ inputs.release-type == 'prerelease' && env.PREV_VERSION }}
+    git_tag:
+        name: 'Git tag release'
+        if: needs.is_release_commit.outputs.version
+        needs: [is_release_commit, build_publish_NPM]
+        runs-on: ubuntu-latest
+        outputs:
+            tag: ${{ steps.git.outputs.tag }}
+        steps:
+            - name: 'Checkout repository'
+              uses: actions/checkout@v5
+              with:
+                  token: '${{ secrets.GITBOT_TOKEN }}'
+                  fetch-depth: 0
+
+            - name: 'Git tag'
+              id: git
               run: |
-                  packages=$(npm pkg get name -ws | egrep -o '@lumx/\w+' | uniq)
-                  for package in $packages;
-                  do
-                      echo "Deprecate ${package}@${PREV_VERSION}";
-                      npm deprecate ${package}@${PREV_VERSION} deprecated;
-                  done
+                  set -x
+
+                  # Create tag
+                  tag="v${{ needs.is_release_commit.outputs.version }}"
+                  echo "tag=$tag" >> $GITHUB_OUTPUT
+                  git tag "$tag"
+
+                  # Push tag
+                  git push origin "$tag"
+
+    deploy_chromatic:
+        name: 'Deploy chromatic'
+        if: needs.is_release_commit.outputs.version
+        needs: [is_release_commit, git_tag]
+        runs-on: ubuntu-latest
+        steps:
+            - name: 'Checkout repository'
+              uses: actions/checkout@v5
+              with:
+                  fetch-depth: 0 # retrieve all the repo history (required by chromatic)
+
+            - name: 'Setup'
+              uses: ./.github/actions/setup
+
+            - name: 'Deploy chromatic'
+              uses: chromaui/action@d0795df816d05c4a89c80295303970fddd247cce #v13.1.4
+              with:
+                  token: ${{ secrets.GITHUB_TOKEN }}
+                  projectToken: ${{ secrets.CHROMATIC_TOKEN }}
+                  buildScriptName: build:storybook
+
+    deploy_demo_site:
+        name: 'Deploy demo site'
+        if: needs.is_release_commit.outputs.version
+        needs: [is_release_commit, git_tag]
+        timeout-minutes: 30
+        runs-on: ubuntu-latest
+        env:
+            GCP_PROD_REGISTRY: gcr.io/lumapps-registry
+        steps:
+            - name: 'Checkout repository'
+              uses: actions/checkout@v5
+              with:
+                  fetch-depth: 0
+
+            - name: 'Login to GCR'
+              uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
+              with:
+                  registry: gcr.io
+                  username: _json_key
+                  password: ${{ secrets.GCR_PROD_RW_CREDS }}
+
+            - name: 'Setup buildx'
+              id: buildx_setup
+              uses: docker/setup-buildx-action@8c0edbc76e98fa90f69d9a2c020dcb50019dc325
+              with:
+                  install: true
+
+            - run: |
+                  echo "git_commit=$(git rev-parse HEAD)" >> $GITHUB_ENV
+                  echo "build_date=$(date --rfc-3339=seconds)" >> $GITHUB_ENV
+                  echo "version=${{ needs.git_tag.outputs.tag }}" >> $GITHUB_ENV
+                  echo "node_version=$(cat .nvmrc)" >> $GITHUB_ENV
+
+            - name: 'Docker metadata'
+              id: meta
+              uses: docker/metadata-action@f206c36955d3cc6213c38fb3747d9ba4113e686a
+              with:
+                  tags: |
+                      type=raw,value=${{ env.version }}
+                      type=raw,value=${{ env.git_commit }}
+                  images: |
+                      ${{ env.GCP_PROD_REGISTRY }}/design-system
+                  labels: |
+                      com.lumapps.image.created=${{ env.build_date }}
+                      com.lumapps.image.sha1=${{ env.git_commit }}
+                      com.lumapps.image.authors=frontend@lumapps.com
+                      com.lumapps.image.version=${{ env.version }}
+
+            - name: 'Build image'
+              uses: docker/build-push-action@c56af957549030174b10d6867f20e78cfd7debc5
+              with:
+                  context: ./
+                  file: ./Dockerfile
+                  builder: ${{ steps.buildx_setup.outputs.name }}
+                  build-args: |
+                      version=${{ env.version }}
+                      NODE_VERSION=${{ env.node_version }}
+                  push: true
+                  tags: ${{ steps.meta.outputs.tags }}
+                  labels: ${{ steps.meta.outputs.labels }}
+                  cache-from: type=gha, scope=${{ github.workflow }}
+                  cache-to: type=gha, scope=${{ github.workflow }}, mode=max
+
+            - name: 'Deploy site'
+              env:
+                  GH_TOKEN: ${{ secrets.GITBOT_TOKEN }}
+              run: gh workflow run -R lumapps/design-system-deployment update-lumx-version.yml
+
+    create_gh_release:
+        name: 'Create release note'
+        if: needs.is_release_commit.outputs.version
+        needs: [is_release_commit, git_tag]
+        permissions:
+            contents: write
+        runs-on: ubuntu-latest
+        steps:
+            - name: 'Checkout repository'
+              uses: actions/checkout@v5
+
+            - name: 'Create release note'
+              uses: ./.github/actions/release-note
