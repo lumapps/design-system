@@ -10,7 +10,7 @@ name: "CD / Publish"
 # For prereleases: it increments package versions, publishes them to NPM with a prerelease tag,
 # and deprecates previous prerelease versions.
 #
-# Note: Release version increments are managed by `release-prepare.yml`.
+# Note: Release version increments are managed by `cd-prepare-release.yml`.
 
 on:
     push:
