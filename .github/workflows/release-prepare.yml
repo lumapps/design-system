@@ -1,4 +1,4 @@
-name: "CD / Prepare Release Workflow"
+name: "CD / Prepare Release"
 
 # Manual trigger workflow to automatically setup a new release PR (built & publish on merge)
 
