@@ -3450,8 +3450,8 @@ __metadata:
     core-js: "npm:^3.6.4"
     focus-visible: "npm:^5.0.2"
     glob: "npm:^7.1.6"
-    install-peers-cli: "npm:^2.2.0"
     jsdom: "npm:^27.2.0"
+    lodash: "npm:4.17.21"
     react: "npm:^17.0.2"
     react-dom: "npm:^17.0.2"
     react-is: "npm:>=16.13.0"
@@ -12205,15 +12205,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"executioner@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "executioner@npm:2.0.1"
-  dependencies:
-    mixly: "npm:^1.0.0"
-  checksum: 10/327d1cd4d35f622dd024fa3f168f7b50353feea102bca4ede6aed24c17f09eae0074e4b4509d19b2c65fdecd41d2687b7682987e34646bbdac2219fd0126b753
-  languageName: node
-  linkType: hard
-
 "exit-hook@npm:^1.0.0":
   version: 1.1.1
   resolution: "exit-hook@npm:1.1.1"
@@ -13072,13 +13063,6 @@ __metadata:
   dependencies:
     node-gyp: "npm:latest"
   conditions: os=darwin
-  languageName: node
-  linkType: hard
-
-"fulcon@npm:^1.0.1":
-  version: 1.0.2
-  resolution: "fulcon@npm:1.0.2"
-  checksum: 10/212a4b4d699601b91c3980bd41ff1a320dd36d9a61465d333bc3ea41d62109328f51d21a81f6cff5ba952b1dd259198502fb6bfd4a9460c515511e6ff5ce73f3
   languageName: node
   linkType: hard
 
@@ -15655,18 +15639,6 @@ __metadata:
     wrap-ansi: "npm:^6.2.0"
     yoctocolors-cjs: "npm:^2.1.2"
   checksum: 10/92d0a0f55701e05a8dd3624eab0c03c6e96de18285cefdbef4edc5c1a77c8283361700e088db275ec5d5b36c45ff9428127125d78428e07ea4c5574f55b17176
-  languageName: node
-  linkType: hard
-
-"install-peers-cli@npm:^2.2.0":
-  version: 2.2.0
-  resolution: "install-peers-cli@npm:2.2.0"
-  dependencies:
-    commander: "npm:^2.20.0"
-    executioner: "npm:^2.0.1"
-  bin:
-    install-peers: ./install.js
-  checksum: 10/5daa83098875cfa6e94d5652e472fadf961ebc3cf2f0c5e7399b5d33e2db0c4c05f620545436880cf9354d4b17d8a38af7fbb1ad4a46c7e4f78c2928ddeb37f2
   languageName: node
   linkType: hard
 
@@ -19125,15 +19097,6 @@ __metadata:
     for-in: "npm:^1.0.2"
     is-extendable: "npm:^1.0.1"
   checksum: 10/820d5a51fcb7479f2926b97f2c3bb223546bc915e6b3a3eb5d906dda871bba569863595424a76682f2b15718252954644f3891437cb7e3f220949bed54b1750d
-  languageName: node
-  linkType: hard
-
-"mixly@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "mixly@npm:1.0.0"
-  dependencies:
-    fulcon: "npm:^1.0.1"
-  checksum: 10/a8acb64803a59f8d0ecf9a4d7d0fcdc0d755290702b191682a4c3a43548df9ba97547900dd574ac49c2bd7d8546b8eb4d9970835c8630fe52cc432df4e1e4796
   languageName: node
   linkType: hard
 
