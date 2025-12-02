@@ -27,7 +27,7 @@ const input = {
     'utils/index': 'src/utils/index.ts', // => @lumx/react/utils
 };
 
-const external = [/@lumx\/core(\/*)/];
+const external = [/@lumx\/core(\/*)/, 'classnames'];
 
 // Bundle JS code
 const bundleJS = {
