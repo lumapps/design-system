@@ -28,7 +28,7 @@
         "@babel/preset-typescript": "^7.26.0",
         "@chromatic-com/storybook": "^4.1.1",
         "@rollup/plugin-babel": "^6.0.4",
-        "@rollup/plugin-commonjs": "^19.0.2",
+        "@rollup/plugin-commonjs": "^29.0.0",
         "@rollup/plugin-node-resolve": "16.0.0",
         "@storybook/addon-a11y": "^9.1.4",
         "@storybook/addon-docs": "^9.1.4",
