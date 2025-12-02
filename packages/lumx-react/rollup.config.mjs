@@ -49,7 +49,7 @@ const formatFileNames = (ext) => (info) => {
     return `[name].${ext}`;
 };
 
-const external = [/@lumx\/core(\/*)/, 'classnames'];
+const external = [/@lumx\/core(\/.*)?/, 'classnames', /@lumx\/icons(\/.*)?/];
 
 // Bundle JS code
 const bundleJS = {
