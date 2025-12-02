@@ -1,4 +1,3 @@
-import isBoolean from 'lodash/isBoolean';
 import kebabCase from 'lodash/kebabCase';
 
 /**
@@ -18,7 +17,7 @@ export function getBasicClass({
     type: string;
     value: string | number | boolean | undefined;
 }): string {
-    if (isBoolean(value)) {
+    if (typeof value === 'boolean') {
         if (!value) {
             // False value should not return a class.
             return '';
