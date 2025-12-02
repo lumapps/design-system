@@ -68,7 +68,7 @@
         "scaffold": "yo lumx-component --with-tests --with-demo",
         "setup:git-hooks": "yarn husky uninstall && yarn husky install || exit 0",
         "start": "yarn workspace lumx-site-demo start",
-        "test": "yarn workspace @lumx/react test",
+        "test": "yarn workspaces foreach -A run test",
         "type-check": "yarn tsc -p tsconfig.json",
         "storybook:react": "yarn workspace @lumx/react start:storybook",
         "storybook": "yarn storybook:react",
