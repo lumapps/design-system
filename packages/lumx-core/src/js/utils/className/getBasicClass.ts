@@ -1,4 +1,4 @@
-import kebabCase from 'lodash/kebabCase';
+import { kebabCase } from '../string/kebabCase';
 
 /**
  * Get the basic CSS class for the given type.
