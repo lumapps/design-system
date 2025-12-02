@@ -29,13 +29,13 @@ jobs:
         runs-on: ubuntu-latest
         strategy:
             matrix:
-                packageVersions: [
+                reactPackageVersions: [
                     default,
                     'react@18.3.1 react-dom@18.3.1 @testing-library/react@16.3.0',
                     'react@19.1.1 react-dom@19.1.1 @testing-library/react@16.3.0'
                 ]
         # Making sure we have a clean job name on 'default' package so that it matches the required "test" check
-        name: "test${{ matrix.packageVersions != 'default' && format(' ({0})', matrix.packageVersions) || '' }}"
+        name: "test${{ matrix.reactPackageVersions != 'default' && format(' ({0})', matrix.reactPackageVersions) || '' }}"
         steps:
             -   name: "Checkout repository"
                 uses: actions/checkout@v5
@@ -44,13 +44,18 @@ jobs:
                 uses: ./.github/actions/setup
 
             -   name: "Switch react version"
-                if: ${{ matrix.packageVersions != 'default' }}
-                run: yarn up ${{ matrix.packageVersions }}
+                if: ${{ matrix.reactPackageVersions != 'default' }}
+                run: yarn up ${{ matrix.reactPackageVersions }}
 
-            -   name: "Run unit tests"
+            -   name: "Run lumx-react tests"
                 run: |
                     sudo timedatectl set-timezone Europe/Paris
-                    yarn test
+                    yarn workspace @lumx/react test
+
+            -   name: "Run lumx-core tests"
+                if: ${{ matrix.reactPackageVersions == 'default' }}
+                run: |
+                    yarn workspace @lumx/core test
 
     type-check:
         if: github.event.pull_request.draft == false

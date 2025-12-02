@@ -30,6 +30,7 @@
     "scripts": {
         "generate:design-tokens": "yarn node style-dictionary",
         "build": "rollup -c",
+        "test": "vitest run",
         "update-version-changelog": "yarn version-changelog ../../CHANGELOG.md"
     },
     "sideEffects": false,
@@ -48,6 +49,10 @@
         "sass": "^1.54.0",
         "style-dictionary": "^3.9.0",
         "tinycolor2": "^1.4.1",
-        "version-changelog": "^3.1.1"
+        "typescript": "^5.4.3",
+        "version-changelog": "^3.1.1",
+        "vite": "^6.3.5",
+        "vite-tsconfig-paths": "^5.1.4",
+        "vitest": "^3.0.0"
     }
 }
