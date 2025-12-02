@@ -1,5 +1,5 @@
 import { CodeBlock } from '@lumx/demo/components/content/CodeBlock/CodeBlock';
-import { mdiCodeTags } from '@lumx/icons';
+import { mdiCodeTags } from '@lumx/icons/esm/code-tags';
 import {
     Alignment,
     Button,

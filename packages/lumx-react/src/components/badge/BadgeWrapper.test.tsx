@@ -1,7 +1,8 @@
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import omit from 'lodash/omit';
 
-import { mdiAccount, mdiHeart } from '@lumx/icons';
+import { mdiAccount } from '@lumx/icons/esm/account';
+import { mdiHeart } from '@lumx/icons/esm/heart';
 import { Badge, BadgeWrapper, BadgeWrapperProps, ColorPalette, Icon } from '@lumx/react';
 import { getByClassName } from '@lumx/react/testing/utils/queries';
 import { render } from '@testing-library/react';

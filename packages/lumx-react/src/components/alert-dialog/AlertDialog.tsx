@@ -14,7 +14,10 @@ import {
     Toolbar,
     ButtonProps,
 } from '@lumx/react';
-import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiInformation } from '@lumx/icons';
+import { mdiAlert } from '@lumx/icons/esm/alert';
+import { mdiAlertCircle } from '@lumx/icons/esm/alert-circle';
+import { mdiCheckCircle } from '@lumx/icons/esm/check-circle';
+import { mdiInformation } from '@lumx/icons/esm/information';
 import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';
 import { useId } from '@lumx/react/hooks/useId';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';

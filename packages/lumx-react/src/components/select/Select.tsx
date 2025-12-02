@@ -2,7 +2,10 @@ import { RefObject } from 'react';
 
 import classNames from 'classnames';
 
-import { mdiAlertCircle, mdiCheckCircle, mdiCloseCircle, mdiMenuDown } from '@lumx/icons';
+import { mdiAlertCircle } from '@lumx/icons/esm/alert-circle';
+import { mdiCheckCircle } from '@lumx/icons/esm/check-circle';
+import { mdiCloseCircle } from '@lumx/icons/esm/close-circle';
+import { mdiMenuDown } from '@lumx/icons/esm/menu-down';
 import { Emphasis, Size, Theme } from '@lumx/core/js/constants';
 import { IconButton } from '@lumx/react/components/button/IconButton';
 import { Chip } from '@lumx/react/components/chip/Chip';

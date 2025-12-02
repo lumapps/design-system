@@ -1,4 +1,7 @@
-import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiInformation } from '@lumx/icons';
+import { mdiAlert } from '@lumx/icons/esm/alert';
+import { mdiAlertCircle } from '@lumx/icons/esm/alert-circle';
+import { mdiCheckCircle } from '@lumx/icons/esm/check-circle';
+import { mdiInformation } from '@lumx/icons/esm/information';
 
 /**
  * Notification delay before hiding.

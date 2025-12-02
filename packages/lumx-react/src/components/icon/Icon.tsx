@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 
-import { mdiAlertCircle } from '@lumx/icons';
+import { mdiAlertCircle } from '@lumx/icons/esm/alert-circle';
 import { ColorPalette, ColorVariant, ColorWithVariants, Size, Theme } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses, resolveColorWithVariants } from '@lumx/core/js/utils/className';

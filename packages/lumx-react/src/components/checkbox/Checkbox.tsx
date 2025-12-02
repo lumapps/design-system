@@ -2,7 +2,8 @@ import React, { InputHTMLAttributes, ReactNode, SyntheticEvent } from 'react';
 
 import classNames from 'classnames';
 
-import { mdiCheck, mdiMinus } from '@lumx/icons';
+import { mdiCheck } from '@lumx/icons/esm/check';
+import { mdiMinus } from '@lumx/icons/esm/minus';
 
 import { Icon, InputHelper, InputLabel, Theme } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';

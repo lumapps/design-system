@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 
-import { mdiDragVertical } from '@lumx/icons';
+import { mdiDragVertical } from '@lumx/icons/esm/drag-vertical';
 import { ColorPalette, Icon, Size, Theme } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';

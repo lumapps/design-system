@@ -1,6 +1,7 @@
 import { useRef, useState, useContext } from 'react';
 
-import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
+import { mdiChevronDown } from '@lumx/icons/esm/chevron-down';
+import { mdiChevronUp } from '@lumx/icons/esm/chevron-up';
 import { Icon, Size, Text, Orientation, Popover, Placement, Theme } from '@lumx/react';
 import classNames from 'classnames';
 import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';

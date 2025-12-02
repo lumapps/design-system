@@ -2,7 +2,10 @@ import { FocusEventHandler, KeyboardEventHandler, useCallback } from 'react';
 
 import classNames from 'classnames';
 
-import { mdiAlertCircle, mdiCheckCircle, mdiRadioboxBlank, mdiRadioboxMarked } from '@lumx/icons';
+import { mdiAlertCircle } from '@lumx/icons/esm/alert-circle';
+import { mdiCheckCircle } from '@lumx/icons/esm/check-circle';
+import { mdiRadioboxBlank } from '@lumx/icons/esm/radiobox-blank';
+import { mdiRadioboxMarked } from '@lumx/icons/esm/radiobox-marked';
 import { Icon, InputHelper, InputLabel, Kind, Size } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';

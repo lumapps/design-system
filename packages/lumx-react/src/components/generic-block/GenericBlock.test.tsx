@@ -148,15 +148,7 @@ describe(`<${GenericBlock.displayName}>`, () => {
 
         it('should filter out empty children (null, undefined, false) from otherChildren', () => {
             const { content, figure, actions } = setup({
-                children: [
-                    null,
-                    undefined,
-                    false,
-                    'Valid Content',
-                    null,
-                    'Another Valid Content',
-                    undefined,
-                ],
+                children: [null, undefined, false, 'Valid Content', null, 'Another Valid Content', undefined],
             });
 
             // Content should be rendered

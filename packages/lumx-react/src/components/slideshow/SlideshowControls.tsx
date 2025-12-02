@@ -2,7 +2,10 @@ import React, { RefObject, useCallback, useMemo } from 'react';
 
 import classNames from 'classnames';
 
-import { mdiChevronLeft, mdiChevronRight, mdiPlayCircleOutline, mdiPauseCircleOutline } from '@lumx/icons';
+import { mdiChevronLeft } from '@lumx/icons/esm/chevron-left';
+import { mdiChevronRight } from '@lumx/icons/esm/chevron-right';
+import { mdiPlayCircleOutline } from '@lumx/icons/esm/play-circle-outline';
+import { mdiPauseCircleOutline } from '@lumx/icons/esm/pause-circle-outline';
 import { Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';

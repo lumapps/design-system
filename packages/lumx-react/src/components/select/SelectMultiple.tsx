@@ -2,7 +2,11 @@ import { ReactNode, RefObject, SyntheticEvent } from 'react';
 
 import classNames from 'classnames';
 
-import { mdiAlertCircle, mdiCheckCircle, mdiClose, mdiCloseCircle, mdiMenuDown } from '@lumx/icons';
+import { mdiAlertCircle } from '@lumx/icons/esm/alert-circle';
+import { mdiCheckCircle } from '@lumx/icons/esm/check-circle';
+import { mdiClose } from '@lumx/icons/esm/close';
+import { mdiCloseCircle } from '@lumx/icons/esm/close-circle';
+import { mdiMenuDown } from '@lumx/icons/esm/menu-down';
 import { Size, Theme } from '@lumx/core/js/constants';
 import { Chip } from '@lumx/react/components/chip/Chip';
 import { Icon } from '@lumx/react/components/icon/Icon';

@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { mdiMagnifyMinusOutline, mdiMagnifyPlusOutline } from '@lumx/icons';
+import { mdiMagnifyMinusOutline } from '@lumx/icons/esm/magnify-minus-outline';
+import { mdiMagnifyPlusOutline } from '@lumx/icons/esm/magnify-plus-outline';
 import { FlexBox, IconButton, Slides, SlideshowControls } from '@lumx/react';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 

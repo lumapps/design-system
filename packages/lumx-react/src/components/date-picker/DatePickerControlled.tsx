@@ -13,7 +13,8 @@ import {
     TextFieldProps,
     Toolbar,
 } from '@lumx/react';
-import { mdiChevronLeft, mdiChevronRight } from '@lumx/icons';
+import { mdiChevronLeft } from '@lumx/icons/esm/chevron-left';
+import { mdiChevronRight } from '@lumx/icons/esm/chevron-right';
 import { getMonthCalendar } from '@lumx/react/utils/date/getMonthCalendar';
 import { isSameDay } from '@lumx/react/utils/date/isSameDay';
 import { getCurrentLocale } from '@lumx/react/utils/locale/getCurrentLocale';

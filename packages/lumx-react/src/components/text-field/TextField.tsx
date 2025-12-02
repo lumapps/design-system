@@ -2,7 +2,9 @@ import { ReactNode, Ref, RefObject, SyntheticEvent, useEffect, useRef, useState 
 
 import classNames from 'classnames';
 
-import { mdiAlertCircle, mdiCheckCircle, mdiCloseCircle } from '@lumx/icons';
+import { mdiAlertCircle } from '@lumx/icons/esm/alert-circle';
+import { mdiCheckCircle } from '@lumx/icons/esm/check-circle';
+import { mdiCloseCircle } from '@lumx/icons/esm/close-circle';
 import {
     Emphasis,
     Icon,

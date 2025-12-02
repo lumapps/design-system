@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useEffect, useRef, useState } from 'react';
 
-import { mdiAccount, mdiBell } from '@lumx/icons';
+import { mdiAccount } from '@lumx/icons/esm/account';
+import { mdiBell } from '@lumx/icons/esm/bell';
 import {
     Chip,
     Emphasis,

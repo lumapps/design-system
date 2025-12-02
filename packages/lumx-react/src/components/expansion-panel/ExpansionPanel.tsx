@@ -2,7 +2,8 @@ import React, { Children, PropsWithChildren, ReactNode, useRef } from 'react';
 
 import classNames from 'classnames';
 
-import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
+import { mdiChevronDown } from '@lumx/icons/esm/chevron-down';
+import { mdiChevronUp } from '@lumx/icons/esm/chevron-up';
 
 import { ColorPalette, DragHandle, Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
 import { GenericProps, HasCloseMode, HasTheme, isComponent } from '@lumx/react/utils/type';

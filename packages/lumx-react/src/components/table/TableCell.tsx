@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 
-import { mdiArrowDown, mdiArrowUp } from '@lumx/icons';
+import { mdiArrowDown } from '@lumx/icons/esm/arrow-down';
+import { mdiArrowUp } from '@lumx/icons/esm/arrow-up';
 import { Icon, Size } from '@lumx/react';
 import { GenericProps, ValueOf } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';

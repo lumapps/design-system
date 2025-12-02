@@ -2,7 +2,7 @@ import { RefObject, useRef, useEffect, AriaAttributes } from 'react';
 
 import classNames from 'classnames';
 
-import { mdiClose } from '@lumx/icons';
+import { mdiClose } from '@lumx/icons/esm/close';
 import { HeadingLevelProvider, IconButton, IconButtonProps } from '@lumx/react';
 import { DIALOG_TRANSITION_DURATION, DOCUMENT } from '@lumx/react/constants';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';

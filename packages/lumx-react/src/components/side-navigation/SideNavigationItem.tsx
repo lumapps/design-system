@@ -2,7 +2,8 @@ import { Children, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
-import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
+import { mdiChevronDown } from '@lumx/icons/esm/chevron-down';
+import { mdiChevronUp } from '@lumx/icons/esm/chevron-up';
 import { Emphasis, Icon, Size, IconButton, IconButtonProps } from '@lumx/react';
 import { GenericProps, HasCloseMode, isComponent } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';

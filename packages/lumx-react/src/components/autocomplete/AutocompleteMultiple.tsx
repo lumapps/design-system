@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 import classNames from 'classnames';
 
-import { mdiClose } from '@lumx/icons';
+import { mdiClose } from '@lumx/icons/esm/close';
 
 import { Autocomplete, AutocompleteProps, Chip, HorizontalAlignment, Icon, Size } from '@lumx/react';
 import { getRootClassName } from '@lumx/core/js/utils/className';

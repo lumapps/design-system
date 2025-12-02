@@ -53,6 +53,7 @@ module.exports = {
         'import/no-unresolved': 'off',
         'import/prefer-default-export': 'off',
         'lumapps/do-not-import-all-lodash': 2,
+        'lumapps/prefer-direct-icon-import': 2,
         'no-continue': 'off',
         'no-plusplus': [
             'error',

@@ -5,7 +5,7 @@ import { withCombinations } from '@lumx/react/stories/decorators/withCombination
 import { withUndefined } from '@lumx/react/stories/controls/withUndefined';
 import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
 import { castArray } from '@lumx/core/js/utils/collection/castArray';
-import { mdiAtom } from '@lumx/icons';
+import { mdiAtom } from '@lumx/icons/esm/atom';
 import mergeWith from 'lodash/fp/mergeWith';
 import { FlexBox } from './FlexBox';
 
