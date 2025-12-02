@@ -49,8 +49,8 @@
         "core-js": "^3.6.4",
         "focus-visible": "^5.0.2",
         "glob": "^7.1.6",
-        "install-peers-cli": "^2.2.0",
         "jsdom": "^27.2.0",
+        "lodash": "4.17.21",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
         "rollup": "3.29.5",
@@ -93,7 +93,6 @@
     },
     "scripts": {
         "build": "rollup -c",
-        "prepare": "install-peers || exit 0",
         "test": "vitest run",
         "start:storybook": "storybook dev -p 9000",
         "build:storybook": "storybook build"
