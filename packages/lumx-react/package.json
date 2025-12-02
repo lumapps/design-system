@@ -45,15 +45,12 @@
         "@types/react-is": "^17.0.2",
         "@vitest/ui": "^3.0.0",
         "autoprefixer": "^9.7.4",
-        "babel-loader": "^8.0.6",
         "chromatic": "^13.1.4",
         "core-js": "^3.6.4",
         "focus-visible": "^5.0.2",
         "glob": "^7.1.6",
         "install-peers-cli": "^2.2.0",
-        "is-ci": "^2.0.0",
         "jsdom": "^27.2.0",
-        "node-notifier": "^10.0.1",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
         "rollup": "3.29.5",
@@ -67,8 +64,7 @@
         "typescript": "^5.4.3",
         "vite": "^6.3.5",
         "vite-tsconfig-paths": "^5.1.4",
-        "vitest": "^3.0.0",
-        "yargs": "^15.4.1"
+        "vitest": "^3.0.0"
     },
     "peerDependencies": {
         "lodash": "4.17.21",
