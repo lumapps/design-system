@@ -14,6 +14,5 @@ export default defineConfig({
         include: ['src/**/*.{test,spec}.{ts,tsx}'],
         exclude: ['src/**/*.stories.tsx'],
     },
-    // @ts-expect-error seems that the error is not relevant
     plugins: [tsconfigPaths()],
 });
