@@ -3387,6 +3387,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@lumx/lumx@workspace:."
   dependencies:
+    "@vitest/ui": "npm:^3.0.0"
     changelog-verify: "npm:^1.1.2"
     es-abstract: "npm:1.17.6"
     eslint: "npm:^8.57.0"
@@ -3401,6 +3402,7 @@ __metadata:
     stylelint-config-recess-order: "npm:^3.0.0"
     stylelint-config-standard-scss: "npm:^5.0.0"
     typescript: "npm:^5.4.3"
+    vitest: "npm:^3.0.0"
     yo: "npm:^5.1.0"
   languageName: unknown
   linkType: soft
