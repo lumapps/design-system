@@ -20,7 +20,7 @@ import { mdiFoodApple } from '@lumx/icons';
 import { LANDSCAPE_IMAGES } from '@lumx/react/stories/controls/image';
 
 export default {
-    title: 'LumX components/DisabledStateProvider',
+    title: 'utils/disabled/DisabledStateProvider',
     component: DisabledStateProvider,
     argTypes: {
         state: getSelectArgType(['disabled', undefined]),
