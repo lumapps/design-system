@@ -1,7 +1,7 @@
 import path from 'path';
 import sass from 'sass';
 import fs from 'fs/promises';
-import typescript from "@rollup/plugin-typescript";
+import typescript from '@rollup/plugin-typescript';
 import cleaner from 'rollup-plugin-cleaner';
 import copy from 'rollup-plugin-copy';
 import glob from 'glob';
@@ -16,31 +16,6 @@ const __dirname = path.dirname(importUrl.pathname);
 const ROOT_PATH = path.resolve(__dirname, '..', '..');
 const DIST_PATH = path.resolve(__dirname, pkg.publishConfig.directory);
 const SRC_PATH = path.resolve(__dirname, 'src');
-
-// Custom SASS build to handle import of "sass-mq"
-const sassPlugin = (input) => ({
-    name: 'sass-builder',
-    async buildEnd() {
-        const customImporter = {
-            findFileUrl: (url) => new URL(import.meta.resolve(url)),
-        };
-
-        const { css } = await sass.compileAsync(input, {
-            style: 'expanded',
-            importers: [customImporter],
-        });
-
-        const { name } = path.parse(input);
-        const outputPath = path.resolve(DIST_PATH, `${name}.css`);
-
-        await fs.mkdir(path.dirname(outputPath), { recursive: true });
-
-        const { css: postProcess } = await postcss(CONFIGS.postcss.plugins).process(css, { from: undefined });
-        await fs.writeFile(outputPath, postProcess);
-        console.log(`${path.relative(__dirname, input)} → ${path.relative(__dirname, DIST_PATH)}`);
-    },
-});
-
 
 export default {
     // Bundle all TS files
@@ -60,7 +35,6 @@ export default {
     ].map((dependency) => new RegExp(`^${dependency}(/.*)?`)),
     plugins: [
         cleaner({ targets: [DIST_PATH] }),
-        sassPlugin('src/scss/lumx.scss'),
         typescript({
             compilerOptions: {
                 declaration: true,
@@ -80,6 +54,30 @@ export default {
                 { src: path.join(__dirname, 'src/{scss,css}'), dest: DIST_PATH },
             ],
         }),
+        /**
+         * Custom SASS to CSS builder plugin to handle `sass-mq` and a custom SCSS entry point not imported via JS/TS
+         */
+        {
+            name: 'sass-builder',
+            async buildEnd() {
+                const input = 'src/scss/lumx.scss';
+                const { css } = await sass.compileAsync(input, {
+                    style: 'expanded',
+                    importers: [{
+                        findFileUrl: (url) => new URL(import.meta.resolve(url)),
+                    }],
+                });
+
+                const { name } = path.parse(input);
+                const outputPath = path.resolve(DIST_PATH, `${name}.css`);
+
+                await fs.mkdir(path.dirname(outputPath), { recursive: true });
+
+                const { css: postProcess } = await postcss(CONFIGS.postcss.plugins).process(css, { from: undefined });
+                await fs.writeFile(outputPath, postProcess);
+                console.log(`${path.relative(__dirname, input)} → ${path.relative(__dirname, DIST_PATH)}`);
+            },
+        },
     ],
 };
 
