@@ -29,6 +29,7 @@ export * from './components/icon';
 export * from './components/image-block';
 export * from './components/image-lightbox';
 export * from './components/inline-list';
+export * from './components/input';
 export * from './components/input-helper';
 export * from './components/input-label';
 export * from './components/lightbox';

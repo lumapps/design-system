@@ -52,7 +52,8 @@ describe(`<${TextField.displayName}>`, () => {
 
     describe('Render', () => {
         it('should render defaults', () => {
-            const { element, inputNative } = setup({ id: 'fixedId' });
+            const inputRef = React.createRef<HTMLInputElement>();
+            const { element, inputNative } = setup({ id: 'fixedId', inputRef });
             expect(element).toBeInTheDocument();
 
             expect(element).not.toHaveClass(`${CLASSNAME}--is-valid`);
@@ -65,13 +66,16 @@ describe(`<${TextField.displayName}>`, () => {
 
             expect(element).toHaveClass(`${CLASSNAME}--theme-light`);
             expect(inputNative.tagName).toBe('INPUT');
+            expect(inputRef.current).toBe(inputNative);
         });
 
         it('should render textarea', () => {
-            const { element, inputNative } = setup({ id: 'fixedId', multiline: true });
+            const inputRef = React.createRef<HTMLTextAreaElement>();
+            const { element, inputNative } = setup({ id: 'fixedId', multiline: true, inputRef });
             expect(element).toBeInTheDocument();
 
             expect(inputNative.tagName).toBe('TEXTAREA');
+            expect(inputRef.current).toBe(inputNative);
         });
     });
 
@@ -174,6 +178,8 @@ describe(`<${TextField.displayName}>`, () => {
             expect(error).toHaveTextContent('error');
             expect(helper).toHaveTextContent('helper');
             expect(inputNative).toHaveAttribute('aria-describedby', expect.stringContaining('aria-description'));
+            expect(inputNative).toHaveAttribute('aria-describedby', expect.stringContaining('text-field-error-'));
+            expect(inputNative).toHaveAttribute('aria-describedby', expect.stringContaining('text-field-helper-'));
         });
     });
 
