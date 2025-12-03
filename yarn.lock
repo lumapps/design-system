@@ -23575,6 +23575,14 @@ __metadata:
   languageName: node
   linkType: hard
 
+"rollup-plugin-optimize-imports-lumx-icons@workspace:dev-packages/rollup-plugin-optimize-imports-lumx-icons":
+  version: 0.0.0-use.local
+  resolution: "rollup-plugin-optimize-imports-lumx-icons@workspace:dev-packages/rollup-plugin-optimize-imports-lumx-icons"
+  dependencies:
+    magic-string: "npm:^0.30.0"
+  languageName: unknown
+  linkType: soft
+
 "rollup-plugin-peer-deps-external@npm:^2.2.4":
   version: 2.2.4
   resolution: "rollup-plugin-peer-deps-external@npm:2.2.4"

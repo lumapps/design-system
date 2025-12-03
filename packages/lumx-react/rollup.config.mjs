@@ -8,6 +8,7 @@ import copy from 'rollup-plugin-copy';
 import dts from 'rollup-plugin-dts';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import { tsPathsResolve } from 'rollup-plugin-ts-paths-resolve';
+import optimizeImportsLumxIcons from 'rollup-plugin-optimize-imports-lumx-icons';
 
 import pkg from './package.json' with { type: 'json' };
 
@@ -50,6 +51,8 @@ const bundleJS = {
         analyze(),
         /** Resolve tsconfig paths. */
         tsPathsResolve(),
+        /** Transform @lumx/icons imports to direct ESM imports. */
+        optimizeImportsLumxIcons(),
         /** Resolve source files. */
         nodeResolve({ browser: true, extensions }),
         /** Resolve commonjs dependencies. */
