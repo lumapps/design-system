@@ -1,1 +1,0 @@
-../../../../../site-demo/content/product/components/text-field/react/character-counter.tsx

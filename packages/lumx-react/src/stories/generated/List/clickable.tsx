@@ -1,1 +1,0 @@
-../../../../../site-demo/content/product/components/list/react/clickable.tsx

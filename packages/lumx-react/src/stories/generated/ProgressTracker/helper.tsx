@@ -1,1 +1,0 @@
-../../../../../site-demo/content/product/components/progress-tracker/react/helper.tsx

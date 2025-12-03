@@ -1,1 +1,0 @@
-../../../../../site-demo/content/product/components/switch/react/default.tsx
