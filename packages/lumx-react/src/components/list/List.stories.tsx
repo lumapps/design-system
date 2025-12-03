@@ -77,7 +77,6 @@ export const KeyboardNavigation = ({
             </List>
             <pre>{`
                 When focused:
-                arrow up/down to move focus on list item
                 tab/shift+tab to move focus on list item AND outside the list
             `}</pre>
         </>
