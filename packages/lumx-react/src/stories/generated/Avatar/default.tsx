@@ -1,1 +1,0 @@
-../../../../../site-demo/content/product/components/avatar/react/default.tsx

@@ -1,1 +1,0 @@
-../../../../../site-demo/content/product/components/image-lightbox/react/default.tsx

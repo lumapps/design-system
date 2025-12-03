@@ -1,1 +1,0 @@
-../../../../../site-demo/content/product/components/comment-block/react/default.tsx
