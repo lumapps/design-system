@@ -1,9 +1,7 @@
-import { babel } from "@rollup/plugin-babel";
-import { nodeResolve } from "@rollup/plugin-node-resolve";
 import path from 'path';
 import sass from 'sass';
 import fs from 'fs/promises';
-import commonjs from '@rollup/plugin-commonjs';
+import typescript from "@rollup/plugin-typescript";
 import cleaner from 'rollup-plugin-cleaner';
 import copy from 'rollup-plugin-copy';
 import glob from 'glob';
@@ -17,7 +15,7 @@ const __dirname = path.dirname(importUrl.pathname);
 
 const ROOT_PATH = path.resolve(__dirname, '..', '..');
 const DIST_PATH = path.resolve(__dirname, pkg.publishConfig.directory);
-const extensions = ['.js', '.ts'];
+const SRC_PATH = path.resolve(__dirname, 'src');
 
 // Custom SASS build to handle import of "sass-mq"
 const sassPlugin = (input) => ({
@@ -63,12 +61,15 @@ export default {
     plugins: [
         cleaner({ targets: [DIST_PATH] }),
         sassPlugin('src/scss/lumx.scss'),
-        nodeResolve({ browser: true, extensions }),
-        commonjs({ include: /node_modules/ }),
-        babel({
-            extensions,
-            exclude: /node_modules/,
-            presets: ['@babel/preset-typescript'],
+        typescript({
+            compilerOptions: {
+                declaration: true,
+                rootDir: SRC_PATH,
+                outDir: DIST_PATH,
+                target: 'ESNext',
+                module: 'ESNext',
+            },
+            exclude: ['**/*.test.*'],
         }),
         copy({
             targets: [
@@ -76,7 +77,7 @@ export default {
                 { src: path.join(ROOT_PATH, 'LICENSE.md'), dest: DIST_PATH },
                 { src: path.join(__dirname, 'README.md'), dest: DIST_PATH },
                 { src: path.join(__dirname, 'package.json'), dest: DIST_PATH },
-                { src: path.join(__dirname, 'src/*'), dest: DIST_PATH },
+                { src: path.join(__dirname, 'src/{scss,css}'), dest: DIST_PATH },
             ],
         }),
     ],
