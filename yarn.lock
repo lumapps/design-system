@@ -3385,7 +3385,6 @@ __metadata:
     "@types/lodash": "npm:^4.14.149"
     "@types/react": "npm:^17.0.2"
     "@types/react-dom": "npm:^17.0.2"
-    "@types/react-is": "npm:^17.0.2"
     "@vitest/ui": "npm:^3.0.0"
     autoprefixer: "npm:^9.7.4"
     body-scroll-lock: "npm:^3.1.5"
@@ -3397,7 +3396,6 @@ __metadata:
     lodash: "npm:4.17.21"
     react: "npm:^17.0.2"
     react-dom: "npm:^17.0.2"
-    react-is: "npm:>=16.13.0"
     react-popper: "npm:^2.2.4"
     rollup: "npm:3.29.5"
     rollup-plugin-analyzer: "npm:^4.0.0"
@@ -5395,15 +5393,6 @@ __metadata:
   dependencies:
     "@types/react": "npm:*"
   checksum: 10/90a24a99e1a5f090575445139dd902b8915d4405f097818fdd31847e986a1e0dc8e0361a08366d285f9bbe9e0c013a4f06fc6b4da2d577a22b76086eefde4087
-  languageName: node
-  linkType: hard
-
-"@types/react-is@npm:^17.0.2":
-  version: 17.0.7
-  resolution: "@types/react-is@npm:17.0.7"
-  dependencies:
-    "@types/react": "npm:^17"
-  checksum: 10/a8f11067795dbcf54a54d5fdc1977816be155fd04051e850f7c85dbbad83897f846dd3e474d56bd12a7055e0ae1825185f41c6f56342fd5cd31a08df3b3fbfff
   languageName: node
   linkType: hard
 
@@ -22403,13 +22392,6 @@ __metadata:
   peerDependencies:
     react: ">=16.3.0"
   checksum: 10/eff25231384bb0a229870a0552839953a59af17f0ff5e8bca1b8c8fdf19a329e4c00c7fa2fcedc8be5d73f5c7bebb30cf9a32ea58efc7c8f726a10dba51f48a2
-  languageName: node
-  linkType: hard
-
-"react-is@npm:>=16.13.0":
-  version: 18.2.0
-  resolution: "react-is@npm:18.2.0"
-  checksum: 10/200cd65bf2e0be7ba6055f647091b725a45dd2a6abef03bf2380ce701fd5edccee40b49b9d15edab7ac08a762bf83cb4081e31ec2673a5bfb549a36ba21570df
   languageName: node
   linkType: hard
 
