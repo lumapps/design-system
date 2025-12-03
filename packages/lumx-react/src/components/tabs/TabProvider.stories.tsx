@@ -11,7 +11,7 @@ import times from 'lodash/times';
 import { useState } from 'react';
 
 export default {
-    title: 'LumX components/tabs',
+    title: 'LumX components/tabs/TabProvider',
     decorators: [withNestedProps()],
     parameters: { controls: { sort: 'alpha' } },
 };
@@ -106,7 +106,7 @@ export const Controlled = {
             </>
         );
     },
-    chromatic: { disable: true },
+    parameters: { chromatic: { disable: true } },
 };
 
 /* Display tabs far from their tab panels. */
@@ -141,7 +141,7 @@ export const SplitTabListAndTabPanels = {
             </TabProvider>
         );
     },
-    chromatic: { disable: true },
+    parameters: { chromatic: { disable: true } },
 };
 
 /* Dynamically generate tabs. */
@@ -166,5 +166,5 @@ export const DynamicTabs = {
     args: {
         tabCount: 3,
     },
-    chromatic: { disable: true },
+    parameters: { chromatic: { disable: true } },
 };

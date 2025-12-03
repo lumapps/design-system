@@ -45,10 +45,10 @@ export const FullFeatured = {
         <CommentBlock
             {...props}
             actions={[
-                <Button emphasis="low" size="s" leftIcon={mdiHeart}>
+                <Button key="1" emphasis="low" size="s" leftIcon={mdiHeart}>
                     24 likes
                 </Button>,
-                <Button emphasis="low" size="s" leftIcon={mdiReply}>
+                <Button key="2" emphasis="low" size="s" leftIcon={mdiReply}>
                     Reply
                 </Button>,
             ]}
@@ -75,12 +75,14 @@ export const Thread = {
         isOpen: true,
         children: [
             <CommentBlock
+                key="1"
                 avatarProps={{ image: AVATAR_IMAGES.avatar2, alt: '' }}
                 name="John Doe"
                 date="5 days ago"
                 text={loremIpsum('tiny')}
             />,
             <CommentBlock
+                key="2"
                 avatarProps={{ image: AVATAR_IMAGES.avatar4, alt: '' }}
                 name="Jane Doe"
                 date="5 days ago"
