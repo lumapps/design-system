@@ -1,14 +1,17 @@
 import { mdiBullhornOutline } from '@lumx/icons';
 import { List, ListItem, Select, Size, TextField } from '@lumx/react';
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
-import noop from 'lodash/noop';
-import range from 'lodash/range';
 import { SyntheticEvent, useState } from 'react';
+import { range } from '@lumx/core/js/utils/collection/range';
 import { SelectVariant } from './constants';
 
 export default {
     title: 'LumX components/select/Select',
     component: Select,
+    argTypes: {
+        onInputClick: { action: true },
+        onDropdownClose: { action: true },
+    },
 };
 
 const CHOICES = ['First item', 'Second item', 'Third item'];
@@ -114,8 +117,8 @@ export const DisabledSelect = () => {
             value=""
             label="My select"
             placeholder="Placeholder"
-            onInputClick={noop}
-            onDropdownClose={noop}
+            onInputClick={onInputClick}
+            onDropdownClose={onDropdownClose}
             isDisabled
         >
             <List isClickable>
@@ -202,7 +205,7 @@ export const SelectWithAnotherField = () => {
 
     return (
         <>
-            <TextField value="myvalue" label="I am the label" placeholder="ex: A value" onChange={noop} />
+            <TextField value="myvalue" label="I am the label" placeholder="ex: A value" onChange={() => {}} />
             <Select
                 style={{ width: '100%' }}
                 isOpen={isOpen}

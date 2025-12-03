@@ -1,10 +1,10 @@
 /* eslint-disable react/display-name */
-import range from 'lodash/range';
 
 import { GridColumn, GridColumnProps } from '@lumx/react/components/grid-column/GridColumn';
 import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
 import { Size } from '@lumx/react';
 import { loremIpsum } from '@lumx/react/stories/utils/lorem';
+import { range } from '@lumx/core/js/utils/collection/range';
 
 const genericBlockStyle = { border: '1px solid red', padding: '2px 8px' };
 

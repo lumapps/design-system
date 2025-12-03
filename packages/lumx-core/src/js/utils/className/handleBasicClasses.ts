@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 
-import isBoolean from 'lodash/isBoolean';
-import isEmpty from 'lodash/isEmpty';
+import { isEmpty } from '@lumx/core/js/utils/collection/isEmpty';
 
 import { getBasicClass } from './getBasicClass';
 
@@ -34,9 +33,8 @@ export function handleBasicClasses({ prefix, ...props }: { prefix: string; [prop
     const otherClasses: any = {};
     if (!isEmpty(props)) {
         Object.keys(props).forEach((prop) => {
-            otherClasses[getBasicClass({ prefix, type: prop, value: props[prop] })] = isBoolean(props[prop])
-                ? props[prop]
-                : !_isEmpty(props[prop]);
+            otherClasses[getBasicClass({ prefix, type: prop, value: props[prop] })] =
+                typeof props[prop] === 'boolean' ? props[prop] : !_isEmpty(props[prop]);
         });
     }
 

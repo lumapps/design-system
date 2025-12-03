@@ -1,12 +1,10 @@
 import React, { Children, ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
-import isEmpty from 'lodash/isEmpty';
-import noop from 'lodash/noop';
 
 import { Comp, isComponentType } from '@lumx/react/utils/type';
 import { getRootClassName } from '@lumx/core/js/utils/className';
-import { partitionMulti } from '@lumx/react/utils/partitionMulti';
+import { partitionMulti } from '@lumx/core/js/utils/collection/partitionMulti';
 import { Orientation, Size, FlexBox, FlexBoxProps } from '@lumx/react';
 import { GenericBlockGapSize } from '@lumx/react/components/generic-block/constants';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
@@ -101,13 +99,13 @@ interface GenericBlock extends BaseGenericBlock {
     Actions: Comp<GenericBlockSectionProps>;
 }
 
-const Figure = noop.bind({}) as Comp<FlexBoxProps>;
+const Figure = (() => {}) as unknown as Comp<FlexBoxProps>;
 const isFigure = isComponentType(Figure);
 
-const Content = noop.bind({}) as Comp<FlexBoxProps>;
+const Content = (() => {}) as unknown as Comp<FlexBoxProps>;
 const isContent = isComponentType(Content);
 
-const Actions = noop.bind({}) as Comp<FlexBoxProps>;
+const Actions = (() => {}) as unknown as Comp<FlexBoxProps>;
 const isActions = isComponentType(Actions);
 
 /**
@@ -148,7 +146,7 @@ const BaseGenericBlock: BaseGenericBlock = forwardRef((props, ref) => {
             contentChildProps: (contentChild as ReactElement)?.props,
             actionsChild,
             actionsChildProps: (actionsChild as ReactElement)?.props,
-            otherChildren: otherChildren.filter((child) => !isEmpty(child)),
+            otherChildren: otherChildren.filter((child) => React.Children.count(child) > 0),
         };
     }, [children]);
 

@@ -15,7 +15,6 @@ import {
 } from '@lumx/react';
 
 import classNames from 'classnames';
-import isFunction from 'lodash/isFunction';
 import { useState } from 'react';
 
 import './DemoBlock.scss';
@@ -75,7 +74,7 @@ export const DemoBlock: React.FC<DemoBlockProps> = ({
                         Could not load demo <code>{demo}</code>.
                     </span>
                 )}
-                {isFunction(children) ? children({ theme }) : children}
+                {typeof children === 'function' ? children({ theme }) : children}
             </FlexBox>
             {(!alwaysShowCode || withThemeSwitcher) && (
                 <div className="demo-block__toolbar">

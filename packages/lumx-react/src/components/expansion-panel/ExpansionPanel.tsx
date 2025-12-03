@@ -4,14 +4,13 @@ import classNames from 'classnames';
 
 import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
 
-import isEmpty from 'lodash/isEmpty';
-
 import { ColorPalette, DragHandle, Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
 import { GenericProps, HasCloseMode, HasTheme, isComponent } from '@lumx/react/utils/type';
 import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';
-import { partitionMulti } from '@lumx/react/utils/partitionMulti';
+import { partitionMulti } from '@lumx/core/js/utils/collection/partitionMulti';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { isEmpty } from '@lumx/core/js/utils/collection/isEmpty';
 import { IS_BROWSER } from '@lumx/react/constants';
 
 /**
@@ -92,11 +91,12 @@ export const ExpansionPanel = forwardRef<ExpansionPanelProps, HTMLDivElement>((p
 
     // Either take the header in children or create one with the label.
     const headerProps: PropsWithChildren<any> = React.isValidElement(header) ? header.props : {};
-    const headerContent = !isEmpty(headerProps.children) ? (
-        headerProps.children
-    ) : (
-        <span className={`${CLASSNAME}__label`}>{label}</span>
-    );
+    const headerContent =
+        React.Children.count(headerProps.children) > 0 ? (
+            headerProps.children
+        ) : (
+            <span className={`${CLASSNAME}__label`}>{label}</span>
+        );
 
     const toggleOpen = (event: React.MouseEvent) => {
         const shouldOpen = !isOpen;
@@ -118,7 +118,7 @@ export const ExpansionPanel = forwardRef<ExpansionPanelProps, HTMLDivElement>((p
         className,
         handleBasicClasses({
             hasBackground,
-            hasHeader: Boolean(!isEmpty(headerProps.children)),
+            hasHeader: !isEmpty(headerProps.children),
             hasHeaderDivider,
             isClose: !isOpen,
             isDraggable: Boolean(dragHandle),

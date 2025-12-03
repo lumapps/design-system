@@ -1,8 +1,8 @@
 import { Alignment, Divider, ExpansionPanel, Grid, GridItem, Heading } from '@lumx/react';
 import partition from 'lodash/partition';
-import castArray from 'lodash/castArray';
 import orderBy from 'lodash/orderBy';
 import { Fragment, ReactNode, useState } from 'react';
+import { castArray } from '@lumx/core/js/utils/collection/castArray';
 
 import './PropTable.scss';
 

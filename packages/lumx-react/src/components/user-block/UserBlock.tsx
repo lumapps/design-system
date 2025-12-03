@@ -1,8 +1,5 @@
 import React, { ReactNode } from 'react';
-
 import classNames from 'classnames';
-import isEmpty from 'lodash/isEmpty';
-import set from 'lodash/set';
 
 import { Avatar, ColorPalette, Link, Orientation, Size, Theme } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
@@ -114,7 +111,7 @@ export const UserBlock = forwardRef<UserBlockProps, HTMLDivElement>((props, ref)
     const isClickable = !!onClick || isLink;
 
     const nameBlock: ReactNode = React.useMemo(() => {
-        if (isEmpty(name)) {
+        if (!name) {
             return null;
         }
         let NameComponent: any = 'span';
@@ -131,12 +128,8 @@ export const UserBlock = forwardRef<UserBlockProps, HTMLDivElement>((props, ref)
                 color: ColorPalette.dark,
             });
         }
-        // Disable avatar focus since the name block is the same link / same button.
-        if (avatarProps) {
-            set(avatarProps, ['thumbnailProps', 'tabIndex'], -1);
-        }
         return <NameComponent {...nProps}>{name}</NameComponent>;
-    }, [avatarProps, isClickable, linkAs, linkProps, name, nameProps, onClick]);
+    }, [isClickable, linkAs, linkProps, name, nameProps, onClick]);
 
     const shouldDisplayFields = componentSize !== Size.s && componentSize !== Size.xs;
 
@@ -171,6 +164,11 @@ export const UserBlock = forwardRef<UserBlockProps, HTMLDivElement>((props, ref)
                     size={componentSize}
                     onClick={onClick}
                     theme={theme}
+                    thumbnailProps={{
+                        ...avatarProps?.thumbnailProps,
+                        // Disable avatar focus since the name block is the same link / same button.
+                        tabIndex: avatarProps ? -1 : undefined,
+                    }}
                 />
             )}
             {(fields || name || children || additionalFields) && (

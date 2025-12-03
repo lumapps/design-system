@@ -4,7 +4,6 @@ import { isClickable } from '@lumx/react/components/list/ListItem';
 import { isComponent } from '@lumx/react/utils/type';
 import { flattenChildren } from '@lumx/react/utils/react/flattenChildren';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
-import get from 'lodash/get';
 import {
     cloneElement,
     Key,
@@ -147,7 +146,7 @@ export const useInteractiveList: useInteractiveList = (options) => {
             setActiveItemIndex(nextIndex);
             evt.preventDefault();
             evt.stopPropagation();
-            onListItemNavigated?.(nextIndex, get(items, [nextIndex, 'key']));
+            onListItemNavigated?.(nextIndex, (items[nextIndex] as ReactElement)?.key);
         };
 
         /**

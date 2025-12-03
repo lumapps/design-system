@@ -1,7 +1,6 @@
 import { Children, InputHTMLAttributes, SyntheticEvent } from 'react';
 
 import classNames from 'classnames';
-import isEmpty from 'lodash/isEmpty';
 
 import { Alignment, InputHelper, InputLabel, Theme } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
@@ -130,7 +129,7 @@ export const Switch = forwardRef<SwitchProps, HTMLDivElement>((props, ref) => {
                     <InputLabel htmlFor={inputId} theme={theme} className={`${CLASSNAME}__label`}>
                         {children}
                     </InputLabel>
-                    {!isEmpty(helper) && (
+                    {helper && (
                         <InputHelper id={`${inputId}-helper`} theme={theme} className={`${CLASSNAME}__helper`}>
                             {helper}
                         </InputHelper>

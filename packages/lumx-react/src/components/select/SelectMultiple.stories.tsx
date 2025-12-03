@@ -13,11 +13,13 @@ import {
     Toolbar,
 } from '@lumx/react';
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
-import noop from 'lodash/noop';
 import { MouseEventHandler, SyntheticEvent, useRef, useState } from 'react';
 import { SelectVariant } from './constants';
 
-export default { title: 'LumX components/select/Select Multiple' };
+export default {
+    title: 'LumX components/select/Select Multiple',
+    argTypes: { onClear: { action: true }, onInputClick: { action: true }, onDropdownClose: { action: true } },
+};
 
 const PLACEHOLDER = 'Select values';
 const LABEL = 'Select label';
@@ -80,12 +82,12 @@ export const SelectMultipleWithNoData = () => {
         <SelectMultiple
             isOpen
             value={[]}
-            onClear={noop}
+            onClear={onClear}
             clearButtonProps={{ label: 'Clear' }}
             label="Select label"
             placeholder="Select values"
-            onInputClick={noop}
-            onDropdownClose={noop}
+            onInputClick={onInputClick}
+            onDropdownClose={onDropdownClose}
         >
             <List isClickable>
                 <ListItem key={0} size={Size.tiny}>
@@ -101,12 +103,12 @@ export const DisabledSelectMultiple = () => {
         <SelectMultiple
             isOpen
             value={[]}
-            onClear={noop}
+            onClear={onClear}
             clearButtonProps={{ label: 'Clear' }}
             label="Select label"
             placeholder="Select values"
-            onInputClick={noop}
-            onDropdownClose={noop}
+            onInputClick={onInputClick}
+            onDropdownClose={onDropdownClose}
             isDisabled
         />
     );

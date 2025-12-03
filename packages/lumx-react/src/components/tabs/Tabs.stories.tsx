@@ -6,7 +6,6 @@ import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
 import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
 import { toFlattenProps } from '@lumx/react/stories/utils/toFlattenProps';
 import { withCategory } from '@lumx/react/stories/utils/withCategory';
-import get from 'lodash/get';
 import times from 'lodash/times';
 import { useState } from 'react';
 
@@ -63,13 +62,13 @@ export const Default = {
 export const Controlled = {
     render() {
         const [activeTab, setActiveTab] = useState(1);
-        const changeActiveTabIndex = (evt: any) => setActiveTab(parseInt(get(evt, 'target.value', '0'), 10));
+        const changeActiveTabIndex = (evt: any) => setActiveTab(parseInt(evt.target.value || 0, 10));
 
         const [isLazy, setIsLazy] = useState(true);
-        const changeIsLazy = (evt: any) => setIsLazy(get(evt, 'target.checked'));
+        const changeIsLazy = (evt: any) => setIsLazy(evt.target.checked);
 
         const [shouldActivateOnFocus, setShouldActivateOnFocus] = useState(true);
-        const changeShouldActivateOnFocus = (evt: any) => setShouldActivateOnFocus(get(evt, 'target.checked'));
+        const changeShouldActivateOnFocus = (evt: any) => setShouldActivateOnFocus(evt.target.checked);
 
         return (
             <>

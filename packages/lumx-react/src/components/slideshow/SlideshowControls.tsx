@@ -1,7 +1,6 @@
 import React, { RefObject, useCallback, useMemo } from 'react';
 
 import classNames from 'classnames';
-import range from 'lodash/range';
 
 import { mdiChevronLeft, mdiChevronRight, mdiPlayCircleOutline, mdiPauseCircleOutline } from '@lumx/icons';
 import { Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
@@ -13,6 +12,7 @@ import { useRovingTabIndex } from '@lumx/react/hooks/useRovingTabIndex';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
+import { range } from '@lumx/core/js/utils/collection/range';
 import { useSwipeNavigate } from './useSwipeNavigate';
 import { PAGINATION_ITEM_SIZE, PAGINATION_ITEMS_MAX } from './constants';
 import { usePaginationVisibleRange } from './usePaginationVisibleRange';

@@ -1,5 +1,4 @@
-import last from 'lodash/last';
-import pull from 'lodash/pull';
+import { last } from '@lumx/core/js/utils/collection/last';
 
 export type Listener = { enable(): void; disable(): void };
 
@@ -24,7 +23,10 @@ export function makeListenerTowerContext() {
             // Disable current listener.
             listener.disable();
             // Remove current listener.
-            pull(LISTENERS, listener);
+            const index = LISTENERS.indexOf(listener);
+            if (index > -1) {
+                LISTENERS.splice(index, 1);
+            }
             // Enable previous listener.
             last(LISTENERS)?.enable();
         },

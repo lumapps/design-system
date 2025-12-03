@@ -10,7 +10,7 @@ import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { useIntersectionObserver } from '@lumx/react/hooks/useIntersectionObserver';
 
 import { GenericProps, isComponent } from '@lumx/react/utils/type';
-import { partitionMulti } from '@lumx/react/utils/partitionMulti';
+import { partitionMulti } from '@lumx/core/js/utils/collection/partitionMulti';
 import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
