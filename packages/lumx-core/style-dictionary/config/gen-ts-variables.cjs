@@ -1,7 +1,7 @@
 const StyleDictionary = require('style-dictionary');
 const path = require('path');
-const pickFieldsInTree = require('./utils/_pickFieldsInTree');
-const transformGroup = require('./_transform-group');
+const pickFieldsInTree = require('./utils/_pickFieldsInTree.cjs');
+const transformGroup = require('./_transform-group.cjs');
 
 /**
  * Typescript generator:
@@ -45,7 +45,7 @@ module.exports = () => {
                         destination: 'design-tokens.ts',
                     },
                 ],
-                actions: [require('./utils/_action-prettier-ts')({ buildPath })],
+                actions: [require('./utils/_action-prettier-ts.cjs')({ buildPath })],
             },
         },
     };

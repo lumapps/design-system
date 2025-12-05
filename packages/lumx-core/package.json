@@ -29,7 +29,7 @@
         "url": "git+https://github.com/lumapps/design-system.git"
     },
     "scripts": {
-        "generate:design-tokens": "yarn node style-dictionary",
+        "generate:design-tokens": "yarn node style-dictionary/index.cjs",
         "build": "rollup -c",
         "test": "vitest run",
         "update-version-changelog": "yarn version-changelog ../../CHANGELOG.md"

@@ -8,7 +8,7 @@ async function main() {
     for (const config of CONFIGS) {
       console.log('Running', config, '...');
       // Run generation
-      exec(`yarn node '${__dirname}/config/_run' '${config}'`)
+      exec(`yarn node '${__dirname}/config/_run.cjs' '${config}'`)
           .then(({ stdout, stderr }) => {
               console.log(stdout.toString(), stderr.toString());
           });

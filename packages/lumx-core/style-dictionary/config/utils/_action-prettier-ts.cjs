@@ -1,6 +1,6 @@
 const StyleDictionary = require('style-dictionary');
 const path = require('path');
-const exec = require('./_exec');
+const exec = require('./_exec.cjs');
 
 module.exports = function({ buildPath }) {
     const name = 'prettier/ts';
