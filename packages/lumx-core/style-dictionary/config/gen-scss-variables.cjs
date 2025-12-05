@@ -1,8 +1,8 @@
 const StyleDictionary = require('style-dictionary');
 const path = require('path');
 const _ = require('lodash');
-const transformGroup = require('./_transform-group');
-const prependStylelintDisable = require('./utils/_format-stylelint-disable');
+const transformGroup = require('./_transform-group.cjs');
+const prependStylelintDisable = require('./utils/_format-stylelint-disable.cjs');
 
 /**
  * SCSS generator
@@ -56,7 +56,7 @@ module.exports = () => {
                         format: prependStylelintDisable(customFormat()),
                     },
                 ],
-                actions: [require('./utils/_action-prettier-style')()],
+                actions: [require('./utils/_action-prettier-style.cjs')()],
             },
         },
     };
