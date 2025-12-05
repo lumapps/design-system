@@ -1,6 +1,6 @@
 const path = require('path');
-const transformGroup = require('./_transform-group');
-const prependStylelintDisable = require('./utils/_format-stylelint-disable');
+const transformGroup = require('./_transform-group.cjs');
+const prependStylelintDisable = require('./utils/_format-stylelint-disable.cjs');
 
 module.exports = () => {
     const baseDir = `${__dirname}/../`;
@@ -20,7 +20,7 @@ module.exports = () => {
                         filter: (token) => token.value !== null,
                     },
                 ],
-                actions: [require('./utils/_action-prettier-style')()],
+                actions: [require('./utils/_action-prettier-style.cjs')()],
             },
         },
     };
