@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   _[BREAKING]_ Reduced ecmascript transpilation to the minimum (make sure to transpile this lib if your project needs it)
     -   _[BREAKING]_ Externalise `@lumx/core`, `@lumx/icons` and `classnames` (now imported instead of bundled inside `@lumx/react`)
     -   _[BREAKING]_ `List`: remove keyboard arrow navigation as it does not comply with any specific a11y pattern
+    - Prevent layout shift when disabling body scroll by reserving space for the scrollbar. (dialog & lightbox)
 -   `@lumx/core`:
     -   _[BREAKING]_ Removed deprecated `@lumx/core/js/utils/date-picker` utils
     -   _[BREAKING]_ Migrate to ESM module format (instead of CJS)

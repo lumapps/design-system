@@ -16,6 +16,8 @@ export const useDisableBodyScroll = (modalElement: Element | Falsy): void => {
         // Fixing the document overflow style to prevent a bug that scrolls the window to the top.
         const previousDocumentOverflow = document.documentElement.style.overflow;
         document.documentElement.style.overflow = 'visible';
+        // Prevent layout shift by reserving space for the scrollbar.
+        document.documentElement.style.scrollbarGutter = 'stable both-edges';
         disableBodyScroll(modalElement);
         return () => {
             enableBodyScroll(modalElement);
