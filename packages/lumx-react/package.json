@@ -6,8 +6,8 @@
         "url": "https://github.com/lumapps/design-system/issues"
     },
     "dependencies": {
-        "@lumx/core": "^3.21.1",
-        "@lumx/icons": "^3.21.1",
+        "@lumx/core": "^4.0.0",
+        "@lumx/icons": "^4.0.0",
         "@popperjs/core": "^2.5.4",
         "body-scroll-lock": "^3.1.5",
         "react-popper": "^2.2.4"
@@ -87,5 +87,5 @@
         "build:storybook": "storybook build"
     },
     "sideEffects": false,
-    "version": "3.21.1"
+    "version": "4.0.0"
 }
