@@ -6,11 +6,8 @@
         "url": "https://github.com/lumapps/design-system/issues"
     },
     "dependencies": {
-        "@lumx/core": "^3.20.0",
-        "@lumx/icons": "^3.20.0",
         "@popperjs/core": "^2.5.4",
         "body-scroll-lock": "^3.1.5",
-        "classnames": "^2.3.2",
         "react-popper": "^2.2.4"
     },
     "devDependencies": {
@@ -36,6 +33,7 @@
         "@vitest/ui": "^3.0.0",
         "autoprefixer": "^9.7.4",
         "chromatic": "^13.1.4",
+        "classnames": "^2.3.2",
         "focus-visible": "^5.0.2",
         "glob": "^7.1.6",
         "jsdom": "^27.2.0",
@@ -56,6 +54,9 @@
         "vitest": "^3.0.0"
     },
     "peerDependencies": {
+        "@lumx/core": "^3.20.0",
+        "@lumx/icons": "^3.20.0",
+        "classnames": "^2.3.2",
         "lodash": "4.17.21",
         "react": ">= 17.0.2",
         "react-dom": ">= 17.0.2"

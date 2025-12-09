@@ -3287,8 +3287,6 @@ __metadata:
     "@babel/preset-react": "npm:^7.26.3"
     "@babel/preset-typescript": "npm:^7.26.0"
     "@chromatic-com/storybook": "npm:^4.1.1"
-    "@lumx/core": "npm:^3.20.0"
-    "@lumx/icons": "npm:^3.20.0"
     "@popperjs/core": "npm:^2.5.4"
     "@rollup/plugin-babel": "npm:^6.1.0"
     "@rollup/plugin-commonjs": "npm:^29.0.0"
@@ -3330,6 +3328,9 @@ __metadata:
     vite-tsconfig-paths: "npm:^5.1.4"
     vitest: "npm:^3.0.0"
   peerDependencies:
+    "@lumx/core": ^3.20.0
+    "@lumx/icons": ^3.20.0
+    classnames: ^2.3.2
     lodash: 4.17.21
     react: ">= 17.0.2"
     react-dom: ">= 17.0.2"

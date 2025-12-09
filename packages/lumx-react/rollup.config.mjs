@@ -28,12 +28,9 @@ const input = {
     'utils/index': 'src/utils/index.ts', // => @lumx/react/utils
 };
 
-const external = [/^@lumx\/core/, 'classnames', /^@lumx\/icons/];
-
 // Bundle JS code
 const bundleJS = {
     input,
-    external,
     output: {
         format: 'esm',
         sourcemap: true,
@@ -81,7 +78,6 @@ const bundleJS = {
 // Bundle TS types in D.TS files
 const bundleType = {
     input,
-    external,
     output: {
         format: 'esm',
         dir: DIST_PATH,
