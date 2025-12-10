@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import userEvent from '@testing-library/user-event';
-import { VISUALLY_HIDDEN } from '@lumx/react/constants';
+import { classNames } from '@lumx/core/js/utils';
 
 import { DatePickerControlled, DatePickerControlledProps } from './DatePickerControlled';
 import { CLASSNAME } from './constants';
@@ -38,7 +38,7 @@ const queries = {
         screen.getByRole('spinbutton', {
             name: /année/i,
         }),
-    getAccessibleMonthYear: (container: HTMLElement) => getByClassName(container, VISUALLY_HIDDEN),
+    getAccessibleMonthYear: (container: HTMLElement) => getByClassName(container, classNames.visuallyHidden()),
 };
 
 describe(`<${DatePickerControlled.displayName}>`, () => {

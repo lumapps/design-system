@@ -1,6 +1,5 @@
 import { MouseEventHandler, useMemo } from 'react';
 
-import classNames from 'classnames';
 import take from 'lodash/take';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
@@ -8,6 +7,7 @@ import { Alignment, AspectRatio, Theme, Thumbnail, ThumbnailProps } from '@lumx/
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
@@ -59,7 +59,7 @@ export const Mosaic = forwardRef<MosaicProps, HTMLDivElement>((props, ref) => {
         <div
             ref={ref}
             {...forwardedProps}
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }), {
+            className={classNames.join(className, handleBasicClasses({ prefix: CLASSNAME, theme }), {
                 [`${CLASSNAME}--has-1-thumbnail`]: thumbnails?.length === 1,
                 [`${CLASSNAME}--has-2-thumbnails`]: thumbnails?.length === 2,
                 [`${CLASSNAME}--has-3-thumbnails`]: thumbnails?.length === 3,

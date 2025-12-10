@@ -1,6 +1,5 @@
 import { Children, ReactNode } from 'react';
 
-import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
 
 import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
@@ -8,6 +7,7 @@ import { Emphasis, Icon, Size, IconButton, IconButtonProps } from '@lumx/react';
 import { GenericProps, HasCloseMode, isComponent } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { useId } from '@lumx/react/hooks/useId';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { RawClickable } from '@lumx/react/utils/react/RawClickable';
@@ -101,7 +101,7 @@ export const SideNavigationItem = forwardRef<SideNavigationItemProps, HTMLLIElem
         <li
             ref={ref}
             {...forwardedProps}
-            className={classNames(
+            className={classNames.join(
                 className,
                 handleBasicClasses({
                     emphasis,

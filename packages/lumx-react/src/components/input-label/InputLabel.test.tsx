@@ -1,6 +1,6 @@
 import { Theme, Typography } from '@lumx/react';
 import { getByClassName } from '@lumx/react/testing/utils/queries';
-import { getTypographyClassName } from '@lumx/core/js/utils/_internal/className';
+import { classNames } from '@lumx/core/js/utils';
 import { render } from '@testing-library/react';
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { InputLabel, InputLabelProps } from './InputLabel';
@@ -41,7 +41,7 @@ describe(`<${InputLabel.displayName}>`, () => {
         it('should render typography', () => {
             const { label } = setup({ children: 'The label', typography: Typography.body1 });
             expect(label).toHaveClass(CLASSNAME);
-            expect(label).toHaveClass(getTypographyClassName(Typography.body1));
+            expect(label).toHaveClass(classNames.typography(Typography.body1));
         });
     });
 

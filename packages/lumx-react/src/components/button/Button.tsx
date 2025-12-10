@@ -1,10 +1,10 @@
-import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
 
 import { Emphasis, Icon, Size, Theme, Text, ThemeProvider } from '@lumx/react';
 import { isComponent } from '@lumx/react/utils/type';
 import { getBasicClass } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
@@ -68,7 +68,7 @@ export const Button = forwardRef<ButtonProps, HTMLButtonElement | HTMLAnchorElem
         ...forwardedProps
     } = props;
 
-    const buttonClassName = classNames(
+    const buttonClassName = classNames.join(
         className,
         getBasicClass({ prefix: CLASSNAME, type: 'hasLeftIcon', value: !isEmpty(leftIcon) }),
         getBasicClass({ prefix: CLASSNAME, type: 'hasRightIcon', value: !isEmpty(rightIcon) }),

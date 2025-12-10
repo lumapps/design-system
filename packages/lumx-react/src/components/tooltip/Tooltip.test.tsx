@@ -7,7 +7,7 @@ import { queryAllByTagName, queryByClassName } from '@lumx/react/testing/utils/q
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import userEvent from '@testing-library/user-event';
 import { isFocusVisible } from '@lumx/react/utils/browser/isFocusVisible';
-import { VISUALLY_HIDDEN } from '@lumx/react/constants';
+import { classNames } from '@lumx/core/js/utils';
 
 import { Tooltip, TooltipProps } from './Tooltip';
 
@@ -21,7 +21,6 @@ vi.mock('@lumx/react/constants', async (importActual: any) => {
     return {
         ...actual,
         TOOLTIP_HOVER_DELAY: { open: 0, close: 0 },
-        VISUALLY_HIDDEN: actual.VISUALLY_HIDDEN,
     };
 });
 
@@ -148,13 +147,13 @@ describe(`<${Tooltip.displayName}>`, () => {
                     forceOpen: false,
                 });
                 expect(tooltip).toBeInTheDocument();
-                expect(tooltip).toHaveClass(VISUALLY_HIDDEN);
+                expect(tooltip).toHaveClass(classNames.visuallyHidden());
                 // Popper styles should not be applied when closed.
                 expect(tooltip?.style?.transform).toBe('');
 
                 const anchor = screen.getByRole('button', { name: 'Anchor' });
                 await userEvent.hover(anchor);
-                expect(tooltip).not.toHaveClass(VISUALLY_HIDDEN);
+                expect(tooltip).not.toHaveClass(classNames.visuallyHidden());
             });
         });
 

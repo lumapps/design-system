@@ -1,13 +1,12 @@
 import React, { InputHTMLAttributes, ReactNode, SyntheticEvent } from 'react';
 
-import classNames from 'classnames';
-
 import { mdiCheck, mdiMinus } from '@lumx/icons';
 
 import { Icon, InputHelper, InputLabel, Theme } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { useId } from '@lumx/react/hooks/useId';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
@@ -107,7 +106,7 @@ export const Checkbox = forwardRef<CheckboxProps, HTMLDivElement>((props, ref) =
         <div
             ref={ref}
             {...forwardedProps}
-            className={classNames(
+            className={classNames.join(
                 className,
                 handleBasicClasses({
                     // Whether state is intermediate class name will "-checked"

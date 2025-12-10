@@ -1,10 +1,8 @@
 import { Children, isValidElement } from 'react';
 
-import classNames from 'classnames';
-
 import { ColorVariant, ColorWithVariants, Typography } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
-import { fontColorClass, getTypographyClassName } from '@lumx/core/js/utils/_internal/className';
+import { classNames } from '@lumx/core/js/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
@@ -58,18 +56,17 @@ const DEFAULT_PROPS = {} as const;
  */
 export const InlineList = forwardRef<InlineListProps>((props, ref) => {
     const { className, color, colorVariant, typography, children, wrap, ...forwardedProps } = props;
-    const typographyClassName = typography && getTypographyClassName(typography);
     return (
         // eslint-disable-next-line jsx-a11y/no-redundant-roles
         <ul
             {...forwardedProps}
             ref={ref as any}
-            className={classNames(
+            className={classNames.join(
                 className,
                 CLASSNAME,
                 wrap && `${CLASSNAME}--wrap`,
-                fontColorClass(color, colorVariant),
-                typographyClassName,
+                color && classNames.font(color, colorVariant),
+                typography && classNames.typography(typography),
             )}
             // Lists with removed bullet style can lose their a11y list role on some browsers
             role="list"

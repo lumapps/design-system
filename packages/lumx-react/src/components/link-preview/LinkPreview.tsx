@@ -1,5 +1,3 @@
-import classNames from 'classnames';
-
 import {
     AspectRatio,
     ColorPalette,
@@ -15,6 +13,7 @@ import {
 import { GenericProps, HeadingElement, HasTheme } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
@@ -87,7 +86,7 @@ export const LinkPreview = forwardRef<LinkPreviewProps, HTMLDivElement>((props, 
         <article
             ref={ref}
             {...forwardedProps}
-            className={classNames(
+            className={classNames.join(
                 className,
                 handleBasicClasses({
                     prefix: CLASSNAME,
@@ -137,7 +136,7 @@ export const LinkPreview = forwardRef<LinkPreviewProps, HTMLDivElement>((props, 
                         <Link
                             {...linkProps}
                             linkAs={linkAs}
-                            className={classNames(`${CLASSNAME}__link`, linkProps?.className)}
+                            className={classNames.join(`${CLASSNAME}__link`, linkProps?.className)}
                             target="_blank"
                             href={link}
                             color={theme === Theme.light ? ColorPalette.primary : ColorPalette.light}

@@ -1,6 +1,5 @@
 import { MouseEventHandler, ReactNode } from 'react';
 
-import classNames from 'classnames';
 import isFunction from 'lodash/isFunction';
 
 import { ColorPalette, Size, Theme } from '@lumx/react';
@@ -9,7 +8,7 @@ import { useStopPropagation } from '@lumx/react/hooks/useStopPropagation';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { onEnterPressed } from '@lumx/core/js/utils';
+import { classNames, onEnterPressed } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
@@ -119,7 +118,7 @@ export const Chip = forwardRef<ChipProps, HTMLAnchorElement>((props, ref) => {
             {...forwardedProps}
             href={!disabledStateProps.disabled ? href : undefined}
             ref={ref}
-            className={classNames(
+            className={classNames.join(
                 className,
                 handleBasicClasses({
                     clickable: isClickable,
@@ -141,7 +140,7 @@ export const Chip = forwardRef<ChipProps, HTMLAnchorElement>((props, ref) => {
             {before && (
                 // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
                 <div
-                    className={classNames(`${CLASSNAME}__before`, {
+                    className={classNames.join(`${CLASSNAME}__before`, {
                         [`${CLASSNAME}__before--is-clickable`]: hasBeforeClick,
                     })}
                     onClick={handleOnBeforeClick}
@@ -153,7 +152,7 @@ export const Chip = forwardRef<ChipProps, HTMLAnchorElement>((props, ref) => {
             {after && (
                 // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
                 <div
-                    className={classNames(`${CLASSNAME}__after`, {
+                    className={classNames.join(`${CLASSNAME}__after`, {
                         [`${CLASSNAME}__after--is-clickable`]: hasAfterClick,
                     })}
                     onClick={handleOnAfterClick}

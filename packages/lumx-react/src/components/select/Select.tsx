@@ -1,6 +1,5 @@
 import { RefObject } from 'react';
 
-import classNames from 'classnames';
 import lodashIsEmpty from 'lodash/isEmpty';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiCloseCircle, mdiMenuDown } from '@lumx/icons';
@@ -11,6 +10,7 @@ import { Icon } from '@lumx/react/components/icon/Icon';
 import { InputLabel } from '@lumx/react/components/input-label/InputLabel';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
@@ -107,7 +107,7 @@ const SelectField: React.FC<SelectProps> = (props) => {
                         )}
 
                         <div
-                            className={classNames([
+                            className={classNames.join([
                                 `${CLASSNAME}__input-native`,
                                 isEmpty && placeholder && `${CLASSNAME}__input-native--placeholder`,
                             ])}
@@ -180,7 +180,7 @@ export const Select = forwardRef<SelectProps, HTMLDivElement>((props, ref) => {
         {
             ...DEFAULT_PROPS,
             ...props,
-            className: classNames(
+            className: classNames.join(
                 props.className,
                 handleBasicClasses({
                     hasInputClear,
