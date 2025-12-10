@@ -1,9 +1,8 @@
 import { ReactNode } from 'react';
 
-import classNames from 'classnames';
-
 import { GenericProps } from '@lumx/react/utils/type';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
@@ -35,7 +34,7 @@ export const ListSubheader = forwardRef<ListSubheaderProps, HTMLLIElement>((prop
     const { children, className, ...forwardedProps } = props;
 
     return (
-        <li ref={ref} {...forwardedProps} className={classNames(className, CLASSNAME)}>
+        <li ref={ref} {...forwardedProps} className={classNames.join(className, CLASSNAME)}>
             {children}
         </li>
     );

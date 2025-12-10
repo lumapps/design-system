@@ -1,12 +1,11 @@
 import { ReactNode } from 'react';
 
-import classNames from 'classnames';
-
 import { Alignment, HorizontalAlignment, Size, Theme, Thumbnail } from '@lumx/react';
 
 import { GenericProps, HasTheme, ValueOf } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
@@ -99,7 +98,7 @@ export const ImageBlock = forwardRef<ImageBlockProps, HTMLDivElement>((props, re
         <figure
             ref={ref}
             {...forwardedProps}
-            className={classNames(
+            className={classNames.join(
                 className,
                 handleBasicClasses({
                     prefix: CLASSNAME,
@@ -113,7 +112,7 @@ export const ImageBlock = forwardRef<ImageBlockProps, HTMLDivElement>((props, re
         >
             <Thumbnail
                 {...thumbnailProps}
-                className={classNames(`${CLASSNAME}__image`, thumbnailProps?.className)}
+                className={classNames.join(`${CLASSNAME}__image`, thumbnailProps?.className)}
                 fillHeight={fillHeight}
                 align={align}
                 image={image}

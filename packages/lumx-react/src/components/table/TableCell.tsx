@@ -1,9 +1,8 @@
-import classNames from 'classnames';
-
 import { mdiArrowDown, mdiArrowUp } from '@lumx/icons';
 import { Icon, Size } from '@lumx/react';
 import { GenericProps, ValueOf } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { CLASSNAME as TABLE_CLASSNAME } from './constants';
@@ -92,7 +91,7 @@ export const TableCell = forwardRef<TableCellProps, HTMLTableCellElement>((props
                 <th
                     ref={ref}
                     {...forwardedProps}
-                    className={classNames(
+                    className={classNames.join(
                         handleBasicClasses({
                             prefix: CLASSNAME,
                             isSortable,
@@ -120,7 +119,7 @@ export const TableCell = forwardRef<TableCellProps, HTMLTableCellElement>((props
             )}
 
             {variant === TableCellVariant.body && (
-                <td {...forwardedProps} className={classNames(className, CLASSNAME, `${CLASSNAME}--body`)}>
+                <td {...forwardedProps} className={classNames.join(className, CLASSNAME, `${CLASSNAME}--body`)}>
                     <div className={`${CLASSNAME}-content`}>{children}</div>
                 </td>
             )}

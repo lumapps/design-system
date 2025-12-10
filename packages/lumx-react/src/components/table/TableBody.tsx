@@ -1,7 +1,6 @@
-import classNames from 'classnames';
-
 import { GenericProps } from '@lumx/react/utils/type';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { classNames } from '@lumx/core/js/utils';
 
 import { CLASSNAME as TABLE_CLASSNAME } from './constants';
 
@@ -34,7 +33,7 @@ export const TableBody = forwardRef<TableBodyProps, HTMLTableSectionElement>((pr
     const { children, className, ...forwardedProps } = props;
 
     return (
-        <tbody ref={ref} {...forwardedProps} className={classNames(className, CLASSNAME)}>
+        <tbody ref={ref} {...forwardedProps} className={classNames.join(className, CLASSNAME)}>
             {children}
         </tbody>
     );

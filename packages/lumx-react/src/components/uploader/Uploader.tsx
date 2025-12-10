@@ -1,18 +1,16 @@
 import React, { MouseEventHandler } from 'react';
 
-import classNames from 'classnames';
-
 import { AspectRatio, Icon, Size, Theme } from '@lumx/react';
 import { GenericProps, HasTheme, ValueOf } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
 import { useId } from '@lumx/react/hooks/useId';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { HasAriaDisabled } from '@lumx/react/utils/type/HasAriaDisabled';
 import { useDisableStateProps } from '@lumx/react/utils/disabled';
-import { VISUALLY_HIDDEN } from '@lumx/react/constants';
 
 /**
  * Uploader variants.
@@ -135,7 +133,7 @@ export const Uploader = forwardRef<UploaderProps>((props, ref) => {
             {...wrapper.props}
             {...forwardedProps}
             onClick={handleClick}
-            className={classNames(
+            className={classNames.join(
                 className,
                 handleBasicClasses({
                     aspectRatio: adjustedAspectRatio,
@@ -160,7 +158,7 @@ export const Uploader = forwardRef<UploaderProps>((props, ref) => {
                 <input
                     type="file"
                     id={inputId}
-                    className={`${CLASSNAME}__input ${VISUALLY_HIDDEN}`}
+                    className={`${CLASSNAME}__input ${classNames.visuallyHidden()}`}
                     {...disabledStateProps}
                     {...fileInputProps}
                     readOnly={isAnyDisabled}

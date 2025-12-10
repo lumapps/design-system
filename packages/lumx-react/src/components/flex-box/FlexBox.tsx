@@ -1,6 +1,5 @@
 import { ReactNode } from 'react';
 
-import classNames from 'classnames';
 import castArray from 'lodash/castArray';
 
 import { Alignment, Orientation, HorizontalAlignment, Size, VerticalAlignment } from '@lumx/core/js/constants';
@@ -8,6 +7,7 @@ import { GenericProps } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { classNames } from '@lumx/core/js/utils';
 
 export type MarginAutoAlignment = Extract<Alignment, 'top' | 'bottom' | 'right' | 'left'>;
 export type GapSize = Extract<Size, 'tiny' | 'regular' | 'medium' | 'big' | 'huge'>;
@@ -78,7 +78,7 @@ export const FlexBox = forwardRef<FlexBoxProps, HTMLDivElement>((props, ref) => 
         <Component
             ref={ref}
             {...forwardedProps}
-            className={classNames(
+            className={classNames.join(
                 className,
                 handleBasicClasses({
                     prefix: CLASSNAME,

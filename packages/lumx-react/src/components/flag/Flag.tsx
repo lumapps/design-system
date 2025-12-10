@@ -1,9 +1,8 @@
-import classNames from 'classnames';
-
 import { ColorPalette, Icon, Size, Theme, Text } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
@@ -38,7 +37,10 @@ export const Flag = forwardRef<FlagProps, HTMLDivElement>((props, ref) => {
     return (
         <div
             {...forwardedProps}
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color: flagColor, isTruncated }))}
+            className={classNames.join(
+                className,
+                handleBasicClasses({ prefix: CLASSNAME, color: flagColor, isTruncated }),
+            )}
             ref={ref}
         >
             {icon && <Icon icon={icon} size={Size.xxs} className={`${CLASSNAME}__icon`} />}

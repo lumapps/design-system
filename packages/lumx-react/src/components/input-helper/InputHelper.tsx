@@ -1,11 +1,10 @@
 import { ReactNode } from 'react';
 
-import classNames from 'classnames';
-
 import { Kind, Theme } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
@@ -54,7 +53,7 @@ export const InputHelper = forwardRef<InputHelperProps, HTMLParagraphElement>((p
         <p
             ref={ref}
             {...forwardedProps}
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color, theme }))}
+            className={classNames.join(className, handleBasicClasses({ prefix: CLASSNAME, color, theme }))}
         >
             {children}
         </p>

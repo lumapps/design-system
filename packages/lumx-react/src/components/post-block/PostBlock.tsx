@@ -1,12 +1,12 @@
 import { ReactNode } from 'react';
 
-import classNames from 'classnames';
 import isObject from 'lodash/isObject';
 
 import { Orientation, Theme, Thumbnail, ThumbnailProps, ThumbnailVariant } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
@@ -81,7 +81,7 @@ export const PostBlock = forwardRef<PostBlockProps, HTMLDivElement>((props, ref)
     return (
         <div
             ref={ref}
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, orientation, theme }))}
+            className={classNames.join(className, handleBasicClasses({ prefix: CLASSNAME, orientation, theme }))}
             {...forwardedProps}
         >
             {thumbnailProps && (

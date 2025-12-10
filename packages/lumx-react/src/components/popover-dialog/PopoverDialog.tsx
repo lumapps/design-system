@@ -1,7 +1,6 @@
-import classNames from 'classnames';
-
 import { HasAriaLabelOrLabelledBy } from '@lumx/react/utils/type';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { HeadingLevelProvider } from '@lumx/react/components/heading';
@@ -50,7 +49,7 @@ export const PopoverDialog = forwardRef<PopoverDialogProps, HTMLDivElement>((pro
         <Popover
             {...forwardedProps}
             ref={ref}
-            className={classNames(className, CLASSNAME)}
+            className={classNames.join(className, CLASSNAME)}
             role="dialog"
             aria-modal="true"
             /**

@@ -31,7 +31,6 @@ const input = {
 const external = [
     // Externalize "public" lumx-core exports (internalize `_internal/*` exports)
     /^@lumx\/core(?!.*\/_internal).*$/,
-    'classnames',
     /^@lumx\/icons/
 ];
 

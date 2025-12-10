@@ -1,9 +1,8 @@
-import classNames from 'classnames';
-
 import { Alignment, Orientation, Size } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 type GridGutterSize = Extract<Size, 'regular' | 'big' | 'huge'>;
@@ -67,7 +66,7 @@ export const Grid = forwardRef<GridProps, HTMLDivElement>((props, ref) => {
         <div
             ref={ref}
             {...forwardedProps}
-            className={classNames(
+            className={classNames.join(
                 className,
                 `${CLASSNAME}-container`,
                 { [`${CLASSNAME}--h-align-${hAlign}`]: hAlign },

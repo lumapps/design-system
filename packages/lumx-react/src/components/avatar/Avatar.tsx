@@ -1,12 +1,11 @@
 import { KeyboardEventHandler, MouseEventHandler, ReactElement, ReactNode } from 'react';
 
-import classNames from 'classnames';
-
 import { AspectRatio, Size, Theme, Thumbnail, ThumbnailProps } from '@lumx/react';
 
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
@@ -90,7 +89,7 @@ export const Avatar = forwardRef<AvatarProps, HTMLDivElement>((props, ref) => {
         <div
             ref={ref}
             {...forwardedProps}
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, size, theme }))}
+            className={classNames.join(className, handleBasicClasses({ prefix: CLASSNAME, size, theme }))}
         >
             <Thumbnail
                 linkProps={linkProps}

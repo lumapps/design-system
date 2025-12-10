@@ -1,13 +1,12 @@
 import { RefObject, useRef, useEffect, AriaAttributes } from 'react';
 
-import classNames from 'classnames';
-
 import { mdiClose } from '@lumx/icons';
 import { HeadingLevelProvider, IconButton, IconButtonProps } from '@lumx/react';
 import { DIALOG_TRANSITION_DURATION, DOCUMENT } from '@lumx/react/constants';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { useDisableBodyScroll } from '@lumx/react/hooks/useDisableBodyScroll';
@@ -139,7 +138,7 @@ export const Lightbox = forwardRef<LightboxProps, HTMLDivElement>((props, ref) =
                 aria-modal="true"
                 role="dialog"
                 tabIndex={-1}
-                className={classNames(
+                className={classNames.join(
                     className,
                     handleBasicClasses({
                         prefix: CLASSNAME,

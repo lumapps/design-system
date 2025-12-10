@@ -1,11 +1,10 @@
 import { CSSProperties } from 'react';
 
-import classNames from 'classnames';
-
 import { Theme, TypographyInterface, ColorPalette } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
@@ -48,7 +47,7 @@ export const SkeletonTypography = forwardRef<SkeletonTypographyProps, HTMLDivEle
         <div
             ref={ref}
             {...forwardedProps}
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, typography, color }))}
+            className={classNames.join(className, handleBasicClasses({ prefix: CLASSNAME, theme, typography, color }))}
             style={{ ...forwardedProps.style, width }}
         >
             <div className={`${CLASSNAME}__inner`} />

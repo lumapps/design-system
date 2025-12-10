@@ -1,7 +1,5 @@
 import React, { Children, ReactElement, ReactNode, Ref, RefObject, useMemo, useRef, useState } from 'react';
 
-import classNames from 'classnames';
-
 import { HeadingLevelProvider, Progress, ProgressVariant, Size } from '@lumx/react';
 
 import { DIALOG_TRANSITION_DURATION, DOCUMENT } from '@lumx/react/constants';
@@ -13,6 +11,7 @@ import { GenericProps, isComponent } from '@lumx/react/utils/type';
 import { partitionMulti } from '@lumx/react/utils/partitionMulti';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
@@ -200,7 +199,7 @@ export const Dialog = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
             <div
                 ref={mergeRefs(rootRef, ref)}
                 {...forwardedProps}
-                className={classNames(
+                className={classNames.join(
                     className,
                     handleBasicClasses({
                         isHidden: !isOpen,
@@ -226,7 +225,7 @@ export const Dialog = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
                                     {(header || headerChildContent) && (
                                         <header
                                             {...headerChildProps}
-                                            className={classNames(
+                                            className={classNames.join(
                                                 `${CLASSNAME}__header`,
                                                 (forceHeaderDivider || hasTopIntersection) &&
                                                     `${CLASSNAME}__header--has-divider`,
@@ -258,7 +257,7 @@ export const Dialog = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
                                     {(footer || footerChildContent) && (
                                         <footer
                                             {...footerChildProps}
-                                            className={classNames(
+                                            className={classNames.join(
                                                 `${CLASSNAME}__footer`,
                                                 (forceFooterDivider || hasBottomIntersection) &&
                                                     `${CLASSNAME}__footer--has-divider`,

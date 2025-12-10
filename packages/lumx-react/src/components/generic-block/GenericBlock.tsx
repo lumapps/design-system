@@ -1,11 +1,11 @@
 import React, { Children, ReactElement, ReactNode } from 'react';
 
-import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
 import noop from 'lodash/noop';
 
 import { Comp, isComponentType } from '@lumx/react/utils/type';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { partitionMulti } from '@lumx/react/utils/partitionMulti';
 import { Orientation, Size, FlexBox, FlexBoxProps } from '@lumx/react';
 import { GenericBlockGapSize } from '@lumx/react/components/generic-block/constants';
@@ -155,7 +155,7 @@ const BaseGenericBlock: BaseGenericBlock = forwardRef((props, ref) => {
     return (
         <FlexBox
             ref={ref}
-            className={classNames(className, CLASSNAME)}
+            className={classNames.join(className, CLASSNAME)}
             gap={gap}
             orientation={orientation}
             {...forwardedProps}
@@ -167,7 +167,7 @@ const BaseGenericBlock: BaseGenericBlock = forwardRef((props, ref) => {
                     hAlign={forwardedProps.hAlign}
                     {...figureProps}
                     {...sections.figureChildProps}
-                    className={classNames(
+                    className={classNames.join(
                         figureProps?.className,
                         sections.figureChildProps?.className,
                         `${CLASSNAME}__figure`,
@@ -187,7 +187,7 @@ const BaseGenericBlock: BaseGenericBlock = forwardRef((props, ref) => {
                     hAlign={forwardedProps.hAlign}
                     {...contentProps}
                     {...sections.contentChildProps}
-                    className={classNames(
+                    className={classNames.join(
                         contentProps?.className,
                         sections.contentChildProps?.className,
                         `${CLASSNAME}__content`,
@@ -205,7 +205,7 @@ const BaseGenericBlock: BaseGenericBlock = forwardRef((props, ref) => {
                     hAlign={forwardedProps.hAlign}
                     {...actionsProps}
                     {...sections.actionsChildProps}
-                    className={classNames(
+                    className={classNames.join(
                         actionsProps?.className,
                         sections.actionsChildProps?.className,
                         `${CLASSNAME}__actions`,
