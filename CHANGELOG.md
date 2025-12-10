@@ -37,6 +37,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
         functions to generate lumx class names (exported in `classNames` namespace in `@lumx/core/js/utils` or as individual
         exports in `@lumx/core/js/utils/classNames`)
     -   Added `block` and `element` utility functions to generate BEM class names
+-   `@lumx/react`:
+    -   Added `useClassnames` utility hook to `@lumx/react/utils` providing BEM (block, element & modifier) classname generation
 
 ## [3.21.1][] - 2025-12-16
 
