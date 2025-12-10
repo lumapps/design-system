@@ -1,10 +1,9 @@
 import { mdiAlertCircle } from '@lumx/icons';
 import { ColorPalette, ColorVariant, ColorWithVariants, Size, Theme } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
-import { resolveColorWithVariants } from '@lumx/core/js/utils/_internal/color';
+import { useClassnames } from '@lumx/react/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
+import { resolveColorWithVariants } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
@@ -66,6 +65,7 @@ export const Icon = forwardRef<IconProps, HTMLElement>((props, ref) => {
         alt,
         ...forwardedProps
     } = props;
+    const { block } = useClassnames(CLASSNAME);
     const [color, colorVariant] = resolveColorWithVariants(propColor, propColorVariant);
 
     // Color
@@ -96,22 +96,20 @@ export const Icon = forwardRef<IconProps, HTMLElement>((props, ref) => {
         <i
             ref={ref}
             {...forwardedProps}
-            className={classNames.join(
+            className={block(
+                {
+                    [`color-${iconColor}`]: Boolean(iconColor),
+                    [`color-variant-${iconColorVariant}`]: Boolean(iconColorVariant),
+                    [`size-${iconSize}`]: Boolean(iconSize),
+                    [`theme-${theme}`]: Boolean(theme),
+                    'has-shape': Boolean(hasShape),
+                    'no-shape': Boolean(!hasShape),
+                    'has-dark-layer': Boolean(
+                        !hasShape && iconColor === ColorPalette.yellow && icon === mdiAlertCircle,
+                    ),
+                    path: true,
+                },
                 className,
-                handleBasicClasses({
-                    color: iconColor,
-                    colorVariant: iconColorVariant,
-                    hasShape,
-                    prefix: CLASSNAME,
-                    theme,
-                    size: iconSize,
-                }),
-                !hasShape && `${CLASSNAME}--no-shape`,
-                !hasShape &&
-                    iconColor === ColorPalette.yellow &&
-                    icon === mdiAlertCircle &&
-                    `${CLASSNAME}--has-dark-layer`,
-                `${CLASSNAME}--path`,
             )}
         >
             <svg

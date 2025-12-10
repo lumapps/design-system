@@ -4,8 +4,8 @@ import { List, ListProps } from '@lumx/react/components/list/List';
 import { Popover, PopoverProps } from '@lumx/react/components/popover/Popover';
 import { useInfiniteScroll } from '@lumx/react/hooks/useInfiniteScroll';
 import { GenericProps, isComponent } from '@lumx/react/utils/type';
+import { useClassnames } from '@lumx/react/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { Offset, Placement } from '@lumx/react/components/popover/constants';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
@@ -135,6 +135,7 @@ export const Dropdown = forwardRef<DropdownProps, HTMLDivElement>((props, ref) =
     } = props;
     const innerRef = useRef<HTMLDivElement>(null);
     const listElement = useRef(null);
+    const { block, element } = useClassnames(CLASSNAME);
 
     useInfiniteScroll(innerRef, onInfiniteScroll);
 
@@ -161,7 +162,7 @@ export const Dropdown = forwardRef<DropdownProps, HTMLDivElement>((props, ref) =
             {...forwardedProps}
             focusAnchorOnClose={focusAnchorOnClose}
             anchorRef={anchorRef}
-            className={classNames.join(className, CLASSNAME)}
+            className={block([className])}
             elevation={0 as any}
             closeOnClickAway={closeOnClickAway}
             closeOnEscape={closeOnEscape}
@@ -174,7 +175,7 @@ export const Dropdown = forwardRef<DropdownProps, HTMLDivElement>((props, ref) =
             placement={placement}
             zIndex={zIndex}
         >
-            <div className={`${CLASSNAME}__menu`} ref={innerRef}>
+            <div className={element('menu')} ref={innerRef}>
                 {popperElement}
             </div>
         </Popover>

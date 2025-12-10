@@ -1,10 +1,9 @@
 import React from 'react';
 
 import { Lightbox, ThemeProvider } from '@lumx/react';
-import { ClickAwayProvider } from '@lumx/react/utils';
+import { ClickAwayProvider, useClassnames } from '@lumx/react/utils';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
-import { classNames } from '@lumx/core/js/utils';
 
 import { ImageSlideshow } from './internal/ImageSlideshow';
 import { useImageLightbox } from './useImageLightbox';
@@ -27,6 +26,7 @@ const Inner = forwardRef<ImageLightboxProps, HTMLDivElement>((props, ref) => {
         activeImageRef: propImageRef,
         ...forwardedProps
     } = props;
+    const { block } = useClassnames(CLASSNAME);
     const currentPaginationItemRef = React.useRef(null);
     const footerRef = React.useRef(null);
     const imageRef = React.useRef(null);
@@ -48,7 +48,7 @@ const Inner = forwardRef<ImageLightboxProps, HTMLDivElement>((props, ref) => {
     return (
         <Lightbox
             ref={ref}
-            className={classNames.join(className, CLASSNAME)}
+            className={block([className])}
             parentElement={parentElement}
             isOpen={isOpen}
             onClose={onClose}

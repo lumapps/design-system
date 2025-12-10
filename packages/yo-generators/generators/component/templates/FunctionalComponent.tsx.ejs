@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 
-import {  handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import { forwardRef } from "@lumx/react/utils/react/forwardRef";
+import { useClassnames } from '@lumx/react/utils';
 import { LumxClassName } from '@lumx/core/js/types';
 
 /**
@@ -34,17 +34,13 @@ const DEFAULT_PROPS: Partial<<%= componentName %>Props> = {
  */
 export const <%= componentName %> = forwardRef<<%= componentName %>Props, HTMLDivElement>((props, ref) => {
     const { children, className, someProp = DEFAULT_PROPS.someProp, ...forwardedProps } = props;
+    const { block } = useClassnames(CLASSNAME);
 
     return (
         <div
             ref={ref}
             {...forwardedProps}
-            className={classNames(
-                className,
-                handleBasicClasses({
-                    prefix: CLASSNAME,
-                }),
-            )}
+            className={block([className])}
         >
             {children}
         </div>

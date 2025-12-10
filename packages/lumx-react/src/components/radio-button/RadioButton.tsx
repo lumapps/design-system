@@ -2,14 +2,13 @@ import { ReactNode, SyntheticEvent, InputHTMLAttributes } from 'react';
 
 import { InputHelper, InputLabel, Theme } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { useId } from '@lumx/react/hooks/useId';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
 import { HasAriaDisabled } from '@lumx/react/utils/type/HasAriaDisabled';
+import { useClassnames } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
@@ -77,6 +76,7 @@ export const RadioButton = forwardRef<RadioButtonProps, HTMLDivElement>((props, 
         inputProps,
         ...forwardedProps
     } = otherProps;
+    const { block, element } = useClassnames(CLASSNAME);
     const generatedInputId = useId();
     const inputId = id || generatedInputId;
 
@@ -90,21 +90,20 @@ export const RadioButton = forwardRef<RadioButtonProps, HTMLDivElement>((props, 
         <div
             ref={ref}
             {...forwardedProps}
-            className={classNames.join(
+            className={block(
+                {
+                    'is-checked': Boolean(isChecked),
+                    'is-disabled': Boolean(isAnyDisabled),
+                    'is-unchecked': Boolean(!isChecked),
+                    [`theme-${theme}`]: Boolean(theme),
+                },
                 className,
-                handleBasicClasses({
-                    isChecked,
-                    isDisabled: isAnyDisabled,
-                    isUnchecked: !isChecked,
-                    prefix: CLASSNAME,
-                    theme,
-                }),
             )}
         >
-            <div className={`${CLASSNAME}__input-wrapper`}>
+            <div className={element('input-wrapper')}>
                 <input
                     ref={inputRef}
-                    className={`${CLASSNAME}__input-native`}
+                    className={element('input-native')}
                     {...disabledStateProps}
                     id={inputId}
                     type="radio"
@@ -117,20 +116,20 @@ export const RadioButton = forwardRef<RadioButtonProps, HTMLDivElement>((props, 
                     {...inputProps}
                 />
 
-                <div className={`${CLASSNAME}__input-placeholder`}>
-                    <div className={`${CLASSNAME}__input-background`} />
-                    <div className={`${CLASSNAME}__input-indicator`} />
+                <div className={element('input-placeholder')}>
+                    <div className={element('input-background')} />
+                    <div className={element('input-indicator')} />
                 </div>
             </div>
 
-            <div className={`${CLASSNAME}__content`}>
+            <div className={element('content')}>
                 {label && (
-                    <InputLabel htmlFor={inputId} theme={theme} className={`${CLASSNAME}__label`}>
+                    <InputLabel htmlFor={inputId} theme={theme} className={element('label')}>
                         {label}
                     </InputLabel>
                 )}
                 {helper && (
-                    <InputHelper id={`${inputId}-helper`} theme={theme} className={`${CLASSNAME}__helper`}>
+                    <InputHelper id={`${inputId}-helper`} theme={theme} className={element('helper')}>
                         {helper}
                     </InputHelper>
                 )}

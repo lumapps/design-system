@@ -4,15 +4,14 @@ import { mdiCheck, mdiMinus } from '@lumx/icons';
 
 import { Icon, InputHelper, InputLabel, Theme } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { useId } from '@lumx/react/hooks/useId';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
 import { HasAriaDisabled } from '@lumx/react/utils/type/HasAriaDisabled';
+import { useClassnames } from '@lumx/react/utils';
 
 /**
  * Intermediate state of checkbox.
@@ -85,6 +84,7 @@ export const Checkbox = forwardRef<CheckboxProps, HTMLDivElement>((props, ref) =
         inputProps = {},
         ...forwardedProps
     } = otherProps;
+    const { block, element } = useClassnames(CLASSNAME);
     const localInputRef = React.useRef<HTMLInputElement>(null);
     const generatedInputId = useId();
     const inputId = id || generatedInputId;
@@ -106,24 +106,23 @@ export const Checkbox = forwardRef<CheckboxProps, HTMLDivElement>((props, ref) =
         <div
             ref={ref}
             {...forwardedProps}
-            className={classNames.join(
-                className,
-                handleBasicClasses({
+            className={block(
+                {
                     // Whether state is intermediate class name will "-checked"
-                    isChecked: intermediateState ? true : isChecked,
-                    isDisabled: isAnyDisabled,
-                    isUnchecked: !isChecked,
-                    prefix: CLASSNAME,
-                    theme,
-                }),
+                    'is-checked': Boolean(intermediateState ? true : isChecked),
+                    'is-disabled': Boolean(isAnyDisabled),
+                    'is-unchecked': Boolean(!isChecked),
+                    [`theme-${theme}`]: Boolean(theme),
+                },
+                className,
             )}
         >
-            <div className={`${CLASSNAME}__input-wrapper`}>
+            <div className={element('input-wrapper')}>
                 <input
                     ref={useMergeRefs(inputRef, localInputRef)}
                     type="checkbox"
                     id={inputId}
-                    className={`${CLASSNAME}__input-native`}
+                    className={element('input-native')}
                     {...disabledStateProps}
                     name={name}
                     value={value}
@@ -135,23 +134,23 @@ export const Checkbox = forwardRef<CheckboxProps, HTMLDivElement>((props, ref) =
                     {...inputProps}
                 />
 
-                <div className={`${CLASSNAME}__input-placeholder`}>
-                    <div className={`${CLASSNAME}__input-background`} />
+                <div className={element('input-placeholder')}>
+                    <div className={element('input-background')} />
 
-                    <div className={`${CLASSNAME}__input-indicator`}>
+                    <div className={element('input-indicator')}>
                         <Icon icon={intermediateState ? mdiMinus : mdiCheck} />
                     </div>
                 </div>
             </div>
 
-            <div className={`${CLASSNAME}__content`}>
+            <div className={element('content')}>
                 {label && (
-                    <InputLabel htmlFor={inputId} className={`${CLASSNAME}__label`} theme={theme}>
+                    <InputLabel htmlFor={inputId} className={element('label')} theme={theme}>
                         {label}
                     </InputLabel>
                 )}
                 {helper && (
-                    <InputHelper id={`${inputId}-helper`} className={`${CLASSNAME}__helper`} theme={theme}>
+                    <InputHelper id={`${inputId}-helper`} className={element('helper')} theme={theme}>
                         {helper}
                     </InputHelper>
                 )}
