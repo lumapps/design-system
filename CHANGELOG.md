@@ -36,6 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Added `spacing`, `margin`, `padding`, `typography`, `color`, `font`, `background` and `visuallyHidden` utility
         functions to generate lumx class names (exported in `classNames` namespace in `@lumx/core/js/utils` or as individual
         exports in `@lumx/core/js/utils/classNames`)
+    -   Added `block` and `element` utility functions to generate BEM class names
 
 ## [3.21.1][] - 2025-12-16
 
