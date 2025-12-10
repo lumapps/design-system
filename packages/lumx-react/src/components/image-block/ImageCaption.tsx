@@ -2,7 +2,7 @@ import { CSSProperties, ReactNode } from 'react';
 
 import { FlexBox, HorizontalAlignment, Text, TextProps, useTheme } from '@lumx/react';
 import { HasPolymorphicAs, HasTheme } from '@lumx/react/utils/type';
-import classNames from 'classnames';
+import { classNames } from '@lumx/core/js/utils';
 
 type As = 'div' | 'figcaption';
 
@@ -62,7 +62,7 @@ export const ImageCaption = <AS extends As>(props: ImageCaptionProps<AS>) => {
     return (
         <FlexBox
             as={as}
-            className={classNames(baseClassName && `${baseClassName}__wrapper`)}
+            className={classNames.join(baseClassName && `${baseClassName}__wrapper`)}
             style={captionStyle}
             orientation="vertical"
             vAlign={align}
@@ -72,7 +72,7 @@ export const ImageCaption = <AS extends As>(props: ImageCaptionProps<AS>) => {
             {(title || description) && (
                 <Text
                     as="p"
-                    className={classNames(baseClassName && `${baseClassName}__caption`)}
+                    className={classNames.join(baseClassName && `${baseClassName}__caption`)}
                     truncate={truncate}
                     {...baseColor}
                 >
@@ -80,7 +80,10 @@ export const ImageCaption = <AS extends As>(props: ImageCaptionProps<AS>) => {
                         <Text
                             {...titleProps}
                             as="span"
-                            className={classNames(titleProps?.className, baseClassName && `${baseClassName}__title`)}
+                            className={classNames.join(
+                                titleProps?.className,
+                                baseClassName && `${baseClassName}__title`,
+                            )}
                             typography="subtitle1"
                             {...titleColor}
                         >
@@ -91,7 +94,7 @@ export const ImageCaption = <AS extends As>(props: ImageCaptionProps<AS>) => {
                         <Text
                             {...descriptionProps}
                             as="span"
-                            className={classNames(
+                            className={classNames.join(
                                 descriptionProps?.className,
                                 baseClassName && `${baseClassName}__description`,
                             )}
@@ -103,7 +106,7 @@ export const ImageCaption = <AS extends As>(props: ImageCaptionProps<AS>) => {
             )}
             {tags && (
                 <FlexBox
-                    className={classNames(baseClassName && `${baseClassName}__tags`)}
+                    className={classNames.join(baseClassName && `${baseClassName}__tags`)}
                     orientation="horizontal"
                     vAlign={align}
                 >

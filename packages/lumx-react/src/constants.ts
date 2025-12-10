@@ -3,6 +3,7 @@ export {
     NOTIFICATION_TRANSITION_DURATION,
     TOOLTIP_HOVER_DELAY,
     TOOLTIP_LONG_PRESS_DELAY,
+    VISUALLY_HIDDEN,
 } from '@lumx/core/js/constants';
 
 /**
@@ -19,8 +20,3 @@ export const DOCUMENT = typeof document !== 'undefined' ? document : undefined;
  * Check if we are running in a true browser
  */
 export const IS_BROWSER = typeof navigator !== 'undefined' && !navigator.userAgent.includes('jsdom');
-
-/**
- * Visually hidden a11y utility class name
- */
-export const VISUALLY_HIDDEN = 'visually-hidden';

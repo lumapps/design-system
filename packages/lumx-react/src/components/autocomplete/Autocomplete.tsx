@@ -1,11 +1,10 @@
 import { ReactNode, SyntheticEvent, useRef } from 'react';
 
-import classNames from 'classnames';
-
 import { Dropdown, DropdownProps, IconButtonProps, Offset, Placement, TextField, TextFieldProps } from '@lumx/react';
 
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
@@ -246,7 +245,7 @@ export const Autocomplete = forwardRef<AutocompleteProps, HTMLDivElement>((props
     useFocus(inputAnchorRef.current, !isOpen && shouldFocusOnClose);
 
     return (
-        <div ref={ref} {...forwardedProps} className={classNames(className, CLASSNAME)}>
+        <div ref={ref} {...forwardedProps} className={classNames.join(className, CLASSNAME)}>
             <TextField
                 {...textFieldProps}
                 chips={chips}

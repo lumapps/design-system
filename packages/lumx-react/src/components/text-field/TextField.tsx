@@ -1,7 +1,5 @@
 import { ReactNode, Ref, RefObject, SyntheticEvent, useRef, useState } from 'react';
 
-import classNames from 'classnames';
-
 import { mdiAlertCircle, mdiCheckCircle, mdiCloseCircle } from '@lumx/icons';
 import {
     Emphasis,
@@ -17,6 +15,7 @@ import {
 } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { classNames } from '@lumx/core/js/utils';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useId } from '@lumx/react/hooks/useId';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
@@ -216,7 +215,7 @@ export const TextField = forwardRef<TextFieldProps, HTMLDivElement>((props, ref)
     return (
         <div
             ref={ref}
-            className={classNames(
+            className={classNames.join(
                 className,
                 handleBasicClasses({
                     hasChips: Boolean(chips),

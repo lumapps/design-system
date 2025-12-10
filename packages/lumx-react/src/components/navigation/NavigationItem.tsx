@@ -1,8 +1,8 @@
 import { ElementType, ReactNode } from 'react';
 import { Icon, Placement, Size, Text, Tooltip } from '@lumx/react';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { classNames } from '@lumx/core/js/utils';
 import { ComponentRef, HasClassName, HasPolymorphicAs, HasRequiredLinkHref, HasTheme } from '@lumx/react/utils/type';
-import classNames from 'classnames';
 import { forwardRefPolymorphic } from '@lumx/react/utils/react/forwardRefPolymorphic';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { useOverflowTooltipLabel } from '@lumx/react/hooks/useOverflowTooltipLabel';
@@ -36,7 +36,7 @@ export const NavigationItem = Object.assign(
 
         return (
             <li
-                className={classNames(
+                className={classNames.join(
                     className,
                     handleBasicClasses({
                         prefix: CLASSNAME,

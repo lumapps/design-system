@@ -9,12 +9,11 @@ import React, {
     useState,
 } from 'react';
 
-import classNames from 'classnames';
-
 import { AspectRatio, HorizontalAlignment, Icon, Size, Theme, ThumbnailObjectFit } from '@lumx/react';
 import { Falsy, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { mdiImageBroken } from '@lumx/icons';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useImageLoad } from '@lumx/react/components/thumbnail/useImageLoad';
@@ -180,7 +179,7 @@ export const Thumbnail = forwardRef<ThumbnailProps>((props, ref) => {
         <Wrapper
             {...wrapperProps}
             ref={ref}
-            className={classNames(
+            className={classNames.join(
                 linkProps?.className,
                 className,
                 handleBasicClasses({
@@ -216,7 +215,7 @@ export const Thumbnail = forwardRef<ThumbnailProps>((props, ref) => {
                         ...loadingStyle,
                     }}
                     ref={useMergeRefs(setImgElement, propImgRef)}
-                    className={classNames(
+                    className={classNames.join(
                         handleBasicClasses({
                             prefix: `${CLASSNAME}__image`,
                             isLoading,
@@ -240,7 +239,7 @@ export const Thumbnail = forwardRef<ThumbnailProps>((props, ref) => {
                 )}
             </span>
             {badge &&
-                React.cloneElement(badge, { className: classNames(`${CLASSNAME}__badge`, badge.props.className) })}
+                React.cloneElement(badge, { className: classNames.join(`${CLASSNAME}__badge`, badge.props.className) })}
         </Wrapper>
     );
 });

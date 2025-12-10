@@ -1,12 +1,11 @@
 import { cloneElement, useMemo, useRef } from 'react';
 
-import classNames from 'classnames';
-
 import { List, ListProps } from '@lumx/react/components/list/List';
 import { Popover, PopoverProps } from '@lumx/react/components/popover/Popover';
 import { useInfiniteScroll } from '@lumx/react/hooks/useInfiniteScroll';
 import { GenericProps, isComponent } from '@lumx/react/utils/type';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { Offset, Placement } from '@lumx/react/components/popover/constants';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
@@ -162,7 +161,7 @@ export const Dropdown = forwardRef<DropdownProps, HTMLDivElement>((props, ref) =
             {...forwardedProps}
             focusAnchorOnClose={focusAnchorOnClose}
             anchorRef={anchorRef}
-            className={classNames(className, CLASSNAME)}
+            className={classNames.join(className, CLASSNAME)}
             elevation={0 as any}
             closeOnClickAway={closeOnClickAway}
             closeOnEscape={closeOnEscape}

@@ -1,8 +1,7 @@
-import classNames from 'classnames';
-
 import { HasAriaLabelOrLabelledBy, HasClassName, HasTheme } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { Orientation, Theme } from '@lumx/react';
 import { ThemeProvider, useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
@@ -53,7 +52,7 @@ export const Navigation = forwardRef<NavigationProps, HTMLElement, SubComponents
     return (
         <ThemeProvider value={theme}>
             <nav
-                className={classNames(
+                className={classNames.join(
                     className,
                     handleBasicClasses({
                         prefix: CLASSNAME,

@@ -1,10 +1,9 @@
 import { FocusEventHandler, KeyboardEventHandler, ReactNode, useCallback } from 'react';
 
-import classNames from 'classnames';
-
 import { Icon, IconProps, Size, Text } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
 
@@ -106,7 +105,7 @@ export const Tab = forwardRef<TabProps, HTMLButtonElement>((props, ref) => {
             {...forwardedProps}
             type="button"
             id={state?.tabId}
-            className={classNames(
+            className={classNames.join(
                 className,
                 handleBasicClasses({ prefix: CLASSNAME, isActive, isDisabled: isAnyDisabled }),
             )}
