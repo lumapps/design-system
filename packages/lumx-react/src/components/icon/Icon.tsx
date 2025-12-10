@@ -3,7 +3,7 @@ import { ColorPalette, ColorVariant, ColorWithVariants, Size, Theme } from '@lum
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { useClassnames } from '@lumx/react/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { resolveColorWithVariants } from '@lumx/core/js/utils';
+import { resolveColorWithVariants } from '@lumx/core/js/utils/_internal/color';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
