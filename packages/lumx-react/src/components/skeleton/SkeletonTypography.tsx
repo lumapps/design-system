@@ -2,9 +2,8 @@ import { CSSProperties } from 'react';
 
 import { Theme, TypographyInterface, ColorPalette } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { useClassnames } from '@lumx/react/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
@@ -42,15 +41,23 @@ const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-skeleton-typograph
 export const SkeletonTypography = forwardRef<SkeletonTypographyProps, HTMLDivElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
     const { className, theme = defaultTheme, typography, width, color, ...forwardedProps } = props;
+    const { block, element } = useClassnames(CLASSNAME);
 
     return (
         <div
             ref={ref}
             {...forwardedProps}
-            className={classNames.join(className, handleBasicClasses({ prefix: CLASSNAME, theme, typography, color }))}
+            className={block(
+                {
+                    [`theme-${theme}`]: Boolean(theme),
+                    [`typography-${typography}`]: Boolean(typography),
+                    [`color-${color}`]: Boolean(color),
+                },
+                className,
+            )}
             style={{ ...forwardedProps.style, width }}
         >
-            <div className={`${CLASSNAME}__inner`} />
+            <div className={element('inner')} />
         </div>
     );
 });

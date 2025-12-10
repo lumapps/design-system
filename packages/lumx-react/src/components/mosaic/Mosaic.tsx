@@ -5,9 +5,8 @@ import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
 import { Alignment, AspectRatio, Theme, Thumbnail, ThumbnailProps } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { useClassnames } from '@lumx/react/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
@@ -45,6 +44,8 @@ const DEFAULT_PROPS: Partial<MosaicProps> = {};
 export const Mosaic = forwardRef<MosaicProps, HTMLDivElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
     const { className, theme = defaultTheme, thumbnails, onImageClick, ...forwardedProps } = props;
+    const { block, element } = useClassnames(CLASSNAME);
+
     const handleImageClick = useMemo(() => {
         if (!onImageClick) return undefined;
 
@@ -59,19 +60,23 @@ export const Mosaic = forwardRef<MosaicProps, HTMLDivElement>((props, ref) => {
         <div
             ref={ref}
             {...forwardedProps}
-            className={classNames.join(className, handleBasicClasses({ prefix: CLASSNAME, theme }), {
-                [`${CLASSNAME}--has-1-thumbnail`]: thumbnails?.length === 1,
-                [`${CLASSNAME}--has-2-thumbnails`]: thumbnails?.length === 2,
-                [`${CLASSNAME}--has-3-thumbnails`]: thumbnails?.length === 3,
-                [`${CLASSNAME}--has-4-thumbnails`]: thumbnails?.length >= 4,
-            })}
+            className={block(
+                {
+                    [`theme-${theme}`]: Boolean(theme),
+                    'has-1-thumbnail': thumbnails?.length === 1,
+                    'has-2-thumbnails': thumbnails?.length === 2,
+                    'has-3-thumbnails': thumbnails?.length === 3,
+                    'has-4-thumbnails': thumbnails?.length >= 4,
+                },
+                className,
+            )}
         >
-            <div className={`${CLASSNAME}__wrapper`}>
+            <div className={element('wrapper')}>
                 {take(thumbnails, 4).map((thumbnail: any, index: number) => {
                     const { image, onClick, align, ...thumbnailProps } = thumbnail;
 
                     return (
-                        <div key={index} className={`${CLASSNAME}__thumbnail`}>
+                        <div key={index} className={element('thumbnail')}>
                             <Thumbnail
                                 {...thumbnailProps}
                                 align={align || Alignment.left}
@@ -83,7 +88,7 @@ export const Mosaic = forwardRef<MosaicProps, HTMLDivElement>((props, ref) => {
                             />
 
                             {thumbnails.length > 4 && index === 3 && (
-                                <div className={`${CLASSNAME}__overlay`}>
+                                <div className={element('overlay')}>
                                     <span>+{thumbnails.length - 4}</span>
                                 </div>
                             )}

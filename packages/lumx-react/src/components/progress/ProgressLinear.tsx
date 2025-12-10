@@ -1,10 +1,9 @@
 import { Theme } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { useClassnames } from '@lumx/react/utils';
 
 export interface ProgressLinearProps extends GenericProps, HasTheme {}
 
@@ -33,15 +32,21 @@ const DEFAULT_PROPS: Partial<ProgressLinearProps> = {};
 export const ProgressLinear = forwardRef<ProgressLinearProps, HTMLDivElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
     const { className, theme = defaultTheme, ...forwardedProps } = props;
+    const { block, element } = useClassnames(CLASSNAME);
 
     return (
         <div
             ref={ref}
             {...forwardedProps}
-            className={classNames.join(className, handleBasicClasses({ prefix: CLASSNAME, theme }))}
+            className={block(
+                {
+                    [`theme-${theme}`]: Boolean(theme),
+                },
+                className,
+            )}
         >
-            <div className="lumx-progress-linear__line1" />
-            <div className="lumx-progress-linear__line2" />
+            <div className={element('line1')} />
+            <div className={element('line2')} />
         </div>
     );
 });

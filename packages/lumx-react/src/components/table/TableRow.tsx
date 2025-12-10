@@ -1,8 +1,7 @@
 import { GenericProps } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
-import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
+import { useClassnames } from '@lumx/react/utils';
 
 import { CLASSNAME as TABLE_CLASSNAME } from './constants';
 
@@ -45,20 +44,21 @@ const DEFAULT_PROPS: Partial<TableRowProps> = {};
 export const TableRow = forwardRef<TableRowProps, HTMLTableRowElement>((props, ref) => {
     const { isAnyDisabled, disabledStateProps, otherProps } = useDisableStateProps(props);
     const { children, className, isClickable, isSelected, ...forwardedProps } = otherProps;
+    const { element } = useClassnames(TABLE_CLASSNAME);
 
     return (
         <tr
             ref={ref}
             tabIndex={isClickable && !disabledStateProps.disabled ? 0 : -1}
             {...forwardedProps}
-            className={classNames.join(
+            className={element(
+                'row',
+                {
+                    'is-clickable': Boolean(isClickable && !isAnyDisabled),
+                    'is-disabled': isAnyDisabled,
+                    'is-selected': Boolean(isSelected && !isAnyDisabled),
+                },
                 className,
-                handleBasicClasses({
-                    isClickable: isClickable && !isAnyDisabled,
-                    isDisabled: isAnyDisabled,
-                    isSelected: isSelected && !isAnyDisabled,
-                    prefix: CLASSNAME,
-                }),
             )}
             aria-disabled={isAnyDisabled}
         >

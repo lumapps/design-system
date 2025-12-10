@@ -1,11 +1,9 @@
 import { ReactNode, Ref, SyntheticEvent, useMemo } from 'react';
 
-import isEmpty from 'lodash/isEmpty';
-
 import { ListProps, Size } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
-import { onEnterPressed, onButtonPressed, classNames } from '@lumx/core/js/utils';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { onEnterPressed, onButtonPressed } from '@lumx/core/js/utils';
+import { useClassnames } from '@lumx/react/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { renderLink } from '@lumx/react/utils/react/renderLink';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
@@ -67,7 +65,7 @@ const DEFAULT_PROPS: Partial<ListProps> = {
  * @return `true` if the list item is clickable; `false` otherwise.
  */
 export function isClickable({ linkProps, onItemSelected }: Partial<ListItemProps>): boolean {
-    return !isEmpty(linkProps?.href) || !!onItemSelected;
+    return Boolean(linkProps?.href) || Boolean(onItemSelected);
 }
 
 /**
@@ -93,6 +91,7 @@ export const ListItem = forwardRef<ListItemProps, HTMLLIElement>((props, ref) =>
         size = DEFAULT_PROPS.size,
         ...forwardedProps
     } = otherProps;
+    const { block, element } = useClassnames(CLASSNAME);
 
     const role = linkAs || linkProps.href ? 'link' : 'button';
     const onKeyDown = useMemo(() => {
@@ -103,9 +102,9 @@ export const ListItem = forwardRef<ListItemProps, HTMLLIElement>((props, ref) =>
 
     const content = (
         <>
-            {before && <div className={`${CLASSNAME}__before`}>{before}</div>}
-            <div className={`${CLASSNAME}__content`}>{children}</div>
-            {after && <div className={`${CLASSNAME}__after`}>{after}</div>}
+            {before && <div className={element('before')}>{before}</div>}
+            <div className={element('content')}>{children}</div>
+            {after && <div className={element('after')}>{after}</div>}
         </>
     );
 
@@ -113,12 +112,11 @@ export const ListItem = forwardRef<ListItemProps, HTMLLIElement>((props, ref) =>
         <li
             ref={ref}
             {...forwardedProps}
-            className={classNames.join(
+            className={block(
+                {
+                    [`size-${size}`]: Boolean(size),
+                },
                 className,
-                handleBasicClasses({
-                    prefix: CLASSNAME,
-                    size,
-                }),
             )}
         >
             {isClickable({ linkProps, onItemSelected }) ? (
@@ -131,14 +129,11 @@ export const ListItem = forwardRef<ListItemProps, HTMLLIElement>((props, ref) =>
                         'aria-disabled': isAnyDisabled,
                         ...linkProps,
                         href: isAnyDisabled ? undefined : linkProps.href,
-                        className: classNames.join(
-                            handleBasicClasses({
-                                prefix: `${CLASSNAME}__link`,
-                                isHighlighted,
-                                isSelected,
-                                isDisabled: isAnyDisabled,
-                            }),
-                        ),
+                        className: element('link', {
+                            'is-highlighted': Boolean(isHighlighted),
+                            'is-selected': Boolean(isSelected),
+                            'is-disabled': Boolean(isAnyDisabled),
+                        }),
                         onClick: isAnyDisabled ? undefined : onItemSelected,
                         onKeyDown: isAnyDisabled ? undefined : onKeyDown,
                         ref: linkRef,
@@ -147,7 +142,7 @@ export const ListItem = forwardRef<ListItemProps, HTMLLIElement>((props, ref) =>
                 )
             ) : (
                 /* Non clickable list item */
-                <div className={`${CLASSNAME}__wrapper`}>{content}</div>
+                <div className={element('wrapper')}>{content}</div>
             )}
         </li>
     );

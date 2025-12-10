@@ -2,9 +2,9 @@ import React, { ReactNode } from 'react';
 
 import { GenericProps } from '@lumx/react/utils/type';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { useClassnames } from '@lumx/react/utils';
 
 import { useRovingTabIndex } from '../../hooks/useRovingTabIndex';
 import { useTabProviderContextState } from '../tabs/state';
@@ -45,6 +45,7 @@ const DEFAULT_PROPS: Partial<ProgressTrackerProps> = {};
  */
 export const ProgressTracker = forwardRef<ProgressTrackerProps, HTMLDivElement>((props, ref) => {
     const { 'aria-label': ariaLabel, children, className, ...forwardedProps } = props;
+    const { block, element } = useClassnames(CLASSNAME);
     const stepListRef = React.useRef(null);
     useRovingTabIndex({
         parentRef: stepListRef,
@@ -60,18 +61,18 @@ export const ProgressTracker = forwardRef<ProgressTrackerProps, HTMLDivElement>(
         numberOfSteps > 0 ? ((100 / (numberOfSteps - 1)) * (state?.activeTabIndex || 0)) / 100 : 0;
 
     return (
-        <div ref={mergeRefs(ref, stepListRef)} {...forwardedProps} className={classNames.join(className, CLASSNAME)}>
-            <div className={`${CLASSNAME}__steps`} role="tablist" aria-label={ariaLabel}>
+        <div ref={mergeRefs(ref, stepListRef)} {...forwardedProps} className={block([className])}>
+            <div className={element('steps')} role="tablist" aria-label={ariaLabel}>
                 {children}
             </div>
 
             <div
-                className={`${CLASSNAME}__background-bar`}
+                className={element('background-bar')}
                 style={{ left: `${backgroundPosition}%`, right: `${backgroundPosition}%` }}
             />
 
             <div
-                className={`${CLASSNAME}__foreground-bar`}
+                className={element('foreground-bar')}
                 style={{
                     left: `${backgroundPosition}%`,
                     right: `${backgroundPosition}%`,

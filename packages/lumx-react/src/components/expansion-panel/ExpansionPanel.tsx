@@ -2,17 +2,14 @@ import React, { Children, PropsWithChildren, ReactNode, useRef } from 'react';
 
 import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
 
-import isEmpty from 'lodash/isEmpty';
-
 import { ColorPalette, DragHandle, Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
 import { GenericProps, HasCloseMode, HasTheme, isComponent } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { partitionMulti } from '@lumx/react/utils/partitionMulti';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { IS_BROWSER } from '@lumx/react/constants';
+import { useClassnames } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
@@ -84,6 +81,7 @@ export const ExpansionPanel = forwardRef<ExpansionPanelProps, HTMLDivElement>((p
         toggleButtonProps,
         ...forwardedProps
     } = props;
+    const { block, element } = useClassnames(CLASSNAME);
 
     const children: ReactNode[] = Children.toArray(anyChildren);
 
@@ -92,11 +90,8 @@ export const ExpansionPanel = forwardRef<ExpansionPanelProps, HTMLDivElement>((p
 
     // Either take the header in children or create one with the label.
     const headerProps: PropsWithChildren<any> = React.isValidElement(header) ? header.props : {};
-    const headerContent = !isEmpty(headerProps.children) ? (
-        headerProps.children
-    ) : (
-        <span className={`${CLASSNAME}__label`}>{label}</span>
-    );
+    const hasHeaderChildren = React.Children.count(headerProps.children) > 0;
+    const headerContent = hasHeaderChildren ? headerProps.children : <span className={element('label')}>{label}</span>;
 
     const toggleOpen = (event: React.MouseEvent) => {
         const shouldOpen = !isOpen;
@@ -114,18 +109,17 @@ export const ExpansionPanel = forwardRef<ExpansionPanelProps, HTMLDivElement>((p
 
     const color = theme === Theme.dark ? ColorPalette.light : ColorPalette.dark;
 
-    const rootClassName = classNames.join(
+    const rootClassName = block(
+        {
+            'has-background': Boolean(hasBackground),
+            'has-header': Boolean(hasHeaderChildren),
+            'has-header-divider': Boolean(hasHeaderDivider),
+            'is-close': Boolean(!isOpen),
+            'is-draggable': Boolean(dragHandle),
+            'is-open': Boolean(isOpen),
+            [`theme-${theme}`]: Boolean(theme),
+        },
         className,
-        handleBasicClasses({
-            hasBackground,
-            hasHeader: Boolean(!isEmpty(headerProps.children)),
-            hasHeaderDivider,
-            isClose: !isOpen,
-            isDraggable: Boolean(dragHandle),
-            isOpen,
-            prefix: CLASSNAME,
-            theme,
-        }),
     );
 
     const wrapperRef = useRef<HTMLDivElement>(null);
@@ -160,14 +154,14 @@ export const ExpansionPanel = forwardRef<ExpansionPanelProps, HTMLDivElement>((p
     return (
         <section ref={ref} {...forwardedProps} className={rootClassName}>
             {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
-            <header className={`${CLASSNAME}__header`} onClick={toggleOpen}>
-                {dragHandle && <div className={`${CLASSNAME}__header-drag`}>{dragHandle}</div>}
+            <header className={element('header')} onClick={toggleOpen}>
+                {dragHandle && <div className={element('header-drag')}>{dragHandle}</div>}
 
-                <div {...headerProps} className={`${CLASSNAME}__header-content`}>
+                <div {...headerProps} className={element('header-content')}>
                     {headerContent}
                 </div>
 
-                <div className={`${CLASSNAME}__header-toggle`}>
+                <div className={element('header-toggle')}>
                     <IconButton
                         {...toggleButtonProps}
                         color={color}
@@ -178,12 +172,12 @@ export const ExpansionPanel = forwardRef<ExpansionPanelProps, HTMLDivElement>((p
                 </div>
             </header>
 
-            <div className={`${CLASSNAME}__wrapper`} ref={wrapperRef}>
+            <div className={element('wrapper')} ref={wrapperRef}>
                 {(isOpen || isChildrenVisible) && (
-                    <div className={`${CLASSNAME}__container`}>
-                        <div className={`${CLASSNAME}__content`}>{content}</div>
+                    <div className={element('container')}>
+                        <div className={element('content')}>{content}</div>
 
-                        {footer && <div className={`${CLASSNAME}__footer`}>{footer}</div>}
+                        {footer && <div className={element('footer')}>{footer}</div>}
                     </div>
                 )}
             </div>

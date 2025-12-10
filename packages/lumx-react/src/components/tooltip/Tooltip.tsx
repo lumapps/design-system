@@ -3,7 +3,7 @@ import React, { ReactNode, useState } from 'react';
 
 import { DOCUMENT } from '@lumx/react/constants';
 import { GenericProps, HasCloseMode } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { Portal, useClassnames } from '@lumx/react/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
@@ -12,9 +12,7 @@ import { TooltipContextProvider } from '@lumx/react/components/tooltip/context';
 import { useId } from '@lumx/react/hooks/useId';
 import { usePopper } from '@lumx/react/hooks/usePopper';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
-
 import { ARIA_LINK_MODES, TOOLTIP_ZINDEX } from '@lumx/react/components/tooltip/constants';
-import { Portal } from '@lumx/react/utils';
 import { useInjectTooltipRef } from './useInjectTooltipRef';
 import { useTooltipOpen } from './useTooltipOpen';
 
@@ -125,6 +123,7 @@ export const Tooltip = forwardRef<TooltipProps, HTMLDivElement>((props, ref) => 
     const labelLines = label ? label.split('\n') : [];
 
     const tooltipRef = useMergeRefs(ref, setPopperElement, onPopperMount);
+    const { block, element } = useClassnames(CLASSNAME);
 
     return (
         <>
@@ -136,20 +135,18 @@ export const Tooltip = forwardRef<TooltipProps, HTMLDivElement>((props, ref) => 
                         {...forwardedProps}
                         id={id}
                         role="tooltip"
-                        className={classNames.join(
-                            className,
-                            handleBasicClasses({
-                                prefix: CLASSNAME,
-                                position,
-                                isInitializing: !styles.popper?.transform,
-                            }),
-                            isHidden && classNames.visuallyHidden(),
+                        className={block(
+                            {
+                                [`position-${position}`]: Boolean(position),
+                                'is-initializing': !styles.popper?.transform,
+                            },
+                            [className, isHidden && classNames.visuallyHidden()],
                         )}
                         style={{ ...(isHidden ? undefined : styles.popper), zIndex }}
                         {...attributes.popper}
                     >
-                        <div className={`${CLASSNAME}__arrow`} />
-                        <div className={`${CLASSNAME}__inner`}>
+                        <div className={element('arrow')} />
+                        <div className={element('inner')}>
                             {labelLines.map((line) => (
                                 <p key={line}>{line}</p>
                             ))}

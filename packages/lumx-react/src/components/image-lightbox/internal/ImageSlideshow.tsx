@@ -1,10 +1,12 @@
 import React from 'react';
 
+import memoize from 'lodash/memoize';
+
 import { mdiMagnifyMinusOutline, mdiMagnifyPlusOutline } from '@lumx/icons';
 import { FlexBox, IconButton, Slides, SlideshowControls } from '@lumx/react';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
+import { useClassnames } from '@lumx/react/utils';
 
-import memoize from 'lodash/memoize';
 import { ImageCaption } from '../../image-block/ImageCaption';
 import { CLASSNAME } from '../constants';
 import type { ImagesProps, InheritedSlideShowProps, ZoomButtonProps } from '../types';
@@ -41,6 +43,7 @@ export const ImageSlideshow: React.FC<ImageSlideshowProps> = ({
         itemsCount: images.length,
         activeIndex: activeImageIndex,
     });
+    const { element } = useClassnames(CLASSNAME);
 
     // Image metadata (caption)
     const title = images[activeIndex]?.title;
@@ -144,16 +147,10 @@ export const ImageSlideshow: React.FC<ImageSlideshowProps> = ({
                 })}
             </Slides>
             {(metadata || slideShowControls || zoomControls) && (
-                <FlexBox
-                    ref={footerRef}
-                    className={`${CLASSNAME}__footer`}
-                    orientation="vertical"
-                    vAlign="center"
-                    gap="big"
-                >
+                <FlexBox ref={footerRef} className={element(`footer`)} orientation="vertical" vAlign="center" gap="big">
                     {metadata}
 
-                    <FlexBox className={`${CLASSNAME}__footer-actions`} orientation="horizontal" gap="regular">
+                    <FlexBox className={element(`footer-actions`)} orientation="horizontal" gap="regular">
                         {slideShowControls}
                         {zoomControls}
                     </FlexBox>

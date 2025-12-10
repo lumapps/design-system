@@ -3,9 +3,8 @@ import { FocusEventHandler, KeyboardEventHandler, useCallback } from 'react';
 import { mdiAlertCircle, mdiCheckCircle, mdiRadioboxBlank, mdiRadioboxMarked } from '@lumx/icons';
 import { Icon, InputHelper, InputLabel, Kind, Size } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { useClassnames } from '@lumx/react/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
@@ -74,6 +73,7 @@ export const ProgressTrackerStep = forwardRef<ProgressTrackerStepProps, HTMLButt
     } = otherProps;
     const state = useTabProviderContext('tab', id);
     const isActive = propIsActive || state?.isActive;
+    const { block, element } = useClassnames(CLASSNAME);
 
     const changeToCurrentTab = useCallback(() => {
         if (isAnyDisabled) {
@@ -121,15 +121,14 @@ export const ProgressTrackerStep = forwardRef<ProgressTrackerStepProps, HTMLButt
             {...forwardedProps}
             type="button"
             id={state?.tabId}
-            className={classNames.join(
+            className={block(
+                {
+                    'has-error': hasError,
+                    'is-active': isActive,
+                    'is-clickable': Boolean(state && !isAnyDisabled),
+                    'is-complete': isComplete,
+                },
                 className,
-                handleBasicClasses({
-                    prefix: CLASSNAME,
-                    hasError,
-                    isActive,
-                    isClickable: state && !isAnyDisabled,
-                    isComplete,
-                }),
             )}
             onClick={changeToCurrentTab}
             onKeyPress={handleKeyPress}
@@ -140,14 +139,14 @@ export const ProgressTrackerStep = forwardRef<ProgressTrackerStepProps, HTMLButt
             aria-selected={isActive}
             aria-controls={state?.tabPanelId}
         >
-            <Icon className={`${CLASSNAME}__state`} icon={getIcon()} size={Size.s} />
+            <Icon className={element('state')} icon={getIcon()} size={Size.s} />
 
-            <InputLabel htmlFor={state?.tabId || ''} className={`${CLASSNAME}__label`}>
+            <InputLabel htmlFor={state?.tabId || ''} className={element('label')}>
                 {label}
             </InputLabel>
 
             {helper && (
-                <InputHelper kind={hasError ? Kind.error : Kind.info} className={`${CLASSNAME}__helper`}>
+                <InputHelper kind={hasError ? Kind.error : Kind.info} className={element('helper')}>
                     {helper}
                 </InputHelper>
             )}

@@ -6,15 +6,12 @@ import { Button, Emphasis, Icon, Kind, Size, Theme } from '@lumx/react';
 import { DOCUMENT, NOTIFICATION_TRANSITION_DURATION } from '@lumx/react/constants';
 import { NOTIFICATION_CONFIGURATION } from '@lumx/react/components/notification/constants';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { Portal, useClassnames } from '@lumx/react/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { useTransitionVisibility } from '@lumx/react/hooks/useTransitionVisibility';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
-
-import { Portal } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
@@ -88,6 +85,7 @@ export const Notification = forwardRef<NotificationProps, HTMLDivElement>((props
     const rootRef = useRef<HTMLDivElement>(null);
     const isVisible = useTransitionVisibility(rootRef, !!isOpen, NOTIFICATION_TRANSITION_DURATION);
     const hasAction: boolean = Boolean(onActionClick) && Boolean(actionLabel);
+    const { block, element } = useClassnames(CLASSNAME);
 
     const handleCallback = (evt: React.MouseEvent) => {
         if (isFunction(onActionClick)) {
@@ -107,24 +105,23 @@ export const Notification = forwardRef<NotificationProps, HTMLDivElement>((props
                 ref={mergeRefs(ref, rootRef)}
                 role="alert"
                 {...forwardedProps}
-                className={classNames.join(
+                className={block(
+                    {
+                        [`color-${color}`]: Boolean(color),
+                        'has-action': hasAction,
+                        'is-hidden': !isOpen,
+                    },
                     className,
-                    handleBasicClasses({
-                        color,
-                        hasAction,
-                        isHidden: !isOpen,
-                        prefix: CLASSNAME,
-                    }),
                 )}
                 onClick={onClick}
                 style={{ ...style, zIndex }}
             >
-                <div className={`${CLASSNAME}__icon`}>
+                <div className={element('icon')}>
                     <Icon icon={icon} size={Size.s} />
                 </div>
-                <div className={`${CLASSNAME}__content`}>{content}</div>
+                <div className={element('content')}>{content}</div>
                 {hasAction && (
-                    <div className={`${CLASSNAME}__action`}>
+                    <div className={element('action')}>
                         <Button emphasis={Emphasis.medium} theme={theme} onClick={handleCallback}>
                             <span>{actionLabel}</span>
                         </Button>

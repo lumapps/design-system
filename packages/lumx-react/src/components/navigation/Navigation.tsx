@@ -1,7 +1,6 @@
 import { HasAriaLabelOrLabelledBy, HasClassName, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { useClassnames } from '@lumx/react/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { Orientation, Theme } from '@lumx/react';
 import { ThemeProvider, useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
@@ -49,22 +48,23 @@ export const Navigation = forwardRef<NavigationProps, HTMLElement, SubComponents
         orientation = DEFAULT_PROPS.orientation,
         ...forwardedProps
     } = props;
+    const { block, element } = useClassnames(CLASSNAME);
+
     return (
         <ThemeProvider value={theme}>
             <nav
-                className={classNames.join(
+                className={block(
+                    {
+                        [`theme-${theme}`]: Boolean(theme),
+                        [`orientation-${orientation}`]: Boolean(orientation),
+                    },
                     className,
-                    handleBasicClasses({
-                        prefix: CLASSNAME,
-                        theme,
-                        orientation,
-                    }),
                 )}
                 ref={ref}
                 {...forwardedProps}
             >
                 <NavigationContext.Provider value={{ orientation }}>
-                    <ul className={`${CLASSNAME}__list`}>{children}</ul>
+                    <ul className={element('list')}>{children}</ul>
                 </NavigationContext.Provider>
             </nav>
         </ThemeProvider>

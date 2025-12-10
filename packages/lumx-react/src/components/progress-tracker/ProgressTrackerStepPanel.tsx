@@ -1,8 +1,7 @@
 import { useTabProviderContext } from '@lumx/react/components/tabs/state';
 import { GenericProps } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
-import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { useClassnames } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
@@ -45,13 +44,14 @@ export const ProgressTrackerStepPanel = forwardRef<ProgressTrackerStepPanelProps
 
     const state = useTabProviderContext('tabPanel', id);
     const isActive = propIsActive || state?.isActive;
+    const { block } = useClassnames(CLASSNAME);
 
     return (
         <div
             ref={ref}
             {...forwardedProps}
             id={state?.tabPanelId}
-            className={classNames.join(className, handleBasicClasses({ prefix: CLASSNAME, isActive }))}
+            className={block({ 'is-active': isActive }, className)}
             role="tabpanel"
             tabIndex={isActive ? 0 : -1}
             aria-labelledby={state?.tabId}

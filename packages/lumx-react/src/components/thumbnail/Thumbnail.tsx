@@ -11,9 +11,8 @@ import React, {
 
 import { AspectRatio, HorizontalAlignment, Icon, Size, Theme, ThumbnailObjectFit } from '@lumx/react';
 import { Falsy, GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { useClassnames } from '@lumx/react/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { mdiImageBroken } from '@lumx/icons';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useImageLoad } from '@lumx/react/components/thumbnail/useImageLoad';
@@ -130,6 +129,7 @@ export const Thumbnail = forwardRef<ThumbnailProps>((props, ref) => {
         ...forwardedProps
     } = otherProps;
     const [imgElement, setImgElement] = useState<HTMLImageElement>();
+    const { block, element } = useClassnames(CLASSNAME);
 
     // Image loading state.
     const loadingState = useImageLoad(image, imgElement);
@@ -179,28 +179,26 @@ export const Thumbnail = forwardRef<ThumbnailProps>((props, ref) => {
         <Wrapper
             {...wrapperProps}
             ref={ref}
-            className={classNames.join(
-                linkProps?.className,
-                className,
-                handleBasicClasses({
-                    align,
-                    aspectRatio,
-                    prefix: CLASSNAME,
-                    size,
-                    theme,
-                    variant,
-                    isClickable,
-                    hasError,
-                    hasIconErrorFallback,
-                    hasCustomErrorFallback,
-                    isLoading,
-                    objectFit,
-                    hasBadge: !!badge,
-                }),
-                fillHeight && `${CLASSNAME}--fill-height`,
+            className={block(
+                {
+                    [`align-${align}`]: Boolean(align),
+                    [`aspect-ratio-${aspectRatio}`]: Boolean(aspectRatio),
+                    [`size-${size}`]: Boolean(size),
+                    [`theme-${theme}`]: Boolean(theme),
+                    [`variant-${variant}`]: Boolean(variant),
+                    'is-clickable': Boolean(isClickable),
+                    'has-error': Boolean(hasError),
+                    'has-icon-error-fallback': Boolean(hasIconErrorFallback),
+                    'has-custom-error-fallback': Boolean(hasCustomErrorFallback),
+                    'is-loading': Boolean(isLoading),
+                    [`object-fit-${objectFit}`]: Boolean(objectFit),
+                    'has-badge': Boolean(badge),
+                    'fill-height': Boolean(fillHeight),
+                },
+                [linkProps?.className, className],
             )}
         >
-            <span className={`${CLASSNAME}__background`}>
+            <span className={element('background')}>
                 <img
                     // Use placeholder image size
                     width={loadingPlaceholderImage?.naturalWidth}
@@ -215,12 +213,12 @@ export const Thumbnail = forwardRef<ThumbnailProps>((props, ref) => {
                         ...loadingStyle,
                     }}
                     ref={useMergeRefs(setImgElement, propImgRef)}
-                    className={classNames.join(
-                        handleBasicClasses({
-                            prefix: `${CLASSNAME}__image`,
-                            isLoading,
-                            hasDefinedSize: Boolean(imgProps?.height && imgProps.width),
-                        }),
+                    className={element(
+                        'image',
+                        {
+                            'is-loading': Boolean(isLoading),
+                            'has-defined-size': Boolean(imgProps?.height && imgProps.width),
+                        },
                         imgProps?.className,
                     )}
                     crossOrigin={crossOrigin}
@@ -229,7 +227,7 @@ export const Thumbnail = forwardRef<ThumbnailProps>((props, ref) => {
                     loading={loading}
                 />
                 {!isLoading && hasError && (
-                    <span className={`${CLASSNAME}__fallback`}>
+                    <span className={element('fallback')}>
                         {hasIconErrorFallback ? (
                             <Icon icon={fallback as string} size={Size.xxs} theme={theme} />
                         ) : (
@@ -238,8 +236,7 @@ export const Thumbnail = forwardRef<ThumbnailProps>((props, ref) => {
                     </span>
                 )}
             </span>
-            {badge &&
-                React.cloneElement(badge, { className: classNames.join(`${CLASSNAME}__badge`, badge.props.className) })}
+            {badge && React.cloneElement(badge, { className: element('badge', [badge.props.className]) })}
         </Wrapper>
     );
 });

@@ -3,9 +3,8 @@ import { ReactNode } from 'react';
 import { Alignment, HorizontalAlignment, Size, Theme, Thumbnail } from '@lumx/react';
 
 import { GenericProps, HasTheme, ValueOf } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { useClassnames } from '@lumx/react/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
@@ -94,25 +93,26 @@ export const ImageBlock = forwardRef<ImageBlockProps, HTMLDivElement>((props, re
         titleProps,
         ...forwardedProps
     } = props;
+    const { block, element } = useClassnames(CLASSNAME);
+
     return (
         <figure
             ref={ref}
             {...forwardedProps}
-            className={classNames.join(
+            className={block(
+                {
+                    [`caption-position-${captionPosition}`]: Boolean(captionPosition),
+                    [`align-${align}`]: Boolean(align),
+                    [`size-${size}`]: Boolean(size),
+                    [`theme-${theme}`]: Boolean(theme),
+                    'fill-height': Boolean(fillHeight),
+                },
                 className,
-                handleBasicClasses({
-                    prefix: CLASSNAME,
-                    captionPosition,
-                    align,
-                    size,
-                    theme,
-                }),
-                fillHeight && `${CLASSNAME}--fill-height`,
             )}
         >
             <Thumbnail
                 {...thumbnailProps}
-                className={classNames.join(`${CLASSNAME}__image`, thumbnailProps?.className)}
+                className={element('image', [thumbnailProps?.className])}
                 fillHeight={fillHeight}
                 align={align}
                 image={image}
@@ -122,18 +122,26 @@ export const ImageBlock = forwardRef<ImageBlockProps, HTMLDivElement>((props, re
             />
             <ImageCaption
                 as="figcaption"
-                baseClassName={CLASSNAME}
+                className={element('wrapper')}
                 theme={theme}
                 title={title}
-                titleProps={titleProps}
+                titleProps={{
+                    ...titleProps,
+                    className: element('title', [titleProps?.className]),
+                }}
                 description={description}
-                descriptionProps={descriptionProps}
+                descriptionProps={{
+                    ...descriptionProps,
+                    className: element('description', [descriptionProps?.className]),
+                }}
                 tags={tags}
+                tagsProps={{ className: element('tags') }}
                 captionStyle={captionStyle}
+                captionProps={{ className: element('caption') }}
                 align={align}
                 truncate={captionPosition === 'over'}
             />
-            {actions && <div className={`${CLASSNAME}__actions`}>{actions}</div>}
+            {actions && <div className={element('actions')}>{actions}</div>}
         </figure>
     );
 });

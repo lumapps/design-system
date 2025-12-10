@@ -13,11 +13,10 @@ import {
     ButtonProps,
 } from '@lumx/react';
 import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiInformation } from '@lumx/icons';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { useClassnames } from '@lumx/react/utils';
 import { useId } from '@lumx/react/hooks/useId';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import type { LumxClassName } from '@lumx/react/utils/type';
-import { classNames } from '@lumx/core/js/utils';
 
 export interface AlertDialogProps extends Omit<DialogProps, 'header' | 'footer'> {
     /** Message variant. */
@@ -97,6 +96,7 @@ export const AlertDialog = forwardRef<AlertDialogProps, HTMLDivElement>((props, 
     const cancelButtonRef = React.useRef(null);
     const confirmationButtonRef = React.useRef(null);
     const { color, icon } = CONFIG[kind as Kind] || {};
+    const { block } = useClassnames(CLASSNAME);
 
     // Define a unique ID to target title and description for aria attributes.
     const generatedId = useId();
@@ -122,12 +122,11 @@ export const AlertDialog = forwardRef<AlertDialogProps, HTMLDivElement>((props, 
                 'aria-describedby': descriptionId,
                 ...dialogProps,
             }}
-            className={classNames.join(
+            className={block(
+                {
+                    [`kind-${kind}`]: Boolean(kind),
+                },
                 className,
-                handleBasicClasses({
-                    kind,
-                    prefix: CLASSNAME,
-                }),
             )}
             {...forwardedProps}
         >

@@ -6,9 +6,8 @@ import { Dropdown } from '@lumx/react/components/dropdown/Dropdown';
 import { InputHelper } from '@lumx/react/components/input-helper/InputHelper';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { useListenFocus } from '@lumx/react/hooks/useListenFocus';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { useClassnames } from '@lumx/react/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 
 import { useId } from '@lumx/react/hooks/useId';
@@ -27,6 +26,7 @@ export const WithSelectContext = (
     ref: Ref<HTMLDivElement>,
 ): React.ReactElement => {
     const defaultTheme = useTheme() || Theme.light;
+    const { block, element } = useClassnames(CLASSNAME);
     const {
         children,
         className,
@@ -84,21 +84,20 @@ export const WithSelectContext = (
     return (
         <div
             ref={mergeRefs(ref, selectRef)}
-            className={classNames.join(
+            className={block(
+                {
+                    'has-error': hasError,
+                    'has-label': Boolean(label),
+                    'has-placeholder': Boolean(placeholder),
+                    'has-value': !isEmpty,
+                    'is-disabled': isDisabled,
+                    'is-empty': isEmpty,
+                    'is-focus': isFocus,
+                    'is-open': isOpen,
+                    'is-valid': isValid,
+                    [`theme-${theme || Theme.light}`]: true,
+                },
                 className,
-                handleBasicClasses({
-                    hasError,
-                    hasLabel: Boolean(label),
-                    hasPlaceholder: Boolean(placeholder),
-                    hasValue: !isEmpty,
-                    isDisabled,
-                    isEmpty,
-                    isFocus,
-                    isOpen,
-                    isValid,
-                    prefix: CLASSNAME,
-                    theme: theme === Theme.light ? Theme.light : Theme.dark,
-                }),
             )}
         >
             <SelectElement
@@ -134,12 +133,12 @@ export const WithSelectContext = (
                 {children}
             </Dropdown>
             {hasError && error && (
-                <InputHelper className={`${CLASSNAME}__helper`} kind={Kind.error} theme={theme}>
+                <InputHelper className={element('helper')} kind={Kind.error} theme={theme}>
                     {error}
                 </InputHelper>
             )}
             {helper && (
-                <InputHelper className={`${CLASSNAME}__helper`} theme={theme}>
+                <InputHelper className={element('helper')} theme={theme}>
                     {helper}
                 </InputHelper>
             )}

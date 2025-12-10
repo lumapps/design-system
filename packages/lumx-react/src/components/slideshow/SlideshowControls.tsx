@@ -5,9 +5,8 @@ import range from 'lodash/range';
 import { mdiChevronLeft, mdiChevronRight, mdiPlayCircleOutline, mdiPauseCircleOutline } from '@lumx/icons';
 import { Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { useClassnames } from '@lumx/react/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { WINDOW } from '@lumx/react/constants';
 import { useSlideshowControls, DEFAULT_OPTIONS } from '@lumx/react/hooks/useSlideshowControls';
 import { useRovingTabIndex } from '@lumx/react/hooks/useRovingTabIndex';
@@ -109,6 +108,7 @@ const InternalSlideshowControls = forwardRef<SlideshowControlsProps, HTMLDivElem
         parent = parentRef instanceof HTMLElement ? parentRef : parentRef?.current;
     }
     const paginationRef = React.useRef(null);
+    const { block, element } = useClassnames(CLASSNAME);
     // Listen to touch swipe navigate left & right.
     useSwipeNavigate(
         parent,
@@ -125,8 +125,8 @@ const InternalSlideshowControls = forwardRef<SlideshowControlsProps, HTMLDivElem
         parentRef: paginationRef,
         elementSelector: 'button',
         keepTabIndex: true,
-        onElementFocus: (element) => {
-            element.click();
+        onElementFocus: (el) => {
+            el.click();
         },
     });
 
@@ -140,25 +140,24 @@ const InternalSlideshowControls = forwardRef<SlideshowControlsProps, HTMLDivElem
         <div
             ref={ref}
             {...forwardedProps}
-            className={classNames.join(className, handleBasicClasses({ prefix: CLASSNAME, theme }), {
-                [`${CLASSNAME}--has-infinite-pagination`]: slidesCount > PAGINATION_ITEMS_MAX,
-            })}
+            className={block(
+                {
+                    [`theme-${theme}`]: Boolean(theme),
+                    'has-infinite-pagination': slidesCount > PAGINATION_ITEMS_MAX,
+                },
+                className,
+            )}
         >
             <IconButton
                 {...previousButtonProps}
                 icon={mdiChevronLeft}
-                className={`${CLASSNAME}__navigation`}
+                className={element('navigation')}
                 color={theme === Theme.dark ? 'light' : 'dark'}
                 emphasis={Emphasis.low}
                 onClick={onPreviousClick}
             />
-            <div ref={paginationRef} className={`${CLASSNAME}__pagination`}>
-                <div
-                    className={`${CLASSNAME}__pagination-items`}
-                    style={wrapperStyle}
-                    role="tablist"
-                    {...paginationProps}
-                >
+            <div ref={paginationRef} className={element('pagination')}>
+                <div className={element('pagination-items')} style={wrapperStyle} role="tablist" {...paginationProps}>
                     {useMemo(
                         () =>
                             range(slidesCount).map((index) => {
@@ -179,13 +178,13 @@ const InternalSlideshowControls = forwardRef<SlideshowControlsProps, HTMLDivElem
 
                                 return (
                                     <button
-                                        className={classNames.join(
-                                            handleBasicClasses({
-                                                prefix: `${CLASSNAME}__pagination-item`,
-                                                isActive,
-                                                isOnEdge,
-                                                isOutRange,
-                                            }),
+                                        className={element(
+                                            'pagination-item',
+                                            {
+                                                'is-active': isActive,
+                                                'is-on-edge': isOnEdge,
+                                                'is-out-range': isOutRange,
+                                            },
                                             itemClassName,
                                         )}
                                         key={index}
@@ -200,6 +199,7 @@ const InternalSlideshowControls = forwardRef<SlideshowControlsProps, HTMLDivElem
                                 );
                             }),
                         [
+                            element,
                             slidesCount,
                             visibleRange.min,
                             visibleRange.max,
@@ -216,7 +216,7 @@ const InternalSlideshowControls = forwardRef<SlideshowControlsProps, HTMLDivElem
                 <IconButton
                     {...playButtonProps}
                     icon={isAutoPlaying ? mdiPauseCircleOutline : mdiPlayCircleOutline}
-                    className={`${CLASSNAME}__play`}
+                    className={element('play')}
                     color={theme === Theme.dark ? 'light' : 'dark'}
                     emphasis={Emphasis.low}
                 />
@@ -225,7 +225,7 @@ const InternalSlideshowControls = forwardRef<SlideshowControlsProps, HTMLDivElem
             <IconButton
                 {...nextButtonProps}
                 icon={mdiChevronRight}
-                className={`${CLASSNAME}__navigation`}
+                className={element('navigation')}
                 color={theme === Theme.dark ? 'light' : 'dark'}
                 emphasis={Emphasis.low}
                 onClick={onNextClick}

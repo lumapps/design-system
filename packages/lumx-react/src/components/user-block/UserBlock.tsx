@@ -5,9 +5,8 @@ import set from 'lodash/set';
 
 import { Avatar, ColorPalette, Link, Orientation, Size, Theme } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { useClassnames } from '@lumx/react/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
@@ -102,6 +101,8 @@ export const UserBlock = forwardRef<UserBlockProps, HTMLDivElement>((props, ref)
         after,
         ...forwardedProps
     } = props;
+    const { block, element } = useClassnames(CLASSNAME);
+
     let componentSize = size;
 
     // Special case - When using vertical orientation force the size to be Sizes.l.
@@ -121,7 +122,7 @@ export const UserBlock = forwardRef<UserBlockProps, HTMLDivElement>((props, ref)
         let NameComponent: any = 'span';
         const nProps: any = {
             ...nameProps,
-            className: classNames.join(`${CLASSNAME}__name`, linkProps?.className, nameProps?.className),
+            className: element('name', [linkProps?.className, nameProps?.className]),
         };
         if (isClickable) {
             NameComponent = Link;
@@ -137,14 +138,14 @@ export const UserBlock = forwardRef<UserBlockProps, HTMLDivElement>((props, ref)
             set(avatarProps, ['thumbnailProps', 'tabIndex'], -1);
         }
         return <NameComponent {...nProps}>{name}</NameComponent>;
-    }, [avatarProps, isClickable, linkAs, linkProps, name, nameProps, onClick]);
+    }, [avatarProps, element, isClickable, linkAs, linkProps, name, nameProps, onClick]);
 
     const shouldDisplayFields = componentSize !== Size.s && componentSize !== Size.xs;
 
     const fieldsBlock: ReactNode = fields && shouldDisplayFields && (
-        <div className={`${CLASSNAME}__fields`}>
+        <div className={element('fields')}>
             {fields.map((field: string, idx: number) => (
-                <span key={idx} className={`${CLASSNAME}__field`}>
+                <span key={idx} className={element('field')}>
                     {field}
                 </span>
             ))}
@@ -155,9 +156,14 @@ export const UserBlock = forwardRef<UserBlockProps, HTMLDivElement>((props, ref)
         <div
             ref={ref}
             {...forwardedProps}
-            className={classNames.join(
+            className={block(
+                {
+                    [`orientation-${orientation}`]: Boolean(orientation),
+                    [`size-${componentSize}`]: Boolean(componentSize),
+                    [`theme-${theme}`]: Boolean(theme),
+                    'is-clickable': Boolean(isClickable),
+                },
                 className,
-                handleBasicClasses({ prefix: CLASSNAME, orientation, size: componentSize, theme, isClickable }),
             )}
             onMouseLeave={onMouseLeave}
             onMouseEnter={onMouseEnter}
@@ -168,24 +174,22 @@ export const UserBlock = forwardRef<UserBlockProps, HTMLDivElement>((props, ref)
                     linkProps={linkProps}
                     alt=""
                     {...(avatarProps as any)}
-                    className={classNames.join(`${CLASSNAME}__avatar`, avatarProps.className)}
+                    className={element('avatar', [avatarProps.className])}
                     size={componentSize}
                     onClick={onClick}
                     theme={theme}
                 />
             )}
             {(fields || name || children || additionalFields) && (
-                <div className={`${CLASSNAME}__wrapper`}>
+                <div className={element('wrapper')}>
                     {children || nameBlock}
                     {fieldsBlock}
                     {shouldDisplayFields ? additionalFields : null}
                 </div>
             )}
-            {shouldDisplayActions && simpleAction && <div className={`${CLASSNAME}__action`}>{simpleAction}</div>}
-            {shouldDisplayActions && multipleActions && (
-                <div className={`${CLASSNAME}__actions`}>{multipleActions}</div>
-            )}
-            {after ? <div className={`${CLASSNAME}__after`}>{after}</div> : null}
+            {shouldDisplayActions && simpleAction && <div className={element('action')}>{simpleAction}</div>}
+            {shouldDisplayActions && multipleActions && <div className={element('actions')}>{multipleActions}</div>}
+            {after ? <div className={element('after')}>{after}</div> : null}
         </div>
     );
 });

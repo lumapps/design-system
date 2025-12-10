@@ -2,9 +2,8 @@ import { useRef, useState, useContext } from 'react';
 
 import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
 import { Icon, Size, Text, Orientation, Popover, Placement, Theme } from '@lumx/react';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { useClassnames } from '@lumx/react/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { HasClassName } from '@lumx/react/utils/type';
 import { ThemeProvider, useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { useId } from '@lumx/react/hooks/useId';
@@ -41,17 +40,17 @@ export const NavigationSection = forwardRef<NavigationSectionProps, HTMLLIElemen
     const { orientation } = useContext(NavigationContext) || {};
     const theme = useTheme();
     const isDropdown = orientation === Orientation.horizontal;
+    const item = useClassnames(ITEM_CLASSNAME);
+    const { block, element } = useClassnames(CLASSNAME);
+
     return (
         <li
-            className={classNames.join(
+            className={block([
                 className,
-                CLASSNAME,
-                ITEM_CLASSNAME,
-                handleBasicClasses({
-                    prefix: ITEM_CLASSNAME,
-                    theme,
+                item.block({
+                    [`theme-${theme}`]: Boolean(theme),
                 }),
-            )}
+            ])}
             ref={ref}
         >
             <RawClickable<'button'>
@@ -59,20 +58,20 @@ export const NavigationSection = forwardRef<NavigationSectionProps, HTMLLIElemen
                 {...forwardedProps}
                 aria-controls={sectionId}
                 aria-expanded={isOpen}
-                className={classNames.join(`${ITEM_CLASSNAME}__link`)}
+                className={item.element('link')}
                 ref={buttonRef}
                 onClick={(event) => {
                     setIsOpen(!isOpen);
                     event.stopPropagation();
                 }}
             >
-                {icon ? <Icon className={`${ITEM_CLASSNAME}__icon`} icon={icon} size={Size.xs} /> : null}
+                {icon ? <Icon className={item.element('icon')} icon={icon} size={Size.xs} /> : null}
 
-                <Text as="span" truncate className={`${ITEM_CLASSNAME}__label`} ref={ref}>
+                <Text as="span" truncate className={item.element('label')} ref={ref}>
                     {label}
                 </Text>
                 <Icon
-                    className={classNames.join(`${ITEM_CLASSNAME}__icon`, `${CLASSNAME}__chevron`)}
+                    className={element('chevron', [item.element('icon')])}
                     icon={isOpen ? mdiChevronUp : mdiChevronDown}
                 />
             </RawClickable>
@@ -90,7 +89,7 @@ export const NavigationSection = forwardRef<NavigationSectionProps, HTMLLIElemen
                         zIndex={996}
                     >
                         <ThemeProvider value={Theme.light}>
-                            <ul className={`${CLASSNAME}__drawer--popover`} id={sectionId}>
+                            <ul className={element('drawer', { popover: true })} id={sectionId}>
                                 <NavigationContext.Provider value={{ orientation: Orientation.vertical }}>
                                     {children}
                                 </NavigationContext.Provider>
@@ -98,7 +97,7 @@ export const NavigationSection = forwardRef<NavigationSectionProps, HTMLLIElemen
                         </ThemeProvider>
                     </Popover>
                 ) : (
-                    <ul className={`${CLASSNAME}__drawer`} id={sectionId}>
+                    <ul className={element('drawer')} id={sectionId}>
                         {children}
                     </ul>
                 ))}

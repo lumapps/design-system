@@ -1,12 +1,9 @@
 import { Children, InputHTMLAttributes, SyntheticEvent } from 'react';
 
-import isEmpty from 'lodash/isEmpty';
-
 import { Alignment, InputHelper, InputLabel, Theme } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { useClassnames } from '@lumx/react/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { useId } from '@lumx/react/hooks/useId';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
@@ -79,6 +76,7 @@ export const Switch = forwardRef<SwitchProps, HTMLDivElement>((props, ref) => {
         inputProps = {},
         ...forwardedProps
     } = otherProps;
+    const { block, element } = useClassnames(CLASSNAME);
     const generatedInputId = useId();
     const inputId = id || generatedInputId;
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -91,24 +89,23 @@ export const Switch = forwardRef<SwitchProps, HTMLDivElement>((props, ref) => {
         <div
             ref={ref}
             {...forwardedProps}
-            className={classNames.join(
+            className={block(
+                {
+                    'is-checked': Boolean(isChecked),
+                    'is-disabled': Boolean(isAnyDisabled),
+                    'is-unchecked': Boolean(!isChecked),
+                    [`position-${position}`]: Boolean(position),
+                    [`theme-${theme}`]: Boolean(theme),
+                },
                 className,
-                handleBasicClasses({
-                    prefix: CLASSNAME,
-                    isChecked,
-                    isDisabled: isAnyDisabled,
-                    position,
-                    theme,
-                    isUnchecked: !isChecked,
-                }),
             )}
         >
-            <div className={`${CLASSNAME}__input-wrapper`}>
+            <div className={element('input-wrapper')}>
                 <input
                     type="checkbox"
                     role="switch"
                     id={inputId}
-                    className={`${CLASSNAME}__input-native`}
+                    className={element('input-native')}
                     name={name}
                     value={value}
                     {...disabledStateProps}
@@ -120,19 +117,19 @@ export const Switch = forwardRef<SwitchProps, HTMLDivElement>((props, ref) => {
                     {...inputProps}
                 />
 
-                <div className={`${CLASSNAME}__input-placeholder`}>
-                    <div className={`${CLASSNAME}__input-background`} />
-                    <div className={`${CLASSNAME}__input-indicator`} />
+                <div className={element('input-placeholder')}>
+                    <div className={element('input-background')} />
+                    <div className={element('input-indicator')} />
                 </div>
             </div>
 
             {Children.count(children) > 0 && (
-                <div className={`${CLASSNAME}__content`}>
-                    <InputLabel htmlFor={inputId} theme={theme} className={`${CLASSNAME}__label`}>
+                <div className={element('content')}>
+                    <InputLabel htmlFor={inputId} theme={theme} className={element('label')}>
                         {children}
                     </InputLabel>
-                    {!isEmpty(helper) && (
-                        <InputHelper id={`${inputId}-helper`} theme={theme} className={`${CLASSNAME}__helper`}>
+                    {helper && (
+                        <InputHelper id={`${inputId}-helper`} theme={theme} className={element('helper')}>
                             {helper}
                         </InputHelper>
                     )}

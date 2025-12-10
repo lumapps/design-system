@@ -2,9 +2,8 @@ import { ReactNode } from 'react';
 
 import { ColorPalette } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { useClassnames } from '@lumx/react/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
@@ -43,11 +42,18 @@ const DEFAULT_PROPS: Partial<BadgeProps> = {
  */
 export const Badge = forwardRef<BadgeProps, HTMLDivElement>((props, ref) => {
     const { children, className, color = DEFAULT_PROPS.color, ...forwardedProps } = props;
+    const { block } = useClassnames(CLASSNAME);
+
     return (
         <div
             ref={ref}
             {...forwardedProps}
-            className={classNames.join(className, handleBasicClasses({ prefix: CLASSNAME, color }))}
+            className={block(
+                {
+                    [`color-${color}`]: Boolean(color),
+                },
+                className,
+            )}
         >
             {children}
         </div>

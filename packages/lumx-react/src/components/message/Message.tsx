@@ -3,9 +3,8 @@ import { ReactNode } from 'react';
 import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiClose, mdiInformation } from '@lumx/icons';
 import { ColorPalette, Emphasis, Icon, IconButton, Kind, Size } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { useClassnames } from '@lumx/react/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
@@ -61,6 +60,7 @@ const CONFIG = {
  * @return React element.
  */
 export const Message = forwardRef<MessageProps, HTMLDivElement>((props, ref) => {
+    const { block, element } = useClassnames(CLASSNAME);
     const { children, className, hasBackground, kind, icon: customIcon, closeButtonProps, ...forwardedProps } = props;
     const { color, icon } = CONFIG[kind as Kind] || {};
     const { onClick, label: closeButtonLabel } = closeButtonProps || {};
@@ -69,23 +69,22 @@ export const Message = forwardRef<MessageProps, HTMLDivElement>((props, ref) => 
     return (
         <div
             ref={ref}
-            className={classNames.join(
+            className={block(
+                {
+                    [`color-${color}`]: Boolean(color),
+                    'has-background': hasBackground,
+                },
                 className,
-                handleBasicClasses({
-                    color,
-                    hasBackground,
-                    prefix: CLASSNAME,
-                }),
             )}
             {...forwardedProps}
         >
             {(customIcon || icon) && (
-                <Icon className={`${CLASSNAME}__icon`} icon={customIcon || icon} size={Size.xs} color={color} />
+                <Icon className={element('icon')} icon={customIcon || icon} size={Size.xs} color={color} />
             )}
-            <div className={`${CLASSNAME}__text`}>{children}</div>
+            <div className={element('text')}>{children}</div>
             {isCloseButtonDisplayed && (
                 <IconButton
-                    className={`${CLASSNAME}__close-button`}
+                    className={element('close-button')}
                     icon={mdiClose}
                     onClick={onClick}
                     label={closeButtonLabel}

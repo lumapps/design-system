@@ -1,8 +1,7 @@
 import { Theme } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { useClassnames } from '@lumx/react/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
@@ -36,12 +35,18 @@ const DEFAULT_PROPS: Partial<DividerProps> = {};
 export const Divider = forwardRef<DividerProps, HTMLHRElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
     const { className, theme = defaultTheme, ...forwardedProps } = props;
+    const { block } = useClassnames(CLASSNAME);
 
     return (
         <hr
             ref={ref}
             {...forwardedProps}
-            className={classNames.join(className, handleBasicClasses({ prefix: CLASSNAME, theme }))}
+            className={block(
+                {
+                    [`theme-${theme}`]: Boolean(theme),
+                },
+                className,
+            )}
         />
     );
 });

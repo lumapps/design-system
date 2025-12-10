@@ -5,13 +5,11 @@ import { Size, Theme } from '@lumx/core/js/constants';
 import { Chip } from '@lumx/react/components/chip/Chip';
 import { Icon } from '@lumx/react/components/icon/Icon';
 import { InputLabel } from '@lumx/react/components/input-label/InputLabel';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { useClassnames } from '@lumx/react/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
-
 import { WithSelectContext } from './WithSelectContext';
 import { CoreSelectProps, SelectVariant } from './constants';
 
@@ -59,6 +57,7 @@ const DEFAULT_PROPS: Partial<SelectMultipleProps> = {
 
 export const SelectMultipleField: React.FC<SelectMultipleProps> = (props) => {
     const defaultTheme = useTheme();
+    const { element } = useClassnames(CLASSNAME);
     const {
         anchorRef,
         handleKeyboardNav,
@@ -87,13 +86,8 @@ export const SelectMultipleField: React.FC<SelectMultipleProps> = (props) => {
             {variant === SelectVariant.input && (
                 <>
                     {label && (
-                        <div className={`${CLASSNAME}__header`}>
-                            <InputLabel
-                                htmlFor={id}
-                                className={`${CLASSNAME}__label`}
-                                isRequired={isRequired}
-                                theme={theme}
-                            >
+                        <div className={element('header')}>
+                            <InputLabel htmlFor={id} className={element('label')} isRequired={isRequired} theme={theme}>
                                 {label}
                             </InputLabel>
                         </div>
@@ -103,7 +97,7 @@ export const SelectMultipleField: React.FC<SelectMultipleProps> = (props) => {
                     <div
                         ref={mergeRefs(anchorRef as RefObject<HTMLDivElement>, selectElementRef)}
                         id={id}
-                        className={`${CLASSNAME}__wrapper`}
+                        className={element('wrapper')}
                         onClick={onInputClick}
                         onKeyDown={handleKeyboardNav}
                         tabIndex={isDisabled ? undefined : 0}
@@ -112,36 +106,31 @@ export const SelectMultipleField: React.FC<SelectMultipleProps> = (props) => {
                     >
                         {icon && (
                             <Icon
-                                className={`${CLASSNAME}__input-icon`}
+                                className={element('input-icon')}
                                 color={theme === Theme.dark ? 'light' : undefined}
                                 icon={icon}
                                 size={Size.xs}
                             />
                         )}
 
-                        <div className={`${CLASSNAME}__chips`}>
+                        <div className={element('chips')}>
                             {!isEmpty &&
                                 value.map((val, index) => selectedChipRender?.(val, index, onClear, isDisabled, theme))}
                         </div>
 
                         {isEmpty && placeholder && (
-                            <div
-                                className={classNames.join([
-                                    `${CLASSNAME}__input-native`,
-                                    `${CLASSNAME}__input-native--placeholder`,
-                                ])}
-                            >
+                            <div className={element('input-native', { placeholder: true })}>
                                 <span>{placeholder}</span>
                             </div>
                         )}
 
                         {(isValid || hasError) && (
-                            <div className={`${CLASSNAME}__input-validity`}>
+                            <div className={element('input-validity')}>
                                 <Icon icon={isValid ? mdiCheckCircle : mdiAlertCircle} size={Size.xxs} />
                             </div>
                         )}
 
-                        <div className={`${CLASSNAME}__input-indicator`}>
+                        <div className={element('input-indicator')}>
                             <Icon icon={mdiMenuDown} size={Size.s} />
                         </div>
                     </div>
@@ -183,17 +172,17 @@ export const SelectMultipleField: React.FC<SelectMultipleProps> = (props) => {
  * @return React element.
  */
 export const SelectMultiple = forwardRef<SelectMultipleProps, HTMLDivElement>((props, ref) => {
+    const { block } = useClassnames(CLASSNAME);
     return WithSelectContext(
         SelectMultipleField,
         {
             ...DEFAULT_PROPS,
             ...props,
-            className: classNames.join(
+            className: block(
+                {
+                    'has-multiple': !props.isEmpty,
+                },
                 props.className,
-                handleBasicClasses({
-                    hasMultiple: !props.isEmpty,
-                    prefix: CLASSNAME,
-                }),
             ),
             isEmpty: props.value.length === 0,
             isMultiple: true,
