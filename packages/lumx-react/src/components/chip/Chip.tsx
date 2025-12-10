@@ -6,9 +6,9 @@ import { ColorPalette, Size, Theme } from '@lumx/react';
 import { useStopPropagation } from '@lumx/react/hooks/useStopPropagation';
 
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { onEnterPressed } from '@lumx/core/js/utils';
+import { useClassnames } from '@lumx/react/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames, onEnterPressed } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
@@ -92,6 +92,7 @@ export const Chip = forwardRef<ChipProps, HTMLAnchorElement>((props, ref) => {
         onKeyDown,
         ...forwardedProps
     } = otherProps;
+    const { block, element } = useClassnames(CLASSNAME);
     const hasAfterClick = isFunction(onAfterClick);
     const hasBeforeClick = isFunction(onBeforeClick);
     const hasOnClick = isFunction(props.onClick);
@@ -118,20 +119,19 @@ export const Chip = forwardRef<ChipProps, HTMLAnchorElement>((props, ref) => {
             {...forwardedProps}
             href={!disabledStateProps.disabled ? href : undefined}
             ref={ref}
-            className={classNames.join(
+            className={block(
+                {
+                    'is-clickable': Boolean(isClickable),
+                    'is-disabled': Boolean(isAnyDisabled),
+                    'is-highlighted': Boolean(isHighlighted),
+                    'is-selected': Boolean(isSelected),
+                    'is-unselected': Boolean(!isSelected),
+                    'has-after': Boolean(after),
+                    'has-before': Boolean(before),
+                    [`color-${chipColor}`]: Boolean(chipColor),
+                    [`size-${size}`]: Boolean(size),
+                },
                 className,
-                handleBasicClasses({
-                    clickable: isClickable,
-                    color: chipColor,
-                    isDisabled: isAnyDisabled,
-                    hasAfter: Boolean(after),
-                    hasBefore: Boolean(before),
-                    highlighted: Boolean(isHighlighted),
-                    prefix: CLASSNAME,
-                    selected: Boolean(isSelected),
-                    size,
-                    unselected: Boolean(!isSelected),
-                }),
             )}
             aria-disabled={(isClickable && isAnyDisabled) || undefined}
             onClick={hasOnClick ? onClick : undefined}
@@ -140,21 +140,17 @@ export const Chip = forwardRef<ChipProps, HTMLAnchorElement>((props, ref) => {
             {before && (
                 // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
                 <div
-                    className={classNames.join(`${CLASSNAME}__before`, {
-                        [`${CLASSNAME}__before--is-clickable`]: hasBeforeClick,
-                    })}
+                    className={element('before', { 'is-clickable': Boolean(hasBeforeClick) })}
                     onClick={handleOnBeforeClick}
                 >
                     {before}
                 </div>
             )}
-            <div className={`${CLASSNAME}__label`}>{children}</div>
+            <div className={element('label')}>{children}</div>
             {after && (
                 // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
                 <div
-                    className={classNames.join(`${CLASSNAME}__after`, {
-                        [`${CLASSNAME}__after--is-clickable`]: hasAfterClick,
-                    })}
+                    className={element('after', { 'is-clickable': Boolean(hasAfterClick) })}
                     onClick={handleOnAfterClick}
                 >
                     {after}

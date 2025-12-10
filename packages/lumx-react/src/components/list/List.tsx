@@ -3,9 +3,8 @@ import { Key, ReactNode, SyntheticEvent } from 'react';
 import { Size } from '@lumx/react';
 import { useKeyboardListNavigation } from '@lumx/react/hooks/useKeyboardListNavigation';
 import { GenericProps } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { useClassnames } from '@lumx/react/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
@@ -69,15 +68,17 @@ const InternalList = forwardRef<ListProps, HTMLUListElement>((props, ref) => {
         ...forwardedProps
     } = props;
 
+    const { block } = useClassnames(CLASSNAME);
+    const padding = itemPadding ?? (isClickable ? Size.big : undefined);
+
     return (
         <ul
             {...forwardedProps}
-            className={classNames.join(
+            className={block(
+                {
+                    [`item-padding-${padding}`]: Boolean(padding),
+                },
                 className,
-                handleBasicClasses({
-                    prefix: CLASSNAME,
-                    itemPadding: itemPadding ?? (isClickable ? Size.big : undefined),
-                }),
             )}
             tabIndex={tabIndex}
             ref={ref}

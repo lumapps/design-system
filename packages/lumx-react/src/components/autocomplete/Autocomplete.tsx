@@ -4,11 +4,11 @@ import { Dropdown, DropdownProps, IconButtonProps, Offset, Placement, TextField,
 
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { useClassnames } from '@lumx/react/utils';
 
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
 
@@ -240,12 +240,13 @@ export const Autocomplete = forwardRef<AutocompleteProps, HTMLDivElement>((props
         focusAnchorOnClose,
         ...forwardedProps
     } = otherProps;
+    const { block } = useClassnames(CLASSNAME);
     const inputAnchorRef = useRef<HTMLElement>(null);
     const textFieldRef = useRef(null);
     useFocus(inputAnchorRef.current, !isOpen && shouldFocusOnClose);
 
     return (
-        <div ref={ref} {...forwardedProps} className={classNames.join(className, CLASSNAME)}>
+        <div ref={ref} {...forwardedProps} className={block([className])}>
             <TextField
                 {...textFieldProps}
                 chips={chips}

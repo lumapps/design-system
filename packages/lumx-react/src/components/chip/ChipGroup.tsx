@@ -3,8 +3,8 @@ import { ReactNode } from 'react';
 import { HorizontalAlignment } from '@lumx/core/js/constants';
 import { GenericProps } from '@lumx/react/utils/type';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { useClassnames } from '@lumx/react/utils';
 
 import { useChipGroupNavigation } from '@lumx/react/hooks/useChipGroupNavigation';
 
@@ -45,9 +45,10 @@ const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-chip-group';
  */
 const InternalChipGroup = forwardRef<ChipGroupProps, HTMLDivElement>((props, ref) => {
     const { align, children, className, ...forwardedProps } = props;
+    const { block } = useClassnames(CLASSNAME);
 
     return (
-        <div ref={ref} {...forwardedProps} className={classNames.join(className, CLASSNAME)}>
+        <div ref={ref} {...forwardedProps} className={block([className])}>
             {children}
         </div>
     );

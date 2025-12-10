@@ -46,7 +46,7 @@ describe('<SelectMultiple>', () => {
             expect(valueChips).toBeEmptyDOMElement();
             expect(chip).not.toBeInTheDocument();
             expect(select.className).toMatchInlineSnapshot(
-                '"lumx-select lumx-select--has-multiple lumx-select lumx-select--is-empty lumx-select--theme-light"',
+                `"lumx-select lumx-select--is-empty lumx-select--theme-light lumx-select lumx-select--has-multiple"`,
             );
         });
 
@@ -117,7 +117,7 @@ describe('<SelectMultiple>', () => {
                 expect(inputWrapper).not.toBeInTheDocument();
                 expect(chip).toBeInTheDocument();
                 expect(select.className).toMatchInlineSnapshot(
-                    '"lumx-select lumx-select--has-multiple lumx-select lumx-select--is-empty lumx-select--theme-light"',
+                    `"lumx-select lumx-select--is-empty lumx-select--theme-light lumx-select lumx-select--has-multiple"`,
                 );
             });
 
@@ -125,7 +125,7 @@ describe('<SelectMultiple>', () => {
                 const { select, chip } = setup({ variant: SelectVariant.chip, value: ['val1', 'val2'] });
                 expect(chip).toHaveTextContent('val1 +1');
                 expect(select.className).toMatchInlineSnapshot(
-                    '"lumx-select lumx-select--has-multiple lumx-select lumx-select--has-value lumx-select--theme-light"',
+                    `"lumx-select lumx-select--has-value lumx-select--theme-light lumx-select lumx-select--has-multiple"`,
                 );
             });
 

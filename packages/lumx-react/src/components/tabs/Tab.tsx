@@ -2,8 +2,7 @@ import { FocusEventHandler, KeyboardEventHandler, ReactNode, useCallback } from 
 
 import { Icon, IconProps, Size, Text } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
-import { classNames } from '@lumx/core/js/utils';
+import { useClassnames } from '@lumx/react/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
 
@@ -70,6 +69,7 @@ export const Tab = forwardRef<TabProps, HTMLButtonElement>((props, ref) => {
     } = otherProps;
     const state = useTabProviderContext('tab', id);
     const isActive = propIsActive || state?.isActive;
+    const { element } = useClassnames('lumx-tabs');
 
     const changeToCurrentTab = useCallback(() => {
         if (isAnyDisabled) {
@@ -105,9 +105,13 @@ export const Tab = forwardRef<TabProps, HTMLButtonElement>((props, ref) => {
             {...forwardedProps}
             type="button"
             id={state?.tabId}
-            className={classNames.join(
+            className={element(
+                'link',
+                {
+                    'is-active': isActive,
+                    'is-disabled': isAnyDisabled,
+                },
                 className,
-                handleBasicClasses({ prefix: CLASSNAME, isActive, isDisabled: isAnyDisabled }),
             )}
             onClick={changeToCurrentTab}
             onKeyPress={handleKeyPress}

@@ -3,8 +3,8 @@ import React from 'react';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { GenericProps } from '@lumx/react/utils/type';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { useClassnames } from '@lumx/react/utils';
 import { useSlideFocusManagement } from './useSlideFocusManagement';
 
 /**
@@ -38,6 +38,7 @@ export const buildSlideShowGroupId = (slidesId: string, index: number) => `${sli
  */
 export const SlideshowItemGroup = forwardRef<SlideshowItemGroupProps, HTMLDivElement>((props, ref) => {
     const { className, children, role = 'group', label, isDisplayed, ...forwardedProps } = props;
+    const { block } = useClassnames(CLASSNAME);
     const groupRef = React.useRef<HTMLDivElement>(null);
 
     useSlideFocusManagement({ isSlideDisplayed: isDisplayed, slideRef: groupRef });
@@ -46,7 +47,7 @@ export const SlideshowItemGroup = forwardRef<SlideshowItemGroupProps, HTMLDivEle
         <div
             ref={mergeRefs(groupRef, ref)}
             role={role}
-            className={classNames.join(className, CLASSNAME)}
+            className={block([className])}
             aria-roledescription="slide"
             aria-label={label}
             {...forwardedProps}
