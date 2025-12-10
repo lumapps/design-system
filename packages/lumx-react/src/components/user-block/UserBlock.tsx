@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react';
 
-import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
 import set from 'lodash/set';
 
@@ -8,6 +7,7 @@ import { Avatar, ColorPalette, Link, Orientation, Size, Theme } from '@lumx/reac
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
@@ -121,7 +121,7 @@ export const UserBlock = forwardRef<UserBlockProps, HTMLDivElement>((props, ref)
         let NameComponent: any = 'span';
         const nProps: any = {
             ...nameProps,
-            className: classNames(`${CLASSNAME}__name`, linkProps?.className, nameProps?.className),
+            className: classNames.join(`${CLASSNAME}__name`, linkProps?.className, nameProps?.className),
         };
         if (isClickable) {
             NameComponent = Link;
@@ -155,7 +155,7 @@ export const UserBlock = forwardRef<UserBlockProps, HTMLDivElement>((props, ref)
         <div
             ref={ref}
             {...forwardedProps}
-            className={classNames(
+            className={classNames.join(
                 className,
                 handleBasicClasses({ prefix: CLASSNAME, orientation, size: componentSize, theme, isClickable }),
             )}
@@ -168,7 +168,7 @@ export const UserBlock = forwardRef<UserBlockProps, HTMLDivElement>((props, ref)
                     linkProps={linkProps}
                     alt=""
                     {...(avatarProps as any)}
-                    className={classNames(`${CLASSNAME}__avatar`, avatarProps.className)}
+                    className={classNames.join(`${CLASSNAME}__avatar`, avatarProps.className)}
                     size={componentSize}
                     onClick={onClick}
                     theme={theme}

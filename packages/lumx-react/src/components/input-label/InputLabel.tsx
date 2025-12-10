@@ -1,10 +1,9 @@
 import { ReactNode } from 'react';
 
-import classNames from 'classnames';
-
 import { Theme, Typography } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses, getTypographyClassName } from '@lumx/core/js/utils/_internal/className';
+import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { classNames } from '@lumx/core/js/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
@@ -48,17 +47,16 @@ const DEFAULT_PROPS: Partial<InputLabelProps> = {};
 export const InputLabel = forwardRef<InputLabelProps, HTMLLabelElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
     const { children, className, htmlFor, isRequired, theme = defaultTheme, typography, ...forwardedProps } = props;
-    const typographyClass = typography && getTypographyClassName(typography);
 
     return (
         <label
             ref={ref}
             {...forwardedProps}
             htmlFor={htmlFor}
-            className={classNames(
+            className={classNames.join(
                 className,
                 handleBasicClasses({ prefix: CLASSNAME, isRequired, theme, hasCustomTypography: Boolean(typography) }),
-                typographyClass,
+                typography && classNames.typography(typography),
             )}
         >
             {children}

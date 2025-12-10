@@ -1,9 +1,8 @@
-import classNames from 'classnames';
-
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTabProviderContext } from '@lumx/react/components/tabs/state';
 import { GenericProps, LumxClassName } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { classNames } from '@lumx/core/js/utils';
 
 /**
  * Defines the props of the component.
@@ -52,7 +51,7 @@ export const TabPanel = forwardRef<TabPanelProps, HTMLDivElement>((props, ref) =
             ref={ref}
             {...forwardedProps}
             id={state?.tabPanelId}
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, isActive }))}
+            className={classNames.join(className, handleBasicClasses({ prefix: CLASSNAME, isActive }))}
             role="tabpanel"
             tabIndex={isActive ? 0 : -1}
             aria-labelledby={state?.tabId}

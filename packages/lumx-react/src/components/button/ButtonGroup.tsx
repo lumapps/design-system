@@ -1,7 +1,6 @@
-import classNames from 'classnames';
-
 import { GenericProps } from '@lumx/react/utils/type';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
@@ -40,7 +39,7 @@ export const ButtonGroup = forwardRef<ButtonGroupProps, HTMLDivElement>((props, 
     const { children, className, ...forwardedProps } = props;
 
     return (
-        <div ref={ref} {...forwardedProps} className={classNames(className, CLASSNAME)}>
+        <div ref={ref} {...forwardedProps} className={classNames.join(className, CLASSNAME)}>
             {children}
         </div>
     );

@@ -1,10 +1,9 @@
 import { AriaAttributes, ButtonHTMLAttributes, DetailedHTMLProps, RefObject } from 'react';
 
-import classNames from 'classnames';
-
 import { ColorPalette, Emphasis, Size, Theme } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { HasAriaDisabled } from '@lumx/react/utils/type/HasAriaDisabled';
 import { RawClickable } from '@lumx/react/utils/react/RawClickable';
@@ -70,7 +69,7 @@ const renderButtonWrapper: React.FC<ButtonRootProps> = (props) => {
     const adaptedColor =
         emphasis === Emphasis.low && (color === ColorPalette.light ? ColorPalette.dark : ColorPalette.light);
 
-    const wrapperClassName = classNames(
+    const wrapperClassName = classNames.join(
         handleBasicClasses({
             color: adaptedColor,
             prefix: BUTTON_WRAPPER_CLASSNAME,
@@ -126,7 +125,7 @@ export const ButtonRoot = forwardRef<ButtonRootProps, HTMLButtonElement | HTMLAn
         return renderButtonWrapper({ ...props, ref, variant, color: adaptedColor });
     }
 
-    const buttonClassName = classNames(
+    const buttonClassName = classNames.join(
         className,
         handleBasicClasses({
             color: adaptedColor,

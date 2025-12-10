@@ -1,5 +1,5 @@
 import React, { ElementType } from 'react';
-import classNames from 'classnames';
+import { classNames } from '@lumx/core/js/utils';
 import isChromatic from 'chromatic/isChromatic';
 import { toggleMaterialTheme } from './toggleMaterialTheme';
 import { ThemeProvider } from '@lumx/react';
@@ -31,7 +31,7 @@ export const StoryBlock: React.FC<StoryBlockProps> = (props) => {
     }, [materialTheme])
 
     return (
-        <div className={classNames(CLASSNAME, context.parameters.hasGreyBackground && `${CLASSNAME}--has-grey-background`, `${CLASSNAME}--theme-${appliedTheme}`)}>
+        <div className={classNames.join(CLASSNAME, context.parameters.hasGreyBackground && `${CLASSNAME}--has-grey-background`, `${CLASSNAME}--theme-${appliedTheme}`)}>
             <ThemeProvider value={appliedTheme || undefined}>
                 <Story />
             </ThemeProvider>

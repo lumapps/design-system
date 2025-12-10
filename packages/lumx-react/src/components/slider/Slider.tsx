@@ -1,13 +1,12 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import { SyntheticEvent, useMemo, useRef } from 'react';
 
-import classNames from 'classnames';
-
 import { InputHelper, InputLabel, Theme } from '@lumx/react';
 import useEventCallback from '@lumx/react/hooks/useEventCallback';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { clamp } from '@lumx/react/utils/number/clamp';
 import { useId } from '@lumx/react/hooks/useId';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
@@ -238,7 +237,7 @@ export const Slider = forwardRef<SliderProps, HTMLDivElement>((props, ref) => {
         <div
             ref={ref}
             {...forwardedProps}
-            className={classNames(
+            className={classNames.join(
                 className,
                 handleBasicClasses({ prefix: CLASSNAME, theme, hasLabel: Boolean(label) }),
             )}
