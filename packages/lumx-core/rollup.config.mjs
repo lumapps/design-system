@@ -19,8 +19,8 @@ const SRC_PATH = path.resolve(__dirname, 'src');
 
 export default {
     // Bundle all TS files
-    input: glob.sync('src/js/**/*.ts', {
-        ignore: ['**/*.test.*'],
+    input: glob.sync('src/js/**/index.ts', {
+        ignore: ['**/*.test.*', '**/_internal/**'],
     }),
     output: {
         format: 'esm',
@@ -43,7 +43,7 @@ export default {
                 target: 'ESNext',
                 module: 'ESNext',
             },
-            exclude: ['**/*.test.*'],
+            exclude: ['**/*.test.*',  '**/_internal/**'],
         }),
         copy({
             targets: [

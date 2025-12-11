@@ -11,7 +11,7 @@ import { useIntersectionObserver } from '@lumx/react/hooks/useIntersectionObserv
 
 import { GenericProps, isComponent } from '@lumx/react/utils/type';
 import { partitionMulti } from '@lumx/react/utils/partitionMulti';
-import { handleBasicClasses } from '@lumx/core/js/utils/className';
+import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';

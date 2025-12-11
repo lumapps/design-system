@@ -6,7 +6,7 @@ import isEmpty from 'lodash/isEmpty';
 import { ListProps, Size } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
 import { onEnterPressed, onButtonPressed } from '@lumx/core/js/utils';
-import { handleBasicClasses } from '@lumx/core/js/utils/className';
+import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { renderLink } from '@lumx/react/utils/react/renderLink';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';

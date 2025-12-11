@@ -15,7 +15,7 @@ import {
     ButtonProps,
 } from '@lumx/react';
 import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiInformation } from '@lumx/icons';
-import { handleBasicClasses } from '@lumx/core/js/utils/className';
+import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import { useId } from '@lumx/react/hooks/useId';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import type { LumxClassName } from '@lumx/react/utils/type';

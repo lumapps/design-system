@@ -2,7 +2,7 @@ import classNames from 'classnames';
 
 import { ColorWithVariants, ColorVariant, Typography, WhiteSpace } from '@lumx/react';
 import { GenericProps, TextElement } from '@lumx/react/utils/type';
-import { fontColorClass, handleBasicClasses, getTypographyClassName } from '@lumx/core/js/utils/className';
+import { fontColorClass, handleBasicClasses, getTypographyClassName } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { useOverflowTooltipLabel } from '@lumx/react/hooks/useOverflowTooltipLabel';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';

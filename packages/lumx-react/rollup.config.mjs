@@ -28,7 +28,12 @@ const input = {
     'utils/index': 'src/utils/index.ts', // => @lumx/react/utils
 };
 
-const external = [/^@lumx\/core/, 'classnames', /^@lumx\/icons/];
+const external = [
+    // Externalize "public" lumx-core exports (internalize `_internal/*` exports)
+    /^@lumx\/core(?!.*\/_internal).*$/,
+    'classnames',
+    /^@lumx\/icons/
+];
 
 // Bundle JS code
 const bundleJS = {
@@ -40,7 +45,7 @@ const bundleJS = {
         hoistTransitiveImports: false,
         dir: DIST_PATH,
         // Unnamed chunk moved to `_internal` folder
-        chunkFileNames: '_internal/[name].js',
+        chunkFileNames: '_internal/[hash].js',
     },
     plugins: [
         /** Clean dist dir */

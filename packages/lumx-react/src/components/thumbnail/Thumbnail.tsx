@@ -13,7 +13,7 @@ import classNames from 'classnames';
 
 import { AspectRatio, HorizontalAlignment, Icon, Size, Theme, ThumbnailObjectFit } from '@lumx/react';
 import { Falsy, GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/className';
+import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { mdiImageBroken } from '@lumx/icons';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';

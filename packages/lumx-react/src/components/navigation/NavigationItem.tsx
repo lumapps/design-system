@@ -1,6 +1,6 @@
 import { ElementType, ReactNode } from 'react';
 import { Icon, Placement, Size, Text, Tooltip } from '@lumx/react';
-import { handleBasicClasses } from '@lumx/core/js/utils/className';
+import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import { ComponentRef, HasClassName, HasPolymorphicAs, HasRequiredLinkHref, HasTheme } from '@lumx/react/utils/type';
 import classNames from 'classnames';
 import { forwardRefPolymorphic } from '@lumx/react/utils/react/forwardRefPolymorphic';

@@ -16,7 +16,7 @@ import {
     Theme,
 } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/className';
+import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useId } from '@lumx/react/hooks/useId';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';

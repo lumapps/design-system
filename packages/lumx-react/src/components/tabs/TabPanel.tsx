@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTabProviderContext } from '@lumx/react/components/tabs/state';
 import { GenericProps, LumxClassName } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/className';
+import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 
 /**
  * Defines the props of the component.

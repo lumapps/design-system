@@ -13,7 +13,7 @@ import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
 import { loremIpsum } from '@lumx/react/stories/utils/lorem';
 import { withThemedBackground } from '@lumx/react/stories/decorators/withThemedBackground';
 import { withTheming } from '@lumx/react/stories/utils/theming';
-import { DESIGN_TOKENS } from '@lumx/core/js/constants/design-tokens';
+import { DESIGN_TOKENS } from '@lumx/core/js/constants/_internal/design-tokens';
 
 const buttonSizes = [Size.m, Size.s];
 const buttonEmphasis = [Emphasis.high, Emphasis.medium, Emphasis.low];

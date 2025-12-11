@@ -7,7 +7,7 @@ import { Size, Theme } from '@lumx/core/js/constants';
 import { Chip } from '@lumx/react/components/chip/Chip';
 import { Icon } from '@lumx/react/components/icon/Icon';
 import { InputLabel } from '@lumx/react/components/input-label/InputLabel';
-import { handleBasicClasses } from '@lumx/core/js/utils/className';
+import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
