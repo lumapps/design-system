@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   _[BREAKING]_ Removed deprecated and unused `detectSwipe` function from `@lumx/core/js/utils`
     -   _[BREAKING]_ Replace `getRootClassName` utility function with type `LumxClassName`
     -   _[BREAKING]_ Removed `CSS_PREFIX` constant
+    -   _[BREAKING]_ Removed deprecated `@lumx/core/js/custom-colors` utils
 -   `@lumx/icons`
     -   _[BREAKING]_ Migrate to ESM module format
 -   `@lumx/angularjs`: removed from the project. Future updates to `@lumx/core` will continue to avoid breaking change to the deprecated angularjs directives but without any guarantee.
