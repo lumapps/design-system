@@ -2,7 +2,7 @@ import classNames from 'classnames';
 
 import { useTabProviderContext } from '@lumx/react/components/tabs/state';
 import { GenericProps } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/className';
+import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**

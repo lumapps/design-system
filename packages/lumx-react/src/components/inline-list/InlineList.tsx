@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { ColorVariant, ColorWithVariants, Typography } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
-import { fontColorClass, getTypographyClassName } from '@lumx/core/js/utils/className';
+import { fontColorClass, getTypographyClassName } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 

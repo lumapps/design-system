@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { Theme, Typography } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses, getTypographyClassName } from '@lumx/core/js/utils/className';
+import { handleBasicClasses, getTypographyClassName } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';

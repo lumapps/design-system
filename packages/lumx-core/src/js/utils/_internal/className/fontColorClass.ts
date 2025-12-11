@@ -1,4 +1,4 @@
-import { ColorVariant, ColorWithVariants } from '../../constants';
+import { ColorVariant, ColorWithVariants } from '../../../constants';
 import { resolveColorWithVariants } from './resolveColorWithVariants';
 
 /**

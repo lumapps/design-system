@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 import { DOCUMENT, VISUALLY_HIDDEN } from '@lumx/react/constants';
 import { GenericProps, HasCloseMode } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/className';
+import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { Placement } from '@lumx/react/components/popover';

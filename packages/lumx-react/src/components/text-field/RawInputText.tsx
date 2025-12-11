@@ -7,7 +7,7 @@ import { Theme, useTheme } from '@lumx/react';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { HasClassName, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils';
+import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 
 import { INPUT_NATIVE_CLASSNAME } from './constants';
 
