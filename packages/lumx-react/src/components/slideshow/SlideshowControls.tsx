@@ -1,6 +1,5 @@
 import React, { RefObject, useCallback, useMemo } from 'react';
 
-import classNames from 'classnames';
 import range from 'lodash/range';
 
 import { mdiChevronLeft, mdiChevronRight, mdiPlayCircleOutline, mdiPauseCircleOutline } from '@lumx/icons';
@@ -8,6 +7,7 @@ import { Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { WINDOW } from '@lumx/react/constants';
 import { useSlideshowControls, DEFAULT_OPTIONS } from '@lumx/react/hooks/useSlideshowControls';
 import { useRovingTabIndex } from '@lumx/react/hooks/useRovingTabIndex';
@@ -140,7 +140,7 @@ const InternalSlideshowControls = forwardRef<SlideshowControlsProps, HTMLDivElem
         <div
             ref={ref}
             {...forwardedProps}
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }), {
+            className={classNames.join(className, handleBasicClasses({ prefix: CLASSNAME, theme }), {
                 [`${CLASSNAME}--has-infinite-pagination`]: slidesCount > PAGINATION_ITEMS_MAX,
             })}
         >
@@ -179,7 +179,7 @@ const InternalSlideshowControls = forwardRef<SlideshowControlsProps, HTMLDivElem
 
                                 return (
                                     <button
-                                        className={classNames(
+                                        className={classNames.join(
                                             handleBasicClasses({
                                                 prefix: `${CLASSNAME}__pagination-item`,
                                                 isActive,

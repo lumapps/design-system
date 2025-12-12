@@ -1,7 +1,5 @@
 import { ReactNode, RefObject, useRef } from 'react';
 
-import classNames from 'classnames';
-
 import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
@@ -9,6 +7,7 @@ import { DOCUMENT } from '@lumx/react/constants';
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { skipRender } from '@lumx/react/utils/react/skipRender';
@@ -155,7 +154,7 @@ const _InnerPopover = forwardRef<PopoverProps, HTMLDivElement>((props, ref) => {
             <Component
                 {...forwardedProps}
                 ref={mergedRefs}
-                className={classNames(
+                className={classNames.join(
                     className,
                     handleBasicClasses({
                         prefix: CLASSNAME,

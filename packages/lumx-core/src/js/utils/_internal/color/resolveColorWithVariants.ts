@@ -1,4 +1,4 @@
-import { ColorPalette, ColorVariant, ColorWithVariants } from '../../../constants';
+import type { ColorPalette, ColorVariant, ColorWithVariants } from '@lumx/core/js/constants';
 
 /** Resolve color & color variant from a `ColorWithVariants` and optionally a `ColorVariant`. */
 export function resolveColorWithVariants(

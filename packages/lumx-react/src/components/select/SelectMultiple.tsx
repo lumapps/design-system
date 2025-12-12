@@ -1,7 +1,5 @@
 import { ReactNode, RefObject, SyntheticEvent } from 'react';
 
-import classNames from 'classnames';
-
 import { mdiAlertCircle, mdiCheckCircle, mdiClose, mdiCloseCircle, mdiMenuDown } from '@lumx/icons';
 import { Size, Theme } from '@lumx/core/js/constants';
 import { Chip } from '@lumx/react/components/chip/Chip';
@@ -9,6 +7,7 @@ import { Icon } from '@lumx/react/components/icon/Icon';
 import { InputLabel } from '@lumx/react/components/input-label/InputLabel';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
@@ -127,7 +126,7 @@ export const SelectMultipleField: React.FC<SelectMultipleProps> = (props) => {
 
                         {isEmpty && placeholder && (
                             <div
-                                className={classNames([
+                                className={classNames.join([
                                     `${CLASSNAME}__input-native`,
                                     `${CLASSNAME}__input-native--placeholder`,
                                 ])}
@@ -189,7 +188,7 @@ export const SelectMultiple = forwardRef<SelectMultipleProps, HTMLDivElement>((p
         {
             ...DEFAULT_PROPS,
             ...props,
-            className: classNames(
+            className: classNames.join(
                 props.className,
                 handleBasicClasses({
                     hasMultiple: !props.isEmpty,

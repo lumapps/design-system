@@ -1,11 +1,12 @@
 import path from 'path';
 import sass from 'sass';
 import fs from 'fs/promises';
+import glob from 'glob';
+import postcss from 'postcss';
+
 import typescript from '@rollup/plugin-typescript';
 import cleaner from 'rollup-plugin-cleaner';
 import copy from 'rollup-plugin-copy';
-import glob from 'glob';
-import postcss from 'postcss';
 
 import pkg from './package.json' with { type: 'json' };
 import CONFIGS from '../../configs/index.js';
@@ -17,6 +18,12 @@ const ROOT_PATH = path.resolve(__dirname, '..', '..');
 const DIST_PATH = path.resolve(__dirname, pkg.publishConfig.directory);
 const SRC_PATH = path.resolve(__dirname, 'src');
 
+// Move internal modules to hash named files
+function formatPath(entry) {
+    if (entry.name.includes('_internal')) return '_internal/[hash].js';
+    return '[name].js';
+}
+
 export default {
     // Bundle all TS files
     input: glob.sync('src/js/**/index.ts', {
@@ -27,6 +34,8 @@ export default {
         dir: DIST_PATH,
         preserveModules: true,
         preserveModulesRoot: 'src',
+        entryFileNames: formatPath,
+        chunkFileNames: formatPath,
     },
     // Externalize all dependencies
     external: [
@@ -43,7 +52,7 @@ export default {
                 target: 'ESNext',
                 module: 'ESNext',
             },
-            exclude: ['**/*.test.*',  '**/_internal/**'],
+            exclude: ['**/*.test.*'],
         }),
         copy({
             targets: [

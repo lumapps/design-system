@@ -1,12 +1,11 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { ReactNode, useState } from 'react';
 
-import classNames from 'classnames';
-
-import { DOCUMENT, VISUALLY_HIDDEN } from '@lumx/react/constants';
+import { DOCUMENT } from '@lumx/react/constants';
 import { GenericProps, HasCloseMode } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { Placement } from '@lumx/react/components/popover';
 import { TooltipContextProvider } from '@lumx/react/components/tooltip/context';
@@ -137,14 +136,14 @@ export const Tooltip = forwardRef<TooltipProps, HTMLDivElement>((props, ref) => 
                         {...forwardedProps}
                         id={id}
                         role="tooltip"
-                        className={classNames(
+                        className={classNames.join(
                             className,
                             handleBasicClasses({
                                 prefix: CLASSNAME,
                                 position,
                                 isInitializing: !styles.popper?.transform,
                             }),
-                            isHidden && VISUALLY_HIDDEN,
+                            isHidden && classNames.visuallyHidden(),
                         )}
                         style={{ ...(isHidden ? undefined : styles.popper), zIndex }}
                         {...attributes.popper}

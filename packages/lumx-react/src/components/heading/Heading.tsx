@@ -1,7 +1,6 @@
-import classNames from 'classnames';
-
 import { HeadingElement } from '@lumx/react/utils/type';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { Text, TextProps } from '../text';
@@ -50,7 +49,7 @@ export const Heading = forwardRef<HeadingProps>((props, ref) => {
     return (
         <Text
             ref={ref}
-            className={classNames(className, CLASSNAME)}
+            className={classNames.join(className, CLASSNAME)}
             as={computedHeadingElement}
             typography={DEFAULT_TYPOGRAPHY_BY_LEVEL[computedHeadingElement]}
             {...forwardedProps}

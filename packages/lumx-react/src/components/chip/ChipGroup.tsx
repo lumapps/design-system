@@ -1,10 +1,9 @@
 import { ReactNode } from 'react';
 
-import classNames from 'classnames';
-
 import { HorizontalAlignment } from '@lumx/core/js/constants';
 import { GenericProps } from '@lumx/react/utils/type';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { useChipGroupNavigation } from '@lumx/react/hooks/useChipGroupNavigation';
@@ -48,7 +47,7 @@ const InternalChipGroup = forwardRef<ChipGroupProps, HTMLDivElement>((props, ref
     const { align, children, className, ...forwardedProps } = props;
 
     return (
-        <div ref={ref} {...forwardedProps} className={classNames(className, CLASSNAME)}>
+        <div ref={ref} {...forwardedProps} className={classNames.join(className, CLASSNAME)}>
             {children}
         </div>
     );

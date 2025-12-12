@@ -1,11 +1,11 @@
 import { ReactElement, ReactNode } from 'react';
 
 import isInteger from 'lodash/isInteger';
-import classNames from 'classnames';
 
 import { Size } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 export type GridColumnGapSize = Extract<Size, 'tiny' | 'regular' | 'big' | 'huge'>;
@@ -66,7 +66,7 @@ export const GridColumn = forwardRef<GridColumnProps>((props, ref): ReactElement
         <Component
             {...forwardedProps}
             ref={ref as React.Ref<any>}
-            className={classNames(className, CLASSNAME)}
+            className={classNames.join(className, CLASSNAME)}
             style={{
                 ...style,
                 ['--lumx-grid-column-item-min-width' as any]: isInteger(itemMinWidth) && `${itemMinWidth}px`,

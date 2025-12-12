@@ -1,6 +1,5 @@
 import { useRef } from 'react';
 
-import classNames from 'classnames';
 import isFunction from 'lodash/isFunction';
 
 import { Button, Emphasis, Icon, Kind, Size, Theme } from '@lumx/react';
@@ -9,6 +8,7 @@ import { NOTIFICATION_CONFIGURATION } from '@lumx/react/components/notification/
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { useTransitionVisibility } from '@lumx/react/hooks/useTransitionVisibility';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
@@ -107,7 +107,7 @@ export const Notification = forwardRef<NotificationProps, HTMLDivElement>((props
                 ref={mergeRefs(ref, rootRef)}
                 role="alert"
                 {...forwardedProps}
-                className={classNames(
+                className={classNames.join(
                     className,
                     handleBasicClasses({
                         color,

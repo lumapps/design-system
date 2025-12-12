@@ -1,10 +1,10 @@
-import classNames from 'classnames';
-
 import { mdiAlertCircle } from '@lumx/icons';
 import { ColorPalette, ColorVariant, ColorWithVariants, Size, Theme } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses, resolveColorWithVariants } from '@lumx/core/js/utils/_internal/className';
+import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { resolveColorWithVariants } from '@lumx/core/js/utils/_internal/color';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
@@ -96,7 +96,7 @@ export const Icon = forwardRef<IconProps, HTMLElement>((props, ref) => {
         <i
             ref={ref}
             {...forwardedProps}
-            className={classNames(
+            className={classNames.join(
                 className,
                 handleBasicClasses({
                     color: iconColor,
