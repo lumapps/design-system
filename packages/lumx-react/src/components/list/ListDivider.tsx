@@ -1,7 +1,7 @@
 import { GenericProps } from '@lumx/react/utils/type';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { useClassnames } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
@@ -27,8 +27,9 @@ const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-list-divider';
  */
 export const ListDivider = forwardRef<ListDividerProps, HTMLLIElement>((props, ref) => {
     const { className, ...forwardedProps } = props;
+    const { block } = useClassnames(CLASSNAME);
 
-    return <li ref={ref} {...forwardedProps} className={classNames.join(className, CLASSNAME)} />;
+    return <li ref={ref} {...forwardedProps} className={block([className])} />;
 });
 ListDivider.displayName = COMPONENT_NAME;
 ListDivider.className = CLASSNAME;

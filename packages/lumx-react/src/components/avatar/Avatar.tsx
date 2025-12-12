@@ -3,9 +3,8 @@ import { KeyboardEventHandler, MouseEventHandler, ReactElement, ReactNode } from
 import { AspectRatio, Size, Theme, Thumbnail, ThumbnailProps } from '@lumx/react';
 
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { useClassnames } from '@lumx/react/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
@@ -85,16 +84,24 @@ export const Avatar = forwardRef<AvatarProps, HTMLDivElement>((props, ref) => {
         ...forwardedProps
     } = props;
 
+    const { block, element } = useClassnames(CLASSNAME);
+
     return (
         <div
             ref={ref}
             {...forwardedProps}
-            className={classNames.join(className, handleBasicClasses({ prefix: CLASSNAME, size, theme }))}
+            className={block(
+                {
+                    [`size-${size}`]: Boolean(size),
+                    [`theme-${theme}`]: Boolean(theme),
+                },
+                className,
+            )}
         >
             <Thumbnail
                 linkProps={linkProps}
                 linkAs={linkAs}
-                className={`${CLASSNAME}__thumbnail`}
+                className={element('thumbnail')}
                 onClick={onClick}
                 onKeyPress={onKeyPress}
                 {...thumbnailProps}
@@ -104,8 +111,8 @@ export const Avatar = forwardRef<AvatarProps, HTMLDivElement>((props, ref) => {
                 alt={alt}
                 theme={theme}
             />
-            {actions && <div className={`${CLASSNAME}__actions`}>{actions}</div>}
-            {badge && <div className={`${CLASSNAME}__badge`}>{badge}</div>}
+            {actions && <div className={element('actions')}>{actions}</div>}
+            {badge && <div className={element('badge')}>{badge}</div>}
         </div>
     );
 });

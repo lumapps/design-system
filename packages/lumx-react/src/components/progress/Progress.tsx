@@ -1,10 +1,9 @@
 import { Theme } from '@lumx/react';
 import { GenericProps, HasTheme, ValueOf } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { useClassnames } from '@lumx/react/utils';
 
 import { ProgressLinear } from './ProgressLinear';
 import { ProgressCircular } from './ProgressCircular';
@@ -51,12 +50,19 @@ const DEFAULT_PROPS: Partial<ProgressProps> = {
 export const Progress = forwardRef<ProgressProps, HTMLDivElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
     const { className, theme = defaultTheme, variant = DEFAULT_PROPS.variant, ...forwardedProps } = props;
+    const { block } = useClassnames(CLASSNAME);
 
     return (
         <div
             ref={ref}
             {...forwardedProps}
-            className={classNames.join(className, handleBasicClasses({ prefix: CLASSNAME, theme, variant }))}
+            className={block(
+                {
+                    [`theme-${theme}`]: Boolean(theme),
+                    [`variant-${variant}`]: Boolean(variant),
+                },
+                className,
+            )}
         >
             {variant === ProgressVariant.circular && <ProgressCircular theme={theme} />}
             {variant === ProgressVariant.linear && <ProgressLinear theme={theme} />}

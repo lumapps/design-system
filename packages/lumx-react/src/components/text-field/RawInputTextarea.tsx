@@ -4,8 +4,7 @@ import { Theme, useTheme } from '@lumx/react';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import type { HasClassName, HasTheme } from '@lumx/core/js/types';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
-import { classNames } from '@lumx/core/js/utils';
+import { useClassnames } from '@lumx/react/utils';
 
 import { useFitRowsToContent } from './useFitRowsToContent';
 import { INPUT_NATIVE_CLASSNAME } from './constants';
@@ -43,8 +42,8 @@ export const RawInputTextarea = forwardRef<Omit<RawInputTextareaProps, 'type'>, 
         ...forwardedProps
     } = props;
     const textareaRef = useRef<HTMLTextAreaElement>(null);
-
     const rows = useFitRowsToContent(minimumRows, textareaRef, value);
+    const { block } = useClassnames(INPUT_NATIVE_CLASSNAME);
 
     const handleChange: ChangeEventHandler<HTMLTextAreaElement> = useCallback(
         (evt) => {
@@ -55,7 +54,7 @@ export const RawInputTextarea = forwardRef<Omit<RawInputTextareaProps, 'type'>, 
 
     return (
         <textarea
-            className={classNames.join(className, handleBasicClasses({ prefix: INPUT_NATIVE_CLASSNAME, theme }))}
+            className={block({ [`theme-${theme}`]: Boolean(theme) }, [className])}
             ref={useMergeRefs(ref, textareaRef)}
             {...forwardedProps}
             onChange={handleChange}
