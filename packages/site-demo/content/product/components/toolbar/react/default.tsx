@@ -3,7 +3,6 @@ import { mdiMagnify } from '@lumx/icons';
 import { Emphasis, IconButton, Theme, Toolbar } from '@lumx/react';
 
 import classNames from 'classnames';
-import React from 'react';
 
 export const App = ({ theme = Theme.light }: any) => (
     <Toolbar

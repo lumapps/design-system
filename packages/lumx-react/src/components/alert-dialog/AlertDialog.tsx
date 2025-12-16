@@ -15,9 +15,10 @@ import {
     ButtonProps,
 } from '@lumx/react';
 import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiInformation } from '@lumx/icons';
-import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';
+import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import { useId } from '@lumx/react/hooks/useId';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import type { LumxClassName } from '@lumx/react/utils/type';
 
 export interface AlertDialogProps extends Omit<DialogProps, 'header' | 'footer'> {
     /** Message variant. */
@@ -61,7 +62,7 @@ const COMPONENT_NAME = 'AlertDialog';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-alert-dialog';
 
 /**
  * Component default props.

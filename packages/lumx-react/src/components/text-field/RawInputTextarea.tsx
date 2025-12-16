@@ -1,4 +1,4 @@
-import React, { ComponentProps, ChangeEventHandler, SyntheticEvent, useRef, useCallback } from 'react';
+import { ComponentProps, ChangeEventHandler, SyntheticEvent, useRef, useCallback } from 'react';
 
 import classNames from 'classnames';
 
@@ -7,7 +7,7 @@ import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import type { HasClassName, HasTheme } from '@lumx/core/js/types';
 
-import { handleBasicClasses } from '@lumx/core/js/utils';
+import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 
 import { useFitRowsToContent } from './useFitRowsToContent';
 import { INPUT_NATIVE_CLASSNAME } from './constants';

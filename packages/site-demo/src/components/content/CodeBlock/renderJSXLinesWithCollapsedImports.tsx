@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 import { renderLines } from '@lumx/demo/components/content/CodeBlock/renderLines';
 import { RenderLineParams, TokenLines } from './types';
 

@@ -1,10 +1,11 @@
-import React, { CSSProperties } from 'react';
+import { CSSProperties } from 'react';
 
 import classNames from 'classnames';
 
 import { Theme, TypographyInterface, ColorPalette } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';
+import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import type { LumxClassName } from '@lumx/core/js/types';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
@@ -30,7 +31,7 @@ const COMPONENT_NAME = 'SkeletonTypography';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-skeleton-typography';
 
 /**
  * SkeletonTypography component.

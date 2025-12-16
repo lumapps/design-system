@@ -1,10 +1,11 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 import classNames from 'classnames';
 
 import { Theme, Typography } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses, getTypographyClassName } from '@lumx/core/js/utils/className';
+import { handleBasicClasses, getTypographyClassName } from '@lumx/core/js/utils/_internal/className';
+import type { LumxClassName } from '@lumx/core/js/types';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
@@ -30,7 +31,7 @@ const COMPONENT_NAME = 'InputLabel';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-input-label';
 
 /**
  * Component default props.

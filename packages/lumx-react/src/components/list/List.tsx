@@ -1,15 +1,13 @@
-import React, { Key, ReactNode, SyntheticEvent, useRef } from 'react';
+import { Key, ReactNode, SyntheticEvent } from 'react';
 
 import classNames from 'classnames';
 
 import { Size } from '@lumx/react';
 import { useKeyboardListNavigation } from '@lumx/react/hooks/useKeyboardListNavigation';
 import { GenericProps } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';
-import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
+import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import type { LumxClassName } from '@lumx/core/js/types';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
-
-import { useInteractiveList } from './useInteractiveList';
 
 /**
  * Defines the props of the component.
@@ -44,7 +42,7 @@ const COMPONENT_NAME = 'List';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-list';
 
 /**
  * Component default props.
@@ -71,14 +69,6 @@ const InternalList = forwardRef<ListProps, HTMLUListElement>((props, ref) => {
         tabIndex = DEFAULT_PROPS.tabIndex,
         ...forwardedProps
     } = props;
-    const listElementRef = useRef<HTMLUListElement>(null);
-
-    const { items, hasClickableItem } = useInteractiveList({
-        items: children,
-        ref: listElementRef,
-        onListItemSelected,
-    });
-    const clickable = hasClickableItem || isClickable;
 
     return (
         <ul
@@ -87,13 +77,13 @@ const InternalList = forwardRef<ListProps, HTMLUListElement>((props, ref) => {
                 className,
                 handleBasicClasses({
                     prefix: CLASSNAME,
-                    itemPadding: itemPadding ?? (clickable ? Size.big : undefined),
+                    itemPadding: itemPadding ?? (isClickable ? Size.big : undefined),
                 }),
             )}
             tabIndex={tabIndex}
-            ref={mergeRefs(ref, listElementRef)}
+            ref={ref}
         >
-            {items}
+            {children}
         </ul>
     );
 });

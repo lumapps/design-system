@@ -1,6 +1,6 @@
-import { ALL_TYPOGRAPHY, allTypographyArgType } from '@lumx/react/stories/controls/typography';
 import React from 'react';
 
+import { ALL_TYPOGRAPHY, allTypographyArgType } from '@lumx/react/stories/controls/typography';
 import { colorArgType, colorVariantArgType } from '@lumx/react/stories/controls/color';
 import { textElementArgType } from '@lumx/react/stories/controls/element';
 import { withUndefined } from '@lumx/react/stories/controls/withUndefined';

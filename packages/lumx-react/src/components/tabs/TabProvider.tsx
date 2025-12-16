@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
-import React, { ReactNode, useEffect, useReducer } from 'react';
+import { ReactNode, useEffect, useReducer } from 'react';
 import { INIT_STATE, TabProviderContext, reducer } from './state';
 
 export interface TabProviderProps {

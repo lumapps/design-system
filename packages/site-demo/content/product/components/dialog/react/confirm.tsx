@@ -1,6 +1,6 @@
 import { mdiPlay } from '@lumx/icons';
 import { Button, Dialog, Emphasis, Size, Toolbar } from '@lumx/react';
-import React, { useCallback, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 export const App = ({ theme }: any) => {
     const [isOpen, setOpen] = useState(false);

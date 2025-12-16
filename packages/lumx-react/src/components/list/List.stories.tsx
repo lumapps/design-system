@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 
 import { mdiAccount, mdiOpenInNew } from '@lumx/icons';
 import { Icon, ListDivider, ListProps, ListSubheader, Size } from '@lumx/react';
@@ -77,7 +77,6 @@ export const KeyboardNavigation = ({
             </List>
             <pre>{`
                 When focused:
-                arrow up/down to move focus on list item
                 tab/shift+tab to move focus on list item AND outside the list
             `}</pre>
         </>

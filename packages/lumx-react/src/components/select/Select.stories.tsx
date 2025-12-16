@@ -3,7 +3,7 @@ import { List, ListItem, Select, Size, TextField } from '@lumx/react';
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
 import noop from 'lodash/noop';
 import range from 'lodash/range';
-import React, { SyntheticEvent, useState } from 'react';
+import { SyntheticEvent, useState } from 'react';
 import { SelectVariant } from './constants';
 
 export default {

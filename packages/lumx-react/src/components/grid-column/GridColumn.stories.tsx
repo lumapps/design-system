@@ -1,5 +1,4 @@
 /* eslint-disable react/display-name */
-import React from 'react';
 import range from 'lodash/range';
 
 import { GridColumn, GridColumnProps } from '@lumx/react/components/grid-column/GridColumn';

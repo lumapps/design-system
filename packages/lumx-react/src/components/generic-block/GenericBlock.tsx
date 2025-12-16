@@ -5,7 +5,7 @@ import isEmpty from 'lodash/isEmpty';
 import noop from 'lodash/noop';
 
 import { Comp, isComponentType } from '@lumx/react/utils/type';
-import { getRootClassName } from '@lumx/core/js/utils/className';
+import type { LumxClassName } from '@lumx/core/js/types';
 import { partitionMulti } from '@lumx/react/utils/partitionMulti';
 import { Orientation, Size, FlexBox, FlexBoxProps } from '@lumx/react';
 import { GenericBlockGapSize } from '@lumx/react/components/generic-block/constants';
@@ -64,7 +64,7 @@ const COMPONENT_NAME = 'GenericBlock';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-generic-block';
 
 /**
  * Component default props.

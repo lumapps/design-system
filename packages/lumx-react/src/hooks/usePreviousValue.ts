@@ -1,5 +1,4 @@
 import React from 'react';
-
 /**
  * Returns the value from the previous render.
  */

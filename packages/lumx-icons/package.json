@@ -17,8 +17,8 @@
     },
     "description": "LumX icons",
     "license": "MIT",
-    "main": "cjs/index.js",
-    "module": "index.js",
+    "type": "module",
+    "main": "index.js",
     "types": "index.d.ts",
     "name": "@lumx/icons",
     "repository": {

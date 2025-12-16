@@ -2,7 +2,7 @@ import get from 'lodash/get';
 import mapValues from 'lodash/mapValues';
 import { useMemo } from 'react';
 
-import { DESIGN_TOKENS } from '@lumx/core/js/constants/design-tokens';
+import { DESIGN_TOKENS } from '@lumx/core/js/constants/_internal/design-tokens';
 
 interface ColorDocumentation {
     colorName: string;

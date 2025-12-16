@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { DatePickerProps } from '@lumx/react';
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import { getByClassName } from '@lumx/react/testing/utils/queries';

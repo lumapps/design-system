@@ -52,11 +52,14 @@
 
 .#{$lumx-base-prefix}-list-item__link,
 .#{$lumx-base-prefix}-list-item__wrapper {
-    .#{$lumx-base-prefix}-list--item-padding-big & {
+    // Padding big (defaults when list contain clickable item)
+    .#{$lumx-base-prefix}-list:has(.#{$lumx-base-prefix}-list-item__link) &,
+    .#{$lumx-base-prefix}-list.#{$lumx-base-prefix}-list--item-padding-big & {
         @include lumx-list-item-padding("big");
     }
 
-    .#{$lumx-base-prefix}-list--item-padding-huge & {
+    // Padding huge
+    .#{$lumx-base-prefix}-list.#{$lumx-base-prefix}-list--item-padding-huge & {
         @include lumx-list-item-padding("huge");
     }
 }
@@ -78,11 +81,14 @@
         @include lumx-list-subheader-icon;
     }
 
-    .#{$lumx-base-prefix}-list--item-padding-big & {
+    // Padding big (defaults when list contain clickable item)
+    .#{$lumx-base-prefix}-list:has(.#{$lumx-base-prefix}-list-item__link) &,
+    .#{$lumx-base-prefix}-list.#{$lumx-base-prefix}-list--item-padding-big & {
         @include lumx-list-item-padding("big");
     }
 
-    .#{$lumx-base-prefix}-list--item-padding-huge & {
+    // Padding huge
+    .#{$lumx-base-prefix}-list.#{$lumx-base-prefix}-list--item-padding-huge & {
         @include lumx-list-item-padding("huge");
     }
 }

@@ -1,5 +1,5 @@
 import { AspectRatio, Badge, Icon, Size, Thumbnail, ThumbnailVariant } from '@lumx/react';
-import React from 'react';
+
 import { mdiApps, mdiClose } from '@lumx/icons';
 
 export const App = ({ theme }: any) => (

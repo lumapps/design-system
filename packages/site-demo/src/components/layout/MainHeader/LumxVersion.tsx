@@ -1,7 +1,6 @@
 import { mdiTagOutline } from '@lumx/icons';
 import { Button, Emphasis, Size } from '@lumx/react';
 import { graphql, useStaticQuery } from 'gatsby';
-import React from 'react';
 
 const query = graphql`
     query LumxVersion {

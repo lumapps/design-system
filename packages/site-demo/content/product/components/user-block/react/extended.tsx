@@ -1,6 +1,5 @@
 import { mdiCellphone, mdiEmail, mdiGoogleHangouts, mdiPhone, mdiSlack } from '@lumx/icons';
 import { Button, Emphasis, IconButton, Orientation, Size, Theme, UserBlock } from '@lumx/react';
-import React from 'react';
 
 export const App = ({ theme = Theme.light }: any) => {
     const demoActions = [

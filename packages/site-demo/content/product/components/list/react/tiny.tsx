@@ -1,7 +1,6 @@
 import { mdiSend } from '@lumx/icons';
 
 import { Avatar, Icon, List, ListItem, ListSubheader, Size, Thumbnail, ThumbnailVariant } from '@lumx/react';
-import React from 'react';
 
 export const App = () => (
     <List>

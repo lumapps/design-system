@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs/promises');
-const aliasesConfig = require('../alias-icons');
+const aliasesConfig = require('../alias-icons.cjs');
 const { GENERATED_DIR, OUT_ALIASES_NAME } = require('./constants.cjs');
 
 /**

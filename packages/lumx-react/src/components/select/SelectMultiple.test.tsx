@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Theme } from '@lumx/core/js/constants';
 import { Chip } from '@lumx/react/components/chip/Chip';
 import { Dropdown } from '@lumx/react/components/dropdown/Dropdown';

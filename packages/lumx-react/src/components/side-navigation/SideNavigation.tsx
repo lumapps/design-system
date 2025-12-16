@@ -1,10 +1,10 @@
-import React, { Children, ReactNode } from 'react';
+import { Children, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
 import { SideNavigationItem, Theme } from '@lumx/react';
 import { GenericProps, HasTheme, isComponent } from '@lumx/react/utils/type';
-import { getRootClassName } from '@lumx/core/js/utils/className';
+import type { LumxClassName } from '@lumx/core/js/types';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
@@ -24,7 +24,7 @@ const COMPONENT_NAME = 'SideNavigation';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-side-navigation';
 
 /**
  * SideNavigation component.

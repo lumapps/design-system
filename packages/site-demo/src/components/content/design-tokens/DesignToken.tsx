@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { ReactNode, useState } from 'react';
+import { ReactNode, useState } from 'react';
 
 import { ExpansionPanel, Theme } from '@lumx/react';
 

@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import React, { useCallback, useRef, useState } from 'react';
+import { forwardRef, useCallback, useRef, useState } from 'react';
 import { Button } from '@lumx/react';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 import { initDemoShadowDOMPortal } from '@lumx/react/stories/utils/initDemoShadowDOMPortal';
 import { PortalProvider, Portal } from '@lumx/react/utils/Portal';
 
 export default {
-    title: 'LumX components/ClickAwayProvider',
+    title: 'utils/ClickAwayProvider',
     parameters: {
         // Disables Chromatic snapshot (not relevant for this story).
         chromatic: { disable: true },
@@ -15,7 +15,7 @@ export default {
 };
 
 // eslint-disable-next-line react/display-name
-const Card = React.forwardRef(({ top, children, close }, ref) => (
+const Card = forwardRef(({ top, children, close }, ref) => (
     <ClickAwayProvider callback={close} childrenRefs={useRef([ref])}>
         <Portal>
             <div

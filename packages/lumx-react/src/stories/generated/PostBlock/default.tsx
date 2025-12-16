@@ -1,1 +1,0 @@
-../../../../../site-demo/content/product/components/post-block/react/default.tsx

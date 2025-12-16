@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import { mdiEarth } from '@lumx/icons';
 import { Icon } from '@lumx/react';

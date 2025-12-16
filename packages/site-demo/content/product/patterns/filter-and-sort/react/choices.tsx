@@ -1,6 +1,6 @@
 import { mdiMagnify, mdiMenuDown, mdiSort } from '@lumx/icons';
 import { Button, Chip, ChipGroup, Emphasis, FlexBox, Orientation, Size, TextField } from '@lumx/react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const COLORS = ['Red', 'Green', 'Blue'];
 

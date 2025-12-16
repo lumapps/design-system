@@ -1,6 +1,4 @@
 import { Mock } from 'vitest';
-import React from 'react';
-
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { queryByRole, render, screen } from '@testing-library/react';
 import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';

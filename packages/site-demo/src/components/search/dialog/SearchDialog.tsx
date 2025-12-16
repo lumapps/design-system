@@ -1,5 +1,5 @@
 /* eslint-disable react/no-danger */
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link, navigate } from 'gatsby';
 
 import { Dialog, DialogProps, IconButton, List, ListItem, Progress, TextField } from '@lumx/react';

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { SkeletonTypography, Typography, ColorPalette } from '@lumx/react';
 
 export default { title: 'LumX components/skeleton/Skeleton Typography' };

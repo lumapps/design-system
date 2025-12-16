@@ -11,7 +11,7 @@ import {
     Text,
     Thumbnail,
 } from '@lumx/react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export const App = () => {
     const [isOpen1, setOpen1] = useState(false);

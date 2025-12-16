@@ -1,12 +1,14 @@
-import React, { ElementType, ReactNode } from 'react';
-import { Icon, Placement, Size, Tooltip, Text } from '@lumx/react';
-import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';
+import { ElementType, ReactNode } from 'react';
+import { Icon, Placement, Size, Text, Tooltip } from '@lumx/react';
+import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import { ComponentRef, HasClassName, HasPolymorphicAs, HasRequiredLinkHref, HasTheme } from '@lumx/react/utils/type';
 import classNames from 'classnames';
 import { forwardRefPolymorphic } from '@lumx/react/utils/react/forwardRefPolymorphic';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { useOverflowTooltipLabel } from '@lumx/react/hooks/useOverflowTooltipLabel';
 import { RawClickable } from '@lumx/react/utils/react/RawClickable';
+
+import { ITEM_CLASSNAME as CLASSNAME, ITEM_COMPONENT_NAME as COMPONENT_NAME } from './constants';
 
 type BaseNavigationItemProps = {
     /** Icon (SVG path). */
@@ -25,16 +27,6 @@ export type NavigationItemProps<E extends ElementType = 'a'> = HasPolymorphicAs<
     HasClassName &
     BaseNavigationItemProps &
     HasRequiredLinkHref<E>;
-
-/**
- * Component display name.
- */
-const COMPONENT_NAME = 'NavigationItem';
-
-/**
- * Component default class name and class prefix.
- */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 export const NavigationItem = Object.assign(
     forwardRefPolymorphic(<E extends ElementType = 'a'>(props: NavigationItemProps<E>, ref: ComponentRef<E>) => {

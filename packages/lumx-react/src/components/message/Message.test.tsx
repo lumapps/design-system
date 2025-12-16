@@ -1,7 +1,6 @@
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import { Kind } from '@lumx/react';
 
-import React from 'react';
 import { queryByRole, render } from '@testing-library/react';
 import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import { mdiAbTesting } from '@lumx/icons';

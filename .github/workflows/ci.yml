@@ -1,0 +1,86 @@
+name: "CI"
+
+on:
+    pull_request:
+        types: [ opened, synchronize, reopened, ready_for_review ]
+
+concurrency:
+    group: ${{ github.head_ref }}-validate-pr
+    cancel-in-progress: true
+
+jobs:
+    lint:
+        if: github.event.pull_request.draft == false
+        timeout-minutes: 30
+        runs-on: ubuntu-latest
+        steps:
+            -   name: "Checkout repository"
+                uses: actions/checkout@v5
+
+            -   name: "Setup"
+                uses: ./.github/actions/setup
+
+            -   name: "Run packages lint"
+                run: yarn lint:code
+
+    test:
+        if: github.event.pull_request.draft == false
+        timeout-minutes: 30
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                reactPackageVersions: [
+                    default,
+                    'react@18.3.1 react-dom@18.3.1 @testing-library/react@16.3.0',
+                    'react@19.1.1 react-dom@19.1.1 @testing-library/react@16.3.0'
+                ]
+        # Making sure we have a clean job name on 'default' package so that it matches the required "test" check
+        name: "test${{ matrix.reactPackageVersions != 'default' && format(' ({0})', matrix.reactPackageVersions) || '' }}"
+        steps:
+            -   name: "Checkout repository"
+                uses: actions/checkout@v5
+
+            -   name: "Setup"
+                uses: ./.github/actions/setup
+
+            -   name: "Switch react version"
+                if: ${{ matrix.reactPackageVersions != 'default' }}
+                run: yarn up ${{ matrix.reactPackageVersions }}
+
+            -   name: "Run lumx-react tests"
+                run: |
+                    sudo timedatectl set-timezone Europe/Paris
+                    yarn workspace @lumx/react test
+
+            -   name: "Run lumx-core tests"
+                if: ${{ matrix.reactPackageVersions == 'default' }}
+                run: |
+                    yarn workspace @lumx/core test
+
+    type-check:
+        if: github.event.pull_request.draft == false
+        timeout-minutes: 30
+        runs-on: ubuntu-latest
+        steps:
+            -   name: "Checkout repository"
+                uses: actions/checkout@v5
+
+            -   name: "Setup"
+                uses: ./.github/actions/setup
+
+            -   name: "Run code type check"
+                run: yarn type-check
+
+    Commit-message-validation:
+        if: github.event.pull_request.draft == false
+        runs-on: ubuntu-latest
+        steps:
+            -   name: "Checkout repository"
+                uses: actions/checkout@v5
+
+            -   name: "Commit message validation"
+                uses: lumapps/commit-message-validator@master
+                with:
+                    no_jira: true
+                env:
+                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

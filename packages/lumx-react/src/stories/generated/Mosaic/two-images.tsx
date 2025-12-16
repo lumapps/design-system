@@ -1,1 +1,0 @@
-../../../../../site-demo/content/product/components/mosaic/react/two-images.tsx

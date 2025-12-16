@@ -1,5 +1,5 @@
 import { Checkbox, CheckboxProps } from '@lumx/react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export const App = ({ theme }: any) => {
     const useCheckBoxState = (initial: CheckboxProps['isChecked']) => {

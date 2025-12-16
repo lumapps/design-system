@@ -1,4 +1,3 @@
-import React from 'react';
 import { FlexBox, Message, Text, Thumbnail, ImageLightbox } from '@lumx/react';
 
 const images = [

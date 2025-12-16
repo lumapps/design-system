@@ -1,4 +1,4 @@
-import { getRootClassName } from '@lumx/core/js/utils';
+import { LumxClassName } from '@lumx/core/js/types';
 
 /**
  * Component display name.
@@ -8,7 +8,7 @@ export const COMPONENT_NAME = 'TextField';
 /**
  * Component default class name and class prefix.
  */
-export const CLASSNAME = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-text-field';
 
 /**
  * Input native element class name.

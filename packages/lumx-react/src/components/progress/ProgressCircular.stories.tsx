@@ -1,4 +1,3 @@
-import React from 'react';
 import { ProgressCircular, ProgressCircularSize, Size, Text } from '@lumx/react';
 import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';

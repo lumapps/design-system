@@ -1,4 +1,3 @@
-import React from 'react';
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 
 import { render } from '@testing-library/react';

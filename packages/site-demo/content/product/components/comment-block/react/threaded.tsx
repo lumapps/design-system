@@ -1,6 +1,5 @@
 import { mdiHeart, mdiReply } from '@lumx/icons';
 import { Button, CommentBlock, Emphasis, Size } from '@lumx/react';
-import React from 'react';
 
 export const App = ({ theme }: any) => (
     <>

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { mdiPlus } from '@lumx/icons';
 import { Button, IconButton } from '@lumx/react';
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';

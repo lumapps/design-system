@@ -8,36 +8,44 @@ import copy from 'rollup-plugin-copy';
 import dts from 'rollup-plugin-dts';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import { tsPathsResolve } from 'rollup-plugin-ts-paths-resolve';
+import optimizeImportsLumxIcons from 'rollup-plugin-optimize-imports-lumx-icons';
 
 import pkg from './package.json' with { type: 'json' };
-import CONFIGS from '../../configs/index.js';
 
 const importUrl = new URL(import.meta.url);
 const __dirname = path.dirname(importUrl.pathname);
 
 const ROOT_PATH = path.resolve(__dirname, '..', '..');
 const DIST_PATH = path.resolve(__dirname, pkg.publishConfig.directory);
-export const extensions = ['.js', '.jsx', '.ts', '.tsx'];
+const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 
 /**
  * List of entry modules that will get compiled and exported to NPM.
  * All other modules are considered as internal and won't be exposed.
  */
-const input = Object.fromEntries([
-    ['index', 'src/index.ts'],             // => @lumx/react
-    ['utils/index', 'src/utils/index.ts'], // => @lumx/react/utils
-]);
+const input = {
+    index: 'src/index.ts',               // => @lumx/react
+    'utils/index': 'src/utils/index.ts', // => @lumx/react/utils
+};
+
+const external = [
+    // Externalize "public" lumx-core exports (internalize `_internal/*` exports)
+    /^@lumx\/core(?!.*\/_internal).*$/,
+    'classnames',
+    /^@lumx\/icons/
+];
 
 // Bundle JS code
 const bundleJS = {
     input,
+    external,
     output: {
         format: 'esm',
         sourcemap: true,
         hoistTransitiveImports: false,
         dir: DIST_PATH,
         // Unnamed chunk moved to `_internal` folder
-        chunkFileNames: '_internal/[name].js',
+        chunkFileNames: '_internal/[hash].js',
     },
     plugins: [
         /** Clean dist dir */
@@ -48,6 +56,8 @@ const bundleJS = {
         analyze(),
         /** Resolve tsconfig paths. */
         tsPathsResolve(),
+        /** Transform @lumx/icons imports to direct ESM imports. */
+        optimizeImportsLumxIcons(),
         /** Resolve source files. */
         nodeResolve({ browser: true, extensions }),
         /** Resolve commonjs dependencies. */
@@ -56,10 +66,8 @@ const bundleJS = {
         babel({
             extensions,
             exclude: /node_modules/,
-            plugins: CONFIGS.babel.plugins,
             presets: [
-                ['@babel/preset-env', { targets: 'defaults' }],
-                '@babel/preset-react',
+                ['@babel/react', { runtime: 'automatic'}],
                 '@babel/preset-typescript',
             ],
         }),
@@ -70,10 +78,6 @@ const bundleJS = {
                 { src: path.join(ROOT_PATH, 'LICENSE.md'), dest: DIST_PATH },
                 { src: path.join(__dirname, 'README.md'), dest: DIST_PATH },
                 { src: path.join(__dirname, 'package.json'), dest: DIST_PATH },
-                {
-                    src: [path.join(__dirname, 'src'), '!**/*.snap', '!**/*.test.tsx', '!**/*.test.ts'],
-                    dest: DIST_PATH,
-                },
             ],
         }),
     ],
@@ -82,11 +86,10 @@ const bundleJS = {
 // Bundle TS types in D.TS files
 const bundleType = {
     input,
+    external,
     output: {
         format: 'esm',
         dir: DIST_PATH,
-        // Unnamed chunk moved to `_internal` folder
-        chunkFileNames: '_internal/[name].d.ts',
     },
     plugins: [
         /** Externalize peer dependencies. */

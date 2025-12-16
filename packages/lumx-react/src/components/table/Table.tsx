@@ -1,12 +1,12 @@
-import React from 'react';
-
 import classNames from 'classnames';
 
 import { Theme } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';
+import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+
+import { CLASSNAME, COMPONENT_NAME } from './constants';
 
 /**
  * Defines the props of the component.
@@ -19,16 +19,6 @@ export interface TableProps extends GenericProps, HasTheme {
     /** Children */
     children?: React.ReactNode;
 }
-
-/**
- * Component display name.
- */
-const COMPONENT_NAME = 'Table';
-
-/**
- * Component default class name and class prefix.
- */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * Component default props.

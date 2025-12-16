@@ -1,6 +1,5 @@
 import { mdiAlert, mdiAlertCircle, mdiArrowRight, mdiBullhorn, mdiCheck, mdiMessageText } from '@lumx/icons';
 import { ColorPalette, Icon, Size, Theme } from '@lumx/react';
-import React from 'react';
 
 export const App = ({ theme = Theme.light }: any) => (
     <>

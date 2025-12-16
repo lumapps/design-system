@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { Ref, useCallback, useRef } from 'react';
+import { Ref, useCallback, useRef } from 'react';
 
 import { Placement } from '@lumx/react';
 import { Kind, Theme } from '@lumx/core/js/constants';
@@ -7,7 +7,8 @@ import { Dropdown } from '@lumx/react/components/dropdown/Dropdown';
 import { InputHelper } from '@lumx/react/components/input-helper/InputHelper';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { useListenFocus } from '@lumx/react/hooks/useListenFocus';
-import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';
+import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import type { LumxClassName } from '@lumx/core/js/types';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 
 import { useId } from '@lumx/react/hooks/useId';
@@ -18,7 +19,7 @@ import { CoreSelectProps } from './constants';
 const COMPONENT_NAME = 'Select';
 
 /** The default class name and classes prefix for this component. */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-select';
 
 export const WithSelectContext = (
     SelectElement: React.FC<any>,

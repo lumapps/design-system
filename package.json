@@ -5,6 +5,7 @@
     },
     "description": "The official LumApps Design System (LumX) for AngularJS and React applications",
     "devDependencies": {
+        "@vitest/ui": "^3.0.0",
         "changelog-verify": "^1.1.2",
         "es-abstract": "1.17.6",
         "eslint": "^8.57.0",
@@ -19,6 +20,7 @@
         "stylelint-config-recess-order": "^3.0.0",
         "stylelint-config-standard-scss": "^5.0.0",
         "typescript": "^5.4.3",
+        "vitest": "^3.0.0",
         "yo": "^5.1.0"
     },
     "engines": {
@@ -53,7 +55,6 @@
         "build:react": "yarn workspace @lumx/react build",
         "build:core": "yarn workspace @lumx/core build",
         "build:icons": "yarn workspace @lumx/icons build",
-        "build:angularjs": "yarn workspace @lumx/angularjs build",
         "build:storybook": "yarn workspace @lumx/react build:storybook",
         "chromatic": "npx chromatic -b build:storybook",
         "clean": "rm -rf packages/*/dist; lerna clean --yes && lerna run --stream clean",
@@ -69,7 +70,7 @@
         "scaffold": "yo lumx-component --with-tests --with-demo",
         "setup:git-hooks": "yarn husky uninstall && yarn husky install || exit 0",
         "start": "yarn workspace lumx-site-demo start",
-        "test": "yarn workspace @lumx/react test",
+        "test": "vitest",
         "type-check": "yarn tsc -p tsconfig.json",
         "storybook:react": "yarn workspace @lumx/react start:storybook",
         "storybook": "yarn storybook:react",
@@ -81,5 +82,5 @@
         "packages/*",
         "dev-packages/*"
     ],
-    "packageManager": "yarn@3.1.0"
+    "packageManager": "yarn@4.12.0"
 }

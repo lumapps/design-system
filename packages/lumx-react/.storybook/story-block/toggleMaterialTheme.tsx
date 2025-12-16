@@ -1,5 +1,3 @@
-import React from 'react';
-
 // Global state used to
 const globalState = {
     isEnabled: false,

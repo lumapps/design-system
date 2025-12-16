@@ -7,7 +7,7 @@ import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
 import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 import { withTheming } from '@lumx/react/stories/utils/theming';
-import { DESIGN_TOKENS } from '@lumx/core/js/constants/design-tokens';
+import { DESIGN_TOKENS } from '@lumx/core/js/constants/_internal/design-tokens';
 import { disableArgTypes } from '@lumx/react/stories/utils/disableArgTypes';
 import { iconArgType } from '@lumx/react/stories/controls/icons';
 import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';

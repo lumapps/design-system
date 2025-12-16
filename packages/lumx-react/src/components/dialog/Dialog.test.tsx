@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Dialog, DialogProps } from '@lumx/react/components/dialog/Dialog';
 import { queryByClassName } from '@lumx/react/testing/utils/queries';
 import { render, screen } from '@testing-library/react';
