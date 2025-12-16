@@ -41,6 +41,7 @@ export const RawInputTextarea = forwardRef<Omit<RawInputTextareaProps, 'type'>, 
         theme = defaultTheme,
         minimumRows = DEFAULT_PROPS.minimumRows as number,
         value,
+        name,
         onChange,
         ...forwardedProps
     } = props;
@@ -50,16 +51,21 @@ export const RawInputTextarea = forwardRef<Omit<RawInputTextareaProps, 'type'>, 
 
     const handleChange: ChangeEventHandler<HTMLTextAreaElement> = useCallback(
         (evt) => {
-            onChange?.(evt.target.value, evt.target.name, evt);
+            onChange?.(evt.target.value, name, evt);
         },
-        [onChange],
+        [onChange, name],
     );
 
     return (
         <textarea
-            className={classNames(className, handleBasicClasses({ prefix: INPUT_NATIVE_CLASSNAME, theme }))}
-            ref={useMergeRefs(ref, textareaRef)}
             {...forwardedProps}
+            name={name}
+            className={classNames(
+                className,
+                handleBasicClasses({ prefix: INPUT_NATIVE_CLASSNAME, theme }),
+                `${INPUT_NATIVE_CLASSNAME}--textarea`,
+            )}
+            ref={useMergeRefs(ref, textareaRef)}
             onChange={handleChange}
             value={value}
             rows={rows}

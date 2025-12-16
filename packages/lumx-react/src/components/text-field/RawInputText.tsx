@@ -33,22 +33,35 @@ export const DEFAULT_PROPS: Partial<RawInputTextProps> = {
  */
 export const RawInputText = forwardRef<RawInputTextProps, HTMLInputElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
-    const { className, theme = defaultTheme, value, onChange, type = DEFAULT_PROPS.type, ...forwardedProps } = props;
+    const {
+        className,
+        theme = defaultTheme,
+        value,
+        onChange,
+        type = DEFAULT_PROPS.type,
+        name,
+        ...forwardedProps
+    } = props;
     const textareaRef = useRef<HTMLInputElement>(null);
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = useCallback(
         (evt) => {
-            onChange?.(evt.target.value, evt.target.name, evt);
+            onChange?.(evt.target.value, name, evt);
         },
-        [onChange],
+        [onChange, name],
     );
 
     return (
         <input
             {...forwardedProps}
+            name={name}
             type={type}
             ref={useMergeRefs(ref, textareaRef)}
-            className={classNames(className, handleBasicClasses({ prefix: INPUT_NATIVE_CLASSNAME, theme }))}
+            className={classNames(
+                className,
+                handleBasicClasses({ prefix: INPUT_NATIVE_CLASSNAME, theme }),
+                `${INPUT_NATIVE_CLASSNAME}--text`,
+            )}
             onChange={handleChange}
             value={value}
         />
