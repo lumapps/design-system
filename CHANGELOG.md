@@ -7,13 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.21.1][] - 2025-12-16
+
 ### Fixed
 
 -   `@lumx/react`:
     -   `TextField`: restore `--text` and `--textarea` modifier classes on the native input and textarea
     -   `TextField`: use prop `name` as second argument of `onChange` instead of element `name` attribute
 
-## [3.21.0][] - 2025-11-20
+## [3.21.0][] - 2025-12-16
 
 ### Added
 
