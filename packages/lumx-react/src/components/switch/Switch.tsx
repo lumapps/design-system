@@ -1,12 +1,12 @@
 import { Children, InputHTMLAttributes, SyntheticEvent } from 'react';
 
-import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
 
 import { Alignment, InputHelper, InputLabel, Theme } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { useId } from '@lumx/react/hooks/useId';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
@@ -91,7 +91,7 @@ export const Switch = forwardRef<SwitchProps, HTMLDivElement>((props, ref) => {
         <div
             ref={ref}
             {...forwardedProps}
-            className={classNames(
+            className={classNames.join(
                 className,
                 handleBasicClasses({
                     prefix: CLASSNAME,

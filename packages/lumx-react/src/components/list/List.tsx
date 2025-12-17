@@ -1,12 +1,11 @@
 import { Key, ReactNode, SyntheticEvent } from 'react';
 
-import classNames from 'classnames';
-
 import { Size } from '@lumx/react';
 import { useKeyboardListNavigation } from '@lumx/react/hooks/useKeyboardListNavigation';
 import { GenericProps } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
@@ -73,7 +72,7 @@ const InternalList = forwardRef<ListProps, HTMLUListElement>((props, ref) => {
     return (
         <ul
             {...forwardedProps}
-            className={classNames(
+            className={classNames.join(
                 className,
                 handleBasicClasses({
                     prefix: CLASSNAME,

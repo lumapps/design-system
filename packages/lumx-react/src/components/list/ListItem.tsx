@@ -1,11 +1,10 @@
 import { ReactNode, Ref, SyntheticEvent, useMemo } from 'react';
 
-import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
 
 import { ListProps, Size } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
-import { onEnterPressed, onButtonPressed } from '@lumx/core/js/utils';
+import { onEnterPressed, onButtonPressed, classNames } from '@lumx/core/js/utils';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { renderLink } from '@lumx/react/utils/react/renderLink';
@@ -114,7 +113,7 @@ export const ListItem = forwardRef<ListItemProps, HTMLLIElement>((props, ref) =>
         <li
             ref={ref}
             {...forwardedProps}
-            className={classNames(
+            className={classNames.join(
                 className,
                 handleBasicClasses({
                     prefix: CLASSNAME,
@@ -132,7 +131,7 @@ export const ListItem = forwardRef<ListItemProps, HTMLLIElement>((props, ref) =>
                         'aria-disabled': isAnyDisabled,
                         ...linkProps,
                         href: isAnyDisabled ? undefined : linkProps.href,
-                        className: classNames(
+                        className: classNames.join(
                             handleBasicClasses({
                                 prefix: `${CLASSNAME}__link`,
                                 isHighlighted,

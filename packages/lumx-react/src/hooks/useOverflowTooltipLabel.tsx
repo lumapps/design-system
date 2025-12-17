@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTooltipContext } from '@lumx/react/components/tooltip/context';
-import { VISUALLY_HIDDEN } from '@lumx/react/constants';
+import { classNames } from '@lumx/core/js/utils';
 
 /**
  * Compute a tooltip label based on a label element `innerText` if the text overflows.
@@ -17,7 +17,7 @@ export const useOverflowTooltipLabel = (content: React.ReactNode) => {
             !parentTooltip &&
             labelElement &&
             // Not inside a visually hidden
-            !labelElement?.closest(`.${VISUALLY_HIDDEN}`) &&
+            !labelElement?.closest(`.${classNames.visuallyHidden()}`) &&
             // Text overflows
             labelElement.offsetWidth < labelElement.scrollWidth
         ) {

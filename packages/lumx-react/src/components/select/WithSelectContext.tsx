@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import { Ref, useCallback, useRef } from 'react';
 
 import { Placement } from '@lumx/react';
@@ -9,6 +8,7 @@ import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { useListenFocus } from '@lumx/react/hooks/useListenFocus';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 
 import { useId } from '@lumx/react/hooks/useId';
@@ -84,7 +84,7 @@ export const WithSelectContext = (
     return (
         <div
             ref={mergeRefs(ref, selectRef)}
-            className={classNames(
+            className={classNames.join(
                 className,
                 handleBasicClasses({
                     hasError,

@@ -1,12 +1,8 @@
-import classNames from 'classnames';
-
 import { ColorVariant, ColorWithVariants, Icon, Typography } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
-import {
-    getTypographyClassName,
-    handleBasicClasses,
-    resolveColorWithVariants,
-} from '@lumx/core/js/utils/_internal/className';
+import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { resolveColorWithVariants } from '@lumx/core/js/utils/_internal/color';
+import { classNames } from '@lumx/core/js/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { wrapChildrenIconWithSpaces } from '@lumx/react/utils/react/wrapChildrenIconWithSpaces';
@@ -86,10 +82,10 @@ export const Link = forwardRef<LinkProps, HTMLAnchorElement | HTMLButtonElement>
             as={linkAs || (forwardedProps.href ? 'a' : 'button')}
             {...forwardedProps}
             {...disabledStateProps}
-            className={classNames(
+            className={classNames.join(
                 className,
                 handleBasicClasses({ prefix: CLASSNAME, color, colorVariant, hasTypography: !!typography }),
-                typography && getTypographyClassName(typography),
+                typography && classNames.typography(typography),
             )}
         >
             {wrapChildrenIconWithSpaces(
