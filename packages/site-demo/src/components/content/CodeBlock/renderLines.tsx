@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { RenderLineParams } from './types';
 
 export const renderLines = ({ tokens, getLineProps, getTokenProps }: RenderLineParams): ReactNode =>

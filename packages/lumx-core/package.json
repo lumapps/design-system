@@ -19,6 +19,7 @@
         "LumX"
     ],
     "license": "MIT",
+    "type": "module",
     "name": "@lumx/core",
     "publishConfig": {
         "directory": "dist"
@@ -28,30 +29,29 @@
         "url": "git+https://github.com/lumapps/design-system.git"
     },
     "scripts": {
-        "generate:design-tokens": "yarn node style-dictionary",
+        "generate:design-tokens": "yarn node style-dictionary/index.cjs",
         "build": "rollup -c",
+        "test": "vitest run",
         "update-version-changelog": "yarn version-changelog ../../CHANGELOG.md"
     },
     "sideEffects": false,
     "version": "3.21.1",
     "devDependencies": {
-        "@rollup/plugin-commonjs": "^19.0.2",
-        "@rollup/plugin-terser": "^0.4.4",
-        "@rollup/plugin-typescript": "^12.1.4",
+        "@rollup/plugin-typescript": "^12.3.0",
         "@types/react": "^17.0.2",
         "autoprefixer": "^9.7.4",
         "glob": "^7.1.6",
         "postcss": "^8.5.6",
-        "rollup": "^2.79.1",
+        "rollup": "^4.53.3",
         "rollup-plugin-cleaner": "^1.0.0",
         "rollup-plugin-copy": "^3.5.0",
         "sass": "^1.54.0",
         "style-dictionary": "^3.9.0",
         "tinycolor2": "^1.4.1",
-        "version-changelog": "^3.1.1"
-    },
-    "peerDependencies": {
-        "moment": ">= 2",
-        "moment-range": "^4.0.2"
+        "typescript": "^5.4.3",
+        "version-changelog": "^3.1.1",
+        "vite": "^6.3.5",
+        "vite-tsconfig-paths": "^5.1.4",
+        "vitest": "^3.0.0"
     }
 }

@@ -1,15 +1,13 @@
-import React from 'react';
-
 import classNames from 'classnames';
 
 import { ColorVariant, ColorWithVariants, Icon, Typography } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
 import {
-    getRootClassName,
     getTypographyClassName,
     handleBasicClasses,
     resolveColorWithVariants,
-} from '@lumx/core/js/utils/className';
+} from '@lumx/core/js/utils/_internal/className';
+import type { LumxClassName } from '@lumx/core/js/types';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { wrapChildrenIconWithSpaces } from '@lumx/react/utils/react/wrapChildrenIconWithSpaces';
 import { HasAriaDisabled } from '@lumx/react/utils/type/HasAriaDisabled';
@@ -58,7 +56,7 @@ const COMPONENT_NAME = 'Link';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-link';
 
 /**
  * Link component.

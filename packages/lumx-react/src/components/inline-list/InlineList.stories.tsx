@@ -1,4 +1,3 @@
-import React from 'react';
 import { mdiEarth } from '@lumx/icons';
 import { Icon, Text } from '@lumx/react';
 import { withResizableBox } from '@lumx/react/stories/decorators/withResizableBox';

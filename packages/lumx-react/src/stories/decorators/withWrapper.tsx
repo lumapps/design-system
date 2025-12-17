@@ -1,5 +1,3 @@
-import React from 'react';
-
 /**
  * SB decorator adding a wrapping div around the story
  */

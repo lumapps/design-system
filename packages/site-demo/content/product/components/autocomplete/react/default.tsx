@@ -1,5 +1,6 @@
-import { Autocomplete, List, ListItem, Size } from '@lumx/react';
 import React from 'react';
+
+import { Autocomplete, List, ListItem, Size } from '@lumx/react';
 
 interface City {
     id: string;

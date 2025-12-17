@@ -1,4 +1,4 @@
-import React, { ReactNode, Ref, SyntheticEvent, useMemo } from 'react';
+import { ReactNode, Ref, SyntheticEvent, useMemo } from 'react';
 
 import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
@@ -6,7 +6,8 @@ import isEmpty from 'lodash/isEmpty';
 import { ListProps, Size } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
 import { onEnterPressed, onButtonPressed } from '@lumx/core/js/utils';
-import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';
+import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import type { LumxClassName } from '@lumx/core/js/types';
 import { renderLink } from '@lumx/react/utils/react/renderLink';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
@@ -53,7 +54,7 @@ const COMPONENT_NAME = 'ListItem';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-list-item';
 
 /**
  * Component default props.

@@ -1,5 +1,4 @@
 import React from 'react';
-
 /**
  * Example custom link that can be used in linkAs props.
  */

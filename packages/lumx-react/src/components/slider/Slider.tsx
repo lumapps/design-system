@@ -1,12 +1,13 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { SyntheticEvent, useMemo, useRef } from 'react';
+import { SyntheticEvent, useMemo, useRef } from 'react';
 
 import classNames from 'classnames';
 
 import { InputHelper, InputLabel, Theme } from '@lumx/react';
 import useEventCallback from '@lumx/react/hooks/useEventCallback';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';
+import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import type { LumxClassName } from '@lumx/core/js/types';
 import { clamp } from '@lumx/react/utils/number/clamp';
 import { useId } from '@lumx/react/hooks/useId';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
@@ -51,7 +52,7 @@ const COMPONENT_NAME = 'Slider';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-slider';
 
 /**
  * Component default props.

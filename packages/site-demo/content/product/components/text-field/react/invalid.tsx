@@ -1,5 +1,5 @@
 import { TextField } from '@lumx/react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export const App = ({ theme }: any) => {
     const [value, setValue] = useState('Invalid value');

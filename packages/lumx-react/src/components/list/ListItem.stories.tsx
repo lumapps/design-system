@@ -16,7 +16,6 @@ export default {
     argTypes: {
         size: getSelectArgType(sizes),
     },
-    decorators: [withWrapper({}, List)],
 };
 
 /**
@@ -24,6 +23,7 @@ export default {
  */
 export const Default = {
     args: { children: 'List item' },
+    decorators: [withWrapper({}, List)],
 };
 
 /**
@@ -34,6 +34,7 @@ export const CustomLink_ = {
         linkAs: CustomLink,
         children: 'List item custom link',
     },
+    decorators: [withWrapper({}, List)],
 };
 
 /**
@@ -42,6 +43,7 @@ export const CustomLink_ = {
 export const AllStates = {
     args: { children: 'List item' },
     decorators: [
+        withWrapper({}, List),
         withCombinations({
             combinations: {
                 rows: { key: 'size', options: sizes },

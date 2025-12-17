@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Dropdown, List, ListItem, Size, TextField } from '@lumx/react';
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { getByClassName, getByTagName, queryByClassName } from '@lumx/react/testing/utils/queries';

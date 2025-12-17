@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { ProgressTrackerStep } from '@lumx/react';
 import { render, within } from '@testing-library/react';
 import { getByClassName } from '@lumx/react/testing/utils/queries';

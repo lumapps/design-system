@@ -1,6 +1,7 @@
+import React, { SyntheticEvent, useState } from 'react';
+
 import { mdiAccessPoint, mdiAccountBox, mdiAlphaF, mdiClose, mdiMagnify } from '@lumx/icons';
 import { Chip, Icon, List, ListDivider, ListItem, ListSubheader, SelectMultiple, Size, TextField } from '@lumx/react';
-import React, { SyntheticEvent, useState } from 'react';
 
 export const App = ({ theme }: any) => {
     const CHOICES_WITH_ICONS = [

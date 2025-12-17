@@ -14,7 +14,7 @@ import {
 } from '@lumx/react';
 
 import classNames from 'classnames';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export const App = ({ theme = Theme.light }: any) => {
     const [value, setValue] = useState('');

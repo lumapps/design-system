@@ -1,11 +1,10 @@
-import React from 'react';
 import { Button } from '@lumx/react';
 import { initDemoShadowDOMPortal } from '@lumx/react/stories/utils/initDemoShadowDOMPortal';
 import { PortalProvider } from './PortalProvider';
 import { Portal } from './Portal';
 
 export default {
-    title: 'LumX components/PortalProvider',
+    title: 'utils/portal/PortalProvider',
     component: PortalProvider,
     args: { enabled: true },
     parameters: { chromatic: { disable: true } },

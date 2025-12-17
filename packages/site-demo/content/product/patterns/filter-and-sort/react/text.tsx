@@ -10,7 +10,7 @@ import {
     Thumbnail,
     ThumbnailVariant,
 } from '@lumx/react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const RESULTS = [
     {

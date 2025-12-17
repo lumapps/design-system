@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {
     mdiHome,
     mdiMessageTextOutline,
@@ -15,7 +13,7 @@ import { withCombinations } from '@lumx/react/stories/decorators/withCombination
 import { withThemedBackground } from '@lumx/react/stories/decorators/withThemedBackground';
 import { withTheming } from '@lumx/react/stories/utils/theming';
 import pick from 'lodash/pick';
-import { DESIGN_TOKENS } from '@lumx/core/js/constants/design-tokens';
+import { DESIGN_TOKENS } from '@lumx/core/js/constants/_internal/design-tokens';
 import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
 import { iconArgType } from '@lumx/react/stories/controls/icons';
 import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';

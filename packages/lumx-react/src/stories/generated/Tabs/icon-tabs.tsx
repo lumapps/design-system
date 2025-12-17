@@ -1,1 +1,0 @@
-../../../../../site-demo/content/product/components/tabs/react/icon-tabs.tsx

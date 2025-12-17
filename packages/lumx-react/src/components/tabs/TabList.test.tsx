@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Tab } from '@lumx/react';
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { render, screen } from '@testing-library/react';

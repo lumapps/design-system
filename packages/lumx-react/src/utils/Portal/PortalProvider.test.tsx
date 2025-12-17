@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { PortalInit, PortalProvider } from './PortalProvider';
 import { Portal } from './Portal';

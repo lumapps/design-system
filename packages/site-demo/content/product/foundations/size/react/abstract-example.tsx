@@ -1,5 +1,4 @@
 import { Avatar, Button, Emphasis, LinkPreview, List, ListItem, Size } from '@lumx/react';
-import React from 'react';
 
 export const App = () => (
     <>

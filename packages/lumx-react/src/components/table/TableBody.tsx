@@ -1,10 +1,9 @@
-import React from 'react';
-
 import classNames from 'classnames';
 
 import { GenericProps } from '@lumx/react/utils/type';
-import { getRootClassName } from '@lumx/core/js/utils/className';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+
+import { CLASSNAME as TABLE_CLASSNAME } from './constants';
 
 /**
  * Defines the props of the component.
@@ -22,7 +21,7 @@ const COMPONENT_NAME = 'TableBody';
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME, true);
+const CLASSNAME = `${TABLE_CLASSNAME}__body`;
 
 /**
  * TableBody component.

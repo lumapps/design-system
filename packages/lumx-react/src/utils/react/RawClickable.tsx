@@ -1,4 +1,4 @@
-import React, { AriaAttributes, ElementType } from 'react';
+import { AriaAttributes, ElementType } from 'react';
 import { forwardRefPolymorphic } from '@lumx/react/utils/react/forwardRefPolymorphic';
 import { ComponentRef, HasPolymorphicAs } from '@lumx/react/utils/type';
 import { HasRequiredLinkHref } from '@lumx/react/utils/type/HasRequiredLinkHref';

@@ -3,7 +3,7 @@ const without = require('lodash/without');
 const path = require('path');
 const fs = require('fs/promises');
 
-const overrideConfig = require('../override-icons/config');
+const overrideConfig = require('../override-icons/config.cjs');
 const {
     MDI_FONT_PATH,
     OVERRIDE_FONT_PATH,

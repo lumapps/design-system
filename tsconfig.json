@@ -5,7 +5,7 @@
         "esModuleInterop": true,
         "declaration": true,
         "forceConsistentCasingInFileNames": true,
-        "jsx": "react",
+        "jsx": "react-jsx",
         "lib": ["es2020", "dom"],
         "module": "ESNext",
         "moduleResolution": "node",
@@ -16,11 +16,10 @@
         "types": ["vitest/globals"],
         "paths": {
             "@lumx/core/*": ["lumx-core/src/*"],
-            "@lumx/angularjs": ["lumx-angularjs/src"],
-            "@lumx/angularjs/*": ["lumx-angularjs/src/*"],
             "@lumx/react": ["lumx-react/src"],
             "@lumx/react/*": ["lumx-react/src/*"],
             "@lumx/icons": ["lumx-icons"],
+            "@lumx/icons/*": ["lumx-icons/dist/*"],
             "@lumx/demo/*": ["site-demo/src/*"]
         },
         "strict": true,

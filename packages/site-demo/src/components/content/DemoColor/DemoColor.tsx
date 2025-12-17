@@ -1,6 +1,4 @@
 import classNames from 'classnames';
-import React from 'react';
-
 import { useThemeColorVariants } from '@lumx/demo/utils/hooks/useThemeColorVariants';
 import { Theme } from '@lumx/react';
 

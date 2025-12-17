@@ -22,7 +22,7 @@ import {
 } from '@lumx/react';
 
 import orderBy from 'lodash/orderBy';
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 const initialTable = [
     {

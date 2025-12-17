@@ -1,4 +1,3 @@
-import React from 'react';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
 const TEST_ID = 'theme-sentinel';

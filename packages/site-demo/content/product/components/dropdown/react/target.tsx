@@ -1,5 +1,5 @@
 import { Button, Chip, Dropdown, FlexBox, List, ListItem, Orientation, Placement, Size } from '@lumx/react';
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 export const App = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);

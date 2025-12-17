@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Kind } from '@lumx/react';
 import { render, within, screen } from '@testing-library/react';
 import { queryByClassName } from '@lumx/react/testing/utils/queries';

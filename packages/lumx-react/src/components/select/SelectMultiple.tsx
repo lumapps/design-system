@@ -1,4 +1,4 @@
-import React, { ReactNode, RefObject, SyntheticEvent } from 'react';
+import { ReactNode, RefObject, SyntheticEvent } from 'react';
 
 import classNames from 'classnames';
 
@@ -7,7 +7,8 @@ import { Size, Theme } from '@lumx/core/js/constants';
 import { Chip } from '@lumx/react/components/chip/Chip';
 import { Icon } from '@lumx/react/components/icon/Icon';
 import { InputLabel } from '@lumx/react/components/input-label/InputLabel';
-import { getRootClassName, handleBasicClasses } from '@lumx/core/js/utils/className';
+import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import type { LumxClassName } from '@lumx/core/js/types';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
@@ -33,7 +34,7 @@ export interface SelectMultipleProps extends CoreSelectProps {
 const COMPONENT_NAME = 'Select';
 
 /** The default class name and classes prefix for this component. */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-select';
 
 /** The default value of props. */
 const DEFAULT_PROPS: Partial<SelectMultipleProps> = {

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { PageHead } from '../components/base/PageHead';
 
 const Page404: React.FC = () => (

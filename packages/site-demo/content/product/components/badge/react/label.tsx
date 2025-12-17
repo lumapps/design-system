@@ -1,5 +1,4 @@
 import { Avatar, Badge, ColorPalette, Size } from '@lumx/react';
-import React from 'react';
 
 export const App = () => (
     <>

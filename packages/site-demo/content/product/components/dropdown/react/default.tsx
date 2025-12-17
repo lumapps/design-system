@@ -1,5 +1,6 @@
-import { Button, Dropdown, List, ListItem, ListSubheader, Size } from '@lumx/react';
 import React from 'react';
+
+import { Button, Dropdown, List, ListItem, ListSubheader, Size } from '@lumx/react';
 
 export const App = () => {
     const anchorSimpleRef = React.useRef(null);

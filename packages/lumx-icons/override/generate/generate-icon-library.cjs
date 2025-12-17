@@ -3,8 +3,8 @@ const fs = require('node:fs/promises');
 
 const sortBy = require('lodash/sortBy');
 
-const aliasesConfig = require('../alias-icons');
-const overrideConfig = require('../override-icons/config');
+const aliasesConfig = require('../alias-icons.cjs');
+const overrideConfig = require('../override-icons/config.cjs');
 
 const { INPUT_ICON_OVERRIDE_DIR, GENERATED_DIR, JSON_ICON_LIBRARY_FILE } = require('./constants.cjs');
 const { svgToPath, optimizeSVGPath } = require('./utils.cjs');

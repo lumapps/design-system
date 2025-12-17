@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useReducer } from 'react';
+import { ReactNode, useEffect, useReducer } from 'react';
 import { INIT_STATE, TabProviderContext, reducer } from '../tabs/state';
 
 export interface ProgressTrackerProviderProps {

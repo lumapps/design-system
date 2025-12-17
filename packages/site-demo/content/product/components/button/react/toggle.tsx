@@ -1,6 +1,5 @@
 import { mdiBellPlus, mdiBellRing, mdiCheck } from '@lumx/icons';
 import { Button, Emphasis, IconButton } from '@lumx/react';
-import React from 'react';
 
 export const App = ({ theme }: any) => (
     <>

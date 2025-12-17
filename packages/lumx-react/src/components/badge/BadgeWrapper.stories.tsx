@@ -1,6 +1,5 @@
 import { mdiAccount, mdiBee, mdiHeart } from '@lumx/icons';
 import { Badge, BadgeWrapper, Button, Chip, ColorPalette, FlexBox, Icon, Orientation, Size } from '@lumx/react';
-import React from 'react';
 
 export default {
     title: 'LumX components/badge/BadgeWrapper',

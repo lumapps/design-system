@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Tab, TabList, TabPanel, TabProvider, TabProviderProps } from '@lumx/react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';

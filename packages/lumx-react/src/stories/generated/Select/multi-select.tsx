@@ -1,1 +1,0 @@
-../../../../../site-demo/content/product/components/select/react/multi-select.tsx
