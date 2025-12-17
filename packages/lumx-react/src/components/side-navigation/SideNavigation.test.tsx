@@ -24,7 +24,7 @@ describe(`<${SideNavigation.displayName}>`, () => {
 
     it('should render dark theme', () => {
         const { sideNavigation } = setup({ theme: Theme.dark });
-        expect(sideNavigation.className).toMatchInlineSnapshot('"lumx-color-font-light-N lumx-side-navigation"');
+        expect(sideNavigation.className).toMatchInlineSnapshot(`"lumx-side-navigation lumx-color-font-light-N"`);
     });
 
     // Common tests suite.

@@ -2,7 +2,7 @@ import React, { MouseEventHandler } from 'react';
 
 import { AspectRatio, Icon, Size, Theme } from '@lumx/react';
 import { GenericProps, HasTheme, ValueOf } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { useClassnames } from '@lumx/react/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
@@ -83,6 +83,7 @@ const DEFAULT_PROPS: Partial<UploaderProps> = {
  * @return React element.
  */
 export const Uploader = forwardRef<UploaderProps>((props, ref) => {
+    const { block, element } = useClassnames(CLASSNAME);
     const { disabledStateProps, otherProps, isAnyDisabled } = useDisableStateProps(props);
     const defaultTheme = useTheme() || Theme.light;
     const {
@@ -133,32 +134,31 @@ export const Uploader = forwardRef<UploaderProps>((props, ref) => {
             {...wrapper.props}
             {...forwardedProps}
             onClick={handleClick}
-            className={classNames.join(
+            className={block(
+                {
+                    [`aspect-ratio-${adjustedAspectRatio}`]: Boolean(adjustedAspectRatio),
+                    [`size-${size}`]: Boolean(size),
+                    [`theme-${theme}`]: Boolean(theme),
+                    [`variant-${variant}`]: Boolean(variant),
+                    'is-drag-hovering': isDragHovering,
+                    'is-disabled': isAnyDisabled,
+                },
                 className,
-                handleBasicClasses({
-                    aspectRatio: adjustedAspectRatio,
-                    prefix: CLASSNAME,
-                    size,
-                    theme,
-                    variant,
-                    isDragHovering,
-                    isDisabled: isAnyDisabled,
-                }),
             )}
         >
-            <span className={`${CLASSNAME}__background`} />
+            <span className={element('background')} />
 
-            <span className={`${CLASSNAME}__wrapper`}>
-                {icon && <Icon className={`${CLASSNAME}__icon`} icon={icon} size={Size.s} />}
+            <span className={element('wrapper')}>
+                {icon && <Icon className={element('icon')} icon={icon} size={Size.s} />}
 
-                {label && <span className={`${CLASSNAME}__label`}>{label}</span>}
+                {label && <span className={element('label')}>{label}</span>}
             </span>
 
             {fileInputProps && (
                 <input
                     type="file"
                     id={inputId}
-                    className={`${CLASSNAME}__input ${classNames.visuallyHidden()}`}
+                    className={element('input', [classNames.visuallyHidden()])}
                     {...disabledStateProps}
                     {...fileInputProps}
                     readOnly={isAnyDisabled}

@@ -1,7 +1,6 @@
 import { Theme } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
-import { classNames } from '@lumx/core/js/utils';
+import { useClassnames } from '@lumx/react/utils';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
@@ -34,14 +33,19 @@ const DEFAULT_PROPS: Partial<TableProps> = {};
 export const Table = forwardRef<TableProps, HTMLTableElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
     const { children, className, hasBefore, hasDividers, theme = defaultTheme, ...forwardedProps } = props;
+    const { block } = useClassnames(CLASSNAME);
 
     return (
         <table
             ref={ref}
             {...forwardedProps}
-            className={classNames.join(
+            className={block(
+                {
+                    'has-before': hasBefore,
+                    'has-dividers': hasDividers,
+                    [`theme-${theme}`]: Boolean(theme),
+                },
                 className,
-                handleBasicClasses({ prefix: CLASSNAME, hasBefore, hasDividers, theme }),
             )}
         >
             {children}

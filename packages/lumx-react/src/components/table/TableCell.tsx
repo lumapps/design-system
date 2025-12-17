@@ -1,9 +1,8 @@
 import { mdiArrowDown, mdiArrowUp } from '@lumx/icons';
 import { Icon, Size } from '@lumx/react';
 import { GenericProps, ValueOf } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
-import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { useClassnames } from '@lumx/react/utils';
 
 import { CLASSNAME as TABLE_CLASSNAME } from './constants';
 
@@ -73,6 +72,8 @@ export const TableCell = forwardRef<TableCellProps, HTMLTableCellElement>((props
         ...forwardedProps
     } = props;
 
+    const { block } = useClassnames(CLASSNAME);
+
     // Use button if clickable
     const Wrapper = onHeaderClick ? 'button' : 'div';
     const wrapperProps = Wrapper === 'button' ? ({ type: 'button', onClick: onHeaderClick } as const) : undefined;
@@ -91,14 +92,13 @@ export const TableCell = forwardRef<TableCellProps, HTMLTableCellElement>((props
                 <th
                     ref={ref}
                     {...forwardedProps}
-                    className={classNames.join(
-                        handleBasicClasses({
-                            prefix: CLASSNAME,
-                            isSortable,
-                            isSorted: isSortable && !!sortOrder,
-                        }),
-                        className,
-                        `${CLASSNAME}--head`,
+                    className={block(
+                        {
+                            head: true,
+                            'is-sortable': isSortable,
+                            'is-sorted': Boolean(isSortable && sortOrder),
+                        },
+                        [className],
                     )}
                     aria-sort={ariaSort}
                 >
@@ -119,7 +119,7 @@ export const TableCell = forwardRef<TableCellProps, HTMLTableCellElement>((props
             )}
 
             {variant === TableCellVariant.body && (
-                <td {...forwardedProps} className={classNames.join(className, CLASSNAME, `${CLASSNAME}--body`)}>
+                <td {...forwardedProps} className={block({ body: true }, [className])}>
                     <div className={`${CLASSNAME}-content`}>{children}</div>
                 </td>
             )}

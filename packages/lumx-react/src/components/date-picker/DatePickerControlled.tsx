@@ -23,6 +23,7 @@ import { classNames, onEnterPressed } from '@lumx/core/js/utils';
 import { addMonthResetDay } from '@lumx/react/utils/date/addMonthResetDay';
 import { formatDayNumber } from '@lumx/react/utils/date/formatDayNumber';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { useClassnames } from '@lumx/react/utils';
 
 import { CLASSNAME } from './constants';
 
@@ -72,6 +73,7 @@ export const DatePickerControlled = forwardRef<DatePickerControlledProps, HTMLDi
         const localeObj = parseLocale(locale) as Locale;
         return getMonthCalendar(localeObj, selectedMonth, minDate, maxDate);
     }, [locale, minDate, maxDate, selectedMonth]);
+    const { block, element } = useClassnames(CLASSNAME);
 
     const selectedYear = selectedMonth.getFullYear();
     const formattedYear = selectedMonth.toLocaleDateString(locale, { year: 'numeric' }).slice(0, 4);
@@ -138,9 +140,9 @@ export const DatePickerControlled = forwardRef<DatePickerControlledProps, HTMLDi
     const yearLabel = getYearDisplayName(locale);
 
     return (
-        <div ref={ref} className={`${CLASSNAME}`} style={style}>
+        <div ref={ref} className={block()} style={style}>
             <Toolbar
-                className={`${CLASSNAME}__toolbar`}
+                className={element('toolbar')}
                 after={
                     <IconButton
                         {...nextButtonProps}
@@ -168,7 +170,7 @@ export const DatePickerControlled = forwardRef<DatePickerControlledProps, HTMLDi
                         </span>
                         {onMonthChange && (
                             <FlexBox
-                                className={`${CLASSNAME}__month`}
+                                className={element(`month`)}
                                 orientation="horizontal"
                                 hAlign="center"
                                 gap="regular"
@@ -191,7 +193,7 @@ export const DatePickerControlled = forwardRef<DatePickerControlledProps, HTMLDi
                                                 onBlur={updateYear}
                                                 onKeyPress={updateYearOnEnterPressed}
                                                 key="year"
-                                                className={`${CLASSNAME}__year`}
+                                                className={element(`year`)}
                                             />
                                         ) : (
                                             <Text as="p" key={part}>
@@ -204,19 +206,18 @@ export const DatePickerControlled = forwardRef<DatePickerControlledProps, HTMLDi
                     </>
                 }
             />
-            <div className={`${CLASSNAME}__calendar`}>
-                <div className={`${CLASSNAME}__week-days ${CLASSNAME}__days-wrapper`}>
+            <div className={element(`calendar`)}>
+                <div className={element(`week-days`, [element(`days-wrapper`)])}>
                     {weekDays.map(({ letter, number, long }) => (
-                        <div key={number} className={`${CLASSNAME}__day-wrapper`}>
-                            <span className={`${CLASSNAME}__week-day`} aria-hidden>
+                        <div key={number} className={element(`day-wrapper`)}>
+                            <span className={element(`week-day`)} aria-hidden>
                                 {letter.toLocaleUpperCase()}
                             </span>
                             <span className="visually-hidden">{long}</span>
                         </div>
                     ))}
                 </div>
-
-                <div className={`${CLASSNAME}__month-days ${CLASSNAME}__days-wrapper`}>
+                <div className={element(`month-days`, [element(`days-wrapper`)])}>
                     {weeks.flatMap((week, weekIndex) => {
                         return weekDays.map((weekDay, dayIndex) => {
                             const { date, isOutOfRange } = week[weekDay.number] || {};
@@ -225,12 +226,12 @@ export const DatePickerControlled = forwardRef<DatePickerControlledProps, HTMLDi
                             const isSelected = date && value && isSameDay(value, date);
 
                             return (
-                                <div key={key} className={`${CLASSNAME}__day-wrapper`}>
+                                <div key={key} className={element(`day-wrapper`)}>
                                     {date && (
                                         <Button
                                             ref={isSelected || (!value && isToday) ? todayOrSelectedDateRef : null}
-                                            className={classNames.join(`${CLASSNAME}__month-day`, {
-                                                [`${CLASSNAME}__month-day--is-today`]: isToday,
+                                            className={element(`month-day`, {
+                                                'is-today': isToday,
                                             })}
                                             disabled={isOutOfRange}
                                             isSelected={isSelected}

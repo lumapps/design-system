@@ -4,8 +4,8 @@ import isEmpty from 'lodash/isEmpty';
 import noop from 'lodash/noop';
 
 import { Comp, isComponentType } from '@lumx/react/utils/type';
+import { useClassnames } from '@lumx/react/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { partitionMulti } from '@lumx/react/utils/partitionMulti';
 import { Orientation, Size, FlexBox, FlexBoxProps } from '@lumx/react';
 import { GenericBlockGapSize } from '@lumx/react/components/generic-block/constants';
@@ -134,6 +134,7 @@ const BaseGenericBlock: BaseGenericBlock = forwardRef((props, ref) => {
         contentProps,
         ...forwardedProps
     } = props;
+    const { block, element } = useClassnames(CLASSNAME);
 
     const sections = React.useMemo(() => {
         // Split children by section type
@@ -153,13 +154,7 @@ const BaseGenericBlock: BaseGenericBlock = forwardRef((props, ref) => {
     }, [children]);
 
     return (
-        <FlexBox
-            ref={ref}
-            className={classNames.join(className, CLASSNAME)}
-            gap={gap}
-            orientation={orientation}
-            {...forwardedProps}
-        >
+        <FlexBox ref={ref} className={block([className])} gap={gap} orientation={orientation} {...forwardedProps}>
             {(figure || sections.figureChildProps?.children) && (
                 <FlexBox
                     ref={(sections.figureChild as any)?.ref}
@@ -167,11 +162,7 @@ const BaseGenericBlock: BaseGenericBlock = forwardRef((props, ref) => {
                     hAlign={forwardedProps.hAlign}
                     {...figureProps}
                     {...sections.figureChildProps}
-                    className={classNames.join(
-                        figureProps?.className,
-                        sections.figureChildProps?.className,
-                        `${CLASSNAME}__figure`,
-                    )}
+                    className={element('figure', [figureProps?.className, sections.figureChildProps?.className])}
                 >
                     {figure}
                     {sections.figureChildProps?.children}
@@ -187,11 +178,7 @@ const BaseGenericBlock: BaseGenericBlock = forwardRef((props, ref) => {
                     hAlign={forwardedProps.hAlign}
                     {...contentProps}
                     {...sections.contentChildProps}
-                    className={classNames.join(
-                        contentProps?.className,
-                        sections.contentChildProps?.className,
-                        `${CLASSNAME}__content`,
-                    )}
+                    className={element('content', [contentProps?.className, sections.contentChildProps?.className])}
                 >
                     {sections.contentChildProps?.children}
                     {sections.otherChildren}
@@ -205,11 +192,7 @@ const BaseGenericBlock: BaseGenericBlock = forwardRef((props, ref) => {
                     hAlign={forwardedProps.hAlign}
                     {...actionsProps}
                     {...sections.actionsChildProps}
-                    className={classNames.join(
-                        actionsProps?.className,
-                        sections.actionsChildProps?.className,
-                        `${CLASSNAME}__actions`,
-                    )}
+                    className={element('actions', [actionsProps?.className, sections.actionsChildProps?.className])}
                 >
                     {actions}
                     {sections.actionsChildProps?.children}

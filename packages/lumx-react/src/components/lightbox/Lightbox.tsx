@@ -4,9 +4,8 @@ import { mdiClose } from '@lumx/icons';
 import { HeadingLevelProvider, IconButton, IconButtonProps } from '@lumx/react';
 import { DIALOG_TRANSITION_DURATION, DOCUMENT } from '@lumx/react/constants';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { Portal, useClassnames } from '@lumx/react/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { useDisableBodyScroll } from '@lumx/react/hooks/useDisableBodyScroll';
@@ -16,8 +15,6 @@ import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { useTransitionVisibility } from '@lumx/react/hooks/useTransitionVisibility';
 import { ThemeProvider } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
-
-import { Portal } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
@@ -83,6 +80,9 @@ export const Lightbox = forwardRef<LightboxProps, HTMLDivElement>((props, ref) =
     }
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
+    const { block, element } = useClassnames(CLASSNAME);
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const childrenRef = useRef<any>(null);
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const wrapperRef = useRef<HTMLDivElement>(null);
@@ -138,19 +138,18 @@ export const Lightbox = forwardRef<LightboxProps, HTMLDivElement>((props, ref) =
                 aria-modal="true"
                 role="dialog"
                 tabIndex={-1}
-                className={classNames.join(
+                className={block(
+                    {
+                        'is-hidden': !isOpen,
+                        'is-shown': isOpen || isVisible,
+                        [`theme-${theme}`]: Boolean(theme),
+                    },
                     className,
-                    handleBasicClasses({
-                        prefix: CLASSNAME,
-                        isHidden: !isOpen,
-                        isShown: isOpen || isVisible,
-                        theme,
-                    }),
                 )}
                 style={{ zIndex }}
             >
                 {closeButtonProps && (
-                    <div className={`${CLASSNAME}__close`}>
+                    <div className={element('close')}>
                         <IconButton
                             {...closeButtonProps}
                             ref={closeButtonRef}
@@ -166,7 +165,7 @@ export const Lightbox = forwardRef<LightboxProps, HTMLDivElement>((props, ref) =
                 <HeadingLevelProvider level={2}>
                     <ThemeProvider value={undefined}>
                         <ClickAwayProvider callback={!preventAutoClose && onClose} childrenRefs={clickAwayRefs}>
-                            <div ref={childrenRef} className={`${CLASSNAME}__wrapper`} role="presentation">
+                            <div ref={childrenRef} className={element('wrapper')} role="presentation">
                                 {children}
                             </div>
                         </ClickAwayProvider>

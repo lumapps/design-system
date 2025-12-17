@@ -1,9 +1,9 @@
 import { ReactElement, ReactNode } from 'react';
 
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { GenericProps } from '@lumx/react/utils/type';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { useClassnames } from '@lumx/react/utils';
 
 export interface BadgeWrapperProps extends GenericProps {
     /** Badge. */
@@ -24,11 +24,12 @@ const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-badge-wrapper';
 
 export const BadgeWrapper = forwardRef<BadgeWrapperProps, HTMLDivElement>((props, ref) => {
     const { badge, children, className, ...forwardedProps } = props;
+    const { block, element } = useClassnames(CLASSNAME);
 
     return (
-        <div ref={ref} {...forwardedProps} className={classNames.join(className, CLASSNAME)}>
+        <div ref={ref} {...forwardedProps} className={block([className])}>
             {children}
-            {badge && <div className={`${CLASSNAME}__badge`}>{badge}</div>}
+            {badge && <div className={element('badge')}>{badge}</div>}
         </div>
     );
 });
