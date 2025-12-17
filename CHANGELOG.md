@@ -30,11 +30,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   _[BREAKING]_ Migrate to ESM module format
 -   `@lumx/angularjs`: removed from the project. Future updates to `@lumx/core` will continue to avoid breaking change to the deprecated angularjs directives but without any guarantee.
 
+## [3.21.1][] - 2025-12-16
+
+### Fixed
+
+-   `@lumx/react`:
+    -   `TextField`: restore `--text` and `--textarea` modifier classes on the native input and textarea
+    -   `TextField`: use prop `name` as second argument of `onChange` instead of element `name` attribute
+
+## [3.21.0][] - 2025-12-16
+
 ### Added
 
 -   `@lumx/react`:
     -   Added `RawInputText` and `RawInputTextarea` components. Decoration-less version of input and textarea used in
         `TextField` component
+
+### Fixed
+
+-   `@lumx/react`:
+    -   Fix unwanted scroll when focusing a very big multiline text field
 
 ## [3.20.0][] - 2025-11-20
 
@@ -50,7 +65,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Migrate tests to `vitest`
     -   Uniformize link and button handling in `Link`, `Button`, `SideNavigationItem`, `Thumbnail` and `NavigationItem`.
     -   Render disabled links as link instead of disabled buttons.
-    -   _[BREAKING]_ Drop support for React 16
 
 ## [3.19.0][] - 2025-11-07
 
