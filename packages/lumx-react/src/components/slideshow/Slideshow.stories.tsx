@@ -177,3 +177,6 @@ WithComplexContent.args = {
     groupBy: 2,
     slideCount: 6,
 };
+
+export const ScrollSnap: any = Simple.bind({});
+ScrollSnap.args = { mode: 'scroll-snap' };
