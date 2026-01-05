@@ -38,6 +38,20 @@
             flex: 1 1 auto;
             min-height: 0;
         }
+
+        &--mode-scroll-snap {
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+
+            @media (prefers-reduced-motion: no-preference) {
+                scroll-behavior: smooth;
+            }
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
     }
 
     &__controls {
@@ -57,6 +71,7 @@
     overflow: hidden;
     max-width: 100%;
     flex: 0 0 100%;
+    scroll-snap-align: start;
 }
 
 /* Slideshow item
@@ -147,7 +162,7 @@
                 width: $item-size*2;
                 border-radius: $lumx-border-radius;
                 border-width: 0;
-                
+
                 &[data-focus-visible-added] {
                     @include lumx-state(lumx-base-const("state", "FOCUS"), lumx-base-const("emphasis", "LOW"), "primary");
                 }

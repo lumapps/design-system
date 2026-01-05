@@ -24,7 +24,7 @@ export const Simple = ({ images = Object.values(LANDSCAPE_IMAGES), ...props }: a
                 previousButtonProps: { label: 'Previous' },
             }}
             {...props}
-            style={{ width: '50%' }}
+            style={{ width: '50%', marginLeft: 50 }}
             slideGroupLabel={(currentGroup, totalGroup) => `${currentGroup} of ${totalGroup}`}
         >
             {images.map((image: string, index: number) => (
@@ -178,3 +178,6 @@ WithComplexContent.args = {
     groupBy: 2,
     slideCount: 6,
 };
+
+export const ScrollSnap: any = Simple.bind({});
+ScrollSnap.args = { mode: 'scroll-snap' };

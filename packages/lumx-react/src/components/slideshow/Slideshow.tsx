@@ -16,6 +16,8 @@ import { buildSlideShowGroupId } from './SlideshowItemGroup';
 export interface SlideshowProps
     extends GenericProps,
         Pick<SlidesProps, 'autoPlay' | 'slidesId' | 'id' | 'theme' | 'fillHeight' | 'groupBy' | 'slideGroupLabel'> {
+    /** Whether to use CSS transform or native scroll snap. */
+    mode?: 'transform' | 'scroll-snap';
     /** current slide active */
     activeIndex?: SlidesProps['activeIndex'];
     /** Interval between each slide when automatic rotation is enabled. */
@@ -44,7 +46,10 @@ export interface SlideshowProps
 /**
  * Component default props.
  */
-const DEFAULT_PROPS: Partial<SlideshowProps> = DEFAULT_OPTIONS;
+const DEFAULT_PROPS: Partial<SlideshowProps> = {
+    ...DEFAULT_OPTIONS,
+    mode: 'transform',
+};
 
 /**
  * Slideshow component.
@@ -69,6 +74,7 @@ export const Slideshow = forwardRef<SlideshowProps, HTMLDivElement>((props, ref)
         id,
         slidesId,
         slideGroupLabel,
+        mode = DEFAULT_PROPS.mode,
         ...forwardedProps
     } = props;
     // Number of slideshow items.
@@ -111,6 +117,8 @@ export const Slideshow = forwardRef<SlideshowProps, HTMLDivElement>((props, ref)
 
     return (
         <Slides
+            mode={mode as any}
+            onChange={mode === 'scroll-snap' ? onPaginationClick : undefined}
             activeIndex={currentIndex}
             id={slideshowId}
             className={className}
