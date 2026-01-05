@@ -8,7 +8,9 @@ import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
+import { isScrollSnapSupported } from '@lumx/react/utils/browser/isScrollSnapSupported';
 import { buildSlideShowGroupId } from './SlideshowItemGroup';
+import { SlideMode } from './constants';
 
 /**
  * Defines the props of the component.
@@ -16,6 +18,8 @@ import { buildSlideShowGroupId } from './SlideshowItemGroup';
 export interface SlideshowProps
     extends GenericProps,
         Pick<SlidesProps, 'autoPlay' | 'slidesId' | 'id' | 'theme' | 'fillHeight' | 'groupBy' | 'slideGroupLabel'> {
+    /** Whether to use CSS transform translate or native scroll snap. */
+    slideMode?: SlideMode;
     /** current slide active */
     activeIndex?: SlidesProps['activeIndex'];
     /** Interval between each slide when automatic rotation is enabled. */
@@ -44,7 +48,10 @@ export interface SlideshowProps
 /**
  * Component default props.
  */
-const DEFAULT_PROPS: Partial<SlideshowProps> = DEFAULT_OPTIONS;
+const DEFAULT_PROPS: Partial<SlideshowProps> = {
+    ...DEFAULT_OPTIONS,
+    slideMode: SlideMode.transformTranslate,
+};
 
 /**
  * Slideshow component.
@@ -69,6 +76,7 @@ export const Slideshow = forwardRef<SlideshowProps, HTMLDivElement>((props, ref)
         id,
         slidesId,
         slideGroupLabel,
+        slideMode = DEFAULT_PROPS.slideMode,
         ...forwardedProps
     } = props;
     // Number of slideshow items.
@@ -109,8 +117,13 @@ export const Slideshow = forwardRef<SlideshowProps, HTMLDivElement>((props, ref)
 
     const showControls = slideshowControlsProps && slidesCount > 1;
 
+    // Only enable scroll-snap if requested and browser supports it
+    const isScrollsnapEnabled = slideMode === SlideMode.scrollSnap && isScrollSnapSupported();
+
     return (
         <Slides
+            slideMode={slideMode}
+            onChange={isScrollsnapEnabled ? onPaginationClick : undefined}
             activeIndex={currentIndex}
             id={slideshowId}
             className={className}
