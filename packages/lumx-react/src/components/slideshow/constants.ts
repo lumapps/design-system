@@ -1,3 +1,5 @@
+import type { ValueOf } from '@lumx/core/js/types';
+
 /**
  * Autoplay default interval in ms.
  */
@@ -22,3 +24,14 @@ export const PAGINATION_ITEMS_MAX = 5;
  * Size of a pagination item. Used to translate wrapper.
  */
 export const PAGINATION_ITEM_SIZE = 12;
+
+/**
+ * Slide mode
+ */
+export const SlideMode = {
+    /** Move slides with CSS transform translate */
+    transformTranslate: 'transform-translate',
+    /** Move slides native scroll snap (available only on supported browsers) */
+    scrollSnap: 'scroll-snap',
+} as const;
+export type SlideMode = ValueOf<typeof SlideMode>;
