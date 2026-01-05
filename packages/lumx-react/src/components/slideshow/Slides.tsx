@@ -11,8 +11,9 @@ import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { buildSlideShowGroupId, SlideshowItemGroup } from './SlideshowItemGroup';
+import { useSlideScroll } from './useSlideScroll';
 
-export interface SlidesProps extends GenericProps, HasTheme {
+export interface SlidesCommonProps extends GenericProps, HasTheme {
     /** current slide active */
     activeIndex: number;
     /** slides id to be added to the wrapper */
@@ -42,6 +43,17 @@ export interface SlidesProps extends GenericProps, HasTheme {
     children?: React.ReactNode;
 }
 
+interface SlidesTransformProps extends SlidesCommonProps {
+    mode?: 'transform';
+}
+
+interface SlidesScrollSnapProps extends SlidesCommonProps {
+    mode: 'scroll-snap';
+    onChange: (index: number) => void;
+}
+
+export type SlidesProps = SlidesTransformProps | SlidesScrollSnapProps;
+
 /**
  * Component display name.
  */
@@ -51,6 +63,13 @@ const COMPONENT_NAME = 'Slideshow';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-slideshow';
+
+/**
+ * Component default props.
+ */
+const DEFAULT_PROPS: Partial<SlidesProps> = {
+    mode: 'transform',
+};
 
 /**
  * Slides component.
@@ -75,14 +94,19 @@ export const Slides = forwardRef<SlidesProps, HTMLDivElement>((props, ref) => {
         afterSlides,
         hasControls,
         slideGroupLabel,
+        mode = DEFAULT_PROPS.mode,
+        onChange,
         ...forwardedProps
     } = props;
     const wrapperRef = React.useRef<HTMLDivElement>(null);
     const startIndexVisible = activeIndex;
     const endIndexVisible = startIndexVisible + 1;
 
+    useSlideScroll({ activeIndex, enabled: mode === 'scroll-snap', wrapperRef, onChange });
+
     // Inline style of wrapper element.
-    const wrapperStyle: CSSProperties = { transform: `translateX(-${FULL_WIDTH_PERCENT * activeIndex}%)` };
+    const wrapperStyle: CSSProperties | undefined =
+        mode === 'transform' ? { transform: `translateX(-${FULL_WIDTH_PERCENT * activeIndex}%)` } : undefined;
 
     const groups = React.useMemo(() => {
         const childrenArray = Children.toArray(children);
@@ -107,7 +131,11 @@ export const Slides = forwardRef<SlidesProps, HTMLDivElement>((props, ref) => {
                 onMouseLeave={toggleAutoPlay}
                 aria-live={isAutoPlaying ? 'off' : 'polite'}
             >
-                <div ref={wrapperRef} className={`${CLASSNAME}__wrapper`} style={wrapperStyle}>
+                <div
+                    ref={wrapperRef}
+                    className={`${CLASSNAME}__wrapper ${CLASSNAME}__wrapper--mode-${mode}`}
+                    style={wrapperStyle}
+                >
                     {groups.map((group, index) => (
                         <SlideshowItemGroup
                             key={index}
