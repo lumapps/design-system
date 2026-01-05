@@ -1,16 +1,18 @@
-import React, { Children, CSSProperties } from 'react';
+import React, { Children } from 'react';
 
 import chunk from 'lodash/chunk';
 
-import { FULL_WIDTH_PERCENT } from '@lumx/react/components/slideshow/constants';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { isScrollSnapSupported } from '@lumx/react/utils/browser/isScrollSnapSupported';
 
 import { buildSlideShowGroupId, SlideshowItemGroup } from './SlideshowItemGroup';
+import { useSlideScroll } from './useSlideScroll';
+import { FULL_WIDTH_PERCENT, SlideMode } from './constants';
 
 export interface SlidesProps extends GenericProps, HasTheme {
     /** current slide active */
@@ -38,6 +40,10 @@ export interface SlidesProps extends GenericProps, HasTheme {
      * Receives the group position starting from 1 and the total number of groups.
      * */
     slideGroupLabel?: (groupPosition: number, groupTotal: number) => string;
+    /** Whether to use CSS transform translate or native scroll snap. */
+    slideMode?: SlideMode;
+    /** On slide change (only triggered on scroll when slideMode=scroll-snap) */
+    onChange?(index: number): void;
     /** Children */
     children?: React.ReactNode;
 }
@@ -51,6 +57,13 @@ const COMPONENT_NAME = 'Slideshow';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-slideshow';
+
+/**
+ * Component default props.
+ */
+const DEFAULT_PROPS: Partial<SlidesProps> = {
+    slideMode: SlideMode.transformTranslate,
+};
 
 /**
  * Slides component.
@@ -75,14 +88,26 @@ export const Slides = forwardRef<SlidesProps, HTMLDivElement>((props, ref) => {
         afterSlides,
         hasControls,
         slideGroupLabel,
+        slideMode = DEFAULT_PROPS.slideMode,
+        onChange,
         ...forwardedProps
     } = props;
     const wrapperRef = React.useRef<HTMLDivElement>(null);
     const startIndexVisible = activeIndex;
     const endIndexVisible = startIndexVisible + 1;
 
-    // Inline style of wrapper element.
-    const wrapperStyle: CSSProperties = { transform: `translateX(-${FULL_WIDTH_PERCENT * activeIndex}%)` };
+    // Only enable scroll-snap if requested and browser supports it
+    const isScrollSnapEnabled = slideMode === SlideMode.scrollSnap && isScrollSnapSupported();
+    useSlideScroll({ activeIndex, enabled: isScrollSnapEnabled, wrapperRef, onChange });
+
+    let wrapperProps;
+    if (isScrollSnapEnabled) {
+        // Make scroll zone focusable (a11y recommendation)
+        wrapperProps = { tabIndex: 0 };
+    } else {
+        // Transform translate to display the current slide
+        wrapperProps = { style: { transform: `translateX(-${FULL_WIDTH_PERCENT * activeIndex}%)` } };
+    }
 
     const groups = React.useMemo(() => {
         const childrenArray = Children.toArray(children);
@@ -107,7 +132,14 @@ export const Slides = forwardRef<SlidesProps, HTMLDivElement>((props, ref) => {
                 onMouseLeave={toggleAutoPlay}
                 aria-live={isAutoPlaying ? 'off' : 'polite'}
             >
-                <div ref={wrapperRef} className={`${CLASSNAME}__wrapper`} style={wrapperStyle}>
+                <div
+                    ref={wrapperRef}
+                    className={classNames.join(
+                        `${CLASSNAME}__wrapper`,
+                        isScrollSnapEnabled && `${CLASSNAME}__wrapper--${slideMode}`,
+                    )}
+                    {...wrapperProps}
+                >
                     {groups.map((group, index) => (
                         <SlideshowItemGroup
                             key={index}

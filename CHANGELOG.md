@@ -22,10 +22,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/vue`:
     -   Create the `Text` component
     -   Create the `Button` component
-    -   `Icon`: add `verticalAlign` prop to allow centered vertically aligned icon inside Text 
+    -   `Icon`: add `verticalAlign` prop to allow centered vertically aligned icon inside Text
 -   `@lumx/react`:
     -   `UserBlock`: improve name and fields text layout in constrained space
     -   `Icon`: add `verticalAlign` prop to allow centered vertically aligned icon inside Text or Heading
+    -   `Slideshow`: add mode prop to switch to a native scroll snap slideshow
 
 ## [4.1.0][] - 2026-01-22
 
