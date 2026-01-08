@@ -2,9 +2,8 @@ import { ReactNode } from 'react';
 
 import { Kind, Theme } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { useClassnames } from '@lumx/react/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
@@ -48,12 +47,19 @@ export const InputHelper = forwardRef<InputHelperProps, HTMLParagraphElement>((p
     const defaultTheme = useTheme() || Theme.light;
     const { children, className, kind = DEFAULT_PROPS.kind, theme = defaultTheme, ...forwardedProps } = props;
     const { color } = INPUT_HELPER_CONFIGURATION[kind as any] || {};
+    const { block } = useClassnames(CLASSNAME);
 
     return (
         <p
             ref={ref}
             {...forwardedProps}
-            className={classNames.join(className, handleBasicClasses({ prefix: CLASSNAME, color, theme }))}
+            className={block(
+                {
+                    [`color-${color}`]: Boolean(color),
+                    [`theme-${theme}`]: Boolean(theme),
+                },
+                className,
+            )}
         >
             {children}
         </p>

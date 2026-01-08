@@ -4,9 +4,9 @@ import { mdiClose } from '@lumx/icons';
 
 import { Autocomplete, AutocompleteProps, Chip, HorizontalAlignment, Icon, Size } from '@lumx/react';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
+import { useClassnames } from '@lumx/react/utils';
 
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
 
@@ -109,13 +109,14 @@ export const AutocompleteMultiple = forwardRef<AutocompleteMultipleProps, HTMLDi
         values = DEFAULT_PROPS.values,
         ...forwardedProps
     } = otherProps;
+    const { block } = useClassnames(CLASSNAME);
 
     return (
         <Autocomplete
             ref={ref}
             {...forwardedProps}
             anchorToInput={anchorToInput}
-            className={classNames.join(className, CLASSNAME)}
+            className={block([className])}
             name={name}
             value={value}
             onChange={onChange}

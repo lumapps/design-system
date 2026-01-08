@@ -4,10 +4,9 @@ import castArray from 'lodash/castArray';
 
 import { Alignment, Orientation, HorizontalAlignment, Size, VerticalAlignment } from '@lumx/core/js/constants';
 import { GenericProps } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { useClassnames } from '@lumx/react/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
-import { classNames } from '@lumx/core/js/utils';
 
 export type MarginAutoAlignment = Extract<Alignment, 'top' | 'bottom' | 'right' | 'left'>;
 export type GapSize = Extract<Size, 'tiny' | 'regular' | 'medium' | 'big' | 'huge'>;
@@ -74,23 +73,28 @@ export const FlexBox = forwardRef<FlexBoxProps, HTMLDivElement>((props, ref) => 
         ...forwardedProps
     } = props;
 
+    const { block } = useClassnames(CLASSNAME);
+
+    const computedOrientation = orientation ?? (wrap || hAlign || vAlign ? Orientation.horizontal : null);
+    const marginAutoModifiers =
+        marginAuto && castArray(marginAuto).reduce((acc, align) => ({ ...acc, [`margin-auto-${align}`]: true }), {});
+
     return (
         <Component
             ref={ref}
             {...forwardedProps}
-            className={classNames.join(
+            className={block(
+                {
+                    [`orientation-${computedOrientation}`]: Boolean(computedOrientation),
+                    [`v-align-${vAlign}`]: Boolean(vAlign),
+                    [`h-align-${hAlign}`]: Boolean(hAlign),
+                    [`gap-${gap}`]: Boolean(gap),
+                    wrap: Boolean(wrap),
+                    'fill-space': fillSpace,
+                    'no-shrink': noShrink,
+                    ...marginAutoModifiers,
+                },
                 className,
-                handleBasicClasses({
-                    prefix: CLASSNAME,
-                    orientation: orientation ?? (wrap || hAlign || vAlign ? Orientation.horizontal : null),
-                    vAlign,
-                    hAlign,
-                    gap,
-                }),
-                wrap && `${CLASSNAME}--wrap`,
-                fillSpace && `${CLASSNAME}--fill-space`,
-                noShrink && `${CLASSNAME}--no-shrink`,
-                marginAuto && castArray(marginAuto).map((align) => `${CLASSNAME}--margin-auto-${align}`),
             )}
         >
             {children}

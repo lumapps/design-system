@@ -1,8 +1,7 @@
 import { ColorPalette, Icon, Size, Theme, Text } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { useClassnames } from '@lumx/react/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
@@ -33,18 +32,22 @@ export const Flag = forwardRef<FlagProps, HTMLDivElement>((props, ref) => {
     const { label, icon, color, className, theme = defaultTheme, truncate, ...forwardedProps } = props;
     const flagColor = color || (theme === Theme.light ? ColorPalette.dark : ColorPalette.light);
     const isTruncated = !!truncate;
+    const { block, element } = useClassnames(CLASSNAME);
 
     return (
         <div
             {...forwardedProps}
-            className={classNames.join(
+            className={block(
+                {
+                    [`color-${flagColor}`]: Boolean(flagColor),
+                    'is-truncated': isTruncated,
+                },
                 className,
-                handleBasicClasses({ prefix: CLASSNAME, color: flagColor, isTruncated }),
             )}
             ref={ref}
         >
-            {icon && <Icon icon={icon} size={Size.xxs} className={`${CLASSNAME}__icon`} />}
-            <Text as="span" truncate={isTruncated} typography="overline" className={`${CLASSNAME}__label`}>
+            {icon && <Icon icon={icon} size={Size.xxs} className={element('icon')} />}
+            <Text as="span" truncate={isTruncated} typography="overline" className={element('label')}>
                 {label}
             </Text>
         </div>

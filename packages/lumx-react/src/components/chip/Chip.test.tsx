@@ -30,7 +30,7 @@ describe('<Chip />', () => {
             expect(chip).toBeInTheDocument();
             expect(chip).toHaveTextContent('Chip text');
             expect(chip.className).toMatchInlineSnapshot(
-                '"lumx-chip lumx-chip--color-dark lumx-chip--size-m lumx-chip--is-unselected"',
+                `"lumx-chip lumx-chip--is-unselected lumx-chip--color-dark lumx-chip--size-m"`,
             );
         });
 
@@ -44,7 +44,7 @@ describe('<Chip />', () => {
             const { chip } = setup({ children: 'Chip text', onClick });
             expect(chip).toHaveAttribute('role', 'button');
             expect(chip.className).toMatchInlineSnapshot(
-                '"lumx-chip lumx-chip--is-clickable lumx-chip--color-dark lumx-chip--size-m lumx-chip--is-unselected"',
+                `"lumx-chip lumx-chip--is-clickable lumx-chip--is-unselected lumx-chip--color-dark lumx-chip--size-m"`,
             );
         });
 

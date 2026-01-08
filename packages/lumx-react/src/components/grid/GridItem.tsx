@@ -1,8 +1,7 @@
 import { Alignment } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { useClassnames } from '@lumx/react/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 type Columns = '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | '11' | '12';
@@ -40,12 +39,20 @@ const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-grid-item';
  */
 export const GridItem = forwardRef<GridItemProps, HTMLDivElement>((props, ref) => {
     const { children, className, width, align, order, ...forwardedProps } = props;
+    const { block } = useClassnames(CLASSNAME);
 
     return (
         <div
             ref={ref}
             {...forwardedProps}
-            className={classNames.join(className, handleBasicClasses({ prefix: CLASSNAME, width, order, align }))}
+            className={block(
+                {
+                    [`width-${width}`]: Boolean(width),
+                    [`order-${order}`]: Boolean(order),
+                    [`align-${align}`]: Boolean(align),
+                },
+                className,
+            )}
         >
             {children}
         </div>

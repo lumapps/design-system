@@ -1,7 +1,7 @@
 import { GenericProps } from '@lumx/react/utils/type';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { useClassnames } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component
@@ -37,9 +37,10 @@ const DEFAULT_PROPS: Partial<ButtonGroupProps> = {};
  */
 export const ButtonGroup = forwardRef<ButtonGroupProps, HTMLDivElement>((props, ref) => {
     const { children, className, ...forwardedProps } = props;
+    const { block } = useClassnames(CLASSNAME);
 
     return (
-        <div ref={ref} {...forwardedProps} className={classNames.join(className, CLASSNAME)}>
+        <div ref={ref} {...forwardedProps} className={block([className])}>
             {children}
         </div>
     );

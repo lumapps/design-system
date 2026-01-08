@@ -2,7 +2,7 @@ import { AriaAttributes, ButtonHTMLAttributes, DetailedHTMLProps, RefObject } fr
 
 import { ColorPalette, Emphasis, Size, Theme } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { useClassnames } from '@lumx/react/utils';
 import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { HasAriaDisabled } from '@lumx/react/utils/type/HasAriaDisabled';
@@ -57,6 +57,8 @@ const COMPONENT_NAME = 'ButtonRoot';
 export const BUTTON_WRAPPER_CLASSNAME = `lumx-button-wrapper`;
 export const BUTTON_CLASSNAME = `lumx-button`;
 
+const wrapperBlock = classNames.bem.block(BUTTON_WRAPPER_CLASSNAME);
+
 /**
  * Render a button wrapper with the ButtonRoot inside.
  *
@@ -69,14 +71,11 @@ const renderButtonWrapper: React.FC<ButtonRootProps> = (props) => {
     const adaptedColor =
         emphasis === Emphasis.low && (color === ColorPalette.light ? ColorPalette.dark : ColorPalette.light);
 
-    const wrapperClassName = classNames.join(
-        handleBasicClasses({
-            color: adaptedColor,
-            prefix: BUTTON_WRAPPER_CLASSNAME,
-            variant,
-            fullWidth,
-        }),
-    );
+    const wrapperClassName = wrapperBlock({
+        [`color-${adaptedColor}`]: Boolean(adaptedColor),
+        [`variant-${variant}`]: Boolean(variant),
+        'is-full-width': fullWidth,
+    });
     const buttonProps = { ...props, hasBackground: false };
 
     return (
@@ -114,6 +113,7 @@ export const ButtonRoot = forwardRef<ButtonRootProps, HTMLButtonElement | HTMLAn
         fullWidth,
         ...forwardedProps
     } = otherProps;
+    const { block } = useClassnames(BUTTON_CLASSNAME);
 
     const adaptedColor =
         color ||
@@ -125,22 +125,21 @@ export const ButtonRoot = forwardRef<ButtonRootProps, HTMLButtonElement | HTMLAn
         return renderButtonWrapper({ ...props, ref, variant, color: adaptedColor });
     }
 
-    const buttonClassName = classNames.join(
+    const buttonClassName = block(
+        {
+            [`color-${adaptedColor}`]: Boolean(adaptedColor),
+            [`emphasis-${emphasis}`]: Boolean(emphasis),
+            'is-selected': Boolean(isSelected),
+            'is-disabled': Boolean(props.isDisabled || props['aria-disabled']),
+            'is-active': Boolean(isActive),
+            'is-focused': Boolean(isFocused),
+            'is-hovered': Boolean(isHovered),
+            [`size-${size}`]: Boolean(size),
+            [`theme-${theme}`]: Boolean(emphasis === Emphasis.high && theme),
+            [`variant-${variant}`]: Boolean(variant),
+            'is-full-width': Boolean(fullWidth),
+        },
         className,
-        handleBasicClasses({
-            color: adaptedColor,
-            emphasis,
-            isSelected,
-            isDisabled: props.isDisabled || props['aria-disabled'],
-            isActive,
-            isFocused,
-            isHovered,
-            prefix: BUTTON_CLASSNAME,
-            size,
-            theme: emphasis === Emphasis.high && theme,
-            variant,
-            fullWidth,
-        }),
     );
 
     return (

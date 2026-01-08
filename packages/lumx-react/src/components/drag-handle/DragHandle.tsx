@@ -1,9 +1,8 @@
 import { mdiDragVertical } from '@lumx/icons';
 import { ColorPalette, Icon, Size, Theme } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { useClassnames } from '@lumx/react/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
@@ -32,12 +31,18 @@ const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-drag-handle';
 export const DragHandle = forwardRef<DragHandleProps, HTMLDivElement>((props, ref) => {
     const defaultTheme = useTheme();
     const { className, theme = defaultTheme, ...forwardedProps } = props;
+    const { block } = useClassnames(CLASSNAME);
 
     return (
         <div
             ref={ref}
             {...forwardedProps}
-            className={classNames.join(className, handleBasicClasses({ prefix: CLASSNAME, theme }))}
+            className={block(
+                {
+                    [`theme-${theme}`]: Boolean(theme),
+                },
+                className,
+            )}
         >
             <Icon
                 icon={mdiDragVertical}
