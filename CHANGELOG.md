@@ -25,10 +25,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   _[BREAKING]_ Replace `getRootClassName` utility function with type `LumxClassName`
     -   _[BREAKING]_ Removed `CSS_PREFIX` constant
     -   _[BREAKING]_ Removed deprecated `@lumx/core/js/custom-colors` utils
-    -   _[BREAKING]_ Removed `@lumx/core/js/constants/design-tokens` (internal use only) and `@lumx/core/js/utils/classNames` (soon to be rewritten)
+    -   _[BREAKING]_ Removed `@lumx/core/js/constants/design-tokens` (internal use only)
+    -   _[BREAKING]_ Removed `getBasicClass`, `handleBasicClasses` and `resolveColorWithVariants` from exports in `@lumx/core/js/utils/classNames` (internal use only)
+    -   _[BREAKING]_ Replace `fontColorClass` with `font` (or `classNames.font` in `@lumx/core/js/utils`)
+    -   _[BREAKING]_ Replace `getTypographyClassName` with `typography` (or `classNames.typography` in `@lumx/core/js/utils`)
 -   `@lumx/icons`
     -   _[BREAKING]_ Migrate to ESM module format
--   `@lumx/angularjs`: removed from the project. Future updates to `@lumx/core` will continue to avoid breaking change to the deprecated angularjs directives but without any guarantee.
+-   `@lumx/angularjs`: Removed from the project. Future updates to `@lumx/core` will continue to avoid breaking change to the deprecated angularjs directives but without any guarantee.
 
 ### Added
 
