@@ -24,7 +24,7 @@ describe(element, () => {
     });
 
     it('should generate element class with additional classes', () => {
-        expect(button('icon', undefined, 'custom-class')).toBe('my-button__icon custom-class');
+        expect(button('icon', undefined, 'custom-class')).toBe('custom-class my-button__icon');
     });
 
     it('should generate element class with modifier and additional classes', () => {
@@ -35,7 +35,7 @@ describe(element, () => {
     });
 
     it('should order classes correctly by default (modifier before additional)', () => {
-        expect(button('icon', 'large', 'custom-class')).toBe('my-button__icon my-button__icon--large custom-class');
+        expect(button('icon', 'large', 'custom-class')).toBe('custom-class my-button__icon my-button__icon--large');
     });
 
     it('should handle array of additional classes', () => {

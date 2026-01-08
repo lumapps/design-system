@@ -43,7 +43,7 @@ describe(generateBEMClass, () => {
 
     describe('with additional classes', () => {
         it('should include single additional class', () => {
-            expect(generateBEMClass('button', undefined, 'custom-class')).toBe('button custom-class');
+            expect(generateBEMClass('button', undefined, 'custom-class')).toBe('custom-class button');
         });
 
         it('should include array of additional classes', () => {
@@ -63,7 +63,7 @@ describe(generateBEMClass, () => {
         });
 
         it('should order modifier before additional classes by default', () => {
-            expect(generateBEMClass('button', 'primary', 'custom-class')).toBe('button button--primary custom-class');
+            expect(generateBEMClass('button', 'primary', 'custom-class')).toBe('custom-class button button--primary');
         });
     });
 

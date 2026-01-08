@@ -24,7 +24,7 @@ describe(block, () => {
     });
 
     it('should generate block class with additional classes', () => {
-        expect(button(undefined, 'custom-class')).toBe('my-button custom-class');
+        expect(button(undefined, 'custom-class')).toBe('custom-class my-button');
     });
 
     it('should generate block class with modifier and additional classes', () => {
@@ -35,7 +35,7 @@ describe(block, () => {
     });
 
     it('should order classes correctly by default (modifier before additional)', () => {
-        expect(button('primary', 'custom-class')).toBe('my-button my-button--primary custom-class');
+        expect(button('primary', 'custom-class')).toBe('custom-class my-button my-button--primary');
     });
 
     it('should handle array of additional classes', () => {

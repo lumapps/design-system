@@ -26,13 +26,13 @@ describe(`<${GenericBlock.displayName}>`, () => {
             const { genericBlock, content, figure, actions } = setup({ children: 'Content' });
             expect(genericBlock).toBeInTheDocument();
             expect(genericBlock.className).toMatchInlineSnapshot(
-                `"lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--gap-big lumx-generic-block"`,
+                `"lumx-generic-block lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--gap-big"`,
             );
 
             expect(content).toBeInTheDocument();
             expect(content).toHaveTextContent('Content');
             expect(content?.className).toMatchInlineSnapshot(
-                `"lumx-flex-box lumx-flex-box--orientation-vertical lumx-flex-box--fill-space lumx-generic-block__content"`,
+                `"lumx-generic-block__content lumx-flex-box lumx-flex-box--orientation-vertical lumx-flex-box--fill-space"`,
             );
 
             expect(figure).not.toBeInTheDocument();
@@ -49,16 +49,16 @@ describe(`<${GenericBlock.displayName}>`, () => {
             });
 
             expect(genericBlock?.className).toMatchInlineSnapshot(
-                `"lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--v-align-left lumx-flex-box--h-align-bottom lumx-flex-box--gap-big lumx-generic-block"`,
+                `"lumx-generic-block lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--v-align-left lumx-flex-box--h-align-bottom lumx-flex-box--gap-big"`,
             );
             expect(figure?.className).toMatchInlineSnapshot(
-                `"lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--v-align-left lumx-flex-box--h-align-bottom lumx-generic-block__figure"`,
+                `"lumx-generic-block__figure lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--v-align-left lumx-flex-box--h-align-bottom"`,
             );
             expect(content?.className).toMatchInlineSnapshot(
-                `"lumx-flex-box lumx-flex-box--orientation-vertical lumx-flex-box--v-align-left lumx-flex-box--h-align-bottom lumx-flex-box--fill-space lumx-generic-block__content"`,
+                `"lumx-generic-block__content lumx-flex-box lumx-flex-box--orientation-vertical lumx-flex-box--v-align-left lumx-flex-box--h-align-bottom lumx-flex-box--fill-space"`,
             );
             expect(actions?.className).toMatchInlineSnapshot(
-                `"lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--v-align-left lumx-flex-box--h-align-bottom lumx-generic-block__actions"`,
+                `"lumx-generic-block__actions lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--v-align-left lumx-flex-box--h-align-bottom"`,
             );
         });
 
@@ -75,7 +75,7 @@ describe(`<${GenericBlock.displayName}>`, () => {
 
             // Merged class names
             expect(figure?.className).toMatchInlineSnapshot(
-                `"lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--v-align-left lumx-flex-box--fill-space lumx-generic-block__figure figure1 figure2"`,
+                `"lumx-generic-block__figure figure1 figure2 lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--v-align-left lumx-flex-box--fill-space"`,
             );
             // Merged content
             expect(figure).toHaveTextContent('Figure 1Figure 2');
@@ -97,7 +97,7 @@ describe(`<${GenericBlock.displayName}>`, () => {
 
             // Merged class names
             expect(content?.className).toMatchInlineSnapshot(
-                `"lumx-flex-box lumx-flex-box--orientation-vertical lumx-flex-box--v-align-left lumx-flex-box--fill-space lumx-generic-block__content content1 content2"`,
+                `"lumx-generic-block__content content1 content2 lumx-flex-box lumx-flex-box--orientation-vertical lumx-flex-box--v-align-left lumx-flex-box--fill-space"`,
             );
             // Merged content
             expect(content).toHaveTextContent('Content 2Content 1');
@@ -119,7 +119,7 @@ describe(`<${GenericBlock.displayName}>`, () => {
 
             // Merged class names
             expect(actions?.className).toMatchInlineSnapshot(
-                `"lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--v-align-left lumx-flex-box--fill-space lumx-generic-block__actions actions1 actions2"`,
+                `"lumx-generic-block__actions actions1 actions2 lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--v-align-left lumx-flex-box--fill-space"`,
             );
             // Merged content
             expect(actions).toHaveTextContent('Actions 1Actions 2');

@@ -53,11 +53,11 @@ export function generateBEMClass(
     additionalClasses?: ClassValue | ClassValue[],
 ) {
     return classnames(
+        // Additional classes
+        additionalClasses,
         // Base class
         baseClass,
         // Modifier(s)
         generateModifierClasses(baseClass, modifier),
-        // Additional classes
-        additionalClasses,
     );
 }
