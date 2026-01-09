@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   `@lumx/react`:
+    -   `Slideshow`: add mode prop to switch to a native scroll snap slideshow
+
 ## [4.0.0][] - 2025-12-09
 
 ### Changed
