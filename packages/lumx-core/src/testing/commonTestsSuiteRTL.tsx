@@ -53,7 +53,10 @@ export interface Options<S extends CommonSetup> {
 /**
  * Options passed to the setup function.
  */
-export type SetupRenderOptions<T> = { wrapper?: T };
+export type SetupRenderOptions<T, S = GenericProps> = {
+    wrapper?: T;
+    render?: (props: S, { wrapper }: { wrapper?: T }) => void;
+};
 
 /**
  * Function to setup the component for testing.

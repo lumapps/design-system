@@ -3230,6 +3230,7 @@ __metadata:
     rollup: "npm:^4.53.3"
     rollup-plugin-cleaner: "npm:^1.0.0"
     rollup-plugin-copy: "npm:^3.5.0"
+    rollup-plugin-ts-paths-resolve: "npm:^1.7.1"
     sass: "npm:^1.54.0"
     sass-mq: "npm:^6.0.0"
     style-dictionary: "npm:^3.9.0"

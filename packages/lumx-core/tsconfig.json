@@ -1,3 +1,10 @@
 {
-    "extends": "../../tsconfig"
+    "extends": "../../tsconfig",
+    "compilerOptions": {
+        "paths": {
+            "@lumx/core/*": ["lumx-core/src/*"],
+            "@lumx/icons": ["lumx-icons/dist"],
+            "@lumx/icons/*": ["lumx-icons/dist/*"]
+        }
+    }
 }

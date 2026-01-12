@@ -26,8 +26,8 @@ function formatPath(entry) {
 
 export default {
     // Bundle all TS files
-    input: glob.sync('src/js/**/index.ts', {
-        ignore: ['**/_internal/**'],
+    input: glob.sync('src/js/**/index.{ts,tsx}', {
+        ignore: ['**/_internal/**', '**/Tests.ts', '**/Stories.ts'],
     }),
     output: {
         format: 'esm',
@@ -41,6 +41,7 @@ export default {
     external: [
         ...Object.keys(pkg.dependencies),
         ...Object.keys(pkg.peerDependencies || []),
+        'react/jsx-runtime',
     ].map((dependency) => new RegExp(`^${dependency}(/.*)?`)),
     plugins: [
         cleaner({ targets: [DIST_PATH] }),
@@ -52,8 +53,8 @@ export default {
                 target: 'ESNext',
                 module: 'ESNext',
             },
-            include: [`${SRC_PATH}/js/**/*.ts`],
-            exclude: ['**/*.test.*'],
+            include: [`${SRC_PATH}/js/**/*.ts`, `${SRC_PATH}/js/**/*.tsx`],
+            exclude: ['**/*.test.*', '**/Tests.ts', '**/Stories.ts'],
         }),
         copy({
             targets: [
