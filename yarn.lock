@@ -3218,6 +3218,7 @@ __metadata:
   resolution: "@lumx/core@workspace:packages/lumx-core"
   dependencies:
     "@rollup/plugin-typescript": "npm:^12.3.0"
+    "@testing-library/dom": "npm:^10.4.1"
     "@types/react": "npm:^17.0.2"
     autoprefixer: "npm:^9.7.4"
     classnames: "npm:^2.3.2"
