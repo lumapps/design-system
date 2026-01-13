@@ -1,7 +1,7 @@
 import { GenericProps } from '@lumx/react/utils/type';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { useClassnames } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
@@ -32,8 +32,9 @@ const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-slideshow-item';
  */
 export const SlideshowItem = forwardRef<SlideshowItemProps, HTMLDivElement>((props, ref) => {
     const { className, children, ...forwardedProps } = props;
+    const { block } = useClassnames(CLASSNAME);
     return (
-        <div ref={ref} className={classNames.join(className, CLASSNAME)} {...forwardedProps}>
+        <div ref={ref} className={block([className])} {...forwardedProps}>
             {children}
         </div>
     );

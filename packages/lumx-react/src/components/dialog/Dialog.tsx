@@ -9,9 +9,8 @@ import { useIntersectionObserver } from '@lumx/react/hooks/useIntersectionObserv
 
 import { GenericProps, isComponent } from '@lumx/react/utils/type';
 import { partitionMulti } from '@lumx/react/utils/partitionMulti';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
+import { Portal, useClassnames } from '@lumx/react/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
@@ -19,8 +18,6 @@ import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useDisableBodyScroll } from '@lumx/react/hooks/useDisableBodyScroll';
 import { useTransitionVisibility } from '@lumx/react/hooks/useTransitionVisibility';
 import { ThemeProvider } from '@lumx/react/utils/theme/ThemeContext';
-
-import { Portal } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
@@ -125,6 +122,8 @@ export const Dialog = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
         preventCloseOnEscape,
         ...forwardedProps
     } = props;
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const { block, element } = useClassnames(CLASSNAME);
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const previousOpen = React.useRef(isOpen);
@@ -199,37 +198,37 @@ export const Dialog = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
             <div
                 ref={mergeRefs(rootRef, ref)}
                 {...forwardedProps}
-                className={classNames.join(
+                className={block(
+                    {
+                        'is-hidden': Boolean(!isOpen),
+                        'is-loading': Boolean(isLoading),
+                        'is-shown': Boolean(isOpen || isVisible),
+                        [`size-${size}`]: Boolean(size),
+                    },
                     className,
-                    handleBasicClasses({
-                        isHidden: !isOpen,
-                        isLoading,
-                        isShown: isOpen || isVisible,
-                        prefix: CLASSNAME,
-                        size,
-                    }),
                 )}
                 style={{ zIndex }}
             >
-                <div className={`${CLASSNAME}__overlay`} />
+                <div className={element('overlay')} />
 
                 <HeadingLevelProvider level={2}>
                     <ThemeProvider value={undefined}>
-                        <div className={`${CLASSNAME}__container`} role="dialog" aria-modal="true" {...dialogProps}>
+                        <div className={element('container')} role="dialog" aria-modal="true" {...dialogProps}>
                             <ClickAwayProvider
                                 callback={!shouldPreventCloseOnClickAway && onClose}
                                 childrenRefs={clickAwayRefs}
                                 parentRef={rootRef}
                             >
-                                <section className={`${CLASSNAME}__wrapper`} ref={wrapperRef}>
+                                <section className={element('wrapper')} ref={wrapperRef}>
                                     {(header || headerChildContent) && (
                                         <header
                                             {...headerChildProps}
-                                            className={classNames.join(
-                                                `${CLASSNAME}__header`,
-                                                (forceHeaderDivider || hasTopIntersection) &&
-                                                    `${CLASSNAME}__header--has-divider`,
-                                                headerChildProps?.className,
+                                            className={element(
+                                                'header',
+                                                {
+                                                    'has-divider': Boolean(forceHeaderDivider || hasTopIntersection),
+                                                },
+                                                [headerChildProps?.className],
                                             )}
                                         >
                                             {header}
@@ -237,31 +236,23 @@ export const Dialog = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
                                         </header>
                                     )}
 
-                                    <div
-                                        ref={mergeRefs(contentRef, localContentRef)}
-                                        className={`${CLASSNAME}__content`}
-                                    >
-                                        <div
-                                            className={`${CLASSNAME}__sentinel ${CLASSNAME}__sentinel--top`}
-                                            ref={setSentinelTop}
-                                        />
+                                    <div ref={mergeRefs(contentRef, localContentRef)} className={element('content')}>
+                                        <div className={element('sentinel', 'top')} ref={setSentinelTop} />
 
                                         {content}
 
-                                        <div
-                                            className={`${CLASSNAME}__sentinel ${CLASSNAME}__sentinel--bottom`}
-                                            ref={setSentinelBottom}
-                                        />
+                                        <div className={element('sentinel', 'bottom')} ref={setSentinelBottom} />
                                     </div>
 
                                     {(footer || footerChildContent) && (
                                         <footer
                                             {...footerChildProps}
-                                            className={classNames.join(
-                                                `${CLASSNAME}__footer`,
-                                                (forceFooterDivider || hasBottomIntersection) &&
-                                                    `${CLASSNAME}__footer--has-divider`,
-                                                footerChildProps?.className,
+                                            className={element(
+                                                'footer',
+                                                {
+                                                    'has-divider': Boolean(forceFooterDivider || hasBottomIntersection),
+                                                },
+                                                [footerChildProps?.className],
                                             )}
                                         >
                                             {footer}
@@ -270,7 +261,7 @@ export const Dialog = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
                                     )}
 
                                     {isLoading && (
-                                        <div className={`${CLASSNAME}__progress-overlay`}>
+                                        <div className={element('progress-overlay')}>
                                             <Progress variant={ProgressVariant.circular} />
                                         </div>
                                     )}

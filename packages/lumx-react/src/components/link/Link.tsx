@@ -1,9 +1,9 @@
 import { ColorVariant, ColorWithVariants, Icon, Typography } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
-import { resolveColorWithVariants } from '@lumx/core/js/utils/_internal/color';
+import { useClassnames } from '@lumx/react/utils';
 import { classNames } from '@lumx/core/js/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
+import { resolveColorWithVariants } from '@lumx/core/js/utils/_internal/color';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { wrapChildrenIconWithSpaces } from '@lumx/react/utils/react/wrapChildrenIconWithSpaces';
 import { HasAriaDisabled } from '@lumx/react/utils/type/HasAriaDisabled';
@@ -75,6 +75,7 @@ export const Link = forwardRef<LinkProps, HTMLAnchorElement | HTMLButtonElement>
         ...forwardedProps
     } = otherProps;
     const [color, colorVariant] = resolveColorWithVariants(propColor, propColorVariant);
+    const { block, element } = useClassnames(CLASSNAME);
 
     return (
         <RawClickable
@@ -82,17 +83,20 @@ export const Link = forwardRef<LinkProps, HTMLAnchorElement | HTMLButtonElement>
             as={linkAs || (forwardedProps.href ? 'a' : 'button')}
             {...forwardedProps}
             {...disabledStateProps}
-            className={classNames.join(
-                className,
-                handleBasicClasses({ prefix: CLASSNAME, color, colorVariant, hasTypography: !!typography }),
-                typography && classNames.typography(typography),
+            className={block(
+                {
+                    [`color-${color}`]: Boolean(color),
+                    [`color-variant-${colorVariant}`]: Boolean(colorVariant),
+                    'has-typography': Boolean(typography),
+                },
+                [className, typography && classNames.typography(typography)],
             )}
         >
             {wrapChildrenIconWithSpaces(
                 <>
-                    {leftIcon && <Icon icon={leftIcon} className={`${CLASSNAME}__left-icon`} />}
-                    {children && <span className={`${CLASSNAME}__content`}>{children}</span>}
-                    {rightIcon && <Icon icon={rightIcon} className={`${CLASSNAME}__right-icon`} />}
+                    {leftIcon && <Icon icon={leftIcon} className={element('left-icon')} />}
+                    {children && <span className={element('content')}>{children}</span>}
+                    {rightIcon && <Icon icon={rightIcon} className={element('right-icon')} />}
                 </>,
             )}
         </RawClickable>
