@@ -1,6 +1,6 @@
 import { AspectRatio, ImageBlock, Slides, SlideshowControls, SlideshowItem } from '@lumx/react';
 import { useFocusWithin } from '@lumx/react/hooks/useFocusWithin';
-import { LANDSCAPE_IMAGES } from '@lumx/react/stories/controls/image';
+import { LANDSCAPE_IMAGES } from '@lumx/core/stories/controls/image';
 
 export default { title: 'LumX components/slideshow/Slideshow controls' };
 

@@ -1,8 +1,8 @@
 import { Alignment, Button, IconButton, Orientation, Size, Text } from '@lumx/react';
 
-import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
-import { withUndefined } from '@lumx/react/stories/controls/withUndefined';
+import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
 import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
 import { mdiAtom } from '@lumx/icons';
 import mergeWith from 'lodash/fp/mergeWith';

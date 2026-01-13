@@ -1,5 +1,5 @@
 import { ProgressCircular, ProgressCircularSize, Size, Text } from '@lumx/react';
-import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 
 const sizes: Array<ProgressCircularSize> = [Size.xxs, Size.xs, Size.s, Size.m];

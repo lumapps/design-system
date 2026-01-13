@@ -1,7 +1,7 @@
 import React from 'react';
 import { mdiPencil } from '@lumx/icons';
 import { GenericBlock, Button, Icon, Size, Thumbnail } from '@lumx/react';
-import { IMAGES } from '@lumx/react/stories/controls/image';
+import { IMAGES } from '@lumx/core/stories/controls/image';
 
 export default { title: 'LumX components/generic-block/GenericBlock' };
 

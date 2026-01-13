@@ -1,8 +1,8 @@
 import { mdiHeart } from '@lumx/icons';
 import { ColorPalette, Flag } from '@lumx/react';
-import { colorArgType } from '@lumx/react/stories/controls/color';
-import { iconArgType } from '@lumx/react/stories/controls/icons';
-import { withUndefined } from '@lumx/react/stories/controls/withUndefined';
+import { colorArgType } from '@lumx/core/stories/controls/color';
+import { iconArgType } from '@lumx/core/stories/controls/icons';
+import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 import { withResizableBox } from '@lumx/react/stories/decorators/withResizableBox';
 import { loremIpsum } from '@lumx/react/stories/utils/lorem';

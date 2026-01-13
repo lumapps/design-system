@@ -2,14 +2,14 @@ import React from 'react';
 import map from 'lodash/map';
 
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
-import { iconArgType } from '@lumx/react/stories/controls/icons';
+import { iconArgType } from '@lumx/core/stories/controls/icons';
 import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
 import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
 
 import { AspectRatio, GridColumn, Size, Uploader, UploaderVariant } from '@lumx/react';
 import { mdiTextBoxPlus } from '@lumx/icons';
-import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
-import { withUndefined } from '@lumx/react/stories/controls/withUndefined';
+import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
+import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
 
 export default {
     title: 'LumX components/uploader/Uploader',

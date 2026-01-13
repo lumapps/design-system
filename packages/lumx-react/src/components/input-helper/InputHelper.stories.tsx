@@ -1,7 +1,7 @@
 import { InputHelper, Kind } from '@lumx/react';
-import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
-import { withUndefined } from '@lumx/react/stories/controls/withUndefined';
+import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
 
 export default {
     title: 'LumX components/input-helper/Input Helper',

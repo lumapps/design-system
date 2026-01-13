@@ -1,10 +1,10 @@
 import { Kind, Message } from '@lumx/react';
 import { mdiDelete } from '@lumx/icons';
-import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
 import { loremIpsum } from '@lumx/react/stories/utils/lorem';
-import { iconArgType } from '@lumx/react/stories/controls/icons';
+import { iconArgType } from '@lumx/core/stories/controls/icons';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
-import { withUndefined } from '@lumx/react/stories/controls/withUndefined';
+import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
 import { withNestedProps } from '../../stories/decorators/withNestedProps';
 
 export default {

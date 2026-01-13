@@ -4,9 +4,9 @@ import pick from 'lodash/pick';
 import { Button, ButtonSize, Emphasis, GridColumn, Size, Text, Theme } from '@lumx/react';
 import { mdiAccountBox } from '@lumx/icons';
 
-import { iconArgType } from '@lumx/react/stories/controls/icons';
-import { colorArgType } from '@lumx/react/stories/controls/color';
-import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { iconArgType } from '@lumx/core/stories/controls/icons';
+import { colorArgType } from '@lumx/core/stories/controls/color';
+import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 import { disableArgTypes } from '@lumx/react/stories/utils/disableArgTypes';
 import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';

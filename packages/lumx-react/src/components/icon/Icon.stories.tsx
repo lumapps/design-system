@@ -1,9 +1,9 @@
 import { mdiEmail } from '@lumx/icons';
 import { ColorPalette, ColorVariant, GridColumn, Icon, IconSizes, Size } from '@lumx/react';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
-import { withUndefined } from '@lumx/react/stories/controls/withUndefined';
-import { iconArgType } from '@lumx/react/stories/controls/icons';
-import { colorArgType, colorVariantArgType } from '@lumx/react/stories/controls/color';
+import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
+import { iconArgType } from '@lumx/core/stories/controls/icons';
+import { colorArgType, colorVariantArgType } from '@lumx/core/stories/controls/color';
 import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
 
 const iconSizes: Array<IconSizes> = [Size.xxs, Size.xs, Size.s, Size.m, Size.l, Size.xl, Size.xxl];

@@ -21,7 +21,7 @@ import {
 } from '@lumx/react';
 import { DIALOG_TRANSITION_DURATION } from '@lumx/core/js/constants';
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
-import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
 import { withChromaticForceScreenSize } from '@lumx/react/stories/decorators/withChromaticForceScreenSize';
 
 import { Dialog } from './Dialog';

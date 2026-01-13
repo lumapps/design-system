@@ -2,7 +2,7 @@
 import React from 'react';
 import { ImageBlock, Alignment, Lightbox, Button, Slideshow, SlideshowItem } from '@lumx/react';
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
-import { LANDSCAPE_IMAGES, LANDSCAPE_IMAGES_ALT } from '@lumx/react/stories/controls/image';
+import { LANDSCAPE_IMAGES, LANDSCAPE_IMAGES_ALT } from '@lumx/core/stories/controls/image';
 
 export default {
     title: 'LumX components/lightbox/Lightbox',

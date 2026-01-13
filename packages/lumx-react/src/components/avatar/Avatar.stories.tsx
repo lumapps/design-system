@@ -1,14 +1,14 @@
 /* eslint-disable react/display-name */
 import { mdiDelete, mdiEye, mdiPencil, mdiStar } from '@lumx/icons';
 import { AvatarSize, Badge, ColorPalette, FlexBox, Icon, IconButton, Size } from '@lumx/react';
-import { avatarImageArgType, AVATAR_IMAGES } from '@lumx/react/stories/controls/image';
+import { avatarImageArgType, AVATAR_IMAGES } from '@lumx/core/stories/controls/image';
 import { CustomLink } from '@lumx/react/stories/utils/CustomLink';
 
-import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
-import { colorArgType } from '@lumx/react/stories/controls/color';
+import { colorArgType } from '@lumx/core/stories/controls/color';
 import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
-import { iconArgType } from '@lumx/react/stories/controls/icons';
+import { iconArgType } from '@lumx/core/stories/controls/icons';
 import { Avatar } from './Avatar';
 
 const AVATAR_SIZES = [Size.xxs, Size.xs, Size.s, Size.m, Size.l, Size.xl, Size.xxl];

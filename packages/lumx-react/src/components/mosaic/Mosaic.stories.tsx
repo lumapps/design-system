@@ -1,5 +1,5 @@
 import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
-import { IMAGES } from '@lumx/react/stories/controls/image';
+import { IMAGES } from '@lumx/core/stories/controls/image';
 import { Mosaic } from './Mosaic';
 
 export default {

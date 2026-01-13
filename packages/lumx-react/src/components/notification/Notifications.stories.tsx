@@ -1,6 +1,6 @@
 import { Notification, Kind } from '@lumx/react';
 import { NOTIFICATION_TRANSITION_DURATION } from '@lumx/core/js/constants';
-import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
 import { withChromaticForceScreenSize } from '../../stories/decorators/withChromaticForceScreenSize';
 
 export default {

@@ -2,9 +2,9 @@ import omit from 'lodash/omit';
 import { mdiClose, mdiViewList } from '@lumx/icons';
 import { Chip, ChipProps, ColorPalette, Icon, Size, Theme } from '@lumx/react';
 
-import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
-import { withUndefined } from '@lumx/react/stories/controls/withUndefined';
+import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
 import { withTheming } from '@lumx/react/stories/utils/theming';
 import { DESIGN_TOKENS } from '@lumx/core/src/js/constants/_internal/design-tokens';
 import pick from 'lodash/pick';

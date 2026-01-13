@@ -1,6 +1,6 @@
 import { Size, SkeletonCircle, SkeletonCircleProps } from '@lumx/react';
-import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
-import { ALL_COLORS, colorArgType } from '@lumx/react/stories/controls/color';
+import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
+import { ALL_COLORS, colorArgType } from '@lumx/core/stories/controls/color';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 
 const sizes: SkeletonCircleProps['size'][] = [Size.xxs, Size.xs, Size.s, Size.m, Size.l, Size.xl, Size.xxl];

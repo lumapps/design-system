@@ -1,8 +1,8 @@
 import { mdiEarth } from '@lumx/icons';
 import { Icon, Text } from '@lumx/react';
 import { withResizableBox } from '@lumx/react/stories/decorators/withResizableBox';
-import { allTypographyArgType } from '@lumx/react/stories/controls/typography';
-import { colorArgType, colorVariantArgType } from '@lumx/react/stories/controls/color';
+import { allTypographyArgType } from '@lumx/core/stories/controls/typography';
+import { colorArgType, colorVariantArgType } from '@lumx/core/stories/controls/color';
 import { InlineList } from '.';
 
 export default {

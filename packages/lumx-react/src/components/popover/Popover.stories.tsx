@@ -20,10 +20,10 @@ import {
 } from '@lumx/react';
 import range from 'lodash/range';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
-import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
 import { withChromaticForceScreenSize } from '@lumx/react/stories/decorators/withChromaticForceScreenSize';
 import { FitAnchorWidth } from '@lumx/react/components/popover/constants';
-import { withUndefined } from '@lumx/react/stories/controls/withUndefined';
+import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
 
 export default {
     title: 'LumX components/popover/Popover',

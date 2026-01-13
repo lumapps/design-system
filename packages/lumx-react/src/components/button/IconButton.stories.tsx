@@ -1,9 +1,9 @@
 import { mdiSend } from '@lumx/icons';
 import { ButtonSize, Emphasis, IconButton, Size } from '@lumx/react';
-import { iconArgType } from '@lumx/react/stories/controls/icons';
-import { colorArgType } from '@lumx/react/stories/controls/color';
-import { SQUARE_IMAGES, squareImageArgType } from '@lumx/react/stories/controls/image';
-import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { iconArgType } from '@lumx/core/stories/controls/icons';
+import { colorArgType } from '@lumx/core/stories/controls/color';
+import { SQUARE_IMAGES, squareImageArgType } from '@lumx/core/stories/controls/image';
+import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
 import { StateVariations } from './Button.stories';
 
 export default {

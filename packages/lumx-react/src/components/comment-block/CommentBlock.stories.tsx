@@ -3,7 +3,7 @@ import { mdiDotsHorizontal, mdiHeart, mdiReply } from '@lumx/icons';
 import { Button, CommentBlock } from '@lumx/react';
 import { IconButton } from '@lumx/react/components/button/IconButton';
 import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
-import { avatarImageArgType, AVATAR_IMAGES } from '@lumx/react/stories/controls/image';
+import { avatarImageArgType, AVATAR_IMAGES } from '@lumx/core/stories/controls/image';
 import { loremIpsum } from '@lumx/react/stories/utils/lorem';
 
 export default {

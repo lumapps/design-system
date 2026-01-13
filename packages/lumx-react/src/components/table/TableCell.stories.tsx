@@ -1,7 +1,7 @@
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 import { mdiAccount } from '@lumx/icons';
 
-import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
 import { Table, TableBody, TableCell, TableCellVariant, TableHeader, TableRow, ThOrder } from '.';
 
 export default {

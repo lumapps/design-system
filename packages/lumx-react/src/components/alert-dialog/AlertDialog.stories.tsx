@@ -5,7 +5,7 @@ import { DIALOG_TRANSITION_DURATION } from '@lumx/core/js/constants';
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
 import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
 import { loremIpsum } from '@lumx/react/stories/utils/lorem';
-import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
 import { withChromaticForceScreenSize } from '../../stories/decorators/withChromaticForceScreenSize';
 import { AlertDialog } from './AlertDialog';
 import DialogStories from '../dialog/Dialog.stories';

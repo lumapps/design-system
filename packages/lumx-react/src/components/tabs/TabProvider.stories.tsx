@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 
 import { Alignment, Button, Dialog, Tab, TabList, TabListLayout, TabPanel, TabProvider } from '@lumx/react';
-import { iconArgType } from '@lumx/react/stories/controls/icons';
-import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { iconArgType } from '@lumx/core/stories/controls/icons';
+import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
 import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
 import { toFlattenProps } from '@lumx/react/stories/utils/toFlattenProps';
 import { withCategory } from '@lumx/react/stories/utils/withCategory';

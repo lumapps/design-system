@@ -10,11 +10,11 @@ import {
     ImageBlockSize,
     Size,
 } from '@lumx/react';
-import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
-import { imageArgType, PORTRAIT_IMAGES, LANDSCAPE_IMAGES } from '@lumx/react/stories/controls/image';
+import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
+import { imageArgType, PORTRAIT_IMAGES, LANDSCAPE_IMAGES } from '@lumx/core/stories/controls/image';
 import { mdiFileEdit } from '@lumx/icons';
 import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
-import { focusPoint } from '@lumx/react/stories/controls/focusPoint';
+import { focusPoint } from '@lumx/core/stories/controls/focusPoint';
 import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
 
 export default {
