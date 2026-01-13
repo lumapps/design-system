@@ -2,7 +2,7 @@ import { useRef } from 'react';
 
 import { mdiAccount, mdiOpenInNew } from '@lumx/icons';
 import { Icon, ListDivider, ListProps, ListSubheader, Size } from '@lumx/react';
-import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
 
 import { List } from './List';
 import { ListItem } from './ListItem';

@@ -1,6 +1,6 @@
-import { headingElementArgType, HEADING_ELEMENTS } from '@lumx/react/stories/controls/element';
+import { headingElementArgType, HEADING_ELEMENTS } from '@lumx/core/stories/controls/element';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
-import { ALL_TYPOGRAPHY } from '@lumx/react/stories/controls/typography';
+import { ALL_TYPOGRAPHY } from '@lumx/core/stories/controls/typography';
 import { Heading, HeadingLevelProvider } from '.';
 import TextStories from '../text/Text.stories';
 

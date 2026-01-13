@@ -1,6 +1,6 @@
 import { AspectRatio, Size, SkeletonRectangle, SkeletonRectangleVariant, SkeletonRectangleProps } from '@lumx/react';
-import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
-import { ALL_COLORS, colorArgType } from '@lumx/react/stories/controls/color';
+import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
+import { ALL_COLORS, colorArgType } from '@lumx/core/stories/controls/color';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 
 const variants: SkeletonRectangleProps['variant'][] = [

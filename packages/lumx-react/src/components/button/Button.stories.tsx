@@ -4,13 +4,13 @@ import pick from 'lodash/pick';
 import { Button, ButtonSize, Emphasis, GridColumn, Size, Text, Theme } from '@lumx/react';
 import { mdiAccountBox } from '@lumx/icons';
 
-import { iconArgType } from '@lumx/react/stories/controls/icons';
-import { colorArgType } from '@lumx/react/stories/controls/color';
-import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { iconArgType } from '@lumx/core/stories/controls/icons';
+import { colorArgType } from '@lumx/core/stories/controls/color';
+import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
-import { disableArgTypes } from '@lumx/react/stories/utils/disableArgTypes';
+import { disableArgTypes } from '@lumx/core/stories/utils/disableArgTypes';
 import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
-import { loremIpsum } from '@lumx/react/stories/utils/lorem';
+import { loremIpsum } from '@lumx/core/stories/utils/lorem';
 import { withThemedBackground } from '@lumx/react/stories/decorators/withThemedBackground';
 import { withTheming } from '@lumx/react/stories/utils/theming';
 import { DESIGN_TOKENS } from '@lumx/core/js/constants/_internal/design-tokens';

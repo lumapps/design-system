@@ -17,12 +17,12 @@ import {
     ThumbnailVariant,
 } from '@lumx/react';
 import { CustomLink } from '@lumx/react/stories/utils/CustomLink';
-import { IMAGE_SIZES, imageArgType, IMAGES } from '@lumx/react/stories/controls/image';
-import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { IMAGE_SIZES, imageArgType, IMAGES } from '@lumx/core/stories/controls/image';
+import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
 import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
 import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
-import { withUndefined } from '@lumx/react/stories/controls/withUndefined';
+import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
 
 const aligns = [Alignment.center, Alignment.left, Alignment.right];
 const variants = [ThumbnailVariant.squared, ThumbnailVariant.rounded];

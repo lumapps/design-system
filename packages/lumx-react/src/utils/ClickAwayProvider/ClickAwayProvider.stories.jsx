@@ -3,7 +3,7 @@
 import { forwardRef, useCallback, useRef, useState } from 'react';
 import { Button } from '@lumx/react';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
-import { initDemoShadowDOMPortal } from '@lumx/react/stories/utils/initDemoShadowDOMPortal';
+import { initDemoShadowDOMPortal } from '@lumx/core/stories/utils/initDemoShadowDOMPortal';
 import { PortalProvider, Portal } from '@lumx/react/utils/Portal';
 
 export default {

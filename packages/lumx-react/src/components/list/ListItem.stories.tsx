@@ -3,7 +3,7 @@ import { List, ListItemSize, Size } from '@lumx/react';
 import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
 import { CustomLink } from '@lumx/react/stories/utils/CustomLink';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
-import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
 import { isEqual } from '@lumx/react/utils/object/isEqual';
 import { ListItem } from './ListItem';
 

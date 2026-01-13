@@ -1,5 +1,5 @@
 import { Slider } from '@lumx/react';
-import { loremIpsum } from '@lumx/react/stories/utils/lorem';
+import { loremIpsum } from '@lumx/core/stories/utils/lorem';
 import { withValueOnChange } from '@lumx/react/stories/decorators/withValueOnChange';
 
 export default {

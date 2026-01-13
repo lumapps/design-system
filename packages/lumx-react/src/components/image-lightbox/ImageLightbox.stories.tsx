@@ -1,4 +1,4 @@
-import { IMAGES } from '@lumx/react/stories/controls/image';
+import { IMAGES } from '@lumx/core/stories/controls/image';
 import { Button, Mosaic, ImageLightbox, ImageLightboxProps, Chip, ChipGroup } from '@lumx/react';
 import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
 

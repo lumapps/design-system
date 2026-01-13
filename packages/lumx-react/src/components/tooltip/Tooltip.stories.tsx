@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { Button, Dialog, Dropdown, Placement, Tooltip } from '@lumx/react';
-import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
 import { withChromaticForceScreenSize } from '@lumx/react/stories/decorators/withChromaticForceScreenSize';
 import { ARIA_LINK_MODES } from '@lumx/react/components/tooltip/constants';
 

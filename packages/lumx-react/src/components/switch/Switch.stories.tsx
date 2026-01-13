@@ -1,6 +1,6 @@
 import { Alignment, Switch, SwitchProps } from '@lumx/react';
 import { withValueOnChange } from '@lumx/react/stories/decorators/withValueOnChange';
-import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 
 export default {

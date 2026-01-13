@@ -3,9 +3,9 @@ import { mdiMenuDown, mdiStar } from '@lumx/icons';
 import { Badge, ColorPalette, Icon, IconButton, Link, Orientation, Size, Text } from '@lumx/react';
 import { CustomLink } from '@lumx/react/stories/utils/CustomLink';
 
-import { AVATAR_IMAGES } from '@lumx/react/stories/controls/image';
+import { AVATAR_IMAGES } from '@lumx/core/stories/controls/image';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
-import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
 import { withResizableBox } from '@lumx/react/stories/decorators/withResizableBox';
 import { UserBlock } from './UserBlock';
 

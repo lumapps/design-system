@@ -1,7 +1,7 @@
-import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
-import { headingElementArgType } from '@lumx/react/stories/controls/element';
-import { loremIpsum } from '@lumx/react/stories/utils/lorem';
-import { LANDSCAPE_IMAGES } from '@lumx/react/stories/controls/image';
+import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
+import { headingElementArgType } from '@lumx/core/stories/controls/element';
+import { loremIpsum } from '@lumx/core/stories/utils/lorem';
+import { LANDSCAPE_IMAGES } from '@lumx/core/stories/controls/image';
 import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
 import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
 
