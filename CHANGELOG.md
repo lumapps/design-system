@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   `@lumx/core`:
+    -   Moved testing utilities from `@lumx/react`
+
 ## [4.0.0][] - 2025-12-09
 
 ### Changed
