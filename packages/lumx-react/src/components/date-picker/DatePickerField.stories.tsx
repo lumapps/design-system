@@ -1,7 +1,7 @@
 import { DatePickerField } from '@lumx/react';
 import { withValueOnChange } from '@lumx/react/stories/decorators/withValueOnChange';
 import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
-import { loremIpsum } from '@lumx/react/stories/utils/lorem';
+import { loremIpsum } from '@lumx/core/stories/utils/lorem';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 
 export default {

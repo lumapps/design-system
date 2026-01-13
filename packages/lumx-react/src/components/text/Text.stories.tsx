@@ -4,7 +4,7 @@ import { ALL_TYPOGRAPHY, allTypographyArgType } from '@lumx/core/stories/control
 import { colorArgType, colorVariantArgType } from '@lumx/core/stories/controls/color';
 import { textElementArgType } from '@lumx/core/stories/controls/element';
 import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
-import { loremIpsum } from '@lumx/react/stories/utils/lorem';
+import { loremIpsum } from '@lumx/core/stories/utils/lorem';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 import { Button, ColorPalette, ColorVariant, Icon, WhiteSpace } from '@lumx/react';
 import { mdiEarth, mdiHeart } from '@lumx/icons';

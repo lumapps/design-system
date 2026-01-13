@@ -1,5 +1,5 @@
 import { Button } from '@lumx/react';
-import { initDemoShadowDOMPortal } from '@lumx/react/stories/utils/initDemoShadowDOMPortal';
+import { initDemoShadowDOMPortal } from '@lumx/core/stories/utils/initDemoShadowDOMPortal';
 import { PortalProvider } from './PortalProvider';
 import { Portal } from './Portal';
 

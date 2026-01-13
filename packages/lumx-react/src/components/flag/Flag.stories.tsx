@@ -5,7 +5,7 @@ import { iconArgType } from '@lumx/core/stories/controls/icons';
 import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 import { withResizableBox } from '@lumx/react/stories/decorators/withResizableBox';
-import { loremIpsum } from '@lumx/react/stories/utils/lorem';
+import { loremIpsum } from '@lumx/core/stories/utils/lorem';
 
 export default {
     title: 'LumX components/flag/Flag',

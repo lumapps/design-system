@@ -22,10 +22,10 @@ import {
 import { DIALOG_TRANSITION_DURATION } from '@lumx/core/js/constants';
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
 import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
+import { loremIpsum } from '@lumx/core/stories/utils/lorem';
 import { withChromaticForceScreenSize } from '@lumx/react/stories/decorators/withChromaticForceScreenSize';
 
 import { Dialog } from './Dialog';
-import { loremIpsum } from '../../stories/utils/lorem';
 
 const dialogSizes = [Size.tiny, Size.regular, Size.big, Size.huge];
 

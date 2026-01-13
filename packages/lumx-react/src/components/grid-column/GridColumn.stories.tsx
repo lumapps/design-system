@@ -4,7 +4,7 @@ import range from 'lodash/range';
 import { GridColumn, GridColumnProps } from '@lumx/react/components/grid-column/GridColumn';
 import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
 import { Size } from '@lumx/react';
-import { loremIpsum } from '@lumx/react/stories/utils/lorem';
+import { loremIpsum } from '@lumx/core/stories/utils/lorem';
 
 const genericBlockStyle = { border: '1px solid red', padding: '2px 8px' };
 

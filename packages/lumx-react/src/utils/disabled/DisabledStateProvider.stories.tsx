@@ -14,10 +14,10 @@ import {
     Uploader,
 } from '@lumx/react';
 import { DisabledStateProvider } from '@lumx/react/utils';
-import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
-import { disableArgTypes } from '@lumx/react/stories/utils/disableArgTypes';
+import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
+import { disableArgTypes } from '@lumx/core/stories/utils/disableArgTypes';
 import { mdiFoodApple } from '@lumx/icons';
-import { LANDSCAPE_IMAGES } from '@lumx/react/stories/controls/image';
+import { LANDSCAPE_IMAGES } from '@lumx/core/stories/controls/image';
 
 export default {
     title: 'utils/disabled/DisabledStateProvider',

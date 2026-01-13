@@ -4,7 +4,7 @@ import { Button, CommentBlock } from '@lumx/react';
 import { IconButton } from '@lumx/react/components/button/IconButton';
 import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
 import { avatarImageArgType, AVATAR_IMAGES } from '@lumx/core/stories/controls/image';
-import { loremIpsum } from '@lumx/react/stories/utils/lorem';
+import { loremIpsum } from '@lumx/core/stories/utils/lorem';
 
 export default {
     title: 'LumX components/comment-block/CommentBlock',

@@ -1,4 +1,4 @@
-import { getSelectArgType } from '@lumx/react/stories/controls/selectArgType';
+import { getSelectArgType } from './selectArgType';
 
 const avatar1 = '/demo-assets/avatar1.jpg';
 const avatar2 = '/demo-assets/avatar2.jpg';

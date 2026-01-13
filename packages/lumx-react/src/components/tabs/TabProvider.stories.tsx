@@ -4,8 +4,8 @@ import { Alignment, Button, Dialog, Tab, TabList, TabListLayout, TabPanel, TabPr
 import { iconArgType } from '@lumx/core/stories/controls/icons';
 import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
 import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
-import { toFlattenProps } from '@lumx/react/stories/utils/toFlattenProps';
-import { withCategory } from '@lumx/react/stories/utils/withCategory';
+import { toFlattenProps } from '@lumx/core/stories/utils/toFlattenProps';
+import { withCategory } from '@lumx/core/stories/utils/withCategory';
 import get from 'lodash/get';
 import times from 'lodash/times';
 import { useState } from 'react';

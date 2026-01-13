@@ -1,7 +1,7 @@
 import { Kind, Message } from '@lumx/react';
 import { mdiDelete } from '@lumx/icons';
 import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
-import { loremIpsum } from '@lumx/react/stories/utils/lorem';
+import { loremIpsum } from '@lumx/core/stories/utils/lorem';
 import { iconArgType } from '@lumx/core/stories/controls/icons';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 import { withUndefined } from '@lumx/core/stories/controls/withUndefined';

@@ -27,7 +27,7 @@ function formatPath(entry) {
 export default {
     // Bundle all TS files
     input: glob.sync('src/js/**/index.ts', {
-        ignore: ['**/*.test.*', '**/_internal/**', '**/testing/**'],
+        ignore: ['**/_internal/**'],
     }),
     output: {
         format: 'esm',
@@ -52,7 +52,8 @@ export default {
                 target: 'ESNext',
                 module: 'ESNext',
             },
-            exclude: ['**/*.test.*', '**/testing/**'],
+            include: [`${SRC_PATH}/js/**/*.ts`],
+            exclude: ['**/*.test.*'],
         }),
         copy({
             targets: [
