@@ -7,14 +7,13 @@ To migrate a React component's JSX template, tests, and stories to 'lumx-core' a
 This file will contain the primary logic, props, styling constants, and the actual JSX rendering of your component.
 
 *   Move any display-related constants (like mappings of `kind` to `color`) directly into this file.
-*   Use `handleBasicClasses` for standard class generation.
+*   Use `classNames.bem` for standard class generation.
 *   Import types and utilities from `../../types` and `../../utils` or `@lumx/core/...`.
 *   **Crucial:** Ensure there are NO imports from `@lumx/react`. Any types or constants (like `Kind`, `Size`, `Theme`) must be imported from `@lumx/core` (e.g., `../../constants`).
 
 Example (`packages/lumx-core/src/js/components/InputHelper/index.tsx`):
 ```tsx
 import type { ReactNode } from 'react';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName, GenericProps, HasTheme } from '../../types';
 import { classNames } from '../../utils';
 import { Kind } from '../../constants';
@@ -26,6 +25,7 @@ export interface InputHelperProps extends GenericProps, HasTheme {
 
 const COMPONENT_NAME = 'InputHelper';
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-input-helper';
+const { block } = classNames.bem(CLASSNAME);
 const DEFAULT_PROPS: Partial<InputHelperProps> = {
     kind: Kind.info,
 };
@@ -53,7 +53,10 @@ export const InputHelper = (props: InputHelperProps) => {
             {...forwardedProps}
             className={classNames.join(
                 className,
-                handleBasicClasses({ prefix: CLASSNAME, color, theme }),
+                block({
+                    [`color-${color}`]: Boolean(color),
+                    [`theme-${theme}`]: Boolean(theme),
+                }),
             )}
         >
             {children}
