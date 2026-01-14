@@ -8,7 +8,6 @@ import { IconButton } from '@lumx/react/components/button/IconButton';
 import { Chip } from '@lumx/react/components/chip/Chip';
 import { Icon } from '@lumx/react/components/icon/Icon';
 import { InputLabel } from '@lumx/react/components/input-label/InputLabel';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
@@ -31,6 +30,7 @@ const COMPONENT_NAME = 'Select';
 
 /** The default class name and classes prefix for this component. */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-select';
+const { block, element } = classNames.bem(CLASSNAME);
 
 /** The default value of props. */
 const DEFAULT_PROPS: Partial<SelectProps> = {
@@ -74,13 +74,8 @@ const SelectField: React.FC<SelectProps> = (props) => {
             {variant === SelectVariant.input && (
                 <>
                     {label && (
-                        <div className={`${CLASSNAME}__header`}>
-                            <InputLabel
-                                htmlFor={id}
-                                className={`${CLASSNAME}__label`}
-                                isRequired={isRequired}
-                                theme={theme}
-                            >
+                        <div className={element('header')}>
+                            <InputLabel htmlFor={id} className={element('label')} isRequired={isRequired} theme={theme}>
                                 {label}
                             </InputLabel>
                         </div>
@@ -90,7 +85,7 @@ const SelectField: React.FC<SelectProps> = (props) => {
                     <div
                         ref={mergeRefs(anchorRef as RefObject<HTMLDivElement>, selectElementRef)}
                         id={id}
-                        className={`${CLASSNAME}__wrapper`}
+                        className={element('wrapper')}
                         onClick={onInputClick}
                         onKeyDown={handleKeyboardNav}
                         tabIndex={isDisabled ? undefined : 0}
@@ -99,7 +94,7 @@ const SelectField: React.FC<SelectProps> = (props) => {
                     >
                         {icon && (
                             <Icon
-                                className={`${CLASSNAME}__input-icon`}
+                                className={element('input-icon')}
                                 color={theme === Theme.dark ? 'light' : undefined}
                                 icon={icon}
                                 size={Size.xs}
@@ -107,10 +102,9 @@ const SelectField: React.FC<SelectProps> = (props) => {
                         )}
 
                         <div
-                            className={classNames.join([
-                                `${CLASSNAME}__input-native`,
-                                isEmpty && placeholder && `${CLASSNAME}__input-native--placeholder`,
-                            ])}
+                            className={element('input-native', {
+                                placeholder: isEmpty && placeholder,
+                            })}
                         >
                             {!isEmpty && <span>{selectedValueRender?.(value)}</span>}
 
@@ -118,7 +112,7 @@ const SelectField: React.FC<SelectProps> = (props) => {
                         </div>
 
                         {(isValid || hasError) && (
-                            <div className={`${CLASSNAME}__input-validity`}>
+                            <div className={element('input-validity')}>
                                 <Icon icon={isValid ? mdiCheckCircle : mdiAlertCircle} size={Size.xxs} />
                             </div>
                         )}
@@ -126,7 +120,7 @@ const SelectField: React.FC<SelectProps> = (props) => {
                         {hasInputClear && clearButtonProps && (
                             <IconButton
                                 {...clearButtonProps}
-                                className={`${CLASSNAME}__input-clear`}
+                                className={element('input-clear')}
                                 icon={mdiCloseCircle}
                                 emphasis={Emphasis.low}
                                 size={Size.s}
@@ -136,7 +130,7 @@ const SelectField: React.FC<SelectProps> = (props) => {
                             />
                         )}
 
-                        <div className={`${CLASSNAME}__input-indicator`}>
+                        <div className={element('input-indicator')}>
                             <Icon icon={mdiMenuDown} size={Size.s} />
                         </div>
                     </div>
@@ -182,10 +176,9 @@ export const Select = forwardRef<SelectProps, HTMLDivElement>((props, ref) => {
             ...props,
             className: classNames.join(
                 props.className,
-                handleBasicClasses({
-                    hasInputClear,
-                    hasUnique: !props.isEmpty,
-                    prefix: CLASSNAME,
+                block({
+                    'has-input-clear': hasInputClear,
+                    'has-unique': !props.isEmpty,
                 }),
             ),
             hasInputClear,

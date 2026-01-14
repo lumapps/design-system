@@ -1,6 +1,5 @@
 import { Theme } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
@@ -20,6 +19,7 @@ const COMPONENT_NAME = 'Divider';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-divider';
+const { block } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -41,7 +41,7 @@ export const Divider = forwardRef<DividerProps, HTMLHRElement>((props, ref) => {
         <hr
             ref={ref}
             {...forwardedProps}
-            className={classNames.join(className, handleBasicClasses({ prefix: CLASSNAME, theme }))}
+            className={classNames.join(className, block({ [`theme-${theme}`]: Boolean(theme) }))}
         />
     );
 });

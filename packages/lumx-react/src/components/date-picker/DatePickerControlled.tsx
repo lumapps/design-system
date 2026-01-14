@@ -26,6 +26,8 @@ import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { CLASSNAME } from './constants';
 
+const { element } = classNames.bem(CLASSNAME);
+
 /**
  * Defines the props of the component.
  */
@@ -140,7 +142,7 @@ export const DatePickerControlled = forwardRef<DatePickerControlledProps, HTMLDi
     return (
         <div ref={ref} className={`${CLASSNAME}`} style={style}>
             <Toolbar
-                className={`${CLASSNAME}__toolbar`}
+                className={element('toolbar')}
                 after={
                     <IconButton
                         {...nextButtonProps}
@@ -168,7 +170,7 @@ export const DatePickerControlled = forwardRef<DatePickerControlledProps, HTMLDi
                         </span>
                         {onMonthChange && (
                             <FlexBox
-                                className={`${CLASSNAME}__month`}
+                                className={element('month')}
                                 orientation="horizontal"
                                 hAlign="center"
                                 gap="regular"
@@ -191,7 +193,7 @@ export const DatePickerControlled = forwardRef<DatePickerControlledProps, HTMLDi
                                                 onBlur={updateYear}
                                                 onKeyPress={updateYearOnEnterPressed}
                                                 key="year"
-                                                className={`${CLASSNAME}__year`}
+                                                className={element('year')}
                                             />
                                         ) : (
                                             <Text as="p" key={part}>
@@ -204,11 +206,11 @@ export const DatePickerControlled = forwardRef<DatePickerControlledProps, HTMLDi
                     </>
                 }
             />
-            <div className={`${CLASSNAME}__calendar`}>
-                <div className={`${CLASSNAME}__week-days ${CLASSNAME}__days-wrapper`}>
+            <div className={element('calendar')}>
+                <div className={classNames.join(element('week-days'), element('days-wrapper'))}>
                     {weekDays.map(({ letter, number, long }) => (
-                        <div key={number} className={`${CLASSNAME}__day-wrapper`}>
-                            <span className={`${CLASSNAME}__week-day`} aria-hidden>
+                        <div key={number} className={element('day-wrapper')}>
+                            <span className={element('week-day')} aria-hidden>
                                 {letter.toLocaleUpperCase()}
                             </span>
                             <span className="visually-hidden">{long}</span>
@@ -216,7 +218,7 @@ export const DatePickerControlled = forwardRef<DatePickerControlledProps, HTMLDi
                     ))}
                 </div>
 
-                <div className={`${CLASSNAME}__month-days ${CLASSNAME}__days-wrapper`}>
+                <div className={classNames.join(element('month-days'), element('days-wrapper'))}>
                     {weeks.flatMap((week, weekIndex) => {
                         return weekDays.map((weekDay, dayIndex) => {
                             const { date, isOutOfRange } = week[weekDay.number] || {};
@@ -225,12 +227,12 @@ export const DatePickerControlled = forwardRef<DatePickerControlledProps, HTMLDi
                             const isSelected = date && value && isSameDay(value, date);
 
                             return (
-                                <div key={key} className={`${CLASSNAME}__day-wrapper`}>
+                                <div key={key} className={element('day-wrapper')}>
                                     {date && (
                                         <Button
                                             ref={isSelected || (!value && isToday) ? todayOrSelectedDateRef : null}
-                                            className={classNames.join(`${CLASSNAME}__month-day`, {
-                                                [`${CLASSNAME}__month-day--is-today`]: isToday,
+                                            className={element('month-day', {
+                                                'is-today': isToday,
                                             })}
                                             disabled={isOutOfRange}
                                             isSelected={isSelected}

@@ -29,4 +29,14 @@ describe(block, () => {
             expect(result).toBe('button');
         });
     });
+
+    describe('with additional classes', () => {
+        it('should append additional classes', () => {
+            expect(block('button', ['class-a', 'class-b'])).toBe('class-a class-b button');
+        });
+
+        it('should append additional classes with modifiers', () => {
+            expect(block('button', { active: true }, ['class-a'])).toBe('class-a button button--active');
+        });
+    });
 });

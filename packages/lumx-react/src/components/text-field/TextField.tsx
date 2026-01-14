@@ -14,7 +14,6 @@ import {
     Theme,
 } from '@lumx/react';
 import { GenericProps, HasTheme, HasAriaDisabled } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import { classNames } from '@lumx/core/js/utils';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useId } from '@lumx/react/hooks/useId';
@@ -25,6 +24,8 @@ import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableState
 import { CLASSNAME, COMPONENT_NAME } from './constants';
 import { RawInputText } from './RawInputText';
 import { RawInputTextarea } from './RawInputTextarea';
+
+const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * Defines the props of the component.
@@ -216,31 +217,30 @@ export const TextField = forwardRef<TextFieldProps, HTMLDivElement>((props, ref)
             ref={ref}
             className={classNames.join(
                 className,
-                handleBasicClasses({
-                    hasChips: Boolean(chips),
-                    hasError: !isValid && hasError,
-                    hasIcon: Boolean(icon),
-                    hasInput: !multiline,
-                    hasInputClear: clearButtonProps && isNotEmpty,
-                    hasLabel: Boolean(label),
-                    hasPlaceholder: Boolean(placeholder),
-                    hasTextarea: multiline,
-                    hasValue: Boolean(value),
-                    isDisabled: isAnyDisabled,
-                    isFocus: isFocus || forceFocusStyle,
-                    isValid,
-                    prefix: CLASSNAME,
-                    theme,
+                block({
+                    'has-chips': Boolean(chips),
+                    'has-error': !isValid && hasError,
+                    'has-icon': Boolean(icon),
+                    'has-input': !multiline,
+                    'has-input-clear': Boolean(clearButtonProps && isNotEmpty),
+                    'has-label': Boolean(label),
+                    'has-placeholder': Boolean(placeholder),
+                    'has-textarea': multiline,
+                    'has-value': Boolean(value),
+                    'is-disabled': isAnyDisabled,
+                    'is-focus': isFocus || forceFocusStyle,
+                    'is-valid': isValid,
+                    [`theme-${theme}`]: Boolean(theme),
                 }),
             )}
         >
             {(label || maxLength) && (
-                <div className={`${CLASSNAME}__header`}>
+                <div className={element('header')}>
                     {label && (
                         <InputLabel
                             {...labelProps}
                             htmlFor={textFieldId}
-                            className={`${CLASSNAME}__label`}
+                            className={element('label')}
                             isRequired={isRequired}
                             theme={theme}
                         >
@@ -249,7 +249,7 @@ export const TextField = forwardRef<TextFieldProps, HTMLDivElement>((props, ref)
                     )}
 
                     {maxLength && (
-                        <div className={`${CLASSNAME}__char-counter`}>
+                        <div className={element('char-counter')}>
                             <span>{maxLength - valueLength}</span>
                             {maxLength - valueLength === 0 && <Icon icon={mdiAlertCircle} size={Size.xxs} />}
                         </div>
@@ -257,10 +257,10 @@ export const TextField = forwardRef<TextFieldProps, HTMLDivElement>((props, ref)
                 </div>
             )}
 
-            <div className={`${CLASSNAME}__wrapper`} ref={textFieldRef}>
+            <div className={element('wrapper')} ref={textFieldRef}>
                 {icon && (
                     <Icon
-                        className={`${CLASSNAME}__input-icon`}
+                        className={element('input-icon')}
                         color={theme === Theme.dark ? 'light' : undefined}
                         icon={icon}
                         size={Size.xs}
@@ -268,18 +268,18 @@ export const TextField = forwardRef<TextFieldProps, HTMLDivElement>((props, ref)
                 )}
 
                 {chips ? (
-                    <div className={`${CLASSNAME}__chips`}>
+                    <div className={element('chips')}>
                         {chips}
 
                         {input}
                     </div>
                 ) : (
-                    <div className={`${CLASSNAME}__input-wrapper`}>{input}</div>
+                    <div className={element('input-wrapper')}>{input}</div>
                 )}
 
                 {(isValid || hasError) && (
                     <Icon
-                        className={`${CLASSNAME}__input-validity`}
+                        className={element('input-validity')}
                         color={theme === Theme.dark ? 'light' : undefined}
                         icon={isValid ? mdiCheckCircle : mdiAlertCircle}
                         size={Size.xxs}
@@ -289,7 +289,7 @@ export const TextField = forwardRef<TextFieldProps, HTMLDivElement>((props, ref)
                 {clearButtonProps && isNotEmpty && !isAnyDisabled && (
                     <IconButton
                         {...clearButtonProps}
-                        className={`${CLASSNAME}__input-clear`}
+                        className={element('input-clear')}
                         icon={mdiCloseCircle}
                         emphasis={Emphasis.low}
                         size={Size.s}
@@ -299,17 +299,17 @@ export const TextField = forwardRef<TextFieldProps, HTMLDivElement>((props, ref)
                     />
                 )}
 
-                {afterElement && <div className={`${CLASSNAME}__after-element`}>{afterElement}</div>}
+                {afterElement && <div className={element('after-element')}>{afterElement}</div>}
             </div>
 
             {hasError && error && (
-                <InputHelper className={`${CLASSNAME}__helper`} kind={Kind.error} theme={theme} id={errorId}>
+                <InputHelper className={element('helper')} kind={Kind.error} theme={theme} id={errorId}>
                     {error}
                 </InputHelper>
             )}
 
             {helper && (
-                <InputHelper className={`${CLASSNAME}__helper`} theme={theme} id={helperId}>
+                <InputHelper className={element('helper')} theme={theme} id={helperId}>
                     {helper}
                 </InputHelper>
             )}

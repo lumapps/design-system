@@ -1,6 +1,5 @@
 import { GlobalSize, Theme, ColorPalette } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
@@ -27,6 +26,7 @@ const COMPONENT_NAME = 'SkeletonCircle';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-skeleton-circle';
+const { block } = classNames.bem(CLASSNAME);
 
 /**
  * SkeletonCircle component.
@@ -43,7 +43,14 @@ export const SkeletonCircle = forwardRef<SkeletonCircleProps, HTMLDivElement>((p
         <div
             ref={ref}
             {...forwardedProps}
-            className={classNames.join(className, handleBasicClasses({ prefix: CLASSNAME, size, color, theme }))}
+            className={classNames.join(
+                className,
+                block({
+                    [`size-${size}`]: Boolean(size),
+                    [`color-${color}`]: Boolean(color),
+                    [`theme-${theme}`]: Boolean(theme),
+                }),
+            )}
         />
     );
 });

@@ -3,7 +3,6 @@ import { FocusEventHandler, KeyboardEventHandler, useCallback } from 'react';
 import { mdiAlertCircle, mdiCheckCircle, mdiRadioboxBlank, mdiRadioboxMarked } from '@lumx/icons';
 import { Icon, InputHelper, InputLabel, Kind, Size } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
@@ -42,6 +41,7 @@ const COMPONENT_NAME = 'ProgressTrackerStep';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-progress-tracker-step';
+const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -123,12 +123,11 @@ export const ProgressTrackerStep = forwardRef<ProgressTrackerStepProps, HTMLButt
             id={state?.tabId}
             className={classNames.join(
                 className,
-                handleBasicClasses({
-                    prefix: CLASSNAME,
-                    hasError,
-                    isActive,
-                    isClickable: state && !isAnyDisabled,
-                    isComplete,
+                block({
+                    'has-error': hasError,
+                    'is-active': isActive,
+                    'is-clickable': state && !isAnyDisabled,
+                    'is-complete': isComplete,
                 }),
             )}
             onClick={changeToCurrentTab}
@@ -140,14 +139,14 @@ export const ProgressTrackerStep = forwardRef<ProgressTrackerStepProps, HTMLButt
             aria-selected={isActive}
             aria-controls={state?.tabPanelId}
         >
-            <Icon className={`${CLASSNAME}__state`} icon={getIcon()} size={Size.s} />
+            <Icon className={element('state')} icon={getIcon()} size={Size.s} />
 
-            <InputLabel htmlFor={state?.tabId || ''} className={`${CLASSNAME}__label`}>
+            <InputLabel htmlFor={state?.tabId || ''} className={element('label')}>
                 {label}
             </InputLabel>
 
             {helper && (
-                <InputHelper kind={hasError ? Kind.error : Kind.info} className={`${CLASSNAME}__helper`}>
+                <InputHelper kind={hasError ? Kind.error : Kind.info} className={element('helper')}>
                     {helper}
                 </InputHelper>
             )}

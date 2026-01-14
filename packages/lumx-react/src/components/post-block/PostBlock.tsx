@@ -2,7 +2,6 @@ import { ReactNode } from 'react';
 
 import { Orientation, Theme, Thumbnail, ThumbnailProps, ThumbnailVariant } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
@@ -43,6 +42,7 @@ const COMPONENT_NAME = 'PostBlock';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-post-block';
+const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -79,37 +79,43 @@ export const PostBlock = forwardRef<PostBlockProps, HTMLDivElement>((props, ref)
     return (
         <div
             ref={ref}
-            className={classNames.join(className, handleBasicClasses({ prefix: CLASSNAME, orientation, theme }))}
+            className={classNames.join(
+                className,
+                block({
+                    [`orientation-${orientation}`]: Boolean(orientation),
+                    [`theme-${theme}`]: Boolean(theme),
+                }),
+            )}
             {...forwardedProps}
         >
             {thumbnailProps && (
-                <div className={`${CLASSNAME}__thumbnail`}>
+                <div className={element('thumbnail')}>
                     <Thumbnail {...thumbnailProps} theme={theme} variant={ThumbnailVariant.rounded} />
                 </div>
             )}
-            <div className={`${CLASSNAME}__wrapper`}>
-                {author && <div className={`${CLASSNAME}__author`}>{author}</div>}
+            <div className={element('wrapper')}>
+                {author && <div className={element('author')}>{author}</div>}
 
                 {title && (
-                    <button type="button" className={`${CLASSNAME}__title`} onClick={onClick}>
+                    <button type="button" className={element('title')} onClick={onClick}>
                         {title}
                     </button>
                 )}
 
-                {meta && <span className={`${CLASSNAME}__meta`}>{meta}</span>}
+                {meta && <span className={element('meta')}>{meta}</span>}
 
                 {typeof text === 'string' ? (
-                    <p className={`${CLASSNAME}__text`}>{text}</p>
+                    <p className={element('text')}>{text}</p>
                 ) : (
                     // eslint-disable-next-line react/no-danger
-                    <p dangerouslySetInnerHTML={text} className={`${CLASSNAME}__text`} />
+                    <p dangerouslySetInnerHTML={text} className={element('text')} />
                 )}
 
-                {attachments && <div className={`${CLASSNAME}__attachments`}>{attachments}</div>}
+                {attachments && <div className={element('attachments')}>{attachments}</div>}
                 {(tags || actions) && (
-                    <div className={`${CLASSNAME}__toolbar`}>
-                        {tags && <div className={`${CLASSNAME}__tags`}>{tags}</div>}
-                        {actions && <div className={`${CLASSNAME}__actions`}>{actions}</div>}
+                    <div className={element('toolbar')}>
+                        {tags && <div className={element('tags')}>{tags}</div>}
+                        {actions && <div className={element('actions')}>{actions}</div>}
                     </div>
                 )}
             </div>

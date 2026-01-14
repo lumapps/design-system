@@ -1,7 +1,4 @@
-import isEmpty from 'lodash/isEmpty';
-
 import { Emphasis, Size } from '../../constants';
-import { getBasicClass } from '../../utils/_internal/className';
 import type { JSXElement, LumxClassName } from '../../types';
 import { classNames } from '../../utils';
 import { BaseButtonProps, ButtonRoot } from './ButtonRoot';
@@ -35,6 +32,7 @@ export const COMPONENT_NAME = 'Button';
  * Component default class name and class prefix.
  */
 export const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-button';
+const { modifier } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -62,8 +60,10 @@ export const Button = (props: ButtonProps) => {
 
     const buttonClassName = classNames.join(
         className,
-        getBasicClass({ prefix: CLASSNAME, type: 'hasLeftIcon', value: !isEmpty(leftIcon) }),
-        getBasicClass({ prefix: CLASSNAME, type: 'hasRightIcon', value: !isEmpty(rightIcon) }),
+        modifier({
+            'has-left-icon': Boolean(leftIcon),
+            'has-right-icon': Boolean(rightIcon),
+        }),
     );
 
     return ButtonRoot({

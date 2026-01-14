@@ -4,11 +4,12 @@ import { Theme, useTheme } from '@lumx/react';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import type { HasClassName, HasTheme } from '@lumx/core/js/types';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import { classNames } from '@lumx/core/js/utils';
 
 import { useFitRowsToContent } from './useFitRowsToContent';
 import { INPUT_NATIVE_CLASSNAME } from './constants';
+
+const { block } = classNames.bem(INPUT_NATIVE_CLASSNAME);
 
 type NativeTextareaProps = ComponentProps<'textarea'>;
 
@@ -60,8 +61,10 @@ export const RawInputTextarea = forwardRef<Omit<RawInputTextareaProps, 'type'>, 
             name={name}
             className={classNames.join(
                 className,
-                handleBasicClasses({ prefix: INPUT_NATIVE_CLASSNAME, theme }),
-                `${INPUT_NATIVE_CLASSNAME}--textarea`,
+                block({
+                    [`theme-${theme}`]: Boolean(theme),
+                    textarea: true,
+                }),
             )}
             ref={useMergeRefs(ref, textareaRef)}
             onChange={handleChange}

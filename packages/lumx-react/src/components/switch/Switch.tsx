@@ -4,7 +4,6 @@ import isEmpty from 'lodash/isEmpty';
 
 import { Alignment, InputHelper, InputLabel, Theme } from '@lumx/react';
 import { GenericProps, HasTheme, HasAriaDisabled } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { useId } from '@lumx/react/hooks/useId';
@@ -45,6 +44,7 @@ const COMPONENT_NAME = 'Switch';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-switch';
+const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -92,22 +92,21 @@ export const Switch = forwardRef<SwitchProps, HTMLDivElement>((props, ref) => {
             {...forwardedProps}
             className={classNames.join(
                 className,
-                handleBasicClasses({
-                    prefix: CLASSNAME,
-                    isChecked,
-                    isDisabled: isAnyDisabled,
-                    position,
-                    theme,
-                    isUnchecked: !isChecked,
+                block({
+                    'is-checked': isChecked,
+                    'is-disabled': isAnyDisabled,
+                    [`position-${position}`]: Boolean(position),
+                    [`theme-${theme}`]: Boolean(theme),
+                    'is-unchecked': !isChecked,
                 }),
             )}
         >
-            <div className={`${CLASSNAME}__input-wrapper`}>
+            <div className={element('input-wrapper')}>
                 <input
                     type="checkbox"
                     role="switch"
                     id={inputId}
-                    className={`${CLASSNAME}__input-native`}
+                    className={element('input-native')}
                     name={name}
                     value={value}
                     {...disabledStateProps}
@@ -119,19 +118,19 @@ export const Switch = forwardRef<SwitchProps, HTMLDivElement>((props, ref) => {
                     {...inputProps}
                 />
 
-                <div className={`${CLASSNAME}__input-placeholder`}>
-                    <div className={`${CLASSNAME}__input-background`} />
-                    <div className={`${CLASSNAME}__input-indicator`} />
+                <div className={element('input-placeholder')}>
+                    <div className={element('input-background')} />
+                    <div className={element('input-indicator')} />
                 </div>
             </div>
 
             {Children.count(children) > 0 && (
-                <div className={`${CLASSNAME}__content`}>
-                    <InputLabel htmlFor={inputId} theme={theme} className={`${CLASSNAME}__label`}>
+                <div className={element('content')}>
+                    <InputLabel htmlFor={inputId} theme={theme} className={element('label')}>
                         {children}
                     </InputLabel>
                     {!isEmpty(helper) && (
-                        <InputHelper id={`${inputId}-helper`} theme={theme} className={`${CLASSNAME}__helper`}>
+                        <InputHelper id={`${inputId}-helper`} theme={theme} className={element('helper')}>
                             {helper}
                         </InputHelper>
                     )}

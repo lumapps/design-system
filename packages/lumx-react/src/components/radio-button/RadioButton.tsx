@@ -2,7 +2,6 @@ import { ReactNode, SyntheticEvent, InputHTMLAttributes } from 'react';
 
 import { InputHelper, InputLabel, Theme } from '@lumx/react';
 import { GenericProps, HasTheme, HasAriaDisabled } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { useId } from '@lumx/react/hooks/useId';
@@ -45,6 +44,7 @@ const COMPONENT_NAME = 'RadioButton';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-radio-button';
+const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -91,19 +91,18 @@ export const RadioButton = forwardRef<RadioButtonProps, HTMLDivElement>((props, 
             {...forwardedProps}
             className={classNames.join(
                 className,
-                handleBasicClasses({
-                    isChecked,
-                    isDisabled: isAnyDisabled,
-                    isUnchecked: !isChecked,
-                    prefix: CLASSNAME,
-                    theme,
+                block({
+                    'is-checked': isChecked,
+                    'is-disabled': isAnyDisabled,
+                    'is-unchecked': !isChecked,
+                    [`theme-${theme}`]: Boolean(theme),
                 }),
             )}
         >
-            <div className={`${CLASSNAME}__input-wrapper`}>
+            <div className={element('input-wrapper')}>
                 <input
                     ref={inputRef}
-                    className={`${CLASSNAME}__input-native`}
+                    className={element('input-native')}
                     {...disabledStateProps}
                     id={inputId}
                     type="radio"
@@ -116,20 +115,20 @@ export const RadioButton = forwardRef<RadioButtonProps, HTMLDivElement>((props, 
                     {...inputProps}
                 />
 
-                <div className={`${CLASSNAME}__input-placeholder`}>
-                    <div className={`${CLASSNAME}__input-background`} />
-                    <div className={`${CLASSNAME}__input-indicator`} />
+                <div className={element('input-placeholder')}>
+                    <div className={element('input-background')} />
+                    <div className={element('input-indicator')} />
                 </div>
             </div>
 
-            <div className={`${CLASSNAME}__content`}>
+            <div className={element('content')}>
                 {label && (
-                    <InputLabel htmlFor={inputId} theme={theme} className={`${CLASSNAME}__label`}>
+                    <InputLabel htmlFor={inputId} theme={theme} className={element('label')}>
                         {label}
                     </InputLabel>
                 )}
                 {helper && (
-                    <InputHelper id={`${inputId}-helper`} theme={theme} className={`${CLASSNAME}__helper`}>
+                    <InputHelper id={`${inputId}-helper`} theme={theme} className={element('helper')}>
                         {helper}
                     </InputHelper>
                 )}

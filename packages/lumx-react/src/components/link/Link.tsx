@@ -1,6 +1,5 @@
 import { ColorVariant, ColorWithVariants, Icon, Typography } from '@lumx/react';
 import { GenericProps, HasAriaDisabled } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import { resolveColorWithVariants } from '@lumx/core/js/utils/_internal/color';
 import { classNames } from '@lumx/core/js/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
@@ -52,6 +51,7 @@ const COMPONENT_NAME = 'Link';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-link';
+const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * Link component.
@@ -83,15 +83,19 @@ export const Link = forwardRef<LinkProps, HTMLAnchorElement | HTMLButtonElement>
             {...disabledStateProps}
             className={classNames.join(
                 className,
-                handleBasicClasses({ prefix: CLASSNAME, color, colorVariant, hasTypography: !!typography }),
+                block({
+                    [`color-${color}`]: Boolean(color),
+                    [`color-variant-${colorVariant}`]: Boolean(colorVariant),
+                    'has-typography': !!typography,
+                }),
                 typography && classNames.typography(typography),
             )}
         >
             {wrapChildrenIconWithSpaces(
                 <>
-                    {leftIcon && <Icon icon={leftIcon} className={`${CLASSNAME}__left-icon`} />}
-                    {children && <span className={`${CLASSNAME}__content`}>{children}</span>}
-                    {rightIcon && <Icon icon={rightIcon} className={`${CLASSNAME}__right-icon`} />}
+                    {leftIcon && <Icon icon={leftIcon} className={element('left-icon')} />}
+                    {children && <span className={element('content')}>{children}</span>}
+                    {rightIcon && <Icon icon={rightIcon} className={element('right-icon')} />}
                 </>,
             )}
         </RawClickable>

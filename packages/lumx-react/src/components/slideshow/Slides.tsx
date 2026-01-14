@@ -3,7 +3,6 @@ import React, { Children } from 'react';
 import chunk from 'lodash/chunk';
 
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
@@ -57,6 +56,7 @@ const COMPONENT_NAME = 'Slideshow';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-slideshow';
+const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -119,25 +119,28 @@ export const Slides = forwardRef<SlidesProps, HTMLDivElement>((props, ref) => {
             id={id}
             ref={ref}
             {...forwardedProps}
-            className={classNames.join(className, handleBasicClasses({ prefix: CLASSNAME, theme }), {
-                [`${CLASSNAME}--fill-height`]: fillHeight,
-                [`${CLASSNAME}--group-by-${groupBy}`]: Boolean(groupBy),
-            })}
+            className={classNames.join(
+                className,
+                block({
+                    [`theme-${theme}`]: Boolean(theme),
+                    'fill-height': fillHeight,
+                    [`group-by-${groupBy}`]: Boolean(groupBy),
+                }),
+            )}
             aria-roledescription="carousel"
         >
             <div
                 id={slidesId}
-                className={`${CLASSNAME}__slides`}
+                className={element('slides')}
                 onMouseEnter={toggleAutoPlay}
                 onMouseLeave={toggleAutoPlay}
                 aria-live={isAutoPlaying ? 'off' : 'polite'}
             >
                 <div
                     ref={wrapperRef}
-                    className={classNames.join(
-                        `${CLASSNAME}__wrapper`,
-                        isScrollSnapEnabled && `${CLASSNAME}__wrapper--${slideMode}`,
-                    )}
+                    className={element('wrapper', {
+                        [`${slideMode}`]: isScrollSnapEnabled,
+                    })}
                     {...wrapperProps}
                 >
                     {groups.map((group, index) => (

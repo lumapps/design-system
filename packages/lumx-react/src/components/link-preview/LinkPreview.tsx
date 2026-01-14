@@ -11,7 +11,6 @@ import {
 } from '@lumx/react';
 
 import { GenericProps, HeadingElement, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
@@ -48,6 +47,7 @@ const COMPONENT_NAME = 'LinkPreview';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-link-preview';
+const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -81,6 +81,7 @@ export const LinkPreview = forwardRef<LinkPreviewProps, HTMLDivElement>((props, 
     } = props;
     // Use title heading as title wrapper (see DEFAULT_PROPS for the default value).
     const TitleHeading = titleHeading as HeadingElement;
+    const adjustedSize = size === Size.big && thumbnailProps ? Size.big : Size.regular;
 
     return (
         <article
@@ -88,16 +89,15 @@ export const LinkPreview = forwardRef<LinkPreviewProps, HTMLDivElement>((props, 
             {...forwardedProps}
             className={classNames.join(
                 className,
-                handleBasicClasses({
-                    prefix: CLASSNAME,
-                    size: size === Size.big && thumbnailProps ? Size.big : Size.regular,
-                    theme,
+                block({
+                    [`size-${adjustedSize}`]: Boolean(adjustedSize),
+                    [`theme-${theme}`]: Boolean(theme),
                 }),
             )}
         >
-            <div className={`${CLASSNAME}__wrapper`}>
+            <div className={element('wrapper')}>
                 {thumbnailProps && (
-                    <div className={`${CLASSNAME}__thumbnail`}>
+                    <div className={element('thumbnail')}>
                         <Thumbnail
                             {...thumbnailProps}
                             linkAs={linkAs}
@@ -114,9 +114,9 @@ export const LinkPreview = forwardRef<LinkPreviewProps, HTMLDivElement>((props, 
                     </div>
                 )}
 
-                <div className={`${CLASSNAME}__container`}>
+                <div className={element('container')}>
                     {title && (
-                        <TitleHeading className={`${CLASSNAME}__title`}>
+                        <TitleHeading className={element('title')}>
                             <Link
                                 {...linkProps}
                                 linkAs={linkAs}
@@ -130,13 +130,13 @@ export const LinkPreview = forwardRef<LinkPreviewProps, HTMLDivElement>((props, 
                         </TitleHeading>
                     )}
 
-                    {description && <p className={`${CLASSNAME}__description`}>{description}</p>}
+                    {description && <p className={element('description')}>{description}</p>}
 
-                    <div className={`${CLASSNAME}__link`}>
+                    <div className={element('link')}>
                         <Link
                             {...linkProps}
                             linkAs={linkAs}
-                            className={classNames.join(`${CLASSNAME}__link`, linkProps?.className)}
+                            className={classNames.join(element('link'), linkProps?.className)}
                             target="_blank"
                             href={link}
                             color={theme === Theme.light ? ColorPalette.primary : ColorPalette.light}

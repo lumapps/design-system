@@ -1,5 +1,4 @@
 import { ColorPalette, Size, Theme } from '../../constants';
-import { handleBasicClasses } from '../../utils/_internal/className';
 import type { LumxClassName, GenericProps, HasTheme, JSXElement, NestedComponents } from '../../types';
 import { classNames } from '../../utils';
 import { Icon } from '../Icon';
@@ -18,6 +17,7 @@ export interface FlagProps extends GenericProps, HasTheme {
 export const COMPONENT_NAME = 'Flag';
 export const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-flag';
 export const DEFAULT_PROPS: Partial<FlagProps> = {};
+export const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * Flag component.
@@ -36,11 +36,14 @@ export const Flag = (props: FlagProps, nestedComponents?: NestedComponents) => {
             {...forwardedProps}
             className={classNames.join(
                 className,
-                handleBasicClasses({ prefix: CLASSNAME, color: flagColor, isTruncated }),
+                block({
+                    [`color-${flagColor}`]: Boolean(flagColor),
+                    'is-truncated': isTruncated,
+                }),
             )}
         >
-            {icon && Icon({ icon, size: Size.xxs, className: `${CLASSNAME}__icon` })}
-            <Text as="span" truncate={!!props.truncate} typography="overline" className={`${CLASSNAME}__label`}>
+            {icon && Icon({ icon, size: Size.xxs, className: element('icon') })}
+            <Text as="span" truncate={!!props.truncate} typography="overline" className={element('label')}>
                 {children}
             </Text>
         </div>

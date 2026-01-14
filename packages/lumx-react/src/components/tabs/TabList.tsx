@@ -2,7 +2,6 @@ import React, { ReactNode } from 'react';
 
 import { Alignment, Theme } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import { classNames } from '@lumx/core/js/utils';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
@@ -10,6 +9,8 @@ import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
 import { useRovingTabIndex } from '../../hooks/useRovingTabIndex';
 import { TABS_CLASSNAME as CLASSNAME } from './constants';
+
+const { block, element } = classNames.bem(CLASSNAME);
 
 export enum TabListLayout {
     clustered = 'clustered',
@@ -75,9 +76,16 @@ export const TabList = forwardRef<TabListProps, HTMLDivElement>((props, ref) => 
         <div
             ref={mergeRefs(ref, tabListRef)}
             {...forwardedProps}
-            className={classNames.join(className, handleBasicClasses({ prefix: CLASSNAME, layout, position, theme }))}
+            className={classNames.join(
+                className,
+                block({
+                    [`layout-${layout}`]: Boolean(layout),
+                    [`position-${position}`]: Boolean(position),
+                    [`theme-${theme}`]: Boolean(theme),
+                }),
+            )}
         >
-            <div className={`${CLASSNAME}__links`} role="tablist" aria-label={ariaLabel}>
+            <div className={element('links')} role="tablist" aria-label={ariaLabel}>
                 {children}
             </div>
         </div>

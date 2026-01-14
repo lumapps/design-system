@@ -5,7 +5,6 @@ import set from 'lodash/set';
 
 import { Avatar, ColorPalette, Link, Orientation, Size, Theme, Text } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
@@ -63,6 +62,7 @@ const COMPONENT_NAME = 'UserBlock';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-user-block';
+const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -121,7 +121,7 @@ export const UserBlock = forwardRef<UserBlockProps, HTMLDivElement>((props, ref)
         let NameComponent: any = 'span';
         const nProps: any = {
             ...nameProps,
-            className: classNames.join(`${CLASSNAME}__name`, linkProps?.className, nameProps?.className),
+            className: classNames.join(element('name'), linkProps?.className, nameProps?.className),
         };
         if (isClickable) {
             NameComponent = Link;
@@ -146,9 +146,9 @@ export const UserBlock = forwardRef<UserBlockProps, HTMLDivElement>((props, ref)
     const shouldDisplayFields = componentSize !== Size.s && componentSize !== Size.xs;
 
     const fieldsBlock: ReactNode = fields && shouldDisplayFields && (
-        <div className={`${CLASSNAME}__fields`}>
+        <div className={element('fields')}>
             {fields.map((field: string, idx: number) => (
-                <Text as="span" key={idx} className={`${CLASSNAME}__field`}>
+                <Text as="span" key={idx} className={element('field')}>
                     {field}
                 </Text>
             ))}
@@ -161,7 +161,12 @@ export const UserBlock = forwardRef<UserBlockProps, HTMLDivElement>((props, ref)
             {...forwardedProps}
             className={classNames.join(
                 className,
-                handleBasicClasses({ prefix: CLASSNAME, orientation, size: componentSize, theme, isClickable }),
+                block({
+                    [`orientation-${orientation}`]: Boolean(orientation),
+                    [`size-${componentSize}`]: Boolean(componentSize),
+                    [`theme-${theme}`]: Boolean(theme),
+                    'is-clickable': isClickable,
+                }),
             )}
             onMouseLeave={onMouseLeave}
             onMouseEnter={onMouseEnter}
@@ -172,24 +177,22 @@ export const UserBlock = forwardRef<UserBlockProps, HTMLDivElement>((props, ref)
                     linkProps={linkProps}
                     alt=""
                     {...(avatarProps as any)}
-                    className={classNames.join(`${CLASSNAME}__avatar`, avatarProps.className)}
+                    className={classNames.join(element('avatar'), avatarProps.className)}
                     size={componentSize}
                     onClick={onClick}
                     theme={theme}
                 />
             )}
             {(fields || name || children || additionalFields) && (
-                <div className={`${CLASSNAME}__wrapper`}>
+                <div className={element('wrapper')}>
                     {children || nameBlock}
                     {fieldsBlock}
                     {shouldDisplayFields ? additionalFields : null}
                 </div>
             )}
-            {shouldDisplayActions && simpleAction && <div className={`${CLASSNAME}__action`}>{simpleAction}</div>}
-            {shouldDisplayActions && multipleActions && (
-                <div className={`${CLASSNAME}__actions`}>{multipleActions}</div>
-            )}
-            {after ? <div className={`${CLASSNAME}__after`}>{after}</div> : null}
+            {shouldDisplayActions && simpleAction && <div className={element('action')}>{simpleAction}</div>}
+            {shouldDisplayActions && multipleActions && <div className={element('actions')}>{multipleActions}</div>}
+            {after ? <div className={element('after')}>{after}</div> : null}
         </div>
     );
 });

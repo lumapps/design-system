@@ -1,8 +1,7 @@
+/** eslint-disable prettier/prettier */
 import { Mock } from 'vitest';
-import camelCase from 'lodash/camelCase';
 
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
-import { getBasicClass } from '@lumx/core/js/utils/_internal/className';
 import { render, screen } from '@testing-library/react';
 import {
     getByClassName,
@@ -89,23 +88,20 @@ describe(`<${TextField.displayName}>`, () => {
                 label: 'test',
                 placeholder: 'test',
             };
-            const hasProps = ['icon', 'label', 'placeholder'];
             const { element } = setup(modifiedProps);
 
-            for (const [prop, value] of Object.entries(modifiedProps)) {
-                const propType = hasProps.includes(prop) ? camelCase(`has-${prop}`) : prop;
-                const propValue = hasProps.includes(prop) ? true : value;
-                expect(element).toHaveClass(getBasicClass({ prefix: CLASSNAME, type: propType, value: propValue }));
-            }
+            expect(element.className).toEqual(
+                'lumx-text-field lumx-text-field--has-icon lumx-text-field--has-input lumx-text-field--has-label lumx-text-field--has-placeholder lumx-text-field--is-disabled lumx-text-field--is-valid lumx-text-field--theme-light',
+            );
         });
 
         it('should add "has-error" class name', () => {
             const modifiedProps = { hasError: true };
             const { element } = setup(modifiedProps);
 
-            for (const [prop, value] of Object.entries(modifiedProps)) {
-                expect(element).toHaveClass(getBasicClass({ prefix: CLASSNAME, type: prop, value }));
-            }
+            expect(element.className).toEqual(
+                'lumx-text-field lumx-text-field--has-error lumx-text-field--has-input lumx-text-field--theme-light',
+            );
         });
 
         it('should have text as value', () => {

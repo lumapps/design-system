@@ -1,6 +1,5 @@
 import { Alignment, Orientation, Size } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
@@ -34,6 +33,7 @@ const COMPONENT_NAME = 'Grid';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-grid';
+const { block } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -68,10 +68,14 @@ export const Grid = forwardRef<GridProps, HTMLDivElement>((props, ref) => {
             {...forwardedProps}
             className={classNames.join(
                 className,
-                `${CLASSNAME}-container`,
-                { [`${CLASSNAME}--h-align-${hAlign}`]: hAlign },
-                { [`${CLASSNAME}--v-align-${vAlign}`]: vAlign },
-                handleBasicClasses({ prefix: CLASSNAME, orientation, wrap, gutter }),
+                classNames.bem(`${CLASSNAME}-container`).block(),
+                block({
+                    [`h-align-${hAlign}`]: Boolean(hAlign),
+                    [`v-align-${vAlign}`]: Boolean(vAlign),
+                    [`orientation-${orientation}`]: Boolean(orientation),
+                    [`wrap-${wrap}`]: Boolean(wrap),
+                    [`gutter-${gutter}`]: Boolean(gutter),
+                }),
             )}
         >
             {children}

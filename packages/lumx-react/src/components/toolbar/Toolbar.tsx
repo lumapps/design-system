@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 
 import { GenericProps } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
@@ -27,6 +26,7 @@ const COMPONENT_NAME = 'Toolbar';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-toolbar';
+const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -49,17 +49,16 @@ export const Toolbar = forwardRef<ToolbarProps, HTMLDivElement>((props, ref) => 
             {...forwardedProps}
             className={classNames.join(
                 className,
-                handleBasicClasses({
-                    hasAfter: Boolean(after),
-                    hasBefore: Boolean(before),
-                    hasLabel: Boolean(label),
-                    prefix: CLASSNAME,
+                block({
+                    'has-after': Boolean(after),
+                    'has-before': Boolean(before),
+                    'has-label': Boolean(label),
                 }),
             )}
         >
-            {before && <div className={`${CLASSNAME}__before`}>{before}</div>}
-            {label && <div className={`${CLASSNAME}__label`}>{label}</div>}
-            {after && <div className={`${CLASSNAME}__after`}>{after}</div>}
+            {before && <div className={element('before')}>{before}</div>}
+            {label && <div className={element('label')}>{label}</div>}
+            {after && <div className={element('after')}>{after}</div>}
         </div>
     );
 });

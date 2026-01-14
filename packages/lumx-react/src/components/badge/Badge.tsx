@@ -2,7 +2,6 @@ import { ReactNode } from 'react';
 
 import { ColorPalette } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
@@ -26,6 +25,7 @@ const COMPONENT_NAME = 'Badge';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-badge';
+const { block } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -47,7 +47,12 @@ export const Badge = forwardRef<BadgeProps, HTMLDivElement>((props, ref) => {
         <div
             ref={ref}
             {...forwardedProps}
-            className={classNames.join(className, handleBasicClasses({ prefix: CLASSNAME, color }))}
+            className={classNames.join(
+                className,
+                block({
+                    [`color-${color}`]: Boolean(color),
+                }),
+            )}
         >
             {children}
         </div>

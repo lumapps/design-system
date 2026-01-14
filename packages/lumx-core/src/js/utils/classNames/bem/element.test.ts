@@ -16,4 +16,14 @@ describe(element, () => {
         expect(result).toContain('my-button__icon--visible');
         expect(result).not.toContain('my-button__icon--disabled');
     });
+
+    it('should generate element class with additional classes', () => {
+        expect(element('my-button', 'icon', ['class-a'])).toBe('class-a my-button__icon');
+    });
+
+    it('should generate element class with modifiers and additional classes', () => {
+        expect(element('my-button', 'icon', { active: true }, ['class-a'])).toBe(
+            'class-a my-button__icon my-button__icon--active',
+        );
+    });
 });

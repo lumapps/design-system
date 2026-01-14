@@ -3,7 +3,6 @@ import React, { ReactNode, useState } from 'react';
 
 import { DOCUMENT } from '@lumx/react/constants';
 import { GenericProps, HasCloseMode } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
@@ -48,6 +47,7 @@ const COMPONENT_NAME = 'Tooltip';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-tooltip';
+const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -138,18 +138,17 @@ export const Tooltip = forwardRef<TooltipProps, HTMLDivElement>((props, ref) => 
                         role="tooltip"
                         className={classNames.join(
                             className,
-                            handleBasicClasses({
-                                prefix: CLASSNAME,
-                                position,
-                                isInitializing: !styles.popper?.transform,
+                            block({
+                                [`position-${position}`]: Boolean(position),
+                                'is-initializing': !styles.popper?.transform,
                             }),
                             isHidden && classNames.visuallyHidden(),
                         )}
                         style={{ ...(isHidden ? undefined : styles.popper), zIndex }}
                         {...attributes.popper}
                     >
-                        <div className={`${CLASSNAME}__arrow`} />
-                        <div className={`${CLASSNAME}__inner`}>
+                        <div className={element('arrow')} />
+                        <div className={element('inner')}>
                             {labelLines.map((line) => (
                                 <p key={line}>{line}</p>
                             ))}

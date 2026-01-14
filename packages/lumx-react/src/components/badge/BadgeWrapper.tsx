@@ -21,14 +21,15 @@ const COMPONENT_NAME = 'BadgeWrapper';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-badge-wrapper';
+const { block, element } = classNames.bem(CLASSNAME);
 
 export const BadgeWrapper = forwardRef<BadgeWrapperProps, HTMLDivElement>((props, ref) => {
     const { badge, children, className, ...forwardedProps } = props;
 
     return (
-        <div ref={ref} {...forwardedProps} className={classNames.join(className, CLASSNAME)}>
+        <div ref={ref} {...forwardedProps} className={classNames.join(className, block())}>
             {children}
-            {badge && <div className={`${CLASSNAME}__badge`}>{badge}</div>}
+            {badge && <div className={element('badge')}>{badge}</div>}
         </div>
     );
 });

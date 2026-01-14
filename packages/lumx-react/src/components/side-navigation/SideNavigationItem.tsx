@@ -5,7 +5,6 @@ import isEmpty from 'lodash/isEmpty';
 import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
 import { Emphasis, Icon, Size, IconButton, IconButtonProps } from '@lumx/react';
 import { GenericProps, HasCloseMode, isComponent } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { useId } from '@lumx/react/hooks/useId';
@@ -50,6 +49,7 @@ const COMPONENT_NAME = 'SideNavigationItem';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-side-navigation-item';
+const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -103,29 +103,28 @@ export const SideNavigationItem = forwardRef<SideNavigationItemProps, HTMLLIElem
             {...forwardedProps}
             className={classNames.join(
                 className,
-                handleBasicClasses({
-                    emphasis,
-                    isOpen: showChildren,
-                    isSelected,
-                    prefix: CLASSNAME,
+                block({
+                    [`emphasis-${emphasis}`]: Boolean(emphasis),
+                    'is-open': showChildren,
+                    'is-selected': isSelected,
                 }),
             )}
         >
             {shouldSplitActions ? (
-                <div className={`${CLASSNAME}__wrapper`}>
+                <div className={element('wrapper')}>
                     <RawClickable
                         as={linkAs || (linkProps?.href ? 'a' : 'button')}
                         {...(linkProps as any)}
-                        className={`${CLASSNAME}__link`}
+                        className={element('link')}
                         onClick={onClick}
                     >
-                        {icon && <Icon className={`${CLASSNAME}__icon`} icon={icon} size={Size.xs} />}
+                        {icon && <Icon className={element('icon')} icon={icon} size={Size.xs} />}
                         <span>{label}</span>
                     </RawClickable>
 
                     <IconButton
                         {...toggleButtonProps}
-                        className={`${CLASSNAME}__toggle`}
+                        className={element('toggle')}
                         icon={isOpen ? mdiChevronUp : mdiChevronDown}
                         size={Size.m}
                         emphasis={Emphasis.low}
@@ -137,15 +136,15 @@ export const SideNavigationItem = forwardRef<SideNavigationItemProps, HTMLLIElem
                 <RawClickable
                     as={linkAs || (linkProps?.href ? 'a' : 'button')}
                     {...linkProps}
-                    className={`${CLASSNAME}__link`}
+                    className={element('link')}
                     onClick={onClick}
                     {...ariaProps}
                 >
-                    {icon && <Icon className={`${CLASSNAME}__icon`} icon={icon} size={Size.xs} />}
+                    {icon && <Icon className={element('icon')} icon={icon} size={Size.xs} />}
                     <span>{label}</span>
                     {hasContent && (
                         <Icon
-                            className={`${CLASSNAME}__chevron`}
+                            className={element('chevron')}
                             icon={isOpen ? mdiChevronUp : mdiChevronDown}
                             size={Size.xs}
                         />
@@ -154,7 +153,7 @@ export const SideNavigationItem = forwardRef<SideNavigationItemProps, HTMLLIElem
             )}
 
             {(closeMode === 'hide' || showChildren) && (
-                <ul className={`${CLASSNAME}__children`} id={contentId}>
+                <ul className={element('children')} id={contentId}>
                     {content}
                 </ul>
             )}
