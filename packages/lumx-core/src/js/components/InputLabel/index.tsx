@@ -1,4 +1,3 @@
-import { handleBasicClasses } from '../../utils/_internal/className';
 import { classNames } from '../../utils';
 import { LumxClassName, GenericProps, HasTheme, JSXElement } from '../../types';
 import { Typography } from '../../constants';
@@ -16,6 +15,7 @@ export interface InputLabelProps extends GenericProps, HasTheme {
 
 const COMPONENT_NAME = 'InputLabel';
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-input-label';
+const { block } = classNames.bem(CLASSNAME);
 const DEFAULT_PROPS: Partial<InputLabelProps> = {};
 
 export const InputLabel = (props: InputLabelProps) => {
@@ -28,11 +28,10 @@ export const InputLabel = (props: InputLabelProps) => {
             htmlFor={htmlFor}
             className={classNames.join(
                 className,
-                handleBasicClasses({
-                    prefix: CLASSNAME,
-                    isRequired,
-                    theme,
-                    hasCustomTypography: Boolean(typography),
+                block({
+                    'is-required': isRequired,
+                    [`theme-${theme}`]: Boolean(theme),
+                    'has-custom-typography': Boolean(typography),
                 }),
                 typography && classNames.typography(typography),
             )}

@@ -1,6 +1,5 @@
 import { mdiAlertCircle } from '@lumx/icons';
 
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import { resolveColorWithVariants } from '@lumx/core/js/utils/_internal/color';
 import type { LumxClassName, GenericProps, HasTheme } from '../../types';
 import { classNames } from '../../utils';
@@ -39,6 +38,7 @@ const COMPONENT_NAME = 'Icon';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-icon';
+const { block } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -97,20 +97,18 @@ export const Icon = (props: IconProps) => {
             {...forwardedProps}
             className={classNames.join(
                 className,
-                handleBasicClasses({
-                    color: iconColor,
-                    colorVariant: iconColorVariant,
-                    hasShape,
-                    prefix: CLASSNAME,
-                    theme,
-                    size: iconSize,
+                block({
+                    [`color-${iconColor}`]: Boolean(iconColor),
+                    [`color-variant-${iconColorVariant}`]: Boolean(iconColorVariant),
+                    'has-shape': hasShape,
+                    [`theme-${theme}`]: Boolean(theme),
+                    [`size-${iconSize}`]: Boolean(iconSize),
+                    'no-shape': !hasShape,
+                    'has-dark-layer': Boolean(
+                        !hasShape && iconColor === ColorPalette.yellow && icon === mdiAlertCircle,
+                    ),
+                    path: true,
                 }),
-                !hasShape && `${CLASSNAME}--no-shape`,
-                !hasShape &&
-                    iconColor === ColorPalette.yellow &&
-                    icon === mdiAlertCircle &&
-                    `${CLASSNAME}--has-dark-layer`,
-                `${CLASSNAME}--path`,
             )}
         >
             <svg
