@@ -1,11 +1,12 @@
 import { Theme } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import { classNames } from '@lumx/core/js/utils';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { CLASSNAME, COMPONENT_NAME } from './constants';
+
+const { block } = classNames.bem(CLASSNAME);
 
 /**
  * Defines the props of the component.
@@ -41,7 +42,11 @@ export const Table = forwardRef<TableProps, HTMLTableElement>((props, ref) => {
             {...forwardedProps}
             className={classNames.join(
                 className,
-                handleBasicClasses({ prefix: CLASSNAME, hasBefore, hasDividers, theme }),
+                block({
+                    'has-before': hasBefore,
+                    'has-dividers': hasDividers,
+                    [`theme-${theme}`]: Boolean(theme),
+                }),
             )}
         >
             {children}

@@ -13,15 +13,33 @@ import { modifier, type Modifier } from './modifier';
  * block('button'); // 'button'
  * block('button', { active: true, disabled: false }); // 'button button--active'
  */
-export function block(baseName: string, modifiers?: Modifier) {
-    if (!modifiers) {
+export function block(baseName: string, additionalClasses: string[]): string;
+export function block(baseName: string, modifiers?: Modifier, additionalClasses?: string[]): string;
+export function block(
+    baseName: string,
+    modifiersOrAdditionalClasses?: Modifier | string[],
+    additionalClasses?: string[],
+) {
+    let modifiers: Modifier | undefined;
+    let classes: string[] | undefined;
+
+    if (Array.isArray(modifiersOrAdditionalClasses)) {
+        classes = modifiersOrAdditionalClasses;
+    } else {
+        modifiers = modifiersOrAdditionalClasses;
+        classes = additionalClasses;
+    }
+
+    if (!modifiers && !classes) {
         return baseName;
     }
 
     return classnames(
+        // Additional classes
+        classes,
         // Base class
         baseName,
         // Modifier(s)
-        modifier(baseName, modifiers),
+        modifiers ? modifier(baseName, modifiers) : null,
     );
 }

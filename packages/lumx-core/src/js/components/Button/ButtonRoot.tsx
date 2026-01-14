@@ -1,5 +1,4 @@
 import { ColorPalette, Emphasis, Size, Theme } from '../../constants';
-import { handleBasicClasses } from '../../utils/_internal/className';
 import { classNames } from '../../utils';
 import { GenericProps, HasTheme, HasAriaDisabled, AriaAttributes, CommonRef } from '../../types';
 import { RawClickable } from '../RawClickable';
@@ -48,7 +47,10 @@ export interface ButtonRootProps extends BaseButtonProps {
 const COMPONENT_NAME = 'ButtonRoot';
 
 export const BUTTON_WRAPPER_CLASSNAME = `lumx-button-wrapper`;
+const { block: buttonWrapperBlock } = classNames.bem(BUTTON_WRAPPER_CLASSNAME);
+
 export const BUTTON_CLASSNAME = `lumx-button`;
+const { block: buttonBlock } = classNames.bem(BUTTON_CLASSNAME);
 
 /**
  * Render a button wrapper with the ButtonRoot inside.
@@ -62,14 +64,11 @@ const renderButtonWrapper = (props: ButtonRootProps) => {
     const adaptedColor =
         emphasis === Emphasis.low && (color === ColorPalette.light ? ColorPalette.dark : ColorPalette.light);
 
-    const wrapperClassName = classNames.join(
-        handleBasicClasses({
-            color: adaptedColor,
-            prefix: BUTTON_WRAPPER_CLASSNAME,
-            variant,
-            fullWidth,
-        }),
-    );
+    const wrapperClassName = buttonWrapperBlock({
+        [`color-${adaptedColor}`]: Boolean(adaptedColor),
+        [`variant-${variant}`]: Boolean(variant),
+        'is-full-width': fullWidth,
+    });
     const buttonProps = { ...props, hasBackground: false };
 
     return (
@@ -120,19 +119,18 @@ export const ButtonRoot = (props: ButtonRootProps) => {
 
     const buttonClassName = classNames.join(
         className,
-        handleBasicClasses({
-            color: adaptedColor,
-            emphasis,
-            isSelected,
-            isDisabled: props.isDisabled || props['aria-disabled'],
-            isActive,
-            isFocused,
-            isHovered,
-            prefix: BUTTON_CLASSNAME,
-            size,
-            theme: emphasis === Emphasis.high && theme,
-            variant,
-            fullWidth,
+        buttonBlock({
+            [`color-${adaptedColor}`]: Boolean(adaptedColor),
+            [`emphasis-${emphasis}`]: Boolean(emphasis),
+            'is-selected': isSelected,
+            'is-disabled': Boolean(props.isDisabled || props['aria-disabled']),
+            'is-active': isActive,
+            'is-focused': isFocused,
+            'is-hovered': isHovered,
+            [`size-${size}`]: Boolean(size),
+            [`theme-${theme}`]: Boolean(emphasis === Emphasis.high && theme),
+            [`variant-${variant}`]: Boolean(variant),
+            'is-full-width': fullWidth,
         }),
     );
 

@@ -5,10 +5,13 @@ import { FlexBox, IconButton, Slides, SlideshowControls } from '@lumx/react';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 
 import memoize from 'lodash/memoize';
+import { classNames } from '@lumx/core/js/utils';
 import { ImageCaption } from '../../image-block/ImageCaption';
 import { CLASSNAME } from '../constants';
 import type { ImagesProps, InheritedSlideShowProps, ZoomButtonProps } from '../types';
 import { ImageSlide } from './ImageSlide';
+
+const { element } = classNames.bem(CLASSNAME);
 
 export interface ImageSlideshowProps extends InheritedSlideShowProps, ZoomButtonProps, ImagesProps {
     currentPaginationItemRef?: React.Ref<HTMLButtonElement>;
@@ -144,16 +147,10 @@ export const ImageSlideshow: React.FC<ImageSlideshowProps> = ({
                 })}
             </Slides>
             {(metadata || slideShowControls || zoomControls) && (
-                <FlexBox
-                    ref={footerRef}
-                    className={`${CLASSNAME}__footer`}
-                    orientation="vertical"
-                    vAlign="center"
-                    gap="big"
-                >
+                <FlexBox ref={footerRef} className={element('footer')} orientation="vertical" vAlign="center" gap="big">
                     {metadata}
 
-                    <FlexBox className={`${CLASSNAME}__footer-actions`} orientation="horizontal" gap="regular">
+                    <FlexBox className={element('footer-actions')} orientation="horizontal" gap="regular">
                         {slideShowControls}
                         {zoomControls}
                     </FlexBox>

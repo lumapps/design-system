@@ -2,7 +2,6 @@ import React, { MouseEventHandler } from 'react';
 
 import { AspectRatio, Icon, Size, Theme } from '@lumx/react';
 import { GenericProps, HasTheme, ValueOf, HasAriaDisabled } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
@@ -64,6 +63,7 @@ const COMPONENT_NAME = 'Uploader';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-uploader';
+const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -134,30 +134,29 @@ export const Uploader = forwardRef<UploaderProps>((props, ref) => {
             onClick={handleClick}
             className={classNames.join(
                 className,
-                handleBasicClasses({
-                    aspectRatio: adjustedAspectRatio,
-                    prefix: CLASSNAME,
-                    size,
-                    theme,
-                    variant,
-                    isDragHovering,
-                    isDisabled: isAnyDisabled,
+                block({
+                    [`aspect-ratio-${adjustedAspectRatio}`]: Boolean(adjustedAspectRatio),
+                    [`size-${size}`]: Boolean(size),
+                    [`theme-${theme}`]: Boolean(theme),
+                    [`variant-${variant}`]: Boolean(variant),
+                    'is-drag-hovering': isDragHovering,
+                    'is-disabled': isAnyDisabled,
                 }),
             )}
         >
-            <span className={`${CLASSNAME}__background`} />
+            <span className={element('background')} />
 
-            <span className={`${CLASSNAME}__wrapper`}>
-                {icon && <Icon className={`${CLASSNAME}__icon`} icon={icon} size={Size.s} />}
+            <span className={element('wrapper')}>
+                {icon && <Icon className={element('icon')} icon={icon} size={Size.s} />}
 
-                {label && <span className={`${CLASSNAME}__label`}>{label}</span>}
+                {label && <span className={element('label')}>{label}</span>}
             </span>
 
             {fileInputProps && (
                 <input
                     type="file"
                     id={inputId}
-                    className={`${CLASSNAME}__input ${classNames.visuallyHidden()}`}
+                    className={classNames.join(element('input'), classNames.visuallyHidden())}
                     {...disabledStateProps}
                     {...fileInputProps}
                     readOnly={isAnyDisabled}

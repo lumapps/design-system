@@ -1,6 +1,5 @@
 import { Theme, Size } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
@@ -35,6 +34,7 @@ const COMPONENT_NAME = 'ProgressCircular';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-progress-circular';
+const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -66,13 +66,20 @@ export const ProgressCircular = forwardRef<ProgressCircularProps, HTMLDivElement
         <Element
             ref={ref}
             {...forwardedProps}
-            className={classNames.join(className, handleBasicClasses({ prefix: CLASSNAME, theme, size, display }))}
+            className={classNames.join(
+                className,
+                block({
+                    [`theme-${theme}`]: Boolean(theme),
+                    [`size-${size}`]: Boolean(size),
+                    [`display-${display}`]: Boolean(display),
+                }),
+            )}
         >
-            <Element className="lumx-progress-circular__double-bounce1" />
-            <Element className="lumx-progress-circular__double-bounce2" />
+            <Element className={element('double-bounce1')} />
+            <Element className={element('double-bounce2')} />
 
-            <svg className="lumx-progress-circular__svg" viewBox="25 25 50 50">
-                <circle className="lumx-progress-circular__path" cx="50" cy="50" r="20" fill="none" strokeWidth="5" />
+            <svg className={element('svg')} viewBox="25 25 50 50">
+                <circle className={element('path')} cx="50" cy="50" r="20" fill="none" strokeWidth="5" />
             </svg>
         </Element>
     );

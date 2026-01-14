@@ -3,7 +3,6 @@ import { ReactNode } from 'react';
 import { Alignment, HorizontalAlignment, Size, Theme, Thumbnail } from '@lumx/react';
 
 import { GenericProps, HasTheme, ValueOf } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
@@ -57,6 +56,7 @@ const COMPONENT_NAME = 'ImageBlock';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-image-block';
+const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -100,19 +100,18 @@ export const ImageBlock = forwardRef<ImageBlockProps, HTMLDivElement>((props, re
             {...forwardedProps}
             className={classNames.join(
                 className,
-                handleBasicClasses({
-                    prefix: CLASSNAME,
-                    captionPosition,
-                    align,
-                    size,
-                    theme,
+                block({
+                    [`caption-position-${captionPosition}`]: Boolean(captionPosition),
+                    [`align-${align}`]: Boolean(align),
+                    [`size-${size}`]: Boolean(size),
+                    [`theme-${theme}`]: Boolean(theme),
+                    'fill-height': fillHeight,
                 }),
-                fillHeight && `${CLASSNAME}--fill-height`,
             )}
         >
             <Thumbnail
                 {...thumbnailProps}
-                className={classNames.join(`${CLASSNAME}__image`, thumbnailProps?.className)}
+                className={classNames.join(element('image'), thumbnailProps?.className)}
                 fillHeight={fillHeight}
                 align={align}
                 image={image}
@@ -133,7 +132,7 @@ export const ImageBlock = forwardRef<ImageBlockProps, HTMLDivElement>((props, re
                 align={align}
                 truncate={captionPosition === 'over'}
             />
-            {actions && <div className={`${CLASSNAME}__actions`}>{actions}</div>}
+            {actions && <div className={element('actions')}>{actions}</div>}
         </figure>
     );
 });

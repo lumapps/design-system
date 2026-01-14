@@ -6,7 +6,6 @@ import isEmpty from 'lodash/isEmpty';
 
 import { ColorPalette, DragHandle, Emphasis, IconButton, IconButtonProps, Theme } from '@lumx/react';
 import { GenericProps, HasCloseMode, HasTheme, isComponent } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { partitionMulti } from '@lumx/react/utils/partitionMulti';
@@ -48,6 +47,7 @@ const COMPONENT_NAME = 'ExpansionPanel';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-expansion-panel';
+const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -95,7 +95,7 @@ export const ExpansionPanel = forwardRef<ExpansionPanelProps, HTMLDivElement>((p
     const headerContent = !isEmpty(headerProps.children) ? (
         headerProps.children
     ) : (
-        <span className={`${CLASSNAME}__label`}>{label}</span>
+        <span className={element('label')}>{label}</span>
     );
 
     const toggleOpen = (event: React.MouseEvent) => {
@@ -116,15 +116,14 @@ export const ExpansionPanel = forwardRef<ExpansionPanelProps, HTMLDivElement>((p
 
     const rootClassName = classNames.join(
         className,
-        handleBasicClasses({
-            hasBackground,
-            hasHeader: Boolean(!isEmpty(headerProps.children)),
-            hasHeaderDivider,
-            isClose: !isOpen,
-            isDraggable: Boolean(dragHandle),
-            isOpen,
-            prefix: CLASSNAME,
-            theme,
+        block({
+            'has-background': hasBackground,
+            'has-header': Boolean(!isEmpty(headerProps.children)),
+            'has-header-divider': hasHeaderDivider,
+            'is-close': !isOpen,
+            'is-draggable': Boolean(dragHandle),
+            'is-open': isOpen,
+            [`theme-${theme}`]: Boolean(theme),
         }),
     );
 
@@ -160,14 +159,14 @@ export const ExpansionPanel = forwardRef<ExpansionPanelProps, HTMLDivElement>((p
     return (
         <section ref={ref} {...forwardedProps} className={rootClassName}>
             {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
-            <header className={`${CLASSNAME}__header`} onClick={toggleOpen}>
-                {dragHandle && <div className={`${CLASSNAME}__header-drag`}>{dragHandle}</div>}
+            <header className={element('header')} onClick={toggleOpen}>
+                {dragHandle && <div className={element('header-drag')}>{dragHandle}</div>}
 
-                <div {...headerProps} className={`${CLASSNAME}__header-content`}>
+                <div {...headerProps} className={element('header-content')}>
                     {headerContent}
                 </div>
 
-                <div className={`${CLASSNAME}__header-toggle`}>
+                <div className={element('header-toggle')}>
                     <IconButton
                         {...toggleButtonProps}
                         color={color}
@@ -178,12 +177,12 @@ export const ExpansionPanel = forwardRef<ExpansionPanelProps, HTMLDivElement>((p
                 </div>
             </header>
 
-            <div className={`${CLASSNAME}__wrapper`} ref={wrapperRef}>
+            <div className={element('wrapper')} ref={wrapperRef}>
                 {(isOpen || isChildrenVisible) && (
-                    <div className={`${CLASSNAME}__container`}>
-                        <div className={`${CLASSNAME}__content`}>{content}</div>
+                    <div className={element('container')}>
+                        <div className={element('content')}>{content}</div>
 
-                        {footer && <div className={`${CLASSNAME}__footer`}>{footer}</div>}
+                        {footer && <div className={element('footer')}>{footer}</div>}
                     </div>
                 )}
             </div>

@@ -1,6 +1,5 @@
 import { Alignment } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
@@ -30,6 +29,7 @@ const COMPONENT_NAME = 'GridItem';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-grid-item';
+const { block } = classNames.bem(CLASSNAME);
 
 /**
  * GridItem component.
@@ -45,7 +45,14 @@ export const GridItem = forwardRef<GridItemProps, HTMLDivElement>((props, ref) =
         <div
             ref={ref}
             {...forwardedProps}
-            className={classNames.join(className, handleBasicClasses({ prefix: CLASSNAME, width, order, align }))}
+            className={classNames.join(
+                className,
+                block({
+                    [`width-${width}`]: Boolean(width),
+                    [`order-${order}`]: Boolean(order),
+                    [`align-${align}`]: Boolean(align),
+                }),
+            )}
         >
             {children}
         </div>

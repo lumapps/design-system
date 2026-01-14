@@ -11,7 +11,6 @@ import React, {
 
 import { AspectRatio, HorizontalAlignment, Icon, Size, Theme, ThumbnailObjectFit } from '@lumx/react';
 import { Falsy, GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { mdiImageBroken } from '@lumx/icons';
@@ -84,6 +83,7 @@ const COMPONENT_NAME = 'Thumbnail';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-thumbnail';
+const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -182,25 +182,24 @@ export const Thumbnail = forwardRef<ThumbnailProps>((props, ref) => {
             className={classNames.join(
                 linkProps?.className,
                 className,
-                handleBasicClasses({
-                    align,
-                    aspectRatio,
-                    prefix: CLASSNAME,
-                    size,
-                    theme,
-                    variant,
-                    isClickable,
-                    hasError,
-                    hasIconErrorFallback,
-                    hasCustomErrorFallback,
-                    isLoading,
-                    objectFit,
-                    hasBadge: !!badge,
+                block({
+                    [`align-${align}`]: Boolean(align),
+                    [`aspect-ratio-${aspectRatio}`]: Boolean(aspectRatio),
+                    [`size-${size}`]: Boolean(size),
+                    [`theme-${theme}`]: Boolean(theme),
+                    [`variant-${variant}`]: Boolean(variant),
+                    'is-clickable': isClickable,
+                    'has-error': hasError,
+                    'has-icon-error-fallback': hasIconErrorFallback,
+                    'has-custom-error-fallback': hasCustomErrorFallback,
+                    'is-loading': isLoading,
+                    [`object-fit-${objectFit}`]: Boolean(objectFit),
+                    'has-badge': !!badge,
+                    'fill-height': fillHeight,
                 }),
-                fillHeight && `${CLASSNAME}--fill-height`,
             )}
         >
-            <span className={`${CLASSNAME}__background`}>
+            <span className={element('background')}>
                 <img
                     // Use placeholder image size
                     width={loadingPlaceholderImage?.naturalWidth}
@@ -216,10 +215,9 @@ export const Thumbnail = forwardRef<ThumbnailProps>((props, ref) => {
                     }}
                     ref={useMergeRefs(setImgElement, propImgRef)}
                     className={classNames.join(
-                        handleBasicClasses({
-                            prefix: `${CLASSNAME}__image`,
-                            isLoading,
-                            hasDefinedSize: Boolean(imgProps?.height && imgProps.width),
+                        element('image', {
+                            'is-loading': isLoading,
+                            'has-defined-size': Boolean(imgProps?.height && imgProps.width),
                         }),
                         imgProps?.className,
                     )}
@@ -229,7 +227,7 @@ export const Thumbnail = forwardRef<ThumbnailProps>((props, ref) => {
                     loading={loading}
                 />
                 {!isLoading && hasError && (
-                    <span className={`${CLASSNAME}__fallback`}>
+                    <span className={element('fallback')}>
                         {hasIconErrorFallback ? (
                             <Icon icon={fallback as string} size={Size.xxs} theme={theme} />
                         ) : (
@@ -239,7 +237,9 @@ export const Thumbnail = forwardRef<ThumbnailProps>((props, ref) => {
                 )}
             </span>
             {badge &&
-                React.cloneElement(badge, { className: classNames.join(`${CLASSNAME}__badge`, badge.props.className) })}
+                React.cloneElement(badge, {
+                    className: classNames.join(element('badge'), badge.props.className),
+                })}
         </Wrapper>
     );
 });

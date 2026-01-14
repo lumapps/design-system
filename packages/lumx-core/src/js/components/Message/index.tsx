@@ -1,6 +1,5 @@
 import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiClose, mdiInformation } from '@lumx/icons';
 import { ColorPalette, Emphasis, Kind, Size } from '../../constants';
-import { handleBasicClasses } from '../../utils/_internal/className';
 import type { JSXElement, LumxClassName, GenericProps } from '../../types';
 import { classNames } from '../../utils';
 import { Icon } from '../Icon';
@@ -40,6 +39,7 @@ export const COMPONENT_NAME = 'Message';
  * Component default class name and class prefix.
  */
 export const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-message';
+export const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * Associative map from message kind to color and icon.
@@ -68,19 +68,18 @@ export const Message = (props: MessageProps) => {
             {...forwardedProps}
             className={classNames.join(
                 className,
-                handleBasicClasses({
-                    color,
-                    hasBackground,
-                    prefix: CLASSNAME,
+                block({
+                    [`color-${color}`]: Boolean(color),
+                    'has-background': hasBackground,
                 }),
             )}
         >
             {(customIcon || icon) &&
-                Icon({ className: `${CLASSNAME}__icon`, icon: customIcon || icon, size: Size.xs, color })}
-            <div className={`${CLASSNAME}__text`}>{children}</div>
+                Icon({ className: element('icon'), icon: customIcon || icon, size: Size.xs, color })}
+            <div className={element('text')}>{children}</div>
             {isCloseButtonDisplayed &&
                 IconButton({
-                    className: `${CLASSNAME}__close-button`,
+                    className: element('close-button'),
                     icon: mdiClose,
                     onClick,
                     label: closeButtonLabel,

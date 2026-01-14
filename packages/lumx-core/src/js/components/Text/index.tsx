@@ -1,4 +1,3 @@
-import { handleBasicClasses } from '../../utils/_internal/className';
 import { classNames } from '../../utils';
 import type { GenericProps, TextElement, LumxClassName, JSXElement } from '../../types';
 import { ColorWithVariants, ColorVariant, Typography, WhiteSpace } from '../../constants';
@@ -55,6 +54,7 @@ export const COMPONENT_NAME = 'Text';
  * Component default class name and class prefix.
  */
 export const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-text';
+export const { block } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -88,14 +88,13 @@ export const getTextProps = (props: TextProps) => {
     return {
         className: classNames.join(
             className,
-            handleBasicClasses({
-                prefix: CLASSNAME,
-                isTruncated: isTruncated && !isTruncatedMultiline,
-                isTruncatedMultiline,
+            block({
+                'is-truncated': isTruncated && !isTruncatedMultiline,
+                'is-truncated-multiline': isTruncatedMultiline,
+                'no-wrap': noWrap,
             }),
             typography && classNames.typography(typography),
             color && classNames.font(color, colorVariant),
-            noWrap && `${CLASSNAME}--no-wrap`,
         ),
         style: { ...truncateLinesStyle, ...whiteSpaceStyle, ...style },
     };

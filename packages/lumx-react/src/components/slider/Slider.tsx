@@ -4,7 +4,6 @@ import { SyntheticEvent, useMemo, useRef } from 'react';
 import { InputHelper, InputLabel, Theme } from '@lumx/react';
 import useEventCallback from '@lumx/react/hooks/useEventCallback';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { clamp } from '@lumx/react/utils/number/clamp';
@@ -52,6 +51,7 @@ const COMPONENT_NAME = 'Slider';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-slider';
+const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -239,38 +239,45 @@ export const Slider = forwardRef<SliderProps, HTMLDivElement>((props, ref) => {
             {...forwardedProps}
             className={classNames.join(
                 className,
-                handleBasicClasses({ prefix: CLASSNAME, theme, hasLabel: Boolean(label) }),
+                block({
+                    [`theme-${theme}`]: Boolean(theme),
+                    'has-label': Boolean(label),
+                }),
             )}
             onMouseDown={handleMouseDown}
         >
             {label && (
-                <InputLabel id={sliderLabelId} htmlFor={sliderId} className={`${CLASSNAME}__label`} theme={theme}>
+                <InputLabel id={sliderLabelId} htmlFor={sliderId} className={element('label')} theme={theme}>
                     {label}
                 </InputLabel>
             )}
 
             {helper && (
-                <InputHelper className={`${CLASSNAME}__helper`} theme={theme}>
+                <InputHelper className={element('helper')} theme={theme}>
                     {helper}
                 </InputHelper>
             )}
 
-            <div className={`${CLASSNAME}__ui-wrapper`}>
-                {!hideMinMaxLabel && (
-                    <span className={`${CLASSNAME}__value-label ${CLASSNAME}__value-label--min`}>{min}</span>
-                )}
-                <div className={`${CLASSNAME}__wrapper`} ref={sliderRef}>
-                    <div className={`${CLASSNAME}__track ${CLASSNAME}__track--background`} />
+            <div className={element('ui-wrapper')}>
+                {!hideMinMaxLabel && <span className={element('value-label', { min: true })}>{min}</span>}
+                <div className={element('wrapper')} ref={sliderRef}>
                     <div
-                        className={`${CLASSNAME}__track ${CLASSNAME}__track--active`}
+                        className={element('track', {
+                            background: true,
+                        })}
+                    />
+                    <div
+                        className={element('track', {
+                            active: true,
+                        })}
                         style={{ width: percentString }}
                     />
                     {steps ? (
-                        <div className={`${CLASSNAME}__ticks`}>
+                        <div className={element('ticks')}>
                             {availableSteps.map((step, idx) => (
                                 <div
                                     key={`tick_${idx}`}
-                                    className={`${CLASSNAME}__tick`}
+                                    className={element('tick')}
                                     style={{ left: `${step * 100}%` }}
                                 />
                             ))}
@@ -281,15 +288,13 @@ export const Slider = forwardRef<SliderProps, HTMLDivElement>((props, ref) => {
                         aria-labelledby={sliderLabelId}
                         name={name}
                         id={sliderId}
-                        className={`${CLASSNAME}__handle`}
+                        className={element('handle')}
                         style={{ left: percentString }}
                         onKeyDown={isAnyDisabled ? undefined : handleKeyDown}
                         {...disabledStateProps}
                     />
                 </div>
-                {!hideMinMaxLabel && (
-                    <span className={`${CLASSNAME}__value-label ${CLASSNAME}__value-label--max`}>{max}</span>
-                )}
+                {!hideMinMaxLabel && <span className={element('value-label', { max: true })}>{max}</span>}
             </div>
         </div>
     );

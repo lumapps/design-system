@@ -5,10 +5,11 @@ import { Theme, useTheme } from '@lumx/react';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { HasClassName, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import { classNames } from '@lumx/core/js/utils';
 
 import { INPUT_NATIVE_CLASSNAME } from './constants';
+
+const { block } = classNames.bem(INPUT_NATIVE_CLASSNAME);
 
 type NativeInputProps = Omit<ComponentProps<'input'>, 'value' | 'onChange'>;
 
@@ -58,8 +59,10 @@ export const RawInputText = forwardRef<RawInputTextProps, HTMLInputElement>((pro
             ref={useMergeRefs(ref, textareaRef)}
             className={classNames.join(
                 className,
-                handleBasicClasses({ prefix: INPUT_NATIVE_CLASSNAME, theme }),
-                `${INPUT_NATIVE_CLASSNAME}--text`,
+                block({
+                    [`theme-${theme}`]: Boolean(theme),
+                    text: true,
+                }),
             )}
             onChange={handleChange}
             value={value}

@@ -2,7 +2,6 @@ import { useRef, useState, useContext } from 'react';
 
 import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
 import { Icon, Size, Text, Orientation, Popover, Placement, Theme } from '@lumx/react';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { HasClassName } from '@lumx/react/utils/type';
@@ -32,6 +31,8 @@ const COMPONENT_NAME = 'NavigationSection';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-navigation-section';
+const { block: sectionBlock, element: sectionElement } = classNames.bem(CLASSNAME);
+const { block: itemBlock, element: itemElement } = classNames.bem(ITEM_CLASSNAME);
 
 export const NavigationSection = forwardRef<NavigationSectionProps, HTMLLIElement>((props, ref) => {
     const { children, className, label, icon, ...forwardedProps } = props;
@@ -45,11 +46,9 @@ export const NavigationSection = forwardRef<NavigationSectionProps, HTMLLIElemen
         <li
             className={classNames.join(
                 className,
-                CLASSNAME,
-                ITEM_CLASSNAME,
-                handleBasicClasses({
-                    prefix: ITEM_CLASSNAME,
-                    theme,
+                sectionBlock(),
+                itemBlock({
+                    [`theme-${theme}`]: Boolean(theme),
                 }),
             )}
             ref={ref}
@@ -59,20 +58,20 @@ export const NavigationSection = forwardRef<NavigationSectionProps, HTMLLIElemen
                 {...forwardedProps}
                 aria-controls={sectionId}
                 aria-expanded={isOpen}
-                className={classNames.join(`${ITEM_CLASSNAME}__link`)}
+                className={itemElement('link')}
                 ref={buttonRef}
                 onClick={(event) => {
                     setIsOpen(!isOpen);
                     event.stopPropagation();
                 }}
             >
-                {icon ? <Icon className={`${ITEM_CLASSNAME}__icon`} icon={icon} size={Size.xs} /> : null}
+                {icon ? <Icon className={itemElement('icon')} icon={icon} size={Size.xs} /> : null}
 
-                <Text as="span" truncate className={`${ITEM_CLASSNAME}__label`} ref={ref}>
+                <Text as="span" truncate className={itemElement('label')} ref={ref}>
                     {label}
                 </Text>
                 <Icon
-                    className={classNames.join(`${ITEM_CLASSNAME}__icon`, `${CLASSNAME}__chevron`)}
+                    className={classNames.join(itemElement('icon'), sectionElement('chevron'))}
                     icon={isOpen ? mdiChevronUp : mdiChevronDown}
                 />
             </RawClickable>
@@ -90,7 +89,7 @@ export const NavigationSection = forwardRef<NavigationSectionProps, HTMLLIElemen
                         zIndex={996}
                     >
                         <ThemeProvider value={Theme.light}>
-                            <ul className={`${CLASSNAME}__drawer--popover`} id={sectionId}>
+                            <ul className={sectionElement('drawer', { popover: true })} id={sectionId}>
                                 <NavigationContext.Provider value={{ orientation: Orientation.vertical }}>
                                     {children}
                                 </NavigationContext.Provider>
@@ -98,7 +97,7 @@ export const NavigationSection = forwardRef<NavigationSectionProps, HTMLLIElemen
                         </ThemeProvider>
                     </Popover>
                 ) : (
-                    <ul className={`${CLASSNAME}__drawer`} id={sectionId}>
+                    <ul className={sectionElement('drawer')} id={sectionId}>
                         {children}
                     </ul>
                 ))}
