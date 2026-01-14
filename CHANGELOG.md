@@ -16,6 +16,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Moved InputLabel JSX templating from `@lumx/react`
     -   Moved InputHelper JSX templating from `@lumx/react`
 
+### Added
+
+-   `@lumx/core`:
+    -   Added `block` and `element` utility functions to generate BEM class names
+
 ## [4.0.0][] - 2025-12-09
 
 ### Changed
