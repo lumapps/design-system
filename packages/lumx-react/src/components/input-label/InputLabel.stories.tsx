@@ -1,5 +1,4 @@
-import { Typography } from '@lumx/react';
-
+import { Default, IsRequired, WithCustomTypography } from '@lumx/core/js/components/InputLabel/Stories';
 import { InputLabel } from './InputLabel';
 
 export default {
@@ -7,11 +6,9 @@ export default {
     component: InputLabel,
     args: {
         ...InputLabel.defaultProps,
-        children: 'Label text',
+        ...Default.args,
     },
-    argTypes: {
-        isRequired: { control: 'boolean' },
-    },
+    argTypes: Default.argTypes,
     decorators: [
         /**
          * Associate label with an input
@@ -25,21 +22,4 @@ export default {
     ],
 };
 
-/**
- * Default input label
- */
-export const Default = {};
-
-/**
- * Required input label
- */
-export const IsRequired = {
-    args: { isRequired: true },
-};
-
-/**
- * Default input label
- */
-export const WithCustomTypography = {
-    args: { typography: Typography.subtitle1 },
-};
+export { Default, IsRequired, WithCustomTypography };
