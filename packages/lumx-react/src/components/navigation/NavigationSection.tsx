@@ -46,7 +46,7 @@ export const NavigationSection = forwardRef<NavigationSectionProps, HTMLLIElemen
         <li
             className={classNames.join(
                 className,
-                CLASSNAME,
+                sectionBlock(),
                 itemBlock({
                     [`theme-${theme}`]: Boolean(theme),
                 }),
