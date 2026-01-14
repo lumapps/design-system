@@ -1,36 +1,28 @@
-import { mdiEmail } from '@lumx/icons';
 import { ColorPalette, ColorVariant, GridColumn, Icon, IconSizes, Size } from '@lumx/react';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
+
 import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
-import { iconArgType } from '@lumx/core/stories/controls/icons';
-import { colorArgType, colorVariantArgType } from '@lumx/core/stories/controls/color';
 import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
+import {
+    AllColors as AllColorsStory,
+    Default,
+    SizeAndShape as SizeAndShapeStory,
+} from '@lumx/core/js/components/Icon/Stories';
 
 const iconSizes: Array<IconSizes> = [Size.xxs, Size.xs, Size.s, Size.m, Size.l, Size.xl, Size.xxl];
 
 export default {
-    title: 'LumX components/icon/Icon',
     component: Icon,
     args: Icon.defaultProps,
-    argTypes: {
-        icon: iconArgType,
-        hasShape: { control: 'boolean' },
-        color: colorArgType,
-        colorVariant: colorVariantArgType,
-    },
+    title: 'LumX components/icon/Icon',
+    ...Default,
 };
 
 /**
  * All combinations of size and shape
  */
 export const SizeAndShape = {
-    args: {
-        icon: mdiEmail,
-    },
-    argTypes: {
-        hasShape: { control: false },
-        size: { control: false },
-    },
+    ...SizeAndShapeStory,
     decorators: [
         withCombinations({
             combinations: {
@@ -48,15 +40,7 @@ export const SizeAndShape = {
  * All combinations of size and shape
  */
 export const AllColors = {
-    args: {
-        size: Size.m,
-        icon: mdiEmail,
-    },
-    argTypes: {
-        hasShape: { control: false },
-        color: { control: false },
-        colorVariant: { control: false },
-    },
+    ...AllColorsStory,
     decorators: [
         withCombinations({
             combinations: {

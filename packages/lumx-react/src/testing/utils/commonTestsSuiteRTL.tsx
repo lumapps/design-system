@@ -14,7 +14,7 @@ import {
 } from '@lumx/core/testing/commonTestsSuiteRTL';
 
 export type RenderWrapper = RenderOptions['wrapper'];
-export type SetupRenderOptions = CommonSetupRenderOptions<RenderWrapper>;
+export type SetupRenderOptions<S = any> = CommonSetupRenderOptions<RenderWrapper, S>;
 /**
  * Common tests on components
  * - Check base class name and class name forwarding

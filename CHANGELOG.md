@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/core`:
     -   Moved testing utilities from `@lumx/react`
     -   Moved storybook utilities from `@lumx/react`
+    -   Moved Icon JSX templating from `@lumx/react`
 
 ## [4.0.0][] - 2025-12-09
 
