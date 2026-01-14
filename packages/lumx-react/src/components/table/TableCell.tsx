@@ -1,7 +1,6 @@
 import { mdiArrowDown, mdiArrowUp } from '@lumx/icons';
 import { Icon, Size } from '@lumx/react';
 import { GenericProps, ValueOf } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
@@ -46,6 +45,7 @@ const COMPONENT_NAME = 'TableCell';
  * Component default class name and class prefix.
  */
 const CLASSNAME = `${TABLE_CLASSNAME}__cell`;
+const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -92,40 +92,40 @@ export const TableCell = forwardRef<TableCellProps, HTMLTableCellElement>((props
                     ref={ref}
                     {...forwardedProps}
                     className={classNames.join(
-                        handleBasicClasses({
-                            prefix: CLASSNAME,
-                            isSortable,
-                            isSorted: isSortable && !!sortOrder,
-                        }),
                         className,
-                        `${CLASSNAME}--head`,
+                        block({
+                            'is-sortable': isSortable,
+                            'is-sorted': isSortable && !!sortOrder,
+                            head: true,
+                        }),
                     )}
                     aria-sort={ariaSort}
                 >
-                    <Wrapper className={`${CLASSNAME}-wrapper`} {...wrapperProps}>
-                        {icon && !isSortable && <Icon className={`${CLASSNAME}-icon`} icon={icon} size={Size.xxs} />}
+                    <Wrapper className={element('wrapper')} {...wrapperProps}>
+                        {icon && !isSortable && <Icon className={element('icon')} icon={icon} size={Size.xxs} />}
 
                         {isSortable && sortOrder === ThOrder.asc && (
-                            <Icon className={`${CLASSNAME}-icon`} icon={mdiArrowUp} size={Size.xxs} />
+                            <Icon className={element('icon')} icon={mdiArrowUp} size={Size.xxs} />
                         )}
 
                         {isSortable && sortOrder === ThOrder.desc && (
-                            <Icon className={`${CLASSNAME}-icon`} icon={mdiArrowDown} size={Size.xxs} />
+                            <Icon className={element('icon')} icon={mdiArrowDown} size={Size.xxs} />
                         )}
 
-                        <div className={`${CLASSNAME}-content`}>{children}</div>
+                        <div className={element('content')}>{children}</div>
                     </Wrapper>
                 </th>
             )}
 
             {variant === TableCellVariant.body && (
-                <td {...forwardedProps} className={classNames.join(className, CLASSNAME, `${CLASSNAME}--body`)}>
-                    <div className={`${CLASSNAME}-content`}>{children}</div>
+                <td {...forwardedProps} className={classNames.join(className, block({ body: true }))}>
+                    <div className={element('content')}>{children}</div>
                 </td>
             )}
         </>
     );
 });
+
 TableCell.displayName = COMPONENT_NAME;
 TableCell.className = CLASSNAME;
 TableCell.defaultProps = DEFAULT_PROPS;

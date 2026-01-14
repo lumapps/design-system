@@ -3,7 +3,6 @@ import { ReactNode } from 'react';
 import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiClose, mdiInformation } from '@lumx/icons';
 import { ColorPalette, Emphasis, Icon, IconButton, Kind, Size } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
@@ -42,6 +41,7 @@ const COMPONENT_NAME = 'Message';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-message';
+const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * Associative map from message kind to color and icon.
@@ -71,21 +71,20 @@ export const Message = forwardRef<MessageProps, HTMLDivElement>((props, ref) => 
             ref={ref}
             className={classNames.join(
                 className,
-                handleBasicClasses({
-                    color,
-                    hasBackground,
-                    prefix: CLASSNAME,
+                block({
+                    [`color-${color}`]: Boolean(color),
+                    'has-background': hasBackground,
                 }),
             )}
             {...forwardedProps}
         >
             {(customIcon || icon) && (
-                <Icon className={`${CLASSNAME}__icon`} icon={customIcon || icon} size={Size.xs} color={color} />
+                <Icon className={element('icon')} icon={customIcon || icon} size={Size.xs} color={color} />
             )}
-            <div className={`${CLASSNAME}__text`}>{children}</div>
+            <div className={element('text')}>{children}</div>
             {isCloseButtonDisplayed && (
                 <IconButton
-                    className={`${CLASSNAME}__close-button`}
+                    className={element('close-button')}
                     icon={mdiClose}
                     onClick={onClick}
                     label={closeButtonLabel}
