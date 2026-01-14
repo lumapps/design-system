@@ -7,10 +7,13 @@ import { useImageSize } from '@lumx/react/hooks/useImageSize';
 import { isReducedMotion } from '@lumx/react/utils/browser/isReducedMotion';
 import { isEqual } from '@lumx/react/utils/object/isEqual';
 
+import { classNames } from '@lumx/core/js/utils';
 import { CLASSNAME } from '../constants';
 import { usePointerZoom } from './usePointerZoom';
 import { useAnimateScroll } from './useAnimateScroll';
 import type { ImageProps } from '../types';
+
+const { element } = classNames.bem(CLASSNAME);
 
 export interface ImageSlideProps {
     image: ImageProps;
@@ -81,13 +84,13 @@ export const ImageSlide = React.memo((props: ImageSlideProps) => {
             ref={scrollAreaRef}
             // Make it accessible to keyboard nav when the zone is scrollable
             tabIndex={isScrollable ? 0 : undefined}
-            className={`${CLASSNAME}__image-slide`}
+            className={element('image-slide')}
         >
             <Thumbnail
                 imgRef={useMergeRefs(imgRef, propImgRef)}
                 image={image}
                 alt={alt}
-                className={`${CLASSNAME}__thumbnail`}
+                className={element('thumbnail')}
                 imgProps={{
                     ...imgProps,
                     style: {

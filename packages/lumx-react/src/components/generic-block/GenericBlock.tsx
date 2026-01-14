@@ -65,6 +65,7 @@ const COMPONENT_NAME = 'GenericBlock';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-generic-block';
+const { element } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -170,7 +171,7 @@ const BaseGenericBlock: BaseGenericBlock = forwardRef((props, ref) => {
                     className={classNames.join(
                         figureProps?.className,
                         sections.figureChildProps?.className,
-                        `${CLASSNAME}__figure`,
+                        element('figure'),
                     )}
                 >
                     {figure}
@@ -190,7 +191,7 @@ const BaseGenericBlock: BaseGenericBlock = forwardRef((props, ref) => {
                     className={classNames.join(
                         contentProps?.className,
                         sections.contentChildProps?.className,
-                        `${CLASSNAME}__content`,
+                        element('content'),
                     )}
                 >
                     {sections.contentChildProps?.children}
@@ -208,7 +209,7 @@ const BaseGenericBlock: BaseGenericBlock = forwardRef((props, ref) => {
                     className={classNames.join(
                         actionsProps?.className,
                         sections.actionsChildProps?.className,
-                        `${CLASSNAME}__actions`,
+                        element('actions'),
                     )}
                 >
                     {actions}
@@ -218,6 +219,7 @@ const BaseGenericBlock: BaseGenericBlock = forwardRef((props, ref) => {
         </FlexBox>
     );
 });
+
 BaseGenericBlock.displayName = COMPONENT_NAME;
 BaseGenericBlock.className = CLASSNAME;
 BaseGenericBlock.defaultProps = DEFAULT_PROPS;

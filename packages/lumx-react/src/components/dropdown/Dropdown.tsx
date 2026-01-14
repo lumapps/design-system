@@ -91,6 +91,7 @@ const COMPONENT_NAME = 'Dropdown';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-dropdown';
+const { element } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -174,12 +175,13 @@ export const Dropdown = forwardRef<DropdownProps, HTMLDivElement>((props, ref) =
             placement={placement}
             zIndex={zIndex}
         >
-            <div className={`${CLASSNAME}__menu`} ref={innerRef}>
+            <div className={element('menu')} ref={innerRef}>
                 {popperElement}
             </div>
         </Popover>
     ) : null;
 });
+
 Dropdown.displayName = COMPONENT_NAME;
 Dropdown.className = CLASSNAME;
 Dropdown.defaultProps = DEFAULT_PROPS;
