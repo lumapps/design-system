@@ -1,41 +1,9 @@
-import { ReactNode } from 'react';
-
-import { Kind, Theme } from '@lumx/react';
-import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
-import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
+import { InputHelper as UI, InputHelperProps } from '@lumx/core/js/components/InputHelper';
+import { Theme } from '@lumx/react';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
-
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
-import { INPUT_HELPER_CONFIGURATION } from './constants';
 
-/**
- * Defines the props of the component.
- */
-export interface InputHelperProps extends GenericProps, HasTheme {
-    /** Helper content. */
-    children: string | ReactNode;
-    /** Helper variant. */
-    kind?: Kind;
-}
-
-/**
- * Component display name.
- */
-const COMPONENT_NAME = 'InputHelper';
-
-/**
- * Component default class name and class prefix.
- */
-const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-input-helper';
-
-/**
- * Component default props.
- */
-const DEFAULT_PROPS: Partial<InputHelperProps> = {
-    kind: Kind.info,
-};
+export type { InputHelperProps };
 
 /**
  * InputHelper component.
@@ -46,20 +14,9 @@ const DEFAULT_PROPS: Partial<InputHelperProps> = {
  */
 export const InputHelper = forwardRef<InputHelperProps, HTMLParagraphElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
-    const { children, className, kind = DEFAULT_PROPS.kind, theme = defaultTheme, ...forwardedProps } = props;
-    const { color } = INPUT_HELPER_CONFIGURATION[kind as any] || {};
-
-    return (
-        <p
-            ref={ref}
-            {...forwardedProps}
-            className={classNames.join(className, handleBasicClasses({ prefix: CLASSNAME, color, theme }))}
-        >
-            {children}
-        </p>
-    );
+    return UI({ ...props, ref, theme: props.theme || defaultTheme });
 });
 
-InputHelper.displayName = COMPONENT_NAME;
-InputHelper.className = CLASSNAME;
-InputHelper.defaultProps = DEFAULT_PROPS;
+InputHelper.displayName = UI.displayName;
+InputHelper.className = UI.className;
+InputHelper.defaultProps = UI.defaultProps;
