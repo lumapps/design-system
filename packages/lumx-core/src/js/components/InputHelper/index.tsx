@@ -1,16 +1,15 @@
-import type { ReactNode } from 'react';
-
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
-import type { LumxClassName, GenericProps, HasTheme } from '../../types';
+import type { LumxClassName, GenericProps, HasTheme, JSXElement } from '../../types';
 import { classNames } from '../../utils';
 import { Kind } from '../../constants';
+import { INPUT_HELPER_CONFIGURATION } from './constants';
 
 /**
  * Defines the props of the component.
  */
 export interface InputHelperProps extends GenericProps, HasTheme {
     /** Helper content. */
-    children: ReactNode | string;
+    children: JSXElement;
     /** Helper variant. */
     kind?: Kind;
 }
@@ -30,18 +29,6 @@ const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-input-helper';
  */
 const DEFAULT_PROPS: Partial<InputHelperProps> = {
     kind: Kind.info,
-};
-
-const INPUT_HELPER_CONFIGURATION: Record<string, { color: string }> = {
-    [Kind.error]: {
-        color: 'red',
-    },
-    [Kind.success]: {
-        color: 'green',
-    },
-    [Kind.warning]: {
-        color: 'yellow',
-    },
 };
 
 /**

@@ -1,13 +1,13 @@
 import { handleBasicClasses } from '../../utils/_internal/className';
 import { classNames } from '../../utils';
-import { LumxClassName, GenericProps, HasTheme } from '../../types';
+import { LumxClassName, GenericProps, HasTheme, JSXElement } from '../../types';
 import { Typography } from '../../constants';
 
 export interface InputLabelProps extends GenericProps, HasTheme {
     /** Typography variant. */
     typography?: Typography;
     /** Label content. */
-    children: string | JSX.Element;
+    children: JSXElement;
     /** Native htmlFor property. */
     htmlFor: string;
     /** Whether the component is required or not. */

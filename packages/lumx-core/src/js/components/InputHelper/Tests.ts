@@ -1,15 +1,10 @@
 import { Kind, Theme } from '../../constants';
+import { INPUT_HELPER_CONFIGURATION } from './constants';
 import { SetupRenderOptions } from '../../../testing';
 import { getByClassName } from '../../../testing/queries';
 import { InputHelper, InputHelperProps } from '.';
 
 const CLASSNAME = InputHelper.className as string;
-
-const INPUT_HELPER_CONFIGURATION: Record<string, { color: string }> = {
-    [Kind.error]: { color: 'red' },
-    [Kind.success]: { color: 'green' },
-    [Kind.warning]: { color: 'yellow' },
-};
 
 type SetupProps = Partial<InputHelperProps>;
 

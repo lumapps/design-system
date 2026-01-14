@@ -1,17 +1,19 @@
 import { InputHelper, Kind } from '@lumx/react';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
-import { AllKinds as AllKindsStory, Default } from '@lumx/core/js/components/InputHelper/Stories';
+import { AllKinds as AllKindsStory, Default as DefaultConfig } from '@lumx/core/js/components/InputHelper/Stories';
 
 export default {
     title: 'LumX components/input-helper/Input Helper',
     component: InputHelper,
+    ...DefaultConfig,
     args: {
-        ...InputHelper.defaultProps,
+        ...DefaultConfig.args,
         children: 'Some helper text',
     },
-    ...Default,
 };
+
+export const Default = {};
 
 /**
  * All `kind` variants
