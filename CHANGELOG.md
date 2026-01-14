@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Create the `Flag` component
 -   `@lumx/core`:
     -   Added `Selector` types and utils
+    -   Added `classNames.bem` utility function to generate BEM class names
 -   `@lumx/react`:
     -   Added `A11YLiveMessage` util
     -   Added `InfiniteScroll` util
