@@ -1,25 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from '@reach/router';
 import filter from 'lodash/fp/filter';
+import * as Comlink from 'comlink';
+import type { SearchDocument, SearchWorkerApi } from './search-worker';
 
-interface SearchResult {
-    slug: string;
-    title: string;
-    content: string;
-    parentTitlePath: string[];
-}
-
-type searchFunction = (searchTerm: string) => Promise<SearchResult[]>;
-
-// Load worker module and instantiate (method mapping is handled by the `workerize-loader`).
-const loadWorker = async () => {
-    const module = await import(
-        /* webpackChunkName: "search-worker" */
-        './search.worker'
-    );
-    const SearchWorker = (module as any).default;
-    return new SearchWorker() as typeof module;
-};
+const worker =
+    typeof Worker !== 'undefined' &&
+    Comlink.wrap<SearchWorkerApi>(new Worker(new URL('./search-worker', import.meta.url)));
 
 /**
  * Implement search
@@ -28,26 +15,16 @@ const loadWorker = async () => {
  */
 export function useSearch() {
     const [query, setQuery] = useState<string>('');
-    const [results, setResults] = useState<SearchResult[] | undefined>([]);
-    const [searchFunction, setSearchFunction] = useState<searchFunction>();
+    const [results, setResults] = useState<SearchDocument[] | undefined>([]);
     const { pathname } = useLocation();
-
-    useEffect(() => {
-        // Load the web worker.
-        loadWorker().then((worker) => {
-            // Load the search index:
-            const searchIndexURL = new URL('/search_index.json', document.baseURI).toString();
-            worker.loadIndex(searchIndexURL);
-            setSearchFunction(() => worker.search);
-        });
-    }, []);
 
     // On search:
     useEffect(() => {
-        if (query) {
+        if (query && worker) {
             // Unset results (loading state)
             setResults(undefined);
-            searchFunction?.(query)
+            worker
+                .search(query)
                 // Remove current page from results
                 .then(filter((result) => result.slug !== pathname))
                 // Set results
@@ -56,7 +33,7 @@ export function useSearch() {
             // No result
             setResults([]);
         }
-    }, [pathname, query, searchFunction]);
+    }, [pathname, query]);
 
     return { query, setQuery, results };
 }
