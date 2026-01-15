@@ -1,5 +1,4 @@
 import { HasAriaLabelOrLabelledBy, HasClassName, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { Orientation, Theme } from '@lumx/react';
@@ -27,6 +26,7 @@ const COMPONENT_NAME = 'Navigation';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-navigation';
+const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props
@@ -54,17 +54,16 @@ export const Navigation = forwardRef<NavigationProps, HTMLElement, SubComponents
             <nav
                 className={classNames.join(
                     className,
-                    handleBasicClasses({
-                        prefix: CLASSNAME,
-                        theme,
-                        orientation,
+                    block({
+                        [`theme-${theme}`]: Boolean(theme),
+                        [`orientation-${orientation}`]: Boolean(orientation),
                     }),
                 )}
                 ref={ref}
                 {...forwardedProps}
             >
                 <NavigationContext.Provider value={{ orientation }}>
-                    <ul className={`${CLASSNAME}__list`}>{children}</ul>
+                    <ul className={element('list')}>{children}</ul>
                 </NavigationContext.Provider>
             </nav>
         </ThemeProvider>

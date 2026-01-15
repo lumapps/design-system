@@ -5,7 +5,6 @@ import { useFocus } from '@lumx/react/hooks/useFocus';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 import { DOCUMENT } from '@lumx/react/constants';
 import { Comp, GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
@@ -81,6 +80,7 @@ const COMPONENT_NAME = 'Popover';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-popover';
+const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -148,6 +148,7 @@ const _InnerPopover = forwardRef<PopoverProps, HTMLDivElement>((props, ref) => {
 
     const clickAwayRefs = useRef([popoverRef, anchorRef]);
     const mergedRefs = useMergeRefs<HTMLDivElement>(setPopperElement, ref, popoverRef);
+    const adjustedElevation = Math.min(elevation || 0, 5);
 
     return isOpen ? (
         <Portal enabled={usePortal}>
@@ -156,12 +157,11 @@ const _InnerPopover = forwardRef<PopoverProps, HTMLDivElement>((props, ref) => {
                 ref={mergedRefs}
                 className={classNames.join(
                     className,
-                    handleBasicClasses({
-                        prefix: CLASSNAME,
-                        theme,
-                        elevation: Math.min(elevation || 0, 5),
-                        position,
-                        isInitializing: !styles.popover?.transform,
+                    block({
+                        [`theme-${theme}`]: Boolean(theme),
+                        [`elevation-${adjustedElevation}`]: Boolean(adjustedElevation),
+                        [`position-${position}`]: Boolean(position),
+                        'is-initializing': !styles.popover?.transform,
                     }),
                 )}
                 style={styles.popover}
@@ -170,7 +170,7 @@ const _InnerPopover = forwardRef<PopoverProps, HTMLDivElement>((props, ref) => {
                 {unmountSentinel}
                 <ClickAwayProvider callback={closeOnClickAway && onClose} childrenRefs={clickAwayRefs}>
                     {hasArrow && (
-                        <div ref={setArrowElement} className={`${CLASSNAME}__arrow`} style={styles.arrow}>
+                        <div ref={setArrowElement} className={element('arrow')} style={styles.arrow}>
                             <svg viewBox="0 0 14 14" aria-hidden>
                                 <path d="M8 3.49C7.62 2.82 6.66 2.82 6.27 3.48L.04 14 14.04 14 8 3.49Z" />
                             </svg>

@@ -2,7 +2,6 @@ import { CSSProperties } from 'react';
 
 import { Theme, TypographyInterface, ColorPalette } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
@@ -31,6 +30,7 @@ const COMPONENT_NAME = 'SkeletonTypography';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-skeleton-typography';
+const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * SkeletonTypography component.
@@ -47,10 +47,17 @@ export const SkeletonTypography = forwardRef<SkeletonTypographyProps, HTMLDivEle
         <div
             ref={ref}
             {...forwardedProps}
-            className={classNames.join(className, handleBasicClasses({ prefix: CLASSNAME, theme, typography, color }))}
+            className={classNames.join(
+                className,
+                block({
+                    [`theme-${theme}`]: Boolean(theme),
+                    [`typography-${typography}`]: Boolean(typography),
+                    [`color-${color}`]: Boolean(color),
+                }),
+            )}
             style={{ ...forwardedProps.style, width }}
         >
-            <div className={`${CLASSNAME}__inner`} />
+            <div className={element('inner')} />
         </div>
     );
 });

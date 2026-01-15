@@ -2,7 +2,6 @@ import { AriaAttributes, ButtonHTMLAttributes, DetailedHTMLProps, RefObject } fr
 
 import { ColorPalette, Emphasis, Size, Theme } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { HasAriaDisabled } from '@lumx/react/utils/type/HasAriaDisabled';
@@ -57,6 +56,9 @@ const COMPONENT_NAME = 'ButtonRoot';
 export const BUTTON_WRAPPER_CLASSNAME = `lumx-button-wrapper`;
 export const BUTTON_CLASSNAME = `lumx-button`;
 
+const { block: buttonWrapperBlock } = classNames.bem(BUTTON_WRAPPER_CLASSNAME);
+const { block: buttonBlock } = classNames.bem(BUTTON_CLASSNAME);
+
 /**
  * Render a button wrapper with the ButtonRoot inside.
  *
@@ -69,18 +71,16 @@ const renderButtonWrapper: React.FC<ButtonRootProps> = (props) => {
     const adaptedColor =
         emphasis === Emphasis.low && (color === ColorPalette.light ? ColorPalette.dark : ColorPalette.light);
 
-    const wrapperClassName = classNames.join(
-        handleBasicClasses({
-            color: adaptedColor,
-            prefix: BUTTON_WRAPPER_CLASSNAME,
-            variant,
-            fullWidth,
-        }),
-    );
     const buttonProps = { ...props, hasBackground: false };
 
     return (
-        <div className={wrapperClassName}>
+        <div
+            className={buttonWrapperBlock({
+                [`color-${adaptedColor}`]: Boolean(adaptedColor),
+                [`variant-${variant}`]: Boolean(variant),
+                'is-full-width': fullWidth,
+            })}
+        >
             {/* eslint-disable-next-line @typescript-eslint/no-use-before-define */}
             <ButtonRoot {...buttonProps} />
         </div>
@@ -127,19 +127,18 @@ export const ButtonRoot = forwardRef<ButtonRootProps, HTMLButtonElement | HTMLAn
 
     const buttonClassName = classNames.join(
         className,
-        handleBasicClasses({
-            color: adaptedColor,
-            emphasis,
-            isSelected,
-            isDisabled: props.isDisabled || props['aria-disabled'],
-            isActive,
-            isFocused,
-            isHovered,
-            prefix: BUTTON_CLASSNAME,
-            size,
-            theme: emphasis === Emphasis.high && theme,
-            variant,
-            fullWidth,
+        buttonBlock({
+            [`color-${adaptedColor}`]: Boolean(adaptedColor),
+            [`emphasis-${emphasis}`]: Boolean(emphasis),
+            'is-selected': isSelected,
+            'is-disabled': Boolean(props.isDisabled || props['aria-disabled']),
+            'is-active': isActive,
+            'is-focused': isFocused,
+            'is-hovered': isHovered,
+            [`size-${size}`]: Boolean(size),
+            [`theme-${theme}`]: Boolean(emphasis === Emphasis.high && theme),
+            [`variant-${variant}`]: Boolean(variant),
+            'is-full-width': fullWidth,
         }),
     );
 

@@ -5,7 +5,6 @@ import isEmpty from 'lodash/isEmpty';
 import { ListProps, Size } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
 import { onEnterPressed, onButtonPressed, classNames } from '@lumx/core/js/utils';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { renderLink } from '@lumx/react/utils/react/renderLink';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
@@ -54,6 +53,7 @@ const COMPONENT_NAME = 'ListItem';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-list-item';
+const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -103,9 +103,9 @@ export const ListItem = forwardRef<ListItemProps, HTMLLIElement>((props, ref) =>
 
     const content = (
         <>
-            {before && <div className={`${CLASSNAME}__before`}>{before}</div>}
-            <div className={`${CLASSNAME}__content`}>{children}</div>
-            {after && <div className={`${CLASSNAME}__after`}>{after}</div>}
+            {before && <div className={element('before')}>{before}</div>}
+            <div className={element('content')}>{children}</div>
+            {after && <div className={element('after')}>{after}</div>}
         </>
     );
 
@@ -115,9 +115,8 @@ export const ListItem = forwardRef<ListItemProps, HTMLLIElement>((props, ref) =>
             {...forwardedProps}
             className={classNames.join(
                 className,
-                handleBasicClasses({
-                    prefix: CLASSNAME,
-                    size,
+                block({
+                    [`size-${size}`]: Boolean(size),
                 }),
             )}
         >
@@ -132,11 +131,10 @@ export const ListItem = forwardRef<ListItemProps, HTMLLIElement>((props, ref) =>
                         ...linkProps,
                         href: isAnyDisabled ? undefined : linkProps.href,
                         className: classNames.join(
-                            handleBasicClasses({
-                                prefix: `${CLASSNAME}__link`,
-                                isHighlighted,
-                                isSelected,
-                                isDisabled: isAnyDisabled,
+                            element('link', {
+                                'is-highlighted': isHighlighted,
+                                'is-selected': isSelected,
+                                'is-disabled': isAnyDisabled,
                             }),
                         ),
                         onClick: isAnyDisabled ? undefined : onItemSelected,
@@ -147,7 +145,7 @@ export const ListItem = forwardRef<ListItemProps, HTMLLIElement>((props, ref) =>
                 )
             ) : (
                 /* Non clickable list item */
-                <div className={`${CLASSNAME}__wrapper`}>{content}</div>
+                <div className={element('wrapper')}>{content}</div>
             )}
         </li>
     );

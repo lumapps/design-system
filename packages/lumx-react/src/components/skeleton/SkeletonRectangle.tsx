@@ -1,6 +1,5 @@
 import { AspectRatio, GlobalSize, Theme, ColorPalette } from '@lumx/react';
 import { GenericProps, HasTheme, ValueOf } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
@@ -41,6 +40,7 @@ const COMPONENT_NAME = 'SkeletonRectangle';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-skeleton-rectangle';
+const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * SkeletonRectangle component.
@@ -68,18 +68,17 @@ export const SkeletonRectangle = forwardRef<SkeletonRectangleProps, HTMLDivEleme
             {...forwardedProps}
             className={classNames.join(
                 className,
-                handleBasicClasses({
-                    prefix: CLASSNAME,
-                    aspectRatio,
-                    height: aspectRatio ? undefined : height,
-                    theme,
-                    variant,
-                    width,
-                    color,
+                block({
+                    [`aspect-ratio-${aspectRatio}`]: Boolean(aspectRatio),
+                    [`height-${height}`]: Boolean(aspectRatio ? undefined : height),
+                    [`theme-${theme}`]: Boolean(theme),
+                    [`variant-${variant}`]: Boolean(variant),
+                    [`width-${width}`]: Boolean(width),
+                    [`color-${color}`]: Boolean(color),
                 }),
             )}
         >
-            <div className={`${CLASSNAME}__inner`} />
+            <div className={element('inner')} />
         </div>
     );
 });

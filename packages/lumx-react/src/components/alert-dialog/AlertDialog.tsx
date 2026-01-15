@@ -13,7 +13,6 @@ import {
     ButtonProps,
 } from '@lumx/react';
 import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiInformation } from '@lumx/icons';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import { useId } from '@lumx/react/hooks/useId';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import type { LumxClassName } from '@lumx/react/utils/type';
@@ -62,6 +61,7 @@ const COMPONENT_NAME = 'AlertDialog';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-alert-dialog';
+const { block } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -124,9 +124,8 @@ export const AlertDialog = forwardRef<AlertDialogProps, HTMLDivElement>((props, 
             }}
             className={classNames.join(
                 className,
-                handleBasicClasses({
-                    kind,
-                    prefix: CLASSNAME,
+                block({
+                    [`kind-${kind}`]: Boolean(kind),
                 }),
             )}
             {...forwardedProps}

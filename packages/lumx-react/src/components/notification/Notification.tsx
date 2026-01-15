@@ -6,7 +6,6 @@ import { Button, Emphasis, Icon, Kind, Size, Theme } from '@lumx/react';
 import { DOCUMENT, NOTIFICATION_TRANSITION_DURATION } from '@lumx/react/constants';
 import { NOTIFICATION_CONFIGURATION } from '@lumx/react/components/notification/constants';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { useTransitionVisibility } from '@lumx/react/hooks/useTransitionVisibility';
@@ -47,6 +46,7 @@ const COMPONENT_NAME = 'Notification';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-notification';
+const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -109,22 +109,21 @@ export const Notification = forwardRef<NotificationProps, HTMLDivElement>((props
                 {...forwardedProps}
                 className={classNames.join(
                     className,
-                    handleBasicClasses({
-                        color,
-                        hasAction,
-                        isHidden: !isOpen,
-                        prefix: CLASSNAME,
+                    block({
+                        [`color-${color}`]: Boolean(color),
+                        'has-action': hasAction,
+                        'is-hidden': !isOpen,
                     }),
                 )}
                 onClick={onClick}
                 style={{ ...style, zIndex }}
             >
-                <div className={`${CLASSNAME}__icon`}>
+                <div className={element('icon')}>
                     <Icon icon={icon} size={Size.s} />
                 </div>
-                <div className={`${CLASSNAME}__content`}>{content}</div>
+                <div className={element('content')}>{content}</div>
                 {hasAction && (
-                    <div className={`${CLASSNAME}__action`}>
+                    <div className={element('action')}>
                         <Button emphasis={Emphasis.medium} theme={theme} onClick={handleCallback}>
                             <span>{actionLabel}</span>
                         </Button>

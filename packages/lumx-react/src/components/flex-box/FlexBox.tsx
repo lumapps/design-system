@@ -4,7 +4,6 @@ import castArray from 'lodash/castArray';
 
 import { Alignment, Orientation, HorizontalAlignment, Size, VerticalAlignment } from '@lumx/core/js/constants';
 import { GenericProps } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { classNames } from '@lumx/core/js/utils';
@@ -50,6 +49,7 @@ const COMPONENT_NAME = 'FlexBox';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-flex-box';
+const { block } = classNames.bem(CLASSNAME);
 
 /**
  * FlexBox component.
@@ -68,11 +68,12 @@ export const FlexBox = forwardRef<FlexBoxProps, HTMLDivElement>((props, ref) => 
         hAlign,
         marginAuto,
         noShrink,
-        orientation,
         vAlign,
         wrap,
+        orientation,
         ...forwardedProps
     } = props;
+    const adjustedOrientation = orientation ?? (wrap || hAlign || vAlign ? Orientation.horizontal : null);
 
     return (
         <Component
@@ -80,17 +81,20 @@ export const FlexBox = forwardRef<FlexBoxProps, HTMLDivElement>((props, ref) => 
             {...forwardedProps}
             className={classNames.join(
                 className,
-                handleBasicClasses({
-                    prefix: CLASSNAME,
-                    orientation: orientation ?? (wrap || hAlign || vAlign ? Orientation.horizontal : null),
-                    vAlign,
-                    hAlign,
-                    gap,
+                block({
+                    [`orientation-${adjustedOrientation}`]: Boolean(adjustedOrientation),
+                    [`v-align-${vAlign}`]: Boolean(vAlign),
+                    [`h-align-${hAlign}`]: Boolean(hAlign),
+                    [`gap-${gap}`]: Boolean(gap),
+                    wrap: Boolean(wrap),
+                    'fill-space': fillSpace,
+                    'no-shrink': noShrink,
+                    ...Object.fromEntries(
+                        castArray(marginAuto)
+                            .filter(Boolean)
+                            .map((align) => [`margin-auto-${align}`, true]),
+                    ),
                 }),
-                wrap && `${CLASSNAME}--wrap`,
-                fillSpace && `${CLASSNAME}--fill-space`,
-                noShrink && `${CLASSNAME}--no-shrink`,
-                marginAuto && castArray(marginAuto).map((align) => `${CLASSNAME}--margin-auto-${align}`),
             )}
         >
             {children}

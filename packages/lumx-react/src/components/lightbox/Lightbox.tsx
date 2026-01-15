@@ -4,7 +4,6 @@ import { mdiClose } from '@lumx/icons';
 import { HeadingLevelProvider, IconButton, IconButtonProps } from '@lumx/react';
 import { DIALOG_TRANSITION_DURATION, DOCUMENT } from '@lumx/react/constants';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 
@@ -51,6 +50,7 @@ const COMPONENT_NAME = 'Lightbox';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-lightbox';
+const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * Lightbox component.
@@ -140,17 +140,16 @@ export const Lightbox = forwardRef<LightboxProps, HTMLDivElement>((props, ref) =
                 tabIndex={-1}
                 className={classNames.join(
                     className,
-                    handleBasicClasses({
-                        prefix: CLASSNAME,
-                        isHidden: !isOpen,
-                        isShown: isOpen || isVisible,
-                        theme,
+                    block({
+                        'is-hidden': !isOpen,
+                        'is-shown': isOpen || isVisible,
+                        [`theme-${theme}`]: Boolean(theme),
                     }),
                 )}
                 style={{ zIndex }}
             >
                 {closeButtonProps && (
-                    <div className={`${CLASSNAME}__close`}>
+                    <div className={element('close')}>
                         <IconButton
                             {...closeButtonProps}
                             ref={closeButtonRef}
@@ -166,7 +165,7 @@ export const Lightbox = forwardRef<LightboxProps, HTMLDivElement>((props, ref) =
                 <HeadingLevelProvider level={2}>
                     <ThemeProvider value={undefined}>
                         <ClickAwayProvider callback={!preventAutoClose && onClose} childrenRefs={clickAwayRefs}>
-                            <div ref={childrenRef} className={`${CLASSNAME}__wrapper`} role="presentation">
+                            <div ref={childrenRef} className={element('wrapper')} role="presentation">
                                 {children}
                             </div>
                         </ClickAwayProvider>

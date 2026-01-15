@@ -28,6 +28,7 @@ const COMPONENT_NAME = 'ProgressTracker';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-progress-tracker';
+const { element } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -61,17 +62,17 @@ export const ProgressTracker = forwardRef<ProgressTrackerProps, HTMLDivElement>(
 
     return (
         <div ref={mergeRefs(ref, stepListRef)} {...forwardedProps} className={classNames.join(className, CLASSNAME)}>
-            <div className={`${CLASSNAME}__steps`} role="tablist" aria-label={ariaLabel}>
+            <div className={element('steps')} role="tablist" aria-label={ariaLabel}>
                 {children}
             </div>
 
             <div
-                className={`${CLASSNAME}__background-bar`}
+                className={element('background-bar')}
                 style={{ left: `${backgroundPosition}%`, right: `${backgroundPosition}%` }}
             />
 
             <div
-                className={`${CLASSNAME}__foreground-bar`}
+                className={element('foreground-bar')}
                 style={{
                     left: `${backgroundPosition}%`,
                     right: `${backgroundPosition}%`,

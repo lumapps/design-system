@@ -9,7 +9,6 @@ import { useIntersectionObserver } from '@lumx/react/hooks/useIntersectionObserv
 
 import { GenericProps, isComponent } from '@lumx/react/utils/type';
 import { partitionMulti } from '@lumx/react/utils/partitionMulti';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
@@ -80,6 +79,7 @@ const COMPONENT_NAME = 'Dialog';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-dialog';
+const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -201,34 +201,33 @@ export const Dialog = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
                 {...forwardedProps}
                 className={classNames.join(
                     className,
-                    handleBasicClasses({
-                        isHidden: !isOpen,
-                        isLoading,
-                        isShown: isOpen || isVisible,
-                        prefix: CLASSNAME,
-                        size,
+                    block({
+                        'is-hidden': !isOpen,
+                        'is-loading': isLoading,
+                        'is-shown': isOpen || isVisible,
+                        [`size-${size}`]: Boolean(size),
                     }),
                 )}
                 style={{ zIndex }}
             >
-                <div className={`${CLASSNAME}__overlay`} />
+                <div className={element('overlay')} />
 
                 <HeadingLevelProvider level={2}>
                     <ThemeProvider value={undefined}>
-                        <div className={`${CLASSNAME}__container`} role="dialog" aria-modal="true" {...dialogProps}>
+                        <div className={element('container')} role="dialog" aria-modal="true" {...dialogProps}>
                             <ClickAwayProvider
                                 callback={!shouldPreventCloseOnClickAway && onClose}
                                 childrenRefs={clickAwayRefs}
                                 parentRef={rootRef}
                             >
-                                <section className={`${CLASSNAME}__wrapper`} ref={wrapperRef}>
+                                <section className={element('wrapper')} ref={wrapperRef}>
                                     {(header || headerChildContent) && (
                                         <header
                                             {...headerChildProps}
                                             className={classNames.join(
-                                                `${CLASSNAME}__header`,
-                                                (forceHeaderDivider || hasTopIntersection) &&
-                                                    `${CLASSNAME}__header--has-divider`,
+                                                element('header', {
+                                                    'has-divider': Boolean(forceHeaderDivider || hasTopIntersection),
+                                                }),
                                                 headerChildProps?.className,
                                             )}
                                         >
@@ -237,19 +236,13 @@ export const Dialog = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
                                         </header>
                                     )}
 
-                                    <div
-                                        ref={mergeRefs(contentRef, localContentRef)}
-                                        className={`${CLASSNAME}__content`}
-                                    >
-                                        <div
-                                            className={`${CLASSNAME}__sentinel ${CLASSNAME}__sentinel--top`}
-                                            ref={setSentinelTop}
-                                        />
+                                    <div ref={mergeRefs(contentRef, localContentRef)} className={element('content')}>
+                                        <div className={element('sentinel', { top: true })} ref={setSentinelTop} />
 
                                         {content}
 
                                         <div
-                                            className={`${CLASSNAME}__sentinel ${CLASSNAME}__sentinel--bottom`}
+                                            className={element('sentinel', { bottom: true })}
                                             ref={setSentinelBottom}
                                         />
                                     </div>
@@ -258,9 +251,9 @@ export const Dialog = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
                                         <footer
                                             {...footerChildProps}
                                             className={classNames.join(
-                                                `${CLASSNAME}__footer`,
-                                                (forceFooterDivider || hasBottomIntersection) &&
-                                                    `${CLASSNAME}__footer--has-divider`,
+                                                element('footer', {
+                                                    'has-divider': Boolean(forceFooterDivider || hasBottomIntersection),
+                                                }),
                                                 footerChildProps?.className,
                                             )}
                                         >
@@ -270,7 +263,7 @@ export const Dialog = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
                                     )}
 
                                     {isLoading && (
-                                        <div className={`${CLASSNAME}__progress-overlay`}>
+                                        <div className={element('progress-overlay')}>
                                             <Progress variant={ProgressVariant.circular} />
                                         </div>
                                     )}

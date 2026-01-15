@@ -1,4 +1,3 @@
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName, GenericProps, HasTheme, JSXElement } from '../../types';
 import { classNames } from '../../utils';
 import { Kind } from '../../constants';
@@ -23,6 +22,7 @@ const COMPONENT_NAME = 'InputHelper';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-input-helper';
+const { block } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -46,7 +46,13 @@ export const InputHelper = (props: InputHelperProps) => {
         <p
             ref={ref}
             {...forwardedProps}
-            className={classNames.join(className, handleBasicClasses({ prefix: CLASSNAME, color, theme }))}
+            className={classNames.join(
+                className,
+                block({
+                    [`color-${color}`]: Boolean(color),
+                    [`theme-${theme}`]: Boolean(theme),
+                }),
+            )}
         >
             {children}
         </p>

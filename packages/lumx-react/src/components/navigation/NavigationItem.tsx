@@ -1,14 +1,16 @@
 import { ElementType, ReactNode } from 'react';
 import { Icon, Placement, Size, Text, Tooltip } from '@lumx/react';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import { classNames } from '@lumx/core/js/utils';
 import { ComponentRef, HasClassName, HasPolymorphicAs, HasRequiredLinkHref, HasTheme } from '@lumx/react/utils/type';
+
 import { forwardRefPolymorphic } from '@lumx/react/utils/react/forwardRefPolymorphic';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { useOverflowTooltipLabel } from '@lumx/react/hooks/useOverflowTooltipLabel';
 import { RawClickable } from '@lumx/react/utils/react/RawClickable';
 
 import { ITEM_CLASSNAME as CLASSNAME, ITEM_COMPONENT_NAME as COMPONENT_NAME } from './constants';
+
+const { block, element } = classNames.bem(CLASSNAME);
 
 type BaseNavigationItemProps = {
     /** Icon (SVG path). */
@@ -38,28 +40,24 @@ export const NavigationItem = Object.assign(
             <li
                 className={classNames.join(
                     className,
-                    handleBasicClasses({
-                        prefix: CLASSNAME,
-                        theme,
+                    block({
+                        [`theme-${theme}`]: Boolean(theme),
                     }),
                 )}
             >
                 <Tooltip label={tooltipLabel} placement={Placement.TOP}>
                     <RawClickable
                         as={Element}
-                        className={handleBasicClasses({
-                            prefix: `${CLASSNAME}__link`,
-                            isSelected: isCurrentPage,
+                        className={element('link', {
+                            'is-selected': isCurrentPage,
                         })}
                         ref={ref as React.Ref<any>}
                         aria-current={isCurrentPage ? 'page' : undefined}
                         {...forwardedProps}
                     >
-                        {icon ? (
-                            <Icon className={`${CLASSNAME}__icon`} icon={icon} size={Size.xs} theme={theme} />
-                        ) : null}
+                        {icon ? <Icon className={element('icon')} icon={icon} size={Size.xs} theme={theme} /> : null}
 
-                        <Text as="span" truncate className={`${CLASSNAME}__label`} ref={labelRef}>
+                        <Text as="span" truncate className={element('label')} ref={labelRef}>
                             {label}
                         </Text>
                     </RawClickable>
