@@ -6003,6 +6003,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/lunr@npm:^2.3.7":
+  version: 2.3.7
+  resolution: "@types/lunr@npm:2.3.7"
+  checksum: 10/262a09c908271bb6b3fb1a9f4d312ddea3436022ea7d17cbf4a04215ca8a909c2af8a03af89b931f7cd0d5389f75c606582a050f900c1837f6527544de5ae014
+  languageName: node
+  linkType: hard
+
 "@types/mdast@npm:^3.0.0, @types/mdast@npm:^3.0.3":
   version: 3.0.3
   resolution: "@types/mdast@npm:3.0.3"
@@ -9651,6 +9658,13 @@ __metadata:
   dependencies:
     delayed-stream: "npm:~1.0.0"
   checksum: 10/2e969e637d05d09fa50b02d74c83a1186f6914aae89e6653b62595cc75a221464f884f55f231b8f4df7a49537fba60bdc0427acd2bf324c09a1dbb84837e36e4
+  languageName: node
+  linkType: hard
+
+"comlink@npm:^4.4.2":
+  version: 4.4.2
+  resolution: "comlink@npm:4.4.2"
+  checksum: 10/ecee53b5b4536b3aa3f7636c383f831e68fbc013def77665cc7fad873d72cfa23b994e1ec4b49e83e4e909c1089a03acae03a523e33a5e5ed938cdb613456434
   languageName: node
   linkType: hard
 
@@ -18440,8 +18454,10 @@ __metadata:
     "@lumx/react": "npm:^4.0.0"
     "@mdx-js/react": "npm:^2.0.0"
     "@reach/router": "npm:^1.2.1"
+    "@types/lunr": "npm:^2.3.7"
     "@types/reach__router": "npm:^1.3.6"
     classnames: "npm:^2.3.2"
+    comlink: "npm:^4.4.2"
     focus-visible: "npm:^5.2.0"
     gatsby: "npm:^5.13.0"
     gatsby-plugin-copy-files-enhanced: "npm:^1.1.1"
@@ -18468,7 +18484,6 @@ __metadata:
     sass: "npm:^1.54.0"
     tsconfig-paths-webpack-plugin: "npm:^4.0.1"
     typescript: "npm:^5.4.3"
-    workerize-loader: "npm:^2.0.2"
     yaml: "npm:^1.10.0"
   languageName: unknown
   linkType: soft
@@ -29541,17 +29556,6 @@ __metadata:
   version: 1.0.0
   resolution: "wordwrap@npm:1.0.0"
   checksum: 10/497d40beb2bdb08e6d38754faa17ce20b0bf1306327f80cb777927edb23f461ee1f6bc659b3c3c93f26b08e1cf4b46acc5bae8fda1f0be3b5ab9a1a0211034cd
-  languageName: node
-  linkType: hard
-
-"workerize-loader@npm:^2.0.2":
-  version: 2.0.2
-  resolution: "workerize-loader@npm:2.0.2"
-  dependencies:
-    loader-utils: "npm:^2.0.0"
-  peerDependencies:
-    webpack: "*"
-  checksum: 10/a46785c905f7b6a110aee09efb7c6e4544c8bc6a41e84571b064ca83b84e6b0ea369a3f898c83d8df38e3275e38c7b83457c637b3a169d295674365142f01daa
   languageName: node
   linkType: hard
 
