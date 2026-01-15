@@ -6,13 +6,12 @@
 
 The default font vary with the theme used.
 
-- With Material theme the design system uses the open-source typeface Roboto. It can be accessed and downloaded from <a href="https://fonts.google.com/specimen/Roboto" target="_blank">Google font</a>.
-
-- Without Material theme, the design system intentionaly uses default systems fonts, avoiding unecessary weight, loading time plus benefiting native system fonts accessibility.
+-   With Material theme the design system uses the open-source typeface Roboto. It can be accessed and downloaded from <a href="https://fonts.google.com/specimen/Roboto" target="_blank" rel="noopener noreferrer">Google font</a>.
+-   Without Material theme, the design system intentionaly uses default systems fonts, avoiding unecessary weight, loading time plus benefiting native system fonts accessibility.
 
 ### Fonts by system
 
-<table style="text-align: left; width: 100%">
+<table style={{ textAlign: 'left', width: '100%' }}>
     <thead>
         <tr>
             <th>System</th>
@@ -21,19 +20,27 @@ The default font vary with the theme used.
     </thead>
     <tbody>
         <tr>
-            <td><strong>Windows</strong></td>
+            <td>
+                <strong>Windows</strong>
+            </td>
             <td>Segoe UI</td>
         </tr>
         <tr>
-            <td><strong>Mac OSX</strong></td>
+            <td>
+                <strong>Mac OSX</strong>
+            </td>
             <td>SF Pro</td>
         </tr>
         <tr>
-            <td><strong>Linux</strong></td>
+            <td>
+                <strong>Linux</strong>
+            </td>
             <td>Ubuntu</td>
         </tr>
         <tr>
-            <td><strong>Chrome OS</strong></td>
+            <td>
+                <strong>Chrome OS</strong>
+            </td>
             <td>Roboto</td>
         </tr>
     </tbody>
@@ -48,15 +55,26 @@ Selecting appropriate text styles is determined by layout structure. Layouts may
 Basic text styles are default choice for any piece of UI. They are consistent throughout the whole interface and cannot be customized further than the font family choice.
 
 <DemoBlock>
-<h1 className="lumx-typography-display1">Display 1</h1>
-<h2 className="lumx-typography-headline">Headline</h2>
-<h3 className="lumx-typography-title">Title</h3>
-<h4 className="lumx-typography-subtitle2">Subtitle 2 dream of the mind's eye star stuff harvesting star</h4>
-<h5 className="lumx-typography-subtitle1">Subtitle 1 finite but unbounded the ash of stellar alchemy</h5>
-<p className="lumx-typography-body2">Body 2 Hundreds of thousands with pretty stories for which there's little good evidence billions upon billions culture science from which we spring? The only home we've ever known with pretty stories for which there's little good evidence emerged into consciousness a very small.</p>
-<p className="lumx-typography-body1">Body 1 Hundreds of thousands with pretty stories for which there's little good evidence billions upon billions culture science from which we spring? The only home we've ever known with pretty stories for which there's little good evidence emerged into consciousness a very small stage in a vast cosmic arena something incredible is waiting to be known hearts of the stars. Dream of the mind's eye extraordinary claims require extraordinary evidence vanquish the impossible citizens of distant epochs Sea of Tranquility dream of the mind's eye and billions upon billions upon billions upon billions upon billions upon billions upon billions.</p>
-<p className="lumx-typography-caption">Caption</p>
-<p className="lumx-typography-overline">Overline</p>
+    <h1 className="lumx-typography-display1">Display 1</h1>
+    <h2 className="lumx-typography-headline">Headline</h2>
+    <h3 className="lumx-typography-title">Title</h3>
+    <h4 className="lumx-typography-subtitle2">Subtitle 2 dream of the mind's eye star stuff harvesting star</h4>
+    <h5 className="lumx-typography-subtitle1">Subtitle 1 finite but unbounded the ash of stellar alchemy</h5>
+    <p className="lumx-typography-body2">
+        Body 2 Hundreds of thousands with pretty stories for which there's little good evidence billions upon billions
+        culture science from which we spring? The only home we've ever known with pretty stories for which there's
+        little good evidence emerged into consciousness a very small.
+    </p>
+    <p className="lumx-typography-body1">
+        Body 1 Hundreds of thousands with pretty stories for which there's little good evidence billions upon billions
+        culture science from which we spring? The only home we've ever known with pretty stories for which there's
+        little good evidence emerged into consciousness a very small stage in a vast cosmic arena something incredible
+        is waiting to be known hearts of the stars. Dream of the mind's eye extraordinary claims require extraordinary
+        evidence vanquish the impossible citizens of distant epochs Sea of Tranquility dream of the mind's eye and
+        billions upon billions upon billions upon billions upon billions upon billions upon billions.
+    </p>
+    <p className="lumx-typography-caption">Caption</p>
+    <p className="lumx-typography-overline">Overline</p>
 </DemoBlock>
 
 ### Custom styles
@@ -64,30 +82,24 @@ Basic text styles are default choice for any piece of UI. They are consistent th
 Custom styles are only available when Material theme is not used.
 Custom text styles are overrideable by customization:
 
-- font-family
-- size
-- weight
-- style
-- line-height
+-   font-family
+-   size
+-   weight
+-   style
+-   line-height
 
 Use them in pieces of UI that need to reflect an identity (usually widgets or pages). They’re the same app-wide by default but the customization can be made with context: targeting a specific piece of UI like a specific widget in a specific page.
 
 <DemoBlock>
-<h1 className="lumx-typography-custom-title1">Title1</h1>
-<h2 className="lumx-typography-custom-title2">Title2</h2>
-<h3 className="lumx-typography-custom-title3">Title3</h3>
-<h4 className="lumx-typography-custom-title4">Title4</h4>
-<h5 className="lumx-typography-custom-title5">Title5</h5>
-<h6 className="lumx-typography-custom-title6">Title6</h6>
-<p className="lumx-typography-custom-intro">Intro</p>
-<p className="lumx-typography-custom-body-large">Body large</p>
-<p className="lumx-typography-custom-body">Body</p>
-<p className="lumx-typography-custom-quote">Quote</p>
-<p className="lumx-typography-custom-publish-info">Publish info</p>
-{/*
-<p className="lumx-typography-custom-tag">Tag</p>
-<p className="lumx-typography-custom-metadata">metadata</p>
-<p className="lumx-typography-custom-button-size-m">Button m</p>
-<p className="lumx-typography-custom-button-size-s">Button s</p>
-*/}
+    <h1 className="lumx-typography-custom-title1">Title1</h1>
+    <h2 className="lumx-typography-custom-title2">Title2</h2>
+    <h3 className="lumx-typography-custom-title3">Title3</h3>
+    <h4 className="lumx-typography-custom-title4">Title4</h4>
+    <h5 className="lumx-typography-custom-title5">Title5</h5>
+    <h6 className="lumx-typography-custom-title6">Title6</h6>
+    <p className="lumx-typography-custom-intro">Intro</p>
+    <p className="lumx-typography-custom-body-large">Body large</p>
+    <p className="lumx-typography-custom-body">Body</p>
+    <p className="lumx-typography-custom-quote">Quote</p>
+    <p className="lumx-typography-custom-publish-info">Publish info</p>
 </DemoBlock>

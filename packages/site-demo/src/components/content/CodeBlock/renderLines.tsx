@@ -3,9 +3,9 @@ import { RenderLineParams } from './types';
 
 export const renderLines = ({ tokens, getLineProps, getTokenProps }: RenderLineParams): ReactNode =>
     tokens.map((line, i) => (
-        <div key={line} {...getLineProps({ line, key: i })}>
+        <div {...getLineProps({ line, key: i })} key={i}>
             {line.map((token, key) => (
-                <code key={token} {...getTokenProps({ token, key })} />
+                <code {...getTokenProps({ token, key })} key={key} />
             ))}
         </div>
     ));
