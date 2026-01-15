@@ -24,6 +24,7 @@ exports.createPages = async ({ graphql, actions }) => {
                         parent {
                             ... on File {
                                 sourceInstanceName
+                                relativeDirectory
                             }
                         }
                         excerpt(pruneLength: 200)
@@ -47,9 +48,13 @@ exports.createPages = async ({ graphql, actions }) => {
         (edge) => edge.node.parent && edge.node.parent.sourceInstanceName === 'preprocessed-content',
     );
     for (const page of pages) {
-        const slug = page.node.fields.slug;
+        const slug = page.node.fields?.slug;
+        if (!slug) {
+            continue;
+        }
         const title = mdxUtils.getFirstH1Text(page.node.tableOfContents) || slugToTitle(slug);
         const excerpt = cleanExcerpt(page.node.excerpt, title);
+
         createPage({
             path: slug,
             component: `${pageTemplate}?__contentFilePath=${page.node.internal.contentFilePath}`,
@@ -80,17 +85,15 @@ exports.onCreateBabelConfig = ({ actions }) => {
     });
 };
 
-exports.onCreateWebpackConfig = async ({ actions, getConfig }) => {
-    // Generate the JSON icon library
-    await generateJSONIconLibrary();
+exports.onCreateWebpackConfig = async ({ actions, stage }) => {
+    if (!stage.endsWith('html')) {
+        // Generate the JSON icon library
+        await generateJSONIconLibrary();
+    }
 
     actions.setWebpackConfig({
         plugins: [CONFIGS.ignoreNotFoundExport],
-
         resolve: {
-            alias: {
-                '@content': path.resolve('./content'),
-            },
             plugins: [new TsconfigPathsPlugin({ extensions: ['.ts', '.tsx'] })],
         },
     });

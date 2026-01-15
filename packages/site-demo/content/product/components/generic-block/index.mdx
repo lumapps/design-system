@@ -1,6 +1,12 @@
-import { Avatar, Thumbnail, Button, Checkbox, Message, GenericBlock, Heading, Icon, Text, Link, InlineList, UserBlock, GenericBlockGapSize } from '@lumx/react';
-import { Placeholder } from '@lumx/demo/components/content/Placeholder';
-import { mdiPlus, mdiStarOutline, mdiEarth, mdiMenuDown, mdiClose } from '@lumx/icons';
+import * as Demo1 from './react/demo1.tsx';
+import * as Demo2 from './react/demo2.tsx';
+import * as Demo3 from './react/demo3.tsx';
+import * as Demo4 from './react/demo4.tsx';
+import * as Demo5 from './react/demo5.tsx';
+import * as Demo6 from './react/demo6.tsx';
+import * as Demo7 from './react/demo7.tsx';
+import * as Demo8 from './react/demo8.tsx';
+import * as Demo9 from './react/demo9.tsx';
 
 # Generic block
 
@@ -12,225 +18,40 @@ Generic blocks have 3 sections : 1) **Figure**, 2) **Content** and 3) **Actions*
 
 Here presented in two **orientation**: **Vertical** and **Horizontal**.
 
-<DemoBlock orientation="horizontal" vAlign="space-evenly">
-    <GenericBlock orientation="vertical" vAlign="center">
-        <GenericBlock.Figure>
-            <Placeholder name="1" height={64} width={64} />
-        </GenericBlock.Figure>
-        <GenericBlock.Content>
-            <Placeholder name="2" height={52} width={104} />
-        </GenericBlock.Content>
-        <GenericBlock.Actions>
-            <Placeholder name="3" width={80} />
-        </GenericBlock.Actions>
-    </GenericBlock>
-    <GenericBlock orientation="horizontal">
-        <GenericBlock.Figure>
-            <Placeholder name="1" />
-        </GenericBlock.Figure>
-        <GenericBlock.Content>
-            <Placeholder name="2" width={122} />
-        </GenericBlock.Content>
-        <GenericBlock.Actions>
-            <Placeholder name="3" width={80} textAlign="right" />
-        </GenericBlock.Actions>
-    </GenericBlock>
-</DemoBlock>
+<DemoBlock orientation="horizontal" vAlign="space-evenly" demo={{ react: Demo1 }} />
 
 ### Figure section
 
 Optional, containing a figure-like element (like [Avatar](/product/components/avatar/), [Thumbnail](/product/components/thumbnail/), [Icon](/product/components/icon/), etc.).
 
-<DemoBlock orientation="horizontal" hAlign="bottom" vAlign="space-evenly">
-    <GenericBlock as="article" orientation="vertical" vAlign="center">
-        <GenericBlock.Figure>
-            <Avatar image="/demo-assets/persona.png" alt="Emmitt O Lum. Profile Photo" size="l" />
-        </GenericBlock.Figure>
-        <GenericBlock.Content>
-            <Placeholder name="2" height={52} width={104} />
-        </GenericBlock.Content>
-        <GenericBlock.Actions>
-            <Placeholder name="3" width={80} />
-        </GenericBlock.Actions>
-    </GenericBlock>
-    <GenericBlock as="article" orientation="vertical" vAlign="center">
-        <GenericBlock.Figure>
-            <Thumbnail image="/demo-assets/landscape3.jpg" alt="Book" variant="rounded" size="xl" />
-        </GenericBlock.Figure>
-        <GenericBlock.Content>
-            <Placeholder name="2" height={52} width={104} />
-        </GenericBlock.Content>
-        <GenericBlock.Actions>
-            <Placeholder name="3" width={80} />
-        </GenericBlock.Actions>
-    </GenericBlock>
-    <GenericBlock as="article" orientation="vertical" vAlign="center">
-        <GenericBlock.Figure>
-            <Icon icon={mdiPlus} size="l" hasShape />
-        </GenericBlock.Figure>
-        <GenericBlock.Content>
-            <Placeholder name="2" height={52} width={104} />
-        </GenericBlock.Content>
-        <GenericBlock.Actions>
-            <Placeholder name="3" width={80} />
-        </GenericBlock.Actions>
-    </GenericBlock>
-</DemoBlock>
+<DemoBlock orientation="horizontal" hAlign="bottom" vAlign="space-evenly" demo={{ react: Demo2 }} />
 
 ### Content section
 
 Containing one or more content elements ([Heading](/product/components/heading/), [Text](/product/components/text/), [Icon](/product/components/icon/), [Link](/product/components/link), [InlineList](/product/components/inline-list/), [User block](/product/components/user-block/), etc.).
 
 <Message kind="warning" hasBackground>
-    When building another component with this block, always refers to the overflow rules defined.
-    For examples, some components mays have a fixed height and truncated text.
+    When building another component with this block, always refers to the overflow rules defined. For examples, some
+    components mays have a fixed height and truncated text.
 </Message>
 
-<DemoBlock orientation="vertical" gap="huge" vAlign="center" hAlign="bottom">
-    <GenericBlock as="article" orientation="horizontal" style={{ width: 494 }}>
-        <GenericBlock.Figure>
-            <Placeholder name="1" height={64} width={64} />
-        </GenericBlock.Figure>
-        <GenericBlock.Content>
-            <Heading as="h2" typography="subtitle2">
-                Marketing & Comms Workspace
-            </Heading>
-            <Text as="p" truncate typography="body1" color="dark-L2">
-                A space to collaborate on events, communication and a workspace.
-            </Text>
-            <InlineList typography="body1" color="dark-L2">
-                <Text as="span">
-                    <Icon icon={mdiEarth} /> Open
-                </Text>
-                <Text as="span">1035 Members</Text>
-            </InlineList>
-        </GenericBlock.Content>
-        <GenericBlock.Actions hAlign="center">
-            <Placeholder name="3" width={80} textAlign="right" />
-        </GenericBlock.Actions>
-    </GenericBlock>
-    <GenericBlock as="article" orientation="horizontal" style={{ width: 450 }}>
-        <GenericBlock.Figure>
-            <Placeholder name="1" />
-        </GenericBlock.Figure>
-        <GenericBlock.Content>
-            <Heading as="h2" typography="subtitle1">
-                Ines Gomez
-            </Heading>
-            <InlineList typography="body1" color="dark-L2">
-                <Text as="span">Account Manager</Text>
-                <Text as="span">
-                    Added in <Link href="#">Sales Team</Link>
-                </Text>
-            </InlineList>
-        </GenericBlock.Content>
-        <GenericBlock.Actions hAlign="center">
-            <Placeholder name="3" width={72} textAlign="right" />
-        </GenericBlock.Actions>
-    </GenericBlock>
-</DemoBlock>
+<DemoBlock orientation="vertical" gap="huge" vAlign="center" hAlign="bottom" demo={{ react: Demo3 }} />
 
-<DemoBlock orientation="horizontal" vAlign="space-evenly">
-    <GenericBlock as="article" orientation="vertical" vAlign="center" gap="big" style={{ maxWidth: 216 }}>
-        <GenericBlock.Figure>
-            <Placeholder name="2" height={154} width={216} />
-        </GenericBlock.Figure>
-        <GenericBlock.Content className="lumx-spacing-padding-horizontal-big" vAlign="left" gap="tiny">
-            <UserBlock name="Emmitt O. Lum" avatarProps={{ image: '/demo-assets/persona.png' }} size="s" />
-            <Heading as="h2" typography="subtitle2">
-                Fiscal Year Results and Conference
-            </Heading>
-            <Text as="p" typography="body1" color="dark-L2">
-                Our company will release its Fiscal Year Results next…
-            </Text>
-        </GenericBlock.Content>
-    </GenericBlock>
-    <GenericBlock as="article" orientation="vertical" vAlign="center" style={{ maxWidth: 184 }}>
-        <GenericBlock.Figure>
-            <Placeholder name="1" height={64} width={64} />
-        </GenericBlock.Figure>
-        <GenericBlock.Content>
-            <Heading as="h2" typography="subtitle2">
-                Slack
-            </Heading>
-            <Text as="p" typography="body1" color="dark-L2">
-                A communication platform including chat rooms…
-            </Text>
-        </GenericBlock.Content>
-        <GenericBlock.Actions>
-            <Placeholder name="3" width={80} />
-        </GenericBlock.Actions>
-    </GenericBlock>
-</DemoBlock>
+<DemoBlock orientation="horizontal" vAlign="space-evenly" demo={{ react: Demo4 }} />
 
 ### Action section
 
 Optional, containing one or more action elements ([Button](/product/components/button), [CheckBox](/product/components/check-box), [Select](/product/components/select), etc.).
 
-<DemoBlock orientation="horizontal" vAlign="space-evenly">
-    <GenericBlock as="article" orientation="vertical" vAlign="center">
-        <GenericBlock.Figure>
-            <Placeholder name="1" />
-        </GenericBlock.Figure>
-        <GenericBlock.Content>
-            <Placeholder name="2" height={52} width={104} />
-        </GenericBlock.Content>
-        <GenericBlock.Actions>
-            <Button emphasis="medium" size="m" leftIcon={mdiStarOutline}>
-                Follow
-            </Button>
-        </GenericBlock.Actions>
-    </GenericBlock>
-    <GenericBlock as="article" orientation="vertical" vAlign="center">
-        <GenericBlock.Figure>
-            <Placeholder name="1" width={64} height={64} />
-        </GenericBlock.Figure>
-        <GenericBlock.Content>
-            <Placeholder name="2" height={52} width={104} />
-        </GenericBlock.Content>
-        <GenericBlock.Actions>
-            <Button emphasis="medium" size="s">
-                Follow
-            </Button>
-        </GenericBlock.Actions>
-    </GenericBlock>
-</DemoBlock>
+<DemoBlock orientation="horizontal" vAlign="space-evenly" demo={{ react: Demo5 }} />
 
-<DemoBlock orientation="vertical" gap="huge" vAlign="center" hAlign="bottom">
-    <GenericBlock as="article" orientation="horizontal" style={{ maxWidth: 517 }} gap="medium">
-        <GenericBlock.Figure>
-            <Placeholder name="1" />
-        </GenericBlock.Figure>
-        <GenericBlock.Content>
-            <Placeholder name="2" textAlign="left" width={244} />
-        </GenericBlock.Content>
-        <GenericBlock.Actions hAlign="center" gap="tiny">
-            <Button emphasis="medium" size="m" rightIcon={mdiMenuDown}>
-                Role
-            </Button>
-            <Button emphasis="medium" size="m" leftIcon={mdiClose}>
-                Medium
-            </Button>
-        </GenericBlock.Actions>
-    </GenericBlock>
-    <GenericBlock as="article" orientation="horizontal" style={{ maxWidth: 424, width: '100%' }} gap="medium">
-        <GenericBlock.Figure>
-            <Placeholder name="1" height={64} width={64} />
-        </GenericBlock.Figure>
-        <GenericBlock.Content>
-            <Placeholder name="2" textAlign="left" height={64} width="100%" />
-        </GenericBlock.Content>
-        <GenericBlock.Actions hAlign="center">
-            <Checkbox isDisabled inputProps={{ 'aria-label': 'Select row' }} />
-        </GenericBlock.Actions>
-    </GenericBlock>
-</DemoBlock>
+<DemoBlock orientation="vertical" gap="huge" vAlign="center" hAlign="bottom" demo={{ react: Demo6 }} />
 
 ## Gap sizes
 
 Generic blocks can have various gap sizes between sections.
 
-<DemoBlock orientation="horizontal" vAlign="space-evenly" demo="sizes" />
+<DemoBlock orientation="horizontal" vAlign="space-evenly" demo={{ react: Demo7 }} />
 
 ## Alignment
 
@@ -238,13 +59,13 @@ Generic blocks can have various gap sizes between sections.
 
 On **Horizontal** orientation, generic blocks can be aligned: `top`, `center` or `bottom`.
 
-<DemoBlock orientation="horizontal" vAlign="space-evenly" demo="horizontal-alignment" />
+<DemoBlock orientation="horizontal" vAlign="space-evenly" demo={{ react: Demo8 }} />
 
 ### Alignments in vertical orientation
 
 On **Vertical** orientation, generic blocks can be aligned: `right`, `center` or `left`.
 
-<DemoBlock orientation="horizontal" vAlign="space-evenly" demo="vertical-alignment" />
+<DemoBlock orientation="horizontal" vAlign="space-evenly" demo={{ react: Demo9 }} />
 
 ### Accessibility concerns
 

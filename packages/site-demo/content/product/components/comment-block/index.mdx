@@ -1,20 +1,24 @@
+import * as Demo1 from './react/demo1.tsx';
+import * as Demo2 from './react/demo2.tsx';
+import * as Demo3 from './react/demo3.tsx';
+
 # Comment block
 
 **Comment blocks display rich text messages as comments or chat messages.**
 
-<DemoBlock demo="default" withThemeSwitcher />
+<DemoBlock withThemeSwitcher demo={{ react: Demo1 }} />
 
 ## Relevant
 
 Use relevant comment block for validated messages as an accepted answer to a question.
 
-<DemoBlock demo="relevant" withThemeSwitcher />
+<DemoBlock withThemeSwitcher demo={{ react: Demo2 }} />
 
 ## Threaded
 
 Use threaded comment block to show relation between several messages as replies.
 
-<DemoBlock demo="threaded" withThemeSwitcher />
+<DemoBlock withThemeSwitcher demo={{ react: Demo3 }} />
 
 ### Accessibility concerns
 

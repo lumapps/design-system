@@ -1,19 +1,16 @@
+import * as Demo1 from './react/demo1.tsx';
+import * as Demo2 from './react/demo2.tsx';
+
 # Color
 
 **Use color utility classes to add color to fonts and backgrounds.**
 
-Use color utility based on [color palette](/product/foundations/colors) variants.
+Use color utility based on [color palette](/product/foundations/color) variants.
 
 ## Font color
 
-<DemoBlock>
-<span className="lumx-color-font-dark-L2">The quick brown fox jumps over the lazy dog</span>
-</DemoBlock>
+<DemoBlock demo={{ react: Demo1 }} />
 
 ## Background color
 
-<DemoBlock>
-<div className="lumx-color-background-primary-N lumx-spacing-padding-big">
-    <span className="lumx-color-font-light-N">The quick brown fox jumps over the lazy dog</span>
-</div>
-</DemoBlock>
+<DemoBlock demo={{ react: Demo2 }} />

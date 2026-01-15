@@ -1,3 +1,9 @@
+import * as Demo1 from './react/demo1.tsx';
+import * as Demo2 from './react/demo2.tsx';
+import * as Demo3 from './react/demo3.tsx';
+import * as Demo4 from './react/demo4.tsx';
+import * as Demo5 from './react/demo5.tsx';
+
 # Thumbnail mosaic
 
 **Thumbnail mosaics display multiple formatted images in a constant space.**
@@ -8,15 +14,15 @@ Thumbnail mosaics can display up to 4 images.
 
 ### Two images
 
-<DemoBlock orientation="horizontal" demo="two-images" />
+<DemoBlock demo={{ react: Demo1 }} />
 
 ### Three images
 
-<DemoBlock orientation="horizontal" demo="three-images" />
+<DemoBlock demo={{ react: Demo2 }} />
 
 ### Four images
 
-<DemoBlock orientation="horizontal" demo="four-images" />
+<DemoBlock demo={{ react: Demo3 }} />
 
 ### More than four images
 
@@ -24,13 +30,13 @@ If there are more than 4 images to display, thumbnail mosaics can display the re
 
 In this example there are 6 images in total, 4 are shown, 2 aren’t.
 
-<DemoBlock orientation="horizontal" demo="more-images" />
+<DemoBlock demo={{ react: Demo4 }} />
 
 ## Click on thumbnail
 
 Mosaic's thumbnails can be clickable to attach an [image lightbox](/product/components/image-lightbox) that displays the images in a full screen image slideshow.
 
-<DemoBlock orientation="horizontal" demo="clickable" />
+<DemoBlock demo={{ react: Demo5 }} />
 
 ### Accessibility concerns
 

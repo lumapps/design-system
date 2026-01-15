@@ -1,3 +1,10 @@
+import * as Demo1 from './react/demo1.tsx';
+import * as Demo2 from './react/demo2.tsx';
+import * as Demo3 from './react/demo3.tsx';
+import * as Demo4 from './react/demo4.tsx';
+import * as Demo5 from './react/demo5.tsx';
+import * as Demo6 from './react/demo6.tsx';
+
 # List
 
 **Lists group items vertically.**
@@ -12,43 +19,48 @@ Favor those 3 sizes for lists with list items with consistent heights.
 `huge` list items have a `16px` vertical padding.
 Use this size for any other cases.
 
-
 ### Tiny
+
 Tiny list items have a minimum height of `36px`.
 Use this size for dense lists with single line items like menus made of [dropdown](../dropdown).
 
-<DemoBlock demo="tiny" />
+<DemoBlock demo={{ react: Demo1 }} />
 
 ### Regular
+
 Regular list items have a minimum height of `52px`.
 Use this size for single line list items.
 
-<DemoBlock demo="regular" />
+<DemoBlock demo={{ react: Demo2 }} />
 
 ### Big
+
 Big list items have a minimum height of `72px`.
 Use this size for two lines list items.
 
-<DemoBlock demo="big" />
+<DemoBlock demo={{ react: Demo3 }} />
 
 ### Huge
+
 Huge list items have a vertical padding of `16px`.
 Use this size for list items that have more than two lines of content.
 
-<DemoBlock demo="huge" />
+<DemoBlock demo={{ react: Demo4 }} />
 
 ## Item padding
+
 The horizontal padding has 2 sizes: `big` and `huge`.
 By default, there is no horizontal padding.
 
-<DemoBlock demo="paddings" />
+<DemoBlock demo={{ react: Demo5 }} />
 
 ## Clickable
+
 List items can be clickable.
 Clickable list items can then be disabled, highlighted or selected.
 Use clickable list items when users need to select one or more options in a list.
 
-<DemoBlock demo="clickable" />
+<DemoBlock demo={{ react: Demo6 }} />
 
 ### List properties
 

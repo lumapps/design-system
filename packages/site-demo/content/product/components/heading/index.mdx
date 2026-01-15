@@ -1,30 +1,29 @@
-import { Heading, Message } from '@lumx/react';
+import * as Demo1 from './react/demo1.tsx';
+import * as Demo2 from './react/demo2.tsx';
+import * as Demo3 from './react/demo3.tsx';
 
 # Heading
 
-**Display simple heading text.** (specialized version of the [Text](/product/components/text/) component).
+**Display simple heading text.** (specialized version of the [Text](/product/components/text/) component).\
 By default (no parent heading level defined), heading elements use the first heading level (`h1` tag) and `display1` typography.
 
-<DemoBlock>
-    <Heading>Default heading text</Heading>
-</DemoBlock>
+<DemoBlock demo={{ react: Demo1 }} />
 
 ## Heading level & typography
 
 Use `as` to set a custom heading level and `typography` to override the default typography (see list of [typography](/product/foundations/typography/) styles).
 
-<DemoBlock orientation="horizontal" vAlign="space-evenly">
-    <Heading as="h3">Third level heading</Heading>
-    <Heading typography="overline">Custom typography</Heading>
-</DemoBlock>
+<DemoBlock orientation="horizontal" vAlign="space-evenly" demo={{ react: Demo2 }} />
 
 ## Automatic heading level
 
 Use the `HeadingLevelProvider` component to help you automatically adapt heading levels by nesting them.
 
-<DemoBlock demo="automatic-heading-level" />
+<DemoBlock demo={{ react: Demo3 }} />
 
-<Message kind="info">Use <code>level</code> property to override the base level for children headings.</Message>
+<Message kind="info">
+    Use <code>level</code> property to override the base level for children headings.
+</Message>
 
 ### Accessibility concerns
 

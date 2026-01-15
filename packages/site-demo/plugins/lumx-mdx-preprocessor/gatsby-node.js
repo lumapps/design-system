@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-const mdxDemoBlock = require('./mdx-demo-block');
-const mdxPropTable = require('./mdx-prop-table');
+const processDemo = require('./mdx-demo-block');
+const processPropTable = require('./mdx-prop-table');
 
 const CACHE_DIR = path.resolve(__dirname, '../../.cache/lumx-preprocessed-content');
 
@@ -10,35 +10,34 @@ if (!fs.existsSync(CACHE_DIR)) {
     fs.mkdirSync(CACHE_DIR, { recursive: true });
 }
 
-/**
- * Preprocess MDX files and write them to a cache directory for gatsby-plugin-mdx to pick up.
- */
-exports.onCreateNode = async ({ node, reporter }) => {
-    // Only process MDX files from the 'content' source
-    if (node.internal.type === 'File' && node.ext === '.mdx' && node.sourceInstanceName === 'content') {
-        try {
-            // Read the original file content
-            const buffer = await fs.promises.readFile(node.absolutePath, 'utf-8');
-            let mdxString = buffer.toString();
+exports.onCreateNode = async ({ node, actions, reporter }) => {
+    if (node.sourceInstanceName !== 'raw-content') return;
 
-            // Apply preprocessing
-            mdxString = await mdxDemoBlock(mdxString);
-            mdxString = await mdxPropTable(mdxString);
+    // Only process .tsx files in the content directory (demos) or .mdx files
+    const isDemo = node.internal.type === 'File' && node.ext === '.tsx';
+    const isMDX = node.internal.type === 'File' && node.ext === '.mdx';
 
-            // Determine path in cache directory
-            // We maintain the relative path structure to avoid collisions
-            const relativePath = node.relativePath;
-            const cachePath = path.join(CACHE_DIR, relativePath);
-            const cacheDir = path.dirname(cachePath);
+    if (!isDemo && !isMDX) return;
 
-            if (!fs.existsSync(cacheDir)) {
-                await fs.promises.mkdir(cacheDir, { recursive: true });
-            }
+    // Check if it's in the content directory
+    if (!node.absolutePath.includes('/content/')) return;
 
-            // Write the preprocessed content
-            await fs.promises.writeFile(cachePath, mdxString);
-        } catch (e) {
-            reporter.error(`Error preprocessing MDX file ${node.absolutePath}`, e);
+    try {
+        const content = await fs.promises.readFile(node.absolutePath, 'utf-8');
+        let processedContent = content;
+
+        if (isDemo) {
+            processedContent = await processDemo(node, content);
+        } else if (isMDX) {
+            processedContent = await processPropTable(node, content);
         }
+
+        const relativePath = node.relativePath;
+        const outputPath = path.join(CACHE_DIR, relativePath);
+
+        await fs.promises.mkdir(path.dirname(outputPath), { recursive: true });
+        await fs.promises.writeFile(outputPath, processedContent);
+    } catch (e) {
+        reporter.error(`Error processing ${node.absolutePath}`, e);
     }
 };

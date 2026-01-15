@@ -1,30 +1,23 @@
-import { Icon, Text, Message } from '@lumx/react';
-import { mdiHeart } from '@lumx/icons';
+import * as Demo1 from './react/demo1.tsx';
+import * as Demo2 from './react/demo2.tsx';
+import * as Demo3 from './react/demo3.tsx';
 
 # Text
 
-**Display simple text.**
+**Display simple text.**\
 By default, text elements have no defined color or typography.
 
-<DemoBlock>
-    <Text as="p">Default text</Text>
-</DemoBlock>
+<DemoBlock demo={{ react: Demo1 }} />
 
 ## Color and typography
 
 Both **color** and **typography** can be adapted on text elements (see list of [typography](/product/foundations/typography/) and [color](/product/foundations/color/) styles).
 
-<DemoBlock gap="tiny">
-    <Text as="h2" typography="title2">
-        Title
-    </Text>
-    <Text as="p" typography="body1" color="dark-L2">
-        Some <Text as="span" color="red"><Icon icon={mdiHeart} /> colored</Text> text
-    </Text>
-</DemoBlock>
+<DemoBlock gap="tiny" demo={{ react: Demo2 }} />
 
 <Message kind="info">
-    Here "Title" is using <code>Text</code> for demo purpose but the <a href="/product/components/heading">heading</a> element would fit better.
+    Here "Title" is using <code>Text</code> for demo purpose but the <a href="/product/components/heading">heading</a>{' '}
+    element would fit better.
 </Message>
 
 ## Text wrap and overflow
@@ -32,32 +25,7 @@ Both **color** and **typography** can be adapted on text elements (see list of [
 By default, long texts will wrap on multiple lines. Use `noWrap` to prevent that.
 Alternatively, `truncate` can be used to cut with ellipsis (it can also truncate after multiple lines).
 
-<DemoBlock orientation="horizontal" vAlign="space-evenly" style={{ gap: 90 }}>
-    <div style={{ maxWidth: '180px', overflow: 'hidden' }}>
-        <code>default</code>
-        <Text as="p" typography="body2">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </Text>
-    </div>
-    <div style={{ maxWidth: '180px', overflow: 'hidden' }}>
-        <code>no wrap</code>
-        <Text as="p" typography="body2" noWrap>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </Text>
-    </div>
-    <div style={{ maxWidth: '180px', overflow: 'hidden' }}>
-        <code>truncate</code>
-        <Text as="p" typography="body2" truncate>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </Text>
-    </div>
-    <div style={{ maxWidth: '180px', overflow: 'hidden' }}>
-        <code>truncate multiline</code>
-        <Text as="p" typography="body2" truncate={{ lines: 2 }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </Text>
-    </div>
-</DemoBlock>
+<DemoBlock orientation="horizontal" vAlign="space-evenly" style={{ gap: 90 }} demo={{ react: Demo3 }} />
 
 ### Accessibility concerns
 

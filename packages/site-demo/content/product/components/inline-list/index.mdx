@@ -1,59 +1,29 @@
-import { InlineList, Text, Link, Icon } from '@lumx/react';
-import { mdiEarth } from '@lumx/icons';
+import * as Demo1 from './react/demo1.tsx';
+import * as Demo2 from './react/demo2.tsx';
+import * as Demo3 from './react/demo3.tsx';
+import * as Demo4 from './react/demo4.tsx';
 
 # Inline list
 
 **Display inline list of elements.**
 
-<DemoBlock>
-    <InlineList>
-        <Text as="span">Some text</Text>
-        <Link href="#">Some link</Link>
-        <Icon icon={mdiEarth} />
-    </InlineList>
-</DemoBlock>
+<DemoBlock demo={{ react: Demo1 }} />
 
 ## Color and typography
 
 Like [text](/product/components/text/) elements, inline lists can have customized **color** and **typography** (see list of [typography](/product/foundations/typography/) and [color](/product/foundations/color/) styles).
 
-<DemoBlock>
-    <InlineList typography="body1" color="dark-L2">
-        <Text as="span">Some text</Text>
-        <Link href="#">Some link</Link>
-        <Icon icon={mdiEarth} />
-    </InlineList>
-</DemoBlock>
+<DemoBlock demo={{ react: Demo2 }} />
 
 ## Text wrap and overflow
 
 Inline lists pair well with [text](/product/components/text/) `noWrap` property to disable line wrap and `truncate` property to cut text with ellipsis.
 
-<DemoBlock orientation="horizontal" vAlign="space-around">
-    <InlineList typography="body1" color="dark-L2" style={{ maxWidth: 275 }}>
-        <Text as="span" noWrap>
-            <Icon icon={mdiEarth} />
-            Some text
-        </Text>
-        <Text as="span" truncate>
-            Very very very very very long text
-        </Text>
-    </InlineList>
-</DemoBlock>
+<DemoBlock orientation="horizontal" vAlign="space-around" demo={{ react: Demo3 }} />
 
 Inversely, the use of the `wrap` property will activate line wrap on overflow.
 
-<DemoBlock orientation="horizontal" vAlign="space-around">
-    <InlineList typography="body1" color="dark-L2" wrap style={{ maxWidth: 275 }}>
-        <Text as="span">
-            <Icon icon={mdiEarth} />
-            Some text
-        </Text>
-        <Text as="span">
-            Very very very very very long text
-        </Text>
-    </InlineList>
-</DemoBlock>
+<DemoBlock orientation="horizontal" vAlign="space-around" demo={{ react: Demo4 }} />
 
 ### Accessibility concerns
 

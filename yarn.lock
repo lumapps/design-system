@@ -17316,13 +17316,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"intersection-observer@npm:^0.7.0":
-  version: 0.7.0
-  resolution: "intersection-observer@npm:0.7.0"
-  checksum: 10/40fec6bca05bf37eaf75870d5bdcbc2a7409e517520cf113a26b46e1356e794c872d7f34ef45728201c964bc691ed6fa53117569c6e7e8a7ecc19c55ee9abb89
-  languageName: node
-  linkType: hard
-
 "invariant@npm:^2.2.4":
   version: 2.2.4
   resolution: "invariant@npm:2.2.4"
@@ -19621,6 +19614,7 @@ __metadata:
     "@lumx/react": "npm:^4.1.0"
     "@mdx-js/react": "npm:^2.0.0"
     "@types/gatsbyjs__reach-router": "npm:^2.0.5"
+    "@types/lodash": "npm:^4.14.149"
     "@types/lunr": "npm:^2.3.7"
     classnames: "npm:^2.3.2"
     comlink: "npm:^4.4.2"
@@ -19637,7 +19631,6 @@ __metadata:
     glob: "npm:^7.1.6"
     highlight-words-core: "npm:^1.2.2"
     htmlparser2: "npm:^3.10.1"
-    intersection-observer: "npm:^0.7.0"
     lodash: "npm:4.17.23"
     lunr: "npm:^2.3.9"
     postcss: "npm:^8.5.6"
@@ -19647,6 +19640,7 @@ __metadata:
     react: "npm:^18.3.1"
     react-docgen-typescript: "npm:^2.2.2"
     react-dom: "npm:^18.3.1"
+    react-live-runner: "npm:^1.0.7"
     sass: "npm:^1.54.0"
     tsconfig-paths-webpack-plugin: "npm:^4.0.1"
     typescript: "npm:^5.4.3"
@@ -24291,6 +24285,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"prism-react-renderer@npm:^1.2.1":
+  version: 1.3.5
+  resolution: "prism-react-renderer@npm:1.3.5"
+  peerDependencies:
+    react: ">=0.14.9"
+  checksum: 10/6deeef1bf497b5ce2ea5113f253f5d5e0842caa74eee385f15f17b75012fdea994cddf097759d0a2a9426ff857ea44bf2febe219392be4c72f887c7df88cc34d
+  languageName: node
+  linkType: hard
+
 "prismjs@npm:^1.25.0":
   version: 1.30.0
   resolution: "prismjs@npm:1.30.0"
@@ -24954,6 +24957,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-live-runner@npm:^1.0.7":
+  version: 1.0.7
+  resolution: "react-live-runner@npm:1.0.7"
+  dependencies:
+    prism-react-renderer: "npm:^1.2.1"
+    react-runner: "npm:^1.0.5"
+    react-simple-code-editor: "npm:^0.13.1"
+  peerDependencies:
+    react: ^16.8.0 || ^17 || ^18
+    react-dom: ^16.8.0 || ^17 || ^18
+  checksum: 10/650cda3a784243af12ece542898d36a357b684d599df56146e5a0446b3266b9aa189ac7cad7045650d3ea9b89f68805e6a72d2ccf07413c126537e9d73524f59
+  languageName: node
+  linkType: hard
+
 "react-popper@npm:^2.2.4":
   version: 2.2.4
   resolution: "react-popper@npm:2.2.4"
@@ -24974,6 +24991,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-runner@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "react-runner@npm:1.0.5"
+  dependencies:
+    sucrase: "npm:^3.21.0"
+  peerDependencies:
+    react: ^16.0.0 || ^17 || ^18
+    react-dom: ^16.0.0 || ^17 || ^18
+  checksum: 10/18661270da164b8c3d9457b6497db20595cce82bfe187c50d4acdfca342ef19cb7e68cc97f6a4fb8fe82ba465d277e25b85cdbed0fe88048db0849ef10842db8
+  languageName: node
+  linkType: hard
+
 "react-server-dom-webpack@npm:0.0.0-experimental-c8b778b7f-20220825":
   version: 0.0.0-experimental-c8b778b7f-20220825
   resolution: "react-server-dom-webpack@npm:0.0.0-experimental-c8b778b7f-20220825"
@@ -24985,6 +25014,16 @@ __metadata:
     react: 0.0.0-experimental-c8b778b7f-20220825
     webpack: ^5.59.0
   checksum: 10/63ce72dd8e4399ad835e8b3e220d458f4e44665310edf4e136919faf7f8b80bac238ce91c237c248b477466035c92de4b7bce3ad14215025f14ecb8e42ebd202
+  languageName: node
+  linkType: hard
+
+"react-simple-code-editor@npm:^0.13.1":
+  version: 0.13.1
+  resolution: "react-simple-code-editor@npm:0.13.1"
+  peerDependencies:
+    react: "*"
+    react-dom: "*"
+  checksum: 10/6374b164b4d0f30d7a5c7ad424539cfea2f367e6f1ce78a52d207058835e3628645a88439af22012b5b00d72867f84d17173b49ec37df1145a5994e367937dcf
   languageName: node
   linkType: hard
 
@@ -28243,6 +28282,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"sucrase@npm:^3.21.0":
+  version: 3.35.1
+  resolution: "sucrase@npm:3.35.1"
+  dependencies:
+    "@jridgewell/gen-mapping": "npm:^0.3.2"
+    commander: "npm:^4.0.0"
+    lines-and-columns: "npm:^1.1.6"
+    mz: "npm:^2.7.0"
+    pirates: "npm:^4.0.1"
+    tinyglobby: "npm:^0.2.11"
+    ts-interface-checker: "npm:^0.1.9"
+  bin:
+    sucrase: bin/sucrase
+    sucrase-node: bin/sucrase-node
+  checksum: 10/539f5c6ebc1ff8d449a89eb52b8c8944a730b9840ddadbd299a7d89ebcf16c3f4bc9aa59e1f2e112a502e5cf1508f7e02065f0e97c0435eb9a7058e997dfff5a
+  languageName: node
+  linkType: hard
+
 "sucrase@npm:^3.32.0":
   version: 3.34.0
   resolution: "sucrase@npm:3.34.0"
@@ -28838,7 +28895,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tinyglobby@npm:^0.2.13, tinyglobby@npm:^0.2.14, tinyglobby@npm:^0.2.15":
+"tinyglobby@npm:^0.2.11, tinyglobby@npm:^0.2.13, tinyglobby@npm:^0.2.14, tinyglobby@npm:^0.2.15":
   version: 0.2.15
   resolution: "tinyglobby@npm:0.2.15"
   dependencies:

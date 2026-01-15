@@ -1,46 +1,52 @@
+import * as Demo1 from './react/demo1.tsx';
+import * as Demo2 from './react/demo2.tsx';
+import * as Demo3 from './react/demo3.tsx';
+import * as Demo4 from './react/demo4.tsx';
+
 # Badge
 
-**Use badges to display counters, rankings, states, status, activities or custom logos.**
+**Use badges to display counters, rankings, states, status, activities or custom logos.**\
 Badges can be placed above avatars.
 
 ## Label
 
 Badges with label are often used to display counters or rankings.
 
-<DemoBlock orientation="horizontal" demo="label" />
+<DemoBlock orientation="horizontal" demo={{ react: Demo1 }} />
 
 ## Icon
 
 Badges with icon are often used to display states, status or activities.
 
-<DemoBlock orientation="horizontal" demo="icon" />
+<DemoBlock orientation="horizontal" demo={{ react: Demo2 }} />
 
 ## Thumbnail
 
 Badges with thumbnail are often used to display custom logos images.
 
-<DemoBlock orientation="horizontal" demo="thumbnail" />
+<DemoBlock orientation="horizontal" demo={{ react: Demo3 }} />
 
 ## Colors
+
 **Blue** badges are often used as an accent visual, **Green** to emphasize success, **Yellow** to emphasize warnings, **Red** to emphasize alerts and **Dark** as a neutral visual.
 
-<DemoBlock orientation="horizontal" demo="colors" />
+<DemoBlock orientation="horizontal" demo={{ react: Demo4 }} />
 
 ### Accessibility concerns
 
-
 A badge can contain two types of information:
-- **An icon/image**, if the information given by this icon is not given by another element next to the badged item,
-then you have to add an alt on the icon to explicit what it means.
-(Ex: a badge icon telling the user is an admin, the alt could be "This user is an administrator" ).
-If the information is already available as a text near the badged element, then you don't have to repeat the
-information. Leave the icon's `alt` empty.
-- **A number**, if the information given by this icon is not given by another element next to the badged item,
-then you have to wrap your number in a span with a `aria-hidden=true` attribute and add a `aria-label` on the badge that
-gives the information.
-(Ex: a badge number counting the number of unread notifications, the aria-label could be "You have X unread notifications").
-If the information is already available as a text near the badged element, then you don't have to repeat the
-information. Keep the number wrapped in `aria-hidden=true` span, and leave no `aria-label` on the Badge component.
+
+-   **An icon/image**, if the information given by this icon is not given by another element next to the badged item,
+    then you have to add an alt on the icon to explicit what it means.
+    (Ex: a badge icon telling the user is an admin, the alt could be "This user is an administrator" ).
+    If the information is already available as a text near the badged element, then you don't have to repeat the
+    information. Leave the icon's `alt` empty.
+-   **A number**, if the information given by this icon is not given by another element next to the badged item,
+    then you have to wrap your number in a span with a `aria-hidden=true` attribute and add a `aria-label` on the badge that
+    gives the information.
+    (Ex: a badge number counting the number of unread notifications, the aria-label could be "You have X unread notifications").
+    If the information is already available as a text near the badged element, then you don't have to repeat the
+    information. Keep the number wrapped in `aria-hidden=true` span, and leave no `aria-label` on the Badge component.
 
 Keep in mind that the color can also carry an information, it may be translated for screen-readers through alt texts.
 

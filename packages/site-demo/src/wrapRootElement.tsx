@@ -3,10 +3,11 @@ import { CodeBlock } from '@lumx/demo/components/content/CodeBlock/CodeBlock';
 import { DemoBlock } from '@lumx/demo/components/content/DemoBlock/DemoBlock';
 import { PropTable } from '@lumx/demo/components/content/PropTable/PropTable';
 import { Link } from '@lumx/demo/components/base/Link';
-
+import { Message } from '@lumx/react';
 import { MDXProvider } from '@mdx-js/react';
+
 import 'focus-visible';
-import 'intersection-observer';
+
 /**
  * Customize MDX components.
  */
@@ -24,6 +25,7 @@ const mdxComponents = {
     a: Link,
     DemoBlock,
     PropTable,
+    Message,
 };
 
 /**

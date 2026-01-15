@@ -40,12 +40,45 @@
 
     &__code {
         display: none;
-        border: none;
-        border-top: 1px solid $lumx-color-dark-L4;
-        border-radius: 0;
 
         &--shown {
             display: block;
+            border-top: 1px solid $lumx-color-dark-L4;
+        }
+    }
+
+    &__code-part {
+        overflow: visible;
+        border: none;
+        border-radius: 0;
+        padding: 0;
+        margin: $lumx-spacing-unit-big;
+        white-space: break-spaces;
+
+        textarea {
+            overflow: visible !important;
+            outline-offset: 4px !important;
+            transition-property: outline;
+
+            &:hover {
+                outline: 1px solid $lumx-color-primary-L3;
+            }
+            &:focus-visible {
+                outline: 2px solid $lumx-color-primary-N;
+            }
+        }
+
+        &--editable {
+            // Override react-live inline styles
+            > div {
+                overflow: visible !important;
+
+                background-color: transparent !important;
+            }
+            pre, textarea {
+                padding: 0 !important;
+                font-family: monospace !important;
+            }
         }
     }
 

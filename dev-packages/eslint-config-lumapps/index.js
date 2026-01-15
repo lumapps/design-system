@@ -68,9 +68,8 @@ module.exports = {
             files: [
                 'packages/lumx-react/**/*.{js,jsx,ts,tsx}',
                 'packages/lumx-core/**/*.{js,jsx,ts,tsx}',
-                'site-demo/**/*.{js,jsx,ts,tsx}',
+                'packages/site-demo/**/*.{js,jsx,ts,tsx}',
             ],
-            excludedFiles: ['**/site-demo/content/**'],
             extends: [
                 'airbnb',
                 'airbnb/hooks',
@@ -92,6 +91,17 @@ module.exports = {
                 'react/no-array-index-key': 'off',
                 'react/prop-types': 'off',
                 'react/require-default-props': 'off',
+            },
+        },
+        {
+            files: ['*/stories/*', '*.stories.tsx', '**/site-demo/content/**'],
+            rules: {
+                '@typescript-eslint/explicit-module-boundary-types': 'off',
+                'no-alert': 'off',
+                'no-console': 'off',
+                'jsx-a11y/anchor-is-valid': 'off',
+                'react/no-unescaped-entities': 'off',
+                'react/display-name': 'off',
             },
         },
         // TODO: remove theme switcher

@@ -5,6 +5,10 @@ const extractTextFromHTMLPage = require('./plugins/utils/extractTextFromHTMLPage
 const path = require('path');
 
 module.exports = {
+    flags: {
+        FAST_DEV: true,
+        PARALLEL_SOURCING: true,
+    },
     siteMetadata: {
         title: 'LumApps Design System',
         author: packageJson.author.name,
@@ -12,12 +16,12 @@ module.exports = {
         version: packageJson.version,
     },
     plugins: [
-        // Load content source files.
+        // Load content source files (RAW)
         {
             resolve: 'gatsby-source-filesystem',
             options: {
                 path: `${__dirname}/content`,
-                name: 'content',
+                name: 'raw-content',
             },
         },
         // Load preprocessed content source files.
@@ -36,8 +40,8 @@ module.exports = {
                 destination: '/',
             },
         },
-        // Parse DemoBlock and PropTable.
-        './lumx-mdx-preprocessor',
+        // Preprocess MDX and Demos.
+        './plugins/lumx-mdx-preprocessor',
         // Compile MDX content.
         {
             resolve: 'gatsby-plugin-mdx',

@@ -1,13 +1,4 @@
-import { graphql } from 'gatsby';
 import { PageHead } from '../components/base/PageHead';
-
-export const pageQuery = graphql`
-    query ($slug: String!) {
-        mdx(fields: { slug: { eq: $slug } }) {
-            body
-        }
-    }
-`;
 
 interface Props {
     pageContext: {
@@ -15,12 +6,6 @@ interface Props {
         title: string;
         /** Content excerpt. */
         excerpt: string;
-    };
-    data: {
-        mdx: {
-            /** Precompiled MDX content ready to be displayed. */
-            body: string;
-        };
     };
     children?: React.ReactNode;
 }

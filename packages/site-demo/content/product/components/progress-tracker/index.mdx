@@ -1,27 +1,32 @@
+import * as Demo1 from './react/demo1.tsx';
+import * as Demo2 from './react/demo2.tsx';
+import * as Demo3 from './react/demo3.tsx';
+import * as Demo4 from './react/demo4.tsx';
+
 # Progress tracker
 
 **Progress tracker convey user progress through a sequence of steps.**
 
-<DemoBlock demo="default" />
+<DemoBlock demo={{ react: Demo1 }} />
 
 ## States
 
 A step can be active or complete.
 
-<DemoBlock orientation="horizontal" demo="states" />
+<DemoBlock orientation="horizontal" demo={{ react: Demo2 }} />
 
 ### Helper
 
 A step can be completed by a helper text.
 
-<DemoBlock demo="helper" />
+<DemoBlock demo={{ react: Demo3 }} />
 
 ### Error
 
 When an error occurs, the error message can replace the helper text.
 Step can be inactive or active but can't be completed while in error.
 
-<DemoBlock orientation="horizontal" demo="error" />
+<DemoBlock orientation="horizontal" demo={{ react: Demo4 }} />
 
 ### ProgressTracker properties
 

@@ -1,8 +1,10 @@
+import * as Demo1 from './react/demo1.tsx';
+
 # Checkbox
 
 **Checkboxes allow users to select none, one, or more items.**
 
-<DemoBlock demo="default" withThemeSwitcher />
+<DemoBlock withThemeSwitcher demo={{ react: Demo1 }} />
 
 ### Accessibility concerns
 
@@ -11,11 +13,12 @@ Checkboxes with label are fully accessible by default. If a helper is provided, 
 In contexts where there is no direct label attached to the checkbox, alternative label should be provided with either [`aria-labelledby`](https://w3c.github.io/aria/#aria-labelledby) (preferred) or [`aria-label`](https://w3c.github.io/aria/#aria-label) (only in last resort) attributes forwarded inside the `inputProps` property.
 
 Checkbox can be disabled in two ways:
-- `disabled`/`isDisabled` which completely disables the checkbox. It's not focusable and pointer events (hover, click,
-  etc.) are all disabled too. You'll have to find another way to indicate to users that the checkbox is here and why it
-  is disabled.
-- `aria-disabled` only disable changes on the checkbox (read only) so it's still focusable and accessible. You'll have
-  to setup either a `helper`, a tooltip or an aria description to explain to the user why it is disabled.
+
+-   `disabled`/`isDisabled` which completely disables the checkbox. It's not focusable and pointer events (hover, click,
+    etc.) are all disabled too. You'll have to find another way to indicate to users that the checkbox is here and why it
+    is disabled.
+-   `aria-disabled` only disable changes on the checkbox (read only) so it's still focusable and accessible. You'll have
+    to setup either a `helper`, a tooltip or an aria description to explain to the user why it is disabled.
 
 ### Properties
 

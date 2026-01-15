@@ -1,8 +1,10 @@
-import { ThemeProvider, Button, Chip, Flag, useTheme } from '@lumx/react';
+import * as Demo1 from './react/demo1.tsx';
+import * as Demo2 from './react/demo2.tsx';
+import * as Demo3 from './react/demo3.tsx';
 
 # Light & Dark Theme
 
-By default, all component use a `light` theme that works on light-colored backgrounds.
+By default, all component use a `light` theme that works on light-colored backgrounds.\
 **Some components** provide an alternative `dark` theme that can be used to adapt to dark backgrounds.
 
 This theme is not synced to the user's preferred color scheme, it **must be activated manually**.
@@ -11,44 +13,19 @@ This theme is not synced to the user's preferred color scheme, it **must be acti
 
 On the supported components, use the `theme` prop to activate the desired theme.
 
-<DemoBlock orientation="horizontal"  withThemeSwitcher theme="dark" alwaysShowCode>
-    {function App({ theme }) {
-        return (
-            <>
-                <Button theme={theme}>Button</Button>
-                <Chip theme={theme}>Chip</Chip>
-            </>
-        )
-    }}
-</DemoBlock>
+<DemoBlock orientation="horizontal" withThemeSwitcher theme="dark" alwaysShowCode demo={{ react: Demo1 }} />
 
 ## Activate via context
 
 Use the `ThemeProvider` component to apply the desired theme to all descendants that supports it.
 
-<DemoBlock orientation="horizontal"  withThemeSwitcher theme="dark" alwaysShowCode>
-    {function App({ theme }) {
-        return (
-            <ThemeProvider value={theme}>
-                <Button>Button</Button>
-                <Chip>Chip</Chip>
-            </ThemeProvider>
-        )
-    }}
-</DemoBlock>
+<DemoBlock orientation="horizontal" withThemeSwitcher theme="dark" alwaysShowCode demo={{ react: Demo2 }} />
 
 Please note **some exceptions** to the theme context propagation:
-- The components `Popover`, `Lightbox` and `Dialog` all ignore the parent theme context and reset the theme because their children won't appear on the same background from where they are called
-- However, the `Popover` takes the given `theme` props and propagates to its items via the context
+
+-   The components `Popover`, `Lightbox` and `Dialog` all ignore the parent theme context and reset the theme because their children won't appear on the same background from where they are called
+-   However, the `Popover` takes the given `theme` props and propagates to its items via the context
 
 Use the `useTheme()` hook to get the theme from the current theme context when you need to adapt within your custom component.
 
-<DemoBlock orientation="horizontal" withThemeSwitcher theme="dark" alwaysShowCode>
-    {function App({ theme }) {
-        function MyComponent() {
-            const theme = useTheme();
-            return <Flag theme={theme} label={`Current theme: ${theme}`} />;
-        }
-        return <ThemeProvider value={theme}><MyComponent /></ThemeProvider>;
-    }}
-</DemoBlock>
+<DemoBlock orientation="horizontal" withThemeSwitcher theme="dark" alwaysShowCode demo={{ react: Demo3 }} />

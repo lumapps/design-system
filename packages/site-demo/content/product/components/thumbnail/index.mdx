@@ -1,4 +1,11 @@
-import { Thumbnail } from '@lumx/react';
+import * as Demo1 from './react/demo1.tsx';
+import * as Demo2 from './react/demo2.tsx';
+import * as Demo3 from './react/demo3.tsx';
+import * as Demo4 from './react/demo4.tsx';
+import * as Demo5 from './react/demo5.tsx';
+import * as Demo6 from './react/demo6.tsx';
+import * as Demo7 from './react/demo7.tsx';
+import * as Demo8 from './react/demo8.tsx';
 
 # Thumbnail
 
@@ -9,57 +16,48 @@ import { Thumbnail } from '@lumx/react';
 Thumbnails come in 7 sizes (width): `xxs`, `xs`, `s`, `m`, `l`, `xl`, and unset.
 Check [size foundations](/product/foundations/size) for more details.
 
-<DemoBlock orientation="horizontal" demo="sizes" />
+<DemoBlock orientation="horizontal" demo={{ react: Demo1 }} />
 
 ## Ratios
 
 Thumbnails come in 6 aspect ratios: `free`, `horizontal`, `original`, `square`, `vertical` and `wide`.
 
-- `free`: define width and height as wanted, there is no relation between them.
-- `horizontal`: 3:2 (width:height) ratio, define width, height is calculated.
-- `original`: source image ratio, define width, height is calculated.
-- `square`: 1:1 ratio, define width, height is calculated.
-- `vertical`: 2:3 ratio, define width, height is calculated.
-- `wide`: 16:9 ratio, define width, height is calculated.
+-   `free`: define width and height as wanted, there is no relation between them.
+-   `horizontal`: 3:2 (width:height) ratio, define width, height is calculated.
+-   `original`: source image ratio, define width, height is calculated.
+-   `square`: 1:1 ratio, define width, height is calculated.
+-   `vertical`: 2:3 ratio, define width, height is calculated.
+-   `wide`: 16:9 ratio, define width, height is calculated.
 
-*For any ratio except `original` the source image might be cropped.*
+_For any ratio except `original` the source image might be cropped._
 
-<DemoBlock orientation="horizontal" demo="ratios" />
+<DemoBlock orientation="horizontal" demo={{ react: Demo2 }} />
 
-*Setting the `objectFit` property to `contain` avoids cropping the image (letterboxing).*
+_Setting the `objectFit` property to `contain` avoids cropping the image (letterboxing)._
 
-<DemoBlock orientation="horizontal">
-    <Thumbnail
-        image="/demo-assets/landscape3.jpg"
-        alt="Square"
-        size="xl"
-        aspectRatio="wide"
-        objectFit="contain"
-        style={{ background: 'black' }}
-    />
-</DemoBlock>
+<DemoBlock orientation="horizontal" demo={{ react: Demo3 }} />
 
 ## Variants
 
 Thumbnails come in two variants: `squared` and `rounded`
 
-<DemoBlock orientation="horizontal" demo="variants" />
+<DemoBlock orientation="horizontal" demo={{ react: Demo4 }} />
 
 ## Sizes, ratios, and variants combined
 
-<DemoBlock orientation="horizontal" demo="combined" />
+<DemoBlock orientation="horizontal" demo={{ react: Demo5 }} />
 
 ## Loading state
 
-<DemoBlock orientation="horizontal" demo="loading" withThemeSwitcher />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: Demo6 }} />
 
 Thumbnails display a loading state while loading the image if they are configured with sufficient size constraints.
 Three type of size constraints can be used:
 
-- using `imgProps={{ width, height }}` to set the original image size (or same original size ratio).
-  Thumbnails will scale down if the given `width` and `height` are bigger than allowed space.
-- using `fillHeight` to fit the parent height.
-- using a fixed ratio (any ratio except `free` and `original`) and a width constraint (using `size` prop or manual CSS).
+-   using `imgProps={{ width, height }}` to set the original image size (or same original size ratio).
+    Thumbnails will scale down if the given `width` and `height` are bigger than allowed space.
+-   using `fillHeight` to fit the parent height.
+-   using a fixed ratio (any ratio except `free` and `original`) and a width constraint (using `size` prop or manual CSS).
 
 When loading a larger version of an image already loaded in the current page, the `loadingPlaceholderImageRef` can be
 used to provide the reference to the smaller image that will be used as a placeholder image displayed while the larger
@@ -69,28 +67,29 @@ image loads.
 
 Thumbnails will display an error state by default when the image fails to load correctly.
 
-<DemoBlock orientation="horizontal" demo="error" withThemeSwitcher />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: Demo7 }} />
 
 The `fallback` prop can be used to change the icon or even replace the error state with a custom React node.
 
-<DemoBlock orientation="horizontal" demo="error-fallback" withThemeSwitcher />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: Demo8 }} />
 
 ### Accessibility concerns
 
 Thumbnails may have 5 different accessibility use cases:
-- **Decorative image** if your image is only decorative, there is no essential information in it, you can set can **let the `alt` attribute empty**
-(See [the W3C reference page for Decorative images](https://www.w3.org/WAI/tutorials/images/decorative/) for more details)
-- **Non-decorative image** if your image gives information, is textual or helps understand better the sibling content, you will **have to
-define an `alt` attribute**.
-In order to find how to fill this attribute, please refer to this [decision tree](https://www.w3.org/WAI/tutorials/images/decision-tree/).
-- **Link image** if the `linkProps.href` or `linkAs` is defined, then your image will be wrapped in `<a>` tag.
-You **should define the `alt` attribute**, with a string indicating where the link will take the user.
-(See [the W3C reference page for Functional images](https://www.w3.org/WAI/tutorials/images/functional/) for more details)
-- **Clickable image** if the `onClick` prop is defined, then your image will be wrapped in a button.
-You **should define the `alt` attribute**, with a string indicating the purpose of the button.
-(See [the W3C reference page for Functional images](https://www.w3.org/WAI/tutorials/images/functional/) for more details)
-- **Badged thumbnail** if you have a badge on your Thumbnail, then the badge should handle the accessibility of its information.
-(See the [badge page](../badge#accessibility-concerns) for the accessibility concerns on badged thumbnails.)
+
+-   **Decorative image** if your image is only decorative, there is no essential information in it, you can set can **let the `alt` attribute empty**
+    (See [the W3C reference page for Decorative images](https://www.w3.org/WAI/tutorials/images/decorative/) for more details)
+-   **Non-decorative image** if your image gives information, is textual or helps understand better the sibling content, you will **have to
+    define an `alt` attribute**.
+    In order to find how to fill this attribute, please refer to this [decision tree](https://www.w3.org/WAI/tutorials/images/decision-tree/).
+-   **Link image** if the `linkProps.href` or `linkAs` is defined, then your image will be wrapped in `<a>` tag.
+    You **should define the `alt` attribute**, with a string indicating where the link will take the user.
+    (See [the W3C reference page for Functional images](https://www.w3.org/WAI/tutorials/images/functional/) for more details)
+-   **Clickable image** if the `onClick` prop is defined, then your image will be wrapped in a button.
+    You **should define the `alt` attribute**, with a string indicating the purpose of the button.
+    (See [the W3C reference page for Functional images](https://www.w3.org/WAI/tutorials/images/functional/) for more details)
+-   **Badged thumbnail** if you have a badge on your Thumbnail, then the badge should handle the accessibility of its information.
+    (See the [badge page](../badge#accessibility-concerns) for the accessibility concerns on badged thumbnails.)
 
 If you have some troubles to define how to fill the `alt` attribute, you can use the [Alt decision tree](https://www.w3.org/WAI/tutorials/images/decision-tree/).
 
