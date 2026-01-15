@@ -1,5 +1,4 @@
 import { graphql } from 'gatsby';
-import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { PageHead } from '../components/base/PageHead';
 
 export const pageQuery = graphql`
@@ -23,16 +22,17 @@ interface Props {
             body: string;
         };
     };
+    children?: React.ReactNode;
 }
 
 /** Template for the MDX page content */
 const MDXPageTemplate: React.FC<Props> = (props) => {
-    const { data } = props;
+    const { children } = props;
 
     return (
         <>
             {/* MDX content render */}
-            <MDXRenderer>{data.mdx.body}</MDXRenderer>
+            {children}
         </>
     );
 };

@@ -19,7 +19,7 @@ Both **color** and **typography** can be adapted on text elements (see list of [
         Title
     </Text>
     <Text as="p" typography="body1" color="dark-L2">
-        Some <Text as="span" color="red"><Icon icon={mdiHeart} />colored</Text> text
+        Some <Text as="span" color="red"><Icon icon={mdiHeart} /> colored</Text> text
     </Text>
 </DemoBlock>
 
@@ -33,25 +33,25 @@ By default, long texts will wrap on multiple lines. Use `noWrap` to prevent that
 Alternatively, `truncate` can be used to cut with ellipsis (it can also truncate after multiple lines).
 
 <DemoBlock orientation="horizontal" vAlign="space-evenly" style={{ gap: 90 }}>
-    <div style="max-width: 180px; overflow: hidden">
+    <div style={{ maxWidth: '180px', overflow: 'hidden' }}>
         <code>default</code>
         <Text as="p" typography="body2">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         </Text>
     </div>
-    <div style="max-width: 180px; overflow: hidden">
+    <div style={{ maxWidth: '180px', overflow: 'hidden' }}>
         <code>no wrap</code>
         <Text as="p" typography="body2" noWrap>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         </Text>
     </div>
-    <div style="max-width: 180px; overflow: hidden">
+    <div style={{ maxWidth: '180px', overflow: 'hidden' }}>
         <code>truncate</code>
         <Text as="p" typography="body2" truncate>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         </Text>
     </div>
-    <div style="max-width: 180px; overflow: hidden">
+    <div style={{ maxWidth: '180px', overflow: 'hidden' }}>
         <code>truncate multiline</code>
         <Text as="p" typography="body2" truncate={{ lines: 2 }}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.

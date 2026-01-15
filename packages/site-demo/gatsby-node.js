@@ -16,38 +16,46 @@ const slugToTitle = (slug) => lodash.startCase(lodash.last(slug.split('/').filte
 exports.createPages = async ({ graphql, actions }) => {
     const { createPage } = actions;
     const pageTemplate = path.resolve('./src/templates/MDXPageTemplate.tsx');
-    const result = await graphql(
-        `
-            {
-                allMdx {
-                    edges {
-                        node {
-                            excerpt(pruneLength: 200)
-                            fields {
-                                slug
+    const result = await graphql(`
+        {
+            allMdx {
+                edges {
+                    node {
+                        parent {
+                            ... on File {
+                                sourceInstanceName
                             }
-                            mdxAST
+                        }
+                        excerpt(pruneLength: 200)
+                        fields {
+                            slug
+                        }
+                        tableOfContents
+                        internal {
+                            contentFilePath
                         }
                     }
                 }
             }
-        `,
-    );
+        }
+    `);
     if (result.errors) {
         throw result.errors;
     }
 
-    const pages = result.data.allMdx.edges;
-    pages.forEach((page) => {
+    const pages = result.data.allMdx.edges.filter(
+        (edge) => edge.node.parent && edge.node.parent.sourceInstanceName === 'preprocessed-content',
+    );
+    for (const page of pages) {
         const slug = page.node.fields.slug;
-        const title = mdxUtils.getFirstH1Text(page.node.mdxAST) || slugToTitle(slug);
+        const title = mdxUtils.getFirstH1Text(page.node.tableOfContents) || slugToTitle(slug);
         const excerpt = cleanExcerpt(page.node.excerpt, title);
         createPage({
             path: slug,
-            component: pageTemplate,
+            component: `${pageTemplate}?__contentFilePath=${page.node.internal.contentFilePath}`,
             context: { slug, title, excerpt },
         });
-    });
+    }
 };
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
@@ -69,8 +77,8 @@ exports.onCreateBabelConfig = ({ actions }) => {
         options: {
             runtime: 'automatic',
         },
-    })
-}
+    });
+};
 
 exports.onCreateWebpackConfig = async ({ actions, getConfig }) => {
     // Generate the JSON icon library
