@@ -115,12 +115,57 @@ T-shirt sizes correspond to standardised values across all the design system. T-
 
 ### Example of user block in T-shirt size `m`
 
-<DemoBlock orientation="horizontal" demo="t-shirt-example" />
+```jsx demo orientation="horizontal" vAlign="space-around"
+import { FlexBox, UserBlock } from '@lumx/react';
+
+export default () => (
+    <>
+        <UserBlock
+            name="Emmitt O. Lum"
+            fields={['Creative developer', 'Denpasar']}
+            avatar="/demo-assets/persona.png"
+            size="m"
+        />
+
+        <FlexBox
+            hAlign="center"
+            vAlign="center"
+            className="lumx-color-background-dark-L6 lumx-color-font-dark-L3"
+            style={{ width: '36px', height: '36px' }}
+        >
+            m
+        </FlexBox>
+    </>
+);
+```
 
 ## Abstract
 
-Abstract sizes don’t correspond to standardised values across the design system, they represent specific dimensions at a component level. They can be values like 400px or a specific behavior like full-screen with margins (see [Dialog](/product/components/dialog)). Abstract sizes are: `tiny`, `regular`, `big`, `huge`. Use Abstract sizes to define elements dimensions that don’t need to or can’t be standardised. An element doesn’t have to exist in each of every size.
+Abstract sizes (`tiny`, `regular`, `medium`, `big`, `huge`) don’t correspond to standardised values across the design system, they represent size variations at a component level. They can be values like 400px or a specific behavior like full-screen with margins (see [Dialog](/product/components/dialog)). Use Abstract sizes to define elements dimensions that don’t need to or can’t be standardised. A component doesn’t have to exist in each of every size.
 
 Example of a `big` [list](/product/components/list) component and a `big` [link-preview](/product/components/link-preview)
 
-<DemoBlock orientation="horizontal" demo="abstract-example" />
+```jsx demo orientation="horizontal" vAlign="space-around"
+import { Avatar, Button, LinkPreview, List, ListItem, Text } from '@lumx/react';
+
+export default () => (
+    <>
+        <List>
+            <ListItem size="big">
+                <Text as="p">Two-line item</Text>
+                <Text as="p" color="dark-L2">
+                    Secondary text
+                </Text>
+            </ListItem>
+        </List>
+
+        <LinkPreview
+            link="https://google.com"
+            title="Link title"
+            size="big"
+            thumbnail="https://picsum.photos/320/240"
+            style={{ width: 350 }}
+        />
+    </>
+);
+```

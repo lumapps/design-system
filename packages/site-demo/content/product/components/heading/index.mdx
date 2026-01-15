@@ -1,30 +1,60 @@
-import { Heading, Message } from '@lumx/react';
+import { Message } from '@lumx/react';
 
 # Heading
 
-**Display simple heading text.** (specialized version of the [Text](/product/components/text/) component).
+**Display simple heading text.** (specialized version of the [Text](/product/components/text/) component).\
 By default (no parent heading level defined), heading elements use the first heading level (`h1` tag) and `display1` typography.
 
-<DemoBlock>
-    <Heading>Default heading text</Heading>
-</DemoBlock>
+```jsx demo
+import { Heading, HeadingLevelProvider, Message, Text } from '@lumx/react';
+
+export default () => <Heading>Default heading text</Heading>;
+```
 
 ## Heading level & typography
 
 Use `as` to set a custom heading level and `typography` to override the default typography (see list of [typography](/product/foundations/typography/) styles).
 
-<DemoBlock orientation="horizontal" vAlign="space-evenly">
-    <Heading as="h3">Third level heading</Heading>
-    <Heading typography="overline">Custom typography</Heading>
-</DemoBlock>
+```jsx demo orientation="horizontal" vAlign="space-evenly"
+import { Heading, HeadingLevelProvider, Message, Text } from '@lumx/react';
+
+export default () => (
+    <>
+        <Heading as="h3">Third level heading</Heading>
+        <Heading typography="overline">Custom typography</Heading>
+    </>
+);
+```
 
 ## Automatic heading level
 
 Use the `HeadingLevelProvider` component to help you automatically adapt heading levels by nesting them.
 
-<DemoBlock demo="automatic-heading-level" />
+```jsx demo
+import { Heading, HeadingLevelProvider, Text } from '@lumx/react';
+const Article = ({ title, children }) => (
+    <article className="lumx-spacing-padding-left-big">
+        <HeadingLevelProvider>
+            <Heading>{title}</Heading>
+            <Text as="p">Article content</Text>
+            {children}
+        </HeadingLevelProvider>
+    </article>
+);
 
-<Message kind="info">Use <code>level</code> property to override the base level for children headings.</Message>
+export default () => (
+    <Article title="Article 1 title">
+        <Article title="Article 1.1 title">
+            <Article title="Article 1.1.1 title" />
+        </Article>
+        <Article title="Article 1.2 title" />
+    </Article>
+);
+```
+
+<Message kind="info">
+    Use <code>level</code> property to override the base level for children headings.
+</Message>
 
 ### Accessibility concerns
 

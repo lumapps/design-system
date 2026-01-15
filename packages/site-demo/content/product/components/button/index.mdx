@@ -7,38 +7,252 @@
 Use high emphasis to help users to identify the main action.
 There should not be more than one high emphasis button in a view.
 
-<DemoBlock orientation="horizontal" demo="emphasis-high" withThemeSwitcher />
+```jsx demo orientation="horizontal" withThemeSwitcher
+import { mdiMenuDown, mdiPencil, mdiPlus } from '@lumx/icons';
+import { Button, ButtonGroup, IconButton } from '@lumx/react';
+
+export default ({ theme }) => (
+    <>
+        <Button theme={theme}>Default</Button>
+
+        <Button isDisabled theme={theme}>
+            Disabled
+        </Button>
+
+        <Button leftIcon={mdiPencil} theme={theme}>
+            With Icon
+        </Button>
+
+        <Button rightIcon={mdiMenuDown} theme={theme}>
+            Dropdown
+        </Button>
+
+        <ButtonGroup>
+            <Button theme={theme}>Split</Button>
+            <IconButton label="More" icon={mdiMenuDown} theme={theme} />
+        </ButtonGroup>
+
+        <IconButton label="Add" icon={mdiPlus} theme={theme} />
+    </>
+);
+```
 
 ## Medium emphasis
 
 Use medium emphasis for secondary actions.
 
-<DemoBlock orientation="horizontal" demo="emphasis-medium" withThemeSwitcher />
+```jsx demo orientation="horizontal" withThemeSwitcher
+import { mdiMenuDown, mdiPencil, mdiPlus } from '@lumx/icons';
+import { Button, ButtonGroup, IconButton } from '@lumx/react';
+
+export default ({ theme }) => (
+    <>
+        <Button emphasis="medium" theme={theme}>
+            Default
+        </Button>
+
+        <Button isDisabled emphasis="medium" theme={theme}>
+            Disabled
+        </Button>
+
+        <Button leftIcon={mdiPencil} emphasis="medium" theme={theme}>
+            With Icon
+        </Button>
+
+        <Button rightIcon={mdiMenuDown} emphasis="medium" theme={theme}>
+            Dropdown
+        </Button>
+
+        <ButtonGroup>
+            <Button emphasis="medium" theme={theme}>
+                Split
+            </Button>
+            <IconButton label="More" emphasis="medium" icon={mdiMenuDown} theme={theme} />
+        </ButtonGroup>
+
+        <IconButton label="Add" emphasis="medium" icon={mdiPlus} theme={theme} />
+    </>
+);
+```
 
 ### Toggled button
 
 Medium button have an extra option: `isSelected`. Use `isSelected` for toggleable actions like notification activation, or feed subscription. Make sure to describe as much as possible actions with the buttons labels.
 
-<DemoBlock orientation="horizontal" demo="toggle" withThemeSwitcher />
+```jsx demo orientation="horizontal" withThemeSwitcher
+import { mdiBellPlus, mdiBellRing, mdiCheck } from '@lumx/icons';
+import { Button, IconButton } from '@lumx/react';
+
+export default ({ theme }) => (
+    <>
+        <Button theme={theme} emphasis="medium">
+            Subscribe
+        </Button>
+
+        <Button theme={theme} emphasis="medium" leftIcon={mdiCheck} isSelected>
+            Subscribed
+        </Button>
+
+        <IconButton theme={theme} label="Subscribe" emphasis="medium" icon={mdiBellPlus} />
+
+        <IconButton theme={theme} label="Subscribed" emphasis="medium" icon={mdiBellRing} isSelected />
+    </>
+);
+```
 
 ## Low emphasis
 
 When the view contains a primary and a medium button, use low emphasis for lower priority actions.
 Alternatively, use low emphasis when there is only one level of priority.
 
-<DemoBlock orientation="horizontal" demo="emphasis-low" withThemeSwitcher />
+```jsx demo orientation="horizontal" withThemeSwitcher
+import { mdiMenuDown, mdiPencil, mdiPlus } from '@lumx/icons';
+import { Button, IconButton } from '@lumx/react';
+
+export default ({ theme }) => (
+    <>
+        <Button emphasis="low" theme={theme}>
+            Default
+        </Button>
+
+        <Button isDisabled emphasis="low" theme={theme}>
+            Disabled
+        </Button>
+
+        <Button leftIcon={mdiPencil} emphasis="low" theme={theme}>
+            With Icon
+        </Button>
+
+        <Button rightIcon={mdiMenuDown} emphasis="low" theme={theme}>
+            Dropdown
+        </Button>
+
+        <IconButton label="Add" emphasis="low" icon={mdiPlus} theme={theme} />
+    </>
+);
+```
 
 ## Small size
 
 Use small size when space is a constraint.
 
-<DemoBlock vAlign="center" demo="small" withThemeSwitcher />
+```jsx demo vAlign="center" withThemeSwitcher
+import { mdiMenuDown, mdiPencil, mdiPlus } from '@lumx/icons';
+import { Button, ButtonGroup, FlexBox, IconButton } from '@lumx/react';
+
+export default ({ theme }) => (
+    <>
+        <FlexBox gap="big" orientation="horizontal" wrap>
+            <Button size="s" theme={theme}>
+                Default
+            </Button>
+
+            <Button isDisabled size="s" theme={theme}>
+                Disabled
+            </Button>
+
+            <Button leftIcon={mdiPencil} size="s" theme={theme}>
+                With Icon
+            </Button>
+
+            <Button rightIcon={mdiMenuDown} size="s" theme={theme}>
+                Dropdown
+            </Button>
+
+            <ButtonGroup>
+                <Button size="s" theme={theme}>
+                    Split
+                </Button>
+                <IconButton label="More" size="s" icon={mdiMenuDown} theme={theme} />
+            </ButtonGroup>
+
+            <IconButton label="Add" icon={mdiPlus} size="s" theme={theme} />
+        </FlexBox>
+
+        <FlexBox gap="big" orientation="horizontal" wrap>
+            <Button emphasis="medium" size="s" theme={theme}>
+                Default
+            </Button>
+
+            <Button isDisabled emphasis="medium" size="s" theme={theme}>
+                Disabled
+            </Button>
+            <Button emphasis="medium" leftIcon={mdiPencil} size="s" theme={theme}>
+                With Icon
+            </Button>
+
+            <Button emphasis="medium" rightIcon={mdiMenuDown} size="s" theme={theme}>
+                Dropdown
+            </Button>
+
+            <ButtonGroup>
+                <Button emphasis="medium" size="s" theme={theme}>
+                    Split
+                </Button>
+                <IconButton label="More" emphasis="medium" icon={mdiMenuDown} size="s" theme={theme} />
+            </ButtonGroup>
+
+            <IconButton label="Add" icon={mdiPlus} emphasis="medium" size="s" theme={theme} />
+        </FlexBox>
+
+        <FlexBox gap="big" orientation="horizontal" wrap>
+            <Button emphasis="low" size="s" theme={theme}>
+                Default
+            </Button>
+
+            <Button isDisabled emphasis="low" size="s" theme={theme}>
+                Disabled
+            </Button>
+
+            <Button emphasis="low" leftIcon={mdiPencil} size="s" theme={theme}>
+                With Icon
+            </Button>
+
+            <Button emphasis="low" rightIcon={mdiMenuDown} size="s" theme={theme}>
+                Dropdown
+            </Button>
+
+            <IconButton label="Add" icon={mdiPlus} emphasis="low" size="s" theme={theme} />
+        </FlexBox>
+    </>
+);
+```
 
 ## Full width
 
 Use full width when you need to get the button full width.
 
-<DemoBlock vAlign="center" demo="full-width" withThemeSwitcher />
+```jsx demo vAlign="center" withThemeSwitcher
+import { Button, FlexBox } from '@lumx/react';
+
+export default ({ theme }) => (
+    <div style={{ display: 'flex', width: '100%', flexDirection: 'column', gap: 16 }}>
+        <FlexBox fillSpace gap="big" orientation="horizontal">
+            <Button fullWidth emphasis="high" theme={theme}>
+                Single full width button
+            </Button>
+        </FlexBox>
+
+        <FlexBox fillSpace gap="big" orientation="horizontal">
+            <Button fullWidth emphasis="medium" theme={theme}>
+                Two full width buttons
+            </Button>
+            <Button fullWidth emphasis="medium" theme={theme}>
+                Two full width buttons
+            </Button>
+        </FlexBox>
+
+        <FlexBox fillSpace gap="big" orientation="horizontal">
+            <Button fullWidth emphasis="medium" theme={theme}>
+                Single full width button
+            </Button>
+            <Button emphasis="medium" theme={theme}>
+                Button
+            </Button>
+        </FlexBox>
+    </div>
+);
+```
 
 ### Accessibility concerns
 
@@ -48,14 +262,14 @@ Button will use the text within the button as the accessible name, if there is n
 
 Buttons may have 3 specific accessibility use cases:
 
-- **Button as a link** if you set the `linkAs` or the `href` prop, then your button will use the `<a>` tag.
-In this case, the label of the button (or `aria-label`) will be enough to make your link accessible.
-- **Toggle button**, when your button as an active/inactive state (`isSelected` prop is responsible of this state). 
-If the label of the button **changes depending on the state, then it doesn't need anything more.**
-But if the label of the button **doesn't change you should add a `aria-pressed=true/false`** to specify to the user in which state the button is.
- - **Menu button** if your button opens a dropdown. 
- You have to set, on the button, `aria-haspopup` to `true`, and `aria-expanded` to `true` when the dropdown is open.
- Also, when the dropdown is open, you have to add `aria-controls` on the button, referencing the id of the dropdown. If your dropdown is not present in the DOM when it is closed, then you should not provide the `aria-controls` prop.
+-   **Button as a link** if you set the `linkAs` or the `href` prop, then your button will use the `<a>` tag.
+    In this case, the label of the button (or `aria-label`) will be enough to make your link accessible.
+-   **Toggle button**, when your button as an active/inactive state (`isSelected` prop is responsible of this state).
+    If the label of the button **changes depending on the state, then it doesn't need anything more.**
+    But if the label of the button **doesn't change you should add a `aria-pressed=true/false`** to specify to the user in which state the button is.
+-   **Menu button** if your button opens a dropdown.
+    You have to set, on the button, `aria-haspopup` to `true`, and `aria-expanded` to `true` when the dropdown is open.
+    Also, when the dropdown is open, you have to add `aria-controls` on the button, referencing the id of the dropdown. If your dropdown is not present in the DOM when it is closed, then you should not provide the `aria-controls` prop.
 
 #### IconButton
 

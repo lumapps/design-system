@@ -2,7 +2,94 @@
 
 **Notifications provide messages about app processes at the bottom right of the screen.**
 
-<DemoBlock orientation="horizontal" demo="default" hasPlayButton />
+```jsx demo orientation="horizontal" hasPlayButton
+import { mdiPlay } from '@lumx/icons';
+import { Button, Notification } from '@lumx/react';
+import { useState } from 'react';
+
+export default () => {
+    const properties = {
+        error: {
+            content: 'Error',
+            type: 'error',
+        },
+        info: {
+            content: 'Info',
+            type: 'info',
+        },
+        infoWithCallback: {
+            actionLabel: 'Undo',
+            content: 'Info with callback',
+            type: 'info',
+        },
+        success: {
+            content: 'Success',
+            type: 'success',
+        },
+        warning: {
+            content: 'Warning',
+            type: 'warning',
+        },
+    };
+    const [type, setType] = useState(null);
+    const [timer, setTimer] = useState(0);
+    const [isOpen, setIsOpen] = useState(false);
+    const close = () => {
+        setIsOpen(false);
+    };
+    const open = (typeToDisplay) => {
+        setType(typeToDisplay);
+        setIsOpen(true);
+        setTimer(window.setTimeout(close, 3000));
+    };
+    const onClick = (typeToDisplay) => () => {
+        if (timer) {
+            clearTimeout(timer);
+        }
+        /** If the notification is displayed, we need to close it, let the state be reflected and then open the notification once more */
+        if (isOpen) {
+            close();
+            setTimeout(() => {
+                open(typeToDisplay);
+            }, 300);
+        } else {
+            open(typeToDisplay);
+        }
+    };
+    return (
+        <>
+            <Button leftIcon={mdiPlay} onClick={onClick('info')}>
+                Info
+            </Button>
+
+            <Button leftIcon={mdiPlay} onClick={onClick('success')}>
+                Success
+            </Button>
+
+            <Button leftIcon={mdiPlay} onClick={onClick('warning')}>
+                Warning
+            </Button>
+
+            <Button leftIcon={mdiPlay} onClick={onClick('error')}>
+                Error
+            </Button>
+
+            <Button leftIcon={mdiPlay} onClick={onClick('infoWithCallback')}>
+                Info with callback
+            </Button>
+
+            {type && (
+                <Notification
+                    isOpen={isOpen}
+                    onClick={close}
+                    onActionClick={onClick('success')}
+                    {...properties[type]}
+                />
+            )}
+        </>
+    );
+};
+```
 
 ### Accessibility concerns
 

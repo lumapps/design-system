@@ -8,15 +8,57 @@ Thumbnail mosaics can display up to 4 images.
 
 ### Two images
 
-<DemoBlock orientation="horizontal" demo="two-images" />
+```jsx demo
+import { Mosaic } from '@lumx/react';
+
+export default () => (
+    <div style={{ width: 250 }}>
+        <Mosaic
+            thumbnails={[
+                { image: '/demo-assets/portrait1.jpg', alt: 'Portrait 1' },
+                { image: '/demo-assets/portrait2.jpg', alt: 'Portrait 2' },
+            ]}
+        />
+    </div>
+);
+```
 
 ### Three images
 
-<DemoBlock orientation="horizontal" demo="three-images" />
+```jsx demo
+import { Mosaic } from '@lumx/react';
+
+export default () => (
+    <div style={{ width: 250 }}>
+        <Mosaic
+            thumbnails={[
+                { image: '/demo-assets/landscape1.jpg', alt: 'Landscape' },
+                { image: '/demo-assets/portrait1.jpg', alt: 'Portrait 1' },
+                { image: '/demo-assets/portrait2.jpg', alt: 'Portrait 2' },
+            ]}
+        />
+    </div>
+);
+```
 
 ### Four images
 
-<DemoBlock orientation="horizontal" demo="four-images" />
+```jsx demo
+import { Mosaic } from '@lumx/react';
+
+export default () => (
+    <div style={{ width: 250 }}>
+        <Mosaic
+            thumbnails={[
+                { image: '/demo-assets/landscape1.jpg', alt: 'Landscape 1' },
+                { image: '/demo-assets/portrait1.jpg', alt: 'Portrait 1' },
+                { image: '/demo-assets/portrait2.jpg', alt: 'Portrait 2' },
+                { image: '/demo-assets/portrait3.jpg', alt: 'Portrait 3' },
+            ]}
+        />
+    </div>
+);
+```
 
 ### More than four images
 
@@ -24,13 +66,68 @@ If there are more than 4 images to display, thumbnail mosaics can display the re
 
 In this example there are 6 images in total, 4 are shown, 2 aren’t.
 
-<DemoBlock orientation="horizontal" demo="more-images" />
+```jsx demo
+import { Mosaic } from '@lumx/react';
+
+export default () => (
+    <div style={{ width: 250 }}>
+        <Mosaic
+            thumbnails={[
+                { image: '/demo-assets/landscape1.jpg', alt: 'Landscape 1' },
+                { image: '/demo-assets/landscape2.jpg', alt: 'Landscape 2' },
+                { image: '/demo-assets/landscape3.jpg', alt: 'Landscape 3' },
+                { image: '/demo-assets/portrait1.jpg', alt: 'Portrait 1' },
+                { image: '/demo-assets/portrait2.jpg', alt: 'Portrait 2' },
+                { image: '/demo-assets/portrait3.jpg', alt: 'Portrait 3' },
+            ]}
+        />
+    </div>
+);
+```
 
 ## Click on thumbnail
 
 Mosaic's thumbnails can be clickable to attach an [image lightbox](/product/components/image-lightbox) that displays the images in a full screen image slideshow.
 
-<DemoBlock orientation="horizontal" demo="clickable" />
+```jsx demo
+import { ImageLightbox, Mosaic } from '@lumx/react';
+
+const IMAGES = [
+    { image: '/demo-assets/landscape1.jpg', alt: 'Landscape 1' },
+    { image: '/demo-assets/landscape2.jpg', alt: 'Landscape 2' },
+    { image: '/demo-assets/landscape3.jpg', alt: 'Landscape 3' },
+    { image: '/demo-assets/portrait1.jpg', alt: 'Portrait 1' },
+    { image: '/demo-assets/portrait2.jpg', alt: 'Portrait 2' },
+    { image: '/demo-assets/portrait3.jpg', alt: 'Portrait 3' },
+];
+
+export default () => {
+    const { getTriggerProps, imageLightboxProps } = ImageLightbox.useImageLightbox({ images: IMAGES });
+    const thumbnails = IMAGES.map((image, index) => ({
+        ...image,
+        ...getTriggerProps({ activeImageIndex: index }),
+        alt: `${image.alt}; Open in a fullscreen image slideshow`,
+    }));
+    return (
+        <div style={{ width: 250 }}>
+            <Mosaic thumbnails={thumbnails} />
+
+            <ImageLightbox
+                {...imageLightboxProps}
+                aria-label="Fullscreen image slideshow"
+                closeButtonProps={{ label: 'Close' }}
+                zoomInButtonProps={{ label: 'Zoom in' }}
+                zoomOutButtonProps={{ label: 'Zoom out' }}
+                slideshowControlsProps={{
+                    nextButtonProps: { label: 'Next image' },
+                    previousButtonProps: { label: 'Previous image' },
+                    paginationItemProps: (index) => ({ label: `Go to slide ${index + 1}` }),
+                }}
+            />
+        </div>
+    );
+};
+```
 
 ### Accessibility concerns
 

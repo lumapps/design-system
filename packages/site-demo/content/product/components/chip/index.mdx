@@ -6,46 +6,223 @@
 
 Use default to display distinct attributes such as tags on a blog post.
 
-<DemoBlock orientation="horizontal" demo="default" withThemeSwitcher />
+```jsx demo orientation="horizontal" withThemeSwitcher
+import { mdiEmail } from '@lumx/icons';
+import { Chip, Icon } from '@lumx/react';
+
+export default ({ theme }) => (
+    <>
+        <Chip theme={theme}>Default</Chip>
+
+        <Chip before={<Icon icon={mdiEmail} size="xs" theme={theme} />} theme={theme}>
+            Default rich
+        </Chip>
+    </>
+);
+```
 
 ## Dismissible
 
 Use dismissible when chips can be removed by users.
 
-<DemoBlock orientation="horizontal" demo="dismissible" withThemeSwitcher />
+```jsx demo orientation="horizontal" withThemeSwitcher
+import { mdiClose, mdiEmail } from '@lumx/icons';
+import { Chip, Icon } from '@lumx/react';
+
+export default ({ theme }) => {
+    const onClick = () => console.log('clicked chip');
+    return (
+        <>
+            <Chip theme={theme} after={<Icon icon={mdiClose} size="xs" theme={theme} />} onClick={onClick}>
+                Dismissible
+            </Chip>
+
+            <Chip
+                theme={theme}
+                before={<Icon icon={mdiEmail} size="xs" theme={theme} />}
+                after={<Icon icon={mdiClose} size="xs" theme={theme} />}
+                onClick={onClick}
+            >
+                Dismissible rich
+            </Chip>
+        </>
+    );
+};
+```
 
 ## Choice
 
 Use choice when users make an exclusive choice between values. When space is not a constraint, use this chip instead of a select component.
 
-<DemoBlock orientation="horizontal" demo="choice" withThemeSwitcher />
+```jsx demo orientation="horizontal" withThemeSwitcher
+import { Chip } from '@lumx/react';
+import { useState } from 'react';
+
+export default ({ theme }) => {
+    const [selected, setSelected] = useState(-1);
+    const indexedProps = (index) => ({
+        isSelected: selected === index,
+        onClick: () => setSelected(selected === index ? -1 : index),
+    });
+    return (
+        <>
+            <Chip theme={theme} {...indexedProps(0)}>
+                Am
+            </Chip>
+
+            <Chip theme={theme} {...indexedProps(1)}>
+                Stram
+            </Chip>
+
+            <Chip theme={theme} {...indexedProps(2)}>
+                Gram
+            </Chip>
+
+            <Chip theme={theme} {...indexedProps(3)}>
+                Pic
+            </Chip>
+
+            <Chip theme={theme} {...indexedProps(4)}>
+                Pic
+            </Chip>
+
+            <Chip theme={theme} {...indexedProps(5)}>
+                Colegram
+            </Chip>
+        </>
+    );
+};
+```
 
 ## Filter
 
 Use filter as an entry point to one or several choices. When it is active, it can have a clear button.
 
-<DemoBlock orientation="horizontal" demo="filter" withThemeSwitcher />
+```jsx demo orientation="horizontal" withThemeSwitcher
+import { mdiCloseCircle, mdiFilterVariant, mdiMenuDown } from '@lumx/icons';
+import { Chip, Icon } from '@lumx/react';
+import { useState } from 'react';
+
+export default ({ theme }) => {
+    const [isSelected, setSelected] = useState(false);
+    const onClick = () => !isSelected && setSelected(true);
+    const onAfterClick = () => setSelected(!isSelected);
+    return (
+        <>
+            <Chip
+                theme={theme}
+                after={<Icon icon={isSelected ? mdiCloseCircle : mdiMenuDown} size="xs" />}
+                isSelected={isSelected}
+                onClick={onClick}
+                onAfterClick={onAfterClick}
+            >
+                Filter
+            </Chip>
+
+            <Chip
+                theme={theme}
+                before={<Icon icon={mdiFilterVariant} size="xs" />}
+                after={<Icon icon={isSelected ? mdiCloseCircle : mdiMenuDown} size="xs" />}
+                isSelected={isSelected}
+                onClick={onClick}
+                onAfterClick={onAfterClick}
+            >
+                Filter rich
+            </Chip>
+        </>
+    );
+};
+```
 
 ## Small
 
 Use small when space is a constraint, as in areas like text fields, selects, dropdown menus and metadata.
 
-<DemoBlock orientation="horizontal" demo="small" withThemeSwitcher />
+```jsx demo orientation="horizontal" withThemeSwitcher
+import { mdiClose, mdiEmail } from '@lumx/icons';
+import { Chip, Icon } from '@lumx/react';
+
+export default ({ theme }) => {
+    const onClick = () => console.log('clicked chip');
+    return (
+        <>
+            <Chip theme={theme} size="s">
+                Small
+            </Chip>
+
+            <Chip theme={theme} size="s" before={<Icon icon={mdiEmail} size="xxs" theme={theme} />}>
+                Small rich
+            </Chip>
+
+            <Chip theme={theme} size="s" after={<Icon icon={mdiClose} size="xxs" theme={theme} />} onClick={onClick}>
+                Small dismissible
+            </Chip>
+        </>
+    );
+};
+```
 
 ## Chip Group
 
 Use chip groups to group chips together. Groups give chips responsive behavior.
 
-<DemoBlock orientation="horizontal" demo="group" withThemeSwitcher />
+```jsx demo orientation="horizontal" withThemeSwitcher
+import { Chip, ChipGroup } from '@lumx/react';
+
+export default ({ theme }) => (
+    <ChipGroup>
+        <Chip theme={theme} size="s">
+            Apricot
+        </Chip>
+        <Chip theme={theme} size="s">
+            Apple
+        </Chip>
+        <Chip theme={theme} size="s">
+            Banana
+        </Chip>
+        <Chip theme={theme} size="s">
+            Blueberry
+        </Chip>
+        <Chip theme={theme} size="s">
+            Lemon
+        </Chip>
+        <Chip theme={theme} size="s">
+            Orange
+        </Chip>
+        <Chip theme={theme} size="s">
+            Peach
+        </Chip>
+        <Chip theme={theme} size="s">
+            Pear
+        </Chip>
+        <Chip theme={theme} size="s">
+            Pineapple
+        </Chip>
+        <Chip theme={theme} size="s">
+            Melon
+        </Chip>
+        <Chip theme={theme} size="s">
+            Raspberry
+        </Chip>
+        <Chip theme={theme} size="s">
+            Strawberry
+        </Chip>
+        <Chip theme={theme} size="s">
+            Watermelon
+        </Chip>
+    </ChipGroup>
+);
+```
 
 ### Accessibility concerns
 
 Chips can be disabled in two ways:
-- `disabled`/`isDisabled` which completely disables the chip. It's not focusable and pointer events (hover, click,
-  etc.) are all disabled too. You'll have to find another way to indicate to users that the chip is here and why it
-  is disabled.
-- `aria-disabled` only disable changes on the chip (read only) so it's still focusable and accessible. You'll have
-  to setup either a tooltip or an aria description (must be visible too) to explain to the user why it is disabled.
+
+-   `disabled`/`isDisabled` which completely disables the chip. It's not focusable and pointer events (hover, click,
+    etc.) are all disabled too. You'll have to find another way to indicate to users that the chip is here and why it
+    is disabled.
+-   `aria-disabled` only disable changes on the chip (read only) so it's still focusable and accessible. You'll have
+    to setup either a tooltip or an aria description (must be visible too) to explain to the user why it is disabled.
 
 ### Chip properties
 

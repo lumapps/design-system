@@ -5,27 +5,38 @@
 Validation requirements **must be stated upfront**, live feedbacks are strongly suggested. Users mustn't be left guessing.
 
 A validation can occur for example when:
-- The datatype isn’t correct.
-- The entered data has too many or not enough characters.
-- No data has been entered in a required field.
+
+-   The datatype isn’t correct.
+-   The entered data has too many or not enough characters.
+-   No data has been entered in a required field.
 
 ## Visualization
 
 Colors scheme :
-- <span className="lumx-color-font-red-N"><strong>Red/N</strong></span> for errors
-- <span className="lumx-color-font-yellow-D2"><strong>Yellow/D2</strong></span> for warnings
-- <span className="lumx-color-font-green-N"><strong>Green/N</strong></span> for success
-- <span className="lumx-color-font-dark-N"><strong>Dark/N</strong></span> for helpers
+
+-   <span className="lumx-color-font-red-N">
+        <strong>Red/N</strong>
+    </span> for errors
+-   <span className="lumx-color-font-yellow-D2">
+        <strong>Yellow/D2</strong>
+    </span> for warnings
+-   <span className="lumx-color-font-green-N">
+        <strong>Green/N</strong>
+    </span> for success
+-   <span className="lumx-color-font-dark-N">
+        <strong>Dark/N</strong>
+    </span> for helpers
 
 ## Error state
 
 <img src="assets/error-state.png" width="100%" />
 
 Use error messages to help users understand the issue and how to fix it. Error messages are emphasized with :
-- The label in <span className="lumx-color-font-red-N"><strong>Red/N</strong></span>
-- The field borders in <span className="lumx-color-font-red-N"><strong>Red/N</strong></span>
-- The material design icon “alert-circle” within the field in <span className="lumx-color-font-red-N"><strong>Red/N</strong></span>
-- The error message in <span className="lumx-color-font-red-N"><strong>Red/N</strong></span>, under the field
+
+-   The label in <span className="lumx-color-font-red-N"><strong>Red/N</strong></span>
+-   The field borders in <span className="lumx-color-font-red-N"><strong>Red/N</strong></span>
+-   The material design icon “alert-circle” within the field in <span className="lumx-color-font-red-N"><strong>Red/N</strong></span>
+-   The error message in <span className="lumx-color-font-red-N"><strong>Red/N</strong></span>, under the field
 
 ## Success state
 
@@ -33,16 +44,17 @@ Use error messages to help users understand the issue and how to fix it. Error m
 
 Use success messages to confirm users inputs validation. Success messages are not mandatory.
 Success messages are emphasized with :
-- The label in <span className="lumx-color-font-green-N"><strong>Green/N</strong></span>
-- The field borders in <span className="lumx-color-font-green-N"><strong>Green/N</strong></span>
-- The material design icon “check-circle” within the field in <span className="lumx-color-font-green-N"><strong>Green/N</strong></span>
+
+-   The label in <span className="lumx-color-font-green-N"><strong>Green/N</strong></span>
+-   The field borders in <span className="lumx-color-font-green-N"><strong>Green/N</strong></span>
+-   The material design icon “check-circle” within the field in <span className="lumx-color-font-green-N"><strong>Green/N</strong></span>
 
 ## Helpers
 
 <img src="assets/helpers.png" width="100%" />
 
-Use helper messages  to provide guidance.
-Helper messages are not mandatory.
+Use helper messages to provide guidance. \
+Helper messages are not mandatory. \
 Helper messages are emphasized with the helper message in <span className="lumx-color-font-dark-L2"><strong>Dark/L2/N</strong></span>, under the field.
 
 ## Submit button behavior
@@ -77,11 +89,11 @@ Error messages must be displayed inline with erroneous fields. If an error occur
 
 <img src="assets/stepper-behavior2.png" width="100%" />
 
-The "Next" stepper button is *disabled* as long as the mandatory fields haven’t been completed or present errors.
+The "Next" stepper button is _disabled_ as long as the mandatory fields haven’t been completed or present errors.
 
 <img src="assets/stepper-behavior3.png" width="100%" />
 
-The "Next" stepper button is *enabled* when all the mandatory fields have been completed and do not present errors.
+The "Next" stepper button is _enabled_ when all the mandatory fields have been completed and do not present errors.
 
 ## Optional vs. mandatory fields
 
@@ -95,11 +107,10 @@ Mandatory fields are marked with a red asterisk at the beginning of the label.
 
 The error message copy below the field should be as informative as possible when describing the issue with the users data. Error messages should clearly state:
 
-- What happened, ex. :
-     <span className="lumx-color-font-red-N">Sorry, this username has already been taken</span>
-
-- What’s the next step the user should take to succeed, ex. :
-     <span className="lumx-color-font-red-N">Please choose another username</span>
+-   What happened, ex. : \
+    <span className="lumx-color-font-red-N">Sorry, this username has already been taken</span>
+-   What’s the next step the user should take to succeed, ex. : \
+    <span className="lumx-color-font-red-N">Please choose another username</span>
 
 Validation labels should always avoid using technical jargon.
 

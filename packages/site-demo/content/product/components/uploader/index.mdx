@@ -2,7 +2,12 @@
 
 **Uploaders help users select files or medias.**
 
-<DemoBlock orientation="horizontal" demo="default" withThemeSwitcher />
+```jsx demo orientation="horizontal" withThemeSwitcher
+import { mdiTextBoxPlus } from '@lumx/icons';
+import { Uploader } from '@lumx/react';
+
+export default ({ theme }) => <Uploader icon={mdiTextBoxPlus} label="Add files" theme={theme} />;
+```
 
 ## Variants
 
@@ -10,23 +15,39 @@ There are three variants: `square`, `rounded` and `circle`.
 
 ### Thumbnail
 
-<DemoBlock orientation="horizontal" demo="thumbnail" withThemeSwitcher />
+```jsx demo orientation="horizontal" withThemeSwitcher
+import { mdiImagePlus } from '@lumx/icons';
+import { Uploader, UploaderVariant } from '@lumx/react';
+
+export default ({ theme }) => (
+    <Uploader icon={mdiImagePlus} label="Add picture" theme={theme} variant={UploaderVariant.rounded} />
+);
+```
 
 ### Avatar
 
-<DemoBlock orientation="horizontal" demo="avatar" withThemeSwitcher />
+```jsx demo orientation="horizontal" withThemeSwitcher
+import { mdiImagePlus } from '@lumx/icons';
+import { Uploader, UploaderVariant } from '@lumx/react';
+
+export default ({ theme }) => (
+    <Uploader icon={mdiImagePlus} label="Add photo" theme={theme} variant={UploaderVariant.circle} />
+);
+```
 
 ### Accessibility concerns
 
 Uploaders have 2 accessibility use cases:
+
 1. **native file input**: using the `fileInputProps` prop transforms uploaders into a native HTML file input capable of handling file drop.
 2. **button** : using the `onClick` prop transforms uploaders into standard button for when you need to use a non-native file picker.
 
 Uploaders can be disabled in two ways:
-- `isDisabled` which completely disables it. It's not focusable and pointer events (hover, click, etc.) are
-all disabled too. You'll have to find another way to indicate to users that the field is here and why it is disabled.
-- `aria-disabled` only disable click and on change (read only) so it's still focusable and accessible. You'll have
-to set up either a tooltip or an aria description to explain to the user why this field is disabled.
+
+-   `isDisabled` which completely disables it. It's not focusable and pointer events (hover, click, etc.) are
+    all disabled too. You'll have to find another way to indicate to users that the field is here and why it is disabled.
+-   `aria-disabled` only disable click and on change (read only) so it's still focusable and accessible. You'll have
+    to set up either a tooltip or an aria description to explain to the user why this field is disabled.
 
 ### Properties
 

@@ -2,7 +2,48 @@
 
 **Radio buttons display exclusive options to chose from.**
 
-<DemoBlock demo="default" withThemeSwitcher />
+```jsx demo withThemeSwitcher
+import { RadioButton, RadioGroup } from '@lumx/react';
+import { useState } from 'react';
+
+export default ({ theme }) => {
+    const [value, onChange] = useState('lorem');
+
+    return (
+        <RadioGroup>
+            <RadioButton
+                isChecked={value === 'lorem'}
+                label="Radio button"
+                name="test1"
+                theme={theme}
+                value="lorem"
+                onChange={onChange}
+            />
+
+            <RadioButton
+                isChecked={value === 'ipsum'}
+                helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
+                label="Radio button with help"
+                name="test1"
+                theme={theme}
+                value="ipsum"
+                onChange={onChange}
+            />
+
+            <RadioButton
+                isChecked={value === 'dolor'}
+                helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
+                label="Disabled radio button with help"
+                name="test1"
+                theme={theme}
+                value="dolor"
+                onChange={onChange}
+                isDisabled
+            />
+        </RadioGroup>
+    );
+};
+```
 
 ### Accessibility concerns
 
@@ -11,11 +52,12 @@ Radio buttons with label are fully accessible by default. If a helper is provide
 In contexts where there is no direct label attached to the radio button, alternative label should be provided with either [`aria-labelledby`](https://w3c.github.io/aria/#aria-labelledby) (preferred) or [`aria-label`](https://w3c.github.io/aria/#aria-label) (only in last resort) attributes forwarded inside the `inputProps` property.
 
 Radio button can disabled in two ways:
-- `disabled`/`isDisabled` which completely disables the radio button. It's not focusable and pointer events (hover, click,
-  etc.) are all disabled too. You'll have to find another way to indicate to users that the radio button is here and
-  why it is disabled.
-- `aria-disabled` only disable changes on the radio button (read only) so it's still focusable and accessible. You'll
-  have to setup either a `helper`, a tooltip or an aria description to explain to the user why it is disabled.
+
+-   `disabled`/`isDisabled` which completely disables the radio button. It's not focusable and pointer events (hover, click,
+    etc.) are all disabled too. You'll have to find another way to indicate to users that the radio button is here and
+    why it is disabled.
+-   `aria-disabled` only disable changes on the radio button (read only) so it's still focusable and accessible. You'll
+    have to setup either a `helper`, a tooltip or an aria description to explain to the user why it is disabled.
 
 ### Properties
 
