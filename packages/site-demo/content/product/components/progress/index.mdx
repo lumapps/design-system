@@ -1,15 +1,23 @@
 # Progress
 
-**Progress notify user that an action is being completed.**
+**Progress notify user that an action is being completed.**\
 Progress come in two styles: `circular` and `linear`.
 
 ## Circular
 
-<DemoBlock orientation="horizontal" demo="circular" withThemeSwitcher />
+```jsx demo orientation="horizontal" withThemeSwitcher
+import { ProgressCircular } from '@lumx/react';
+
+export default ({ theme }) => <ProgressCircular theme={theme} />;
+```
 
 ## Linear
 
-<DemoBlock demo="linear" withThemeSwitcher />
+```jsx demo withThemeSwitcher
+import { ProgressLinear } from '@lumx/react';
+
+export default ({ theme }) => <ProgressLinear theme={theme} />;
+```
 
 ### Accessibility concerns
 

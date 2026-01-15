@@ -80,17 +80,13 @@ exports.onCreateBabelConfig = ({ actions }) => {
     });
 };
 
-exports.onCreateWebpackConfig = async ({ actions, getConfig }) => {
+exports.onCreateWebpackConfig = async ({ actions }) => {
     // Generate the JSON icon library
     await generateJSONIconLibrary();
 
     actions.setWebpackConfig({
         plugins: [CONFIGS.ignoreNotFoundExport],
-
         resolve: {
-            alias: {
-                '@content': path.resolve('./content'),
-            },
             plugins: [new TsconfigPathsPlugin({ extensions: ['.ts', '.tsx'] })],
         },
     });

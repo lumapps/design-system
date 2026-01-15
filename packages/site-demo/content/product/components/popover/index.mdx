@@ -2,7 +2,31 @@
 
 **Popovers display pieces of UI on top of others. They are positioned using anchor elements.**
 
-<DemoBlock orientation="horizontal" demo="default" />
+```jsx demo orientation="horizontal"
+import { Chip, Popover } from '@lumx/react';
+import { useRef } from 'react';
+
+export default ({ theme }) => {
+    const anchorRef = useRef(null);
+    return (
+        <>
+            <Chip style={{ marginBottom: 80 }} ref={anchorRef} theme={theme} size="s">
+                Anchor
+            </Chip>
+
+            <Popover
+                isOpen
+                className="lumx-spacing-padding-huge"
+                theme={theme}
+                anchorRef={anchorRef}
+                placement="bottom"
+            >
+                Popover
+            </Popover>
+        </>
+    );
+};
+```
 
 ## Positions
 
@@ -10,32 +34,182 @@
 
 Popovers can be placed to 4 positions: `top`, `right`, `bottom`, `left`
 
-<DemoBlock demo="positions" />
+```jsx demo
+import { Chip, FlexBox, Popover } from '@lumx/react';
+import { useRef } from 'react';
+
+export default ({ theme }) => {
+    const popovers = [
+        ['left', useRef(null)],
+        ['top', useRef(null)],
+        ['bottom', useRef(null)],
+        ['right', useRef(null)],
+    ];
+    return (
+        <FlexBox style={{ padding: 80, gap: 128 }} orientation="vertical">
+            {popovers.map(([placement, ref]) => (
+                <FlexBox key={placement} fillSpace vAlign="center" hAlign="center">
+                    <Chip ref={ref} theme={theme} size="s">
+                        {placement.toUpperCase()}
+                    </Chip>
+
+                    <Popover
+                        isOpen
+                        className="lumx-spacing-padding-huge"
+                        theme={theme}
+                        anchorRef={ref}
+                        placement={placement}
+                    >
+                        Popover
+                    </Popover>
+                </FlexBox>
+            ))}
+        </FlexBox>
+    );
+};
+```
 
 ### Auto
 
 Popovers can also be placed automatically where space is available. They are placed at the bottom of anchors by default.
 
-<DemoBlock orientation="horizontal" demo="auto" />
+```jsx demo orientation="horizontal"
+import { Chip, Popover } from '@lumx/react';
+import { useRef } from 'react';
+
+export default ({ theme }) => {
+    const anchorRef = useRef(null);
+    return (
+        <>
+            <Chip style={{ margin: 80 }} ref={anchorRef} theme={theme} size="s">
+                Anchor
+            </Chip>
+
+            <Popover isOpen className="lumx-spacing-padding-huge" theme={theme} anchorRef={anchorRef} placement="auto">
+                Popover
+            </Popover>
+        </>
+    );
+};
+```
 
 ## Offset
 
 Popovers position can have an offset.
 
-<DemoBlock orientation="horizontal" demo="offset" />
+```jsx demo orientation="horizontal"
+import { Chip, Popover } from '@lumx/react';
+import { useRef } from 'react';
+
+export default ({ theme }) => {
+    const anchorRef = useRef(null);
+    return (
+        <>
+            <Chip style={{ marginBottom: 80 }} ref={anchorRef} theme={theme} size="s">
+                Anchor
+            </Chip>
+
+            <Popover
+                isOpen
+                className="lumx-spacing-padding-huge"
+                theme={theme}
+                anchorRef={anchorRef}
+                placement="right"
+                offset={{
+                    away: 30,
+                    along: 60,
+                }}
+            >
+                Popover
+            </Popover>
+        </>
+    );
+};
+```
 
 ## Alignments
 
 In addition to positions, popovers can be aligned to a chosen anchor's side:
 `top-start`, `top-end`, `right-start`, `right-end`, `bottom-start`, `bottom-end`, `left-start`, `left-end`, `auto-start`, `auto-end`.
 
-<DemoBlock orientation="vertical" demo="alignments" />
+```jsx demo orientation="vertical"
+import { Chip, FlexBox, Popover } from '@lumx/react';
+import { useRef } from 'react';
+
+export default ({ theme }) => {
+    const topStartAnchorRef = useRef(null);
+    const topEndAnchorRef = useRef(null);
+    return (
+        <>
+            <FlexBox style={{ marginTop: 80, gap: 128 }} orientation="vertical">
+                <Chip ref={topStartAnchorRef} theme={theme} size="s" style={{ placeSelf: 'flex-start' }}>
+                    TOP_START
+                </Chip>
+                <Popover
+                    isOpen
+                    className="lumx-spacing-padding-huge"
+                    theme={theme}
+                    anchorRef={topStartAnchorRef}
+                    placement="top-start"
+                >
+                    Popover aligned on start of the top side
+                </Popover>
+                <Chip ref={topEndAnchorRef} theme={theme} size="s" style={{ placeSelf: 'flex-end' }}>
+                    TOP_END
+                </Chip>
+            </FlexBox>
+            <Popover
+                isOpen
+                className="lumx-spacing-padding-huge"
+                theme={theme}
+                anchorRef={topEndAnchorRef}
+                placement="top-end"
+            >
+                Popover aligned on start of the top side
+            </Popover>
+        </>
+    );
+};
+```
 
 ## Matching width
 
 Popovers width can be forced to match anchors.
 
-<DemoBlock demo="matching-width" />
+```jsx demo
+import { mdiMagnify } from '@lumx/icons';
+import { Popover, TextField } from '@lumx/react';
+import React, { useRef } from 'react';
+
+export default ({ theme }) => {
+    const [searchValue, setSearchValue] = React.useState('');
+    const anchorRef = useRef(null);
+    return (
+        <>
+            <div style={{ marginBottom: 80 }}>
+                <TextField
+                    placeholder="Search"
+                    value={searchValue}
+                    onChange={setSearchValue}
+                    icon={mdiMagnify}
+                    theme={theme}
+                    textFieldRef={anchorRef}
+                />
+            </div>
+            <Popover
+                isOpen
+                className="lumx-spacing-padding-huge"
+                theme={theme}
+                anchorRef={anchorRef}
+                placement="bottom-start"
+                fitToAnchorWidth
+            >
+                Popover&apos;s width matching anchor&apos;s
+            </Popover>
+        </>
+    );
+};
+```
 
 ### Accessibility concerns
 
@@ -47,11 +221,11 @@ Popovers can be used to disclose information by activating a button.
 
 To apply this pattern, the following concerns should be handled:
 
-- The activating element should have the `aria-expanded` ([see W3C documentation](https://w3c.github.io/aria/#aria-expanded) for detail usage)
-- The popover should not take focus on open (`focusElement` property should be left blank)
-- The popover should appear after the activating element in the tab order (`usePortal` property should be set to `false`)
-- The popover should be closable using the escape key (`closeOnEscape` property, activated by default)
-- The activating element should take focus on popover close (`focusAnchorOnClose` property, activated by default)
+-   The activating element should have the `aria-expanded` ([see W3C documentation](https://w3c.github.io/aria/#aria-expanded) for detail usage)
+-   The popover should not take focus on open (`focusElement` property should be left blank)
+-   The popover should appear after the activating element in the tab order (`usePortal` property should be set to `false`)
+-   The popover should be closable using the escape key (`closeOnEscape` property, activated by default)
+-   The activating element should take focus on popover close (`focusAnchorOnClose` property, activated by default)
 
 Examples of this pattern can be found on the WAI-ARIA [disclosure pattern documentation](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/).
 
@@ -61,10 +235,10 @@ Popovers can be used as "popup" containing other accessibility pattern inside (m
 
 In all of those cases, the following concerns should be handled:
 
-- The activating element should have the `aria-haspopup` ([see W3C documentation](https://w3c.github.io/aria/#aria-haspopup) for detail usage)
-- The popover should take focus on open (`focusElement` property should be filled)
-- The popover should be closable using the escape key (`closeOnEscape` property, activated by default)
-- The activating element should take focus on popover close (`focusAnchorOnClose` property, activated by default)
+-   The activating element should have the `aria-haspopup` ([see W3C documentation](https://w3c.github.io/aria/#aria-haspopup) for detail usage)
+-   The popover should take focus on open (`focusElement` property should be filled)
+-   The popover should be closable using the escape key (`closeOnEscape` property, activated by default)
+-   The activating element should take focus on popover close (`focusAnchorOnClose` property, activated by default)
 
 Examples of this pattern can be found on the WAI-ARIA [combobox pattern documentation](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/), [menu pattern documentation](https://www.w3.org/WAI/ARIA/apg/patterns/menu/) or [dialog pattern documentation](https://www.w3.org/WAI/ARIA/apg/patterns/dialogmodal/).
 
@@ -74,8 +248,8 @@ Popovers can be used as "dialogs" containing any complex pattern inside.
 
 In this case, the following concerns should be handled:
 
-- Follow the sames rules as described in the [popup section](/product/components/popover#popup)
-- Use the [PopoverDialog](/product/component/popover-dialog) component to apply the correct role and pattern to the popover
+-   Follow the sames rules as described in the [popup section](/product/components/popover#popup)
+-   Use the [PopoverDialog](/product/component/popover-dialog) component to apply the correct role and pattern to the popover
 
 ### Properties
 

@@ -6,39 +6,116 @@
 
 ### Info
 
-Informative messages display advices, tips and/or information related to another component or pattern.
+Informative messages display advice, tips and/or information related to another component or pattern.
 
-<DemoBlock demo="info" />
+```jsx demo
+import { Message } from '@lumx/react';
+
+export default () => (
+    <Message kind="info" hasBackground>
+        <p>
+            Message text quisque tincidunt lobortis dui non auctor. Donec porta, ligula volutpat vehicula aliquet, dui
+            sapien tempus felis, sed cursus diam ante.
+        </p>
+    </Message>
+);
+```
 
 ### Warning
 
 Warning messages display very important information (often about a limitation) related to another component or pattern.
 
-<DemoBlock demo="warning" />
+```jsx demo
+import { Message } from '@lumx/react';
+
+export default () => (
+    <Message kind="warning" hasBackground>
+        <p>
+            Message text quisque tincidunt lobortis dui non auctor. Donec porta, ligula volutpat vehicula aliquet, dui
+            sapien tempus felis, sed cursus diam ante.
+        </p>
+    </Message>
+);
+```
 
 ### Error
 
 Error messages display critical information (often about a loss for the user) related to another component or pattern.
 
-<DemoBlock demo="error" />
+```jsx demo
+import { Message } from '@lumx/react';
+
+export default () => (
+    <Message kind="error" hasBackground>
+        <p>
+            Message text quisque tincidunt lobortis dui non auctor. Donec porta, ligula volutpat vehicula aliquet, dui
+            sapien tempus felis, sed cursus diam ante.
+        </p>
+    </Message>
+);
+```
 
 ### Success
 
 Success messages display critical information (often about the completion of a task performed by the user) related to another component or pattern.
 
-<DemoBlock demo="success" />
+```jsx demo
+import { Message } from '@lumx/react';
+
+export default () => (
+    <Message kind="success" hasBackground>
+        <p>
+            Message text quisque tincidunt lobortis dui non auctor. Donec porta, ligula volutpat vehicula aliquet, dui
+            sapien tempus felis, sed cursus diam ante.
+        </p>
+    </Message>
+);
+```
 
 ## Trimmed
 
 Use trimmed when you don't need a background color, left and right spacing.
 
-<DemoBlock demo="trimmed" />
+```jsx demo
+import { Message } from '@lumx/react';
+
+export default () => (
+    <Message kind="info">
+        <p>
+            Message text quisque tincidunt lobortis dui non auctor. Donec porta, ligula volutpat vehicula aliquet, dui
+            sapien tempus felis, sed cursus diam ante.
+        </p>
+    </Message>
+);
+```
 
 ## Closable
 
-Use closable when you need to make the message closable by the user. This option is only available for the `info` kind with a background. It won't display in any other configuration. 
+Use closable when you need to make the message closable by the user. This option is only available for the `info` kind with a background. It won't display in any other configuration.
 
-<DemoBlock hAlign="center" vAlign="center" demo="closable" />
+```jsx demo hAlign="center" vAlign="center"
+import React from 'react';
+import { Button, Message } from '@lumx/react';
+
+export default () => {
+    const [isMessageDisplayed, setMessageDisplay] = React.useState(true);
+
+    return isMessageDisplayed ? (
+        <Message
+            kind="info"
+            hasBackground
+            closeButtonProps={{ label: 'Close', onClick: () => setMessageDisplay(false) }}
+        >
+            <p>
+                Message text quisque tincidunt lobortis dui non auctor. Donec porta, ligula volutpat vehicula aliquet,
+                dui sapien tempus felis, sed cursus diam ante.
+            </p>
+        </Message>
+    ) : (
+        <Button onClick={() => setMessageDisplay(true)}>Reset message display</Button>
+    );
+};
+```
 
 ### Accessibility concerns
 

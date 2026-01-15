@@ -21,7 +21,6 @@ import { useState } from 'react';
 import './DemoBlock.scss';
 
 interface DemoBlockProps extends FlexBoxProps {
-    demo?: string;
     codeString?: string;
     theme?: Theme;
     withThemeSwitcher?: boolean;
@@ -32,7 +31,6 @@ interface DemoBlockProps extends FlexBoxProps {
 
 export const DemoBlock: React.FC<DemoBlockProps> = ({
     children,
-    demo,
     codeString,
     theme: defaultTheme = Theme.light,
     withThemeSwitcher = false,
@@ -70,11 +68,7 @@ export const DemoBlock: React.FC<DemoBlockProps> = ({
                 gap={gap}
                 {...flexBoxProps}
             >
-                {!children && (
-                    <span>
-                        Could not load demo <code>{demo}</code>.
-                    </span>
-                )}
+                {!children && <span>Could not load demo</span>}
                 {isFunction(children) ? children({ theme }) : children}
             </FlexBox>
             {(!alwaysShowCode || withThemeSwitcher) && (

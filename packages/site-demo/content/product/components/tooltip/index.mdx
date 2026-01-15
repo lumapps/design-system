@@ -1,9 +1,18 @@
 # Tooltip
 
-**Tooltips display information when users hover or focus an element.**
+**Tooltips display information when users hover or focus an element.**\
 They are positioned using anchor elements.
 
-<DemoBlock orientation="horizontal" demo="default" />
+```jsx demo orientation="horizontal"
+import { mdiPrinter } from '@lumx/icons';
+import { Icon, Tooltip } from '@lumx/react';
+
+export default () => (
+    <Tooltip label="Print">
+        <Icon icon={mdiPrinter} hasShape />
+    </Tooltip>
+);
+```
 
 ## Placement
 
@@ -11,13 +20,45 @@ Tooltips are positioned at the bottom of the target by default.
 Tooltips' position can be forced to one of these options: `top`, `right`, `bottom`, or `left`.
 If there is not enough space to correctly display the tooltip, tooltip will be displayed at the best position.
 
-<DemoBlock orientation="horizontal" demo="placement" />
+```jsx demo orientation="horizontal"
+import { mdiPrinter } from '@lumx/icons';
+import { Icon, Placement, Tooltip } from '@lumx/react';
+
+export default () => (
+    <>
+        <Tooltip label="Print" placement={Placement.LEFT} forceOpen>
+            <Icon hasShape icon={mdiPrinter} />
+        </Tooltip>
+
+        <Tooltip label="Print" placement={Placement.BOTTOM} forceOpen>
+            <Icon hasShape icon={mdiPrinter} />
+        </Tooltip>
+
+        <Tooltip label="Print" placement={Placement.TOP} forceOpen>
+            <Icon hasShape icon={mdiPrinter} />
+        </Tooltip>
+
+        <Tooltip label="Print" placement={Placement.RIGHT} forceOpen>
+            <Icon hasShape icon={mdiPrinter} />
+        </Tooltip>
+    </>
+);
+```
 
 ## Delay
 
 Tooltips display can be delayed.
 
-<DemoBlock orientation="horizontal" demo="delay" />
+```jsx demo orientation="horizontal"
+import { mdiPrinter } from '@lumx/icons';
+import { Icon, Tooltip } from '@lumx/react';
+
+export default () => (
+    <Tooltip delay={2000} label="Print">
+        <Icon icon={mdiPrinter} hasShape />
+    </Tooltip>
+);
+```
 
 ### Accessibility concerns
 

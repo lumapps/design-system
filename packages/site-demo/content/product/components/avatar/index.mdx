@@ -7,24 +7,56 @@
 Comes in 5 sizes: `xs`, `s`, `m`, `l`, `xl`.
 Check [size foundations](/product/foundations/size) for more details.
 
-<DemoBlock orientation="horizontal" demo="default" />
+```jsx demo orientation="horizontal"
+import { Avatar } from '@lumx/react';
+
+export default ({ theme }) => (
+    <>
+        <Avatar theme={theme} image="/demo-assets/persona.png" alt="XS" size="xs" />
+        <Avatar theme={theme} image="/demo-assets/persona.png" alt="S" size="s" />
+        <Avatar theme={theme} image="/demo-assets/persona.png" alt="M" size="m" />
+        <Avatar theme={theme} image="/demo-assets/persona.png" alt="L" size="l" />
+        <Avatar theme={theme} image="/demo-assets/persona.png" alt="XL" size="xl" />
+    </>
+);
+```
 
 ## Actions
 
 Buttons can be placed above avatars.
 The avatar recommended size to display actions is `xl`.
 
-<DemoBlock orientation="horizontal" demo="actions" />
+```jsx demo orientation="horizontal"
+import { mdiDelete, mdiEye, mdiPencil } from '@lumx/icons';
+import { Avatar, FlexBox, IconButton } from '@lumx/react';
+
+export default ({ theme }) => (
+    <Avatar
+        theme={theme}
+        image="/demo-assets/persona.png"
+        alt="Avatar with actions"
+        size="xl"
+        actions={
+            <FlexBox orientation="horizontal" vAlign="center" gap="regular">
+                <IconButton label="Edit" color="dark" emphasis="low" hasBackground icon={mdiPencil} size="s" />
+                <IconButton label="See" color="dark" emphasis="low" hasBackground icon={mdiEye} size="s" />
+                <IconButton label="Delete" color="dark" emphasis="low" hasBackground icon={mdiDelete} size="s" />
+            </FlexBox>
+        }
+    />
+);
+```
 
 ### Accessibility concerns
 
 Avatars can have 3 different accessibility use cases:
-- **default**: avatars are usually decorative images, so you can use an empty `alt` attribute
-  (See [the MDN `img` documentation for more info](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#accessibility_concerns))
-- **button**: using the `onClick` transforms avatars into a button, you **should also provide an `aria-label`** in
-  `thumbnailProps` to describe the action to screen readers
-- **link**: using the `linkAs` and/or `linkProps` transforms avatars into a link, you **should also provide an `aria-label`**
-  in the `linkProps` to describe the link for screen readers
+
+-   **default**: avatars are usually decorative images, so you can use an empty `alt` attribute
+    (See [the MDN `img` documentation for more info](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#accessibility_concerns))
+-   **button**: using the `onClick` transforms avatars into a button, you **should also provide an `aria-label`** in
+    `thumbnailProps` to describe the action to screen readers
+-   **link**: using the `linkAs` and/or `linkProps` transforms avatars into a link, you **should also provide an `aria-label`**
+    in the `linkProps` to describe the link for screen readers
 
 See the [button page](../button#accessibility-concerns) for the accessibility concerns on actions button.
 

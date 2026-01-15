@@ -2,19 +2,89 @@
 
 **Date pickers allow users to pick a date from a calendar.**
 
-<DemoBlock orientation="horizontal" demo="default" />
+```jsx demo orientation="horizontal"
+import { DatePicker } from '@lumx/react';
+import { useState } from 'react';
+
+export default (_, context) => {
+    const today = context?.parameters?.today || new Date();
+    const [datePicked, setDatePicked] = useState(new Date(today));
+    return (
+        <DatePicker
+            value={datePicked}
+            locale="en"
+            onChange={(newDate) => {
+                setDatePicked(newDate);
+            }}
+            nextButtonProps={{ label: 'Next month' }}
+            previousButtonProps={{ label: 'Previous month' }}
+        />
+    );
+};
+```
 
 ## Input
 
 Date picker can be triggered by a click on a [text field](/product/components/text-field).
 
-<DemoBlock orientation="horizontal" demo="input" />
+```jsx demo orientation="horizontal"
+import { mdiCalendar } from '@lumx/icons';
+import { DatePickerField } from '@lumx/react';
+import { useState } from 'react';
+
+export default (_, context) => {
+    const today = context?.parameters?.today || new Date();
+    const [datePicked, setDatePicked] = useState(today);
+    return (
+        <DatePickerField
+            locale="en"
+            label="Pick a date"
+            icon={mdiCalendar}
+            value={datePicked}
+            onChange={setDatePicked}
+            nextButtonProps={{ label: 'Next month' }}
+            previousButtonProps={{ label: 'Previous month' }}
+        />
+    );
+};
+```
 
 ## Restricted selection modes
 
 Date selection can be restricted via `minDate` and `maxDate` properties.
 
-<DemoBlock orientation="horizontal" demo="restricted" />
+```jsx demo orientation="horizontal"
+import { DatePicker } from '@lumx/react';
+import { useState } from 'react';
+
+export default (_, context) => {
+    const today = context?.parameters?.today || new Date();
+    const maxDate = new Date(today);
+    const minDate = new Date(today);
+    minDate.setDate(minDate.getDate() - 1);
+    const [datePicked, setDatePicked] = useState(maxDate);
+    return (
+        <>
+            <DatePicker
+                value={datePicked}
+                locale="en"
+                onChange={setDatePicked}
+                minDate={minDate}
+                nextButtonProps={{ label: 'Next month' }}
+                previousButtonProps={{ label: 'Previous month' }}
+            />
+            <DatePicker
+                value={datePicked}
+                locale="en"
+                onChange={setDatePicked}
+                maxDate={maxDate}
+                nextButtonProps={{ label: 'Next month' }}
+                previousButtonProps={{ label: 'Previous month' }}
+            />
+        </>
+    );
+};
+```
 
 ### Properties
 

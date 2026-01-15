@@ -12,43 +12,259 @@ Favor those 3 sizes for lists with list items with consistent heights.
 `huge` list items have a `16px` vertical padding.
 Use this size for any other cases.
 
-
 ### Tiny
+
 Tiny list items have a minimum height of `36px`.
 Use this size for dense lists with single line items like menus made of [dropdown](../dropdown).
 
-<DemoBlock demo="tiny" />
+```jsx demo
+import { mdiSend } from '@lumx/icons';
+import { Avatar, Icon, List, ListItem, ListSubheader, Thumbnail } from '@lumx/react';
+
+export default () => (
+    <List>
+        <ListSubheader>text only</ListSubheader>
+
+        <ListItem size="tiny">Single-line item</ListItem>
+        <ListItem size="tiny">Single-line item</ListItem>
+        <ListItem size="tiny">Single-line item</ListItem>
+
+        <ListSubheader>rich</ListSubheader>
+
+        <ListItem size="tiny" before={<Icon icon={mdiSend} size="xs" />}>
+            Single-line item
+        </ListItem>
+
+        <ListItem
+            size="tiny"
+            before={<Thumbnail variant="rounded" alt="Thumbnail" image="/demo-assets/square1.jpg" size="xs" />}
+        >
+            Single-line item
+        </ListItem>
+
+        <ListItem size="tiny" before={<Avatar image="/demo-assets/persona.png" alt="Avatar" size="xs" />}>
+            Single-line item
+        </ListItem>
+    </List>
+);
+```
 
 ### Regular
+
 Regular list items have a minimum height of `52px`.
 Use this size for single line list items.
 
-<DemoBlock demo="regular" />
+```jsx demo
+import { mdiDotsHorizontal, mdiSend } from '@lumx/icons';
+import { Avatar, Button, Icon, IconButton, List, ListItem, ListSubheader, Thumbnail } from '@lumx/react';
+
+export default () => (
+    <List>
+        <ListSubheader>text only</ListSubheader>
+
+        <ListItem>Single-line item</ListItem>
+
+        <ListSubheader>rich</ListSubheader>
+
+        <ListItem before={<Icon icon={mdiSend} size="xs" />}>Single-line item</ListItem>
+
+        <ListItem
+            before={<Thumbnail variant="rounded" alt="Thumbnail" image="/demo-assets/square1.jpg" size="m" />}
+            after={<IconButton label="More" emphasis="low" icon={mdiDotsHorizontal} />}
+        >
+            Single-line item
+        </ListItem>
+
+        <ListItem
+            before={<Avatar image="/demo-assets/persona.png" alt="Avatar" size="m" />}
+            after={<Button emphasis="low">Button</Button>}
+        >
+            Single-line item
+        </ListItem>
+    </List>
+);
+```
 
 ### Big
+
 Big list items have a minimum height of `72px`.
 Use this size for two lines list items.
 
-<DemoBlock demo="big" />
+```jsx demo
+import { mdiDotsHorizontal, mdiSend } from '@lumx/icons';
+import { Avatar, Button, Icon, IconButton, List, ListItem, ListSubheader, Thumbnail, Text } from '@lumx/react';
+
+export default () => (
+    <List>
+        <ListSubheader>text only</ListSubheader>
+
+        <ListItem size="big">
+            <Text as="p">Two-line item</Text>
+            <Text as="p" color="dark-L2">
+                Secondary text
+            </Text>
+        </ListItem>
+
+        <ListSubheader>rich</ListSubheader>
+
+        <ListItem size="big" before={<Icon icon={mdiSend} size="xs" />}>
+            <Text as="p">Two-line item</Text>
+            <Text as="p" color="dark-L2">
+                Secondary text
+            </Text>
+        </ListItem>
+
+        <ListItem
+            size="big"
+            before={<Thumbnail variant="rounded" alt="Thumbnail" image="/demo-assets/square1.jpg" size="m" />}
+            after={<IconButton label="More" emphasis="low" icon={mdiDotsHorizontal} />}
+        >
+            <Text as="p">Two-line item</Text>
+            <Text as="p" color="dark-L2">
+                Secondary text
+            </Text>
+        </ListItem>
+
+        <ListItem
+            size="big"
+            before={<Avatar image="/demo-assets/persona.png" alt="Avatar" size="m" />}
+            after={<Button emphasis="low">Button</Button>}
+        >
+            <Text as="p">Two-line item</Text>
+            <Text as="p" color="dark-L2">
+                Secondary text
+            </Text>
+        </ListItem>
+    </List>
+);
+```
 
 ### Huge
+
 Huge list items have a vertical padding of `16px`.
 Use this size for list items that have more than two lines of content.
 
-<DemoBlock demo="huge" />
+```jsx demo
+import { mdiDotsHorizontal, mdiSend } from '@lumx/icons';
+import { Avatar, Button, Icon, IconButton, List, ListItem, ListSubheader, Thumbnail, Text } from '@lumx/react';
+
+export default () => (
+    <List>
+        <ListSubheader>text only</ListSubheader>
+
+        <ListItem size="huge">
+            <Text as="p">Multi-line item</Text>
+            <Text as="p" color="dark-L2">
+                Secondary text Ambitioni dedisse scripsisse iudicaretur. Hi omnes lingua, institutis, legibus inter se
+                differunt. Idque Caesaris facere voluntate liceret: sese habere
+            </Text>
+        </ListItem>
+
+        <ListSubheader>rich</ListSubheader>
+
+        <ListItem size="huge" before={<Icon icon={mdiSend} size="xs" />}>
+            <Text as="p">Multi-line item</Text>
+            <Text as="p" color="dark-L2">
+                Secondary text Ambitioni dedisse scripsisse iudicaretur. Hi omnes lingua, institutis, legibus inter se
+                differunt. Idque Caesaris facere voluntate liceret: sese habere
+            </Text>
+        </ListItem>
+
+        <ListItem
+            size="huge"
+            before={<Thumbnail variant="rounded" alt="Thumbnail" image="/demo-assets/square1.jpg" size="m" />}
+            after={<IconButton label="More" emphasis="low" icon={mdiDotsHorizontal} />}
+        >
+            <Text as="p">Multi-line item</Text>
+            <Text as="p" color="dark-L2">
+                Secondary text Ambitioni dedisse scripsisse iudicaretur. Hi omnes lingua, institutis, legibus inter se
+                differunt. Idque Caesaris facere voluntate liceret: sese habere
+            </Text>
+        </ListItem>
+
+        <ListItem
+            size="huge"
+            before={<Avatar image="/demo-assets/persona.png" alt="Avatar" size="m" />}
+            after={<Button emphasis="low">Button</Button>}
+        >
+            <Text as="p">Multi-line item</Text>
+            <Text as="p" color="dark-L2">
+                Secondary text Ambitioni dedisse scripsisse iudicaretur. Hi omnes lingua, institutis, legibus inter se
+                differunt. Idque Caesaris facere voluntate liceret: sese habere
+            </Text>
+        </ListItem>
+    </List>
+);
+```
 
 ## Item padding
+
 The horizontal padding has 2 sizes: `big` and `huge`.
 By default, there is no horizontal padding.
 
-<DemoBlock demo="paddings" />
+```jsx demo
+import { List, ListItem, ListSubheader, Text } from '@lumx/react';
+
+export default () => (
+    <div>
+        <List>
+            <ListSubheader>Default</ListSubheader>
+
+            <ListItem size="big" className="lumx-color-background-dark-L6">
+                <Text as="p">Two-line item</Text>
+                <Text as="p" color="dark-L2">
+                    Secondary text
+                </Text>
+            </ListItem>
+        </List>
+        <List itemPadding="big">
+            <ListSubheader>Big padding</ListSubheader>
+
+            <ListItem size="big" className="lumx-color-background-dark-L6">
+                <Text as="p">Two-line item</Text>
+                <Text as="p" color="dark-L2">
+                    Secondary text
+                </Text>
+            </ListItem>
+        </List>
+        <List itemPadding="huge">
+            <ListSubheader>Huge padding</ListSubheader>
+
+            <ListItem size="big" className="lumx-color-background-dark-L6">
+                <Text as="p">Two-line item</Text>
+                <Text as="p" color="dark-L2">
+                    Secondary text
+                </Text>
+            </ListItem>
+        </List>
+    </div>
+);
+```
 
 ## Clickable
+
 List items can be clickable.
 Clickable list items can then be disabled, highlighted or selected.
 Use clickable list items when users need to select one or more options in a list.
 
-<DemoBlock demo="clickable" />
+```jsx demo
+import { List, ListItem } from '@lumx/react';
+
+export default () => (
+    <List>
+        <ListItem linkProps={{ href: '#' }}>Clickable list item</ListItem>
+        <ListItem linkProps={{ href: '#' }} isDisabled>
+            Disabled clickable list item
+        </ListItem>
+        <ListItem linkProps={{ href: '#' }} isHighlighted>
+            Highlighted clickable list item
+        </ListItem>
+        <ListItem linkProps={{ href: '#' }} isSelected>
+            Selected clickable list item
+        </ListItem>
+    </List>
+);
+```
 
 ### List properties
 

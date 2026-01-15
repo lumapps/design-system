@@ -1,105 +1,66 @@
-const { camelCase, partial } = require('lodash');
 const path = require('path');
 const fs = require('fs');
+const { createContentDigest } = require('gatsby-core-utils');
 
 const CONTENT_DIR = path.resolve('./content');
-const rewriteJSXComponents = require('../utils/rewriteJSXComponents');
-const debug = require('../utils/debug');
-
-/** Read source code to string (or return null if source code not found). */
-async function readSourceCode(sourcePath) {
-    try {
-        const buffer = await fs.promises.readFile(sourcePath);
-        return buffer.toString();
-    } catch (exception) {
-        console.warn(`Could not load demo in '${path.relative(CONTENT_DIR, sourcePath)}'`);
-        return null;
-    }
-}
-
-// Remove first level indent on code (if found).
-const removeIndent = (code) => {
-    const indentMatch = code.match(/^\n?(\s+)/);
-    if (!indentMatch) return code;
-    return code.trim().replace(new RegExp(`\n${indentMatch[1]}`, 'g'), '\n')
-}
-
-// Use a regular expression to remove curly braces at the start and end
-function removeCurlyBracesFromJSX(code) {
-    return code.replace(/^\{|\}$/g, '');
-}
-
-/** Update <DemoBlock/> props to import source code. */
-async function updateDemoBlock(resourceFolder, addImport, props) {
-    if (props.children) {
-        // <DemoBlock> with children already have a demo inside them.
-        // We copy the demo as string into the `codeString` prop.
-        props.codeString = JSON.stringify(removeCurlyBracesFromJSX(removeIndent(props.children)));
-        return props;
-    }
-
-    if (!props.demo) {
-        // Nothing to do.
-        return props;
-    }
-
-    const demoName = props.demo.replace(/"/g, '');
-    const relativeSourcePath = `./react/${demoName}.tsx`;
-    const sourcePath = path.join(resourceFolder, relativeSourcePath);
-
-    // Get demo code.
-    const code = await readSourceCode(sourcePath);
-    if (!code) {
-        return props;
-    }
-    props.codeString = JSON.stringify(code.trim());
-
-    // Import demo (will be added at the top).
-    let relativePath = path.relative(CONTENT_DIR, sourcePath);
-    const demoVar = camelCase(`demo-${relativePath.replace('/', '-')}`);
-    addImport(`import * as ${demoVar} from '@content/${relativePath}';`);
-
-    // Add demo as children.
-    props.children = `{Object.values(${demoVar}).find(v => typeof v === 'function')}`;
-
-    return props;
-}
+const CACHE_DIR = path.resolve(__dirname, '../../.cache/lumx-preprocessed-content');
 
 /**
  * MDX plugin to extract and insert source code from demo block in MDX documents.
  */
 module.exports = async (filePath, mdxString) => {
-    try {
-        const resourceFolder = path.dirname(filePath);
-        const imports = [];
-        const addImport = (i) => imports.push(i);
+    // Determine the location of the MDX file relative to content root
+    // e.g. product/components/avatar/index.mdx
+    const relativePath = path.relative(CONTENT_DIR, filePath);
+    const relativeDir = path.dirname(relativePath);
 
-        // Rewrite demo blocks.
-        mdxString = await rewriteJSXComponents(
-            'DemoBlock',
-            mdxString,
-            partial(updateDemoBlock, resourceFolder, addImport)
-        );
+    // The directory where we will store demos for this MDX file
+    // e.g. .cache/lumx-preprocessed-content/product/components/avatar/demos/
+    const demoCacheDir = path.join(CACHE_DIR, relativeDir, 'demos');
 
-        if (imports.length) {
-            // Inject imports at the top.
-            mdxString = `${imports.join('\n')}\n\n${mdxString}`;
+    const imports = [];
+
+    // Regex to match code blocks with "demo" meta
+    // ```language demo prop="value"
+    // content
+    // ```
+    // Capture groups: 1: language, 2: props, 3: content
+    // Note: We use [^\n]* to match props to avoid matching across newlines if \s includes \n
+    const codeBlockRegex = /```([a-z0-9]+)\s+demo([^\n]*)\n([\s\S]*?)```/g;
+
+    const demoFileWritePromises = [];
+
+    const editedMdxString = mdxString.replace(codeBlockRegex, (fullMatch, lang, propsStr, content) => {
+        const hash = createContentDigest(content);
+        const demoFilename = `${hash}.tsx`;
+        const demoFilePath = path.join(demoCacheDir, demoFilename);
+
+        // Create directory if not exists
+        if (!fs.existsSync(demoCacheDir)) {
+            fs.mkdirSync(demoCacheDir, { recursive: true });
         }
 
-        return mdxString;
-    } catch (e) {
-        debug(e);
-    }
-};
+        // Write the demo file
+        demoFileWritePromises.push(fs.promises.writeFile(demoFilePath, content.trim()));
 
-// Test code indent remove
-if (require.main === module) {
-    (async () => {
-        const props = await updateDemoBlock(
-            '.',
-            () => undefined,
-            { children: '    Foo\n    Bar'}
-        );
-        console.debug(props);
-    })();
-}
+        // Generate import statement
+        // import Demo_<hash> from './demos/<hash>';
+        const componentName = `Demo_${hash}`;
+        imports.push(`import ${componentName} from './demos/${hash}';`);
+
+        const codeString = JSON.stringify(content.trim());
+        const props = propsStr.trim();
+
+        // Construct <DemoBlock> replacement
+        // <DemoBlock codeString={...} orientation="horizontal">{Demo_<hash>}</DemoBlock>
+        return `<DemoBlock codeString={${codeString}} ${props}>{${componentName}}</DemoBlock>`;
+    });
+
+    await Promise.all(demoFileWritePromises);
+
+    if (imports.length > 0) {
+        return `${imports.join('\n')}\n\n${editedMdxString}`;
+    }
+
+    return editedMdxString;
+};

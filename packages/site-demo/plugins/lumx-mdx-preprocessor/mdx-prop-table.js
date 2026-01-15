@@ -53,7 +53,7 @@ const getComponentPath = async (component) => {
 
 function isReactType(type) {
     if (type.name === 'enum' && type.raw === 'ReactNode') return true;
-    if (type.name === 'enum' && type.raw === 'ElementType<any>') return true;
+    if (type.name === 'enum' && type.raw.match(/ElementType<.*>/)) return true;
     if (type.name === 'enum' && type.raw.match(/Ref<.*>/)) return true;
     return !type.raw.includes(' | ') && type.raw.startsWith('React');
 }
