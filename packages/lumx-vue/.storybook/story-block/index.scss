@@ -1,0 +1,27 @@
+@import "@lumx/core/src/scss/design-tokens";
+@import "@lumx/core/src/scss/core";
+
+.story-block {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    overflow: auto;
+
+    &--has-grey-background:not(&--theme-dark) {
+        background: lightgray;
+    }
+
+    &--theme-dark {
+        color: lumx-color-variant("light", "N");
+        background: lumx-color-variant("dark", "N");
+    }
+
+    &__toolbar {
+        display: flex;
+        gap: $lumx-spacing-unit-big;
+        margin-bottom: $lumx-spacing-unit-big;
+    }
+}
