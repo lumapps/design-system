@@ -1,9 +1,5 @@
 import { graphql, useStaticQuery } from 'gatsby';
 import React from 'react';
-import Helmet_, { HelmetProps } from 'react-helmet';
-
-// TODO: replace with gatsby page head API
-const Helmet = Helmet_ as any;
 
 const query = graphql`
     query Query {
@@ -21,13 +17,13 @@ interface Props {
     description?: string;
     keywords?: string[];
     lang?: string;
-    meta?: HelmetProps['meta'];
+    meta?: React.MetaHTMLAttributes<HTMLMetaElement>[];
 }
 
 const DEFAULT_KEYWORDS = ['lumapps', 'design system', 'lumx', 'react'];
 
 /**
- * Provide SEO using `react-helmet` to inject data in the document <head>.
+ * Provide SEO using Gatsby Head API to inject data in the document <head>.
  */
 export const PageHead: React.FC<Props> = (props) => {
     const { description, lang = 'en', meta = [], keywords = DEFAULT_KEYWORDS, title } = props;
@@ -36,7 +32,7 @@ export const PageHead: React.FC<Props> = (props) => {
     const metaDescription = description || site.siteMetadata.description;
 
     return (
-        <Helmet>
+        <>
             <html lang={lang} />
 
             <title>{title ? `${title} | ${siteTitle}` : siteTitle}</title>
@@ -55,6 +51,6 @@ export const PageHead: React.FC<Props> = (props) => {
             <meta property="og:type" content="website" />
             {keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
             {meta.length > 0 && meta.map((m) => <meta key={m.name || m.property} {...m} />)}
-        </Helmet>
+        </>
     );
 };

@@ -56,8 +56,6 @@ module.exports = {
         },
         // Load menu entries from `content/menu.yml` and MDX files.
         './lumx-menu',
-        // Update document head using react.
-        'gatsby-plugin-react-helmet',
         // Compile SASS.
         {
             resolve: 'gatsby-plugin-sass',
