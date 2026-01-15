@@ -27,16 +27,18 @@ interface Props {
 
 /** Template for the MDX page content */
 const MDXPageTemplate: React.FC<Props> = (props) => {
-    const { data, pageContext } = props;
+    const { data } = props;
 
     return (
         <>
-            {/* Update page title & description */}
-            <PageHead title={pageContext.title} description={pageContext.excerpt} />
             {/* MDX content render */}
             <MDXRenderer>{data.mdx.body}</MDXRenderer>
         </>
     );
 };
+
+export const Head: React.FC<Props> = ({ pageContext }) => (
+    <PageHead title={pageContext.title} description={pageContext.excerpt} />
+);
 
 export default MDXPageTemplate;
