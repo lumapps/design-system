@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link as LumxLink } from '@lumx/react';
 import { Link as RouterLink } from 'gatsby';
-import { useLocation } from '@reach/router';
+import { useLocation } from '@gatsbyjs/reach-router';
 
 interface Props {
     href: string;

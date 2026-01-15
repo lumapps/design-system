@@ -1,5 +1,5 @@
 import { Ref } from 'react';
-import { Match as Match_ } from '@reach/router';
+import { Match } from '@gatsbyjs/reach-router';
 
 import { mdiMenu } from '@lumx/icons';
 import { IconButton } from '@lumx/react';
@@ -9,9 +9,6 @@ import { SearchButton } from '@lumx/demo/components/search/SearchButton';
 
 import { LumxVersion } from './LumxVersion';
 import './MainHeader.scss';
-
-// TODO: replace with gatsby router (when updated to v4)
-const Match = Match_ as any;
 
 interface MainHeaderProps {
     openMenu(): void;
@@ -30,7 +27,7 @@ export const MainHeader: React.FC<MainHeaderProps> = ({ openMenu, openNavButtonR
         />
         <HomeLogoLink className="main-header__home-logo-link" />
         <Match path="/product/*">
-            {({ match }: any) =>
+            {({ match }) =>
                 match && (
                     <div className="main-header__extras">
                         <MaterialThemeSwitcher />

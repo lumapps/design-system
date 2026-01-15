@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from '@reach/router';
+import { useLocation } from '@gatsbyjs/reach-router';
 import filter from 'lodash/fp/filter';
 import * as Comlink from 'comlink';
 import type { SearchDocument, SearchWorkerApi } from './search.worker';
