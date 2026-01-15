@@ -3563,8 +3563,11 @@ __metadata:
   resolution: "@lumx/vue@workspace:packages/lumx-vue"
   dependencies:
     "@babel/plugin-transform-react-jsx": "npm:^7.27.1"
+    "@chromatic-com/storybook": "npm:^4.1.1"
     "@lumx/core": "npm:^4.0.0"
     "@lumx/icons": "npm:^4.0.0"
+    "@storybook/addon-a11y": "npm:^9.1.4"
+    "@storybook/addon-docs": "npm:^9.1.4"
     "@storybook/vue3-vite": "npm:^9.1.4"
     "@vitejs/plugin-vue": "npm:^6.0.2"
     "@vitejs/plugin-vue-jsx": "npm:^5.1.1"
