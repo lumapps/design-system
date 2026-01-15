@@ -30,18 +30,19 @@ function addMDXAsMenuEntry(createNode, getNode, node) {
     addMenuEntry(createNode, createMenuEntry({ path }));
 }
 
+exports.createSchemaCustomization = ({ actions }) => {
+    actions.createTypes(`
+        type MenuEntry implements Node {
+          path: String
+          label: String
+          hasDynamicChildren: Boolean
+        }
+    `);
+};
+
 /** Load `content/menu.yml` and create a menu entry for each menu node. */
 exports.sourceNodes = async ({ actions, getNode, getNodesByType }) => {
     try {
-        // Create GraphQL node type.
-        actions.createTypes(`
-            type MenuEntry implements Node {
-              path: String
-              label: String
-              hasDynamicChildren: Boolean
-            }
-        `);
-
         // Create menu for each MDX content.
         getNodesByType('Mdx').forEach(lodash.partial(addMDXAsMenuEntry, actions.createNode, getNode));
 
