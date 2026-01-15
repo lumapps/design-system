@@ -1,4 +1,4 @@
-const extensions = ['.js', '.ts', '.jsx', '.tsx'];
+const extensions = ['.js', '.ts', '.jsx', '.tsx', '.vue'];
 
 module.exports = {
     env: {
@@ -42,6 +42,7 @@ module.exports = {
                 svg: 'always',
                 scss: 'always',
                 json: 'always',
+                vue: 'always',
             },
         ],
         'import/no-extraneous-dependencies': [

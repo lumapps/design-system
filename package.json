@@ -5,6 +5,7 @@
     },
     "description": "The official LumApps Design System (LumX) for AngularJS and React applications",
     "devDependencies": {
+        "@testing-library/vue": "^8.1.0",
         "@vitest/ui": "^3.0.0",
         "changelog-verify": "^1.1.2",
         "es-abstract": "1.17.6",
