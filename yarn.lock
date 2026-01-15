@@ -3569,6 +3569,7 @@ __metadata:
     "@storybook/addon-a11y": "npm:^9.1.4"
     "@storybook/addon-docs": "npm:^9.1.4"
     "@storybook/vue3-vite": "npm:^9.1.4"
+    "@types/lodash": "npm:^4.14.149"
     "@vitejs/plugin-vue": "npm:^6.0.2"
     "@vitejs/plugin-vue-jsx": "npm:^5.1.1"
     chromatic: "npm:^13.3.5"
@@ -3578,6 +3579,8 @@ __metadata:
     vite: "npm:^6.3.5"
     vite-tsconfig-paths: "npm:^5.1.4"
     vue: "npm:^3.5.25"
+  peerDependencies:
+    lodash: 4.17.21
   languageName: unknown
   linkType: soft
 
