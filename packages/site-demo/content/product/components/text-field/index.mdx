@@ -2,7 +2,15 @@
 
 **Text fields are simple text inputs.**
 
-<DemoBlock demo="default" withThemeSwitcher />
+```jsx demo withThemeSwitcher
+import { TextField } from '@lumx/react';
+import { useState } from 'react';
+
+export default ({ theme }) => {
+    const [value, setValue] = useState('');
+    return <TextField label="Text field label" value={value} onChange={setValue} theme={theme} />;
+};
+```
 
 ## Special states
 
@@ -12,19 +20,40 @@ There are three special states: `isDisabled`, `isValid`, and `hasError`.
 
 Use `isDisabled` when values can't be edited.
 
-<DemoBlock demo="disabled" withThemeSwitcher />
+```jsx demo withThemeSwitcher
+import { TextField } from '@lumx/react';
+import noop from 'lodash/noop';
+
+export default ({ theme }) => <TextField label="Textfield label" isDisabled theme={theme} onChange={noop} value="" />;
+```
 
 ### Is valid
 
 Use `isValid` to tell that entered values are considered correct.
 
-<DemoBlock demo="valid" withThemeSwitcher />
+```jsx demo withThemeSwitcher
+import { TextField } from '@lumx/react';
+import { useState } from 'react';
+
+export default ({ theme }) => {
+    const [value, setValue] = useState('Valid value');
+    return <TextField label="Text field label" value={value} onChange={setValue} isValid theme={theme} />;
+};
+```
 
 ### Has error
 
 Use `hasError` to tell that entered values are considered incorrect.
 
-<DemoBlock demo="invalid" withThemeSwitcher />
+```jsx demo withThemeSwitcher
+import { TextField } from '@lumx/react';
+import { useState } from 'react';
+
+export default ({ theme }) => {
+    const [value, setValue] = useState('Invalid value');
+    return <TextField label="Text field label" value={value} onChange={setValue} hasError theme={theme} />;
+};
+```
 
 ## Options
 
@@ -34,78 +63,197 @@ There are seven options: `isRequired`, `helper`, `placeholder`, `icon`, `clearBu
 
 Use `isRequired` to tell that the text field must be filled to submit the form.
 
-<DemoBlock demo="required" withThemeSwitcher />
+```jsx demo withThemeSwitcher
+import { TextField } from '@lumx/react';
+import { useState } from 'react';
+
+export default ({ theme }) => {
+    const [value, setValue] = useState('');
+    return <TextField label="Text field label" value={value} onChange={setValue} isRequired theme={theme} />;
+};
+```
 
 ### Helper
 
 Use `helper` to provide guidance.
 
-<DemoBlock demo="helper" withThemeSwitcher />
+```jsx demo withThemeSwitcher
+import { TextField } from '@lumx/react';
+import { useState } from 'react';
+
+export default ({ theme }) => {
+    const [value, setValue] = useState('');
+    return <TextField label="Text field label" value={value} onChange={setValue} helper="Helper text" theme={theme} />;
+};
+```
 
 ### Placeholder
 
 Use `placeholder` to give an example of expected values or invite filling text fields.
 
-<DemoBlock demo="placeholder" withThemeSwitcher />
+```jsx demo withThemeSwitcher
+import { TextField } from '@lumx/react';
+import { useState } from 'react';
+
+export default ({ theme }) => {
+    const [value, setValue] = useState('');
+    return (
+        <TextField
+            label="Text field label"
+            value={value}
+            onChange={setValue}
+            placeholder="Placeholder text"
+            theme={theme}
+        />
+    );
+};
+```
 
 ### Icon
 
 Use `icon` to illustrate text fields `label`, `icon` complements `label` but can't replace it.
 
-<DemoBlock demo="icon" withThemeSwitcher />
+```jsx demo withThemeSwitcher
+import { mdiMagnify } from '@lumx/icons';
+import { TextField } from '@lumx/react';
+import { useState } from 'react';
+
+export default ({ theme }) => {
+    const [value, setValue] = useState('');
+    return <TextField value={value} onChange={setValue} icon={mdiMagnify} theme={theme} />;
+};
+```
 
 ### Is clearable
 
 To allow the user to clear the text field, you would have to pass a `label` prop through `clearButtonProps` prop. This corresponds to the label which will be used inside the tooltip of the clear icon button. Setting the label is enough to determine the visibility of the clear button. Use `onClear` to pass the function triggered by a click on the clear icon button.
 
-<DemoBlock demo="clearable" withThemeSwitcher />
+```jsx demo withThemeSwitcher
+import { TextField } from '@lumx/react';
+import { useState } from 'react';
+
+export default ({ theme }) => {
+    const [value, setValue] = useState('Clearable value');
+    return (
+        <TextField
+            label="Text field label"
+            clearButtonProps={{ label: 'Clear' }}
+            value={value}
+            onChange={setValue}
+            theme={theme}
+        />
+    );
+};
+```
 
 ### Max length
 
 Use `maxLength` when users inputs length are limited.
 
-<DemoBlock demo="character-counter" withThemeSwitcher />
+```jsx demo withThemeSwitcher
+import { TextField } from '@lumx/react';
+import { useState } from 'react';
+
+export default ({ theme }) => {
+    const [value, setValue] = useState('');
+    return <TextField label="Text field label" value={value} onChange={setValue} maxLength={50} theme={theme} />;
+};
+```
 
 ### Chips
 
 Use `chips` when users inputs need to be split in distinct parts such as tag entry.
 
-<DemoBlock demo="with-chips" withThemeSwitcher />
+```jsx demo withThemeSwitcher
+import { Chip, ChipGroup, TextField } from '@lumx/react';
+import { useState } from 'react';
+
+export default ({ theme }) => {
+    const [value, setValue] = useState('');
+    return (
+        <TextField
+            value={value}
+            onChange={setValue}
+            theme={theme}
+            chips={
+                <ChipGroup>
+                    <Chip size="s">First</Chip>
+                    <Chip size="s">Second</Chip>
+                    <Chip size="s">Third</Chip>
+                </ChipGroup>
+            }
+        />
+    );
+};
+```
 
 ## Textarea
 
 Use Text areas when users are expected to enter more than one line of text.
 
-<DemoBlock demo="text-area" withThemeSwitcher />
+```jsx demo withThemeSwitcher
+import { TextField } from '@lumx/react';
+import { useState } from 'react';
+
+export default ({ theme }) => {
+    const [value, setValue] = useState('');
+    return <TextField label="Text area label" value={value} onChange={setValue} theme={theme} multiline />;
+};
+```
 
 ### Valid
 
-<DemoBlock demo="text-area-valid" withThemeSwitcher />
+```jsx demo withThemeSwitcher
+import { TextField } from '@lumx/react';
+import { useState } from 'react';
+
+export default ({ theme }) => {
+    const [value, setValue] = useState('Valid value');
+    return <TextField label="Text area label" value={value} onChange={setValue} isValid theme={theme} multiline />;
+};
+```
 
 ### Invalid
 
-<DemoBlock demo="text-area-invalid" withThemeSwitcher />
+```jsx demo withThemeSwitcher
+import { TextField } from '@lumx/react';
+import { useState } from 'react';
+
+export default ({ theme }) => {
+    const [value, setValue] = useState('Invalid value');
+    return <TextField label="Text area label" value={value} onChange={setValue} hasError theme={theme} multiline />;
+};
+```
 
 ## Number
 
 Use number input when users are expected to enter numeric values.
 
-<DemoBlock demo="number" withThemeSwitcher />
+```jsx demo withThemeSwitcher
+import { TextField } from '@lumx/react';
+import { useState } from 'react';
+
+export default ({ theme }) => {
+    const [value, setValue] = useState('');
+    return <TextField label="Number" value={value} type="number" onChange={setValue} theme={theme} />;
+};
+```
 
 ### Accessibility concerns
 
 TextFields use standard HTML input or textarea (when using multiline).
 
 Make sure to always properly label them with the builtin `label` or attaching external labels (via `aria-labelledby`, or
- external HTML `label` with `for`).
+external HTML `label` with `for`).
 
 Showing a text field with only a placeholder is not sufficient, visual and accessible labels must also be in place.
 
 Text fields can be disabled in two ways:
-- `disabled`/`isDisabled` which completely disables the text field. It's not focusable and pointer events (hover, click, etc.) are
-  all disabled too. You'll have to find another way to indicate to users that the field is here and why it is disabled.
-- `aria-disabled` only disable editing the text field (read only) so it's still focusable and accessible. You'll have
-  to setup either a `helper`, a tooltip or an aria description to explain to the user why this field is disabled.
+
+-   `disabled`/`isDisabled` which completely disables the text field. It's not focusable and pointer events (hover, click, etc.) are
+    all disabled too. You'll have to find another way to indicate to users that the field is here and why it is disabled.
+-   `aria-disabled` only disable editing the text field (read only) so it's still focusable and accessible. You'll have
+    to setup either a `helper`, a tooltip or an aria description to explain to the user why this field is disabled.
 
 ### Properties
 

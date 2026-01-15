@@ -1,7 +1,7 @@
 # Icon
 
-**Icons are small visual representations of common actions, objects or ideas.**
-They help users to identify information and provide context.
+**Icons are small visual representations of common actions, objects or ideas.**\
+They help users to identify information and provide context.\
 Check the [icon library](/product/foundations/iconography/#library) for a searchable list of all our icons.
 
 ## Sizes
@@ -15,13 +15,39 @@ Check [size foundations](/product/foundations/size) for more details.
 
 Display a raw icon. Often used nested in other components.
 
-<DemoBlock orientation="horizontal" demo="simple" withThemeSwitcher />
+```jsx demo orientation="horizontal" withThemeSwitcher
+import { mdiEmail } from '@lumx/icons';
+import { Icon } from '@lumx/react';
+
+export default ({ theme }) => (
+    <>
+        <Icon icon={mdiEmail} size="xxs" theme={theme} />
+        <Icon icon={mdiEmail} size="xs" theme={theme} />
+        <Icon icon={mdiEmail} size="s" theme={theme} />
+        <Icon icon={mdiEmail} size="m" theme={theme} />
+        <Icon icon={mdiEmail} size="l" theme={theme} />
+        <Icon icon={mdiEmail} size="xl" theme={theme} />
+    </>
+);
+```
 
 ### Shape
 
 Display an icon with a shape. Often used as small illustrations.
 
-<DemoBlock orientation="horizontal" demo="shape" withThemeSwitcher />
+```jsx demo orientation="horizontal" withThemeSwitcher
+import { mdiMessageTextOutline } from '@lumx/icons';
+import { Icon } from '@lumx/react';
+
+export default ({ theme }) => (
+    <>
+        <Icon icon={mdiMessageTextOutline} size="s" hasShape theme={theme} />
+        <Icon icon={mdiMessageTextOutline} size="m" hasShape theme={theme} />
+        <Icon icon={mdiMessageTextOutline} size="l" hasShape theme={theme} />
+        <Icon icon={mdiMessageTextOutline} size="xl" hasShape theme={theme} />
+    </>
+);
+```
 
 ## Colors
 
@@ -29,7 +55,26 @@ Colors available: `blue`, `green`, `yellow`, `red`, `dark` and `light`.
 `blue` is often used as an accent visual, `green` to emphasize success, `yellow` to emphasize warnings, `red` to emphasize alerts and `dark` or `light` as a neutral visual.
 See [foundation colors](/product/foundations/color) for more details.
 
-<DemoBlock orientation="horizontal" demo="colors" withThemeSwitcher/>
+```jsx demo orientation="horizontal" withThemeSwitcher
+import { mdiAlert, mdiAlertCircle, mdiArrowRight, mdiBullhorn, mdiCheck, mdiMessageText } from '@lumx/icons';
+import { Icon } from '@lumx/react';
+
+export default ({ theme = 'light' }) => (
+    <>
+        <Icon icon={mdiArrowRight} size="s" color="blue" />
+        <Icon icon={mdiCheck} size="s" color="green" />
+        <Icon icon={mdiAlertCircle} size="s" color="yellow" />
+        <Icon icon={mdiAlert} size="s" color="red" />
+        <Icon icon={mdiBullhorn} size="m" color="blue" theme={theme} hasShape />
+        <Icon icon={mdiAlertCircle} size="m" color="yellow" theme={theme} hasShape />
+        <Icon icon={mdiAlert} size="m" theme={theme} color="red" hasShape />
+        <Icon icon={mdiCheck} size="m" theme={theme} color="green" hasShape />
+        <Icon icon={mdiMessageText} size="m" color="dark" theme={theme} hasShape />
+        <span className={theme === 'dark' ? 'lumx-color-font-light-N' : ''}>Without color:</span>
+        <Icon icon={mdiMessageText} size="m" theme={theme} hasShape />
+    </>
+);
+```
 
 ### Accessibility concerns
 

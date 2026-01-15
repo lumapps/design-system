@@ -2,26 +2,99 @@
 
 **Progress tracker convey user progress through a sequence of steps.**
 
-<DemoBlock demo="default" />
+```jsx demo
+import { ProgressTracker, ProgressTrackerProvider, ProgressTrackerStep } from '@lumx/react';
+import { useState } from 'react';
+
+const steps = [
+    {
+        isDisabled: false,
+        isComplete: true,
+        hasError: false,
+    },
+    {
+        isDisabled: false,
+        isComplete: true,
+        hasError: false,
+    },
+    {
+        isDisabled: false,
+        isComplete: false,
+        hasError: true,
+    },
+    {
+        isDisabled: true,
+        isComplete: false,
+        hasError: false,
+    },
+    {
+        isDisabled: true,
+        isComplete: false,
+        hasError: false,
+    },
+];
+
+export default () => {
+    const [activeStep, setActiveStep] = useState(2);
+
+    return (
+        <ProgressTrackerProvider activeStepIndex={activeStep} onChange={setActiveStep}>
+            <ProgressTracker aria-label="Steps with a linear progression">
+                {steps.map((step, index) => (
+                    <ProgressTrackerStep
+                        key={`step-${index + 1}`}
+                        label={`Step ${index + 1}`}
+                        helper={index === 2 ? 'Error message' : `Helper text ${index + 1}`}
+                        {...step}
+                    />
+                ))}
+            </ProgressTracker>
+        </ProgressTrackerProvider>
+    );
+};
+```
 
 ## States
 
 A step can be active or complete.
 
-<DemoBlock orientation="horizontal" demo="states" />
+```jsx demo orientation="horizontal"
+import { ProgressTrackerStep } from '@lumx/react';
+
+export default () => (
+    <>
+        <ProgressTrackerStep label="Step" />
+        <ProgressTrackerStep isActive label="Active step" />
+        <ProgressTrackerStep isComplete label="Complete step" />
+    </>
+);
+```
 
 ### Helper
 
 A step can be completed by a helper text.
 
-<DemoBlock demo="helper" />
+```jsx demo
+import { ProgressTrackerStep } from '@lumx/react';
+
+export default () => <ProgressTrackerStep label="Step" helper="Helper text" />;
+```
 
 ### Error
 
 When an error occurs, the error message can replace the helper text.
 Step can be inactive or active but can't be completed while in error.
 
-<DemoBlock orientation="horizontal" demo="error" />
+```jsx demo orientation="horizontal"
+import { ProgressTrackerStep } from '@lumx/react';
+
+export default () => (
+    <>
+        <ProgressTrackerStep label="Step" helper="Error message" hasError />
+        <ProgressTrackerStep label="Active step" helper="Error message" isActive hasError />
+    </>
+);
+```
 
 ### ProgressTracker properties
 

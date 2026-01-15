@@ -3,19 +3,196 @@
 **Dropdowns present multiple actions in a small area.**
 Dropdowns are commonly used for contextual menus and in form selects.
 
-<DemoBlock orientation="horizontal" demo="default" />
+```jsx demo orientation="horizontal"
+import React from 'react';
+import { Button, Dropdown, List, ListItem, ListSubheader } from '@lumx/react';
+
+export default () => {
+    const anchorSimpleRef = React.useRef(null);
+    const [isSimpleOpen, setSimpleIsOpen] = React.useState(false);
+    const anchorComplexRef = React.useRef(null);
+    const [isComplexOpen, setComplexIsOpen] = React.useState(false);
+    const toggleSimpleMenu = () => setSimpleIsOpen(!isSimpleOpen);
+    const closeSimpleMenu = () => setSimpleIsOpen(false);
+    const toggleComplexMenu = () => setComplexIsOpen(!isComplexOpen);
+    const closeComplexMenu = () => setComplexIsOpen(false);
+    const onSimpleMenuSelected = (item) => () => {
+        closeSimpleMenu();
+    };
+    const onComplexMenuSelected = (item) => () => {
+        closeComplexMenu();
+    };
+    return (
+        <>
+            {/* Simple menu */}
+            <Button ref={anchorSimpleRef} onClick={toggleSimpleMenu}>
+                Simple Menu
+            </Button>
+
+            <Dropdown isOpen={isSimpleOpen} onClose={closeSimpleMenu} anchorRef={anchorSimpleRef}>
+                <List>
+                    <ListItem onItemSelected={onSimpleMenuSelected('losangeles')} size="tiny">
+                        Los Angeles
+                    </ListItem>
+
+                    <ListItem onItemSelected={onSimpleMenuSelected('monterrey')} size="tiny">
+                        Monterrey
+                    </ListItem>
+
+                    <ListItem onItemSelected={onSimpleMenuSelected('georgetown')} size="tiny">
+                        Georgetown
+                    </ListItem>
+
+                    <ListItem onItemSelected={onSimpleMenuSelected('cali')} size="tiny">
+                        Cali
+                    </ListItem>
+
+                    <ListItem onItemSelected={onSimpleMenuSelected('trondheim')} size="tiny">
+                        Trondheim
+                    </ListItem>
+                </List>
+            </Dropdown>
+
+            {/* Complex menu */}
+            <Button ref={anchorComplexRef} onClick={toggleComplexMenu}>
+                Complex Menu
+            </Button>
+
+            <Dropdown isOpen={isComplexOpen} onClose={closeComplexMenu} anchorRef={anchorComplexRef}>
+                <List>
+                    <ListSubheader>Contribution</ListSubheader>
+
+                    <ListItem onItemSelected={onComplexMenuSelected('pages')} size="tiny">
+                        Pages
+                    </ListItem>
+
+                    <ListItem onItemSelected={onComplexMenuSelected('news')} size="tiny">
+                        News Articles with a longer name
+                    </ListItem>
+
+                    <ListItem onItemSelected={onComplexMenuSelected('jobs')} size="tiny">
+                        Job Offers
+                    </ListItem>
+
+                    <ListSubheader>Directories</ListSubheader>
+
+                    <ListItem onItemSelected={onComplexMenuSelected('projects')} size="tiny">
+                        Projects
+                    </ListItem>
+
+                    <ListItem onItemSelected={onComplexMenuSelected('useful')} size="tiny">
+                        Useful links
+                    </ListItem>
+
+                    <ListItem onItemSelected={onComplexMenuSelected('support')} size="tiny">
+                        Support links
+                    </ListItem>
+
+                    <ListItem onItemSelected={onComplexMenuSelected('engineering')} size="tiny">
+                        Engineering
+                    </ListItem>
+                </List>
+            </Dropdown>
+        </>
+    );
+};
+```
 
 ## Programmatically controlled
 
 Dropdowns can be controlled from external events.
 
-<DemoBlock vAlign="center" demo="target" />
+```jsx demo vAlign="center"
+import { useRef, useState } from 'react';
+import { Button, Chip, Dropdown, FlexBox, List, ListItem } from '@lumx/react';
+
+export default () => {
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const anchorRef = useRef(null);
+    const openDropdown = () => setIsDropdownOpen(true);
+    const closeDropdown = () => setIsDropdownOpen(false);
+    return (
+        <>
+            <Chip ref={anchorRef}>I am the anchor</Chip>
+
+            <Dropdown
+                closeOnClickAway={false}
+                closeOnEscape
+                onClose={closeDropdown}
+                placement="bottom-start"
+                isOpen={isDropdownOpen}
+                anchorRef={anchorRef}
+            >
+                <List isClickable>
+                    <ListItem size="tiny">Los Angeles</ListItem>
+                    <ListItem size="tiny">Monterrey</ListItem>
+                    <ListItem size="tiny">Georgetown</ListItem>
+                    <ListItem size="tiny">Cali</ListItem>
+                    <ListItem size="tiny">Trondheim</ListItem>
+                </List>
+            </Dropdown>
+
+            <FlexBox gap="regular" orientation="horizontal">
+                <Button onClick={openDropdown}>Open dropdown</Button>
+                <Button onClick={closeDropdown}>Close dropdown</Button>
+            </FlexBox>
+        </>
+    );
+};
+```
 
 ## Actions states
 
 Presented actions have various states, they behave like [`clickable list`](/product/components/list/)
 
-<DemoBlock demo="selects" backgroundColor={{ color: 'dark', variant: 'L6' }} vAlign="center" />
+```jsx demo backgroundColor={{ color: 'dark', variant: 'L6' }} vAlign="center"
+import { Dropdown, List, ListDivider, ListItem, ListSubheader } from '@lumx/react';
+// Demo purpose only: force the dropdown position to have it show inline in the demo block
+const overridePositionStyle = (element) => {
+    // eslint-disable-next-line no-param-reassign
+    if (element?.style) element.style.position = 'initial';
+};
+
+export default () => (
+    <Dropdown isOpen anchorRef={{ current: null }} usePortal={false} ref={overridePositionStyle}>
+        <List>
+            <ListSubheader>Fruits</ListSubheader>
+
+            <ListItem linkProps={{ href: '#' }} size="tiny">
+                Ananas
+            </ListItem>
+
+            <ListItem linkProps={{ href: '#' }} size="tiny" isDisabled>
+                Coconut (unavailable)
+            </ListItem>
+
+            <ListItem linkProps={{ href: '#' }} size="tiny">
+                Kiwi
+            </ListItem>
+
+            <ListDivider />
+
+            <ListSubheader>Vegetables</ListSubheader>
+
+            <ListItem linkProps={{ href: '#' }} size="tiny">
+                Carrot
+            </ListItem>
+
+            <ListItem linkProps={{ href: '#' }} size="tiny" isSelected>
+                Onion (selected)
+            </ListItem>
+
+            <ListItem linkProps={{ href: '#' }} size="tiny">
+                Potato
+            </ListItem>
+
+            <ListItem linkProps={{ href: '#' }} size="tiny">
+                Rice
+            </ListItem>
+        </List>
+    </Dropdown>
+);
+```
 
 ### Accessibility concerns
 

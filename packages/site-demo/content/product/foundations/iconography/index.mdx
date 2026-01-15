@@ -1,4 +1,4 @@
-import { FlexBox, Orientation } from '@lumx/react';
+import { FlexBox } from '@lumx/react';
 import { IconLibrary } from '@lumx/demo/components/content/design-tokens';
 
 # Iconography
@@ -7,17 +7,31 @@ import { IconLibrary } from '@lumx/demo/components/content/design-tokens';
 
 ## Sizes
 
-Icons come in 6 sizes: xxs, xs, s, m, l, xl.
+Icons come in 6 sizes: `xxs`, `xs`, `s`, `m`, `l`, `xl`.
 
-<DemoBlock demo="default" orientation="horizontal" />
+```jsx demo orientation="horizontal"
+import { mdiEmail } from '@lumx/icons';
+import { Icon } from '@lumx/react';
+
+export default () => (
+    <>
+        <Icon icon={mdiEmail} size="xxs" />
+        <Icon icon={mdiEmail} size="xs" />
+        <Icon icon={mdiEmail} size="s" />
+        <Icon icon={mdiEmail} size="m" />
+        <Icon icon={mdiEmail} size="l" />
+        <Icon icon={mdiEmail} size="xl" />
+    </>
+);
+```
 
 ## Layout
 
 We use [Material Design](https://material.io/archive/guidelines/style/icons.html) grid and proportions.
 
-<FlexBox orientation={Orientation.horizontal}>
-    <img src="assets/iconography-layout.png" width="128" height="128" />
-    <img src="assets/iconography-keylines.png" width="128" height="128" />
+<FlexBox orientation="horizontal">
+    <img src="assets/iconography-layout.png" width="128" height="128" alt="" />
+    <img src="assets/iconography-keylines.png" width="128" height="128" alt="" />
 </FlexBox>
 
 ## Library

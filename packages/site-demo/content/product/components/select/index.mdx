@@ -1,23 +1,333 @@
 # Select
 
-**Selects display options in a list and present the users choice in the list box.**
+**Selects display options in a list and present the users choice in the list box.**\
 Use it when users need to select one or more options.
 
 ## Single selection
 
-<DemoBlock demo="single-select" withThemeSwitcher />
+```jsx demo withThemeSwitcher
+import { List, ListItem, Select } from '@lumx/react';
+import React, { useState } from 'react';
+
+export default ({ theme }) => {
+    const CHOICES = ['First item', 'Second item', 'Third item'];
+    const PLACEHOLDER = 'Select a value';
+    const LABEL = 'Select label';
+    const [isOpen, setOpen] = useState(false);
+    const closeSelect = () => setOpen(false);
+    const toggleSelect = () => setOpen(!isOpen);
+    const [value, setValue] = React.useState('');
+    const clearSelected = (event) => {
+        event.stopPropagation();
+        setValue('');
+    };
+    const selectItem = (item) => () => {
+        if (value === item) {
+            setValue('');
+        } else {
+            setValue(item);
+        }
+        closeSelect();
+    };
+    return (
+        <Select
+            style={{ width: '100%' }}
+            isOpen={isOpen}
+            value={value}
+            onClear={clearSelected}
+            clearButtonProps={{ label: 'Clear' }}
+            label={LABEL}
+            placeholder={PLACEHOLDER}
+            theme={theme}
+            onInputClick={toggleSelect}
+            onDropdownClose={closeSelect}
+        >
+            <List>
+                {CHOICES.length > 0
+                    ? CHOICES.map((choice, index) => (
+                          <ListItem
+                              isSelected={value === choice}
+                              key={index}
+                              onItemSelected={selectItem(choice)}
+                              size="tiny"
+                          >
+                              {choice}
+                          </ListItem>
+                      ))
+                    : [
+                          <ListItem key={0} size="tiny">
+                              No data
+                          </ListItem>,
+                      ]}
+            </List>
+        </Select>
+    );
+};
+```
 
 ## Single selection with search
 
-<DemoBlock demo="single-select-search" withThemeSwitcher />
+```jsx demo withThemeSwitcher
+import { mdiMagnify } from '@lumx/icons';
+import { List, ListDivider, ListItem, ListSubheader, Select, TextField } from '@lumx/react';
+import React, { useState } from 'react';
+
+export default ({ theme }) => {
+    const CHOICES = ['First item', 'Second item', 'Third item'];
+    const PLACEHOLDER = 'Select a value';
+    const LABEL = 'Select label';
+    const [isOpen, setOpen] = useState(false);
+    const closeSelect = () => setOpen(false);
+    const toggleSelect = () => setOpen(!isOpen);
+    const [value, setValue] = React.useState('');
+    const [filterValue, setFilterValue] = React.useState('');
+    const filteredChoices = CHOICES.filter((choice) =>
+        choice.replace(' ', '').toLowerCase().includes(filterValue.replace(' ', '').toLowerCase()),
+    );
+    const clearSelected = (event) => {
+        event.stopPropagation();
+        setValue('');
+    };
+    const selectItem = (item) => () => {
+        if (value === item) {
+            setValue('');
+        } else {
+            setValue(item);
+        }
+        closeSelect();
+    };
+    return (
+        <Select
+            closeOnClick={false}
+            isOpen={isOpen}
+            label={LABEL}
+            placeholder={PLACEHOLDER}
+            style={{ width: '100%' }}
+            theme={theme}
+            value={value}
+            onClear={clearSelected}
+            clearButtonProps={{ label: 'Clear' }}
+            onInputClick={toggleSelect}
+            onDropdownClose={closeSelect}
+        >
+            <List>
+                <ListSubheader>
+                    <TextField
+                        style={{ width: '100%', padding: 0 }}
+                        value={filterValue}
+                        onChange={setFilterValue}
+                        icon={mdiMagnify}
+                        size="tiny"
+                    />
+                </ListSubheader>
+
+                <ListDivider />
+
+                {filteredChoices.length > 0
+                    ? filteredChoices.map((choice, index) => (
+                          <ListItem
+                              isSelected={value === choice}
+                              key={index}
+                              onItemSelected={selectItem(choice)}
+                              size="tiny"
+                          >
+                              {choice}
+                          </ListItem>
+                      ))
+                    : [
+                          <ListItem key={0} size="tiny">
+                              No data
+                          </ListItem>,
+                      ]}
+            </List>
+        </Select>
+    );
+};
+```
 
 ## Multi selection
 
-<DemoBlock demo="multi-select" withThemeSwitcher />
+```jsx demo withThemeSwitcher
+import { List, ListItem, SelectMultiple } from '@lumx/react';
+import React, { useState } from 'react';
+
+export default ({ theme }) => {
+    const CHOICES = ['First item', 'Second item', 'Third item'];
+    const PLACEHOLDER = 'Select a value';
+    const LABEL = 'Select label';
+    const [isOpen, setOpen] = useState(false);
+    const closeSelect = () => setOpen(false);
+    const toggleSelect = () => setOpen(!isOpen);
+    const [values, setValues] = React.useState([]);
+    const clearSelected = (event, value) => {
+        event?.stopPropagation();
+        setValues(value ? values.filter((val) => val !== value) : []);
+    };
+    const selectItem = (item) => () => {
+        if (values.includes(item)) {
+            clearSelected(undefined, item);
+            return;
+        }
+        setValues([...values, item]);
+    };
+    return (
+        <SelectMultiple
+            style={{ width: '100%' }}
+            value={values}
+            isOpen={isOpen}
+            onDropdownClose={closeSelect}
+            onInputClick={toggleSelect}
+            label={LABEL}
+            placeholder={PLACEHOLDER}
+            theme={theme}
+            onClear={clearSelected}
+            clearButtonProps={{ label: 'Clear' }}
+        >
+            <List>
+                {CHOICES.length > 0
+                    ? CHOICES.map((choice, index) => (
+                          <ListItem
+                              isSelected={values.includes(choice)}
+                              key={index}
+                              onItemSelected={selectItem(choice)}
+                              size="tiny"
+                          >
+                              {choice}
+                          </ListItem>
+                      ))
+                    : [
+                          <ListItem key={0} size="tiny">
+                              No data
+                          </ListItem>,
+                      ]}
+            </List>
+        </SelectMultiple>
+    );
+};
+```
 
 ## Multi selection with search
 
-<DemoBlock demo="multi-select-search" withThemeSwitcher />
+```jsx demo withThemeSwitcher
+import { mdiAccessPoint, mdiAccountBox, mdiAlphaF, mdiClose, mdiMagnify } from '@lumx/icons';
+import { Chip, Icon, List, ListDivider, ListItem, ListSubheader, SelectMultiple, TextField } from '@lumx/react';
+import React, { useState } from 'react';
+
+export default ({ theme }) => {
+    const CHOICES_WITH_ICONS = [
+        {
+            icon: mdiAccessPoint,
+            label: 'First item',
+        },
+        {
+            icon: mdiAccountBox,
+            label: 'Second item',
+        },
+        {
+            icon: mdiAlphaF,
+            label: 'Third item',
+        },
+    ];
+    const PLACEHOLDER = 'Select a value';
+    const LABEL = 'Select label';
+    const getChoiceByValue = (value) => CHOICES_WITH_ICONS.find((ch) => ch.label === value);
+    const [isOpen, setOpen] = useState(false);
+    const closeSelect = () => setOpen(false);
+    const toggleSelect = () => setOpen(!isOpen);
+    const [values, setValues] = React.useState([]);
+    const onInfiniteScroll = () => {
+        console.log('You have reached the bottom of the select dropdown.');
+    };
+    const clearSelected = (event, value) => {
+        event?.stopPropagation();
+        setValues(value ? values.filter((val) => val !== value) : []);
+    };
+    const selectItem = (item) => () => {
+        if (values.includes(item)) {
+            setValues(values.filter((val) => item !== val));
+            return;
+        }
+        setValues([...values, item]);
+    };
+    const [filterValue, setFilterValue] = React.useState('');
+    const filteredChoices = CHOICES_WITH_ICONS.filter((choice) =>
+        choice.label.replace(' ', '').toLowerCase().includes(filterValue.replace(' ', '').toLowerCase()),
+    );
+    const selectedChipRender = (choice, index, onClear, isDisabled) => {
+        const matchedChoice = getChoiceByValue(choice);
+        const onClick = (event) => onClear && onClear(event, choice);
+        return (
+            <Chip
+                key={index}
+                after={onClear && <Icon icon={mdiClose} size="xxs" />}
+                before={<Icon size="xs" icon={(matchedChoice && matchedChoice.icon) || ''} />}
+                isDisabled={isDisabled}
+                size="s"
+                onAfterClick={onClick}
+                onClick={onClick}
+            >
+                {choice}
+            </Chip>
+        );
+    };
+    const selectedValueRender = (choice) => {
+        const matchedChoice = getChoiceByValue(choice);
+        return (
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+                <Icon size="xs" icon={(matchedChoice && matchedChoice.icon) || ''} style={{ marginRight: 5 }} />
+                {matchedChoice && matchedChoice.label}
+            </div>
+        );
+    };
+    return (
+        <SelectMultiple
+            style={{ width: '100%' }}
+            isOpen={isOpen}
+            value={values}
+            label={LABEL}
+            placeholder={PLACEHOLDER}
+            theme={theme}
+            onClear={clearSelected}
+            clearButtonProps={{ label: 'Clear' }}
+            onDropdownClose={closeSelect}
+            onInputClick={toggleSelect}
+            onInfiniteScroll={onInfiniteScroll}
+            selectedChipRender={selectedChipRender}
+            selectedValueRender={selectedValueRender}
+        >
+            <List>
+                <ListSubheader>
+                    <TextField
+                        style={{ width: '100%', padding: 0 }}
+                        value={filterValue}
+                        onChange={setFilterValue}
+                        icon={mdiMagnify}
+                        size="tiny"
+                    />
+                </ListSubheader>
+                <ListDivider />
+                {filteredChoices.length > 0
+                    ? filteredChoices.map((choice, index) => (
+                          <ListItem
+                              isSelected={values.includes(choice.label)}
+                              key={index}
+                              onItemSelected={selectItem(choice.label)}
+                              before={<Icon size="xs" icon={choice.icon} />}
+                              size="tiny"
+                          >
+                              <div>{choice.label}</div>
+                          </ListItem>
+                      ))
+                    : [
+                          <ListItem key={0} size="tiny">
+                              No data
+                          </ListItem>,
+                      ]}
+            </List>
+        </SelectMultiple>
+    );
+};
+```
 
 ## States
 
@@ -25,25 +335,159 @@ There are three states: _disabled_, _valid_, and _invalid_.
 
 ### Disabled
 
-<DemoBlock demo="state-disabled" withThemeSwitcher />
+```jsx demo withThemeSwitcher
+import { Select } from '@lumx/react';
+
+export default ({ theme }) => (
+    <Select isDisabled value="" label="Select label" placeholder="Select a value" theme={theme} />
+);
+```
 
 ### Valid
 
-<DemoBlock demo="state-valid" withThemeSwitcher />
+```jsx demo withThemeSwitcher
+import { Select } from '@lumx/react';
+
+export default ({ theme }) => (
+    <Select isValid value="" label="Select label" placeholder="Select a value" theme={theme} />
+);
+```
 
 ### Invalid
 
-<DemoBlock demo="state-invalid" withThemeSwitcher />
+```jsx demo withThemeSwitcher
+import { Select } from '@lumx/react';
+
+export default ({ theme }) => (
+    <Select hasError value="" label="Select label" placeholder="Select a value" theme={theme} />
+);
+```
 
 ## Chip variant
 
 Use chip variant when selects behave like filters (see [filter chip](../chip)).
 
-<DemoBlock demo="select-chip" withThemeSwitcher />
+```jsx demo withThemeSwitcher
+import { List, ListItem, Select } from '@lumx/react';
+import React, { useState } from 'react';
+
+export default ({ theme }) => {
+    const CHOICES = ['First item', 'Second item', 'Third item'];
+    const PLACEHOLDER = 'Select a value';
+    const LABEL = 'Select label';
+    const [isOpen, setOpen] = useState(false);
+    const closeSelect = () => setOpen(false);
+    const toggleSelect = () => setOpen(!isOpen);
+    const [value, setValue] = React.useState('');
+    const clearSelected = (event) => {
+        event?.stopPropagation();
+        setValue('');
+    };
+    const selectItem = (item) => {
+        if (value === item) {
+            setValue('');
+        } else {
+            setValue(item);
+        }
+        closeSelect();
+    };
+    const onItemSelected = (choice) => () => selectItem(choice);
+    return (
+        <Select
+            isOpen={isOpen}
+            value={value}
+            label={LABEL}
+            placeholder={PLACEHOLDER}
+            theme={theme}
+            variant="chip"
+            onClear={clearSelected}
+            clearButtonProps={{ label: 'Clear' }}
+            onDropdownClose={closeSelect}
+            onInputClick={toggleSelect}
+        >
+            <List>
+                {CHOICES.length > 0
+                    ? CHOICES.map((choice, index) => (
+                          <ListItem
+                              isSelected={value === choice}
+                              key={index}
+                              onItemSelected={onItemSelected(choice)}
+                              size="tiny"
+                          >
+                              {choice}
+                          </ListItem>
+                      ))
+                    : [
+                          <ListItem key={0} size="tiny">
+                              No data
+                          </ListItem>,
+                      ]}
+            </List>
+        </Select>
+    );
+};
+```
 
 ## Multi Chip selection
 
-<DemoBlock demo="multi-select-chip" withThemeSwitcher />
+```jsx demo withThemeSwitcher
+import { List, ListItem, SelectMultiple } from '@lumx/react';
+import React, { useState } from 'react';
+
+export default ({ theme }) => {
+    const CHOICES = ['First item', 'Second item', 'Third item'];
+    const PLACEHOLDER = 'Select a value';
+    const LABEL = 'Select label';
+    const [isOpen, setOpen] = useState(false);
+    const closeSelect = () => setOpen(false);
+    const toggleSelect = () => setOpen(!isOpen);
+    const [values, setValues] = React.useState([]);
+    const clearSelected = (event, value) => {
+        event?.stopPropagation();
+        setValues(value ? values.filter((val) => val !== value) : []);
+    };
+    const selectItem = (item) => () => {
+        if (values.includes(item)) {
+            clearSelected(undefined, item);
+            return;
+        }
+        setValues([...values, item]);
+    };
+    return (
+        <SelectMultiple
+            isOpen={isOpen}
+            value={values}
+            label={LABEL}
+            placeholder={PLACEHOLDER}
+            theme={theme}
+            variant="chip"
+            onClear={clearSelected}
+            clearButtonProps={{ label: 'Clear' }}
+            onDropdownClose={closeSelect}
+            onInputClick={toggleSelect}
+        >
+            <List>
+                {CHOICES.length > 0
+                    ? CHOICES.map((choice, index) => (
+                          <ListItem
+                              isSelected={values.includes(choice)}
+                              key={index}
+                              onItemSelected={selectItem(choice)}
+                              size="tiny"
+                          >
+                              {choice}
+                          </ListItem>
+                      ))
+                    : [
+                          <ListItem key={0} size="tiny">
+                              No data
+                          </ListItem>,
+                      ]}
+            </List>
+        </SelectMultiple>
+    );
+};
+```
 
 ### Select properties
 

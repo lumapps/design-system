@@ -9,19 +9,75 @@ Check [size foundations](/product/foundations/size) for more details.
 
 ### Extra Small
 
-<DemoBlock orientation="horizontal" demo="size-xs" withThemeSwitcher />
+```jsx demo orientation="horizontal" withThemeSwitcher
+import { UserBlock } from '@lumx/react';
+
+export default ({ theme }) => (
+    <UserBlock
+        theme={theme}
+        name="Emmitt O. Lum"
+        nameProps={{ 'aria-label': 'Emmitt O. Lum - open user profile' }}
+        fields={['Creative developer', 'Denpasar']}
+        avatarProps={{ image: '/demo-assets/persona.png' }}
+        size="xs"
+        onClick={console.log}
+    />
+);
+```
 
 ### Small
 
-<DemoBlock orientation="horizontal" demo="size-s" withThemeSwitcher />
+```jsx demo orientation="horizontal" withThemeSwitcher
+import { UserBlock } from '@lumx/react';
+
+export default ({ theme }) => (
+    <UserBlock
+        theme={theme}
+        name="Emmitt O. Lum"
+        nameProps={{ 'aria-label': 'Emmitt O. Lum - open user profile' }}
+        fields={['Creative developer', 'Denpasar']}
+        avatarProps={{ image: '/demo-assets/persona.png' }}
+        size="s"
+        onClick={console.log}
+    />
+);
+```
 
 ### Medium
 
-<DemoBlock orientation="horizontal" demo="size-m" withThemeSwitcher />
+```jsx demo orientation="horizontal" withThemeSwitcher
+import { UserBlock } from '@lumx/react';
+
+export default ({ theme }) => (
+    <UserBlock
+        theme={theme}
+        name="Emmitt O. Lum"
+        nameProps={{ 'aria-label': 'Emmitt O. Lum - open user profile' }}
+        fields={['Creative developer', 'Denpasar']}
+        avatarProps={{ image: '/demo-assets/persona.png' }}
+        size="m"
+        onClick={console.log}
+    />
+);
+```
 
 ### Large
 
-<DemoBlock orientation="horizontal" demo="size-l" withThemeSwitcher />
+```jsx demo orientation="horizontal" withThemeSwitcher
+import { UserBlock } from '@lumx/react';
+
+export default ({ theme }) => (
+    <UserBlock
+        theme={theme}
+        name="Emmitt O. Lum"
+        nameProps={{ 'aria-label': 'Emmitt O. Lum - open user profile' }}
+        fields={['Creative developer', 'Denpasar']}
+        avatarProps={{ image: '/demo-assets/persona.png' }}
+        size="l"
+        onClick={console.log}
+    />
+);
+```
 
 ## Layouts
 
@@ -31,20 +87,76 @@ There are two orientation: `horizontal` and `vertical`.
 
 A `l` size user block is needed for `vertical` orientation.
 
-<DemoBlock orientation="horizontal" demo="vertical" withThemeSwitcher />
+```jsx demo orientation="horizontal" withThemeSwitcher
+import { UserBlock } from '@lumx/react';
+
+export default ({ theme }) => (
+    <UserBlock
+        theme={theme}
+        name="Emmitt O. Lum"
+        nameProps={{ 'aria-label': 'Emmitt O. Lum - open user profile' }}
+        fields={['Creative developer', 'Denpasar']}
+        avatarProps={{ image: '/demo-assets/persona.png' }}
+        size="l"
+        orientation="vertical"
+        onClick={console.log}
+    />
+);
+```
 
 ### Extended
 
 The `vertical` orientation displays additional contact actions and a follow button.
 When there are more than five contact actions, the fifth is replaced with an overflow menu presenting remaining actions.
 
-<DemoBlock orientation="horizontal" demo="extended" withThemeSwitcher />
+```jsx demo orientation="horizontal" withThemeSwitcher
+import { mdiCellphone, mdiEmail, mdiGoogleHangouts, mdiPhone, mdiSlack } from '@lumx/icons';
+import { Button, IconButton, UserBlock } from '@lumx/react';
+
+export default ({ theme = 'light' }) => {
+    const demoActions = [
+        { label: 'Copy phone number', icon: mdiPhone },
+        { label: 'Copy cell phone number', icon: mdiCellphone },
+        { label: 'Mail to', icon: mdiEmail },
+        { label: 'Contact on google hangout', icon: mdiGoogleHangouts },
+        { label: 'Contact on slack', icon: mdiSlack },
+    ];
+    return (
+        <UserBlock
+            theme={theme}
+            name="Emmitt O. Lum"
+            nameProps={{ 'aria-label': 'Emmitt O. Lum - open user profile' }}
+            fields={['Creative developer', 'Denpasar']}
+            avatarProps={{ image: '/demo-assets/persona.png' }}
+            size="l"
+            orientation="vertical"
+            onClick={console.log}
+            simpleAction={
+                <Button emphasis="medium" color={theme === 'dark' ? 'light' : undefined} size="s" theme={theme}>
+                    Follow
+                </Button>
+            }
+            multipleActions={demoActions.map(({ icon, label }, idx) => (
+                <IconButton
+                    key={idx}
+                    label={label}
+                    emphasis="low"
+                    color={theme === 'dark' ? 'light' : undefined}
+                    icon={icon}
+                    theme={theme}
+                />
+            ))}
+        />
+    );
+};
+```
 
 ### Accessibility concerns
 
 User blocks can be clickable if provided with `onClick` or `linkProps` or `linkAs` props:
-- `onClick` will use buttons on the avatar and name elements
-- `linkProps` or `linkAs` will use links on the avatar and name elements
+
+-   `onClick` will use buttons on the avatar and name elements
+-   `linkProps` or `linkAs` will use links on the avatar and name elements
 
 Between the avatar and the name, only the name is accessible on keyboard navigation to avoid redundancy since both
 replicate the same link or button. You should set the `aria-label` on the name element (via the `nameProps`) to properly

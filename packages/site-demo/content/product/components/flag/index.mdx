@@ -4,7 +4,20 @@
 
 Use flags to display short to middle length pieces of info like labels, status, states in lists and tables.
 
-<DemoBlock orientation="horizontal" demo="flag" />
+```jsx demo orientation="horizontal"
+import { mdiHeart } from '@lumx/icons';
+import { Flag } from '@lumx/react';
+
+export default ({ theme }) => (
+    <>
+        <Flag color="blue" icon={mdiHeart} label="blue" theme={theme} />
+        <Flag color="dark" icon={mdiHeart} label="dark" theme={theme} />
+        <Flag color="green" icon={mdiHeart} label="green" theme={theme} />
+        <Flag color="red" icon={mdiHeart} label="red" theme={theme} />
+        <Flag color="yellow" icon={mdiHeart} label="yellow" theme={theme} />
+    </>
+);
+```
 
 ### Accessibility concerns
 

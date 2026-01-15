@@ -4,7 +4,54 @@
 
 The image lightbox component is a composition of the [Lightbox](/product/components/lightbox/) and a [Slideshow](/product/components/slideshow/) with extra features (zoom & better a11y defaults).
 
-<DemoBlock demo="default" vAlign="center" />
+```jsx demo vAlign="center"
+import { FlexBox, ImageLightbox, Message, Text, Thumbnail } from '@lumx/react';
+const images = [
+    { image: '/demo-assets/portrait1.jpg', alt: 'Portrait 1' },
+    { image: '/demo-assets/portrait2.jpg', alt: 'Portrait 2' },
+    { image: '/demo-assets/landscape3.jpg', alt: 'Landscape 3' },
+    { image: '/demo-assets/landscape2.jpg', alt: 'Landscape 2' },
+];
+
+export default () => {
+    const { getTriggerProps, imageLightboxProps } = ImageLightbox.useImageLightbox({ images });
+    return (
+        <>
+            <FlexBox orientation="vertical" gap="big">
+                <FlexBox orientation="horizontal" gap="regular">
+                    {images.map(({ image, alt }, index) => (
+                        <Thumbnail
+                            key={image}
+                            image={image}
+                            alt={`${alt}; Open in a fullscreen image slideshow`}
+                            size="xl"
+                            aspectRatio="square"
+                            {...getTriggerProps({ activeImageIndex: index })}
+                        />
+                    ))}
+                </FlexBox>
+
+                <Message kind="info" hasBackground>
+                    <Text as="span">Click on a picture to open the image lightbox.</Text>
+                </Message>
+            </FlexBox>
+
+            <ImageLightbox
+                {...imageLightboxProps}
+                aria-label="Fullscreen image slideshow"
+                closeButtonProps={{ label: 'Close' }}
+                zoomInButtonProps={{ label: 'Zoom in' }}
+                zoomOutButtonProps={{ label: 'Zoom out' }}
+                slideshowControlsProps={{
+                    nextButtonProps: { label: 'Next' },
+                    previousButtonProps: { label: 'Previous' },
+                    paginationItemProps: (index) => ({ label: `Go to slide ${index + 1}` }),
+                }}
+            />
+        </>
+    );
+};
+```
 
 ### Accessibility concerns
 
@@ -12,15 +59,14 @@ All accessibility concern around focus management are handled by the `ImageLight
 
 As this component is composed of a dialog and many action button, you must provide:
 
-- A label via either `aria-label` or `aria-labelledby` props to name the dialog (ex: "Fullscreen image").
-Setting `aria-labelledby` is recommended as it target a visible label rather than adding an invisible `aria-label` on the dialog.
+-   A label via either `aria-label` or `aria-labelledby` props to name the dialog (ex: "Fullscreen image").
+    Setting `aria-labelledby` is recommended as it target a visible label rather than adding an invisible `aria-label` on the dialog.
 
-- A label for the close button via `closeButtonProps` (see demo code).
+-   A label for the close button via `closeButtonProps` (see demo code).
 
-- Labels for the slideshow controls via `slideshowControlsProps` (see demo code).
+-   Labels for the slideshow controls via `slideshowControlsProps` (see demo code).
 
-- Labels for the zoom buttons via `zoomInButtonProps`and `zoomOutButtonProps` (see demo code).
-
+-   Labels for the zoom buttons via `zoomInButtonProps`and `zoomOutButtonProps` (see demo code).
 
 ### Properties
 

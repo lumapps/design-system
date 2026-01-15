@@ -2,13 +2,40 @@
 
 **Link previews display an hyperlink related info and image.**
 
-<DemoBlock demo="default" withThemeSwitcher />
+```jsx demo withThemeSwitcher
+import { LinkPreview } from '@lumx/react';
+
+export default ({ theme }) => (
+    <LinkPreview
+        title="Link title"
+        description="Description"
+        link="https://google.com"
+        theme={theme}
+        thumbnailProps={{ image: '/demo-assets/landscape1.jpg', alt: 'Landscape' }}
+    />
+);
+```
 
 ## Big size
 
 Use `big` size to give more emphasis to the displayed hyperlink, make sure to have a good quality image.
 
-<DemoBlock orientation="horizontal" demo="big" withThemeSwitcher />
+```jsx demo withThemeSwitcher
+import { LinkPreview } from '@lumx/react';
+
+export default ({ theme }) => (
+    <div style={{ width: 350 }}>
+        <LinkPreview
+            title="Link title"
+            description="Description"
+            link="https://google.com"
+            size="big"
+            theme={theme}
+            thumbnailProps={{ image: '/demo-assets/landscape3.jpg', alt: 'Landscape' }}
+        />
+    </div>
+);
+```
 
 ### Accessibility concerns
 
