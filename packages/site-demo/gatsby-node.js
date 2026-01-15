@@ -94,12 +94,4 @@ exports.onCreateWebpackConfig = async ({ actions, getConfig }) => {
             plugins: [new TsconfigPathsPlugin({ extensions: ['.ts', '.tsx'] })],
         },
     });
-
-    // Add `workerize-loader` to simplify loading Web Workers with standard `import`
-    const config = getConfig();
-    config.module.rules.push({
-        test: /\.worker\.js$/,
-        use: { loader: 'workerize-loader', options: { inline: true } },
-    });
-    actions.replaceWebpackConfig(config);
 };
