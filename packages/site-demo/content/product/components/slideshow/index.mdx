@@ -1,20 +1,24 @@
+import * as Demo1 from './react/demo1.tsx';
+import * as Demo2 from './react/demo2.tsx';
+import * as Demo3 from './react/demo3.tsx';
+
 # Slideshow
 
 **Slideshows display multiple pieces of featured content in a limited allocated amount of space.**
 
-<DemoBlock orientation="horizontal" demo="default" withThemeSwitcher />
+<DemoBlock orientation="horizontal" withThemeSwitcher vAlign="center" demo={{ react: Demo1 }} />
 
 ## Group by
 
 Slideshows can display groups of pieces of content.
 
-<DemoBlock orientation="horizontal" demo="group" withThemeSwitcher />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: Demo2 }} />
 
 ## Autoplay
 
 Slideshows can play automatically.
 
-<DemoBlock orientation="horizontal" demo="auto" withThemeSwitcher />
+<DemoBlock orientation="horizontal" withThemeSwitcher vAlign="center" demo={{ react: Demo3 }} />
 
 ### Properties
 

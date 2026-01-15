@@ -1,7 +1,7 @@
 type Props = React.FC<{
     name: string;
-    height?: number;
-    width?: number | string;
+    height?: React.CSSProperties['height'];
+    width?: React.CSSProperties['width'];
     textAlign?: 'center' | 'right' | 'left';
 }>;
 export const Placeholder: Props = ({ name, height = 36, width = 36, textAlign = 'center' }) => (

@@ -1,21 +1,25 @@
+import * as Demo1 from './react/demo1.tsx';
+import * as Demo2 from './react/demo2.tsx';
+import * as Demo3 from './react/demo3.tsx';
+
 # Dropdown
 
 **Dropdowns present multiple actions in a small area.**
 Dropdowns are commonly used for contextual menus and in form selects.
 
-<DemoBlock orientation="horizontal" demo="default" />
+<DemoBlock orientation="horizontal" demo={{ react: Demo1 }} />
 
 ## Programmatically controlled
 
 Dropdowns can be controlled from external events.
 
-<DemoBlock vAlign="center" demo="target" />
+<DemoBlock vAlign="center" demo={{ react: Demo2 }} />
 
 ## Actions states
 
 Presented actions have various states, they behave like [`clickable list`](/product/components/list/)
 
-<DemoBlock demo="selects" backgroundColor={{ color: 'dark', variant: 'L6' }} vAlign="center" />
+<DemoBlock backgroundColor={{ color: 'dark', variant: 'L6' }} vAlign="center" demo={{ react: Demo3 }} />
 
 ### Accessibility concerns
 

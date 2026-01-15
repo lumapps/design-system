@@ -1,3 +1,6 @@
+import * as Demo1 from './react/demo1.tsx';
+import * as Demo2 from './react/demo2.tsx';
+
 # Avatar
 
 **Enables user to quickly identify people.**
@@ -7,24 +10,25 @@
 Comes in 5 sizes: `xs`, `s`, `m`, `l`, `xl`.
 Check [size foundations](/product/foundations/size) for more details.
 
-<DemoBlock orientation="horizontal" demo="default" />
+<DemoBlock orientation="horizontal" demo={{ react: Demo1 }} />
 
 ## Actions
 
 Buttons can be placed above avatars.
 The avatar recommended size to display actions is `xl`.
 
-<DemoBlock orientation="horizontal" demo="actions" />
+<DemoBlock orientation="horizontal" demo={{ react: Demo2 }} />
 
 ### Accessibility concerns
 
 Avatars can have 3 different accessibility use cases:
-- **default**: avatars are usually decorative images, so you can use an empty `alt` attribute
-  (See [the MDN `img` documentation for more info](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#accessibility_concerns))
-- **button**: using the `onClick` transforms avatars into a button, you **should also provide an `aria-label`** in
-  `thumbnailProps` to describe the action to screen readers
-- **link**: using the `linkAs` and/or `linkProps` transforms avatars into a link, you **should also provide an `aria-label`**
-  in the `linkProps` to describe the link for screen readers
+
+-   **default**: avatars are usually decorative images, so you can use an empty `alt` attribute
+    (See [the MDN `img` documentation for more info](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#accessibility_concerns))
+-   **button**: using the `onClick` transforms avatars into a button, you **should also provide an `aria-label`** in
+    `thumbnailProps` to describe the action to screen readers
+-   **link**: using the `linkAs` and/or `linkProps` transforms avatars into a link, you **should also provide an `aria-label`**
+    in the `linkProps` to describe the link for screen readers
 
 See the [button page](../button#accessibility-concerns) for the accessibility concerns on actions button.
 

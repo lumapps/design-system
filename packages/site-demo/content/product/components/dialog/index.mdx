@@ -1,8 +1,14 @@
+import * as Demo1 from './react/demo1.tsx';
+import * as Demo2 from './react/demo2.tsx';
+import * as Demo3 from './react/demo3.tsx';
+import * as Demo4 from './react/demo4.tsx';
+import * as Demo5 from './react/demo5.tsx';
+
 # Dialog
 
 **Inform users about a task and can contain critical information, require decisions, or involve multiple tasks.**
 
-<DemoBlock orientation="horizontal" demo="default" hasPlayButton />
+<DemoBlock orientation="horizontal" hasPlayButton demo={{ react: Demo1 }} />
 
 ## Anatomy
 
@@ -15,25 +21,25 @@ On user scroll, the header stays fixed on top and the footer at the bottom of th
 
 Confirmation dialogs cannot be dismissed until users confirm a choice.
 
-<DemoBlock orientation="horizontal" demo="confirm" hasPlayButton />
+<DemoBlock orientation="horizontal" hasPlayButton demo={{ react: Demo2 }} />
 
 ### Alert dialog
 
 Use alert dialogs to interrupt users with urgent information, details, or action requests.
 
-<DemoBlock orientation="horizontal" demo="alert" hasPlayButton />
+<DemoBlock orientation="horizontal" hasPlayButton demo={{ react: Demo3 }} />
 
 ## Sizes
 
 Dialogs come in four sizes: `tiny` (400dp), `regular` (600dp), `big` (800dp), and `huge` (full screen).
 
-<DemoBlock orientation="horizontal" demo="sizes" hasPlayButton />
+<DemoBlock orientation="horizontal" hasPlayButton demo={{ react: Demo4 }} />
 
 ## Processing state
 
 Use processing state when dialogs contain a form which submission takes an extended amount of time to process.
 
-<DemoBlock orientation="horizontal" demo="isloading" hasPlayButton />
+<DemoBlock orientation="horizontal" hasPlayButton demo={{ react: Demo5 }} />
 
 ### Properties
 

@@ -18,7 +18,9 @@ A React context provider that build a tree (both DOM and React) of elements that
 ```
 
 <Message kind="info">
-    In this example, clicking outside the card (referenced by <code>cardRef</code>) will trigger the <code>close</code> callback. Clicks in children DOM nodes of the card or children of nested "click away" contexts (here the dropdown) are all considered as "in" the the context and won't trigger the callback.
+    In this example, clicking outside the card (referenced by <code>cardRef</code>) will trigger the <code>close</code>
+    callback. Clicks in children DOM nodes of the card or children of nested "click away" contexts (here the dropdown) are
+    all considered as "in" the the context and won't trigger the callback.
 </Message>
 
 This is used to provide correct "click away" behavior on nested `Dialog` or `Dropdown` even though they are not nested in the DOM tree.
@@ -71,12 +73,12 @@ import { Button, TextField, Checkbox } from '@lumx/react';
 import { DisabledStateProvider } from '@lumx/react/utils';
 
 const MyComponent = () => (
-  <DisabledStateProvider state="disabled">
-    <Button>Button</Button>
-    <TextField />
-    <Checkbox />
-  </DisabledStateProvider>
-)
+    <DisabledStateProvider state="disabled">
+        <Button>Button</Button>
+        <TextField />
+        <Checkbox />
+    </DisabledStateProvider>
+);
 ```
 
 <Message kind="info">

@@ -1,8 +1,24 @@
+import * as Demo1 from './react/demo1.tsx';
+import * as Demo2 from './react/demo2.tsx';
+import * as Demo3 from './react/demo3.tsx';
+import * as Demo4 from './react/demo4.tsx';
+import * as Demo5 from './react/demo5.tsx';
+import * as Demo6 from './react/demo6.tsx';
+import * as Demo7 from './react/demo7.tsx';
+import * as Demo8 from './react/demo8.tsx';
+import * as Demo9 from './react/demo9.tsx';
+import * as Demo10 from './react/demo10.tsx';
+import * as Demo11 from './react/demo11.tsx';
+import * as Demo12 from './react/demo12.tsx';
+import * as Demo13 from './react/demo13.tsx';
+import * as Demo14 from './react/demo14.tsx';
+import * as Demo15 from './react/demo15.tsx';
+
 # Text field
 
 **Text fields are simple text inputs.**
 
-<DemoBlock demo="default" withThemeSwitcher />
+<DemoBlock withThemeSwitcher demo={{ react: Demo1 }} />
 
 ## Special states
 
@@ -12,19 +28,19 @@ There are three special states: `isDisabled`, `isValid`, and `hasError`.
 
 Use `isDisabled` when values can't be edited.
 
-<DemoBlock demo="disabled" withThemeSwitcher />
+<DemoBlock withThemeSwitcher demo={{ react: Demo2 }} />
 
 ### Is valid
 
 Use `isValid` to tell that entered values are considered correct.
 
-<DemoBlock demo="valid" withThemeSwitcher />
+<DemoBlock withThemeSwitcher demo={{ react: Demo3 }} />
 
 ### Has error
 
 Use `hasError` to tell that entered values are considered incorrect.
 
-<DemoBlock demo="invalid" withThemeSwitcher />
+<DemoBlock withThemeSwitcher demo={{ react: Demo4 }} />
 
 ## Options
 
@@ -34,78 +50,79 @@ There are seven options: `isRequired`, `helper`, `placeholder`, `icon`, `clearBu
 
 Use `isRequired` to tell that the text field must be filled to submit the form.
 
-<DemoBlock demo="required" withThemeSwitcher />
+<DemoBlock withThemeSwitcher demo={{ react: Demo5 }} />
 
 ### Helper
 
 Use `helper` to provide guidance.
 
-<DemoBlock demo="helper" withThemeSwitcher />
+<DemoBlock withThemeSwitcher demo={{ react: Demo6 }} />
 
 ### Placeholder
 
 Use `placeholder` to give an example of expected values or invite filling text fields.
 
-<DemoBlock demo="placeholder" withThemeSwitcher />
+<DemoBlock withThemeSwitcher demo={{ react: Demo7 }} />
 
 ### Icon
 
 Use `icon` to illustrate text fields `label`, `icon` complements `label` but can't replace it.
 
-<DemoBlock demo="icon" withThemeSwitcher />
+<DemoBlock withThemeSwitcher demo={{ react: Demo8 }} />
 
 ### Is clearable
 
 To allow the user to clear the text field, you would have to pass a `label` prop through `clearButtonProps` prop. This corresponds to the label which will be used inside the tooltip of the clear icon button. Setting the label is enough to determine the visibility of the clear button. Use `onClear` to pass the function triggered by a click on the clear icon button.
 
-<DemoBlock demo="clearable" withThemeSwitcher />
+<DemoBlock withThemeSwitcher demo={{ react: Demo9 }} />
 
 ### Max length
 
 Use `maxLength` when users inputs length are limited.
 
-<DemoBlock demo="character-counter" withThemeSwitcher />
+<DemoBlock withThemeSwitcher demo={{ react: Demo10 }} />
 
 ### Chips
 
 Use `chips` when users inputs need to be split in distinct parts such as tag entry.
 
-<DemoBlock demo="with-chips" withThemeSwitcher />
+<DemoBlock withThemeSwitcher demo={{ react: Demo11 }} />
 
 ## Textarea
 
 Use Text areas when users are expected to enter more than one line of text.
 
-<DemoBlock demo="text-area" withThemeSwitcher />
+<DemoBlock withThemeSwitcher demo={{ react: Demo12 }} />
 
 ### Valid
 
-<DemoBlock demo="text-area-valid" withThemeSwitcher />
+<DemoBlock withThemeSwitcher demo={{ react: Demo13 }} />
 
 ### Invalid
 
-<DemoBlock demo="text-area-invalid" withThemeSwitcher />
+<DemoBlock withThemeSwitcher demo={{ react: Demo14 }} />
 
 ## Number
 
 Use number input when users are expected to enter numeric values.
 
-<DemoBlock demo="number" withThemeSwitcher />
+<DemoBlock withThemeSwitcher demo={{ react: Demo15 }} />
 
 ### Accessibility concerns
 
 TextFields use standard HTML input or textarea (when using multiline).
 
 Make sure to always properly label them with the builtin `label` or attaching external labels (via `aria-labelledby`, or
- external HTML `label` with `for`).
+external HTML `label` with `for`).
 
 Showing a text field with only a placeholder is not sufficient, visual and accessible labels must also be in place.
 
 Text fields can be disabled in two ways:
-- `disabled`/`isDisabled` which completely disables the text field. It's not focusable and pointer events (hover, click, etc.) are
-  all disabled too. You'll have to find another way to indicate to users that the field is here and why it is disabled.
-- `aria-disabled` only disable editing the text field (read only) so it's still focusable and accessible. You'll have
-  to setup either a `helper`, a tooltip or an aria description to explain to the user why this field is disabled.
+
+-   `disabled`/`isDisabled` which completely disables the text field. It's not focusable and pointer events (hover, click, etc.) are
+    all disabled too. You'll have to find another way to indicate to users that the field is here and why it is disabled.
+-   `aria-disabled` only disable editing the text field (read only) so it's still focusable and accessible. You'll have
+    to setup either a `helper`, a tooltip or an aria description to explain to the user why this field is disabled.
 
 ### Properties
 

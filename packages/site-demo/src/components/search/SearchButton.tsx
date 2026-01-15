@@ -56,7 +56,7 @@ export const SearchButton: React.FC<SearchButtonProps> = ({ className }) => {
             >
                 Search
                 <kbd className={classNames('search-shortcut', isServerSide && 'search-shortcut--hidden')}>
-                    <kbd>{IS_MAC ? '⌘' : 'Ctrl'}</kbd>
+                    <kbd>{!isServerSide && IS_MAC ? '⌘' : 'Ctrl'}</kbd>
                     <kbd>K</kbd>
                 </kbd>
             </Chip>

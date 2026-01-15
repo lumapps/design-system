@@ -20,7 +20,7 @@
         margin: -$lumx-spacing-unit-tiny;
     }
 
-    details:not([open]) {
+    details:not([open]):not(:last) {
         margin-bottom: 1rem;
     }
 

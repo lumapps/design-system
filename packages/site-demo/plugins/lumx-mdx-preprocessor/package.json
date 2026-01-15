@@ -1,4 +1,5 @@
 {
-    "name": "lumx-mdx-preprossesor",
-    "main": "index.js"
+    "name": "lumx-mdx-preprocessor",
+    "version": "1.0.0",
+    "main": "gatsby-node.js"
 }

@@ -1,8 +1,10 @@
+import * as Demo1 from './react/demo1.tsx';
+
 # Lightbox
 
 **Reveals elements above the page and on a backdrop after clicking on a trigger.**
 
-<DemoBlock demo="default" vAlign="center"/>
+<DemoBlock vAlign="center" demo={{ react: Demo1 }} />
 
 See the [ImageLightbox](/product/components/image-lightbox) component a fully featured image and image slideshow lightbox.
 
@@ -10,13 +12,13 @@ See the [ImageLightbox](/product/components/image-lightbox) component a fully fe
 
 This component uses the `dialog` accessible pattern, a few specific behaviors are applied:
 
-- When opening, focus will be set either on the provided `focusElement` prop or on the close button (if defined) or on the dialog itself.
-Once the focus is set within, it will be trapped and stay within the lightbox until it is closed.
+-   When opening, focus will be set either on the provided `focusElement` prop or on the close button (if defined) or on the dialog itself.
+    Once the focus is set within, it will be trapped and stay within the lightbox until it is closed.
 
-- A label must be defined using either `aria-label` or `aria-labelledby` props.
-Setting `aria-labelledby` is recommended as it target a visible label rather than adding an invisible `aria-label` on the dialog.
+-   A label must be defined using either `aria-label` or `aria-labelledby` props.
+    Setting `aria-labelledby` is recommended as it target a visible label rather than adding an invisible `aria-label` on the dialog.
 
-- When closing, the activating element should take focus. Make sure to fill the `parentElement` prop to make this work properly.
+-   When closing, the activating element should take focus. Make sure to fill the `parentElement` prop to make this work properly.
 
 ### Properties
 

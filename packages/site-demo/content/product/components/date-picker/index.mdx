@@ -1,20 +1,24 @@
+import * as Demo1 from './react/demo1.tsx';
+import * as Demo2 from './react/demo2.tsx';
+import * as Demo3 from './react/demo3.tsx';
+
 # Date picker
 
 **Date pickers allow users to pick a date from a calendar.**
 
-<DemoBlock orientation="horizontal" demo="default" />
+<DemoBlock orientation="horizontal" demo={{ react: Demo1 }} />
 
 ## Input
 
 Date picker can be triggered by a click on a [text field](/product/components/text-field).
 
-<DemoBlock orientation="horizontal" demo="input" />
+<DemoBlock orientation="horizontal" demo={{ react: Demo2 }} />
 
 ## Restricted selection modes
 
 Date selection can be restricted via `minDate` and `maxDate` properties.
 
-<DemoBlock orientation="horizontal" demo="restricted" />
+<DemoBlock orientation="horizontal" demo={{ react: Demo3 }} />
 
 ### Properties
 

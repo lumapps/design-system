@@ -1,3 +1,10 @@
+import * as Demo1 from './react/demo1.tsx';
+import * as Demo2 from './react/demo2.tsx';
+import * as Demo3 from './react/demo3.tsx';
+import * as Demo4 from './react/demo4.tsx';
+import * as Demo5 from './react/demo5.tsx';
+import * as Demo6 from './react/demo6.tsx';
+
 # Message
 
 **Displays a prominent and permanent message.**
@@ -6,39 +13,39 @@
 
 ### Info
 
-Informative messages display advices, tips and/or information related to another component or pattern.
+Informative messages display advice, tips and/or information related to another component or pattern.
 
-<DemoBlock demo="info" />
+<DemoBlock demo={{ react: Demo1 }} />
 
 ### Warning
 
 Warning messages display very important information (often about a limitation) related to another component or pattern.
 
-<DemoBlock demo="warning" />
+<DemoBlock demo={{ react: Demo2 }} />
 
 ### Error
 
 Error messages display critical information (often about a loss for the user) related to another component or pattern.
 
-<DemoBlock demo="error" />
+<DemoBlock demo={{ react: Demo3 }} />
 
 ### Success
 
 Success messages display critical information (often about the completion of a task performed by the user) related to another component or pattern.
 
-<DemoBlock demo="success" />
+<DemoBlock demo={{ react: Demo4 }} />
 
 ## Trimmed
 
 Use trimmed when you don't need a background color, left and right spacing.
 
-<DemoBlock demo="trimmed" />
+<DemoBlock demo={{ react: Demo5 }} />
 
 ## Closable
 
-Use closable when you need to make the message closable by the user. This option is only available for the `info` kind with a background. It won't display in any other configuration. 
+Use closable when you need to make the message closable by the user. This option is only available for the `info` kind with a background. It won't display in any other configuration.
 
-<DemoBlock hAlign="center" vAlign="center" demo="closable" />
+<DemoBlock hAlign="center" vAlign="center" demo={{ react: Demo6 }} />
 
 ### Accessibility concerns
 

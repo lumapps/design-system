@@ -17,24 +17,32 @@ interface Props {
     language?: Language | 'tsx';
     /** Code */
     children?: React.ReactNode;
+    /** Render as */
+    as?: 'pre' | 'div';
 }
 
 /** Display syntax highlighted code */
-export const CodeBlock: React.FC<Props> = ({ className, codeString, language: propLanguage, children }) => {
+export const CodeBlock: React.FC<Props> = ({
+    as: Component = 'pre',
+    className,
+    codeString,
+    language: propLanguage,
+    children,
+}) => {
     const language = propLanguage || className?.match(/language-(\w+)/)?.[1];
     if (!language) {
-        return <pre className={classNames('code-block', className)}>{children || codeString}</pre>;
+        return <Component className={classNames('code-block', className)}>{children || codeString}</Component>;
     }
 
     const code = (isString(children) ? children : codeString) || '';
     return (
         <Highlight {...defaultProps} theme={theme} code={code} language={language as Language}>
             {({ className: prismClassName, ...renderParams }) => (
-                <pre className={classNames('code-block', prismClassName, className)}>
+                <Component className={classNames('code-block', prismClassName, className)}>
                     {language === 'jsx' || language === 'tsx'
                         ? renderJSXLinesWithCollapsedImports(renderParams)
                         : renderLines(renderParams)}
-                </pre>
+                </Component>
             )}
         </Highlight>
     );

@@ -1,27 +1,32 @@
+import * as Demo1 from './react/demo1.tsx';
+import * as Demo2 from './react/demo2.tsx';
+import * as Demo3 from './react/demo3.tsx';
+import * as Demo4 from './react/demo4.tsx';
+
 # Image block
 
 **Image blocks display an image with related info.**
 Image blocks support thumbnail's formats (see [thumbnail](/product/components/thumbnail)).
 
-<DemoBlock demo="default" withThemeSwitcher wrap={false} />
+<DemoBlock withThemeSwitcher wrap={false} demo={{ react: Demo1 }} />
 
 ## Custom padding
 
 A custom padding can be added.
 
-<DemoBlock demo="image-block-padding" wrap={false} />
+<DemoBlock wrap={false} demo={{ react: Demo2 }} />
 
 ## Info above
 
 Info can be placed above the image.
 
-<DemoBlock demo="image-block-above" withThemeSwitcher wrap={false} />
+<DemoBlock withThemeSwitcher wrap={false} demo={{ react: Demo3 }} />
 
 ## Info alignment
 
 There are three alignments: `left`, `center` and `right`.
 
-<DemoBlock demo="image-block-alignment" withThemeSwitcher wrap={false} />
+<DemoBlock withThemeSwitcher wrap={false} demo={{ react: Demo4 }} />
 
 ### Accessibility concerns
 

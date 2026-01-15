@@ -1,8 +1,15 @@
+import * as Demo1 from './react/demo1.tsx';
+import * as Demo2 from './react/demo2.tsx';
+import * as Demo3 from './react/demo3.tsx';
+import * as Demo4 from './react/demo4.tsx';
+import * as Demo5 from './react/demo5.tsx';
+import * as Demo6 from './react/demo6.tsx';
+
 # Popover
 
 **Popovers display pieces of UI on top of others. They are positioned using anchor elements.**
 
-<DemoBlock orientation="horizontal" demo="default" />
+<DemoBlock orientation="horizontal" demo={{ react: Demo1 }} />
 
 ## Positions
 
@@ -10,32 +17,32 @@
 
 Popovers can be placed to 4 positions: `top`, `right`, `bottom`, `left`
 
-<DemoBlock demo="positions" />
+<DemoBlock demo={{ react: Demo2 }} />
 
 ### Auto
 
 Popovers can also be placed automatically where space is available. They are placed at the bottom of anchors by default.
 
-<DemoBlock orientation="horizontal" demo="auto" />
+<DemoBlock orientation="horizontal" demo={{ react: Demo3 }} />
 
 ## Offset
 
 Popovers position can have an offset.
 
-<DemoBlock orientation="horizontal" demo="offset" />
+<DemoBlock orientation="horizontal" demo={{ react: Demo4 }} />
 
 ## Alignments
 
 In addition to positions, popovers can be aligned to a chosen anchor's side:
 `top-start`, `top-end`, `right-start`, `right-end`, `bottom-start`, `bottom-end`, `left-start`, `left-end`, `auto-start`, `auto-end`.
 
-<DemoBlock orientation="vertical" demo="alignments" />
+<DemoBlock orientation="vertical" demo={{ react: Demo5 }} />
 
 ## Matching width
 
 Popovers width can be forced to match anchors.
 
-<DemoBlock demo="matching-width" />
+<DemoBlock demo={{ react: Demo6 }} />
 
 ### Accessibility concerns
 
@@ -47,11 +54,11 @@ Popovers can be used to disclose information by activating a button.
 
 To apply this pattern, the following concerns should be handled:
 
-- The activating element should have the `aria-expanded` ([see W3C documentation](https://w3c.github.io/aria/#aria-expanded) for detail usage)
-- The popover should not take focus on open (`focusElement` property should be left blank)
-- The popover should appear after the activating element in the tab order (`usePortal` property should be set to `false`)
-- The popover should be closable using the escape key (`closeOnEscape` property, activated by default)
-- The activating element should take focus on popover close (`focusAnchorOnClose` property, activated by default)
+-   The activating element should have the `aria-expanded` ([see W3C documentation](https://w3c.github.io/aria/#aria-expanded) for detail usage)
+-   The popover should not take focus on open (`focusElement` property should be left blank)
+-   The popover should appear after the activating element in the tab order (`usePortal` property should be set to `false`)
+-   The popover should be closable using the escape key (`closeOnEscape` property, activated by default)
+-   The activating element should take focus on popover close (`focusAnchorOnClose` property, activated by default)
 
 Examples of this pattern can be found on the WAI-ARIA [disclosure pattern documentation](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/).
 
@@ -61,10 +68,10 @@ Popovers can be used as "popup" containing other accessibility pattern inside (m
 
 In all of those cases, the following concerns should be handled:
 
-- The activating element should have the `aria-haspopup` ([see W3C documentation](https://w3c.github.io/aria/#aria-haspopup) for detail usage)
-- The popover should take focus on open (`focusElement` property should be filled)
-- The popover should be closable using the escape key (`closeOnEscape` property, activated by default)
-- The activating element should take focus on popover close (`focusAnchorOnClose` property, activated by default)
+-   The activating element should have the `aria-haspopup` ([see W3C documentation](https://w3c.github.io/aria/#aria-haspopup) for detail usage)
+-   The popover should take focus on open (`focusElement` property should be filled)
+-   The popover should be closable using the escape key (`closeOnEscape` property, activated by default)
+-   The activating element should take focus on popover close (`focusAnchorOnClose` property, activated by default)
 
 Examples of this pattern can be found on the WAI-ARIA [combobox pattern documentation](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/), [menu pattern documentation](https://www.w3.org/WAI/ARIA/apg/patterns/menu/) or [dialog pattern documentation](https://www.w3.org/WAI/ARIA/apg/patterns/dialogmodal/).
 
@@ -74,8 +81,8 @@ Popovers can be used as "dialogs" containing any complex pattern inside.
 
 In this case, the following concerns should be handled:
 
-- Follow the sames rules as described in the [popup section](/product/components/popover#popup)
-- Use the [PopoverDialog](/product/component/popover-dialog) component to apply the correct role and pattern to the popover
+-   Follow the sames rules as described in the [popup section](/product/components/popover#popup)
+-   Use the [PopoverDialog](/product/component/popover-dialog) component to apply the correct role and pattern to the popover
 
 ### Properties
 

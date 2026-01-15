@@ -1,8 +1,10 @@
+import * as Demo1 from './react/demo1.tsx';
+
 # Popover dialog
 
 **Popover dialogs are [Popovers](/product/components/popover) with a [dialog accessibility pattern](https://www.w3.org/WAI/ARIA/apg/example-index/dialog-modal/dialog.html) applied to it.**
 
-<DemoBlock orientation="horizontal" demo="default" />
+<DemoBlock orientation="horizontal" demo={{ react: Demo1 }} />
 
 ### Accessibility concerns
 
@@ -10,15 +12,13 @@ This component should be used when popovers contains complex content with multip
 
 As this component uses the `dialog` accessible pattern, a few specific behaviors are applied:
 
-- When the popover is opened, focus will be set on either the element set using the `focusElement` prop or the first focusable element.
-Once the focus is set within the popover, it will be trapped and stay within the popover until it is closed.
+-   When the popover is opened, focus will be set on either the element set using the `focusElement` prop or the first focusable element.
+    Once the focus is set within the popover, it will be trapped and stay within the popover until it is closed.
 
-- A label must be defined using either `aria-label` or `aria-labelledby` props.
-  Setting `aria-labelledby` is recommended as it target a visible label rather than adding an invisible `aria-label` on the dialog.
+-   A label must be defined using either `aria-label` or `aria-labelledby` props.
+    Setting `aria-labelledby` is recommended as it target a visible label rather than adding an invisible `aria-label` on the dialog.
 
-- The activating element should take focus on popover close (`focusAnchorOnClose` property, activated by default)
-
-
+-   The activating element should take focus on popover close (`focusAnchorOnClose` property, activated by default)
 
 ### Properties
 

@@ -1,3 +1,6 @@
+import * as Demo1 from './react/demo1.tsx';
+import * as Demo2 from './react/demo2.tsx';
+
 # Size
 
 **Sizes are names given to steps of dimension scales. They help design with visual consistency and give imaged names to easily refer to.**
@@ -115,12 +118,12 @@ T-shirt sizes correspond to standardised values across all the design system. T-
 
 ### Example of user block in T-shirt size `m`
 
-<DemoBlock orientation="horizontal" demo="t-shirt-example" />
+<DemoBlock orientation="horizontal" vAlign="space-around" demo={{ react: Demo1 }} />
 
 ## Abstract
 
-Abstract sizes don’t correspond to standardised values across the design system, they represent specific dimensions at a component level. They can be values like 400px or a specific behavior like full-screen with margins (see [Dialog](/product/components/dialog)). Abstract sizes are: `tiny`, `regular`, `big`, `huge`. Use Abstract sizes to define elements dimensions that don’t need to or can’t be standardised. An element doesn’t have to exist in each of every size.
+Abstract sizes (`tiny`, `regular`, `medium`, `big`, `huge`) don’t correspond to standardised values across the design system, they represent size variations at a component level. They can be values like 400px or a specific behavior like full-screen with margins (see [Dialog](/product/components/dialog)). Use Abstract sizes to define elements dimensions that don’t need to or can’t be standardised. A component doesn’t have to exist in each of every size.
 
 Example of a `big` [list](/product/components/list) component and a `big` [link-preview](/product/components/link-preview)
 
-<DemoBlock orientation="horizontal" demo="abstract-example" />
+<DemoBlock orientation="horizontal" vAlign="space-around" demo={{ react: Demo2 }} />

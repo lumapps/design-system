@@ -1,9 +1,13 @@
+import * as Demo1 from './react/demo1.tsx';
+import * as Demo2 from './react/demo2.tsx';
+import * as Demo3 from './react/demo3.tsx';
+
 # Tooltip
 
-**Tooltips display information when users hover or focus an element.**
+**Tooltips display information when users hover or focus an element.**\
 They are positioned using anchor elements.
 
-<DemoBlock orientation="horizontal" demo="default" />
+<DemoBlock orientation="horizontal" demo={{ react: Demo1 }} />
 
 ## Placement
 
@@ -11,13 +15,13 @@ Tooltips are positioned at the bottom of the target by default.
 Tooltips' position can be forced to one of these options: `top`, `right`, `bottom`, or `left`.
 If there is not enough space to correctly display the tooltip, tooltip will be displayed at the best position.
 
-<DemoBlock orientation="horizontal" demo="placement" />
+<DemoBlock orientation="horizontal" demo={{ react: Demo2 }} />
 
 ## Delay
 
 Tooltips display can be delayed.
 
-<DemoBlock orientation="horizontal" demo="delay" />
+<DemoBlock orientation="horizontal" demo={{ react: Demo3 }} />
 
 ### Accessibility concerns
 

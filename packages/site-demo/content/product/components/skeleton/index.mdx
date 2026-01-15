@@ -1,3 +1,8 @@
+import * as Demo1 from './react/demo1.tsx';
+import * as Demo2 from './react/demo2.tsx';
+import * as Demo3 from './react/demo3.tsx';
+import * as Demo4 from './react/demo4.tsx';
+
 # Skeleton
 
 **Skeleton are primitives shapes which mimic a piece of content in a recognizable way. It communicates [loading states](/product/patterns/loading-state).**
@@ -8,25 +13,25 @@ There are three variants: `circle`, `rectangular`, `typography`. When designing 
 
 Use circle skeletons to mimic components like [avatar](/product/components/avatar/), [icon](/product/components/icon). Respect at best the size of replaced element using the T-shirt [sizes](/product/foundations/size).
 
-<DemoBlock demo="circle" orientation="horizontal" withThemeSwitcher />
+<DemoBlock orientation="horizontal" withThemeSwitcher gap="huge" demo={{ react: Demo1 }} />
 
 ## Rectangle
 
 Use rectangular skeletons to mimic [thumbnail](/product/components/thumbnail), [button](/product/components/button), [chip](/product/components/chip), [text field](/product/components/text-field) and so on. `width`, `height` and `border-radius` are adjustable.
 
-<DemoBlock demo="rectangle" orientation="horizontal" withThemeSwitcher />
+<DemoBlock orientation="horizontal" withThemeSwitcher gap="huge" demo={{ react: Demo2 }} />
 
 ## Typography
 
 Use typography skeletons to mimic text. Use [text style](/product/foundations/typography) as parameter to easily set a replacement for texts. `width`, is adjustable.
 
-<DemoBlock demo="typography" withThemeSwitcher />
+<DemoBlock withThemeSwitcher demo={{ react: Demo3 }} />
 
 ## Animation and style
 
 Skeletons have a unique animation and style: pulsating grey or white depending on the theme.
 
-<DemoBlock demo="animation" orientation="horizontal" withThemeSwitcher />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: Demo4 }} />
 
 ### Accessibility concerns
 
