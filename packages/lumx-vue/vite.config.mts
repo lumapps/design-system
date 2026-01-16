@@ -4,6 +4,14 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import optimizeImportsLumxIcons from 'rollup-plugin-optimize-imports-lumx-icons';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import vue from '@vitejs/plugin-vue';
+import dts from 'vite-plugin-dts';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const ROOT_PATH = path.resolve(__dirname, '../..');
 
 /**
  * Vite config
@@ -22,6 +30,26 @@ export default defineConfig({
         include: ['src/**/*.{test,spec}.{ts,tsx}'],
         exclude: ['src/**/*.stories.tsx'],
     },
+    build: {
+        lib: {
+            entry: 'src/index.ts',
+            formats: ['es'],
+            fileName: 'index',
+        },
+        outDir: 'dist',
+        sourcemap: true,
+        rollupOptions: {
+            external: [
+                /^@lumx\/core(?!.*\/_internal).*$/,
+                /^@lumx\/icons/,
+                'vue',
+                'lodash',
+            ],
+            output: {
+                chunkFileNames: '_internal/[hash].js',
+            },
+        },
+    },
     plugins: [
         vue(),
         vueJsx({
@@ -34,5 +62,16 @@ export default defineConfig({
         tsconfigPaths(),
         /** Transform @lumx/icons imports to direct ESM imports. */
         optimizeImportsLumxIcons(),
+        dts({
+            exclude: ['src/**/*.stories.tsx', 'src/**/*.test.tsx', 'src/testing'],
+            entryRoot: 'src',
+        }),
+        viteStaticCopy({
+            targets: [
+                { src: path.join(ROOT_PATH, 'CONTRIBUTING.md'), dest: '.' },
+                { src: path.join(ROOT_PATH, 'LICENSE.md'), dest: '.' },
+                { src: 'package.json', dest: '.' },
+            ],
+        }),
     ],
 });
