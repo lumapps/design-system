@@ -1,8 +1,9 @@
+import type { ReactNode } from 'react';
+
 import * as Core from '@lumx/core/js/components/InputHelper';
 import { Theme } from '@lumx/react';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
-import type { ReactNode } from 'react';
 
 export type InputHelperProps = Core.InputHelperProps<ReactNode>;
 
