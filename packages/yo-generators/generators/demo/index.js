@@ -24,11 +24,6 @@ module.exports = class extends MainGenerator {
             this.destinationPath(`${path}/index.mdx`),
             { componentName, kbComponentName },
         );
-        this.fs.copyTpl(
-            this.templatePath('react/default.tsx.ejs'),
-            this.destinationPath(`${path}/react/default.tsx`),
-            { componentName, kbComponentName },
-        );
 
         console.warn(`\nWarning: Add the following line to the 'lumx-react/src/index.js' file for the demo to work:
 

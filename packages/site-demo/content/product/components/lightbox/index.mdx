@@ -2,7 +2,32 @@
 
 **Reveals elements above the page and on a backdrop after clicking on a trigger.**
 
-<DemoBlock demo="default" vAlign="center"/>
+```jsx demo vAlign="center"
+import React from 'react';
+import { Button, FlexBox, Lightbox, Thumbnail } from '@lumx/react';
+
+export default () => {
+    const [isOpen, setOpen] = React.useState(false);
+    const triggerElement = React.useRef(null);
+    return (
+        <>
+            <Button ref={triggerElement} onClick={() => setOpen(true)}>
+                Open LightBox
+            </Button>
+            <Lightbox
+                isOpen={isOpen}
+                parentElement={triggerElement}
+                onClose={() => setOpen(false)}
+                closeButtonProps={{ label: 'Close' }}
+            >
+                <FlexBox vAlign="center" hAlign="center" style={{ height: '100%' }}>
+                    <Thumbnail alt="Portrait image" image="/demo-assets/portrait1.jpg" />
+                </FlexBox>
+            </Lightbox>
+        </>
+    );
+};
+```
 
 See the [ImageLightbox](/product/components/image-lightbox) component a fully featured image and image slideshow lightbox.
 
@@ -10,13 +35,13 @@ See the [ImageLightbox](/product/components/image-lightbox) component a fully fe
 
 This component uses the `dialog` accessible pattern, a few specific behaviors are applied:
 
-- When opening, focus will be set either on the provided `focusElement` prop or on the close button (if defined) or on the dialog itself.
-Once the focus is set within, it will be trapped and stay within the lightbox until it is closed.
+-   When opening, focus will be set either on the provided `focusElement` prop or on the close button (if defined) or on the dialog itself.
+    Once the focus is set within, it will be trapped and stay within the lightbox until it is closed.
 
-- A label must be defined using either `aria-label` or `aria-labelledby` props.
-Setting `aria-labelledby` is recommended as it target a visible label rather than adding an invisible `aria-label` on the dialog.
+-   A label must be defined using either `aria-label` or `aria-labelledby` props.
+    Setting `aria-labelledby` is recommended as it target a visible label rather than adding an invisible `aria-label` on the dialog.
 
-- When closing, the activating element should take focus. Make sure to fill the `parentElement` prop to make this work properly.
+-   When closing, the activating element should take focus. Make sure to fill the `parentElement` prop to make this work properly.
 
 ### Properties
 

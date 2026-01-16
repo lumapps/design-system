@@ -2,7 +2,52 @@
 
 **Popover dialogs are [Popovers](/product/components/popover) with a [dialog accessibility pattern](https://www.w3.org/WAI/ARIA/apg/example-index/dialog-modal/dialog.html) applied to it.**
 
-<DemoBlock orientation="horizontal" demo="default" />
+```jsx demo orientation="horizontal"
+import { useRef, useState } from 'react';
+import { mdiMenu, mdiSettings } from '@lumx/icons';
+import { Button, FlexBox, Heading, IconButton, List, ListItem, PopoverDialog, Toolbar } from '@lumx/react';
+
+export default ({ theme }) => {
+    const anchorRef = useRef(null);
+    const [isOpen, setIsOpen] = useState(false);
+    const handleClose = () => setIsOpen(false);
+
+    return (
+        <>
+            <Button ref={anchorRef} theme={theme} onClick={() => setIsOpen((current) => !current)}>
+                Open popover
+            </Button>
+            <PopoverDialog
+                aria-labelledby="dialogHeaderId"
+                anchorRef={anchorRef}
+                isOpen={isOpen}
+                onClose={handleClose}
+                placement="bottom"
+                offset={{ away: 8 }}
+            >
+                <FlexBox orientation="vertical">
+                    <Toolbar
+                        label={
+                            <Heading id="dialogHeaderId" typography="subtitle2">
+                                Popover Dialog Example
+                            </Heading>
+                        }
+                        after={<IconButton label="Settings" icon={mdiSettings} emphasis="low" />}
+                    />
+                    <List>
+                        <ListItem size="huge" after={<IconButton label="Menu" icon={mdiMenu} size="s" />}>
+                            List Item With Actions
+                        </ListItem>
+                        <ListItem size="huge" linkProps={{ href: 'http://google.com' }}>
+                            Clickable list item
+                        </ListItem>
+                    </List>
+                </FlexBox>
+            </PopoverDialog>
+        </>
+    );
+};
+```
 
 ### Accessibility concerns
 
@@ -10,15 +55,13 @@ This component should be used when popovers contains complex content with multip
 
 As this component uses the `dialog` accessible pattern, a few specific behaviors are applied:
 
-- When the popover is opened, focus will be set on either the element set using the `focusElement` prop or the first focusable element.
-Once the focus is set within the popover, it will be trapped and stay within the popover until it is closed.
+-   When the popover is opened, focus will be set on either the element set using the `focusElement` prop or the first focusable element.
+    Once the focus is set within the popover, it will be trapped and stay within the popover until it is closed.
 
-- A label must be defined using either `aria-label` or `aria-labelledby` props.
-  Setting `aria-labelledby` is recommended as it target a visible label rather than adding an invisible `aria-label` on the dialog.
+-   A label must be defined using either `aria-label` or `aria-labelledby` props.
+    Setting `aria-labelledby` is recommended as it target a visible label rather than adding an invisible `aria-label` on the dialog.
 
-- The activating element should take focus on popover close (`focusAnchorOnClose` property, activated by default)
-
-
+-   The activating element should take focus on popover close (`focusAnchorOnClose` property, activated by default)
 
 ### Properties
 

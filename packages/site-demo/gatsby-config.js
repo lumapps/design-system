@@ -20,6 +20,14 @@ module.exports = {
                 name: 'content',
             },
         },
+        // Load preprocessed content source files.
+        {
+            resolve: 'gatsby-source-filesystem',
+            options: {
+                path: `${__dirname}/.cache/lumx-preprocessed-content`,
+                name: 'preprocessed-content',
+            },
+        },
         // Copy static content files.
         {
             resolve: 'gatsby-plugin-copy-files-enhanced',
@@ -35,9 +43,6 @@ module.exports = {
             resolve: 'gatsby-plugin-mdx',
             options: {
                 extensions: ['.mdx', '.md'],
-                // Skip `File` node to process on `ProcessedMdxFile` nodes created by `lumx-mdx-preprocessor`.
-                shouldBlockNodeFromTransformation: (node) => node.internal.type === 'File',
-
                 gatsbyRemarkPlugins: [
                     // Replaces “dumb” punctuation marks with “smart” punctuation marks.
                     'gatsby-remark-smartypants',
@@ -47,17 +52,10 @@ module.exports = {
                         options: { icon: false },
                     },
                 ],
-
-                rehypePlugins: [
-                    // Insert <br> on MDX \n.
-                    require('./plugins/lumx-rehype-break-line'),
-                ],
             },
         },
         // Load menu entries from `content/menu.yml` and MDX files.
         './lumx-menu',
-        // Update document head using react.
-        'gatsby-plugin-react-helmet',
         // Compile SASS.
         {
             resolve: 'gatsby-plugin-sass',

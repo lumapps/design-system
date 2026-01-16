@@ -3,25 +3,129 @@
 **Image blocks display an image with related info.**
 Image blocks support thumbnail's formats (see [thumbnail](/product/components/thumbnail)).
 
-<DemoBlock demo="default" withThemeSwitcher wrap={false} />
+```jsx demo withThemeSwitcher wrap={false}
+import { mdiDelete, mdiEye, mdiPencil } from '@lumx/icons';
+import { Chip, ChipGroup, FlexBox, IconButton, ImageBlock } from '@lumx/react';
+
+export default ({ theme }) => (
+    <ImageBlock
+        actions={
+            <FlexBox orientation="horizontal" gap="regular">
+                <IconButton label="Edit" color="dark" emphasis="low" hasBackground icon={mdiPencil} />
+                <IconButton label="See" color="dark" emphasis="low" hasBackground icon={mdiEye} />
+                <IconButton label="Delete" color="dark" emphasis="low" hasBackground icon={mdiDelete} />
+            </FlexBox>
+        }
+        description="Lorem ipsum dolor sit amet, consectur adipiscing "
+        image="/demo-assets/landscape1.jpg"
+        tags={
+            <ChipGroup>
+                <Chip size="s" theme={theme}>
+                    Tag 1
+                </Chip>
+
+                <Chip size="s" theme={theme}>
+                    Tag 2
+                </Chip>
+            </ChipGroup>
+        }
+        theme={theme}
+        title="Lorem ipsum"
+        alt="Lorem ipsum"
+        thumbnailProps={{ aspectRatio: 'horizontal' }}
+    />
+);
+```
 
 ## Custom padding
 
 A custom padding can be added.
 
-<DemoBlock demo="image-block-padding" wrap={false} />
+```jsx demo wrap={false}
+import { Chip, ChipGroup, ImageBlock } from '@lumx/react';
+
+export default () => (
+    <div className="lumx-color-background-dark-L5 lumx-spacing-padding-huge">
+        <ImageBlock
+            className="lumx-color-background-light-N"
+            captionStyle={{ padding: 16 }}
+            description="Lorem ipsum dolor sit amet, consectur adipiscing "
+            image="/demo-assets/landscape3.jpg"
+            tags={
+                <ChipGroup>
+                    <Chip size="s">Tag 1</Chip>
+                    <Chip size="s">Tag 2</Chip>
+                </ChipGroup>
+            }
+            title="Lorem ipsum"
+            alt="Lorem ipsum"
+            thumbnailProps={{ aspectRatio: 'horizontal' }}
+        />
+    </div>
+);
+```
 
 ## Info above
 
 Info can be placed above the image.
 
-<DemoBlock demo="image-block-above" withThemeSwitcher wrap={false} />
+```jsx demo withThemeSwitcher wrap={false}
+import { Chip, ChipGroup, ImageBlock } from '@lumx/react';
+
+export default ({ theme }) => (
+    <ImageBlock
+        captionPosition="over"
+        description="Lorem ipsum dolor sit amet, consectur adipiscing "
+        image="/demo-assets/landscape2.jpg"
+        tags={
+            <ChipGroup>
+                <Chip size="s" theme={theme}>
+                    Tag 1
+                </Chip>
+
+                <Chip size="s" theme={theme}>
+                    Tag 2
+                </Chip>
+            </ChipGroup>
+        }
+        theme={theme}
+        title="Lorem ipsum"
+        alt="Lorem ipsum"
+        thumbnailProps={{ aspectRatio: 'horizontal' }}
+    />
+);
+```
 
 ## Info alignment
 
 There are three alignments: `left`, `center` and `right`.
 
-<DemoBlock demo="image-block-alignment" withThemeSwitcher wrap={false} />
+```jsx demo withThemeSwitcher wrap={false}
+import { Chip, ChipGroup, ImageBlock } from '@lumx/react';
+
+export default ({ theme }) => (
+    <ImageBlock
+        description="Lorem ipsum dolor sit amet, consectur adipiscing "
+        image="/demo-assets/portrait1.jpg"
+        tags={
+            <ChipGroup align="center">
+                <Chip size="s" theme={theme}>
+                    Tag 1
+                </Chip>
+
+                <Chip size="s" theme={theme}>
+                    Tag 2
+                </Chip>
+            </ChipGroup>
+        }
+        theme={theme}
+        title="Lorem ipsum"
+        alt="Lorem ipsum"
+        align="center"
+        thumbnailProps={{ aspectRatio: 'original' }}
+    />
+);
+```
 
 ### Accessibility concerns
 

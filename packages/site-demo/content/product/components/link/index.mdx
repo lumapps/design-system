@@ -1,54 +1,73 @@
-import { mdiPencil, mdiTypewriter } from '@lumx/icons';
-import { Icon, Link, Heading } from '@lumx/react';
-
 # Link
 
 **Display simple hyperlinks**.
 By default, links use the primary color. They can contain text and icons.
 
-<DemoBlock orientation="horizontal" vAlign="space-evenly" wrap>
-    <Link href="#">Default link</Link>
-    <Link href="#">
-        <Icon icon={mdiPencil} /> Link with an icon
-    </Link>
-</DemoBlock>
+```jsx demo orientation="horizontal" vAlign="space-evenly" wrap
+import { mdiPencil } from '@lumx/icons';
+import { Icon, Link } from '@lumx/react';
+
+export default () => (
+    <>
+        <Link href="#">Default link</Link>
+        <Link href="#">
+            <Icon icon={mdiPencil} /> Link with an icon
+        </Link>
+    </>
+);
+```
 
 ## Typography
 
 Link typography can be applied with the `typography` prop or **inherited** from the wrapping parent (like [Text](/product/components/text/) or [Heading](/product/components/heading/)).
 
-<DemoBlock orientation="horizontal" vAlign="space-evenly" wrap>
-    <Link href="#" typography="title">
-        Link with title <Icon icon={mdiTypewriter}/> typography
-    </Link>
-    <Heading as="h2">
-        <Link href="#">
-            Link with inherited <Icon icon={mdiTypewriter}/> typography
+```jsx demo orientation="horizontal" vAlign="space-evenly" wrap
+import { mdiTypewriter } from '@lumx/icons';
+import { Heading, Icon, Link } from '@lumx/react';
+
+export default () => (
+    <>
+        <Link href="#" typography="title">
+            Link with title <Icon icon={mdiTypewriter} /> typography
         </Link>
-    </Heading>
-</DemoBlock>
+        <Heading as="h2">
+            <Link href="#">
+                Link with inherited <Icon icon={mdiTypewriter} /> typography
+            </Link>
+        </Heading>
+    </>
+);
+```
 
 ## Color
 
 Use the `color` prop to change the color of the link. Link color **is not inherited** from the wrapping parent.
 
-<DemoBlock orientation="horizontal" vAlign="space-evenly" wrap>
-    <Link href="#" color="dark">
-        Dark color link
-    </Link>
-    <div className="lumx-spacing-padding lumx-color-background-dark-N">
-        <Link href="#" color="light">
-            Light color link
+```jsx demo orientation="horizontal" vAlign="space-evenly" wrap
+import { mdiPencil, mdiTypewriter } from '@lumx/icons';
+import { Heading, Icon, Link } from '@lumx/react';
+
+export default () => (
+    <>
+        <Link href="#" color="dark">
+            Dark color link
         </Link>
-    </div>
-</DemoBlock>
+        <div className="lumx-spacing-padding lumx-color-background-dark-N">
+            <Link href="#" color="light">
+                Light color link
+            </Link>
+        </div>
+    </>
+);
+```
 
 ### Accessibility concerns
 
 Links can change its `role` depending on the situation:
-- Providing a `href` will render as an HTML `<a>` link (role `link`)
-- Providing a `onClick` instead will transform the link into a `button` (while keeping the same link style)
-- Providing a `linkAs` will use the given component instead (e.g. a react router link), **you'll have to make sure this component provides good accessibility**
+
+-   Providing a `href` will render as an HTML `<a>` link (role `link`)
+-   Providing a `onClick` instead will transform the link into a `button` (while keeping the same link style)
+-   Providing a `linkAs` will use the given component instead (e.g. a react router link), **you'll have to make sure this component provides good accessibility**
 
 If the link is within some other text, please **avoid to use the same color** as the neighbouring text because users won't be able to see where the link start or ends.
 

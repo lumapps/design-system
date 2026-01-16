@@ -1,3 +1,4 @@
+import React from 'react';
 import { CodeBlock } from '@lumx/demo/components/content/CodeBlock/CodeBlock';
 import { DemoBlock } from '@lumx/demo/components/content/DemoBlock/DemoBlock';
 import { PropTable } from '@lumx/demo/components/content/PropTable/PropTable';
@@ -11,15 +12,14 @@ import 'intersection-observer';
  */
 const mdxComponents = {
     pre(props: any) {
-        const { children } = props;
-        const codeProps = children?.props?.mdxType === 'code' && children?.props;
-        if (codeProps) {
-            return <CodeBlock {...codeProps}>{codeProps.children?.trim()}</CodeBlock>;
+        const child = props.children;
+        // MDX v2 wraps code blocks in <pre><code>...</code></pre>
+        if (React.isValidElement(child) && (child.props as any).className) {
+            const childProps = child.props as any;
+            return <CodeBlock {...childProps}>{childProps.children?.trim()}</CodeBlock>;
         }
         return <pre {...props} />;
     },
-    // eslint-disable-next-line react/display-name
-    inlineCode: (props: any) => <code {...props} />,
     // Use router link when possible.
     a: Link,
     DemoBlock,

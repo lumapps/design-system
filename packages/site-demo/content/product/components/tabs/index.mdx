@@ -2,15 +2,78 @@
 
 **Tabs are navigation elements that regroup related sections of content for users to navigate.**
 
-<DemoBlock demo="default" withThemeSwitcher />
+```jsx demo withThemeSwitcher
+import { Tab, TabList, TabPanel, TabProvider } from '@lumx/react';
+
+export default ({ theme }) => (
+    <div style={{ minWidth: 260 }}>
+        <TabProvider>
+            <TabList theme={theme} aria-label="Tab list">
+                <Tab label="Tab 1" />
+                <Tab label="Tab 2" />
+                <Tab label="Tab 3" />
+            </TabList>
+
+            <TabPanel className="lumx-spacing-padding-vertical-huge">Tab 1 content</TabPanel>
+            <TabPanel className="lumx-spacing-padding-vertical-huge">Tab 2 content</TabPanel>
+            <TabPanel className="lumx-spacing-padding-vertical-huge">Tab 3 content</TabPanel>
+        </TabProvider>
+    </div>
+);
+```
 
 ## Justify left
 
-<DemoBlock demo="left-tabs" withThemeSwitcher />
+```jsx demo withThemeSwitcher
+import { Tab, TabList, TabListLayout, TabPanel, TabProvider } from '@lumx/react';
+import { useState } from 'react';
+
+export default ({ theme }) => {
+    const [activeTab, setActiveTab] = useState(0);
+    return (
+        <div style={{ minWidth: 260 }}>
+            <TabProvider activeTabIndex={activeTab} onChange={setActiveTab}>
+                <TabList theme={theme} layout={TabListLayout.clustered} aria-label="Tab list">
+                    <Tab label="Tab 1" />
+                    <Tab label="Tab 2" />
+                    <Tab label="Tab 3" />
+                </TabList>
+
+                <TabPanel className="lumx-spacing-padding-vertical-huge">Tab 1 content</TabPanel>
+                <TabPanel className="lumx-spacing-padding-vertical-huge">Tab 2 content</TabPanel>
+                <TabPanel className="lumx-spacing-padding-vertical-huge">Tab 3 content</TabPanel>
+            </TabProvider>
+        </div>
+    );
+};
+```
 
 ## Icon
 
-<DemoBlock demo="icon-tabs" withThemeSwitcher />
+```jsx demo withThemeSwitcher
+import { mdiBowl, mdiBreadSliceOutline, mdiSilverwareForkKnife } from '@lumx/icons';
+import { Tab, TabList, TabPanel, TabProvider } from '@lumx/react';
+import { useState } from 'react';
+
+export default ({ theme }) => {
+    const [activeTab, setActiveTab] = useState(0);
+    return (
+        <div style={{ minWidth: 340 }}>
+            <TabProvider activeTabIndex={activeTab} onChange={setActiveTab}>
+                <TabList theme={theme} aria-label="Tab list">
+                    <Tab label="Tab 1" icon={mdiBowl} />
+                    <Tab label="Tab 2" icon={mdiBreadSliceOutline} iconProps={{ color: 'red-L1', hasShape: false }} />
+                    <Tab label="Tab 3" icon={mdiSilverwareForkKnife} />
+                </TabList>
+
+                <TabPanel className="lumx-spacing-padding-vertical-huge">Tab 1 content</TabPanel>
+                <TabPanel className="lumx-spacing-padding-vertical-huge">Tab 2 content</TabPanel>
+                <TabPanel className="lumx-spacing-padding-vertical-huge">Tab 3 content</TabPanel>
+            </TabProvider>
+        </div>
+    );
+};
+```
 
 ### Accessibility concerns
 

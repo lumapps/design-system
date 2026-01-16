@@ -2,25 +2,100 @@
 
 **Slider is a visual input where the user can increase or decrease the value between two numeric values.**
 
-<DemoBlock demo="default" withThemeSwitcher />
+```jsx demo withThemeSwitcher
+import { Slider } from '@lumx/react';
+import { useState } from 'react';
+
+export default ({ theme }) => {
+    const [value, setValue] = useState(4);
+    return (
+        <Slider
+            label="Slider label"
+            helper="Helper text"
+            max={100}
+            min={0}
+            theme={theme}
+            value={value}
+            onChange={setValue}
+        />
+    );
+};
+```
 
 ## Without min and max labels
 
 Possibility to hide the min and max value.
 
-<DemoBlock demo="without-min-max" withThemeSwitcher />
+```jsx demo withThemeSwitcher
+import { Slider } from '@lumx/react';
+import { useState } from 'react';
+
+export default ({ theme }) => {
+    const [value, setValue] = useState(20);
+    return (
+        <Slider
+            label="Slider label"
+            helper="Helper text"
+            max={100}
+            min={0}
+            hideMinMaxLabel
+            theme={theme}
+            value={value}
+            onChange={setValue}
+        />
+    );
+};
+```
 
 ## Precision
 
 Use when the values are decimal numbers.
 
-<DemoBlock demo="precision" withThemeSwitcher />
+```jsx demo withThemeSwitcher
+import { Slider } from '@lumx/react';
+import { useState } from 'react';
+
+export default ({ theme }) => {
+    const [value, setValue] = useState(4.23765);
+    return (
+        <Slider
+            label="Slider label"
+            helper="Helper text"
+            max={10}
+            min={0}
+            theme={theme}
+            precision={5}
+            value={value}
+            onChange={setValue}
+        />
+    );
+};
+```
 
 ## Step
 
 Use to limit the choice between value propositions.
 
-<DemoBlock demo="steps" withThemeSwitcher />
+```jsx demo withThemeSwitcher
+import { Slider } from '@lumx/react';
+import { useState } from 'react';
+
+export default ({ theme }) => {
+    const [value, setValue] = useState(40);
+    return (
+        <Slider
+            label="Slider label"
+            helper="Helper text"
+            max={180}
+            min={30}
+            steps={5}
+            theme={theme}
+            value={value}
+            onChange={setValue}
+        />
+    );
+};
+```
 
 ### Properties
 

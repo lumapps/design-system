@@ -2,31 +2,114 @@
 
 **Side navigation regroup navigation items that leads to sections of content for users to navigate.**
 
-<DemoBlock demo="default" />
+```jsx demo
+import { SideNavigation, SideNavigationItem } from '@lumx/react';
+
+export default () => (
+    <SideNavigation>
+        <SideNavigationItem label="Navigation item" emphasis="low" toggleButtonProps={{ label: 'Toggle' }} />
+        <SideNavigationItem label="Navigation item" emphasis="low" toggleButtonProps={{ label: 'Toggle' }} />
+        <SideNavigationItem label="Navigation item" emphasis="low" toggleButtonProps={{ label: 'Toggle' }} />
+        <SideNavigationItem label="Navigation item" emphasis="low" toggleButtonProps={{ label: 'Toggle' }} />
+        <SideNavigationItem label="Navigation item" emphasis="low" toggleButtonProps={{ label: 'Toggle' }} />
+    </SideNavigation>
+);
+```
 
 ## With icon
 
 Side navigation items can have leading icons.
 
-<DemoBlock demo="with-icon" />
+```jsx demo
+import { mdiEmail } from '@lumx/icons';
+import { SideNavigation, SideNavigationItem } from '@lumx/react';
+
+export default () => (
+    <SideNavigation>
+        <SideNavigationItem
+            label="With leading icon"
+            icon={mdiEmail}
+            emphasis="low"
+            toggleButtonProps={{ label: 'Toggle' }}
+        />
+    </SideNavigation>
+);
+```
 
 ## States
 
 Side navigation items have two states: _resting_, and _selected_.
 
-<DemoBlock demo="states" />
+```jsx demo
+import { mdiEmail } from '@lumx/icons';
+import { SideNavigation, SideNavigationItem } from '@lumx/react';
+
+export default () => (
+    <SideNavigation>
+        <SideNavigationItem label="Resting" icon={mdiEmail} emphasis="low" toggleButtonProps={{ label: 'Toggle' }} />
+        <SideNavigationItem
+            label="Selected"
+            icon={mdiEmail}
+            emphasis="low"
+            isSelected
+            toggleButtonProps={{ label: 'Toggle' }}
+        />
+    </SideNavigation>
+);
+```
 
 ## Nested items
 
 Side navigation items can be nested. Parent items have two states: _closed_, and _open_.
 
-<DemoBlock demo="nested" />
+```jsx demo
+import { SideNavigation, SideNavigationItem } from '@lumx/react';
+
+export default () => (
+    <SideNavigation>
+        <SideNavigationItem label="Level 0 (closed)" toggleButtonProps={{ label: 'Toggle' }}>
+            <SideNavigationItem label="Level 1" emphasis="medium" toggleButtonProps={{ label: 'Toggle' }} />
+        </SideNavigationItem>
+
+        <SideNavigationItem label="Level 0 (open)" isOpen toggleButtonProps={{ label: 'Toggle' }}>
+            <SideNavigationItem label="Level 1" emphasis="medium" toggleButtonProps={{ label: 'Toggle' }} />
+            <SideNavigationItem label="Level 1" emphasis="medium" toggleButtonProps={{ label: 'Toggle' }} />
+        </SideNavigationItem>
+    </SideNavigation>
+);
+```
 
 ## Emphasis
 
 Side navigation items have three emphasises: `low`, `medium`, and `high`. Default is `high`.
 
-<DemoBlock demo="emphasis" />
+```jsx demo
+import { mdiArrowTopRightThick } from '@lumx/icons';
+import { SideNavigation, SideNavigationItem } from '@lumx/react';
+
+export default () => (
+    <SideNavigation>
+        <SideNavigationItem
+            label="Low"
+            icon={mdiArrowTopRightThick}
+            emphasis="low"
+            toggleButtonProps={{ label: 'Toggle' }}
+        />
+        <SideNavigationItem
+            label="Medium"
+            icon={mdiArrowTopRightThick}
+            emphasis="medium"
+            toggleButtonProps={{ label: 'Toggle' }}
+        />
+        <SideNavigationItem
+            label="High"
+            icon={mdiArrowTopRightThick}
+            emphasis="high"
+            toggleButtonProps={{ label: 'Toggle' }}
+        />
+    </SideNavigation>
+);
+```
 
 ### Accessibility concerns
 
