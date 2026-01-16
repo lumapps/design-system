@@ -40,7 +40,6 @@ export default defineConfig({
         sourcemap: true,
         rollupOptions: {
             external: [
-                /^@lumx\/core(?!.*\/_internal).*$/,
                 /^@lumx\/icons/,
                 'vue',
                 'lodash',
