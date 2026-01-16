@@ -12,12 +12,14 @@ module.exports = {
         'plugin:@typescript-eslint/recommended',
         'plugin:react/recommended',
         'plugin:react/jsx-runtime',
+        'plugin:mdx/recommended',
         'plugin:prettier/recommended',
     ],
     parser: '@typescript-eslint/parser',
     parserOptions: {
         sourceType: 'module',
         project: './tsconfig.json',
+        extraFileExtensions: ['.mdx'],
         ecmaFeatures: {
             jsx: true,
         },
@@ -68,7 +70,7 @@ module.exports = {
         'react/destructuring-assignment': 'off',
         'react/display-name': 'off',
         'react/function-component-definition': 'off',
-        'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
+        'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx', '.mdx'] }],
         'react/jsx-no-constructed-context-values': 'off',
         'react/jsx-no-useless-fragment': ['error', { allowExpressions: true }],
         'react/jsx-props-no-spreading': 'off',
@@ -92,6 +94,13 @@ module.exports = {
             rules: {
                 'import/no-webpack-loader-syntax': 'off',
                 'import/extensions': 'off',
+            },
+        },
+        {
+            files: ['*.md', '*.mdx'],
+            parser: 'eslint-mdx',
+            globals: {
+                PropTable: false,
             },
         },
     ],

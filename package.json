@@ -9,6 +9,7 @@
         "changelog-verify": "^1.1.2",
         "es-abstract": "1.17.6",
         "eslint": "^8.57.0",
+        "eslint-plugin-mdx": "^3.6.2",
         "husky": "^5.0.4",
         "jsx-ast-utils": "^3.1.0",
         "lerna": "^3.18.4",
@@ -32,7 +33,8 @@
         "*.{scss,css}": [
             "stylelint --fix"
         ],
-        "*.{md,html}": "prettier --write"
+        "*.{md,mdx,html}": "prettier --write",
+        "*.mdx": "eslint --cache --fix"
     },
     "keywords": [
         "AngularJS",
