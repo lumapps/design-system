@@ -9,7 +9,7 @@
     "start:storybook": "storybook dev -p 9000",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "build": "vite build"
+    "test": "vitest run"
   },
   "installConfig": {
     "hoistingLimits": "workspaces"
@@ -36,11 +36,13 @@
     "@storybook/vue3-vite": "^9.1.4",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/user-event": "^14.4.3",
+    "@testing-library/vue": "^8.1.0",
     "@types/lodash": "^4.14.149",
     "@vitejs/plugin-vue": "^6.0.2",
     "@vitejs/plugin-vue-jsx": "^5.1.1",
     "chromatic": "^13.3.5",
     "focus-visible": "^5.2.1",
+    "jsdom": "^27.2.0",
     "storybook": "^9.1.4",
     "typescript": "^5.4.3",
     "vite": "^6.3.5",

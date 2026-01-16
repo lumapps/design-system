@@ -2,6 +2,8 @@
 import { defineConfig } from 'vitest/config';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import optimizeImportsLumxIcons from 'rollup-plugin-optimize-imports-lumx-icons';
+import vueJsx from '@vitejs/plugin-vue-jsx';
+import vue from '@vitejs/plugin-vue';
 
 /**
  * Vite config
@@ -21,6 +23,14 @@ export default defineConfig({
         exclude: ['src/**/*.stories.tsx'],
     },
     plugins: [
+        vue(),
+        vueJsx({
+            // 1. Tell the Vue JSX compiler what function to use (h)
+            // 2. Tell it to import 'h' from the 'vue' module
+            // The default setup in modern Vue JSX handles this, but explicitly
+            // ensuring the right runtime is used is key.
+            babelPlugins: [['@babel/plugin-transform-react-jsx', { runtime: 'automatic', importSource: 'vue' }]],
+        }),
         tsconfigPaths(),
         /** Transform @lumx/icons imports to direct ESM imports. */
         optimizeImportsLumxIcons(),
