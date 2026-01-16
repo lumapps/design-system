@@ -7,7 +7,6 @@
   },
   "scripts": {
     "start:storybook": "storybook dev -p 9000",
-    "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test": "vitest run"
   },
