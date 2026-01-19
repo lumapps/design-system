@@ -1,39 +1,27 @@
-import React from 'react';
-import { RenderOptions } from '@testing-library/react';
-import { GenericProps, Theme } from '@lumx/react';
-import { ThemeProvider } from '@lumx/react/utils/theme/ThemeContext';
-import { invertTheme } from '@lumx/react/utils/theme/invertTheme';
+import { GenericProps, Theme } from '@lumx/vue';
+import { RenderOptions } from '@testing-library/vue';
+import { invertTheme } from '@lumx/core/js/utils/theme/invertTheme';
 import {
     commonTestsSuiteTL as coreCommonTestsSuiteTL,
+    SetupFunction,
     Options,
     getTestElements,
-    SetupFunction,
     expectTheme,
 } from '@lumx/core/testing/commonTestsSuiteTL';
 
-export type SetupRenderOptions = RenderOptions;
-export type RenderWrapper = RenderOptions['wrapper'];
-
+export type SetupRenderOptions<Props> = RenderOptions<Props>;
 /**
  * Common tests on components
  * - Check base class name and class name forwarding
  * - Check props forwarding
  */
-export function commonTestsSuiteRTL<S extends GenericProps>(setup: SetupFunction, options: Options<S>): void {
-    const { forwardRef, applyTheme } = options;
+export function commonTestsSuiteVTL<S extends GenericProps>(setup: SetupFunction, options: Options<S>): void {
+    const { applyTheme } = options;
 
     coreCommonTestsSuiteTL(setup, options);
 
-    if (forwardRef || applyTheme) {
-        describe('React - Common tests suite', () => {
-            if (forwardRef) {
-                it('should forward ref', async () => {
-                    const ref = React.createRef();
-                    const wrappers = await setup({ ref });
-                    expect(ref.current).toBe(wrappers[forwardRef]);
-                });
-            }
-
+    if (applyTheme) {
+        describe('Vue - Common tests suite', () => {
             if (applyTheme) {
                 describe('theme', () => {
                     const { defaultTheme, viaProp, viaContext } = applyTheme;
@@ -43,10 +31,16 @@ export function commonTestsSuiteRTL<S extends GenericProps>(setup: SetupFunction
                     it.each(testElements)(
                         `should $apply context theme=${contextTheme} to \`$element\``,
                         async (affectedElement) => {
-                            const Wrapper = ({ children }: any) => (
-                                <ThemeProvider value={contextTheme}>{children}</ThemeProvider>
+                            const wrappers = await setup(
+                                {},
+                                {
+                                    global: {
+                                        provide: {
+                                            theme: contextTheme,
+                                        },
+                                    },
+                                },
                             );
-                            const wrappers = await setup({}, { wrapper: Wrapper });
                             expectTheme(wrappers, affectedElement, contextTheme, {
                                 shouldHaveModifier: !viaContext ? false : undefined,
                             });
@@ -58,10 +52,16 @@ export function commonTestsSuiteRTL<S extends GenericProps>(setup: SetupFunction
                         it.each(testElements)(
                             `should $apply prop theme=${propTheme} to \`$element\` overriding the context theme=${contextTheme}`,
                             async (affectedElement) => {
-                                const Wrapper = ({ children }: any) => (
-                                    <ThemeProvider value={contextTheme}>{children}</ThemeProvider>
+                                const wrappers = await setup(
+                                    { theme: propTheme },
+                                    {
+                                        global: {
+                                            provide: {
+                                                theme: contextTheme,
+                                            },
+                                        },
+                                    },
                                 );
-                                const wrappers = await setup({ theme: propTheme }, { wrapper: Wrapper });
                                 expectTheme(wrappers, affectedElement, propTheme);
                             },
                         );

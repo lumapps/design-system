@@ -1,1 +1,1 @@
-export * from './commonTestsSuiteRTL';
+export * from './commonTestsSuiteTL';

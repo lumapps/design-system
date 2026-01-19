@@ -1,0 +1,24 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "module": "ESNext",
+        "moduleResolution": "Bundler",
+        "allowImportingTsExtensions": false,
+        "noEmit": false,
+        "emitDeclarationOnly": true,
+        "skipLibCheck": true
+    },
+    "files": [],
+    "include": [
+        "src/**/*.ts",
+        "src/**/*.vue"
+    ],
+    "exclude": [
+        "node_modules",
+        "vite.config.mts",
+        "vitest.setup.ts",
+        "src/**/*.stories.ts",
+        "src/**/*.test.ts",
+        "src/testing"
+    ]
+}

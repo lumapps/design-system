@@ -22,7 +22,7 @@ export interface AutocompleteMultipleProps extends AutocompleteProps {
     selectedChipRender(
         choice: any,
         index: number,
-        onClear?: (event: React.MouseEvent, choice: any) => void,
+        onClear?: (event: React.MouseEvent, val: any) => void,
         isDisabled?: boolean,
     ): ReactNode | string;
 }

@@ -1,5 +1,5 @@
 import { Theme, Typography } from '../../constants';
-import { SetupRenderOptions } from '../../../testing';
+import { SetupOptions } from '../../../testing';
 import { getByClassName } from '../../../testing/queries';
 import { InputLabel, InputLabelProps } from '.';
 import { classNames } from '../../utils';
@@ -11,24 +11,21 @@ type SetupProps = Partial<InputLabelProps>;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-export const setup = <T>(
-    propsOverride: SetupProps = {},
-    { wrapper, render }: SetupRenderOptions<T, InputLabelProps> = {},
-) => {
+export const setup = (propsOverride: SetupProps = {}, { render, ...options }: SetupOptions<InputLabelProps>) => {
     const props: InputLabelProps = {
         children: 'Label text',
         htmlFor: '123',
         ...propsOverride,
     };
 
-    render?.(props, { wrapper });
+    render(props, options);
 
     const label = getByClassName(document.body, CLASSNAME);
 
     return { label, props };
 };
 
-export default <T>(renderOptions: SetupRenderOptions<T, InputLabelProps>) => {
+export default (renderOptions: SetupOptions<InputLabelProps>) => {
     describe('Props', () => {
         it('should render text', () => {
             const { label, props } = setup(
