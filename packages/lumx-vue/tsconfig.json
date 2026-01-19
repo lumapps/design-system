@@ -1,0 +1,29 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "target": "ESNext",
+        "skipLibCheck": true,
+        "moduleResolution": "bundler",
+        "jsx": "preserve",
+        "jsxImportSource": "vue",
+        "paths": {
+            "@lumx/core/*": ["lumx-core/src/*"],
+            "@lumx/react": ["lumx-react/src"],
+            "@lumx/react/*": ["lumx-react/src/*"],
+            "@lumx/vue": ["lumx-vue/src"],
+            "@lumx/vue/*": ["lumx-vue/src/*"],
+            "@lumx/icons": ["lumx-icons"],
+            "@lumx/icons/*": ["lumx-icons/dist/*"],
+            "@lumx/demo/*": ["site-demo/src/*"],
+            "vue/jsx-runtime": ["lumx-vue/node_modules/vue/jsx-runtime"]
+        }
+    },
+    "include": [
+        "src/**/*.ts",
+        "src/**/*.vue"
+    ],
+    "files": [
+        "vite.config.mts",
+        "vitest.setup.ts"
+    ]
+}

@@ -8,12 +8,12 @@ import { InputLabel, InputLabelProps } from './InputLabel';
 const CLASSNAME = InputLabel.className as string;
 
 describe(`<${InputLabel.displayName}>`, () => {
-    const renderInputLabel = (props: InputLabelProps, options: SetupRenderOptions<InputLabelProps>) =>
+    const renderInputLabel = (props: InputLabelProps, options?: SetupRenderOptions) =>
         render(<InputLabel {...props} />, options);
 
     BaseInputLabelTests({ render: renderInputLabel });
 
-    const setupInputLabel = (props: Partial<InputLabelProps> = {}, options: SetupRenderOptions<InputLabelProps> = {}) =>
+    const setupInputLabel = (props: Partial<InputLabelProps> = {}, options: SetupRenderOptions = {}) =>
         setup(props, { ...options, render: renderInputLabel });
 
     commonTestsSuiteRTL(setupInputLabel, {

@@ -1,4 +1,4 @@
-const extensions = ['.js', '.ts', '.jsx', '.tsx'];
+const extensions = ['.js', '.ts', '.jsx', '.tsx', '.vue'];
 
 module.exports = {
     env: {
@@ -42,6 +42,7 @@ module.exports = {
                 svg: 'always',
                 scss: 'always',
                 json: 'always',
+                vue: 'always',
             },
         ],
         'import/no-extraneous-dependencies': [
@@ -84,6 +85,13 @@ module.exports = {
                 '@typescript-eslint/explicit-module-boundary-types': 'off',
                 'no-alert': 'off',
                 'no-console': 'off',
+            },
+        },
+        {
+            files: ['*.ts'],
+            rules: {
+                'import/no-named-as-default': 'off',
+                'import/no-named-as-default-member': 'off',
             },
         },
         // TODO: remove theme switcher

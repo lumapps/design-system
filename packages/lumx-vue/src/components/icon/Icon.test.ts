@@ -1,18 +1,19 @@
-import { render } from '@testing-library/react';
+import { render } from '@testing-library/vue';
 
 import BaseIconTests, { setup } from '@lumx/core/js/components/Icon/Tests';
-import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/vue/testing';
 
-import { Icon, IconProps } from './Icon';
+import { Icon, IconProps } from '.';
 
 const CLASSNAME = Icon.className as string;
 
-describe(`<${Icon.displayName}>`, () => {
-    const renderIcon = (props: IconProps, options?: SetupRenderOptions) => render(<Icon {...props} />, options);
+describe('<Icon />', () => {
+    const renderIcon = (props: IconProps, options?: SetupRenderOptions<IconProps>) =>
+        render(Icon, { props, ...options });
 
     BaseIconTests({ render: renderIcon });
 
-    const setupIcon = (props: Partial<IconProps> = {}, options: SetupRenderOptions = {}) =>
+    const setupIcon = (props: Partial<IconProps> = {}, options: SetupRenderOptions<IconProps> = {}) =>
         setup(props, { ...options, render: renderIcon });
 
     // Common tests suite.

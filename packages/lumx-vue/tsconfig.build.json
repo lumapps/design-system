@@ -1,0 +1,18 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "noEmit": false,
+        "emitDeclarationOnly": true
+    },
+    "include": [
+        "src/**/*.ts",
+        "src/**/*.vue"
+    ],
+    "exclude": [
+        "vite.config.mts",
+        "vitest.setup.ts",
+        "src/**/*.stories.ts",
+        "src/**/*.test.ts",
+        "src/testing"
+    ]
+}

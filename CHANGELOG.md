@@ -16,6 +16,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Moved InputLabel JSX templating from `@lumx/react`
     -   Moved InputHelper JSX templating from `@lumx/react`
 
+### Added
+
+-   `@lumx/vue`:
+    -   Initialise package
+    -   Create the `InputHelper` component
+    -   Create the `InputLabel` component
+    -   Create the `Icon` component
+    -   Setup Storybook and Tests
+
 ## [4.0.0][] - 2025-12-09
 
 ### Changed
