@@ -3,15 +3,23 @@ import isEmpty from 'lodash/isEmpty';
 
 import { GenericProps } from '../js/types';
 import { Theme } from '../js/constants';
+
 import { invertTheme } from '../js/utils/theme/invertTheme';
 import { queryByClassName } from './queries';
 
-/**
- * Common setup interface for the tests.
- */
-export interface CommonSetup {
-    props: GenericProps;
-}
+export type SetupResult = {
+    [propName: keyof GenericProps]: any;
+};
+
+export type SetupRenderOptions = {
+    [propName: keyof GenericProps]: any;
+};
+
+export type SetupOptions<Props extends GenericProps> = {
+    render: (props: Props, options?: SetupRenderOptions) => Partial<SetupResult>;
+} & SetupRenderOptions;
+
+export type SetupFunction = (props?: GenericProps, options?: SetupRenderOptions) => Partial<SetupResult>;
 
 /**
  * Configuration for an element affected by a theme.
@@ -26,7 +34,7 @@ export type Not<E> = { not: E };
 /**
  * Configuration for applying a theme to the component.
  */
-export type ApplyTheme<S extends CommonSetup> = {
+export type ApplyTheme<S extends GenericProps, Props extends GenericProps> = {
     /** Element(s) to which we apply the theme class */
     affects: Array<AffectConfig<keyof S> | Not<AffectConfig<keyof S>>>;
     /** Apply theme via theme prop */
@@ -36,35 +44,19 @@ export type ApplyTheme<S extends CommonSetup> = {
     /** Apply a default theme if no prop or context was provided */
     defaultTheme?: Theme;
     /** Default props to apply when testing theme */
-    defaultProps?: S['props'];
+    defaultProps?: Props;
 };
 
 /**
  * Options for the common tests suite.
  */
-export interface Options<S extends CommonSetup> {
+export interface Options<Props extends Partial<GenericProps>> {
     baseClassName: string;
-    forwardClassName?: keyof S;
-    forwardAttributes?: keyof S;
-    forwardRef?: keyof S;
-    applyTheme?: ApplyTheme<S>;
+    forwardClassName?: keyof GenericProps;
+    forwardAttributes?: keyof GenericProps;
+    forwardRef?: keyof GenericProps;
+    applyTheme?: ApplyTheme<GenericProps, Props>;
 }
-
-/**
- * Options passed to the setup function.
- */
-export type SetupRenderOptions<T, S = GenericProps> = {
-    wrapper?: T;
-    render?: (props: S, { wrapper }: { wrapper?: T }) => void;
-};
-
-/**
- * Function to setup the component for testing.
- */
-export type SetupFunction<S extends CommonSetup, T> = (
-    props?: GenericProps,
-    options?: SetupRenderOptions<T>,
-) => S | Promise<S>;
 
 /**
  * Get the test elements based on the theme configuration.
@@ -72,7 +64,9 @@ export type SetupFunction<S extends CommonSetup, T> = (
  * @param applyTheme The theme configuration.
  * @return The test elements configuration.
  */
-export const getTestElements = <S extends CommonSetup>(applyTheme: ApplyTheme<S>) => {
+export const getTestElements = <S extends GenericProps, Props extends GenericProps>(
+    applyTheme: ApplyTheme<S, Props>,
+) => {
     const { affects } = applyTheme;
     const testElements = affects.map((configOrNot) => {
         let shouldHaveModifier: boolean = true;
@@ -131,7 +125,7 @@ export const expectTheme = (
  * @param setup The setup function returns the wrapper and the component.
  * @param options The options for the common tests.
  */
-export function commonTestsSuiteRTL<S extends CommonSetup, T>(setup: SetupFunction<S, T>, options: Options<S>): void {
+export function commonTestsSuiteRTL<Props extends GenericProps>(setup: SetupFunction, options: Options<Props>): void {
     if (isEmpty(options)) {
         return;
     }

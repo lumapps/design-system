@@ -29,9 +29,9 @@ const input = {
 };
 
 const external = [
-    // Externalize "public" lumx-core exports (internalize `_internal/*` and `components/*` exports)
-    /^@lumx\/core(?!.*\/(_internal|components)).*$/,
-    /^@lumx\/icons/,
+    // Externalize "public" lumx-core exports (internalize `_internal/*` exports)
+    /^@lumx\/core(?!.*\/_internal).*$/,
+    /^@lumx\/icons/
 ];
 
 // Bundle JS code

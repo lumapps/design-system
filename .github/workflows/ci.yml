@@ -57,6 +57,12 @@ jobs:
                 run: |
                     yarn workspace @lumx/core test
 
+            -   name: "Run lumx-vue tests"
+                run: |
+                    sudo timedatectl set-timezone Europe/Paris
+                    yarn workspace @lumx/vue test
+
+
     type-check:
         if: github.event.pull_request.draft == false
         timeout-minutes: 30

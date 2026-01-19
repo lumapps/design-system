@@ -5,10 +5,12 @@
     },
     "description": "The official LumApps Design System (LumX) for AngularJS and React applications",
     "devDependencies": {
+        "@testing-library/vue": "^8.1.0",
         "@vitest/ui": "^3.0.0",
         "changelog-verify": "^1.1.2",
         "es-abstract": "1.17.6",
         "eslint": "^8.57.0",
+        "eslint-plugin-vue": "^10.7.0",
         "husky": "^5.0.4",
         "jsx-ast-utils": "^3.1.0",
         "lerna": "^3.18.4",
@@ -21,6 +23,7 @@
         "stylelint-config-standard-scss": "^5.0.0",
         "typescript": "^5.4.3",
         "vitest": "^3.0.0",
+        "vue-eslint-parser": "^10.2.0",
         "yo": "^5.1.0"
     },
     "engines": {
@@ -73,6 +76,7 @@
         "test": "vitest",
         "type-check": "yarn tsc -p tsconfig.json",
         "storybook:react": "yarn workspace @lumx/react start:storybook",
+        "storybook:vue": "yarn workspace @lumx/vue start:storybook",
         "storybook": "yarn storybook:react",
         "generate:design-tokens": "yarn workspace @lumx/core generate:design-tokens",
         "generate:icons": "yarn workspace @lumx/icons generate:icons",

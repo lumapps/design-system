@@ -18,7 +18,9 @@
             "@lumx/core/*": ["lumx-core/src/*"],
             "@lumx/react": ["lumx-react/src"],
             "@lumx/react/*": ["lumx-react/src/*"],
-            "@lumx/icons": ["lumx-icons/dist"],
+            "@lumx/vue": ["lumx-vue/src"],
+            "@lumx/vue/*": ["lumx-vue/src/*"],
+            "@lumx/icons": ["lumx-icons"],
             "@lumx/icons/*": ["lumx-icons/dist/*"],
             "@lumx/demo/*": ["site-demo/src/*"]
         },
@@ -27,5 +29,5 @@
         "target": "es5",
         "downlevelIteration": true
     },
-    "exclude": ["**/dist/", "**/public/", "node_modules"]
+    "exclude": ["**/dist/", "**/public/", "node_modules", "packages/lumx-vue/vite.config.mts", "packages/lumx-vue/vitest.setup.ts"]
 }

@@ -1,7 +1,7 @@
 import { mdiAlertCircle } from '@lumx/icons';
 
 import { ColorPalette, ColorVariant, Size, Theme } from '../../constants';
-import { SetupRenderOptions } from '../../../testing';
+import { SetupOptions } from '../../../testing';
 import { getByClassName, getByTagName } from '../../../testing/queries';
 import { Icon, IconProps } from '.';
 
@@ -12,16 +12,13 @@ type SetupProps = Partial<IconProps>;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-export const setup = <T>(
-    propsOverride: SetupProps = {},
-    { wrapper, render }: SetupRenderOptions<T, IconProps> = {},
-) => {
+export const setup = (propsOverride: SetupProps = {}, { render, ...options }: SetupOptions<IconProps>) => {
     const props: IconProps = {
         icon: 'mdiPlus',
         ...propsOverride,
     };
 
-    render?.(props, { wrapper });
+    render(props, options);
 
     const i = getByClassName(document.body, CLASSNAME);
     const svg = getByTagName(i, 'svg');
@@ -30,7 +27,7 @@ export const setup = <T>(
     return { i, svg, path, props };
 };
 
-export default <T>(renderOptions: SetupRenderOptions<T, IconProps>) => {
+export default (renderOptions: SetupOptions<IconProps>) => {
     describe('Props', () => {
         it('should render default', () => {
             const { i, svg, path, props } = setup(undefined, renderOptions);
