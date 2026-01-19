@@ -1,27 +1,29 @@
 import React from 'react';
-import { Theme } from '@lumx/react';
+import { GenericProps, Theme } from '@lumx/react';
 import { RenderOptions } from '@testing-library/react';
 import { ThemeProvider } from '@lumx/react/utils/theme/ThemeContext';
 import { invertTheme } from '@lumx/react/utils/theme/invertTheme';
 import {
     commonTestsSuiteRTL as coreCommonTestsSuiteRTL,
-    CommonSetup,
-    SetupFunction,
+    CommonRenderResult,
     Options,
-    SetupRenderOptions as CommonSetupRenderOptions,
     getTestElements,
     expectTheme,
 } from '@lumx/core/testing/commonTestsSuiteRTL';
 
-export type RenderWrapper = RenderOptions['wrapper'];
-export type SetupRenderOptions<S = any> = CommonSetupRenderOptions<RenderWrapper, S>;
+export type SetupRenderOptions = RenderOptions;
+export type ReactSetupFunction<S extends CommonRenderResult = CommonRenderResult> = (
+    props?: GenericProps,
+    options?: RenderOptions,
+) => S | Promise<S>;
+
 /**
  * Common tests on components
  * - Check base class name and class name forwarding
  * - Check props forwarding
  */
-export function commonTestsSuiteRTL<S extends CommonSetup>(
-    setup: SetupFunction<S, RenderWrapper>,
+export function commonTestsSuiteRTL<S extends CommonRenderResult>(
+    setup: ReactSetupFunction<S>,
     options: Options<S>,
 ): void {
     const { forwardRef, applyTheme } = options;

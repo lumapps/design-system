@@ -9,9 +9,11 @@ import { queryByClassName } from './queries';
 /**
  * Common setup interface for the tests.
  */
-export interface CommonSetup {
+export interface CommonRenderResult {
     props: GenericProps;
 }
+
+export type SetupFunction<S extends CommonRenderResult = CommonRenderResult> = (props?: GenericProps) => S | Promise<S>;
 
 /**
  * Configuration for an element affected by a theme.
@@ -26,7 +28,7 @@ export type Not<E> = { not: E };
 /**
  * Configuration for applying a theme to the component.
  */
-export type ApplyTheme<S extends CommonSetup> = {
+export type ApplyTheme<S extends CommonRenderResult> = {
     /** Element(s) to which we apply the theme class */
     affects: Array<AffectConfig<keyof S> | Not<AffectConfig<keyof S>>>;
     /** Apply theme via theme prop */
@@ -42,7 +44,7 @@ export type ApplyTheme<S extends CommonSetup> = {
 /**
  * Options for the common tests suite.
  */
-export interface Options<S extends CommonSetup> {
+export interface Options<S extends CommonRenderResult> {
     baseClassName: string;
     forwardClassName?: keyof S;
     forwardAttributes?: keyof S;
@@ -51,28 +53,12 @@ export interface Options<S extends CommonSetup> {
 }
 
 /**
- * Options passed to the setup function.
- */
-export type SetupRenderOptions<T, S = GenericProps> = {
-    wrapper?: T;
-    render?: (props: S, { wrapper }: { wrapper?: T }) => void;
-};
-
-/**
- * Function to setup the component for testing.
- */
-export type SetupFunction<S extends CommonSetup, T> = (
-    props?: GenericProps,
-    options?: SetupRenderOptions<T>,
-) => S | Promise<S>;
-
-/**
  * Get the test elements based on the theme configuration.
  *
  * @param applyTheme The theme configuration.
  * @return The test elements configuration.
  */
-export const getTestElements = <S extends CommonSetup>(applyTheme: ApplyTheme<S>) => {
+export const getTestElements = <S extends CommonRenderResult>(applyTheme: ApplyTheme<S>) => {
     const { affects } = applyTheme;
     const testElements = affects.map((configOrNot) => {
         let shouldHaveModifier: boolean = true;
@@ -131,7 +117,7 @@ export const expectTheme = (
  * @param setup The setup function returns the wrapper and the component.
  * @param options The options for the common tests.
  */
-export function commonTestsSuiteRTL<S extends CommonSetup, T>(setup: SetupFunction<S, T>, options: Options<S>): void {
+export function commonTestsSuiteRTL<S extends CommonRenderResult>(setup: SetupFunction<S>, options: Options<S>): void {
     if (isEmpty(options)) {
         return;
     }
