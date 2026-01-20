@@ -44,8 +44,25 @@ async function updateDemoBlock(resourceFolder, addImport, props) {
     }
 
     const demoName = props.demo.replace(/"/g, '');
-    const relativeSourcePath = `./react/${demoName}.tsx`;
-    const sourcePath = path.join(resourceFolder, relativeSourcePath);
+    let relativeSourcePath = `./react/${demoName}.tsx`;
+    let sourcePath = path.join(resourceFolder, relativeSourcePath);
+    let isVue = false;
+
+    // Check if React demo exists, if not, check for Vue demo.
+    try {
+        await fs.promises.access(sourcePath);
+    } catch (e) {
+        const vueRelativeSourcePath = `./vue/${demoName}.vue`;
+        const vueSourcePath = path.join(resourceFolder, vueRelativeSourcePath);
+        try {
+            await fs.promises.access(vueSourcePath);
+            relativeSourcePath = vueRelativeSourcePath;
+            sourcePath = vueSourcePath;
+            isVue = true;
+        } catch (vueE) {
+            // Neither exists, fall back to React path (will fail gracefully in readSourceCode)
+        }
+    }
 
     // Get demo code.
     const code = await readSourceCode(sourcePath);
@@ -57,10 +74,17 @@ async function updateDemoBlock(resourceFolder, addImport, props) {
     // Import demo (will be added at the top).
     let relativePath = path.relative(CONTENT_DIR, sourcePath);
     const demoVar = camelCase(`demo-${relativePath.replace('/', '-')}`);
-    addImport(`import * as ${demoVar} from '@content/${relativePath}';`);
-
-    // Add demo as children.
-    props.children = `{Object.values(${demoVar}).find(v => typeof v === 'function')}`;
+    
+    if (isVue) {
+        addImport("import { VueComponentWrapper } from '@lumx/demo/components/content/VueComponentWrapper';");
+        addImport(`import * as ${demoVar} from '@content/${relativePath}';`);
+        // Wrap in curly braces to treat as a JS expression that returns a function
+        props.children = `{({ theme }) => <VueComponentWrapper component={${demoVar}.default} theme={theme} />}`;
+    } else {
+        addImport(`import * as ${demoVar} from '@content/${relativePath}';`);
+        // Add demo as children.
+        props.children = `{Object.values(${demoVar}).find(v => typeof v === 'function')}`;
+    }
 
     return props;
 }
@@ -72,7 +96,11 @@ module.exports = async (filePath, mdxString) => {
     try {
         const resourceFolder = path.dirname(filePath);
         const imports = [];
-        const addImport = (i) => imports.push(i);
+        const addImport = (i) => {
+            if (!imports.includes(i)) {
+                imports.push(i);
+            }
+        };
 
         // Rewrite demo blocks.
         mdxString = await rewriteJSXComponents(

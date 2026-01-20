@@ -1,5 +1,6 @@
 /* eslint-disable */
 const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin');
+const { VueLoaderPlugin } = require('vue-loader');
 
 const path = require('path');
 const lodash = require('lodash');
@@ -77,13 +78,38 @@ exports.onCreateWebpackConfig = async ({ actions, getConfig }) => {
     await generateJSONIconLibrary();
 
     actions.setWebpackConfig({
-        plugins: [CONFIGS.ignoreNotFoundExport],
+        plugins: [
+            CONFIGS.ignoreNotFoundExport,
+            new VueLoaderPlugin(),
+        ],
 
         resolve: {
             alias: {
                 '@content': path.resolve('./content'),
+                'vue$': 'vue/dist/vue.esm-bundler.js',
             },
-            plugins: [new TsconfigPathsPlugin({ extensions: ['.ts', '.tsx'] })],
+            plugins: [new TsconfigPathsPlugin({ extensions: ['.ts', '.tsx', '.vue'] })],
+        },
+        module: {
+            rules: [
+                {
+                    test: /\.vue$/,
+                    loader: 'vue-loader',
+                },
+                {
+                    test: /\.ts$/,
+                    include: [
+                        path.resolve(__dirname, '../lumx-vue'),
+                        path.resolve(__dirname, 'content'),
+                    ],
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [
+                            ['@babel/preset-typescript', { allExtensions: true, isTSX: true }],
+                        ],
+                    },
+                },
+            ],
         },
     });
 

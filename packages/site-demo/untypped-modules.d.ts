@@ -4,5 +4,6 @@
 declare module 'prismjs';
 declare module '@mdx-js/react';
 declare module '*.svg';
+declare module '*.vue';
 declare module 'highlight-words-core';
 declare module '@lumx/icons/override/generated/icon-library.json';
