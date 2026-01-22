@@ -15,3 +15,4 @@ export type { ValueOf } from './ValueOf';
 export type { LumxClassName } from './LumxClassName';
 export type { Direction } from './Direction';
 export type { Spacing } from './Spacing';
+export type { ObjectValues } from './ObjectValues';
