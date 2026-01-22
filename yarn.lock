@@ -3463,11 +3463,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@lumx/core@npm:^4.0.0, @lumx/core@workspace:packages/lumx-core":
+"@lumx/core@npm:^4.1.0, @lumx/core@workspace:packages/lumx-core":
   version: 0.0.0-use.local
   resolution: "@lumx/core@workspace:packages/lumx-core"
   dependencies:
-    "@lumx/icons": "npm:^4.0.0"
+    "@lumx/icons": "npm:^4.1.0"
     "@rollup/plugin-typescript": "npm:^12.3.0"
     "@testing-library/dom": "npm:^10.4.1"
     "@testing-library/jest-dom": "npm:^6.6.3"
@@ -3495,7 +3495,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@lumx/icons@npm:^4.0.0, @lumx/icons@workspace:packages/lumx-icons":
+"@lumx/icons@npm:^4.1.0, @lumx/icons@workspace:packages/lumx-icons":
   version: 0.0.0-use.local
   resolution: "@lumx/icons@workspace:packages/lumx-icons"
   dependencies:
@@ -3536,7 +3536,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@lumx/react@npm:^4.0.0, @lumx/react@workspace:packages/lumx-react":
+"@lumx/react@npm:^4.1.0, @lumx/react@workspace:packages/lumx-react":
   version: 0.0.0-use.local
   resolution: "@lumx/react@workspace:packages/lumx-react"
   dependencies:
@@ -3544,8 +3544,8 @@ __metadata:
     "@babel/preset-react": "npm:^7.26.3"
     "@babel/preset-typescript": "npm:^7.26.0"
     "@chromatic-com/storybook": "npm:^4.1.1"
-    "@lumx/core": "npm:^4.0.0"
-    "@lumx/icons": "npm:^4.0.0"
+    "@lumx/core": "npm:^4.1.0"
+    "@lumx/icons": "npm:^4.1.0"
     "@popperjs/core": "npm:^2.5.4"
     "@rollup/plugin-babel": "npm:^6.1.0"
     "@rollup/plugin-commonjs": "npm:^29.0.0"
@@ -3598,8 +3598,8 @@ __metadata:
   dependencies:
     "@babel/plugin-transform-react-jsx": "npm:^7.27.1"
     "@chromatic-com/storybook": "npm:^4.1.1"
-    "@lumx/core": "npm:^4.0.0"
-    "@lumx/icons": "npm:^4.0.0"
+    "@lumx/core": "npm:^4.1.0"
+    "@lumx/icons": "npm:^4.1.0"
     "@rollup/plugin-node-resolve": "npm:^16.0.3"
     "@storybook/addon-a11y": "npm:^9.1.4"
     "@storybook/addon-docs": "npm:^9.1.4"
@@ -12579,7 +12579,7 @@ __metadata:
     eslint-config-prettier: "npm:^9.1.0"
     eslint-plugin-import: "npm:2.26.0"
     eslint-plugin-jsx-a11y: "npm:^6.8.0"
-    eslint-plugin-lumapps: "npm:^4.0.0"
+    eslint-plugin-lumapps: "npm:^4.1.0"
     eslint-plugin-prettier: "npm:5.1.3"
     eslint-plugin-react: "npm:^7.29.4"
     eslint-plugin-react-hooks: "npm:4.6.0"
@@ -12755,7 +12755,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-lumapps@npm:^4.0.0, eslint-plugin-lumapps@workspace:dev-packages/eslint-plugin-lumapps":
+"eslint-plugin-lumapps@npm:^4.1.0, eslint-plugin-lumapps@workspace:dev-packages/eslint-plugin-lumapps":
   version: 0.0.0-use.local
   resolution: "eslint-plugin-lumapps@workspace:dev-packages/eslint-plugin-lumapps"
   languageName: unknown
@@ -19101,9 +19101,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "lumx-site-demo@workspace:packages/site-demo"
   dependencies:
-    "@lumx/core": "npm:^4.0.0"
-    "@lumx/icons": "npm:^4.0.0"
-    "@lumx/react": "npm:^4.0.0"
+    "@lumx/core": "npm:^4.1.0"
+    "@lumx/icons": "npm:^4.1.0"
+    "@lumx/react": "npm:^4.1.0"
     "@mdx-js/mdx": "npm:^1.6.22"
     "@mdx-js/react": "npm:^1.6.22"
     "@reach/router": "npm:^1.2.1"
