@@ -1,4 +1,3 @@
-import React from 'react';
 import { mdiPencil } from '@lumx/icons';
 import { GenericBlock, Button, Icon, Size, Thumbnail } from '@lumx/react';
 import { IMAGES } from '@lumx/core/stories/controls/image';

@@ -1,6 +1,6 @@
 import { Kind, Theme } from '../../constants';
 import { INPUT_HELPER_CONFIGURATION } from './constants';
-import { SetupRenderOptions } from '../../../testing';
+import { SetupOptions } from '../../../testing';
 import { getByClassName } from '../../../testing/queries';
 import { InputHelper, InputHelperProps } from '.';
 
@@ -11,23 +11,20 @@ type SetupProps = Partial<InputHelperProps>;
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
-export const setup = <T>(
-    propsOverride: SetupProps = {},
-    { wrapper, render }: SetupRenderOptions<T, InputHelperProps> = {},
-) => {
+export const setup = (propsOverride: SetupProps = {}, { render, ...options }: SetupOptions<InputHelperProps>) => {
     const props: InputHelperProps = {
         children: 'Helper text',
         ...propsOverride,
     };
 
-    render?.(props, { wrapper });
+    render(props, options);
 
     const helper = getByClassName(document.body, CLASSNAME);
 
     return { helper, props };
 };
 
-export default <T>(renderOptions: SetupRenderOptions<T, InputHelperProps>) => {
+export default (renderOptions: SetupOptions<InputHelperProps>) => {
     describe('Props', () => {
         it('should render text', () => {
             const { props, helper } = setup({ children: 'helper text' }, renderOptions);

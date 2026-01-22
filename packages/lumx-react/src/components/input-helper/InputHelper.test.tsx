@@ -8,15 +8,13 @@ import { InputHelper, InputHelperProps } from './InputHelper';
 const CLASSNAME = InputHelper.className as string;
 
 describe(`<${InputHelper.displayName}>`, () => {
-    const renderInputHelper = (props: InputHelperProps, options: SetupRenderOptions<InputHelperProps>) =>
+    const renderInputHelper = (props: InputHelperProps, options?: SetupRenderOptions) =>
         render(<InputHelper {...props} />, options);
 
     BaseInputHelperTests({ render: renderInputHelper });
 
-    const setupInputHelper = (
-        props: Partial<InputHelperProps> = {},
-        options: SetupRenderOptions<InputHelperProps> = {},
-    ) => setup(props, { ...options, render: renderInputHelper });
+    const setupInputHelper = (props: Partial<InputHelperProps> = {}, options: SetupRenderOptions = {}) =>
+        setup(props, { ...options, render: renderInputHelper });
 
     commonTestsSuiteRTL(setupInputHelper, {
         baseClassName: CLASSNAME,

@@ -1,8 +1,11 @@
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
-import type { LumxClassName, GenericProps, HasTheme, JSXElement } from '../../types';
 import { classNames } from '../../utils';
 import { Kind } from '../../constants';
 import { INPUT_HELPER_CONFIGURATION } from './constants';
+import type { LumxClassName, GenericProps, HasTheme, JSXElement } from '../../types';
+
+export const COMPONENT_NAME = 'InputHelper';
+export const InputHelperClassName: LumxClassName<typeof COMPONENT_NAME> = 'lumx-input-helper';
 
 /**
  * Defines the props of the component.
@@ -14,15 +17,7 @@ export interface InputHelperProps extends GenericProps, HasTheme {
     kind?: Kind;
 }
 
-/**
- * Component display name.
- */
-const COMPONENT_NAME = 'InputHelper';
-
-/**
- * Component default class name and class prefix.
- */
-const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-input-helper';
+const CLASSNAME = InputHelperClassName;
 
 /**
  * Component default props.

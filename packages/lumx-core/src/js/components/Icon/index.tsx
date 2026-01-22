@@ -2,10 +2,13 @@ import { mdiAlertCircle } from '@lumx/icons';
 
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import { resolveColorWithVariants } from '@lumx/core/js/utils/_internal/color';
-import type { LumxClassName, GenericProps, HasTheme } from '../../types';
 import { classNames } from '../../utils';
 
-import { ColorPalette, ColorVariant, ColorWithVariants, Size, Theme } from '../../constants';
+import { ColorPalette, Size, Theme, ColorWithVariants, ColorVariant } from '../../constants';
+import type { LumxClassName, GenericProps, HasTheme } from '../../types';
+
+export const COMPONENT_NAME = 'Icon';
+export const IconClassName: LumxClassName<typeof COMPONENT_NAME> = 'lumx-icon';
 
 export type IconSizes = Extract<Size, 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl'>;
 
@@ -30,15 +33,7 @@ export interface IconProps extends GenericProps, HasTheme {
     alt?: string;
 }
 
-/**
- * Component display name.
- */
-const COMPONENT_NAME = 'Icon';
-
-/**
- * Component default class name and class prefix.
- */
-const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-icon';
+const CLASSNAME = IconClassName;
 
 /**
  * Component default props.
