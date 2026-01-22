@@ -9,7 +9,7 @@
         "@lumx/icons": "^4.0.0",
         "classnames": "^2.3.2",
         "focus-visible": "^5.0.2",
-        "lodash": "4.17.21",
+        "lodash": "4.17.23",
         "sass-mq": "^6.0.0"
     },
     "description": "LumX core",
