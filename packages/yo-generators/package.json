@@ -1,7 +1,7 @@
 {
     "dependencies": {
         "chalk": "^2.4.2",
-        "lodash": "4.17.21",
+        "lodash": "4.17.23",
         "yeoman-generator": "^5.10.0"
     },
     "description": "A Yeoman generator to generate a LumX React component with the associated test and demo file.",
