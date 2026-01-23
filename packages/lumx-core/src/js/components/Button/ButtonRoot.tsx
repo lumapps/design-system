@@ -135,18 +135,15 @@ export const ButtonRoot = (props: BaseButtonProps) => {
         }),
     );
 
-    return (
-        <RawClickable
-            as={linkAs || (forwardedProps.href ? 'a' : 'button')}
-            {...forwardedProps}
-            aria-disabled={ariaDisabled}
-            aria-label={ariaLabel}
-            ref={ref as CommonRef<HTMLButtonElement>}
-            className={buttonClassName}
-        >
-            {children}
-        </RawClickable>
-    );
+    return RawClickable({
+        as: linkAs || (forwardedProps.href ? 'a' : 'button'),
+        ...forwardedProps,
+        'aria-disabled': ariaDisabled,
+        'aria-label': ariaLabel,
+        ref: ref as CommonRef<HTMLButtonElement>,
+        className: buttonClassName,
+        children,
+    });
 };
 
 ButtonRoot.displayName = COMPONENT_NAME;
