@@ -3,7 +3,8 @@ import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/uti
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { getByClassName, queryAllByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
-import { Emphasis, Icon } from '@lumx/react';
+import { Emphasis, Icon, Text, Theme, ThemeProvider } from '@lumx/react';
+import { DisabledStateProvider } from '@lumx/react/utils/disabled';
 
 import { Button, ButtonProps } from './Button';
 
@@ -62,6 +63,56 @@ describe(`<${Button.displayName}>`, () => {
             expect(buttonWrapper).toBeInTheDocument();
             expect(button).toBe(within(buttonWrapper as any).queryByRole('button', { name: label }));
         });
+
+        it('should render fullWidth', () => {
+            const { button } = setup({ fullWidth: true });
+            expect(button.className).toContain('lumx-button--is-full-width');
+        });
+
+        it('should render isSelected', () => {
+            const { button } = setup({ isSelected: true });
+            expect(button.className).toContain('lumx-button--is-selected');
+        });
+
+        it('should wrap text children in span', () => {
+            const label = 'Label';
+            const { button } = setup({ children: label });
+            expect(button.querySelector('span')).toHaveTextContent(label);
+        });
+
+        it('should not wrap Text component children', () => {
+            const { button } = setup({ children: <Text as="p">Label</Text> });
+            expect(button.querySelector('p')).toHaveTextContent('Label');
+            expect(button.querySelector('span')).toBeNull();
+        });
+
+        it('should call onClick', async () => {
+            const onClick = vi.fn();
+            const { button } = setup({ onClick });
+            await userEvent.click(button);
+            expect(onClick).toHaveBeenCalledTimes(1);
+        });
+
+        it('should render with type submit', () => {
+            const { button } = setup({ type: 'submit' });
+            expect(button).toHaveAttribute('type', 'submit');
+        });
+
+        it('should render link with target', () => {
+            const { button } = setup({ href: 'https://example.com', target: '_blank' });
+            expect(button).toHaveAttribute('target', '_blank');
+        });
+
+        it('should not apply theme to icons', () => {
+            const { icons } = setup(
+                { leftIcon: mdiCheck, rightIcon: mdiPlus },
+                {
+                    wrapper: ({ children }) => <ThemeProvider value={Theme.dark}>{children}</ThemeProvider>,
+                },
+            );
+            expect(icons[0]).not.toHaveClass('lumx-icon--theme-dark');
+            expect(icons[1]).not.toHaveClass('lumx-icon--theme-dark');
+        });
     });
 
     describe('Disabled state', () => {
@@ -103,6 +154,40 @@ describe(`<${Button.displayName}>`, () => {
             expect(button).toHaveAccessibleName('Label');
             expect(screen.queryByRole('link')).toBeInTheDocument();
             expect(button).toHaveAttribute('aria-disabled', 'true');
+            await userEvent.click(button);
+            expect(onClick).not.toHaveBeenCalled();
+        });
+
+        it('should render disabled button when context is disabled', async () => {
+            const onClick = vi.fn();
+            const { button } = setup(
+                { children: 'Label', onClick },
+                {
+                    wrapper: ({ children }) => (
+                        <DisabledStateProvider state="disabled">{children}</DisabledStateProvider>
+                    ),
+                },
+            );
+            expect(button).toHaveAttribute('disabled');
+            expect(button).toHaveAttribute('aria-disabled', 'true');
+            await userEvent.click(button);
+            expect(onClick).not.toHaveBeenCalled();
+        });
+
+        it('should render disabled link when context is disabled', async () => {
+            const onClick = vi.fn();
+            const { button } = setup(
+                { children: 'Label', href: 'https://example.com', onClick },
+                {
+                    wrapper: ({ children }) => (
+                        <DisabledStateProvider state="disabled">{children}</DisabledStateProvider>
+                    ),
+                },
+            );
+            expect(screen.queryByRole('link')).toBeInTheDocument();
+            expect(button).toHaveAttribute('aria-disabled', 'true');
+            // Simulate standard disabled state (not focusable)
+            expect(button).toHaveAttribute('tabindex', '-1');
             await userEvent.click(button);
             expect(onClick).not.toHaveBeenCalled();
         });
