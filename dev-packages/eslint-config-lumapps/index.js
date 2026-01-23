@@ -20,7 +20,7 @@ const BASE_RULES = {
     'import/no-extraneous-dependencies': [
         'error',
         {
-            devDependencies: ['**/*.test*', '**/*.stories*', '**/testing/**', '**/stories/**'],
+            devDependencies: ['**/*.test*', '**/Tests.ts', '**/*.stories*', '**/testing/**', '**/stories/**'],
         },
     ],
     'indent': 'off',
@@ -70,7 +70,7 @@ module.exports = {
                 'packages/lumx-core/**/*.{js,jsx,ts,tsx}',
                 'site-demo/**/*.{js,jsx,ts,tsx}',
             ],
-            excludedFiles: ['*/*/stories/*', '*.stories.tsx', '**/site-demo/content/**'],
+            excludedFiles: ['**/site-demo/content/**'],
             extends: [
                 'airbnb',
                 'airbnb/hooks',
@@ -92,23 +92,6 @@ module.exports = {
                 'react/no-array-index-key': 'off',
                 'react/prop-types': 'off',
                 'react/require-default-props': 'off',
-            },
-        },
-        {
-            files: ['*/stories/*', '*.stories.tsx', '**/site-demo/content/**'],
-            extends: [
-                'airbnb',
-                'airbnb/hooks',
-                'plugin:react/recommended',
-                'plugin:react/jsx-runtime',
-                ...BASE_EXTENDS,
-            ],
-            plugins: [...BASE_PLUGINS, 'react', 'jsx-a11y'],
-            rules: {
-                ...BASE_RULES,
-                '@typescript-eslint/explicit-module-boundary-types': 'off',
-                'no-alert': 'off',
-                'no-console': 'off',
             },
         },
         // TODO: remove theme switcher

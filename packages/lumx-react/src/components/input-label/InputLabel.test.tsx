@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import BaseInputLabelTests, { setup } from '@lumx/core/js/components/InputLabel/Tests';
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
@@ -11,10 +11,10 @@ describe(`<${InputLabel.displayName}>`, () => {
     const renderInputLabel = (props: InputLabelProps, options?: SetupRenderOptions) =>
         render(<InputLabel {...props} />, options);
 
-    BaseInputLabelTests({ render: renderInputLabel });
+    BaseInputLabelTests({ render: renderInputLabel, screen });
 
     const setupInputLabel = (props: Partial<InputLabelProps> = {}, options: SetupRenderOptions = {}) =>
-        setup(props, { ...options, render: renderInputLabel });
+        setup(props, { ...options, render: renderInputLabel, screen });
 
     commonTestsSuiteRTL(setupInputLabel, {
         baseClassName: CLASSNAME,

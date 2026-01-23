@@ -1,4 +1,4 @@
-import { render } from '@testing-library/vue';
+import { render, screen } from '@testing-library/vue';
 
 import BaseInputHelperTests, { setup } from '@lumx/core/js/components/InputHelper/Tests';
 import { commonTestsSuiteVTL, SetupRenderOptions } from '@lumx/vue/testing';
@@ -11,12 +11,12 @@ describe('<InputHelper />', () => {
     const renderInputHelper = (props: InputHelperProps, options?: SetupRenderOptions<InputHelperProps>) =>
         render(InputHelper, { props, ...options });
 
-    BaseInputHelperTests({ render: renderInputHelper });
+    BaseInputHelperTests({ render: renderInputHelper, screen });
 
     const setupInputHelper = (
         props: Partial<InputHelperProps> = {},
         options: SetupRenderOptions<InputHelperProps> = {},
-    ) => setup(props, { ...options, render: renderInputHelper });
+    ) => setup(props, { ...options, render: renderInputHelper, screen });
 
     // Common tests suite.
     commonTestsSuiteVTL(setupInputHelper, {

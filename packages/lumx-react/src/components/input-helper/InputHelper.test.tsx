@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import BaseInputHelperTests, { setup } from '@lumx/core/js/components/InputHelper/Tests';
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
@@ -11,10 +11,10 @@ describe(`<${InputHelper.displayName}>`, () => {
     const renderInputHelper = (props: InputHelperProps, options?: SetupRenderOptions) =>
         render(<InputHelper {...props} />, options);
 
-    BaseInputHelperTests({ render: renderInputHelper });
+    BaseInputHelperTests({ render: renderInputHelper, screen });
 
     const setupInputHelper = (props: Partial<InputHelperProps> = {}, options: SetupRenderOptions = {}) =>
-        setup(props, { ...options, render: renderInputHelper });
+        setup(props, { ...options, render: renderInputHelper, screen });
 
     commonTestsSuiteRTL(setupInputHelper, {
         baseClassName: CLASSNAME,
