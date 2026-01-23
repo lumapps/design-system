@@ -7,8 +7,9 @@ import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { useDisableStateProps } from '@lumx/react/utils/disabled';
 
-import { BaseButtonProps, ButtonRoot } from './ButtonRoot';
+import { ButtonRoot as UI, BaseButtonProps } from '@lumx/core/js/components/Button/ButtonRoot';
 
 /**
  * Button emphasis definition.
@@ -74,29 +75,39 @@ export const Button = forwardRef<ButtonProps, HTMLButtonElement | HTMLAnchorElem
         getBasicClass({ prefix: CLASSNAME, type: 'hasRightIcon', value: !isEmpty(rightIcon) }),
     );
 
-    return (
-        <ButtonRoot
-            ref={ref}
-            {...{ emphasis, size, theme, ...forwardedProps }}
-            className={buttonClassName}
-            variant="button"
-        >
-            {leftIcon && !isEmpty(leftIcon) && (
-                // Theme is handled in the button scss
-                <ThemeProvider value={undefined}>
-                    <Icon icon={leftIcon} />
-                </ThemeProvider>
-            )}
-            {children && (isComponent(Text)(children) ? children : <span>{children}</span>)}
-            {rightIcon && !isEmpty(rightIcon) && (
-                // Theme is handled in the button scss
-                <ThemeProvider value={undefined}>
-                    <Icon icon={rightIcon} />
-                </ThemeProvider>
-            )}
-        </ButtonRoot>
-    );
+    const { isAnyDisabled, disabledStateProps, otherProps } = useDisableStateProps(forwardedProps);
+
+    return UI({
+        ...forwardedProps,
+        ...otherProps,
+        ...disabledStateProps,
+        theme,
+        emphasis,
+        size,
+        className: buttonClassName,
+        variant: 'button',
+        'aria-disabled': isAnyDisabled,
+        ref,
+        children: (
+            <>
+                {leftIcon && !isEmpty(leftIcon) && (
+                    // Theme is handled in the button scss
+                    <ThemeProvider value={undefined}>
+                        <Icon icon={leftIcon} />
+                    </ThemeProvider>
+                )}
+                {children && (isComponent(Text)(children) ? children : <span>{children}</span>)}
+                {rightIcon && !isEmpty(rightIcon) && (
+                    // Theme is handled in the button scss
+                    <ThemeProvider value={undefined}>
+                        <Icon icon={rightIcon} />
+                    </ThemeProvider>
+                )}
+            </>
+        ),
+    });
 });
+
 Button.displayName = COMPONENT_NAME;
 Button.className = CLASSNAME;
 Button.defaultProps = DEFAULT_PROPS;

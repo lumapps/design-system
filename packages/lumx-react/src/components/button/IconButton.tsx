@@ -1,8 +1,10 @@
 import { Emphasis, Icon, Size, Theme, ThemeProvider, Tooltip, TooltipProps } from '@lumx/react';
-import { BaseButtonProps, ButtonRoot } from '@lumx/react/components/button/ButtonRoot';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { useDisableStateProps } from '@lumx/react/utils/disabled';
+
+import { ButtonRoot as UI, BaseButtonProps } from '@lumx/core/js/components/Button/ButtonRoot';
 
 export interface IconButtonProps extends BaseButtonProps {
     /**
@@ -68,21 +70,35 @@ export const IconButton = forwardRef<IconButtonProps, HTMLButtonElement>((props,
         ...forwardedProps
     } = props;
 
+    const { isAnyDisabled, disabledStateProps, otherProps } = useDisableStateProps(forwardedProps);
+
+    const InternalButton = UI({
+        ref,
+        emphasis,
+        size,
+        theme,
+        ...forwardedProps,
+        ...disabledStateProps,
+        ...otherProps,
+        'aria-label': label,
+        'aria-disabled': isAnyDisabled,
+        variant: 'icon',
+        children: image ? (
+            <img
+                // no need to set alt as an aria-label is already set on the button
+                alt=""
+                src={image}
+            />
+        ) : (
+            <ThemeProvider value={undefined}>
+                <Icon icon={icon as string} />
+            </ThemeProvider>
+        ),
+    });
+
     return (
         <Tooltip label={hideTooltip ? '' : label} {...tooltipProps}>
-            <ButtonRoot ref={ref} {...{ emphasis, size, theme, ...forwardedProps }} aria-label={label} variant="icon">
-                {image ? (
-                    <img
-                        // no need to set alt as an aria-label is already set on the button
-                        alt=""
-                        src={image}
-                    />
-                ) : (
-                    <ThemeProvider value={undefined}>
-                        <Icon icon={icon as string} />
-                    </ThemeProvider>
-                )}
-            </ButtonRoot>
+            {InternalButton}
         </Tooltip>
     );
 });

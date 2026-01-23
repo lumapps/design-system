@@ -1,9 +1,8 @@
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
-import { useDisableStateProps } from '@lumx/react/utils/disabled';
 
-import { ButtonRoot as UI, ButtonRootProps } from '@lumx/core/js/components/Button/ButtonRoot';
+import { ButtonRoot as UI, ButtonRootProps, BaseButtonProps } from '@lumx/core/js/components/Button/ButtonRoot';
 
-export type { ButtonRootProps as BaseButtonProps };
+export type { ButtonRootProps, BaseButtonProps };
 
 /**
  * ButtonRoot component.
@@ -13,12 +12,8 @@ export type { ButtonRootProps as BaseButtonProps };
  * @return React element.
  */
 export const ButtonRoot = forwardRef<ButtonRootProps, HTMLButtonElement | HTMLAnchorElement>((props, ref) => {
-    const { isAnyDisabled, disabledStateProps, otherProps } = useDisableStateProps(props);
-
     return UI({
-        ...otherProps,
-        ...disabledStateProps,
-        'aria-disabled': isAnyDisabled,
+        ...props,
         ref,
     });
 });
