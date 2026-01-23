@@ -5,7 +5,6 @@ import { Size, Theme } from '@lumx/core/js/constants';
 import { Chip } from '@lumx/react/components/chip/Chip';
 import { Icon } from '@lumx/react/components/icon/Icon';
 import { InputLabel } from '@lumx/react/components/input-label/InputLabel';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
@@ -34,6 +33,7 @@ const COMPONENT_NAME = 'Select';
 
 /** The default class name and classes prefix for this component. */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-select';
+const { block, element } = classNames.bem(CLASSNAME);
 
 /** The default value of props. */
 const DEFAULT_PROPS: Partial<SelectMultipleProps> = {
@@ -87,13 +87,8 @@ export const SelectMultipleField: React.FC<SelectMultipleProps> = (props) => {
             {variant === SelectVariant.input && (
                 <>
                     {label && (
-                        <div className={`${CLASSNAME}__header`}>
-                            <InputLabel
-                                htmlFor={id}
-                                className={`${CLASSNAME}__label`}
-                                isRequired={isRequired}
-                                theme={theme}
-                            >
+                        <div className={element('header')}>
+                            <InputLabel htmlFor={id} className={element('label')} isRequired={isRequired} theme={theme}>
                                 {label}
                             </InputLabel>
                         </div>
@@ -103,7 +98,7 @@ export const SelectMultipleField: React.FC<SelectMultipleProps> = (props) => {
                     <div
                         ref={mergeRefs(anchorRef as RefObject<HTMLDivElement>, selectElementRef)}
                         id={id}
-                        className={`${CLASSNAME}__wrapper`}
+                        className={element('wrapper')}
                         onClick={onInputClick}
                         onKeyDown={handleKeyboardNav}
                         tabIndex={isDisabled ? undefined : 0}
@@ -112,25 +107,20 @@ export const SelectMultipleField: React.FC<SelectMultipleProps> = (props) => {
                     >
                         {icon && (
                             <Icon
-                                className={`${CLASSNAME}__input-icon`}
+                                className={element('input-icon')}
                                 color={theme === Theme.dark ? 'light' : undefined}
                                 icon={icon}
                                 size={Size.xs}
                             />
                         )}
 
-                        <div className={`${CLASSNAME}__chips`}>
+                        <div className={element('chips')}>
                             {!isEmpty &&
                                 value.map((val, index) => selectedChipRender?.(val, index, onClear, isDisabled, theme))}
                         </div>
 
                         {isEmpty && placeholder && (
-                            <div
-                                className={classNames.join([
-                                    `${CLASSNAME}__input-native`,
-                                    `${CLASSNAME}__input-native--placeholder`,
-                                ])}
-                            >
+                            <div className={element('input-native', { placeholder: true })}>
                                 <span>{placeholder}</span>
                             </div>
                         )}
@@ -190,9 +180,8 @@ export const SelectMultiple = forwardRef<SelectMultipleProps, HTMLDivElement>((p
             ...props,
             className: classNames.join(
                 props.className,
-                handleBasicClasses({
-                    hasMultiple: !props.isEmpty,
-                    prefix: CLASSNAME,
+                block({
+                    'has-multiple': !props.isEmpty,
                 }),
             ),
             isEmpty: props.value.length === 0,

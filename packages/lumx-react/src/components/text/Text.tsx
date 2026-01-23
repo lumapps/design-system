@@ -1,8 +1,8 @@
 import { ColorWithVariants, ColorVariant, Typography, WhiteSpace } from '@lumx/react';
 import { GenericProps, TextElement } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import { classNames } from '@lumx/core/js/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
+
 import { useOverflowTooltipLabel } from '@lumx/react/hooks/useOverflowTooltipLabel';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
@@ -60,6 +60,7 @@ const COMPONENT_NAME = 'Text';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-text';
+const { block } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -110,14 +111,13 @@ export const Text = forwardRef<TextProps>((props, ref) => {
             ref={useMergeRefs(ref as React.Ref<any>, labelRef)}
             className={classNames.join(
                 className,
-                handleBasicClasses({
-                    prefix: CLASSNAME,
-                    isTruncated: isTruncated && !isTruncatedMultiline,
-                    isTruncatedMultiline,
+                block({
+                    'is-truncated': isTruncated && !isTruncatedMultiline,
+                    'is-truncated-multiline': isTruncatedMultiline,
+                    'no-wrap': noWrap,
                 }),
                 typography && classNames.typography(typography),
                 color && classNames.font(color, colorVariant),
-                noWrap && `${CLASSNAME}--no-wrap`,
             )}
             title={tooltipLabel}
             style={{ ...truncateLinesStyle, ...whiteSpaceStyle, ...style }}

@@ -2,7 +2,6 @@ import { Children, ReactNode } from 'react';
 
 import { Avatar, Size, Theme, Tooltip } from '@lumx/react';
 import { GenericProps, HasTheme, ValueOf } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
@@ -73,6 +72,7 @@ const COMPONENT_NAME = 'CommentBlock';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-comment-block';
+const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -117,29 +117,28 @@ export const CommentBlock = forwardRef<CommentBlockProps, HTMLDivElement>((props
             ref={ref}
             className={classNames.join(
                 className,
-                handleBasicClasses({
-                    hasChildren: hasChildren && isOpen,
-                    hasIndentedChildren: hasChildren && variant === CommentBlockVariant.indented,
-                    hasLinearChildren: hasChildren && variant === CommentBlockVariant.linear,
-                    isRelevant,
-                    prefix: CLASSNAME,
-                    theme,
+                block({
+                    'has-children': hasChildren && isOpen,
+                    'has-indented-children': hasChildren && variant === CommentBlockVariant.indented,
+                    'has-linear-children': hasChildren && variant === CommentBlockVariant.linear,
+                    'is-relevant': isRelevant,
+                    [`theme-${theme}`]: Boolean(theme),
                 }),
             )}
             {...forwardedProps}
         >
-            <div className={`${CLASSNAME}__wrapper`}>
-                <div className={`${CLASSNAME}__avatar`}>
+            <div className={element('wrapper')}>
+                <div className={element('avatar')}>
                     <Avatar {...avatarProps} size={Size.m} onClick={onClick} />
                 </div>
 
-                <div className={`${CLASSNAME}__container`}>
-                    <div className={`${CLASSNAME}__content`}>
-                        <div className={`${CLASSNAME}__meta`}>
+                <div className={element('container')}>
+                    <div className={element('content')}>
+                        <div className={element('meta')}>
                             {name && (
                                 // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
                                 <span
-                                    className={`${CLASSNAME}__name`}
+                                    className={element('name')}
                                     onClick={onClick}
                                     onMouseEnter={onMouseEnter}
                                     onMouseLeave={onMouseLeave}
@@ -147,23 +146,23 @@ export const CommentBlock = forwardRef<CommentBlockProps, HTMLDivElement>((props
                                     {name}
                                 </span>
                             )}
-                            {headerActions && <span className={`${CLASSNAME}__header-actions`}>{headerActions}</span>}
+                            {headerActions && <span className={element('header-actions')}>{headerActions}</span>}
                         </div>
 
-                        <div className={`${CLASSNAME}__text`}>{text}</div>
+                        <div className={element('text')}>{text}</div>
                         {date &&
                             (fullDate ? (
                                 <Tooltip label={fullDate} placement="top">
-                                    <span className={`${CLASSNAME}__date`}>{date}</span>
+                                    <span className={element('date')}>{date}</span>
                                 </Tooltip>
                             ) : (
-                                <span className={`${CLASSNAME}__date`}>{date}</span>
+                                <span className={element('date')}>{date}</span>
                             ))}
                     </div>
-                    {hasActions && <div className={`${CLASSNAME}__actions`}>{actions}</div>}
+                    {hasActions && <div className={element('actions')}>{actions}</div>}
                 </div>
             </div>
-            {hasChildren && isOpen && <div className={`${CLASSNAME}__children`}>{children}</div>}
+            {hasChildren && isOpen && <div className={element('children')}>{children}</div>}
         </div>
     );
 });

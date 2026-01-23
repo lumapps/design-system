@@ -41,6 +41,7 @@ const COMPONENT_NAME = 'InlineList';
  * Component default class name and class prefix.
  */
 const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-inline-list';
+const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -63,8 +64,7 @@ export const InlineList = forwardRef<InlineListProps>((props, ref) => {
             ref={ref as any}
             className={classNames.join(
                 className,
-                CLASSNAME,
-                wrap && `${CLASSNAME}--wrap`,
+                block({ wrap: Boolean(wrap) }),
                 color && classNames.font(color, colorVariant),
                 typography && classNames.typography(typography),
             )}
@@ -76,9 +76,9 @@ export const InlineList = forwardRef<InlineListProps>((props, ref) => {
                 return (
                     // We need to item is set as display: contents which removes the semantic.
                     // eslint-disable-next-line jsx-a11y/no-redundant-roles
-                    <li key={key} role="listitem" className={`${CLASSNAME}__item`}>
+                    <li key={key} role="listitem" className={element('item')}>
                         {index !== 0 && (
-                            <span className={`${CLASSNAME}__item-separator`} aria-hidden="true">
+                            <span className={element('item-separator')} aria-hidden="true">
                                 {'\u00A0•\u00A0'}
                             </span>
                         )}
