@@ -1,4 +1,4 @@
-import { render } from '@testing-library/vue';
+import { render, screen } from '@testing-library/vue';
 
 import BaseInputLabelTests, { setup } from '@lumx/core/js/components/InputLabel/Tests';
 import { commonTestsSuiteVTL, SetupRenderOptions } from '@lumx/vue/testing';
@@ -11,10 +11,10 @@ describe('<InputLabel />', () => {
     const renderInputHelper = (props: InputLabelProps, options?: SetupRenderOptions<InputLabelProps>) =>
         render(InputLabel, { props, ...options });
 
-    BaseInputLabelTests({ render: renderInputHelper });
+    BaseInputLabelTests({ render: renderInputHelper, screen });
 
     const setupInputLabel = (props: Partial<InputLabelProps> = {}, options: SetupRenderOptions<InputLabelProps> = {}) =>
-        setup(props, { ...options, render: renderInputHelper });
+        setup(props, { ...options, render: renderInputHelper, screen });
 
     commonTestsSuiteVTL(setupInputLabel, {
         baseClassName: CLASSNAME,

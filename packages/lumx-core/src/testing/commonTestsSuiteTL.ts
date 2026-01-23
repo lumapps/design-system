@@ -1,6 +1,7 @@
 import castArray from 'lodash/castArray';
 import isEmpty from 'lodash/isEmpty';
 
+import { Screen } from '@testing-library/dom';
 import { GenericProps } from '../js/types';
 import { Theme } from '../js/constants';
 
@@ -17,6 +18,7 @@ export type SetupRenderOptions = {
 
 export type SetupOptions<Props extends GenericProps> = {
     render: (props: Props, options?: SetupRenderOptions) => Partial<SetupResult>;
+    screen: Screen;
 } & SetupRenderOptions;
 
 export type SetupFunction = (props?: GenericProps, options?: SetupRenderOptions) => Partial<SetupResult>;

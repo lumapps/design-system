@@ -44,7 +44,6 @@ const DEFAULT_PROPS: Partial<IconProps> = {};
  * Icon component.
  *
  * @param  props Component props.
- * @param  ref   Component ref.
  */
 export const Icon = (props: IconProps) => {
     const {

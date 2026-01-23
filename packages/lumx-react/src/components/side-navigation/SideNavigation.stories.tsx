@@ -4,7 +4,14 @@ import React from 'react';
 import { mdiAccount } from '@lumx/icons';
 import { Emphasis, SideNavigation, SideNavigationItem } from '@lumx/react';
 
-export default { title: 'LumX components/side-navigation/Side Navigation' };
+export default {
+    title: 'LumX components/side-navigation/Side Navigation',
+    argTypes: {
+        onActionClick: {
+            action: true,
+        },
+    },
+};
 
 const CustomLink: React.FC<{ children?: React.ReactNode }> = ({ children, ...props }) =>
     React.createElement('a', { ...props, style: { color: 'red' } }, children);
@@ -118,12 +125,12 @@ export const With3LevelsAndIcons = () => {
     );
 };
 
-export const With3LevelsAndMultiActions = () => {
+export const With3LevelsAndMultiActions = ({ onActionSave }: { onActionSave: (message: string) => void }) => {
     const [l1IsOpen, setL1IsOpen] = React.useState(true);
     const [l2IsOpen, setL2IsOpen] = React.useState(true);
     const toggleL1 = () => setL1IsOpen(!l1IsOpen);
     const toggleL2 = () => setL2IsOpen(!l2IsOpen);
-    const alertMessage = (message: string) => () => alert(message);
+    const alertMessage = (message: string) => () => onActionSave(message);
 
     return (
         <SideNavigation>

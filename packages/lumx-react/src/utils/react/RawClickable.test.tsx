@@ -1,6 +1,11 @@
 import React from 'react';
+
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+
+import { SetupRenderOptions } from '@lumx/core/testing';
+import BaseRawClickableTests from '@lumx/core/js/components/RawClickable/Tests';
+
 import { RawClickable, RawClickableProps } from './RawClickable';
 import { CustomLink } from '../../stories/utils/CustomLink';
 
@@ -13,91 +18,11 @@ const setup = (props: RawClickableProps<any>) => {
     return { props, element };
 };
 
-describe(`<RawClickable>`, () => {
-    describe('as a button', () => {
-        it('should render a button by default', () => {
-            const { element } = setup({ as: 'button', children: 'Click me' });
-            expect(element.tagName).toBe('BUTTON');
-            expect(element).toHaveAttribute('type', 'button');
-            expect(screen.getByRole('button', { name: 'Click me' })).toBe(element);
-        });
+describe('<RawClickable>', () => {
+    const renderRawClickable = (props: RawClickableProps<any>, options?: SetupRenderOptions) =>
+        render(<RawClickable {...props} />, options);
 
-        it('should trigger onClick', async () => {
-            const onClick = vi.fn();
-            const { element } = setup({ as: 'button', children: 'Click me', onClick });
-            await userEvent.click(element);
-            expect(onClick).toHaveBeenCalledTimes(1);
-        });
-
-        it('should be disabled with `disabled` prop', async () => {
-            const onClick = vi.fn();
-            const { element } = setup({ as: 'button', children: 'Click me', onClick, disabled: true });
-            expect(element).toBeDisabled();
-            await userEvent.click(element);
-            expect(onClick).not.toHaveBeenCalled();
-        });
-
-        it('should be disabled with `isDisabled` prop', async () => {
-            const onClick = vi.fn();
-            const { element } = setup({ as: 'button', children: 'Click me', onClick, isDisabled: true });
-            expect(element).toBeDisabled();
-            await userEvent.click(element);
-            expect(onClick).not.toHaveBeenCalled();
-        });
-
-        it('should be aria-disabled with `aria-disabled` prop', async () => {
-            const onClick = vi.fn();
-            const { element } = setup({ as: 'button', children: 'Click me', onClick, 'aria-disabled': true });
-            expect(element).not.toBeDisabled();
-            expect(element).toHaveAttribute('aria-disabled', 'true');
-            await userEvent.click(element);
-            expect(onClick).not.toHaveBeenCalled();
-        });
-    });
-
-    describe('as a link', () => {
-        const href = 'https://example.com';
-
-        it('should render a link with `href` prop', () => {
-            const { element } = setup({ as: 'a', children: 'Click me', href });
-            expect(element.tagName).toBe('A');
-            expect(element).toHaveAttribute('href', href);
-            expect(screen.getByRole('link', { name: 'Click me' })).toBe(element);
-        });
-
-        it('should trigger onClick', async () => {
-            const onClick = vi.fn((evt: any) => evt.preventDefault());
-            const { element } = setup({ as: 'a', children: 'Click me', href, onClick });
-            await userEvent.click(element);
-            expect(onClick).toHaveBeenCalledTimes(1);
-        });
-
-        it('should be disabled with `disabled` prop', async () => {
-            const onClick = vi.fn();
-            const { element } = setup({ as: 'a', children: 'Click me', href, onClick, disabled: true });
-            expect(element).toHaveAttribute('aria-disabled', 'true');
-            expect(element).toHaveAttribute('tabindex', '-1');
-            await userEvent.click(element);
-            expect(onClick).not.toHaveBeenCalled();
-        });
-
-        it('should be disabled with `isDisabled` prop', async () => {
-            const onClick = vi.fn();
-            const { element } = setup({ as: 'a', children: 'Click me', href, onClick, isDisabled: true });
-            expect(element).toHaveAttribute('aria-disabled', 'true');
-            expect(element).toHaveAttribute('tabindex', '-1');
-            await userEvent.click(element);
-            expect(onClick).not.toHaveBeenCalled();
-        });
-
-        it('should be aria-disabled with `aria-disabled` prop', async () => {
-            const onClick = vi.fn();
-            const { element } = setup({ as: 'a', children: 'Click me', href, onClick, 'aria-disabled': true });
-            expect(element).toHaveAttribute('aria-disabled', 'true');
-            await userEvent.click(element);
-            expect(onClick).not.toHaveBeenCalled();
-        });
-    });
+    BaseRawClickableTests({ render: renderRawClickable, screen });
 
     describe('as a custom component', () => {
         it('should render a custom component with `linkAs` prop', () => {

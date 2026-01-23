@@ -11,6 +11,7 @@ export default {
         groupBy: { control: 'number' },
         autoPlay: { control: 'boolean' },
         interval: { control: 'number' },
+        onClick: { action: true },
     },
 };
 
@@ -42,7 +43,7 @@ export const Simple = ({ images = Object.values(LANDSCAPE_IMAGES), ...props }: a
 export const SimpleWithAutoPlay: any = Simple.bind({});
 SimpleWithAutoPlay.args = { autoPlay: true };
 
-export const ResponsiveSlideShowSwipe = () => {
+export const ResponsiveSlideShowSwipe = ({ onClick }: { onClick: (message: string) => void }) => {
     const slides = range(5);
     return (
         <>
@@ -69,7 +70,7 @@ export const ResponsiveSlideShowSwipe = () => {
                                 hAlign="center"
                                 vAlign="center"
                             >
-                                <Button onClick={() => alert(`Clicked button ${slide}`)}>Button {slide}</Button>
+                                <Button onClick={() => onClick(`Clicked button ${slide}`)}>Button {slide}</Button>
                             </FlexBox>
                         </SlideshowItem>
                     ))}
