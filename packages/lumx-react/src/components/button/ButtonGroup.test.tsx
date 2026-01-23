@@ -31,6 +31,13 @@ const setup = (propsOverride: SetupProps = {}) => {
 };
 
 describe(`<${ButtonGroup.displayName}>`, () => {
+    describe('Props', () => {
+        it('should render children', () => {
+            const { buttonGroup } = setup();
+            expect(buttonGroup).toHaveTextContent('Label');
+        });
+    });
+
     // Common tests suite.
     commonTestsSuiteRTL(setup, {
         baseClassName: CLASSNAME,
