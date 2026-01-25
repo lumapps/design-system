@@ -30,17 +30,17 @@ export interface ButtonProps extends BaseButtonProps {
 /**
  * Component display name.
  */
-const COMPONENT_NAME = 'Button';
+export const COMPONENT_NAME = 'Button';
 
 /**
  * Component default class name and class prefix.
  */
-const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-button';
+export const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-button';
 
 /**
  * Component default props.
  */
-const DEFAULT_PROPS: Partial<ButtonProps> = {
+export const DEFAULT_PROPS: Partial<ButtonProps> = {
     emphasis: Emphasis.high,
     size: Size.m,
 };

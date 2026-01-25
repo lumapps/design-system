@@ -1,15 +1,18 @@
 import isEmpty from 'lodash/isEmpty';
 
-import { Emphasis, Icon, Size, Theme, Text, ThemeProvider } from '@lumx/react';
+import { Emphasis, Icon, Theme, Text, ThemeProvider } from '@lumx/react';
 import { isComponent } from '@lumx/react/utils/type';
-import { getBasicClass } from '@lumx/core/js/utils/_internal/className';
-import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useDisableStateProps } from '@lumx/react/utils/disabled';
 
-import { ButtonRoot as UI, BaseButtonProps } from '@lumx/core/js/components/Button/ButtonRoot';
+import {
+    Button as UI,
+    ButtonProps,
+    CLASSNAME,
+    COMPONENT_NAME,
+    DEFAULT_PROPS,
+} from '@lumx/core/js/components/Button/Button';
 
 /**
  * Button emphasis definition.
@@ -20,34 +23,8 @@ export const ButtonEmphasis = Emphasis;
 /**
  * Defines the props of the component.
  */
-export interface ButtonProps extends BaseButtonProps {
-    /** Left icon (SVG path). */
-    leftIcon?: string;
-    /** Right icon (SVG path). */
-    rightIcon?: string;
-    /** When `true`, the button gets as large as possible. */
-    fullWidth?: boolean;
-    /** Children */
-    children?: React.ReactNode;
-}
-
-/**
- * Component display name.
- */
-const COMPONENT_NAME = 'Button';
-
-/**
- * Component default class name and class prefix.
- */
-const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-button';
-
-/**
- * Component default props.
- */
-const DEFAULT_PROPS: Partial<ButtonProps> = {
-    emphasis: Emphasis.high,
-    size: Size.m,
-};
+export type { ButtonProps };
+export { CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS };
 
 /**
  * Button component.
@@ -58,33 +35,14 @@ const DEFAULT_PROPS: Partial<ButtonProps> = {
  */
 export const Button = forwardRef<ButtonProps, HTMLButtonElement | HTMLAnchorElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
-    const {
-        children,
-        className,
-        emphasis = DEFAULT_PROPS.emphasis,
-        leftIcon,
-        rightIcon,
-        size = DEFAULT_PROPS.size,
-        theme = defaultTheme,
-        ...forwardedProps
-    } = props;
-
-    const buttonClassName = classNames.join(
-        className,
-        getBasicClass({ prefix: CLASSNAME, type: 'hasLeftIcon', value: !isEmpty(leftIcon) }),
-        getBasicClass({ prefix: CLASSNAME, type: 'hasRightIcon', value: !isEmpty(rightIcon) }),
-    );
-
-    const { isAnyDisabled, disabledStateProps, otherProps } = useDisableStateProps(forwardedProps);
+    const { leftIcon, rightIcon, children } = props;
+    const { isAnyDisabled, disabledStateProps, otherProps } = useDisableStateProps(props);
 
     return UI({
-        ...forwardedProps,
+        ...props,
         ...otherProps,
         ...disabledStateProps,
-        theme,
-        emphasis,
-        size,
-        className: buttonClassName,
+        theme: defaultTheme,
         variant: 'button',
         'aria-disabled': isAnyDisabled,
         ref,

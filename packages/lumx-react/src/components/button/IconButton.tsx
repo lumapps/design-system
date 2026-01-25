@@ -102,6 +102,7 @@ export const IconButton = forwardRef<IconButtonProps, HTMLButtonElement>((props,
         </Tooltip>
     );
 });
+
 IconButton.displayName = COMPONENT_NAME;
 IconButton.className = CLASSNAME;
 IconButton.defaultProps = DEFAULT_PROPS;
