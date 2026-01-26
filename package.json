@@ -5,7 +5,7 @@
     },
     "description": "The official LumApps Design System (LumX) for AngularJS and React applications",
     "devDependencies": {
-        "@vitest/ui": "^3.0.0",
+        "@vitest/ui": "^4.0.18",
         "changelog-verify": "^1.1.2",
         "es-abstract": "1.17.6",
         "eslint": "^8.57.0",
@@ -20,7 +20,7 @@
         "stylelint-config-recess-order": "^3.0.0",
         "stylelint-config-standard-scss": "^5.0.0",
         "typescript": "^5.4.3",
-        "vitest": "^3.0.0",
+        "vitest": "^4.0.18",
         "vue-eslint-parser": "^10.2.0",
         "yo": "^5.1.0"
     },
