@@ -4,7 +4,7 @@ import { Avatar, FlexBox, IconButton, type Theme } from '@lumx/react';
 export default ({ theme }: { theme?: Theme }) => (
     <Avatar
         theme={theme}
-        image="/demo-assets/persona.png"
+        image="https://i.pravatar.cc/128?img=32"
         alt="Avatar with actions"
         size="xl"
         actions={

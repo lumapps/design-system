@@ -19,6 +19,8 @@ interface Props {
     children?: React.ReactNode;
     /** Render as */
     as?: 'pre' | 'div';
+    /** Disables import collapse */
+    disableCollapseImports?: boolean;
 }
 
 /** Display syntax highlighted code */
@@ -28,6 +30,7 @@ export const CodeBlock: React.FC<Props> = ({
     codeString,
     language: propLanguage,
     children,
+    disableCollapseImports,
 }) => {
     const language = propLanguage || className?.match(/language-(\w+)/)?.[1];
     if (!language) {
@@ -39,7 +42,7 @@ export const CodeBlock: React.FC<Props> = ({
         <Highlight {...defaultProps} theme={prismTheme} code={code} language={language as Language}>
             {({ className: prismClassName, ...renderParams }) => (
                 <Component className={classNames('code-block', prismClassName, className)}>
-                    {language === 'jsx' || language === 'tsx'
+                    {!disableCollapseImports && (language === 'jsx' || language === 'tsx')
                         ? renderJSXLinesWithCollapsedImports(renderParams)
                         : renderLines(renderParams)}
                 </Component>

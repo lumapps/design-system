@@ -25,7 +25,7 @@ export default () => (
 
         <ListItem
             size="huge"
-            before={<Thumbnail variant="rounded" alt="Thumbnail" image="/demo-assets/square1.jpg" size="m" />}
+            before={<Thumbnail variant="rounded" alt="Thumbnail" image="https://picsum.photos/id/1/128/128" size="m" />}
             after={<IconButton label="More" emphasis="low" icon={mdiDotsHorizontal} />}
         >
             <Text as="p">Multi-line item</Text>
@@ -37,7 +37,7 @@ export default () => (
 
         <ListItem
             size="huge"
-            before={<Avatar image="/demo-assets/persona.png" alt="Avatar" size="m" />}
+            before={<Avatar image="https://i.pravatar.cc/128?img=32" alt="Avatar" size="m" />}
             after={<Button emphasis="low">Button</Button>}
         >
             <Text as="p">Multi-line item</Text>

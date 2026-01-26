@@ -1,10 +1,10 @@
 import { FlexBox, ImageLightbox, Message, Text, Thumbnail } from '@lumx/react';
 
 const images = [
-    { image: '/demo-assets/portrait1.jpg', alt: 'Portrait 1' },
-    { image: '/demo-assets/portrait2.jpg', alt: 'Portrait 2' },
-    { image: '/demo-assets/landscape3.jpg', alt: 'Landscape 3' },
-    { image: '/demo-assets/landscape2.jpg', alt: 'Landscape 2' },
+    { image: 'https://picsum.photos/id/653/275/500', alt: 'Portrait 1' },
+    { image: 'https://picsum.photos/id/670/350/500', alt: 'Portrait 2' },
+    { image: 'https://picsum.photos/id/24/640/480', alt: 'Landscape 3' },
+    { image: 'https://picsum.photos/id/535/640/480', alt: 'Landscape 2' },
 ];
 
 export default () => {

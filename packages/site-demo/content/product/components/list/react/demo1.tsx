@@ -17,12 +17,14 @@ export default () => (
 
         <ListItem
             size="tiny"
-            before={<Thumbnail variant="rounded" alt="Thumbnail" image="/demo-assets/square1.jpg" size="xs" />}
+            before={
+                <Thumbnail variant="rounded" alt="Thumbnail" image="https://picsum.photos/id/1/128/128" size="xs" />
+            }
         >
             Single-line item
         </ListItem>
 
-        <ListItem size="tiny" before={<Avatar image="/demo-assets/persona.png" alt="Avatar" size="xs" />}>
+        <ListItem size="tiny" before={<Avatar image="https://i.pravatar.cc/128?img=32" alt="Avatar" size="xs" />}>
             Single-line item
         </ListItem>
     </List>

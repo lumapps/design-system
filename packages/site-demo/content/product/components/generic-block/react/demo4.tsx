@@ -8,7 +8,7 @@ export default () => (
                 <Placeholder name="2" height={154} width={216} />
             </GenericBlock.Figure>
             <GenericBlock.Content className="lumx-spacing-padding-horizontal-big" vAlign="left" gap="tiny">
-                <UserBlock name="Emmitt O. Lum" avatarProps={{ image: '/demo-assets/persona.png' }} size="s" />
+                <UserBlock name="Emmitt O. Lum" avatarProps={{ image: 'https://i.pravatar.cc/128?img=32' }} size="s" />
                 <Heading as="h2" typography="subtitle2">
                     Fiscal Year Results and Conference
                 </Heading>

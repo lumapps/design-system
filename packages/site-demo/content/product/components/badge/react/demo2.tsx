@@ -12,7 +12,7 @@ export default () => (
         </Badge>
 
         <Avatar
-            image="/demo-assets/persona.png"
+            image="https://i.pravatar.cc/128?img=32"
             alt="Avatar with icon"
             size="m"
             badge={
@@ -23,7 +23,7 @@ export default () => (
         />
 
         <Avatar
-            image="/demo-assets/persona.png"
+            image="https://i.pravatar.cc/128?img=32"
             alt="Avatar with icon"
             size="m"
             badge={

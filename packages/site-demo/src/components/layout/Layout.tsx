@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
+import upperFirst from 'lodash/upperFirst';
 
 import { Message } from '@lumx/react';
+import { classNames } from '@lumx/core/js/utils';
 
 import { MainHeader } from './MainHeader/MainHeader';
 import { MainContent } from './MainContent/MainContent';
@@ -43,7 +45,9 @@ export const Layout: React.FC<Props> = ({ children, location, pageContext }) => 
                     <MainHeader openNavButtonRef={openNavButtonRef} openMenu={openMenu} />
                     {/* Warning when selected framework is not supported on this page */}
                     {pageFrameworks && !pageFrameworks.includes(framework) && (
-                        <Message kind="warning">This page does not have {framework} examples.</Message>
+                        <Message kind="warning" hasBackground className={classNames.margin('vertical')}>
+                            This page does not provide documentation for {upperFirst(framework)}
+                        </Message>
                     )}
                     <MainContent>{children}</MainContent>
                 </div>

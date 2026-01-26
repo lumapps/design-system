@@ -1,19 +1,24 @@
 @import "@lumx/core/src/scss/design-tokens";
 @import "@lumx/core/src/scss/core";
 
-/* ==========================================================================
-   Demo block
-   ========================================================================== */
-
 .demo-block {
     $self: &;
 
     border: 1px solid $lumx-color-dark-L4;
     border-radius: var(--lumx-border-radius);
+    // margin-bottom: $lumx-spacing-unit-huge; // Usually handled by layout
 
     &__content {
-        padding: $lumx-spacing-unit * 3;
-        overflow: auto;
+        .live-preview__static {
+            padding: $lumx-spacing-unit * 3;
+            overflow: auto;
+        }
+
+        display: grid;
+        height: max-content;
+        & > * {
+            grid-area: 1 /1;
+        }
 
         #{$self}--has-play-button & {
             display: flex;
@@ -25,12 +30,9 @@
     &__toolbar {
         display: flex;
         align-items: center;
+        gap: $lumx-spacing-unit;
         padding: $lumx-spacing-unit $lumx-spacing-unit * 2 $lumx-spacing-unit $lumx-spacing-unit;
         border-top: 1px solid $lumx-color-dark-L4;
-    }
-
-    &__code-toggle {
-        flex: 1 1 auto;
     }
 
     &__theme-toggle {
@@ -38,47 +40,27 @@
         margin-left: auto;
     }
 
+    // Override SandPack styles
+    .sp-wrapper {
+        .cm-content {
+            padding: 0 12px;
+        }
+        .sp-preview-container, .sp-preview, .sp-preview-iframe {
+            background: none;
+            min-height: 0px;
+        }
+    }
+
     &__code {
         display: none;
+
+        .code-block {
+            border: none;
+        }
 
         &--shown {
             display: block;
             border-top: 1px solid $lumx-color-dark-L4;
-        }
-    }
-
-    &__code-part {
-        overflow: visible;
-        border: none;
-        border-radius: 0;
-        padding: 0;
-        margin: $lumx-spacing-unit-big;
-        white-space: break-spaces;
-
-        textarea {
-            overflow: visible !important;
-            outline-offset: 4px !important;
-            transition-property: outline;
-
-            &:hover {
-                outline: 1px solid $lumx-color-primary-L3;
-            }
-            &:focus-visible {
-                outline: 2px solid $lumx-color-primary-N;
-            }
-        }
-
-        &--editable {
-            // Override react-live inline styles
-            > div {
-                overflow: visible !important;
-
-                background-color: transparent !important;
-            }
-            pre, textarea {
-                padding: 0 !important;
-                font-family: monospace !important;
-            }
         }
     }
 

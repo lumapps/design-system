@@ -21,6 +21,7 @@
             "@lumx/vue/*": ["lumx-vue/src/*"],
             "@lumx/icons": ["lumx-icons/dist"],
             "@lumx/icons/*": ["lumx-icons/dist/*"],
+            "@lumx/demo/demo-assets/*": ["site-demo/static/demo-assets/*"],
             "@lumx/demo/*": ["site-demo/src/*"]
         },
         "strict": true,

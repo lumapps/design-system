@@ -2,16 +2,16 @@ import { Thumbnail } from '@lumx/react';
 
 export default () => (
     <>
-        <Thumbnail image="/demo-assets/landscape3.jpg" alt="Landscape" aspectRatio="original" size="xl" />
+        <Thumbnail image="https://picsum.photos/id/24/640/480" alt="Landscape" aspectRatio="original" size="xl" />
 
         <Thumbnail
-            image="/demo-assets/portrait3.jpg"
+            image="https://picsum.photos/id/885/300/500"
             alt="Portrait"
             aspectRatio="vertical"
             size="xl"
             variant="rounded"
         />
 
-        <Thumbnail alt="Square" image="/demo-assets/square1.jpg" aspectRatio="square" size="l" />
+        <Thumbnail alt="Square" image="https://picsum.photos/id/1/128/128" aspectRatio="square" size="l" />
     </>
 );

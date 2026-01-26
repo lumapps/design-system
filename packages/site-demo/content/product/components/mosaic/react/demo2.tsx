@@ -4,9 +4,9 @@ export default () => (
     <div style={{ width: 250 }}>
         <Mosaic
             thumbnails={[
-                { image: '/demo-assets/landscape1.jpg', alt: 'Landscape' },
-                { image: '/demo-assets/portrait1.jpg', alt: 'Portrait 1' },
-                { image: '/demo-assets/portrait2.jpg', alt: 'Portrait 2' },
+                { image: 'https://picsum.photos/id/256/800/546', alt: 'Landscape' },
+                { image: 'https://picsum.photos/id/653/275/500', alt: 'Portrait 1' },
+                { image: 'https://picsum.photos/id/670/350/500', alt: 'Portrait 2' },
             ]}
         />
     </div>

@@ -8,7 +8,7 @@ export default ({ theme }: { theme?: Theme }) => (
             link="https://google.com"
             size="big"
             theme={theme}
-            thumbnailProps={{ image: '/demo-assets/landscape3.jpg', alt: 'Landscape' }}
+            thumbnailProps={{ image: 'https://picsum.photos/id/24/640/480', alt: 'Landscape' }}
         />
     </div>
 );
