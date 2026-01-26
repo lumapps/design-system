@@ -72,6 +72,9 @@ jobs:
         steps:
             - name: 'Checkout repository'
               uses: actions/checkout@v5
+              with:
+                  # Need to fetch all for the increment package versions step
+                  fetch-depth: 0
 
             - name: 'Setup'
               uses: ./.github/actions/setup

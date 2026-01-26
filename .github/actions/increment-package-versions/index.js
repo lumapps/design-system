@@ -31,7 +31,7 @@ async function main({ inputs, context }) {
             process.exit(1);
         }
 
-        const localVersion = require(`${process.env.GITHUB_WORKSPACE}/lerna.json`).version;
+        const localVersion = require(`${process.env.GITHUB_WORKSPACE}/package.json`).version;
         if (localVersion !== npmLatestVersion) {
             console.log(`NPM latest version (${npmLatestVersion}) does not match the local latest version (${localVersion}).\n`);
             process.exit(1);
@@ -65,15 +65,12 @@ async function main({ inputs, context }) {
     const nextVersion = semver.inc(baseVersion, releaseType, prereleaseName);
     console.log(`New ${releaseType} version: ${nextVersion}`);
 
-    // Checkout new branch (lerna version requires this)
+    // Checkout new branch
     const releaseBranch = `release/${nextVersion}`;
     await run(`git checkout -b ${releaseBranch}`);
 
     // Update version in all packages
-    await run(`yarn lerna version --no-git-tag-version --yes ${nextVersion}`);
-
-    // Update yarn.lock with new package versions
-    await run(`YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn install`);
+    await run(`yarn workspaces foreach -A version ${nextVersion}`);
 
     // Update version in changelog (need to run in a package which has a version, so not the root package)
     await run(`yarn workspace @lumx/core update-version-changelog`);

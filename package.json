@@ -12,7 +12,6 @@
         "eslint-plugin-vue": "9.32.0",
         "husky": "^5.0.4",
         "jsx-ast-utils": "^3.1.0",
-        "lerna": "^3.18.4",
         "lint-staged": "^10.5.3",
         "postcss-hover-media-feature": "^0.3.1",
         "prettier": "^3.2.5",
@@ -51,15 +50,15 @@
         "url": "git+https://github.com/lumapps/design-system.git"
     },
     "scripts": {
-        "build": "lerna run --stream build",
-        "build:libs": "lerna run --no-private --stream build",
+        "build:libs": "yarn workspaces foreach --all --no-private --parallel --interlaced --topological -v run build",
         "build:site": "yarn workspace lumx-site-demo clean && yarn workspace lumx-site-demo build",
         "build:react": "yarn workspace @lumx/react build",
         "build:core": "yarn workspace @lumx/core build",
         "build:icons": "yarn workspace @lumx/icons build",
+        "build:vue": "yarn workspace @lumx/vue build",
         "build:storybook": "yarn workspace @lumx/react build:storybook",
         "chromatic": "npx chromatic -b build:storybook",
-        "clean": "rm -rf packages/*/dist; lerna clean --yes && lerna run --stream clean",
+        "clean": "yarn workspaces foreach --all --parallel run clean",
         "clean:git-hooks": "yarn husky uninstall",
         "format": "yarn format:code && yarn format:style",
         "format:style": "prettier-stylelint --prettier-last --write packages/**/*.{css,scss}",
@@ -67,8 +66,6 @@
         "lint": "yarn lint:code; yarn lint:style",
         "lint:style": "stylelint packages/**/*.{css,scss}",
         "lint:code": "eslint packages/",
-        "prepare": "lerna run --stream prepare",
-        "release": "yarn lerna publish --force-publish",
         "scaffold": "yo lumx-component --with-tests --with-demo",
         "setup:git-hooks": "yarn husky uninstall && yarn husky install || exit 0",
         "start": "yarn workspace lumx-site-demo start",
@@ -85,5 +82,6 @@
         "packages/*",
         "dev-packages/*"
     ],
-    "packageManager": "yarn@4.12.0"
+    "packageManager": "yarn@4.12.0",
+    "version": "4.1.0"
 }
