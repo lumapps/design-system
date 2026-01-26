@@ -6,7 +6,7 @@ export default ({ theme }: { theme?: Theme }) => (
         name="Emmitt O. Lum"
         nameProps={{ 'aria-label': 'Emmitt O. Lum - open user profile' }}
         fields={['Creative developer', 'Denpasar']}
-        avatarProps={{ image: '/demo-assets/persona.png' }}
+        avatarProps={{ image: 'https://i.pravatar.cc/128?img=32' }}
         size="s"
         onClick={console.log}
     />

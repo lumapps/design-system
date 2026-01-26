@@ -42,7 +42,9 @@ export default () => {
                     <GenericBlock
                         className="lumx-spacing-margin-left-regular"
                         hAlign="center"
-                        figure={<Thumbnail alt="" image="/demo-assets/square1.jpg" size="m" variant="rounded" />}
+                        figure={
+                            <Thumbnail alt="" image="https://picsum.photos/id/1/128/128" size="m" variant="rounded" />
+                        }
                     >
                         <Heading typography="body1">With thumbnail</Heading>
                     </GenericBlock>
@@ -69,7 +71,9 @@ export default () => {
                     <GenericBlock
                         className="lumx-spacing-margin-left-regular"
                         hAlign="center"
-                        figure={<Thumbnail alt="" image="/demo-assets/square1.jpg" size="m" variant="rounded" />}
+                        figure={
+                            <Thumbnail alt="" image="https://picsum.photos/id/1/128/128" size="m" variant="rounded" />
+                        }
                     >
                         <Heading typography="body1">With thumbnail</Heading>
                         <Text as="p" typography="caption" color="dark-L2">
@@ -126,7 +130,9 @@ export default () => {
                 <header>
                     <GenericBlock
                         hAlign="center"
-                        figure={<Thumbnail alt="" image="/demo-assets/square1.jpg" size="m" variant="rounded" />}
+                        figure={
+                            <Thumbnail alt="" image="https://picsum.photos/id/1/128/128" size="m" variant="rounded" />
+                        }
                     >
                         <Heading typography="body1">With Dividers</Heading>
                     </GenericBlock>
@@ -148,7 +154,9 @@ export default () => {
                 <header>
                     <GenericBlock
                         hAlign="center"
-                        figure={<Thumbnail alt="" image="/demo-assets/square1.jpg" size="m" variant="rounded" />}
+                        figure={
+                            <Thumbnail alt="" image="https://picsum.photos/id/1/128/128" size="m" variant="rounded" />
+                        }
                     >
                         <Heading typography="body1">With Dividers</Heading>
                     </GenericBlock>

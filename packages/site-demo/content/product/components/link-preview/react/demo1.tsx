@@ -6,6 +6,6 @@ export default ({ theme }: { theme?: Theme }) => (
         description="Description"
         link="https://google.com"
         theme={theme}
-        thumbnailProps={{ image: '/demo-assets/landscape1.jpg', alt: 'Landscape' }}
+        thumbnailProps={{ image: 'https://picsum.photos/id/256/800/546', alt: 'Landscape' }}
     />
 );

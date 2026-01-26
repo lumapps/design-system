@@ -11,7 +11,7 @@ export default ({ theme }: { theme?: Theme }) => (
             </FlexBox>
         }
         description="Lorem ipsum dolor sit amet, consectur adipiscing "
-        image="/demo-assets/landscape1.jpg"
+        image="https://picsum.photos/id/256/800/546"
         tags={
             <ChipGroup>
                 <Chip size="s" theme={theme}>

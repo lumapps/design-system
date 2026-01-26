@@ -16,7 +16,7 @@ export default () => {
                 closeButtonProps={{ label: 'Close' }}
             >
                 <FlexBox vAlign="center" hAlign="center" style={{ height: '100%' }}>
-                    <Thumbnail alt="Portrait image" image="/demo-assets/portrait1.jpg" />
+                    <Thumbnail alt="Portrait image" image="https://picsum.photos/id/653/275/500" />
                 </FlexBox>
             </Lightbox>
         </>

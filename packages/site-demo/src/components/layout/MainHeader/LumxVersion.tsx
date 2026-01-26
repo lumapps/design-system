@@ -1,20 +1,9 @@
 import { mdiTagOutline } from '@lumx/icons';
 import { Button } from '@lumx/react';
-import { graphql, useStaticQuery } from 'gatsby';
-
-const query = graphql`
-    query LumxVersion {
-        site {
-            siteMetadata {
-                version
-            }
-        }
-    }
-`;
+import { useLumxVersion } from '@lumx/demo/utils/hooks/useLumxVersion';
 
 export const LumxVersion: React.FC = () => {
-    const data = useStaticQuery(query);
-    const { version } = data.site.siteMetadata;
+    const version = useLumxVersion();
     return (
         <Button
             emphasis="low"

@@ -1,17 +1,15 @@
 import React from 'react';
+import { Framework } from '../../layout/FrameworkContext';
 
-export interface ReactDemo {
-    default: React.FC<any>;
-    scope: Record<string, any>;
-    code: string;
-    imports: string;
-}
-
-export interface VueDemo {
-    default: string;
-}
+/** Map of @lumx/demo import paths to their source code */
+export type localImports = Record<string, string>;
 
 export interface Demo {
-    react?: ReactDemo;
-    vue?: VueDemo;
+    default?: React.FC<any>;
+    sourceCode: string;
+    localImports: localImports;
 }
+
+export type Demos = {
+    [framework in Framework]: Demo;
+};

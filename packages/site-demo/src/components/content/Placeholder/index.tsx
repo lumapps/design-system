@@ -1,3 +1,5 @@
+import type React from 'react';
+
 type Props = React.FC<{
     name: string;
     height?: React.CSSProperties['height'];

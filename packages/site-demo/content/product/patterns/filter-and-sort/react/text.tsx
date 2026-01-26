@@ -14,22 +14,22 @@ import { useState } from 'react';
 
 const RESULTS = [
     {
-        thumbnail: '/demo-assets/square1.jpg',
+        thumbnail: 'https://picsum.photos/id/1/128/128',
         label: 'Apple Juice',
         city: 'Perth',
     },
     {
-        thumbnail: '/demo-assets/square2.jpg',
+        thumbnail: 'https://picsum.photos/id/511/300/300',
         label: 'Apple pie',
         city: 'Zurich',
     },
     {
-        thumbnail: '/demo-assets/square1.jpg',
+        thumbnail: 'https://picsum.photos/id/1/128/128',
         label: 'Kiwi juie',
         city: 'Bologna',
     },
     {
-        thumbnail: '/demo-assets/square2.jpg',
+        thumbnail: 'https://picsum.photos/id/511/300/300',
         label: 'Kiwi pie',
         city: 'Lima',
     },

@@ -5,7 +5,7 @@ export default () => (
         <UserBlock
             name="Emmitt O. Lum"
             fields={['Creative developer', 'Denpasar']}
-            avatar="/demo-assets/persona.png"
+            avatar="https://i.pravatar.cc/128?img=32"
             size="m"
         />
 

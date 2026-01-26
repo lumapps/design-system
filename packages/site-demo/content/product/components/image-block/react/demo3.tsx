@@ -4,7 +4,7 @@ export default ({ theme }: { theme?: Theme }) => (
     <ImageBlock
         captionPosition="over"
         description="Lorem ipsum dolor sit amet, consectur adipiscing "
-        image="/demo-assets/landscape2.jpg"
+        image="https://picsum.photos/id/535/640/480"
         tags={
             <ChipGroup>
                 <Chip size="s" theme={theme}>

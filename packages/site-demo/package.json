@@ -21,6 +21,7 @@
         "type-check": "yarn tsc -p tsconfig.json"
     },
     "dependencies": {
+        "@codesandbox/sandpack-react": "^2.20.0",
         "@gatsbyjs/reach-router": "^2.0.1",
         "@lumx/core": "^4.2.0",
         "@lumx/icons": "^4.2.0",

@@ -6,7 +6,7 @@ export default () => (
     <>
         <GenericBlock as="article" orientation="vertical" vAlign="center">
             <GenericBlock.Figure>
-                <Avatar image="/demo-assets/persona.png" alt="Emmitt O Lum. Profile Photo" size="l" />
+                <Avatar image="https://i.pravatar.cc/128?img=32" alt="Emmitt O Lum. Profile Photo" size="l" />
             </GenericBlock.Figure>
             <GenericBlock.Content>
                 <Placeholder name="2" height={52} width={104} />
@@ -18,7 +18,7 @@ export default () => (
 
         <GenericBlock as="article" orientation="vertical" vAlign="center">
             <GenericBlock.Figure>
-                <Thumbnail image="/demo-assets/landscape3.jpg" alt="Book" variant="rounded" size="xl" />
+                <Thumbnail image="https://picsum.photos/id/24/640/480" alt="Book" variant="rounded" size="xl" />
             </GenericBlock.Figure>
             <GenericBlock.Content>
                 <Placeholder name="2" height={52} width={104} />

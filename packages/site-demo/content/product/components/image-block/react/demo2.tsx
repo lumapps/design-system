@@ -6,7 +6,7 @@ export default () => (
             className="lumx-color-background-light-N"
             captionStyle={{ padding: 16 }}
             description="Lorem ipsum dolor sit amet, consectur adipiscing "
-            image="/demo-assets/landscape3.jpg"
+            image="https://picsum.photos/id/24/640/480"
             tags={
                 <ChipGroup>
                     <Chip size="s">Tag 1</Chip>

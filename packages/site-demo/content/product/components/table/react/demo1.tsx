@@ -22,7 +22,7 @@ const initialTable = [
         dessert: 'Frozen yogurt',
         fat: 6.0,
         id: 1,
-        image: '/demo-assets/landscape1.jpg',
+        image: 'https://picsum.photos/id/256/800/546',
     },
     {
         calories: 237,
@@ -30,7 +30,7 @@ const initialTable = [
         dessert: 'Ice cream sandwich',
         fat: 9.0,
         id: 2,
-        image: '/demo-assets/landscape2.jpg',
+        image: 'https://picsum.photos/id/535/640/480',
     },
     {
         calories: 262,
@@ -38,7 +38,7 @@ const initialTable = [
         dessert: 'Eclair',
         fat: 16.0,
         id: 3,
-        image: '/demo-assets/landscape3.jpg',
+        image: 'https://picsum.photos/id/24/640/480',
     },
 ];
 const initialHeaders: Array<{
