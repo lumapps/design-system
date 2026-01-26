@@ -2,19 +2,15 @@
 import { vi } from 'vitest';
 import '@testing-library/jest-dom';
 
-// Mock the intersection observer for Vitest
-global.IntersectionObserver = class IntersectionObserver {
-    root = null;
+vi.stubGlobal(
+    'IntersectionObserver',
+    vi.fn(
+        class {
+            disconnect = vi.fn();
 
-    rootMargin = '';
+            observe = vi.fn();
 
-    thresholds = [];
-
-    observe = vi.fn();
-
-    unobserve = vi.fn();
-
-    disconnect = vi.fn();
-
-    takeRecords = vi.fn();
-};
+            unobserve = vi.fn();
+        },
+    ),
+);

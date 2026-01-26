@@ -13,11 +13,15 @@ describe('useIntersectionObserver', () => {
         const disconnect = vi.fn();
 
         // Mock IntersectionObserver
-        const MockObserver = vi.fn(() => ({
-            observe,
-            disconnect,
-            unobserve: vi.fn(),
-        }));
+        const MockObserver = vi.fn(
+            class {
+                observe = observe;
+
+                disconnect = disconnect;
+
+                unobserve = vi.fn();
+            },
+        );
         vi.stubGlobal('IntersectionObserver', MockObserver);
 
         const element = document.createElement('div');
