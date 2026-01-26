@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/core`:
     -   Moved `RawClickable` from `@lumx/react`
     -   Moved `ButtonRoot` from `@lumx/react`
+    -   Moved `Button` from `@lumx/react`
+    -   Moved `ButtonGroup` from `@lumx/react`
 
 ## [4.1.0][] - 2026-01-22
 
