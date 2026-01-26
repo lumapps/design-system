@@ -8,6 +8,8 @@ import {
 
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
+export type { ButtonGroupProps };
+
 /**
  * ButtonGroup component.
  *
