@@ -47,7 +47,7 @@
         "glob": "^7.1.6",
         "jsdom": "^27.2.0",
         "postcss": "^8.5.6",
-        "rollup": "^4.53.3",
+        "rollup": "^4.56.0",
         "rollup-plugin-cleaner": "^1.0.0",
         "rollup-plugin-copy": "^3.5.0",
         "rollup-plugin-ts-paths-resolve": "^1.7.1",
