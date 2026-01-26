@@ -36,7 +36,7 @@ async function buildJSFiles() {
         promises.push(
             fs.writeFile(
                 path.join(distEsmPath, `${kebabName}.js`),
-                `export const ${formattedName} = /*#__PURE__*/ '${iconPath}';`,
+                `export const ${formattedName} = '${iconPath}';`,
             ),
         );
 
