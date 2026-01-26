@@ -2,7 +2,7 @@
     "extends": "./tsconfig.json",
     "compilerOptions": {
         "module": "ESNext",
-        "moduleResolution": "Bundler",
+        "moduleResolution": "bundler",
         "allowImportingTsExtensions": false,
         "noEmit": false,
         "emitDeclarationOnly": true,

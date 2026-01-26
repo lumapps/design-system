@@ -20,7 +20,7 @@
         "forceConsistentCasingInFileNames": true,
         "lib": ["es2020", "dom"],
         "module": "ESNext",
-        "moduleResolution": "node",
+        "moduleResolution": "bundler",
         "noEmit": true,
         "noErrorTruncation": true,
         "noFallthroughCasesInSwitch": false,
