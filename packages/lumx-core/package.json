@@ -51,7 +51,7 @@
         "rollup-plugin-cleaner": "^1.0.0",
         "rollup-plugin-copy": "^3.5.0",
         "rollup-plugin-ts-paths-resolve": "^1.7.1",
-        "sass": "^1.54.0",
+        "sass": "1.70.0",
         "style-dictionary": "^3.9.0",
         "tinycolor2": "^1.4.1",
         "typescript": "^5.4.3",
