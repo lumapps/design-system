@@ -3,7 +3,7 @@ import camelCase from 'lodash/camelCase';
 
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/core/js/utils/_internal/className';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import {
     getByClassName,
     getByTagName,
@@ -181,6 +181,25 @@ describe(`<${TextField.displayName}>`, () => {
             expect(inputNative).toHaveAttribute('aria-describedby', expect.stringContaining('aria-description'));
             expect(inputNative).toHaveAttribute('aria-describedby', expect.stringContaining('text-field-error-'));
             expect(inputNative).toHaveAttribute('aria-describedby', expect.stringContaining('text-field-helper-'));
+        });
+
+        it('should render chips', () => {
+            const { container } = setup({ chips: <span data-testid="chip">Chip</span> });
+            expect(screen.getByTestId('chip')).toBeInTheDocument();
+            expect(container.querySelector(`.${CLASSNAME}__chips`)).toBeInTheDocument();
+        });
+
+        it('should render afterElement', () => {
+            const { container } = setup({ afterElement: <span data-testid="after">After</span> });
+            expect(screen.getByTestId('after')).toBeInTheDocument();
+            expect(container.querySelector(`.${CLASSNAME}__after-element`)).toBeInTheDocument();
+        });
+
+        it('should render character counter', () => {
+            const { container } = setup({ maxLength: 100, value: 'test' });
+            const counter = container.querySelector(`.${CLASSNAME}__char-counter`);
+            expect(counter).toBeInTheDocument();
+            expect(counter).toHaveTextContent('96'); // 100 - 4
         });
     });
 

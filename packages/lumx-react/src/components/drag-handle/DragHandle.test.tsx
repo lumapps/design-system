@@ -2,6 +2,7 @@ import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/uti
 
 import { render } from '@testing-library/react';
 import { queryByClassName } from '@lumx/react/testing/utils/queries';
+import { Theme } from '@lumx/react';
 import { DragHandle, DragHandleProps } from './DragHandle';
 
 const CLASSNAME = DragHandle.className as string;
@@ -32,5 +33,24 @@ describe(`<${DragHandle.displayName}>`, () => {
             viaProp: true,
             viaContext: true,
         },
+    });
+
+    describe('Rendering', () => {
+        it('should render icon', () => {
+            const { handle } = setup();
+            expect(handle?.querySelector('.lumx-icon')).toBeInTheDocument();
+        });
+
+        it('should use dark color for light theme (default)', () => {
+            const { handle } = setup({ theme: Theme.light });
+            const icon = handle?.querySelector('.lumx-icon');
+            expect(icon).toHaveClass('lumx-icon--color-dark');
+        });
+
+        it('should use light color for dark theme', () => {
+            const { handle } = setup({ theme: Theme.dark });
+            const icon = handle?.querySelector('.lumx-icon');
+            expect(icon).toHaveClass('lumx-icon--color-light');
+        });
     });
 });

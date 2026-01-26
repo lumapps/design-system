@@ -1,7 +1,7 @@
 import { ColorPalette } from '@lumx/react';
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import { getByClassName } from '@lumx/react/testing/utils/queries';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { Badge, BadgeProps } from './Badge';
 
 const CLASSNAME = Badge.className as string;
@@ -32,6 +32,19 @@ describe(`<${Badge.displayName}>`, () => {
             const { badge } = setup({ color: ColorPalette.red });
 
             expect(badge).toHaveClass('lumx-badge--color-red');
+        });
+    });
+
+    describe('Content Rendering', () => {
+        it('should render string content', () => {
+            setup({ children: 'New Content' });
+            expect(screen.getByText('New Content')).toBeInTheDocument();
+        });
+
+        it('should render empty children', () => {
+            const { badge } = setup({ children: null });
+            expect(badge).toBeInTheDocument();
+            expect(badge).toBeEmptyDOMElement();
         });
     });
 

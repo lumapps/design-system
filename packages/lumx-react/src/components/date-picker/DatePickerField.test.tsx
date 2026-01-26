@@ -2,13 +2,14 @@ import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/uti
 import { render, screen } from '@testing-library/react';
 import { getByClassName, getByTagName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import { TextField } from '@lumx/react';
+import { vi } from 'vitest';
 
 import userEvent from '@testing-library/user-event';
 import { DatePickerField, DatePickerFieldProps } from './DatePickerField';
 import { CLASSNAME } from './constants';
 
 const mockedDate = new Date(1487721600000);
-Date.now = vi.fn(() => mockedDate.valueOf());
+
 vi.mock('@lumx/react/utils/date/getYearDisplayName', () => ({
     getYearDisplayName: () => 'année',
 }));
@@ -31,6 +32,15 @@ const setup = (propsOverride: Partial<DatePickerFieldProps> = {}, { wrapper }: S
 };
 
 describe(`<${DatePickerField.displayName}>`, () => {
+    beforeEach(() => {
+        vi.useFakeTimers({ toFake: ['Date'] });
+        vi.setSystemTime(mockedDate);
+    });
+
+    afterEach(() => {
+        vi.useRealTimers();
+    });
+
     it('should render', () => {
         const { inputNative, props } = setup();
         expect(inputNative).toBe(screen.queryByRole('textbox', { name: props.label }));
@@ -53,6 +63,24 @@ describe(`<${DatePickerField.displayName}>`, () => {
         expect(inputNative).toHaveFocus();
         await userEvent.keyboard('[Enter]');
         expect(getDatePicker()).toBeInTheDocument();
+    });
+
+    it('should select a date and close popover', async () => {
+        const { getDatePicker, inputNative, props } = setup();
+
+        // Open
+        await userEvent.click(inputNative);
+        expect(getDatePicker()).toBeInTheDocument();
+
+        // Select a date (e.g. 15th)
+        // Note: DatePicker renders in a Portal, so getDatePicker finds it in document.body
+        // The date picker popover renders at the bottom of the body usually.
+        // We use screen.getByRole which queries the whole document.
+        const dayBtn = screen.getByRole('button', { name: /15 février 2017/i });
+        await userEvent.click(dayBtn);
+
+        expect(props.onChange).toHaveBeenCalledWith(expect.any(Date), undefined);
+        expect(getDatePicker()).not.toBeInTheDocument();
     });
 
     commonTestsSuiteRTL(setup, {

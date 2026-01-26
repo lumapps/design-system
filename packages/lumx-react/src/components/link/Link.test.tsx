@@ -54,6 +54,16 @@ describe(`<${Link.displayName}>`, () => {
             expect(link).toBe(screen.queryByRole('button', { name }));
         });
 
+        it('should render as a different element', () => {
+            setup({ linkAs: 'span', children: 'Link' });
+            expect(screen.getByText('Link').closest('span')).toBeInTheDocument();
+        });
+
+        it('should forward target prop to anchor', () => {
+            const { link } = setup({ href: 'https://example.com', target: '_blank', children: 'Link' });
+            expect(link).toHaveAttribute('target', '_blank');
+        });
+
         it('should render with icons', () => {
             const { link } = setup({
                 leftIcon: mdiCheck,

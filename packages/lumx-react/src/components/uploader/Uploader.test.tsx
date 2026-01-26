@@ -1,6 +1,6 @@
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { getByClassName, getByTagName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import userEvent from '@testing-library/user-event';
 import { mdiPlus } from '@lumx/icons';
@@ -127,6 +127,17 @@ describe(`<${Uploader.displayName}>`, () => {
             // Activate with Space
             await userEvent.keyboard('[Space]');
             assertClick();
+        });
+
+        it('should apply drag hovering class', () => {
+            const { uploader, input } = setup({ fileInputProps: { onChange: vi.fn() } });
+            expect(uploader).not.toHaveClass(`${CLASSNAME}--is-drag-hovering`);
+
+            fireEvent.dragEnter(input as HTMLElement);
+            expect(uploader).toHaveClass(`${CLASSNAME}--is-drag-hovering`);
+
+            fireEvent.dragLeave(input as HTMLElement);
+            expect(uploader).not.toHaveClass(`${CLASSNAME}--is-drag-hovering`);
         });
     });
 

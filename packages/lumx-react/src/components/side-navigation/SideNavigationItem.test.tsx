@@ -1,6 +1,8 @@
 import { getAllByClassName, queryAllByClassName } from '@lumx/react/testing/utils/queries';
 import { render, screen } from '@testing-library/react';
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { mdiHome } from '@lumx/icons';
+import { Emphasis } from '@lumx/react';
 
 import { SideNavigationItem, SideNavigationItemProps } from './SideNavigationItem';
 
@@ -47,6 +49,23 @@ describe(`<${SideNavigationItem.displayName}>`, () => {
         expect(link).toBe(screen.queryByRole('link', { name: label }));
         expect(link).toHaveAttribute('href', props.linkProps?.href);
         expect(link).not.toHaveAttribute('aria-expanded');
+    });
+
+    describe('Props', () => {
+        it('should render icon', () => {
+            const { icon } = setup({ icon: mdiHome });
+            expect(icon).toBeInTheDocument();
+        });
+
+        it('should apply emphasis class', () => {
+            const { sideNavigation } = setup({ emphasis: Emphasis.low });
+            expect(sideNavigation).toHaveClass(`${CLASSNAME}--emphasis-low`);
+        });
+
+        it('should apply selected class', () => {
+            const { sideNavigation } = setup({ isSelected: true });
+            expect(sideNavigation).toHaveClass(`${CLASSNAME}--is-selected`);
+        });
     });
 
     describe('children', () => {

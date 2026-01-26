@@ -41,6 +41,18 @@ describe(`<${InlineList.displayName}>`, () => {
             const { inlineList } = setup({ color: 'blue', colorVariant: 'D2', children: 'Some text' });
             expect(inlineList).toHaveClass('lumx-color-font-blue-D2');
         });
+
+        it('should apply wrap class', () => {
+            const { inlineList } = setup({ wrap: true, children: 'Some text' });
+            expect(inlineList).toHaveClass(`${CLASSNAME}--wrap`);
+        });
+
+        it('should render separators between items', () => {
+            setup({ children: ['Item 1', 'Item 2', 'Item 3'] });
+            const separators = document.querySelectorAll(`.${CLASSNAME}__item-separator`);
+            expect(separators.length).toBe(2);
+            expect(separators[0].textContent).toMatch(/•/);
+        });
     });
 
     // Common tests suite.

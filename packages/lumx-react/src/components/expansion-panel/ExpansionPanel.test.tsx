@@ -6,6 +6,7 @@ import userEvent from '@testing-library/user-event';
 import { isFocusVisible } from '@lumx/react/utils/browser/isFocusVisible';
 
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
+import { DragHandle } from '@lumx/react';
 import { ExpansionPanel, ExpansionPanelProps } from '.';
 
 const CLASSNAME = ExpansionPanel.className as string;
@@ -95,6 +96,29 @@ describe(`<${ExpansionPanel.displayName}>`, () => {
             const { query } = setup({ label: labelText, children: <header>{headerText}</header> });
 
             expect(query.header()).toHaveTextContent(headerText);
+        });
+
+        it('should render drag handle', () => {
+            const { element } = setup({ children: <DragHandle /> });
+            expect(element).toHaveClass(`${CLASSNAME}--is-draggable`);
+            expect(element.querySelector('.lumx-drag-handle')).toBeInTheDocument();
+        });
+
+        it('should render footer', () => {
+            setup({ isOpen: true, children: <footer>Footer Content</footer> });
+            const footerContent = screen.getByText('Footer Content');
+            expect(footerContent).toBeInTheDocument();
+            expect(footerContent.closest(`.${CLASSNAME}__footer`)).toBeInTheDocument();
+        });
+
+        it('should apply background class', () => {
+            const { element } = setup({ hasBackground: true });
+            expect(element).toHaveClass(`${CLASSNAME}--has-background`);
+        });
+
+        it('should apply header divider class', () => {
+            const { element } = setup({ hasHeaderDivider: true });
+            expect(element).toHaveClass(`${CLASSNAME}--has-header-divider`);
         });
     });
 

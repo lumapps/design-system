@@ -1,8 +1,10 @@
+import React from 'react';
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 
 import { getByClassName, getByTagName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { mdiCheck, mdiMinus } from '@lumx/icons';
 import { Checkbox, CheckboxProps } from './Checkbox';
 
 const CLASSNAME = Checkbox.className as string;
@@ -92,6 +94,38 @@ describe(`<${Checkbox.displayName}>`, () => {
             });
 
             expect(input).toHaveAttribute('aria-labelledby', props.inputProps['aria-labelledby']);
+        });
+
+        it('should forward name and value to input', () => {
+            const { input } = setup({ name: 'test-name', value: 'test-value' });
+            expect(input).toHaveAttribute('name', 'test-name');
+            expect(input).toHaveAttribute('value', 'test-value');
+        });
+
+        it('should forward ref to the root element', () => {
+            const ref = React.createRef<HTMLDivElement>();
+            setup({ ref } as any);
+            expect(ref.current).toHaveClass(CLASSNAME);
+        });
+
+        it('should forward inputRef to the native input', () => {
+            const inputRef = React.createRef<HTMLInputElement>();
+            setup({ inputRef });
+            expect(inputRef.current).toBeInstanceOf(HTMLInputElement);
+        });
+    });
+
+    describe('Icon Rendering', () => {
+        it('should render check icon when checked', () => {
+            const { checkbox } = setup({ isChecked: true });
+            const path = checkbox.querySelector('path');
+            expect(path).toHaveAttribute('d', mdiCheck);
+        });
+
+        it('should render minus icon when intermediate', () => {
+            const { checkbox } = setup({ isChecked: 'intermediate' });
+            const path = checkbox.querySelector('path');
+            expect(path).toHaveAttribute('d', mdiMinus);
         });
     });
 

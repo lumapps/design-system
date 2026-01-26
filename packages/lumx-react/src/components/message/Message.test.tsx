@@ -6,6 +6,7 @@ import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/quer
 import { mdiAbTesting } from '@lumx/icons';
 
 import userEvent from '@testing-library/user-event';
+import { vi } from 'vitest';
 import { Message, MessageProps } from './Message';
 
 const CLASSNAME = Message.className as string;
@@ -50,6 +51,11 @@ describe(`<${Message.displayName}>`, () => {
             expect(message.className).toEqual(expect.stringMatching(/\blumx-message--color-\w+\b/));
             expect(icon).toBeInTheDocument();
             expect(closeButton).not.toBeInTheDocument();
+        });
+
+        it('should use correct icon color based on kind', () => {
+            const { icon } = setup({ kind: Kind.error });
+            expect(icon).toHaveClass('lumx-icon--color-red');
         });
 
         it('should render close button', async () => {

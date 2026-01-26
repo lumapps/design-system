@@ -2,7 +2,9 @@ import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/uti
 import { render, screen } from '@testing-library/react';
 import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import userEvent from '@testing-library/user-event';
-
+import { vi } from 'vitest';
+import { Size } from '@lumx/react';
+import React from 'react';
 import { ListItem, ListItemProps } from './ListItem';
 
 const CLASSNAME = ListItem.className as string;
@@ -34,6 +36,47 @@ describe(`<${ListItem.displayName}>`, () => {
         it('should render as a link', () => {
             setup({ children: 'Label', linkProps: { href: '#' } });
             expect(screen.getByRole('link', { name: 'Label' })).toBeInTheDocument();
+        });
+
+        it('should render before and after content', () => {
+            const { listItem } = setup({
+                children: 'Label',
+                before: <span data-testid="before">Before</span>,
+                after: <span data-testid="after">After</span>,
+            });
+            expect(screen.getByTestId('before')).toBeInTheDocument();
+            expect(screen.getByTestId('after')).toBeInTheDocument();
+            expect(listItem.querySelector(`.${CLASSNAME}__before`)).toBeInTheDocument();
+            expect(listItem.querySelector(`.${CLASSNAME}__after`)).toBeInTheDocument();
+        });
+
+        it('should apply highlighted and selected classes to link', () => {
+            const { link } = setup({
+                children: 'Label',
+                onItemSelected: vi.fn(),
+                isHighlighted: true,
+                isSelected: true,
+            });
+            expect(link).toHaveClass(`${CLASSNAME}__link--is-highlighted`);
+            expect(link).toHaveClass(`${CLASSNAME}__link--is-selected`);
+        });
+
+        it('should apply size class', () => {
+            const { listItem } = setup({ children: 'Label', size: Size.big });
+            expect(listItem).toHaveClass(`${CLASSNAME}--size-big`);
+        });
+
+        it('should forward multiple refs', () => {
+            const listItemRef = React.createRef<HTMLLIElement>();
+            const linkRef = React.createRef<HTMLAnchorElement>();
+            setup({
+                children: 'Label',
+                onItemSelected: vi.fn(),
+                ref: listItemRef,
+                linkRef,
+            });
+            expect(listItemRef.current).toBeInstanceOf(HTMLLIElement);
+            expect(linkRef.current).toBeInstanceOf(HTMLAnchorElement);
         });
     });
 

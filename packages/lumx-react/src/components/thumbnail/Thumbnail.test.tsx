@@ -85,4 +85,23 @@ describe(`<${Thumbnail.displayName}>`, () => {
             expect(thumbnail?.tagName).toBe('DIV');
         });
     });
+
+    describe('Props', () => {
+        it('should render badge', () => {
+            const { thumbnail } = setup({ badge: <span data-testid="badge">Badge</span> });
+            expect(screen.getByTestId('badge')).toBeInTheDocument();
+            expect(thumbnail?.querySelector(`.${CLASSNAME}__badge`)).toBeInTheDocument();
+        });
+
+        it('should render loading skeleton', () => {
+            const { thumbnail } = setup({ isLoading: true });
+            expect(thumbnail).toHaveClass(`${CLASSNAME}--is-loading`);
+            expect(thumbnail?.querySelector(`.${CLASSNAME}__image--is-loading`)).toBeInTheDocument();
+        });
+
+        it('should apply objectFit class', () => {
+            const { thumbnail } = setup({ objectFit: 'cover' });
+            expect(thumbnail).toHaveClass(`${CLASSNAME}--object-fit-cover`);
+        });
+    });
 });

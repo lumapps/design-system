@@ -71,6 +71,12 @@ describe(`<${Heading.displayName}>`, () => {
             expect(h6[0]).toHaveTextContent('Level 6');
             expect(h6[1]).toHaveTextContent('Level 7');
         });
+
+        it('should override typography', () => {
+            setup({ children: 'Custom Typo', typography: 'body1' });
+            const heading = screen.getByRole('heading', { name: 'Custom Typo' });
+            expect(heading).toHaveClass('lumx-typography-body1');
+        });
     });
 
     // Common tests suite.

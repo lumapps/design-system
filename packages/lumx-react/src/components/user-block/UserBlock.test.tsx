@@ -1,7 +1,7 @@
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { render, within, screen } from '@testing-library/react';
 import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
-import { Text, Thumbnail } from '@lumx/react';
+import { Text, Thumbnail, Size, Orientation } from '@lumx/react';
 import userEvent from '@testing-library/user-event';
 
 import { UserBlock, UserBlockProps } from './UserBlock';
@@ -27,6 +27,26 @@ const setup = (propsOverride: Partial<UserBlockProps> = {}, { wrapper }: SetupRe
 
 describe(`<${UserBlock.displayName}>`, () => {
     describe('Props', () => {
+        it('should apply orientation class', () => {
+            const { userBlock } = setup({ orientation: Orientation.vertical });
+            expect(userBlock).toHaveClass(`${CLASSNAME}--orientation-vertical`);
+        });
+
+        it('should apply size class', () => {
+            const { userBlock } = setup({ size: Size.s });
+            expect(userBlock).toHaveClass(`${CLASSNAME}--size-s`);
+        });
+
+        it('should render actions in vertical orientation', () => {
+            setup({
+                orientation: Orientation.vertical,
+                simpleAction: <button type="button">Simple</button>,
+                multipleActions: <button type="button">Multiple</button>,
+            });
+            expect(screen.getByText('Simple')).toBeInTheDocument();
+            expect(screen.getByText('Multiple')).toBeInTheDocument();
+        });
+
         it('should forward name props', () => {
             const { name } = setup({ name: 'John Doe', nameProps: { 'data-custom-attribute': true } });
 

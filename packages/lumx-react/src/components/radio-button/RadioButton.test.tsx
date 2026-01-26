@@ -2,6 +2,8 @@ import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/uti
 import { getByClassName, getByTagName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import React from 'react';
+import { vi } from 'vitest';
 
 import { RadioButton, RadioButtonProps } from '.';
 
@@ -80,6 +82,17 @@ describe(`<${RadioButton.displayName}>`, () => {
             });
 
             expect(input).toHaveAttribute('aria-labelledby', props.inputProps['aria-labelledby']);
+        });
+
+        it('should forward value', () => {
+            const { input } = setup({ value: 'test-value' });
+            expect(input).toHaveAttribute('value', 'test-value');
+        });
+
+        it('should forward inputRef', () => {
+            const inputRef = React.createRef<HTMLInputElement>();
+            setup({ inputRef });
+            expect(inputRef.current).toBeInstanceOf(HTMLInputElement);
         });
     });
 

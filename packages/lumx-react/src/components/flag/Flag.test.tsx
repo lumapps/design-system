@@ -2,7 +2,7 @@ import { ColorPalette, Theme } from '@lumx/react';
 import { mdiAbTesting } from '@lumx/icons';
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import { Flag, FlagProps } from './Flag';
 
@@ -29,6 +29,16 @@ describe(`<${Flag.displayName} />`, () => {
             expect(flag).toHaveClass(CLASSNAME);
             expect(flag).toHaveClass(`${CLASSNAME}--color-dark`);
             expect(icon).not.toBeInTheDocument();
+        });
+
+        it('should render label content', () => {
+            setup({ label: 'My Label' });
+            expect(screen.getByText('My Label')).toBeInTheDocument();
+        });
+
+        it('should apply truncate class', () => {
+            const { flag } = setup({ truncate: true });
+            expect(flag).toHaveClass(`${CLASSNAME}--is-truncated`);
         });
 
         it('should render icon', () => {
