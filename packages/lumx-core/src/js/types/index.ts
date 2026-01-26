@@ -19,3 +19,5 @@ export type { ObjectValues } from './ObjectValues';
 export type { HasRequiredLinkHref } from './HasRequiredLinkHref';
 export type { HasPolymorphicAs } from './HasPolymorphicAs';
 export type { CommonRef } from './CommonRef';
+export type { HasAriaDisabled } from './HasAriaDisabled';
+export type { AriaAttributes } from './AriaAttributes';
