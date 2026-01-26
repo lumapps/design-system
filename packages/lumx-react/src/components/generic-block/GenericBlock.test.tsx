@@ -12,12 +12,12 @@ const CLASSNAME = GenericBlock.className as string;
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
 const setup = (props: Partial<GenericBlockProps> = {}) => {
-    render(<GenericBlock {...(props as any)} />);
+    const { container } = render(<GenericBlock {...(props as any)} />);
     const genericBlock = getByClassName(document.body, CLASSNAME);
     const figure = queryByClassName(genericBlock, 'lumx-generic-block__figure');
     const content = queryByClassName(genericBlock, 'lumx-generic-block__content');
     const actions = queryByClassName(genericBlock, 'lumx-generic-block__actions');
-    return { props, genericBlock, figure, content, actions };
+    return { props, genericBlock, figure, content, actions, container };
 };
 
 describe(`<${GenericBlock.displayName}>`, () => {
@@ -144,6 +144,17 @@ describe(`<${GenericBlock.displayName}>`, () => {
             expect(figureRef.current).toBeDefined();
             expect(contentRef.current).toBeDefined();
             expect(actionsRef.current).toBeDefined();
+        });
+
+        it('should render as a different element', () => {
+            const { container } = setup({ as: 'section', children: 'Content' });
+            expect(container.querySelector('section')).toBeInTheDocument();
+        });
+
+        it('should not render empty sections', () => {
+            const { figure, actions } = setup({ children: 'Content' });
+            expect(figure).not.toBeInTheDocument();
+            expect(actions).not.toBeInTheDocument();
         });
     });
 

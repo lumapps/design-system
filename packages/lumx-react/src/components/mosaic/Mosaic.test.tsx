@@ -61,6 +61,18 @@ describe(`<${Mosaic.displayName}>`, () => {
         expect(onClick).toHaveBeenCalled();
     });
 
+    it('should trigger individual thumbnail onClick', async () => {
+        const individualOnClick = vi.fn();
+        const thumbnailsProps = generateThumbnails(4);
+        // Add onClick to the first thumbnail
+        (thumbnailsProps[0] as any).onClick = individualOnClick;
+
+        const { thumbnails } = setup({ thumbnails: thumbnailsProps });
+
+        await userEvent.click(thumbnails[0]);
+        expect(individualOnClick).toHaveBeenCalled();
+    });
+
     // Common tests suite.
     commonTestsSuiteRTL(setup, {
         baseClassName: CLASSNAME,

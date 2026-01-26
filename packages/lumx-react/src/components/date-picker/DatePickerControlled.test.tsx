@@ -3,12 +3,13 @@ import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/quer
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import userEvent from '@testing-library/user-event';
 import { classNames } from '@lumx/core/js/utils';
+import { vi } from 'vitest';
 
 import { DatePickerControlled, DatePickerControlledProps } from './DatePickerControlled';
 import { CLASSNAME } from './constants';
 
-const mockedDate = new Date(1487721600000);
-Date.now = vi.fn(() => mockedDate.valueOf());
+const mockedDate = new Date(1487721600000); // Feb 22 2017
+
 vi.mock('@lumx/react/utils/date/getYearDisplayName', () => ({
     getYearDisplayName: () => 'année',
 }));
@@ -42,6 +43,15 @@ const queries = {
 };
 
 describe(`<${DatePickerControlled.displayName}>`, () => {
+    beforeEach(() => {
+        vi.useFakeTimers({ toFake: ['Date'] });
+        vi.setSystemTime(mockedDate);
+    });
+
+    afterEach(() => {
+        vi.useRealTimers();
+    });
+
     it('should render', () => {
         const { datePickerControlled } = setup();
         expect(datePickerControlled).toBeInTheDocument();
@@ -82,6 +92,30 @@ describe(`<${DatePickerControlled.displayName}>`, () => {
         await userEvent.tab(); // set year to 2015
         await waitFor(() => expect(props.onMonthChange).toHaveBeenCalledTimes(1));
         expect(props.onMonthChange).toHaveBeenCalledWith(new Date(1422748800000)); // 2017 - 24 months = 2015
+    });
+
+    it('should call onNextMonthChange when next button is clicked', async () => {
+        const { props } = setup();
+        const nextBtn = screen.getByRole('button', { name: 'Next month' });
+        await userEvent.click(nextBtn);
+        expect(props.onNextMonthChange).toHaveBeenCalled();
+    });
+
+    it('should call onPrevMonthChange when prev button is clicked', async () => {
+        const { props } = setup();
+        const prevBtn = screen.getByRole('button', { name: 'Previous month' });
+        await userEvent.click(prevBtn);
+        expect(props.onPrevMonthChange).toHaveBeenCalled();
+    });
+
+    it('should call onChange when a day is clicked', async () => {
+        const { props } = setup();
+        // Click 15th of Feb
+        const dayBtn = screen.getByRole('button', { name: /15 février 2017/i });
+        await userEvent.click(dayBtn);
+        expect(props.onChange).toHaveBeenCalledWith(expect.any(Date));
+        const calledDate = (props.onChange as any).mock.calls[0][0];
+        expect(calledDate.getDate()).toBe(15);
     });
 
     commonTestsSuiteRTL(setup, {

@@ -13,6 +13,16 @@ const setup = (props: Partial<TableProps> = {}, { wrapper }: SetupRenderOptions 
 };
 
 describe(`<${Table.displayName}>`, () => {
+    it('should render hasBefore', () => {
+        const { table } = setup({ hasBefore: true });
+        expect(table).toHaveClass(`${CLASSNAME}--has-before`);
+    });
+
+    it('should render hasDividers', () => {
+        const { table } = setup({ hasDividers: true });
+        expect(table).toHaveClass(`${CLASSNAME}--has-dividers`);
+    });
+
     // Common tests suite.
     commonTestsSuiteRTL(setup, {
         baseClassName: CLASSNAME,

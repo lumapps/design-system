@@ -89,6 +89,23 @@ describe(`<${LinkPreview.displayName}>`, () => {
         expect(description).toHaveTextContent(props.description);
     });
 
+    describe('Props', () => {
+        it('should render custom titleHeading', () => {
+            const { title } = setup({ title: 'Title', titleHeading: 'h3' });
+            expect(title?.tagName).toBe('H3');
+        });
+
+        it('should render regular size by default', () => {
+            const { linkPreview } = setup();
+            expect(linkPreview).toHaveClass(`${CLASSNAME}--size-regular`);
+        });
+
+        it('should render big size when big and thumbnail provided', () => {
+            const { linkPreview } = setup({ size: Size.big, thumbnailProps: { image: 'test.jpg' } as any });
+            expect(linkPreview).toHaveClass(`${CLASSNAME}--size-big`);
+        });
+    });
+
     // Common tests suite.
     commonTestsSuiteRTL(setup, {
         baseClassName: CLASSNAME,

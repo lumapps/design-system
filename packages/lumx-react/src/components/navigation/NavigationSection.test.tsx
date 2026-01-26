@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import userEvent from '@testing-library/user-event';
 import { Orientation } from '@lumx/core/js/constants';
+import { mdiHome } from '@lumx/icons';
 
 import { NavigationItem } from './NavigationItem';
 import { NavigationSection, NavigationSectionProps } from './NavigationSection';
@@ -51,6 +52,11 @@ describe(`<${NavigationSection.displayName}>`, () => {
         const { element } = setup();
         expect(element).toBeInTheDocument();
         expect(element).toHaveClass(CLASSNAME);
+    });
+
+    it('should render icon', () => {
+        const { container } = setup({ icon: mdiHome });
+        expect(container.querySelector('.lumx-icon')).toBeInTheDocument();
     });
 
     it('should be closed by default in vertical mode', () => {

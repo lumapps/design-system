@@ -1,5 +1,5 @@
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { queryByClassName } from '@lumx/react/testing/utils/queries';
 import { Slideshow, SlideshowProps } from './Slideshow';
 import { Slides } from './Slides';
@@ -12,6 +12,7 @@ const setup = (propsOverride: Partial<SlideshowProps> = {}, { wrapper }: SetupRe
             nextButtonProps: { label: 'Next' },
             previousButtonProps: { label: 'Prev' },
         },
+        children: [<div key="1">Slide 1</div>, <div key="2">Slide 2</div>],
         ...propsOverride,
     };
     render(<Slideshow {...props} />, { wrapper });
@@ -20,6 +21,12 @@ const setup = (propsOverride: Partial<SlideshowProps> = {}, { wrapper }: SetupRe
 };
 
 describe(`<${Slideshow.displayName}>`, () => {
+    it('should render controls', () => {
+        setup();
+        expect(screen.getByRole('button', { name: 'Next' })).toBeInTheDocument();
+        expect(screen.getByRole('button', { name: 'Prev' })).toBeInTheDocument();
+    });
+
     // Common tests suite.
     commonTestsSuiteRTL(setup, {
         baseClassName: CLASSNAME,

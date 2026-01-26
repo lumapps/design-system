@@ -1,5 +1,5 @@
 import { ProgressTrackerStep } from '@lumx/react';
-import { render, within } from '@testing-library/react';
+import { render, within, screen } from '@testing-library/react';
 import { getByClassName } from '@lumx/react/testing/utils/queries';
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 
@@ -30,6 +30,12 @@ describe(`<${ProgressTracker.displayName}>`, () => {
         const label = 'Steps';
         const { progressTracker } = setup({ 'aria-label': label });
         expect(within(progressTracker).queryByRole('tablist', { name: label })).toBeInTheDocument();
+    });
+
+    it('should render children steps', () => {
+        setup();
+        expect(screen.getByText('Step 0')).toBeInTheDocument();
+        expect(screen.getByText('Step 1')).toBeInTheDocument();
     });
 
     // Common tests suite.

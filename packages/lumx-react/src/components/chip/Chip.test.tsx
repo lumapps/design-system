@@ -1,8 +1,10 @@
-import { Theme } from '@lumx/react';
+import React from 'react';
+import { Theme, Size } from '@lumx/react';
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import userEvent from '@testing-library/user-event';
+import { vi } from 'vitest';
 import { Chip, ChipProps } from './Chip';
 
 const CLASSNAME = Chip.className as string;
@@ -64,6 +66,31 @@ describe('<Chip />', () => {
         it('should override the tabIndex', () => {
             const { chip } = setup({ children: 'Chip text', tabIndex: -1 });
             expect(chip).toHaveAttribute('tabIndex', '-1');
+        });
+
+        it('should forward ref', () => {
+            const ref = React.createRef<HTMLAnchorElement>();
+            setup({ ref } as any);
+            expect(ref.current).toHaveClass(CLASSNAME);
+            expect(ref.current).toBeInstanceOf(HTMLAnchorElement);
+        });
+    });
+
+    describe('Styling', () => {
+        it('should render highlighted state', () => {
+            const { chip } = setup({ isHighlighted: true });
+            expect(chip).toHaveClass('lumx-chip--is-highlighted');
+        });
+
+        it('should render selected state', () => {
+            const { chip } = setup({ isSelected: true });
+            expect(chip).toHaveClass('lumx-chip--is-selected');
+            expect(chip).not.toHaveClass('lumx-chip--is-unselected');
+        });
+
+        it('should render small size', () => {
+            const { chip } = setup({ size: Size.s });
+            expect(chip).toHaveClass('lumx-chip--size-s');
         });
     });
 

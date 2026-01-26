@@ -245,6 +245,28 @@ describe(`<${ImageLightbox.displayName}>`, () => {
         });
     });
 
+    describe('Props & Interactions', () => {
+        it('should forward closeButtonProps', () => {
+            setup({ ...SingleImage.args, closeButtonProps: { label: 'Custom Close' } as any });
+            const imageLightbox = queries.getImageLightbox();
+            expect(within(imageLightbox).getByRole('button', { name: 'Custom Close' })).toBeInTheDocument();
+        });
+
+        it('should change slide on pagination click', async () => {
+            setup(MultipleImages.args);
+            const imageLightbox = queries.getImageLightbox();
+
+            // Initial state
+            expect(queries.queryImage(imageLightbox, 'Image 1')).toBeInTheDocument();
+
+            // Click slide 2
+            const slide2 = queries.querySlideButton(imageLightbox, 2);
+            await userEvent.click(slide2 as any);
+
+            expect(queries.queryImage(imageLightbox, 'Image 2')).toBeInTheDocument();
+        });
+    });
+
     // Common tests suite.
     commonTestsSuiteRTL(setup, {
         baseClassName: CLASSNAME,

@@ -84,6 +84,19 @@ describe(`<${Notification.displayName}>`, () => {
         expect(notification).toHaveStyle('color: rgb(255, 0, 0)');
     });
 
+    it('should apply zIndex', () => {
+        const { notification } = setup({ zIndex: 1234 });
+        expect(notification).toHaveStyle('z-index: 1234');
+    });
+
+    it.each(Object.values(Kind))('should render notification of type %s', (type) => {
+        const { notification } = setup({ type });
+        expect(notification).toHaveClass(
+            // eslint-disable-next-line no-nested-ternary
+            `${CLASSNAME}--color-${type === Kind.error ? 'red' : type === Kind.warning ? 'yellow' : type === Kind.success ? 'green' : 'blue'}`,
+        );
+    });
+
     // Common tests suite.
     commonTestsSuiteRTL(setup, {
         baseClassName: CLASSNAME,

@@ -51,6 +51,7 @@ describe(`<${Text.displayName}>`, () => {
             const { element } = setup({ truncate: { lines: 2 } });
             expect(element.tagName).toBe('SPAN');
             expect(element).toHaveClass('lumx-text--is-truncated-multiline');
+            expect(element).toHaveAttribute('style', expect.stringContaining('--lumx-text-truncate-lines: 2'));
         });
 
         it('should render noWrap', () => {

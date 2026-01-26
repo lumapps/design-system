@@ -4,7 +4,7 @@ import { getByClassName } from '@lumx/react/testing/utils/queries';
 
 import { GridColumn } from './index';
 
-const CLASSNAME = GridColumn.className;
+const CLASSNAME = GridColumn.className as string;
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -44,6 +44,11 @@ describe(`<${GridColumn.displayName}>`, () => {
                 'style',
                 '--lumx-grid-column-item-min-width: 300px; --lumx-grid-column-columns: 10; --lumx-grid-column-gap: var(--lumx-spacing-unit-regular);',
             );
+        });
+
+        it('should render as a different element', () => {
+            const { container } = render(<GridColumn as="section">Content</GridColumn>);
+            expect(container.querySelector('section')).toBeInTheDocument();
         });
     });
 

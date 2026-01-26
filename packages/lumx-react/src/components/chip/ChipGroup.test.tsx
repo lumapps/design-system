@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { getByClassName } from '@lumx/react/testing/utils/queries';
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import { ChipGroup, ChipGroupProps } from './ChipGroup';
@@ -26,6 +26,13 @@ describe('<ChipGroup />', () => {
             const { chipGroup } = setup();
             expect(chipGroup).toBeInTheDocument();
             expect(chipGroup).toHaveClass(CLASSNAME);
+        });
+
+        it('should render all children', () => {
+            setup();
+            expect(screen.getByText('Chip 1')).toBeInTheDocument();
+            expect(screen.getByText('Chip 2')).toBeInTheDocument();
+            expect(screen.getByText('Chip 3')).toBeInTheDocument();
         });
     });
 

@@ -1,10 +1,11 @@
 import { Tab, TabList, TabPanel, TabProvider, TabProviderProps } from '@lumx/react';
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { checkTabActive, query } from '@lumx/react/components/tabs/test-utils';
+import { vi } from 'vitest';
 
 const setup = (props: Partial<TabProviderProps> = {}) => {
-    render(
+    return render(
         <TabProvider {...props}>
             <TabList aria-label="Tab list">
                 <Tab label="Tab 1" />
@@ -126,6 +127,49 @@ describe('TabProvider', () => {
             expect(query.tab('Tab 3')).toHaveFocus();
 
             checkTabActive('Tab 3');
+        });
+    });
+
+    describe('Controlled mode', () => {
+        it('should call onChange and respond to activeTabIndex prop', async () => {
+            const onChange = vi.fn();
+            const { rerender } = setup({ activeTabIndex: 0, onChange });
+
+            checkTabActive('Tab 1');
+
+            // Switch to tab 3
+            await userEvent.click(query.tab('Tab 3'));
+            await waitFor(() => expect(onChange).toHaveBeenCalledWith(2));
+
+            // Re-render with new index to simulate external state update
+            rerender(
+                <TabProvider activeTabIndex={2} onChange={onChange}>
+                    <TabList aria-label="Tab list">
+                        <Tab label="Tab 1" />
+                        <Tab label="Tab 2" isDisabled />
+                        <Tab label="Tab 3" />
+                    </TabList>
+                    <TabPanel>Tab 1 content</TabPanel>
+                    <TabPanel>Tab 2 content</TabPanel>
+                    <TabPanel>Tab 3 content</TabPanel>
+                </TabProvider>,
+            );
+            checkTabActive('Tab 3');
+
+            // Change prop back to 0 externally
+            rerender(
+                <TabProvider activeTabIndex={0} onChange={onChange}>
+                    <TabList aria-label="Tab list">
+                        <Tab label="Tab 1" />
+                        <Tab label="Tab 2" isDisabled />
+                        <Tab label="Tab 3" />
+                    </TabList>
+                    <TabPanel>Tab 1 content</TabPanel>
+                    <TabPanel>Tab 2 content</TabPanel>
+                    <TabPanel>Tab 3 content</TabPanel>
+                </TabProvider>,
+            );
+            checkTabActive('Tab 1');
         });
     });
 

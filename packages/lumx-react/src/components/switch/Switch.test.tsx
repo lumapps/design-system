@@ -81,6 +81,11 @@ describe(`<${Switch.displayName}>`, () => {
 
             expect(input).toHaveAttribute('aria-labelledby', props.inputProps?.['aria-labelledby']);
         });
+
+        it('should apply position class', () => {
+            const { switchWrapper } = setup({ position: 'right' });
+            expect(switchWrapper).toHaveClass(`${CLASSNAME}--position-right`);
+        });
     });
 
     describe('Events', () => {
