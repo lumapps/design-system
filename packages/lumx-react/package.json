@@ -12,9 +12,6 @@
         "body-scroll-lock": "^3.1.5",
         "react-popper": "^2.2.4"
     },
-    "installConfig": {
-        "hoistingLimits": "workspaces"
-    },
     "devDependencies": {
         "@babel/core": "^7.26.10",
         "@babel/preset-react": "^7.26.3",
@@ -23,9 +20,8 @@
         "@rollup/plugin-babel": "^6.1.0",
         "@rollup/plugin-commonjs": "^29.0.0",
         "@rollup/plugin-node-resolve": "^16.0.3",
-        "@storybook/addon-a11y": "^9.1.4",
-        "@storybook/addon-docs": "^9.1.4",
-        "@storybook/react-vite": "^9.1.4",
+        "@storybook/addon-a11y": "^10.2.0",
+        "@storybook/react-vite": "^10.2.0",
         "@testing-library/dom": "^10.4.1",
         "@testing-library/react": "^16.3.1",
         "@testing-library/user-event": "^14.6.1",
@@ -51,7 +47,7 @@
         "rollup-plugin-dts": "^6.3.0",
         "rollup-plugin-peer-deps-external": "^2.2.4",
         "rollup-plugin-ts-paths-resolve": "^1.7.1",
-        "storybook": "^9.1.4",
+        "storybook": "^10.2.0",
         "typescript": "^5.4.3",
         "vite": "^7.3.1",
         "vite-tsconfig-paths": "^5.1.4",
