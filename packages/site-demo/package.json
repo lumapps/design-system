@@ -48,7 +48,7 @@
         "react-docgen-typescript": "^2.2.2",
         "react-dom": "^18.3.1",
         "react-live-runner": "^1.0.7",
-        "sass": "^1.54.0"
+        "sass": "1.70.0"
     },
     "devDependencies": {
         "@types/gatsbyjs__reach-router": "^2.0.5",
