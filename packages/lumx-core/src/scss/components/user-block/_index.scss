@@ -9,6 +9,7 @@
 
     display: flex;
     align-items: center;
+    min-width: 0;
 
     &--orientation-vertical {
         flex-direction: column;
@@ -42,6 +43,7 @@
     &__wrapper {
         display: flex;
         flex-direction: column;
+        min-width: 0;
 
         #{$self}--orientation-vertical & {
             align-items: center;
@@ -49,13 +51,11 @@
     }
 
     &__name {
-        width: fit-content;
         outline: none;
 
         #{$self}--size-xs & {
             @include lumx-typography("body1");
         }
-
 
         @include lumx-typography("subtitle1");
 

@@ -3,7 +3,7 @@ import React, { ReactNode } from 'react';
 import isEmpty from 'lodash/isEmpty';
 import set from 'lodash/set';
 
-import { Avatar, ColorPalette, Link, Orientation, Size, Theme } from '@lumx/react';
+import { Avatar, ColorPalette, Link, Orientation, Size, Theme, Text, InlineList } from '@lumx/react';
 import { GenericProps, HasTheme } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
@@ -136,19 +136,25 @@ export const UserBlock = forwardRef<UserBlockProps, HTMLDivElement>((props, ref)
         if (avatarProps) {
             set(avatarProps, ['thumbnailProps', 'tabIndex'], -1);
         }
-        return <NameComponent {...nProps}>{name}</NameComponent>;
+        return (
+            <NameComponent {...nProps}>
+                <Text as="span" truncate>
+                    {name}
+                </Text>
+            </NameComponent>
+        );
     }, [avatarProps, isClickable, linkAs, linkProps, name, nameProps, onClick]);
 
     const shouldDisplayFields = componentSize !== Size.s && componentSize !== Size.xs;
 
     const fieldsBlock: ReactNode = fields && shouldDisplayFields && (
-        <div className={`${CLASSNAME}__fields`}>
+        <InlineList className={`${CLASSNAME}__fields`} wrap>
             {fields.map((field: string, idx: number) => (
-                <span key={idx} className={`${CLASSNAME}__field`}>
+                <Text as="span" truncate key={idx} className={`${CLASSNAME}__field`}>
                     {field}
-                </span>
+                </Text>
             ))}
-        </div>
+        </InlineList>
     );
 
     return (
