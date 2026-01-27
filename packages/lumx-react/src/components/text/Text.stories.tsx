@@ -1,48 +1,43 @@
 import React from 'react';
 
-import { ALL_TYPOGRAPHY, allTypographyArgType } from '@lumx/core/stories/controls/typography';
-import { colorArgType, colorVariantArgType } from '@lumx/core/stories/controls/color';
-import { textElementArgType } from '@lumx/core/stories/controls/element';
+import { ALL_TYPOGRAPHY } from '@lumx/core/stories/controls/typography';
 import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
-import { loremIpsum } from '@lumx/core/stories/utils/lorem';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 import { Button, ColorPalette, ColorVariant, Icon, WhiteSpace } from '@lumx/react';
 import { mdiEarth, mdiHeart } from '@lumx/icons';
 import { withResizableBox } from '@lumx/react/stories/decorators/withResizableBox';
-import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
+
+import {
+    Default as DefaultConfig,
+    Base as BaseStory,
+    LongText as LongTextStory,
+    NoWrap as NoWrapStory,
+    AllWhiteSpace as AllWhiteSpaceStory,
+    Truncate as TruncateStory,
+    TruncateMultiline as TruncateMultilineStory,
+    AllTypography as AllTypographyStory,
+    AllColors as AllColorsStory,
+} from '@lumx/core/js/components/Text/Stories';
 
 import { Text } from './Text';
 
 export default {
     title: 'LumX components/text/Text',
     component: Text,
-    args: Text.defaultProps,
-    argTypes: {
-        children: { control: false },
-        as: textElementArgType,
-        typography: allTypographyArgType,
-        color: colorArgType,
-        colorVariant: colorVariantArgType,
-        whiteSpace: getSelectArgType(WhiteSpace),
-    },
+    ...DefaultConfig,
 };
 
 /**
  * Default text component as a paragraph
  */
-export const Default = {
-    args: {
-        as: 'p',
-        children: 'Some text',
-    },
-};
+export const Base = BaseStory;
 
 /**
  * Text containing icons (should match font size)
  */
 export const WithIcon = {
     args: {
-        ...Default.args,
+        ...Base.args,
         children: (
             <>
                 Some text <Icon icon={mdiHeart} /> with icons <Icon icon={mdiEarth} />
@@ -55,10 +50,7 @@ export const WithIcon = {
  * Long text should wrap by default
  */
 export const LongText = {
-    args: {
-        ...Default.args,
-        children: loremIpsum('tiny'),
-    },
+    ...LongTextStory,
     decorators: [withResizableBox()],
 };
 
@@ -69,7 +61,7 @@ export const NoWrap = {
     ...LongText,
     args: {
         ...LongText.args,
-        noWrap: true,
+        ...NoWrapStory.args,
     },
 };
 
@@ -77,13 +69,7 @@ export const NoWrap = {
  * Long text with line breaks
  */
 export const AllWhiteSpace = {
-    args: {
-        ...Default.args,
-        children: `
-        But ere she from the church-door stepped She smiled and told us why: 'It was a wicked woman's curse,' Quoth she,
-        'and what care I?' She smiled, and smiled, and passed it off Ere from the door she stept—
-      `,
-    },
+    ...AllWhiteSpaceStory,
     decorators: [
         withCombinations({
             combinations: {
@@ -102,11 +88,10 @@ export const AllWhiteSpace = {
 export const Truncate = {
     ...LongText,
     args: {
+        ...TruncateStory.args,
         ...LongText.args,
-        truncate: true,
     },
 };
-
 /**
  * Test the update of the `title` attribute when text overflows
  */
@@ -136,7 +121,7 @@ export const TruncateMultiline = {
     ...LongText,
     args: {
         ...LongText.args,
-        truncate: { lines: 2 },
+        ...TruncateMultilineStory.args,
     },
 };
 
@@ -145,9 +130,7 @@ export const TruncateMultiline = {
  */
 export const AllTypography = {
     ...WithIcon,
-    argTypes: {
-        typography: { control: false },
-    },
+    ...AllTypographyStory,
     decorators: [
         withCombinations({
             combinations: {
@@ -162,10 +145,7 @@ export const AllTypography = {
  */
 export const AllColors = {
     ...WithIcon,
-    argTypes: {
-        color: { control: false },
-        colorVariant: { control: false },
-    },
+    ...AllColorsStory,
     decorators: [
         withCombinations({
             combinations: {

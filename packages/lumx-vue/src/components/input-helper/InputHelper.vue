@@ -1,3 +1,9 @@
+<template>
+    <ui v-bind="{ ...attrs, ...props, theme: props.theme || defaultTheme }">
+        <slot />
+    </ui>
+</template>
+
 <script setup lang="ts">
 import { useAttrs } from 'vue';
 import { InputHelper as InputHelperUI, InputHelperProps } from '@lumx/core/js/components/InputHelper';
@@ -14,9 +20,3 @@ const attrs = useAttrs();
 const defaultTheme = useTheme();
 const ui = VueToJSX<InputHelperProps>(InputHelperUI);
 </script>
-
-<template>
-    <ui v-bind="{ ...attrs, ...props, theme: props.theme || defaultTheme }">
-        <slot />
-    </ui>
-</template>

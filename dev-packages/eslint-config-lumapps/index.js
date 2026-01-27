@@ -136,6 +136,9 @@ module.exports = {
                 'vue/html-self-closing': ['error', { html: { void: 'always', normal: 'always', component: 'always' } }],
                 'vue/html-indent': ['error', 4],
                 'vue/multi-word-component-names': 'off',
+                "vue/block-order": ["error", {
+                    "order": [ "template", "script", "style" ]
+                }]
             },
         },
     ],
