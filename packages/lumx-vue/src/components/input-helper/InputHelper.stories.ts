@@ -14,7 +14,19 @@ export default {
     },
 };
 
-export const Default = {};
+export const Default = {
+    render: (args: InputHelperProps) => ({
+        components: { InputHelper },
+        setup() {
+            return { args };
+        },
+        template: `
+            <InputHelper v-bind="args">
+                {{ args.children }}
+            </InputHelper>
+        `,
+    }),
+};
 
 export const AllKinds = {
     ...AllKindsStory,
@@ -30,7 +42,9 @@ export const AllKinds = {
                     <InputHelper 
                         v-bind="args" 
                         :kind="row" 
-                    />
+                    >
+                        {{ args.children }}
+                    </InputHelper>
                 </template>
             </StoryMatrix>
             `,

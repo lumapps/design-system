@@ -9,7 +9,7 @@ const CLASSNAME = InputHelper.className as string;
 
 describe('<InputHelper />', () => {
     const renderInputHelper = (props: InputHelperProps, options?: SetupRenderOptions<InputHelperProps>) =>
-        render(InputHelper, { props, ...options });
+        render(InputHelper, { props, ...options, slots: { default: props.children } });
 
     BaseInputHelperTests({ render: renderInputHelper, screen });
 
