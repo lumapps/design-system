@@ -1,7 +1,7 @@
 {
     "name": "rollup-plugin-optimize-imports-lumx-icons",
     "private": true,
-    "version": "4.1.0",
+    "version": "4.1.1",
     "license": "MIT",
     "type": "module",
     "main": "index.js",
