@@ -28208,9 +28208,9 @@ __metadata:
   linkType: hard
 
 "y18n@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "y18n@npm:4.0.0"
-  checksum: 10/c3fabe29b076bf4779a561b9c45b958e5eac909fc0f411da106b87f4a7793b179a731d1758fd8b8a44b2911a97eddffd4174aa14a79b3c0ac2ffad755d022d35
+  version: 4.0.3
+  resolution: "y18n@npm:4.0.3"
+  checksum: 10/392870b2a100bbc643bc035fe3a89cef5591b719c7bdc8721bcdb3d27ab39fa4870acdca67b0ee096e146d769f311d68eda6b8195a6d970f227795061923013f
   languageName: node
   linkType: hard
 
