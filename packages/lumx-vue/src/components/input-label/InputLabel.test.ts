@@ -9,7 +9,7 @@ const CLASSNAME = InputLabel.className as string;
 
 describe('<InputLabel />', () => {
     const renderInputHelper = (props: InputLabelProps, options?: SetupRenderOptions<InputLabelProps>) =>
-        render(InputLabel, { props, ...options });
+        render(InputLabel, { props, ...options, slots: { default: props.children } });
 
     BaseInputLabelTests({ render: renderInputHelper, screen });
 
