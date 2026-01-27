@@ -1,12 +1,11 @@
 import { ColorVariant, ColorWithVariants, Icon, Typography } from '@lumx/react';
-import { GenericProps } from '@lumx/react/utils/type';
+import { GenericProps, HasAriaDisabled } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import { resolveColorWithVariants } from '@lumx/core/js/utils/_internal/color';
 import { classNames } from '@lumx/core/js/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { wrapChildrenIconWithSpaces } from '@lumx/react/utils/react/wrapChildrenIconWithSpaces';
-import { HasAriaDisabled } from '@lumx/react/utils/type/HasAriaDisabled';
 import { RawClickable } from '@lumx/react/utils/react/RawClickable';
 import { useDisableStateProps } from '@lumx/react/utils/disabled';
 

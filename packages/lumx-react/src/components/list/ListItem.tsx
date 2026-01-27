@@ -3,14 +3,13 @@ import { ReactNode, Ref, SyntheticEvent, useMemo } from 'react';
 import isEmpty from 'lodash/isEmpty';
 
 import { ListProps, Size } from '@lumx/react';
-import { GenericProps } from '@lumx/react/utils/type';
+import { GenericProps, HasAriaDisabled } from '@lumx/react/utils/type';
 import { onEnterPressed, onButtonPressed, classNames } from '@lumx/core/js/utils';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { renderLink } from '@lumx/react/utils/react/renderLink';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
-import { HasAriaDisabled } from '@lumx/react/utils/type/HasAriaDisabled';
 
 export type ListItemSize = Extract<Size, 'tiny' | 'regular' | 'big' | 'huge'>;
 
