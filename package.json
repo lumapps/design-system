@@ -70,7 +70,7 @@
         "setup:git-hooks": "yarn husky uninstall && yarn husky install || exit 0",
         "start": "yarn workspace lumx-site-demo start",
         "test": "vitest",
-        "type-check": "yarn tsc -p tsconfig.json",
+        "type-check": "yarn workspaces foreach --all --parallel --interlaced -v run type-check",
         "storybook:react": "yarn workspace @lumx/react start:storybook",
         "storybook:vue": "yarn workspace @lumx/vue start:storybook",
         "storybook": "yarn storybook:react",

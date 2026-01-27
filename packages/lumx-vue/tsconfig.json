@@ -2,34 +2,7 @@
     "extends": "../../tsconfig.json",
     "compilerOptions": {
         "jsx": "preserve",
-        "jsxImportSource": "vue",
-        "paths": {
-            "@lumx/core/*": ["lumx-core/src/*"],
-            "@lumx/react": ["lumx-react/src"],
-            "@lumx/react/*": ["lumx-react/src/*"],
-            "@lumx/vue": ["lumx-vue/src"],
-            "@lumx/vue/*": ["lumx-vue/src/*"],
-            "@lumx/icons": ["lumx-icons"],
-            "@lumx/icons/*": ["lumx-icons/dist/*"],
-            "@lumx/demo/*": ["site-demo/src/*"],
-            "vue/jsx-runtime": ["lumx-vue/node_modules/vue/jsx-runtime"]
-        },
-        "allowJs": true,
-        "esModuleInterop": true,
-        "declaration": true,
-        "forceConsistentCasingInFileNames": true,
-        "lib": ["es2020", "dom"],
-        "module": "ESNext",
-        "moduleResolution": "bundler",
-        "noEmit": true,
-        "noErrorTruncation": true,
-        "noFallthroughCasesInSwitch": false,
-        "resolveJsonModule": true,
-        "types": ["vitest/globals"],
-        "strict": true,
-        "skipLibCheck": true,
-        "target": "es5",
-        "downlevelIteration": true
+        "jsxImportSource": "vue"
     },
     "include": [
         "src/**/*.ts",

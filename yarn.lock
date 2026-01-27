@@ -2650,6 +2650,7 @@ __metadata:
     lodash: "npm:4.17.23"
     svgo: "npm:^3.2.0"
     svgtofont: "npm:^4.0.0"
+    typescript: "npm:^5.4.3"
   languageName: unknown
   linkType: soft
 
