@@ -26,10 +26,10 @@ async function main({ inputs, context }) {
 
     if (releaseType !== 'prerelease') {
         // Exit if not on master
-        if (baseBranch !== 'master') {
-            console.log(`New ${releaseType} release can only be created from master branch.\n`);
-            process.exit(1);
-        }
+        // if (baseBranch !== 'master') {
+        //     console.log(`New ${releaseType} release can only be created from master branch.\n`);
+        //     process.exit(1);
+        // }
 
         const localVersion = require(`${process.env.GITHUB_WORKSPACE}/package.json`).version;
         if (localVersion !== npmLatestVersion) {

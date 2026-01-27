@@ -67,7 +67,7 @@ jobs:
                             repo: context.repo.repo,
                             base: 'master',
                             head: '${{ steps.version.outputs.releaseBranch }}',
-                            title: '${{ steps.git.outputs.commit }}',
+                            title: 'TEST ${{ steps.git.outputs.commit }}',
                             body: '# Release v${{ steps.version.outputs.nextVersion }}\n\n'
                                 + 'Review, test and merge to publish to NPM.\n\n'
                                 + 'Triggered by @${{ github.actor }}',
