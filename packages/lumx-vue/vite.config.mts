@@ -94,7 +94,6 @@ export default defineConfig({
         /** Transform @lumx/icons imports to direct ESM imports. */
         optimizeImportsLumxIcons(),
         dts({
-            tsconfigPath: 'tsconfig.build.json',
             exclude: ['src/**/*.stories.ts', 'src/**/*.test.ts', 'src/testing'],
             entryRoot: 'src',
         }),
