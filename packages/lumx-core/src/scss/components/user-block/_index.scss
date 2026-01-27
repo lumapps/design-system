@@ -9,6 +9,7 @@
 
     display: flex;
     align-items: center;
+    min-width: 0;
 
     &--orientation-vertical {
         flex-direction: column;
@@ -42,6 +43,7 @@
     &__wrapper {
         display: flex;
         flex-direction: column;
+        min-width: 0;
 
         #{$self}--orientation-vertical & {
             align-items: center;
@@ -49,13 +51,12 @@
     }
 
     &__name {
-        width: fit-content;
         outline: none;
+        overflow-wrap: break-word;
 
         #{$self}--size-xs & {
             @include lumx-typography("body1");
         }
-
 
         @include lumx-typography("subtitle1");
 
@@ -83,11 +84,13 @@
 
     &__field {
         @include lumx-typography("body1");
+        overflow-wrap: break-word;
 
         #{$self}--size-m & {
             &::after {
                 margin: 0 math.div($lumx-spacing-unit, 2);
                 content: "•";
+                word-break: break-all;
             }
 
             &:last-child::after {
