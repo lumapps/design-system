@@ -1,6 +1,6 @@
-import type { AriaAttributes } from 'react';
+import { Booleanish } from './Booleanish';
 
 export interface HasAriaDisabled {
     /** Similar to `disabled` but does not block pointer events or focus */
-    'aria-disabled'?: AriaAttributes['aria-disabled'];
+    'aria-disabled'?: Booleanish;
 }

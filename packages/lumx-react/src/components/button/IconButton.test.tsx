@@ -2,57 +2,36 @@ import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/uti
 import { Button, Theme, ThemeProvider } from '@lumx/react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { getByClassName, queryByClassName, queryByTagName } from '@lumx/react/testing/utils/queries';
 import { DisabledStateProvider } from '@lumx/react/utils/disabled';
+
+import Tests, { setup } from '@lumx/core/js/components/Button/IconButtonTests';
 
 import { IconButton, IconButtonProps } from './IconButton';
 
 const CLASSNAME = Button.className as string;
 
-type SetupProps = Partial<IconButtonProps>;
-
-/**
- * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
- */
-const setup = (propsOverride: SetupProps = {}, { wrapper }: SetupRenderOptions = {}) => {
-    const props: any = { ...propsOverride };
-    render(<IconButton {...props} />, { wrapper });
-    const iconButton = getByClassName(document.body, CLASSNAME);
-    const icon = queryByClassName(iconButton, 'lumx-icon');
-    const img = queryByTagName(iconButton, 'IMG');
-
-    return { props, iconButton, icon, img };
-};
-
 describe(`<${IconButton.displayName}>`, () => {
+    const renderComponent = (props: IconButtonProps, options?: SetupRenderOptions) =>
+        render(<IconButton {...props} />, options);
+
+    Tests({ render: renderComponent, screen });
+
+    const setupComponent = (props: Partial<IconButtonProps> = {}, options: SetupRenderOptions = {}) =>
+        setup(props, { ...options, render: renderComponent, screen });
+
     describe('Props', () => {
-        it('should render default', () => {
-            const { iconButton, icon, img } = setup();
-            expect(iconButton).toBeInTheDocument();
-            expect(iconButton.className).toMatchInlineSnapshot(
-                '"lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-icon"',
+        it('should not apply theme to icon', () => {
+            const { icon } = setupComponent(
+                {},
+                {
+                    wrapper: ({ children }) => <ThemeProvider value={Theme.dark}>{children}</ThemeProvider>,
+                },
             );
-
-            expect(icon).toBeInTheDocument();
-            expect(img).not.toBeInTheDocument();
-        });
-
-        it('should render label', () => {
-            const label = 'Label';
-            const { iconButton } = setup({ label });
-            expect(iconButton).toBe(screen.queryByRole('button', { name: label }));
-        });
-
-        it('should render icon button with an image', () => {
-            const { iconButton, icon, img } = setup({ image: 'http://foo.com' });
-
-            expect(iconButton).toBeInTheDocument();
-            expect(icon).not.toBeInTheDocument();
-            expect(img).toBeInTheDocument();
+            expect(icon).not.toHaveClass('lumx-icon--theme-dark');
         });
 
         it('should pass tooltipProps to Tooltip', async () => {
-            const { iconButton } = setup({ label: 'Label', tooltipProps: { placement: 'right' } });
+            const { iconButton } = setupComponent({ label: 'Label', tooltipProps: { placement: 'right' } });
             await userEvent.hover(iconButton);
             const tooltip = await screen.findByRole('tooltip');
             expect(tooltip).toBeInTheDocument();
@@ -61,46 +40,17 @@ describe(`<${IconButton.displayName}>`, () => {
         });
 
         it('should hide tooltip when hideTooltip is true', async () => {
-            const { iconButton } = setup({ label: 'Label', hideTooltip: true });
+            const { iconButton } = setupComponent({ label: 'Label', hideTooltip: true });
             await userEvent.hover(iconButton);
             const tooltip = screen.queryByRole('tooltip');
             expect(tooltip).not.toBeInTheDocument();
-        });
-
-        it('should render disabled button', async () => {
-            const onClick = vi.fn();
-            const { iconButton } = setup({ isDisabled: true, onClick });
-            expect(iconButton).toBeDisabled();
-            await userEvent.click(iconButton);
-            expect(onClick).not.toHaveBeenCalled();
-        });
-
-        it('should render with type submit', () => {
-            const { iconButton } = setup({ type: 'submit' });
-            expect(iconButton).toHaveAttribute('type', 'submit');
-        });
-
-        it('should render as link', () => {
-            const { iconButton } = setup({ href: 'https://example.com' });
-            expect(iconButton.tagName).toBe('A');
-            expect(iconButton).toHaveAttribute('href', 'https://example.com');
-        });
-
-        it('should not apply theme to icon', () => {
-            const { icon } = setup(
-                {},
-                {
-                    wrapper: ({ children }) => <ThemeProvider value={Theme.dark}>{children}</ThemeProvider>,
-                },
-            );
-            expect(icon).not.toHaveClass('lumx-icon--theme-dark');
         });
     });
 
     describe('Disabled state from context', () => {
         it('should render disabled button when context is disabled', async () => {
             const onClick = vi.fn();
-            const { iconButton } = setup(
+            const { iconButton } = setupComponent(
                 { label: 'Label', onClick },
                 {
                     wrapper: ({ children }) => (
@@ -116,7 +66,7 @@ describe(`<${IconButton.displayName}>`, () => {
 
         it('should render disabled link when context is disabled', async () => {
             const onClick = vi.fn();
-            const { iconButton } = setup(
+            const { iconButton } = setupComponent(
                 { label: 'Label', href: 'https://example.com', onClick },
                 {
                     wrapper: ({ children }) => (
@@ -134,7 +84,7 @@ describe(`<${IconButton.displayName}>`, () => {
     });
 
     // Common tests suite.
-    commonTestsSuiteRTL(setup, {
+    commonTestsSuiteRTL(setupComponent, {
         baseClassName: CLASSNAME,
         forwardClassName: 'iconButton',
         forwardAttributes: 'iconButton',

@@ -1,28 +1,36 @@
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { getByClassName } from '@lumx/react/testing/utils/queries';
 import { DisabledStateProvider } from '@lumx/react/utils/disabled';
+
+import Tests, { setup } from '@lumx/core/js/components/Button/ButtonRootTests';
 
 import { ButtonRoot, ButtonRootProps, BUTTON_CLASSNAME } from './ButtonRoot';
 
-type SetupProps = Partial<ButtonRootProps>;
+describe('<ButtonRoot />', () => {
+    const renderComponent = (props: ButtonRootProps, options?: SetupRenderOptions) =>
+        render(<ButtonRoot {...props} />, options);
 
-/**
- * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
- */
-const setup = (propsOverride: SetupProps = {}, { wrapper }: SetupRenderOptions = {}) => {
-    const props: any = { ...propsOverride };
-    render(<ButtonRoot {...props} variant="button" />, { wrapper });
-    const button = getByClassName(document.body, BUTTON_CLASSNAME);
-    return { props, button };
-};
+    Tests({ render: renderComponent, screen });
 
-describe(`<${ButtonRoot.displayName}>`, () => {
+    const setupComponent = (props: Partial<ButtonRootProps> = {}, options: SetupRenderOptions = {}) =>
+        setup(props, { ...options, render: renderComponent, screen });
+
+    it('should render as a custom component when linkAs is provided', () => {
+        const CustomLink = ({ children, ...props }: any) => (
+            <a data-custom="true" {...props}>
+                {children}
+            </a>
+        );
+        const { button } = setupComponent({ linkAs: CustomLink });
+        expect(button.tagName).toBe('A');
+        expect(button).toHaveAttribute('data-custom', 'true');
+    });
+
     describe('Disabled state from context', () => {
         it('should render disabled button when context is disabled', async () => {
             const onClick = vi.fn();
-            const { button } = setup(
+            const { button } = setupComponent(
                 { children: 'Label', onClick },
                 {
                     wrapper: ({ children }) => (
@@ -38,7 +46,7 @@ describe(`<${ButtonRoot.displayName}>`, () => {
 
         it('should render disabled link when context is disabled', async () => {
             const onClick = vi.fn();
-            const { button } = setup(
+            const { button } = setupComponent(
                 { children: 'Label', href: 'https://example.com', onClick },
                 {
                     wrapper: ({ children }) => (
@@ -56,7 +64,7 @@ describe(`<${ButtonRoot.displayName}>`, () => {
     });
 
     // Common tests suite.
-    commonTestsSuiteRTL(setup, {
+    commonTestsSuiteRTL(setupComponent, {
         baseClassName: BUTTON_CLASSNAME,
         forwardClassName: 'button',
         forwardAttributes: 'button',

@@ -1,25 +1,16 @@
-import { Emphasis, Icon, Size, Theme, ThemeProvider, Tooltip, TooltipProps } from '@lumx/react';
-import { BaseButtonProps, ButtonRoot } from '@lumx/react/components/button/ButtonRoot';
-import type { LumxClassName } from '@lumx/core/js/types';
+import { Theme, Tooltip, TooltipProps } from '@lumx/react';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { useDisableStateProps } from '@lumx/react/utils/disabled';
+import {
+    IconButton as UI,
+    CLASSNAME,
+    COMPONENT_NAME,
+    DEFAULT_PROPS,
+    IconButtonProps as BaseIconButtonProps,
+} from '@lumx/core/js/components/Button/IconButton';
 
-export interface IconButtonProps extends BaseButtonProps {
-    /**
-     * Icon (SVG path).
-     * If `image` is also set, `image` will be used instead.
-     */
-    icon?: string;
-    /**
-     * Image (image url).
-     * Has priority over `icon`.
-     */
-    image?: string;
-    /**
-     * Label text (required for a11y purpose).
-     * If you really don't want an aria-label, you can set an empty label (this is not recommended).
-     */
-    label: string;
+export interface IconButtonProps extends BaseIconButtonProps {
     /**
      * Props to pass to the tooltip.
      * If undefined or if tooltipProps.label is undefined, the label prop will be used as tooltip label.
@@ -30,24 +21,6 @@ export interface IconButtonProps extends BaseButtonProps {
 }
 
 /**
- * Component display name.
- */
-const COMPONENT_NAME = 'IconButton';
-
-/**
- * Component default class name and class prefix.
- */
-const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-icon-button';
-
-/**
- * Component default props.
- */
-const DEFAULT_PROPS: Partial<IconButtonProps> = {
-    emphasis: Emphasis.high,
-    size: Size.m,
-};
-
-/**
  * IconButton component.
  *
  * @param  props Component props.
@@ -56,36 +29,24 @@ const DEFAULT_PROPS: Partial<IconButtonProps> = {
  */
 export const IconButton = forwardRef<IconButtonProps, HTMLButtonElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
-    const {
-        emphasis = DEFAULT_PROPS.emphasis,
-        image,
-        icon,
-        label,
-        size = DEFAULT_PROPS.size,
-        theme = defaultTheme,
-        tooltipProps,
-        hideTooltip,
-        ...forwardedProps
-    } = props;
+    const { tooltipProps, hideTooltip, label, ...forwardedProps } = props;
+
+    const { isAnyDisabled, disabledStateProps, otherProps } = useDisableStateProps(forwardedProps);
 
     return (
         <Tooltip label={hideTooltip ? '' : label} {...tooltipProps}>
-            <ButtonRoot ref={ref} {...{ emphasis, size, theme, ...forwardedProps }} aria-label={label} variant="icon">
-                {image ? (
-                    <img
-                        // no need to set alt as an aria-label is already set on the button
-                        alt=""
-                        src={image}
-                    />
-                ) : (
-                    <ThemeProvider value={undefined}>
-                        <Icon icon={icon as string} />
-                    </ThemeProvider>
-                )}
-            </ButtonRoot>
+            {UI({
+                ref,
+                theme: defaultTheme,
+                ...disabledStateProps,
+                ...otherProps,
+                'aria-disabled': isAnyDisabled,
+                label,
+            })}
         </Tooltip>
     );
 });
+
 IconButton.displayName = COMPONENT_NAME;
 IconButton.className = CLASSNAME;
 IconButton.defaultProps = DEFAULT_PROPS;

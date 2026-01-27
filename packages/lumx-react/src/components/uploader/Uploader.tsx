@@ -1,7 +1,7 @@
 import React, { MouseEventHandler } from 'react';
 
 import { AspectRatio, Icon, Size, Theme } from '@lumx/react';
-import { GenericProps, HasTheme, ValueOf } from '@lumx/react/utils/type';
+import { GenericProps, HasTheme, ValueOf, HasAriaDisabled } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
@@ -9,7 +9,6 @@ import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
 import { useId } from '@lumx/react/hooks/useId';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
-import { HasAriaDisabled } from '@lumx/react/utils/type/HasAriaDisabled';
 import { useDisableStateProps } from '@lumx/react/utils/disabled';
 
 /**

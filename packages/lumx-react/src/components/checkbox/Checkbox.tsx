@@ -3,7 +3,7 @@ import React, { InputHTMLAttributes, ReactNode, SyntheticEvent } from 'react';
 import { mdiCheck, mdiMinus } from '@lumx/icons';
 
 import { Icon, InputHelper, InputLabel, Theme } from '@lumx/react';
-import { GenericProps, HasTheme } from '@lumx/react/utils/type';
+import { GenericProps, HasTheme, HasAriaDisabled } from '@lumx/react/utils/type';
 import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
@@ -12,7 +12,6 @@ import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
-import { HasAriaDisabled } from '@lumx/react/utils/type/HasAriaDisabled';
 
 /**
  * Intermediate state of checkbox.
