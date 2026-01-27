@@ -19,7 +19,7 @@ export default {
         size: getSelectArgType(sizes),
         orientation: getSelectArgType(Orientation),
     },
-    decorators: [withResizableBox({ width: 'auto', minWidth: 'min-content', height: 'auto' })],
+    decorators: [withResizableBox({ width: 'auto', height: 'auto' })],
 };
 
 /** Only an avatar */
@@ -93,6 +93,15 @@ export const SizesAndOrientations = {
             },
         }),
     ],
+};
+
+/** Demo text ellipsis on name and fields */
+export const WithConstrainedSize = {
+    args: AvatarAndNameAndSecondaryFields.args,
+    parameters: {
+        // Testing constrained space
+        wrapperProps: { style: { width: 150 } },
+    },
 };
 
 /** Setting `onClick` to use it as a button */
