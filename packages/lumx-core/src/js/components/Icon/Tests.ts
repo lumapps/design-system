@@ -116,5 +116,13 @@ export default (renderOptions: SetupOptions<IconProps>) => {
                 expect(i).toHaveClass('lumx-icon--color-variant-L2 lumx-icon--color-dark lumx-icon--has-shape');
             });
         });
+
+        describe('verticalAlign', () => {
+            it('should add vertical align middle class and remove default style on svg', () => {
+                const { i, svg } = setup({ verticalAlign: 'middle' }, renderOptions);
+                expect(i).toHaveClass(`${CLASSNAME}--vertical-align-middle`);
+                expect(svg).not.toHaveStyle({ verticalAlign: '-0.125em' });
+            });
+        });
     });
 };

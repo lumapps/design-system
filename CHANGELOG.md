@@ -16,13 +16,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Moved `ButtonGroup` from `@lumx/react`
     -   Moved `IconButton` from `@lumx/react`
     -   Moved `Text` from `@lumx/react`
--   `@lumx/vue`:
-    -   Create the `Text` component
 
 ### Added
 
+-   `@lumx/vue`:
+    -   Create the `Text` component
+    -   `Icon`: add `verticalAlign` prop to allow centered vertically aligned icon inside Text 
 -   `@lumx/react`:
     -   `UserBlock`: improve name and fields text layout in constrained space
+    -   `Icon`: add `verticalAlign` prop to allow centered vertically aligned icon inside Text or Heading
 
 ## [4.1.0][] - 2026-01-22
 
