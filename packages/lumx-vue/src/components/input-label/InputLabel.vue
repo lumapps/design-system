@@ -1,16 +1,23 @@
 <script setup lang="ts">
 import { useAttrs } from 'vue';
-import { InputLabel as ui, InputLabelProps } from '@lumx/core/js/components/InputLabel';
+
+import { InputLabel as InputLabelUI, InputLabelProps } from '@lumx/core/js/components/InputLabel';
 
 import { useTheme } from '../../composables/useTheme';
-import { useSlot } from '../../composables/useSlot';
+import { VueToJSX } from '../../utils/VueToJSX';
 
+defineOptions({
+    inheritAttrs: false,
+});
+
+const ui = VueToJSX(InputLabelUI);
 const props = defineProps<InputLabelProps>();
 const attrs = useAttrs();
 const defaultTheme = useTheme();
-const defaultSlot = useSlot();
 </script>
 
 <template>
-    <ui v-bind="{ ...attrs, ...props, theme: props.theme || defaultTheme, children: defaultSlot() }" />
+    <ui v-bind="{ ...props, ...attrs, theme: props.theme || defaultTheme }">
+        <slot />
+    </ui>
 </template>
