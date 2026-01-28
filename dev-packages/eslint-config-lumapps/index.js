@@ -105,7 +105,7 @@ module.exports = {
             },
         },
         {
-            files: ['packages/lumx-vue/**'],
+            files: ['packages/lumx-vue/**', 'packages/site-demo/**/*.vue'],
             plugins: [...BASE_PLUGINS, 'vue'],
             extends: [...BASE_EXTENDS, 'plugin:vue/vue3-recommended', '@vue/eslint-config-typescript'],
             parserOptions: {

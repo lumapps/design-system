@@ -2,6 +2,7 @@ import React from 'react';
 import { CodeBlock } from '@lumx/demo/components/content/CodeBlock/CodeBlock';
 import { DemoBlock } from '@lumx/demo/components/content/DemoBlock/DemoBlock';
 import { PropTable } from '@lumx/demo/components/content/PropTable/PropTable';
+import { FrameworkProvider } from '@lumx/demo/components/layout/FrameworkContext';
 import { Link } from '@lumx/demo/components/base/Link';
 import { Message } from '@lumx/react';
 import { MDXProvider } from '@mdx-js/react';
@@ -34,4 +35,8 @@ const mdxComponents = {
  * @return wrapped element.
  */
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const wrapRootElement = ({ element }: any) => <MDXProvider components={mdxComponents}>{element}</MDXProvider>;
+export const wrapRootElement = ({ element }: any) => (
+    <FrameworkProvider>
+        <MDXProvider components={mdxComponents}>{element}</MDXProvider>
+    </FrameworkProvider>
+);

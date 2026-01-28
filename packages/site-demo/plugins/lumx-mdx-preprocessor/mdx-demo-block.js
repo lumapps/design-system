@@ -48,7 +48,7 @@ function parseDemo(content) {
     };
 }
 
-module.exports = async (node, content) => {
+module.exports = async (content) => {
     const { scopeEntries, importsCode, bodyCode } = parseDemo(content);
 
     const output = `
