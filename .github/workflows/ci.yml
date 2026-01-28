@@ -1,8 +1,8 @@
-name: "CI"
+name: 'CI'
 
 on:
     pull_request:
-        types: [ opened, synchronize, reopened, ready_for_review ]
+        types: [opened, synchronize, reopened, ready_for_review]
 
 concurrency:
     group: ${{ github.head_ref }}-validate-pr
@@ -14,80 +14,82 @@ jobs:
         timeout-minutes: 30
         runs-on: ubuntu-latest
         steps:
-            -   name: "Checkout repository"
-                uses: actions/checkout@v5
+            - name: 'Checkout repository'
+              uses: actions/checkout@v5
 
-            -   name: "Setup"
-                uses: ./.github/actions/setup
+            - name: 'Setup'
+              uses: ./.github/actions/setup
 
-            -   name: "Run packages lint"
-                run: yarn lint:code
+            - name: 'Run packages lint'
+              run: yarn lint:code
 
-    test:
+    tests:
         if: github.event.pull_request.draft == false
         timeout-minutes: 30
         runs-on: ubuntu-latest
         strategy:
             matrix:
-                reactPackageVersions: [
-                    default,
-                    'react@17.0.2 react-dom@17.0.2 @testing-library/react@12.1.2',
-                    'react@19.1.1 react-dom@19.1.1 @testing-library/react@16.3.0'
-                ]
-        # Making sure we have a clean job name on 'default' package so that it matches the required "test" check
-        name: "test${{ matrix.reactPackageVersions != 'default' && format(' ({0})', matrix.reactPackageVersions) || '' }}"
+                package: ['@lumx/core', '@lumx/react', '@lumx/vue']
+                packageOverrides: ['']
+                include:
+                    - package: '@lumx/react'
+                      packageOverrides: 'react@17.0.2 react-dom@17.0.2 @testing-library/react@12.1.2'
+                    - package: '@lumx/react'
+                      packageOverrides: 'react@19.1.1 react-dom@19.1.1 @testing-library/react@16.3.0'
         steps:
-            -   name: "Checkout repository"
-                uses: actions/checkout@v5
+            - name: 'Checkout repository'
+              uses: actions/checkout@v5
 
-            -   name: "Setup"
-                uses: ./.github/actions/setup
+            - name: 'Setup'
+              uses: ./.github/actions/setup
 
-            -   name: "Switch react version"
-                if: ${{ matrix.reactPackageVersions != 'default' }}
-                run: yarn up ${{ matrix.reactPackageVersions }}
+            - name: 'Override package versions'
+              if: ${{ matrix.packageOverrides != '' }}
+              run: yarn up ${{ matrix.packageOverrides }}
 
-            -   name: "Run lumx-react tests"
-                run: |
-                    sudo timedatectl set-timezone Europe/Paris
-                    yarn workspace @lumx/react test
+            - name: 'Run ${{ matrix.package }} tests'
+              run: |
+                  sudo timedatectl set-timezone Europe/Paris
+                  yarn workspace ${{ matrix.package }} test
 
-            -   name: "Run lumx-core tests"
-                if: ${{ matrix.reactPackageVersions == 'default' }}
-                run: |
-                    yarn workspace @lumx/core test
-
-            -   name: "Run lumx-vue tests"
-                if: ${{ matrix.reactPackageVersions == 'default' }}
-                run: |
-                    sudo timedatectl set-timezone Europe/Paris
-                    yarn workspace @lumx/vue test
-
+    # Required "test" job in branch protection rule
+    # (tests is running multiple jobs and thus we cannot mark them all as required)
+    test:
+        runs-on: ubuntu-latest
+        needs: [tests]
+        if: always()
+        steps:
+            - name: Success
+              if: ${{ !(contains(needs.*.result, 'failure')) }}
+              run: exit 0
+            - name: Failure
+              if: ${{ contains(needs.*.result, 'failure') }}
+              run: exit 1
 
     type-check:
         if: github.event.pull_request.draft == false
         timeout-minutes: 30
         runs-on: ubuntu-latest
         steps:
-            -   name: "Checkout repository"
-                uses: actions/checkout@v5
+            - name: 'Checkout repository'
+              uses: actions/checkout@v5
 
-            -   name: "Setup"
-                uses: ./.github/actions/setup
+            - name: 'Setup'
+              uses: ./.github/actions/setup
 
-            -   name: "Run code type check"
-                run: yarn type-check
+            - name: 'Run code type check'
+              run: yarn type-check
 
     Commit-message-validation:
         if: github.event.pull_request.draft == false
         runs-on: ubuntu-latest
         steps:
-            -   name: "Checkout repository"
-                uses: actions/checkout@v5
+            - name: 'Checkout repository'
+              uses: actions/checkout@v5
 
-            -   name: "Commit message validation"
-                uses: lumapps/commit-message-validator@master
-                with:
-                    no_jira: true
-                env:
-                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - name: 'Commit message validation'
+              uses: lumapps/commit-message-validator@master
+              with:
+                  no_jira: true
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
