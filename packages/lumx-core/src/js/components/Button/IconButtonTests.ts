@@ -1,11 +1,9 @@
-import { Button } from '@lumx/react';
 import userEvent from '@testing-library/user-event';
 import { getByClassName, queryByClassName, queryByTagName } from '@lumx/core/testing/queries';
 import { SetupOptions } from '@lumx/core/testing';
 
+import { CLASSNAME } from './Button';
 import { IconButton, IconButtonProps } from './IconButton';
-
-const CLASSNAME = Button.className as string;
 
 type SetupProps = Partial<IconButtonProps>;
 

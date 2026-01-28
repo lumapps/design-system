@@ -1,13 +1,13 @@
 import omit from 'lodash/omit';
 
-import { ButtonSize, Emphasis, Size } from '@lumx/react';
+import { Emphasis, Size } from '@lumx/core/js/constants';
 import { mdiAccountBox } from '@lumx/icons';
-
 import { iconArgType } from '@lumx/core/stories/controls/icons';
 import { colorArgType } from '@lumx/core/stories/controls/color';
 import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
 import { disableArgTypes } from '@lumx/core/stories/utils/disableArgTypes';
 
+import { ButtonSize } from './ButtonRoot';
 import { Button } from './Button';
 
 const buttonSizes = [Size.m, Size.s];

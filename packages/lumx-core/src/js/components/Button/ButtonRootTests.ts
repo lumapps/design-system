@@ -1,5 +1,5 @@
 import userEvent from '@testing-library/user-event';
-import { ColorPalette, Emphasis, Size, Theme } from '@lumx/react';
+import { ColorPalette, Emphasis, Size, Theme } from '@lumx/core/js/constants';
 
 import { SetupOptions } from '@lumx/core/testing';
 import { getByClassName } from '@lumx/core/testing/queries';
