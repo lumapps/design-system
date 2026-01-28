@@ -16,8 +16,7 @@ Add/Remove/Update the following check list depending on your submission:
 -   [ ] (if has code) Add `need: review-frontend` label
 -   [ ] (if has react) Check through the [react dev check list]
 -   [ ] (if fix or feature) Add `need: test` label
--   [ ] (if you need a storybook and/or visual diff) Add `need: deploy-chromatic` label
-    Chromatic builds are available here: https://www.chromatic.com/builds?appId=5fbfb1d508c0520021560f10
+-   [ ] (if you need a storybook and/or visual diff) Add `need: deploy-storybook-react` or `need: deploy-storybook-vue` label
 
 Check out the [contribution guide] for general guidelines for submissions to the design system.
 
