@@ -5,12 +5,13 @@ import { resolveColorWithVariants } from '@lumx/core/js/utils/_internal/color';
 import { classNames } from '../../utils';
 
 import { ColorPalette, Size, Theme, ColorWithVariants, ColorVariant } from '../../constants';
-import type { LumxClassName, GenericProps, HasTheme } from '../../types';
+import type { LumxClassName, GenericProps, HasTheme, ObjectValues } from '../../types';
+import { ICON_SIZES } from './constants';
 
 export const COMPONENT_NAME = 'Icon';
 export const IconClassName: LumxClassName<typeof COMPONENT_NAME> = 'lumx-icon';
 
-export type IconSizes = Extract<Size, 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl'>;
+export type IconSizes = ObjectValues<typeof ICON_SIZES>;
 
 /**
  * Defines the props of the component.
@@ -31,6 +32,8 @@ export interface IconProps extends GenericProps, HasTheme {
     size?: IconSizes;
     /** Sets an alternative text on the svg. Will set an `img` role to the svg. */
     alt?: string;
+    /** Vertical alignment of the icon (only applies for icons nested in Text/Heading). */
+    verticalAlign?: null | 'middle';
 }
 
 const CLASSNAME = IconClassName;
@@ -56,6 +59,7 @@ export const Icon = (props: IconProps) => {
         ref,
         theme,
         alt,
+        verticalAlign,
         ...forwardedProps
     } = props;
     const [color, colorVariant] = resolveColorWithVariants(propColor, propColorVariant);
@@ -97,6 +101,7 @@ export const Icon = (props: IconProps) => {
                     prefix: CLASSNAME,
                     theme,
                     size: iconSize,
+                    verticalAlign,
                 }),
                 !hasShape && `${CLASSNAME}--no-shape`,
                 !hasShape &&
@@ -112,7 +117,7 @@ export const Icon = (props: IconProps) => {
                 aria-label={alt}
                 height="1em"
                 preserveAspectRatio="xMidYMid meet"
-                style={{ verticalAlign: '-0.125em' }}
+                style={{ verticalAlign: verticalAlign ? undefined : '-0.125em' }}
                 viewBox="0 0 24 24"
                 width="1em"
             >
