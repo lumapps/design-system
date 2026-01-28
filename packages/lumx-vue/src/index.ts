@@ -5,3 +5,4 @@ export * from './components/input-helper';
 export * from './components/input-label';
 export * from './components/icon';
 export * from './components/text';
+export * from './components/button';

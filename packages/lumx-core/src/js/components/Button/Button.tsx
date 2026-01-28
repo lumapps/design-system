@@ -4,7 +4,7 @@ import { Emphasis, Size } from '../../constants';
 import { getBasicClass } from '../../utils/_internal/className';
 import type { JSXElement, LumxClassName } from '../../types';
 import { classNames } from '../../utils';
-import { BaseButtonProps, ButtonRoot } from './ButtonRoot';
+import { type BaseButtonProps, ButtonRoot } from './ButtonRoot';
 
 /**
  * Button emphasis definition.

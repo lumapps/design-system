@@ -136,6 +136,12 @@ module.exports = {
                 'vue/html-self-closing': ['error', { html: { void: 'always', normal: 'always', component: 'always' } }],
                 'vue/html-indent': ['error', 4],
                 'vue/multi-word-component-names': 'off',
+                "vue/prop-name-casing": ["error",
+                    "camelCase" | "snake_case",
+                    {
+                        "ignoreProps": ['aria-*']
+                    }
+                ]
             },
         },
     ],
