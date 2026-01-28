@@ -77,13 +77,6 @@ export default (renderOptions: SetupOptions<ButtonProps>) => {
                 expect(button.querySelector('span')).toHaveTextContent(label);
             });
 
-            it('should call onClick', async () => {
-                const onClick = vi.fn();
-                const { button } = setup({ onClick }, renderOptions);
-                await userEvent.click(button);
-                expect(onClick).toHaveBeenCalledTimes(1);
-            });
-
             it('should render with type submit', () => {
                 const { button } = setup({ type: 'submit' }, renderOptions);
                 expect(button).toHaveAttribute('type', 'submit');
@@ -92,56 +85,6 @@ export default (renderOptions: SetupOptions<ButtonProps>) => {
             it('should render link with target', () => {
                 const { button } = setup({ href: 'https://example.com', target: '_blank' }, renderOptions);
                 expect(button).toHaveAttribute('target', '_blank');
-            });
-        });
-
-        describe('Disabled state', () => {
-            it('should render disabled button', async () => {
-                const onClick = vi.fn();
-                const { button } = setup({ children: 'Label', disabled: true, onClick }, renderOptions);
-                expect(button).toHaveAttribute('disabled');
-                await userEvent.click(button);
-                expect(onClick).not.toHaveBeenCalled();
-            });
-
-            it('should render disabled link', async () => {
-                const onClick = vi.fn();
-                const { button } = setup(
-                    { children: 'Label', disabled: true, href: 'https://example.com', onClick },
-                    renderOptions,
-                );
-                expect(screen.queryByRole('link')).toBeInTheDocument();
-                expect(button).toHaveAttribute('aria-disabled', 'true');
-                // Simulate standard disabled state (not focusable)
-                expect(button).toHaveAttribute('tabindex', '-1');
-                await userEvent.click(button);
-                expect(onClick).not.toHaveBeenCalled();
-            });
-
-            it('should render aria-disabled button', async () => {
-                const onClick = vi.fn();
-                const { button } = setup({ children: 'Label', 'aria-disabled': true, onClick }, renderOptions);
-                expect(button).toHaveAttribute('aria-disabled');
-                await userEvent.click(button);
-                expect(onClick).not.toHaveBeenCalled();
-            });
-
-            it('should render aria-disabled link', async () => {
-                const onClick = vi.fn();
-                const { button } = setup(
-                    {
-                        children: 'Label',
-                        'aria-disabled': true,
-                        href: 'https://example.com',
-                        onClick,
-                    },
-                    renderOptions,
-                );
-                expect(button).toHaveAccessibleName('Label');
-                expect(screen.queryByRole('link')).toBeInTheDocument();
-                expect(button).toHaveAttribute('aria-disabled', 'true');
-                await userEvent.click(button);
-                expect(onClick).not.toHaveBeenCalled();
             });
         });
     });

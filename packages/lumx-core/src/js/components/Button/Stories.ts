@@ -18,6 +18,7 @@ export const Default = {
     argTypes: {
         isSelected: { control: 'boolean', if: { arg: 'emphasis', eq: 'medium' } },
         isDisabled: { control: 'boolean' },
+        fullWidth: { control: 'boolean' },
         hasBackground: { control: 'boolean', if: { arg: 'emphasis', eq: 'low' } },
         emphasis: getSelectArgType(buttonEmphasis),
         size: getSelectArgType<ButtonSize>(buttonSizes),

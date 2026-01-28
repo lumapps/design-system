@@ -43,6 +43,13 @@ describe(`<${Button.displayName}>`, () => {
             expect(icons[0]).not.toHaveClass('lumx-icon--theme-dark');
             expect(icons[1]).not.toHaveClass('lumx-icon--theme-dark');
         });
+
+        it('should call onClick', async () => {
+            const onClick = vi.fn();
+            const { button } = setupComponent({ onClick });
+            await userEvent.click(button);
+            expect(onClick).toHaveBeenCalledTimes(1);
+        });
     });
 
     describe('Disabled state', () => {
@@ -76,6 +83,52 @@ describe(`<${Button.displayName}>`, () => {
             expect(button).toHaveAttribute('aria-disabled', 'true');
             // Simulate standard disabled state (not focusable)
             expect(button).toHaveAttribute('tabindex', '-1');
+            await userEvent.click(button);
+            expect(onClick).not.toHaveBeenCalled();
+        });
+
+        it('should render disabled button', async () => {
+            const onClick = vi.fn();
+            const { button } = setupComponent({ children: 'Label', disabled: true, onClick });
+            expect(button).toHaveAttribute('disabled');
+            await userEvent.click(button);
+            expect(onClick).not.toHaveBeenCalled();
+        });
+
+        it('should render disabled link', async () => {
+            const onClick = vi.fn();
+            const { button } = setupComponent(
+                { children: 'Label', disabled: true, href: 'https://example.com', onClick },
+            );
+            expect(screen.queryByRole('link')).toBeInTheDocument();
+            expect(button).toHaveAttribute('aria-disabled', 'true');
+            // Simulate standard disabled state (not focusable)
+            expect(button).toHaveAttribute('tabindex', '-1');
+            await userEvent.click(button);
+            expect(onClick).not.toHaveBeenCalled();
+        });
+
+        it('should render aria-disabled button', async () => {
+            const onClick = vi.fn();
+            const { button } = setupComponent({ children: 'Label', 'aria-disabled': true, onClick });
+            expect(button).toHaveAttribute('aria-disabled');
+            await userEvent.click(button);
+            expect(onClick).not.toHaveBeenCalled();
+        });
+
+        it('should render aria-disabled link', async () => {
+            const onClick = vi.fn();
+            const { button } = setupComponent(
+                {
+                    children: 'Label',
+                    'aria-disabled': true,
+                    href: 'https://example.com',
+                    onClick,
+                },
+            );
+            expect(button).toHaveAccessibleName('Label');
+            expect(screen.queryByRole('link')).toBeInTheDocument();
+            expect(button).toHaveAttribute('aria-disabled', 'true');
             await userEvent.click(button);
             expect(onClick).not.toHaveBeenCalled();
         });

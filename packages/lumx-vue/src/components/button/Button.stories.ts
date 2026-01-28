@@ -22,7 +22,7 @@ export const Base = {
             return { args };
         },
         template: `
-            <Button v-bind="args">
+            <Button v-bind="args" @click="args.onClick">
                 {{ args.children }}
             </Button>
         `,
