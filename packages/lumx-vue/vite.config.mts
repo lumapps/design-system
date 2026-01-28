@@ -82,7 +82,14 @@ export default defineConfig({
     },
     plugins: [
         fixEsmImports(),
-        vue(),
+        vue({
+            script: {
+                // This enables the compiler to resolve types from external files/packages
+                fsSelfReference: true,
+                // This helps with complex prop analysis
+                propsDestructure: true, 
+            },
+        }),
         vueJsx({
             // 1. Tell the Vue JSX compiler what function to use (h)
             // 2. Tell it to import 'h' from the 'vue' module

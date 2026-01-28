@@ -138,7 +138,13 @@ module.exports = {
                 'vue/multi-word-component-names': 'off',
                 "vue/block-order": ["error", {
                     "order": [ "template", "script", "style" ]
-                }]
+                }],
+                "vue/prop-name-casing": ["error",
+                    "camelCase" | "snake_case",
+                    {
+                        "ignoreProps": ['aria-*']
+                    }
+                ]
             },
         },
     ],
