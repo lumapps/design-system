@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Theme } from '@lumx/react';
 
-import { theme as prismTheme } from '../../../CodeBlock/init-prism';
+import prismTheme from 'prism-react-renderer/themes/github';
 import type { ReactDemo } from '../../types';
 
 export const LazyReactLiveProvider = React.lazy(() =>

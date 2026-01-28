@@ -96,5 +96,14 @@ exports.onCreateWebpackConfig = async ({ actions, stage }) => {
         resolve: {
             plugins: [new TsconfigPathsPlugin({ extensions: ['.ts', '.tsx'] })],
         },
+        module: {
+            rules: [
+                // Load .vue files as raw text
+                {
+                    test: /\.vue$/,
+                    use: 'raw-loader',
+                },
+            ],
+        },
     });
 };

@@ -1,4 +1,4 @@
-import { Ref } from 'react';
+import React, { Ref } from 'react';
 import { Match } from '@gatsbyjs/reach-router';
 
 import { mdiMenu } from '@lumx/icons';
@@ -7,6 +7,8 @@ import { HomeLogoLink } from '@lumx/demo/components/layout/MainNav/HomeLogoLink/
 import { SearchButton } from '@lumx/demo/components/search/SearchButton';
 
 import { LumxVersion } from './LumxVersion';
+import { FrameworkSelector } from './FrameworkSelector';
+
 import './MainHeader.scss';
 
 interface MainHeaderProps {
@@ -29,6 +31,7 @@ export const MainHeader: React.FC<MainHeaderProps> = ({ openMenu, openNavButtonR
             {({ match }) =>
                 match && (
                     <div className="main-header__extras">
+                        <FrameworkSelector />
                         <LumxVersion />
                     </div>
                 )

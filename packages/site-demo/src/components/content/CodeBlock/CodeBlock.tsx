@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import isString from 'lodash/isString';
+import prismTheme from 'prism-react-renderer/themes/github';
 import Highlight, { defaultProps, Language } from 'prism-react-renderer';
 import React from 'react';
-import { theme } from './init-prism';
 import { renderJSXLinesWithCollapsedImports } from './renderJSXLinesWithCollapsedImports';
 import { renderLines } from './renderLines';
 
@@ -36,7 +36,7 @@ export const CodeBlock: React.FC<Props> = ({
 
     const code = (isString(children) ? children : codeString) || '';
     return (
-        <Highlight {...defaultProps} theme={theme} code={code} language={language as Language}>
+        <Highlight {...defaultProps} theme={prismTheme} code={code} language={language as Language}>
             {({ className: prismClassName, ...renderParams }) => (
                 <Component className={classNames('code-block', prismClassName, className)}>
                     {language === 'jsx' || language === 'tsx'

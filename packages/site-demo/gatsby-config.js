@@ -6,8 +6,8 @@ const path = require('path');
 
 module.exports = {
     flags: {
-        FAST_DEV: true,
-        PARALLEL_SOURCING: true,
+        //FAST_DEV: true,
+        //PARALLEL_SOURCING: true,
     },
     siteMetadata: {
         title: 'LumApps Design System',

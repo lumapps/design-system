@@ -108,7 +108,7 @@ async function updatePropTable(docgenParser, props) {
 /**
  * Inject `react-docgen-typescript` prop documentation in <PropTable> MDX.
  */
-module.exports = async (node, mdxString) => {
+module.exports = async (mdxString) => {
     try {
         const docgenParser = await getDocgenParser();
 

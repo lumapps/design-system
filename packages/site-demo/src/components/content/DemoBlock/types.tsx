@@ -7,6 +7,11 @@ export interface ReactDemo {
     imports: string;
 }
 
+export interface VueDemo {
+    default: string;
+}
+
 export interface Demo {
     react?: ReactDemo;
+    vue?: VueDemo;
 }

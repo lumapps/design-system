@@ -19,7 +19,7 @@ interface Props {
     lang?: string;
 }
 
-const DEFAULT_KEYWORDS = ['lumapps', 'design system', 'lumx', 'react'];
+const DEFAULT_KEYWORDS = ['lumapps', 'design system', 'lumx', 'react', 'vue'];
 
 /**
  * Provide SEO using Gatsby Head API to inject data in the document <head>.
