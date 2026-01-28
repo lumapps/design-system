@@ -1,9 +1,10 @@
-import { ColorPalette, ColorVariant, Icon, IconProps, IconSizes, Size } from '@lumx/vue';
+import { ColorPalette, ColorVariant, Icon, IconProps, IconSizes, Size, Text } from '@lumx/vue';
 
 import {
     Default as DefaultConfig,
     SizeAndShape as SizeAndShapeStory,
     AllColors as AllColorsStory,
+    InsideText as InsideTextStory,
 } from '@lumx/core/js/components/Icon/Stories';
 import StoryMatrix from '@lumx/vue/stories/utils/StoryMatrix.vue';
 import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
@@ -32,8 +33,8 @@ export const SizeAndShape = {
         template: `
             <StoryMatrix :rows="shapes" :cols="sizes">
                 <template #default="{ row, col }">
-                    <Icon 
-                        v-bind="args" 
+                    <Icon
+                        v-bind="args"
                         :size="col"
                         :hasShape="row"
                     />
@@ -58,13 +59,32 @@ export const AllColors = {
         template: `
             <StoryMatrix :rows="colors" :cols="variants">
                 <template #default="{ row, col }">
-                    <Icon 
-                        v-bind="args" 
+                    <Icon
+                        v-bind="args"
                         :color="row"
                         :colorVariant="col"
                     />
                 </template>
             </StoryMatrix>
             `,
+    }),
+};
+
+/**
+ * Icon inside a text component
+ * (renders as inline instead of block and can adapt to the verticalAlign)
+ */
+export const InsideText = {
+    ...InsideTextStory,
+    render: (args: IconProps) => ({
+        components: { Icon, Text },
+        setup() {
+            return { args };
+        },
+        template: `
+            <Text as="p">
+                Lorem ipsum <Icon v-bind="args" /> dolor sit amet.
+            </Text>
+        `,
     }),
 };
