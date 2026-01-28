@@ -12,7 +12,7 @@
     "build": "vite build",
     "type-check": "yarn tsc -p tsconfig.json",
     "start:storybook": "storybook dev -p 9000",
-    "build-storybook": "storybook build",
+    "build:storybook": "storybook build",
     "test": "vitest run"
   },
   "type": "module",
