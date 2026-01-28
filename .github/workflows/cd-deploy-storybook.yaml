@@ -21,7 +21,6 @@ jobs:
         secrets: inherit
         with:
             package: 'react'
-            projectTokenKey: 'CHROMATIC_TOKEN'
 
     deploy-storybook-vue:
         if: "github.event.action == 'labeled' && github.event.label.name == 'need: deploy-storybook-vue'"
@@ -29,7 +28,6 @@ jobs:
         secrets: inherit
         with:
             package: 'vue'
-            projectTokenKey: 'CHROMATIC_TOKEN_LUMX_VUE'
 
     check_up_to_date:
         if: "github.event.action == 'synchronize' && contains(github.event.pull_request.body, '\nStoryBook: ')"

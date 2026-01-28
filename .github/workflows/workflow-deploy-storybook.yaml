@@ -6,9 +6,6 @@ on:
             package:
                 required: true
                 type: string
-            projectTokenKey:
-                required: true
-                type: string
 
 jobs:
     deploy:
@@ -23,21 +20,36 @@ jobs:
               id: vars
               uses: actions/github-script@v6
               with:
+                  result-encoding: json
                   script: |
-                      // Link to the current run on github website
-                      const run_html_url = "${{github.event.repository.html_url}}/actions/runs/${{github.run_id}}?pr=${{github.event.pull_request.number}}";
+                      const pkg = '${{ inputs.package }}';
 
-                      // StoryBook URL
-                      const utils = require('./.github/actions/utils');
-                      const storybook_url = await utils.getStoryBookURL('${{github.event.pull_request.head.sha}}', 'lumx-${{ inputs.package }}');
+                      let project_token_key;
+                      if (pkg === 'react') {
+                        project_token_key = 'CHROMATIC_TOKEN_LUMX_REACT';
+                      } else if (pkg === 'vue') {
+                        project_token_key = 'CHROMATIC_TOKEN_LUMX_VUE';
+                      }
 
-                      return { run_html_url, storybook_url };
+                      let run_html_url, storybook_url;
+                      if (context.payload.pull_request) {
+                        // Link to the current run on github website
+                        run_html_url = `${context.payload.repository.html_url}/actions/runs/${context.runId}?pr=${context.payload.pull_request.number}`;
+
+                        // StoryBook URL
+                        const utils = require('./.github/actions/utils');
+                        const shortSHA = await utils.getShortSHA(context.payload.pull_request.head.sha);
+                        storybook_url = utils.getStoryBookURL(shortSHA, 'lumx-${{ inputs.package }}');
+                      }
+
+                      return { project_token_key, run_html_url, storybook_url }
 
             - name: 'Update PR body: Deploying state'
+              if: github.event.pull_request
               uses: ./.github/actions/update-pr-body
               with:
                   pattern: 'StoryBook ${{ inputs.package }}: .*'
-                  replace: 'StoryBook ${{ inputs.package }}: [Deploying...](${{fromJSON(steps.vars.outputs.result).run_html_url}})'
+                  replace: 'StoryBook ${{ inputs.package }}: [Deploying...](${{steps.vars.outputs.result.run_html_url}})'
                   whenNotFound: 'append'
                   keepLastMatch: true
 
@@ -49,28 +61,29 @@ jobs:
               uses: chromaui/action@d0795df816d05c4a89c80295303970fddd247cce #v13.1.4
               with:
                   token: ${{ secrets.GITHUB_TOKEN }}
-                  projectToken: ${{ secrets[inputs.projectTokenKey] }}
+                  projectToken: ${{ secrets[steps.vars.outputs.result.project_token_key] }}
                   buildScriptName: build:storybook:${{ inputs.package }}
 
-            - if: 'failure()'
+            - if: failure() && github.event.pull_request
               name: 'Update PR body: Failure state'
               uses: ./.github/actions/update-pr-body
               with:
                   pattern: 'StoryBook ${{ inputs.package }}: .*'
-                  replace: 'StoryBook ${{ inputs.package }}: [:x: Failed](${{fromJSON(steps.vars.outputs.result).run_html_url}})'
+                  replace: 'StoryBook ${{ inputs.package }}: [:x: Failed](${{steps.vars.outputs.result.run_html_url}})'
                   whenNotFound: 'ignore'
                   keepLastMatch: true
 
-            - if: "always() && contains(github.event.pull_request.labels.*.name, format('need: deploy-storybook-{0}', inputs.package))"
+            - if: "always() && github.event.pull_request && contains(github.event.pull_request.labels.*.name, format('need: deploy-storybook-{0}', inputs.package))"
               name: 'Remove label'
               uses: ./.github/actions/remove-label
               with:
                   label: 'need: deploy-storybook-${{ inputs.package }}'
 
             - name: 'Update PR body: Deployed state'
+              if: github.event.pull_request
               uses: ./.github/actions/update-pr-body
               with:
                   pattern: 'StoryBook ${{ inputs.package }}: .*'
-                  replace: 'StoryBook ${{ inputs.package }}: ${{fromJSON(steps.vars.outputs.result).storybook_url}} ([Chromatic build](${{steps.deploy.outputs.buildUrl}}))'
+                  replace: 'StoryBook ${{ inputs.package }}: ${{steps.vars.outputs.result.storybook_url}} ([Chromatic build](${{steps.deploy.outputs.buildUrl}}))'
                   whenNotFound: 'append'
                   keepLastMatch: true

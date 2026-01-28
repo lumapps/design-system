@@ -1,4 +1,4 @@
-name: "CD / Publish"
+name: 'CD / Publish'
 
 # This workflow orchestrates the continuous delivery process for the design system.
 # It supports both official releases triggered by merges to 'master' (with a specific commit message)
@@ -29,7 +29,7 @@ permissions:
     contents: read
 
 concurrency:
-    group: "${{ github.workflow }}-${{ github.ref_name }}"
+    group: '${{ github.workflow }}-${{ github.ref_name }}'
     cancel-in-progress: true
 
 jobs:
@@ -133,22 +133,13 @@ jobs:
         name: 'Deploy chromatic'
         if: needs.is_release_commit.outputs.version
         needs: [is_release_commit, git_tag]
-        runs-on: ubuntu-latest
-        steps:
-            - name: 'Checkout repository'
-              uses: actions/checkout@v5
-              with:
-                  fetch-depth: 0 # retrieve all the repo history (required by chromatic)
-
-            - name: 'Setup'
-              uses: ./.github/actions/setup
-
-            - name: 'Deploy chromatic'
-              uses: chromaui/action@d0795df816d05c4a89c80295303970fddd247cce #v13.1.4
-              with:
-                  token: ${{ secrets.GITHUB_TOKEN }}
-                  projectToken: ${{ secrets.CHROMATIC_TOKEN }}
-                  buildScriptName: build:storybook
+        strategy:
+            matrix:
+                package: [react, vue]
+        uses: ./.github/workflows/workflow-deploy-storybook.yaml
+        with:
+            package: ${{ matrix.package }}
+        secrets: inherit
 
     deploy_demo_site:
         name: 'Deploy demo site'

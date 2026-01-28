@@ -2,9 +2,9 @@
 
 const fs = require('fs');
 
-const { getStoryBookURL } = require('../utils');
+const { getStoryBookURL, getShortSHA } = require('../utils');
 const { CHANGELOG_PATH } = require('../../../configs/path');
-const VERSION_HEADER_REGEXP = /^## \[(.*?)\]\[\]/mg;
+const VERSION_HEADER_REGEXP = /^## \[(.*?)\]\[\]/gm;
 
 // Extract changelog from latest version in CHANGELOG.md
 async function getLatestVersionChangelog() {
@@ -23,14 +23,19 @@ async function getLatestVersionChangelog() {
  * Generate release note and create a release on GH.
  */
 async function main({ github, context }) {
-    const storybookURLPromise = getStoryBookURL(context.sha);
-    const { version, versionChangelog } = await getLatestVersionChangelog();
+    const [shortSHA, { version, versionChangelog }] = await Promise.all([
+        getShortSHA(context.sha),
+        getLatestVersionChangelog(),
+    ]);
     const versionTag = `v${version}`;
 
     // Related links
     const changelogURL = `https://github.com/lumapps/design-system/blob/${versionTag}/CHANGELOG.md`;
-    const storyBookURL = await storybookURLPromise;
-    const links = `[🎨 StoryBook](${storyBookURL}) - [📄 See changelog history](${changelogURL})`;
+    const links = [
+        `[🎨 StoryBook React](${getStoryBookURL(shortSHA, 'lumx-react')})`,
+        `[🎨 StoryBook Vue](${getStoryBookURL(shortSHA, 'lumx-vue')})`,
+        `[📄 See changelog history](${changelogURL})`,
+    ].join(' - ');
 
     // Release notes
     const body = `${versionChangelog}\n\n${links}`;
