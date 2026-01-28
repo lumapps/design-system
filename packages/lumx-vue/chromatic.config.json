@@ -1,0 +1,7 @@
+{
+    "$schema": "https://www.chromatic.com/config-file.schema.json",
+    "projectId": "Project:697a023f84e832e23544fb3c",
+    "storybookBaseDir": "packages/lumx-vue",
+    "buildScriptName": "build:storybook",
+    "zip": true
+}
