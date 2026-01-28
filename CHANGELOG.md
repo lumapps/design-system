@@ -15,6 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Moved `Button` from `@lumx/react`
     -   Moved `ButtonGroup` from `@lumx/react`
     -   Moved `IconButton` from `@lumx/react`
+    -   Moved `Text` from `@lumx/react`
+-   `@lumx/vue`:
+    -   Create the `Text` component
 
 ## [4.1.0][] - 2026-01-22
 
@@ -32,7 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/vue`:
     -   Initialise package
     -   Create the `InputHelper` component
-    -   Create the `InputLabel` component
+    -   Moved Icon JSX templating from `@lumx/react`
     -   Create the `Icon` component
     -   Setup Storybook and Tests
 -   `@lumx/react`:

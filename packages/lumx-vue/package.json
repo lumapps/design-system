@@ -25,7 +25,8 @@
   "version": "4.1.0",
   "dependencies": {
     "@lumx/core": "^4.1.0",
-    "@lumx/icons": "^4.1.0"
+    "@lumx/icons": "^4.1.0",
+    "@vueuse/core": "^14.1.0"
   },
   "peerDependencies": {
     "lodash": "4.17.21",

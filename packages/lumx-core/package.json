@@ -58,6 +58,7 @@
         "version-changelog": "^3.1.1",
         "vite": "^6.3.5",
         "vite-tsconfig-paths": "^5.1.4",
-        "vitest": "^3.0.0"
+        "vitest": "^3.0.0",
+        "vue": "^3.5.25"
     }
 }
