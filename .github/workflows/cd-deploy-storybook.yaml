@@ -1,9 +1,6 @@
 name: 'CD / Deploy storybook'
 
 # Deploy Storybook (chromatic) on pull requests
-# - label "need: deploy-storybook-react" to deploy lumx react
-# - label "need: deploy-storybook-vue" to deploy lumx vue
-#
 # When updates are pushed to the PR, we mark previous deploys as outdated
 
 on:
@@ -17,22 +14,46 @@ concurrency:
 jobs:
     deploy-storybook-react:
         if: "github.event.action == 'labeled' && github.event.label.name == 'need: deploy-storybook-react'"
-        uses: ./.github/workflows/workflow-deploy-storybook.yaml
-        secrets: inherit
-        with:
-            package: 'react'
-            projectTokenKey: 'CHROMATIC_TOKEN'
+        runs-on: ubuntu-latest
+        steps:
+            - name: 'Checkout repository'
+              uses: actions/checkout@v5
+              with:
+                  fetch-depth: 0 # retrieve all the repo history (required by chromatic)
+
+            - uses: ./.github/actions/deploy-storybook
+              with:
+                  package: 'lumx-react'
+                  chromatic_token: ${{ secrets.CHROMATIC_TOKEN_LUMX_REACT }}
+
+            - if: always()
+              name: 'Remove label'
+              uses: ./.github/actions/remove-label
+              with:
+                  label: 'need: deploy-storybook-react'
 
     deploy-storybook-vue:
         if: "github.event.action == 'labeled' && github.event.label.name == 'need: deploy-storybook-vue'"
-        uses: ./.github/workflows/workflow-deploy-storybook.yaml
-        secrets: inherit
-        with:
-            package: 'vue'
-            projectTokenKey: 'CHROMATIC_TOKEN_LUMX_VUE'
+        runs-on: ubuntu-latest
+        steps:
+            - name: 'Checkout repository'
+              uses: actions/checkout@v5
+              with:
+                  fetch-depth: 0 # retrieve all the repo history (required by chromatic)
+
+            - uses: ./.github/actions/deploy-storybook
+              with:
+                  package: 'lumx-vue'
+                  chromatic_token: ${{ secrets.CHROMATIC_TOKEN_LUMX_VUE }}
+
+            - if: always()
+              name: 'Remove label'
+              uses: ./.github/actions/remove-label
+              with:
+                  label: 'need: deploy-storybook-vue'
 
     check_up_to_date:
-        if: "github.event.action == 'synchronize' && contains(github.event.pull_request.body, '\nStoryBook: ')"
+        if: "github.event.action == 'synchronize' && contains(github.event.pull_request.body, 'StoryBook ')"
         name: 'Check StoryBook URL is up-to-date'
         runs-on: ubuntu-latest
         steps:
@@ -46,7 +67,7 @@ jobs:
             - name: 'Mark storybook URL as outdated'
               uses: ./.github/actions/update-pr-body
               with:
-                  pattern: '(Storybook \w+: (https:\/\/([a-z0-9]+)--[^ ]*).*)'
+                  pattern: '(StoryBook [^:]+: (https:\/\/([a-z0-9]+)--[^ ]*).*)'
                   # Ignore if the short SHA in the storybook URL is up-to-date or if it was already marked as outdated
                   skipReplaceIf: |
                       groups[3] === "${{steps.short_sha.outputs.short_sha}}"

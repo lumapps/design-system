@@ -3,7 +3,7 @@
     "bugs": {
         "url": "https://github.com/lumapps/design-system/issues"
     },
-    "description": "The official LumApps Design System (LumX) for AngularJS and React applications",
+    "description": "The official LumApps Design System (LumX) for Vue and React applications",
     "devDependencies": {
         "@vitest/ui": "^4.0.18",
         "changelog-verify": "^1.1.2",
@@ -36,7 +36,7 @@
         "*.{md,html}": "prettier --write"
     },
     "keywords": [
-        "AngularJS",
+        "Vue",
         "Design System",
         "LumApps",
         "LumX",
@@ -80,7 +80,8 @@
     },
     "workspaces": [
         "packages/*",
-        "dev-packages/*"
+        "dev-packages/*",
+        ".github/actions"
     ],
     "packageManager": "yarn@4.12.0",
     "version": "4.1.0"

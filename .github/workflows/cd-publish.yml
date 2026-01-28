@@ -1,4 +1,4 @@
-name: "CD / Publish"
+name: 'CD / Publish'
 
 # This workflow orchestrates the continuous delivery process for the design system.
 # It supports both official releases triggered by merges to 'master' (with a specific commit message)
@@ -29,7 +29,7 @@ permissions:
     contents: read
 
 concurrency:
-    group: "${{ github.workflow }}-${{ github.ref_name }}"
+    group: '${{ github.workflow }}-${{ github.ref_name }}'
     cancel-in-progress: true
 
 jobs:
@@ -129,26 +129,47 @@ jobs:
                   # Push tag
                   git push origin "$tag"
 
-    deploy_chromatic:
-        name: 'Deploy chromatic'
+    deploy_chromatic_react:
+        name: 'Deploy chromatic (React)'
         if: needs.is_release_commit.outputs.version
         needs: [is_release_commit, git_tag]
         runs-on: ubuntu-latest
+        environment:
+            name: storybook-lumx-react
+            url: ${{ steps.deploy.outputs.storybook_url }}
         steps:
             - name: 'Checkout repository'
               uses: actions/checkout@v5
               with:
                   fetch-depth: 0 # retrieve all the repo history (required by chromatic)
 
-            - name: 'Setup'
-              uses: ./.github/actions/setup
-
-            - name: 'Deploy chromatic'
-              uses: chromaui/action@d0795df816d05c4a89c80295303970fddd247cce #v13.1.4
+            - name: 'Deploy Storybook'
+              id: deploy
+              uses: ./.github/actions/deploy-storybook
               with:
-                  token: ${{ secrets.GITHUB_TOKEN }}
-                  projectToken: ${{ secrets.CHROMATIC_TOKEN }}
-                  buildScriptName: build:storybook
+                  package: 'lumx-react'
+                  chromatic_token: ${{ secrets.CHROMATIC_TOKEN_LUMX_REACT }}
+
+    deploy_chromatic_vue:
+        name: 'Deploy chromatic (Vue)'
+        if: needs.is_release_commit.outputs.version
+        needs: [is_release_commit, git_tag]
+        runs-on: ubuntu-latest
+        environment:
+            name: storybook-lumx-vue
+            url: ${{ steps.deploy.outputs.storybook_url }}
+        steps:
+            - name: 'Checkout repository'
+              uses: actions/checkout@v5
+              with:
+                  fetch-depth: 0 # retrieve all the repo history (required by chromatic)
+
+            - name: 'Deploy Storybook'
+              id: deploy
+              uses: ./.github/actions/deploy-storybook
+              with:
+                  package: 'lumx-vue'
+                  chromatic_token: ${{ secrets.CHROMATIC_TOKEN_LUMX_VUE }}
 
     deploy_demo_site:
         name: 'Deploy demo site'

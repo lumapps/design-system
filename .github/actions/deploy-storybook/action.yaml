@@ -1,0 +1,69 @@
+name: 'Deploy Storybook'
+description: 'Deploy storybook (chromatic)'
+inputs:
+    package:
+        description: 'Package to deploy (lumx-react or lumx-vue)'
+        required: true
+    chromatic_token:
+        description: 'Chromatic token'
+        required: true
+outputs:
+    storybook_url:
+        description: 'Storybook URL'
+        value: ${{ steps.vars.outputs.storybook_url }}
+    build_url:
+        description: 'Chromatic Build URL'
+        value: ${{ steps.deploy.outputs.buildUrl }}
+
+runs:
+    using: 'composite'
+    steps:
+        - name: 'Init variables'
+          id: vars
+          uses: actions/github-script@v6
+          with:
+              result-encoding: json
+              script: |
+                  await require('./.github/actions/deploy-storybook/init.js').run(
+                      context,
+                      core,
+                      '${{ inputs.package }}'
+                  );
+
+        - name: 'Update PR body: Deploying state'
+          if: github.event.pull_request
+          uses: ./.github/actions/update-pr-body
+          with:
+              pattern: 'StoryBook ${{ inputs.package }}: .*'
+              replace: 'StoryBook ${{ inputs.package }}: [Deploying...](${{ steps.vars.outputs.run_html_url }})'
+              whenNotFound: 'append'
+              keepLastMatch: true
+
+        - name: 'Setup'
+          uses: ./.github/actions/setup
+
+        - name: 'Deploy chromatic'
+          id: deploy
+          uses: chromaui/action@d0795df816d05c4a89c80295303970fddd247cce #v13.1.4
+          with:
+              token: ${{ github.token }}
+              projectToken: ${{ inputs.chromatic_token }}
+              workingDir: ${{ steps.vars.outputs.package_path }}
+
+        - if: failure() && github.event.pull_request
+          name: 'Update PR body: Failure state'
+          uses: ./.github/actions/update-pr-body
+          with:
+              pattern: 'StoryBook ${{ inputs.package }}: .*'
+              replace: 'StoryBook ${{ inputs.package }}: [:x: Failed](${{ steps.vars.outputs.run_html_url }})'
+              whenNotFound: 'ignore'
+              keepLastMatch: true
+
+        - name: 'Update PR body: Deployed state'
+          if: github.event.pull_request
+          uses: ./.github/actions/update-pr-body
+          with:
+              pattern: 'StoryBook ${{ inputs.package }}: .*'
+              replace: 'StoryBook ${{ inputs.package }}: ${{ steps.vars.outputs.storybook_url }} ([Chromatic build](${{ steps.deploy.outputs.buildUrl }}))'
+              whenNotFound: 'append'
+              keepLastMatch: true
