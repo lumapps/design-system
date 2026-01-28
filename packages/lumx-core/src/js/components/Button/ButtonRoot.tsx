@@ -101,7 +101,7 @@ export const ButtonRoot = (props: ButtonRootProps) => {
         isHovered,
         linkAs,
         size,
-        theme,
+        theme = Theme.light,
         variant,
         fullWidth,
         ref,
