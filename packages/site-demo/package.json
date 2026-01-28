@@ -17,7 +17,8 @@
     "scripts": {
         "clean": "NODE_OPTIONS=--no-warnings gatsby clean",
         "build": "NODE_OPTIONS=--no-warnings gatsby build",
-        "start": "NODE_OPTIONS=--no-warnings gatsby develop"
+        "start": "NODE_OPTIONS=--no-warnings gatsby develop",
+        "type-check": "yarn tsc -p tsconfig.json"
     },
     "dependencies": {
         "@gatsbyjs/reach-router": "^2.0.1",
