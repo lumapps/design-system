@@ -19,6 +19,7 @@
         "stylelint": "^14.9.1",
         "stylelint-config-recess-order": "^3.0.0",
         "stylelint-config-standard-scss": "^5.0.0",
+        "ts-morph": "^27.0.2",
         "typescript": "^5.4.3",
         "vitest": "^4.0.18",
         "vue-eslint-parser": "^10.2.0",

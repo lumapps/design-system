@@ -6,8 +6,7 @@ const path = require('path');
 
 module.exports = {
     flags: {
-        //FAST_DEV: true,
-        //PARALLEL_SOURCING: true,
+        DEV_SSR: true,
     },
     siteMetadata: {
         title: 'LumApps Design System',
@@ -40,6 +39,8 @@ module.exports = {
                 destination: '/',
             },
         },
+        // Generate/update component props JSON files.
+        './plugins/lumx-prop-table',
         // Preprocess MDX and Demos.
         './plugins/lumx-mdx-preprocessor',
         // Compile MDX content.

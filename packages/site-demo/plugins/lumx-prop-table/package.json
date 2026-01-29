@@ -1,0 +1,10 @@
+{
+    "name": "lumx-prop-table",
+    "version": "1.0.0",
+    "description": "Gatsby plugin to watch lumx-react components and generate Props.json files",
+    "main": "gatsby-node.js",
+    "exports": {
+        ".": "./gatsby-node.js"
+    },
+    "private": true
+}

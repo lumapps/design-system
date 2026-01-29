@@ -26,7 +26,7 @@ const renderTypeTableRow = ({ type, defaultValue }: Property) => (
         {castArray(type).reduce((acc, typeName, index, arr) => {
             if (typeName === defaultValue) {
                 // Display default value in bold.
-                acc.push(<strong>{defaultValue}</strong>);
+                acc.push(<strong key={defaultValue}>{defaultValue}</strong>);
             } else {
                 acc.push(typeName);
             }
@@ -93,19 +93,25 @@ const Table = ({ properties }: { properties: Property[] }) => (
     </div>
 );
 
-export interface PropTableProps {
-    /** Component name. */
-    component: string;
-    /** Component props doc. */
-    props?: Property[];
+export interface ComponentDoc {
+    displayName: string;
+    props: Property[];
 }
 
-export const PropTable: React.FC<PropTableProps> = ({ component, props }) => {
-    if (!props) {
-        return <span>Could not load properties of the {component} component.</span>;
+export interface PropTableProps {
+    /** Component props doc. */
+    docs?: { react?: ComponentDoc };
+}
+
+export const PropTable: React.FC<PropTableProps> = ({ docs }) => {
+    const properties = docs?.react?.props;
+    const componentName = docs?.react?.displayName;
+
+    if (!properties) {
+        return <span>Could not load properties{componentName ? ` of the ${componentName} component` : ''}.</span>;
     }
 
-    const [forwardedProps, others] = partition(props, (prop) =>
+    const [forwardedProps, others] = partition(properties, (prop) =>
         prop.declarations?.some(({ fileName }) => fileName.match(/@types\/react/)),
     );
 

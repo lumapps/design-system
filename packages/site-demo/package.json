@@ -15,9 +15,9 @@
         "name": "LumApps"
     },
     "scripts": {
-        "clean": "NODE_OPTIONS=--no-warnings gatsby clean",
-        "build": "NODE_OPTIONS=--no-warnings gatsby build",
-        "start": "NODE_OPTIONS=--no-warnings gatsby develop",
+        "clean": "gatsby clean",
+        "build": "gatsby build",
+        "start": "gatsby develop",
         "type-check": "yarn tsc -p tsconfig.json"
     },
     "dependencies": {
@@ -46,10 +46,10 @@
         "prismjs": "^1.30.0",
         "raw-loader": "^4.0.2",
         "react": "^18.3.1",
-        "react-docgen-typescript": "^2.2.2",
         "react-dom": "^18.3.1",
-        "react-live-runner": "^1.0.7",
-        "sass": "1.70.0"
+        "sass": "1.70.0",
+        "ts-morph": "^27.0.2",
+        "vue": "^3.5.27"
     },
     "devDependencies": {
         "@types/gatsbyjs__reach-router": "^2.0.5",

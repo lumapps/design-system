@@ -1,4 +1,5 @@
 import * as Demo1 from './react/demo1.tsx';
+import ReactGridColumn from 'lumx-docs:@lumx/react/components/grid-column/GridColumn';
 
 # Grid column
 
@@ -6,7 +7,11 @@ import * as Demo1 from './react/demo1.tsx';
 
 ## Example
 
-<DemoBlock marginAuto={["left", "right"]} style={{ overflow: "hidden", resize: "horizontal", maxWidth: "100%" }} demo={{ react: Demo1 }} />
+<DemoBlock
+    marginAuto={['left', 'right']}
+    style={{ overflow: 'hidden', resize: 'horizontal', maxWidth: '100%' }}
+    demo={{ react: Demo1 }}
+/>
 
 ### Accessibility concerns
 
@@ -14,4 +19,4 @@ GridColumn is a simple layout blocks without any particular semantic or ARIA rol
 
 ### Properties
 
-<PropTable component="GridColumn" />
+<PropTable docs={{ react: ReactGridColumn }} />
