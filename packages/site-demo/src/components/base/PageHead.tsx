@@ -17,7 +17,6 @@ interface Props {
     description?: string;
     keywords?: string[];
     lang?: string;
-    meta?: React.MetaHTMLAttributes<HTMLMetaElement>[];
 }
 
 const DEFAULT_KEYWORDS = ['lumapps', 'design system', 'lumx', 'react'];
@@ -26,7 +25,7 @@ const DEFAULT_KEYWORDS = ['lumapps', 'design system', 'lumx', 'react'];
  * Provide SEO using Gatsby Head API to inject data in the document <head>.
  */
 export const PageHead: React.FC<Props> = (props) => {
-    const { description, lang = 'en', meta = [], keywords = DEFAULT_KEYWORDS, title } = props;
+    const { description, lang = 'en', keywords = DEFAULT_KEYWORDS, title } = props;
     const { site } = useStaticQuery(query);
     const siteTitle = site.siteMetadata.title;
     const metaDescription = description || site.siteMetadata.description;
@@ -37,7 +36,6 @@ export const PageHead: React.FC<Props> = (props) => {
 
             <title>{title ? `${title} | ${siteTitle}` : siteTitle}</title>
 
-            <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
             <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -50,7 +48,6 @@ export const PageHead: React.FC<Props> = (props) => {
             <meta property="og:description" content={metaDescription} />
             <meta property="og:type" content="website" />
             {keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
-            {meta.length > 0 && meta.map((m) => <meta key={m.name || m.property} {...m} />)}
         </>
     );
 };
