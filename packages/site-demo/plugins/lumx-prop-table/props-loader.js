@@ -33,7 +33,7 @@ function lumxDocsWebpackLoader() {
             throw new Error('Could not load prop docs for component ' + filePath);
         }
 
-        const code = `module.exports = ${JSON.stringify(result)};`;
+        const code = `const docs = ${JSON.stringify(result)}; export default docs;`;
         callback(null, code);
     } catch (err) {
         callback(err);

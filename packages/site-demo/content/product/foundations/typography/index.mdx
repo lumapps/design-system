@@ -1,5 +1,11 @@
-import * as Demo1 from './react/demo1.tsx';
-import * as Demo2 from './react/demo2.tsx';
+---
+frameworks: ['react', 'vue']
+---
+
+import * as ReactDemo1 from './react/demo1.tsx';
+import * as ReactDemo2 from './react/demo2.tsx';
+import * as VueDemo1 from './vue/demo1.vue';
+import * as VueDemo2 from './vue/demo2.vue';
 
 # Typography
 
@@ -54,7 +60,7 @@ Selecting appropriate text styles is determined by layout structure. Layouts may
 
 Basic text styles are default choice for any piece of UI. They are consistent throughout the whole interface and cannot be customized further than the font family choice.
 
-<DemoBlock demo={{ react: Demo1 }} />
+<DemoBlock demo={{ react: ReactDemo1, vue: VueDemo1 }} />
 
 ### Custom styles
 
@@ -68,4 +74,4 @@ Custom text styles are overridable by customization:
 
 Use them in pieces of UI that need to reflect an identity (usually widgets or pages). They’re the same app-wide by default but the customization can be made with context: targeting a specific piece of UI like a specific widget in a specific page.
 
-<DemoBlock demo={{ react: Demo2 }} />
+<DemoBlock demo={{ react: ReactDemo2, vue: VueDemo2 }} />

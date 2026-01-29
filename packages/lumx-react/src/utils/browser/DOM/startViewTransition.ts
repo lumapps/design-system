@@ -5,12 +5,12 @@ import { MaybeElementOrRef } from '@lumx/react/utils/type';
 import { unref } from '../../react/unref';
 import { isReducedMotion } from '../isReducedMotion';
 
-function setupViewTransitionName(elementRef: MaybeElementOrRef<HTMLElement>, name: string) {
+function setupViewTransitionName(elementRef: MaybeElementOrRef<HTMLElement>, name?: string) {
     let originalName: string | null = null;
     return {
         set() {
             const element = unref(elementRef);
-            if (!element) return;
+            if (!element || !name) return;
             originalName = element.style.viewTransitionName;
             element.style.viewTransitionName = name;
         },
@@ -34,7 +34,7 @@ export async function startViewTransition({
     viewTransitionName,
 }: {
     changes: () => void;
-    viewTransitionName: {
+    viewTransitionName?: {
         source: MaybeElementOrRef<HTMLElement>;
         target: MaybeElementOrRef<HTMLElement>;
         name: string;
@@ -43,15 +43,20 @@ export async function startViewTransition({
     const start = (document as any)?.startViewTransition?.bind(document);
     const prefersReducedMotion = isReducedMotion();
     const { flushSync } = ReactDOM as any;
-    if (prefersReducedMotion || !start || !flushSync || !viewTransitionName?.source || !viewTransitionName?.target) {
+    if (
+        prefersReducedMotion ||
+        !start ||
+        !flushSync ||
+        (viewTransitionName && (!viewTransitionName?.source || !viewTransitionName?.target))
+    ) {
         // Skip, apply changes without a transition
         changes();
         return;
     }
 
     // Setup set/unset transition name on source & target
-    const sourceTransitionName = setupViewTransitionName(viewTransitionName.source, viewTransitionName.name);
-    const targetTransitionName = setupViewTransitionName(viewTransitionName.target, viewTransitionName.name);
+    const sourceTransitionName = setupViewTransitionName(viewTransitionName?.source, viewTransitionName?.name);
+    const targetTransitionName = setupViewTransitionName(viewTransitionName?.target, viewTransitionName?.name);
 
     sourceTransitionName.set();
 

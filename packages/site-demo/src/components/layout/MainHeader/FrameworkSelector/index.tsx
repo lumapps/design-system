@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from '@lumx/react';
 import { mdiMenuDown, mdiReact, mdiVuejs } from '@lumx/icons';
+import { useIsServerSide } from '@lumx/demo/utils/hooks/useIsServerSide';
 import { useFramework, Framework } from '@lumx/demo/components/layout/FrameworkContext';
 
 import './index.scss';
@@ -21,6 +22,8 @@ const CONFIG = {
 export const FrameworkSelector: React.FC = () => {
     const { framework, setFramework } = useFramework();
     const selectRef = React.useRef<HTMLSelectElement>(null);
+    const isServer = useIsServerSide();
+    if (isServer) return null;
 
     return (
         <div className="framework-selector">

@@ -2,6 +2,7 @@ import React from 'react';
 import { CodeBlock } from '@lumx/demo/components/content/CodeBlock/CodeBlock';
 import { DemoBlock } from '@lumx/demo/components/content/DemoBlock/DemoBlock';
 import { PropTable } from '@lumx/demo/components/content/PropTable/PropTable';
+import { FrameworkOnly } from '@lumx/demo/components/content/FrameworkOnly';
 import { FrameworkProvider } from '@lumx/demo/components/layout/FrameworkContext';
 import { Link } from '@lumx/demo/components/base/Link';
 import { Message } from '@lumx/react';
@@ -27,6 +28,7 @@ const mdxComponents = {
     DemoBlock,
     PropTable,
     Message,
+    FrameworkOnly,
 };
 
 /**

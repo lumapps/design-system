@@ -91,4 +91,10 @@ $transition-duration: 300ms;
     .home-logo-link {
         margin-bottom: $lumx-spacing-unit * 4;
     }
+
+    &__item--dimmed {
+        .lumx-side-navigation-item__link {
+            opacity: 0.5;
+        }
+    }
 }

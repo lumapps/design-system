@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
 
+import { startViewTransition } from '@lumx/react/utils/browser/DOM/startViewTransition';
+
 export enum Framework {
     react = 'react',
     vue = 'vue',
@@ -30,7 +32,10 @@ export const FrameworkProvider: React.FC<{ children: React.ReactNode }> = ({ chi
             framework,
             setFramework(newFramework) {
                 global?.localStorage?.setItem(STORAGE_KEY, newFramework);
-                setFramework(newFramework);
+                // Animate change of framework
+                startViewTransition({
+                    changes: () => setFramework(newFramework),
+                });
             },
         }),
         [framework, setFramework],

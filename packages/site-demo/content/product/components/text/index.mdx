@@ -1,6 +1,13 @@
-import * as Demo1 from './react/demo1.tsx';
-import * as Demo2 from './react/demo2.tsx';
-import * as Demo3 from './react/demo3.tsx';
+---
+frameworks: ['react', 'vue']
+---
+
+import * as ReactDemo1 from './react/demo1.tsx';
+import * as ReactDemo2 from './react/demo2.tsx';
+import * as ReactDemo3 from './react/demo3.tsx';
+import * as VueDemo1 from './vue/demo1.vue';
+import * as VueDemo2 from './vue/demo2.vue';
+import * as VueDemo3 from './vue/demo3.vue';
 import ReactText from 'lumx-docs:@lumx/react/components/text/Text';
 
 # Text
@@ -8,13 +15,13 @@ import ReactText from 'lumx-docs:@lumx/react/components/text/Text';
 **Display simple text.**\
 By default, text elements have no defined color or typography.
 
-<DemoBlock demo={{ react: Demo1 }} />
+<DemoBlock demo={{ react: ReactDemo1, vue: VueDemo1 }} />
 
 ## Color and typography
 
 Both **color** and **typography** can be adapted on text elements (see list of [typography](/product/foundations/typography/) and [color](/product/foundations/color/) styles).
 
-<DemoBlock gap="tiny" demo={{ react: Demo2 }} />
+<DemoBlock gap="tiny" demo={{ react: ReactDemo2, vue: VueDemo2 }} />
 
 <Message kind="info">
     Here "Title" is using <code>Text</code> for demo purpose but the <a href="/product/components/heading">heading</a>{' '}
@@ -26,7 +33,12 @@ Both **color** and **typography** can be adapted on text elements (see list of [
 By default, long texts will wrap on multiple lines. Use `noWrap` to prevent that.
 Alternatively, `truncate` can be used to cut with ellipsis (it can also truncate after multiple lines).
 
-<DemoBlock orientation="horizontal" vAlign="space-evenly" style={{ gap: 90 }} demo={{ react: Demo3 }} />
+<DemoBlock
+    orientation="horizontal"
+    vAlign="space-evenly"
+    style={{ gap: '90px' }}
+    demo={{ react: ReactDemo3, vue: VueDemo3 }}
+/>
 
 ### Accessibility concerns
 

@@ -1,16 +1,19 @@
-import { Emphasis, IconButton, SideNavigation, SideNavigationItem, SideNavigationItemProps } from '@lumx/react';
+import { useEffect, useState } from 'react';
 import { Link as RouterLink } from 'gatsby';
 import includes from 'lodash/includes';
 import partial from 'lodash/partial';
 import without from 'lodash/without';
-import { useEffect, useState } from 'react';
 import classNames from 'classnames';
+
+import { Emphasis, IconButton, SideNavigation, SideNavigationItem, SideNavigationItemProps } from '@lumx/react';
 import { mdiClose } from '@lumx/icons';
 import { MenuEntry } from '@lumx/demo/components/layout/MainNav/types';
 import { useMenuItems } from '@lumx/demo/components/layout/MainNav/useMenuItems';
 import { HomeLogoLink } from '@lumx/demo/components/layout/MainNav/HomeLogoLink/HomeLogoLink';
 import { onEscapePressed } from '@lumx/core/js/utils';
 import { useResponsiveNavState } from '@lumx/demo/components/layout/MainNav/useResponsiveNavState';
+
+import { Framework, useFramework } from '../FrameworkContext';
 
 import './MainNav.scss';
 
@@ -29,8 +32,9 @@ const renderNavItem = (
     getChildren: (entry: MenuEntry) => MenuEntry[] | null,
     locationPath: string,
     menuEntry: MenuEntry,
+    currentFramework: Framework,
 ) => {
-    const { label, path } = menuEntry;
+    const { label, path, frameworks } = menuEntry;
     const children = getChildren(menuEntry);
     const level = path.split('/').length - 2;
     const props: SideNavigationItemProps = {
@@ -39,6 +43,10 @@ const renderNavItem = (
         emphasis: EMPHASIS_BY_LEVEL[level],
         isSelected: locationPath === path,
         toggleButtonProps: { label: 'Toggle' },
+        className:
+            !children?.length && frameworks && !frameworks?.includes(currentFramework)
+                ? 'main-nav__item--dimmed'
+                : undefined,
     };
 
     if (!children?.length) {
@@ -47,11 +55,13 @@ const renderNavItem = (
         props.linkProps = { to: path } as any;
     } else {
         props.onClick = partial(toggleOpenPath, path);
-        props.children = children.map(partial(renderNavItem, openPaths, toggleOpenPath, getChildren, locationPath));
+        props.children = children.map((entry) =>
+            renderNavItem(openPaths, toggleOpenPath, getChildren, locationPath, entry, currentFramework),
+        );
         props.isOpen = openPaths.some((openPath) => openPath.startsWith(path));
     }
 
-    return <SideNavigationItem key={path} {...props} />;
+    return <SideNavigationItem style={{ viewTransitionName: path.replaceAll('/', '-') }} key={path} {...props} />;
 };
 
 /**
@@ -72,18 +82,19 @@ export const MainNav: React.FC<MainNavProps> = (props) => {
             return includes(previousOpenPaths, path) ? without(previousOpenPaths, path) : [...previousOpenPaths, path];
         });
 
+    const { framework } = useFramework();
     useEffect(() => {
-        if (locationPath) {
+        if (locationPath && framework) {
             // Close responsive menu on location change.
             closeMenu();
             // Open menus for current location path.
             setOpenPaths([locationPath]);
             // Scroll to current page link.
             setTimeout(() => {
-                document.querySelector('[aria-current]')?.scrollIntoView();
+                document.querySelector('[aria-current]')?.scrollIntoView({ block: 'nearest' });
             }, 100);
         }
-    }, [closeMenu, locationPath]);
+    }, [closeMenu, locationPath, framework]);
 
     return (
         <>
@@ -108,8 +119,8 @@ export const MainNav: React.FC<MainNavProps> = (props) => {
                     <HomeLogoLink />
 
                     <SideNavigation>
-                        {rootMenuEntries?.map(
-                            partial(renderNavItem, openPaths, toggleOpenPath, getChildren, locationPath),
+                        {rootMenuEntries?.map((entry) =>
+                            renderNavItem(openPaths, toggleOpenPath, getChildren, locationPath, entry, framework),
                         )}
                     </SideNavigation>
                 </div>

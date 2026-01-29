@@ -1,5 +1,11 @@
-import * as Demo1 from './react/demo1.tsx';
-import * as Demo2 from './react/demo2.tsx';
+---
+frameworks: ['react', 'vue']
+---
+
+import * as ReactDemo1 from './react/demo1.tsx';
+import * as ReactDemo2 from './react/demo2.tsx';
+import * as VueDemo1 from './vue/demo1.vue';
+import * as VueDemo2 from './vue/demo2.vue';
 
 # Color
 
@@ -9,8 +15,8 @@ Use color utility based on [color palette](/product/foundations/color) variants.
 
 ## Font color
 
-<DemoBlock demo={{ react: Demo1 }} />
+<DemoBlock demo={{ react: ReactDemo1, vue: VueDemo1 }} />
 
 ## Background color
 
-<DemoBlock demo={{ react: Demo2 }} />
+<DemoBlock demo={{ react: ReactDemo2, vue: VueDemo2 }} />
