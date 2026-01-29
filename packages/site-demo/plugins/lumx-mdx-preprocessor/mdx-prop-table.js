@@ -9,6 +9,7 @@ const rewriteJSXComponents = require('../utils/rewriteJSXComponents');
 const aliasPropType = require('../utils/aliasPropType');
 const debug = require('../utils/debug');
 const ROOT_PATH = path.resolve(__dirname, '../../../..');
+const LUMX_REACT_PATH = path.resolve(ROOT_PATH, 'packages/lumx-react');
 
 const globPromise = (globString) =>
     new Promise((resolve, reject) =>
@@ -21,7 +22,7 @@ const globPromise = (globString) =>
 let parserConfig;
 const getDocgenParser = async () => {
     if (!parserConfig) {
-        const tsconfigPath = path.resolve(ROOT_PATH, 'tsconfig.json');
+        const tsconfigPath = path.resolve(LUMX_REACT_PATH, 'tsconfig.json');
         const basePath = path.dirname(tsconfigPath);
         const { config, error } = ts.readConfigFile(tsconfigPath, (filename) => fs.readFileSync(filename, 'utf8'));
         if (error) debug(error);
@@ -43,7 +44,7 @@ const getDocgenParser = async () => {
 
 /** Find LumX react component path by component name. */
 const getComponentPath = async (component) => {
-    const dir = path.resolve(ROOT_PATH, `packages/lumx-react/src/components/`);
+    const dir = path.resolve(LUMX_REACT_PATH, `src/components/`);
     const files = await globPromise(path.join(dir, '**', `${component}.tsx`));
     if (files.length === 0) {
         console.warn(`Could not found component ${component} in ${dir} for <PropTable> generation.`);
@@ -120,3 +121,16 @@ module.exports = async (node, mdxString) => {
         return mdxString;
     }
 };
+
+
+// Example updatePropTable
+if (require.main === module) {
+    (async () => {
+        const docgenParser = await getDocgenParser();
+        const props = await updatePropTable(
+            docgenParser,
+            { component: '"Icon"' }
+        );
+        console.debug(JSON.stringify(JSON.parse(props.props), null, 2));
+    })();
+}
