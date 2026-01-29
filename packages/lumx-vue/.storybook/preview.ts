@@ -19,16 +19,6 @@ const preview: Preview = {
                 dynamicTitle: true,
             },
         },
-        /** Add legacy material theme switcher in the toolbar */
-        materialTheme: {
-            name: 'Material theme',
-            description: 'Activate legacy material theme',
-            defaultValue: undefined,
-            toolbar: {
-                icon: 'paintbrush',
-                items: [{ value: 'false', title: 'Default' }, { value: 'true', title: 'Legacy material theme' }],
-            },
-        },
     },
     argTypes: {
         theme: { table: { disable: true } },
