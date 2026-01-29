@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { computed, watch } from 'vue';
+import { computed, provide, watch } from 'vue';
 import { classNames } from '@lumx/core/src/js/utils';
+import { Theme } from '@lumx/core/src/js/constants';
 import isChromatic from 'chromatic/isChromatic';
 import { toggleMaterialTheme } from './toggleMaterialTheme';
 import 'focus-visible';
@@ -11,13 +12,21 @@ const props = defineProps<{
 
 const appliedTheme = computed(() => {
     const { theme } = props.context.globals;
-    return props.context.args.theme || theme;
+    const themeToUse = props.context.args.theme || theme;
+
+    if (theme === '') {
+        return Theme.light;
+    }
+
+    return themeToUse;
 });
 
 // Hard code today date for stable chromatic stories snapshots.
 if (props.context.parameters) {
     props.context.parameters.today = isChromatic() ? new Date('May 25 2021 01:00') : new Date();
 }
+
+provide('theme', appliedTheme ? appliedTheme.value : undefined);
 
 const isChromaticEnv = isChromatic();
 

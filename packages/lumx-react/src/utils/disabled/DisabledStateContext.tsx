@@ -1,11 +1,6 @@
 import React, { useContext } from 'react';
 
-/** Disable state */
-type DisabledStateContextValue =
-    | {
-          state: 'disabled';
-      }
-    | { state: undefined | null };
+import { DisabledStateContextValue } from '@lumx/core/js/utils/disabledState';
 
 export const DisabledStateContext = React.createContext<DisabledStateContextValue>({ state: null });
 
