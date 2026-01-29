@@ -1,16 +1,11 @@
 const fs = require('fs');
 const path = require('path');
 const processDemo = require('./mdx-demo-block');
-const processPropTable = require('./mdx-prop-table');
 
 const CACHE_DIR = path.resolve(__dirname, '../../.cache/lumx-preprocessed-content');
 
-exports.onPreInit = ({ reporter }) => {
-    if (fs.existsSync(CACHE_DIR)) {
-        fs.rmSync(CACHE_DIR, { recursive: true, force: true });
-    }
+exports.onPreInit = () => {
     fs.mkdirSync(CACHE_DIR, { recursive: true });
-    reporter.info(`Cleared and recreated cache dir: ${CACHE_DIR}`);
 };
 
 exports.onCreateNode = async ({ node, actions, reporter }) => {
@@ -20,8 +15,9 @@ exports.onCreateNode = async ({ node, actions, reporter }) => {
     const isDemo = node.internal.type === 'File' && node.ext === '.tsx';
     const isDemoVue = node.internal.type === 'File' && node.ext === '.vue';
     const isMDX = node.internal.type === 'File' && node.ext === '.mdx';
+    const isJSON = node.internal.type === 'File' && node.ext === '.json';
 
-    if (!isDemo && !isDemoVue && !isMDX) return;
+    if (!isDemo && !isDemoVue && !isMDX && !isJSON) return;
 
     // Check if it's in the content directory
     if (!node.absolutePath.includes('/content/')) return;
@@ -32,8 +28,6 @@ exports.onCreateNode = async ({ node, actions, reporter }) => {
 
         if (isDemo) {
             processedContent = await processDemo(content);
-        } else if (isMDX) {
-            processedContent = await processPropTable(content);
         }
 
         const relativePath = node.relativePath;
