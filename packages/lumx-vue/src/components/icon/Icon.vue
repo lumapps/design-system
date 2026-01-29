@@ -1,3 +1,7 @@
+<template>
+    <ui v-bind="{ ...attrs, ...props, theme: props.theme || defaultTheme }" />
+</template>
+
 <script setup lang="ts">
 import { useAttrs } from 'vue';
 import { Icon as IconUI, IconProps } from '@lumx/core/js/components/Icon';
@@ -14,7 +18,3 @@ const props = defineProps<IconProps>();
 const attrs = useAttrs();
 const defaultTheme = useTheme({ defaultTheme: undefined });
 </script>
-
-<template>
-    <ui v-bind="{ ...attrs, ...props, theme: props.theme || defaultTheme }" />
-</template>

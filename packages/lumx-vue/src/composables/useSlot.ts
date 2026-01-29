@@ -8,8 +8,8 @@ import { useSlots } from 'vue';
 export const useSlot = (slot: string = 'default') => {
     const slots = useSlots();
 
-    return (): JSXElement | null => {
+    return <T = JSXElement>(): T | null => {
         const slotFn = slots?.[slot];
-        return slotFn ? (slotFn() as JSXElement) : null;
+        return slotFn ? (slotFn() as T) : null;
     };
 };
