@@ -2,7 +2,6 @@
 import { computed, provide, watch } from 'vue';
 import { classNames } from '@lumx/core/src/js/utils';
 import isChromatic from 'chromatic/isChromatic';
-import { toggleMaterialTheme } from './toggleMaterialTheme';
 import 'focus-visible';
 
 const props = defineProps<{
@@ -28,10 +27,6 @@ if (props.context.parameters) {
 provide('theme', appliedTheme ? appliedTheme.value : undefined);
 
 const isChromaticEnv = isChromatic();
-
-watch(() => props.context.globals.materialTheme, (newVal) => {
-    toggleMaterialTheme(newVal !== 'true');
-}, { immediate: true });
 
 const classes = computed(() => classNames.join(
     'story-block',
