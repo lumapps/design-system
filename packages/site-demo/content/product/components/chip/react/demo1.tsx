@@ -1,5 +1,5 @@
 import { mdiEmail } from '@lumx/icons';
-import { Chip, Icon, Theme } from '@lumx/react';
+import { Chip, Icon, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => (
     <>

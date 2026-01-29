@@ -1,6 +1,6 @@
 import React from 'react';
 import { mdiClose } from '@lumx/icons';
-import { AutocompleteMultiple, Chip, ChipGroup, Icon, List, ListItem, Theme } from '@lumx/react';
+import { AutocompleteMultiple, Chip, ChipGroup, Icon, List, ListItem, type Theme } from '@lumx/react';
 
 type City = { id: string; text: string };
 

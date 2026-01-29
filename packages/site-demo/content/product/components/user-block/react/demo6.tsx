@@ -1,5 +1,5 @@
 import { mdiCellphone, mdiEmail, mdiGoogleHangouts, mdiPhone, mdiSlack } from '@lumx/icons';
-import { Button, IconButton, UserBlock, Theme } from '@lumx/react';
+import { Button, IconButton, UserBlock, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => {
     const demoActions = [

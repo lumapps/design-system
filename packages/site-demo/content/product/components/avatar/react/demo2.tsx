@@ -1,5 +1,5 @@
 import { mdiDelete, mdiEye, mdiPencil } from '@lumx/icons';
-import { Avatar, FlexBox, IconButton, Theme } from '@lumx/react';
+import { Avatar, FlexBox, IconButton, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => (
     <Avatar

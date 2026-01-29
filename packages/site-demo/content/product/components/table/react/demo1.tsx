@@ -11,8 +11,8 @@ import {
     TableHeader,
     TableRow,
     Thumbnail,
-    Theme,
-    ThOrder,
+    type Theme,
+    type ThOrder,
 } from '@lumx/react';
 
 const initialTable = [

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Checkbox, Theme } from '@lumx/react';
+import { Checkbox, type Theme } from '@lumx/react';
 
 function useCheckBoxState(initial: boolean | 'intermediate') {
     const [isChecked, onChange] = useState(initial);

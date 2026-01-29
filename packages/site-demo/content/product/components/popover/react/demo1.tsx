@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { Chip, Popover, Theme } from '@lumx/react';
+import { Chip, Popover, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => {
     const anchorRef = useRef(null);

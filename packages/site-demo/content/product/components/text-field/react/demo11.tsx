@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Chip, ChipGroup, TextField, Theme } from '@lumx/react';
+import { Chip, ChipGroup, TextField, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => {
     const [value, setValue] = useState('');

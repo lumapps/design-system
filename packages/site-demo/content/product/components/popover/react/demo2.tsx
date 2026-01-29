@@ -1,5 +1,5 @@
-import { useRef, RefObject } from 'react';
-import { Chip, FlexBox, Popover, Theme, Placement } from '@lumx/react';
+import { useRef, type RefObject } from 'react';
+import { Chip, FlexBox, Popover, type Theme, type Placement } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => {
     const popovers: Array<[Placement, RefObject<any>]> = [

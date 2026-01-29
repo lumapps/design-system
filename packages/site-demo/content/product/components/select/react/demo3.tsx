@@ -1,4 +1,4 @@
-import { List, ListItem, SelectMultiple, Theme } from '@lumx/react';
+import { List, ListItem, SelectMultiple, type Theme } from '@lumx/react';
 import React, { useState } from 'react';
 
 export default ({ theme }: { theme?: Theme }) => {

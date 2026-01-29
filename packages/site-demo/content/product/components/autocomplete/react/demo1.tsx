@@ -1,5 +1,5 @@
 import React from 'react';
-import { Autocomplete, List, ListItem, Theme } from '@lumx/react';
+import { Autocomplete, List, ListItem, type Theme } from '@lumx/react';
 
 const CITIES = [
     {

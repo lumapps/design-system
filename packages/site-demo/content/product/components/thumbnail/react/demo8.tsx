@@ -1,4 +1,4 @@
-import { Badge, Icon, Thumbnail, Theme } from '@lumx/react';
+import { Badge, Icon, Thumbnail, type Theme } from '@lumx/react';
 import { mdiApps, mdiClose } from '@lumx/icons';
 
 export default ({ theme }: { theme?: Theme }) => (

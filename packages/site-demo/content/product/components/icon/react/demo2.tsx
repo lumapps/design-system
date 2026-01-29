@@ -1,5 +1,5 @@
 import { mdiMessageTextOutline } from '@lumx/icons';
-import { Icon, Theme } from '@lumx/react';
+import { Icon, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => (
     <>

@@ -1,5 +1,5 @@
 import { mdiDelete, mdiEye, mdiPencil } from '@lumx/icons';
-import { Chip, ChipGroup, FlexBox, IconButton, ImageBlock, Theme } from '@lumx/react';
+import { Chip, ChipGroup, FlexBox, IconButton, ImageBlock, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => (
     <ImageBlock

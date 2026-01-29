@@ -1,5 +1,5 @@
 import { mdiHeart, mdiReply } from '@lumx/icons';
-import { Button, CommentBlock, Theme } from '@lumx/react';
+import { Button, CommentBlock, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => (
     <>

@@ -1,4 +1,4 @@
-import { TextField, Theme } from '@lumx/react';
+import { TextField, type Theme } from '@lumx/react';
 import noop from 'lodash/noop';
 
 export default ({ theme }: { theme?: Theme }) => (

@@ -1,4 +1,4 @@
-import { SkeletonRectangle, Theme } from '@lumx/react';
+import { SkeletonRectangle, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => (
     <>

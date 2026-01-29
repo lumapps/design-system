@@ -1,5 +1,5 @@
 import { mdiMagnify } from '@lumx/icons';
-import { Popover, TextField, Theme } from '@lumx/react';
+import { Popover, TextField, type Theme } from '@lumx/react';
 import React, { useRef } from 'react';
 
 export default ({ theme }: { theme?: Theme }) => {

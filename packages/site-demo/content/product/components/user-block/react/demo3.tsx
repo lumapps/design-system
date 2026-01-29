@@ -1,4 +1,4 @@
-import { UserBlock, Theme } from '@lumx/react';
+import { UserBlock, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => (
     <UserBlock

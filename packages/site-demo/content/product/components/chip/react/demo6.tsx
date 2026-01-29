@@ -1,4 +1,4 @@
-import { Chip, ChipGroup, Theme } from '@lumx/react';
+import { Chip, ChipGroup, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => (
     <ChipGroup>

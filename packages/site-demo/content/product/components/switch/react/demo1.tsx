@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Switch, Theme } from '@lumx/react';
+import { Switch, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => {
     const [state, setState] = useState(false);

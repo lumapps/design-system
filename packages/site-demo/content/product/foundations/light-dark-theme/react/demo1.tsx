@@ -1,4 +1,4 @@
-import { Button, Chip, Theme } from '@lumx/react';
+import { Button, Chip, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => (
     <>

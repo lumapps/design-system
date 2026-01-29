@@ -1,4 +1,4 @@
-import { Chip, ChipGroup, ImageBlock, Theme } from '@lumx/react';
+import { Chip, ChipGroup, ImageBlock, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => (
     <ImageBlock
