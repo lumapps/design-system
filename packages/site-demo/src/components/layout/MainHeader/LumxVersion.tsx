@@ -1,5 +1,5 @@
 import { mdiTagOutline } from '@lumx/icons';
-import { Button, Emphasis, Size } from '@lumx/react';
+import { Button } from '@lumx/react';
 import { graphql, useStaticQuery } from 'gatsby';
 
 const query = graphql`
@@ -17,11 +17,10 @@ export const LumxVersion: React.FC = () => {
     const { version } = data.site.siteMetadata;
     return (
         <Button
-            className="lumx-version-link"
-            emphasis={Emphasis.low}
-            size={Size.s}
+            emphasis="low"
+            size="s"
             leftIcon={mdiTagOutline}
-            href={`https://github.com/lumapps/design-system/blob/v${version}/CHANGELOG.md`}
+            href={`https://github.com/lumapps/design-system/releases/tag/v${version}`}
             target="_blank"
         >
             v{version}
