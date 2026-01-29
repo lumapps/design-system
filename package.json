@@ -8,7 +8,7 @@
         "@vitest/ui": "^4.0.18",
         "changelog-verify": "^1.1.2",
         "es-abstract": "1.17.6",
-        "eslint": "^8.57.0",
+        "eslint": "^9.26.0",
         "eslint-plugin-vue": "9.32.0",
         "husky": "^5.0.4",
         "jsx-ast-utils": "^3.1.0",
