@@ -3,7 +3,6 @@ import { Match } from '@gatsbyjs/reach-router';
 
 import { mdiMenu } from '@lumx/icons';
 import { IconButton } from '@lumx/react';
-import { MaterialThemeSwitcher } from '@lumx/react/utils/MaterialThemeSwitcher';
 import { HomeLogoLink } from '@lumx/demo/components/layout/MainNav/HomeLogoLink/HomeLogoLink';
 import { SearchButton } from '@lumx/demo/components/search/SearchButton';
 
@@ -30,7 +29,6 @@ export const MainHeader: React.FC<MainHeaderProps> = ({ openMenu, openNavButtonR
             {({ match }) =>
                 match && (
                     <div className="main-header__extras">
-                        <MaterialThemeSwitcher />
                         <LumxVersion />
                     </div>
                 )
