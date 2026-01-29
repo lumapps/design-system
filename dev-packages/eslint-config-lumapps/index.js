@@ -104,16 +104,6 @@ module.exports = {
                 'react/display-name': 'off',
             },
         },
-        // TODO: remove theme switcher
-        {
-            files: ['**/MaterialThemeSwitcher/**'],
-            extends: BASE_EXTENDS,
-            rules: {
-                ...BASE_RULES,
-                'import/no-webpack-loader-syntax': 'off',
-                'import/extensions': 'off',
-            },
-        },
         {
             files: ['packages/lumx-vue/**'],
             plugins: [...BASE_PLUGINS, 'vue'],

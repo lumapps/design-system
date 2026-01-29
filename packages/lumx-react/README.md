@@ -1,7 +1,7 @@
 # LumApps Design System (LumX)
 
 The first official LumApps Design System for [React][react] applications.
-_LumX_ will help you design your applications faster and more easily. You will be able to use LumX with either the LumApps design styleguides or the [Google Material Design specifications][material].
+_LumX_ will help you design your applications faster and more easily. You will be able to use LumX with the LumApps design styleguides.
 
 ## Quick start
 
@@ -31,6 +31,5 @@ Please refer to our [contributing guidelines](CONTRIBUTING.md).
 Code and documentation copyright 2019 LumApps. Code released under the [MIT license](LICENSE.md).
 
 [react]: https://react.org/
-[material]: http://www.google.com/design/spec/material-design/introduction.html
 [react-release]: https://www.npmjs.com/package/@lumx/react
 [webpack]: https://webpack.js.org/
