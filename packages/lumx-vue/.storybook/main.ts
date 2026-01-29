@@ -12,6 +12,9 @@ const config: StorybookConfig = {
         name: '@storybook/vue3-vite',
         options: { docgen: false },
     },
+    core: {
+        disableWhatsNewNotifications: true,
+    },
     async viteFinal(config) {
         return mergeConfig(config, {
             css: { postcss },
