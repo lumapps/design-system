@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@babel/plugin-transform-react-jsx": "^7.27.1",
-    "@chromatic-com/storybook": "^4.1.1",
+    "@chromatic-com/storybook": "^5.0.0",
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@storybook/addon-a11y": "^10.2.0",
     "@storybook/vue3-vite": "^10.2.0",
