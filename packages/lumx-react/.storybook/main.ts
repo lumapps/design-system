@@ -10,6 +10,10 @@ const config: StorybookConfig = {
     stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
     staticDirs: ['../../site-demo/static/'],
     framework: '@storybook/react-vite',
+    core: {
+        disableWhatsNewNotifications: true,
+    },
+
     async viteFinal(config) {
         return mergeConfig(config, {
             css: { postcss },
