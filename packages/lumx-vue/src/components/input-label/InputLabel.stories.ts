@@ -4,6 +4,7 @@ import {
     WithCustomTypography as WithCustomTypographyStory,
 } from '@lumx/core/js/components/InputLabel/Stories';
 import { InputLabel, InputLabelProps } from '@lumx/vue';
+import { withSlot } from '@lumx/vue/stories/utils/withSlot';
 
 export default {
     title: 'LumX components/input-label/Input Label',
@@ -20,11 +21,11 @@ export const Default = {
     render: (args: InputLabelProps) => ({
         components: { InputLabel },
         setup() {
-            return { args };
+            return withSlot(args);
         },
         template: `
             <InputLabel v-bind="args">
-                {{ args.children }}
+                {{ slot }}
             </InputLabel>
         `,
     }),
