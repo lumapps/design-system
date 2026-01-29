@@ -13,7 +13,7 @@ export function ReactLiveEditor() {
 
     return (
         <>
-            <CodeBlock className="demo-block__code-part" language="tsx" codeString={demo.imports} />
+            {demo.imports && <CodeBlock className="demo-block__code-part" language="tsx" codeString={demo.imports} />}
             <React.Suspense fallback={<CodeBlock codeString={demo.code} language="tsx" />}>
                 <CodeBlock as="div" className="demo-block__code-part demo-block__code-part--editable">
                     <LazyReactLiveEditor />
