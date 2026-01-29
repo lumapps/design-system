@@ -1,6 +1,6 @@
 import { h } from 'vue';
-import { render, screen } from '@testing-library/vue';
-import { describe, it, expect } from 'vitest';
+import { render, screen, fireEvent } from '@testing-library/vue';
+import { describe, it, expect, vi } from 'vitest';
 import { VueToJSX } from './VueToJSX';
 
 describe('VueToJSX', () => {
@@ -70,5 +70,42 @@ describe('VueToJSX', () => {
 
         const element = screen.getByTestId('mock');
         expect(element).toHaveClass('test-class');
+    });
+
+    it('should generate event handlers based on events prop', async () => {
+        const MockComponent = (props: { onClick?: any; onFocus?: any }) =>
+            h('div', { 
+                'data-testid': 'mock', 
+                onClick: props.onClick,
+                onFocus: props.onFocus 
+            });
+
+        const emitSpy = vi.fn();
+        const WrappedComponent = VueToJSX(
+            MockComponent, 
+            emitSpy, 
+            ['click', 'focus']
+        );
+
+        render(WrappedComponent);
+        const element = screen.getByTestId('mock');
+
+        await fireEvent.click(element);
+        expect(emitSpy).toHaveBeenCalledWith('click', expect.anything());
+
+        await fireEvent.focus(element);
+        expect(emitSpy).toHaveBeenCalledWith('focus', expect.anything());
+    });
+
+    it('should not generate handlers if events list is not provided', () => {
+        const MockComponent = vi.fn((_props: any) => h('div'));
+        const WrappedComponent = VueToJSX(MockComponent);
+
+        render(WrappedComponent);
+        
+        // Check the props passed to MockComponent
+        // MockComponent is a functional component, so it receives props as first arg
+        const props = MockComponent.mock.calls[0][0] as any;
+        expect(props).not.toHaveProperty('onClick');
     });
 });

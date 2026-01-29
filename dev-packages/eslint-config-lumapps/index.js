@@ -119,7 +119,7 @@ module.exports = {
             plugins: [...BASE_PLUGINS, 'vue'],
             extends: [...BASE_EXTENDS, 'plugin:vue/vue3-recommended', '@vue/eslint-config-typescript'],
             parserOptions: {
-                project: ['packages/lumx-vue/tsconfig.json'],
+                project: ['./tsconfig.json'],
             },
             rules: {
                 ...BASE_RULES,
@@ -146,7 +146,8 @@ module.exports = {
                     "multiline": {
                         "max": 3
                     }
-                }]
+                }],
+                "vue/prop-name-casing": "off"
             },
         },
     ],

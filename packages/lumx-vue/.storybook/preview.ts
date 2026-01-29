@@ -1,6 +1,6 @@
 import type { Preview } from '@storybook/vue3-vite';
 import { withStoryBlockDecorator } from './story-block/decorator';
-import { Theme } from '@lumx/vue';
+import { Theme } from '@lumx/core/src/js/constants';
 import '@lumx/core/scss/lumx.scss';
 
 const preview: Preview = {
@@ -17,7 +17,6 @@ const preview: Preview = {
                     { value: Theme.dark, title: 'Dark theme' },
                 ],
                 dynamicTitle: true,
-                showName: true,
             },
         },
         /** Add legacy material theme switcher in the toolbar */
@@ -28,7 +27,6 @@ const preview: Preview = {
             toolbar: {
                 icon: 'paintbrush',
                 items: [{ value: 'false', title: 'Default' }, { value: 'true', title: 'Legacy material theme' }],
-                showName: true,
             },
         },
     },
