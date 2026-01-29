@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocation } from '@gatsbyjs/reach-router';
 import filter from 'lodash/fp/filter';
 import * as Comlink from 'comlink';
+import { useFramework } from '@lumx/demo/components/layout/FrameworkContext';
 import type { SearchDocument, SearchWorkerApi } from './search-worker';
 
 const worker =
@@ -17,6 +18,7 @@ export function useSearch() {
     const [query, setQuery] = useState<string>('');
     const [results, setResults] = useState<SearchDocument[] | undefined>([]);
     const { pathname } = useLocation();
+    const { framework } = useFramework();
 
     // On search:
     useEffect(() => {
@@ -24,7 +26,7 @@ export function useSearch() {
             // Unset results (loading state)
             setResults(undefined);
             worker
-                .search(query)
+                .search(query, framework)
                 // Remove current page from results
                 .then(filter((result) => result.slug !== pathname))
                 // Set results
@@ -33,7 +35,7 @@ export function useSearch() {
             // No result
             setResults([]);
         }
-    }, [pathname, query]);
+    }, [pathname, query, framework]);
 
     return { query, setQuery, results };
 }

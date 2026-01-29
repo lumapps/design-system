@@ -1,8 +1,11 @@
-import { Alignment, Divider, ExpansionPanel, Grid, GridItem, Heading } from '@lumx/react';
+import React, { Fragment, ReactNode, useState } from 'react';
 import partition from 'lodash/partition';
 import castArray from 'lodash/castArray';
 import orderBy from 'lodash/orderBy';
-import { Fragment, ReactNode, useState } from 'react';
+import upperFirst from 'lodash/upperFirst';
+
+import { Alignment, Divider, ExpansionPanel, Grid, GridItem, Heading, Message } from '@lumx/react';
+import { useFramework } from '@lumx/demo/components/layout/FrameworkContext';
 
 import './PropTable.scss';
 
@@ -100,15 +103,20 @@ export interface ComponentDoc {
 
 export interface PropTableProps {
     /** Component props doc. */
-    docs?: { react?: ComponentDoc };
+    docs?: { react?: ComponentDoc; vue?: ComponentDoc };
 }
 
 export const PropTable: React.FC<PropTableProps> = ({ docs }) => {
-    const properties = docs?.react?.props;
-    const componentName = docs?.react?.displayName;
+    const { framework } = useFramework();
+    const properties = docs?.[framework]?.props;
+    const componentName = docs?.[framework]?.displayName;
 
-    if (!properties) {
-        return <span>Could not load properties{componentName ? ` of the ${componentName} component` : ''}.</span>;
+    if (!properties || !componentName) {
+        return (
+            <Message kind="warning" hasBackground>
+                Props table not available yet for {upperFirst(framework)}
+            </Message>
+        );
     }
 
     const [forwardedProps, others] = partition(properties, (prop) =>

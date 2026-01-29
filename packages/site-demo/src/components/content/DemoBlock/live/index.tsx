@@ -1,5 +1,6 @@
 import React from 'react';
-import type { Theme } from '@lumx/react';
+import { type Theme, Message } from '@lumx/react';
+import { classNames } from '@lumx/core/js/utils';
 
 import { useFramework } from '@lumx/demo/components/layout/FrameworkContext';
 import { CodeBlock } from '@lumx/demo/components/content/CodeBlock/CodeBlock';
@@ -27,9 +28,17 @@ export function LiveEditor() {
     const context = React.useContext(LiveContext);
     const demo = context?.demo;
 
-    // Show Vue code if Vue framework is selected and Vue demo exists, otherwise show React
-    if (framework === 'vue' && demo?.vue) {
-        return <CodeBlock className="demo-block__code-part" language="markup" codeString={demo.vue.default} />;
+    // Vue demo
+    if (framework === 'vue') {
+        const codeString = demo?.vue?.default?.trim();
+        if (codeString) {
+            return <CodeBlock className="demo-block__code-part" language="markup" codeString={codeString} />;
+        }
+        return (
+            <Message kind="warning" className={classNames.margin('all', 'big')}>
+                Vue demo is not available yet.
+            </Message>
+        );
     }
 
     // Fall back to React editor

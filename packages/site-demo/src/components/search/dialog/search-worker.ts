@@ -8,6 +8,7 @@ export interface SearchDocument {
     parentTitlePath: string[];
     slug: string;
     content: string;
+    frameworks?: string[];
 }
 
 /** Document fields in which we want to have search term highlighted */
@@ -28,7 +29,7 @@ async function loadIndex(url: string): Promise<SearchIndex> {
 const searchIndexPromise = loadIndex(new URL('/search_index.json', global.location.origin).toString());
 
 /** Execute a search query against the LunR index. */
-async function search(rawQuery: string) {
+async function search(rawQuery: string, selectedFramework: string) {
     const { index, store } = await searchIndexPromise;
     const terms = rawQuery.toLowerCase().split(/\s+/);
 
@@ -50,6 +51,12 @@ async function search(rawQuery: string) {
 
         // Get the full document from the store
         const document = { ...store[ref] };
+
+        // Filter by framework support
+        if (selectedFramework === 'vue') {
+            const docFrameworks = document.frameworks || ['react'];
+            if (!docFrameworks.includes('vue')) continue;
+        }
 
         // Highlight search terms in title and content
         for (const field of HIGHLITHED_FIELDS) {

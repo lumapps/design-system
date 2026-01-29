@@ -16,6 +16,7 @@
     &__wrapper {
         display: flex;
         flex-direction: column;
+        view-transition-name: main-content-wrapper;
 
         & > h1 {
             @include lumx-typography(display1);
@@ -49,8 +50,8 @@
             font-family: monospace;
             font-size: 14px;
             font-weight: 700;
-            color: $lumx-color-dark-N;
-            background-color: $lumx-color-dark-L5;
+            color: var(--lumx-color-dark-N);
+            background-color: var(--lumx-color-dark-L5);
         }
 
         & > ul {

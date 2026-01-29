@@ -2,6 +2,9 @@ import { graphql, useStaticQuery } from 'gatsby';
 import map from 'lodash/map';
 import keyBy from 'lodash/keyBy';
 import partial from 'lodash/partial';
+
+import { Framework, useFramework } from '@lumx/demo/components/layout/FrameworkContext';
+
 import { MenuEntry, MenuEntryByPath } from './types';
 
 const query = graphql`
@@ -12,6 +15,7 @@ const query = graphql`
                     path
                     label
                     hasDynamicChildren
+                    frameworks
                     children {
                         id
                     }
@@ -21,9 +25,13 @@ const query = graphql`
     }
 `;
 
-function getChildren(menuEntryByPath: MenuEntryByPath, menuEntry: MenuEntry): MenuEntry[] | null {
+function getChildren(
+    menuEntryByPath: MenuEntryByPath,
+    selectedFramework: Framework,
+    menuEntry: MenuEntry,
+): MenuEntry[] | null {
     if (menuEntry.children.length) {
-        return menuEntry.children.map(({ id }) => menuEntryByPath[id]);
+        return menuEntry.children.map(({ id }) => menuEntryByPath[id]).filter(Boolean);
     }
     if (menuEntry.hasDynamicChildren) {
         const children = Object.keys(menuEntryByPath)
@@ -31,18 +39,27 @@ function getChildren(menuEntryByPath: MenuEntryByPath, menuEntry: MenuEntry): Me
             .filter((childPath) => childPath.startsWith(menuEntry.path) && childPath !== menuEntry.path)
             // Get children menu entries.
             .map((path) => menuEntryByPath[path])
-            // Sort by label.
-            .sort(({ label: labelA }, { label: labelB }) => labelA.localeCompare(labelB));
+            // Sort dynamic children: matching framework first, then by label
+            .sort((a, b) => {
+                const aMatches = a.frameworks?.includes(selectedFramework);
+                const bMatches = b.frameworks?.includes(selectedFramework);
+                if (aMatches === bMatches) {
+                    return a.label.localeCompare(b.label);
+                }
+                return aMatches ? -1 : 1;
+            });
         return children.length ? children : null;
     }
     return null;
 }
 
 export const useMenuItems = () => {
+    const { framework: selectedFramework } = useFramework();
     const data = useStaticQuery(query);
     const entries = map(data.allMenuEntry.edges, 'node') as MenuEntry[];
-    const menuEntryByPath = keyBy(entries, 'path') as MenuEntryByPath;
-    const rootMenuEntries = getChildren(menuEntryByPath, menuEntryByPath['/']);
 
-    return { rootMenuEntries, getChildren: partial(getChildren, menuEntryByPath) };
+    const menuEntryByPath = keyBy(entries, 'path') as MenuEntryByPath;
+    const rootMenuEntries = getChildren(menuEntryByPath, selectedFramework, menuEntryByPath['/']);
+
+    return { rootMenuEntries, getChildren: partial(getChildren, menuEntryByPath, selectedFramework) };
 };

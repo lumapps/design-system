@@ -5,7 +5,9 @@ const Article = ({ title, children }: { title: string; children?: ReactNode }) =
     <article className="lumx-spacing-padding-left-big">
         <HeadingLevelProvider>
             <Heading>{title}</Heading>
-            <Text as="p">Article content</Text>
+            <Text as="p" typography="body1">
+                Article content
+            </Text>
             {children}
         </HeadingLevelProvider>
     </article>

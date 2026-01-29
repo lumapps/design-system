@@ -1,6 +1,7 @@
 /* eslint-disable */
 const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin');
 
+const fs = require('fs');
 const path = require('path');
 const lodash = require('lodash');
 const { createFilePath } = require('gatsby-source-filesystem');
@@ -30,6 +31,7 @@ exports.createPages = async ({ graphql, actions }) => {
                         excerpt(pruneLength: 200)
                         fields {
                             slug
+                            frameworks
                         }
                         tableOfContents
                         internal {
@@ -54,11 +56,12 @@ exports.createPages = async ({ graphql, actions }) => {
         }
         const title = mdxUtils.getFirstH1Text(page.node.tableOfContents) || slugToTitle(slug);
         const excerpt = cleanExcerpt(page.node.excerpt, title);
+        const frameworks = page.node.fields?.frameworks;
 
         createPage({
             path: slug,
             component: `${pageTemplate}?__contentFilePath=${page.node.internal.contentFilePath}`,
-            context: { slug, title, excerpt },
+            context: { slug, title, excerpt, frameworks },
         });
     }
 };
@@ -68,10 +71,18 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 
     if (node.internal.type === 'Mdx') {
         const value = createFilePath({ node, getNode });
+        const frameworks = node.frontmatter?.frameworks;
+
         createNodeField({
             name: 'slug',
             node,
             value,
+        });
+
+        createNodeField({
+            name: 'frameworks',
+            node,
+            value: frameworks,
         });
     }
 };
