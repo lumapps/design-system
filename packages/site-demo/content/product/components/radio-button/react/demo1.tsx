@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { RadioButton, RadioGroup, Theme } from '@lumx/react';
+import { RadioButton, RadioGroup, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => {
     const [value, onChange] = useState<string | undefined>('lorem');

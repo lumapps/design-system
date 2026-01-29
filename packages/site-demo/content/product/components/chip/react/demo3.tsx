@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Chip, Theme } from '@lumx/react';
+import { Chip, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => {
     const [selected, setSelected] = useState(-1);

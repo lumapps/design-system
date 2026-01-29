@@ -1,4 +1,4 @@
-import { Table, TableBody, TableCell, TableRow, Theme } from '@lumx/react';
+import { Table, TableBody, TableCell, TableRow, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => (
     <Table hasDividers theme={theme} style={{ minWidth: 620 }}>

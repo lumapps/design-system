@@ -1,4 +1,4 @@
-import { FlexBox, SkeletonTypography, Theme } from '@lumx/react';
+import { FlexBox, SkeletonTypography, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => (
     <>

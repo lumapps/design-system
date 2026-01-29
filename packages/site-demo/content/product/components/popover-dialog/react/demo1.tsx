@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { mdiMenu, mdiSettings } from '@lumx/icons';
-import { Button, FlexBox, Heading, IconButton, List, ListItem, PopoverDialog, Toolbar, Theme } from '@lumx/react';
+import { Button, FlexBox, Heading, IconButton, List, ListItem, PopoverDialog, Toolbar, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => {
     const anchorRef = useRef(null);

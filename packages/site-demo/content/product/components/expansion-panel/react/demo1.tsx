@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ExpansionPanel, Text, Theme } from '@lumx/react';
+import { ExpansionPanel, Text, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => {
     const [isOpen, setOpen] = useState(false);

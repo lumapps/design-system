@@ -1,5 +1,5 @@
 import { mdiImagePlus } from '@lumx/icons';
-import { Uploader, UploaderVariant, Theme } from '@lumx/react';
+import { Uploader, UploaderVariant, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => (
     <Uploader icon={mdiImagePlus} label="Add photo" theme={theme} variant={UploaderVariant.circle} />

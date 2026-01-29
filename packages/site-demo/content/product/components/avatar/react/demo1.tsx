@@ -1,4 +1,4 @@
-import { Avatar, Theme } from '@lumx/react';
+import { Avatar, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => (
     <>

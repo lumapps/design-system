@@ -1,4 +1,4 @@
-import { ThemeProvider, Flag, useTheme, Theme } from '@lumx/react';
+import { ThemeProvider, Flag, useTheme, type Theme } from '@lumx/react';
 
 function MyComponent() {
     const theme = useTheme();

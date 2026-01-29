@@ -1,4 +1,4 @@
-import { GenericBlock, SkeletonCircle, SkeletonTypography, Theme } from '@lumx/react';
+import { GenericBlock, SkeletonCircle, SkeletonTypography, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => (
     <GenericBlock orientation="horizontal" gap="big">

@@ -1,4 +1,4 @@
-import { Thumbnail, Theme } from '@lumx/react';
+import { Thumbnail, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => (
     <Thumbnail

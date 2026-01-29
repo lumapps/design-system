@@ -1,4 +1,4 @@
-import { Button, FlexBox, Theme } from '@lumx/react';
+import { Button, FlexBox, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => (
     <div style={{ display: 'flex', width: '100%', flexDirection: 'column', gap: 16 }}>

@@ -1,4 +1,4 @@
-import { ImageBlock, Slideshow, SlideshowItem, Theme } from '@lumx/react';
+import { ImageBlock, Slideshow, SlideshowItem, type Theme } from '@lumx/react';
 
 const IMAGES = [
     { image: '/demo-assets/landscape1.jpg', alt: 'Landscape 1' },

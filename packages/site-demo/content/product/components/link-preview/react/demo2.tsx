@@ -1,4 +1,4 @@
-import { LinkPreview, Theme } from '@lumx/react';
+import { LinkPreview, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => (
     <div style={{ width: 350 }}>

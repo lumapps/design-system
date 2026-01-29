@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TextField, Theme } from '@lumx/react';
+import { TextField, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => {
     const [value, setValue] = useState('');

@@ -1,4 +1,4 @@
-import { SkeletonCircle, Theme } from '@lumx/react';
+import { SkeletonCircle, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => (
     <>

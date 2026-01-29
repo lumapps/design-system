@@ -1,4 +1,4 @@
-import { Tab, TabList, TabPanel, TabProvider, Theme } from '@lumx/react';
+import { Tab, TabList, TabPanel, TabProvider, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => (
     <div style={{ minWidth: 260 }}>

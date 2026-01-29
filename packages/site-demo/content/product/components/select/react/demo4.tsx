@@ -1,5 +1,15 @@
 import { mdiAccessPoint, mdiAccountBox, mdiAlphaF, mdiClose, mdiMagnify } from '@lumx/icons';
-import { Chip, Icon, List, ListDivider, ListItem, ListSubheader, SelectMultiple, TextField, Theme } from '@lumx/react';
+import {
+    Chip,
+    Icon,
+    List,
+    ListDivider,
+    ListItem,
+    ListSubheader,
+    SelectMultiple,
+    TextField,
+    type Theme,
+} from '@lumx/react';
 import React, { useState } from 'react';
 
 export default ({ theme }: { theme?: Theme }) => {

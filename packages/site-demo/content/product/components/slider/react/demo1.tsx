@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Slider, Theme } from '@lumx/react';
+import { Slider, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => {
     const [value, setValue] = useState(4);

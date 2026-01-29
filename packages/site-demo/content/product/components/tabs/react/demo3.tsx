@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { mdiBowl, mdiBreadSliceOutline, mdiSilverwareForkKnife } from '@lumx/icons';
-import { Tab, TabList, TabPanel, TabProvider, Theme } from '@lumx/react';
+import { Tab, TabList, TabPanel, TabProvider, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => {
     const [activeTab, setActiveTab] = useState(0);

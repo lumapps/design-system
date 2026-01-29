@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import { Heading, HeadingLevelProvider, Text } from '@lumx/react';
 
 const Article = ({ title, children }: { title: string; children?: ReactNode }) => (

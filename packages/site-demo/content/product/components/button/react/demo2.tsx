@@ -1,5 +1,5 @@
 import { mdiMenuDown, mdiPencil, mdiPlus } from '@lumx/icons';
-import { Button, ButtonGroup, IconButton, Theme } from '@lumx/react';
+import { Button, ButtonGroup, IconButton, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => (
     <>

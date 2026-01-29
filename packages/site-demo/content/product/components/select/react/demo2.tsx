@@ -1,5 +1,5 @@
 import { mdiMagnify } from '@lumx/icons';
-import { List, ListDivider, ListItem, ListSubheader, Select, TextField, Theme } from '@lumx/react';
+import { List, ListDivider, ListItem, ListSubheader, Select, TextField, type Theme } from '@lumx/react';
 import React, { useState } from 'react';
 
 export default ({ theme }: { theme?: Theme }) => {
