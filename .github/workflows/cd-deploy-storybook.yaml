@@ -7,12 +7,12 @@ on:
     pull_request:
         types: [labeled, synchronize]
 
-concurrency:
-    group: storybook-${{ github.head_ref }}
-    cancel-in-progress: true
 
 jobs:
     deploy-storybook-react:
+        concurrency:
+            group: storybook-react-${{ github.head_ref }}
+            cancel-in-progress: true
         if: "github.event.action == 'labeled' && github.event.label.name == 'need: deploy-storybook-react'"
         runs-on: ubuntu-latest
         steps:
@@ -33,6 +33,9 @@ jobs:
                   label: 'need: deploy-storybook-react'
 
     deploy-storybook-vue:
+        concurrency:
+            group: storybook-vue-${{ github.head_ref }}
+            cancel-in-progress: true
         if: "github.event.action == 'labeled' && github.event.label.name == 'need: deploy-storybook-vue'"
         runs-on: ubuntu-latest
         steps:
@@ -53,6 +56,9 @@ jobs:
                   label: 'need: deploy-storybook-vue'
 
     check_up_to_date:
+        concurrency:
+            group: storybook-check-up-to-date-${{ github.head_ref }}
+            cancel-in-progress: true
         if: "github.event.action == 'synchronize' && contains(github.event.pull_request.body, 'StoryBook ')"
         name: 'Check StoryBook URL is up-to-date'
         runs-on: ubuntu-latest
