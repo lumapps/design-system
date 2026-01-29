@@ -14,7 +14,7 @@ const NAME_PROPERTIES: string[] = ['type.name', 'type.displayName', 'type.__name
  * @return predicate returning true if value is instance of the component
  */
 export const isComponent =
-    (component: ConcreteComponent | string) =>
+    (component: ConcreteComponent<any> | string) =>
     (instance: VNode): boolean => {
         const componentName =
             typeof component === 'string'

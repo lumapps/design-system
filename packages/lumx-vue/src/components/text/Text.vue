@@ -1,6 +1,6 @@
 <template>
     <component
-        :is="as"
+        :is="props.as"
         ref="tooltip-label"
         v-bind="componentProps"
         :class="textProps.className"

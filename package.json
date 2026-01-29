@@ -69,7 +69,7 @@
         "scaffold": "yo lumx-component --with-tests --with-demo",
         "setup:git-hooks": "yarn husky uninstall && yarn husky install || exit 0",
         "start": "yarn workspace lumx-site-demo start",
-        "test": "vitest",
+        "test": "vitest run",
         "type-check": "yarn workspaces foreach --all --parallel --interlaced -v run type-check",
         "storybook:react": "yarn workspace @lumx/react start:storybook",
         "storybook:vue": "yarn workspace @lumx/vue start:storybook",

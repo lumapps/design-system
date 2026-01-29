@@ -84,8 +84,6 @@ export default defineConfig({
         fixEsmImports(),
         vue({
             script: {
-                // This enables the compiler to resolve types from external files/packages
-                fsSelfReference: true,
                 // This helps with complex prop analysis
                 propsDestructure: true, 
             },

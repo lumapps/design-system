@@ -3,7 +3,7 @@ import { InputHelper, InputHelperProps, Kind } from '@lumx/vue';
 import { Default as DefaultConfig, AllKinds as AllKindsStory } from '@lumx/core/js/components/InputHelper/Stories';
 import StoryMatrix from '@lumx/vue/stories/utils/StoryMatrix.vue';
 import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
-import { withSlot } from '@lumx/vue/stories/utils/withSlot';
+import { cleanArgs } from '@lumx/vue/stories/utils/cleanArgs';
 
 export default {
     title: 'LumX components/input-helper/Input Helper',
@@ -19,7 +19,7 @@ export const Default = {
     render: (args: InputHelperProps) => ({
         components: { InputHelper },
         setup() {
-            return withSlot(args);
+            return cleanArgs(args);
         },
         template: `
             <InputHelper v-bind="args">
@@ -35,7 +35,7 @@ export const AllKinds = {
         components: { InputHelper, StoryMatrix },
         setup() {
             const kinds = withUndefined(Kind);
-            return { kinds, ...withSlot(args) };
+            return { kinds, ...cleanArgs(args) };
         },
         template: `
             <StoryMatrix :rows="kinds">

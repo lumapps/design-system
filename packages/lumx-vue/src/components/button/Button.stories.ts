@@ -4,6 +4,7 @@ import {
     Base as BaseStory,
     Default as DefaultStory,
 } from '@lumx/core/js/components/Button/Stories';
+import { cleanArgs } from '@lumx/vue/stories/utils/cleanArgs';
 
 export default {
     title: 'LumX components/button/Button',
@@ -19,11 +20,11 @@ export const Base = {
     render: (args: ButtonProps) => ({
         components: { Button },
         setup() {
-            return { args };
+            return cleanArgs(args);
         },
         template: `
-            <Button v-bind="args">
-                {{ args.children }}
+            <Button v-bind="args" @click="events.onClick">
+                {{ slot }}
             </Button>
         `,
     }),
