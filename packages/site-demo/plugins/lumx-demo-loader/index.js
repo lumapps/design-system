@@ -48,10 +48,13 @@ function parseDemo(content) {
     };
 }
 
-module.exports = async (content) => {
-    const { scopeEntries, importsCode, bodyCode } = parseDemo(content);
+module.exports = function (content) {
+    const callback = this.async();
 
-    const output = `
+    try {
+        const { scopeEntries, importsCode, bodyCode } = parseDemo(content);
+
+        const output = `
 ${content}
 
 export const scope = {
@@ -61,5 +64,8 @@ export const scope = {
 export const code = ${JSON.stringify(bodyCode)};
 export const imports = ${JSON.stringify(importsCode)};
 `;
-    return output;
+        callback(null, output);
+    } catch (e) {
+        callback(e);
+    }
 };
