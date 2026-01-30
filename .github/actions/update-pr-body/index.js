@@ -10,7 +10,13 @@ async function main({ inputs, github, context }) {
     const { owner, repo } = context.repo;
     const pull_number = context.issue.number;
 
-    const body = context.payload.pull_request.body || '';
+    // Fetch current PR body from API to avoid stale data in parallel workflows
+    const { data: pullRequest } = await github.rest.pulls.get({
+        owner,
+        repo,
+        pull_number,
+    });
+    const body = pullRequest.body || '';
     const matches = Array.from(body.matchAll(pattern));
     const lastMatch = matches[matches.length - 1];
 
