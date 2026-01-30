@@ -1,5 +1,6 @@
-import { GenericProps, JSXElement } from '@lumx/core/js/types';
 import { VNode, SetupContext, EmitsOptions, FunctionalComponent } from 'vue';
+
+import { GenericProps, JSXElement } from '@lumx/core/js/types';
 
 /**
  * Props type that includes optional children for JSX compatibility.
@@ -16,6 +17,8 @@ export type VueToJSXProps<Props extends GenericPropsWithChildren> = Omit<Props, 
     class?: string;
 };
 
+type VueEmits = EmitsOptions | Record<string, any[]>;
+
 /**
  * Higher-order component that wraps a LumX Core component (which uses JSX patterns)
  * to be used as a Vue functional component.
@@ -29,16 +32,31 @@ export type VueToJSXProps<Props extends GenericPropsWithChildren> = Omit<Props, 
  */
 export const VueToJSX = <
     Props extends GenericPropsWithChildren,
-    Emits extends EmitsOptions | Record<string, any[]> = Record<string, never>,
+    Emits extends VueEmits = Record<string, never>,
 >(
     Component: (props: Props) => VNode,
+    emit?: SetupContext<Emits>['emit'],
+    events?: string[],
 ) => {
     function funcComponent(props: Props, context: SetupContext<Emits>) {
         const { slots } = context;
         const defaultSlot = slots.default;
 
+        /**
+         * Generate event handlers dynamically based on the `events` array.
+         * For each event (e.g., 'click'), it creates a prop following the 'on<Event>'
+         * convention (e.g., 'onClick') that calls Vue's `emit` function.
+         */
+        const eventHandlers =
+            events?.reduce((acc, event) => {
+                const propName = `on${event.charAt(0).toUpperCase() + event.slice(1)}`;
+                acc[propName] = (e: any) => emit?.(event, e);
+                return acc;
+            }, {} as Record<string, (e: any) => void>) || {};
+
         const componentProps = {
             ...props,
+            ...eventHandlers,
             className: props.class,
         };
 

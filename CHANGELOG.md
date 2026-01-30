@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/vue`:
     -   Create the `Text` component
+    -   Create the `Button` component
     -   `Icon`: add `verticalAlign` prop to allow centered vertically aligned icon inside Text 
 -   `@lumx/react`:
     -   `UserBlock`: improve name and fields text layout in constrained space
