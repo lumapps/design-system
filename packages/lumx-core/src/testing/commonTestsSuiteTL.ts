@@ -131,22 +131,12 @@ export function commonTestsSuiteTL<Props extends GenericProps>(setup: SetupFunct
     if (isEmpty(options)) {
         return;
     }
-    const { baseClassName, forwardClassName, forwardAttributes, applyTheme } = options;
+    const { baseClassName, forwardAttributes, applyTheme } = options;
     describe('Common tests suite', () => {
         it('should render with base class name', async () => {
             await setup();
             expect(queryByClassName(document.body, baseClassName)).toBeInTheDocument();
         });
-
-        if (forwardClassName) {
-            it('should forward any CSS class', async () => {
-                const modifiedProps = {
-                    className: 'component component--is-tested',
-                };
-                const wrappers = await setup(modifiedProps);
-                expect(wrappers[forwardClassName]).toHaveClass(modifiedProps.className);
-            });
-        }
 
         if (forwardAttributes) {
             it('should forward any other prop', async () => {

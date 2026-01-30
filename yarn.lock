@@ -2832,10 +2832,10 @@ __metadata:
     vite-plugin-static-copy: "npm:^3.1.4"
     vite-tsconfig-paths: "npm:^5.1.4"
     vitest: "npm:^4.0.18"
-    vue: "npm:^3.5.25"
+    vue: "npm:^3.5.27"
   peerDependencies:
     lodash: 4.17.21
-    vue: ^3.5.25
+    vue: ^3.5.27
   languageName: unknown
   linkType: soft
 
@@ -27806,7 +27806,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue@npm:^3.5.25":
+"vue@npm:^3.5.27":
   version: 3.5.27
   resolution: "vue@npm:3.5.27"
   dependencies:

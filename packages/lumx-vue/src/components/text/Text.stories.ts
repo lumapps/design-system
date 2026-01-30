@@ -9,7 +9,7 @@ import {
     Base,
     NoWrap,
     Truncate,
-    TruncateMultiline,
+    TruncateMultiline as TruncateMultilineStory,
     AllWhiteSpace as AllWhiteSpaceStory,
     LongText as LongTextStory,
 } from '@lumx/core/js/components/Text/Stories';
@@ -33,7 +33,7 @@ export default {
     }),
 };
 
-export { Base, NoWrap, Truncate, TruncateMultiline };
+export { Base, NoWrap, Truncate };
 
 /**
  * Test the update of the `title` attribute when text overflows
@@ -80,6 +80,14 @@ export const WithColor = {
 export const LongText = {
     ...LongTextStory,
     decorators: [withResizableBox()],
+};
+
+export const TruncateMultiline = {
+    ...LongText,
+    args: {
+        ...LongText.args,
+        ...TruncateMultilineStory.args,
+    },
 };
 
 /**

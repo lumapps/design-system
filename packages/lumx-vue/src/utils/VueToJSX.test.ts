@@ -44,4 +44,31 @@ describe('VueToJSX', () => {
         const element = screen.getByTestId('mock');
         expect(element).toHaveTextContent('Label: Content');
     });
+
+    it('should map class prop to className when default slot is present', () => {
+        const MockComponent = (props: { className?: string; children?: any }) =>
+            h('div', { 'data-testid': 'mock', class: props.className }, props.children);
+        const WrappedComponent = VueToJSX(MockComponent);
+
+        render(WrappedComponent, {
+            props: { class: 'test-class' },
+            slots: { default: 'Content' },
+        });
+
+        const element = screen.getByTestId('mock');
+        expect(element).toHaveClass('test-class');
+    });
+
+    it('should map class prop to className when no slots are present', () => {
+        const MockComponent = (props: { className?: string }) =>
+            h('div', { 'data-testid': 'mock', class: props.className });
+        const WrappedComponent = VueToJSX(MockComponent);
+
+        render(WrappedComponent, {
+            props: { class: 'test-class' },
+        });
+
+        const element = screen.getByTestId('mock');
+        expect(element).toHaveClass('test-class');
+    });
 });

@@ -16,23 +16,43 @@ export type SetupRenderOptions<Props> = RenderOptions<Props>;
  * - Check props forwarding
  */
 export function commonTestsSuiteVTL<S extends GenericProps>(setup: SetupFunction, options: Options<S>): void {
-    const { applyTheme } = options;
+    const { applyTheme, forwardClassName } = options;
 
     coreCommonTestsSuiteTL(setup, options);
 
-    if (applyTheme) {
-        describe('Vue - Common tests suite', () => {
-            if (applyTheme) {
-                describe('theme', () => {
-                    const { defaultTheme, viaProp, viaContext } = applyTheme;
-                    const testElements = getTestElements(applyTheme);
+    describe('Vue - Common tests suite', () => {
+        if (applyTheme) {
+            describe('theme', () => {
+                const { defaultTheme, viaProp, viaContext } = applyTheme;
+                const testElements = getTestElements(applyTheme);
 
-                    const contextTheme = invertTheme(defaultTheme || Theme.light);
+                const contextTheme = invertTheme(defaultTheme || Theme.light);
+                it.each(testElements)(
+                    `should $apply context theme=${contextTheme} to \`$element\``,
+                    async (affectedElement) => {
+                        const wrappers = await setup(
+                            {},
+                            {
+                                global: {
+                                    provide: {
+                                        theme: contextTheme,
+                                    },
+                                },
+                            },
+                        );
+                        expectTheme(wrappers, affectedElement, contextTheme, {
+                            shouldHaveModifier: !viaContext ? false : undefined,
+                        });
+                    },
+                );
+
+                if (viaProp && viaContext) {
+                    const propTheme = invertTheme(contextTheme);
                     it.each(testElements)(
-                        `should $apply context theme=${contextTheme} to \`$element\``,
+                        `should $apply prop theme=${propTheme} to \`$element\` overriding the context theme=${contextTheme}`,
                         async (affectedElement) => {
                             const wrappers = await setup(
-                                {},
+                                { theme: propTheme },
                                 {
                                     global: {
                                         provide: {
@@ -41,33 +61,21 @@ export function commonTestsSuiteVTL<S extends GenericProps>(setup: SetupFunction
                                     },
                                 },
                             );
-                            expectTheme(wrappers, affectedElement, contextTheme, {
-                                shouldHaveModifier: !viaContext ? false : undefined,
-                            });
+                            expectTheme(wrappers, affectedElement, propTheme);
                         },
                     );
+                }
+            });
+        }
 
-                    if (viaProp && viaContext) {
-                        const propTheme = invertTheme(contextTheme);
-                        it.each(testElements)(
-                            `should $apply prop theme=${propTheme} to \`$element\` overriding the context theme=${contextTheme}`,
-                            async (affectedElement) => {
-                                const wrappers = await setup(
-                                    { theme: propTheme },
-                                    {
-                                        global: {
-                                            provide: {
-                                                theme: contextTheme,
-                                            },
-                                        },
-                                    },
-                                );
-                                expectTheme(wrappers, affectedElement, propTheme);
-                            },
-                        );
-                    }
-                });
-            }
-        });
-    }
+        if (forwardClassName) {
+            it('should forward any CSS class', async () => {
+                const modifiedProps = {
+                    class: 'component component--is-tested',
+                };
+                const wrappers = await setup(modifiedProps);
+                expect(wrappers[forwardClassName]).toHaveClass(modifiedProps.class);
+            });
+        }
+    });
 }

@@ -137,7 +137,15 @@ module.exports = {
                 'vue/html-indent': ['error', 4],
                 'vue/multi-word-component-names': 'off',
                 "vue/block-order": ["error", {
-                    "order": [ "template", "script", "style" ]
+                    "order": ["template", "script", "style"]
+                }],
+                "vue/max-attributes-per-line": ["error", {
+                    "singleline": {
+                        "max": 3
+                    },
+                    "multiline": {
+                        "max": 3
+                    }
                 }]
             },
         },
