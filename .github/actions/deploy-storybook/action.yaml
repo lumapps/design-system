@@ -34,7 +34,7 @@ runs:
           if: github.event.pull_request
           uses: ./.github/actions/update-pr-body
           with:
-              pattern: 'StoryBook ${{ inputs.package }}: .*'
+              pattern: 'StoryBook ${{ inputs.package }}: [^\n]*'
               replace: 'StoryBook ${{ inputs.package }}: [Deploying...](${{ steps.vars.outputs.run_html_url }})'
               whenNotFound: 'append'
               keepLastMatch: true
@@ -54,7 +54,7 @@ runs:
           name: 'Update PR body: Failure state'
           uses: ./.github/actions/update-pr-body
           with:
-              pattern: 'StoryBook ${{ inputs.package }}: .*'
+              pattern: 'StoryBook ${{ inputs.package }}: [^\n]*'
               replace: 'StoryBook ${{ inputs.package }}: [:x: Failed](${{ steps.vars.outputs.run_html_url }})'
               whenNotFound: 'ignore'
               keepLastMatch: true
@@ -63,7 +63,7 @@ runs:
           if: github.event.pull_request
           uses: ./.github/actions/update-pr-body
           with:
-              pattern: 'StoryBook ${{ inputs.package }}: .*'
+              pattern: 'StoryBook ${{ inputs.package }}: [^\n]*'
               replace: 'StoryBook ${{ inputs.package }}: ${{ steps.vars.outputs.storybook_url }} ([Chromatic build](${{ steps.deploy.outputs.buildUrl }}))'
               whenNotFound: 'append'
               keepLastMatch: true
