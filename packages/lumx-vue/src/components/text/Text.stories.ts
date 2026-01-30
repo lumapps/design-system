@@ -89,24 +89,10 @@ export const TruncateMultiline = {
         ...TruncateMultilineStory.args,
     },
 };
+
 /**
  * Text containing icons (should match font size)
  */
-// export const WithIcon = {
-//     ...Base,
-//     render: (args: TextProps) => ({
-//         components: { Text, Icon },
-//         setup() {
-//             return { args, mdiHeart, mdiEarth };
-//         },
-//         template: `
-//             <Text v-bind="args">
-//                 Some text <Icon :icon="mdiHeart" /> with icons <Icon :icon="mdiEarth" />
-//             </Text>
-//         `,
-//     }),
-// };
-
 export const WithIcon = {
     ...Base,
     render: (args: TextProps) => ({
