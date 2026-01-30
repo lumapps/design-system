@@ -95,6 +95,7 @@ export default defineConfig({
         optimizeImportsLumxIcons(),
         dts({
             exclude: ['src/**/*.stories.ts', 'src/**/*.test.ts', 'src/testing'],
+            aliasesExclude: [/@lumx\/core/],
             entryRoot: 'src',
         }),
         viteStaticCopy({
