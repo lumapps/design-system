@@ -5,13 +5,13 @@ import { resolveColorWithVariants } from '@lumx/core/js/utils/_internal/color';
 import { classNames } from '../../utils';
 
 import { ColorPalette, Size, Theme, ColorWithVariants, ColorVariant } from '../../constants';
-import type { LumxClassName, GenericProps, HasTheme, ObjectValues } from '../../types';
+import type { LumxClassName, GenericProps, HasTheme } from '../../types';
 import { ICON_SIZES } from './constants';
 
 export const COMPONENT_NAME = 'Icon';
 export const IconClassName: LumxClassName<typeof COMPONENT_NAME> = 'lumx-icon';
 
-export type IconSizes = ObjectValues<typeof ICON_SIZES>;
+export type IconSizes = (typeof ICON_SIZES)[number];
 
 /**
  * Defines the props of the component.
