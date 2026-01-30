@@ -45,7 +45,7 @@ exports.createPages = async ({ graphql, actions }) => {
     }
 
     const pages = result.data.allMdx.edges.filter(
-        (edge) => edge.node.parent && edge.node.parent.sourceInstanceName === 'preprocessed-content',
+        (edge) => edge.node.parent && edge.node.parent.sourceInstanceName === 'content',
     );
     for (const page of pages) {
         const slug = page.node.fields?.slug;
@@ -95,15 +95,6 @@ exports.onCreateWebpackConfig = async ({ actions, stage }) => {
         plugins: [CONFIGS.ignoreNotFoundExport],
         resolve: {
             plugins: [new TsconfigPathsPlugin({ extensions: ['.ts', '.tsx'] })],
-        },
-        module: {
-            rules: [
-                // Load .vue files as raw text
-                {
-                    test: /\.vue$/,
-                    use: 'raw-loader',
-                },
-            ],
         },
     });
 };

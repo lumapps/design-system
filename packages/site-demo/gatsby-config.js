@@ -15,20 +15,12 @@ module.exports = {
         version: packageJson.version,
     },
     plugins: [
-        // Load content source files (RAW)
+        // Load content source files.
         {
             resolve: 'gatsby-source-filesystem',
             options: {
                 path: `${__dirname}/content`,
-                name: 'raw-content',
-            },
-        },
-        // Load preprocessed content source files.
-        {
-            resolve: 'gatsby-source-filesystem',
-            options: {
-                path: `${__dirname}/.cache/lumx-preprocessed-content`,
-                name: 'preprocessed-content',
+                name: 'content',
             },
         },
         // Copy static content files.
@@ -41,8 +33,8 @@ module.exports = {
         },
         // Generate/update component props JSON files.
         './plugins/lumx-prop-table',
-        // Preprocess MDX and Demos.
-        './plugins/lumx-mdx-preprocessor',
+        // Load demo files (react/vue).
+        './plugins/lumx-demo-loader',
         // Compile MDX content.
         {
             resolve: 'gatsby-plugin-mdx',
