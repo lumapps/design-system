@@ -3,7 +3,7 @@ import { BaseButtonProps, ButtonRoot } from './ButtonRoot';
 import { Icon } from '../Icon';
 import type { LumxClassName } from '../../types';
 
-export interface IconButtonProps extends BaseButtonProps {
+export interface IconButtonProps extends /* @vue-ignore */ BaseButtonProps {
     /**
      * Icon (SVG path).
      * If `image` is also set, `image` will be used instead.
