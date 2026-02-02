@@ -46,9 +46,6 @@ const RenderSlot = () => {
 };
 
 const componentProps = computed(() => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    // remove children from the props sent over to the component.
-    const { children, ...rest } = props;
-    return { ...attrs, ...rest, ...textProps.value };
+    return { ...attrs, ...textProps.value };
 });
 </script>

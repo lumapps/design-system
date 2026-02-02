@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed, provide, watch } from 'vue';
 import { classNames } from '@lumx/core/src/js/utils';
-import { Theme } from '@lumx/core/src/js/constants';
 import isChromatic from 'chromatic/isChromatic';
 import { toggleMaterialTheme } from './toggleMaterialTheme';
 import 'focus-visible';
@@ -15,7 +14,7 @@ const appliedTheme = computed(() => {
     const themeToUse = props.context.args.theme || theme;
 
     if (theme === '') {
-        return Theme.light;
+        return undefined;
     }
 
     return themeToUse;

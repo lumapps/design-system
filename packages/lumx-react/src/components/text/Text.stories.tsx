@@ -46,6 +46,19 @@ export const WithIcon = {
     },
 };
 
+export const WithIconAndColor = {
+    args: {
+        ...Base.args,
+        color: 'red',
+        colorVariant: 'L1',
+        children: (
+            <>
+                Some text <Icon icon={mdiHeart} /> with icons <Icon icon={mdiEarth} />
+            </>
+        ),
+    },
+};
+
 /**
  * Long text should wrap by default
  */

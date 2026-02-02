@@ -15,7 +15,7 @@
                 <th :style="[{ textAlign: 'left' }, firstColStyle]">
                     <small>{{ row === undefined ? 'undefined' : row }}</small>
                 </th>
-                <td v-for="col in cols" :key="String(col)" :style="[{ textAlign: 'center' }, cellStyle]">
+                <td v-for="col in cols" :key="String(col)" :style="[{ textAlign: 'left' }, cellStyle]">
                     <slot :row="row" :col="col"></slot>
                 </td>
             </tr>

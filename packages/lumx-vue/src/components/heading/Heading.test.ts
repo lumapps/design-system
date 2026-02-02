@@ -1,50 +1,58 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/vue';
 
 import BaseHeadingTests from '@lumx/core/js/components/Heading/Tests';
-import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
-import { getByClassName } from '@lumx/react/testing/utils/queries';
-import { Heading, HeadingProps } from './Heading';
-import { HeadingLevelProvider } from './HeadingLevelProvider';
+import { commonTestsSuiteVTL, SetupRenderOptions } from '@lumx/vue/testing';
+import { getByClassName } from '@lumx/core/testing/queries';
+import { Heading, HeadingLevelProvider, HeadingProps } from '.';
 
 const CLASSNAME = Heading.className as string;
 
 const setup = (props: Partial<HeadingProps> = {}) => {
-    const { container } = render(<Heading {...props} />);
-    return { props, container, element: getByClassName(container, CLASSNAME) };
+    const { container } = render(Heading, { props });
+    return { props, container, element: getByClassName(container as HTMLElement, CLASSNAME) };
 };
 
-describe(`<${Heading.displayName}>`, () => {
-    const renderHeading = (props: HeadingProps, options?: SetupRenderOptions) =>
-        render(<Heading {...props} />, options);
+describe('<Heading>', () => {
+    const renderHeading = (props: HeadingProps, options: SetupRenderOptions<HeadingProps> = {}) => {
+        const { children, ...restProps } = props;
+        return render(Heading, {
+            props: restProps,
+            slots: children ? { default: children } : undefined,
+            ...options,
+        });
+    };
 
     BaseHeadingTests({ render: renderHeading, screen });
 
     describe('Render', () => {
         it('should correctly render levels nested in HeadingLevel', () => {
-            render(
-                <>
-                    <Heading>Level 1</Heading>
-                    <HeadingLevelProvider>
-                        <Heading>Level 2</Heading>
+            render({
+                components: { Heading, HeadingLevelProvider },
+                template: `
+                    <div>
+                        <Heading>Level 1</Heading>
                         <HeadingLevelProvider>
-                            <Heading>Level 3</Heading>
+                            <Heading>Level 2</Heading>
                             <HeadingLevelProvider>
-                                <Heading>Level 4</Heading>
+                                <Heading>Level 3</Heading>
                                 <HeadingLevelProvider>
-                                    <Heading>Level 5 - 1</Heading>
-                                    <Heading>Level 5 - 2</Heading>
+                                    <Heading>Level 4</Heading>
                                     <HeadingLevelProvider>
-                                        <Heading>Level 6</Heading>
+                                        <Heading>Level 5 - 1</Heading>
+                                        <Heading>Level 5 - 2</Heading>
                                         <HeadingLevelProvider>
-                                            <Heading>Level 7</Heading>
+                                            <Heading>Level 6</Heading>
+                                            <HeadingLevelProvider>
+                                                <Heading>Level 7</Heading>
+                                            </HeadingLevelProvider>
                                         </HeadingLevelProvider>
                                     </HeadingLevelProvider>
                                 </HeadingLevelProvider>
                             </HeadingLevelProvider>
                         </HeadingLevelProvider>
-                    </HeadingLevelProvider>
-                </>,
-            );
+                    </div>
+                `,
+            });
 
             expect(screen.getByRole('heading', { level: 1, name: 'Level 1' })).toBeInTheDocument();
             expect(screen.getByRole('heading', { level: 2, name: 'Level 2' })).toBeInTheDocument();
@@ -63,14 +71,18 @@ describe(`<${Heading.displayName}>`, () => {
         });
 
         it('should override typography', () => {
-            setup({ children: 'Custom Typo', typography: 'body1' });
+            render(Heading, {
+                props: { typography: 'body1' } as HeadingProps,
+                slots: { default: 'Custom Typo' },
+            });
+
             const heading = screen.getByRole('heading', { name: 'Custom Typo' });
             expect(heading).toHaveClass('lumx-typography-body1');
         });
     });
 
     // Common tests suite.
-    commonTestsSuiteRTL(setup, {
+    commonTestsSuiteVTL(setup, {
         baseClassName: CLASSNAME,
         forwardClassName: 'element',
         forwardAttributes: 'element',

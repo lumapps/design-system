@@ -1,13 +1,8 @@
-import { HeadingElement } from '@lumx/react/utils/type';
 import { createContext } from 'react';
 
-interface HeadingLevelContext {
-    /** The current level */
-    level: number;
-    /** The heading element matching the current level */
-    headingElement: HeadingElement;
-}
+import {
+    type HeadingLevelContext as HeadingLevelContextType,
+    defaultContext,
+} from '@lumx/core/js/components/Heading/constants';
 
-const defaultContext: HeadingLevelContext = { level: 1, headingElement: 'h1' };
-
-export const HeadingLevelContext = createContext<HeadingLevelContext>(defaultContext);
+export const HeadingLevelContext = createContext<HeadingLevelContextType>(defaultContext);

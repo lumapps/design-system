@@ -1,40 +1,16 @@
-import { HeadingElement } from '@lumx/react/utils/type';
-import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import {
+    CLASSNAME,
+    COMPONENT_NAME,
+    DEFAULT_PROPS,
+    HeadingProps,
+    getHeadingProps,
+} from '@lumx/core/js/components/Heading';
 
-import { Text, TextProps } from '../text';
-import { DEFAULT_TYPOGRAPHY_BY_LEVEL } from './constants';
+import { Text } from '../text';
 import { useHeadingLevel } from './useHeadingLevel';
 
-/**
- * Defines the props of the component.
- */
-export interface HeadingProps extends Partial<TextProps> {
-    /**
-     * Display a specific heading level instead of the one provided by parent context provider.
-     */
-    as?: HeadingElement;
-    /**
-     * Children
-     */
-    children?: React.ReactNode;
-}
-
-/**
- * Component display name.
- */
-const COMPONENT_NAME = 'Heading';
-
-/**
- * Component default class name and class prefix.
- */
-const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-heading';
-
-/**
- * Component default props.
- */
-const DEFAULT_PROPS = {} as const;
+export type { HeadingProps };
 
 /**
  * Renders a heading component.
@@ -42,18 +18,12 @@ const DEFAULT_PROPS = {} as const;
  * the current level provided by the context.
  */
 export const Heading = forwardRef<HeadingProps>((props, ref) => {
-    const { children, as, className, ...forwardedProps } = props;
+    const { children, ...otherProps } = props;
     const { headingElement } = useHeadingLevel();
+    const headingProps = getHeadingProps(otherProps, headingElement);
 
-    const computedHeadingElement = as || headingElement;
     return (
-        <Text
-            ref={ref}
-            className={classNames.join(className, CLASSNAME)}
-            as={computedHeadingElement}
-            typography={DEFAULT_TYPOGRAPHY_BY_LEVEL[computedHeadingElement]}
-            {...forwardedProps}
-        >
+        <Text ref={ref} {...headingProps}>
             {children}
         </Text>
     );
