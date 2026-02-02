@@ -20,10 +20,10 @@
   "main": "index.js",
   "types": "index.d.ts",
   "sideEffects": false,
-  "version": "4.1.0",
+  "version": "4.2.0",
   "dependencies": {
-    "@lumx/core": "^4.1.0",
-    "@lumx/icons": "^4.1.0",
+    "@lumx/core": "^4.2.0",
+    "@lumx/icons": "^4.2.0",
     "@vueuse/core": "^14.1.0"
   },
   "peerDependencies": {
