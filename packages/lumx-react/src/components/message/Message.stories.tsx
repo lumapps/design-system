@@ -1,27 +1,27 @@
 import { Kind, Message } from '@lumx/react';
-import { mdiDelete } from '@lumx/icons';
-import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
-import { loremIpsum } from '@lumx/core/stories/utils/lorem';
-import { iconArgType } from '@lumx/core/stories/controls/icons';
+
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
+import {
+    Default as DefaultConfig,
+    Base,
+    AllKindsWithBackground as AllKindsWithBackgroundStory,
+    CustomIcon as CustomIconStory,
+    ClosableMessage as ClosableMessageStory,
+} from '@lumx/core/js/components/Message/Stories';
+
 import { withNestedProps } from '../../stories/decorators/withNestedProps';
 
 export default {
     title: 'LumX components/message/Message',
     component: Message,
-    argTypes: {
-        kind: getSelectArgType(Kind),
-        hasBackground: { control: 'boolean' },
-        icon: iconArgType,
-    },
-    args: { ...Message.defaultProps, children: loremIpsum('tiny') },
+    ...DefaultConfig,
 };
 
 /**
  * Default message
  */
-export const Default = {};
+export const Default = Base;
 
 /**
  * All `kind` variants
@@ -42,31 +42,18 @@ export const AllKinds = {
  */
 export const AllKindsWithBackground = {
     ...AllKinds,
-    args: {
-        hasBackground: true,
-    },
+    ...AllKindsWithBackgroundStory,
 };
 
 /**
  * With custom icon
  */
-export const CustomIcon = {
-    args: {
-        icon: mdiDelete,
-    },
-};
+export const CustomIcon = CustomIconStory;
 
 /**
  * With close button (has background and kind info)
  */
 export const ClosableMessage = {
-    args: {
-        'closeButtonProps.label': 'Close',
-        hasBackground: true,
-        kind: 'info',
-    },
-    argTypes: {
-        'closeButtonProps.onClick': { action: true },
-    },
+    ...ClosableMessageStory,
     decorators: [withNestedProps()],
 };
