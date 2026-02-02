@@ -11,7 +11,7 @@ type SetupProps = Partial<IconButtonProps>;
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  */
 export const setup = (propsOverride: SetupProps = {}, { render, ...options }: SetupOptions<IconButtonProps>) => {
-    const props: any = { ...propsOverride };
+    const props: any = { label: 'IconButton', ...propsOverride };
     render(props, options);
     const iconButton = getByClassName(document.body, CLASSNAME);
     const icon = queryByClassName(iconButton, 'lumx-icon');

@@ -6,27 +6,6 @@ export default {
     argTypes: { children: { control: false } },
 };
 
-/** Size & emphasis variants */
-// export const Variants = {
-//     render: ({ size, emphasis, theme }: any) => (
-//         <ButtonGroup>
-//             <Button size={size} emphasis={emphasis} theme={theme}>
-//                 Button
-//             </Button>
-//             <IconButton size={size} emphasis={emphasis} theme={theme} label="IconButton" icon={mdiMenuDown} />
-//         </ButtonGroup>
-//     ),
-//     decorators: [
-//         withCombinations({
-//             cellStyle: { padding: '10px' },
-//             combinations: {
-//                 rows: { '': { size: Size.m }, 'size=s': { size: Size.s } },
-//                 cols: { key: 'emphasis', options: [undefined, Emphasis.medium, Emphasis.low] },
-//             },
-//         }),
-//     ],
-// };
-
 export const OneButton = {
     render: (args: ButtonGroupProps) => ({
         components: { ButtonGroup, Button },

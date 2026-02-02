@@ -30,10 +30,7 @@ type VueEmits = EmitsOptions | Record<string, any[]>;
  * @param Component The LumX Core component to wrap.
  * @returns A Vue functional component.
  */
-export const VueToJSX = <
-    Props extends GenericPropsWithChildren,
-    Emits extends VueEmits = Record<string, never>,
->(
+export const VueToJSX = <Props extends GenericPropsWithChildren, Emits extends VueEmits = Record<string, never>>(
     Component: (props: Props) => VNode,
     emit?: SetupContext<Emits>['emit'],
     events?: string[],
@@ -48,11 +45,14 @@ export const VueToJSX = <
          * convention (e.g., 'onClick') that calls Vue's `emit` function.
          */
         const eventHandlers =
-            events?.reduce((acc, event) => {
-                const propName = `on${event.charAt(0).toUpperCase() + event.slice(1)}`;
-                acc[propName] = (e: any) => emit?.(event, e);
-                return acc;
-            }, {} as Record<string, (e: any) => void>) || {};
+            events?.reduce(
+                (acc, event) => {
+                    const propName = `on${event.charAt(0).toUpperCase() + event.slice(1)}`;
+                    acc[propName] = (e: any) => emit?.(event, e);
+                    return acc;
+                },
+                {} as Record<string, (e: any) => void>,
+            ) || {};
 
         const componentProps = {
             ...props,
