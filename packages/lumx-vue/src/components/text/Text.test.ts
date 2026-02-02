@@ -48,5 +48,6 @@ describe(`<Text>`, () => {
         baseClassName: Text.className as string,
         forwardClassName: 'element',
         forwardAttributes: 'element',
+        forwardRef: 'element',
     });
 });

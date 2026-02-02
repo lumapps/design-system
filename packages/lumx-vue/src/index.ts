@@ -3,5 +3,6 @@ export * from '@lumx/core/js/types';
 
 export * from './components/input-helper';
 export * from './components/input-label';
+export * from './components/button';
 export * from './components/icon';
 export * from './components/text';
