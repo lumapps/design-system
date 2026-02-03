@@ -1,35 +1,37 @@
-import { mdiHeart } from '@lumx/icons';
 import { ColorPalette, Flag } from '@lumx/react';
-import { colorArgType } from '@lumx/core/stories/controls/color';
-import { iconArgType } from '@lumx/core/stories/controls/icons';
 import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 import { withResizableBox } from '@lumx/react/stories/decorators/withResizableBox';
-import { loremIpsum } from '@lumx/core/stories/utils/lorem';
+
+import {
+    Default as DefaultConfig,
+    Base,
+    WithIcon as WithIconStory,
+    AllColors as AllColorsStory,
+    Truncate as TruncateStory,
+} from '@lumx/core/js/components/Flag/Stories';
 
 export default {
+    ...DefaultConfig,
     title: 'LumX components/flag/Flag',
     component: Flag,
-    argTypes: { color: colorArgType, icon: iconArgType },
-    args: { ...Flag.defaultProps, label: 'Label' },
 };
 
 /**
  * Default flag with label
  */
-export const Default = {};
+export const Default = Base;
 
 /**
  * With icon
  */
-export const WithIcon = { args: { icon: mdiHeart } };
+export const WithIcon = WithIconStory;
 
 /**
  * All `color` variants
  */
 export const AllColors = {
-    ...WithIcon,
-    argTypes: { color: { control: false } },
+    ...AllColorsStory,
     decorators: [
         withCombinations({
             combinations: {
@@ -43,6 +45,6 @@ export const AllColors = {
  * Truncate text option
  */
 export const Truncate = {
-    args: { label: loremIpsum('tiny'), truncate: true },
+    ...TruncateStory,
     decorators: [withResizableBox()],
 };

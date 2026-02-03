@@ -15,6 +15,7 @@
 import { computed, useAttrs, VNodeArrayChildren, useTemplateRef } from 'vue';
 
 import { getTextProps, TextProps } from '@lumx/core/js/components/Text';
+
 import { useOverflowTooltipLabel } from '../../composables/useOverflowTooltipLabel';
 import { useSlot } from '../../composables/useSlot';
 import { wrapChildrenIconWithSpaces } from '../../utils/wrapChildrenIconWithSpaces';

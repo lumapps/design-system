@@ -12,11 +12,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/vue`:
     -   Create the `Heading` component
     -   Create the `Message` component
+    -   Create the `Flag` component
 
 ### Changed
 
 -   `@lumx/core`:
     -   Moved `Message` from `@lumx/react`
+    -   Moved `Flag` from `@lumx/react`
 
 ## [4.2.0][] - 2026-02-02
 

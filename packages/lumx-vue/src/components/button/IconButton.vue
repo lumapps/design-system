@@ -24,7 +24,7 @@ const props = defineProps<IconButtonProps>();
 const attrs = useAttrs();
 const defaultTheme = useTheme();
 const emit = defineEmits(emitSchema);
-const ui = VueToJSX<IconButtonProps, typeof emitSchema>(IconButtonUI, emit, Object.keys(emitSchema));
+const ui = VueToJSX<IconButtonProps, typeof emitSchema>(IconButtonUI, { emit, events: Object.keys(emitSchema) });
 
 const { isAnyDisabled, disabledStateProps } = useDisableStateProps(computed(() => ({ ...props, ...attrs })));
 

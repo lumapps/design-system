@@ -74,17 +74,16 @@ describe('VueToJSX', () => {
 
     it('should generate event handlers based on events prop', async () => {
         const MockComponent = (props: { onClick?: any; onFocus?: any }) =>
-            h('div', { 
-                'data-testid': 'mock', 
+            h('div', {
+                'data-testid': 'mock',
                 onClick: props.onClick,
-                onFocus: props.onFocus 
+                onFocus: props.onFocus
             });
 
         const emitSpy = vi.fn();
         const WrappedComponent = VueToJSX(
-            MockComponent, 
-            emitSpy, 
-            ['click', 'focus']
+            MockComponent,
+            { emit: emitSpy, events: ['click', 'focus'] }
         );
 
         render(WrappedComponent);
@@ -102,10 +101,42 @@ describe('VueToJSX', () => {
         const WrappedComponent = VueToJSX(MockComponent);
 
         render(WrappedComponent);
-        
+
         // Check the props passed to MockComponent
         // MockComponent is a functional component, so it receives props as first arg
         const props = MockComponent.mock.calls[0][0] as any;
         expect(props).not.toHaveProperty('onClick');
+    });
+
+    it('should handle options with only emit but no events', () => {
+        const MockComponent = vi.fn((_props: any) => h('div'));
+        const emitSpy = vi.fn();
+        const WrappedComponent = VueToJSX(MockComponent, { emit: emitSpy });
+
+        render(WrappedComponent);
+
+        const props = MockComponent.mock.calls[0][0] as any;
+        expect(props).not.toHaveProperty('onClick');
+    });
+
+    it('should handle undefined options gracefully', () => {
+        const MockComponent = vi.fn((_props: any) => h('div'));
+        const WrappedComponent = VueToJSX(MockComponent, undefined);
+
+        render(WrappedComponent);
+
+        const props = MockComponent.mock.calls[0][0] as any;
+        expect(props).not.toHaveProperty('onClick');
+    });
+
+    it('should handle options with events but no emit', () => {
+        const MockComponent = vi.fn((_props: any) => h('div'));
+        const WrappedComponent = VueToJSX(MockComponent, { events: ['click'] });
+
+        render(WrappedComponent);
+
+        const props = MockComponent.mock.calls[0][0] as any;
+        // Should have onClick handler, but it won't emit anything since emit is undefined
+        expect(props).toHaveProperty('onClick');
     });
 });
