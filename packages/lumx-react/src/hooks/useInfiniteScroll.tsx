@@ -58,3 +58,6 @@ export const useInfiniteScroll: useInfiniteScrollType = (
         }
     }, [callback, callbackOnMount]);
 };
+
+// Re-export InfiniteScroll from utils for backwards compatibility
+export { InfiniteScroll, type InfiniteScrollProps } from '../utils/InfiniteScroll';
