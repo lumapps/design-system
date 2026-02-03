@@ -1,25 +1,17 @@
-import { ColorPalette, Icon, Size, Theme, Text } from '@lumx/react';
-import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { handleBasicClasses } from '@lumx/core/js/utils/_internal/className';
-import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
+import { Theme, Text } from '@lumx/react';
+import {
+    CLASSNAME,
+    COMPONENT_NAME,
+    DEFAULT_PROPS,
+    Flag as UI,
+    FlagProps as UIProps,
+} from '@lumx/core/js/components/Flag';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
-export interface FlagProps extends GenericProps, HasTheme {
-    /** Color of the component. */
-    color?: ColorPalette;
-    /** Icon to use before the label. */
-    icon?: string;
-    /** Text label of the flag. */
+export interface FlagProps extends Omit<UIProps, 'children'> {
     label: React.ReactNode;
-    /** Enable text truncate on overflow */
-    truncate?: boolean;
 }
-
-const COMPONENT_NAME = 'Flag';
-const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-flag';
-const DEFAULT_PROPS: Partial<FlagProps> = {};
 
 /**
  * Flag component.
@@ -30,26 +22,19 @@ const DEFAULT_PROPS: Partial<FlagProps> = {};
  */
 export const Flag = forwardRef<FlagProps, HTMLDivElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
-    const { label, icon, color, className, theme = defaultTheme, truncate, ...forwardedProps } = props;
-    const flagColor = color || (theme === Theme.light ? ColorPalette.dark : ColorPalette.light);
-    const isTruncated = !!truncate;
 
-    return (
-        <div
-            {...forwardedProps}
-            className={classNames.join(
-                className,
-                handleBasicClasses({ prefix: CLASSNAME, color: flagColor, isTruncated }),
-            )}
-            ref={ref}
-        >
-            {icon && <Icon icon={icon} size={Size.xxs} className={`${CLASSNAME}__icon`} />}
-            <Text as="span" truncate={isTruncated} typography="overline" className={`${CLASSNAME}__label`}>
-                {label}
+    return UI({
+        ...props,
+        theme: props.theme || defaultTheme,
+        ref,
+        children: (
+            <Text as="span" truncate={!!props.truncate} typography="overline" className={`${CLASSNAME}__label`}>
+                {props.label}
             </Text>
-        </div>
-    );
+        ),
+    });
 });
+
 Flag.displayName = COMPONENT_NAME;
 Flag.className = CLASSNAME;
 Flag.defaultProps = DEFAULT_PROPS;

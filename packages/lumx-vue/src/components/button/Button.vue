@@ -42,7 +42,7 @@ const defaultSlot = useSlot();
 
 const { isAnyDisabled, disabledStateProps } = useDisableStateProps(computed(() => ({ ...props, ...attrs })));
 const emit = defineEmits(emitSchema);
-const ui = VueToJSX<ButtonProps, typeof emitSchema>(ButtonUI, emit, Object.keys(emitSchema));
+const ui = VueToJSX<ButtonProps, typeof emitSchema>(ButtonUI, { emit, events: Object.keys(emitSchema) });
 
 /**
  * Compute properties to pass to the underlying UI component.
