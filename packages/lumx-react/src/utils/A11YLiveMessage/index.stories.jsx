@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { TextField, Button } from '@lumapps/lumx/react';
+import { TextField, Button } from '@lumx/react';
 
 import { A11YLiveMessage } from '.';
 
