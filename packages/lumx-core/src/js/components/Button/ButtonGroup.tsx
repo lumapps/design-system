@@ -1,4 +1,4 @@
-import type { LumxClassName, GenericProps } from '../../types';
+import type { LumxClassName, GenericProps, JSXElement } from '../../types';
 import { classNames } from '../../utils';
 
 /**
@@ -8,7 +8,7 @@ export interface ButtonGroupProps extends GenericProps {
     /**
      * Children
      */
-    children?: React.ReactNode;
+    children?: JSXElement;
 }
 
 /**
@@ -30,8 +30,7 @@ export const DEFAULT_PROPS: Partial<ButtonGroupProps> = {};
  * ButtonGroup component.
  *
  * @param  props Component props.
- * @param  ref   Component ref.
- * @return React element.
+ * @return JSX element.
  */
 export const ButtonGroup = (props: ButtonGroupProps) => {
     const { children, className, ...forwardedProps } = props;

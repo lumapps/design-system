@@ -34,7 +34,7 @@ export interface BaseButtonProps
     target?: '_self' | '_blank' | '_parent' | '_top';
     /** Native button type. */
     type?: 'submit' | 'reset' | 'button' | undefined;
-    /** Custom react component for the link (can be used to inject react router Link). */
+    /** Custom component for the link (can be used to inject router Link). */
     linkAs?: 'a' | any;
 }
 

@@ -1,22 +1,22 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 
 import BaseMessageTests, { setup } from '@lumx/core/js/components/Message/Tests';
-import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
-import { Kind } from '@lumx/react';
+import { commonTestsSuiteVTL, SetupRenderOptions } from '@lumx/vue/testing';
+import { Kind } from '@lumx/core/js/constants';
 
-import { Message, MessageProps } from './Message';
+import { Message, MessageProps } from '.';
 
 const CLASSNAME = Message.className as string;
 
-describe(`<${Message.displayName}>`, () => {
-    const renderMessage = (props: MessageProps, options?: SetupRenderOptions) =>
-        render(<Message {...props} />, options);
+describe('<Message />', () => {
+    const renderMessage = (props: MessageProps, options?: SetupRenderOptions<MessageProps>) =>
+        render(Message, { props, ...options, slots: { default: props.children } });
 
     BaseMessageTests({ render: renderMessage, screen });
 
-    const setupMessage = (props: Partial<MessageProps> = {}, options: SetupRenderOptions = {}) =>
+    const setupMessage = (props: Partial<MessageProps> = {}, options: SetupRenderOptions<MessageProps> = {}) =>
         setup(props, { ...options, render: renderMessage, screen });
 
     describe('Props', () => {
@@ -39,7 +39,7 @@ describe(`<${Message.displayName}>`, () => {
         });
     });
 
-    commonTestsSuiteRTL(setupMessage, {
+    commonTestsSuiteVTL(setupMessage, {
         baseClassName: CLASSNAME,
         forwardClassName: 'message',
         forwardAttributes: 'message',
