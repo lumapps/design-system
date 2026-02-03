@@ -1,3 +1,4 @@
+/* eslint-disable max-classes-per-file */
 import { render, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
 import { InfiniteScroll } from './InfiniteScroll';
@@ -18,8 +19,11 @@ describe('InfiniteScroll', () => {
             constructor(callback: IntersectionObserverCallback) {
                 observeCallback = callback;
             }
+
             observe = observeMock;
+
             unobserve = unobserveMock;
+
             disconnect = disconnectMock;
         } as any;
     });
@@ -43,9 +47,7 @@ describe('InfiniteScroll', () => {
         render(<InfiniteScroll callback={callback} />);
 
         // Simulate intersection
-        const entries: Partial<IntersectionObserverEntry>[] = [
-            { isIntersecting: true } as IntersectionObserverEntry,
-        ];
+        const entries: Partial<IntersectionObserverEntry>[] = [{ isIntersecting: true } as IntersectionObserverEntry];
 
         await waitFor(() => {
             observeCallback(entries as IntersectionObserverEntry[], {} as IntersectionObserver);
@@ -59,9 +61,7 @@ describe('InfiniteScroll', () => {
         render(<InfiniteScroll callback={callback} />);
 
         // Simulate no intersection
-        const entries: Partial<IntersectionObserverEntry>[] = [
-            { isIntersecting: false } as IntersectionObserverEntry,
-        ];
+        const entries: Partial<IntersectionObserverEntry>[] = [{ isIntersecting: false } as IntersectionObserverEntry];
 
         await waitFor(() => {
             observeCallback(entries as IntersectionObserverEntry[], {} as IntersectionObserver);
@@ -80,8 +80,11 @@ describe('InfiniteScroll', () => {
                 constructorSpy(cb, opts);
                 observeCallback = cb;
             }
+
             observe = observeMock;
+
             unobserve = unobserveMock;
+
             disconnect = disconnectMock;
         } as any;
 
