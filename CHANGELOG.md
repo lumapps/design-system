@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   `@lumx/vue`:
+    -   Create the `Heading` component
+
 ## [4.2.0][] - 2026-02-02
 
 ### Changed
@@ -18,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Moved `ButtonGroup` from `@lumx/react`
     -   Moved `IconButton` from `@lumx/react`
     -   Moved `Text` from `@lumx/react`
+    -   Moved `Heading` from `@lumx/react`
 
 ### Added
 

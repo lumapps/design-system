@@ -1,6 +1,9 @@
-import { HeadingElement } from '@lumx/react/utils/type';
 import { ReactNode } from 'react';
-import { MAX_HEADING_LEVEL } from './constants';
+
+import { HeadingElement } from '@lumx/react/utils/type';
+
+import { computeHeadingLevel } from '@lumx/core/js/components/Heading/utils';
+
 import { HeadingLevelContext } from './context';
 import { useHeadingLevel } from './useHeadingLevel';
 
@@ -17,9 +20,7 @@ export interface HeadingLevelProviderProps {
 export const HeadingLevelProvider: React.FC<HeadingLevelProviderProps> = ({ children, level }) => {
     const { level: contextLevel } = useHeadingLevel();
 
-    const incrementedLevel = level || contextLevel + 1;
-    /** Don't allow a level beyond the maximum level. */
-    const nextLevel = incrementedLevel > MAX_HEADING_LEVEL ? MAX_HEADING_LEVEL : incrementedLevel;
+    const nextLevel = computeHeadingLevel(level, contextLevel);
     const headingElement = `h${nextLevel}` as HeadingElement;
 
     return (

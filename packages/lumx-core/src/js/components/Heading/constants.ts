@@ -1,4 +1,5 @@
-import { Typography } from '@lumx/core/js/constants';
+import { Typography } from '../../constants';
+import { HeadingElement } from '../../types';
 
 /** The maximum authorized heading level. */
 export const MAX_HEADING_LEVEL = 6;
@@ -14,3 +15,12 @@ export const DEFAULT_TYPOGRAPHY_BY_LEVEL = {
     h5: Typography.subtitle1,
     h6: Typography.body2,
 };
+
+export interface HeadingLevelContext {
+    /** The current level */
+    level: number;
+    /** The heading element matching the current level */
+    headingElement: HeadingElement;
+}
+
+export const defaultContext: HeadingLevelContext = { level: 1, headingElement: 'h1' };

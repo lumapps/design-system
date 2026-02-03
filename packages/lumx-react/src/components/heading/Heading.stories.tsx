@@ -1,33 +1,30 @@
-import { headingElementArgType, HEADING_ELEMENTS } from '@lumx/core/stories/controls/element';
+import { HEADING_ELEMENTS } from '@lumx/core/stories/controls/element';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 import { ALL_TYPOGRAPHY } from '@lumx/core/stories/controls/typography';
+import {
+    AllLevels as AllLevelsStory,
+    AllTypography as AllTypographyStory,
+    Default as DefaultConfig,
+    Base,
+} from '@lumx/core/js/components/Heading/Stories';
 import { Heading, HeadingLevelProvider } from '.';
-import TextStories from '../text/Text.stories';
 
 export default {
     title: 'LumX components/heading/Heading',
     component: Heading,
-    args: Heading.defaultProps,
-    argTypes: {
-        ...TextStories.argTypes,
-        as: headingElementArgType,
-        children: { control: 'text' },
-    },
+    ...DefaultConfig,
 };
 
 /**
  * Default heading with text
  */
-export const Default = {
-    args: { children: 'Some heading text' },
-};
+export const Default = Base;
 
 /**
  * All supported heading elements
  */
 export const AllLevels = {
-    ...Default,
-    argTypes: { as: { control: false } },
+    ...AllLevelsStory,
     decorators: [withCombinations({ combinations: { rows: { key: 'as', options: HEADING_ELEMENTS } } })],
 };
 
@@ -35,7 +32,7 @@ export const AllLevels = {
  * All typography
  */
 export const AllTypography = {
-    ...Default,
+    ...AllTypographyStory,
     argTypes: { typography: { control: false } },
     decorators: [withCombinations({ combinations: { rows: { key: 'typography', options: ALL_TYPOGRAPHY } } })],
 };

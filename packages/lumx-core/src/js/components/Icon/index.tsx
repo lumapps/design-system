@@ -62,6 +62,7 @@ export const Icon = (props: IconProps) => {
         verticalAlign,
         ...forwardedProps
     } = props;
+
     const [color, colorVariant] = resolveColorWithVariants(propColor, propColorVariant);
 
     // Color

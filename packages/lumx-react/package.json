@@ -81,7 +81,7 @@
     },
     "scripts": {
         "build": "rollup -c",
-        "test": "vitest run",
+        "test": "vitest run --run",
         "type-check": "yarn tsc -p tsconfig.json",
         "start:storybook": "storybook dev -p 9000",
         "build:storybook": "storybook build"
