@@ -1,28 +1,26 @@
 - Product:
-    - Foundations:
-        - Color
-        - Iconography
-        - Typography
-        - Size
-        - Spacing
-        - Light & Dark Theme
-    - Components: '*'
-    - Patterns:
-        - Drag and drop
-        - Filter and sort
-        - Form Validation
-        - Loading state
-        - Pick and manage
-        - Translation
-        - Widgets settings
-    - Utilities:
-        - Color
-        - Spacing
-        - Typography
-        - Miscellaneous
-    - Design Tokens:
-        - Color
-        - Size
-        - Spacing
-- Brand
-- Partners
+      - Foundations:
+            - Color
+            - Iconography
+            - Typography
+            - Size
+            - Spacing
+            - Light & Dark Theme
+      - Components: '*'
+      - Patterns:
+            - Drag and drop
+            - Filter and sort
+            - Form Validation
+            - Loading state
+            - Pick and manage
+            - Translation
+            - Widgets settings
+      - Utilities:
+            - Color
+            - Spacing
+            - Typography
+            - Miscellaneous
+      - Design Tokens:
+            - Color
+            - Size
+            - Spacing

@@ -59,7 +59,11 @@ export const useMenuItems = () => {
     const entries = map(data.allMenuEntry.edges, 'node') as MenuEntry[];
 
     const menuEntryByPath = keyBy(entries, 'path') as MenuEntryByPath;
-    const rootMenuEntries = getChildren(menuEntryByPath, selectedFramework, menuEntryByPath['/']);
+    // Render children of /product/ at the root level instead of showing "Product" wrapper
+    const productEntry = menuEntryByPath['/product/'];
+    const rootMenuEntries = productEntry
+        ? getChildren(menuEntryByPath, selectedFramework, productEntry)
+        : getChildren(menuEntryByPath, selectedFramework, menuEntryByPath['/']);
 
     return { rootMenuEntries, getChildren: partial(getChildren, menuEntryByPath, selectedFramework) };
 };
