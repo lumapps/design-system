@@ -23,16 +23,15 @@ export interface FlagProps extends Omit<UIProps, 'children'> {
 export const Flag = forwardRef<FlagProps, HTMLDivElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
 
-    return UI({
-        ...props,
-        theme: props.theme || defaultTheme,
-        ref,
-        children: (
-            <Text as="span" truncate={!!props.truncate} typography="overline" className={`${CLASSNAME}__label`}>
-                {props.label}
-            </Text>
-        ),
-    });
+    return UI(
+        {
+            ...props,
+            theme: props.theme || defaultTheme,
+            ref,
+            children: props.label,
+        },
+        { Text },
+    );
 });
 
 Flag.displayName = COMPONENT_NAME;

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { h } from 'vue';
 import { render, screen, fireEvent } from '@testing-library/vue';
 import { describe, it, expect, vi } from 'vitest';
@@ -77,14 +78,11 @@ describe('VueToJSX', () => {
             h('div', {
                 'data-testid': 'mock',
                 onClick: props.onClick,
-                onFocus: props.onFocus
+                onFocus: props.onFocus,
             });
 
         const emitSpy = vi.fn();
-        const WrappedComponent = VueToJSX(
-            MockComponent,
-            { emit: emitSpy, events: ['click', 'focus'] }
-        );
+        const WrappedComponent = VueToJSX(MockComponent, { emit: emitSpy, events: ['click', 'focus'] });
 
         render(WrappedComponent);
         const element = screen.getByTestId('mock');
@@ -138,5 +136,117 @@ describe('VueToJSX', () => {
         const props = MockComponent.mock.calls[0][0] as any;
         // Should have onClick handler, but it won't emit anything since emit is undefined
         expect(props).toHaveProperty('onClick');
+    });
+
+    it('should pass nestedComponents as second argument to component', () => {
+        const MockText = vi.fn((props: any) => {
+            const { children, ...restProps } = props || {};
+            return h('span', restProps, children || 'Mock Text');
+        });
+        const MockComponent = vi.fn((props: any, nestedComponents: any) => {
+            const { Text } = nestedComponents || {};
+            return h('div', { 'data-testid': 'mock' }, Text ? Text({ children: 'Nested' }) : 'No Text');
+        });
+
+        const WrappedComponent = VueToJSX(MockComponent, { nestedComponents: { Text: MockText } });
+
+        render(WrappedComponent);
+
+        // Verify MockComponent received nestedComponents as second argument
+        expect(MockComponent.mock.calls[0][1]).toEqual({ Text: MockText });
+        // Verify the component used the nested Text component
+        expect(MockText).toHaveBeenCalled();
+    });
+
+    it('should work without nestedComponents', () => {
+        const MockComponent = vi.fn((props: any, nestedComponents: any) => {
+            return h('div', { 'data-testid': 'mock' }, nestedComponents ? 'Has nested' : 'No nested');
+        });
+
+        const WrappedComponent = VueToJSX(MockComponent);
+
+        render(WrappedComponent);
+
+        const element = screen.getByTestId('mock');
+        expect(element).toHaveTextContent('No nested');
+        expect(MockComponent.mock.calls[0][1]).toBeUndefined();
+    });
+
+    it('should pass nestedComponents with default slot', () => {
+        const MockText = (props: any) => {
+            const { children, ...restProps } = props || {};
+            return h('span', restProps, children);
+        };
+        const MockComponent = vi.fn((props: any, nestedComponents: any) => {
+            const { Text } = nestedComponents || {};
+            return h('div', { 'data-testid': 'mock' }, [Text ? Text({ children: 'Label: ' }) : null, props.children]);
+        });
+
+        const WrappedComponent = VueToJSX(MockComponent, { nestedComponents: { Text: MockText } });
+
+        render(WrappedComponent, {
+            slots: {
+                default: 'Content',
+            },
+        });
+
+        const element = screen.getByTestId('mock');
+        expect(element).toHaveTextContent('Label: Content');
+        expect(MockComponent.mock.calls[0][1]).toEqual({ Text: MockText });
+    });
+
+    it('should pass multiple nested components', () => {
+        const MockText = (props: any) => h('span', { class: 'text' }, props.children);
+        const MockIcon = (props: any) => h('i', { class: 'icon' }, props.icon);
+        const MockComponent = vi.fn((props: any, nestedComponents: any) => {
+            const { Text, Icon } = nestedComponents || {};
+            return h('div', { 'data-testid': 'mock' }, [
+                Icon ? Icon({ icon: 'star' }) : null,
+                Text ? Text({ children: 'Label' }) : null,
+            ]);
+        });
+
+        const WrappedComponent = VueToJSX(MockComponent, {
+            nestedComponents: { Text: MockText, Icon: MockIcon },
+        });
+
+        render(WrappedComponent);
+
+        expect(MockComponent.mock.calls[0][1]).toEqual({ Text: MockText, Icon: MockIcon });
+        expect(screen.getByTestId('mock').querySelector('.text')).toBeInTheDocument();
+        expect(screen.getByTestId('mock').querySelector('.icon')).toBeInTheDocument();
+    });
+
+    it('should work with nestedComponents and events together', async () => {
+        const MockText = (props: any) => {
+            const { children, ...restProps } = props || {};
+            return h('span', restProps, children);
+        };
+        const MockComponent = (props: any, nestedComponents: any) => {
+            const { Text } = nestedComponents || {};
+            return h(
+                'button',
+                {
+                    'data-testid': 'mock',
+                    onClick: props.onClick,
+                },
+                Text ? Text({ children: 'Click me' }) : 'Button',
+            );
+        };
+
+        const emitSpy = vi.fn();
+        const WrappedComponent = VueToJSX(MockComponent, {
+            emit: emitSpy,
+            events: ['click'],
+            nestedComponents: { Text: MockText },
+        });
+
+        render(WrappedComponent);
+
+        const element = screen.getByTestId('mock');
+        expect(element).toHaveTextContent('Click me');
+
+        await fireEvent.click(element);
+        expect(emitSpy).toHaveBeenCalledWith('click', expect.anything());
     });
 });
