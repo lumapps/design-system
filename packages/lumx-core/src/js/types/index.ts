@@ -22,3 +22,4 @@ export type { HasPolymorphicAs } from './HasPolymorphicAs';
 export type { CommonRef } from './CommonRef';
 export type { HasAriaDisabled } from './HasAriaDisabled';
 export type { AriaAttributes } from './AriaAttributes';
+export type { Selector } from './Selector';

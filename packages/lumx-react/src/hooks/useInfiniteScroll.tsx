@@ -4,6 +4,7 @@ type useInfiniteScrollType = (
     ref: React.RefObject<HTMLElement>,
     callback?: EventCallback,
     callbackOnMount?: boolean,
+    scrollTriggerMargin?: number,
 ) => void;
 type EventCallback = (evt?: Event) => void;
 
