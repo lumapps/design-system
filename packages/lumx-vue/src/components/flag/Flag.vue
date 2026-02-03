@@ -1,15 +1,13 @@
 <template>
     <ui v-bind="uiProps">
-        <Text as="span" :truncate="!!uiProps.truncate" typography="overline" :class="`${CLASSNAME}__label`">
-            <slot />
-        </Text>
+        <slot />
     </ui>
 </template>
 
 <script setup lang="ts">
 import { computed, useAttrs } from 'vue';
 import { Theme } from '@lumx/core/js/constants';
-import { Flag as FlagUI, FlagProps, CLASSNAME } from '@lumx/core/js/components/Flag';
+import { Flag as FlagUI, FlagProps } from '@lumx/core/js/components/Flag';
 
 import { Text } from '../text';
 
@@ -20,7 +18,7 @@ defineOptions({
     inheritAttrs: false,
 });
 
-const ui = VueToJSX(FlagUI);
+const ui = VueToJSX(FlagUI, { nestedComponents: { Text } });
 const props = defineProps<FlagProps>();
 const attrs = useAttrs();
 const defaultTheme = useTheme();

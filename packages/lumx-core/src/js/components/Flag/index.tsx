@@ -1,6 +1,6 @@
 import { ColorPalette, Size, Theme } from '../../constants';
 import { handleBasicClasses } from '../../utils/_internal/className';
-import type { LumxClassName, GenericProps, HasTheme, JSXElement } from '../../types';
+import type { LumxClassName, GenericProps, HasTheme, JSXElement, NestedComponents } from '../../types';
 import { classNames } from '../../utils';
 import { Icon } from '../Icon';
 
@@ -25,7 +25,8 @@ export const DEFAULT_PROPS: Partial<FlagProps> = {};
  * @param  props Component props.
  * @return JSX element.
  */
-export const Flag = (props: FlagProps) => {
+export const Flag = (props: FlagProps, nestedComponents?: NestedComponents) => {
+    const { Text } = nestedComponents || {};
     const { children, icon, color, className, theme, truncate, ...forwardedProps } = props;
     const flagColor = color || (theme === Theme.light ? ColorPalette.dark : ColorPalette.light);
     const isTruncated = !!truncate;
@@ -39,7 +40,9 @@ export const Flag = (props: FlagProps) => {
             )}
         >
             {icon && Icon({ icon, size: Size.xxs, className: `${CLASSNAME}__icon` })}
-            {children}
+            <Text as="span" truncate={!!props.truncate} typography="overline" className={`${CLASSNAME}__label`}>
+                {children}
+            </Text>
         </div>
     );
 };
