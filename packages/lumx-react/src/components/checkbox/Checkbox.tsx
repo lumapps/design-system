@@ -1,16 +1,19 @@
-import React, { InputHTMLAttributes, ReactNode, SyntheticEvent } from 'react';
+import React from 'react';
 
-import { mdiCheck, mdiMinus } from '@lumx/icons';
-
-import { Icon, InputHelper, InputLabel, Theme } from '@lumx/react';
-import { GenericProps, HasTheme, HasAriaDisabled } from '@lumx/react/utils/type';
-import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
+import { Theme } from '@lumx/react';
 import { useId } from '@lumx/react/hooks/useId';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
+
+import {
+    BaseCheckboxProps,
+    CLASSNAME,
+    COMPONENT_NAME,
+    DEFAULT_PROPS,
+    Checkbox as UI,
+} from '@lumx/core/js/components/Checkbox';
 
 /**
  * Intermediate state of checkbox.
@@ -20,44 +23,10 @@ const INTERMEDIATE_STATE = 'intermediate';
 /**
  * Defines the props of the component.
  */
-export interface CheckboxProps extends GenericProps, HasTheme, HasAriaDisabled {
-    /** Helper text. */
-    helper?: string;
-    /** Native input id property. */
-    id?: string;
+export interface CheckboxProps extends Omit<BaseCheckboxProps, 'inputRef' | 'onChange'> {
     /** Native input ref. */
     inputRef?: React.Ref<HTMLInputElement>;
-    /** Whether it is checked or not or intermediate. */
-    isChecked?: boolean | 'intermediate';
-    /** Whether the component is disabled or not. */
-    isDisabled?: boolean;
-    /** Label text. */
-    label?: ReactNode;
-    /** Native input name property. */
-    name?: string;
-    /** Native input value property. */
-    value?: string;
-    /** optional props for input */
-    inputProps?: InputHTMLAttributes<HTMLInputElement>;
-    /** On change callback. */
-    onChange?(isChecked: boolean, value?: string, name?: string, event?: SyntheticEvent): void;
 }
-
-/**
- * Component display name.
- */
-const COMPONENT_NAME = 'Checkbox';
-
-/**
- * Component default class name and class prefix.
- */
-const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-checkbox';
-const { block, element } = classNames.bem(CLASSNAME);
-
-/**
- * Component default props.
- */
-const DEFAULT_PROPS: Partial<CheckboxProps> = {};
 
 /**
  * Checkbox component.
@@ -71,28 +40,16 @@ export const Checkbox = forwardRef<CheckboxProps, HTMLDivElement>((props, ref) =
     const defaultTheme = useTheme() || Theme.light;
     const {
         checked,
-        className,
-        helper,
         id,
         inputRef,
         isChecked = checked,
-        label,
-        name,
-        onChange,
         theme = defaultTheme,
-        value,
         inputProps = {},
         ...forwardedProps
     } = otherProps;
     const localInputRef = React.useRef<HTMLInputElement>(null);
     const generatedInputId = useId();
     const inputId = id || generatedInputId;
-
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (onChange) {
-            onChange(!isChecked, value, name, event);
-        }
-    };
 
     const intermediateState = isChecked === INTERMEDIATE_STATE;
 
@@ -101,62 +58,23 @@ export const Checkbox = forwardRef<CheckboxProps, HTMLDivElement>((props, ref) =
         if (input) input.indeterminate = intermediateState;
     }, [intermediateState]);
 
-    return (
-        <div
-            ref={ref}
-            {...forwardedProps}
-            className={classNames.join(
-                className,
-                block({
-                    // Whether state is intermediate class name will "-checked"
-                    'is-checked': intermediateState ? true : isChecked,
-                    'is-disabled': isAnyDisabled,
-                    'is-unchecked': !isChecked,
-                    [`theme-${theme}`]: Boolean(theme),
-                }),
-            )}
-        >
-            <div className={element('input-wrapper')}>
-                <input
-                    ref={useMergeRefs(inputRef, localInputRef)}
-                    type="checkbox"
-                    id={inputId}
-                    className={element('input-native')}
-                    {...disabledStateProps}
-                    name={name}
-                    value={value}
-                    checked={isChecked}
-                    onChange={handleChange}
-                    aria-describedby={helper ? `${inputId}-helper` : undefined}
-                    aria-checked={intermediateState ? 'mixed' : Boolean(isChecked)}
-                    readOnly={inputProps.readOnly || disabledStateProps['aria-disabled']}
-                    {...inputProps}
-                />
-
-                <div className={element('input-placeholder')}>
-                    <div className={element('input-background')} />
-
-                    <div className={element('input-indicator')}>
-                        <Icon icon={intermediateState ? mdiMinus : mdiCheck} />
-                    </div>
-                </div>
-            </div>
-
-            <div className={element('content')}>
-                {label && (
-                    <InputLabel htmlFor={inputId} className={element('label')} theme={theme}>
-                        {label}
-                    </InputLabel>
-                )}
-                {helper && (
-                    <InputHelper id={`${inputId}-helper`} className={element('helper')} theme={theme}>
-                        {helper}
-                    </InputHelper>
-                )}
-            </div>
-        </div>
-    );
+    return UI({
+        ref,
+        theme,
+        checked,
+        isChecked,
+        ...forwardedProps,
+        inputRef: useMergeRefs(inputRef, localInputRef),
+        isDisabled: isAnyDisabled,
+        inputProps: {
+            id: inputId,
+            ...inputProps,
+            ...disabledStateProps,
+            readOnly: inputProps.readOnly || disabledStateProps['aria-disabled'],
+        },
+    });
 });
+
 Checkbox.displayName = COMPONENT_NAME;
 Checkbox.className = CLASSNAME;
 Checkbox.defaultProps = DEFAULT_PROPS;

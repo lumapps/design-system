@@ -1,7 +1,6 @@
+import { FnRef } from '@lumx/core/js/types/CommonRef';
 import { Falsy } from '@lumx/react/utils/type';
 import { MutableRefObject, useMemo } from 'react';
-
-type FnRef<T> = (value: T) => void;
 
 /**
  * Merge refs into a single function ref.
