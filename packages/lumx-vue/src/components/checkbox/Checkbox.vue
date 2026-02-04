@@ -21,7 +21,7 @@ defineOptions({
     inheritAttrs: false,
 });
 
-const props = defineProps<BaseCheckboxProps>();
+const props = defineProps<Omit<BaseCheckboxProps, 'onChange'>>();
 const attrs = useAttrs();
 const { isAnyDisabled, disabledStateProps } = useDisableStateProps(computed(() => ({ ...props, ...attrs })));
 const defaultTheme = useTheme();
