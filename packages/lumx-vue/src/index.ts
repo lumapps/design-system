@@ -9,3 +9,4 @@ export * from './components/text';
 export * from './components/heading';
 export * from './components/message';
 export * from './components/flag';
+export * from './components/flex-box';

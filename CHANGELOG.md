@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Create the `Heading` component
     -   Create the `Message` component
     -   Create the `Flag` component
+    -   Create the `FlexBox` component
 -   `@lumx/core`:
     -   Added `Selector` types and utils
     -   Added `classNames.bem` utility function to generate BEM class names

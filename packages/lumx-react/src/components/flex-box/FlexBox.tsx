@@ -1,55 +1,27 @@
-import { ReactNode } from 'react';
+import React from 'react';
 
-import castArray from 'lodash/castArray';
-
-import { Alignment, Orientation, HorizontalAlignment, Size, VerticalAlignment } from '@lumx/core/js/constants';
-import { GenericProps } from '@lumx/react/utils/type';
-import type { LumxClassName } from '@lumx/core/js/types';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
-import { classNames } from '@lumx/core/js/utils';
+import {
+    getFlexBoxProps,
+    FlexBoxProps as CoreFlexBoxProps,
+    CLASSNAME,
+    COMPONENT_NAME,
+} from '@lumx/core/js/components/FlexBox';
 
-export type MarginAutoAlignment = Extract<Alignment, 'top' | 'bottom' | 'right' | 'left'>;
-export type GapSize = Extract<Size, 'tiny' | 'regular' | 'medium' | 'big' | 'huge'>;
-type SpaceAlignment = Extract<Alignment, 'space-between' | 'space-evenly' | 'space-around'>;
-export type FlexVerticalAlignment = VerticalAlignment | SpaceAlignment;
-export type FlexHorizontalAlignment = HorizontalAlignment | SpaceAlignment;
+export type {
+    MarginAutoAlignment,
+    GapSize,
+    FlexVerticalAlignment,
+    FlexHorizontalAlignment,
+} from '@lumx/core/js/components/FlexBox';
 
 /**
  * Defines the props of the component.
  */
-export interface FlexBoxProps extends GenericProps {
+export interface FlexBoxProps extends CoreFlexBoxProps {
     /** Customize the root element. */
     as?: React.ElementType;
-    /** Children elements. */
-    children?: ReactNode;
-    /** Whether the "content filling space" is enabled or not. */
-    fillSpace?: boolean;
-    /** Gap space between flexbox items. */
-    gap?: GapSize;
-    /** Flex horizontal alignment. */
-    hAlign?: FlexVerticalAlignment;
-    /** Whether the "auto margin" is enabled all around or not. */
-    marginAuto?: MarginAutoAlignment | MarginAutoAlignment[];
-    /** Whether the "content shrink" is disabled or not. */
-    noShrink?: boolean;
-    /** Flex direction. */
-    orientation?: Orientation;
-    /** Flex vertical alignment. */
-    vAlign?: FlexHorizontalAlignment;
-    /** Whether the "flex wrap" is enabled or not. */
-    wrap?: boolean;
 }
-
-/**
- * Component display name.
- */
-const COMPONENT_NAME = 'FlexBox';
-
-/**
- * Component default class name and class prefix.
- */
-const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-flex-box';
-const { block } = classNames.bem(CLASSNAME);
 
 /**
  * FlexBox component.
@@ -59,44 +31,10 @@ const { block } = classNames.bem(CLASSNAME);
  * @return React element.
  */
 export const FlexBox = forwardRef<FlexBoxProps, HTMLDivElement>((props, ref) => {
-    const {
-        as: Component = 'div',
-        children,
-        className,
-        fillSpace,
-        gap,
-        hAlign,
-        marginAuto,
-        noShrink,
-        vAlign,
-        wrap,
-        orientation,
-        ...forwardedProps
-    } = props;
-    const adjustedOrientation = orientation ?? (wrap || hAlign || vAlign ? Orientation.horizontal : null);
+    const { as: Component = 'div', children, ...forwardedProps } = props;
 
     return (
-        <Component
-            ref={ref}
-            {...forwardedProps}
-            className={classNames.join(
-                className,
-                block({
-                    [`orientation-${adjustedOrientation}`]: Boolean(adjustedOrientation),
-                    [`v-align-${vAlign}`]: Boolean(vAlign),
-                    [`h-align-${hAlign}`]: Boolean(hAlign),
-                    [`gap-${gap}`]: Boolean(gap),
-                    wrap: Boolean(wrap),
-                    'fill-space': fillSpace,
-                    'no-shrink': noShrink,
-                    ...Object.fromEntries(
-                        castArray(marginAuto)
-                            .filter(Boolean)
-                            .map((align) => [`margin-auto-${align}`, true]),
-                    ),
-                }),
-            )}
-        >
+        <Component ref={ref} {...getFlexBoxProps(forwardedProps)}>
             {children}
         </Component>
     );
