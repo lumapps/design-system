@@ -10,7 +10,7 @@ export const emitSchema = {
 </script>
 
 <script setup lang="ts">
-import { computed, useAttrs } from 'vue';
+import { computed, useAttrs, useId } from 'vue';
 import { Checkbox as CheckboxUI, BaseCheckboxProps } from '@lumx/core/js/components/Checkbox';
 
 import { useTheme } from '../../composables/useTheme';
@@ -27,6 +27,8 @@ const { isAnyDisabled, disabledStateProps } = useDisableStateProps(computed(() =
 const defaultTheme = useTheme();
 const emit = defineEmits(emitSchema);
 const ui = VueToJSX<BaseCheckboxProps, typeof emitSchema>(CheckboxUI, { emit, events: Object.keys(emitSchema) });
+const generatedInputId = useId();
+const inputId = props.id || generatedInputId;
 
 /**
  * Compute properties to pass to the underlying UI component.
@@ -38,5 +40,12 @@ const uiProps = computed(() => ({
     ...disabledStateProps.value,
     theme: props.theme || attrs.theme || defaultTheme,
     'aria-disabled': isAnyDisabled.value,
+    isDisabled: isAnyDisabled.value,
+    inputProps: {
+        id: inputId,
+        ...props.inputProps,
+        ...disabledStateProps.value,
+        readOnly: props.inputProps?.readOnly,
+    },
 }));
 </script>
