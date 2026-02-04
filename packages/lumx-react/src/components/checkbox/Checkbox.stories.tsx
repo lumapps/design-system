@@ -1,56 +1,48 @@
 import { Checkbox } from '@lumx/react';
 import { withValueOnChange } from '@lumx/react/stories/decorators/withValueOnChange';
-import { loremIpsum } from '@lumx/core/stories/utils/lorem';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
+
+import {
+    Default as DefaultStory,
+    Base as BaseStory,
+    LabelAndHelper as LabelAndHelperStory,
+    IntermediateState as IntermediateStateStory,
+    Disabled as DisabledStory,
+} from '@lumx/core/js/components/Checkbox/Stories';
 
 export default {
     title: 'LumX components/checkbox/Checkbox',
+    ...DefaultStory,
     component: Checkbox,
     decorators: [withValueOnChange({ valueProp: 'isChecked' })],
-    args: {
-        isChecked: false,
-        name: 'checkbox-html-name',
-        value: 'checkbox-html-value',
-    },
-    argTypes: {
-        onChange: { action: true },
-        name: { control: false },
-        value: { control: false },
-    },
 };
 
 /**
  * Default checkbox
  */
-export const Default = {};
+export const Base = {
+    ...BaseStory,
+};
 
 /**
  * With label and helper
  */
 export const LabelAndHelper = {
-    args: {
-        label: 'Checkbox label',
-        helper: loremIpsum('tiny'),
-    },
+    ...LabelAndHelperStory,
 };
 
 /**
  * With intermediate state
  */
 export const IntermediateState = {
-    args: {
-        isChecked: 'intermediate',
-    },
+    ...IntermediateStateStory,
 };
 
 /**
  * Disabled
  */
 export const Disabled = {
-    args: {
-        label: 'Checkbox label',
-        helper: 'Checkbox is disabled because...',
-    },
+    ...DisabledStory,
     decorators: [
         withCombinations({
             combinations: {
