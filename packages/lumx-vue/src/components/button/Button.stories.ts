@@ -1,4 +1,4 @@
-import { Button, ButtonProps, ColorPalette, Emphasis, Size } from '@lumx/vue';
+import { Button } from '@lumx/vue';
 
 import {
     Base as BaseStory,
@@ -6,33 +6,27 @@ import {
     SizeAndEmphasis as SizeAndEmphasisStory,
     LinkButton as LinkButtonStory,
 } from '@lumx/core/js/components/Button/Stories';
-import StoryMatrix from '@lumx/vue/stories/utils/StoryMatrix.vue';
-import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
+import { withRender } from '@lumx/vue/stories/utils/withRender';
+import ButtonBaseVue from './Stories/ButtonBase.vue';
+import ButtonSizeAndEmphasisVue from './Stories/ButtonSizeAndEmphasis.vue';
+import ButtonSizeAndColorsVue from './Stories/ButtonSizeAndColors.vue';
 
 export default {
     title: 'LumX components/button/Button',
     ...DefaultStory,
     component: Button,
+    argTypes: {
+        ...DefaultStory.argTypes,
+        onClick: { action: 'click' },
+    },
 };
-
-const buttonEmphasis = [Emphasis.high, Emphasis.medium, Emphasis.low];
 
 /**
  * Default button
  */
 export const Base = {
     ...BaseStory,
-    render: (args: ButtonProps) => ({
-        components: { Button },
-        setup() {
-            return { args };
-        },
-        template: `
-            <Button v-bind="args" @click="args.onClick">
-                {{ args.children }}
-            </Button>
-        `,
-    }),
+    render: withRender({ ButtonBaseVue }, '{{ args.children }}'),
 };
 
 /**
@@ -40,48 +34,12 @@ export const Base = {
  */
 export const SizeAndEmphasis = {
     ...SizeAndEmphasisStory,
-    render: (args: ButtonProps) => ({
-        components: { Button, StoryMatrix },
-        setup() {
-            const sizes = [Size.s, Size.m];
-            const emphasis = buttonEmphasis;
-            return { sizes, args, emphasis };
-        },
-        template: `
-            <StoryMatrix :rows="emphasis" :cols="sizes">
-                <template #default="{ row, col }">
-                    <Button
-                        v-bind="args"
-                        :size="col"
-                        :emphasis="row"
-                    >Button</Button>
-                </template>
-            </StoryMatrix>
-            `,
-    }),
+    render: withRender({ ButtonSizeAndEmphasisVue }),
 };
 
 export const SizeAndColors = {
     ...SizeAndEmphasisStory,
-    render: (args: ButtonProps) => ({
-        components: { Button, StoryMatrix },
-        setup() {
-            const sizes = [Size.s, Size.m];
-            const colors = withUndefined(ColorPalette);
-            return { sizes, args, colors };
-        },
-        template: `
-            <StoryMatrix :rows="colors" :cols="sizes">
-                <template #default="{ row, col }">
-                    <Button
-                        v-bind="args"
-                        :size="col"
-                        :color="row"
-                    >Button</Button>
-                </template>
-            </StoryMatrix>
-            `,
-    }),
+    render: withRender({ ButtonSizeAndColorsVue }),
 };
 
 /**

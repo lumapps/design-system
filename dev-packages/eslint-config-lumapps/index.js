@@ -147,6 +147,7 @@ module.exports = {
                         "max": 3
                     }
                 }],
+                "vue/singleline-html-element-content-newline": "off",
                 "vue/prop-name-casing": "off"
             },
         },

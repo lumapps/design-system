@@ -55,5 +55,9 @@ export const CustomIcon = CustomIconStory;
  */
 export const ClosableMessage = {
     ...ClosableMessageStory,
+    argTypes: {
+        ...ClosableMessageStory.argTypes,
+        'closeButtonProps.onClick': { action: true },
+    },
     decorators: [withNestedProps()],
 };
