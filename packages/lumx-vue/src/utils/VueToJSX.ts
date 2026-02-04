@@ -68,15 +68,16 @@ export const VueToJSX = <Props extends GenericPropsWithChildren, Emits extends V
          * Generate event handlers dynamically based on the `events` array.
          * For each event (e.g., 'click'), it creates a prop following the 'on<Event>'
          * convention (e.g., 'onClick') that calls Vue's `emit` function.
+         * Uses rest parameters to support callbacks with multiple arguments.
          */
         const eventHandlers =
             events?.reduce(
                 (acc, event) => {
                     const propName = `on${event.charAt(0).toUpperCase() + event.slice(1)}`;
-                    acc[propName] = (e: any) => emit?.(event, e);
+                    acc[propName] = (...args: any[]) => emit?.(event, ...args);
                     return acc;
                 },
-                {} as Record<string, (e: any) => void>,
+                {} as Record<string, (...args: any[]) => void>,
             ) || {};
 
         const componentProps = {
