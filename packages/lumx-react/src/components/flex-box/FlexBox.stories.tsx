@@ -3,9 +3,8 @@ import { Alignment, Button, IconButton, Orientation, Text } from '@lumx/react';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
 import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
+import { mergeArraysCombinator } from '@lumx/core/stories/utils/combinations';
 import { mdiAtom } from '@lumx/icons';
-import mergeWith from 'lodash/fp/mergeWith';
-import castArray from 'lodash/castArray';
 
 import {
     Default as DefaultConfig,
@@ -146,12 +145,7 @@ export const MarginAuto = {
                     options: [undefined, Alignment.right, Alignment.bottom, [Alignment.right, Alignment.bottom]],
                 },
             },
-            combinator: mergeWith((a, b) => {
-                if (a && b) {
-                    return [...castArray(a), ...castArray(b)].filter(Boolean);
-                }
-                return undefined;
-            }),
+            combinator: mergeArraysCombinator,
         }),
     ],
 };
