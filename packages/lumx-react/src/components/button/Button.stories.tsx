@@ -33,10 +33,6 @@ export default {
     title: 'LumX components/button/Button',
     ...DefaultStory,
     component: Button,
-    argTypes: {
-        ...DefaultStory.argTypes,
-        onClick: { action: true, table: { disable: true } },
-    },
 };
 
 /**

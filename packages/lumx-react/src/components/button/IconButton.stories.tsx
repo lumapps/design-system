@@ -10,10 +10,6 @@ export default {
     title: 'LumX components/button/IconButton',
     component: IconButton,
     ...DefaultConfig,
-    argTypes: {
-        ...DefaultConfig.argTypes,
-        onClick: { action: true, table: { disable: true } },
-    },
 };
 
 /**

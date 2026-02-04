@@ -27,6 +27,7 @@ export const Default = {
         ref: { table: { disable: true } },
         linkAs: { table: { disable: true } },
         className: { table: { disable: true } },
+        onClick: { action: 'click' },
         target: { if: { arg: 'href', exists: true }, control: { type: 'inline-radio' } },
         type: { if: { arg: 'href', exists: false }, control: { type: 'inline-radio' } },
     },
