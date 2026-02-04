@@ -249,4 +249,226 @@ describe('VueToJSX', () => {
         await fireEvent.click(element);
         expect(emitSpy).toHaveBeenCalledWith('click', expect.anything());
     });
+
+    it('should handle event handlers with multiple arguments', async () => {
+        const MockComponent = (props: { onChange?: any }) =>
+            h('input', {
+                'data-testid': 'mock',
+                onChange: () => props.onChange?.('value1', 'value2', 123),
+            });
+
+        const emitSpy = vi.fn();
+        const WrappedComponent = VueToJSX(MockComponent, { emit: emitSpy, events: ['change'] });
+
+        render(WrappedComponent);
+        const element = screen.getByTestId('mock');
+
+        await fireEvent.change(element);
+        expect(emitSpy).toHaveBeenCalledWith('change', 'value1', 'value2', 123);
+    });
+
+    it('should spread all arguments when emitting events', async () => {
+        const MockComponent = (props: { onClick?: (...args: any[]) => void }) =>
+            h('button', {
+                'data-testid': 'mock',
+                onClick: (event: Event) => {
+                    // Simulate a component that passes the event plus additional data
+                    props.onClick?.(event, { id: 'item-1', value: 42 }, 'extra-data');
+                },
+            });
+
+        const emitSpy = vi.fn();
+        const WrappedComponent = VueToJSX(MockComponent, { emit: emitSpy, events: ['click'] });
+
+        render(WrappedComponent);
+        const element = screen.getByTestId('mock');
+
+        await fireEvent.click(element);
+
+        // Verify emit was called with event name and all spread arguments
+        expect(emitSpy).toHaveBeenCalledTimes(1);
+        expect(emitSpy).toHaveBeenCalledWith(
+            'click',
+            expect.any(Object), // the event object
+            { id: 'item-1', value: 42 },
+            'extra-data',
+        );
+    });
+
+    it('should handle zero arguments in event handlers', async () => {
+        const MockComponent = (props: { onClick?: () => void }) =>
+            h('button', {
+                'data-testid': 'mock',
+                onClick: () => props.onClick?.(),
+            });
+
+        const emitSpy = vi.fn();
+        const WrappedComponent = VueToJSX(MockComponent, { emit: emitSpy, events: ['click'] });
+
+        render(WrappedComponent);
+        const element = screen.getByTestId('mock');
+
+        await fireEvent.click(element);
+        // Should emit with just the event name, no additional arguments
+        expect(emitSpy).toHaveBeenCalledWith('click');
+    });
+
+    it('should correctly capitalize event names for handler props', async () => {
+        const MockComponent = (props: { onCustomEvent?: any; onFocusIn?: any }) =>
+            h('div', {
+                'data-testid': 'mock',
+                onClick: () => {
+                    props.onCustomEvent?.();
+                    props.onFocusIn?.();
+                },
+            });
+
+        const emitSpy = vi.fn();
+        const WrappedComponent = VueToJSX(MockComponent, {
+            emit: emitSpy,
+            events: ['customEvent', 'focusIn'],
+        });
+
+        render(WrappedComponent);
+        const element = screen.getByTestId('mock');
+
+        await fireEvent.click(element);
+        expect(emitSpy).toHaveBeenCalledWith('customEvent');
+        expect(emitSpy).toHaveBeenCalledWith('focusIn');
+    });
+
+    it('should handle complex slot content with VNodes', () => {
+        const MockComponent = (props: { children?: any }) => h('div', { 'data-testid': 'mock' }, props.children);
+        const WrappedComponent = VueToJSX(MockComponent);
+
+        render(WrappedComponent, {
+            slots: {
+                default: () => h('span', { 'data-testid': 'nested' }, 'Nested VNode'),
+            },
+        });
+
+        const element = screen.getByTestId('mock');
+        const nested = screen.getByTestId('nested');
+        expect(element).toBeInTheDocument();
+        expect(nested).toBeInTheDocument();
+        expect(nested).toHaveTextContent('Nested VNode');
+    });
+
+    it('should not mutate original props', () => {
+        const MockComponent = vi.fn((props: any) => h('div', props));
+        const WrappedComponent = VueToJSX(MockComponent);
+
+        const originalProps = { testProp: 'value', class: 'test-class' };
+        render(WrappedComponent, { props: originalProps });
+
+        // Original props should remain unchanged
+        expect(originalProps).toEqual({ testProp: 'value', class: 'test-class' });
+        expect(originalProps).not.toHaveProperty('className');
+    });
+
+    it('should handle empty class string', () => {
+        const MockComponent = (props: { className?: string }) =>
+            h('div', { 'data-testid': 'mock', class: props.className });
+        const WrappedComponent = VueToJSX(MockComponent);
+
+        render(WrappedComponent, { props: { class: '' } });
+
+        const element = screen.getByTestId('mock');
+        expect(element).toBeInTheDocument();
+        expect(element.className).toBe('');
+    });
+
+    it('should preserve other props when mapping className', () => {
+        const MockComponent = (props: { className?: string; id?: string; 'data-custom'?: string }) =>
+            h('div', {
+                'data-testid': 'mock',
+                class: props.className,
+                id: props.id,
+                'data-custom': props['data-custom'],
+            });
+        const WrappedComponent = VueToJSX(MockComponent);
+
+        render(WrappedComponent, {
+            props: { class: 'test-class', id: 'test-id', 'data-custom': 'custom-value' },
+        });
+
+        const element = screen.getByTestId('mock');
+        expect(element).toHaveClass('test-class');
+        expect(element).toHaveAttribute('id', 'test-id');
+        expect(element).toHaveAttribute('data-custom', 'custom-value');
+    });
+
+    it('should handle single character event names', async () => {
+        const MockComponent = (props: { onX?: any }) =>
+            h('div', {
+                'data-testid': 'mock',
+                onClick: props.onX,
+            });
+
+        const emitSpy = vi.fn();
+        const WrappedComponent = VueToJSX(MockComponent, { emit: emitSpy, events: ['x'] });
+
+        render(WrappedComponent);
+        const element = screen.getByTestId('mock');
+
+        await fireEvent.click(element);
+        expect(emitSpy).toHaveBeenCalledWith('x', expect.anything());
+    });
+
+    it('should work with multiple slots by using only default slot', () => {
+        const MockComponent = (props: { children?: any }) => h('div', { 'data-testid': 'mock' }, props.children);
+        const WrappedComponent = VueToJSX(MockComponent);
+
+        render(WrappedComponent, {
+            slots: {
+                default: 'Default Content',
+                // Named slots are not handled by VueToJSX, only default slot
+                header: 'Header Content',
+            },
+        });
+
+        const element = screen.getByTestId('mock');
+        // Should only contain default slot content
+        expect(element).toHaveTextContent('Default Content');
+        expect(element).not.toHaveTextContent('Header Content');
+    });
+
+    it('should handle all options together: emit, events, and nestedComponents with slot', async () => {
+        const MockText = (props: any) => h('span', { class: 'nested-text' }, props.children);
+        const MockComponent = (props: any, nestedComponents: any) => {
+            const { Text } = nestedComponents || {};
+            return h(
+                'button',
+                {
+                    'data-testid': 'mock',
+                    class: props.className,
+                    onClick: props.onClick,
+                    onFocus: props.onFocus,
+                },
+                [Text ? Text({ children: 'Label: ' }) : null, props.children],
+            );
+        };
+
+        const emitSpy = vi.fn();
+        const WrappedComponent = VueToJSX(MockComponent, {
+            emit: emitSpy,
+            events: ['click', 'focus'],
+            nestedComponents: { Text: MockText },
+        });
+
+        render(WrappedComponent, {
+            props: { class: 'custom-class' },
+            slots: { default: 'Button Text' },
+        });
+
+        const element = screen.getByTestId('mock');
+        expect(element).toHaveClass('custom-class');
+        expect(element).toHaveTextContent('Label: Button Text');
+
+        await fireEvent.click(element);
+        expect(emitSpy).toHaveBeenCalledWith('click', expect.anything());
+
+        await fireEvent.focus(element);
+        expect(emitSpy).toHaveBeenCalledWith('focus', expect.anything());
+    });
 });
