@@ -2,7 +2,6 @@ import type { ChangeEvent, InputHTMLAttributes } from 'react';
 
 import { mdiCheck, mdiMinus } from '@lumx/icons';
 
-import { handleBasicClasses } from '../../utils/_internal/className';
 import type { CommonRef, JSXElement, LumxClassName, GenericProps, HasTheme, HasAriaDisabled } from '../../types';
 import { classNames } from '../../utils';
 import { Icon } from '../Icon';
@@ -38,7 +37,7 @@ export interface BaseCheckboxProps extends GenericProps, HasTheme, HasAriaDisabl
     /** optional props for input */
     inputProps?: InputHTMLAttributes<HTMLInputElement>;
     /** On change callback. */
-    onChange?(isChecked: boolean, value?: string, name?: string, event?: ChangeEvent): void;
+    onChange?(isChecked: boolean, value?: string, name?: string, event?: ChangeEvent | Event): void;
 }
 
 /**
@@ -50,6 +49,7 @@ export const COMPONENT_NAME = 'Checkbox';
  * Component default class name and class prefix.
  */
 export const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-checkbox';
+const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -96,22 +96,21 @@ export const Checkbox = (props: BaseCheckboxProps) => {
             {...forwardedProps}
             className={classNames.join(
                 className,
-                handleBasicClasses({
+                block({
                     // Whether state is intermediate class name will "-checked"
-                    isChecked: intermediateState ? true : isChecked,
-                    isDisabled,
-                    isUnchecked: !isChecked,
-                    prefix: CLASSNAME,
-                    theme,
+                    'is-checked': intermediateState ? true : isChecked,
+                    'is-disabled': isDisabled,
+                    'is-unchecked': !isChecked,
+                    [`theme-${theme}`]: Boolean(theme),
                 }),
             )}
         >
-            <div className={`${CLASSNAME}__input-wrapper`}>
+            <div className={element('input-wrapper')}>
                 <input
                     ref={inputRef}
                     type="checkbox"
                     id={inputProps.id}
-                    className={`${CLASSNAME}__input-native`}
+                    className={element('input-native')}
                     name={name}
                     value={value}
                     checked={isChecked}
@@ -121,27 +120,27 @@ export const Checkbox = (props: BaseCheckboxProps) => {
                     {...inputProps}
                 />
 
-                <div className={`${CLASSNAME}__input-placeholder`}>
-                    <div className={`${CLASSNAME}__input-background`} />
+                <div className={element('input-placeholder')}>
+                    <div className={element('input-background')} />
 
-                    <div className={`${CLASSNAME}__input-indicator`}>
+                    <div className={element('input-indicator')}>
                         {Icon({ icon: intermediateState ? mdiMinus : mdiCheck })}
                     </div>
                 </div>
             </div>
 
-            <div className={`${CLASSNAME}__content`}>
+            <div className={element('content')}>
                 {label &&
                     InputLabel({
                         htmlFor: inputProps.id as string,
-                        className: `${CLASSNAME}__label`,
+                        className: element('label'),
                         theme,
                         children: label,
                     })}
                 {helper &&
                     InputHelper({
                         id: `${inputProps.id}-helper`,
-                        className: `${CLASSNAME}__helper`,
+                        className: element('helper'),
                         theme,
                         children: helper,
                     })}
