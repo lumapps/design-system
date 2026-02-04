@@ -18,7 +18,6 @@ export const Default = {
         icon: iconArgType,
         color: colorArgType,
         ref: { table: { disable: true } },
-        onClick: { action: true, table: { disable: true } },
         linkAs: { table: { disable: true } },
         className: { table: { disable: true } },
         target: { if: { arg: 'href', exists: true }, control: { type: 'inline-radio' } },

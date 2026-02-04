@@ -1,7 +1,5 @@
-import { Kind, Message, MessageProps } from '@lumx/vue';
+import { Message } from '@lumx/vue';
 
-import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
-import StoryMatrix from '@lumx/vue/stories/utils/StoryMatrix.vue';
 import {
     Default as DefaultConfig,
     Base,
@@ -10,6 +8,9 @@ import {
     ClosableMessage as ClosableMessageStory,
 } from '@lumx/core/js/components/Message/Stories';
 import { withNestedProps } from '@lumx/vue/stories/decorators/withNestedProps';
+import { withRender } from '@lumx/vue/stories/utils/withRender';
+import MessageDefaultVue from './Stories/MessageDefault.vue';
+import MessageAllKindsVue from './Stories/MessageAllKinds.vue';
 
 export default {
     title: 'LumX components/message/Message',
@@ -22,17 +23,7 @@ export default {
  */
 export const Default = {
     ...Base,
-    render: (args: MessageProps) => ({
-        components: { Message },
-        setup() {
-            return { args };
-        },
-        template: `
-            <Message v-bind="args">
-                {{ args.children }}
-            </Message>
-        `,
-    }),
+    render: withRender({ MessageDefaultVue }, '{{ args.children }}'),
 };
 
 /**
@@ -40,25 +31,7 @@ export const Default = {
  */
 export const AllKinds = {
     ...Default,
-    render: (args: MessageProps) => ({
-        components: { Message, StoryMatrix },
-        setup() {
-            const kinds = withUndefined(Kind);
-            return { kinds, args };
-        },
-        template: `
-            <StoryMatrix :rows="kinds">
-                <template #default="{ row }">
-                    <Message 
-                        v-bind="args" 
-                        :kind="row" 
-                    >
-                        {{ args.children }}
-                    </Message>
-                </template>
-            </StoryMatrix>
-            `,
-    }),
+    render: withRender({ MessageAllKindsVue }, '{{ args.children }}'),
 };
 
 /**
@@ -83,5 +56,8 @@ export const CustomIcon = {
 export const ClosableMessage = {
     ...Default,
     ...ClosableMessageStory,
+    argTypes: {
+        'closeButtonProps.onClick': { action: 'close-button-click' },
+    },
     decorators: [withNestedProps()],
 };

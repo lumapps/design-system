@@ -11,5 +11,5 @@ export interface UseTheme {
  */
 export function useTheme(options: UseTheme = { defaultTheme: Theme.light }) {
     const { defaultTheme } = options;
-    return inject('theme', defaultTheme);
+    return inject('theme', undefined) || defaultTheme;
 }

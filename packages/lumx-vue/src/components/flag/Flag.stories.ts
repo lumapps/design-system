@@ -1,5 +1,4 @@
-import { ColorPalette, Flag, FlagProps } from '@lumx/vue';
-import StoryMatrix from '@lumx/vue/stories/utils/StoryMatrix.vue';
+import { Flag } from '@lumx/vue';
 import { withResizableBox } from '@lumx/vue/stories/decorators/withResizableBox';
 
 import {
@@ -9,7 +8,9 @@ import {
     Truncate as TruncateStory,
     AllColors as AllColorsStory,
 } from '@lumx/core/js/components/Flag/Stories';
-import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
+import { withRender } from '@lumx/vue/stories/utils/withRender';
+import FlagDefaultVue from './Stories/FlagDefault.vue';
+import FlagAllColorsVue from './Stories/FlagAllColors.vue';
 
 export default {
     ...DefaultConfig,
@@ -22,17 +23,7 @@ export default {
  */
 export const Default = {
     ...Base,
-    render: (args: FlagProps) => ({
-        components: { Flag },
-        setup() {
-            return { args };
-        },
-        template: `
-            <Flag v-bind="args">
-                {{ args.label }}
-            </Flag>
-        `,
-    }),
+    render: withRender({ FlagDefaultVue }, '{{ args.label }}'),
 };
 
 /**
@@ -40,17 +31,7 @@ export const Default = {
  */
 export const WithIcon = {
     ...WithIconStory,
-    render: (args: FlagProps) => ({
-        components: { Flag },
-        setup() {
-            return { args };
-        },
-        template: `
-            <Flag v-bind="args">
-                {{ args.label }}
-            </Flag>
-        `,
-    }),
+    render: Default.render,
 };
 
 /**
@@ -58,24 +39,7 @@ export const WithIcon = {
  */
 export const AllColors = {
     ...AllColorsStory,
-    render: (args: FlagProps) => ({
-        components: { Flag, StoryMatrix },
-        setup() {
-            return { colors: withUndefined(ColorPalette), args };
-        },
-        template: `
-            <StoryMatrix :rows="colors">
-                <template #default="{ row }">
-                    <Flag 
-                        v-bind="args" 
-                        :color="row" 
-                    >
-                        {{ args.label }}
-                    </Flag>
-                </template>
-            </StoryMatrix>
-            `,
-    }),
+    render: withRender({ FlagAllColorsVue }, '{{ args.label }}'),
 };
 
 /**

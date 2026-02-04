@@ -1,15 +1,21 @@
-import { IconButton, IconButtonProps } from '@lumx/vue';
+import { IconButton } from '@lumx/vue';
 
 import {
     Base as BaseStory,
     WithImage as WithImageStory,
     Default as DefaultConfig,
 } from '@lumx/core/js/components/Button/IconButtonStories';
+import { withRender } from '@lumx/vue/stories/utils/withRender';
+import IconButtonBaseVue from './Stories/IconButtonBase.vue';
 
 export default {
     title: 'LumX components/button/IconButton',
     ...DefaultConfig,
     component: IconButton,
+    argTypes: {
+        ...DefaultConfig.argTypes,
+        onClick: { action: 'click' },
+    },
 };
 
 /**
@@ -17,15 +23,7 @@ export default {
  */
 export const Base = {
     ...BaseStory,
-    render: (args: IconButtonProps) => ({
-        components: { IconButton },
-        setup() {
-            return { args };
-        },
-        template: `
-            <IconButton v-bind="args" @click="args.onClick" />
-        `,
-    }),
+    render: withRender({ IconButtonBaseVue }),
 };
 
 /**

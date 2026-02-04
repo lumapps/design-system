@@ -54,7 +54,4 @@ export const ClosableMessage = {
         hasBackground: true,
         kind: 'info',
     },
-    argTypes: {
-        'closeButtonProps.onClick': { action: true },
-    },
 };

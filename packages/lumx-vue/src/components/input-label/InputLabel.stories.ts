@@ -3,7 +3,9 @@ import {
     IsRequired as IsRequiredStory,
     WithCustomTypography as WithCustomTypographyStory,
 } from '@lumx/core/js/components/InputLabel/Stories';
-import { InputLabel, InputLabelProps } from '@lumx/vue';
+import { InputLabel } from '@lumx/vue';
+import { withRender } from '@lumx/vue/stories/utils/withRender';
+import InputLabelDefaultVue from './Stories/InputLabelDefault.vue';
 
 export default {
     title: 'LumX components/input-label/Input Label',
@@ -17,17 +19,7 @@ export default {
 
 export const Default = {
     ...DefaultStory,
-    render: (args: InputLabelProps) => ({
-        components: { InputLabel },
-        setup() {
-            return { args };
-        },
-        template: `
-            <InputLabel v-bind="args">
-                {{ args.children }}
-            </InputLabel>
-        `,
-    }),
+    render: withRender({ InputLabelDefaultVue }, '{{ args.children }}'),
 };
 
 export const IsRequired = {
