@@ -1,38 +1,37 @@
-import { Alignment, Button, IconButton, Orientation, Size, Text } from '@lumx/react';
+import { Alignment, Button, IconButton, Orientation, Text } from '@lumx/react';
 
-import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
-import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
 import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
+import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
 import { mdiAtom } from '@lumx/icons';
 import mergeWith from 'lodash/fp/mergeWith';
 import castArray from 'lodash/castArray';
-import { FlexBox } from './FlexBox';
 
-const gapSizes = [Size.tiny, Size.regular, Size.medium, Size.big, Size.huge];
-const spaceAlignments = [Alignment.spaceBetween, Alignment.spaceEvenly, Alignment.spaceAround];
-const verticalAlignments = [...spaceAlignments, Alignment.top, Alignment.center, Alignment.bottom];
-const horizontalAlignments = [...spaceAlignments, Alignment.left, Alignment.center, Alignment.right];
+import {
+    Default as DefaultConfig,
+    NoConfig as NoConfigStory,
+    Horizontal as HorizontalStory,
+    Vertical as VerticalStory,
+    GapSizes as GapSizesStory,
+    Wrap as WrapStory,
+    NoShrink as NoShrinkStory,
+} from '@lumx/core/js/components/FlexBox/Stories';
+import { GAP_SIZES, HORIZONTAL_ALIGNMENTS, VERTICAL_ALIGNMENTS } from '@lumx/core/js/components/FlexBox/constants';
+
+import { FlexBox } from './FlexBox';
 
 export default {
     title: 'LumX components/flex-box/FlexBox',
     component: FlexBox,
     args: FlexBox.defaultProps,
-    argTypes: {
-        orientation: getSelectArgType(Orientation),
-        fillSpace: { control: 'boolean' },
-        wrap: { control: 'boolean' },
-        noShrink: { control: 'boolean' },
-        hAlign: getSelectArgType(verticalAlignments),
-        vAlign: getSelectArgType(horizontalAlignments),
-        gap: getSelectArgType(gapSizes),
-    },
+    ...DefaultConfig,
 };
 
 /** Without config, FlexBox acts as a simple <div> */
 export const NoConfig = {
+    ...NoConfigStory,
     args: {
-        style: { width: '100%', height: '100%' },
+        ...NoConfigStory.args,
         children: [
             <Button key="1">Button 1</Button>,
             <Text key="2" as="p">
@@ -47,15 +46,16 @@ export const NoConfig = {
 /** Horizontal orientation with all possible item alignments */
 export const Horizontal = {
     ...NoConfig,
+    ...HorizontalStory,
     args: {
         ...NoConfig.args,
-        orientation: Orientation.horizontal,
+        ...HorizontalStory.args,
     },
     decorators: [
         withCombinations({
             cellStyle: { border: '1px dashed red' },
             firstColStyle: { whiteSpace: 'nowrap', width: '1%' },
-            combinations: { rows: { key: 'vAlign', options: withUndefined(horizontalAlignments) } },
+            combinations: { rows: { key: 'vAlign', options: withUndefined(HORIZONTAL_ALIGNMENTS) } },
         }),
     ],
 };
@@ -63,15 +63,16 @@ export const Horizontal = {
 /** Vertical orientation with all possible item alignments */
 export const Vertical = {
     ...NoConfig,
+    ...VerticalStory,
     args: {
         ...NoConfig.args,
-        orientation: Orientation.vertical,
+        ...VerticalStory.args,
     },
     decorators: [
         withCombinations({
             cellStyle: { border: '1px dashed red', height: '200px' },
             firstColStyle: { whiteSpace: 'nowrap', width: '1%' },
-            combinations: { rows: { key: 'hAlign', options: withUndefined(verticalAlignments) } },
+            combinations: { rows: { key: 'hAlign', options: withUndefined(VERTICAL_ALIGNMENTS) } },
         }),
     ],
 };
@@ -79,14 +80,16 @@ export const Vertical = {
 /** All gap sizes */
 export const GapSizes = {
     ...Horizontal,
-    argTypes: {
-        gap: { control: false },
+    ...GapSizesStory,
+    args: {
+        ...Horizontal.args,
+        ...GapSizesStory.args,
     },
     decorators: [
         ...NoConfig.decorators,
         withCombinations({
             combinations: {
-                rows: { key: 'gap', options: withUndefined(gapSizes) },
+                rows: { key: 'gap', options: withUndefined(GAP_SIZES) },
             },
         }),
     ],
@@ -94,13 +97,10 @@ export const GapSizes = {
 
 /** Wrap items in new row or column */
 export const Wrap = {
+    ...WrapStory,
     args: {
         ...NoConfig.args,
-        orientation: Orientation.horizontal,
-        wrap: true,
-    },
-    argTypes: {
-        wrap: { control: false },
+        ...WrapStory.args,
     },
     decorators: [
         withWrapper({ style: { border: '1px dashed red', width: '100px', height: '100px', margin: '20px auto' } }),
@@ -116,9 +116,10 @@ export const Wrap = {
 
 /** Prevent FlexBox from shrinking into a parent flex box */
 export const NoShrink = {
+    ...NoShrinkStory,
     args: {
+        ...NoShrinkStory.args,
         children: <Text as="p">Some paragraph</Text>,
-        noShrink: true,
     },
     decorators: [
         withWrapper({
