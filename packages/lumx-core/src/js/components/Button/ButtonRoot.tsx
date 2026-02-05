@@ -139,7 +139,7 @@ export const ButtonRoot = (props: ButtonRootProps) => {
         ...forwardedProps,
         'aria-disabled': ariaDisabled,
         'aria-label': ariaLabel,
-        ref: ref as CommonRef<HTMLButtonElement>,
+        ref: ref as CommonRef,
         className: buttonClassName,
         children,
     });

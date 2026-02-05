@@ -1,8 +1,4 @@
-import { CLASSNAME, MessageProps } from '@lumx/core/js/components/Message';
-
-import Message from './Message.vue';
-
-Message.className = CLASSNAME;
+import Message, { MessageProps } from './Message';
 
 export { Message };
 export type { MessageProps };

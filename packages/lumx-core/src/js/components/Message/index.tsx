@@ -1,6 +1,6 @@
 import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiClose, mdiInformation } from '@lumx/icons';
 import { ColorPalette, Emphasis, Kind, Size } from '../../constants';
-import type { JSXElement, LumxClassName, GenericProps } from '../../types';
+import type { JSXElement, LumxClassName, HasClassName, CommonRef } from '../../types';
 import { classNames } from '../../utils';
 import { Icon } from '../Icon';
 import { IconButton } from '../Button/IconButton';
@@ -8,7 +8,7 @@ import { IconButton } from '../Button/IconButton';
 /**
  * Defines the props of the component.
  */
-export interface MessageProps extends GenericProps {
+export interface MessageProps extends HasClassName {
     /** Content. */
     children?: JSXElement;
     /** Whether the message has a background or not. */
@@ -17,6 +17,8 @@ export interface MessageProps extends GenericProps {
     kind?: Kind;
     /** Message custom icon SVG path. */
     icon?: string;
+    /** Reference to the message container element. */
+    ref?: CommonRef;
     /**
      * Displays a close button.
      *
@@ -58,7 +60,16 @@ export const CONFIG = {
  * @return JSX element.
  */
 export const Message = (props: MessageProps) => {
-    const { children, className, hasBackground, kind, icon: customIcon, closeButtonProps, ...forwardedProps } = props;
+    const {
+        children,
+        className,
+        hasBackground,
+        kind,
+        icon: customIcon,
+        closeButtonProps,
+        ref,
+        ...forwardedProps
+    } = props;
     const { color, icon } = CONFIG[kind as Kind] || {};
     const { onClick, label: closeButtonLabel } = closeButtonProps || {};
     const isCloseButtonDisplayed = hasBackground && kind === 'info' && onClick && closeButtonLabel;
@@ -66,6 +77,7 @@ export const Message = (props: MessageProps) => {
     return (
         <div
             {...forwardedProps}
+            ref={ref}
             className={classNames.join(
                 className,
                 block({

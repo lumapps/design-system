@@ -1,7 +1,10 @@
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
-import { Message as UI, CLASSNAME, COMPONENT_NAME, MessageProps } from '@lumx/core/js/components/Message';
+import { Message as UI, CLASSNAME, COMPONENT_NAME, MessageProps as UIProps } from '@lumx/core/js/components/Message';
 
-export type { MessageProps };
+export interface MessageProps extends Omit<UIProps, 'children' | 'ref'> {
+    /** Content. */
+    children?: React.ReactNode;
+}
 
 /**
  * Message component.

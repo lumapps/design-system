@@ -7,10 +7,10 @@ import {
     CustomIcon as CustomIconStory,
     ClosableMessage as ClosableMessageStory,
 } from '@lumx/core/js/components/Message/Stories';
-import { withNestedProps } from '@lumx/vue/stories/decorators/withNestedProps';
 import { withRender } from '@lumx/vue/stories/utils/withRender';
 import MessageDefaultVue from './Stories/MessageDefault.vue';
 import MessageAllKindsVue from './Stories/MessageAllKinds.vue';
+import MessageWithClose from './Stories/MessageWithClose.vue';
 
 export default {
     title: 'LumX components/message/Message',
@@ -57,7 +57,7 @@ export const ClosableMessage = {
     ...Default,
     ...ClosableMessageStory,
     argTypes: {
-        'closeButtonProps.onClick': { action: 'close-button-click' },
+        onClose: { action: 'close-button-click' },
     },
-    decorators: [withNestedProps()],
+    render: withRender({ MessageWithClose }, '{{ args.children }}'),
 };
