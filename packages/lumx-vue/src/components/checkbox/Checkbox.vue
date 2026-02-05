@@ -21,7 +21,7 @@ defineOptions({
     inheritAttrs: false,
 });
 
-const props = defineProps<Omit<BaseCheckboxProps, 'onChange'>>();
+const props = defineProps<BaseCheckboxProps>();
 const attrs = useAttrs();
 const { isAnyDisabled, disabledStateProps } = useDisableStateProps(computed(() => ({ ...props, ...attrs })));
 const defaultTheme = useTheme();
@@ -29,6 +29,8 @@ const emit = defineEmits(emitSchema);
 const ui = VueToJSX<BaseCheckboxProps, typeof emitSchema>(CheckboxUI, { emit, events: Object.keys(emitSchema) });
 const generatedInputId = useId();
 const inputId = props.id || generatedInputId;
+
+console.log(props, attrs);
 
 /**
  * Compute properties to pass to the underlying UI component.
