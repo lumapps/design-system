@@ -11,8 +11,8 @@ import Text from '../text/Text.vue';
 export const ButtonContent = defineComponent({
     props: {
         content: {
-            type: Array as PropType<VNode[]>,
-            default: () => [],
+            type: Array as PropType<VNode[] | null>,
+            default: null,
         },
     },
     setup(props) {

@@ -1,6 +1,6 @@
 import { ColorPalette, Emphasis, Size, Theme } from '../../constants';
 import { classNames } from '../../utils';
-import { GenericProps, HasTheme, HasAriaDisabled, AriaAttributes, CommonRef } from '../../types';
+import { HasTheme, HasAriaDisabled, AriaAttributes, CommonRef } from '../../types';
 import { RawClickable } from '../RawClickable';
 
 /**
@@ -9,8 +9,7 @@ import { RawClickable } from '../RawClickable';
 export type ButtonSize = Extract<Size, 's' | 'm'>;
 
 export interface BaseButtonProps
-    extends GenericProps,
-        Pick<AriaAttributes, 'aria-expanded' | 'aria-haspopup' | 'aria-pressed' | 'aria-label'>,
+    extends Pick<AriaAttributes, 'aria-expanded' | 'aria-haspopup' | 'aria-pressed' | 'aria-label'>,
         HasTheme,
         HasAriaDisabled {
     /** Color variant. */
