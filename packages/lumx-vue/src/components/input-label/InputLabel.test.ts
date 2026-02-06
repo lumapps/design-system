@@ -1,15 +1,16 @@
 import { render, screen } from '@testing-library/vue';
 
+import { InputLabelClassName, type InputLabelProps } from '@lumx/core/js/components/InputLabel';
 import BaseInputLabelTests, { setup } from '@lumx/core/js/components/InputLabel/Tests';
 import { commonTestsSuiteVTL, SetupRenderOptions } from '@lumx/vue/testing';
 
-import { InputLabel, InputLabelProps } from '.';
+import { InputLabel } from '.';
 
-const CLASSNAME = InputLabel.className as string;
+const CLASSNAME = InputLabelClassName;
 
 describe('<InputLabel />', () => {
     const renderInputHelper = (props: InputLabelProps, options?: SetupRenderOptions<InputLabelProps>) =>
-        render(InputLabel, { props, ...options, slots: { default: props.children } });
+        render(InputLabel, { ...options, props, slots: { default: props.children } });
 
     BaseInputLabelTests({ render: renderInputHelper, screen });
 

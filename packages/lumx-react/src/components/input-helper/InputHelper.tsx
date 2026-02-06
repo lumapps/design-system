@@ -1,9 +1,10 @@
-import { InputHelper as UI, InputHelperProps } from '@lumx/core/js/components/InputHelper';
+import { InputHelper as UI, InputHelperProps as UIProps } from '@lumx/core/js/components/InputHelper';
+import { GenericProps } from '@lumx/core/js/utils/disabledState';
 import { Theme } from '@lumx/react';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
-export type { InputHelperProps };
+export interface InputHelperProps extends UIProps, GenericProps {}
 
 /**
  * InputHelper component.
