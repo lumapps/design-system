@@ -29,7 +29,7 @@ import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { VueToJSX } from '../../utils/VueToJSX';
 import { ResetTheme } from '../../utils/ResetTheme';
 import Icon from '../icon/Icon.vue';
-import Text from '../text/Text.vue';
+import { Text } from '../text';
 
 defineOptions({
     inheritAttrs: false,
