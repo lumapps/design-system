@@ -1,7 +1,7 @@
 import { classNames } from '../../utils';
 import { Kind } from '../../constants';
 import { INPUT_HELPER_CONFIGURATION } from './constants';
-import type { LumxClassName, GenericProps, HasTheme, JSXElement } from '../../types';
+import type { LumxClassName, HasTheme, JSXElement, HasClassName, CommonRef } from '../../types';
 
 export const COMPONENT_NAME = 'InputHelper';
 export const InputHelperClassName: LumxClassName<typeof COMPONENT_NAME> = 'lumx-input-helper';
@@ -9,11 +9,13 @@ export const InputHelperClassName: LumxClassName<typeof COMPONENT_NAME> = 'lumx-
 /**
  * Defines the props of the component.
  */
-export interface InputHelperProps extends GenericProps, HasTheme {
+export interface InputHelperProps extends HasClassName, HasTheme {
     /** Helper content. */
     children: JSXElement;
     /** Helper variant. */
     kind?: Kind;
+    /** ref to the root element `p` */
+    ref?: CommonRef;
 }
 
 const CLASSNAME = InputHelperClassName;

@@ -1,11 +1,12 @@
 import { render, screen } from '@testing-library/vue';
 
 import BaseInputHelperTests, { setup } from '@lumx/core/js/components/InputHelper/Tests';
+import { InputHelperClassName, InputHelperProps } from '@lumx/core/js/components/InputHelper';
 import { commonTestsSuiteVTL, SetupRenderOptions } from '@lumx/vue/testing';
 
-import { InputHelper, InputHelperProps } from '.';
+import { InputHelper } from '.';
 
-const CLASSNAME = InputHelper.className as string;
+const CLASSNAME = InputHelperClassName;
 
 describe('<InputHelper />', () => {
     const renderInputHelper = (props: InputHelperProps, options?: SetupRenderOptions<InputHelperProps>) =>
