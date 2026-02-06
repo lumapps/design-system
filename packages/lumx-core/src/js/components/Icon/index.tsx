@@ -33,6 +33,7 @@ export interface IconProps extends HasClassName, HasTheme {
     alt?: string;
     /** Vertical alignment of the icon (only applies for icons nested in Text/Heading). */
     verticalAlign?: null | 'middle';
+    /** reference to the root `i` element */
     ref?: CommonRef;
 }
 
