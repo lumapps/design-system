@@ -20,18 +20,20 @@ export const setup = (propsOverride: SetupProps = {}, { render, ...options }: Se
 
     const flag = getByClassName(document.body, CLASSNAME);
     const icon = queryByClassName(flag, `${CLASSNAME}__icon`);
+    const label = queryByClassName(flag, `${CLASSNAME}__label`);
 
-    return { flag, icon, props };
+    return { flag, icon, label, props };
 };
 
 export default (renderOptions: SetupOptions<FlagProps>) => {
     describe('Props', () => {
         it('should render default', () => {
-            const { flag, icon } = setup({}, renderOptions);
+            const { flag, icon, label } = setup({}, renderOptions);
             expect(flag).toBeInTheDocument();
             expect(flag).toHaveClass(CLASSNAME);
             expect(flag).toHaveClass(`${CLASSNAME}--color-dark`);
             expect(icon).not.toBeInTheDocument();
+            expect(label).toBeInTheDocument();
         });
 
         it('should render label content', () => {
