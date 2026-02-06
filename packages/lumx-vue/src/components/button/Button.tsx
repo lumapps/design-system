@@ -1,5 +1,5 @@
 import isEmpty from 'lodash/isEmpty';
-import { defineComponent, useAttrs, computed } from 'vue';
+import { defineComponent, computed } from 'vue';
 
 import { Button as ButtonUI, ButtonProps as UIProps } from '@lumx/core/js/components/Button/Button';
 
@@ -8,9 +8,8 @@ import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { ResetTheme } from '../../utils/ResetTheme';
 import Icon from '../icon/Icon.vue';
-import { ButtonContent } from './ButtonContent';
 
-export type ButtonProps = VueToJSXProps<UIProps>;
+export type ButtonProps = VueToJSXProps<UIProps, 'onClick'>;
 
 export interface ButtonEmits {
     click: [event: MouseEvent];
@@ -26,36 +25,38 @@ const keysOfButton = keysOf<ButtonProps>();
  */
 const Button = defineComponent(
     (props: ButtonProps, { slots, emit }) => {
-        const attrs = useAttrs();
         const defaultTheme = useTheme();
 
-        const { isAnyDisabled, disabledStateProps } = useDisableStateProps(computed(() => ({ ...props, ...attrs })));
+        const { isAnyDisabled, disabledStateProps } = useDisableStateProps(computed(() => props));
 
-        const hasLeftIcon = computed(() => !isEmpty(props.leftIcon));
-        const hasRightIcon = computed(() => !isEmpty(props.rightIcon));
+        const handleClick = (event: MouseEvent) => {
+            emit('click', event);
+        };
 
         return () => (
             <ButtonUI
                 {...props}
-                {...attrs}
                 {...disabledStateProps.value}
                 className={props.class}
-                theme={props.theme || attrs.theme || defaultTheme}
+                theme={props.theme || defaultTheme}
                 aria-disabled={isAnyDisabled.value}
-                onClick={(event: MouseEvent) => emit('click', event)}
-            >
-                {hasLeftIcon.value && (
-                    <ResetTheme>
-                        <Icon icon={props.leftIcon} />
-                    </ResetTheme>
-                )}
-                <ButtonContent content={slots.default?.()} />
-                {hasRightIcon.value && (
-                    <ResetTheme>
-                        <Icon icon={props.rightIcon} />
-                    </ResetTheme>
-                )}
-            </ButtonUI>
+                onClick={handleClick}
+                children={
+                    <>
+                        {!isEmpty(props.leftIcon) && props.leftIcon && (
+                            <ResetTheme>
+                                <Icon icon={props.leftIcon} />
+                            </ResetTheme>
+                        )}
+                        <span>{slots.default?.()}</span>
+                        {!isEmpty(props.rightIcon) && props.rightIcon && (
+                            <ResetTheme>
+                                <Icon icon={props.rightIcon} />
+                            </ResetTheme>
+                        )}
+                    </>
+                }
+            />
         );
     },
     {
@@ -68,7 +69,10 @@ const Button = defineComponent(
             'fullWidth',
             'hasBackground',
             'href',
+            'isActive',
             'isDisabled',
+            'isFocused',
+            'isHovered',
             'isSelected',
             'leftIcon',
             'linkAs',

@@ -1,6 +1,6 @@
 import { ColorPalette, Emphasis, Size, Theme } from '../../constants';
 import { classNames } from '../../utils';
-import { HasTheme, HasAriaDisabled, AriaAttributes, CommonRef } from '../../types';
+import { HasTheme, HasAriaDisabled, AriaAttributes, CommonRef, HasClassName, JSXElement } from '../../types';
 import { RawClickable } from '../RawClickable';
 
 /**
@@ -10,6 +10,7 @@ export type ButtonSize = Extract<Size, 's' | 'm'>;
 
 export interface BaseButtonProps
     extends Pick<AriaAttributes, 'aria-expanded' | 'aria-haspopup' | 'aria-pressed' | 'aria-label'>,
+        HasClassName,
         HasTheme,
         HasAriaDisabled {
     /** Color variant. */
@@ -34,6 +35,14 @@ export interface BaseButtonProps
     type?: 'submit' | 'reset' | 'button' | undefined;
     /** Custom component for the link (can be used to inject router Link). */
     linkAs?: 'a' | any;
+    children?: JSXElement;
+    fullWidth?: boolean;
+    isActive?: boolean;
+    isFocused?: boolean;
+    isHovered?: boolean;
+    onClick?: (event: MouseEvent) => void;
+    /** Reference to the message container element. */
+    ref?: CommonRef;
 }
 
 export interface ButtonRootProps extends BaseButtonProps {

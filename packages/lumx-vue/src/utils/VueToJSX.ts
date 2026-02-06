@@ -25,9 +25,10 @@ export interface VueToJSXOptions<Emits extends VueEmits = Record<string, never>>
 
 export const keysOf = <T>() => {
     return <K extends readonly (keyof T)[]>(
-        ...keys: [keyof T] extends [K[number]]
-            ? K
-            : [Error: '❌ Missing keys in your list:', Exclude<keyof T, K[number]>]
+        ...keys: K &
+            (Exclude<keyof T, K[number]> extends never
+                ? unknown
+                : { '❌ Error: Missing Keys': Exclude<keyof T, K[number]> })
     ): K => keys as any;
 };
 
