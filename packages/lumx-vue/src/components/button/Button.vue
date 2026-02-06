@@ -19,7 +19,7 @@ export const emitSchema = {
 <script setup lang="ts">
 import isEmpty from 'lodash/isEmpty';
 
-import { defineComponent, useAttrs, VNode, h, computed } from 'vue';
+import { useAttrs, computed } from 'vue';
 
 import { Button as ButtonUI, ButtonProps } from '@lumx/core/js/components/Button/Button';
 
@@ -29,7 +29,7 @@ import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { VueToJSX } from '../../utils/VueToJSX';
 import { ResetTheme } from '../../utils/ResetTheme';
 import Icon from '../icon/Icon.vue';
-import Text from '../text/Text.vue';
+import { ButtonContent } from './ButtonContent.tsx';
 
 defineOptions({
     inheritAttrs: false,
@@ -58,25 +58,4 @@ const uiProps = computed(() => ({
 
 const hasLeftIcon = computed(() => !isEmpty(props.leftIcon));
 const hasRightIcon = computed(() => !isEmpty(props.rightIcon));
-
-/**
- * Functional component to handle button content.
- * It prevents unnecessary wrapping:
- * - If the child is a single <Text> component, it renders it directly.
- * - Otherwise, it wraps the content in a <span> to ensure correct layout within the button.
- */
-const ButtonContent = defineComponent({
-    props: ['content'],
-    setup(props) {
-        return () => {
-            const children = props.content as VNode[];
-            if (!children || children.length === 0) return null;
-
-            if (children.length === 1 && children[0].type === Text) {
-                return children[0];
-            }
-            return h('span', children);
-        };
-    },
-});
 </script>
