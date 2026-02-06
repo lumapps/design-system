@@ -10,7 +10,7 @@ import {
     IconButtonProps as BaseIconButtonProps,
 } from '@lumx/core/js/components/Button/IconButton';
 
-export interface IconButtonProps extends BaseIconButtonProps, GenericProps {
+export interface IconButtonProps extends GenericProps, BaseIconButtonProps {
     /**
      * Props to pass to the tooltip.
      * If undefined or if tooltipProps.label is undefined, the label prop will be used as tooltip label.

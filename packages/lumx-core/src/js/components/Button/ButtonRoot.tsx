@@ -8,12 +8,7 @@ import { RawClickable, BaseClickableProps } from '../RawClickable';
  */
 export type ButtonSize = Extract<Size, 's' | 'm'>;
 
-export interface BaseButtonProps
-    extends Pick<AriaAttributes, 'aria-expanded' | 'aria-haspopup' | 'aria-pressed' | 'aria-label'>,
-        HasClassName,
-        HasTheme,
-        HasAriaDisabled,
-        BaseClickableProps {
+export interface BaseButtonProps extends AriaAttributes, HasClassName, HasTheme, HasAriaDisabled, BaseClickableProps {
     /** Color variant. */
     color?: ColorPalette;
     /** Emphasis variant. */

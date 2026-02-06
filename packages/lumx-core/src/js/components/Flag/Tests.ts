@@ -1,5 +1,7 @@
 import { mdiAbTesting } from '@lumx/icons';
 
+import noop from 'lodash/noop';
+
 import { ColorPalette, Theme } from '../../constants';
 import { SetupOptions } from '../../../testing';
 import { getByClassName, queryByClassName } from '../../../testing/queries';
@@ -13,6 +15,7 @@ type SetupProps = Partial<FlagProps>;
 export const setup = (propsOverride: SetupProps = {}, { render, ...options }: SetupOptions<FlagProps>) => {
     const props: FlagProps = {
         children: 'Default label',
+        Text: noop,
         ...propsOverride,
     };
 

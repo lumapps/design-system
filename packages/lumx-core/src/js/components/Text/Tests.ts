@@ -6,8 +6,7 @@ type SetupProps = Partial<TextProps>;
 
 export const setup = (propsOverride: SetupProps = {}, { render, ...options }: SetupOptions<TextProps>) => {
     const props: TextProps = {
-        children: propsOverride.dangerouslySetInnerHTML ? undefined : 'Label text',
-        htmlFor: '123',
+        children: (propsOverride as any).dangerouslySetInnerHTML ? undefined : 'Label text',
         as: 'span',
         ...propsOverride,
     };

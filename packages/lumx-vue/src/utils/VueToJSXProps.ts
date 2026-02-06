@@ -7,7 +7,7 @@
  */
 export type VueToJSXProps<Props, OmitProps extends keyof Props = never> = Omit<
     Props,
-    'children' | 'className' | 'ref' | OmitProps
+    'children' | 'className' | 'ref' | 'onClick' | 'onChange' | OmitProps
 > & {
     /** Class name forwarded to the root element of the component. */
     class?: string;

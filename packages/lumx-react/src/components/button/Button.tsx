@@ -17,7 +17,7 @@ import { isComponent } from '@lumx/react/utils/type/isComponent';
 export type { ButtonEmphasis };
 export { CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS };
 
-export interface ButtonProps extends UIProps, GenericProps {}
+export interface ButtonProps extends GenericProps, UIProps {}
 
 /**
  * Button component.

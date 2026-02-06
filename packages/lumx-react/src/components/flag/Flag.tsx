@@ -9,7 +9,7 @@ import {
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
-export interface FlagProps extends GenericProps, Omit<UIProps, 'children'> {
+export interface FlagProps extends GenericProps, Omit<UIProps, 'children' | 'Text'> {
     label: React.ReactNode;
 }
 
@@ -23,15 +23,13 @@ export interface FlagProps extends GenericProps, Omit<UIProps, 'children'> {
 export const Flag = forwardRef<FlagProps, HTMLDivElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
 
-    return UI(
-        {
-            ...props,
-            theme: props.theme || defaultTheme,
-            ref,
-            children: props.label,
-        },
-        { Text },
-    );
+    return UI({
+        ...props,
+        theme: props.theme || defaultTheme,
+        ref,
+        children: props.label,
+        Text,
+    });
 });
 
 Flag.displayName = COMPONENT_NAME;

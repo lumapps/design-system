@@ -1,11 +1,10 @@
 import { render, screen } from '@testing-library/vue';
 
 import BaseFlexBoxTests, { setup } from '@lumx/core/js/components/FlexBox/Tests';
+import { CLASSNAME, FlexBoxProps } from '@lumx/core/js/components/FlexBox';
 import { commonTestsSuiteVTL, SetupRenderOptions } from '@lumx/vue/testing';
 
-import { FlexBox, FlexBoxProps } from '.';
-
-const CLASSNAME = FlexBox.className as string;
+import { FlexBox } from '.';
 
 describe('<FlexBox />', () => {
     function renderFlexBox({ children, ...props }: FlexBoxProps, options?: SetupRenderOptions<FlexBoxProps>) {
