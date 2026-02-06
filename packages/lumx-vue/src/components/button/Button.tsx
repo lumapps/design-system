@@ -1,5 +1,5 @@
 import isEmpty from 'lodash/isEmpty';
-import { defineComponent, computed } from 'vue';
+import { defineComponent, computed, useAttrs } from 'vue';
 
 import { Button as ButtonUI, ButtonProps as UIProps } from '@lumx/core/js/components/Button/Button';
 
@@ -7,7 +7,9 @@ import { useTheme } from '../../composables/useTheme';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { ResetTheme } from '../../utils/ResetTheme';
+import { isComponent } from '../../utils/isComponent';
 import Icon from '../icon/Icon.vue';
+import { Text } from '../text';
 
 export type ButtonProps = VueToJSXProps<UIProps, 'onClick'>;
 
@@ -26,38 +28,45 @@ const keysOfButton = keysOf<ButtonProps>();
 const Button = defineComponent(
     (props: ButtonProps, { slots, emit }) => {
         const defaultTheme = useTheme();
+        const attrs = useAttrs();
 
         const { isAnyDisabled, disabledStateProps } = useDisableStateProps(computed(() => props));
 
         const handleClick = (event: MouseEvent) => {
+            event.stopImmediatePropagation();
             emit('click', event);
         };
 
-        return () => (
-            <ButtonUI
-                {...props}
-                {...disabledStateProps.value}
-                className={props.class}
-                theme={props.theme || defaultTheme}
-                aria-disabled={isAnyDisabled.value}
-                onClick={handleClick}
-                children={
-                    <>
-                        {!isEmpty(props.leftIcon) && props.leftIcon && (
-                            <ResetTheme>
-                                <Icon icon={props.leftIcon} />
-                            </ResetTheme>
-                        )}
-                        <span>{slots.default?.()}</span>
-                        {!isEmpty(props.rightIcon) && props.rightIcon && (
-                            <ResetTheme>
-                                <Icon icon={props.rightIcon} />
-                            </ResetTheme>
-                        )}
-                    </>
-                }
-            />
-        );
+        return () => {
+            const children = slots.default?.();
+
+            return (
+                <ButtonUI
+                    {...attrs}
+                    {...props}
+                    {...disabledStateProps.value}
+                    className={props.class}
+                    theme={props.theme || defaultTheme}
+                    aria-disabled={isAnyDisabled.value}
+                    onClick={handleClick}
+                    children={
+                        <>
+                            {!isEmpty(props.leftIcon) && props.leftIcon && (
+                                <ResetTheme>
+                                    <Icon icon={props.leftIcon} />
+                                </ResetTheme>
+                            )}
+                            {children && (isComponent(Text)(children) ? children : <span>{children}</span>)}
+                            {!isEmpty(props.rightIcon) && props.rightIcon && (
+                                <ResetTheme>
+                                    <Icon icon={props.rightIcon} />
+                                </ResetTheme>
+                            )}
+                        </>
+                    }
+                />
+            );
+        };
     },
     {
         inheritAttrs: false,
