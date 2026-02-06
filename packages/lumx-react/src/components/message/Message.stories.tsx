@@ -1,62 +1,25 @@
-import { Kind, Message } from '@lumx/react';
-
+import { Message } from '@lumx/react';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
-import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
-import {
-    Default as DefaultConfig,
-    Base,
-    AllKindsWithBackground as AllKindsWithBackgroundStory,
-    CustomIcon as CustomIconStory,
-    ClosableMessage as ClosableMessageStory,
-} from '@lumx/core/js/components/Message/Stories';
+import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
+import { setup } from '@lumx/core/js/components/Message/Stories';
 
 import { withNestedProps } from '../../stories/decorators/withNestedProps';
 
+const { meta, Default, AllKinds, AllKindsWithBackground, CustomIcon, ClosableMessage } = setup({
+    component: Message,
+    decorators: { withWrapper, withCombinations },
+    overrides: {
+        ClosableMessage: {
+            args: { 'closeButtonProps.label': 'Close' },
+            argTypes: { 'closeButtonProps.onClick': { action: true } },
+            decorators: [withNestedProps()],
+        },
+    },
+});
+
 export default {
     title: 'LumX components/message/Message',
-    component: Message,
-    ...DefaultConfig,
+    ...meta,
 };
 
-/**
- * Default message
- */
-export const Default = Base;
-
-/**
- * All `kind` variants
- */
-export const AllKinds = {
-    ...Default,
-    decorators: [
-        withCombinations({
-            combinations: {
-                rows: { key: 'kind', options: withUndefined(Kind) },
-            },
-        }),
-    ],
-};
-
-/**
- * All `kind` variants with `hasBackground`
- */
-export const AllKindsWithBackground = {
-    ...AllKinds,
-    ...AllKindsWithBackgroundStory,
-};
-
-/**
- * With custom icon
- */
-export const CustomIcon = CustomIconStory;
-
-/**
- * With close button (has background and kind info)
- */
-export const ClosableMessage = {
-    ...ClosableMessageStory,
-    argTypes: {
-        'closeButtonProps.onClick': { action: true },
-    },
-    decorators: [withNestedProps()],
-};
+export { Default, AllKinds, AllKindsWithBackground, CustomIcon, ClosableMessage };

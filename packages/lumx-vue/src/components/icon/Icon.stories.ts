@@ -1,43 +1,22 @@
-import { Icon } from '@lumx/vue';
-
-import {
-    Default as DefaultConfig,
-    SizeAndShape as SizeAndShapeStory,
-    AllColors as AllColorsStory,
-    InsideText as InsideTextStory,
-} from '@lumx/core/js/components/Icon/Stories';
+import { withWrapper } from '@lumx/vue/stories/decorators/withWrapper';
+import { withCombinations } from '@lumx/vue/stories/decorators/withCombinations';
 import { withRender } from '@lumx/vue/stories/utils/withRender';
-import IconSizeAndShapeVue from './Stories/IconSizeAndShape.vue';
-import IconAllColorsVue from './Stories/IconAllColors.vue';
+import { setup } from '@lumx/core/js/components/Icon/Stories';
+
+import { Icon } from '@lumx/vue';
 import IconInsideTextVue from './Stories/IconInsideText.vue';
 
-export default {
+const { meta, SizeAndShape, AllColors, InsideText } = setup({
     component: Icon,
+    decorators: { withWrapper, withCombinations },
+    overrides: {
+        InsideText: { render: withRender({ IconInsideTextVue }) },
+    },
+});
+
+export default {
     title: 'LumX components/icon/Icon',
-    ...DefaultConfig,
+    ...meta,
 };
 
-/**
- * All combinations of size and shape
- */
-export const SizeAndShape = {
-    ...SizeAndShapeStory,
-    render: withRender({ IconSizeAndShapeVue }),
-};
-
-/**
- * All combinations of size and shape
-//  */
-export const AllColors = {
-    ...AllColorsStory,
-    render: withRender({ IconAllColorsVue }),
-};
-
-/**
- * Icon inside a text component
- * (renders as inline instead of block and can adapt to the verticalAlign)
- */
-export const InsideText = {
-    ...InsideTextStory,
-    render: withRender({ IconInsideTextVue }),
-};
+export { SizeAndShape, AllColors, InsideText };

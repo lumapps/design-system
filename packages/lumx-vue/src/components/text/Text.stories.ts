@@ -1,76 +1,49 @@
-import { Text } from '@lumx/vue';
-
-import {
-    Default as DefaultConfig,
-    Base,
-    NoWrap,
-    Truncate,
-    TruncateMultiline as TruncateMultilineStory,
-    AllWhiteSpace as AllWhiteSpaceStory,
-    LongText as LongTextStory,
-} from '@lumx/core/js/components/Text/Stories';
+import { withWrapper } from '@lumx/vue/stories/decorators/withWrapper';
+import { withCombinations } from '@lumx/vue/stories/decorators/withCombinations';
 import { withResizableBox } from '@lumx/vue/stories/decorators/withResizableBox';
 import { withRender } from '@lumx/vue/stories/utils/withRender';
+import { setup } from '@lumx/core/js/components/Text/Stories';
+
+import { Text } from '@lumx/vue';
 import TextTestUpdateTruncateTitleLabelVue from './Stories/TextTestUpdateTruncateTitleLabel.vue';
 import TextWithIconVue from './Stories/TextWithIcon.vue';
-import TextAllWhiteSpaceVue from './Stories/TextAllWhiteSpace.vue';
-import TextAllTypographyVue from './Stories/TextAllTypography.vue';
-import TextAllColorsVue from './Stories/TextAllColors.vue';
+
+const {
+    meta,
+    Base,
+    LongText,
+    NoWrap,
+    AllWhiteSpace,
+    Truncate,
+    TruncateMultiline,
+    AllTypography,
+    AllColors,
+    TestUpdateTruncateTitleLabel,
+    WithIcon,
+} = setup({
+    component: Text,
+    render: withRender({ Text }, '{{ args.children }}'),
+    decorators: { withWrapper, withCombinations, withResizableBox },
+    overrides: {
+        TestUpdateTruncateTitleLabel: { render: withRender({ TextTestUpdateTruncateTitleLabelVue }) },
+        WithIcon: { render: withRender({ TextWithIconVue }) },
+    },
+});
 
 export default {
     title: 'LumX components/text/Text',
-    component: Text,
-    ...DefaultConfig,
-    render: withRender({ Text }, '{{ args.children }}'),
+    ...meta,
 };
 
-export { Base, NoWrap, Truncate };
-
-/**
- * Test the update of the `title` attribute when text overflows
- */
-export const TestUpdateTruncateTitleLabel = {
-    args: {
-        as: 'p',
-    },
-    render: withRender({ TextTestUpdateTruncateTitleLabelVue }),
-};
-
-/**
- * Long text should wrap by default
- */
-export const LongText = {
-    ...LongTextStory,
-    decorators: [withResizableBox()],
-};
-
-export const TruncateMultiline = {
-    ...LongText,
-    args: {
-        ...LongText.args,
-        ...TruncateMultilineStory.args,
-    },
-};
-
-/**
- * Text containing icons (should match font size)
- */
-export const WithIcon = {
-    ...Base,
-    render: withRender({ TextWithIconVue }),
-};
-
-export const AllWhiteSpace = {
-    ...AllWhiteSpaceStory,
-    render: withRender({ TextAllWhiteSpaceVue }, '{{ args.children }}'),
-};
-
-export const AllTypography = {
-    ...Base,
-    render: withRender({ TextAllTypographyVue }),
-};
-
-export const AllColors = {
-    ...Base,
-    render: withRender({ TextAllColorsVue }),
+export {
+    Base,
+    LongText,
+    NoWrap,
+    AllWhiteSpace,
+    Truncate,
+    TruncateMultiline,
+    AllTypography,
+    AllColors,
+    TestUpdateTruncateTitleLabel,
+    WithIcon,
 };

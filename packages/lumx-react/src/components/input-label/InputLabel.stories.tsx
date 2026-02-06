@@ -1,14 +1,14 @@
-import { Default, IsRequired, WithCustomTypography } from '@lumx/core/js/components/InputLabel/Stories';
+import { setup } from '@lumx/core/js/components/InputLabel/Stories';
+
 import { InputLabel } from './InputLabel';
+
+const { meta, Default, IsRequired, WithCustomTypography } = setup({
+    component: InputLabel,
+});
 
 export default {
     title: 'LumX components/input-label/Input Label',
-    component: InputLabel,
-    args: {
-        ...InputLabel.defaultProps,
-        ...Default.args,
-    },
-    argTypes: Default.argTypes,
+    ...meta,
     decorators: [
         /**
          * Associate label with an input
