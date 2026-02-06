@@ -10,6 +10,7 @@ import { ResetTheme } from '../../utils/ResetTheme';
 import { isComponent } from '../../utils/isComponent';
 import Icon from '../icon/Icon.vue';
 import { Text } from '../text';
+import { JSXElement } from '@lumx/core/js/types';
 
 export type ButtonProps = VueToJSXProps<UIProps, 'onClick'>;
 
@@ -50,19 +51,21 @@ const Button = defineComponent(
                     aria-disabled={isAnyDisabled.value}
                     onClick={handleClick}
                     children={
-                        <>
-                            {!isEmpty(props.leftIcon) && props.leftIcon && (
-                                <ResetTheme>
-                                    <Icon icon={props.leftIcon} />
-                                </ResetTheme>
-                            )}
-                            {children && (isComponent(Text)(children) ? children : <span>{children}</span>)}
-                            {!isEmpty(props.rightIcon) && props.rightIcon && (
-                                <ResetTheme>
-                                    <Icon icon={props.rightIcon} />
-                                </ResetTheme>
-                            )}
-                        </>
+                        (
+                            <>
+                                {!isEmpty(props.leftIcon) && props.leftIcon && (
+                                    <ResetTheme>
+                                        <Icon icon={props.leftIcon} />
+                                    </ResetTheme>
+                                )}
+                                {children && (isComponent(Text)(children) ? children : <span>{children}</span>)}
+                                {!isEmpty(props.rightIcon) && props.rightIcon && (
+                                    <ResetTheme>
+                                        <Icon icon={props.rightIcon} />
+                                    </ResetTheme>
+                                )}
+                            </>
+                        ) as JSXElement
                     }
                 />
             );
