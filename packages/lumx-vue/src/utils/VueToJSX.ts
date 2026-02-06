@@ -1,21 +1,14 @@
 import { VNode, SetupContext, EmitsOptions, FunctionalComponent } from 'vue';
 
-import { GenericProps, JSXElement, NestedComponents } from '@lumx/core/js/types';
+import type { NestedComponents } from '@lumx/core/js/types';
+import { VueToJSXProps } from './VueToJSXProps';
 
 /**
  * Props type that includes optional children for JSX compatibility.
  */
-type GenericPropsWithChildren = GenericProps & {
-    children?: JSXElement;
-};
+type GenericPropsWithChildren = Record<string, any>;
 
-/**
- * Props interface for components wrapped with VueToJSX.
- * It omits JSX-specific props like `children` and `className` and adds Vue's `class`.
- */
-export type VueToJSXProps<Props extends GenericPropsWithChildren> = Omit<Props, 'children' | 'className'> & {
-    class?: string;
-};
+export type { VueToJSXProps } from './VueToJSXProps';
 
 type VueEmits = EmitsOptions | Record<string, any[]>;
 
@@ -29,6 +22,14 @@ export interface VueToJSXOptions<Emits extends VueEmits = Record<string, never>>
     events?: string[];
     nestedComponents?: NestedComponents;
 }
+
+export const keysOf = <T>() => {
+    return <K extends readonly (keyof T)[]>(
+        ...keys: [keyof T] extends [K[number]]
+            ? K
+            : [Error: '❌ Missing keys in your list:', Exclude<keyof T, K[number]>]
+    ): K => keys as any;
+};
 
 /**
  * Higher-order component that wraps a LumX Core component (which uses JSX patterns)

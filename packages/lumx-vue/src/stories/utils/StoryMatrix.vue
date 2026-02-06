@@ -23,31 +23,26 @@
     </table>
 </template>
 
-<script setup lang="ts">
-import { computed } from 'vue';
+<script setup lang="ts" generic="Row = any, Col = any">
+import { computed, CSSProperties } from 'vue';
 
-const props = defineProps({
-    rows: {
-        type: Array,
-        required: true,
-    },
-    cols: {
-        type: Array,
-        // Default to a single-item array so the loop runs once
-        default: () => [null],
-    },
-    tableStyle: {
-        type: Object,
-        default: undefined,
-    },
-    firstColStyle: {
-        type: Object,
-        default: undefined,
-    },
-    cellStyle: {
-        type: Object,
-        default: undefined,
-    },
+interface StoryMatrixProps {
+    rows: Row[];
+    cols?: Col[];
+    tableStyle?: CSSProperties;
+    firstColStyle?: CSSProperties;
+    cellStyle?: CSSProperties;
+}
+
+defineSlots<{
+    default(props: { row: Row; col: Col }): any;
+}>();
+
+const props = withDefaults(defineProps<StoryMatrixProps>(), {
+    cols: () => [null] as any,
+    tableStyle: undefined,
+    firstColStyle: undefined,
+    cellStyle: undefined,
 });
 
 const hasMultipleCols = computed(() => {

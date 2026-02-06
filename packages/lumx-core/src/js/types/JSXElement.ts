@@ -1,13 +1,11 @@
 import type React from 'react';
 
-export type JSXElement =
-    | boolean
-    | number
-    | string
-    | React.JSX.Element
-    | React.ReactNode
-    | Iterable<JSXElement>
-    | undefined
-    | null;
+/**
+ * Framework-agnostic type for renderable content.
+ * Vue components should cast VNode[] from slots to this type.
+ *
+ * Note: Uses type-only import to avoid runtime dependencies.
+ */
+export type JSXElement = React.ReactNode;
 
 export type ElementType = React.ElementType;
