@@ -10,11 +10,7 @@ import InputLabelDefaultVue from './Stories/InputLabelDefault.vue';
 export default {
     title: 'LumX components/input-label/Input Label',
     component: InputLabel,
-    args: {
-        ...InputLabel.defaultProps,
-        ...DefaultStory.args,
-    },
-    argTypes: DefaultStory.argTypes,
+    ...DefaultStory,
 };
 
 export const Default = {

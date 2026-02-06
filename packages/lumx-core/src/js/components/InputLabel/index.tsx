@@ -1,11 +1,11 @@
 import { classNames } from '../../utils';
-import { LumxClassName, GenericProps, HasTheme, JSXElement } from '../../types';
+import { LumxClassName, HasTheme, JSXElement, HasClassName, CommonRef } from '../../types';
 import { Typography } from '../../constants';
 
 export const COMPONENT_NAME = 'InputLabel';
 export const InputLabelClassName: LumxClassName<typeof COMPONENT_NAME> = 'lumx-input-label';
 
-export interface InputLabelProps extends GenericProps, HasTheme {
+export interface InputLabelProps extends HasClassName, HasTheme {
     /** Typography variant. */
     typography?: Typography;
     /** Label content. */
@@ -14,6 +14,8 @@ export interface InputLabelProps extends GenericProps, HasTheme {
     htmlFor: string;
     /** Whether the component is required or not. */
     isRequired?: boolean;
+    /** ref to the root element */
+    ref?: CommonRef;
 }
 
 const CLASSNAME = InputLabelClassName;

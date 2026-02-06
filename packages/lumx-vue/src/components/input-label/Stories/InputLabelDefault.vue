@@ -1,5 +1,5 @@
 <template>
-    <InputLabel v-bind="$attrs">
+    <InputLabel v-bind="$attrs" html-for="storybook">
         <slot />
     </InputLabel>
 </template>
