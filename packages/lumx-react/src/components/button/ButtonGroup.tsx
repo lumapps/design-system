@@ -2,13 +2,14 @@ import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import {
     ButtonGroup as UI,
-    ButtonGroupProps,
+    ButtonGroupProps as UIProps,
     CLASSNAME,
     COMPONENT_NAME,
     DEFAULT_PROPS,
 } from '@lumx/core/js/components/Button/ButtonGroup';
+import { GenericProps } from '@lumx/core/js/types';
 
-export type { ButtonGroupProps };
+export interface ButtonGroupProps extends UIProps, GenericProps {}
 
 /**
  * ButtonGroup component.

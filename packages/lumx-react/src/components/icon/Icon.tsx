@@ -1,9 +1,12 @@
-import { Icon as UI, IconProps, IconSizes } from '@lumx/core/js/components/Icon';
+import { Icon as UI, IconProps as UIProps, IconSizes } from '@lumx/core/js/components/Icon';
+import { GenericProps } from '@lumx/core/js/types';
 
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 
-export type { IconProps, IconSizes };
+export type { IconSizes };
+
+export interface IconProps extends UIProps, GenericProps {}
 
 /**
  * Icon component.

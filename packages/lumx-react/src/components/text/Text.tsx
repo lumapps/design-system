@@ -4,9 +4,16 @@ import { useOverflowTooltipLabel } from '@lumx/react/hooks/useOverflowTooltipLab
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { wrapChildrenIconWithSpaces } from '@lumx/react/utils/react/wrapChildrenIconWithSpaces';
-import { getTextProps, TextProps, CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS } from '@lumx/core/js/components/Text';
+import {
+    getTextProps,
+    TextProps as UIProps,
+    CLASSNAME,
+    COMPONENT_NAME,
+    DEFAULT_PROPS,
+} from '@lumx/core/js/components/Text';
+import { GenericProps } from '@lumx/core/js/types';
 
-export type { TextProps };
+export interface TextProps extends UIProps, GenericProps {}
 /**
  * Text component.
  *

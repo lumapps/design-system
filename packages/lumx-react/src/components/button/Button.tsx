@@ -1,12 +1,12 @@
 import isEmpty from 'lodash/isEmpty';
 
-import { Icon, Theme, Text, ThemeProvider } from '@lumx/react';
+import { Icon, Theme, Text, ThemeProvider, GenericProps } from '@lumx/react';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useDisableStateProps } from '@lumx/react/utils/disabled';
 import {
     Button as UI,
-    ButtonProps,
+    ButtonProps as UIProps,
     CLASSNAME,
     COMPONENT_NAME,
     DEFAULT_PROPS,
@@ -14,8 +14,10 @@ import {
 } from '@lumx/core/js/components/Button/Button';
 import { isComponent } from '@lumx/react/utils/type/isComponent';
 
-export type { ButtonProps, ButtonEmphasis };
+export type { ButtonEmphasis };
 export { CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS };
+
+export interface ButtonProps extends UIProps, GenericProps {}
 
 /**
  * Button component.

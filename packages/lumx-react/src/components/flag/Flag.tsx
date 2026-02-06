@@ -1,4 +1,4 @@
-import { Theme, Text } from '@lumx/react';
+import { Theme, Text, GenericProps } from '@lumx/react';
 import {
     CLASSNAME,
     COMPONENT_NAME,
@@ -9,7 +9,7 @@ import {
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
-export interface FlagProps extends Omit<UIProps, 'children'> {
+export interface FlagProps extends GenericProps, Omit<UIProps, 'children'> {
     label: React.ReactNode;
 }
 
