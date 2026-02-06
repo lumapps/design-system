@@ -3,14 +3,15 @@ import {
     CLASSNAME,
     COMPONENT_NAME,
     DEFAULT_PROPS,
-    HeadingProps,
+    HeadingProps as UIProps,
     getHeadingProps,
 } from '@lumx/core/js/components/Heading';
+import { GenericProps } from '@lumx/core/js/types';
 
 import { Text } from '../text';
 import { useHeadingLevel } from './useHeadingLevel';
 
-export type { HeadingProps };
+export interface HeadingProps extends GenericProps, UIProps {}
 
 /**
  * Renders a heading component.

@@ -4,7 +4,7 @@ import { resolveColorWithVariants } from '@lumx/core/js/utils/_internal/color';
 import { classNames } from '../../utils';
 
 import { ColorPalette, Size, Theme, ColorWithVariants, ColorVariant } from '../../constants';
-import type { LumxClassName, GenericProps, HasTheme } from '../../types';
+import type { LumxClassName, HasTheme, HasClassName, CommonRef } from '../../types';
 import { ICON_SIZES } from './constants';
 
 export const COMPONENT_NAME = 'Icon';
@@ -15,7 +15,7 @@ export type IconSizes = (typeof ICON_SIZES)[number];
 /**
  * Defines the props of the component.
  */
-export interface IconProps extends GenericProps, HasTheme {
+export interface IconProps extends HasClassName, HasTheme {
     /** Color variant. */
     color?: ColorWithVariants;
     /** Lightened or darkened variant of the selected icon color. */
@@ -33,6 +33,8 @@ export interface IconProps extends GenericProps, HasTheme {
     alt?: string;
     /** Vertical alignment of the icon (only applies for icons nested in Text/Heading). */
     verticalAlign?: null | 'middle';
+    /** reference to the root element */
+    ref?: CommonRef;
 }
 
 const CLASSNAME = IconClassName;

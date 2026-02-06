@@ -8,8 +8,10 @@ import {
 } from '@lumx/core/js/components/Flag';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { GenericProps } from '@lumx/core/js/types';
 
-export interface FlagProps extends Omit<UIProps, 'children'> {
+export interface FlagProps extends GenericProps, Omit<UIProps, 'children'> {
+    /** Text label of the flag. */
     label: React.ReactNode;
 }
 

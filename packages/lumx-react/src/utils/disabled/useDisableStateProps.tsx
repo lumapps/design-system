@@ -1,7 +1,7 @@
-import { getDisabledState, GenericProps, DisabledState } from '@lumx/core/js/utils/disabledState';
+import { getDisabledState, DisabledProps, DisabledState } from '@lumx/core/js/utils/disabledState';
 import { useDisabledStateContext } from './DisabledStateContext';
 
-interface Output<TProps extends GenericProps> {
+interface Output<TProps extends DisabledProps> {
     /** Is disabled or aria-disabled */
     isAnyDisabled?: boolean;
     disabledStateProps: DisabledState;
@@ -14,7 +14,7 @@ interface Output<TProps extends GenericProps> {
  *
  * @params component props
  */
-export function useDisableStateProps<TProps extends GenericProps>(props: TProps): Output<TProps> {
+export function useDisableStateProps<TProps extends DisabledProps>(props: TProps): Output<TProps> {
     const { disabled, isDisabled, 'aria-disabled': ariaDisabled, onClick, onChange, ...otherProps } = props;
     const disabledStateContext = useDisabledStateContext();
     const disabledStateProps = getDisabledState(disabledStateContext, {

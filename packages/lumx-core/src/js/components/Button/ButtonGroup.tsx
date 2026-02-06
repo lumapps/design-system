@@ -1,14 +1,16 @@
-import type { LumxClassName, GenericProps, JSXElement } from '../../types';
+import type { LumxClassName, HasClassName, JSXElement, CommonRef } from '../../types';
 import { classNames } from '../../utils';
 
 /**
  * Defines the props of the component
  */
-export interface ButtonGroupProps extends GenericProps {
+export interface ButtonGroupProps extends HasClassName {
     /**
      * Children
      */
     children?: JSXElement;
+    /** reference to the root element */
+    ref?: CommonRef;
 }
 
 /**

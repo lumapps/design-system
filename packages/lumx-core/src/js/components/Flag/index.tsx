@@ -1,9 +1,9 @@
 import { ColorPalette, Size, Theme } from '../../constants';
-import type { LumxClassName, GenericProps, HasTheme, JSXElement, NestedComponents } from '../../types';
+import type { LumxClassName, HasTheme, JSXElement, NestedComponents, HasClassName, CommonRef } from '../../types';
 import { classNames } from '../../utils';
 import { Icon } from '../Icon';
 
-export interface FlagProps extends GenericProps, HasTheme {
+export interface FlagProps extends HasClassName, HasTheme {
     /** Color of the component. */
     color?: ColorPalette;
     /** Icon to use before the label. */
@@ -12,6 +12,8 @@ export interface FlagProps extends GenericProps, HasTheme {
     children: JSXElement;
     /** Enable text truncate on overflow */
     truncate?: boolean;
+    /** ref to the root element */
+    ref?: CommonRef;
 }
 
 export const COMPONENT_NAME = 'Flag';

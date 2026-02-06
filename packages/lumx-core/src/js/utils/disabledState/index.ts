@@ -5,7 +5,7 @@ export type DisabledStateContextValue =
       }
     | { state: undefined | null };
 
-export type GenericProps = {
+export type DisabledProps = {
     disabled?: boolean;
     isDisabled?: boolean;
     'aria-disabled'?: boolean | 'true' | 'false';
@@ -22,7 +22,7 @@ export type DisabledState = {
 /**
  * Calculate the disabled state based on context and props.
  */
-export function getDisabledState(context: DisabledStateContextValue | undefined, props: GenericProps): DisabledState {
+export function getDisabledState(context: DisabledStateContextValue | undefined, props: DisabledProps): DisabledState {
     const { disabled, isDisabled = disabled, 'aria-disabled': ariaDisabled } = props;
     return {
         disabled: context?.state === 'disabled' || !!isDisabled,
