@@ -15,10 +15,11 @@ describe('<Message />', () => {
     // Translate core MessageProps to Vue MessageProps
     const renderMessage = (props: MessageProps, options?: SetupRenderOptions<MessageProps>) => {
         const { closeButtonProps, ...restProps } = props;
-        const vueProps: any = {
+        const vueProps = {
             ...restProps,
             closeButtonLabel: closeButtonProps?.label,
         };
+
         return render(Message, { props: vueProps, ...options, slots: { default: props.children } });
     };
 

@@ -1,35 +1,29 @@
-import isEmpty from 'lodash/isEmpty';
 import { defineComponent, computed, useAttrs } from 'vue';
 
-import { Button as ButtonUI, ButtonProps as UIProps } from '@lumx/core/js/components/Button/Button';
+import { IconButton as IconButtonUI, IconButtonProps as UIProps } from '@lumx/core/js/components/Button/IconButton';
 
 import { useTheme } from '../../composables/useTheme';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
-import { ResetTheme } from '../../utils/ResetTheme';
-import { isComponent } from '../../utils/isComponent';
-import { Icon } from '../icon';
-import { Text } from '../text';
-import { JSXElement } from '@lumx/core/js/types';
 
-export type ButtonProps = VueToJSXProps<UIProps, 'onClick'>;
+export type IconButtonProps = VueToJSXProps<UIProps, 'onClick'>;
 
-export interface ButtonEmits {
+export interface IconButtonEmits {
     click: [event: MouseEvent];
 }
 
 /**
- * Button component.
+ * IconButton component.
  *
  * @param  props Component props.
  * @return Vue element.
  */
-const Button = defineComponent(
-    (props: ButtonProps, { slots, emit }) => {
+const IconButton = defineComponent(
+    (props: IconButtonProps, { emit }) => {
         const defaultTheme = useTheme();
         const attrs = useAttrs();
 
-        const { isAnyDisabled, disabledStateProps } = useDisableStateProps(computed(() => props));
+        const { isAnyDisabled, disabledStateProps } = useDisableStateProps(computed(() => ({ ...props, ...attrs })));
 
         const handleClick = (event: MouseEvent) => {
             event.stopImmediatePropagation();
@@ -37,10 +31,8 @@ const Button = defineComponent(
         };
 
         return () => {
-            const children = slots.default?.();
-
             return (
-                <ButtonUI
+                <IconButtonUI
                     {...attrs}
                     {...props}
                     {...disabledStateProps.value}
@@ -48,23 +40,6 @@ const Button = defineComponent(
                     theme={props.theme || defaultTheme}
                     aria-disabled={isAnyDisabled.value ? 'true' : undefined}
                     onClick={handleClick}
-                    children={
-                        (
-                            <>
-                                {!isEmpty(props.leftIcon) && props.leftIcon && (
-                                    <ResetTheme>
-                                        <Icon icon={props.leftIcon} />
-                                    </ResetTheme>
-                                )}
-                                {children && (isComponent(Text)(children) ? children : <span>{children}</span>)}
-                                {!isEmpty(props.rightIcon) && props.rightIcon && (
-                                    <ResetTheme>
-                                        <Icon icon={props.rightIcon} />
-                                    </ResetTheme>
-                                )}
-                            </>
-                        ) as JSXElement
-                    }
                 />
             );
         };
@@ -72,23 +47,24 @@ const Button = defineComponent(
     {
         inheritAttrs: false,
         // Redefine properties so that they come in as `props` on the `defineComponent` function
-        props: keysOf<ButtonProps>()(
+        props: keysOf<IconButtonProps>()(
             'class',
             'color',
             'emphasis',
             'fullWidth',
             'hasBackground',
             'href',
+            'icon',
+            'image',
             'isActive',
             'isDisabled',
             'disabled',
             'isFocused',
             'isHovered',
             'isSelected',
-            'leftIcon',
+            'label',
             'linkAs',
             'name',
-            'rightIcon',
             'size',
             'target',
             'theme',
@@ -103,4 +79,4 @@ const Button = defineComponent(
     },
 );
 
-export default Button;
+export default IconButton;

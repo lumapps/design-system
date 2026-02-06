@@ -23,6 +23,7 @@ export interface BaseButtonProps
     href?: string;
     /** Whether the component is disabled or not. */
     isDisabled?: boolean;
+    disabled?: boolean;
     /** Whether the component is selected or not (unsupported in `high` emphasis). */
     isSelected?: boolean;
     /** Native button name property. */

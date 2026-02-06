@@ -7,18 +7,18 @@ import { render, screen } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
 
 import IconButtonTests, { setup } from '@lumx/core/js/components/Button/IconButtonTests';
+import { CLASSNAME } from '@lumx/core/js/components/Button/Button';
+import { IconButtonProps } from '@lumx/core/js/components/Button/IconButton';
 import { commonTestsSuiteVTL, SetupRenderOptions } from '@lumx/vue/testing';
 
-import { IconButtonProps, IconButton, Button } from '.';
+import { IconButton } from '.';
 import { provideDisabledState } from '../../composables/useDisabledState';
-
-const CLASSNAME = Button.className as string;
 
 describe('<IconButton />', () => {
     const renderComponent = (props: IconButtonProps, options: SetupRenderOptions<IconButtonProps> = {}) => {
         return render(IconButton, {
-            props,
             ...options,
+            props,
         });
     };
 
@@ -34,44 +34,40 @@ describe('<IconButton />', () => {
 
     describe('Props', () => {
         it('should call onClick', async () => {
-            const onClick = vi.fn();
-            const { iconButton } = setupComponent({ onClick });
+            const { iconButton, wrapper } = setupComponent();
             await userEvent.click(iconButton);
-            expect(onClick).toHaveBeenCalledTimes(1);
+            expect(wrapper.emitted('click')).toHaveLength(1);
         });
     });
 
     describe('Disabled state', () => {
         describe('Disabled state', () => {
             it('should render disabled button', async () => {
-                const onClick = vi.fn();
-                const { iconButton } = setupComponent({ disabled: true, onClick } as any);
+                const { iconButton, wrapper } = setupComponent({ isDisabled: true });
                 expect(iconButton).toHaveAttribute('disabled');
                 await userEvent.click(iconButton);
-                expect(onClick).not.toHaveBeenCalled();
+                expect(wrapper.emitted('click')).toBeUndefined();
             });
 
             it('should render disabled link', async () => {
-                const onClick = vi.fn();
-                const { iconButton } = setupComponent({
-                    disabled: true,
+                const { iconButton, wrapper } = setupComponent({
+                    isDisabled: true,
                     href: 'https://example.com',
-                    onClick,
-                } as any);
+                });
+
                 expect(screen.queryByRole('link')).toBeInTheDocument();
                 expect(iconButton).toHaveAttribute('aria-disabled', 'true');
                 // Simulate standard disabled state (not focusable)
                 expect(iconButton).toHaveAttribute('tabindex', '-1');
                 await userEvent.click(iconButton);
-                expect(onClick).not.toHaveBeenCalled();
+                expect(wrapper.emitted('click')).toBeUndefined();
             });
 
             it('should render aria-disabled button', async () => {
-                const onClick = vi.fn();
-                const { iconButton } = setupComponent({ 'aria-disabled': true, onClick });
+                const { iconButton, wrapper } = setupComponent({ 'aria-disabled': true, isDisabled: true });
                 expect(iconButton).toHaveAttribute('aria-disabled');
                 await userEvent.click(iconButton);
-                expect(onClick).not.toHaveBeenCalled();
+                expect(wrapper.emitted('click')).toBeUndefined();
             });
         });
 

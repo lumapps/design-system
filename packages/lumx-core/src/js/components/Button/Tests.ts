@@ -14,12 +14,12 @@ type SetupProps = Partial<ButtonProps>;
  */
 export const setup = (propsOverride: SetupProps = {}, { render, ...options }: SetupOptions<ButtonProps>) => {
     const props: any = { ...propsOverride };
-    render(props, options);
+    const wrapper = render(props, options);
 
     const button = getByClassName(document.body, CLASSNAME);
     const buttonWrapper = queryByClassName(document.body, 'lumx-button-wrapper');
     const icons = queryAllByClassName(button, Icon.className as string);
-    return { props, button, buttonWrapper, icons };
+    return { props, button, buttonWrapper, icons, wrapper };
 };
 
 export default (renderOptions: SetupOptions<ButtonProps>) => {

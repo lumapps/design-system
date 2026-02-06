@@ -3,10 +3,9 @@ import { render } from '@testing-library/vue';
 import { mdiPlus } from '@lumx/icons';
 
 import { commonTestsSuiteVTL, SetupRenderOptions } from '@lumx/vue/testing';
+import { CLASSNAME, ButtonGroupProps } from '@lumx/core/js/components/Button/ButtonGroup';
 
-import { ButtonGroup, ButtonGroupProps, Button } from '.';
-
-const CLASSNAME = ButtonGroup.className as string;
+import { ButtonGroup, Button } from '.';
 
 describe(`<ButtonGroup>`, () => {
     const renderComponent = (

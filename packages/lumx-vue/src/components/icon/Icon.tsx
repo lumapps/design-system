@@ -3,7 +3,7 @@ import { Icon as IconUI, type IconProps as UIProps } from '@lumx/core/js/compone
 
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
-export type IconProps = VueToJSXProps<UIProps>;
+export type IconProps = VueToJSXProps<UIProps, 'ref'>;
 
 /**
  * Icon component.
