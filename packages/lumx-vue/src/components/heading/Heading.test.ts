@@ -1,11 +1,9 @@
 import { render, screen } from '@testing-library/vue';
 
-import BaseHeadingTests from '@lumx/core/js/components/Heading/Tests';
-import { commonTestsSuiteVTL, SetupRenderOptions } from '@lumx/vue/testing';
+import { commonTestsSuiteVTL } from '@lumx/vue/testing';
 import { getByClassName } from '@lumx/core/testing/queries';
-import { Heading, HeadingLevelProvider, HeadingProps } from '.';
-
-const CLASSNAME = Heading.className as string;
+import { CLASSNAME, HeadingProps } from '@lumx/core/js/components/Heading';
+import { Heading, HeadingLevelProvider } from '.';
 
 const setup = (props: Partial<HeadingProps> = {}) => {
     const { container } = render(Heading, { props });
@@ -13,16 +11,26 @@ const setup = (props: Partial<HeadingProps> = {}) => {
 };
 
 describe('<Heading>', () => {
-    const renderHeading = (props: HeadingProps, options: SetupRenderOptions<HeadingProps> = {}) => {
-        const { children, ...restProps } = props;
-        return render(Heading, {
-            props: restProps,
-            slots: children ? { default: children } : undefined,
-            ...options,
+    describe('Common Render', () => {
+        it('should render a Text component with h1 by default', () => {
+            render(Heading, { slots: { default: 'Some text' } });
+            const heading = screen.getByRole('heading', { level: 1, name: 'Some text' });
+            expect(heading).toBeInTheDocument();
+            expect(heading).toHaveClass(CLASSNAME);
+            expect(heading).toHaveClass('lumx-typography-display1');
         });
-    };
 
-    BaseHeadingTests({ render: renderHeading, screen });
+        it('should render with as with the correct default typography', () => {
+            render(Heading, {
+                props: { as: 'h2' },
+                slots: { default: 'Some text' },
+            });
+            const heading = screen.getByRole('heading', { level: 2, name: 'Some text' });
+            expect(heading).toBeInTheDocument();
+            expect(heading).toHaveClass(CLASSNAME);
+            expect(heading).toHaveClass('lumx-typography-headline');
+        });
+    });
 
     describe('Render', () => {
         it('should correctly render levels nested in HeadingLevel', () => {

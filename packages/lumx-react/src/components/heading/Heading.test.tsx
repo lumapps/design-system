@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import BaseHeadingTests from '@lumx/core/js/components/Heading/Tests';
-import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import { getByClassName } from '@lumx/react/testing/utils/queries';
 import { Heading, HeadingProps } from './Heading';
 import { HeadingLevelProvider } from './HeadingLevelProvider';
@@ -14,10 +13,23 @@ const setup = (props: Partial<HeadingProps> = {}) => {
 };
 
 describe(`<${Heading.displayName}>`, () => {
-    const renderHeading = (props: HeadingProps, options?: SetupRenderOptions) =>
-        render(<Heading {...props} />, options);
+    describe('Common Render', () => {
+        it('should render a Text component with h1 by default', () => {
+            setup({ children: 'Some text' });
+            const heading = screen.getByRole('heading', { level: 1, name: 'Some text' });
+            expect(heading).toBeInTheDocument();
+            expect(heading).toHaveClass(CLASSNAME);
+            expect(heading).toHaveClass('lumx-typography-display1');
+        });
 
-    BaseHeadingTests({ render: renderHeading, screen });
+        it('should render with as with the correct default typography', () => {
+            setup({ children: 'Some text', as: 'h2' });
+            const heading = screen.getByRole('heading', { level: 2, name: 'Some text' });
+            expect(heading).toBeInTheDocument();
+            expect(heading).toHaveClass(CLASSNAME);
+            expect(heading).toHaveClass('lumx-typography-headline');
+        });
+    });
 
     describe('Render', () => {
         it('should correctly render levels nested in HeadingLevel', () => {
