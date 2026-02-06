@@ -1,63 +1,26 @@
-import { Message } from '@lumx/vue';
-
-import {
-    Default as DefaultConfig,
-    Base,
-    AllKindsWithBackground as AllKindsWithBackgroundStory,
-    CustomIcon as CustomIconStory,
-    ClosableMessage as ClosableMessageStory,
-} from '@lumx/core/js/components/Message/Stories';
+import { withWrapper } from '@lumx/vue/stories/decorators/withWrapper';
+import { withCombinations } from '@lumx/vue/stories/decorators/withCombinations';
 import { withRender } from '@lumx/vue/stories/utils/withRender';
+import { setup } from '@lumx/core/js/components/Message/Stories';
+
+import { Message } from '@lumx/vue';
 import MessageDefaultVue from './Stories/MessageDefault.vue';
-import MessageAllKindsVue from './Stories/MessageAllKinds.vue';
-import MessageWithClose from './Stories/MessageWithClose.vue';
+
+const { meta, Default, AllKinds, AllKindsWithBackground, CustomIcon, ClosableMessage } = setup({
+    component: Message,
+    render: withRender({ MessageDefaultVue }, '{{ args.children }}'),
+    decorators: { withWrapper, withCombinations },
+    overrides: {
+        ClosableMessage: {
+            args: { closeButtonLabel: 'Close' },
+            argTypes: { onClose: { action: 'close' } },
+        },
+    },
+});
 
 export default {
     title: 'LumX components/message/Message',
-    component: Message,
-    ...DefaultConfig,
+    ...meta,
 };
 
-/**
- * Default message
- */
-export const Default = {
-    ...Base,
-    render: withRender({ MessageDefaultVue }, '{{ args.children }}'),
-};
-
-/**
- * All `kind` variants
- */
-export const AllKinds = {
-    ...Default,
-    render: withRender({ MessageAllKindsVue }, '{{ args.children }}'),
-};
-
-/**
- * All `kind` variants with `hasBackground`
- */
-export const AllKindsWithBackground = {
-    ...AllKinds,
-    ...AllKindsWithBackgroundStory,
-};
-
-/**
- * With custom icon
- */
-export const CustomIcon = {
-    ...Default,
-    ...CustomIconStory,
-};
-
-/**
- * With close button (has background and kind info)
- */
-export const ClosableMessage = {
-    ...Default,
-    ...ClosableMessageStory,
-    argTypes: {
-        onClose: { action: 'close-button-click' },
-    },
-    render: withRender({ MessageWithClose }, '{{ args.children }}'),
-};
+export { Default, AllKinds, AllKindsWithBackground, CustomIcon, ClosableMessage };

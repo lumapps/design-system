@@ -1,25 +1,20 @@
-import { InputHelper } from '@lumx/vue';
-
-import { Default as DefaultConfig, AllKinds as AllKindsStory } from '@lumx/core/js/components/InputHelper/Stories';
+import { withWrapper } from '@lumx/vue/stories/decorators/withWrapper';
+import { withCombinations } from '@lumx/vue/stories/decorators/withCombinations';
 import { withRender } from '@lumx/vue/stories/utils/withRender';
+import { setup } from '@lumx/core/js/components/InputHelper/Stories';
+
+import { InputHelper } from '@lumx/vue';
 import InputHelperDefaultVue from './Stories/InputHelperDefault.vue';
-import InputHelperAllKindsVue from './Stories/InputHelperAllKinds.vue';
+
+const { meta, Default, AllKinds } = setup({
+    component: InputHelper,
+    render: withRender({ InputHelperDefaultVue }, '{{ args.children }}'),
+    decorators: { withWrapper, withCombinations },
+});
 
 export default {
     title: 'LumX components/input-helper/Input Helper',
-    component: InputHelper,
-    ...DefaultConfig,
-    args: {
-        ...DefaultConfig.args,
-        children: 'Some helper text',
-    },
+    ...meta,
 };
 
-export const Default = {
-    render: withRender({ InputHelperDefaultVue }, '{{ args.children }}'),
-};
-
-export const AllKinds = {
-    ...AllKindsStory,
-    render: withRender({ InputHelperAllKindsVue }, '{{ args.children }}'),
-};
+export { Default, AllKinds };

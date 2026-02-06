@@ -1,50 +1,24 @@
-import {
-    AllLevels as AllLevelsStory,
-    Default as DefaultConfig,
-    Base,
-    AllTypography as AllTypographyStory,
-} from '@lumx/core/js/components/Heading/Stories';
-import { Heading } from '.';
+import { withWrapper } from '@lumx/vue/stories/decorators/withWrapper';
+import { withCombinations } from '@lumx/vue/stories/decorators/withCombinations';
 import { withRender } from '@lumx/vue/stories/utils/withRender';
+import { setup } from '@lumx/core/js/components/Heading/Stories';
+
+import { Heading } from '.';
 import HeadingDefaultVue from './Stories/HeadingDefault.vue';
-import HeadingAllLevelsVue from './Stories/HeadingAllLevels.vue';
-import HeadingAllTypographyVue from './Stories/HeadingAllTypography.vue';
 import HeadingNestedHeadingLevelProviderVue from './Stories/HeadingNestedHeadingLevelProvider.vue';
+
+const { meta, Default, AllLevels, AllTypography, NestedHeadingLevelProvider } = setup({
+    component: Heading,
+    render: withRender({ HeadingDefaultVue }, '{{ args.children }}'),
+    decorators: { withWrapper, withCombinations },
+    overrides: {
+        NestedHeadingLevelProvider: { render: withRender({ HeadingNestedHeadingLevelProviderVue }) },
+    },
+});
 
 export default {
     title: 'LumX components/heading/Heading',
-    component: Heading,
-    ...DefaultConfig,
+    ...meta,
 };
 
-/**
- * Default heading with text
- */
-export const Default = {
-    ...Base,
-    render: withRender({ HeadingDefaultVue }, '{{ args.children }}'),
-};
-
-/**
- * All supported heading elements
- */
-export const AllLevels = {
-    ...AllLevelsStory,
-    render: withRender({ HeadingAllLevelsVue }, '{{ args.children }}'),
-};
-
-/**
- * All typography
- */
-export const AllTypography = {
-    ...AllTypographyStory,
-    argTypes: { typography: { control: false } },
-    render: withRender({ HeadingAllTypographyVue }, '{{ args.children }}'),
-};
-
-/**
- * Nest HeadingLevelProvider to increment heading levels
- */
-export const NestedHeadingLevelProvider = {
-    render: withRender({ HeadingNestedHeadingLevelProviderVue }),
-};
+export { Default, AllLevels, AllTypography, NestedHeadingLevelProvider };

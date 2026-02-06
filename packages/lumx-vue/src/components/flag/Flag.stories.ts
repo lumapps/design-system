@@ -1,52 +1,21 @@
-import { Flag } from '@lumx/vue';
-import { withResizableBox } from '@lumx/vue/stories/decorators/withResizableBox';
-
-import {
-    Default as DefaultConfig,
-    Base,
-    WithIcon as WithIconStory,
-    Truncate as TruncateStory,
-    AllColors as AllColorsStory,
-} from '@lumx/core/js/components/Flag/Stories';
+import { withWrapper } from '@lumx/vue/stories/decorators/withWrapper';
+import { withCombinations } from '@lumx/vue/stories/decorators/withCombinations';
 import { withRender } from '@lumx/vue/stories/utils/withRender';
+import { withResizableBox } from '@lumx/vue/stories/decorators/withResizableBox';
+import { setup } from '@lumx/core/js/components/Flag/Stories';
+
+import { Flag } from '@lumx/vue';
 import FlagDefaultVue from './Stories/FlagDefault.vue';
-import FlagAllColorsVue from './Stories/FlagAllColors.vue';
+
+const { meta, Default, WithIcon, AllColors, Truncate } = setup({
+    component: Flag,
+    render: withRender({ FlagDefaultVue }, '{{ args.label }}'),
+    decorators: { withWrapper, withCombinations, withResizableBox },
+});
 
 export default {
-    ...DefaultConfig,
     title: 'LumX components/flag/Flag',
-    component: Flag,
+    ...meta,
 };
 
-/**
- * Default flag with label
- */
-export const Default = {
-    ...Base,
-    render: withRender({ FlagDefaultVue }, '{{ args.label }}'),
-};
-
-/**
- * With icon
- */
-export const WithIcon = {
-    ...WithIconStory,
-    render: Default.render,
-};
-
-/**
- * All `color` variants
- */
-export const AllColors = {
-    ...AllColorsStory,
-    render: withRender({ FlagAllColorsVue }, '{{ args.label }}'),
-};
-
-/**
- * Truncate text option
- */
-export const Truncate = {
-    ...Default,
-    ...TruncateStory,
-    decorators: [withResizableBox()],
-};
+export { Default, WithIcon, AllColors, Truncate };

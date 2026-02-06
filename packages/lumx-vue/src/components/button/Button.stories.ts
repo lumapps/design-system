@@ -1,61 +1,21 @@
-import { Button } from '@lumx/vue';
-
-import {
-    Base as BaseStory,
-    Default as DefaultStory,
-    SizeAndEmphasis as SizeAndEmphasisStory,
-    LinkButton as LinkButtonStory,
-} from '@lumx/core/js/components/Button/Stories';
+import { withWrapper } from '@lumx/vue/stories/decorators/withWrapper';
+import { withCombinations } from '@lumx/vue/stories/decorators/withCombinations';
+import { withThemedBackground } from '@lumx/vue/stories/decorators/withThemedBackground';
 import { withRender } from '@lumx/vue/stories/utils/withRender';
+import { setup } from '@lumx/core/js/components/Button/Stories';
+
+import { Button } from '@lumx/vue';
 import ButtonBaseVue from './Stories/ButtonBase.vue';
-import ButtonSizeAndEmphasisVue from './Stories/ButtonSizeAndEmphasis.vue';
-import ButtonSizeAndColorsVue from './Stories/ButtonSizeAndColors.vue';
+
+const { meta, Base, SizeAndEmphasis, LinkButton, StateVariations } = setup({
+    component: Button,
+    render: withRender({ ButtonBaseVue }, '{{ args.children }}'),
+    decorators: { withWrapper, withCombinations, withThemedBackground },
+});
 
 export default {
     title: 'LumX components/button/Button',
-    ...DefaultStory,
-    component: Button,
-    argTypes: {
-        ...DefaultStory.argTypes,
-        onClick: { action: 'click' },
-    },
+    ...meta,
 };
 
-/**
- * Default button
- */
-export const Base = {
-    ...BaseStory,
-    render: withRender({ ButtonBaseVue }, '{{ args.children }}'),
-};
-
-/**
- * All combinations of size and emphasis
- */
-export const SizeAndEmphasis = {
-    ...SizeAndEmphasisStory,
-    render: withRender({ ButtonSizeAndEmphasisVue }),
-};
-
-export const SizeAndColors = {
-    ...SizeAndEmphasisStory,
-    render: withRender({ ButtonSizeAndColorsVue }),
-};
-
-/**
- * Setting a href to transform the button into a link.
- */
-export const LinkButton = {
-    ...Base,
-    ...LinkButtonStory,
-};
-
-export const StateVariations = {
-    ...Base,
-    args: {
-        ...Base.args,
-        color: 'red',
-        isSelected: true,
-        isFocused: true,
-    },
-};
+export { Base, SizeAndEmphasis, LinkButton, StateVariations };

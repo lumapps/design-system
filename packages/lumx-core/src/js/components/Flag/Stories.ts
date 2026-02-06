@@ -1,35 +1,54 @@
 import { mdiHeart } from '@lumx/icons';
+import { ColorPalette } from '@lumx/core/js/constants';
 import { colorArgType } from '@lumx/core/stories/controls/color';
 import { iconArgType } from '@lumx/core/stories/controls/icons';
 import { loremIpsum } from '@lumx/core/stories/utils/lorem';
-
-export const Default = {
-    title: 'LumX components/flag/Flag',
-    argTypes: { color: colorArgType, icon: iconArgType },
-    args: { label: 'Label' },
-};
+import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
+import type { SetupStoriesOptions } from '@lumx/core/stories/types';
 
 /**
- * Default flag with label
+ * Setup Flag stories for a specific framework (React or Vue).
+ * This function creates all the stories with the appropriate decorators.
+ * Framework-specific render functions or args can be injected via `overrides`.
  */
-export const Base = {};
+export function setup({
+    component,
+    render,
+    decorators: { withCombinations, withResizableBox },
+}: SetupStoriesOptions<{
+    decorators: 'withCombinations' | 'withResizableBox';
+}>) {
+    return {
+        meta: {
+            component,
+            render,
+            argTypes: { color: colorArgType, icon: iconArgType },
+            args: { label: 'Label' },
+        },
 
-/**
- * With icon
- */
-export const WithIcon = { args: { icon: mdiHeart } };
+        /** Default flag with label */
+        Default: {},
 
-/**
- * All `color` variants
- */
-export const AllColors = {
-    ...WithIcon,
-    argTypes: { color: { control: false } },
-};
+        /** With icon */
+        WithIcon: { args: { icon: mdiHeart } },
 
-/**
- * Truncate text option
- */
-export const Truncate = {
-    args: { label: loremIpsum('tiny'), truncate: true },
-};
+        /** All `color` variants */
+        AllColors: {
+            args: { icon: mdiHeart },
+            argTypes: { color: { control: false } },
+            decorators: [
+                withCombinations({
+                    combinations: {
+                        cols: { key: 'color', options: withUndefined(ColorPalette) },
+                    },
+                }),
+            ],
+        },
+
+        /** Truncate text option */
+        Truncate: {
+            args: { label: loremIpsum('tiny'), truncate: true },
+            decorators: [withResizableBox()],
+        },
+    };
+}

@@ -1,30 +1,16 @@
-import { InputHelper, Kind } from '@lumx/react';
+import { InputHelper } from '@lumx/react';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
-import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
-import { AllKinds as AllKindsStory, Default as DefaultConfig } from '@lumx/core/js/components/InputHelper/Stories';
+import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
+import { setup } from '@lumx/core/js/components/InputHelper/Stories';
+
+const { meta, Default, AllKinds } = setup({
+    component: InputHelper,
+    decorators: { withWrapper, withCombinations },
+});
 
 export default {
     title: 'LumX components/input-helper/Input Helper',
-    component: InputHelper,
-    ...DefaultConfig,
-    args: {
-        ...DefaultConfig.args,
-        children: 'Some helper text',
-    },
+    ...meta,
 };
 
-export const Default = {};
-
-/**
- * All `kind` variants
- */
-export const AllKinds = {
-    ...AllKindsStory,
-    decorators: [
-        withCombinations({
-            combinations: {
-                rows: { key: 'kind', options: withUndefined(Kind) },
-            },
-        }),
-    ],
-};
+export { Default, AllKinds };
