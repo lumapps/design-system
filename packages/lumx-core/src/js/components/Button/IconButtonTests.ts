@@ -12,12 +12,12 @@ type SetupProps = Partial<IconButtonProps>;
  */
 export const setup = (propsOverride: SetupProps = {}, { render, ...options }: SetupOptions<IconButtonProps>) => {
     const props: any = { label: 'IconButton', ...propsOverride };
-    render(props, options);
+    const wrapper = render(props, options);
     const iconButton = getByClassName(document.body, CLASSNAME);
     const icon = queryByClassName(iconButton, 'lumx-icon');
     const img = queryByTagName(iconButton, 'IMG');
 
-    return { props, iconButton, icon, img };
+    return { props, iconButton, icon, img, wrapper };
 };
 
 export default (renderOptions: SetupOptions<IconButtonProps>) => {

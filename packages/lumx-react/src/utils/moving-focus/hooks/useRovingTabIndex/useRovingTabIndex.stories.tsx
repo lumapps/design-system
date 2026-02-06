@@ -52,9 +52,9 @@ export const RovingTabIndexButton: React.FC<ButtonProps & { autofocus?: boolean 
             ref={ref}
             disabled={disabled}
             onKeyDown={onKeyDown}
-            onClick={() => {
+            onClick={(event) => {
                 if (onClick) {
-                    onClick();
+                    onClick(event);
                 }
                 handleClick();
             }}

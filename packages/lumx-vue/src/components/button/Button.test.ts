@@ -8,13 +8,12 @@ import { mdiCheck, mdiPlus } from '@lumx/icons';
 import { JSXElement, Theme } from '@lumx/vue';
 
 import ButtonTests, { setup } from '@lumx/core/js/components/Button/Tests';
+import { CLASSNAME, ButtonProps } from '@lumx/core/js/components/Button/Button';
 import { commonTestsSuiteVTL, SetupRenderOptions } from '@lumx/vue/testing';
 import { provideDisabledState } from '../../composables/useDisabledState';
 
-import { Button, ButtonProps } from '.';
+import { Button } from '.';
 import { Text } from '../text';
-
-const CLASSNAME = Button.className as string;
 
 describe('<Button />', () => {
     const renderComponent = (
@@ -51,10 +50,9 @@ describe('<Button />', () => {
         });
 
         it('should call onClick', async () => {
-            const onClick = vi.fn();
-            const { button } = setupComponent({ onClick });
+            const { button, wrapper } = setupComponent();
             await userEvent.click(button);
-            expect(onClick).toHaveBeenCalledTimes(1);
+            expect(wrapper.emitted('click')).toHaveLength(1);
         });
 
         it('should not apply theme to icons', () => {
@@ -76,50 +74,44 @@ describe('<Button />', () => {
     describe('Disabled state', () => {
         describe('Disabled state', () => {
             it('should render disabled button', async () => {
-                const onClick = vi.fn();
-                const { button } = setupComponent({ children: 'Label', disabled: true, onClick } as any);
+                const { button, wrapper } = setupComponent({ children: 'Label', disabled: true } as any);
                 expect(button).toHaveAttribute('disabled');
                 await userEvent.click(button);
-                expect(onClick).not.toHaveBeenCalled();
+                expect(wrapper.emitted('click')).toBeUndefined();
             });
 
             it('should render disabled link', async () => {
-                const onClick = vi.fn();
-                const { button } = setupComponent({
+                const { button, wrapper } = setupComponent({
                     children: 'Label',
                     disabled: true,
                     href: 'https://example.com',
-                    onClick,
                 } as any);
                 expect(screen.queryByRole('link')).toBeInTheDocument();
                 expect(button).toHaveAttribute('aria-disabled', 'true');
                 // Simulate standard disabled state (not focusable)
                 expect(button).toHaveAttribute('tabindex', '-1');
                 await userEvent.click(button);
-                expect(onClick).not.toHaveBeenCalled();
+                expect(wrapper.emitted('click')).toBeUndefined();
             });
 
             it('should render aria-disabled button', async () => {
-                const onClick = vi.fn();
-                const { button } = setupComponent({ children: 'Label', 'aria-disabled': true, onClick });
+                const { button, wrapper } = setupComponent({ children: 'Label', 'aria-disabled': true });
                 expect(button).toHaveAttribute('aria-disabled');
                 await userEvent.click(button);
-                expect(onClick).not.toHaveBeenCalled();
+                expect(wrapper.emitted('click')).toBeUndefined();
             });
 
             it('should render aria-disabled link', async () => {
-                const onClick = vi.fn();
-                const { button } = setupComponent({
+                const { button, wrapper } = setupComponent({
                     children: 'Label',
                     'aria-disabled': true,
                     href: 'https://example.com',
-                    onClick,
                 });
                 expect(button).toHaveAccessibleName('Label');
                 expect(screen.queryByRole('link')).toBeInTheDocument();
                 expect(button).toHaveAttribute('aria-disabled', 'true');
                 await userEvent.click(button);
-                expect(onClick).not.toHaveBeenCalled();
+                expect(wrapper.emitted('click')).toBeUndefined();
             });
         });
 

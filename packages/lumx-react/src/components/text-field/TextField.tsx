@@ -163,7 +163,7 @@ export const TextField = forwardRef<TextFieldProps, HTMLDivElement>((props, ref)
      * and remove focus from the clear button.
      * @param evt On clear event.
      */
-    const handleClear = (evt: React.ChangeEvent) => {
+    const handleClear = (evt: React.MouseEvent) => {
         evt.nativeEvent.preventDefault();
         evt.nativeEvent.stopPropagation();
         (evt.currentTarget as HTMLElement).blur();

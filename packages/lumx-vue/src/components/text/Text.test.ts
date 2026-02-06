@@ -6,6 +6,7 @@ import { Icon, JSXElement, Text } from '@lumx/vue';
 import { queryAllByClassName } from '@lumx/core/testing/queries';
 import BaseTextTests, { setup } from '@lumx/core/js/components/Text/Tests';
 import { TextProps } from '@lumx/core/js/components/Text';
+import { IconClassName } from '@lumx/core/js/components/Icon';
 import { commonTestsSuiteVTL, SetupRenderOptions } from '../../testing/commonTestsSuiteVTL';
 
 describe(`<Text>`, () => {
@@ -14,11 +15,11 @@ describe(`<Text>`, () => {
         options: SetupRenderOptions<TextProps> = {},
     ) => {
         return render(Text, {
-            props,
             slots: {
                 default: props.children,
             },
             ...options,
+            props,
         });
     };
 
@@ -32,7 +33,7 @@ describe(`<Text>`, () => {
             const { element } = setupText({
                 children: ['Some text', h(Icon, { icon: mdiEarth }), 'with icon'] as JSXElement,
             });
-            const icons = queryAllByClassName(element, Icon.className as string);
+            const icons = queryAllByClassName(element, IconClassName);
             expect(icons).toHaveLength(1);
 
             // Icons are all wrapped with spaces

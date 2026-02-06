@@ -1,5 +1,5 @@
 <template>
-    <IconButton v-bind="attrs" @click="handleClick" />
+    <IconButton label="Icon Button" v-bind="attrs" @click="handleClick" />
 </template>
 
 <script setup lang="ts">

@@ -1,11 +1,10 @@
 import { render, screen } from '@testing-library/vue';
 
 import BaseFlagTests, { setup } from '@lumx/core/js/components/Flag/Tests';
+import { CLASSNAME } from '@lumx/core/js/components/Flag';
 import { commonTestsSuiteVTL, SetupRenderOptions } from '@lumx/vue/testing';
 
 import { Flag, FlagProps } from '.';
-
-const CLASSNAME = Flag.className as string;
 
 describe('<Flag />', () => {
     const renderFlag = (props: FlagProps, options?: SetupRenderOptions<FlagProps>) =>

@@ -8,7 +8,7 @@ export type BaseClickableProps = {
     isDisabled?: boolean;
     disabled?: boolean;
     'aria-disabled'?: Booleanish;
-    onClick?: (event: MouseEvent) => void;
+    onClick?: (event: React.MouseEvent) => void;
     ref?: CommonRef;
 };
 
@@ -43,9 +43,9 @@ export const RawClickable = <E extends ClickableElement>(props: RawClickableProp
 
     return (
         <Component
-            aria-disabled={isAnyDisabled || undefined}
             {...forwardedProps}
             {...clickableProps}
+            aria-disabled={isAnyDisabled || undefined}
             onClick={(event: any) => {
                 if (isAnyDisabled) {
                     event.stopPropagation();
