@@ -30,6 +30,9 @@ export { Base, NoWrap, Truncate };
  * Test the update of the `title` attribute when text overflows
  */
 export const TestUpdateTruncateTitleLabel = {
+    args: {
+        as: 'p',
+    },
     render: withRender({ TextTestUpdateTruncateTitleLabelVue }),
 };
 
