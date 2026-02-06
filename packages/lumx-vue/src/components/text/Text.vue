@@ -33,7 +33,7 @@ const { tooltipLabel } = useOverflowTooltipLabel(labelRef);
 const textProps = computed(() =>
     getTextProps({
         ...props,
-        className: attrs.class as string,
+        className: (props.className || attrs.class) as string,
     }),
 );
 
