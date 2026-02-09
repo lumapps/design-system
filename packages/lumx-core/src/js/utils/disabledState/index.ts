@@ -6,7 +6,7 @@ export type DisabledStateContextValue =
     | { state: undefined | null };
 
 export type GenericProps = {
-    disabled?: boolean;
+    disabled?: boolean | null;
     isDisabled?: boolean;
     'aria-disabled'?: boolean | 'true' | 'false';
     onClick?: any;

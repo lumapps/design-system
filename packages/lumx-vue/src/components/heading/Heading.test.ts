@@ -1,11 +1,10 @@
 import { render, screen } from '@testing-library/vue';
 
+import { CLASSNAME } from '@lumx/core/js/components/Heading';
 import BaseHeadingTests from '@lumx/core/js/components/Heading/Tests';
 import { commonTestsSuiteVTL, SetupRenderOptions } from '@lumx/vue/testing';
 import { getByClassName } from '@lumx/core/testing/queries';
 import { Heading, HeadingLevelProvider, HeadingProps } from '.';
-
-const CLASSNAME = Heading.className as string;
 
 const setup = (props: Partial<HeadingProps> = {}) => {
     const { container } = render(Heading, { props });

@@ -15,7 +15,7 @@ export type BaseHookOptions = [
      * Whether or not the DOM element is currently enabled. This value can be updated as appropriate throughout the
      * lifetime of the containing component.
      */
-    disabled?: boolean,
+    disabled?: boolean | null,
     /**
      * An optional string value that must be populated if the roving tabindex is being used in a grid. In that case,
      * set it to a unique key for all tabStops part of the same row that the given DOM element is currently part of. You can update this

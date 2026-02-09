@@ -6,9 +6,9 @@ export type ClickableElement = 'a' | 'button' | ElementType;
 export interface BaseClickableProps {
     children?: JSXElement;
     isDisabled?: boolean;
-    disabled?: boolean;
+    disabled?: boolean | null;
     'aria-disabled'?: Booleanish;
-    onClick?: (event?: any) => void;
+    onClick?: ((event: any) => void) | null;
     ref?: CommonRef;
 }
 

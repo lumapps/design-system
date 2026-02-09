@@ -1,6 +1,6 @@
 import isEmpty from 'lodash/isEmpty';
 
-import { Icon, Theme, Text, ThemeProvider, GenericProps } from '@lumx/react';
+import { Icon, Theme, Text, ThemeProvider } from '@lumx/react';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useDisableStateProps } from '@lumx/react/utils/disabled';
@@ -17,7 +17,12 @@ import { isComponent } from '@lumx/react/utils/type/isComponent';
 export type { ButtonEmphasis };
 export { CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS };
 
-export interface ButtonProps extends GenericProps, UIProps {}
+export interface ButtonProps extends UIProps {
+    /**
+     * Any prop (particularly any supported prop for a HTML element).
+     */
+    [propName: string]: any;
+}
 
 /**
  * Button component.

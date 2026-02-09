@@ -1,4 +1,4 @@
-import { Theme, Text, GenericProps } from '@lumx/react';
+import { Theme, Text } from '@lumx/react';
 import {
     CLASSNAME,
     COMPONENT_NAME,
@@ -9,7 +9,12 @@ import {
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
-export interface FlagProps extends GenericProps, Omit<UIProps, 'children' | 'Text'> {
+export interface FlagProps extends Omit<UIProps, 'children' | 'Text'> {
+    /**
+     * Any prop (particularly any supported prop for a HTML element).
+     */
+    [propName: string]: any;
+    /** Text label of the flag. */
     label: React.ReactNode;
 }
 

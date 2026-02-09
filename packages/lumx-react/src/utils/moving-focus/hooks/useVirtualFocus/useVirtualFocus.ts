@@ -45,7 +45,7 @@ export const useVirtualFocus: (...args: Options) => boolean = (
             domElement.addEventListener('click', onClick);
 
             // Register tab stop in context
-            dispatch({ type: 'REGISTER_TAB_STOP', payload: { id, domElementRef, rowKey, disabled, autofocus } });
+            dispatch({ type: 'REGISTER_TAB_STOP', payload: { id, domElementRef, rowKey, disabled: !!disabled, autofocus } });
 
             return () => {
                 domElement.removeEventListener('click', onClick);
@@ -68,7 +68,7 @@ export const useVirtualFocus: (...args: Options) => boolean = (
     React.useEffect(
         () => {
             if (isMounted.current) {
-                dispatch({ type: 'UPDATE_TAB_STOP', payload: { id, rowKey, disabled } });
+                dispatch({ type: 'UPDATE_TAB_STOP', payload: { id, rowKey, disabled: !!disabled } });
             } else {
                 isMounted.current = true;
             }

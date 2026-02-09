@@ -52,7 +52,7 @@ export const useRovingTabIndex: (...args: BaseHookOptions) => Output = (
     React.useEffect(
         () => {
             const id = getId();
-            dispatch({ type: 'REGISTER_TAB_STOP', payload: { id, domElementRef: ref, rowKey, disabled, autofocus } });
+            dispatch({ type: 'REGISTER_TAB_STOP', payload: { id, domElementRef: ref, rowKey, disabled: !!disabled, autofocus } });
             return () => {
                 dispatch({ type: 'UNREGISTER_TAB_STOP', payload: { id } });
             };
@@ -69,7 +69,7 @@ export const useRovingTabIndex: (...args: BaseHookOptions) => Output = (
     React.useEffect(
         () => {
             if (isMounted.current) {
-                dispatch({ type: 'UPDATE_TAB_STOP', payload: { id: getId(), rowKey, disabled } });
+                dispatch({ type: 'UPDATE_TAB_STOP', payload: { id: getId(), rowKey, disabled: !!disabled } });
             } else {
                 isMounted.current = true;
             }

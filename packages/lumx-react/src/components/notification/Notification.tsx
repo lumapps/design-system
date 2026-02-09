@@ -30,9 +30,9 @@ export interface NotificationProps extends GenericProps, HasTheme {
     /** Z-axis position. */
     zIndex?: number;
     /** On action button click callback. */
-    onActionClick?(): void;
+    onActionClick?(event: any): void | null;
     /** On click callback. */
-    onClick?(): void;
+    onClick?(event: any): void | null;
     /** Whether the notification should be rendered into a DOM node that exists outside the DOM hierarchy of the parent component. */
     usePortal?: boolean;
 }
@@ -91,7 +91,7 @@ export const Notification = forwardRef<NotificationProps, HTMLDivElement>((props
 
     const handleCallback = (evt: React.MouseEvent) => {
         if (isFunction(onActionClick)) {
-            onActionClick();
+            onActionClick(evt);
         }
         evt.stopPropagation();
     };
