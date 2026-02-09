@@ -16,6 +16,8 @@ export interface InputHelperProps extends HasClassName, HasTheme {
     kind?: Kind;
     /** ref to the root element `p` */
     ref?: CommonRef;
+    /** id for the input helper */
+    id?: string;
 }
 
 const CLASSNAME = InputHelperClassName;
