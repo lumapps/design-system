@@ -1,165 +1,58 @@
 import React from 'react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
+import BaseCheckboxTests, { setup } from '@lumx/core/js/components/Checkbox/Tests';
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 
-import { getByClassName, getByTagName, queryByClassName } from '@lumx/react/testing/utils/queries';
-import { render } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { mdiCheck, mdiMinus } from '@lumx/icons';
 import { Checkbox, CheckboxProps } from './Checkbox';
 
 const CLASSNAME = Checkbox.className as string;
 
-type SetupProps = Partial<CheckboxProps>;
-
-/**
- * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
- */
-const setup = (propsOverride: SetupProps = {}, { wrapper }: SetupRenderOptions = {}) => {
-    const props: any = { id: 'fixedId', ...propsOverride };
-    render(<Checkbox {...props} />, { wrapper });
-
-    const checkbox = getByClassName(document.body, CLASSNAME);
-    const helper = queryByClassName(checkbox, `${CLASSNAME}__helper`);
-    const label = queryByClassName(checkbox, `${CLASSNAME}__label`);
-    const input = getByTagName(checkbox, 'input');
-    return { checkbox, helper, label, input, props };
-};
-
 describe(`<${Checkbox.displayName}>`, () => {
-    describe('Props', () => {
-        it('should render correctly', () => {
-            const { checkbox, input, label, helper } = setup();
-            expect(checkbox).toBeInTheDocument();
-            expect(checkbox).toHaveClass(CLASSNAME);
-            expect(checkbox).not.toHaveClass('lumx-checkbox--is-disabled');
-            expect(checkbox).toHaveClass('lumx-checkbox--is-unchecked');
+    const renderCheckbox = (props: CheckboxProps, options?: SetupRenderOptions) => {
+        // Map core props to React props (inputId -> id)
+        const { inputId, ...restProps } = props;
+        return render(<Checkbox id={inputId} {...(restProps as any)} />, options);
+    };
 
-            expect(label).not.toBeInTheDocument();
-            expect(helper).not.toBeInTheDocument();
+    BaseCheckboxTests({ render: renderCheckbox, screen });
 
-            expect(input).toBeInTheDocument();
-            expect(input).not.toBeChecked();
-            expect(input).toHaveAttribute('aria-checked', 'false');
-            expect(input).not.toBeDisabled();
-        });
+    const setupCheckbox = (props: Partial<CheckboxProps> = {}, options: SetupRenderOptions = {}) =>
+        setup(props, { ...options, render: renderCheckbox, screen });
 
-        it('should render disabled and checked', () => {
-            const { checkbox, input } = setup({
-                isDisabled: true,
-                isChecked: true,
-            });
-            expect(checkbox).toHaveClass('lumx-checkbox--is-disabled');
-            expect(checkbox).toHaveClass('lumx-checkbox--is-checked');
-
-            expect(input).toBeChecked();
-            expect(input).toHaveAttribute('aria-checked', 'true');
-            expect(input).toBeDisabled();
-        });
-
-        it('should render intermediate state', () => {
-            const { checkbox, input } = setup({
-                isChecked: 'intermediate',
-            });
-            expect(checkbox).toHaveClass('lumx-checkbox--is-checked');
-
-            expect(input).toBeChecked();
-            expect(input).toHaveAttribute('aria-checked', 'mixed');
-        });
-
-        it('should render helper and label', () => {
-            const id = 'checkbox1';
-            const { props, helper, label, input } = setup({
-                id,
-                helper: 'Test helper',
-                label: 'Test label',
-            });
-
-            expect(helper).toBeInTheDocument();
-            expect(helper).toHaveTextContent(props.helper);
-            expect(helper).toHaveAttribute('id');
-
-            expect(label).toBeInTheDocument();
-            expect(label).toHaveTextContent(props.label);
-            expect(label).toHaveAttribute('for', id);
-
-            expect(input).toHaveAttribute('id', id);
-            expect(input).toHaveAttribute('aria-describedby', helper?.id);
-        });
-
-        it('should forward input props', () => {
-            const { props, input } = setup({
-                inputProps: {
-                    'aria-labelledby': 'labelledby-id',
-                },
-            });
-
-            expect(input).toHaveAttribute('aria-labelledby', props.inputProps['aria-labelledby']);
-        });
-
-        it('should forward name and value to input', () => {
-            const { input } = setup({ name: 'test-name', value: 'test-value' });
-            expect(input).toHaveAttribute('name', 'test-name');
-            expect(input).toHaveAttribute('value', 'test-value');
-        });
-
+    describe('React-specific', () => {
         it('should forward ref to the root element', () => {
             const ref = React.createRef<HTMLDivElement>();
-            setup({ ref } as any);
+            render(<Checkbox id="test" ref={ref} />);
             expect(ref.current).toHaveClass(CLASSNAME);
         });
 
         it('should forward inputRef to the native input', () => {
             const inputRef = React.createRef<HTMLInputElement>();
-            setup({ inputRef });
+            render(<Checkbox id="test" inputRef={inputRef} />);
             expect(inputRef.current).toBeInstanceOf(HTMLInputElement);
         });
-    });
 
-    describe('Icon Rendering', () => {
-        it('should render check icon when checked', () => {
-            const { checkbox } = setup({ isChecked: true });
-            const path = checkbox.querySelector('path');
-            expect(path).toHaveAttribute('d', mdiCheck);
-        });
-
-        it('should render minus icon when intermediate', () => {
-            const { checkbox } = setup({ isChecked: 'intermediate' });
-            const path = checkbox.querySelector('path');
-            expect(path).toHaveAttribute('d', mdiMinus);
-        });
-    });
-
-    describe('Events', () => {
-        const onChange = vi.fn();
-
-        it('should trigger `onChange` when checkbox is clicked', async () => {
-            const value = 'value';
-            const name = 'name';
-            const { input } = setup({ checked: false, onChange, value, name });
-            expect(input).not.toBeChecked();
-
-            await userEvent.click(input);
-
-            expect(onChange).toHaveBeenCalledWith(true, value, name, expect.any(Object));
-        });
-    });
-
-    describe('Disabled state', () => {
         it('should be disabled with isDisabled', async () => {
             const onChange = vi.fn();
-            const { checkbox, input } = setup({ isDisabled: true, onChange });
+            const { container } = render(<Checkbox id="test" isDisabled onChange={onChange} />);
+            const checkbox = container.querySelector(`.${CLASSNAME}`);
+            const input = container.querySelector('input');
 
             expect(checkbox).toHaveClass('lumx-checkbox--is-disabled');
             expect(input).toBeDisabled();
 
             // Should not trigger onChange.
-            await userEvent.click(input);
+            if (input) await userEvent.click(input);
             expect(onChange).not.toHaveBeenCalled();
         });
 
         it('should be disabled with aria-disabled', async () => {
             const onChange = vi.fn();
-            const { checkbox, input } = setup({ 'aria-disabled': true, onChange });
+            const { container } = render(<Checkbox id="test" aria-disabled onChange={onChange} />);
+            const checkbox = container.querySelector(`.${CLASSNAME}`);
+            const input = container.querySelector('input');
 
             expect(checkbox).toHaveClass('lumx-checkbox--is-disabled');
             // Note: input is not disabled (so it can be focused) but it's readOnly.
@@ -168,13 +61,12 @@ describe(`<${Checkbox.displayName}>`, () => {
             expect(input).toHaveAttribute('readOnly');
 
             // Should not trigger onChange.
-            await userEvent.click(input);
+            if (input) await userEvent.click(input);
             expect(onChange).not.toHaveBeenCalled();
         });
     });
 
-    // Common tests suite.
-    commonTestsSuiteRTL(setup, {
+    commonTestsSuiteRTL(setupCheckbox, {
         baseClassName: CLASSNAME,
         forwardClassName: 'checkbox',
         forwardAttributes: 'checkbox',
