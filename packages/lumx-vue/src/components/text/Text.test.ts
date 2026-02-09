@@ -5,6 +5,7 @@ import { mdiEarth } from '@lumx/icons';
 import { Icon, JSXElement, Text } from '@lumx/vue';
 import { queryAllByClassName } from '@lumx/core/testing/queries';
 import BaseTextTests, { setup } from '@lumx/core/js/components/Text/Tests';
+import { CLASSNAME } from '@lumx/core/js/components/Text';
 import { TextProps } from '@lumx/core/js/components/Text';
 import { IconClassName } from '@lumx/core/js/components/Icon';
 import { commonTestsSuiteVTL, SetupRenderOptions } from '../../testing/commonTestsSuiteVTL';
@@ -46,7 +47,7 @@ describe(`<Text>`, () => {
 
     // Common tests suite.
     commonTestsSuiteVTL(setupText, {
-        baseClassName: Text.className as string,
+        baseClassName: CLASSNAME,
         forwardClassName: 'element',
         forwardAttributes: 'element',
         forwardRef: 'element',

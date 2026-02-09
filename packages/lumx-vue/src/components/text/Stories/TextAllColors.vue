@@ -1,7 +1,7 @@
 <template>
     <StoryMatrix :rows="colors" :cols="colorVariants">
         <template #default="{ row, col }">
-            <Text v-bind="$attrs" :color="row" :color-variant="col">
+            <Text as="span" v-bind="$attrs" :color="row" :color-variant="col">
                 Some text <Icon :icon="mdiHeart" /> with icons <Icon :icon="mdiEarth" />
             </Text>
         </template>

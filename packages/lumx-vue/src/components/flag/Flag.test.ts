@@ -7,8 +7,11 @@ import { commonTestsSuiteVTL, SetupRenderOptions } from '@lumx/vue/testing';
 import { Flag, FlagProps } from '.';
 
 describe('<Flag />', () => {
-    const renderFlag = (props: FlagProps, options?: SetupRenderOptions<FlagProps>) =>
-        render(Flag, { props, ...options, slots: { default: props.children } });
+    const renderFlag = (props: FlagProps, options?: SetupRenderOptions<FlagProps>) => {
+        // Remove Text prop from props as it's hardcoded in the Flag component
+        const { Text: _Text, ...restProps } = props as any;
+        return render(Flag, { props: restProps, ...options, slots: { default: props.children } });
+    };
 
     BaseFlagTests({ render: renderFlag, screen });
 

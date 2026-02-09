@@ -6,7 +6,7 @@
         :cell-style="styles.cellStyle"
     >
         <template #default="{ row }">
-            <Text v-bind="$attrs" :white-space="row">
+            <Text as="span" v-bind="$attrs" :white-space="row">
                 <slot />
             </Text>
         </template>

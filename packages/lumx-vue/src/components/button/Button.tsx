@@ -14,7 +14,7 @@ import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { ResetTheme } from '../../utils/ResetTheme';
 import { Icon } from '../icon';
-import Text from '../text/Text.vue';
+import Text from '../text/Text';
 import { JSXElement } from '@lumx/core/js/types';
 
 export type ButtonProps = VueToJSXProps<UIProps>;

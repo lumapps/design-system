@@ -1,7 +1,7 @@
 <template>
     <StoryMatrix :rows="typos">
         <template #default="{ row }">
-            <Text v-bind="$attrs" :typography="row">
+            <Text as="span" v-bind="$attrs" :typography="row">
                 Some text <Icon :icon="mdiHeart" /> with icons <Icon :icon="mdiEarth" />
             </Text>
         </template>
