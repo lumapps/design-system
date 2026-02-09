@@ -1,5 +1,3 @@
-import type { InputHTMLAttributes } from 'react';
-
 import { mdiCheck, mdiMinus } from '@lumx/icons';
 
 import type { JSXElement, LumxClassName, HasTheme, HasAriaDisabled, HasClassName, CommonRef } from '../../types';
@@ -33,9 +31,9 @@ export interface CheckboxProps extends HasTheme, HasClassName, HasAriaDisabled {
     /** Native input value property. */
     value?: string;
     /** optional props for input */
-    inputProps?: InputHTMLAttributes<HTMLInputElement>;
+    inputProps?: Record<string, any>;
     /** Native input ref. */
-    inputRef?: React.Ref<HTMLInputElement>;
+    inputRef?: CommonRef;
     /** Native input id. */
     inputId: string;
     /** On change callback. */
@@ -121,7 +119,7 @@ export const Checkbox = (props: CheckboxProps) => {
                     onChange={handleChange}
                     aria-describedby={helper ? `${inputId}-helper` : undefined}
                     aria-checked={intermediateState ? 'mixed' : Boolean(isChecked)}
-                    readOnly={inputProps.readOnly}
+                    {...(inputProps?.readOnly ? { readOnly: inputProps.readOnly } : {})}
                     {...inputProps}
                 />
 
