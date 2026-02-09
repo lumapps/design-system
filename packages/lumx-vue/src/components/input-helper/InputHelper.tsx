@@ -33,7 +33,7 @@ const InputHelper = defineComponent(
         name: 'InputHelper',
         inheritAttrs: false,
         // Redefine properties so that they come in as `props` on the `defineComponent` function
-        props: keysOf<InputHelperProps>()('kind', 'theme', 'class'),
+        props: keysOf<InputHelperProps>()('kind', 'theme', 'class', 'id'),
     },
 );
 
