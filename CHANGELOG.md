@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   `@lumx/vue`:
+    -   Create the `Checkbox` component
     -   Create the `Heading` component
     -   Create the `Message` component
     -   Create the `Flag` component
@@ -25,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 -   `@lumx/core`:
+    -   Moved `Checkbox` from `@lumx/react`
     -   Moved `Message` from `@lumx/react`
     -   Moved `Flag` from `@lumx/react`
 
