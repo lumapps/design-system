@@ -13,7 +13,7 @@
         "fonteditor-core": "^2.3.2",
         "lodash": "4.17.23",
         "svgo": "^3.2.0",
-        "svgtofont": "^4.0.0",
+        "svgtofont": "^4.2.3",
         "typescript": "^5.4.3"
     },
     "description": "LumX icons",
