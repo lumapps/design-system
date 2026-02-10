@@ -1,11 +1,13 @@
+import type { CSSProperties } from 'react';
+
 import { classNames } from '../../utils';
-import type { GenericProps, TextElement, LumxClassName, JSXElement } from '../../types';
+import type { TextElement, LumxClassName, JSXElement, HasClassName } from '../../types';
 import { ColorWithVariants, ColorVariant, Typography, WhiteSpace } from '../../constants';
 
 /**
  * Defines the props of the component.
  */
-export interface TextProps extends GenericProps {
+export interface TextProps extends HasClassName {
     /**
      * Color variant.
      */
@@ -43,6 +45,8 @@ export interface TextProps extends GenericProps {
      * Children
      */
     children?: JSXElement;
+    /** list of styles to apply */
+    style?: CSSProperties;
 }
 
 /**

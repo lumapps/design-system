@@ -1,5 +1,5 @@
 import { computed, ComputedRef, unref } from 'vue';
-import { getDisabledState, GenericProps, DisabledState } from '@lumx/core/js/utils/disabledState';
+import { getDisabledState, DisabledProps, DisabledState } from '@lumx/core/js/utils/disabledState';
 import { useDisabledStateContext } from './useDisabledState';
 
 interface Output {
@@ -14,7 +14,9 @@ interface Output {
  *
  * @params component props
  */
-export function useDisableStateProps(props: GenericProps | ComputedRef<GenericProps> | (() => GenericProps)): Output {
+export function useDisableStateProps(
+    props: DisabledProps | ComputedRef<DisabledProps> | (() => DisabledProps),
+): Output {
     const disabledStateContext = useDisabledStateContext();
 
     const disabledStateProps = computed(() => {

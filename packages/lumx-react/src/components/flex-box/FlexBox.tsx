@@ -1,12 +1,8 @@
 import React from 'react';
 
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
-import {
-    getFlexBoxProps,
-    FlexBoxProps as CoreFlexBoxProps,
-    CLASSNAME,
-    COMPONENT_NAME,
-} from '@lumx/core/js/components/FlexBox';
+import { getFlexBoxProps, FlexBoxProps as UIProps, CLASSNAME, COMPONENT_NAME } from '@lumx/core/js/components/FlexBox';
+import { GenericProps } from '@lumx/core/js/types';
 
 export type {
     MarginAutoAlignment,
@@ -18,7 +14,7 @@ export type {
 /**
  * Defines the props of the component.
  */
-export interface FlexBoxProps extends CoreFlexBoxProps {
+export interface FlexBoxProps extends GenericProps, UIProps {
     /** Customize the root element. */
     as?: React.ElementType;
 }

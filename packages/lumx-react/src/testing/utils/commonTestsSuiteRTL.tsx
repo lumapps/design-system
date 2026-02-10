@@ -1,6 +1,6 @@
 import React from 'react';
 import { RenderOptions } from '@testing-library/react';
-import { GenericProps, Theme } from '@lumx/react';
+import { GenericProps } from '@lumx/core/js/types';
 import { ThemeProvider } from '@lumx/react/utils/theme/ThemeContext';
 import { invertTheme } from '@lumx/react/utils/theme/invertTheme';
 import {
@@ -10,6 +10,7 @@ import {
     SetupFunction,
     expectTheme,
 } from '@lumx/core/testing/commonTestsSuiteTL';
+import { Theme } from '@lumx/core/js/constants';
 
 export type SetupRenderOptions = RenderOptions;
 export type RenderWrapper = RenderOptions['wrapper'];

@@ -1,7 +1,7 @@
 import { ColorPalette, Emphasis, Size, Theme } from '../../constants';
 import { classNames } from '../../utils';
-import { GenericProps, HasTheme, HasAriaDisabled, AriaAttributes, CommonRef } from '../../types';
-import { RawClickable } from '../RawClickable';
+import { HasTheme, HasAriaDisabled, AriaAttributes, CommonRef, HasClassName } from '../../types';
+import { RawClickable, BaseClickableProps } from '../RawClickable';
 
 /**
  * Button size definition.
@@ -9,10 +9,11 @@ import { RawClickable } from '../RawClickable';
 export type ButtonSize = Extract<Size, 's' | 'm'>;
 
 export interface BaseButtonProps
-    extends GenericProps,
-        Pick<AriaAttributes, 'aria-expanded' | 'aria-haspopup' | 'aria-pressed' | 'aria-label'>,
+    extends Pick<AriaAttributes, 'aria-expanded' | 'aria-haspopup' | 'aria-pressed' | 'aria-label'>,
+        HasClassName,
         HasTheme,
-        HasAriaDisabled {
+        HasAriaDisabled,
+        BaseClickableProps {
     /** Color variant. */
     color?: ColorPalette;
     /** Emphasis variant. */
@@ -35,6 +36,14 @@ export interface BaseButtonProps
     type?: 'submit' | 'reset' | 'button' | undefined;
     /** Custom component for the link (can be used to inject router Link). */
     linkAs?: 'a' | any;
+    /** whether the button is dispalyed in full width or not */
+    fullWidth?: boolean;
+    /** whether the button is currently active or not */
+    isActive?: boolean;
+    /** whether the button is currently focused or not */
+    isFocused?: boolean;
+    /** whether the button is currently focused or not */
+    isHovered?: boolean;
 }
 
 export interface ButtonRootProps extends BaseButtonProps {

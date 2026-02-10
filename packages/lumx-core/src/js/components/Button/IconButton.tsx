@@ -1,7 +1,7 @@
 import { Emphasis, Size } from '../../constants';
 import { BaseButtonProps, ButtonRoot } from './ButtonRoot';
 import { Icon } from '../Icon';
-import type { LumxClassName } from '../../types';
+import type { LumxClassName, JSXElement } from '../../types';
 
 export interface IconButtonProps extends /* @vue-ignore */ BaseButtonProps {
     /**
@@ -55,7 +55,7 @@ export const IconButton = (props: IconButtonProps) => {
         ...forwardedProps
     } = props;
 
-    const defaultChildren = image ? (
+    const defaultChildren = (image ? (
         <img
             // no need to set alt as an aria-label is already set on the button
             alt=""
@@ -63,7 +63,7 @@ export const IconButton = (props: IconButtonProps) => {
         />
     ) : (
         Icon({ icon: icon as string })
-    );
+    )) as unknown as JSXElement;
 
     return ButtonRoot({
         emphasis,

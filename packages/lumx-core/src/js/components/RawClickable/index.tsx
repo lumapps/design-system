@@ -8,7 +8,7 @@ export type BaseClickableProps = {
     isDisabled?: boolean;
     disabled?: boolean;
     'aria-disabled'?: Booleanish;
-    onClick?: (event: MouseEvent) => void;
+    onClick?: (event?: any) => void;
     ref?: CommonRef;
 };
 

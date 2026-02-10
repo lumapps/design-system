@@ -3,8 +3,9 @@ import React, { useContext } from 'react';
 import chunk from 'lodash/chunk';
 
 import { mdiMenuDown } from '@lumx/icons';
-import { Button, FlexBox, GenericProps, List, ListItem, Popover, TextField } from '@lumx/react';
+import { Button, FlexBox, List, ListItem, Popover, TextField } from '@lumx/react';
 import { StoryFn } from '@storybook/react-vite';
+import { GenericProps } from '@lumx/core/js/types';
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 

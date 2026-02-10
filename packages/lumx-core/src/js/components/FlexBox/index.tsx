@@ -2,7 +2,7 @@ import castArray from 'lodash/castArray';
 
 import { Orientation } from '../../constants';
 import { classNames } from '../../utils';
-import type { GenericProps, LumxClassName, JSXElement } from '../../types';
+import type { LumxClassName, JSXElement, HasClassName } from '../../types';
 import type { FlexHorizontalAlignment, FlexVerticalAlignment, GapSize, MarginAutoAlignment } from './types';
 
 export type * from './types';
@@ -10,7 +10,7 @@ export type * from './types';
 /**
  * Defines the props of the component.
  */
-export interface FlexBoxProps extends GenericProps {
+export interface FlexBoxProps extends HasClassName {
     /** Children elements. */
     children?: JSXElement;
     /** Whether the "content filling space" is enabled or not. */
