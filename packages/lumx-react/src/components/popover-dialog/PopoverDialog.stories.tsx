@@ -8,6 +8,7 @@ export default {
     title: 'LumX components/popover-dialog/PopoverDialog',
     component: PopoverDialog,
     parameters: { chromatic: { disableSnapshot: true } },
+    tags: ['!snapshot'],
 };
 
 /**

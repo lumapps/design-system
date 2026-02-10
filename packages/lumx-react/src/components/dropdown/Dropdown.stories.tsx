@@ -29,3 +29,4 @@ InfiniteScroll.parameters = {
     // Disables Chromatic snapshot (not relevant for this story).
     chromatic: { disable: true },
 };
+InfiniteScroll.tags = ['!snapshot'];

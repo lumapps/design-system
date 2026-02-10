@@ -29,9 +29,9 @@ export const excludeCombination = ({ isSelected, emphasis, hasBackground }: any)
 export function setup({
     component,
     render,
-    decorators: { withCombinations, withThemedBackground, withWrapper },
+    decorators: { withCombinations, withThemedBackground },
 }: SetupStoriesOptions<{
-    decorators: 'withCombinations' | 'withThemedBackground' | 'withWrapper';
+    decorators: 'withCombinations' | 'withThemedBackground';
 }>) {
     return {
         meta: {
@@ -85,7 +85,6 @@ export function setup({
                         cols: { key: 'emphasis', options: buttonEmphasis },
                     },
                 }),
-                withWrapper({ maxColumns: 3, itemMinWidth: 350 }),
             ],
         },
 

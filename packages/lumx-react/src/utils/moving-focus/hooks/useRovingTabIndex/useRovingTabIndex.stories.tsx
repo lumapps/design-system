@@ -24,6 +24,8 @@ export default {
         loopAroundColumn: INITIAL_STATE.loopAround.col,
         gridJumpToShortcutDirection: INITIAL_STATE.gridJumpToShortcutDirection,
     },
+    // No need to snapshot these stories
+    tags: ['!snapshot'],
 };
 
 // Button using the `useRovingTabIndex()` hook.

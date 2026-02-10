@@ -61,7 +61,12 @@ function VariableEditor({
     );
 
     return (
-        <FlexBox as="label" orientation="horizontal" hAlign="center" style={{ whiteSpace: 'nowrap' }}>
+        <FlexBox
+            as="label"
+            orientation="horizontal"
+            hAlign="center"
+            style={{ whiteSpace: 'nowrap', fontFamily: 'monospace' }}
+        >
             <span style={{ flexShrink: 0 }}>{key}</span>:
             <input
                 name={key}
@@ -91,7 +96,7 @@ function VariablesEditor({
         [setStyle],
     );
     return (
-        <details style={{ fontFamily: 'monospace' }} className="lumx-spacing-margin-vertical-huge">
+        <details className="lumx-spacing-margin-vertical-huge">
             <summary className="lumx-typography-subtitle2">Edit variables</summary>
             {Object.entries(style).map((variable) => (
                 <VariableEditor

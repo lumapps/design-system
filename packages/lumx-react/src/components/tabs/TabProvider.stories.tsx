@@ -107,6 +107,7 @@ export const Controlled = {
         );
     },
     parameters: { chromatic: { disable: true } },
+    tags: ['!snapshot'],
 };
 
 /* Display tabs far from their tab panels. */
@@ -142,6 +143,7 @@ export const SplitTabListAndTabPanels = {
         );
     },
     parameters: { chromatic: { disable: true } },
+    tags: ['!snapshot'],
 };
 
 /* Dynamically generate tabs. */
@@ -167,4 +169,5 @@ export const DynamicTabs = {
         tabCount: 3,
     },
     parameters: { chromatic: { disable: true } },
+    tags: ['!snapshot'],
 };

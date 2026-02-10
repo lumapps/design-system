@@ -75,7 +75,7 @@ export const AllComponents = {
                 label="Date picker field"
                 nextButtonProps={{ label: 'Next' }}
                 previousButtonProps={{ label: 'Previous' }}
-                value={new Date()}
+                value={new Date('2020-05-18')}
                 onChange={() => {}}
             />
             <Link href="https://example.com">Link</Link>

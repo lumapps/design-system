@@ -161,30 +161,34 @@ export const Original = () => (
         <h1>Ratio: Original</h1>
         <h2>Default</h2>
         <table>
-            <tr>
-                <th>Landscape</th>
-                <th>
-                    Landscape <small>(with original size)</small>
-                </th>
-                <th>Portrait</th>
-                <th>
-                    Portrait <small>(with original size)</small>
-                </th>
-            </tr>
-            <tr>
-                <td>
-                    <Thumbnail alt="landscape image" image={IMAGES.landscape1} />
-                </td>
-                <td>
-                    <Thumbnail alt="landscape image" image={IMAGES.landscape1} imgProps={IMAGE_SIZES.landscape1} />
-                </td>
-                <td>
-                    <Thumbnail alt="portrait image" image={IMAGES.portrait1} />
-                </td>
-                <td>
-                    <Thumbnail alt="portrait image" image={IMAGES.portrait1} imgProps={IMAGE_SIZES.portrait1} />
-                </td>
-            </tr>
+            <thead>
+                <tr>
+                    <th>Landscape</th>
+                    <th>
+                        Landscape <small>(with original size)</small>
+                    </th>
+                    <th>Portrait</th>
+                    <th>
+                        Portrait <small>(with original size)</small>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <Thumbnail alt="landscape image" image={IMAGES.landscape1} />
+                    </td>
+                    <td>
+                        <Thumbnail alt="landscape image" image={IMAGES.landscape1} imgProps={IMAGE_SIZES.landscape1} />
+                    </td>
+                    <td>
+                        <Thumbnail alt="portrait image" image={IMAGES.portrait1} />
+                    </td>
+                    <td>
+                        <Thumbnail alt="portrait image" image={IMAGES.portrait1} imgProps={IMAGE_SIZES.portrait1} />
+                    </td>
+                </tr>
+            </tbody>
         </table>
         <h2>Constrained parent size</h2>
         <FlexBox orientation="horizontal" vAlign="center" gap="huge">
@@ -446,3 +450,4 @@ export const LoadingPlaceholderImage = () => {
 };
 // Disables Chromatic snapshot (not relevant for this story).
 LoadingPlaceholderImage.parameters = { chromatic: { disable: true } };
+LoadingPlaceholderImage.tags = ['!snapshot'];
