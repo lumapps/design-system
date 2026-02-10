@@ -1,9 +1,11 @@
-import { ReactNode, SyntheticEvent, InputHTMLAttributes } from 'react';
-
-import { InputHelper, InputLabel, Theme } from '@lumx/react';
-import { GenericProps, HasTheme, HasAriaDisabled } from '@lumx/react/utils/type';
-import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
+import { Theme } from '@lumx/react';
+import { GenericProps } from '@lumx/react/utils/type';
+import {
+    RadioButton as UI,
+    RadioButtonProps as UIProps,
+    CLASSNAME,
+    COMPONENT_NAME,
+} from '@lumx/core/js/components/RadioButton';
 import { useId } from '@lumx/react/hooks/useId';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
@@ -12,39 +14,7 @@ import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableState
 /**
  * Defines the props of the component.
  */
-export interface RadioButtonProps extends GenericProps, HasTheme, HasAriaDisabled {
-    /** Helper text. */
-    helper?: string;
-    /** Native input id property. */
-    id?: string;
-    /** Native input ref. */
-    inputRef?: React.Ref<HTMLInputElement>;
-    /** Whether it is checked or not. */
-    isChecked?: boolean;
-    /** Whether the component is disabled or not. */
-    isDisabled?: boolean;
-    /** Label content. */
-    label?: ReactNode;
-    /** Native input name property. */
-    name?: string;
-    /** Native input value property. */
-    value?: string;
-    /** On change callback. */
-    onChange?(value?: string, name?: string, event?: SyntheticEvent): void;
-    /** optional props for input */
-    inputProps?: InputHTMLAttributes<HTMLInputElement>;
-}
-
-/**
- * Component display name.
- */
-const COMPONENT_NAME = 'RadioButton';
-
-/**
- * Component default class name and class prefix.
- */
-const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-radio-button';
-const { block, element } = classNames.bem(CLASSNAME);
+export interface RadioButtonProps extends GenericProps, Omit<UIProps, 'inputId'> {}
 
 /**
  * Component default props.
@@ -73,68 +43,32 @@ export const RadioButton = forwardRef<RadioButtonProps, HTMLDivElement>((props, 
         onChange,
         theme = defaultTheme,
         value,
-        inputProps,
+        inputProps = {},
         ...forwardedProps
     } = otherProps;
     const generatedInputId = useId();
     const inputId = id || generatedInputId;
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (onChange) {
-            onChange(value, name, event);
-        }
-    };
-
-    return (
-        <div
-            ref={ref}
-            {...forwardedProps}
-            className={classNames.join(
-                className,
-                block({
-                    'is-checked': isChecked,
-                    'is-disabled': isAnyDisabled,
-                    'is-unchecked': !isChecked,
-                    [`theme-${theme}`]: Boolean(theme),
-                }),
-            )}
-        >
-            <div className={element('input-wrapper')}>
-                <input
-                    ref={inputRef}
-                    className={element('input-native')}
-                    {...disabledStateProps}
-                    id={inputId}
-                    type="radio"
-                    name={name}
-                    value={value}
-                    checked={isChecked}
-                    onChange={handleChange}
-                    readOnly={inputProps?.readOnly || isAnyDisabled}
-                    aria-describedby={helper ? `${inputId}-helper` : undefined}
-                    {...inputProps}
-                />
-
-                <div className={element('input-placeholder')}>
-                    <div className={element('input-background')} />
-                    <div className={element('input-indicator')} />
-                </div>
-            </div>
-
-            <div className={element('content')}>
-                {label && (
-                    <InputLabel htmlFor={inputId} theme={theme} className={element('label')}>
-                        {label}
-                    </InputLabel>
-                )}
-                {helper && (
-                    <InputHelper id={`${inputId}-helper`} theme={theme} className={element('helper')}>
-                        {helper}
-                    </InputHelper>
-                )}
-            </div>
-        </div>
-    );
+    return UI({
+        ref,
+        className,
+        helper,
+        inputRef,
+        isChecked,
+        label,
+        name,
+        onChange,
+        theme,
+        value,
+        inputProps: {
+            ...inputProps,
+            ...disabledStateProps,
+            readOnly: inputProps.readOnly || disabledStateProps['aria-disabled'],
+        },
+        ...forwardedProps,
+        isDisabled: isAnyDisabled,
+        inputId,
+    });
 });
 RadioButton.displayName = COMPONENT_NAME;
 RadioButton.className = CLASSNAME;

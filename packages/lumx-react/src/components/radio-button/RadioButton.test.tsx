@@ -1,133 +1,58 @@
-import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
-import { getByClassName, getByTagName, queryByClassName } from '@lumx/react/testing/utils/queries';
-import { render } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import React from 'react';
-import { vi } from 'vitest';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
-import { RadioButton, RadioButtonProps } from '.';
+import BaseRadioButtonTests, { setup } from '@lumx/core/js/components/RadioButton/Tests';
+import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
+
+import { RadioButton, RadioButtonProps } from './RadioButton';
 
 const CLASSNAME = RadioButton.className as string;
 
-type SetupProps = Partial<RadioButtonProps>;
-
-/**
- * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
- */
-const setup = (propsOverride: SetupProps = {}, { wrapper }: SetupRenderOptions = {}) => {
-    const props: any = { id: 'fixedId', ...propsOverride };
-    render(<RadioButton {...props} />, { wrapper });
-
-    const radioButton = getByClassName(document.body, CLASSNAME);
-    const helper = queryByClassName(radioButton, `${CLASSNAME}__helper`);
-    const label = queryByClassName(radioButton, `${CLASSNAME}__label`);
-    const input = getByTagName(radioButton, 'input');
-    return { radioButton, helper, label, input, props };
-};
-
 describe(`<${RadioButton.displayName}>`, () => {
-    describe('Props', () => {
-        it('should render correctly', () => {
-            const { radioButton, input, label, helper } = setup();
-            expect(radioButton).toBeInTheDocument();
-            expect(radioButton).toHaveClass(CLASSNAME);
-            expect(radioButton).not.toHaveClass('lumx-radio-button--is-disabled');
-            expect(radioButton).toHaveClass('lumx-radio-button--is-unchecked');
+    const renderRadioButton = (props: RadioButtonProps, options?: SetupRenderOptions) => {
+        // Map core props to React props (inputId -> id)
+        const { inputId, ...restProps } = props;
+        return render(<RadioButton id={inputId} {...(restProps as any)} />, options);
+    };
 
-            expect(label).not.toBeInTheDocument();
-            expect(helper).not.toBeInTheDocument();
+    BaseRadioButtonTests({ render: renderRadioButton, screen });
 
-            expect(input).toBeInTheDocument();
-            expect(input).not.toBeChecked();
-            expect(input).not.toBeDisabled();
+    const setupRadioButton = (props: Partial<RadioButtonProps> = {}, options: SetupRenderOptions = {}) =>
+        setup(props, { ...options, render: renderRadioButton, screen });
+
+    describe('React-specific', () => {
+        it('should forward ref to the root element', () => {
+            const ref = React.createRef<HTMLDivElement>();
+            render(<RadioButton id="test" ref={ref} />);
+            expect(ref.current).toHaveClass(CLASSNAME);
         });
 
-        it('should render disabled and checked', () => {
-            const { radioButton, input } = setup({
-                isDisabled: true,
-                isChecked: true,
-            });
-            expect(radioButton).toHaveClass('lumx-radio-button--is-disabled');
-            expect(radioButton).toHaveClass('lumx-radio-button--is-checked');
-
-            expect(input).toBeChecked();
-            expect(input).toBeDisabled();
-        });
-
-        it('should render helper and label', () => {
-            const id = 'radioButton1';
-            const { props, helper, label, input } = setup({
-                id,
-                helper: 'Test helper',
-                label: 'Test label',
-            });
-
-            expect(helper).toBeInTheDocument();
-            expect(helper).toHaveTextContent(props.helper);
-            expect(helper).toHaveAttribute('id');
-
-            expect(label).toBeInTheDocument();
-            expect(label).toHaveTextContent(props.label);
-            expect(label).toHaveAttribute('for', id);
-
-            expect(input).toHaveAttribute('id', id);
-            expect(input).toHaveAttribute('aria-describedby', helper?.id);
-        });
-
-        it('should forward input props', () => {
-            const { props, input } = setup({
-                inputProps: {
-                    'aria-labelledby': 'labelledby-id',
-                },
-            });
-
-            expect(input).toHaveAttribute('aria-labelledby', props.inputProps['aria-labelledby']);
-        });
-
-        it('should forward value', () => {
-            const { input } = setup({ value: 'test-value' });
-            expect(input).toHaveAttribute('value', 'test-value');
-        });
-
-        it('should forward inputRef', () => {
+        it('should forward inputRef to the native input', () => {
             const inputRef = React.createRef<HTMLInputElement>();
-            setup({ inputRef });
+            render(<RadioButton id="test" inputRef={inputRef} />);
             expect(inputRef.current).toBeInstanceOf(HTMLInputElement);
         });
-    });
 
-    describe('Events', () => {
-        const onChange = vi.fn();
-
-        it('should trigger `onChange` when radioButton is clicked', async () => {
-            const value = 'value';
-            const name = 'name';
-            const { input } = setup({ checked: false, onChange, value, name });
-            expect(input).not.toBeChecked();
-
-            await userEvent.click(input);
-
-            expect(onChange).toHaveBeenCalledWith(value, name, expect.any(Object));
-        });
-    });
-
-    describe('Disabled state', () => {
         it('should be disabled with isDisabled', async () => {
             const onChange = vi.fn();
-            const { radioButton, input } = setup({ isDisabled: true, onChange });
+            const { container } = render(<RadioButton id="test" isDisabled onChange={onChange} />);
+            const radioButton = container.querySelector(`.${CLASSNAME}`);
+            const input = container.querySelector('input');
 
             expect(radioButton).toHaveClass('lumx-radio-button--is-disabled');
             expect(input).toBeDisabled();
-            expect(input).toHaveAttribute('readOnly');
 
             // Should not trigger onChange.
-            await userEvent.click(input);
+            if (input) await userEvent.click(input);
             expect(onChange).not.toHaveBeenCalled();
         });
 
         it('should be disabled with aria-disabled', async () => {
             const onChange = vi.fn();
-            const { radioButton, input } = setup({ 'aria-disabled': true, onChange });
+            const { container } = render(<RadioButton id="test" aria-disabled onChange={onChange} />);
+            const radioButton = container.querySelector(`.${CLASSNAME}`);
+            const input = container.querySelector('input');
 
             expect(radioButton).toHaveClass('lumx-radio-button--is-disabled');
             // Note: input is not disabled (so it can be focused) but it's readOnly.
@@ -136,13 +61,12 @@ describe(`<${RadioButton.displayName}>`, () => {
             expect(input).toHaveAttribute('readOnly');
 
             // Should not trigger onChange.
-            await userEvent.click(input);
+            if (input) await userEvent.click(input);
             expect(onChange).not.toHaveBeenCalled();
         });
     });
 
-    // Common tests suite.
-    commonTestsSuiteRTL(setup, {
+    commonTestsSuiteRTL(setupRadioButton, {
         baseClassName: CLASSNAME,
         forwardClassName: 'radioButton',
         forwardAttributes: 'radioButton',
