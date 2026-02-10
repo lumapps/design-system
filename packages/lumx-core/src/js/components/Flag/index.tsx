@@ -1,7 +1,8 @@
 import { ColorPalette, Size, Theme } from '../../constants';
-import type { LumxClassName, HasTheme, JSXElement, NestedComponents, HasClassName, CommonRef } from '../../types';
+import type { LumxClassName, HasTheme, JSXElement, HasClassName, CommonRef } from '../../types';
 import { classNames } from '../../utils';
 import { Icon } from '../Icon';
+import { TextProps } from '../Text';
 
 export interface FlagProps extends HasClassName, HasTheme {
     /** Color of the component. */
@@ -14,6 +15,8 @@ export interface FlagProps extends HasClassName, HasTheme {
     truncate?: boolean;
     /** ref to the root element */
     ref?: CommonRef;
+    /** Text component to use for rendering the label */
+    Text: (props: TextProps) => any;
 }
 
 export const COMPONENT_NAME = 'Flag';
@@ -27,9 +30,8 @@ export const { block, element } = classNames.bem(CLASSNAME);
  * @param  props Component props.
  * @return JSX element.
  */
-export const Flag = (props: FlagProps, nestedComponents?: NestedComponents) => {
-    const { Text } = nestedComponents || {};
-    const { children, icon, color, className, theme, truncate, ...forwardedProps } = props;
+export const Flag = (props: FlagProps) => {
+    const { children, icon, color, className, theme, truncate, Text, ...forwardedProps } = props;
     const flagColor = color || (theme === Theme.light ? ColorPalette.dark : ColorPalette.light);
     const isTruncated = !!truncate;
 
@@ -45,7 +47,7 @@ export const Flag = (props: FlagProps, nestedComponents?: NestedComponents) => {
             )}
         >
             {icon && Icon({ icon, size: Size.xxs, className: element('icon') })}
-            <Text as="span" truncate={!!props.truncate} typography="overline" className={element('label')}>
+            <Text as="span" truncate={!!truncate} typography="overline" className={element('label')}>
                 {children}
             </Text>
         </div>

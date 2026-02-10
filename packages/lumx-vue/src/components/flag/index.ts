@@ -1,8 +1,6 @@
-import { CLASSNAME, FlagProps } from '@lumx/core/js/components/Flag';
+import { FlagProps } from '@lumx/core/js/components/Flag';
 
-import Flag from './Flag.vue';
-
-Flag.className = CLASSNAME;
+import Flag from './Flag';
 
 export { Flag };
 export type { FlagProps };

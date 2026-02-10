@@ -5,7 +5,7 @@
         :first-col-style="{ whiteSpace: 'nowrap', width: '1%' }"
     >
         <template #default="{ row }">
-            <FlexBox v-bind="$attrs" :vAlign="row">
+            <FlexBox v-bind="$attrs" :v-align="row">
                 <Button>Button 1</Button>
                 <Text as="p"> Some paragraph </Text>
                 <Button>Button 3</Button>

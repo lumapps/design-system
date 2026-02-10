@@ -1,7 +1,7 @@
 /* eslint-disable vue/one-component-per-file */
 /* eslint-disable vue/require-prop-types */
 import { defineComponent, h } from 'vue';
-import { render, fireEvent } from '@testing-library/vue';
+import { render } from '@testing-library/vue';
 import { useDisableStateProps } from './useDisableStateProps';
 import { provideDisabledState } from './useDisabledState';
 

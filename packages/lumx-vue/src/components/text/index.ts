@@ -1,8 +1,4 @@
-import { TextProps, CLASSNAME } from '@lumx/core/js/components/Text';
-
-import Text from './Text.vue';
-
-Text.className = CLASSNAME;
+import Text, { TextProps } from './Text';
 
 export { Text };
 export type { TextProps };

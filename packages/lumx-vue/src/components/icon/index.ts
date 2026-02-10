@@ -1,8 +1,6 @@
-import { IconProps, IconSizes, IconClassName } from '@lumx/core/js/components/Icon';
+import { IconProps, IconSizes } from '@lumx/core/js/components/Icon';
 
-import Icon from './Icon.vue';
-
-Icon.className = IconClassName;
+import Icon from './Icon';
 
 export { Icon };
 export type { IconProps, IconSizes };

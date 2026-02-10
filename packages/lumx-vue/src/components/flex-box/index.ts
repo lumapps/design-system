@@ -1,11 +1,7 @@
-import { CLASSNAME } from '@lumx/core/js/components/FlexBox';
-
-import FlexBox from './FlexBox.vue';
-
-FlexBox.className = CLASSNAME;
+import FlexBox, { FlexBoxProps } from './FlexBox';
 
 export { FlexBox };
-export type { FlexBoxProps } from './types';
+export type { FlexBoxProps };
 export type {
     MarginAutoAlignment,
     GapSize,

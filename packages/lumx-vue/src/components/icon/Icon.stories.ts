@@ -13,7 +13,6 @@ import IconInsideTextVue from './Stories/IconInsideText.vue';
 
 export default {
     component: Icon,
-    args: Icon.defaultProps,
     title: 'LumX components/icon/Icon',
     ...DefaultConfig,
 };
