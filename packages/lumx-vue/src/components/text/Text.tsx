@@ -1,13 +1,13 @@
 import { computed, defineComponent, useAttrs, useTemplateRef, type VNodeArrayChildren } from 'vue';
 
-import { getTextProps, type TextProps } from '@lumx/core/js/components/Text';
+import { getTextProps, type TextProps as UIProps } from '@lumx/core/js/components/Text';
 
 import { useOverflowTooltipLabel } from '../../composables/useOverflowTooltipLabel';
 import { useSlot } from '../../composables/useSlot';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { wrapChildrenIconWithSpaces } from '../../utils/wrapChildrenIconWithSpaces';
 
-export type TextVueProps = VueToJSXProps<TextProps>;
+export type TextProps = VueToJSXProps<UIProps>;
 
 /**
  * Text component.
@@ -16,7 +16,7 @@ export type TextVueProps = VueToJSXProps<TextProps>;
  * @return Vue element.
  */
 const Text = defineComponent(
-    (props: TextVueProps, { slots }) => {
+    (props: TextProps, { slots }) => {
         const attrs = useAttrs();
         const defaultSlot = useSlot();
         const labelRef = useTemplateRef<HTMLElement>('tooltip-label');
@@ -58,7 +58,7 @@ const Text = defineComponent(
         name: 'LumxText',
         inheritAttrs: false,
         // Redefine properties so that they come in as `props` on the `defineComponent` function
-        props: keysOf<TextVueProps>()(
+        props: keysOf<TextProps>()(
             'as',
             'color',
             'colorVariant',
