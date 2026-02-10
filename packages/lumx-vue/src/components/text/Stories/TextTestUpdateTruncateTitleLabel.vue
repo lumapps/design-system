@@ -1,7 +1,7 @@
 <template>
     <div style="max-width: 300px">
         <button type="button" @click="lengthen">Lengthen text</button>
-        <Text truncate v-bind="$attrs">
+        <Text as="span" truncate v-bind="$attrs">
             {{ content }}
         </Text>
     </div>

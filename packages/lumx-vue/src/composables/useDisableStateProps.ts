@@ -2,10 +2,11 @@ import { computed, ComputedRef, unref } from 'vue';
 import { getDisabledState, DisabledProps, DisabledState } from '@lumx/core/js/utils/disabledState';
 import { useDisabledStateContext } from './useDisabledState';
 
-interface Output {
+interface Output<TProps extends DisabledProps> {
     /** Is disabled or aria-disabled */
-    isAnyDisabled: ComputedRef<boolean>;
+    isAnyDisabled: ComputedRef<boolean | undefined>;
     disabledStateProps: ComputedRef<DisabledState>;
+    otherProps: ComputedRef<Omit<TProps, 'disabled' | 'isDisabled' | 'aria-disabled' | 'ariaDisabled'>>;
 }
 
 /**
@@ -14,9 +15,9 @@ interface Output {
  *
  * @params component props
  */
-export function useDisableStateProps(
-    props: DisabledProps | ComputedRef<DisabledProps> | (() => DisabledProps),
-): Output {
+export function useDisableStateProps<TProps extends DisabledProps>(
+    props: TProps | ComputedRef<TProps> | (() => TProps),
+): Output<TProps> {
     const disabledStateContext = useDisabledStateContext();
 
     const disabledStateProps = computed(() => {
@@ -24,13 +25,26 @@ export function useDisableStateProps(
         return getDisabledState(disabledStateContext, {
             disabled: p.disabled,
             isDisabled: p.isDisabled,
-            'aria-disabled': p['aria-disabled'],
+            'aria-disabled': p['aria-disabled'] ?? p.ariaDisabled,
         });
     });
 
     const isAnyDisabled = computed(
-        () => disabledStateProps.value['aria-disabled'] || disabledStateProps.value.disabled,
+        () => disabledStateProps.value['aria-disabled'] || disabledStateProps.value.disabled || undefined,
     );
 
-    return { disabledStateProps, isAnyDisabled };
+    const otherProps = computed(() => {
+        const p = typeof props === 'function' ? props() : unref(props);
+        const { disabled, isDisabled, 'aria-disabled': _, ariaDisabled, onClick, onChange, ...rest } = p as any;
+
+        // Only include onClick/onChange if not disabled (matching React behavior)
+        if (!isAnyDisabled.value) {
+            if (onClick) (rest as any).onClick = onClick;
+            if (onChange) (rest as any).onChange = onChange;
+        }
+
+        return rest;
+    });
+
+    return { disabledStateProps, isAnyDisabled, otherProps };
 }
