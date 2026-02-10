@@ -1,8 +1,12 @@
 name: 'CD / Publish'
 
 # This workflow orchestrates the continuous delivery process for the design system.
-# It supports both official releases triggered by merges to 'master' (with a specific commit message)
-# and manual prereleases initiated via workflow_dispatch.
+# It supports:
+# - Official releases triggered by merging a release PR into 'master'
+#   (from release/* branches created by cd-prepare-release.yml)
+# - Manual prereleases initiated via workflow_dispatch (with prereleaseName)
+# - Manual release retries via workflow_dispatch (without prereleaseName, to retry a failed release
+#   using the version already set in packages)
 #
 # For releases: it builds and publishes NPM packages, creates Git tags,
 # deploys the demo site, updates Chromatic, and generates GitHub release notes.
@@ -13,15 +17,18 @@ name: 'CD / Publish'
 # Note: Release version increments are managed by `cd-prepare-release.yml`.
 
 on:
-    push:
+    # Trigger on release PR merged into master (from release/* branches created by cd-prepare-release.yml)
+    pull_request:
         branches:
             - master
+        types:
+            - closed
     workflow_dispatch:
         inputs:
             prereleaseName:
-                description: 'Prerelease name'
-                required: true
+                description: 'Prerelease name (Leave empty to retry a release).'
                 default: 'alpha'
+                required: false
                 type: string
 
 permissions:
@@ -34,27 +41,32 @@ concurrency:
 
 jobs:
     is_release_commit:
-        name: 'Check is release commit'
+        name: 'Check is merged release PR'
         runs-on: ubuntu-latest
+        # Only run for merged PRs from release/* branches (not just closed/dismissed PRs)
+        if: >-
+            github.event_name == 'workflow_dispatch' ||
+            (github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/'))
         outputs:
             version: ${{ steps.check.outputs.version }}
         steps:
-            - if: github.event_name == 'push'
+            - if: github.event_name == 'workflow_dispatch' && !inputs.prereleaseName
               name: 'Checkout repository'
               uses: actions/checkout@v5
-              with:
-                  ref: ${{ github.event.pull_request.head.sha || env.GITHUB_SHA }}
 
-            - if: github.event_name == 'push'
-              name: 'Check is release commit'
+            - name: 'Extract release version'
               id: check
               run: |
                   set -x # verbose
-                  message=$(git show -s --format=%s)
-                  version=$(echo $message | egrep -o '[0-9]+\.[0-9]+\.[0-9]+' || true)
-
-                  # Check is release commit has version
-                  if [[ "$message" == 'chore(release): release v'* ]] && [ -n "$version" ]; then
+                  if [ "${{ github.event_name }}" = "pull_request" ]; then
+                      # Extract version from PR branch name (release/1.2.3 -> 1.2.3)
+                      branch="${{ github.event.pull_request.head.ref }}"
+                      version=$(echo "$branch" | egrep -o '[0-9]+\.[0-9]+\.[0-9]+' || true)
+                  elif [ -z "${{ inputs.prereleaseName }}" ]; then
+                      # Release retry: read version from package.json
+                      version=$(node -p "require('./packages/lumx-core/package.json').version")
+                  fi
+                  if [ -n "$version" ]; then
                       echo "version=$version" >> "$GITHUB_OUTPUT"
                   fi
 
@@ -73,6 +85,7 @@ jobs:
             - name: 'Checkout repository'
               uses: actions/checkout@v5
               with:
+                  ref: ${{ github.event.pull_request.head.sha || github.sha }}
                   # Need to fetch all for the increment package versions step
                   fetch-depth: 0
 
@@ -84,7 +97,7 @@ jobs:
 
             - name: '[prerelease only] Increment package versions'
               id: version
-              if: github.event_name == 'workflow_dispatch'
+              if: github.event_name == 'workflow_dispatch' && inputs.prereleaseName
               uses: ./.github/actions/increment-package-versions
               with:
                   releaseType: 'prerelease'
@@ -113,6 +126,8 @@ jobs:
             - name: 'Checkout repository'
               uses: actions/checkout@v5
               with:
+                  # Tag the release commit (PR head), not the merge commit
+                  ref: ${{ github.event.pull_request.head.sha || github.sha }}
                   token: '${{ secrets.GITBOT_TOKEN }}'
                   fetch-depth: 0
 
@@ -141,6 +156,7 @@ jobs:
             - name: 'Checkout repository'
               uses: actions/checkout@v5
               with:
+                  ref: ${{ github.event.pull_request.head.sha || github.sha }}
                   fetch-depth: 0 # retrieve all the repo history (required by chromatic)
 
             - name: 'Deploy Storybook'
@@ -162,6 +178,7 @@ jobs:
             - name: 'Checkout repository'
               uses: actions/checkout@v5
               with:
+                  ref: ${{ github.event.pull_request.head.sha || github.sha }}
                   fetch-depth: 0 # retrieve all the repo history (required by chromatic)
 
             - name: 'Deploy Storybook'
@@ -183,6 +200,7 @@ jobs:
             - name: 'Checkout repository'
               uses: actions/checkout@v5
               with:
+                  ref: ${{ github.event.pull_request.head.sha || github.sha }}
                   fetch-depth: 0
 
             - name: 'Login to GCR'
@@ -249,6 +267,8 @@ jobs:
         steps:
             - name: 'Checkout repository'
               uses: actions/checkout@v5
+              with:
+                  ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
             - name: 'Create release note'
               uses: ./.github/actions/release-note
