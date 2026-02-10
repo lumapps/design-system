@@ -1,15 +1,14 @@
 import { render, screen } from '@testing-library/vue';
 
 import BaseIconTests, { setup } from '@lumx/core/js/components/Icon/Tests';
+import { IconClassName, IconProps } from '@lumx/core/js/components/Icon';
 import { commonTestsSuiteVTL, SetupRenderOptions } from '@lumx/vue/testing';
 
-import { Icon, IconProps } from '.';
-
-const CLASSNAME = Icon.className as string;
+import { Icon } from '.';
 
 describe('<Icon />', () => {
     const renderIcon = (props: IconProps, options?: SetupRenderOptions<IconProps>) =>
-        render(Icon, { props, ...options });
+        render(Icon, { ...options, props });
 
     BaseIconTests({ render: renderIcon, screen });
 
@@ -18,7 +17,7 @@ describe('<Icon />', () => {
 
     // Common tests suite.
     commonTestsSuiteVTL(setupIcon, {
-        baseClassName: CLASSNAME,
+        baseClassName: IconClassName,
         forwardClassName: 'i',
         forwardAttributes: 'i',
         forwardRef: 'i',
