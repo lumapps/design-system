@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/react`:
     -   Added `A11YLiveMessage` util
     -   Added `InfiniteScroll` util
+    -   Added `SelectionChipGroup` component
 
 ### Changed
 

@@ -186,3 +186,28 @@
     flex-wrap: wrap;
     gap: $lumx-chip-group-spacing * 2;
 }
+
+/* Selection Chip group
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-selection-chip-group {
+  max-width: 100%;
+
+  &:empty {
+    display: none;
+  }
+
+  &__item {
+    display: flex;
+    overflow: hidden;
+  }
+
+  &__chip {
+    overflow: hidden;
+
+    .#{$lumx-base-prefix}-chip__label {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
