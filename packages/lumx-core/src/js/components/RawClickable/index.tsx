@@ -8,7 +8,7 @@ export interface BaseClickableProps {
     isDisabled?: boolean;
     disabled?: boolean | null;
     'aria-disabled'?: Booleanish;
-    onClick?: ((event: any) => void) | null;
+    onClick?: (event?: any) => void;
     ref?: CommonRef;
 }
 

@@ -26,7 +26,7 @@ export interface MessageProps extends HasClassName {
      */
     closeButtonProps?: {
         /** The callback called when the button is clicked */
-        onClick: ((event: any) => void) | null;
+        onClick: (event: any) => void;
         /** The label of the close button. */
         label: string;
     };
