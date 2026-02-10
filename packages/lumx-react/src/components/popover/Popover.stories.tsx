@@ -211,6 +211,7 @@ export const TestUpdatingChildrenAndMovingAnchor = {
         );
     },
     parameters: { chromatic: { disable: true } },
+    tags: ['!snapshot'],
 };
 
 /**
@@ -261,4 +262,5 @@ export const TestScrollingPopover = {
         );
     },
     parameters: { chromatic: { disable: true } },
+    tags: ['!snapshot'],
 };

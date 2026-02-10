@@ -13,17 +13,6 @@ export default defineConfig({
         jsx: 'automatic',
         jsxImportSource: 'react',
     },
-    test: {
-        environment: 'jsdom',
-        globals: true,
-        setupFiles: ['./vitest.setup.ts'],
-        coverage: {
-            reporter: ['json', 'lcov', 'html', 'text'],
-            reportsDirectory: './reports/coverage',
-        },
-        include: ['src/**/*.{test,spec}.{ts,tsx}'],
-        exclude: ['src/**/*.stories.tsx'],
-    },
     plugins: [
         tsconfigPaths(),
         /** Transform @lumx/icons imports to direct ESM imports. */

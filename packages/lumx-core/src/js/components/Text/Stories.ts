@@ -140,6 +140,7 @@ export function setup({
         TestUpdateTruncateTitleLabel: {
             // Disables Chromatic snapshot (not relevant for this story).
             parameters: { chromatic: { disable: true } },
+            tags: ['!snapshot'],
             ...overrides.TestUpdateTruncateTitleLabel,
         },
     };

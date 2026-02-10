@@ -1,4 +1,4 @@
-/* eslint-disable react-hooks/rules-of-hooks,react/jsx-key */
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useRef, useState } from 'react';
 
 import over from 'lodash/over';
@@ -90,14 +90,16 @@ export const WithHeaderFooter = {
 export const WithHeaderFooterChildren = {
     args: {
         children: [
-            <header>
+            <header key="header">
                 <Toolbar
                     label={<Heading typography="title">Dialog heading</Heading>}
                     after={<IconButton label="Close" emphasis="low" icon={mdiClose} />}
                 />
             </header>,
-            <div className="lumx-spacing-padding-huge">{loremIpsum('short')}</div>,
-            <footer>
+            <div key="content" className="lumx-spacing-padding-huge">
+                {loremIpsum('short')}
+            </div>,
+            <footer key="footer">
                 <Toolbar after={<Button>Close</Button>} />
             </footer>,
         ],
@@ -316,3 +318,4 @@ export const FocusTrap = () => {
         </>
     );
 };
+FocusTrap.tags = ['!snapshot'];

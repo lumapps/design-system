@@ -61,6 +61,7 @@ export default {
     argTypes: {
         onClose: { action: true },
     },
+    tags: ['!snapshot'],
 };
 
 /**

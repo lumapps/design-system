@@ -27,7 +27,8 @@
         "strict": true,
         "skipLibCheck": true,
         "target": "es5",
-        "downlevelIteration": true
+        "downlevelIteration": true,
+        "allowImportingTsExtensions": true
     },
     "exclude": ["**/dist/", "**/public/", "node_modules", "packages/lumx-vue/vite.config.mts", "packages/lumx-vue/vitest.setup.ts"]
 }

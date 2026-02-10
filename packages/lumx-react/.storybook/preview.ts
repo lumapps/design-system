@@ -25,5 +25,7 @@ const preview: Preview = {
         theme: { table: { disable: true } },
     },
     decorators: [withGlobalTheme],
+    /** Add 'snapshot' tag to all stories (can be removed with `tags: ['!snapshot']`) */
+    tags: ['snapshot']
 };
 export default preview;
