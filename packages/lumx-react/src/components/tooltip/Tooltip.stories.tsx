@@ -101,6 +101,7 @@ export const HideTooltipOnHiddenAnchor = () => {
     );
 };
 HideTooltipOnHiddenAnchor.parameters = { chromatic: { disableSnapshot: true } };
+HideTooltipOnHiddenAnchor.tags = ['!snapshot'];
 
 /** Test focusing a tooltip anchor programmatically */
 export const TestProgrammaticFocus = () => {
@@ -116,3 +117,4 @@ export const TestProgrammaticFocus = () => {
     );
 };
 TestProgrammaticFocus.parameters = { chromatic: { disableSnapshot: true } };
+TestProgrammaticFocus.tags = ['!snapshot'];

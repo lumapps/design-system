@@ -12,6 +12,8 @@ export default {
         // Disables Chromatic snapshot (not relevant for this story).
         chromatic: { disable: true },
     },
+    // No need to snapshot these stories
+    tags: ['!snapshot'],
 };
 
 // eslint-disable-next-line react/display-name

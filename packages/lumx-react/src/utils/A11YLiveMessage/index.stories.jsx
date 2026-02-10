@@ -8,6 +8,8 @@ const LiveMessagePrefix = 'Here is your new message: ';
 
 export default {
     component: A11YLiveMessage,
+    // No need to snapshot these stories
+    tags: ['!snapshot'],
 };
 
 const Template = (args) => {

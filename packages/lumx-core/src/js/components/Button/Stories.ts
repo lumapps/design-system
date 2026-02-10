@@ -85,7 +85,6 @@ export function setup({
                         cols: { key: 'emphasis', options: buttonEmphasis },
                     },
                 }),
-                withWrapper({ maxColumns: 3, itemMinWidth: 350 }),
             ],
         },
 

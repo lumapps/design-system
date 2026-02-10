@@ -20,7 +20,7 @@ const BASE_RULES = {
     'import/no-extraneous-dependencies': [
         'error',
         {
-            devDependencies: ['**/*.test*', '**/*Tests.ts', '**/*.stories*', '**/testing/**', '**/stories/**'],
+            devDependencies: ['**/*.test*', '**/*Tests.ts', '**/*.stories*', '**/testing/**', '**/stories/**', '**/*.{setup,config}.{mts,ts}'],
         },
     ],
     'indent': 'off',
