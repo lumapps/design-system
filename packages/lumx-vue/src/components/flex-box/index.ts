@@ -1,6 +1,7 @@
 import FlexBox, { FlexBoxProps } from './FlexBox';
 
-export { FlexBox, FlexBoxProps };
+export { FlexBox };
+export type { FlexBoxProps };
 export type {
     MarginAutoAlignment,
     GapSize,

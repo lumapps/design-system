@@ -12,7 +12,7 @@ export const ButtonEmphasis = Emphasis;
 /**
  * Defines the props of the component.
  */
-export interface ButtonProps extends /* @vue-ignore */ BaseButtonProps {
+export interface ButtonProps extends BaseButtonProps {
     /** Left icon (SVG path). */
     leftIcon?: string;
     /** Right icon (SVG path). */

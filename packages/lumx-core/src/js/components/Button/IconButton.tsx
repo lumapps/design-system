@@ -3,7 +3,7 @@ import { BaseButtonProps, ButtonRoot } from './ButtonRoot';
 import { Icon } from '../Icon';
 import type { LumxClassName, JSXElement } from '../../types';
 
-export interface IconButtonProps extends /* @vue-ignore */ BaseButtonProps {
+export interface IconButtonProps extends BaseButtonProps {
     /**
      * Icon (SVG path).
      * If `image` is also set, `image` will be used instead.
@@ -19,6 +19,8 @@ export interface IconButtonProps extends /* @vue-ignore */ BaseButtonProps {
      * If you really don't want an aria-label, you can set an empty label (this is not recommended).
      */
     label: string;
+    /** text to be displayed on hover */
+    title?: string;
 }
 
 /**
