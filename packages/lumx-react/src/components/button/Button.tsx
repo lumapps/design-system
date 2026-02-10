@@ -13,16 +13,12 @@ import {
     ButtonEmphasis,
 } from '@lumx/core/js/components/Button/Button';
 import { isComponent } from '@lumx/react/utils/type/isComponent';
+import { GenericProps } from '@lumx/core/js/types';
 
 export type { ButtonEmphasis };
 export { CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS };
 
-export interface ButtonProps extends UIProps {
-    /**
-     * Any prop (particularly any supported prop for a HTML element).
-     */
-    [propName: string]: any;
-}
+export interface ButtonProps extends UIProps, GenericProps {}
 
 /**
  * Button component.

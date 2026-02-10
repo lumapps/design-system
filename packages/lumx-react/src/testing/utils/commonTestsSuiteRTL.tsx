@@ -1,8 +1,9 @@
 import React from 'react';
 import { RenderOptions } from '@testing-library/react';
-import { GenericProps, Theme } from '@lumx/react';
+import { Theme } from '@lumx/react';
 import { ThemeProvider } from '@lumx/react/utils/theme/ThemeContext';
 import { invertTheme } from '@lumx/react/utils/theme/invertTheme';
+import { GenericProps } from '@lumx/core/js/types';
 import {
     commonTestsSuiteTL as coreCommonTestsSuiteTL,
     Options,

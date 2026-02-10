@@ -8,12 +8,9 @@ import {
 } from '@lumx/core/js/components/Flag';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { GenericProps } from '@lumx/core/js/types';
 
-export interface FlagProps extends Omit<UIProps, 'children' | 'Text'> {
-    /**
-     * Any prop (particularly any supported prop for a HTML element).
-     */
-    [propName: string]: any;
+export interface FlagProps extends GenericProps, Omit<UIProps, 'children' | 'Text'> {
     /** Text label of the flag. */
     label: React.ReactNode;
 }

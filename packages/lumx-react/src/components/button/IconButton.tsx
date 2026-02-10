@@ -9,12 +9,9 @@ import {
     DEFAULT_PROPS,
     IconButtonProps as BaseIconButtonProps,
 } from '@lumx/core/js/components/Button/IconButton';
+import { GenericProps } from '@lumx/core/js/types';
 
-export interface IconButtonProps extends Omit<BaseIconButtonProps, 'children'> {
-    /**
-     * Any prop (particularly any supported prop for a HTML element).
-     */
-    [propName: string]: any;
+export interface IconButtonProps extends GenericProps, Omit<BaseIconButtonProps, 'children'> {
     /**
      * Props to pass to the tooltip.
      * If undefined or if tooltipProps.label is undefined, the label prop will be used as tooltip label.

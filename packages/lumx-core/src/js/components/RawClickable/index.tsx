@@ -3,14 +3,14 @@ import { CommonRef, HasPolymorphicAs, HasRequiredLinkHref, JSXElement, ElementTy
 
 export type ClickableElement = 'a' | 'button' | ElementType;
 
-export interface BaseClickableProps {
+export type BaseClickableProps = {
     children?: JSXElement;
     isDisabled?: boolean;
-    disabled?: boolean | null;
+    disabled?: boolean;
     'aria-disabled'?: Booleanish;
     onClick?: (event?: any) => void;
     ref?: CommonRef;
-}
+};
 
 export type RawClickableProps<E extends ClickableElement> = HasPolymorphicAs<E> &
     HasRequiredLinkHref<E> &
@@ -43,9 +43,9 @@ export const RawClickable = <E extends ClickableElement>(props: RawClickableProp
 
     return (
         <Component
+            aria-disabled={isAnyDisabled || undefined}
             {...forwardedProps}
             {...clickableProps}
-            aria-disabled={isAnyDisabled || undefined}
             onClick={(event: any) => {
                 if (isAnyDisabled) {
                     event.stopPropagation();

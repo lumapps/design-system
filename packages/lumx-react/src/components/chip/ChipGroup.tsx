@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 import { HorizontalAlignment } from '@lumx/core/js/constants';
-import { GenericProps } from '@lumx/react/utils/type';
+import { GenericProps } from '@lumx/core/js/types';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
