@@ -10,4 +10,5 @@ export * from './components/icon';
 export * from './components/input-helper';
 export * from './components/input-label';
 export * from './components/message';
+export * from './components/switch';
 export * from './components/text';
