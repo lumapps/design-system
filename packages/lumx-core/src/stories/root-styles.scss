@@ -1,0 +1,6 @@
+@import '../scss/lumx.scss';
+
+html.theme-dark {
+    color: var(--lumx-color-light-N);
+    background: var(--lumx-color-dark-N);
+}
