@@ -7,7 +7,7 @@ import { setup } from '@lumx/core/js/components/Button/Stories';
 import { Button } from '@lumx/vue';
 import ButtonBaseVue from './Stories/ButtonBase.vue';
 
-const { meta, Base, SizeAndEmphasis, LinkButton, StateVariations } = setup({
+const { meta, ...stories } = setup({
     component: Button,
     render: withRender({ ButtonBaseVue }, '{{ args.children }}'),
     decorators: { withWrapper, withCombinations, withThemedBackground },
@@ -18,4 +18,7 @@ export default {
     ...meta,
 };
 
-export { Base, SizeAndEmphasis, LinkButton, StateVariations };
+export const Base = { ...stories.Base };
+export const SizeAndEmphasis = { ...stories.SizeAndEmphasis };
+export const LinkButton = { ...stories.LinkButton };
+export const StateVariations = { ...stories.StateVariations };

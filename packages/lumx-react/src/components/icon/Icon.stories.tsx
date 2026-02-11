@@ -4,7 +4,7 @@ import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
 import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
 import { setup } from '@lumx/core/js/components/Icon/Stories';
 
-const { meta, SizeAndShape, AllColors, InsideText } = setup({
+const { meta, ...stories } = setup({
     component: Icon,
     decorators: { withWrapper, withCombinations },
     overrides: {
@@ -38,4 +38,6 @@ export default {
     ...meta,
 };
 
-export { SizeAndShape, AllColors, InsideText };
+export const SizeAndShape = { ...stories.SizeAndShape };
+export const AllColors = { ...stories.AllColors };
+export const InsideText = { ...stories.InsideText };

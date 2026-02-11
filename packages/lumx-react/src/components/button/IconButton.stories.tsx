@@ -3,7 +3,7 @@ import { withCombinations } from '@lumx/react/stories/decorators/withCombination
 import { withThemedBackground } from '@lumx/react/stories/decorators/withThemedBackground';
 import { setup } from '@lumx/core/js/components/Button/IconButtonStories';
 
-const { meta, Default, WithImage, IconStateVariations } = setup({
+const { meta, ...stories } = setup({
     component: IconButton,
     decorators: { withCombinations, withThemedBackground },
 });
@@ -13,4 +13,6 @@ export default {
     ...meta,
 };
 
-export { Default, WithImage, IconStateVariations };
+export const Default = { ...stories.Default };
+export const WithImage = { ...stories.WithImage };
+export const IconStateVariations = { ...stories.IconStateVariations };

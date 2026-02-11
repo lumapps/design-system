@@ -13,7 +13,7 @@ import { disableArgTypes } from '@lumx/core/stories/utils/disableArgTypes';
 
 const buttonEmphasis = [Emphasis.high, Emphasis.medium, Emphasis.low];
 
-const { meta, Base, SizeAndEmphasis, LinkButton, StateVariations } = setup({
+const { meta, ...stories } = setup({
     component: Button,
     decorators: { withWrapper, withCombinations, withThemedBackground },
 });
@@ -23,7 +23,10 @@ export default {
     ...meta,
 };
 
-export { Base, SizeAndEmphasis, LinkButton, StateVariations };
+export const Base = { ...stories.Base };
+export const SizeAndEmphasis = { ...stories.SizeAndEmphasis };
+export const LinkButton = { ...stories.LinkButton };
+export const StateVariations = { ...stories.StateVariations };
 
 /** Demo button LumX CSS theming variable */
 export const Theming = {

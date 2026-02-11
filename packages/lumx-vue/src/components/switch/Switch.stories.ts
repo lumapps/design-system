@@ -5,7 +5,7 @@ import { setup } from '@lumx/core/js/components/Switch/Stories';
 import { Switch } from '@lumx/vue';
 import SwitchDefaultVue from './Stories/SwitchDefault.vue';
 
-const { meta, Default, LabelAndHelper, PositionRight, Disabled } = setup({
+const { meta, ...stories } = setup({
     component: Switch,
     render: withRender({ SwitchDefaultVue }),
     decorators: { withCombinations },
@@ -25,4 +25,7 @@ export default {
     },
 };
 
-export { Default, LabelAndHelper, PositionRight, Disabled };
+export const Default = { ...stories.Default };
+export const LabelAndHelper = { ...stories.LabelAndHelper };
+export const PositionRight = { ...stories.PositionRight };
+export const Disabled = { ...stories.Disabled };

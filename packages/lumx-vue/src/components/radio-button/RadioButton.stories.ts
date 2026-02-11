@@ -5,7 +5,7 @@ import { setup } from '@lumx/core/js/components/RadioButton/Stories';
 import { RadioButton } from '@lumx/vue';
 import RadioButtonDefaultVue from './Stories/RadioButtonDefault.vue';
 
-const { meta, Default, LabelAndHelper, Disabled } = setup({
+const { meta, ...stories } = setup({
     component: RadioButton,
     render: withRender({ RadioButtonDefaultVue }),
     decorators: { withCombinations },
@@ -25,4 +25,6 @@ export default {
     },
 };
 
-export { Default, LabelAndHelper, Disabled };
+export const Default = { ...stories.Default };
+export const LabelAndHelper = { ...stories.LabelAndHelper };
+export const Disabled = { ...stories.Disabled };

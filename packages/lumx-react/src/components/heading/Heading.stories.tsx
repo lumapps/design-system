@@ -4,7 +4,7 @@ import { setup } from '@lumx/core/js/components/Heading/Stories';
 
 import { Heading, HeadingLevelProvider } from '.';
 
-const { meta, Default, AllLevels, AllTypography, NestedHeadingLevelProvider } = setup({
+const { meta, ...stories } = setup({
     component: Heading,
     decorators: { withWrapper, withCombinations },
     overrides: {
@@ -42,4 +42,7 @@ export default {
     ...meta,
 };
 
-export { Default, AllLevels, AllTypography, NestedHeadingLevelProvider };
+export const Default = { ...stories.Default };
+export const AllLevels = { ...stories.AllLevels };
+export const AllTypography = { ...stories.AllTypography };
+export const NestedHeadingLevelProvider = { ...stories.NestedHeadingLevelProvider };

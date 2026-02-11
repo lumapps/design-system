@@ -3,7 +3,7 @@ import { withValueOnChange } from '@lumx/react/stories/decorators/withValueOnCha
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 import { setup } from '@lumx/core/js/components/RadioButton/Stories';
 
-const { meta, Default, LabelAndHelper, Disabled } = setup({
+const { meta, ...stories } = setup({
     component: RadioButton,
     decorators: { withCombinations },
 });
@@ -19,4 +19,6 @@ export default {
     ...meta,
 };
 
-export { Default, LabelAndHelper, Disabled };
+export const Default = { ...stories.Default };
+export const LabelAndHelper = { ...stories.LabelAndHelper };
+export const Disabled = { ...stories.Disabled };

@@ -6,7 +6,7 @@ import ButtonGroupVariantsVue from './Stories/ButtonGroupVariants.vue';
 import ButtonOneButtonVue from './Stories/ButtonOneButton.vue';
 import ButtonManyButtonsVue from './Stories/ButtonManyButtons.vue';
 
-const { meta, Variants, OneButton, ManyButtons } = setup({
+const { meta, ...stories } = setup({
     component: ButtonGroup,
     decorators: { withCombinations },
     overrides: {
@@ -27,4 +27,6 @@ export default {
     ...meta,
 };
 
-export { Variants, OneButton, ManyButtons };
+export const Variants = { ...stories.Variants };
+export const OneButton = { ...stories.OneButton };
+export const ManyButtons = { ...stories.ManyButtons };

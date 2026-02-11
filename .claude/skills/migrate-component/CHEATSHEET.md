@@ -235,7 +235,7 @@ export function setup({ component, render, decorators: { withCombinations } }) {
 import { setup } from '@lumx/core/js/components/Component/Stories';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 
-const { meta, Default, WithLabel, Disabled } = setup({
+const { meta, ...stories } = setup({
     component: Component,
     decorators: { withCombinations },
 });
@@ -245,7 +245,9 @@ export default {
     ...meta,
 };
 
-export { Default, WithLabel, Disabled };
+export const Default = { ...stories.Default };
+export const WithLabel = { ...stories.WithLabel };
+export const Disabled = { ...stories.Disabled };
 ```
 
 ### Vue Stories
@@ -255,7 +257,7 @@ import { setup } from '@lumx/core/js/components/Component/Stories';
 import { withRender } from '@lumx/vue/stories/utils/withRender';
 import ComponentDefaultVue from './Stories/ComponentDefault.vue';
 
-const { meta, Default, WithLabel, Disabled } = setup({
+const { meta, ...stories } = setup({
     component: Component,
     render: withRender({ ComponentDefaultVue }),
     decorators: { withCombinations },
@@ -270,7 +272,9 @@ export default {
     },
 };
 
-export { Default, WithLabel, Disabled };
+export const Default = { ...stories.Default };
+export const WithLabel = { ...stories.WithLabel };
+export const Disabled = { ...stories.Disabled };
 ```
 
 ## Verification Commands

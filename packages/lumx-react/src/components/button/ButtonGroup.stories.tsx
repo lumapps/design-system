@@ -3,7 +3,7 @@ import { mdiMenuDown } from '@lumx/icons';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 import { setup } from '@lumx/core/js/components/Button/ButtonGroupStories';
 
-const { meta, Variants, OneButton, ManyButtons } = setup({
+const { meta, ...stories } = setup({
     component: ButtonGroup,
     decorators: { withCombinations },
     overrides: {
@@ -41,4 +41,6 @@ export default {
     ...meta,
 };
 
-export { Variants, OneButton, ManyButtons };
+export const Variants = { ...stories.Variants };
+export const OneButton = { ...stories.OneButton };
+export const ManyButtons = { ...stories.ManyButtons };

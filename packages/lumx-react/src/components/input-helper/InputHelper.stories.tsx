@@ -3,7 +3,7 @@ import { withCombinations } from '@lumx/react/stories/decorators/withCombination
 import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
 import { setup } from '@lumx/core/js/components/InputHelper/Stories';
 
-const { meta, Default, AllKinds } = setup({
+const { meta, ...stories } = setup({
     component: InputHelper,
     decorators: { withWrapper, withCombinations },
 });
@@ -13,4 +13,5 @@ export default {
     ...meta,
 };
 
-export { Default, AllKinds };
+export const Default = { ...stories.Default };
+export const AllKinds = { ...stories.AllKinds };
