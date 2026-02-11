@@ -22,6 +22,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   Fixed publish workflow on merge commit
+-   `@lumx/vue`:
+    -   Build now correctly fixes all imports from `lumx/core`
 
 
 ## [4.3.0][] - 2026-02-10
