@@ -1,14 +1,16 @@
 ---
-frameworks: ['react']
+frameworks: ['react', 'vue']
 ---
-import * as Demo1 from './react/demo1.tsx';
+
+import * as ReactDemo1 from './react/demo1.tsx';
+import * as VueDemo1 from './vue/demo1.vue';
 import ReactRadioButton from 'lumx-docs:@lumx/react/components/radio-button/RadioButton';
 
 # Radio button
 
 **Radio buttons display exclusive options to chose from.**
 
-<DemoBlock withThemeSwitcher demo={{ react: Demo1 }} />
+<DemoBlock withThemeSwitcher demo={{ react: ReactDemo1, vue: VueDemo1 }} />
 
 ### Accessibility concerns
 
