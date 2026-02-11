@@ -1,15 +1,15 @@
 <template>
-    <FlexBox fill-space gap="big" orientation="horizontal">
-        <Button full-width emphasis="high" :theme="theme">Single full width button</Button>
+    <FlexBox :fill-space="true" gap="big" orientation="horizontal">
+        <Button :full-width="true" emphasis="high" :theme="theme">Single full width button</Button>
     </FlexBox>
 
-    <FlexBox fill-space gap="big" orientation="horizontal">
-        <Button full-width emphasis="medium" :theme="theme">Two full width buttons</Button>
-        <Button full-width emphasis="medium" :theme="theme">Two full width buttons</Button>
+    <FlexBox :fill-space="true" gap="big" orientation="horizontal">
+        <Button :full-width="true" emphasis="medium" :theme="theme">Two full width buttons</Button>
+        <Button :full-width="true" emphasis="medium" :theme="theme">Two full width buttons</Button>
     </FlexBox>
 
-    <FlexBox fill-space gap="big" orientation="horizontal">
-        <Button full-width emphasis="medium" :theme="theme">Single full width button</Button>
+    <FlexBox :fill-space="true" gap="big" orientation="horizontal">
+        <Button :full-width="true" emphasis="medium" :theme="theme">Single full width button</Button>
         <Button emphasis="medium" :theme="theme">Button</Button>
     </FlexBox>
 </template>
