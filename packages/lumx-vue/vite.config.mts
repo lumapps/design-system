@@ -24,16 +24,16 @@ const fixEsmImports = () => ({
         for (const fileName in bundle) {
             const chunk = bundle[fileName];
             if (chunk.type === 'chunk') {
-                // 1. Fix directory imports specifically for @lumx/core constants and types
+                // 1. Fix directory imports for @lumx/core (add /index.js to directory imports)
                 chunk.code = chunk.code.replace(
-                    /from\s+['"](@lumx\/core\/js\/(?:constants|types))['"]/g,
+                    /from\s+['"](@lumx\/core\/js\/[^'"]+?)(?<!\.js)['"]/g,
                     "from '$1/index.js'",
                 );
 
-                // 2. Fix other extensionless imports (like icons or relative files)
+                // 2. Fix other extensionless imports (like icons, core utils, or relative files)
                 // This regex avoids adding .js if it's already there or if it's a directory we just fixed
                 chunk.code = chunk.code.replace(
-                    /from\s+['"]((?:@lumx\/icons\/esm\/|\.).*?)(?<!\.js)['"]/g,
+                    /from\s+['"]((?:@lumx\/(?:icons\/esm\/|core\/js\/)|\.).*?)(?<!\.js)['"]/g,
                     "from '$1.js'",
                 );
             }
