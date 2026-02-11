@@ -1,46 +1,24 @@
-import { AspectRatio, GlobalSize, Theme, ColorPalette } from '@lumx/react';
-import { GenericProps, HasTheme, ValueOf } from '@lumx/react/utils/type';
-import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
+import { Theme } from '@lumx/react';
+import { GenericProps } from '@lumx/react/utils/type';
+import {
+    SkeletonRectangle as UI,
+    SkeletonRectangleProps as UIProps,
+    SkeletonRectangleVariant,
+    SKELETON_RECTANGLE_CLASSNAME as CLASSNAME,
+    SKELETON_RECTANGLE_COMPONENT_NAME as COMPONENT_NAME,
+    SKELETON_RECTANGLE_DEFAULT_PROPS as UI_DEFAULT_PROPS,
+} from '@lumx/core/js/components/Skeleton';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
-/**
- * Skeleton variants.
- */
-export const SkeletonRectangleVariant = { squared: 'squared', rounded: 'rounded', pill: 'pill' } as const;
-export type SkeletonRectangleVariant = ValueOf<typeof SkeletonRectangleVariant>;
+export { SkeletonRectangleVariant };
 
 /**
  * Defines the props of the component.
  */
-export interface SkeletonRectangleProps extends GenericProps, HasTheme {
-    /** Aspect ratio (use with width and not height). */
-    aspectRatio?: Extract<AspectRatio, 'square' | 'horizontal' | 'vertical' | 'wide'>;
-    /** Height size. */
-    height?: GlobalSize;
-    /** Border variant. */
-    variant?: SkeletonRectangleVariant;
-    /** Width size. */
-    width?: GlobalSize;
-    /** The color of the skeleton. */
-    color?: ColorPalette;
-}
+export interface SkeletonRectangleProps extends GenericProps, UIProps {}
 
-const DEFAULT_PROPS: Partial<SkeletonRectangleProps> = {
-    variant: SkeletonRectangleVariant.squared,
-};
-
-/**
- * Component display name.
- */
-const COMPONENT_NAME = 'SkeletonRectangle';
-
-/**
- * Component default class name and class prefix.
- */
-const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-skeleton-rectangle';
-const { block, element } = classNames.bem(CLASSNAME);
+const DEFAULT_PROPS: Partial<SkeletonRectangleProps> = UI_DEFAULT_PROPS;
 
 /**
  * SkeletonRectangle component.
@@ -62,25 +40,17 @@ export const SkeletonRectangle = forwardRef<SkeletonRectangleProps, HTMLDivEleme
         ...forwardedProps
     } = props;
 
-    return (
-        <div
-            ref={ref}
-            {...forwardedProps}
-            className={classNames.join(
-                className,
-                block({
-                    [`aspect-ratio-${aspectRatio}`]: Boolean(aspectRatio),
-                    [`height-${height}`]: Boolean(aspectRatio ? undefined : height),
-                    [`theme-${theme}`]: Boolean(theme),
-                    [`variant-${variant}`]: Boolean(variant),
-                    [`width-${width}`]: Boolean(width),
-                    [`color-${color}`]: Boolean(color),
-                }),
-            )}
-        >
-            <div className={element('inner')} />
-        </div>
-    );
+    return UI({
+        ref,
+        aspectRatio,
+        className,
+        height,
+        theme,
+        variant,
+        width,
+        color,
+        ...forwardedProps,
+    });
 });
 SkeletonRectangle.displayName = COMPONENT_NAME;
 SkeletonRectangle.className = CLASSNAME;

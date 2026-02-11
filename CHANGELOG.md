@@ -14,12 +14,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/vue`:
     -   Create the `Switch` component
     -   Create the `RadioButton` component
+    -   Create the `SkeletonCircle` component
+    -   Create the `SkeletonRectangle` component
+    -   Create the `SkeletonTypography` component
 
 ### Changed
 
 -   `@lumx/core`:
     -   Moved `Switch` from `@lumx/react`
     -   Moved `RadioButton` from `@lumx/react`
+    -   Moved `SkeletonCircle` from `@lumx/react`
+    -   Moved `SkeletonRectangle` from `@lumx/react`
+    -   Moved `SkeletonTypography` from `@lumx/react`
 
 ### Fixed
 
