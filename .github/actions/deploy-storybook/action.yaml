@@ -31,7 +31,7 @@ runs:
                   );
 
         - name: 'Update PR body: Deploying state'
-          if: github.event.pull_request
+          if: github.event.pull_request && github.event.pull_request.state == 'open'
           uses: ./.github/actions/update-pr-body
           with:
               pattern: 'StoryBook ${{ inputs.package }}: [^\n]*'
@@ -50,7 +50,7 @@ runs:
               projectToken: ${{ inputs.chromatic_token }}
               workingDir: ${{ steps.vars.outputs.package_path }}
 
-        - if: failure() && github.event.pull_request
+        - if: failure() && github.event.pull_request && github.event.pull_request.state == 'open'
           name: 'Update PR body: Failure state'
           uses: ./.github/actions/update-pr-body
           with:
@@ -60,7 +60,7 @@ runs:
               keepLastMatch: true
 
         - name: 'Update PR body: Deployed state'
-          if: github.event.pull_request
+          if: github.event.pull_request && github.event.pull_request.state == 'open'
           uses: ./.github/actions/update-pr-body
           with:
               pattern: 'StoryBook ${{ inputs.package }}: [^\n]*'
