@@ -1,29 +1,25 @@
+import { render, screen } from '@testing-library/react';
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
-import { render } from '@testing-library/react';
 import { queryByClassName } from '@lumx/react/testing/utils/queries';
-import { ColorPalette } from '@lumx/react';
-import { SkeletonCircle, SkeletonCircleProps } from './SkeletonCircle';
+import BaseSkeletonCircleTests from '@lumx/core/js/components/Skeleton/SkeletonCircleTests';
+import type { SkeletonCircleProps } from '@lumx/core/js/components/Skeleton';
+import { SkeletonCircle } from './SkeletonCircle';
 
 const CLASSNAME = SkeletonCircle.className as string;
 
-const setup = (props: Partial<SkeletonCircleProps> = {}, { wrapper }: SetupRenderOptions = {}) => {
-    render(<SkeletonCircle {...(props as any)} />, { wrapper });
-    const skeletonCircle = queryByClassName(document.body, CLASSNAME);
-    return { props, skeletonCircle };
-};
-
 describe(`<${SkeletonCircle.displayName}>`, () => {
-    describe('Props', () => {
-        it('should render with size', () => {
-            const { skeletonCircle } = setup({ size: 'xl' });
-            expect(skeletonCircle).toHaveClass(`${CLASSNAME}--size-xl`);
-        });
+    const renderSkeletonCircle = (props: SkeletonCircleProps, options?: SetupRenderOptions) => {
+        return render(<SkeletonCircle {...(props as any)} />, options);
+    };
 
-        it('should render with color', () => {
-            const { skeletonCircle } = setup({ color: ColorPalette.primary });
-            expect(skeletonCircle).toHaveClass(`${CLASSNAME}--color-primary`);
-        });
-    });
+    // Run core tests
+    BaseSkeletonCircleTests({ render: renderSkeletonCircle, screen });
+
+    const setup = (props: Partial<SkeletonCircleProps> = {}, { wrapper }: SetupRenderOptions = {}) => {
+        render(<SkeletonCircle {...(props as any)} />, { wrapper });
+        const skeletonCircle = queryByClassName(document.body, CLASSNAME);
+        return { props, skeletonCircle };
+    };
 
     // Common tests suite.
     commonTestsSuiteRTL(setup, {

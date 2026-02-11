@@ -1,34 +1,25 @@
+import { render, screen } from '@testing-library/react';
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
-import { render } from '@testing-library/react';
 import { queryByClassName } from '@lumx/react/testing/utils/queries';
-import { ColorPalette, Typography } from '@lumx/react';
-import { SkeletonTypography, SkeletonTypographyProps } from './SkeletonTypography';
+import BaseSkeletonTypographyTests from '@lumx/core/js/components/Skeleton/SkeletonTypographyTests';
+import type { SkeletonTypographyProps } from '@lumx/core/js/components/Skeleton';
+import { SkeletonTypography } from './SkeletonTypography';
 
 const CLASSNAME = SkeletonTypography.className as string;
 
-const setup = (props: Partial<SkeletonTypographyProps> = {}, { wrapper }: SetupRenderOptions = {}) => {
-    render(<SkeletonTypography {...(props as any)} />, { wrapper });
-    const skeletonTypography = queryByClassName(document.body, CLASSNAME);
-    return { props, skeletonTypography };
-};
-
 describe(`<${SkeletonTypography.displayName}>`, () => {
-    describe('Props', () => {
-        it('should render with typography', () => {
-            const { skeletonTypography } = setup({ typography: Typography.body1 });
-            expect(skeletonTypography).toHaveClass(`${CLASSNAME}--typography-body1`);
-        });
+    const renderSkeletonTypography = (props: SkeletonTypographyProps, options?: SetupRenderOptions) => {
+        return render(<SkeletonTypography {...(props as any)} />, options);
+    };
 
-        it('should render with width', () => {
-            const { skeletonTypography } = setup({ width: '100px' });
-            expect(skeletonTypography).toHaveStyle('width: 100px');
-        });
+    // Run core tests
+    BaseSkeletonTypographyTests({ render: renderSkeletonTypography, screen });
 
-        it('should render with color', () => {
-            const { skeletonTypography } = setup({ color: ColorPalette.primary });
-            expect(skeletonTypography).toHaveClass(`${CLASSNAME}--color-primary`);
-        });
-    });
+    const setup = (props: Partial<SkeletonTypographyProps> = {}, { wrapper }: SetupRenderOptions = {}) => {
+        render(<SkeletonTypography {...(props as any)} />, { wrapper });
+        const skeletonTypography = queryByClassName(document.body, CLASSNAME);
+        return { props, skeletonTypography };
+    };
 
     // Common tests suite.
     commonTestsSuiteRTL(setup, {

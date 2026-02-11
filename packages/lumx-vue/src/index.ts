@@ -10,6 +10,7 @@ export * from './components/icon';
 export * from './components/input-helper';
 export * from './components/input-label';
 export * from './components/message';
-export * from './components/switch';
 export * from './components/radio-button';
+export * from './components/skeleton';
+export * from './components/switch';
 export * from './components/text';
