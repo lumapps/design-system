@@ -173,24 +173,32 @@ This content only appears when React is selected.
 
 ### PropTable
 
-Displays React component props documentation:
+Displays component props, events, and slots documentation. Automatically switches between React and Vue docs based on the selected framework.
 
 ```mdx
 import ReactButton from 'lumx-docs:@lumx/react/components/button/Button';
 import ReactIconButton from 'lumx-docs:@lumx/react/components/button/IconButton';
+import VueButton from 'lumx-docs:@lumx/vue/components/button/Button';
+import VueIconButton from 'lumx-docs:@lumx/vue/components/button/IconButton';
 
 ### Button properties
 
-<PropTable docs={{ react: ReactButton }} />
+<PropTable docs={{ react: ReactButton, vue: VueButton }} />
 
 ### IconButton properties
 
-<PropTable docs={{ react: ReactIconButton }} />
+<PropTable docs={{ react: ReactIconButton, vue: VueIconButton }} />
 ```
 
-The component must be imported using the `lumx-docs:` prefix to access the documentation metadata.
+Components must be imported using the `lumx-docs:` prefix which triggers the documentation extraction webpack loader. This works for both `@lumx/react` and `@lumx/vue` packages.
 
-Multiple PropTables can be shown for related components.
+Multiple PropTables can be shown for related components. The `vue` key is optional -- omit it for components that only exist in React.
+
+**What gets displayed:**
+
+-   **Props**: Shown for both React and Vue. Includes name, type, required flag, default value, and description.
+-   **Events**: Shown for Vue only (React represents events as callback props). Extracted from `emitSchema` objects or inline `emits` arrays in the Vue component source.
+-   **Slots**: Shown for Vue only (React uses `children` prop). Currently only the `default` slot is detected.
 
 ## File Structure
 
