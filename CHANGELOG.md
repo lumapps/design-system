@@ -11,11 +11,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/vue`:
     -   Create the `Switch` component
+    -   Create the `RadioButton` component
 
 ### Changed
 
 -   `@lumx/core`:
     -   Moved `Switch` from `@lumx/react`
+    -   Moved `RadioButton` from `@lumx/react`
 
 ### Fixed
 

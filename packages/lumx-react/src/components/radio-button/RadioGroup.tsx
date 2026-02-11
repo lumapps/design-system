@@ -1,8 +1,7 @@
 import { ReactNode } from 'react';
 
 import { GenericProps } from '@lumx/react/utils/type';
-import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
+import { RadioGroup as UI, CLASSNAME, COMPONENT_NAME } from '@lumx/core/js/components/RadioGroup';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
@@ -14,16 +13,6 @@ export interface RadioGroupProps extends GenericProps {
 }
 
 /**
- * Component display name.
- */
-const COMPONENT_NAME = 'RadioGroup';
-
-/**
- * Component default class name and class prefix.
- */
-const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-radio-group';
-
-/**
  * RadioGroup component.
  *
  * @param  props Component props.
@@ -33,11 +22,12 @@ const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-radio-group';
 export const RadioGroup = forwardRef<RadioGroupProps, HTMLDivElement>((props, ref) => {
     const { children, className, ...forwardedProps } = props;
 
-    return (
-        <div ref={ref} {...forwardedProps} className={classNames.join(className, CLASSNAME)}>
-            {children}
-        </div>
-    );
+    return UI({
+        ref,
+        className,
+        children,
+        ...forwardedProps,
+    });
 });
 RadioGroup.displayName = COMPONENT_NAME;
 RadioGroup.className = CLASSNAME;

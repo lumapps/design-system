@@ -46,6 +46,13 @@ const Button = defineComponent(
                 return;
             }
 
+            // IMPORTANT: Prevent double event emission when using JSX syntax.
+            // Vue's JSX transform treats props starting with 'on' (e.g., onClick) as both:
+            // 1. A prop passed to the component
+            // 2. An automatic event listener for matching emitted events
+            // Without stopImmediatePropagation, the 'click' event would be emitted twice:
+            // - Once when the core component calls the onClick prop
+            // - Again when Vue's event system catches the emitted 'click' event
             event.stopImmediatePropagation();
             emit('click', event);
         };
