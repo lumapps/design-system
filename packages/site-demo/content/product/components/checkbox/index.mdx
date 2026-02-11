@@ -1,14 +1,16 @@
 ---
-frameworks: ['react']
+frameworks: ['react', 'vue']
 ---
-import * as Demo1 from './react/demo1.tsx';
+
+import * as ReactDemo1 from './react/demo1.tsx';
+import * as VueDemo1 from './vue/demo1.vue';
 import ReactCheckbox from 'lumx-docs:@lumx/react/components/checkbox/Checkbox';
 
 # Checkbox
 
 **Checkboxes allow users to select none, one, or more items.**
 
-<DemoBlock withThemeSwitcher demo={{ react: Demo1 }} />
+<DemoBlock withThemeSwitcher demo={{ react: ReactDemo1, vue: VueDemo1 }} />
 
 ### Accessibility concerns
 
