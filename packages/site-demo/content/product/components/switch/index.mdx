@@ -1,14 +1,16 @@
 ---
-frameworks: ['react']
+frameworks: ['react', 'vue']
 ---
-import * as Demo1 from './react/demo1.tsx';
+
+import * as ReactDemo1 from './react/demo1.tsx';
+import * as VueDemo1 from './vue/demo1.vue';
 import ReactSwitch from 'lumx-docs:@lumx/react/components/switch/Switch';
 
 # Switch
 
 **Switches are on/off toggles for a single option.**
 
-<DemoBlock withThemeSwitcher demo={{ react: Demo1 }} />
+<DemoBlock withThemeSwitcher demo={{ react: ReactDemo1, vue: VueDemo1 }} />
 
 ### Accessibility concerns
 
