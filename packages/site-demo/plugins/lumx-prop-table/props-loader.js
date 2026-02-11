@@ -1,18 +1,25 @@
 const path = require('path');
 const { createProject } = require('./docgen.js');
 const { parseReactComponent } = require('./react-docgen.js');
+const { parseVueComponent } = require('./vue-docgen.js');
 
 const ROOT_PATH = path.resolve(__dirname, '../../../..');
-const LUMX_REACT_PATH = path.resolve(ROOT_PATH, 'packages/lumx-react');
 
-// Cache project instances at module level
-let reactProject = null;
+const PACKAGE_PATH_RX = /(packages\/lumx-[^/]+)/;
+
+const PROJECTS = {
+    'packages/lumx-react': { project: null, parse: parseReactComponent },
+    'packages/lumx-vue': { project: null, parse: parseVueComponent },
+};
+
 
 /**
  * LumX docs prop table webpack loader
  *
  * @example import lumx react component prop table
  *    import ReactIcon from 'lumx-docs:@lumx/react/components/icon/Icon';
+ * @example import lumx vue component prop table
+ *    import VueIcon from 'lumx-docs:@lumx/vue/components/icon/Icon';
  */
 function lumxDocsWebpackLoader() {
     this.cacheable?.();
@@ -20,15 +27,21 @@ function lumxDocsWebpackLoader() {
     const filePath = this.resourcePath;
 
     try {
-        if (!reactProject) {
-            reactProject = createProject(LUMX_REACT_PATH);
+        const [_, packagePath] = filePath.match(PACKAGE_PATH_RX) || [];
+        if (!packagePath) {
+            throw new Error('Could not determine package from file path: ' + filePath);
+        }
+
+        const projectConf = PROJECTS[packagePath];
+        if (!projectConf.project) {
+            projectConf.project = createProject(path.resolve(ROOT_PATH, packagePath));
         }
 
         // Add dependency so webpack watches the component file
         this.addDependency(filePath);
 
-        // Parse
-        const result = parseReactComponent(reactProject, filePath);
+        // Parse with the appropriate framework docgen
+        const result = projectConf.parse(projectConf.project, filePath);
 
         if (!result) {
             throw new Error('Could not load prop docs for component ' + filePath);
