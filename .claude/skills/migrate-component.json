@@ -1,0 +1,35 @@
+{
+  "name": "migrate-component",
+  "displayName": "Migrate Component to Core Architecture",
+  "description": "Migrate a React-only component to the shared core/React/Vue architecture",
+  "version": "1.0.0",
+  "command": "/migrate-component",
+  "parameters": [
+    {
+      "name": "componentName",
+      "description": "Name of the component to migrate (e.g., 'Switch', 'Button')",
+      "required": true,
+      "type": "string"
+    }
+  ],
+  "examples": [
+    "/migrate-component Switch",
+    "/migrate-component RadioButton",
+    "/migrate-component TextField"
+  ],
+  "tags": ["migration", "architecture", "refactoring", "vue", "react"],
+  "permissions": {
+    "allow": [
+      "Read",
+      "Write",
+      "Edit",
+      "Bash(yarn test:*)",
+      "Bash(yarn build:*)",
+      "Bash(mkdir:*)",
+      "Bash(ls:*)",
+      "Glob",
+      "Grep",
+      "Task"
+    ]
+  }
+}

@@ -1,140 +1,80 @@
-import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
-import { render } from '@testing-library/react';
-import { getByClassName, getByTagName, queryByClassName } from '@lumx/react/testing/utils/queries';
+import React from 'react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { Switch, SwitchProps } from './Switch';
+import BaseSwitchTests, { setup } from '@lumx/core/js/components/Switch/Tests';
+import { SwitchProps as CoreSwitchProps } from '@lumx/core/js/components/Switch';
+import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
+
+import { Switch } from './Switch';
 
 const CLASSNAME = Switch.className as string;
-
-type SetupProps = Partial<SwitchProps>;
-
-/**
- * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
- */
-const setup = (propsOverride: SetupProps = {}, { wrapper }: SetupRenderOptions = {}) => {
-    const props = { ...propsOverride };
-    render(<Switch {...props} />, { wrapper });
-    const switchWrapper = getByClassName(document.body, CLASSNAME);
-    const input = getByTagName(switchWrapper, 'input');
-    const helper = queryByClassName(switchWrapper, `${CLASSNAME}__helper`);
-    const label = queryByClassName(switchWrapper, `${CLASSNAME}__label`);
-    return { switchWrapper, input, helper, label, props };
-};
 
 vi.mock('@lumx/react/hooks/useId', () => ({ useId: () => ':r1:' }));
 
 describe(`<${Switch.displayName}>`, () => {
-    describe('Props', () => {
-        it('should render correctly', () => {
-            const { switchWrapper, input, label, helper } = setup();
-            expect(switchWrapper).toBeInTheDocument();
-            expect(switchWrapper).toHaveClass(CLASSNAME);
-            expect(switchWrapper).not.toHaveClass('lumx-switch--is-disabled');
-            expect(switchWrapper).toHaveClass('lumx-switch--is-unchecked');
+    // Adapter for core tests
+    const renderSwitch = (props: CoreSwitchProps, options?: SetupRenderOptions) => {
+        const { inputId, label, ...restProps } = props;
+        return render(
+            <Switch id={inputId} {...restProps}>
+                {label}
+            </Switch>,
+            options,
+        );
+    };
 
-            expect(label).not.toBeInTheDocument();
-            expect(helper).not.toBeInTheDocument();
+    // Run core tests
+    BaseSwitchTests({ render: renderSwitch, screen });
 
-            expect(input).toBeInTheDocument();
-            expect(input).toHaveAttribute('role', 'switch');
-            expect(input).not.toBeChecked();
-            expect(input).not.toBeDisabled();
+    const setupSwitch = (props: Partial<CoreSwitchProps> = {}, options: SetupRenderOptions = {}) =>
+        setup(props, { ...options, render: renderSwitch, screen });
+
+    // React-specific tests only
+    describe('React-specific', () => {
+        it('should forward ref to the root element', () => {
+            const ref = React.createRef<HTMLDivElement>();
+            render(<Switch id="test" ref={ref} />);
+            expect(ref.current).toHaveClass(CLASSNAME);
         });
 
-        it('should render disabled and checked', () => {
-            const { switchWrapper, input } = setup({
-                isDisabled: true,
-                isChecked: true,
-            });
-            expect(switchWrapper).toHaveClass('lumx-switch--is-disabled');
-            expect(switchWrapper).toHaveClass('lumx-switch--is-checked');
-
-            expect(input).toBeChecked();
-            expect(input).toBeDisabled();
+        it('should forward inputRef to the native input', () => {
+            const inputRef = React.createRef<HTMLInputElement>();
+            render(<Switch id="test" inputRef={inputRef} />);
+            expect(inputRef.current).toBeInstanceOf(HTMLInputElement);
         });
 
-        it('should render helper and label', () => {
-            const id = 'switchWrapper1';
-            const { props, helper, label, input } = setup({
-                id,
-                helper: 'Test helper',
-                children: 'Test label',
-            });
-
-            expect(helper).toBeInTheDocument();
-            expect(helper).toHaveTextContent(props.helper as string);
-            expect(helper).toHaveAttribute('id');
-
-            expect(label).toBeInTheDocument();
-            expect(label).toHaveTextContent(props.children as string);
-            expect(label).toHaveAttribute('for', id);
-
-            expect(input).toHaveAttribute('id', id);
-            expect(input).toHaveAttribute('aria-describedby', helper?.id);
-        });
-
-        it('should forward input props', () => {
-            const { props, input } = setup({
-                inputProps: { 'aria-labelledby': 'labelledby-id' },
-            });
-
-            expect(input).toHaveAttribute('aria-labelledby', props.inputProps?.['aria-labelledby']);
-        });
-
-        it('should apply position class', () => {
-            const { switchWrapper } = setup({ position: 'right' });
-            expect(switchWrapper).toHaveClass(`${CLASSNAME}--position-right`);
-        });
-    });
-
-    describe('Events', () => {
-        const onChange = vi.fn();
-
-        it('should trigger `onChange` when switchWrapper is clicked', async () => {
-            const value = 'value';
-            const name = 'name';
-            const { input } = setup({ checked: false, onChange, value, name });
-            expect(input).not.toBeChecked();
-
-            await userEvent.click(input);
-
-            expect(onChange).toHaveBeenCalledWith(true, value, name, expect.any(Object));
-        });
-    });
-
-    describe('Disabled state', () => {
         it('should be disabled with isDisabled', async () => {
             const onChange = vi.fn();
-            const { switchWrapper, input } = setup({ isDisabled: true, onChange });
+            const { container } = render(<Switch id="test" isDisabled onChange={onChange} />);
+            const switchWrapper = container.querySelector(`.${CLASSNAME}`);
+            const input = container.querySelector('input');
 
             expect(switchWrapper).toHaveClass('lumx-switch--is-disabled');
             expect(input).toBeDisabled();
             expect(input).toHaveAttribute('readOnly');
 
-            // Should not trigger onChange.
-            await userEvent.click(input);
+            if (input) await userEvent.click(input);
             expect(onChange).not.toHaveBeenCalled();
         });
 
         it('should be disabled with aria-disabled', async () => {
             const onChange = vi.fn();
-            const { switchWrapper, input } = setup({ 'aria-disabled': true, onChange });
+            const { container } = render(<Switch id="test" aria-disabled onChange={onChange} />);
+            const switchWrapper = container.querySelector(`.${CLASSNAME}`);
+            const input = container.querySelector('input');
 
             expect(switchWrapper).toHaveClass('lumx-switch--is-disabled');
-            // Note: input is not disabled (so it can be focused) but it's readOnly.
             expect(input).not.toBeDisabled();
             expect(input).toHaveAttribute('aria-disabled', 'true');
             expect(input).toHaveAttribute('readOnly');
 
-            // Should not trigger onChange.
-            await userEvent.click(input);
+            if (input) await userEvent.click(input);
             expect(onChange).not.toHaveBeenCalled();
         });
     });
 
-    // Common tests suite.
-    commonTestsSuiteRTL(setup, {
+    commonTestsSuiteRTL(setupSwitch, {
         baseClassName: CLASSNAME,
         forwardClassName: 'switchWrapper',
         forwardAttributes: 'switchWrapper',

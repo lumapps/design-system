@@ -7,9 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   `@lumx/vue`:
+    -   Create the `Switch` component
+
+### Changed
+
+-   `@lumx/core`:
+    -   Moved `Switch` from `@lumx/react`
+
 ### Fixed
 
 -   Fixed publish workflow on merge commit
+
 
 ## [4.3.0][] - 2026-02-10
 

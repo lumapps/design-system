@@ -1,12 +1,10 @@
-import { Children, InputHTMLAttributes, SyntheticEvent } from 'react';
+import React from 'react';
 
-import isEmpty from 'lodash/isEmpty';
-
-import { Alignment, InputHelper, InputLabel, Theme } from '@lumx/react';
-import { GenericProps, HasTheme, HasAriaDisabled } from '@lumx/react/utils/type';
-import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
+import { Alignment, Theme } from '@lumx/react';
+import { GenericProps } from '@lumx/react/utils/type';
+import { Switch as UI, SwitchProps as UIProps, CLASSNAME, COMPONENT_NAME } from '@lumx/core/js/components/Switch';
 import { useId } from '@lumx/react/hooks/useId';
+import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
@@ -14,37 +12,10 @@ import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableState
 /**
  * Defines the props of the component.
  */
-export interface SwitchProps extends GenericProps, HasTheme, HasAriaDisabled {
-    /** Helper text. */
-    helper?: string;
-    /** Whether it is checked or not. */
-    isChecked?: boolean;
-    /** Whether the component is disabled or not. */
-    isDisabled?: boolean;
-    /** Native input name property. */
-    name?: string;
-    /** Position of the switch relative to the label. */
-    position?: Extract<Alignment, 'right' | 'left'>;
-    /** Native input value property. */
-    value?: string;
-    /** On change callback. */
-    onChange?(isChecked: boolean, value?: string, name?: string, event?: SyntheticEvent): void;
-    /** optional props for input */
-    inputProps?: InputHTMLAttributes<HTMLInputElement>;
-    /** Children */
+export interface SwitchProps extends GenericProps, Omit<UIProps, 'inputId' | 'label'> {
+    /** Children (label content). */
     children?: React.ReactNode;
 }
-
-/**
- * Component display name.
- */
-const COMPONENT_NAME = 'Switch';
-
-/**
- * Component default class name and class prefix.
- */
-const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-switch';
-const { block, element } = classNames.bem(CLASSNAME);
 
 /**
  * Component default props.
@@ -69,6 +40,7 @@ export const Switch = forwardRef<SwitchProps, HTMLDivElement>((props, ref) => {
         className,
         helper,
         id,
+        inputRef,
         isChecked = checked,
         name,
         onChange,
@@ -78,66 +50,32 @@ export const Switch = forwardRef<SwitchProps, HTMLDivElement>((props, ref) => {
         inputProps = {},
         ...forwardedProps
     } = otherProps;
+
+    const localInputRef = React.useRef<HTMLInputElement>(null);
     const generatedInputId = useId();
     const inputId = id || generatedInputId;
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (onChange) {
-            onChange(!isChecked, value, name, event);
-        }
-    };
 
-    return (
-        <div
-            ref={ref}
-            {...forwardedProps}
-            className={classNames.join(
-                className,
-                block({
-                    'is-checked': isChecked,
-                    'is-disabled': isAnyDisabled,
-                    [`position-${position}`]: Boolean(position),
-                    [`theme-${theme}`]: Boolean(theme),
-                    'is-unchecked': !isChecked,
-                }),
-            )}
-        >
-            <div className={element('input-wrapper')}>
-                <input
-                    type="checkbox"
-                    role="switch"
-                    id={inputId}
-                    className={element('input-native')}
-                    name={name}
-                    value={value}
-                    {...disabledStateProps}
-                    readOnly={inputProps.readOnly || isAnyDisabled}
-                    checked={isChecked}
-                    aria-checked={Boolean(isChecked)}
-                    onChange={handleChange}
-                    aria-describedby={helper ? `${inputId}-helper` : undefined}
-                    {...inputProps}
-                />
-
-                <div className={element('input-placeholder')}>
-                    <div className={element('input-background')} />
-                    <div className={element('input-indicator')} />
-                </div>
-            </div>
-
-            {Children.count(children) > 0 && (
-                <div className={element('content')}>
-                    <InputLabel htmlFor={inputId} theme={theme} className={element('label')}>
-                        {children}
-                    </InputLabel>
-                    {!isEmpty(helper) && (
-                        <InputHelper id={`${inputId}-helper`} theme={theme} className={element('helper')}>
-                            {helper}
-                        </InputHelper>
-                    )}
-                </div>
-            )}
-        </div>
-    );
+    return UI({
+        ref,
+        className,
+        helper,
+        inputRef: useMergeRefs(inputRef, localInputRef),
+        isChecked,
+        label: children,
+        name,
+        onChange,
+        position,
+        theme,
+        value,
+        inputProps: {
+            ...inputProps,
+            ...disabledStateProps,
+            readOnly: inputProps.readOnly || isAnyDisabled,
+        },
+        ...forwardedProps,
+        isDisabled: isAnyDisabled,
+        inputId,
+    });
 });
 Switch.displayName = COMPONENT_NAME;
 Switch.className = CLASSNAME;
