@@ -5,7 +5,7 @@ import { setup } from '@lumx/core/js/components/Checkbox/Stories';
 import { Checkbox } from '@lumx/vue';
 import CheckboxDefaultVue from './Stories/CheckboxDefault.vue';
 
-const { meta, Default, LabelAndHelper, IntermediateState, Disabled } = setup({
+const { meta, ...stories } = setup({
     component: Checkbox,
     render: withRender({ CheckboxDefaultVue }),
     decorators: { withCombinations },
@@ -25,4 +25,7 @@ export default {
     },
 };
 
-export { Default, LabelAndHelper, IntermediateState, Disabled };
+export const Default = { ...stories.Default };
+export const LabelAndHelper = { ...stories.LabelAndHelper };
+export const IntermediateState = { ...stories.IntermediateState };
+export const Disabled = { ...stories.Disabled };

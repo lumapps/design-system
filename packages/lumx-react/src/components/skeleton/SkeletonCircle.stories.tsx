@@ -2,7 +2,7 @@ import { SkeletonCircle } from '@lumx/react';
 import { setup } from '@lumx/core/js/components/Skeleton/SkeletonCircleStories';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 
-const { AllColor, AllSize, meta } = setup({
+const { meta, ...stories } = setup({
     component: SkeletonCircle,
     decorators: { withCombinations },
 });
@@ -12,4 +12,5 @@ export default {
     ...meta,
 };
 
-export { AllColor, AllSize };
+export const AllColor = { ...stories.AllColor };
+export const AllSize = { ...stories.AllSize };

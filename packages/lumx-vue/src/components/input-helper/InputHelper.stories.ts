@@ -6,7 +6,7 @@ import { setup } from '@lumx/core/js/components/InputHelper/Stories';
 import { InputHelper } from '@lumx/vue';
 import InputHelperDefaultVue from './Stories/InputHelperDefault.vue';
 
-const { meta, Default, AllKinds } = setup({
+const { meta, ...stories } = setup({
     component: InputHelper,
     render: withRender({ InputHelperDefaultVue }, '{{ args.children }}'),
     decorators: { withWrapper, withCombinations },
@@ -17,4 +17,5 @@ export default {
     ...meta,
 };
 
-export { Default, AllKinds };
+export const Default = { ...stories.Default };
+export const AllKinds = { ...stories.AllKinds };

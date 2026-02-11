@@ -5,7 +5,7 @@ import { setup } from '@lumx/core/js/components/Message/Stories';
 
 import { withNestedProps } from '../../stories/decorators/withNestedProps';
 
-const { meta, Default, AllKinds, AllKindsWithBackground, CustomIcon, ClosableMessage } = setup({
+const { meta, ...stories } = setup({
     component: Message,
     decorators: { withWrapper, withCombinations },
     overrides: {
@@ -22,4 +22,8 @@ export default {
     ...meta,
 };
 
-export { Default, AllKinds, AllKindsWithBackground, CustomIcon, ClosableMessage };
+export const Default = { ...stories.Default };
+export const AllKinds = { ...stories.AllKinds };
+export const AllKindsWithBackground = { ...stories.AllKindsWithBackground };
+export const CustomIcon = { ...stories.CustomIcon };
+export const ClosableMessage = { ...stories.ClosableMessage };

@@ -8,7 +8,7 @@ import FlexBoxNoConfigVue from './Stories/FlexBoxNoConfig.vue';
 import FlexBoxNoShrinkVue from './Stories/FlexBoxNoShrink.vue';
 import FlexBoxMarginAutoVue from './Stories/FlexBoxMarginAuto.vue';
 
-const { meta, NoConfig, Horizontal, Vertical, GapSizes, Wrap, NoShrink, MarginAuto } = setup({
+const { meta, ...stories } = setup({
     component: FlexBox,
     render: withRender({ FlexBoxNoConfigVue }),
     decorators: { withWrapper, withCombinations },
@@ -23,4 +23,10 @@ export default {
     ...meta,
 };
 
-export { NoConfig, Horizontal, Vertical, GapSizes, Wrap, NoShrink, MarginAuto };
+export const NoConfig = { ...stories.NoConfig };
+export const Horizontal = { ...stories.Horizontal };
+export const Vertical = { ...stories.Vertical };
+export const GapSizes = { ...stories.GapSizes };
+export const Wrap = { ...stories.Wrap };
+export const NoShrink = { ...stories.NoShrink };
+export const MarginAuto = { ...stories.MarginAuto };

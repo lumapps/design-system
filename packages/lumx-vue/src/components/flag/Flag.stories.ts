@@ -7,7 +7,7 @@ import { setup } from '@lumx/core/js/components/Flag/Stories';
 import { Flag } from '@lumx/vue';
 import FlagDefaultVue from './Stories/FlagDefault.vue';
 
-const { meta, Default, WithIcon, AllColors, Truncate } = setup({
+const { meta, ...stories } = setup({
     component: Flag,
     render: withRender({ FlagDefaultVue }, '{{ args.label }}'),
     decorators: { withWrapper, withCombinations, withResizableBox },
@@ -18,4 +18,7 @@ export default {
     ...meta,
 };
 
-export { Default, WithIcon, AllColors, Truncate };
+export const Default = { ...stories.Default };
+export const WithIcon = { ...stories.WithIcon };
+export const AllColors = { ...stories.AllColors };
+export const Truncate = { ...stories.Truncate };

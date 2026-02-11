@@ -6,7 +6,7 @@ import { setup } from '@lumx/core/js/components/Button/IconButtonStories';
 import { IconButton } from '@lumx/vue';
 import IconButtonBaseVue from './Stories/IconButtonBase.vue';
 
-const { meta, Default, WithImage, IconStateVariations } = setup({
+const { meta, ...stories } = setup({
     component: IconButton,
     render: withRender({ IconButtonBaseVue }),
     decorators: { withCombinations, withThemedBackground },
@@ -17,4 +17,6 @@ export default {
     ...meta,
 };
 
-export { Default, WithImage, IconStateVariations };
+export const Default = { ...stories.Default };
+export const WithImage = { ...stories.WithImage };
+export const IconStateVariations = { ...stories.IconStateVariations };

@@ -7,7 +7,7 @@ import { Heading } from '.';
 import HeadingDefaultVue from './Stories/HeadingDefault.vue';
 import HeadingNestedHeadingLevelProviderVue from './Stories/HeadingNestedHeadingLevelProvider.vue';
 
-const { meta, Default, AllLevels, AllTypography, NestedHeadingLevelProvider } = setup({
+const { meta, ...stories } = setup({
     component: Heading,
     render: withRender({ HeadingDefaultVue }, '{{ args.children }}'),
     decorators: { withWrapper, withCombinations },
@@ -21,4 +21,7 @@ export default {
     ...meta,
 };
 
-export { Default, AllLevels, AllTypography, NestedHeadingLevelProvider };
+export const Default = { ...stories.Default };
+export const AllLevels = { ...stories.AllLevels };
+export const AllTypography = { ...stories.AllTypography };
+export const NestedHeadingLevelProvider = { ...stories.NestedHeadingLevelProvider };

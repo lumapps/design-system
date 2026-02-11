@@ -2,7 +2,7 @@ import { setup } from '@lumx/core/js/components/InputLabel/Stories';
 
 import { InputLabel } from './InputLabel';
 
-const { meta, Default, IsRequired, WithCustomTypography } = setup({
+const { meta, ...stories } = setup({
     component: InputLabel,
 });
 
@@ -22,4 +22,6 @@ export default {
     ],
 };
 
-export { Default, IsRequired, WithCustomTypography };
+export const Default = { ...stories.Default };
+export const IsRequired = { ...stories.IsRequired };
+export const WithCustomTypography = { ...stories.WithCustomTypography };

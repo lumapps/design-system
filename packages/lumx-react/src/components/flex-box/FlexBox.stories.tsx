@@ -7,7 +7,7 @@ import { setup } from '@lumx/core/js/components/FlexBox/Stories';
 
 import { FlexBox } from './FlexBox';
 
-const { meta, NoConfig, Horizontal, Vertical, GapSizes, Wrap, NoShrink, MarginAuto } = setup({
+const { meta, ...stories } = setup({
     component: FlexBox,
     args: {
         children: (
@@ -30,4 +30,10 @@ export default {
     ...meta,
 };
 
-export { NoConfig, Horizontal, Vertical, GapSizes, Wrap, NoShrink, MarginAuto };
+export const NoConfig = { ...stories.NoConfig };
+export const Horizontal = { ...stories.Horizontal };
+export const Vertical = { ...stories.Vertical };
+export const GapSizes = { ...stories.GapSizes };
+export const Wrap = { ...stories.Wrap };
+export const NoShrink = { ...stories.NoShrink };
+export const MarginAuto = { ...stories.MarginAuto };

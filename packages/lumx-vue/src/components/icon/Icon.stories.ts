@@ -6,7 +6,7 @@ import { setup } from '@lumx/core/js/components/Icon/Stories';
 import { Icon } from '@lumx/vue';
 import IconInsideTextVue from './Stories/IconInsideText.vue';
 
-const { meta, SizeAndShape, AllColors, InsideText } = setup({
+const { meta, ...stories } = setup({
     component: Icon,
     decorators: { withWrapper, withCombinations },
     overrides: {
@@ -19,4 +19,6 @@ export default {
     ...meta,
 };
 
-export { SizeAndShape, AllColors, InsideText };
+export const SizeAndShape = { ...stories.SizeAndShape };
+export const AllColors = { ...stories.AllColors };
+export const InsideText = { ...stories.InsideText };

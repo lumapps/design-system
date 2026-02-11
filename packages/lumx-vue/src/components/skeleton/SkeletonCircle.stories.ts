@@ -4,7 +4,7 @@ import { withCombinations } from '@lumx/vue/stories/decorators/withCombinations'
 import { withRender } from '@lumx/vue/stories/utils/withRender';
 import SkeletonCircleDefaultVue from './Stories/SkeletonCircleDefault.vue';
 
-const { AllColor, AllSize, meta } = setup({
+const { meta, ...stories } = setup({
     component: SkeletonCircle,
     render: withRender({ SkeletonCircleDefaultVue }),
     decorators: { withCombinations },
@@ -15,4 +15,5 @@ export default {
     ...meta,
 };
 
-export { AllColor, AllSize };
+export const AllColor = { ...stories.AllColor };
+export const AllSize = { ...stories.AllSize };

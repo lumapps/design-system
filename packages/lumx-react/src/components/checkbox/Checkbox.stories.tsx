@@ -3,7 +3,7 @@ import { withValueOnChange } from '@lumx/react/stories/decorators/withValueOnCha
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 import { setup } from '@lumx/core/js/components/Checkbox/Stories';
 
-const { meta, Default, LabelAndHelper, IntermediateState, Disabled } = setup({
+const { meta, ...stories } = setup({
     component: Checkbox,
     decorators: { withCombinations },
 });
@@ -14,4 +14,7 @@ export default {
     ...meta,
 };
 
-export { Default, LabelAndHelper, IntermediateState, Disabled };
+export const Default = { ...stories.Default };
+export const LabelAndHelper = { ...stories.LabelAndHelper };
+export const IntermediateState = { ...stories.IntermediateState };
+export const Disabled = { ...stories.Disabled };

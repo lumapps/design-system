@@ -9,19 +9,7 @@ import { setup } from '@lumx/core/js/components/Text/Stories';
 
 import { Text } from './Text';
 
-const {
-    meta,
-    Base,
-    LongText,
-    NoWrap,
-    AllWhiteSpace,
-    Truncate,
-    TruncateMultiline,
-    AllTypography,
-    AllColors,
-    TestUpdateTruncateTitleLabel,
-    WithIcon,
-} = setup({
+const { meta, ...stories } = setup({
     component: Text,
     decorators: { withWrapper, withCombinations, withResizableBox },
     overrides: {
@@ -61,15 +49,13 @@ export default {
     ...meta,
 };
 
-export {
-    Base,
-    LongText,
-    NoWrap,
-    AllWhiteSpace,
-    Truncate,
-    TruncateMultiline,
-    AllTypography,
-    AllColors,
-    TestUpdateTruncateTitleLabel,
-    WithIcon,
-};
+export const Base = { ...stories.Base };
+export const LongText = { ...stories.LongText };
+export const NoWrap = { ...stories.NoWrap };
+export const AllWhiteSpace = { ...stories.AllWhiteSpace };
+export const Truncate = { ...stories.Truncate };
+export const TruncateMultiline = { ...stories.TruncateMultiline };
+export const AllTypography = { ...stories.AllTypography };
+export const AllColors = { ...stories.AllColors };
+export const TestUpdateTruncateTitleLabel = { ...stories.TestUpdateTruncateTitleLabel };
+export const WithIcon = { ...stories.WithIcon };
