@@ -1,0 +1,222 @@
+import type { AriaAttributes, CSSProperties, ImgHTMLAttributes } from 'react';
+
+import { mdiImageBroken } from '@lumx/icons';
+
+import { AspectRatio, Size, type HorizontalAlignment } from '../../constants';
+import type { HasClassName, HasTheme, Falsy, JSXElement, CommonRef, LumxClassName } from '../../types';
+import { ThumbnailSize, ThumbnailVariant, ThumbnailObjectFit, LoadingState } from './types';
+import { classNames } from '../../utils';
+import { RawClickable } from '../RawClickable';
+import { Icon } from '../Icon';
+
+type ImgHTMLProps = ImgHTMLAttributes<HTMLImageElement>;
+
+/**
+ * Defines the props of the component.
+ */
+export interface ThumbnailProps extends HasClassName, HasTheme, AriaAttributes {
+    /** Alignment of the thumbnail in it's parent (requires flex parent). */
+    align?: HorizontalAlignment;
+    /** Image alternative text. */
+    alt: string;
+    /** Image aspect ratio. */
+    aspectRatio?: AspectRatio;
+    /** Badge. */
+    badge?: JSXElement | Falsy;
+    /** Image cross origin resource policy. */
+    crossOrigin?: ImgHTMLProps['crossOrigin'];
+    /** Fallback icon (SVG path) or react node when image fails to load. */
+    fallback?: string | JSXElement;
+    /** Whether the thumbnail should fill it's parent size (requires flex parent) or not. */
+    fillHeight?: boolean;
+    /** Image URL. */
+    image: string;
+    /** Props to inject into the native <img> element. */
+    imgProps?: ImgHTMLProps;
+    /** Reference to the native <img> element. */
+    imgRef?: CommonRef;
+    ref?: CommonRef;
+    /** Set to true to force the display of the loading skeleton. */
+    isLoading?: boolean;
+    isAnyDisabled?: boolean;
+    /** Set how the image should fit when its aspect ratio is constrained */
+    objectFit?: ThumbnailObjectFit;
+    /** Size variant of the component. */
+    size?: ThumbnailSize;
+    /** Image loading mode. */
+    loading?: ImgHTMLProps['loading'];
+    loadingState?: LoadingState;
+    /** Ref of an existing placeholder image to display while loading. */
+    loadingPlaceholderImageRef?: React.RefObject<HTMLImageElement>;
+    /** On click callback. */
+    onClick?: (event: any) => void;
+    /** On key press callback. */
+    onKeyPress?: (event: any) => void;
+    disabledStateProps?: any;
+    /** Variant of the component. */
+    variant?: ThumbnailVariant;
+    focusPointStyle?: CSSProperties;
+    /** Props to pass to the link wrapping the thumbnail. */
+    linkProps?: React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
+    /** Custom react component for the link (can be used to inject react router Link). */
+    linkAs?: 'a' | any;
+}
+
+/**
+ * Component display name.
+ */
+export const COMPONENT_NAME = 'Thumbnail';
+
+/**
+ * Component default class name and class prefix.
+ */
+export const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-thumbnail';
+export const { block, element } = classNames.bem(CLASSNAME);
+
+/**
+ * Component default props.
+ */
+export const DEFAULT_PROPS: Partial<ThumbnailProps> = {
+    fallback: mdiImageBroken,
+    loading: 'lazy',
+};
+
+/**
+ * Thumbnail component.
+ *
+ * @param  props Component props.
+ * @param  ref   Component ref.
+ * @return React element.
+ */
+export const Thumbnail = (props: ThumbnailProps) => {
+    const {
+        align,
+        alt,
+        aspectRatio = AspectRatio.original,
+        badge,
+        className,
+        crossOrigin,
+        fallback = DEFAULT_PROPS.fallback,
+        fillHeight,
+        image,
+        imgProps,
+        imgRef,
+        isLoading: isLoadingProp,
+        objectFit,
+        loading = DEFAULT_PROPS.loading,
+        loadingPlaceholderImageRef,
+        size,
+        theme,
+        variant,
+        linkProps,
+        isAnyDisabled,
+        disabledStateProps,
+        ref,
+        linkAs,
+        loadingState,
+        focusPointStyle,
+        ...forwardedProps
+    } = props;
+    const isLoading = isLoadingProp || loadingState === 'isLoading';
+    const hasError = loadingState === 'hasError';
+
+    const hasIconErrorFallback = hasError && typeof fallback === 'string';
+    const hasCustomErrorFallback = hasError && !hasIconErrorFallback;
+    const imageErrorStyle: CSSProperties = {};
+    if (hasIconErrorFallback) {
+        // Keep the image layout on icon fallback.
+        imageErrorStyle.visibility = 'hidden';
+    } else if (hasCustomErrorFallback) {
+        // Remove the image on custom fallback.
+        imageErrorStyle.display = 'none';
+    }
+
+    const isLink = Boolean(linkProps?.href || linkAs);
+    const isClickable = !isAnyDisabled && Boolean(isLink || !!forwardedProps.onClick);
+
+    const Wrapper: any = isClickable ? RawClickable : 'div';
+    const wrapperProps = { ...forwardedProps };
+    if (isClickable) {
+        Object.assign(wrapperProps, { as: linkAs || (linkProps?.href ? 'a' : 'button') }, disabledStateProps);
+        if (isLink) {
+            Object.assign(wrapperProps, linkProps);
+        } else {
+            wrapperProps['aria-label'] = forwardedProps['aria-label'] || alt;
+        }
+    }
+
+    // If we have a loading placeholder image that is really loaded (complete)
+    const loadingPlaceholderImage =
+        (isLoading && loadingPlaceholderImageRef?.current?.complete && loadingPlaceholderImageRef?.current) ||
+        undefined;
+
+    // Set loading placeholder image as background
+    const loadingStyle = loadingPlaceholderImage
+        ? { backgroundImage: `url(${loadingPlaceholderImage.src})` }
+        : undefined;
+
+    return (
+        <Wrapper
+            {...wrapperProps}
+            ref={ref}
+            className={classNames.join(
+                linkProps?.className,
+                className,
+                block({
+                    [`align-${align}`]: Boolean(align),
+                    [`aspect-ratio-${aspectRatio}`]: Boolean(aspectRatio),
+                    [`size-${size}`]: Boolean(size),
+                    [`theme-${theme}`]: Boolean(theme),
+                    [`variant-${variant}`]: Boolean(variant),
+                    'is-clickable': isClickable,
+                    'has-error': hasError,
+                    'has-icon-error-fallback': hasIconErrorFallback,
+                    'has-custom-error-fallback': hasCustomErrorFallback,
+                    'is-loading': isLoading,
+                    [`object-fit-${objectFit}`]: Boolean(objectFit),
+                    'has-badge': !!badge,
+                    'fill-height': fillHeight,
+                }),
+            )}
+        >
+            <span className={element('background')}>
+                <img
+                    // Use placeholder image size
+                    width={loadingPlaceholderImage?.naturalWidth}
+                    height={loadingPlaceholderImage?.naturalHeight}
+                    {...imgProps}
+                    style={{
+                        // Reserve space while loading (when possible)
+                        width: isLoading ? imgProps?.width || loadingPlaceholderImage?.naturalWidth : undefined,
+                        ...imgProps?.style,
+                        ...imageErrorStyle,
+                        ...focusPointStyle,
+                        ...loadingStyle,
+                    }}
+                    ref={imgRef}
+                    className={classNames.join(
+                        element('image', {
+                            'is-loading': isLoading,
+                            'has-defined-size': Boolean(imgProps?.height && imgProps.width),
+                        }),
+                        imgProps?.className,
+                    )}
+                    crossOrigin={crossOrigin}
+                    src={image}
+                    alt={alt}
+                    loading={loading}
+                />
+                {!isLoading && hasError && (
+                    <span className={element('fallback')}>
+                        {hasIconErrorFallback ? (
+                            <Icon icon={fallback as string} size={Size.xxs} theme={theme} />
+                        ) : (
+                            fallback
+                        )}
+                    </span>
+                )}
+            </span>
+            {badge}
+        </Wrapper>
+    );
+};
