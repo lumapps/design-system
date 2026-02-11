@@ -1,42 +1,41 @@
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
+import BaseDividerTests, { setup } from '@lumx/core/js/components/Divider/Tests';
+import { DividerProps } from '@lumx/core/js/components/Divider';
 
 import { Theme } from '@lumx/react';
 import { render, screen } from '@testing-library/react';
-import { Divider, DividerProps } from './Divider';
+import { Divider } from './Divider';
 
 const CLASSNAME = Divider.className as string;
 
-type SetupProps = Partial<DividerProps>;
-
-/**
- * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
- */
-const setup = (propsOverride: SetupProps = {}, { wrapper }: SetupRenderOptions = {}) => {
-    const props: DividerProps = { ...propsOverride };
-
-    render(<Divider {...props} />, { wrapper });
-    const divider = screen.queryByRole('separator');
-
-    return { props, divider };
-};
-
 describe(`<${Divider.displayName}>`, () => {
-    describe('Props', () => {
-        it('should render default', () => {
-            const { divider } = setup();
+    // Adapter for core tests
+    const renderDivider = (props: DividerProps, options?: SetupRenderOptions) => {
+        return render(<Divider {...props} />, options);
+    };
+
+    // Run core tests
+    BaseDividerTests({ render: renderDivider, screen });
+
+    const setupDivider = (props: Partial<DividerProps> = {}, options: SetupRenderOptions = {}) =>
+        setup(props, { ...options, render: renderDivider, screen });
+
+    describe('React-specific', () => {
+        it('should render with default theme from context', () => {
+            const { divider } = setupDivider();
             expect(divider).toBeInTheDocument();
             expect(divider).toHaveClass(CLASSNAME);
             expect(divider).toHaveClass(`${CLASSNAME}--theme-light`);
         });
 
         it('should render dark Theme', () => {
-            const { divider } = setup({ theme: Theme.dark });
+            const { divider } = setupDivider({ theme: Theme.dark });
             expect(divider).toHaveClass(`${CLASSNAME}--theme-dark`);
         });
     });
 
     // Common tests suite.
-    commonTestsSuiteRTL(setup, {
+    commonTestsSuiteRTL(setupDivider, {
         baseClassName: CLASSNAME,
         forwardClassName: 'divider',
         forwardAttributes: 'divider',

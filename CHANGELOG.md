@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   `@lumx/vue`:
+    -   Create the `Divider` component
+
+### Changed
+
+-   `@lumx/core`:
+    -   Moved `Divider` from `@lumx/react`
+
 ## [4.3.1][] - 2026-02-11
 
 ### Added
