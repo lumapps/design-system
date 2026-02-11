@@ -80,6 +80,7 @@ const RadioButton = defineComponent(
         props: keysOf<RadioButtonProps>()(
             'checked',
             'class',
+            'disabled',
             'helper',
             'id',
             'inputProps',

@@ -97,6 +97,7 @@ const Checkbox = defineComponent(
         props: keysOf<CheckboxProps>()(
             'checked',
             'class',
+            'disabled',
             'helper',
             'id',
             'inputProps',
