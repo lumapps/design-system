@@ -3,14 +3,15 @@ import { CommonRef, HasPolymorphicAs, HasRequiredLinkHref, JSXElement, ElementTy
 
 export type ClickableElement = 'a' | 'button' | ElementType;
 
-export type BaseClickableProps = {
+export interface BaseClickableProps {
     children?: JSXElement;
     isDisabled?: boolean;
+    /** @alias isDisabled */
     disabled?: boolean;
     'aria-disabled'?: Booleanish;
     onClick?: (event?: any) => void;
     ref?: CommonRef;
-};
+}
 
 export type RawClickableProps<E extends ClickableElement> = HasPolymorphicAs<E> &
     HasRequiredLinkHref<E> &

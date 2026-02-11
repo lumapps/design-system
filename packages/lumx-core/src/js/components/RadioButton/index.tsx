@@ -13,6 +13,7 @@ export interface RadioButtonProps extends HasTheme, HasClassName, HasAriaDisable
     id?: string;
     /** Whether it is checked or not. */
     isChecked?: boolean;
+    /** @alias isChecked */
     checked?: boolean;
     /** Whether the component is disabled or not. */
     isDisabled?: boolean;

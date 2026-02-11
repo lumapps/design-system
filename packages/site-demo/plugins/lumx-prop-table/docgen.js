@@ -297,6 +297,57 @@ function getJsDocDescription(propSymbol) {
 }
 
 /**
+ * Get @alias tag value from a declaration node's JSDoc.
+ */
+function getJsDocAliasFromDeclaration(decl) {
+    if (!decl) return undefined;
+
+    const jsDocs = decl.getJsDocs?.();
+    if (jsDocs && jsDocs.length > 0) {
+        for (const jsDoc of jsDocs) {
+            const tags = jsDoc.getTags?.();
+            if (!tags) continue;
+            for (const tag of tags) {
+                if (tag.getTagName() === 'alias') {
+                    const comment = tag.getComment();
+                    if (typeof comment === 'string') return comment.trim();
+                    if (comment) {
+                        return comment
+                            .map((c) => (typeof c === 'string' ? c : c.getText?.() || ''))
+                            .join('')
+                            .trim();
+                    }
+                }
+            }
+        }
+    }
+    return undefined;
+}
+
+/**
+ * Get @alias target for a property symbol.
+ * Returns the alias target prop name, or undefined if not an alias.
+ *
+ * @param {Symbol} propSymbol - The property symbol
+ * @returns {string|undefined} - The alias target prop name
+ */
+function getJsDocAlias(propSymbol) {
+    // Try valueDeclaration first
+    const valueDecl = propSymbol.getValueDeclaration?.();
+    const alias = getJsDocAliasFromDeclaration(valueDecl);
+    if (alias) return alias;
+
+    // Fallback to declarations (for Pick<> and other mapped types)
+    const declarations = propSymbol.getDeclarations?.() || [];
+    for (const decl of declarations) {
+        const declAlias = getJsDocAliasFromDeclaration(decl);
+        if (declAlias) return declAlias;
+    }
+
+    return undefined;
+}
+
+/**
  * Check if a declaration node has optional marker.
  */
 function isDeclarationOptional(decl) {
@@ -414,6 +465,8 @@ function extractDefaultValues(sourceFile) {
 function extractPropertiesFromInterface(interfaceDecl, sourceFile, rootPath, defaultValues = {}) {
     const properties = [];
     const seenProps = new Set();
+    // Track alias relationships: alias prop name -> target prop name
+    const aliasMap = new Map();
 
     // Get the type of the interface
     const interfaceType = interfaceDecl.getType();
@@ -427,6 +480,13 @@ function extractPropertiesFromInterface(interfaceDecl, sourceFile, rootPath, def
         // Skip duplicates
         if (seenProps.has(name)) continue;
         seenProps.add(name);
+
+        // Check for @alias tag
+        const aliasTarget = getJsDocAlias(prop);
+        if (aliasTarget) {
+            aliasMap.set(name, aliasTarget);
+            continue;
+        }
 
         // Get the value declaration for this property (may be undefined for Pick<> types)
         const valueDecl = prop.getValueDeclaration();
@@ -448,6 +508,15 @@ function extractPropertiesFromInterface(interfaceDecl, sourceFile, rootPath, def
         };
 
         properties.push(propInfo);
+    }
+
+    // Merge aliases into their target properties
+    for (const [aliasName, targetName] of aliasMap) {
+        const targetProp = properties.find((p) => p.name === targetName);
+        if (targetProp) {
+            if (!targetProp.aliases) targetProp.aliases = [];
+            targetProp.aliases.push(aliasName);
+        }
     }
 
     return properties;
