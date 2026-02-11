@@ -19,30 +19,37 @@ const CONFIG = {
     [Framework.vue]: { label: 'Vue', icon: mdiVuejs },
 };
 
+const SelectButton = ({ framework, children }: { framework: Framework; children?: React.ReactNode }) => (
+    <Button size="s" emphasis="medium" leftIcon={CONFIG[framework].icon} rightIcon={mdiMenuDown} isDisabled={!children}>
+        {children || framework}
+    </Button>
+);
+
 export const FrameworkSelector: React.FC = () => {
     const { framework, setFramework } = useFramework();
     const selectRef = React.useRef<HTMLSelectElement>(null);
     const isServer = useIsServerSide();
-    if (isServer) return null;
+    if (isServer) {
+        return <SelectButton framework={framework} />;
+    }
 
     return (
-        <div className="framework-selector">
-            <select
-                ref={selectRef}
-                value={framework}
-                id="framework-selector"
-                onChange={(e) => setFramework(e.target.value as Framework)}
-                aria-label="Select framework"
-            >
-                <Button size="s" emphasis="medium" leftIcon={CONFIG[framework].icon} rightIcon={mdiMenuDown}>
-                    <selectedcontent />
-                </Button>
-                {Object.values(Framework).map((f) => (
-                    <option key={f} value={f}>
-                        {CONFIG[f].label}
-                    </option>
-                ))}
-            </select>
-        </div>
+        <select
+            className="framework-selector"
+            ref={selectRef}
+            value={framework}
+            id="framework-selector"
+            onChange={(e) => setFramework(e.target.value as Framework)}
+            aria-label="Select framework"
+        >
+            <SelectButton framework={framework}>
+                <selectedcontent />
+            </SelectButton>
+            {Object.values(Framework).map((f) => (
+                <option key={f} value={f}>
+                    {CONFIG[f].label}
+                </option>
+            ))}
+        </select>
     );
 };

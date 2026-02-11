@@ -1,11 +1,11 @@
-@import "@lumx/core/src/scss/design-tokens";
-@import "@lumx/core/src/scss/core";
+@import '@lumx/core/src/scss/design-tokens';
+@import '@lumx/core/src/scss/core';
 
 .framework-selector {
     // On supported browsers, customize the select look
     @supports (appearance: base-select) {
         // Make the select neutral (we use the lumx button inside as styling)
-        select {
+        & {
             appearance: base-select;
             border: none;
             padding: 0;
@@ -14,7 +14,7 @@
             }
         }
         // Select dropdown styled like a lumx popover
-        ::picker(select) {
+        &::picker(select) {
             appearance: base-select;
             border: none;
             @include lumx-elevation(2);
