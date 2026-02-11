@@ -220,3 +220,5 @@ export const Thumbnail = (props: ThumbnailProps) => {
         </Wrapper>
     );
 };
+
+export * from './utils';

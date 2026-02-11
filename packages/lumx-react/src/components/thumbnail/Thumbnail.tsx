@@ -40,7 +40,7 @@ export interface ThumbnailProps extends GenericProps, Omit<UIProps, 'badge'> {
 export const Thumbnail = forwardRef<ThumbnailProps>((props, ref) => {
     const { isAnyDisabled, otherProps, disabledStateProps } = useDisableStateProps(props);
     const defaultTheme = useTheme() || Theme.light;
-    const { image, theme = defaultTheme } = otherProps;
+    const { image, theme = defaultTheme, focusPoint, ...restProps } = otherProps;
     const [imgElement, setImgElement] = useState<HTMLImageElement>();
 
     // Image loading state.
@@ -55,9 +55,10 @@ export const Thumbnail = forwardRef<ThumbnailProps>((props, ref) => {
         focusPointStyle,
         loadingState,
         isAnyDisabled,
+        image,
         theme,
         disabledStateProps,
-        ...otherProps,
+        ...restProps,
         badge:
             props.badge &&
             React.cloneElement(props.badge, {
