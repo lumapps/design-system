@@ -22,6 +22,8 @@ export interface Property {
     defaultValue: string;
     /** Where the property comes from */
     declarations?: Array<{ name: string; fileName: string }>;
+    /** Alias prop names (e.g. "disabled" is an alias of "isDisabled"). */
+    aliases?: string[];
 }
 
 const renderTypeTableRow = ({ type, defaultValue }: Property) => (
@@ -66,13 +68,18 @@ const Row: React.FC<{ property: Property }> = ({ property }) => {
             <header>
                 <Grid hAlign={Alignment.center}>
                     <GridItem width="4">
-                        {property.required ? (
-                            <Text as="span" typography="subtitle1">{`${property.name} *`}</Text>
-                        ) : (
-                            <Text as="span" typography="body1">
+                        <Text as="span" typography="body1">
+                            <Text as="span" typography={property.required ? 'subtitle1' : 'body1'}>
                                 {property.name}
+                                {property.required ? ' *' : null}
                             </Text>
-                        )}
+                            {property.aliases?.map((alias) => (
+                                <Fragment key={alias}>
+                                    {' / '}
+                                    {alias}
+                                </Fragment>
+                            ))}
+                        </Text>
                     </GridItem>
 
                     <GridItem width="8">{renderTypeTableRow(property)}</GridItem>

@@ -21,6 +21,7 @@ export interface CheckboxProps extends HasTheme, HasClassName, HasAriaDisabled {
     id?: string;
     /** Whether it is checked or not or intermediate. */
     isChecked?: boolean | 'intermediate';
+    /** @alias isChecked */
     checked?: boolean;
     /** Whether the component is disabled or not. */
     isDisabled?: boolean;
