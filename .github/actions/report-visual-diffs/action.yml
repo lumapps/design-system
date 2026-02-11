@@ -1,0 +1,51 @@
+name: 'Report Visual Diffs'
+description: 'Scan visual test artifacts for screenshot diffs and post a PR comment with a summary'
+
+inputs:
+    artifacts-dir:
+        description: 'Path to the downloaded artifacts directory'
+        required: true
+    run-id:
+        description: 'GitHub Actions run ID (for artifact download link)'
+        required: true
+    wiki-token:
+        description: 'Token with write access to the wiki repo (for uploading inline images and full report)'
+        required: true
+
+runs:
+    using: 'composite'
+    steps:
+        - name: 'Generate visual diff reports'
+          id: generate-reports
+          uses: actions/github-script@v7
+          with:
+              script: |
+                  await require('${{ github.action_path }}/generate-report.js')({
+                      artifactsDir: '${{ inputs.artifacts-dir }}',
+                      runId: '${{ inputs.run-id }}',
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      prNumber: context.issue.number,
+                  });
+
+        - name: 'Upload images and report to wiki'
+          continue-on-error: true
+          env:
+              GITHUB_TOKEN: ${{ inputs.wiki-token }}
+          shell: bash
+          run: >
+              bash ${{ github.action_path }}/upload-wiki-images.sh
+              ${{ inputs.artifacts-dir }}
+              ${{ github.repository }}
+              ${{ github.event.pull_request.number }}
+              ${{ inputs.run-id }}
+
+        - name: 'Publish PR comment'
+          uses: actions/github-script@v7
+          with:
+              script: |
+                  await require('${{ github.action_path }}/publish-comment.js')({
+                      github,
+                      context,
+                      commentBodyPath: 'comment-body.md',
+                  });

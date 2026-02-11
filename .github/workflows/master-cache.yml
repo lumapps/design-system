@@ -1,0 +1,27 @@
+name: Master Cache
+
+# Run on push to master so that PRs can get updated caches (dependencies + visual snapshots)
+on:
+    push:
+        branches:
+            - master
+
+jobs:
+    dependencies:
+        timeout-minutes: 30
+        name: 'dependencies'
+        runs-on: ubuntu-latest
+        steps:
+            - name: 'Checkout repository'
+              uses: actions/checkout@v5
+
+            - name: 'Setup'
+              uses: ./.github/actions/setup
+              with:
+                  playwright: 'true'
+
+    update-visual-snapshots:
+        needs: [dependencies]
+        uses: ./.github/workflows/workflow-visual-tests.yml
+        with:
+            update: true

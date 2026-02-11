@@ -2917,6 +2917,7 @@ __metadata:
     husky: "npm:^5.0.4"
     jsx-ast-utils: "npm:^3.1.0"
     lint-staged: "npm:^10.5.3"
+    playwright: "npm:^1.58.2"
     postcss-hover-media-feature: "npm:^0.3.1"
     prettier: "npm:^3.2.5"
     semver: "npm:^7.6.0"
