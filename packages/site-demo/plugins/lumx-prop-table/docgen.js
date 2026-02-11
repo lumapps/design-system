@@ -166,8 +166,9 @@ function isExpandableEnum(type) {
         const declarations = aliasSymbol.getDeclarations();
         if (declarations.length > 0) {
             const filePath = declarations[0].getSourceFile().getFilePath();
-            // Expand only types from lumx-core or lumx-react
-            const isDesignSystem = filePath.includes('lumx-core') || filePath.includes('lumx-react');
+            // Expand only types from lumx-core, lumx-react, or lumx-vue
+            const isDesignSystem =
+                filePath.includes('lumx-core') || filePath.includes('lumx-react') || filePath.includes('lumx-vue');
             // Skip types from node_modules (like React types)
             const isNodeModules = filePath.includes('node_modules');
             return isDesignSystem && !isNodeModules;
@@ -408,13 +409,11 @@ function extractDefaultValues(sourceFile) {
  * @param {InterfaceDeclaration|TypeAliasDeclaration} interfaceDecl
  * @param {SourceFile} sourceFile
  * @param {string} rootPath - The project root path for relative file names
+ * @param {Object} [defaultValues] - Default values map (prop name -> default value string)
  */
-function extractPropertiesFromInterface(interfaceDecl, sourceFile, rootPath) {
+function extractPropertiesFromInterface(interfaceDecl, sourceFile, rootPath, defaultValues = {}) {
     const properties = [];
     const seenProps = new Set();
-
-    // Get default values from component file
-    const defaultValues = extractDefaultValues(sourceFile);
 
     // Get the type of the interface
     const interfaceType = interfaceDecl.getType();
@@ -520,104 +519,36 @@ function findComponentInterface(sourceFile, project) {
 }
 
 /**
- * Get the component name from the file
+ * Get the root path for a ts-morph project (monorepo root).
+ * @param {Project} project - The ts-morph project
+ * @returns {string} - The root path
  */
-function getComponentName(sourceFile) {
-    const baseName = path.basename(sourceFile.getFilePath(), '.tsx');
-
-    // Look for exported const with displayName property
-    const variableDeclarations = sourceFile.getVariableDeclarations();
-    for (const varDecl of variableDeclarations) {
-        const name = varDecl.getName();
-        if (name && name === baseName) {
-            return name;
-        }
-    }
-
-    // Look for any exported variable that could be a component
-    for (const varDecl of variableDeclarations) {
-        if (varDecl.isExported()) {
-            return varDecl.getName();
-        }
-    }
-
-    // Look for function declarations
-    const functions = sourceFile.getFunctions();
-    for (const func of functions) {
-        if (func.isExported()) {
-            return func.getName() || baseName;
-        }
-    }
-
-    return baseName;
+function getRootPath(project) {
+    const configFilePath = project.getCompilerOptions().configFilePath;
+    return configFilePath ? path.resolve(path.dirname(configFilePath), '../..') : process.cwd();
 }
 
 /**
- * Parse a component file and extract prop information
+ * Get a source file from a project, adding it if necessary.
  * @param {Project} project - The ts-morph project
- * @param {string} filePath - Path to the component file
+ * @param {string} filePath - Path to the source file
+ * @returns {SourceFile|null} - The source file or null
  */
-function parseComponent(project, filePath) {
-    // Ensure file is in project
+function getSourceFile(project, filePath) {
     let sourceFile = project.getSourceFile(filePath);
     if (!sourceFile) {
         sourceFile = project.addSourceFileAtPath(filePath);
     }
-
-    if (!sourceFile) {
-        return null;
-    }
-
-    const interfaceDecl = findComponentInterface(sourceFile, project);
-    if (!interfaceDecl) {
-        return null;
-    }
-
-    // Get root path from tsconfig location (go up 2 levels from packages/lumx-react)
-    const configFilePath = project.getCompilerOptions().configFilePath;
-    const rootPath = configFilePath ? path.resolve(path.dirname(configFilePath), '../..') : process.cwd();
-
-    const props = extractPropertiesFromInterface(interfaceDecl, sourceFile, rootPath);
-    const displayName = getComponentName(sourceFile);
-
-    return {
-        displayName,
-        props,
-    };
+    return sourceFile || null;
 }
 
 exports.createProject = createProject;
-exports.parseComponent = parseComponent;
-
-/**
- * CLI entrypoint - run docgen for a single component
- * Usage: node docgen.js <component-path>
- * Example: node docgen.js packages/lumx-react/src/components/button/Button.tsx
- */
-if (require.main === module) {
-    const args = process.argv.slice(2);
-
-    if (args.length === 0) {
-        console.error('Usage: node docgen.js <component-path>');
-        console.error('Example: node docgen.js packages/lumx-react/src/components/button/Button.tsx');
-        process.exit(1);
-    }
-
-    const componentPath = args[0];
-    const lumxReactPath = path.resolve(__dirname, '../../../../packages/lumx-react');
-
-    try {
-        const project = createProject(lumxReactPath);
-        const result = parseComponent(project, path.resolve(componentPath));
-
-        if (!result) {
-            console.error('Error: Could not extract props from component');
-            process.exit(1);
-        }
-
-        console.log(JSON.stringify(result, null, 2));
-    } catch (err) {
-        console.error('Error:', err.message);
-        process.exit(1);
-    }
-}
+exports.getRootPath = getRootPath;
+exports.getSourceFile = getSourceFile;
+exports.findComponentInterface = findComponentInterface;
+exports.findTypeByName = findTypeByName;
+exports.extractPropertiesFromInterface = extractPropertiesFromInterface;
+exports.extractDefaultValues = extractDefaultValues;
+exports.getJsDocFromDeclaration = getJsDocFromDeclaration;
+exports.getJsDocDescription = getJsDocDescription;
+exports.getTypeText = getTypeText;
