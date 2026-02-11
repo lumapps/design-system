@@ -1,4 +1,4 @@
-import { computed, defineComponent, useAttrs } from 'vue';
+import { defineComponent, useAttrs } from 'vue';
 
 import {
     SkeletonTypography as SkeletonTypographyUI,
@@ -40,7 +40,7 @@ const SkeletonTypography = defineComponent(
     {
         name: 'LumxSkeletonTypography',
         inheritAttrs: false,
-        props: keysOf<SkeletonTypographyProps>()('class', 'typography', 'width', 'color', 'theme'),
+        props: keysOf<SkeletonTypographyProps>()('class', 'typography', 'width', 'color', 'theme', 'style'),
     },
 );
 

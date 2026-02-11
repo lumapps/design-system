@@ -1,10 +1,9 @@
-import { withRender } from '@lumx/vue/stories/utils/withRender';
-import { setup } from '@lumx/core/js/components/Skeleton/SkeletonTypographyStories';
-
 import { SkeletonTypography } from '@lumx/vue';
+import { setup } from '@lumx/core/js/components/Skeleton/SkeletonTypographyStories';
+import { withRender } from '@lumx/vue/stories/utils/withRender';
 import SkeletonTypographyDefaultVue from './Stories/SkeletonTypographyDefault.vue';
 
-const { meta, TextTypography } = setup({
+const { TextTypography, meta } = setup({
     component: SkeletonTypography,
     render: withRender({ SkeletonTypographyDefaultVue }),
 });

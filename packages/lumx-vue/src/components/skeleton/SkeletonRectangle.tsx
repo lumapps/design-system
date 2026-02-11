@@ -1,4 +1,4 @@
-import { computed, defineComponent, useAttrs } from 'vue';
+import { defineComponent, useAttrs } from 'vue';
 
 import {
     SkeletonRectangle as SkeletonRectangleUI,
@@ -39,17 +39,9 @@ const SkeletonRectangle = defineComponent(
         };
     },
     {
-        name: 'LumxSkeletonRectangle',
+        name: 'SkeletonRectangle',
         inheritAttrs: false,
-        props: keysOf<SkeletonRectangleProps>()(
-            'class',
-            'aspectRatio',
-            'height',
-            'variant',
-            'width',
-            'color',
-            'theme',
-        ),
+        props: keysOf<SkeletonRectangleProps>()('class', 'aspectRatio', 'height', 'variant', 'width', 'color', 'theme'),
     },
 );
 

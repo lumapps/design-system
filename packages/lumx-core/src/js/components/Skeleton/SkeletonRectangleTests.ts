@@ -7,10 +7,7 @@ type SetupProps = Partial<SkeletonRectangleProps>;
 /**
  * Mounts the SkeletonRectangle component and returns common DOM elements needed in tests.
  */
-export const setup = (
-    propsOverride: SetupProps = {},
-    { render, ...options }: SetupOptions<SkeletonRectangleProps>,
-) => {
+export const setup = (propsOverride: SetupProps = {}, { render, ...options }: SetupOptions<SkeletonRectangleProps>) => {
     const props: SkeletonRectangleProps = {
         ...propsOverride,
     };

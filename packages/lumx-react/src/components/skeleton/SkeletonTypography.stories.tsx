@@ -1,16 +1,16 @@
 import { SkeletonTypography, Typography, ColorPalette } from '@lumx/react';
 import { setup } from '@lumx/core/js/components/Skeleton/SkeletonTypographyStories';
 
-const stories = setup({
+const { TextTypography, meta } = setup({
     component: SkeletonTypography,
 });
 
 export default {
     title: 'LumX components/skeleton/Skeleton Typography',
-    ...stories.meta,
+    ...meta,
 };
 
-export const TextTypography = stories.TextTypography;
+export { TextTypography };
 
 // Additional React-specific story
 const colors = Object.values(ColorPalette);
