@@ -14,6 +14,7 @@ interface FrameworkContextValue {
 
 const FrameworkContext = createContext<FrameworkContextValue | null>(null);
 const STORAGE_KEY = 'lumx-framework-selector';
+const FRAMEWORK_PARAM = 'framework';
 
 /**
  * Framework context provider
@@ -23,6 +24,13 @@ export const FrameworkProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     const [framework, setFramework] = useState<Framework>(Framework.react);
 
     React.useEffect(() => {
+        // URL search param takes precedence over localStorage
+        const urlParam = new URLSearchParams(global?.location?.search).get(FRAMEWORK_PARAM);
+        if (urlParam && urlParam in Framework) {
+            setFramework(urlParam as Framework);
+            global?.localStorage?.setItem(STORAGE_KEY, urlParam);
+            return;
+        }
         const stored = global?.localStorage?.getItem(STORAGE_KEY) as null | Framework;
         if (stored) setFramework(stored);
     }, []);
@@ -31,7 +39,14 @@ export const FrameworkProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         () => ({
             framework,
             setFramework(newFramework) {
+                // Persist in local storage
                 global?.localStorage?.setItem(STORAGE_KEY, newFramework);
+
+                // Persist in URL (temporarily)
+                const url = new URL(global.location.href);
+                url.searchParams.set(FRAMEWORK_PARAM, framework);
+                global.history.replaceState({}, '', url.toString());
+
                 // Animate change of framework
                 startViewTransition({
                     changes: () => setFramework(newFramework),
