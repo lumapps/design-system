@@ -1,3 +1,10 @@
+---
+name: migrate-component
+description: Migrate a React-only component to the shared core/React/Vue architecture
+argument-hint: [component-name]
+allowed-tools: Read, Write, Edit, Bash(yarn test:*), Bash(yarn build:*), Bash(mkdir:*), Bash(ls:*), Glob, Grep, Task, TodoWrite
+---
+
 # Migrate Component to Core Architecture
 
 Migrate a React-only component to the core/React/Vue architecture pattern.
