@@ -4,7 +4,7 @@ import castArray from 'lodash/castArray';
 import orderBy from 'lodash/orderBy';
 import upperFirst from 'lodash/upperFirst';
 
-import { Alignment, Divider, ExpansionPanel, Grid, GridItem, Heading, Message } from '@lumx/react';
+import { Alignment, Divider, ExpansionPanel, Grid, GridItem, Heading, Message, Text } from '@lumx/react';
 import { useFramework } from '@lumx/demo/components/layout/FrameworkContext';
 
 import './PropTable.scss';
@@ -25,7 +25,7 @@ export interface Property {
 }
 
 const renderTypeTableRow = ({ type, defaultValue }: Property) => (
-    <span className="prop-table__type lumx-typography-body1">
+    <Text as="span" typography="body1" className="prop-table__type">
         {castArray(type).reduce((acc, typeName, index, arr) => {
             if (typeName === defaultValue) {
                 // Display default value in bold.
@@ -46,7 +46,7 @@ const renderTypeTableRow = ({ type, defaultValue }: Property) => (
                 (default: <strong>{defaultValue}</strong>)
             </span>
         )}
-    </span>
+    </Text>
 );
 
 const Row: React.FC<{ property: Property }> = ({ property }) => {
@@ -67,9 +67,11 @@ const Row: React.FC<{ property: Property }> = ({ property }) => {
                 <Grid hAlign={Alignment.center}>
                     <GridItem width="4">
                         {property.required ? (
-                            <span className="lumx-typography-subtitle1">{`${property.name} *`}</span>
+                            <Text as="span" typography="subtitle1">{`${property.name} *`}</Text>
                         ) : (
-                            <span className="lumx-typography-body1">{property.name}</span>
+                            <Text as="span" typography="body1">
+                                {property.name}
+                            </Text>
                         )}
                     </GridItem>
 
@@ -78,7 +80,9 @@ const Row: React.FC<{ property: Property }> = ({ property }) => {
             </header>
 
             <div className="lumx-spacing-padding-vertical">
-                <p className="lumx-typography-body1">{property.description}</p>
+                <Text as="p" typography="body1">
+                    {property.description}
+                </Text>
             </div>
         </ExpansionPanel>
     );
@@ -96,9 +100,71 @@ const Table = ({ properties }: { properties: Property[] }) => (
     </div>
 );
 
+export interface EventDoc {
+    /** Event name. */
+    name: string;
+    /** Description. */
+    description: string;
+    /** Event parameters. */
+    parameters: Array<{ name: string; type: string; optional: boolean }>;
+}
+
+export interface SlotDoc {
+    /** Slot name. */
+    name: string;
+}
+
+const EventsTable: React.FC<{ events: EventDoc[] }> = ({ events }) => (
+    <div className="prop-table">
+        {events.map((event, idx) => (
+            <Fragment key={event.name}>
+                <div className="prop-table__event">
+                    <Grid hAlign={Alignment.center}>
+                        <GridItem width="4">
+                            <Text as="span" typography="subtitle1">
+                                {event.name}
+                            </Text>
+                        </GridItem>
+                        <GridItem width="8">
+                            <Text as="span" typography="body1" className="prop-table__type">
+                                (
+                                {event.parameters.map((p) => `${p.name}${p.optional ? '?' : ''}: ${p.type}`).join(', ')}
+                                )
+                            </Text>
+                        </GridItem>
+                    </Grid>
+                    {event.description && (
+                        <Text as="p" typography="body1" className="lumx-spacing-padding-top-regular">
+                            {event.description}
+                        </Text>
+                    )}
+                </div>
+                {idx < events.length - 1 && <Divider className="lumx-spacing-margin-vertical-regular" />}
+            </Fragment>
+        ))}
+    </div>
+);
+
+const SlotsTable: React.FC<{ slots: SlotDoc[] }> = ({ slots }) => (
+    <div className="prop-table">
+        {slots.map((slot, idx) => (
+            <Fragment key={slot.name}>
+                <div className="prop-table__slot">
+                    <Text as="span" typography="subtitle1">
+                        {slot.name}
+                    </Text>
+                </div>
+                {idx < slots.length - 1 && <Divider className="lumx-spacing-margin-vertical-regular" />}
+            </Fragment>
+        ))}
+    </div>
+);
+
 export interface ComponentDoc {
     displayName: string;
     props: Property[];
+    events?: EventDoc[];
+    slots?: SlotDoc[];
 }
 
 export interface PropTableProps {
@@ -108,8 +174,11 @@ export interface PropTableProps {
 
 export const PropTable: React.FC<PropTableProps> = ({ docs }) => {
     const { framework } = useFramework();
-    const properties = docs?.[framework]?.props;
-    const componentName = docs?.[framework]?.displayName;
+    const componentDoc = docs?.[framework];
+    const properties = componentDoc?.props;
+    const componentName = componentDoc?.displayName;
+    const events = componentDoc?.events;
+    const slots = componentDoc?.slots;
 
     if (!properties || !componentName) {
         return (
@@ -136,6 +205,24 @@ export const PropTable: React.FC<PropTableProps> = ({ docs }) => {
                     <Table properties={forwardedProps} />
                 </details>
             ) : null}
+
+            {events && events.length > 0 && (
+                <>
+                    <Heading as="h4" typography="subtitle2">
+                        Events
+                    </Heading>
+                    <EventsTable events={events} />
+                </>
+            )}
+
+            {slots && slots.length > 0 && (
+                <>
+                    <Heading as="h4" typography="subtitle2">
+                        Slots
+                    </Heading>
+                    <SlotsTable slots={slots} />
+                </>
+            )}
         </>
     );
 };
