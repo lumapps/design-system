@@ -1,14 +1,17 @@
-import { Booleanish } from '../../types/Booleanish';
-import { CommonRef, HasPolymorphicAs, HasRequiredLinkHref, JSXElement, ElementType } from '../../types';
+import {
+    CommonRef,
+    HasPolymorphicAs,
+    HasRequiredLinkHref,
+    HasDisabled,
+    JSXElement,
+    ElementType,
+    HasAriaDisabled,
+} from '../../types';
 
 export type ClickableElement = 'a' | 'button' | ElementType;
 
-export interface BaseClickableProps {
+export interface BaseClickableProps extends HasDisabled, HasAriaDisabled {
     children?: JSXElement;
-    isDisabled?: boolean;
-    /** @alias isDisabled */
-    disabled?: boolean;
-    'aria-disabled'?: Booleanish;
     onClick?: (event?: any) => void;
     ref?: CommonRef;
 }

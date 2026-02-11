@@ -21,5 +21,6 @@ export type { HasRequiredLinkHref } from './HasRequiredLinkHref';
 export type { HasPolymorphicAs } from './HasPolymorphicAs';
 export type { CommonRef } from './CommonRef';
 export type { HasAriaDisabled } from './HasAriaDisabled';
+export type { HasDisabled } from './HasDisabled';
 export type { AriaAttributes } from './AriaAttributes';
 export type { Selector } from './Selector';

@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/core`:
     -   Moved `Divider` from `@lumx/react`
+    -   Uniformize documentation of `disabled` (as an alias to `isDisabled`) props across core components
 
 ## [4.3.1][] - 2026-02-11
 

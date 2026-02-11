@@ -75,6 +75,7 @@ const Switch = defineComponent(
         props: keysOf<SwitchProps>()(
             'checked',
             'class',
+            'disabled',
             'helper',
             'id',
             'inputProps',
