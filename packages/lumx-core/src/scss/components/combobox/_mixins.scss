@@ -1,0 +1,63 @@
+/**
+ * Add styles before & after an element while avoiding having a "before" section display if an "after" section was
+ displayed.
+ */
+@mixin between($selector) {
+  &:not(:first-child):not(#{$selector} + #{$selector}):not(.visually-hidden + #{$selector}) {
+    @content('before')
+  }
+  &:not(:last-child):not(:has(+ .visually-hidden)):not(:has(+ [aria-hidden=true])) {
+    @content('after')
+  }
+}
+
+@mixin vertical-divider($color: 'theme-light') {
+  @include lumx-divider($color);
+  height: 20px;
+  margin: auto 0;
+  width: 1px;
+}
+
+/**
+ * Automatic divider between elements of a list using border before and after the element
+ *
+ * @param $orientation  Required 'vertical'/'horizontal' orientation
+ * @param $selector     Optional element selector to apply to (default to parent '&' selector)
+ * @param $theme        Optional 'theme-light'/'theme-dark' (defaults to 'theme-light')
+ * @param $spacing      Optional spacing around dividers (defaults to $lumx-spacing-unit-regular)
+ */
+@mixin auto-list-divider($orientation, $selector: &, $theme: 'theme-light', $spacing: $lumx-spacing-unit-regular) {
+  $start: if($orientation == 'vertical', 'top', 'left');
+  $end: if($orientation == 'vertical', 'bottom', 'right');
+
+  @include between($selector) using($position) {
+    @if $position == 'before' {
+      &::before {
+        content: '';
+        display: block;
+        @if $orientation == 'horizontal' {
+          @include vertical-divider($theme);
+        }
+        @if $orientation == 'vertical' {
+          @include lumx-divider($theme);
+        }
+        margin-#{$start}: $spacing;
+        margin-#{$end}: $spacing;
+      }
+    }
+    @if $position == 'after' {
+      &::after {
+        content: '';
+        display: block;
+        @if $orientation == 'horizontal' {
+          @include vertical-divider($theme);
+        }
+        @if $orientation == 'vertical' {
+          @include lumx-divider($theme);
+        }
+        margin-#{$start}: $spacing;
+        margin-#{$end}: $spacing;
+      }
+    }
+  }
+}
