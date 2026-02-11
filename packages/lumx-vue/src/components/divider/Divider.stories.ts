@@ -1,6 +1,6 @@
 import { setup } from '@lumx/core/js/components/Divider/Stories';
 
-import { Divider } from '@lumx/react';
+import { Divider } from '@lumx/vue';
 
 const { meta, ...stories } = setup({
     component: Divider,
