@@ -2,8 +2,9 @@
     <Message
         v-if="isMessageDisplayed"
         kind="info"
-        has-background
-        :close-button-props="{ label: 'Close', onClick: () => (isMessageDisplayed = false) }"
+        :has-background="true"
+        close-button-label="Close"
+        @close="isMessageDisplayed = false"
     >
         <p>
             Message text quisque tincidunt lobortis dui non auctor. Donec porta, ligula volutpat vehicula aliquet, dui
