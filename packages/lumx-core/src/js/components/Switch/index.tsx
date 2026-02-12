@@ -5,6 +5,7 @@ import type {
     HasAriaDisabled,
     HasDisabled,
     HasClassName,
+    HasChecked,
     CommonRef,
 } from '../../types';
 import { classNames } from '../../utils';
@@ -14,15 +15,11 @@ import { InputHelper } from '../InputHelper';
 /**
  * Defines the props of the component.
  */
-export interface SwitchProps extends HasTheme, HasClassName, HasAriaDisabled, HasDisabled {
+export interface SwitchProps extends HasTheme, HasClassName, HasAriaDisabled, HasDisabled, HasChecked {
     /** Helper text. */
     helper?: string;
     /** Native input id property. */
     id?: string;
-    /** Whether it is checked or not. */
-    isChecked?: boolean;
-    /** @alias isChecked */
-    checked?: boolean;
     /** Label text. */
     label?: JSXElement;
     /** Native input name property. */
