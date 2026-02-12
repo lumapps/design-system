@@ -3012,6 +3012,7 @@ __metadata:
     vite-tsconfig-paths: "npm:^5.1.4"
     vitest: "npm:^4.0.18"
     vue: "npm:^3.5.27"
+    vue-tsc: "npm:^3.2.4"
   peerDependencies:
     lodash: 4.17.21
     vue: ^3.5.27
