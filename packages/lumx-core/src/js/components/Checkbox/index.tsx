@@ -7,6 +7,7 @@ import type {
     HasAriaDisabled,
     HasDisabled,
     HasClassName,
+    HasChecked,
     CommonRef,
 } from '../../types';
 import { classNames } from '../../utils';
@@ -22,15 +23,16 @@ export const INTERMEDIATE_STATE = 'intermediate';
 /**
  * Defines the props of the component.
  */
-export interface CheckboxProps extends HasTheme, HasClassName, HasAriaDisabled, HasDisabled {
+export interface CheckboxProps
+    extends HasTheme,
+        HasClassName,
+        HasAriaDisabled,
+        HasDisabled,
+        HasChecked<boolean | 'intermediate'> {
     /** Helper text. */
     helper?: string;
     /** Native input id property. */
     id?: string;
-    /** Whether it is checked or not or intermediate. */
-    isChecked?: boolean | 'intermediate';
-    /** @alias isChecked */
-    checked?: boolean;
     /** Label text. */
     label?: JSXElement;
     /** Native input name property. */
