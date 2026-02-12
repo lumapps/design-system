@@ -41,18 +41,6 @@ Before opening a Pull Request, please see the Submission Guidelines below.
 You can request a new feature by submitting an issue to our [GitHub Repository](https://github.com/lumapps/design-system/issues).
 If you would like to implement a new feature then consider what kind of change it is, discuss it with us before hand in your issue, so that we can better coordinate our efforts, prevent duplication of work, and help you to craft the change so that it is successfully accepted into the project.
 
-## <a name="create-a-new-react-component-"></a> Want to create a new React Component?
-
-The first step to create a new React component is to run:
-
-```
-yarn scaffold
-```
-
-This script will generate a TSX file for the component code, a TSX file for the component tests and an MDX file to demo this component.
-
-To export your component into the `@lumx/react` NPM package, you also have to make sure to update the `src/index.tsx` file.
-
 ## <a name="submission-guidelines"></a> Submission guidelines
 
 ### Submitting an issue

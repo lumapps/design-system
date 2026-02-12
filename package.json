@@ -22,8 +22,7 @@
         "ts-morph": "^27.0.2",
         "typescript": "^5.4.3",
         "vitest": "^4.0.18",
-        "vue-eslint-parser": "^10.2.0",
-        "yo": "^5.1.0"
+        "vue-eslint-parser": "^10.2.0"
     },
     "engines": {
         "node": ">= 20.0.0"
@@ -67,7 +66,6 @@
         "lint": "yarn lint:code; yarn lint:style",
         "lint:style": "stylelint packages/**/*.{css,scss}",
         "lint:code": "eslint packages/",
-        "scaffold": "yo lumx-component --with-tests --with-demo",
         "setup:git-hooks": "yarn husky uninstall && yarn husky install || exit 0",
         "start": "yarn workspace lumx-site-demo start",
         "test": "vitest",
