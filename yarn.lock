@@ -2914,7 +2914,6 @@ __metadata:
     changelog-verify: "npm:^1.1.2"
     es-abstract: "npm:1.17.6"
     eslint: "npm:^8.57.0"
-    eslint-plugin-vue: "npm:9.32.0"
     husky: "npm:^5.0.4"
     jsx-ast-utils: "npm:^3.1.0"
     lint-staged: "npm:^10.5.3"
@@ -2927,7 +2926,6 @@ __metadata:
     ts-morph: "npm:^27.0.2"
     typescript: "npm:^5.4.3"
     vitest: "npm:^4.0.18"
-    vue-eslint-parser: "npm:^10.2.0"
   languageName: unknown
   linkType: soft
 
