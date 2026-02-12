@@ -25,7 +25,7 @@ import { useAttrs, computed, type ComputedRef } from 'vue';
  * </template>
  * ```
  */
-export const useAttrsWithoutHandlers = (): ComputedRef<Record<string, any>> => {
+export const useAttrsWithoutHandlers = (): ComputedRef<any> => {
     const attrs = useAttrs();
 
     return computed(() => {
