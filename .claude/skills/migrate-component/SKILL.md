@@ -36,14 +36,14 @@ Before running this skill, ensure:
 
 ## Migration Steps
 
-### Phase 1: Create Core Component
+### Phase 1: UI Extraction & Implementation
+
+**Goal:** Extract the core UI logic and create thin wrappers for React and Vue.
 
 1. **Create core component directory:**
    ```
    packages/lumx-core/src/js/components/<ComponentName>/
-   ├── index.tsx
-   ├── Tests.ts
-   └── Stories.ts
+   └── index.tsx
    ```
 
 2. **Extract UI logic to `index.tsx`:**
@@ -53,19 +53,7 @@ Before running this skill, ensure:
    - Remove React-specific code (Children.count, etc.)
    - Export: `Component`, `ComponentProps`, `COMPONENT_NAME`, `CLASSNAME`, `DEFAULT_PROPS`
 
-3. **Create `Tests.ts`:**
-   - Export `setup()` function returning test helpers
-   - Export default test suite function
-   - Move UI-related tests from React
-   - Keep framework-specific tests in wrappers
-
-4. **Create `Stories.ts`:**
-   - Export `setup()` function returning story configurations
-   - Create stories: Default, with variations, Disabled
-
-### Phase 2: Update React Wrapper
-
-1. **Refactor React component:**
+3. **Update React wrapper:**
    - Import UI component from core
    - Transform into thin wrapper using `forwardRef`
    - Use hooks: `useId`, `useTheme`, `useDisableStateProps`, `useMergeRefs`
@@ -73,30 +61,13 @@ Before running this skill, ensure:
    - Call `UI({ ... })` instead of rendering JSX
    - Maintain backward compatibility
 
-2. **Update React tests:**
-   - Import and run `BaseComponentTests` from core
-   - Keep only React-specific tests (ref forwarding, theme context)
-   - Create adapter to map props for core tests
-
-3. **Update React stories:**
-   - Import `setup` from core stories
-   - Add framework-specific decorators
-   - Re-export stories
-
-### Phase 3: Create Vue Wrapper
-
-1. **Create Vue component structure:**
-   ```
-   packages/lumx-vue/src/components/<component-name>/
-   ├── <Component>.tsx
-   ├── <Component>.test.ts
-   ├── <Component>.stories.ts
-   ├── Stories/
-   │   └── <Component>Default.vue
-   └── index.ts
-   ```
-
-2. **Create Vue wrapper (`<Component>.tsx`):**
+4. **Create Vue wrapper:**
+   - Create directory structure:
+     ```
+     packages/lumx-vue/src/components/<component-name>/
+     ├── <Component>.tsx
+     └── index.ts
+     ```
    - Use `defineComponent` with render function
    - Use composables: `useTheme`, `useId`, `useDisableStateProps`
    - Support both `label` prop and default slot
@@ -106,33 +77,78 @@ Before running this skill, ensure:
    - Define props using `keysOf<ComponentProps>()`
    - Set `name: 'Lumx<Component>'`
    - Set `inheritAttrs: false`
+   - Create `index.ts` to export component, props, and constants
 
-3. **Create Vue tests:**
-   - Import and run core tests
-   - Add Vue-specific tests (emit events, disabled states)
-   - Use `@testing-library/vue`
-
-4. **Create Vue stories:**
-   - Import core story setup
-   - Use `withRender` decorator
-   - Disable `isChecked` control (managed internally)
-
-5. **Create story template (`.vue` file):**
-   - Internal state management with `ref`
-   - Use `useAttrsWithoutHandlers`
-   - Handle change events
-
-6. **Create `index.ts`:**
-   - Export component, props, and constants
-
-### Phase 4: Update Package Exports
-
-1. **Update Vue package index:**
+5. **Update Vue package index:**
    ```typescript
    export * from './components/<component-name>';
    ```
 
-2. **Verify React package already exports component**
+**Validation Checkpoint 1:**
+- Run `yarn test` to ensure no regressions
+- Run `yarn type-check` to verify TypeScript compilation
+- Ask developer for validation before proceeding to Phase 2
+
+### Phase 2: Tests Migration
+
+**Goal:** Extract core tests and update framework-specific test suites.
+
+1. **Create core tests (`packages/lumx-core/src/js/components/<ComponentName>/Tests.ts`):**
+   - Export `setup()` function returning test helpers
+   - Export default test suite function
+   - Move UI-related tests from React
+   - Keep framework-specific tests in wrappers
+
+2. **Update React tests:**
+   - Import and run `BaseComponentTests` from core
+   - Keep only React-specific tests (ref forwarding, theme context)
+   - Create adapter to map props for core tests
+
+3. **Create Vue tests (`packages/lumx-vue/src/components/<component-name>/<Component>.test.ts`):**
+   - Import and run core tests
+   - Add Vue-specific tests (emit events, disabled states)
+   - Use `@testing-library/vue`
+
+**Validation Checkpoint 2:**
+- Run `yarn test` to ensure all tests pass
+- Run `yarn type-check` to verify TypeScript compilation
+- Ask developer for validation before proceeding to Phase 3
+
+### Phase 3: Stories Migration
+
+**Goal:** Extract core stories and create framework-specific story implementations.
+
+1. **Create core stories (`packages/lumx-core/src/js/components/<ComponentName>/Stories.ts`):**
+   - Export `setup()` function returning story configurations
+   - Create stories: Default, with variations, Disabled
+
+2. **Update React stories:**
+   - Import `setup` from core stories
+   - Add framework-specific decorators
+   - Re-export stories
+
+3. **Create Vue stories:**
+   - Create `<Component>.stories.ts` in Vue component directory
+   - Import core story setup
+   - Use `withRender` decorator
+   - Disable controls for internally managed state (e.g., `isChecked`)
+   - Create story template (`.vue` file in `Stories/` subdirectory):
+     - Internal state management with `ref`
+     - Use `useAttrsWithoutHandlers`
+     - Handle change events
+
+**Validation Checkpoint 3:**
+- Run `yarn test` to ensure no regressions
+- Run `yarn type-check` to verify TypeScript compilation
+- Visual verification in Storybook:
+  - Verify React stories render correctly
+  - Verify Vue stories render correctly
+  - Test all variants and states
+- Ask developer for validation before proceeding to Phase 4
+
+### Phase 4: Update Package Exports
+
+**Verify React package already exports component**
 
 ### Phase 5: Update CHANGELOG
 
@@ -150,26 +166,19 @@ Add entry under `[Unreleased]`:
     -   Moved `<Component>` from `@lumx/react`
 ```
 
-### Phase 6: Verification
+### Phase 6: Final Build Verification
 
-1. **Run tests:**
-   ```bash
-   yarn test packages/lumx-core/src/js/components/<Component>
-   yarn test packages/lumx-react/src/components/<component>
-   yarn test packages/lumx-vue/src/components/<component>
-   ```
-
-2. **Build packages:**
+1. **Build packages:**
    ```bash
    yarn build:core
    yarn build:react
    yarn build:vue
    ```
 
-3. **Visual verification in Storybook:**
-   - Verify React stories render correctly
-   - Verify Vue stories render correctly
-   - Test all variants and states
+2. **Final smoke test:**
+   - Run full test suite: `yarn test`
+   - Verify all builds succeed
+   - Check Storybook for any console errors
 
 ## Key Patterns to Follow
 
@@ -338,34 +347,56 @@ export default Component;
 
 ## Files Created/Modified Checklist
 
-### Core
-- [ ] `/packages/lumx-core/src/js/components/<Component>/index.tsx`
-- [ ] `/packages/lumx-core/src/js/components/<Component>/Tests.ts`
-- [ ] `/packages/lumx-core/src/js/components/<Component>/Stories.ts`
-
-### React
-- [ ] `/packages/lumx-react/src/components/<component>/<Component>.tsx` (modified)
-- [ ] `/packages/lumx-react/src/components/<component>/<Component>.test.tsx` (modified)
-- [ ] `/packages/lumx-react/src/components/<component>/<Component>.stories.tsx` (modified)
-
-### Vue
-- [ ] `/packages/lumx-vue/src/components/<component>/<Component>.tsx`
-- [ ] `/packages/lumx-vue/src/components/<component>/<Component>.test.ts`
-- [ ] `/packages/lumx-vue/src/components/<component>/<Component>.stories.ts`
-- [ ] `/packages/lumx-vue/src/components/<component>/Stories/<Component>Default.vue`
-- [ ] `/packages/lumx-vue/src/components/<component>/index.ts`
+### Phase 1: UI Extraction & Implementation
+- [ ] `/packages/lumx-core/src/js/components/<Component>/index.tsx` (created)
+- [ ] `/packages/lumx-react/src/components/<component>/<Component>.tsx` (modified to wrapper)
+- [ ] `/packages/lumx-vue/src/components/<component>/<Component>.tsx` (created)
+- [ ] `/packages/lumx-vue/src/components/<component>/index.ts` (created)
 - [ ] `/packages/lumx-vue/src/index.ts` (add export)
 
-### Documentation
+### Phase 2: Tests Migration
+- [ ] `/packages/lumx-core/src/js/components/<Component>/Tests.ts` (created)
+- [ ] `/packages/lumx-react/src/components/<component>/<Component>.test.tsx` (modified)
+- [ ] `/packages/lumx-vue/src/components/<component>/<Component>.test.ts` (created)
+
+### Phase 3: Stories Migration
+- [ ] `/packages/lumx-core/src/js/components/<Component>/Stories.ts` (created)
+- [ ] `/packages/lumx-react/src/components/<component>/<Component>.stories.tsx` (modified)
+- [ ] `/packages/lumx-vue/src/components/<component>/<Component>.stories.ts` (created)
+- [ ] `/packages/lumx-vue/src/components/<component>/Stories/<Component>Default.vue` (created)
+
+### Phase 4-6: Finalization
+- [ ] Package exports verified
 - [ ] `/CHANGELOG.md` (add entry under Unreleased)
+- [ ] Final build verification completed
 
 ## Success Criteria
 
+### After Phase 1 (UI Extraction)
+- [ ] `yarn test` passes
+- [ ] `yarn type-check` passes
+- [ ] React component still works (backward compatible)
+- [ ] Vue component renders basic UI
+- [ ] Developer validates UI implementation
+
+### After Phase 2 (Tests)
 - [ ] All core tests pass
-- [ ] All React tests pass (including new core tests)
-- [ ] All Vue tests pass (including new core tests)
-- [ ] All packages build successfully
+- [ ] All React tests pass (including imported core tests)
+- [ ] All Vue tests pass (including imported core tests)
+- [ ] `yarn test` passes
+- [ ] `yarn type-check` passes
+- [ ] Developer validates test coverage
+
+### After Phase 3 (Stories)
 - [ ] React Storybook stories render correctly
 - [ ] Vue Storybook stories render correctly
+- [ ] All variants and states display properly
+- [ ] `yarn test` passes
+- [ ] `yarn type-check` passes
+- [ ] Developer validates stories
+
+### Final Success Criteria
+- [ ] All packages build successfully (`yarn build:core`, `yarn build:react`, `yarn build:vue`)
 - [ ] React API is backward compatible
 - [ ] CHANGELOG is updated
+- [ ] No console errors in Storybook
