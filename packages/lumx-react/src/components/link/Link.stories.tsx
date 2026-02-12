@@ -20,41 +20,59 @@ import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
 import { withThemedBackground } from '@lumx/react/stories/decorators/withThemedBackground';
 import { mdiEarth, mdiFoodApple, mdiPencil } from '@lumx/icons';
 import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
+import { setup } from '@lumx/core/js/components/Link/Stories';
 
 const linkTypographies = { ...TypographyInterface, ...TypographyTitleCustom };
 
+const { meta, ...coreStories } = setup({
+    component: Link,
+    decorators: { withCombinations },
+});
+
 export default {
     title: 'LumX components/link/Link',
-    component: Link,
+    ...meta,
     argTypes: {
+        ...meta.argTypes,
         typography: getSelectArgType(linkTypographies),
         color: colorArgType,
         colorVariant: colorVariantArgType,
         rightIcon: iconArgType,
         leftIcon: iconArgType,
     },
-    args: { ...Link.defaultProps, children: 'Link' },
+    args: { ...meta.args, children: 'Link' },
 };
 
-/**
- * Default link
- */
-export const Default = {
-    args: { href: 'https://example.com', target: '_blank' },
+/** Default link */
+export const Default = { ...coreStories.Default, args: { ...coreStories.Default.args, children: 'Link' } };
+
+/** Link as button */
+export const AsButton = { ...coreStories.AsButton, args: { ...coreStories.AsButton.args, children: 'Button Link' } };
+
+/** With typography */
+export const WithTypography = {
+    ...coreStories.WithTypography,
+    args: { ...coreStories.WithTypography.args, children: 'Link' },
 };
+
+/** With color */
+export const WithColor = { ...coreStories.WithColor, args: { ...coreStories.WithColor.args, children: 'Link' } };
+
+/** Disabled states */
+export const Disabled = { ...coreStories.Disabled };
 
 /**
  * Use custom component instead of <a> or <button>
  */
 export const LinkAs = {
-    args: { linkAs: CustomLink },
+    args: { linkAs: CustomLink, children: 'Link' },
 };
 
 /**
  * Use a custom typography and customize it via CSS variable
  */
 export const WithCustomizableTypography = {
-    typography: Typography.custom.title1,
+    args: { typography: Typography.custom.title1, children: 'Link' },
     // eslint-disable-next-line react/display-name
     render: (props: any) => (
         // Injecting CSS variable to customize the font size
@@ -73,8 +91,9 @@ export const WithCustomizableTypography = {
  * Show state combinations
  */
 export const AllStates = {
+    ...coreStories.AllStates,
     argTypes: {
-        isDisabled: { control: false },
+        ...coreStories.AllStates.argTypes,
         onClick: { action: true },
     },
     decorators: [
@@ -82,8 +101,8 @@ export const AllStates = {
         withCombinations({
             combinations: {
                 sections: {
-                    Default: { href: '#' },
-                    'As button': {},
+                    Default: { href: '#', children: 'Link' },
+                    'As button': { children: 'Link' },
                     'with icon': {
                         children: ['Link', <Icon key="icon" icon={mdiEarth} />, 'with icon'],
                     },
@@ -132,6 +151,7 @@ export const AllTypography = {
  * Show all color combinations
  */
 export const AllColors = {
+    args: { children: 'Link' },
     argTypes: {
         color: { control: false },
         colorVariant: { control: false },

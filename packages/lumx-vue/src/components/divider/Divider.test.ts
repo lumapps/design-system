@@ -32,7 +32,7 @@ describe('<Divider />', () => {
         return { divider, props };
     };
 
-    describe('Vue-specific', () => {
+    describe('Vue', () => {
         it('should render with default theme from context', () => {
             const { divider } = setupDivider();
             expect(divider).toBeInTheDocument();

@@ -21,7 +21,7 @@ describe(`<${RadioButton.displayName}>`, () => {
     const setupRadioButton = (props: Partial<RadioButtonProps> = {}, options: SetupRenderOptions = {}) =>
         setup(props, { ...options, render: renderRadioButton, screen });
 
-    describe('React-specific', () => {
+    describe('React', () => {
         it('should forward ref to the root element', () => {
             const ref = React.createRef<HTMLDivElement>();
             render(<RadioButton id="test" ref={ref} />);

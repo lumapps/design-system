@@ -30,8 +30,7 @@ describe(`<${Switch.displayName}>`, () => {
     const setupSwitch = (props: Partial<CoreSwitchProps> = {}, options: SetupRenderOptions = {}) =>
         setup(props, { ...options, render: renderSwitch, screen });
 
-    // React-specific tests only
-    describe('React-specific', () => {
+    describe('React', () => {
         it('should forward ref to the root element', () => {
             const ref = React.createRef<HTMLDivElement>();
             render(<Switch id="test" ref={ref} />);
