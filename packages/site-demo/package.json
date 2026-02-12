@@ -18,7 +18,9 @@
         "clean": "gatsby clean",
         "build": "gatsby build",
         "start": "gatsby develop",
-        "type-check": "yarn tsc -p tsconfig.json"
+        "type-check:vue": "vue-tsc --noEmit -p tsconfig.vue.json",
+        "type-check:react": "tsc -p tsconfig.json",
+        "type-check": "yarn type-check:vue && yarn type-check:react"
     },
     "dependencies": {
         "@codesandbox/sandpack-react": "^2.20.0",
@@ -60,6 +62,7 @@
         "htmlparser2": "^3.10.1",
         "tsconfig-paths-webpack-plugin": "^4.0.1",
         "typescript": "^5.4.3",
+        "vue-tsc": "^3.2.4",
         "yaml": "^1.10.0"
     }
 }

@@ -1,6 +1,6 @@
 <template>
     <Button :theme="theme">Default</Button>
-    <Button disabled="true" :theme="theme">Disabled</Button>
+    <Button :disabled="true" :theme="theme">Disabled</Button>
     <Button :left-icon="mdiPencil" :theme="theme">With Icon</Button>
     <Button :right-icon="mdiMenuDown" :theme="theme">Dropdown</Button>
     <ButtonGroup>
