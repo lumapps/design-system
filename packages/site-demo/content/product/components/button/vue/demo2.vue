@@ -1,6 +1,6 @@
 <template>
     <Button emphasis="medium" :theme="theme">Default</Button>
-    <Button disabled="true" emphasis="medium" :theme="theme">Disabled</Button>
+    <Button :disabled="true" emphasis="medium" :theme="theme">Disabled</Button>
     <Button :left-icon="mdiPencil" emphasis="medium" :theme="theme">With Icon</Button>
     <Button :right-icon="mdiMenuDown" emphasis="medium" :theme="theme">Dropdown</Button>
     <ButtonGroup>

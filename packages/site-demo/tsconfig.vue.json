@@ -1,0 +1,9 @@
+{
+    "extends": "../../tsconfig",
+    "compilerOptions": {
+        "jsx": "preserve",
+        "jsxImportSource": "vue"
+    },
+    "include": ["content/**/*.vue"],
+    "files": ["../lumx-vue/src/shims-tsx.d.ts"]
+}
