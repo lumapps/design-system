@@ -75,7 +75,7 @@ const Checkbox = defineComponent(
                 <CheckboxUI
                     {...otherProps.value}
                     className={props.class}
-                    theme={props.theme || defaultTheme}
+                    theme={props.theme || defaultTheme.value}
                     inputId={inputId.value}
                     inputRef={localInputRef}
                     isDisabled={isAnyDisabled.value}
