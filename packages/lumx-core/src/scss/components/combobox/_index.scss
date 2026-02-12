@@ -1,0 +1,86 @@
+/* ==========================================================================
+   Combobox Divider
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-combobox-divider {
+    // Hide if first or last in list
+    &:last-child,
+    &:first-child {
+        display: none;
+    }
+}
+
+/* ==========================================================================
+   Combobox Option
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-combobox-option {
+    position: relative;
+
+    &__content {
+        // TODO: migrate away from using lumx-list-item styles https://lumapps.atlassian.net/browse/DSW-288
+        gap: 0;
+
+        &--is-disabled {
+            opacity: .5;
+        }
+    }
+
+    &__trigger {
+        color: $lumx-color-dark-N;
+        text-decoration: none;
+        overflow: hidden;
+        overflow-wrap: break-word;
+
+        // Make the whole item clickable
+        &::before {
+            content: '';
+            cursor: pointer;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            top: 0;
+            z-index: 2;
+        }
+    }
+
+    &__after {
+        z-index: 3;
+    }
+}
+
+/* ==========================================================================
+   Combobox Listbox
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-combobox-listbox {
+  &:empty {
+    padding: 0;
+  }
+
+  &__state {
+    text-align: center;
+    margin: $lumx-spacing-unit-regular;
+  }
+}
+
+/* ==========================================================================
+   Combobox Option more Info
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-combobox-option-more-info {
+  &__popover {
+    padding: $lumx-spacing-unit-big;
+    max-width: $lumx-size-xxl;
+  }
+}
+
+
+/* ==========================================================================
+   Combobox Section
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-combobox-section {
+  @include auto-list-divider($orientation: 'vertical');
+}

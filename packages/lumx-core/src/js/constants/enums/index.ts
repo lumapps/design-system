@@ -193,3 +193,13 @@ export type ColorWithVariants =
           // No dark variant for light and dark
           `light-D${number}` | `dark-D${number}`
       >;
+
+export const REAL_SIZE_FOR_LUMX_SIZE = {
+    [Size.xxs]: 14,
+    [Size.xs]: 20,
+    [Size.s]: 24,
+    [Size.m]: 36,
+    [Size.l]: 64,
+    [Size.xl]: 128,
+    [Size.xxl]: 256,
+};

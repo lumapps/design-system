@@ -25,3 +25,4 @@ export type { HasChecked } from './HasChecked';
 export type { HasDisabled } from './HasDisabled';
 export type { AriaAttributes } from './AriaAttributes';
 export type { Selector } from './Selector';
+export type { PartialBy, PartialExcept } from './PartialBy';

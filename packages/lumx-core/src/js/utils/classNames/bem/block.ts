@@ -1,4 +1,5 @@
 import classnames from 'classnames';
+import { ClassValue } from 'classnames/types';
 import { modifier, type Modifier } from './modifier';
 
 /**
@@ -13,15 +14,15 @@ import { modifier, type Modifier } from './modifier';
  * block('button'); // 'button'
  * block('button', { active: true, disabled: false }); // 'button button--active'
  */
-export function block(baseName: string, additionalClasses: string[]): string;
-export function block(baseName: string, modifiers?: Modifier, additionalClasses?: string[]): string;
+export function block(baseName: string, additionalClasses: ClassValue[]): string;
+export function block(baseName: string, modifiers?: Modifier, additionalClasses?: ClassValue[]): string;
 export function block(
     baseName: string,
-    modifiersOrAdditionalClasses?: Modifier | string[],
-    additionalClasses?: string[],
+    modifiersOrAdditionalClasses?: Modifier | ClassValue[],
+    additionalClasses?: ClassValue[],
 ) {
     let modifiers: Modifier | undefined;
-    let classes: string[] | undefined;
+    let classes: ClassValue[] | undefined;
 
     if (Array.isArray(modifiersOrAdditionalClasses)) {
         classes = modifiersOrAdditionalClasses;
