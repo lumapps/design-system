@@ -32,7 +32,7 @@ const SkeletonTypography = defineComponent(
                     {...props}
                     {...attrs}
                     className={props.class}
-                    theme={props.theme || defaultTheme}
+                    theme={props.theme || defaultTheme.value}
                 />
             );
         };

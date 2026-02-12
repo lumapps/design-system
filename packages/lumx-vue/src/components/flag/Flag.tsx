@@ -25,7 +25,7 @@ const Flag = defineComponent(
                 {...props}
                 {...attrs}
                 className={props.class}
-                theme={props.theme || defaultTheme}
+                theme={props.theme || defaultTheme.value}
                 children={slots.default?.() as JSXElement}
                 Text={Text as unknown as UIProps['Text']}
             />

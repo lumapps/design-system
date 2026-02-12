@@ -63,7 +63,7 @@ const Link = defineComponent(
                     {...otherProps.value}
                     {...disabledStateProps.value}
                     className={className}
-                    theme={props.theme || defaultTheme}
+                    theme={props.theme || defaultTheme.value}
                     isDisabled={isAnyDisabled.value}
                     onClick={handleClick}
                     label={labelContent as JSXElement}

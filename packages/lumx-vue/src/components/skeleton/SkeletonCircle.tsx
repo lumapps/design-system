@@ -28,7 +28,12 @@ const SkeletonCircle = defineComponent(
 
         return () => {
             return (
-                <SkeletonCircleUI {...props} {...attrs} className={props.class} theme={props.theme || defaultTheme} />
+                <SkeletonCircleUI
+                    {...props}
+                    {...attrs}
+                    className={props.class}
+                    theme={props.theme || defaultTheme.value}
+                />
             );
         };
     },

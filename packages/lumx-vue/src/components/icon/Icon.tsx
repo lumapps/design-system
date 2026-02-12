@@ -18,7 +18,7 @@ const Icon = defineComponent(
         const attrs = useAttrs();
         const defaultTheme = useTheme({ defaultTheme: undefined });
 
-        return () => <IconUI {...props} {...attrs} className={props.class} theme={props.theme || defaultTheme} />;
+        return () => <IconUI {...props} {...attrs} className={props.class} theme={props.theme || defaultTheme.value} />;
     },
     {
         name: 'Icon',
