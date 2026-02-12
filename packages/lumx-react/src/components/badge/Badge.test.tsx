@@ -1,7 +1,7 @@
-import { ColorPalette } from '@lumx/react';
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import { getByClassName } from '@lumx/react/testing/utils/queries';
 import { render, screen } from '@testing-library/react';
+import BaseBadgeTests from '@lumx/core/js/components/Badge/Tests';
 import { Badge, BadgeProps } from './Badge';
 
 const CLASSNAME = Badge.className as string;
@@ -20,27 +20,14 @@ const setup = (propsOverride: Partial<BadgeProps> = {}) => {
 };
 
 describe(`<${Badge.displayName}>`, () => {
-    describe('Props', () => {
-        it('should use default props', () => {
-            const { badge } = setup();
-
-            expect(badge.className).toMatchInlineSnapshot('"lumx-badge lumx-badge--color-primary"');
-            expect(badge).toHaveTextContent(/30/);
-        });
-
-        it('should render color', () => {
-            const { badge } = setup({ color: ColorPalette.red });
-
-            expect(badge).toHaveClass('lumx-badge--color-red');
-        });
+    // Run core tests
+    BaseBadgeTests({
+        render: (props: BadgeProps) => render(<Badge {...props} />),
+        screen,
     });
 
-    describe('Content Rendering', () => {
-        it('should render string content', () => {
-            setup({ children: 'New Content' });
-            expect(screen.getByText('New Content')).toBeInTheDocument();
-        });
-
+    // React-specific tests
+    describe('React', () => {
         it('should render empty children', () => {
             const { badge } = setup({ children: null });
             expect(badge).toBeInTheDocument();
@@ -48,7 +35,7 @@ describe(`<${Badge.displayName}>`, () => {
         });
     });
 
-    // Common tests suite.
+    // Common tests suite (React-specific).
     commonTestsSuiteRTL(setup, {
         baseClassName: CLASSNAME,
         forwardClassName: 'badge',
