@@ -134,7 +134,6 @@ export const Thumbnail = (props: ThumbnailProps) => {
     const isLink = Boolean(linkProps?.href || linkAs);
     const isClickable = !isAnyDisabled && Boolean(isLink || !!forwardedProps.onClick);
 
-    const Wrapper: any = isClickable ? RawClickable : 'div';
     const wrapperProps = { ...forwardedProps };
     if (isClickable) {
         Object.assign(wrapperProps, { as: linkAs || (linkProps?.href ? 'a' : 'button') }, disabledStateProps);
@@ -144,6 +143,26 @@ export const Thumbnail = (props: ThumbnailProps) => {
             wrapperProps['aria-label'] = forwardedProps['aria-label'] || alt;
         }
     }
+
+    const wrapperClassName = classNames.join(
+        linkProps?.className,
+        className,
+        block({
+            [`align-${align}`]: Boolean(align),
+            [`aspect-ratio-${aspectRatio}`]: Boolean(aspectRatio),
+            [`size-${size}`]: Boolean(size),
+            [`theme-${theme}`]: Boolean(theme),
+            [`variant-${variant}`]: Boolean(variant),
+            'is-clickable': isClickable,
+            'has-error': hasError,
+            'has-icon-error-fallback': hasIconErrorFallback,
+            'has-custom-error-fallback': hasCustomErrorFallback,
+            'is-loading': isLoading,
+            [`object-fit-${objectFit}`]: Boolean(objectFit),
+            'has-badge': !!badge,
+            'fill-height': fillHeight,
+        }),
+    );
 
     // If we have a loading placeholder image that is really loaded (complete)
     const loadingPlaceholderImage =
@@ -155,30 +174,8 @@ export const Thumbnail = (props: ThumbnailProps) => {
         ? { backgroundImage: `url(${loadingPlaceholderImage.src})` }
         : undefined;
 
-    return (
-        <Wrapper
-            {...wrapperProps}
-            ref={ref}
-            className={classNames.join(
-                linkProps?.className,
-                className,
-                block({
-                    [`align-${align}`]: Boolean(align),
-                    [`aspect-ratio-${aspectRatio}`]: Boolean(aspectRatio),
-                    [`size-${size}`]: Boolean(size),
-                    [`theme-${theme}`]: Boolean(theme),
-                    [`variant-${variant}`]: Boolean(variant),
-                    'is-clickable': isClickable,
-                    'has-error': hasError,
-                    'has-icon-error-fallback': hasIconErrorFallback,
-                    'has-custom-error-fallback': hasCustomErrorFallback,
-                    'is-loading': isLoading,
-                    [`object-fit-${objectFit}`]: Boolean(objectFit),
-                    'has-badge': !!badge,
-                    'fill-height': fillHeight,
-                }),
-            )}
-        >
+    const innerImage = (
+        <>
             <span className={element('background')}>
                 <img
                     // Use placeholder image size
@@ -201,6 +198,8 @@ export const Thumbnail = (props: ThumbnailProps) => {
                         }),
                         imgProps?.className,
                     )}
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-ignore - crossOrigin prop compatibility between React and Vue JSX
                     crossOrigin={crossOrigin}
                     src={image}
                     alt={alt}
@@ -213,7 +212,18 @@ export const Thumbnail = (props: ThumbnailProps) => {
                 )}
             </span>
             {badge}
-        </Wrapper>
+        </>
+    );
+
+    /** Render `RawClickable` as a function since it is a core component which needs to be treated as such */
+    if (isClickable) {
+        return RawClickable({ ref, ...wrapperProps, className: wrapperClassName, children: innerImage as JSXElement });
+    }
+
+    return (
+        <div ref={ref} {...wrapperProps} className={wrapperClassName}>
+            {innerImage}
+        </div>
     );
 };
 

@@ -1,15 +1,24 @@
 ---
-frameworks: ['react']
+frameworks: ['react', 'vue']
 ---
-import * as Demo1 from './react/demo1.tsx';
-import * as Demo2 from './react/demo2.tsx';
-import * as Demo3 from './react/demo3.tsx';
-import * as Demo4 from './react/demo4.tsx';
-import * as Demo5 from './react/demo5.tsx';
-import * as Demo6 from './react/demo6.tsx';
-import * as Demo7 from './react/demo7.tsx';
-import * as Demo8 from './react/demo8.tsx';
+import * as ReactDemo1 from './react/demo1.tsx';
+import * as ReactDemo2 from './react/demo2.tsx';
+import * as ReactDemo3 from './react/demo3.tsx';
+import * as ReactDemo4 from './react/demo4.tsx';
+import * as ReactDemo5 from './react/demo5.tsx';
+import * as ReactDemo6 from './react/demo6.tsx';
+import * as ReactDemo7 from './react/demo7.tsx';
+import * as ReactDemo8 from './react/demo8.tsx';
+import * as VueDemo1 from './vue/demo1.vue';
+import * as VueDemo2 from './vue/demo2.vue';
+import * as VueDemo3 from './vue/demo3.vue';
+import * as VueDemo4 from './vue/demo4.vue';
+import * as VueDemo5 from './vue/demo5.vue';
+import * as VueDemo6 from './vue/demo6.vue';
+import * as VueDemo7 from './vue/demo7.vue';
+import * as VueDemo8 from './vue/demo8.vue';
 import ReactThumbnail from 'lumx-docs:@lumx/react/components/thumbnail/Thumbnail';
+import VueThumbnail from 'lumx-docs:@lumx/vue/components/thumbnail/Thumbnail';
 
 # Thumbnail
 
@@ -20,7 +29,7 @@ import ReactThumbnail from 'lumx-docs:@lumx/react/components/thumbnail/Thumbnail
 Thumbnails come in 7 sizes (width): `xxs`, `xs`, `s`, `m`, `l`, `xl`, and unset.
 Check [size foundations](/product/foundations/size) for more details.
 
-<DemoBlock orientation="horizontal" demo={{ react: Demo1 }} />
+<DemoBlock orientation="horizontal" demo={{ react: ReactDemo1, vue: VueDemo1 }} />
 
 ## Ratios
 
@@ -35,25 +44,25 @@ Thumbnails come in 6 aspect ratios: `free`, `horizontal`, `original`, `square`, 
 
 _For any ratio except `original` the source image might be cropped._
 
-<DemoBlock orientation="horizontal" demo={{ react: Demo2 }} />
+<DemoBlock orientation="horizontal" demo={{ react: ReactDemo2, vue: VueDemo2 }} />
 
 _Setting the `objectFit` property to `contain` avoids cropping the image (letterboxing)._
 
-<DemoBlock orientation="horizontal" demo={{ react: Demo3 }} />
+<DemoBlock orientation="horizontal" demo={{ react: ReactDemo3, vue: VueDemo3 }} />
 
 ## Variants
 
 Thumbnails come in two variants: `squared` and `rounded`
 
-<DemoBlock orientation="horizontal" demo={{ react: Demo4 }} />
+<DemoBlock orientation="horizontal" demo={{ react: ReactDemo4, vue: VueDemo4 }} />
 
 ## Sizes, ratios, and variants combined
 
-<DemoBlock orientation="horizontal" demo={{ react: Demo5 }} />
+<DemoBlock orientation="horizontal" demo={{ react: ReactDemo5, vue: VueDemo5 }} />
 
 ## Loading state
 
-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: Demo6 }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemo6, vue: VueDemo6 }} />
 
 Thumbnails display a loading state while loading the image if they are configured with sufficient size constraints.
 Three type of size constraints can be used:
@@ -71,11 +80,11 @@ image loads.
 
 Thumbnails will display an error state by default when the image fails to load correctly.
 
-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: Demo7 }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemo7, vue: VueDemo7 }} />
 
 The `fallback` prop can be used to change the icon or even replace the error state with a custom React node.
 
-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: Demo8 }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemo8, vue: VueDemo8 }} />
 
 ### Accessibility concerns
 
@@ -99,4 +108,4 @@ If you have some troubles to define how to fill the `alt` attribute, you can use
 
 ### Properties
 
-<PropTable docs={{ react: ReactThumbnail }} />
+<PropTable docs={{ react: ReactThumbnail, vue: VueThumbnail }} />
