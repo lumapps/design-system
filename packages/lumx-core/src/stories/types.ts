@@ -11,6 +11,8 @@ interface StoryDecorators {
     withCombinations?: (options: CombinationsOptions) => Decorator;
     /** Decorator adding a themed background (light/dark) based on the `theme` arg */
     withThemedBackground?: () => Decorator;
+    /** manages nested props */
+    withNestedProps?: () => Decorator;
     /** Decorator wrapping story in a resizable box */
     withResizableBox?: (options?: {
         width?: number | string;

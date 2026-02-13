@@ -1,33 +1,20 @@
 import { useEffect, useState } from 'react';
-
-export type LoadingState = 'isLoading' | 'isLoaded' | 'hasError';
-
-function getState(img: HTMLImageElement | null | undefined, event?: Event) {
-    // Error event occurred or image has no source.
-    if (event?.type === 'error' || (img?.complete && !img.getAttribute('src'))) {
-        return 'hasError';
-    }
-    // Image is undefined or incomplete.
-    if (!img || !img.complete) {
-        return 'isLoading';
-    }
-    // Else loaded.
-    return 'isLoaded';
-}
+import { getImageLoadingState } from '@lumx/core/js/components/Thumbnail';
+import { type LoadingState } from '@lumx/core/js/components/Thumbnail/types';
 
 export function useImageLoad(imageURL: string, imgRef?: HTMLImageElement): LoadingState {
-    const [state, setState] = useState<LoadingState>(getState(imgRef));
+    const [state, setState] = useState<LoadingState>(getImageLoadingState(imgRef));
 
     // Update state when changing image URL or DOM reference.
     useEffect(() => {
-        setState(getState(imgRef));
+        setState(getImageLoadingState(imgRef));
     }, [imageURL, imgRef]);
 
     // Listen to `load` and `error` event on image
     useEffect(() => {
         const img = imgRef;
         if (!img) return undefined;
-        const update = (event?: Event) => setState(getState(img, event));
+        const update = (event?: Event) => setState(getImageLoadingState(img, event));
         img.addEventListener('load', update);
         img.addEventListener('error', update);
         return () => {
