@@ -3,5 +3,8 @@
     "projectId": "Project:5fbfb1d508c0520021560f10",
     "storybookBaseDir": "packages/lumx-react",
     "buildScriptName": "build:storybook",
-    "zip": true
+    "zip": true,
+    "onlyChanged": true,
+    "externals": ["packages/site-demo/static/**"],
+    "autoAcceptChanges": "master"
 }
