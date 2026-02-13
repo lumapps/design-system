@@ -1,0 +1,99 @@
+name: 'Visual Tests'
+
+on:
+    workflow_dispatch:
+    workflow_call:
+        inputs:
+            update:
+                description: 'Update all snapshots without checking for differences'
+                type: boolean
+                default: false
+        secrets:
+            GITBOT_TOKEN:
+                description: 'Token with write access to the wiki repo'
+                required: false
+
+jobs:
+    test-storybook:
+        timeout-minutes: 30
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                include:
+                    - project: '@lumx/react storybook'
+                      visDir: packages/lumx-react/__vis__
+                      label: 'react'
+                    - project: '@lumx/vue storybook'
+                      visDir: packages/lumx-vue/__vis__
+                      label: 'vue'
+        steps:
+            - name: 'Checkout repository'
+              uses: actions/checkout@v5
+
+            - name: 'Setup'
+              uses: ./.github/actions/setup
+              with:
+                  playwright: 'true'
+
+            - name: 'Restore visual snapshots cache'
+              id: cache-restore
+              uses: actions/cache/restore@v4
+              with:
+                  path: ${{ matrix.visDir }}/*/__baselines__
+                  key: vis-snapshots-${{ matrix.label }}-${{ github.sha }}
+                  restore-keys: |
+                      vis-snapshots-${{ matrix.label }}-
+
+            - name: 'Save cached baselines manifest'
+              run: |
+                  mkdir -p ${{ matrix.visDir }}
+                  # Save a manifest of cached baselines (before tests run) to detect new/deleted screenshots later
+                  find ${{ matrix.visDir }} -path '*__baselines__/*.png' 2>/dev/null \
+                    | sed 's|.*__baselines__/||' \
+                    | sort > ${{ matrix.visDir }}/cached-baselines.txt
+
+            - name: 'Run ${{ matrix.project }} tests'
+              id: visual-tests
+              continue-on-error: true
+              run: yarn test --project '${{ matrix.project }}' --run ${{ inputs.update && '--update' || '' }}
+
+            - name: 'Upload visual report artifacts'
+              if: always()
+              uses: actions/upload-artifact@v4
+              with:
+                  name: vis-report-${{ matrix.label }}
+                  path: ${{ matrix.visDir }}
+                  retention-days: 15
+                  if-no-files-found: ignore
+
+            - name: 'Save visual snapshots cache'
+              if: steps.cache-restore.outputs.cache-hit != 'true' || inputs.update == 'true'
+              uses: actions/cache/save@v4
+              with:
+                  path: ${{ matrix.visDir }}/*/__baselines__
+                  key: vis-snapshots-${{ matrix.label }}-${{ github.sha }}
+
+    visual-report:
+        if: always() && github.event_name == 'pull_request'
+        needs: [test-storybook]
+        runs-on: ubuntu-latest
+        permissions:
+            pull-requests: write
+        steps:
+            - name: 'Checkout repository'
+              uses: actions/checkout@v5
+
+            - name: 'Download visual diff artifacts'
+              uses: actions/download-artifact@v4
+              with:
+                  pattern: vis-report-*
+                  path: vis-artifacts/
+                  merge-multiple: false
+              continue-on-error: true # No artifacts if all tests pass
+
+            - name: 'Report visual diffs'
+              uses: ./.github/actions/report-visual-diffs
+              with:
+                  artifacts-dir: vis-artifacts
+                  run-id: ${{ github.run_id }}
+                  wiki-token: ${{ secrets.GITBOT_TOKEN }}

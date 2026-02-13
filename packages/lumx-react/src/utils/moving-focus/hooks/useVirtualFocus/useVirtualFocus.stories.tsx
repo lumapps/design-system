@@ -14,7 +14,11 @@ import { MovingFocusContext } from '../../components/MovingFocusProvider/context
 import { useVirtualFocus } from './useVirtualFocus';
 import { useVirtualFocusParent } from './useVirtualFocusParent';
 
-export default { title: 'utils/moving-focus/hooks/useVirtualFocus' };
+export default {
+    title: 'utils/moving-focus/hooks/useVirtualFocus',
+    // No need to snapshot these stories
+    tags: ['!snapshot'],
+};
 
 // ListItem using the `useVirtualFocus()` hook to use virtual focus.
 const VirtualFocusChild: React.FC<GenericProps> = ({

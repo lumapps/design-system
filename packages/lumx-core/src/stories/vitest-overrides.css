@@ -1,0 +1,32 @@
+/**
+ * CSS overrides applied only during Vitest browser tests.
+ * Use this to stabilize visual snapshots and test behavior.
+ */
+
+/** Disable animations and transitions */
+*,
+*::before,
+*::after {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+}
+
+/** Stabilize image rendering */
+img {
+    backface-visibility: initial !important;
+}
+
+/** Stabilize font family */
+:root {
+    --lumx-typography-font-family: Arial, sans-serif !important;
+}
+pre {
+    font-family: monospace;
+}
+
+/** Add some space around the subject */
+body {
+    padding: 1rem !important;
+}

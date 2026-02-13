@@ -8,6 +8,8 @@ export default {
     component: PortalProvider,
     args: { enabled: true },
     parameters: { chromatic: { disable: true } },
+    // No need to snapshot these stories
+    tags: ['!snapshot'],
 };
 
 /**

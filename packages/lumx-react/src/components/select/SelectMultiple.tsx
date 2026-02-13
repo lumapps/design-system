@@ -61,6 +61,8 @@ export const SelectMultipleField: React.FC<SelectMultipleProps> = (props) => {
     const defaultTheme = useTheme();
     const {
         anchorRef,
+        // We don't have a clear button in select multiple but it must be removed from the forwardedProps
+        clearButtonProps,
         handleKeyboardNav,
         hasError,
         icon,

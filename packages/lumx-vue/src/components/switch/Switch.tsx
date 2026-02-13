@@ -54,7 +54,7 @@ const Switch = defineComponent(
                 <SwitchUI
                     {...otherProps.value}
                     className={props.class}
-                    theme={props.theme || defaultTheme}
+                    theme={props.theme || defaultTheme.value}
                     inputId={inputId.value}
                     isDisabled={isAnyDisabled.value}
                     onChange={handleChange}

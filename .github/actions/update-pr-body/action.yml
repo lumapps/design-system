@@ -2,6 +2,9 @@ name: 'Update PR body'
 description: 'Update PR body with pattern replace'
 
 inputs:
+    pull_number:
+        description: 'PR number to update. Falls back to context.issue.number if not provided.'
+        required: false
     pattern:
         description: |
             RexExp pattern to match.
@@ -38,10 +41,10 @@ inputs:
 runs:
     using: composite
     steps:
-        -   name: Update PR body
-            uses: actions/github-script@v6
-            with:
-                script: |
-                    require("${{ github.action_path }}")({
-                        github, context, inputs: ${{ toJSON(inputs) }}
-                    })
+        - name: Update PR body
+          uses: actions/github-script@v6
+          with:
+              script: |
+                  require("${{ github.action_path }}")({
+                      github, context, inputs: ${{ toJSON(inputs) }}
+                  })

@@ -43,21 +43,8 @@ const fixEsmImports = () => ({
 
 /**
  * Vite config
- *
- * Shared with Vitest and Storybook (with some override in the `viteFinal` of `.storybook/main.ts`)
  */
 export default defineConfig({
-    test: {
-        environment: 'jsdom',
-        globals: true,
-        setupFiles: ['./vitest.setup.ts'],
-        coverage: {
-            reporter: ['json', 'lcov', 'html', 'text'],
-            reportsDirectory: './reports/coverage',
-        },
-        include: ['src/**/*.{test,spec}.{ts,tsx}'],
-        exclude: ['src/**/*.stories.tsx'],
-    },
     build: {
         lib: {
             entry: 'src/index.ts',
