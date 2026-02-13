@@ -1,6 +1,8 @@
 import type { Preview } from '@storybook/react-vite';
-import { withStoryBlockDecorator } from './story-block/decorator';
-import { Theme } from '@lumx/react';
+import { withGlobalTheme } from './decorators/withGlobalTheme';
+import { Theme } from '@lumx/core/src/js/constants';
+import '@lumx/core/stories/root-styles.scss';
+import 'focus-visible';
 
 const preview: Preview = {
     globalTypes: {
@@ -16,13 +18,12 @@ const preview: Preview = {
                     { value: Theme.dark, title: 'Dark theme' },
                 ],
                 dynamicTitle: true,
-                showName: true,
             },
         },
     },
     argTypes: {
         theme: { table: { disable: true } },
     },
-    decorators: [withStoryBlockDecorator],
+    decorators: [withGlobalTheme],
 };
 export default preview;

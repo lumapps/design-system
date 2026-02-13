@@ -44,7 +44,7 @@ const IconButton = defineComponent(
                 {...otherProps.value}
                 {...disabledStateProps.value}
                 className={props.class}
-                theme={props.theme || defaultTheme}
+                theme={props.theme || defaultTheme.value}
                 title={props.label}
                 onClick={handleClick as any}
             />

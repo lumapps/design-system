@@ -27,7 +27,9 @@ const Divider = defineComponent(
         const defaultTheme = useTheme();
 
         return () => {
-            return <DividerUI {...attrs} {...props} className={props.class} theme={props.theme || defaultTheme} />;
+            return (
+                <DividerUI {...attrs} {...props} className={props.class} theme={props.theme || defaultTheme.value} />
+            );
         };
     },
     {

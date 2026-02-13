@@ -1,4 +1,4 @@
-import { inject } from 'vue';
+import { type ComputedRef, type Ref, computed, inject, unref } from 'vue';
 
 import { Theme } from '@lumx/core/js/constants';
 
@@ -6,10 +6,11 @@ export interface UseTheme {
     defaultTheme?: Theme;
 }
 /**
- * Retrives the globally applied theme.
- * @returns theme
+ * Retrieves the globally applied theme.
+ * @returns computed theme value (auto-updates when the provided theme changes)
  */
-export function useTheme(options: UseTheme = { defaultTheme: Theme.light }) {
+export function useTheme(options: UseTheme = { defaultTheme: Theme.light }): ComputedRef<Theme | undefined> {
     const { defaultTheme } = options;
-    return inject('theme', undefined) || defaultTheme;
+    const injected = inject<Theme | Ref<Theme | undefined> | undefined>('theme', undefined);
+    return computed(() => unref(injected) || defaultTheme);
 }
