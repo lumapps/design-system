@@ -81,7 +81,7 @@ jobs:
               run: yarn type-check
 
     visual-tests:
-        if: github.event.pull_request.draft == false
+        #if: github.event.pull_request.draft == false
         uses: ./.github/workflows/workflow-visual-tests.yml
         permissions:
             pull-requests: write

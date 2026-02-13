@@ -36,7 +36,7 @@ jobs:
                       }
 
                       const pulls = await findPRs(github, context.repo, branch);
-                      const pr = pulls.find((p) => !p.draft);
+                      const pr = pulls[0]//.find((p) => !p.draft);
                       if (pr) {
                           core.info(`Found open non-draft PR #${pr.number} for branch "${branch}"`);
                           core.setOutput('deploy', 'true');
