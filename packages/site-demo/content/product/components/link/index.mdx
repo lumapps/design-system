@@ -1,29 +1,33 @@
 ---
-frameworks: ['react']
+frameworks: ['react', 'vue']
 ---
-import * as Demo1 from './react/demo1.tsx';
-import * as Demo2 from './react/demo2.tsx';
-import * as Demo3 from './react/demo3.tsx';
+import * as ReactDemo1 from './react/demo1.tsx';
+import * as ReactDemo2 from './react/demo2.tsx';
+import * as ReactDemo3 from './react/demo3.tsx';
+import * as VueDemo1 from './vue/demo1.vue';
+import * as VueDemo2 from './vue/demo2.vue';
+import * as VueDemo3 from './vue/demo3.vue';
 import ReactLink from 'lumx-docs:@lumx/react/components/link/Link';
+import VueLink from 'lumx-docs:@lumx/vue/components/link/Link';
 
 # Link
 
 **Display simple hyperlinks**.
 By default, links use the primary color. They can contain text and icons.
 
-<DemoBlock orientation="horizontal" vAlign="space-evenly" wrap demo={{ react: Demo1 }} />
+<DemoBlock orientation="horizontal" vAlign="space-evenly" wrap demo={{ react: ReactDemo1, vue: VueDemo1 }} />
 
 ## Typography
 
 Link typography can be applied with the `typography` prop or **inherited** from the wrapping parent (like [Text](/product/components/text/) or [Heading](/product/components/heading/)).
 
-<DemoBlock orientation="horizontal" vAlign="space-evenly" wrap demo={{ react: Demo2 }} />
+<DemoBlock orientation="horizontal" vAlign="space-evenly" wrap demo={{ react: ReactDemo2, vue: VueDemo2 }} />
 
 ## Color
 
 Use the `color` prop to change the color of the link. Link color **is not inherited** from the wrapping parent.
 
-<DemoBlock orientation="horizontal" vAlign="space-evenly" wrap demo={{ react: Demo3 }} />
+<DemoBlock orientation="horizontal" vAlign="space-evenly" wrap demo={{ react: ReactDemo3, vue: VueDemo3 }} />
 
 ### Accessibility concerns
 
@@ -37,4 +41,4 @@ If the link is within some other text, please **avoid to use the same color** as
 
 ### Properties
 
-<PropTable docs={{ react: ReactLink }} />
+<PropTable docs={{ react: ReactLink, vue: VueLink }} />

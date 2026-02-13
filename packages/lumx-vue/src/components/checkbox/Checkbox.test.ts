@@ -19,7 +19,7 @@ describe('<Checkbox />', () => {
     const setupCheckbox = (props: Partial<CheckboxProps> = {}, options: SetupRenderOptions<CheckboxProps> = {}) =>
         setup(props, { ...options, render: renderCheckbox, screen });
 
-    describe('Vue-specific', () => {
+    describe('Vue', () => {
         it('should emit change event when checkbox is clicked', async () => {
             const { getByRole, emitted } = render(Checkbox, {
                 props: { id: 'test', label: 'Test label' },

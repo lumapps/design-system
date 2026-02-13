@@ -21,7 +21,7 @@ describe(`<${Checkbox.displayName}>`, () => {
     const setupCheckbox = (props: Partial<CheckboxProps> = {}, options: SetupRenderOptions = {}) =>
         setup(props, { ...options, render: renderCheckbox, screen });
 
-    describe('React-specific', () => {
+    describe('React', () => {
         it('should forward ref to the root element', () => {
             const ref = React.createRef<HTMLDivElement>();
             render(<Checkbox id="test" ref={ref} />);

@@ -20,7 +20,7 @@ describe(`<${Divider.displayName}>`, () => {
     const setupDivider = (props: Partial<DividerProps> = {}, options: SetupRenderOptions = {}) =>
         setup(props, { ...options, render: renderDivider, screen });
 
-    describe('React-specific', () => {
+    describe('React', () => {
         it('should render with default theme from context', () => {
             const { divider } = setupDivider();
             expect(divider).toBeInTheDocument();
