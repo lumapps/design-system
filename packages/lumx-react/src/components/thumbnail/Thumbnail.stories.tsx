@@ -4,7 +4,6 @@ import uniqueId from 'lodash/uniqueId';
 
 import { mdiAbTesting } from '@lumx/icons';
 import {
-    Alignment,
     AspectRatio,
     Badge,
     Button,
@@ -14,55 +13,74 @@ import {
     Size,
     Thumbnail,
     ThumbnailObjectFit,
-    ThumbnailVariant,
 } from '@lumx/react';
 import { CustomLink } from '@lumx/react/stories/utils/CustomLink';
-import { IMAGE_SIZES, imageArgType, IMAGES } from '@lumx/core/stories/controls/image';
-import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
+import { IMAGE_SIZES, IMAGES } from '@lumx/core/stories/controls/image';
 import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
 import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
+import { setup } from '@lumx/core/js/components/Thumbnail/Stories';
 
-const aligns = [Alignment.center, Alignment.left, Alignment.right];
-const variants = [ThumbnailVariant.squared, ThumbnailVariant.rounded];
+const { meta, ...stories } = setup({
+    component: Thumbnail,
+    decorators: { withNestedProps },
+    overrides: {
+        Simple: {
+            args: { image: IMAGES.landscape1s200 },
+            decorators: [
+                withWrapper({
+                    style: { border: '1px dashed red', height: 500, width: 500, resize: 'both', overflow: 'hidden' },
+                }),
+            ],
+        },
+        FillHeightAndRatio: {
+            args: { image: IMAGES.landscape1s200, fillHeight: true },
+            decorators: [
+                withWrapper({
+                    style: { border: '1px dashed red', height: 500, width: 500, resize: 'both', overflow: 'hidden' },
+                }),
+                withCombinations({
+                    combinations: { rows: { key: 'aspectRatio', options: withUndefined(AspectRatio) } },
+                }),
+            ],
+        },
+        ObjectFit: {
+            args: { size: Size.xl },
+            decorators: [
+                withCombinations({
+                    cellStyle: { border: '1px solid lightgray' },
+                    combinations: {
+                        cols: {
+                            'Default (cover)': {},
+                            contain: { objectFit: ThumbnailObjectFit.contain },
+                        },
+                        rows: {
+                            'Ratio square': { aspectRatio: AspectRatio.square },
+                            'Ratio wide': { aspectRatio: AspectRatio.wide },
+                            'Ratio vertical': { aspectRatio: AspectRatio.vertical },
+                        },
+                        sections: {
+                            'Portrait image': { image: IMAGES.portrait1 },
+                            'Landscape image': { image: IMAGES.landscape1 },
+                        },
+                    },
+                }),
+                withWrapper({ maxColumns: 3, itemMinWidth: 350 }, GridColumn),
+            ],
+        },
+    },
+});
 
 export default {
     title: 'LumX components/thumbnail/Thumbnail',
-    component: Thumbnail,
-    args: Thumbnail.defaultProps,
-    argTypes: {
-        image: imageArgType,
-        align: getSelectArgType(aligns),
-        variant: getSelectArgType(variants),
-        aspectRatio: getSelectArgType(AspectRatio),
-        fallback: { control: false },
-        'focusPoint.x': { control: { type: 'range', max: 1, min: -1, step: 0.05 } },
-        'focusPoint.y': { control: { type: 'range', max: 1, min: -1, step: 0.05 } },
-    },
-    decorators: [withNestedProps()],
+    ...meta,
 };
 
-/** Simple thumbnail taking the size of the original image */
-export const Simple = {
-    args: { image: IMAGES.landscape1s200 },
-    decorators: [
-        withWrapper({
-            style: { border: '1px dashed red', height: 500, width: 500, resize: 'both', overflow: 'hidden' },
-        }),
-    ],
-};
+export const Simple = { ...stories.Simple };
+export const IsLoading = { ...stories.IsLoading };
+export const WithoutSource = { ...stories.WithoutSource };
 
-/** Loading state*/
-export const IsLoading = {
-    args: { ...Simple.args, isLoading: true },
-};
-
-export const WithoutSource = {
-    args: { image: IMAGES.emptyImage, size: Size.xxl, aspectRatio: AspectRatio.square },
-};
-
-/** Thumbnail error fallback and size variants */
 export const ErrorFallback = {
     args: { image: 'foo' },
     decorators: [
@@ -83,11 +101,9 @@ export const ErrorFallback = {
     ],
 };
 
-/** Simple thumbnail with badge */
 export const WithBadge = {
-    ...Simple,
     args: {
-        ...Simple.args,
+        image: IMAGES.landscape1s200,
         size: Size.xl,
         badge: (
             <Badge color="green">
@@ -95,66 +111,24 @@ export const WithBadge = {
             </Badge>
         ),
     },
-};
-
-/** Demonstrate the focus point X on a vertical thumbnail containing an horizontal image */
-export const FocusPointVertical = {
-    args: {
-        aspectRatio: AspectRatio.vertical,
-        size: Size.xxl,
-        image: IMAGES.landscape1,
-        'focusPoint.x': 1,
-    },
-};
-
-/** Demonstrate the focus point Y on a horizontal thumbnail containing an vertical image */
-export const FocusPointHorizontal = {
-    args: {
-        aspectRatio: AspectRatio.horizontal,
-        size: Size.xxl,
-        image: IMAGES.portrait1,
-        'focusPoint.y': 1,
-    },
-};
-
-/** Setting `onClick` to turn the thumbnail into a button */
-export const AsButton = {
-    args: Simple.args,
-    argTypes: { onClick: { action: true } },
-};
-
-/** Setting `linkProps.href` to turn the thumbnail into a link */
-export const AsLink = {
-    args: { ...Simple.args, linkProps: { href: 'https://example.com' } },
-};
-
-/** Setting `href` to turn the thumbnail into a link */
-export const AsCustomLink = {
-    args: { ...Simple.args, linkAs: CustomLink, linkProps: { href: 'https://example.com' } },
-};
-
-/** Combinations of fillHeight and ratios */
-export const FillHeightAndRatio = {
-    ...Simple,
-    args: { ...Simple.args, fillHeight: true },
-
     decorators: [
-        ...Simple.decorators,
-        withCombinations({ combinations: { rows: { key: 'aspectRatio', options: withUndefined(AspectRatio) } } }),
+        withWrapper({
+            style: { border: '1px dashed red', height: 500, width: 500, resize: 'both', overflow: 'hidden' },
+        }),
     ],
 };
 
-/**
- * Simple thumbnail with svg image
- * */
-export const WithSvgImages = {
-    args: {
-        image: IMAGES.defaultSvg,
-        size: Size.xxl,
-        fillHeight: true,
-        'focusPoint.x': 1,
-    },
+export const FocusPointVertical = { ...stories.FocusPointVertical };
+export const FocusPointHorizontal = { ...stories.FocusPointHorizontal };
+export const AsButton = { ...stories.AsButton };
+export const AsLink = { ...stories.AsLink };
+
+export const AsCustomLink = {
+    args: { image: IMAGES.landscape1s200, linkAs: CustomLink, linkProps: { href: 'https://example.com' } },
 };
+
+export const FillHeightAndRatio = { ...stories.FillHeightAndRatio };
+export const WithSvgImages = { ...stories.WithSvgImages };
 
 export const Original = () => (
     <>
@@ -394,34 +368,8 @@ export const Square = () => (
     </>
 );
 
-export const ObjectFit = {
-    args: { size: Size.xl },
-    decorators: [
-        withCombinations({
-            cellStyle: { border: '1px solid lightgray' },
-            combinations: {
-                cols: {
-                    'Default (cover)': {},
-                    contain: { objectFit: ThumbnailObjectFit.contain },
-                },
-                rows: {
-                    'Ratio square': { aspectRatio: AspectRatio.square },
-                    'Ratio wide': { aspectRatio: AspectRatio.wide },
-                    'Ratio vertical': { aspectRatio: AspectRatio.vertical },
-                },
-                sections: {
-                    'Portrait image': { image: IMAGES.portrait1 },
-                    'Landscape image': { image: IMAGES.landscape1 },
-                },
-            },
-        }),
-        withWrapper({ maxColumns: 3, itemMinWidth: 350 }, GridColumn),
-    ],
-};
+export const ObjectFit = { ...stories.ObjectFit };
 
-/**
- * Demonstrate loading a small image and then use it as the loading placeholder image when loading a bigger image
- */
 export const LoadingPlaceholderImage = () => {
     const [isShown, setShown] = React.useState(false);
     const imgRef = React.useRef() as React.RefObject<HTMLImageElement>;
@@ -437,9 +385,7 @@ export const LoadingPlaceholderImage = () => {
                         <Thumbnail
                             image={`https://picsum.photos/id/15/2500/1667?cacheBust${uniqueId()}`}
                             alt="Large image"
-                            // Loading placeholder image
                             loadingPlaceholderImageRef={imgRef}
-                            // Reserve space
                             imgProps={{ width: 2500, height: 1667 }}
                         />
                     </div>
@@ -448,6 +394,5 @@ export const LoadingPlaceholderImage = () => {
         </>
     );
 };
-// Disables Chromatic snapshot (not relevant for this story).
 LoadingPlaceholderImage.parameters = { chromatic: { disable: true } };
 LoadingPlaceholderImage.tags = ['!snapshot'];
