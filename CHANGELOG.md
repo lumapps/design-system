@@ -10,11 +10,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   `@lumx/vue`:
+    -   Create the `Badge` component
+    -   Create the `BadgeWrapper` component
     -   Create the `Divider` component
 
 ### Changed
 
 -   `@lumx/core`:
+    -   Moved `Badge` from `@lumx/react`
+    -   Moved `BadgeWrapper` from `@lumx/react`
     -   Moved `Divider` from `@lumx/react`
     -   Uniformize documentation of `disabled` (as an alias to `isDisabled`) props across core components
 

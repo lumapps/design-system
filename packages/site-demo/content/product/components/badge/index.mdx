@@ -1,12 +1,18 @@
 ---
-frameworks: ['react']
+frameworks: ['react', 'vue']
 ---
-import * as Demo1 from './react/demo1.tsx';
-import * as Demo2 from './react/demo2.tsx';
-import * as Demo3 from './react/demo3.tsx';
-import * as Demo4 from './react/demo4.tsx';
+import * as ReactDemo1 from './react/demo1.tsx';
+import * as ReactDemo2 from './react/demo2.tsx';
+import * as ReactDemo3 from './react/demo3.tsx';
+import * as ReactDemo4 from './react/demo4.tsx';
+import * as VueDemo1 from './vue/demo1.vue';
+import * as VueDemo2 from './vue/demo2.vue';
+import * as VueDemo3 from './vue/demo3.vue';
+import * as VueDemo4 from './vue/demo4.vue';
 import ReactBadge from 'lumx-docs:@lumx/react/components/badge/Badge';
 import ReactBadgeWrapper from 'lumx-docs:@lumx/react/components/badge/BadgeWrapper';
+import VueBadge from 'lumx-docs:@lumx/vue/components/badge/Badge';
+import VueBadgeWrapper from 'lumx-docs:@lumx/vue/components/badge/BadgeWrapper';
 
 # Badge
 
@@ -17,25 +23,25 @@ Badges can be placed above avatars.
 
 Badges with label are often used to display counters or rankings.
 
-<DemoBlock orientation="horizontal" demo={{ react: Demo1 }} />
+<DemoBlock orientation="horizontal" demo={{ react: ReactDemo1, vue: VueDemo1 }} />
 
 ## Icon
 
 Badges with icon are often used to display states, status or activities.
 
-<DemoBlock orientation="horizontal" demo={{ react: Demo2 }} />
+<DemoBlock orientation="horizontal" demo={{ react: ReactDemo2, vue: VueDemo2 }} />
 
 ## Thumbnail
 
 Badges with thumbnail are often used to display custom logos images.
 
-<DemoBlock orientation="horizontal" demo={{ react: Demo3 }} />
+<DemoBlock orientation="horizontal" demo={{ react: ReactDemo3, vue: VueDemo3 }} />
 
 ## Colors
 
 **Blue** badges are often used as an accent visual, **Green** to emphasize success, **Yellow** to emphasize warnings, **Red** to emphasize alerts and **Dark** as a neutral visual.
 
-<DemoBlock orientation="horizontal" demo={{ react: Demo4 }} />
+<DemoBlock orientation="horizontal" demo={{ react: ReactDemo4, vue: VueDemo4 }} />
 
 ### Accessibility concerns
 
@@ -57,4 +63,4 @@ Keep in mind that the color can also carry an information, it may be translated 
 
 ### Properties
 
-<PropTable docs={{ react: ReactBadge }} />
+<PropTable docs={{ react: ReactBadge, vue: VueBadge }} />

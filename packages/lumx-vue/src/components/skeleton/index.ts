@@ -1,9 +1,13 @@
-export { default as SkeletonCircle } from './SkeletonCircle';
-export type { SkeletonCircleProps } from './SkeletonCircle';
+import SkeletonCircle, { SkeletonCircleProps } from './SkeletonCircle';
+import SkeletonRectangle, { SkeletonRectangleProps, SkeletonRectangleVariant } from './SkeletonRectangle';
+import SkeletonTypography, { SkeletonTypographyProps } from './SkeletonTypography';
 
-export { default as SkeletonRectangle } from './SkeletonRectangle';
-export type { SkeletonRectangleProps } from './SkeletonRectangle';
-export { SkeletonRectangleVariant } from './SkeletonRectangle';
+export { SkeletonCircle };
+export type { SkeletonCircleProps };
 
-export { default as SkeletonTypography } from './SkeletonTypography';
-export type { SkeletonTypographyProps } from './SkeletonTypography';
+export { SkeletonRectangle };
+export type { SkeletonRectangleProps };
+export { SkeletonRectangleVariant };
+
+export { SkeletonTypography };
+export type { SkeletonTypographyProps };

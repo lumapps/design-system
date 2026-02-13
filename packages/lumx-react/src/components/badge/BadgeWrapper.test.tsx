@@ -6,12 +6,10 @@ import { mdiAccount, mdiHeart } from '@lumx/icons';
 import { Badge, BadgeWrapper, BadgeWrapperProps, ColorPalette, Icon } from '@lumx/react';
 import { getByClassName } from '@lumx/react/testing/utils/queries';
 import { render, screen } from '@testing-library/react';
+import BaseBadgeWrapperTests from '@lumx/core/js/components/Badge/BadgeWrapperTests';
 
 const CLASSNAME = BadgeWrapper.className as string;
 
-/**
- * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
- */
 const setup = (propsOverride: Partial<BadgeWrapperProps> = {}) => {
     const props = {
         badge: (
@@ -28,8 +26,14 @@ const setup = (propsOverride: Partial<BadgeWrapperProps> = {}) => {
 };
 
 describe(`<${BadgeWrapper.displayName}>`, () => {
-    describe('Props', () => {
-        it('should render badge', () => {
+    BaseBadgeWrapperTests({
+        render: (props: any) =>
+            render(<BadgeWrapper {...(omit(props, 'children') as any)}>{props.children}</BadgeWrapper>),
+        screen,
+    });
+
+    describe('React', () => {
+        it('should render badge with JSX components', () => {
             const { badgeWrapper } = setup();
 
             expect(badgeWrapper).toHaveClass('lumx-badge-wrapper');
@@ -37,17 +41,10 @@ describe(`<${BadgeWrapper.displayName}>`, () => {
             expect(last(badgeWrapper.children)).toHaveClass('lumx-badge-wrapper__badge');
         });
 
-        it('should render children content', () => {
+        it('should render JSX children content', () => {
             setup({ children: <div data-testid="child">Child Content</div> });
             expect(screen.getByTestId('child')).toBeInTheDocument();
             expect(screen.getByText('Child Content')).toBeInTheDocument();
-        });
-
-        it('should not render badge container if badge is missing', () => {
-            // @ts-expect-error: badge is required in types but we test null for safety.
-            const { badgeWrapper } = setup({ badge: null });
-            expect(badgeWrapper.children).toHaveLength(1);
-            expect(badgeWrapper.querySelector('.lumx-badge-wrapper__badge')).not.toBeInTheDocument();
         });
     });
 

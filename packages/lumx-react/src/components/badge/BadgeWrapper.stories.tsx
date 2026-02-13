@@ -1,41 +1,40 @@
 import { mdiAccount, mdiBee, mdiHeart } from '@lumx/icons';
 import { Badge, BadgeWrapper, Button, Chip, ColorPalette, FlexBox, Icon, Orientation, Size } from '@lumx/react';
+import { setup } from '@lumx/core/js/components/Badge/BadgeWrapperStories';
+
+const { meta, ...stories } = setup({
+    component: BadgeWrapper,
+    overrides: {
+        WithIcon: {
+            args: {
+                badge: (
+                    <Badge color={ColorPalette.red}>
+                        <Icon icon={mdiHeart} />
+                    </Badge>
+                ),
+                children: <Icon icon={mdiAccount} size={Size.m} color={ColorPalette.dark} />,
+            },
+        },
+        WithButton: {
+            args: {
+                badge: (
+                    <Badge color={ColorPalette.red}>
+                        <Icon icon={mdiHeart} />
+                    </Badge>
+                ),
+                children: <Button>Some button</Button>,
+            },
+        },
+    },
+});
 
 export default {
     title: 'LumX components/badge/BadgeWrapper',
-    component: BadgeWrapper,
-    argTypes: {
-        children: { control: false },
-    },
+    ...meta,
 };
 
-/**
- * Using badge wrapper with icon
- */
-export const WithIcon = {
-    args: {
-        badge: (
-            <Badge color={ColorPalette.red}>
-                <Icon icon={mdiHeart} />
-            </Badge>
-        ),
-        children: <Icon icon={mdiAccount} size={Size.m} color={ColorPalette.dark} />,
-    },
-};
-
-/**
- * Using badge wrapper with icon
- */
-export const WithButton = {
-    args: {
-        badge: (
-            <Badge color={ColorPalette.red}>
-                <Icon icon={mdiHeart} />
-            </Badge>
-        ),
-        children: <Button>Some button</Button>,
-    },
-};
+export const WithIcon = { ...stories.WithIcon };
+export const WithButton = { ...stories.WithButton };
 
 export const WithChip = {
     args: {

@@ -23,9 +23,18 @@ Migrate a React-only component to the core/React/Vue architecture pattern.
 ## Description
 
 This skill migrates a component from React-only implementation to a shared core architecture where:
-- **Core package** (`@lumx/core`): Contains framework-agnostic UI logic, tests, and stories
+- **Core package** (`@lumx/core`): Contains framework-agnostic UI logic, tests (plain data only, no JSX), and stories (plain data only, no JSX)
 - **React package** (`@lumx/react`): Thin wrapper that delegates to core
 - **Vue package** (`@lumx/vue`): Thin wrapper that delegates to core
+
+**Component Organization:**
+- **Sub-components go in the same folder as their parent component**
+- Example: `Badge` and `BadgeWrapper` both live in the `badge/` folder
+  - Core: `/packages/lumx-core/src/js/components/Badge/` contains both `Badge` and `BadgeWrapper`
+  - React: `/packages/lumx-react/src/components/badge/` contains both `Badge.tsx` and `BadgeWrapper.tsx`
+  - Vue: `/packages/lumx-vue/src/components/badge/` contains both `Badge.tsx` and `BadgeWrapper.tsx`
+- When migrating a sub-component (like `BadgeWrapper`), respect the existing folder structure from React
+- The folder name uses lowercase-with-dashes (e.g., `badge/`), while the component names use PascalCase (e.g., `Badge`, `BadgeWrapper`)
 
 ## Prerequisites
 
@@ -36,15 +45,23 @@ Before running this skill, ensure:
 
 ## Migration Steps
 
-### Phase 1: Create Core Component
+### Phase 1: UI Extraction & Implementation
 
-1. **Create core component directory:**
-   ```
-   packages/lumx-core/src/js/components/<ComponentName>/
-   ├── index.tsx
-   ├── Tests.ts
-   └── Stories.ts
-   ```
+**Goal:** Extract the core UI logic and create thin wrappers for React and Vue.
+
+1. **Create core component file:**
+   - For standalone components:
+     ```
+     packages/lumx-core/src/js/components/<ComponentName>/
+     └── index.tsx
+     ```
+   - For sub-components (e.g., `BadgeWrapper` alongside `Badge`):
+     ```
+     packages/lumx-core/src/js/components/<ParentComponentName>/
+     ├── index.tsx (parent component)
+     └── <SubComponentName>.tsx (e.g., BadgeWrapper.tsx)
+     ```
+   - Sub-components use separate files (e.g., `BadgeWrapper.tsx`), not `index.tsx`
 
 2. **Extract UI logic to `index.tsx`:**
    - Change `children` prop to `label: JSXElement` (framework-agnostic)
@@ -53,19 +70,7 @@ Before running this skill, ensure:
    - Remove React-specific code (Children.count, etc.)
    - Export: `Component`, `ComponentProps`, `COMPONENT_NAME`, `CLASSNAME`, `DEFAULT_PROPS`
 
-3. **Create `Tests.ts`:**
-   - Export `setup()` function returning test helpers
-   - Export default test suite function
-   - Move UI-related tests from React
-   - Keep framework-specific tests in wrappers
-
-4. **Create `Stories.ts`:**
-   - Export `setup()` function returning story configurations
-   - Create stories: Default, with variations, Disabled
-
-### Phase 2: Update React Wrapper
-
-1. **Refactor React component:**
+3. **Update React wrapper:**
    - Import UI component from core
    - Transform into thin wrapper using `forwardRef`
    - Use hooks: `useId`, `useTheme`, `useDisableStateProps`, `useMergeRefs`
@@ -73,30 +78,20 @@ Before running this skill, ensure:
    - Call `UI({ ... })` instead of rendering JSX
    - Maintain backward compatibility
 
-2. **Update React tests:**
-   - Import and run `BaseComponentTests` from core
-   - Keep only React-specific tests (ref forwarding, theme context)
-   - Create adapter to map props for core tests
-
-3. **Update React stories:**
-   - Import `setup` from core stories
-   - Add framework-specific decorators
-   - Re-export stories
-
-### Phase 3: Create Vue Wrapper
-
-1. **Create Vue component structure:**
-   ```
-   packages/lumx-vue/src/components/<component-name>/
-   ├── <Component>.tsx
-   ├── <Component>.test.ts
-   ├── <Component>.stories.ts
-   ├── Stories/
-   │   └── <Component>Default.vue
-   └── index.ts
-   ```
-
-2. **Create Vue wrapper (`<Component>.tsx`):**
+4. **Create Vue wrapper:**
+   - For standalone components, create directory structure:
+     ```
+     packages/lumx-vue/src/components/<component-name>/
+     ├── <Component>.tsx
+     └── index.ts
+     ```
+   - For sub-components (e.g., `BadgeWrapper` alongside `Badge`), add to existing parent folder:
+     ```
+     packages/lumx-vue/src/components/<parent-component-name>/
+     ├── <ParentComponent>.tsx
+     ├── <SubComponent>.tsx (e.g., BadgeWrapper.tsx)
+     └── index.ts (update to export both components)
+     ```
    - Use `defineComponent` with render function
    - Use composables: `useTheme`, `useId`, `useDisableStateProps`
    - Support both `label` prop and default slot
@@ -106,33 +101,447 @@ Before running this skill, ensure:
    - Define props using `keysOf<ComponentProps>()`
    - Set `name: 'Lumx<Component>'`
    - Set `inheritAttrs: false`
+   - Create `index.ts` to export component, props, and constants
 
-3. **Create Vue tests:**
-   - Import and run core tests
-   - Add Vue-specific tests (emit events, disabled states)
-   - Use `@testing-library/vue`
-
-4. **Create Vue stories:**
-   - Import core story setup
-   - Use `withRender` decorator
-   - Disable `isChecked` control (managed internally)
-
-5. **Create story template (`.vue` file):**
-   - Internal state management with `ref`
-   - Use `useAttrsWithoutHandlers`
-   - Handle change events
-
-6. **Create `index.ts`:**
-   - Export component, props, and constants
-
-### Phase 4: Update Package Exports
-
-1. **Update Vue package index:**
+5. **Update Vue package index:**
    ```typescript
    export * from './components/<component-name>';
    ```
 
-2. **Verify React package already exports component**
+**Validation Checkpoint 1:**
+- Run `yarn test` to ensure no regressions
+- Run `yarn type-check` to verify TypeScript compilation
+- Ask developer for validation before proceeding to Phase 2
+
+### Phase 2: Stories Migration
+
+**Goal:** Extract core stories and create framework-specific story implementations.
+
+**IMPORTANT RULES:**
+- **NO JSX ELEMENTS in core stories** - Use plain data or functional JSX calls, NOT JSX elements like `<Component />`
+  - ✅ Allowed: `children: 'text'`, `children: Icon({ icon: mdiHeart })`
+  - ❌ Not allowed: `children: <Icon icon={mdiHeart} />`
+- **Analyze component dependencies** - Read existing stories and check if all components used are available in `@lumx/core`
+- **Skip stories with unavailable dependencies** - If a story uses components not yet in core, document it and skip migration for that story
+- **Keep the same stories** - Don't add or remove stories; migrate existing ones only
+
+#### Step 1: Analyze and Create Core Stories
+
+1. **Read and analyze existing React stories:**
+   - Identify all components used in the stories
+   - Check if those components exist in `@lumx/core/js/components/`
+   - Document any stories that cannot be migrated due to missing core dependencies
+
+2. **Create core stories (`packages/lumx-core/src/js/components/<ComponentName>/Stories.ts`):**
+   - **NO JSX ELEMENTS or component function calls allowed** - Use plain data only
+   - **Stories that need component children must use `overrides`** - Let React/Vue provide the actual components
+   - Export `setup()` function that takes `{ component, render, decorators, overrides }` and returns story configurations
+   - List stories that need component children in the `overrides` type parameter
+   - Only migrate stories where all component dependencies are available in core
+   - For stories with unavailable dependencies, add a comment explaining why they weren't migrated
+   - **Keep the same stories** - Migrate existing stories, don't add new ones
+   - Pattern with TypeScript types:
+     ```typescript
+     import type { SetupStoriesOptions } from '@lumx/core/stories/types';
+     import { DEFAULT_PROPS } from '.';
+
+     export function setup({
+         component,
+         render,
+         decorators: { withCombinations },
+         overrides = {},
+     }: SetupStoriesOptions<{
+         overrides: 'WithIcon';  // List stories that need component children
+         decorators: 'withCombinations';  // List required decorators (or 'never' for none)
+     }>) {
+         return {
+             meta: {
+                 component,
+                 render,
+                 argTypes: {
+                     color: colorArgType,
+                     children: { control: false },
+                 },
+                 args: {
+                     ...DEFAULT_PROPS,
+                 },
+             },
+
+             /** Story description */
+             Default: {
+                 args: {
+                     children: 'Text', // Plain data only
+                 },
+             },
+
+             /** Story with component children - injected via overrides */
+             WithIcon: {
+                 ...overrides.WithIcon,  // Framework provides the Icon component
+             },
+
+             AllColors: {
+                 argTypes: {
+                     color: { control: false },
+                 },
+                 decorators: [
+                     withCombinations({
+                         combinations: {
+                             cols: { key: 'color', options: ColorPalette },
+                             rows: {
+                                 'With text': { children: '30' },
+                                 // Framework-specific rows added via decorator override in React/Vue
+                             },
+                         },
+                     }),
+                 ],
+             },
+         };
+     }
+     ```
+
+#### Step 2: Implement React Stories (All Stories)
+
+3. **Update React stories to use core setup:**
+   - Import `setup` from core stories
+   - Call `const { meta, ...stories } = setup({ component, decorators, overrides })`
+   - Pass React-specific decorators (e.g., `withCombinations`, `withWrapper`)
+   - **Pass `overrides` for stories with component children** - Provide JSX for component rendering
+   - Export default with `...meta`
+   - Export each story individually: `export const StoryName = { ...stories.StoryName };`
+   - **Override stories at export level as needed** by spreading the core story and adding/replacing properties
+   - Add stories that couldn't be migrated to core (due to missing dependencies) as separate exports
+   - Pattern:
+     ```typescript
+     import { Component, Icon } from '@lumx/react';
+     import { mdiHeart } from '@lumx/icons';
+     import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
+     import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
+     import { setup } from '@lumx/core/js/components/Component/Stories';
+
+     const { meta, ...stories } = setup({
+         component: Component,
+         decorators: { withCombinations, withWrapper },
+         overrides: {
+             // Provide JSX for stories that need component children
+             WithIcon: {
+                 args: {
+                     children: <Icon icon={mdiHeart} />,
+                 },
+             },
+         },
+     });
+
+     export default {
+         title: 'LumX components/component/Component',
+         ...meta,
+     };
+
+     // Export stories as-is from core
+     export const Default = { ...stories.Default };
+     export const WithIcon = { ...stories.WithIcon };
+
+     // Override a story at export with React-specific customizations
+     export const CustomStory = {
+         ...stories.CustomStory,
+         // Override decorators, render, args, etc. as needed
+         decorators: [
+             withCombinations({ /* React-specific config */ }),
+         ],
+     };
+
+     // Stories not in core (e.g., using components not yet migrated)
+     export const WithThumbnail = {
+         args: {
+             children: <Thumbnail ... />,
+         },
+     };
+     ```
+
+**Validation Checkpoint 2a:**
+- Run `yarn type-check` to verify TypeScript compilation
+- Visual verification in Storybook:
+  - Verify ALL React stories render correctly
+  - Test all variants and states
+- Ask developer for validation before proceeding to Vue stories
+
+#### Step 3: Implement First Vue Story
+
+4. **Create Vue story infrastructure with ONE story:**
+   - Create `<Component>.stories.ts` in Vue component directory (use `.tsx` if using JSX in decorators/overrides)
+   - Import `setup` from core stories
+   - **IMPORTANT: Components with `children` prop need `withRender` to convert children to slots**
+   - For components with `children`:
+     - Create a `.vue` template in `Stories/` subdirectory that wraps the component with `<slot />`
+     - Pass `render: withRender({ ComponentDefaultVue }, '{{ args.children }}')` to setup
+   - Call `const { meta, ...stories } = setup({ component, render, decorators })`
+   - Pass Vue-specific decorators (e.g., `withCombinations`, `withWrapper`)
+   - Implement ONLY the Default/first story export
+
+   - **Pattern for components with `children` prop:**
+     ```typescript
+     // Badge.stories.ts (NO .tsx needed, no JSX in args)
+     import { Badge } from '@lumx/vue';
+     import { withCombinations } from '@lumx/vue/stories/decorators/withCombinations';
+     import { withRender } from '@lumx/vue/stories/utils/withRender';
+     import { setup } from '@lumx/core/js/components/Badge/Stories';
+     import BadgeDefaultVue from './Stories/BadgeDefault.vue';
+     import BadgeWithIconVue from './Stories/BadgeWithIcon.vue';
+
+     const { meta, ...stories } = setup({
+         component: Badge,
+         render: withRender({ BadgeDefaultVue }, '{{ args.children }}'),
+         decorators: { withCombinations },
+         overrides: {
+             // For stories with component children, provide .vue template with render
+             WithIcon: {
+                 render: withRender({ BadgeWithIconVue }),
+             },
+         },
+     });
+
+     export default {
+         title: 'LumX components/badge/Badge',
+         ...meta,
+     };
+
+     // Export ONLY the first story
+     export const WithText = { ...stories.WithText };
+     ```
+
+   - **Vue template for component children (`Stories/BadgeWithIcon.vue`):**
+     ```vue
+     <template>
+         <Badge v-bind="$attrs">
+             <Icon :icon="mdiHeart" />
+         </Badge>
+     </template>
+
+     <script setup lang="ts">
+     import { Badge, Icon } from '@lumx/vue';
+     import { mdiHeart } from '@lumx/icons';
+     </script>
+     ```
+
+   - **Vue template pattern (`Stories/BadgeDefault.vue`):**
+     ```vue
+     <template>
+         <Badge v-bind="$attrs">
+             <slot />
+         </Badge>
+     </template>
+
+     <script setup lang="ts">
+     import { Badge } from '@lumx/vue';
+     </script>
+     ```
+
+   - **Pattern for components WITHOUT `children` (e.g., Divider):**
+     ```typescript
+     const { meta, ...stories } = setup({
+         component: Component,
+         decorators: { withCombinations },
+     });
+     // No render or .vue template needed
+     ```
+
+**Validation Checkpoint 2b:**
+- Run `yarn type-check` to verify TypeScript compilation
+- Visual verification in Storybook:
+  - Verify the first Vue story renders correctly
+- Ask developer for validation before implementing remaining stories
+
+#### Step 4: Implement Remaining Vue Stories
+
+5. **Complete all remaining Vue stories:**
+   - Export all remaining stories: `export const StoryName = { ...stories.StoryName };`
+   - **Override stories as needed** by spreading the core story and adding/replacing properties
+   - Create additional `.vue` templates if needed for different story variants
+   - Ensure all stories follow the same pattern as the validated first story
+   - Add stories that couldn't be migrated to core (due to missing dependencies) as separate exports
+
+**Validation Checkpoint 2c (Final):**
+- Run `yarn test` to ensure no regressions
+- Run `yarn type-check` to verify TypeScript compilation
+- Visual verification in Storybook:
+  - Verify ALL Vue stories render correctly
+  - Test all variants and states
+- Ask developer for final validation before proceeding to Phase 3
+
+### Phase 3: Tests Migration
+
+**Goal:** Extract core tests and update framework-specific test suites.
+
+**IMPORTANT RULES:**
+- **NO JSX ELEMENTS or component calls in core tests** - Use plain data only
+- **Tests that need component children must use framework-specific setup** - Don't migrate those to core
+- **Vue tests should mimic React tests** - Include the same structure: core tests import, framework-specific describe block, and `commonTestsSuiteVTL` (Vue) or `commonTestsSuiteRTL` (React)
+- **DO NOT add NOTE comments or explanatory comments in generated files** - Keep code clean without meta-commentary
+
+1. **Read and analyze existing React tests:**
+   - Identify tests that use plain data (strings, numbers, etc.) - these can migrate to core
+   - Identify tests that use JSX components (Icon, Thumbnail, etc.) - these stay in React/Vue only
+   - Document which tests cannot be migrated due to component dependencies
+
+2. **Create core tests (`packages/lumx-core/src/js/components/<ComponentName>/Tests.ts`):**
+   - **NO JSX ELEMENTS or component calls allowed** - Use plain data only
+   - Export `setup()` function that takes props and `SetupOptions`
+   - Export default test suite function that receives `SetupOptions` and contains describe/it blocks
+   - Only migrate tests that use plain data (strings, numbers, booleans)
+   - Follow the Button pattern exactly
+   - Example pattern:
+     ```typescript
+     import { getByClassName } from '../../../testing/queries';
+     import { SetupOptions } from '../../../testing';
+     import { ColorPalette } from '../../constants';
+
+     const CLASSNAME = 'lumx-badge';
+
+     /**
+      * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
+      */
+     export const setup = (propsOverride: any = {}, { render, ...options }: SetupOptions<any>) => {
+         const props = { ...propsOverride };
+         const wrapper = render(props, options);
+
+         const badge = getByClassName(document.body, CLASSNAME);
+         return { props, badge, wrapper };
+     };
+
+     export default (renderOptions: SetupOptions<any>) => {
+         const { screen } = renderOptions;
+
+         describe('Badge core tests', () => {
+             describe('Props', () => {
+                 it('should use default props', () => {
+                     const { badge } = setup({ children: '30' }, renderOptions);
+
+                     expect(badge.className).toContain('lumx-badge');
+                     expect(badge.className).toContain('lumx-badge--color-primary');
+                     expect(badge).toHaveTextContent(/30/);
+                 });
+
+                 it('should render color', () => {
+                     const { badge } = setup({ children: 'Badge', color: ColorPalette.red }, renderOptions);
+                     expect(badge).toHaveClass('lumx-badge--color-red');
+                 });
+             });
+         });
+     };
+     ```
+
+3. **Update React tests:**
+   - Import default export from core tests (the test suite)
+   - Call the test suite with `{ render, screen }` options
+   - Keep React-specific tests (ref forwarding, theme context, JSX children)
+   - Keep `commonTestsSuiteRTL` (React-specific)
+   - Example pattern:
+     ```typescript
+     import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+     import { getByClassName } from '@lumx/react/testing/utils/queries';
+     import { render, screen } from '@testing-library/react';
+     import { Badge, BadgeProps } from './Badge';
+     import BaseBadgeTests from '@lumx/core/js/components/Badge/Tests';
+
+     const CLASSNAME = Badge.className as string;
+
+     const setup = (propsOverride: Partial<BadgeProps> = {}) => {
+         const props: BadgeProps = {
+             children: <span>30</span>,
+             ...propsOverride,
+         };
+         render(<Badge {...props} />);
+         const badge = getByClassName(document.body, CLASSNAME);
+         return { badge, props };
+     };
+
+     describe(`<${Badge.displayName}>`, () => {
+         // Run core tests
+         BaseBadgeTests({
+             render: (props: BadgeProps) => render(<Badge {...props} />),
+             screen,
+         });
+
+         // React-specific tests
+         describe('React', () => {
+             it('should render empty children', () => {
+                 const { badge } = setup({ children: null });
+                 expect(badge).toBeInTheDocument();
+                 expect(badge).toBeEmptyDOMElement();
+             });
+         });
+
+         // Common tests suite
+         commonTestsSuiteRTL(setup, {
+             baseClassName: CLASSNAME,
+             forwardClassName: 'badge',
+             forwardAttributes: 'badge',
+             forwardRef: 'badge',
+         });
+     });
+     ```
+
+4. **Create Vue tests (`packages/lumx-vue/src/components/<component-name>/<Component>.test.ts`):**
+   - **IMPORTANT: Vue tests should mimic React tests exactly** - Same structure with core tests, framework describe, and commonTestsSuite
+   - Import default export from core tests (the test suite)
+   - Import and use the core `setup` function
+   - Call the test suite with render function that converts `children` to slots
+   - Create a local setup function that wraps the core setup
+   - Add `commonTestsSuiteVTL` (Vue equivalent of React's `commonTestsSuiteRTL`)
+   - Add Vue-specific tests (emit events, disabled states) if needed
+   - Use `@testing-library/vue`
+   - Example pattern:
+     ```typescript
+     import { render, screen } from '@testing-library/vue';
+     import BaseBadgeTests, { setup } from '@lumx/core/js/components/Badge/Tests';
+     import { CLASSNAME } from '@lumx/core/js/components/Badge';
+     import { commonTestsSuiteVTL, SetupRenderOptions } from '@lumx/vue/testing';
+
+     import { Badge } from '.';
+
+     describe('<Badge />', () => {
+         const renderBadge = ({ children, ...props }: any, options?: SetupRenderOptions<any>) =>
+             render(Badge, {
+                 ...options,
+                 props,
+                 slots: children ? { default: children } : undefined,
+             });
+
+         // Run core tests
+         BaseBadgeTests({
+             render: renderBadge,
+             screen,
+         });
+
+         const setupBadge = (props: any = {}, options: SetupRenderOptions<any> = {}) =>
+             setup(props, { ...options, render: renderBadge, screen });
+
+         // Common tests suite
+         commonTestsSuiteVTL(setupBadge, {
+             baseClassName: CLASSNAME,
+             forwardClassName: 'div',
+             forwardAttributes: 'div',
+             forwardRef: 'div',
+         });
+     });
+     ```
+
+**Validation Checkpoint 3:**
+- Run `yarn test` to ensure all tests pass
+- Run `yarn type-check` to verify TypeScript compilation
+- Verify core tests use only plain data (no JSX)
+- Verify framework-specific tests remain in React/Vue
+- Ask developer for validation before proceeding to Phase 4
+
+**Important Notes:**
+- Tests with framework-specific rendering behavior (e.g., empty children) should stay in framework test files
+- Vue uses slots for children, so the render helper must convert `children` prop to `slots.default`
+- React renders empty for `null` children, Vue renders comment nodes `<!---->`
+- Vue tests should include `commonTestsSuiteVTL` to match React's `commonTestsSuiteRTL` structure
+- Core `setup()` function should return aliases if needed (e.g., `const div = badge;`) for `commonTestsSuite` compatibility
+
+### Phase 4: Update Package Exports
+
+**Verify React package already exports component**
 
 ### Phase 5: Update CHANGELOG
 
@@ -150,26 +559,19 @@ Add entry under `[Unreleased]`:
     -   Moved `<Component>` from `@lumx/react`
 ```
 
-### Phase 6: Verification
+### Phase 6: Final Build Verification
 
-1. **Run tests:**
-   ```bash
-   yarn test packages/lumx-core/src/js/components/<Component>
-   yarn test packages/lumx-react/src/components/<component>
-   yarn test packages/lumx-vue/src/components/<component>
-   ```
-
-2. **Build packages:**
+1. **Build packages:**
    ```bash
    yarn build:core
    yarn build:react
    yarn build:vue
    ```
 
-3. **Visual verification in Storybook:**
-   - Verify React stories render correctly
-   - Verify Vue stories render correctly
-   - Test all variants and states
+2. **Final smoke test:**
+   - Run full test suite: `yarn test`
+   - Verify all builds succeed
+   - Check Storybook for any console errors
 
 ## Key Patterns to Follow
 
@@ -321,14 +723,25 @@ export default Component;
 
 ## Common Pitfalls
 
-1. **Don't use `Children.count()` in core** - This is React-specific
-2. **Always use functional calls in core** - `InputLabel({ ... })` not `<InputLabel ... />`
-3. **Map children to label** - React uses `children`, core uses `label`
-4. **Include inputId in props** - Wrappers generate it, core requires it
-5. **Add stopImmediatePropagation** - Prevent event bubbling in Vue wrapper
-6. **Use JSX in Vue wrapper** - `return (<Component />)` not function calls
-7. **Set correct component name** - Vue: `'LumxComponent'`, not `'Component'`
-8. **Handle readOnly correctly** - Use `isAnyDisabled.value` not `aria-disabled`
+1. **NO JSX ELEMENTS or component calls in core stories or tests** - Use plain data only, provide components via `overrides` (stories) or framework-specific tests (tests)
+   - ✅ Core stories: `children: 'Text'` or `...overrides.WithIcon`
+   - ❌ Core stories: `children: <Icon />`, `children: Icon({ icon: mdiHeart })`
+   - ✅ Core tests: `children: '30'`, use `SetupOptions` pattern with default export
+   - ❌ Core tests: Pass testing utilities as parameters, don't follow Button pattern
+2. **DO NOT add NOTE comments or explanatory comments** - Don't add meta-commentary like "NOTE: X is not migrated because..." or "This test is framework-specific". Keep generated code clean.
+3. **Don't add/remove stories** - Migrate existing stories only, keep the same set of stories
+4. **Check component dependencies before migrating stories** - If a story uses components not in core, don't migrate it
+5. **Don't use `Children.count()` in core** - This is React-specific
+6. **Always use functional calls in core UI** - `InputLabel({ ... })` not `<InputLabel ... />`
+7. **Add stopImmediatePropagation** - Prevent event bubbling in Vue wrapper (when handling events)
+8. **Use JSX in Vue wrapper** - `return (<Component />)` not function calls
+9. **Set correct component name** - Vue: `'LumxComponent'`, not `'Component'`
+10. **Vue stories with component children need `.vue` templates in `overrides`** - Create `.vue` template and use `render: withRender({ ComponentVue })` in overrides
+11. **Vue components with `children` need base `.vue` template + `withRender`** - Convert children prop to slots
+12. **Don't override Vue combination decorators with JSX** - Can't use JSX in `withCombinations` rows; use core version or create templates
+13. **Don't pass JSX components in Vue `args.children`** - Use `render: withRender({ ComponentVue })` instead
+14. **Use `.ts` extension for Vue stories** - Only use `.tsx` if absolutely necessary (rare)
+15. **Vue tests must mimic React tests** - Include the same structure with `commonTestsSuiteVTL`
 
 ## Reference Components
 
@@ -338,34 +751,93 @@ export default Component;
 
 ## Files Created/Modified Checklist
 
-### Core
-- [ ] `/packages/lumx-core/src/js/components/<Component>/index.tsx`
-- [ ] `/packages/lumx-core/src/js/components/<Component>/Tests.ts`
-- [ ] `/packages/lumx-core/src/js/components/<Component>/Stories.ts`
+**Note:** For sub-components (e.g., `BadgeWrapper` alongside `Badge`), replace `<Component>` with the parent folder name (e.g., `Badge`), and use `<SubComponent>.tsx` instead of `index.tsx` in core.
 
-### React
-- [ ] `/packages/lumx-react/src/components/<component>/<Component>.tsx` (modified)
+### Phase 1: UI Extraction & Implementation
+- [ ] `/packages/lumx-core/src/js/components/<Component>/index.tsx` (created) or `<Component>/<SubComponent>.tsx` for sub-components
+- [ ] `/packages/lumx-react/src/components/<component>/<Component>.tsx` (modified to wrapper)
+- [ ] `/packages/lumx-vue/src/components/<component>/<Component>.tsx` (created)
+- [ ] `/packages/lumx-vue/src/components/<component>/index.ts` (created or updated to export sub-component)
+- [ ] `/packages/lumx-vue/src/index.ts` (export already exists for parent folder)
+
+### Phase 2: Stories Migration
+**Step 1: Core Stories**
+- [ ] Analyze existing React stories for component dependencies
+- [ ] Document any stories that cannot be migrated (missing core dependencies)
+- [ ] `/packages/lumx-core/src/js/components/<Component>/Stories.ts` (created - NO JSX, data only)
+
+**Step 2: React Stories**
+- [ ] `/packages/lumx-react/src/components/<component>/<Component>.stories.tsx` (modified - all stories)
+- [ ] Validation checkpoint 2a (developer validates all React stories)
+
+**Step 3: First Vue Story**
+- [ ] `/packages/lumx-vue/src/components/<component>/<Component>.stories.ts` (created - one story)
+- [ ] `/packages/lumx-vue/src/components/<component>/Stories/<Component>Default.vue` (created)
+- [ ] Validation checkpoint 2b (developer validates first Vue story)
+
+**Step 4: Remaining Vue Stories**
+- [ ] Complete all Vue stories in `<Component>.stories.ts`
+- [ ] Create additional `.vue` templates if needed
+- [ ] Validation checkpoint 2c (developer validates all Vue stories)
+
+### Phase 3: Tests Migration
+- [ ] `/packages/lumx-core/src/js/components/<Component>/Tests.ts` (created - NO JSX, plain data only)
 - [ ] `/packages/lumx-react/src/components/<component>/<Component>.test.tsx` (modified)
-- [ ] `/packages/lumx-react/src/components/<component>/<Component>.stories.tsx` (modified)
+- [ ] `/packages/lumx-vue/src/components/<component>/<Component>.test.ts` (created)
 
-### Vue
-- [ ] `/packages/lumx-vue/src/components/<component>/<Component>.tsx`
-- [ ] `/packages/lumx-vue/src/components/<component>/<Component>.test.ts`
-- [ ] `/packages/lumx-vue/src/components/<component>/<Component>.stories.ts`
-- [ ] `/packages/lumx-vue/src/components/<component>/Stories/<Component>Default.vue`
-- [ ] `/packages/lumx-vue/src/components/<component>/index.ts`
-- [ ] `/packages/lumx-vue/src/index.ts` (add export)
-
-### Documentation
+### Phase 4-6: Finalization
+- [ ] Package exports verified
 - [ ] `/CHANGELOG.md` (add entry under Unreleased)
+- [ ] Final build verification completed
 
 ## Success Criteria
 
+### After Phase 1 (UI Extraction)
+- [ ] `yarn test` passes
+- [ ] `yarn type-check` passes
+- [ ] React component still works (backward compatible)
+- [ ] Vue component renders basic UI
+- [ ] Developer validates UI implementation
+
+### After Phase 2 (Stories)
+**After Step 1 (Core Stories):**
+- [ ] All component dependencies analyzed
+- [ ] Stories with missing dependencies documented
+- [ ] No JSX in core stories (data only)
+- [ ] Core stories created successfully
+
+**After Step 2 (React Stories - Checkpoint 2a):**
+- [ ] All React stories implemented
+- [ ] `yarn type-check` passes
+- [ ] All React Storybook stories render correctly
+- [ ] All variants and states display properly
+- [ ] Developer validates React stories ✅
+
+**After Step 3 (First Vue Story - Checkpoint 2b):**
+- [ ] First Vue story implemented
+- [ ] `yarn type-check` passes
+- [ ] First Vue story renders correctly
+- [ ] Developer validates first Vue story ✅
+
+**After Step 4 (All Vue Stories - Checkpoint 2c):**
+- [ ] All Vue stories implemented
+- [ ] `yarn test` passes
+- [ ] `yarn type-check` passes
+- [ ] All Vue Storybook stories render correctly
+- [ ] All variants and states display properly
+- [ ] Developer validates all Vue stories ✅
+
+### After Phase 3 (Tests)
+- [ ] No JSX in core tests (plain data only)
 - [ ] All core tests pass
-- [ ] All React tests pass (including new core tests)
-- [ ] All Vue tests pass (including new core tests)
-- [ ] All packages build successfully
-- [ ] React Storybook stories render correctly
-- [ ] Vue Storybook stories render correctly
+- [ ] All React tests pass (including imported core tests)
+- [ ] All Vue tests pass (including imported core tests)
+- [ ] `yarn test` passes
+- [ ] `yarn type-check` passes
+- [ ] Developer validates test coverage
+
+### Final Success Criteria
+- [ ] All packages build successfully (`yarn build:core`, `yarn build:react`, `yarn build:vue`)
 - [ ] React API is backward compatible
 - [ ] CHANGELOG is updated
+- [ ] No console errors in Storybook
