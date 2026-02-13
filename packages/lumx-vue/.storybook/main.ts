@@ -8,6 +8,7 @@ const postcss = path.join('../..', importUrl.pathname, 'configs');
 const config: StorybookConfig = {
     addons: ['@storybook/addon-a11y', '@chromatic-com/storybook'],
     stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
+    staticDirs: ['../../site-demo/static/'],
     framework: {
         name: '@storybook/vue3-vite',
         options: { docgen: false },

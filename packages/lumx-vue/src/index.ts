@@ -17,3 +17,4 @@ export * from './components/radio-button';
 export * from './components/skeleton';
 export * from './components/switch';
 export * from './components/text';
+export * from './components/thumbnail';
