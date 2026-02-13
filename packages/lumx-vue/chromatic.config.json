@@ -3,5 +3,7 @@
     "projectId": "Project:697a023f84e832e23544fb3c",
     "storybookBaseDir": "packages/lumx-vue",
     "buildScriptName": "build:storybook",
-    "zip": true
+    "zip": true,
+    "onlyChanged": true,
+    "autoAcceptChanges": "master"
 }

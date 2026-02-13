@@ -1,83 +1,135 @@
 name: 'CD / Deploy storybook'
 
-# Deploy Storybook (chromatic) on pull requests
-# When updates are pushed to the PR, we mark previous deploys as outdated
+# Deploy Storybook (Chromatic) on every push.
+# - On master: always deploy for baseline tracking (auto-accept changes).
+# - On other branches: only deploy if there's an open, non-draft PR.
 
 on:
-    pull_request:
-        types: [labeled, synchronize]
-
+    push:
 
 jobs:
-    deploy-storybook-react:
-        concurrency:
-            group: storybook-react-${{ github.head_ref }}
-            cancel-in-progress: true
-        if: "github.event.action == 'labeled' && github.event.label.name == 'need: deploy-storybook-react'"
+    should-deploy:
+        name: 'Check if deploy is needed'
         runs-on: ubuntu-latest
+        outputs:
+            deploy: ${{ steps.check.outputs.deploy }}
+            pr_number: ${{ steps.check.outputs.pr_number }}
+        steps:
+            - name: 'Checkout repository'
+              uses: actions/checkout@v5
+              with:
+                  sparse-checkout: .github
+
+            - name: 'Check for open PR'
+              id: check
+              uses: actions/github-script@v6
+              with:
+                  script: |
+                      const { findPRs } = require('./.github/actions/utils.js');
+                      const branch = context.ref.replace('refs/heads/', '');
+
+                      if (branch === 'master') {
+                          core.info('On master branch — always deploying (baseline tracking)');
+                          core.setOutput('deploy', 'true');
+                          core.setOutput('pr_number', '');
+                          return;
+                      }
+
+                      const pulls = await findPRs(github, context.repo, branch);
+                      const pr = pulls.find((p) => !p.draft);
+                      if (pr) {
+                          core.info(`Found open non-draft PR #${pr.number} for branch "${branch}"`);
+                          core.setOutput('deploy', 'true');
+                          core.setOutput('pr_number', String(pr.number));
+                      } else {
+                          core.info(`No open non-draft PR found for branch "${branch}" — skipping deploy`);
+                          core.setOutput('deploy', 'false');
+                          core.setOutput('pr_number', '');
+                      }
+
+    deploy-storybook:
+        name: 'Deploy chromatic (${{ matrix.package }})'
+        needs: [should-deploy]
+        if: needs.should-deploy.outputs.deploy == 'true'
+        strategy:
+            matrix:
+                include:
+                    - package: lumx-react
+                      token_secret: CHROMATIC_TOKEN_LUMX_REACT
+                      environment: storybook-lumx-react
+                    - package: lumx-vue
+                      token_secret: CHROMATIC_TOKEN_LUMX_VUE
+                      environment: storybook-lumx-vue
+        concurrency:
+            group: storybook-${{ matrix.package }}-${{ github.ref_name }}
+            cancel-in-progress: true
+        runs-on: ubuntu-latest
+        environment:
+            name: ${{ github.ref_name == 'master' && matrix.environment || '' }}
+            url: ${{ steps.vars.outputs.storybook_url }}
         steps:
             - name: 'Checkout repository'
               uses: actions/checkout@v5
               with:
                   fetch-depth: 0 # retrieve all the repo history (required by chromatic)
 
-            - uses: ./.github/actions/deploy-storybook
+            - name: 'Init variables'
+              id: vars
+              uses: actions/github-script@v6
               with:
-                  package: 'lumx-react'
-                  chromatic_token: ${{ secrets.CHROMATIC_TOKEN_LUMX_REACT }}
+                  result-encoding: json
+                  script: |
+                      const { getShortSHA, getStoryBookURL, getRunURL } = require('./.github/actions/utils.js');
+                      const packageName = '${{ matrix.package }}';
+                      const prNumber = '${{ needs.should-deploy.outputs.pr_number }}';
 
-            - if: always()
-              name: 'Remove label'
-              uses: ./.github/actions/remove-label
-              with:
-                  label: 'need: deploy-storybook-react'
+                      const package_path = `packages/${packageName}`;
+                      const run_html_url = getRunURL(context.payload.repository.html_url, context.runId, prNumber);
+                      const shortSHA = await getShortSHA(context.sha);
+                      const storybook_url = getStoryBookURL(shortSHA, packageName);
 
-    deploy-storybook-vue:
-        concurrency:
-            group: storybook-vue-${{ github.head_ref }}
-            cancel-in-progress: true
-        if: "github.event.action == 'labeled' && github.event.label.name == 'need: deploy-storybook-vue'"
-        runs-on: ubuntu-latest
-        steps:
-            - name: 'Checkout repository'
-              uses: actions/checkout@v5
-              with:
-                  fetch-depth: 0 # retrieve all the repo history (required by chromatic)
+                      core.setOutput('storybook_url', storybook_url);
+                      core.setOutput('run_html_url', run_html_url);
+                      core.setOutput('package_path', package_path);
 
-            - uses: ./.github/actions/deploy-storybook
-              with:
-                  package: 'lumx-vue'
-                  chromatic_token: ${{ secrets.CHROMATIC_TOKEN_LUMX_VUE }}
-
-            - if: always()
-              name: 'Remove label'
-              uses: ./.github/actions/remove-label
-              with:
-                  label: 'need: deploy-storybook-vue'
-
-    check_up_to_date:
-        concurrency:
-            group: storybook-check-up-to-date-${{ github.head_ref }}
-            cancel-in-progress: true
-        if: "github.event.action == 'synchronize' && contains(github.event.pull_request.body, 'StoryBook ')"
-        name: 'Check StoryBook URL is up-to-date'
-        runs-on: ubuntu-latest
-        steps:
-            - name: 'Checkout repository'
-              uses: actions/checkout@v5
-
-            - name: 'Get current short SHA'
-              id: short_sha
-              run: echo "short_sha=$(git rev-parse --short ${{github.event.pull_request.head.sha}})" >> $GITHUB_OUTPUT
-
-            - name: 'Mark storybook URL as outdated'
+            - name: 'Update PR body: Deploying state'
+              if: needs.should-deploy.outputs.pr_number != ''
               uses: ./.github/actions/update-pr-body
               with:
-                  pattern: '(StoryBook [^:]+: (https:\/\/([a-z0-9]+)--[^ ]*).*)'
-                  # Ignore if the short SHA in the storybook URL is up-to-date or if it was already marked as outdated
-                  skipReplaceIf: |
-                      groups[3] === "${{steps.short_sha.outputs.short_sha}}"
-                      || groups[0].includes("Outdated commit")
-                  replace: '$1 **⚠️ Outdated commit**'
+                  pull_number: ${{ needs.should-deploy.outputs.pr_number }}
+                  pattern: 'StoryBook ${{ matrix.package }}: [^\n]*'
+                  replace: 'StoryBook ${{ matrix.package }}: [Deploying...](${{ steps.vars.outputs.run_html_url }})'
+                  whenNotFound: 'append'
+                  keepLastMatch: true
+
+            - name: 'Setup'
+              uses: ./.github/actions/setup
+
+            - name: 'Deploy chromatic'
+              id: deploy
+              uses: chromaui/action@a8ce9c58f59be5cc7090cadfc8f130fb08fcf0c3 #v15.1.0
+              with:
+                  exitOnceUploaded: true
+                  token: ${{ github.token }}
+                  projectToken: ${{ secrets[matrix.token_secret] }}
+                  workingDir: ${{ steps.vars.outputs.package_path }}
+
+            - if: failure() && needs.should-deploy.outputs.pr_number != ''
+              name: 'Update PR body: Failure state'
+              uses: ./.github/actions/update-pr-body
+              with:
+                  pull_number: ${{ needs.should-deploy.outputs.pr_number }}
+                  pattern: 'StoryBook ${{ matrix.package }}: [^\n]*'
+                  replace: 'StoryBook ${{ matrix.package }}: [:x: Failed](${{ steps.vars.outputs.run_html_url }})'
                   whenNotFound: 'ignore'
+                  keepLastMatch: true
+
+            - name: 'Update PR body: Deployed state'
+              if: needs.should-deploy.outputs.pr_number != ''
+              uses: ./.github/actions/update-pr-body
+              with:
+                  pull_number: ${{ needs.should-deploy.outputs.pr_number }}
+                  pattern: 'StoryBook ${{ matrix.package }}: [^\n]*'
+                  replace: 'StoryBook ${{ matrix.package }}: ${{ steps.vars.outputs.storybook_url }} ([Chromatic build](${{ steps.deploy.outputs.buildUrl }}))'
+                  whenNotFound: 'append'
                   keepLastMatch: true
