@@ -2854,6 +2854,8 @@ __metadata:
   dependencies:
     "@actions/core": "npm:^3.0.0"
     "@actions/github": "npm:^9.0.0"
+    pixelmatch: "npm:^7.0.0"
+    pngjs: "npm:^7.0.0"
   languageName: unknown
   linkType: soft
 
@@ -18420,7 +18422,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pixelmatch@npm:7.1.0, pixelmatch@npm:^7.1.0":
+"pixelmatch@npm:7.1.0, pixelmatch@npm:^7.0.0, pixelmatch@npm:^7.1.0":
   version: 7.1.0
   resolution: "pixelmatch@npm:7.1.0"
   dependencies:

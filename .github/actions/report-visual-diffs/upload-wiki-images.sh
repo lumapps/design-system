@@ -47,6 +47,21 @@ for report_dir in "$ARTIFACTS_DIR"/vis-report-*; do
   done
 done
 
+# Copy cross-framework diff images
+# Structure: cross-framework-diffs/<image-type>/.../*.png
+# Wiki structure: cross-framework/<image-type>/.../*.png
+CROSS_FW_DIR="$ARTIFACTS_DIR/cross-framework-diffs"
+if [ -d "$CROSS_FW_DIR" ]; then
+  for image_type in __react__ __vue__ __diffs__; do
+    find "$CROSS_FW_DIR" -path "*/${image_type}/*.png" 2>/dev/null | while read -r img; do
+      rel_path="${img#*${image_type}/}"
+      dest="${DEST_DIR}/cross-framework/${image_type}/${rel_path}"
+      mkdir -p "$(dirname "$dest")"
+      cp "$img" "$dest"
+    done
+  done
+fi
+
 # Copy the report markdown (filename includes PR number for flat wiki URL resolution)
 REPORT_FILE="$ARTIFACTS_DIR/visual-reports-pr-${PR_NUMBER}-report.md"
 [ -f "$REPORT_FILE" ] && cp "$REPORT_FILE" "$DEST_DIR/visual-reports-pr-${PR_NUMBER}-report.md"
