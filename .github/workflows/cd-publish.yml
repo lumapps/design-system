@@ -144,50 +144,6 @@ jobs:
                   # Push tag
                   git push origin "$tag"
 
-    deploy_chromatic_react:
-        name: 'Deploy chromatic (React)'
-        if: needs.is_release_commit.outputs.version
-        needs: [is_release_commit, git_tag]
-        runs-on: ubuntu-latest
-        environment:
-            name: storybook-lumx-react
-            url: ${{ steps.deploy.outputs.storybook_url }}
-        steps:
-            - name: 'Checkout repository'
-              uses: actions/checkout@v5
-              with:
-                  ref: ${{ github.event.pull_request.head.sha || github.sha }}
-                  fetch-depth: 0 # retrieve all the repo history (required by chromatic)
-
-            - name: 'Deploy Storybook'
-              id: deploy
-              uses: ./.github/actions/deploy-storybook
-              with:
-                  package: 'lumx-react'
-                  chromatic_token: ${{ secrets.CHROMATIC_TOKEN_LUMX_REACT }}
-
-    deploy_chromatic_vue:
-        name: 'Deploy chromatic (Vue)'
-        if: needs.is_release_commit.outputs.version
-        needs: [is_release_commit, git_tag]
-        runs-on: ubuntu-latest
-        environment:
-            name: storybook-lumx-vue
-            url: ${{ steps.deploy.outputs.storybook_url }}
-        steps:
-            - name: 'Checkout repository'
-              uses: actions/checkout@v5
-              with:
-                  ref: ${{ github.event.pull_request.head.sha || github.sha }}
-                  fetch-depth: 0 # retrieve all the repo history (required by chromatic)
-
-            - name: 'Deploy Storybook'
-              id: deploy
-              uses: ./.github/actions/deploy-storybook
-              with:
-                  package: 'lumx-vue'
-                  chromatic_token: ${{ secrets.CHROMATIC_TOKEN_LUMX_VUE }}
-
     deploy_demo_site:
         name: 'Deploy demo site'
         if: needs.is_release_commit.outputs.version
