@@ -1,6 +1,7 @@
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { queryByClassName } from '@lumx/react/testing/utils/queries';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import BaseTableTests from '@lumx/core/js/components/Table/Tests';
 
 import { Table, TableProps } from './Table';
 
@@ -13,17 +14,13 @@ const setup = (props: Partial<TableProps> = {}, { wrapper }: SetupRenderOptions 
 };
 
 describe(`<${Table.displayName}>`, () => {
-    it('should render hasBefore', () => {
-        const { table } = setup({ hasBefore: true });
-        expect(table).toHaveClass(`${CLASSNAME}--has-before`);
+    // Run core tests
+    BaseTableTests({
+        render: (props: TableProps) => render(<Table {...props} />),
+        screen,
     });
 
-    it('should render hasDividers', () => {
-        const { table } = setup({ hasDividers: true });
-        expect(table).toHaveClass(`${CLASSNAME}--has-dividers`);
-    });
-
-    // Common tests suite.
+    // Common tests suite
     commonTestsSuiteRTL(setup, {
         baseClassName: CLASSNAME,
         forwardClassName: 'table',

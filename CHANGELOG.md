@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   `@lumx/vue`:
+    -   Create the `Table` component family (`Table`, `TableBody`, `TableCell`, `TableHeader`, `TableRow`)
     -   Create the `Badge` component
     -   Create the `BadgeWrapper` component
     -   Create the `Link` component
@@ -18,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 -   `@lumx/core`:
+    -   Moved `Table` component family from `@lumx/react` (`Table`, `TableBody`, `TableCell`, `TableHeader`, `TableRow`)
     -   Moved `Badge` from `@lumx/react`
     -   Moved `BadgeWrapper` from `@lumx/react`
     -   Moved `Link` from `@lumx/react`

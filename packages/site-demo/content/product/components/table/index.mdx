@@ -1,24 +1,29 @@
 ---
-frameworks: ['react']
+frameworks: ['react', 'vue']
 ---
-import * as Demo1 from './react/demo1.tsx';
-import * as Demo2 from './react/demo2.tsx';
+import * as ReactDemo1 from './react/demo1.tsx';
+import * as ReactDemo2 from './react/demo2.tsx';
+import * as VueDemo1 from './vue/demo1.vue';
+import * as VueDemo2 from './vue/demo2.vue';
 import ReactTable from 'lumx-docs:@lumx/react/components/table/Table';
 import ReactTableRow from 'lumx-docs:@lumx/react/components/table/TableRow';
 import ReactTableCell from 'lumx-docs:@lumx/react/components/table/TableCell';
+import VueTable from 'lumx-docs:@lumx/vue/components/table/Table';
+import VueTableRow from 'lumx-docs:@lumx/vue/components/table/TableRow';
+import VueTableCell from 'lumx-docs:@lumx/vue/components/table/TableCell';
 
 # Table
 
 **Tables display tabular information to make it easier to scan and to compare.**
 
-<DemoBlock withThemeSwitcher demo={{ react: Demo1 }} />
+<DemoBlock withThemeSwitcher demo={{ react: ReactDemo1, vue: VueDemo1 }} />
 
 ## Clickable
 
 Use clickable table rows when users need to select one or more options in a table.
 Clickable table rows can be disabled or selected.
 
-<DemoBlock withThemeSwitcher demo={{ react: Demo2 }} />
+<DemoBlock withThemeSwitcher demo={{ react: ReactDemo2, vue: VueDemo2 }} />
 
 ### Accessibility concerns
 
@@ -26,12 +31,12 @@ Table components use standard HTML elements for semantic and structure. Consider
 
 ### Table properties
 
-<PropTable docs={{ react: ReactTable }} />
+<PropTable docs={{ react: ReactTable, vue: VueTable }} />
 
 ### TableRow properties
 
-<PropTable docs={{ react: ReactTableRow }} />
+<PropTable docs={{ react: ReactTableRow, vue: VueTableRow }} />
 
 ### TableCell properties
 
-<PropTable docs={{ react: ReactTableCell }} />
+<PropTable docs={{ react: ReactTableCell, vue: VueTableCell }} />
