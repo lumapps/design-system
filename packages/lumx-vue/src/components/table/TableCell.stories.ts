@@ -1,7 +1,10 @@
-import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
-import { mdiAccount } from '@lumx/icons';
+import { TableCell, ThOrder } from '@lumx/vue';
+import { withCombinations } from '@lumx/vue/stories/decorators/withCombinations';
+import { withRender } from '@lumx/vue/stories/utils/withRender';
 import { setup } from '@lumx/core/js/components/Table/TableCellStories';
-import { Table, TableBody, TableCell, TableHeader, TableRow, ThOrder } from '.';
+import { mdiAccount } from '@lumx/icons';
+import TableCellDefaultVue from './Stories/TableCellDefault.vue';
+import TableCellHeaderVue from './Stories/TableCellHeader.vue';
 
 const { meta, ...stories } = setup({
     component: TableCell,
@@ -11,43 +14,21 @@ const { meta, ...stories } = setup({
             args: {
                 children: 'Cell',
             },
-            render: (args: any) => (
-                <Table>
-                    <TableBody>
-                        <TableRow>
-                            <TableCell {...args} />
-                        </TableRow>
-                    </TableBody>
-                </Table>
-            ),
+            render: withRender({ TableCellDefaultVue }, '{{ args.children }}'),
         },
         Header: {
             args: {
+                variant: 'head',
                 children: 'Header',
             },
-            render: (args: any) => (
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableCell {...args} />
-                        </TableRow>
-                    </TableHeader>
-                </Table>
-            ),
+            render: withRender({ TableCellHeaderVue }, '{{ args.children }}'),
         },
         AllHeaderStates: {
             args: {
+                variant: 'head',
                 children: 'Header',
             },
-            render: (args: any) => (
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableCell {...args} />
-                        </TableRow>
-                    </TableHeader>
-                </Table>
-            ),
+            render: withRender({ TableCellHeaderVue }, '{{ args.children }}'),
             decorators: [
                 withCombinations({
                     firstColStyle: { minWidth: 200 },
@@ -73,7 +54,7 @@ const { meta, ...stories } = setup({
 });
 
 export default {
-    title: 'Lumx components/table/TableCell',
+    title: 'LumX components/table/TableCell',
     ...meta,
 };
 

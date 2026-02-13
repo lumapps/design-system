@@ -1,29 +1,22 @@
 import { Theme } from '@lumx/react';
-import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import { classNames } from '@lumx/core/js/utils';
+import {
+    Table as TableUI,
+    TableProps as TableUIProps,
+    CLASSNAME,
+    COMPONENT_NAME,
+    DEFAULT_PROPS,
+} from '@lumx/core/js/components/Table';
+import { GenericProps } from '@lumx/react/utils/type';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
-
-import { CLASSNAME, COMPONENT_NAME } from './constants';
-
-const { block } = classNames.bem(CLASSNAME);
 
 /**
  * Defines the props of the component.
  */
-export interface TableProps extends GenericProps, HasTheme {
-    /** Whether the table has checkbox or thumbnail on first cell or not. */
-    hasBefore?: boolean;
-    /** Whether the table has dividers or not. */
-    hasDividers?: boolean;
+export interface TableProps extends GenericProps, Omit<TableUIProps, 'ref'> {
     /** Children */
     children?: React.ReactNode;
 }
-
-/**
- * Component default props.
- */
-const DEFAULT_PROPS: Partial<TableProps> = {};
 
 /**
  * Table component.
@@ -34,24 +27,14 @@ const DEFAULT_PROPS: Partial<TableProps> = {};
  */
 export const Table = forwardRef<TableProps, HTMLTableElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
-    const { children, className, hasBefore, hasDividers, theme = defaultTheme, ...forwardedProps } = props;
+    const { children, theme = defaultTheme, ...otherProps } = props;
 
-    return (
-        <table
-            ref={ref}
-            {...forwardedProps}
-            className={classNames.join(
-                className,
-                block({
-                    'has-before': hasBefore,
-                    'has-dividers': hasDividers,
-                    [`theme-${theme}`]: Boolean(theme),
-                }),
-            )}
-        >
-            {children}
-        </table>
-    );
+    return TableUI({
+        ref,
+        theme,
+        children,
+        ...otherProps,
+    });
 });
 Table.displayName = COMPONENT_NAME;
 Table.className = CLASSNAME;

@@ -1,34 +1,18 @@
-import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
+import { TableRow } from '@lumx/vue';
+import { withCombinations } from '@lumx/vue/stories/decorators/withCombinations';
+import { withRender } from '@lumx/vue/stories/utils/withRender';
 import { setup } from '@lumx/core/js/components/Table/TableRowStories';
-import { Table, TableBody, TableCell, TableRow } from '.';
+import TableRowDefaultVue from './Stories/TableRowDefault.vue';
 
 const { meta, ...stories } = setup({
     component: TableRow,
     decorators: { withCombinations },
     overrides: {
         Default: {
-            render: (args: any) => (
-                <Table>
-                    <TableBody>
-                        <TableRow {...args}>
-                            <TableCell>Cell 1</TableCell>
-                            <TableCell>Cell 2</TableCell>
-                        </TableRow>
-                    </TableBody>
-                </Table>
-            ),
+            render: withRender({ TableRowDefaultVue }),
         },
         AllStates: {
-            render: (args: any) => (
-                <Table>
-                    <TableBody>
-                        <TableRow {...args}>
-                            <TableCell>Cell 1</TableCell>
-                            <TableCell>Cell 2</TableCell>
-                        </TableRow>
-                    </TableBody>
-                </Table>
-            ),
+            render: withRender({ TableRowDefaultVue }),
             decorators: [
                 withCombinations({
                     firstColStyle: { minWidth: 200 },
@@ -49,7 +33,7 @@ const { meta, ...stories } = setup({
 });
 
 export default {
-    title: 'Lumx components/table/TableRow',
+    title: 'LumX components/table/TableRow',
     ...meta,
 };
 
