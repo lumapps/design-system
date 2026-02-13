@@ -1,11 +1,13 @@
 import { withCombinations } from '@lumx/vue/stories/decorators/withCombinations';
 import { withWrapper } from '@lumx/vue/stories/decorators/withWrapper';
 import { withNestedProps } from '@lumx/vue/stories/decorators/withNestedProps';
+import { withRender } from '@lumx/vue/stories/utils/withRender';
 import { setup } from '@lumx/core/js/components/Thumbnail/Stories';
 import { Thumbnail, AspectRatio, Size } from '@lumx/vue';
 import { IMAGES } from '@lumx/core/stories/controls/image';
 import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
 import { ThumbnailObjectFit } from '@lumx/core/js/components/Thumbnail/types';
+import ThumbnailBaseVue from './Stories/ThumbnailBase.vue';
 
 const { meta, ...stories } = setup({
     component: Thumbnail,
@@ -67,7 +69,7 @@ export const IsLoading = { ...stories.IsLoading };
 export const WithoutSource = { ...stories.WithoutSource };
 export const FocusPointVertical = { ...stories.FocusPointVertical };
 export const FocusPointHorizontal = { ...stories.FocusPointHorizontal };
-export const AsButton = { ...stories.AsButton };
+export const AsButton = { ...stories.AsButton, render: withRender({ ThumbnailBaseVue }) };
 export const AsLink = { ...stories.AsLink };
 export const FillHeightAndRatio = { ...stories.FillHeightAndRatio };
 export const WithSvgImages = { ...stories.WithSvgImages };
