@@ -71,23 +71,18 @@ function alignImages(img1, img2) {
         if (image.width === width && image.height === height) {
             return image;
         }
+        // Buffer.alloc zero-fills, so out-of-bounds pixels start as (0,0,0,0).
         const buf = Buffer.alloc(width * height * 4);
+        const srcRowBytes = image.width * 4;
+        const dstRowBytes = width * 4;
+        // Copy existing rows using Buffer.copy (much faster than pixel-by-pixel)
+        for (let y = 0; y < image.height; y++) {
+            image.data.copy(buf, y * dstRowBytes, y * srcRowBytes, y * srcRowBytes + srcRowBytes);
+        }
+        // Fill out-of-bounds alpha to 64 (semi-transparent black) for visibility
         for (let y = 0; y < height; y++) {
-            for (let x = 0; x < width; x++) {
-                const idx = (width * y + x) * 4;
-                if (y < image.height && x < image.width) {
-                    const old = (image.width * y + x) * 4;
-                    buf[idx] = image.data[old];
-                    buf[idx + 1] = image.data[old + 1];
-                    buf[idx + 2] = image.data[old + 2];
-                    buf[idx + 3] = image.data[old + 3];
-                } else {
-                    // Semi-transparent black for out-of-bounds pixels
-                    buf[idx] = 0;
-                    buf[idx + 1] = 0;
-                    buf[idx + 2] = 0;
-                    buf[idx + 3] = 64;
-                }
+            for (let x = y < image.height ? image.width : 0; x < width; x++) {
+                buf[(width * y + x) * 4 + 3] = 64;
             }
         }
         return { data: buf, width, height };
