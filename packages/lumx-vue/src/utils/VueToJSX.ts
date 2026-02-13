@@ -18,5 +18,12 @@ export const keysOf = <T>() => {
         ...keys: [keyof T] extends [K[number]]
             ? K
             : [Error: '❌ Missing keys in your list:', Exclude<keyof T, K[number]>]
-    ): K => keys as any;
+    ) => {
+        // Return an object with all props marked as optional (not required)
+        // This ensures Vue's type system correctly infers props as optional
+        return keys.reduce((acc, key) => {
+            acc[key as K[number]] = { required: false };
+            return acc;
+        }, {} as Record<K[number], { required: false }>);
+    };
 };

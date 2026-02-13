@@ -27,6 +27,15 @@ This skill migrates a component from React-only implementation to a shared core 
 - **React package** (`@lumx/react`): Thin wrapper that delegates to core
 - **Vue package** (`@lumx/vue`): Thin wrapper that delegates to core
 
+**Component Organization:**
+- **Sub-components go in the same folder as their parent component**
+- Example: `Badge` and `BadgeWrapper` both live in the `badge/` folder
+  - Core: `/packages/lumx-core/src/js/components/Badge/` contains both `Badge` and `BadgeWrapper`
+  - React: `/packages/lumx-react/src/components/badge/` contains both `Badge.tsx` and `BadgeWrapper.tsx`
+  - Vue: `/packages/lumx-vue/src/components/badge/` contains both `Badge.tsx` and `BadgeWrapper.tsx`
+- When migrating a sub-component (like `BadgeWrapper`), respect the existing folder structure from React
+- The folder name uses lowercase-with-dashes (e.g., `badge/`), while the component names use PascalCase (e.g., `Badge`, `BadgeWrapper`)
+
 ## Prerequisites
 
 Before running this skill, ensure:
@@ -40,11 +49,19 @@ Before running this skill, ensure:
 
 **Goal:** Extract the core UI logic and create thin wrappers for React and Vue.
 
-1. **Create core component directory:**
-   ```
-   packages/lumx-core/src/js/components/<ComponentName>/
-   └── index.tsx
-   ```
+1. **Create core component file:**
+   - For standalone components:
+     ```
+     packages/lumx-core/src/js/components/<ComponentName>/
+     └── index.tsx
+     ```
+   - For sub-components (e.g., `BadgeWrapper` alongside `Badge`):
+     ```
+     packages/lumx-core/src/js/components/<ParentComponentName>/
+     ├── index.tsx (parent component)
+     └── <SubComponentName>.tsx (e.g., BadgeWrapper.tsx)
+     ```
+   - Sub-components use separate files (e.g., `BadgeWrapper.tsx`), not `index.tsx`
 
 2. **Extract UI logic to `index.tsx`:**
    - Change `children` prop to `label: JSXElement` (framework-agnostic)
@@ -62,11 +79,18 @@ Before running this skill, ensure:
    - Maintain backward compatibility
 
 4. **Create Vue wrapper:**
-   - Create directory structure:
+   - For standalone components, create directory structure:
      ```
      packages/lumx-vue/src/components/<component-name>/
      ├── <Component>.tsx
      └── index.ts
+     ```
+   - For sub-components (e.g., `BadgeWrapper` alongside `Badge`), add to existing parent folder:
+     ```
+     packages/lumx-vue/src/components/<parent-component-name>/
+     ├── <ParentComponent>.tsx
+     ├── <SubComponent>.tsx (e.g., BadgeWrapper.tsx)
+     └── index.ts (update to export both components)
      ```
    - Use `defineComponent` with render function
    - Use composables: `useTheme`, `useId`, `useDisableStateProps`
@@ -727,12 +751,14 @@ export default Component;
 
 ## Files Created/Modified Checklist
 
+**Note:** For sub-components (e.g., `BadgeWrapper` alongside `Badge`), replace `<Component>` with the parent folder name (e.g., `Badge`), and use `<SubComponent>.tsx` instead of `index.tsx` in core.
+
 ### Phase 1: UI Extraction & Implementation
-- [ ] `/packages/lumx-core/src/js/components/<Component>/index.tsx` (created)
+- [ ] `/packages/lumx-core/src/js/components/<Component>/index.tsx` (created) or `<Component>/<SubComponent>.tsx` for sub-components
 - [ ] `/packages/lumx-react/src/components/<component>/<Component>.tsx` (modified to wrapper)
 - [ ] `/packages/lumx-vue/src/components/<component>/<Component>.tsx` (created)
-- [ ] `/packages/lumx-vue/src/components/<component>/index.ts` (created)
-- [ ] `/packages/lumx-vue/src/index.ts` (add export)
+- [ ] `/packages/lumx-vue/src/components/<component>/index.ts` (created or updated to export sub-component)
+- [ ] `/packages/lumx-vue/src/index.ts` (export already exists for parent folder)
 
 ### Phase 2: Stories Migration
 **Step 1: Core Stories**

@@ -1,37 +1,23 @@
 import { ReactElement, ReactNode } from 'react';
 
-import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
+import {
+    BadgeWrapper as UI,
+    BadgeWrapperProps as UIProps,
+    CLASSNAME,
+    COMPONENT_NAME,
+} from '@lumx/core/js/components/Badge/BadgeWrapper';
 import { GenericProps } from '@lumx/react/utils/type';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
-export interface BadgeWrapperProps extends GenericProps {
-    /** Badge. */
+export interface BadgeWrapperProps extends GenericProps, Omit<UIProps, 'children' | 'badge'> {
+    /** Badge element to display */
     badge: ReactElement;
-    /** Node to display the badge on */
+    /** Content to wrap with badge */
     children: ReactNode;
 }
 
-/**
- * Component display name.
- */
-const COMPONENT_NAME = 'BadgeWrapper';
-
-/**
- * Component default class name and class prefix.
- */
-const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-badge-wrapper';
-const { block, element } = classNames.bem(CLASSNAME);
-
 export const BadgeWrapper = forwardRef<BadgeWrapperProps, HTMLDivElement>((props, ref) => {
-    const { badge, children, className, ...forwardedProps } = props;
-
-    return (
-        <div ref={ref} {...forwardedProps} className={classNames.join(className, block())}>
-            {children}
-            {badge && <div className={element('badge')}>{badge}</div>}
-        </div>
-    );
+    return UI({ ...props, ref });
 });
-BadgeWrapper.displayName = 'BadgeWrapper';
+BadgeWrapper.displayName = COMPONENT_NAME;
 BadgeWrapper.className = CLASSNAME;
