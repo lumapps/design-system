@@ -37,6 +37,13 @@ for label in react vue; do
   cp -r "$src"/* "${DEST_DIR}/${label}/"
 done
 
+# Copy cross-framework diff images
+CROSS_FW_DIR="$ARTIFACTS_DIR/cross-framework-diffs"
+if [ -d "$CROSS_FW_DIR" ]; then
+  mkdir -p "${DEST_DIR}/cross-framework"
+  cp -r "$CROSS_FW_DIR"/__*__/ "${DEST_DIR}/cross-framework/"
+fi
+
 # Copy the report markdown
 for report_file in "$ARTIFACTS_DIR"/*.md; do
   [ -f "$report_file" ] && cp "$report_file" "${DEST_DIR}/"

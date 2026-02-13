@@ -178,6 +178,37 @@ async function scanArtifacts(artifactsDir) {
 }
 
 /**
+ * Scan the cross-framework diff manifest produced by cross-framework-diff.js.
+ *
+ * @param {string} artifactsDir
+ * @returns {Promise<{ diffs: Array<{ relPath: string, diffPercent: number }>, totalPairs: number, unmatchedReact: number, unmatchedVue: number } | null>}
+ */
+async function scanCrossFrameworkDiffs(artifactsDir) {
+    const manifestPath = path.join(artifactsDir, 'cross-framework-diffs', 'manifest.json');
+    try {
+        const content = await fs.readFile(manifestPath, 'utf8');
+        const manifest = JSON.parse(content);
+
+        const diffs = manifest.comparisons
+            .filter((c) => c.diffPixels > 0)
+            .map((c) => ({
+                relPath: c.normalizedPath,
+                diffPercent: c.diffPercent,
+            }))
+            .sort((a, b) => a.relPath.localeCompare(b.relPath));
+
+        return {
+            diffs,
+            totalPairs: manifest.totalPairs,
+            unmatchedReact: manifest.unmatchedReact,
+            unmatchedVue: manifest.unmatchedVue,
+        };
+    } catch {
+        return null;
+    }
+}
+
+/**
  * Build a section with entries grouped by story file, each group in a collapsible details block.
  * @param {string} heading - Section heading (e.g. "Differences")
  * @param {Array<{ relPath: string }>} entries
@@ -198,36 +229,44 @@ function buildGroupedSection(heading, entries, renderEntry, { collapsed = false 
     return [md.bold(`${heading}:`), '', ...content];
 }
 
-    const separator = header.replace(/[^|]/g, '-').replace(/\|-/g, '|--').replace(/-\|/g, '--|');
+/**
+ * Render a single entry as an image table.
+ * @param {Object} entry
+ * @param {Array<{ label: string, url: string }>} columns - Table columns with label and image URL
+ * @returns {string[]}
+ */
+function renderImageEntry(entry, columns) {
+    const suffix = entry.diffPercent !== undefined ? ` (${entry.diffPercent.toFixed(2)}% diff)` : '';
+    const table = md.table(
+        columns.map((c) => c.label),
+        columns.map((c) => md.linkedImage(c.url, { width: 300 })),
+    );
+    return [md.bold(`${entry.shortName}${suffix}`), '', table, ''];
+}
 
-    return [
-        `<details>`,
-        `<summary><strong>${entry.storyName}</strong>${suffix}</summary>`,
-        '',
-        header,
-        separator,
-        row,
-        '',
-        '</details>',
-    ].join('\n');
+/**
+ * Summarize changes for a package as a human-readable string.
+ * @param {Object} pkg
+ * @returns {string} e.g. "3 difference(s), 1 new" or "No changes"
+ */
+function summarizeChanges(pkg) {
+    const parts = [
+        pkg.diffs.length > 0 && `${pkg.diffs.length} difference(s)`,
+        pkg.newScreenshots.length > 0 && `${pkg.newScreenshots.length} new`,
+        pkg.deletedScreenshots.length > 0 && `${pkg.deletedScreenshots.length} deleted`,
+    ].filter(Boolean);
+    return parts.length > 0 ? parts.join(', ') : 'No changes';
 }
 
 /**
  * Build report preamble: "no changes" or "no baselines" message when there are no visual changes.
  * Returns an empty array if there are changes (the per-package headings will describe them).
  *
- * @param {Array} packages - Packages with diffs, newScreenshots, unchangedScreenshots, deletedScreenshots
- * @param {Object} options
- * @param {string} options.imageUrlPrefix - Prefix for image URLs
- * @param {string} [options.reportUrl] - Link to full report
- * @param {string} [options.artifactUrl] - Link to download artifacts
- * @param {boolean} [options.summaryOnly] - Only include stats and links, no images
- * @returns {string}
+ * @param {Array} packages - Packages with diffs, newScreenshots, deletedScreenshots
+ * @returns {string[]}
  */
-function buildReport(packages, options) {
-    const { imageUrlPrefix, reportUrl, artifactUrl, cacheStatus = {}, maxItems } = options;
-
-    const lines = [COMMENT_MARKER, ''];
+function buildReportPreamble(packages) {
+    if (packages.some((pkg) => summarizeChanges(pkg) !== 'No changes')) return [];
 
     const noBaselineLabels = packages.filter((pkg) => !pkg.hasBaselines).map((pkg) => pkg.label);
     if (noBaselineLabels.length > 0) {
@@ -235,11 +274,6 @@ function buildReport(packages, options) {
             md.warning(`@lumx/${label} — No baseline snapshots found. Diff results are not available.`),
             '',
         ]);
-        lines.push('', '---', '');
-        if (artifactUrl) {
-            lines.push(`[Download artifacts](${artifactUrl})`);
-        }
-        return lines.join('\n');
     }
     return ['All screenshots match the baselines.'];
 }
@@ -366,6 +400,30 @@ function buildFullReport(packages, options) {
         }
     }
 
+    lines.push(...buildFooter({ artifactUrl }));
+
+    return lines.join('\n');
+}
+
+/**
+ * Build a summary report markdown with stats and links only, no images (for PR comment).
+ *
+ * @param {Array} packages - Packages with diffs, newScreenshots, unchangedScreenshots, deletedScreenshots
+ * @param {Object} options
+ * @param {string} [options.reportUrl] - Link to full report
+ * @param {string} [options.artifactUrl] - Link to download artifacts
+ * @param {Object} [options.crossFramework] - Cross-framework diff data
+ * @returns {string}
+ */
+function buildSummaryReport(packages, options) {
+    const { reportUrl, artifactUrl, crossFramework } = options;
+    const headingOptions = { heading: md.h3 };
+    const lines = buildReportPreamble(packages);
+
+    for (const pkg of packages) {
+        lines.push(...buildPackageHeading(pkg, headingOptions));
+    }
+
     if (crossFramework) {
         lines.push(...buildCrossFrameworkHeading(crossFramework, headingOptions));
     }
@@ -389,7 +447,10 @@ async function main({ artifactsDir, runId, owner, repo, prNumber }) {
     console.log(`Scanning artifacts in: ${artifactsDir}`);
 
     // 1. Scan artifacts
-    const [packages, cacheStatus] = await Promise.all([scanArtifacts(artifactsDir), scanCacheStatus(artifactsDir)]);
+    const [packages, crossFramework] = await Promise.all([
+        scanArtifacts(artifactsDir),
+        scanCrossFrameworkDiffs(artifactsDir),
+    ]);
 
     // Log totals
     for (const pkg of packages) {
@@ -405,34 +466,21 @@ async function main({ artifactsDir, runId, owner, repo, prNumber }) {
     const artifactUrl = `https://github.com/${owner}/${repo}/actions/runs/${runId}`;
     const baseOptions = { imageUrlPrefix, artifactUrl, crossFramework };
 
-    // 3. Build full report (for wiki) with absolute image paths
-    const fullReport = buildReport(packages, {
-        imageUrlPrefix: imageBaseUrl,
-        artifactUrl,
-        cacheStatus,
-    });
-
-    // 4. Build PR comment (with absolute paths)
-    let commentBody = buildReport(packages, {
-        imageUrlPrefix: imageBaseUrl,
-        reportUrl,
-        artifactUrl,
-        cacheStatus,
-    });
-
-    // Check if it fits in GitHub's comment limit
-    if (commentBody.length > GITHUB_COMMENT_MAX_LENGTH) {
-        console.log(`Full report too large (${commentBody.length} chars), truncating...`);
-        commentBody = buildReport(packages, {
-            ...baseOptions,
-            reportUrl,
-            artifactUrl,
-            cacheStatus,
-            maxItems: 30,
-        });
+    // Log cross-framework results
+    if (crossFramework) {
+        console.log(
+            `  Cross-framework: ${crossFramework.diffs.length} diffs out of ${crossFramework.totalPairs} pairs` +
+                ` (${crossFramework.unmatchedReact} React-only, ${crossFramework.unmatchedVue} Vue-only)`,
+        );
     } else {
-        console.log(`Full report fits in comment (${commentBody.length} chars)`);
+        console.log('  Cross-framework: no manifest found (skipped)');
     }
+
+    // 3. Build full report (for wiki) with images
+    const fullReport = buildFullReport(packages, baseOptions);
+
+    // 4. Build PR comment (summary only: stats + links, no images)
+    const commentBody = buildSummaryReport(packages, { ...baseOptions, reportUrl });
 
     // 5. Write outputs
     const reportPath = path.join(artifactsDir, `${reportFileName}.md`);
@@ -458,5 +506,6 @@ async function main({ artifactsDir, runId, owner, repo, prNumber }) {
 
 module.exports = main;
 module.exports.scanArtifacts = scanArtifacts;
+module.exports.scanCrossFrameworkDiffs = scanCrossFrameworkDiffs;
 module.exports.buildFullReport = buildFullReport;
 module.exports.buildSummaryReport = buildSummaryReport;

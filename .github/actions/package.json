@@ -3,6 +3,8 @@
     "private": true,
     "devDependencies": {
         "@actions/core": "^3.0.0",
-        "@actions/github": "^9.0.0"
+        "@actions/github": "^9.0.0",
+        "pixelmatch": "^7.0.0",
+        "pngjs": "^7.0.0"
     }
 }
