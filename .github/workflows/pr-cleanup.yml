@@ -1,0 +1,33 @@
+name: 'PR Cleanup'
+
+on:
+    pull_request:
+        types: [closed]
+
+jobs:
+    cleanup-visual-reports:
+        runs-on: ubuntu-latest
+        steps:
+            - name: 'Remove visual report from wiki'
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITBOT_TOKEN }}
+              run: |
+                  PR_NUMBER=${{ github.event.pull_request.number }}
+                  REPOSITORY=${{ github.repository }}
+
+                  git clone --depth 1 \
+                    "https://x-access-token:${GITHUB_TOKEN}@github.com/${REPOSITORY}.wiki.git" \
+                    wiki-repo
+
+                  cd wiki-repo
+
+                  # Remove all wiki data for this PR
+                  rm -rf "pr-${PR_NUMBER}"
+
+                  git add -A
+                  git diff --cached --quiet && echo "No visual report to clean up" && exit 0
+
+                  git -c user.name="github-actions[bot]" \
+                      -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+                      commit -m "Clean up visual report for PR #${PR_NUMBER}"
+                  git push
