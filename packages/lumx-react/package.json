@@ -76,6 +76,16 @@
     "main": "index.js",
     "types": "index.d.ts",
     "name": "@lumx/react",
+    "exports": {
+        ".": {
+            "types": "./index.d.ts",
+            "default": "./index.js"
+        },
+        "./utils": {
+            "types": "./utils/index.d.ts",
+            "default": "./utils/index.js"
+        }
+    },
     "publishConfig": {
         "directory": "dist"
     },

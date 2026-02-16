@@ -11,6 +11,8 @@ import { viteStaticCopy } from 'vite-plugin-static-copy';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import pkg from './package.json' with { type: 'json' };
+import lumxCorePkg from '../lumx-core/package.json' with { type: 'json' };
+import fixEsmImports from 'rollup-plugin-lumx-fix-esm-imports';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,28 +20,8 @@ const ROOT_PATH = path.resolve(__dirname, '../..');
 const DIST_PATH = path.resolve(__dirname, pkg.publishConfig.directory);
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 
-const fixEsmImports = () => ({
-    name: 'fix-esm-imports',
-    generateBundle(_: any, bundle: any) {
-        for (const fileName in bundle) {
-            const chunk = bundle[fileName];
-            if (chunk.type === 'chunk') {
-                // 1. Fix directory imports for @lumx/core (add /index.js to directory imports)
-                chunk.code = chunk.code.replace(
-                    /from\s+['"](@lumx\/core\/js\/[^'"]+?)(?<!\.js)['"]/g,
-                    "from '$1/index.js'",
-                );
-
-                // 2. Fix other extensionless imports (like icons, core utils, or relative files)
-                // This regex avoids adding .js if it's already there or if it's a directory we just fixed
-                chunk.code = chunk.code.replace(
-                    /from\s+['"]((?:@lumx\/(?:icons\/esm\/|core\/js\/)|\.).*?)(?<!\.js)['"]/g,
-                    "from '$1.js'",
-                );
-            }
-        }
-    },
-});
+/** Set of lumx core exports */
+const lumxCoreExports = new Set(Object.keys(lumxCorePkg.exports).map((subpath) => path.join('@lumx/core', subpath)));
 
 /**
  * Vite config
@@ -54,7 +36,13 @@ export default defineConfig({
         outDir: 'dist',
         sourcemap: true,
         rollupOptions: {
-            external: [/^@lumx\/core(?!.*\/(_internal|components)).*$/, /^@lumx\/icons/, 'vue'],
+            external(id) {
+                if (id === 'vue') return true;
+                if (id.startsWith('@lumx/icons')) return true;
+                // @lumx/core imports are only external if they are available in the package.json "exports"
+                if (lumxCoreExports.has(id)) return true;
+                return false;
+            },
             output: {
                 format: 'esm',
                 hoistTransitiveImports: false,

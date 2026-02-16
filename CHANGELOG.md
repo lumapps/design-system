@@ -32,6 +32,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Moved `Toolbar` from `@lumx/react`
     -   Uniformize documentation of `disabled` (as an alias to `isDisabled`) props across core components
 
+-   `@lumx/core`, `@lumx/react`, `@lumx/vue`: improve declared ESM exports in package.json
+
 ## [4.3.1][] - 2026-02-11
 
 ### Added

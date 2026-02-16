@@ -1,6 +1,6 @@
 import type { Preview } from '@storybook/react-vite';
 import { withGlobalTheme } from './decorators/withGlobalTheme';
-import { Theme } from '@lumx/core/src/js/constants';
+import { Theme } from '@lumx/core/js/constants';
 import '@lumx/core/stories/root-styles.scss';
 import 'focus-visible';
 

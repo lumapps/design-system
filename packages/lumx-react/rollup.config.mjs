@@ -9,8 +9,10 @@ import dts from 'rollup-plugin-dts';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import { tsPathsResolve } from 'rollup-plugin-ts-paths-resolve';
 import optimizeImportsLumxIcons from 'rollup-plugin-optimize-imports-lumx-icons';
+import fixEsmImports from 'rollup-plugin-lumx-fix-esm-imports';
 
 import pkg from './package.json' with { type: 'json' };
+import lumxCorePkg from '../lumx-core/package.json' with { type: 'json' };
 
 const importUrl = new URL(import.meta.url);
 const __dirname = path.dirname(importUrl.pathname);
@@ -28,11 +30,21 @@ const input = {
     'utils/index': 'src/utils/index.ts', // => @lumx/react/utils
 };
 
-const external = [
-    // Externalize "public" lumx-core exports (internalize `_internal/*` and `components/*` exports)
-    /^@lumx\/core(?!.*\/(_internal|components)).*$/,
-    /^@lumx\/icons/,
-];
+/** Set of lumx core exports */
+const lumxCoreExports = new Set(Object.keys(lumxCorePkg.exports).map(
+    (subpath) => path.join('@lumx/core', subpath),
+));
+
+/**
+ * Determine if an import should be treated as external (not bundled).
+ * - @lumx/icons => externa
+ * - @lumx/core => only external if the given module is not in the @lumx/core package.json "exports"
+ */
+function external(id) {
+    if (id.startsWith('@lumx/icons')) return true;
+    if (lumxCoreExports.has(id)) return true;
+    return false;
+}
 
 // Bundle JS code
 const bundleJS = {
@@ -67,6 +79,8 @@ const bundleJS = {
             exclude: /node_modules/,
             presets: [['@babel/react', { runtime: 'automatic' }], '@babel/preset-typescript'],
         }),
+        /** Fix ESM imports to add .js extensions and /index.js for directory imports */
+        fixEsmImports(),
         /** Copy additional files to dist. */
         copy({
             targets: [
