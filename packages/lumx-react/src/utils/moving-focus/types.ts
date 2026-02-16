@@ -1,4 +1,4 @@
-import { ObjectValues } from '@lumx/core/src/js/types/ObjectValues';
+import { ObjectValues } from '@lumx/core/js/types';
 
 import { CELL_SEARCH_DIRECTION, LOOP_AROUND_TYPES } from './constants';
 

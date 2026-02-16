@@ -7,6 +7,7 @@ import postcss from 'postcss';
 import typescript from '@rollup/plugin-typescript';
 import cleaner from 'rollup-plugin-cleaner';
 import copy from 'rollup-plugin-copy';
+import fixEsmImports from 'rollup-plugin-lumx-fix-esm-imports';
 
 import pkg from './package.json' with { type: 'json' };
 import CONFIGS from '../../configs/index.js';
@@ -25,10 +26,11 @@ function formatPath(entry) {
 }
 
 export default {
-    // Bundle constants, types and utils
-    input: glob.sync(`${SRC_PATH}/js/{constants,types,utils}/**/index.ts`, {
-        ignore: ['**/_internal/**'],
-    }),
+    // Bundle exports from package.json
+    input: Object.values(pkg.exports)
+        .map((e) => e.default)
+        .filter(Boolean)
+        .map((importPath) => path.join(SRC_PATH, importPath.replace(/index.js$/, 'index.ts'))),
     output: {
         format: 'esm',
         dir: DIST_PATH,
@@ -38,12 +40,12 @@ export default {
         chunkFileNames: formatPath,
     },
     // Externalize all dependencies
-    external: [
-        ...Object.keys(pkg.dependencies),
-        ...Object.keys(pkg.peerDependencies || []),
-    ].map((dependency) => new RegExp(`^${dependency}(/.*)?`)),
+    external: [...Object.keys(pkg.dependencies), ...Object.keys(pkg.peerDependencies || [])].map(
+        (dependency) => new RegExp(`^${dependency}(/.*)?`),
+    ),
     plugins: [
         cleaner({ targets: [DIST_PATH] }),
+        fixEsmImports(),
         typescript({
             compilerOptions: {
                 declaration: true,
@@ -52,7 +54,7 @@ export default {
                 target: 'ESNext',
                 module: 'ESNext',
             },
-            include: [`${SRC_PATH}/js/{constants,types,utils}/**/*.ts`],
+            include: path.join(SRC_PATH, '**', '*.ts'),
             exclude: ['**/*.test.*'],
         }),
         copy({
@@ -73,9 +75,11 @@ export default {
                 const input = 'src/scss/lumx.scss';
                 const { css } = await sass.compileAsync(input, {
                     style: 'expanded',
-                    importers: [{
-                        findFileUrl: (url) => new URL(import.meta.resolve(url)),
-                    }],
+                    importers: [
+                        {
+                            findFileUrl: (url) => new URL(import.meta.resolve(url)),
+                        },
+                    ],
                 });
 
                 const { name } = path.parse(input);
@@ -90,4 +94,3 @@ export default {
         },
     ],
 };
-

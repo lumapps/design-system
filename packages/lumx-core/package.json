@@ -22,6 +22,32 @@
     "license": "MIT",
     "type": "module",
     "name": "@lumx/core",
+    "exports": {
+        "./js/constants": {
+            "types": "./js/constants/index.d.ts",
+            "default": "./js/constants/index.js"
+        },
+        "./js/types": {
+            "types": "./js/types/index.d.ts",
+            "default": "./js/types/index.js"
+        },
+        "./js/utils/classNames": {
+            "types": "./js/utils/classNames/index.d.ts",
+            "default": "./js/utils/classNames/index.js"
+        },
+        "./js/utils/disabledState": {
+            "types": "./js/utils/disabledState/index.d.ts",
+            "default": "./js/utils/disabledState/index.js"
+        },
+        "./js/utils/selectors": {
+            "types": "./js/utils/selectors/index.d.ts",
+            "default": "./js/utils/selectors/index.js"
+        },
+        "./js/utils": {
+            "types": "./js/utils/index.d.ts",
+            "default": "./js/utils/index.js"
+        }
+    },
     "publishConfig": {
         "directory": "dist"
     },
