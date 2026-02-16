@@ -20407,6 +20407,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"rollup-plugin-lumx-fix-esm-imports@workspace:dev-packages/rollup-plugin-fix-esm-imports":
+  version: 0.0.0-use.local
+  resolution: "rollup-plugin-lumx-fix-esm-imports@workspace:dev-packages/rollup-plugin-fix-esm-imports"
+  languageName: unknown
+  linkType: soft
+
 "rollup-plugin-optimize-imports-lumx-icons@workspace:dev-packages/rollup-plugin-optimize-imports-lumx-icons":
   version: 0.0.0-use.local
   resolution: "rollup-plugin-optimize-imports-lumx-icons@workspace:dev-packages/rollup-plugin-optimize-imports-lumx-icons"

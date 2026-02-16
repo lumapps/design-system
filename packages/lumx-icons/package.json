@@ -22,6 +22,14 @@
     "main": "index.js",
     "types": "index.d.ts",
     "name": "@lumx/icons",
+    "exports": {
+        ".": "./index.js",
+        "./esm/*": "./esm/*",
+        "./cjs/*": "./cjs/*",
+        "./override/*": "./override/*",
+        "./font.scss": "./font.scss",
+        "./package.json": "./package.json"
+    },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/lumapps/design-system.git"

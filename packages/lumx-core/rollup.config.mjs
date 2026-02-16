@@ -24,9 +24,21 @@ function formatPath(entry) {
     return '[name].js';
 }
 
+// Extract export directories from package.json exports field
+const exportDirs = Object.keys(pkg.exports)
+    .map((exportPath) => {
+        // Extract directory name from paths like "./src/js/constants/*"
+        const match = exportPath.match(/\.\/src\/js\/([^/]+)\/\*/);
+        return match ? match[1] : null;
+    })
+    .filter(Boolean);
+
+// Construct glob pattern from exports: {constants,types,utils}
+const globPattern = exportDirs.length > 0 ? `{${exportDirs.join(',')}}` : '*';
+
 export default {
-    // Bundle constants, types and utils
-    input: glob.sync(`${SRC_PATH}/js/{constants,types,utils}/**/index.ts`, {
+    // Bundle exports from package.json
+    input: glob.sync(`${SRC_PATH}/js/${globPattern}/**/index.ts`, {
         ignore: ['**/_internal/**'],
     }),
     output: {
@@ -52,7 +64,7 @@ export default {
                 target: 'ESNext',
                 module: 'ESNext',
             },
-            include: [`${SRC_PATH}/js/{constants,types,utils}/**/*.ts`],
+            include: [`${SRC_PATH}/js/${globPattern}/**/*.ts`],
             exclude: ['**/*.test.*'],
         }),
         copy({

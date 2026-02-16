@@ -22,6 +22,11 @@
     "license": "MIT",
     "type": "module",
     "name": "@lumx/core",
+    "exports": {
+        "./src/js/constants/*": "./src/js/constants/*",
+        "./src/js/types/*": "./src/js/types/*",
+        "./src/js/utils/*": "./src/js/utils/*"
+    },
     "publishConfig": {
         "directory": "dist"
     },
