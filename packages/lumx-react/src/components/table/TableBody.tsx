@@ -1,26 +1,19 @@
+import {
+    TableBody as TableBodyUI,
+    TableBodyProps as TableBodyUIProps,
+    CLASSNAME,
+    COMPONENT_NAME,
+} from '@lumx/core/js/components/Table/TableBody';
 import { GenericProps } from '@lumx/react/utils/type';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
-import { classNames } from '@lumx/core/js/utils';
-
-import { CLASSNAME as TABLE_CLASSNAME } from './constants';
 
 /**
  * Defines the props of the component.
  */
-export interface TableBodyProps extends GenericProps {
+export interface TableBodyProps extends GenericProps, Omit<TableBodyUIProps, 'ref'> {
     /** Children */
     children?: React.ReactNode;
 }
-
-/**
- * Component display name.
- */
-const COMPONENT_NAME = 'TableBody';
-
-/**
- * Component default class name and class prefix.
- */
-const CLASSNAME = `${TABLE_CLASSNAME}__body`;
 
 /**
  * TableBody component.
@@ -30,13 +23,13 @@ const CLASSNAME = `${TABLE_CLASSNAME}__body`;
  * @return React element.
  */
 export const TableBody = forwardRef<TableBodyProps, HTMLTableSectionElement>((props, ref) => {
-    const { children, className, ...forwardedProps } = props;
+    const { children, ...otherProps } = props;
 
-    return (
-        <tbody ref={ref} {...forwardedProps} className={classNames.join(className, CLASSNAME)}>
-            {children}
-        </tbody>
-    );
+    return TableBodyUI({
+        ref,
+        children,
+        ...otherProps,
+    });
 });
 TableBody.displayName = COMPONENT_NAME;
 TableBody.className = CLASSNAME;

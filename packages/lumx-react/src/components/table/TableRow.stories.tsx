@@ -1,17 +1,9 @@
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
-
+import { setup } from '@lumx/core/js/components/Table/TableRowStories';
 import { Table, TableBody, TableCell, TableRow } from '.';
 
-export default {
-    title: 'Lumx components/table/TableRow',
+const { meta, ...stories } = setup({
     component: TableRow,
-    argTypes: {
-        children: { control: false },
-    },
-};
-
-/** Simple table row */
-export const Default = {
     render: (args: any) => (
         <Table>
             <TableBody>
@@ -22,24 +14,17 @@ export const Default = {
             </TableBody>
         </Table>
     ),
+    decorators: { withCombinations },
+    overrides: {
+        Default: {},
+        AllStates: {},
+    },
+});
+
+export default {
+    title: 'Lumx components/table/TableRow',
+    ...meta,
 };
 
-/** Combination of all states */
-export const AllStates = {
-    ...Default,
-    decorators: [
-        withCombinations({
-            firstColStyle: { minWidth: 200 },
-            combinations: {
-                rows: {
-                    Default: {},
-                    Clickable: { isClickable: true },
-                    Selected: { isSelected: true },
-                    Disabled: { isDisabled: true },
-                    'Clickable & Selected': { isClickable: true, isSelected: true },
-                    'Clickable & Disabled': { isClickable: true, isDisabled: true },
-                },
-            },
-        }),
-    ],
-};
+export const Default = { ...stories.Default };
+export const AllStates = { ...stories.AllStates };

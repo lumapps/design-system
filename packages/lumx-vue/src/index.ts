@@ -16,4 +16,5 @@ export * from './components/message';
 export * from './components/radio-button';
 export * from './components/skeleton';
 export * from './components/switch';
+export * from './components/table';
 export * from './components/text';

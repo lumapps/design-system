@@ -18,14 +18,23 @@ Migrate a React-only component to the core/React/Vue architecture pattern.
 **Example:**
 ```
 /migrate-component Switch
+/migrate-component Table
 ```
 
 ## Description
 
-This skill migrates a component from React-only implementation to a shared core architecture where:
+This skill migrates a component (or component family) from React-only implementation to a shared core architecture where:
 - **Core package** (`@lumx/core`): Contains framework-agnostic UI logic, tests (plain data only, no JSX), and stories (plain data only, no JSX)
 - **React package** (`@lumx/react`): Thin wrapper that delegates to core
 - **Vue package** (`@lumx/vue`): Thin wrapper that delegates to core
+
+**Component Families:**
+- A component name may refer to a **family of components** (e.g., "Table" includes Table, TableRow, TableCell, TableBody, TableHeader)
+- When migrating a component family, the skill will:
+  1. **Discover all components** in the family by scanning the React folder
+  2. **Analyze dependencies** between components and external dependencies
+  3. **Determine migration order** based on dependencies
+  4. **Migrate each component** in the correct order through all phases
 
 **Component Organization:**
 - **Sub-components go in the same folder as their parent component**
@@ -33,8 +42,11 @@ This skill migrates a component from React-only implementation to a shared core 
   - Core: `/packages/lumx-core/src/js/components/Badge/` contains both `Badge` and `BadgeWrapper`
   - React: `/packages/lumx-react/src/components/badge/` contains both `Badge.tsx` and `BadgeWrapper.tsx`
   - Vue: `/packages/lumx-vue/src/components/badge/` contains both `Badge.tsx` and `BadgeWrapper.tsx`
-- When migrating a sub-component (like `BadgeWrapper`), respect the existing folder structure from React
-- The folder name uses lowercase-with-dashes (e.g., `badge/`), while the component names use PascalCase (e.g., `Badge`, `BadgeWrapper`)
+- Example: `Table` family in the `table/` folder
+  - Core: `/packages/lumx-core/src/js/components/Table/` contains `index.tsx` (Table), `TableRow.tsx`, `TableCell.tsx`, etc.
+  - React: `/packages/lumx-react/src/components/table/` contains `Table.tsx`, `TableRow.tsx`, `TableCell.tsx`, etc.
+  - Vue: `/packages/lumx-vue/src/components/table/` contains `Table.tsx`, `TableRow.tsx`, `TableCell.tsx`, etc.
+- The folder name uses lowercase-with-dashes (e.g., `badge/`, `table/`), while the component names use PascalCase (e.g., `Badge`, `BadgeWrapper`, `Table`, `TableRow`)
 
 ## Prerequisites
 
@@ -43,19 +55,84 @@ Before running this skill, ensure:
 2. The component has existing tests and stories
 3. A reference component (like Checkbox) has already been migrated and can serve as a pattern
 
+## Phase 0: Discovery & Dependency Analysis
+
+**Goal:** Discover all components in the family and determine the correct migration order.
+
+**IMPORTANT:** This phase MUST be completed before starting any migration work.
+
+1. **Discover component family:**
+   - Read `/packages/lumx-react/src/components/<component-name>/index.ts` to find all exported components
+   - List all `.tsx` files in the component folder
+   - Identify which component is the parent and which are sub-components
+
+2. **Analyze dependencies:**
+   - For each component, check if it imports:
+     - Constants from a shared `constants.ts` file (dependency on parent)
+     - Other components from the same folder (dependency on siblings)
+     - Components from `@lumx/react` or `@lumx/core` (external dependencies)
+   - Verify external component dependencies are available in `@lumx/core`
+   - Document any blocking dependencies (components not yet migrated to core)
+
+3. **Determine migration order:**
+   - **If there's a `constants.ts` file**, migrate the parent component first (it will create the constants in core)
+   - **If sub-components import the parent component**, migrate the parent first
+   - **Otherwise**, components can be migrated in any order
+   - Create a numbered list of components in migration order
+
+4. **Present migration plan to developer:**
+   - Show discovered components
+   - Show dependency analysis
+   - Show proposed migration order
+   - List any blocking dependencies
+   - Ask for confirmation before proceeding
+
+**Example for Table family:**
+```
+Discovered components:
+1. Table (parent - defines constants.ts)
+2. TableBody (imports TABLE_CLASSNAME from constants)
+3. TableCell (imports TABLE_CLASSNAME from constants, uses Icon)
+4. TableHeader (imports TABLE_CLASSNAME from constants)
+5. TableRow (imports TABLE_CLASSNAME from constants)
+
+Dependencies:
+- All sub-components depend on constants.ts (created by Table)
+- TableCell uses Icon (already available in core ✓)
+
+Migration order:
+1. Table (parent, creates constants)
+2. TableBody
+3. TableCell
+4. TableHeader
+5. TableRow
+```
+
+**Validation Checkpoint 0:**
+- Developer reviews and approves the migration plan
+- Developer confirms all external dependencies are available or acceptable to skip
+
 ## Migration Steps
+
+**IMPORTANT:** After Phase 0 approval, migrate each component in the determined order by going through Phases 1-6 for each component before moving to the next.
 
 ### Phase 1: UI Extraction & Implementation
 
 **Goal:** Extract the core UI logic and create thin wrappers for React and Vue.
 
-1. **Create core component file:**
+1. **Create core component files:**
+   - **If migrating the parent component first** (has constants.ts in React):
+     ```
+     packages/lumx-core/src/js/components/<ComponentName>/
+     ├── constants.ts (migrate from React)
+     └── index.tsx (parent component)
+     ```
    - For standalone components:
      ```
      packages/lumx-core/src/js/components/<ComponentName>/
      └── index.tsx
      ```
-   - For sub-components (e.g., `BadgeWrapper` alongside `Badge`):
+   - For sub-components being migrated after parent (e.g., `TableRow` after `Table`):
      ```
      packages/lumx-core/src/js/components/<ParentComponentName>/
      ├── index.tsx (parent component)
@@ -63,12 +140,18 @@ Before running this skill, ensure:
      ```
    - Sub-components use separate files (e.g., `BadgeWrapper.tsx`), not `index.tsx`
 
-2. **Extract UI logic to `index.tsx`:**
-   - Change `children` prop to `label: JSXElement` (framework-agnostic)
-   - Add required `inputId: string` prop (generated by wrappers)
-   - Use functional JSX calls: `InputLabel({ ... })` instead of `<InputLabel ... />`
-   - Remove React-specific code (Children.count, etc.)
-   - Export: `Component`, `ComponentProps`, `COMPONENT_NAME`, `CLASSNAME`, `DEFAULT_PROPS`
+2. **Extract UI logic:**
+   - **For parent components with constants.ts:**
+     - First migrate `constants.ts` to core (keep exact same structure)
+     - Update React imports to use `@lumx/core/js/components/<Component>/constants`
+   - **For sub-components:**
+     - Update imports: `import { CLASSNAME as PARENT_CLASSNAME } from './constants'` → `import { CLASSNAME as PARENT_CLASSNAME } from '@lumx/core/js/components/<Parent>/constants'`
+   - **For all components:**
+     - Change `children` prop to `label: JSXElement` (framework-agnostic)
+     - Add required `inputId: string` prop if needed (generated by wrappers)
+     - Use functional JSX calls: `InputLabel({ ... })` instead of `<InputLabel ... />`
+     - Remove React-specific code (Children.count, etc.)
+     - Export: `Component`, `ComponentProps`, `COMPONENT_NAME`, `CLASSNAME`, `DEFAULT_PROPS` (or import from constants if applicable)
 
 3. **Update React wrapper:**
    - Import UI component from core
@@ -545,8 +628,11 @@ Before running this skill, ensure:
 
 ### Phase 5: Update CHANGELOG
 
+**IMPORTANT:** Complete this phase ONCE for the entire component family after all components are migrated.
+
 Add entry under `[Unreleased]`:
 
+**For single component:**
 ```markdown
 ### Added
 
@@ -559,7 +645,35 @@ Add entry under `[Unreleased]`:
     -   Moved `<Component>` from `@lumx/react`
 ```
 
+**For component family:**
+```markdown
+### Added
+
+-   `@lumx/vue`:
+    -   Create the `<Component>` component family (`<Component>`, `<SubComponent1>`, `<SubComponent2>`, etc.)
+
+### Changed
+
+-   `@lumx/core`:
+    -   Moved `<Component>` component family from `@lumx/react` (`<Component>`, `<SubComponent1>`, `<SubComponent2>`, etc.)
+```
+
+**Example for Table:**
+```markdown
+### Added
+
+-   `@lumx/vue`:
+    -   Create the `Table` component family (`Table`, `TableBody`, `TableCell`, `TableHeader`, `TableRow`)
+
+### Changed
+
+-   `@lumx/core`:
+    -   Moved `Table` component family from `@lumx/react` (`Table`, `TableBody`, `TableCell`, `TableHeader`, `TableRow`)
+```
+
 ### Phase 6: Final Build Verification
+
+**IMPORTANT:** After completing Phases 1-5 for ALL components in the family, perform final verification.
 
 1. **Build packages:**
    ```bash
@@ -572,6 +686,61 @@ Add entry under `[Unreleased]`:
    - Run full test suite: `yarn test`
    - Verify all builds succeed
    - Check Storybook for any console errors
+   - Verify all components in the family work together correctly
+
+3. **Validate React/Vue parity:**
+   - **CRITICAL: Check that all tests and stories are properly matched between React and Vue**
+   - For each component in the family:
+
+     **Stories validation:**
+     - Verify every `.stories.tsx` file in React has a corresponding `.stories.ts` file in Vue
+     - Read both story files and compare exported story names
+     - Ensure all React stories have Vue equivalents (e.g., Default, WithHeader, AllStates)
+     - Example check:
+       ```bash
+       # React stories
+       ls packages/lumx-react/src/components/<component-name>/*.stories.tsx
+       # Vue stories
+       ls packages/lumx-vue/src/components/<component-name>/*.stories.ts
+       ```
+
+     **Tests validation:**
+     - Verify every `.test.tsx` file in React has a corresponding `.test.ts` file in Vue
+     - Read test files and compare test structure:
+       - Core tests are imported and run in both React and Vue
+       - Framework-specific `describe` blocks exist in both (React/Vue)
+       - `commonTestsSuiteRTL` (React) has equivalent `commonTestsSuiteVTL` (Vue)
+       - React-specific tests have Vue-specific equivalents where appropriate
+     - Check `commonTestsSuite` configurations match:
+       - Verify `baseClassName`, `forwardClassName`, `forwardAttributes`, `forwardRef` are present
+       - Check if React has `applyTheme` config - Vue should have it too
+     - Example validation:
+       ```typescript
+       // React test structure:
+       describe(`<${Component.displayName}>`, () => {
+           BaseComponentTests({ render, screen });
+           describe('React', () => { /* React-specific tests */ });
+           commonTestsSuiteRTL(setup, { /* config */ });
+       });
+
+       // Vue test structure should match:
+       describe('<Component />', () => {
+           BaseComponentTests({ render, screen });
+           describe('Vue', () => { /* Vue-specific tests */ });
+           commonTestsSuiteVTL(setup, { /* same config */ });
+       });
+       ```
+
+   - **Fix any discrepancies found:**
+     - Missing Vue stories → Create them using `.vue` templates and `withRender`
+     - Missing Vue tests → Add them following the React test structure
+     - Missing `applyTheme` config → Add to Vue test
+     - Missing Vue-specific tests → Add equivalent tests for Vue behavior
+
+   - **Run tests again after fixes:**
+     ```bash
+     yarn test
+     ```
 
 ## Key Patterns to Follow
 
@@ -743,17 +912,45 @@ export default Component;
 14. **Use `.ts` extension for Vue stories** - Only use `.tsx` if absolutely necessary (rare)
 15. **Vue tests must mimic React tests** - Include the same structure with `commonTestsSuiteVTL`
 
+## Single Component vs Component Family
+
+### Single Component (e.g., Switch, Divider)
+- One component file in the folder
+- Migration is straightforward: Phases 0-6 sequentially
+- CHANGELOG entry lists one component
+
+### Component Family (e.g., Table, Badge)
+- Multiple component files in the same folder
+- **Phase 0 is critical**: Must analyze dependencies and determine order
+- **Phases 1-4 repeat per component** in the migration order
+- **Phases 5-6 run once** for the entire family
+- CHANGELOG entry lists all components in the family
+- **Common patterns:**
+  - Parent defines `constants.ts` → migrate parent first
+  - Sub-components import from constants → migrate after parent
+  - Sub-components are independent → can migrate in any order
+
 ## Reference Components
 
+### Single Components
 - **Checkbox**: Full implementation with intermediate state
 - **Switch**: Recently migrated, good reference for binary components
+- **Divider**: Simple component without complex dependencies
+
+### Component Families
+- **Badge**: Parent `Badge` + sub-component `BadgeWrapper`
+- **Table** (not yet migrated): Parent `Table` + sub-components `TableBody`, `TableCell`, `TableHeader`, `TableRow`
 - **Button**: Good example of event handling with stopImmediatePropagation
 
 ## Files Created/Modified Checklist
 
-**Note:** For sub-components (e.g., `BadgeWrapper` alongside `Badge`), replace `<Component>` with the parent folder name (e.g., `Badge`), and use `<SubComponent>.tsx` instead of `index.tsx` in core.
+**IMPORTANT:** This checklist applies to EACH component in the family. Complete all phases for one component before moving to the next (following the migration order from Phase 0).
 
-### Phase 1: UI Extraction & Implementation
+**Note:** For sub-components (e.g., `BadgeWrapper` alongside `Badge`, or `TableRow` alongside `Table`), replace `<Component>` with the parent folder name (e.g., `Badge`, `Table`), and use `<SubComponent>.tsx` instead of `index.tsx` in core.
+
+**Note:** For parent components with `constants.ts`, create the constants file in core during the first component migration.
+
+### Phase 1: UI Extraction & Implementation (Per Component)
 - [ ] `/packages/lumx-core/src/js/components/<Component>/index.tsx` (created) or `<Component>/<SubComponent>.tsx` for sub-components
 - [ ] `/packages/lumx-react/src/components/<component>/<Component>.tsx` (modified to wrapper)
 - [ ] `/packages/lumx-vue/src/components/<component>/<Component>.tsx` (created)
@@ -790,9 +987,48 @@ export default Component;
 - [ ] `/CHANGELOG.md` (add entry under Unreleased)
 - [ ] Final build verification completed
 
+## Migration Workflow for Component Families
+
+When migrating a component family (e.g., Table, TableRow, TableCell, etc.):
+
+1. **Complete Phase 0** for the entire family
+2. **For each component in migration order:**
+   - Complete Phase 1 (UI Extraction) → Checkpoint
+   - Complete Phase 2 (Stories) → Checkpoint
+   - Complete Phase 3 (Tests) → Checkpoint
+   - Complete Phase 4 (Package Exports)
+3. **After all components are migrated:**
+   - Complete Phase 5 (CHANGELOG) once for the entire family
+   - Complete Phase 6 (Final Build Verification)
+
+**Example Timeline for Table Family:**
+```
+Phase 0: Discovery & Planning (all components)
+├─ Component 1: Table
+│  ├─ Phase 1: UI Extraction → ✓
+│  ├─ Phase 2: Stories → ✓
+│  ├─ Phase 3: Tests → ✓
+│  └─ Phase 4: Package Exports → ✓
+├─ Component 2: TableBody
+│  ├─ Phase 1: UI Extraction → ✓
+│  ├─ Phase 2: Stories → ✓
+│  ├─ Phase 3: Tests → ✓
+│  └─ Phase 4: Package Exports → ✓
+├─ ... (repeat for TableCell, TableHeader, TableRow)
+├─ Phase 5: CHANGELOG (entire family)
+└─ Phase 6: Final Build Verification (entire family)
+```
+
 ## Success Criteria
 
-### After Phase 1 (UI Extraction)
+### After Phase 0 (Discovery & Planning)
+- [ ] All components in the family discovered
+- [ ] Dependencies analyzed
+- [ ] Migration order determined
+- [ ] Blocking dependencies identified
+- [ ] Developer approves migration plan
+
+### After Phase 1 (UI Extraction - Per Component)
 - [ ] `yarn test` passes
 - [ ] `yarn type-check` passes
 - [ ] React component still works (backward compatible)
