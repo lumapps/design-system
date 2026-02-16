@@ -1,6 +1,7 @@
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { getByClassName } from '@lumx/react/testing/utils/queries';
+import BaseGridColumnTests from '@lumx/core/js/components/GridColumn/GridColumnTests';
 
 import { GridColumn } from './index';
 
@@ -25,25 +26,19 @@ const setup = (propsOverride = {}) => {
 };
 
 describe(`<${GridColumn.displayName}>`, () => {
-    it('should create default component', () => {
-        const { gridColumn } = setup();
-
-        expect(gridColumn).toBeInTheDocument();
-        expect(gridColumn.children).toHaveLength(3);
+    // Run core tests
+    BaseGridColumnTests({
+        render: (props: any) => render(<GridColumn {...props} />),
+        screen,
     });
 
-    describe('Props', () => {
-        it('should override CSS props', () => {
-            const { gridColumn } = setup({
-                gap: 'regular',
-                maxColumns: 10,
-                itemMinWidth: 300,
-            });
+    // React-specific tests
+    describe('React', () => {
+        it('should create default component', () => {
+            const { gridColumn } = setup();
 
-            expect(gridColumn).toHaveAttribute(
-                'style',
-                '--lumx-grid-column-item-min-width: 300px; --lumx-grid-column-columns: 10; --lumx-grid-column-gap: var(--lumx-spacing-unit-regular);',
-            );
+            expect(gridColumn).toBeInTheDocument();
+            expect(gridColumn.children).toHaveLength(3);
         });
 
         it('should render as a different element', () => {

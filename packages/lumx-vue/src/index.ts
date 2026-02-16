@@ -7,6 +7,7 @@ export * from './components/checkbox';
 export * from './components/divider';
 export * from './components/flag';
 export * from './components/flex-box';
+export * from './components/grid-column';
 export * from './components/heading';
 export * from './components/icon';
 export * from './components/input-helper';

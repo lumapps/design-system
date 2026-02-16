@@ -1,8 +1,10 @@
 ---
-frameworks: ['react']
+frameworks: ['react', 'vue']
 ---
-import * as Demo1 from './react/demo1.tsx';
+import * as ReactDemo1 from './react/demo1.tsx';
+import * as VueDemo1 from './vue/demo1.vue';
 import ReactGridColumn from 'lumx-docs:@lumx/react/components/grid-column/GridColumn';
+import VueGridColumn from 'lumx-docs:@lumx/vue/components/grid-column/GridColumn';
 
 # Grid column
 
@@ -13,7 +15,7 @@ import ReactGridColumn from 'lumx-docs:@lumx/react/components/grid-column/GridCo
 <DemoBlock
     marginAuto={['left', 'right']}
     style={{ overflow: 'hidden', resize: 'horizontal', maxWidth: '100%' }}
-    demo={{ react: Demo1 }}
+    demo={{ react: ReactDemo1, vue: VueDemo1 }}
 />
 
 ### Accessibility concerns
@@ -22,4 +24,4 @@ GridColumn is a simple layout blocks without any particular semantic or ARIA rol
 
 ### Properties
 
-<PropTable docs={{ react: ReactGridColumn }} />
+<PropTable docs={{ react: ReactGridColumn, vue: VueGridColumn }} />
