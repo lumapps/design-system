@@ -111,6 +111,20 @@ Migration order:
 **Validation Checkpoint 0:**
 - Developer reviews and approves the migration plan
 - Developer confirms all external dependencies are available or acceptable to skip
+## 🛑 IMPORTANT: Validation Checkpoints
+
+**This skill has MANDATORY validation checkpoints where you MUST stop and wait for user approval:**
+- **Checkpoint 1**: After Phase 1 (UI Implementation) - Verify React/Vue components work
+- **Checkpoint 2a**: After React stories migration - Verify React stories in Storybook
+- **Checkpoint 2b**: After first Vue story - Verify first Vue story in Storybook
+- **Checkpoint 2c**: After all Vue stories - Verify all Vue stories in Storybook
+- **Checkpoint 3**: After tests migration - Verify all tests pass
+
+**At each checkpoint:**
+1. **STOP immediately** - Do not continue to the next phase
+2. **USE the AskUserQuestion tool** to present results and ask for approval
+3. **WAIT for user response** - Only proceed when user explicitly approves
+4. **DO NOT skip or rush through checkpoints** - Each validation is critical
 
 ## Migration Steps
 
@@ -191,10 +205,15 @@ Migration order:
    export * from './components/<component-name>';
    ```
 
-**Validation Checkpoint 1:**
+**🛑 MANDATORY Validation Checkpoint 1 - STOP HERE:**
 - Run `yarn test` to ensure no regressions
 - Run `yarn type-check` to verify TypeScript compilation
-- Ask developer for validation before proceeding to Phase 2
+- **STOP AND USE AskUserQuestion tool** to ask developer for validation:
+  - Present test and type-check results
+  - Ask: "Phase 1 complete. Please verify React components work correctly and Vue components render basic UI. Should I proceed to Phase 2 (Stories Migration)?"
+  - Options: "Yes, proceed" / "No, fix issues first"
+- **DO NOT PROCEED** to Phase 2 until developer selects "Yes, proceed"
+- If developer selects "No", fix issues and ask again
 
 ### Phase 2: Stories Migration
 
@@ -340,12 +359,14 @@ Migration order:
      };
      ```
 
-**Validation Checkpoint 2a:**
+**🛑 MANDATORY Validation Checkpoint 2a - STOP HERE:**
 - Run `yarn type-check` to verify TypeScript compilation
-- Visual verification in Storybook:
-  - Verify ALL React stories render correctly
-  - Test all variants and states
-- Ask developer for validation before proceeding to Vue stories
+- **STOP AND USE AskUserQuestion tool** to ask developer for validation:
+  - Present type-check status
+  - Ask: "React stories migrated. Please verify ALL React stories render correctly in Storybook. Should I proceed to create Vue stories?"
+  - Options: "Yes, proceed to Vue stories" / "No, fix issues first"
+- **DO NOT PROCEED** to Step 3 (Vue stories) until developer selects "Yes, proceed to Vue stories"
+- If developer selects "No", fix issues and ask again
 
 #### Step 3: Implement First Vue Story
 
@@ -427,11 +448,14 @@ Migration order:
      // No render or .vue template needed
      ```
 
-**Validation Checkpoint 2b:**
+**🛑 MANDATORY Validation Checkpoint 2b - STOP HERE:**
 - Run `yarn type-check` to verify TypeScript compilation
-- Visual verification in Storybook:
-  - Verify the first Vue story renders correctly
-- Ask developer for validation before implementing remaining stories
+- **STOP AND USE AskUserQuestion tool** to ask developer for validation:
+  - Present type-check status
+  - Ask: "First Vue story created. Please verify it renders correctly in Storybook. Should I proceed to implement remaining Vue stories?"
+  - Options: "Yes, proceed with remaining stories" / "No, fix issues first"
+- **DO NOT PROCEED** to Step 4 (remaining Vue stories) until developer selects "Yes, proceed with remaining stories"
+- If developer selects "No", fix issues and ask again
 
 #### Step 4: Implement Remaining Vue Stories
 
@@ -442,13 +466,15 @@ Migration order:
    - Ensure all stories follow the same pattern as the validated first story
    - Add stories that couldn't be migrated to core (due to missing dependencies) as separate exports
 
-**Validation Checkpoint 2c (Final):**
+**🛑 MANDATORY Validation Checkpoint 2c (Final Stories) - STOP HERE:**
 - Run `yarn test` to ensure no regressions
 - Run `yarn type-check` to verify TypeScript compilation
-- Visual verification in Storybook:
-  - Verify ALL Vue stories render correctly
-  - Test all variants and states
-- Ask developer for final validation before proceeding to Phase 3
+- **STOP AND USE AskUserQuestion tool** to ask developer for validation:
+  - Present test and type-check results
+  - Ask: "All Vue stories complete. Please verify ALL Vue stories render correctly in Storybook and test all variants. Should I proceed to Phase 3 (Tests Migration)?"
+  - Options: "Yes, proceed to Phase 3" / "No, fix issues first"
+- **DO NOT PROCEED** to Phase 3 (Tests Migration) until developer selects "Yes, proceed to Phase 3"
+- If developer selects "No", fix issues and ask again
 
 ### Phase 3: Tests Migration
 
@@ -608,12 +634,17 @@ Migration order:
      });
      ```
 
-**Validation Checkpoint 3:**
+**🛑 MANDATORY Validation Checkpoint 3 (Tests) - STOP HERE:**
 - Run `yarn test` to ensure all tests pass
 - Run `yarn type-check` to verify TypeScript compilation
 - Verify core tests use only plain data (no JSX)
 - Verify framework-specific tests remain in React/Vue
-- Ask developer for validation before proceeding to Phase 4
+- **STOP AND USE AskUserQuestion tool** to ask developer for validation:
+  - Present test results (number of tests passing)
+  - Ask: "Phase 3 complete. All tests migrated and passing. Should I proceed to Phase 4 (Update CHANGELOG and verify builds)?"
+  - Options: "Yes, proceed to finalization" / "No, fix issues first"
+- **DO NOT PROCEED** to Phase 4 until developer selects "Yes, proceed to finalization"
+- If developer selects "No", fix issues and ask again
 
 **Important Notes:**
 - Tests with framework-specific rendering behavior (e.g., empty children) should stay in framework test files
@@ -892,25 +923,30 @@ export default Component;
 
 ## Common Pitfalls
 
-1. **NO JSX ELEMENTS or component calls in core stories or tests** - Use plain data only, provide components via `overrides` (stories) or framework-specific tests (tests)
+1. **🛑 NEVER skip validation checkpoints!** - This is the #1 most critical pitfall!
+   - ✅ ALWAYS use AskUserQuestion tool at each checkpoint
+   - ✅ WAIT for user approval before proceeding to next phase
+   - ❌ NEVER continue to next phase without explicit user approval
+   - ❌ NEVER assume "the user will validate later" - validate NOW
+2. **NO JSX ELEMENTS or component calls in core stories or tests** - Use plain data only, provide components via `overrides` (stories) or framework-specific tests (tests)
    - ✅ Core stories: `children: 'Text'` or `...overrides.WithIcon`
    - ❌ Core stories: `children: <Icon />`, `children: Icon({ icon: mdiHeart })`
    - ✅ Core tests: `children: '30'`, use `SetupOptions` pattern with default export
    - ❌ Core tests: Pass testing utilities as parameters, don't follow Button pattern
-2. **DO NOT add NOTE comments or explanatory comments** - Don't add meta-commentary like "NOTE: X is not migrated because..." or "This test is framework-specific". Keep generated code clean.
-3. **Don't add/remove stories** - Migrate existing stories only, keep the same set of stories
-4. **Check component dependencies before migrating stories** - If a story uses components not in core, don't migrate it
-5. **Don't use `Children.count()` in core** - This is React-specific
-6. **Always use functional calls in core UI** - `InputLabel({ ... })` not `<InputLabel ... />`
-7. **Add stopImmediatePropagation** - Prevent event bubbling in Vue wrapper (when handling events)
-8. **Use JSX in Vue wrapper** - `return (<Component />)` not function calls
-9. **Set correct component name** - Vue: `'LumxComponent'`, not `'Component'`
-10. **Vue stories with component children need `.vue` templates in `overrides`** - Create `.vue` template and use `render: withRender({ ComponentVue })` in overrides
-11. **Vue components with `children` need base `.vue` template + `withRender`** - Convert children prop to slots
-12. **Don't override Vue combination decorators with JSX** - Can't use JSX in `withCombinations` rows; use core version or create templates
-13. **Don't pass JSX components in Vue `args.children`** - Use `render: withRender({ ComponentVue })` instead
-14. **Use `.ts` extension for Vue stories** - Only use `.tsx` if absolutely necessary (rare)
-15. **Vue tests must mimic React tests** - Include the same structure with `commonTestsSuiteVTL`
+3. **DO NOT add NOTE comments or explanatory comments** - Don't add meta-commentary like "NOTE: X is not migrated because..." or "This test is framework-specific". Keep generated code clean.
+4. **Don't add/remove stories** - Migrate existing stories only, keep the same set of stories
+5. **Check component dependencies before migrating stories** - If a story uses components not in core, don't migrate it
+6. **Don't use `Children.count()` in core** - This is React-specific
+7. **Always use functional calls in core UI** - `InputLabel({ ... })` not `<InputLabel ... />`
+8. **Add stopImmediatePropagation** - Prevent event bubbling in Vue wrapper (when handling events)
+9. **Use JSX in Vue wrapper** - `return (<Component />)` not function calls
+10. **Set correct component name** - Vue: `'LumxComponent'`, not `'Component'`
+11. **Vue stories with component children need `.vue` templates in `overrides`** - Create `.vue` template and use `render: withRender({ ComponentVue })` in overrides
+12. **Vue components with `children` need base `.vue` template + `withRender`** - Convert children prop to slots
+13. **Don't override Vue combination decorators with JSX** - Can't use JSX in `withCombinations` rows; use core version or create templates
+14. **Don't pass JSX components in Vue `args.children`** - Use `render: withRender({ ComponentVue })` instead
+15. **Use `.ts` extension for Vue stories** - Only use `.tsx` if absolutely necessary (rare)
+16. **Vue tests must mimic React tests** - Include the same structure with `commonTestsSuiteVTL`
 
 ## Single Component vs Component Family
 

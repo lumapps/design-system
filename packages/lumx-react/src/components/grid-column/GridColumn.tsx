@@ -1,40 +1,26 @@
-import { ReactElement, ReactNode } from 'react';
-
-import isInteger from 'lodash/isInteger';
-
-import { Size } from '@lumx/react';
+import { ReactElement } from 'react';
 import { GenericProps } from '@lumx/react/utils/type';
-import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
-
-export type GridColumnGapSize = Extract<Size, 'tiny' | 'regular' | 'big' | 'huge'>;
+import {
+    GridColumn as UI,
+    type GridColumnProps as UIProps,
+    type GridColumnGapSize,
+    CLASSNAME,
+    COMPONENT_NAME,
+} from '@lumx/core/js/components/GridColumn';
 
 /**
  * Defines the props of the component.
  */
-export interface GridColumnProps extends GenericProps {
+export interface GridColumnProps extends GenericProps, UIProps {
     /** Customize the root element. */
     as?: React.ElementType;
     /** Children elements. */
-    children?: ReactNode;
-    /** Space between columns and rows. */
-    gap?: GridColumnGapSize;
-    /** Ideal number of columns. */
-    maxColumns?: number;
-    /** Minimum width for each item, reduce the number of column if there is not enough space. */
-    itemMinWidth?: number;
+    children?: React.ReactNode;
 }
 
-/**
- * Component display name.
- */
-const COMPONENT_NAME = 'GridColumn';
-
-/**
- * Component default class name and class prefix.
- */
-const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-grid-column';
+// Re-export types for backward compatibility
+export type { GridColumnGapSize };
 
 /**
  * Component default props.
@@ -51,32 +37,10 @@ const DEFAULT_PROPS: Partial<GridColumnProps> = {};
  * @return React element.
  */
 export const GridColumn = forwardRef<GridColumnProps>((props, ref): ReactElement => {
-    const {
-        as: Component = 'div',
-        gap,
-        maxColumns,
-        itemMinWidth,
-        children,
-        className,
-        style = {},
-        ...forwardedProps
-    } = props;
-
-    return (
-        <Component
-            {...forwardedProps}
-            ref={ref as React.Ref<any>}
-            className={classNames.join(className, CLASSNAME)}
-            style={{
-                ...style,
-                ['--lumx-grid-column-item-min-width' as any]: isInteger(itemMinWidth) && `${itemMinWidth}px`,
-                ['--lumx-grid-column-columns' as any]: maxColumns,
-                ['--lumx-grid-column-gap' as any]: gap && `var(--lumx-spacing-unit-${gap})`,
-            }}
-        >
-            {children}
-        </Component>
-    );
+    return UI({
+        ref,
+        ...props,
+    }) as ReactElement;
 });
 GridColumn.displayName = COMPONENT_NAME;
 GridColumn.className = CLASSNAME;

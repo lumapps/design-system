@@ -1,6 +1,5 @@
-/* eslint-disable react/display-name */
 import range from 'lodash/range';
-import { GridColumn } from '@lumx/react/components/grid-column/GridColumn';
+import { GridColumn } from '@lumx/vue';
 import { loremIpsum } from '@lumx/core/stories/utils/lorem';
 import { setup } from '@lumx/core/js/components/GridColumn/GridColumnStories';
 
@@ -16,11 +15,11 @@ const getItems = (nb: number) =>
 
 const { meta, ...stories } = setup({
     component: GridColumn,
-    render: ({ nbItems = 5, ...props }) => <GridColumn {...props}>{getItems(nbItems)}</GridColumn>,
+    render: ({ nbItems = 5, ...props }: any) => <GridColumn {...props}>{getItems(nbItems)}</GridColumn>,
 });
 
 export default {
-    title: 'LumX components/grid-column/GridColumn',
+    title: 'LumX components/grid/GridColumn',
     ...meta,
 };
 
