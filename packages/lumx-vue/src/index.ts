@@ -18,3 +18,4 @@ export * from './components/skeleton';
 export * from './components/switch';
 export * from './components/table';
 export * from './components/text';
+export * from './components/thumbnail';
