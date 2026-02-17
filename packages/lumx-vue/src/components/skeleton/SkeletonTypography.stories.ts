@@ -1,11 +1,10 @@
 import { SkeletonTypography } from '@lumx/vue';
+import { withCombinations } from '@lumx/vue/stories/decorators/withCombinations';
 import { setup } from '@lumx/core/js/components/Skeleton/SkeletonTypographyStories';
-import { withRender } from '@lumx/vue/stories/utils/withRender';
-import SkeletonTypographyDefaultVue from './Stories/SkeletonTypographyDefault.vue';
 
 const { meta, ...stories } = setup({
     component: SkeletonTypography,
-    render: withRender({ SkeletonTypographyDefaultVue }),
+    decorators: { withCombinations },
 });
 
 export default {
@@ -14,3 +13,5 @@ export default {
 };
 
 export const TextTypography = { ...stories.TextTypography };
+export const WidthVariations = { ...stories.WidthVariations };
+export const AllColors = { ...stories.AllColors };

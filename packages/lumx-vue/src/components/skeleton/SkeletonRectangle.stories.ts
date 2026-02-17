@@ -1,12 +1,9 @@
 import { SkeletonRectangle } from '@lumx/vue';
 import { setup } from '@lumx/core/js/components/Skeleton/SkeletonRectangleStories';
 import { withCombinations } from '@lumx/vue/stories/decorators/withCombinations';
-import { withRender } from '@lumx/vue/stories/utils/withRender';
-import SkeletonRectangleDefaultVue from './Stories/SkeletonRectangleDefault.vue';
 
 const { meta, ...stories } = setup({
     component: SkeletonRectangle,
-    render: withRender({ SkeletonRectangleDefaultVue }),
     decorators: { withCombinations },
 });
 
