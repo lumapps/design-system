@@ -3,22 +3,19 @@ import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
 import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
 import type { SetupStoriesOptions } from '@lumx/core/stories/types';
 
-import { InputHelper } from '.';
-
 /**
  * Setup InputHelper stories for a specific framework (React or Vue).
  * This function creates all the stories with the appropriate decorators.
  * Framework-specific render functions or args can be injected via `overrides`.
  */
 export function setup({
-    component,
-    render,
+    component: InputHelper,
     decorators: { withCombinations },
 }: SetupStoriesOptions<{ decorators: 'withCombinations' }>) {
     return {
         meta: {
-            component,
-            render,
+            component: InputHelper,
+            render: ({ children, ...args }: any) => <InputHelper {...args}>{children}</InputHelper>,
             argTypes: {
                 kind: getSelectArgType(Kind),
             },
