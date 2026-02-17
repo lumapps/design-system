@@ -1,18 +1,24 @@
 ---
-frameworks: ['react']
+frameworks: ['react', 'vue']
 ---
-import * as Demo1 from './react/demo1.tsx';
-import * as Demo2 from './react/demo2.tsx';
-import * as Demo3 from './react/demo3.tsx';
-import * as Demo4 from './react/demo4.tsx';
-import * as Demo5 from './react/demo5.tsx';
+import * as ReactDemo1 from './react/demo1.tsx';
+import * as ReactDemo2 from './react/demo2.tsx';
+import * as ReactDemo3 from './react/demo3.tsx';
+import * as ReactDemo4 from './react/demo4.tsx';
+import * as ReactDemo5 from './react/demo5.tsx';
+import VueDemo1 from './vue/demo1.vue';
+import VueDemo2 from './vue/demo2.vue';
+import VueDemo3 from './vue/demo3.vue';
+import VueDemo4 from './vue/demo4.vue';
+import VueDemo5 from './vue/demo5.vue';
 import ReactToolbar from 'lumx-docs:@lumx/react/components/toolbar/Toolbar';
+import VueToolbar from 'lumx-docs:@lumx/vue/components/toolbar/Toolbar';
 
 # Toolbar
 
 **Toolbars display information and actions related to the context.**
 
-<DemoBlock demo={{ react: Demo1 }} />
+<DemoBlock demo={{ react: ReactDemo1, vue: VueDemo1 }} />
 
 ## Anatomy
 
@@ -24,19 +30,19 @@ A toolbar has three sections. An optional contextual icon button and a title on 
 
 ### Dialog toolbar
 
-<DemoBlock demo={{ react: Demo2 }} />
+<DemoBlock demo={{ react: ReactDemo2, vue: VueDemo2 }} />
 
 ### Media picker toolbar
 
-<DemoBlock demo={{ react: Demo3 }} />
+<DemoBlock demo={{ react: ReactDemo3, vue: VueDemo3 }} />
 
 ### Contextual icon button
 
-<DemoBlock demo={{ react: Demo4 }} />
+<DemoBlock demo={{ react: ReactDemo4, vue: VueDemo4 }} />
 
 ### File list widget
 
-<DemoBlock demo={{ react: Demo5 }} />
+<DemoBlock demo={{ react: ReactDemo5, vue: VueDemo5 }} />
 
 ### Accessibility concerns
 
@@ -44,4 +50,4 @@ Toolbars are simple layout blocks without any particular semantic or ARIA role.
 
 ### Properties
 
-<PropTable docs={{ react: ReactToolbar }} />
+<PropTable docs={{ react: ReactToolbar, vue: VueToolbar }} />

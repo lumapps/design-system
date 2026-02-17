@@ -1,8 +1,7 @@
 ---
 name: migrate-component
 description: Migrate a React-only component to the shared core/React/Vue architecture
-argument-hint: [component-name]
-allowed-tools: Read, Write, Edit, Bash(yarn test:*), Bash(yarn build:*), Bash(mkdir:*), Bash(ls:*), Glob, Grep, Task, TodoWrite
+argument-hint: component-name
 ---
 
 # Migrate Component to Core Architecture
@@ -61,12 +60,30 @@ Before running this skill, ensure:
 
 **IMPORTANT:** This phase MUST be completed before starting any migration work.
 
-1. **Discover component family:**
+1. **Check for existing core implementation:**
+   - **BEFORE starting migration**, check if the component already exists in `@lumx/core`
+   - Read `/packages/lumx-core/src/js/components/<ComponentName>/` to see if any files exist
+   - Check for existing artifacts:
+     - **UI files**: `index.tsx`, `<SubComponent>.tsx`, `constants.ts`
+     - **Stories**: `Stories.ts`
+     - **Tests**: `Tests.ts`
+   - Document what already exists:
+     - If core UI implementation exists → Plan to reuse and skip Phase 1 (UI extraction)
+     - If core Stories exist → Plan to reuse and skip Phase 2 Step 1 (Core stories creation)
+     - If core Tests exist → Plan to reuse and skip Phase 3 Step 2 (Core tests creation)
+   - **If ANY existing core code is found:**
+     - Review the existing code to understand its structure
+     - **USE AskUserQuestion tool** to inform the developer about what exists
+     - Ask if any changes to the existing core implementation are needed
+     - If changes are needed, document them and get approval before proceeding
+   - If no core implementation exists, proceed with full migration
+
+2. **Discover component family:**
    - Read `/packages/lumx-react/src/components/<component-name>/index.ts` to find all exported components
    - List all `.tsx` files in the component folder
    - Identify which component is the parent and which are sub-components
 
-2. **Analyze dependencies:**
+3. **Analyze dependencies:**
    - For each component, check if it imports:
      - Constants from a shared `constants.ts` file (dependency on parent)
      - Other components from the same folder (dependency on siblings)
@@ -74,17 +91,19 @@ Before running this skill, ensure:
    - Verify external component dependencies are available in `@lumx/core`
    - Document any blocking dependencies (components not yet migrated to core)
 
-3. **Determine migration order:**
+4. **Determine migration order:**
    - **If there's a `constants.ts` file**, migrate the parent component first (it will create the constants in core)
    - **If sub-components import the parent component**, migrate the parent first
    - **Otherwise**, components can be migrated in any order
    - Create a numbered list of components in migration order
 
-4. **Present migration plan to developer:**
+5. **Present migration plan to developer:**
+   - Show whether core implementation already exists
    - Show discovered components
    - Show dependency analysis
    - Show proposed migration order
    - List any blocking dependencies
+   - If core exists, list any proposed changes to core implementation
    - Ask for confirmation before proceeding
 
 **Example for Table family:**
@@ -109,8 +128,10 @@ Migration order:
 ```
 
 **Validation Checkpoint 0:**
+- Developer is informed about any existing core implementation (UI, Stories, Tests)
 - Developer reviews and approves the migration plan
 - Developer confirms all external dependencies are available or acceptable to skip
+- If changes to existing core code are proposed, developer approves those changes
 ## 🛑 IMPORTANT: Validation Checkpoints
 
 **This skill has MANDATORY validation checkpoints where you MUST stop and wait for user approval:**
@@ -133,6 +154,14 @@ Migration order:
 ### Phase 1: UI Extraction & Implementation
 
 **Goal:** Extract the core UI logic and create thin wrappers for React and Vue.
+
+**IMPORTANT - Check for Existing Core Implementation:**
+- If Phase 0 discovered that core UI implementation already exists, **skip steps 1-2** and proceed directly to step 3 (Update React wrapper)
+- If any modifications to the existing core implementation are needed:
+  - **ALWAYS use AskUserQuestion tool BEFORE making any changes to core code**
+  - Present the proposed changes clearly with rationale
+  - Wait for user approval before modifying any core files
+- If no core implementation exists, proceed with steps 1-2 to create it
 
 1. **Create core component files:**
    - **If migrating the parent component first** (has constants.ts in React):
@@ -198,7 +227,13 @@ Migration order:
    - Define props using `keysOf<ComponentProps>()`
    - Set `name: 'Lumx<Component>'`
    - Set `inheritAttrs: false`
-   - Create `index.ts` to export component, props, and constants
+   - **Create `index.ts` with exports matching React structure:**
+     - Read the React component's `index.ts` file
+     - Export the same items (components, types, props, constants, utilities)
+     - Maintain similar export structure, accounting for framework differences:
+       - Vue uses default export for the component: `export { default as Component }`
+       - React uses named export: `export { Component }`
+       - Both should export the same types, props, and constants
 
 5. **Update Vue package index:**
    ```typescript
@@ -228,6 +263,13 @@ Migration order:
 - **Keep the same stories** - Don't add or remove stories; migrate existing ones only
 
 #### Step 1: Analyze and Create Core Stories
+
+**IMPORTANT - Check for Existing Core Stories:**
+- If Phase 0 discovered that `Stories.ts` already exists in core, **skip step 2** and proceed to Step 2 (React stories)
+- If any modifications to existing core stories are needed:
+  - **ALWAYS use AskUserQuestion tool BEFORE making any changes**
+  - Present proposed changes with clear rationale
+  - Wait for user approval before modifying core Stories.ts
 
 1. **Read and analyze existing React stories:**
    - Identify all components used in the stories
@@ -485,6 +527,13 @@ Migration order:
 - **Tests that need component children must use framework-specific setup** - Don't migrate those to core
 - **Vue tests should mimic React tests** - Include the same structure: core tests import, framework-specific describe block, and `commonTestsSuiteVTL` (Vue) or `commonTestsSuiteRTL` (React)
 - **DO NOT add NOTE comments or explanatory comments in generated files** - Keep code clean without meta-commentary
+
+**IMPORTANT - Check for Existing Core Tests:**
+- If Phase 0 discovered that `Tests.ts` already exists in core, **skip step 2** and proceed to step 3 (React tests update)
+- If any modifications to existing core tests are needed:
+  - **ALWAYS use AskUserQuestion tool BEFORE making any changes**
+  - Present proposed changes with clear rationale
+  - Wait for user approval before modifying core Tests.ts
 
 1. **Read and analyze existing React tests:**
    - Identify tests that use plain data (strings, numbers, etc.) - these can migrate to core
@@ -773,7 +822,62 @@ Add entry under `[Unreleased]`:
      yarn test
      ```
 
+### Phase 7: Add Vue Documentation
+
+**IMPORTANT:** After all components are migrated and verified, add Vue documentation to the site-demo.
+
+**Goal:** Create Vue demo files and update the documentation MDX page to include both React and Vue frameworks.
+
+1. **Check for existing documentation:**
+   - Verify that a documentation page exists at `packages/site-demo/content/product/components/<component>/index.mdx`
+   - If no documentation exists, the vue-docs skill will report this and you should note it for later
+
+2. **Run the vue-docs skill:**
+   - Use the Skill tool to invoke the vue-docs skill for the component
+   - The skill will automatically:
+     - Read existing React demos
+     - Create matching Vue demos (.vue files)
+     - Update the MDX page with Vue imports and demo blocks
+     - Add Vue PropTable integration
+   - Example:
+     ```
+     Skill tool: vue-docs, args: "<ComponentName>"
+     ```
+
+3. **Manual verification:**
+   - After the vue-docs skill completes, verify:
+     - All Vue demo files were created
+     - MDX page includes `frameworks: ['react', 'vue']`
+     - All DemoBlocks reference both frameworks
+     - PropTable includes both React and Vue docs
+
+**Note:** This phase must be completed for every component migration. If documentation doesn't exist, create a task or issue to add it later.
+
 ## Key Patterns to Follow
+
+### Export Files (index.ts) - React and Vue
+
+**IMPORTANT:** The `index.ts` files in React and Vue should export the same items in a similar structure, with only framework-specific differences.
+
+**React index.ts pattern:**
+```typescript
+export { Badge, type BadgeProps } from './Badge';
+export { BadgeWrapper, type BadgeWrapperProps } from './BadgeWrapper';
+export { CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS } from '@lumx/core/js/components/Badge';
+```
+
+**Vue index.ts pattern:**
+```typescript
+export { default as Badge, type BadgeProps } from './Badge';
+export { default as BadgeWrapper, type BadgeWrapperProps } from './BadgeWrapper';
+export { CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS } from '@lumx/core/js/components/Badge';
+```
+
+**Key differences:**
+- Vue uses `default as ComponentName` for component exports (because Vue component files use default export)
+- React uses direct named exports (because React component files use named exports)
+- Both export the same types, props, and constants from core
+- Both maintain the same export order and grouping
 
 ### Core Component Structure
 
@@ -947,6 +1051,8 @@ export default Component;
 14. **Don't pass JSX components in Vue `args.children`** - Use `render: withRender({ ComponentVue })` instead
 15. **Use `.ts` extension for Vue stories** - Only use `.tsx` if absolutely necessary (rare)
 16. **Vue tests must mimic React tests** - Include the same structure with `commonTestsSuiteVTL`
+17. **Vue `index.ts` should match React `index.ts` structure** - Export the same items (components, types, constants) in the same order, only differing in default vs named export syntax for components
+18. **Always check for existing core implementation first** - Before creating UI/Stories/Tests in core, verify they don't already exist. If they do, reuse them and only make changes after user approval
 
 ## Single Component vs Component Family
 
@@ -1023,6 +1129,12 @@ export default Component;
 - [ ] `/CHANGELOG.md` (add entry under Unreleased)
 - [ ] Final build verification completed
 
+### Phase 7: Vue Documentation
+- [ ] Check if documentation page exists
+- [ ] Run vue-docs skill for the component
+- [ ] Verify Vue demo files created
+- [ ] Verify MDX page updated with Vue support
+
 ## Migration Workflow for Component Families
 
 When migrating a component family (e.g., Table, TableRow, TableCell, etc.):
@@ -1036,6 +1148,7 @@ When migrating a component family (e.g., Table, TableRow, TableCell, etc.):
 3. **After all components are migrated:**
    - Complete Phase 5 (CHANGELOG) once for the entire family
    - Complete Phase 6 (Final Build Verification)
+   - Complete Phase 7 (Vue Documentation)
 
 **Example Timeline for Table Family:**
 ```

@@ -1,14 +1,19 @@
 import { ReactNode } from 'react';
 
 import { GenericProps } from '@lumx/react/utils/type';
-import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
+import {
+    Toolbar as UI,
+    ToolbarProps as UIProps,
+    CLASSNAME,
+    TOOLBAR_NAME,
+    DEFAULT_PROPS,
+} from '@lumx/core/js/components/Toolbar';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
  * Defines the props of the component.
  */
-export interface ToolbarProps extends GenericProps {
+export interface ToolbarProps extends GenericProps, UIProps {
     /** After content (placed after the label). */
     after?: ReactNode;
     /** Before content (placed before the label). */
@@ -18,22 +23,6 @@ export interface ToolbarProps extends GenericProps {
 }
 
 /**
- * Component display name.
- */
-const COMPONENT_NAME = 'Toolbar';
-
-/**
- * Component default class name and class prefix.
- */
-const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-toolbar';
-const { block, element } = classNames.bem(CLASSNAME);
-
-/**
- * Component default props.
- */
-const DEFAULT_PROPS: Partial<ToolbarProps> = {};
-
-/**
  * Toolbar component.
  *
  * @param  props Component props.
@@ -41,27 +30,11 @@ const DEFAULT_PROPS: Partial<ToolbarProps> = {};
  * @return React element.
  */
 export const Toolbar = forwardRef<ToolbarProps, HTMLDivElement>((props, ref) => {
-    const { after, before, className, label, ...forwardedProps } = props;
-
-    return (
-        <div
-            ref={ref}
-            {...forwardedProps}
-            className={classNames.join(
-                className,
-                block({
-                    'has-after': Boolean(after),
-                    'has-before': Boolean(before),
-                    'has-label': Boolean(label),
-                }),
-            )}
-        >
-            {before && <div className={element('before')}>{before}</div>}
-            {label && <div className={element('label')}>{label}</div>}
-            {after && <div className={element('after')}>{after}</div>}
-        </div>
-    );
+    return UI({
+        ref,
+        ...props,
+    });
 });
-Toolbar.displayName = COMPONENT_NAME;
+Toolbar.displayName = TOOLBAR_NAME;
 Toolbar.className = CLASSNAME;
 Toolbar.defaultProps = DEFAULT_PROPS;

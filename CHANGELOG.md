@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Create the `Divider` component
     -   Create the `Thumbnail` component
     -   Create the `GridColumn` component
+    -   Create the `Toolbar` component
 
 ### Changed
 
@@ -28,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Moved `Divider` from `@lumx/react`
     -   Moved `Thumbnail` from `@lumx/react`
     -   Moved `GridColumn` from `@lumx/react`
+    -   Moved `Toolbar` from `@lumx/react`
     -   Uniformize documentation of `disabled` (as an alias to `isDisabled`) props across core components
 
 ## [4.3.1][] - 2026-02-11
