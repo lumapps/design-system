@@ -1,4 +1,4 @@
-import { ProgressLinear } from '@lumx/react';
+import { ProgressLinear } from '@lumx/vue';
 import { setup } from '@lumx/core/js/components/ProgressLinear/Stories';
 
 const { meta, ...stories } = setup({

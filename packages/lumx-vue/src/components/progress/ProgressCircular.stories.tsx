@@ -1,5 +1,5 @@
-import { ProgressCircular, Text } from '@lumx/react';
-import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
+import { ProgressCircular, Text } from '@lumx/vue';
+import { withCombinations } from '@lumx/vue/stories/decorators/withCombinations';
 import { setup } from '@lumx/core/js/components/ProgressCircular/Stories';
 
 const { meta, ...stories } = setup({

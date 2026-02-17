@@ -1,6 +1,7 @@
 import { getByClassName } from '@lumx/react/testing/utils/queries';
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import BaseProgressLinearTests from '@lumx/core/js/components/ProgressLinear/Tests';
 
 import { ProgressLinear, ProgressLinearProps } from './ProgressLinear';
 
@@ -16,6 +17,12 @@ const setup = (props: Partial<ProgressLinearProps> = {}, { wrapper }: SetupRende
 };
 
 describe(`<${ProgressLinear.displayName}>`, () => {
+    // Run core tests
+    BaseProgressLinearTests({
+        render: (props: ProgressLinearProps) => render(<ProgressLinear {...props} />),
+        screen,
+    });
+
     commonTestsSuiteRTL(setup, {
         baseClassName: CLASSNAME,
         forwardClassName: 'element',
