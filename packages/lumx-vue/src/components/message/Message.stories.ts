@@ -1,15 +1,11 @@
-import { withWrapper } from '@lumx/vue/stories/decorators/withWrapper';
 import { withCombinations } from '@lumx/vue/stories/decorators/withCombinations';
-import { withRender } from '@lumx/vue/stories/utils/withRender';
 import { setup } from '@lumx/core/js/components/Message/Stories';
 
 import { Message } from '@lumx/vue';
-import MessageDefaultVue from './Stories/MessageDefault.vue';
 
 const { meta, ...stories } = setup({
     component: Message,
-    render: withRender({ MessageDefaultVue }, '{{ args.children }}'),
-    decorators: { withWrapper, withCombinations },
+    decorators: { withCombinations },
     overrides: {
         ClosableMessage: {
             args: { closeButtonLabel: 'Close' },

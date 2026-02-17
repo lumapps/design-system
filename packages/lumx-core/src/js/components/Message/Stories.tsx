@@ -10,18 +10,17 @@ import { Kind } from '../../constants';
 /**
  * Setup Message stories for a specific framework (React or Vue).
  * This function creates all the stories with the appropriate decorators.
- * Framework-specific render functions or args can be injected via `overrides`.
+ * Framework-specific components are injected via `components`.
  */
 export function setup({
-    component,
-    render,
+    component: Message,
     decorators: { withCombinations },
     overrides = {},
 }: SetupStoriesOptions<{ overrides: 'ClosableMessage'; decorators: 'withCombinations' }>) {
     return {
         meta: {
-            component,
-            render,
+            component: Message,
+            render: ({ children, ...args }: any) => <Message {...args}>{children}</Message>,
             argTypes: {
                 kind: getSelectArgType(Kind),
                 hasBackground: { control: 'boolean' },
