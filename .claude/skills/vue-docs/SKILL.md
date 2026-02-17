@@ -75,8 +75,13 @@ Update `content/product/components/<component>/index.mdx`:
 **Example MDX diff:**
 
 ```mdx
+import * as ReactDemo1 from './react/demo1.tsx';
++import * as VueDemo1 from './vue/demo1.vue';
 import ReactButton from 'lumx-docs:@lumx/react/components/button/Button';
 +import VueButton from 'lumx-docs:@lumx/vue/components/button/Button';
+
+-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemo1 }} />
++<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemo1, vue: VueDemo1 }} />
 
 -<PropTable docs={{ react: ReactButton }} />
 +<PropTable docs={{ react: ReactButton, vue: VueButton }} />
