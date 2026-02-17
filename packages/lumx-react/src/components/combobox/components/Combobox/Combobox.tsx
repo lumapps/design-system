@@ -48,7 +48,7 @@ export const Combobox = <O,>({
     const triggerRef = useRef<HTMLInputElement>(null);
 
     // Generate a unique id for the combobox that will be used for every child components.
-    const generatedId = useId('combobox');
+    const generatedId = useId();
     const comboboxId = htmlId || generatedId;
     const listboxId = `${comboboxId}-popover`;
 

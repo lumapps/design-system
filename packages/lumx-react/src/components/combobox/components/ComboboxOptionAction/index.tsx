@@ -35,7 +35,7 @@ export const ComboboxOptionAction = (props: ComboboxOptionActionProps) => {
     const { triggerRef } = useComboboxRefs();
     const itemRef = React.useRef<any>(null);
 
-    const generatedId = useId(`${optionId}-action`);
+    const generatedId = useId();
     const id = originalId || generatedId;
 
     const isHighlighted = useVirtualFocus(id, itemRef, isDisabled, optionId);
