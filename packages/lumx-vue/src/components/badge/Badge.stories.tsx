@@ -1,6 +1,6 @@
-import { Badge, FlexBox, Icon, Thumbnail } from '@lumx/react';
-import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
+import { withCombinations } from '@lumx/vue/stories/decorators/withCombinations';
 import { setup } from '@lumx/core/js/components/Badge/Stories';
+import { Badge, Icon, Thumbnail, FlexBox } from '@lumx/vue';
 
 const { meta, ...stories } = setup({
     component: Badge,
