@@ -1,13 +1,10 @@
-import { withRender } from '@lumx/vue/stories/utils/withRender';
 import { withCombinations } from '@lumx/vue/stories/decorators/withCombinations';
 import { setup } from '@lumx/core/js/components/Checkbox/Stories';
 
 import { Checkbox } from '@lumx/vue';
-import CheckboxDefaultVue from './Stories/CheckboxDefault.vue';
 
 const { meta, ...stories } = setup({
     component: Checkbox,
-    render: withRender({ CheckboxDefaultVue }),
     decorators: { withCombinations },
 });
 
