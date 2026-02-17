@@ -3,7 +3,6 @@ import pick from 'lodash/pick';
 import { Button, Emphasis, Text } from '@lumx/react';
 
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
-import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
 import { loremIpsum } from '@lumx/core/stories/utils/lorem';
 import { withThemedBackground } from '@lumx/react/stories/decorators/withThemedBackground';
 import { withTheming } from '@lumx/react/stories/utils/theming';
@@ -15,7 +14,7 @@ const buttonEmphasis = [Emphasis.high, Emphasis.medium, Emphasis.low];
 
 const { meta, ...stories } = setup({
     component: Button,
-    decorators: { withWrapper, withCombinations, withThemedBackground },
+    decorators: { withCombinations, withThemedBackground },
 });
 
 export default {

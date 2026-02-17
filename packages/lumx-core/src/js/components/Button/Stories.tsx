@@ -24,19 +24,18 @@ export const excludeCombination = ({ isSelected, emphasis, hasBackground }: any)
 /**
  * Setup Button stories for a specific framework (React or Vue).
  * This function creates all the stories with the appropriate decorators.
- * Framework-specific render functions or args can be injected via `overrides`.
+ * Framework-specific components are injected via `components`.
  */
 export function setup({
-    component,
-    render,
+    component: Button,
     decorators: { withCombinations, withThemedBackground },
 }: SetupStoriesOptions<{
     decorators: 'withCombinations' | 'withThemedBackground';
 }>) {
     return {
         meta: {
-            component,
-            render,
+            component: Button,
+            render: ({ children, ...args }: any) => <Button {...args}>{children}</Button>,
             argTypes: {
                 isSelected: { control: 'boolean', if: { arg: 'emphasis', eq: 'medium' } },
                 isDisabled: { control: 'boolean' },
