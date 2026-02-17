@@ -1,8 +1,6 @@
 /** Markdown formatting helpers. */
 const md = {
-    heading: (level, text) => `${'#'.repeat(level)} ${text}`,
-    h2: (text) => md.heading(2, text),
-    h3: (text) => md.heading(3, text),
+    heading: (level, text) => `<h${level}>${text}</h${level}>`,
     bold: (text) => `<strong>${text}</strong>`,
     link: (text, url) => `[${text}](${url})`,
     image: (url, { width } = {}) => `<img src="${url}"${width ? ` width="${width}"` : ''} />`,

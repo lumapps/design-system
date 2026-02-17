@@ -2,41 +2,7 @@ const fs = require('fs/promises');
 const path = require('path');
 
 const { md } = require('./md');
-
-/**
- * List all files under a directory matching a predicate.
- * @param {string} dir
- * @param {(filePath: string) => boolean} predicate
- * @returns {Promise<string[]>}
- */
-async function findFiles(dir, predicate) {
-    try {
-        const entries = await fs.readdir(dir, { withFileTypes: true, recursive: true });
-        return entries.flatMap((e) => {
-            if (e.isDirectory()) return [];
-            const filePath = path.join(e.parentPath || e.path, e.name);
-            return predicate(filePath) ? [filePath] : [];
-        });
-    } catch {
-        return [];
-    }
-}
-
-/**
- * Extract the relative image path after the image-type marker directory.
- * @param {string} filePath
- * @param {string} markerDir - e.g. '__diffs__'
- * @returns {string} relative path including .png extension (using '/' separators)
- */
-function extractRelativeImagePath(filePath, markerDir) {
-    const marker = markerDir + path.sep;
-    const idx = filePath.indexOf(marker);
-    if (idx === -1) return path.basename(filePath);
-    return filePath
-        .substring(idx + marker.length)
-        .split(path.sep)
-        .join('/');
-}
+const { findFiles, extractRelativePath, normalizeScreenshotPath } = require('./utils');
 
 /**
  * Strip the `.png` extension and `-auto` suffix from screenshot file names.
@@ -56,7 +22,7 @@ function stripScreenshotSuffix(name) {
  */
 function toEntries(files, markerDir) {
     return files
-        .map((f) => ({ relPath: extractRelativeImagePath(f, markerDir) }))
+        .map((f) => ({ relPath: extractRelativePath(f, markerDir) }))
         .sort((a, b) => a.relPath.localeCompare(b.relPath));
 }
 
@@ -69,9 +35,10 @@ function toEntries(files, markerDir) {
 function groupByStoryFile(entries) {
     const groups = new Map();
     for (const entry of entries) {
-        const storyFile = path.posix.dirname(entry.relPath);
+        const normalizedRelPath = normalizeScreenshotPath(entry.relPath);
+        const storyFile = path.posix.dirname(normalizedRelPath);
         if (!groups.has(storyFile)) groups.set(storyFile, []);
-        const shortName = stripScreenshotSuffix(path.posix.basename(entry.relPath));
+        const shortName = stripScreenshotSuffix(path.posix.basename(normalizedRelPath));
         groups.get(storyFile).push({ ...entry, shortName });
     }
     return [...groups.entries()].sort(([a], [b]) => a.localeCompare(b));
@@ -113,7 +80,7 @@ async function scanPackage(artifactRoot) {
     const cachedBaselines = await readBaselineManifest(artifactRoot);
 
     const baselineEntries = toEntries(baselinePngs, '__baselines__');
-    const resultRelPaths = new Set(resultPngs.map((f) => extractRelativeImagePath(f, '__results__')));
+    const resultRelPaths = new Set(resultPngs.map((f) => extractRelativePath(f, '__results__')));
 
     const diffs = toEntries(diffPngs, '__diffs__');
     const diffRelPaths = new Set(diffs.map((e) => e.relPath));
@@ -220,13 +187,13 @@ function buildGroupedSection(heading, entries, renderEntry, { collapsed = false 
     if (entries.length === 0) return [];
     const content = [];
     for (const [storyFile, groupEntries] of groupByStoryFile(entries)) {
-        const summary = `${md.bold(storyFile.split('/').join(' > '))} (${groupEntries.length})`;
+        const summary = `${md.heading(5, storyFile.split('/').join(' > '))} (${groupEntries.length})`;
         content.push(...md.details(summary, ...groupEntries.flatMap(renderEntry)), '');
     }
     if (collapsed) {
-        return [...md.details(`${md.bold(`${heading}:`)} (${entries.length})`, ...content), ''];
+        return [...md.details(`${heading} (${entries.length})`, ...content), ''];
     }
-    return [md.bold(`${heading}:`), '', ...content];
+    return [heading, '', ...content];
 }
 
 /**
@@ -281,29 +248,29 @@ function buildReportPreamble(packages) {
 /**
  * Build per-package heading lines (status summary).
  * @param {Object} pkg
- * @param {{ heading?: (text: string) => string }} [options]
+ * @param {{ headingLevel?: number }} [options]
  * @returns {string[]}
  */
-function buildPackageHeading(pkg, { heading = md.h2 } = {}) {
+function buildPackageHeading(pkg, { headingLevel = 2 } = {}) {
     if (!pkg.hasBaselines) {
         return [
-            heading(`@lumx/${pkg.label} — No baseline snapshots found`),
+            md.heading(headingLevel, `@lumx/${pkg.label} — No baseline snapshots found`),
             '',
             md.warning('Diff results may be unreliable since no baseline snapshots were available.'),
             '',
         ];
     }
 
-    return [heading(`@lumx/${pkg.label} — ${summarizeChanges(pkg)}`), ''];
+    return [md.heading(headingLevel, `@lumx/${pkg.label} — ${summarizeChanges(pkg)}`), ''];
 }
 
 /**
  * Build cross-framework heading lines.
  * @param {Object} crossFramework
- * @param {{ heading?: (text: string) => string }} [options]
+ * @param {{ headingLevel?: number }} [options]
  * @returns {string[]}
  */
-function buildCrossFrameworkHeading(crossFramework, { heading = md.h2 } = {}) {
+function buildCrossFrameworkHeading(crossFramework, { headingLevel = 2 } = {}) {
     const { diffs, totalPairs, unmatchedReact, unmatchedVue } = crossFramework;
     const hasDiffs = diffs.length > 0;
 
@@ -321,7 +288,14 @@ function buildCrossFrameworkHeading(crossFramework, { heading = md.h2 } = {}) {
         ? `Compared ${totalPairs} matching baseline(s). This section is informational only.`
         : `Compared ${totalPairs} matching screenshot(s). All identical.`;
 
-    return [md.rule, '', heading(`Cross-framework (React vs Vue) — ${summary}`), '', md.blockquote(note), ''];
+    return [
+        md.rule,
+        '',
+        md.heading(headingLevel, `Cross-framework (React vs Vue) — ${summary}`),
+        '',
+        md.blockquote(note),
+        '',
+    ];
 }
 
 /**
@@ -345,13 +319,17 @@ function buildFooter({ reportUrl, artifactUrl }) {
  * @param {Array} packages - Packages with diffs, newScreenshots, unchangedScreenshots, deletedScreenshots
  * @param {Object} options
  * @param {string} options.imageUrlPrefix - Prefix for image URLs
+ * @param {string} [options.prUrl] - Link back to the pull request
+ * @param {string} [options.prNumber] - Pull request number
  * @param {string} [options.artifactUrl] - Link to download artifacts
  * @param {Object} [options.crossFramework] - Cross-framework diff data
  * @returns {string}
  */
 function buildFullReport(packages, options) {
-    const { imageUrlPrefix, artifactUrl, crossFramework } = options;
-    const lines = buildReportPreamble(packages);
+    const { imageUrlPrefix, prUrl, prNumber, artifactUrl, crossFramework } = options;
+    const lines = [];
+    lines.push(md.link(`PR#${prNumber}`, prUrl), '');
+    lines.push(...buildReportPreamble(packages));
 
     for (const pkg of packages) {
         lines.push(...buildPackageHeading(pkg));
@@ -361,21 +339,21 @@ function buildFullReport(packages, options) {
         const url = (entry, imageType) => `${imageUrlPrefix}/${pkg.label}/${imageType}/${entry.relPath}`;
 
         lines.push(
-            ...buildGroupedSection('Differences', pkg.diffs, (e) =>
+            ...buildGroupedSection(md.heading(3, 'Differences'), pkg.diffs, (e) =>
                 renderImageEntry(e, [
                     { label: 'Baseline', url: url(e, '__baselines__') },
                     { label: 'Current', url: url(e, '__results__') },
                     { label: 'Diff', url: url(e, '__diffs__') },
                 ]),
             ),
-            ...buildGroupedSection('New Screenshots', pkg.newScreenshots, (e) =>
+            ...buildGroupedSection(md.heading(3, 'New Screenshots'), pkg.newScreenshots, (e) =>
                 renderImageEntry(e, [{ label: 'Current', url: url(e, '__baselines__') }]),
             ),
-            ...buildGroupedSection('Deleted Screenshots', pkg.deletedScreenshots, (e) =>
+            ...buildGroupedSection(md.heading(3, 'Deleted Screenshots'), pkg.deletedScreenshots, (e) =>
                 renderImageEntry(e, [{ label: 'Previous', url: url(e, '__baselines__') }]),
             ),
             ...buildGroupedSection(
-                'Unchanged Screenshots',
+                md.heading(3, 'Unchanged Screenshots'),
                 pkg.unchangedScreenshots,
                 (e) => renderImageEntry(e, [{ label: 'Current', url: url(e, '__baselines__') }]),
                 { collapsed: true },
@@ -388,7 +366,7 @@ function buildFullReport(packages, options) {
 
         if (crossFramework.diffs.length > 0) {
             lines.push(
-                ...buildGroupedSection('Differences', crossFramework.diffs, (entry) => {
+                ...buildGroupedSection(md.heading(3, 'Differences'), crossFramework.diffs, (entry) => {
                     const cfUrl = (type) => `${imageUrlPrefix}/cross-framework/${type}/${entry.relPath}`;
                     return renderImageEntry(entry, [
                         { label: 'React', url: cfUrl('__react__') },
@@ -417,7 +395,7 @@ function buildFullReport(packages, options) {
  */
 function buildSummaryReport(packages, options) {
     const { reportUrl, artifactUrl, crossFramework } = options;
-    const headingOptions = { heading: md.h3 };
+    const headingOptions = { headingLevel: 3 };
     const lines = buildReportPreamble(packages);
 
     for (const pkg of packages) {
@@ -463,8 +441,9 @@ async function main({ artifactsDir, runId, owner, repo, prNumber }) {
     const imageUrlPrefix = `https://raw.githubusercontent.com/wiki/${owner}/${repo}/pr-${prNumber}/visual-reports`;
     const reportFileName = `Visual-Reports-PR-${prNumber}`;
     const reportUrl = `https://github.com/${owner}/${repo}/wiki/${reportFileName}`;
+    const prUrl = `https://github.com/${owner}/${repo}/pull/${prNumber}`;
     const artifactUrl = `https://github.com/${owner}/${repo}/actions/runs/${runId}`;
-    const baseOptions = { imageUrlPrefix, artifactUrl, crossFramework };
+    const baseOptions = { imageUrlPrefix, prUrl, prNumber, artifactUrl, crossFramework };
 
     // Log cross-framework results
     if (crossFramework) {

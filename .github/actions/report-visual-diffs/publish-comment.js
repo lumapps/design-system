@@ -43,7 +43,7 @@ async function main({ github, context, commentBodyPath }) {
     const prNumber = context.issue.number;
 
     let commentBody = await fs.readFile(commentBodyPath, 'utf8');
-    commentBody = COMMENT_MARKER + '\n' + md.h2('Visual Regression Report') + '\n' + commentBody;
+    commentBody = COMMENT_MARKER + '\n' + md.heading(2, 'Visual Regression Report') + '\n' + commentBody;
     console.log(`Comment body size: ${commentBody.length} chars`);
 
     // Find existing comment
