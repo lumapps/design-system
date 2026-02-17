@@ -10,7 +10,7 @@ const pixelmatch = pixelmatchModule.default || pixelmatchModule;
  * e.g. "components/button/Button.stories.tsx/base-auto.png"
  *   -> "components/button/Button/base-auto.png"
  *
- * @param {string} relPath - Relative path after __baselines__/
+ * @param {string} relPath - Relative path after __results__/ or __baselines__/
  * @returns {string} Normalized path
  */
 function normalizeScreenshotPath(relPath) {
@@ -36,19 +36,23 @@ async function findFiles(dir, predicate) {
 }
 
 /**
- * Extract the relative path after a marker directory (e.g. '__baselines__').
+ * Extract the relative path after a marker directory (e.g. '__results__' or '__baselines__').
+ * Tries '__results__' first, then falls back to '__baselines__'.
  * @param {string} filePath
- * @param {string} markerDir
  * @returns {string}
  */
-function extractRelativePath(filePath, markerDir) {
-    const marker = markerDir + path.sep;
-    const idx = filePath.indexOf(marker);
-    if (idx === -1) return path.basename(filePath);
-    return filePath
-        .substring(idx + marker.length)
-        .split(path.sep)
-        .join('/');
+function extractRelativePath(filePath) {
+    for (const markerDir of ['__results__', '__baselines__']) {
+        const marker = markerDir + path.sep;
+        const idx = filePath.indexOf(marker);
+        if (idx !== -1) {
+            return filePath
+                .substring(idx + marker.length)
+                .split(path.sep)
+                .join('/');
+        }
+    }
+    return path.basename(filePath);
 }
 
 /**
@@ -94,8 +98,8 @@ function alignImages(img1, img2) {
 /**
  * Compare two PNG files and produce a diff image.
  *
- * @param {string} reactPath - Path to react baseline PNG
- * @param {string} vuePath - Path to vue baseline PNG
+ * @param {string} reactPath - Path to react screenshot PNG
+ * @param {string} vuePath - Path to vue screenshot PNG
  * @param {string} diffPath - Path to write the diff PNG
  * @returns {{ diffPixels: number, diffPercent: number, totalPixels: number }}
  */
@@ -144,29 +148,36 @@ async function main({ artifactsDir }) {
         }
     }
 
-    // Find all baseline PNGs in each artifact
+    // Find all screenshot PNGs in each artifact (__results__ preferred, __baselines__ as fallback)
     const isPng = (f) => f.endsWith('.png');
-    const isBaseline = (f) => f.includes('__baselines__') && isPng(f);
+    const isScreenshot = (f) => (f.includes('__results__') || f.includes('__baselines__')) && isPng(f);
 
-    const [reactFiles, vueFiles] = await Promise.all([findFiles(reactDir, isBaseline), findFiles(vueDir, isBaseline)]);
+    const [reactFiles, vueFiles] = await Promise.all([
+        findFiles(reactDir, isScreenshot),
+        findFiles(vueDir, isScreenshot),
+    ]);
 
-    console.log(`  React baselines: ${reactFiles.length}`);
-    console.log(`  Vue baselines: ${vueFiles.length}`);
+    console.log(`  React screenshots: ${reactFiles.length}`);
+    console.log(`  Vue screenshots: ${vueFiles.length}`);
 
     // Build maps: normalized path -> absolute file path
-    const reactMap = new Map();
-    for (const f of reactFiles) {
-        const relPath = extractRelativePath(f, '__baselines__');
-        const normalizedPath = normalizeScreenshotPath(relPath);
-        reactMap.set(normalizedPath, f);
-    }
+    // __results__ entries take priority over __baselines__ entries
+    const buildMap = (files) => {
+        const map = new Map();
+        for (const f of files) {
+            const relPath = extractRelativePath(f);
+            const normalizedPath = normalizeScreenshotPath(relPath);
+            const isResult = f.includes('__results__');
+            // Only overwrite if we don't have a __results__ entry yet
+            if (!map.has(normalizedPath) || isResult) {
+                map.set(normalizedPath, f);
+            }
+        }
+        return map;
+    };
 
-    const vueMap = new Map();
-    for (const f of vueFiles) {
-        const relPath = extractRelativePath(f, '__baselines__');
-        const normalizedPath = normalizeScreenshotPath(relPath);
-        vueMap.set(normalizedPath, f);
-    }
+    const reactMap = buildMap(reactFiles);
+    const vueMap = buildMap(vueFiles);
 
     // Find matching pairs
     const matchedPaths = [...vueMap.keys()].filter((k) => reactMap.has(k));
