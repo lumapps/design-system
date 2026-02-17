@@ -1,21 +1,14 @@
 import { withWrapper } from '@lumx/vue/stories/decorators/withWrapper';
 import { withCombinations } from '@lumx/vue/stories/decorators/withCombinations';
-import { withRender } from '@lumx/vue/stories/utils/withRender';
 import { setup } from '@lumx/core/js/components/FlexBox/Stories';
 
+import { Button, IconButton, Text } from '@lumx/vue';
 import { FlexBox } from '.';
-import FlexBoxNoConfigVue from './Stories/FlexBoxNoConfig.vue';
-import FlexBoxNoShrinkVue from './Stories/FlexBoxNoShrink.vue';
-import FlexBoxMarginAutoVue from './Stories/FlexBoxMarginAuto.vue';
 
 const { meta, ...stories } = setup({
     component: FlexBox,
-    render: withRender({ FlexBoxNoConfigVue }),
+    components: { Button, Text, IconButton },
     decorators: { withWrapper, withCombinations },
-    overrides: {
-        NoShrink: { render: withRender({ FlexBoxNoShrinkVue }) },
-        MarginAuto: { render: withRender({ FlexBoxMarginAutoVue }) },
-    },
 });
 
 export default {
