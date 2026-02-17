@@ -4,7 +4,7 @@ import { mdiClose } from '@lumx/icons';
 import { Chip, ChipGroup, Icon, LumxClassName, Tooltip, type Theme } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
 import { Selector } from '@lumx/core/js/types/Selector';
-import { getWithSelector } from '@lumx/core/js/utils/selectors/getWithSelector';
+import { getWithSelector } from '@lumx/core/js/utils/selectors';
 import { classNames } from '@lumx/core/js/utils';
 
 import { isComponentType } from '../../utils/type/isComponentType';

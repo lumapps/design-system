@@ -80,7 +80,7 @@ export default function optimizeImportsLumxIcons() {
                             this.error(`Icon "${imported}" not found in @lumx/icons library (expected: "${name}")`);
                         }
 
-                        return `import { ${fullImport} } from '@lumx/icons/esm/${name}';`;
+                        return `import { ${fullImport} } from '@lumx/icons/esm/${name}.js';`;
                     })
                     .join('\n');
 

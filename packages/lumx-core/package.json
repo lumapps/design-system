@@ -23,9 +23,30 @@
     "type": "module",
     "name": "@lumx/core",
     "exports": {
-        "./src/js/constants/*": "./src/js/constants/*",
-        "./src/js/types/*": "./src/js/types/*",
-        "./src/js/utils/*": "./src/js/utils/*"
+        "./js/constants": {
+            "default": "./js/constants/index.js",
+            "types": "./js/constants/index.d.ts"
+        },
+        "./js/types": {
+            "default": "./js/types/index.js",
+            "types": "./js/types/index.d.ts"
+        },
+        "./js/utils/classNames": {
+            "default": "./js/utils/classNames/index.js",
+            "types": "./js/utils/classNames/index.d.ts"
+        },
+        "./js/utils/disabledState": {
+            "default": "./js/utils/disabledState/index.js",
+            "types": "./js/utils/disabledState/index.d.ts"
+        },
+        "./js/utils/selectors": {
+            "default": "./js/utils/selectors/index.js",
+            "types": "./js/utils/selectors/index.d.ts"
+        },
+        "./js/utils": {
+            "default": "./js/utils/index.js",
+            "types": "./js/utils/index.d.ts"
+        }
     },
     "publishConfig": {
         "directory": "dist"
