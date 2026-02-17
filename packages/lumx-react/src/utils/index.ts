@@ -8,4 +8,4 @@ export { A11YLiveMessage, type A11YLiveMessageProps } from './A11YLiveMessage';
 export { Portal, type PortalProps, type PortalInit, PortalProvider, type PortalProviderProps } from './Portal';
 export { DisabledStateProvider, useDisabledStateContext } from './disabled';
 export * from './moving-focus';
-export * from '../components/combobox/hooks/useCombobox';
+export { useCombobox } from '../components/combobox/hooks/useCombobox';
