@@ -11,6 +11,7 @@ Quick reference for migrating components to core architecture.
 ## File Mapping
 
 ### Input (React only)
+
 ```
 packages/lumx-react/src/components/<component>/
 ├── <Component>.tsx
@@ -24,20 +25,18 @@ packages/lumx-react/src/components/<component>/
 packages/lumx-core/src/js/components/<Component>/
 ├── index.tsx        # Core UI logic
 ├── Tests.ts         # Core test suite
-└── Stories.ts       # Story configurations
+└── Stories.tsx      # Story configurations with JSX renders
 
 packages/lumx-react/src/components/<component>/
 ├── <Component>.tsx          # Thin wrapper (modified)
 ├── <Component>.test.tsx     # Framework tests (modified)
-└── <Component>.stories.tsx  # Story export (modified)
+└── <Component>.stories.tsx  # Thin story wrapper (modified)
 
 packages/lumx-vue/src/components/<component>/
-├── <Component>.tsx              # Vue wrapper (new)
-├── <Component>.test.ts          # Vue tests (new)
-├── <Component>.stories.ts       # Vue stories (new)
-├── Stories/
-│   └── <Component>Default.vue  # Story template (new)
-└── index.ts                     # Exports (new)
+├── <Component>.tsx          # Vue wrapper (new)
+├── <Component>.test.ts      # Vue tests (new)
+├── <Component>.stories.tsx  # Thin story wrapper (new)
+└── index.ts                 # Exports (new)
 ```
 
 ## Key Code Transformations
@@ -47,15 +46,15 @@ packages/lumx-vue/src/components/<component>/
 ```typescript
 // BEFORE (React)
 export interface SwitchProps {
-    children?: React.ReactNode;  // ← React-specific
+    children?: React.ReactNode; // ← React-specific
     helper?: string;
     // ...
 }
 
 // AFTER (Core)
 export interface SwitchProps {
-    label?: JSXElement;          // ← Framework-agnostic
-    inputId: string;             // ← Required (wrappers generate)
+    label?: JSXElement; // ← Framework-agnostic
+    inputId: string; // ← Required (wrappers generate)
     helper?: string;
     // ...
 }
@@ -92,8 +91,8 @@ export const Component = forwardRef<Props, HTMLDivElement>((props, ref) => {
 
     return UI({
         ref,
-        label: children,  // Map children → label
-        inputId,          // Pass generated ID
+        label: children, // Map children → label
+        inputId, // Pass generated ID
         // ... other props
     });
 });
@@ -132,14 +131,14 @@ const Component = defineComponent(
 
 ## Common Props Mappings
 
-| React             | Core              | Notes                           |
-|-------------------|-------------------|---------------------------------|
-| `children`        | `label`           | JSXElement type                 |
-| `id` (generated)  | `inputId`         | Required prop                   |
-| `ref`             | `ref`             | Same                            |
-| `className`       | `className`       | Same                            |
-| `theme`           | `theme`           | Same                            |
-| `onChange`        | `onChange`        | Same signature                  |
+| React            | Core        | Notes           |
+| ---------------- | ----------- | --------------- |
+| `children`       | `label`     | JSXElement type |
+| `id` (generated) | `inputId`   | Required prop   |
+| `ref`            | `ref`       | Same            |
+| `className`      | `className` | Same            |
+| `theme`          | `theme`     | Same            |
+| `onChange`       | `onChange`  | Same signature  |
 
 ## Test File Templates
 
@@ -159,8 +158,12 @@ export const setup = (props = {}, { render, ...options }) => {
 };
 
 export default (renderOptions) => {
-    describe('Props', () => { /* tests */ });
-    describe('Events', () => { /* tests */ });
+    describe('Props', () => {
+        /* tests */
+    });
+    describe('Events', () => {
+        /* tests */
+    });
 };
 ```
 
@@ -195,86 +198,177 @@ describe('<Component />', () => {
     BaseTests({ render: renderComponent, screen });
 
     describe('Vue-specific', () => {
-        it('should emit events', () => { /* ... */ });
+        it('should emit events', () => {
+            /* ... */
+        });
     });
 });
 ```
 
 ## Story Templates
 
-### Core Stories
+### Core Stories (`Stories.tsx`)
 
-```typescript
-export function setup({ component, render, decorators: { withCombinations } }) {
-    return {
-        meta: {
-            component,
-            render,
-            argTypes: { /* ... */ },
-            args: { ...DEFAULT_PROPS },
+Core stories use JSX with framework components injected via `components` parameter.
+The same JSX works for both React and Vue because each framework's build compiles it.
+
+**KEY RULES:**
+
+-   **NEVER put JSX in `args`** — all JSX must live in `render` functions
+-   **NEVER put JSX in `withCombinations` rows/sections/cols** — these are merged into args
+-   **Define each story as an individual `const`** — enables cross-referencing renders
+-   **Only serializable data in `args`** — strings, numbers, booleans, enums, objects
+-   **ALWAYS destructure `children` in render functions** — when a render provides its own inline JSX children, destructure `children` out of args to prevent it leaking via `{...args}` as a DOM prop (causes Vue warnings)
+
+```tsx
+import type { SetupStoriesOptions } from '@lumx/core/stories/types';
+import { mdiHeart } from '@lumx/icons';
+import { DEFAULT_PROPS } from '.';
+
+export function setup({
+    component: Badge,
+    components: { Icon, FlexBox },
+    decorators: { withCombinations },
+}: SetupStoriesOptions<{
+    decorators: 'withCombinations';
+    components: { Icon: any; FlexBox: any };
+}>) {
+    const meta = {
+        component: Badge,
+        render: (args: any) => <Badge {...args} />,
+        argTypes: {
+            /* ... */
         },
-        Default: {},
-        WithLabel: { args: { label: 'Label' } },
-        Disabled: {
-            decorators: [withCombinations({
+        args: DEFAULT_PROPS,
+    };
+
+    /** Default with text — JSX in render, NOT args */
+    const WithText = {
+        render: (args: any) => (
+            <Badge {...args}>
+                <span>30</span>
+            </Badge>
+        ),
+    };
+
+    /** With icon child — uses Icon from injected components */
+    const WithIcon = {
+        render: (args: any) => (
+            <Badge {...args}>
+                <Icon icon={mdiHeart} />
+            </Badge>
+        ),
+    };
+
+    /** Disabled — only serializable data in args, no JSX */
+    const Disabled = {
+        args: { isDisabled: true },
+        decorators: [
+            withCombinations({
                 combinations: {
                     rows: {
                         disabled: { isDisabled: true },
                         'aria-disabled': { 'aria-disabled': true },
                     },
                 },
-            })],
-        },
+            }),
+        ],
     };
+
+    /** Composite story — references other stories' renders */
+    const AllVariants = {
+        render: (args: any) => (
+            <FlexBox orientation="vertical" gap="regular">
+                {WithText.render(args)}
+                {WithIcon.render(args)}
+            </FlexBox>
+        ),
+    };
+
+    return { meta, WithText, WithIcon, Disabled, AllVariants };
 }
 ```
 
-### React Stories
+### React Stories (thin wrapper)
 
-```typescript
-import { setup } from '@lumx/core/js/components/Component/Stories';
+```tsx
+import { Badge, FlexBox, Icon } from '@lumx/react';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
+import { setup } from '@lumx/core/js/components/Badge/Stories';
 
 const { meta, ...stories } = setup({
-    component: Component,
+    component: Badge,
+    components: { Icon, FlexBox },
     decorators: { withCombinations },
 });
 
 export default {
-    title: 'LumX components/component/Component',
+    title: 'LumX components/badge/Badge',
     ...meta,
 };
 
-export const Default = { ...stories.Default };
-export const WithLabel = { ...stories.WithLabel };
+export const WithText = { ...stories.WithText };
+export const WithIcon = { ...stories.WithIcon };
 export const Disabled = { ...stories.Disabled };
+export const AllVariants = { ...stories.AllVariants };
 ```
 
-### Vue Stories
+### Vue Stories (thin wrapper — identical structure to React)
 
-```typescript
-import { setup } from '@lumx/core/js/components/Component/Stories';
-import { withRender } from '@lumx/vue/stories/utils/withRender';
-import ComponentDefaultVue from './Stories/ComponentDefault.vue';
+```tsx
+import { Badge, FlexBox, Icon } from '@lumx/vue';
+import { withCombinations } from '@lumx/vue/stories/decorators/withCombinations';
+import { setup } from '@lumx/core/js/components/Badge/Stories';
 
 const { meta, ...stories } = setup({
-    component: Component,
-    render: withRender({ ComponentDefaultVue }),
+    component: Badge,
+    components: { Icon, FlexBox },
     decorators: { withCombinations },
 });
 
 export default {
-    title: 'LumX components/component/Component',
+    title: 'LumX components/badge/Badge',
     ...meta,
-    argTypes: {
-        ...meta.argTypes,
-        onChange: { action: 'change' },
-    },
+};
+
+export const WithText = { ...stories.WithText };
+export const WithIcon = { ...stories.WithIcon };
+export const Disabled = { ...stories.Disabled };
+export const AllVariants = { ...stories.AllVariants };
+```
+
+### Vue Stories with slot mapping (when Vue component uses slots)
+
+When the core stories pass slot-like content via the meta `render` or args, and the Vue component uses slots instead of props, provide a `render` override:
+
+```tsx
+import { Toolbar, Icon } from '@lumx/vue';
+import { setup } from '@lumx/core/js/components/Toolbar/Stories';
+
+const { meta, ...stories } = setup({
+    component: Toolbar,
+    components: { Icon },
+    // Map props to Vue named slots
+    render: ({ label, before, after, ...args }: any) => (
+        <Toolbar {...args}>
+            {{
+                default: label ? () => label : undefined,
+                before: before ? () => before : undefined,
+                after: after ? () => after : undefined,
+            }}
+        </Toolbar>
+    ),
+});
+
+export default {
+    title: 'LumX components/toolbar/Toolbar',
+    ...meta,
 };
 
 export const Default = { ...stories.Default };
-export const WithLabel = { ...stories.WithLabel };
-export const Disabled = { ...stories.Disabled };
+export const WithBefore = { ...stories.WithBefore };
+export const WithAfter = { ...stories.WithAfter };
+export const WithAll = { ...stories.WithAll };
 ```
 
 ## Verification Commands
@@ -312,14 +406,18 @@ yarn storybook
 
 ## Time Estimates
 
-- **Simple component** (like Switch): 1-2 hours
-- **Complex component** (with many variants): 3-4 hours
-- **Component with special logic**: 4-6 hours
+-   **Simple component** (like Switch): 1-2 hours
+-   **Complex component** (with many variants): 3-4 hours
+-   **Component with special logic**: 4-6 hours
 
 ## Reference Components
 
-- **Checkbox** - Complete example with intermediate state
-- **Switch** - Recently migrated binary component
-- **Button** - Event handling with stopImmediatePropagation
-- **Message** - Simple component migration
-- **Flag** - Component with variants
+-   **Badge** - Best reference for the **new stories pattern** (`const` variables, no JSX in args, story render composition, `FlexBox` for layout)
+-   **Toolbar** - Best reference for components with **slot-like props** (each story self-contains its JSX, Vue provides `render` override for slot mapping)
+-   **Link** - Good reference for stories with `const` pattern, render reuse, and `withCombinations`
+-   **Text** - Good reference for sharing `render` across stories (`WithIcon.render` reused by `AllTypography` and `AllColors`)
+-   **Checkbox** - Complete example with intermediate state
+-   **Switch** - Recently migrated binary component
+-   **Button** - Event handling with stopImmediatePropagation
+-   **Message** - Simple component migration
+-   **Flag** - Component with variants
