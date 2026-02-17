@@ -1,25 +1,11 @@
-import { ButtonGroup } from '@lumx/vue';
-import { withRender } from '@lumx/vue/stories/utils/withRender';
+import { Button, ButtonGroup, IconButton } from '@lumx/vue';
 import { withCombinations } from '@lumx/vue/stories/decorators/withCombinations';
 import { setup } from '@lumx/core/js/components/Button/ButtonGroupStories';
-import ButtonGroupVariantsVue from './Stories/ButtonGroupVariants.vue';
-import ButtonOneButtonVue from './Stories/ButtonOneButton.vue';
-import ButtonManyButtonsVue from './Stories/ButtonManyButtons.vue';
 
 const { meta, ...stories } = setup({
     component: ButtonGroup,
+    components: { Button, IconButton },
     decorators: { withCombinations },
-    overrides: {
-        Variants: {
-            render: withRender({ ButtonGroupVariantsVue }),
-        },
-        OneButton: {
-            render: withRender({ ButtonOneButtonVue }),
-        },
-        ManyButtons: {
-            render: withRender({ ButtonManyButtonsVue }),
-        },
-    },
 });
 
 export default {
