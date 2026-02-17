@@ -1,14 +1,15 @@
-import { useMemo } from 'react';
+import React from 'react';
 
-import uniqueId from 'lodash/uniqueId';
+let i = 0;
 
 /**
- * Generate a unique and stable id that can then safely be used as html id.
- * This is similar to, but much simpler than, React's `useId` hook.
+ * Generate a unique id (for use in a11y or other id based DOM linking).
  *
- * Once we upgrade to React 18, this hook will be deprecated.
+ * (Tries to emulate React 18 useId hook, to remove once we upgrade React)
  */
-export const useId = (prefix: string = 'lumx') => {
-    // A common practice to make sure ids are unique is to surround them with colons.
-    return useMemo(() => `:${uniqueId(prefix)}:`, [prefix]);
-};
+export function useId() {
+    return React.useMemo(() => {
+        i += 1;
+        return `:lumx${i}:`;
+    }, []);
+}
