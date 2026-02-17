@@ -9,16 +9,15 @@ import { DEFAULT_PROPS } from '.';
  * Framework-specific render functions or args can be injected via `overrides`.
  */
 export function setup({
-    component,
-    render,
+    component: Switch,
     decorators: { withCombinations },
 }: SetupStoriesOptions<{
     decorators: 'withCombinations';
 }>) {
     return {
         meta: {
-            component,
-            render,
+            component: Switch,
+            render: (args: any) => <Switch {...args} />,
             argTypes: {
                 onChange: { action: true },
                 name: { control: false },

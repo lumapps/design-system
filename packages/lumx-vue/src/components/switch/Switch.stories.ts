@@ -1,13 +1,10 @@
-import { withRender } from '@lumx/vue/stories/utils/withRender';
 import { withCombinations } from '@lumx/vue/stories/decorators/withCombinations';
 import { setup } from '@lumx/core/js/components/Switch/Stories';
 
 import { Switch } from '@lumx/vue';
-import SwitchDefaultVue from './Stories/SwitchDefault.vue';
 
 const { meta, ...stories } = setup({
     component: Switch,
-    render: withRender({ SwitchDefaultVue }),
     decorators: { withCombinations },
 });
 
