@@ -106,6 +106,9 @@ exports.onCreateWebpackConfig = async ({ actions, stage }) => {
         plugins: [CONFIGS.ignoreNotFoundExport],
         resolve: {
             plugins: [new TsconfigPathsPlugin({ extensions: ['.ts', '.tsx'] })],
+            alias: {
+                '@lumx/core/scss': path.resolve(__dirname, '../lumx-core/src/scss'),
+            }
         },
     });
 };
