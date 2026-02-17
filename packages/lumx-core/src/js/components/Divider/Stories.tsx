@@ -8,15 +8,14 @@ import { DEFAULT_PROPS } from '.';
  * Framework-specific render functions or args can be injected via `overrides`.
  */
 export function setup({
-    component,
-    render,
+    component: Divider,
 }: SetupStoriesOptions<{
     decorators?: never;
 }>) {
     return {
         meta: {
-            component,
-            render,
+            component: Divider,
+            render: (args: any) => <Divider {...args} />,
             args: {
                 ...DEFAULT_PROPS,
             },
