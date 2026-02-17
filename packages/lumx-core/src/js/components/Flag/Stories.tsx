@@ -12,7 +12,7 @@ import type { SetupStoriesOptions } from '@lumx/core/stories/types';
  * Framework-specific render functions or args can be injected via `overrides`.
  */
 export function setup({
-    component,
+    component: Flag,
     render,
     decorators: { withCombinations, withResizableBox },
 }: SetupStoriesOptions<{
@@ -20,8 +20,8 @@ export function setup({
 }>) {
     return {
         meta: {
-            component,
-            render,
+            component: Flag,
+            render: render || ((args: any) => <Flag {...args} />),
             argTypes: { color: colorArgType, icon: iconArgType },
             args: { label: 'Label' },
         },
