@@ -1,12 +1,10 @@
-import { TableRow } from '@lumx/vue';
+import { Table, TableBody, TableCell, TableRow } from '@lumx/vue';
 import { withCombinations } from '@lumx/vue/stories/decorators/withCombinations';
-import { withRender } from '@lumx/vue/stories/utils/withRender';
 import { setup } from '@lumx/core/js/components/Table/TableRowStories';
-import TableRowDefaultVue from './Stories/TableRowDefault.vue';
 
 const { meta, ...stories } = setup({
     component: TableRow,
-    render: withRender({ TableRowDefaultVue }),
+    components: { Table, TableBody, TableCell },
     decorators: { withCombinations },
 });
 

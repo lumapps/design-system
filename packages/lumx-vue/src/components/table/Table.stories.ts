@@ -1,19 +1,9 @@
-import { Table } from '@lumx/vue';
-import { withRender } from '@lumx/vue/stories/utils/withRender';
+import { Table, TableBody, TableCell, TableHeader, TableRow } from '@lumx/vue';
 import { setup } from '@lumx/core/js/components/Table/Stories';
-import TableDefaultVue from './Stories/TableDefault.vue';
-import TableWithHeaderVue from './Stories/TableWithHeader.vue';
 
 const { meta, ...stories } = setup({
     component: Table,
-    overrides: {
-        Default: {
-            render: withRender({ TableDefaultVue }),
-        },
-        WithHeader: {
-            render: withRender({ TableWithHeaderVue }),
-        },
-    },
+    components: { TableBody, TableCell, TableHeader, TableRow },
 });
 
 export default {

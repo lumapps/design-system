@@ -1,27 +1,13 @@
-import { TableCell } from '@lumx/vue';
+import { Table, TableBody, TableCell, TableHeader, TableRow } from '@lumx/vue';
+import { setup } from '@lumx/core/js/components/Table/TableCellStories';
 import { withCombinations } from '@lumx/vue/stories/decorators/withCombinations';
 import { withRender } from '@lumx/vue/stories/utils/withRender';
-import { setup } from '@lumx/core/js/components/Table/TableCellStories';
-import { mdiAccount } from '@lumx/icons';
-import TableCellDefaultVue from './Stories/TableCellDefault.vue';
-import TableCellHeaderVue from './Stories/TableCellHeader.vue';
 import TableCellClickableAndSortableVue from './Stories/TableCellClickableAndSortable.vue';
 
 const { meta, ...stories } = setup({
     component: TableCell,
+    components: { Table, TableBody, TableHeader, TableRow },
     decorators: { withCombinations },
-    icon: mdiAccount,
-    overrides: {
-        Default: {
-            render: withRender({ TableCellDefaultVue }, '{{ args.children }}'),
-        },
-        Header: {
-            render: withRender({ TableCellHeaderVue }, '{{ args.children }}'),
-        },
-        AllHeaderStates: {
-            render: withRender({ TableCellHeaderVue }, '{{ args.children }}'),
-        },
-    },
 });
 
 export default {
