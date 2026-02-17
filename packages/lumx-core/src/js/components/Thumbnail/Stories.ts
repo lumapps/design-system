@@ -1,8 +1,10 @@
 import type { SetupStoriesOptions } from '@lumx/core/stories/types';
 import { imageArgType, IMAGES } from '@lumx/core/stories/controls/image';
 import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
+import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
+
 import { Alignment, AspectRatio, Size } from '../../constants';
-import { ThumbnailVariant } from './types';
+import { ThumbnailObjectFit, ThumbnailVariant } from './types';
 import { DEFAULT_PROPS } from '.';
 
 const aligns = [Alignment.center, Alignment.left, Alignment.right];
@@ -15,11 +17,9 @@ const variants = [ThumbnailVariant.squared, ThumbnailVariant.rounded];
 export function setup({
     component,
     render,
-    decorators: { withNestedProps },
-    overrides = {},
+    decorators: { withNestedProps, withWrapper, withCombinations },
 }: SetupStoriesOptions<{
-    overrides: 'Simple' | 'FillHeightAndRatio' | 'ObjectFit';
-    decorators: 'withNestedProps';
+    decorators: 'withNestedProps' | 'withWrapper' | 'withCombinations';
 }>) {
     return {
         meta: {
@@ -42,7 +42,18 @@ export function setup({
 
         /** Simple thumbnail taking the size of the original image */
         Simple: {
-            ...overrides.Simple,
+            args: { image: IMAGES.landscape1s200 },
+            decorators: [
+                withWrapper({
+                    style: {
+                        border: '1px dashed red',
+                        height: '500px',
+                        width: '500px',
+                        resize: 'both',
+                        overflow: 'hidden',
+                    },
+                }),
+            ],
         },
 
         /** Loading state */
@@ -87,7 +98,21 @@ export function setup({
 
         /** Combinations of fillHeight and ratios */
         FillHeightAndRatio: {
-            ...overrides.FillHeightAndRatio,
+            args: { image: IMAGES.landscape1s200, fillHeight: true },
+            decorators: [
+                withWrapper({
+                    style: {
+                        border: '1px dashed red',
+                        height: '500px',
+                        width: '500px',
+                        resize: 'both',
+                        overflow: 'hidden',
+                    },
+                }),
+                withCombinations({
+                    combinations: { rows: { key: 'aspectRatio', options: withUndefined(AspectRatio) } },
+                }),
+            ],
         },
 
         /** Simple thumbnail with svg image */
@@ -100,8 +125,29 @@ export function setup({
             },
         },
 
+        /** Thumbnail letter-boxing */
         ObjectFit: {
-            ...overrides.ObjectFit,
+            args: { size: Size.xl },
+            decorators: [
+                withCombinations({
+                    cellStyle: { border: '1px solid lightgray' },
+                    combinations: {
+                        cols: {
+                            'Default (cover)': {},
+                            contain: { objectFit: ThumbnailObjectFit.contain },
+                        },
+                        rows: {
+                            'Ratio square': { aspectRatio: AspectRatio.square },
+                            'Ratio wide': { aspectRatio: AspectRatio.wide },
+                            'Ratio vertical': { aspectRatio: AspectRatio.vertical },
+                        },
+                        sections: {
+                            'Portrait image': { image: IMAGES.portrait1 },
+                            'Landscape image': { image: IMAGES.landscape1 },
+                        },
+                    },
+                }),
+            ],
         },
     };
 }
