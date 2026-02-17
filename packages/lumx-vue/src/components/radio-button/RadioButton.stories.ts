@@ -1,13 +1,10 @@
-import { withRender } from '@lumx/vue/stories/utils/withRender';
 import { withCombinations } from '@lumx/vue/stories/decorators/withCombinations';
 import { setup } from '@lumx/core/js/components/RadioButton/Stories';
 
 import { RadioButton } from '@lumx/vue';
-import RadioButtonDefaultVue from './Stories/RadioButtonDefault.vue';
 
 const { meta, ...stories } = setup({
     component: RadioButton,
-    render: withRender({ RadioButtonDefaultVue }),
     decorators: { withCombinations },
 });
 
