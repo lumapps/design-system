@@ -1,17 +1,12 @@
-import { withWrapper } from '@lumx/vue/stories/decorators/withWrapper';
-import { withCombinations } from '@lumx/vue/stories/decorators/withCombinations';
-import { withRender } from '@lumx/vue/stories/utils/withRender';
+import { Icon, Text, GridColumn } from '@lumx/vue';
 import { setup } from '@lumx/core/js/components/Icon/Stories';
-
-import { Icon } from '@lumx/vue';
-import IconInsideTextVue from './Stories/IconInsideText.vue';
+import { withCombinations } from '@lumx/vue/stories/decorators/withCombinations';
+import { withWrapper } from '@lumx/vue/stories/decorators/withWrapper';
 
 const { meta, ...stories } = setup({
     component: Icon,
-    decorators: { withWrapper, withCombinations },
-    overrides: {
-        InsideText: { render: withRender({ IconInsideTextVue }) },
-    },
+    components: { Text, GridColumn },
+    decorators: { withCombinations, withWrapper },
 });
 
 export default {
