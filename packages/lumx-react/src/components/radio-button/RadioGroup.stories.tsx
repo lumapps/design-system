@@ -1,3 +1,4 @@
+import { loremIpsum } from '@lumx/core/stories/utils/lorem';
 import { RadioButton, RadioGroup } from '@lumx/react';
 import { useState } from 'react';
 
@@ -10,7 +11,7 @@ export const Simple = () => {
         <RadioGroup>
             <RadioButton
                 isChecked={value === 'lorem'}
-                helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
+                helper={loremIpsum('tiny')}
                 label="Radio button with help 1"
                 name="test2"
                 value="lorem"
@@ -19,7 +20,7 @@ export const Simple = () => {
 
             <RadioButton
                 isDisabled
-                helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
+                helper={loremIpsum('tiny')}
                 label="Radio button with help 2"
                 name="test2"
                 value="ipsum"
@@ -28,7 +29,7 @@ export const Simple = () => {
 
             <RadioButton
                 isChecked={value === 'dolor'}
-                helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
+                helper={loremIpsum('tiny')}
                 label="Radio button with help 3"
                 name="test2"
                 value="dolor"

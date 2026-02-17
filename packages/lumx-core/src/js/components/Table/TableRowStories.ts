@@ -27,7 +27,7 @@ export function setup({
         AllStates: {
             decorators: [
                 withCombinations({
-                    firstColStyle: { minWidth: 200 },
+                    firstColStyle: { minWidth: '200px' },
                     combinations: {
                         rows: {
                             Default: {},

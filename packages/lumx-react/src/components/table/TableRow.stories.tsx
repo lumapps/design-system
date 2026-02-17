@@ -15,10 +15,6 @@ const { meta, ...stories } = setup({
         </Table>
     ),
     decorators: { withCombinations },
-    overrides: {
-        Default: {},
-        AllStates: {},
-    },
 });
 
 export default {
