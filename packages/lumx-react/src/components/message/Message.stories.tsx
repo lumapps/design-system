@@ -1,13 +1,12 @@
 import { Message } from '@lumx/react';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
-import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
 import { setup } from '@lumx/core/js/components/Message/Stories';
 
 import { withNestedProps } from '../../stories/decorators/withNestedProps';
 
 const { meta, ...stories } = setup({
     component: Message,
-    decorators: { withWrapper, withCombinations },
+    decorators: { withCombinations },
     overrides: {
         ClosableMessage: {
             args: { 'closeButtonProps.label': 'Close' },
