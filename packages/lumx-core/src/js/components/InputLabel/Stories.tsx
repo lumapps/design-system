@@ -7,11 +7,11 @@ import { Typography } from '../../constants';
  * This function creates all the stories with the appropriate decorators.
  * Framework-specific render functions or args can be injected via `overrides`.
  */
-export function setup({ component, render }: SetupStoriesOptions) {
+export function setup({ component: InputLabel }: SetupStoriesOptions) {
     return {
         meta: {
-            component,
-            render,
+            component: InputLabel,
+            render: ({ children, ...args }: any) => <InputLabel {...args}>{children}</InputLabel>,
             args: {
                 children: 'Label text',
             },
