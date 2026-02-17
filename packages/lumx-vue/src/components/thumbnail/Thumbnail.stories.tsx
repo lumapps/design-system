@@ -3,60 +3,12 @@ import { withWrapper } from '@lumx/vue/stories/decorators/withWrapper';
 import { withNestedProps } from '@lumx/vue/stories/decorators/withNestedProps';
 import { withRender } from '@lumx/vue/stories/utils/withRender';
 import { setup } from '@lumx/core/js/components/Thumbnail/Stories';
-import { Thumbnail, AspectRatio, Size } from '@lumx/vue';
-import { IMAGES } from '@lumx/core/stories/controls/image';
-import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
-import { ThumbnailObjectFit } from '@lumx/core/js/components/Thumbnail/types';
+import { Thumbnail } from '@lumx/vue';
 import ThumbnailClickable from './Stories/ThumbnailClickable.vue';
 
 const { meta, ...stories } = setup({
     component: Thumbnail,
-    decorators: { withNestedProps },
-    overrides: {
-        Simple: {
-            args: { image: IMAGES.landscape1s200 },
-            decorators: [
-                withWrapper({
-                    style: { border: '1px dashed red', height: 500, width: 500, resize: 'both', overflow: 'hidden' },
-                }),
-            ],
-        },
-        FillHeightAndRatio: {
-            args: { image: IMAGES.landscape1s200, fillHeight: true },
-            decorators: [
-                withWrapper({
-                    style: { border: '1px dashed red', height: 500, width: 500, resize: 'both', overflow: 'hidden' },
-                }),
-                withCombinations({
-                    combinations: { rows: { key: 'aspectRatio', options: withUndefined(AspectRatio) } },
-                }),
-            ],
-        },
-        ObjectFit: {
-            args: { size: Size.xl },
-            decorators: [
-                withCombinations({
-                    cellStyle: { border: '1px solid lightgray' },
-                    combinations: {
-                        cols: {
-                            'Default (cover)': {},
-                            contain: { objectFit: ThumbnailObjectFit.contain },
-                        },
-                        rows: {
-                            'Ratio square': { aspectRatio: AspectRatio.square },
-                            'Ratio wide': { aspectRatio: AspectRatio.wide },
-                            'Ratio vertical': { aspectRatio: AspectRatio.vertical },
-                        },
-                        sections: {
-                            'Portrait image': { image: IMAGES.portrait1 },
-                            'Landscape image': { image: IMAGES.landscape1 },
-                        },
-                    },
-                }),
-                withWrapper({ maxColumns: 3, itemMinWidth: 350 }),
-            ],
-        },
-    },
+    decorators: { withNestedProps, withWrapper, withCombinations },
 });
 
 export default {

@@ -1,75 +1,20 @@
+/** eslint-disable prettier/prettier */
 import React from 'react';
 
 import uniqueId from 'lodash/uniqueId';
 
 import { mdiAbTesting } from '@lumx/icons';
-import {
-    AspectRatio,
-    Badge,
-    Button,
-    FlexBox,
-    GridColumn,
-    Icon,
-    Size,
-    Thumbnail,
-    ThumbnailObjectFit,
-} from '@lumx/react';
+import { AspectRatio, Badge, Button, FlexBox, Icon, Size, Thumbnail } from '@lumx/react';
 import { CustomLink } from '@lumx/react/stories/utils/CustomLink';
 import { IMAGE_SIZES, IMAGES } from '@lumx/core/stories/controls/image';
 import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
 import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
-import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
 import { setup } from '@lumx/core/js/components/Thumbnail/Stories';
 
 const { meta, ...stories } = setup({
     component: Thumbnail,
-    decorators: { withNestedProps },
-    overrides: {
-        Simple: {
-            args: { image: IMAGES.landscape1s200 },
-            decorators: [
-                withWrapper({
-                    style: { border: '1px dashed red', height: 500, width: 500, resize: 'both', overflow: 'hidden' },
-                }),
-            ],
-        },
-        FillHeightAndRatio: {
-            args: { image: IMAGES.landscape1s200, fillHeight: true },
-            decorators: [
-                withWrapper({
-                    style: { border: '1px dashed red', height: 500, width: 500, resize: 'both', overflow: 'hidden' },
-                }),
-                withCombinations({
-                    combinations: { rows: { key: 'aspectRatio', options: withUndefined(AspectRatio) } },
-                }),
-            ],
-        },
-        ObjectFit: {
-            args: { size: Size.xl },
-            decorators: [
-                withCombinations({
-                    cellStyle: { border: '1px solid lightgray' },
-                    combinations: {
-                        cols: {
-                            'Default (cover)': {},
-                            contain: { objectFit: ThumbnailObjectFit.contain },
-                        },
-                        rows: {
-                            'Ratio square': { aspectRatio: AspectRatio.square },
-                            'Ratio wide': { aspectRatio: AspectRatio.wide },
-                            'Ratio vertical': { aspectRatio: AspectRatio.vertical },
-                        },
-                        sections: {
-                            'Portrait image': { image: IMAGES.portrait1 },
-                            'Landscape image': { image: IMAGES.landscape1 },
-                        },
-                    },
-                }),
-                withWrapper({ maxColumns: 3, itemMinWidth: 350 }, GridColumn),
-            ],
-        },
-    },
+    decorators: { withNestedProps, withWrapper, withCombinations },
 });
 
 export default {
