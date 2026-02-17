@@ -76,8 +76,8 @@ export function setup({
                     combinations: {
                         rows: { key: 'whiteSpace', options: Object.values(WhiteSpace) },
                     },
-                    tableStyle: { width: 500, tableLayout: 'fixed' },
-                    firstColStyle: { width: 100 },
+                    tableStyle: { width: '500px', tableLayout: 'fixed' },
+                    firstColStyle: { width: '100px' },
                     cellStyle: { border: '1px solid #000', width: '100%' },
                 }),
             ],
