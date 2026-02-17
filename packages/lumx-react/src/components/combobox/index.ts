@@ -8,3 +8,4 @@ export * from './components/ComboboxOptionAction';
 export * from './components/ComboboxOptionMoreInfo';
 export * from './components/ComboboxSection';
 export * from './components/Combobox';
+export type * from './types';

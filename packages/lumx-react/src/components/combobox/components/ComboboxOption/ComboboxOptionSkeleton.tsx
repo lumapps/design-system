@@ -4,7 +4,7 @@ import { classNames } from '@lumx/core/js/utils';
 import { Size, SkeletonTypography, Text } from '@lumx/react';
 import { REAL_SIZE_FOR_LUMX_SIZE } from '@lumx/core/js/constants';
 
-import { CLASSNAME } from '.';
+import { COMBOBOX_OPTION_CLASSNAME } from '.';
 import { ComboboxOptionProps } from '../../types';
 
 export interface ComboboxOptionSkeletonProps {
@@ -18,7 +18,7 @@ export interface ComboboxOptionSkeletonProps {
 
 // Default widths the skeletons must have
 const defaultWidths = [REAL_SIZE_FOR_LUMX_SIZE.xxl, REAL_SIZE_FOR_LUMX_SIZE.xl, REAL_SIZE_FOR_LUMX_SIZE.l];
-const { block, element } = classNames.bem(CLASSNAME);
+const { block, element } = classNames.bem(COMBOBOX_OPTION_CLASSNAME);
 
 /**
  * Skeleton for a combobox option.

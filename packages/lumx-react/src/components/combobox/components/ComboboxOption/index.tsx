@@ -14,7 +14,7 @@ import { useRegisterOption } from '../../hooks/useRegisterOption';
 import { ComboboxOptionProps, RegisteredComboboxOptionValue } from '../../types';
 import { generateOptionId } from '../../utils';
 
-export const CLASSNAME = 'lumx-combobox-option';
+export const COMBOBOX_OPTION_CLASSNAME = 'lumx-combobox-option';
 export const LUMX_CLASSNAME = 'lumx-list-item';
 
 interface OptionContentProps<O extends object = any>
@@ -32,7 +32,7 @@ interface OptionContentProps<O extends object = any>
     comboboxType?: 'listbox' | 'grid';
 }
 
-const { block, element } = classNames.bem(CLASSNAME);
+const { block, element } = classNames.bem(COMBOBOX_OPTION_CLASSNAME);
 const lumxListItem = classNames.bem(LUMX_CLASSNAME);
 
 /**
