@@ -2,10 +2,10 @@ import { withWrapper } from './withWrapper';
 
 /** Storybook decorator wrapping story in a resizable box  */
 export const withResizableBox = ({
-    width = 150,
-    height = 50,
+    width = '150px',
+    height = '50px',
     ...style
-}: { width?: number | string; height?: number | string; [key: string]: any } = {}) => {
+}: { width?: string; height?: string; [key: string]: any } = {}) => {
     return withWrapper({
         style: {
             display: 'flex',

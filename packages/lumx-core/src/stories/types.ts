@@ -14,11 +14,7 @@ interface StoryDecorators {
     /** manages nested props */
     withNestedProps?: () => Decorator;
     /** Decorator wrapping story in a resizable box */
-    withResizableBox?: (options?: {
-        width?: number | string;
-        height?: number | string;
-        [key: string]: any;
-    }) => Decorator;
+    withResizableBox?: (options?: Record<string, any>) => Decorator;
 }
 
 /** A partial Storybook story object (args, argTypes, render, decorators, etc.) */
