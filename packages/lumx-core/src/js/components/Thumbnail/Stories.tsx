@@ -15,16 +15,15 @@ const variants = [ThumbnailVariant.squared, ThumbnailVariant.rounded];
  * This function creates all the stories with the appropriate decorators.
  */
 export function setup({
-    component,
-    render,
+    component: Thumbnail,
     decorators: { withNestedProps, withWrapper, withCombinations },
 }: SetupStoriesOptions<{
     decorators: 'withNestedProps' | 'withWrapper' | 'withCombinations';
 }>) {
     return {
         meta: {
-            component,
-            render,
+            component: Thumbnail,
+            render: (args: any) => <Thumbnail {...args} />,
             argTypes: {
                 image: imageArgType,
                 align: getSelectArgType(aligns),
