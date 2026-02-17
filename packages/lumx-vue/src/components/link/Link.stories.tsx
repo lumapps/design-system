@@ -1,10 +1,9 @@
-import { FlexBox, GenericBlock, Icon, Link, Text } from '@lumx/react';
-import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
-import { withThemedBackground } from '@lumx/react/stories/decorators/withThemedBackground';
-import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
-import { CustomLink } from '@lumx/react/stories/utils/CustomLink';
-import { mdiEarth } from '@lumx/icons';
+import { withCombinations } from '@lumx/vue/stories/decorators/withCombinations';
+import { withThemedBackground } from '@lumx/vue/stories/decorators/withThemedBackground';
+import { withWrapper } from '@lumx/vue/stories/decorators/withWrapper';
 import { setup } from '@lumx/core/js/components/Link/Stories';
+import { FlexBox, Icon, Link, Text } from '@lumx/vue';
+import CustomLink from '@lumx/vue/stories/utils/CustomLink.vue';
 
 const { meta, ...stories } = setup({
     component: Link,
@@ -28,19 +27,3 @@ export const AllStates = { ...stories.AllStates };
 export const AllTypography = { ...stories.AllTypography };
 export const AllColors = { ...stories.AllColors };
 export const ParentTypographyAndColor = { ...stories.ParentTypographyAndColor };
-
-/** React-only: Check wrapping a block with a Link */
-export const WrappingBlock = {
-    render() {
-        return (
-            // eslint-disable-next-line jsx-a11y/anchor-is-valid
-            <Link href="#" color="dark">
-                <GenericBlock figure={<Icon icon={mdiEarth} hasShape color="red" />} hAlign="center">
-                    <Text as="p" typography="subtitle1">
-                        Hello Earth
-                    </Text>
-                </GenericBlock>
-            </Link>
-        );
-    },
-};

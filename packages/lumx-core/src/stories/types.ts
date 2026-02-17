@@ -37,6 +37,7 @@ export type SetupStoriesOptions<
     TConfig extends {
         overrides?: string;
         decorators?: keyof StoryDecorators;
+        components?: Record<string, any>;
     } = Record<string, never>,
 > = SetupStoriesBaseOptions &
     // Add overrides only when TConfig specifies story names
@@ -46,4 +47,6 @@ export type SetupStoriesOptions<
     // Add decorators only when TConfig specifies required decorator names
     (TConfig extends { decorators: infer D extends keyof StoryDecorators }
         ? { decorators: Pick<Required<StoryDecorators>, D> & StoryDecorators }
-        : unknown);
+        : unknown) &
+    // Add components only when TConfig specifies a components type
+    (TConfig extends { components: infer C } ? { components: C } : unknown);
