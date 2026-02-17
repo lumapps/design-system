@@ -1,17 +1,16 @@
 import React from 'react';
 
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
-import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
 import { withResizableBox } from '@lumx/react/stories/decorators/withResizableBox';
 import { Button, Icon } from '@lumx/react';
-import { mdiEarth, mdiHeart } from '@lumx/icons';
 import { setup } from '@lumx/core/js/components/Text/Stories';
 
 import { Text } from './Text';
 
 const { meta, ...stories } = setup({
     component: Text,
-    decorators: { withWrapper, withCombinations, withResizableBox },
+    components: { Icon },
+    decorators: { withCombinations, withResizableBox },
     overrides: {
         TestUpdateTruncateTitleLabel: {
             render(args: any) {
@@ -30,15 +29,6 @@ const { meta, ...stories } = setup({
                         </Text>
                     </>
                 );
-            },
-        },
-        WithIcon: {
-            args: {
-                children: (
-                    <>
-                        Some text <Icon icon={mdiHeart} /> with icons <Icon icon={mdiEarth} />
-                    </>
-                ),
             },
         },
     },
