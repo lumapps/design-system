@@ -10,17 +10,19 @@ import { ICON_SIZES } from './constants';
 
 /**
  * Setup Icon stories for a specific framework (React or Vue).
- * This function creates all the stories with the appropriate decorators.
- * Framework-specific render functions or args can be injected via `overrides`.
+ * Framework-specific components (Text) are injected via `components`.
  */
 export function setup({
-    component,
-    decorators: { withCombinations },
-    overrides = {},
-}: SetupStoriesOptions<{ overrides: 'SizeAndShape' | 'AllColors' | 'InsideText'; decorators: 'withCombinations' }>) {
+    component: Icon,
+    components: { Text, GridColumn },
+    decorators: { withCombinations, withWrapper },
+}: SetupStoriesOptions<{
+    decorators: 'withCombinations' | 'withWrapper';
+    components: { Text: any; GridColumn: any };
+}>) {
     return {
         meta: {
-            component,
+            component: Icon,
             argTypes: {
                 icon: iconArgType,
                 hasShape: { control: 'boolean' },
@@ -74,6 +76,7 @@ export function setup({
                         },
                     },
                 }),
+                withWrapper({ maxColumns: 2, itemMinWidth: 500 }, GridColumn),
             ],
         },
 
@@ -82,12 +85,15 @@ export function setup({
             args: {
                 icon: mdiEmail,
                 size: 'm',
-                ...overrides.InsideText?.args,
             },
             argTypes: {
                 verticalAlign: { control: 'inline-radio', options: [undefined, 'middle'] },
             },
-            ...overrides.InsideText,
+            render: (args: any) => (
+                <Text as="p">
+                    Lorem ipsum <Icon {...args} /> dolor sit amet.
+                </Text>
+            ),
         },
     };
 }

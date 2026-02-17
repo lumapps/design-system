@@ -1,36 +1,12 @@
-import { ColorPalette, ColorVariant, GridColumn, Icon, IconProps, Text } from '@lumx/react';
-import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
-import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
-import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
+import { GridColumn, Icon, Text } from '@lumx/react';
 import { setup } from '@lumx/core/js/components/Icon/Stories';
+import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
+import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
 
 const { meta, ...stories } = setup({
     component: Icon,
-    decorators: { withWrapper, withCombinations },
-    overrides: {
-        AllColors: {
-            decorators: [
-                withCombinations({
-                    combinations: {
-                        rows: { key: 'color', options: withUndefined(ColorPalette) },
-                        cols: { key: 'colorVariant', options: withUndefined(ColorVariant) },
-                        sections: {
-                            Default: {},
-                            'Has shape': { hasShape: true },
-                        },
-                    },
-                }),
-                withWrapper({ maxColumns: 2, itemMinWidth: 500 }, GridColumn),
-            ],
-        },
-        InsideText: {
-            render: (args: IconProps) => (
-                <Text as="p">
-                    Lorem ipsum <Icon {...args} /> dolor sit amet.
-                </Text>
-            ),
-        },
-    },
+    components: { Text, GridColumn },
+    decorators: { withCombinations, withWrapper },
 });
 
 export default {
