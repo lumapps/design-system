@@ -20,3 +20,4 @@ export * from './components/switch';
 export * from './components/table';
 export * from './components/text';
 export * from './components/thumbnail';
+export * from './components/toolbar';

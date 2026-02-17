@@ -1,6 +1,7 @@
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { getByClassName } from '@lumx/react/testing/utils/queries';
 import { render, screen } from '@testing-library/react';
+import BaseToolbarTests from '@lumx/core/js/components/Toolbar/Tests';
 import { Toolbar, ToolbarProps } from './Toolbar';
 
 const CLASSNAME = Toolbar.className as string;
@@ -12,7 +13,14 @@ const setup = (props: Partial<ToolbarProps> = {}, { wrapper }: SetupRenderOption
 };
 
 describe(`<${Toolbar.displayName}>`, () => {
-    describe('Render', () => {
+    // Run core tests
+    BaseToolbarTests({
+        render: (props: ToolbarProps) => render(<Toolbar {...props} />),
+        screen,
+    });
+
+    // React-specific tests
+    describe('React', () => {
         it('should render content elements', () => {
             setup({
                 before: <span data-testid="before">Before</span>,
@@ -32,21 +40,9 @@ describe(`<${Toolbar.displayName}>`, () => {
             expect(labelWrapper).toBeInTheDocument();
             expect(afterWrapper).toBeInTheDocument();
         });
-
-        it('should apply modifier classes', () => {
-            const { element } = setup({
-                before: <div />,
-                label: <div />,
-                after: <div />,
-            });
-
-            expect(element).toHaveClass(`${CLASSNAME}--has-before`);
-            expect(element).toHaveClass(`${CLASSNAME}--has-label`);
-            expect(element).toHaveClass(`${CLASSNAME}--has-after`);
-        });
     });
 
-    // Common tests suite.
+    // Common tests suite
     commonTestsSuiteRTL(setup, {
         baseClassName: CLASSNAME,
         forwardClassName: 'element',
