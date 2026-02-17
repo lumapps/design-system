@@ -4,16 +4,7 @@ import { Table, TableBody, TableCell, TableRow } from '.';
 
 const { meta, ...stories } = setup({
     component: TableRow,
-    render: (args: any) => (
-        <Table>
-            <TableBody>
-                <TableRow {...args}>
-                    <TableCell>Cell 1</TableCell>
-                    <TableCell>Cell 2</TableCell>
-                </TableRow>
-            </TableBody>
-        </Table>
-    ),
+    components: { Table, TableBody, TableCell },
     decorators: { withCombinations },
 });
 
