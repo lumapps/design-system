@@ -1,6 +1,6 @@
 import { ReactNode, ReactText } from 'react';
 
-import { ListItemSize, TextFieldProps, TooltipProps } from '@lumx/react';
+import { ComboboxListBoxProps, ListItemSize, TextFieldProps, TooltipProps } from '@lumx/react';
 import type { Selector } from '@lumx/core/js/types/Selector';
 
 /**
@@ -318,7 +318,7 @@ export type BaseSelectProps<O = any> = {
     /**
      * Props passed to the option list.
      */
-    // listProps?: Partial<ComboboxListBoxProps>;
+    listProps?: Partial<ComboboxListBoxProps>;
     /**
      * Add custom elements before the options
      */
