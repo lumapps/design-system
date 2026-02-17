@@ -5,22 +5,20 @@ import { TEXT_ARG_TYPES } from '../Text/Stories';
 
 /**
  * Setup Heading stories for a specific framework (React or Vue).
- * This function creates all the stories with the appropriate decorators.
- * Framework-specific render functions or args can be injected via `overrides`.
+ * Framework-specific components (HeadingLevelProvider) are injected via `components`.
  */
 export function setup({
-    component,
-    render,
+    component: Heading,
+    components: { HeadingLevelProvider },
     decorators: { withCombinations },
-    overrides = {},
 }: SetupStoriesOptions<{
-    overrides: 'NestedHeadingLevelProvider';
     decorators: 'withCombinations';
+    components: { HeadingLevelProvider: any };
 }>) {
     return {
         meta: {
-            component,
-            render,
+            component: Heading,
+            render: ({ children, ...args }: any) => <Heading {...args}>{children}</Heading>,
             argTypes: {
                 ...TEXT_ARG_TYPES,
                 as: headingElementArgType,
@@ -61,7 +59,24 @@ export function setup({
 
         /** Nest HeadingLevelProvider to increment heading levels */
         NestedHeadingLevelProvider: {
-            ...overrides.NestedHeadingLevelProvider,
+            render: () => (
+                <>
+                    <Heading>First level</Heading>
+                    <HeadingLevelProvider>
+                        <Heading>Second Level</Heading>
+                        <HeadingLevelProvider>
+                            <Heading>Third Level</Heading>
+                            <Heading>Other Third Level</Heading>
+                            <HeadingLevelProvider>
+                                <Heading>Fourth Level</Heading>
+                                <HeadingLevelProvider>
+                                    <Heading>Fifth Level</Heading>
+                                </HeadingLevelProvider>
+                            </HeadingLevelProvider>
+                        </HeadingLevelProvider>
+                    </HeadingLevelProvider>
+                </>
+            ),
         },
     };
 }
