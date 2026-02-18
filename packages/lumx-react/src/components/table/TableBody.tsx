@@ -1,19 +1,17 @@
 import {
-    TableBody as TableBodyUI,
-    TableBodyProps as TableBodyUIProps,
+    TableBody as UI,
+    TableBodyProps as UIProps,
     CLASSNAME,
     COMPONENT_NAME,
 } from '@lumx/core/js/components/Table/TableBody';
 import { GenericProps } from '@lumx/react/utils/type';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 
 /**
  * Defines the props of the component.
  */
-export interface TableBodyProps extends GenericProps, Omit<TableBodyUIProps, 'ref'> {
-    /** Children */
-    children?: React.ReactNode;
-}
+export interface TableBodyProps extends GenericProps, ReactToJSX<UIProps> {}
 
 /**
  * TableBody component.
@@ -25,7 +23,7 @@ export interface TableBodyProps extends GenericProps, Omit<TableBodyUIProps, 're
 export const TableBody = forwardRef<TableBodyProps, HTMLTableSectionElement>((props, ref) => {
     const { children, ...otherProps } = props;
 
-    return TableBodyUI({
+    return UI({
         ref,
         children,
         ...otherProps,

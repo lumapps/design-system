@@ -1,8 +1,5 @@
 import { defineComponent, useAttrs } from 'vue';
-import {
-    TableHeader as TableHeaderUI,
-    type TableHeaderProps as UIProps,
-} from '@lumx/core/js/components/Table/TableHeader';
+import { TableHeader as UI, type TableHeaderProps as UIProps } from '@lumx/core/js/components/Table/TableHeader';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { JSXElement } from '@lumx/core/js/types';
 
@@ -13,14 +10,7 @@ const TableHeader = defineComponent(
         const attrs = useAttrs();
 
         return () => {
-            return (
-                <TableHeaderUI
-                    {...props}
-                    {...attrs}
-                    className={props.class}
-                    children={slots.default?.() as JSXElement}
-                />
-            );
+            return <UI {...props} {...attrs} className={props.class} children={slots.default?.() as JSXElement} />;
         };
     },
     {

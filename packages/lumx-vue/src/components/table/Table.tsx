@@ -1,5 +1,5 @@
 import { defineComponent, useAttrs } from 'vue';
-import { Table as TableUI, type TableProps as UIProps } from '@lumx/core/js/components/Table';
+import { Table as UI, type TableProps as UIProps } from '@lumx/core/js/components/Table';
 import { useTheme } from '../../composables/useTheme';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { JSXElement } from '@lumx/core/js/types';
@@ -13,7 +13,7 @@ const Table = defineComponent(
 
         return () => {
             return (
-                <TableUI
+                <UI
                     {...props}
                     {...attrs}
                     className={props.class}

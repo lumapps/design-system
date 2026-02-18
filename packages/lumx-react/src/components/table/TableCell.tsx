@@ -1,6 +1,6 @@
 import {
-    TableCell as TableCellUI,
-    TableCellProps as TableCellUIProps,
+    TableCell as UI,
+    TableCellProps as UIProps,
     CLASSNAME,
     COMPONENT_NAME,
     DEFAULT_PROPS,
@@ -9,6 +9,7 @@ import {
 } from '@lumx/core/js/components/Table/TableCell';
 import { GenericProps } from '@lumx/react/utils/type';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 
 export { ThOrder, TableCellVariant };
 export type {
@@ -19,9 +20,9 @@ export type {
 /**
  * Defines the props of the component.
  */
-export interface TableCellProps extends GenericProps, Omit<TableCellUIProps, 'ref'> {
-    /** Children */
-    children?: React.ReactNode;
+export interface TableCellProps extends GenericProps, ReactToJSX<UIProps> {
+    /** On header cell click callback. */
+    onHeaderClick?: () => void;
 }
 
 /**
@@ -32,12 +33,12 @@ export interface TableCellProps extends GenericProps, Omit<TableCellUIProps, 're
  * @return React element.
  */
 export const TableCell = forwardRef<TableCellProps, HTMLTableCellElement>((props, ref) => {
-    const { children, ...otherProps } = props;
+    const { onHeaderClick, ...otherProps } = props;
 
-    return TableCellUI({
+    return UI({
         ref,
-        children,
         ...otherProps,
+        handleClick: onHeaderClick,
     });
 });
 

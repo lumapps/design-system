@@ -28,8 +28,6 @@ export const TableCellClickableAndSortable: React.FC = () => {
     const [currentSortColumn, setCurrentSortColumn] = useState<keyof Omit<DataRow, 'id'> | null>(null);
 
     const handleSort = (column: keyof Omit<DataRow, 'id'>) => {
-        console.log('handleSort called for column:', column);
-
         // Reset other columns
         if (currentSortColumn && currentSortColumn !== column) {
             setSortOrders((prev) => ({ ...prev, [currentSortColumn]: undefined }));
@@ -49,7 +47,6 @@ export const TableCellClickableAndSortable: React.FC = () => {
 
         setSortOrders((prev) => ({ ...prev, [column]: newOrder }));
         setCurrentSortColumn(newOrder ? column : null);
-        console.log('New sort state:', { column, order: newOrder });
     };
 
     const sortedData = useMemo(() => {

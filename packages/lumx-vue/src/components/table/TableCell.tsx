@@ -1,6 +1,6 @@
 import { defineComponent } from 'vue';
 import {
-    TableCell as TableCellUI,
+    TableCell as UI,
     type TableCellProps as UIProps,
     ThOrder,
     TableCellVariant,
@@ -15,7 +15,7 @@ export type {
     TableCellVariant as TableCellVariantType,
 } from '@lumx/core/js/components/Table/TableCell';
 
-export type TableCellProps = VueToJSXProps<UIProps, 'onHeaderClick'>;
+export type TableCellProps = VueToJSXProps<UIProps>;
 
 export const emitSchema = {
     headerClick: () => true,
@@ -31,12 +31,12 @@ const TableCell = defineComponent(
 
         return () => {
             return (
-                <TableCellUI
+                <UI
                     {...props}
                     {...attrs}
                     className={props.class}
                     // Pass handler if sortable or if there's a listener
-                    onHeaderClick={hasClickListener ? handleHeaderClick : undefined}
+                    handleClick={hasClickListener ? handleHeaderClick : undefined}
                     children={slots.default?.() as JSXElement}
                 />
             );
