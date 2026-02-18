@@ -7,11 +7,12 @@ import {
     CLASSNAME,
     COMPONENT_NAME,
     DEFAULT_PROPS,
-    IconButtonProps as BaseIconButtonProps,
+    IconButtonProps as UIProps,
 } from '@lumx/core/js/components/Button/IconButton';
 import { GenericProps } from '@lumx/core/js/types';
+import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 
-export interface IconButtonProps extends GenericProps, Omit<BaseIconButtonProps, 'title' | 'children'> {
+export interface IconButtonProps extends GenericProps, ReactToJSX<UIProps, 'title' | 'children'> {
     /**
      * Props to pass to the tooltip.
      * If undefined or if tooltipProps.label is undefined, the label prop will be used as tooltip label.
@@ -19,6 +20,8 @@ export interface IconButtonProps extends GenericProps, Omit<BaseIconButtonProps,
     tooltipProps?: Partial<TooltipProps>;
     /** Whether the tooltip should be hidden or not. */
     hideTooltip?: boolean;
+    /** callback for clicking on the button */
+    onClick?: (event: React.MouseEvent) => void;
 }
 
 /**

@@ -21,14 +21,7 @@ import { useFocusPointStyle } from './useFocusPointStyle';
 export type ThumbnailProps = VueToJSXProps<
     Omit<
         UIProps,
-        | 'loadingState'
-        | 'isAnyDisabled'
-        | 'focusPointStyle'
-        | 'disabledStateProps'
-        | 'badge'
-        | 'imgRef'
-        | 'onKeyPress'
-        | 'fallback'
+        'loadingState' | 'isAnyDisabled' | 'focusPointStyle' | 'disabledStateProps' | 'badge' | 'imgRef' | 'fallback'
     >
 > & {
     /** Apply relative vertical and horizontal shift (from -1 to 1) on the image position inside the thumbnail. */

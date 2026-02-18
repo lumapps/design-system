@@ -6,13 +6,14 @@ import { Link as UI, LinkProps as UIProps, CLASSNAME, COMPONENT_NAME } from '@lu
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
 import { wrapChildrenIconWithSpaces } from '@lumx/react/utils/react/wrapChildrenIconWithSpaces';
+import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 
 type HTMLAnchorProps = React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
 
 /**
  * Defines the props of the component.
  */
-export interface LinkProps extends GenericProps, Omit<UIProps, 'label'> {
+export interface LinkProps extends GenericProps, ReactToJSX<UIProps, 'label'> {
     /** Link href. */
     href?: HTMLAnchorProps['href'];
     /** Custom react component for the link (can be used to inject react router Link). */
@@ -21,8 +22,8 @@ export interface LinkProps extends GenericProps, Omit<UIProps, 'label'> {
     target?: HTMLAnchorProps['target'];
     /** Typography variant. */
     typography?: Typography;
-    /** Children */
-    children?: React.ReactNode;
+    /** Click handler. */
+    onClick?: (event: React.MouseEvent) => void;
 }
 
 /**

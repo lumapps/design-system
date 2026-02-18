@@ -1,3 +1,4 @@
+import { PropsToOverride } from '@lumx/core/js/types';
 /**
  * Props interface for components wrapped with VueToJSX.
  * It omits JSX-specific props like `children` and `className` and adds Vue's `class`.
@@ -7,7 +8,7 @@
  */
 export type VueToJSXProps<Props, OmitProps extends keyof Props = never> = Omit<
     Props,
-    'children' | 'className' | 'ref' | 'onClick' | 'onChange' | OmitProps
+    PropsToOverride | 'children' | 'className' | OmitProps
 > & {
     /** Class name forwarded to the root element of the component. */
     class?: string;
@@ -21,9 +22,12 @@ export const keysOf = <T>() => {
     ) => {
         // Return an object with all props marked as optional (not required)
         // This ensures Vue's type system correctly infers props as optional
-        return keys.reduce((acc, key) => {
-            acc[key as K[number]] = { required: false };
-            return acc;
-        }, {} as Record<K[number], { required: false }>);
+        return keys.reduce(
+            (acc, key) => {
+                acc[key as K[number]] = { required: false };
+                return acc;
+            },
+            {} as Record<K[number], { required: false }>,
+        );
     };
 };

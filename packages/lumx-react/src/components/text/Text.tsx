@@ -12,8 +12,9 @@ import {
     DEFAULT_PROPS,
 } from '@lumx/core/js/components/Text';
 import { GenericProps } from '@lumx/core/js/types';
+import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 
-export interface TextProps extends UIProps, GenericProps {}
+export interface TextProps extends ReactToJSX<UIProps>, GenericProps {}
 
 /**
  * Text component.

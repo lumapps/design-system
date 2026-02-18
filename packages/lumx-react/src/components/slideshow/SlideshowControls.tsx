@@ -154,7 +154,7 @@ const InternalSlideshowControls = forwardRef<SlideshowControlsProps, HTMLDivElem
                 className={element('navigation')}
                 color={theme === Theme.dark ? 'light' : 'dark'}
                 emphasis={Emphasis.low}
-                onClick={onPreviousClick}
+                onClick={() => onPreviousClick?.()}
             />
             <div ref={paginationRef} className={element('pagination')}>
                 <div className={element('pagination-items')} style={wrapperStyle} role="tablist" {...paginationProps}>
@@ -226,7 +226,7 @@ const InternalSlideshowControls = forwardRef<SlideshowControlsProps, HTMLDivElem
                 className={element('navigation')}
                 color={theme === Theme.dark ? 'light' : 'dark'}
                 emphasis={Emphasis.low}
-                onClick={onNextClick}
+                onClick={() => onNextClick?.()}
             />
         </div>
     );

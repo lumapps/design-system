@@ -8,11 +8,12 @@ import {
 } from '@lumx/core/js/components/Skeleton';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 
 /**
  * Defines the props of the component.
  */
-export interface SkeletonCircleProps extends GenericProps, UIProps {}
+export interface SkeletonCircleProps extends GenericProps, ReactToJSX<UIProps> {}
 
 const DEFAULT_PROPS: Partial<SkeletonCircleProps> = {};
 

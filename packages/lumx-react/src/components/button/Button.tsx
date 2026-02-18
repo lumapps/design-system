@@ -14,11 +14,15 @@ import {
 } from '@lumx/core/js/components/Button/Button';
 import { isComponent } from '@lumx/react/utils/type/isComponent';
 import { GenericProps } from '@lumx/core/js/types';
+import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 
 export type { ButtonEmphasis };
 export { CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS };
 
-export interface ButtonProps extends GenericProps, UIProps {}
+export interface ButtonProps extends GenericProps, ReactToJSX<UIProps> {
+    /** callback for clicking on the button */
+    onClick?: (event: React.MouseEvent) => void;
+}
 
 /**
  * Button component.

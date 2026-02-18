@@ -1,16 +1,17 @@
-import { ReactNode } from 'react';
-
 import { GenericProps } from '@lumx/react/utils/type';
-import { RadioGroup as UI, CLASSNAME, COMPONENT_NAME } from '@lumx/core/js/components/RadioGroup';
+import {
+    RadioGroup as UI,
+    CLASSNAME,
+    COMPONENT_NAME,
+    RadioGroupProps as UIProps,
+} from '@lumx/core/js/components/RadioGroup';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 
 /**
  * Defines the props of the component.
  */
-export interface RadioGroupProps extends GenericProps {
-    /** RadioButton elements */
-    children: ReactNode;
-}
+export interface RadioGroupProps extends GenericProps, ReactToJSX<UIProps> {}
 
 /**
  * RadioGroup component.

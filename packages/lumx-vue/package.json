@@ -21,10 +21,10 @@
   "main": "index.js",
   "types": "index.d.ts",
   "exports": {
-      ".": {
-          "types": "./index.d.ts",
-          "default": "./index.js"
-      }
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    }
   },
   "sideEffects": false,
   "version": "4.3.1",

@@ -3,11 +3,12 @@ import { ReactNode } from 'react';
 import { Badge as UI, BadgeProps as UIProps } from '@lumx/core/js/components/Badge';
 import { GenericProps } from '@lumx/react/utils/type';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 
 /**
  * Defines the props of the component.
  */
-export interface BadgeProps extends Omit<UIProps, 'children'>, GenericProps {
+export interface BadgeProps extends ReactToJSX<UIProps>, GenericProps {
     /** Badge content. */
     children?: ReactNode;
 }

@@ -3,11 +3,12 @@ import { GenericProps } from '@lumx/react/utils/type';
 import { Divider as UI, DividerProps as UIProps, CLASSNAME, COMPONENT_NAME } from '@lumx/core/js/components/Divider';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 
 /**
  * Defines the props of the component.
  */
-export interface DividerProps extends GenericProps, UIProps {}
+export interface DividerProps extends GenericProps, ReactToJSX<UIProps> {}
 
 /**
  * Component default props.

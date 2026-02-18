@@ -10,11 +10,15 @@ import { useId } from '@lumx/react/hooks/useId';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
+import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 
 /**
  * Defines the props of the component.
  */
-export interface RadioButtonProps extends GenericProps, Omit<UIProps, 'inputId'> {}
+export interface RadioButtonProps extends GenericProps, ReactToJSX<UIProps, 'inputId'> {
+    /** On change callback. */
+    onChange?(value?: string, name?: string, event?: React.ChangeEvent): void;
+}
 
 /**
  * Component default props.

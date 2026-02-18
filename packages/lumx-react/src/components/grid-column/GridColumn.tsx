@@ -8,15 +8,14 @@ import {
     CLASSNAME,
     COMPONENT_NAME,
 } from '@lumx/core/js/components/GridColumn';
+import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 
 /**
  * Defines the props of the component.
  */
-export interface GridColumnProps extends GenericProps, UIProps {
+export interface GridColumnProps extends GenericProps, ReactToJSX<UIProps> {
     /** Customize the root element. */
     as?: React.ElementType;
-    /** Children elements. */
-    children?: React.ReactNode;
 }
 
 // Re-export types for backward compatibility
