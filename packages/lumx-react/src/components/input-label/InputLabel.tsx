@@ -3,8 +3,9 @@ import { InputLabel as UI, InputLabelProps as UIProps } from '@lumx/core/js/comp
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { GenericProps } from '@lumx/core/js/types';
+import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 
-export interface InputLabelProps extends UIProps, GenericProps {}
+export interface InputLabelProps extends ReactToJSX<UIProps>, GenericProps {}
 
 /**
  * InputLabel component.

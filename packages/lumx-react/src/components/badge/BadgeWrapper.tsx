@@ -8,8 +8,9 @@ import {
 } from '@lumx/core/js/components/Badge/BadgeWrapper';
 import { GenericProps } from '@lumx/react/utils/type';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 
-export interface BadgeWrapperProps extends GenericProps, Omit<UIProps, 'children' | 'badge'> {
+export interface BadgeWrapperProps extends GenericProps, ReactToJSX<UIProps, 'children' | 'badge'> {
     /** Badge element to display */
     badge: ReactElement;
     /** Content to wrap with badge */

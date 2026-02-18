@@ -10,13 +10,14 @@ import {
 } from '@lumx/core/js/components/Skeleton';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 
 export { SkeletonRectangleVariant };
 
 /**
  * Defines the props of the component.
  */
-export interface SkeletonRectangleProps extends GenericProps, UIProps {}
+export interface SkeletonRectangleProps extends GenericProps, ReactToJSX<UIProps> {}
 
 const DEFAULT_PROPS: Partial<SkeletonRectangleProps> = UI_DEFAULT_PROPS;
 

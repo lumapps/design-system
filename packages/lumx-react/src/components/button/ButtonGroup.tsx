@@ -8,8 +8,9 @@ import {
     DEFAULT_PROPS,
 } from '@lumx/core/js/components/Button/ButtonGroup';
 import { GenericProps } from '@lumx/core/js/types';
+import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 
-export interface ButtonGroupProps extends GenericProps, UIProps {}
+export interface ButtonGroupProps extends GenericProps, ReactToJSX<UIProps> {}
 
 /**
  * ButtonGroup component.

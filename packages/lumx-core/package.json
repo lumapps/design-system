@@ -46,7 +46,10 @@
         "./js/utils": {
             "types": "./js/utils/index.d.ts",
             "default": "./js/utils/index.js"
-        }
+        },
+        "./lumx.css": "./lumx.css",
+        "./css/*": "./css/*",
+        "./scss/*": "./scss/*"
     },
     "publishConfig": {
         "directory": "dist"

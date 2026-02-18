@@ -9,8 +9,9 @@ import {
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { GenericProps } from '@lumx/core/js/types';
+import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 
-export interface FlagProps extends GenericProps, Omit<UIProps, 'children' | 'Text'> {
+export interface FlagProps extends GenericProps, ReactToJSX<UIProps, 'children' | 'Text'> {
     /** Text label of the flag. */
     label: React.ReactNode;
 }

@@ -3,8 +3,9 @@ import { Theme } from '@lumx/react';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { GenericProps } from '@lumx/core/js/types';
+import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 
-export interface InputHelperProps extends UIProps, GenericProps {}
+export interface InputHelperProps extends ReactToJSX<UIProps>, GenericProps {}
 
 /**
  * InputHelper component.

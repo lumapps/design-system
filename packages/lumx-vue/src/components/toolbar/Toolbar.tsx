@@ -9,7 +9,7 @@ import {
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import type { JSXElement } from '@lumx/core/js/types';
 
-export type ToolbarProps = VueToJSXProps<UIProps, 'ref' | 'label' | 'after' | 'before'>;
+export type ToolbarProps = VueToJSXProps<UIProps, 'label' | 'after' | 'before'>;
 
 export { CLASSNAME, TOOLBAR_NAME, DEFAULT_PROPS };
 

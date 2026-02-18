@@ -18,6 +18,7 @@ import {
     DEFAULT_PROPS,
     element,
 } from '@lumx/core/js/components/Thumbnail';
+import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 import { FocusPoint } from './types';
 
 /**
@@ -25,11 +26,15 @@ import { FocusPoint } from './types';
  */
 export interface ThumbnailProps
     extends GenericProps,
-        Omit<UIProps, 'loadingState' | 'isAnyDisabled' | 'focusPointStyle' | 'disabledStateProps' | 'badge'> {
+        ReactToJSX<UIProps, 'loadingState' | 'isAnyDisabled' | 'focusPointStyle' | 'disabledStateProps' | 'badge'> {
     /** Apply relative vertical and horizontal shift (from -1 to 1) on the image position inside the thumbnail. */
     focusPoint?: FocusPoint;
     /** Badge. */
     badge?: ReactElement | Falsy;
+    /** On click callback. */
+    onClick?: React.MouseEventHandler<HTMLDivElement>;
+    /** On key press callback. */
+    onKeyPress?: React.KeyboardEventHandler<HTMLDivElement>;
 }
 
 /**

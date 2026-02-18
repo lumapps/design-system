@@ -9,11 +9,12 @@ import {
     DEFAULT_PROPS,
 } from '@lumx/core/js/components/Toolbar';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 
 /**
  * Defines the props of the component.
  */
-export interface ToolbarProps extends GenericProps, UIProps {
+export interface ToolbarProps extends GenericProps, ReactToJSX<UIProps> {
     /** After content (placed after the label). */
     after?: ReactNode;
     /** Before content (placed before the label). */
