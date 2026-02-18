@@ -73,7 +73,7 @@ export const Checkbox = forwardRef<CheckboxProps, HTMLDivElement>((props, ref) =
         isChecked,
         label,
         name,
-        onChange,
+        handleChange: onChange,
         theme,
         value,
         inputProps: {
