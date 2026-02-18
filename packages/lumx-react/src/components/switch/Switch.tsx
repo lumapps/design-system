@@ -64,7 +64,7 @@ export const Switch = forwardRef<SwitchProps, HTMLDivElement>((props, ref) => {
         isChecked,
         label: children,
         name,
-        onChange,
+        handleChange: onChange,
         position,
         theme,
         value,
