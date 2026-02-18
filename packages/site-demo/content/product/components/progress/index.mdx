@@ -1,10 +1,14 @@
 ---
-frameworks: ['react']
+frameworks: ['react', 'vue']
 ---
-import * as Demo1 from './react/demo1.tsx';
-import * as Demo2 from './react/demo2.tsx';
+import * as ReactDemo1 from './react/demo1.tsx';
+import * as ReactDemo2 from './react/demo2.tsx';
+import * as VueDemo1 from './vue/demo1.vue';
+import * as VueDemo2 from './vue/demo2.vue';
 import ReactProgressCircular from 'lumx-docs:@lumx/react/components/progress/ProgressCircular';
 import ReactProgressLinear from 'lumx-docs:@lumx/react/components/progress/ProgressLinear';
+import VueProgressCircular from 'lumx-docs:@lumx/vue/components/progress/ProgressCircular';
+import VueProgressLinear from 'lumx-docs:@lumx/vue/components/progress/ProgressLinear';
 
 # Progress
 
@@ -13,11 +17,11 @@ Progress come in two styles: `circular` and `linear`.
 
 ## Circular
 
-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: Demo1 }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemo1, vue: VueDemo1 }} />
 
 ## Linear
 
-<DemoBlock withThemeSwitcher demo={{ react: Demo2 }} />
+<DemoBlock withThemeSwitcher demo={{ react: ReactDemo2, vue: VueDemo2 }} />
 
 ### Accessibility concerns
 
@@ -27,8 +31,8 @@ Please look into ARIA live regions to announce the loading state and changes to 
 
 ### Progress circular properties
 
-<PropTable docs={{ react: ReactProgressCircular }} />
+<PropTable docs={{ react: ReactProgressCircular, vue: VueProgressCircular }} />
 
 ### Progress linear properties
 
-<PropTable docs={{ react: ReactProgressLinear }} />
+<PropTable docs={{ react: ReactProgressLinear, vue: VueProgressLinear }} />

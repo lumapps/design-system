@@ -18,6 +18,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Create the `Thumbnail` component
     -   Create the `GridColumn` component
     -   Create the `Toolbar` component
+    -   Create the `ProgressCircular` component
+    -   Create the `ProgressLinear` component
 
 ### Changed
 
@@ -30,6 +32,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Moved `Thumbnail` from `@lumx/react`
     -   Moved `GridColumn` from `@lumx/react`
     -   Moved `Toolbar` from `@lumx/react`
+    -   Moved `ProgressCircular` from `@lumx/react`
+    -   Moved `ProgressLinear` from `@lumx/react`
     -   Uniformize documentation of `disabled` (as an alias to `isDisabled`) props across core components
 
 -   `@lumx/core`, `@lumx/react`, `@lumx/vue`: improve declared ESM exports in package.json

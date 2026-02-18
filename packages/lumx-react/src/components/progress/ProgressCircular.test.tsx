@@ -1,6 +1,7 @@
 import { getByClassName } from '@lumx/react/testing/utils/queries';
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import BaseProgressCircularTests from '@lumx/core/js/components/ProgressCircular/Tests';
 
 import { ProgressCircular, ProgressCircularProps } from './ProgressCircular';
 
@@ -16,20 +17,10 @@ const setup = (props: Partial<ProgressCircularProps> = {}, { wrapper }: SetupRen
 };
 
 describe(`<${ProgressCircular.displayName}>`, () => {
-    it('should render default', () => {
-        const { element } = setup();
-        expect(element).toHaveClass(`${CLASSNAME}--size-m`);
-        expect(element.tagName).toBe('DIV');
-    });
-
-    it('should render size xs', () => {
-        const { element } = setup({ size: 'xs' });
-        expect(element).toHaveClass(`${CLASSNAME}--size-xs`);
-    });
-
-    it('should render display inline', () => {
-        const { element } = setup({ display: 'inline' });
-        expect(element.tagName).toBe('SPAN');
+    // Run core tests
+    BaseProgressCircularTests({
+        render: (props: ProgressCircularProps) => render(<ProgressCircular {...props} />),
+        screen,
     });
 
     commonTestsSuiteRTL(setup, {
