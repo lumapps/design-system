@@ -75,6 +75,8 @@ export const TableCell = (props: TableCellProps) => {
         ...forwardedProps
     } = props;
 
+    console.log({ onHeaderClick, isSortable });
+
     // Use button if clickable
     const Wrapper = onHeaderClick ? 'button' : 'div';
     const wrapperProps = Wrapper === 'button' ? ({ type: 'button', onClick: onHeaderClick } as const) : undefined;

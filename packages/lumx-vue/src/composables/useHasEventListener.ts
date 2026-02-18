@@ -8,5 +8,7 @@ import { getCurrentInstance } from 'vue';
  */
 export const useHasEventListener = (eventName: string): boolean => {
     const instance = getCurrentInstance();
+    console.log({ eventName });
+    console.log(instance?.vnode.props);
     return instance?.vnode.props?.[eventName] !== undefined;
 };
