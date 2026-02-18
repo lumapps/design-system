@@ -48,6 +48,19 @@ describe(`<${RadioButton.displayName}>`, () => {
             expect(onChange).not.toHaveBeenCalled();
         });
 
+        it('should trigger `onChange` with correct signature when radio is clicked', async () => {
+            const value = 'radio-value';
+            const name = 'radio-name';
+            const onChange = vi.fn();
+            render(<RadioButton id="test" value={value} name={name} onChange={onChange} />);
+            const input = screen.getByRole('radio');
+            expect(input).not.toBeChecked();
+
+            await input.click();
+
+            expect(onChange).toHaveBeenCalledWith(value, name, expect.any(Object));
+        });
+
         it('should be disabled with aria-disabled', async () => {
             const onChange = vi.fn();
             const { container } = render(<RadioButton id="test" aria-disabled onChange={onChange} />);
