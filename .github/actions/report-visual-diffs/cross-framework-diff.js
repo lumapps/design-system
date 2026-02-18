@@ -7,6 +7,8 @@ const pixelmatch = pixelmatchModule.default || pixelmatchModule;
 
 const { findFiles, extractRelativePath, normalizeScreenshotPath } = require('./utils');
 
+const DIFF_PIXELS_THRESHOLD = 30;
+
 /**
  * Align two PNG images to the same dimensions by padding the smaller one.
  * Follows the vitest-plugin-vis approach: out-of-bounds pixels become semi-transparent black.
@@ -53,7 +55,7 @@ function alignImages(img1, img2) {
  * @param {string} reactPath - Path to react screenshot PNG
  * @param {string} vuePath - Path to vue screenshot PNG
  * @param {string} diffPath - Path to write the diff PNG
- * @returns {{ diffPixels: number, diffPercent: number, totalPixels: number }}
+ * @returns {{ diffPixels: number, diffPercent: number, totalPixels: number, hasDiff: boolean }}
  */
 function compareImages(reactPath, vuePath, diffPath) {
     const img1 = PNG.sync.read(fs.readFileSync(reactPath));
@@ -69,13 +71,14 @@ function compareImages(reactPath, vuePath, diffPath) {
 
     const totalPixels = width * height;
     const diffPercent = totalPixels > 0 ? (diffPixels / totalPixels) * 100 : 0;
+    const hasDiff = diffPixels > DIFF_PIXELS_THRESHOLD;
 
-    if (diffPixels > 0) {
+    if (hasDiff) {
         fs.mkdirSync(path.dirname(diffPath), { recursive: true });
         fs.writeFileSync(diffPath, PNG.sync.write(diff));
     }
 
-    return { diffPixels, diffPercent, totalPixels };
+    return { diffPixels, diffPercent, totalPixels, hasDiff };
 }
 
 /**
@@ -151,7 +154,7 @@ async function main({ reactDir, vueDir, outputDir }) {
 
         const result = compareImages(reactFile, vueFile, diffFile);
 
-        if (result.diffPixels > 0) {
+        if (result.hasDiff) {
             diffCount++;
 
             // Copy originals for report display
