@@ -35,13 +35,18 @@ export function useDisableStateProps<TProps extends DisabledProps>(
 
     const otherProps = computed(() => {
         const p = typeof props === 'function' ? props() : unref(props);
-        const { disabled, isDisabled, 'aria-disabled': _, ariaDisabled, onClick, onChange, ...rest } = p as any;
-
-        // Only include onClick/onChange if not disabled (matching React behavior)
-        if (!isAnyDisabled.value) {
-            if (onClick) (rest as any).onClick = onClick;
-            if (onChange) (rest as any).onChange = onChange;
-        }
+        // Exclude onClick/onChange/onKeyPress to prevent mergeProps from creating arrays
+        // Components handle these event handlers explicitly
+        const {
+            disabled,
+            isDisabled,
+            'aria-disabled': _,
+            ariaDisabled,
+            onClick,
+            onChange,
+            onKeyPress,
+            ...rest
+        } = p as any;
 
         return rest;
     });

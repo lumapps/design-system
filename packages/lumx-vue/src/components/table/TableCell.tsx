@@ -32,10 +32,13 @@ const TableCell = defineComponent(
 
             console.log({ hasClickListener });
 
+            // Exclude onHeaderClick from attrs to prevent mergeProps from creating an array
+            const { onHeaderClick: _, ...restAttrs } = attrs;
+
             return (
                 <TableCellUI
                     {...props}
-                    {...attrs}
+                    {...restAttrs}
                     className={props.class}
                     // Pass handler if sortable or if there's a listener
                     onHeaderClick={handleHeaderClick}
