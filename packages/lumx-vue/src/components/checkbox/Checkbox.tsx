@@ -74,12 +74,12 @@ const Checkbox = defineComponent(
             return (
                 <CheckboxUI
                     {...otherProps.value}
+                    {...{ onChange: handleChange }}
                     className={props.class}
                     theme={props.theme || defaultTheme.value}
                     inputId={inputId.value}
                     inputRef={localInputRef}
                     isDisabled={isAnyDisabled.value}
-                    onChange={handleChange}
                     label={props.label}
                     inputProps={{
                         ...props.inputProps,

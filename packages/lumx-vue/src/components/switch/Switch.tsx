@@ -53,11 +53,11 @@ const Switch = defineComponent(
             return (
                 <SwitchUI
                     {...otherProps.value}
+                    {...{ onChange: handleChange }}
                     className={props.class}
                     theme={props.theme || defaultTheme.value}
                     inputId={inputId.value}
                     isDisabled={isAnyDisabled.value}
-                    onChange={handleChange}
                     label={(props.label || slots.default?.()) as JSXElement}
                     inputProps={{
                         ...props.inputProps,

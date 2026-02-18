@@ -97,9 +97,9 @@ const Button = defineComponent(
                 <ButtonUI
                     {...otherProps.value}
                     {...disabledStateProps.value}
+                    {...{ onClick: handleClick }}
                     className={props.class}
                     theme={props.theme || defaultTheme.value}
-                    onClick={handleClick as any}
                     children={children as JSXElement}
                 />
             );

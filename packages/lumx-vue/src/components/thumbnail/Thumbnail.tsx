@@ -100,6 +100,8 @@ const Thumbnail = defineComponent(
             return (
                 <ThumbnailUI
                     {...otherProps.value}
+                    {...{ onClick: hasClickListener ? handleClick : undefined }}
+                    {...{ onKeyPress: hasKeyPressListener ? handleKeyPress : undefined }}
                     className={props.class}
                     theme={props.theme || defaultTheme.value}
                     isAnyDisabled={isAnyDisabled.value}
@@ -108,8 +110,6 @@ const Thumbnail = defineComponent(
                     loadingState={loadingState.value}
                     imgRef={imgElement}
                     image={props.image}
-                    onClick={hasClickListener ? handleClick : undefined}
-                    onKeyPress={hasKeyPressListener ? handleKeyPress : undefined}
                     fallback={fallback as JSXElement}
                     badge={
                         badge &&

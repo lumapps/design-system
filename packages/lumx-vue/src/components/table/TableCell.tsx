@@ -42,9 +42,8 @@ const TableCell = defineComponent(
                 <TableCellUI
                     {...restProps}
                     {...restAttrs}
+                    {...{ onHeaderClick: hasClickListener || props.isSortable ? handleHeaderClick : undefined }}
                     className={props.class}
-                    // Pass handler only if sortable or if there's a listener
-                    onHeaderClick={hasClickListener || props.isSortable ? handleHeaderClick : undefined}
                     children={slots.default?.() as JSXElement}
                 />
             );

@@ -62,10 +62,10 @@ const Link = defineComponent(
                 <LinkUI
                     {...otherProps.value}
                     {...disabledStateProps.value}
+                    {...{ onClick: handleClick }}
                     className={className}
                     theme={props.theme || defaultTheme.value}
                     isDisabled={isAnyDisabled.value}
-                    onClick={handleClick}
                     label={labelContent as JSXElement}
                 />
             );
