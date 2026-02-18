@@ -7,6 +7,7 @@ import {
 } from '@lumx/core/js/components/Table/TableCell';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { JSXElement } from '@lumx/core/js/types';
+import { useHasEventListener } from '@lumx/vue/composables/useHasEventListener';
 
 export { ThOrder, TableCellVariant };
 export type {
@@ -23,22 +24,19 @@ export const emitSchema = {
 const TableCell = defineComponent(
     (props: TableCellProps, { emit, slots, attrs }) => {
         const handleHeaderClick = () => {
-            event?.stopImmediatePropagation();
             emit('headerClick');
         };
 
-        return () => {
-            // Check if there's a listener for headerClick event
-            // In Vue 3 with JSX, event listeners in attrs have 'on' prefix
-            const hasHeaderClickListener = 'onHeaderClick' in attrs;
+        const hasClickListener = useHasEventListener('onHeaderClick');
 
+        return () => {
             return (
                 <TableCellUI
                     {...props}
                     {...attrs}
                     className={props.class}
-                    // Pass handler if there's a listener, so core component creates button wrapper
-                    onHeaderClick={hasHeaderClickListener ? handleHeaderClick : undefined}
+                    // Pass handler if sortable or if there's a listener
+                    onHeaderClick={hasClickListener ? handleHeaderClick : undefined}
                     children={slots.default?.() as JSXElement}
                 />
             );
