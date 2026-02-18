@@ -38,7 +38,7 @@ const TableCell = defineComponent(
                     {...attrs}
                     className={props.class}
                     // Pass handler if sortable or if there's a listener
-                    onHeaderClick={hasClickListener ? handleHeaderClick : undefined}
+                    onHeaderClick={handleHeaderClick}
                     children={slots.default?.() as JSXElement}
                 />
             );
