@@ -27,9 +27,11 @@ const TableCell = defineComponent(
             emit('headerClick');
         };
 
-        const hasClickListener = useHasEventListener('onHeaderClick');
-
         return () => {
+            const hasClickListener = useHasEventListener('onHeaderClick');
+
+            console.log({ hasClickListener });
+
             return (
                 <TableCellUI
                     {...props}
