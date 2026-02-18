@@ -157,7 +157,7 @@ async function scanCrossFrameworkDiffs(artifactsDir) {
         const manifest = JSON.parse(content);
 
         const diffs = manifest.comparisons
-            .filter((c) => c.diffPixels > 0)
+            .filter((c) => c.hasDiff)
             .map((c) => ({
                 relPath: c.normalizedPath,
                 diffPercent: c.diffPercent,
