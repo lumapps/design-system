@@ -6,7 +6,7 @@ import { ComponentRef, HasClassName, HasPolymorphicAs, HasRequiredLinkHref, HasT
 import { forwardRefPolymorphic } from '@lumx/react/utils/react/forwardRefPolymorphic';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { useOverflowTooltipLabel } from '@lumx/react/hooks/useOverflowTooltipLabel';
-import { RawClickable } from '@lumx/react/utils/react/RawClickable';
+import { RawClickable } from '@lumx/core/js/components/RawClickable';
 
 import { ITEM_CLASSNAME as CLASSNAME, ITEM_COMPONENT_NAME as COMPONENT_NAME } from './constants';
 
@@ -46,21 +46,26 @@ export const NavigationItem = Object.assign(
                 )}
             >
                 <Tooltip label={tooltipLabel} placement={Placement.TOP}>
-                    <RawClickable
-                        as={Element}
-                        className={element('link', {
+                    {RawClickable({
+                        as: Element,
+                        className: element('link', {
                             'is-selected': isCurrentPage,
-                        })}
-                        ref={ref as React.Ref<any>}
-                        aria-current={isCurrentPage ? 'page' : undefined}
-                        {...forwardedProps}
-                    >
-                        {icon ? <Icon className={element('icon')} icon={icon} size={Size.xs} theme={theme} /> : null}
+                        }),
+                        ref,
+                        'aria-current': isCurrentPage ? 'page' : undefined,
+                        ...forwardedProps,
+                        children: (
+                            <>
+                                {icon ? (
+                                    <Icon className={element('icon')} icon={icon} size={Size.xs} theme={theme} />
+                                ) : null}
 
-                        <Text as="span" truncate className={element('label')} ref={labelRef}>
-                            {label}
-                        </Text>
-                    </RawClickable>
+                                <Text as="span" truncate className={element('label')} ref={labelRef}>
+                                    {label}
+                                </Text>
+                            </>
+                        ),
+                    })}
                 </Tooltip>
             </li>
         );

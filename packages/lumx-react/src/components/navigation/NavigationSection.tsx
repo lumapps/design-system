@@ -8,7 +8,7 @@ import { HasClassName } from '@lumx/react/utils/type';
 import { ThemeProvider, useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { useId } from '@lumx/react/hooks/useId';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
-import { RawClickable } from '@lumx/react/utils/react/RawClickable';
+import { RawClickable } from '@lumx/core/js/components/RawClickable';
 
 import { NavigationContext } from './context';
 import { ITEM_CLASSNAME } from './constants';
@@ -53,28 +53,31 @@ export const NavigationSection = forwardRef<NavigationSectionProps, HTMLLIElemen
             )}
             ref={ref}
         >
-            <RawClickable<'button'>
-                as="button"
-                {...forwardedProps}
-                aria-controls={sectionId}
-                aria-expanded={isOpen}
-                className={itemElement('link')}
-                ref={buttonRef}
-                onClick={(event) => {
+            {RawClickable<'button'>({
+                as: 'button',
+                ...forwardedProps,
+                'aria-controls': sectionId,
+                'aria-expanded': isOpen,
+                className: itemElement('link'),
+                ref: buttonRef,
+                onClick: (event) => {
                     setIsOpen(!isOpen);
                     event.stopPropagation();
-                }}
-            >
-                {icon ? <Icon className={itemElement('icon')} icon={icon} size={Size.xs} /> : null}
+                },
+                children: (
+                    <>
+                        {icon ? <Icon className={itemElement('icon')} icon={icon} size={Size.xs} /> : null}
 
-                <Text as="span" truncate className={itemElement('label')} ref={ref}>
-                    {label}
-                </Text>
-                <Icon
-                    className={classNames.join(itemElement('icon'), sectionElement('chevron'))}
-                    icon={isOpen ? mdiChevronUp : mdiChevronDown}
-                />
-            </RawClickable>
+                        <Text as="span" truncate className={itemElement('label')} ref={ref}>
+                            {label}
+                        </Text>
+                        <Icon
+                            className={classNames.join(itemElement('icon'), sectionElement('chevron'))}
+                            icon={isOpen ? mdiChevronUp : mdiChevronDown}
+                        />
+                    </>
+                ),
+            })}
             {isOpen &&
                 (isDropdown ? (
                     <Popover
