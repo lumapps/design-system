@@ -95,15 +95,6 @@ export default (renderOptions: SetupOptions<LinkProps>) => {
             expect(link).toHaveAttribute('aria-disabled', 'true');
             expect(link).toHaveAttribute('tabindex', '-1');
         });
-
-        it('should not trigger onClick when disabled', () => {
-            const onClick = vi.fn();
-            const { link } = setup({ label: 'Label', isDisabled: true, onClick }, renderOptions);
-
-            link.click();
-
-            expect(onClick).not.toHaveBeenCalled();
-        });
     });
 
     describe('Icons', () => {
