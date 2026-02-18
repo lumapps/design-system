@@ -91,7 +91,11 @@ const Link = defineComponent(
             'aria-disabled',
         ),
         emits: emitSchema,
-    },
+        // Enable compatibility with @vue/compat for event listeners
+        compatConfig: {
+            MODE: 3, // Use Vue 3 behavior for this component
+        },
+    } as any,
 );
 
 export default Link;
