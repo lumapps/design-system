@@ -11,7 +11,7 @@
   "scripts": {
     "build": "vite build",
     "type-check": "vue-tsc",
-    "start:storybook": "storybook dev -p 9000",
+    "start:storybook": "storybook dev -p 9001",
     "build:storybook": "storybook build",
     "test": "vitest run --run",
     "test:storybook": "vitest -c .storybook/vitest.config.mts run --run"
