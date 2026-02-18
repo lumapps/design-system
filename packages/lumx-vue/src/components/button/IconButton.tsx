@@ -9,7 +9,7 @@ import { useTheme } from '../../composables/useTheme';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
-export type IconButtonProps = VueToJSXProps<UIProps>;
+export type IconButtonProps = VueToJSXProps<UIProps, 'label'>;
 
 export const emitSchema = {
     click: (event: MouseEvent) => event instanceof MouseEvent,
@@ -45,7 +45,7 @@ const IconButton = defineComponent(
                 {...disabledStateProps.value}
                 className={props.class}
                 theme={props.theme || defaultTheme.value}
-                title={props.label}
+                label={props.title || ''}
                 onClick={handleClick as any}
             />
         );
@@ -57,7 +57,6 @@ const IconButton = defineComponent(
         props: keysOf<IconButtonProps>()(
             'icon',
             'image',
-            'label',
             'color',
             'emphasis',
             'hasBackground',
