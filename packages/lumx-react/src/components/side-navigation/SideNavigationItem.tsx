@@ -136,23 +136,26 @@ export const SideNavigationItem = forwardRef<SideNavigationItemProps, HTMLLIElem
                     />
                 </div>
             ) : (
-                <RawClickable
-                    as={linkAs || (linkProps?.href ? 'a' : 'button')}
-                    {...linkProps}
-                    className={element('link')}
-                    onClick={onClick}
-                    {...ariaProps}
-                >
-                    {icon && <Icon className={element('icon')} icon={icon} size={Size.xs} />}
-                    <span>{label}</span>
-                    {hasContent && (
-                        <Icon
-                            className={element('chevron')}
-                            icon={isOpen ? mdiChevronUp : mdiChevronDown}
-                            size={Size.xs}
-                        />
-                    )}
-                </RawClickable>
+                RawClickable({
+                    as: linkAs || (linkProps?.href ? 'a' : 'button'),
+                    ...linkProps,
+                    className: element('link'),
+                    handleClick: onClick,
+                    ...ariaProps,
+                    children: (
+                        <>
+                            {icon && <Icon className={element('icon')} icon={icon} size={Size.xs} />}
+                            <span>{label}</span>
+                            {hasContent && (
+                                <Icon
+                                    className={element('chevron')}
+                                    icon={isOpen ? mdiChevronUp : mdiChevronDown}
+                                    size={Size.xs}
+                                />
+                            )}
+                        </>
+                    ),
+                })
             )}
 
             {(closeMode === 'hide' || showChildren) && (
