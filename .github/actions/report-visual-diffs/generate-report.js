@@ -276,7 +276,7 @@ function buildCrossFrameworkHeading(crossFramework, { headingLevel = 2 } = {}) {
 
     const summary = hasDiffs
         ? [
-              `${diffs.length} difference(s)`,
+              `${diffs.length} difference(s) (out of ${totalPairs})`,
               unmatchedReact > 0 && `${unmatchedReact} React-only`,
               unmatchedVue > 0 && `${unmatchedVue} Vue-only`,
           ]
@@ -284,18 +284,7 @@ function buildCrossFrameworkHeading(crossFramework, { headingLevel = 2 } = {}) {
               .join(', ')
         : 'No differences';
 
-    const note = hasDiffs
-        ? `Compared ${totalPairs} matching baseline(s). This section is informational only.`
-        : `Compared ${totalPairs} matching screenshot(s). All identical.`;
-
-    return [
-        md.rule,
-        '',
-        md.heading(headingLevel, `Cross-framework (React vs Vue) — ${summary}`),
-        '',
-        md.blockquote(note),
-        '',
-    ];
+    return [md.heading(headingLevel, `@lumx/react vs @lumx/vue — ${summary}`)];
 }
 
 /**
@@ -358,6 +347,7 @@ function buildFullReport(packages, options) {
                 (e) => renderImageEntry(e, [{ label: 'Current', url: url(e, '__baselines__') }]),
                 { collapsed: true },
             ),
+            md.rule,
         );
     }
 
@@ -395,7 +385,7 @@ function buildFullReport(packages, options) {
  */
 function buildSummaryReport(packages, options) {
     const { reportUrl, artifactUrl, crossFramework } = options;
-    const headingOptions = { headingLevel: 3 };
+    const headingOptions = { headingLevel: 4 };
     const lines = buildReportPreamble(packages);
 
     for (const pkg of packages) {
