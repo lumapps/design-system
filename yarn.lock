@@ -2855,7 +2855,7 @@ __metadata:
     "@actions/core": "npm:^3.0.0"
     "@actions/github": "npm:^9.0.0"
     pixelmatch: "npm:^7.0.0"
-    pngjs: "npm:^7.0.0"
+    sharp: "npm:^0.32.6"
   languageName: unknown
   linkType: soft
 
