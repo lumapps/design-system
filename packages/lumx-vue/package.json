@@ -27,10 +27,10 @@
     }
   },
   "sideEffects": false,
-  "version": "4.3.1",
+  "version": "4.4.0",
   "dependencies": {
-    "@lumx/core": "^4.3.1",
-    "@lumx/icons": "^4.3.1",
+    "@lumx/core": "^4.4.0",
+    "@lumx/icons": "^4.4.0",
     "@vueuse/core": "^14.1.0"
   },
   "peerDependencies": {
