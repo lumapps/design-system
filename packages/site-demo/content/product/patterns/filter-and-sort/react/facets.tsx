@@ -25,7 +25,7 @@ export const App = () => {
     const toggleSelect = () => setOpen(!isOpen);
     const [value, setValue] = useState('Green');
 
-    const clearSelected = (event: { stopPropagation(): void }) => {
+    const clearSelected = (event?: { stopPropagation(): void }) => {
         event?.stopPropagation();
         setValue('');
     };

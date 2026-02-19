@@ -18,7 +18,7 @@ export default () => {
     const [isOpen3, setOpen3] = useState(false);
     const [isOpen4, setOpen4] = useState(false);
     const [isOpen5, setOpen5] = useState(false);
-    const stopPropagation = (evt: SyntheticEvent) => evt.stopPropagation();
+    const stopPropagation = (evt?: SyntheticEvent) => evt?.stopPropagation();
     const handleCloseAll = () => {
         setOpen1(false);
         setOpen2(false);

@@ -34,7 +34,7 @@ export function useImageLightbox<P extends Partial<ImageLightboxProps>>(
      * Generates trigger props
      * @param index Provide an index to choose which image to display when the image lightbox opens.
      * */
-    getTriggerProps: (options?: TriggerOptions) => { onClick: React.MouseEventHandler; ref: React.Ref<any> };
+    getTriggerProps: (options?: TriggerOptions) => { onClick: (ev?: React.MouseEvent) => void; ref: React.Ref<any> };
     /** Props to forward to the ImageLightbox */
     imageLightboxProps: ManagedProps & P;
 } {
@@ -131,8 +131,8 @@ export function useImageLightbox<P extends Partial<ImageLightboxProps>>(
                     triggerImageRefs[options.activeImageIndex] = { current: findImage(element) };
                 }
             },
-            onClick(e: React.MouseEvent) {
-                open(e.target as HTMLElement, options);
+            onClick(e?: React.MouseEvent) {
+                open(e?.target as HTMLElement, options);
             },
         }));
     }, []);

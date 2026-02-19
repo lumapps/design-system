@@ -37,7 +37,7 @@ export interface CoreSelectProps extends GenericProps, HasTheme {
     /** Select variant. */
     variant?: SelectVariant;
     /** On clear callback. */
-    onClear?(event: SyntheticEvent, value?: string): void;
+    onClear?(event?: SyntheticEvent, value?: string): void;
     /** On blur callback. */
     onBlur?(): void;
     /** On filter text change callback (with 500ms debounce). */
