@@ -124,18 +124,17 @@ const _InnerPopover = forwardRef<PopoverProps, HTMLDivElement>((props, ref) => {
     } = props;
     const popoverRef = useRef<HTMLDivElement>(null);
 
-    const { styles, attributes, isPositioned, position, setArrowElement, setPopperElement, popperElement } =
-        usePopoverStyle({
-            offset,
-            hasArrow,
-            fitToAnchorWidth,
-            fitWithinViewportHeight,
-            boundaryRef,
-            anchorRef,
-            placement,
-            style,
-            zIndex,
-        });
+    const { styles, isPositioned, position, setArrowElement, setPopperElement, popperElement } = usePopoverStyle({
+        offset,
+        hasArrow,
+        fitToAnchorWidth,
+        fitWithinViewportHeight,
+        boundaryRef,
+        anchorRef,
+        placement,
+        style,
+        zIndex,
+    });
 
     const unmountSentinel = useRestoreFocusOnClose({ focusAnchorOnClose, anchorRef, parentElement }, popperElement);
     const focusZoneElement = focusTrapZoneElement?.current || popoverRef?.current;
@@ -161,11 +160,10 @@ const _InnerPopover = forwardRef<PopoverProps, HTMLDivElement>((props, ref) => {
                         [`theme-${theme}`]: Boolean(theme),
                         [`elevation-${adjustedElevation}`]: Boolean(adjustedElevation),
                         [`position-${position}`]: Boolean(position),
-                        'is-initializing': !styles.popover?.transform,
                     }),
                 )}
                 style={styles.popover}
-                {...attributes.popper}
+                data-popper-placement={position}
             >
                 {unmountSentinel}
                 <ClickAwayProvider callback={closeOnClickAway && onClose} childrenRefs={clickAwayRefs}>
