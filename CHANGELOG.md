@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   `@lumx/react`:
+    -   `Tooltip` & `Popover`: migrate/update positioning lib from popperjs to floating-ui
+
 ## [4.4.0][] - 2026-02-19
 
 ### Added
