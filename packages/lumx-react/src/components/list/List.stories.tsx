@@ -75,10 +75,9 @@ export const KeyboardNavigation = ({
                     </ListItem>,
                 ]}
             </List>
-            <pre>{`
-                When focused:
-                tab/shift+tab to move focus on list item AND outside the list
-            `}</pre>
+            <p>
+                <small>When focused: tab/shift+tab to move focus on list item AND outside the list</small>
+            </p>
         </>
     );
 };
