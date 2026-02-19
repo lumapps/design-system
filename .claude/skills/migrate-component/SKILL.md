@@ -609,11 +609,12 @@ Migration order:
 **Goal:** Extract core tests and update framework-specific test suites.
 
 **IMPORTANT RULES:**
-
--   **NO JSX ELEMENTS or component calls in core tests** - Use plain data only
--   **Tests that need component children must use framework-specific setup** - Don't migrate those to core
--   **Vue tests should mimic React tests** - Include the same structure: core tests import, framework-specific describe block, and `commonTestsSuiteVTL` (Vue) or `commonTestsSuiteRTL` (React)
--   **DO NOT add NOTE comments or explanatory comments in generated files** - Keep code clean without meta-commentary
+- **NO JSX ELEMENTS or component calls in core tests** - Use plain data only
+- **NO interaction/event tests in core** - Core tests should only test rendering, props, and DOM structure
+- **Event handler tests belong in React/Vue** - Test `onClick` interactions in React tests, test `emit('click')` in Vue tests
+- **Tests that need component children must use framework-specific setup** - Don't migrate those to core
+- **Vue tests should mimic React tests** - Include the same structure: core tests import, framework-specific describe block, and `commonTestsSuiteVTL` (Vue) or `commonTestsSuiteRTL` (React)
+- **DO NOT add NOTE comments or explanatory comments in generated files** - Keep code clean without meta-commentary
 
 **IMPORTANT - Check for Existing Core Tests:**
 

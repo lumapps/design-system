@@ -156,13 +156,9 @@ export function setup({
     const AllTypography = {
         render: ({ children, ...args }: any) => (
             <Link {...args}>
-                Link <Icon icon={mdiEarth} /> with icon
+                <Icon icon={mdiPencil} /> Link <Icon icon={mdiEarth} /> with icon <Icon icon={mdiFoodApple} />
             </Link>
         ),
-        args: {
-            rightIcon: mdiPencil,
-            leftIcon: mdiFoodApple,
-        },
         argTypes: {
             typography: { control: false },
         },

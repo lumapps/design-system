@@ -1,35 +1,33 @@
-import React from 'react';
-
-import { Typography } from '@lumx/react';
+import { Icon } from '@lumx/react';
 import { GenericProps } from '@lumx/react/utils/type';
-import { Link as UI, LinkProps as UIProps, CLASSNAME, COMPONENT_NAME } from '@lumx/core/js/components/Link';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
-import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
 import { wrapChildrenIconWithSpaces } from '@lumx/react/utils/react/wrapChildrenIconWithSpaces';
+import { useDisableStateProps } from '@lumx/react/utils/disabled';
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
+import { classNames } from '@lumx/core/js/utils';
+import { Link as UI, LinkProps as UIProps, CLASSNAME, COMPONENT_NAME } from '@lumx/core/js/components/Link';
 
-type HTMLAnchorProps = React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
+const { element } = classNames.bem(CLASSNAME);
 
 /**
  * Defines the props of the component.
  */
-export interface LinkProps extends GenericProps, ReactToJSX<UIProps, 'label'> {
-    /** Link href. */
-    href?: HTMLAnchorProps['href'];
-    /** Custom react component for the link (can be used to inject react router Link). */
-    linkAs?: 'a' | any;
-    /** Link target. */
-    target?: HTMLAnchorProps['target'];
-    /** Typography variant. */
-    typography?: Typography;
+export interface LinkProps extends GenericProps, ReactToJSX<UIProps> {
+    /**
+     * Left icon (SVG path).
+     * @deprecated Instead, simply nest `<Icon />` in the children
+     */
+    leftIcon?: string;
     /** Click handler. */
-    onClick?: (event: React.MouseEvent) => void;
+    onClick?: (event?: React.MouseEvent) => void;
+    /**
+     * Right icon (SVG path).
+     * @deprecated Instead, simply nest `<Icon />` in the children
+     */
+    rightIcon?: string;
+    /** Children */
+    children?: React.ReactNode;
 }
-
-/**
- * Component default props.
- */
-const DEFAULT_PROPS: Partial<LinkProps> = {};
 
 /**
  * Link component.
@@ -39,28 +37,24 @@ const DEFAULT_PROPS: Partial<LinkProps> = {};
  * @return React element.
  */
 export const Link = forwardRef<LinkProps, HTMLAnchorElement | HTMLButtonElement>((props, ref) => {
-    const { isAnyDisabled, disabledStateProps, otherProps } = useDisableStateProps(props);
-    const { children, className, color, colorVariant, leftIcon, rightIcon, typography, linkAs, ...forwardedProps } =
-        otherProps;
-
-    // Wrap children with spaces if they contain icons
-    const label = wrapChildrenIconWithSpaces(children);
+    const { disabledStateProps, otherProps } = useDisableStateProps(props);
+    const { children, leftIcon, rightIcon, linkAs, onClick, ...forwardedProps } = otherProps;
 
     return UI({
         ref,
-        label,
-        className,
-        color,
-        colorVariant,
-        leftIcon,
-        rightIcon,
-        typography,
-        as: linkAs,
-        ...forwardedProps,
         ...disabledStateProps,
-        isDisabled: isAnyDisabled,
+        ...forwardedProps,
+        linkAs,
+        handleClick: onClick,
+        children: wrapChildrenIconWithSpaces(
+            <>
+                {leftIcon && <Icon icon={leftIcon} className={element('left-icon')} />}
+                {children && <span className={element('content')}>{children}</span>}
+                {rightIcon && <Icon icon={rightIcon} className={element('right-icon')} />}
+            </>,
+        ),
     });
 });
+
 Link.displayName = COMPONENT_NAME;
 Link.className = CLASSNAME;
-Link.defaultProps = DEFAULT_PROPS;

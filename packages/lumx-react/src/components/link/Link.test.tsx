@@ -1,114 +1,87 @@
-import React from 'react';
+import { Icon } from '@lumx/react';
+import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
+import { getByClassName, queryAllByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-
-import BaseLinkTests, { setup } from '@lumx/core/js/components/Link/Tests';
-import { LinkProps } from '@lumx/core/js/components/Link';
-import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
-import { Icon } from '@lumx/react';
 import { mdiCheck, mdiPlus } from '@lumx/icons';
-
-import { queryAllByClassName } from '@lumx/react/testing/utils/queries';
-import { Link } from './Link';
+import BaseLinkTests from '@lumx/core/js/components/Link/Tests';
+import { Link, LinkProps } from './Link';
 
 const CLASSNAME = Link.className as string;
 
+const setup = (props: LinkProps = {}) => {
+    render(<Link {...props} />);
+    const link = getByClassName(document.body, CLASSNAME);
+    const rightIcon = queryByClassName(link, `${CLASSNAME}__right-icon`);
+    const leftIcon = queryByClassName(link, `${CLASSNAME}__left-icon`);
+    return { props, link, rightIcon, leftIcon };
+};
+
 describe(`<${Link.displayName}>`, () => {
-    const renderLink = (props: LinkProps, options?: SetupRenderOptions) => {
-        // Map core props to React props (label -> children)
-        const { label, ...restProps } = props;
-        return render(<Link {...(restProps as any)}>{label}</Link>, options);
-    };
-
-    BaseLinkTests({ render: renderLink, screen });
-
-    const setupLink = (props: Partial<LinkProps> = {}, options: SetupRenderOptions = {}) =>
-        setup(props, { ...options, render: renderLink, screen });
+    BaseLinkTests({
+        render: (props: LinkProps) => render(<Link {...props} />),
+        screen,
+    });
 
     describe('React', () => {
-        it('should forward ref to the root element', () => {
-            const ref = React.createRef<HTMLAnchorElement>();
-            render(<Link href="https://example.com" ref={ref} />);
-            expect(ref.current).toBeInstanceOf(HTMLAnchorElement);
+        it('should render link without icons', () => {
+            const name = 'Link';
+            const { rightIcon, leftIcon } = setup({ href: 'https://example.com', children: name });
+
+            expect(rightIcon).not.toBeInTheDocument();
+            expect(leftIcon).not.toBeInTheDocument();
         });
 
-        it('should render as button and forward ref', () => {
-            const ref = React.createRef<HTMLButtonElement>();
-            // eslint-disable-next-line jsx-a11y/anchor-is-valid
-            render(<Link ref={ref}>Link</Link>);
-            expect(ref.current).toBeInstanceOf(HTMLButtonElement);
-        });
-
-        it('should be disabled with isDisabled', async () => {
-            const onClick = vi.fn();
-            const { container } = render(
-                <Link href="/test" isDisabled onClick={onClick}>
-                    Label
-                </Link>,
-            );
-            const link = container.querySelector(`.${CLASSNAME}`);
-
-            expect(link).toHaveAttribute('disabled');
-
-            // Should not trigger onClick.
-            if (link) await userEvent.click(link);
-            expect(onClick).not.toHaveBeenCalled();
-        });
-
-        it('should be disabled link with isDisabled and href', async () => {
-            const onClick = vi.fn();
-            const { container } = render(
-                <Link isDisabled href="https://example.com" onClick={onClick}>
-                    Label
-                </Link>,
-            );
-            const link = container.querySelector(`.${CLASSNAME}`);
-
-            expect(link).toHaveAttribute('aria-disabled', 'true');
-            expect(link).toHaveAttribute('tabindex', '-1');
-
-            // Should not trigger onClick.
-            if (link) await userEvent.click(link);
-            expect(onClick).not.toHaveBeenCalled();
-        });
-
-        it('should be disabled with aria-disabled', async () => {
-            const onClick = vi.fn();
-            const { container } = render(
-                <Link href="/test" aria-disabled onClick={onClick}>
-                    Label
-                </Link>,
-            );
-            const link = container.querySelector(`.${CLASSNAME}`);
-
-            expect(link).toHaveAttribute('aria-disabled', 'true');
-
-            // Should not trigger onClick.
-            if (link) await userEvent.click(link);
-            expect(onClick).not.toHaveBeenCalled();
-        });
-
-        it('should render with icons wrapped with spaces', () => {
-            const { container } = render(
-                <Link href="/test" leftIcon={mdiCheck} rightIcon={mdiPlus}>
-                    Link
-                    <Icon icon={mdiCheck} />
-                    with icons
-                </Link>,
-            );
-            const link = container.querySelector(`.${CLASSNAME}`) as HTMLElement;
+        it('should render with icons', () => {
+            const { link } = setup({
+                leftIcon: mdiCheck,
+                children: ['Link', <Icon key="icon" icon={mdiCheck} />, 'with icons'],
+                rightIcon: mdiPlus,
+            });
             const icons = queryAllByClassName(link, Icon.className as string);
             expect(icons).toHaveLength(3);
 
-            // Icons are all wrapped with spaces
             for (const icon of icons) {
                 expect((icon.previousSibling as any).textContent).toEqual(' ');
                 expect((icon.nextSibling as any).textContent).toEqual(' ');
             }
         });
+
+        it('should not call onClick when disabled button is clicked', async () => {
+            const onClick = vi.fn();
+            const { link } = setup({ children: 'Label', isDisabled: true, onClick });
+            await userEvent.click(link);
+            expect(onClick).not.toHaveBeenCalled();
+        });
+
+        it('should not call onClick when disabled link is clicked', async () => {
+            const onClick = vi.fn();
+            const { link } = setup({ children: 'Label', isDisabled: true, href: 'https://example.com', onClick });
+            await userEvent.click(link);
+            expect(onClick).not.toHaveBeenCalled();
+        });
+
+        it('should not call onClick when aria-disabled button is clicked', async () => {
+            const onClick = vi.fn();
+            const { link } = setup({ children: 'Label', 'aria-disabled': true, onClick });
+            await userEvent.click(link);
+            expect(onClick).not.toHaveBeenCalled();
+        });
+
+        it('should not call onClick when aria-disabled link is clicked', async () => {
+            const onClick = vi.fn();
+            const { link } = setup({
+                children: 'Label',
+                'aria-disabled': true,
+                href: 'https://example.com',
+                onClick,
+            });
+            await userEvent.click(link);
+            expect(onClick).not.toHaveBeenCalled();
+        });
     });
 
-    commonTestsSuiteRTL(setupLink, {
+    commonTestsSuiteRTL(setup, {
         baseClassName: CLASSNAME,
         forwardAttributes: 'link',
         forwardClassName: 'link',

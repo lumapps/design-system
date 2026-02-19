@@ -1,110 +1,65 @@
 import { render, screen } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
-
 import BaseLinkTests, { setup } from '@lumx/core/js/components/Link/Tests';
-import { CLASSNAME, LinkProps } from '@lumx/core/js/components/Link';
+import { CLASSNAME } from '@lumx/core/js/components/Link';
 import { commonTestsSuiteVTL, SetupRenderOptions } from '@lumx/vue/testing';
-
 import { Link } from '.';
 
 describe('<Link />', () => {
-    const renderLink = (props: LinkProps, options?: SetupRenderOptions<LinkProps>) =>
+    const renderLink = ({ children, ...props }: any, options?: SetupRenderOptions<any>) =>
         render(Link, {
-            props,
             ...options,
+            props,
+            slots: children ? { default: children } : undefined,
         });
 
-    BaseLinkTests({ render: renderLink, screen });
+    BaseLinkTests({
+        render: renderLink,
+        screen,
+    });
 
-    const setupLink = (props: Partial<LinkProps> = {}, options: SetupRenderOptions<LinkProps> = {}) =>
+    const setupLink = (props: any = {}, options: SetupRenderOptions<any> = {}) =>
         setup(props, { ...options, render: renderLink, screen });
 
     describe('Vue', () => {
-        it('should emit click event when link is clicked', async () => {
-            const { getByRole, emitted } = render(Link, {
-                props: { href: 'https://example.com' },
-                slots: { default: 'Test link' },
-            });
-            const link = getByRole('link', { name: 'Test link' });
-
+        it('should emit click event', async () => {
+            const { link, wrapper } = setupLink({ children: 'Label' });
             await userEvent.click(link);
-
-            const clickEvents = emitted('click');
-            expect(clickEvents).toHaveLength(1);
-            expect((clickEvents as any)?.[0][0]).toBeInstanceOf(Event);
+            expect(wrapper.emitted('click')).toHaveLength(1);
         });
 
-        it('should emit click event when button is clicked', async () => {
-            const { getByRole, emitted } = render(Link, {
-                props: {},
-                slots: { default: 'Test button' },
-            });
-            const button = getByRole('button', { name: 'Test button' });
-
-            await userEvent.click(button);
-
-            const clickEvents = emitted('click');
-            expect(clickEvents).toHaveLength(1);
+        it('should not emit click when disabled button is clicked', async () => {
+            const { link, wrapper } = setupLink({ children: 'Label', isDisabled: true });
+            await userEvent.click(link);
+            expect(wrapper.emitted('click')).toBeUndefined();
         });
 
-        it('should be disabled with isDisabled', async () => {
-            const { container, emitted } = render(Link, {
-                props: { isDisabled: true },
-                slots: { default: 'Test' },
-            });
-            const link = container.querySelector(`.${CLASSNAME}`);
-
-            expect(link).toHaveAttribute('disabled');
-
-            // Should not trigger click event
-            if (link) await userEvent.click(link);
-            expect(emitted('click')).toBeUndefined();
+        it('should not emit click when disabled link is clicked', async () => {
+            const { link, wrapper } = setupLink({ children: 'Label', isDisabled: true, href: 'https://example.com' });
+            await userEvent.click(link);
+            expect(wrapper.emitted('click')).toBeUndefined();
         });
 
-        it('should be disabled link with isDisabled and href', async () => {
-            const { container, emitted } = render(Link, {
-                props: { isDisabled: true, href: 'https://example.com' },
-                slots: { default: 'Test' },
-            });
-            const link = container.querySelector(`.${CLASSNAME}`);
-
-            expect(link).toHaveAttribute('aria-disabled', 'true');
-            expect(link).toHaveAttribute('tabindex', '-1');
-
-            // Should not trigger click event
-            if (link) await userEvent.click(link);
-            expect(emitted('click')).toBeUndefined();
+        it('should not emit click when aria-disabled button is clicked', async () => {
+            const { link, wrapper } = setupLink({ children: 'Label', 'aria-disabled': true });
+            await userEvent.click(link);
+            expect(wrapper.emitted('click')).toBeUndefined();
         });
 
-        it('should be disabled with aria-disabled', async () => {
-            const { container, emitted } = render(Link, {
-                props: { 'aria-disabled': true },
-                slots: { default: 'Test' },
+        it('should not emit click when aria-disabled link is clicked', async () => {
+            const { link, wrapper } = setupLink({
+                children: 'Label',
+                'aria-disabled': true,
+                href: 'https://example.com',
             });
-            const link = container.querySelector(`.${CLASSNAME}`);
-
-            expect(link).toHaveAttribute('aria-disabled', 'true');
-
-            // Should not trigger click event
-            if (link) await userEvent.click(link);
-            expect(emitted('click')).toBeUndefined();
-        });
-
-        it('should render default slot as label', () => {
-            const { getByText } = render(Link, {
-                slots: {
-                    default: 'Link from slot',
-                },
-            });
-
-            expect(getByText('Link from slot')).toBeInTheDocument();
+            await userEvent.click(link);
+            expect(wrapper.emitted('click')).toBeUndefined();
         });
     });
 
-    // Common tests suite.
     commonTestsSuiteVTL(setupLink, {
         baseClassName: CLASSNAME,
-        forwardClassName: 'link',
         forwardAttributes: 'link',
+        forwardClassName: 'link',
     });
 });
