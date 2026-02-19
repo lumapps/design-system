@@ -1,13 +1,25 @@
-const fs = require('fs');
 const fsPromises = require('fs/promises');
 const path = require('path');
-const { PNG } = require('pngjs');
+const sharp = require('sharp');
 const pixelmatchModule = require('pixelmatch');
 const pixelmatch = pixelmatchModule.default || pixelmatchModule;
 
 const { findFiles, extractRelativePath, normalizeScreenshotPath } = require('./utils');
 
 const DIFF_PIXELS_THRESHOLD = 30;
+
+/** Read a PNG file and return raw RGBA pixel data with dimensions. */
+async function readPng(filePath) {
+    const { data, info } = await sharp(filePath).raw().ensureAlpha().toBuffer({ resolveWithObject: true });
+    return { data, width: info.width, height: info.height };
+}
+
+/** Write raw RGBA pixel data as a PNG file. */
+async function writePng(data, width, height, filePath) {
+    await sharp(data, { raw: { width, height, channels: 4 } })
+        .png()
+        .toFile(filePath);
+}
 
 /**
  * Align two PNG images to the same dimensions by padding the smaller one.
@@ -55,17 +67,16 @@ function alignImages(img1, img2) {
  * @param {string} reactPath - Path to react screenshot PNG
  * @param {string} vuePath - Path to vue screenshot PNG
  * @param {string} diffPath - Path to write the diff PNG
- * @returns {{ diffPixels: number, diffPercent: number, totalPixels: number, hasDiff: boolean }}
+ * @returns {Promise<{ diffPixels: number, diffPercent: number, totalPixels: number, hasDiff: boolean }>}
  */
-function compareImages(reactPath, vuePath, diffPath) {
-    const img1 = PNG.sync.read(fs.readFileSync(reactPath));
-    const img2 = PNG.sync.read(fs.readFileSync(vuePath));
+async function compareImages(reactPath, vuePath, diffPath) {
+    const [img1, img2] = await Promise.all([readPng(reactPath), readPng(vuePath)]);
 
     const [aligned1, aligned2] = alignImages(img1, img2);
     const { width, height } = aligned1;
 
-    const diff = new PNG({ width, height });
-    const diffPixels = pixelmatch(aligned1.data, aligned2.data, diff.data, width, height, {
+    const diffBuf = Buffer.alloc(width * height * 4);
+    const diffPixels = pixelmatch(aligned1.data, aligned2.data, diffBuf, width, height, {
         threshold: 0.1,
     });
 
@@ -74,8 +85,8 @@ function compareImages(reactPath, vuePath, diffPath) {
     const hasDiff = diffPixels > DIFF_PIXELS_THRESHOLD;
 
     if (hasDiff) {
-        fs.mkdirSync(path.dirname(diffPath), { recursive: true });
-        fs.writeFileSync(diffPath, PNG.sync.write(diff));
+        await fsPromises.mkdir(path.dirname(diffPath), { recursive: true });
+        await writePng(diffBuf, width, height, diffPath);
     }
 
     return { diffPixels, diffPercent, totalPixels, hasDiff };
@@ -144,34 +155,47 @@ async function main({ reactDir, vueDir, outputDir }) {
 
     await fsPromises.mkdir(outputDir, { recursive: true });
 
-    const results = [];
-    let diffCount = 0;
+    // Process comparisons with a concurrency pool to limit memory usage.
+    // Maintains up to CONCURRENCY in-flight tasks, starting a new one as soon as any resolves.
+    const CONCURRENCY = 10;
+    const sorted = matchedPaths.sort();
+    const results = new Array(sorted.length);
+    const pending = new Set();
 
-    for (const normalizedPath of matchedPaths.sort()) {
-        const reactFile = reactMap.get(normalizedPath);
-        const vueFile = vueMap.get(normalizedPath);
-        const diffFile = path.join(outputDir, '__diffs__', normalizedPath);
+    for (let i = 0; i < sorted.length; i++) {
+        const task = (async (index) => {
+            const normalizedPath = sorted[index];
+            const reactFile = reactMap.get(normalizedPath);
+            const vueFile = vueMap.get(normalizedPath);
+            const diffFile = path.join(outputDir, '__diffs__', normalizedPath);
 
-        const result = compareImages(reactFile, vueFile, diffFile);
+            const result = await compareImages(reactFile, vueFile, diffFile);
 
-        if (result.hasDiff) {
-            diffCount++;
+            if (result.hasDiff) {
+                // Copy originals for report display
+                const reactDest = path.join(outputDir, '__react__', normalizedPath);
+                const vueDest = path.join(outputDir, '__vue__', normalizedPath);
 
-            // Copy originals for report display
-            const reactDest = path.join(outputDir, '__react__', normalizedPath);
-            const vueDest = path.join(outputDir, '__vue__', normalizedPath);
+                await Promise.all([
+                    fsPromises.mkdir(path.dirname(reactDest), { recursive: true }),
+                    fsPromises.mkdir(path.dirname(vueDest), { recursive: true }),
+                ]);
+                await Promise.all([fsPromises.copyFile(reactFile, reactDest), fsPromises.copyFile(vueFile, vueDest)]);
+            }
 
-            fs.mkdirSync(path.dirname(reactDest), { recursive: true });
-            fs.mkdirSync(path.dirname(vueDest), { recursive: true });
-            fs.copyFileSync(reactFile, reactDest);
-            fs.copyFileSync(vueFile, vueDest);
+            results[index] = { normalizedPath, ...result };
+        })(i).then(() => pending.delete(task));
+
+        pending.add(task);
+
+        if (pending.size >= CONCURRENCY) {
+            await Promise.race(pending);
         }
-
-        results.push({
-            normalizedPath,
-            ...result,
-        });
     }
+
+    await Promise.all(pending);
+
+    const diffCount = results.filter((r) => r.hasDiff).length;
 
     // Write manifest
     const manifest = {
