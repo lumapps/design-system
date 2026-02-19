@@ -25,7 +25,6 @@ export interface AlertDialogProps extends Omit<DialogProps, 'header' | 'footer'>
     title?: string;
     /** Props forwarded to the confirm button */
     confirmProps: ButtonProps & {
-        onClick(): void;
         label: string;
     };
     /**
@@ -33,7 +32,6 @@ export interface AlertDialogProps extends Omit<DialogProps, 'header' | 'footer'>
      * Will not render a cancel button if undefined.
      */
     cancelProps?: ButtonProps & {
-        onClick(): void;
         label: string;
     };
     /**

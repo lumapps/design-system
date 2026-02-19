@@ -89,11 +89,11 @@ export const Notification = forwardRef<NotificationProps, HTMLDivElement>((props
     const isVisible = useTransitionVisibility(rootRef, !!isOpen, NOTIFICATION_TRANSITION_DURATION);
     const hasAction: boolean = Boolean(onActionClick) && Boolean(actionLabel);
 
-    const handleCallback = (evt: React.MouseEvent) => {
+    const handleCallback = (evt?: React.MouseEvent) => {
         if (isFunction(onActionClick)) {
             onActionClick();
         }
-        evt.stopPropagation();
+        evt?.stopPropagation();
     };
 
     if (!type || !isVisible) {

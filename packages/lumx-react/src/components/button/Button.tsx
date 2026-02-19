@@ -21,7 +21,7 @@ export { CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS };
 
 export interface ButtonProps extends GenericProps, ReactToJSX<UIProps> {
     /** callback for clicking on the button */
-    onClick?: (event: React.MouseEvent) => void;
+    onClick?: (event?: React.MouseEvent) => void;
 }
 
 /**
