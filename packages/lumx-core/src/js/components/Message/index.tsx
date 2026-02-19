@@ -93,7 +93,7 @@ export const Message = (props: MessageProps) => {
                 IconButton({
                     className: element('close-button'),
                     icon: mdiClose,
-                    onClick,
+                    handleClick: onClick,
                     label: closeButtonLabel,
                     emphasis: Emphasis.low,
                 })}

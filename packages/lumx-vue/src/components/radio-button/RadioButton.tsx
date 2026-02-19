@@ -62,7 +62,7 @@ const RadioButton = defineComponent(
                     theme={props.theme || defaultTheme.value}
                     inputId={inputId.value}
                     isDisabled={isAnyDisabled.value}
-                    onChange={handleChange}
+                    handleChange={handleChange}
                     label={props.label}
                     inputProps={{
                         ...props.inputProps,

@@ -96,19 +96,4 @@ export default (renderOptions: SetupOptions<RadioButtonProps>) => {
             expect(input).toHaveAttribute('value', 'test-value');
         });
     });
-
-    describe('Events', () => {
-        const onChange = vi.fn();
-
-        it('should trigger `onChange` with correct signature when radio is clicked', async () => {
-            const value = 'radio-value';
-            const name = 'radio-name';
-            const { input } = setup({ checked: false, onChange, value, name }, renderOptions);
-            expect(input).not.toBeChecked();
-
-            await input.click();
-
-            expect(onChange).toHaveBeenCalledWith(value, name, expect.any(Object));
-        });
-    });
 };

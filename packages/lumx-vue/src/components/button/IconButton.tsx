@@ -46,7 +46,8 @@ const IconButton = defineComponent(
                 className={props.class}
                 theme={props.theme || defaultTheme.value}
                 title={props.label}
-                onClick={handleClick as any}
+                label={props.label}
+                handleClick={handleClick as any}
             />
         );
     },
@@ -57,8 +58,8 @@ const IconButton = defineComponent(
         props: keysOf<IconButtonProps>()(
             'icon',
             'image',
-            'label',
             'color',
+            'label',
             'emphasis',
             'hasBackground',
             'href',

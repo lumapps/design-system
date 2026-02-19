@@ -47,7 +47,7 @@ export interface ThumbnailProps
 export const Thumbnail = forwardRef<ThumbnailProps>((props, ref) => {
     const { isAnyDisabled, otherProps, disabledStateProps } = useDisableStateProps(props);
     const defaultTheme = useTheme() || Theme.light;
-    const { badge, focusPoint, image, imgRef: propImgRef, ...forwardedProps } = otherProps;
+    const { badge, focusPoint, image, imgRef: propImgRef, onClick, onKeyPress, ...forwardedProps } = otherProps;
     const [imgElement, setImgElement] = useState<HTMLImageElement>();
 
     // Image loading state.
@@ -66,6 +66,8 @@ export const Thumbnail = forwardRef<ThumbnailProps>((props, ref) => {
         focusPointStyle,
         loadingState,
         imgRef: useMergeRefs(setImgElement, propImgRef),
+        handleClick: onClick,
+        handleKeyPress: onKeyPress,
         image,
         badge:
             badge &&

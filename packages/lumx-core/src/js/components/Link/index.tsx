@@ -41,7 +41,7 @@ export interface LinkProps extends HasTheme, HasClassName, HasAriaDisabled, HasD
     /** Typography variant. */
     typography?: string;
     /** Click handler. */
-    onClick?: (event: any) => void;
+    handleClick?: (event: any) => void;
     /** Reference to the root element. */
     ref?: CommonRef;
 }
@@ -83,7 +83,7 @@ export const Link = (props: LinkProps) => {
         theme,
         href,
         target,
-        onClick,
+        handleClick,
         ...forwardedProps
     } = props;
 
@@ -127,7 +127,7 @@ export const Link = (props: LinkProps) => {
     const elementProps: any = {
         ref,
         className: combinedClassName,
-        onClick: isDisabled ? undefined : onClick,
+        onClick: isDisabled ? undefined : handleClick,
         ...forwardedProps,
         ...disabledProps,
     };

@@ -34,6 +34,20 @@ describe(`<${Checkbox.displayName}>`, () => {
             expect(inputRef.current).toBeInstanceOf(HTMLInputElement);
         });
 
+        it('should trigger `onChange` when checkbox is clicked', async () => {
+            const onChange = vi.fn();
+
+            const value = 'value';
+            const name = 'name';
+            render(<Checkbox id="test" checked={false} value={value} name={name} onChange={onChange} />);
+            const input = screen.getByRole('checkbox');
+            expect(input).not.toBeChecked();
+
+            await input.click();
+
+            expect(onChange).toHaveBeenCalledWith(true, value, name, expect.any(Object));
+        });
+
         it('should be disabled with isDisabled', async () => {
             const onChange = vi.fn();
             const { container } = render(<Checkbox id="test" isDisabled onChange={onChange} />);

@@ -57,7 +57,7 @@ const Switch = defineComponent(
                     theme={props.theme || defaultTheme.value}
                     inputId={inputId.value}
                     isDisabled={isAnyDisabled.value}
-                    onChange={handleChange}
+                    handleChange={handleChange}
                     label={(props.label || slots.default?.()) as JSXElement}
                     inputProps={{
                         ...props.inputProps,

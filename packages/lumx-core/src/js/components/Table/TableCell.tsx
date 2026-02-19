@@ -31,7 +31,7 @@ export interface TableCellProps extends HasClassName {
     /** Variant. */
     variant?: TableCellVariant;
     /** On header cell click callback. */
-    onHeaderClick?(): void;
+    handleClick?(): void;
     /** Children */
     children?: JSXElement;
     /** reference to the root element */
@@ -68,7 +68,7 @@ export const TableCell = (props: TableCellProps) => {
         className,
         icon,
         isSortable,
-        onHeaderClick,
+        handleClick,
         ref,
         sortOrder,
         variant = DEFAULT_PROPS.variant,
@@ -76,8 +76,8 @@ export const TableCell = (props: TableCellProps) => {
     } = props;
 
     // Use button if clickable
-    const Wrapper = onHeaderClick ? 'button' : 'div';
-    const wrapperProps = Wrapper === 'button' ? ({ type: 'button', onClick: onHeaderClick } as const) : undefined;
+    const Wrapper = handleClick ? 'button' : 'div';
+    const wrapperProps = Wrapper === 'button' ? ({ type: 'button', onClick: handleClick } as const) : undefined;
 
     // ARIA sort
     let ariaSort: 'ascending' | 'descending' | 'none' | undefined;

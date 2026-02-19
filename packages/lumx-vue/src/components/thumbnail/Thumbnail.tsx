@@ -1,4 +1,4 @@
-import { computed, defineComponent, ref, toRef, useAttrs, getCurrentInstance } from 'vue';
+import { computed, defineComponent, ref, toRef, useAttrs } from 'vue';
 
 import {
     Thumbnail as ThumbnailUI,
@@ -14,6 +14,7 @@ import { JSXElement } from '@lumx/core/js/types';
 
 import { useTheme } from '../../composables/useTheme';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
+import { useHasEventListener } from '../../composables/useHasEventListener';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { useImageLoad } from './useImageLoad';
 import { useFocusPointStyle } from './useFocusPointStyle';
@@ -48,10 +49,9 @@ const Thumbnail = defineComponent(
         const attrs = useAttrs();
         const defaultTheme = useTheme();
         const imgElement = ref<HTMLImageElement>();
-        const instance = getCurrentInstance();
 
-        const hasClickListener = instance?.vnode.props?.onClick !== undefined;
-        const hasKeyPressListener = instance?.vnode.props?.onKeyPress !== undefined;
+        const hasClickListener = useHasEventListener('onClick');
+        const hasKeyPressListener = useHasEventListener('onKeyPress');
 
         const { isAnyDisabled, disabledStateProps, otherProps } = useDisableStateProps(
             computed(() => ({ ...props, ...attrs })),
@@ -108,8 +108,8 @@ const Thumbnail = defineComponent(
                     loadingState={loadingState.value}
                     imgRef={imgElement}
                     image={props.image}
-                    onClick={hasClickListener ? handleClick : undefined}
-                    onKeyPress={hasKeyPressListener ? handleKeyPress : undefined}
+                    handleClick={hasClickListener ? handleClick : undefined}
+                    handleKeyPress={hasKeyPressListener ? handleKeyPress : undefined}
                     fallback={fallback as JSXElement}
                     badge={
                         badge &&

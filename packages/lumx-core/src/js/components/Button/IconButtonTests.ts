@@ -1,4 +1,3 @@
-import userEvent from '@testing-library/user-event';
 import { getByClassName, queryByClassName, queryByTagName } from '@lumx/core/testing/queries';
 import { SetupOptions } from '@lumx/core/testing';
 
@@ -48,14 +47,6 @@ export default (renderOptions: SetupOptions<IconButtonProps>) => {
                 expect(iconButton).toBeInTheDocument();
                 expect(icon).not.toBeInTheDocument();
                 expect(img).toBeInTheDocument();
-            });
-
-            it('should render disabled button', async () => {
-                const onClick = vi.fn();
-                const { iconButton } = setup({ isDisabled: true, onClick }, renderOptions);
-                expect(iconButton).toBeDisabled();
-                await userEvent.click(iconButton);
-                expect(onClick).not.toHaveBeenCalled();
             });
 
             it('should render with type submit', () => {

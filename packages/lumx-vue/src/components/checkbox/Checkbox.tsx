@@ -79,7 +79,7 @@ const Checkbox = defineComponent(
                     inputId={inputId.value}
                     inputRef={localInputRef}
                     isDisabled={isAnyDisabled.value}
-                    onChange={handleChange}
+                    handleChange={handleChange}
                     label={props.label}
                     inputProps={{
                         ...props.inputProps,

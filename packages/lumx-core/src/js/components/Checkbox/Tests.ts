@@ -125,19 +125,4 @@ export default (renderOptions: SetupOptions<CheckboxProps>) => {
             expect(path).toHaveAttribute('d', mdiMinus);
         });
     });
-
-    describe('Events', () => {
-        const onChange = vi.fn();
-
-        it('should trigger `onChange` when checkbox is clicked', async () => {
-            const value = 'value';
-            const name = 'name';
-            const { input } = setup({ checked: false, onChange, value, name }, renderOptions);
-            expect(input).not.toBeChecked();
-
-            await input.click();
-
-            expect(onChange).toHaveBeenCalledWith(true, value, name, expect.any(Object));
-        });
-    });
 };

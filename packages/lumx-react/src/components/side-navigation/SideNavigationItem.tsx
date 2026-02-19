@@ -9,7 +9,7 @@ import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
 import { useId } from '@lumx/react/hooks/useId';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
-import { RawClickable } from '@lumx/react/utils/react/RawClickable';
+import { RawClickable } from '@lumx/core/js/components/RawClickable';
 
 /**
  * Defines the props of the component.
@@ -112,15 +112,18 @@ export const SideNavigationItem = forwardRef<SideNavigationItemProps, HTMLLIElem
         >
             {shouldSplitActions ? (
                 <div className={element('wrapper')}>
-                    <RawClickable
-                        as={linkAs || (linkProps?.href ? 'a' : 'button')}
-                        {...(linkProps as any)}
-                        className={element('link')}
-                        onClick={onClick}
-                    >
-                        {icon && <Icon className={element('icon')} icon={icon} size={Size.xs} />}
-                        <span>{label}</span>
-                    </RawClickable>
+                    {RawClickable({
+                        as: linkAs || (linkProps?.href ? 'a' : 'button'),
+                        ...(linkProps as any),
+                        className: element('link'),
+                        handleClick: onClick,
+                        children: (
+                            <>
+                                {icon && <Icon className={element('icon')} icon={icon} size={Size.xs} />}
+                                <span>{label}</span>
+                            </>
+                        ),
+                    })}
 
                     <IconButton
                         {...toggleButtonProps}

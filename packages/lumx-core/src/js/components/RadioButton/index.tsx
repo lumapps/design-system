@@ -33,7 +33,7 @@ export interface RadioButtonProps extends HasTheme, HasClassName, HasAriaDisable
     /** Native input id. */
     inputId: string;
     /** On change callback. */
-    onChange?(value?: string, name?: string, event?: any): void;
+    handleChange?(value?: string, name?: string, event?: any): void;
     /** reference to the root element */
     ref?: CommonRef;
 }
@@ -71,7 +71,7 @@ export const RadioButton = (props: RadioButtonProps) => {
         label,
         name,
         ref,
-        onChange,
+        handleChange,
         theme,
         value,
         inputProps = {},
@@ -80,9 +80,9 @@ export const RadioButton = (props: RadioButtonProps) => {
         ...forwardedProps
     } = props;
 
-    const handleChange = (event: any) => {
-        if (onChange) {
-            onChange(value, name, event);
+    const handleOnChange = (event: any) => {
+        if (handleChange) {
+            handleChange(value, name, event);
         }
     };
 
@@ -109,7 +109,7 @@ export const RadioButton = (props: RadioButtonProps) => {
                     name={name}
                     value={value}
                     checked={isChecked}
-                    onChange={handleChange}
+                    onChange={handleOnChange}
                     aria-describedby={helper ? `${inputId}-helper` : undefined}
                     {...(inputProps?.readOnly ? { readOnly: inputProps.readOnly } : {})}
                     {...inputProps}

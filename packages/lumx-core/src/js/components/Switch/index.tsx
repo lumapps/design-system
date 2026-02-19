@@ -33,7 +33,7 @@ export interface SwitchProps extends HasTheme, HasClassName, HasAriaDisabled, Ha
     /** Native input id. */
     inputId: string;
     /** On change callback. */
-    onChange?(isChecked: boolean, value?: string, name?: string, event?: any): void;
+    handleChange?(isChecked: boolean, value?: string, name?: string, event?: any): void;
     /** Position of the switch relative to the label. */
     position?: 'left' | 'right';
     /** reference to the root element */
@@ -75,7 +75,7 @@ export const Switch = (props: SwitchProps) => {
         label,
         name,
         ref,
-        onChange,
+        handleChange,
         theme,
         value,
         inputProps = {},
@@ -85,9 +85,9 @@ export const Switch = (props: SwitchProps) => {
         ...forwardedProps
     } = props;
 
-    const handleChange = (event: any) => {
-        if (onChange) {
-            onChange(!isChecked, value, name, event);
+    const handleOnChange = (event: any) => {
+        if (handleChange) {
+            handleChange(!isChecked, value, name, event);
         }
     };
 
@@ -116,7 +116,7 @@ export const Switch = (props: SwitchProps) => {
                     name={name}
                     value={value}
                     checked={Boolean(isChecked)}
-                    onChange={handleChange}
+                    onChange={handleOnChange}
                     aria-describedby={helper ? `${inputId}-helper` : undefined}
                     aria-checked={Boolean(isChecked)}
                     {...(inputProps?.readOnly ? { readOnly: inputProps.readOnly } : {})}

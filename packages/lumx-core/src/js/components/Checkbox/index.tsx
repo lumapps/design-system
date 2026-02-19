@@ -46,7 +46,7 @@ export interface CheckboxProps
     /** Native input id. */
     inputId: string;
     /** On change callback. */
-    onChange?(isChecked: boolean, value?: string, name?: string, event?: any): void;
+    handleChange?(isChecked: boolean, value?: string, name?: string, event?: any): void;
     /** reference to the root element */
     ref?: CommonRef;
 }
@@ -84,7 +84,7 @@ export const Checkbox = (props: CheckboxProps) => {
         label,
         name,
         ref,
-        onChange,
+        handleChange,
         theme,
         value,
         inputProps = {},
@@ -95,9 +95,9 @@ export const Checkbox = (props: CheckboxProps) => {
 
     const intermediateState = isChecked === INTERMEDIATE_STATE;
 
-    const handleChange = (event: any) => {
-        if (onChange) {
-            onChange(!isChecked, value, name, event);
+    const handleOnChange = (event: any) => {
+        if (handleChange) {
+            handleChange(!isChecked, value, name, event);
         }
     };
 
@@ -125,7 +125,7 @@ export const Checkbox = (props: CheckboxProps) => {
                     name={name}
                     value={value}
                     checked={isChecked as boolean}
-                    onChange={handleChange}
+                    onChange={handleOnChange}
                     aria-describedby={helper ? `${inputId}-helper` : undefined}
                     aria-checked={intermediateState ? 'mixed' : Boolean(isChecked)}
                     {...(inputProps?.readOnly ? { readOnly: inputProps.readOnly } : {})}

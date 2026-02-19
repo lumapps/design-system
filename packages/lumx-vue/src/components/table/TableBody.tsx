@@ -1,5 +1,5 @@
 import { defineComponent, useAttrs } from 'vue';
-import { TableBody as TableBodyUI, type TableBodyProps as UIProps } from '@lumx/core/js/components/Table/TableBody';
+import { TableBody as UI, type TableBodyProps as UIProps } from '@lumx/core/js/components/Table/TableBody';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { JSXElement } from '@lumx/core/js/types';
 
@@ -10,9 +10,7 @@ const TableBody = defineComponent(
         const attrs = useAttrs();
 
         return () => {
-            return (
-                <TableBodyUI {...props} {...attrs} className={props.class} children={slots.default?.() as JSXElement} />
-            );
+            return <UI {...props} {...attrs} className={props.class} children={slots.default?.() as JSXElement} />;
         };
     },
     {

@@ -61,7 +61,7 @@ export const RadioButton = forwardRef<RadioButtonProps, HTMLDivElement>((props, 
         isChecked,
         label,
         name,
-        onChange,
+        handleChange: onChange,
         theme,
         value,
         inputProps: {

@@ -43,6 +43,19 @@ describe(`<${Switch.displayName}>`, () => {
             expect(inputRef.current).toBeInstanceOf(HTMLInputElement);
         });
 
+        it('should trigger `onChange` when switch is clicked', async () => {
+            const onChange = vi.fn();
+            const value = 'value';
+            const name = 'name';
+            render(<Switch id="test" name={name} value={value} onChange={onChange} />);
+            const input = screen.getByRole('switch');
+            expect(input).not.toBeChecked();
+
+            await input.click();
+
+            expect(onChange).toHaveBeenCalledWith(true, value, name, expect.any(Object));
+        });
+
         it('should be disabled with isDisabled', async () => {
             const onChange = vi.fn();
             const { container } = render(<Switch id="test" isDisabled onChange={onChange} />);

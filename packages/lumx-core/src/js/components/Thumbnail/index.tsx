@@ -47,9 +47,9 @@ export interface ThumbnailProps extends HasTheme, HasClassName {
     /** Ref of an existing placeholder image to display while loading. */
     loadingPlaceholderImageRef?: React.RefObject<HTMLImageElement>;
     /** On click callback. */
-    onClick?: (event: any) => void;
+    handleClick?: (event: any) => void;
     /** On key press callback. */
-    onKeyPress?: (event: any) => void;
+    handleKeyPress?: (event: any) => void;
     /** Variant of the component. */
     variant?: ThumbnailVariant;
     /** Props to pass to the link wrapping the thumbnail. */
@@ -115,6 +115,8 @@ export const Thumbnail = (props: ThumbnailProps) => {
         variant,
         linkProps,
         linkAs,
+        handleClick,
+        handleKeyPress,
         ...forwardedProps
     } = props;
     const isLoading = isLoadingProp || loadingState === 'isLoading';
@@ -132,7 +134,7 @@ export const Thumbnail = (props: ThumbnailProps) => {
     }
 
     const isLink = Boolean(linkProps?.href || linkAs);
-    const isClickable = !isAnyDisabled && Boolean(isLink || !!forwardedProps.onClick);
+    const isClickable = !isAnyDisabled && Boolean(isLink || !!handleClick || !!handleKeyPress);
 
     const wrapperProps = { ...forwardedProps };
     if (isClickable) {
@@ -217,7 +219,14 @@ export const Thumbnail = (props: ThumbnailProps) => {
 
     /** Render `RawClickable` as a function since it is a core component which needs to be treated as such */
     if (isClickable) {
-        return RawClickable({ ref, ...wrapperProps, className: wrapperClassName, children: innerImage as JSXElement });
+        return RawClickable({
+            ref,
+            ...wrapperProps,
+            className: wrapperClassName,
+            children: innerImage as JSXElement,
+            handleClick,
+            handleKeyPress,
+        });
     }
 
     return (

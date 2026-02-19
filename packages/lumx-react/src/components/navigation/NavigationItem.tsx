@@ -6,7 +6,7 @@ import { ComponentRef, HasClassName, HasPolymorphicAs, HasRequiredLinkHref, HasT
 import { forwardRefPolymorphic } from '@lumx/react/utils/react/forwardRefPolymorphic';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { useOverflowTooltipLabel } from '@lumx/react/hooks/useOverflowTooltipLabel';
-import { RawClickable } from '@lumx/react/utils/react/RawClickable';
+import { RawClickable } from '@lumx/core/js/components/RawClickable';
 
 import { ITEM_CLASSNAME as CLASSNAME, ITEM_COMPONENT_NAME as COMPONENT_NAME } from './constants';
 
@@ -32,7 +32,7 @@ export type NavigationItemProps<E extends ElementType = 'a'> = HasPolymorphicAs<
 
 export const NavigationItem = Object.assign(
     forwardRefPolymorphic(<E extends ElementType = 'a'>(props: NavigationItemProps<E>, ref: ComponentRef<E>) => {
-        const { className, icon, label, isCurrentPage, as: Element = 'a', ...forwardedProps } = props;
+        const { className, icon, label, isCurrentPage, as: Element = 'a', onClick, ...forwardedProps } = props;
         const theme = useTheme();
         const { tooltipLabel, labelRef } = useOverflowTooltipLabel(label);
 
@@ -46,21 +46,27 @@ export const NavigationItem = Object.assign(
                 )}
             >
                 <Tooltip label={tooltipLabel} placement={Placement.TOP}>
-                    <RawClickable
-                        as={Element}
-                        className={element('link', {
+                    {RawClickable({
+                        as: Element,
+                        className: element('link', {
                             'is-selected': isCurrentPage,
-                        })}
-                        ref={ref as React.Ref<any>}
-                        aria-current={isCurrentPage ? 'page' : undefined}
-                        {...forwardedProps}
-                    >
-                        {icon ? <Icon className={element('icon')} icon={icon} size={Size.xs} theme={theme} /> : null}
+                        }),
+                        ref,
+                        'aria-current': isCurrentPage ? 'page' : undefined,
+                        ...forwardedProps,
+                        handleClick: onClick,
+                        children: (
+                            <>
+                                {icon ? (
+                                    <Icon className={element('icon')} icon={icon} size={Size.xs} theme={theme} />
+                                ) : null}
 
-                        <Text as="span" truncate className={element('label')} ref={labelRef}>
-                            {label}
-                        </Text>
-                    </RawClickable>
+                                <Text as="span" truncate className={element('label')} ref={labelRef}>
+                                    {label}
+                                </Text>
+                            </>
+                        ),
+                    })}
                 </Tooltip>
             </li>
         );

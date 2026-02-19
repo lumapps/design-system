@@ -5,6 +5,7 @@ import { setup } from '@lumx/core/js/components/Table/TableCellStories';
 import { mdiAccount } from '@lumx/icons';
 import TableCellDefaultVue from './Stories/TableCellDefault.vue';
 import TableCellHeaderVue from './Stories/TableCellHeader.vue';
+import TableCellClickableAndSortableVue from './Stories/TableCellClickableAndSortable.vue';
 
 const { meta, ...stories } = setup({
     component: TableCell,
@@ -31,3 +32,8 @@ export default {
 export const Default = { ...stories.Default };
 export const Header = { ...stories.Header };
 export const AllHeaderStates = { ...stories.AllHeaderStates };
+
+/** Interactive example demonstrating clickable and sortable header cells */
+export const ClickableAndSortable = {
+    render: withRender({ TableCellClickableAndSortableVue }),
+};
