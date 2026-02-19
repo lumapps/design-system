@@ -7,7 +7,7 @@ const md = {
     linkedImage: (url, { width } = {}) => `<a href="${url}">${md.image(url, { width })}</a>`,
     blockquote: (text) => `> ${text}`,
     warning: (text) => `> [!WARNING]\n> ${text}`,
-    rule: '---',
+    rule: '\n---',
     details: (summary, ...contentLines) => [
         `<details>`,
         `<summary>${summary}</summary>`,
