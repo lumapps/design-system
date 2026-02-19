@@ -27,6 +27,13 @@ describe('<ButtonRoot />', () => {
         expect(button).toHaveAttribute('data-custom', 'true');
     });
 
+    it('should call onClick when clicked', async () => {
+        const onClick = vi.fn();
+        const { button } = setupComponent({ onClick });
+        await userEvent.click(button);
+        expect(onClick).toHaveBeenCalledTimes(1);
+    });
+
     describe('Disabled state from context', () => {
         it('should render disabled button when context is disabled', async () => {
             const onClick = vi.fn();

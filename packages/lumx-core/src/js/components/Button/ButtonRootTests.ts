@@ -1,4 +1,3 @@
-import userEvent from '@testing-library/user-event';
 import { ColorPalette, Emphasis, Size, Theme } from '@lumx/core/js/constants';
 
 import { SetupOptions } from '@lumx/core/testing';
@@ -56,13 +55,6 @@ export default (renderOptions: SetupOptions<ButtonRootProps>) => {
             const { button } = setup({ href: 'https://example.com' }, renderOptions);
             expect(button.tagName).toBe('A');
             expect(button).toHaveAttribute('href', 'https://example.com');
-        });
-
-        it('should call onClick when clicked', async () => {
-            const onClick = vi.fn();
-            const { button } = setup({ onClick }, renderOptions);
-            await userEvent.click(button);
-            expect(onClick).toHaveBeenCalledTimes(1);
         });
 
         it('should apply the correct class for isSelected', () => {

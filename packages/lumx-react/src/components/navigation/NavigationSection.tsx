@@ -60,7 +60,7 @@ export const NavigationSection = forwardRef<NavigationSectionProps, HTMLLIElemen
                 'aria-expanded': isOpen,
                 className: itemElement('link'),
                 ref: buttonRef,
-                onClick: (event) => {
+                handleClick: (event) => {
                     setIsOpen(!isOpen);
                     event.stopPropagation();
                 },

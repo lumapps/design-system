@@ -47,7 +47,7 @@ const IconButton = defineComponent(
                 theme={props.theme || defaultTheme.value}
                 title={props.label}
                 label={props.label}
-                onClick={handleClick as any}
+                handleClick={handleClick as any}
             />
         );
     },

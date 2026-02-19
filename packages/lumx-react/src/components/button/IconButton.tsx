@@ -36,6 +36,7 @@ export const IconButton = forwardRef<IconButtonProps, HTMLButtonElement>((props,
     const { tooltipProps, hideTooltip, label, ...forwardedProps } = props;
 
     const { isAnyDisabled, disabledStateProps, otherProps } = useDisableStateProps(forwardedProps);
+    const { onClick, ...restOfOtherProps } = otherProps;
 
     return (
         <Tooltip label={hideTooltip ? '' : label} {...tooltipProps}>
@@ -43,7 +44,8 @@ export const IconButton = forwardRef<IconButtonProps, HTMLButtonElement>((props,
                 ref,
                 theme: defaultTheme,
                 ...disabledStateProps,
-                ...otherProps,
+                ...restOfOtherProps,
+                handleClick: onClick,
                 'aria-disabled': isAnyDisabled,
                 label,
             })}

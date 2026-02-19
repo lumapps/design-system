@@ -108,8 +108,8 @@ const Thumbnail = defineComponent(
                     loadingState={loadingState.value}
                     imgRef={imgElement}
                     image={props.image}
-                    onClick={hasClickListener ? handleClick : undefined}
-                    onKeyPress={hasKeyPressListener ? handleKeyPress : undefined}
+                    handleClick={hasClickListener ? handleClick : undefined}
+                    handleKeyPress={hasKeyPressListener ? handleKeyPress : undefined}
                     fallback={fallback as JSXElement}
                     badge={
                         badge &&

@@ -99,7 +99,7 @@ const Button = defineComponent(
                     {...disabledStateProps.value}
                     className={props.class}
                     theme={props.theme || defaultTheme.value}
-                    onClick={handleClick as any}
+                    handleClick={handleClick as any}
                     children={children as JSXElement}
                 />
             );

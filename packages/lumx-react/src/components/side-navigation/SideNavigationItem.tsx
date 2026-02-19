@@ -116,7 +116,7 @@ export const SideNavigationItem = forwardRef<SideNavigationItemProps, HTMLLIElem
                         as: linkAs || (linkProps?.href ? 'a' : 'button'),
                         ...(linkProps as any),
                         className: element('link'),
-                        onClick,
+                        handleClick: onClick,
                         children: (
                             <>
                                 {icon && <Icon className={element('icon')} icon={icon} size={Size.xs} />}

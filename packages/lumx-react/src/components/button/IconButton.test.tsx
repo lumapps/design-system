@@ -45,6 +45,14 @@ describe(`<${IconButton.displayName}>`, () => {
             const tooltip = screen.queryByRole('tooltip');
             expect(tooltip).not.toBeInTheDocument();
         });
+
+        it('should render disabled button', async () => {
+            const onClick = vi.fn();
+            const { iconButton } = setupComponent({ isDisabled: true, onClick });
+            expect(iconButton).toBeDisabled();
+            await userEvent.click(iconButton);
+            expect(onClick).not.toHaveBeenCalled();
+        });
     });
 
     describe('Disabled state from context', () => {

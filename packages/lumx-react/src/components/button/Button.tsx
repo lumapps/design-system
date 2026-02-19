@@ -34,14 +34,16 @@ export interface ButtonProps extends GenericProps, ReactToJSX<UIProps> {
 export const Button = forwardRef<ButtonProps, HTMLButtonElement | HTMLAnchorElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
     const { isAnyDisabled, disabledStateProps, otherProps } = useDisableStateProps(props);
+    const { onClick, ...restOfOtherProps } = otherProps;
     const { leftIcon, rightIcon, children } = props;
 
     return UI({
         ref,
         theme: defaultTheme,
         ...disabledStateProps,
-        ...otherProps,
+        ...restOfOtherProps,
         'aria-disabled': isAnyDisabled,
+        handleClick: onClick,
         children: (
             <>
                 {leftIcon && !isEmpty(leftIcon) && (

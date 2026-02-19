@@ -12,7 +12,8 @@ export type ClickableElement = 'a' | 'button' | ElementType;
 
 export interface BaseClickableProps extends HasDisabled, HasAriaDisabled {
     children?: JSXElement;
-    onClick?: (event?: any) => void;
+    handleClick?: (event?: any) => void;
+    handleKeyPress?: (event?: any) => void;
     ref?: CommonRef;
 }
 
@@ -27,7 +28,8 @@ export type RawClickableProps<E extends ClickableElement> = HasPolymorphicAs<E> 
 export const RawClickable = <E extends ClickableElement>(props: RawClickableProps<E>) => {
     const {
         children,
-        onClick,
+        handleClick,
+        handleKeyPress,
         disabled,
         isDisabled = disabled,
         'aria-disabled': ariaDisabled,
@@ -50,13 +52,14 @@ export const RawClickable = <E extends ClickableElement>(props: RawClickableProp
             aria-disabled={isAnyDisabled || undefined}
             {...forwardedProps}
             {...clickableProps}
+            onKeyPress={handleKeyPress}
             onClick={(event: any) => {
                 if (isAnyDisabled) {
                     event.stopPropagation();
                     event.preventDefault();
                     return;
                 }
-                onClick?.(event);
+                handleClick?.(event);
             }}
         >
             {children}
