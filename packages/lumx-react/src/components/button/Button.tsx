@@ -22,6 +22,8 @@ export { CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS };
 export interface ButtonProps extends GenericProps, ReactToJSX<UIProps> {
     /** callback for clicking on the button */
     onClick?: (event?: React.MouseEvent) => void;
+    /** callback for pressing a key on the button */
+    onKeyPress?: (event?: React.KeyboardEvent) => void;
 }
 
 /**
@@ -34,7 +36,7 @@ export interface ButtonProps extends GenericProps, ReactToJSX<UIProps> {
 export const Button = forwardRef<ButtonProps, HTMLButtonElement | HTMLAnchorElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
     const { isAnyDisabled, disabledStateProps, otherProps } = useDisableStateProps(props);
-    const { onClick, ...restOfOtherProps } = otherProps;
+    const { onClick, onKeyPress, ...restOfOtherProps } = otherProps;
     const { leftIcon, rightIcon, children } = props;
 
     return UI({
@@ -44,6 +46,7 @@ export const Button = forwardRef<ButtonProps, HTMLButtonElement | HTMLAnchorElem
         ...restOfOtherProps,
         'aria-disabled': isAnyDisabled,
         handleClick: onClick,
+        handleKeyPress: onKeyPress,
         children: (
             <>
                 {leftIcon && !isEmpty(leftIcon) && (

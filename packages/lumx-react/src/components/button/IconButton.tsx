@@ -22,6 +22,8 @@ export interface IconButtonProps extends GenericProps, ReactToJSX<UIProps, 'titl
     hideTooltip?: boolean;
     /** callback for clicking on the button */
     onClick?: (event?: React.MouseEvent) => void;
+    /** callback for pressing a key on the button */
+    onKeyPress?: (event?: React.KeyboardEvent) => void;
 }
 
 /**
@@ -36,7 +38,7 @@ export const IconButton = forwardRef<IconButtonProps, HTMLButtonElement>((props,
     const { tooltipProps, hideTooltip, label, ...forwardedProps } = props;
 
     const { isAnyDisabled, disabledStateProps, otherProps } = useDisableStateProps(forwardedProps);
-    const { onClick, ...restOfOtherProps } = otherProps;
+    const { onClick, onKeyPress, ...restOfOtherProps } = otherProps;
 
     return (
         <Tooltip label={hideTooltip ? '' : label} {...tooltipProps}>
@@ -46,6 +48,7 @@ export const IconButton = forwardRef<IconButtonProps, HTMLButtonElement>((props,
                 ...disabledStateProps,
                 ...restOfOtherProps,
                 handleClick: onClick,
+                handleKeyPress: onKeyPress,
                 'aria-disabled': isAnyDisabled,
                 label,
             })}

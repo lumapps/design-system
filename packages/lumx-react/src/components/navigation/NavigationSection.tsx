@@ -64,6 +64,7 @@ export const NavigationSection = forwardRef<NavigationSectionProps, HTMLLIElemen
                     setIsOpen(!isOpen);
                     event.stopPropagation();
                 },
+                handleKeyPress: forwardedProps.onKeyPress,
                 children: (
                     <>
                         {icon ? <Icon className={itemElement('icon')} icon={icon} size={Size.xs} /> : null}

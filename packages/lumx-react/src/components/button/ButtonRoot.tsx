@@ -17,6 +17,8 @@ export { BUTTON_WRAPPER_CLASSNAME, BUTTON_CLASSNAME };
 export interface ButtonRootProps extends ReactToJSX<UIProps> {
     /** callback for clicking on the button */
     onClick?: (event?: React.MouseEvent) => void;
+    /** callback for pressing a key on the button */
+    onKeyPress?: (event?: React.KeyboardEvent) => void;
 }
 
 /**
@@ -28,12 +30,13 @@ export interface ButtonRootProps extends ReactToJSX<UIProps> {
  */
 export const ButtonRoot = forwardRef<ButtonRootProps, HTMLButtonElement | HTMLAnchorElement>((props, ref) => {
     const { isAnyDisabled, disabledStateProps, otherProps } = useDisableStateProps(props);
-    const { onClick, ...restOfOtherProps } = otherProps;
+    const { onClick, onKeyPress, ...restOfOtherProps } = otherProps;
 
     return UI({
         ...restOfOtherProps,
         ...disabledStateProps,
         handleClick: onClick,
+        handleKeyPress: onKeyPress,
         ref,
         'aria-disabled': isAnyDisabled,
     });
