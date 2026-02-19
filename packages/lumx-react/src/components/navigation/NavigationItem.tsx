@@ -32,7 +32,16 @@ export type NavigationItemProps<E extends ElementType = 'a'> = HasPolymorphicAs<
 
 export const NavigationItem = Object.assign(
     forwardRefPolymorphic(<E extends ElementType = 'a'>(props: NavigationItemProps<E>, ref: ComponentRef<E>) => {
-        const { className, icon, label, isCurrentPage, as: Element = 'a', onClick, ...forwardedProps } = props;
+        const {
+            className,
+            icon,
+            label,
+            isCurrentPage,
+            as: Element = 'a',
+            onClick,
+            onKeyPress,
+            ...forwardedProps
+        } = props;
         const theme = useTheme();
         const { tooltipLabel, labelRef } = useOverflowTooltipLabel(label);
 
@@ -55,6 +64,7 @@ export const NavigationItem = Object.assign(
                         'aria-current': isCurrentPage ? 'page' : undefined,
                         ...forwardedProps,
                         handleClick: onClick,
+                        handleKeyPress: onKeyPress,
                         children: (
                             <>
                                 {icon ? (

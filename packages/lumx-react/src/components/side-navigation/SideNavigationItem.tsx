@@ -117,6 +117,7 @@ export const SideNavigationItem = forwardRef<SideNavigationItemProps, HTMLLIElem
                         ...(linkProps as any),
                         className: element('link'),
                         handleClick: onClick,
+                        handleKeyPress: linkProps?.onKeyPress,
                         children: (
                             <>
                                 {icon && <Icon className={element('icon')} icon={icon} size={Size.xs} />}
@@ -141,6 +142,7 @@ export const SideNavigationItem = forwardRef<SideNavigationItemProps, HTMLLIElem
                     ...linkProps,
                     className: element('link'),
                     handleClick: onClick,
+                    handleKeyPress: linkProps?.onKeyPress,
                     ...ariaProps,
                     children: (
                         <>
