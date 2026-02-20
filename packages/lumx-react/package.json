@@ -6,11 +6,10 @@
         "url": "https://github.com/lumapps/design-system/issues"
     },
     "dependencies": {
+        "@floating-ui/react-dom": "^2.1.7",
         "@lumx/core": "^4.4.0",
         "@lumx/icons": "^4.4.0",
-        "@popperjs/core": "^2.5.4",
-        "body-scroll-lock": "^3.1.5",
-        "react-popper": "^2.2.4"
+        "body-scroll-lock": "^3.1.5"
     },
     "devDependencies": {
         "@babel/core": "^7.26.10",

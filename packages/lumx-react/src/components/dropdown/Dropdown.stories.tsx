@@ -1,5 +1,5 @@
 import range from 'lodash/range';
-import { useRef, useState } from 'react';
+import { useRef, useState, useCallback } from 'react';
 
 import { Button, Dropdown, List, ListItem } from '@lumx/react';
 
@@ -8,9 +8,9 @@ export default { title: 'LumX components/dropdown/Dropdown' };
 export const InfiniteScroll = () => {
     const buttonRef = useRef(null);
     const [items, setItems] = useState(range(10));
-    const onInfiniteScroll = () => {
-        setItems([...items, ...range(items.length, items.length + 10)]);
-    };
+    const onInfiniteScroll = useCallback(() => {
+        setItems((prevItems) => [...prevItems, ...range(prevItems.length, prevItems.length + 10)]);
+    }, []);
 
     return (
         <>

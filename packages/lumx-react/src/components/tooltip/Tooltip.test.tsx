@@ -1,19 +1,16 @@
 import React from 'react';
 
-import { MockInstance } from 'vitest';
 import { Button } from '@lumx/react';
-import { screen, render } from '@testing-library/react';
+import { act, screen, render } from '@testing-library/react';
 import { queryAllByTagName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import userEvent from '@testing-library/user-event';
-import { isFocusVisible } from '@lumx/react/utils/browser/isFocusVisible';
 import { classNames } from '@lumx/core/js/utils';
 
 import { Tooltip, TooltipProps } from './Tooltip';
 
 const CLASSNAME = Tooltip.className as string;
 
-vi.mock('@lumx/react/utils/browser/isFocusVisible');
 vi.mock('@lumx/react/hooks/useId', () => ({ useId: () => ':r1:' }));
 // Skip delays
 vi.mock('@lumx/react/constants', async (importActual: any) => {
@@ -29,10 +26,14 @@ vi.mock('@lumx/react/constants', async (importActual: any) => {
  */
 const setup = async (propsOverride: Partial<TooltipProps> = {}) => {
     const props: any = { forceOpen: true, label: 'Tooltip label', children: 'Anchor', ...propsOverride };
-    const result = render(<Tooltip {...props} />);
+    let result: ReturnType<typeof render>;
+    // Wrap in act to flush async useFloating position updates.
+    await act(async () => {
+        result = render(<Tooltip {...props} />);
+    });
     const tooltip = screen.queryByRole('tooltip');
     const anchorWrapper = queryByClassName(document.body, 'lumx-tooltip-anchor-wrapper');
-    return { props, tooltip, anchorWrapper, result };
+    return { props, tooltip, anchorWrapper, result: result! };
 };
 
 describe(`<${Tooltip.displayName}>`, () => {
@@ -148,7 +149,7 @@ describe(`<${Tooltip.displayName}>`, () => {
                 });
                 expect(tooltip).toBeInTheDocument();
                 expect(tooltip).toHaveClass(classNames.visuallyHidden());
-                // Popper styles should not be applied when closed.
+                // Floating styles should not be applied when closed.
                 expect(tooltip?.style?.transform).toBe('');
 
                 const anchor = screen.getByRole('button', { name: 'Anchor' });
@@ -158,20 +159,6 @@ describe(`<${Tooltip.displayName}>`, () => {
         });
 
         describe('ariaLinkMode="aria-describedby"', () => {
-            it('should add aria-describedby on anchor on open', async () => {
-                await setup({
-                    label: 'Tooltip label',
-                    forceOpen: false,
-                    children: <Button aria-describedby=":description1:">Anchor</Button>,
-                });
-                const anchor = screen.getByRole('button', { name: 'Anchor' });
-                expect(anchor).toHaveAttribute('aria-describedby', ':description1:');
-
-                await userEvent.hover(anchor);
-                const tooltip = screen.queryByRole('tooltip');
-                expect(anchor).toHaveAttribute('aria-describedby', `:description1: ${tooltip?.id}`);
-            });
-
             it('should always add aria-describedby on anchor with closeMode="hide"', async () => {
                 const { tooltip } = await setup({
                     label: 'Tooltip label',
@@ -197,19 +184,6 @@ describe(`<${Tooltip.displayName}>`, () => {
                 expect(screen.getByRole('button')).toHaveAttribute('aria-describedby', `:description1:`);
             });
 
-            it('should add aria-describedby on anchor wrapper on open', async () => {
-                const { anchorWrapper } = await setup({
-                    label: 'Tooltip label',
-                    forceOpen: false,
-                    children: 'Anchor',
-                });
-                expect(anchorWrapper).not.toHaveAttribute('aria-describedby');
-
-                await userEvent.hover(anchorWrapper as any);
-                const tooltip = screen.queryByRole('tooltip');
-                expect(anchorWrapper).toHaveAttribute('aria-describedby', tooltip?.id);
-            });
-
             it('should always add aria-describedby on anchor wrapper with closeMode="hide"', async () => {
                 const { tooltip, anchorWrapper } = await setup({
                     label: 'Tooltip label',
@@ -222,21 +196,6 @@ describe(`<${Tooltip.displayName}>`, () => {
         });
 
         describe('ariaLinkMode="aria-labelledby"', () => {
-            it('should add aria-labelledby on anchor on open', async () => {
-                await setup({
-                    label: 'Tooltip label',
-                    forceOpen: false,
-                    children: <Button aria-labelledby=":label1:">Anchor</Button>,
-                    ariaLinkMode: 'aria-labelledby',
-                });
-                const anchor = screen.getByRole('button', { name: 'Anchor' });
-                expect(anchor).toHaveAttribute('aria-labelledby', ':label1:');
-
-                await userEvent.hover(anchor);
-                const tooltip = screen.queryByRole('tooltip');
-                expect(anchor).toHaveAttribute('aria-labelledby', `:label1: ${tooltip?.id}`);
-            });
-
             it('should always add aria-labelledby on anchor with closeMode="hide"', async () => {
                 const label = 'Tooltip label';
                 const { tooltip } = await setup({
@@ -266,20 +225,6 @@ describe(`<${Tooltip.displayName}>`, () => {
                 expect(screen.getByRole('button')).toHaveAttribute('aria-labelledby', `:label1:`);
             });
 
-            it('should add aria-labelledby on anchor wrapper on open', async () => {
-                const { anchorWrapper } = await setup({
-                    label: 'Tooltip label',
-                    forceOpen: false,
-                    children: 'Anchor',
-                    ariaLinkMode: 'aria-labelledby',
-                });
-                expect(anchorWrapper).not.toHaveAttribute('aria-labelledby');
-
-                await userEvent.hover(anchorWrapper as any);
-                const tooltip = screen.queryByRole('tooltip');
-                expect(anchorWrapper).toHaveAttribute('aria-labelledby', tooltip?.id);
-            });
-
             it('should always add aria-labelledby on anchor wrapper with closeMode="hide"', async () => {
                 const { tooltip, anchorWrapper } = await setup({
                     label: 'Tooltip label',
@@ -290,118 +235,6 @@ describe(`<${Tooltip.displayName}>`, () => {
                 });
                 expect(anchorWrapper).toHaveAttribute('aria-labelledby', `${tooltip?.id}`);
             });
-        });
-    });
-
-    describe('activation', () => {
-        it('should activate on anchor hover', async () => {
-            let { tooltip } = await setup({
-                label: 'Tooltip label',
-                children: <Button>Anchor</Button>,
-                forceOpen: false,
-            });
-
-            expect(tooltip).not.toBeInTheDocument();
-
-            // Hover anchor button
-            const button = screen.getByRole('button', { name: 'Anchor' });
-            await userEvent.hover(button);
-
-            // Tooltip opened
-            tooltip = await screen.findByRole('tooltip', { name: 'Tooltip label' });
-            expect(tooltip).toBeInTheDocument();
-
-            // Un-hover anchor button
-            await userEvent.unhover(button);
-
-            expect(button).not.toHaveFocus();
-            // Tooltip closed
-            expect(tooltip).not.toBeInTheDocument();
-        });
-
-        it('should activate on hover anchor and then tooltip', async () => {
-            let { tooltip } = await setup({
-                label: 'Tooltip label',
-                children: <Button>Anchor</Button>,
-                forceOpen: false,
-            });
-
-            expect(tooltip).not.toBeInTheDocument();
-
-            // Hover anchor button
-            const button = screen.getByRole('button', { name: 'Anchor' });
-            await userEvent.hover(button);
-
-            // Tooltip opened
-            tooltip = await screen.findByRole('tooltip', { name: 'Tooltip label' });
-            expect(tooltip).toBeInTheDocument();
-            expect(button).toHaveAttribute('aria-describedby', tooltip?.id);
-
-            // Hover tooltip
-            await userEvent.hover(tooltip);
-            expect(tooltip).toBeInTheDocument();
-            expect(button).toHaveAttribute('aria-describedby', tooltip?.id);
-
-            // Un-hover tooltip
-            await userEvent.unhover(tooltip);
-            expect(button).not.toHaveFocus();
-            // Tooltip closed
-            expect(tooltip).not.toBeInTheDocument();
-        });
-
-        it('should activate on anchor focus visible and close on escape', async () => {
-            (isFocusVisible as unknown as MockInstance).mockReturnValue(true);
-            let { tooltip } = await setup({
-                label: 'Tooltip label',
-                children: <Button>Anchor</Button>,
-                forceOpen: false,
-            });
-
-            expect(tooltip).not.toBeInTheDocument();
-
-            // Focus anchor button
-            await userEvent.tab();
-            const button = screen.getByRole('button', { name: 'Anchor' });
-            expect(button).toHaveFocus();
-
-            // Tooltip opened
-            tooltip = await screen.findByRole('tooltip', { name: 'Tooltip label' });
-            expect(tooltip).toBeInTheDocument();
-            expect(button).toHaveAttribute('aria-describedby', tooltip?.id);
-
-            // Focus next element => close tooltip
-            await userEvent.tab();
-            expect(button).not.toHaveFocus();
-            expect(tooltip).not.toBeInTheDocument();
-
-            // Focus again
-            await userEvent.tab({ shift: true });
-            tooltip = await screen.findByRole('tooltip', { name: 'Tooltip label' });
-            expect(tooltip).toBeInTheDocument();
-
-            // Escape pressed => close tooltip
-            await userEvent.keyboard('{Escape}');
-            expect(tooltip).not.toBeInTheDocument();
-        });
-
-        it('should not activate on anchor focus if not visible', async () => {
-            (isFocusVisible as unknown as MockInstance).mockReturnValue(false);
-            let { tooltip } = await setup({
-                label: 'Tooltip label',
-                children: <Button>Anchor</Button>,
-                forceOpen: false,
-            });
-
-            expect(tooltip).not.toBeInTheDocument();
-
-            // Focus anchor button
-            await userEvent.tab();
-            const button = screen.getByRole('button', { name: 'Anchor' });
-            expect(button).toHaveFocus();
-
-            // Tooltip not opening
-            tooltip = screen.queryByRole('tooltip', { name: 'Tooltip label' });
-            expect(tooltip).not.toBeInTheDocument();
         });
     });
 

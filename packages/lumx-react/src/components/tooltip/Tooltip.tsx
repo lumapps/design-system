@@ -1,5 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { ReactNode, useState } from 'react';
+import { ReactNode, useState } from 'react';
+
+import { useFloating, offset, autoUpdate, type Placement as FloatingPlacement } from '@floating-ui/react-dom';
 
 import { DOCUMENT } from '@lumx/react/constants';
 import { GenericProps, HasCloseMode } from '@lumx/react/utils/type';
@@ -9,7 +11,6 @@ import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { Placement } from '@lumx/react/components/popover';
 import { TooltipContextProvider } from '@lumx/react/components/tooltip/context';
 import { useId } from '@lumx/react/hooks/useId';
-import { usePopper } from '@lumx/react/hooks/usePopper';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { ARIA_LINK_MODES, TOOLTIP_ZINDEX } from '@lumx/react/components/tooltip/constants';
@@ -93,17 +94,14 @@ export const Tooltip = forwardRef<TooltipProps, HTMLDivElement>((props, ref) => 
 
     const [popperElement, setPopperElement] = useState<null | HTMLElement>(null);
     const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
-    const { styles, attributes, update } = usePopper(anchorElement, popperElement, {
-        placement,
-        modifiers: [
-            {
-                name: 'offset',
-                options: { offset: [0, ARROW_SIZE] },
-            },
-        ],
+    const { floatingStyles, placement: resolvedPlacement } = useFloating({
+        placement: placement as FloatingPlacement,
+        whileElementsMounted: autoUpdate,
+        middleware: [offset(ARROW_SIZE)],
+        elements: { reference: anchorElement, floating: popperElement },
     });
 
-    const position = attributes?.popper?.['data-popper-placement'] ?? placement;
+    const position = resolvedPlacement ?? placement;
     const { isOpen: isActivated, onPopperMount } = useTooltipOpen(delay, anchorElement);
     const isOpen = (isActivated || forceOpen) && !!label;
     const isMounted = !!label && (isOpen || closeMode === 'hide');
@@ -116,11 +114,6 @@ export const Tooltip = forwardRef<TooltipProps, HTMLDivElement>((props, ref) => 
         label,
         ariaLinkMode: ariaLinkMode as any,
     });
-
-    // Update on open
-    React.useEffect(() => {
-        if (isOpen || popperElement) update?.();
-    }, [isOpen, update, popperElement]);
 
     const labelLines = label ? label.split('\n') : [];
 
@@ -140,12 +133,11 @@ export const Tooltip = forwardRef<TooltipProps, HTMLDivElement>((props, ref) => 
                             className,
                             block({
                                 [`position-${position}`]: Boolean(position),
-                                'is-initializing': !styles.popper?.transform,
                             }),
                             isHidden && classNames.visuallyHidden(),
                         )}
-                        style={{ ...(isHidden ? undefined : styles.popper), zIndex }}
-                        {...attributes.popper}
+                        style={{ ...(isHidden ? undefined : floatingStyles), zIndex }}
+                        data-popper-placement={position}
                     >
                         <div className={element('arrow')} />
                         <div className={element('inner')}>
