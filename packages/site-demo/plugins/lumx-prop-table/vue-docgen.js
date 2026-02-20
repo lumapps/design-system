@@ -155,8 +155,7 @@ function extractEmits(sourceFile) {
 
 /**
  * Extract slots from a Vue component.
- * Detects usage of `slots.default` in the component source.
- * For now, only the `default` slot is supported.
+ * Detects usage of `slots.<name>` patterns in the component source.
  *
  * @param {SourceFile} sourceFile - The Vue component source file
  * @returns {Array<{name: string}>}
@@ -164,9 +163,14 @@ function extractEmits(sourceFile) {
 function extractSlots(sourceFile) {
     const slots = [];
     const text = sourceFile.getFullText();
+    const seen = new Set();
 
-    if (text.includes('slots.default')) {
-        slots.push({ name: 'default' });
+    for (const match of text.matchAll(/\bslots\.(\w+)\b/g)) {
+        const name = match[1];
+        if (!seen.has(name)) {
+            seen.add(name);
+            slots.push({ name });
+        }
     }
 
     return slots;
