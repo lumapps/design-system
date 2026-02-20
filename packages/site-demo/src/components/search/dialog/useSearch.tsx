@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useLocation } from '@gatsbyjs/reach-router';
 import filter from 'lodash/fp/filter';
 import * as Comlink from 'comlink';
-import { useFramework } from '@lumx/demo/components/layout/FrameworkContext';
 import type { SearchDocument, SearchWorkerApi } from './search-worker';
 
 const worker =
@@ -13,12 +12,12 @@ const worker =
  * Implement search
  * - Lazy loads the search worker
  * - Handles search with loading state on query change.
+ * - Pushes results that don't match the current framework to the end.
  */
-export function useSearch() {
+export function useSearch(framework?: string) {
     const [query, setQuery] = useState<string>('');
     const [results, setResults] = useState<SearchDocument[] | undefined>([]);
     const { pathname } = useLocation();
-    const { framework } = useFramework();
 
     // On search:
     useEffect(() => {
@@ -26,16 +25,27 @@ export function useSearch() {
             // Unset results (loading state)
             setResults(undefined);
             worker
-                .search(query, framework)
+                .search(query)
                 // Remove current page from results
                 .then(filter((result) => result.slug !== pathname))
+                // Push results that don't match the current framework to the end
+                .then((docs) =>
+                    framework
+                        ? [...docs].sort((a, b) => {
+                              const aMatches = !a.frameworks || a.frameworks.includes(framework);
+                              const bMatches = !b.frameworks || b.frameworks.includes(framework);
+                              if (aMatches === bMatches) return 0;
+                              return aMatches ? -1 : 1;
+                          })
+                        : docs,
+                )
                 // Set results
                 .then(setResults);
         } else {
             // No result
             setResults([]);
         }
-    }, [pathname, query, framework]);
+    }, [framework, pathname, query]);
 
     return { query, setQuery, results };
 }

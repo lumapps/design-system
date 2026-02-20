@@ -2,10 +2,22 @@
 import { useEffect, useRef } from 'react';
 import { Link, navigate } from 'gatsby';
 
-import { Dialog, DialogProps, IconButton, List, ListItem, Progress, TextField } from '@lumx/react';
+import {
+    Dialog,
+    DialogProps,
+    Flag,
+    FlexBox,
+    IconButton,
+    List,
+    ListItem,
+    ProgressCircular,
+    TextField,
+} from '@lumx/react';
 import { mdiClose, mdiMagnify } from '@lumx/icons';
 
 import { useSearch } from './useSearch';
+import { useFramework } from '../../layout/FrameworkContext';
+
 import './SearchDialog.scss';
 
 type SearchDialogProps = Pick<Required<DialogProps>, 'isOpen' | 'onClose' | 'parentElement' | 'onVisibilityChange'>;
@@ -13,7 +25,9 @@ type SearchDialogProps = Pick<Required<DialogProps>, 'isOpen' | 'onClose' | 'par
 export const SearchDialog: React.FC<SearchDialogProps> = (props) => {
     const { isOpen, onClose, parentElement, onVisibilityChange } = props;
     const inputRef = useRef<HTMLElement>(null);
-    const { query, setQuery, results } = useSearch();
+    const { framework } = useFramework();
+    const otherFramework = framework === 'react' ? 'vue' : 'react';
+    const { query, setQuery, results } = useSearch(framework);
 
     // TODO: replace this with a true combobox pattern (taking inspiration from https://webpack.js.org).
     const { activeItemIndex, setActiveItemIndex } = List.useKeyboardListNavigation(
@@ -63,7 +77,7 @@ export const SearchDialog: React.FC<SearchDialogProps> = (props) => {
             </header>
 
             {!results ? (
-                <Progress />
+                <ProgressCircular />
             ) : (
                 <List className="search-results">
                     {results.map((result, index) => (
@@ -74,10 +88,15 @@ export const SearchDialog: React.FC<SearchDialogProps> = (props) => {
                             linkProps={{ href: '#', to: result.slug } as any}
                             isSelected={index === activeItemIndex}
                         >
-                            <p className="search-result__path">
-                                {result.parentTitlePath?.map((parent) => <span key={parent}>{parent}</span>)}
-                                <span dangerouslySetInnerHTML={{ __html: result.title }} />
-                            </p>
+                            <FlexBox orientation="horizontal" gap="regular" hAlign="center">
+                                <p className="search-result__path">
+                                    {result.parentTitlePath?.map((parent) => <span key={parent}>{parent}</span>)}
+                                    <span dangerouslySetInnerHTML={{ __html: result.title }} />
+                                </p>
+                                {result.frameworks && !result.frameworks.includes(framework) && (
+                                    <Flag color="yellow" label={`${otherFramework} only`} />
+                                )}
+                            </FlexBox>
                             {result.content && (
                                 <p
                                     className="search-result__content"
