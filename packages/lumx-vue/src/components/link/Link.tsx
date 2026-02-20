@@ -1,25 +1,19 @@
 import { computed, defineComponent, useAttrs, useSlots } from 'vue';
 
-import {
-    Link as LinkUI,
-    type LinkProps as UIProps,
-    CLASSNAME,
-    COMPONENT_NAME,
-    DEFAULT_PROPS,
-} from '@lumx/core/js/components/Link';
+import { Link as LinkUI, type LinkProps as UIProps, CLASSNAME } from '@lumx/core/js/components/Link';
 
-import { useTheme } from '../../composables/useTheme';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 import { JSXElement } from '@lumx/core/js/types';
+import { classNames } from '@lumx/core/js/utils';
 
-export type LinkProps = VueToJSXProps<UIProps, 'label'>;
+export type LinkProps = VueToJSXProps<UIProps>;
 
 export const emitSchema = {
-    click: (event: Event) => event instanceof Event,
+    click: (event: MouseEvent) => event instanceof MouseEvent,
 };
 
-export { CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS };
+const { element } = classNames.bem(CLASSNAME);
 
 /**
  * Link component.
@@ -29,44 +23,30 @@ export { CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS };
  */
 const Link = defineComponent(
     (props: LinkProps, { emit }) => {
-        const attrs = useAttrs();
         const slots = useSlots();
-        const defaultTheme = useTheme();
-        const { class: className, ...restOfProps } = props;
+        const attrs = useAttrs();
 
         const { isAnyDisabled, disabledStateProps, otherProps } = useDisableStateProps(
-            computed(() => ({ ...restOfProps, ...attrs })),
+            computed(() => ({ ...props, ...attrs })),
         );
 
-        const handleClick = (event: any) => {
+        const handleClick = (event: MouseEvent) => {
             if (isAnyDisabled.value) {
                 return;
             }
 
-            // IMPORTANT: Prevent double event emission when using JSX syntax.
-            // Vue's JSX transform treats props starting with 'on' (e.g., onClick) as both:
-            // 1. A prop passed to the component
-            // 2. An automatic event listener for matching emitted events
-            // Without stopImmediatePropagation, the 'click' event would be emitted twice:
-            // - Once when the core component calls the onClick prop
-            // - Again when Vue's event system catches the emitted 'click' event
-            event?.stopImmediatePropagation?.();
+            event.stopImmediatePropagation();
             emit('click', event);
         };
 
         return () => {
-            const slotContent = slots.default?.();
-            const labelContent = slotContent || (otherProps.value as any).label;
-
             return (
                 <LinkUI
                     {...otherProps.value}
                     {...disabledStateProps.value}
-                    className={className}
-                    theme={props.theme || defaultTheme.value}
-                    isDisabled={isAnyDisabled.value}
-                    handleClick={handleClick}
-                    label={labelContent as JSXElement}
+                    className={props.class}
+                    handleClick={handleClick as any}
+                    children={(<span className={element('content')}>{slots.default?.()}</span>) as JSXElement}
                 />
             );
         };
@@ -74,20 +54,16 @@ const Link = defineComponent(
     {
         name: 'LumxLink',
         inheritAttrs: false,
-        // Redefine properties so that they come in as `props` on the `defineComponent` function
         props: keysOf<LinkProps>()(
-            'as',
-            'class',
             'color',
             'colorVariant',
-            'disabled',
             'href',
             'isDisabled',
-            'leftIcon',
-            'rightIcon',
+            'disabled',
+            'linkAs',
             'target',
-            'theme',
             'typography',
+            'class',
             'aria-disabled',
         ),
         emits: emitSchema,
