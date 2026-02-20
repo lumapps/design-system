@@ -11,15 +11,10 @@ import { Tooltip, TooltipProps } from './Tooltip';
 
 const CLASSNAME = Tooltip.className as string;
 
+vi.mock('@lumx/react/utils/browser/isPopoverSupported', () => ({
+    isPopoverSupported: vi.fn(() => false),
+}));
 vi.mock('@lumx/react/hooks/useId', () => ({ useId: () => ':r1:' }));
-// Skip delays
-vi.mock('@lumx/react/constants', async (importActual: any) => {
-    const actual = (await importActual()) as Record<string, any>;
-    return {
-        ...actual,
-        TOOLTIP_HOVER_DELAY: { open: 0, close: 0 },
-    };
-});
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.

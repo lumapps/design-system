@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { ReactNode, useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 
 import { useFloating, offset, autoUpdate, type Placement as FloatingPlacement } from '@floating-ui/react-dom';
 
@@ -14,6 +14,7 @@ import { useId } from '@lumx/react/hooks/useId';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { ARIA_LINK_MODES, TOOLTIP_ZINDEX } from '@lumx/react/components/tooltip/constants';
+import { isPopoverSupported } from '@lumx/react/utils/browser/isPopoverSupported';
 import { Portal } from '@lumx/react/utils';
 import { useInjectTooltipRef } from './useInjectTooltipRef';
 import { useTooltipOpen } from './useTooltipOpen';
@@ -37,6 +38,11 @@ export interface TooltipProps extends GenericProps, HasCloseMode {
     placement?: TooltipPlacement;
     /** Choose how the tooltip text should link to the anchor */
     ariaLinkMode?: (typeof ARIA_LINK_MODES)[number];
+    /**
+     * z-index positioning
+     * @deprecated Never really needed. Ignored on browsers supporting the HTML popover API
+     */
+    zIndex?: number;
 }
 
 /**
@@ -115,28 +121,50 @@ export const Tooltip = forwardRef<TooltipProps, HTMLDivElement>((props, ref) => 
         ariaLinkMode: ariaLinkMode as any,
     });
 
+    // Update popover visibility on open/close.
+    React.useEffect(() => {
+        if (!popperElement?.popover) return;
+        try {
+            if (isOpen) popperElement.showPopover();
+            else popperElement.hidePopover();
+        } catch {
+            /* already open/closed */
+        }
+    }, [isOpen, popperElement]);
+
     const labelLines = label ? label.split('\n') : [];
 
     const tooltipRef = useMergeRefs(ref, setPopperElement, onPopperMount);
+
+    let popover: React.HTMLAttributes<any>['popover'];
+    let Wrapper = Portal;
+
+    if (isPopoverSupported()) {
+        // Use native HTML popover API
+        popover = forceOpen ? 'manual' : 'hint';
+        // No need for Portal (originally used to escape potential parent hidden/cliped overflow)
+        Wrapper = React.Fragment;
+    }
 
     return (
         <>
             <TooltipContextProvider>{wrappedChildren}</TooltipContextProvider>
             {isMounted && (
-                <Portal>
+                <Wrapper>
                     <div
                         ref={tooltipRef}
                         {...forwardedProps}
-                        id={id}
                         role="tooltip"
+                        popover={popover}
+                        id={id}
                         className={classNames.join(
                             className,
                             block({
                                 [`position-${position}`]: Boolean(position),
                             }),
-                            isHidden && classNames.visuallyHidden(),
+                            !popover && isHidden && classNames.visuallyHidden(),
                         )}
-                        style={{ ...(isHidden ? undefined : floatingStyles), zIndex }}
+                        style={{ ...(isHidden ? undefined : floatingStyles), ...(!popover && { zIndex }) }}
                         data-popper-placement={position}
                     >
                         <div className={element('arrow')} />
@@ -146,7 +174,7 @@ export const Tooltip = forwardRef<TooltipProps, HTMLDivElement>((props, ref) => 
                             ))}
                         </div>
                     </div>
-                </Portal>
+                </Wrapper>
             )}
         </>
     );

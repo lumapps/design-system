@@ -8,6 +8,11 @@
 .#{$lumx-base-prefix}-tooltip {
     $self: &;
 
+    &[popover] {
+        margin: 0;
+        border: none;
+    }
+
     position: absolute;
     top: 0;
     left: 0;
@@ -16,6 +21,7 @@
     background-color: lumx-color-variant("dark", "N");
     border-radius: var(--lumx-border-radius);
     will-change: transform;
+    overflow: visible;
 
     &--is-initializing {
         opacity: 0;
