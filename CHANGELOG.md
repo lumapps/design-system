@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/react`:
     -   `Tooltip` & `Popover`: migrate/update positioning lib from popperjs to floating-ui
+    -   `Toolip`: render with native HTML popover without react portal when browser supports it
 
 ## [4.4.0][] - 2026-02-19
 
