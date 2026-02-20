@@ -196,7 +196,7 @@ export type ComboboxProps<O = any> = {
     /**
      * Status of the combobox
      */
-    status?: BaseLoadingStatus;
+    status: BaseLoadingStatus;
     /**
      * Callback when the input changes.
      */

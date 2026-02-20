@@ -12,6 +12,7 @@ export * from './components/badge';
 export * from './components/button';
 export * from './components/checkbox';
 export * from './components/chip';
+export * from './components/combobox';
 export * from './components/comment-block';
 export * from './components/date-picker';
 export * from './components/dialog';
