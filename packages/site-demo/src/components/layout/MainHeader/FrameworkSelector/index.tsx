@@ -1,4 +1,5 @@
 import React from 'react';
+import upperFirst from 'lodash/upperFirst';
 import { Button } from '@lumx/react';
 import { mdiMenuDown, mdiReact, mdiVuejs } from '@lumx/icons';
 import { useIsServerSide } from '@lumx/demo/utils/hooks/useIsServerSide';
@@ -21,7 +22,7 @@ const CONFIG = {
 
 const SelectButton = ({ framework, children }: { framework: Framework; children?: React.ReactNode }) => (
     <Button size="s" emphasis="medium" leftIcon={CONFIG[framework].icon} rightIcon={mdiMenuDown} isDisabled={!children}>
-        {children || framework}
+        {children || upperFirst(framework)}
     </Button>
 );
 
