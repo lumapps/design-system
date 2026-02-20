@@ -1,7 +1,7 @@
 {
     "name": "eslint-config-lumapps",
     "private": true,
-    "version": "4.3.1",
+    "version": "4.4.0",
     "main": "index.js",
     "peerDependencies": {
         "eslint": ">=8.24.0",
