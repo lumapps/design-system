@@ -16,7 +16,7 @@ import { Tooltip } from '../tooltip';
 import { useComboboxContext } from './context/ComboboxContext';
 import { useComboboxOpen } from './context/useComboboxOpen';
 
-export type ComboboxButtonProps = VueToJSXProps<UIProps, 'label'> & {
+export type ComboboxButtonProps = VueToJSXProps<UIProps, 'label' | 'renderButton'> & {
     /** The label for the button (used for ARIA and tooltip). */
     label: string;
     /** The currently selected value to display. */

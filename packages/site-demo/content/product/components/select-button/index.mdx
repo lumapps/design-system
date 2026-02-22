@@ -1,0 +1,75 @@
+---
+frameworks: ['react']
+---
+
+import * as ReactDemoDefault from './react/default.tsx';
+import * as ReactDemoWithDescriptionsAndSections from './react/with-descriptions-and-sections.tsx';
+import * as ReactDemoMultipleSelection from './react/multiple-selection.tsx';
+import * as ReactDemoListStates from './react/list-states.tsx';
+import * as ReactDemoCustomTrigger from './react/custom-trigger.tsx';
+import ReactSelectButton from 'lumx-docs:@lumx/react/components/select-button/SelectButton';
+
+# Select button
+
+**Select buttons let users pick one or more options from a dropdown anchored to a button trigger.**
+
+For a full text input with built-in search and filtering, use [Select text field](/product/components/select-text-field) instead.
+
+## Default
+
+By default, a select button lets the user pick a single option. The trigger shows the selected option, or the button label when nothing is selected yet.
+
+<DemoBlock orientation="horizontal" demo={{ react: ReactDemoDefault }} />
+
+## Options & Sections
+
+Each option can carry a primary label and an optional description shown on a second line in the dropdown. Long lists can also be grouped into sections with a heading, helping users scan and locate options faster.
+
+<DemoBlock orientation="horizontal" demo={{ react: ReactDemoWithDescriptionsAndSections }} />
+
+## Customization
+
+The default trigger is a [Button](/product/components/button). its appearance can be tuned with the standard button options (`size`, `emphasis`, `color`, `leftIcon`, etc.) to match the surrounding UI.
+
+For more flexibility, the trigger is also **interchangeable**: it can be rendered as an icon button, a chip, a link, or any other interactive element.
+
+The dropdown options themselves can be fully customized as well, to support richer layouts (custom typography, icons, badges, etc.).
+
+The example below shows, side by side: a default button trigger tuned with a small size, low emphasis and red color; an icon button (compact, label exposed via tooltip); a chip with custom-rendered options; and a link.
+
+<DemoBlock orientation="horizontal" vAlign="space-around" demo={{ react: ReactDemoCustomTrigger }} />
+
+## Multiple selection
+
+Switch to multi-select mode to let the user pick several options at once. The trigger shows the selected option names joined together, and clicking an already-selected option toggles it off.
+
+<DemoBlock orientation="horizontal" demo={{ react: ReactDemoMultipleSelection }} />
+
+## Label display modes
+
+The trigger can display its content in three different ways:
+
+- **Show selection** (default): Displays the selected option(s); falls back to the button label when nothing is selected.
+- **Show label**: Always displays the button label, regardless of what is selected.
+- **Show tooltip**: Hides the label inline; it appears as a tooltip on hover or focus instead. Best paired with an icon-button trigger where space is tight.
+
+## List states
+
+When options come from a server, the dropdown can communicate the loading or error state to the user:
+
+- **Loading**: Displays skeleton placeholders while options are being fetched.
+- **Error**: Displays an error message inside the dropdown so the user knows the list could not be loaded and can try again.
+
+<DemoBlock orientation="horizontal" demo={{ react: ReactDemoListStates }} />
+
+## Accessibility concerns
+
+Select button follows the WAI-ARIA combobox pattern, but a few content choices are essential for an accessible experience:
+
+- Always provide a meaningful **label**: it is announced by screen readers and used as the trigger's fallback text.
+- Provide localized **screen-reader messages** for loading state, error state, and the number of available options, so assistive technologies can announce list updates.
+- When using an icon-only trigger, expose the label as a tooltip so it remains discoverable for sighted users too.
+
+## Properties
+
+<PropTable docs={{ react: ReactSelectButton }} />
