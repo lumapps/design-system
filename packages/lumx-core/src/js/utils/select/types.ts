@@ -124,6 +124,54 @@ export interface SelectTextFieldTranslations {
 }
 
 /**
+ * Shared translation labels for SelectButton wrappers (React and Vue).
+ */
+export interface SelectButtonTranslations {
+    /** Screen reader loading announcement (e.g. "Loading…"). */
+    loadingMessage?: string;
+    /**
+     * Message to display when the list has no visible options.
+     * Can be a plain string or a function receiving the current input value (for dynamic messages).
+     * When omitted, the empty state is not shown.
+     */
+    emptyMessage?: string | ((inputValue: string) => string);
+    /**
+     * Message callback to display the number of available options.
+     * Called with the current visible option count and should return a human-readable string.
+     * Displayed when the dropdown is open, not empty, not loading, and not in error.
+     * When omitted, no option count message is shown.
+     */
+    nbOptionMessage?: (optionsLength: number) => string;
+    /** Error title displayed in the dropdown (e.g. "Failed to load"). */
+    errorMessage?: string;
+    /** Secondary error message (e.g. "Please try again"). */
+    errorTryReloadMessage?: string;
+}
+
+/**
+ * Wrapper-level props shared between React and Vue SelectButton implementations.
+ * These are framework-specific concerns (not part of the core template) that both
+ * wrappers need — extracted here to avoid duplication.
+ */
+export interface BaseSelectButtonWrapperProps<O>
+    extends Pick<
+        BaseSelectProps<O>,
+        'options' | 'getOptionId' | 'getOptionName' | 'getOptionDescription' | 'getSectionId'
+    > {
+    /** Selected value. */
+    value?: O;
+    /** Button label (used for ARIA and when no selection). */
+    label: string;
+    /**
+     * Status of the dropdown list.
+     * @default 'idle'
+     */
+    listStatus?: SelectTextFieldStatus;
+    /** Optional translations for screen-reader announcements (loading/empty/error/option count). */
+    translations?: SelectButtonTranslations;
+}
+
+/**
  * Wrapper-level props shared between React and Vue SelectTextField implementations.
  * These are framework-specific concerns (not part of the core template) that both
  * wrappers need — extracted here to avoid duplication.

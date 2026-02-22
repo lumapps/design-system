@@ -131,6 +131,11 @@ export default function comboboxOptionTests({ Combobox, render }: ComboboxOption
                 expect(describedBy).toContain(descEl!.id);
             });
 
+            it('should expose the description as the action accessible description', () => {
+                const { action } = setup({ description: 'A round red fruit' });
+                expect(action).toHaveAccessibleDescription('A round red fruit');
+            });
+
             it('should not render a description block when description is not set', () => {
                 setup();
                 expect(
