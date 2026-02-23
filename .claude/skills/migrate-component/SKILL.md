@@ -609,12 +609,13 @@ Migration order:
 **Goal:** Extract core tests and update framework-specific test suites.
 
 **IMPORTANT RULES:**
-- **NO JSX ELEMENTS or component calls in core tests** - Use plain data only
-- **NO interaction/event tests in core** - Core tests should only test rendering, props, and DOM structure
-- **Event handler tests belong in React/Vue** - Test `onClick` interactions in React tests, test `emit('click')` in Vue tests
-- **Tests that need component children must use framework-specific setup** - Don't migrate those to core
-- **Vue tests should mimic React tests** - Include the same structure: core tests import, framework-specific describe block, and `commonTestsSuiteVTL` (Vue) or `commonTestsSuiteRTL` (React)
-- **DO NOT add NOTE comments or explanatory comments in generated files** - Keep code clean without meta-commentary
+
+-   **NO JSX ELEMENTS or component calls in core tests** - Use plain data only
+-   **NO interaction/event tests in core** - Core tests should only test rendering, props, and DOM structure
+-   **Event handler tests belong in React/Vue** - Test `onClick` interactions in React tests, test `emit('click')` in Vue tests
+-   **Tests that need component children must use framework-specific setup** - Don't migrate those to core
+-   **Vue tests should mimic React tests** - Include the same structure: core tests import, framework-specific describe block, and `commonTestsSuiteVTL` (Vue) or `commonTestsSuiteRTL` (React)
+-   **DO NOT add NOTE comments or explanatory comments in generated files** - Keep code clean without meta-commentary
 
 **IMPORTANT - Check for Existing Core Tests:**
 
@@ -1116,7 +1117,7 @@ export const Component = forwardRef<ComponentProps, HTMLDivElement>((props, ref)
 ### Vue Wrapper Structure
 
 ```typescript
-import { computed, defineComponent, useAttrs } from 'vue';
+import { computed, defineComponent, toRaw, useAttrs } from 'vue';
 import {
     Component as ComponentUI,
     type ComponentProps as UIProps,
@@ -1155,10 +1156,14 @@ const Component = defineComponent(
         };
 
         return () => {
+            // Unwrap linkAs from reactivity before passing to core (see pitfall #22)
+            const { linkAs, ...rest } = otherProps.value;
+
             // Use JSX rendering
             return (
                 <ComponentUI
-                    {...otherProps.value}
+                    {...rest}
+                    linkAs={toRaw(linkAs)}
                     className={props.class}
                     theme={props.theme || defaultTheme}
                     inputId={inputId.value}
@@ -1234,6 +1239,12 @@ export default Component;
 19. **Vue `index.ts` should match React `index.ts` structure** - Export the same items (components, types, constants) in the same order, only differing in default vs named export syntax for components
 20. **Always check for existing core implementation first** - Before creating UI/Stories/Tests in core, verify they don't already exist. If they do, reuse them and only make changes after user approval
 21. **Use ReactToJSX and VueToJSXProps type utilities** - Don't manually list all props to omit; use the new type utilities that automatically handle PropsToOverride
+22. **🛑 Use `toRaw()` on props that accept Vue component references** — Props like `linkAs` accept a Vue component object (e.g., a custom `RouterLink`). When this component object flows through Vue's reactivity system (props → `computed` → spread in `useDisableStateProps`), it becomes a reactive proxy. Passing a reactive component to JSX causes: `[Vue warn]: Vue received a Component that was made a reactive object`. Use `toRaw()` to unwrap reactivity before passing to the core UI component.
+    - ✅ `const { linkAs, ...rest } = otherProps.value; <CoreUI {...rest} linkAs={toRaw(linkAs)} />`
+    - ❌ `<CoreUI {...otherProps.value} />` (linkAs is still a reactive proxy)
+    - **When does this apply?** Only for props whose value can be a **component reference** (function or object), like `linkAs`. Props like `as` on Text/Heading/FlexBox only accept **string** tag names (`'span'`, `'p'`, `'h1'`, `'div'`), which are primitives immune to reactivity — no `toRaw()` needed for those.
+    - **Affected components:** `Link`, `Button`, `IconButton`, `Thumbnail` — any component with a `linkAs` prop.
+    - **Import:** `import { toRaw } from 'vue';`
 
 ## Single Component vs Component Family
 
