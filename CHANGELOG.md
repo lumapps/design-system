@@ -11,9 +11,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/vue`:
     -    Create the portal utils
+    -   Create the `Avatar` component
 
 ### Changed
 
+-   `@lumx/core`:
+    -   Moved `Avatar` from `@lumx/react`
+-   `@lumx/vue`:
+    -   Changed `FlexBox` props `hAlign` and `vAlign` to `horizontalAlign` and `verticalAlign`
 -   `@lumx/react`:
     -   `Tooltip` & `Popover`: migrate/update positioning lib from popperjs to floating-ui
 

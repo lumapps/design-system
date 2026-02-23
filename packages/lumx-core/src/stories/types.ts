@@ -38,6 +38,7 @@ export type SetupStoriesOptions<
         overrides?: string;
         decorators?: keyof StoryDecorators;
         components?: Record<string, any>;
+        argsConverter?: (props: any) => any;
     } = Record<string, never>,
 > = SetupStoriesBaseOptions &
     // Add overrides only when TConfig specifies story names
@@ -49,4 +50,6 @@ export type SetupStoriesOptions<
         ? { decorators: Pick<Required<StoryDecorators>, D> & StoryDecorators }
         : unknown) &
     // Add components only when TConfig specifies a components type
-    (TConfig extends { components: infer C } ? { components: C } : unknown);
+    (TConfig extends { components: infer C } ? { components: C } : unknown) &
+    // Add argsConverter only when TConfig specifies it
+    (TConfig extends { argsConverter: infer A } ? { argsConverter: A } : unknown);

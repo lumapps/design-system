@@ -59,14 +59,6 @@ const Checkbox = defineComponent(
                 return;
             }
 
-            // IMPORTANT: Prevent double event emission when using JSX syntax.
-            // Vue's JSX transform treats props starting with 'on' (e.g., onChange) as both:
-            // 1. A prop passed to the component
-            // 2. An automatic event listener for matching emitted events
-            // Without stopImmediatePropagation, the 'change' event would be emitted twice:
-            // - Once when the core component calls the onChange prop
-            // - Again when Vue's event system catches the emitted 'change' event
-            event?.stopImmediatePropagation?.();
             emit('change', isChecked, value, name, event);
         };
 

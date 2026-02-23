@@ -80,7 +80,6 @@ const Thumbnail = defineComponent(
                 return;
             }
 
-            event.stopImmediatePropagation();
             emit('click', event);
         };
 
@@ -89,7 +88,6 @@ const Thumbnail = defineComponent(
                 return;
             }
 
-            event.stopImmediatePropagation();
             emit('keyPress', event);
         };
 

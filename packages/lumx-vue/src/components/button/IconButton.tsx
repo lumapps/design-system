@@ -35,7 +35,6 @@ const IconButton = defineComponent(
                 return;
             }
 
-            event.stopImmediatePropagation();
             emit('click', event);
         };
 

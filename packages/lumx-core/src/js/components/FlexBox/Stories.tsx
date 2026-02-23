@@ -15,14 +15,16 @@ export function setup({
     component: FlexBox,
     components: { Button, Text, IconButton },
     decorators: { withWrapper, withCombinations },
+    argsConverter = (args) => args,
 }: SetupStoriesOptions<{
     decorators: 'withCombinations' | 'withWrapper';
     components: { Button: any; Text: any; IconButton: any };
+    argsConverter: (args: any) => any;
 }>) {
     const meta = {
         component: FlexBox,
         render: (args: any) => (
-            <FlexBox {...args}>
+            <FlexBox {...argsConverter(args)}>
                 <Button>Button 1</Button>
                 <Text as="p">Some paragraph</Text>
                 <Button>Button 3</Button>
@@ -110,7 +112,7 @@ export function setup({
     /** Prevent FlexBox from shrinking into a parent flex box */
     const NoShrink = {
         render: (args: any) => (
-            <FlexBox {...args}>
+            <FlexBox {...argsConverter(args)}>
                 <Text as="p">Some paragraph</Text>
             </FlexBox>
         ),
@@ -131,7 +133,7 @@ export function setup({
     /** All combinations of margin auto values */
     const MarginAuto = {
         render: (args: any) => (
-            <FlexBox {...args}>
+            <FlexBox {...argsConverter(args)}>
                 <IconButton label="" icon={mdiAtom} />
             </FlexBox>
         ),
