@@ -36,6 +36,7 @@ jobs:
                   playwright: 'true'
 
             - name: 'Restore visual snapshots cache'
+              if: inputs.update != 'true'
               id: cache-restore
               uses: actions/cache/restore@v4
               with:
