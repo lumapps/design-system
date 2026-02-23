@@ -1,4 +1,4 @@
-import { computed, defineComponent, useAttrs, useSlots } from 'vue';
+import { computed, defineComponent, toRaw, useAttrs, useSlots } from 'vue';
 
 import { Link as LinkUI, type LinkProps as UIProps, CLASSNAME } from '@lumx/core/js/components/Link';
 
@@ -40,9 +40,11 @@ const Link = defineComponent(
         };
 
         return () => {
+            const { linkAs, ...rest } = otherProps.value;
             return (
                 <LinkUI
-                    {...otherProps.value}
+                    {...rest}
+                    linkAs={toRaw(linkAs)}
                     {...disabledStateProps.value}
                     className={props.class}
                     handleClick={handleClick as any}

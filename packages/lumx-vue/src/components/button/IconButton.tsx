@@ -1,4 +1,4 @@
-import { computed, defineComponent, useAttrs } from 'vue';
+import { computed, defineComponent, toRaw, useAttrs } from 'vue';
 
 import {
     IconButton as IconButtonUI,
@@ -39,17 +39,21 @@ const IconButton = defineComponent(
             emit('click', event);
         };
 
-        return () => (
-            <IconButtonUI
-                {...otherProps.value}
-                {...disabledStateProps.value}
-                className={props.class}
-                theme={props.theme || defaultTheme.value}
-                title={props.label}
-                label={props.label}
-                handleClick={handleClick as any}
-            />
-        );
+        return () => {
+            const { linkAs, ...rest } = otherProps.value;
+            return (
+                <IconButtonUI
+                    {...rest}
+                    linkAs={toRaw(linkAs)}
+                    {...disabledStateProps.value}
+                    className={props.class}
+                    theme={props.theme || defaultTheme.value}
+                    title={props.label}
+                    label={props.label}
+                    handleClick={handleClick as any}
+                />
+            );
+        };
     },
     {
         name: 'IconButton',

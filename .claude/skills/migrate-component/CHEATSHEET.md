@@ -111,14 +111,21 @@ const Component = defineComponent(
             emit('change', ...args);
         };
 
-        return () => (
-            <ComponentUI
-                inputId={inputId.value}
-                label={(props.label || slots.default?.()) as JSXElement}
-                onChange={handleChange}
-                {...props}
-            />
-        );
+        return () => {
+            // Unwrap linkAs from reactivity before passing to core
+            // (only needed for props accepting component references, see pitfall #22)
+            const { linkAs, ...rest } = otherProps.value;
+
+            return (
+                <ComponentUI
+                    {...rest}
+                    linkAs={toRaw(linkAs)}
+                    inputId={inputId.value}
+                    label={(props.label || slots.default?.()) as JSXElement}
+                    onChange={handleChange}
+                />
+            );
+        };
     },
     {
         name: 'LumxComponent',  // ← Prefix with 'Lumx'

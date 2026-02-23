@@ -1,4 +1,4 @@
-import { computed, defineComponent, ref, toRef, useAttrs } from 'vue';
+import { computed, defineComponent, ref, toRaw, toRef, useAttrs } from 'vue';
 
 import {
     Thumbnail as ThumbnailUI,
@@ -97,9 +97,11 @@ const Thumbnail = defineComponent(
             const badge = slots.badge?.();
             const fallback = slots.fallback?.();
 
+            const { linkAs, ...restProps } = otherProps.value;
             return (
                 <ThumbnailUI
-                    {...otherProps.value}
+                    {...restProps}
+                    linkAs={toRaw(linkAs)}
                     className={props.class}
                     theme={props.theme || defaultTheme.value}
                     isAnyDisabled={isAnyDisabled.value}

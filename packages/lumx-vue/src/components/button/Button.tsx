@@ -1,5 +1,5 @@
 import isEmpty from 'lodash/isEmpty';
-import { computed, defineComponent, useAttrs, useSlots } from 'vue';
+import { computed, defineComponent, toRaw, useAttrs, useSlots } from 'vue';
 
 import {
     Button as ButtonUI,
@@ -93,9 +93,11 @@ const Button = defineComponent(
                 </>
             );
 
+            const { linkAs, ...rest } = otherProps.value;
             return (
                 <ButtonUI
-                    {...otherProps.value}
+                    {...rest}
+                    linkAs={toRaw(linkAs)}
                     {...disabledStateProps.value}
                     className={props.class}
                     theme={props.theme || defaultTheme.value}
