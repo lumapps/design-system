@@ -38,6 +38,20 @@ describe('<IconButton />', () => {
             await userEvent.click(iconButton);
             expect(wrapper.emitted('click')).toHaveLength(1);
         });
+
+        it('should show tooltip on hover', async () => {
+            const { iconButton } = setupComponent({ label: 'Label' });
+            await userEvent.hover(iconButton);
+            const tooltip = await screen.findByRole('tooltip');
+            expect(tooltip).toBeInTheDocument();
+        });
+
+        it('should hide tooltip when hideTooltip is true', async () => {
+            const { iconButton } = setupComponent({ label: 'Label', hideTooltip: true } as any);
+            await userEvent.hover(iconButton);
+            const tooltip = screen.queryByRole('tooltip');
+            expect(tooltip).not.toBeInTheDocument();
+        });
     });
 
     describe('Disabled state', () => {

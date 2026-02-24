@@ -1,12 +1,19 @@
 import { ref, Ref, watch } from 'vue';
 import { useMutationObserver, useResizeObserver } from '@vueuse/core';
 import { classNames } from '@lumx/core/js/utils';
+import { useTooltipContext } from '../components/tooltip/context';
 
 /**
  * Compute a tooltip label based on a label element `innerText` if the text overflows.
  */
 export function useOverflowTooltipLabel(labelRef: Ref<HTMLElement | null | undefined>) {
     const tooltipLabel = ref<string | undefined>(undefined);
+
+    // Skip if already inside a tooltip (prevents nested tooltips)
+    const isInsideTooltip = useTooltipContext();
+    if (isInsideTooltip) {
+        return { tooltipLabel };
+    }
 
     const updateLabel = () => {
         const labelElement = labelRef.value;

@@ -5,11 +5,20 @@ import {
     type IconButtonProps as UIProps,
 } from '@lumx/core/js/components/Button/IconButton';
 
+import { Tooltip, type TooltipProps } from '../tooltip/Tooltip';
 import { useTheme } from '../../composables/useTheme';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
-export type IconButtonProps = VueToJSXProps<UIProps>;
+export type IconButtonProps = VueToJSXProps<UIProps> & {
+    /**
+     * Props to pass to the tooltip.
+     * If undefined or if tooltipProps.label is undefined, the label prop will be used as tooltip label.
+     */
+    tooltipProps?: Partial<TooltipProps>;
+    /** Whether the tooltip should be hidden or not. */
+    hideTooltip?: boolean;
+};
 
 export const emitSchema = {
     click: (event: MouseEvent) => event instanceof MouseEvent,
@@ -39,18 +48,19 @@ const IconButton = defineComponent(
         };
 
         return () => {
-            const { linkAs, ...rest } = otherProps.value;
+            const { linkAs, tooltipProps, hideTooltip, ...rest } = otherProps.value;
             return (
-                <IconButtonUI
-                    {...rest}
-                    linkAs={toRaw(linkAs)}
-                    {...disabledStateProps.value}
-                    className={props.class}
-                    theme={props.theme || defaultTheme.value}
-                    title={props.label}
-                    label={props.label}
-                    handleClick={handleClick as any}
-                />
+                <Tooltip label={hideTooltip ? '' : props.label} {...tooltipProps}>
+                    <IconButtonUI
+                        {...rest}
+                        linkAs={toRaw(linkAs)}
+                        {...disabledStateProps.value}
+                        className={props.class}
+                        theme={props.theme || defaultTheme.value}
+                        label={props.label}
+                        handleClick={handleClick as any}
+                    />
+                </Tooltip>
             );
         };
     },
@@ -87,6 +97,8 @@ const IconButton = defineComponent(
             'target',
             'type',
             'title',
+            'tooltipProps',
+            'hideTooltip',
         ),
         emits: emitSchema,
     },

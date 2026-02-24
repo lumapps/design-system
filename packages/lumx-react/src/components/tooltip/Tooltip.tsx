@@ -4,66 +4,35 @@ import { ReactNode, useState } from 'react';
 import { useFloating, offset, autoUpdate, type Placement as FloatingPlacement } from '@floating-ui/react-dom';
 
 import { DOCUMENT } from '@lumx/react/constants';
-import { GenericProps, HasCloseMode } from '@lumx/react/utils/type';
-import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
+import { GenericProps } from '@lumx/react/utils/type';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
-import { Placement } from '@lumx/react/components/popover';
+
 import { TooltipContextProvider } from '@lumx/react/components/tooltip/context';
 import { useId } from '@lumx/react/hooks/useId';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
-import { ARIA_LINK_MODES, TOOLTIP_ZINDEX } from '@lumx/react/components/tooltip/constants';
+import {
+    TooltipPopup,
+    type TooltipProps as CoreTooltipProps,
+    type TooltipPlacement,
+    DEFAULT_PROPS,
+    CLASSNAME as CORE_CLASSNAME,
+    COMPONENT_NAME as CORE_COMPONENT_NAME,
+    ARROW_SIZE,
+} from '@lumx/core/js/components/Tooltip';
 import { Portal } from '@lumx/react/utils';
 import { useInjectTooltipRef } from './useInjectTooltipRef';
 import { useTooltipOpen } from './useTooltipOpen';
 
-/** Position of the tooltip relative to the anchor element. */
-export type TooltipPlacement = Extract<Placement, 'top' | 'right' | 'bottom' | 'left'>;
+export type { TooltipPlacement };
 
 /**
  * Defines the props of the component.
  */
-export interface TooltipProps extends GenericProps, HasCloseMode {
+export interface TooltipProps extends GenericProps, CoreTooltipProps {
     /** Anchor (element on which we activate the tooltip). */
     children: ReactNode;
-    /** Delay (in ms) before closing the tooltip. */
-    delay?: number;
-    /** Whether the tooltip is displayed even without the mouse hovering the anchor. */
-    forceOpen?: boolean;
-    /** Label text. */
-    label?: string | null | false;
-    /** Placement of the tooltip relative to the anchor. */
-    placement?: TooltipPlacement;
-    /** Choose how the tooltip text should link to the anchor */
-    ariaLinkMode?: (typeof ARIA_LINK_MODES)[number];
 }
-
-/**
- * Component display name.
- */
-const COMPONENT_NAME = 'Tooltip';
-
-/**
- * Component default class name and class prefix.
- */
-const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-tooltip';
-const { block, element } = classNames.bem(CLASSNAME);
-
-/**
- * Component default props.
- */
-const DEFAULT_PROPS: Partial<TooltipProps> = {
-    placement: Placement.BOTTOM,
-    closeMode: 'unmount',
-    ariaLinkMode: 'aria-describedby',
-    zIndex: TOOLTIP_ZINDEX,
-};
-
-/**
- * Arrow size (in pixel).
- */
-const ARROW_SIZE = 8;
 
 /**
  * Tooltip component.
@@ -115,8 +84,6 @@ export const Tooltip = forwardRef<TooltipProps, HTMLDivElement>((props, ref) => 
         ariaLinkMode: ariaLinkMode as any,
     });
 
-    const labelLines = label ? label.split('\n') : [];
-
     const tooltipRef = useMergeRefs(ref, setPopperElement, onPopperMount);
 
     return (
@@ -124,33 +91,22 @@ export const Tooltip = forwardRef<TooltipProps, HTMLDivElement>((props, ref) => 
             <TooltipContextProvider>{wrappedChildren}</TooltipContextProvider>
             {isMounted && (
                 <Portal>
-                    <div
-                        ref={tooltipRef}
-                        {...forwardedProps}
-                        id={id}
-                        role="tooltip"
-                        className={classNames.join(
-                            className,
-                            block({
-                                [`position-${position}`]: Boolean(position),
-                            }),
-                            isHidden && classNames.visuallyHidden(),
-                        )}
-                        style={{ ...(isHidden ? undefined : floatingStyles), zIndex }}
-                        data-popper-placement={position}
-                    >
-                        <div className={element('arrow')} />
-                        <div className={element('inner')}>
-                            {labelLines.map((line) => (
-                                <p key={line}>{line}</p>
-                            ))}
-                        </div>
-                    </div>
+                    {TooltipPopup({
+                        ref: tooltipRef,
+                        ...forwardedProps,
+                        id,
+                        label: label as string,
+                        position: position!,
+                        isHidden,
+                        style: isHidden ? undefined : floatingStyles,
+                        zIndex,
+                        className,
+                    })}
                 </Portal>
             )}
         </>
     );
 });
-Tooltip.displayName = COMPONENT_NAME;
-Tooltip.className = CLASSNAME;
+Tooltip.displayName = CORE_COMPONENT_NAME;
+Tooltip.className = CORE_CLASSNAME;
 Tooltip.defaultProps = DEFAULT_PROPS;

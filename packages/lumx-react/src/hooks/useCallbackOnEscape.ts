@@ -2,7 +2,7 @@ import { DOCUMENT } from '@lumx/react/constants';
 import { Callback } from '@lumx/react/utils/type';
 import { onEscapePressed } from '@lumx/core/js/utils';
 import { useEffect } from 'react';
-import { Listener, makeListenerTowerContext } from '@lumx/react/utils/function/makeListenerTowerContext';
+import { Listener, makeListenerTowerContext } from '@lumx/core/js/utils/function/listenerTower';
 
 const LISTENERS = makeListenerTowerContext();
 

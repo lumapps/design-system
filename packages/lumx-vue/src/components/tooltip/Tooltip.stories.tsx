@@ -1,5 +1,5 @@
-import { Button, Tooltip } from '@lumx/react';
-import { withChromaticForceScreenSize } from '@lumx/react/stories/decorators/withChromaticForceScreenSize';
+import { Button, Tooltip } from '@lumx/vue';
+import { withChromaticForceScreenSize } from '@lumx/vue/stories/decorators/withChromaticForceScreenSize';
 import { setup } from '@lumx/core/js/components/Tooltip/Stories';
 
 const { meta, ...stories } = setup({
@@ -10,7 +10,6 @@ const { meta, ...stories } = setup({
 
 export default {
     title: 'LumX components/tooltip/Tooltip',
-    args: Tooltip.defaultProps,
     ...meta,
 };
 
