@@ -1,4 +1,4 @@
-import { ValueOf } from '@lumx/react/utils/type';
+import { ValueOf } from '../../types/ValueOf';
 
 /**
  * Different possible placements for the popover.

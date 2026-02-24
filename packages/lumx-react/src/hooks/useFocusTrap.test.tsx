@@ -1,9 +1,9 @@
 import { render } from '@testing-library/react';
 import { vi } from 'vitest';
-import * as focusUtils from '@lumx/react/utils/browser/focus/getFirstAndLastFocusable';
+import * as focusUtils from '@lumx/core/js/utils/focus/getFirstAndLastFocusable';
 import { useFocusTrap } from './useFocusTrap';
 
-vi.mock('@lumx/react/utils/browser/focus/getFirstAndLastFocusable', () => ({
+vi.mock('@lumx/core/js/utils/focus/getFirstAndLastFocusable', () => ({
     getFirstAndLastFocusable: vi.fn(),
 }));
 

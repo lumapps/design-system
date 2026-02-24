@@ -1,19 +1,18 @@
 import { useRef } from 'react';
 import { classNames } from '@lumx/core/js/utils';
-import { Chip, Popover, type Theme } from '@lumx/react';
+import { Button, Popover } from '@lumx/react';
 
-export default ({ theme }: { theme?: Theme }) => {
+export default () => {
     const anchorRef = useRef(null);
     return (
         <>
-            <Chip style={{ marginBottom: 80 }} ref={anchorRef} theme={theme} size="s">
+            <Button style={{ marginBottom: 80 }} ref={anchorRef} size="s" emphasis="medium">
                 Anchor
-            </Chip>
+            </Button>
 
             <Popover
                 isOpen
                 className={classNames.padding('huge')}
-                theme={theme}
                 anchorRef={anchorRef}
                 placement="right"
                 offset={{

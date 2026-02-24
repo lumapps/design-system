@@ -4,3 +4,4 @@
 
 export { Portal, type PortalProps, type PortalInit, PortalProvider, type PortalProviderProps } from './Portal';
 export { ClickAwayProvider, useClickAway } from './ClickAway';
+export { useTheme, ThemeProvider } from './theme';

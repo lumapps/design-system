@@ -1,36 +1,29 @@
 import { useRef } from 'react';
 import { classNames } from '@lumx/core/js/utils';
-import { Chip, FlexBox, Popover, type Theme } from '@lumx/react';
+import { Button, FlexBox, Popover } from '@lumx/react';
 
-export default ({ theme }: { theme?: Theme }) => {
+export default () => {
     const topStartAnchorRef = useRef(null);
     const topEndAnchorRef = useRef(null);
     return (
         <>
             <FlexBox style={{ marginTop: 80, gap: 128 }} orientation="vertical">
-                <Chip ref={topStartAnchorRef} theme={theme} size="s" style={{ placeSelf: 'flex-start' }}>
+                <Button ref={topStartAnchorRef} size="s" style={{ placeSelf: 'flex-start' }} emphasis="medium">
                     TOP_START
-                </Chip>
+                </Button>
                 <Popover
                     isOpen
                     className={classNames.padding('huge')}
-                    theme={theme}
                     anchorRef={topStartAnchorRef}
                     placement="top-start"
                 >
                     Popover aligned on start of the top side
                 </Popover>
-                <Chip ref={topEndAnchorRef} theme={theme} size="s" style={{ placeSelf: 'flex-end' }}>
+                <Button ref={topEndAnchorRef} size="s" style={{ placeSelf: 'flex-end' }} emphasis="medium">
                     TOP_END
-                </Chip>
+                </Button>
             </FlexBox>
-            <Popover
-                isOpen
-                className={classNames.padding('huge')}
-                theme={theme}
-                anchorRef={topEndAnchorRef}
-                placement="top-end"
-            >
+            <Popover isOpen className={classNames.padding('huge')} anchorRef={topEndAnchorRef} placement="top-end">
                 Popover aligned on start of the top side
             </Popover>
         </>

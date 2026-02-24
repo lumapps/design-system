@@ -6,6 +6,7 @@
         "url": "https://github.com/lumapps/design-system/issues"
     },
     "dependencies": {
+        "@floating-ui/dom": "^1.7.5",
         "@lumx/icons": "^4.5.1",
         "classnames": "^2.3.2",
         "focus-visible": "^5.0.2",

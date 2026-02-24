@@ -15,6 +15,7 @@ export * from './components/input-helper';
 export * from './components/input-label';
 export * from './components/link';
 export * from './components/message';
+export * from './components/popover';
 export * from './components/progress';
 export * from './components/radio-button';
 export * from './components/skeleton';

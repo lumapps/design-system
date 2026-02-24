@@ -1,3 +1,4 @@
+// @vitest-environment jsdom
 import { getFocusableElements } from './getFocusableElements';
 
 function htmlToElement(html: string): any {

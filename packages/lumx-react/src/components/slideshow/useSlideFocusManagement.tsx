@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { getFocusableElements } from '@lumx/react/utils/browser/focus/getFocusableElements';
+import { getFocusableElements } from '@lumx/core/js/utils/focus/getFocusableElements';
 
 export interface UseSlideFocusManagementProps {
     isSlideDisplayed?: boolean;

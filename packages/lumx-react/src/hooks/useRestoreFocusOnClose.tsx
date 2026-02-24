@@ -1,7 +1,7 @@
 import React from 'react';
-import { getFirstAndLastFocusable } from '@lumx/react/utils/browser/focus/getFirstAndLastFocusable';
+import { getFirstAndLastFocusable } from '@lumx/core/js/utils/focus/getFirstAndLastFocusable';
 import { OnBeforeUnmount } from '@lumx/react/utils/react/OnBeforeUnmount';
-import type { PopoverProps } from './Popover';
+import type { PopoverProps } from '../components/popover/Popover';
 
 /**
  * Provides an unmount sentinel to inject in the popover to detect when it closes and restore the focus to the

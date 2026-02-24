@@ -6,7 +6,7 @@ import { useInfiniteScroll } from '@lumx/react/hooks/useInfiniteScroll';
 import { GenericProps, isComponent } from '@lumx/react/utils/type';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
-import { Offset, Placement } from '@lumx/react/components/popover/constants';
+import { Offset, Placement } from '@lumx/react/components/popover';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
