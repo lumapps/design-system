@@ -1,19 +1,11 @@
 import React from 'react';
+import type { PortalInit } from '@lumx/core/js/utils/Portal';
 
-type Container = DocumentFragment | Element;
-
-/**
- * Portal initializing function.
- * If it does not provide a container, the Portal children will render in classic React tree and not in a portal.
- */
-export type PortalInit = () => {
-    container?: Container;
-    teardown?: () => void;
-};
+export type { PortalInit, PortalProviderProps } from '@lumx/core/js/utils/Portal';
 
 export const PortalContext = React.createContext<PortalInit>(() => ({ container: document.body }));
 
-export interface PortalProviderProps {
+export interface ReactPortalProviderProps {
     children?: React.ReactNode;
     value: PortalInit;
 }
@@ -21,4 +13,4 @@ export interface PortalProviderProps {
 /**
  * Customize where <Portal> wrapped elements render (tooltip, popover, dialog, etc.)
  */
-export const PortalProvider: React.FC<PortalProviderProps> = PortalContext.Provider;
+export const PortalProvider: React.FC<ReactPortalProviderProps> = PortalContext.Provider;

@@ -1,31 +1,27 @@
 import { render, screen } from '@testing-library/react';
+import BasePortalTests from '@lumx/core/js/utils/Portal/Tests';
 import { Portal } from './Portal';
+import { PortalProvider } from './PortalProvider';
 
 const TEST_ID = 'portal-child';
 const PortalChild = () => <div data-testid={TEST_ID}>Hello from portal</div>;
 
-describe(Portal, () => {
-    it('should render portal content in document.body by default', () => {
-        render(
-            <Portal>
-                <PortalChild />
-            </Portal>,
-        );
-
-        const child = screen.getByTestId(TEST_ID);
-        expect(child.parentElement).toBe(document.body);
-    });
-
-    it('should render inline when enabled is false', () => {
-        const { container } = render(
-            <div id="wrapper">
-                <Portal enabled={false}>
+describe('Portal', () => {
+    // Run shared core tests
+    BasePortalTests({
+        screen,
+        renderPortal({ enabled, portalInit, wrapInDiv }) {
+            const portal = (
+                <Portal enabled={enabled}>
                     <PortalChild />
                 </Portal>
-            </div>,
-        );
+            );
 
-        const child = screen.getByTestId(TEST_ID);
-        expect(child.parentElement).toBe(container.querySelector('#wrapper'));
+            const withProvider = portalInit ? <PortalProvider value={portalInit}>{portal}</PortalProvider> : portal;
+
+            const content = wrapInDiv ? <div id="wrapper">{withProvider}</div> : withProvider;
+
+            return render(content);
+        },
     });
 });
