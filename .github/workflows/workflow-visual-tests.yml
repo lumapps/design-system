@@ -36,7 +36,7 @@ jobs:
                   playwright: 'true'
 
             - name: 'Restore visual snapshots cache'
-              if: inputs.update != 'true'
+              if: ${{ !inputs.update }}
               id: cache-restore
               uses: actions/cache/restore@v4
               with:
@@ -68,11 +68,11 @@ jobs:
                   if-no-files-found: ignore
 
             - name: 'Save visual snapshots cache'
-              if: steps.cache-restore.outputs.cache-hit != 'true' || inputs.update == 'true'
+              if: ${{ steps.cache-restore.outputs.cache-hit != 'true' || inputs.update }}
               uses: actions/cache/save@v4
               with:
                   path: ${{ matrix.visDir }}/*/__baselines__
-                  key: vis-snapshots-${{ matrix.label }}-${{ github.sha }}
+                  key: vis-snapshots-${{ matrix.label }}-${{ github.sha }}${{ inputs.update && format('-{0}', github.run_id) || '' }}
 
     visual-report:
         if: always() && github.event_name == 'pull_request'
