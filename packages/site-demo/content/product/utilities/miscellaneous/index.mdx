@@ -1,11 +1,25 @@
 ---
-frameworks: ['react']
+frameworks: ['react', 'vue']
 ---
+
 import { Message } from '@lumx/react';
+import { FrameworkOnly } from '@lumx/demo/components/content/FrameworkOnly';
 
 # Miscellaneous utilities
 
+<FrameworkOnly framework="react">
+
 The `@lumx/react/utils` module contains utilities like React hooks, functions and component that provide re-usable logic.
+
+</FrameworkOnly>
+
+<FrameworkOnly framework="vue">
+
+The `@lumx/vue/utils` module contains utility components that provide re-usable logic.
+
+</FrameworkOnly>
+
+<FrameworkOnly framework="react">
 
 ## ClickAwayProvider
 
@@ -28,6 +42,8 @@ A React context provider that build a tree (both DOM and React) of elements that
 
 This is used to provide correct "click away" behavior on nested `Dialog` or `Dropdown` even though they are not nested in the DOM tree.
 
+</FrameworkOnly>
+
 ## Portal
 
 The `Portal` component renders its children into a new subtree outside of the current DOM hierarchy. By default, it renders to `document.body`. This is useful for components that need to appear above everything else, like `Dialog` or `Tooltip`.
@@ -42,10 +58,11 @@ The `PortalProvider` takes a `value` prop, which is a function that returns an o
 
 This is useful for scenarios where you need to render components in a specific part of your application's layout instead of `document.body`.
 
+<FrameworkOnly framework="react">
+
 ```tsx
 import { Button } from '@lumx/react';
 import { Portal, PortalProvider } from '@lumx/react/utils';
-import { useEffect } from 'react';
 
 function initPortal() {
     const container = document.createElement('div');
@@ -63,9 +80,40 @@ const MyComponent = () => (
 );
 ```
 
+</FrameworkOnly>
+
+<FrameworkOnly framework="vue">
+
+```html
+<template>
+    <PortalProvider :value="initPortal">
+        <p>The button below will be rendered inside a custom div appended to the document body.</p>
+        <Portal>
+            <button>My button is in the portal</button>
+        </Portal>
+    </PortalProvider>
+</template>
+
+<script setup>
+    import { Button } from '@lumx/vue';
+    import { Portal, PortalProvider } from '@lumx/vue/utils';
+
+    function initPortal() {
+        const container = document.createElement('div');
+        document.body.appendChild(container);
+        return { container, teardown: () => container.remove() };
+    }
+</script>
+```
+
+</FrameworkOnly>
+
 <Message kind="info">
-    In this example, `initPortal` initializes a container div for all portals defined inside the children content
+    In this example, <code>initPortal</code> initializes a container div for all portals defined inside the children
+    content
 </Message>
+
+<FrameworkOnly framework="react">
 
 ## Disabled state context
 
@@ -90,3 +138,5 @@ const MyComponent = () => (
 
 To get your custom component to handle this disable state context, you can use the `useDisabledStateContext()` hook
 (from the same `@lumx/react/utils` module).
+
+</FrameworkOnly>

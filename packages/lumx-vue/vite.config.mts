@@ -29,9 +29,11 @@ const lumxCoreExports = new Set(Object.keys(lumxCorePkg.exports).map((subpath) =
 export default defineConfig({
     build: {
         lib: {
-            entry: 'src/index.ts',
+            entry: {
+                index: 'src/index.ts',
+                'utils/index': 'src/utils/index.ts',
+            },
             formats: ['es'],
-            fileName: 'index',
         },
         outDir: 'dist',
         sourcemap: true,

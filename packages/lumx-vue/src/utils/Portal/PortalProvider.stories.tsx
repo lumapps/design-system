@@ -1,4 +1,4 @@
-import { Button } from '@lumx/react';
+import { Button } from '@lumx/vue/components/button';
 import { setup } from '@lumx/core/js/utils/Portal/Stories';
 import { PortalProvider } from './PortalProvider';
 import { Portal } from './Portal';

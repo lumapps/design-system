@@ -2,7 +2,9 @@ import React from 'react';
 import { createPortal } from 'react-dom';
 import { PortalContext } from './PortalProvider';
 
-export interface PortalProps {
+export type { PortalProps } from '@lumx/core/js/utils/Portal';
+
+export interface ReactPortalProps {
     enabled?: boolean;
     children: React.ReactNode;
 }
@@ -11,7 +13,7 @@ export interface PortalProps {
  * Render children in a portal outside the current DOM position
  * (defaults to `document.body` but can be customized with the PortalContextProvider)
  */
-export const Portal: React.FC<PortalProps> = ({ children, enabled = true }) => {
+export const Portal: React.FC<ReactPortalProps> = ({ children, enabled = true }) => {
     const init = React.useContext(PortalContext);
     const context = React.useMemo(
         () => {
@@ -26,8 +28,9 @@ export const Portal: React.FC<PortalProps> = ({ children, enabled = true }) => {
         return context?.teardown;
     }, [context?.teardown, enabled]);
 
-    if (!context?.container) {
+    const { container } = context ?? {};
+    if (!container || typeof container === 'string') {
         return <>{children}</>;
     }
-    return createPortal(children, context.container);
+    return createPortal(children, container);
 };
