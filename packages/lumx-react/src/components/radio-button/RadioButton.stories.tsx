@@ -5,17 +5,11 @@ import { setup } from '@lumx/core/js/components/RadioButton/Stories';
 
 const { meta, ...stories } = setup({
     component: RadioButton,
-    decorators: { withCombinations },
+    decorators: { withCombinations, withValueOnChange },
 });
 
 export default {
     title: 'LumX components/radio-button/Radio button',
-    decorators: [
-        withValueOnChange({
-            valueProp: 'isChecked',
-            valueTransform: (value) => value === 'radio-html-value',
-        }),
-    ],
     ...meta,
 };
 

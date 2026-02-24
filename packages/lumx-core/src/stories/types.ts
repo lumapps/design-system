@@ -15,6 +15,8 @@ interface StoryDecorators {
     withNestedProps?: () => Decorator;
     /** Decorator wrapping story in a resizable box */
     withResizableBox?: (options?: Record<string, any>) => Decorator;
+    /** Decorator managing a local state for a value prop, updating it via onChange */
+    withValueOnChange?: (options?: { valueProp?: string; valueTransform?: (v: any) => any }) => Decorator;
 }
 
 /** A partial Storybook story object (args, argTypes, render, decorators, etc.) */

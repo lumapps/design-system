@@ -10,14 +10,15 @@ import { DEFAULT_PROPS } from '.';
  */
 export function setup({
     component: Checkbox,
-    decorators: { withCombinations },
+    decorators: { withCombinations, withValueOnChange },
 }: SetupStoriesOptions<{
-    decorators: 'withCombinations';
+    decorators: 'withCombinations' | 'withValueOnChange';
 }>) {
     return {
         meta: {
             component: Checkbox,
             render: (args: any) => <Checkbox {...args} />,
+            decorators: [withValueOnChange({ valueProp: 'isChecked' })],
             argTypes: {
                 onChange: { action: true },
                 name: { control: false },

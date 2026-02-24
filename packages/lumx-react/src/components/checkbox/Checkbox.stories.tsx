@@ -5,12 +5,11 @@ import { setup } from '@lumx/core/js/components/Checkbox/Stories';
 
 const { meta, ...stories } = setup({
     component: Checkbox,
-    decorators: { withCombinations },
+    decorators: { withCombinations, withValueOnChange },
 });
 
 export default {
     title: 'LumX components/checkbox/Checkbox',
-    decorators: [withValueOnChange({ valueProp: 'isChecked' })],
     ...meta,
 };
 

@@ -10,14 +10,20 @@ import { DEFAULT_PROPS } from '.';
  */
 export function setup({
     component: RadioButton,
-    decorators: { withCombinations },
+    decorators: { withCombinations, withValueOnChange },
 }: SetupStoriesOptions<{
-    decorators: 'withCombinations';
+    decorators: 'withCombinations' | 'withValueOnChange';
 }>) {
     return {
         meta: {
             component: RadioButton,
             render: (args: any) => <RadioButton {...args} />,
+            decorators: [
+                withValueOnChange({
+                    valueProp: 'isChecked',
+                    valueTransform: (value) => value === 'radio-html-value',
+                }),
+            ],
             argTypes: {
                 onChange: { action: true },
                 name: { control: false },
