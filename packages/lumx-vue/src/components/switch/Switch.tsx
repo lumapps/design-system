@@ -45,7 +45,6 @@ const Switch = defineComponent(
                 return;
             }
 
-            event.stopImmediatePropagation();
             emit('change', isChecked, value, name, event);
         };
 

@@ -9,6 +9,7 @@ const { meta, ...stories } = setup({
     component: FlexBox,
     components: { Button, Text, IconButton },
     decorators: { withWrapper, withCombinations },
+    argsConverter: (args) => ({ ...args, verticalAlign: args.vAlign, horizontalAlign: args.hAlign }),
 });
 
 export default {

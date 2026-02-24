@@ -35,7 +35,6 @@ const Link = defineComponent(
                 return;
             }
 
-            event.stopImmediatePropagation();
             emit('click', event);
         };
 

@@ -3,6 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { queryByClassName } from '@lumx/react/testing/utils/queries';
 import { vi } from 'vitest';
 import { Size } from '@lumx/react';
+import BaseAvatarTests from '@lumx/core/js/components/Avatar/Tests';
 import { Avatar, AvatarProps } from './Avatar';
 
 const CLASSNAME = Avatar.className as string;
@@ -19,7 +20,11 @@ const setup = (propsOverride: Partial<AvatarProps> = {}, { wrapper }: SetupRende
 };
 
 describe(`<${Avatar.displayName}>`, () => {
-    // Common tests suite.
+    BaseAvatarTests({
+        render: (props: AvatarProps) => render(<Avatar {...props} />),
+        screen,
+    });
+
     commonTestsSuiteRTL(setup, {
         baseClassName: CLASSNAME,
         forwardClassName: 'avatar',
@@ -59,8 +64,6 @@ describe(`<${Avatar.displayName}>`, () => {
         it('handles onClick via Thumbnail', () => {
             const onClick = vi.fn();
             setup({ onClick });
-            // The click is technically on the thumbnail wrapper/div usually, but let's target the image or root
-            // The Avatar passes onClick to Thumbnail.
             const thumbnail = document.querySelector('.lumx-thumbnail');
             fireEvent.click(thumbnail!);
             expect(onClick).toHaveBeenCalled();

@@ -9,7 +9,11 @@ import { FlexBox } from '.';
 describe('<FlexBox />', () => {
     function renderFlexBox({ children, ...props }: FlexBoxProps, options?: SetupRenderOptions<FlexBoxProps>) {
         return render(FlexBox, {
-            props,
+            props: {
+                ...props,
+                verticalAlign: props.vAlign,
+                horizontalAlign: props.hAlign,
+            },
             slots: children ? { default: children } : undefined,
             ...options,
         });

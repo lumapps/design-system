@@ -1,51 +1,29 @@
 /* eslint-disable react/display-name */
 import { mdiDelete, mdiEye, mdiPencil, mdiStar } from '@lumx/icons';
-import { AvatarSize, Badge, ColorPalette, FlexBox, Icon, IconButton, Size } from '@lumx/react';
-import { avatarImageArgType, AVATAR_IMAGES } from '@lumx/core/stories/controls/image';
-import { CustomLink } from '@lumx/react/stories/utils/CustomLink';
-
-import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
-import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
+import { Badge, ColorPalette, FlexBox, Icon, IconButton, Size } from '@lumx/react';
 import { colorArgType } from '@lumx/core/stories/controls/color';
-import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
 import { iconArgType } from '@lumx/core/stories/controls/icons';
+import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
+import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
+import { CustomLink } from '@lumx/react/stories/utils/CustomLink';
+import { setup } from '@lumx/core/js/components/Avatar/Stories';
+
 import { Avatar } from './Avatar';
 
-const AVATAR_SIZES = [Size.xxs, Size.xs, Size.s, Size.m, Size.l, Size.xl, Size.xxl];
+const { meta, ...stories } = setup({
+    component: Avatar,
+    decorators: { withCombinations },
+});
 
 export default {
     title: 'LumX components/avatar/Avatar',
-    component: Avatar,
-    argTypes: {
-        image: avatarImageArgType,
-        size: getSelectArgType<AvatarSize>(AVATAR_SIZES),
-    },
-    args: { image: AVATAR_IMAGES.avatar1 },
+    ...meta,
 };
 
-/**
- * Default avatar
- */
-export const Default = {};
-
-/**
- * Having onClick transforming the avatar into a button
- */
-export const AvatarButton = {
-    argTypes: {
-        onClick: { action: true },
-    },
-};
-
-/**
- * Having href transforming the avatar into a link
- */
-export const AvatarLink = {
-    args: {
-        href: 'https://example.com',
-        target: '_blank',
-    },
-};
+export const Default = { ...stories.Default };
+export const AvatarButton = { ...stories.AvatarButton };
+export const AvatarLink = { ...stories.AvatarLink };
+export const AllSizes = { ...stories.AllSizes };
 
 /**
  * Having linkAs transforming the avatar into a custom link
@@ -76,36 +54,20 @@ export const WithActions = {
 };
 
 /**
- * All sizes
- */
-export const AllSizes = {
-    argTypes: {
-        size: { control: false },
-    },
-    decorators: [
-        withCombinations({
-            combinations: {
-                cols: { key: 'size', options: AVATAR_SIZES },
-            },
-        }),
-    ],
-};
-
-/**
  * All sizes with badge
  */
 export const AllSizesWithBadge = {
-    ...AllSizes,
+    ...stories.AllSizes,
     args: {
         'badge.color': ColorPalette.blue,
         'badge.icon': mdiStar,
     },
     argTypes: {
-        ...AllSizes.argTypes,
+        ...stories.AllSizes.argTypes,
         'badge.color': colorArgType,
         'badge.icon': iconArgType,
     },
-    decorators: [...AllSizes.decorators, withNestedProps()],
+    decorators: [...stories.AllSizes.decorators, withNestedProps()],
     render: ({ badge, ...props }: any) => (
         <Avatar
             {...(props as any)}

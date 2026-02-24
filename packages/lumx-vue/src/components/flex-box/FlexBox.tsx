@@ -10,9 +10,13 @@ import type { JSXElement } from '@lumx/core/js/types';
 
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 
-export type FlexBoxProps = VueToJSXProps<UIProps> & {
+export type FlexBoxProps = VueToJSXProps<UIProps, 'vAlign' | 'hAlign'> & {
     /** Customize the root element. */
     as?: string;
+    /** FlexBox vertical alignment */
+    verticalAlign?: UIProps['vAlign'];
+    /** FlexBox horizontal alignment */
+    horizontalAlign?: UIProps['hAlign'];
 };
 
 export { CLASSNAME, COMPONENT_NAME };
@@ -36,6 +40,8 @@ const FlexBox = defineComponent(
                 ...props,
                 ...attrs,
                 className: props.class,
+                vAlign: props.verticalAlign,
+                hAlign: props.horizontalAlign,
             });
 
             return <Component {...computedProps}>{slots.default?.() as JSXElement}</Component>;
@@ -49,11 +55,11 @@ const FlexBox = defineComponent(
             'as',
             'fillSpace',
             'gap',
-            'hAlign',
+            'horizontalAlign',
             'marginAuto',
             'noShrink',
             'orientation',
-            'vAlign',
+            'verticalAlign',
             'wrap',
             'class',
         ),
