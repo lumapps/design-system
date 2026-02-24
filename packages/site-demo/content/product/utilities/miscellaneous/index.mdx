@@ -19,30 +19,62 @@ The `@lumx/vue/utils` module contains utility components that provide re-usable 
 
 </FrameworkOnly>
 
-<FrameworkOnly framework="react">
-
 ## ClickAwayProvider
 
-A React context provider that build a tree (both DOM and React) of elements that are considered "within" the context even if children are rendered as in a React portal. User clicks outside this context will trigger to provided `callback`.
+A context provider that builds a tree (both DOM and component tree) of elements that are considered "within" the context even if children are rendered in a portal. User clicks outside this context will trigger the provided `callback`.
+
+<FrameworkOnly framework="react">
 
 ```tsx
-<ClickAwayProvider callback={close} childrenRefs={useRef([cardRef])}>
-    <article ref={cardRef}>
-        <p>Click outside this card to close it.</p>
-        <Dropdown>...</Dropdown>
-    </article>
-</ClickAwayProvider>
+import { useRef } from 'react';
+import { ClickAwayProvider } from '@lumx/react/utils';
+
+const MyComponent = ({ close }) => {
+    const cardRef = useRef(null);
+    return (
+        <ClickAwayProvider callback={close} childrenRefs={useRef([cardRef])}>
+            <article ref={cardRef}>
+                <p>Click outside this card to close it.</p>
+                <Dropdown>...</Dropdown>
+            </article>
+        </ClickAwayProvider>
+    );
+};
 ```
 
+</FrameworkOnly>
+
+<FrameworkOnly framework="vue">
+
+```html
+<template>
+    <ClickAwayProvider :callback="close" :childrenRefs="childrenRefs">
+        <article ref="cardRef">
+            <p>Click outside this card to close it.</p>
+        </article>
+    </ClickAwayProvider>
+</template>
+
+<script setup>
+    import { ref, computed } from 'vue';
+    import { ClickAwayProvider } from '@lumx/vue/utils';
+
+    const emit = defineEmits(['close']);
+    const close = () => emit('close');
+    const cardRef = ref(null);
+    const childrenRefs = ref([cardRef]);
+</script>
+```
+
+</FrameworkOnly>
+
 <Message kind="info">
-    In this example, clicking outside the card (referenced by <code>cardRef</code>) will trigger the <code>close</code>
-    callback. Clicks in children DOM nodes of the card or children of nested "click away" contexts (here the dropdown) are
-    all considered as "in" the the context and won't trigger the callback.
+    In this example, clicking outside the card will trigger the <code>close</code>
+    callback. Clicks in children DOM nodes of the card or children of nested "click away" contexts are all considered as
+    "in" the context and won't trigger the callback.
 </Message>
 
 This is used to provide correct "click away" behavior on nested `Dialog` or `Dropdown` even though they are not nested in the DOM tree.
-
-</FrameworkOnly>
 
 ## Portal
 

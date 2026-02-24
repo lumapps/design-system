@@ -10,8 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   `@lumx/vue`:
-    -    Create the portal utils
+    -   Create the portal utils
     -   Create the `Avatar` component
+    -   Create the click away utils
 
 ### Changed
 
@@ -21,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Changed `FlexBox` props `hAlign` and `vAlign` to `horizontalAlign` and `verticalAlign`
 -   `@lumx/react`:
     -   `Tooltip` & `Popover`: migrate/update positioning lib from popperjs to floating-ui
+    -   `useClickAway`: refactored to use shared code from `@lumx/core`
 
 ## [4.4.0][] - 2026-02-19
 
