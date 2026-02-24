@@ -2,10 +2,11 @@ import React from 'react';
 
 import { Button } from '@lumx/react';
 import { act, screen, render } from '@testing-library/react';
-import { queryAllByTagName, queryByClassName } from '@lumx/react/testing/utils/queries';
+import { queryByClassName } from '@lumx/react/testing/utils/queries';
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 import userEvent from '@testing-library/user-event';
 import { classNames } from '@lumx/core/js/utils';
+import BaseTooltipTests from '@lumx/core/js/components/Tooltip/Tests';
 
 import { Tooltip, TooltipProps } from './Tooltip';
 
@@ -37,16 +38,18 @@ const setup = async (propsOverride: Partial<TooltipProps> = {}) => {
 };
 
 describe(`<${Tooltip.displayName}>`, () => {
-    describe('render', () => {
-        it('should not render with empty label', async () => {
-            const { tooltip, anchorWrapper } = await setup({
-                label: undefined,
-                forceOpen: true,
-            });
-            expect(tooltip).not.toBeInTheDocument();
-            expect(anchorWrapper).not.toBeInTheDocument();
-        });
+    // Run core tests (shared between React and Vue)
+    BaseTooltipTests({
+        render: ({ children, ...props }: any) =>
+            render(
+                <Tooltip {...props}>
+                    <span>{children || 'Anchor'}</span>
+                </Tooltip>,
+            ),
+        screen,
+    });
 
+    describe('render', () => {
         it('should wrap unknown children', async () => {
             const { tooltip, anchorWrapper } = await setup({
                 label: 'Tooltip label',
@@ -54,20 +57,7 @@ describe(`<${Tooltip.displayName}>`, () => {
                 forceOpen: true,
             });
             expect(tooltip).toBeInTheDocument();
-            // Default placement
-            expect(tooltip).toHaveAttribute('data-popper-placement', 'bottom');
             expect(anchorWrapper).toBeInTheDocument();
-        });
-
-        it('should render with custom placement', async () => {
-            const { tooltip } = await setup({
-                label: 'Tooltip label',
-                children: 'Anchor',
-                forceOpen: true,
-                placement: 'top',
-            });
-            // Custom placement
-            expect(tooltip).toHaveAttribute('data-popper-placement', 'top');
         });
 
         it('should not wrap Button', async () => {
@@ -93,18 +83,6 @@ describe(`<${Tooltip.displayName}>`, () => {
             expect(anchorWrapper).toHaveAttribute('aria-describedby', tooltip?.id);
             const button = screen.queryByRole('button', { name: 'Anchor' });
             expect(button?.parentElement).toBe(anchorWrapper);
-        });
-
-        it('should render multiline', async () => {
-            const { tooltip } = await setup({
-                label: 'First line\nSecond line',
-                forceOpen: true,
-            });
-            expect(tooltip).toBeInTheDocument();
-            const lines = queryAllByTagName(tooltip as any, 'p');
-            expect(lines.length).toBe(2);
-            expect(lines[0]).toHaveTextContent('First line');
-            expect(lines[1]).toHaveTextContent('Second line');
         });
 
         it('should have a stable ref', async () => {

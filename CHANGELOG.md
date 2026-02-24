@@ -13,11 +13,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Create the portal utils
     -   Create the `Avatar` component
     -   Create the click away utils
+    -   Create the `Tooltip` component
 
 ### Changed
 
 -   `@lumx/core`:
     -   Moved `Avatar` from `@lumx/react`
+    -   Moved `Tooltip` from `@lumx/react`
 -   `@lumx/vue`:
     -   Changed `FlexBox` props `hAlign` and `vAlign` to `horizontalAlign` and `verticalAlign`
 -   `@lumx/react`:

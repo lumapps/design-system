@@ -7,8 +7,8 @@ export const withWrapper = (props: Record<string, any> = {}, as: string | object
         const overriddenProps = {
             ...props,
             ...wrapperProps,
-            verticalAlign: props.vAlign || wrapperProps.vAlign,
-            horizontalAlign: props.hAlign || wrapperProps.hAlign,
+            verticalAlign: props.vAlign || wrapperProps?.vAlign,
+            horizontalAlign: props.hAlign || wrapperProps?.hAlign,
             style: { ...props?.style, ...wrapperProps?.style },
         };
 

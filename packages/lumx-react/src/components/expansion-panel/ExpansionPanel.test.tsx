@@ -3,15 +3,15 @@ import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/uti
 import { queryByRole, render, screen } from '@testing-library/react';
 import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import userEvent from '@testing-library/user-event';
-import { isFocusVisible } from '@lumx/react/utils/browser/isFocusVisible';
 
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
 import { DragHandle } from '@lumx/react';
+import { isFocusVisible } from '@lumx/core/js/utils/browser/isFocusVisible';
 import { ExpansionPanel, ExpansionPanelProps } from '.';
 
 const CLASSNAME = ExpansionPanel.className as string;
 
-vi.mock('@lumx/react/utils/browser/isFocusVisible');
+vi.mock('@lumx/core/js/utils/browser/isFocusVisible');
 
 const mockChildrenContent = 'children content';
 
