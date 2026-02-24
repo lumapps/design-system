@@ -1,15 +1,7 @@
 import { RefObject, useEffect } from 'react';
 
 import { Falsy } from '@lumx/react/utils/type';
-
-import isEmpty from 'lodash/isEmpty';
-
-const EVENT_TYPES = ['mousedown', 'touchstart'];
-
-function isClickAway(targets: HTMLElement[], refs: Array<RefObject<HTMLElement>>): boolean {
-    // The targets elements are not contained in any of the listed element references.
-    return !refs.some((ref) => targets.some((target) => ref?.current?.contains(target)));
-}
+import { setupClickAway } from '@lumx/core/js/utils/ClickAway';
 
 export interface ClickAwayParameters {
     /**
@@ -29,20 +21,11 @@ export interface ClickAwayParameters {
  */
 export function useClickAway({ callback, childrenRefs }: ClickAwayParameters): void {
     useEffect(() => {
-        const { current: currentRefs } = childrenRefs;
-        if (!callback || !currentRefs || isEmpty(currentRefs)) {
-            return undefined;
-        }
-        const listener: EventListener = (evt) => {
-            const targets = [evt.composedPath?.()[0], evt.target] as HTMLElement[];
-            if (isClickAway(targets, currentRefs)) {
-                callback(evt);
-            }
+        const getElements = () => {
+            const refs = childrenRefs.current;
+            if (!refs) return [];
+            return refs.map((ref) => ref?.current).filter(Boolean) as HTMLElement[];
         };
-
-        EVENT_TYPES.forEach((evtType) => document.addEventListener(evtType, listener));
-        return () => {
-            EVENT_TYPES.forEach((evtType) => document.removeEventListener(evtType, listener));
-        };
+        return setupClickAway(getElements, callback);
     }, [callback, childrenRefs]);
 }
