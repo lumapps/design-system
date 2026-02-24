@@ -7,11 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   `@lumx/vue`:
+    -   Create the `Popover` component
+
 ### Changed
 
 -   `@lumx/core`:
     -    Improve spacing util size type (abstract sizes, not t-shirt sizes)
     -    Add all direction short-hand for spacing utils (`margin(null)`, `padding('regular')`, etc.)
+    -   Moved `Popover` from `@lumx/react`
 -   `@lumx/react`:
     -    `ListItem`: display "clickable" variant when providing `linkAs` (and not just on `onItemSelected` or `linkProps.href`)
     -    `ListItem`: render as HTML `<button>` with `onItemSelected` (instead of `<a role="button">`)

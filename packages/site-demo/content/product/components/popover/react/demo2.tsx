@@ -1,8 +1,8 @@
 import { useRef, type RefObject } from 'react';
 import { classNames } from '@lumx/core/js/utils';
-import { Chip, FlexBox, Popover, type Theme, type Placement } from '@lumx/react';
+import { Button, FlexBox, Popover, type Placement } from '@lumx/react';
 
-export default ({ theme }: { theme?: Theme }) => {
+export default () => {
     const popovers: Array<[Placement, RefObject<any>]> = [
         ['left', useRef(null)],
         ['top', useRef(null)],
@@ -13,17 +13,11 @@ export default ({ theme }: { theme?: Theme }) => {
         <FlexBox style={{ padding: 80, gap: 128 }} orientation="vertical">
             {popovers.map(([placement, ref]) => (
                 <FlexBox key={placement} fillSpace vAlign="center" hAlign="center">
-                    <Chip ref={ref as any} theme={theme} size="s">
+                    <Button ref={ref as any} size="s" emphasis="medium">
                         {placement.toUpperCase()}
-                    </Chip>
+                    </Button>
 
-                    <Popover
-                        isOpen
-                        className={classNames.padding('huge')}
-                        theme={theme}
-                        anchorRef={ref as any}
-                        placement={placement}
-                    >
+                    <Popover isOpen className={classNames.padding('huge')} anchorRef={ref as any} placement={placement}>
                         Popover
                     </Popover>
                 </FlexBox>

@@ -1,19 +1,27 @@
 ---
-frameworks: ['react']
+frameworks: ['react', 'vue']
 ---
-import * as Demo1 from './react/demo1.tsx';
-import * as Demo2 from './react/demo2.tsx';
-import * as Demo3 from './react/demo3.tsx';
-import * as Demo4 from './react/demo4.tsx';
-import * as Demo5 from './react/demo5.tsx';
-import * as Demo6 from './react/demo6.tsx';
+
+import * as ReactDemo1 from './react/demo1.tsx';
+import * as ReactDemo2 from './react/demo2.tsx';
+import * as ReactDemo3 from './react/demo3.tsx';
+import * as ReactDemo4 from './react/demo4.tsx';
+import * as ReactDemo5 from './react/demo5.tsx';
+import * as ReactDemo6 from './react/demo6.tsx';
+import * as VueDemo1 from './vue/demo1.vue';
+import * as VueDemo2 from './vue/demo2.vue';
+import * as VueDemo3 from './vue/demo3.vue';
+import * as VueDemo4 from './vue/demo4.vue';
+import * as VueDemo5 from './vue/demo5.vue';
+import * as VueDemo6 from './vue/demo6.vue';
 import ReactPopover from 'lumx-docs:@lumx/react/components/popover/Popover';
+import VuePopover from 'lumx-docs:@lumx/vue/components/popover/Popover';
 
 # Popover
 
 **Popovers display pieces of UI on top of others. They are positioned using anchor elements.**
 
-<DemoBlock orientation="horizontal" demo={{ react: Demo1 }} />
+<DemoBlock orientation="horizontal" demo={{ react: ReactDemo1, vue: VueDemo1 }} />
 
 ## Positions
 
@@ -21,32 +29,32 @@ import ReactPopover from 'lumx-docs:@lumx/react/components/popover/Popover';
 
 Popovers can be placed to 4 positions: `top`, `right`, `bottom`, `left`
 
-<DemoBlock demo={{ react: Demo2 }} />
+<DemoBlock demo={{ react: ReactDemo2, vue: VueDemo2 }} />
 
 ### Auto
 
 Popovers can also be placed automatically where space is available. They are placed at the bottom of anchors by default.
 
-<DemoBlock orientation="horizontal" demo={{ react: Demo3 }} />
+<DemoBlock orientation="horizontal" demo={{ react: ReactDemo3, vue: VueDemo3 }} />
 
 ## Offset
 
 Popovers position can have an offset.
 
-<DemoBlock orientation="horizontal" demo={{ react: Demo4 }} />
+<DemoBlock orientation="horizontal" demo={{ react: ReactDemo4, vue: VueDemo4 }} />
 
 ## Alignments
 
 In addition to positions, popovers can be aligned to a chosen anchor's side:
 `top-start`, `top-end`, `right-start`, `right-end`, `bottom-start`, `bottom-end`, `left-start`, `left-end`, `auto-start`, `auto-end`.
 
-<DemoBlock orientation="vertical" demo={{ react: Demo5 }} />
+<DemoBlock orientation="vertical" demo={{ react: ReactDemo5, vue: VueDemo5 }} />
 
 ## Matching width
 
 Popovers width can be forced to match anchors.
 
-<DemoBlock demo={{ react: Demo6 }} />
+<DemoBlock demo={{ react: ReactDemo6, vue: VueDemo6 }} />
 
 ### Accessibility concerns
 
@@ -90,4 +98,4 @@ In this case, the following concerns should be handled:
 
 ### Properties
 
-<PropTable docs={{ react: ReactPopover }} />
+<PropTable docs={{ react: ReactPopover, vue: VuePopover }} />

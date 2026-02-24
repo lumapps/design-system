@@ -1,3 +1,4 @@
+// @vitest-environment jsdom
 import { getFirstAndLastFocusable } from './getFirstAndLastFocusable';
 
 function htmlToElement(html: string): any {

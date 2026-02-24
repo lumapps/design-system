@@ -12,7 +12,7 @@ import {
 import { useTheme } from '../../composables/useTheme';
 import { useDisableStateProps } from '../../composables/useDisableStateProps';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
-import { ResetTheme } from '../../utils/ResetTheme';
+import { ResetTheme } from '../../utils/theme';
 import { Icon } from '../icon';
 import Text from '../text/Text';
 import { JSXElement } from '@lumx/core/js/types';
