@@ -31,6 +31,9 @@ export function isClickAway(targets: HTMLElement[], elements: HTMLElement[]): bo
  * Adds mousedown/touchstart listeners on `document` and calls the callback when a click
  * occurs outside the elements returned by `getElements`.
  *
+ * Note: when `getElements` returns an empty array, any click is considered a click away.
+ * Callers should guard against calling `setupClickAway` when no refs are registered.
+ *
  * @param getElements - Getter returning the current list of elements considered "inside".
  * @param callback - Callback to invoke on click away.
  * @returns A teardown function that removes the event listeners.
@@ -46,7 +49,7 @@ export function setupClickAway(
     const listener: EventListener = (evt) => {
         const targets = [evt.composedPath?.()[0], evt.target] as HTMLElement[];
         const elements = getElements();
-        if (elements.length > 0 && isClickAway(targets, elements)) {
+        if (isClickAway(targets, elements)) {
             callback(evt);
         }
     };
