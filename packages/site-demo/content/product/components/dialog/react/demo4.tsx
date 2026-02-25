@@ -1,6 +1,7 @@
 import { useCallback, useRef, useState } from 'react';
 import { mdiPlay } from '@lumx/icons';
-import { Button, Dialog, type DialogSizes, Toolbar, type Theme } from '@lumx/react';
+import { Button, Dialog, type DialogSizes, Text, Toolbar, type Theme } from '@lumx/react';
+import { classNames } from '@lumx/core/js/utils';
 
 export default ({ theme }: { theme?: Theme }) => {
     const [size, setSize] = useState<DialogSizes>();
@@ -15,7 +16,7 @@ export default ({ theme }: { theme?: Theme }) => {
     return (
         <>
             <Button
-                className="lumx-spacing-margin-horizontal-tiny"
+                className={classNames.margin('horizontal', 'tiny')}
                 leftIcon={mdiPlay}
                 ref={buttonRef}
                 onClick={onClickSize('tiny')}
@@ -25,7 +26,7 @@ export default ({ theme }: { theme?: Theme }) => {
             </Button>
 
             <Button
-                className="lumx-spacing-margin-horizontal-tiny"
+                className={classNames.margin('horizontal', 'tiny')}
                 leftIcon={mdiPlay}
                 ref={buttonRef}
                 onClick={onClickSize('regular')}
@@ -35,7 +36,7 @@ export default ({ theme }: { theme?: Theme }) => {
             </Button>
 
             <Button
-                className="lumx-spacing-margin-horizontal-tiny"
+                className={classNames.margin('horizontal', 'tiny')}
                 leftIcon={mdiPlay}
                 ref={buttonRef}
                 onClick={onClickSize('big')}
@@ -45,7 +46,7 @@ export default ({ theme }: { theme?: Theme }) => {
             </Button>
 
             <Button
-                className="lumx-spacing-margin-horizontal-tiny"
+                className={classNames.margin('horizontal', 'tiny')}
                 leftIcon={mdiPlay}
                 ref={buttonRef}
                 onClick={onClickSize('huge')}
@@ -56,10 +57,16 @@ export default ({ theme }: { theme?: Theme }) => {
 
             <Dialog isOpen={isOpen} parentElement={buttonRef} onClose={close} size={size}>
                 <header>
-                    <Toolbar label={<span className="lumx-typography-title">Dialog</span>} />
+                    <Toolbar
+                        label={
+                            <Text as="span" typography="title">
+                                Dialog
+                            </Text>
+                        }
+                    />
                 </header>
 
-                <p className="lumx-spacing-padding-horizontal-huge">
+                <p className={classNames.padding('horizontal', 'huge')}>
                     Nihil hic munitissimus habendi senatus locus, nihil horum? At nos hinc posthac, sitientis piros
                     Afros. Magna pars studiorum, prodita quaerimus. Integer legentibus erat a ante historiarum dapibus.
                     Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea commodi
@@ -81,7 +88,7 @@ export default ({ theme }: { theme?: Theme }) => {
                                 <Button emphasis="medium" onClick={close}>
                                     Cancel
                                 </Button>
-                                <Button className="lumx-spacing-margin-left-regular" onClick={close}>
+                                <Button className={classNames.margin('left', 'regular')} onClick={close}>
                                     Save
                                 </Button>
                             </>

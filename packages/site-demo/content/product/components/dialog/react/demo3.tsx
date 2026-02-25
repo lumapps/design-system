@@ -1,38 +1,54 @@
 import { useCallback, useRef, useState } from 'react';
 import { mdiPlay } from '@lumx/icons';
-import { Button, Dialog, Toolbar, type Theme } from '@lumx/react';
+import { AlertDialog, Button, type Kind, type Theme } from '@lumx/react';
+import { classNames } from '@lumx/core/js/utils';
 
 export default ({ theme }: { theme?: Theme }) => {
+    const [kind, setKind] = useState<Kind>();
     const [isOpen, setOpen] = useState(false);
     const close = useCallback(() => setOpen(false), []);
-    const toggle = useCallback(() => setOpen(!isOpen), [isOpen]);
     const buttonRef = useRef(null);
+    const open = (k: Kind) => () => {
+        setKind(k);
+        setOpen(true);
+    };
     return (
         <>
-            <Button leftIcon={mdiPlay} ref={buttonRef} onClick={toggle} theme={theme}>
-                Try alert dialog
+            <Button
+                className={classNames.margin('right', 'regular')}
+                leftIcon={mdiPlay}
+                ref={buttonRef}
+                onClick={open('warning')}
+                theme={theme}
+            >
+                Warning
             </Button>
 
-            <Dialog size="tiny" isOpen={isOpen} parentElement={buttonRef} onClose={close} preventAutoClose>
-                <header>
-                    <Toolbar label={<span className="lumx-typography-title">Alert dialog</span>} />
-                </header>
+            <Button
+                className={classNames.margin('right', 'regular')}
+                leftIcon={mdiPlay}
+                ref={buttonRef}
+                onClick={open('error')}
+                theme={theme}
+            >
+                Error
+            </Button>
 
-                <p className="lumx-spacing-padding-horizontal-huge">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sit amet urna quis nisi sodales
-                    semper pharetra eu augue.
-                </p>
+            <Button leftIcon={mdiPlay} ref={buttonRef} onClick={open('success')} theme={theme}>
+                Success
+            </Button>
 
-                <footer>
-                    <Toolbar
-                        after={
-                            <Button className="lumx-spacing-margin-left-regular" onClick={close}>
-                                Ok
-                            </Button>
-                        }
-                    />
-                </footer>
-            </Dialog>
+            <AlertDialog
+                isOpen={isOpen}
+                parentElement={buttonRef}
+                onClose={close}
+                kind={kind}
+                title="Alert dialog"
+                confirmProps={{ label: 'Ok', onClick: close }}
+            >
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sit amet urna quis nisi sodales semper
+                pharetra eu augue.
+            </AlertDialog>
         </>
     );
 };
