@@ -1,4 +1,4 @@
-import { h } from 'vue';
+import { defineComponent, h, type PropType } from 'vue';
 import { CombinationsOptions } from '@lumx/core/stories/utils/combinations';
 import { CombinationsTable } from '@lumx/core/stories/utils/CombinationsTable';
 import { Heading, HeadingLevelProvider } from '@lumx/vue';
@@ -10,17 +10,27 @@ export type { CombinationsOptions, Combination, PropEntry } from '@lumx/core/sto
  * SB decorator generating a tables of combination of props (max 3 levels of props)
  */
 export const withCombinations = (options: CombinationsOptions) => (story: any, ctx: any) => {
-    // Render each cell by calling story() with per-cell args.
-    // Storybook's Vue renderer mutates context.args via Object.assign when story() is called
-    // with an update, so we snapshot and restore ctx.args around each call to prevent
-    // args from accumulating across cells.
-    const Story = ({ args }: { args: Record<string, any> }) => {
-        const savedArgs = ctx.args;
-        ctx.args = { ...args };
-        const StoryComponent = story({ args });
-        ctx.args = savedArgs;
-        return h(StoryComponent);
-    };
+    // Story component that renders a single combination cell.
+    // Uses defineComponent so that story() is called once during setup(),
+    // producing a stable component reference. Calling story() in the render
+    // function would create new component definitions on every render,
+    // causing Vue to unmount/remount and triggering infinite recursive updates.
+    const Story = defineComponent(
+        (props: { args: Record<string, any> }) => {
+            // Snapshot and restore ctx.args around the story() call to prevent
+            // Storybook's Vue renderer from accumulating args across cells.
+            const savedArgs = ctx.args;
+            ctx.args = { ...props.args };
+            const StoryComponent = story({ args: props.args });
+            ctx.args = savedArgs;
+            return () => h(StoryComponent);
+        },
+        {
+            props: {
+                args: { type: Object as PropType<Record<string, any>>, required: true },
+            },
+        },
+    );
     const nestedComponents = { HeadingLevelProvider, Heading, Story };
 
     return () => <CombinationsTable ctx={ctx} options={options} nestedComponents={nestedComponents} />;
