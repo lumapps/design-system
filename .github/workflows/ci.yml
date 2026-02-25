@@ -80,9 +80,9 @@ jobs:
             - name: 'Run code type check'
               run: yarn type-check
 
-    visual-tests:
+    test-storybook:
         if: github.event.pull_request.draft == false
-        uses: ./.github/workflows/workflow-visual-tests.yml
+        uses: ./.github/workflows/workflow-test-storybook.yml
         permissions:
             pull-requests: write
         secrets:
