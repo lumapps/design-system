@@ -13,6 +13,7 @@ import {
     type Middleware,
 } from '@floating-ui/react-dom';
 
+import { IS_BROWSER } from '@lumx/react/constants';
 import { PopoverProps } from '@lumx/react/components/popover/Popover';
 import { ARROW_SIZE, FitAnchorWidth, Placement } from './constants';
 
@@ -132,12 +133,15 @@ export function usePopoverStyle({
         middlewareData,
     } = useFloating({
         placement: floatingPlacement,
-        whileElementsMounted: autoUpdate,
+        // Disable autoUpdate and element refs in non-browser environments (e.g. jsdom) to avoid
+        // flushSync act() warnings from @floating-ui/react-dom (positioning is not meaningful in jsdom anyway).
+        ...(IS_BROWSER
+            ? {
+                  whileElementsMounted: autoUpdate,
+                  elements: { reference: anchorElement, floating: popperElement },
+              }
+            : {}),
         middleware,
-        elements: {
-            reference: anchorElement,
-            floating: popperElement,
-        },
     });
 
     const position = resolvedPlacement ?? placement;

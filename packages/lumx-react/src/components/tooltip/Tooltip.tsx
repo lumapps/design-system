@@ -3,7 +3,7 @@ import { ReactNode, useState } from 'react';
 
 import { useFloating, offset, autoUpdate, type Placement as FloatingPlacement } from '@floating-ui/react-dom';
 
-import { DOCUMENT } from '@lumx/react/constants';
+import { DOCUMENT, IS_BROWSER } from '@lumx/react/constants';
 import { GenericProps } from '@lumx/react/utils/type';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
 
@@ -65,9 +65,15 @@ export const Tooltip = forwardRef<TooltipProps, HTMLDivElement>((props, ref) => 
     const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
     const { floatingStyles, placement: resolvedPlacement } = useFloating({
         placement: placement as FloatingPlacement,
-        whileElementsMounted: autoUpdate,
+        // Disable autoUpdate and element refs in non-browser environments (e.g. jsdom) to avoid
+        // flushSync act() warnings from @floating-ui/react-dom (positioning is not meaningful in jsdom anyway).
+        ...(IS_BROWSER
+            ? {
+                  whileElementsMounted: autoUpdate,
+                  elements: { reference: anchorElement, floating: popperElement },
+              }
+            : {}),
         middleware: [offset(ARROW_SIZE)],
-        elements: { reference: anchorElement, floating: popperElement },
     });
 
     const position = resolvedPlacement ?? placement;
