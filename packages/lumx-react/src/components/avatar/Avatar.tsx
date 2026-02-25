@@ -1,4 +1,4 @@
-import { KeyboardEventHandler, MouseEventHandler, ReactNode } from 'react';
+import React, { KeyboardEventHandler, MouseEventHandler, ReactNode } from 'react';
 
 import { AspectRatio, Theme, Thumbnail, ThumbnailProps } from '@lumx/react';
 
@@ -27,6 +27,8 @@ export type { AvatarSize };
 export interface AvatarProps extends GenericProps, ReactToJSX<UIProps, 'actions' | 'badge' | 'image'> {
     /** Action toolbar content. */
     actions?: ReactNode;
+    /** Image URL. */
+    image: string;
     /** Props to pass to the link wrapping the thumbnail. */
     linkProps?: React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
     /** Custom react component for the link (can be used to inject react router Link). */
