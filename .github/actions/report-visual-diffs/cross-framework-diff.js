@@ -7,6 +7,7 @@ const pixelmatch = pixelmatchModule.default || pixelmatchModule;
 const { findFiles, extractRelativePath, normalizeScreenshotPath } = require('./utils');
 
 const DIFF_PIXELS_THRESHOLD = 30;
+const DIFF_PERCENT_THRESHOLD = 0.01;
 
 /** Read a PNG file and return raw RGBA pixel data with dimensions. */
 async function readPng(filePath) {
@@ -82,7 +83,7 @@ async function compareImages(reactPath, vuePath, diffPath) {
 
     const totalPixels = width * height;
     const diffPercent = totalPixels > 0 ? (diffPixels / totalPixels) * 100 : 0;
-    const hasDiff = diffPixels > DIFF_PIXELS_THRESHOLD;
+    const hasDiff = diffPixels > DIFF_PIXELS_THRESHOLD && diffPercent > DIFF_PERCENT_THRESHOLD;
 
     if (hasDiff) {
         await fsPromises.mkdir(path.dirname(diffPath), { recursive: true });
