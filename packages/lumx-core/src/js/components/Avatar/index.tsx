@@ -37,9 +37,9 @@ export const { block, element } = classNames.bem(CLASSNAME);
 /**
  * Component default props.
  */
-export const DEFAULT_PROPS: Partial<AvatarProps> = {
+export const DEFAULT_PROPS = {
     size: Size.m,
-};
+} as const;
 
 /**
  * Avatar component.
