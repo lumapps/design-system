@@ -14,7 +14,6 @@ interface DemoBlockProps extends FlexBoxProps {
     demo: Demos;
     theme?: Theme;
     withThemeSwitcher?: boolean;
-    hasPlayButton?: boolean;
     backgroundColor?: { color: ColorPalette; variant: ColorVariant };
     alwaysShowCode?: boolean;
 }
@@ -23,7 +22,6 @@ export const DemoBlock: React.FC<DemoBlockProps> = ({
     demo,
     theme: defaultTheme = Theme.light,
     withThemeSwitcher = false,
-    hasPlayButton = false,
     backgroundColor: propBackgroundColor,
     alwaysShowCode,
     gap = Size.big,
@@ -47,7 +45,7 @@ export const DemoBlock: React.FC<DemoBlockProps> = ({
     const sourceCode = currentDemo?.sourceCode?.trim();
 
     return (
-        <div className={classNames.join('demo-block', { 'demo-block--has-play-button': hasPlayButton })}>
+        <div className={classNames.join('demo-block')}>
             <LiveProvider demo={demo} theme={theme} isEditMode={isEditMode} flexBoxProps={flexBoxProps}>
                 <LivePreview
                     className={classNames.join(
