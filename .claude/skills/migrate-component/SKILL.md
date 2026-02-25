@@ -249,13 +249,12 @@ Migration order:
     - Define props using `keysOf<ComponentProps>()`
     - Set `name: 'Lumx<Component>'`
     - Set `inheritAttrs: false`
-    - **Create `index.ts` with exports matching React structure:**
-        - Read the React component's `index.ts` file
-        - Export the same items (components, types, props, constants, utilities)
-        - Maintain similar export structure, accounting for framework differences:
-            - Vue uses default export for the component: `export { default as Component }`
-            - React uses named export: `export { Component }`
-            - Both should export the same types, props, and constants
+    - **Create `index.ts` with exports for components and types only:**
+        - Read the React component's `index.ts` file for reference
+        - Export components and types (props, enums, utilities)
+        - **Do NOT export `CLASSNAME`, `COMPONENT_NAME`, or `DEFAULT_PROPS`** — these are internal constants
+        - Vue uses default export for the component: `export { default as Component }`
+        - React uses named export: `export { Component }`
 
 5. **Update Vue package index:**
     ```typescript
@@ -1029,15 +1028,14 @@ export { CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS } from '@lumx/core/js/componen
 ```typescript
 export { default as Badge, type BadgeProps } from './Badge';
 export { default as BadgeWrapper, type BadgeWrapperProps } from './BadgeWrapper';
-export { CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS } from '@lumx/core/js/components/Badge';
 ```
 
 **Key differences:**
 
 -   Vue uses `default as ComponentName` for component exports (because Vue component files use default export)
 -   React uses direct named exports (because React component files use named exports)
--   Both export the same types, props, and constants from core
--   Both maintain the same export order and grouping
+-   **Vue does NOT export `CLASSNAME`, `COMPONENT_NAME`, or `DEFAULT_PROPS`** — these are internal constants meant for core/React only
+-   Both export the same component types and props
 
 ### Core Component Structure
 
@@ -1121,9 +1119,6 @@ import { computed, defineComponent, toRaw, useAttrs } from 'vue';
 import {
     Component as ComponentUI,
     type ComponentProps as UIProps,
-    CLASSNAME,
-    COMPONENT_NAME,
-    DEFAULT_PROPS,
 } from '@lumx/core/js/components/Component';
 import { useTheme, useDisableStateProps, useId } from '../../composables/...';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
@@ -1134,8 +1129,6 @@ export type ComponentProps = VueToJSXProps<UIProps, 'inputId' | 'label'>;
 export const emitSchema = {
     change: (/* params */) => /* validation */,
 };
-
-export { CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS };
 
 const Component = defineComponent(
     (props: ComponentProps, { emit, slots }) => {
@@ -1236,7 +1229,7 @@ export default Component;
 16. **Use `.tsx` extension for ALL story files** — core, React, and Vue stories all use JSX (Vue stories need `.tsx` when they provide a `render` override with JSX)
 17. **No `.vue` template files for stories** — all story rendering is handled by JSX in core. Do NOT create `Stories/*.vue` files or use `withRender`.
 18. **Vue tests must mimic React tests** - Include the same structure with `commonTestsSuiteVTL`
-19. **Vue `index.ts` should match React `index.ts` structure** - Export the same items (components, types, constants) in the same order, only differing in default vs named export syntax for components
+19. **Vue `index.ts` should export components and types only** - Do NOT export `CLASSNAME`, `COMPONENT_NAME`, or `DEFAULT_PROPS` from Vue index files. Only export components (using `default as` syntax) and types (props, enums)
 20. **Always check for existing core implementation first** - Before creating UI/Stories/Tests in core, verify they don't already exist. If they do, reuse them and only make changes after user approval
 21. **Use ReactToJSX and VueToJSXProps type utilities** - Don't manually list all props to omit; use the new type utilities that automatically handle PropsToOverride
 22. **🛑 Use `toRaw()` on props that accept Vue component references** — Props like `linkAs` accept a Vue component object (e.g., a custom `RouterLink`). When this component object flows through Vue's reactivity system (props → `computed` → spread in `useDisableStateProps`), it becomes a reactive proxy. Passing a reactive component to JSX causes: `[Vue warn]: Vue received a Component that was made a reactive object`. Use `toRaw()` to unwrap reactivity before passing to the core UI component.
