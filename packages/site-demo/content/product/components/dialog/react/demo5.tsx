@@ -1,6 +1,7 @@
 import { useCallback, useRef, useState } from 'react';
 import { mdiPlay } from '@lumx/icons';
-import { Button, Dialog, Toolbar, type Theme } from '@lumx/react';
+import { Button, Dialog, Text, Toolbar, type Theme } from '@lumx/react';
+import { classNames } from '@lumx/core/js/utils';
 
 export default ({ theme }: { theme?: Theme }) => {
     const [isOpen, setOpen] = useState(false);
@@ -15,10 +16,16 @@ export default ({ theme }: { theme?: Theme }) => {
 
             <Dialog isOpen={isOpen} isLoading parentElement={buttonRef} onClose={close}>
                 <header>
-                    <Toolbar label={<span className="lumx-typography-title">Default dialog</span>} />
+                    <Toolbar
+                        label={
+                            <Text as="span" typography="title">
+                                Default dialog
+                            </Text>
+                        }
+                    />
                 </header>
 
-                <p className="lumx-spacing-padding-horizontal-huge">
+                <p className={classNames.padding('horizontal', 'huge')}>
                     Nihil hic munitissimus habendi senatus locus, nihil horum? At nos hinc posthac, sitientis piros
                     Afros. Magna pars studiorum, prodita quaerimus. Integer legentibus erat a ante historiarum dapibus.
                     Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea commodi
@@ -40,7 +47,7 @@ export default ({ theme }: { theme?: Theme }) => {
                                 <Button emphasis="medium" onClick={close}>
                                     Cancel
                                 </Button>
-                                <Button className="lumx-spacing-margin-left-regular" onClick={close}>
+                                <Button className={classNames.margin('left', 'regular')} onClick={close}>
                                     Save
                                 </Button>
                             </>
