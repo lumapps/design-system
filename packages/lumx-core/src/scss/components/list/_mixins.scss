@@ -27,6 +27,8 @@
 @mixin lumx-list-item-clickable() {
     @include lumx-state(lumx-base-const("state", "DEFAULT"), lumx-base-const("emphasis", "LOW"), "dark");
 
+    appearance: none;
+    border: none;
     cursor: pointer;
 
     &[data-focus-visible-added] {

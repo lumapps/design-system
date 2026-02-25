@@ -7,16 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Added
-
--   `@lumx/core`:
-    -    Added `classNames.actionArea` CSS utility
-
 ### Changed
 
 -   `@lumx/core`:
     -    Improve spacing util size type (abstract sizes, not t-shirt sizes)
     -    Add all direction short-hand for spacing utils (`margin(null)`, `padding('regular')`, etc.)
+-   `@lumx/react`:
+    -    `ListItem`: display "clickable" variant when providing `linkAs` (and not just on `onItemSelected` or `linkProps.href`)
+    -    `ListItem`: render as HTML `<button>` with `onItemSelected` (instead of `<a role="button">`)
 
 ## [4.5.1][] - 2026-02-26
 

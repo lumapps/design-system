@@ -1,12 +1,12 @@
-import { ReactNode, Ref, SyntheticEvent, useMemo } from 'react';
+import { ReactNode, Ref, SyntheticEvent } from 'react';
 
 import isEmpty from 'lodash/isEmpty';
 
 import { ListProps, Size } from '@lumx/react';
 import { GenericProps, HasAriaDisabled } from '@lumx/react/utils/type';
-import { onEnterPressed, onButtonPressed, classNames } from '@lumx/core/js/utils';
+import { classNames } from '@lumx/core/js/utils';
 import type { LumxClassName } from '@lumx/core/js/types';
-import { renderLink } from '@lumx/react/utils/react/renderLink';
+import { RawClickable } from '@lumx/core/js/components/RawClickable';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
 
@@ -65,8 +65,8 @@ const DEFAULT_PROPS: Partial<ListProps> = {
  * Check if the list item is clickable.
  * @return `true` if the list item is clickable; `false` otherwise.
  */
-export function isClickable({ linkProps, onItemSelected }: Partial<ListItemProps>): boolean {
-    return !isEmpty(linkProps?.href) || !!onItemSelected;
+export function isClickable({ linkAs, linkProps, onItemSelected }: Partial<ListItemProps>): boolean {
+    return !!linkAs || !isEmpty(linkProps?.href) || !!onItemSelected;
 }
 
 /**
@@ -93,59 +93,35 @@ export const ListItem = forwardRef<ListItemProps, HTMLLIElement>((props, ref) =>
         ...forwardedProps
     } = otherProps;
 
-    const role = linkAs || linkProps.href ? 'link' : 'button';
-    const onKeyDown = useMemo(() => {
-        if (onItemSelected && role === 'link') return onEnterPressed(onItemSelected as any);
-        if (onItemSelected && role === 'button') return onButtonPressed(onItemSelected as any);
-        return undefined;
-    }, [role, onItemSelected]);
-
-    const content = (
-        <>
-            {before && <div className={element('before')}>{before}</div>}
-            <div className={element('content')}>{children}</div>
-            {after && <div className={element('after')}>{after}</div>}
-        </>
-    );
+    const clickable = isClickable({ linkAs, linkProps, onItemSelected });
 
     return (
         <li
             ref={ref}
             {...forwardedProps}
-            className={classNames.join(
-                className,
-                block({
-                    [`size-${size}`]: Boolean(size),
-                }),
-            )}
+            className={classNames.join(className, block({ [`size-${size}`]: Boolean(size) }))}
         >
-            {isClickable({ linkProps, onItemSelected }) ? (
-                /* Clickable list item */
-                renderLink(
-                    {
-                        linkAs,
-                        tabIndex: !disabledStateProps.disabled ? 0 : undefined,
-                        role,
-                        'aria-disabled': isAnyDisabled,
-                        ...linkProps,
-                        href: isAnyDisabled ? undefined : linkProps.href,
-                        className: classNames.join(
-                            element('link', {
-                                'is-highlighted': isHighlighted,
-                                'is-selected': isSelected,
-                                'is-disabled': isAnyDisabled,
-                            }),
-                        ),
-                        onClick: isAnyDisabled ? undefined : onItemSelected,
-                        onKeyDown: isAnyDisabled ? undefined : onKeyDown,
-                        ref: linkRef,
-                    },
-                    content,
-                )
-            ) : (
-                /* Non clickable list item */
-                <div className={element('wrapper')}>{content}</div>
-            )}
+            {RawClickable({
+                as: clickable ? linkAs || (linkProps.href ? 'a' : 'button') : 'div',
+                ...disabledStateProps,
+                ...linkProps,
+                className: classNames.join(
+                    element(clickable ? 'link' : 'wrapper', {
+                        'is-highlighted': isHighlighted,
+                        'is-selected': isSelected,
+                        'is-disabled': isAnyDisabled,
+                    }),
+                ),
+                handleClick: onItemSelected,
+                ref: linkRef,
+                children: (
+                    <>
+                        {before && <div className={element('before')}>{before}</div>}
+                        <div className={element('content')}>{children}</div>
+                        {after && <div className={element('after')}>{after}</div>}
+                    </>
+                ),
+            })}
         </li>
     );
 });
