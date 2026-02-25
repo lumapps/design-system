@@ -1,4 +1,4 @@
-name: 'Visual Tests'
+name: 'Test Storybook'
 
 on:
     workflow_dispatch:
@@ -54,9 +54,10 @@ jobs:
                     | sort > ${{ matrix.visDir }}/cached-baselines.txt
 
             - name: 'Run ${{ matrix.project }} tests'
-              id: visual-tests
-              continue-on-error: true
+              id: test-storybook
               run: yarn test --project '${{ matrix.project }}' --run ${{ inputs.update && '--update' || '' }}
+              env:
+                  SNAPSHOT_ONLY: ${{ inputs.update && 'true' || '' }}
 
             - name: 'Upload visual report artifacts'
               if: always()

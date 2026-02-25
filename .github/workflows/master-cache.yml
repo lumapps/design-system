@@ -22,6 +22,6 @@ jobs:
 
     update-visual-snapshots:
         needs: [dependencies]
-        uses: ./.github/workflows/workflow-visual-tests.yml
+        uses: ./.github/workflows/workflow-test-storybook.yml
         with:
             update: true
