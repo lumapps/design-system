@@ -43,6 +43,13 @@
             background: none;
             min-height: 0px;
         }
+        .sp-preview-container {
+            resize: vertical;
+            min-height: 100%;
+        }
+        .sp-stack {
+            display: block;
+        }
     }
 
     &__code {
