@@ -5,11 +5,11 @@
     </div>
     <div style="max-width: 180px; overflow: hidden">
         <code>no wrap</code>
-        <Text as="p" typography="body2" noWrap> Lorem ipsum dolor sit amet, consectetur adipiscing elit. </Text>
+        <Text as="p" typography="body2" :no-wrap="true"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. </Text>
     </div>
     <div style="max-width: 180px; overflow: hidden">
         <code>truncate</code>
-        <Text as="p" typography="body2" truncate> Lorem ipsum dolor sit amet, consectetur adipiscing elit. </Text>
+        <Text as="p" typography="body2" :truncate="true"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. </Text>
     </div>
     <div style="max-width: 180px; overflow: hidden">
         <code>truncate multiline</code>

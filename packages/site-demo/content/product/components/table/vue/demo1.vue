@@ -1,5 +1,5 @@
 <template>
-    <Table has-dividers :theme="theme" :style="{ minWidth: '620px' }">
+    <Table :has-dividers="true" :theme="theme" :style="{ minWidth: '620px' }">
         <TableHeader>
             <TableRow>
                 <TableCell
@@ -20,38 +20,27 @@
         <TableBody>
             <TableRow v-for="body in tableBody" :key="body.id">
                 <TableCell>
-                    <FlexBox orientation="horizontal" h-align="center">
-                        <img
-                            :src="body.image"
-                            :alt="body.dessert"
+                    <FlexBox orientation="horizontal" horizontal-align="center">
+                        <Thumbnail
                             class="lumx-spacing-margin-right-big"
-                            style="width: 40px; height: 40px; border-radius: 4px; object-fit: cover;"
+                            :image="body.image"
+                            aspect-ratio="square"
+                            :alt="body.dessert"
+                            size="m"
+                            variant="rounded"
                         />
                         <Link :color="theme === 'dark' ? 'light' : 'dark'" href="./">
                             <span class="lumx-typography-subtitle1">{{ body.dessert }}</span>
                         </Link>
 
-                        <FlexBox orientation="horizontal" h-align="center" margin-auto="left">
-                            <button
-                                type="button"
-                                class="lumx-button lumx-button--emphasis-low lumx-button--size-m lumx-button--variant-icon"
-                                :class="`lumx-button--theme-${theme || 'light'}`"
-                                aria-label="Informations"
-                            >
-                                <svg viewBox="0 0 24 24" class="lumx-icon lumx-button__icon">
-                                    <path :d="mdiInformationOutline" />
-                                </svg>
-                            </button>
-                            <button
-                                type="button"
-                                class="lumx-button lumx-button--emphasis-low lumx-button--size-m lumx-button--variant-icon"
-                                :class="`lumx-button--theme-${theme || 'light'}`"
-                                aria-label="More options"
-                            >
-                                <svg viewBox="0 0 24 24" class="lumx-icon lumx-button__icon">
-                                    <path :d="mdiDotsVertical" />
-                                </svg>
-                            </button>
+                        <FlexBox orientation="horizontal" horizontal-align="center" margin-auto="left">
+                            <IconButton
+                                emphasis="low"
+                                :icon="mdiInformationOutline"
+                                label="Informations"
+                                :theme="theme"
+                            />
+                            <IconButton emphasis="low" :icon="mdiDotsVertical" label="More options" :theme="theme" />
                         </FlexBox>
                     </FlexBox>
                 </TableCell>
@@ -69,12 +58,14 @@ import orderBy from 'lodash/orderBy';
 import { mdiCommentOutline, mdiDotsVertical, mdiInformationOutline } from '@lumx/icons';
 import {
     FlexBox,
+    IconButton,
     Link,
     Table,
     TableBody,
     TableCell,
     TableHeader,
     TableRow,
+    Thumbnail,
     type Theme,
     type ThOrder,
 } from '@lumx/vue';

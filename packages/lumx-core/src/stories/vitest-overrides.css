@@ -22,8 +22,8 @@ img {
 :root {
     --lumx-typography-font-family: Arial, sans-serif !important;
 }
-pre {
-    font-family: monospace;
+pre, code {
+    font-family: "Ubuntu Mono", monospace;
 }
 
 /** Add some space around the subject */

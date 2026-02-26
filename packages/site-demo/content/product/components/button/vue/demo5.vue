@@ -1,5 +1,5 @@
 <template>
-    <FlexBox gap="big" orientation="horizontal" wrap>
+    <FlexBox gap="big" orientation="horizontal" :wrap="true">
         <Button size="s" :theme="theme">Default</Button>
         <Button :disabled="true" size="s" :theme="theme">Disabled</Button>
         <Button :left-icon="mdiPencil" size="s" :theme="theme">With Icon</Button>
@@ -11,7 +11,7 @@
         <IconButton label="Add" :icon="mdiPlus" size="s" :theme="theme" />
     </FlexBox>
 
-    <FlexBox gap="big" orientation="horizontal" wrap>
+    <FlexBox gap="big" orientation="horizontal" :wrap="true">
         <Button emphasis="medium" size="s" :theme="theme">Default</Button>
         <Button :disabled="true" emphasis="medium" size="s" :theme="theme">Disabled</Button>
         <Button emphasis="medium" :left-icon="mdiPencil" size="s" :theme="theme">With Icon</Button>
@@ -23,7 +23,7 @@
         <IconButton label="Add" :icon="mdiPlus" emphasis="medium" size="s" :theme="theme" />
     </FlexBox>
 
-    <FlexBox gap="big" orientation="horizontal" wrap>
+    <FlexBox gap="big" orientation="horizontal" :wrap="true">
         <Button emphasis="low" size="s" :theme="theme">Default</Button>
         <Button :disabled="true" emphasis="low" size="s" :theme="theme">Disabled</Button>
         <Button emphasis="low" :left-icon="mdiPencil" size="s" :theme="theme">With Icon</Button>

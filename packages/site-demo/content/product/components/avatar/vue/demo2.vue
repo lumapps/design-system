@@ -1,10 +1,10 @@
 <template>
     <Avatar :theme="theme" image="https://i.pravatar.cc/128?img=32" alt="Avatar with actions" size="xl">
         <template #actions>
-            <FlexBox orientation="horizontal" vAlign="center" gap="regular">
-                <IconButton label="Edit" color="dark" emphasis="low" has-background :icon="mdiPencil" size="s" />
-                <IconButton label="See" color="dark" emphasis="low" has-background :icon="mdiEye" size="s" />
-                <IconButton label="Delete" color="dark" emphasis="low" has-background :icon="mdiDelete" size="s" />
+            <FlexBox orientation="horizontal" verticalAlign="center" gap="regular">
+                <IconButton label="Edit" color="dark" emphasis="low" :has-background="true" :icon="mdiPencil" size="s" />
+                <IconButton label="See" color="dark" emphasis="low" :has-background="true" :icon="mdiEye" size="s" />
+                <IconButton label="Delete" color="dark" emphasis="low" :has-background="true" :icon="mdiDelete" size="s" />
             </FlexBox>
         </template>
     </Avatar>

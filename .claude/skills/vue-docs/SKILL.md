@@ -53,7 +53,9 @@ defineProps<{ theme?: Theme }>(); // only if withThemeSwitcher
 
 **Key conversion rules (React to Vue):**
 
--   **Props:** camelCase to kebab-case in templates (`leftIcon` -> `:left-icon`, `isDisabled` -> `is-disabled`)
+-   **Props:** camelCase to kebab-case in templates (`leftIcon` -> `:left-icon`, `isDisabled` -> `:is-disabled="true"`)
+-   **Boolean props:** Always use the explicit binding syntax `:<prop>="true"` instead of just `<prop>` (e.g., `:is-disabled="true"` not `is-disabled`, `:fill-space="true"` not `fill-space`)
+-   **FlexBox alignment props:** React `hAlign` maps to `horizontal-align` in Vue, and React `vAlign` maps to `vertical-align` in Vue
 -   **Events:** React callbacks to Vue events (`onChange={handler}` -> `@change="handler"`, `onClick` -> `@click`)
 -   **State:** `useState` to `ref()` (`const [checked, setChecked] = useState(false)` -> `const checked = ref(false)`)
 -   **State updates in events:** `@change="checked = $event"` or `@click="active = !active"`
