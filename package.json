@@ -81,5 +81,5 @@
         ".github/actions"
     ],
     "packageManager": "yarn@4.12.0",
-    "version": "4.5.0"
+    "version": "4.5.1"
 }
