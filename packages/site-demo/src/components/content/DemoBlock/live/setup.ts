@@ -107,6 +107,11 @@ createRoot(document.getElementById("root"))
     };
 }
 
+const CORRECTED_VUE_FLEXBOX_PROPS: Record<string, string> = {
+    vAlign: 'verticalAlign',
+    hAlign: 'horizontalAlign',
+};
+
 /**
  * Setup Vue Sandpack configuration.
  */
@@ -118,7 +123,8 @@ export function setupVueSandpack(
     const serializedProps = Object.entries(flexBoxProps)
         .map(([key, value]) => {
             if (value === undefined || value == null) return '';
-            return `:${key}="${JSON.stringify(value).replace(/"/g, "'")}"`;
+            const correctedKey = CORRECTED_VUE_FLEXBOX_PROPS[key] || key;
+            return `:${correctedKey}="${JSON.stringify(value).replace(/"/g, "'")}"`;
         })
         .join(' ');
 
