@@ -4,7 +4,7 @@
             <IconButton label="Previous" emphasis="low" :icon="mdiChevronLeft" />
         </template>
         <template #default>
-            <FlexBox orientation="horizontal" h-align="center" gap="big">
+            <FlexBox orientation="horizontal" horizontal-align="center" gap="big">
                 <Heading typography="title">Toolbar title</Heading>
 
                 <div style="position: relative; display: inline-flex; align-items: center;">
@@ -18,7 +18,7 @@
             </FlexBox>
         </template>
         <template #after>
-            <FlexBox orientation="horizontal" h-align="center" gap="regular">
+            <FlexBox orientation="horizontal" horizontal-align="center" gap="regular">
                 <IconButton label="Grid" emphasis="low" :icon="mdiViewGrid" />
                 <Button>Action</Button>
             </FlexBox>

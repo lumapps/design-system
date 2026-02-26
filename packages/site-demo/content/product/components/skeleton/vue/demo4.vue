@@ -1,8 +1,8 @@
 <template>
-    <FlexBox orientation="horizontal" gap="big">
-        <SkeletonCircle :theme="theme" size="m" />
+    <FlexBox orientation="horizontal" gap="big" :style="{ width: '200px' }">
+        <SkeletonCircle :theme="theme" size="m" style="flex-shrink: 0" />
 
-        <div :style="{ width: '200px' }">
+        <div :style="{ width: '100%' }">
             <SkeletonTypography :theme="theme" typography="body1" />
             <SkeletonTypography :theme="theme" typography="caption" width="60%" />
         </div>

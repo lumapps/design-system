@@ -4,13 +4,13 @@
             <IconButton label="Previous" emphasis="low" :icon="mdiChevronLeft" />
         </template>
         <template #default>
-            <FlexBox orientation="horizontal" h-align="center" gap="regular">
+            <FlexBox orientation="horizontal" horizontal-align="center" gap="regular">
                 <Heading typography="title">Folder name</Heading>
                 <IconButton label="Previous" emphasis="low" :icon="mdiOpenInNew" />
             </FlexBox>
         </template>
         <template #after>
-            <FlexBox orientation="horizontal" h-align="center" gap="regular">
+            <FlexBox orientation="horizontal" horizontal-align="center" gap="regular">
                 <div style="position: relative; display: inline-flex; align-items: center;">
                     <Icon :icon="mdiMagnify" style="position: absolute; left: 8px; pointer-events: none;" />
                     <input
