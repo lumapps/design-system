@@ -14,8 +14,6 @@ jsconfig.json
 .awcache
 coverage
 design_system.xpr
-design_system.ditamap
 build-storybook.log
-packages/lumx-react/storybook-static
 .eslintcache
 cross-framework-diffs
