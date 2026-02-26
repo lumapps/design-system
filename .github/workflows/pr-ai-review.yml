@@ -1,0 +1,29 @@
+name: "Claude PR Review"
+
+on:
+  pull_request:
+    types: [labeled]
+
+jobs:
+  claude_review:
+    if: "${{ contains( github.event.pull_request.labels.*.name, 'need: review-ai') }}"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: "Run Claude PR Review"
+        uses: lumapps/shared-github-actions/actions/claude-review@bb5ddb47b86b2017f049c33c0b6ee45a3e15ec9f
+        with:
+          pr_number: ${{ github.event.pull_request.number }}
+          github_token: ${{ secrets.GITBOT_TOKEN }}
+          vertex_credentials: ${{ secrets.DEV_AI_TOOLING_SERVICE_ACCOUNT_KEY }}
+          files_to_ignore: |
+            node_modules/**, .yarn/**, *.lock, yarn.lock, package-lock.json, storybook/build/**,
+            dist/**, build/**, .next/**, **/*.generated.ts, **/*.d.ts
+          custom_intro: |
+              You are reviewing a pull request for LumApps Design system application developed in React and Vue JS
+
+              All the information needed to review is in CLAUDE.md.
+
+              When doing comments, be concise with your comments, avoid long explanations.
