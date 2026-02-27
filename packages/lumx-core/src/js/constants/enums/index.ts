@@ -41,6 +41,7 @@ export const Size = {
 } as const;
 export type Size = ValueOf<typeof Size>;
 export type GlobalSize = Extract<Size, 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl'>;
+export type AbstractSize = Extract<Size, 'tiny' | 'regular' | 'medium' | 'big' | 'huge'>;
 
 export const Orientation = {
     horizontal: 'horizontal',
