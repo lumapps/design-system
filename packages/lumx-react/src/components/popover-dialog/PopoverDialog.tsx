@@ -1,49 +1,32 @@
-import { HasAriaLabelOrLabelledBy } from '@lumx/react/utils/type';
-import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
-import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { ReactNode } from 'react';
 
+import { HasAriaLabelOrLabelledBy } from '@lumx/react/utils/type';
+import { classNames } from '@lumx/core/js/utils';
+import { CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS } from '@lumx/core/js/components/PopoverDialog';
+import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { HeadingLevelProvider } from '@lumx/react/components/heading';
-import { Popover, PopoverProps } from '../popover/Popover';
+import { Popover, type PopoverProps } from '../popover/Popover';
 
 /**
  * PopoverDialog props.
  * The PopoverDialog has the same props as the Popover but requires an accessible label.
  */
-export type PopoverDialogProps = PopoverProps & HasAriaLabelOrLabelledBy;
-
-/**
- * Component display name.
- */
-const COMPONENT_NAME = 'PopoverDialog';
-
-/**
- * Component default class name and class prefix.
- */
-const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-popover-dialog';
-
-/**
- * Component default props.
- */
-const DEFAULT_PROPS: Partial<PopoverDialogProps> = {};
+export type PopoverDialogProps = PopoverProps &
+    HasAriaLabelOrLabelledBy & {
+        /** Accessible label for the dialog (alternative to aria-label prop). */
+        label?: string;
+    };
 
 /**
  * PopoverDialog component.
- * Defines a popover that acts like a dialog
- * * Has a dialog aria role
- * * Sets a focus trap within the popover
- * * Closes on click away and escape.
+ * Defines a popover that acts like a dialog:
+ * - Has a dialog aria role
+ * - Sets a focus trap within the popover
+ * - Closes on click away and escape
+ * - Resets heading level context to 2
  */
 export const PopoverDialog = forwardRef<PopoverDialogProps, HTMLDivElement>((props, ref) => {
-    const {
-        children,
-        isOpen,
-        focusElement,
-        'aria-label': ariaLabel,
-        label = ariaLabel,
-        className,
-        ...forwardedProps
-    } = props;
+    const { children, 'aria-label': ariaLabel, label = ariaLabel, className, ...forwardedProps } = props;
 
     return (
         <Popover
@@ -57,17 +40,15 @@ export const PopoverDialog = forwardRef<PopoverDialogProps, HTMLDivElement>((pro
              * If it is undefined, the label can be set using the `aria-label` and `aria-labelledby` props
              */
             aria-label={label}
-            isOpen={isOpen}
-            focusElement={focusElement}
             closeOnClickAway
             closeOnEscape
             withFocusTrap
         >
-            <HeadingLevelProvider level={2}>{children}</HeadingLevelProvider>
+            <HeadingLevelProvider level={2}>{children as ReactNode}</HeadingLevelProvider>
         </Popover>
     );
 });
 
 PopoverDialog.displayName = COMPONENT_NAME;
 PopoverDialog.className = CLASSNAME;
-PopoverDialog.defaultProps = DEFAULT_PROPS;
+PopoverDialog.defaultProps = DEFAULT_PROPS as Partial<PopoverDialogProps>;
