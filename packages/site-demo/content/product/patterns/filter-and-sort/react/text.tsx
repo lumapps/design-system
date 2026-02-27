@@ -1,4 +1,5 @@
 import { mdiMagnify } from '@lumx/icons';
+import { classNames } from '@lumx/core/js/utils';
 import {
     Alignment,
     FlexBox,
@@ -61,7 +62,7 @@ export const App = () => {
                         </div>
 
                         <div>
-                            <span className="lumx-color-font-dark-L2">{result.city}</span>
+                            <span className={classNames.font('dark-L2')}>{result.city}</span>
                         </div>
                     </ListItem>
                 ))}

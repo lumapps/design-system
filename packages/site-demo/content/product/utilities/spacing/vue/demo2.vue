@@ -1,6 +1,6 @@
 <template>
-    <div :class="classNames.join('lumx-color-background-primary-N', classNames.padding('huge'))">
-        <span class="lumx-color-font-light-N">The quick brown fox jumps over the lazy dog</span>
+    <div :class="classNames.join(classNames.background('primary'), classNames.padding('huge'))">
+        <span :class="classNames.font('light')">The quick brown fox jumps over the lazy dog</span>
     </div>
 </template>
 

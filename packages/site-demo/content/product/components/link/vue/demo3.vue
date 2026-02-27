@@ -1,6 +1,6 @@
 <template>
     <Link href="#" color="dark"> Dark color link </Link>
-    <div :class="classNames.join(classNames.padding(), 'lumx-color-background-dark-N')">
+    <div :class="classNames.join(classNames.padding(), classNames.background('dark'))">
         <Link href="#" color="light"> Light color link </Link>
     </div>
 </template>

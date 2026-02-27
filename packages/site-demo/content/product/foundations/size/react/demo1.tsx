@@ -1,3 +1,4 @@
+import { classNames } from '@lumx/core/js/utils';
 import { FlexBox, UserBlock } from '@lumx/react';
 
 export default () => (
@@ -12,7 +13,7 @@ export default () => (
         <FlexBox
             hAlign="center"
             vAlign="center"
-            className="lumx-color-background-dark-L6 lumx-color-font-dark-L3"
+            className={classNames.join(classNames.background('dark-L6'), classNames.font('dark-L3'))}
             style={{ width: '36px', height: '36px' }}
         >
             m
