@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Create the `Chip` component
     -   Create the `Popover` component
     -   Create the `PopoverDialog` component
+-   `@lumx/react`:
+    -    `Dialog`: added `closeMode` to `"unmount"` (default) or `"hide"` the dialog when closed
 
 ### Changed
 

@@ -27,6 +27,7 @@ import { withChromaticForceScreenSize } from '@lumx/react/stories/decorators/wit
 
 import { Dialog } from './Dialog';
 
+const CLOSE_MODES = ['hide', 'unmount'];
 const dialogSizes = [Size.tiny, Size.regular, Size.big, Size.huge];
 
 export default {
@@ -48,6 +49,7 @@ export default {
         size: getSelectArgType(dialogSizes),
         onVisibilityChange: { action: true },
         children: { control: false },
+        closeMode: { control: { type: 'inline-radio' as const }, options: CLOSE_MODES },
     },
     render(props: any) {
         const buttonRef = useRef<HTMLButtonElement>(null);
