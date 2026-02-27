@@ -107,12 +107,10 @@ jobs:
 
             - name: 'Deploy chromatic'
               id: deploy
-              uses: chromaui/action@a8ce9c58f59be5cc7090cadfc8f130fb08fcf0c3 #v15.1.0
-              with:
-                  exitOnceUploaded: true
-                  token: ${{ github.token }}
-                  projectToken: ${{ secrets[matrix.token_secret] }}
-                  workingDir: ${{ steps.vars.outputs.package_path }}
+              env:
+                  CHROMATIC_PROJECT_TOKEN: ${{ secrets[matrix.token_secret] }}
+              run: yarn dlx chromatic --exit-once-uploaded --auto-accept-changes
+              working-directory: ${{ steps.vars.outputs.package_path }}
 
             - if: failure() && needs.should-deploy.outputs.pr_number != ''
               name: 'Update PR body: Failure state'
@@ -130,6 +128,6 @@ jobs:
               with:
                   pull_number: ${{ needs.should-deploy.outputs.pr_number }}
                   pattern: 'StoryBook ${{ matrix.package }}: [^\n]*'
-                  replace: 'StoryBook ${{ matrix.package }}: ${{ steps.vars.outputs.storybook_url }} ([Chromatic build](${{ steps.deploy.outputs.buildUrl }}))'
+                  replace: 'StoryBook ${{ matrix.package }}: ${{ steps.vars.outputs.storybook_url }}'
                   whenNotFound: 'append'
                   keepLastMatch: true
