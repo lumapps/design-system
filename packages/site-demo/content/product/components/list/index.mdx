@@ -6,10 +6,12 @@ import * as DemoItemSizes from './react/item-sizes.tsx';
 import * as DemoItemPadding from './react/item-padding.tsx';
 import * as DemoClickable from './react/clickable.tsx';
 import * as DemoItemLayout from './react/item-layout.tsx';
+import * as DemoAction from './react/item-action.tsx';
 import ReactList from 'lumx-docs:@lumx/react/components/list/List';
 import ReactListDivider from 'lumx-docs:@lumx/react/components/list/ListDivider';
 import ReactListItem from 'lumx-docs:@lumx/react/components/list/ListItem';
 import ReactListSubheader from 'lumx-docs:@lumx/react/components/list/ListSubheader';
+import ReactListItemAction from 'lumx-docs:@lumx/react/components/list/ListItemAction';
 
 # List
 
@@ -51,11 +53,18 @@ Use clickable list items when users need to select one or more options in a list
 
 <DemoBlock demo={{ react: DemoClickable }} />
 
+Use `ListItem.Action` to activate the [action area](../../utilities/action-area) pattern and allow
+nested interactive elements in `before` or `after` while keeping them accessible.
+
+<DemoBlock demo={{ react: DemoAction }} />
+
 ### Accessibility concerns
 
 The `List` component renders a standard `<ul>` element with an implicit `list` role, and `ListItem`
 renders a `<li>` element with an implicit `listitem` role. Screen readers will announce the list
 and its items natively.
+
+#### Clickable list items
 
 When a `ListItem` is made clickable (via `onClick`, `linkProps.href`, or `linkAs`), its
 inner content is wrapped in a button or a link depending on the props provided. This ensures
@@ -69,6 +78,13 @@ Clickable list items can be disabled in two ways:
 -   `aria-disabled` only disable changes on the item (read only) so it's still focusable and accessible. You'll have
     to setup either a tooltip or an aria description (must be visible too) to explain to the user why it is disabled.
 
+#### Clickable list items with nested interactive elements
+
+When a list item needs **multiple independently clickable elements**, use `ListItem.Action` instead.
+It activates the [action area](../../utilities/action-area) pattern: the primary action expands its click target to
+the full list item area, while other interactive elements in `before` and `after` slots remain separately focusable
+and clickable. This keeps the DOM valid and preserves a clear tab order for keyboard and screen reader users.
+
 ### List properties
 
 <PropTable docs={{ react: ReactList }} />
@@ -80,3 +96,7 @@ Clickable list items can be disabled in two ways:
 ### ListSubheader properties
 
 <PropTable docs={{ react: ReactListSubheader }} />
+
+### ListItem.Action properties
+
+<PropTable docs={{ react: ReactListItemAction }} />

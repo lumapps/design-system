@@ -25,7 +25,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   `@lumx/react`:
-    -    `Popover`: added `closeMode` to `"unmount"` (default) or `"hide"` the popover when closed
+    -   `Popover`: added `closeMode` to `"unmount"` (default) or `"hide"` the popover when closed
+    -   Create the `ListItem.Action` component using the action area util on a `ListItem`
 -   `@lumx/core`:
     -   Add action area CSS utils
 

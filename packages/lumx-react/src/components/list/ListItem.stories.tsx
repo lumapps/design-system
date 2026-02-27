@@ -1,4 +1,4 @@
-import { List, ListItemSize, Size } from '@lumx/react';
+import { Button, List, ListItemSize, Size, Text } from '@lumx/react';
 
 import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
 import { CustomLink } from '@lumx/react/stories/utils/CustomLink';
@@ -65,4 +65,49 @@ export const AllStates = {
                 !props.onItemSelected && !props.linkProps?.href && !isEqual(Object.keys(props), ['size', 'children']),
         }),
     ],
+};
+
+/**
+ * Action area with a button as default action and a secondary action in the after slot.
+ */
+export const ActionAreaButton = {
+    argTypes: {
+        onClick: { action: true },
+        onAfterClick: { action: true },
+    },
+    render({ onClick, onAfterClick }: any) {
+        return (
+            <List itemPadding="big">
+                <ListItem
+                    after={
+                        <Button emphasis="low" onClick={onAfterClick}>
+                            Secondary action
+                        </Button>
+                    }
+                >
+                    <ListItem.Action onClick={onClick}>Main action</ListItem.Action>
+                    <Text as="p" color="dark-L2">
+                        Some text outside the main action
+                    </Text>
+                </ListItem>
+            </List>
+        );
+    },
+};
+
+/**
+ * Action area with a link as default action.
+ */
+export const ActionAreaLink = {
+    render() {
+        return (
+            <List itemPadding="big">
+                <ListItem>
+                    <ListItem.Action as="a" href="#">
+                        Link action
+                    </ListItem.Action>
+                </ListItem>
+            </List>
+        );
+    },
 };
