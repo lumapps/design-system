@@ -20,7 +20,7 @@ export const LiveEditor: React.FC = () => {
 
     if (!sourceCode) {
         return (
-            <Message kind="warning" className={classNames.margin('all', 'big')}>
+            <Message kind="warning" className={classNames.margin('big')}>
                 No available demo in {upperFirst(framework)} yet
             </Message>
         );

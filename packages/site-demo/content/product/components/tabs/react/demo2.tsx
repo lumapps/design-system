@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { classNames } from '@lumx/core/js/utils';
 import { Tab, TabList, TabListLayout, TabPanel, TabProvider, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => {
@@ -12,9 +13,9 @@ export default ({ theme }: { theme?: Theme }) => {
                     <Tab label="Tab 3" />
                 </TabList>
 
-                <TabPanel className="lumx-spacing-padding-vertical-huge">Tab 1 content</TabPanel>
-                <TabPanel className="lumx-spacing-padding-vertical-huge">Tab 2 content</TabPanel>
-                <TabPanel className="lumx-spacing-padding-vertical-huge">Tab 3 content</TabPanel>
+                <TabPanel className={classNames.padding('vertical', 'huge')}>Tab 1 content</TabPanel>
+                <TabPanel className={classNames.padding('vertical', 'huge')}>Tab 2 content</TabPanel>
+                <TabPanel className={classNames.padding('vertical', 'huge')}>Tab 3 content</TabPanel>
             </TabProvider>
         </div>
     );

@@ -1,4 +1,5 @@
 import { mdiMagnify } from '@lumx/icons';
+import { classNames } from '@lumx/core/js/utils';
 import { Popover, TextField, type Theme } from '@lumx/react';
 import React, { useRef } from 'react';
 
@@ -19,7 +20,7 @@ export default ({ theme }: { theme?: Theme }) => {
             </div>
             <Popover
                 isOpen
-                className="lumx-spacing-padding-huge"
+                className={classNames.padding('huge')}
                 theme={theme}
                 anchorRef={anchorRef}
                 placement="bottom-start"

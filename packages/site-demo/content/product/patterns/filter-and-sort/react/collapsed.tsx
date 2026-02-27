@@ -1,4 +1,5 @@
 import { mdiFilterVariant, mdiMagnify, mdiMenuDown, mdiSort } from '@lumx/icons';
+import { classNames } from '@lumx/core/js/utils';
 import {
     Button,
     Chip,
@@ -55,10 +56,10 @@ export const App = () => {
                 closeOnClickAway
                 closeOnEscape
             >
-                <div className="lumx-spacing-padding-huge">
+                <div className={classNames.padding('huge')}>
                     <span className="lumx-display-block lumx-typography-subtitle1">Type</span>
 
-                    <ChipGroup className="lumx-spacing-margin-top-big" style={{ maxWidth: 250 }}>
+                    <ChipGroup className={classNames.margin('top', 'big')} style={{ maxWidth: 250 }}>
                         {TYPES.map((type, index) => (
                             <Chip key={index} isClickable>
                                 {type}
@@ -69,10 +70,10 @@ export const App = () => {
 
                 <Divider />
 
-                <div className="lumx-spacing-padding-huge">
+                <div className={classNames.padding('huge')}>
                     <span className="lumx-display-block lumx-typography-subtitle1">Color</span>
 
-                    <ChipGroup className="lumx-spacing-margin-top-big" style={{ maxWidth: 250 }}>
+                    <ChipGroup className={classNames.margin('top', 'big')} style={{ maxWidth: 250 }}>
                         {COLORS.map((color, index) => (
                             <Chip key={index} isClickable>
                                 {color}
@@ -83,10 +84,10 @@ export const App = () => {
 
                 <Divider />
 
-                <div className="lumx-spacing-padding-huge">
+                <div className={classNames.padding('huge')}>
                     <span className="lumx-display-block lumx-typography-subtitle1">Shape</span>
 
-                    <ChipGroup className="lumx-spacing-margin-top-big" style={{ maxWidth: 250 }}>
+                    <ChipGroup className={classNames.margin('top', 'big')} style={{ maxWidth: 250 }}>
                         {SHAPES.map((shape, index) => (
                             <Chip key={index} isClickable>
                                 {shape}

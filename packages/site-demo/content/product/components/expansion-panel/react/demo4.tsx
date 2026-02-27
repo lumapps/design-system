@@ -1,4 +1,5 @@
 import { type SyntheticEvent, useState } from 'react';
+import { classNames } from '@lumx/core/js/utils';
 import {
     Button,
     Divider,
@@ -40,7 +41,7 @@ export default () => {
             >
                 <header>
                     <GenericBlock
-                        className="lumx-spacing-margin-left-regular"
+                        className={classNames.margin('left', 'regular')}
                         hAlign="center"
                         figure={
                             <Thumbnail alt="" image="https://picsum.photos/id/1/128/128" size="m" variant="rounded" />
@@ -50,7 +51,7 @@ export default () => {
                     </GenericBlock>
                 </header>
 
-                <div className="lumx-spacing-padding-big">
+                <div className={classNames.padding('big')}>
                     <Text as="p" typography="subtitle1">
                         Curabitur est gravida et libero vitae dictum.
                     </Text>
@@ -69,7 +70,7 @@ export default () => {
             >
                 <header>
                     <GenericBlock
-                        className="lumx-spacing-margin-left-regular"
+                        className={classNames.margin('left', 'regular')}
                         hAlign="center"
                         figure={
                             <Thumbnail alt="" image="https://picsum.photos/id/1/128/128" size="m" variant="rounded" />
@@ -82,7 +83,7 @@ export default () => {
                     </GenericBlock>
                 </header>
 
-                <div className="lumx-spacing-padding-big">
+                <div className={classNames.padding('big')}>
                     <Text as="p" typography="subtitle1">
                         Curabitur est gravida et libero vitae dictum.
                     </Text>
@@ -99,7 +100,7 @@ export default () => {
                 toggleButtonProps={{ label: 'Toggle' }}
             >
                 <header>
-                    <FlexBox className="lumx-spacing-margin-left-big" orientation="horizontal" hAlign="center">
+                    <FlexBox className={classNames.margin('left', 'big')} orientation="horizontal" hAlign="center">
                         <Text as="p" typography="body1">
                             With secondary action
                         </Text>
@@ -116,7 +117,7 @@ export default () => {
                     </FlexBox>
                 </header>
 
-                <div className="lumx-spacing-padding-big lumx-spacing-padding-top-none">
+                <div className={classNames.join(classNames.padding('big'), classNames.padding('top', null))}>
                     <Text as="p" typography="subtitle1">
                         Curabitur est gravida et libero vitae dictum.
                     </Text>
@@ -138,7 +139,7 @@ export default () => {
                     </GenericBlock>
                 </header>
 
-                <div className="lumx-spacing-padding-top">
+                <div className={classNames.padding('top')}>
                     <Text as="p" typography="subtitle1">
                         Curabitur est gravida et libero vitae dictum.
                     </Text>
@@ -162,7 +163,7 @@ export default () => {
                     </GenericBlock>
                 </header>
 
-                <div className="lumx-spacing-padding-top">
+                <div className={classNames.padding('top')}>
                     <Text as="p" typography="subtitle1">
                         Curabitur est gravida et libero vitae dictum.
                     </Text>

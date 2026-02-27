@@ -22,7 +22,7 @@
                 <TableCell>
                     <FlexBox orientation="horizontal" horizontal-align="center">
                         <Thumbnail
-                            class="lumx-spacing-margin-right-big"
+                            :class="classNames.margin('right', 'big')"
                             :image="body.image"
                             aspect-ratio="square"
                             :alt="body.dessert"
@@ -56,6 +56,7 @@
 import { ref } from 'vue';
 import orderBy from 'lodash/orderBy';
 import { mdiCommentOutline, mdiDotsVertical, mdiInformationOutline } from '@lumx/icons';
+import { classNames } from '@lumx/core/js/utils';
 import {
     FlexBox,
     IconButton,

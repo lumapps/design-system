@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { classNames } from '@lumx/core/js/utils';
 import { ExpansionPanel, Text, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => {
@@ -11,7 +12,7 @@ export default ({ theme }: { theme?: Theme }) => {
             onToggleOpen={setOpen}
             toggleButtonProps={{ label: 'Toggle' }}
         >
-            <div className="lumx-spacing-padding-top">
+            <div className={classNames.padding('top')}>
                 <Text as="p" typography="subtitle1" color={theme === 'light' ? 'dark' : 'light'}>
                     Curabitur est gravida et libero vitae dictum.
                 </Text>
