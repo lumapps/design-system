@@ -1,7 +1,8 @@
+import { classNames } from '@lumx/core/js/utils';
 import { Chip, ChipGroup, ImageBlock } from '@lumx/react';
 
 export default () => (
-    <div className="lumx-color-background-dark-L5 lumx-spacing-padding-huge">
+    <div className={classNames.join('lumx-color-background-dark-L5', classNames.padding('huge'))}>
         <ImageBlock
             className="lumx-color-background-light-N"
             captionStyle={{ padding: 16 }}

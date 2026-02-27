@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 import orderBy from 'lodash/orderBy';
 import { mdiCommentOutline, mdiDotsVertical, mdiInformationOutline } from '@lumx/icons';
+import { classNames } from '@lumx/core/js/utils';
 import {
     FlexBox,
     IconButton,
@@ -121,7 +122,7 @@ export default ({ theme }: { theme?: Theme }) => {
                         <TableCell>
                             <FlexBox orientation="horizontal" hAlign="center">
                                 <Thumbnail
-                                    className="lumx-spacing-margin-right-big"
+                                    className={classNames.margin('right', 'big')}
                                     image={body.image}
                                     aspectRatio="square"
                                     alt={body.dessert}

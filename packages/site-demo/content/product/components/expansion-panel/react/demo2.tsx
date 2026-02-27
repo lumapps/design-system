@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { classNames } from '@lumx/core/js/utils';
 import { DragHandle, ExpansionPanel, Text, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => {
@@ -14,7 +15,7 @@ export default ({ theme }: { theme?: Theme }) => {
         >
             <DragHandle theme={theme} />
 
-            <div className="lumx-spacing-padding-big lumx-spacing-padding-top-none">
+            <div className={classNames.join(classNames.padding('big'), classNames.padding('top', null))}>
                 <Text as="p" typography="subtitle1" color={theme === 'light' ? 'dark' : 'light'}>
                     Curabitur est gravida et libero vitae dictum.
                 </Text>

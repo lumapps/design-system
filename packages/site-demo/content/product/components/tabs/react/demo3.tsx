@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { mdiBowl, mdiBreadSliceOutline, mdiSilverwareForkKnife } from '@lumx/icons';
+import { classNames } from '@lumx/core/js/utils';
 import { Tab, TabList, TabPanel, TabProvider, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => {
@@ -13,9 +14,9 @@ export default ({ theme }: { theme?: Theme }) => {
                     <Tab label="Tab 3" icon={mdiSilverwareForkKnife} />
                 </TabList>
 
-                <TabPanel className="lumx-spacing-padding-vertical-huge">Tab 1 content</TabPanel>
-                <TabPanel className="lumx-spacing-padding-vertical-huge">Tab 2 content</TabPanel>
-                <TabPanel className="lumx-spacing-padding-vertical-huge">Tab 3 content</TabPanel>
+                <TabPanel className={classNames.padding('vertical', 'huge')}>Tab 1 content</TabPanel>
+                <TabPanel className={classNames.padding('vertical', 'huge')}>Tab 2 content</TabPanel>
+                <TabPanel className={classNames.padding('vertical', 'huge')}>Tab 3 content</TabPanel>
             </TabProvider>
         </div>
     );

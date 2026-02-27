@@ -1,3 +1,4 @@
+import { classNames } from '@lumx/core/js/utils';
 import { GenericBlock, Heading, Text, UserBlock } from '@lumx/react';
 import { Placeholder } from '@lumx/demo/components/content/Placeholder';
 
@@ -7,7 +8,7 @@ export default () => (
             <GenericBlock.Figure>
                 <Placeholder name="2" height={154} width={216} />
             </GenericBlock.Figure>
-            <GenericBlock.Content className="lumx-spacing-padding-horizontal-big" vAlign="left" gap="tiny">
+            <GenericBlock.Content className={classNames.padding('horizontal', 'big')} vAlign="left" gap="tiny">
                 <UserBlock name="Emmitt O. Lum" avatarProps={{ image: 'https://i.pravatar.cc/128?img=32' }} size="s" />
                 <Heading as="h2" typography="subtitle2">
                     Fiscal Year Results and Conference

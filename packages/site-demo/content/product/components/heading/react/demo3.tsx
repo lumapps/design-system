@@ -1,8 +1,9 @@
 import { type ReactNode } from 'react';
+import { classNames } from '@lumx/core/js/utils';
 import { Heading, HeadingLevelProvider, Text } from '@lumx/react';
 
 const Article = ({ title, children }: { title: string; children?: ReactNode }) => (
-    <article className="lumx-spacing-padding-left-big">
+    <article className={classNames.padding('left', 'big')}>
         <HeadingLevelProvider>
             <Heading>{title}</Heading>
             <Text as="p" typography="body1">

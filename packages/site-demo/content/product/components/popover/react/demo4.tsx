@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { classNames } from '@lumx/core/js/utils';
 import { Chip, Popover, type Theme } from '@lumx/react';
 
 export default ({ theme }: { theme?: Theme }) => {
@@ -11,7 +12,7 @@ export default ({ theme }: { theme?: Theme }) => {
 
             <Popover
                 isOpen
-                className="lumx-spacing-padding-huge"
+                className={classNames.padding('huge')}
                 theme={theme}
                 anchorRef={anchorRef}
                 placement="right"
