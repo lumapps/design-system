@@ -1,6 +1,6 @@
-// Generate Storybook story files from site-demo component demos.
+// Generate Storybook story files from site-demo component and utility demos.
 //
-// Scans content/product/components/{name}/react/ and vue/ directories for demo files
+// Globs content/product/*/*/{react,vue}/demo*.{tsx,vue} to find all demos
 // and generates corresponding .stories.tsx files in lumx-react and lumx-vue.
 //
 // Usage: node scripts/generate-demo-stories.js [--react] [--vue]
@@ -9,47 +9,74 @@
 //   (default: generate both)
 
 import fs from 'node:fs';
-import fsp from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import glob from 'glob';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SITE_DEMO_DIR = path.resolve(__dirname, '..');
-const COMPONENTS_DIR = path.join(SITE_DEMO_DIR, 'content/product/components');
+const CONTENT_DIR = path.join(SITE_DEMO_DIR, 'content/product');
 const REACT_OUTPUT_DIR = path.resolve(SITE_DEMO_DIR, '../lumx-react/src/stories/demos-generated');
 const VUE_OUTPUT_DIR = path.resolve(SITE_DEMO_DIR, '../lumx-vue/src/stories/demos-generated');
 
-/** Cached relative paths from each output dir back to the site-demo components dir */
-const REACT_PREFIX = path.relative(REACT_OUTPUT_DIR, COMPONENTS_DIR);
-const VUE_PREFIX = path.relative(VUE_OUTPUT_DIR, COMPONENTS_DIR);
+/** Map content/product/ category dirs to story title prefixes.
+ *  Only categories listed here are scanned for demos. */
+const STORY_TITLES = {
+    components: 'LumX components',
+    utilities: 'utils',
+};
+
+/** Brace pattern matching the category keys */
+const CATEGORIES_GLOB = `{${Object.keys(STORY_TITLES).join(',')}}`;
 
 /**
- * List demo files in a framework subdirectory concurrently, sorted by number.
- * Returns an empty array if the directory does not exist.
+ * Scan for all demo files for a given framework using a single glob,
+ * then group them by category + folder.
+ *
+ * @param {'react' | 'vue'} fw
+ * @param {string} ext - file extension including dot (e.g. '.tsx' or '.vue')
+ * @returns {Map<string, { folder: string, sourceDir: string, storyTitle: string, demos: { number: number, name: string }[] }>}
  */
-async function listDemoFiles(dir) {
-    let files;
-    try {
-        files = await fsp.readdir(dir);
-    } catch {
-        return [];
+function scanDemos(fw, ext) {
+    const pattern = `${CATEGORIES_GLOB}/*/${fw}/demo*${ext}`;
+    const files = glob.sync(pattern, { cwd: CONTENT_DIR });
+
+    // Group files by category/folder
+    /** @type {Map<string, { folder: string, sourceDir: string, storyTitle: string, demos: { number: number, name: string }[] }>} */
+    const groups = new Map();
+
+    for (const file of files) {
+        // file looks like: "components/thumbnail/react/demo1.tsx"
+        const match = file.match(/^([^/]+)\/([^/]+)\/[^/]+\/demo(\d+)\./);
+        if (!match) continue;
+        const [, category, folder, num] = match;
+        const key = `${category}/${folder}`;
+
+        if (!groups.has(key)) {
+            groups.set(key, {
+                folder,
+                sourceDir: path.join(CONTENT_DIR, category),
+                storyTitle: STORY_TITLES[category] || category,
+                demos: [],
+            });
+        }
+        groups.get(key).demos.push({ number: Number(num), name: `demo${num}` });
     }
-    const result = [];
-    for (const f of files) {
-        const match = f.match(/^demo(\d+)(\.(tsx|vue))$/);
-        if (match) result.push({ number: Number(match[1]), name: f.slice(0, -match[2].length), ext: match[2] });
+
+    // Sort demos by number within each group
+    for (const group of groups.values()) {
+        group.demos.sort((a, b) => a.number - b.number);
     }
-    return result.sort((a, b) => a.number - b.number);
+
+    return groups;
 }
 
 /** Generate stories file content */
-function generateStories(componentFolder, demos, { prefix, fw, importExt }) {
+function generateStories(folder, demos, { prefix, fw, importExt, storyTitle }) {
     const imports = [
         `import { FlexBox } from '@lumx/${fw}/components/flex-box';`,
         "import { withWrapper } from '../decorators/withWrapper';",
-        ...demos.map(
-            (d) => `import Demo${d.number}Component from '${prefix}/${componentFolder}/${fw}/${d.name}${importExt}';`,
-        ),
+        ...demos.map((d) => `import Demo${d.number}Component from '${prefix}/${folder}/${fw}/${d.name}${importExt}';`),
     ];
 
     const stories = demos
@@ -61,20 +88,11 @@ function generateStories(componentFolder, demos, { prefix, fw, importExt }) {
         ``,
         imports.join('\n'),
         ``,
-        `export default {\n    title: 'LumX components/${componentFolder}/Demos',\n    decorators: [withWrapper({ vAlign: 'space-evenly', hAlign: 'center', wrap: true }, FlexBox)],\n};`,
+        `export default {\n    title: '${storyTitle}/${folder}/Demos',\n    decorators: [withWrapper({ vAlign: 'space-evenly', hAlign: 'center', wrap: true }, FlexBox)],\n};`,
         ``,
         stories,
         ``,
     ].join('\n');
-}
-
-/** Sorted list of component folder names */
-function listComponentFolders() {
-    return fs
-        .readdirSync(COMPONENTS_DIR, { withFileTypes: true })
-        .filter((d) => d.isDirectory())
-        .map((d) => d.name)
-        .sort();
 }
 
 /**
@@ -89,30 +107,35 @@ function once(fn) {
 }
 
 /**
+ * Generate demo story files for a given framework.
+ * @param {'react' | 'vue'} fw
+ * @param {string} outputDir
+ * @param {string} ext - file extension including dot (e.g. '.tsx' or '.vue')
+ * @param {(msg: string) => void} log
+ */
+function generateDemoStories(fw, outputDir, ext, log) {
+    fs.mkdirSync(outputDir, { recursive: true });
+    const groups = scanDemos(fw, ext);
+    const importExt = ext === '.tsx' ? '' : ext;
+
+    let count = 0;
+    for (const { folder, sourceDir, storyTitle, demos } of groups.values()) {
+        const prefix = path.relative(outputDir, sourceDir);
+        fs.writeFileSync(
+            path.join(outputDir, `${folder}.stories.tsx`),
+            generateStories(folder, demos, { prefix, fw, importExt, storyTitle }),
+        );
+        count++;
+    }
+    log(`Generated ${count} ${fw} demo story files in ${outputDir}`);
+}
+
+/**
  * Generate React demo story files.
  * @param {(msg: string) => void} [log] - Optional log function (e.g. Rollup's `this.info`). Falls back to `console.log`.
  */
 export const generateReactDemoStories = once(async function generateReactDemoStories(log = console.log) {
-    const componentFolders = listComponentFolders();
-    fs.mkdirSync(REACT_OUTPUT_DIR, { recursive: true });
-
-    // Scan all react/ subdirs concurrently, then write synchronously
-    const demosByFolder = await Promise.all(
-        componentFolders.map((folder) => listDemoFiles(path.join(COMPONENTS_DIR, folder, 'react'))),
-    );
-
-    let count = 0;
-    for (let i = 0; i < componentFolders.length; i++) {
-        const demos = demosByFolder[i];
-        if (demos.length > 0) {
-            fs.writeFileSync(
-                path.join(REACT_OUTPUT_DIR, `${componentFolders[i]}.stories.tsx`),
-                generateStories(componentFolders[i], demos, { prefix: REACT_PREFIX, fw: 'react', importExt: '' }),
-            );
-            count++;
-        }
-    }
-    log(`Generated ${count} React demo story files in ${REACT_OUTPUT_DIR}`);
+    generateDemoStories('react', REACT_OUTPUT_DIR, '.tsx', log);
 });
 
 /**
@@ -120,26 +143,7 @@ export const generateReactDemoStories = once(async function generateReactDemoSto
  * @param {(msg: string) => void} [log] - Optional log function (e.g. Rollup's `this.info`). Falls back to `console.log`.
  */
 export const generateVueDemoStories = once(async function generateVueDemoStories(log = console.log) {
-    const componentFolders = listComponentFolders();
-    fs.mkdirSync(VUE_OUTPUT_DIR, { recursive: true });
-
-    // Scan all vue/ subdirs concurrently, then write synchronously
-    const demosByFolder = await Promise.all(
-        componentFolders.map((folder) => listDemoFiles(path.join(COMPONENTS_DIR, folder, 'vue'))),
-    );
-
-    let count = 0;
-    for (let i = 0; i < componentFolders.length; i++) {
-        const demos = demosByFolder[i];
-        if (demos.length > 0) {
-            fs.writeFileSync(
-                path.join(VUE_OUTPUT_DIR, `${componentFolders[i]}.stories.tsx`),
-                generateStories(componentFolders[i], demos, { prefix: VUE_PREFIX, fw: 'vue', importExt: '.vue' }),
-            );
-            count++;
-        }
-    }
-    log(`Generated ${count} Vue demo story files in ${VUE_OUTPUT_DIR}`);
+    generateDemoStories('vue', VUE_OUTPUT_DIR, '.vue', log);
 });
 
 // Run directly when executed as a script
