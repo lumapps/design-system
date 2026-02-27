@@ -6,7 +6,7 @@ import { vi } from 'vitest';
 import { Size } from '@lumx/react';
 import React from 'react';
 import { DisabledStateProvider } from '@lumx/react/utils/disabled';
-import { ListItem, ListItemProps } from './ListItem';
+import { ListItem, ListItemProps } from '.';
 
 const CLASSNAME = ListItem.className as string;
 
@@ -234,6 +234,89 @@ describe(`<${ListItem.displayName}>`, () => {
             expect(link).toHaveAttribute('aria-disabled', 'true');
             if (link) await userEvent.click(link);
             expect(onItemSelected).not.toHaveBeenCalled();
+        });
+    });
+
+    describe('ListItem.Action', () => {
+        it('should render action as a button with default action class', async () => {
+            const onClick = vi.fn();
+            render(
+                <ListItem>
+                    <ListItem.Action onClick={onClick}>Action label</ListItem.Action>
+                </ListItem>,
+            );
+            const button = screen.getByRole('button', { name: 'Action label' });
+            expect(button).toBeInTheDocument();
+            expect(button).toHaveClass('lumx-action-area__action');
+            await userEvent.click(button);
+            expect(onClick).toHaveBeenCalledTimes(1);
+        });
+
+        it('should render action as a link with default action class', () => {
+            render(
+                <ListItem>
+                    <ListItem.Action as="a" href="/test">
+                        Link action
+                    </ListItem.Action>
+                </ListItem>,
+            );
+            const link = screen.getByRole('link', { name: 'Link action' });
+            expect(link).toBeInTheDocument();
+            expect(link).toHaveClass('lumx-action-area__action');
+            expect(link).toHaveAttribute('href', '/test');
+        });
+
+        it('should render wrapper as div (non-clickable) when Action is used', () => {
+            render(
+                <ListItem>
+                    <ListItem.Action onClick={vi.fn()}>Action</ListItem.Action>
+                </ListItem>,
+            );
+            const listItem = getByClassName(document.body, CLASSNAME);
+            const wrapper = queryByClassName(listItem, `${CLASSNAME}__wrapper`);
+            const link = queryByClassName(listItem, `${CLASSNAME}__link`);
+            expect(wrapper).toBeInTheDocument();
+            expect(wrapper?.tagName).toBe('DIV');
+            expect(link).not.toBeInTheDocument();
+        });
+
+        it('should render action with secondary actions in after slot', async () => {
+            const onPrimary = vi.fn();
+            const onSecondary = vi.fn();
+            render(
+                <ListItem
+                    after={
+                        <button type="button" onClick={onSecondary}>
+                            Secondary
+                        </button>
+                    }
+                >
+                    <ListItem.Action onClick={onPrimary}>Primary</ListItem.Action>
+                </ListItem>,
+            );
+            const primary = screen.getByRole('button', { name: 'Primary' });
+            const secondary = screen.getByRole('button', { name: 'Secondary' });
+            expect(primary).toBeInTheDocument();
+            expect(secondary).toBeInTheDocument();
+
+            await userEvent.click(primary);
+            expect(onPrimary).toHaveBeenCalledTimes(1);
+            expect(onSecondary).not.toHaveBeenCalled();
+
+            await userEvent.click(secondary);
+            expect(onSecondary).toHaveBeenCalledTimes(1);
+        });
+
+        it('should forward ref to the action element', () => {
+            const actionRef = React.createRef<HTMLButtonElement>();
+            render(
+                <ListItem>
+                    <ListItem.Action ref={actionRef} onClick={vi.fn()}>
+                        Action
+                    </ListItem.Action>
+                </ListItem>,
+            );
+            expect(actionRef.current).toBeInstanceOf(HTMLButtonElement);
         });
     });
 

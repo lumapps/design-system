@@ -1,4 +1,5 @@
-import { List, ListItemSize, Size } from '@lumx/react';
+import { Button, FlexBox, IconButton, List, ListItemSize, Size, Text, Thumbnail } from '@lumx/react';
+import { mdiAlert } from '@lumx/icons';
 
 import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
 import { CustomLink } from '@lumx/react/stories/utils/CustomLink';
@@ -65,4 +66,73 @@ export const AllStates = {
                 !props.onItemSelected && !props.linkProps?.href && !isEqual(Object.keys(props), ['size', 'children']),
         }),
     ],
+};
+
+/**
+ * Action area with a default action and a secondary actions in before or after slots.
+ */
+export const ActionArea = {
+    argTypes: {
+        onClick: { action: true },
+    },
+    render({ onClick, size }: any) {
+        return (
+            <List itemPadding="big">
+                <ListItem
+                    size={size}
+                    before={
+                        <Thumbnail
+                            image="https://i.pravatar.cc/128?img=32"
+                            variant="rounded"
+                            alt="Profile"
+                            size="m"
+                            onClick={onClick}
+                        />
+                    }
+                    after={
+                        <FlexBox orientation="horizontal" gap="regular">
+                            <IconButton size="s" emphasis="medium" icon={mdiAlert} label="Alert" onClick={onClick} />
+                            <Button size="s" emphasis="medium" onClick={onClick}>
+                                Secondary action
+                            </Button>
+                        </FlexBox>
+                    }
+                    style={{ outline: '1px dashed red' }}
+                >
+                    <ListItem.Action onClick={onClick}>Main action as button</ListItem.Action>
+                    <Text as="p" color="dark-L2">
+                        Some text outside the main action
+                    </Text>
+                </ListItem>
+                <ListItem
+                    size={size}
+                    before={
+                        <Thumbnail
+                            image="https://i.pravatar.cc/128?img=32"
+                            variant="rounded"
+                            alt="Profile"
+                            size="m"
+                            onClick={onClick}
+                        />
+                    }
+                    after={
+                        <FlexBox orientation="horizontal" gap="regular">
+                            <IconButton size="s" emphasis="medium" icon={mdiAlert} label="Alert" onClick={onClick} />
+                            <Button size="s" emphasis="medium" onClick={onClick}>
+                                Secondary action
+                            </Button>
+                        </FlexBox>
+                    }
+                    style={{ outline: '1px dashed red' }}
+                >
+                    <ListItem.Action as="a" onClick={onClick}>
+                        Main action as link
+                    </ListItem.Action>
+                    <Text as="p" color="dark-L2">
+                        Some text outside the main action
+                    </Text>
+                </ListItem>
+            </List>
+        );
+    },
 };
