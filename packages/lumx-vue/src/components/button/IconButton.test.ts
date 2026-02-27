@@ -1,7 +1,7 @@
 /* eslint-disable vue/one-component-per-file */
 /* eslint-disable vue/order-in-components */
 /* eslint-disable vue/no-reserved-component-names */
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 
 import { render, screen } from '@testing-library/vue';
 import userEvent from '@testing-library/user-event';
@@ -44,6 +44,22 @@ describe('<IconButton />', () => {
             await userEvent.hover(iconButton);
             const tooltip = await screen.findByRole('tooltip');
             expect(tooltip).toBeInTheDocument();
+        });
+
+        it('should forward ref to the underlying button element', () => {
+            const iconButtonRef = ref<HTMLElement>();
+            render(
+                defineComponent({
+                    components: { IconButton },
+                    setup() {
+                        return { iconButtonRef };
+                    },
+                    template: `<IconButton ref="iconButtonRef" label="Icon" />`,
+                }),
+            );
+            // The ref exposes { $el } pointing to the underlying button element,
+            // so that @floating-ui/vue can resolve it correctly as an anchor.
+            expect((iconButtonRef.value as any)?.$el).toBe(screen.getByRole('button', { name: 'Icon' }));
         });
 
         it('should hide tooltip when hideTooltip is true', async () => {

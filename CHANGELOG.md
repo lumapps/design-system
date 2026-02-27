@@ -16,6 +16,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -    `ListItem`: display "clickable" variant when providing `linkAs` (and not just on `onItemSelected` or `linkProps.href`)
     -    `ListItem`: render as HTML `<button>` with `onItemSelected` (instead of `<a role="button">`)
 
+### Fixed
+
+-   `@lumx/vue`:
+    -   `IconButton`: fix ref forwarding to the button and not the wrapping tooltip
+
 ## [4.5.1][] - 2026-02-26
 
 ### Fixed

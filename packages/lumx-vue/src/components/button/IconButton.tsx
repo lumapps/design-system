@@ -1,4 +1,4 @@
-import { computed, defineComponent, toRaw, useAttrs } from 'vue';
+import { computed, defineComponent, ref, toRaw, useAttrs } from 'vue';
 
 import {
     IconButton as IconButtonUI,
@@ -31,7 +31,7 @@ export const emitSchema = {
  * @return Vue element.
  */
 const IconButton = defineComponent(
-    (props: IconButtonProps, { emit }) => {
+    (props: IconButtonProps, { emit, expose }) => {
         const attrs = useAttrs();
         const defaultTheme = useTheme();
 
@@ -47,12 +47,17 @@ const IconButton = defineComponent(
             emit('click', event);
         };
 
+        // Ref to the underlying button DOM element, exposed so template refs resolve to the button.
+        const buttonRef = ref<HTMLElement>();
+        expose({ $el: buttonRef });
+
         return () => {
             const { linkAs, tooltipProps, hideTooltip, ...rest } = otherProps.value;
             return (
                 <Tooltip label={hideTooltip ? '' : props.label} {...tooltipProps}>
                     <IconButtonUI
                         {...rest}
+                        ref={buttonRef}
                         linkAs={toRaw(linkAs)}
                         {...disabledStateProps.value}
                         className={props.class}
