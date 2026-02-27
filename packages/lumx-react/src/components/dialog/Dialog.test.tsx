@@ -1,11 +1,12 @@
 import { Dialog, DialogProps } from '@lumx/react/components/dialog/Dialog';
 import { queryByClassName } from '@lumx/react/testing/utils/queries';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import userEvent from '@testing-library/user-event';
 import { ThemeSentinel } from '@lumx/react/testing/utils/ThemeSentinel';
 import { Heading, HeadingLevelProvider } from '@lumx/react';
 import { vi } from 'vitest';
+import { DIALOG_TRANSITION_DURATION } from '@lumx/react/constants';
 
 const CLASSNAME = Dialog.className as string;
 
@@ -110,6 +111,55 @@ describe(`<${Dialog.displayName}>`, () => {
             fireEvent.mouseDown(insideBtn);
             fireEvent.click(insideBtn);
             expect(onClose).not.toHaveBeenCalled();
+        });
+    });
+
+    describe('closeMode', () => {
+        it('should unmount dialog when closed (default)', () => {
+            vi.useFakeTimers();
+            const { rerender } = render(<Dialog isOpen>Content</Dialog>);
+            expect(queryByClassName(document.body, CLASSNAME)).toBeInTheDocument();
+
+            rerender(<Dialog isOpen={false}>Content</Dialog>);
+            // Still mounted during the close transition
+            expect(queryByClassName(document.body, CLASSNAME)).toBeInTheDocument();
+
+            // After the transition duration, the dialog is unmounted
+            act(() => vi.advanceTimersByTime(DIALOG_TRANSITION_DURATION));
+            expect(queryByClassName(document.body, CLASSNAME)).not.toBeInTheDocument();
+            vi.useRealTimers();
+        });
+
+        it('should keep dialog mounted when closed with closeMode="hide"', () => {
+            const { rerender } = render(
+                <Dialog isOpen closeMode="hide">
+                    Content
+                </Dialog>,
+            );
+            expect(queryByClassName(document.body, CLASSNAME)).toBeInTheDocument();
+
+            rerender(
+                <Dialog isOpen={false} closeMode="hide">
+                    Content
+                </Dialog>,
+            );
+            expect(queryByClassName(document.body, CLASSNAME)).toBeInTheDocument();
+        });
+
+        it('should add is-hidden class when closed with closeMode="hide"', () => {
+            const { rerender } = render(
+                <Dialog isOpen closeMode="hide">
+                    Content
+                </Dialog>,
+            );
+            expect(queryByClassName(document.body, CLASSNAME)).not.toHaveClass(`${CLASSNAME}--is-hidden`);
+
+            rerender(
+                <Dialog isOpen={false} closeMode="hide">
+                    Content
+                </Dialog>,
+            );
+            expect(queryByClassName(document.body, CLASSNAME)).toHaveClass(`${CLASSNAME}--is-hidden`);
         });
     });
 

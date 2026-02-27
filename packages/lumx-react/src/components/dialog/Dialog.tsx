@@ -7,7 +7,7 @@ import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { useIntersectionObserver } from '@lumx/react/hooks/useIntersectionObserver';
 
-import { GenericProps, isComponent } from '@lumx/react/utils/type';
+import { GenericProps, HasCloseMode, isComponent } from '@lumx/react/utils/type';
 import { partitionMulti } from '@lumx/react/utils/partitionMulti';
 import type { LumxClassName } from '@lumx/core/js/types';
 import { classNames } from '@lumx/core/js/utils';
@@ -24,7 +24,7 @@ import { Portal } from '@lumx/react/utils';
 /**
  * Defines the props of the component.
  */
-export interface DialogProps extends GenericProps {
+export interface DialogProps extends GenericProps, HasCloseMode {
     /** Footer content. */
     footer?: ReactNode;
     /** Whether the divider between the dialog content and the footer is always displayed (instead of showing it on scroll). */
@@ -85,6 +85,7 @@ const { block, element } = classNames.bem(CLASSNAME);
  * Component default props.
  */
 const DEFAULT_PROPS: Partial<DialogProps> = {
+    closeMode: 'unmount',
     size: Size.big,
     disableBodyScroll: true,
 };
@@ -105,6 +106,7 @@ export const Dialog = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
     const {
         children,
         className,
+        closeMode = DEFAULT_PROPS.closeMode,
         header,
         focusElement,
         forceFooterDivider,
@@ -194,7 +196,9 @@ export const Dialog = forwardRef<DialogProps, HTMLDivElement>((props, ref) => {
 
     const shouldPreventCloseOnClickAway = preventAutoClose || preventCloseOnClick;
 
-    return isOpen || isVisible ? (
+    const isMounted = isOpen || isVisible || closeMode === 'hide';
+
+    return isMounted ? (
         <Portal>
             <div
                 ref={mergeRefs(rootRef, ref)}
