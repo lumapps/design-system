@@ -59,6 +59,7 @@ const Popover = defineComponent(
         const zIndexRef = computed(() => props.zIndex ?? POPOVER_ZINDEX);
         const focusAnchorOnCloseRef = computed(() => props.focusAnchorOnClose ?? true);
         const parentElementRef = computed(() => props.parentElement);
+        const isOpenRef = computed(() => Boolean(props.isOpen));
 
         const { styles, isPositioned, position, floatingRef, arrowRef } = usePopoverStyle({
             anchorRef: anchorRef as Ref<HTMLElement | undefined>,
@@ -78,6 +79,7 @@ const Popover = defineComponent(
             anchorRef as Ref<HTMLElement | undefined>,
             parentElementRef as Ref<HTMLElement | undefined>,
             floatingRef,
+            isOpenRef,
         );
 
         // Close handler using emit
