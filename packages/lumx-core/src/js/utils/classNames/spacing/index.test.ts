@@ -1,5 +1,5 @@
 import { Size } from '@lumx/core/js/constants';
-import { spacing, spacings } from '.';
+import { spacing, spacings, margin, padding } from '.';
 
 describe(spacing, () => {
     describe('with direction and size', () => {
@@ -102,5 +102,71 @@ describe(spacings, () => {
         expect(result).toContain('lumx-spacing-padding-top-regular');
         expect(result).toContain('lumx-spacing-margin-bottom-big');
         expect(result).toContain('lumx-spacing-padding-tiny');
+    });
+});
+
+describe('shorthand overloads', () => {
+    describe(spacing, () => {
+        it('should accept (type, size) as shorthand for (type, "all", size)', () => {
+            expect(spacing('padding', Size.regular)).toBe('lumx-spacing-padding-regular');
+            expect(spacing('margin', Size.big)).toBe('lumx-spacing-margin-big');
+        });
+
+        it('should produce the same result as the explicit form', () => {
+            expect(spacing('padding', Size.regular)).toBe(spacing('padding', 'all', Size.regular));
+            expect(spacing('margin', Size.tiny)).toBe(spacing('margin', 'all', Size.tiny));
+        });
+
+        it('should handle null size in shorthand form', () => {
+            expect(spacing('padding', null)).toBe('lumx-spacing-padding-none');
+        });
+
+        it('should still work with direction and size', () => {
+            expect(spacing('padding', 'right', Size.regular)).toBe('lumx-spacing-padding-right-regular');
+        });
+    });
+
+    describe(margin, () => {
+        it('should accept (size) as shorthand for ("all", size)', () => {
+            expect(margin(Size.regular)).toBe('lumx-spacing-margin-regular');
+            expect(margin(Size.big)).toBe('lumx-spacing-margin-big');
+            expect(margin(Size.tiny)).toBe('lumx-spacing-margin-tiny');
+            expect(margin(Size.medium)).toBe('lumx-spacing-margin-medium');
+            expect(margin(Size.huge)).toBe('lumx-spacing-margin-huge');
+        });
+
+        it('should produce the same result as the explicit form', () => {
+            expect(margin(Size.regular)).toBe(margin('all', Size.regular));
+        });
+
+        it('should handle null size in shorthand form', () => {
+            expect(margin(null)).toBe('lumx-spacing-margin-none');
+        });
+
+        it('should still work with direction and size', () => {
+            expect(margin('right', Size.regular)).toBe('lumx-spacing-margin-right-regular');
+        });
+    });
+
+    describe(padding, () => {
+        it('should accept (size) as shorthand for ("all", size)', () => {
+            expect(padding(Size.regular)).toBe('lumx-spacing-padding-regular');
+            expect(padding(Size.big)).toBe('lumx-spacing-padding-big');
+            expect(padding(Size.tiny)).toBe('lumx-spacing-padding-tiny');
+            expect(padding(Size.medium)).toBe('lumx-spacing-padding-medium');
+            expect(padding(Size.huge)).toBe('lumx-spacing-padding-huge');
+        });
+
+        it('should produce the same result as the explicit form', () => {
+            expect(padding(Size.regular)).toBe(padding('all', Size.regular));
+        });
+
+        it('should handle null size in shorthand form', () => {
+            expect(padding(null)).toBe('lumx-spacing-padding-none');
+        });
+
+        it('should still work with direction and size', () => {
+            expect(padding('right', Size.regular)).toBe('lumx-spacing-padding-right-regular');
+        });
     });
 });
