@@ -3025,7 +3025,7 @@ __metadata:
     rollup-plugin-dts: "npm:^6.3.0"
     rollup-plugin-peer-deps-external: "npm:^2.2.4"
     rollup-plugin-ts-paths-resolve: "npm:^1.7.1"
-    storybook: "npm:^10.2.0"
+    storybook: "npm:^10.2.10"
     typescript: "npm:^5.4.3"
     vite: "npm:^7.3.1"
     vite-tsconfig-paths: "npm:^5.1.4"
@@ -3072,7 +3072,7 @@ __metadata:
     chromatic: "npm:^13.3.5"
     focus-visible: "npm:^5.2.1"
     jsdom: "npm:^27.2.0"
-    storybook: "npm:^10.2.0"
+    storybook: "npm:^10.2.10"
     typescript: "npm:^5.4.3"
     vite: "npm:^7.3.1"
     vite-plugin-dts: "npm:^4.5.4"
@@ -21553,9 +21553,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"storybook@npm:^10.2.0":
-  version: 10.2.0
-  resolution: "storybook@npm:10.2.0"
+"storybook@npm:^10.2.10":
+  version: 10.2.13
+  resolution: "storybook@npm:10.2.13"
   dependencies:
     "@storybook/global": "npm:^5.0.0"
     "@storybook/icons": "npm:^2.0.1"
@@ -21576,7 +21576,7 @@ __metadata:
       optional: true
   bin:
     storybook: ./dist/bin/dispatcher.js
-  checksum: 10/cac19b62c3dfd7a0a2e5d642472b2b1fee183bb5f992a6b070d0ff091aae62b79df2db24bedc57458bcf225f7cabc03e7a013b87aa065fe29b2ace76473dfa46
+  checksum: 10/1e325ed686f080f61858a631d7fb5bef62ee54bf1381fdda951a0f40a30a6b4ce65480e149d1af7fd53813da8ae9e9ff4a8c30e61d607bda35d40c2f13b47015
   languageName: node
   linkType: hard
 

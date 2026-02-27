@@ -48,7 +48,7 @@
         "rollup-plugin-dts": "^6.3.0",
         "rollup-plugin-peer-deps-external": "^2.2.4",
         "rollup-plugin-ts-paths-resolve": "^1.7.1",
-        "storybook": "^10.2.0",
+        "storybook": "^10.2.10",
         "typescript": "^5.4.3",
         "vite": "^7.3.1",
         "vite-tsconfig-paths": "^5.1.4",
