@@ -1,4 +1,5 @@
 export { default as join } from 'classnames';
+export * from './action-area';
 export * from './color';
 export * from './typography';
 export * from './spacing';
