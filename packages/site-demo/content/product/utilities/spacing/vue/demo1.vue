@@ -1,9 +1,9 @@
 <template>
-    <div style="border: 1px dashed rgba(40, 51, 109, 0.2)">
+    <div style="border: 1px dashed rgba(40, 51, 109, 0.2); min-width: 300px">
         <div
             :class="
                 classNames.join(
-                    'lumx-color-background-primary-N',
+                    classNames.background('primary'),
                     classNames.margin('vertical', 'big'),
                     classNames.margin('left', 'huge'),
                 )
