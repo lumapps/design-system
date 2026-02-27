@@ -1,7 +1,14 @@
 import classnames from 'classnames';
 
 import type { Direction, Spacing } from '@lumx/core/js/types';
-import type { AbstractSize } from '@lumx/core/js/constants';
+import { Size, type AbstractSize } from '@lumx/core/js/constants';
+
+/** Set of valid AbstractSize values for runtime detection. */
+const ABSTRACT_SIZES: ReadonlySet<string> = new Set([Size.tiny, Size.regular, Size.medium, Size.big, Size.huge]);
+
+function isAbstractSize(value: unknown): value is AbstractSize {
+    return typeof value === 'string' && ABSTRACT_SIZES.has(value);
+}
 
 /**
  * Returns a lumx classname for the given type, direction and size. For example, for
@@ -11,16 +18,27 @@ import type { AbstractSize } from '@lumx/core/js/constants';
  * @param size - Size
  * @returns string
  */
-export function spacing(type: Spacing, direction?: Direction, size?: AbstractSize | null): string {
+export function spacing(type: Spacing, size: AbstractSize | null): string;
+export function spacing(type: Spacing, direction?: Direction, size?: AbstractSize | null): string;
+export function spacing(
+    type: Spacing,
+    directionOrSize?: Direction | AbstractSize | null,
+    size?: AbstractSize | null,
+): string {
+    // Resolve shorthand: spacing(type, size) => spacing(type, undefined, size)
+    const isShorthand = isAbstractSize(directionOrSize) || (directionOrSize === null && size === undefined);
+    const direction: Direction | undefined = isShorthand ? undefined : directionOrSize ?? undefined;
+    const resolvedSize: AbstractSize | null | undefined = isShorthand ? directionOrSize : size;
+
     let baseClass = `lumx-spacing-${type}`;
 
     if (direction && direction !== 'all') {
         baseClass = `${baseClass}-${direction}`;
     }
 
-    if (size) {
-        baseClass = `${baseClass}-${size}`;
-    } else if (size === null) {
+    if (resolvedSize) {
+        baseClass = `${baseClass}-${resolvedSize}`;
+    } else if (resolvedSize === null) {
         baseClass = `${baseClass}-none`;
     }
 
@@ -43,11 +61,20 @@ export const spacings = (spacingConfigs: { type: Spacing; direction?: Direction;
 /**
  * Returns a lumx margin classname for the given direction and size. For example, for
  * arguments direction='right', size='regular' it returns lumx-spacing-margin-right-regular
+ *
+ * Can also be called with just a size: margin('regular') is equivalent to margin('all', 'regular').
  * @param direction - Direction
  * @param size - Size
  * @returns string
  */
-export const margin = (direction?: Direction, size?: AbstractSize | null) => spacing('margin', direction, size);
+export function margin(size: AbstractSize | null): string;
+export function margin(direction?: Direction, size?: AbstractSize | null): string;
+export function margin(directionOrSize?: Direction | AbstractSize | null, size?: AbstractSize | null): string {
+    if (isAbstractSize(directionOrSize) || (directionOrSize === null && size === undefined)) {
+        return spacing('margin', directionOrSize);
+    }
+    return spacing('margin', directionOrSize ?? undefined, size);
+}
 
 /**
  * Returns a list of lumx margin classnames for the given directions and sizes. For example, for
@@ -65,11 +92,20 @@ export const margins = (marginConfigs: { direction?: Direction; size?: AbstractS
 /**
  * Returns a lumx padding classname for the given direction and size. For example, for
  * arguments direction='right', size='regular' it returns lumx-spacing-padding-right-regular
+ *
+ * Can also be called with just a size: padding('regular') is equivalent to padding('all', 'regular').
  * @param direction - Direction
  * @param size - Size
  * @returns string
  */
-export const padding = (direction?: Direction, size?: AbstractSize | null) => spacing('padding', direction, size);
+export function padding(size: AbstractSize | null): string;
+export function padding(direction?: Direction, size?: AbstractSize | null): string;
+export function padding(directionOrSize?: Direction | AbstractSize | null, size?: AbstractSize | null): string {
+    if (isAbstractSize(directionOrSize) || (directionOrSize === null && size === undefined)) {
+        return spacing('padding', directionOrSize);
+    }
+    return spacing('padding', directionOrSize ?? undefined, size);
+}
 
 /**
  * Returns a list of lumx padding classnames for the given directions and sizes. For example, for

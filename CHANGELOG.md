@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/core`:
     -    Improve spacing util size type (abstract sizes, not t-shirt sizes)
+    -    Add all direction short-hand for spacing utils (`margin(null)`, `padding('regular')`, etc.)
 
 ## [4.5.1][] - 2026-02-26
 
