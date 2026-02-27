@@ -9,6 +9,7 @@ import type { LumxClassName } from '@lumx/core/js/types';
 import { RawClickable } from '@lumx/core/js/components/RawClickable';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
+import { ListItemAction } from './ListItemAction';
 
 export type ListItemSize = Extract<Size, 'tiny' | 'regular' | 'big' | 'huge'>;
 
@@ -78,7 +79,7 @@ export function isClickable({ linkAs, linkProps, onItemSelected }: Partial<ListI
  * @param  ref   Component ref.
  * @return React element.
  */
-export const ListItem = forwardRef<ListItemProps, HTMLLIElement>((props, ref) => {
+const _ListItem = forwardRef<ListItemProps, HTMLLIElement>((props, ref) => {
     const { isAnyDisabled, disabledStateProps, otherProps } = useDisableStateProps(props);
     const {
         after,
@@ -131,6 +132,14 @@ export const ListItem = forwardRef<ListItemProps, HTMLLIElement>((props, ref) =>
         </li>
     );
 });
-ListItem.displayName = COMPONENT_NAME;
-ListItem.className = CLASSNAME;
-ListItem.defaultProps = DEFAULT_PROPS;
+_ListItem.displayName = COMPONENT_NAME;
+_ListItem.className = CLASSNAME;
+_ListItem.defaultProps = DEFAULT_PROPS;
+
+/**
+ * ListItem component with Action sub-component.
+ */
+export const ListItem = Object.assign(_ListItem, {
+    /** Sub-component that renders the default action (button or link) for the action area pattern. */
+    Action: ListItemAction,
+});

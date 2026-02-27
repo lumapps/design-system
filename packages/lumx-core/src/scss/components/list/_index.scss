@@ -30,6 +30,9 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-list-item {
+    // Positioning context for action area overlay (harmless no-op when no action area child).
+    position: relative;
+
     &__link {
         @include lumx-list-item-clickable;
     }
@@ -38,12 +41,22 @@
         @include lumx-list-item-highlighted;
     }
 
-    &__link--is-selected {
+    &__link--is-selected,
+    & .lumx-action-area__action[aria-selected="true"]::before {
         @include lumx-list-item-selected;
     }
 
-    &__link--is-disabled {
+    &__link--is-disabled,
+    &__link[aria-disabled="true"],
+    &:has(.lumx-action-area__action[aria-disabled="true"]) {
         @include lumx-state-disabled-input;
+    }
+
+    // Elevate before/after slots above the action area overlay.
+    &__before,
+    &__after {
+        position: relative;
+        z-index: 1;
     }
 }
 
