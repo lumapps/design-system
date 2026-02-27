@@ -30,7 +30,7 @@ type StoryOverride = Record<string, any>;
 /** Base options shared by all setup functions. */
 interface SetupStoriesBaseOptions {
     /** The component to create stories for */
-    component: any;
+    component?: any;
     /** Base render */
     render?: any;
     /** Base args */

@@ -1,0 +1,88 @@
+/* ==========================================================================
+   Action area
+   ========================================================================== */
+
+.lumx-action-area {
+    position: relative;
+
+    // Auto-elevate interactive children above the action overlay,
+    // excluding the action itself (its ::before IS the overlay).
+    & > a:not(.lumx-action-area__action),
+    & > button:not(.lumx-action-area__action),
+    & > input:not(.lumx-action-area__action),
+    & > select:not(.lumx-action-area__action),
+    & > textarea:not(.lumx-action-area__action),
+    & > [role='button']:not(.lumx-action-area__action),
+    & > [role='link']:not(.lumx-action-area__action) {
+        position: relative;
+        z-index: 1;
+    }
+}
+
+/* Action element
+   ========================================================================== */
+
+.lumx-action-area__action {
+    all: unset;
+
+    &::before {
+        @include lumx-state-transition;
+
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        cursor: pointer;
+        content: '';
+        outline: 2px none lumx-color-variant('dark', 'N');
+    }
+
+    /* ==================================================================
+       Overlay (hover / active)
+       ================================================================== */
+
+    // Light theme overlay (default)
+    &--has-overlay {
+        &:hover::before,
+        &[data-focus-visible-added]::before,
+        &[data-lumx-hover]::before {
+            @include lumx-state(lumx-base-const('state', 'HOVER'), lumx-base-const('emphasis', 'LOW'), 'dark');
+        }
+
+        &:active::before,
+        &[data-lumx-active]::before {
+            @include lumx-state(lumx-base-const('state', 'ACTIVE'), lumx-base-const('emphasis', 'LOW'), 'dark');
+        }
+    }
+
+    // Dark theme overlay
+    &--theme-dark#{&}--has-overlay {
+        &:hover::before,
+        &[data-focus-visible-added]::before,
+        &[data-lumx-hover]::before {
+            @include lumx-state(lumx-base-const('state', 'HOVER'), lumx-base-const('emphasis', 'LOW'), 'light');
+        }
+
+        &:active::before,
+        &[data-lumx-active]::before {
+            @include lumx-state(lumx-base-const('state', 'ACTIVE'), lumx-base-const('emphasis', 'LOW'), 'light');
+        }
+    }
+
+    /* ==================================================================
+       Focus outline
+       ================================================================== */
+
+    &--focus-outset[data-focus-visible-added]::before {
+        outline-style: solid;
+        outline-offset: 2px;
+    }
+
+    &--focus-inset[data-focus-visible-added]::before {
+        outline-style: solid;
+        outline-offset: -2px;
+    }
+
+    &--theme-dark[data-focus-visible-added]::before {
+        outline-color: lumx-color-variant('light', 'N');
+    }
+}
