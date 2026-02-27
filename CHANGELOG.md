@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   `@lumx/core`:
+    -    Added `classNames.actionArea` CSS utility
+
+### Changed
+
+-   `@lumx/core`:
+    -    Improve spacing util size type (abstract sizes, not t-shirt sizes)
+
 ## [4.5.1][] - 2026-02-26
 
 ### Fixed

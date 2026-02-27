@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 
 import type { Direction, Spacing } from '@lumx/core/js/types';
-import type { Size } from '@lumx/core/js/constants';
+import type { AbstractSize } from '@lumx/core/js/constants';
 
 /**
  * Returns a lumx classname for the given type, direction and size. For example, for
@@ -11,7 +11,7 @@ import type { Size } from '@lumx/core/js/constants';
  * @param size - Size
  * @returns string
  */
-export function spacing(type: Spacing, direction?: Direction, size?: Size | null): string {
+export function spacing(type: Spacing, direction?: Direction, size?: AbstractSize | null): string {
     let baseClass = `lumx-spacing-${type}`;
 
     if (direction && direction !== 'all') {
@@ -37,7 +37,7 @@ export function spacing(type: Spacing, direction?: Direction, size?: Size | null
  * @param spacingConfigs - Array of spacing configurations with direction and size
  * @returns string
  */
-export const spacings = (spacingConfigs: { type: Spacing; direction?: Direction; size?: Size | null }[]) =>
+export const spacings = (spacingConfigs: { type: Spacing; direction?: Direction; size?: AbstractSize | null }[]) =>
     classnames(spacingConfigs.map((spa) => spacing(spa.type, spa.direction, spa.size)));
 
 /**
@@ -47,7 +47,7 @@ export const spacings = (spacingConfigs: { type: Spacing; direction?: Direction;
  * @param size - Size
  * @returns string
  */
-export const margin = (direction?: Direction, size?: Size | null) => spacing('margin', direction, size);
+export const margin = (direction?: Direction, size?: AbstractSize | null) => spacing('margin', direction, size);
 
 /**
  * Returns a list of lumx margin classnames for the given directions and sizes. For example, for
@@ -59,7 +59,7 @@ export const margin = (direction?: Direction, size?: Size | null) => spacing('ma
  * @param marginConfigs - Array of padding configurations with direction and size
  * @returns string
  */
-export const margins = (marginConfigs: { direction?: Direction; size?: Size | null }[]) =>
+export const margins = (marginConfigs: { direction?: Direction; size?: AbstractSize | null }[]) =>
     spacings(marginConfigs.map(({ direction, size }) => ({ type: 'margin', direction, size })));
 
 /**
@@ -69,7 +69,7 @@ export const margins = (marginConfigs: { direction?: Direction; size?: Size | nu
  * @param size - Size
  * @returns string
  */
-export const padding = (direction?: Direction, size?: Size | null) => spacing('padding', direction, size);
+export const padding = (direction?: Direction, size?: AbstractSize | null) => spacing('padding', direction, size);
 
 /**
  * Returns a list of lumx padding classnames for the given directions and sizes. For example, for
@@ -81,5 +81,5 @@ export const padding = (direction?: Direction, size?: Size | null) => spacing('p
  * @param paddingConfigs - Array of padding configurations with direction and size
  * @returns Combined padding classnames as a string
  */
-export const paddings = (paddingConfigs: { direction?: Direction; size?: Size | null }[]) =>
+export const paddings = (paddingConfigs: { direction?: Direction; size?: AbstractSize | null }[]) =>
     spacings(paddingConfigs.map(({ direction, size }) => ({ type: 'padding', direction, size })));
