@@ -65,7 +65,7 @@ export function useInjectTooltipRef(options: Options): VNode {
             extraProps[ariaLinkMode] = existing ? `${existing} ${linkId}` : linkId;
         }
 
-        return cloneVNode(firstChild, extraProps);
+        return cloneVNode(firstChild, extraProps, true);
     }
 
     // Fallback: wrap in a <div>
