@@ -1,0 +1,78 @@
+---
+frameworks: ['react', 'vue']
+---
+
+import * as ReactDemo1 from './react/demo1.tsx';
+import * as VueDemo1 from './vue/demo1.vue';
+
+# Action area
+
+**Use action area utility classes to make a container clickable via a primary link or button, while keeping nested interactive elements independently clickable.**
+
+## About
+
+Inspired by the [Open UI Link Area Delegation proposal](https://open-ui.org/components/link-area-delegation-explainer/), the action area pattern lets you expand the click target of a primary action (link or button) to fill an entire container — such as a card, list item, or table row.
+
+-   Apply `classNames.actionArea()` to the container element.
+-   Apply `classNames.actionArea.action()` to the primary interactive element (link or button) to stretch the click area to the container.
+-   Nested interactive elements are automatically elevated above the overlay so they remain independently clickable.
+
+```ts
+import { classNames } from '@lumx/core/js/utils';
+
+classNames.actionArea(); // => 'lumx-action-area'
+classNames.actionArea.action(); // => 'lumx-action-area__action'
+```
+
+## Demo
+
+<DemoBlock demo={{ react: ReactDemo1, vue: VueDemo1 }} />
+
+## Modifiers
+
+The `classNames.actionArea.action()` function accepts an optional modifier object:
+
+<table>
+    <thead>
+        <tr>
+            <th>Modifier</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <code>has-overlay</code>
+            </td>
+            <td>Adds a hover/active overlay (like most clickable lumx components).</td>
+        </tr>
+        <tr>
+            <td>
+                <code>focus-outset</code>
+            </td>
+            <td>
+                Adds an outset focus ring (like most lumx components).
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>focus-inset</code>
+            </td>
+            <td>
+                Adds an inset focus ring (like clickable list items).
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>theme-\{light,dark\}</code>
+            </td>
+            <td>Theme styling adapting the focus and overlay colors</td>
+        </tr>
+    </tbody>
+</table>
+
+## Accessibility concerns
+
+-   The action element (link or button) remains the accessible interactive element. Screen readers will announce it normally.
+-   The container itself does not gain any interactive ARIA role — the expanded click area is purely a pointer affordance.
+-   Ensure nested interactive targets meet minimum sizing requirements ([WCAG 2.5.8: Target Size](https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html)).
