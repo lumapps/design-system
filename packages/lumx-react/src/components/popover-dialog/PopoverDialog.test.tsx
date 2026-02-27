@@ -1,12 +1,13 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { getByClassName } from '@lumx/react/testing/utils/queries';
+import BasePopoverDialogTests from '@lumx/core/js/components/PopoverDialog/Tests';
 
 import { PopoverDialog, PopoverDialogProps } from './PopoverDialog';
 
 const CLASSNAME = PopoverDialog.className as string;
 
-const setup = (propsOverride: Partial<PopoverDialogProps> = {}, { wrapper }: SetupRenderOptions = {}) => {
+const setupPopoverDialog = (propsOverride: Partial<PopoverDialogProps> = {}, { wrapper }: SetupRenderOptions = {}) => {
     const props = { children: <div />, ...propsOverride };
     const { container } = render(
         <PopoverDialog
@@ -23,8 +24,19 @@ const setup = (propsOverride: Partial<PopoverDialogProps> = {}, { wrapper }: Set
 };
 
 describe(`<${PopoverDialog.displayName}>`, () => {
-    // Common tests suite.
-    commonTestsSuiteRTL(setup, {
+    // Run core tests
+    BasePopoverDialogTests({
+        render: (props: any) =>
+            render(
+                <PopoverDialog anchorRef={{ current: null }} {...props}>
+                    <div />
+                </PopoverDialog>,
+            ),
+        screen,
+    });
+
+    // Common tests suite
+    commonTestsSuiteRTL(setupPopoverDialog, {
         baseClassName: CLASSNAME,
         forwardClassName: 'element',
         forwardAttributes: 'element',

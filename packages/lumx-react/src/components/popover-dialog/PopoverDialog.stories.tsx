@@ -1,65 +1,74 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React from 'react';
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
 import { mdiMenuDown } from '@lumx/icons';
-import { PopoverDialog } from '.';
+import { setup } from '@lumx/core/js/components/PopoverDialog/Stories';
 import { Button, IconButton } from '../button';
+import { PopoverDialog } from '.';
+
+const { meta, ...stories } = setup({
+    component: PopoverDialog,
+    /**
+     * Default render: opens PopoverDialog using a Button trigger.
+     */
+    render: ({ label, ...props }: any) => {
+        const anchorRef = React.useRef(null);
+        const [isOpen, close, open] = useBooleanState(false);
+
+        return (
+            <>
+                <Button ref={anchorRef} onClick={open}>
+                    Open popover
+                </Button>
+                <PopoverDialog
+                    anchorRef={anchorRef}
+                    isOpen={isOpen}
+                    onClose={close}
+                    placement="bottom"
+                    className="lumx-spacing-padding-huge"
+                    label={label}
+                    {...props}
+                >
+                    <Button onClick={close}>Close</Button>
+                    <Button emphasis="medium">Other button</Button>
+                </PopoverDialog>
+            </>
+        );
+    },
+});
 
 export default {
     title: 'LumX components/popover-dialog/PopoverDialog',
-    component: PopoverDialog,
-    parameters: { chromatic: { disableSnapshot: true } },
-    tags: ['!snapshot'],
+    ...meta,
 };
 
-/**
- * Example PopoverDialog using a button as a trigger
- */
-export const WithButtonTrigger = (props: any) => {
-    const anchorRef = React.useRef(null);
-    const [isOpen, close, open] = useBooleanState(false);
-
-    return (
-        <>
-            <Button ref={anchorRef} onClick={open}>
-                Open popover
-            </Button>
-            <PopoverDialog
-                anchorRef={anchorRef}
-                isOpen={isOpen}
-                onClose={close}
-                placement="bottom"
-                className="lumx-spacing-padding-huge"
-                {...props}
-            >
-                <Button onClick={close}>Close</Button>
-                <Button emphasis="medium">Other button</Button>
-            </PopoverDialog>
-        </>
-    );
-};
+export const WithButtonTrigger = { ...stories.WithButtonTrigger };
 
 /**
  * Example PopoverDialog using an icon button as a trigger
  */
-export const WithIconButtonTrigger = ({ children, ...props }: any) => {
-    const anchorRef = React.useRef(null);
-    const [isOpen, close, open] = useBooleanState(false);
+export const WithIconButtonTrigger = {
+    ...stories.WithIconButtonTrigger,
+    render: ({ label, children, ...props }: any) => {
+        const anchorRef = React.useRef(null);
+        const [isOpen, close, open] = useBooleanState(false);
 
-    return (
-        <>
-            <IconButton label="Open popover" ref={anchorRef} onClick={open} icon={mdiMenuDown} />
-            <PopoverDialog
-                anchorRef={anchorRef}
-                isOpen={isOpen}
-                onClose={close}
-                placement="bottom"
-                className="lumx-spacing-padding-huge"
-                label="Example popover"
-                {...props}
-            >
-                <Button onClick={close}>Close</Button>
-                {children}
-            </PopoverDialog>
-        </>
-    );
+        return (
+            <>
+                <IconButton label="Open popover" ref={anchorRef} onClick={open} icon={mdiMenuDown} />
+                <PopoverDialog
+                    anchorRef={anchorRef}
+                    isOpen={isOpen}
+                    onClose={close}
+                    placement="bottom"
+                    className="lumx-spacing-padding-huge"
+                    label={label}
+                    {...props}
+                >
+                    <Button onClick={close}>Close</Button>
+                    {children}
+                </PopoverDialog>
+            </>
+        );
+    },
 };
