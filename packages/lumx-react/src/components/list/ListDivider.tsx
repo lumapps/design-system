@@ -20,6 +20,7 @@ const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-list-divider';
 
 /**
  * ListDivider component.
+ * Purely decorative, consider a `ListSection` with label for a better list structure.
  *
  * @param  props Component props.
  * @param  ref   Component ref.
@@ -28,7 +29,7 @@ const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-list-divider';
 export const ListDivider = forwardRef<ListDividerProps, HTMLLIElement>((props, ref) => {
     const { className, ...forwardedProps } = props;
 
-    return <li ref={ref} {...forwardedProps} className={classNames.join(className, CLASSNAME)} />;
+    return <li ref={ref} role="none" {...forwardedProps} className={classNames.join(className, CLASSNAME)} />;
 });
 ListDivider.displayName = COMPONENT_NAME;
 ListDivider.className = CLASSNAME;
