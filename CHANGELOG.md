@@ -27,12 +27,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   `List`: fix jsdoc for deprecated `onListItemSelected` prop (removed in v4.0.0)
     -   `List`: remove default value for `tabIndex`
     -   `ListItem`: alias `onItemSelected` prop to `onClick`
+    -   `ListDivider`: set `role=none` as a more sensible a11y default (use `ListSection` with label for proper grouping of list items)
 
 ### Added
 
 -   `@lumx/react`:
     -   `Popover`: added `closeMode` to `"unmount"` (default) or `"hide"` the popover when closed
     -   Create the `ListItem.Action` component using the action area util on a `ListItem`
+    -   Create the `ListSection` component
 -   `@lumx/core`:
     -   Added a new css entry point for components and utils
     -   Add action area CSS utils
@@ -116,6 +118,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 -   `@lumx/core`:
+
     -   Moved `Table` component family from `@lumx/react` (`Table`, `TableBody`, `TableCell`, `TableHeader`, `TableRow`)
     -   Moved `Badge` from `@lumx/react`
     -   Moved `BadgeWrapper` from `@lumx/react`
@@ -158,7 +161,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Build now correctly fixes all imports from `lumx/core`
 -   `@lumx/react`:
     -   Prop `children` is now ignored for component `IconButton`
-
 
 ## [4.3.0][] - 2026-02-10
 
@@ -330,7 +332,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- `Thumbnail`: update CSS for thumbnail rendering with wrongly dimensioned images in chrome.
+-   `Thumbnail`: update CSS for thumbnail rendering with wrongly dimensioned images in chrome.
 
 ## [3.18.0][] - 2025-10-03
 

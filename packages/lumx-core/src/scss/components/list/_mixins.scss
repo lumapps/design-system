@@ -131,6 +131,30 @@
     background-color: lumx-color-variant("dark", $lumx-divider-color-variant);
 }
 
+@mixin lumx-list-auto-section-divider() {
+    $divider: '.#{$lumx-base-prefix}-list-divider';
+
+    // Insert a divider before each section NOT directly following another section or an explicit divider.
+    // Avoids double dividers when two sections are adjacent or when a ListDivider separates them.
+    &:not(:first-child):not(& + &):not(#{$divider} + &) {
+        &::before {
+            content: '';
+            display: block;
+            @include lumx-list-divider;
+        }
+    }
+
+    // Insert a divider after each section that is not the last child
+    // and not directly followed by an explicit divider.
+    &:not(:last-child):not(:has(+ #{$divider})) {
+        &::after {
+            content: '';
+            display: block;
+            @include lumx-list-divider;
+        }
+    }
+}
+
 @mixin lumx-list-item-padding($size) {
     @if $size == "big" {
         padding-right: $lumx-spacing-unit * 2;

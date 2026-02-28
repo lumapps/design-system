@@ -5,11 +5,13 @@ frameworks: ['react']
 import * as DemoItemSizes from './react/item-sizes.tsx';
 import * as DemoItemPadding from './react/item-padding.tsx';
 import * as DemoClickable from './react/clickable.tsx';
+import * as DemoListSection from './react/list-section.tsx';
 import * as DemoItemLayout from './react/item-layout.tsx';
 import * as DemoAction from './react/item-action.tsx';
 import ReactList from 'lumx-docs:@lumx/react/components/list/List';
 import ReactListDivider from 'lumx-docs:@lumx/react/components/list/ListDivider';
 import ReactListItem from 'lumx-docs:@lumx/react/components/list/ListItem';
+import ReactListSection from 'lumx-docs:@lumx/react/components/list/ListSection';
 import ReactListSubheader from 'lumx-docs:@lumx/react/components/list/ListSubheader';
 import ReactListItemAction from 'lumx-docs:@lumx/react/components/list/ListItemAction';
 
@@ -58,6 +60,13 @@ nested interactive elements in `before` or `after` while keeping them accessible
 
 <DemoBlock demo={{ react: DemoAction }} />
 
+## List sections
+
+Use sections to group list items into labeled sections. Each section can have a `label` and an optional `icon`.
+Adjacent sections are automatically separated by a divider.
+
+<DemoBlock demo={{ react: DemoListSection }} />
+
 ### Accessibility concerns
 
 The `List` component renders a standard `<ul>` element with an implicit `list` role, and `ListItem`
@@ -85,6 +94,26 @@ It activates the [action area](../../utilities/action-area) pattern: the primary
 the full list item area, while other interactive elements in `before` and `after` slots remain separately focusable
 and clickable. This keeps the DOM valid and preserves a clear tab order for keyboard and screen reader users.
 
+#### Sections
+
+`ListSection` with a `label` renders a standard HTML nested list: a `<li>` containing a labeled
+`<ul>` (via `aria-labelledby`). This is the recommended way to split a list into named sections.
+
+Pass `itemsWrapperProps={{ role: 'group' }}` to change the inner `<ul>` to a `group` role.
+Use this when sections represent grouped items/options inside a `listbox` or `menu`.
+
+**Patterns to avoid:**
+
+-   **`ListSection` without a `label`**: produces an unnamed nested list with a "phantom" list item
+    wrapper, which is semantically confusing for screen readers.
+-   **`ListSubheader`** (deprecated): renders a `<li>` used as a section header, producing an improper
+    list structure. Use `ListSection` with a `label` instead.
+
+#### Divider
+
+`ListDivider` and the automatic dividers between `ListSection` are purely visual. Only a section with label provides
+a correct split of items in a list.
+
 ### List properties
 
 <PropTable docs={{ react: ReactList }} />
@@ -93,10 +122,18 @@ and clickable. This keeps the DOM valid and preserves a clear tab order for keyb
 
 <PropTable docs={{ react: ReactListItem }} />
 
+### ListItem.Action properties
+
+<PropTable docs={{ react: ReactListItemAction }} />
+
+### ListSection properties
+
+<PropTable docs={{ react: ReactListSection }} />
+
 ### ListSubheader properties
 
 <PropTable docs={{ react: ReactListSubheader }} />
 
-### ListItem.Action properties
+### ListDivider properties
 
-<PropTable docs={{ react: ReactListItemAction }} />
+<PropTable docs={{ react: ReactListDivider }} />

@@ -25,6 +25,7 @@ const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-list-subheader';
 
 /**
  * ListSubheader component.
+ * @deprecated ListSubheader produces improper list structure. use ListSection instead.
  *
  * @param  props Component props.
  * @param  ref   Component ref.
