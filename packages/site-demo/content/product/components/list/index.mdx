@@ -5,11 +5,13 @@ frameworks: ['react']
 import * as DemoItemSizes from './react/item-sizes.tsx';
 import * as DemoItemPadding from './react/item-padding.tsx';
 import * as DemoClickable from './react/clickable.tsx';
+import * as DemoListSection from './react/list-section.tsx';
 import * as DemoItemLayout from './react/item-layout.tsx';
 import * as DemoAction from './react/item-action.tsx';
 import ReactList from 'lumx-docs:@lumx/react/components/list/List';
 import ReactListDivider from 'lumx-docs:@lumx/react/components/list/ListDivider';
 import ReactListItem from 'lumx-docs:@lumx/react/components/list/ListItem';
+import ReactListSection from 'lumx-docs:@lumx/react/components/list/ListSection';
 import ReactListSubheader from 'lumx-docs:@lumx/react/components/list/ListSubheader';
 import ReactListItemAction from 'lumx-docs:@lumx/react/components/list/ListItemAction';
 
@@ -58,6 +60,13 @@ nested interactive elements in `before` or `after` while keeping them accessible
 
 <DemoBlock demo={{ react: DemoAction }} />
 
+## List sections
+
+Use sections to group list items into labeled sections. Each section can have a `label` and an optional `icon`.
+Adjacent sections are automatically separated by a divider.
+
+<DemoBlock demo={{ react: DemoListSection }} />
+
 ### Accessibility concerns
 
 The `List` component renders a standard `<ul>` element with an implicit `list` role, and `ListItem`
@@ -92,6 +101,10 @@ and clickable. This keeps the DOM valid and preserves a clear tab order for keyb
 ### ListItem properties
 
 <PropTable docs={{ react: ReactListItem }} />
+
+### ListSection properties
+
+<PropTable docs={{ react: ReactListSection }} />
 
 ### ListSubheader properties
 
