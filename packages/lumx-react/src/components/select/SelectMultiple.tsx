@@ -22,7 +22,7 @@ export interface SelectMultipleProps extends CoreSelectProps {
     selectedChipRender?(
         choice: string,
         index: number,
-        onClear?: (event: SyntheticEvent, choice: string) => void,
+        onClear?: (event?: SyntheticEvent, choice?: string) => void,
         isDisabled?: boolean,
         theme?: any,
     ): ReactNode | string;
@@ -38,7 +38,7 @@ const { block, element } = classNames.bem(CLASSNAME);
 /** The default value of props. */
 const DEFAULT_PROPS: Partial<SelectMultipleProps> = {
     selectedChipRender(choice, index, onClear, isDisabled?, theme?) {
-        const onClick = (event: React.MouseEvent) => onClear && onClear(event, choice);
+        const onClick = (event?: React.MouseEvent) => onClear && onClear(event, choice);
         return (
             <Chip
                 key={index}

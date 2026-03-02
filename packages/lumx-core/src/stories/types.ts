@@ -1,4 +1,5 @@
 import type { CombinationsOptions } from './utils/combinations';
+import { ThemeVariablesOptions } from './utils/themeVariables';
 
 /** Storybook decorator function */
 type Decorator = (story: any, context: any) => any;
@@ -19,6 +20,8 @@ interface StoryDecorators {
     withValueOnChange?: (options?: { valueProp?: string; valueTransform?: (v: any) => any }) => Decorator;
     /** Decorator forcing a minimum screen size for Chromatic snapshots */
     withChromaticForceScreenSize?: () => Decorator;
+    /** Decorator for adding custom theming to a story */
+    withTheming?: (options: ThemeVariablesOptions) => Decorator;
 }
 
 /** A partial Storybook story object (args, argTypes, render, decorators, etc.) */

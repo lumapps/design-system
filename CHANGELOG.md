@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   `@lumx/vue`:
+    -   Create the `Chip` component
     -   Create the `Popover` component
     -   Create the `PopoverDialog` component
 
@@ -18,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/core`:
     -   Improve spacing util size type (abstract sizes, not t-shirt sizes)
     -   Add all direction short-hand for spacing utils (`margin(null)`, `padding('regular')`, etc.)
+    -   Moved `Chip` from `@lumx/react`
     -   Moved `Popover` from `@lumx/react`
     -   Moved `PopoverDialog` from `@lumx/react`
 -   `@lumx/react`:

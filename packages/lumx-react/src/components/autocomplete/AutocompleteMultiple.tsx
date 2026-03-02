@@ -22,7 +22,7 @@ export interface AutocompleteMultipleProps extends AutocompleteProps {
     selectedChipRender(
         choice: any,
         index: number,
-        onClear?: (event: React.MouseEvent, val: any) => void,
+        onClear?: (event?: React.MouseEvent, val?: any) => void,
         isDisabled?: boolean,
     ): ReactNode | string;
 }
@@ -44,7 +44,7 @@ const DEFAULT_PROPS: Partial<AutocompleteMultipleProps> = {
     closeOnClickAway: true,
     closeOnEscape: true,
     selectedChipRender(choice, index, onClear, isDisabled) {
-        const onClick = (event: React.MouseEvent) => onClear && onClear(event, choice);
+        const onClick = (event?: React.MouseEvent) => onClear && onClear(event, choice);
         return (
             <Chip
                 key={index}

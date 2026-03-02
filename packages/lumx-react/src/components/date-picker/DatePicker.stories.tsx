@@ -3,7 +3,7 @@ import { withValueOnChange } from '@lumx/react/stories/decorators/withValueOnCha
 import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
-import { withTheming } from '@lumx/react/stories/utils/theming';
+import { withTheming } from '@lumx/react/stories/decorators/withTheming';
 
 export default {
     title: 'LumX components/date-picker/DatePicker',

@@ -55,11 +55,11 @@ export default ({ theme }: { theme?: Theme }) => {
     const selectedChipRender = (
         choice: string,
         index: number,
-        onClear?: (event: React.SyntheticEvent, choice: string) => void,
+        onClear?: (event?: React.SyntheticEvent, choice?: string) => void,
         isDisabled?: boolean,
     ) => {
         const matchedChoice = getChoiceByValue(choice);
-        const onClick = (event: React.MouseEvent) => onClear && onClear(event, choice);
+        const onClick = (event?: React.MouseEvent) => onClear && onClear(event, choice);
         return (
             <Chip
                 key={index}

@@ -5,6 +5,7 @@ export * from './components/avatar';
 export * from './components/badge';
 export * from './components/button';
 export * from './components/checkbox';
+export * from './components/chip';
 export * from './components/divider';
 export * from './components/flag';
 export * from './components/flex-box';
