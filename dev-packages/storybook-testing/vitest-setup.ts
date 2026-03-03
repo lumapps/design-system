@@ -5,6 +5,37 @@ import { beforeAll, expect } from 'vitest';
 
 type SetProjectAnnotationsFn = (annotations: any[]) => { beforeAll: () => Promise<void> };
 
+/** Wait for all images in the document to finish loading (or error). */
+function waitForImages(timeout = 3_000): Promise<void> {
+    return new Promise((resolve) => {
+        const images = document.querySelectorAll('img');
+        const pending = Array.from(images).filter((img) => !img.complete);
+        if (pending.length === 0) return resolve();
+
+        let settled = false;
+        const timer = setTimeout(() => {
+            if (!settled) {
+                settled = true;
+                resolve();
+            }
+        }, timeout);
+
+        let remaining = pending.length;
+        const onSettled = () => {
+            remaining--;
+            if (remaining <= 0 && !settled) {
+                settled = true;
+                clearTimeout(timer);
+                resolve();
+            }
+        };
+        for (const img of pending) {
+            img.addEventListener('load', onSettled, { once: true });
+            img.addEventListener('error', onSettled, { once: true });
+        }
+    });
+}
+
 /**
  * Setup storybook vitest with visual snapshot testing.
  * Visual diffs are logged as warnings instead of failing the test.
@@ -21,6 +52,9 @@ export function setupStorybookVitest(
         auto: async (options) => {
             // Skip image snapshots unless IMAGE_SNAPSHOT env flag is set.
             if (!process.env.IMAGE_SNAPSHOT) return false;
+
+            // Wait for all images to load before taking the screenshot.
+            await waitForImages();
 
             const subject = options.subject ? document.querySelector(options.subject) ?? document.body : document.body;
             try {
