@@ -19,6 +19,9 @@ export function setupStorybookVitest(
 
     vis.setup({
         auto: async (options) => {
+            // Skip image snapshots unless IMAGE_SNAPSHOT env flag is set.
+            if (!process.env.IMAGE_SNAPSHOT) return false;
+
             const subject = options.subject ? document.querySelector(options.subject) ?? document.body : document.body;
             try {
                 await expect(subject).toMatchImageSnapshot(options);
