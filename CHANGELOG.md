@@ -27,6 +27,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/react`:
     -   `ListItem`: display "clickable" variant when providing `linkAs` (and not just on `onItemSelected` or `linkProps.href`)
     -   `ListItem`: render as HTML `<button>` with `onItemSelected` (instead of `<a role="button">`)
+-   `@lumx/core`, `@lumx/react`, `@lumx/vue`:
+    -   Improve click and key event callback types
 
 ### Fixed
 

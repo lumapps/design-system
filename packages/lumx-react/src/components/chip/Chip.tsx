@@ -28,13 +28,13 @@ export interface ChipProps extends GenericProps, ReactToJSX<UIProps, ChipPropsTo
     /** A component to be rendered before the content. */
     before?: ReactNode;
     /** On "after" element clicked callback. */
-    onAfterClick?: (event?: React.MouseEvent) => void;
+    onAfterClick?: (event: React.MouseEvent) => void;
     /** On "before" element clicked callback. */
-    onBeforeClick?: (event?: React.MouseEvent) => void;
+    onBeforeClick?: (event: React.MouseEvent) => void;
     /** On element clicked callback. */
-    onClick?: (event?: React.MouseEvent) => void;
+    onClick?: (event: React.MouseEvent) => void;
     /** On element key down callback. */
-    onKeyDown?: (event?: React.KeyboardEvent) => void;
+    onKeyDown?: (event: React.KeyboardEvent) => void;
 }
 
 /**
