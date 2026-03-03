@@ -1,6 +1,5 @@
 <template>
-    <!-- ChipGroup not yet available in @lumx/vue, using flex container -->
-    <div style="display: flex; flex-wrap: wrap; gap: var(--lumx-spacing-unit-tiny)">
+    <ChipGroup>
         <Chip :theme="theme" size="s">Apricot</Chip>
         <Chip :theme="theme" size="s">Apple</Chip>
         <Chip :theme="theme" size="s">Banana</Chip>
@@ -14,11 +13,11 @@
         <Chip :theme="theme" size="s">Raspberry</Chip>
         <Chip :theme="theme" size="s">Strawberry</Chip>
         <Chip :theme="theme" size="s">Watermelon</Chip>
-    </div>
+    </ChipGroup>
 </template>
 
 <script setup lang="ts">
-import { Chip, type Theme } from '@lumx/vue';
+import { Chip, ChipGroup, type Theme } from '@lumx/vue';
 
 defineProps<{ theme?: Theme }>();
 </script>
