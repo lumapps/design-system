@@ -1,6 +1,6 @@
 <template>
     <div style="width: 100px; height: 10px">
-        <Thumbnail image="https://picsum.photos/id/535/640/480" alt="Free" aspect-ratio="free" fill-height />
+        <Thumbnail image="https://picsum.photos/id/535/640/480" alt="Free" aspect-ratio="free" :fill-height="true" />
     </div>
 
     <div style="width: 100px">
