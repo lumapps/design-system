@@ -1,4 +1,4 @@
-import { watchEffect, isRef, onUnmounted, type Ref } from 'vue';
+import { watchPostEffect, isRef, onUnmounted, type Ref } from 'vue';
 import { getFirstAndLastFocusable } from '@lumx/core/js/utils/focus/getFirstAndLastFocusable';
 import { makeListenerTowerContext, type Listener } from '@lumx/core/js/utils/function/listenerTower';
 
@@ -19,7 +19,7 @@ export function useFocusTrap(
 ): void {
     let currentTrap: Listener | undefined;
 
-    watchEffect((onCleanup) => {
+    watchPostEffect((onCleanup) => {
         const focusZoneElement = isRef(focusZoneElementRef) ? focusZoneElementRef.value : focusZoneElementRef;
         const focusElement = isRef(focusElementRef) ? focusElementRef.value : focusElementRef;
 

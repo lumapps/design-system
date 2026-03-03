@@ -61,6 +61,7 @@ const PopoverDialog = defineComponent(
             'aria-labelledby',
             'as',
             'boundaryRef',
+            'closeMode',
             'closeOnClickAway',
             'closeOnEscape',
             'elevation',

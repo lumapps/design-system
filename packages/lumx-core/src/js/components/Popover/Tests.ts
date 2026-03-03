@@ -1,4 +1,4 @@
-import { fireEvent } from '@testing-library/dom';
+import userEvent from '@testing-library/user-event';
 import { getByClassName, queryByClassName } from '../../../testing/queries';
 import { SetupOptions } from '../../../testing';
 
@@ -22,11 +22,19 @@ export default (renderOptions: SetupOptions<any>) => {
             expect(element.className).toContain(CLASSNAME);
         });
 
-        it('should not render when closed', () => {
+        it('should not render when closed (closeMode unmount)', () => {
             const { render: renderFn } = renderOptions;
             renderFn({ isOpen: false, usePortal: false, children: 'Popover content' });
             const element = queryByClassName(document.body, CLASSNAME);
             expect(element).not.toBeInTheDocument();
+        });
+
+        it('should keep element in DOM but hidden when closed with closeMode hide', () => {
+            const { render: renderFn } = renderOptions;
+            renderFn({ isOpen: false, closeMode: 'hide', usePortal: false, children: 'Popover content' });
+            const element = queryByClassName(document.body, CLASSNAME);
+            expect(element).toBeInTheDocument();
+            expect(element).toHaveClass(`${CLASSNAME}--is-hidden`);
         });
 
         describe('Props', () => {
@@ -68,10 +76,17 @@ export default (renderOptions: SetupOptions<any>) => {
             });
         });
 
-        it('should close on escape', () => {
+        it('should close on escape', async () => {
             const onClose = vi.fn();
             setup({ isOpen: true, closeOnEscape: true, onClose }, renderOptions);
-            fireEvent.keyDown(document.body, { key: 'Escape', code: 'Escape' });
+            await userEvent.keyboard('{Escape}');
+            expect(onClose).toHaveBeenCalled();
+        });
+
+        it('should close on escape with closeMode hide', async () => {
+            const onClose = vi.fn();
+            setup({ isOpen: true, closeMode: 'hide', closeOnEscape: true, onClose }, renderOptions);
+            await userEvent.keyboard('{Escape}');
             expect(onClose).toHaveBeenCalled();
         });
     });

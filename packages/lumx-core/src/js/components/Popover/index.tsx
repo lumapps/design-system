@@ -1,4 +1,4 @@
-import type { JSXElement, HasTheme, HasClassName, CommonRef, LumxClassName } from '../../types';
+import type { JSXElement, HasTheme, HasClassName, HasCloseMode, CommonRef, LumxClassName } from '../../types';
 import { classNames } from '../../utils';
 import { Elevation, FitAnchorWidth, Offset, Placement, POPOVER_ZINDEX } from './constants';
 
@@ -10,7 +10,7 @@ import { Elevation, FitAnchorWidth, Offset, Placement, POPOVER_ZINDEX } from './
  * are typed as `any` here because React uses `RefObject<HTMLElement>` while Vue uses
  * raw `HTMLElement` — each framework narrows the type in its own props definition.
  */
-export interface PopoverProps extends HasClassName, HasTheme {
+export interface PopoverProps extends HasClassName, HasTheme, HasCloseMode {
     /** Reference to the DOM element used to set the position of the popover. */
     anchorRef?: CommonRef;
     /** Customize the root element tag. */
@@ -62,7 +62,7 @@ export interface PopoverProps extends HasClassName, HasTheme {
  * Internal UI rendering props for the core Popover component.
  * These are passed by the framework wrappers after processing the behavioral PopoverProps.
  */
-export interface PopoverUIProps extends HasClassName, HasTheme {
+export interface PopoverUIProps extends HasClassName, HasTheme, HasCloseMode {
     /** Customize the root element tag. */
     as?: string;
     /** Content. */
@@ -119,6 +119,7 @@ const { block, element } = classNames.bem(CLASSNAME);
  * Component default props (used by framework wrappers).
  */
 export const DEFAULT_PROPS: Partial<PopoverProps> = {
+    closeMode: 'unmount',
     elevation: 3 as Elevation,
     placement: Placement.AUTO,
     focusAnchorOnClose: true,
@@ -137,6 +138,7 @@ export const Popover = (props: PopoverUIProps, { Portal, ClickAwayProvider, Them
         as: asTag = 'div',
         children,
         className,
+        closeMode = DEFAULT_PROPS.closeMode,
         elevation = DEFAULT_PROPS.elevation,
         hasArrow,
         isOpen,
@@ -157,12 +159,16 @@ export const Popover = (props: PopoverUIProps, { Portal, ClickAwayProvider, Them
         ...forwardedProps
     } = props;
 
+    // Compute hidden/mounted state from closeMode and isOpen.
+    const isHidden = !isOpen && closeMode === 'hide';
+    const isMounted = isOpen || closeMode === 'hide';
+
     // Cast to `any` to avoid "union type too complex" error when using a dynamic tag name in JSX.
     // This is safe because `asTag` is always a valid HTML element tag (e.g. 'div').
     const Component = asTag as any;
     const adjustedElevation = Math.min(elevation || 0, 5);
 
-    if (!isOpen) return null;
+    if (!isMounted) return null;
 
     return (
         <Portal enabled={usePortal}>
@@ -175,15 +181,16 @@ export const Popover = (props: PopoverUIProps, { Portal, ClickAwayProvider, Them
                         [`theme-${theme}`]: Boolean(theme),
                         [`elevation-${adjustedElevation}`]: Boolean(adjustedElevation),
                         [`position-${position}`]: Boolean(position),
+                        'is-hidden': Boolean(isHidden),
                     }),
                 )}
-                style={popoverStyle}
+                style={isHidden ? undefined : popoverStyle}
                 data-popper-placement={position}
             >
                 {unmountSentinel}
-                <ClickAwayProvider callback={clickAwayCallback} childrenRefs={clickAwayRefs}>
+                <ClickAwayProvider callback={!isHidden && clickAwayCallback} childrenRefs={clickAwayRefs}>
                     {hasArrow && (
-                        <div ref={arrowRef} className={element('arrow')} style={arrowStyle}>
+                        <div ref={arrowRef} className={element('arrow')} style={isHidden ? undefined : arrowStyle}>
                             <svg viewBox="0 0 14 14" aria-hidden>
                                 <path d="M8 3.49C7.62 2.82 6.66 2.82 6.27 3.48L.04 14 14.04 14 8 3.49Z" />
                             </svg>

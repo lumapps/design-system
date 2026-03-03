@@ -61,6 +61,7 @@ const _InnerPopover = forwardRef<PopoverProps, HTMLDivElement>((props, ref) => {
         as,
         children,
         className,
+        closeMode = DEFAULT_PROPS.closeMode,
         closeOnClickAway,
         closeOnEscape,
         elevation = DEFAULT_PROPS.elevation,
@@ -83,6 +84,7 @@ const _InnerPopover = forwardRef<PopoverProps, HTMLDivElement>((props, ref) => {
         zIndex = DEFAULT_PROPS.zIndex,
         ...forwardedProps
     } = props;
+
     const popoverRef = useRef<HTMLDivElement>(null);
 
     const { styles, isPositioned, position, setArrowElement, setPopperElement, popperElement } = usePopoverStyle({
@@ -97,7 +99,11 @@ const _InnerPopover = forwardRef<PopoverProps, HTMLDivElement>((props, ref) => {
         zIndex,
     });
 
-    const unmountSentinel = useRestoreFocusOnClose({ focusAnchorOnClose, anchorRef, parentElement }, popperElement);
+    const unmountSentinel = useRestoreFocusOnClose(
+        { focusAnchorOnClose, anchorRef, parentElement },
+        popperElement,
+        isOpen,
+    );
     const focusZoneElement = focusTrapZoneElement?.current || popoverRef?.current;
 
     useCallbackOnEscape(onClose, isOpen && closeOnEscape);
@@ -115,6 +121,7 @@ const _InnerPopover = forwardRef<PopoverProps, HTMLDivElement>((props, ref) => {
             as: as as string,
             children,
             className,
+            closeMode,
             elevation,
             hasArrow,
             isOpen,

@@ -1,7 +1,11 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useEffect, useRef, useState } from 'react';
 
 import { mdiAccount, mdiBell } from '@lumx/icons';
 import { Emphasis, Text, Icon, IconButton, List, ListItem, Size, Message, FlexBox, IconButtonProps } from '@lumx/react';
+import { CLASSNAME } from '@lumx/core/js/components/Popover';
+import { expect, screen, waitFor } from 'storybook/test';
+import type { GenericStory } from '@lumx/react/stories/utils/types';
 import range from 'lodash/range';
 
 import { Popover, Placement } from '.';
@@ -116,3 +120,108 @@ export const TestScrollingPopover = () => {
         </div>
     );
 };
+
+/** Test: closeMode="hide" keeps the popover in the DOM but hidden when closed */
+export const TestCloseModeHide = {
+    render() {
+        const anchorRef = useRef(null);
+        const [isOpen, setIsOpen] = useState(false);
+
+        const toggleOpen = () => setIsOpen(!isOpen);
+
+        return (
+            <>
+                <IconButton
+                    label="Toggle popover"
+                    ref={anchorRef}
+                    emphasis={Emphasis.low}
+                    icon={mdiBell}
+                    onClick={toggleOpen}
+                />
+                <Popover
+                    closeMode="hide"
+                    isOpen={isOpen}
+                    anchorRef={anchorRef}
+                    placement={Placement.BOTTOM}
+                    onClose={toggleOpen}
+                    closeOnEscape
+                >
+                    <Text as="p" className="lumx-spacing-padding-big">
+                        Popover content
+                    </Text>
+                </Popover>
+            </>
+        );
+    },
+    async play({ userEvent }) {
+        const popover = document.querySelector(`.${CLASSNAME}`) as HTMLElement;
+
+        // Popover should be in the DOM but hidden
+        expect(popover).toBeInTheDocument();
+        expect(popover).toHaveClass(`${CLASSNAME}--is-hidden`);
+
+        // Click to open
+        const trigger = screen.getByRole('button', { name: 'Toggle popover' });
+        await userEvent.click(trigger);
+
+        // Popover should be visible (no is-hidden class)
+        await waitFor(() => expect(popover).not.toHaveClass(`${CLASSNAME}--is-hidden`));
+
+        // Click to close
+        await userEvent.click(trigger);
+
+        // Popover should still be in the DOM but hidden again
+        await waitFor(() => expect(popover).toHaveClass(`${CLASSNAME}--is-hidden`));
+    },
+} satisfies GenericStory;
+
+/** Test: closeMode="unmount" removes the popover from the DOM when closed (default) */
+export const TestCloseModeUnmount = {
+    render() {
+        const anchorRef = useRef(null);
+        const [isOpen, setIsOpen] = useState(false);
+
+        const toggleOpen = () => setIsOpen(!isOpen);
+
+        return (
+            <>
+                <IconButton
+                    label="Toggle popover"
+                    ref={anchorRef}
+                    emphasis={Emphasis.low}
+                    icon={mdiBell}
+                    onClick={toggleOpen}
+                />
+                <Popover
+                    closeMode="unmount"
+                    isOpen={isOpen}
+                    anchorRef={anchorRef}
+                    placement={Placement.BOTTOM}
+                    onClose={toggleOpen}
+                    closeOnEscape
+                >
+                    <Text as="p" className="lumx-spacing-padding-big">
+                        Popover content
+                    </Text>
+                </Popover>
+            </>
+        );
+    },
+    async play({ userEvent }) {
+        // Popover should not be in the DOM when closed
+        expect(document.querySelector(`.${CLASSNAME}`)).not.toBeInTheDocument();
+
+        // Click to open
+        const trigger = screen.getByRole('button', { name: 'Toggle popover' });
+        await userEvent.click(trigger);
+
+        // Popover should be in the DOM
+        await waitFor(() => expect(document.querySelector(`.${CLASSNAME}`)).toBeInTheDocument());
+
+        // Click to close
+        await userEvent.click(trigger);
+
+        // Popover should be removed from the DOM
+        await waitFor(() => expect(document.querySelector(`.${CLASSNAME}`)).not.toBeInTheDocument());
+    },
+} satisfies GenericStory;

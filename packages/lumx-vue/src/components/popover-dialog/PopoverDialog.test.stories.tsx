@@ -134,6 +134,58 @@ export const TestCloseEscapeWithTooltip = {
     },
 };
 
+/** Test: closeMode="hide" — focus is trapped within the popover dialog */
+export const TestTrapFocusCloseModeHide = {
+    args: { label: 'Test Label', closeMode: 'hide' as const },
+    async play({ userEvent }: any) {
+        await userEvent.click(screen.getByRole('button', { name: 'Open popover' }));
+        const dialog = await screen.findByRole('dialog', { name: 'Test Label' });
+        const dialogButtons = within(dialog).getAllByRole('button');
+
+        // First button should have focus
+        expect(dialogButtons[0]).toHaveFocus();
+
+        // Tab to next button
+        await userEvent.tab();
+        expect(dialogButtons[1]).toHaveFocus();
+
+        // Tab again: focus should loop back to first button
+        await userEvent.tab();
+        expect(dialogButtons[0]).toHaveFocus();
+    },
+};
+
+/** Test: closeMode="hide" — escape closes the dialog and restores focus to trigger */
+export const TestCloseOnEscapeCloseModeHide = {
+    args: { label: 'Test Label', closeMode: 'hide' as const },
+    async play({ userEvent }: any) {
+        const trigger = screen.getByRole('button', { name: 'Open popover' });
+        await userEvent.click(trigger);
+
+        await screen.findByRole('dialog', { name: 'Test Label' });
+
+        await userEvent.keyboard('{Escape}');
+        // Dialog should be hidden, not removed from DOM
+        expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+        expect(trigger).toHaveFocus();
+    },
+};
+
+/** Test: closeMode="hide" — closing via the Close button restores focus to trigger */
+export const TestCloseExternallyCloseModeHide = {
+    args: { label: 'Test Label', closeMode: 'hide' as const },
+    async play({ userEvent }: any) {
+        const trigger = screen.getByRole('button', { name: 'Open popover' });
+        await userEvent.click(trigger);
+
+        await screen.findByRole('dialog', { name: 'Test Label' });
+
+        await userEvent.click(screen.getByRole('button', { name: 'Close' }));
+        expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+        expect(trigger).toHaveFocus();
+    },
+};
+
 /** Test: heading level context is reset inside the popover dialog */
 export const TestHeadingLevelReset = {
     render({ children, ...args }: any) {
