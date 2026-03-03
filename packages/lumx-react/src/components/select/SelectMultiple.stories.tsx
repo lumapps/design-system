@@ -14,7 +14,7 @@ import {
 } from '@lumx/react';
 import { useBooleanState } from '@lumx/react/hooks/useBooleanState';
 import noop from 'lodash/noop';
-import { MouseEventHandler, SyntheticEvent, useRef, useState } from 'react';
+import { SyntheticEvent, useRef, useState } from 'react';
 import { SelectVariant } from './constants';
 
 export default { title: 'LumX components/select/Select Multiple' };
@@ -183,7 +183,7 @@ export const ChipsCustomSelectMultiple = () => {
     };
 
     const customSelectChipRenderer = (choice: string, index: number, onClear: any, isDisabled: any) => {
-        const onClick: MouseEventHandler = (event) => onClear && onClear(event, choice);
+        const onClick: (ev?: React.MouseEvent) => void = (event) => onClear && onClear(event, choice);
         return (
             <Chip key={choice} isDisabled={isDisabled} size={Size.s} onAfterClick={onClick} onClick={onClick}>
                 {choice}

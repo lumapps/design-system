@@ -6,7 +6,7 @@ import { Emphasis, GridColumn, SideNavigation, SideNavigationItem } from '@lumx/
 import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
 import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
-import { withTheming } from '@lumx/react/stories/utils/theming';
+import { withTheming } from '@lumx/react/stories/decorators/withTheming';
 import { DESIGN_TOKENS } from '@lumx/core/js/constants/_internal/design-tokens';
 import { disableArgTypes } from '@lumx/core/stories/utils/disableArgTypes';
 import { iconArgType } from '@lumx/core/stories/controls/icons';

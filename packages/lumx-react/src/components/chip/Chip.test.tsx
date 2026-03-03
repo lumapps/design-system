@@ -1,10 +1,10 @@
 import React from 'react';
-import { Theme, Size } from '@lumx/react';
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
+import BaseChipTests from '@lumx/core/js/components/Chip/Tests';
 import { Chip, ChipProps } from './Chip';
 
 const CLASSNAME = Chip.className as string;
@@ -26,71 +26,26 @@ const setup = (propOverrides: Partial<ChipProps> = {}, { wrapper }: SetupRenderO
 };
 
 describe('<Chip />', () => {
-    describe('Props', () => {
-        it('should render default', () => {
-            const { chip } = setup({ children: 'Chip text' });
-            expect(chip).toBeInTheDocument();
-            expect(chip).toHaveTextContent('Chip text');
-            expect(chip.className).toMatchInlineSnapshot(
-                '"lumx-chip lumx-chip--color-dark lumx-chip--size-m lumx-chip--is-unselected"',
-            );
-        });
+    // Run core tests
+    BaseChipTests({
+        render: (props: ChipProps) => render(<Chip {...props} />),
+        screen,
+    });
 
-        it('should render dark theme', () => {
-            const { chip } = setup({ theme: Theme.dark });
-            expect(chip).toHaveClass('lumx-chip--color-light');
-        });
-
-        it('should render clickable', () => {
-            const onClick = vi.fn();
-            const { chip } = setup({ children: 'Chip text', onClick });
-            expect(chip).toHaveAttribute('role', 'button');
-            expect(chip.className).toMatchInlineSnapshot(
-                '"lumx-chip lumx-chip--is-clickable lumx-chip--color-dark lumx-chip--size-m lumx-chip--is-unselected"',
-            );
-        });
-
-        it('should render a link', () => {
-            setup({ children: 'Chip text', href: 'https://google.com', target: '_blank' });
-            const chip = screen.getByRole('link', { name: 'Chip text' });
-            expect(chip).toHaveAttribute('href', 'https://google.com');
-            expect(chip).toHaveAttribute('target', '_blank');
-            expect(chip).toHaveAttribute('tabIndex', '0');
-        });
-
-        it('should override the role', () => {
-            setup({ children: 'Chip text', role: 'radio' });
-            expect(screen.getByRole('radio', { name: 'Chip text' })).toBeInTheDocument();
-        });
-
-        it('should override the tabIndex', () => {
-            const { chip } = setup({ children: 'Chip text', tabIndex: -1 });
-            expect(chip).toHaveAttribute('tabIndex', '-1');
-        });
-
+    // React-specific tests
+    describe('React', () => {
         it('should forward ref', () => {
             const ref = React.createRef<HTMLAnchorElement>();
             setup({ ref } as any);
             expect(ref.current).toHaveClass(CLASSNAME);
             expect(ref.current).toBeInstanceOf(HTMLAnchorElement);
         });
-    });
 
-    describe('Styling', () => {
-        it('should render highlighted state', () => {
-            const { chip } = setup({ isHighlighted: true });
-            expect(chip).toHaveClass('lumx-chip--is-highlighted');
-        });
-
-        it('should render selected state', () => {
-            const { chip } = setup({ isSelected: true });
-            expect(chip).toHaveClass('lumx-chip--is-selected');
-            expect(chip).not.toHaveClass('lumx-chip--is-unselected');
-        });
-
-        it('should render small size', () => {
-            const { chip } = setup({ size: Size.s });
-            expect(chip).toHaveClass('lumx-chip--size-s');
+        it('should render clickable with onClick', () => {
+            const onClick = vi.fn();
+            const { chip } = setup({ children: 'Chip text', onClick });
+            expect(chip).toHaveAttribute('role', 'button');
+            expect(chip.className).toContain('lumx-chip--is-clickable');
         });
     });
 

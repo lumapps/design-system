@@ -1,164 +1,25 @@
-import omit from 'lodash/omit';
-import { mdiClose, mdiViewList } from '@lumx/icons';
-import { Chip, ChipProps, ColorPalette, Icon, Size, Theme } from '@lumx/react';
-
-import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
+import { Chip, Icon } from '@lumx/react';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
-import { withUndefined } from '@lumx/core/stories/controls/withUndefined';
-import { withTheming } from '@lumx/react/stories/utils/theming';
-import { DESIGN_TOKENS } from '@lumx/core/js/constants/_internal/design-tokens';
-import pick from 'lodash/pick';
 import { withThemedBackground } from '@lumx/react/stories/decorators/withThemedBackground';
+import { withTheming } from '@lumx/react/stories/decorators/withTheming';
+import { setup } from '@lumx/core/js/components/Chip/Stories';
 
-const chipSizes = [Size.m, Size.s];
+const { meta, ...stories } = setup({
+    component: Chip,
+    components: { Icon },
+    decorators: { withCombinations, withThemedBackground, withTheming },
+});
+
 export default {
     title: 'LumX components/chip/Chip',
-    component: Chip,
-    args: omit(Chip.defaultProps, ['theme']),
-    argTypes: {
-        size: getSelectArgType<ChipProps['size']>(chipSizes),
-        before: { control: false },
-        after: { control: false },
-    },
+    ...meta,
 };
 
-/**
- * Default chip with label
- */
-export const Default = {
-    args: { children: 'Chip label' },
-};
-
-/**
- * Clickable chip
- */
-export const ChipButton = {
-    args: { children: 'Chip label' },
-    argTypes: { onClick: { action: true } },
-};
-
-/**
- * Link chip
- */
-export const ChipLink = {
-    args: {
-        children: 'Chip link',
-        href: 'https://example.com',
-        target: '_blank',
-    },
-};
-
-/**
- * With custom elements at the start and end of the chip
- */
-export const WithAfterAndBefore = {
-    argTypes: {
-        onBeforeClick: { action: true },
-        onClick: { action: true },
-        onAfterClick: { action: true },
-    },
-    args: {
-        before: <Icon icon={mdiViewList} />,
-        children: 'Chip label',
-        after: <Icon icon={mdiClose} />,
-    },
-};
-
-/**
- * All combinations of color, size and states.
- */
-export const ColorVariants = {
-    ...WithAfterAndBefore,
-    decorators: [
-        withCombinations({
-            combinations: {
-                rows: { key: 'color', options: withUndefined(ColorPalette) },
-                sections: { key: 'size', options: chipSizes },
-                cols: {
-                    Default: {},
-                    Hover: { 'data-lumx-hover': true },
-                    Active: { 'data-lumx-active': true },
-                    Disabled: { isDisabled: true },
-                    Focused: { 'data-focus-visible-added': true },
-                },
-            },
-        }),
-    ],
-};
-
-/**
- * All combinations of color, size and states.
- */
-export const SelectedVariants = {
-    ...WithAfterAndBefore,
-    decorators: [
-        withThemedBackground(),
-        withCombinations({
-            combinations: {
-                sections: { 'Size m': {}, 'Size s': { size: 's' } },
-                rows: {
-                    'theme=light': { theme: Theme.light },
-                    'Selected & theme=light': { isSelected: true, theme: Theme.light },
-                    'theme=dark': { theme: Theme.dark },
-                    'Selected & theme=dark': { isSelected: true, theme: Theme.dark },
-                },
-                cols: {
-                    Default: {},
-                    Hover: { 'data-lumx-hover': true },
-                    Active: { 'data-lumx-active': true },
-                    Disabled: { isDisabled: true },
-                    Focused: { 'data-focus-visible-added': true },
-                },
-            },
-        }),
-    ],
-};
-
-/**
- * Test chip CSS variable theming
- */
-export const Theming = {
-    ...SelectedVariants,
-    decorators: [
-        ...SelectedVariants.decorators,
-        withTheming({
-            properties: pick(DESIGN_TOKENS, ['chip']),
-            values: `
-            --lumx-chip-emphasis-selected-state-default-border-width: 2px;
-            --lumx-chip-emphasis-selected-state-default-theme-light-border-color: red;
-            --lumx-chip-emphasis-selected-state-default-theme-light-background-color: blue;
-            --lumx-chip-emphasis-selected-state-default-theme-dark-border-color: blue;
-            --lumx-chip-emphasis-selected-state-default-theme-dark-background-color: red;
-
-            --lumx-chip-emphasis-selected-state-hover-border-width: 3px;
-            --lumx-chip-emphasis-selected-state-hover-theme-light-border-color: green;
-            --lumx-chip-emphasis-selected-state-hover-theme-light-background-color: violet;
-            --lumx-chip-emphasis-selected-state-hover-theme-dark-border-color: violet;
-            --lumx-chip-emphasis-selected-state-hover-theme-dark-background-color: green;
-
-            --lumx-chip-emphasis-selected-state-active-border-width: 4px;
-            --lumx-chip-emphasis-selected-state-active-theme-light-border-color: orange;
-            --lumx-chip-emphasis-selected-state-active-theme-light-background-color: pink;
-            --lumx-chip-emphasis-selected-state-active-theme-dark-border-color: pink;
-            --lumx-chip-emphasis-selected-state-active-theme-dark-background-color: orange;
-            `,
-        }),
-    ],
-};
-
-/**
- * Test Chip disabled states
- */
-export const Disabled = {
-    args: {
-        children: 'Chip label',
-    },
-    decorators: [
-        withCombinations({
-            combinations: {
-                rows: { disabled: { disabled: true }, 'aria-disabled': { 'aria-disabled': true } },
-                cols: { button: { onClick: () => {} }, link: { href: 'https://example.com' } },
-            },
-        }),
-    ],
-};
+export const Default = { ...stories.Default };
+export const ChipButton = { ...stories.ChipButton };
+export const ChipLink = { ...stories.ChipLink };
+export const WithAfterAndBefore = { ...stories.WithAfterAndBefore };
+export const ColorVariants = { ...stories.ColorVariants };
+export const SelectedVariants = { ...stories.SelectedVariants };
+export const Disabled = { ...stories.Disabled };
+export const Theming = { ...stories.Theming };

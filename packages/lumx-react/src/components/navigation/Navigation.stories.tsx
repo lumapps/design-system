@@ -11,7 +11,7 @@ import { Navigation, Orientation, Theme } from '@lumx/react';
 import { CustomLink } from '@lumx/react/stories/utils/CustomLink';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 import { withThemedBackground } from '@lumx/react/stories/decorators/withThemedBackground';
-import { withTheming } from '@lumx/react/stories/utils/theming';
+import { withTheming } from '@lumx/react/stories/decorators/withTheming';
 import pick from 'lodash/pick';
 import { DESIGN_TOKENS } from '@lumx/core/js/constants/_internal/design-tokens';
 import { withNestedProps } from '@lumx/react/stories/decorators/withNestedProps';

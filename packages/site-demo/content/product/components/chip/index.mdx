@@ -1,14 +1,21 @@
 ---
-frameworks: ['react']
+frameworks: ['react', 'vue']
 ---
-import * as Demo1 from './react/demo1.tsx';
-import * as Demo2 from './react/demo2.tsx';
-import * as Demo3 from './react/demo3.tsx';
-import * as Demo4 from './react/demo4.tsx';
-import * as Demo5 from './react/demo5.tsx';
-import * as Demo6 from './react/demo6.tsx';
+import * as ReactDemo1 from './react/demo1.tsx';
+import * as ReactDemo2 from './react/demo2.tsx';
+import * as ReactDemo3 from './react/demo3.tsx';
+import * as ReactDemo4 from './react/demo4.tsx';
+import * as ReactDemo5 from './react/demo5.tsx';
+import * as ReactDemo6 from './react/demo6.tsx';
+import * as VueDemo1 from './vue/demo1.vue';
+import * as VueDemo2 from './vue/demo2.vue';
+import * as VueDemo3 from './vue/demo3.vue';
+import * as VueDemo4 from './vue/demo4.vue';
+import * as VueDemo5 from './vue/demo5.vue';
+import * as VueDemo6 from './vue/demo6.vue';
 import ReactChip from 'lumx-docs:@lumx/react/components/chip/Chip';
 import ReactChipGroup from 'lumx-docs:@lumx/react/components/chip/ChipGroup';
+import VueChip from 'lumx-docs:@lumx/vue/components/chip/Chip';
 
 # Chip
 
@@ -18,37 +25,37 @@ import ReactChipGroup from 'lumx-docs:@lumx/react/components/chip/ChipGroup';
 
 Use default to display distinct attributes such as tags on a blog post.
 
-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: Demo1 }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemo1, vue: VueDemo1 }} />
 
 ## Dismissible
 
 Use dismissible when chips can be removed by users.
 
-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: Demo2 }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemo2, vue: VueDemo2 }} />
 
 ## Choice
 
 Use choice when users make an exclusive choice between values. When space is not a constraint, use this chip instead of a select component.
 
-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: Demo3 }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemo3, vue: VueDemo3 }} />
 
 ## Filter
 
 Use filter as an entry point to one or several choices. When it is active, it can have a clear button.
 
-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: Demo4 }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemo4, vue: VueDemo4 }} />
 
 ## Small
 
 Use small when space is a constraint, as in areas like text fields, selects, dropdown menus and metadata.
 
-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: Demo5 }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemo5, vue: VueDemo5 }} />
 
 ## Chip Group
 
 Use chip groups to group chips together. Groups give chips responsive behavior.
 
-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: Demo6 }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemo6, vue: VueDemo6 }} />
 
 ### Accessibility concerns
 
@@ -62,7 +69,7 @@ Chips can be disabled in two ways:
 
 ### Chip properties
 
-<PropTable docs={{ react: ReactChip }} />
+<PropTable docs={{ react: ReactChip, vue: VueChip }} />
 
 ### ChipGroup properties
 

@@ -5,7 +5,7 @@ import { Button, Emphasis, Text } from '@lumx/react';
 import { withCombinations } from '@lumx/react/stories/decorators/withCombinations';
 import { loremIpsum } from '@lumx/core/stories/utils/lorem';
 import { withThemedBackground } from '@lumx/react/stories/decorators/withThemedBackground';
-import { withTheming } from '@lumx/react/stories/utils/theming';
+import { withTheming } from '@lumx/react/stories/decorators/withTheming';
 import { DESIGN_TOKENS } from '@lumx/core/js/constants/_internal/design-tokens';
 import { setup, excludeCombination } from '@lumx/core/js/components/Button/Stories';
 import { disableArgTypes } from '@lumx/core/stories/utils/disableArgTypes';
