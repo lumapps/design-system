@@ -8,6 +8,9 @@ import path from 'node:path';
 const snapshotOnly = !!process.env.SNAPSHOT_ONLY;
 const tags = snapshotOnly ? { include: ['snapshot'] } : undefined;
 
+// Forward IMAGE_SNAPSHOT env flag to the browser context via Vite's define.
+const imageSnapshot = !!process.env.IMAGE_SNAPSHOT;
+
 /**
  * Create a vitest config for storybook browser testing with visual snapshots.
  *
@@ -21,6 +24,9 @@ export function createStorybookVitestConfig(options) {
     return mergeConfig(
         viteConfig,
         defineConfig({
+            define: {
+                'process.env.IMAGE_SNAPSHOT': JSON.stringify(imageSnapshot),
+            },
             plugins: [
                 /** Load stories as tests */
                 storybookTest({ configDir, tags }),
