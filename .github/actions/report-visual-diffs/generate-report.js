@@ -187,7 +187,7 @@ function buildGroupedSection(heading, entries, renderEntry, { collapsed = false 
     if (entries.length === 0) return [];
     const content = [];
     for (const [storyFile, groupEntries] of groupByStoryFile(entries)) {
-        const summary = `${md.heading(5, storyFile.split('/').join(' > '))} (${groupEntries.length})`;
+        const summary = `${md.bold(storyFile.split('/').join(' > '))} (${groupEntries.length})`;
         content.push(...md.details(summary, ...groupEntries.flatMap(renderEntry)), '');
     }
     if (collapsed) {
