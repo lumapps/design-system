@@ -16,6 +16,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Add `test:storybook`, `test:storybook:react`, `test:storybook:vue`, and `test:all` root scripts
     -   Remove root `vitest.config.mts`, `vitest`, and `@vitest/ui` devDependencies (each package now owns its own vitest setup)
 
+### Added
+
+-   `@lumx/react`:
+    -    `Popover`: added `closeMode` to `"unmount"` (default) or `"hide"` the popover when closed
+
 ## [4.6.0][] - 2026-03-03
 
 ### Added

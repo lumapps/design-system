@@ -1,4 +1,5 @@
 import type { SetupStoriesOptions } from '@lumx/core/stories/types';
+import { getSelectArgType } from '@lumx/core/stories/controls/selectArgType';
 
 /**
  * Core stories for the PopoverDialog component.
@@ -18,6 +19,7 @@ export function setup({ component: PopoverDialog, render }: SetupStoriesOptions)
         parameters: { chromatic: { disableSnapshot: true } },
         tags: ['!snapshot'],
         argTypes: {
+            closeMode: getSelectArgType(['hide', 'unmount']),
             anchorRef: { control: false },
             children: { control: false },
         },

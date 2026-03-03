@@ -1,8 +1,11 @@
-import { ref } from 'vue';
+/* eslint-disable vue/one-component-per-file */
+import { defineComponent, ref } from 'vue';
 import { Text, IconButton, FlexBox, Message } from '@lumx/vue';
 import { Emphasis } from '@lumx/core/js/constants';
 import { mdiBell } from '@lumx/icons';
+import { CLASSNAME } from '@lumx/core/js/components/Popover';
 import { Placement } from '@lumx/core/js/components/Popover/constants';
+import { expect, screen, waitFor } from 'storybook/test';
 
 import { Popover } from '.';
 
@@ -65,5 +68,122 @@ export const TestUpdatingChildrenAndMovingAnchor = {
                 </FlexBox>
             </FlexBox>
         );
+    },
+};
+
+const CloseModeHideStory = defineComponent(
+    () => {
+        const anchorRef = ref<HTMLElement>();
+        const isOpen = ref(false);
+        const toggleOpen = () => {
+            isOpen.value = !isOpen.value;
+        };
+
+        return () => (
+            <>
+                <IconButton
+                    label="Toggle popover"
+                    ref={anchorRef}
+                    emphasis={Emphasis.low}
+                    icon={mdiBell}
+                    onClick={toggleOpen}
+                />
+                <Popover
+                    closeMode="hide"
+                    isOpen={isOpen.value}
+                    anchorRef={anchorRef}
+                    placement={Placement.BOTTOM}
+                    onClose={toggleOpen}
+                    closeOnEscape
+                >
+                    <Text as="p" class="lumx-spacing-padding-big">
+                        Popover content
+                    </Text>
+                </Popover>
+            </>
+        );
+    },
+    { name: 'CloseModeHideStory' },
+);
+
+/** Test: closeMode="hide" keeps the popover in the DOM but hidden when closed */
+export const TestCloseModeHide = {
+    render: () => () => <CloseModeHideStory />,
+    async play({ userEvent }: any) {
+        const popover = document.querySelector(`.${CLASSNAME}`) as HTMLElement;
+
+        // Popover should be in the DOM but hidden
+        expect(popover).toBeInTheDocument();
+        expect(popover).toHaveClass(`${CLASSNAME}--is-hidden`);
+
+        // Click to open
+        const trigger = screen.getByRole('button', { name: 'Toggle popover' });
+        await userEvent.click(trigger);
+
+        // Popover should be visible (no is-hidden class)
+        await waitFor(() => expect(popover).not.toHaveClass(`${CLASSNAME}--is-hidden`));
+
+        // Click to close
+        await userEvent.click(trigger);
+
+        // Popover should still be in the DOM but hidden again
+        await waitFor(() => expect(popover).toHaveClass(`${CLASSNAME}--is-hidden`));
+    },
+};
+
+const CloseModeUnmountStory = defineComponent(
+    () => {
+        const anchorRef = ref<HTMLElement>();
+        const isOpen = ref(false);
+        const toggleOpen = () => {
+            isOpen.value = !isOpen.value;
+        };
+
+        return () => (
+            <>
+                <IconButton
+                    label="Toggle popover"
+                    ref={anchorRef}
+                    emphasis={Emphasis.low}
+                    icon={mdiBell}
+                    onClick={toggleOpen}
+                />
+                <Popover
+                    closeMode="unmount"
+                    isOpen={isOpen.value}
+                    anchorRef={anchorRef}
+                    placement={Placement.BOTTOM}
+                    onClose={toggleOpen}
+                    closeOnEscape
+                >
+                    <Text as="p" class="lumx-spacing-padding-big">
+                        Popover content
+                    </Text>
+                </Popover>
+            </>
+        );
+    },
+    { name: 'CloseModeUnmountStory' },
+);
+
+/** Test: closeMode="unmount" removes the popover from the DOM when closed (default) */
+export const TestCloseModeUnmount = {
+    render: () => () => <CloseModeUnmountStory />,
+    async play({ userEvent }: any) {
+        // Popover should not be in the DOM when closed
+        expect(document.querySelector(`.${CLASSNAME}`)).not.toBeInTheDocument();
+
+        // Click to open
+        const trigger = screen.getByRole('button', { name: 'Toggle popover' });
+        await userEvent.click(trigger);
+
+        // Popover should be in the DOM
+        await waitFor(() => expect(document.querySelector(`.${CLASSNAME}`)).toBeInTheDocument());
+
+        // Click to close
+        await userEvent.click(trigger);
+
+        // Popover should be removed from the DOM
+        await waitFor(() => expect(document.querySelector(`.${CLASSNAME}`)).not.toBeInTheDocument());
     },
 };

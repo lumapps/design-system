@@ -35,6 +35,7 @@ export function setup({
             anchorClassName: 'lumx-spacing-margin-big',
         },
         argTypes: {
+            closeMode: getSelectArgType(['hide', 'unmount']),
             isOpen: { control: 'boolean' },
             hasArrow: { control: 'boolean' },
             placement: getSelectArgType(Placement),

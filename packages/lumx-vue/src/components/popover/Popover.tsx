@@ -115,6 +115,7 @@ const Popover = defineComponent(
             const {
                 anchorRef: _a,
                 boundaryRef: _b,
+                closeMode: _c0,
                 closeOnClickAway: _c,
                 closeOnEscape: _d,
                 focusElement: _e,
@@ -144,6 +145,7 @@ const Popover = defineComponent(
                     as: props.as,
                     children: slots.default?.() as JSXElement,
                     className,
+                    closeMode: props.closeMode,
                     elevation: props.elevation,
                     hasArrow: props.hasArrow,
                     isOpen: Boolean(isOpen),
@@ -168,6 +170,7 @@ const Popover = defineComponent(
             'anchorRef',
             'as',
             'boundaryRef',
+            'closeMode',
             'closeOnClickAway',
             'closeOnEscape',
             'elevation',
