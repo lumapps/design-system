@@ -1,4 +1,4 @@
-import { Chip, ChipGroup } from '@lumx/react';
+import { Chip, ChipGroup } from '@lumx/vue';
 import { setup } from '@lumx/core/js/components/Chip/ChipGroupStories';
 
 const { meta, ...stories } = setup({

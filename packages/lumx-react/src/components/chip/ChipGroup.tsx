@@ -1,9 +1,14 @@
 import { ReactNode } from 'react';
 
-import { HorizontalAlignment } from '@lumx/core/js/constants';
+import {
+    ChipGroup as UI,
+    ChipGroupProps as UIProps,
+    CLASSNAME,
+    COMPONENT_NAME,
+    DEFAULT_PROPS,
+} from '@lumx/core/js/components/Chip/ChipGroup';
 import { GenericProps } from '@lumx/react/utils/type';
-import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
+import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 import { useChipGroupNavigation } from '@lumx/react/hooks/useChipGroupNavigation';
@@ -11,30 +16,10 @@ import { useChipGroupNavigation } from '@lumx/react/hooks/useChipGroupNavigation
 /**
  * Defines the props of the component.
  */
-export interface ChipGroupProps extends GenericProps {
-    /**
-     * Chip horizontal alignment.
-     * @deprecated
-     */
-    align?: HorizontalAlignment;
+export interface ChipGroupProps extends GenericProps, ReactToJSX<UIProps, never> {
     /** List of Chip. */
     children: ReactNode;
 }
-
-/**
- * Component default props.
- */
-const DEFAULT_PROPS: Partial<ChipGroupProps> = {};
-
-/**
- * Component display name.
- */
-const COMPONENT_NAME = 'ChipGroup';
-
-/**
- * Component default class name and class prefix.
- */
-const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-chip-group';
 
 /**
  * ChipGroup component.
@@ -44,13 +29,13 @@ const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-chip-group';
  * @return React element.
  */
 const InternalChipGroup = forwardRef<ChipGroupProps, HTMLDivElement>((props, ref) => {
-    const { align, children, className, ...forwardedProps } = props;
+    const { children, ...forwardedProps } = props;
 
-    return (
-        <div ref={ref} {...forwardedProps} className={classNames.join(className, CLASSNAME)}>
-            {children}
-        </div>
-    );
+    return UI({
+        ref,
+        children,
+        ...forwardedProps,
+    });
 });
 InternalChipGroup.displayName = COMPONENT_NAME;
 InternalChipGroup.className = CLASSNAME;
