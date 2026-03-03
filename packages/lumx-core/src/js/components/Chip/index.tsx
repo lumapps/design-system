@@ -39,13 +39,13 @@ export interface ChipProps extends HasClassName, HasDisabled, HasTheme, HasAriaD
     /** reference to the root element */
     ref?: CommonRef;
     /** On "after" element clicked callback. */
-    handleAfterClick?: (event?: any) => void;
+    handleAfterClick?: (event: any) => void;
     /** On element key down callback. */
-    handleKeyDown?: (event?: any) => void;
+    handleKeyDown?: (event: any) => void;
     /** On "before" element clicked callback. */
-    handleBeforeClick?: (event?: any) => void;
+    handleBeforeClick?: (event: any) => void;
     /** On element clicked callback. */
-    handleClick?: (event?: any) => void;
+    handleClick?: (event: any) => void;
     /** name of the prop for handling key down events */
     keyDownProp?: string;
     /** name of the prop for tab index */

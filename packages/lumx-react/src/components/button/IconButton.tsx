@@ -21,9 +21,9 @@ export interface IconButtonProps extends GenericProps, ReactToJSX<UIProps, 'titl
     /** Whether the tooltip should be hidden or not. */
     hideTooltip?: boolean;
     /** callback for clicking on the button */
-    onClick?: (event?: React.MouseEvent) => void;
+    onClick?: (event: React.MouseEvent) => void;
     /** callback for pressing a key on the button */
-    onKeyPress?: (event?: React.KeyboardEvent) => void;
+    onKeyPress?: (event: React.KeyboardEvent) => void;
 }
 
 /**

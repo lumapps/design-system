@@ -18,10 +18,10 @@ import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 export type ChipProps = VueToJSXProps<UIProps, ChipPropsToOverride>;
 
 export const emitSchema = {
-    click: (event?: MouseEvent) => !event || event instanceof MouseEvent,
-    afterClick: (event?: MouseEvent) => !event || event instanceof MouseEvent,
-    beforeClick: (event?: MouseEvent) => !event || event instanceof MouseEvent,
-    keydown: (event?: KeyboardEvent) => !event || event instanceof KeyboardEvent,
+    click: (event: MouseEvent) => event instanceof MouseEvent,
+    afterClick: (event: MouseEvent) => event instanceof MouseEvent,
+    beforeClick: (event: MouseEvent) => event instanceof MouseEvent,
+    keydown: (event: KeyboardEvent) => event instanceof KeyboardEvent,
 };
 
 export { CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS };
@@ -46,7 +46,7 @@ const Chip = defineComponent(
             computed(() => ({ ...props, ...attrs })),
         );
 
-        const handleClick = (event?: MouseEvent) => {
+        const handleClick = (event: MouseEvent) => {
             if (isAnyDisabled.value) {
                 return;
             }
@@ -54,7 +54,7 @@ const Chip = defineComponent(
             emit('click', event);
         };
 
-        const handleAfterClick = (event?: MouseEvent) => {
+        const handleAfterClick = (event: MouseEvent) => {
             if (isAnyDisabled.value) {
                 return;
             }
@@ -63,7 +63,7 @@ const Chip = defineComponent(
             event?.stopPropagation();
         };
 
-        const handleBeforeClick = (event?: MouseEvent) => {
+        const handleBeforeClick = (event: MouseEvent) => {
             if (isAnyDisabled.value) {
                 return;
             }
@@ -72,7 +72,7 @@ const Chip = defineComponent(
             event?.stopPropagation();
         };
 
-        const handleKeyDown = (event?: KeyboardEvent) => {
+        const handleKeyDown = (event: KeyboardEvent) => {
             if (isAnyDisabled.value) {
                 return;
             }

@@ -19,7 +19,7 @@ export interface LinkProps extends GenericProps, ReactToJSX<UIProps> {
      */
     leftIcon?: string;
     /** Click handler. */
-    onClick?: (event?: React.MouseEvent) => void;
+    onClick?: (event: React.MouseEvent) => void;
     /**
      * Right icon (SVG path).
      * @deprecated Instead, simply nest `<Icon />` in the children

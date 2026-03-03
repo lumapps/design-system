@@ -16,9 +16,9 @@ export { BUTTON_WRAPPER_CLASSNAME, BUTTON_CLASSNAME };
 
 export interface ButtonRootProps extends ReactToJSX<UIProps> {
     /** callback for clicking on the button */
-    onClick?: (event?: React.MouseEvent) => void;
+    onClick?: (event: React.MouseEvent) => void;
     /** callback for pressing a key on the button */
-    onKeyPress?: (event?: React.KeyboardEvent) => void;
+    onKeyPress?: (event: React.KeyboardEvent) => void;
 }
 
 /**
