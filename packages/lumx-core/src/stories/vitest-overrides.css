@@ -18,12 +18,14 @@ img {
     backface-visibility: initial !important;
 }
 
-/** Stabilize font family */
+/** Stabilize font styles */
 :root {
     --lumx-typography-font-family: Arial, sans-serif !important;
 }
-pre, code {
-    font-family: "Ubuntu Mono", monospace;
+pre,
+code {
+    font-family: serif;
+    font-style: italic;
 }
 
 /** Add some space around the subject */
