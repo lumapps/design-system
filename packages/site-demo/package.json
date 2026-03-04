@@ -16,6 +16,7 @@
     },
     "scripts": {
         "clean": "gatsby clean",
+        "lint": "cd ../.. && eslint packages/site-demo/src/",
         "build": "gatsby build",
         "start": "gatsby develop",
         "type-check:vue": "vue-tsc --noEmit -p tsconfig.vue.json",

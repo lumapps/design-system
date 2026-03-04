@@ -102,6 +102,13 @@ module.exports = {
                 'jsx-a11y/anchor-is-valid': 'off',
                 'react/no-unescaped-entities': 'off',
                 'react/display-name': 'off',
+                'vue/one-component-per-file': 'off',
+            },
+        },
+        {
+            files: ['**/*.test.*', '**/*Tests.*', '**/testing/**'],
+            rules: {
+                'vue/one-component-per-file': 'off',
             },
         },
         {

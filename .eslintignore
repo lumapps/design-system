@@ -1,6 +1,7 @@
 **/node_modules/**
-**/dist/*
-**/public/*
+**/dist/**
+**/demos-generated/**
+**/public/**
 yo-generators/**
 **/.yarn/**
 storybook

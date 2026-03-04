@@ -55,7 +55,7 @@ jobs:
 
             - name: 'Run ${{ matrix.project }} tests'
               id: test-storybook
-              run: yarn test --project '${{ matrix.project }}' --run ${{ inputs.update && '--update' || '' }}
+              run: yarn workspace "@lumx/${{ matrix.label }}" test:storybook ${{ inputs.update && '--update' || '' }}
               env:
                   IMAGE_SNAPSHOT: 'true'
                   SNAPSHOT_ONLY: ${{ inputs.update && 'true' || '' }}
