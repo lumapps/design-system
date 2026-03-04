@@ -2,18 +2,18 @@
 frameworks: ['react', 'vue']
 ---
 
-import * as ReactDemo1 from './react/demo1.tsx';
-import * as ReactDemo2 from './react/demo2.tsx';
-import * as ReactDemo3 from './react/demo3.tsx';
-import * as ReactDemo4 from './react/demo4.tsx';
-import * as ReactDemo5 from './react/demo5.tsx';
-import * as ReactDemo6 from './react/demo6.tsx';
-import * as VueDemo1 from './vue/demo1.vue';
-import * as VueDemo2 from './vue/demo2.vue';
-import * as VueDemo3 from './vue/demo3.vue';
-import * as VueDemo4 from './vue/demo4.vue';
-import * as VueDemo5 from './vue/demo5.vue';
-import * as VueDemo6 from './vue/demo6.vue';
+import * as ReactDemoInfo from './react/info.tsx';
+import * as ReactDemoWarning from './react/warning.tsx';
+import * as ReactDemoError from './react/error.tsx';
+import * as ReactDemoSuccess from './react/success.tsx';
+import * as ReactDemoTrimmed from './react/trimmed.tsx';
+import * as ReactDemoClosable from './react/closable.tsx';
+import * as VueDemoInfo from './vue/info.vue';
+import * as VueDemoWarning from './vue/warning.vue';
+import * as VueDemoError from './vue/error.vue';
+import * as VueDemoSuccess from './vue/success.vue';
+import * as VueDemoTrimmed from './vue/trimmed.vue';
+import * as VueDemoClosable from './vue/closable.vue';
 import ReactMessage from 'lumx-docs:@lumx/react/components/message/Message';
 import VueMessage from 'lumx-docs:@lumx/vue/components/message/Message';
 
@@ -27,37 +27,37 @@ import VueMessage from 'lumx-docs:@lumx/vue/components/message/Message';
 
 Informative messages display advice, tips and/or information related to another component or pattern.
 
-<DemoBlock demo={{ react: ReactDemo1, vue: VueDemo1 }} />
+<DemoBlock demo={{ react: ReactDemoInfo, vue: VueDemoInfo }} />
 
 ### Warning
 
 Warning messages display very important information (often about a limitation) related to another component or pattern.
 
-<DemoBlock demo={{ react: ReactDemo2, vue: VueDemo2 }} />
+<DemoBlock demo={{ react: ReactDemoWarning, vue: VueDemoWarning }} />
 
 ### Error
 
 Error messages display critical information (often about a loss for the user) related to another component or pattern.
 
-<DemoBlock demo={{ react: ReactDemo3, vue: VueDemo3 }} />
+<DemoBlock demo={{ react: ReactDemoError, vue: VueDemoError }} />
 
 ### Success
 
 Success messages display critical information (often about the completion of a task performed by the user) related to another component or pattern.
 
-<DemoBlock demo={{ react: ReactDemo4, vue: VueDemo4 }} />
+<DemoBlock demo={{ react: ReactDemoSuccess, vue: VueDemoSuccess }} />
 
 ## Trimmed
 
 Use trimmed when you don't need a background color, left and right spacing.
 
-<DemoBlock demo={{ react: ReactDemo5, vue: VueDemo5 }} />
+<DemoBlock demo={{ react: ReactDemoTrimmed, vue: VueDemoTrimmed }} />
 
 ## Closable
 
 Use closable when you need to make the message closable by the user. This option is only available for the `info` kind with a background. It won't display in any other configuration.
 
-<DemoBlock hAlign="center" vAlign="center" demo={{ react: ReactDemo6, vue: VueDemo6 }} />
+<DemoBlock hAlign="center" vAlign="center" demo={{ react: ReactDemoClosable, vue: VueDemoClosable }} />
 
 ### Accessibility concerns
 

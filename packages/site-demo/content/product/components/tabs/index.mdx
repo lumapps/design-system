@@ -1,9 +1,9 @@
 ---
 frameworks: ['react']
 ---
-import * as Demo1 from './react/demo1.tsx';
-import * as Demo2 from './react/demo2.tsx';
-import * as Demo3 from './react/demo3.tsx';
+import * as DemoDefault from './react/default.tsx';
+import * as DemoJustifyLeft from './react/justify-left.tsx';
+import * as DemoIcon from './react/icon.tsx';
 import ReactTabProvider from 'lumx-docs:@lumx/react/components/tabs/TabProvider';
 import ReactTabList from 'lumx-docs:@lumx/react/components/tabs/TabList';
 import ReactTab from 'lumx-docs:@lumx/react/components/tabs/Tab';
@@ -13,15 +13,15 @@ import ReactTabPanel from 'lumx-docs:@lumx/react/components/tabs/TabPanel';
 
 **Tabs are navigation elements that regroup related sections of content for users to navigate.**
 
-<DemoBlock withThemeSwitcher demo={{ react: Demo1 }} />
+<DemoBlock withThemeSwitcher demo={{ react: DemoDefault }} />
 
 ## Justify left
 
-<DemoBlock withThemeSwitcher demo={{ react: Demo2 }} />
+<DemoBlock withThemeSwitcher demo={{ react: DemoJustifyLeft }} />
 
 ## Icon
 
-<DemoBlock withThemeSwitcher demo={{ react: Demo3 }} />
+<DemoBlock withThemeSwitcher demo={{ react: DemoIcon }} />
 
 ### Accessibility concerns
 

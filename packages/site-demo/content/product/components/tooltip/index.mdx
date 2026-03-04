@@ -2,10 +2,10 @@
 frameworks: ['react', 'vue']
 ---
 
-import * as ReactDemo1 from './react/demo1.tsx';
-import * as ReactDemo2 from './react/demo2.tsx';
-import * as VueDemo1 from './vue/demo1.vue';
-import * as VueDemo2 from './vue/demo2.vue';
+import * as ReactDemoDefault from './react/default.tsx';
+import * as ReactDemoPlacement from './react/placement.tsx';
+import * as VueDemoDefault from './vue/default.vue';
+import * as VueDemoPlacement from './vue/placement.vue';
 import ReactTooltip from 'lumx-docs:@lumx/react/components/tooltip/Tooltip';
 import VueTooltip from 'lumx-docs:@lumx/vue/components/tooltip/Tooltip';
 
@@ -14,7 +14,7 @@ import VueTooltip from 'lumx-docs:@lumx/vue/components/tooltip/Tooltip';
 **Tooltips display information when users hover or focus an element.**\
 They are positioned using anchor elements.
 
-<DemoBlock orientation="horizontal" demo={{ react: ReactDemo1, vue: VueDemo1 }} />
+<DemoBlock orientation="horizontal" demo={{ react: ReactDemoDefault, vue: VueDemoDefault }} />
 
 ## Placement
 
@@ -22,7 +22,7 @@ Tooltips are positioned at the bottom of the target by default.
 Tooltips' position can be forced to one of these options: `top`, `right`, `bottom`, or `left`.
 If there is not enough space to correctly display the tooltip, tooltip will be displayed at the best position.
 
-<DemoBlock orientation="horizontal" vAlign="space-around" demo={{ react: ReactDemo2, vue: VueDemo2 }} />
+<DemoBlock orientation="horizontal" vAlign="space-around" demo={{ react: ReactDemoPlacement, vue: VueDemoPlacement }} />
 
 ### Accessibility concerns
 

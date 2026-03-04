@@ -1,6 +1,6 @@
 // Generate Storybook story files from site-demo component and utility demos.
 //
-// Globs content/product/*/*/{react,vue}/demo*.{tsx,vue} to find all demos
+// Globs content/product/*/*/{react,vue}/*.{tsx,vue} to find all demos
 // and generates corresponding .stories.tsx files in lumx-react and lumx-vue.
 //
 // Usage: node scripts/generate-demo-stories.js [--react] [--vue]
@@ -30,26 +30,36 @@ const STORY_TITLES = {
 const CATEGORIES_GLOB = `{${Object.keys(STORY_TITLES).join(',')}}`;
 
 /**
+ * Convert a kebab-case demo file name to a PascalCase story name.
+ * E.g. "high-emphasis" -> "HighEmphasis"
+ * @param {string} name
+ * @returns {string}
+ */
+function toPascalCase(name) {
+    return name.replace(/(^|-)([a-z])/g, (_, _sep, char) => char.toUpperCase());
+}
+
+/**
  * Scan for all demo files for a given framework using a single glob,
  * then group them by category + folder.
  *
  * @param {'react' | 'vue'} fw
  * @param {string} ext - file extension including dot (e.g. '.tsx' or '.vue')
- * @returns {Map<string, { folder: string, sourceDir: string, storyTitle: string, demos: { number: number, name: string }[] }>}
+ * @returns {Map<string, { folder: string, sourceDir: string, storyTitle: string, demos: { name: string, storyName: string }[] }>}
  */
 function scanDemos(fw, ext) {
-    const pattern = `${CATEGORIES_GLOB}/*/${fw}/demo*${ext}`;
+    const pattern = `${CATEGORIES_GLOB}/*/${fw}/*${ext}`;
     const files = glob.sync(pattern, { cwd: CONTENT_DIR });
 
     // Group files by category/folder
-    /** @type {Map<string, { folder: string, sourceDir: string, storyTitle: string, demos: { number: number, name: string }[] }>} */
+    /** @type {Map<string, { folder: string, sourceDir: string, storyTitle: string, demos: { name: string, storyName: string }[] }>} */
     const groups = new Map();
 
     for (const file of files) {
-        // file looks like: "components/thumbnail/react/demo1.tsx"
-        const match = file.match(/^([^/]+)\/([^/]+)\/[^/]+\/demo(\d+)\./);
+        // file looks like: "components/thumbnail/react/sizes.tsx"
+        const match = file.match(/^([^/]+)\/([^/]+)\/[^/]+\/([^/]+)\.[^.]+$/);
         if (!match) continue;
-        const [, category, folder, num] = match;
+        const [, category, folder, demoName] = match;
         const key = `${category}/${folder}`;
 
         if (!groups.has(key)) {
@@ -60,12 +70,12 @@ function scanDemos(fw, ext) {
                 demos: [],
             });
         }
-        groups.get(key).demos.push({ number: Number(num), name: `demo${num}` });
+        groups.get(key).demos.push({ name: demoName, storyName: toPascalCase(demoName) });
     }
 
-    // Sort demos by number within each group
+    // Sort demos alphabetically by name within each group
     for (const group of groups.values()) {
-        group.demos.sort((a, b) => a.number - b.number);
+        group.demos.sort((a, b) => a.name.localeCompare(b.name));
     }
 
     return groups;
@@ -76,11 +86,11 @@ function generateStories(folder, demos, { prefix, fw, importExt, storyTitle }) {
     const imports = [
         `import { FlexBox } from '@lumx/${fw}/components/flex-box';`,
         "import { withWrapper } from '../decorators/withWrapper';",
-        ...demos.map((d) => `import Demo${d.number}Component from '${prefix}/${folder}/${fw}/${d.name}${importExt}';`),
+        ...demos.map((d) => `import ${d.storyName}Component from '${prefix}/${folder}/${fw}/${d.name}${importExt}';`),
     ];
 
     const stories = demos
-        .map((d) => `export const Demo${d.number} = { render: () => <Demo${d.number}Component /> };`)
+        .map((d) => `export const ${d.storyName} = { render: () => <${d.storyName}Component /> };`)
         .join('\n');
 
     return [

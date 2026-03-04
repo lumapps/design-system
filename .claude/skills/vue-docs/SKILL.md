@@ -31,7 +31,7 @@ For general documentation site conventions (page structure, frontmatter, DemoBlo
 
 Create Vue demos in `content/product/components/<component>/vue/` matching each React demo.
 
-**File naming:** Match the React demo numbering: `demo1.vue`, `demo2.vue`, etc.
+**File naming:** Match the React demo file names: e.g. `high-emphasis.vue`, `default.vue`, etc. (meaningful kebab-case names matching the MDX heading).
 
 **Template structure:**
 
@@ -68,22 +68,22 @@ defineProps<{ theme?: Theme }>(); // only if withThemeSwitcher
 Update `content/product/components/<component>/index.mdx`:
 
 1. **Frontmatter:** Ensure `frameworks: ['react', 'vue']`
-2. **Rename React demo imports** from `Demo1` to `ReactDemo1` if needed (multi-framework convention)
-3. **Add Vue demo imports** as `VueDemo1`, `VueDemo2`, etc.
-4. **Update DemoBlock** to include both frameworks: `demo={{ react: ReactDemo1, vue: VueDemo1 }}`
+2. **Rename React demo imports** from `DemoName` to `ReactDemoName` if needed (multi-framework convention)
+3. **Add Vue demo imports** as `VueDemoName` (PascalCase of the file name, e.g. `VueDemoHighEmphasis` for `high-emphasis.vue`)
+4. **Update DemoBlock** to include both frameworks: `demo={{ react: ReactDemoHighEmphasis, vue: VueDemoHighEmphasis }}`
 5. **Add Vue PropTable import** using the `lumx-docs:@lumx/vue/...` prefix
 6. **Update PropTable** to include Vue docs: `docs={{ react: ReactButton, vue: VueButton }}`
 
 **Example MDX diff:**
 
 ```mdx
-import * as ReactDemo1 from './react/demo1.tsx';
-+import * as VueDemo1 from './vue/demo1.vue';
+import * as ReactDemoHighEmphasis from './react/high-emphasis.tsx';
++import * as VueDemoHighEmphasis from './vue/high-emphasis.vue';
 import ReactButton from 'lumx-docs:@lumx/react/components/button/Button';
 +import VueButton from 'lumx-docs:@lumx/vue/components/button/Button';
 
--<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemo1 }} />
-+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemo1, vue: VueDemo1 }} />
+-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemoHighEmphasis }} />
++<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemoHighEmphasis, vue: VueDemoHighEmphasis }} />
 
 -<PropTable docs={{ react: ReactButton }} />
 +<PropTable docs={{ react: ReactButton, vue: VueButton }} />
@@ -118,8 +118,8 @@ node packages/site-demo/plugins/lumx-prop-table/vue-docgen.js packages/lumx-vue/
 ```
 content/product/components/<component>/
 ├── react/
-│   ├── demo1.tsx
-│   └── demo2.tsx
+│   ├── default.tsx
+│   └── high-emphasis.tsx
 └── index.mdx
 ```
 
@@ -128,10 +128,10 @@ content/product/components/<component>/
 ```
 content/product/components/<component>/
 ├── react/
-│   ├── demo1.tsx
-│   └── demo2.tsx
+│   ├── default.tsx
+│   └── high-emphasis.tsx
 ├── vue/
-│   ├── demo1.vue
-│   └── demo2.vue
+│   ├── default.vue
+│   └── high-emphasis.vue
 └── index.mdx          # Updated with Vue imports, DemoBlock, and PropTable
 ```

@@ -1,11 +1,11 @@
 ---
 frameworks: ['react']
 ---
-import * as Demo1 from './react/demo1.tsx';
-import * as Demo2 from './react/demo2.tsx';
-import * as Demo3 from './react/demo3.tsx';
-import * as Demo4 from './react/demo4.tsx';
-import * as Demo5 from './react/demo5.tsx';
+import * as DemoDefault from './react/default.tsx';
+import * as DemoWithIcon from './react/with-icon.tsx';
+import * as DemoStates from './react/states.tsx';
+import * as DemoNestedItems from './react/nested-items.tsx';
+import * as DemoEmphasis from './react/emphasis.tsx';
 import ReactSideNavigation from 'lumx-docs:@lumx/react/components/side-navigation/SideNavigation';
 import ReactSideNavigationItem from 'lumx-docs:@lumx/react/components/side-navigation/SideNavigationItem';
 
@@ -13,31 +13,31 @@ import ReactSideNavigationItem from 'lumx-docs:@lumx/react/components/side-navig
 
 **Side navigation regroup navigation items that leads to sections of content for users to navigate.**
 
-<DemoBlock demo={{ react: Demo1 }} />
+<DemoBlock demo={{ react: DemoDefault }} />
 
 ## With icon
 
 Side navigation items can have leading icons.
 
-<DemoBlock demo={{ react: Demo2 }} />
+<DemoBlock demo={{ react: DemoWithIcon }} />
 
 ## States
 
 Side navigation items have two states: _resting_, and _selected_.
 
-<DemoBlock demo={{ react: Demo3 }} />
+<DemoBlock demo={{ react: DemoStates }} />
 
 ## Nested items
 
 Side navigation items can be nested. Parent items have two states: _closed_, and _open_.
 
-<DemoBlock demo={{ react: Demo4 }} />
+<DemoBlock demo={{ react: DemoNestedItems }} />
 
 ## Emphasis
 
 Side navigation items have three emphasises: `low`, `medium`, and `high`. Default is `high`.
 
-<DemoBlock demo={{ react: Demo5 }} />
+<DemoBlock demo={{ react: DemoEmphasis }} />
 
 ### Accessibility concerns
 

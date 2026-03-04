@@ -1,12 +1,12 @@
 ---
 frameworks: ['react']
 ---
-import * as Demo1 from './react/demo1.tsx';
-import * as Demo2 from './react/demo2.tsx';
-import * as Demo3 from './react/demo3.tsx';
-import * as Demo4 from './react/demo4.tsx';
-import * as Demo5 from './react/demo5.tsx';
-import * as Demo6 from './react/demo6.tsx';
+import * as DemoTiny from './react/tiny.tsx';
+import * as DemoRegular from './react/regular.tsx';
+import * as DemoBig from './react/big.tsx';
+import * as DemoHuge from './react/huge.tsx';
+import * as DemoItemPadding from './react/item-padding.tsx';
+import * as DemoClickable from './react/clickable.tsx';
 import ReactList from 'lumx-docs:@lumx/react/components/list/List';
 import ReactListItem from 'lumx-docs:@lumx/react/components/list/ListItem';
 import ReactListSubheader from 'lumx-docs:@lumx/react/components/list/ListSubheader';
@@ -30,35 +30,35 @@ Use this size for any other cases.
 Tiny list items have a minimum height of `36px`.
 Use this size for dense lists with single line items like menus made of [dropdown](../dropdown).
 
-<DemoBlock demo={{ react: Demo1 }} />
+<DemoBlock demo={{ react: DemoTiny }} />
 
 ### Regular
 
 Regular list items have a minimum height of `52px`.
 Use this size for single line list items.
 
-<DemoBlock demo={{ react: Demo2 }} />
+<DemoBlock demo={{ react: DemoRegular }} />
 
 ### Big
 
 Big list items have a minimum height of `72px`.
 Use this size for two lines list items.
 
-<DemoBlock demo={{ react: Demo3 }} />
+<DemoBlock demo={{ react: DemoBig }} />
 
 ### Huge
 
 Huge list items have a vertical padding of `16px`.
 Use this size for list items that have more than two lines of content.
 
-<DemoBlock demo={{ react: Demo4 }} />
+<DemoBlock demo={{ react: DemoHuge }} />
 
 ## Item padding
 
 The horizontal padding has 2 sizes: `big` and `huge`.
 By default, there is no horizontal padding.
 
-<DemoBlock demo={{ react: Demo5 }} />
+<DemoBlock demo={{ react: DemoItemPadding }} />
 
 ## Clickable
 
@@ -66,7 +66,7 @@ List items can be clickable.
 Clickable list items can then be disabled, highlighted or selected.
 Use clickable list items when users need to select one or more options in a list.
 
-<DemoBlock demo={{ react: Demo6 }} />
+<DemoBlock demo={{ react: DemoClickable }} />
 
 ### List properties
 

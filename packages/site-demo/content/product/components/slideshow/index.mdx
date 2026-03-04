@@ -1,28 +1,28 @@
 ---
 frameworks: ['react']
 ---
-import * as Demo1 from './react/demo1.tsx';
-import * as Demo2 from './react/demo2.tsx';
-import * as Demo3 from './react/demo3.tsx';
+import * as DemoDefault from './react/default.tsx';
+import * as DemoGroupBy from './react/group-by.tsx';
+import * as DemoAutoplay from './react/autoplay.tsx';
 import ReactSlideshow from 'lumx-docs:@lumx/react/components/slideshow/Slideshow';
 
 # Slideshow
 
 **Slideshows display multiple pieces of featured content in a limited allocated amount of space.**
 
-<DemoBlock orientation="horizontal" withThemeSwitcher vAlign="center" demo={{ react: Demo1 }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher vAlign="center" demo={{ react: DemoDefault }} />
 
 ## Group by
 
 Slideshows can display groups of pieces of content.
 
-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: Demo2 }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: DemoGroupBy }} />
 
 ## Autoplay
 
 Slideshows can play automatically.
 
-<DemoBlock orientation="horizontal" withThemeSwitcher vAlign="center" demo={{ react: Demo3 }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher vAlign="center" demo={{ react: DemoAutoplay }} />
 
 ### Properties
 

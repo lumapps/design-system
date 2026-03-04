@@ -1,15 +1,15 @@
 ---
 frameworks: ['react']
 ---
-import * as Demo1 from './react/demo1.tsx';
-import * as Demo2 from './react/demo2.tsx';
-import * as Demo3 from './react/demo3.tsx';
-import * as Demo4 from './react/demo4.tsx';
-import * as Demo5 from './react/demo5.tsx';
-import * as Demo6 from './react/demo6.tsx';
-import * as Demo7 from './react/demo7.tsx';
-import * as Demo8 from './react/demo8.tsx';
-import * as Demo9 from './react/demo9.tsx';
+import * as DemoAnatomy from './react/anatomy.tsx';
+import * as DemoFigureSection from './react/figure-section.tsx';
+import * as DemoContentSectionVertical from './react/content-section-vertical.tsx';
+import * as DemoContentSectionHorizontal from './react/content-section-horizontal.tsx';
+import * as DemoActionSectionHorizontal from './react/action-section-horizontal.tsx';
+import * as DemoActionSectionVertical from './react/action-section-vertical.tsx';
+import * as DemoGapSizes from './react/gap-sizes.tsx';
+import * as DemoAlignmentsHorizontal from './react/alignments-horizontal.tsx';
+import * as DemoAlignmentsVertical from './react/alignments-vertical.tsx';
 import ReactGenericBlock from 'lumx-docs:@lumx/react/components/generic-block/GenericBlock';
 
 # Generic block
@@ -22,13 +22,13 @@ Generic blocks have 3 sections : 1) **Figure**, 2) **Content** and 3) **Actions*
 
 Here presented in two **orientation**: **Vertical** and **Horizontal**.
 
-<DemoBlock orientation="horizontal" vAlign="space-evenly" demo={{ react: Demo1 }} />
+<DemoBlock orientation="horizontal" vAlign="space-evenly" demo={{ react: DemoAnatomy }} />
 
 ### Figure section
 
 Optional, containing a figure-like element (like [Avatar](/product/components/avatar/), [Thumbnail](/product/components/thumbnail/), [Icon](/product/components/icon/), etc.).
 
-<DemoBlock orientation="horizontal" hAlign="bottom" vAlign="space-evenly" demo={{ react: Demo2 }} />
+<DemoBlock orientation="horizontal" hAlign="bottom" vAlign="space-evenly" demo={{ react: DemoFigureSection }} />
 
 ### Content section
 
@@ -39,23 +39,23 @@ Containing one or more content elements ([Heading](/product/components/heading/)
     components mays have a fixed height and truncated text.
 </Message>
 
-<DemoBlock orientation="vertical" gap="huge" vAlign="center" hAlign="bottom" demo={{ react: Demo3 }} />
+<DemoBlock orientation="vertical" gap="huge" vAlign="center" hAlign="bottom" demo={{ react: DemoContentSectionVertical }} />
 
-<DemoBlock orientation="horizontal" vAlign="space-evenly" demo={{ react: Demo4 }} />
+<DemoBlock orientation="horizontal" vAlign="space-evenly" demo={{ react: DemoContentSectionHorizontal }} />
 
 ### Action section
 
 Optional, containing one or more action elements ([Button](/product/components/button), [CheckBox](/product/components/check-box), [Select](/product/components/select), etc.).
 
-<DemoBlock orientation="horizontal" vAlign="space-evenly" demo={{ react: Demo5 }} />
+<DemoBlock orientation="horizontal" vAlign="space-evenly" demo={{ react: DemoActionSectionHorizontal }} />
 
-<DemoBlock orientation="vertical" gap="huge" vAlign="center" hAlign="bottom" demo={{ react: Demo6 }} />
+<DemoBlock orientation="vertical" gap="huge" vAlign="center" hAlign="bottom" demo={{ react: DemoActionSectionVertical }} />
 
 ## Gap sizes
 
 Generic blocks can have various gap sizes between sections.
 
-<DemoBlock orientation="horizontal" vAlign="space-evenly" demo={{ react: Demo7 }} />
+<DemoBlock orientation="horizontal" vAlign="space-evenly" demo={{ react: DemoGapSizes }} />
 
 ## Alignment
 
@@ -63,13 +63,13 @@ Generic blocks can have various gap sizes between sections.
 
 On **Horizontal** orientation, generic blocks can be aligned: `top`, `center` or `bottom`.
 
-<DemoBlock orientation="horizontal" vAlign="space-evenly" demo={{ react: Demo8 }} />
+<DemoBlock orientation="horizontal" vAlign="space-evenly" demo={{ react: DemoAlignmentsHorizontal }} />
 
 ### Alignments in vertical orientation
 
 On **Vertical** orientation, generic blocks can be aligned: `right`, `center` or `left`.
 
-<DemoBlock orientation="horizontal" vAlign="space-evenly" demo={{ react: Demo9 }} />
+<DemoBlock orientation="horizontal" vAlign="space-evenly" demo={{ react: DemoAlignmentsVertical }} />
 
 ### Accessibility concerns
 

@@ -1,33 +1,33 @@
 ---
 frameworks: ['react']
 ---
-import * as Demo1 from './react/demo1.tsx';
-import * as Demo2 from './react/demo2.tsx';
-import * as Demo3 from './react/demo3.tsx';
-import * as Demo4 from './react/demo4.tsx';
+import * as DemoDefault from './react/default.tsx';
+import * as DemoDragHandle from './react/drag-handle.tsx';
+import * as DemoTrimmed from './react/trimmed.tsx';
+import * as DemoExamples from './react/examples.tsx';
 import ReactExpansionPanel from 'lumx-docs:@lumx/react/components/expansion-panel/ExpansionPanel';
 
 # Expansion panel
 
 **Expansion panels implement large amounts of content in a small space through <a href="https://en.wikipedia.org/wiki/Progressive_disclosure" target="_blank" rel="noreferrer">progressive disclosure</a>.**
 
-<DemoBlock withThemeSwitcher demo={{ react: Demo1 }} />
+<DemoBlock withThemeSwitcher demo={{ react: DemoDefault }} />
 
 ## Drag handle
 
 A drag handle can be added.
 
-<DemoBlock withThemeSwitcher demo={{ react: Demo2 }} />
+<DemoBlock withThemeSwitcher demo={{ react: DemoDragHandle }} />
 
 ## Trimmed
 
 Use trimmed when you don't need the left and right spacing.
 
-<DemoBlock withThemeSwitcher demo={{ react: Demo3 }} />
+<DemoBlock withThemeSwitcher demo={{ react: DemoTrimmed }} />
 
 ## Examples
 
-<DemoBlock demo={{ react: Demo4 }} />
+<DemoBlock demo={{ react: DemoExamples }} />
 
 ### Accessibility concerns
 

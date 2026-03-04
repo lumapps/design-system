@@ -54,16 +54,16 @@ Demo files live in `react/` and/or `vue/` subdirectories:
 ```
 content/product/components/button/
 ├── react/
-│   ├── demo1.tsx
-│   └── demo2.tsx
+│   ├── high-emphasis.tsx
+│   └── medium-emphasis.tsx
 ├── vue/
-│   └── demo1.vue
+│   └── high-emphasis.vue
 └── index.mdx
 ```
 
 **Demo conventions:**
 
--   Name demos sequentially: `demo1.tsx`, `demo2.tsx`, etc.
+-   Name demos with meaningful kebab-case names matching the MDX heading they illustrate (e.g. `high-emphasis.tsx`, `default.tsx`)
 -   Export a default component that accepts an optional `theme` prop when using `withThemeSwitcher`
 
 **Example demo file:**
@@ -132,9 +132,9 @@ This is useful for testing demos against different versions or pre-release build
 Displays code examples with optional theme switching:
 
 ```mdx
-import * as Demo1 from './react/demo1.tsx';
-import * as Demo2 from './react/demo2.tsx';
-import * as VueDemo1 from './vue/demo1.vue';
+import * as ReactDemoHighEmphasis from './react/high-emphasis.tsx';
+import * as ReactDemoMediumEmphasis from './react/medium-emphasis.tsx';
+import * as VueDemoHighEmphasis from './vue/high-emphasis.vue';
 
 <DemoBlock
   orientation="horizontal"      # Layout: horizontal or vertical (default)
@@ -143,10 +143,10 @@ import * as VueDemo1 from './vue/demo1.vue';
   theme="dark"                  # Default theme
   alwaysShowCode               # Show code by default
   demo={{
-    react: Demo1,               # Single framework demo
+    react: ReactDemoHighEmphasis,          # Single framework demo
     # OR
-    react: Demo1,               # Multi-framework demos
-    vue: VueDemo1
+    react: ReactDemoHighEmphasis,          # Multi-framework demos
+    vue: VueDemoHighEmphasis
   }}
 />
 ```
@@ -155,7 +155,7 @@ import * as VueDemo1 from './vue/demo1.vue';
 When `withThemeSwitcher` is enabled, demos receive a `theme` prop that can be used to adapt the component styling.
 
 **Naming imports:**
-Import demos as `Demo1`, `Demo2`, etc., and use `VueDemo1`, `VueDemo2` when both frameworks are present.
+Import demos as `DemoName` (PascalCase of file name), and use `ReactDemoName`, `VueDemoName` when both frameworks are present (e.g. `ReactDemoHighEmphasis`, `VueDemoHighEmphasis`).
 
 ### FrameworkOnly
 
@@ -213,11 +213,11 @@ content/
     │       ├── assets/         # Images and static assets
     │       │   └── anatomy.png
     │       ├── react/          # React demo files
-    │       │   ├── demo1.tsx
-    │       │   └── demo2.tsx
+    │       │   ├── simple.tsx
+    │       │   └── shape.tsx
     │       ├── vue/            # Vue demo files (optional)
-    │       │   ├── demo1.vue
-    │       │   └── demo2.vue
+    │       │   ├── simple.vue
+    │       │   └── shape.vue
     │       └── index.mdx       # Documentation page
     ├── foundations/
     ├── patterns/

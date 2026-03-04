@@ -1,12 +1,12 @@
 ---
 frameworks: ['react']
 ---
-import * as Demo1 from './react/demo1.tsx';
-import * as Demo2 from './react/demo2.tsx';
-import * as Demo3 from './react/demo3.tsx';
-import * as Demo4 from './react/demo4.tsx';
-import * as Demo5 from './react/demo5.tsx';
-import * as Demo6 from './react/demo6.tsx';
+import * as DemoExtraSmall from './react/extra-small.tsx';
+import * as DemoSmall from './react/small.tsx';
+import * as DemoMedium from './react/medium.tsx';
+import * as DemoLarge from './react/large.tsx';
+import * as DemoVertical from './react/vertical.tsx';
+import * as DemoExtended from './react/extended.tsx';
 import ReactUserBlock from 'lumx-docs:@lumx/react/components/user-block/UserBlock';
 
 # User block
@@ -20,19 +20,19 @@ Check [size foundations](/product/foundations/size) for more details.
 
 ### Extra Small
 
-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: Demo1 }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: DemoExtraSmall }} />
 
 ### Small
 
-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: Demo2 }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: DemoSmall }} />
 
 ### Medium
 
-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: Demo3 }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: DemoMedium }} />
 
 ### Large
 
-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: Demo4 }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: DemoLarge }} />
 
 ## Layouts
 
@@ -42,14 +42,14 @@ There are two orientation: `horizontal` and `vertical`.
 
 A `l` size user block is needed for `vertical` orientation.
 
-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: Demo5 }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: DemoVertical }} />
 
 ### Extended
 
 The `vertical` orientation displays additional contact actions and a follow button.
 When there are more than five contact actions, the fifth is replaced with an overflow menu presenting remaining actions.
 
-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: Demo6 }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: DemoExtended }} />
 
 ### Accessibility concerns
 

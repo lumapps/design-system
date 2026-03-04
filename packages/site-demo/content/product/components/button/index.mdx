@@ -2,18 +2,18 @@
 frameworks: ['react', 'vue']
 ---
 
-import * as ReactDemo1 from './react/demo1.tsx';
-import * as ReactDemo2 from './react/demo2.tsx';
-import * as ReactDemo3 from './react/demo3.tsx';
-import * as ReactDemo4 from './react/demo4.tsx';
-import * as ReactDemo5 from './react/demo5.tsx';
-import * as ReactDemo6 from './react/demo6.tsx';
-import * as VueDemo1 from './vue/demo1.vue';
-import * as VueDemo2 from './vue/demo2.vue';
-import * as VueDemo3 from './vue/demo3.vue';
-import * as VueDemo4 from './vue/demo4.vue';
-import * as VueDemo5 from './vue/demo5.vue';
-import * as VueDemo6 from './vue/demo6.vue';
+import * as ReactDemoHighEmphasis from './react/high-emphasis.tsx';
+import * as ReactDemoMediumEmphasis from './react/medium-emphasis.tsx';
+import * as ReactDemoToggledButton from './react/toggled-button.tsx';
+import * as ReactDemoLowEmphasis from './react/low-emphasis.tsx';
+import * as ReactDemoSmallSize from './react/small-size.tsx';
+import * as ReactDemoFullWidth from './react/full-width.tsx';
+import * as VueDemoHighEmphasis from './vue/high-emphasis.vue';
+import * as VueDemoMediumEmphasis from './vue/medium-emphasis.vue';
+import * as VueDemoToggledButton from './vue/toggled-button.vue';
+import * as VueDemoLowEmphasis from './vue/low-emphasis.vue';
+import * as VueDemoSmallSize from './vue/small-size.vue';
+import * as VueDemoFullWidth from './vue/full-width.vue';
 import ReactButton from 'lumx-docs:@lumx/react/components/button/Button';
 import ReactIconButton from 'lumx-docs:@lumx/react/components/button/IconButton';
 import VueButton from 'lumx-docs:@lumx/vue/components/button/Button';
@@ -28,38 +28,38 @@ import VueIconButton from 'lumx-docs:@lumx/vue/components/button/IconButton';
 Use high emphasis to help users to identify the main action.
 There should not be more than one high emphasis button in a view.
 
-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemo1, vue: VueDemo1 }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemoHighEmphasis, vue: VueDemoHighEmphasis }} />
 
 ## Medium emphasis
 
 Use medium emphasis for secondary actions.
 
-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemo2, vue: VueDemo2 }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemoMediumEmphasis, vue: VueDemoMediumEmphasis }} />
 
 ### Toggled button
 
 Medium button have an extra option: `isSelected`. Use `isSelected` for toggleable actions like notification activation, or feed subscription. Make sure to describe as much as possible actions with the buttons labels.
 
-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemo3, vue: VueDemo3 }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemoToggledButton, vue: VueDemoToggledButton }} />
 
 ## Low emphasis
 
 When the view contains a primary and a medium button, use low emphasis for lower priority actions.
 Alternatively, use low emphasis when there is only one level of priority.
 
-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemo4, vue: VueDemo4 }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemoLowEmphasis, vue: VueDemoLowEmphasis }} />
 
 ## Small size
 
 Use small size when space is a constraint.
 
-<DemoBlock vAlign="center" withThemeSwitcher demo={{ react: ReactDemo5, vue: VueDemo5 }} />
+<DemoBlock vAlign="center" withThemeSwitcher demo={{ react: ReactDemoSmallSize, vue: VueDemoSmallSize }} />
 
 ## Full width
 
 Use full width when you need to get the button full width.
 
-<DemoBlock withThemeSwitcher demo={{ react: ReactDemo6, vue: VueDemo6 }} />
+<DemoBlock withThemeSwitcher demo={{ react: ReactDemoFullWidth, vue: VueDemoFullWidth }} />
 
 ### Accessibility concerns
 

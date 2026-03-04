@@ -2,14 +2,14 @@
 frameworks: ['react', 'vue']
 ---
 
-import * as ReactDemo1 from './react/demo1.tsx';
-import * as ReactDemo2 from './react/demo2.tsx';
-import * as ReactDemo3 from './react/demo3.tsx';
-import * as ReactDemo4 from './react/demo4.tsx';
-import * as VueDemo1 from './vue/demo1.vue';
-import * as VueDemo2 from './vue/demo2.vue';
-import * as VueDemo3 from './vue/demo3.vue';
-import * as VueDemo4 from './vue/demo4.vue';
+import * as ReactDemoCircle from './react/circle.tsx';
+import * as ReactDemoRectangle from './react/rectangle.tsx';
+import * as ReactDemoTypography from './react/typography.tsx';
+import * as ReactDemoAnimationAndStyle from './react/animation-and-style.tsx';
+import * as VueDemoCircle from './vue/circle.vue';
+import * as VueDemoRectangle from './vue/rectangle.vue';
+import * as VueDemoTypography from './vue/typography.vue';
+import * as VueDemoAnimationAndStyle from './vue/animation-and-style.vue';
 import ReactSkeletonCircle from 'lumx-docs:@lumx/react/components/skeleton/SkeletonCircle';
 import ReactSkeletonRectangle from 'lumx-docs:@lumx/react/components/skeleton/SkeletonRectangle';
 import ReactSkeletonTypography from 'lumx-docs:@lumx/react/components/skeleton/SkeletonTypography';
@@ -27,25 +27,25 @@ There are three variants: `circle`, `rectangular`, `typography`. When designing 
 
 Use circle skeletons to mimic components like [avatar](/product/components/avatar/), [icon](/product/components/icon). Respect at best the size of replaced element using the T-shirt [sizes](/product/foundations/size).
 
-<DemoBlock orientation="horizontal" withThemeSwitcher gap="huge" demo={{ react: ReactDemo1, vue: VueDemo1 }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher gap="huge" demo={{ react: ReactDemoCircle, vue: VueDemoCircle }} />
 
 ## Rectangle
 
 Use rectangular skeletons to mimic [thumbnail](/product/components/thumbnail), [button](/product/components/button), [chip](/product/components/chip), [text field](/product/components/text-field) and so on. `width`, `height` and `border-radius` are adjustable.
 
-<DemoBlock orientation="horizontal" withThemeSwitcher gap="huge" demo={{ react: ReactDemo2, vue: VueDemo2 }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher gap="huge" demo={{ react: ReactDemoRectangle, vue: VueDemoRectangle }} />
 
 ## Typography
 
 Use typography skeletons to mimic text. Use [text style](/product/foundations/typography) as parameter to easily set a replacement for texts. `width`, is adjustable.
 
-<DemoBlock withThemeSwitcher demo={{ react: ReactDemo3, vue: VueDemo3 }} />
+<DemoBlock withThemeSwitcher demo={{ react: ReactDemoTypography, vue: VueDemoTypography }} />
 
 ## Animation and style
 
 Skeletons have a unique animation and style: pulsating grey or white depending on the theme.
 
-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemo4, vue: VueDemo4 }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemoAnimationAndStyle, vue: VueDemoAnimationAndStyle }} />
 
 ### Accessibility concerns
 

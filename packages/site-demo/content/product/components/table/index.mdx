@@ -1,10 +1,10 @@
 ---
 frameworks: ['react', 'vue']
 ---
-import * as ReactDemo1 from './react/demo1.tsx';
-import * as ReactDemo2 from './react/demo2.tsx';
-import * as VueDemo1 from './vue/demo1.vue';
-import * as VueDemo2 from './vue/demo2.vue';
+import * as ReactDemoDefault from './react/default.tsx';
+import * as ReactDemoClickable from './react/clickable.tsx';
+import * as VueDemoDefault from './vue/default.vue';
+import * as VueDemoClickable from './vue/clickable.vue';
 import ReactTable from 'lumx-docs:@lumx/react/components/table/Table';
 import ReactTableRow from 'lumx-docs:@lumx/react/components/table/TableRow';
 import ReactTableCell from 'lumx-docs:@lumx/react/components/table/TableCell';
@@ -16,14 +16,14 @@ import VueTableCell from 'lumx-docs:@lumx/vue/components/table/TableCell';
 
 **Tables display tabular information to make it easier to scan and to compare.**
 
-<DemoBlock withThemeSwitcher demo={{ react: ReactDemo1, vue: VueDemo1 }} />
+<DemoBlock withThemeSwitcher demo={{ react: ReactDemoDefault, vue: VueDemoDefault }} />
 
 ## Clickable
 
 Use clickable table rows when users need to select one or more options in a table.
 Clickable table rows can be disabled or selected.
 
-<DemoBlock withThemeSwitcher demo={{ react: ReactDemo2, vue: VueDemo2 }} />
+<DemoBlock withThemeSwitcher demo={{ react: ReactDemoClickable, vue: VueDemoClickable }} />
 
 ### Accessibility concerns
 

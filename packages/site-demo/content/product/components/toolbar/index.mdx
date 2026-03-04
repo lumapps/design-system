@@ -1,16 +1,16 @@
 ---
 frameworks: ['react', 'vue']
 ---
-import * as ReactDemo1 from './react/demo1.tsx';
-import * as ReactDemo2 from './react/demo2.tsx';
-import * as ReactDemo3 from './react/demo3.tsx';
-import * as ReactDemo4 from './react/demo4.tsx';
-import * as ReactDemo5 from './react/demo5.tsx';
-import * as VueDemo1 from './vue/demo1.vue';
-import * as VueDemo2 from './vue/demo2.vue';
-import * as VueDemo3 from './vue/demo3.vue';
-import * as VueDemo4 from './vue/demo4.vue';
-import * as VueDemo5 from './vue/demo5.vue';
+import * as ReactDemoDefault from './react/default.tsx';
+import * as ReactDemoDialogToolbar from './react/dialog-toolbar.tsx';
+import * as ReactDemoMediaPickerToolbar from './react/media-picker-toolbar.tsx';
+import * as ReactDemoContextualIconButton from './react/contextual-icon-button.tsx';
+import * as ReactDemoFileListWidget from './react/file-list-widget.tsx';
+import * as VueDemoDefault from './vue/default.vue';
+import * as VueDemoDialogToolbar from './vue/dialog-toolbar.vue';
+import * as VueDemoMediaPickerToolbar from './vue/media-picker-toolbar.vue';
+import * as VueDemoContextualIconButton from './vue/contextual-icon-button.vue';
+import * as VueDemoFileListWidget from './vue/file-list-widget.vue';
 import ReactToolbar from 'lumx-docs:@lumx/react/components/toolbar/Toolbar';
 import VueToolbar from 'lumx-docs:@lumx/vue/components/toolbar/Toolbar';
 
@@ -18,7 +18,7 @@ import VueToolbar from 'lumx-docs:@lumx/vue/components/toolbar/Toolbar';
 
 **Toolbars display information and actions related to the context.**
 
-<DemoBlock demo={{ react: ReactDemo1, vue: VueDemo1 }} />
+<DemoBlock demo={{ react: ReactDemoDefault, vue: VueDemoDefault }} />
 
 ## Anatomy
 
@@ -30,19 +30,19 @@ A toolbar has three sections. An optional contextual icon button and a title on 
 
 ### Dialog toolbar
 
-<DemoBlock demo={{ react: ReactDemo2, vue: VueDemo2 }} />
+<DemoBlock demo={{ react: ReactDemoDialogToolbar, vue: VueDemoDialogToolbar }} />
 
 ### Media picker toolbar
 
-<DemoBlock demo={{ react: ReactDemo3, vue: VueDemo3 }} />
+<DemoBlock demo={{ react: ReactDemoMediaPickerToolbar, vue: VueDemoMediaPickerToolbar }} />
 
 ### Contextual icon button
 
-<DemoBlock demo={{ react: ReactDemo4, vue: VueDemo4 }} />
+<DemoBlock demo={{ react: ReactDemoContextualIconButton, vue: VueDemoContextualIconButton }} />
 
 ### File list widget
 
-<DemoBlock demo={{ react: ReactDemo5, vue: VueDemo5 }} />
+<DemoBlock demo={{ react: ReactDemoFileListWidget, vue: VueDemoFileListWidget }} />
 
 ### Accessibility concerns
 

@@ -1,12 +1,12 @@
 ---
 frameworks: ['react', 'vue']
 ---
-import * as ReactDemo1 from './react/demo1.tsx';
-import * as ReactDemo2 from './react/demo2.tsx';
-import * as ReactDemo3 from './react/demo3.tsx';
-import * as VueDemo1 from './vue/demo1.vue';
-import * as VueDemo2 from './vue/demo2.vue';
-import * as VueDemo3 from './vue/demo3.vue';
+import * as ReactDemoDefault from './react/default.tsx';
+import * as ReactDemoTypography from './react/typography.tsx';
+import * as ReactDemoColor from './react/color.tsx';
+import * as VueDemoDefault from './vue/default.vue';
+import * as VueDemoTypography from './vue/typography.vue';
+import * as VueDemoColor from './vue/color.vue';
 import ReactLink from 'lumx-docs:@lumx/react/components/link/Link';
 import VueLink from 'lumx-docs:@lumx/vue/components/link/Link';
 
@@ -15,19 +15,19 @@ import VueLink from 'lumx-docs:@lumx/vue/components/link/Link';
 **Display simple hyperlinks**.
 By default, links use the primary color. They can contain text and icons.
 
-<DemoBlock orientation="horizontal" vAlign="space-evenly" wrap demo={{ react: ReactDemo1, vue: VueDemo1 }} />
+<DemoBlock orientation="horizontal" vAlign="space-evenly" wrap demo={{ react: ReactDemoDefault, vue: VueDemoDefault }} />
 
 ## Typography
 
 Link typography can be applied with the `typography` prop or **inherited** from the wrapping parent (like [Text](/product/components/text/) or [Heading](/product/components/heading/)).
 
-<DemoBlock orientation="horizontal" vAlign="space-evenly" wrap demo={{ react: ReactDemo2, vue: VueDemo2 }} />
+<DemoBlock orientation="horizontal" vAlign="space-evenly" wrap demo={{ react: ReactDemoTypography, vue: VueDemoTypography }} />
 
 ## Color
 
 Use the `color` prop to change the color of the link. Link color **is not inherited** from the wrapping parent.
 
-<DemoBlock orientation="horizontal" vAlign="space-evenly" wrap demo={{ react: ReactDemo3, vue: VueDemo3 }} />
+<DemoBlock orientation="horizontal" vAlign="space-evenly" wrap demo={{ react: ReactDemoColor, vue: VueDemoColor }} />
 
 ### Accessibility concerns
 

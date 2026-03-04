@@ -1,10 +1,10 @@
 ---
 frameworks: ['react', 'vue']
 ---
-import * as ReactDemo1 from './react/demo1.tsx';
-import * as ReactDemo2 from './react/demo2.tsx';
-import * as VueDemo1 from './vue/demo1.vue';
-import * as VueDemo2 from './vue/demo2.vue';
+import * as ReactDemoCircular from './react/circular.tsx';
+import * as ReactDemoLinear from './react/linear.tsx';
+import * as VueDemoCircular from './vue/circular.vue';
+import * as VueDemoLinear from './vue/linear.vue';
 import ReactProgressCircular from 'lumx-docs:@lumx/react/components/progress/ProgressCircular';
 import ReactProgressLinear from 'lumx-docs:@lumx/react/components/progress/ProgressLinear';
 import VueProgressCircular from 'lumx-docs:@lumx/vue/components/progress/ProgressCircular';
@@ -17,11 +17,11 @@ Progress come in two styles: `circular` and `linear`.
 
 ## Circular
 
-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemo1, vue: VueDemo1 }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemoCircular, vue: VueDemoCircular }} />
 
 ## Linear
 
-<DemoBlock withThemeSwitcher demo={{ react: ReactDemo2, vue: VueDemo2 }} />
+<DemoBlock withThemeSwitcher demo={{ react: ReactDemoLinear, vue: VueDemoLinear }} />
 
 ### Accessibility concerns
 

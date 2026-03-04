@@ -1,28 +1,28 @@
 ---
 frameworks: ['react']
 ---
-import * as Demo1 from './react/demo1.tsx';
-import * as Demo2 from './react/demo2.tsx';
-import * as Demo3 from './react/demo3.tsx';
-import * as Demo4 from './react/demo4.tsx';
-import * as Demo5 from './react/demo5.tsx';
-import * as Demo6 from './react/demo6.tsx';
-import * as Demo7 from './react/demo7.tsx';
-import * as Demo8 from './react/demo8.tsx';
-import * as Demo9 from './react/demo9.tsx';
-import * as Demo10 from './react/demo10.tsx';
-import * as Demo11 from './react/demo11.tsx';
-import * as Demo12 from './react/demo12.tsx';
-import * as Demo13 from './react/demo13.tsx';
-import * as Demo14 from './react/demo14.tsx';
-import * as Demo15 from './react/demo15.tsx';
+import * as DemoDefault from './react/default.tsx';
+import * as DemoIsDisabled from './react/is-disabled.tsx';
+import * as DemoIsValid from './react/is-valid.tsx';
+import * as DemoHasError from './react/has-error.tsx';
+import * as DemoIsRequired from './react/is-required.tsx';
+import * as DemoHelper from './react/helper.tsx';
+import * as DemoPlaceholder from './react/placeholder.tsx';
+import * as DemoIcon from './react/icon.tsx';
+import * as DemoIsClearable from './react/is-clearable.tsx';
+import * as DemoMaxLength from './react/max-length.tsx';
+import * as DemoChips from './react/chips.tsx';
+import * as DemoTextarea from './react/textarea.tsx';
+import * as DemoTextareaValid from './react/textarea-valid.tsx';
+import * as DemoTextareaInvalid from './react/textarea-invalid.tsx';
+import * as DemoNumber from './react/number.tsx';
 import ReactTextField from 'lumx-docs:@lumx/react/components/text-field/TextField';
 
 # Text field
 
 **Text fields are simple text inputs.**
 
-<DemoBlock withThemeSwitcher demo={{ react: Demo1 }} />
+<DemoBlock withThemeSwitcher demo={{ react: DemoDefault }} />
 
 ## Special states
 
@@ -32,19 +32,19 @@ There are three special states: `isDisabled`, `isValid`, and `hasError`.
 
 Use `isDisabled` when values can't be edited.
 
-<DemoBlock withThemeSwitcher demo={{ react: Demo2 }} />
+<DemoBlock withThemeSwitcher demo={{ react: DemoIsDisabled }} />
 
 ### Is valid
 
 Use `isValid` to tell that entered values are considered correct.
 
-<DemoBlock withThemeSwitcher demo={{ react: Demo3 }} />
+<DemoBlock withThemeSwitcher demo={{ react: DemoIsValid }} />
 
 ### Has error
 
 Use `hasError` to tell that entered values are considered incorrect.
 
-<DemoBlock withThemeSwitcher demo={{ react: Demo4 }} />
+<DemoBlock withThemeSwitcher demo={{ react: DemoHasError }} />
 
 ## Options
 
@@ -54,63 +54,63 @@ There are seven options: `isRequired`, `helper`, `placeholder`, `icon`, `clearBu
 
 Use `isRequired` to tell that the text field must be filled to submit the form.
 
-<DemoBlock withThemeSwitcher demo={{ react: Demo5 }} />
+<DemoBlock withThemeSwitcher demo={{ react: DemoIsRequired }} />
 
 ### Helper
 
 Use `helper` to provide guidance.
 
-<DemoBlock withThemeSwitcher demo={{ react: Demo6 }} />
+<DemoBlock withThemeSwitcher demo={{ react: DemoHelper }} />
 
 ### Placeholder
 
 Use `placeholder` to give an example of expected values or invite filling text fields.
 
-<DemoBlock withThemeSwitcher demo={{ react: Demo7 }} />
+<DemoBlock withThemeSwitcher demo={{ react: DemoPlaceholder }} />
 
 ### Icon
 
 Use `icon` to illustrate text fields `label`, `icon` complements `label` but can't replace it.
 
-<DemoBlock withThemeSwitcher demo={{ react: Demo8 }} />
+<DemoBlock withThemeSwitcher demo={{ react: DemoIcon }} />
 
 ### Is clearable
 
 To allow the user to clear the text field, you would have to pass a `label` prop through `clearButtonProps` prop. This corresponds to the label which will be used inside the tooltip of the clear icon button. Setting the label is enough to determine the visibility of the clear button. Use `onClear` to pass the function triggered by a click on the clear icon button.
 
-<DemoBlock withThemeSwitcher demo={{ react: Demo9 }} />
+<DemoBlock withThemeSwitcher demo={{ react: DemoIsClearable }} />
 
 ### Max length
 
 Use `maxLength` when users inputs length are limited.
 
-<DemoBlock withThemeSwitcher demo={{ react: Demo10 }} />
+<DemoBlock withThemeSwitcher demo={{ react: DemoMaxLength }} />
 
 ### Chips
 
 Use `chips` when users inputs need to be split in distinct parts such as tag entry.
 
-<DemoBlock withThemeSwitcher demo={{ react: Demo11 }} />
+<DemoBlock withThemeSwitcher demo={{ react: DemoChips }} />
 
 ## Textarea
 
 Use Text areas when users are expected to enter more than one line of text.
 
-<DemoBlock withThemeSwitcher demo={{ react: Demo12 }} />
+<DemoBlock withThemeSwitcher demo={{ react: DemoTextarea }} />
 
 ### Valid
 
-<DemoBlock withThemeSwitcher demo={{ react: Demo13 }} />
+<DemoBlock withThemeSwitcher demo={{ react: DemoTextareaValid }} />
 
 ### Invalid
 
-<DemoBlock withThemeSwitcher demo={{ react: Demo14 }} />
+<DemoBlock withThemeSwitcher demo={{ react: DemoTextareaInvalid }} />
 
 ## Number
 
 Use number input when users are expected to enter numeric values.
 
-<DemoBlock withThemeSwitcher demo={{ react: Demo15 }} />
+<DemoBlock withThemeSwitcher demo={{ react: DemoNumber }} />
 
 ### Accessibility concerns
 
