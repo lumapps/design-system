@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+-   `@lumx/core`:
+    -   Moved `RawInputText` from `@lumx/react`
 -   Monorepo: introduce Nx for task caching and dependency graph orchestration
     -   Add `nx.json` with task pipeline (`build`, `test`, `type-check`, `lint`, `build:storybook`, `test:storybook`) and named inputs for cache invalidation
     -   Root scripts for `build:libs`, `build:site`, `build:react`, `build:core`, `build:icons`, `build:vue`, `build:storybook:react`, `build:storybook:vue`, `test`, `test:react`, `test:vue`, `test:core`, `type-check`, `lint`, `lint:code`, and `postinstall` now run through Nx

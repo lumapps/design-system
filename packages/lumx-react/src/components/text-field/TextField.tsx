@@ -21,7 +21,8 @@ import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableStateProps';
 
-import { CLASSNAME, COMPONENT_NAME } from './constants';
+import { CLASSNAME, COMPONENT_NAME } from '@lumx/core/js/components/TextField/constants';
+
 import { RawInputText } from './RawInputText';
 import { RawInputTextarea } from './RawInputTextarea';
 
