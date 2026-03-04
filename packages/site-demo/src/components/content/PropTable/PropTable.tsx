@@ -4,16 +4,19 @@ import castArray from 'lodash/castArray';
 import orderBy from 'lodash/orderBy';
 import upperFirst from 'lodash/upperFirst';
 
-import { Alignment, Divider, ExpansionPanel, Grid, GridItem, Heading, Message, Text } from '@lumx/react';
+import { Alignment, Divider, ExpansionPanel, Flag, Grid, GridItem, Heading, Message, Text } from '@lumx/react';
 import { useFramework } from '@lumx/demo/components/layout/FrameworkContext';
 
 import './PropTable.scss';
+import { classNames } from '@lumx/core/js/utils';
 
 export interface Property {
     /** Name. */
     name: string;
     /** Required flag. */
     required: boolean;
+    /** Deprecated flag. */
+    deprecated: boolean;
     /** Description. */
     description: string;
     /** Accepted type or types (union type). */
@@ -66,9 +69,17 @@ const Row: React.FC<{ property: Property }> = ({ property }) => {
             id={`properties-${property.name}`}
         >
             <header>
-                <Grid hAlign={Alignment.center}>
+                <Grid
+                    hAlign={Alignment.center}
+                    className={property.deprecated ? classNames.font('dark-L2') : undefined}
+                >
                     <GridItem width="4">
                         <Text as="span" typography="body1">
+                            {property.deprecated && (
+                                <>
+                                    <Flag label="deprecated" color="yellow" />{' '}
+                                </>
+                            )}
                             <Text as="span" typography={property.required ? 'subtitle1' : 'body1'}>
                                 {property.name}
                                 {property.required ? ' *' : null}
@@ -97,7 +108,7 @@ const Row: React.FC<{ property: Property }> = ({ property }) => {
 
 const Table = ({ properties }: { properties: Property[] }) => (
     <div className="prop-table">
-        {orderBy(properties, ['required', 'name'], ['desc', 'asc']).map((property, idx) => (
+        {orderBy(properties, ['deprecated', 'required', 'name'], ['asc', 'desc', 'asc']).map((property, idx) => (
             <Fragment key={property.name}>
                 <Row property={property} />
 

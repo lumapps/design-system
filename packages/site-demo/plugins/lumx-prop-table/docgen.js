@@ -297,6 +297,58 @@ function getJsDocDescription(propSymbol) {
 }
 
 /**
+ * Get @deprecated tag comment from a declaration node's JSDoc.
+ * @returns {string|undefined} - The deprecation reason, or empty string if deprecated without reason, or undefined if not deprecated.
+ */
+function getJsDocDeprecatedFromDeclaration(decl) {
+    if (!decl) return undefined;
+
+    const jsDocs = decl.getJsDocs?.();
+    if (jsDocs && jsDocs.length > 0) {
+        for (const jsDoc of jsDocs) {
+            const tags = jsDoc.getTags?.();
+            if (!tags) continue;
+            for (const tag of tags) {
+                if (tag.getTagName() === 'deprecated') {
+                    const comment = tag.getComment();
+                    if (typeof comment === 'string') return comment.trim();
+                    if (comment) {
+                        return comment
+                            .map((c) => (typeof c === 'string' ? c : c.getText?.() || ''))
+                            .join('')
+                            .trim();
+                    }
+                    return '';
+                }
+            }
+        }
+    }
+    return undefined;
+}
+
+/**
+ * Get @deprecated reason for a property symbol.
+ *
+ * @param {Symbol} propSymbol - The property symbol
+ * @returns {string|undefined} - The deprecation reason (or empty string if no reason), or undefined if not deprecated.
+ */
+function getJsDocDeprecated(propSymbol) {
+    // Try valueDeclaration first
+    const valueDecl = propSymbol.getValueDeclaration?.();
+    const reason = getJsDocDeprecatedFromDeclaration(valueDecl);
+    if (reason !== undefined) return reason;
+
+    // Fallback to declarations (for Pick<> and other mapped types)
+    const declarations = propSymbol.getDeclarations?.() || [];
+    for (const decl of declarations) {
+        const declReason = getJsDocDeprecatedFromDeclaration(decl);
+        if (declReason !== undefined) return declReason;
+    }
+
+    return undefined;
+}
+
+/**
  * Get @alias tag value from a declaration node's JSDoc.
  */
 function getJsDocAliasFromDeclaration(decl) {
@@ -498,10 +550,21 @@ function extractPropertiesFromInterface(interfaceDecl, sourceFile, rootPath, def
         // Get default value if any
         let defaultValue = defaultValues[name] || null;
 
+        const deprecatedReason = getJsDocDeprecated(prop);
+        const deprecated = deprecatedReason !== undefined;
+
+        // Build description, appending @deprecated reason if present
+        let description = getJsDocDescription(prop);
+        if (deprecated && deprecatedReason) {
+            const deprecatedText = `@deprecated ${deprecatedReason}`;
+            description = description ? `${description}\n${deprecatedText}` : deprecatedText;
+        }
+
         const propInfo = {
             name,
-            description: getJsDocDescription(prop),
+            description,
             required: !optional,
+            deprecated,
             type: getTypeText(propType, valueDecl),
             declarations: getDeclarations(prop, rootPath),
             defaultValue,
