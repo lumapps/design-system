@@ -1,0 +1,64 @@
+{
+    "$schema": "./node_modules/nx/schemas/nx-schema.json",
+    "defaultBase": "master",
+    "namedInputs": {
+        "sharedGlobals": [
+            "{workspaceRoot}/yarn.lock",
+            "{workspaceRoot}/tsconfig.json",
+            "{workspaceRoot}/package.json",
+            "{workspaceRoot}/.nvmrc"
+        ],
+        "sourceFiles": [
+            "sharedGlobals",
+            "{projectRoot}/**/*",
+            "!{projectRoot}/dist/**/*",
+            "!{projectRoot}/public/**/*",
+            "!{projectRoot}/storybook-static/**/*",
+            "!{projectRoot}/__vis__/**/*",
+            "!{projectRoot}/reports/**/*",
+            "!{projectRoot}/node_modules/**/*"
+        ],
+        "storybookFiles": [
+            "sourceFiles",
+            "{projectRoot}/.storybook/**/*"
+        ]
+    },
+    "targetDefaults": {
+        "build": {
+            "dependsOn": ["^build"],
+            "inputs": ["sourceFiles"],
+            "outputs": ["{projectRoot}/dist", "{projectRoot}/public"],
+            "cache": true
+        },
+        "test": {
+            "inputs": ["sourceFiles"],
+            "outputs": ["{projectRoot}/reports/coverage"],
+            "cache": true
+        },
+        "lint": {
+            "inputs": ["sourceFiles"],
+            "outputs": [],
+            "cache": true
+        },
+        "type-check": {
+            "inputs": ["sourceFiles"],
+            "outputs": [],
+            "cache": true
+        },
+        "build:storybook": {
+            "inputs": ["storybookFiles"],
+            "outputs": ["{projectRoot}/storybook-static"],
+            "cache": true
+        },
+        "test:storybook": {
+            "inputs": ["storybookFiles"],
+            "outputs": ["{projectRoot}/reports/coverage"],
+            "cache": true
+        },
+        "start:storybook": { "cache": false },
+        "start": { "cache": false },
+        "clean": { "cache": false },
+        "generate:icons": { "cache": false },
+        "generate:design-tokens": { "cache": false }
+    }
+}

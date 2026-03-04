@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   Monorepo: introduce Nx for task caching and dependency graph orchestration
+    -   Add `nx.json` with task pipeline (`build`, `test`, `type-check`, `lint`, `build:storybook`, `test:storybook`) and named inputs for cache invalidation
+    -   Root scripts for `build:libs`, `build:site`, `build:react`, `build:core`, `build:icons`, `build:vue`, `build:storybook:react`, `build:storybook:vue`, `test`, `test:react`, `test:vue`, `test:core`, `type-check`, `lint`, `lint:code`, and `postinstall` now run through Nx
+    -   Add `lint` script to each package (`eslint .`) to enable per-package linting with cache support
+    -   Add `test:storybook`, `test:storybook:react`, `test:storybook:vue`, and `test:all` root scripts
+    -   Remove root `vitest.config.mts`, `vitest`, and `@vitest/ui` devDependencies (each package now owns its own vitest setup)
+
 ## [4.6.0][] - 2026-03-03
 
 ### Added

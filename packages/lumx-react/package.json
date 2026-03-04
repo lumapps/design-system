@@ -91,6 +91,7 @@
         "url": "git+https://github.com/lumapps/design-system.git"
     },
     "scripts": {
+        "lint": "cd ../.. && eslint packages/lumx-react/src/",
         "build": "rollup -c",
         "test": "vitest run --run",
         "test:storybook": "vitest -c .storybook/vitest.config.mts run --run",

@@ -61,6 +61,7 @@
     },
     "scripts": {
         "generate:design-tokens": "yarn node style-dictionary/index.cjs",
+        "lint": "cd ../.. && eslint packages/lumx-core/src/",
         "build": "rollup -c",
         "test": "vitest run --run",
         "type-check": "yarn tsc -p tsconfig.json",

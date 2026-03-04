@@ -5,6 +5,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 export default defineConfig({
     test: {
         globals: true,
+        passWithNoTests: true,
         setupFiles: ['./vitest.setup.ts'],
         coverage: {
             reporter: ['json', 'lcov', 'html', 'text'],

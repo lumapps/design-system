@@ -7,6 +7,7 @@ export default mergeConfig(
     defineConfig({
         test: {
             name: '@lumx/react',
+            passWithNoTests: true,
             environment: 'jsdom',
             globals: true,
             setupFiles: ['./vitest.setup.ts'],
