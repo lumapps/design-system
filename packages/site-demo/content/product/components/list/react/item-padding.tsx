@@ -2,7 +2,7 @@ import { classNames } from '@lumx/core/js/utils';
 import { List, ListItem, ListSubheader, Text } from '@lumx/react';
 
 export default () => (
-    <div>
+    <>
         <List>
             <ListSubheader>Default</ListSubheader>
 
@@ -13,6 +13,7 @@ export default () => (
                 </Text>
             </ListItem>
         </List>
+
         <List itemPadding="big">
             <ListSubheader>Big padding</ListSubheader>
 
@@ -23,6 +24,7 @@ export default () => (
                 </Text>
             </ListItem>
         </List>
+
         <List itemPadding="huge">
             <ListSubheader>Huge padding</ListSubheader>
 
@@ -33,5 +35,5 @@ export default () => (
                 </Text>
             </ListItem>
         </List>
-    </div>
+    </>
 );
