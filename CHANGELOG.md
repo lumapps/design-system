@@ -17,6 +17,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Add `lint` script to each package (`eslint .`) to enable per-package linting with cache support
     -   Add `test:storybook`, `test:storybook:react`, `test:storybook:vue`, and `test:all` root scripts
     -   Remove root `vitest.config.mts`, `vitest`, and `@vitest/ui` devDependencies (each package now owns its own vitest setup)
+-   `@lumx/react`:
+    -   `List`: fix jsdoc for deprecated `onListItemSelected` prop (removed in v4.0.0)
 
 ### Added
 

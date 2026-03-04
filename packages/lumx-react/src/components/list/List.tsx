@@ -22,13 +22,7 @@ export interface ListProps extends GenericProps {
     itemPadding?: Extract<Size, 'big' | 'huge'>;
     /** Tab index of the list. Default to -1 */
     tabIndex?: number;
-    /**
-     * On list item selected callback.
-     *
-     * @param key   React key of the selected item.
-     * @param index Index of the selected item among the sibling items.
-     * @param evt   Source event (either mouse or keyboard event).
-     */
+    /** @deprecated not supported since v4.0.0 */
     onListItemSelected?(key: Key, index: number, evt: SyntheticEvent): void;
 }
 
