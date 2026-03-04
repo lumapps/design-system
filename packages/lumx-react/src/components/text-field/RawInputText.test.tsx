@@ -1,10 +1,13 @@
+import React from 'react';
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { getByClassName } from '@lumx/react/testing/utils/queries';
+import { vi } from 'vitest';
+import BaseRawInputTextTests from '@lumx/core/js/components/TextField/RawInputTextTests';
+import { INPUT_NATIVE_CLASSNAME } from '@lumx/core/js/components/TextField/constants';
 
 import { RawInputText, RawInputTextProps } from './RawInputText';
-import { INPUT_NATIVE_CLASSNAME } from './constants';
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -17,17 +20,27 @@ const setup = (propsOverride: Partial<RawInputTextProps> = {}, { wrapper }: Setu
 };
 
 describe(`<${RawInputText.displayName}>`, () => {
-    describe('Props', () => {
-        it('should render default', () => {
-            const { input } = setup();
-            expect(input).toBeInTheDocument();
-            expect(input?.tagName).toBe('INPUT');
-            expect(input).toHaveAttribute('type', 'text');
-        });
+    // Run core tests
+    BaseRawInputTextTests({
+        render: (props: any) => {
+            // Map core props to React props
+            const { handleChange, ...otherProps } = props;
+            const reactProps = {
+                ...otherProps,
+                onChange: handleChange,
+            };
+            return render(<RawInputText {...reactProps} />);
+        },
+        screen,
+    });
 
-        it('should render with custom type', () => {
-            const { input } = setup({ type: 'number' });
-            expect(input).toHaveAttribute('type', 'number');
+    // React-specific tests
+    describe('React', () => {
+        it('should forward ref', () => {
+            const ref = React.createRef<HTMLInputElement>();
+            setup({ ref } as any);
+            expect(ref.current).toHaveClass(INPUT_NATIVE_CLASSNAME);
+            expect(ref.current).toBeInstanceOf(HTMLInputElement);
         });
     });
 

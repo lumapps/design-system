@@ -2,9 +2,9 @@ import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/uti
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { getByClassName } from '@lumx/react/testing/utils/queries';
+import { INPUT_NATIVE_CLASSNAME } from '@lumx/core/js/components/TextField/constants';
 
 import { RawInputTextarea, RawInputTextareaProps, DEFAULT_PROPS } from './RawInputTextarea';
-import { INPUT_NATIVE_CLASSNAME } from './constants';
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
