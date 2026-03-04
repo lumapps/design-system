@@ -1,35 +1,35 @@
 ---
 frameworks: ['react']
 ---
-import * as Demo1 from './react/demo1.tsx';
-import * as Demo2 from './react/demo2.tsx';
-import * as Demo3 from './react/demo3.tsx';
-import * as Demo4 from './react/demo4.tsx';
+import * as DemoDefault from './react/default.tsx';
+import * as DemoWithoutMinAndMaxLabels from './react/without-min-and-max-labels.tsx';
+import * as DemoPrecision from './react/precision.tsx';
+import * as DemoStep from './react/step.tsx';
 import ReactSlider from 'lumx-docs:@lumx/react/components/slider/Slider';
 
 # Slider
 
 **Slider is a visual input where the user can increase or decrease the value between two numeric values.**
 
-<DemoBlock withThemeSwitcher demo={{ react: Demo1 }} />
+<DemoBlock withThemeSwitcher demo={{ react: DemoDefault }} />
 
 ## Without min and max labels
 
 Possibility to hide the min and max value.
 
-<DemoBlock withThemeSwitcher demo={{ react: Demo2 }} />
+<DemoBlock withThemeSwitcher demo={{ react: DemoWithoutMinAndMaxLabels }} />
 
 ## Precision
 
 Use when the values are decimal numbers.
 
-<DemoBlock withThemeSwitcher demo={{ react: Demo3 }} />
+<DemoBlock withThemeSwitcher demo={{ react: DemoPrecision }} />
 
 ## Step
 
 Use to limit the choice between value propositions.
 
-<DemoBlock withThemeSwitcher demo={{ react: Demo4 }} />
+<DemoBlock withThemeSwitcher demo={{ react: DemoStep }} />
 
 ### Properties
 

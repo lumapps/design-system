@@ -2,10 +2,10 @@
 frameworks: ['react', 'vue']
 ---
 
-import * as ReactDemo1 from './react/demo1.tsx';
-import * as ReactDemo2 from './react/demo2.tsx';
-import * as VueDemo1 from './vue/demo1.vue';
-import * as VueDemo2 from './vue/demo2.vue';
+import * as ReactDemoBasicStyles from './react/basic-styles.tsx';
+import * as ReactDemoCustomStyles from './react/custom-styles.tsx';
+import * as VueDemoBasicStyles from './vue/basic-styles.vue';
+import * as VueDemoCustomStyles from './vue/custom-styles.vue';
 
 # Typography
 
@@ -60,7 +60,7 @@ Selecting appropriate text styles is determined by layout structure. Layouts may
 
 Basic text styles are default choice for any piece of UI. They are consistent throughout the whole interface and cannot be customized further than the font family choice.
 
-<DemoBlock demo={{ react: ReactDemo1, vue: VueDemo1 }} />
+<DemoBlock demo={{ react: ReactDemoBasicStyles, vue: VueDemoBasicStyles }} />
 
 ### Custom styles
 
@@ -74,4 +74,4 @@ Custom text styles are overridable by customization:
 
 Use them in pieces of UI that need to reflect an identity (usually widgets or pages). They’re the same app-wide by default but the customization can be made with context: targeting a specific piece of UI like a specific widget in a specific page.
 
-<DemoBlock demo={{ react: ReactDemo2, vue: VueDemo2 }} />
+<DemoBlock demo={{ react: ReactDemoCustomStyles, vue: VueDemoCustomStyles }} />

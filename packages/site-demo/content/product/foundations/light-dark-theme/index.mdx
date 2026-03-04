@@ -2,10 +2,10 @@
 frameworks: ['react', 'vue']
 ---
 
-import * as ReactDemo1 from './react/demo1.tsx';
-import * as ReactDemo2 from './react/demo2.tsx';
-import * as ReactDemo3 from './react/demo3.tsx';
-import * as VueDemo1 from './vue/demo1.vue';
+import * as ReactDemoActivateViaProp from './react/activate-via-prop.tsx';
+import * as ReactDemoActivateViaContext from './react/activate-via-context.tsx';
+import * as ReactDemoActivateViaContextHook from './react/activate-via-context-hook.tsx';
+import * as VueDemoActivateViaProp from './vue/activate-via-prop.vue';
 
 # Light & Dark Theme
 
@@ -23,7 +23,7 @@ On the supported components, use the `theme` prop to activate the desired theme.
     withThemeSwitcher
     theme="dark"
     alwaysShowCode
-    demo={{ react: ReactDemo1, vue: VueDemo1 }}
+    demo={{ react: ReactDemoActivateViaProp, vue: VueDemoActivateViaProp }}
 />
 
 <FrameworkOnly framework="react">
@@ -32,7 +32,7 @@ On the supported components, use the `theme` prop to activate the desired theme.
 
 Use the `ThemeProvider` component to apply the desired theme to all descendants that supports it.
 
-<DemoBlock orientation="horizontal" withThemeSwitcher theme="dark" alwaysShowCode demo={{ react: ReactDemo2 }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher theme="dark" alwaysShowCode demo={{ react: ReactDemoActivateViaContext }} />
 
 Please note **some exceptions** to the theme context propagation:
 
@@ -41,6 +41,6 @@ Please note **some exceptions** to the theme context propagation:
 
 Use the `useTheme()` hook to get the theme from the current theme context when you need to adapt within your custom component.
 
-<DemoBlock orientation="horizontal" withThemeSwitcher theme="dark" alwaysShowCode demo={{ react: ReactDemo3 }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher theme="dark" alwaysShowCode demo={{ react: ReactDemoActivateViaContextHook }} />
 
 </FrameworkOnly>

@@ -1,10 +1,10 @@
 ---
 frameworks: ['react']
 ---
-import * as Demo1 from './react/demo1.tsx';
-import * as Demo2 from './react/demo2.tsx';
-import * as Demo3 from './react/demo3.tsx';
-import * as Demo4 from './react/demo4.tsx';
+import * as DemoDefault from './react/default.tsx';
+import * as DemoCustomPadding from './react/custom-padding.tsx';
+import * as DemoInfoAbove from './react/info-above.tsx';
+import * as DemoInfoAlignment from './react/info-alignment.tsx';
 import ReactImageBlock from 'lumx-docs:@lumx/react/components/image-block/ImageBlock';
 
 # Image block
@@ -12,25 +12,25 @@ import ReactImageBlock from 'lumx-docs:@lumx/react/components/image-block/ImageB
 **Image blocks display an image with related info.**
 Image blocks support thumbnail's formats (see [thumbnail](/product/components/thumbnail)).
 
-<DemoBlock withThemeSwitcher wrap={false} demo={{ react: Demo1 }} />
+<DemoBlock withThemeSwitcher wrap={false} demo={{ react: DemoDefault }} />
 
 ## Custom padding
 
 A custom padding can be added.
 
-<DemoBlock wrap={false} demo={{ react: Demo2 }} />
+<DemoBlock wrap={false} demo={{ react: DemoCustomPadding }} />
 
 ## Info above
 
 Info can be placed above the image.
 
-<DemoBlock withThemeSwitcher wrap={false} demo={{ react: Demo3 }} />
+<DemoBlock withThemeSwitcher wrap={false} demo={{ react: DemoInfoAbove }} />
 
 ## Info alignment
 
 There are three alignments: `left`, `center` and `right`.
 
-<DemoBlock withThemeSwitcher wrap={false} demo={{ react: Demo4 }} />
+<DemoBlock withThemeSwitcher wrap={false} demo={{ react: DemoInfoAlignment }} />
 
 ### Accessibility concerns
 

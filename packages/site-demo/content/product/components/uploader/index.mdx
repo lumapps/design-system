@@ -1,16 +1,16 @@
 ---
 frameworks: ['react']
 ---
-import * as Demo1 from './react/demo1.tsx';
-import * as Demo2 from './react/demo2.tsx';
-import * as Demo3 from './react/demo3.tsx';
+import * as DemoDefault from './react/default.tsx';
+import * as DemoThumbnail from './react/thumbnail.tsx';
+import * as DemoAvatar from './react/avatar.tsx';
 import ReactUploader from 'lumx-docs:@lumx/react/components/uploader/Uploader';
 
 # Uploader
 
 **Uploaders help users select files or medias.**
 
-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: Demo1 }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: DemoDefault }} />
 
 ## Variants
 
@@ -18,11 +18,11 @@ There are three variants: `square`, `rounded` and `circle`.
 
 ### Thumbnail
 
-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: Demo2 }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: DemoThumbnail }} />
 
 ### Avatar
 
-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: Demo3 }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: DemoAvatar }} />
 
 ### Accessibility concerns
 

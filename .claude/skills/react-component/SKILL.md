@@ -124,5 +124,5 @@ When adding or modifying components, add an entry under "Unreleased" in `/CHANGE
 -   [ ] `packages/lumx-react/src/index.ts` (add export)
 -   [ ] `packages/lumx-core/src/scss/components/<component-name>/_index.scss`
 -   [ ] `packages/site-demo/content/product/components/<component-name>/index.mdx` (optional)
--   [ ] `packages/site-demo/content/product/components/<component-name>/react/demo*.tsx` (optional)
+-   [ ] `packages/site-demo/content/product/components/<component-name>/react/<demo-name>.tsx` (optional, use meaningful kebab-case names matching the MDX heading)
 -   [ ] `CHANGELOG.md`

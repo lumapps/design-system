@@ -2,12 +2,12 @@
 frameworks: ['react', 'vue']
 ---
 
-import * as ReactDemo1 from './react/demo1.tsx';
-import * as ReactDemo2 from './react/demo2.tsx';
-import * as ReactDemo3 from './react/demo3.tsx';
-import * as VueDemo1 from './vue/demo1.vue';
-import * as VueDemo2 from './vue/demo2.vue';
-import * as VueDemo3 from './vue/demo3.vue';
+import * as ReactDemoDefault from './react/default.tsx';
+import * as ReactDemoHeadingLevelAndTypography from './react/heading-level-and-typography.tsx';
+import * as ReactDemoAutomaticHeadingLevel from './react/automatic-heading-level.tsx';
+import * as VueDemoDefault from './vue/default.vue';
+import * as VueDemoHeadingLevelAndTypography from './vue/heading-level-and-typography.vue';
+import * as VueDemoAutomaticHeadingLevel from './vue/automatic-heading-level.vue';
 import ReactHeading from 'lumx-docs:@lumx/react/components/heading/Heading';
 import ReactHeadingLevelProvider from 'lumx-docs:@lumx/react/components/heading/HeadingLevelProvider';
 import VueHeading from 'lumx-docs:@lumx/vue/components/heading/Heading';
@@ -18,19 +18,19 @@ import VueHeadingLevelProvider from 'lumx-docs:@lumx/vue/components/heading/Head
 **Display simple heading text.** (specialized version of the [Text](/product/components/text/) component).\
 By default (no parent heading level defined), heading elements use the first heading level (`h1` tag) and `display1` typography.
 
-<DemoBlock demo={{ react: ReactDemo1, vue: VueDemo1 }} />
+<DemoBlock demo={{ react: ReactDemoDefault, vue: VueDemoDefault }} />
 
 ## Heading level & typography
 
 Use `as` to set a custom heading level and `typography` to override the default typography (see list of [typography](/product/foundations/typography/) styles).
 
-<DemoBlock orientation="horizontal" vAlign="space-evenly" demo={{ react: ReactDemo2, vue: VueDemo2 }} />
+<DemoBlock orientation="horizontal" vAlign="space-evenly" demo={{ react: ReactDemoHeadingLevelAndTypography, vue: VueDemoHeadingLevelAndTypography }} />
 
 ## Automatic heading level
 
 Use the `HeadingLevelProvider` component to help you automatically adapt heading levels by nesting them.
 
-<DemoBlock demo={{ react: ReactDemo3, vue: VueDemo3 }} />
+<DemoBlock demo={{ react: ReactDemoAutomaticHeadingLevel, vue: VueDemoAutomaticHeadingLevel }} />
 
 <Message kind="info">
     Use <code>level</code> property to override the base level for children headings.
