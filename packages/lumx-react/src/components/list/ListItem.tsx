@@ -39,7 +39,9 @@ export interface ListItemProps extends GenericProps, HasAriaDisabled {
     /** Size variant. */
     size?: ListItemSize;
 
-    /** On selected callback. */
+    /** On click callback. */
+    onClick?(event: SyntheticEvent): void;
+    /** @alias onClick */
     onItemSelected?(evt: SyntheticEvent): void;
 }
 
@@ -89,11 +91,12 @@ export const ListItem = forwardRef<ListItemProps, HTMLLIElement>((props, ref) =>
         linkProps = {},
         linkRef,
         onItemSelected,
+        onClick,
         size = DEFAULT_PROPS.size,
         ...forwardedProps
     } = otherProps;
 
-    const clickable = isClickable({ linkAs, linkProps, onItemSelected });
+    const clickable = isClickable({ linkAs, linkProps, onItemSelected: onItemSelected || onClick });
 
     return (
         <li
@@ -112,7 +115,10 @@ export const ListItem = forwardRef<ListItemProps, HTMLLIElement>((props, ref) =>
                         'is-disabled': isAnyDisabled,
                     }),
                 ),
-                handleClick: onItemSelected,
+                handleClick(event) {
+                    onItemSelected?.(event);
+                    onClick?.(event);
+                },
                 ref: linkRef,
                 children: (
                     <>
