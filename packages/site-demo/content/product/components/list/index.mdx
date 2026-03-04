@@ -1,13 +1,13 @@
 ---
 frameworks: ['react']
 ---
-import * as DemoTiny from './react/tiny.tsx';
-import * as DemoRegular from './react/regular.tsx';
-import * as DemoBig from './react/big.tsx';
-import * as DemoHuge from './react/huge.tsx';
+
+import * as DemoItemSizes from './react/item-sizes.tsx';
 import * as DemoItemPadding from './react/item-padding.tsx';
 import * as DemoClickable from './react/clickable.tsx';
+import * as DemoItemLayout from './react/item-layout.tsx';
 import ReactList from 'lumx-docs:@lumx/react/components/list/List';
+import ReactListDivider from 'lumx-docs:@lumx/react/components/list/ListDivider';
 import ReactListItem from 'lumx-docs:@lumx/react/components/list/ListItem';
 import ReactListSubheader from 'lumx-docs:@lumx/react/components/list/ListSubheader';
 
@@ -15,58 +15,59 @@ import ReactListSubheader from 'lumx-docs:@lumx/react/components/list/ListSubhea
 
 **Lists group items vertically.**
 
-## Sizes
+## Item layout
 
-Lists come in 4 sizes: `tiny`, `regular`, `big` and `huge`.
+List items has three sections.\
+The main section that can display simple text or multi-line text,
+the `before` section usually used to display an icon or thumbnail and the `after` section usually used to
+display icons or actions.
 
-`tiny`, `regular` and `big` list items have specific **minimum heights** and a `8px` vertical padding.
+<DemoBlock demo={{ react: DemoItemLayout }} orientation="horizontal" vAlign="space-around" />
+
+## Item sizes
+
+List items come in 4 sizes: `tiny`, `regular`, `big` and `huge`.
+
+`tiny`, `regular` and `big` list items have specific **minimum heights** and a `8px` vertical padding.\
 Favor those 3 sizes for lists with list items with consistent heights.
 
-`huge` list items have a `16px` vertical padding.
+`huge` list items have a `16px` vertical padding.\
 Use this size for any other cases.
 
-### Tiny
-
-Tiny list items have a minimum height of `36px`.
-Use this size for dense lists with single line items like menus made of [dropdown](../dropdown).
-
-<DemoBlock demo={{ react: DemoTiny }} />
-
-### Regular
-
-Regular list items have a minimum height of `52px`.
-Use this size for single line list items.
-
-<DemoBlock demo={{ react: DemoRegular }} />
-
-### Big
-
-Big list items have a minimum height of `72px`.
-Use this size for two lines list items.
-
-<DemoBlock demo={{ react: DemoBig }} />
-
-### Huge
-
-Huge list items have a vertical padding of `16px`.
-Use this size for list items that have more than two lines of content.
-
-<DemoBlock demo={{ react: DemoHuge }} />
+<DemoBlock demo={{ react: DemoItemSizes }} />
 
 ## Item padding
 
-The horizontal padding has 2 sizes: `big` and `huge`.
+The list horizontal padding has 2 sizes: `big` and `huge`.
 By default, there is no horizontal padding.
 
-<DemoBlock demo={{ react: DemoItemPadding }} />
+<DemoBlock demo={{ react: DemoItemPadding }} orientation="horizontal" vAlign="space-around" />
 
 ## Clickable
 
-List items can be clickable.
+List items can be made clickable either as a link or a button.\
 Clickable list items can then be disabled, highlighted or selected.
 Use clickable list items when users need to select one or more options in a list.
 
 <DemoBlock demo={{ react: DemoClickable }} />
+
+### Accessibility concerns
+
+The `List` component renders a standard `<ul>` element with an implicit `list` role, and `ListItem`
+renders a `<li>` element with an implicit `listitem` role. Screen readers will announce the list
+and its items natively.
+
+When a `ListItem` is made clickable (via `onClick`, `linkProps.href`, or `linkAs`), its
+inner content is wrapped in a button or a link depending on the props provided. This ensures
+clickable items are keyboard accessible and properly announced by screen readers as interactive elements.
+
+Clickable list items can be disabled in two ways:
+
+-   `isDisabled` which completely disables the item. It's not focusable and pointer events (hover, click,
+    etc.) are all disabled too. You'll have to find another way to indicate to users that the item is here and why it
+    is disabled.
+-   `aria-disabled` only disable changes on the item (read only) so it's still focusable and accessible. You'll have
+    to setup either a tooltip or an aria description (must be visible too) to explain to the user why it is disabled.
 
 ### List properties
 
