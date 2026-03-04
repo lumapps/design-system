@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Remove root `vitest.config.mts`, `vitest`, and `@vitest/ui` devDependencies (each package now owns its own vitest setup)
 -   `@lumx/react`:
     -   `List`: fix jsdoc for deprecated `onListItemSelected` prop (removed in v4.0.0)
+    -   `List`: remove default value for `tabIndex`
 
 ### Added
 
