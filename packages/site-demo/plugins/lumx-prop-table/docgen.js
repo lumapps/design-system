@@ -96,7 +96,7 @@ function getTypeNameFromNode(typeNode) {
  * Extract literal values from union types for display.
  * Returns an array of formatted values, collapsing boolean literals to 'boolean'.
  */
-function extractUnionLiteralValues(unionTypes) {
+function extractUnionLiteralValues(unionTypes, sourceFile) {
     const values = [];
     let hasBoolean = false;
 
@@ -113,6 +113,9 @@ function extractUnionLiteralValues(unionTypes) {
             const literalValue = t.getLiteralValue();
             // Wrap strings in quotes for display, keep numbers/booleans as-is
             values.push(typeof literalValue === 'string' ? JSON.stringify(literalValue) : literalValue);
+        } else if (t.getCallSignatures().length > 0) {
+            // Function types: use text representation (FQN would be the property name, not the type)
+            values.push(sourceFile ? t.getText(sourceFile) : t.getText());
         } else {
             // For non-literal types in a union, use the symbol's FQN
             const symbol = t.getAliasSymbol() || t.getSymbol();
@@ -185,8 +188,9 @@ function isExpandableEnum(type) {
  *
  * @param {Type} type - The TypeScript type object
  * @param {Node} [valueDecl] - The value declaration (used to get original type annotation)
+ * @param {SourceFile} [sourceFile] - The source file (used for scoped type text with short names)
  */
-function getTypeText(type, valueDecl) {
+function getTypeText(type, valueDecl, sourceFile) {
     const typeNode = valueDecl?.getTypeNode?.();
 
     // Handle special types early (any, unknown, never)
@@ -202,7 +206,7 @@ function getTypeText(type, valueDecl) {
         // Check if this is an expandable enum (simple literal union from design system)
         // If so, expand it to show the actual values instead of the type name
         if (isExpandableEnum(type)) {
-            const values = extractUnionLiteralValues(unionTypes);
+            const values = extractUnionLiteralValues(unionTypes, sourceFile);
             return values.length === 1 ? values[0] : values;
         }
 
@@ -222,7 +226,7 @@ function getTypeText(type, valueDecl) {
         }
 
         // Fallback: extract values from the resolved union
-        const values = extractUnionLiteralValues(unionTypes);
+        const values = extractUnionLiteralValues(unionTypes, sourceFile);
         return values.length === 1 ? values[0] : values;
     }
 
@@ -245,6 +249,11 @@ function getTypeText(type, valueDecl) {
         return type.getText() === 'true';
     }
 
+    // Function types: use text representation (FQN would be the property name, not the type)
+    if (type.getCallSignatures().length > 0) {
+        return sourceFile ? type.getText(sourceFile) : type.getText();
+    }
+
     // Fallback: use symbol FQN or type text
     const symbol = type.getAliasSymbol() || type.getSymbol();
     const fqn = getCleanFQN(symbol);
@@ -252,48 +261,67 @@ function getTypeText(type, valueDecl) {
 }
 
 /**
+ * Convert a JSDoc comment (string or array of JSDocComment nodes) to a trimmed string.
+ */
+function getCommentText(comment) {
+    if (typeof comment === 'string') return comment.trim();
+    if (comment) {
+        return comment
+            .map((c) => (typeof c === 'string' ? c : c.getText?.() || ''))
+            .join('')
+            .trim();
+    }
+    return '';
+}
+
+/**
+ * Search for a value across all declarations of a property symbol.
+ * Tries the valueDeclaration first, then falls back to getDeclarations().
+ *
+ * @param {Symbol} propSymbol - The property symbol
+ * @param {function} extractFn - Function that extracts a value from a declaration node.
+ *                                Should return undefined/falsy to continue searching.
+ * @param {*} defaultValue - Value to return if nothing is found
+ * @returns {*} - The first non-default value found, or defaultValue
+ */
+function findInDeclarations(propSymbol, extractFn, defaultValue) {
+    // Try valueDeclaration first
+    const valueDecl = propSymbol.getValueDeclaration?.();
+    if (valueDecl) {
+        const result = extractFn(valueDecl);
+        if (result !== undefined && result !== defaultValue) return result;
+    }
+
+    // Fallback to declarations (for Pick<> and other mapped types)
+    const declarations = propSymbol.getDeclarations?.() || [];
+    for (const decl of declarations) {
+        const result = extractFn(decl);
+        if (result !== undefined && result !== defaultValue) return result;
+    }
+
+    return defaultValue;
+}
+
+/**
  * Get JSDoc description from a declaration node.
  */
 function getJsDocFromDeclaration(decl) {
     if (!decl) return '';
-
     const jsDocs = decl.getJsDocs?.();
     if (jsDocs && jsDocs.length > 0) {
-        const comment = jsDocs[0].getComment();
-        if (typeof comment === 'string') {
-            return comment.trim();
-        } else if (comment) {
-            // Handle array of JSDocComment
-            return comment
-                .map((c) => (typeof c === 'string' ? c : c.getText?.() || ''))
-                .join('')
-                .trim();
-        }
+        return getCommentText(jsDocs[0].getComment());
     }
     return '';
 }
 
 /**
  * Get JSDoc description for a property symbol.
- * Falls back to declarations if valueDecl is not available.
  *
  * @param {Symbol} propSymbol - The property symbol
  * @returns {string} - The JSDoc description
  */
 function getJsDocDescription(propSymbol) {
-    // Try valueDeclaration first
-    const valueDecl = propSymbol.getValueDeclaration?.();
-    const desc = getJsDocFromDeclaration(valueDecl);
-    if (desc) return desc;
-
-    // Fallback to declarations (for Pick<> and other mapped types)
-    const declarations = propSymbol.getDeclarations?.() || [];
-    for (const decl of declarations) {
-        const declDesc = getJsDocFromDeclaration(decl);
-        if (declDesc) return declDesc;
-    }
-
-    return '';
+    return findInDeclarations(propSymbol, getJsDocFromDeclaration, '');
 }
 
 /**
@@ -302,23 +330,14 @@ function getJsDocDescription(propSymbol) {
  */
 function getJsDocDeprecatedFromDeclaration(decl) {
     if (!decl) return undefined;
-
     const jsDocs = decl.getJsDocs?.();
-    if (jsDocs && jsDocs.length > 0) {
+    if (jsDocs) {
         for (const jsDoc of jsDocs) {
             const tags = jsDoc.getTags?.();
             if (!tags) continue;
             for (const tag of tags) {
                 if (tag.getTagName() === 'deprecated') {
-                    const comment = tag.getComment();
-                    if (typeof comment === 'string') return comment.trim();
-                    if (comment) {
-                        return comment
-                            .map((c) => (typeof c === 'string' ? c : c.getText?.() || ''))
-                            .join('')
-                            .trim();
-                    }
-                    return '';
+                    return getCommentText(tag.getComment()) ?? '';
                 }
             }
         }
@@ -333,19 +352,7 @@ function getJsDocDeprecatedFromDeclaration(decl) {
  * @returns {string|undefined} - The deprecation reason (or empty string if no reason), or undefined if not deprecated.
  */
 function getJsDocDeprecated(propSymbol) {
-    // Try valueDeclaration first
-    const valueDecl = propSymbol.getValueDeclaration?.();
-    const reason = getJsDocDeprecatedFromDeclaration(valueDecl);
-    if (reason !== undefined) return reason;
-
-    // Fallback to declarations (for Pick<> and other mapped types)
-    const declarations = propSymbol.getDeclarations?.() || [];
-    for (const decl of declarations) {
-        const declReason = getJsDocDeprecatedFromDeclaration(decl);
-        if (declReason !== undefined) return declReason;
-    }
-
-    return undefined;
+    return findInDeclarations(propSymbol, getJsDocDeprecatedFromDeclaration, undefined);
 }
 
 /**
@@ -353,22 +360,14 @@ function getJsDocDeprecated(propSymbol) {
  */
 function getJsDocAliasFromDeclaration(decl) {
     if (!decl) return undefined;
-
     const jsDocs = decl.getJsDocs?.();
-    if (jsDocs && jsDocs.length > 0) {
+    if (jsDocs) {
         for (const jsDoc of jsDocs) {
             const tags = jsDoc.getTags?.();
             if (!tags) continue;
             for (const tag of tags) {
                 if (tag.getTagName() === 'alias') {
-                    const comment = tag.getComment();
-                    if (typeof comment === 'string') return comment.trim();
-                    if (comment) {
-                        return comment
-                            .map((c) => (typeof c === 'string' ? c : c.getText?.() || ''))
-                            .join('')
-                            .trim();
-                    }
+                    return getCommentText(tag.getComment()) || undefined;
                 }
             }
         }
@@ -384,67 +383,7 @@ function getJsDocAliasFromDeclaration(decl) {
  * @returns {string|undefined} - The alias target prop name
  */
 function getJsDocAlias(propSymbol) {
-    // Try valueDeclaration first
-    const valueDecl = propSymbol.getValueDeclaration?.();
-    const alias = getJsDocAliasFromDeclaration(valueDecl);
-    if (alias) return alias;
-
-    // Fallback to declarations (for Pick<> and other mapped types)
-    const declarations = propSymbol.getDeclarations?.() || [];
-    for (const decl of declarations) {
-        const declAlias = getJsDocAliasFromDeclaration(decl);
-        if (declAlias) return declAlias;
-    }
-
-    return undefined;
-}
-
-/**
- * Check if a declaration node has optional marker.
- */
-function isDeclarationOptional(decl) {
-    if (!decl) return false;
-
-    // Check for question token
-    if (decl.hasQuestionToken?.()) return true;
-
-    // Check TypeScript node directly
-    const node = decl.compilerNode;
-    if (node && node.questionToken) return true;
-
-    // Check if type includes undefined
-    const type = decl.getType?.();
-    if (type && type.isUnion()) {
-        return type.getUnionTypes().some((t) => t.isUndefined());
-    }
-
-    return false;
-}
-
-/**
- * Check if property symbol is optional.
- * Falls back to declarations if valueDecl is not available.
- *
- * @param {Symbol} propSymbol - The property symbol
- * @returns {boolean} - True if the property is optional
- */
-function isOptionalProperty(propSymbol) {
-    // Try valueDeclaration first
-    const valueDecl = propSymbol.getValueDeclaration?.();
-    if (valueDecl) {
-        return isDeclarationOptional(valueDecl);
-    }
-
-    // Fallback to declarations (for Pick<> and other mapped types)
-    const declarations = propSymbol.getDeclarations?.() || [];
-    for (const decl of declarations) {
-        if (isDeclarationOptional(decl)) {
-            return true;
-        }
-    }
-
-    // If no declarations found, assume not optional
-    return false;
+    return findInDeclarations(propSymbol, getJsDocAliasFromDeclaration, undefined);
 }
 
 /**
@@ -484,24 +423,24 @@ function extractDefaultValues(sourceFile) {
     const defaults = {};
 
     // Look for DEFAULT_PROPS constant
-    const variableDeclarations = sourceFile.getVariableDeclarations();
-    for (const varDecl of variableDeclarations) {
-        if (varDecl.getName() === 'DEFAULT_PROPS') {
-            const initializer = varDecl.getInitializer();
-            if (initializer && initializer.getKindName() === 'ObjectLiteralExpression') {
-                const properties = initializer.getProperties();
-                for (const prop of properties) {
-                    if (prop.getKindName() === 'PropertyAssignment') {
-                        const name = prop.getName();
-                        const value = prop.getInitializer()?.getText();
-                        if (name && value) {
-                            // Remove quotes from string literals
-                            defaults[name] = value.replace(/^["']|["']$/g, '');
-                        }
-                    }
+    for (const varDecl of sourceFile.getVariableDeclarations()) {
+        if (varDecl.getName() !== 'DEFAULT_PROPS') continue;
+
+        const initializer = varDecl.getInitializer();
+        if (!initializer || initializer.getKindName() !== 'ObjectLiteralExpression') continue;
+
+        for (const prop of initializer.getProperties()) {
+            if (prop.getKindName() === 'PropertyAssignment') {
+                const name = prop.getName();
+                const value = prop.getInitializer()?.getText();
+                if (name && value) {
+                    // Remove quotes from string literals
+                    defaults[name] = value.replace(/^["']|["']$/g, '');
                 }
             }
         }
+        // Found DEFAULT_PROPS, no need to continue
+        break;
     }
 
     return defaults;
@@ -545,7 +484,7 @@ function extractPropertiesFromInterface(interfaceDecl, sourceFile, rootPath, def
 
         // Get the type at the location
         const propType = prop.getTypeAtLocation(sourceFile);
-        const optional = isOptionalProperty(prop);
+        const optional = prop.isOptional();
 
         // Get default value if any
         let defaultValue = defaultValues[name] || null;
@@ -565,7 +504,7 @@ function extractPropertiesFromInterface(interfaceDecl, sourceFile, rootPath, def
             description,
             required: !optional,
             deprecated,
-            type: getTypeText(propType, valueDecl),
+            type: getTypeText(propType, valueDecl, sourceFile),
             declarations: getDeclarations(prop, rootPath),
             defaultValue,
         };
@@ -592,16 +531,14 @@ function findTypeByName(project, typeName) {
     // Search in all source files
     for (const sourceFile of project.getSourceFiles()) {
         // Check interfaces
-        const interfaces = sourceFile.getInterfaces();
-        for (const iface of interfaces) {
+        for (const iface of sourceFile.getInterfaces()) {
             if (iface.getName() === typeName) {
                 return iface;
             }
         }
 
         // Check type aliases
-        const typeAliases = sourceFile.getTypeAliases();
-        for (const typeAlias of typeAliases) {
+        for (const typeAlias of sourceFile.getTypeAliases()) {
             if (typeAlias.getName() === typeName) {
                 return typeAlias;
             }
