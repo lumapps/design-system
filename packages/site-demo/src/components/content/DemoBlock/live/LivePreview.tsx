@@ -23,12 +23,12 @@ export function LivePreview({ className }: HasClassName) {
         <div className={block([className as string])}>
             {DemoComponent ? (
                 <div className={element('static')} {...demoProps}>
-                    <FlexBox {...flexBoxProps}>
-                        <PortalProvider value={initPortal}>
+                    <PortalProvider value={initPortal}>
+                        <FlexBox {...flexBoxProps}>
                             <DemoComponent theme={theme} />
-                            <div ref={portalRef} />
-                        </PortalProvider>
-                    </FlexBox>
+                        </FlexBox>
+                    </PortalProvider>
+                    <div ref={portalRef} />
                 </div>
             ) : null}
             <React.Suspense>{isEditMode ? <LazySandpackPreview /> : null}</React.Suspense>
