@@ -20,7 +20,7 @@ export interface ListProps extends GenericProps {
     isClickable?: boolean;
     /** Item padding size. */
     itemPadding?: Extract<Size, 'big' | 'huge'>;
-    /** Tab index of the list. Default to -1 */
+    /** Tab index of the list. */
     tabIndex?: number;
     /** @deprecated not supported since v4.0.0 */
     onListItemSelected?(key: Key, index: number, evt: SyntheticEvent): void;
@@ -40,9 +40,7 @@ const { block } = classNames.bem(CLASSNAME);
 /**
  * Component default props.
  */
-const DEFAULT_PROPS: Partial<ListProps> = {
-    tabIndex: -1,
-};
+const DEFAULT_PROPS: Partial<ListProps> = {};
 
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 /**
@@ -53,15 +51,7 @@ const DEFAULT_PROPS: Partial<ListProps> = {
  * @return React element.
  */
 const InternalList = forwardRef<ListProps, HTMLUListElement>((props, ref) => {
-    const {
-        children,
-        className,
-        isClickable,
-        itemPadding,
-        onListItemSelected,
-        tabIndex = DEFAULT_PROPS.tabIndex,
-        ...forwardedProps
-    } = props;
+    const { children, className, isClickable, itemPadding, onListItemSelected, ...forwardedProps } = props;
     const adjustedItemPadding = itemPadding ?? (isClickable ? Size.big : undefined);
 
     return (
@@ -73,7 +63,6 @@ const InternalList = forwardRef<ListProps, HTMLUListElement>((props, ref) => {
                     [`item-padding-${adjustedItemPadding}`]: Boolean(adjustedItemPadding),
                 }),
             )}
-            tabIndex={tabIndex}
             ref={ref}
         >
             {children}
