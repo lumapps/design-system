@@ -619,5 +619,6 @@ exports.findTypeByName = findTypeByName;
 exports.extractPropertiesFromInterface = extractPropertiesFromInterface;
 exports.extractDefaultValues = extractDefaultValues;
 exports.getJsDocFromDeclaration = getJsDocFromDeclaration;
+exports.getJsDocDeprecatedFromDeclaration = getJsDocDeprecatedFromDeclaration;
 exports.getJsDocDescription = getJsDocDescription;
 exports.getTypeText = getTypeText;

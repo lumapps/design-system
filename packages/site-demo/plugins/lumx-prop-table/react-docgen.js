@@ -6,7 +6,36 @@ const {
     findComponentInterface,
     extractPropertiesFromInterface,
     extractDefaultValues,
+    getJsDocDeprecatedFromDeclaration,
 } = require('./docgen.js');
+
+/**
+ * Get the @deprecated JSDoc tag from a component's variable or function declaration.
+ * @param {SourceFile} sourceFile - The source file
+ * @param {string} componentName - The component name to look for
+ * @returns {string|undefined} - The deprecation reason, or undefined if not deprecated
+ */
+function getComponentDeprecated(sourceFile, componentName) {
+    // Check variable declarations (e.g., `export const Foo = forwardRef(...)`)
+    for (const varDecl of sourceFile.getVariableDeclarations()) {
+        if (varDecl.getName() === componentName) {
+            // JSDoc is on the VariableStatement (parent of VariableDeclarationList)
+            const varStatement = varDecl.getParent()?.getParent();
+            const result = getJsDocDeprecatedFromDeclaration(varStatement);
+            if (result !== undefined) return result;
+        }
+    }
+
+    // Check function declarations
+    for (const func of sourceFile.getFunctions()) {
+        if (func.getName() === componentName && func.isExported()) {
+            const result = getJsDocDeprecatedFromDeclaration(func);
+            if (result !== undefined) return result;
+        }
+    }
+
+    return undefined;
+}
 
 /**
  * Get the component name from the file (React-specific).
@@ -62,11 +91,13 @@ function parseReactComponent(project, filePath) {
     const defaultValues = extractDefaultValues(sourceFile);
     const props = extractPropertiesFromInterface(interfaceDecl, sourceFile, rootPath, defaultValues);
     const displayName = getComponentName(sourceFile);
+    const deprecated = getComponentDeprecated(sourceFile, displayName);
 
-    return {
-        displayName,
-        props,
-    };
+    const result = { displayName, props };
+    if (deprecated !== undefined) {
+        result.deprecated = deprecated;
+    }
+    return result;
 }
 
 exports.createProject = createProject;

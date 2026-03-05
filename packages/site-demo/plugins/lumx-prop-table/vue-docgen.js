@@ -7,6 +7,7 @@ const {
     extractPropertiesFromInterface,
     extractDefaultValues,
     getJsDocFromDeclaration,
+    getJsDocDeprecatedFromDeclaration,
 } = require('./docgen.js');
 
 /**
@@ -177,6 +178,25 @@ function extractSlots(sourceFile) {
 }
 
 /**
+ * Get the @deprecated JSDoc tag from a Vue component's defineComponent variable declaration.
+ * @param {SourceFile} sourceFile - The source file
+ * @returns {string|undefined} - The deprecation reason, or undefined if not deprecated
+ */
+function getVueComponentDeprecated(sourceFile) {
+    for (const varDecl of sourceFile.getVariableDeclarations()) {
+        const initializer = varDecl.getInitializer();
+        if (!initializer || initializer.getKindName() !== 'CallExpression') continue;
+        if (initializer.getExpression().getText() !== 'defineComponent') continue;
+
+        // JSDoc is on the VariableStatement (parent of VariableDeclarationList)
+        const varStatement = varDecl.getParent()?.getParent();
+        const result = getJsDocDeprecatedFromDeclaration(varStatement);
+        if (result !== undefined) return result;
+    }
+    return undefined;
+}
+
+/**
  * Parse a Vue component file and extract props, events, and slots.
  *
  * @param {Project} project - The ts-morph project
@@ -200,13 +220,13 @@ function parseVueComponent(project, filePath) {
     const displayName = getVueComponentName(sourceFile);
     const events = extractEmits(sourceFile);
     const slots = extractSlots(sourceFile);
+    const deprecated = getVueComponentDeprecated(sourceFile);
 
-    return {
-        displayName,
-        props,
-        events,
-        slots,
-    };
+    const result = { displayName, props, events, slots };
+    if (deprecated !== undefined) {
+        result.deprecated = deprecated;
+    }
+    return result;
 }
 
 exports.createProject = createProject;
