@@ -168,15 +168,15 @@ export function setup({
             return (
                 <List itemPadding={itemPadding} style={{ border: '1px dashed red' }}>
                     <ListSection label="Actions">
-                        <ListItem size={itemSize} onItemSelected={onClick}>
+                        <ListItem size={itemSize} onClick={onClick}>
                             Edit
                         </ListItem>
-                        <ListItem size={itemSize} onItemSelected={onClick}>
+                        <ListItem size={itemSize} onClick={onClick}>
                             Duplicate
                         </ListItem>
                     </ListSection>
                     <ListSection icon={mdiAlert} label="Danger zone">
-                        <ListItem size={itemSize} onItemSelected={onClick}>
+                        <ListItem size={itemSize} onClick={onClick}>
                             Delete
                         </ListItem>
                     </ListSection>

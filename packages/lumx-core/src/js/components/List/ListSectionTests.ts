@@ -35,6 +35,11 @@ export default (renderOptions: SetupOptions<any>) => {
                 const { items } = setup({}, renderOptions);
                 expect(items?.tagName).toBe('UL');
             });
+
+            it('should render children inside the items list', () => {
+                const { items } = setup({ children: 'Child content' }, renderOptions);
+                expect(items).toHaveTextContent('Child content');
+            });
         });
 
         describe('Accessibility', () => {
