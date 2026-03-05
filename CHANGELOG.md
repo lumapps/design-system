@@ -27,6 +27,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/react`:
     -    `Popover`: added `closeMode` to `"unmount"` (default) or `"hide"` the popover when closed
+-   `@lumx/core`:
+    -    Added a new css entry point for components and utils
 
 ## [4.6.0][] - 2026-03-03
 

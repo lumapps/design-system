@@ -72,24 +72,30 @@ export default {
         {
             name: 'sass-builder',
             async buildEnd() {
-                const input = 'src/scss/lumx.scss';
-                const { css } = await sass.compileAsync(input, {
-                    style: 'expanded',
-                    importers: [
-                        {
-                            findFileUrl: (url) => new URL(import.meta.resolve(url)),
-                        },
-                    ],
-                });
+                const inputs = [
+                    'src/scss/lumx.scss',
+                    'src/scss/components-and-utils.scss',
+                ];
 
-                const { name } = path.parse(input);
-                const outputPath = path.resolve(DIST_PATH, `${name}.css`);
+                for (const input of inputs) {
+                    const { css } = await sass.compileAsync(input, {
+                        style: 'expanded',
+                        importers: [
+                            {
+                                findFileUrl: (url) => new URL(import.meta.resolve(url)),
+                            },
+                        ],
+                    });
 
-                await fs.mkdir(path.dirname(outputPath), { recursive: true });
+                    const { name } = path.parse(input);
+                    const outputPath = path.resolve(DIST_PATH, `${name}.css`);
 
-                const { css: postProcess } = await postcss(CONFIGS.postcss.plugins).process(css, { from: undefined });
-                await fs.writeFile(outputPath, postProcess);
-                console.log(`${path.relative(__dirname, input)} → ${path.relative(__dirname, DIST_PATH)}`);
+                    await fs.mkdir(path.dirname(outputPath), { recursive: true });
+
+                    const { css: postProcess } = await postcss(CONFIGS.postcss.plugins).process(css, { from: undefined });
+                    await fs.writeFile(outputPath, postProcess);
+                    console.log(`${path.relative(__dirname, input)} → ${path.relative(__dirname, DIST_PATH)}`);
+                }
             },
         },
     ],
