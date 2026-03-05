@@ -183,6 +183,8 @@ export interface ComponentDoc {
     props: Property[];
     events?: EventDoc[];
     slots?: SlotDoc[];
+    /** Component-level deprecation message from @deprecated JSDoc tag. */
+    deprecated?: string;
 }
 
 export interface PropTableProps {
@@ -197,6 +199,7 @@ export const PropTable: React.FC<PropTableProps> = ({ docs }) => {
     const componentName = componentDoc?.displayName;
     const events = componentDoc?.events;
     const slots = componentDoc?.slots;
+    const deprecated = componentDoc?.deprecated;
 
     if (!properties || !componentName) {
         return (
@@ -212,6 +215,13 @@ export const PropTable: React.FC<PropTableProps> = ({ docs }) => {
 
     return (
         <>
+            {deprecated !== undefined && (
+                <Message kind="warning" hasBackground className="lumx-spacing-margin-bottom-big">
+                    <Text as="p" typography="body1">
+                        <strong>Deprecated:</strong> {deprecated || 'This component is deprecated.'}
+                    </Text>
+                </Message>
+            )}
             <Table properties={others} />
             {forwardedProps.length ? (
                 <details>
