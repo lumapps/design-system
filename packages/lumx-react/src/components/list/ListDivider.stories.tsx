@@ -1,12 +1,18 @@
 import { withWrapper } from '@lumx/react/stories/decorators/withWrapper';
-import { List } from '@lumx/react';
+import { setup } from '@lumx/core/js/components/List/ListDividerStories';
+
+import { List } from '.';
 import { ListDivider } from './ListDivider';
+
+const { meta, ...stories } = setup({
+    component: ListDivider,
+    components: { List },
+    decorators: { withWrapper },
+});
 
 export default {
     title: 'LumX components/list/ListDivider',
-    component: ListDivider,
-    args: ListDivider.defaultProps,
-    decorators: [withWrapper({}, List)],
+    ...meta,
 };
 
-export const Default = {};
+export const Default = { ...stories.Default };

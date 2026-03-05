@@ -1,46 +1,32 @@
-import { Key, ReactNode, SyntheticEvent } from 'react';
+import { Key, SyntheticEvent } from 'react';
 
 import { Size } from '@lumx/react';
 import { useKeyboardListNavigation } from '@lumx/react/hooks/useKeyboardListNavigation';
 import { GenericProps } from '@lumx/react/utils/type';
-import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
+import {
+    List as UI,
+    ListProps as UIProps,
+    CLASSNAME,
+    COMPONENT_NAME,
+    DEFAULT_PROPS,
+} from '@lumx/core/js/components/List';
+import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 
 /**
  * Defines the props of the component.
  */
-export interface ListProps extends GenericProps {
-    /** List content (should be ListItem, ListSubheader or ListDivider). */
-    children: ReactNode;
+export interface ListProps extends GenericProps, ReactToJSX<UIProps> {
     /**
      * Whether the list items are clickable.
      * @deprecated not needed anymore.
      */
     isClickable?: boolean;
-    /** Item padding size. */
-    itemPadding?: Extract<Size, 'big' | 'huge'>;
     /** Tab index of the list. */
     tabIndex?: number;
     /** @deprecated not supported since v4.0.0 */
     onListItemSelected?(key: Key, index: number, evt: SyntheticEvent): void;
 }
-
-/**
- * Component display name.
- */
-const COMPONENT_NAME = 'List';
-
-/**
- * Component default class name and class prefix.
- */
-const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-list';
-const { block } = classNames.bem(CLASSNAME);
-
-/**
- * Component default props.
- */
-const DEFAULT_PROPS: Partial<ListProps> = {};
 
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 /**
@@ -51,23 +37,10 @@ const DEFAULT_PROPS: Partial<ListProps> = {};
  * @return React element.
  */
 const InternalList = forwardRef<ListProps, HTMLUListElement>((props, ref) => {
-    const { children, className, isClickable, itemPadding, onListItemSelected, ...forwardedProps } = props;
+    const { children, isClickable, onListItemSelected, itemPadding, ...forwardedProps } = props;
     const adjustedItemPadding = itemPadding ?? (isClickable ? Size.big : undefined);
 
-    return (
-        <ul
-            {...forwardedProps}
-            className={classNames.join(
-                className,
-                block({
-                    [`item-padding-${adjustedItemPadding}`]: Boolean(adjustedItemPadding),
-                }),
-            )}
-            ref={ref}
-        >
-            {children}
-        </ul>
-    );
+    return UI({ ...forwardedProps, ref, children, itemPadding: adjustedItemPadding });
 });
 InternalList.displayName = COMPONENT_NAME;
 InternalList.className = CLASSNAME;

@@ -1,5 +1,3 @@
-import type { ComponentProps } from 'react';
-
 import type { CommonRef, HasClassName, JSXElement, LumxClassName } from '../../types';
 import { classNames } from '../../utils';
 import { Icon } from '../Icon';
@@ -16,7 +14,7 @@ export interface ListSectionProps extends HasClassName {
     /** List items (should be ListItem, ListDivider, etc.). */
     children: JSXElement;
     /** Items wrapper forwarded props */
-    itemsWrapperProps?: ComponentProps<'ul'>;
+    itemsWrapperProps?: Record<string, any>;
     /** ID for the label element (used for aria-labelledby). */
     id: string;
     /** ref to the root element */
