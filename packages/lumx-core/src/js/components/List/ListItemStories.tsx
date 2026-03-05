@@ -30,6 +30,8 @@ export function setup({
 }>) {
     const meta = {
         component,
+        // When a custom render is provided (e.g. Vue slot mapping), use it as default render for all stories.
+        ...(ListItem !== component && { render: ListItem }),
         args: DEFAULT_PROPS,
         argTypes: {
             size: getSelectArgType(sizes),

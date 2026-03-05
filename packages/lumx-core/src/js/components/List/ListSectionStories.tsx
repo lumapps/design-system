@@ -56,9 +56,9 @@ export function setup({
     const AutoDividerEdgeCases = {
         render({ 'list.itemPadding': itemPadding, 'listItem.size': itemSize }: any) {
             return (
-                <div style={{ display: 'flex', gap: 32 }}>
+                <div style={{ display: 'flex', gap: '32px' }}>
                     <div>
-                        <p style={{ marginBottom: 8, fontWeight: 'bold' }}>Single section</p>
+                        <p style={{ marginBottom: '8px', fontWeight: 'bold' }}>Single section</p>
                         <List itemPadding={itemPadding} style={{ border: '1px dashed red' }}>
                             <ListSection label="Only section">
                                 <ListItem size={itemSize}>Item A</ListItem>
@@ -67,7 +67,7 @@ export function setup({
                     </div>
 
                     <div>
-                        <p style={{ marginBottom: 8, fontWeight: 'bold' }}>Two adjacent sections</p>
+                        <p style={{ marginBottom: '8px', fontWeight: 'bold' }}>Two adjacent sections</p>
                         <List itemPadding={itemPadding} style={{ border: '1px dashed red' }}>
                             <ListSection label="Section 1">
                                 <ListItem size={itemSize}>Item A</ListItem>
@@ -80,7 +80,7 @@ export function setup({
                     </div>
 
                     <div>
-                        <p style={{ marginBottom: 8, fontWeight: 'bold' }}>Three adjacent sections</p>
+                        <p style={{ marginBottom: '8px', fontWeight: 'bold' }}>Three adjacent sections</p>
                         <List itemPadding={itemPadding} style={{ border: '1px dashed red' }}>
                             <ListSection label="Section 1">
                                 <ListItem size={itemSize}>Item A</ListItem>
@@ -95,7 +95,7 @@ export function setup({
                     </div>
 
                     <div>
-                        <p style={{ marginBottom: 8, fontWeight: 'bold' }}>Sections separated by ListItem</p>
+                        <p style={{ marginBottom: '8px', fontWeight: 'bold' }}>Sections separated by ListItem</p>
                         <List itemPadding={itemPadding} style={{ border: '1px dashed red' }}>
                             <ListSection label="Section 1">
                                 <ListItem size={itemSize}>Item A</ListItem>
@@ -108,7 +108,7 @@ export function setup({
                     </div>
 
                     <div>
-                        <p style={{ marginBottom: 8, fontWeight: 'bold' }}>Sections separated by ListDivider</p>
+                        <p style={{ marginBottom: '8px', fontWeight: 'bold' }}>Sections separated by ListDivider</p>
                         <List itemPadding={itemPadding} style={{ border: '1px dashed red' }}>
                             <ListSection label="Section 1">
                                 <ListItem size={itemSize}>Item A</ListItem>

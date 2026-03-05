@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     -   Create the `Uploader` component
     -   Create the `GenericBlock` component
     -   Create the `InlineList` component
+    -   Create the `List` component family (`List`, `ListItem`, `ListItem.Action`, `ListSection`, `ListDivider`)
 
 ### Changed
 

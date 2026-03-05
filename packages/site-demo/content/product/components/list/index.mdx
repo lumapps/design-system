@@ -1,19 +1,30 @@
 ---
-frameworks: ['react']
+frameworks: ['react', 'vue']
 ---
 
-import * as DemoItemSizes from './react/item-sizes.tsx';
-import * as DemoItemPadding from './react/item-padding.tsx';
-import * as DemoClickable from './react/clickable.tsx';
-import * as DemoListSection from './react/list-section.tsx';
-import * as DemoItemLayout from './react/item-layout.tsx';
-import * as DemoAction from './react/item-action.tsx';
+import * as ReactDemoItemSizes from './react/item-sizes.tsx';
+import * as ReactDemoItemPadding from './react/item-padding.tsx';
+import * as ReactDemoClickable from './react/clickable.tsx';
+import * as ReactDemoListSection from './react/list-section.tsx';
+import * as ReactDemoItemLayout from './react/item-layout.tsx';
+import * as ReactDemoAction from './react/item-action.tsx';
+import * as VueDemoItemSizes from './vue/item-sizes.vue';
+import * as VueDemoItemPadding from './vue/item-padding.vue';
+import * as VueDemoClickable from './vue/clickable.vue';
+import * as VueDemoListSection from './vue/list-section.vue';
+import * as VueDemoItemLayout from './vue/item-layout.vue';
+import * as VueDemoAction from './vue/item-action.vue';
 import ReactList from 'lumx-docs:@lumx/react/components/list/List';
 import ReactListDivider from 'lumx-docs:@lumx/react/components/list/ListDivider';
 import ReactListItem from 'lumx-docs:@lumx/react/components/list/ListItem';
 import ReactListSection from 'lumx-docs:@lumx/react/components/list/ListSection';
 import ReactListSubheader from 'lumx-docs:@lumx/react/components/list/ListSubheader';
 import ReactListItemAction from 'lumx-docs:@lumx/react/components/list/ListItemAction';
+import VueList from 'lumx-docs:@lumx/vue/components/list/List';
+import VueListDivider from 'lumx-docs:@lumx/vue/components/list/ListDivider';
+import VueListItem from 'lumx-docs:@lumx/vue/components/list/ListItem';
+import VueListSection from 'lumx-docs:@lumx/vue/components/list/ListSection';
+import VueListItemAction from 'lumx-docs:@lumx/vue/components/list/ListItemAction';
 
 # List
 
@@ -26,7 +37,11 @@ The main section that can display simple text or multi-line text,
 the `before` section usually used to display an icon or thumbnail and the `after` section usually used to
 display icons or actions.
 
-<DemoBlock demo={{ react: DemoItemLayout }} orientation="horizontal" vAlign="space-around" />
+<DemoBlock
+    demo={{ react: ReactDemoItemLayout, vue: VueDemoItemLayout }}
+    orientation="horizontal"
+    vAlign="space-around"
+/>
 
 ## Item sizes
 
@@ -38,14 +53,18 @@ Favor those 3 sizes for lists with list items with consistent heights.
 `huge` list items have a `16px` vertical padding.\
 Use this size for any other cases.
 
-<DemoBlock demo={{ react: DemoItemSizes }} />
+<DemoBlock demo={{ react: ReactDemoItemSizes, vue: VueDemoItemSizes }} />
 
 ## Item padding
 
 The list horizontal padding has 2 sizes: `big` and `huge`.
 By default, there is no horizontal padding.
 
-<DemoBlock demo={{ react: DemoItemPadding }} orientation="horizontal" vAlign="space-around" />
+<DemoBlock
+    demo={{ react: ReactDemoItemPadding, vue: VueDemoItemPadding }}
+    orientation="horizontal"
+    vAlign="space-around"
+/>
 
 ## Clickable
 
@@ -53,19 +72,19 @@ List items can be made clickable either as a link or a button.\
 Clickable list items can then be disabled, highlighted or selected.
 Use clickable list items when users need to select one or more options in a list.
 
-<DemoBlock demo={{ react: DemoClickable }} />
+<DemoBlock demo={{ react: ReactDemoClickable, vue: VueDemoClickable }} />
 
 Use `ListItem.Action` to activate the [action area](../../utilities/action-area) pattern and allow
 nested interactive elements in `before` or `after` while keeping them accessible.
 
-<DemoBlock demo={{ react: DemoAction }} />
+<DemoBlock demo={{ react: ReactDemoAction, vue: VueDemoAction }} />
 
 ## List sections
 
 Use sections to group list items into labeled sections. Each section can have a `label` and an optional `icon`.
 Adjacent sections are automatically separated by a divider.
 
-<DemoBlock demo={{ react: DemoListSection }} />
+<DemoBlock demo={{ react: ReactDemoListSection, vue: VueDemoListSection }} />
 
 ### Accessibility concerns
 
@@ -116,19 +135,19 @@ a correct split of items in a list.
 
 ### List properties
 
-<PropTable docs={{ react: ReactList }} />
+<PropTable docs={{ react: ReactList, vue: VueList }} />
 
 ### ListItem properties
 
-<PropTable docs={{ react: ReactListItem }} />
+<PropTable docs={{ react: ReactListItem, vue: VueListItem }} />
 
 ### ListItem.Action properties
 
-<PropTable docs={{ react: ReactListItemAction }} />
+<PropTable docs={{ react: ReactListItemAction, vue: VueListItemAction }} />
 
 ### ListSection properties
 
-<PropTable docs={{ react: ReactListSection }} />
+<PropTable docs={{ react: ReactListSection, vue: VueListSection }} />
 
 ### ListSubheader properties
 
@@ -136,4 +155,4 @@ a correct split of items in a list.
 
 ### ListDivider properties
 
-<PropTable docs={{ react: ReactListDivider }} />
+<PropTable docs={{ react: ReactListDivider, vue: VueListDivider }} />
