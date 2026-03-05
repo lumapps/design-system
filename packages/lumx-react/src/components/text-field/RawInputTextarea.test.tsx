@@ -1,10 +1,13 @@
+import React from 'react';
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { getByClassName } from '@lumx/react/testing/utils/queries';
+import { vi } from 'vitest';
+import BaseRawInputTextareaTests from '@lumx/core/js/components/TextField/RawInputTextareaTests';
 import { INPUT_NATIVE_CLASSNAME } from '@lumx/core/js/components/TextField/constants';
 
-import { RawInputTextarea, RawInputTextareaProps, DEFAULT_PROPS } from './RawInputTextarea';
+import { RawInputTextarea, RawInputTextareaProps } from './RawInputTextarea';
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -17,22 +20,34 @@ const setup = (propsOverride: Partial<RawInputTextareaProps> = {}, { wrapper }: 
 };
 
 describe(`<${RawInputTextarea.displayName}>`, () => {
-    describe('Props', () => {
-        it('should render default', () => {
-            const { textarea } = setup();
-            expect(textarea).toBeInTheDocument();
-            expect(textarea?.tagName).toBe('TEXTAREA');
-            expect(textarea).toHaveAttribute('rows', String(DEFAULT_PROPS.minimumRows));
-        });
+    // Run core tests
+    BaseRawInputTextareaTests({
+        render: (props: any) => {
+            // Map core props to React props
+            const { handleChange, rows, ...otherProps } = props;
+            const reactProps = {
+                ...otherProps,
+                onChange: handleChange,
+                // Note: if rows is provided, use it; otherwise let minimumRows default
+                ...(rows !== undefined && { minimumRows: rows }),
+            };
+            return render(<RawInputTextarea {...reactProps} />);
+        },
+        screen,
+    });
 
+    // React-specific tests
+    describe('React', () => {
         it('should render with custom minimumRows', () => {
             const { textarea } = setup({ minimumRows: 5 });
             expect(textarea).toHaveAttribute('rows', '5');
         });
 
-        it('should render with placeholder', () => {
-            const { textarea } = setup({ placeholder: 'Test placeholder' });
-            expect(textarea).toHaveAttribute('placeholder', 'Test placeholder');
+        it('should forward ref', () => {
+            const ref = React.createRef<HTMLTextAreaElement>();
+            setup({ ref } as any);
+            expect(ref.current).toHaveClass(INPUT_NATIVE_CLASSNAME);
+            expect(ref.current).toBeInstanceOf(HTMLTextAreaElement);
         });
     });
 
