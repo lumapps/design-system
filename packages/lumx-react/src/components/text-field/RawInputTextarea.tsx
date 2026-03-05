@@ -1,24 +1,23 @@
-import { ComponentProps, ChangeEventHandler, SyntheticEvent, useRef, useCallback } from 'react';
+import { SyntheticEvent, useRef } from 'react';
 
 import { Theme, useTheme } from '@lumx/react';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
 import { useMergeRefs } from '@lumx/react/utils/react/mergeRefs';
-import type { HasClassName, HasTheme } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
-import { INPUT_NATIVE_CLASSNAME } from '@lumx/core/js/components/TextField/constants';
+import {
+    RawInputTextarea as UI,
+    RawInputTextareaProps as UIProps,
+    DEFAULT_PROPS as CORE_DEFAULT_PROPS,
+} from '@lumx/core/js/components/TextField/RawInputTextarea';
+
+import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 
 import { useFitRowsToContent } from './useFitRowsToContent';
-
-const { block } = classNames.bem(INPUT_NATIVE_CLASSNAME);
-
-type NativeTextareaProps = ComponentProps<'textarea'>;
 
 /**
  * Defines the props of the component.
  */
-export interface RawInputTextareaProps extends Omit<NativeTextareaProps, 'value' | 'onChange'>, HasTheme, HasClassName {
+export interface RawInputTextareaProps extends ReactToJSX<UIProps, 'rows'> {
     minimumRows?: number;
-    value?: string;
     onChange?: (value: string, name?: string, event?: SyntheticEvent) => void;
 }
 
@@ -26,7 +25,7 @@ export interface RawInputTextareaProps extends Omit<NativeTextareaProps, 'value'
  * Component default props.
  */
 export const DEFAULT_PROPS: Partial<RawInputTextareaProps> = {
-    minimumRows: 2,
+    minimumRows: CORE_DEFAULT_PROPS.rows,
 };
 
 /**
@@ -36,40 +35,22 @@ export const DEFAULT_PROPS: Partial<RawInputTextareaProps> = {
 export const RawInputTextarea = forwardRef<Omit<RawInputTextareaProps, 'type'>, HTMLTextAreaElement>((props, ref) => {
     const defaultTheme = useTheme() || Theme.light;
     const {
-        className,
         theme = defaultTheme,
         minimumRows = DEFAULT_PROPS.minimumRows as number,
         value,
-        name,
         onChange,
-        ...forwardedProps
+        ...restOfProps
     } = props;
     const textareaRef = useRef<HTMLTextAreaElement>(null);
 
     const rows = useFitRowsToContent(minimumRows, textareaRef, value);
 
-    const handleChange: ChangeEventHandler<HTMLTextAreaElement> = useCallback(
-        (evt) => {
-            onChange?.(evt.target.value, name, evt);
-        },
-        [onChange, name],
-    );
-
-    return (
-        <textarea
-            {...forwardedProps}
-            name={name}
-            className={classNames.join(
-                className,
-                block({
-                    [`theme-${theme}`]: Boolean(theme),
-                    textarea: true,
-                }),
-            )}
-            ref={useMergeRefs(ref, textareaRef)}
-            onChange={handleChange}
-            value={value}
-            rows={rows}
-        />
-    );
+    return UI({
+        ...restOfProps,
+        ref: useMergeRefs(ref, textareaRef),
+        theme,
+        value,
+        rows,
+        handleChange: onChange,
+    });
 });
