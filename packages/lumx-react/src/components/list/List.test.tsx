@@ -2,7 +2,7 @@ import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 
 import { render, screen } from '@testing-library/react';
 import { queryByClassName } from '@lumx/react/testing/utils/queries';
-import { Size } from '@lumx/react';
+import BaseListTests from '@lumx/core/js/components/List/ListTests';
 import { List, ListProps } from './List';
 
 const CLASSNAME = List.className as string;
@@ -18,21 +18,10 @@ const setup = (props: Partial<ListProps> = {}) => {
 };
 
 describe(`<${List.displayName}>`, () => {
-    describe('Props', () => {
-        it('should render children', () => {
-            setup({ children: <li data-testid="item">My Item</li> });
-            expect(screen.getByTestId('item')).toBeInTheDocument();
-        });
-
-        it('should apply itemPadding class', () => {
-            const { list } = setup({ itemPadding: Size.big });
-            expect(list).toHaveClass(`${CLASSNAME}--item-padding-big`);
-        });
-
-        it('should apply tabIndex', () => {
-            const { list } = setup({ tabIndex: 0 });
-            expect(list).toHaveAttribute('tabindex', '0');
-        });
+    // Run core tests
+    BaseListTests({
+        render: (props: ListProps) => render(<List {...(props as any)} />),
+        screen,
     });
 
     // Common tests suite.

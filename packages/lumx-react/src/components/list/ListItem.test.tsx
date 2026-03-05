@@ -3,9 +3,9 @@ import { render, screen } from '@testing-library/react';
 import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
-import { Size } from '@lumx/react';
 import React from 'react';
 import { DisabledStateProvider } from '@lumx/react/utils/disabled';
+import BaseListItemTests from '@lumx/core/js/components/List/ListItemTests';
 import { ListItem, ListItemProps } from '.';
 
 const CLASSNAME = ListItem.className as string;
@@ -22,301 +22,262 @@ const setup = (props: Partial<ListItemProps> = {}, { wrapper }: SetupRenderOptio
 };
 
 describe(`<${ListItem.displayName}>`, () => {
-    describe('Props', () => {
-        it('should render default', () => {
-            const { listItem, link, wrapper: listItemWrapper } = setup({ children: 'Label' });
-            expect(listItem).toBeInTheDocument();
-            expect(link).not.toBeInTheDocument();
-            expect(listItemWrapper).toBeInTheDocument();
-            expect(listItemWrapper?.tagName).toBe('DIV');
-            expect(listItem).toHaveTextContent('Label');
-        });
-
-        it('should render as a button', () => {
-            const { link } = setup({ children: 'Label', onItemSelected: vi.fn() });
-            expect(screen.getByRole('button', { name: 'Label' })).toBeInTheDocument();
-            expect(link?.tagName).toBe('BUTTON');
-        });
-
-        it('should render as a link', () => {
-            const { link } = setup({ children: 'Label', linkProps: { href: '#' } });
-            expect(screen.getByRole('link', { name: 'Label' })).toBeInTheDocument();
-            expect(link?.tagName).toBe('A');
-            expect(link).toHaveAttribute('href', '#');
-        });
-
-        it('should render before and after content', () => {
-            const { listItem } = setup({
-                children: 'Label',
-                before: <span data-testid="before">Before</span>,
-                after: <span data-testid="after">After</span>,
-            });
-            expect(screen.getByTestId('before')).toBeInTheDocument();
-            expect(screen.getByTestId('after')).toBeInTheDocument();
-            expect(listItem.querySelector(`.${CLASSNAME}__before`)).toBeInTheDocument();
-            expect(listItem.querySelector(`.${CLASSNAME}__after`)).toBeInTheDocument();
-        });
-
-        it('should apply highlighted and selected classes to link', () => {
-            const { link } = setup({
-                children: 'Label',
-                onItemSelected: vi.fn(),
-                isHighlighted: true,
-                isSelected: true,
-            });
-            expect(link).toHaveClass(`${CLASSNAME}__link--is-highlighted`);
-            expect(link).toHaveClass(`${CLASSNAME}__link--is-selected`);
-        });
-
-        it('should apply size class', () => {
-            const { listItem } = setup({ children: 'Label', size: Size.big });
-            expect(listItem).toHaveClass(`${CLASSNAME}--size-big`);
-        });
-
-        it('should forward multiple refs (button mode)', () => {
-            const listItemRef = React.createRef<HTMLLIElement>();
-            const linkRef = React.createRef<HTMLButtonElement>();
-            setup({
-                children: 'Label',
-                onItemSelected: vi.fn(),
-                ref: listItemRef,
-                linkRef: linkRef as any,
-            });
-            expect(listItemRef.current).toBeInstanceOf(HTMLLIElement);
-            expect(linkRef.current).toBeInstanceOf(HTMLButtonElement);
-        });
-
-        it('should forward multiple refs (link mode)', () => {
-            const listItemRef = React.createRef<HTMLLIElement>();
-            const linkRef = React.createRef<HTMLAnchorElement>();
-            setup({
-                children: 'Label',
-                linkProps: { href: '#' },
-                ref: listItemRef,
-                linkRef,
-            });
-            expect(listItemRef.current).toBeInstanceOf(HTMLLIElement);
-            expect(linkRef.current).toBeInstanceOf(HTMLAnchorElement);
-        });
+    // Run core tests (mapping handleClick -> onItemSelected for React;
+    // onItemSelected is used instead of onClick to avoid useDisableStateProps stripping onClick when disabled)
+    BaseListItemTests({
+        render: ({ handleClick, ...props }: any) => render(<ListItem {...props} onItemSelected={handleClick} />),
+        screen,
     });
 
-    describe('Click handling', () => {
-        it('should call onItemSelected when button is clicked', async () => {
-            const onItemSelected = vi.fn();
-            setup({ children: 'Label', onItemSelected });
-            await userEvent.click(screen.getByRole('button', { name: 'Label' }));
-            expect(onItemSelected).toHaveBeenCalledTimes(1);
-        });
-
-        it('should call onItemSelected when link is clicked', async () => {
-            const onItemSelected = vi.fn();
-            setup({ children: 'Label', linkProps: { href: '#' }, onItemSelected });
-            await userEvent.click(screen.getByRole('link', { name: 'Label' }));
-            expect(onItemSelected).toHaveBeenCalledTimes(1);
-        });
-    });
-
-    describe('linkAs prop', () => {
-        it('should render as a custom component when linkAs is provided with href', () => {
-            const CustomLink = React.forwardRef(({ children, ...props }: any, ref: any) => (
-                <a data-custom="true" ref={ref} {...props}>
-                    {children}
-                </a>
-            ));
-            const { link } = setup({
-                children: 'Label',
-                linkAs: CustomLink,
-                linkProps: { href: '/custom' },
+    // React-specific tests
+    describe('React', () => {
+        describe('onItemSelected alias', () => {
+            it('should render as a button via onItemSelected', () => {
+                const { link } = setup({ children: 'Label', onItemSelected: vi.fn() });
+                expect(screen.getByRole('button', { name: 'Label' })).toBeInTheDocument();
+                expect(link?.tagName).toBe('BUTTON');
             });
-            expect(link).toBeInTheDocument();
-            expect(link).toHaveAttribute('data-custom', 'true');
-            expect(link).toHaveAttribute('href', '/custom');
-        });
 
-        it('should render as clickable when only linkAs is provided', () => {
-            const CustomLink = React.forwardRef(({ children, ...props }: any, ref: any) => (
-                <a data-custom="true" ref={ref} {...props}>
-                    {children}
-                </a>
-            ));
-            const { link } = setup({
-                children: 'Label',
-                linkAs: CustomLink,
+            it('should call onItemSelected when button is clicked', async () => {
+                const onItemSelected = vi.fn();
+                setup({ children: 'Label', onItemSelected });
+                await userEvent.click(screen.getByRole('button', { name: 'Label' }));
+                expect(onItemSelected).toHaveBeenCalledTimes(1);
             });
-            expect(link).toBeInTheDocument();
-            expect(link).toHaveAttribute('data-custom', 'true');
-        });
-    });
 
-    describe('linkProps forwarding', () => {
-        it('should forward target and rel to the link', () => {
-            const { link } = setup({
-                children: 'Label',
-                linkProps: { href: 'https://example.com', target: '_blank', rel: 'noopener noreferrer' },
+            it('should call onItemSelected when link is clicked', async () => {
+                const onItemSelected = vi.fn();
+                setup({ children: 'Label', linkProps: { href: '#' }, onItemSelected });
+                await userEvent.click(screen.getByRole('link', { name: 'Label' }));
+                expect(onItemSelected).toHaveBeenCalledTimes(1);
             });
-            expect(link).toHaveAttribute('target', '_blank');
-            expect(link).toHaveAttribute('rel', 'noopener noreferrer');
-        });
-    });
-
-    describe('Disabled state', () => {
-        it('should render disabled list item button', async () => {
-            const onItemSelected = vi.fn();
-            const { link } = setup({ children: 'Label', isDisabled: true, onItemSelected });
-            expect(link).toHaveAttribute('aria-disabled', 'true');
-            if (link) await userEvent.click(link);
-            expect(onItemSelected).not.toHaveBeenCalled();
         });
 
-        it('should render disabled list item link', async () => {
-            const onItemSelected = vi.fn();
-            const { link } = setup({
-                children: 'Label',
-                isDisabled: true,
-                linkProps: { href: 'https://example.com' },
-                onItemSelected,
+        describe('Disabled state', () => {
+            it('should still render as a button with isDisabled but block onClick', async () => {
+                const onClick = vi.fn();
+                const { link } = setup({ children: 'Label', isDisabled: true, onClick });
+                expect(link).toHaveAttribute('aria-disabled', 'true');
+                await userEvent.click(link as HTMLElement);
+                expect(onClick).not.toHaveBeenCalled();
+                expect(link?.tagName).toBe('BUTTON');
             });
-            expect(link).toHaveAttribute('aria-disabled', 'true');
-            if (link) await userEvent.click(link);
-            expect(onItemSelected).not.toHaveBeenCalled();
-        });
 
-        it('should render aria-disabled list item button', async () => {
-            const onItemSelected = vi.fn();
-            const { link } = setup({ children: 'Label', 'aria-disabled': true, onItemSelected });
-            expect(link).toHaveAttribute('aria-disabled', 'true');
-            if (link) await userEvent.click(link);
-            expect(onItemSelected).not.toHaveBeenCalled();
-        });
-
-        it('should render aria-disabled list item link', async () => {
-            const onItemSelected = vi.fn();
-            const { link } = setup({
-                children: 'Label',
-                'aria-disabled': true,
-                linkProps: { href: 'https://example.com' },
-                onItemSelected,
+            it('should not call onItemSelected when button is disabled', async () => {
+                const onItemSelected = vi.fn();
+                const { link } = setup({ children: 'Label', isDisabled: true, onItemSelected });
+                if (link) await userEvent.click(link);
+                expect(onItemSelected).not.toHaveBeenCalled();
             });
-            expect(link).toHaveAttribute('aria-disabled', 'true');
-            if (link) await userEvent.click(link);
-            expect(onItemSelected).not.toHaveBeenCalled();
-        });
 
-        it('should render disabled from DisabledStateProvider context (button)', async () => {
-            const onItemSelected = vi.fn();
-            const { link } = setup(
-                { children: 'Label', onItemSelected },
-                {
-                    wrapper: ({ children }) => (
-                        <DisabledStateProvider state="disabled">{children}</DisabledStateProvider>
-                    ),
-                },
-            );
-            expect(link).toHaveAttribute('aria-disabled', 'true');
-            if (link) await userEvent.click(link);
-            expect(onItemSelected).not.toHaveBeenCalled();
-        });
-
-        it('should render disabled from DisabledStateProvider context (link)', async () => {
-            const onItemSelected = vi.fn();
-            const { link } = setup(
-                {
+            it('should render isDisabled link with aria-disabled', () => {
+                const { link } = setup({
                     children: 'Label',
+                    isDisabled: true,
+                    linkProps: { href: 'https://example.com' },
+                });
+                expect(link).toHaveAttribute('aria-disabled', 'true');
+            });
+
+            it('should not call onItemSelected when link is disabled', async () => {
+                const onItemSelected = vi.fn();
+                const { link } = setup({
+                    children: 'Label',
+                    isDisabled: true,
                     linkProps: { href: 'https://example.com' },
                     onItemSelected,
-                },
-                {
-                    wrapper: ({ children }) => (
-                        <DisabledStateProvider state="disabled">{children}</DisabledStateProvider>
-                    ),
-                },
-            );
-            expect(link).toHaveAttribute('aria-disabled', 'true');
-            if (link) await userEvent.click(link);
-            expect(onItemSelected).not.toHaveBeenCalled();
-        });
-    });
+                });
+                if (link) await userEvent.click(link);
+                expect(onItemSelected).not.toHaveBeenCalled();
+            });
 
-    describe('ListItem.Action', () => {
-        it('should render action as a button with default action class', async () => {
-            const onClick = vi.fn();
-            render(
-                <ListItem>
-                    <ListItem.Action onClick={onClick}>Action label</ListItem.Action>
-                </ListItem>,
-            );
-            const button = screen.getByRole('button', { name: 'Action label' });
-            expect(button).toBeInTheDocument();
-            expect(button).toHaveClass('lumx-action-area__action');
-            await userEvent.click(button);
-            expect(onClick).toHaveBeenCalledTimes(1);
-        });
+            it('should still render as a button with aria-disabled but block onClick', async () => {
+                const onClick = vi.fn();
+                const { link } = setup({ children: 'Label', 'aria-disabled': true, onClick });
+                expect(link).toHaveAttribute('aria-disabled', 'true');
+                await userEvent.click(link as HTMLElement);
+                expect(onClick).not.toHaveBeenCalled();
+                expect(link?.tagName).toBe('BUTTON');
+            });
 
-        it('should render action as a link with default action class', () => {
-            render(
-                <ListItem>
-                    <ListItem.Action as="a" href="/test">
-                        Link action
-                    </ListItem.Action>
-                </ListItem>,
-            );
-            const link = screen.getByRole('link', { name: 'Link action' });
-            expect(link).toBeInTheDocument();
-            expect(link).toHaveClass('lumx-action-area__action');
-            expect(link).toHaveAttribute('href', '/test');
-        });
+            it('should not call onItemSelected when button is aria-disabled', async () => {
+                const onItemSelected = vi.fn();
+                const { link } = setup({ children: 'Label', 'aria-disabled': true, onItemSelected });
+                if (link) await userEvent.click(link);
+                expect(onItemSelected).not.toHaveBeenCalled();
+            });
 
-        it('should render wrapper as div (non-clickable) when Action is used', () => {
-            render(
-                <ListItem>
-                    <ListItem.Action onClick={vi.fn()}>Action</ListItem.Action>
-                </ListItem>,
-            );
-            const listItem = getByClassName(document.body, CLASSNAME);
-            const wrapper = queryByClassName(listItem, `${CLASSNAME}__wrapper`);
-            const link = queryByClassName(listItem, `${CLASSNAME}__link`);
-            expect(wrapper).toBeInTheDocument();
-            expect(wrapper?.tagName).toBe('DIV');
-            expect(link).not.toBeInTheDocument();
+            it('should render aria-disabled link with aria-disabled', () => {
+                const { link } = setup({
+                    children: 'Label',
+                    'aria-disabled': true,
+                    linkProps: { href: 'https://example.com' },
+                });
+                expect(link).toHaveAttribute('aria-disabled', 'true');
+            });
+
+            it('should not call onItemSelected when link is aria-disabled', async () => {
+                const onItemSelected = vi.fn();
+                const { link } = setup({
+                    children: 'Label',
+                    'aria-disabled': true,
+                    linkProps: { href: 'https://example.com' },
+                    onItemSelected,
+                });
+                if (link) await userEvent.click(link);
+                expect(onItemSelected).not.toHaveBeenCalled();
+            });
         });
 
-        it('should render action with secondary actions in after slot', async () => {
-            const onPrimary = vi.fn();
-            const onSecondary = vi.fn();
-            render(
-                <ListItem
-                    after={
-                        <button type="button" onClick={onSecondary}>
-                            Secondary
-                        </button>
-                    }
-                >
-                    <ListItem.Action onClick={onPrimary}>Primary</ListItem.Action>
-                </ListItem>,
-            );
-            const primary = screen.getByRole('button', { name: 'Primary' });
-            const secondary = screen.getByRole('button', { name: 'Secondary' });
-            expect(primary).toBeInTheDocument();
-            expect(secondary).toBeInTheDocument();
+        describe('linkAs prop', () => {
+            it('should render as a custom component when linkAs is provided with href', () => {
+                const CustomLink = React.forwardRef(({ children, ...props }: any, ref: any) => (
+                    <a data-custom="true" ref={ref} {...props}>
+                        {children}
+                    </a>
+                ));
+                const { link } = setup({
+                    children: 'Label',
+                    linkAs: CustomLink,
+                    linkProps: { href: '/custom' },
+                });
+                expect(link).toBeInTheDocument();
+                expect(link).toHaveAttribute('data-custom', 'true');
+                expect(link).toHaveAttribute('href', '/custom');
+            });
 
-            await userEvent.click(primary);
-            expect(onPrimary).toHaveBeenCalledTimes(1);
-            expect(onSecondary).not.toHaveBeenCalled();
-
-            await userEvent.click(secondary);
-            expect(onSecondary).toHaveBeenCalledTimes(1);
+            it('should render as clickable when only linkAs is provided', () => {
+                const CustomLink = React.forwardRef(({ children, ...props }: any, ref: any) => (
+                    <a data-custom="true" ref={ref} {...props}>
+                        {children}
+                    </a>
+                ));
+                const { link } = setup({
+                    children: 'Label',
+                    linkAs: CustomLink,
+                });
+                expect(link).toBeInTheDocument();
+                expect(link).toHaveAttribute('data-custom', 'true');
+            });
         });
 
-        it('should forward ref to the action element', () => {
-            const actionRef = React.createRef<HTMLButtonElement>();
-            render(
-                <ListItem>
-                    <ListItem.Action ref={actionRef} onClick={vi.fn()}>
-                        Action
-                    </ListItem.Action>
-                </ListItem>,
-            );
-            expect(actionRef.current).toBeInstanceOf(HTMLButtonElement);
+        describe('DisabledStateProvider context', () => {
+            it('should render disabled from context (button)', async () => {
+                const onItemSelected = vi.fn();
+                const { link } = setup(
+                    { children: 'Label', onItemSelected },
+                    {
+                        wrapper: ({ children }) => (
+                            <DisabledStateProvider state="disabled">{children}</DisabledStateProvider>
+                        ),
+                    },
+                );
+                expect(link).toHaveAttribute('aria-disabled', 'true');
+                if (link) await userEvent.click(link);
+                expect(onItemSelected).not.toHaveBeenCalled();
+            });
+
+            it('should render disabled from context (link)', async () => {
+                const onItemSelected = vi.fn();
+                const { link } = setup(
+                    {
+                        children: 'Label',
+                        linkProps: { href: 'https://example.com' },
+                        onItemSelected,
+                    },
+                    {
+                        wrapper: ({ children }) => (
+                            <DisabledStateProvider state="disabled">{children}</DisabledStateProvider>
+                        ),
+                    },
+                );
+                expect(link).toHaveAttribute('aria-disabled', 'true');
+                if (link) await userEvent.click(link);
+                expect(onItemSelected).not.toHaveBeenCalled();
+            });
+        });
+
+        describe('ListItem.Action', () => {
+            it('should render action as a button with default action class', async () => {
+                const onClick = vi.fn();
+                render(
+                    <ListItem>
+                        <ListItem.Action onClick={onClick}>Action label</ListItem.Action>
+                    </ListItem>,
+                );
+                const button = screen.getByRole('button', { name: 'Action label' });
+                expect(button).toBeInTheDocument();
+                expect(button).toHaveClass('lumx-action-area__action');
+                await userEvent.click(button);
+                expect(onClick).toHaveBeenCalledTimes(1);
+            });
+
+            it('should render action as a link with default action class', () => {
+                render(
+                    <ListItem>
+                        <ListItem.Action as="a" href="/test">
+                            Link action
+                        </ListItem.Action>
+                    </ListItem>,
+                );
+                const link = screen.getByRole('link', { name: 'Link action' });
+                expect(link).toBeInTheDocument();
+                expect(link).toHaveClass('lumx-action-area__action');
+                expect(link).toHaveAttribute('href', '/test');
+            });
+
+            it('should render wrapper as div (non-clickable) when Action is used', () => {
+                render(
+                    <ListItem>
+                        <ListItem.Action onClick={vi.fn()}>Action</ListItem.Action>
+                    </ListItem>,
+                );
+                const listItem = getByClassName(document.body, CLASSNAME);
+                const wrapper = queryByClassName(listItem, `${CLASSNAME}__wrapper`);
+                const link = queryByClassName(listItem, `${CLASSNAME}__link`);
+                expect(wrapper).toBeInTheDocument();
+                expect(wrapper?.tagName).toBe('DIV');
+                expect(link).not.toBeInTheDocument();
+            });
+
+            it('should render action with secondary actions in after slot', async () => {
+                const onPrimary = vi.fn();
+                const onSecondary = vi.fn();
+                render(
+                    <ListItem
+                        after={
+                            <button type="button" onClick={onSecondary}>
+                                Secondary
+                            </button>
+                        }
+                    >
+                        <ListItem.Action onClick={onPrimary}>Primary</ListItem.Action>
+                    </ListItem>,
+                );
+                const primary = screen.getByRole('button', { name: 'Primary' });
+                const secondary = screen.getByRole('button', { name: 'Secondary' });
+                expect(primary).toBeInTheDocument();
+                expect(secondary).toBeInTheDocument();
+
+                await userEvent.click(primary);
+                expect(onPrimary).toHaveBeenCalledTimes(1);
+                expect(onSecondary).not.toHaveBeenCalled();
+
+                await userEvent.click(secondary);
+                expect(onSecondary).toHaveBeenCalledTimes(1);
+            });
+
+            it('should forward ref to the action element', () => {
+                const actionRef = React.createRef<HTMLButtonElement>();
+                render(
+                    <ListItem>
+                        <ListItem.Action ref={actionRef} onClick={vi.fn()}>
+                            Action
+                        </ListItem.Action>
+                    </ListItem>,
+                );
+                expect(actionRef.current).toBeInstanceOf(HTMLButtonElement);
+            });
         });
     });
 

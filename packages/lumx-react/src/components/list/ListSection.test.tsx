@@ -26,14 +26,6 @@ describe(`<${ListSection.displayName}>`, () => {
         screen,
     });
 
-    // React-specific tests
-    describe('React', () => {
-        it('should render children inside the items list', () => {
-            setup({ children: <li data-testid="child-item">Child</li> });
-            expect(screen.getByTestId('child-item')).toBeInTheDocument();
-        });
-    });
-
     // Common tests suite.
     commonTestsSuiteRTL(setup, {
         baseClassName: CLASSNAME,

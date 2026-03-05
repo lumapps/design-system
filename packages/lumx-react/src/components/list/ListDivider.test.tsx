@@ -1,7 +1,8 @@
 import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
 
 import { queryByClassName } from '@lumx/react/testing/utils/queries';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import BaseListDividerTests from '@lumx/core/js/components/List/ListDividerTests';
 import { ListDivider, ListDividerProps } from './ListDivider';
 
 const CLASSNAME = ListDivider.className as string;
@@ -13,6 +14,12 @@ const setup = (props: Partial<ListDividerProps> = {}) => {
 };
 
 describe(`<${ListDivider.displayName}>`, () => {
+    // Run core tests
+    BaseListDividerTests({
+        render: (props: ListDividerProps) => render(<ListDivider {...(props as any)} />),
+        screen,
+    });
+
     // Common tests suite.
     commonTestsSuiteRTL(setup, {
         baseClassName: CLASSNAME,
