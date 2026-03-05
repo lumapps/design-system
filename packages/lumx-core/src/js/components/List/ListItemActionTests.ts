@@ -1,6 +1,9 @@
 import userEvent from '@testing-library/user-event';
 
+import { getByClassName } from '../../../testing/queries';
 import { SetupOptions } from '../../../testing';
+
+const CLASSNAME = 'lumx-action-area__action';
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -8,7 +11,9 @@ import { SetupOptions } from '../../../testing';
 export const setup = (propsOverride: any = {}, { render, screen, ...options }: SetupOptions<any>) => {
     const props = { children: 'Label', ...propsOverride };
     render(props, options);
-    return { props, screen };
+
+    const listItemAction = getByClassName(document.body, CLASSNAME);
+    return { props, listItemAction, screen };
 };
 
 export default (renderOptions: SetupOptions<any>) => {

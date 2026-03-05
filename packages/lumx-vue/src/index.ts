@@ -16,6 +16,7 @@ export * from './components/icon';
 export * from './components/input-helper';
 export * from './components/input-label';
 export * from './components/link';
+export * from './components/list';
 export * from './components/message';
 export * from './components/popover';
 export * from './components/popover-dialog';

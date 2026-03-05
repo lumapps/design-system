@@ -106,7 +106,7 @@ export const ListItem = (props: ListItemProps) => {
                         <div className={element('content')}>{children}</div>
                         {after && <div className={element('after')}>{after}</div>}
                     </>
-                ),
+                ) as JSXElement,
             })}
         </li>
     );
