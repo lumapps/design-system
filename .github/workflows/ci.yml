@@ -101,3 +101,7 @@ jobs:
                   no_jira: true
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    after-all:
+        needs: [lint, test, type-check, test-storybook, Commit-message-validation]
+        uses: ./.github/workflows/pr-automation.yml
