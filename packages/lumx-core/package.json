@@ -49,6 +49,7 @@
             "default": "./js/utils/index.js"
         },
         "./lumx.css": "./lumx.css",
+        "./components-and-utils.css": "./components-and-utils.css",
         "./css/*": "./css/*",
         "./scss/*": "./scss/*"
     },
