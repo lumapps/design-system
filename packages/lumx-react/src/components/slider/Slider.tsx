@@ -123,7 +123,7 @@ export const Slider = forwardRef<SliderProps, HTMLDivElement>((props, ref) => {
         const available = [0];
         const percentStep = 1 / ((max - min) / steps);
         let ptr = 0;
-        while (ptr + percentStep < 1) {
+        while (ptr + percentStep <= 1) {
             ptr += percentStep;
             available.push(ptr);
         }
