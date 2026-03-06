@@ -1,7 +1,7 @@
-import { ReactNode, Ref, RefObject, SyntheticEvent, useRef, useState } from 'react';
+import { Ref, RefObject, SyntheticEvent, useRef, useState } from 'react';
 
 import { IconButton, IconButtonProps, InputLabelProps, Theme } from '@lumx/react';
-import { GenericProps, HasTheme, HasAriaDisabled } from '@lumx/react/utils/type';
+import { GenericProps } from '@lumx/react/utils/type';
 import { mergeRefs } from '@lumx/react/utils/react/mergeRefs';
 import { useId } from '@lumx/react/hooks/useId';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
@@ -10,61 +10,33 @@ import { useDisableStateProps } from '@lumx/react/utils/disabled/useDisableState
 
 import { CLASSNAME, COMPONENT_NAME } from '@lumx/core/js/components/TextField/constants';
 
-import { TextField as UI, generateAccessibilityIds } from '@lumx/core/js/components/TextField/TextField';
+import {
+    TextField as UI,
+    TextFieldProps as UIProps,
+    TextFieldPropsToOverride,
+    generateAccessibilityIds,
+} from '@lumx/core/js/components/TextField/TextField';
+import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 import { RawInputText } from './RawInputText';
 import { RawInputTextarea } from './RawInputTextarea';
 
 /**
  * Defines the props of the component.
  */
-export interface TextFieldProps extends GenericProps, HasTheme, HasAriaDisabled {
-    /** Chip Group to be rendered before the main text input. */
-    chips?: ReactNode;
+export interface TextFieldProps extends GenericProps, ReactToJSX<UIProps, TextFieldPropsToOverride> {
     /** Props to pass to the clear button (minus those already set by the TextField props). If not specified, the button won't be displayed. */
     clearButtonProps?: Pick<IconButtonProps, 'label'> &
         Omit<IconButtonProps, 'label' | 'onClick' | 'icon' | 'emphasis'>;
-    /** Error message. */
-    error?: string | ReactNode;
-    /** Whether we force the focus style or not. */
-    forceFocusStyle?: boolean;
-    /** Whether the text field is displayed with error style or not. */
-    hasError?: boolean;
-    /** Additional element to put at the end of the text field. */
-    afterElement?: ReactNode;
-    /** Helper text. */
-    helper?: string | ReactNode;
-    /** Icon (SVG path). */
-    icon?: string;
-    /** Native input id property (generated if not provided to link the label element). */
-    id?: string;
     /** Reference to the <input> or <textarea> element. */
     inputRef?: Ref<HTMLInputElement | HTMLTextAreaElement>;
-    /** Whether the component is disabled or not. */
-    isDisabled?: boolean;
-    /** Whether the component is required or not. */
-    isRequired?: boolean;
-    /** Whether the text field is displayed with valid style or not. */
-    isValid?: boolean;
-    /** Label text. */
-    label?: string;
     /** Additional label props. */
     labelProps?: InputLabelProps;
-    /** Max string length the input accepts (constrains the input and displays a character counter). */
-    maxLength?: number;
-    /** Minimum number of rows displayed in multiline mode (requires `multiline` to be enabled). */
-    minimumRows?: number;
-    /** Whether the text field is a textarea or an input. */
-    multiline?: boolean;
     /** Native input name property. */
     name?: string;
-    /** Placeholder text. */
-    placeholder?: string;
     /** Reference to the wrapper. */
     textFieldRef?: Ref<HTMLDivElement>;
     /** Native input type (only when `multiline` is disabled). */
     type?: React.ComponentProps<'input'>['type'];
-    /** Value. */
-    value?: string;
     /** On blur callback. */
     onBlur?(event: React.FocusEvent): void;
     /** On change callback. */
