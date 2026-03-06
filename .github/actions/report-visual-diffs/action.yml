@@ -5,6 +5,9 @@ inputs:
     artifacts-dir:
         description: 'Path to the downloaded artifacts directory'
         required: true
+    output-dir:
+        description: 'Path to write the consolidated visual report'
+        required: true
     run-id:
         description: 'GitHub Actions run ID (for artifact download link)'
         required: true
@@ -21,31 +24,20 @@ runs:
               node-version-file: '.nvmrc'
               cache: 'yarn'
 
-        - name: 'Install @lumx/actions dependencies'
+        - name: 'Install dependencies'
           shell: bash
-          run: yarn workspaces focus @lumx/actions
+          run: yarn workspaces focus @lumx/visual-diffs
 
-        - name: 'Generate cross-framework diffs'
-          id: cross-framework-diff
-          uses: actions/github-script@v7
-          with:
-              script: |
-                  await require('${{ github.action_path }}/cross-framework-diff.js')({
-                      artifactsDir: '${{ inputs.artifacts-dir }}',
-                  });
-
-        - name: 'Generate visual diff reports'
-          id: generate-reports
-          uses: actions/github-script@v7
-          with:
-              script: |
-                  await require('${{ github.action_path }}/generate-report.js')({
-                      artifactsDir: '${{ inputs.artifacts-dir }}',
-                      runId: '${{ inputs.run-id }}',
-                      owner: context.repo.owner,
-                      repo: context.repo.repo,
-                      prNumber: context.issue.number,
-                  });
+        - name: 'Generate visual diffs report'
+          shell: bash
+          run: >
+              node node_modules/@lumx/visual-diffs/index.js
+              --artifacts-dir=${{ inputs.artifacts-dir }}
+              --output-dir=${{ inputs.output-dir }}
+              --run-id=${{ inputs.run-id }}
+              --owner=${{ github.repository_owner }}
+              --repo=${{ github.event.repository.name }}
+              --pr-number=${{ github.event.pull_request.number }}
 
         - name: 'Upload images and report to wiki'
           continue-on-error: true
@@ -54,7 +46,7 @@ runs:
           shell: bash
           run: >
               bash ${{ github.action_path }}/upload-wiki-images.sh
-              ${{ inputs.artifacts-dir }}
+              ${{ inputs.output-dir }}
               ${{ github.repository }}
               ${{ github.event.pull_request.number }}
               ${{ inputs.run-id }}
@@ -66,5 +58,5 @@ runs:
                   await require('${{ github.action_path }}/publish-comment.js')({
                       github,
                       context,
-                      commentBodyPath: 'comment-body.md',
+                      commentBodyPath: '${{ inputs.output-dir }}/comment-body.md',
                   });

@@ -18,10 +18,7 @@
             "!{projectRoot}/reports/**/*",
             "!{projectRoot}/node_modules/**/*"
         ],
-        "storybookFiles": [
-            "sourceFiles",
-            "{projectRoot}/.storybook/**/*"
-        ]
+        "storybookFiles": ["sourceFiles", "{projectRoot}/.storybook/**/*"]
     },
     "targetDefaults": {
         "build": {
@@ -53,6 +50,16 @@
         "test:storybook": {
             "inputs": ["storybookFiles"],
             "outputs": ["{projectRoot}/reports/coverage"],
+            "cache": true
+        },
+        "test:storybook:visual": {
+            "inputs": ["storybookFiles"],
+            "outputs": ["{projectRoot}/__vis__"],
+            "cache": true
+        },
+        "visual-diffs": {
+            "dependsOn": [{ "projects": ["@lumx/react", "@lumx/vue"], "target": "test:storybook:visual" }],
+            "outputs": ["{workspaceRoot}/visual-diffs"],
             "cache": true
         },
         "start:storybook": { "cache": false },

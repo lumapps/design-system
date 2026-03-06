@@ -1,5 +1,9 @@
 const fs = require('fs/promises');
 const path = require('path');
+const { execFile } = require('child_process');
+const { promisify } = require('util');
+
+const execFileAsync = promisify(execFile);
 
 const { md } = require('./md');
 const { findFiles, extractRelativePath, normalizeScreenshotPath } = require('./utils');
@@ -18,11 +22,11 @@ function stripScreenshotSuffix(name) {
  * Map a list of file paths into sorted screenshot entries.
  * @param {string[]} files
  * @param {string} markerDir
- * @returns {Array<{ relPath: string }>}
+ * @returns {Array<{ relPath: string, srcPath: string }>}
  */
 function toEntries(files, markerDir) {
     return files
-        .map((f) => ({ relPath: extractRelativePath(f, markerDir) }))
+        .map((f) => ({ relPath: extractRelativePath(f, markerDir), srcPath: f }))
         .sort((a, b) => a.relPath.localeCompare(b.relPath));
 }
 
@@ -66,6 +70,9 @@ async function readBaselineManifest(artifactRoot) {
 /**
  * Scan a single package artifact directory and categorize its screenshots.
  *
+ * Each entry includes `relPath` (relative screenshot path) and `srcPath` (absolute source file).
+ * Diff entries are augmented with `baselineSrcPath` and `resultSrcPath` for the corresponding images.
+ *
  * @param {string} artifactRoot - Path to the package artifact directory
  * @returns {Promise<{ diffs: Array, newScreenshots: Array, unchangedScreenshots: Array, deletedScreenshots: Array, hasBaselines: boolean }>}
  */
@@ -80,9 +87,18 @@ async function scanPackage(artifactRoot) {
     const cachedBaselines = await readBaselineManifest(artifactRoot);
 
     const baselineEntries = toEntries(baselinePngs, '__baselines__');
-    const resultRelPaths = new Set(resultPngs.map((f) => extractRelativePath(f, '__results__')));
+    const resultEntries = toEntries(resultPngs, '__results__');
+    const resultRelPaths = new Set(resultEntries.map((e) => e.relPath));
 
-    const diffs = toEntries(diffPngs, '__diffs__');
+    // Build lookup maps: relPath -> srcPath
+    const baselineSrcMap = new Map(baselineEntries.map((e) => [e.relPath, e.srcPath]));
+    const resultSrcMap = new Map(resultEntries.map((e) => [e.relPath, e.srcPath]));
+
+    const diffs = toEntries(diffPngs, '__diffs__').map((e) => ({
+        ...e,
+        baselineSrcPath: baselineSrcMap.get(e.relPath),
+        resultSrcPath: resultSrcMap.get(e.relPath),
+    }));
     const diffRelPaths = new Set(diffs.map((e) => e.relPath));
 
     // New screenshots: in baselines after tests but NOT in cached baselines manifest
@@ -288,6 +304,32 @@ function buildCrossFrameworkHeading(crossFramework, { headingLevel = 2 } = {}) {
 }
 
 /**
+ * Build the unchanged screenshots section with a zip download link and a collapsed list of names.
+ * @param {Object} pkg
+ * @param {string} imageUrlPrefix
+ * @returns {string[]}
+ */
+function buildUnchangedSection(pkg, imageUrlPrefix) {
+    if (pkg.unchangedScreenshots.length === 0) return [];
+    const zipUrl = `${imageUrlPrefix}/${pkg.label}-unchanged.zip`;
+    const content = [
+        md.link('Download all unchanged screenshots (.zip)', zipUrl),
+        '',
+    ];
+    for (const [storyFile, groupEntries] of groupByStoryFile(pkg.unchangedScreenshots)) {
+        const names = groupEntries.map((e) => e.shortName).join(', ');
+        content.push(`- ${md.bold(storyFile.split('/').join(' > '))}: ${names}`);
+    }
+    return [
+        ...md.details(
+            `${md.heading(3, 'Unchanged Screenshots')} (${pkg.unchangedScreenshots.length})`,
+            ...content,
+        ),
+        '',
+    ];
+}
+
+/**
  * Build footer links.
  * @param {Object} options
  * @param {string} [options.reportUrl]
@@ -300,6 +342,22 @@ function buildFooter({ reportUrl, artifactUrl }) {
     if (reportUrl) links.push(md.link('View full report', reportUrl));
     if (artifactUrl) links.push(md.link('Download artifacts', artifactUrl));
     return [md.rule, '', links.join(' · ')];
+}
+
+/**
+ * Build a colocated image URL for a screenshot entry.
+ * All images for a given screenshot live in the same directory:
+ *   {prefix}/{label}/{normalizedRelPath without .png}/{variant}.png
+ *
+ * @param {string} imageUrlPrefix
+ * @param {string} section - Section name (e.g. 'react', 'vue', 'cross-framework')
+ * @param {{ relPath: string }} entry
+ * @param {string} variant - Image variant (e.g. 'baseline', 'current', 'diff', 'react', 'vue')
+ * @returns {string}
+ */
+function colocatedImageUrl(imageUrlPrefix, section, entry, variant) {
+    const dir = normalizeScreenshotPath(entry.relPath).replace(/\.png$/, '');
+    return `${imageUrlPrefix}/${section}/${dir}/${variant}.png`;
 }
 
 /**
@@ -325,28 +383,23 @@ function buildFullReport(packages, options) {
 
         if (!pkg.hasBaselines) continue;
 
-        const url = (entry, imageType) => `${imageUrlPrefix}/${pkg.label}/${imageType}/${entry.relPath}`;
+        const url = (entry, variant) => colocatedImageUrl(imageUrlPrefix, pkg.label, entry, variant);
 
         lines.push(
             ...buildGroupedSection(md.heading(3, 'Differences'), pkg.diffs, (e) =>
                 renderImageEntry(e, [
-                    { label: 'Baseline', url: url(e, '__baselines__') },
-                    { label: 'Current', url: url(e, '__results__') },
-                    { label: 'Diff', url: url(e, '__diffs__') },
+                    { label: 'Baseline', url: url(e, 'baseline') },
+                    { label: 'Current', url: url(e, 'current') },
+                    { label: 'Diff', url: url(e, 'diff') },
                 ]),
             ),
             ...buildGroupedSection(md.heading(3, 'New Screenshots'), pkg.newScreenshots, (e) =>
-                renderImageEntry(e, [{ label: 'Current', url: url(e, '__baselines__') }]),
+                renderImageEntry(e, [{ label: 'Current', url: url(e, 'current') }]),
             ),
             ...buildGroupedSection(md.heading(3, 'Deleted Screenshots'), pkg.deletedScreenshots, (e) =>
-                renderImageEntry(e, [{ label: 'Previous', url: url(e, '__baselines__') }]),
+                renderImageEntry(e, [{ label: 'Previous', url: url(e, 'baseline') }]),
             ),
-            ...buildGroupedSection(
-                md.heading(3, 'Unchanged Screenshots'),
-                pkg.unchangedScreenshots,
-                (e) => renderImageEntry(e, [{ label: 'Current', url: url(e, '__baselines__') }]),
-                { collapsed: true },
-            ),
+            ...buildUnchangedSection(pkg, imageUrlPrefix),
             md.rule,
         );
     }
@@ -357,11 +410,11 @@ function buildFullReport(packages, options) {
         if (crossFramework.diffs.length > 0) {
             lines.push(
                 ...buildGroupedSection(md.heading(3, 'Differences'), crossFramework.diffs, (entry) => {
-                    const cfUrl = (type) => `${imageUrlPrefix}/cross-framework/${type}/${entry.relPath}`;
+                    const url = (variant) => colocatedImageUrl(imageUrlPrefix, 'cross-framework', entry, variant);
                     return renderImageEntry(entry, [
-                        { label: 'React', url: cfUrl('__react__') },
-                        { label: 'Vue', url: cfUrl('__vue__') },
-                        { label: 'Diff', url: cfUrl('__diffs__') },
+                        { label: 'React', url: url('react') },
+                        { label: 'Vue', url: url('vue') },
+                        { label: 'Diff', url: url('diff') },
                     ]);
                 }),
             );
@@ -402,16 +455,139 @@ function buildSummaryReport(packages, options) {
 }
 
 /**
+ * Copy a file to a destination, creating parent directories as needed.
+ * @param {string} srcPath - Source file path
+ * @param {string} destPath - Destination file path
+ */
+async function copyFile(srcPath, destPath) {
+    await fs.mkdir(path.dirname(destPath), { recursive: true });
+    await fs.copyFile(srcPath, destPath);
+}
+
+/**
+ * Compute the colocated destination path for a screenshot entry.
+ * Strips the .png extension from the relPath to create a directory, then appends {variant}.png.
+ *
+ * @param {string} outputDir - Root output directory
+ * @param {string} section - Section name (e.g. 'react', 'vue', 'cross-framework')
+ * @param {string} relPath - Relative screenshot path (e.g. 'components/button/Button.stories.tsx/base-auto.png')
+ * @param {string} variant - Image variant name (e.g. 'baseline', 'current', 'diff')
+ * @returns {string}
+ */
+function colocatedPath(outputDir, section, relPath, variant) {
+    const dir = normalizeScreenshotPath(relPath).replace(/\.png$/, '');
+    return path.join(outputDir, section, dir, `${variant}.png`);
+}
+
+/**
+ * Consolidate all visual diff images into a single colocated output directory.
+ *
+ * Output structure:
+ *   {outputDir}/
+ *     {react,vue}/
+ *       {story-path}/{screenshot-name}/
+ *         baseline.png   — previous baseline (diffs, deleted, unchanged)
+ *         current.png    — current result (diffs, new, unchanged)
+ *         diff.png       — pixel diff (diffs only)
+ *     cross-framework/
+ *       {story-path}/{screenshot-name}/
+ *         react.png
+ *         vue.png
+ *         diff.png
+ *
+ * @param {Array} packages - Scanned package data (with srcPath on entries)
+ * @param {Object|null} crossFramework - Cross-framework diff data
+ * @param {string} artifactsDir - Path to the raw artifacts directory
+ * @param {string} outputDir - Path to write the consolidated output
+ */
+async function consolidateImages(packages, crossFramework, artifactsDir, outputDir) {
+    console.log(`Consolidating images into: ${outputDir}`);
+    await fs.mkdir(outputDir, { recursive: true });
+
+    const copies = [];
+    const unchangedZips = [];
+
+    // Per-framework images
+    for (const pkg of packages) {
+        if (!pkg.hasBaselines) continue;
+        const dest = (entry, variant) => colocatedPath(outputDir, pkg.label, entry.relPath, variant);
+
+        // Diffs: baseline + current + diff
+        for (const entry of pkg.diffs) {
+            copies.push(copyFile(entry.srcPath, dest(entry, 'diff')));
+            if (entry.baselineSrcPath) copies.push(copyFile(entry.baselineSrcPath, dest(entry, 'baseline')));
+            if (entry.resultSrcPath) copies.push(copyFile(entry.resultSrcPath, dest(entry, 'current')));
+        }
+
+        // New screenshots: current only (from baselines, since vitest-plugin-vis writes new baselines)
+        for (const entry of pkg.newScreenshots) {
+            copies.push(copyFile(entry.srcPath, dest(entry, 'current')));
+        }
+
+        // Deleted screenshots: baseline only
+        for (const entry of pkg.deletedScreenshots) {
+            copies.push(copyFile(entry.srcPath, dest(entry, 'baseline')));
+        }
+
+        // Unchanged screenshots: bundled into a single zip per framework
+        if (pkg.unchangedScreenshots.length > 0) {
+            const zipPath = path.join(outputDir, `${pkg.label}-unchanged.zip`);
+            unchangedZips.push({
+                label: pkg.label,
+                zipPath,
+                entries: pkg.unchangedScreenshots,
+            });
+        }
+    }
+
+    // Cross-framework images (already colocated by cross-framework-diff.js)
+    const crossFwSrcDir = path.join(artifactsDir, 'cross-framework-diffs');
+    try {
+        await fs.access(crossFwSrcDir);
+        const crossFwFiles = await findFiles(crossFwSrcDir, (f) => f.endsWith('.png'));
+        for (const srcFile of crossFwFiles) {
+            // Preserve the relative path within cross-framework-diffs/
+            const rel = path.relative(crossFwSrcDir, srcFile);
+            copies.push(copyFile(srcFile, path.join(outputDir, 'cross-framework', rel)));
+        }
+    } catch {
+        // No cross-framework diffs directory
+    }
+
+    await Promise.all(copies);
+    console.log(`  Copied ${copies.length} files`);
+
+    // Create zip archives for unchanged screenshots
+    for (const { label, zipPath, entries } of unchangedZips) {
+        // Create a temp directory with the colocated structure, then zip it
+        const tempDir = path.join(outputDir, `.tmp-${label}-unchanged`);
+        await fs.mkdir(tempDir, { recursive: true });
+        await Promise.all(
+            entries.map((entry) => {
+                const destPath = colocatedPath(tempDir, label, entry.relPath, 'current');
+                return copyFile(entry.srcPath, destPath);
+            }),
+        );
+        // Resolve zipPath to absolute so it works regardless of cwd
+        const absZipPath = path.resolve(zipPath);
+        await execFileAsync('zip', ['-r', '-q', absZipPath, label], { cwd: tempDir });
+        console.log(`  Zipped ${entries.length} unchanged ${label} screenshots into ${path.basename(zipPath)}`);
+        await fs.rm(tempDir, { recursive: true, force: true });
+    }
+}
+
+/**
  * Main entry point for generating reports.
  *
  * @param {Object} params
  * @param {string} params.artifactsDir - Path to downloaded artifacts
+ * @param {string} params.outputDir - Path to write the consolidated visual report
  * @param {string} params.runId - GitHub Actions run ID
  * @param {string} params.owner - Repository owner
  * @param {string} params.repo - Repository name
  * @param {number} params.prNumber - Pull request number
  */
-async function main({ artifactsDir, runId, owner, repo, prNumber }) {
+async function main({ artifactsDir, outputDir, runId, owner, repo, prNumber }) {
     console.log(`Scanning artifacts in: ${artifactsDir}`);
 
     // 1. Scan artifacts
@@ -427,14 +603,6 @@ async function main({ artifactsDir, runId, owner, repo, prNumber }) {
         );
     }
 
-    // 2. Build URLs
-    const imageUrlPrefix = `https://raw.githubusercontent.com/wiki/${owner}/${repo}/pr-${prNumber}/visual-reports`;
-    const reportFileName = `Visual-Reports-PR-${prNumber}`;
-    const reportUrl = `https://github.com/${owner}/${repo}/wiki/${reportFileName}`;
-    const prUrl = `https://github.com/${owner}/${repo}/pull/${prNumber}`;
-    const artifactUrl = `https://github.com/${owner}/${repo}/actions/runs/${runId}`;
-    const baseOptions = { imageUrlPrefix, prUrl, prNumber, artifactUrl, crossFramework };
-
     // Log cross-framework results
     if (crossFramework) {
         console.log(
@@ -445,15 +613,26 @@ async function main({ artifactsDir, runId, owner, repo, prNumber }) {
         console.log('  Cross-framework: no manifest found (skipped)');
     }
 
-    // 3. Build full report (for wiki) with images
+    // 2. Consolidate all images into a single colocated output directory
+    await consolidateImages(packages, crossFramework, artifactsDir, outputDir);
+
+    // 3. Build URLs
+    const imageUrlPrefix = `https://raw.githubusercontent.com/wiki/${owner}/${repo}/pr-${prNumber}/visual-diffs`;
+    const reportFileName = `Visual-Reports-PR-${prNumber}`;
+    const reportUrl = `https://github.com/${owner}/${repo}/wiki/${reportFileName}`;
+    const prUrl = `https://github.com/${owner}/${repo}/pull/${prNumber}`;
+    const artifactUrl = `https://github.com/${owner}/${repo}/actions/runs/${runId}`;
+    const baseOptions = { imageUrlPrefix, prUrl, prNumber, artifactUrl, crossFramework };
+
+    // 4. Build full report (for wiki) with images
     const fullReport = buildFullReport(packages, baseOptions);
 
-    // 4. Build PR comment (summary only: stats + links, no images)
+    // 5. Build PR comment (summary only: stats + links, no images)
     const commentBody = buildSummaryReport(packages, { ...baseOptions, reportUrl });
 
-    // 5. Write outputs
-    const reportPath = path.join(artifactsDir, `${reportFileName}.md`);
-    const commentPath = 'comment-body.md';
+    // 6. Write outputs
+    const reportPath = path.join(outputDir, `${reportFileName}.md`);
+    const commentPath = path.join(outputDir, 'comment-body.md');
 
     await Promise.all([fs.writeFile(reportPath, fullReport, 'utf8'), fs.writeFile(commentPath, commentBody, 'utf8')]);
 
