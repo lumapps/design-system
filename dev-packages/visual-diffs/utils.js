@@ -3,17 +3,38 @@ const path = require('path');
 
 /**
  * Find all files under a directory matching a predicate.
+ * Follows symlinks to directories (Node's recursive readdir does not).
  * @param {string} dir
  * @param {(filePath: string) => boolean} predicate
  * @returns {Promise<string[]>}
  */
 async function findFiles(dir, predicate) {
     try {
-        const entries = await fsPromises.readdir(dir, { withFileTypes: true, recursive: true });
-        return entries
-            .filter((e) => !e.isDirectory())
-            .map((e) => path.join(e.parentPath || e.path, e.name))
-            .filter(predicate);
+        const results = [];
+        const queue = [dir];
+        while (queue.length > 0) {
+            const current = queue.shift();
+            const entries = await fsPromises.readdir(current, { withFileTypes: true });
+            for (const entry of entries) {
+                const fullPath = path.join(current, entry.name);
+                if (entry.isDirectory() || entry.isSymbolicLink()) {
+                    // Follow symlinks by checking if target is a directory
+                    try {
+                        const stat = await fsPromises.stat(fullPath);
+                        if (stat.isDirectory()) {
+                            queue.push(fullPath);
+                            continue;
+                        }
+                    } catch {
+                        continue;
+                    }
+                }
+                if (!entry.isDirectory() && predicate(fullPath)) {
+                    results.push(fullPath);
+                }
+            }
+        }
+        return results;
     } catch {
         return [];
     }

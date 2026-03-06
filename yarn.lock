@@ -2940,8 +2940,6 @@ __metadata:
   dependencies:
     "@actions/core": "npm:^3.0.0"
     "@actions/github": "npm:^9.0.0"
-    pixelmatch: "npm:^7.0.0"
-    sharp: "npm:^0.32.6"
   languageName: unknown
   linkType: soft
 
@@ -3082,6 +3080,17 @@ __metadata:
     "@vitest/browser-playwright": "npm:^4.0.18"
     storybook-addon-vis: "npm:^3.1.2"
     vitest: "npm:^4.0.18"
+  languageName: unknown
+  linkType: soft
+
+"@lumx/visual-diffs@workspace:dev-packages/visual-diffs":
+  version: 0.0.0-use.local
+  resolution: "@lumx/visual-diffs@workspace:dev-packages/visual-diffs"
+  dependencies:
+    pixelmatch: "npm:^7.0.0"
+    sharp: "npm:^0.32.6"
+  bin:
+    visual-diffs: index.js
   languageName: unknown
   linkType: soft
 
