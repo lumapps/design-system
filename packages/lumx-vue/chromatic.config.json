@@ -5,5 +5,5 @@
     "buildScriptName": "build:storybook",
     "zip": true,
     "onlyChanged": true,
-    "autoAcceptChanges": "master"
+    "autoAcceptChanges": true
 }

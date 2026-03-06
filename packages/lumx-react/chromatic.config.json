@@ -6,5 +6,5 @@
     "zip": true,
     "onlyChanged": true,
     "externals": ["packages/site-demo/static/**"],
-    "autoAcceptChanges": "master"
+    "autoAcceptChanges": true
 }
