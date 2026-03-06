@@ -17,5 +17,6 @@ design_system.xpr
 build-storybook.log
 .eslintcache
 cross-framework-diffs
+/visual-diffs
 .nx/cache
 .nx/workspace-data

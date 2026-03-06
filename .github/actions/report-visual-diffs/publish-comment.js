@@ -1,6 +1,6 @@
 const fs = require('fs/promises');
 
-const { md } = require('./md');
+const { md } = require('@lumx/visual-diffs/md');
 
 const COMMENT_MARKER = '<!-- vis-report -->';
 
