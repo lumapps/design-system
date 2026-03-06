@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   `@lumx/react`:
+    -   `Slider`: fix last step unreachable when (max-min)/steps is exactly representable in floating point
+
 ### Changed
 
 -   `@lumx/core`:

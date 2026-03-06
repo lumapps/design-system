@@ -68,6 +68,14 @@ describe(`<${Slider.displayName}>`, () => {
             fireEvent.mouseDown(slider!, { clientX: 50, pageX: 50 });
             expect(onChange).toHaveBeenCalledWith(50, undefined, expect.anything());
         });
+
+        it('should allow reaching the last step value (max)', () => {
+            const onChange = vi.fn();
+            const { slider } = setup({ onChange, min: 0, max: 100, steps: 25 });
+            // Simulate click at 100% (the last step)
+            fireEvent.mouseDown(slider!, { clientX: 100, pageX: 100 });
+            expect(onChange).toHaveBeenCalledWith(100, undefined, expect.anything());
+        });
     });
 
     // Common tests suite.

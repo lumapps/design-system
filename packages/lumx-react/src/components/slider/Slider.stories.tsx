@@ -31,7 +31,19 @@ export const WithLabelAndHelper = {
 };
 
 /**
- * With steps
+ * With steps when (max-min)/steps is exactly representable in floating point
+ */
+export const SliderWithExactDivisibleSteps = {
+    args: {
+        min: 0,
+        max: 5,
+        value: 1,
+        steps: 1,
+    },
+};
+
+/**
+ * With 5 steps and
  */
 export const WithSteps = {
     args: { steps: 5 },
