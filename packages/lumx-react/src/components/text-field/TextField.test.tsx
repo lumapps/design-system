@@ -3,18 +3,12 @@ import { Mock } from 'vitest';
 
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 import { render, screen } from '@testing-library/react';
-import {
-    getByClassName,
-    getByTagName,
-    queryAllByClassName,
-    queryByClassName,
-    queryByTagName,
-} from '@lumx/react/testing/utils/queries';
-import partition from 'lodash/partition';
+import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import userEvent from '@testing-library/user-event';
 
 import { isFocusVisible } from '@lumx/core/js/utils/browser/isFocusVisible';
 import { createRef } from 'react';
+import BaseTextFieldTests from '@lumx/core/js/components/TextField/Tests';
 import { TextField, TextFieldProps } from './TextField';
 
 const CLASSNAME = TextField.className as string;
@@ -29,12 +23,10 @@ const setup = (propsOverride: Partial<TextFieldProps> = {}, { wrapper }: SetupRe
     const { container } = render(<TextField {...props} />, { wrapper });
 
     const element = getByClassName(container, CLASSNAME);
-    const inputNative = (queryByTagName(container, 'textarea') || getByTagName(container, 'input')) as
+    const clearButton = queryByClassName(container, 'lumx-text-field__input-clear');
+    const inputNative = (document.querySelector('textarea') || document.querySelector('input')) as
         | HTMLTextAreaElement
         | HTMLInputElement;
-    const helpers = queryAllByClassName(container, 'lumx-text-field__helper');
-    const [[helper], [error]] = partition(helpers, (h) => !h.className.includes('lumx-input-helper--color-red'));
-    const clearButton = queryByClassName(container, 'lumx-text-field__input-clear');
 
     return {
         props,
@@ -42,141 +34,32 @@ const setup = (propsOverride: Partial<TextFieldProps> = {}, { wrapper }: SetupRe
         container,
         element,
         inputNative,
-        error,
-        helper,
     };
 };
 
 describe(`<${TextField.displayName}>`, () => {
     (isFocusVisible as Mock).mockReturnValue(false);
 
-    describe('Render', () => {
-        it('should render defaults', () => {
-            const inputRef = createRef<HTMLInputElement>();
-            const { element, inputNative } = setup({ id: 'fixedId', inputRef });
-            expect(element).toBeInTheDocument();
-
-            expect(element).not.toHaveClass(`${CLASSNAME}--is-valid`);
-            expect(element).not.toHaveClass(`${CLASSNAME}--has-error`);
-            expect(element).not.toHaveClass(`${CLASSNAME}--has-label`);
-            expect(element).not.toHaveClass(`${CLASSNAME}--is-disabled`);
-            expect(element).not.toHaveClass(`${CLASSNAME}--has-placeholder`);
-            expect(element).not.toHaveClass(`${CLASSNAME}--is-focus`);
-            expect(element).not.toHaveClass(`${CLASSNAME}--has-icon`);
-
-            expect(element).toHaveClass(`${CLASSNAME}--theme-light`);
-            expect(inputNative.tagName).toBe('INPUT');
-            expect(inputRef.current).toBe(inputNative);
-        });
-
-        it('should render textarea', () => {
-            const inputRef = createRef<HTMLTextAreaElement>();
-            const { element, inputNative } = setup({ id: 'fixedId', multiline: true, inputRef });
-            expect(element).toBeInTheDocument();
-
-            expect(inputNative.tagName).toBe('TEXTAREA');
-            expect(inputRef.current).toBe(inputNative);
-        });
+    // Run core tests
+    BaseTextFieldTests({
+        render: (props: TextFieldProps) => render(<TextField {...props} />),
+        screen,
     });
 
-    describe('Props', () => {
-        it('should add all class names (except has-error)', () => {
-            const modifiedProps = {
-                icon: 'icon',
-                isDisabled: true,
-                isValid: true,
-                label: 'test',
-                placeholder: 'test',
-            };
-            const { element } = setup(modifiedProps);
-
-            expect(element.className).toEqual(
-                'lumx-text-field lumx-text-field--has-icon lumx-text-field--has-input lumx-text-field--has-label lumx-text-field--has-placeholder lumx-text-field--is-disabled lumx-text-field--is-valid lumx-text-field--theme-light',
-            );
+    // React-specific tests
+    describe('React', () => {
+        it('should forward inputRef to input element', () => {
+            const inputRef = createRef<HTMLInputElement>();
+            render(<TextField id="fixedId" inputRef={inputRef} onChange={() => {}} />);
+            const inputNative = document.querySelector('input');
+            expect(inputRef.current).toBe(inputNative);
         });
 
-        it('should add "has-error" class name', () => {
-            const modifiedProps = { hasError: true };
-            const { element } = setup(modifiedProps);
-
-            expect(element.className).toEqual(
-                'lumx-text-field lumx-text-field--has-error lumx-text-field--has-input lumx-text-field--theme-light',
-            );
-        });
-
-        it('should have text as value', () => {
-            const value = 'test';
-            const { inputNative } = setup({ value });
-            expect(inputNative.value).toEqual(value);
-        });
-
-        it('should have no value', () => {
-            const value = undefined;
-            const { inputNative } = setup({ value });
-            expect(inputNative.value).toEqual('');
-        });
-
-        it('should have helper text', () => {
-            const { helper, inputNative } = setup({
-                helper: 'helper',
-                label: 'test',
-                placeholder: 'test',
-            });
-
-            expect(helper).toHaveTextContent('helper');
-            expect(inputNative).toHaveAccessibleDescription('helper');
-        });
-
-        it('should have error text', () => {
-            const { error, inputNative } = setup({
-                error: 'error',
-                hasError: true,
-                label: 'test',
-                placeholder: 'test',
-            });
-
-            expect(error).toHaveTextContent('error');
-            expect(inputNative).toHaveAttribute('aria-invalid', 'true');
-            expect(inputNative).toHaveAccessibleDescription('error');
-        });
-
-        it('should not have error text', () => {
-            const { error } = setup({
-                error: 'error',
-                hasError: false,
-                label: 'test',
-                placeholder: 'test',
-            });
-            expect(error).not.toBeDefined();
-        });
-
-        it('should have error and helper text', () => {
-            const { error, helper, inputNative } = setup({
-                error: 'error',
-                hasError: true,
-                helper: 'helper',
-                label: 'test',
-                placeholder: 'test',
-            });
-            expect(error).toHaveTextContent('error');
-            expect(helper).toHaveTextContent('helper');
-            expect(inputNative).toHaveAccessibleDescription('error helper');
-        });
-
-        it('should have error and helper text and custom aria describedby', () => {
-            const { error, helper, inputNative } = setup({
-                error: 'error',
-                hasError: true,
-                helper: 'helper',
-                label: 'test',
-                placeholder: 'test',
-                'aria-describedby': 'aria-description',
-            });
-            expect(error).toHaveTextContent('error');
-            expect(helper).toHaveTextContent('helper');
-            expect(inputNative).toHaveAttribute('aria-describedby', expect.stringContaining('aria-description'));
-            expect(inputNative).toHaveAttribute('aria-describedby', expect.stringContaining('text-field-error-'));
-            expect(inputNative).toHaveAttribute('aria-describedby', expect.stringContaining('text-field-helper-'));
+        it('should forward inputRef to textarea element', () => {
+            const inputRef = createRef<HTMLTextAreaElement>();
+            render(<TextField id="fixedId" multiline inputRef={inputRef} onChange={() => {}} />);
+            const inputNative = document.querySelector('textarea');
+            expect(inputRef.current).toBe(inputNative);
         });
 
         it('should render chips', () => {
@@ -190,19 +73,13 @@ describe(`<${TextField.displayName}>`, () => {
             expect(screen.getByTestId('after')).toBeInTheDocument();
             expect(container.querySelector(`.${CLASSNAME}__after-element`)).toBeInTheDocument();
         });
-
-        it('should render character counter', () => {
-            const { container } = setup({ maxLength: 100, value: 'test' });
-            const counter = container.querySelector(`.${CLASSNAME}__char-counter`);
-            expect(counter).toBeInTheDocument();
-            expect(counter).toHaveTextContent('96'); // 100 - 4
-        });
     });
 
     describe('Events', () => {
         it('should trigger `onChange` when text field is changed', async () => {
             const onChange = vi.fn();
-            const { inputNative } = setup({ value: '', name: 'name', onChange });
+            render(<TextField value="" name="name" onChange={onChange} />);
+            const inputNative = document.querySelector('input') as HTMLInputElement;
 
             await userEvent.tab();
             expect(inputNative).toHaveFocus();
@@ -249,23 +126,6 @@ describe(`<${TextField.displayName}>`, () => {
     });
 
     describe('Disabled state', () => {
-        it('should render with "isDisabled"', async () => {
-            const onChange = vi.fn();
-            const { element, inputNative } = setup({
-                label: 'Label',
-                isDisabled: true,
-                value: 'test',
-                onChange,
-            });
-
-            expect(element).toHaveClass('lumx-text-field--is-disabled');
-            expect(inputNative).toBeDisabled();
-
-            // Cannot type in disabled input.
-            await userEvent.type(inputNative, 'new value');
-            expect(onChange).not.toHaveBeenCalled();
-        });
-
         it('should not render clear button when disabled', () => {
             const { clearButton } = setup({
                 value: 'initial value',
@@ -275,25 +135,6 @@ describe(`<${TextField.displayName}>`, () => {
             expect(clearButton).not.toBeInTheDocument();
         });
 
-        it('should render with "aria-disabled"', async () => {
-            const onChange = vi.fn();
-            const { element, inputNative } = setup({
-                label: 'Label',
-                'aria-disabled': true,
-                value: 'test',
-                onChange,
-            });
-
-            expect(element).toHaveClass('lumx-text-field--is-disabled');
-            expect(inputNative).not.toBeDisabled();
-            expect(inputNative).toHaveAttribute('aria-disabled', 'true');
-            expect(inputNative).toHaveAttribute('readonly');
-
-            // Cannot type in readonly input.
-            await userEvent.type(inputNative, 'new value');
-            expect(onChange).not.toHaveBeenCalled();
-        });
-
         it('should not render clear button when aria-disabled', () => {
             const { clearButton } = setup({
                 value: 'initial value',
@@ -301,6 +142,30 @@ describe(`<${TextField.displayName}>`, () => {
                 'aria-disabled': true,
             });
             expect(clearButton).not.toBeInTheDocument();
+        });
+
+        it('should not allow typing when disabled', async () => {
+            const onChange = vi.fn();
+            render(<TextField label="Label" isDisabled value="test" onChange={onChange} />);
+            const inputNative = document.querySelector('input') as HTMLInputElement;
+
+            expect(inputNative).toBeDisabled();
+
+            await userEvent.type(inputNative, 'new value');
+            expect(onChange).not.toHaveBeenCalled();
+        });
+
+        it('should not allow typing when aria-disabled', async () => {
+            const onChange = vi.fn();
+            render(<TextField label="Label" aria-disabled value="test" onChange={onChange} />);
+            const inputNative = document.querySelector('input') as HTMLInputElement;
+
+            expect(inputNative).not.toBeDisabled();
+            expect(inputNative).toHaveAttribute('aria-disabled', 'true');
+            expect(inputNative).toHaveAttribute('readonly');
+
+            await userEvent.type(inputNative, 'new value');
+            expect(onChange).not.toHaveBeenCalled();
         });
     });
 
