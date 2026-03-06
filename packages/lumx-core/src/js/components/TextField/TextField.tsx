@@ -32,8 +32,9 @@ export interface TextFieldProps extends HasClassName, HasTheme, HasAriaDisabled 
     icon?: string;
     /** Native input id property (generated if not provided to link the label element). */
     id: string;
-    /** Generated text field id for accessibility attributes. */
+    /** Generated helper id for accessibility attributes. */
     helperId?: string;
+    /** Generated error id for accessibility attributes. */
     errorId?: string;
     /** Whether the component is required or not. */
     isRequired?: boolean;
@@ -64,6 +65,17 @@ export interface TextFieldProps extends HasClassName, HasTheme, HasAriaDisabled 
     /** Ref to the component root. */
     ref?: CommonRef;
 }
+
+export type TextFieldPropsToOverride =
+    | 'id'
+    | 'input'
+    | 'IconButton'
+    | 'labelProps'
+    | 'textFieldRef'
+    | 'clearButtonProps'
+    | 'helperId'
+    | 'errorId'
+    | 'isFocus';
 
 /**
  * Generate unique accessibility IDs for helper and error texts.

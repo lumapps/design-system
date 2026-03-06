@@ -48,6 +48,24 @@ describe(`<${TextField.displayName}>`, () => {
 
     // React-specific tests
     describe('React', () => {
+        describe('Clear button', () => {
+            it('should not render clear button when clearButtonProps is not provided', () => {
+                // Regression: the React wrapper used to always pass clearButtonProps (with onClick spread)
+                // even when undefined, causing the clear button to always appear.
+                const { clearButton } = setup({ value: 'some value', onChange: vi.fn() });
+                expect(clearButton).not.toBeInTheDocument();
+            });
+
+            it('should render clear button when clearButtonProps is provided', () => {
+                const { clearButton } = setup({
+                    value: 'some value',
+                    clearButtonProps: { label: 'Clear' },
+                    onChange: vi.fn(),
+                });
+                expect(clearButton).toBeInTheDocument();
+            });
+        });
+
         it('should forward inputRef to input element', () => {
             const inputRef = createRef<HTMLInputElement>();
             render(<TextField id="fixedId" inputRef={inputRef} onChange={() => {}} />);
