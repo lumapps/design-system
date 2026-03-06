@@ -1,0 +1,98 @@
+name: 'Deploy Storybook'
+
+on:
+    workflow_call:
+        inputs:
+            package:
+                description: 'Package name (e.g. lumx-react or lumx-vue)'
+                required: true
+                type: string
+            token_secret:
+                description: 'Secret name for Chromatic project token'
+                required: true
+                type: string
+            environment:
+                description: 'GitHub environment name (set on release deploys only)'
+                required: false
+                type: string
+                default: ''
+            pr_number:
+                description: 'PR number for body updates (empty = skip updates)'
+                required: false
+                type: string
+                default: ''
+
+jobs:
+    deploy:
+        name: 'Deploy chromatic (${{ inputs.package }})'
+        runs-on: ubuntu-latest
+        concurrency:
+            group: storybook-${{ inputs.package }}-${{ github.head_ref || github.ref_name }}
+            cancel-in-progress: true
+        environment:
+            name: ${{ inputs.environment }}
+            url: ${{ steps.vars.outputs.storybook_url }}
+        steps:
+            - name: 'Checkout repository'
+              uses: actions/checkout@v5
+              with:
+                  fetch-depth: 0
+
+            - name: 'Init variables'
+              id: vars
+              uses: actions/github-script@v6
+              with:
+                  result-encoding: json
+                  script: |
+                      const { getShortSHA, getStoryBookURL, getRunURL } = require('./.github/actions/utils.js');
+                      const packageName = '${{ inputs.package }}';
+                      const prNumber = '${{ inputs.pr_number }}';
+
+                      const package_path = `packages/${packageName}`;
+                      const run_html_url = getRunURL(context.payload.repository.html_url, context.runId, prNumber);
+                      const shortSHA = await getShortSHA(context.sha);
+                      const storybook_url = getStoryBookURL(shortSHA, packageName);
+
+                      core.setOutput('storybook_url', storybook_url);
+                      core.setOutput('run_html_url', run_html_url);
+                      core.setOutput('package_path', package_path);
+
+            - name: 'Update PR body: Deploying state'
+              if: inputs.pr_number != ''
+              uses: ./.github/actions/update-pr-body
+              with:
+                  pull_number: ${{ inputs.pr_number }}
+                  pattern: 'StoryBook ${{ inputs.package }}: [^\n]*'
+                  replace: 'StoryBook ${{ inputs.package }}: [Deploying...](${{ steps.vars.outputs.run_html_url }})'
+                  whenNotFound: 'append'
+                  keepLastMatch: true
+
+            - name: 'Setup'
+              uses: ./.github/actions/setup
+
+            - name: 'Deploy chromatic'
+              id: deploy
+              env:
+                  CHROMATIC_PROJECT_TOKEN: ${{ secrets[inputs.token_secret] }}
+              run: yarn dlx chromatic --exit-once-uploaded
+              working-directory: ${{ steps.vars.outputs.package_path }}
+
+            - if: failure() && inputs.pr_number != ''
+              name: 'Update PR body: Failure state'
+              uses: ./.github/actions/update-pr-body
+              with:
+                  pull_number: ${{ inputs.pr_number }}
+                  pattern: 'StoryBook ${{ inputs.package }}: [^\n]*'
+                  replace: 'StoryBook ${{ inputs.package }}: [:x: Failed](${{ steps.vars.outputs.run_html_url }})'
+                  whenNotFound: 'ignore'
+                  keepLastMatch: true
+
+            - name: 'Update PR body: Deployed state'
+              if: inputs.pr_number != ''
+              uses: ./.github/actions/update-pr-body
+              with:
+                  pull_number: ${{ inputs.pr_number }}
+                  pattern: 'StoryBook ${{ inputs.package }}: [^\n]*'
+                  replace: 'StoryBook ${{ inputs.package }}: ${{ steps.vars.outputs.storybook_url }}'
+                  whenNotFound: 'append'
+                  keepLastMatch: true

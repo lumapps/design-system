@@ -1,133 +1,61 @@
 name: 'CD / Deploy storybook'
 
-# Deploy Storybook (Chromatic) on every push.
-# - On master: always deploy for baseline tracking (auto-accept changes).
-# - On other branches: only deploy if there's an open, non-draft PR.
+# Deploy Storybook (Chromatic) on PRs.
+# Uses `nx affected` to only deploy storybooks for packages impacted by the PR changes.
+# Release deploys (master) are handled by cd-publish.yml.
 
 on:
-    push:
+    pull_request:
+        types: [opened, synchronize, reopened, ready_for_review]
+
+concurrency:
+    group: storybook-${{ github.head_ref }}
+    cancel-in-progress: true
 
 jobs:
-    should-deploy:
-        name: 'Check if deploy is needed'
+    check-affected:
+        name: 'Check affected storybooks'
+        if: github.event.pull_request.draft == false
         runs-on: ubuntu-latest
         outputs:
-            deploy: ${{ steps.check.outputs.deploy }}
-            pr_number: ${{ steps.check.outputs.pr_number }}
+            react: ${{ steps.check.outputs.react }}
+            vue: ${{ steps.check.outputs.vue }}
         steps:
             - name: 'Checkout repository'
               uses: actions/checkout@v5
               with:
-                  sparse-checkout: .github
-
-            - name: 'Check for open PR'
-              id: check
-              uses: actions/github-script@v6
-              with:
-                  script: |
-                      const { findPRs } = require('./.github/actions/utils.js');
-                      const branch = context.ref.replace('refs/heads/', '');
-
-                      if (branch === 'master') {
-                          core.info('On master branch — always deploying (baseline tracking)');
-                          core.setOutput('deploy', 'true');
-                          core.setOutput('pr_number', '');
-                          return;
-                      }
-
-                      const pulls = await findPRs(github, context.repo, branch);
-                      const pr = pulls.find((p) => !p.draft);
-                      if (pr) {
-                          core.info(`Found open non-draft PR #${pr.number} for branch "${branch}"`);
-                          core.setOutput('deploy', 'true');
-                          core.setOutput('pr_number', String(pr.number));
-                      } else {
-                          core.info(`No open non-draft PR found for branch "${branch}" — skipping deploy`);
-                          core.setOutput('deploy', 'false');
-                          core.setOutput('pr_number', '');
-                      }
-
-    deploy-storybook:
-        name: 'Deploy chromatic (${{ matrix.package }})'
-        needs: [should-deploy]
-        if: needs.should-deploy.outputs.deploy == 'true'
-        strategy:
-            matrix:
-                include:
-                    - package: lumx-react
-                      token_secret: CHROMATIC_TOKEN_LUMX_REACT
-                      environment: storybook-lumx-react
-                    - package: lumx-vue
-                      token_secret: CHROMATIC_TOKEN_LUMX_VUE
-                      environment: storybook-lumx-vue
-        concurrency:
-            group: storybook-${{ matrix.package }}-${{ github.ref_name }}
-            cancel-in-progress: true
-        runs-on: ubuntu-latest
-        environment:
-            name: ${{ github.ref_name == 'master' && matrix.environment || '' }}
-            url: ${{ steps.vars.outputs.storybook_url }}
-        steps:
-            - name: 'Checkout repository'
-              uses: actions/checkout@v5
-              with:
-                  fetch-depth: 0 # retrieve all the repo history (required by chromatic)
-
-            - name: 'Init variables'
-              id: vars
-              uses: actions/github-script@v6
-              with:
-                  result-encoding: json
-                  script: |
-                      const { getShortSHA, getStoryBookURL, getRunURL } = require('./.github/actions/utils.js');
-                      const packageName = '${{ matrix.package }}';
-                      const prNumber = '${{ needs.should-deploy.outputs.pr_number }}';
-
-                      const package_path = `packages/${packageName}`;
-                      const run_html_url = getRunURL(context.payload.repository.html_url, context.runId, prNumber);
-                      const shortSHA = await getShortSHA(context.sha);
-                      const storybook_url = getStoryBookURL(shortSHA, packageName);
-
-                      core.setOutput('storybook_url', storybook_url);
-                      core.setOutput('run_html_url', run_html_url);
-                      core.setOutput('package_path', package_path);
-
-            - name: 'Update PR body: Deploying state'
-              if: needs.should-deploy.outputs.pr_number != ''
-              uses: ./.github/actions/update-pr-body
-              with:
-                  pull_number: ${{ needs.should-deploy.outputs.pr_number }}
-                  pattern: 'StoryBook ${{ matrix.package }}: [^\n]*'
-                  replace: 'StoryBook ${{ matrix.package }}: [Deploying...](${{ steps.vars.outputs.run_html_url }})'
-                  whenNotFound: 'append'
-                  keepLastMatch: true
+                  fetch-depth: 0
 
             - name: 'Setup'
               uses: ./.github/actions/setup
 
-            - name: 'Deploy chromatic'
-              id: deploy
-              env:
-                  CHROMATIC_PROJECT_TOKEN: ${{ secrets[matrix.token_secret] }}
-              run: yarn dlx chromatic --exit-once-uploaded --auto-accept-changes
-              working-directory: ${{ steps.vars.outputs.package_path }}
+            - name: 'Check affected packages'
+              id: check
+              run: |
+                  AFFECTED=$(npx nx show projects --affected --base=origin/master --head=HEAD)
+                  echo "Affected projects:"
+                  echo "$AFFECTED"
+                  echo "react=$( echo "$AFFECTED" | grep -q '@lumx/react' && echo true || echo false )" >> "$GITHUB_OUTPUT"
+                  echo "vue=$( echo "$AFFECTED" | grep -q '@lumx/vue' && echo true || echo false )" >> "$GITHUB_OUTPUT"
 
-            - if: failure() && needs.should-deploy.outputs.pr_number != ''
-              name: 'Update PR body: Failure state'
-              uses: ./.github/actions/update-pr-body
-              with:
-                  pull_number: ${{ needs.should-deploy.outputs.pr_number }}
-                  pattern: 'StoryBook ${{ matrix.package }}: [^\n]*'
-                  replace: 'StoryBook ${{ matrix.package }}: [:x: Failed](${{ steps.vars.outputs.run_html_url }})'
-                  whenNotFound: 'ignore'
-                  keepLastMatch: true
+    deploy-react:
+        name: 'Deploy storybook (lumx-react)'
+        needs: [check-affected]
+        if: needs.check-affected.outputs.react == 'true'
+        uses: ./.github/workflows/workflow-deploy-storybook.yml
+        with:
+            package: lumx-react
+            token_secret: CHROMATIC_TOKEN_LUMX_REACT
+            pr_number: ${{ github.event.pull_request.number }}
+        secrets: inherit
 
-            - name: 'Update PR body: Deployed state'
-              if: needs.should-deploy.outputs.pr_number != ''
-              uses: ./.github/actions/update-pr-body
-              with:
-                  pull_number: ${{ needs.should-deploy.outputs.pr_number }}
-                  pattern: 'StoryBook ${{ matrix.package }}: [^\n]*'
-                  replace: 'StoryBook ${{ matrix.package }}: ${{ steps.vars.outputs.storybook_url }}'
-                  whenNotFound: 'append'
-                  keepLastMatch: true
+    deploy-vue:
+        name: 'Deploy storybook (lumx-vue)'
+        needs: [check-affected]
+        if: needs.check-affected.outputs.vue == 'true'
+        uses: ./.github/workflows/workflow-deploy-storybook.yml
+        with:
+            package: lumx-vue
+            token_secret: CHROMATIC_TOKEN_LUMX_VUE
+            pr_number: ${{ github.event.pull_request.number }}
+        secrets: inherit
