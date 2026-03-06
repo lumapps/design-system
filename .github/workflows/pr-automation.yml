@@ -1,55 +1,43 @@
 name: 'PR Automation'
 
 on:
-    # Triggered when the CI workflow completes (requires workflow to be on default branch)
-    workflow_run:
-        workflows: ['CI']
-        types: [completed]
-    # Triggered when a PR is marked as ready for review
-    pull_request:
-        types: [ready_for_review]
     # Triggered when a review is submitted
     pull_request_review:
         types: [submitted]
+    # Triggered when a label is removed (e.g. "in progress" or "need: dev*" removed)
+    pull_request:
+        types: [unlabeled]
+    # Triggered from another workflow
+    workflow_call:
 
 jobs:
-    # Add 'need: review-frontend' when CI passes on a non-draft PR with no reviews yet
+    # Add 'need: review-frontend' (triggered from CI workflow or when removing "in progress" label on a PR)
     add-review-label:
+        if: "${{ github.event.action != 'unlabeled' || github.event.label.name != 'need: review-frontend' }}"
+        continue-on-error: true
         runs-on: ubuntu-latest
-        if: github.event_name == 'workflow_run' || github.event_name == 'pull_request'
         permissions:
-            pull-requests: read
+            pull-requests: write
             issues: write
         steps:
             - name: Add review label if CI passes and no reviews
               env:
                   GH_TOKEN: ${{ github.token }}
                   GH_REPO: ${{ github.repository }}
+                  PR_NUMBER: ${{ github.event.pull_request.number }}
               shell: bash
               run: |
-                  # Resolve PR number from the event
-                  if [[ "${{ github.event_name }}" == "workflow_run" ]]; then
-                      PR_NUMBER=$(echo '${{ toJSON(github.event.workflow_run.pull_requests) }}' | jq -r '.[0].number')
-                  else
-                      PR_NUMBER="${{ github.event.pull_request.number }}"
-                  fi
-
-                  if [[ -z "$PR_NUMBER" || "$PR_NUMBER" == "null" ]]; then
-                      echo "No PR associated, skipping."
-                      exit 0
-                  fi
-
                   echo "Processing PR #$PR_NUMBER"
 
                   # Get PR data as JSON
-                  PR_JSON=$(gh pr view "$PR_NUMBER" --json isDraft,labels,reviewDecision,statusCheckRollup)
+                  PR_JSON=$(gh pr view "$PR_NUMBER" --json isDraft,labels,reviewDecision)
 
-                  # Skip draft PRs or PRs with "in progress" / "need: dev*" labels
+                  # Skip draft PRs or PRs with "in progress" / "need: dev*" / "need: review-frontend" labels
                   SKIP=$(echo "$PR_JSON" | jq -r '
-                      .isDraft or (.labels | any(.name | test("in progress") or startswith("need: dev")))
+                      .isDraft or (.labels | any(.name | test("in progress") or startswith("need: dev") or . == "need: review-frontend"))
                   ')
                   if [[ "$SKIP" == "true" ]]; then
-                      echo "PR is draft or has in-progress/dev label, skipping."
+                      echo "PR is draft, has in-progress/dev label, or already has review label, skipping."
                       exit 0
                   fi
 
@@ -60,14 +48,12 @@ jobs:
                       exit 0
                   fi
 
-                  # Check all CI checks pass
-                  FAILING=$(echo "$PR_JSON" | jq '
-                      .statusCheckRollup
-                      | map(select(.conclusion != "SUCCESS" and .conclusion != "SKIPPED" and .conclusion != "NEUTRAL"))
-                  ')
-                  if [[ $(echo "$FAILING" | jq 'length') -gt 0 ]]; then
-                      echo "CI not fully passing:"
-                      echo "$FAILING" | jq -r '.[] | "  - \(.name): \(.status) / \(.conclusion)"'
+                  # Check if all CI checks have passed
+                  CI_STATUS=$(gh pr view "$PR_NUMBER" --json statusCheckRollup \
+                      --jq '[.statusCheckRollup[] | select(.workflowName == "CI" and (.name | startswith("after-all") | not))] | if length == 0 then "PENDING" elif all(.conclusion == "SUCCESS") then "SUCCESS" else "FAILING" end')
+                  echo "CI status: $CI_STATUS"
+                  if [[ "$CI_STATUS" != "SUCCESS" ]]; then
+                      echo "CI has not passed yet, skipping."
                       exit 0
                   fi
 
@@ -77,6 +63,7 @@ jobs:
 
     # Replace 'need: review-frontend' with 'need: test' when all required reviews are approved
     update-test-label:
+        continue-on-error: true
         runs-on: ubuntu-latest
         if: github.event_name == 'pull_request_review'
         permissions:
