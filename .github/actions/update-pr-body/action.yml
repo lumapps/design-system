@@ -30,6 +30,10 @@ inputs:
             This can be used to check a match before replacing it.
             Example: `skipReplaceIf: "groups[1] === 'foo'"`
             => Will skip replacing the match if the first capture group is 'foo'.
+    github_token:
+        description: 'GitHub token to use for API calls. Defaults to the workflow token.'
+        required: false
+        default: ${{ github.token }}
 
 # Example:
 #   - name: Update PR Body
@@ -44,6 +48,7 @@ runs:
         - name: Update PR body
           uses: actions/github-script@v6
           with:
+              github-token: ${{ inputs.github_token }}
               script: |
                   require("${{ github.action_path }}")({
                       github, context, inputs: ${{ toJSON(inputs) }}

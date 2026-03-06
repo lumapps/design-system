@@ -228,3 +228,25 @@ jobs:
 
             - name: 'Create release note'
               uses: ./.github/actions/release-note
+
+    deploy_storybook_react:
+        name: 'Deploy storybook (lumx-react)'
+        if: needs.is_release_commit.outputs.version
+        needs: [is_release_commit, build_publish_NPM]
+        uses: ./.github/workflows/workflow-deploy-storybook.yml
+        with:
+            package: lumx-react
+            token_secret: CHROMATIC_TOKEN_LUMX_REACT
+            environment: storybook-lumx-react
+        secrets: inherit
+
+    deploy_storybook_vue:
+        name: 'Deploy storybook (lumx-vue)'
+        if: needs.is_release_commit.outputs.version
+        needs: [is_release_commit, build_publish_NPM]
+        uses: ./.github/workflows/workflow-deploy-storybook.yml
+        with:
+            package: lumx-vue
+            token_secret: CHROMATIC_TOKEN_LUMX_VUE
+            environment: storybook-lumx-vue
+        secrets: inherit
