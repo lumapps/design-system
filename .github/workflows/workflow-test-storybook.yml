@@ -76,7 +76,7 @@ jobs:
                   path: ${{ matrix.visDir }}/*/__baselines__
                   key: vis-snapshots-${{ matrix.label }}-${{ github.sha }}${{ inputs.update && format('-{0}', github.run_id) || '' }}
 
-    visual-report:
+    visual-diffs:
         if: always() && github.event_name == 'pull_request'
         needs: [test-storybook]
         runs-on: ubuntu-latest
@@ -98,5 +98,15 @@ jobs:
               uses: ./.github/actions/report-visual-diffs
               with:
                   artifacts-dir: vis-artifacts
+                  output-dir: visual-diffs
                   run-id: ${{ github.run_id }}
                   wiki-token: ${{ secrets.GITBOT_TOKEN }}
+
+            - name: 'Upload consolidated visual report'
+              if: always()
+              uses: actions/upload-artifact@v4
+              with:
+                  name: visual-diffs
+                  path: visual-diffs
+                  retention-days: 15
+                  if-no-files-found: ignore

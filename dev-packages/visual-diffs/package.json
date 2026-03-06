@@ -1,0 +1,13 @@
+{
+    "name": "@lumx/visual-diffs",
+    "private": true,
+    "main": "index.js",
+    "bin": "index.js",
+    "scripts": {
+        "visual-diffs": "node index.js"
+    },
+    "dependencies": {
+        "pixelmatch": "^7.0.0",
+        "sharp": "^0.32.6"
+    }
+}

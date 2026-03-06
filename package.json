@@ -73,6 +73,7 @@
         "test:storybook:react": "nx run @lumx/react:test:storybook",
         "test:storybook:vue": "nx run @lumx/vue:test:storybook",
         "test:all": "nx run-many --target=test,test:storybook",
+        "visual-diffs": "nx run @lumx/visual-diffs:visual-diffs",
         "type-check": "nx run-many --target=type-check",
         "storybook:react": "yarn workspace @lumx/react start:storybook",
         "storybook:vue": "yarn workspace @lumx/vue start:storybook",

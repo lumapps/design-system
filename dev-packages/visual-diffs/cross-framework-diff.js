@@ -168,19 +168,19 @@ async function main({ reactDir, vueDir, outputDir }) {
             const normalizedPath = sorted[index];
             const reactFile = reactMap.get(normalizedPath);
             const vueFile = vueMap.get(normalizedPath);
-            const diffFile = path.join(outputDir, '__diffs__', normalizedPath);
+
+            // Colocate all images in a single directory named after the screenshot
+            const screenshotDir = path.join(outputDir, normalizedPath.replace(/\.png$/, ''));
+            const diffFile = path.join(screenshotDir, 'diff.png');
 
             const result = await compareImages(reactFile, vueFile, diffFile);
 
             if (result.hasDiff) {
-                // Copy originals for report display
-                const reactDest = path.join(outputDir, '__react__', normalizedPath);
-                const vueDest = path.join(outputDir, '__vue__', normalizedPath);
+                // Copy originals alongside the diff for easy comparison
+                const reactDest = path.join(screenshotDir, 'react.png');
+                const vueDest = path.join(screenshotDir, 'vue.png');
 
-                await Promise.all([
-                    fsPromises.mkdir(path.dirname(reactDest), { recursive: true }),
-                    fsPromises.mkdir(path.dirname(vueDest), { recursive: true }),
-                ]);
+                await fsPromises.mkdir(screenshotDir, { recursive: true });
                 await Promise.all([fsPromises.copyFile(reactFile, reactDest), fsPromises.copyFile(vueFile, vueDest)]);
             }
 
@@ -218,36 +218,4 @@ async function main({ reactDir, vueDir, outputDir }) {
     console.log(`  Manifest written to: ${manifestPath}`);
 }
 
-/**
- * CI entry point (called from action.yml via actions/github-script).
- * Resolves react/vue directories from the CI artifacts directory structure.
- *
- * @param {Object} params
- * @param {string} params.artifactsDir - Path to the downloaded artifacts directory
- */
-async function ciMain({ artifactsDir }) {
-    return main({
-        reactDir: path.join(artifactsDir, 'vis-report-react'),
-        vueDir: path.join(artifactsDir, 'vis-report-vue'),
-        outputDir: path.join(artifactsDir, 'cross-framework-diffs'),
-    });
-}
-
-module.exports = ciMain;
-module.exports.main = main;
-
-// Allow running locally: node cross-framework-diff.js [output-dir]
-// Compares screenshots from packages/lumx-react/__vis__/local and packages/lumx-vue/__vis__/local.
-if (require.main === module) {
-    const repoRoot = path.resolve(__dirname, '..', '..', '..');
-    const outputDir = process.argv[2] ? path.resolve(process.argv[2]) : path.join(repoRoot, 'cross-framework-diffs');
-
-    main({
-        reactDir: path.join(repoRoot, 'packages', 'lumx-react', '__vis__', 'local'),
-        vueDir: path.join(repoRoot, 'packages', 'lumx-vue', '__vis__', 'local'),
-        outputDir,
-    }).catch((err) => {
-        console.error(err);
-        process.exit(1);
-    });
-}
+module.exports = main;
