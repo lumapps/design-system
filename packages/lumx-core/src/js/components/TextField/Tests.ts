@@ -177,6 +177,37 @@ export default (renderOptions: SetupOptions<any>) => {
                 expect(counter).toBeInTheDocument();
                 expect(counter).toHaveTextContent('96');
             });
+
+            it('should not forward "className" to the native input element', () => {
+                const { element, inputNative } = setup({ className: 'custom-class' }, renderOptions);
+                expect(element).toHaveClass('custom-class');
+                expect(inputNative).not.toHaveClass('custom-class');
+            });
+
+            it('should not forward "icon" to the native input element', () => {
+                const { inputNative } = setup({ icon: 'mdi-icon-path' }, renderOptions);
+                expect(inputNative).not.toHaveAttribute('icon');
+            });
+
+            it('should not forward "isValid" to the native input element', () => {
+                const { inputNative } = setup({ isValid: true }, renderOptions);
+                expect(inputNative).not.toHaveAttribute('isvalid');
+            });
+
+            it('should not forward "label" to the native input element', () => {
+                const { inputNative } = setup({ label: 'My label' }, renderOptions);
+                expect(inputNative).not.toHaveAttribute('label');
+            });
+
+            it('should not forward "chips" to the native input element', () => {
+                const { inputNative } = setup({ chips: 'chip' }, renderOptions);
+                expect(inputNative).not.toHaveAttribute('chips');
+            });
+
+            it('should not forward "labelProps" to the native input element', () => {
+                const { inputNative } = setup({ labelProps: { className: 'custom-label' } }, renderOptions);
+                expect(inputNative).not.toHaveAttribute('labelprops');
+            });
         });
 
         describe('Disabled state', () => {

@@ -31,6 +31,8 @@ export interface TextFieldProps extends GenericProps, ReactToJSX<UIProps, TextFi
     inputRef?: Ref<HTMLInputElement | HTMLTextAreaElement>;
     /** Additional label props. */
     labelProps?: InputLabelProps;
+    /** Minimum number of rows displayed in multiline mode (requires `multiline` to be enabled). */
+    minimumRows?: number;
     /** Native input name property. */
     name?: string;
     /** Reference to the wrapper. */
@@ -65,14 +67,20 @@ export const TextField = forwardRef<TextFieldProps, HTMLDivElement>((props, ref)
     const { isAnyDisabled, disabledStateProps, otherProps } = useDisableStateProps(props);
     const defaultTheme = useTheme() || Theme.light;
     const {
+        chips,
+        className,
         clearButtonProps,
         error,
         forceFocusStyle,
         hasError,
         helper,
+        icon,
         id,
         inputRef: inputRefProps,
         isRequired,
+        isValid,
+        label,
+        labelProps,
         maxLength,
         minimumRows,
         multiline,
@@ -162,6 +170,13 @@ export const TextField = forwardRef<TextFieldProps, HTMLDivElement>((props, ref)
 
     return UI({
         ref,
+        chips,
+        className,
+        forceFocusStyle,
+        icon,
+        isValid,
+        label,
+        labelProps,
         isAnyDisabled,
         input,
         id: textFieldId,
@@ -180,7 +195,6 @@ export const TextField = forwardRef<TextFieldProps, HTMLDivElement>((props, ref)
         helper,
         IconButton: IconButton as any,
         isFocus,
-        ...forwardedProps,
         clearButtonProps: clearButtonProps
             ? {
                   ...clearButtonProps,
