@@ -74,6 +74,7 @@ export type TextFieldPropsToOverride =
     | 'clearButtonProps'
     | 'helperId'
     | 'errorId'
+    | 'isAnyDisabled'
     | 'isFocus';
 
 /**

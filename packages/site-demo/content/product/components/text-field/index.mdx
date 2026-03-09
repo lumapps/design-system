@@ -1,28 +1,44 @@
 ---
-frameworks: ['react']
+frameworks: ['react', 'vue']
 ---
-import * as DemoDefault from './react/default.tsx';
-import * as DemoIsDisabled from './react/is-disabled.tsx';
-import * as DemoIsValid from './react/is-valid.tsx';
-import * as DemoHasError from './react/has-error.tsx';
-import * as DemoIsRequired from './react/is-required.tsx';
-import * as DemoHelper from './react/helper.tsx';
-import * as DemoPlaceholder from './react/placeholder.tsx';
-import * as DemoIcon from './react/icon.tsx';
-import * as DemoIsClearable from './react/is-clearable.tsx';
-import * as DemoMaxLength from './react/max-length.tsx';
-import * as DemoChips from './react/chips.tsx';
-import * as DemoTextarea from './react/textarea.tsx';
-import * as DemoTextareaValid from './react/textarea-valid.tsx';
-import * as DemoTextareaInvalid from './react/textarea-invalid.tsx';
-import * as DemoNumber from './react/number.tsx';
+import * as ReactDemoDefault from './react/default.tsx';
+import * as ReactDemoIsDisabled from './react/is-disabled.tsx';
+import * as ReactDemoIsValid from './react/is-valid.tsx';
+import * as ReactDemoHasError from './react/has-error.tsx';
+import * as ReactDemoIsRequired from './react/is-required.tsx';
+import * as ReactDemoHelper from './react/helper.tsx';
+import * as ReactDemoPlaceholder from './react/placeholder.tsx';
+import * as ReactDemoIcon from './react/icon.tsx';
+import * as ReactDemoIsClearable from './react/is-clearable.tsx';
+import * as ReactDemoMaxLength from './react/max-length.tsx';
+import * as ReactDemoChips from './react/chips.tsx';
+import * as ReactDemoTextarea from './react/textarea.tsx';
+import * as ReactDemoTextareaValid from './react/textarea-valid.tsx';
+import * as ReactDemoTextareaInvalid from './react/textarea-invalid.tsx';
+import * as ReactDemoNumber from './react/number.tsx';
+import * as VueDemoDefault from './vue/default.vue';
+import * as VueDemoIsDisabled from './vue/is-disabled.vue';
+import * as VueDemoIsValid from './vue/is-valid.vue';
+import * as VueDemoHasError from './vue/has-error.vue';
+import * as VueDemoIsRequired from './vue/is-required.vue';
+import * as VueDemoHelper from './vue/helper.vue';
+import * as VueDemoPlaceholder from './vue/placeholder.vue';
+import * as VueDemoIcon from './vue/icon.vue';
+import * as VueDemoIsClearable from './vue/is-clearable.vue';
+import * as VueDemoMaxLength from './vue/max-length.vue';
+import * as VueDemoChips from './vue/chips.vue';
+import * as VueDemoTextarea from './vue/textarea.vue';
+import * as VueDemoTextareaValid from './vue/textarea-valid.vue';
+import * as VueDemoTextareaInvalid from './vue/textarea-invalid.vue';
+import * as VueDemoNumber from './vue/number.vue';
 import ReactTextField from 'lumx-docs:@lumx/react/components/text-field/TextField';
+import VueTextField from 'lumx-docs:@lumx/vue/components/text-field/TextField';
 
 # Text field
 
 **Text fields are simple text inputs.**
 
-<DemoBlock withThemeSwitcher demo={{ react: DemoDefault }} />
+<DemoBlock withThemeSwitcher demo={{ react: ReactDemoDefault, vue: VueDemoDefault }} />
 
 ## Special states
 
@@ -32,19 +48,19 @@ There are three special states: `isDisabled`, `isValid`, and `hasError`.
 
 Use `isDisabled` when values can't be edited.
 
-<DemoBlock withThemeSwitcher demo={{ react: DemoIsDisabled }} />
+<DemoBlock withThemeSwitcher demo={{ react: ReactDemoIsDisabled, vue: VueDemoIsDisabled }} />
 
 ### Is valid
 
 Use `isValid` to tell that entered values are considered correct.
 
-<DemoBlock withThemeSwitcher demo={{ react: DemoIsValid }} />
+<DemoBlock withThemeSwitcher demo={{ react: ReactDemoIsValid, vue: VueDemoIsValid }} />
 
 ### Has error
 
 Use `hasError` to tell that entered values are considered incorrect.
 
-<DemoBlock withThemeSwitcher demo={{ react: DemoHasError }} />
+<DemoBlock withThemeSwitcher demo={{ react: ReactDemoHasError, vue: VueDemoHasError }} />
 
 ## Options
 
@@ -54,63 +70,63 @@ There are seven options: `isRequired`, `helper`, `placeholder`, `icon`, `clearBu
 
 Use `isRequired` to tell that the text field must be filled to submit the form.
 
-<DemoBlock withThemeSwitcher demo={{ react: DemoIsRequired }} />
+<DemoBlock withThemeSwitcher demo={{ react: ReactDemoIsRequired, vue: VueDemoIsRequired }} />
 
 ### Helper
 
 Use `helper` to provide guidance.
 
-<DemoBlock withThemeSwitcher demo={{ react: DemoHelper }} />
+<DemoBlock withThemeSwitcher demo={{ react: ReactDemoHelper, vue: VueDemoHelper }} />
 
 ### Placeholder
 
 Use `placeholder` to give an example of expected values or invite filling text fields.
 
-<DemoBlock withThemeSwitcher demo={{ react: DemoPlaceholder }} />
+<DemoBlock withThemeSwitcher demo={{ react: ReactDemoPlaceholder, vue: VueDemoPlaceholder }} />
 
 ### Icon
 
 Use `icon` to illustrate text fields `label`, `icon` complements `label` but can't replace it.
 
-<DemoBlock withThemeSwitcher demo={{ react: DemoIcon }} />
+<DemoBlock withThemeSwitcher demo={{ react: ReactDemoIcon, vue: VueDemoIcon }} />
 
 ### Is clearable
 
 To allow the user to clear the text field, you would have to pass a `label` prop through `clearButtonProps` prop. This corresponds to the label which will be used inside the tooltip of the clear icon button. Setting the label is enough to determine the visibility of the clear button. Use `onClear` to pass the function triggered by a click on the clear icon button.
 
-<DemoBlock withThemeSwitcher demo={{ react: DemoIsClearable }} />
+<DemoBlock withThemeSwitcher demo={{ react: ReactDemoIsClearable, vue: VueDemoIsClearable }} />
 
 ### Max length
 
 Use `maxLength` when users inputs length are limited.
 
-<DemoBlock withThemeSwitcher demo={{ react: DemoMaxLength }} />
+<DemoBlock withThemeSwitcher demo={{ react: ReactDemoMaxLength, vue: VueDemoMaxLength }} />
 
 ### Chips
 
 Use `chips` when users inputs need to be split in distinct parts such as tag entry.
 
-<DemoBlock withThemeSwitcher demo={{ react: DemoChips }} />
+<DemoBlock withThemeSwitcher demo={{ react: ReactDemoChips, vue: VueDemoChips }} />
 
 ## Textarea
 
 Use Text areas when users are expected to enter more than one line of text.
 
-<DemoBlock withThemeSwitcher demo={{ react: DemoTextarea }} />
+<DemoBlock withThemeSwitcher demo={{ react: ReactDemoTextarea, vue: VueDemoTextarea }} />
 
 ### Valid
 
-<DemoBlock withThemeSwitcher demo={{ react: DemoTextareaValid }} />
+<DemoBlock withThemeSwitcher demo={{ react: ReactDemoTextareaValid, vue: VueDemoTextareaValid }} />
 
 ### Invalid
 
-<DemoBlock withThemeSwitcher demo={{ react: DemoTextareaInvalid }} />
+<DemoBlock withThemeSwitcher demo={{ react: ReactDemoTextareaInvalid, vue: VueDemoTextareaInvalid }} />
 
 ## Number
 
 Use number input when users are expected to enter numeric values.
 
-<DemoBlock withThemeSwitcher demo={{ react: DemoNumber }} />
+<DemoBlock withThemeSwitcher demo={{ react: ReactDemoNumber, vue: VueDemoNumber }} />
 
 ### Accessibility concerns
 
@@ -130,4 +146,4 @@ Text fields can be disabled in two ways:
 
 ### Properties
 
-<PropTable docs={{ react: ReactTextField }} />
+<PropTable docs={{ react: ReactTextField, vue: VueTextField }} />
