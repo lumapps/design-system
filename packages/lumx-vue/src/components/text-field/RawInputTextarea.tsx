@@ -1,14 +1,16 @@
-import { defineComponent, useAttrs } from 'vue';
+import { computed, defineComponent, ref, useAttrs } from 'vue';
 
 import {
-    RawInputText as RawInputTextUI,
-    type RawInputTextProps as UIProps,
-} from '@lumx/core/js/components/TextField/RawInputText';
+    RawInputTextarea as RawInputTextareaUI,
+    type RawInputTextareaProps as UIProps,
+    DEFAULT_PROPS,
+} from '@lumx/core/js/components/TextField/RawInputTextarea';
 
 import { useTheme } from '../../composables/useTheme';
 import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+import { useFitRowsToContent } from './useFitRowsToContent';
 
-export type RawInputTextProps = VueToJSXProps<UIProps>;
+export type RawInputTextareaProps = VueToJSXProps<UIProps>;
 
 export const emitSchema = {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -16,16 +18,23 @@ export const emitSchema = {
 };
 
 /**
- * Raw input text component.
- * (input element without any decoration)
+ * Raw input textarea component.
+ * (textarea element without any decoration)
  *
  * @param  props Component props.
  * @return Vue element.
  */
-const RawInputText = defineComponent(
-    (props: RawInputTextProps, { emit }) => {
+const RawInputTextarea = defineComponent(
+    (props: RawInputTextareaProps, { emit }) => {
         const attrs = useAttrs();
         const defaultTheme = useTheme();
+
+        const textareaRef = ref<HTMLTextAreaElement | null>(null);
+        const rows = useFitRowsToContent(
+            computed(() => props.rows ?? (DEFAULT_PROPS.rows as number)),
+            textareaRef,
+            computed(() => props.value),
+        );
 
         const handleChange = (value: string, name?: string, event?: any) => {
             event?.stopImmediatePropagation();
@@ -34,10 +43,11 @@ const RawInputText = defineComponent(
 
         return () => {
             return (
-                <RawInputTextUI
+                <RawInputTextareaUI
                     {...(attrs as UIProps)}
+                    ref={textareaRef}
                     value={props.value}
-                    type={props.type}
+                    rows={rows.value}
                     name={props.name}
                     className={props.class}
                     theme={props.theme || defaultTheme.value}
@@ -47,11 +57,11 @@ const RawInputText = defineComponent(
         };
     },
     {
-        name: 'LumxRawInputText',
+        name: 'LumxRawInputTextarea',
         inheritAttrs: false,
-        props: keysOf<RawInputTextProps>()('class', 'theme', 'value', 'type', 'name'),
+        props: keysOf<RawInputTextareaProps>()('class', 'theme', 'value', 'rows', 'name'),
         emits: emitSchema,
     },
 );
 
-export default RawInputText;
+export default RawInputTextarea;
