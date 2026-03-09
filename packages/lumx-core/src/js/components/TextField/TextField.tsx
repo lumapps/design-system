@@ -1,5 +1,5 @@
 import { mdiAlertCircle, mdiCheckCircle, mdiCloseCircle } from '@lumx/icons';
-import { HasTheme, HasAriaDisabled, HasClassName, JSXElement, CommonRef, GenericProps } from '../../types';
+import { HasTheme, HasAriaDisabled, HasClassName, JSXElement, CommonRef, GenericProps, HasDisabled } from '../../types';
 import { classNames } from '../../utils';
 
 import { CLASSNAME } from './constants';
@@ -13,7 +13,7 @@ const { block, element } = classNames.bem(CLASSNAME);
 /**
  * Defines the props of the component.
  */
-export interface TextFieldProps extends HasClassName, HasTheme, HasAriaDisabled {
+export interface TextFieldProps extends HasClassName, HasTheme, HasAriaDisabled, HasDisabled {
     /** Chip Group to be rendered before the main text input. */
     chips?: JSXElement;
     /** Props to pass to the clear button (minus those already set by the TextField props). If not specified, the button won't be displayed. */
@@ -31,7 +31,7 @@ export interface TextFieldProps extends HasClassName, HasTheme, HasAriaDisabled 
     /** Icon (SVG path). */
     icon?: string;
     /** Native input id property (generated if not provided to link the label element). */
-    id: string;
+    id?: string;
     /** Generated helper id for accessibility attributes. */
     helperId?: string;
     /** Generated error id for accessibility attributes. */
@@ -67,7 +67,6 @@ export interface TextFieldProps extends HasClassName, HasTheme, HasAriaDisabled 
 }
 
 export type TextFieldPropsToOverride =
-    | 'id'
     | 'input'
     | 'IconButton'
     | 'labelProps'
@@ -169,7 +168,7 @@ export const TextField = (props: TextFieldProps) => {
                     {label &&
                         InputLabel({
                             ...labelProps,
-                            htmlFor: textFieldId,
+                            htmlFor: textFieldId as string,
                             className: element('label'),
                             isRequired,
                             theme,
