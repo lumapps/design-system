@@ -39,6 +39,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/core`:
     -   Added a new css entry point for components and utils
     -   Add action area CSS utils
+-   `@lumx/vue`:
+    -   Create the `RawInputText` component
+    -   Create the `RawInputTextarea` component (with `useFitRowsToContent` composable for auto-expanding rows)
 
 ## [4.6.0][] - 2026-03-03
 

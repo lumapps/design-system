@@ -1,19 +1,20 @@
-import type { ComponentProps } from 'react';
+import type { HTMLInputTypeAttribute } from 'react';
 
-import { HasClassName, HasTheme } from '../../types';
+import { CommonRef, HasClassName, HasTheme } from '../../types';
 import { classNames } from '../../utils';
 
 import { INPUT_NATIVE_CLASSNAME } from './constants';
 
 const { block } = classNames.bem(INPUT_NATIVE_CLASSNAME);
 
-type NativeInputProps = Omit<ComponentProps<'input'>, 'value' | 'onChange'>;
-
 /**
  * Defines the props of the component.
  */
-export interface RawInputTextProps extends NativeInputProps, HasTheme, HasClassName {
+export interface RawInputTextProps extends HasTheme, HasClassName {
     value?: string;
+    type?: HTMLInputTypeAttribute;
+    name?: string | undefined;
+    ref?: CommonRef;
     handleChange?: (value: string, name?: string, event?: any) => void;
 }
 /**

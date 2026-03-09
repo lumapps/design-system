@@ -1,4 +1,4 @@
-import { SyntheticEvent, useRef } from 'react';
+import { ComponentProps, SyntheticEvent, useRef } from 'react';
 
 import { Theme, useTheme } from '@lumx/react';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
@@ -13,10 +13,12 @@ import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 
 import { useFitRowsToContent } from './useFitRowsToContent';
 
+type NativeTextareaProps = Omit<ComponentProps<'textarea'>, 'value' | 'onChange'>;
+
 /**
  * Defines the props of the component.
  */
-export interface RawInputTextareaProps extends ReactToJSX<UIProps, 'rows'> {
+export interface RawInputTextareaProps extends NativeTextareaProps, ReactToJSX<UIProps, 'rows'> {
     minimumRows?: number;
     onChange?: (value: string, name?: string, event?: SyntheticEvent) => void;
 }

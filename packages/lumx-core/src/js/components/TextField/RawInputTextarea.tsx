@@ -1,20 +1,18 @@
-import type { ComponentProps } from 'react';
-
-import { HasClassName, HasTheme } from '../../types';
+import { CommonRef, HasClassName, HasTheme } from '../../types';
 import { classNames } from '../../utils';
 
 import { INPUT_NATIVE_CLASSNAME } from './constants';
 
 const { block } = classNames.bem(INPUT_NATIVE_CLASSNAME);
 
-type NativeTextareaProps = Omit<ComponentProps<'textarea'>, 'value' | 'onChange'>;
-
 /**
  * Defines the props of the component.
  */
-export interface RawInputTextareaProps extends NativeTextareaProps, HasTheme, HasClassName {
+export interface RawInputTextareaProps extends HasTheme, HasClassName {
     value?: string;
     rows?: number;
+    name?: string | undefined;
+    ref?: CommonRef;
     handleChange?: (value: string, name?: string, event?: any) => void;
 }
 
