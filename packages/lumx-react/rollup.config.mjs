@@ -31,9 +31,7 @@ const input = {
 };
 
 /** Set of lumx core exports */
-const lumxCoreExports = new Set(Object.keys(lumxCorePkg.exports).map(
-    (subpath) => path.join('@lumx/core', subpath),
-));
+const lumxCoreExports = new Set(Object.keys(lumxCorePkg.exports).map((subpath) => path.join('@lumx/core', subpath)));
 
 /**
  * Determine if an import should be treated as external (not bundled).
@@ -84,7 +82,6 @@ const bundleJS = {
         /** Copy additional files to dist. */
         copy({
             targets: [
-                { src: path.join(ROOT_PATH, 'CONTRIBUTING.md'), dest: DIST_PATH },
                 { src: path.join(ROOT_PATH, 'LICENSE.md'), dest: DIST_PATH },
                 { src: path.join(__dirname, 'README.md'), dest: DIST_PATH },
                 { src: path.join(__dirname, 'package.json'), dest: DIST_PATH },

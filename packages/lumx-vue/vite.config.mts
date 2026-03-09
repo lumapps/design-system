@@ -77,7 +77,6 @@ export default defineConfig({
         }),
         viteStaticCopy({
             targets: [
-                { src: path.join(ROOT_PATH, 'CONTRIBUTING.md'), dest: '.' },
                 { src: path.join(ROOT_PATH, 'LICENSE.md'), dest: '.' },
                 { src: 'package.json', dest: '.' },
             ],
