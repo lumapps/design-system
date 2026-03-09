@@ -59,7 +59,6 @@ export default {
         }),
         copy({
             targets: [
-                { src: path.join(ROOT_PATH, 'CONTRIBUTING.md'), dest: DIST_PATH },
                 { src: path.join(ROOT_PATH, 'LICENSE.md'), dest: DIST_PATH },
                 { src: path.join(__dirname, 'README.md'), dest: DIST_PATH },
                 { src: path.join(__dirname, 'package.json'), dest: DIST_PATH },
@@ -72,10 +71,7 @@ export default {
         {
             name: 'sass-builder',
             async buildEnd() {
-                const inputs = [
-                    'src/scss/lumx.scss',
-                    'src/scss/components-and-utils.scss',
-                ];
+                const inputs = ['src/scss/lumx.scss', 'src/scss/components-and-utils.scss'];
 
                 for (const input of inputs) {
                     const { css } = await sass.compileAsync(input, {
@@ -92,7 +88,9 @@ export default {
 
                     await fs.mkdir(path.dirname(outputPath), { recursive: true });
 
-                    const { css: postProcess } = await postcss(CONFIGS.postcss.plugins).process(css, { from: undefined });
+                    const { css: postProcess } = await postcss(CONFIGS.postcss.plugins).process(css, {
+                        from: undefined,
+                    });
                     await fs.writeFile(outputPath, postProcess);
                     console.log(`${path.relative(__dirname, input)} → ${path.relative(__dirname, DIST_PATH)}`);
                 }

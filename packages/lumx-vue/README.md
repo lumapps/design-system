@@ -22,10 +22,6 @@ npm install @lumx/vue
 
 You can find an online version of the demo and documentation site at https://design.lumapps.com.
 
-## How to get help, contribute, or provide feedback
-
-Please refer to our [contributing guidelines](CONTRIBUTING.md).
-
 ## Copyright and license
 
 Code and documentation copyright 2019 LumApps. Code released under the [MIT license](LICENSE.md).

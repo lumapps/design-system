@@ -13,10 +13,6 @@ yarn add @lumx/<icons|react|vue>
 npm install @lumx/<icons|react|vue>
 ```
 
-## How to get help, contribute, or provide feedback
-
-Please refer to our [contributing guidelines](CONTRIBUTING.md).
-
 ## Development
 
 ```bash
