@@ -12,6 +12,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/react`:
     -   `Slider`: fix last step unreachable when (max-min)/steps is exactly representable in floating point
 
+### Added
+
+-   `@lumx/vue`:
+    -   Create the `RawInputText` component
+
 ### Changed
 
 -   `@lumx/core`:

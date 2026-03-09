@@ -1,0 +1,56 @@
+import { defineComponent, useAttrs } from 'vue';
+
+import {
+    RawInputText as RawInputTextUI,
+    type RawInputTextProps as UIProps,
+} from '@lumx/core/js/components/TextField/RawInputText';
+
+import { useTheme } from '../../composables/useTheme';
+import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
+
+export type RawInputTextProps = VueToJSXProps<UIProps>;
+
+export const emitSchema = {
+    change: (value: string, name?: string, event?: Event) => typeof value === 'string',
+};
+
+/**
+ * Raw input text component.
+ * (input element without any decoration)
+ *
+ * @param  props Component props.
+ * @return Vue element.
+ */
+const RawInputText = defineComponent(
+    (props: RawInputTextProps, { emit }) => {
+        const attrs = useAttrs();
+        const defaultTheme = useTheme();
+
+        const handleChange = (value: string, name?: string, event?: any) => {
+            event?.stopImmediatePropagation();
+            emit('change', value, name, event);
+        };
+
+        return () => {
+            return (
+                <RawInputTextUI
+                    {...(attrs as UIProps)}
+                    value={props.value}
+                    type={props.type}
+                    name={props.name}
+                    className={props.class}
+                    theme={props.theme || defaultTheme.value}
+                    handleChange={handleChange}
+                />
+            );
+        };
+    },
+    {
+        name: 'LumxRawInputText',
+        inheritAttrs: false,
+        props: keysOf<RawInputTextProps>()('class', 'theme', 'value', 'type', 'name'),
+        emits: emitSchema,
+    },
+);
+
+export default RawInputText;

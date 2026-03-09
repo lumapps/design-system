@@ -1,4 +1,4 @@
-import { SyntheticEvent } from 'react';
+import { ComponentProps, SyntheticEvent } from 'react';
 
 import { Theme, useTheme } from '@lumx/react';
 
@@ -11,10 +11,12 @@ import {
 
 import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 
+type NativeInputProps = Omit<ComponentProps<'input'>, 'value' | 'onChange'>;
+
 /**
  * Defines the props of the component.
  */
-export interface RawInputTextProps extends ReactToJSX<UIProps> {
+export interface RawInputTextProps extends NativeInputProps, ReactToJSX<UIProps> {
     onChange?: (value: string, name?: string, event?: SyntheticEvent) => void;
 }
 /**
