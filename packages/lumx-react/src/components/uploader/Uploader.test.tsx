@@ -1,9 +1,9 @@
 import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
 
 import { render, screen, fireEvent } from '@testing-library/react';
-import { getByClassName, getByTagName, queryByClassName } from '@lumx/react/testing/utils/queries';
+import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
 import userEvent from '@testing-library/user-event';
-import { mdiPlus } from '@lumx/icons';
+import BaseUploaderTests from '@lumx/core/js/components/Uploader/Tests';
 import { Uploader, UploaderProps } from './Uploader';
 
 const CLASSNAME = Uploader.className as string;
@@ -26,60 +26,10 @@ const setup = (propsOverride: SetupProps = {}, { wrapper }: SetupRenderOptions =
 };
 
 describe(`<${Uploader.displayName}>`, () => {
-    describe('Props', () => {
-        it('should render default', () => {
-            const label = 'Label';
-            const { uploader } = setup({ label });
-
-            expect(uploader).toHaveClass(CLASSNAME);
-            expect(uploader).toBe(screen.queryByRole('button', { name: label }));
-            expect(uploader).toHaveClass('lumx-uploader--aspect-ratio-horizontal');
-            expect(uploader).toHaveClass('lumx-uploader--size-xl');
-            expect(uploader).toHaveClass('lumx-uploader--theme-light');
-            expect(uploader).toHaveClass('lumx-uploader--variant-square');
-        });
-
-        it('should render icon', () => {
-            const { icon } = setup({ icon: mdiPlus });
-            expect(icon).toBeInTheDocument();
-        });
-
-        it('should render variant circle', () => {
-            const { uploader } = setup({
-                variant: 'circle',
-                // Ratio should be ignored
-                aspectRatio: 'vertical',
-            });
-
-            expect(uploader).toHaveClass(CLASSNAME);
-            expect(uploader).toHaveClass('lumx-uploader--aspect-ratio-square');
-            expect(uploader).toHaveClass('lumx-uploader--size-xl');
-            expect(uploader).toHaveClass('lumx-uploader--theme-light');
-            expect(uploader).toHaveClass('lumx-uploader--variant-circle');
-        });
-
-        it('should render variant rounded', () => {
-            const { uploader } = setup({ variant: 'rounded' });
-
-            expect(uploader).toHaveClass(CLASSNAME);
-            expect(uploader).toHaveClass('lumx-uploader--aspect-ratio-horizontal');
-            expect(uploader).toHaveClass('lumx-uploader--size-xl');
-            expect(uploader).toHaveClass('lumx-uploader--theme-light');
-            expect(uploader).toHaveClass('lumx-uploader--variant-rounded');
-        });
-
-        it('should render file input', () => {
-            const label = 'Label';
-            const accept = '*';
-            const { uploader } = setup({ label, fileInputProps: { accept } as any });
-
-            expect(uploader.tagName).toBe('LABEL');
-            expect(uploader).toHaveTextContent(label);
-            const inputNative = getByTagName(uploader, 'input');
-            expect(inputNative).toHaveAttribute('type', 'file');
-            expect(inputNative).toHaveAttribute('accept', accept);
-            expect(uploader).toHaveAttribute('for', inputNative.id);
-        });
+    // Run core tests.
+    BaseUploaderTests({
+        render: (props: UploaderProps) => render(<Uploader {...props} />),
+        screen,
     });
 
     describe.each`
