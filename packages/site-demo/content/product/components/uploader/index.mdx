@@ -1,16 +1,20 @@
 ---
-frameworks: ['react']
+frameworks: ['react', 'vue']
 ---
-import * as DemoDefault from './react/default.tsx';
-import * as DemoThumbnail from './react/thumbnail.tsx';
-import * as DemoAvatar from './react/avatar.tsx';
+import * as ReactDemoDefault from './react/default.tsx';
+import * as ReactDemoThumbnail from './react/thumbnail.tsx';
+import * as ReactDemoAvatar from './react/avatar.tsx';
+import * as VueDemoDefault from './vue/default.vue';
+import * as VueDemoThumbnail from './vue/thumbnail.vue';
+import * as VueDemoAvatar from './vue/avatar.vue';
 import ReactUploader from 'lumx-docs:@lumx/react/components/uploader/Uploader';
+import VueUploader from 'lumx-docs:@lumx/vue/components/uploader/Uploader';
 
 # Uploader
 
 **Uploaders help users select files or medias.**
 
-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: DemoDefault }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemoDefault, vue: VueDemoDefault }} />
 
 ## Variants
 
@@ -18,11 +22,11 @@ There are three variants: `square`, `rounded` and `circle`.
 
 ### Thumbnail
 
-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: DemoThumbnail }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemoThumbnail, vue: VueDemoThumbnail }} />
 
 ### Avatar
 
-<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: DemoAvatar }} />
+<DemoBlock orientation="horizontal" withThemeSwitcher demo={{ react: ReactDemoAvatar, vue: VueDemoAvatar }} />
 
 ### Accessibility concerns
 
@@ -40,4 +44,4 @@ Uploaders can be disabled in two ways:
 
 ### Properties
 
-<PropTable docs={{ react: ReactUploader }} />
+<PropTable docs={{ react: ReactUploader, vue: VueUploader }} />
