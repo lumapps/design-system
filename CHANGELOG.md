@@ -51,6 +51,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `@lumx/vue`:
     -   Create the `RawInputText` component
     -   Create the `RawInputTextarea` component (with `useFitRowsToContent` composable for auto-expanding rows)
+    -   Create the `TextField` component
 
 ## [4.6.0][] - 2026-03-03
 
