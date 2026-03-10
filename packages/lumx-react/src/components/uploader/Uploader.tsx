@@ -23,12 +23,18 @@ import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 export type { UploaderSize };
 export { UploaderVariant };
 
+interface ReactFileInputProps extends Omit<React.ComponentProps<'input'>, 'onChange'> {
+    onChange?(files: File[], evt: React.ChangeEvent<HTMLInputElement>): void;
+}
+
 /**
  * Defines the props of the component.
  */
 export interface UploaderProps extends GenericProps, ReactToJSX<UIProps, UploaderPropsToOverride> {
     /** On click callback. */
     onClick?: MouseEventHandler;
+    /** Handle file selection with a native input file. */
+    fileInputProps?: ReactFileInputProps;
 }
 
 /**
@@ -66,7 +72,7 @@ export const Uploader = forwardRef<UploaderProps>((props, ref) => {
         return (evt: React.ChangeEvent<HTMLInputElement>) => {
             const fileList = evt.target.files;
             const files = fileList ? Array.from(fileList) : [];
-            fileInputProps.onChange(files, evt);
+            fileInputProps.onChange?.(files, evt);
         };
     }, [isAnyDisabled, fileInputProps]);
 
@@ -76,17 +82,17 @@ export const Uploader = forwardRef<UploaderProps>((props, ref) => {
         inputId,
         handleClick,
         handleChange: onChange,
-        handleDragEnter: setDragHovering,
-        handleDragLeave: unsetDragHovering,
         isAnyDisabled,
         isDragHovering,
         theme,
-        fileInputProps: fileInputProps
-            ? {
-                  ...fileInputProps,
-                  ...disabledStateProps,
-              }
-            : undefined,
+        fileInputProps: {
+            ...fileInputProps,
+            ...disabledStateProps,
+            readOnly: isAnyDisabled,
+            onDragEnter: setDragHovering,
+            onDragLeave: unsetDragHovering,
+            onDrop: unsetDragHovering,
+        },
         ...wrapper.props,
         ...forwardedProps,
     });

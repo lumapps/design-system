@@ -27,11 +27,9 @@ export type UploaderVariant = ValueOf<typeof UploaderVariant>;
 export type UploaderSize = Extract<Size, 'xl' | 'xxl'>;
 
 /**
- * Extend native HTML input props with specialized `onChange` providing the a `File` array.
+ * Native input file props (framework-agnostic subset).
  */
-interface FileInputProps extends Omit<React.ComponentProps<'input'>, 'onChange'> {
-    onChange(files: File[], evt: React.ChangeEvent<HTMLInputElement>): void;
-}
+type FileInputProps = Record<string, any>;
 
 /**
  * Defines the props of the component.
@@ -59,23 +57,13 @@ export interface UploaderProps extends HasClassName, HasDisabled, HasTheme, HasA
     inputId: string;
     /** Whether a file is currently being dragged over the input. */
     isDragHovering?: boolean;
-    /** Callback fired when a dragged file leaves the drop zone. */
-    handleDragLeave: () => void;
-    /** Callback fired when a file is dragged over the drop zone. */
-    handleDragEnter: () => void;
     /** Callback fired when the file input value changes. */
     handleChange?: (event: any) => void;
     /** Root element tag or component (e.g. `'button'` or `'label'`). */
     Component: 'button' | 'label';
 }
 
-export type UploaderPropsToOverride =
-    | 'isAnyDisabled'
-    | 'inputId'
-    | 'isDragHovering'
-    | 'handleDragLeave'
-    | 'handleDragEnter'
-    | 'Component';
+export type UploaderPropsToOverride = 'isAnyDisabled' | 'inputId' | 'isDragHovering' | 'fileInputProps' | 'Component';
 
 /**
  * Component display name.
@@ -117,8 +105,6 @@ export const Uploader = (props: UploaderProps) => {
         fileInputProps,
         inputId,
         isDragHovering,
-        handleDragLeave,
-        handleDragEnter,
         handleClick,
         handleChange,
         Component = 'label',
@@ -159,11 +145,7 @@ export const Uploader = (props: UploaderProps) => {
                     id={inputId}
                     className={classNames.join(element('input'), classNames.visuallyHidden())}
                     {...fileInputProps}
-                    readOnly={isAnyDisabled}
                     onChange={handleChange}
-                    onDragEnter={handleDragEnter}
-                    onDragLeave={handleDragLeave}
-                    onDrop={handleDragLeave}
                 />
             )}
         </Component>
