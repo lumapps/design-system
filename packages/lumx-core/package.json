@@ -7,7 +7,7 @@
     },
     "dependencies": {
         "@floating-ui/dom": "^1.7.5",
-        "@lumx/icons": "^4.7.0",
+        "@lumx/icons": "^4.7.1",
         "classnames": "^2.3.2",
         "focus-visible": "^5.0.2",
         "lodash": "4.17.23",
@@ -69,7 +69,7 @@
         "update-version-changelog": "yarn version-changelog ../../CHANGELOG.md"
     },
     "sideEffects": false,
-    "version": "4.7.0",
+    "version": "4.7.1",
     "devDependencies": {
         "@rollup/plugin-typescript": "^12.3.0",
         "@testing-library/dom": "^10.4.1",
