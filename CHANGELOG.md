@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   `@lumx/core`:
+    -   Moved `Uploader` stories and tests from `@lumx/react`
+
 ## [4.7.1][] - 2026-03-10
 
 ### Fixed
