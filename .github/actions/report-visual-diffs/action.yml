@@ -58,5 +58,5 @@ runs:
                   await require('${{ github.action_path }}/publish-comment.js')({
                       github,
                       context,
-                      commentBodyPath: '${{ inputs.output-dir }}/comment-body.md',
+                      commentBodyPath: '${{ inputs.artifacts-dir }}/comment-body.md',
                   });
