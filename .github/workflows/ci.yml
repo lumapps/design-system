@@ -57,13 +57,13 @@ jobs:
     test:
         runs-on: ubuntu-latest
         needs: [tests]
-        if: always() && github.event.pull_request.draft == false
+        if: '!cancelled() && github.event.pull_request.draft == false'
         steps:
             - name: Success
-              if: ${{ !(contains(needs.*.result, 'failure')) }}
+              if: ${{ !(contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')) }}
               run: exit 0
             - name: Failure
-              if: ${{ contains(needs.*.result, 'failure') }}
+              if: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') }}
               run: exit 1
 
     type-check:
@@ -102,6 +102,37 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+    # Fails when the release/next PR is frozen (marked "Ready for review"),
+    # blocking merges to master during release preparation.
+    release-freeze-check:
+        if: >-
+            github.event.pull_request.draft == false &&
+            github.head_ref != 'release/next'
+        runs-on: ubuntu-latest
+        steps:
+            - name: 'Checkout repository'
+              uses: actions/checkout@v5
+
+            - name: 'Fail if release is frozen'
+              uses: ./.github/actions/manage-release-pr
+              with:
+                  mode: fail-when-frozen
+                  github-token: ${{ secrets.GITHUB_TOKEN }}
+
+    # Single required check in branch protection rule.
+    # Aggregates all CI jobs so only "required-checks" needs to be required.
+    required-checks:
+        runs-on: ubuntu-latest
+        needs: [lint, test-storybook, tests, type-check, Commit-message-validation, release-freeze-check]
+        if: '!cancelled() && github.event.pull_request.draft == false'
+        steps:
+            - name: Success
+              if: ${{ !(contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')) }}
+              run: exit 0
+            - name: Failure
+              if: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') }}
+              run: exit 1
+
     after-all:
-        needs: [lint, test, type-check, test-storybook, Commit-message-validation]
+        needs: [required-checks]
         uses: ./.github/workflows/pr-automation.yml

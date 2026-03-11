@@ -1,0 +1,47 @@
+name: 'Manage release PR'
+description: 'Check or update the release/next draft PR'
+
+inputs:
+    mode:
+        description: '"check" to check if frozen, "update" to create/update the PR, "fail-when-frozen" to fail CI when frozen'
+        required: true
+    nextVersion:
+        description: 'Release version (required for update mode)'
+        required: false
+    prereleaseVersion:
+        description: 'Latest prerelease version (optional, for update mode)'
+        required: false
+    run-url:
+        description: 'Workflow run URL (optional, for update mode)'
+        required: false
+    github-token:
+        description: 'GitHub token with PR write access'
+        required: true
+
+outputs:
+    frozen:
+        description: 'Whether the release/next PR is frozen (not draft)'
+        value: ${{ steps.run.outputs.frozen }}
+    prNumber:
+        description: 'Existing release/next PR number (0 if none)'
+        value: ${{ steps.run.outputs.prNumber }}
+
+runs:
+    using: composite
+    steps:
+        - name: 'Manage release PR'
+          id: run
+          uses: actions/github-script@v6
+          with:
+              github-token: ${{ inputs.github-token }}
+              script: |
+                  const run = require('${{ github.action_path }}/index.js');
+                  await run({
+                      github,
+                      context,
+                      core,
+                      mode: '${{ inputs.mode }}',
+                      nextVersion: '${{ inputs.nextVersion }}',
+                      prereleaseVersion: '${{ inputs.prereleaseVersion }}',
+                      runUrl: '${{ inputs.run-url }}',
+                  });

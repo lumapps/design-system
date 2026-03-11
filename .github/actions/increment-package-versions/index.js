@@ -2,7 +2,7 @@ const lodash = require('lodash');
 const semver = require('semver');
 const util = require('util');
 const child_process = require('child_process');
-const run = (cmd) => util.promisify(child_process.exec)(cmd, { cdw: process.env.GITHUB_WORKSPACE });
+const run = (cmd) => util.promisify(child_process.exec)(cmd, { cwd: process.env.GITHUB_WORKSPACE });
 
 /**
  * Increment package versions for release or prerelease.
@@ -17,23 +17,32 @@ async function main({ inputs, context }) {
         process.exit(1);
     }
 
-    const releaseType = inputs.releaseType || 'prerelease';
+    const releaseType = inputs.releaseType || 'prepatch';
+    const isPrerelease = releaseType.startsWith('pre');
     console.log(`Release type: ${releaseType}`);
     const prereleaseName = lodash.kebabCase(inputs.prereleaseName || 'alpha');
 
     const getVersion = (tag) => run(`npm view @lumx/core@${tag} version`).then(({ stdout }) => stdout.trim());
     const npmLatestVersion = await getVersion('latest');
+    // Use local version if higher than NPM (handles NPM propagation delay after a release)
+    const localCoreVersion = require(`${process.env.GITHUB_WORKSPACE}/packages/lumx-core/package.json`).version;
+    const latestVersion = semver.gt(localCoreVersion, npmLatestVersion) ? localCoreVersion : npmLatestVersion;
+    if (latestVersion !== npmLatestVersion) {
+        console.log(`Using local version ${latestVersion} (NPM latest: ${npmLatestVersion})`);
+    }
 
-    if (releaseType !== 'prerelease') {
-        // Exit if not on master
+    if (!isPrerelease && !inputs.releaseBranch) {
+        // Exit if not on master (skip when releaseBranch is provided by automation)
         if (baseBranch !== 'master') {
-            console.log(`New ${releaseType} release can only be created from master branch.\n`);
+            console.log(`New ${releaseType} release can only be created from the master branch.\n`);
             process.exit(1);
         }
 
         const localVersion = require(`${process.env.GITHUB_WORKSPACE}/package.json`).version;
         if (localVersion !== npmLatestVersion) {
-            console.log(`NPM latest version (${npmLatestVersion}) does not match the local latest version (${localVersion}).\n`);
+            console.log(
+                `NPM latest version (${npmLatestVersion}) does not match the local latest version (${localVersion}).\n`,
+            );
             process.exit(1);
         }
 
@@ -44,30 +53,31 @@ async function main({ inputs, context }) {
             console.log(err);
             process.exit(1);
         }
-    } else {
+    } else if (isPrerelease) {
         console.log(`Prerelease name: ${prereleaseName}`);
     }
 
-    // Get NPM dist tag
-    const distTag = releaseType === 'prerelease' ? prereleaseName : 'latest';
+    const distTag = isPrerelease ? prereleaseName : 'latest';
     console.log(`NPM dist tag: ${distTag}`);
 
-    // Get base version (version from which to increment)
-    const prevDistTagVersion = await getVersion(distTag);
-    let baseVersion = prevDistTagVersion;
-    // Prerelease should start with latest NPM version + patch (ex: 'v1.0.0' => 'v1.0.1-alpha.0')
-    if (releaseType === 'prerelease' && (!baseVersion || !baseVersion.startsWith(semver.inc(npmLatestVersion, 'patch')))) {
-        baseVersion = npmLatestVersion;
-    }
-    console.log(`${releaseType} base version: ${baseVersion}`);
+    const prevDistTagVersion = await getVersion(distTag).catch(() => '');
 
-    // Increment version
-    const nextVersion = semver.inc(baseVersion, releaseType, prereleaseName);
+    let nextVersion;
+    if (isPrerelease) {
+        const baseReleaseType = releaseType.replace('pre', '');
+        const expectedBase = semver.inc(latestVersion, baseReleaseType);
+        if (prevDistTagVersion && prevDistTagVersion.startsWith(expectedBase)) {
+            nextVersion = semver.inc(prevDistTagVersion, 'prerelease', prereleaseName);
+        } else {
+            nextVersion = semver.inc(latestVersion, releaseType, prereleaseName);
+        }
+    } else {
+        nextVersion = semver.inc(prevDistTagVersion || latestVersion, releaseType);
+    }
     console.log(`New ${releaseType} version: ${nextVersion}`);
 
-    // Checkout new branch
-    const releaseBranch = `release/${nextVersion}`;
-    await run(`git checkout -b ${releaseBranch}`);
+    const releaseBranch = inputs.releaseBranch || `release/${nextVersion}`;
+    await run(`git checkout -B ${releaseBranch}`);
 
     // Update version in all packages
     await run(`yarn workspaces foreach -A version ${nextVersion}`);

@@ -5,29 +5,35 @@ inputs:
     releaseType:
         description: 'Release type'
         required: true
-        default: 'prerelease'
+        default: 'prepatch'
         type: choice
         options:
-            - prerelease
+            - prepatch
+            - preminor
+            - premajor
             - patch
             - minor
             - major
     prereleaseName:
-        description: 'Prerelease name (ignore if release type is not `prerelease`)'
+        description: 'Prerelease name (ignore if release type is not a prerelease)'
         default: 'alpha'
+        type: string
+    releaseBranch:
+        description: 'Override release branch name (default: release/{version})'
+        required: false
         type: string
 outputs:
     distTag:
-        description: "NPM dist tag (latest, alpha, etc.)"
+        description: 'NPM dist tag (latest, alpha, etc.)'
         value: ${{ fromJSON(steps.version.outputs.result).distTag }}
     prevDistTagVersion:
-        description: "Previous version in the dist tag (if any)"
+        description: 'Previous version in the dist tag (if any)'
         value: ${{ fromJSON(steps.version.outputs.result).prevDistTagVersion }}
     nextVersion:
-        description: "Next version"
+        description: 'Next version'
         value: ${{ fromJSON(steps.version.outputs.result).nextVersion }}
     releaseBranch:
-        description: "Name of the release branch"
+        description: 'Name of the release branch'
         value: ${{ fromJSON(steps.version.outputs.result).releaseBranch }}
 
 # Example release:
@@ -36,22 +42,21 @@ outputs:
 #     with:
 #         releaseType: 'patch'
 
-
 # Example prerelease:
 #   - name: Upgrade package versions
 #     uses: ./.github/actions/increment-package-versions
 #     with:
-#         releaseType: 'prerelease'
+#         releaseType: 'preminor'
 #         prereleaseName: 'beta'
 
 runs:
     using: composite
     steps:
-        -   name: Upgrade package versions
-            id: version
-            uses: actions/github-script@v6
-            with:
-                script: |
-                    return require("${{ github.action_path }}")({
-                        github, context, inputs: ${{ toJSON(inputs) }}
-                    })
+        - name: Upgrade package versions
+          id: version
+          uses: actions/github-script@v6
+          with:
+              script: |
+                  return require("${{ github.action_path }}")({
+                      github, context, inputs: ${{ toJSON(inputs) }}
+                  })
