@@ -2,7 +2,7 @@ import castArray from 'lodash/castArray';
 
 import { Orientation } from '../../constants';
 import { classNames } from '../../utils';
-import type { LumxClassName, JSXElement, HasClassName } from '../../types';
+import type { LumxClassName, JSXElement, HasClassName, CommonRef } from '../../types';
 import type { FlexHorizontalAlignment, FlexVerticalAlignment, GapSize, MarginAutoAlignment } from './types';
 
 export type * from './types';
@@ -29,6 +29,8 @@ export interface FlexBoxProps extends HasClassName {
     vAlign?: FlexHorizontalAlignment;
     /** Whether the "flex wrap" is enabled or not. */
     wrap?: boolean;
+    /** reference to the root element */
+    ref?: CommonRef;
 }
 
 /**

@@ -1,67 +1,23 @@
 import { createRef } from 'react';
 
-import { commonTestsSuiteRTL } from '@lumx/react/testing/utils';
-import { render } from '@testing-library/react';
+import { commonTestsSuiteRTL, SetupRenderOptions } from '@lumx/react/testing/utils';
+import { render, screen } from '@testing-library/react';
 
-import { getByClassName, queryByClassName } from '@lumx/react/testing/utils/queries';
-import { GenericBlock, GenericBlockProps } from '.';
+import BaseGenericBlockTests, { setup as coreSetup } from '@lumx/core/js/components/GenericBlock/Tests';
+import { GenericBlock, GenericBlockProps } from './GenericBlock';
 
 const CLASSNAME = GenericBlock.className as string;
 
-/**
- * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
- */
-const setup = (props: Partial<GenericBlockProps> = {}) => {
-    const { container } = render(<GenericBlock {...(props as any)} />);
-    const genericBlock = getByClassName(document.body, CLASSNAME);
-    const figure = queryByClassName(genericBlock, 'lumx-generic-block__figure');
-    const content = queryByClassName(genericBlock, 'lumx-generic-block__content');
-    const actions = queryByClassName(genericBlock, 'lumx-generic-block__actions');
-    return { props, genericBlock, figure, content, actions, container };
-};
+const renderGenericBlock = (props: any) => render(<GenericBlock {...props} />);
+
+const setup = (props: Partial<GenericBlockProps> = {}, options: SetupRenderOptions = {}) =>
+    coreSetup(props, { ...options, render: renderGenericBlock, screen });
 
 describe(`<${GenericBlock.displayName}>`, () => {
+    // Run core tests.
+    BaseGenericBlockTests({ render: renderGenericBlock, screen });
+
     describe('Props', () => {
-        it('should render content', () => {
-            const { genericBlock, content, figure, actions } = setup({ children: 'Content' });
-            expect(genericBlock).toBeInTheDocument();
-            expect(genericBlock.className).toMatchInlineSnapshot(
-                '"lumx-generic-block lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--gap-big"',
-            );
-
-            expect(content).toBeInTheDocument();
-            expect(content).toHaveTextContent('Content');
-            expect(content?.className).toMatchInlineSnapshot(
-                '"lumx-generic-block__content lumx-flex-box lumx-flex-box--orientation-vertical lumx-flex-box--fill-space"',
-            );
-
-            expect(figure).not.toBeInTheDocument();
-            expect(actions).not.toBeInTheDocument();
-        });
-
-        it('should forward vAlign & hAlign', () => {
-            const { genericBlock, figure, content, actions } = setup({
-                children: 'Content',
-                figure: 'Figure',
-                actions: 'Actions',
-                vAlign: 'left',
-                hAlign: 'bottom',
-            });
-
-            expect(genericBlock?.className).toMatchInlineSnapshot(
-                '"lumx-generic-block lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--v-align-left lumx-flex-box--h-align-bottom lumx-flex-box--gap-big"',
-            );
-            expect(figure?.className).toMatchInlineSnapshot(
-                '"lumx-generic-block__figure lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--v-align-left lumx-flex-box--h-align-bottom"',
-            );
-            expect(content?.className).toMatchInlineSnapshot(
-                '"lumx-generic-block__content lumx-flex-box lumx-flex-box--orientation-vertical lumx-flex-box--v-align-left lumx-flex-box--h-align-bottom lumx-flex-box--fill-space"',
-            );
-            expect(actions?.className).toMatchInlineSnapshot(
-                '"lumx-generic-block__actions lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--v-align-left lumx-flex-box--h-align-bottom"',
-            );
-        });
-
         it('should combine figure props', () => {
             const { figure, content, actions } = setup({
                 figure: 'Figure 1',
@@ -147,14 +103,8 @@ describe(`<${GenericBlock.displayName}>`, () => {
         });
 
         it('should render as a different element', () => {
-            const { container } = setup({ as: 'section', children: 'Content' });
+            const { container } = render(<GenericBlock {...({ as: 'section' } as any)}>Content</GenericBlock>);
             expect(container.querySelector('section')).toBeInTheDocument();
-        });
-
-        it('should not render empty sections', () => {
-            const { figure, actions } = setup({ children: 'Content' });
-            expect(figure).not.toBeInTheDocument();
-            expect(actions).not.toBeInTheDocument();
         });
     });
 
