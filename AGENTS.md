@@ -94,11 +94,12 @@ yarn type-check                # TypeScript checking
 
 ## SKILLS (Claude)
 
-| Skill               | When                                          |
-| ------------------- | --------------------------------------------- |
-| `react-component`   | Scaffold new React component                  |
-| `vue-docs`          | Add Vue demos + PropTable to docs             |
-| `migrate-component` | Move React-only → core/React/Vue architecture |
+| Skill               | When                                                     |
+| ------------------- | -------------------------------------------------------- |
+| `react-component`   | Scaffold new React component                             |
+| `vue-docs`          | Add Vue demos + PropTable to docs                        |
+| `migrate-component` | Move React-only → core/React/Vue architecture            |
+| `visual-diffs`      | Debug visual diffs in Storybook screenshots              |
 
 ## NOTES
 
