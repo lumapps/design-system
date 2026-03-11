@@ -290,15 +290,12 @@ function buildCrossFrameworkHeading(crossFramework, { headingLevel = 2 } = {}) {
     const { diffs, totalPairs, unmatchedReact, unmatchedVue } = crossFramework;
     const hasDiffs = diffs.length > 0;
 
-    const summary = hasDiffs
-        ? [
-              `${diffs.length} difference(s) (out of ${totalPairs})`,
-              unmatchedReact > 0 && `${unmatchedReact} React-only`,
-              unmatchedVue > 0 && `${unmatchedVue} Vue-only`,
-          ]
-              .filter(Boolean)
-              .join(', ')
-        : 'No differences';
+    const summary = [
+        hasDiffs ? `${diffs.length} difference(s)` : 'No differences',
+        `${totalPairs} matched`,
+        `${unmatchedReact} React-only`,
+        `${unmatchedVue} Vue-only`,
+    ].join(', ');
 
     return [md.heading(headingLevel, `@lumx/react vs @lumx/vue — ${summary}`)];
 }
