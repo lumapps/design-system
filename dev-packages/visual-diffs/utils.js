@@ -73,7 +73,7 @@ function extractRelativePath(filePath, markerDirs) {
  * @returns {string} Normalized path
  */
 function normalizeScreenshotPath(relPath) {
-    return relPath.replace(/\.stories\.tsx?\//, '/');
+    return relPath.replace(/\.stories\.[jt]sx?\//, '/');
 }
 
 module.exports = { findFiles, extractRelativePath, normalizeScreenshotPath };
