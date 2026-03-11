@@ -1,2 +1,2 @@
 export * from './GenericBlock';
-export { GenericBlockGapSize } from './constants';
+export { GenericBlockGapSize } from '@lumx/core/js/components/GenericBlock/constants';

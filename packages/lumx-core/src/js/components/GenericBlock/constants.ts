@@ -1,6 +1,6 @@
 import pick from 'lodash/pick';
-import { Size } from '@lumx/react';
-import { ValueOf } from '@lumx/react/utils/type';
+import { Size } from '../../constants';
+import { ValueOf } from '../../types';
 
 /**
  * Accepted gap sizes for the generic block.
