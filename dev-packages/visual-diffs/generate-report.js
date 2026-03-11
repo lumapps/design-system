@@ -312,19 +312,13 @@ function buildCrossFrameworkHeading(crossFramework, { headingLevel = 2 } = {}) {
 function buildUnchangedSection(pkg, imageUrlPrefix) {
     if (pkg.unchangedScreenshots.length === 0) return [];
     const zipUrl = `${imageUrlPrefix}/${pkg.label}-unchanged.zip`;
-    const content = [
-        md.link('Download all unchanged screenshots (.zip)', zipUrl),
-        '',
-    ];
+    const content = [md.link('Download all unchanged screenshots (.zip)', zipUrl), ''];
     for (const [storyFile, groupEntries] of groupByStoryFile(pkg.unchangedScreenshots)) {
         const names = groupEntries.map((e) => e.shortName).join(', ');
         content.push(`- ${md.bold(storyFile.split('/').join(' > '))}: ${names}`);
     }
     return [
-        ...md.details(
-            `${md.heading(3, 'Unchanged Screenshots')} (${pkg.unchangedScreenshots.length})`,
-            ...content,
-        ),
+        ...md.details(`${md.heading(3, 'Unchanged Screenshots')} (${pkg.unchangedScreenshots.length})`, ...content),
         '',
     ];
 }
@@ -631,8 +625,10 @@ async function main({ artifactsDir, outputDir, runId, owner, repo, prNumber }) {
     const commentBody = buildSummaryReport(packages, { ...baseOptions, reportUrl });
 
     // 6. Write outputs
+    // The wiki report goes into outputDir (uploaded to wiki + artifact).
+    // The comment body goes into artifactsDir (only read by publish-comment.js, not uploaded).
     const reportPath = path.join(outputDir, `${reportFileName}.md`);
-    const commentPath = path.join(outputDir, 'comment-body.md');
+    const commentPath = path.join(artifactsDir, 'comment-body.md');
 
     await Promise.all([fs.writeFile(reportPath, fullReport, 'utf8'), fs.writeFile(commentPath, commentBody, 'utf8')]);
 
