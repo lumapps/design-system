@@ -4,29 +4,17 @@ const fs = require('fs');
 
 const { getStoryBookURL, getShortSHA } = require('../utils');
 const { CHANGELOG_PATH } = require('../../../configs/path');
-const VERSION_HEADER_REGEXP = /^## \[(.*?)\]\[\]/gm;
-
-// Extract changelog from latest version in CHANGELOG.md
-async function getLatestVersionChangelog() {
-    const changelog = (await fs.promises.readFile(CHANGELOG_PATH)).toString();
-    // Get first and second version header
-    const [matchLatestVersion, matchVersionBefore] = changelog.matchAll(VERSION_HEADER_REGEXP);
-    const version = matchLatestVersion[1];
-    // Start changelog after the first version header
-    const startLastVersionChangelog = changelog.indexOf('\n', matchLatestVersion.index);
-    // Get lines between start and the second version header
-    const versionChangelog = changelog.substring(startLastVersionChangelog, matchVersionBefore.index).trim();
-    return { version, versionChangelog };
-}
+const { extractLatestVersionSection } = require('@lumx/changelog-utils');
 
 /**
  * Generate release note and create a release on GH.
  */
 async function main({ github, context }) {
-    const [shortSHA, { version, versionChangelog }] = await Promise.all([
+    const [shortSHA, changelog] = await Promise.all([
         getShortSHA(context.sha),
-        getLatestVersionChangelog(),
+        fs.promises.readFile(CHANGELOG_PATH, 'utf8'),
     ]);
+    const { version, text: versionChangelog } = extractLatestVersionSection(changelog);
     const versionTag = `v${version}`;
 
     // Related links
@@ -55,8 +43,9 @@ async function main({ github, context }) {
 module.exports = main;
 
 // Example use (run with `node .github/actions/release-note/index.js`)
-if (require.main === module) main({
-    context: { repo: { repo: 'design-system', owner: 'lumapps' }, sha: 'cdde1f3d1' },
-    // Mocked GH API
-    github: { rest: { repos: { createRelease: console.log } } },
-});
+if (require.main === module)
+    main({
+        context: { repo: { repo: 'design-system', owner: 'lumapps' }, sha: 'cdde1f3d1' },
+        // Mocked GH API
+        github: { rest: { repos: { createRelease: console.log } } },
+    });

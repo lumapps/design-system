@@ -2,8 +2,10 @@ name: 'CD / Publish'
 
 # This workflow orchestrates the continuous delivery process for the design system.
 # It supports:
-# - Official releases triggered by merging a release PR into 'master'
-#   (from release/* branches created by cd-prepare-release.yml)
+# - Official releases triggered by merging the release/next PR into 'master'
+#   (auto-maintained as a draft PR, freeze by marking it "ready")
+# - Automatic prereleases (tag 'next') triggered when a PR merged into 'master' modifies
+#   any lib package (packages/lumx-*)
 # - Manual prereleases initiated via workflow_dispatch (with prereleaseName)
 # - Manual release retries via workflow_dispatch (without prereleaseName, to retry a failed release
 #   using the version already set in packages)
@@ -11,13 +13,19 @@ name: 'CD / Publish'
 # For releases: it builds and publishes NPM packages, creates Git tags,
 # deploys the demo site, updates Chromatic, and generates GitHub release notes.
 #
-# For prereleases: it increments package versions, publishes them to NPM with a prerelease tag,
-# and deprecates previous prerelease versions.
+# For prereleases: it increments package versions, publishes them to NPM with a prerelease tag.
 #
-# Note: Release version increments are managed by `cd-prepare-release.yml`.
+# Release type (patch/minor/major) is auto-detected from CHANGELOG.md.
+#
+# Freeze behavior:
+# - When the release/next PR is frozen (marked "Ready"), merges to master are blocked
+#   via the "release-freeze-check" CI job (see ci.yml).
+# - Prereleases ('next' tag) still publish for PRs merged before the freeze.
+# - When the frozen release PR is merged, if CHANGELOG has unreleased changes
+#   (from PRs merged before the freeze), a new release/next draft PR is auto-created.
 
 on:
-    # Trigger on release PR merged into master (from release/* branches created by cd-prepare-release.yml)
+    # Trigger on PR merged into master (release/next for releases, lib-changing PRs for prereleases)
     pull_request:
         branches:
             - master
@@ -40,40 +48,123 @@ concurrency:
     cancel-in-progress: true
 
 jobs:
-    is_release_commit:
-        name: 'Check is merged release PR'
+    check_trigger:
+        name: 'Check trigger type'
         runs-on: ubuntu-latest
-        # Only run for merged PRs from release/* branches (not just closed/dismissed PRs)
         if: >-
             github.event_name == 'workflow_dispatch' ||
-            (github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/'))
+            github.event.pull_request.merged == true
         outputs:
             version: ${{ steps.check.outputs.version }}
+            affected: ${{ steps.check.outputs.affected }}
         steps:
-            - if: github.event_name == 'workflow_dispatch' && !inputs.prereleaseName
-              name: 'Checkout repository'
+            - name: 'Checkout repository'
               uses: actions/checkout@v5
+              with:
+                  fetch-depth: 0
 
-            - name: 'Extract release version'
+            - name: 'Evaluate trigger'
               id: check
               run: |
-                  set -x # verbose
+                  set -ex
+                  version=""
+                  affected="false"
+
                   if [ "${{ github.event_name }}" = "pull_request" ]; then
-                      # Extract version from PR branch name (release/1.2.3 -> 1.2.3)
                       branch="${{ github.event.pull_request.head.ref }}"
-                      version=$(echo "$branch" | egrep -o '[0-9]+\.[0-9]+\.[0-9]+' || true)
+                      if [[ "$branch" == release/* ]]; then
+                          version=$(echo "$branch" | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' || true)
+                          if [ -z "$version" ]; then
+                              version=$(node -p "require('./packages/lumx-core/package.json').version")
+                          fi
+                          # Check if CHANGELOG has unreleased changes (to re-open a release PR after this release)
+                          if sed -n '/^## \[Unreleased\]/,/^## \[/p' CHANGELOG.md | grep -q '^### '; then
+                              affected="true"
+                          fi
+                      else
+                          BASE_SHA="${{ github.event.pull_request.base.sha }}"
+                          CHANGED=$(git diff --name-only "$BASE_SHA" HEAD)
+                          echo "Changed files:"
+                          echo "$CHANGED"
+                          if echo "$CHANGED" | grep -q '^packages/lumx-'; then
+                              affected="true"
+                          fi
+                      fi
                   elif [ -z "${{ inputs.prereleaseName }}" ]; then
-                      # Release retry: read version from package.json
                       version=$(node -p "require('./packages/lumx-core/package.json').version")
                   fi
-                  if [ -n "$version" ]; then
-                      echo "version=$version" >> "$GITHUB_OUTPUT"
-                  fi
+
+                  [ -n "$version" ] && echo "version=$version" >> "$GITHUB_OUTPUT"
+                  echo "affected=$affected" >> "$GITHUB_OUTPUT"
+
+    prepare_release_next:
+        name: 'Update release/next preview'
+        needs: [check_trigger, build_publish_NPM]
+        if: >-
+            !failure() &&
+            needs.check_trigger.outputs.affected == 'true'
+        runs-on: ubuntu-latest
+        steps:
+            - name: 'Checkout repository'
+              uses: actions/checkout@v5
+              with:
+                  token: ${{ secrets.GITBOT_TOKEN }}
+                  fetch-depth: 0
+
+            - name: 'Check if release/next PR is frozen'
+              id: check-pr
+              uses: ./.github/actions/manage-release-pr
+              with:
+                  mode: check
+                  github-token: ${{ secrets.GITBOT_TOKEN }}
+
+            - name: 'Setup'
+              if: success() && steps.check-pr.outputs.frozen != 'true'
+              uses: ./.github/actions/setup
+
+            - name: 'Detect release type from CHANGELOG'
+              id: detect
+              if: success() && steps.check-pr.outputs.frozen != 'true'
+              uses: ./.github/actions/detect-release-type
+
+            - name: 'Increment package versions'
+              id: version
+              if: success() && steps.check-pr.outputs.frozen != 'true'
+              uses: ./.github/actions/increment-package-versions
+              with:
+                  releaseType: '${{ steps.detect.outputs.releaseType }}'
+                  releaseBranch: 'release/next'
+
+            - name: 'Commit and push release/next'
+              if: success() && steps.check-pr.outputs.frozen != 'true'
+              run: |
+                  git config user.name "lumbot"
+                  git config user.email "lumbot@users.noreply.github.com"
+                  git commit -am "chore(release): release v${{ steps.version.outputs.nextVersion }}"
+                  git push --force origin release/next
+
+            - name: 'Create or update draft PR'
+              if: success() && steps.check-pr.outputs.frozen != 'true'
+              uses: ./.github/actions/manage-release-pr
+              with:
+                  mode: update
+                  nextVersion: ${{ steps.version.outputs.nextVersion }}
+                  prereleaseVersion: ${{ needs.build_publish_NPM.outputs.prereleaseVersion }}
+                  run-url: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+                  github-token: ${{ secrets.GITBOT_TOKEN }}
 
     build_publish_NPM:
         name: 'Build & publish NPM libs'
-        needs: [is_release_commit]
-        if: github.event_name == 'workflow_dispatch' || needs.is_release_commit.outputs.version
+        needs: [check_trigger]
+        # Use `!failure()` to override the default "skip when dependency is skipped" behavior.
+        # When check_trigger is skipped (closed-but-not-merged PRs), the inner condition
+        # still evaluates and correctly prevents this job from running.
+        if: >-
+            !failure() && (
+                github.event_name == 'workflow_dispatch' ||
+                needs.check_trigger.outputs.version ||
+                needs.check_trigger.outputs.affected == 'true'
+            )
         permissions:
             id-token: write # Required for OIDC
             contents: read
@@ -81,6 +172,7 @@ jobs:
         outputs:
             distTag: ${{ steps.version.outputs.distTag || 'latest' }}
             prevDistTagVersion: ${{ steps.version.outputs.prevDistTagVersion }}
+            prereleaseVersion: ${{ steps.version.outputs.nextVersion }}
         steps:
             - name: 'Checkout repository'
               uses: actions/checkout@v5
@@ -95,13 +187,26 @@ jobs:
             - name: 'Update npm' # Need npm >= v11.5 for trusted publishing
               run: npm install -g npm@latest
 
-            - name: '[prerelease only] Increment package versions'
+            - name: '[prerelease] Detect release type from CHANGELOG'
+              id: detect-type
+              if: >-
+                  !needs.check_trigger.outputs.version && (
+                      (github.event_name == 'workflow_dispatch' && inputs.prereleaseName) ||
+                      needs.check_trigger.outputs.affected == 'true'
+                  )
+              uses: ./.github/actions/detect-release-type
+
+            - name: '[prerelease] Increment package versions'
               id: version
-              if: github.event_name == 'workflow_dispatch' && inputs.prereleaseName
+              if: >-
+                  !needs.check_trigger.outputs.version && (
+                      (github.event_name == 'workflow_dispatch' && inputs.prereleaseName) ||
+                      needs.check_trigger.outputs.affected == 'true'
+                  )
               uses: ./.github/actions/increment-package-versions
               with:
-                  releaseType: 'prerelease'
-                  prereleaseName: '${{ inputs.prereleaseName }}'
+                  releaseType: "pre${{ steps.detect-type.outputs.releaseType || 'patch' }}"
+                  prereleaseName: "${{ inputs.prereleaseName || 'next' }}"
 
             - name: 'Build libs'
               run: yarn build:libs
@@ -117,8 +222,8 @@ jobs:
 
     git_tag:
         name: 'Git tag release'
-        if: needs.is_release_commit.outputs.version
-        needs: [is_release_commit, build_publish_NPM]
+        if: needs.check_trigger.outputs.version
+        needs: [check_trigger, build_publish_NPM]
         runs-on: ubuntu-latest
         outputs:
             tag: ${{ steps.git.outputs.tag }}
@@ -137,7 +242,7 @@ jobs:
                   set -x
 
                   # Create tag
-                  tag="v${{ needs.is_release_commit.outputs.version }}"
+                  tag="v${{ needs.check_trigger.outputs.version }}"
                   echo "tag=$tag" >> $GITHUB_OUTPUT
                   git tag "$tag"
 
@@ -146,8 +251,8 @@ jobs:
 
     deploy_demo_site:
         name: 'Deploy demo site'
-        if: needs.is_release_commit.outputs.version
-        needs: [is_release_commit, git_tag]
+        if: needs.check_trigger.outputs.version
+        needs: [check_trigger, git_tag]
         timeout-minutes: 30
         runs-on: ubuntu-latest
         env:
@@ -215,8 +320,8 @@ jobs:
 
     create_gh_release:
         name: 'Create release note'
-        if: needs.is_release_commit.outputs.version
-        needs: [is_release_commit, git_tag]
+        if: needs.check_trigger.outputs.version
+        needs: [check_trigger, git_tag]
         permissions:
             contents: write
         runs-on: ubuntu-latest
@@ -231,8 +336,8 @@ jobs:
 
     deploy_storybook_react:
         name: 'Deploy storybook (lumx-react)'
-        if: needs.is_release_commit.outputs.version
-        needs: [is_release_commit, build_publish_NPM]
+        if: needs.check_trigger.outputs.version
+        needs: [check_trigger, build_publish_NPM]
         uses: ./.github/workflows/workflow-deploy-storybook.yml
         with:
             package: lumx-react
@@ -242,8 +347,8 @@ jobs:
 
     deploy_storybook_vue:
         name: 'Deploy storybook (lumx-vue)'
-        if: needs.is_release_commit.outputs.version
-        needs: [is_release_commit, build_publish_NPM]
+        if: needs.check_trigger.outputs.version
+        needs: [check_trigger, build_publish_NPM]
         uses: ./.github/workflows/workflow-deploy-storybook.yml
         with:
             package: lumx-vue

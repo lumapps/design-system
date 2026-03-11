@@ -2943,6 +2943,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@lumx/changelog-utils@workspace:dev-packages/changelog-utils":
+  version: 0.0.0-use.local
+  resolution: "@lumx/changelog-utils@workspace:dev-packages/changelog-utils"
+  languageName: unknown
+  linkType: soft
+
 "@lumx/core@npm:^4.7.1, @lumx/core@workspace:packages/lumx-core":
   version: 0.0.0-use.local
   resolution: "@lumx/core@workspace:packages/lumx-core"

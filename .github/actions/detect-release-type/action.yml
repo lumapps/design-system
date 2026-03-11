@@ -1,0 +1,17 @@
+name: 'Detect release type'
+description: 'Detect release type (patch/minor/major) from CHANGELOG.md unreleased section'
+
+outputs:
+    releaseType:
+        description: 'Detected release type (patch, minor, major)'
+        value: ${{ fromJSON(steps.detect.outputs.result).releaseType }}
+
+runs:
+    using: composite
+    steps:
+        - name: Detect release type from changelog
+          id: detect
+          uses: actions/github-script@v6
+          with:
+              script: |
+                  return require("${{ github.action_path }}")()

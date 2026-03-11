@@ -39,16 +39,25 @@ Each package can also be built individually: `yarn build:react`, `yarn build:vue
 
 ## How to publish packages
 
-The release process uses two automated GitHub workflows:
+Everything is handled by the [**CD / Publish**](https://github.com/lumapps/design-system/actions/workflows/cd-publish.yml) workflow.
 
 ### Official releases (patch / minor / major)
 
-1. Manually trigger [**CD / Prepare Release**](https://github.com/lumapps/design-system/actions/workflows/cd-prepare-release.yml) with `releaseType` (patch, minor, or major) → bumps all package versions, builds libs, and opens a release PR against `master`
-2. Review and merge the PR → automatically triggers [**CD / Publish**](https://github.com/lumapps/design-system/actions/workflows/cd-publish.yml), which: builds and publishes all packages to NPM, creates a Git tag, deploys the demo site, and generates GitHub release notes
+When a PR modifying lib packages (`packages/lumx-*`) is merged into `master`, the workflow automatically:
+
+1. Publishes a `next` prerelease to NPM (e.g. `4.7.1-next.0`)
+2. Creates or updates a **draft** `release/next` PR with the next release version (auto-detected from `CHANGELOG.md`)
+
+To publish an official release:
+
+1. Mark the draft `release/next` PR as **ready for review** (this freezes it — new merges to master won't update it)
+2. Review and merge → publishes all packages to NPM, creates a Git tag, deploys the demo site, and generates GitHub release notes
 
 ### Prereleases
 
-Manually trigger [**CD / Publish**](https://github.com/lumapps/design-system/actions/workflows/cd-publish.yml) directly with a `prereleaseName` (default: `alpha`). This bumps to a prerelease version (e.g. `4.6.1-alpha.0`), publishes under that dist tag, and deprecates the previous prerelease. Prereleases are never merged to `master` and never appear in `CHANGELOG.md`.
+**Automatic (`next`)**: Triggered on every merge to `master` that modifies lib packages. Release type (patch/minor/major) is auto-detected from `CHANGELOG.md`.
+
+**Manual**: Trigger [**CD / Publish**](https://github.com/lumapps/design-system/actions/workflows/cd-publish.yml) via `workflow_dispatch` with a `prereleaseName` (default: `alpha`). This bumps to a prerelease version (e.g. `4.6.1-alpha.0`) and publishes under that dist tag.
 
 ## Copyright and license
 
