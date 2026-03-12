@@ -13,6 +13,12 @@ import { keysOf, VueToJSXProps } from '../../utils/VueToJSX';
 export type FlexBoxProps = VueToJSXProps<UIProps, 'vAlign' | 'hAlign'> & {
     /** Customize the root element. */
     as?: string;
+    /**
+     * @deprecated please use `class`
+     * custom class name, used for compatibility when using
+     * FlexBox as a nested component.
+     */
+    className?: string;
     /** FlexBox vertical alignment */
     verticalAlign?: UIProps['vAlign'];
     /** FlexBox horizontal alignment */
@@ -39,7 +45,7 @@ const FlexBox = defineComponent(
             const computedProps = getFlexBoxProps({
                 ...props,
                 ...attrs,
-                className: props.class,
+                className: props.class || props.className,
                 vAlign: props.verticalAlign,
                 hAlign: props.horizontalAlign,
             });
@@ -54,6 +60,7 @@ const FlexBox = defineComponent(
         props: keysOf<FlexBoxProps>()(
             'as',
             'fillSpace',
+            'className',
             'gap',
             'horizontalAlign',
             'marginAuto',
