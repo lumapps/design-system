@@ -1,26 +1,23 @@
-import { mdiDragVertical } from '@lumx/icons';
-import { ColorPalette, Icon, Size, Theme } from '@lumx/react';
-import { GenericProps, HasTheme } from '@lumx/react/utils/type';
-import type { LumxClassName } from '@lumx/core/js/types';
-import { classNames } from '@lumx/core/js/utils';
+import { GenericProps } from '@lumx/react/utils/type';
+import {
+    DragHandle as UI,
+    DragHandleProps as UIProps,
+    CLASSNAME,
+    COMPONENT_NAME,
+} from '@lumx/core/js/components/DragHandle';
 import { useTheme } from '@lumx/react/utils/theme/ThemeContext';
 import { forwardRef } from '@lumx/react/utils/react/forwardRef';
+import { ReactToJSX } from '@lumx/react/utils/type/ReactToJSX';
 
 /**
  * Defines the props of the component.
  */
-export interface DragHandleProps extends GenericProps, HasTheme {}
+export interface DragHandleProps extends GenericProps, ReactToJSX<UIProps> {}
 
 /**
- * Component display name.
+ * Component default props.
  */
-const COMPONENT_NAME = 'DragHandle';
-
-/**
- * Component default class name and class prefix.
- */
-const CLASSNAME: LumxClassName<typeof COMPONENT_NAME> = 'lumx-drag-handle';
-const { block } = classNames.bem(CLASSNAME);
+const DEFAULT_PROPS: Partial<DragHandleProps> = {};
 
 /**
  * DragHandle component.
@@ -31,21 +28,14 @@ const { block } = classNames.bem(CLASSNAME);
  */
 export const DragHandle = forwardRef<DragHandleProps, HTMLDivElement>((props, ref) => {
     const defaultTheme = useTheme();
-    const { className, theme = defaultTheme, ...forwardedProps } = props;
+    const { theme = defaultTheme, ...otherProps } = props;
 
-    return (
-        <div
-            ref={ref}
-            {...forwardedProps}
-            className={classNames.join(className, block({ [`theme-${theme}`]: Boolean(theme) }))}
-        >
-            <Icon
-                icon={mdiDragVertical}
-                color={theme === Theme.dark ? ColorPalette.light : ColorPalette.dark}
-                size={Size.xs}
-            />
-        </div>
-    );
+    return UI({
+        ref,
+        theme,
+        ...otherProps,
+    });
 });
 DragHandle.displayName = COMPONENT_NAME;
 DragHandle.className = CLASSNAME;
+DragHandle.defaultProps = DEFAULT_PROPS;

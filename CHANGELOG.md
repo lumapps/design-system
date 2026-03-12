@@ -10,12 +10,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   `@lumx/vue`:
+    -   Create the `DragHandle` component
     -   Create the `Uploader` component
     -   Create the `GenericBlock` component
 
 ### Changed
 
 -   `@lumx/core`:
+    -   Moved `DragHandle` from `@lumx/react`
     -   Moved `Uploader` stories and tests from `@lumx/react`
     -   Made `Uploader` `fileInputProps` type framework-agnostic
     -   Moved `GenericBlock` stories and tests from `@lumx/react`
